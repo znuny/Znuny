@@ -114,7 +114,7 @@ Create a MIME article.
             },
         ],
         NoAgentNotify    => 0,                                      # if you don't want to send agent notifications
-        AutoResponseType => 'auto reply'                            # auto reject|auto follow up|auto reply/new ticket|auto remove
+        AutoResponseType => 'auto reply',                           # auto reject|auto follow up|auto reply/new ticket|auto remove
 
         ForceNotificationToUserID   => [ 1, 43, 56 ],               # if you want to force somebody
         ExcludeNotificationToUserID => [ 43,56 ],                   # if you want full exclude somebody from notfications,

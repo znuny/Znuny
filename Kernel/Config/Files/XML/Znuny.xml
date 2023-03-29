@@ -1249,7 +1249,6 @@
                 <Item Key="JavaScript">
                     <Array>
                         <Item>Core.UI.AllocationList.js</Item>
-                        <Item>Core.UI.Table.js</Item>
                         <Item>Znuny.Agent.Admin.DynamicFieldScreenConfiguration.js</Item>
                     </Array>
                 </Item>
@@ -2871,6 +2870,14 @@
         </Value>
     </Setting>
 
+    <Setting Name="ICSParser::StartDate" Required="1" Valid="1">
+        <Description Translatable="1">Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="\A20\d{2}\d{2}\d{2}\z">20100101</Item>
+        </Value>
+    </Setting>
+
     <!--
     UserMaxArticlesPerPage
     -->
@@ -2888,6 +2895,256 @@
                 <Item Key="Prio">50</Item>
                 <Item Key="Active">1</Item>
             </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        DynamicFieldFromCustomerCompany
+    -->
+    <Setting Name="DynamicFieldFromCustomerCompany::Mapping" Required="0" Valid="0">
+        <Description Translatable="1">Define a mapping between variables of the customer company data (keys) and dynamic fields of a ticket (values). The purpose is to store customer company data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn't be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany setting.</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CustomerCompanyName">CustomerCompanyName</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany" Required="0" Valid="0">
+        <Description Translatable="1">This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::DynamicFieldFromCustomerCompany</Item>
+                <Item Key="Event">(TicketCreate|TicketCustomerUpdate)</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Znuny-NoteToLinkedTicket
+    -->
+    <Setting Name="Frontend::Module###AgentTicketNoteToLinkedTicket" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">An additional screen to add notes to a linked ticket.</Item>
+                    <Item Key="Title">NoteToLinkedTicket</Item>
+                    <Item Key="NavBarName">Ticket</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketNoteToLinkedTicket###001-NoteToLinkedTicket" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.TicketAction.js</Item>
+                        <Item>Core.Agent.TicketActionCommon.js</Item>
+                        <Item>Core.Agent.TicketFormDraft.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Permission" Required="1" Valid="1">
+        <Description Translatable="1">Required permissions to use the NoteToLinkedTicket screen in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">note</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###LinkedTicketState" Required="0" Valid="1">
+        <Description Translatable="1">Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###LinkedTicketStateDefault" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="State" ValueRegex="">open</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###NoteToTicket" Required="1" Valid="1">
+        <Description Translatable="1">Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###NoteToTicketDefault" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Subject" Required="0" Valid="1">
+        <Description Translatable="1">Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Body" Required="0" Valid="1">
+        <Description Translatable="1">Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Textarea"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Note" Required="1" Valid="1">
+        <Description Translatable="1">Allows adding notes in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###NoteMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###HistoryType" Required="0" Valid="1">
+        <Description Translatable="1">Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">AddNote</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###HistoryComment" Required="0" Valid="1">
+        <Description Translatable="1">Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">%%NoteToLinkedTicket</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###IsVisibleForCustomerDefault" Required="0" Valid="1">
+        <Description Translatable="1">Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###TicketType" Required="0" Valid="1">
+        <Description Translatable="1">Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Service" Required="0" Valid="1">
+        <Description Translatable="1">Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###ServiceMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Sets if service must be selected by the agent.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###SLAMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Sets if SLA must be selected by the agent.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Queue" Required="0" Valid="1">
+        <Description Translatable="1">Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Owner" Required="0" Valid="1">
+        <Description Translatable="1">Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###OwnerMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Sets if ticket owner must be selected by the agent.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Responsible" Required="0" Valid="1">
+        <Description Translatable="1">Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###State" Required="0" Valid="1">
+        <Description Translatable="1">Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###StateType" Required="0" Valid="1">
+        <Description Translatable="1">Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Array>
+                <Item Translatable="1">open</Item>
+                <Item Translatable="1">closed</Item>
+                <Item Translatable="1">pending reminder</Item>
+                <Item Translatable="1">pending auto</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###StateDefault" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="State" ValueRegex="">open</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Priority" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###PriorityDefault" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Priority" ValueRegex="">3 normal</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Title" Required="0" Valid="1">
+        <Description Translatable="1">Shows the title field in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
 </otrs_config>

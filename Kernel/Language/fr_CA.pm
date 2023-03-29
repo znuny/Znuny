@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.326966655875688;
+    $Self->{Completeness}        = 0.324420103092784;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -232,16 +232,6 @@ sub Data {
         'Message body' => 'Corps du message',
         'Add new notification language' => '',
         'Save Changes' => 'Sauvegarder les modifications',
-        'Tag Reference' => '',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'Vous pouvez utiliser les codets suivants ',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => ' p. ex.',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => '',
-        'Config options' => 'Options de configuration',
-        'Example notification' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '',
@@ -281,20 +271,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'Réponse ',
         'Auto response from' => 'Réponse automatique de ',
-        'Reference' => 'Référence',
-        'To get the first 20 character of the subject.' => 'Pour avoir les 20 premiers caractères du sujet.',
-        'To get the first 5 lines of the email.' => 'Pour avoir les 5 premières lignes du courriel.',
-        'To get the name of the ticket\'s customer user (if given).' => '',
-        'To get the article attribute' => 'Pour avoir l\'attribut de l\'article',
-        'Options of the current customer user data' => 'Options des données du client actuel',
-        'Ticket owner options' => 'Options du propriétaire de la demande',
-        'Ticket responsible options' => 'Options du responsable de la demande',
-        'Options of the current user who requested this action' => 'Options de l\'utilisateur actuel qui a demandé cette action',
-        'Options of the ticket data' => 'Options des données de la demande',
-        'Options of ticket dynamic fields internal key values' => '',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
-        'Example response' => 'Exemple de réponse ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '',
@@ -437,6 +413,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Sélectionner la permission %s pour %s',
         'Customer Default Groups:' => 'Groupes par défaut du client :',
         'No changes can be made to these groups.' => 'Aucun changement n\'est possible pour ces groupes.',
+        'Reference' => 'Référence',
         'ro' => 'Lecture seule',
         'Read only access to the ticket in this group/queue.' => 'Accès en lecture seule aux demandes de cette file ou ce groupe.',
         'rw' => 'Lecture et écriture',
@@ -1448,24 +1425,6 @@ sub Data {
             '',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'Des notifications sont envoyées à un agent ou à un client.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'Pour avoir les 20 premiers caractères du sujet (du dernier article de l\'agent).',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'Pour avoir les 5 premières ligne du corps (du dernier article de l\'agent).',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'Pour avoir les 20 premiers caractères du sujet (du dernier article du client).',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'Pour avoir les 5 premières lignes du sujet (du dernier article du client).',
-        'Attributes of the current customer user data' => '',
-        'Attributes of the current ticket owner user data' => '',
-        'Attributes of the current ticket responsible user data' => '',
-        'Attributes of the current agent user who requested this action' =>
-            '',
-        'Attributes of the ticket data' => '',
-        'Ticket dynamic fields internal key values' => '',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2084,8 +2043,6 @@ sub Data {
         'Edit Salutation' => 'Éditer une formule de salutation',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => 'p. ex.',
-        'Example salutation' => 'Exemple de formule de salutation ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2145,7 +2102,6 @@ sub Data {
         'Edit Signature' => 'Éditer une signature',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => 'Exemple de signature',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Gestion des états',
@@ -2317,18 +2273,6 @@ sub Data {
         'Delete this entry' => 'Supprimer cette entrée',
         'Do you really want to delete this template?' => '',
         'A standard template with this name already exists!' => '',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '',
-        'Example template' => '',
-        'The current ticket state is' => 'L\'état actuel de la demande est',
-        'Your email address is' => 'Votre adresse de courrier électronique est',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -2587,6 +2531,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Mes demandes verrouillées',
+        'My Owned Tickets' => '',
         'My watched tickets' => 'Mes demandes sous surveillance',
         'My responsibilities' => 'Mes responsabilités',
         'Tickets in My Queues' => 'Demandes dans mes files',
@@ -2833,6 +2778,13 @@ sub Data {
         'New Queue' => 'Nouvelle file',
         'Move' => 'Déplacer',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+        'Add note to linked %s%s%s' => '',
+        'Note to linked Ticket' => '',
+        'LinkList invalid.' => '',
+        'Note to origin Ticket' => '',
+        'NoteToTicket invalid.' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => 'Aucune donnée relative à la demande n\'a été trouvée.',
         'Open / Close ticket action menu' => '',
@@ -2841,6 +2793,8 @@ sub Data {
         'First Response Time' => 'Délai de la première réponse',
         'Update Time' => 'Délai de mise à jour ',
         'Solution Time' => 'Délai de résolution ',
+        'Impact' => '',
+        'CustomerID' => 'Numéro de client ',
         'Move ticket to a different queue' => 'Déplacer la demande vers une autre file',
         'Change queue' => 'Changer de file',
 
@@ -3086,7 +3040,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'p. ex. 10*5155 ou 105658*',
-        'CustomerID' => 'Numéro de client ',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Types',
         'Time Restrictions' => '',
@@ -3318,6 +3271,61 @@ sub Data {
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => ' p. ex.',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'Pour avoir les 20 premiers caractères du sujet.',
+        'To get the first 5 lines of the email.' => 'Pour avoir les 5 premières lignes du courriel.',
+        'To get the name of the ticket\'s customer user (if given).' => '',
+        'To get the article attribute' => 'Pour avoir l\'attribut de l\'article',
+        'Options of the current customer user data' => 'Options des données du client actuel',
+        'Ticket owner options' => 'Options du propriétaire de la demande',
+        'Options of the ticket data' => 'Options des données de la demande',
+        'Options of ticket dynamic fields internal key values' => '',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'Pour avoir les 20 premiers caractères du sujet (du dernier article de l\'agent).',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'Pour avoir les 5 premières ligne du corps (du dernier article de l\'agent).',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'Pour avoir les 20 premiers caractères du sujet (du dernier article du client).',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'Pour avoir les 5 premières lignes du sujet (du dernier article du client).',
+        'Attributes of the current customer user data' => '',
+        'Attributes of the current ticket owner user data' => '',
+        'Attributes of the ticket data' => '',
+        'Ticket dynamic fields internal key values' => '',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'p. ex.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => '',
+        'You can use the following tags' => 'Vous pouvez utiliser les codets suivants ',
+        'Ticket responsible options' => 'Options du responsable de la demande',
+        'Options of the current user who requested this action' => 'Options de l\'utilisateur actuel qui a demandé cette action',
+        'Config options' => 'Options de configuration',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
@@ -3916,7 +3924,7 @@ sub Data {
         'Customer user of the ticket' => '',
         'All recipients of the first article' => '',
         'All recipients of the last article' => '',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4372,9 +4380,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => '',
 
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
-
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => '',
         'No permission.' => '',
@@ -4668,6 +4673,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNote.pm
         'Reply to note' => '',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+        'Create notice for linked ticket' => '',
+        'Transfer notice' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPhone.pm
         'Split this article' => 'Scinder cet article',
@@ -5395,6 +5404,11 @@ sub Data {
         'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
             '',
 
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+        'Views with multiple loaded JavaScript files' => '',
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => '',
         'Some packages have locally modified files.' => '',
@@ -5797,6 +5811,7 @@ sub Data {
             'Détermine la hauteur de l\'élément de l\'éditeur RTF. Entrez un nombre de pixels ou un pourcentage relatif.',
         'Defines the selectable font sizes in the rich text editor.' => '',
         'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => '',
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
@@ -6743,6 +6758,14 @@ sub Data {
             'Données par défaut à utiliser comme attributs dans l\'écran de recherche de demandes. Exemple : "TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;".',
         'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".' =>
             'Données par défaut à utiliser comme attributs dans l\'écran de recherche de demandes. Exemple : "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".' =>
+            '',
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             'Détermine l\'attribut par défaut qui permet le tri des demandes dans la vue des demandes fermées de l\'interface agent.',
         'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
@@ -7991,6 +8014,56 @@ sub Data {
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
         'Mapping of non-standard time zones to official ones.' => '',
+        'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
+            '',
+        'Define a mapping between variables of the customer company data (keys) and dynamic fields of a ticket (values). The purpose is to store customer company data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn\'t be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany setting.' =>
+            '',
+        'This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.' =>
+            '',
+        'Required permissions to use the NoteToLinkedTicket screen in the agent interface.' =>
+            '',
+        'Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Allows adding notes in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.' =>
+            '',
+        'Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.' =>
+            '',
+        'Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated).' =>
+            '',
+        'Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated).' =>
+            '',
+        'Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'temporairement non valide',
@@ -8603,6 +8676,7 @@ Thanks for your help!
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Permet la visualisation de la demande en format « S » (petit); les « Renseignements du client » (CustomerInfo => 1) présentent aussi les renseignements relatifs au client.',
         'Always show RichText if available' => '',
+        'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Réponse ',
         'Appointment Calendar overview page.' => '',
         'Appointment Notifications' => '',

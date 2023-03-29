@@ -62,9 +62,9 @@ returns 1 on success or undef on error
     my $Success = $DebugLogObject->LogAdd(
         CommunicationID   => '6f1ed002ab5595859014ebf0951522d9',
         CommunicationType => 'Provider',        # 'Provider' or 'Requester'
-        Data              => 'additional data' # optional
-        DebugLevel        => 'info',           # 'debug', 'info', 'notice', 'error'
-        RemoteIP          => '192.168.0.1',    # optional, must be valid IPv4 or IPv6 address
+        Data              => 'additional data', # optional
+        DebugLevel        => 'info',            # 'debug', 'info', 'notice', 'error'
+        RemoteIP          => '192.168.0.1',     # optional, must be valid IPv4 or IPv6 address
         Summary           => 'description of log entry',
         WebserviceID      => 1,
     );

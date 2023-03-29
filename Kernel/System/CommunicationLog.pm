@@ -214,7 +214,7 @@ sub ObjectLogStart {
 Stops a log object of a given object type.
 
     my $Success = $CommunicationLogObject->ObjectLogStop(
-        ObjectLogType => 'Connection'                        # (required) Can be 'Connection' or 'Message'
+        ObjectLogType => 'Connection',                       # (required) Can be 'Connection' or 'Message'
         ObjectLogID   => 123, # (required) The ObjectID of the started object type
     );
 
@@ -258,8 +258,8 @@ sub ObjectLogStop {
 Adds a log entry for a certain log object.
 
     my $Success = $CommunicationLogObject->ObjectLog(
-        ObjectLogType => '...' # (required) To be defined by the related LogObject
-        ObjectLogID   => 123, # (required) The ObjectID of the started object type
+        ObjectLogType => '...', # (required) To be defined by the related LogObject
+        ObjectLogID   => 123,   # (required) The ObjectID of the started object type
     );
 
 Returns:

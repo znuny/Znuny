@@ -84,7 +84,7 @@ add new Process
 returns the id of the created process if success or undef otherwise
 
     my $ID = $ProcessObject->ProcessAdd(
-        EntityID       => 'P1'             # mandatory, exportable unique identifier
+        EntityID       => 'P1',            # mandatory, exportable unique identifier
         Name           => 'NameOfProcess', # mandatory
         StateEntityID  => 'S1',
         Layout         => $LayoutHashRef,  # mandatory, diagram objects positions to be stored in
@@ -569,7 +569,7 @@ returns 1 if success or undef otherwise
 
     my $Success = $ProcessObject->ProcessUpdate(
         ID            => 123,             # mandatory
-        EntityID      => 'P1'             # mandatory, exportable unique identifier
+        EntityID      => 'P1',            # mandatory, exportable unique identifier
         Name          => 'NameOfProcess', # mandatory
         StateentityID => 'S1',
         Layout        => $LayoutHashRef,  # mandatory, diagram objects positions to be stored in
@@ -990,8 +990,8 @@ gets a complete processes information dump from the DB including: Process State,
 ActivityDialogs, Transitions and TransitionActions
 
     my $ProcessDump = $ProcessObject->ProcessDump(
-        ResultType  => 'SCALAR'                     # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt'   # mandatory for ResultType = 'FILE'
+        ResultType  => 'SCALAR',                    # 'SCALAR' || 'HASH' || 'FILE'
+        Location    => '/opt/otrs/var/myfile.txt',  # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 
@@ -1026,7 +1026,7 @@ Returns:
 
         $Self->{'Process::Activity'} = {
           'A1' => {
-            'Name' => 'Activity 1'
+            'Name' => 'Activity 1',
             'CreateTime' => '2012-07-21 08:11:33',
             'ChangeTime' => '2012-07-21 08:11:33',
             'ActivityDialog' => {
@@ -1066,7 +1066,7 @@ Returns:
 
         $Self->{'Process::Transition'} = {
           'T1' => {
-            'Name' => 'Transition 1'
+            'Name' => 'Transition 1',
             'ChangeTime' => '2012-07-21 08:11:33',
             'CreateTime' => '2012-07-21 08:11:33',
             'Condition' => {
@@ -1101,8 +1101,8 @@ Returns:
      ';
 
     my $ProcessDump = $ProcessObject->ProcessDump(
-        ResultType  => 'HASH'                       # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt'   # mandatory for ResultType = 'FILE'
+        ResultType  => 'HASH',                      # 'SCALAR' || 'HASH' || 'FILE'
+        Location    => '/opt/otrs/var/myfile.txt',  # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 
@@ -1137,7 +1137,7 @@ Returns:
 
         Activity => {
           'A1' => {
-            'Name' => 'Activity 1'
+            'Name' => 'Activity 1',
             'CreateTime' => '2012-07-21 08:11:33',
             'ChangeTime' => '2012-07-21 08:11:33',
             'ActivityDialog' => {
@@ -1177,7 +1177,7 @@ Returns:
 
         Transition => {
           'T1' => {
-            'Name' => 'Transition 1'
+            'Name' => 'Transition 1',
             'ChangeTime' => '2012-07-21 08:11:33',
             'CreateTime' => '2012-07-21 08:11:33',
             'Condition' => {
@@ -1212,8 +1212,8 @@ Returns:
     }
 
     my $ProcessDump = $ProcessObject->ProcessDump(
-        ResultType  => 'Location'                     # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt'     # mandatory for ResultType = 'FILE'
+        ResultType  => 'Location',                    # 'SCALAR' || 'HASH' || 'FILE'
+        Location    => '/opt/otrs/var/myfile.txt',    # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 

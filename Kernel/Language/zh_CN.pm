@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.927484622855293;
+    $Self->{Completeness}        = 0.921230670103093;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -231,16 +231,6 @@ sub Data {
         'Message body' => '消息正文',
         'Add new notification language' => '添加通知语言',
         'Save Changes' => '保存更改',
-        'Tag Reference' => '标签参考',
-        'Notifications are sent to an agent.' => '发送给服务人员的通知。',
-        'You can use the following tags' => '你可以使用以下的标记',
-        'To get the first 20 character of the appointment title.' => '获取预约的前20个字符。',
-        'To get the appointment attribute' => '获取预约的属性',
-        ' e. g.' => ' 例如：',
-        'To get the calendar attribute' => '获取日历的属性',
-        'Attributes of the recipient user for the notification' => '通知收件人的属性',
-        'Config options' => '系统配置数据',
-        'Example notification' => '通知样例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '额外的收件人邮件地址',
@@ -280,20 +270,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '队列 ↔ 自动回复',
         'Response' => '回复内容',
         'Auto response from' => '自动响应的发件人',
-        'Reference' => 'ACL设置参考',
-        'To get the first 20 character of the subject.' => '获取主题的前20个字符。',
-        'To get the first 5 lines of the email.' => '获取邮件的前五行。',
-        'To get the name of the ticket\'s customer user (if given).' => '获取工单的客户用户名字（如果有）。',
-        'To get the article attribute' => '获取邮件的属性信息',
-        'Options of the current customer user data' => '客户用户资料属性',
-        'Ticket owner options' => '工单所有者属性',
-        'Ticket responsible options' => '工单负责人属性',
-        'Options of the current user who requested this action' => '工单提交者的属性',
-        'Options of the ticket data' => '工单数据属性',
-        'Options of ticket dynamic fields internal key values' => '工单动态字段内部键值',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '动态字段显示名称，用于下拉选择和复选框',
-        'Example response' => '自动响应样例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '云服务管理',
@@ -436,6 +412,7 @@ sub Data {
         'Toggle %s permission for %s' => '授予/取消 %s 权限给 %s',
         'Customer Default Groups:' => '客户的默认组:',
         'No changes can be made to these groups.' => '不能更改默认组.',
+        'Reference' => 'ACL设置参考',
         'ro' => 'ro（只读）',
         'Read only access to the ticket in this group/queue.' => '对于组/队列中的工单具有 \'只读\'权限。',
         'rw' => 'rw（读写）',
@@ -1447,24 +1424,6 @@ sub Data {
             '每个工单的通知使用选择的方式一天只发送一次。',
         'This field is required and must have less than 4000 characters.' =>
             '这个字段是必须的，并且不能超过4000个字符。',
-        'Notifications are sent to an agent or a customer.' => '发送给服务人员或客户的通知。',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            '获取主题的前20个字符（最新的服务人员信件）。',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            '获取邮件正文内容前5行（最新的服务人员信件）。',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            '获取邮件主题的前20个字符（最新的客户信件）。',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            '获取邮件正文内容前5行（最新的客户信件）。',
-        'Attributes of the current customer user data' => '客户用户的属性',
-        'Attributes of the current ticket owner user data' => '工单所有者的属性',
-        'Attributes of the current ticket responsible user data' => '工单负责人的属性',
-        'Attributes of the current agent user who requested this action' =>
-            '请示此动作的服务人员的属性',
-        'Attributes of the ticket data' => '工单的属性',
-        'Ticket dynamic fields internal key values' => '工单动态字段内部键值',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '工单动态字段显示值，对下拉式和多项选择字段有用',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '使用逗号或分号分隔电子邮件地址。',
@@ -2083,8 +2042,6 @@ sub Data {
         'Edit Salutation' => '编辑问候语',
         'Filter for Salutations' => '问候语过滤器',
         'Filter for salutations' => '问候语过滤器',
-        'e. g.' => '例如：',
-        'Example salutation' => '问候语样例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '需要启用安全模式！',
@@ -2144,7 +2101,6 @@ sub Data {
         'Edit Signature' => '编辑签名',
         'Filter for Signatures' => '签名过滤器',
         'Filter for signatures' => '签名过滤器',
-        'Example signature' => '签名样例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => '工单状态管理',
@@ -2316,18 +2272,6 @@ sub Data {
         'Delete this entry' => '删除该条目',
         'Do you really want to delete this template?' => '您真的想要删除这个模板吗？',
         'A standard template with this name already exists!' => '模板名称已存在！',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '获取当前/最新服务人员文章主题的前20个字符(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '获取当前/最新服务人员文章正文的前5行(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '获取当前/最新文章主题的前20个字符(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '获取当前/最新文章正文的前5行(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
-        'Create type templates only supports this smart tags' => '“Create创建”类型的模板只支持以下智能标签',
-        'Example template' => '模板样例',
-        'The current ticket state is' => '当前工单状态是',
-        'Your email address is' => '你的邮件地址是',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '管理模板和附件的关联',
@@ -2586,6 +2530,7 @@ sub Data {
         'Assigned to customer user' => '分配给客户用户',
         'Accessible for customer user' => '客户用户可访问',
         'My locked tickets' => '我锁定的工单',
+        'My Owned Tickets' => '',
         'My watched tickets' => '我关注的工单',
         'My responsibilities' => '我负责的工单',
         'Tickets in My Queues' => '我的队列中的工单',
@@ -2832,6 +2777,13 @@ sub Data {
         'New Queue' => '新队列',
         'Move' => '转移',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+        'Add note to linked %s%s%s' => '',
+        'Note to linked Ticket' => '',
+        'LinkList invalid.' => '',
+        'Note to origin Ticket' => '',
+        'NoteToTicket invalid.' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => '没有找到工单数据。',
         'Open / Close ticket action menu' => '处理/关闭工单动作的菜单',
@@ -2840,6 +2792,8 @@ sub Data {
         'First Response Time' => '首次响应时间',
         'Update Time' => '更新时间',
         'Solution Time' => '解决时间',
+        'Impact' => '影响',
+        'CustomerID' => 'CustomerID',
         'Move ticket to a different queue' => '将工单转移到另一个队列',
         'Change queue' => '更改队列',
 
@@ -3085,7 +3039,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索条件',
         'e. g. 10*5155 or 105658*' => '例如: 10*5155 或 105658*',
-        'CustomerID' => 'CustomerID',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '对工单进行全文搜索（例如 "John*n" 或 "Will*"）',
         'Types' => '类型',
         'Time Restrictions' => '时间限制',
@@ -3317,6 +3270,61 @@ sub Data {
             '这是OTRS默认的公共界面！没有操作参数。',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '你可以安装一个定制的有公共界面的公共模块（通过软件包管理器），例如FAQ知识库模块。',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '获取预约的属性',
+        ' e. g.' => ' 例如：',
+        'To get the first 20 character of the appointment title.' => '获取预约的前20个字符。',
+        'To get the calendar attribute' => '获取日历的属性',
+        'Attributes of the recipient user for the notification' => '通知收件人的属性',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => '获取主题的前20个字符。',
+        'To get the first 5 lines of the email.' => '获取邮件的前五行。',
+        'To get the name of the ticket\'s customer user (if given).' => '获取工单的客户用户名字（如果有）。',
+        'To get the article attribute' => '获取邮件的属性信息',
+        'Options of the current customer user data' => '客户用户资料属性',
+        'Ticket owner options' => '工单所有者属性',
+        'Options of the ticket data' => '工单数据属性',
+        'Options of ticket dynamic fields internal key values' => '工单动态字段内部键值',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '动态字段显示名称，用于下拉选择和复选框',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            '获取主题的前20个字符（最新的服务人员信件）。',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            '获取邮件正文内容前5行（最新的服务人员信件）。',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            '获取邮件主题的前20个字符（最新的客户信件）。',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            '获取邮件正文内容前5行（最新的客户信件）。',
+        'Attributes of the current customer user data' => '客户用户的属性',
+        'Attributes of the current ticket owner user data' => '工单所有者的属性',
+        'Attributes of the ticket data' => '工单的属性',
+        'Ticket dynamic fields internal key values' => '工单动态字段内部键值',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '工单动态字段显示值，对下拉式和多项选择字段有用',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => '例如：',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '获取当前/最新服务人员文章主题的前20个字符(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '获取当前/最新服务人员文章正文的前5行(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '获取当前/最新文章主题的前20个字符(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '获取当前/最新文章正文的前5行(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => '标签参考',
+        'You can use the following tags' => '你可以使用以下的标记',
+        'Ticket responsible options' => '工单负责人属性',
+        'Options of the current user who requested this action' => '工单提交者的属性',
+        'Config options' => '系统配置数据',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
@@ -3915,7 +3923,7 @@ sub Data {
         'Customer user of the ticket' => '该工单的客户用户',
         'All recipients of the first article' => '第一封信件的所有收件人',
         'All recipients of the last article' => '最近一封信件的所有收件人',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => '客户不可见',
         'Visible to customer' => '对客户可见',
 
@@ -4371,9 +4379,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => '你需要转换权限！',
 
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
-
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => '聊天不是活动的。',
         'No permission.' => '没有权限。',
@@ -4667,6 +4672,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNote.pm
         'Reply to note' => '回复为备注',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+        'Create notice for linked ticket' => '',
+        'Transfer notice' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPhone.pm
         'Split this article' => '拆分信件',
@@ -5394,6 +5403,11 @@ sub Data {
         'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
             '已安装的软件包不再需要旧的配置备份文件，请从 Kernel/Config/Backups 文件夹中删除它们。',
 
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+        'Views with multiple loaded JavaScript files' => '',
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => '软件包安装状态',
         'Some packages have locally modified files.' => '一些软件包有在本地修改过的文件。',
@@ -5796,6 +5810,7 @@ sub Data {
             '定义富文本编辑器组件的高度。输入数值（像素值）或百分比值（相对值）。',
         'Defines the selectable font sizes in the rich text editor.' => '',
         'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => '',
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
@@ -6742,6 +6757,14 @@ sub Data {
             '工单搜索屏幕用于搜索属性的默认数据。示例：“TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;”。',
         'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".' =>
             '工单搜索屏幕用于搜索属性的默认数据。示例：“TicketCreateTimeStartYear=2015;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2015;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;”。',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".' =>
+            '',
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             '定义服务人员界面锁定的工单视图工单排序的默认工单属性。',
         'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
@@ -7990,6 +8013,56 @@ sub Data {
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
         'Mapping of non-standard time zones to official ones.' => '',
+        'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
+            '',
+        'Define a mapping between variables of the customer company data (keys) and dynamic fields of a ticket (values). The purpose is to store customer company data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn\'t be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany setting.' =>
+            '',
+        'This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.' =>
+            '',
+        'Required permissions to use the NoteToLinkedTicket screen in the agent interface.' =>
+            '',
+        'Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Allows adding notes in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.' =>
+            '',
+        'Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.' =>
+            '',
+        'Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated).' =>
+            '',
+        'Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated).' =>
+            '',
+        'Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '暂时无效',
@@ -8612,6 +8685,7 @@ Thanks for your help!
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '允许拥有一个简洁版式的工单概览视图（如果CustomerInfo => 1还将显示客户信息）。',
         'Always show RichText if available' => '始终显示富文本（如果有富文本）',
+        'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => '回复',
         'Appointment Calendar overview page.' => '预约日历概览页面。',
         'Appointment Notifications' => '预约通知',

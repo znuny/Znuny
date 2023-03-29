@@ -330,7 +330,6 @@
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketProcess.js</Item>
@@ -507,7 +506,6 @@
                     <Array>
                         <Item>Core.TicketProcess.js</Item>
                         <Item>Core.Customer.TicketProcess.js</Item>
-                        <Item>Core.TicketProcess.js</Item>
                     </Array>
                 </Item>
             </Hash>

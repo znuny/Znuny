@@ -15,6 +15,8 @@ The following persons contributed to Znuny:
 * Carlos Rodriguez <carlos.rodriguez@otrs.com>
 * Christian Schöpplein <christian.schoepplein@otrs.com>
 * Christopher T. Kuhn <christopher.kuhn@otrs.com>
+* Daniel Lisiecki <lisiecki.daniel@gmail.com>
+* Daniel Sprenger <123074686+sprengerdaniel@users.noreply.github.com>
 * Daniel Zamorano <daniel.zamorano@otrs.com>
 * David Crimi <deathpoison.dc@gmail.com>
 * Denis Nelubin <dnelubin@gmail.com>
@@ -43,7 +45,7 @@ The following persons contributed to Znuny:
 * Jens Pfeifer <jp@znuny.com>
 * Johannes Hörburger <johannes.hoerburger@otrs.com>
 * Johannes Nickel <jn@znuny.com>
-* Kai Herlemann <43746520+KaiHerlemann@users.noreply.github.com>
+* Kai Herlemann <kh@znuny.com>
 * Kamil Furtek <kfurtek@dev.opgksoftware.com>
 * Keith Moore <tenareth@gmail.com>
 * Kevin Janssen <77158891+BuTzZ@users.noreply.github.com>

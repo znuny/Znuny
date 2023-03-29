@@ -71,10 +71,10 @@ Add a new SysConfig default entry.
         HasConfigLevel           => 200,                           # (optional) default 0
         UserModificationPossible => 0,                             # (optional) 1 or 0, default 0
         UserModificationActive   => 0,                             # (optional) 1 or 0, default 0
-        UserPreferencesGroup     => 'Some Group'                   # (optional)
+        UserPreferencesGroup     => 'Some Group',                  # (optional)
         XMLContentRaw            => $XMLString,                    # (required) the setting XML structure as it is on the config file
         XMLContentParsed         => $XMLParsedToPerl,              # (required) the setting XML structure converted into a Perl structure
-        XMLFilename              => 'Framework.xml'                # (required) the name of the XML file
+        XMLFilename              => 'Framework.xml',               # (required) the name of the XML file
         EffectiveValue           => $SettingEffectiveValue,        # (required) the value as will be stored in the Perl configuration file
         ExclusiveLockExpiryTime  => '2017-02-01 12:23:13',         # (optional) If not provided, method will calculate it.
         UserID                   => 123,
@@ -2188,7 +2188,7 @@ Add a new SysConfig default version entry.
         UserPreferencesGroup     => 'Advanced',                    # optional
         XMLContentRaw            => $XMLString,                    # the XML structure as it is on the config file
         XMLContentParsed         => $XMLParsedToPerl,              # the setting XML structure converted into YAML
-        XMLFilename              => 'Framework.xml'                # the name of the XML file
+        XMLFilename              => 'Framework.xml',               # the name of the XML file
         EffectiveValue           => $YAMLEffectiveValue,           # YAML EffectiveValue
         UserID                   => 1,
         NoCleanup                => 0,                             # (optional) Default 0. If enabled, system WILL NOT DELETE CACHE. In this case, it must be done manually.
@@ -5187,7 +5187,7 @@ to a particular deployment or including also all previous deployments
 
     my %ModifiedVersionList = $SysConfigDBObject->DeploymentModifiedVersionList(
         DeploymentID => 123,        # the deployment id
-        Mode         => 'Equals'    # (optional) default 'Equals'
+        Mode         => 'Equals',   # (optional) default 'Equals'
                                     #   Equals: only the settings from the given deployment
                                     #   GreaterThan: only the settings after the given deployment
                                     #   GreaterThanEquals: includes the settings of the given deployment and after

@@ -198,6 +198,17 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'CPAN::Audit',
+        Required  => 0,
+        Comment   => 'Scan CPAN dependencies in Kernel/cpan-lib and in the system for known vulnerabilities.',
+        InstTypes => {
+            aptget => 'libcpan-audit-perl',
+            emerge => '',
+            zypper => '',
+            ports  => '',
+        },
+    },
+    {
         Module    => 'Crypt::Eksblowfish::Bcrypt',
         Required  => 0,
         Comment   => 'For strong password hashing.',
