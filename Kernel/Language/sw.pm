@@ -1632,7 +1632,7 @@ sub Data {
             'Mabadiliko katika michakato hapa inaadhiri tabia ya mfumo, kama unalandanisha data za mchakato. Kwa kulandanisha michakato, mabadiliko mapya yaliyofanywa yataandikwa kwneye usanidi.',
         'Access Control Lists (ACL)' => 'Orodha Dhibiti Ufikivu (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Michakato',
         'Process name' => 'Jina la mchakato',
         'Print' => 'Chapisha',

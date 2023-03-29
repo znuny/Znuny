@@ -1629,7 +1629,7 @@ sub Data {
             'Änderungen an den Prozessen wirken sich erst dann aus, wenn Sie die Prozesskonfiguration synchronisieren. Dabei werden alle Änderungen in die Systemkonfiguration übernommen.',
         'Access Control Lists (ACL)' => 'Access-Control-Lists (ACL)',
         'Generic Agent' => 'Generic Agent',
-        'Manage Process Widiget Groups' => 'Prozess-Widget-Gruppen verwalten',
+        'Manage Process Widget Groups' => 'Prozess-Widget-Gruppen verwalten',
         'Processes' => 'Prozesse',
         'Process name' => 'Prozessname',
         'Print' => 'Drucken',

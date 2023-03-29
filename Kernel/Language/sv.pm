@@ -1632,7 +1632,7 @@ sub Data {
             '',
         'Access Control Lists (ACL)' => 'Åtkomstkontroll (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Processer',
         'Process name' => 'Processnamn',
         'Print' => 'Skriv ut',

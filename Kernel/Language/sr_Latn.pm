@@ -1635,7 +1635,7 @@ sub Data {
             'Promene u procesima jedino utiču na ponašanje sistema, ako sinhronizujete podatke procesa. Sinhronizovanjem procesa, novonapravljene promene će biti upisane u konfiguraciju.',
         'Access Control Lists (ACL)' => 'Liste za kontrolu pristupa (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Procesi',
         'Process name' => 'Naziv procesa',
         'Print' => 'Štampaj',

@@ -1635,7 +1635,7 @@ sub Data {
             'تغییرات در فرایندهای اینجا تنها رفتار سیستم را تحت تاثیر قرار، اگر شما داده های فرایند همگام سازی. با هماهنگ سازی فرآیندها، تغییرات تازه ساخته شده را به پیکربندی نوشته شده است.',
         'Access Control Lists (ACL)' => 'فهرست سطخ دسترسی (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'فرایند ها',
         'Process name' => 'نام فرایند',
         'Print' => 'چاپ',

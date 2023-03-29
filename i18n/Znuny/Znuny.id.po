@@ -4920,7 +4920,7 @@ msgid "Generic Agent"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-msgid "Manage Process Widiget Groups"
+msgid "Manage Process Widget Groups"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt

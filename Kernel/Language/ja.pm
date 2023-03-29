@@ -1634,7 +1634,7 @@ sub Data {
             '変更はプロセスデータを同期させた場合にのみ反映されます。同期により、行われた変更は実際の設定に反映されます。',
         'Access Control Lists (ACL)' => 'アクセス制御リスト (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'プロセス',
         'Process name' => 'プロセス名',
         'Print' => '印刷',

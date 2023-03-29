@@ -1635,7 +1635,7 @@ sub Data {
             'A folyamatokon itt elvégzett módosítás csak akkor lesz hatással a rendszer viselkedésére, ha szinkronizálja a folyamatadatokat. A folyamatok szinkronizálásával az újonnan elvégzett módosítások be lesznek írva a beállításokba.',
         'Access Control Lists (ACL)' => 'Hozzáférés-vezérlési listák (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Folyamatok',
         'Process name' => 'Folyamat neve',
         'Print' => 'Nyomtatás',

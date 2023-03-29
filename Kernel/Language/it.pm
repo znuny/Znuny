@@ -1638,7 +1638,7 @@ sub Data {
             'I cambiamenti al processo sono riportati a sistema solo se effettuate la sincronizzazione. Con la sincronizzazione le modifiche sono scritte nella configurazione.',
         'Access Control Lists (ACL)' => 'Access Control List (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Processi',
         'Process name' => 'Nome del processo',
         'Print' => 'Stampa',
