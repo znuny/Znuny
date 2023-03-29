@@ -1730,7 +1730,7 @@ sub Data {
             'Зміни в процесах тут вплинуть на поведінку системи тільки після синхронізації даних процесу. При синхронізації процесів, нещодавно зроблені зміни будуть записані до конфігурації.',
         'Access Control Lists (ACL)' => '',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Процеси',
         'Process name' => 'Ім\'я процесу',
         'Print' => 'Друк',

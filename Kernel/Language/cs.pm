@@ -1736,7 +1736,7 @@ sub Data {
             '',
         'Access Control Lists (ACL)' => 'Seznamy řízení přístupu (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Procesy',
         'Process name' => '',
         'Print' => 'Tisknout',

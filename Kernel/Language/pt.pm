@@ -1731,7 +1731,7 @@ sub Data {
             '',
         'Access Control Lists (ACL)' => '',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Processos',
         'Process name' => 'Nome do Processo',
         'Print' => 'Imprimir',

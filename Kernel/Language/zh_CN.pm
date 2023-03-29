@@ -1736,7 +1736,7 @@ sub Data {
             '对流程所做的一切修改仅保存在数据库中。只有执行部署流程操作后，才会生成或重新生成流程配置文件。',
         'Access Control Lists (ACL)' => '访问控制列表(ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => '流程',
         'Process name' => '流程名称',
         'Print' => '打印',

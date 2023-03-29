@@ -1732,7 +1732,7 @@ sub Data {
             '',
         'Access Control Lists (ACL)' => '',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => '',
         'Process name' => '',
         'Print' => 'मुद्रित करें',

@@ -1729,7 +1729,7 @@ sub Data {
             'Промене у процесима једино утичу на понашање система, ако синхронизујете податке процеса. Синхронизовањем процеса, новонаправљене промене ће бити уписане у конфигурацију.',
         'Access Control Lists (ACL)' => 'Листе за контролу приступа (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Процеси',
         'Process name' => 'Назив процеса',
         'Print' => 'Штампај',

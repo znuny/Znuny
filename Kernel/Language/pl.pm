@@ -1734,7 +1734,7 @@ sub Data {
             'Zmiany wprowadzone tutaj do procesów zostaną uwzględnione w systemie jeśli zsynchronizujesz dane procesów. Wskutek synchronizacji procesów, nowe zmiany będą zapisane do konfiguracji.',
         'Access Control Lists (ACL)' => 'Lista Kontroli dostępu (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Procesy',
         'Process name' => 'Nazwa procesu',
         'Print' => 'Drukuj',

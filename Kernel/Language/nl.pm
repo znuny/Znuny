@@ -1735,7 +1735,7 @@ sub Data {
             'Wijzigingen aan de processen hebben alleen invloed op het systeem als u de proces-data synchroniseert. Door het synchroniseren van de processen worden de wijzigingen weggeschreven naar de configuratie.',
         'Access Control Lists (ACL)' => 'Access Control Lists (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Processen',
         'Process name' => 'Naam',
         'Print' => 'Afdrukken',

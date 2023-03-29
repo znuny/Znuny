@@ -1729,7 +1729,7 @@ sub Data {
             '여기에서 프로세스 변경은 프로세스 데이터를 동기화 할 경우에만 시스템의 동작에 영향을 미칩니다. 프로세스를 동기화함으로써 새로 변경된 변경 사항이 구성에 기록됩니다.',
         'Access Control Lists (ACL)' => '액세스 제어 목록 (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => '프로세스',
         'Process name' => '프로세스 이름',
         'Print' => '인쇄',

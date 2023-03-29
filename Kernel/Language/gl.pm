@@ -1729,7 +1729,7 @@ sub Data {
             'Cambios nos Procedementos aquí só aflictirán o comportamento do sistema, se sincroniza os datos do Procedemento. Sincronizando os Procedementos, os cambios feitos de novo serán escritos na Configuración.',
         'Access Control Lists (ACL)' => 'Listas de Control de Acceso (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Procesos',
         'Process name' => 'Nome do proceso',
         'Print' => 'Imprimir',

@@ -1732,7 +1732,7 @@ sub Data {
             '對流程所做的一切修改僅保存在數據庫中。只有執行同步操作後，才會生成或重新生成流程配置文件。',
         'Access Control Lists (ACL)' => '訪問控制列表(ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => '流程',
         'Process name' => '流程名稱',
         'Print' => '打印',

@@ -148,7 +148,7 @@
                     <li>
                         <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AFrontend%3A%3AAgentTicketZoom%23%23%23ProcessWidgetDynamicFieldGroups;ChallengeToken=KDtGaGclmu2ObuGcZSWayxkbvL5rOa5p;" class="CallForAction Fullsize Center">
                             <span>
-                                [% Translate("Manage Process Widiget Groups") | html %]
+                                [% Translate("Manage Process Widget Groups") | html %]
                             </span>
                         </a>
                     </li>

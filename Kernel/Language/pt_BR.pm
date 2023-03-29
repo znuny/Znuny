@@ -1734,7 +1734,7 @@ sub Data {
             'Alterações feitas aos Processos só afetam o sistema após a sincronização dos processos. Ao sincronizar os processos as alterações serão escritas nas configurações.',
         'Access Control Lists (ACL)' => 'Listas de Controle de Acesso (ACL)',
         'Generic Agent' => 'Atendente Genérico',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Processos',
         'Process name' => 'Nome do Processo',
         'Print' => 'Imprimir',

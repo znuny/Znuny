@@ -1731,7 +1731,7 @@ sub Data {
             'Ændringer af disse processer får kun indflydelse på systemet hvis du synkroniserer procesdata. Ved synkronisering skrives ændringerne i konfigurationen.',
         'Access Control Lists (ACL)' => '',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Processer',
         'Process name' => 'Proces-navn',
         'Print' => 'Udskrift',

@@ -1728,7 +1728,7 @@ sub Data {
             'Perubahan kepada Proses disini hanya akan memberi kesan kepada kelakuan sistem, jika anda menyamakan data Proses. Dengan menyamakan Proses, perubahan yang baru akan ditulis ke Konfigurasi.',
         'Access Control Lists (ACL)' => 'Senarai Kawalan Akses (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Proses',
         'Process name' => 'Nama Proses',
         'Print' => 'Cetak',

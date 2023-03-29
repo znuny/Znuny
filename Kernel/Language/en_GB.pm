@@ -1732,7 +1732,7 @@ sub Data {
             'Changes to the Processes here only affect the behaviour of the system, if you synchronise the Process data. By synchronising the Processes, the newly made changes will be written to the Configuration.',
         'Access Control Lists (ACL)' => 'Access Control Lists (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'Processes',
         'Process name' => 'Process name',
         'Print' => 'Print',
