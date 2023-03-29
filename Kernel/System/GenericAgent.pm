@@ -169,7 +169,7 @@ run a generic agent job
     $GenericAgentObject->JobRun(
         Job          => 'JobName',
         OnlyTicketID => 123,     # (optional) for event based Job execution
-        SleepTime    => 100_000  # (optional) sleeptime per ticket in microseconds
+        SleepTime    => 100_000, # (optional) sleeptime per ticket in microseconds
         UserID       => 1,
     );
 

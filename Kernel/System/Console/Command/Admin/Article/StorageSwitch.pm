@@ -61,6 +61,20 @@ sub Configure {
         ValueRegex  => qr/^\d+$/smx,
     );
     $Self->AddOption(
+        Name        => 'tickets-created-before-date',
+        Description => "Only process tickets created before given ISO date.",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^\d{4}-\d{2}-\d{2}[ ]\d{2}:\d{2}:\d{2}$/smx,
+    );
+    $Self->AddOption(
+        Name        => 'tickets-created-before-days',
+        Description => "Only process tickets created more than ... days ago.",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^\d+$/smx,
+    );
+    $Self->AddOption(
         Name        => 'tolerant',
         Description => "Continue after failures.",
         Required    => 0,
@@ -129,15 +143,27 @@ sub Run {
         );
     }
     elsif ( $Self->GetOption('tickets-closed-before-days') ) {
-        my $Seconds = $Self->GetOption('tickets-closed-before-days') * 60 * 60 * 24;
+        my $Days = $Self->GetOption('tickets-closed-before-days');
 
         my $OlderDTObject = $Kernel::OM->Create('Kernel::System::DateTime');
-        $OlderDTObject->Subtract( Seconds => $Seconds );
+        $OlderDTObject->Subtract( Days => $Days );
 
         %SearchParams = (
             StateType                => 'Closed',
             TicketCloseTimeOlderDate => $OlderDTObject->ToString(),
         );
+    }
+
+    if ( $Self->GetOption('tickets-created-before-date') ) {
+        $SearchParams{TicketCreateTimeOlderDate} = $Self->GetOption('tickets-created-before-date');
+    }
+    elsif ( $Self->GetOption('tickets-created-before-days') ) {
+        my $Days = $Self->GetOption('tickets-created-before-days');
+
+        my $OlderDTObject = $Kernel::OM->Create('Kernel::System::DateTime');
+        $OlderDTObject->Subtract( Days => $Days );
+
+        $SearchParams{TicketCreateTimeOlderDate} = $OlderDTObject->ToString();
     }
 
     # If Archive system is enabled, take into account archived tickets as well.

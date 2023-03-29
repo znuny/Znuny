@@ -52,7 +52,7 @@
             expires_in: TokenExpirationDate
     Scope: https://mail.google.com/
     Notifications:
-        NotifyOnExpiredToken: 1
+        NotifyOnExpiredToken: 0
         NotifyOnExpiredRefreshToken: 1
   Name: Google Mail
 

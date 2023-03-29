@@ -266,60 +266,60 @@ $Self->True(
 # Test config collection
 my @Tests = (
     {
-        Name   => 'Empty Attachments',
+        Name   => 'Empty AttachmentsReuse',
         Config => {
             UserID => $UserID,
             Config => {
                 %{$NewCreatedSubTicketConfigData},
-                Attachments => '',
+                AttachmentsReuse => '',
             },
         },
         ExpectedSuccess           => 1,
         ExpectedSuccessAttachment => 0,
     },
     {
-        Name   => 'Empty Attachments with 0',
+        Name   => 'Empty AttachmentsReuse with 0',
         Config => {
             UserID => $UserID,
             Config => {
                 %{$NewCreatedSubTicketConfigData},
-                Attachments => '0',
+                AttachmentsReuse => '0',
             },
         },
         ExpectedSuccess           => 1,
         ExpectedSuccessAttachment => 0,
     },
     {
-        Name   => 'Attachments with 1',
+        Name   => 'AttachmentsReuse with 1',
         Config => {
             UserID => $UserID,
             Config => {
                 %{$NewCreatedSubTicketConfigData},
-                Attachments => '1',
+                AttachmentsReuse => '1',
             },
         },
         ExpectedSuccess           => 1,
         ExpectedSuccessAttachment => 1,
     },
     {
-        Name   => 'Attachments with y',
+        Name   => 'AttachmentsReuse with y',
         Config => {
             UserID => $UserID,
             Config => {
                 %{$NewCreatedSubTicketConfigData},
-                Attachments => 'y',
+                AttachmentsReuse => 'y',
             },
         },
         ExpectedSuccess           => 1,
         ExpectedSuccessAttachment => 1,
     },
     {
-        Name   => 'Attachments with yes',
+        Name   => 'AttachmentsReuse with yes',
         Config => {
             UserID => $UserID,
             Config => {
                 %{$NewCreatedSubTicketConfigData},
-                Attachments => 'yes',
+                AttachmentsReuse => 'yes',
             },
         },
         ExpectedSuccess           => 1,

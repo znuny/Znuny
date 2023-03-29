@@ -25,6 +25,8 @@ $Kernel::OM->Get('Kernel::System::UnitTest::Helper')->ConfigSettingChange(
 
 # get selenium object
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $IsITSMIncidentProblemManagementInstalled
+    = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
 # this test is to check that when AgentTicketPhone is loaded already with
 # customer data on it (like when doing Split), the dropdown of Service is
@@ -85,13 +87,21 @@ $Selenium->RunTest(
         my $TestService = "Service-" . $HelperObject->GetRandomID();
 
         # create a test service
-        my $ServiceID = $ServiceObject->ServiceAdd(
+        my %ServiceValues = (
             Name    => $TestService,
             Comment => 'Selenium Test Service',
             ValidID => 1,
             UserID  => 1,
         );
 
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $ServiceValues{TypeID}      = 1;
+            $ServiceValues{Criticality} = '3 normal';
+        }
+
+        my $ServiceID = $ServiceObject->ServiceAdd(
+            %ServiceValues
+        );
         $Self->True(
             $ServiceID,
             "Service is created - $ServiceID",

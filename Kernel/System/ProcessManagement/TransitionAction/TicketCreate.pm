@@ -103,10 +103,10 @@ Runs TransitionAction TicketCreate.
             %DataPayload,                                               # some parameters depending of each communication channel
 
             # article optional:
-            TimeUnit => 123
+            TimeUnit => 123,
 
             # Attachment optional:
-            Attachments => '1'                                          #  optional, 1|0
+            Attachments => '1',                                         #  optional, 1|0
 
             # other:
             DynamicField_NameX => $Value,
@@ -123,6 +123,8 @@ Returns:
 
 sub Run {
     my ( $Self, %Param ) = @_;
+
+    my $StdAttachmentObject = $Kernel::OM->Get('Kernel::System::StdAttachment');
 
     # define a common message to output in case of any error
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -144,7 +146,11 @@ sub Run {
 
     # Convert DynamicField value to HTML string, see bug#14229.
     my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
-    if ( $Param{Config}->{Body} =~ /OTRS_TICKET_DynamicField_/ ) {
+    if (
+        defined $Param{Config}->{Body}
+        && $Param{Config}->{Body} =~ /OTRS_TICKET_DynamicField_/
+        )
+    {
         MATCH:
         for my $Match ( sort keys %{ $Param{Ticket} } ) {
             if ( $Match =~ m/DynamicField_(.*)/ && $Param{Ticket}->{$Match} ) {
@@ -323,9 +329,38 @@ sub Run {
             ChannelName => $Param{Config}->{CommunicationChannel},
         );
 
-        # check for selected Attachments
-        if ( $Param{Config}->{Attachments} ) {
+        # attachments
+        if ( $Param{Config}->{AttachmentsReuse} ) {
             $Param{Config}->{Attachment} = $Self->_GetAttachments(%Param);
+        }
+
+        if ( $Param{Config}->{Attachments} || $Param{Config}->{AttachmentIDs} ) {
+            my @AttachmentIDs = split /\s*,\s*/, ( $Param{Config}->{AttachmentIDs} || '' );
+
+            my @AttachmentNames = split /\s*,\s*/, ( $Param{Config}->{Attachments} || '' );
+            ATTACHMENT:
+            for my $Name (@AttachmentNames) {
+                my $ID = $StdAttachmentObject->StdAttachmentLookup(
+                    StdAttachment => $Name,
+                );
+                next ATTACHMENT if !$ID;
+
+                push @AttachmentIDs, $ID;
+            }
+
+            ATTACHMENT:
+            for my $ID (@AttachmentIDs) {
+                my %Data = $StdAttachmentObject->StdAttachmentGet(
+                    ID => $ID,
+                );
+                next ATTACHMENT if !%Data;
+
+                push @{ $Param{Config}->{Attachment} }, {
+                    Content     => $Data{Content},
+                    ContentType => $Data{ContentType},
+                    Filename    => $Data{Filename},
+                };
+            }
         }
 
         # Create article for the new ticket.

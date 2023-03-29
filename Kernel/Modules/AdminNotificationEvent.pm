@@ -822,7 +822,7 @@ sub _Edit {
             Customer                  => Translatable('Customer user of the ticket'),
             AllRecipientsFirstArticle => Translatable('All recipients of the first article'),
             AllRecipientsLastArticle  => Translatable('All recipients of the last article'),
-            AllMentionedUsers         => Translatable('All users who are mentioned in a ticket'),
+            AllMentionedUsers         => Translatable('All agents who are mentioned in the ticket'),
         },
         Name       => 'Recipients',
         Multiple   => 1,

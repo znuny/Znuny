@@ -20,6 +20,8 @@ $Selenium->RunTest(
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ACLObject    = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $IsITSMIncidentProblemManagementInstalled
+            = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
         my $RandomID = $HelperObject->GetRandomID();
 
@@ -305,6 +307,37 @@ EOF
         # Create some test services.
         my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
+        my %ITSMSLA;
+        my %ITSMService;
+
+        if ($IsITSMIncidentProblemManagementInstalled) {
+
+            # get the list of service types from general catalog
+            my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::Service::Type',
+            );
+
+            # build a lookup hash
+            my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+            # get the list of sla types from general catalog
+            my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::SLA::Type',
+            );
+
+            # build a lookup hash
+            my %SLATypeName2ID = reverse %{$SLATypeList};
+
+            %ITSMSLA = (
+                TypeID => $SLATypeName2ID{Other},
+            );
+
+            %ITSMService = (
+                TypeID      => $ServiceTypeName2ID{Training},
+                Criticality => '3 normal',
+            );
+        }
+
         my $ServiceID;
         my @Services;
         for my $Count ( 1 .. 3 ) {
@@ -312,6 +345,7 @@ EOF
                 Name    => "UT Test Service $Count $RandomID",
                 ValidID => 1,
                 UserID  => 1,
+                %ITSMService,
             );
             push @Services, $ServiceID;
 
@@ -338,6 +372,7 @@ EOF
                 Name       => "UT Test SLA $Count $RandomID",
                 ValidID    => 1,
                 UserID     => 1,
+                %ITSMSLA,
             );
             push @SLAs, $SLAID;
         }
@@ -662,6 +697,18 @@ EOF
             "Deleted service relations for $CustomerUserLogin",
         );
         for my $ServiceID (@Services) {
+            if ($IsITSMIncidentProblemManagementInstalled) {
+
+                # Clean up servica data.
+                $Success = $DBObject->Do(
+                    SQL  => "DELETE FROM service_preferences WHERE service_id = ?",
+                    Bind => [ \$ServiceID ],
+                );
+                $Self->True(
+                    $Success,
+                    "ServicePreferences is deleted - ID $ServiceID",
+                );
+            }
             $Success = $DBObject->Do(
                 SQL  => "DELETE FROM service WHERE ID = ?",
                 Bind => [ \$ServiceID ],
