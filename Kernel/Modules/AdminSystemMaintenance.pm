@@ -37,6 +37,7 @@ sub Run {
 
     my $SystemMaintenanceID = $ParamObject->GetParam( Param => 'SystemMaintenanceID' ) || '';
     my $WantSessionID       = $ParamObject->GetParam( Param => 'WantSessionID' )       || '';
+    my $Notification        = $ParamObject->GetParam( Param => 'Notification' )        || '';
 
     my $SessionVisibility = 'Collapsed';
 
@@ -239,7 +240,7 @@ sub Run {
             );
         }
 
-        if ( $ParamObject->GetParam( Param => 'Notification' ) eq 'Add' ) {
+        if ( $Notification eq 'Add' ) {
 
             # add notification
             push @NotifyData, {
@@ -248,7 +249,7 @@ sub Run {
             };
         }
 
-        if ( $ParamObject->GetParam( Param => 'Notification' ) eq 'Update' ) {
+        if ( $Notification eq 'Update' ) {
 
             # add notification
             push @NotifyData, {
@@ -484,12 +485,12 @@ sub Run {
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
 
-        if ( ( $ParamObject->GetParam( Param => 'Notification' ) || '' ) eq 'Update' ) {
+        if ( $Notification eq 'Update' ) {
             $Output .= $LayoutObject->Notify(
                 Info => Translatable('System Maintenance was updated successfully!')
             );
         }
-        elsif ( ( $ParamObject->GetParam( Param => 'Notification' ) || '' ) eq 'Add' ) {
+        elsif ( $Notification eq 'Add' ) {
             $Output .= $LayoutObject->Notify(
                 Info => Translatable('System Maintenance was added successfully!')
             );

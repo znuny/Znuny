@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.997733894464228;
+    $Self->{Completeness}        = 0.997583762886598;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -224,16 +224,6 @@ sub Data {
         'Message body' => 'Nachrichteninhalt',
         'Add new notification language' => 'Neue Sprache für Benachrichtigungen hinzufügen',
         'Save Changes' => 'Änderungen speichern',
-        'Tag Reference' => 'Tag-Referenz',
-        'Notifications are sent to an agent.' => 'Benachrichtigungen werden an einen Agenten gesendet.',
-        'You can use the following tags' => 'Sie können folgende Tags verwenden',
-        'To get the first 20 character of the appointment title.' => 'Die ersten 20 Zeichen des Terminbetreffs.',
-        'To get the appointment attribute' => 'Die Termin-Attribute',
-        ' e. g.' => ' z. B.',
-        'To get the calendar attribute' => 'Die Kalender-Attribute',
-        'Attributes of the recipient user for the notification' => 'Attribute der Benutzerdaten des Empfängers der Benachrichtigung',
-        'Config options' => 'Konfigurationsoptionen',
-        'Example notification' => 'Beispiel-Benachrichtigung',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => 'Zusätzliche Empfänger-E-Mail-Adressen',
@@ -273,20 +263,6 @@ sub Data {
         'Queues ↔ Auto Responses' => 'Queues ↔ Automatische Antworten',
         'Response' => 'Antwort',
         'Auto response from' => 'Automatische Antwort von',
-        'Reference' => 'Referenz',
-        'To get the first 20 character of the subject.' => 'Die ersten 20 Zeichen des Betreffs.',
-        'To get the first 5 lines of the email.' => 'Die ersten fünf Zeilen der Nachricht.',
-        'To get the name of the ticket\'s customer user (if given).' => 'Der Namen des Kundenbenutzers (falls vorhanden) eines Tickets.',
-        'To get the article attribute' => 'Die Artikel-Attribute',
-        'Options of the current customer user data' => 'Attribute des aktuellen Kunden',
-        'Ticket owner options' => 'Attribute des Ticketbesitzers',
-        'Ticket responsible options' => 'Attribute des Ticket-Verantwortlichen',
-        'Options of the current user who requested this action' => 'Attribute des aktuellen Benutzers, der die Aktion angefordert hat',
-        'Options of the ticket data' => 'Attribute der Ticketdaten',
-        'Options of ticket dynamic fields internal key values' => 'Interne Werte der Dynamischen Feldern von Tickets',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Angezeigte Werte der Dynamischen Felder von Tickets, nutzbar mit Dropdown und Multiselect',
-        'Example response' => 'Beispielantwort',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'Cloud-Services-Verwaltung',
@@ -429,6 +405,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Recht %s für %s umschalten',
         'Customer Default Groups:' => 'Standard-Kundengruppen:',
         'No changes can be made to these groups.' => 'An diesen Gruppen können keine Änderungen vorgenommen werden.',
+        'Reference' => 'Referenz',
         'ro' => 'ro',
         'Read only access to the ticket in this group/queue.' => 'Nur-Lesen-Zugriff auf Tickets in diesen Gruppen/Queues.',
         'rw' => 'rw',
@@ -1440,24 +1417,6 @@ sub Data {
             'Nur einmal am Tag pro Ticket und Benachrichtigungs-Transportmethode versenden.',
         'This field is required and must have less than 4000 characters.' =>
             'Dieses Feld wird benötigt und darf nicht mehr als 4000 Zeichen enthalten.',
-        'Notifications are sent to an agent or a customer.' => 'Benachrichtigungen werden an Agenten und Kunden gesendet.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'Die ersten 20 Zeichen des Betreffs (des letzten Agenten-Artikels).',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'Die ersten fünf Zeilen der Nachricht (des letzten Agenten-Artikels).',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'Die ersten 20 Zeichen des Betreffs (des letzten Kunden-Artikels).',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'Die ersten fünf Zeilen der Nachricht (des letzten Kunden-Artikels).',
-        'Attributes of the current customer user data' => 'Attribute des aktuellen Kundenbenutzer-Datensatzes',
-        'Attributes of the current ticket owner user data' => 'Attribute der Nutzerdaten des aktuellen Ticket-Besitzers',
-        'Attributes of the current ticket responsible user data' => 'Attribute der Nutzerdaten des aktuellen Ticket-Verantwortlichen',
-        'Attributes of the current agent user who requested this action' =>
-            'Attribute der Benutzerdaten des Agenten, der die Aktion ausgelöst hat',
-        'Attributes of the ticket data' => 'Attribute der Ticket-Daten',
-        'Ticket dynamic fields internal key values' => 'Interne Schlüssel der Dynamischen Felder des Tickets',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Anzeigewerte der Dynamischen Felder des Tickets, verwendbar für Auswahlfelder',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => 'Verwenden Sie Komma oder Semikolon, um E-Mail-Adressen zu trennen.',
@@ -2076,8 +2035,6 @@ sub Data {
         'Edit Salutation' => 'Anrede bearbeiten',
         'Filter for Salutations' => 'Filter für Anreden',
         'Filter for salutations' => 'Filter für Anreden',
-        'e. g.' => 'z. B.',
-        'Example salutation' => 'Beispiel-Anrede',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => 'Sicherheitsmodus muss eingeschaltet sein!',
@@ -2137,7 +2094,6 @@ sub Data {
         'Edit Signature' => 'Signatur bearbeiten',
         'Filter for Signatures' => 'Filter für Signaturen',
         'Filter for signatures' => 'Filter für Signaturen',
-        'Example signature' => 'Beispiel-Signatur',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Statusverwaltung',
@@ -2309,18 +2265,6 @@ sub Data {
         'Delete this entry' => 'Diesen Eintrag löschen',
         'Do you really want to delete this template?' => 'Möchten Sie diese Vorlage wirklich löschen?',
         'A standard template with this name already exists!' => 'Es existiert bereits eine Standardvorlage mit diesem Namen!',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            'So erhalten Sie die ersten 20 Zeichen des Betreffs des aktuellen/jüngsten Agentenartikels (aktuell für Antwort und Weiterleitung, spätestens für den Vorlagentyp Notiz). Dieses Tag wird für andere Vorlagentypen nicht unterstützt.',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            'So erhalten Sie die ersten 5 Zeilen des Hauptteils des aktuellen/jüngsten Agentenartikels (aktuell für Antwort und Weiterleitung, spätestens für den Vorlagentyp Notiz). Dieses Tag wird für andere Vorlagentypen nicht unterstützt.',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            'Um die ersten 20 Zeichen des Betreffs des aktuellen/neuesten Artikels zu erhalten (aktuell für Antwort und Weiterleitung, spätestens für die Art der Notizvorlage). Dieser Tag wird für andere Vorlagentypen nicht unterstützt.',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            'So erhalten Sie die ersten 5 Zeilen des Hauptteils des aktuellen/neuesten Artikels (aktuell für Antwort und Vorwärts, spätestens für den Vorlagentyp Notiz). Dieses Tag wird für andere Vorlagentypen nicht unterstützt.',
-        'Create type templates only supports this smart tags' => 'Vorlagen für das Erstellen unterstützen nur diese "smart tags"',
-        'Example template' => 'Beispielvorlage',
-        'The current ticket state is' => 'Der aktuelle Ticket-Status ist',
-        'Your email address is' => 'Ihre E-Mail-Adresse ist',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => 'Verwaltung der Zuordnung von Anhängen zu Vorlagen',
@@ -2579,6 +2523,7 @@ sub Data {
         'Assigned to customer user' => 'Zugewiesen zu Kundenbenutzer',
         'Accessible for customer user' => 'Zugreifbar für Kundenbenutzer',
         'My locked tickets' => 'Meine gesperrten Tickets',
+        'My Owned Tickets' => 'Meine eigenen Tickets',
         'My watched tickets' => 'Meine beobachteten Tickets',
         'My responsibilities' => 'Meine Verantwortlichkeiten',
         'Tickets in My Queues' => 'Tickets in "Meine Queues"',
@@ -2825,6 +2770,13 @@ sub Data {
         'New Queue' => 'Neue Queue',
         'Move' => 'Verschieben',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+        'Add note to linked %s%s%s' => 'Notiz zu verlinktem %s%s%s hinzufügen',
+        'Note to linked Ticket' => 'Notiz zu verlinktem Ticket',
+        'LinkList invalid.' => 'LinkList ungültig.',
+        'Note to origin Ticket' => 'Notiz zu Ursprungsticket',
+        'NoteToTicket invalid.' => 'Notiz ungültig.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => 'Keine Ticket-Daten gefunden.',
         'Open / Close ticket action menu' => 'Ticket-Aktionsmenü öffnen/schließen',
@@ -2833,6 +2785,8 @@ sub Data {
         'First Response Time' => 'Reaktionszeit',
         'Update Time' => 'Aktualisierungszeit',
         'Solution Time' => 'Lösungszeit',
+        'Impact' => 'Auswirkung',
+        'CustomerID' => 'Kundennummer',
         'Move ticket to a different queue' => 'Ticket in eine andere Queue verschieben',
         'Change queue' => 'Queue wechseln',
 
@@ -3078,7 +3032,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'z. B. 10*5155 oder 105658*',
-        'CustomerID' => 'Kundennummer',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => 'Volltextsuche in Tickets (z. B. "John*n" oder "Will*")',
         'Types' => 'Typen',
         'Time Restrictions' => 'Zeitbeschränkungen',
@@ -3310,6 +3263,61 @@ sub Data {
             'Dies ist die öffentliche Standard-Benutzerschnittstelle von OTRS. Es wurde kein Action-Parameter übergeben.',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             'Sie könnten (mithilfe des Paketmanagers) ein eigenes Modul für den öffentlichen Bereich von OTRS installieren, beispielsweise das FAQ-Modul.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => 'Die Termin-Attribute',
+        ' e. g.' => ' z. B.',
+        'To get the first 20 character of the appointment title.' => 'Die ersten 20 Zeichen des Terminbetreffs.',
+        'To get the calendar attribute' => 'Die Kalender-Attribute',
+        'Attributes of the recipient user for the notification' => 'Attribute der Benutzerdaten des Empfängers der Benachrichtigung',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'Die ersten 20 Zeichen des Betreffs.',
+        'To get the first 5 lines of the email.' => 'Die ersten fünf Zeilen der Nachricht.',
+        'To get the name of the ticket\'s customer user (if given).' => 'Der Namen des Kundenbenutzers (falls vorhanden) eines Tickets.',
+        'To get the article attribute' => 'Die Artikel-Attribute',
+        'Options of the current customer user data' => 'Attribute des aktuellen Kunden',
+        'Ticket owner options' => 'Attribute des Ticketbesitzers',
+        'Options of the ticket data' => 'Attribute der Ticketdaten',
+        'Options of ticket dynamic fields internal key values' => 'Interne Werte der Dynamischen Feldern von Tickets',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Angezeigte Werte der Dynamischen Felder von Tickets, nutzbar mit Dropdown und Multiselect',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'Die ersten 20 Zeichen des Betreffs (des letzten Agenten-Artikels).',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'Die ersten fünf Zeilen der Nachricht (des letzten Agenten-Artikels).',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'Die ersten 20 Zeichen des Betreffs (des letzten Kunden-Artikels).',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'Die ersten fünf Zeilen der Nachricht (des letzten Kunden-Artikels).',
+        'Attributes of the current customer user data' => 'Attribute des aktuellen Kundenbenutzer-Datensatzes',
+        'Attributes of the current ticket owner user data' => 'Attribute der Nutzerdaten des aktuellen Ticket-Besitzers',
+        'Attributes of the ticket data' => 'Attribute der Ticket-Daten',
+        'Ticket dynamic fields internal key values' => 'Interne Schlüssel der Dynamischen Felder des Tickets',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Anzeigewerte der Dynamischen Felder des Tickets, verwendbar für Auswahlfelder',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'z. B.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            'So erhalten Sie die ersten 20 Zeichen des Betreffs des aktuellen/jüngsten Agentenartikels (aktuell für Antwort und Weiterleitung, spätestens für den Vorlagentyp Notiz). Dieses Tag wird für andere Vorlagentypen nicht unterstützt.',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            'So erhalten Sie die ersten 5 Zeilen des Hauptteils des aktuellen/jüngsten Agentenartikels (aktuell für Antwort und Weiterleitung, spätestens für den Vorlagentyp Notiz). Dieses Tag wird für andere Vorlagentypen nicht unterstützt.',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            'Um die ersten 20 Zeichen des Betreffs des aktuellen/neuesten Artikels zu erhalten (aktuell für Antwort und Weiterleitung, spätestens für die Art der Notizvorlage). Dieser Tag wird für andere Vorlagentypen nicht unterstützt.',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            'So erhalten Sie die ersten 5 Zeilen des Hauptteils des aktuellen/neuesten Artikels (aktuell für Antwort und Vorwärts, spätestens für den Vorlagentyp Notiz). Dieses Tag wird für andere Vorlagentypen nicht unterstützt.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => 'Tag-Referenz',
+        'You can use the following tags' => 'Sie können folgende Tags verwenden',
+        'Ticket responsible options' => 'Attribute des Ticket-Verantwortlichen',
+        'Options of the current user who requested this action' => 'Attribute des aktuellen Benutzers, der die Aktion angefordert hat',
+        'Config options' => 'Konfigurationsoptionen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
@@ -3908,7 +3916,7 @@ sub Data {
         'Customer user of the ticket' => 'Kundenbenutzer des Tickets',
         'All recipients of the first article' => 'Alle Empfänger des ersten Artikels',
         'All recipients of the last article' => 'Alle Empfänger des letzten Artikels',
-        'All users who are mentioned in a ticket' => 'Alle Benutzer, die in einem Ticket erwähnt werden.',
+        'All agents who are mentioned in the ticket' => 'Alle Agenten, die in dem Ticket erwähnt werden.',
         'Invisible to customer' => 'Unsichtbar für Kunde',
         'Visible to customer' => 'Sichtbar für Kunde',
 
@@ -4364,9 +4372,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'Sie benötigen die "Verschieben"-Berechtigung!',
 
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => 'Meine eigenen Tickets',
-
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'Der Chat ist nicht aktiv.',
         'No permission.' => 'Keine Berechtigung.',
@@ -4660,6 +4665,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNote.pm
         'Reply to note' => 'Auf Notiz antworten',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+        'Create notice for linked ticket' => 'Notiz für verlinktes Ticket erstellen',
+        'Transfer notice' => 'Notiz übergeben',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPhone.pm
         'Split this article' => 'Diesen Artikel teilen',
@@ -5387,6 +5396,11 @@ sub Data {
         'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
             'Alte Konfigurations-Backup-Dateien werden nicht mehr für die installierten Pakete benötigt. Bitte entfernen Sie diese aus dem Verzeichnis Kernel/Config/Backups.',
 
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+        'Views with multiple loaded JavaScript files' => 'Ansichten mit mehrfach geladenen JavaScript Dateien',
+        'The following JavaScript files loaded multiple times:' => 'Die folgenden JavaScript Dateien werden merfach geladen:',
+        'Files' => 'Dateien',
+
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => 'Paketinstallations-Status',
         'Some packages have locally modified files.' => 'Einige Pakete enthalten lokal angepasste Dateien.',
@@ -5789,6 +5803,7 @@ sub Data {
             'Steuert die Höhe der Richtext-Editor-Komponente. Geben Sie eine Zahl (für die Höhe in Pixeln) oder einen prozentualen Wert (für eine relative Höhe) an.',
         'Defines the selectable font sizes in the rich text editor.' => 'Legt die wählbaren Schriftgrößen im Rich-Text-Editor fest.',
         'Defines the selectable fonts in the rich text editor.' => 'Legt die auswählbaren Schriftarten im Rich-Text-Editor fest.',
+        'Defines the selectable format tags in the rich text editor.' => '',
         'Defines additional plugins for use in the rich text editor.' => 'Definiert zusätzliche Plugins für die Verwendung im Rich-Text-Editor.',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             'Definiert zusätzliche Inhalte, die für die Verwendung im Rich-Text-Editor zugelassen sind.',
@@ -6735,6 +6750,14 @@ sub Data {
             'Standarddaten, die als Attribute für die für die Ticket-Suchmaske verwendet werden. Beispiel: "TicketCreateTimePointFormat = Jahr; TicketCreateTimePointStart = Letzter; TicketCreateTimePoint = 2;".',
         'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".' =>
             'Standarddaten, die als Attribute für die für die Ticket-Suchmaske verwendet werden. Beispiel: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".' =>
+            'Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet werden. Beispiel: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".' =>
+            'Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet werden. Beispiel: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".' =>
+            'Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet werden. Beispiel: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".' =>
+            'Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet werden. Beispiel: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".',
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Gesperrte-Tickets-Anzeige im Agent-Interface.',
         'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
@@ -7983,6 +8006,56 @@ sub Data {
             'Benachrichtigungsmodul für Agenten-Interface, das die Anzahl der Erwähnungen anzeigt.',
         'Module to grant access to the mentioned agents of a ticket.' => 'Modul, das Zugriff für die erwähnten Agenten eines Tickets gewährt.',
         'Mapping of non-standard time zones to official ones.' => 'Mapping von Nicht-Standard-Zeitzonen zu offiziellen Zeitzonen.',
+        'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
+            'Startdatum (JJJJMMTT) des Bereichs, der beim Parsen von ICS-Dateien verwendet werden soll. Das verwendete CPAN-Modul iCal::Parser benötigt diese Angabe, um ICS-Dateien mit Events in einem Jahr vor dem aktuellen Jahr parsen zu können. Das Enddatum des Bereichs wird automatisch auf 10 Jahre in der Zukunft ab dem Zeitpunkt des Parsens/Ausführens gesetzt.',
+        'Define a mapping between variables of the customer company data (keys) and dynamic fields of a ticket (values). The purpose is to store customer company data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn\'t be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany setting.' =>
+            'Definiert eine Zuordnung zwischen Variablen der Kundendaten (Schlüssel) und dynamischen Feldern eines Ticket (Werte). Somit können Sie Kundendaten eines Tickets in dynamische Felder speichern. Die dynamischen Felder müssen im System vorhanden sein und sollten für AgentTicketFreeText aktiviert werden, damit sie eingestellt / manuell durch den Agenten aktualisiert werden können. Sie dürfen nicht für AgentTicketPhone, AgentTicketEmail und AgentTicketCustomer aktiviert werden. Wenn dies der Fall ist, so haben sie Vorrang gegenüber den automatisch gesetzten Werten. Um dieses Mapping zu verwenden, müssen Sie auch die Ticket Einstellung Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany aktivieren.',
+        'This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.' =>
+            'Dieses Eventmodul speichert Attribute des Kunden in dynamischen Ticketfeldern. Bitte schauen Sie sich die DynamicFieldFromCustomerCompany::Mapping-Einstellung für die Konfiguration des Mappings an.',
+        'Required permissions to use the NoteToLinkedTicket screen in the agent interface.' =>
+            'Benötigte Rechte, um den "Notiz übergeben"-Dialog im Agenten-Interface aufzurufen.',
+        'Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Setzt den Status des ausgewählten verknüpften Tickets im NoteToLinkedTicket-Dialog des Agenten-Interface',
+        'Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Definiert den standardmäßigen nächsten Status des Tickets nach dieser Aktion in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            'Aktiviert die Auswahl, ob eine Notiz in der "Notiz übergeben"-Aktion auch im Ursprungsticket erstellt werden soll.',
+        'Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            'Definiert den Standardwert, ob eine Notiz in der "Notiz übergeben"-Aktion auch im Ursprungsticket erstellt werden soll.',
+        'Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Bestimmt den Standardbetreff für Notizen, die im "Notiz übergeben"-Dialog im Agenten-Interface hinzugefügt werden.',
+        'Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Setzt den Standardtext für Notizen in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Allows adding notes in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Erlaubt im Agenten-Interface das Hinzufügen von Notizen im "Notiz übergeben"-Dialog.',
+        'Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.' =>
+            'Bestimmt, ob die Notiz im "Notiz übergeben"-Dialog befüllt sein muss.',
+        'Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            'Definiert den History-Typ für die Aktion "Notiz übergeben", welcher für die Ticket-Historie im Agenten-Interface benutzt wird.',
+        'Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            'Steuert den History-Kommentar für die "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.' =>
+            'Definiert, ob eine Notiz im "Notiz übergeben"-Dialog für den Kunden sichtbar sein soll.',
+        'Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated).' =>
+            'Setzt den Ticket-Typ in der "Notiz übergeben"-Aktion im Agenten-Interface. (Ticket::Type muss aktiviert werden).',
+        'Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated).' =>
+            'Setzt den Service in der "Notiz übergeben"-Aktion im Agenten-Interface (Ticket::Service muss aktiviert sein).',
+        'Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface.' =>
+            'Setzt die Queue in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Setzt den Ticket-Besitzer in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Setzt den Verantwortlichen in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Setzt den Status in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Definiert den nächsten Status des Tickets nach dieser Aktion in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Zeig die Ticket-Priorität-Option in der "Notiz übergeben"-Aktion im Agenten-Interface an.',
+        'Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Definiert die standardmäßige nächste Priorität des Tickets nach dieser Aktion in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Zeigt den Ticket-Titel in der "Notiz übergeben"-Aktion im Agenten-Interface an.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',
@@ -8605,6 +8678,7 @@ Ihr Helpdesk-Team
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Ermöglicht die Benutzung der kleinenTicketübersicht (CustomerInfo => 1 - zeigt auch die Kundeninformation ).',
         'Always show RichText if available' => 'RichText immer verwenden, wenn verfügbar',
+        'An additional screen to add notes to a linked ticket.' => 'Ein zusätzlicher Dialog zum Hinzufügen von Notizen an ein verlinktes Ticket.',
         'Answer' => 'Beantworten',
         'Appointment Calendar overview page.' => 'Terminkalender-Übersichtsseite.',
         'Appointment Notifications' => 'Terminbenachrichtigungen',

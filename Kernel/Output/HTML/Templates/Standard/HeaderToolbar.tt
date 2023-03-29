@@ -1,0 +1,52 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+
+[% RenderBlockStart("ToolBarItem") %]
+            <li class="[% Data.Class | html %]"><a href="[% Data.Link %]" target="[% Data.Target | html %]" accesskey="[% Data.AccessKey | html %]" title="[% Translate(Data.Description) | html %]: [% Data.Count | html %][% Data.AccessKeyReference | html %]">[% Translate(Data.Description) | html %] <i class="icon-small fa fa-clock-o icon-show-reached"></i> <i class="icon-small fa fa-star icon-show-new"></i><i class="[% Data.Icon | html %]"></i> <span class="Counter">[% Data.Count | html %]</span> </a></li>
+[% RenderBlockEnd("ToolBarItem") %]
+
+[% RenderBlockStart("ToolBarSearchProfile") %]
+            <li class="Extended SearchProfile">
+                <form action="[% Env("CGIHandle") %]" method="post" name="SearchProfile">
+                    <input type="hidden" name="Action" value="AgentTicketSearch"/>
+                    <input type="hidden" name="Subaction" value="LoadProfile"/>
+                    <input type="hidden" name="SearchTemplate" value="[% Translate("Search") | html %]"/>
+                    [% Data.Link %]
+#                    <a href="#" id="ToolbarProfileSearch" title="[% Translate(Data.Description) | html %]  ([% Data.AccessKey | html %])" accesskey="[% Data.AccessKey | html %]" [% Data.LinkOption %]>[% Translate(Data.Name) | html %]</a>
+                </form>
+            </li>
+[% RenderBlockEnd("ToolBarSearchProfile") %]
+[% RenderBlockStart("ToolBarSearchFulltext") %]
+            <li class="Extended SearchFulltext">
+                <form action="[% Env("CGIHandle") %]" method="post" name="SearchFulltext">
+                    <input type="hidden" name="Action" value="AgentTicketSearch"/>
+                    <input type="hidden" name="Subaction" value="Search"/>
+                    <input type="hidden" name="SearchTemplate" value="[% Translate("Search") | html %]"/>
+                    <input type="hidden" name="CheckTicketNumberAndRedirect" value="1"/>
+                    [% IF Data.SearchInArchive %]
+                        <input type="hidden" name="SearchInArchive" value="[% Data.SearchInArchive | html %]"/>
+                    [% END %]
+                    [% FOREACH Parameter IN Data.AdditionalSearchParameters %]
+                        <input type="hidden" name="[% Parameter.key | html %]" value="[% Parameter.value | html %]">
+                    [% END %]
+                    <input type="text" size="[% Data.Size | html %]" name="Fulltext" id="Fulltext" value="[% Data.Fulltext | html %]" placeholder="[% Translate(Data.Description) | html %]" title="[% Translate(Data.Description) | html %]"/>
+#                    <a href="#" id="ToolbarFulltextSearch" title="[% Translate(Data.Description) | html %] ([% Data.AccessKey | html %])" accesskey="[% Data.AccessKey | html %]" [% Data.LinkOption %]>[% Translate(Data.Name) | html %]</a>
+                </form>
+            </li>
+[% RenderBlockEnd("ToolBarSearchFulltext") %]
+[% RenderBlockStart("ToolBarCICSearchCustomerID") %]
+            <li class="Extended SearchFulltext">
+                <input type="text" size="[% Data.Size | html %]" id="ToolBarCICSearchCustomerID" placeholder="[% Translate(Data.Description) | html %]" title="[% Translate(Data.Description) | html %]"/>
+            </li>
+[% RenderBlockEnd("ToolBarCICSearchCustomerID") %]
+[% RenderBlockStart("ToolBarCICSearchCustomerUser") %]
+            <li class="Extended SearchFulltext">
+                <input type="text" size="[% Data.Size | html %]" id="ToolBarCICSearchCustomerUser" placeholder="[% Translate(Data.Description) | html %]" title="[% Translate(Data.Description) | html %]"/>
+            </li>
+[% RenderBlockEnd("ToolBarCICSearchCustomerUser") %]

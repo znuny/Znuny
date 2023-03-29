@@ -22,6 +22,8 @@ $Selenium->RunTest(
         my $SignatureObject    = $Kernel::OM->Get('Kernel::System::Signature');
         my $QueueObject        = $Kernel::OM->Get('Kernel::System::Queue');
         my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $IsITSMIncidentProblemManagementInstalled
+            = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
         # Disable check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -37,16 +39,35 @@ $Selenium->RunTest(
         );
 
         # Do not check service and type.
-        $HelperObject->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::Service',
-            Value => 0,
-        );
-        $HelperObject->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::Type',
-            Value => 0,
-        );
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => 'Ticket::Service',
+                Value => 1,
+            );
+        }
+        else {
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => 'Ticket::Service',
+                Value => 0,
+            );
+        }
+
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => 'Ticket::Type',
+                Value => 1,
+            );
+        }
+        else {
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => 'Ticket::Type',
+                Value => 0,
+            );
+        }
 
         # Enable session management use html cookies.
         $HelperObject->ConfigSettingChange(
@@ -131,8 +152,16 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
+        my %TestUserLoginGroup = (
+            Groups => [ 'admin', 'users' ]
+        );
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $TestUserLoginGroup{Groups} = [ 'admin', 'users', 'itsm-service' ];
+        }
+
+        # Create test user.
         my $TestUserLogin = $HelperObject->TestUserCreate(
-            Groups => [ 'admin', 'users' ],
+            %TestUserLoginGroup,
         ) || die "Did not get test user";
 
         $Selenium->Login(
@@ -147,9 +176,14 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketEmail");
 
         # Check page.
+        my @AdditionalIDs;
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            @AdditionalIDs = qw(TypeID ServiceID OptionLinkTicket DynamicField_ITSMImpact);
+        }
+
         for my $ID (
             qw(Dest ToCustomer CcCustomer BccCustomer CustomerID RichText
-            Signature FileUpload NextStateID PriorityID submitRichText)
+            Signature FileUpload NextStateID PriorityID submitRichText), @AdditionalIDs
             )
         {
             my $Element = $Selenium->find_element( "#$ID", 'css' );
@@ -190,6 +224,41 @@ $Selenium->RunTest(
             $SignatureText,
             "Signature is found with no replaced tags"
         );
+
+        my $ServiceID;
+        if ($IsITSMIncidentProblemManagementInstalled) {
+
+            # get service object
+            my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
+
+            # get test user ID
+            my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+                UserLogin => $TestUserLogin,
+            );
+
+            # create test service
+            my $ServiceName = "Selenium" . $HelperObject->GetRandomID();
+            $ServiceID = $ServiceObject->ServiceAdd(
+                Name        => $ServiceName,
+                ValidID     => 1,
+                Comment     => 'Selenium Test Service',
+                TypeID      => 2,
+                Criticality => '5 very high',
+                UserID      => $TestUserID,
+            );
+            $Self->True(
+                $ServiceID,
+                "Service is created - ID $ServiceID",
+            );
+
+            # add customer user as member to the test service
+            $ServiceObject->CustomerUserServiceMemberAdd(
+                CustomerUserLogin => $TestData[1]->{UserLogin},
+                ServiceID         => $ServiceID,
+                Active            => 1,
+                UserID            => $TestUserID,
+            );
+        }
 
         # Select customer user.
         $Selenium->find_element( "#ToCustomer", 'css' )->clear();
@@ -270,6 +339,48 @@ $Selenium->RunTest(
             "Signature is found with replaced tags on selected customer change"
         );
 
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $Selenium->execute_script(
+                "\$('#TypeID').val(\$('#TypeID option').filter(function () { return \$(this).html() == 'Unclassified'; } ).val() ).trigger('redraw.InputField').trigger('change');"
+            );
+            $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length' );
+
+            $Selenium->WaitFor( JavaScript => "return \$('#ServiceID option[value=\"$ServiceID\"]').length;" );
+            $Selenium->execute_script(
+                "\$('#ServiceID').val('$ServiceID').trigger('redraw.InputField').trigger('change');"
+            );
+            $Selenium->WaitFor( JavaScript => 'return $("#ServiceIncidentState").length' );
+
+            # check for service incident state field
+            my $ServiceIncidentStateElement = $Selenium->find_element( "#ServiceIncidentState", 'css' );
+            $ServiceIncidentStateElement->is_enabled();
+            $ServiceIncidentStateElement->is_displayed();
+
+            $Selenium->WaitFor(
+                JavaScript => "return \$('#DynamicField_ITSMImpact option[value=\"3 normal\"]').length;"
+            );
+            $Selenium->WaitFor( JavaScript => "return \$('#PriorityID option[value=\"4\"]').length;" );
+
+            # test priority update based on impact value
+            $Self->Is(
+                $Selenium->find_element( '#PriorityID', 'css' )->get_value(),
+                '4',
+                "#PriorityID stored value",
+            );
+
+            $Selenium->execute_script(
+                "\$('#DynamicField_ITSMImpact').val('1 very low').trigger('redraw.InputField').trigger('change');"
+            );
+
+            sleep 2;
+
+            $Self->Is(
+                $Selenium->find_element( '#PriorityID', 'css' )->get_value(),
+                '3',
+                "#PriorityID updated value",
+            );
+        }
+
         # Submit form.
         $Selenium->find_element( "#submitRichText", 'css' )->VerifiedClick();
 
@@ -312,6 +423,20 @@ $Selenium->RunTest(
             index( $Selenium->get_page_source(), $SignatureText ) > -1,
             "Signature found on page"
         ) || die "$SignatureText not found on page";
+
+        if ($IsITSMIncidentProblemManagementInstalled) {
+
+            # Navigate to AgentTicketHistory screen.
+            $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketHistory;TicketID=$TicketID");
+
+            # check for ITSM updated fields
+            for my $UpdateText (qw(Impact Criticality)) {
+                $Self->True(
+                    index( $Selenium->get_page_source(), "Changed dynamic field ITSM$UpdateText" ) > -1,
+                    "DynamicFieldUpdate $UpdateText - found",
+                );
+            }
+        }
 
         # Disable session management use html cookies to check signature update (see bug#12890).
         $HelperObject->ConfigSettingChange(
@@ -380,6 +505,36 @@ $Selenium->RunTest(
             "Ticket with ticket ID $TicketID is deleted",
         );
 
+        if ($IsITSMIncidentProblemManagementInstalled) {
+
+            # delete test service - test customer connection
+            $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+                SQL => "DELETE FROM service_customer_user WHERE service_id = $ServiceID",
+            );
+            $Self->True(
+                $Success,
+                "Delete service-customer connection",
+            );
+
+            # delete test service preferences
+            $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+                SQL => "DELETE FROM service_preferences WHERE service_id = $ServiceID",
+            );
+            $Self->True(
+                $Success,
+                "Service preferences is deleted - ID $ServiceID",
+            );
+
+            # delete created test service
+            $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+                SQL => "DELETE FROM service WHERE id = $ServiceID",
+            );
+            $Self->True(
+                $Success,
+                "Service is deleted - ID $ServiceID",
+            );
+        }
+
         # Delete created test customer users.
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         for my $CustomerLogin (@CustomerUserIDs) {
@@ -421,7 +576,9 @@ $Selenium->RunTest(
         my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
-        for my $Cache (qw (Ticket CustomerUser)) {
+        my @AdditionalCache = qw (Ticket CustomerUser);
+        push @AdditionalCache, 'Service' if ($IsITSMIncidentProblemManagementInstalled);
+        for my $Cache (@AdditionalCache) {
             $CacheObject->CleanUp( Type => $Cache );
         }
 

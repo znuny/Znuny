@@ -1297,7 +1297,7 @@ sub PackageUninstall {
 =head2 GetRequiredPackages()
 
 This function returns an array of hashes that contains information
-about <RequiredPackages> of the .sopm-file.
+about C<RequiredPackages> of the .sopm-file.
 
     my $PackageRequired = $PackageObject->GetRequiredPackages(
         Structure => \%Structure,       # return of PackageParse()
@@ -1307,14 +1307,14 @@ Returns:
 
     my $PackageRequired = (
       {
-        'Name'                       => 'ITSMCore'
+        'Name'                       => 'ITSMCore',
         'Version'                    => '',
         'IsInstalled'                => 'Problem',
         'IsRequiredVersionInstalled' => 0,
       },
       {
         'Name'                       => 'Survey',
-        'Version'                    => '6.5.0'
+        'Version'                    => '6.5.0',
         'IsInstalled'                => 'OK',
         'IsRequiredVersionInstalled' => 1,
       }
@@ -1972,12 +1972,12 @@ build an opm package
         ],
         Filelist = [
             {
-                Location   => 'Kernel/System/Lala.pm'
+                Location   => 'Kernel/System/Lala.pm',
                 Permission => '644',
                 Content    => $FileInString,
             },
             {
-                Location   => 'Kernel/System/Lulu.pm'
+                Location   => 'Kernel/System/Lulu.pm',
                 Permission => '644',
                 Content    => $FileInString,
             },
@@ -2606,7 +2606,7 @@ generates a MD5 Sum for all files in a given package
 returns:
 
     $MD5SumLookup = {
-        'Direcoty/File1' => 'f3f30bd59afadf542770d43edb280489'
+        'Direcoty/File1' => 'f3f30bd59afadf542770d43edb280489',
         'Direcoty/File2' => 'ccb8a0b86adf125a36392e388eb96778'
     };
 
@@ -3248,7 +3248,7 @@ system data.
 Returns:
     %Result = (
         IsRunning      => 1,             # or 0 if it is not running
-        UpgradeStatus  => 'Running'      # (optional) 'Running' or 'Finished' or 'TimedOut',
+        UpgradeStatus  => 'Running',     # (optional) 'Running' or 'Finished' or 'TimedOut',
         UpgradeSuccess => 1,             # (optional) 1 or 0,
     );
 
@@ -3400,7 +3400,7 @@ sub CheckVersion {
 =head2 GetRequiredModules()
 
 This function returns an array of hashes that contains information
-about <RequiredModules> of the .sopm-file.
+about C<RequiredModules> of the .sopm-file.
 
     my $ModuleRequired = $PackageObject->GetRequiredModules(
         Structure => \%Structure,       # return of PackageParse()
@@ -3412,12 +3412,12 @@ Returns:
         {
           'Name'        => 'GD::Graph',
           'Version'     => undef,
-          'IsInstalled' => 'Problem'
+          'IsInstalled' => 'Problem',
         },
         {
           'Name'        => 'Data::Dumper',
           'Version'     => '2.179',
-          'IsInstalled' => 'OK'
+          'IsInstalled' => 'OK',
         }
     );
 

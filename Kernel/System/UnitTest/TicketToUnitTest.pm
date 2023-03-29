@@ -455,29 +455,29 @@ Returns the HistoryTicketGet for a given SystemTime and TicketID.
     );
 
     %HistoryData = (
-        TicketID                => 'TicketID'
-        Type                    => 'Type'
-        TypeID                  => 'TypeID'
-        Queue                   => 'Queue'
-        QueueID                 => 'QueueID'
-        Priority                => 'Priority'
-        PriorityID              => 'PriorityID'
-        State                   => 'State'
-        StateID                 => 'StateID'
-        Owner                   => 'Owner'
-        OwnerID                 => 'OwnerID'
-        CreateUserID            => 'CreateUserID'
-        CreateTime (timestamp)  => 'CreateTime (timestamp)'
-        CreateOwnerID           => 'CreateOwnerID'
-        CreatePriority          => 'CreatePriority'
-        CreatePriorityID        => 'CreatePriorityID'
-        CreateState             => 'CreateState'
-        CreateStateID           => 'CreateStateID'
-        CreateQueue             => 'CreateQueue'
-        CreateQueueID           => 'CreateQueueID'
-        LockFirst (timestamp)   => 'LockFirst (timestamp)'
-        LockLast (timestamp)    => 'LockLast (timestamp)'
-        UnlockFirst (timestamp) => 'UnlockFirst (timestamp)'
+        TicketID                => 'TicketID',
+        Type                    => 'Type',
+        TypeID                  => 'TypeID',
+        Queue                   => 'Queue',
+        QueueID                 => 'QueueID',
+        Priority                => 'Priority',
+        PriorityID              => 'PriorityID',
+        State                   => 'State',
+        StateID                 => 'StateID',
+        Owner                   => 'Owner',
+        OwnerID                 => 'OwnerID',
+        CreateUserID            => 'CreateUserID',
+        CreateTime (timestamp)  => 'CreateTime (timestamp)',
+        CreateOwnerID           => 'CreateOwnerID',
+        CreatePriority          => 'CreatePriority',
+        CreatePriorityID        => 'CreatePriorityID',
+        CreateState             => 'CreateState',
+        CreateStateID           => 'CreateStateID',
+        CreateQueue             => 'CreateQueue',
+        CreateQueueID           => 'CreateQueueID',
+        LockFirst (timestamp)   => 'LockFirst (timestamp)',
+        LockLast (timestamp)    => 'LockLast (timestamp)',
+        UnlockFirst (timestamp) => 'UnlockFirst (timestamp)',
         UnlockLast (timestamp)  => 'UnlockLast (timestamp)'
     );
 

@@ -267,11 +267,11 @@ sub Create {
 Get a list of the queue elements.
 
     my $List = $MailQueue->List(
-        ID              => '...' # optional
-        ArticleID       => '...' # optional
-        Sender          => '...' # optional
-        Recipient       => '...' # optional
-        Attempts        => '...' # optional
+        ID              => '...', # optional
+        ArticleID       => '...', # optional
+        Sender          => '...', # optional
+        Recipient       => '...', # optional
+        Attempts        => '...', # optional
     );
 
 This returns something like:
@@ -1155,12 +1155,12 @@ sub _SendEventNotification {
 Build the filter sql and associated binds.
 
     my ( $FilterSQL, $Binds ) = $MailQueue->_FiltersSQLAndBinds(
-        ID              => '...' # optional
-        ArticleID       => '...' # optional
-        CommunicationID => '...' # optional
-        Sender          => '...' # optional
-        Recipient       => '...' # optional
-        Attempts        => '...' # optional
+        ID              => '...', # optional
+        ArticleID       => '...', # optional
+        CommunicationID => '...', # optional
+        Sender          => '...', # optional
+        Recipient       => '...', # optional
+        Attempts        => '...', # optional
     );
 
 This returns something like:

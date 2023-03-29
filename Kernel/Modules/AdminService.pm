@@ -35,6 +35,8 @@ sub Run {
     my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
     my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
+    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+
     if ( $Self->{IsITSMInstalled} ) {
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
@@ -333,6 +335,8 @@ sub _MaskNew {
     my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
     my %ServiceData;
 
+    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+
     # get params
     $ServiceData{ServiceID} = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => "ServiceID" );
     if ( $ServiceData{ServiceID} ne 'NEW' ) {
@@ -471,8 +475,6 @@ sub _MaskNew {
             }
         }
     }
-
-    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
 
     # generate output
     return $LayoutObject->Output(

@@ -44,14 +44,14 @@ sub Run {
     my $OAuth2TokenConfigObject = $Kernel::OM->Get('Kernel::System::OAuth2TokenConfig');
 
     my $UserID = $LayoutObject->{UserID};
-    return if !$UserID;
+    return '' if !$UserID;
 
     my $UserHasPermission = $GroupObject->PermissionCheck(
         UserID    => $UserID,
         GroupName => 'admin',
         Type      => 'rw',
     );
-    return if !$UserHasPermission;
+    return '' if !$UserHasPermission;
 
     my @ValidIDs = $ValidObject->ValidIDsGet();
     return '' if !@ValidIDs;
