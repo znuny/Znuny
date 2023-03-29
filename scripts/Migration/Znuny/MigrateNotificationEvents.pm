@@ -30,6 +30,7 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     return if !$Self->_MigratePlaceholders(%Param);
+    return if !$Self->_MigrateMentionNotification(%Param);
 
     return 1;
 }
@@ -72,6 +73,50 @@ sub _MigratePlaceholders {
         }
 
         next NOTIFICATIONEVENTID if !$MessageHasChanged;
+
+        my $NotificationEventUpdated = $NotificationEventObject->NotificationUpdate(
+            %{$NotificationEvent},
+            UserID => 1,
+        );
+        next NOTIFICATIONEVENTID if $NotificationEventUpdated;
+
+        print "    Error updating notification event with ID $NotificationEventID.\n";
+        return;
+    }
+
+    return 1;
+}
+
+sub _MigrateMentionNotification {
+    my ( $Self, %Param ) = @_;
+
+    my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
+
+    my %NotificationEvents = $NotificationEventObject->NotificationList(
+
+        # Type    => 'Ticket', # type of notifications; default: 'Ticket'
+        Details => 1,    # include notification detailed data. possible (0|1) # ; default: 0
+        All => 1,    # optional: if given all notification types will be returned, even if type is given (possible: 0|1)
+    );
+
+    my %NotificationEventsToUpdateByName = (
+        'Mention notification' => 1,
+    );
+
+    NOTIFICATIONEVENTID:
+    for my $NotificationEventID ( sort keys %NotificationEvents ) {
+        my $NotificationEvent = $NotificationEvents{$NotificationEventID};
+        next NOTIFICATIONEVENTID if !$NotificationEventsToUpdateByName{ $NotificationEvent->{Name} };
+
+        $NotificationEvent->{Message}->{en}->{Body} = 'You have been mentioned in ticket <OTRS_TICKET_NUMBER>
+<OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>';
+
+        $NotificationEvent->{Message}->{de}->{Body} = 'Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>
+<OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>';
 
         my $NotificationEventUpdated = $NotificationEventObject->NotificationUpdate(
             %{$NotificationEvent},

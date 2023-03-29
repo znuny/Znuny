@@ -52,11 +52,12 @@ Please see the [Roadmap](https://www.znuny.org/en/roadmap) for an EOL overview.
 
 | Version | Supported          | Known vulnerabilities    |
 | ------- | ------------------ |------------------------- |
-| 6 LTS   | :heavy_check_mark: | -                        |
+| 6 LTS   | :x:                | -                        |
 | 6.1     | :x:                | :heavy_exclamation_mark: |
 | 6.2     | :x:                | :heavy_exclamation_mark: |
 | 6.3     | :x:                | -                        |
-| 6.4     | :heavy_check_mark: | -                        |
+| 6.4     | :x:                | -                        |
+| 6.5 LTS | :heavy_check_mark: | -                        |
 
 ## How to report a security vulnerability?
 

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.923923599870508;
+    $Self->{Completeness}        = 0.917686855670103;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -224,16 +224,6 @@ sub Data {
         'Message body' => 'Садржај поруке',
         'Add new notification language' => 'Уклони нови језик обавештења',
         'Save Changes' => 'Сачувај промене',
-        'Tag Reference' => 'Референца ознаке',
-        'Notifications are sent to an agent.' => 'Обавештење ће бити послато оператеру.',
-        'You can use the following tags' => 'Можете користити следеће ознаке',
-        'To get the first 20 character of the appointment title.' => 'Да видите првих 20 карактера наслова термина.',
-        'To get the appointment attribute' => 'Да видите атрибуте термина',
-        ' e. g.' => ' нпр.',
-        'To get the calendar attribute' => 'Да видите атрибуте календара',
-        'Attributes of the recipient user for the notification' => 'Атрибути корисника примаоца за обавештење',
-        'Config options' => 'Конфигурационе опције',
-        'Example notification' => 'Пример обавештења',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => 'Имејл адреса додатног примаоца',
@@ -273,20 +263,6 @@ sub Data {
         'Queues ↔ Auto Responses' => 'Редови ↔ аутоматски одговори',
         'Response' => 'Одговор',
         'Auto response from' => 'Аутоматски одговор од',
-        'Reference' => 'Референца',
-        'To get the first 20 character of the subject.' => 'Да видите првих 20 слова предмета.',
-        'To get the first 5 lines of the email.' => 'Да видите првих 5 линија имејла.',
-        'To get the name of the ticket\'s customer user (if given).' => 'Да прибавите назив клијента корисника за тикет (ако је дат).',
-        'To get the article attribute' => 'Да видите атрибуте чланка',
-        'Options of the current customer user data' => 'Опције података о актуелном клијенту кориснику',
-        'Ticket owner options' => 'Опције власника тикета',
-        'Ticket responsible options' => 'Опције одговорног за тикет',
-        'Options of the current user who requested this action' => 'Опције актуелног корисника који је тражио ову акцију',
-        'Options of the ticket data' => 'Опције података о тикету',
-        'Options of ticket dynamic fields internal key values' => 'Опције за вредности интерних кључева динамичких поља тикета',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Опције за приказане вредности динамичких поља тикета, корисно за поља Dropdown и Multiselect',
-        'Example response' => 'Пример одговора',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'Управљање сервисима у облаку',
@@ -429,6 +405,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Промени %s дозволе за %s',
         'Customer Default Groups:' => 'Подразумеване групе за клијента:',
         'No changes can be made to these groups.' => 'На овим групама промене нису могуће.',
+        'Reference' => 'Референца',
         'ro' => 'ro',
         'Read only access to the ticket in this group/queue.' => 'Приступ ограничен само на читање за тикете у овим групама/редовима.',
         'rw' => 'rw',
@@ -1440,24 +1417,6 @@ sub Data {
             'Обавети корисника само једном дневно о поједином тикету коришћењем изабраног транспорта.',
         'This field is required and must have less than 4000 characters.' =>
             'Ово поље је обавезно и не сме бити дуже од 4000 карактера.',
-        'Notifications are sent to an agent or a customer.' => 'Обавештење послато оператеру или клијенту.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'Да видите првих 20 слова предмета (последњег чланка оператера).',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'Да видите првих 5 линија поруке (последњег чланка оператера).',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'Да видите првих 20 слова предмета (последњег чланка клијента).',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'Да видите првих 5 линија поруке (последњег чланка клијента).',
-        'Attributes of the current customer user data' => 'Атрибути података актуелног клијента корисника',
-        'Attributes of the current ticket owner user data' => 'Атрибути података корисника власника актуелног тикета',
-        'Attributes of the current ticket responsible user data' => 'Атрибути података одговорног корисника актуелног тикета',
-        'Attributes of the current agent user who requested this action' =>
-            'Атрибути актуелног корисника оператера који је тражио ову акцију',
-        'Attributes of the ticket data' => 'Атрибути података тикета',
-        'Ticket dynamic fields internal key values' => 'Вредности интерних кључева динамичких поља тикета',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Приказане вредности динамичких поља, корисно за падајућа и поља са вишеструким избором',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => 'Користите зарез или тачку-зарез за одвајање имејл адреса.',
@@ -2076,8 +2035,6 @@ sub Data {
         'Edit Salutation' => 'Уреди Поздрав',
         'Filter for Salutations' => 'Филтер за поздраве',
         'Filter for salutations' => 'Филтер за поздраве',
-        'e. g.' => 'нпр.',
-        'Example salutation' => 'Пример поздрава',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => 'Потребно је да сигуран мод буде укључен!',
@@ -2137,7 +2094,6 @@ sub Data {
         'Edit Signature' => 'Уреди Потпис',
         'Filter for Signatures' => 'Филтер за потписе',
         'Filter for signatures' => 'Филтер за потписе',
-        'Example signature' => 'Пример потписа',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Управљање статусима',
@@ -2309,18 +2265,6 @@ sub Data {
         'Delete this entry' => 'Обриши овај унос',
         'Do you really want to delete this template?' => 'Да ли стварно желите да обришете овај шаблон?',
         'A standard template with this name already exists!' => 'Стандардни шаблон са овим називом већ постоји!',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => 'Креирај тип шаблона који подржавају само ове паметне ознаке.',
-        'Example template' => 'Пример шаблона',
-        'The current ticket state is' => 'Тренутни стаус тикета је',
-        'Your email address is' => 'Ваша имејл адреса је',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => 'Управљање релацијама шаблони-прилози',
@@ -2579,6 +2523,7 @@ sub Data {
         'Assigned to customer user' => 'Додељени клијент корисник',
         'Accessible for customer user' => 'Дозвољен приступ за клијент корисника',
         'My locked tickets' => 'Моји закључани тикети',
+        'My Owned Tickets' => '',
         'My watched tickets' => 'Моји праћени тикети',
         'My responsibilities' => 'Одговоран сам за',
         'Tickets in My Queues' => 'Тикети у мојим редовима',
@@ -2825,6 +2770,13 @@ sub Data {
         'New Queue' => 'Нови Ред',
         'Move' => 'Премести',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+        'Add note to linked %s%s%s' => '',
+        'Note to linked Ticket' => '',
+        'LinkList invalid.' => '',
+        'Note to origin Ticket' => '',
+        'NoteToTicket invalid.' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => 'Нису нађени подаци о тикету',
         'Open / Close ticket action menu' => 'Акциони мени Отварања / Затварања тикета',
@@ -2833,6 +2785,8 @@ sub Data {
         'First Response Time' => 'Време првог одговора',
         'Update Time' => 'Време ажурирања',
         'Solution Time' => 'Време решавања',
+        'Impact' => 'Утицај',
+        'CustomerID' => 'ID клијента',
         'Move ticket to a different queue' => 'Премести тикет у други ред',
         'Change queue' => 'Промени ред',
 
@@ -3078,7 +3032,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Профил',
         'e. g. 10*5155 or 105658*' => 'нпр. 10*5155 или 105658*',
-        'CustomerID' => 'ID клијента',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => 'Текстуално претраживање у тикетима (нпр. "John*n" или "Will*")',
         'Types' => 'Типови',
         'Time Restrictions' => 'Временска ограничења',
@@ -3310,6 +3263,61 @@ sub Data {
             'Ово је подразумевани јавни интерфејс за OTRS! Нема датих акционих параметара.',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             'Можете инсталирати додатни модул (видите управљање пакетима), нпр. FAQ, који има јавни интерфејс.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => 'Да видите атрибуте термина',
+        ' e. g.' => ' нпр.',
+        'To get the first 20 character of the appointment title.' => 'Да видите првих 20 карактера наслова термина.',
+        'To get the calendar attribute' => 'Да видите атрибуте календара',
+        'Attributes of the recipient user for the notification' => 'Атрибути корисника примаоца за обавештење',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'Да видите првих 20 слова предмета.',
+        'To get the first 5 lines of the email.' => 'Да видите првих 5 линија имејла.',
+        'To get the name of the ticket\'s customer user (if given).' => 'Да прибавите назив клијента корисника за тикет (ако је дат).',
+        'To get the article attribute' => 'Да видите атрибуте чланка',
+        'Options of the current customer user data' => 'Опције података о актуелном клијенту кориснику',
+        'Ticket owner options' => 'Опције власника тикета',
+        'Options of the ticket data' => 'Опције података о тикету',
+        'Options of ticket dynamic fields internal key values' => 'Опције за вредности интерних кључева динамичких поља тикета',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Опције за приказане вредности динамичких поља тикета, корисно за поља Dropdown и Multiselect',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'Да видите првих 20 слова предмета (последњег чланка оператера).',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'Да видите првих 5 линија поруке (последњег чланка оператера).',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'Да видите првих 20 слова предмета (последњег чланка клијента).',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'Да видите првих 5 линија поруке (последњег чланка клијента).',
+        'Attributes of the current customer user data' => 'Атрибути података актуелног клијента корисника',
+        'Attributes of the current ticket owner user data' => 'Атрибути података корисника власника актуелног тикета',
+        'Attributes of the ticket data' => 'Атрибути података тикета',
+        'Ticket dynamic fields internal key values' => 'Вредности интерних кључева динамичких поља тикета',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Приказане вредности динамичких поља, корисно за падајућа и поља са вишеструким избором',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'нпр.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => 'Референца ознаке',
+        'You can use the following tags' => 'Можете користити следеће ознаке',
+        'Ticket responsible options' => 'Опције одговорног за тикет',
+        'Options of the current user who requested this action' => 'Опције актуелног корисника који је тражио ову акцију',
+        'Config options' => 'Конфигурационе опције',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
@@ -3908,7 +3916,7 @@ sub Data {
         'Customer user of the ticket' => 'Клијент корисник тикета',
         'All recipients of the first article' => 'Сви примаоци првог чланка',
         'All recipients of the last article' => 'Сви примаоци последњег чланка',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => 'Невидљиво клијенту',
         'Visible to customer' => 'Видљиво клијенту',
 
@@ -4364,9 +4372,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'Неопходна вам је дозвола за премештање!',
 
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
-
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'Ћаскање није активно.',
         'No permission.' => 'Нема дозволе.',
@@ -4660,6 +4665,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNote.pm
         'Reply to note' => 'Одговори на напомену',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+        'Create notice for linked ticket' => '',
+        'Transfer notice' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPhone.pm
         'Split this article' => 'Подели овај чланак',
@@ -5387,6 +5396,11 @@ sub Data {
         'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
             'Резервне копије прошлих конфигурација више нису неопходне за рад инсталираних пакета, молимо уклоните их из Kernel/Config/Backups.',
 
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+        'Views with multiple loaded JavaScript files' => '',
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => 'Статус инсталације пакета',
         'Some packages have locally modified files.' => 'Неки пакети садрже локално измењене датотеке.',
@@ -5789,6 +5803,7 @@ sub Data {
             'Одређује висину за компоненту Rich Text Editor. Унеси број (пиксели) или процентуалну вредност (релативну).',
         'Defines the selectable font sizes in the rich text editor.' => '',
         'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => '',
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
@@ -6735,6 +6750,14 @@ sub Data {
             'Подразумевани подаци за коришћење на атрибутима за приказ претраге тикета. Пример: "TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;".',
         'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".' =>
             'Подразумевани подаци за коришћење на атрибутима за приказ претраге тикета. Пример: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".' =>
+            '',
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             'Дефинише подразумевани атрибут тикета за сортирање тикета у прегледу закључаног тикета интерфејса оператера.',
         'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
@@ -7983,6 +8006,56 @@ sub Data {
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
         'Mapping of non-standard time zones to official ones.' => '',
+        'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
+            '',
+        'Define a mapping between variables of the customer company data (keys) and dynamic fields of a ticket (values). The purpose is to store customer company data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn\'t be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany setting.' =>
+            '',
+        'This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.' =>
+            '',
+        'Required permissions to use the NoteToLinkedTicket screen in the agent interface.' =>
+            '',
+        'Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Allows adding notes in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.' =>
+            '',
+        'Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.' =>
+            '',
+        'Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated).' =>
+            '',
+        'Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated).' =>
+            '',
+        'Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'неважећи-привремено',
@@ -8606,6 +8679,7 @@ Thanks for your help!
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Дозвољава поседовање малог формата прегледа тикета ( CustomerInfo => 1  - такође приказује информације о клијенту).',
         'Always show RichText if available' => 'Увек прикажи RichText ако је доступан',
+        'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Одговор',
         'Appointment Calendar overview page.' => 'Страница за преглед календара.',
         'Appointment Notifications' => 'Обавештења о термину',

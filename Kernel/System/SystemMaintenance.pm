@@ -58,8 +58,8 @@ add new SystemMaintenance
 returns the id of the created SystemMaintenance if success or undef otherwise
 
     my $ID = $SystemMaintenance->SystemMaintenanceAdd(
-        StartDate        => 1485346000               # mandatory
-        StopDate         => 1485349600               # mandatory
+        StartDate        => 1485346000,              # mandatory
+        StopDate         => 1485349600,              # mandatory
         Comment          => 'Comment',               # mandatory
         LoginMessage     => 'A login message.',      # optional
         ShowLoginMessage => 1,                       # optional

@@ -1,0 +1,64 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+## nofilter(TidyAll::Plugin::Znuny::TT::Breadcrumb)
+
+<div class="WidgetSimple SpacingTop Collapsed">
+    <div class="Header">
+        <div class="WidgetAction Toggle">
+            <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+        </div>
+        <h2>[% Translate("Tag Reference") | html %]</h2>
+    </div>
+    <div class="Content">
+        <p>[% Translate("You can use the following tags") | html %]:</p>
+        <dl>
+            [% SmartTagTemplate = "SmartTags/" _ Env("Action") _ ".tt" %]
+            [% INCLUDE $SmartTagTemplate %]
+
+            <dt><code>&lt;OTRS_RESPONSIBLE_*&gt;</code></dt>
+            <dd>
+                [% Translate("Ticket responsible options") | html %] ([% Translate("e. g.") | html %]
+                <code>&lt;OTRS_RESPONSIBLE_UserFirstname&gt;</code>).
+            </dd>
+
+            <dt><code>&lt;OTRS_CURRENT_*&gt;</code></dt>
+            <dd>
+                [% Translate("Options of the current user who requested this action") | html %] ([% Translate("e. g.") | html %]
+                <code>&lt;OTRS_CURRENT_UserFirstname&gt;</code>).
+            </dd>
+
+            <dt><code>&lt;OTRS_CONFIG_*&gt;</code></dt>
+            <dd>
+                [% Translate("Config options") | html %] ([% Translate("e. g.") | html %] <code>&lt;OTRS_CONFIG_HttpType&gt;</code>).
+            </dd>
+        </dl>
+        <div class="WidgetSimple SpacingTop Collapsed">
+            <div class="Header">
+                <div class="WidgetAction Toggle">
+                    <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                </div>
+                <h2>[% Translate("Example") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p><textarea rows="10" cols="80" name="TemplateExample">
+Dear &lt;OTRS_CUSTOMER_DATA_UserFirstname&gt; &lt;OTRS_CUSTOMER_DATA_UserLastname&gt;,
+
+your ticket "&lt;OTRS_TICKET_Title&gt;" was created on &lt;OTRS_TICKET_Created&gt; in queue &lt;OTRS_TICKET_Queue&gt; and has the number &lt;OTRS_CONFIG_TicketHook&gt;&lt;OTRS_TICKET_TicketNumber&gt;.
+
+If you have questions, ask for your assigned Agent &lt;OTRS_OWNER_UserFirstname&gt; &lt;OTRS_OWNER_UserLastname&gt; ...
+                </textarea></p>
+                <p><textarea rows="10" cols="80" name="TemplateExample">
+Dear &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,
+
+appointment &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot; has reached the notification time.
+See more details online: &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt; ...
+                </textarea></p>
+            </div>
+        </div>
+    </div>
+</div>

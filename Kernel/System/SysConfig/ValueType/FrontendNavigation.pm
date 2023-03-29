@@ -221,7 +221,7 @@ Extracts the effective value from a XML parsed setting.
         DefaultID      =>  123,             # (required)
         EffectiveValue => '2016-02-02',
         DefaultValue   => 'Product 5',      # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         RW             => 1,                # (optional) Allow editing. Default 0.
         Item           => [                 # (optional) XML parsed item
             {

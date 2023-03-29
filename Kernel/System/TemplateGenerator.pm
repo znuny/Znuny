@@ -358,7 +358,7 @@ sub Sender {
 generate template
 
     my $Template = $TemplateGeneratorObject->Template(
-        TemplateID => 123
+        TemplateID => 123,
         TicketID   => 123,                  # Optional
         Data       => $ArticleHashRef,      # Optional
         UserID     => 123,
@@ -592,7 +592,7 @@ generate attributes
     my %Attributes = $TemplateGeneratorObject->Attributes(
         TicketID   => 123,
         ArticleID  => 123,
-        ResponseID => 123
+        ResponseID => 123,
         UserID     => 123,
         Action     => 'Forward', # Possible values are Reply and Forward, Reply is default.
     );
@@ -1676,13 +1676,15 @@ sub _Replace {
     $HashGlobalReplace->( $Tag, %Ticket, %DynamicFieldDisplayValues );
 
     # OTRS_TICKET_LAST_ARTICLE_ID
-    my $ArticleObject     = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-    my @LastTicketArticle = $ArticleObject->ArticleList(
-        TicketID => $Ticket{TicketID},
-        OnlyLast => 1,
-    );
-    my $LastTicketArticleID = @LastTicketArticle ? $LastTicketArticle[0]->{ArticleID} : '';
-    $Param{Text} =~ s/$Start OTRS_TICKET_LAST_ARTICLE_ID $End/$LastTicketArticleID/gixms;
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    if ( $Ticket{TicketID} ) {
+        my @LastTicketArticle = $ArticleObject->ArticleList(
+            TicketID => $Ticket{TicketID},
+            OnlyLast => 1,
+        );
+        my $LastTicketArticleID = @LastTicketArticle ? $LastTicketArticle[0]->{ArticleID} : '';
+        $Param{Text} =~ s{$Start OTRS_TICKET_LAST_ARTICLE_ID $End}{$LastTicketArticleID}gixms;
+    }
 
     # COMPAT
     $Param{Text} =~ s/$Start OTRS_TICKET_ID $End/$Ticket{TicketID}/gixms;

@@ -110,7 +110,8 @@ Parses ICS string.
 sub Parse {
     my ( $Self, %Param ) = @_;
 
-    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     NEEDED:
     for my $Needed (qw(String)) {
@@ -136,20 +137,29 @@ sub Parse {
 
     # parser accepts only timezones from TimeZoneList()
     # any other format will result in error
-    my $TimeZones = Kernel::System::DateTime->TimeZoneList();
+    my $TimeZones = Kernel::System::DateTime->TimeZoneList() // [];
+    my %TimeZones = map { $_ => 1 } @{$TimeZones};
 
-    if ( !grep { $_ eq $TimeZone } @{$TimeZones} ) {
+    if ( !$TimeZones{$TimeZone} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Specified timezone: $TimeZone is not supported!"
+            Message  => "Specified timezone $TimeZone is not supported!"
         );
         return;
     }
 
+    my $ICSParserStartDate = $ConfigObject->Get('ICSParser::StartDate') // '20100101';
+
+    my $ICSParserEndDateObject = $Kernel::OM->Create('Kernel::System::DateTime');
+    $ICSParserEndDateObject->Add( Years => 10 );
+    my $ICSParserEndDate = $ICSParserEndDateObject->Format( Format => '%Y%m%d' );
+
     my $ParserObject;
     eval {
         $ParserObject = iCal::Parser->new(
-            tz => $TimeZone,
+            start => $ICSParserStartDate,
+            end   => $ICSParserEndDate,
+            tz    => $TimeZone,
         );
     };
     if ($@) {

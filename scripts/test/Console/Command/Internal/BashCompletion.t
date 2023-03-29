@@ -28,6 +28,8 @@ my @Tests = (
 --source
 --tickets-closed-before-date
 --tickets-closed-before-days
+--tickets-created-before-date
+--tickets-created-before-days
 --tolerant
 --micro-sleep
 --force-pid",

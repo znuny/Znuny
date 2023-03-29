@@ -2343,7 +2343,7 @@ Returns:
 
     $ObjectList = $LinkObject->ObjectSearch(
         Object       => 'ITSMConfigItem',
-        SubObject    => 'Computer'         # (optional)
+        SubObject    => 'Computer',        # (optional)
         SearchParams => $HashRef,          # (optional)
         UserID       => 1,
     );
