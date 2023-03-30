@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.634996695307336;
+    $Self->{Completeness}        = 0.640614672835426;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -745,7 +745,7 @@ sub Data {
         'No change time settings.' => 'Brak zmiany ustawień czasu',
         'Ticket changed' => 'Zgłoszenie zmieniono',
         'Ticket changed between' => 'Zgłoszenie zmieniono pomiędzy',
-        'Last close times' => '',
+        'Last close times' => 'Ostatnie czasy zamknięcia',
         'No last close time settings.' => '',
         'Ticket last close' => '',
         'Ticket last close between' => '',
@@ -1323,7 +1323,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'Clear log entries' => '',
-        'Here you will find log information about your system.' => 'Tutaj znajdziesz informacje o swoim systemie Znuny',
+        'Here you will find log information about your system.' => 'Tutaj znajdziesz informacje o swoim systemie OTRS',
         'Hide this message' => 'Ukryj tę wiadomość',
         'System Log' => 'Log systemu',
         'Recent Log Entries' => 'Ostatnie pozycje loga',
@@ -1492,8 +1492,8 @@ sub Data {
         'Go to znuny.org' => '',
         'package information' => 'informacja o pakiecie',
         'Package installation requires a patch level update of Znuny.' =>
-            'Instalacja pakietu wymaga zastosowania odpowiedniego poziomu aktualizacji Znuny',
-        'Package update requires a patch level update of Znuny.' => 'Aktualizacja pakietu wymaga zastosowania odpowiedniego poziomu aktualizacji Znuny',
+            'Instalacja pakietu wymaga zastosowania odpowiedniego poziomu aktualizacji OTRS',
+        'Package update requires a patch level update of Znuny.' => 'Aktualizacja pakietu wymaga zastosowania odpowiedniego poziomu aktualizacji OTRS',
         'Please note that your installed Znuny version is %s.' => 'Zauważ, że twoja zainstalowana wersja Znuny to %s',
         'To install this package, you need to update Znuny to version %s or newer.' =>
             'Aby zainstalować ten pakiet musisz zaktualizować Znuny do wersji%s lub nowszej.',
@@ -2042,12 +2042,12 @@ sub Data {
         'Edit System Email Address' => 'Edytuj systemowy adres e-mail',
         'Email address' => 'Adres e-mail',
         'Display name' => 'Wyświetlana nazwa',
-        'This email address is already used as system email address.' => '',
+        'This email address is already used as system email address.' => 'Ten adres email jest już używany jako adres systemowy.',
         'The display name and email address will be shown on mail you send.' =>
             'Wyświetlana nazwa oraz adres e-mail będą umieszczane w wysyłanej poczcie.',
-        'This system address cannot be set to invalid.' => '',
+        'This system address cannot be set to invalid.' => 'Ten adres systemowy nie może być ustawiony jako nieaktualny.',
         'This system address cannot be set to invalid, because it is used in one or more queue(s) or auto response(s).' =>
-            '',
+            'Ten adres systemowy nie może być ustawiony jako nieaktualny, ponieważ jest używany w konfiguracji kolejek lub automatycznych odpowiedzi.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
         'online administrator documentation' => 'dokumentację administratora online',
@@ -2055,10 +2055,10 @@ sub Data {
         'Navigate through the available settings by using the tree in the navigation box on the left side.' =>
             'Poruszaj się wśród dostępnych ustawień, używając drzewa w obszarze nawigacyjnym po lewej stronie.',
         'Find certain settings by using the search field below or from search icon from the top navigation.' =>
-            'Znajdź określone ustawienia używając poniższego pola wyszukiwania, lub przy pomocy ikony wyszukiwania w menu nawigacyjnym.',
+            'Znajdź ustawienia używając pola wyszukiwania, lub przy pomocy ikony wyszukiwania w menu nawigacyjnym.',
         'Find out how to use the system configuration by reading the %s.' =>
             'Przeczytaj "%s" i dowiedz się jak używać konfiguracji systemu.',
-        'Search in all settings...' => '',
+        'Search in all settings...' => 'Szukaj we wszystkich ustawieniach...',
         'There are currently no settings available. Please make sure to run \'znuny.Console.pl Maint::Config::Rebuild\' before using the software.' =>
             '',
 
@@ -2690,12 +2690,12 @@ sub Data {
         'Move' => 'Przenieś',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
-        'Add note to linked %s%s%s' => '',
+        'Add note to linked %s%s%s' => 'Dodaj notatkę do połączonego %s%s%s',
         'Notes' => '',
-        'Note to linked Ticket' => '',
+        'Note to linked Ticket' => 'Notatka do połączonego Zgłoszenia',
         'LinkList invalid.' => '',
-        'Note to origin Ticket' => '',
-        'NoteToTicket invalid.' => '',
+        'Note to origin Ticket' => 'Notatka do bieżącego Zgłoszenia',
+        'NoteToTicket invalid.' => 'Notatka nieprawidłowa.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         ' Select all' => '',
@@ -3820,7 +3820,7 @@ sub Data {
         'Customer user of the ticket' => 'Użytkownik klienta w tym zgłoszeniu',
         'All recipients of the first article' => 'Wszyscy adresaci pierwszej wiadomości',
         'All recipients of the last article' => 'Wszyscy adresaci ostatniej wiadomości',
-        'All agents who are mentioned in the ticket' => '',
+        'All agents who are mentioned in the ticket' => 'Wszyscy agenci wspomniani w zgłoszeniu',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4505,8 +4505,8 @@ sub Data {
         'Reply to note' => 'Odpowiedź na notatkę',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
-        'Create notice for linked ticket' => '',
-        'Transfer notice' => '',
+        'Create notice for linked ticket' => 'Utwórz notatkę w połączonym Zgłoszeniu',
+        'Transfer notice' => 'Przekaż notatkę',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPhone.pm
         'Split this article' => 'Podziel wiadomość',
@@ -5200,7 +5200,7 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
         'Views with multiple loaded JavaScript files' => '',
         'The following JavaScript files loaded multiple times:' => '',
-        'Files' => '',
+        'Files' => 'Pliki',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => 'Stan instalacji pakietu',
@@ -6056,7 +6056,7 @@ sub Data {
         'Defines the search limit for the stats.' => 'Definiuje limit wyszukiwań dla statystyk.',
         'Defines all the possible stats output formats.' => 'Definiuje wszystkie możliwe formaty użyskiwania statystyk.',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
-            '',
+            'Umożliwia agentom zamianę osi statystyki podczas generowania statystyki.',
         'Allows agents to generate individual-related stats.' => 'Pozwala agentom na generowanie statystyk z indywindualnych działań.',
         'Allows invalid agents to generate individual-related stats.' => '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
@@ -6302,7 +6302,7 @@ sub Data {
         'Enables ticket type feature.' => '',
         'Defines the default ticket type.' => 'Definicja domyślnego typu zgłoszenia.',
         'Allows defining services and SLAs for tickets (e. g. email, desktop, network, ...), and escalation attributes for SLAs (if ticket service/SLA feature is enabled).' =>
-            '',
+            'Umożliwia definiowanie usług i umów SLA dla zgłoszeń (na przykład: e-mail, desktop, sieć, ...) oraz atrybutów eskalacji dla umów SLA (jeśli ustawienie usługa/SLA zgłoszenia jest aktywne).',
         'Retains all services in listings even if they are children of invalid elements.' =>
             '',
         'Allows default services to be selected also for non existing customers.' =>
@@ -6396,7 +6396,7 @@ sub Data {
         'Allows having a small format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information).' =>
             '',
         'Allows having a medium format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information).' =>
-            '',
+            'Umożliwia przegląd listy zgłoszeń w średnim formacie (CustomerInfo =&gt; 1 - pokazuje również informacje o kliencie).',
         'Shows a preview of the ticket overview (CustomerInfo =&gt; 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '',
         'Defines which article sender types should be shown in the preview of a ticket.' =>
@@ -6515,7 +6515,7 @@ sub Data {
         'Defines the default ticket order (after priority sort) in the escalation view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             'Definiuje domyślną kolejność (po sortowaniu priorytetem) w widoku eskalacji zgłoszeń interfejsu agenta. Góra: Najstarze na górze. Dół: Najnowsze na górze.',
         'Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
-            '',
+            'Włącza zaawansowane warunki wyszukiwania zgłoszeń w interfejsie agenta. Dzięki tej funkcji można na przykład wyszukać tytuł zgłoszenia z warunkami takimi jak "(*key1*&amp;&amp;*key2*)" lub "(*key1*|*key2*)".',
         'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>
             'Maksymalna liczba zgłoszeń do wyświetlenia w rezultacie wyszukiwania w interfejsie agenta.',
         'Number of tickets to be displayed in each page of a search result in the agent interface.' =>
@@ -6812,7 +6812,7 @@ sub Data {
         'Defines the default next state of a ticket after adding a note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
             'Definiuje domyślny stan zgłoszenia po dodaniu notatki w oknie zmiany właściciela zgłoszenia w panelu agenta.',
         'Allows adding notes in the ticket owner screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '',
+            'Umożliwia dodawanie notatek na ekranie "Właściciel" w interfejsie agenta w otwartym zgłoszeniu. Może być nadpisane przez Ticket::Frontend::NeedAccountedTime.',
         'Sets the default subject for notes added in the ticket owner screen of a zoomed ticket in the agent interface.' =>
             'Ustawia domyślny tytuł dla notatek dodanych w oknie właściciela przybliżonego zgłoszenia w interfejsie agenta.',
         'Sets the default body text for notes added in the ticket owner screen of a zoomed ticket in the agent interface.' =>
@@ -6856,7 +6856,7 @@ sub Data {
         'Defines the default next state of a ticket after adding a note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
             'Definiuje domyślny stan zgłoszenia po dodaniu notatki w oknie oczekującego zgłoszenia w panelu agenta.',
         'Allows adding notes in the ticket pending screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '',
+            'Pozwala na dodawanie notatek w ekranie "Oczekujące" w interfejsie agenta w otwartym zgłoszeniu. Może być nadpisane przez Ticket::Frontend::NeedAccountedTime.',
         'Sets the default subject for notes added in the ticket pending screen of a zoomed ticket in the agent interface.' =>
             'Ustawia domyślny tytuł dla notatek dodanych w oknie oczekuwania przybliżonego zgłoszenia w interfejsie agenta.',
         'Sets the default body text for notes added in the ticket pending screen of a zoomed ticket in the agent interface.' =>
@@ -6900,7 +6900,7 @@ sub Data {
         'Defines the default next state of a ticket after adding a note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
             'Definiuje domyślny stan zgłoszenia po dodaniu notatki w oknie zmiany priorytetu zgłoszenia w panelu agenta.',
         'Allows adding notes in the ticket priority screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '',
+            'Umożliwia dodawanie notatek na ekranie "Priorytet" w interfejsie agenta w otwartym zgłoszeniu. Może być nadpisane przez Ticket::Frontend::NeedAccountedTime.',
         'Sets the default subject for notes added in the ticket priority screen of a zoomed ticket in the agent interface.' =>
             'Ustawia domyślny tytuł dla notatek dodanych w oknie priorytetu przybliżonego zgłoszenia w interfejsie agenta.',
         'Sets the default body text for notes added in the ticket priority screen of a zoomed ticket in the agent interface.' =>
@@ -6944,7 +6944,7 @@ sub Data {
         'Defines the default next state of a ticket after adding a note, in the ticket responsible screen of the agent interface.' =>
             'Definiuje domyślny stan zgłoszenia po dodaniu notatki w oknie zmiany odpowiedzialnego za zgłoszenie w panelu agenta.',
         'Allows adding notes in the ticket responsible screen of the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '',
+            'Pozwala na dodawanie notatek w ekranie "Odpowiedzialny" w interfejsie agenta w otwartym zgłoszeniu. Może być nadpisane przez Ticket::Frontend::NeedAccountedTime.',
         'Sets the default subject for notes added in the ticket responsible screen of the agent interface.' =>
             'Ustawia domyślny tytuł dla notatek dodanych w oknie odpowiedzialnego za zgłoszenie w interfejsie agenta.',
         'Sets the default body text for notes added in the ticket responsible screen of the agent interface.' =>
@@ -7305,11 +7305,11 @@ sub Data {
         'Defines the default priority of new customer tickets in the customer interface.' =>
             'Definiuje domyślny priorytet nowych zgłoszeń klienta w interfejsie klienta.',
         'Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.' =>
-            '',
+            'Umożliwia klientom ustawienie kolejki zgłoszenia w interfejsie klienta. Jeśli nie jest to aktywowane, należy skonfigurować QueueDefault.',
         'Defines the default queue for new customer tickets in the customer interface.' =>
             'Definiuje domyślną kolejkę dla zgłoszeń klienta w interefejsie klienta.',
         'Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.' =>
-            '',
+            'Umożliwia klientom ustawienie typu zgłoszenia w interfejsie klienta. Jeśli nie jest to aktywowane, należy skonfigurować TicketTypeDefault.',
         'Defines the default ticket type for new customer tickets in the customer interface.' =>
             'Definiuje domyślny rodzaj zgłoszenia dla nowych zgłoszeń interfejsie klienta.',
         'Allows customers to set the ticket service in the customer interface.' =>
@@ -7344,7 +7344,7 @@ sub Data {
         'Defines the default priority of follow-up customer tickets in the ticket zoom screen in the customer interface.' =>
             '',
         'Allows choosing the next compose state for customer tickets in the customer interface.' =>
-            '',
+            'Umożliwia wybór następnego statusu tworzenia zgłoszenia w interfejsie klienta.',
         'Defines the default next state for a ticket after customer follow-up in the customer interface.' =>
             '',
         'Defines the next possible states for customer tickets in the customer interface.' =>
@@ -7366,7 +7366,7 @@ sub Data {
         'Defines the default ticket order of a search result in the customer interface. Up: oldest on top. Down: latest on top.' =>
             'Definiuje domyślną kolejność w wynikach wyszukiwania interfejsu klienta. Góra: Najstarze na górze. Dół: Najnowsze na górze.',
         'Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
-            '',
+            'Włącza zaawansowane warunki wyszukiwania zgłoszeń w interfejsie klienta. Dzięki tej funkcji możesz na przykład wyszukać tytuł zgłoszenia z warunkami takimi jak "(*key1*&amp;&amp;*key2*)" lub "(*key1*||*key2*)".',
         'If enabled, the customer can search for tickets in all services (regardless what services are assigned to the customer).' =>
             '',
         'Defines all the parameters for the ShownTickets object in the customer preferences of the customer interface.' =>
@@ -7391,10 +7391,10 @@ sub Data {
         'Sets the default body text for notes added in the ticket move screen of the agent interface.' =>
             'Ustawia domyślną treść dla notatek dodanych w oknie przesunięcia zgłoszenia interfejsu agenta.',
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
-            '',
+            'Włącza zaawansowane warunki wyszukiwania zgłoszeń w agencie automatycznym. Dzięki tej funkcji można na przykład wyszukać tytuł zgłoszenia z warunkami takimi jak "(*key1*&amp;&amp;*key2*)" lub "(*key1*|*key2*)".',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             'Ustawia limit przetwarzanych zgłoszeń podczas pojedynczego wywołania agenta automatycznego.',
-        'Allows generic agent to execute custom modules.' => '',
+        'Allows generic agent to execute custom modules.' => 'Umożliwia Agentowi automatycznemu wykonywanie własnych modułów.',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             'Odblokowuj zgłoszenia jeżeli została dodana notatka a właściciel jest poza biurem.',
         'Include unknown customers in ticket filter.' => '',
@@ -7801,7 +7801,7 @@ sub Data {
         'This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.' =>
             '',
         'Required permissions to use the NoteToLinkedTicket screen in the agent interface.' =>
-            '',
+            'Wymagane uprawnienia w interfejsie agenta do korzystania z funkcji Przekazania notatki.',
         'Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
         'Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
@@ -7815,7 +7815,7 @@ sub Data {
         'Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
         'Allows adding notes in the NoteToLinkedTicket screen of the agent interface.' =>
-            '',
+            'Umożliwia dodawanie notatek w interfejsie agenta w dialogu "Przekaż notatkę".',
         'Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.' =>
             '',
         'Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
@@ -8456,17 +8456,17 @@ Twój Zespół Helpdesk.
         'All escalated tickets' => 'Wszystkie eskalowane zgłoszenia',
         'All new tickets, these tickets have not been worked on yet' => 'Wszystkie nowe zgłoszenia, nie podjęto jeszcze prac w związku z nimi',
         'All open tickets, these tickets have already been worked on.' =>
-            '',
+            'Wszystkie otwarte zgłoszenia, nad którymi już pracowano.',
         'All tickets with a reminder set where the reminder date has been reached' =>
             'Wszystkie zgłoszenia z ustawionym przypomnieniem, dla których minął czas przypomnienia',
         'Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".' =>
-            '',
+            'Umożliwia rozszerzone warunki wyszukiwania zgłoszeń w interfejsie agenta. Dzięki tej funkcji można np. wyszukiwać tytuły zgłoszeń z warunkami typu "(key1&&key2)" lub "(key1||key2)".',
         'Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".' =>
-            '',
+            'Umożliwia rozszerzone warunki wyszukiwania zgłoszeń w interfejsie klienta. Dzięki tej funkcji można np. wyszukiwać tytuły zgłoszeń z warunkami typu "(key1&&key2)" lub "(key1||key2)".',
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".' =>
-            '',
+            'Umożliwia rozszerzenie warunków wyszukiwania w agencie automatycznym. Dzięki temu można np. wyszukiwać tytuły zgłoszeń z warunkami typu "(*key1*&&*key2*)" lub "(*key1*||*key2*)".',
         'Allows having a medium format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
-            '',
+            'Włącza przegląd listy zgłoszeń z niektórymi informacjami o zgłoszeniach (Klient => 1 - pokazuje również informacje o kliencie).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '',
         'Always show RichText if available' => '',

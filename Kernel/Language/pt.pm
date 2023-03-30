@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.295769993390615;
+    $Self->{Completeness}        = 0.295935228023794;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3500,7 +3500,7 @@ sub Data {
         'There was an error getting data for Notification with ID:%s!' =>
             '',
         'Unknown Notification %s!' => '',
-        '%s (copy)' => '',
+        '%s (copy)' => '%s (copiar)',
         'There was an error creating the Notification' => '',
         'Notifications could not be Imported due to a unknown error, please check Znuny logs for more information' =>
             '',

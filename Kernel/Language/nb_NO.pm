@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.382848645076008;
+    $Self->{Completeness}        = 0.383509583608724;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1853,7 +1853,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Add Role' => 'Ny Rolle',
         'Filter for Roles' => 'Filter for Roller',
-        'Filter for roles' => '',
+        'Filter for roles' => 'Filter for roller',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Opprett en rolle og legg grupper til rollen. Legg deretter til saksbehandlere til rollen.',
         'Agents ↔ Roles' => '',
@@ -1937,7 +1937,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
         'S/MIME Certificate' => 'S/MIME-sertifikat',
         'Close' => 'Avslutt sak',
-        'Certificate Details' => '',
+        'Certificate Details' => 'Detaljer om sertifikatet',
         'Close this dialog' => 'Lukk denne dialogen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
@@ -1960,7 +1960,7 @@ sub Data {
         'Here you can enter SQL to send it directly to the application database. It is not possible to change the content of the tables, only select queries are allowed.' =>
             '',
         'Here you can enter SQL to send it directly to the application database.' =>
-            'Her kan du skrive SQL for å sende kommandoer rett til Znuny sin database',
+            'Her kan du skrive SQL for å sende kommandoer rett til OTRS sin database',
         'SQL Box' => 'SQL-boks',
         'Options' => 'Valg',
         'Only select queries are allowed.' => 'Kun select spørringer er mulig.',
@@ -3982,7 +3982,7 @@ sub Data {
         'Change Role Relations for Group' => 'Endre gruppens koplinger til roller',
 
         # Perl Module: Kernel/Modules/AdminRoleUser.pm
-        'Role' => '',
+        'Role' => 'Rolle',
         'Change Role Relations for Agent' => 'Endre saksbehandlerens kopling til roller',
         'Change Agent Relations for Role' => 'Endre rollens kopling til saksbehandlere',
 
@@ -8940,7 +8940,7 @@ Thanks for your help!
         'Show the ticket history' => 'Vis saks-historikk',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '',
-        'Shows information on how to start OTRS Daemon' => '',
+        'Shows information on how to start OTRS Daemon' => 'Vis informasjon om hvordan starte OTRS Agenten',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Simple' => '',
