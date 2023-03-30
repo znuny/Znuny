@@ -20,7 +20,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get needed object
 my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Ticket::Delete');
@@ -30,7 +30,7 @@ $Kernel::OM->Get('Kernel::System::Cache')->Configure(
     CacheInMemory => 0,
 );
 
-my $CustomerUser = $Helper->GetRandomID() . '@example.com';
+my $CustomerUser = $HelperObject->GetRandomID() . '@example.com';
 
 # create a new tickets
 my @Tickets;

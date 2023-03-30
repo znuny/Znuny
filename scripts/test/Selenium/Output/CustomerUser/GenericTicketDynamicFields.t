@@ -18,30 +18,34 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+        my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject        = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $SysConfigObject           = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $CacheObject               = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
 
         # Create test user.
-        my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Get test customer user ID.
-        my @CustomerIDs = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerIDs(
+        my @CustomerIDs = $CustomerUserObject->CustomerIDs(
             User => $TestCustomerUserLogin,
         );
         my $CustomerID = $CustomerIDs[0];
@@ -340,7 +344,7 @@ $Selenium->RunTest(
 
         my $SysConfigName = 'Frontend::CustomerUser::Item###15-OpenTickets';
 
-        my %SysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %SysConfig = $SysConfigObject->SettingGet(
             Name    => $SysConfigName,
             Default => 1,
         );
@@ -354,7 +358,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Define tests.
         my @Tests = (
@@ -522,7 +526,7 @@ $Selenium->RunTest(
             $SysConfig{EffectiveValue}->{Attributes} = 'States=open;' . $Test->{Attributes};
 
             # Set Attributes.
-            my $Success = $Helper->ConfigSettingChange(
+            my $Success = $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => $SysConfigName,
                 Value => $SysConfig{EffectiveValue},
@@ -533,7 +537,7 @@ $Selenium->RunTest(
             );
 
             # Clean up 'TicketSearch' cache type to be sure that search result is fresh.
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => 'TicketSearch',
             );
 
@@ -576,8 +580,6 @@ $Selenium->RunTest(
                 "DynamicFieldID $DynamicField->{ID} is deleted."
             );
         }
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure cache is correct.
         for my $Cache (qw(Ticket CustomerUser)) {

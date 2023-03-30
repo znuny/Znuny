@@ -19,12 +19,16 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Set fixed time for test purposes.
-        $Helper->FixedTimeSet(
+        $HelperObject->FixedTimeSet(
             $Kernel::OM->Create(
                 'Kernel::System::DateTime',
                 ObjectParams => {
@@ -34,18 +38,18 @@ $Selenium->RunTest(
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['users'],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Create test queue.
-        my $QueueName = "Queue" . $Helper->GetRandomID();
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueName = "Queue" . $HelperObject->GetRandomID();
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => 1,
@@ -130,7 +134,7 @@ $Selenium->RunTest(
         );
 
         # Wait 5 minutes to have escalation trigger.
-        $Helper->FixedTimeAddSeconds(300);
+        $HelperObject->FixedTimeAddSeconds(300);
 
         my %Configs = (
             '0100-TicketPendingReminder' => {
@@ -332,21 +336,21 @@ $Selenium->RunTest(
 
             # Disable all dashboard plugins.
             my $Config = $ConfigObject->Get('DashboardBackend');
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 0,
                 Key   => 'DashboardBackend',
                 Value => \%$Config,
             );
 
-            # Enable current needed dashboard plugin sysconfig.
-            $Helper->ConfigSettingChange(
+            # Enable current needed dashboard plugin SysConfig.
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => "DashboardBackend###" . $DashboardName,
                 Value => $Configs{$DashboardName},
             );
 
             # Refresh dashboard screen and clean it's cache.
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => 'Dashboard',
             );
 
@@ -394,8 +398,13 @@ $Selenium->RunTest(
                 "Priority sort is working",
             );
 
+            my $DashboardActionsFilter
+                = $Selenium->find_element( "#Dashboard$DashboardName" . "-box .DashboardActions", 'css' );
+            $Selenium->mouse_move_to_location( element => $DashboardActionsFilter );
+
             # Set filter by MyQueue.
             my $Filter = "#Dashboard$DashboardName" . "MyQueues";
+
             $Selenium->WaitFor( JavaScript => "return \$('$Filter:visible').length" );
             $Selenium->find_element( $Filter, 'css' )->click();
 
@@ -440,8 +449,6 @@ $Selenium->RunTest(
             "Ticket is deleted - ID $TicketID"
         );
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         # Delete MyQueue from personal_queues.
         $Success = $DBObject->Do(
             SQL => "DELETE FROM personal_queues WHERE queue_id = $QueueID",
@@ -459,8 +466,6 @@ $Selenium->RunTest(
             $Success,
             "Queue is deleted - ID $QueueID",
         );
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure cache is correct.
         for my $Cache (qw(Ticket Queue Dashboard DashboardQueueOverview )) {

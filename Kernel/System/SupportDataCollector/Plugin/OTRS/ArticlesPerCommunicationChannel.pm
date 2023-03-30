@@ -17,13 +17,12 @@ use parent qw(Kernel::System::SupportDataCollector::PluginBase);
 use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::CommunicationChannel',
     'Kernel::System::DB',
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Articles Per Communication Channel');
+    return Translatable('Znuny') . '/' . Translatable('Articles Per Communication Channel');
 }
 
 sub Run {

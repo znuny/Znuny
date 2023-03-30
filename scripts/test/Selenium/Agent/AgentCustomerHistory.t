@@ -18,21 +18,25 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Email');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject          = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ArticleBackendObject  = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Email');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
 
         # Create test customer company.
         my $TestCompany = 'Company' . $RandomNumber;
-        my $CustomerID  = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerID  = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $TestCompany,
             CustomerCompanyName    => $TestCompany,
             CustomerCompanyStreet  => $TestCompany,
@@ -51,7 +55,7 @@ $Selenium->RunTest(
 
         # Create test customer user.
         my $TestUser          = 'CustomerUser' . $RandomNumber;
-        my $CustomerUserLogin = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUserLogin = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestUser,
             UserLastname   => $TestUser,
@@ -111,7 +115,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -121,7 +125,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             {
@@ -163,6 +167,11 @@ $Selenium->RunTest(
             );
 
             # Go to 'Large' view because all of events could be checked there.
+            $Selenium->find_element( ".Medium", 'css' )->click();
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $("#TicketOverviewMedium > li").length === 3'
+            );
             $Selenium->find_element( ".Large", 'css' )->click();
             $Selenium->WaitFor(
                 JavaScript =>
@@ -241,7 +250,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 );
 

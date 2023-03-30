@@ -14,7 +14,7 @@ use parent 'Kernel::Output::HTML::TicketZoom::Agent::Base';
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(IsPositiveInteger);
+use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -25,6 +25,9 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
+    'Kernel::System::CalendarEvents',
+    'Kernel::System::HTMLUtils',
+    'Kernel::System::DateTime',
 );
 
 =head2 ArticleRender()
@@ -225,6 +228,13 @@ sub ArticleRender {
                 Data => $TransmissionStatus,
             );
         }
+
+        $Self->_CalendarEventsOutput(
+            TicketID     => $Param{TicketID},
+            ArticleID    => $Param{ArticleID},
+            AtmIndex     => \%AtmIndex,
+            LayoutObject => $LayoutObject,
+        );
     }
 
     my $Content = $LayoutObject->Output(
@@ -251,6 +261,208 @@ sub ArticleRender {
     );
 
     return $Content;
+}
+
+sub _CalendarEventsOutput {
+    my ( $Self, %Param ) = @_;
+
+    my $CalendarEventsObject = $Kernel::OM->Get('Kernel::System::CalendarEvents');
+    my $HTMLUtilsObject      = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+    my $LayoutObject         = $Param{LayoutObject};
+
+    my $CalendarEventsData = $CalendarEventsObject->Parse(
+        TicketID    => $Param{TicketID},
+        ArticleID   => $Param{ArticleID},
+        Attachments => {
+            Type => 'Article',
+            Data => $Param{AtmIndex},
+        },
+        ToTimeZone => $LayoutObject->{UserTimeZone},
+    ) // {};
+
+    my @AttachmentCalendarEvents = @{ $CalendarEventsData->{Attachments} // [] };
+    @AttachmentCalendarEvents = grep { IsArrayRefWithData( $_->{Data}->{Events} ) } @AttachmentCalendarEvents;
+    return if !@AttachmentCalendarEvents;
+
+    my $TotalNumberOfEvents = 0;
+    ATTACHMENT:
+    for my $Attachment (@AttachmentCalendarEvents) {
+        $TotalNumberOfEvents += @{ $Attachment->{Data}->{Events} };
+    }
+
+    $LayoutObject->Block(
+        Name => 'CalendarEvents',
+        Data => {
+            MultipleEvents => $TotalNumberOfEvents > 1 ? 1 : 0,
+        }
+    );
+
+    ATTACHMENT:
+    for my $Attachment (@AttachmentCalendarEvents) {
+        my @Events         = @{ $Attachment->{Data}->{Events} };
+        my $EventCounter   = 0;
+        my $NumberOfEvents = scalar @Events;
+
+        EVENT:
+        for my $Event (@Events) {
+            $EventCounter++;
+
+            next EVENT if !IsHashRefWithData( $Event->{Dates}->[0]->{Start} );
+            next EVENT if !IsHashRefWithData( $Event->{Dates}->[-1]->{End} );
+
+            my $TimeZone = $Event->{TimeZone};
+            next EVENT if !$TimeZone;
+
+            my %GlobalStartDateProperties = %{ $Event->{Dates}->[0]->{Start} };
+            my %GlobalEndDateProperties   = %{ $Event->{Dates}->[-1]->{End} };
+
+            my $DateTimeObjectStart = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+                ObjectParams => {
+                    %GlobalStartDateProperties,
+                    TimeZone => $TimeZone,
+                }
+            );
+            my $DateTimeObjectEnd = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+                ObjectParams => {
+                    %GlobalEndDateProperties,
+                    TimeZone => $TimeZone,
+                }
+            );
+
+            my $EventStartString
+                = $DateTimeObjectStart->Format( Format => '%Y-%m-%d %H:%M:%S (%{time_zone_long_name})' );
+            my $EventEndString = $DateTimeObjectEnd->Format( Format => '%Y-%m-%d %H:%M:%S (%{time_zone_long_name})' );
+
+            my %DateRangeGlobal = (
+                Start => $EventStartString,
+                End   => $EventEndString,
+            );
+
+            $LayoutObject->Block(
+                Name => 'CalendarEventsMessageRow',
+                Data => {
+                    %DateRangeGlobal,
+                },
+            );
+
+            $LayoutObject->Block(
+                Name => 'CalendarEvent',
+            );
+
+            my @PropertiesToDisplay;
+
+            PROPERTY:
+            for my $Property (qw(Summary Organizer Attendee Description Location)) {
+                if ( IsArrayRefWithData( $Event->{$Property} ) ) {
+                    my $Value = join "\n", @{ $Event->{$Property} };
+
+                    push @PropertiesToDisplay, {
+                        Name  => $Property,
+                        Value => $Value,
+                    };
+
+                    next PROPERTY;
+                }
+
+                next PROPERTY if !$Event->{$Property};
+
+                push @PropertiesToDisplay, {
+                    Name  => $Property,
+                    Value => $Event->{$Property},
+                };
+            }
+
+            push @PropertiesToDisplay, {
+                Name  => "Start",
+                Value => $EventStartString,
+            };
+
+            push @PropertiesToDisplay, {
+                Name  => "End",
+                Value => $EventEndString,
+            };
+
+            PROPERTY:
+            for my $Property (@PropertiesToDisplay) {
+                my $HTMLString = $HTMLUtilsObject->ToHTML(
+                    String             => $Property->{Value},
+                    ReplaceDoubleSpace => 1,
+                );
+
+                my %Safety = $HTMLUtilsObject->Safety(
+                    String       => $HTMLString,
+                    NoApplet     => 1,
+                    NoObject     => 1,
+                    NoEmbed      => 1,
+                    NoSVG        => 1,
+                    NoImg        => 1,
+                    NoIntSrcLoad => 1,
+                    NoExtSrcLoad => 1,
+                    NoJavaScript => 1,
+                );
+
+                $LayoutObject->Block(
+                    Name => 'CalendarEventPropertyRow',
+                    Data => {
+                        Label => $Property->{Name},
+                        Value => $Safety{String},
+                    }
+                );
+
+                my $PropertyImages = $Event->{AdditionalData}->{ $Property->{Name} }->{Images};
+                next PROPERTY if !IsArrayRefWithData($PropertyImages);
+
+                IMAGE:
+                for my $Image ( @{$PropertyImages} ) {
+                    for my $Property (qw (DataType ContentType Content)) {
+                        next IMAGE if !$Image->{$Property};
+                    }
+
+                    next IMAGE if $Image->{DataType} ne 'base64';
+
+                    $LayoutObject->Block(
+                        Name => 'CalendarEventPropertyRowImage',
+                        Data => {
+                            DataType    => $Image->{DataType},
+                            ContentType => $Image->{ContentType},
+                            Content     => $Image->{Content},
+                        }
+                    );
+                }
+            }
+
+            my $FrequencyString = $CalendarEventsObject->BuildString(
+                Data             => $Event->{Details},
+                OriginalTimeZone => $Event->{OriginalTimeZone},
+                Type             => "Frequency",
+            );
+
+            if ($FrequencyString) {
+                $LayoutObject->Block(
+                    Name => 'CalendarEventPropertyRowFrequency',
+                    Data => {
+                        FrequencyStrg => $FrequencyString,
+                    },
+                );
+            }
+
+            # show download for every attachment
+            next EVENT if $EventCounter != $NumberOfEvents;
+
+            $LayoutObject->Block(
+                Name => 'CalendarEventPropertyRowDownload',
+                Data => {
+                    TicketID  => $Param{TicketID},
+                    ArticleID => $Param{ArticleID},
+                    FileID    => $Attachment->{Index},
+                }
+            );
+        }
+    }
+
+    return 1;
 }
 
 1;

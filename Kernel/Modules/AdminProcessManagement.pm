@@ -8,7 +8,7 @@
 # --
 
 package Kernel::Modules::AdminProcessManagement;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Dumper)
 
 use strict;
 use warnings;
@@ -22,7 +22,6 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
 
@@ -38,6 +37,10 @@ sub Run {
 
     my $ProcessID = $ParamObject->GetParam( Param => 'ID' )       || '';
     my $EntityID  = $ParamObject->GetParam( Param => 'EntityID' ) || '';
+
+    # get parameter from web browser
+    my $GetParam = $Self->_GetParams();
+    $GetParam->{ProcessEntityID} ||= $EntityID;
 
     my $EntityObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity');
 
@@ -815,10 +818,7 @@ sub Run {
         # get process data
         my $ProcessData;
 
-        # get parameter from web browser
-        my $GetParam = $Self->_GetParams();
-
-        # set new confguration
+        # set new configuration
         $ProcessData->{Name}                  = $GetParam->{Name};
         $ProcessData->{Config}->{Description} = $GetParam->{Description};
         $ProcessData->{StateEntityID}         = $GetParam->{StateEntityID};
@@ -931,7 +931,10 @@ sub Run {
             {
                 Action    => $Self->{Action}    || '',
                 Subaction => $Self->{Subaction} || '',
-                Parameters => 'ID=' . $ProcessID . ';EntityID=' . $EntityID
+                ID        => $ProcessID,
+                EntityID  => $EntityID,
+                ProcessEntityID => $EntityID,
+                Parameters      => 'ID=' . $ProcessID . ';EntityID=' . $EntityID . ';ProcessEntityID=' . $EntityID,
             }
         );
 
@@ -976,13 +979,9 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        # get webserice configuration
         my $ProcessData;
 
-        # get parameter from web browser
-        my $GetParam = $Self->_GetParams();
-
-        # set new confguration
+        # set new configuration
         $ProcessData->{Name}                          = $GetParam->{Name};
         $ProcessData->{EntityID}                      = $GetParam->{EntityID};
         $ProcessData->{ProcessLayout}                 = $GetParam->{ProcessLayout};
@@ -1046,7 +1045,7 @@ sub Run {
             );
         }
 
-        # set entitty sync state
+        # set entity sync state
         $Success = $EntityObject->EntitySyncStateSet(
             EntityType => 'Process',
             EntityID   => $ProcessData->{EntityID},
@@ -1464,8 +1463,9 @@ sub Run {
     # UpdateAccordion AJAX
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'UpdateAccordion' ) {
+        my $ProcessEntityID = $ParamObject->GetParam( Param => 'ProcessEntityID' );
 
-        # ouput available process elements in the accordion
+        # output available process elements in the accordion
         for my $Element (qw(Activity ActivityDialog Transition TransitionAction)) {
 
             my $ElementMethod = $Element . 'ListGet';
@@ -1507,6 +1507,7 @@ sub Run {
                     $LayoutObject->Block(
                         Name => $Element . 'Row',
                         Data => {
+                            ProcessEntityID => $ProcessEntityID,
                             %{$ElementData},
                             AvailableIn => $AvailableIn,    #only used for ActivityDialogs
                         },
@@ -1525,7 +1526,9 @@ sub Run {
 
         my $Output = $LayoutObject->Output(
             TemplateFile => "AdminProcessManagementProcessAccordion",
-            Data         => {},
+            Data         => {
+                ProcessEntityID => $ProcessEntityID,
+            },
         );
 
         # send HTML response
@@ -1557,10 +1560,11 @@ sub Run {
         if ($Success) {
 
             $Self->_PushSessionScreen(
-                ID        => $Param{ProcessID},
-                EntityID  => $Param{ProcessEntityID},
-                Subaction => 'ProcessEdit',
-                Action    => 'AdminProcessManagement',
+                ID              => $Param{ProcessID},
+                EntityID        => $Param{ProcessEntityID},
+                ProcessEntityID => $Param{ProcessEntityID},
+                Subaction       => 'ProcessEdit',
+                Action          => 'AdminProcessManagement',
             );
         }
 
@@ -1633,7 +1637,6 @@ sub _ShowOverview {
         Translation  => 0,
         Class        => 'Modernize Validate_Required',
     );
-    $Frontend{OTRSBusinessIsInstalled} = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
 
     my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
 
@@ -1708,7 +1711,7 @@ sub _ShowEdit {
             );
         }
 
-        # ouput available process elements in the accordion
+        # output available process elements in the accordion
         for my $Element (qw(Activity ActivityDialog Transition TransitionAction)) {
 
             my $ElementMethod = $Element . 'ListGet';
@@ -1751,7 +1754,8 @@ sub _ShowEdit {
                         Name => $Element . 'Row',
                         Data => {
                             %{$ElementData},
-                            AvailableIn => $AvailableIn,    #only used for ActivityDialogs
+                            ProcessEntityID => $ProcessData->{EntityID} || '',
+                            AvailableIn     => $AvailableIn,                     #only used for ActivityDialogs
                         },
                     );
                 }
@@ -1833,7 +1837,8 @@ sub _ShowEdit {
         Data         => {
             %Param,
             %{$ProcessData},
-            Description => $ProcessData->{Config}->{Description} || '',
+            ProcessEntityID => $ProcessData->{EntityID}              || '',
+            Description     => $ProcessData->{Config}->{Description} || '',
         },
     );
 
@@ -1849,7 +1854,7 @@ sub _GetParams {
 
     # get parameters from web browser
     for my $ParamName (
-        qw( Name EntityID ProcessLayout Path StartActivity StartActivityDialog Description StateEntityID )
+        qw( Name EntityID ProcessLayout Path StartActivity StartActivityDialog Description StateEntityID ProcessEntityID )
         )
     {
         $GetParam->{$ParamName} = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => $ParamName )
@@ -1876,7 +1881,6 @@ sub _GetParams {
 sub _CheckProcessDelete {
     my ( $Self, %Param ) = @_;
 
-    # get needed objects
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # get Process data
@@ -2033,10 +2037,11 @@ sub _PushSessionScreen {
 
     # add screen to the screen path
     push @{ $Self->{ScreensPath} }, {
-        Action    => $Self->{Action} || '',
-        Subaction => $Param{Subaction},
-        ID        => $Param{ID},
-        EntityID  => $Param{EntityID},
+        Action          => $Self->{Action} || '',
+        Subaction       => $Param{Subaction},
+        ID              => $Param{ID},
+        EntityID        => $Param{EntityID},
+        ProcessEntityID => $Param{ProcessEntityID},
     };
 
     # convert screens path to string (JSON)

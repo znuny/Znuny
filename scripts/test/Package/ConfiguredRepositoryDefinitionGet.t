@@ -7,7 +7,6 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-## no critic (Modules::RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -19,134 +18,80 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
 # Make sure repository root setting is set to default for duration of the test.
 my %Setting = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
     Name    => 'Package::RepositoryRoot',
     Default => 1,
 );
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Package::RepositoryRoot',
     Value => $Setting{DefaultValue},
 );
 
-my @FrameworkVersionParts = split /\./, $Kernel::OM->Get('Kernel::Config')->Get('Version');
-my $FrameworkVersion      = $FrameworkVersionParts[0];
-
 my @Tests = (
     {
-        Name           => 'No Repositories',
-        ConfigSet      => {},
-        Success        => 1,
+        Name           => 'Only default root repository',
+        RepositoryList => [],
         ExpectedResult => {
-            'https://download.znuny.org/releases/packages/'    => 'Freebie Features',
-            'https://addons.znuny.com/api/addon_repos/public/' => 'Znuny Open Source Add-ons',
+            'Freebie Features' => {
+                'URL' => 'https://download.znuny.org/releases/packages',
+            },
+            'Znuny Open Source Add-ons' => {
+                'URL' => 'https://addons.znuny.com/public',
+            },
         },
     },
     {
-        Name      => 'No ITSM Repositories',
-        ConfigSet => {
-            'http://otrs.com' => 'Test Repository',
-        },
-        Success        => 1,
+        Name           => 'No ITSM Repositories',
+        RepositoryList => [
+            {
+                Name            => 'Test repository',
+                URL             => 'https://download.znuny.org',
+                AuthHeaderKey   => 'Authorization',
+                AuthHeaderValue => 'Token token=MyToken',
+            },
+            {
+                Name => 'Test repository 2',
+                URL  => 'https://download2.znuny.org',
+            },
+        ],
         ExpectedResult => {
-            'https://download.znuny.org/releases/packages/'    => 'Freebie Features',
-            'https://addons.znuny.com/api/addon_repos/public/' => 'Znuny Open Source Add-ons',
-            'http://otrs.com'                                  => 'Test Repository',
-        },
-    },
-    {
-        Name      => 'ITSM 33 Repository',
-        ConfigSet => {
-            'http://otrs.com'                                      => 'Test Repository',
-            'https://download.znuny.org/releases/itsm/packages33/' => 'OTRS::ITSM 3.3 Master',
-        },
-        Success        => 1,
-        ExpectedResult => {
-            'https://download.znuny.org/releases/packages/'    => 'Freebie Features',
-            'https://addons.znuny.com/api/addon_repos/public/' => 'Znuny Open Source Add-ons',
-            'http://otrs.com'                                  => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
-                "OTRS::ITSM $FrameworkVersion Master",
-        },
-    },
-    {
-        Name      => 'ITSM 33 and 4 Repository',
-        ConfigSet => {
-            'http://otrs.com'                                      => 'Test Repository',
-            'https://download.znuny.org/releases/itsm/packages33/' => 'OTRS::ITSM 3.3 Master',
-            'https://download.znuny.org/releases/itsm/packages4/'  => 'OTRS::ITSM 4 Master',
-        },
-        Success        => 1,
-        ExpectedResult => {
-            'https://download.znuny.org/releases/packages/'    => 'Freebie Features',
-            'https://addons.znuny.com/api/addon_repos/public/' => 'Znuny Open Source Add-ons',
-            'http://otrs.com'                                  => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
-                "OTRS::ITSM $FrameworkVersion Master",
-        },
-    },
-    {
-        Name      => 'ITSM 33 4 and 5 Repository',
-        ConfigSet => {
-            'http://otrs.com'                                      => 'Test Repository',
-            'https://download.znuny.org/releases/itsm/packages33/' => 'OTRS::ITSM 3.3 Master',
-            'https://download.znuny.org/releases/itsm/packages4/'  => 'OTRS::ITSM 4 Master',
-            'https://download.znuny.org/releases/itsm/packages5/'  => 'OTRS::ITSM 5 Master',
-        },
-        Success        => 1,
-        ExpectedResult => {
-            'https://download.znuny.org/releases/packages/'    => 'Freebie Features',
-            'https://addons.znuny.com/api/addon_repos/public/' => 'Znuny Open Source Add-ons',
-            'http://otrs.com'                                  => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
-                "OTRS::ITSM $FrameworkVersion Master",
-        },
-    },
-    {
-        Name      => 'ITSM 6 Repository',
-        ConfigSet => {
-            'https://download.znuny.org/releases/packages/'    => 'Freebie Features',
-            'https://addons.znuny.com/api/addon_repos/public/' => 'Znuny Open Source Add-ons',
-            'http://otrs.com'                                  => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
-                "OTRS::ITSM $FrameworkVersion Master",
-        },
-        Success        => 1,
-        ExpectedResult => {
-            'https://download.znuny.org/releases/packages/'    => 'Freebie Features',
-            'https://addons.znuny.com/api/addon_repos/public/' => 'Znuny Open Source Add-ons',
-            'http://otrs.com'                                  => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
-                "OTRS::ITSM $FrameworkVersion Master",
+            'Freebie Features' => {
+                'URL' => 'https://download.znuny.org/releases/packages',
+            },
+            'Znuny Open Source Add-ons' => {
+                'URL' => 'https://addons.znuny.com/public',
+            },
+            'Test repository' => {
+                URL             => 'https://download.znuny.org',
+                AuthHeaderKey   => 'Authorization',
+                AuthHeaderValue => 'Token token=MyToken',
+            },
+            'Test repository 2' => {
+                URL => 'https://download2.znuny.org',
+            },
         },
     },
 );
 
-my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
-my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
-my $ConfigKey     = 'Package::RepositoryList';
-
 for my $Test (@Tests) {
-    if ( $Test->{ConfigSet} ) {
-        my $Success = $ConfigObject->Set(
-            Key   => $ConfigKey,
-            Value => $Test->{ConfigSet},
-        );
-        $Self->True(
-            $Success,
-            "$Test->{Name} configuration set in run time",
-        );
-    }
+    $HelperObject->ConfigSettingChange(
+        Valid => 1,
+        Key   => 'Package::RepositoryList',
+        Value => $Test->{RepositoryList},
+    );
 
-    my %RepositoryList = $PackageObject->_ConfiguredRepositoryDefinitionGet();
+    my %RepositoryList = $PackageObject->ConfiguredRepositoryListGet();
 
     $Self->IsDeeply(
         \%RepositoryList,
         $Test->{ExpectedResult},
-        "$Test->{Name} _ConfiguredRepositoryDefinitionGet()",
+        "$Test->{Name} ConfiguredRepositoryListGet() must return expected data.",
     );
 }
 

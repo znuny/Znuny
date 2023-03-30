@@ -19,11 +19,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -37,14 +36,14 @@ $Selenium->RunTest(
 
         # disable frontend service module
         my $FrontendAgentTicketService = $ConfigObject->Get('Frontend::Module')->{AgentTicketService};
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'Frontend::Module###AgentTicketService',
             Value => $FrontendAgentTicketService,
         );
 
         # check for NavBarAgentTicketService button when frontend service module is disabled
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentDashboard");
         $Self->True(
             index( $Selenium->get_page_source(), 'Action=AgentTicketService' ) == -1,
@@ -52,14 +51,14 @@ $Selenium->RunTest(
         ) || die;
 
         # enable frontend service module
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::Module###AgentTicketService',
             Value => $FrontendAgentTicketService,
         );
 
         # disable service feature
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0,
@@ -74,7 +73,7 @@ $Selenium->RunTest(
         ) || die;
 
         # enable ticket service feature
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1,
@@ -89,12 +88,12 @@ $Selenium->RunTest(
 
         # disable NavBarAgentTicketSearch feature and verify that 'Service view' button
         # is present when frontend service module is enabled and service features is disabled
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'Frontend::NavBarModule###7-AgentTicketService',
             Value => {},
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0,

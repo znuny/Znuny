@@ -8,10 +8,11 @@
 # --
 
 package Kernel::System::Log;
-## nofilter(TidyAll::Plugin::OTRS::Perl::PODSpelling)
-## nofilter(TidyAll::Plugin::OTRS::Perl::Time)
-## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+
+## nofilter(TidyAll::Plugin::Znuny::Perl::Time)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Dumper)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 use strict;
 use warnings;
@@ -20,6 +21,7 @@ use Carp ();
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DateTime',
     'Kernel::System::Encode',
 );
 
@@ -255,13 +257,18 @@ sub Log {
 
     # write shm cache log
     if ( lc $Priority ne 'debug' && $Self->{IPC} ) {
-
         $Priority = lc $Priority;
 
         my $Data   = $LogTime . ";;$Priority;;$Self->{LogPrefix};;$Message\n";    ## no critic
         my $String = $Self->GetLog();
 
-        shmwrite( $Self->{IPCSHMKey}, $Data . $String, 0, $Self->{IPCSize} ) || die $!;
+        # Fix for issue #286 (GitHub) / #328 (internal): Encode output.
+        my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
+
+        my $Output = $Data . $String;
+        $EncodeObject->EncodeOutput( \$Output );
+
+        shmwrite( $Self->{IPCSHMKey}, $Output, 0, $Self->{IPCSize} ) || die $!;
     }
 
     return 1;

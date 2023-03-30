@@ -19,48 +19,49 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # do not check email addresses
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # do not check RichText
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketPhoneOutbound###RequiredLock',
             Value => 1
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketPhoneInbound###RequiredLock',
             Value => 1
         );
 
         # do not check service and type
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -71,7 +72,7 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -183,12 +184,12 @@ $Selenium->RunTest(
         # See bug#13906 https://bugs.otrs.org/show_bug.cgi?id=13906.
 
         # Setup 'PendingDiffTime' config to 0 seconds.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::PendingDiffTime',
             Value => 0,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketPhoneInbound###State',
         );
@@ -255,7 +256,7 @@ $Selenium->RunTest(
         );
 
         # make sure the cache is correct
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
 
     }
 );

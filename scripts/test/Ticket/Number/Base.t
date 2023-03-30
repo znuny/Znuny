@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Use AutoIncrement backend to have access to the base class functions.
 my $TicketNumberBaseObject = $Kernel::OM->Get('Kernel::System::Ticket::Number::AutoIncrement');
@@ -254,7 +254,7 @@ for my $Test (@Tests) {
 # TicketNumberCounterCleanup() tests.
 $Cleanup->();
 
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 @Tests = (
     {
         Name           => '100 - ..1 Sec',
@@ -309,7 +309,7 @@ $Helper->FixedTimeSet();
 for my $Test (@Tests) {
     for ( 1 .. $Test->{Iterations} ) {
         my $Counter = $TicketNumberBaseObject->TicketNumberCounterAdd( Offset => 1 );
-        $Helper->FixedTimeAddSeconds( $Test->{Seconds} );
+        $HelperObject->FixedTimeAddSeconds( $Test->{Seconds} );
     }
 
     my $Success = $TicketNumberBaseObject->TicketNumberCounterCleanup();
@@ -336,7 +336,7 @@ for my $Test (@Tests) {
     $Cleanup->();
 }
 
-$Helper->FixedTimeUnset();
+$HelperObject->FixedTimeUnset();
 
 # _GetLastTicketNumber() tests
 @Tests = (

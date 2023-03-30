@@ -17,7 +17,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
 

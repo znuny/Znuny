@@ -18,20 +18,23 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+        my $PriorityObject = $Kernel::OM->Get('Kernel::System::Priority');
+        my $TypeObject     = $Kernel::OM->Get('Kernel::System::Type');
+        my $ACLObject      = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Ticket::Type',
             Value => 1,
             Valid => 1,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test Priority for ACL.
-        my $PriorityObject = $Kernel::OM->Get('Kernel::System::Priority');
-        my $PriorityName   = "Test$RandomID";
-        my $PriorityID     = $PriorityObject->PriorityAdd(
+        my $PriorityName = "Test$RandomID";
+        my $PriorityID   = $PriorityObject->PriorityAdd(
             Name    => $PriorityName,
             ValidID => 1,
             UserID  => 1,
@@ -42,9 +45,8 @@ $Selenium->RunTest(
         );
 
         # Create test Type for ACL.
-        my $TypeObject = $Kernel::OM->Get('Kernel::System::Type');
-        my $TypeName   = "TestType$RandomID";
-        my $TypeID     = $TypeObject->TypeAdd(
+        my $TypeName = "TestType$RandomID";
+        my $TypeID   = $TypeObject->TypeAdd(
             Name    => $TypeName,
             ValidID => 1,
             UserID  => 1,
@@ -55,8 +57,7 @@ $Selenium->RunTest(
         );
 
         # Set ACL not to show specific Type and Priority in AgentTicketSearch.
-        my $ACLObject = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
-        my $AclName   = "TicketSearch$RandomID";
+        my $AclName = "TicketSearch$RandomID";
         $ACLObject->ACLImport(
             Content => <<"EOF",
 - ChangeBy: root\@localhost
@@ -86,7 +87,7 @@ EOF
             UserID                    => 1,
         );
 
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -96,7 +97,7 @@ EOF
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # After login, we need to navigate to the ACL deployment to make the imported ACL work.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminACL;Subaction=ACLDeploy");

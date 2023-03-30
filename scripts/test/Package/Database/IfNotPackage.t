@@ -16,7 +16,7 @@ use vars (qw($Self));
 
 # Do not use RestoreDatabae here, in our tests the first contained package remains installed
 #   with this option.
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
@@ -125,7 +125,7 @@ $OTRSVersion =~ s{ (\d+ \. \d+) .+ }{$1}msx;
 # add x as patch level version
 $OTRSVersion .= '.x';
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my %Packages = (
     'Package1' => << "EOF",
@@ -133,16 +133,16 @@ my %Packages = (
 <otrs_package version="1.1">
     <Name>Package1$RandomID</Name>
     <Version>1.0.1</Version>
-    <Vendor>OTRS AG</Vendor>
-    <URL>https://otrs.com/</URL>
-    <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
-    <Description Lang="en">OTRS Business Solution. For more information, please have a look at the official documentation at https://doc.otrs.com/doc/manual/otrs-business-solution/6.0/en/html/.</Description>
+    <Vendor>Znuny GmbH</Vendor>
+    <URL>https://znuny.com/</URL>
+    <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
+    <Description Lang="en">Some test package.</Description>
     <Framework>$OTRSVersion</Framework>
     <PackageIsVisible>1</PackageIsVisible>
     <PackageIsDownloadable>1</PackageIsDownloadable>
     <PackageIsRemovable>1</PackageIsRemovable>
     <BuildDate>2016-03-04 18:02:26</BuildDate>
-    <BuildHost>otrs.master.mandalore.com</BuildHost>
+    <BuildHost>znuny.com</BuildHost>
     <DatabaseInstall Type="post" IfNotPackage="Package2$RandomID">
         <TableCreate Type="post" Name="$RandomID">
             <Column AutoIncrement="true" Name="id" PrimaryKey="true" Required="true" Type="BIGINT"></Column>
@@ -157,16 +157,16 @@ EOF
 <otrs_package version="1.1">
     <Name>Package2$RandomID</Name>
     <Version>1.0.1</Version>
-    <Vendor>OTRS AG</Vendor>
-    <URL>https://otrs.com/</URL>
-    <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
-    <Description Lang="en">OTRS Business Solution. For more information, please have a look at the official documentation at https://doc.otrs.com/doc/manual/otrs-business-solution/6.0/en/html/.</Description>
+    <Vendor>Znuny GmbH</Vendor>
+    <URL>https://znuny.com/</URL>
+    <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
+    <Description Lang="en">Some test package.</Description>
     <Framework>$OTRSVersion</Framework>
     <PackageIsVisible>1</PackageIsVisible>
     <PackageIsDownloadable>1</PackageIsDownloadable>
     <PackageIsRemovable>1</PackageIsRemovable>
     <BuildDate>2016-03-04 18:02:26</BuildDate>
-    <BuildHost>otrs.master.mandalore.com</BuildHost>
+    <BuildHost>znuny.com</BuildHost>
 </otrs_package>
 EOF
 );

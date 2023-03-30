@@ -24,10 +24,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 my $ElementReadOnly = sub {
     my (%Param) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     # Value is optional parameter.
     for my $Needed (qw(UnitTestObject Element)) {
         if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!",
             );
@@ -49,10 +51,12 @@ my $ElementReadOnly = sub {
 my $ElementExists = sub {
     my (%Param) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     # Value is optional parameter.
     for my $Needed (qw(UnitTestObject Element)) {
         if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!",
             );
@@ -80,13 +84,17 @@ my $ElementExists = sub {
 
 $Selenium->RunTest(
     sub {
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-        my $GroupObject    = $Kernel::OM->Get('Kernel::System::Group');
-        my $CalendarObject = $Kernel::OM->Get('Kernel::System::Calendar');
-        my $TicketObject   = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
+        my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
+        my $TicketObject      = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject        = $Kernel::OM->Get('Kernel::System::User');
+        my $MainObject        = $Kernel::OM->Get('Kernel::System::Main');
+        my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "test-calendar-group-$RandomID";
@@ -104,33 +112,30 @@ $Selenium->RunTest(
             UserID  => 1,
         );
 
-        # Change resolution (desktop mode).
-        $Selenium->set_window_size( 768, 1050 );
-
         # Create test user.
         my $Language      = 'en';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'users', $GroupName ],
             Language => $Language,
         ) || die 'Did not get test user';
 
         # Get UserID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
-        my $TestUserLogin2 = $Helper->TestUserCreate(
+        my $TestUserLogin2 = $HelperObject->TestUserCreate(
             Groups   => [ 'users', $GroupName2 ],
             Language => $Language,
         ) || die 'Did not get test user';
 
         # Get UserID.
-        my $UserID2 = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID2 = $UserObject->UserLookup(
             UserLogin => $TestUserLogin2,
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate()
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate()
             || die 'Did not get test customer user';
 
         # Create a few test calendars.
@@ -213,7 +218,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Go to calendar overview page.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentAppointmentCalendarOverview");
@@ -274,8 +279,8 @@ $Selenium->RunTest(
             Element => '#CalendarID',
             Value   => $Calendar1{CalendarID},
         );
-        $Selenium->find_element( '#EndHour',     'css' )->send_keys('18');
-        $Selenium->find_element( '.PluginField', 'css' )->send_keys($TicketNumber);
+        $Selenium->find_element( '#EndHour',    'css' )->send_keys('18');
+        $Selenium->find_element( '#TicketLink', 'css' )->send_keys($TicketNumber);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TicketNumber)').click();");
 
@@ -583,8 +588,7 @@ $Selenium->RunTest(
             Hours => 2,
         );
 
-        my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
-        my $AppointmentID     = $AppointmentObject->AppointmentCreate(
+        my $AppointmentID = $AppointmentObject->AppointmentCreate(
             CalendarID  => $Calendar4{CalendarID},
             Title       => 'Permissions check appointment',
             Description => 'How to use Process tickets...',
@@ -683,8 +687,7 @@ $Selenium->RunTest(
         $AppointmentLink->click();
         $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Title').length;" );
 
-        my $TeamObjectRegistered
-            = $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calendar::Team', Silent => 1 );
+        my $TeamObjectRegistered = $MainObject->Require( 'Kernel::System::Calendar::Team', Silent => 1 );
 
         # Check if fields are disabled.
         ELEMENT:
@@ -965,7 +968,7 @@ $Selenium->RunTest(
 
         # Delete groups.
         $Success = $DBObject->Do(
-            SQL => "DELETE FROM groups WHERE id = $GroupID OR id = $GroupID2",
+            SQL => "DELETE FROM permission_groups WHERE id = $GroupID OR id = $GroupID2",
         );
         $Self->True(
             $Success,

@@ -18,24 +18,25 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                 = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
         my $StdAttachmentObject    = $Kernel::OM->Get('Kernel::System::StdAttachment');
         my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
         my $MainObject             = $Kernel::OM->Get('Kernel::System::Main');
+        my $UserObject             = $Kernel::OM->Get('Kernel::System::User');
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Create test attachment.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.txt";
 
         my $ContentRef = $MainObject->FileRead(
@@ -46,7 +47,7 @@ $Selenium->RunTest(
         my $Content = ${$ContentRef};
         my $MD5     = $MainObject->MD5sum( String => \$Content );
 
-        my $AttachmentRandomID = "attachment" . $Helper->GetRandomID();
+        my $AttachmentRandomID = "attachment" . $HelperObject->GetRandomID();
         my $AttachmentID       = $StdAttachmentObject->StdAttachmentAdd(
             Name        => $AttachmentRandomID,
             ValidID     => 1,
@@ -62,7 +63,7 @@ $Selenium->RunTest(
         );
 
         # Create test template.
-        my $TemplateRandomID = "template" . $Helper->GetRandomID();
+        my $TemplateRandomID = "template" . $HelperObject->GetRandomID();
         my $TemplateType     = 'Answer';
         my $TemplateID       = $StandardTemplateObject->StandardTemplateAdd(
             Name         => $TemplateRandomID,
@@ -142,20 +143,16 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Subaction=Template;ID=$TemplateID' )]")->VerifiedClick();
 
         # Check breadcrumb on relations screen.
-        my $Count = 1;
         my $IsLinkedBreadcrumbText;
         for my $BreadcrumbText (
             'Manage Template-Attachment Relations',
-            'Change Attachment Relations for Template \'' . $TemplateType . ' - ' . $TemplateRandomID . '\''
+            "Change Attachment Relations for Template '" . $TemplateType . " - " . $TemplateRandomID . "'"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => '.BreadCrumb>li>[title="' . $BreadcrumbText . '"]',
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         $Selenium->find_element("//input[\@value='$AttachmentID'][\@type='checkbox']")->click();

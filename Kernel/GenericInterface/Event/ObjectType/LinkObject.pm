@@ -16,7 +16,6 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::System::Log',
-    'Kernel::System::LinkObject',
 );
 
 =head1 NAME

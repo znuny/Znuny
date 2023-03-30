@@ -21,6 +21,8 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    $Self->{IsITSMInstalled} = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+
     return $Self;
 }
 
@@ -32,6 +34,8 @@ sub Run {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $SLAObject    = $Kernel::OM->Get('Kernel::System::SLA');
     my %Error        = ();
+
+    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
 
     # ------------------------------------------------------------ #
     # sla edit
@@ -62,9 +66,15 @@ sub Run {
 
         # get params
         my %GetParam;
-        for my $Param (
-            qw(SLAID Name Calendar FirstResponseTime FirstResponseNotify SolutionTime SolutionNotify UpdateTime UpdateNotify ValidID Comment)
-            )
+
+        my @Needed
+            = qw(SLAID Name Calendar FirstResponseTime FirstResponseNotify SolutionTime SolutionNotify UpdateTime UpdateNotify ValidID Comment);
+
+        if ( $Self->{IsITSMInstalled} ) {
+            push @Needed, qw(TypeID MinTimeBetweenIncidents);
+        }
+
+        for my $Param (@Needed)
         {
             $GetParam{$Param} = $ParamObject->GetParam( Param => $Param ) || '';
         }
@@ -327,6 +337,8 @@ sub _MaskNew {
 
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
+    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+
     # get params
     my %SLAData;
     $SLAData{SLAID} = $ParamObject->GetParam( Param => 'SLAID' ) || '';
@@ -369,6 +381,20 @@ sub _MaskNew {
         Max         => 200,
         Class       => 'Modernize',
     );
+
+    if ( $Self->{IsITSMInstalled} ) {
+
+        # generate TypeOptionStrg
+        my $TypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::SLA::Type',
+        );
+        $Param{TypeOptionStrg} = $LayoutObject->BuildSelection(
+            Data       => $TypeList,
+            Name       => 'TypeID',
+            SelectedID => $SLAData{TypeID},
+            Class      => 'Modernize',
+        );
+    }
 
     # generate CalendarOptionStrg
     my %CalendarList;

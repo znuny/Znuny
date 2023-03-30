@@ -17,7 +17,6 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::DB',
     'Kernel::System::Log',
-    'Kernel::System::SysConfig',
     'Kernel::System::Valid',
 );
 
@@ -61,6 +60,7 @@ add new states
         Comment => 'some comment',
         ValidID => 1,
         TypeID  => 1,
+        Color   => '#FF8A25',
         UserID  => 123,
     );
 
@@ -69,28 +69,32 @@ add new states
 sub StateAdd {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
     for my $Needed (qw(Name ValidID TypeID UserID)) {
-        if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!"
-            );
-            return;
-        }
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
     }
+
+    $Param{Color} //= '#FF8A25';
 
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # store data
     return if !$DBObject->Do(
-        SQL => 'INSERT INTO ticket_state (name, valid_id, type_id, comments,'
+        SQL => 'INSERT INTO ticket_state (name, valid_id, type_id, comments, color,'
             . ' create_time, create_by, change_time, change_by)'
-            . ' VALUES (?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
+            . ' VALUES (?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
             \$Param{Name}, \$Param{ValidID}, \$Param{TypeID}, \$Param{Comment},
-            \$Param{UserID}, \$Param{UserID},
+            \$Param{Color}, \$Param{UserID}, \$Param{UserID},
         ],
     );
 
@@ -137,9 +141,10 @@ returns
         TypeName   => "new",
         TypeID     => 1,
         ValidID    => 1,
+        Comment    => "New ticket created by customer.",
+        Color      => "#FF8A25",
         CreateTime => "2010-11-29 11:04:04",
         ChangeTime => "2010-11-29 11:04:04",
-        Comment    => "New ticket created by customer.",
     );
 
 =cut
@@ -176,7 +181,7 @@ sub StateGet {
     # sql
     my @Bind;
     my $SQL = 'SELECT ts.id, ts.name, ts.valid_id, ts.comments, ts.type_id, tst.name,'
-        . ' ts.change_time, ts.create_time'
+        . ' ts.color, ts.change_time, ts.create_time'
         . ' FROM ticket_state ts, ticket_state_type tst WHERE ts.type_id = tst.id AND ';
     if ( $Param{Name} ) {
         $SQL .= ' ts.name = ?';
@@ -203,8 +208,9 @@ sub StateGet {
             ValidID    => $Data[2],
             TypeID     => $Data[4],
             TypeName   => $Data[5],
-            ChangeTime => $Data[6],
-            CreateTime => $Data[7],
+            Color      => $Data[6],
+            ChangeTime => $Data[7],
+            CreateTime => $Data[8],
         );
     }
 
@@ -234,12 +240,13 @@ sub StateGet {
 update state attributes
 
     $StateObject->StateUpdate(
-        ID             => 123,
-        Name           => 'New State',
-        Comment        => 'some comment',
-        ValidID        => 1,
-        TypeID         => 1,
-        UserID         => 123,
+        ID      => 123,
+        Name    => 'New State',
+        Comment => 'some comment',
+        ValidID => 1,
+        TypeID  => 1,
+        Color   => '#FF8A25',
+        UserID  => 123,
     );
 
 =cut
@@ -258,17 +265,19 @@ sub StateUpdate {
         }
     }
 
+    $Param{Color} //= '#FF8A25';
+
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # sql
     return if !$DBObject->Do(
         SQL => 'UPDATE ticket_state SET name = ?, comments = ?, type_id = ?, '
-            . ' valid_id = ?, change_time = current_timestamp, change_by = ? '
+            . ' valid_id = ?, color = ?, change_time = current_timestamp, change_by = ? '
             . ' WHERE id = ?',
         Bind => [
             \$Param{Name}, \$Param{Comment}, \$Param{TypeID}, \$Param{ValidID},
-            \$Param{UserID}, \$Param{ID},
+            \$Param{Color}, \$Param{UserID}, \$Param{ID},
         ],
     );
 

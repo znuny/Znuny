@@ -19,43 +19,45 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Do not check service and type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DefaultLanguage',
             Value => 'en',
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -66,15 +68,15 @@ $Selenium->RunTest(
         );
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Add test customer for testing.
         my $TestCustomer       = 'Customer' . $RandomID;
-        my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomer,
             UserLastname   => $TestCustomer,
@@ -94,7 +96,7 @@ $Selenium->RunTest(
 
         for my $LockStatus (qw(lock unlock)) {
 
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => $LockStatus eq 'lock' ? 1 : 0,
                 Key   => 'Ticket::EventModulePost###3100-LockAfterCreate',
                 Value => {
@@ -218,7 +220,7 @@ $Selenium->RunTest(
             qw (Ticket CustomerUser)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

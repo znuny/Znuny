@@ -51,8 +51,8 @@
                 <td class="Filetype">[% Data.ContentType | html %]</td>
                 <td class="Filesize" data-file-size="[% Data.Filesize | html %]">[% Data.Filesize | Localize('Filesize') | html %]</td>
                 <td class="Delete">
-                    <a href="#" class="AttachmentDelete" aria-label="[% Translate("Click to delete this attachment.") | html %]" tabindex="0" data-file-id="[% Data.FileID | html %]" data-object-id="[% Data.ObjectID | html %]" data-field-id="[% Data.FieldID | html %]" data-delete-action="[% Data.DeleteAction | html %]">
-                        <i class="fa fa-trash"></i>
+                    <a href="#" class="AttachmentDelete icon-hover-sm" aria-label="[% Translate("Click to delete this attachment.") | html %]" tabindex="0" data-file-id="[% Data.FileID | html %]" data-object-id="[% Data.ObjectID | html %]" data-field-id="[% Data.FieldID | html %]" data-delete-action="[% Data.DeleteAction | html %]">
+                        <i class="fa fa-times"></i>
                     </a>
                 </td>
             </tr>
@@ -63,16 +63,21 @@
         <i class="fa fa-spinner fa-spin"></i>
     </span>
 </div>
-<input
-    class="AjaxDnDUpload [% IF Mandatory %]Validate_DnDUpload[% END %]"
-    [% IF !Single %] multiple="multiple"[% END %]
-    id="[% IF FieldID %][% FieldID | html %][% ELSE %]FileUpload[% END %]"
-    name="[% IF FieldName %][% FieldName | html %][% ELSE %]FileUpload[% END %]"
-    data-max-files="[% MaxFiles | html %]"
-    data-file-types="[% FileTypes | html %]"
-    data-max-size-per-file="[% MaxSizePerFile | html %]"
-    data-max-size-per-file-hr="[% IF MaxSizePerFile %][% MaxSizePerFile | Localize('Filesize') | html %][% END %]"
-    data-form-id="[% FormID | html %]"
-    type="file"
-    size="40"
-/>
+
+<div class="outer-upload-file">
+    <input
+        class="AjaxDnDUpload [% IF Mandatory %]Validate_DnDUpload[% END %]"
+        [% IF !Single %] multiple="multiple"[% END %]
+        id="[% IF FieldID %][% FieldID | html %][% ELSE %]FileUpload[% END %]"
+        name="[% IF FieldName %][% FieldName | html %][% ELSE %]FileUpload[% END %]"
+        data-max-files="[% MaxFiles | html %]"
+        data-file-types="[% FileTypes | html %]"
+        data-max-size-per-file="[% MaxSizePerFile | html %]"
+        data-max-size-per-file-hr="[% IF MaxSizePerFile %][% MaxSizePerFile | Localize('Filesize') | html %][% END %]"
+        # Hin: See Kernel::System::Main::FilenameCleanUp for max. length of filename (200 instead of 220 because meta file name extensions (like .ContentType) count to the file length)
+        data-max-filename-length="200"
+        data-form-id="[% FormID | html %]"
+        type="file"
+        size="40"
+    />
+</div>

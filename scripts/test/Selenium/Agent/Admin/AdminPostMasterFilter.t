@@ -37,12 +37,12 @@ my $PostMasterFilterSubmit = sub {
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         my $Language = 'de';
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Language => $Language,
             Groups   => ['admin'],
         ) || die "Did not get test user";
@@ -120,15 +120,11 @@ $Selenium->RunTest(
         # Check breadcrumb on Add screen.
         my $SecondBreadcrumbText = $LanguageObject->Translate('PostMaster Filter Management');
         my $ThirdBreadcrumbText  = $LanguageObject->Translate('Add PostMaster Filter');
-        my $Count                = 1;
         for my $BreadcrumbText ( $SecondBreadcrumbText, $ThirdBreadcrumbText ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check filter value length.
@@ -151,7 +147,7 @@ $Selenium->RunTest(
         $Selenium->find_element( "#SetValue1", 'css' )->clear();
 
         # Add first test PostMasterFilter.
-        my $PostMasterName     = "postmasterfilter" . $Helper->GetRandomID();
+        my $PostMasterName     = "postmasterfilter" . $HelperObject->GetRandomID();
         my $PostMasterBody     = "Selenium test for PostMasterFilter";
         my $PostMasterPriority = "2 low";
 
@@ -213,16 +209,12 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Edit screen.
-        $Count               = 1;
         $ThirdBreadcrumbText = $LanguageObject->Translate('Edit PostMaster Filter') . ": $PostMasterName";
         for my $BreadcrumbText ( $SecondBreadcrumbText, $ThirdBreadcrumbText ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Edit test PostMasterFilter.

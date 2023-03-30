@@ -21,9 +21,9 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $TemplateName = 'template' . $Helper->GetRandomID();
+my $TemplateName = 'template' . $HelperObject->GetRandomID();
 
 # try to execute command without any options
 my $ExitCode = $CommandObject->Execute();
@@ -50,7 +50,7 @@ $Self->Is(
 );
 
 # provide invalid queue name
-my $QueueName = 'queue' . $Helper->GetRandomID();
+my $QueueName = 'queue' . $HelperObject->GetRandomID();
 $ExitCode = $CommandObject->Execute( '--template-name', 'test answer', '--queue-name', $QueueName );
 $Self->Is(
     $ExitCode,

@@ -9,8 +9,6 @@
 
 package Kernel::Output::HTML::Statistics::View;
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::PodChecker)
-
 use strict;
 use warnings;
 
@@ -21,19 +19,17 @@ use Kernel::System::DateTime;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::Language',
     'Kernel::Output::HTML::Layout',
     'Kernel::Output::PDF::Statistics',
     'Kernel::System::CSV',
     'Kernel::System::CustomerCompany',
     'Kernel::System::DateTime',
+    'Kernel::System::Excel',
     'Kernel::System::Group',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::PDF',
     'Kernel::System::Stats',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::Ticket',
     'Kernel::System::User',
     'Kernel::System::Web::Request',
 );
@@ -189,7 +185,9 @@ sub StatsParamsWidget {
             // $Stat->{TimeZone}
             // Kernel::System::DateTime->OTRSTimeZoneGet();
 
-        my %TimeZoneBuildSelection = $Self->_TimeZoneBuildSelection();
+        my %TimeZoneBuildSelection = $Self->_TimeZoneBuildSelection(
+            IncludeTimeZone => $SelectedTimeZone,
+        );
 
         my %Frontend;
         $Frontend{SelectTimeZone} = $LayoutObject->BuildSelection(
@@ -824,7 +822,9 @@ sub GeneralSpecificationsWidget {
                 // Kernel::System::DateTime->OTRSTimeZoneGet();
         }
 
-        my %TimeZoneBuildSelection = $Self->_TimeZoneBuildSelection();
+        my %TimeZoneBuildSelection = $Self->_TimeZoneBuildSelection(
+            IncludeTimeZone => $SelectedTimeZone,
+        );
 
         $Stat->{SelectTimeZone} = $LayoutObject->BuildSelection(
             %TimeZoneBuildSelection,
@@ -1633,10 +1633,31 @@ sub StatsResultRender {
 
     # generate excel output
     elsif ( $Param{Format} eq 'Excel' ) {
-        my $Output = $CSVObject->Array2CSV(
-            Head   => $HeadArrayRef,
-            Data   => \@StatArray,
-            Format => 'Excel',
+
+        my $StatsBackendObject = $Kernel::OM->Get( $Stat->{ObjectModule} );
+        my $ExcelObject        = $Kernel::OM->Get('Kernel::System::Excel');
+
+        my %Array2ExcelParams;
+        if ( $StatsBackendObject->can('Worksheets') ) {
+            %Array2ExcelParams = (
+                Worksheets => $StatsBackendObject->Worksheets(),
+            );
+        }
+        else {
+            my @TableData        = ( [ @{$HeadArrayRef} ], @StatArray );
+            my $FormatDefinition = $ExcelObject->GetFormatDefinition(
+                Stat => $Stat,
+            );
+
+            %Array2ExcelParams = (
+                Data             => \@TableData,
+                FormatDefinition => $FormatDefinition,
+            );
+        }
+
+        my $Output = $ExcelObject->Array2Excel(
+            %Array2ExcelParams,
+            Stat => $Stat,
         );
 
         return $LayoutObject->Attachment(
@@ -2081,7 +2102,7 @@ sub _TimeOutput {
             $TimeConfig{ $Element . 'StopSecond' }  = 59;
 
             for my $Key (qw(Start Stop)) {
-                $TimeConfig{Prefix} = $Element . $_;
+                $TimeConfig{Prefix} = $Element . $Key;
 
                 # time setting if available
                 if (
@@ -2360,7 +2381,9 @@ sub _GetValidTimeZone {
 sub _TimeZoneBuildSelection {
     my ( $Self, %Param ) = @_;
 
-    my $TimeZones = Kernel::System::DateTime->TimeZoneList();
+    my $TimeZones = Kernel::System::DateTime->TimeZoneList(
+        IncludeTimeZone => $Param{IncludeTimeZone},
+    );
 
     my %TimeZoneBuildSelection = (
         Data => { map { $_ => $_ } @{$TimeZones} },

@@ -19,11 +19,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $SLAObject    = $Kernel::OM->Get('Kernel::System::SLA');
 
         # activate Service
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1
@@ -40,19 +42,19 @@ $Selenium->RunTest(
         );
 
         # enable SLAPreferences
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'SLAPreferences###Comment2',
             Value => \%SLAPreferences,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SLAPreferences###Comment2',
             Value => \%SLAPreferences,
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -62,7 +64,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # go to SLA admin
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSLA");
@@ -82,7 +84,7 @@ $Selenium->RunTest(
         }
 
         # create a real test SLA
-        my $RandomSLAName = "SLA" . $Helper->GetRandomID();
+        my $RandomSLAName = "SLA" . $HelperObject->GetRandomID();
         $Selenium->find_element( "#Name",    'css' )->send_keys($RandomSLAName);
         $Selenium->find_element( "#Comment", 'css' )->send_keys("Some SLA Comment");
 
@@ -129,7 +131,7 @@ $Selenium->RunTest(
         );
 
         # delete test SLA
-        my $SLAID = $Kernel::OM->Get('Kernel::System::SLA')->SLALookup(
+        my $SLAID = $SLAObject->SLALookup(
             Name => $RandomSLAName,
         );
 
@@ -157,7 +159,7 @@ $Selenium->RunTest(
             qw (SLAPreferencesDB SysConfig)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

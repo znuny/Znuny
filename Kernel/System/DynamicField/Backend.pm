@@ -18,9 +18,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::DB',
     'Kernel::System::DynamicField',
-    'Kernel::System::DynamicFieldValue',
     'Kernel::System::Log',
     'Kernel::System::Main',
 );
@@ -212,7 +210,7 @@ creates the field HTML to be used in edit masks.
         },
         Template             => {                         # Optional data structure of GenericAgent etc.
             Owner => 2,                                   # Value is accessable via field name (DynamicField_ + field name)
-            Title => 'Generic Agent Job was here'         # and could be a scalar, Hash- or ArrayRef
+            Title => 'Generic Agent Job was here',         # and could be a scalar, Hash- or ArrayRef
             ...
             DynamicField_ExampleField1 => 'Value 1'
         },
@@ -397,6 +395,9 @@ sets a dynamic field value.
 
     my $Success = $BackendObject->ValueSet(
         DynamicFieldConfig => $DynamicFieldConfig,      # complete config of the DynamicField
+        # OR
+        DynamicFieldName => 'MyField',                  # Implicitly fetches config of dynamic field
+
         ObjectID           => $ObjectID,                # ID of the current object that the field
                                                         # must be linked to, e. g. TicketID
         ObjectName         => $ObjectName,              # Name of the current object that the field
@@ -411,13 +412,44 @@ sets a dynamic field value.
 sub ValueSet {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    for my $Needed (qw(DynamicFieldConfig UserID)) {
+    for my $Needed (qw(UserID)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!"
             );
+            return;
+        }
+    }
+
+    # Either DynamicFieldConfig or DynamicFieldName has to be given
+    if (
+        ( !$Param{DynamicFieldConfig} && !$Param{DynamicFieldName} )
+        || ( $Param{DynamicFieldConfig} && $Param{DynamicFieldName} )
+        )
+    {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Either DynamicFieldConfig or DynamicFieldName has to be given!"
+        );
+        return;
+    }
+
+    if ( $Param{DynamicFieldName} ) {
+        my $DynamicFieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
+            Name => $Param{DynamicFieldName},
+        );
+
+        if ( IsHashRefWithData($DynamicFieldConfig) ) {
+            $Param{DynamicFieldConfig} = $DynamicFieldConfig;
+            delete $Param{DynamicFieldName};
+        }
+        else {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Config for dynamic field with name '$Param{DynamicFieldName}' could not be found."
+            );
+
             return;
         }
     }
@@ -430,7 +462,7 @@ sub ValueSet {
     {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Either ObjectID or ObjectName hast to be given!"
+            Message  => "Either ObjectID or ObjectName has to be given!"
         );
         return;
     }
@@ -1124,7 +1156,7 @@ extracts the value of a dynamic field from the param object.
         DynamicFieldConfig   => $DynamicFieldConfig,    # complete config of the DynamicField
         ParamObject          => $ParamObject,           # the current request data
         LayoutObject         => $LayoutObject,          # used to transform dates to user time zone
-        TransformDates       => 1                       # 1 || 0, default 1, to transform the dynamic fields that
+        TransformDates       => 1,                      # 1 || 0, default 1, to transform the dynamic fields that
                                                         #   use dates to the user time zone (i.e. Date, DateTime
                                                         #   dynamic fields)
         Template             => $Template,
@@ -1143,11 +1175,11 @@ extracts the value of a dynamic field from the param object.
     my $Value = $BackendObject->EditFieldValueGet(
         DynamicFieldConfig      => $DynamicFieldConfig, # complete config of the DynamicField
         ParamObject             => $ParamObject,        # the current request data
-        TransformDates          => 0                    # 1 || 0, default 1, to transform the dynamic fields that
+        TransformDates          => 0,                   # 1 || 0, default 1, to transform the dynamic fields that
                                                         #   use dates to the user time zone (i.e. Date, DateTime
                                                         #   dynamic fields)
 
-        Template                => $Template            # stored values from DB like Search profile or Generic Agent job
+        Template                => $Template,           # stored values from DB like Search profile or Generic Agent job
         ReturnTemplateStructure => 1,                   # 0 || 1, default 0
                                                         #   Returns the structured values as got from the http request
                                                         #   (only for backend internal use).
@@ -1902,7 +1934,7 @@ sets a dynamic field random value.
     returns:
 
     $Result {
-        Success => 1                # or undef
+        Success => 1,               # or undef
         Value   => $RandomValue     # or undef
     }
 
@@ -2122,7 +2154,7 @@ sub ValueLookup {
 
 =head2 HasBehavior()
 
-checks if the dynamic field as an specified behavior
+checks if the dynamic field has a specific behavior
 
     my $Success = $BackendObject->HasBehavior(
         DynamicFieldConfig => $DynamicFieldConfig,       # complete config of the DynamicField
@@ -2307,7 +2339,7 @@ an ArrayHashRef, otherwise the result will be a HashRef.
         },
         {
             Key   => '1',
-            Value => 'Item1'
+            Value => 'Item1',
         },
         {
             Key      => '1::A',

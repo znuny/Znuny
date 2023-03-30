@@ -18,31 +18,33 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Do not check Service.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
 
         # Do not check Type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0
         );
 
         # Create test customer user and login.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         $Selenium->Login(
@@ -51,7 +53,7 @@ $Selenium->RunTest(
             Password => $TestCustomerUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to CustomerTicketMessage screen.
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketMessage");
@@ -86,8 +88,8 @@ $Selenium->RunTest(
         );
 
         # Input fields and create ticket.
-        my $SubjectRandom = "Subject" . $Helper->GetRandomID();
-        my $TextRandom    = "Text" . $Helper->GetRandomID();
+        my $SubjectRandom = "Subject" . $HelperObject->GetRandomID();
+        my $TextRandom    = "Text" . $HelperObject->GetRandomID();
         $Selenium->InputFieldValueSet(
             Element => '#Dest',
             Value   => '2||Raw',
@@ -127,7 +129,7 @@ $Selenium->RunTest(
             "Queue preselected in URL"
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerPanelOwnSelection',
             Value => {
@@ -180,7 +182,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

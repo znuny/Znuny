@@ -18,25 +18,27 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         # Disable all dashboard plugins.
-        my $Config = $Kernel::OM->Get('Kernel::Config')->Get('DashboardBackend');
-        $Helper->ConfigSettingChange(
+        my $Config = $ConfigObject->Get('DashboardBackend');
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'DashboardBackend',
             Value => \%$Config,
         );
 
         # Get dashboard RSS plugin default sysconfig.
-        my %RSSConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %RSSConfig = $SysConfigObject->SettingGet(
             Name    => 'DashboardBackend###0410-RSS',
             Default => 1,
         );
 
-        my $RandomRSSTitle = 'RSS' . $Helper->GetRandomID();
+        my $RandomRSSTitle = 'RSS' . $HelperObject->GetRandomID();
 
-        # Set URL config to xml content in ordr to prevent instability in case cloud services are
+        # Set URL config to xml content in order to prevent instability in case cloud services are
         # unavailable at the exact moment of this test run.
         $RSSConfig{DefaultValue}->{URL} = "
             <?xml version=\"1.0\" encoding=\"UTF-8\"?>
@@ -47,9 +49,9 @@ $Selenium->RunTest(
               xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\"
               xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"  >
               <channel>
-                  <title>Press Releases &#8211; otrs.com| OTRS Simple Service Management</title>
-                  <atom:link href=\"https://www.otrs.com/feed/?cat=112%2C254%2C111\" rel=\"self\" type=\"application/rss+xml\" />
-                  <link>https://www.otrs.com</link>
+                  <title>Some news</title>
+                  <atom:link href=\"https://www.znuny.com/feed/test\" rel=\"self\" type=\"application/rss+xml\" />
+                  <link>https://www.znuny.com</link>
                   <description>Simple service management</description>
                   <lastBuildDate>Fri, 26 Jan 2018 13:37:52 +0000</lastBuildDate>
                   <language>en-EN</language>
@@ -58,34 +60,34 @@ $Selenium->RunTest(
                   <generator>https://wordpress.org/?v=4.9.2</generator>
                   <item>
                       <title>$RandomRSSTitle</title>
-                      <link>https://www.otrs.com/$RandomRSSTitle</link>
+                      <link>https://www.znuny.com/$RandomRSSTitle</link>
                       <pubDate>Tue, 16 Jan 2018 09:00:07 +0000</pubDate>
-                      <dc:creator><![CDATA[Marketing OTRS]]></dc:creator>
+                      <dc:creator><![CDATA[Znuny GmbH]]></dc:creator>
                       <category><![CDATA[Release and Security Notes]]></category>
-                      <category><![CDATA[Release Notes: OTRS Business Solution™]]></category>
-                      <guid isPermaLink=\"false\">https://www.otrs.com/?p=61580</guid>
-                      <description><![CDATA[&#160; January 16, 2018 — OTRS, test]]></description>
+                      <category><![CDATA[Some news]]></category>
+                      <guid isPermaLink=\"false\">https://www.znuny.com/?p=61580</guid>
+                      <description><![CDATA[&#160; January 16, 2018 — Znuny, test]]></description>
                       <content:encoded><![CDATA[<div class=\"row box-space-md\"> <div class=\"col-lg-12 col-md-12 col-sm-12 column1\"></div> </div>]]></content:encoded>
                   </item>
               </channel>
             </rss>
         ";
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0410-RSS',
             Value => $RSSConfig{EffectiveValue},
         );
 
         # Avoid SSL errors on old test platforms.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'WebUserAgent::DisableSSLVerification',
             Value => 1,
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -101,7 +103,7 @@ $Selenium->RunTest(
         # Test if RSS feed is shown.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('#Dashboard0410-RSS tbody a[href*=\"www.otrs.com/$RandomRSSTitle\"]').text().trim() === '$RandomRSSTitle'"
+                "return \$('#Dashboard0410-RSS tbody a[href*=\"www.znuny.com/$RandomRSSTitle\"]').text().trim() === '$RandomRSSTitle'"
             ),
             "RSS feed '$RandomRSSTitle' - found",
         );

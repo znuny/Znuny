@@ -19,7 +19,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Create directory for certificates and private keys.
@@ -31,14 +31,14 @@ $Selenium->RunTest(
         File::Path::make_path( $PrivatePath, { chmod => 0770 } );    ## no critic
 
         # Disabled SMIME in config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME',
             Value => 0
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -70,19 +70,19 @@ $Selenium->RunTest(
         );
 
         # Enable SMIME in config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME',
             Value => 1
         );
 
         # Set SMIME paths in sysConfig.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::CertPath',
             Value => '/SomeCertPath',
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::PrivatePath',
             Value => '/SomePrivatePath',
@@ -102,12 +102,12 @@ $Selenium->RunTest(
         );
 
         # Set SMIME paths in sysConfig.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::CertPath',
             Value => $CertPath,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::PrivatePath',
             Value => $PrivatePath,
@@ -126,19 +126,15 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Subaction=ShowAddCertificate' )]")->VerifiedClick();
 
         # Check breadcrumb on 'Add Certificate' screen.
-        my $Count = 1;
         for my $BreadcrumbText ( 'S/MIME Management', 'Add Certificate' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Add certificate.
-        my $CertLocation = $ConfigObject->Get('Home')
+        my $CertLocation = $Selenium->{Home}
             . "/scripts/test/sample/SMIME/SMIMECertificate-smimeuser1.crt";
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($CertLocation);
@@ -148,19 +144,15 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Subaction=ShowAddPrivate' )]")->VerifiedClick();
 
         # Check breadcrumb on 'Add Private Key' screen.
-        $Count = 1;
         for my $BreadcrumbText ( 'S/MIME Management', 'Add Private Key' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Add private key.
-        my $PrivateLocation = $ConfigObject->Get('Home')
+        my $PrivateLocation = $Selenium->{Home}
             . "/scripts/test/sample/SMIME/SMIMEPrivateKey-smimeuser1.pem";
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($PrivateLocation);
@@ -201,7 +193,7 @@ $Selenium->RunTest(
         # Check download file name.
         my $BaseURL = $ConfigObject->Get('HttpType') . '://';
 
-        $BaseURL .= $Helper->GetTestHTTPHostname() . '/';
+        $BaseURL .= $HelperObject->GetTestHTTPHostname() . '/';
         $BaseURL .= $ConfigObject->Get('ScriptAlias') . 'index.pl?';
 
         my $UserAgent = LWP::UserAgent->new(
@@ -217,13 +209,13 @@ $Selenium->RunTest(
 
             # Check for test created Certificate and Private key download file name.
             my $Response = $UserAgent->get(
-                $BaseURL . "Action=AdminSMIME;Subaction=Download;Type=$TestSMIME;Filename=4d400195.0"
+                $BaseURL . "Action=AdminSMIME;Subaction=Download;Type=$TestSMIME;Filename=097aa832.0"
             );
             if ( $ResponseLogin->is_success() && $Response->is_success() ) {
 
                 $Self->True(
-                    index( $Response->header('content-disposition'), "4d400195-$TestSMIME.pem" ) > -1,
-                    "Download file name is correct - 4d400195-$TestSMIME.pem",
+                    index( $Response->header('content-disposition'), "097aa832-$TestSMIME.pem" ) > -1,
+                    "Download file name is correct - 097aa832-$TestSMIME.pem",
                 );
             }
 

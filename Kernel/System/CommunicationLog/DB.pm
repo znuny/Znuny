@@ -176,7 +176,7 @@ otherwise all available entries will be returned.
         Date        => '2017-07-03', # (optional) List communications just from the given date.
         StartDate   => '2017-07-03', # (optional) List communications starting from the given date.
         OlderThan   => '2017-07-03', # (optional) List communications older than the given date.
-        Result      => 'ARRAY'       # (optional) Can be ARRAY or AVERAGE. ARRAY returns the results as
+        Result      => 'ARRAY',      # (optional) Can be ARRAY or AVERAGE. ARRAY returns the results as
                                      #            an array while AVERAGE returns the communication average in seconds.
                                      #            Default: ARRAY
         OrderBy     => 'Down',       # (optional) Down|Up; Default: Down
@@ -207,7 +207,7 @@ Returns:
             AccountType     => 'DoNotSendEmail',
             AccountID       => undef,
             StartTime       => '2017-07-20 08:58:43',
-            EndTime         => '2017-07-20 08:58:49'
+            EndTime         => '2017-07-20 08:58:49',
             Duration        => 6,
         },
     ];

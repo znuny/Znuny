@@ -23,32 +23,30 @@ my $CheckBredcrumb = sub {
 
     my $OverviewTitle  = $Param{OverviewTitle};
     my $BreadcrumbText = $Param{BreadcrumbText} || '';
-    my $Count          = 1;
 
     for my $BreadcrumbText ( $OverviewTitle, $BreadcrumbText ) {
-        $Self->Is(
-            $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-            $BreadcrumbText,
-            "Breadcrumb text '$BreadcrumbText' is found on screen"
+        $Selenium->ElementExists(
+            Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+            SelectorType => 'css',
         );
-
-        $Count++;
     }
 };
 
 $Selenium->RunTest(
     sub {
 
-        my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $SysConfigObject    = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
 
-        my %DynamicFieldsOverviewPageShownSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %DynamicFieldsOverviewPageShownSysConfig = $SysConfigObject->SettingGet(
             Name => 'PreferencesGroups###DynamicFieldsOverviewPageShown',
         );
 
         # Show more dynamic fields per page as the default value.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PreferencesGroups###DynamicFieldsOverviewPageShown',
             Value => {
@@ -59,7 +57,7 @@ $Selenium->RunTest(
 
         # Create test user and login.
         my $Language      = 'de';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => ['admin'],
             Language => $Language,
         ) || die "Did not get test user";
@@ -70,7 +68,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminDynamiField screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminDynamicField");
@@ -90,26 +88,6 @@ $Selenium->RunTest(
             "Breadcrumb is found on Overview screen.",
         );
 
-        my $OTRSBusinessIsInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-        my $OBTeaser                = $LanguageObject->Translate('More Business Fields');
-        my $OBTeaserFound           = index( $Selenium->get_page_source(), $OBTeaser ) > -1;
-        if ( !$OTRSBusinessIsInstalled ) {
-            $Self->True(
-                $OBTeaserFound,
-                "OTRSBusiness teaser found on page",
-            );
-            for my $TeaserOption (qw(Database Webservice ContactWithData)) {
-                $Selenium->find_element( "select#TicketDynamicField option[value=$TeaserOption]", 'css' );
-            }
-
-        }
-        else {
-            $Self->False(
-                $OBTeaserFound,
-                "OTRSBusiness teaser not found on page",
-            );
-        }
-
         # Define variables for breadcrumb.
         my $OverviewTitleBreadcrumb = $LanguageObject->Translate('Dynamic Fields Management');
         my $IDText;
@@ -128,7 +106,7 @@ $Selenium->RunTest(
                 $Element->is_enabled();
 
                 # Create a real test DynamicField.
-                my $RandomID = $Helper->GetRandomID();
+                my $RandomID = $HelperObject->GetRandomID();
                 $Selenium->InputFieldValueSet(
                     Element => "#$ObjectType",
                     Value   => $ID,
@@ -228,6 +206,22 @@ $Selenium->RunTest(
                     "There is a class 'Invalid' for test DynamicField",
                 );
 
+                # Checks for AdminValidFilter
+                $Self->True(
+                    $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+                    "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+                );
+                $Selenium->find_element( "#ValidFilter", 'css' )->click();
+                $Self->False(
+                    $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+                    "AdminValidFilter - All invalid entries are not displayed.",
+                );
+                $Selenium->find_element( "#ValidFilter", 'css' )->click();
+                $Self->True(
+                    $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+                    "AdminValidFilter - All invalid entries are displayed again.",
+                );
+
                 # Go to new dynamic field again after update and check values.
                 $Selenium->find_element( $RandomID, 'link_text' )->VerifiedClick();
 
@@ -298,7 +292,7 @@ $Selenium->RunTest(
         # Test MaxOrder default value.
         # It could not be matter from which page creation of dynamic field starts - default value of
         # field order must be always the first next number of all fields (see bug#10681).
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
         my @TestDynamicFieldIDs;
 
         # Create some dynamic fields to be sure there will be at least two pages.

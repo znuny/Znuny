@@ -19,23 +19,23 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Enable Type feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 1
         );
-
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         my @DynamicFields = (
             {
@@ -86,7 +86,7 @@ $Selenium->RunTest(
             }
         }
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create Ticket types.
         my $TypeObject = $Kernel::OM->Get('Kernel::System::Type');
@@ -112,7 +112,7 @@ $Selenium->RunTest(
 
         my @ACLs = (
             {
-                Name           => '1-ACL' . $Helper->GetRandomID(),
+                Name           => '1-ACL' . $HelperObject->GetRandomID(),
                 Comment        => 'Selenium Process ACL',
                 Description    => 'Description',
                 StopAfterMatch => 1,
@@ -141,7 +141,7 @@ $Selenium->RunTest(
                 UserID  => 1,
             },
             {
-                Name           => '2-ACL' . $Helper->GetRandomID(),
+                Name           => '2-ACL' . $HelperObject->GetRandomID(),
                 Comment        => 'Selenium Process ACL',
                 Description    => 'Description',
                 StopAfterMatch => 1,
@@ -212,7 +212,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -233,7 +233,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
 
         # Import test Selenium Process.
-        my $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/ProcessManagement/CustomerTicketProcess.yml";
+        my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/CustomerTicketProcess.yml";
 
         $Selenium->WaitFor(
             JavaScript =>
@@ -252,7 +252,7 @@ $Selenium->RunTest(
         sleep 1;
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -279,7 +279,7 @@ $Selenium->RunTest(
         );
 
         # Create test customer user and login.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         $Selenium->Login(
@@ -353,11 +353,10 @@ $Selenium->RunTest(
             "DynamicField filtered options count",
         );
 
-        my $SubjectRandom  = 'Subject' . $Helper->GetRandomID();
-        my $ContentRandom  = 'Content' . $Helper->GetRandomID();
-        my $AttachmentName = "StdAttachment-Test1.txt";
-        my $AttachmentLocation
-            = $Kernel::OM->Get('Kernel::Config')->Get('Home') . "/scripts/test/sample/StdAttachment/$AttachmentName";
+        my $SubjectRandom      = 'Subject' . $HelperObject->GetRandomID();
+        my $ContentRandom      = 'Content' . $HelperObject->GetRandomID();
+        my $AttachmentName     = "StdAttachment-Test1.txt";
+        my $AttachmentLocation = $Selenium->{Home} . "/scripts/test/sample/StdAttachment/$AttachmentName";
 
         $Selenium->find_element( "#Subject",  'css' )->send_keys($SubjectRandom);
         $Selenium->find_element( "#RichText", 'css' )->send_keys($ContentRandom);
@@ -398,23 +397,7 @@ $Selenium->RunTest(
         $Element->is_enabled();
         $Element->is_displayed();
 
-        my $OTRSBusinessIsInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-        my $OTRSSTORMIsInstalled    = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSSTORMIsInstalled();
-        my $OTRSCONTROLIsInstalled  = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSCONTROLIsInstalled();
-
-        my $FooterMessage;
-        if ($OTRSSTORMIsInstalled) {
-            $FooterMessage = 'STORM powered by OTRS';
-        }
-        elsif ($OTRSCONTROLIsInstalled) {
-            $FooterMessage = 'CONTROL powered by OTRS';
-        }
-        elsif ($OTRSBusinessIsInstalled) {
-            $FooterMessage = 'Powered by OTRS Business Solution';
-        }
-        else {
-            $FooterMessage = 'Powered by ' . $ConfigObject->Get('Product');
-        }
+        my $FooterMessage = 'Powered by ' . $ConfigObject->Get('Product');
 
         # Get secure disable banner.
         my $SecureDisableBanner = $ConfigObject->Get('Secure::DisableBanner');

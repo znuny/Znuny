@@ -16,25 +16,28 @@ use vars (qw($Self));
 my @Tests = (
     {
         Name      => 'Command completion',
-        COMP_LINE => 'bin/otrs.Console.pl Hel',
-        Arguments => [ 'bin/otrs.Console.pl', 'Hel', 'bin/otrs.Console.pl' ],
+        COMP_LINE => 'bin/znuny.Console.pl Hel',
+        Arguments => [ 'bin/znuny.Console.pl', 'Hel', 'bin/znuny.Console.pl' ],
         Result    => "Help",
     },
     {
         Name      => 'Argument list',
-        COMP_LINE => 'bin/otrs.Console.pl Admin::Article::StorageSwitch ',
-        Arguments => [ 'bin/otrs.Console.pl', '', 'Admin::Article::SwitchStorage' ],
+        COMP_LINE => 'bin/znuny.Console.pl Admin::Article::StorageSwitch ',
+        Arguments => [ 'bin/znuny.Console.pl', '', 'Admin::Article::SwitchStorage' ],
         Result    => "--target
+--source
 --tickets-closed-before-date
 --tickets-closed-before-days
+--tickets-created-before-date
+--tickets-created-before-days
 --tolerant
 --micro-sleep
 --force-pid",
     },
     {
         Name      => 'Argument list limitted',
-        COMP_LINE => 'bin/otrs.Console.pl Admin::Article::StorageSwitch --to',
-        Arguments => [ 'bin/otrs.Console.pl', '--to', 'Admin::Article::SwitchStorage' ],
+        COMP_LINE => 'bin/znuny.Console.pl Admin::Article::StorageSwitch --to',
+        Arguments => [ 'bin/znuny.Console.pl', '--to', 'Admin::Article::SwitchStorage' ],
         Result    => "--tolerant",
     },
 );

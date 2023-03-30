@@ -18,29 +18,33 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $SystemAddressObject  = $Kernel::OM->Get('Kernel::System::SystemAddress');
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $HelperObject        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject        = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
+        my $ConfigObject        = $Kernel::OM->Get('Kernel::Config');
+        my $ArticleObject       = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $SysConfigObject     = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Disable check of email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => '0',
         );
 
-        my %AgentTicketEmailConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %AgentTicketEmailConfig = $SysConfigObject->SettingGet(
             Name => 'Frontend::Module###AgentTicketEmail',
         );
 
@@ -141,7 +145,7 @@ $Selenium->RunTest(
         }
 
         # Create and login test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -151,7 +155,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             {
@@ -357,7 +361,7 @@ $Selenium->RunTest(
 
         # Disable 'Frontend::Module###AgentTicketEmail' does not remove split target 'Email ticket'.
         # See bug#13690 (https://bugs.otrs.org/show_bug.cgi?id=13690) for more information.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => "Frontend::Module###AgentTicketEmail",
         );
@@ -397,7 +401,7 @@ $Selenium->RunTest(
 
         # Check customer information widget (https://bugs.otrs.org/show_bug.cgi?id=14414).
         # Enable AgentTicketEmail frontend module.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => "Frontend::Module###AgentTicketEmail",
             Value => $AgentTicketEmailConfig{EffectiveValue},
@@ -407,7 +411,7 @@ $Selenium->RunTest(
         my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my @TestCustomerUsers;
         for ( 1 .. 3 ) {
-            my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+            my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
                 Groups => ['admin'],
             ) || die 'Did not get test customer user';
 
@@ -418,7 +422,7 @@ $Selenium->RunTest(
             push @TestCustomerUsers, \%TestCustomerUserData;
         }
 
-        my $TestRandomID = $Helper->GetRandomID();
+        my $TestRandomID = $HelperObject->GetRandomID();
 
         # Create test ticket with second customer user.
         my $TestTicketID = $TicketObject->TicketCreate(
@@ -495,7 +499,7 @@ $Selenium->RunTest(
                 # Check if the first radio button is selected.
                 $Self->True(
                     $Selenium->execute_script(
-                        "return \$('.CustomerKey[value=$CustomerUserOnLoad->{UserLogin}]').siblings('.CustomerTicketRadio').prop('checked') == true;"
+                        "return \$('.CustomerKey[value=$CustomerUserOnLoad->{UserLogin}]').siblings('.RadioRound').prop('checked') == true;"
                     ),
                     "On page load - Customer user '$CustomerUserOnLoad->{UserLogin}' is checked correctly",
                 );
@@ -534,7 +538,7 @@ $Selenium->RunTest(
                 if ( $Test->{ClickRadioButtons} ) {
                     for my $Number ( 0 .. $#TestCustomerUsers ) {
                         $Selenium->execute_script(
-                            "\$('.CustomerKey[value=$TestCustomerUsers[$Number]->{UserLogin}]').siblings('.CustomerTicketRadio').trigger('click');"
+                            "\$('.CustomerKey[value=$TestCustomerUsers[$Number]->{UserLogin}]').siblings('.RadioRound').trigger('click');"
                         );
                         $Selenium->WaitFor(
                             JavaScript =>

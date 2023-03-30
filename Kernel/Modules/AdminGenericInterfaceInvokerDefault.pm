@@ -188,6 +188,10 @@ sub _AddAction {
                 Type  => 'String',
                 Check => 'MappingType',
             },
+            {
+                Name => 'GetAllArticleAttachments',
+                Type => 'String',
+            },
         ],
     );
 
@@ -210,8 +214,9 @@ sub _AddAction {
     }
 
     my $InvokerConfig = {
-        Description => $GetParam->{Description},
-        Type        => $GetParam->{InvokerType},
+        Description              => $GetParam->{Description},
+        Type                     => $GetParam->{InvokerType},
+        GetAllArticleAttachments => $GetParam->{GetAllArticleAttachments},
     };
 
     # Validation errors.
@@ -347,6 +352,10 @@ sub _ChangeAction {
                 Type    => 'String',
                 Default => 'Ticket',
             },
+            {
+                Name => 'GetAllArticleAttachments',
+                Type => 'String',
+            },
         ],
     );
 
@@ -380,7 +389,8 @@ sub _ChangeAction {
         $Errors{InvokerServerError} = 'ServerError';
     }
 
-    $InvokerConfig->{Description} = $GetParam->{Description};
+    $InvokerConfig->{Description}              = $GetParam->{Description};
+    $InvokerConfig->{GetAllArticleAttachments} = $GetParam->{GetAllArticleAttachments};
 
     if (%Errors) {
         return $Self->_ShowScreen(
@@ -807,6 +817,21 @@ sub _ShowScreen {
             SelectedValue => $Param{EventType},
             PossibleNone  => 0,
             Class         => 'Modernize',
+        );
+    }
+
+    if ( $TemplateData{InvokerType} eq 'Ticket::Generic' ) {
+        $TemplateData{GetAllArticleAttachmentsStrg} = $LayoutObject->BuildSelection(
+            Data => {
+                0 => 'no',
+                1 => 'yes',
+            },
+            Name         => 'GetAllArticleAttachments',
+            Sort         => 'AlphanumericValue',
+            SelectedID   => $Param{InvokerConfig}->{GetAllArticleAttachments} // 0,
+            PossibleNone => 0,
+            Class        => 'Modernize',
+            Translation  => 1,
         );
     }
 

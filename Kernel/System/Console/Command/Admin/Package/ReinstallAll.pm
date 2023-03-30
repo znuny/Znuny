@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Reinstall all OTRS packages that are not correctly deployed.');
+    $Self->Description('Reinstall all packages that are not correctly deployed.');
     $Self->AddOption(
         Name        => 'force',
         Description => 'Force package reinstallation even if validation fails.',
@@ -45,7 +45,7 @@ sub Run {
 
     my $HideDeploymentInfoOption = $Self->GetOption('hide-deployment-info') || 0;
 
-    $Self->Print("<yellow>Reinstalling all OTRS packages that are not correctly deployed...</yellow>\n");
+    $Self->Print("<yellow>Reinstalling all packages that are not correctly deployed...</yellow>\n");
 
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 

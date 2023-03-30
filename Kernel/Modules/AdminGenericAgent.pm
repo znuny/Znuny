@@ -12,6 +12,8 @@ package Kernel::Modules::AdminGenericAgent;
 use strict;
 use warnings;
 
+use URI::Escape;
+
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
@@ -112,7 +114,7 @@ sub Run {
             NewParamValue1 NewParamValue2 NewParamValue3 NewParamValue4
             NewParamKey5 NewParamKey6 NewParamKey7 NewParamKey8
             NewParamValue5 NewParamValue6 NewParamValue7 NewParamValue8
-            NewLockID NewDelete NewCMD NewSendNoNotification NewArchiveFlag
+            NewLockID NewDelete NewSendNoNotification NewArchiveFlag
             ScheduleLastRun Valid
             )
             )
@@ -302,6 +304,7 @@ sub Run {
                     )
                 {
                     my $Profile = $Self->{Profile} || '';
+                    $Profile = uri_escape($Profile);    # See internal issue #477.
                     return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Subaction=Update;Profile=$Profile" );
                 }
                 else {
@@ -899,7 +902,6 @@ sub _MaskUpdate {
         Class      => 'Modernize',
     );
 
-    $JobData{AllowCustomScriptExecution} = $ConfigObject->Get('Ticket::GenericAgentAllowCustomScriptExecution') || 0;
     $JobData{AllowCustomModuleExecution} = $ConfigObject->Get('Ticket::GenericAgentAllowCustomModuleExecution') || 0;
 
     $LayoutObject->Block(

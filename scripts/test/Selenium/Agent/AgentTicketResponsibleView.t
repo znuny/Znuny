@@ -18,29 +18,32 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Enable ticket responsible feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1
         );
 
         # Create test user .
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -74,7 +77,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketResponsibleView screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketResponsibleView");
@@ -89,7 +92,10 @@ $Selenium->RunTest(
             );
             $Element->is_enabled();
             $Element->is_displayed();
-            $Element->VerifiedClick();
+
+            if ( $Filter ne 'All' ) {
+                $Element->VerifiedClick();
+            }
 
             # Expect to find no tickets for Reminder Reached filter.
             if ( $Filter eq 'ReminderReached' ) {
@@ -103,10 +109,13 @@ $Selenium->RunTest(
             # Check different views for filters.
             for my $View (qw(Small Medium Preview)) {
 
-                # Click on viewer controller.
-                $Selenium->find_element(
-                    "//a[contains(\@href, \'Action=AgentTicketResponsibleView;Filter=$Filter;View=$View;\' )]"
-                )->VerifiedClick();
+                if ( $View ne 'Small' ) {
+
+                    # Click on viewer controller.
+                    $Selenium->find_element(
+                        "//a[contains(\@href, \'Action=AgentTicketResponsibleView;Filter=$Filter;View=$View;\' )]"
+                    )->VerifiedClick();
+                }
 
                 # Check screen output.
                 $Selenium->find_element( "table",             'css' );
@@ -184,7 +193,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

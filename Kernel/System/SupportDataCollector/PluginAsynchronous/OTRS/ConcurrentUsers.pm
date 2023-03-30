@@ -18,9 +18,7 @@ use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::AuthSession',
-    'Kernel::System::SystemData',
     'Kernel::System::DateTime',
 );
 
@@ -74,7 +72,7 @@ sub Run {
         }
 
         $Self->AddResultInformation(
-            DisplayPath => Translatable('OTRS') . '/' . Translatable('Concurrent Users'),
+            DisplayPath => Translatable('Znuny') . '/' . Translatable('Concurrent Users'),
             Identifier  => $Identifier,
             Label       => "Max. $Label",
             Value       => $MaxValue,
@@ -137,10 +135,10 @@ sub RunAsynchronous {
     # get AuthSession object
     my $AuthSessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
 
-    # delete the old session ids
-    my @Expired = $AuthSessionObject->GetExpiredSessionIDs();
-    for my $Try ( 0 .. 1 ) {
-        for my $SessionID ( @{ $Expired[$_] } ) {
+    # delete the old session IDs
+    my @ExpiredOrIdleSessionIDs = $AuthSessionObject->GetExpiredSessionIDs();
+    for my $ExpiredOrIdleSessionIDs (@ExpiredOrIdleSessionIDs) {
+        for my $SessionID ( @{$ExpiredOrIdleSessionIDs} ) {
             $AuthSessionObject->RemoveSessionID( SessionID => $SessionID );
         }
     }

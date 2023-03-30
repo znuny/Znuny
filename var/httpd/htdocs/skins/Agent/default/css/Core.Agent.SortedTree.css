@@ -15,58 +15,91 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 @media screen,projection,tv,handheld {
 
 .SortableList {
-    border: 1px solid #ddd;
-    padding: 10px 10px 3px 10px;
-    width: 80%;
-    background: #eee;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    padding: var(--padding-md);
+    width: 100%;
+    background: var(--main-bg-color);
+    border-radius: var(--border-radius-xs);
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-sm);
+}
+
+.SortableList > li {
+    width: calc(100% - 35px);
 }
 
 .SortableList li {
-    margin-bottom: 7px;
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-sm);
 }
 
 .SortableList li ul {
-    margin-left: 20px;
-    margin-top: 7px;
+    margin-left: var(--margin-lg);
+}
+
+.SortableList ul.ui-sortable {
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-sm);
 }
 
 .SortableList li span {
-    background-color: #ddd;
-    font-size: 11px;
-    line-height: 12px;
-    margin-bottom: 5px;
-    margin-right: 5px;
-    padding: 5px 25px 5px 15px;
     position: relative;
+    display: flex;
+    flex-flow: row;
+    border-radius: var(--border-radius-xxs);
+    align-items: stretch;
+    padding: 0;
+    width: 60%;
 }
 
 .SortableList li span.Icon {
-    padding: 0px;
     position: absolute;
     cursor: pointer;
-    height: 25px;
-    width: 21px;
-    right: -26px;
-    top: -1px;
+    height: 24px;
+    width: 24px;
+    right: -30px;
+    top: 8px;
     display: none;
     background: none;
-    color: #000;
 }
 
-.SortableList li span:hover > span.Icon {
+.SortableList li span.Icon:hover {
+    background: var(--icon-hover-color);
+}
+
+.SortableList li span.Icon:hover i {
+    color: var(--gray-semi-dark);
+}
+
+.SortableList li span.Icon i {
+    top: 4px;
+    left: 5px;
+}
+
+.SortableList li:hover span > span.Icon {
     display: block;
 }
 
 .SortableList li span input {
-    border: 0px;
-    font-size: 11px;
-    background-color: #ddd;
+    border: 0;
+    background: var(--gray-semi-light);
+    border: var(--border-width) var(--border-solid) var(--border-color);
     box-shadow: none;
-    color: #777;
+    color: var(--main-font-color);
+    width: auto;
+    padding: var(--padding-sm) var(--padding-xl);
+    font-size: var(--main-font-size);
+}
+
+.SortableList li span:hover input {
+    background: var(--icon-hover-color);
 }
 
 .SortableList li span input:focus {
-    color: #000;
+    color: var(--black);
 }
 
 .SortableList li span em {
@@ -74,40 +107,46 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .SortableList li span strong {
-    background-color: #bbb;
-    color: #eee;
     cursor: pointer;
-    display: block;
-    font-size: 11px;
     font-weight: normal;
-    padding: 4px 6px 6px;
+    padding: 0 var(--padding-sm);
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: var(--border-radius-xxs);
+}
+
+.SortableList li span strong > i {
+    position: relative;
+    left: unset;
+    top: 5px;
+}
+
+.SortableList li span strong:hover > i {
+    color: var(--gray-dark);
 }
 
 .SortableList li span i {
-    color: #bbb;
-    font-size: 14px;
+    color: var(--gray-semi-dark);
+    font-size: 18px;
     position: absolute;
-    left: 6px;
-    top: 5px;
+    left: 10px;
+    top: 12px;
     cursor: pointer;
-    width: 10px;
-    display: block;
 }
 
-.SortableList li span:hover i {
-    color: #777;
+.SortableList li span:hover > i {
+    color: var(--gray-dark);
 }
 
 div.AddElement {
-    background: #ddd;
-    border: 1px solid #ddd;
-    font-size: 11px;
-    padding: 3px 10px;
-    width: 80%;
+    background: var(--btn-filter-dropdown-hover-color);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    padding: var(--padding-md);
+    width: 100%;
     margin-bottom: 10px;
+    border-radius: var(--border-radius-xs);
 }
 
 .SortableList .ElementTemplate {

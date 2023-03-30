@@ -17,53 +17,55 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
         my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
         my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Internal');
+        my $SysConfigObject      = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $CacheObject          = $Kernel::OM->Get('Kernel::System::Cache');
+        my $MainObject           = $Kernel::OM->Get('Kernel::System::Main');
+        my $WebUserAgentObject   = $Kernel::OM->Get('Kernel::System::WebUserAgent');
 
-        my %OutputFilterTextAutoLink = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %OutputFilterTextAutoLink = $SysConfigObject->SettingGet(
             Name    => 'Frontend::Output::FilterText###OutputFilterTextAutoLink',
             Default => 1,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::Output::FilterText###OutputFilterTextAutoLink',
             Value => $OutputFilterTextAutoLink{EffectiveValue},
         );
 
-        my %OutputFilterTextAutoLinkCVE = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %OutputFilterTextAutoLinkCVE = $SysConfigObject->SettingGet(
             Name    => 'Frontend::Output::OutputFilterTextAutoLink###CVE',
             Default => 1,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::Output::OutputFilterTextAutoLink###CVE',
             Value => $OutputFilterTextAutoLinkCVE{EffectiveValue},
         );
 
         # Disable RichText and zoom article forcing, in order to get inline HTML attachment (file-1.html) to show up.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::ZoomRichTextForce',
             Value => 0,
         );
 
         # Enable meta floaters for AgentTicketZoom
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::ZoomCollectMeta',
             Value => 1
         );
-
-        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         my $SettingName = 'Ticket::Frontend::ZoomCollectMetaFilters###CVE-Mitre';
 
@@ -71,7 +73,7 @@ $Selenium->RunTest(
             Name => $SettingName,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => $SettingName,
             Value => $Setting{EffectiveValue},
@@ -83,14 +85,14 @@ $Selenium->RunTest(
             Name => $SettingName,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => $SettingName,
             Value => $Setting{EffectiveValue},
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -135,7 +137,7 @@ $Selenium->RunTest(
             # Create article for test ticket with attachment.
             my $Location = $ConfigObject->Get('Home')
                 . "/scripts/test/sample/StdAttachment/$TestAttachment->{Name}";
-            my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+            my $ContentRef = $MainObject->FileRead(
                 Location => $Location,
                 Mode     => 'binmode',
             );
@@ -202,7 +204,7 @@ Something: $CVENumber): Hard-coded Credentials"
                     "Image for $CVEConfig->{Description} link is found - $CVEConfig->{Image}",
                 );
 
-                my %Response = $Kernel::OM->Get('Kernel::System::WebUserAgent')->Request(
+                my %Response = $WebUserAgentObject->Request(
                     Type => 'GET',
                     URL  => $CVEConfig->{Image},
                 );
@@ -226,7 +228,7 @@ Something: $CVENumber): Hard-coded Credentials"
             }
 
             # set download type to inline
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'AttachmentDownloadType',
                 Value => 'inline'
@@ -268,7 +270,7 @@ Something: $CVENumber): Hard-coded Credentials"
 
         # Make sure the cache is correct.
         for my $Cache (qw( Ticket CustomerUser )) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => $Cache );
+            $CacheObject->CleanUp( Type => $Cache );
         }
 
     }

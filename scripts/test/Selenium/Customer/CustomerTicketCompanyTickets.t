@@ -19,17 +19,17 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-
-        # create test customer user
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate() || die "Did not get test customer user";
-
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
         my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
         my $CustomerGroupObject   = $Kernel::OM->Get('Kernel::System::CustomerGroup');
         my $GroupObject           = $Kernel::OM->Get('Kernel::System::Group');
         my $QueueObject           = $Kernel::OM->Get('Kernel::System::Queue');
         my $TicketObject          = $Kernel::OM->Get('Kernel::System::Ticket');
+
+        # create test customer user
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate() || die "Did not get test customer user";
 
         # create test ticket
         my $TicketNumber = $TicketObject->TicketCreateNumber();
@@ -50,28 +50,28 @@ $Selenium->RunTest(
             "Ticket is created - $TicketID",
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerGroupAlwaysGroups',
             Value => [],
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerGroupCompanyAlwaysGroups',
             Value => [],
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerGroupSupport',
             Value => 1,
         );
         my $PermissionContextDirect          = 'UnitTestPermission-direct';
         my $PermissionContextOtherCustomerID = 'UnitTestPermission-other-CustomerID';
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerGroupPermissionContext',
             Value => {
@@ -79,7 +79,7 @@ $Selenium->RunTest(
                 '100-CustomerID-other' => { Value => $PermissionContextOtherCustomerID },
             },
         );
-        $Kernel::OM->Get('Kernel::Config')->Set(
+        $ConfigObject->Set(
             Key   => 'CustomerGroupPermissionContext',
             Value => {
                 '001-CustomerID-same'  => { Value => $PermissionContextDirect },
@@ -212,7 +212,7 @@ $Selenium->RunTest(
             Password => $TestCustomerUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketOverview;Subaction=CompanyTickets");
 
@@ -410,7 +410,7 @@ $Selenium->RunTest(
             }
 
             $Success = $DBObject->Do(
-                SQL  => "DELETE FROM groups WHERE id = ?",
+                SQL  => "DELETE FROM permission_groups WHERE id = ?",
                 Bind => [ \$GroupID ],
             );
             $Self->True(

@@ -248,24 +248,6 @@ my @Tests = (
         Success => 0,
     },
     {
-        Name   => 'OTRSBusiness only',
-        Config => {
-            InstalledPackages => [],
-            OnlinePackages    => [],
-        },
-        OTRSBusinessOptions => {
-            OTRSBusinessIsInstalled  => 1,
-            OTRSBusinessIsUpdateable => 1,
-        },
-        Success        => 1,
-        ExpectedResult => {
-            InstallOrder => {
-                OTRSBusiness => 9999,
-            },
-            Failed => {},
-        },
-    },
-    {
         Name   => 'ITSM 5.0.17 to 5.0.21',
         Config => {
             InstalledPackages => \@InstalledITSM5017,
@@ -281,31 +263,6 @@ my @Tests = (
                 ITSMCore                      => 5,
                 ITSMIncidentProblemManagement => 1,
                 ITSMServiceLevelManagement    => 1,
-            },
-            Failed => {},
-        },
-    },
-    {
-        Name   => 'ITSM 5.0.17 to 5.0.21 W/OTRSBusiness',
-        Config => {
-            InstalledPackages => \@InstalledITSM5017,
-            OnlinePackages    => \@OnlineITSM5021,
-        },
-        OTRSBusinessOptions => {
-            OTRSBusinessIsInstalled  => 1,
-            OTRSBusinessIsUpdateable => 1,
-        },
-        Success        => 1,
-        ExpectedResult => {
-            InstallOrder => {
-                ImportExport                  => 1,
-                GeneralCatalog                => 6,
-                ITSMChangeManagement          => 1,
-                ITSMConfigurationManagement   => 1,
-                ITSMCore                      => 5,
-                ITSMIncidentProblemManagement => 1,
-                ITSMServiceLevelManagement    => 1,
-                OTRSBusiness                  => 9999,
             },
             Failed => {},
         },
@@ -670,29 +627,10 @@ TEST:
 for my $Test (@Tests) {
 
     $Kernel::OM->ObjectsDiscard(
-        Objects => [ 'Kernel::System::OTRSBusiness', 'Kernel::System::Package' ],
+        Objects => ['Kernel::System::Package'],
     );
 
-    $Test->{OTRSBusinessOptions}->{OTRSBusinessIsInstalled}  // 0;
-    $Test->{OTRSBusinessOptions}->{OTRSBusinessIsUpdateable} // 0;
-
-    no warnings 'once';    ## no critic
-    local *Kernel::System::OTRSBusiness::OTRSBusinessIsInstalled = sub {
-        if ( $Test->{OTRSBusinessOptions}->{OTRSBusinessIsInstalled} ) {
-            return 1;
-        }
-        return 0;
-    };
-    local *Kernel::System::OTRSBusiness::OTRSBusinessIsUpdateable = sub {
-        if ( $Test->{OTRSBusinessOptions}->{OTRSBusinessIsUpdateable} ) {
-            return 1;
-        }
-        return 0;
-    };
-    use warnings;
-
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    my $PackageObject      = $Kernel::OM->Get('Kernel::System::Package');
+    my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
     my %Result = $PackageObject->PackageInstallOrderListGet( %{ $Test->{Config} } );
 
@@ -714,7 +652,7 @@ for my $Test (@Tests) {
 }
 continue {
     $Kernel::OM->ObjectsDiscard(
-        Objects => [ 'Kernel::System::OTRSBusiness', 'Kernel::System::Package' ],
+        Objects => ['Kernel::System::Package'],
     );
 }
 

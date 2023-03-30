@@ -18,20 +18,23 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
+        my $MainObject    = $Kernel::OM->Get('Kernel::System::Main');
+
         my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Check to see tickets in plain view.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::PlainView',
             Value => 1
@@ -77,10 +80,10 @@ $Selenium->RunTest(
         );
 
         # Write test sample email as article plain.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/EmailParser/PostMaster-Test1.box";
 
-        my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+        my $ContentRef = $MainObject->FileRead(
             Location => $Location,
             Mode     => 'utf8',
             Result   => 'SCALAR',
@@ -98,7 +101,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -163,7 +166,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

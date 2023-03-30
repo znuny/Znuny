@@ -18,17 +18,19 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0,
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -93,15 +95,11 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText ( 'Type Management', 'Add Type' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check form action.
@@ -111,7 +109,7 @@ $Selenium->RunTest(
         );
 
         # Create a real test type.
-        my $TypeRandomID = "Type" . $Helper->GetRandomID();
+        my $TypeRandomID = "Type" . $HelperObject->GetRandomID();
 
         $Selenium->find_element( "#Name", 'css' )->send_keys($TypeRandomID);
         $Selenium->InputFieldValueSet(
@@ -140,15 +138,11 @@ $Selenium->RunTest(
         $Selenium->find_element( $TypeRandomID, 'link_text' )->VerifiedClick();
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText ( 'Type Management', 'Edit Type: ' . $TypeRandomID ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check form actions.
@@ -183,7 +177,7 @@ $Selenium->RunTest(
         my $DefaultTicketType = $ConfigObject->Get('Ticket::Type::Default');
 
         # Set test Type as a default ticket type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type::Default',
             Value => $TypeRandomID
@@ -209,7 +203,7 @@ $Selenium->RunTest(
         ) || die;
 
         # Reset default ticket type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type::Default',
             Value => $DefaultTicketType
@@ -233,6 +227,22 @@ $Selenium->RunTest(
                 "return \$('tr.Invalid td a:contains($TypeRandomID)').length"
             ),
             "There is a class 'Invalid' for test Type",
+        );
+
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All Invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
         );
 
         # Check overview page.
@@ -262,7 +272,6 @@ $Selenium->RunTest(
         # Since there are no tickets that rely on our test types, we can remove them again
         # from the DB.
         if ($TypeRandomID) {
-            my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
             $TypeRandomID = $DBObject->Quote($TypeRandomID);
             my $Success = $DBObject->Do(
                 SQL  => "DELETE FROM ticket_type WHERE name = ?",
@@ -275,7 +284,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Type',
         );
 

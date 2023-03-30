@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::SysConfig::ValueType::Entity;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
 use warnings;
@@ -22,7 +22,6 @@ our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::SysConfig::EntityType',
 );
 
 =head1 NAME
@@ -193,7 +192,7 @@ Extracts the effective value from a XML parsed setting.
         Name           => 'SettingName',
         EffectiveValue => '3 medium',       # (optional)
         DefaultValue   => '3 medium',       # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         RW             => 1,                # (optional) Allow editing. Default 0.
         Item           => [                 # (optional) XML parsed item
             {
@@ -326,6 +325,7 @@ sub SettingRender {
     $HTML .= $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildSelection(
         Data          => \@EntityValues,
         Name          => $Param{Name},
+        Sort          => "AlphanumericValue",
         ID            => $Param{Name} . $Param{IDSuffix},
         Disabled      => $Param{RW} ? 0 : 1,
         SelectedValue => $EffectiveValue,

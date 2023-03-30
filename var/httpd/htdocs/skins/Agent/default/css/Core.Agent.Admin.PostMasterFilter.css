@@ -20,38 +20,39 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  */
 
 label.Negate {
-	background: #eee;
-	display: inline-block;
-	margin: 0px 10px 0px 5px;
-	padding: 0px 2px 0px 7px;
+    border: var(--border-width) var(--border-solid) var(--gray-semi-light);
+    padding: 8px var(--padding-sm);
+    border-radius: var(--border-radius-xs);
+    cursor: pointer;
 }
 
-label:nth-of-type(2) {
-	margin-left: 7px;
-}
+/*label:nth-of-type(2) {
+    margin-left: 7px;
+}*/
 
 label.Negate.Checked {
-	background: #777;
-	color: #fff;
+    background: var(--gray-semi-light);
 }
 
-label.Negate input {
-	position: relative;
-	left: -3px;
+/*label.Negate input {
+    position: relative;
+    left: -3px;
 }
 
 .FilterFields label + input,
 .FilterFields label + .InputField_Container {
-	margin-left: 5px;
+    margin-left: 5px;
 }
 
 .FilterFields label.RightLabel {
-	margin-left: 15px;
-}
+    margin-left: 15px;
+}*/
 
+/*
 div.InputField_InputContainer .InputField_Search {
-	max-width: 400px !important;
+    max-width: 400px !important;
 }
+*/
 
 
 } /* end @media */

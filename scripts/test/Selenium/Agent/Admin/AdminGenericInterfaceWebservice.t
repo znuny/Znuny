@@ -20,37 +20,32 @@ my $CheckBredcrumb = sub {
     my %Param = @_;
 
     my $BreadcrumbText = $Param{BreadcrumbText} || '';
-    my $Count          = 1;
-
     for my $BreadcrumbText ( 'Web Service Management', $BreadcrumbText ) {
-        $Self->Is(
-            $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-            $BreadcrumbText,
-            "Breadcrumb text '$BreadcrumbText' is found on screen"
+        $Selenium->ElementExists(
+            Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+            SelectorType => 'css',
         );
-
-        $Count++;
     }
 };
 
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
-        my $Home        = $ConfigObject->Get('Home');
 
         # Login as test user.
         $Selenium->Login(
@@ -95,7 +90,7 @@ $Selenium->RunTest(
 
         my %WebserviceNames = (
             webserviceconfig_1 => 'webserviceconfig_1',
-            webserviceconfig_2 => $Helper->GetRandomID(),
+            webserviceconfig_2 => $HelperObject->GetRandomID(),
         );
 
         for my $Webservice (
@@ -112,7 +107,7 @@ $Selenium->RunTest(
             $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('.Dialog.Modal').length" );
 
             my $File     = $Webservice . '.yml';
-            my $Location = "$Home/scripts/test/sample/Webservice/$File";
+            my $Location = "$Selenium->{Home}/scripts/test/sample/Webservice/$File";
             my $Name     = $WebserviceNames{$Webservice};
 
             if ( $Name ne $Webservice ) {
@@ -160,6 +155,22 @@ $Selenium->RunTest(
                     "return \$('tr.Invalid td:contains($Name)').length"
                 ),
                 "There is a class 'Invalid' for test web service",
+            );
+
+            # Checks for AdminValidFilter
+            $Self->True(
+                $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+                "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+            );
+            $Selenium->find_element( "#ValidFilter", 'css' )->click();
+            $Self->False(
+                $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+                "AdminValidFilter - All invalid entries are not displayed.",
+            );
+            $Selenium->find_element( "#ValidFilter", 'css' )->click();
+            $Self->True(
+                $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+                "AdminValidFilter - All invalid entries are displayed again.",
             );
 
             # Check web service values.

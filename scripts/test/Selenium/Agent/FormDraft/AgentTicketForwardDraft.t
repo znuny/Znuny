@@ -18,30 +18,36 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
+        $HelperObject->ConfigSettingChange(
+            Key   => 'CheckMXRecord',
+            Value => 0,
+        );
+
         # Disable RichText control.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Enable FormDraft in AgentTicketForward screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => "Ticket::Frontend::AgentTicketForward###FormDraft",
             Value => 1,
         );
 
         # Change EmailFrom in messages to AgentName.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::DefineEmailFrom',
             Value => 'AgentName',
@@ -51,11 +57,11 @@ $Selenium->RunTest(
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Get RandomID.
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test customer.
         my $TestCustomer       = 'Customer' . $RandomID;
-        my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomer,
             UserLastname   => $TestCustomer,
@@ -109,7 +115,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -119,7 +125,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to forward view of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketForward;TicketID=$TicketID");
@@ -175,7 +181,7 @@ $Selenium->RunTest(
 
                 # Upload a file.
                 $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $ConfigObject->Get('Home') . "/scripts/test/sample/Main/Main-Test1.pdf" );
+                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf" );
 
                 $Selenium->WaitFor(
                     JavaScript =>
@@ -353,7 +359,7 @@ $Selenium->RunTest(
 
                 # Upload a file.
                 $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $ConfigObject->Get('Home') . "/scripts/test/sample/Main/Main-Test1.doc" );
+                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc" );
 
                 $Selenium->WaitFor(
                     JavaScript =>
@@ -392,7 +398,7 @@ $Selenium->RunTest(
         );
 
         # Create second test user login.
-        my $TestUserLogin2 = $Helper->TestUserCreate(
+        my $TestUserLogin2 = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

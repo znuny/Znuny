@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -36,24 +37,34 @@ Core.Agent.Admin.Group = (function (TargetNS) {
                 return false;
             }
 
-            Core.UI.Dialog.ShowContentDialog('<p style="width:400px;">' + Core.Language.Translate("WARNING: When you change the name of the group 'admin', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.") + '</p>', '', '150px', 'Center', true, [
-                {
-                    Label: Core.Language.Translate('Cancel'),
-                    Function: function () {
-                        Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
-                        Core.Form.EnableForm($('form#GroupUpdate'));
-                        $('#GroupName').focus();
-                    }
-                },
-                {
-                    Label: Core.Language.Translate('Confirm'),
-                    Function: function () {
-                        Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
-                        Form.submit();
+            Core.UI.Dialog.ShowDialog({
+                HTML: '<p style="width:400px;">' + Core.Language.Translate("WARNING: When you change the name of the group 'admin', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.") + '</p>',
+                Title: Core.Language.Translate("Warning"),
+                Modal: true,
+                CloseOnClickOutside: false,
+                CloseOnEscape: true,
+                PositionTop: '150px',
+                PositionLeft: 'Center',
+                Buttons: [
+                    {
+                        Label: Core.Language.Translate('Cancel'),
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                            Core.Form.EnableForm($('form#GroupUpdate'));
+                            $('#GroupName').focus();
+                        }
                     },
-                    Class: 'Primary'
-                }
-            ]);
+                    {
+                        Label: Core.Language.Translate('Confirm'),
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                            Form.submit();
+                        },
+                        Class: 'Primary'
+                    }
+                ],
+                AllowAutoGrow: true,
+            });
         });
 
         Core.UI.Table.InitTableFilter($('#FilterGroups'), $('#Groups'));

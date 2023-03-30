@@ -25,13 +25,11 @@ our @ObjectDependencies = (
     'Kernel::Language',
     'Kernel::Output::HTML::Statistics::View',
     'Kernel::System::Cache',
-    'Kernel::System::DB',
-    'Kernel::System::Encode',
+    'Kernel::System::DateTime',
     'Kernel::System::Group',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Storable',
-    'Kernel::System::DateTime',
     'Kernel::System::User',
     'Kernel::System::XML',
 );
@@ -987,7 +985,7 @@ sub GetStaticFiles {
     }
     $Directory .= 'Kernel/System/Stats/Static/';
 
-    if ( !opendir( DIR, $Directory ) ) {
+    if ( !opendir( DIR, $Directory ) ) {    ## no critic
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Can not open Directory: $Directory",
@@ -3568,7 +3566,7 @@ sub _ColumnAndRowTranslation {
 
         # Special handling if the sumfunction is used.
         my $SumColRef;
-        if ( $Param{StatRef}->{SumRow} ) {
+        if ( $Param{StatRef}->{SumCol} ) {
             $SumColRef = pop @HeadOld;
         }
 
@@ -3858,7 +3856,7 @@ sub _AutomaticSampleImport {
     my $Language  = $Kernel::OM->Get('Kernel::Config')->Get('DefaultLanguage');
     my $Directory = $Self->{StatsTempDir};
 
-    if ( !opendir( DIRE, $Directory ) ) {
+    if ( !opendir( DIRE, $Directory ) ) {    ## no critic
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Can not open Directory: $Directory",

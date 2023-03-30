@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::DB;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::FunctionPod)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::FunctionPod)
 
 use strict;
 use warnings;
@@ -343,6 +343,32 @@ sub Quote {
                 Caller   => 1,
                 Priority => 'error',
                 Message  => "Invalid number in query '$Text'!",
+            );
+            return;
+        }
+        return $Text;
+    }
+
+    # quote DateTime
+    if ( $Type eq 'DateTime' ) {
+        if ( $Text !~ m{\A(\d\d\d\d)-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Caller   => 1,
+                Priority => 'error',
+                Message  => "Invalid DateTime in query '$Text'!",
+            );
+            return;
+        }
+        return $Text;
+    }
+
+    # quote Date
+    if ( $Type eq 'Date' ) {
+        if ( $Text !~ m{\A(\d\d\d\d)-(\d\d|\d)-(\d\d|\d)\z} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Caller   => 1,
+                Priority => 'error',
+                Message  => "Invalid Date in query '$Text'!",
             );
             return;
         }
@@ -1111,7 +1137,7 @@ generate SQL condition query based on a search expression
         Key          => 'some_col',
         Value        => '(ABC+DEF)',
         SearchPrefix => '',
-        SearchSuffix => '*'
+        SearchSuffix => '*',
         Extended     => 1, # use also " " as "&&", e.g. "bob smith" -> "bob&&smith"
     );
 
@@ -1140,7 +1166,7 @@ generate SQL condition query based on a search expression
     return the SQL String with ?-values and a array with values references:
 
     $BindModeResult = (
-        'SQL'    => 'WHERE testa LIKE ? AND testb NOT LIKE ? AND testc = ?'
+        'SQL'    => 'WHERE testa LIKE ? AND testb NOT LIKE ? AND testc = ?',
         'Values' => ['a', 'b', 'c'],
     )
 

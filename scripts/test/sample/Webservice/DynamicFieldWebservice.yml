@@ -1,0 +1,22 @@
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: ''
+FrameworkVersion: 6.2.x git
+Provider:
+  Transport:
+    Type: ''
+RemoteSystem: ''
+Requester:
+  Invoker:
+    TestGet:
+      Description: ''
+      Events: ~
+      Type: Test::DynamicFieldWebservice::TestGet
+    TestSearch:
+      Description: ''
+      Events: ~
+      Type: Test::DynamicFieldWebservice::TestSearch
+  Transport:
+    Type: HTTP::REST

@@ -18,11 +18,16 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
         # Overload CustomerUser => Map setting defined in the Defaults.pm.
-        my $DefaultCustomerUser = $Kernel::OM->Get('Kernel::Config')->Get("CustomerUser");
+        my $DefaultCustomerUser = $ConfigObject->Get("CustomerUser");
         $DefaultCustomerUser->{Map}->[5] = [
             'UserEmail',
             'Email',
@@ -35,42 +40,42 @@ $Selenium->RunTest(
             '',
             'AsPopup OTRSPopup_TicketAction',
         ];
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CustomerUser',
             Value => $DefaultCustomerUser,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Do not check service and type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -79,8 +84,8 @@ $Selenium->RunTest(
         my @TicketIDs;
         for my $Count ( 1 .. 2 )
         {
-            my $TestCustomer = 'CustomerUser' . $Helper->GetRandomID();
-            my $UserLogin    = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+            my $TestCustomer = 'CustomerUser' . $HelperObject->GetRandomID();
+            my $UserLogin    = $CustomerUserObject->CustomerUserAdd(
                 Source         => 'CustomerUser',
                 UserFirstname  => $TestCustomer,
                 UserLastname   => $TestCustomer,
@@ -126,7 +131,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketIDs[0]");
 
         # Force sub menus to be visible in order to be able to click one of the links.
@@ -249,7 +254,7 @@ $Selenium->RunTest(
         # Disable CustomerID read only.
         $Selenium->find_element( "a.CancelClosePopup", 'css' )->click();
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketCustomer::CustomerIDReadOnly',
             Value => 0
@@ -277,7 +282,7 @@ $Selenium->RunTest(
                 'return typeof($) === "function" && $("#SelectionCustomerID").length === 1'
         );
 
-        my $RandomCustomerUser = 'RandomCustomerUser' . $Helper->GetRandomID();
+        my $RandomCustomerUser = 'RandomCustomerUser' . $HelperObject->GetRandomID();
         $Selenium->find_element( "#CustomerAutoComplete", 'css' )->clear();
         $Selenium->find_element( "#CustomerID",           'css' )->clear();
         $Selenium->find_element( "#CustomerAutoComplete", 'css' )->send_keys($RandomCustomerUser);
@@ -301,7 +306,7 @@ $Selenium->RunTest(
         );
 
         # Return CustomerID read only to default.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketCustomer::CustomerIDReadOnly',
             Value => 1
@@ -351,7 +356,6 @@ $Selenium->RunTest(
 
         # Delete created test customer users.
         for my $TestCustomer (@TestCustomers) {
-            my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
             $TestCustomer = $DBObject->Quote($TestCustomer);
             my $Success = $DBObject->Do(
                 SQL  => "DELETE FROM customer_user WHERE login = ?",
@@ -362,8 +366,6 @@ $Selenium->RunTest(
                 "Delete customer user - $TestCustomer",
             );
         }
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (

@@ -15,7 +15,6 @@ use warnings;
 use Kernel::System::ObjectManager;    # prevent used once warning
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Ticket::Article',
 );
 

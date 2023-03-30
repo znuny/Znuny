@@ -578,13 +578,15 @@ sub TaskCleanup {
         # get expiration time. 7 days ago system time
         my $ExpiredTime = $SystemTime - ( 60 * 60 * 24 * 7 );
 
-        my $LockTime = $Kernel::OM->Create(
-            'Kernel::System::DateTime',
-            ObjectParams => {
-                String => $Task{LockTime},
-            },
-        );
-
+        my $LockTime;
+        if ( $Task{LockTime} ) {
+            $LockTime = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+                ObjectParams => {
+                    String => $Task{LockTime},
+                },
+            );
+        }
         $LockTime = $LockTime ? $LockTime->ToEpoch() : 0;
 
         # skip if task is not expired
@@ -1555,7 +1557,7 @@ sub CronTaskSummary {
         next JOBNAME if !$JobConfig;
         next JOBNAME if !$JobConfig->{Schedule};
 
-        $TaskLookup{$JobName} = $JobConfig->{Schedule};
+        $TaskLookup{ $Config->{$JobName}->{TaskName} } = $JobConfig->{Schedule};
     }
 
     return $Self->RecurrentTaskSummary(
@@ -1808,9 +1810,9 @@ Returns:
         Type              => 'GenericInterface',
         LastExecutionTime => '2015-01-01 00:00:00',
         LockKey           => 'XYZ',
-        LockTime          => '2015-01-02 00:00:00'
-        CreateTime        => '2015-01-01 00:00:00'
-        ChangeTime        => '2015-01-02 00:00:00'
+        LockTime          => '2015-01-02 00:00:00',
+        CreateTime        => '2015-01-01 00:00:00',
+        ChangeTime        => '2015-01-02 00:00:00',
     );
 
 =cut
@@ -1873,9 +1875,9 @@ Returns:
             Type              => 'GenericInterface',
             LastExecutionTime => '2015-01-01 00:00:00',
             LockKey           => 'XYZ',
-            LockTime          => '2015-01-02 00:00:00'
-            CreateTime        => '2015-01-01 00:00:00'
-            ChangeTime        => '2015-01-02 00:00:00'
+            LockTime          => '2015-01-02 00:00:00',
+            CreateTime        => '2015-01-01 00:00:00',
+            ChangeTime        => '2015-01-02 00:00:00',
         },
         {
             TaskID            => 456,
@@ -1883,9 +1885,9 @@ Returns:
             Type              => 'GenericInterface',
             LastExecutionTime => '2015-01-01 00:00:00',
             LockKey           => 'XYZ',
-            LockTime          => '2015-01-02 00:00:00'
-            CreateTime        => '2015-01-01 00:00:00'
-            ChangeTime        => '2015-01-02 00:00:00'
+            LockTime          => '2015-01-02 00:00:00',
+            CreateTime        => '2015-01-01 00:00:00',
+            ChangeTime        => '2015-01-02 00:00:00',
         },
         # ...
     );

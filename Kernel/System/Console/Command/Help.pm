@@ -18,7 +18,6 @@ use parent qw(
 );
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Main',
 );
 

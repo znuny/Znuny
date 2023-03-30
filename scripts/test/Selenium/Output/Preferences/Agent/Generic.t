@@ -19,7 +19,8 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Enable TicketOverViewPageShown preference.
         for my $View (qw( Small Medium Preview )) {
@@ -44,19 +45,19 @@ $Selenium->RunTest(
             );
 
             my $Key = "PreferencesGroups###TicketOverview" . $View . "PageShown";
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Key   => $Key,
                 Value => \%TicketOverViewPageShown,
             );
 
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => $Key,
                 Value => \%TicketOverViewPageShown,
             );
         }
 
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -66,7 +67,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Go to agent preferences.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentPreferences;Subaction=Group;Group=Miscellaneous");

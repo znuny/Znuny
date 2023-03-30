@@ -63,7 +63,7 @@ returns:
         Hostname     => "servername.example.com",
         OS           => "Linux",
         OSName       => "debian 7.1",
-        Path         => "/home/otrs/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games",
+        Path         => "/home/znuny/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games",
         POSIX        => [
                         "Linux",
                         "servername",
@@ -71,7 +71,7 @@ returns:
                         "#1 SMP Debian 3.2.46-1",
                         "i686",
                       ],
-        User         => "otrs",
+        User         => "znuny",
     );
 
 =cut
@@ -273,6 +273,7 @@ sub PerlInfoGet {
             Net::HTTP
             Net::SSLGlue
             PDF::API2
+            Sisimai
             SOAP::Lite
             Sys::Hostname::Long
             Text::CSV
@@ -345,7 +346,7 @@ returns:
         Product         => "OTRS",
         Version         => "3.3.1",
         DefaultLanguage => "en",
-        Home            => "/opt/otrs",
+        Home            => "/opt/znuny",
         Host            => "prod.otrs.com",
         SystemID        => 70,
     );

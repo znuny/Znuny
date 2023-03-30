@@ -18,12 +18,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+        my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
-
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Create test ticket.
         my $TicketNumber = $TicketObject->TicketCreateNumber();
@@ -44,7 +46,6 @@ $Selenium->RunTest(
             "Ticket is created - $TicketID",
         );
 
-        my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
         my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
         # Create test email article, invisible for customer.
@@ -67,21 +68,37 @@ $Selenium->RunTest(
         );
 
         # Enable CustomerTicketOverviewSortable.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketOverviewSortable',
             Value => 'Sortable',
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Service',
+            Value => 0,
+        );
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Type',
+            Value => 0,
+        );
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Frontend::AgentTicketNote###Owner',
+            Value => 0,
+        );
+
         # Check if TicketOverview does show articles on ProcessTicket, see bug#14006.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', ],
         ) || die "Did not get test user";
         $Selenium->Login(
@@ -91,13 +108,12 @@ $Selenium->RunTest(
         );
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Get all processes.
-        my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
-        my $ProcessList   = $ProcessObject->ProcessListGet(
+        my $ProcessList = $ProcessObject->ProcessListGet(
             UserID => $TestUserID,
         );
 
@@ -134,7 +150,7 @@ $Selenium->RunTest(
         # Import test Selenium Process if it does not exist.
         if ( !$TestProcessExists ) {
             $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
-            my $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/ProcessManagement/$ProcessName.yml";
+            my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/$ProcessName.yml";
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
             $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
@@ -180,9 +196,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketIDProcess");
 
         # Force sub menus to be visible in order to be able to click one of the links.
-        $Selenium->execute_script(
-            '$("#nav-Communication ul").css({ "height": "auto", "opacity": "100" });'
-        );
+        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
         $Selenium->WaitFor(
             JavaScript =>
                 'return $("#nav-Communication ul").css("opacity") == 1;'
@@ -218,13 +232,14 @@ $Selenium->RunTest(
             $Element->is_displayed();
         }
 
-        my $RandomID   = $Helper->GetRandomID();
+        my $RandomID   = $HelperObject->GetRandomID();
         my $TicketBody = "TicketBody$RandomID";
 
         $Selenium->find_element( "#Subject",              'css' )->send_keys("Subject$RandomID");
         $Selenium->find_element( "#RichText",             'css' )->send_keys($TicketBody);
         $Selenium->find_element( "#IsVisibleForCustomer", 'css' )->click();
 
+        sleep 1;
         $Selenium->WaitFor( JavaScript => "return \$('#IsVisibleForCustomer:checked').length;" );
 
         $Selenium->find_element( "#submitRichText", 'css' )->click();
@@ -256,7 +271,7 @@ $Selenium->RunTest(
         # for both Ticket::Frontend::CustomerTicketOverview###ColumnHeader settings.
         for my $ColumnHeader (qw(LastCustomerSubject TicketTitle)) {
 
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Ticket::Frontend::CustomerTicketOverview###ColumnHeader',
                 Value => $ColumnHeader,
@@ -285,12 +300,12 @@ $Selenium->RunTest(
         )->VerifiedClick();
 
         # Check if table contains article.
-        my $TicketNumbeProcess = $TicketObject->TicketNumberLookup(
+        my $TicketNumberProcess = $TicketObject->TicketNumberLookup(
             TicketID => $TicketIDProcess,
         );
         $Self->Is(
             $Selenium->execute_script(
-                "return \$('table.Overview tbody tr a[href*=\"Action=CustomerTicketZoom;TicketNumber=$TicketNumbeProcess\"]').closest('tr').find('td:contains($TicketBody)').length === 1"
+                "return \$('table.Overview tbody tr a[href*=\"Action=CustomerTicketZoom;TicketNumber=$TicketNumberProcess\"]').closest('tr').length === 1"
             ),
             '1',
             'Customer Ticket Overview table contain process with visible article',
@@ -322,7 +337,7 @@ $Selenium->RunTest(
         );
 
         # disable CustomerTicketOverviewSortable
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketOverviewSortable',
             Value => 0

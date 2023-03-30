@@ -16,6 +16,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ACLObject          = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+
         my @Fields = (
             {
                 ID   => 'StateID',
@@ -68,70 +75,66 @@ $Selenium->RunTest(
             }
         };
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ACLObject    = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $RandomID = $HelperObject->GetRandomID();
 
-        my $RandomID = $Helper->GetRandomID();
-
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckMXRecord',
             Value => 0,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###State',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###TicketType',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###Owner',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###Responsible',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###Priority',
             Value => 1,
         );
 
         # Create test user and login.
-        my $TestUserLogin1 = $Helper->TestUserCreate(
+        my $TestUserLogin1 = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
         my $UserObject = $Kernel::OM->Get('Kernel::System::User');
         my $UserID1    = $UserObject->UserLookup(
             UserLogin => $TestUserLogin1,
         );
-        my ( $TestUserLogin2, $UserID2 ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin2, $UserID2 ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         );
 
@@ -282,7 +285,7 @@ EOF
             Password => $TestUserLogin1,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # After login, we need to navigate to the ACL deployment to make the imported ACL work.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminACL;Subaction=ACLDeploy");
@@ -296,13 +299,13 @@ EOF
         );
 
         # Add a customer.
-        my $CustomerUserLogin = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUserLogin = $CustomerUserObject->CustomerUserAdd(
             UserFirstname  => 'Huber',
             UserLastname   => 'Manfred',
             UserCustomerID => 'A124',
-            UserLogin      => 'customeruser_' . $Helper->GetRandomID(),
+            UserLogin      => 'customeruser_' . $HelperObject->GetRandomID(),
             UserPassword   => 'some-pass',
-            UserEmail      => $Helper->GetRandomID() . '@localhost.com',
+            UserEmail      => $HelperObject->GetRandomID() . '@localhost.com',
             ValidID        => 1,
             UserID         => 1,
         );
@@ -540,7 +543,7 @@ EOF
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
 
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -564,8 +567,6 @@ EOF
                 "Deleted Type with ID $TypeID",
             );
         }
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (qw( CustomerUser Type )) {

@@ -18,37 +18,39 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Disable RichText control.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Enable FormDraft in AgentTicketEmailOutbound screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => "Ticket::Frontend::AgentTicketEmailOutbound###FormDraft",
             Value => 1,
         );
 
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
         # Get RandomID.
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test customer.
         my $TestCustomer       = 'Customer' . $RandomID;
-        my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomer,
             UserLastname   => $TestCustomer,
@@ -80,7 +82,6 @@ $Selenium->RunTest(
             "Ticket ID $TicketID is created",
         );
 
-        my $ArticleObject             = $Kernel::OM->Get('Kernel::System::Ticket::Article');
         my $ArticleEmailChannelObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
         # Create test email Article.
@@ -102,7 +103,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -112,7 +113,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to zoom view of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -142,9 +143,7 @@ $Selenium->RunTest(
         };
 
         # Force sub menus to be visible in order to be able to click one of the links.
-        $Selenium->execute_script(
-            '$("#nav-Communication ul").css({ "height": "auto", "opacity": "100" });'
-        );
+        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
         $Selenium->WaitFor( JavaScript => "return \$('#nav-Communication ul').css('opacity') == 1;" );
 
         # Click on EmailOutbound and switch window.
@@ -188,7 +187,7 @@ $Selenium->RunTest(
 
                 # Upload a file.
                 $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $ConfigObject->Get('Home') . "/scripts/test/sample/Main/Main-Test1.pdf" );
+                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf" );
 
                 # Check if uploaded.
                 $Self->Is(
@@ -230,9 +229,7 @@ $Selenium->RunTest(
         );
 
         # Force sub menus to be visible in order to be able to click one of the links.
-        $Selenium->execute_script(
-            '$("#nav-Communication ul").css({ "height": "auto", "opacity": "100" });'
-        );
+        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
         $Selenium->WaitFor( JavaScript => "return \$('#nav-Communication ul').css('opacity') == 1;" );
 
         # Try to create identical FormDraft to check for error.
@@ -385,7 +382,7 @@ $Selenium->RunTest(
 
                 # Upload a file.
                 $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $ConfigObject->Get('Home') . "/scripts/test/sample/Main/Main-Test1.doc" );
+                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc" );
 
                 # Check if uploaded.
                 $Self->Is(
@@ -488,7 +485,6 @@ $Selenium->RunTest(
         );
 
         # Delete test created customer.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         $TestCustomer = $DBObject->Quote($TestCustomer);
         $Success      = $DBObject->Do(
             SQL  => "DELETE FROM customer_user WHERE login = ?",

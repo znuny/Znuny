@@ -2406,8 +2406,15 @@ sub decode_value {
         # extend the array if number of elements is specified
         $#$res = $dimensions[0]-1 if defined $dimensions[0] && @$res < $dimensions[0];
 
-        return defined $class && $class ne 'Array' ? bless($res => $class) : $res;
+# ---
+# Znuny
+# ---
+#         return defined $class && $class ne 'Array' ? bless($res => $class) : $res;
 
+        # Znuny does not support objects for element types given via 'xsi:type' attribute.
+        # Always return the data as an array.
+        return $res;
+# ---
     }
     elsif ($name =~ /^\{$SOAP::Constants::NS_ENC\}Struct$/
         || !$schemaclass->can($method)
@@ -2439,7 +2446,15 @@ sub decode_value {
         }
         # End patch code
 
-        return defined $class && $class ne 'SOAPStruct' ? bless($res => $class) : $res;
+# ---
+# Znuny
+# ---
+#         return defined $class && $class ne 'SOAPStruct' ? bless($res => $class) : $res;
+
+        # Znuny does not support objects for element types given via 'xsi:type' attribute.
+        # Always return the data as a hash.
+        return $res;
+# ---
     }
     else {
         my $res;

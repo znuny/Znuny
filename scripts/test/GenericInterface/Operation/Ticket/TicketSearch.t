@@ -31,7 +31,7 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # search old test tickets
 my @OldTicketIDs = $TicketObject->TicketSearch(
@@ -49,7 +49,7 @@ for my $TicketID (@OldTicketIDs) {
 }
 
 # get a random number
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
@@ -105,14 +105,22 @@ $Self->True(
 );
 
 # get service object
-my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
+my $ServiceObject   = $Kernel::OM->Get('Kernel::System::Service');
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
-# create new service
-my $ServiceID = $ServiceObject->ServiceAdd(
+my %ServiceValues = (
     Name    => 'TestService' . $RandomID,
     ValidID => 1,
     UserID  => 1,
 );
+
+if ($IsITSMInstalled) {
+    $ServiceValues{TypeID}      = 1;
+    $ServiceValues{Criticality} = '3 normal';
+}
+
+# create new service
+my $ServiceID = $ServiceObject->ServiceAdd(%ServiceValues);
 
 # sanity check
 $Self->True(
@@ -757,7 +765,7 @@ for my $Key ( sort keys %TicketEntryFour ) {
 push @TicketIDs, $TicketID4;
 
 # set web service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketSearch-Test-' . $RandomID;
 
 # create web service object
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
@@ -788,7 +796,7 @@ $Self->True(
 );
 
 # get remote host with some precautions for certain unit test systems
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # prepare web service config
 my $RemoteSystem =
@@ -871,7 +879,7 @@ $Self->Is(
 );
 
 # create a new user for current test
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users' ],
 );
 my $Password = $UserLogin;

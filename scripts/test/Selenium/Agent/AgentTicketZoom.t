@@ -47,8 +47,15 @@ my $Hex2RGB = sub {
 
 $Selenium->RunTest(
     sub {
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $MainObject         = $Kernel::OM->Get('Kernel::System::Main');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Overload CustomerUser => Map setting defined in the Defaults.pm.
         my $DefaultCustomerUser = $ConfigObject->Get("CustomerUser");
@@ -64,40 +71,38 @@ $Selenium->RunTest(
             '',
             'AsPopup OTRSPopup_TicketAction',
         ];
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CustomerUser',
             Value => $DefaultCustomerUser,
         );
 
         # Make sure we start with RuntimeDB search.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Hook',
             Value => 'TestTicket#',
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::HookDivider',
             Value => '::',
         );
 
         # Enable NewArticleIgnoreSystemSender config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::NewArticleIgnoreSystemSender',
             Value => 1,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create and login test user.
         my $Language      = 'de';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users' ],
             Language => $Language,
         ) || die "Did not get test user";
-
-        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
         # Get UserID for later manipulation of preferences.
         my $UserID = $UserObject->UserLookup(
@@ -127,15 +132,13 @@ $Selenium->RunTest(
         );
 
         # Create test customer.
-        my $TestCustomerUser = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUser = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Get test customer user ID.
-        my %TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
+        my %TestCustomerUserID = $CustomerUserObject->CustomerUserDataGet(
             User => $TestCustomerUser,
         );
-
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Create test ticket.
         my $TitleRandom  = "Title$RandomID";
@@ -157,15 +160,15 @@ $Selenium->RunTest(
             "Ticket is created - ID $TicketID",
         );
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Phone',
         );
 
         # Get image attachment.
         my $AttachmentName = "StdAttachment-Test1.png";
-        my $Location       = $ConfigObject->Get('Home')
+        my $Location       = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/$AttachmentName";
-        my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+        my $ContentRef = $MainObject->FileRead(
             Location => $Location,
             Mode     => 'binmode',
         );
@@ -212,7 +215,7 @@ $Selenium->RunTest(
             push @ArticleIDs, $ArticleID;
         }
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketZoom for test created ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -270,22 +273,6 @@ $Selenium->RunTest(
             my $Element = $Selenium->find_element("//a[contains(\@href, \'Action=$Action')]");
             $Element->is_enabled();
             $Element->is_displayed();
-        }
-
-        my $OTRSBusinessIsInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-        my $OBTeaser                = $LanguageObject->Translate('All attachments (OTRS Business Solution™)');
-        my $OBTeaserFound           = index( $Selenium->get_page_source(), $OBTeaser ) > -1;
-        if ( !$OTRSBusinessIsInstalled ) {
-            $Self->True(
-                $OBTeaserFound,
-                "OTRSBusiness teaser found on page",
-            );
-        }
-        else {
-            $Self->False(
-                $OBTeaserFound,
-                "OTRSBusiness teaser not found on page",
-            );
         }
 
         # Verify article order in zoom screen.
@@ -370,7 +357,7 @@ $Selenium->RunTest(
         );
 
         # Switch off usage of session cookies.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SessionUseCookie',
             Value => 0,
@@ -412,7 +399,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
 
     }
 );

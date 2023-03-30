@@ -17,7 +17,7 @@ use Kernel::System::DateTime;
 use Kernel::System::VariableCheck qw( IsArrayRefWithData IsHashRefWithData );
 
 our @ObjectDependencies = (
-    'Kernel::Config',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
 );
 

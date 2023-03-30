@@ -48,6 +48,20 @@ sub Run {
         next PARAMNAME if $Key eq 'Action';
 
         $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
+
+        my %SafeGetParam = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+            String       => $GetParam{$Key},
+            NoApplet     => 1,
+            NoObject     => 1,
+            NoEmbed      => 1,
+            NoSVG        => 1,
+            NoImg        => 1,
+            NoIntSrcLoad => 1,
+            NoExtSrcLoad => 1,
+            NoJavaScript => 1,
+        );
+
+        $GetParam{$Key} = $SafeGetParam{String};
     }
 
     my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
@@ -958,61 +972,43 @@ sub Run {
 
         # get plugin list
         $Param{PluginList} = $PluginObject->PluginList();
+        my @PluginGroups = $PluginObject->PluginGroups();
 
-        # new appointment plugin search
-        if ( $GetParam{PluginKey} && ( $GetParam{Search} || $GetParam{ObjectID} ) ) {
-
-            if ( grep { $_ eq $GetParam{PluginKey} } keys %{ $Param{PluginList} } ) {
-
-                # search using plugin
-                my $ResultList = $PluginObject->PluginSearch(
-                    %GetParam,
-                    UserID => $Self->{UserID},
-                );
-
-                $Param{PluginData}->{ $GetParam{PluginKey} } = [];
-                my @LinkArray = sort keys %{$ResultList};
-
-                # add possible links
-                for my $LinkID (@LinkArray) {
-                    push @{ $Param{PluginData}->{ $GetParam{PluginKey} } }, {
-                        LinkID   => $LinkID,
-                        LinkName => $ResultList->{$LinkID},
-                        LinkURL  => sprintf(
-                            $Param{PluginList}->{ $GetParam{PluginKey} }->{PluginURL},
-                            $LinkID
-                        ),
-                    };
-                }
-
-                $Param{PluginList}->{ $GetParam{PluginKey} }->{LinkList} = $LayoutObject->JSONEncode(
-                    Data => \@LinkArray,
-                );
-            }
-        }
-
-        # edit appointment plugin links
-        elsif ( $GetParam{AppointmentID} ) {
-
+        for my $PluginGroup (@PluginGroups) {
+            PLUGIN:
             for my $PluginKey ( sort keys %{ $Param{PluginList} } ) {
-                my $LinkList = $PluginObject->PluginLinkList(
-                    AppointmentID => $GetParam{AppointmentID},
+
+                next PLUGIN if $PluginGroup->{Key} ne $Param{PluginList}->{$PluginKey}->{Block};
+
+                my %Data = $PluginObject->DataGet(
+                    AppointmentID => $Appointment{AppointmentID},
                     PluginKey     => $PluginKey,
-                    UserID        => $Self->{UserID},
+                    UserID        => $Param{UserID},
                 );
-                my @LinkArray;
 
-                $Param{PluginData}->{$PluginKey} = [];
-                for my $LinkID ( sort keys %{$LinkList} ) {
-                    push @{ $Param{PluginData}->{$PluginKey} }, $LinkList->{$LinkID};
-                    push @LinkArray, $LinkList->{$LinkID}->{LinkID};
-                }
-
-                $Param{PluginList}->{$PluginKey}->{LinkList} = $LayoutObject->JSONEncode(
-                    Data => \@LinkArray,
+                my %Plugin = (
+                    %{ $Param{PluginList}->{$PluginKey} },
+                    PluginKey => $PluginKey,
+                    Data      => $Data{Config},
                 );
+
+                my $HTML = $PluginObject->PluginFunction(
+                    PluginKey      => $PluginKey,
+                    PluginFunction => 'RenderOutput',
+                    PluginData     => {
+                        Param           => \%Param,
+                        GetParam        => \%GetParam,
+                        Appointment     => \%Appointment,
+                        Plugin          => \%Plugin,
+                        PermissionLevel => $PermissionLevel{$Permissions},
+                        UserID          => $Self->{UserID},
+                    },
+                );
+                $PluginGroup->{HTML} .= $HTML || '';
             }
         }
+
+        @{ $Param{PluginGroups} } = @PluginGroups;
 
         # html mask output
         $LayoutObject->Block(
@@ -1493,8 +1489,9 @@ sub Run {
         $GetParam{UserID} = $Self->{UserID};
 
         # Get passed plugin parameters.
-        my @PluginParams = grep { $_ =~ /^Plugin_/ } keys %GetParam;
+        my @PluginParams = grep { $_ =~ /^Plugin/ } keys %GetParam;
 
+        my @OldRecurringAppointments;
         if (%Appointment) {
 
             # Continue only if coming from edit screen
@@ -1519,9 +1516,13 @@ sub Run {
 
                 # Remove all existing links.
                 for my $CurrentAppointmentID (@RelatedAppointments) {
-                    my $Success = $PluginObject->PluginLinkDelete(
-                        AppointmentID => $CurrentAppointmentID,
-                        UserID        => $Self->{UserID},
+                    my $Success = $PluginObject->PluginFunction(
+                        PluginKey      => 'TicketLink',
+                        PluginFunction => 'LinkDelete',
+                        PluginData     => {
+                            AppointmentID => $CurrentAppointmentID,
+                            UserID        => $Self->{UserID},
+                        },
                     );
 
                     if ( !$Success ) {
@@ -1533,6 +1534,10 @@ sub Run {
                 }
             }
 
+            # restore old recurring for plugin data deletion
+            @OldRecurringAppointments = $AppointmentObject->AppointmentRecurringGet(
+                AppointmentID => $Appointment{AppointmentID},
+            );
             $Success = $AppointmentObject->AppointmentUpdate(
                 %Appointment,
                 %GetParam,
@@ -1546,62 +1551,52 @@ sub Run {
 
         my $AppointmentID = $GetParam{AppointmentID} ? $GetParam{AppointmentID} : $Success;
 
-        if ($AppointmentID) {
+        # Continue only if coming from edit screen
+        #   (there is at least one passed plugin parameter).
+        if ( $AppointmentID && @PluginParams ) {
 
-            # Continue only if coming from edit screen
-            #   (there is at least one passed plugin parameter).
-            if (@PluginParams) {
+            # Get fresh appointment data.
+            %Appointment = $AppointmentObject->AppointmentGet(
+                AppointmentID => $AppointmentID,
+            );
 
-                # Get fresh appointment data.
-                %Appointment = $AppointmentObject->AppointmentGet(
-                    AppointmentID => $AppointmentID,
+            $Param{PluginList} = $PluginObject->PluginList();
+            my %PluginParam = $PluginObject->PluginGetParam(%Param);
+
+            PLUGIN:
+            for my $PluginKey ( sort keys %{ $Param{PluginList} } ) {
+
+                my %Plugin = (
+                    %{ $Param{PluginList}->{$PluginKey} },
+                    PluginKey => $PluginKey,
+                    Param     => $PluginParam{$PluginKey},
                 );
 
-                # Process all related appointments.
-                my @RelatedAppointments  = ($AppointmentID);
-                my @CalendarAppointments = $AppointmentObject->AppointmentList(
-                    CalendarID => $Appointment{CalendarID},
-                );
-
-                # If we are dealing with a parent, include any child appointments as well.
-                push @RelatedAppointments,
-                    map {
-                    $_->{AppointmentID}
-                    }
-                    grep {
-                    defined $_->{ParentID}
-                        && $_->{ParentID} eq $AppointmentID
-                    } @CalendarAppointments;
-
-                # Process passed plugin parameters.
-                for my $PluginParam (@PluginParams) {
-                    my $PluginData = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
-                        Data => $GetParam{$PluginParam},
+                # delete all old recurring appointments
+                for my $Appointment (@OldRecurringAppointments) {
+                    $PluginObject->PluginFunction(
+                        PluginKey      => $PluginKey,
+                        PluginFunction => 'Delete',
+                        PluginData     => {
+                            GetParam    => \%GetParam,
+                            Appointment => $Appointment,
+                            Plugin      => \%Plugin,
+                            UserID      => $Self->{UserID},
+                        },
                     );
-                    my $PluginKey = $PluginParam;
-                    $PluginKey =~ s/^Plugin_//;
-
-                    # Execute link add method of the plugin.
-                    if ( IsArrayRefWithData($PluginData) ) {
-                        for my $LinkID ( @{$PluginData} ) {
-                            for my $CurrentAppointmentID (@RelatedAppointments) {
-                                my $Link = $PluginObject->PluginLinkAdd(
-                                    AppointmentID => $CurrentAppointmentID,
-                                    PluginKey     => $PluginKey,
-                                    PluginData    => $LinkID,
-                                    UserID        => $Self->{UserID},
-                                );
-
-                                if ( !$Link ) {
-                                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                                        Priority => 'error',
-                                        Message  => "Link could not be created for appointment $CurrentAppointmentID!",
-                                    );
-                                }
-                            }
-                        }
-                    }
                 }
+
+                # add or update data
+                $PluginObject->PluginFunction(
+                    PluginKey      => $PluginKey,
+                    PluginFunction => 'Update',
+                    PluginData     => {
+                        GetParam    => \%GetParam,
+                        Appointment => \%Appointment,
+                        Plugin      => \%Plugin,
+                        UserID      => $Self->{UserID},
+                    },
+                );
             }
         }
 
@@ -1649,11 +1644,20 @@ sub Run {
                         && $_->{ParentID} eq $Appointment{AppointmentID}
                     } @CalendarAppointments;
 
+                $GetParam{Recurring} = grep { defined $_->{ParentID} && $_->{ParentID} eq $Appointment{AppointmentID} }
+                    @CalendarAppointments;
+
+                $Param{PluginList} = $PluginObject->PluginList();
+
                 # Remove all existing links.
                 for my $CurrentAppointmentID (@RelatedAppointments) {
-                    my $Success = $PluginObject->PluginLinkDelete(
-                        AppointmentID => $CurrentAppointmentID,
-                        UserID        => $Self->{UserID},
+                    $Success = $PluginObject->PluginFunction(
+                        PluginKey      => 'TicketLink',
+                        PluginFunction => 'LinkDelete',
+                        PluginData     => {
+                            AppointmentID => $CurrentAppointmentID,
+                            UserID        => $Self->{UserID},
+                        },
                     );
 
                     if ( !$Success ) {
@@ -1662,6 +1666,30 @@ sub Run {
                             Message  => "Links could not be deleted for appointment $CurrentAppointmentID!",
                         );
                     }
+                }
+
+                PLUGIN:
+                for my $PluginKey ( sort keys %{ $Param{PluginList} } ) {
+
+                    my %Plugin = (
+                        %{ $Param{PluginList}->{$PluginKey} },
+                        PluginKey => $PluginKey,
+                    );
+
+                    my %Appointment = $AppointmentObject->AppointmentGet(
+                        AppointmentID => $Appointment{AppointmentID},
+                    );
+
+                    $PluginObject->PluginFunction(
+                        PluginKey      => $PluginKey,
+                        PluginFunction => 'Delete',
+                        PluginData     => {
+                            GetParam    => \%GetParam,
+                            Appointment => \%Appointment,
+                            Plugin      => \%Plugin,
+                            UserID      => $Self->{UserID},
+                        },
+                    );
                 }
 
                 $Success = $AppointmentObject->AppointmentDelete(
@@ -1791,6 +1819,46 @@ sub Run {
             },
         );
 
+    }
+    elsif ( $Self->{Subaction} eq 'AJAXUpdate' ) {
+
+        my %Appointment;
+        if ( $GetParam{AppointmentID} ) {
+            %Appointment = $AppointmentObject->AppointmentGet(
+                AppointmentID => $GetParam{AppointmentID},
+            );
+        }
+
+        my @AJAXUpdate;
+        if ( $GetParam{ElementChanged} =~ m{^Plugin_(.*)_(.*)} ) {
+            my $PluginKey = $1;
+            my $Attribute = $2;
+
+            # AJAXUpdate for plugin lists
+            $Param{PluginList} = $PluginObject->PluginList();
+            my %PluginParam = $PluginObject->PluginGetParam(%Param);
+
+            my %Plugin = (
+                %{ $Param{PluginList}->{$PluginKey} },
+                PluginKey => $PluginKey,
+                Param     => $PluginParam{$PluginKey},
+            );
+
+            my $AJAXPlugin = $PluginObject->PluginFunction(
+                PluginKey      => $PluginKey,
+                PluginFunction => 'AJAXUpdate',
+                PluginData     => {
+                    GetParam    => \%GetParam,
+                    Appointment => \%Appointment,
+                    Plugin      => \%Plugin,
+                    UserID      => $Self->{UserID},
+                },
+            );
+            if ($AJAXPlugin) {
+                push @AJAXUpdate, $AJAXPlugin;
+            }
+        }
+        $JSON = $LayoutObject->BuildSelectionJSON(@AJAXUpdate);
     }
 
     # send JSON response

@@ -6,12 +6,13 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 package Kernel::System::SysConfig;
 
 use strict;
 use warnings;
 
+use File::Copy;
 use Time::HiRes();
 use utf8;
 
@@ -26,12 +27,12 @@ our @ObjectDependencies = (
     'Kernel::Language',
     'Kernel::Output::HTML::SysConfig',
     'Kernel::System::Cache',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Package',
     'Kernel::System::Storable',
     'Kernel::System::SysConfig::DB',
-    'Kernel::System::SysConfig::Migration',
     'Kernel::System::SysConfig::XML',
     'Kernel::System::User',
     'Kernel::System::YAML',
@@ -83,7 +84,7 @@ sub new {
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     FILENAME:
-    for my $Filename (qw(Framework.pm OTRSBusiness.pm)) {
+    for my $Filename (qw(Framework.pm)) {
         my $BaseFile = $BaseDir . $Filename;
         next FILENAME if !-e $BaseFile;
 
@@ -147,7 +148,7 @@ Returns:
         ChangeTime               => "2016-05-29 11:04:04",
         ChangeBy                 => 1,
         DefaultValue             => 'Old default value',
-        OverriddenFileName        => '/opt/otrs/Kernel/Config/Files/ZZZ.pm',
+        OverriddenFileName        => '/opt/znuny/Kernel/Config/Files/ZZZ.pm',
     );
 
 =cut
@@ -687,20 +688,6 @@ sub SettingUpdate {
                 return %Result;
             }
         }
-    }
-
-    # When a setting is set to invalid all modified settings for users has to be removed.
-    if (
-        !$Param{IsValid}
-        && !$Param{TargetUserID}
-        && $Self->can('UserSettingValueDelete')    # OTRS Business Solution™
-        )
-    {
-        $Self->UserSettingValueDelete(
-            Name       => $Setting{Name},
-            ModifiedID => 'All',
-            UserID     => $Param{UserID},
-        );
     }
 
     if ( !$Param{TargetUserID} ) {
@@ -1353,7 +1340,7 @@ Check if provided EffectiveValue matches structure defined in DefaultSetting. Al
             ],
         },
         StoreCache            => 1,               # (optional) Store result in the Cache. Default 0.
-        SettingUID            => 'Default1234'    # (required if StoreCache)
+        SettingUID            => 'Default1234',   # (required if StoreCache)
         NoValidation          => 1,               # (optional) no value type validation.
         CurrentSystemTime     => 1507894796935,   # (optional) Use provided 1507894796935, otherwise calculate
         ExpireTime            => 1507894896935,   # (optional) Use provided ExpireTime for cache, otherwise calculate
@@ -2230,6 +2217,7 @@ sub ConfigurationTranslatableStrings {
     for my $Key ( sort keys %{ $Self->{ConfigurationTranslatableStrings} } ) {
         push @Strings, $Key;
     }
+
     return @Strings;
 }
 
@@ -3597,28 +3585,6 @@ sub ConfigurationDeploy {
             return %Result;
         }
 
-        # If setting is updated on global level, check all user specific settings, maybe it's needed
-        #   to remove duplicates.
-        if ( $Self->can('UserConfigurationResetToGlobal') ) {    # OTRS Business Solution™
-
-            my @DeployedSettings;
-            if ( $Param{DirtySettings} ) {
-                @DeployedSettings = @{ $Param{DirtySettings} };
-            }
-            else {
-                for my $Setting (@Settings) {
-                    push @DeployedSettings, $Setting->{Name};
-                }
-            }
-
-            if ( scalar @DeployedSettings ) {
-                $Self->UserConfigurationResetToGlobal(
-                    Settings => \@DeployedSettings,
-                    UserID   => $Param{UserID},
-                );
-            }
-        }
-
         my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Delete categories cache.
@@ -3760,10 +3726,6 @@ sub ConfigurationDeploySync {
 
         return if !$Success;
     }
-
-    # Sync also user specific settings (if available).
-    return 1 if !$Self->can('UserConfigurationDeploySync');    # OTRS Business Solution™
-    $Self->UserConfigurationDeploySync();
 
     return 1;
 }
@@ -4107,16 +4069,6 @@ sub ConfigurationDump {
                 $Result->{'Modified'}->{ $Setting->{Name} } = $Setting;
             }
         }
-
-        if ( !$Param{SkipUserSettings} && $Self->can('UserConfigurationDump') ) {    # OTRS Business Solution™
-            my %UserSettings = $Self->UserConfigurationDump(
-                SettingList => \@SettingsList,
-                OnlyValues  => $Param{OnlyValues},
-            );
-            if ( scalar keys %UserSettings ) {
-                %{$Result} = ( %{$Result}, %UserSettings );
-            }
-        }
     }
 
     my $YAMLString = $Kernel::OM->Get('Kernel::System::YAML')->Dump(
@@ -4253,17 +4205,6 @@ sub ConfigurationLoad {
                 $Result = '-1';
             }
         }
-
-        # Only deploy user specific settings;
-        next SECTION if !$TargetUserID;
-        next SECTION if !$Self->can('UserConfigurationDeploy');    # OTRS Business Solution™
-
-        # Deploy user configuration requires another package to be installed.
-        my $Success = $Self->UserConfigurationDeploy(
-            TargetUserID => $TargetUserID,
-            UserID       => $Param{UserID},
-        );
-
     }
 
     return $Result;
@@ -4348,7 +4289,7 @@ Returns a list of setting names.
 
     my @Result = $SysConfigObject->ConfigurationSearch(
         Search           => 'The search string', # (optional)
-        Category         => 'OTRS'               # (optional)
+        Category         => 'OTRS',              # (optional)
         IncludeInvisible => 1,                   # (optional) Default 0.
     );
 
@@ -4441,8 +4382,8 @@ Returns:
             Files => [],
         },
         OTRS => {
-            DisplayName => 'OTRS',
-            Files       => ['Calendar.xml', CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml' ],
+            DisplayName => 'Znuny',
+            Files       => ['Calendar.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml' ],
         },
         # ...
     );
@@ -4472,10 +4413,11 @@ sub ConfigurationCategoriesGet {
             Files       => [],
         },
         OTRS => {
-            DisplayName => 'OTRS',
+            DisplayName => 'Znuny',
             Files       => [
-                'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml',
+                'Calendar.xml',         'Daemon.xml',            'Framework.xml',
                 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml',
+                'Znuny.xml',
             ],
         },
     );
@@ -4510,11 +4452,6 @@ sub ConfigurationCategoriesGet {
 
         my $PackageName = $Package->{Name}->{Content};
         my $DisplayName = $ConfigObject->Get("SystemConfiguration::Category::Name::$PackageName") || $PackageName;
-
-        # special treatment for OTRS Business Solution™
-        if ( $DisplayName eq 'OTRSBusiness' ) {
-            $DisplayName = 'OTRS Business Solution™';
-        }
 
         $Result{$PackageName} = {
             DisplayName => $DisplayName,
@@ -5163,6 +5100,7 @@ sub _ConfigurationTranslatableStrings {
             {
                 return if !$Param{Data}->{Content};
                 return if $Param{Data}->{Content} =~ /^\d+$/;
+
                 $Self->{ConfigurationTranslatableStrings}->{ $Param{Data}->{Content} } = 1;
             }
             $Self->_ConfigurationTranslatableStrings( Data => $Param{Data}->{$Key} );
@@ -5929,7 +5867,7 @@ Creates modified versions of dirty settings to deploy and removed the dirty flag
         NotDirty            => 1,                                         # optional - exclusive (1||0)
         AllSettings         => 1,                                         # optional - exclusive (1||0)
         DirtySettings       => [ 'SettingName1', 'SettingName2' ],        # optional - exclusive
-        DeploymentTimeStamp => 2017-12-12 12:00:00'
+        DeploymentTimeStamp => '2017-12-12 12:00:00',
         UserID              => 123,
     );
 
@@ -6342,6 +6280,76 @@ sub _DefaultSettingAddBulk {
         );
         return;
     }
+
+    return 1;
+}
+
+=head2 CreateZZZAAutoBackup()
+
+Creates config backup files from '/Kernel/Config/Files/*'.
+
+    my $Success = $SysConfigObject->CreateZZZAAutoBackup();
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub CreateZZZAAutoBackup {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+
+    # Updates ZZAAuto.pm to the latest deployment found in the database.
+    $Self->ConfigurationDeploySync();
+
+    my $Home                   = $ConfigObject->Get('Home');
+    my $BackupDir              = "$Home/Kernel/Config/Backups/";
+    my $ZZZAAutoFilePath       = "$Home/Kernel/Config/Files/ZZZAAuto.pm";
+    my $ZZZAAutoBackupFilePath = "$Home/Kernel/Config/Backups/ZZZAAuto.pm";
+
+    return if !-f $ZZZAAutoFilePath;
+
+    # create backups directory if not existing
+    if ( !-d $BackupDir ) {
+        return if !mkdir $BackupDir;
+    }
+
+    return if !copy( $ZZZAAutoFilePath, $ZZZAAutoBackupFilePath );
+
+    return 1;
+}
+
+=head2 DeleteZZZAAutoBackup()
+
+Deletes config backup.
+
+    my $Success = $SysConfigObject->DeleteZZZAAutoBackup();
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub DeleteZZZAAutoBackup {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+
+    my $Home                   = $ConfigObject->Get('Home');
+    my $ZZZAAutoBackupFilePath = "$Home/Kernel/Config/Backups/ZZZAAuto.pm";
+
+    return 1 if !-f $ZZZAAutoBackupFilePath;
+
+    my $Success = $MainObject->FileDelete(
+        Location => $ZZZAAutoBackupFilePath
+    );
+
+    return if !$Success;
 
     return 1;
 }

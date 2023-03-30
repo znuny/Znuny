@@ -169,7 +169,7 @@ run a generic agent job
     $GenericAgentObject->JobRun(
         Job          => 'JobName',
         OnlyTicketID => 123,     # (optional) for event based Job execution
-        SleepTime    => 100_000  # (optional) sleeptime per ticket in microseconds
+        SleepTime    => 100_000, # (optional) sleeptime per ticket in microseconds
         UserID       => 1,
     );
 
@@ -979,8 +979,7 @@ sub _JobRunTicket {
         );
 
         if ( IsHashRefWithData( \%Ticket ) ) {
-
-            my %CustomerUserData = {};
+            my %CustomerUserData;
             if ( IsStringWithData( $Ticket{CustomerUserID} ) ) {
                 %CustomerUserData = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
                     User => $Ticket{CustomerUserID},
@@ -1445,37 +1444,6 @@ sub _JobRunTicket {
             TicketID    => $Param{TicketID},
             UserID      => $Param{UserID},
             ArchiveFlag => $Param{Config}->{New}->{ArchiveFlag},
-        );
-    }
-
-    # cmd
-    my $AllowCustomScriptExecution
-        = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::GenericAgentAllowCustomScriptExecution') || 0;
-
-    if ( $Param{Config}->{New}->{CMD} && $AllowCustomScriptExecution ) {
-        if ( $Self->{NoticeSTDOUT} ) {
-            print "  - Execute '$Param{Config}->{New}->{CMD}' for Ticket $Ticket.\n";
-        }
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'notice',
-            Message  => "Execute '$Param{Config}->{New}->{CMD}' for Ticket $Ticket.",
-        );
-        system("$Param{Config}->{New}->{CMD} $Param{TicketNumber} $Param{TicketID} ");
-
-        if ( $? ne 0 ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'notice',
-                Message  => "Command returned a nonzero return code: rc=$?, err=$!",
-            );
-        }
-    }
-    elsif ( $Param{Config}->{New}->{CMD} && !$AllowCustomScriptExecution ) {
-        if ( $Self->{NoticeSTDOUT} ) {
-            print "  - Execute '$Param{Config}->{New}->{CMD}' is not allowed by the system configuration..\n";
-        }
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "Execute '$Param{Config}->{New}->{CMD}' is not allowed by the system configuration..",
         );
     }
 

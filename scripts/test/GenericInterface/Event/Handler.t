@@ -42,7 +42,7 @@ $Self->Is(
 );
 
 my $Home   = $ConfigObject->Get('Home');
-my $Daemon = $Home . '/bin/otrs.Daemon.pl';
+my $Daemon = $Home . '/bin/znuny.Daemon.pl';
 
 # get daemon status (stop if necessary to reload configuration with planner daemon disabled)
 my $PreviousDaemonStatus = `perl $Daemon status`;
@@ -561,7 +561,7 @@ for my $Test (@Tests) {
 
         $Self->Is(
             scalar(
-                grep { $_->{Data} =~ m/'ResponseContent' \s+ => \s+ 'TicketID=$TicketID'/smx }
+                grep { $_->{Data} =~ m/'ResponseContent' \s+ => \s+ '.*?TicketID=$TicketID.*?'/smx }
                     @{ $LogData->[0]->{Data} }
             ),
             1,

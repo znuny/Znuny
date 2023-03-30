@@ -19,51 +19,51 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
         my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
-
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
         # disable check email addresses
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # do not check RichText
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # do not check service and type
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0
         );
 
         # create test user
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # get needed variables
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
         my $DFName   = 'DF' . $RandomID;
 
         # create a test dynamic field
@@ -88,7 +88,7 @@ $Selenium->RunTest(
         );
 
         # enable test dynamic field to show in AgentTicketEmailOutbound screen
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketEmailOutbound###DynamicField',
             Value => {
@@ -115,8 +115,8 @@ $Selenium->RunTest(
         );
 
         # add test customer for testing
-        my $TestCustomer       = 'Customer' . $Helper->GetRandomID();
-        my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $TestCustomer       = 'Customer' . $HelperObject->GetRandomID();
+        my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomer,
             UserLastname   => $TestCustomer,
@@ -289,7 +289,7 @@ $Selenium->RunTest(
         # make sure the cache is correct
         for my $Cache (qw(Ticket CustomerUser))
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

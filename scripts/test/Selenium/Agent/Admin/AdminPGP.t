@@ -20,10 +20,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+        my $CryptPGPObject = $Kernel::OM->Get('Kernel::System::Crypt::PGP');
+        my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -34,16 +36,14 @@ $Selenium->RunTest(
         );
 
         # Disable PGP in config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PGP',
             Value => 0,
         );
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
         # Create test PGP path and set it in sysConfig.
-        my $PGPPath = $ConfigObject->Get('Home') . "/var/tmp/pgp" . $Helper->GetRandomID();
+        my $PGPPath = $ConfigObject->Get('Home') . "/var/tmp/pgp" . $HelperObject->GetRandomID();
         mkpath( [$PGPPath], 0, 0770 );    ## no critic
 
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
@@ -68,14 +68,14 @@ $Selenium->RunTest(
         );
 
         # Enable PGP in config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PGP',
             Value => 1,
         );
 
         # Set PGP path in config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PGP::Options',
             Value => "--homedir $PGPPath --batch --no-tty --yes",
@@ -88,18 +88,14 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText ( 'PGP Management', 'Add PGP Key' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
-        my $Location1 = $ConfigObject->Get('Home')
+        my $Location1 = $Selenium->{Home}
             . "/scripts/test/sample/Crypt/PGPPrivateKey-1.asc";
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location1);
@@ -107,7 +103,7 @@ $Selenium->RunTest(
 
         # Add second test PGP key.
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
-        my $Location2 = $ConfigObject->Get('Home')
+        my $Location2 = $Selenium->{Home}
             . "/scripts/test/sample/Crypt/PGPPrivateKey-2.asc";
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location2);
@@ -130,7 +126,7 @@ $Selenium->RunTest(
 
         # Test search filter.
         $Selenium->find_element( "#Search", 'css' )->send_keys( $PGPKey{1} );
-        $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
 
         $Self->True(
             index( $Selenium->get_page_source(), $PGPKey{1} ) > -1,
@@ -143,21 +139,21 @@ $Selenium->RunTest(
 
         # Clear search filter.
         $Selenium->find_element( "#Search", 'css' )->clear();
-        $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
 
         # Set test PGP in config so we can delete them.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'PGP',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'PGP::Options',
             Value => "--homedir $PGPPath --batch --no-tty --yes",
         );
 
         # Delete test PGP keys.
         for my $Count ( 1 .. 2 ) {
-            my @Keys = $Kernel::OM->Get('Kernel::System::Crypt::PGP')->KeySearch(
+            my @Keys = $CryptPGPObject->KeySearch(
                 Search => $PGPKey{$Count},
             );
 

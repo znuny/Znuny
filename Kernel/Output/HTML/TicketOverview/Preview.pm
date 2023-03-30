@@ -17,19 +17,19 @@ use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
     'Kernel::System::CommunicationChannel',
     'Kernel::System::CustomerUser',
-    'Kernel::System::SystemAddress',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Group',
+    'Kernel::System::JSON',
     'Kernel::System::Log',
-    'Kernel::Output::HTML::Layout',
-    'Kernel::System::User',
-    'Kernel::System::Ticket',
-    'Kernel::System::Ticket::Article',
     'Kernel::System::Main',
     'Kernel::System::Queue',
+    'Kernel::System::Ticket',
+    'Kernel::System::Ticket::Article',
+    'Kernel::System::User',
 );
 
 sub new {
@@ -42,6 +42,25 @@ sub new {
     # get UserID param
     $Self->{UserID} = $Param{UserID} || die "Got no UserID!";
 
+    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
+    # get JSON object
+    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
+    # set stored filters if present
+    my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action};
+    if ( $Preferences{$StoredFiltersKey} ) {
+        my $StoredFilters = $JSONObject->Decode(
+            Data => $Preferences{$StoredFiltersKey},
+        );
+        $Self->{StoredFilters} = $StoredFilters;
+    }
+
+    $Self->{IsITSMIncidentProblemManagementInstalled}
+        = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
+
     return $Self;
 }
 
@@ -51,6 +70,8 @@ sub ActionRow {
     # get needed objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
 
     # check if bulk feature is enabled
     my $BulkFeature = 0;
@@ -199,6 +220,8 @@ sub Run {
     # get needed objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
 
     # check if bulk feature is enabled
     my $BulkFeature = 0;
@@ -354,6 +377,8 @@ sub _Show {
         );
     }
 
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
+
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     my $PreviewArticleLimit = int $ConfigObject->Get('Ticket::Frontend::Overview::PreviewArticleLimit') || 5;
@@ -361,10 +386,20 @@ sub _Show {
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
+    # Get ticket data.
+    my $LoadDynamicFields = $Self->{IsITSMIncidentProblemManagementInstalled} ? 1 : 0;
+
     my %Ticket = $TicketObject->TicketGet(
         TicketID      => $Param{TicketID},
-        DynamicFields => 0,
+        DynamicFields => $LoadDynamicFields,
     );
+
+    if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
+
+        # set criticality and impact
+        $Ticket{Criticality} = $Ticket{DynamicField_ITSMCriticality} || '-';
+        $Ticket{Impact}      = $Ticket{DynamicField_ITSMImpact}      || '-';
+    }
 
     # Get configured number of last articles.
     my @Articles = $ArticleObject->ArticleList(
@@ -575,14 +610,31 @@ sub _Show {
 
     my $AdditionalClasses = $Param{Config}->{TicketActionsPerTicket} ? 'ShowInlineActions' : '';
 
+    my $CSSSelector = $LayoutObject->CleanUpCSSSelector(
+        CSSSelector => $Ticket{State},
+    );
+
+    my $PillClass;
+    if ( IsStringWithData( $Ticket{StateID} ) ) {
+        $PillClass .= 'pill StateID-' . $Ticket{StateID};
+    }
+
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
+    my %AdditionalObjectData;
+    if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
+        %AdditionalObjectData = %Ticket;
+    }
+
     $LayoutObject->Block(
         Name => 'DocumentContent',
         Data => {
             %Param,
             %Article,
             Class             => 'ArticleCount' . $ArticleCount,
+            PillClass         => $PillClass,
             AdditionalClasses => $AdditionalClasses,
             Created           => $Ticket{Created},                 # use value from ticket, not article
+            %AdditionalObjectData,
         },
     );
 

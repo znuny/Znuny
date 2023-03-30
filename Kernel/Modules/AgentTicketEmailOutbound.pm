@@ -64,6 +64,9 @@ sub Run {
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    # get param object
+    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+
     # check if ACL restrictions exist
     if ( IsHashRefWithData( \%AclAction ) ) {
 
@@ -76,7 +79,7 @@ sub Run {
 
     # Check for failed draft loading request.
     if (
-        $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'LoadFormDraft' )
+        $ParamObject->GetParam( Param => 'LoadFormDraft' )
         && !$Self->{LoadedFormDraftID}
         )
     {
@@ -105,7 +108,7 @@ sub Run {
             )
             )
         {
-            $GetParam{$Key} = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => $Key );
+            $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
         }
 
         my %Ticket       = $TicketObject->TicketGet( TicketID => $Self->{TicketID} );
@@ -114,16 +117,6 @@ sub Run {
 
         # get dynamic field values form http request
         my %DynamicFieldValues;
-
-        # convert dynamic field values into a structure for ACLs
-        my %DynamicFieldACLParameters;
-        DYNAMICFIELD:
-        for my $DynamicFieldItem ( sort keys %DynamicFieldValues ) {
-            next DYNAMICFIELD if !$DynamicFieldItem;
-            next DYNAMICFIELD if !defined $DynamicFieldValues{$DynamicFieldItem};
-
-            $DynamicFieldACLParameters{ 'DynamicField_' . $DynamicFieldItem } = $DynamicFieldValues{$DynamicFieldItem};
-        }
 
         # get config object
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -193,6 +186,13 @@ sub Run {
                 %{$PossibleValues} = map { $_ => $PossibleValues->{$_} } keys %Filter;
             }
 
+            # extract the dynamic field value from the web request
+            $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldValueGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                ParamObject        => $ParamObject,
+                LayoutObject       => $LayoutObject,
+            );
+
             my $DataValues = $DynamicFieldBackendObject->BuildSelectionDataGet(
                 DynamicFieldConfig => $DynamicFieldConfig,
                 PossibleValues     => $PossibleValues,
@@ -213,6 +213,7 @@ sub Run {
         }
 
         my $StandardTemplates = $Self->_GetStandardTemplates(
+            TicketID => $Self->{TicketID},
             %GetParam,
             QueueID => $QueueID || '',
         );
@@ -281,15 +282,17 @@ sub Run {
 
             # Get the first article of the ticket.
             my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-            my @MetaArticles  = $ArticleObject->ArticleList(
-                TicketID  => $Self->{TicketID},
-                UserID    => $Self->{UserID},
-                OnlyFirst => 1,
+            my @ArticleIDs    = $ArticleObject->ArticleIndex(
+                TicketID => $Self->{TicketID},
             );
-            my %Article = $ArticleObject->BackendForArticle( %{ $MetaArticles[0] } )->ArticleGet(
-                %{ $MetaArticles[0] },
-                DynamicFields => 0,
-            );
+
+            my %Article;
+            if (@ArticleIDs) {
+                %Article = $ArticleObject->ArticleGet(
+                    TicketID  => $Self->{TicketID},
+                    ArticleID => $ArticleIDs[0],
+                );
+            }
 
             # get the matching signature for the current user
             my $Signature = $TemplateGenerator->Signature(
@@ -782,7 +785,8 @@ sub Form {
 
     # Inform a user that article subject will be empty if contains only the ticket hook (if nothing is modified).
     $Output .= $LayoutObject->Notify(
-        Data => Translatable('Article subject will be empty if the subject contains only the ticket hook!'),
+        Priority => 'Warning',
+        Info     => Translatable('Article subject will be empty if the subject contains only the ticket hook!'),
     );
 
     $Output .= $Self->_Mask(
@@ -1288,12 +1292,19 @@ sub SendEmail {
 
         # When a draft is loaded, inform a user that article subject will be empty
         # if contains only the ticket hook (if nothing is modified).
-        if ( $Error{LoadedFormDraft} ) {
-            $Output .= $LayoutObject->Notify(
-                Data => $LayoutObject->{LanguageObject}->Translate(
-                    'Article subject will be empty if the subject contains only the ticket hook!'
-                ),
+        if ( $Error{LoadedFormDraft} && IsStringWithData( $GetParam{Subject} ) ) {
+            my $CleanedSubject = $TicketObject->TicketSubjectClean(
+                TicketNumber => $Ticket{TicketNumber},
+                Subject      => $GetParam{Subject},
             );
+
+            if ( !IsStringWithData($CleanedSubject) ) {
+                $Output .= $LayoutObject->Notify(
+                    Data => $LayoutObject->{LanguageObject}->Translate(
+                        'Article subject will be empty if the subject contains only the ticket hook!'
+                    ),
+                );
+            }
         }
 
         $Output .= $Self->_Mask(
@@ -1996,18 +2007,9 @@ sub _Mask {
 
     # show time accounting box
     if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {
-        if ( $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime') ) {
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelMandatory',
-                Data => \%Param,
-            );
-        }
-        else {
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabel',
-                Data => \%Param,
-            );
-        }
+        $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
+            %Param,
+        );
         $LayoutObject->Block(
             Name => 'TimeUnits',
             Data => \%Param,
@@ -2023,24 +2025,12 @@ sub _Mask {
         $Param{OptionCustomerUserAddressBook} = 1;
     }
 
-    # build text template string
-    my %StandardTemplates = $Kernel::OM->Get('Kernel::System::StandardTemplate')->StandardTemplateList(
-        Valid => 1,
-        Type  => 'Email',
-    );
-
     my $QueueStandardTemplates = $Self->_GetStandardTemplates(
         %Param,
         TicketID => $Self->{TicketID} || '',
     );
 
-    if (
-        IsHashRefWithData(
-            $QueueStandardTemplates
-                || ( $Param{Queue} && IsHashRefWithData( \%StandardTemplates ) )
-        )
-        )
-    {
+    if ( IsHashRefWithData($QueueStandardTemplates) ) {
         $Param{StandardTemplateStrg} = $LayoutObject->BuildSelection(
             Data         => $QueueStandardTemplates || {},
             Name         => 'StandardTemplateID',
@@ -2421,11 +2411,13 @@ sub _GetExtendedParams {
 sub _GetStandardTemplates {
     my ( $Self, %Param ) = @_;
 
-    # get create templates
-    my %Templates;
-
-    # check needed
-    return \%Templates if !$Param{QueueID} && !$Param{TicketID};
+    if ( !$Param{QueueID} && !$Param{TicketID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Parameter 'QueueID' or 'TicketID' is needed!",
+        );
+        return {};
+    }
 
     my $QueueID = $Param{QueueID} || '';
     if ( !$Param{QueueID} && $Param{TicketID} ) {
@@ -2446,7 +2438,7 @@ sub _GetStandardTemplates {
     );
 
     # return empty hash if there are no templates for this screen
-    return \%Templates if !IsHashRefWithData( $StandardTemplates{Email} );
+    return {} if !IsHashRefWithData( $StandardTemplates{Email} );
 
     # return just the templates for this screen
     return $StandardTemplates{Email};

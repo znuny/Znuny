@@ -21,18 +21,18 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # make sure that CustomerGroupSupport is disabled
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerGroupSupport',
             Value => 0
         );
 
         # create test customer user and login
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         $Selenium->Login(
@@ -43,7 +43,7 @@ $Selenium->RunTest(
 
         # add test queue in group users
         my $QueueObject = $Kernel::OM->Get('Kernel::System::Queue');
-        my $QueueName   = "Queue" . $Helper->GetRandomID();
+        my $QueueName   = "Queue" . $HelperObject->GetRandomID();
         my $QueueID     = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
@@ -69,7 +69,7 @@ $Selenium->RunTest(
         );
 
         # create test group
-        my $GroupName   = "Group" . $Helper->GetRandomID();
+        my $GroupName   = "Group" . $HelperObject->GetRandomID();
         my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
         my $GroupID     = $GroupObject->GroupAdd(
             Name    => $GroupName,
@@ -145,7 +145,7 @@ $Selenium->RunTest(
 
         if ($GroupID) {
             $Success = $DBObject->Do(
-                SQL => "DELETE FROM groups WHERE id = $GroupID",
+                SQL => "DELETE FROM permission_groups WHERE id = $GroupID",
             );
             $Self->True(
                 $Success,
@@ -158,7 +158,7 @@ $Selenium->RunTest(
             qw (Queue Group)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

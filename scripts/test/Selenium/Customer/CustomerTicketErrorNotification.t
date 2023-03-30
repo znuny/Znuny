@@ -18,40 +18,44 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $Queue  = $Kernel::OM->Get('Kernel::System::Queue');
-        my $Random = $Helper->GetRandomID();
+        my $HelperObject        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $Queue               = $Kernel::OM->Get('Kernel::System::Queue');
+        my $ConfigObject        = $Kernel::OM->Get('Kernel::Config');
+        my $GroupObject         = $Kernel::OM->Get('Kernel::System::Group');
+        my $CustomerGroupObject = $Kernel::OM->Get('Kernel::System::CustomerGroup');
+
+        my $Random = $HelperObject->GetRandomID();
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Do not check Service.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
 
         # Do not check Type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0
         );
 
         # Disable queue selection.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketMessage###Queue',
             Value => 0
         );
 
         # Enable customer group support.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerGroupSupport',
             Value => 1
@@ -59,7 +63,7 @@ $Selenium->RunTest(
 
         # Create test group.
         my $GroupName = 'Group' . $Random;
-        my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
+        my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
             UserID  => 1,
@@ -86,18 +90,18 @@ $Selenium->RunTest(
         );
 
         # Set test queue as default.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketMessage###QueueDefault',
             Value => 'Queue' . $Random
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Set user permissions to not include writing to test queue.
-        my $Success = $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupMemberAdd(
+        my $Success = $CustomerGroupObject->GroupMemberAdd(
             GID        => $GroupID,
             UID        => $TestCustomerUserLogin,
             Permission => {
@@ -118,7 +122,7 @@ $Selenium->RunTest(
             Password => $TestCustomerUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to CustomerTicketMessage screen.
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketMessage");
@@ -163,7 +167,7 @@ $Selenium->RunTest(
         );
 
         $Success = $DBObject->Do(
-            SQL  => "DELETE FROM groups WHERE id = ?",
+            SQL  => "DELETE FROM permission_groups WHERE id = ?",
             Bind => [ \$GroupID ],
         );
         $Self->True(

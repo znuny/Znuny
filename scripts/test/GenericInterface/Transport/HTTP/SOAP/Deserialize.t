@@ -25,7 +25,7 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # create soap object to use the soap output recursion
 my $DebuggerObject = Kernel::GenericInterface::Debugger->new(

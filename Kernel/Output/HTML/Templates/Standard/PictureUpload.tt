@@ -6,7 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::TT::ScriptUsage)
+## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
 <script type="text/javascript">
 (function(){var d=document.domain;while (true){try{var A=window.parent.document.domain;break;}catch(e) {};d=d.replace(/.*?(?:\.|\$)/,'');if (d.length==0) break;try{document.domain=d;}catch (e){break;}}})();
 [% RenderBlockStart("ErrorNoFormID") %]

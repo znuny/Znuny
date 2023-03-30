@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
@@ -32,8 +32,7 @@ my $FileString = $MainObject->FileRead(
 );
 my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 my $Success       = $PackageObject->RepositoryAdd(
-    String    => ${$FileString},
-    FromCloud => 0,
+    String => ${$FileString},
 );
 $Self->True(
     $Success,

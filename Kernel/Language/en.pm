@@ -37,6 +37,23 @@ sub Data {
 
     $Self->{Translation} = {
         'May_long' => 'May',
+
+        'LastMention' => 'Last mention',
+
+        # Last views
+        'CustomerInformationCenter'     => 'Customer Information Center',
+        'CustomerUserInformationCenter' => 'Customer User Information Center',
+        'CustomerCompany'               => 'Customer Company',
+        'AppointmentCalendarManage'     => 'Calendar Management',
+        'AppointmentCalendarOverview'   => 'Calendar Overview',
+        'AppointmentAgendaOverview'     => 'Agenda Overview',
+        'TicketOverview'                => 'Ticket Overview',
+        'TicketCreate'                  => 'Ticket create',
+        'PhoneInbound'                  => 'Phone Call Inbound',
+        'PhoneOutbound'                 => 'Phone Call Outbound',
+        'EmailOutbound'                 => 'Email Outbound',
+        'TicketMessage'                 => 'Ticket create',
+        'TicketSearch'                  => 'Ticket search',
     };
 
     $Self->{JavaScriptStrings} = [
@@ -44,6 +61,7 @@ sub Data {
     ];
 
     # $$STOP$$
+
     return;
 }
 

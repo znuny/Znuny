@@ -15,7 +15,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -189,106 +189,7 @@ sub Run {
         );
     }
 
-    # Check if agent has permission to start chats with agents.
-    my $EnableChat               = 1;
-    my $ChatStartingAgentsGroup  = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatStartingAgents') || 'users';
-    my $ChatReceivingAgentsGroup = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatReceivingAgents') || 'users';
-    my $ChatStartingAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-        UserID    => $Self->{UserID},
-        GroupName => $ChatStartingAgentsGroup,
-        Type      => 'rw',
-    );
-
-    if ( !$ConfigObject->Get('ChatEngine::Active') || !$ChatStartingAgentsGroupPermission ) {
-        $EnableChat = 0;
-    }
-    if (
-        $EnableChat
-        && !$ConfigObject->Get('ChatEngine::ChatDirection::AgentToAgent')
-        )
-    {
-        $EnableChat = 0;
-    }
-
     my %OnlineData;
-    if ($EnableChat) {
-        my $VideoChatEnabled     = 0;
-        my $VideoChatAgentsGroup = $ConfigObject->Get('ChatEngine::PermissionGroup::VideoChatAgents') || 'users';
-        my $VideoChatAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-            UserID    => $Self->{UserID},
-            GroupName => $VideoChatAgentsGroup,
-            Type      => 'rw',
-        );
-
-        # Enable the video chat feature if system is entitled and agent is a member of configured group.
-        if ( $ConfigObject->Get('ChatEngine::Active') && $VideoChatAgentsGroupPermission ) {
-            if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::VideoChat', Silent => 1 ) ) {
-                $VideoChatEnabled = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled();
-            }
-        }
-
-        FIELD:
-        for my $Field (qw(OwnerID ResponsibleID)) {
-            next FIELD if !$Ticket{$Field};
-            next FIELD if $Field eq 'ResponsibleID' && !$ConfigObject->Get('Ticket::Responsible');
-
-            my $UserID = $Ticket{$Field};
-
-            $OnlineData{$Field}->{EnableChat}         = $EnableChat;
-            $OnlineData{$Field}->{AgentEnableChat}    = 0;
-            $OnlineData{$Field}->{ChatAccess}         = 0;
-            $OnlineData{$Field}->{VideoChatAvailable} = 0;
-            $OnlineData{$Field}->{VideoChatSupport}   = 0;
-            $OnlineData{$Field}->{VideoChatEnabled}   = $VideoChatEnabled;
-
-            # Default status is offline.
-            $OnlineData{$Field}->{UserState} = Translatable('Offline');
-            $OnlineData{$Field}->{UserStateDescription}
-                = $LayoutObject->{LanguageObject}->Translate('User is currently offline.');
-
-            # We also need to check if the receiving agent has chat permissions.
-            my %UserGroups = $Kernel::OM->Get('Kernel::System::Group')->PermissionUserGet(
-                UserID => $UserID,
-                Type   => 'rw',
-            );
-
-            my %UserGroupsReverse = reverse %UserGroups;
-            $OnlineData{$Field}->{ChatAccess} = $UserGroupsReverse{$ChatReceivingAgentsGroup} ? 1 : 0;
-
-            my %User = $UserObject->GetUserData(
-                UserID => $UserID,
-            );
-            $OnlineData{$Field}->{VideoChatSupport} = $User{VideoChatHasWebRTC};
-
-            # Check agent's availability.
-            if ( $OnlineData{$Field}->{ChatAccess} ) {
-                $OnlineData{$Field}->{AgentChatAvailability}
-                    = $Kernel::OM->Get('Kernel::System::Chat')->AgentAvailabilityGet(
-                    UserID   => $UserID,
-                    External => 0,
-                    );
-
-                if ( $OnlineData{$Field}->{AgentChatAvailability} == 3 ) {
-                    $OnlineData{$Field}->{UserState}       = Translatable('Active');
-                    $OnlineData{$Field}->{AgentEnableChat} = 1;
-                    $OnlineData{$Field}->{UserStateDescription}
-                        = $LayoutObject->{LanguageObject}->Translate('User is currently active.');
-                    $OnlineData{$Field}->{VideoChatAvailable} = 1;
-                }
-                elsif ( $OnlineData{$Field}->{AgentChatAvailability} == 2 ) {
-                    $OnlineData{$Field}->{UserState}       = Translatable('Away');
-                    $OnlineData{$Field}->{AgentEnableChat} = 1;
-                    $OnlineData{$Field}->{UserStateDescription}
-                        = $LayoutObject->{LanguageObject}->Translate('User was inactive for a while.');
-                }
-                elsif ( $OnlineData{$Field}->{AgentChatAvailability} == 1 ) {
-                    $OnlineData{$Field}->{UserState} = Translatable('Unavailable');
-                    $OnlineData{$Field}->{UserStateDescription}
-                        = $LayoutObject->{LanguageObject}->Translate('User set their status to unavailable.');
-                }
-            }
-        }
-    }
 
     # owner info
     my %OwnerInfo = $UserObject->GetUserData(
@@ -370,7 +271,7 @@ sub Run {
         ObjectType  => ['Ticket'],
         FieldFilter => $DynamicFieldFilter || {},
     );
-    my $DynamicFieldBeckendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     # to store dynamic fields to be displayed in the process widget and in the sidebar
     my (@FieldsSidebar);
@@ -385,7 +286,7 @@ sub Run {
         # Check if this field is supposed to be hidden from the ticket information box.
         #   For example, it's displayed by a different mechanism (i.e. async widget).
         if (
-            $DynamicFieldBeckendObject->HasBehavior(
+            $DynamicFieldBackendObject->HasBehavior(
                 DynamicFieldConfig => $DynamicFieldConfig,
                 Behavior           => 'IsHiddenInTicketInformation',
             )
@@ -394,10 +295,16 @@ sub Run {
             next DYNAMICFIELD;
         }
 
+        my $SkipWebserviceDynamicField = $Self->_SkipWebserviceDynamicField(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Value              => $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
+        );
+        next DYNAMICFIELD if $SkipWebserviceDynamicField;
+
         # use translation here to be able to reduce the character length in the template
         my $Label = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
 
-        my $ValueStrg = $DynamicFieldBeckendObject->DisplayValueRender(
+        my $ValueStrg = $DynamicFieldBackendObject->DisplayValueRender(
             DynamicFieldConfig => $DynamicFieldConfig,
             Value              => $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
             LayoutObject       => $LayoutObject,
@@ -480,6 +387,10 @@ sub Run {
         }
     }
 
+    if ( IsStringWithData( $Ticket{StateID} ) ) {
+        $Param{PillClass} .= 'pill StateID-' . $Ticket{StateID};
+    }
+
     my $Output = $LayoutObject->Output(
         TemplateFile => 'AgentTicketZoom/TicketInformation',
         Data         => { %Param, %Ticket, %AclAction },
@@ -488,6 +399,52 @@ sub Run {
     return {
         Output => $Output,
     };
+}
+
+# Checks if dynamic fields of types WebserviceDropdown and WebserviceMultiselect
+# should be skipped if they have no display value and SysConfig option
+# Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue
+# is enabled.
+sub _SkipWebserviceDynamicField {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject                    = $Kernel::OM->Get('Kernel::System::Log');
+    my $ConfigObject                 = $Kernel::OM->Get('Kernel::Config');
+    my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
+
+    NEEDED:
+    for my $Needed (qw(DynamicFieldConfig Value)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my $DynamicFieldConfig = $Param{DynamicFieldConfig};
+    return 1 if !IsHashRefWithData($DynamicFieldConfig);
+
+    return if !$DynamicFieldWebserviceObject->{SupportedDynamicFieldTypes}->{ $DynamicFieldConfig->{FieldType} };
+
+    my $Value = $Param{Value};
+    return 1 if !length $Value;
+
+    my $AgentTicketZoomConfig = $ConfigObject->Get('Ticket::Frontend::AgentTicketZoom');
+    return if !IsHashRefWithData($AgentTicketZoomConfig);
+
+    my $HideWebserviceDynamicFieldsWithoutDisplayValue
+        = $AgentTicketZoomConfig->{HideWebserviceDynamicFieldsWithoutDisplayValue};
+    return if !$HideWebserviceDynamicFieldsWithoutDisplayValue;
+
+    my $DisplayValue = $DynamicFieldWebserviceObject->DisplayValueGet(
+        DynamicFieldConfig => $DynamicFieldConfig,
+        Value              => $Value,
+    );
+    return if defined $DisplayValue && length $DisplayValue;
+
+    return 1;
 }
 
 1;

@@ -13,17 +13,19 @@ use utf8;
 
 use vars (qw($Self));
 
-# get needed objects
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $StatsObject  = $Kernel::OM->Get('Kernel::System::Stats');
 
-# get helper object
+$ConfigObject->Set(
+    Key   => 'OTRSTimeZone',
+    Value => 'Europe/Berlin',
+);
+
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # try to get an invalid stat
 my $StatInvalid = $StatsObject->StatsGet( StatID => 1111 );
@@ -47,6 +49,17 @@ $Self->False(
 );
 
 # check the StatsAddfunction
+my $StatsList = $StatsObject->GetStatsList(
+    OrderBy   => 'StatID',
+    Direction => 'ASC',
+    UserID    => 1,
+);
+
+$Self->True(
+    $StatsList,
+    "GetStatsList() check StatsList exists",
+);
+
 my $StatID1 = $StatsObject->StatsAdd(
     UserID => 1,
 );
@@ -56,14 +69,14 @@ my $StatID2 = $StatsObject->StatsAdd(
 
 # test 1
 $Self->True(
-    $StatID1 > 0,
-    'StatsAdd() first StatID > 0',
+    scalar $StatID1,
+    'StatsAdd() must succeed for first stat.',
 );
 
 # test 2
 $Self->True(
-    $StatID2 > 0,
-    'StatsAdd() second StatID > 0',
+    scalar $StatID2,
+    'StatsAdd() must succeed for second stat.',
 );
 
 # test 3
@@ -204,8 +217,8 @@ my $ArrayRef = $StatsObject->GetStatsList(
 );
 
 my $Counter = 0;
-for ( @{$ArrayRef} ) {
-    if ( $_ eq $StatID1 || $_ eq $StatID2 ) {
+for my $Stat ( @{$ArrayRef} ) {
+    if ( $Stat eq $StatID1 || $Stat eq $StatID2 ) {
         $Counter++;
     }
 }
@@ -290,7 +303,7 @@ my $ExportFile = $StatsObject->Export(
 );
 $Self->True(
     $ExportFile->{Content},
-    'Export() check if Exportfile has a content',
+    'Export() check if export file has a content',
 );
 
 # import the exported stat
@@ -312,29 +325,54 @@ $Self->Is(
 );
 
 # check delete stat function
-$Self->True(
-    $StatsObject->StatsDelete(
-        StatID => $StatID1,
-        UserID => 1,
-    ),
-    'StatsDelete() delete StatID1',
+my $Success = $StatsObject->StatsDelete(
+    StatID => $StatID1,
+    UserID => 1,
 );
 $Self->True(
-    $StatsObject->StatsDelete(
-        StatID => $StatID2,
-        UserID => 1,
-    ),
-    'StatsDelete() delete StatID2',
+    scalar $Success,
+    "StatsDelete() delete StatID1 $StatID1",
+);
+
+$Success = $StatsObject->StatsDelete(
+    StatID => $StatID2,
+    UserID => 1,
 );
 $Self->True(
-    $StatsObject->StatsDelete(
-        StatID => $StatID3,
-        UserID => 1,
-    ),
-    'StatsDelete() delete StatID3',
+    scalar $Success,
+    "StatsDelete() delete StatID2 $StatID2",
+);
+
+$Success = $StatsObject->StatsDelete(
+    StatID => $StatID3,
+    UserID => 1,
+);
+$Self->True(
+    scalar $Success,
+    "StatsDelete() delete StatID3 $StatID3",
 );
 
 # verify stat is deleted
+my $Stat1 = $StatsObject->StatsGet(
+    StatID => $StatID1,
+    UserID => 1,
+);
+$Self->Is(
+    $Stat1->{Title},
+    undef,
+    'StatsGet() check deleted stat1',
+);
+
+my $Stat2 = $StatsObject->StatsGet(
+    StatID => $StatID2,
+    UserID => 1,
+);
+$Self->Is(
+    $Stat2->{Title},
+    undef,
+    'StatsGet() check deleted stat2',
+);
+
 $Stat3 = $StatsObject->StatsGet(
     StatID => $StatID3,
     UserID => 1,
@@ -342,10 +380,11 @@ $Stat3 = $StatsObject->StatsGet(
 $Self->Is(
     $Stat3->{Title},
     undef,
-    'StatsGet() check deleted stat',
+    'StatsGet() check deleted stat3',
 );
 
 # check StatsList
+
 $ArrayRef = $StatsObject->GetStatsList(
     OrderBy   => 'StatID',
     Direction => 'ASC',
@@ -353,32 +392,32 @@ $ArrayRef = $StatsObject->GetStatsList(
 );
 
 $Counter = 0;
-for ( @{$ArrayRef} ) {
-    if ( $_ eq $StatID1 || $_ eq $StatID2 ) {
+for my $Stat ( @{$ArrayRef} ) {
+    if ( $Stat eq $StatID1 || $Stat eq $StatID2 ) {
         $Counter++;
     }
 }
 
-$Self->Is(
+$Self->False(
     $Counter,
-    0,
-    'GetStatsList() check if StatID1 and StatID2 removed from in the statslist',
+    'GetStatsList() check if StatID1 and StatID2 removed from in the stats list',
 );
 
 $StatsHash = $StatsObject->StatsListGet(
     UserID => 1,
 );
+
 $Self->False(
-    exists $StatsHash->{$StatID1},
+    $StatsHash->{$StatID1},
     'StatsListGet() contains Stat1',
 );
 $Self->False(
-    exists $StatsHash->{$StatID2},
+    $StatsHash->{$StatID2},
     'StatsListGet() contains Stat2',
 );
 $Self->False(
-    exists $StatsHash->{$StatID3},
-    'StatsListGet() contains Stat2',
+    $StatsHash->{$StatID3},
+    'StatsListGet() contains Stat3',
 );
 
 # import a Stat and export it - then check if it is the same string
@@ -470,7 +509,7 @@ $Self->False(
     'Import() statistic with not existing object module must fail',
 );
 
-# try to use otrs.Console.pl Maint::Stats::Generate
+# try to use znuny.Console.pl Maint::Stats::Generate
 
 # check the imported stat
 my $Stat4 = $StatsObject->StatsGet( StatID => $StatID );
@@ -538,7 +577,7 @@ $Update = $StatsObject->StatsUpdate(
 );
 $Self->True(
     $Update,
-    'StatsUpdate() Update StatCleanupID1',
+    "StatsUpdate() Update StatCleanupID1 $StatCleanupID1",
 );
 
 $Update = $StatsObject->StatsUpdate(
@@ -559,7 +598,7 @@ $Update = $StatsObject->StatsUpdate(
 );
 $Self->True(
     $Update,
-    'StatsUpdate() Update StatCleanupID2',
+    "StatsUpdate() Update StatCleanupID2 $StatCleanupID2",
 );
 
 # try the clean up function
@@ -595,8 +634,17 @@ $Result = $StatsObject->StatsCleanUp(
     CheckAllObjects => 1,
 );
 $Self->True(
-    $Result,
+    scalar $Result,
     'StatsCleanUp() - clean up stats',
+);
+
+$Success = $StatsObject->StatsDelete(
+    StatID => $StatCleanupID1,
+    UserID => 1,
+);
+$Self->True(
+    scalar $Success,
+    "StatsDelete() delete StatCleanupID1 $StatCleanupID1",
 );
 
 # Check _ToOTRSTimeZone for invalid date (Daylight Saving Time).
@@ -606,9 +654,10 @@ my $String = $StatsObject->_ToOTRSTimeZone(
     TimeZone => 'Europe/Berlin',
 );
 
-$Self->False(
-    $String,
-    '_ToOTRSTimeZone() - invalid date',
+$Self->Is(
+    scalar $String,
+    '2019-03-31 03:30:00',
+    '_ToOTRSTimeZone() - invalid date (DST) corrected to valid date',
 );
 
 # Check _ToOTRSTimeZone for valid date.
@@ -617,8 +666,9 @@ $String = $StatsObject->_ToOTRSTimeZone(
     TimeZone => 'Europe/Berlin',
 );
 
-$Self->True(
-    $String,
+$Self->Is(
+    scalar $String,
+    '2019-03-31 12:30:00',
     '_ToOTRSTimeZone() - valid date',
 );
 

@@ -21,10 +21,11 @@ $Selenium->RunTest(
         my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
         my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $TicketObject          = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $Helper                = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
@@ -35,7 +36,7 @@ $Selenium->RunTest(
 
         # Create test customer companies, create customer user and ticket for each one.
         for ( 0 .. 2 ) {
-            my $RandomID = $Helper->GetRandomID();
+            my $RandomID = $HelperObject->GetRandomID();
 
             my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
                 CustomerID             => 'Company' . $RandomID,
@@ -99,7 +100,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -109,7 +110,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             {

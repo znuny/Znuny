@@ -92,6 +92,9 @@ sub new {
         $Self->{FormID} = $Kernel::OM->Get('Kernel::System::Web::UploadCache')->FormIDCreate();
     }
 
+    $Self->{IsITSMIncidentProblemManagementInstalled}
+        = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
+
     return $Self;
 }
 
@@ -342,6 +345,9 @@ sub Run {
     # get dynamic field values form http request
     my %DynamicFieldValues;
 
+    # to store the reference to the dynamic field for the impact
+    my $ImpactDynamicFieldConfig;
+
     # define the dynamic fields to show based on the object type
     my $ObjectType = ['Ticket'];
 
@@ -370,6 +376,114 @@ sub Run {
             DynamicFieldConfig => $DynamicFieldConfig,
             ParamObject        => $ParamObject,
             LayoutObject       => $LayoutObject,
+        );
+
+        # impact field was found
+        if ( $Self->{IsITSMIncidentProblemManagementInstalled} && $DynamicFieldConfig->{Name} eq 'ITSMImpact' ) {
+
+            # store the reference to the impact field
+            $ImpactDynamicFieldConfig = $DynamicFieldConfig;
+        }
+    }
+
+    my %Service;
+    if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
+
+        # get needed stuff
+        $GetParam{DynamicField_ITSMCriticality} = $ParamObject->GetParam( Param => 'DynamicField_ITSMCriticality' );
+        $GetParam{DynamicField_ITSMImpact}      = $ParamObject->GetParam( Param => 'DynamicField_ITSMImpact' );
+        $GetParam{PriorityRC}                   = $ParamObject->GetParam( Param => 'PriorityRC' );
+        $GetParam{ElementChanged}               = $ParamObject->GetParam( Param => 'ElementChanged' ) || '';
+
+        # check if priority needs to be recalculated
+        if (
+            $GetParam{ElementChanged} eq 'ServiceID'
+            || $GetParam{ElementChanged} eq 'DynamicField_ITSMImpact'
+            || $GetParam{ElementChanged} eq 'DynamicField_ITSMCriticality'
+            )
+        {
+            $GetParam{PriorityRC} = 1;
+        }
+
+        # set service id from ticket
+        if ( !defined $GetParam{ServiceID} && $Ticket{ServiceID} ) {
+            $GetParam{ServiceID} = $Ticket{ServiceID};
+        }
+
+        # set impact from ticket
+        if ( !defined $GetParam{DynamicField_ITSMImpact} ) {
+            $GetParam{DynamicField_ITSMImpact} = $Ticket{DynamicField_ITSMImpact};
+        }
+
+        # set criticality from ticket
+        if ( !defined $GetParam{DynamicField_ITSMCriticality} ) {
+            $GetParam{DynamicField_ITSMCriticality} = $Ticket{DynamicField_ITSMCriticality};
+        }
+
+        if ( $GetParam{ServiceID} ) {
+
+            # get service
+            %Service = $Kernel::OM->Get('Kernel::System::Service')->ServiceGet(
+                ServiceID     => $GetParam{ServiceID},
+                IncidentState => $Config->{ShowIncidentState} || 0,
+                UserID        => $Self->{UserID},
+            );
+
+            if ( $GetParam{ElementChanged} eq 'ServiceID' ) {
+                $GetParam{DynamicField_ITSMCriticality} = $Service{Criticality};
+            }
+
+            # recalculate impact if impact is not set until now
+            if ( !$GetParam{DynamicField_ITSMImpact} && $GetParam{ElementChanged} ne 'DynamicField_ITSMImpact' ) {
+
+                # get default selection
+                my $DefaultSelection = $ImpactDynamicFieldConfig->{Config}->{DefaultValue};
+
+                if ($DefaultSelection) {
+
+                    # get default impact
+                    $GetParam{DynamicField_ITSMImpact} = $DefaultSelection;
+                    $GetParam{PriorityRC}              = 1;
+                }
+            }
+
+            # recalculate priority
+            if ( $GetParam{PriorityRC} && $GetParam{DynamicField_ITSMImpact} && $Config->{Priority} ) {
+
+                if ( $GetParam{DynamicField_ITSMImpact} ) {
+
+                    # get priority
+                    $GetParam{NewPriorityID}
+                        = $Kernel::OM->Get('Kernel::System::ITSMCIPAllocate')->PriorityAllocationGet(
+                        Criticality => $GetParam{DynamicField_ITSMCriticality} || $Service{Criticality},
+                        Impact      => $GetParam{DynamicField_ITSMImpact},
+                        );
+                }
+                else {
+                    $GetParam{NewPriorityID} = '';
+                }
+            }
+        }
+
+        # no service was selected
+        else {
+
+            # do not show the default selection
+            $ImpactDynamicFieldConfig->{Config}->{DefaultValue} = '';
+
+            # show only the empty selection
+            $ImpactDynamicFieldConfig->{Config}->{PossibleValues} = {};
+            $GetParam{DynamicField_ITSMImpact} = '';
+        }
+
+        # set the selected impact and criticality
+        $DynamicFieldValues{ITSMCriticality} = $GetParam{DynamicField_ITSMCriticality} || $Service{Criticality};
+        $DynamicFieldValues{ITSMImpact}      = $GetParam{DynamicField_ITSMImpact};
+
+        # Send config data to JS.
+        $LayoutObject->AddJSData(
+            Key   => $Self->{Action} . 'ShowIncidentState',
+            Value => $Config->{ShowIncidentState},
         );
     }
 
@@ -1237,6 +1351,39 @@ sub Run {
             );
         }
 
+        if (
+            $Self->{IsITSMIncidentProblemManagementInstalled}
+            && ( $GetParam{DynamicField_ITSMCriticality} || $Service{Criticality} )
+            )
+        {
+
+            # get config for criticality dynamic field
+            my $CriticalityDynamicFieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
+                Name => 'ITSMCriticality',
+            );
+
+            # get possible values for criticality
+            my $CriticalityPossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
+                DynamicFieldConfig => $CriticalityDynamicFieldConfig,
+            );
+
+            # reverse the list to find out the key
+            my %ReverseCriticalityPossibleValues = reverse %{$CriticalityPossibleValues};
+
+            my $Criticality = $Service{Criticality} || '';
+            if ( $Config->{DynamicField}->{ITSMCriticality} ) {
+                $Criticality = $GetParam{DynamicField_ITSMCriticality} || '';
+            }
+
+            # set the criticality
+            $DynamicFieldBackendObject->ValueSet(
+                DynamicFieldConfig => $CriticalityDynamicFieldConfig,
+                ObjectID           => $Self->{TicketID},
+                Value              => $ReverseCriticalityPossibleValues{$Criticality},
+                UserID             => $Self->{UserID},
+            );
+        }
+
         # load new URL in parent window and close popup
         $ReturnURL ||= "Action=AgentTicketZoom;TicketID=$Self->{TicketID};ArticleID=$ArticleID";
 
@@ -2002,7 +2149,7 @@ sub _Mask {
         # get user of own groups
         my %ShownUsers;
         my %AllGroupsMembers = $UserObject->UserList(
-            Type  => 'Long',
+            Type  => 'Short',
             Valid => 1,
         );
         if ( $ConfigObject->Get('Ticket::ChangeOwnerToEveryone') ) {
@@ -2031,6 +2178,13 @@ sub _Mask {
         if ($ACL) {
             %ShownUsers = $TicketObject->TicketAclData();
         }
+
+        my %AllGroupsMembersFullnames = $UserObject->UserList(
+            Type  => 'Long',
+            Valid => 1,
+        );
+
+        @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
         # get old owner
         my @OldUserInfo = $TicketObject->TicketOwnerList( TicketID => $Self->{TicketID} );
@@ -2109,7 +2263,7 @@ sub _Mask {
         # get user of own groups
         my %ShownUsers;
         my %AllGroupsMembers = $UserObject->UserList(
-            Type  => 'Long',
+            Type  => 'Short',
             Valid => 1,
         );
         if ( $ConfigObject->Get('Ticket::ChangeOwnerToEveryone') ) {
@@ -2138,6 +2292,13 @@ sub _Mask {
         if ($ACL) {
             %ShownUsers = $TicketObject->TicketAclData();
         }
+
+        my %AllGroupsMembersFullnames = $UserObject->UserList(
+            Type  => 'Long',
+            Valid => 1,
+        );
+
+        @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
         # get responsible
         $Param{ResponsibleStrg} = $LayoutObject->BuildSelection(
@@ -2626,18 +2787,9 @@ sub _Mask {
 
         # show time accounting box
         if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {
-            if ( $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime') ) {
-                $LayoutObject->Block(
-                    Name => 'TimeUnitsLabelMandatory',
-                    Data => \%Param,
-                );
-            }
-            else {
-                $LayoutObject->Block(
-                    Name => 'TimeUnitsLabel',
-                    Data => \%Param,
-                );
-            }
+            $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
+                %Param,
+            );
             $LayoutObject->Block(
                 Name => 'TimeUnits',
                 Data => \%Param,
@@ -2690,9 +2842,12 @@ sub _GetNextStates {
 
 sub _GetResponsible {
     my ( $Self, %Param ) = @_;
+
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     my %ShownUsers;
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -2728,16 +2883,28 @@ sub _GetResponsible {
         UserID        => $Self->{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return \%ShownUsers;
 }
 
 sub _GetOwners {
     my ( $Self, %Param ) = @_;
+
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     my %ShownUsers;
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -2773,7 +2940,16 @@ sub _GetOwners {
         UserID        => $Self->{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return \%ShownUsers;
 }

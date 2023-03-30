@@ -20,12 +20,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Change web max file upload.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'WebMaxFileUpload',
             Value => '68000'
@@ -34,7 +35,7 @@ $Selenium->RunTest(
         my $Language = 'en';
 
         # Create test customer user and login.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
             Language => $Language,
         ) || die "Did not get test customer user";
 
@@ -69,12 +70,10 @@ $Selenium->RunTest(
         );
 
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
-        my $Home        = $ConfigObject->Get('Home');
 
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
-        $Selenium->find_element("//a[contains(\@id, \'ReplyButton' )]")->click();
         $Selenium->WaitFor(
-            JavaScript => "return typeof(\$) === 'function' && \$('#FollowUp.Visible').length"
+            JavaScript => "return typeof(\$) === 'function' && \$('#VisibleMessageContent').length"
         );
 
         # Check DnDUpload.
@@ -96,7 +95,7 @@ $Selenium->RunTest(
         );
 
         my $CheckFileTypeFilename = 'Test1.png';
-        my $Location              = "$Home/scripts/test/sample/Cache/$CheckFileTypeFilename";
+        my $Location              = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckFileTypeFilename";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length' );
@@ -131,7 +130,7 @@ $Selenium->RunTest(
         );
 
         # Now try to upload two files of which one exceeds the max size (.pdf should work (5KB), .png shouldn't (20KB))
-        $Location = "$Home/scripts/test/sample/Cache/Test1.pdf";
+        $Location = "$Selenium->{Home}/scripts/test/sample/Cache/Test1.pdf";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
         $Selenium->WaitFor(
@@ -141,7 +140,7 @@ $Selenium->RunTest(
         sleep 1;
 
         my $CheckMaxAllowedSizeFilename = 'Test1.png';
-        $Location = "$Home/scripts/test/sample/Cache/$CheckMaxAllowedSizeFilename";
+        $Location = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckMaxAllowedSizeFilename";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
         $Selenium->WaitFor(
@@ -176,7 +175,7 @@ $Selenium->RunTest(
 
         # Upload file again.
         my $CheckUploadAgainFilename = 'Test1.pdf';
-        $Location = "$Home/scripts/test/sample/Cache/$CheckUploadAgainFilename";
+        $Location = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckUploadAgainFilename";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length' );
@@ -195,9 +194,11 @@ $Selenium->RunTest(
         $Selenium->find_element( "#DialogButton1", 'css' )->click();
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length' );
 
+        sleep 2;
+
         # Delete Attachment.
-        $Selenium->find_element( "(//a[\@class='AttachmentDelete'])[1]", 'xpath' )->click();
-        sleep 1;
+        $Selenium->find_element( 'a.AttachmentDelete', 'css' )->click();
+        sleep 2;
 
         # Wait until attachment is deleted.
         $Selenium->WaitFor(
@@ -233,7 +234,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

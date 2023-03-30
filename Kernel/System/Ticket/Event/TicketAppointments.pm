@@ -15,7 +15,6 @@ use warnings;
 use parent qw(Kernel::System::AsynchronousExecutor);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Log',
     'Kernel::System::Ticket',
 );

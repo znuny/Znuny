@@ -19,18 +19,18 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # enable PerformanceLog
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PerformanceLog',
             Value => 1
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -41,7 +41,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AdminPerformanceLog screen
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminPerformanceLog");
@@ -76,15 +76,11 @@ $Selenium->RunTest(
             $Selenium->find_element( "div.Progressbar",   'css' )->is_displayed();
 
             # check breadcrumb on Add screen
-            my $Count = 1;
             for my $BreadcrumbText ( 'Performance Log', $RangeBreadcrumb{$Time} ) {
-                $Self->Is(
-                    $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                    $BreadcrumbText,
-                    "Breadcrumb text '$BreadcrumbText' is found on screen"
+                $Selenium->ElementExists(
+                    Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                    SelectorType => 'css',
                 );
-
-                $Count++;
             }
 
             # click on "Go to overview"
@@ -93,7 +89,7 @@ $Selenium->RunTest(
         }
 
         # Clean-up.
-        unlink $Kernel::OM->Get('Kernel::Config')->Get('Home') . "/var/log/Performance.log";
+        unlink $ConfigObject->Get('Home') . "/var/log/Performance.log";
 
     }
 

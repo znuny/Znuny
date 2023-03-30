@@ -17,6 +17,7 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
 );
 
@@ -61,9 +62,9 @@ returns 1 on success or undef on error
     my $Success = $DebugLogObject->LogAdd(
         CommunicationID   => '6f1ed002ab5595859014ebf0951522d9',
         CommunicationType => 'Provider',        # 'Provider' or 'Requester'
-        Data              => 'additional data' # optional
-        DebugLevel        => 'info',           # 'debug', 'info', 'notice', 'error'
-        RemoteIP          => '192.168.0.1',    # optional, must be valid IPv4 or IPv6 address
+        Data              => 'additional data', # optional
+        DebugLevel        => 'info',            # 'debug', 'info', 'notice', 'error'
+        RemoteIP          => '192.168.0.1',     # optional, must be valid IPv4 or IPv6 address
         Summary           => 'description of log entry',
         WebserviceID      => 1,
     );
@@ -787,35 +788,13 @@ sub LogCleanup {
 
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
-    # Get main debug log entries to delete
-    if (
-        !$DBObject->Prepare(
-            SQL  => 'SELECT id FROM gi_debugger_entry WHERE create_time <= ?',
-            Bind => [ \$Param{CreatedAtOrBefore} ],
-        )
-        )
-    {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Could not prepare db query!',
-        );
-        return;
-    }
-    my @LogEntryIDs;
-    while ( my @Row = $DBObject->FetchrowArray() ) {
-        push @LogEntryIDs, $Row[0];
-    }
-
-    return 1 if !@LogEntryIDs;
-
-    my $LogEntryIDsStr = join ',', @LogEntryIDs;
-
     # Remove debug log entries contents.
     if (
         !$DBObject->Do(
             SQL => "
             DELETE FROM gi_debugger_entry_content
-            WHERE gi_debugger_entry_id in( $LogEntryIDsStr )",
+            WHERE gi_debugger_entry_id IN ( SELECT id FROM gi_debugger_entry WHERE create_time <= ? )",
+            Bind => [ \$Param{CreatedAtOrBefore} ],
         )
         )
     {
@@ -831,7 +810,8 @@ sub LogCleanup {
         !$DBObject->Do(
             SQL => "
             DELETE FROM gi_debugger_entry
-            WHERE id in( $LogEntryIDsStr )",
+            WHERE create_time <= ?",
+            Bind => [ \$Param{CreatedAtOrBefore} ],
         )
         )
     {

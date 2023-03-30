@@ -19,11 +19,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject        = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject         = $Kernel::OM->Get('Kernel::System::Queue');
+        my $SysConfigObject     = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $CacheObject         = $Kernel::OM->Get('Kernel::System::Cache');
+        my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
 
         # make sure Ticket::Frontend::CustomerTicketMessage###Queue sysconfig is set to 'Yes'
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketMessage###Queue',
             Value => 1
@@ -33,8 +37,8 @@ $Selenium->RunTest(
         my @QueueIDs;
         my @QueueNames;
         for my $CreateQueue ( 1 .. 2 ) {
-            my $QueueName = "Queue" . $Helper->GetRandomID();
-            my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+            my $QueueName = "Queue" . $HelperObject->GetRandomID();
+            my $QueueID   = $QueueObject->QueueAdd(
                 Name            => $QueueName,
                 ValidID         => 1,
                 GroupID         => 1,
@@ -53,8 +57,8 @@ $Selenium->RunTest(
         }
 
         # create test system address
-        my $SystemAddressName = "SystemAddress" . $Helper->GetRandomID() . "\@localhost.com";
-        my $SystemAddressID   = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressAdd(
+        my $SystemAddressName = "SystemAddress" . $HelperObject->GetRandomID() . "\@localhost.com";
+        my $SystemAddressID   = $SystemAddressObject->SystemAddressAdd(
             Name     => $SystemAddressName,
             Realname => 'Selenium SystemAddress',
             ValidID  => 1,
@@ -64,7 +68,7 @@ $Selenium->RunTest(
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestUserLogin = $HelperObject->TestCustomerUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -75,7 +79,7 @@ $Selenium->RunTest(
         );
 
         # navigate to create new ticket
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketMessage");
 
         # check for test queue destination on customer new ticket
@@ -87,7 +91,7 @@ $Selenium->RunTest(
         );
 
         # switch to system address as new destination for customer new ticket
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerPanelSelectionType',
             Value => 'SystemAddress'
@@ -134,7 +138,7 @@ $Selenium->RunTest(
 
         # make sure the cache is correct.
         for my $Cache (qw(Queue SystemAddress)) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => $Cache );
+            $CacheObject->CleanUp( Type => $Cache );
         }
     }
 );

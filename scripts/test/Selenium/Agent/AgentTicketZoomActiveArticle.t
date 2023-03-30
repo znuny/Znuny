@@ -19,41 +19,45 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
         my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
         my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Email');
+        my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject   = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $UserObject           = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject          = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Set zoom sort to reverse.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::ZoomExpandSort',
             Value => 'reverse',
         );
 
         # Set maximum number of articles per page.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MaxArticlesPerPage',
             Value => 10,
         );
 
         # Create test customer.
-        my $TestCustomerUser = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUser = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Get test customer user ID.
-        my %TestCustomerUserData = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
+        my %TestCustomerUserData = $CustomerUserObject->CustomerUserDataGet(
             User => $TestCustomerUser,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -119,7 +123,7 @@ $Selenium->RunTest(
         );
 
         # Get script alias.
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketZoom for test created ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -166,7 +170,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
 
     }
 );

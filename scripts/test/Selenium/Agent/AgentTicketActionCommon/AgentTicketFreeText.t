@@ -33,43 +33,48 @@ $Selenium->RunTest(
         my $SLAObject       = $Kernel::OM->Get('Kernel::System::SLA');
         my $StateObject     = $Kernel::OM->Get('Kernel::System::State');
         my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
-        my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $UtilObject      = $Kernel::OM->Get('Kernel::System::Util');
+        my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
+
+        my $RandomID = $HelperObject->GetRandomID();
         my $Success;
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Enable ticket responsible feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1,
         );
 
         # Enable ticket service feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1,
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate()
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate()
             || die "Did not get test customer user";
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -107,12 +112,46 @@ $Selenium->RunTest(
             "QueueID $QueueID is created",
         );
 
+        my %ITSMCoreSLA;
+        my %ITSMCoreService;
+
+        if ($IsITSMInstalled) {
+
+            my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
+            # get the list of service types from general catalog
+            my $ServiceTypeList = $GeneralCatalogObject->ItemList(
+                Class => 'ITSM::Service::Type',
+            );
+
+            # build a lookup hash
+            my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+            # get the list of sla types from general catalog
+            my $SLATypeList = $GeneralCatalogObject->ItemList(
+                Class => 'ITSM::SLA::Type',
+            );
+
+            # build a lookup hash
+            my %SLATypeName2ID = reverse %{$SLATypeList};
+
+            %ITSMCoreSLA = (
+                TypeID => $SLATypeName2ID{Other},
+            );
+
+            %ITSMCoreService = (
+                TypeID      => $ServiceTypeName2ID{Training},
+                Criticality => '3 normal',
+            );
+        }
+
         # Create test service.
         my $ServiceName = 'Service' . $RandomID;
         my $ServiceID   = $ServiceObject->ServiceAdd(
             Name    => $ServiceName,
             ValidID => 1,
             UserID  => 1,
+            %ITSMCoreService,
         );
         $Self->True(
             $ServiceID,
@@ -134,6 +173,7 @@ $Selenium->RunTest(
             Name       => $SLAName,
             ValidID    => 1,
             UserID     => 1,
+            %ITSMCoreSLA,
         );
         $Self->True(
             $TicketID,
@@ -167,7 +207,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Define field IDs and frontend modules.
         my %FreeTextFields = (
@@ -229,7 +269,7 @@ $Selenium->RunTest(
 
             for my $NoMandatoryField ( values %{ $FreeTextFields{NoMandatory} } ) {
 
-                $Helper->ConfigSettingChange(
+                $HelperObject->ConfigSettingChange(
                     Valid => 1,
                     Key   => "Ticket::Frontend::AgentTicketFreeText###$NoMandatoryField",
                     Value => $Test->{NoMandatory},
@@ -238,7 +278,7 @@ $Selenium->RunTest(
 
             for my $MandatoryField ( values %{ $FreeTextFields{Mandatory} } ) {
 
-                $Helper->ConfigSettingChange(
+                $HelperObject->ConfigSettingChange(
                     Valid => 1,
                     Key   => "Ticket::Frontend::AgentTicketFreeText###$MandatoryField",
                     Value => $Test->{Mandatory},
@@ -252,12 +292,7 @@ $Selenium->RunTest(
             $Selenium->WaitFor( JavaScript => 'return typeof($) === "function";' );
 
             # Force sub menus to be visible in order to be able to click one of the links.
-            $Selenium->execute_script("\$('#nav-Miscellaneous ul').css('height', 'auto');");
-            $Selenium->execute_script("\$('#nav-Miscellaneous ul').css('opacity', '1');");
-            $Selenium->WaitFor(
-                JavaScript =>
-                    "return \$('#nav-Miscellaneous ul').css('height') !== '0px' && \$('#nav-Miscellaneous ul').css('opacity') == '1';"
-            );
+            $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
 
             # Click on 'Free Fields' and switch window.
             $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketFreeText;TicketID=$TicketID' )]")
@@ -321,12 +356,7 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function";' );
 
         # Force sub menus to be visible in order to be able to click one of the links.
-        $Selenium->execute_script("\$('#nav-Miscellaneous ul').css('height', 'auto');");
-        $Selenium->execute_script("\$('#nav-Miscellaneous ul').css('opacity', '1');");
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return \$('#nav-Miscellaneous ul').css('height') !== '0px' && \$('#nav-Miscellaneous ul').css('opacity') == '1';"
-        );
+        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
 
         # Click on 'Free Fields' and switch window.
         $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketFreeText;TicketID=$TicketID' )]")->click();
@@ -520,6 +550,18 @@ $Selenium->RunTest(
             $Success,
             "Relation SLAID $SLAID referenced to service ID $ServiceID is deleted",
         );
+
+        if ($IsITSMInstalled) {
+
+            # Delete created test service preferences.
+            $Success = $DBObject->Do(
+                SQL => "DELETE FROM service_preferences WHERE service_id = $ServiceID",
+            );
+            $Self->True(
+                $Success,
+                "ServiceID $ServiceID prefereneces is deleted",
+            );
+        }
 
         # Delete created test service.
         $Success = $DBObject->Do(

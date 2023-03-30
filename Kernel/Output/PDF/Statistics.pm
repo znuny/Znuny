@@ -9,8 +9,6 @@
 
 package Kernel::Output::PDF::Statistics;
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::PodChecker)
-
 use strict;
 use warnings;
 
@@ -21,7 +19,6 @@ our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Log',
     'Kernel::System::PDF',
-    'Kernel::System::User',
 );
 
 sub new {

@@ -18,18 +18,20 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject                = $Kernel::OM->Get('Kernel::System::DB');
+        my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Enable SMIME due to 'Enable email security' checkbox must be enabled.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME',
             Value => 1,
@@ -39,7 +41,7 @@ $Selenium->RunTest(
         my $TooLongString = 'A' x 4001;
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -82,15 +84,11 @@ $Selenium->RunTest(
         }
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText ( 'Ticket Notification Management', 'Add Notification' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Toggle Ticket filter widget.
@@ -110,7 +108,7 @@ $Selenium->RunTest(
         );
 
         # Create test NotificationEvent.
-        my $NotifEventRandomID = 'NotificationEvent' . $Helper->GetRandomID();
+        my $NotifEventRandomID = 'NotificationEvent' . $HelperObject->GetRandomID();
         my $NotifEventText     = 'Selenium NotificationEvent test';
         $Selenium->find_element( '#Name',    'css' )->send_keys($NotifEventRandomID);
         $Selenium->find_element( '#Comment', 'css' )->send_keys($NotifEventText);
@@ -170,7 +168,7 @@ $Selenium->RunTest(
         $Selenium->find_element( "#Submit", 'css' )->click();
 
         # If database backend is PostgreSQL or Oracle, first test body length validation.
-        my $DBType = $Kernel::OM->Get('Kernel::System::DB')->{'DB::Type'};
+        my $DBType = $DBObject->{'DB::Type'};
         if (
             $DBType eq 'postgresql'
             || $DBType eq 'oracle'
@@ -260,19 +258,15 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText (
             'Ticket Notification Management',
             'Edit Notification: ' . $NotifEventRandomID
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Edit test NotificationEvent and set it to invalid.
@@ -308,6 +302,22 @@ $Selenium->RunTest(
         $Self->True(
             $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length;"),
             "$Notification - notification is found."
+        );
+
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
         );
 
         # Check edited NotifcationEvent values.
@@ -464,7 +474,7 @@ $Selenium->RunTest(
         );
 
         # Get NotificationEventID.
-        my %NotifEventID = $Kernel::OM->Get('Kernel::System::NotificationEvent')->NotificationGet(
+        my %NotifEventID = $NotificationEventObject->NotificationGet(
             Name => $NotifEventRandomID
         );
 
@@ -490,7 +500,7 @@ $Selenium->RunTest(
             "Test NotificationEvent is deleted - $NotifEventRandomID",
         ) || die;
 
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/NotificationEvent/Export_Notification_Ticket_create_notification.yml";
 
         # Import existing template without overwrite.
@@ -533,9 +543,8 @@ $Selenium->RunTest(
 
        # For English notification text remove button is added.
        # Notification text it is not shown on add screen if DefaultUsedLanguages has no English included. See bug#14594.
-        my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
-        my $NotificationID          = $NotificationEventObject->NotificationAdd(
-            Name => "Notification$Helper->GetRandomID()",
+        my $NotificationID = $NotificationEventObject->NotificationAdd(
+            Name => "Notification$HelperObject->GetRandomID()",
             Data => {
                 Events => ['TicketQueueUpdate'],
             },
@@ -557,7 +566,7 @@ $Selenium->RunTest(
         );
 
         # Set only one language as default.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'DefaultUsedLanguages',
             Valid => 1,
             Value => {
@@ -591,7 +600,7 @@ $Selenium->RunTest(
         );
 
         # Set only one language as default.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'DefaultUsedLanguages',
             Valid => 1,
             Value => {

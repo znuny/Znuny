@@ -20,9 +20,9 @@ $Self->False(
     'Valid object has no method AutoLoadTest by default.',
 );
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'AutoloadPerlPackages###1000-Test',
     Value => ['Kernel::Autoload::Test'],

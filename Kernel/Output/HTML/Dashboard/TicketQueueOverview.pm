@@ -57,6 +57,27 @@ sub Run {
     my $LimitGroup = $Self->{Config}->{QueuePermissionGroup} || 0;
     my $CacheKey   = 'User' . '-' . $Self->{UserID} . '-' . $LimitGroup;
 
+    # get layout object
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    # check for refresh time
+    my $Refresh = '';
+    if ( $Self->{UserRefreshTime} ) {
+        $Refresh = 60 * $Self->{UserRefreshTime};
+        my $NameHTML = $Self->{Name};
+        $NameHTML =~ s{-}{_}xmsg;
+
+        # send data to JS
+        $LayoutObject->AddJSData(
+            Key   => 'QueueOverview',
+            Value => {
+                Name        => $Self->{Name},
+                NameHTML    => $NameHTML,
+                RefreshTime => $Refresh,
+            },
+        );
+    }
+
     # get cache object
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
@@ -160,7 +181,9 @@ sub Run {
         );
 
         # Gather ticket count for corresponding Queue <-> State.
+        QUEUEID:
         for my $QueueID (@QueueIDs) {
+            next QUEUEID if !%Queues || !$Queues{$QueueID};
             push @{ $Results{ $Queues{$QueueID} } },
                 $TicketCountByQueueID->{$QueueID} ? $TicketCountByQueueID->{$QueueID} : 0;
         }
@@ -171,9 +194,6 @@ sub Run {
     for my $StateOrder ( sort { $a <=> $b } keys %ConfiguredStates ) {
         push @Headers, $ConfiguredStates{$StateOrder};
     }
-
-    # get layout object
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     for my $HeaderItem (@Headers) {
         $LayoutObject->Block(
@@ -261,24 +281,6 @@ sub Run {
             Data => {
                 ColumnCount => ( scalar keys %ConfiguredStates ) + 2,
             }
-        );
-    }
-
-    # check for refresh time
-    my $Refresh = '';
-    if ( $Self->{UserRefreshTime} ) {
-        $Refresh = 60 * $Self->{UserRefreshTime};
-        my $NameHTML = $Self->{Name};
-        $NameHTML =~ s{-}{_}xmsg;
-
-        # send data to JS
-        $LayoutObject->AddJSData(
-            Key   => 'QueueOverview',
-            Value => {
-                Name        => $Self->{Name},
-                NameHTML    => $NameHTML,
-                RefreshTime => $Refresh,
-            },
         );
     }
 

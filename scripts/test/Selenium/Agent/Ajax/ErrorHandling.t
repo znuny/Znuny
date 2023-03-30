@@ -17,30 +17,32 @@ use Kernel::Language;
 
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
-# TODO: This test does not cancel potential other AJAX calls that might happen in the background,
-#   e. g. when OTRSBusiness is installed and the Chat is active.
+# TODO: This test does not cancel potential other AJAX calls that might happen in the background.
 
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
         # Change "Move" action to be a link instead of dropdown, since there is an issue to click
         # on the "Customer" action (dropdown can be on top is some cases).
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MoveType',
             Value => 'link',
         );
 
         my $Language      = 'de';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Language => $Language,
             Groups   => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -74,8 +76,11 @@ $Selenium->RunTest(
             'Check for opened alert text',
         );
 
+        # the footer is in the way some times
+        sleep 1;
+
         # Close dialog.
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
 
         # Wait until modal dialog has closed.
         $Selenium->WaitFor(
@@ -157,7 +162,7 @@ JAVASCRIPT
         );
 
         # Close the dialog.
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length;'
         );
@@ -181,7 +186,7 @@ JAVASCRIPT
         );
 
         # Now we close the dialog manually.
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length;'
         );
@@ -212,16 +217,16 @@ JAVASCRIPT
         );
 
         # Create a test ticket to see if the dialogs work in popups, too.
-        my $TestCustomerUser = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUser = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
-        my %TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
+        my %TestCustomerUserID = $CustomerUserObject->CustomerUserDataGet(
             User => $TestCustomerUser,
         );
 
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
-        my $TitleRandom  = "Title" . $Helper->GetRandomID();
+        my $TitleRandom  = "Title" . $HelperObject->GetRandomID();
         my $TicketNumber = $TicketObject->TicketCreateNumber();
         my $TicketID     = $TicketObject->TicketCreate(
             TN         => $TicketNumber,
@@ -242,8 +247,8 @@ JAVASCRIPT
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
 
         # Open the owner change dialog.
-        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
-        $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketOwner' )]")->click();
+        $Selenium->execute_script("\$('.Cluster ul ul#nav-People-container').addClass('ForceVisible');");
+        $Selenium->execute_script('$(\'#nav-People a[href*="Action=AgentTicketOwner"]\').click()');
 
         $Selenium->WaitFor( WindowCount => 2 );
         my $Handles = $Selenium->get_window_handles();
@@ -293,7 +298,7 @@ JAVASCRIPT
             "ConnectionReEstablished dialog visible"
         );
 
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
 
         # Wait until modal dialog has closed.
         $Selenium->WaitFor(
@@ -323,7 +328,7 @@ JAVASCRIPT
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

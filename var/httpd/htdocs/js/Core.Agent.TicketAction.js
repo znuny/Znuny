@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -154,7 +155,7 @@ Core.Agent.TicketAction = (function (TargetNS) {
     function MarkPrimaryCustomer() {
         $('.CustomerContainer').children('div').each(function() {
             var $InputObj = $(this).find('.CustomerTicketText'),
-                $RadioObj = $(this).find('.CustomerTicketRadio');
+                $RadioObj = $(this).find('.RadioRound');
 
             if ($RadioObj.prop('checked')) {
                 $InputObj.addClass('MainCustomer');
@@ -307,6 +308,26 @@ Core.Agent.TicketAction = (function (TargetNS) {
             $TemplateSelect.data('LastValue', $TemplateSelect.val());
         }
     }
+
+    /**
+     * @name SetTimeUnits
+     * @memberof Core.Agent.TicketAction
+     * @function
+     * @param {String} Selector - The selector for TimeUnit input field and dropdown fields.
+     * @description
+     *      This function will set the time units which are selected in the dropdown.
+    */
+    TargetNS.SetTimeUnits = function(Selector) {
+        var Count = 0,
+            $TimeUnits = $('#' + Selector);
+
+        $('.TimeUnitDropdown.' + Selector).each(function() {
+            Count += Number($(this).val() || 0);
+            $(this).removeClass('Validate_Required');
+        });
+
+        $TimeUnits.val(Count);
+    };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 

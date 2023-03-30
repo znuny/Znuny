@@ -19,34 +19,34 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # enable ticket responsible feature
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1
         );
 
-        # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        # Create test user.
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
+
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
 
         $Selenium->Login(
             Type     => 'Agent',
             User     => $TestUserLogin,
             Password => $TestUserLogin,
         );
-
-        # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
-            UserLogin => $TestUserLogin,
-        );
-
-        # get ticket object
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # create test ticket
         my $TicketID = $TicketObject->TicketCreate(
@@ -74,7 +74,7 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@title, \'Responsible Tickets Total:\' )]")->VerifiedClick();
 
         # verify that test is on the correct screen
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         my $ExpectedURL = "${ScriptAlias}index.pl?Action=AgentTicketResponsibleView";
 
         $Self->True(

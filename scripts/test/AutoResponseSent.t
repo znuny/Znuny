@@ -44,7 +44,12 @@ my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
     ChannelName => 'Email',
 );
-my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
+my $MailQueueObject     = $Kernel::OM->Get('Kernel::System::MailQueue');
+my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
+
+my %SystemAddress = $SystemAddressObject->SystemAddressGet(
+    ID => 1,
+);
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -53,7 +58,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # don't validate email addresses
 $ConfigObject->Set(
@@ -128,7 +133,7 @@ for my $Test (@Tests) {
     );
 
     # create test queue
-    my $QueueName = 'Queue' . $Helper->GetRandomID();
+    my $QueueName = 'Queue' . $HelperObject->GetRandomID();
     my $QueueID   = $QueueObject->QueueAdd(
         Name            => $QueueName,
         ValidID         => 1,
@@ -147,7 +152,7 @@ for my $Test (@Tests) {
     push @QueueIDs, $QueueID;
 
     # create test auto-response
-    my $AutoResponseName = 'AutoResponse' . $Helper->GetRandomID();
+    my $AutoResponseName = 'AutoResponse' . $HelperObject->GetRandomID();
     my $AutoResponseID   = $AutoResponseObject->AutoResponseAdd(
         Name        => $AutoResponseName,
         ValidID     => 1,
@@ -292,6 +297,63 @@ for my $Test (@Tests) {
         $Self->True(
             !$LastArticleMailSent && !scalar( @{$Emails} ),
             "Test $Count : Emails fetched from backend - AutoResponse $Test->{AutoResponseType} suppressed by X-OTRS-Loop",
+        );
+    }
+
+    # clean up test email backend again
+    $Success = $TestEmailObject->CleanUp();
+    $Self->True(
+        $Success,
+        "Test $Count : Test backend Email cleanup - success",
+    );
+    $Self->IsDeeply(
+        $TestEmailObject->EmailsGet(),
+        [],
+        "Test $Count : Test backend Email - empty after cleanup",
+    );
+
+    # check auto response not being sent if original sender was a system address
+    $ArticleIDOne = $ArticleBackendObject->ArticleCreate(
+        TicketID             => $TicketIDOne,
+        IsVisibleForCustomer => 1,
+        SenderType           => 'customer',
+        Subject              => 'UnitTest article one',
+        From                 => $SystemAddress{Name},
+        To                   => $QueueName,
+        Body                 => 'UnitTest body',
+        Charset              => 'utf-8',
+        MimeType             => 'text/plain',
+        HistoryType          => 'PhoneCallCustomer',
+        HistoryComment       => 'Some free text!',
+        UserID               => 1,
+        UnlockOnAway         => 1,
+        AutoResponseType     => $Test->{AutoResponseType},
+        OrigHeader           => {
+            From          => $SystemAddress{Name},
+            To            => $QueueName,
+            Subject       => 'UnitTest article one',
+            Body          => 'UnitTest body',
+            'X-OTRS-Loop' => 'no'
+
+        },
+        Queue => $QueueName,
+    );
+    $Self->True(
+        $ArticleIDOne,
+        "Test $Count : ArticleCreate() - ArticleID $ArticleIDOne",
+    );
+
+    {
+        # Get last article for the ticket and really send it
+        my $LastArticleMailSent = $SendLastTicketArticleMail->(
+            TicketID => $TicketIDOne,
+        );
+
+        # check if AutoResponse is sent
+        my $Emails = $TestEmailObject->EmailsGet();
+        $Self->True(
+            !$LastArticleMailSent && !scalar( @{$Emails} ),
+            "Test $Count : Emails fetched from backend - AutoResponse $Test->{AutoResponseType} suppressed for system address",
         );
     }
 

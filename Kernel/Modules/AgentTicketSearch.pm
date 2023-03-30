@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Perl::DBObject)
 
 package Kernel::Modules::AgentTicketSearch;
 
@@ -296,6 +297,20 @@ sub Run {
             if (@Array) {
                 $GetParam{$Key} = \@Array;
             }
+        }
+
+        # add ToolBarSearch
+        my %ToolBarSearchParam;
+        my @ParamNames = $ParamObject->GetParamNames();
+        KEY:
+        for my $Key (@ParamNames) {
+            next KEY if $Key !~ m{^ToolBarSearch(.*)}sm;
+            $ToolBarSearchParam{$Key} = $ParamObject->GetParam( Param => $Key );
+        }
+
+        if ( %ToolBarSearchParam && $ToolBarSearchParam{ToolBarSearchBackend} =~ m{^ToolBarSearchBackend(.*)}xms ) {
+            my $Key = $1;
+            $GetParam{$Key} = $ToolBarSearchParam{ToolBarSearchTerm};
         }
 
         # get Dynamic fields from param object

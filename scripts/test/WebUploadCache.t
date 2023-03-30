@@ -26,7 +26,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 for my $Module (qw(DB FS)) {
 
@@ -48,13 +48,13 @@ for my $Module (qw(DB FS)) {
         "#$Module - FormIDCreate()",
     );
 
-    my $InvalidFormID = $Helper->GetRandomID();
+    my $InvalidFormID = $HelperObject->GetRandomID();
 
     # file checks
-    for my $File (qw(xls txt doc png pdf)) {
+    for my $FileExtension (qw(xls txt doc png pdf)) {
 
         my $Location = $ConfigObject->Get('Home')
-            . "/scripts/test/sample/WebUploadCache/WebUploadCache-Test1.$File";
+            . "/scripts/test/sample/WebUploadCache/WebUploadCache-Test1.$FileExtension";
         my $ContentRef = $MainObject->FileRead(
             Location => $Location,
             Mode     => 'binmode',
@@ -63,34 +63,35 @@ for my $Module (qw(DB FS)) {
         $EncodeObject->EncodeOutput( \$Content );
 
         my $MD5         = md5_hex($Content);
-        my $ContentID   = $Helper->GetRandomID();
+        my $ContentID   = $HelperObject->GetRandomID();
         my $Disposition = 'inline';
 
-        if ( $File eq 'txt' ) {
+        if ( $FileExtension eq 'txt' ) {
             $ContentID   = undef;
             $Disposition = 'attachment';
         }
 
         my $Add = $UploadCacheObject->FormIDAddFile(
             FormID      => $FormID,
-            Filename    => 'UploadCache Test1äöüß.' . $File,
+            Filename    => 'UploadCache Test1äöüß.' . $FileExtension,
             Content     => $Content,
             ContentType => 'text/html',
             ContentID   => $ContentID,
             Disposition => $Disposition,
         );
 
-        my $Filename = "UploadCache Test1äöüß.$File";
+        # formatted filename by FilenameCleanUp()
+        my $ExpectedFilename = "UploadCache Test1äöüß.$FileExtension";
 
         $Self->True(
             $Add || '',
-            "#$Module - FormIDAddFile() - ." . $File,
+            "#$Module - FormIDAddFile() - ." . $FileExtension,
         );
 
         if ( $Module eq 'FS' ) {
             my $Add = $UploadCacheObject->FormIDAddFile(
                 FormID      => $InvalidFormID,
-                Filename    => 'UploadCache Test1äöüß.' . $File,
+                Filename    => 'UploadCache Test1äöüß.' . $FileExtension,
                 Content     => $Content,
                 ContentType => 'text/html',
                 ContentID   => $ContentID,
@@ -108,20 +109,21 @@ for my $Module (qw(DB FS)) {
         );
         if (@Data) {
             my %File = %{ $Data[-1] };
+
             $Self->Is(
                 $File{ContentID},
                 $ContentID,
-                "#$Module - FormIDGetAllFilesData() - ContentID ." . $File,
+                "#$Module - FormIDGetAllFilesData() - ContentID ." . $FileExtension,
             );
 
             $Self->Is(
                 $File{Filename},
-                $Filename,
-                "#$Module - FormIDGetAllFilesData() - Filename ." . $File,
+                $ExpectedFilename,
+                "#$Module - FormIDGetAllFilesData() - Filename ." . $FileExtension,
             );
             $Self->True(
                 $File{Content} eq $Content,
-                "#$Module - FormIDGetAllFilesData() - Content ." . $File,
+                "#$Module - FormIDGetAllFilesData() - Content ." . $FileExtension,
             );
             $EncodeObject->EncodeOutput( \$File{Content} );
             my $MD5New = md5_hex( $File{Content} );
@@ -132,7 +134,7 @@ for my $Module (qw(DB FS)) {
             );
             $Self->True(
                 $File{Disposition} eq $Disposition,
-                "#$Module - FormIDGetAllFilesData() - Disposition ." . $File,
+                "#$Module - FormIDGetAllFilesData() - Disposition ." . $FileExtension,
             );
         }
         @Data = $UploadCacheObject->FormIDGetAllFilesMeta( FormID => $FormID );
@@ -141,17 +143,17 @@ for my $Module (qw(DB FS)) {
             $Self->Is(
                 $File{ContentID},
                 $ContentID,
-                "#$Module - FormIDGetAllFilesMeta() - ContentID ." . $File,
+                "#$Module - FormIDGetAllFilesMeta() - ContentID ." . $FileExtension,
             );
 
             $Self->Is(
                 $File{Filename},
-                $Filename,
-                "#$Module - FormIDGetAllFilesMeta() - Filename ." . $File,
+                $ExpectedFilename,
+                "#$Module - FormIDGetAllFilesMeta() - Filename ." . $FileExtension,
             );
             $Self->True(
                 $File{Disposition} eq $Disposition,
-                "#$Module - FormIDGetAllFilesMeta() - Disposition ." . $File,
+                "#$Module - FormIDGetAllFilesMeta() - Disposition ." . $FileExtension,
             );
         }
 
@@ -173,14 +175,14 @@ for my $Module (qw(DB FS)) {
         );
         $Self->True(
             $Delete || '',
-            "#$Module - FormIDRemoveFile() - ." . $File,
+            "#$Module - FormIDRemoveFile() - ." . $FileExtension,
         );
     }
 
     # file checks without ContentID
-    for my $File (qw(xls txt doc png pdf)) {
+    for my $FileExtension (qw(xls txt doc png pdf)) {
         my $Location = $ConfigObject->Get('Home')
-            . "/scripts/test/sample/WebUploadCache/WebUploadCache-Test1.$File";
+            . "/scripts/test/sample/WebUploadCache/WebUploadCache-Test1.$FileExtension";
         my $ContentRef = $MainObject->FileRead(
             Location => $Location,
             Mode     => 'binmode',
@@ -190,22 +192,23 @@ for my $Module (qw(DB FS)) {
         $EncodeObject->EncodeOutput( \$Content );
         my $MD5         = md5_hex($Content);
         my $Disposition = 'inline';
-        if ( $File eq 'txt' ) {
+        if ( $FileExtension eq 'txt' ) {
             $Disposition = 'attachment';
         }
         my $Add = $UploadCacheObject->FormIDAddFile(
             FormID      => $FormID,
-            Filename    => 'UploadCache Test1äöüß.' . $File,
+            Filename    => 'UploadCache Test1äöüß.' . $FileExtension,
             Content     => $Content,
             ContentType => 'text/html',
             Disposition => $Disposition,
         );
 
-        my $Filename = "UploadCache Test1äöüß.$File";
+        # formatted filename by FilenameCleanUp()
+        my $ExpectedFilename = "UploadCache Test1äöüß.$FileExtension";
 
         $Self->True(
             $Add || '',
-            "#$Module - FormIDAddFile() - ." . $File,
+            "#$Module - FormIDAddFile() - ." . $FileExtension,
         );
 
         if ( $Module eq 'FS' ) {
@@ -227,12 +230,12 @@ for my $Module (qw(DB FS)) {
 
             $Self->Is(
                 $File{Filename},
-                $Filename,
-                "#$Module - FormIDGetAllFilesData() - Filename ." . $File,
+                $ExpectedFilename,
+                "#$Module - FormIDGetAllFilesData() - Filename ." . $FileExtension,
             );
             $Self->True(
                 $File{Content} eq $Content,
-                "#$Module - FormIDGetAllFilesData() - Content ." . $File,
+                "#$Module - FormIDGetAllFilesData() - Content ." . $FileExtension,
             );
             $EncodeObject->EncodeOutput( \$File{Content} );
             my $MD5New = md5_hex( $File{Content} );
@@ -244,7 +247,7 @@ for my $Module (qw(DB FS)) {
             $Self->Is(
                 $File{Disposition},
                 $Disposition,
-                "#$Module - FormIDGetAllFilesData() - Disposition ." . $File,
+                "#$Module - FormIDGetAllFilesData() - Disposition ." . $FileExtension,
             );
         }
 
@@ -264,12 +267,12 @@ for my $Module (qw(DB FS)) {
             my %File = %{ $Data[-1] };
             $Self->Is(
                 $File{Filename},
-                $Filename,
-                "#$Module - FormIDGetAllFilesMeta() - Filename ." . $File,
+                $ExpectedFilename,
+                "#$Module - FormIDGetAllFilesMeta() - Filename ." . $FileExtension,
             );
             $Self->True(
                 $File{Disposition} eq $Disposition,
-                "#$Module - FormIDGetAllFilesMeta() - Disposition ." . $File,
+                "#$Module - FormIDGetAllFilesMeta() - Disposition ." . $FileExtension,
             );
         }
         my $Delete = $UploadCacheObject->FormIDRemoveFile(
@@ -278,7 +281,7 @@ for my $Module (qw(DB FS)) {
         );
         $Self->True(
             $Delete || '',
-            "#$Module - FormIDRemoveFile() - ." . $File,
+            "#$Module - FormIDRemoveFile() - ." . $FileExtension,
         );
     }
 
@@ -298,7 +301,5 @@ for my $Module (qw(DB FS)) {
         );
     }
 }
-
-# cleanup is done by RestoreDatabase
 
 1;

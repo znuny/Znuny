@@ -19,40 +19,50 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject              = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # enable tool bar CICSearchCustomerUser
         my %CICSearchCustomerUser = (
-            Block       => 'ToolBarCICSearchCustomerUser',
+            Block       => 'ToolBarSearch',
             CSS         => 'Core.Agent.Toolbar.CICSearch.css',
             Description => 'Customer user search',
             Module      => 'Kernel::Output::HTML::ToolBar::Generic',
-            Name        => 'Customer user search',
-            Priority    => '1990040',
+            Name        => 'CustomerUser',
+            Priority    => '1990030',
             Size        => '10',
         );
 
-        $Helper->ConfigSettingChange(
-            Key   => 'Frontend::ToolBarModule###14-Ticket::CICSearchCustomerUser',
+        $HelperObject->ConfigSettingChange(
+            Key   => 'Frontend::ToolBarModule###240-CICSearchCustomerUser',
             Value => \%CICSearchCustomerUser,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###14-Ticket::CICSearchCustomerUser',
+            Key   => 'Frontend::ToolBarModule###240-CICSearchCustomerUser',
             Value => \%CICSearchCustomerUser,
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
+
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
 
         $Selenium->Login(
             Type     => 'Agent',
@@ -60,15 +70,10 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
-            UserLogin => $TestUserLogin,
-        );
-
         # create test company
-        my $TestCustomerID    = $Helper->GetRandomID() . 'CID';
-        my $TestCompanyName   = 'Company' . $Helper->GetRandomID();
-        my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $TestCustomerID    = $HelperObject->GetRandomID() . 'CID';
+        my $TestCompanyName   = 'Company' . $HelperObject->GetRandomID();
+        my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $TestCustomerID,
             CustomerCompanyName    => $TestCompanyName,
             CustomerCompanyStreet  => '5201 Blue Lagoon Drive',
@@ -87,9 +92,9 @@ $Selenium->RunTest(
         );
 
         # create test customer
-        my $TestCustomerLogin = "Customer" . $Helper->GetRandomID();
+        my $TestCustomerLogin = "Customer" . $HelperObject->GetRandomID();
         my $TestCustomerEmail = $TestCustomerLogin . "\@localhost.com";
-        my $CustomerID        = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerID        = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomerLogin,
             UserLastname   => $TestCustomerLogin,
@@ -106,7 +111,15 @@ $Selenium->RunTest(
         );
 
         # input test user in search Customer user
-        $Selenium->find_element( "#ToolBarCICSearchCustomerUser", 'css' )->send_keys($TestCustomerLogin);
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#ToolBarSearchTerm").length' );
+        $Selenium->find_element( "#ToolBarSearchTerm", 'css' )->click();
+
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $("#ToolBarSearchBackendCustomerUser").length'
+        );
+        $Selenium->find_element( "#ToolBarSearchBackendCustomerUser", 'css' )->click();
+        $Selenium->find_element( "#ToolBarSearchTerm",                'css' )->send_keys($TestCustomerLogin);
+
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TestCustomerLogin)').click()");
 
@@ -123,9 +136,6 @@ $Selenium->RunTest(
             $Selenium->find_element( '#CustomerUserInformationCenterHeading', 'css' ),
             "Check heading for CustomerUserInformationCenter",
         );
-
-        # get DB object
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
         # delete test customer company
         my $Success = $DBObject->Do(
@@ -152,7 +162,7 @@ $Selenium->RunTest(
             qw (CustomerCompany CustomerUser)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

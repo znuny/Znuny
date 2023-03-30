@@ -22,16 +22,18 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+my $Version      = $ConfigObject->Get('Version');
 
 my $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.1">
     <Name>TestPackage1</Name>
     <Version>0.0.1</Version>
-    <Vendor>OTRS AG</Vendor>
+    <Vendor>Znuny GmbH</Vendor>
     <URL>https://otrs.com/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <Description Lang="en">TestPackage1.</Description>
-    <Framework>6.0.x</Framework>
+    <Framework>' . $Version . '</Framework>
     <BuildDate>2016-10-11 02:35:46</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>
@@ -44,11 +46,11 @@ my $String2 = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.1">
     <Name>TestPackage2</Name>
     <Version>0.0.1</Version>
-    <Vendor>OTRS AG</Vendor>
+    <Vendor>Znuny GmbH</Vendor>
     <URL>https://otrs.com/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <Description Lang="en">TestPackage2.</Description>
-    <Framework>6.0.x</Framework>
+    <Framework>' . $Version . '</Framework>
     <BuildDate>2016-10-11 02:36:29</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>

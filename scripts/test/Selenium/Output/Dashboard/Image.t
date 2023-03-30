@@ -19,23 +19,23 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         # get dashboard Image plugin default sysconfig
-        my %ImageConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %ImageConfig = $SysConfigObject->SettingGet(
             Name    => 'DashboardBackend###0200-Image',
             Default => 1,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0200-Image',
             Value => $ImageConfig{EffectiveValue},
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

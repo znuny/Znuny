@@ -19,11 +19,12 @@ use Kernel::Language qw(Translatable);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::Ticket',
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Database Records');
+    return Translatable('Znuny') . '/' . Translatable('Database Records');
 }
 
 sub Run {
@@ -77,7 +78,7 @@ sub Run {
             Label      => Translatable("Roles"),
         },
         {
-            SQL        => "SELECT count(*) FROM groups",
+            SQL        => "SELECT count(*) FROM permission_groups",
             Identifier => 'GroupCount',
             Label      => Translatable("Groups"),
         },
@@ -128,7 +129,6 @@ sub Run {
         },
     );
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     my %Counts;

@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 use strict;
 use warnings;
@@ -42,7 +43,7 @@ getopt( 'hcrtd', \%Opts );
 if ( exists $Opts{h} ) {
     print <<EOF;
 
-Backup an OTRS system.
+Backup a Znuny system.
 
 Usage:
  backup.pl -d /data_backup_dir [-c gzip|bzip2] [-r DAYS] [-t fullbackup|nofullbackup|dbonly]
@@ -55,7 +56,7 @@ Options:
  [-h]                   - Display help for this command.
 
 Help:
-Using -t fullbackup saves the database and the whole OTRS home directory (except /var/tmp and cache directories).
+Using -t fullbackup saves the database and the whole Znuny home directory (except /var/tmp and cache directories).
 Using -t nofullbackup saves only the database, /Kernel/Config* and /var directories.
 With -t dbonly only the database will be saved.
 
@@ -109,7 +110,7 @@ else {
 # create common objects
 local $Kernel::OM = Kernel::System::ObjectManager->new(
     'Kernel::System::Log' => {
-        LogPrefix => 'OTRS-backup.pl',
+        LogPrefix => 'Znuny-backup.pl',
     },
 );
 
@@ -244,7 +245,7 @@ if ( $DB =~ m/mysql/i ) {
     }
     if (
         !system(
-            "( $DBDump -u $DatabaseUser $DatabasePw -h $DatabaseHost $Database || touch $ErrorIndicationFileName ) | $CompressCMD > $Directory/DatabaseBackup.sql.$CompressEXT"
+            "( $DBDump -u $DatabaseUser $DatabasePw -h $DatabaseHost $Database --no-tablespaces || touch $ErrorIndicationFileName ) | $CompressCMD > $Directory/DatabaseBackup.sql.$CompressEXT"
         )
         && !-f $ErrorIndicationFileName
         )
@@ -367,8 +368,8 @@ if ( defined $Opts{r} ) {
     }
 }
 
-# If error occurs this functions remove incomlete backup folder to avoid the impression
-#   that the backup was ok (see http://bugs.otrs.org/show_bug.cgi?id=10665).
+# If error occurs this function removes incomlete backup folder to avoid the impression
+#   that the backup was ok.
 sub RemoveIncompleteBackup {
 
     # get parameters

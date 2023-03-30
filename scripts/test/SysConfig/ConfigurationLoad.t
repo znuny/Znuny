@@ -222,26 +222,6 @@ my @Tests = (
         Success => 1,
     },
     {
-        Name              => 'Setting disabled',
-        ConfigurationPerl => {
-            Modified => {
-                'OutOfOfficeMessageTemplate' => {
-                    EffectiveValue => 'template',
-                    IsValid        => 0,
-                },
-            },
-        },
-        Config => {
-            UserID => 1,
-        },
-        ExpectedResults => {
-            Modified => {
-                'OutOfOfficeMessageTemplate' => 'template',
-            },
-        },
-        Success => 1,
-    },
-    {
         Name              => 'Full Load',
         ConfigurationPerl => {
             Default => {

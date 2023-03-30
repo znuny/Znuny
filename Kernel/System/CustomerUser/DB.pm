@@ -22,15 +22,14 @@ our @ObjectDependencies = (
     'Kernel::Language',
     'Kernel::System::Cache',
     'Kernel::System::CheckItem',
-    'Kernel::System::DateTime',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Valid',
-    'Kernel::System::DynamicFieldValueObjectName',
 );
 
 sub new {
@@ -362,7 +361,7 @@ sub CustomerSearch {
                     $SQLExt .= " LOWER($Field) = LOWER(?) ";
                 }
             }
-            $SQL .= $SQLExt;
+            $SQL .= " ($SQLExt) ";
         }
     }
     elsif ( $Param{UserLogin} ) {
@@ -1638,12 +1637,6 @@ sub CustomerUserUpdate {
             OldUserID => $UserData{UserLogin},
         );
     }
-
-    # log notice
-    $Kernel::OM->Get('Kernel::System::Log')->Log(
-        Priority => 'info',
-        Message  => "CustomerUser: '$Param{UserLogin}' updated successfully ($Param{UserID})!",
-    );
 
     # check pw
     if ( $Param{UserPassword} ) {

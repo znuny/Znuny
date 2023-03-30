@@ -17,6 +17,7 @@ use vars (qw($Self));
 my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
 my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 my $ServiceObject      = $Kernel::OM->Get('Kernel::System::Service');
+my $IsITSMInstalled    = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -24,7 +25,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # don't check email address validity
 $ConfigObject->Set(
@@ -50,13 +51,20 @@ for my $ServiceID (@OriginalDefaultServices) {
 }
 
 # add service1
-my $ServiceRand1 = 'SomeService' . $Helper->GetRandomID();
-my $ServiceID1   = $ServiceObject->ServiceAdd(
+my $ServiceRand1  = 'SomeService' . $HelperObject->GetRandomID();
+my %ServiceValues = (
     Name    => $ServiceRand1,
     Comment => 'Some Comment',
     ValidID => 1,
     UserID  => 1,
 );
+
+if ($IsITSMInstalled) {
+    $ServiceValues{TypeID}      = 1;
+    $ServiceValues{Criticality} = '3 normal';
+}
+
+my $ServiceID1 = $ServiceObject->ServiceAdd(%ServiceValues);
 
 $Self->True(
     $ServiceID1,
@@ -64,22 +72,29 @@ $Self->True(
 );
 
 # add service2
-my $ServiceRand2 = 'SomeService' . $Helper->GetRandomID();
-my $ServiceID2   = $ServiceObject->ServiceAdd(
+my $ServiceRand2 = 'SomeService' . $HelperObject->GetRandomID();
+%ServiceValues = (
     Name    => $ServiceRand2,
     Comment => 'Some Comment',
     ValidID => 1,
     UserID  => 1,
 );
 
+if ($IsITSMInstalled) {
+    $ServiceValues{TypeID}      = 1;
+    $ServiceValues{Criticality} = '3 normal';
+}
+
+my $ServiceID2 = $ServiceObject->ServiceAdd(%ServiceValues);
+
 $Self->True(
     $ServiceID2,
     'ServiceAdd2()',
 );
 
-my $CustomerUser1 = $Helper->TestCustomerUserCreate()
+my $CustomerUser1 = $HelperObject->TestCustomerUserCreate()
     || die "Did not get test customer user";
-my $CustomerUser2 = $Helper->TestCustomerUserCreate()
+my $CustomerUser2 = $HelperObject->TestCustomerUserCreate()
     || die "Did not get test customer user";
 
 # allocation test 1
@@ -365,7 +380,7 @@ $Self->True(
 my %Customer = $CustomerUserObject->CustomerUserDataGet(
     User => $CustomerUser1,
 );
-my $NewCustomerUser1 = $Helper->GetRandomID();
+my $NewCustomerUser1 = $HelperObject->GetRandomID();
 my $Update           = $CustomerUserObject->CustomerUserUpdate(
     %Customer,
     ID        => $Customer{UserLogin},

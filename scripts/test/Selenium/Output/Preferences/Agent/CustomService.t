@@ -20,25 +20,30 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UtilObject   = $Kernel::OM->Get('Kernel::System::Util');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
 
         # enable the services
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => '1',
         );
 
         # don't keep children services
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service::KeepChildren',
             Value => '0',
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -49,7 +54,7 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -59,13 +64,21 @@ $Selenium->RunTest(
         # create two test services
         my @ServiceIDs;
         my @ServiceNames;
+        my %ITSMServiceValues;
+        if ($IsITSMInstalled) {
+            $ITSMServiceValues{TypeID}      = 1;
+            $ITSMServiceValues{Criticality} = '3 normal';
+        }
+
         for my $Service (qw(Parent Child)) {
-            my $ServiceName = $Service . 'Service' . $Helper->GetRandomID();
-            my $ServiceID   = $ServiceObject->ServiceAdd(
+            my $ServiceName = $Service . 'Service' . $HelperObject->GetRandomID();
+
+            my $ServiceID = $ServiceObject->ServiceAdd(
                 Name    => $ServiceName,
                 ValidID => 2,                 # invalid
                 Comment => 'Selenium Test',
                 UserID  => 1,
+                %ITSMServiceValues,
             );
             $Self->True(
                 $ServiceID,
@@ -82,13 +95,14 @@ $Selenium->RunTest(
             ParentID  => $ServiceIDs[0],
             ValidID   => 1,
             UserID    => 1,
+            %ITSMServiceValues,
         );
         $Self->True(
             $Success,
             "Service ID $ServiceIDs[1] is now child service"
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # go to agent preferences
         $Selenium->VerifiedGet(
@@ -105,7 +119,7 @@ $Selenium->RunTest(
         );
 
         # turn on keep children setting
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service::KeepChildren',
             Value => '1',
@@ -172,7 +186,7 @@ $Selenium->RunTest(
         }
 
         # make sure the cache is correct
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Service',
         );
     },

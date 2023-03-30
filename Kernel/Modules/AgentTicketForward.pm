@@ -145,11 +145,11 @@ sub Run {
 sub Form {
     my ( $Self, %Param ) = @_;
 
+    my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+
     my %Error;
     my %ACLCompatGetParam = %{ $Self->{ACLCompatGetParam} };
-
-    # get layout object
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # check needed stuff
     if ( !$Self->{TicketID} ) {
@@ -364,7 +364,7 @@ sub Form {
         AttachmentsInclude => 1,
     );
 
-    my %SafetyCheckResult = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+    my %SafetyCheckResult = $HTMLUtilsObject->Safety(
         String => $Data{Body},
 
         # Strip out external content if BlockLoadingRemoteContent is enabled.
@@ -386,6 +386,20 @@ sub Form {
             ArticleID => $Data{ArticleID},
         );
         $Data{Sender} = $ArticleFields{Sender}->{Value} // '';
+    }
+
+    # restrict number of body lines if configured
+    my $ForwardQuoteMaxLines = $ConfigObject->Get('Ticket::Frontend::ForwardQuoteMaxLines');
+    if (
+        IsStringWithData( $Data{Body} )
+        && $ForwardQuoteMaxLines
+        )
+    {
+        $Data{Body} = $HTMLUtilsObject->TruncateBodyQuote(
+            Body       => $Data{Body},
+            Limit      => $ForwardQuoteMaxLines,
+            HTMLOutput => $LayoutObject->{BrowserRichText},
+        ) // $Data{Body};
     }
 
     if ( $LayoutObject->{BrowserRichText} ) {
@@ -1877,18 +1891,9 @@ sub _Mask {
 
     # show time accounting box
     if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {
-        if ( $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime') ) {
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelMandatory',
-                Data => \%Param,
-            );
-        }
-        else {
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabel',
-                Data => \%Param,
-            );
-        }
+        $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
+            %Param,
+        );
         $LayoutObject->Block(
             Name => 'TimeUnits',
             Data => \%Param,

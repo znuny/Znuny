@@ -22,7 +22,7 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $TestObjectLogDelete = sub {
     my %Param = @_;
@@ -426,7 +426,7 @@ my @Test = (
 
 for my $Test (@Test) {
 
-    $Helper->FixedTimeSet();
+    $HelperObject->FixedTimeSet();
 
     # Create an object, representing a new communication:
     my $CommunicationLogObject = $Kernel::OM->Create(
@@ -533,7 +533,7 @@ for my $Test (@Test) {
         "$Test->{Name} - Communication list - Duration.",
     );
 
-    $Helper->FixedTimeAddSeconds(1);
+    $HelperObject->FixedTimeAddSeconds(1);
 
     #
     # Communication Stop

@@ -18,13 +18,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
-        my $SLAObject     = $Kernel::OM->Get('Kernel::System::SLA');
-        my $StatsObject   = $Kernel::OM->Get('Kernel::System::Stats');
-        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ServiceObject   = $Kernel::OM->Get('Kernel::System::Service');
+        my $SLAObject       = $Kernel::OM->Get('Kernel::System::SLA');
+        my $StatsObject     = $Kernel::OM->Get('Kernel::System::Stats');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
-        my $Success = $Helper->ConfigSettingChange(
+        my $Success = $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1,
@@ -35,10 +36,18 @@ $Selenium->RunTest(
 
         # Add test services and SLAs.
         for ( 1 .. 5 ) {
-            my $ServiceID = $ServiceObject->ServiceAdd(
-                Name    => "TestService - " . $Helper->GetRandomID(),
+            my %ServiceValues = (
+                Name    => "TestService - " . $HelperObject->GetRandomID(),
                 ValidID => 1,
                 UserID  => 1,
+            );
+            if ($IsITSMInstalled) {
+                $ServiceValues{TypeID}      = 1;
+                $ServiceValues{Criticality} = '3 normal';
+            }
+
+            my $ServiceID = $ServiceObject->ServiceAdd(
+                %ServiceValues,
             );
             $Self->True(
                 $ServiceID,
@@ -53,10 +62,17 @@ $Selenium->RunTest(
             );
             push @ServiceIDs, $ServiceID;
 
-            my $SLAID = $SLAObject->SLAAdd(
-                Name    => "TestSLA - " . $Helper->GetRandomID(),
+            my %SLAValues = (
+                Name    => "TestSLA - " . $HelperObject->GetRandomID(),
                 ValidID => 1,
                 UserID  => 1,
+            );
+            if ($IsITSMInstalled) {
+                $SLAValues{TypeID} = 1;
+            }
+
+            my $SLAID = $SLAObject->SLAAdd(
+                %SLAValues,
             );
             $Self->True(
                 $SLAID,
@@ -67,7 +83,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', 'stats' ],
         ) || die "Did not get test user";
 
@@ -95,7 +111,7 @@ $Selenium->RunTest(
 
         my @Tests = (
             {
-                Title            => 'Statistic DynamicMatrix' . $Helper->GetRandomID(),
+                Title            => 'Statistic DynamicMatrix' . $HelperObject->GetRandomID(),
                 Object           => 'Kernel::System::Stats::Dynamic::Ticket',
                 Type             => 'DynamicMatrix',
                 XAxis            => 'XAxisServiceIDs',
@@ -104,7 +120,7 @@ $Selenium->RunTest(
                 Restrictionvalue => 3,
             },
             {
-                Title             => 'Statistic DynamicMatrix' . $Helper->GetRandomID(),
+                Title             => 'Statistic DynamicMatrix' . $HelperObject->GetRandomID(),
                 Object            => 'Kernel::System::Stats::Dynamic::Ticket',
                 Type              => 'DynamicMatrix',
                 XAxis             => 'XAxisCreateTime',
@@ -114,7 +130,7 @@ $Selenium->RunTest(
                 SelectedTimeField => 1,
             },
             {
-                Title            => 'Statistic - TicketAccountedTime' . $Helper->GetRandomID(),
+                Title            => 'Statistic - TicketAccountedTime' . $HelperObject->GetRandomID(),
                 Object           => 'Kernel::System::Stats::Dynamic::TicketAccountedTime',
                 Type             => 'DynamicMatrix',
                 XAxis            => 'XAxisKindsOfReporting',
@@ -123,7 +139,7 @@ $Selenium->RunTest(
                 Restrictionvalue => $ServiceIDs[0],
             },
             {
-                Title            => 'Statistic - TicketSolutionResponseTime' . $Helper->GetRandomID(),
+                Title            => 'Statistic - TicketSolutionResponseTime' . $HelperObject->GetRandomID(),
                 Object           => 'Kernel::System::Stats::Dynamic::TicketSolutionResponseTime',
                 Type             => 'DynamicMatrix',
                 XAxis            => 'XAxisKindsOfReporting',
@@ -132,7 +148,7 @@ $Selenium->RunTest(
                 Restrictionvalue => $ServiceIDs[0],
             },
             {
-                Title              => 'Statistic - TicketList' . $Helper->GetRandomID(),
+                Title              => 'Statistic - TicketList' . $HelperObject->GetRandomID(),
                 Object             => 'Kernel::System::Stats::Dynamic::TicketList',
                 Type               => 'DynamicList',
                 YAxis              => 'YAxisOrderBy',

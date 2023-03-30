@@ -17,12 +17,11 @@ use parent qw(Kernel::System::SupportDataCollector::PluginBase);
 use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Ticket::Article',
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Article Search Index Status');
+    return Translatable('Znuny') . '/' . Translatable('Article Search Index Status');
 }
 
 sub Run {

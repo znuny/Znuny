@@ -7,7 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 package Kernel::System::PostMaster::LoopProtectionCommon;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Time)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Time)
 
 use strict;
 use warnings;

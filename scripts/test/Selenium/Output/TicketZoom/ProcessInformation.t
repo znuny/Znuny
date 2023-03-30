@@ -19,12 +19,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # disable 'Customer Information' and 'Linked Objects' widgets in AgentTicketZoom screen
         for my $WidgetDisable (qw(0200-CustomerInformation 0300-LinkTable)) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 0,
                 Key   => "Ticket::Frontend::AgentTicketZoom###Widgets###$WidgetDisable",
                 Value => '',
@@ -32,24 +33,24 @@ $Selenium->RunTest(
         }
 
         # do not check RichText, service and type
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -60,7 +61,7 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -74,7 +75,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
 
         # import test selenium process scenario
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
         $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
@@ -122,7 +123,7 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#Subject").length' );
 
         # input process ticket subject and body
-        my $SubjectRand = 'ProcessSubject-' . $Helper->GetRandomID();
+        my $SubjectRand = 'ProcessSubject-' . $HelperObject->GetRandomID();
         $Selenium->InputFieldValueSet(
             Element => '#QueueID',
             Value   => 2,
@@ -248,7 +249,6 @@ $Selenium->RunTest(
             "Process ticket ID $TicketIDs[0] is deleted",
         );
 
-        # get needed objects
         my $ActivityObject       = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Activity');
         my $ActivityDialogObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::ActivityDialog');
 
@@ -356,7 +356,7 @@ $Selenium->RunTest(
             qw (Ticket TicketSearch ProcessManagement_Activity ProcessManagement_ActivityDialog ProcessManagement_Transition ProcessManagement_TransitionAction )
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

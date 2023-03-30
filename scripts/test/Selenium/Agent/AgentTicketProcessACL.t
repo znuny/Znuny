@@ -18,42 +18,42 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
         my $ACLObject     = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
         my $QueueObject   = $Kernel::OM->Get('Kernel::System::Queue');
         my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
 
         # Do not check RichText and Service.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
 
         # Disable CheckEmailAddresses feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckEmailAddresses',
             Value => 0
         );
 
         # Disable CheckMXRecord feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckMXRecord',
             Value => 0
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test user.
-        my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         );
 
@@ -133,7 +133,7 @@ $Selenium->RunTest(
             );
 
             # Import test Selenium Process.
-            my $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
+            my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
             $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
             $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
             $Selenium->WaitFor(

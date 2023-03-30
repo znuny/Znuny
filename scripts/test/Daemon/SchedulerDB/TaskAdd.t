@@ -20,7 +20,7 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
 
 my $NumberOfTasks = 2_500;

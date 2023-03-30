@@ -15,6 +15,7 @@ use warnings;
 use MIME::Base64;
 
 use Kernel::System::VariableCheck qw(:all);
+use Kernel::Language qw(Translatable);
 
 use parent qw(Kernel::System::EventHandler);
 
@@ -180,7 +181,7 @@ sub Create {
                 CommunicationLogObject => $Param{CommunicationLogObject},
             );
         },
-        ErrorMessage => 'Error while validating Message data.',
+        ErrorMessage => Translatable('Error while validating Message data.'),
     );
 
     # Check if sender and recipent are valid email addresses.
@@ -192,7 +193,7 @@ sub Create {
                 CommunicationLogObject => $Param{CommunicationLogObject},
             );
         },
-        ErrorMessage => 'Error while validating Sender email address.',
+        ErrorMessage => Translatable('Error while validating Sender email address.'),
     );
 
     return if !$OnErrorSetArticleTransmissionError->(
@@ -203,7 +204,7 @@ sub Create {
                 CommunicationLogObject => $Param{CommunicationLogObject},
             );
         },
-        ErrorMessage => 'Error while validating Recipient email address.',
+        ErrorMessage => Translatable('Error while validating Recipient email address.'),
     );
 
     # Check if already exists a mail-queue item for the same article id.
@@ -266,11 +267,11 @@ sub Create {
 Get a list of the queue elements.
 
     my $List = $MailQueue->List(
-        ID              => '...' # optional
-        ArticleID       => '...' # optional
-        Sender          => '...' # optional
-        Recipient       => '...' # optional
-        Attempts        => '...' # optional
+        ID              => '...', # optional
+        ArticleID       => '...', # optional
+        Sender          => '...', # optional
+        Recipient       => '...', # optional
+        Attempts        => '...', # optional
     );
 
 This returns something like:
@@ -1154,12 +1155,12 @@ sub _SendEventNotification {
 Build the filter sql and associated binds.
 
     my ( $FilterSQL, $Binds ) = $MailQueue->_FiltersSQLAndBinds(
-        ID              => '...' # optional
-        ArticleID       => '...' # optional
-        CommunicationID => '...' # optional
-        Sender          => '...' # optional
-        Recipient       => '...' # optional
-        Attempts        => '...' # optional
+        ID              => '...', # optional
+        ArticleID       => '...', # optional
+        CommunicationID => '...', # optional
+        Sender          => '...', # optional
+        Recipient       => '...', # optional
+        Attempts        => '...', # optional
     );
 
 This returns something like:

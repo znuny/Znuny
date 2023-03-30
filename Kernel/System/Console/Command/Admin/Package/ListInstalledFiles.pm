@@ -15,15 +15,13 @@ use warnings;
 use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
-    'Kernel::System::Main',
     'Kernel::System::Package',
 );
 
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('List all installed OTRS package files.');
+    $Self->Description('List all installed package files.');
 
     return;
 }

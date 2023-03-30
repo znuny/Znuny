@@ -18,25 +18,26 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # Disable warn on stop word usage.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::SearchIndex::WarnOnStopWordUsage',
             Value => 0,
         );
 
         # Enable ModernizeFormFields.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'ModernizeFormFields',
             Value => 1,
         );
 
-        my $RandomID = $Helper->GetRandomID();
-
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-        my $DFTextName         = 'Text' . $RandomID;
+        my $RandomID   = $HelperObject->GetRandomID();
+        my $DFTextName = 'Text' . $RandomID;
 
         my %DynamicFields = (
             Date => {
@@ -105,7 +106,7 @@ $Selenium->RunTest(
 
         my %LookupDynamicFieldNames = map { $DynamicFields{$_}->{Name} => 1 } sort keys %DynamicFields;
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketSearch###DynamicField',
             Value => \%LookupDynamicFieldNames,
@@ -122,7 +123,7 @@ $Selenium->RunTest(
                 String => '2017-05-04 23:00:00',
             },
         );
-        $Helper->FixedTimeSet($SystemTime);
+        $HelperObject->FixedTimeSet($SystemTime);
 
         my @TicketIDs;
         my $TitleRandom  = "Title" . $RandomID;
@@ -174,7 +175,7 @@ $Selenium->RunTest(
             UserID    => 1,
         );
 
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -184,7 +185,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Go to agent preferences screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentPreferences;Subaction=Group;Group=UserProfile");
@@ -274,7 +275,7 @@ $Selenium->RunTest(
         );
 
         # Enable warn on stop word usage.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::SearchIndex::WarnOnStopWordUsage',
             Value => 1,
@@ -282,7 +283,7 @@ $Selenium->RunTest(
 
         # Recreate article object and update article index for static DB.
         $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::System::Ticket::Article'] );
-        $Kernel::OM->Get('Kernel::System::Ticket::Article')->ArticleSearchIndexBuild(
+        $ArticleObject->ArticleSearchIndexBuild(
             TicketID  => $TicketID,
             ArticleID => $ArticleID,
             UserID    => 1,
@@ -672,7 +673,7 @@ $Selenium->RunTest(
         );
 
         # Verify tree selection view in AgentTicketSearch for multiple fields. See bug#14494.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'ModernizeFormFields',
             Value => 0,
         );
@@ -847,7 +848,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
 
     },
 );

@@ -12,10 +12,14 @@ package Kernel::System::Web::UploadCache::FS;
 use strict;
 use warnings;
 
+use Kernel::System::VariableCheck qw(:all);
+use File::Basename;
+
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Log',
     'Kernel::System::Main',
+    'Kernel::System::FormDraft',
 );
 
 sub new {
@@ -256,16 +260,18 @@ sub FormIDGetAllFilesData {
 
     my $Counter = 0;
 
-    FILE:
-    for my $File (@List) {
+    FILEPATH:
+    for my $FilePath (@List) {
 
         # ignore meta files
-        next FILE if $File =~ /\.ContentType$/;
-        next FILE if $File =~ /\.ContentID$/;
-        next FILE if $File =~ /\.Disposition$/;
+        next FILEPATH if $FilePath =~ /\.ContentType$/;
+        next FILEPATH if $FilePath =~ /\.ContentID$/;
+        next FILEPATH if $FilePath =~ /\.Disposition$/;
 
         $Counter++;
-        my $FileSize = -s $File;
+        my $FileSize = -s $FilePath;
+
+        my $Filename = basename($FilePath);
 
         # human readable file size
         if ( defined $FileSize ) {
@@ -276,22 +282,22 @@ sub FormIDGetAllFilesData {
             }
         }
         my $Content = $MainObject->FileRead(
-            Location => $File,
+            Location => $FilePath,
             Mode     => 'binmode',    # optional - binmode|utf8
         );
-        next FILE if !$Content;
+        next FILEPATH if !$Content;
 
         my $ContentType = $MainObject->FileRead(
-            Location => "$File.ContentType",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.ContentType",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$ContentType;
+        next FILEPATH if !$ContentType;
 
         my $ContentID = $MainObject->FileRead(
-            Location => "$File.ContentID",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.ContentID",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$ContentID;
+        next FILEPATH if !$ContentID;
 
         # verify if content id is empty, set to undef
         if ( !${$ContentID} ) {
@@ -299,20 +305,18 @@ sub FormIDGetAllFilesData {
         }
 
         my $Disposition = $MainObject->FileRead(
-            Location => "$File.Disposition",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.Disposition",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$Disposition;
+        next FILEPATH if !$Disposition;
 
-        # strip filename
-        $File =~ s/^.*\/(.+?)$/$1/;
         push(
             @Data,
             {
                 Content     => ${$Content},
                 ContentID   => ${$ContentID},
                 ContentType => ${$ContentType},
-                Filename    => $File,
+                Filename    => $Filename,
                 Filesize    => $FileSize,
                 FileID      => $Counter,
                 Disposition => ${$Disposition},
@@ -354,16 +358,18 @@ sub FormIDGetAllFilesMeta {
 
     my $Counter = 0;
 
-    FILE:
-    for my $File (@List) {
+    FILEPATH:
+    for my $FilePath (@List) {
 
         # ignore meta files
-        next FILE if $File =~ /\.ContentType$/;
-        next FILE if $File =~ /\.ContentID$/;
-        next FILE if $File =~ /\.Disposition$/;
+        next FILEPATH if $FilePath =~ /\.ContentType$/;
+        next FILEPATH if $FilePath =~ /\.ContentID$/;
+        next FILEPATH if $FilePath =~ /\.Disposition$/;
 
         $Counter++;
-        my $FileSize = -s $File;
+        my $FileSize = -s $FilePath;
+
+        my $Filename = basename($FilePath);
 
         # human readable file size
         if ( defined $FileSize ) {
@@ -375,16 +381,16 @@ sub FormIDGetAllFilesMeta {
         }
 
         my $ContentType = $MainObject->FileRead(
-            Location => "$File.ContentType",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.ContentType",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$ContentType;
+        next FILEPATH if !$ContentType;
 
         my $ContentID = $MainObject->FileRead(
-            Location => "$File.ContentID",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.ContentID",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$ContentID;
+        next FILEPATH if !$ContentID;
 
         # verify if content id is empty, set to undef
         if ( !${$ContentID} ) {
@@ -392,19 +398,17 @@ sub FormIDGetAllFilesMeta {
         }
 
         my $Disposition = $MainObject->FileRead(
-            Location => "$File.Disposition",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.Disposition",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$Disposition;
+        next FILEPATH if !$Disposition;
 
-        # strip filename
-        $File =~ s/^.*\/(.+?)$/$1/;
         push(
             @Data,
             {
                 ContentID   => ${$ContentID},
                 ContentType => ${$ContentType},
-                Filename    => $File,
+                Filename    => $Filename,
                 Filesize    => $FileSize,
                 FileID      => $Counter,
                 Disposition => ${$Disposition},
@@ -420,6 +424,41 @@ sub FormIDCleanUp {
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
+    # check for draft dependency within cache
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $FormDraftTTL = $ConfigObject->Get('FormDraftTTL');
+
+    my %DraftForms;
+    my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
+    for my $ObjectType ( sort keys %{$FormDraftTTL} ) {
+        my $FormDraftList = $FormDraftObject->FormDraftListGet(
+            ObjectType => $ObjectType,
+            UserID     => 1,
+        );
+
+        DRAFT:
+        for my $FormDraft ( @{$FormDraftList} ) {
+            my $FormDraftConfig = $FormDraftObject->FormDraftGet(
+                FormDraftID => $FormDraft->{FormDraftID},
+                UserID      => 1,
+            );
+
+            my $FormID = $FormDraftConfig->{FormData}->{FormID};
+
+            # if TTL configuration is missing, use the default
+            next DRAFT if !$FormDraftTTL->{$ObjectType};
+
+            # check for draft form configuration
+            next DRAFT if !IsHashRefWithData($FormDraftConfig);
+            next DRAFT if !$FormID;
+
+            # form draft TTL config for specific object type is given in minutes
+            my $CurrentTile = time() - ( $FormDraftTTL->{$ObjectType} * 60 );
+
+            $DraftForms{$FormID} = $CurrentTile;
+        }
+    }
+
     my $RetentionTime = int( time() - 86400 );        # remove subdirs older than 24h
     my @List          = $MainObject->DirectoryRead(
         Directory => $Self->{TempDir},
@@ -429,6 +468,7 @@ sub FormIDCleanUp {
     SUBDIR:
     for my $Subdir (@List) {
         my $SubdirTime = $Subdir;
+        ( my $Filename ) = $Subdir =~ /[^\/]+$/g;
 
         if ( $SubdirTime =~ /^.*\/\d+\..+$/ ) {
             $SubdirTime =~ s/^.*\/(\d+?)\..+$/$1/;
@@ -442,7 +482,12 @@ sub FormIDCleanUp {
             next SUBDIR;
         }
 
-        if ( $RetentionTime > $SubdirTime ) {
+        if (
+            ( $DraftForms{$Filename} && $DraftForms{$Filename} > $SubdirTime )
+            ||
+            ( !$DraftForms{$Filename} && $RetentionTime > $SubdirTime )
+            )
+        {
             my @Sublist = $MainObject->DirectoryRead(
                 Directory => $Subdir,
                 Filter    => "*",

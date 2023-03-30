@@ -27,7 +27,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
@@ -45,7 +45,7 @@ for my $Key ( 1 .. 3, 'ä', 'カス', '_', '&' ) {
     TRY:
     for my $Try ( 1 .. 20 ) {
 
-        $UserRand = 'unittest-' . $Key . $Helper->GetRandomID();
+        $UserRand = 'unittest-' . $Key . $HelperObject->GetRandomID();
 
         my %UserData = $CustomerUserObject->CustomerUserDataGet(
             User => $UserRand,

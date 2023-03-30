@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $DynamicFieldObject   = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $BackendObject        = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
@@ -28,15 +28,48 @@ my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
 my $ServiceObject        = $Kernel::OM->Get('Kernel::System::Service');
 
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+my %ITSMCoreSLA;
+my %ITSMCoreService;
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    # get the list of sla types from general catalog
+    my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::SLA::Type',
+    );
+
+    # build a lookup hash
+    my %SLATypeName2ID = reverse %{$SLATypeList};
+
+    %ITSMCoreSLA = (
+        TypeID => $SLATypeName2ID{Other},
+    );
+
+    %ITSMCoreService = (
+        TypeID      => $ServiceTypeName2ID{Training},
+        Criticality => '3 normal',
+    );
+
+}
+
 # Enable Service.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'Ticket::Service',
     Value => 1,
 );
 
 # Use a calendar with the same business hours for every day so that the UT runs correctly
 #   on every day of the week and outside usual business hours.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'TimeWorkingHours::Calendar1',
     Value => {
         map { $_ => [ 0 .. 23 ] } qw( Mon Tue Wed Thu Fri Sat Sun ),
@@ -44,18 +77,18 @@ $Helper->ConfigSettingChange(
 );
 
 # Disable default Vacation days.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'TimeVacationDays::Calendar1',
     Value => {},
 );
 
 # Set fixed time.
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 # Create a test customer.
-my $TestUserCustomer = $Helper->TestCustomerUserCreate();
+my $TestUserCustomer = $HelperObject->TestCustomerUserCreate();
 
 # Create a dynamic field.
 my $DynamicFieldName = "TestDF$RandomID";
@@ -83,9 +116,10 @@ $Self->True(
 
 # Add test Service.
 my $ServiceID = $ServiceObject->ServiceAdd(
-    Name    => "TestService - " . $Helper->GetRandomID(),
+    Name    => "TestService - " . $HelperObject->GetRandomID(),
     ValidID => 1,
     UserID  => 1,
+    %ITSMCoreService,
 );
 $Self->True(
     $ServiceID,
@@ -102,7 +136,7 @@ $ServiceObject->CustomerUserServiceMemberAdd(
 
 # Add test SLA.
 my $SLAID = $Kernel::OM->Get('Kernel::System::SLA')->SLAAdd(
-    Name                => "TestSLA - " . $Helper->GetRandomID(),
+    Name                => "TestSLA - " . $HelperObject->GetRandomID(),
     ServiceIDs          => [$ServiceID],
     FirstResponseTime   => 5,
     FirstResponseNotify => 60,
@@ -113,6 +147,7 @@ my $SLAID = $Kernel::OM->Get('Kernel::System::SLA')->SLAAdd(
     Calendar            => 1,
     ValidID             => 1,
     UserID              => 1,
+    %ITSMCoreSLA,
 );
 $Self->True(
     $SLAID,
@@ -152,7 +187,7 @@ for my $Item ( 1 .. 6 ) {
         UserID             => 1,
     );
 
-    $Helper->FixedTimeAddSeconds( 2 * $Item * 60 );
+    $HelperObject->FixedTimeAddSeconds( 2 * $Item * 60 );
 
     my $Success = $TicketObject->TicketStateSet(
         StateID            => 4,
@@ -183,7 +218,7 @@ for my $Item ( 1 .. 6 ) {
     );
     $Self->True( $ArticleID, "ArticleCreate() Created article $ArticleID" );
 
-    $Helper->FixedTimeAddSeconds( $Item * 60 );
+    $HelperObject->FixedTimeAddSeconds( $Item * 60 );
 
     # Close all ticket's except the last one.
     if ( $Item != 6 ) {

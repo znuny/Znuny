@@ -21,7 +21,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $DateTimeObject = $Kernel::OM->Create(
     'Kernel::System::DateTime',
@@ -29,30 +29,30 @@ my $DateTimeObject = $Kernel::OM->Create(
         String => '2020-01-10 16:00:00',
     },
 );
-$Helper->FixedTimeSet($DateTimeObject);
+$HelperObject->FixedTimeSet($DateTimeObject);
 
 # Do not check email addresses.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
 
 # Do not check RichText.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Frontend::RichText',
     Value => 0,
 );
 
 # Set DefaultLanguage to UTC.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'DefaultLanguage',
     Value => 'en',
 );
 
 # Set OTRSTimeZone to UTC.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'OTRSTimeZone',
     Value => 'UTC',
@@ -347,7 +347,7 @@ for my $Test (@Tests) {
 
         # Create standard template.
         my $TemplateID = $StandardTemplateObject->StandardTemplateAdd(
-            Name         => $Helper->GetRandomID() . '-StandardTemplate',
+            Name         => $HelperObject->GetRandomID() . '-StandardTemplate',
             Template     => $Test->{TemplateText},
             ContentType  => 'text/plain; charset=utf-8',
             TemplateType => $TemplateType,

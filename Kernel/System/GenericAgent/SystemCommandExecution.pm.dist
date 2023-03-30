@@ -1,0 +1,44 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+package Kernel::System::GenericAgent::SystemCommandExecution;
+
+use strict;
+use warnings;
+
+our @ObjectDependencies;
+
+#
+# Example module to show the execution of system commands in generic agent context.
+#
+
+sub new {
+    my ( $Type, %Param ) = @_;
+
+    my $Self = {};
+    bless( $Self, $Type );
+
+    # 0=off; 1=on;
+    $Self->{Debug} = $Param{Debug} || 0;
+
+    return $Self;
+}
+
+sub Run {
+    my ( $Self, %Param ) = @_;
+
+    # Execute system command
+    my $Output = `/path/to/some/script.sh`;
+
+    # Parameters given in generic agent config can be used, e.g.:
+    $Output = `/path/to/some/script.sh $Param{TicketID}`;
+
+    return 1;
+}
+
+1;

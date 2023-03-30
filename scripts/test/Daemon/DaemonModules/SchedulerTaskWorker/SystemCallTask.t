@@ -18,7 +18,7 @@ use vars (qw($Self));
 
 my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
-my $Daemon = $Home . '/bin/otrs.Daemon.pl';
+my $Daemon = $Home . '/bin/znuny.Daemon.pl';
 
 # Get current daemon status.
 my $PreviousDaemonStatus = `$Daemon status`;
@@ -35,7 +35,7 @@ if ( $PreviousDaemonStatus =~ m{Daemon running}i ) {
     sleep $SleepTime;
 }
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
 my $TaskWorkerObject  = $Kernel::OM->Get('Kernel::System::Daemon::DaemonModules::SchedulerTaskWorker');
@@ -77,7 +77,7 @@ $Self->True(
 );
 $RunTasks->();
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
@@ -194,7 +194,7 @@ TESTCASE:
 for my $Test (@Tests) {
 
     # prevent mails send
-    $Helper->ConfigSettingChange(
+    $HelperObject->ConfigSettingChange(
         Key   => 'SendmailModule',
         Value => 'Kernel::System::Email::DoNotSendEmail',
         Valid => 1,

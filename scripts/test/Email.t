@@ -24,10 +24,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Disable email addresses checking.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
@@ -197,6 +197,51 @@ for my $Encoding ( '', qw(base64 quoted-printable 8bit) ) {
         }
     }
 }
+
+# test check method
+$ConfigObject->Set(
+    Key   => 'SendmailModule',
+    Value => 'Kernel::System::Email::Test',
+);
+
+my $EmailObject = $Kernel::OM->Create('Kernel::System::Email');
+my %Result      = $EmailObject->Check( Test => 1 );
+
+$Self->Is(
+    $Result{Successful},
+    1,
+    'Check successful'
+);
+
+$Self->Is(
+    $Result{Message},
+    undef,
+    'Check message is empty'
+);
+
+my %Result2 = $EmailObject->Check( Test => 0 );
+$Self->Is(
+    $Result2{Successful},
+    0,
+    'Check not successful'
+);
+$Self->Is(
+    $Result2{Message},
+    'Error!',
+    'Check returns error message'
+);
+
+my %Result3 = $EmailObject->Check();
+$Self->Is(
+    $Result3{Successful},
+    0,
+    'Check not successful'
+);
+$Self->Is(
+    $Result3{Message},
+    'Error!',
+    'Check returns error message'
+);
 
 # cleanup is done by RestoreDatabase
 

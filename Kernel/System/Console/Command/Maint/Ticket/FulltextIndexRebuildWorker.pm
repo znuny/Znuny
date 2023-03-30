@@ -7,7 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::NoExitInConsoleCommands)
+## nofilter(TidyAll::Plugin::Znuny::Perl::NoExitInConsoleCommands)
 
 package Kernel::System::Console::Command::Maint::Ticket::FulltextIndexRebuildWorker;
 

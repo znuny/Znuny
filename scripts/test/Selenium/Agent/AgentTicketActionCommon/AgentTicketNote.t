@@ -18,27 +18,54 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $ArticleBackendObject   = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Internal');
+        my $ArticleObject          = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $CacheObject            = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject               = $Kernel::OM->Get('Kernel::System::DB');
+        my $GroupObject            = $Kernel::OM->Get('Kernel::System::Group');
+        my $HelperObject           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $MainObject             = $Kernel::OM->Get('Kernel::System::Main');
+        my $QueueObject            = $Kernel::OM->Get('Kernel::System::Queue');
+        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+        my $TicketObject           = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject             = $Kernel::OM->Get('Kernel::System::User');
 
         # Disable check of email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Type',
+            Value => 0,
+        );
+
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Service',
+            Value => 0,
+        );
+
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Frontend::AgentTicketNote###Owner',
+            Value => 0,
+        );
+
         # Create test group.
-        my $RandomID    = $Helper->GetRandomID();
-        my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
-        my $GroupName   = "Group" . $RandomID;
-        my $GroupID     = $GroupObject->GroupAdd(
+        my $RandomID  = $HelperObject->GetRandomID();
+        my $GroupName = "Group" . $RandomID;
+        my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
             UserID  => 1,
@@ -49,9 +76,8 @@ $Selenium->RunTest(
         );
 
         # Create test queue.
-        my $QueueObject = $Kernel::OM->Get('Kernel::System::Queue');
-        my $QueueName   = 'Queue' . $RandomID;
-        my $QueueID     = $QueueObject->QueueAdd(
+        my $QueueName = 'Queue' . $RandomID;
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => $GroupID,
@@ -67,7 +93,6 @@ $Selenium->RunTest(
         );
 
         # Create two test user. One with 'ro' and 'note' permissions, other one with only 'note' permission.
-        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
         my @CreatedUserIDs;
         for my $Count ( 1 .. 2 ) {
             my $UserID = $UserObject->UserAdd(
@@ -102,31 +127,28 @@ $Selenium->RunTest(
         }
 
         # Enable 'InformAgent' for AgentTicketNote screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###InformAgent',
             Value => 1,
         );
 
         # Enable 'InvolvedAgent' for AgentTicketNote screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###InvolvedAgent',
             Value => 1,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', $GroupName ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
-
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Internal');
 
         # Create test ticket.
         my $TicketID = $TicketObject->TicketCreate(
@@ -153,7 +175,7 @@ $Selenium->RunTest(
         );
 
         # Create test user.
-        my ( $TestUserLogin2, $TestUserID2 ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin2, $TestUserID2 ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', $GroupName ],
         );
 
@@ -187,7 +209,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to zoom view of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -198,10 +220,7 @@ $Selenium->RunTest(
         );
 
         # Force sub menus to be visible in order to be able to click one of the links.
-        $Selenium->execute_script(
-            '$("#nav-Communication ul").css({ "height": "auto", "opacity": "100" });'
-        );
-        $Selenium->WaitFor( JavaScript => "return \$('#nav-Communication ul').css('opacity') == 1;" );
+        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
 
         # Click on 'Note' and switch window.
         $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketNote;TicketID=$TicketID' )]")->click();
@@ -329,7 +348,7 @@ $Selenium->RunTest(
         $Selenium->switch_to_window( $Handles->[0] );
 
         # Turn on RichText for next test.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 1,
@@ -337,9 +356,9 @@ $Selenium->RunTest(
 
         # Get image attachment.
         my $AttachmentName = "StdAttachment-Test1.png";
-        my $Location       = $ConfigObject->Get('Home')
+        my $Location       = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/$AttachmentName";
-        my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+        my $ContentRef = $MainObject->FileRead(
             Location => $Location,
             Mode     => 'binmode',
         );
@@ -405,7 +424,7 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function";' );
 
         # Get last article id.
-        my @Articles = $Kernel::OM->Get('Kernel::System::Ticket::Article')->ArticleList(
+        my @Articles = $ArticleObject->ArticleList(
             TicketID => $TicketID,
             OnlyLast => 1,
         );
@@ -452,9 +471,8 @@ $Selenium->RunTest(
         );
 
         # Add a template.
-        my $TemplateText           = 'This is a test template';
-        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
-        my $TemplateID             = $StandardTemplateObject->StandardTemplateAdd(
+        my $TemplateText = 'This is a test template';
+        my $TemplateID   = $StandardTemplateObject->StandardTemplateAdd(
             Name         => 'UTTemplate_' . $RandomID,
             Template     => $TemplateText,
             ContentType  => 'text/plain; charset=utf-8',
@@ -569,7 +587,6 @@ $Selenium->RunTest(
         );
 
         # Delete test created queue.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         $Success = $DBObject->Do(
             SQL  => "DELETE FROM queue WHERE id = ?",
             Bind => [ \$QueueID ],
@@ -612,7 +629,7 @@ $Selenium->RunTest(
 
         # Delete test created groups.
         $Success = $DBObject->Do(
-            SQL  => "DELETE FROM groups WHERE id = ?",
+            SQL  => "DELETE FROM permission_groups WHERE id = ?",
             Bind => [ \$GroupID ],
         );
         $Self->True(
@@ -621,7 +638,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     },

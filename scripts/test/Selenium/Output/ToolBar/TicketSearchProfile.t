@@ -18,33 +18,36 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
 
         # Enable toolbar TicketSearchProfile.
         my %TicketSearchProfile = (
-            Block       => 'ToolBarSearchProfile',
-            Description => 'Search template',
-            MaxWidth    => '40',
             Module      => 'Kernel::Output::HTML::ToolBar::TicketSearchProfile',
-            Name        => 'Search template',
-            Priority    => '1990010',
+            Name        => 'Searchtemplate',
+            Description => 'Search template',
+            Block       => 'ToolBarSearchProfile',
+            Priority    => '1990040',
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::ToolBarModule###11-Ticket::TicketSearchProfile',
             Value => \%TicketSearchProfile
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
 
-        # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
-            UserLogin => $TestUserLogin,
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
         );
 
         # Create test ticket.
@@ -116,15 +119,9 @@ $Selenium->RunTest(
         );
 
         # Return to dashboard screen.
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl");
-        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#ToolBarSearchProfile').length" );
+        $Selenium->find_element( "#ToolBarSearchTerm",    'css' )->click();
+        $Selenium->find_element( ".ToolBarSearchProfile", 'css' )->click();
 
-        # Click on test search profile.
-        $Selenium->InputFieldValueSet(
-            Element => '#ToolBarSearchProfile',
-            Value   => 'SeleniumTest',
-        );
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' && \$('a:contains(\"$TicketNumber\")').length && \$('#TicketSearch').length"
@@ -144,7 +141,7 @@ $Selenium->RunTest(
         );
 
         # Delete search profile from DB.
-        my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        my $Success = $DBObject->Do(
             SQL  => "DELETE FROM search_profile WHERE profile_name = ?",
             Bind => [ \$SearchProfileName ],
         );
@@ -173,7 +170,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

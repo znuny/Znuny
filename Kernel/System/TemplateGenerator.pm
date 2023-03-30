@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::TemplateGenerator;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
 use warnings;
@@ -19,12 +19,13 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
     'Kernel::System::AutoResponse',
     'Kernel::System::CommunicationChannel',
     'Kernel::System::CustomerUser',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
-    'Kernel::System::Encode',
     'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
     'Kernel::System::Queue',
@@ -35,8 +36,6 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
-    'Kernel::Output::HTML::Layout',
-    'Kernel::System::DateTime',
 );
 
 =head1 NAME
@@ -359,7 +358,7 @@ sub Sender {
 generate template
 
     my $Template = $TemplateGeneratorObject->Template(
-        TemplateID => 123
+        TemplateID => 123,
         TicketID   => 123,                  # Optional
         Data       => $ArticleHashRef,      # Optional
         UserID     => 123,
@@ -593,7 +592,7 @@ generate attributes
     my %Attributes = $TemplateGeneratorObject->Attributes(
         TicketID   => 123,
         ArticleID  => 123,
-        ResponseID => 123
+        ResponseID => 123,
         UserID     => 123,
         Action     => 'Forward', # Possible values are Reply and Forward, Reply is default.
     );
@@ -1232,7 +1231,7 @@ sub _Replace {
         $RecipientTimeZone = $Kernel::OM->Create('Kernel::System::DateTime')->OTRSTimeZoneGet();
 
         my %CustomerUser;
-        if ( IsHashRefWithData( \%Ticket ) && $Ticket{CustomerUserID} ) {
+        if ( %Ticket && $Ticket{CustomerUserID} ) {
             %CustomerUser = $CustomerUserObject->CustomerUserDataGet( User => $Ticket{CustomerUserID} );
         }
 
@@ -1256,7 +1255,7 @@ sub _Replace {
         elsif (
             $Param{AddTimezoneInfo}->{AutoResponse}
             && $Ticket{CustomerUserID}
-            && IsHashRefWithData( \%CustomerUser )
+            && %CustomerUser
             )
         {
             %UserPreferences = $CustomerUserObject->GetPreferences(
@@ -1676,6 +1675,17 @@ sub _Replace {
     # replace it
     $HashGlobalReplace->( $Tag, %Ticket, %DynamicFieldDisplayValues );
 
+    # OTRS_TICKET_LAST_ARTICLE_ID
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    if ( $Ticket{TicketID} ) {
+        my @LastTicketArticle = $ArticleObject->ArticleList(
+            TicketID => $Ticket{TicketID},
+            OnlyLast => 1,
+        );
+        my $LastTicketArticleID = @LastTicketArticle ? $LastTicketArticle[0]->{ArticleID} : '';
+        $Param{Text} =~ s{$Start OTRS_TICKET_LAST_ARTICLE_ID $End}{$LastTicketArticleID}gixms;
+    }
+
     # COMPAT
     $Param{Text} =~ s/$Start OTRS_TICKET_ID $End/$Ticket{TicketID}/gixms;
     $Param{Text} =~ s/$Start OTRS_TICKET_NUMBER $End/$Ticket{TicketNumber}/gixms;
@@ -1704,8 +1714,6 @@ sub _Replace {
     # - if ArticleID is sent, data is from selected article.
     # - if ArticleID is not sent, data is from last customer/agent/any article.
     if ( $Param{Template} && $Ticket{TicketID} ) {
-        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-
         if ( $Param{Template} eq 'Note' ) {
 
             # Get last article from agent.
@@ -1714,11 +1722,15 @@ sub _Replace {
                 SenderType => 'agent',
                 OnlyLast   => 1,
             );
+            if ( @AgentArticles && IsHashRefWithData( $AgentArticles[0] ) ) {
+                my %AgentArticle = $ArticleObject->BackendForArticle( %{ $AgentArticles[0] } )->ArticleGet(
+                    %{ $AgentArticles[0] },
+                    DynamicFields => 0,
+                );
 
-            my %AgentArticle = $ArticleObject->BackendForArticle( %{ $AgentArticles[0] } )->ArticleGet(
-                %{ $AgentArticles[0] },
-                DynamicFields => 0,
-            );
+                $Param{DataAgent}->{Subject} = $AgentArticle{Subject};
+                $Param{DataAgent}->{Body}    = $AgentArticle{Body};
+            }
 
             # Get last article from customer.
             my @CustomerArticles = $ArticleObject->ArticleList(
@@ -1726,16 +1738,15 @@ sub _Replace {
                 SenderType => 'customer',
                 OnlyLast   => 1,
             );
+            if ( @CustomerArticles && IsHashRefWithData( $CustomerArticles[0] ) ) {
 
-            my %CustomerArticle = $ArticleObject->BackendForArticle( %{ $CustomerArticles[0] } )->ArticleGet(
-                %{ $CustomerArticles[0] },
-                DynamicFields => 0,
-            );
-
-            $Param{DataAgent}->{Subject} = $AgentArticle{Subject};
-            $Param{DataAgent}->{Body}    = $AgentArticle{Body};
-            $Param{Data}->{Subject}      = $CustomerArticle{Subject};
-            $Param{Data}->{Body}         = $CustomerArticle{Body};
+                my %CustomerArticle = $ArticleObject->BackendForArticle( %{ $CustomerArticles[0] } )->ArticleGet(
+                    %{ $CustomerArticles[0] },
+                    DynamicFields => 0,
+                );
+                $Param{Data}->{Subject} = $CustomerArticle{Subject};
+                $Param{Data}->{Body}    = $CustomerArticle{Body};
+            }
         }
         elsif ( $Param{Template} eq 'Answer' || $Param{Template} eq 'Forward' ) {
 

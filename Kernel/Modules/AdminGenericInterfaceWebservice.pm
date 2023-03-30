@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 maxence business consulting GmbH, http://www.maxence.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -143,7 +144,7 @@ sub Run {
         }
 
         # Check if name is duplicated.
-        my %WebserviceList = %{ $WebserviceObject->WebserviceList() };
+        my %WebserviceList = %{ $WebserviceObject->WebserviceList( Valid => 0 ) };
 
         %WebserviceList = reverse %WebserviceList;
 
@@ -260,7 +261,7 @@ sub Run {
         }
 
         # Check if name is duplicated.
-        my %WebserviceList = %{ $WebserviceObject->WebserviceList() };
+        my %WebserviceList = %{ $WebserviceObject->WebserviceList( Valid => 0 ) };
 
         %WebserviceList = reverse %WebserviceList;
 
@@ -436,7 +437,7 @@ sub Run {
         $WebserviceData->{Name} = $CloneName;
 
         # Check if name is duplicated.
-        my %WebserviceList = %{ $WebserviceObject->WebserviceList() };
+        my %WebserviceList = %{ $WebserviceObject->WebserviceList( Valid => 0 ) };
 
         %WebserviceList = reverse %WebserviceList;
 
@@ -596,7 +597,7 @@ sub Run {
         if ( !IsHashRefWithData($ImportedConfig) ) {
             return $LayoutObject->ErrorScreen(
                 Message =>
-                    Translatable('The imported file has not valid YAML content! Please check OTRS log for details'),
+                    Translatable('The imported file has not valid YAML content! Please check Znuny log for details'),
             );
         }
 
@@ -632,7 +633,7 @@ sub Run {
         $WebserviceData->{ValidID} = 1;
 
         # Check if name is duplicated.
-        my %WebserviceList = %{ $WebserviceObject->WebserviceList() };
+        my %WebserviceList = %{ $WebserviceObject->WebserviceList( Valid => 0 ) };
 
         %WebserviceList = reverse %WebserviceList;
 
@@ -909,23 +910,19 @@ sub _ShowEdit {
             $ExampleWebServicesData{$Key} = $Value;
         }
 
-        my %Frontend;
-
-        if ( %ExampleWebServicesData && $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled() ) {
-            $Frontend{ExampleWebServiceList} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildSelection(
-                Name         => 'ExampleWebService',
-                Data         => \%ExampleWebServicesData,
-                PossibleNone => 1,
-                Translation  => 0,
-                Class        => 'Modernize Validate_Required',
-            );
-        }
+        my $ExampleWebServices = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildSelection(
+            Name         => 'ExampleWebService',
+            Data         => \%ExampleWebServicesData,
+            PossibleNone => 1,
+            Translation  => 0,
+            Class        => 'Modernize Validate_Required',
+        );
 
         # Enable Example web services.
         $LayoutObject->Block(
             Name => 'ExampleWebServices',
             Data => {
-                %Frontend,
+                ExampleWebServiceList => $ExampleWebServices,
             },
         );
     }
@@ -1066,7 +1063,7 @@ sub _ShowEdit {
     # Meta configuration for output blocks.
     my %CommTypeConfig = (
         Provider => {
-            Title                 => Translatable('OTRS as provider'),
+            Title                 => Translatable('Znuny as provider'),
             SelectedTransport     => $ProviderData->{Transport}->{Type},
             ActionType            => 'Operation',
             ActionsTitle          => Translatable('Operations'),
@@ -1076,7 +1073,7 @@ sub _ShowEdit {
             ErrorHandlingPriority => $ErrorHandlingPriorityProvider,
         },
         Requester => {
-            Title                 => Translatable('OTRS as requester'),
+            Title                 => Translatable('Znuny as requester'),
             SelectedTransport     => $RequesterData->{Transport}->{Type},
             ActionType            => 'Invoker',
             ActionsTitle          => Translatable('Invokers'),

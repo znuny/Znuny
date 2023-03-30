@@ -48,16 +48,40 @@ sub new {
 
 =head2 Validate()
 
-    Validate Data
+Validate Data
 
-    my $ValidateResult = $ValidateModuleObject->Validate(
-        Data       => {
-            Queue => 'Raw',
-            # ...
+    my $Match = $ValidateModuleObject->Validate(
+        Data => {
+            # TicketData
+            TicketID => 1,
+            Queue    => 'Postmaster',
         },
+        FieldName    => 'DynamicField_Make',
+        'Transition' => {
+            'Name'      => 'Transition 2',
+            'Condition' => {
+                'Type'             => 'and',
+                'ConditionLinking' => 'and',
+                'Condition 1'      => {
+                    'Fields' => {
+                        'DynamicField_Make' => $VAR1->{'Condition'}
+                    }
+                }
+            }
+        },
+        TransitionName     => 'Transition 2',
+        TransitionEntityID => 'T1903007681700000',
+
+        Condition          => {
+            Match => 'Postmaster',
+            Type  => 'Kernel::System::ProcessManagement::TransitionValidation::ValidateDemo.pm'
+        },
+        ConditionName    => 'Condition 1',
+        ConditionType    => 'and',
+        ConditionLinking => 'and'
     );
 
-    Returns:
+Returns:
 
     $ValidateResult = 1;        # or undef, only returns 1 if Queue is 'Raw'
 

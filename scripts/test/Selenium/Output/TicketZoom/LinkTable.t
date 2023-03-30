@@ -18,13 +18,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
         my $LinkObject   = $Kernel::OM->Get('Kernel::System::LinkObject');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Disable 'Ticket Information', 'Customer Information' and 'Linked Objects' widgets in AgentTicketZoom screen.
         for my $WidgetDisable (qw(0100-TicketInformation 0200-CustomerInformation 0300-LinkTable)) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 0,
                 Key   => "Ticket::Frontend::AgentTicketZoom###Widgets###$WidgetDisable",
                 Value => '',
@@ -32,7 +33,7 @@ $Selenium->RunTest(
         }
 
         # Set 'Linked Objects' widget to simple view.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LinkObject::ViewMode',
             Value => 'Simple',
@@ -42,7 +43,7 @@ $Selenium->RunTest(
         my @TicketTitles;
         my @TicketIDs;
         for my $TicketCreate ( 1 .. 3 ) {
-            my $TicketTitle = "Title" . $Helper->GetRandomID();
+            my $TicketTitle = "Title" . $HelperObject->GetRandomID();
             my $TicketID    = $TicketObject->TicketCreate(
                 Title      => $TicketTitle,
                 Queue      => 'Raw',
@@ -92,7 +93,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -102,7 +103,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketZoom for test created second ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketIDs[1]");
@@ -115,12 +116,14 @@ $Selenium->RunTest(
 
         # Verify there is no 'Linked Objects' widget, it's disabled.
         $Self->True(
-            index( $Selenium->get_page_source(), "Linked Objects" ) == -1,
+            $Selenium->execute_script(
+                "return \$('.LinkTable .Header>h2').length == 0"
+            ),
             "Linked Objects widget is disabled",
         );
 
         # Reset 'Linked Objects' widget sysconfig, enable it and refresh screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketZoom###Widgets###0300-LinkTable',
             Value => {
@@ -131,8 +134,9 @@ $Selenium->RunTest(
         $Selenium->VerifiedRefresh();
 
         # Verify there is 'Linked Objects' widget, it's enabled.
+
         $Self->Is(
-            $Selenium->find_element( '.Header>h2', 'css' )->get_text(),
+            $Selenium->find_element( '.LinkTable .Header>h2', 'css' )->get_text(),
             'Linked Objects',
             'Linked Objects widget is enabled',
         );
@@ -155,7 +159,7 @@ $Selenium->RunTest(
 
         # Verify there is no collapsed elements on the screen.
         $Self->True(
-            $Selenium->find_element("//div[contains(\@class, 'WidgetSimple DontPrint Expanded')]"),
+            $Selenium->find_element("//div[contains(\@class, 'WidgetSimple LinkTable DontPrint Expanded')]"),
             "Linked Objects Widget is expanded",
         );
 
@@ -178,13 +182,13 @@ $Selenium->RunTest(
 
         # Verify 'Linked Objects' widget is in the side bar with simple view.
         $Self->Is(
-            $Selenium->find_element( '.SidebarColumn .Header>h2', 'css' )->get_text(),
+            $Selenium->find_element( '.LinkTable .Header>h2', 'css' )->get_text(),
             'Linked Objects',
             'Linked Objects widget is positioned in the side bar with simple view',
         );
 
         # Change view to complex.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LinkObject::ViewMode',
             Value => 'Complex',

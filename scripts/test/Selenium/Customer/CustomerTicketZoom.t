@@ -18,38 +18,42 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Disable setting.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###CustomerZoomExpand',
             Value => 0,
         );
 
         # Disable check email address.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Change customer user first and last name.
-        my $RandomID          = $Helper->GetRandomID();
+        my $RandomID          = $HelperObject->GetRandomID();
         my $CustomerFirstName = 'FirstName';
         my $CustomerLastName  = 'LastName, test (12345)';
-        $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserUpdate(
+        $CustomerUserObject->CustomerUserUpdate(
             Source         => 'CustomerUser',
             ID             => $TestCustomerUserLogin,
             UserCustomerID => $TestCustomerUserLogin,
@@ -81,10 +85,10 @@ $Selenium->RunTest(
         );
 
         # Create test article for test ticket.
-        my $SubjectRandom = "Subject" . $Helper->GetRandomID();
-        my $TextRandom    = "Text" . $Helper->GetRandomID();
+        my $SubjectRandom = "Subject" . $HelperObject->GetRandomID();
+        my $TextRandom    = "Text" . $HelperObject->GetRandomID();
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Phone',
         );
 
@@ -143,7 +147,7 @@ $Selenium->RunTest(
             Password => $TestCustomerUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=123123123");
 
@@ -210,7 +214,7 @@ $Selenium->RunTest(
         );
 
         # Enable displaying accounted time.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###ZoomTimeDisplay',
             Value => 1
@@ -220,8 +224,9 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
         my $NumberOfExpandedArticles = $Selenium->execute_script(
-            'return $("ul#Messages li.Visible").length'
+            'return $("#VisibleMessageContent").length'
         );
+
         $Self->Is(
             $NumberOfExpandedArticles,
             1,
@@ -229,7 +234,7 @@ $Selenium->RunTest(
         );
 
         # Enable expanding.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###CustomerZoomExpand',
             Value => 1,
@@ -239,11 +244,11 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
         $NumberOfExpandedArticles = $Selenium->execute_script(
-            'return $("ul#Messages li.Visible").length'
+            'return $("#VisibleMessageContent").length'
         );
         $Self->Is(
             $NumberOfExpandedArticles,
-            2,
+            1,
             'Make sure that all articles are expanded.'
         );
 
@@ -254,8 +259,7 @@ $Selenium->RunTest(
         );
 
         # Check reply button.
-        $Selenium->find_element("//a[contains(\@id, \'ReplyButton' )]")->click();
-        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#FollowUp.Visible').length" );
+        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#VisibleMessageContent').length" );
         $Selenium->find_element( '#RichText', 'css' )->send_keys('TestBody');
         $Selenium->find_element("//button[contains(\@value, \'Submit' )]")->VerifiedClick();
 
@@ -272,13 +276,6 @@ $Selenium->RunTest(
 
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
-        # Check if reply button is missing in merged ticket (bug#7301).
-        $Self->Is(
-            $Selenium->execute_script('return $("a#ReplyButton").length'),
-            0,
-            "Reply button not found",
-        );
-
         # Check if print button exists on the screen.
         $Self->Is(
             $Selenium->execute_script('return $("a[href*=\'Action=CustomerTicketPrint\']").length'),
@@ -286,11 +283,11 @@ $Selenium->RunTest(
             "Print button is found",
         );
 
-        my $ArticleBackendObjectInternal = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObjectInternal = $ArticleObject->BackendForChannel(
             ChannelName => 'Internal',
         );
 
-        my $TestOriginalFrom = 'Agent Some Agent Some Agent' . $Helper->GetRandomID();
+        my $TestOriginalFrom = 'Agent Some Agent Some Agent' . $HelperObject->GetRandomID();
 
         # Add article from agent, with enabled IsVisibleForCustomer.
         my $ArticleID3 = $ArticleBackendObjectInternal->ArticleCreate(
@@ -313,7 +310,7 @@ $Selenium->RunTest(
         );
 
         # Use From field value.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###DisplayNoteFrom',
             Value => 'FromField',
@@ -327,7 +324,7 @@ $Selenium->RunTest(
 
         # Check From field value.
         my $FromString = $Selenium->execute_script(
-            "return \$('.MessageBody:eq(3) span:eq(0)').text().trim();"
+            "return \$('.MessageHeader:eq(4) span.message-user').text().trim();"
         );
         $Self->Is(
             $FromString,
@@ -336,16 +333,16 @@ $Selenium->RunTest(
         );
 
         # Use default agent name setting.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###DisplayNoteFrom',
             Value => 'DefaultAgentName',
         );
 
-        my $TestDefaultAgentName = 'ADefaultValueForAgentName' . $Helper->GetRandomID();
+        my $TestDefaultAgentName = 'ADefaultValueForAgentName' . $HelperObject->GetRandomID();
 
         # Set a default value for agent.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###DefaultAgentName',
             Value => $TestDefaultAgentName,
@@ -359,7 +356,7 @@ $Selenium->RunTest(
 
         # Check From field value.
         $FromString = $Selenium->execute_script(
-            "return \$('.MessageBody:eq(3) span:eq(0)').text().trim();"
+            "return \$('.MessageHeader:eq(4) span.message-user').text().trim();"
         );
         $Self->Is(
             $FromString,
@@ -368,7 +365,7 @@ $Selenium->RunTest(
         );
 
         # Login to Agent interface and verify customer name in answer article.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -408,7 +405,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

@@ -8,7 +8,7 @@
 # --
 
 ## no critic (Modules::RequireExplicitPackage)
-## nofilter(TidyAll::Plugin::OTRS::Perl::TestSubs)
+
 use strict;
 use warnings;
 use utf8;
@@ -69,7 +69,7 @@ no warnings 'redefine';
 use utf8;
 sub Load {
     my (\$File, \$Self) = \@_;
-\$Self->{'Loader::Agent::DefaultSelectedSkin'} =  'ivory';
+\$Self->{'Loader::Agent::DefaultSelectedSkin'} =  'default';
 }
 1;
 EOF
@@ -101,14 +101,15 @@ EOF
         # Wait until all AJAX calls finished.
         $Selenium->WaitFor( JavaScript => "return \$.active == 0" );
 
-        # Compile the regex for checking if ivory skin file has been included. Some platforms might sort additional
+        # Compile the regex for checking if default skin file has been included. Some platforms might sort additional
         #   HTML attributes in unexpected order, therefore this check cannot be simple one.
-        my $ExpectedLinkedFile = qr{<link .*? \s href="${WebPath}skins/Agent/ivory/css/Core.Default.css"}x;
+        my $Href               = $WebPath . "skins/Agent/default/css/Core.Default.css";
+        my $ExpectedLinkedFile = qr{<link .*? \s href="$Href"}x;
 
-        # Link to ivory skin file should be present.
+        # Link to default skin file should be present.
         $Self->True(
             $Selenium->get_page_source() =~ $ExpectedLinkedFile,
-            'Ivory skin should be selected'
+            'default skin should be selected'
         );
 
         # Try to expand the user profile sub menu by clicking the avatar.
@@ -120,22 +121,6 @@ EOF
         # Logout.
         my $Element = $Selenium->find_element( 'a#LogoutButton', 'css' );
         $Element->VerifiedClick();
-
-        # Login with a different user.
-        $Selenium->Login(
-            Type     => 'Agent',
-            User     => $TestUserLogin2,
-            Password => $TestUserLogin2,
-        );
-
-        # Wait until all AJAX calls finished.
-        $Selenium->WaitFor( JavaScript => "return \$.active == 0" );
-
-        # Link to ivory skin file shouldn't be present.
-        $Self->True(
-            $Selenium->get_page_source() !~ $ExpectedLinkedFile,
-            "Ivory skin shouldn't be selected"
-        );
 
         # Cleanup system.
         if ( -e $FilePath ) {

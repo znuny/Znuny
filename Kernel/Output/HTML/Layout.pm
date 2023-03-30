@@ -21,23 +21,23 @@ use Kernel::Language qw(Translatable);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Language',
+    'Kernel::System::Activity',
     'Kernel::System::AuthSession',
     'Kernel::System::Cache',
-    'Kernel::System::Chat',
     'Kernel::System::CustomerGroup',
+    'Kernel::System::CustomerUser',
     'Kernel::System::DateTime',
-    'Kernel::System::Group',
     'Kernel::System::Encode',
+    'Kernel::System::Group',
     'Kernel::System::HTMLUtils',
     'Kernel::System::JSON',
+    'Kernel::System::LastViews',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::OTRSBusiness',
     'Kernel::System::State',
     'Kernel::System::Storable',
     'Kernel::System::SystemMaintenance',
     'Kernel::System::User',
-    'Kernel::System::VideoChat',
     'Kernel::System::Web::Request',
 );
 
@@ -431,10 +431,13 @@ EOF
         my @NewFiles = $MainObject->DirectoryRead(
             Directory => $NewDir,
             Filter    => '*.pm',
+            Recursive => 1,
         );
+
         for my $NewFile (@NewFiles) {
             if ( $NewFile !~ /Layout.pm$/ ) {
-                $NewFile =~ s{\A.*\/(.+?).pm\z}{$1}xms;
+                $NewFile =~ s{$NewDir/(.+?).pm\z}{$1}xms;
+                $NewFile =~ s{\/}{::}g;
                 my $NewClassName = "Kernel::Output::HTML::Layout::$NewFile";
                 if ( !$MainObject->RequireBaseClass($NewClassName) ) {
                     $Self->FatalDie(
@@ -717,11 +720,6 @@ sub Login {
     $Self->LoaderCreateAgentJSCalls();
     $Self->LoaderCreateJavaScriptTranslationData();
     $Self->LoaderCreateJavaScriptTemplateData();
-
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-    $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-    $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
 
     # we need the baselink for VerfifiedGet() of selenium tests
     $Self->AddJSData(
@@ -1010,6 +1008,7 @@ sub ErrorScreen {
     my ( $Self, %Param ) = @_;
 
     my $Output = $Self->Header( Title => 'Error' );
+    $Output .= $Self->NavigationBar() if $Self->{UserID};
     $Output .= $Self->Error(%Param);
     $Output .= $Self->Footer();
     return $Output;
@@ -1042,16 +1041,6 @@ sub Error {
 
     if ( !$Param{Message} ) {
         $Param{Message} = $Param{BackendMessage};
-
-        # Don't check for business package if the database was not yet configured (in the installer).
-        if (
-            $Kernel::OM->Get('Kernel::Config')->Get('SecureMode')
-            && $Kernel::OM->Get('Kernel::Config')->Get('DatabaseDSN')
-            && !$Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled()
-            )
-        {
-            $Param{ShowOTRSBusinessHint}++;
-        }
     }
 
     if ( $Param{BackendTraceback} ) {
@@ -1147,19 +1136,27 @@ sub Notify {
         return '' if !$Param{Info};
     }
 
-    my $BoxClass = 'Notice';
+    my $BoxClass  = 'Notice';
+    my $IconClass = 'fa fa-bell';
 
     if ( $Param{Info} ) {
         $Param{Info} =~ s/\n//g;
     }
     if ( $Param{Priority} && $Param{Priority} eq 'Error' ) {
-        $BoxClass = 'Error';
+        $BoxClass  = 'Error';
+        $IconClass = 'fa fa-exclamation-circle';
+    }
+    elsif ( $Param{Priority} && $Param{Priority} eq 'Warning' ) {
+        $BoxClass  = 'Warning';
+        $IconClass = 'fa fa-exclamation-triangle';
     }
     elsif ( $Param{Priority} && $Param{Priority} eq 'Success' ) {
-        $BoxClass = 'Success';
+        $BoxClass  = 'Success';
+        $IconClass = 'fa fa-check-circle';
     }
     elsif ( $Param{Priority} && $Param{Priority} eq 'Info' ) {
-        $BoxClass = 'Info';
+        $BoxClass  = 'Info';
+        $IconClass = 'fa fa-info-circle';
     }
 
     if ( $Param{Link} ) {
@@ -1195,7 +1192,8 @@ sub Notify {
         TemplateFile => 'Notify',
         Data         => {
             %Param,
-            BoxClass => $BoxClass,
+            BoxClass  => $BoxClass,
+            IconClass => $IconClass,
         },
     );
 }
@@ -1251,6 +1249,10 @@ sub Header {
 
     my $Type = $Param{Type} || '';
 
+    if ( !$Self->{UserToolBar} ) {
+        $Param{HideToolBar} = 'hide';
+    }
+
     # check params
     if ( !defined $Param{ShowToolbarItems} ) {
         $Param{ShowToolbarItems} = 1;
@@ -1282,8 +1284,16 @@ sub Header {
         );
     }
 
+    if ( $Self->{UserRefreshTime} ) {
+        $Self->AddJSData(
+            Key   => 'RefreshTimeToolbar',
+            Value => $Self->{UserRefreshTime} * 60,
+        );
+    }
+
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateAgentCSSCalls();
+    $Self->LoaderCreateDynamicCSS();
 
     my %AgentLogo;
 
@@ -1380,114 +1390,18 @@ sub Header {
 
     # run tool bar item modules
     if ( $Self->{UserID} && $Self->{UserType} eq 'User' ) {
+
         my $ToolBarModule = $ConfigObject->Get('Frontend::ToolBarModule');
+
         if ( $Param{ShowToolbarItems} && ref $ToolBarModule eq 'HASH' ) {
 
             $Self->Block(
                 Name => 'ToolBar',
                 Data => \%Param,
             );
-
-            my %Modules;
-            my %Jobs = %{$ToolBarModule};
-
-            # get group object
-            my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
-
-            MODULE:
-            for my $Job ( sort keys %Jobs ) {
-
-                # load and run module
-                next MODULE if !$MainObject->Require( $Jobs{$Job}->{Module} );
-                my $Object = $Jobs{$Job}->{Module}->new(
-                    %{$Self},    # UserID etc.
-                );
-                next MODULE if !$Object;
-
-                my $ToolBarAccessOk;
-
-                # if group restriction for tool-bar is set, check user permission
-                if ( $Jobs{$Job}->{Group} ) {
-
-                    # remove white-spaces
-                    $Jobs{$Job}->{Group} =~ s{\s}{}xmsg;
-
-                    # get group configurations
-                    my @Items = split( ';', $Jobs{$Job}->{Group} );
-
-                    ITEM:
-                    for my $Item (@Items) {
-
-                        # split values into permission and group
-                        my ( $Permission, $GroupName ) = split( ':', $Item );
-
-                        # log an error if not valid setting
-                        if ( !$Permission || !$GroupName ) {
-                            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                                Priority => 'error',
-                                Message  => "Invalid config for ToolBarModule $Job - Key Group: '$Item'! "
-                                    . "Need something like 'Permission:Group;'",
-                            );
-                        }
-
-                        # get groups for current user
-                        my %Groups = $GroupObject->PermissionUserGet(
-                            UserID => $Self->{UserID},
-                            Type   => $Permission,
-                        );
-
-                        # next job if user have not groups
-                        next ITEM if !%Groups;
-
-                        # check user belongs to the correct group
-                        my %GroupsReverse = reverse %Groups;
-                        next ITEM if !$GroupsReverse{$GroupName};
-
-                        $ToolBarAccessOk = 1;
-
-                        last ITEM;
-                    }
-
-                    # go to the next module if not permissions
-                    # for the current one
-                    next MODULE if !$ToolBarAccessOk;
-                }
-
-                %Modules = ( $Object->Run( %Param, Config => $Jobs{$Job} ), %Modules );
-            }
-
-            # show tool bar items
-            MODULE:
-            for my $Key ( sort keys %Modules ) {
-                next MODULE if !%{ $Modules{$Key} };
-
-                # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
-                # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
-                if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearchFulltext' )
-                {
-                    $Modules{$Key}->{SearchInArchive}
-                        = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
-                }
-
-                $Self->Block(
-                    Name => $Modules{$Key}->{Block},
-                    Data => {
-                        %{ $Modules{$Key} },
-                        AccessKeyReference => $Modules{$Key}->{AccessKey}
-                        ? " ($Modules{$Key}->{AccessKey})"
-                        : '',
-                    },
-                );
-            }
-        }
-
-        if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Chat', Silent => 1 ) ) {
-            if ( $ConfigObject->Get('ChatEngine::Active') ) {
-                $Self->AddJSData(
-                    Key   => 'ChatEngine::Active',
-                    Value => $ConfigObject->Get('ChatEngine::Active')
-                );
-            }
+            $Self->ToolbarModules(
+                ToolBarModule => $ToolBarModule,
+            );
         }
 
         # generate avatar
@@ -1505,6 +1419,56 @@ sub Header {
 
             $Param{UserInitials} = $Self->UserInitialsGet( Fullname => $User{UserFullname} );
         }
+
+        # Show links to last views, if enabled for avatar.
+        my $AvatarLastViewsHTML = $Self->_BuildLastViewsOutput(
+            Interface => 'Agent',
+            Position  => 'Avatar',
+        );
+        if ( defined $AvatarLastViewsHTML && length $AvatarLastViewsHTML ) {
+            $Self->Block(
+                Name => 'LastViewsAvatar',
+                Data => {
+                    AvatarLastViewsHTML => $AvatarLastViewsHTML,
+                },
+            );
+        }
+
+        my $ActivityObject = $Kernel::OM->Get('Kernel::System::Activity');
+        my @Activities     = $ActivityObject->ListGet(
+            UserID => $Self->{UserID},
+        );
+
+        my $Count       = scalar @Activities;
+        my $NewActivity = grep { $_->{State} eq 'new' } @Activities;
+
+        my $ActivityBellClass = '';
+        if ($NewActivity) {
+            $ActivityBellClass = 'activity-new';
+        }
+
+        $Self->Block(
+            Name => 'Activity',
+            Data => {
+                Count             => $Count,
+                ActivityBellClass => $ActivityBellClass,
+            },
+        );
+
+        for my $Activity (@Activities) {
+            $Self->Block(
+                Name => 'ActivityList',
+                Data => {
+                    %{$Activity},
+                    LinkTarget => $Self->{UserActivityLinkTarget} || '_self',
+                },
+            );
+        }
+
+        $Self->AddJSData(
+            Key   => 'UserActivityLinkTarget',
+            Value => $Self->{UserActivityLinkTarget} || '_self',
+        );
 
         # show logged in notice
         if ( $Param{ShowPrefLink} ) {
@@ -1533,10 +1497,6 @@ sub Header {
         }
     }
 
-    if ( $ConfigObject->Get('SecureMode') ) {
-        $Param{OTRSBusinessIsInstalled} = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-    }
-
     # create & return output
     $Output .= $Self->Output(
         TemplateFile => "Header$Type",
@@ -1547,6 +1507,150 @@ sub Header {
     $Self->_DisableBannerCheck( OutputRef => \$Output );
 
     return $Output;
+}
+
+sub ToolbarModules {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my %ToolBarModuleBlocks = map { $Param{ToolBarModule}->{$_}->{Block} || 'ToolBarPersonalViews' => 1 }
+        grep { defined $Param{ToolBarModule}->{$_} } keys %{ $Param{ToolBarModule} };
+
+    # renders ToolBarContainer if a ToolBarModule is active
+    for my $Block ( sort keys %ToolBarModuleBlocks ) {
+        $Self->Block(
+            Name => $Block . 'Container',
+            Data => \%Param,
+        );
+    }
+
+    my %Modules;
+    my %Jobs = %{ $Param{ToolBarModule} };
+
+    # get group object
+    my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+
+    MODULE:
+    for my $Job ( sort keys %Jobs ) {
+
+        # load and run module
+        next MODULE if !$MainObject->Require( $Jobs{$Job}->{Module} );
+        my $Object = $Jobs{$Job}->{Module}->new(
+            %{$Self},    # UserID etc.
+        );
+        next MODULE if !$Object;
+
+        my $ToolBarAccessOk;
+
+        # if group restriction for tool-bar is set, check user permission
+        if ( $Jobs{$Job}->{Group} ) {
+
+            # remove white-spaces
+            $Jobs{$Job}->{Group} =~ s{\s}{}xmsg;
+
+            # get group configurations
+            my @Items = split( ';', $Jobs{$Job}->{Group} );
+
+            ITEM:
+            for my $Item (@Items) {
+
+                # split values into permission and group
+                my ( $Permission, $GroupName ) = split( ':', $Item );
+
+                # log an error if not valid setting
+                if ( !$Permission || !$GroupName ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Invalid config for ToolBarModule $Job - Key Group: '$Item'! "
+                            . "Need something like 'Permission:Group;'",
+                    );
+                }
+
+                # get groups for current user
+                my %Groups = $GroupObject->PermissionUserGet(
+                    UserID => $Self->{UserID},
+                    Type   => $Permission,
+                );
+
+                # next job if user have not groups
+                next ITEM if !%Groups;
+
+                # check user belongs to the correct group
+                my %GroupsReverse = reverse %Groups;
+                next ITEM if !$GroupsReverse{$GroupName};
+
+                $ToolBarAccessOk = 1;
+
+                last ITEM;
+            }
+
+            # go to the next module if not permissions
+            # for the current one
+            next MODULE if !$ToolBarAccessOk;
+        }
+
+        %Modules = ( $Object->Run( %Param, Config => $Jobs{$Job} ), %Modules );
+    }
+
+    # show tool bar items
+    MODULE:
+    for my $Key ( sort keys %Modules ) {
+        next MODULE if !%{ $Modules{$Key} };
+
+        $Modules{$Key}->{Block} //= 'ToolBarPersonalViews';
+
+        # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
+        # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
+        if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearch' ) {
+            $Modules{$Key}->{SearchInArchive}
+                = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
+        }
+
+        if (
+            $Modules{$Key}->{Block} eq 'ToolBarSearch'
+            && $Self->{UserToolBarSearchBackend}
+            && $Self->{UserToolBarSearchBackend} eq 'ToolBarSearchBackend' . $Modules{$Key}->{Name}
+            )
+        {
+            $Modules{$Key}->{Checked} = 'checked="checked"';
+        }
+
+        if ( $Modules{$Key}->{Block} eq 'ToolBarItem' ) {
+            $Modules{$Key}->{Block} = 'ToolBarPersonalViews';
+        }
+
+        $Self->Block(
+            Name => $Modules{$Key}->{Block},
+            Data => {
+                %{ $Modules{$Key} },
+                AccessKeyReference => $Modules{$Key}->{AccessKey}
+                ? " ($Modules{$Key}->{AccessKey})"
+                : '',
+            },
+        );
+    }
+
+    my $ToolBarLastViewsHTML = $Self->_BuildLastViewsOutput(
+        Interface => 'Agent',
+        Position  => 'ToolBar',
+    );
+
+    if ( defined $ToolBarLastViewsHTML && length $ToolBarLastViewsHTML ) {
+        $Self->Block(
+            Name => 'ToolBarLastViews',
+            Data => {
+                ToolBarLastViewsHTML => $ToolBarLastViewsHTML,
+            },
+        );
+    }
+
+    if ( $Param{ReturnResult} ) {
+        return $Self->Output(
+            TemplateFile => "HeaderToolbar",
+        );
+    }
 }
 
 sub Footer {
@@ -1612,22 +1716,6 @@ sub Footer {
         }
     }
 
-    # get OTRS business object
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-
-    # don't check for business package if the database was not yet configured (in the installer)
-    if ( $ConfigObject->Get('SecureMode') ) {
-        $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-        $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-        $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
-    }
-
-    # Check if video chat is enabled.
-    if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::VideoChat', Silent => 1 ) ) {
-        $Param{VideoChatEnabled} = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled()
-            || $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'UnitTestMode' ) // 0;
-    }
-
     # Set an array with pending states.
     my @PendingStateIDs = $Kernel::OM->Get('Kernel::System::State')->StateGetStatesByType(
         StateType => [ 'pending reminder', 'pending auto' ],
@@ -1656,8 +1744,7 @@ sub Footer {
         CustomerInfoSet                => $ConfigObject->Get('Ticket::Frontend::CustomerInfoCompose'),
         IncludeUnknownTicketCustomers  => $ConfigObject->Get('Ticket::IncludeUnknownTicketCustomers'),
         InputFieldsActivated           => $ConfigObject->Get('ModernizeFormFields'),
-        OTRSBusinessIsInstalled        => $Param{OTRSBusinessIsInstalled},
-        VideoChatEnabled               => $Param{VideoChatEnabled},
+        DatepickerShowWeek             => $ConfigObject->Get('Datepicker::ShowWeek') || 0,
         PendingStateIDs                => \@PendingStateIDs,
         CheckSearchStringsForStopWords => (
             $ConfigObject->Get('Ticket::SearchIndex::WarnOnStopWordUsage')
@@ -1667,8 +1754,9 @@ sub Footer {
                 eq 'Kernel::System::Ticket::ArticleSearchIndex::DB'
                 )
         ) ? 1 : 0,
-        SearchFrontend => $JSCall,
-        Autocomplete   => $AutocompleteConfig,
+        SearchFrontend             => $JSCall,
+        Autocomplete               => $AutocompleteConfig,
+        'Mentions::RichTextEditor' => $ConfigObject->Get('Mentions::RichTextEditor') // {},
     );
 
     for my $Config ( sort keys %JSConfig ) {
@@ -2412,6 +2500,7 @@ sub NoPermission {
     # create output
     my $Output;
     $Output = $Self->Header( Title => 'Insufficient Rights' ) if ( $WithHeader eq 'yes' );
+    $Output .= $Self->NavigationBar() if ( $WithHeader eq 'yes' && $Self->{UserID} );
     $Output .= $Self->Output(
         TemplateFile => 'NoPermission',
         Data         => \%Param
@@ -2889,7 +2978,7 @@ sub PageNavBar {
 
     # only show total amount of pages if there is more than one
     if ( $Pages > 1 ) {
-        $Param{NavBarLong} = "- " . $Self->{LanguageObject}->Translate("Page") . ": $Param{SearchNavBar}";
+        $Param{NavBarLong} = $Param{SearchNavBar};
     }
     else {
         $Param{SearchNavBar} = '';
@@ -3226,6 +3315,21 @@ sub NavigationBar {
         );
     }
 
+    # Show links to last views, if enabled for menu bar.
+    my $MenuBarLastViewsHTML = $Self->_BuildLastViewsOutput(
+        Interface => 'Agent',
+        Position  => 'MenuBar',
+    );
+
+    if ( defined $MenuBarLastViewsHTML && length $MenuBarLastViewsHTML ) {
+        $Self->Block(
+            Name => 'LastViewsMenuBar',
+            Data => {
+                MenuBarLastViewsHTML => $MenuBarLastViewsHTML,
+            },
+        );
+    }
+
     # create & return output
     my $Output = $Self->Output(
         TemplateFile => 'AgentNavigationBar',
@@ -3253,7 +3357,7 @@ sub NavigationBar {
         }
     }
 
-    # run notification modules
+    # run notify modules
     my $FrontendNotifyModuleConfig = $ConfigObject->Get('Frontend::NotifyModule');
     if ( ref $FrontendNotifyModuleConfig eq 'HASH' ) {
         my %Jobs = %{$FrontendNotifyModuleConfig};
@@ -3270,7 +3374,7 @@ sub NavigationBar {
             next NOTIFICATIONMODULE if !$Object;
 
             # run module
-            $Output .= $Object->Run( %Param, Config => $Jobs{$Job} );
+            $Output .= $Object->Run( %Param, Config => $Jobs{$Job} ) || '';
         }
     }
 
@@ -3889,11 +3993,6 @@ sub CustomerLogin {
     $Self->LoaderCreateJavaScriptTranslationData();
     $Self->LoaderCreateJavaScriptTemplateData();
 
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-    $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-    $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
-
     $Self->AddJSData(
         Key   => 'Baselink',
         Value => $Self->{Baselink},
@@ -4061,7 +4160,8 @@ sub CustomerHeader {
 
     my $Type = $Param{Type} || '';
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+    my $FrontendModule = $ConfigObject->Get('CustomerFrontend::Module');
 
     # add cookies if exists
     my $Output = '';
@@ -4079,18 +4179,18 @@ sub CustomerHeader {
     # area and title
     if (
         !$Param{Area}
-        && $ConfigObject->Get('CustomerFrontend::Module')->{ $Self->{Action} }
+        && $FrontendModule->{ $Self->{Action} }
         )
     {
-        $Param{Area} = $ConfigObject->Get('CustomerFrontend::Module')->{ $Self->{Action} }
+        $Param{Area} = $FrontendModule->{ $Self->{Action} }
             ->{NavBarName} || '';
     }
     if (
         !$Param{Title}
-        && $ConfigObject->Get('CustomerFrontend::Module')->{ $Self->{Action} }
+        && $FrontendModule->{ $Self->{Action} }
         )
     {
-        $Param{Title} = $ConfigObject->Get('CustomerFrontend::Module')->{ $Self->{Action} }->{Title}
+        $Param{Title} = $FrontendModule->{ $Self->{Action} }->{Title}
             || '';
     }
     if (
@@ -4116,7 +4216,7 @@ sub CustomerHeader {
     }
 
     my $Frontend;
-    if ( $ConfigObject->Get('CustomerFrontend::Module')->{ $Self->{Action} } ) {
+    if ( $FrontendModule->{ $Self->{Action} } ) {
         $Frontend = 'Customer';
     }
     else {
@@ -4182,6 +4282,35 @@ sub CustomerHeader {
     # Generate the minified CSS and JavaScript files
     # and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateCustomerCSSCalls();
+    $Self->LoaderCreateDynamicCSS();
+
+    # only on valid session
+    if ( $Self->{UserID} ) {
+
+        $Self->Block(
+            Name => 'Actions',
+            Data => \%Param,
+        );
+
+        # show logout button (if registered)
+        if ( $FrontendModule->{Logout} ) {
+            $Self->Block(
+                Name => 'Logout',
+                Data => \%Param,
+            );
+        }
+
+        # show preferences button (if registered)
+        if ( $FrontendModule->{CustomerPreferences} ) {
+            if ( $Self->{Action} eq 'CustomerPreferences' ) {
+                $Param{Class} = 'Selected';
+            }
+            $Self->Block(
+                Name => 'Preferences',
+                Data => \%Param,
+            );
+        }
+    }
 
     # create & return output
     $Output .= $Self->Output(
@@ -4224,52 +4353,6 @@ sub CustomerFooter {
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # Check if video chat is enabled.
-    if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::VideoChat', Silent => 1 ) ) {
-        $Param{VideoChatEnabled} = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled()
-            || $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'UnitTestMode' ) // 0;
-    }
-
-    # Check if customer user has permission for chat.
-    my $CustomerChatPermission;
-    if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Chat', Silent => 1 ) ) {
-
-        my $CustomerChatConfig = $ConfigObject->Get('CustomerFrontend::Module')->{'CustomerChat'} || {};
-
-        if (
-            $Kernel::OM->Get('Kernel::Config')->Get('CustomerGroupSupport')
-            && (
-                IsArrayRefWithData( $CustomerChatConfig->{GroupRo} )
-                || IsArrayRefWithData( $CustomerChatConfig->{Group} )
-            )
-            )
-        {
-
-            my $CustomerGroupObject = $Kernel::OM->Get('Kernel::System::CustomerGroup');
-
-            GROUP:
-            for my $GroupName ( @{ $CustomerChatConfig->{GroupRo} }, @{ $CustomerChatConfig->{Group} } ) {
-                $CustomerChatPermission = $CustomerGroupObject->PermissionCheck(
-                    UserID    => $Self->{UserID},
-                    GroupName => $GroupName,
-                    Type      => 'ro',
-                );
-                last GROUP if $CustomerChatPermission;
-            }
-        }
-        else {
-            $CustomerChatPermission = 1;
-        }
-    }
-
-    # don't check for business package if the database was not yet configured (in the installer)
-    if ( $ConfigObject->Get('SecureMode') ) {
-        my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-        $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-        $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-        $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
-    }
-
     # AutoComplete-Config
     my $AutocompleteConfig = $ConfigObject->Get('AutoComplete::Customer');
 
@@ -4293,14 +4376,9 @@ sub CustomerFooter {
         CustomerPanelSessionName => $ConfigObject->Get('CustomerPanelSessionName'),
         UserLanguage             => $Self->{UserLanguage},
         CheckEmailAddresses      => $ConfigObject->Get('CheckEmailAddresses'),
-        OTRSBusinessIsInstalled  => $Param{OTRSBusinessIsInstalled},
-        OTRSSTORMIsInstalled     => $Param{OTRSSTORMIsInstalled},
-        OTRSCONTROLIsInstalled   => $Param{OTRSCONTROLIsInstalled},
         InputFieldsActivated     => $ConfigObject->Get('ModernizeCustomerFormFields'),
         Autocomplete             => $AutocompleteConfig,
-        VideoChatEnabled         => $Param{VideoChatEnabled},
         WebMaxFileUpload         => $ConfigObject->Get('WebMaxFileUpload'),
-        CustomerChatPermission   => $CustomerChatPermission,
     );
 
     for my $Config ( sort keys %JSConfig ) {
@@ -4665,56 +4743,19 @@ sub CustomerNavigationBar {
         $Param{UserLoginIdentifier} = $Self->{UserLoginIdentifier};
     }
 
-    # only on valid session
-    if ( $Self->{UserID} ) {
+    # Show links to last views, if enabled for menu bar.
+    my $MenuBarLastViewsHTML = $Self->_BuildLastViewsOutput(
+        Interface => 'Customer',
+        Position  => 'MenuBar',
+    );
 
-        # show logout button (if registered)
-        if ( $FrontendModule->{Logout} ) {
-            $Self->Block(
-                Name => 'Logout',
-                Data => \%Param,
-            );
-        }
-
-        # show preferences button (if registered)
-        if ( $FrontendModule->{CustomerPreferences} ) {
-            if ( $Self->{Action} eq 'CustomerPreferences' ) {
-                $Param{Class} = 'Selected';
-            }
-            $Self->Block(
-                Name => 'Preferences',
-                Data => \%Param,
-            );
-        }
-
-        # Show open chat requests (if chat engine is active).
-        if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Chat', Silent => 1 ) ) {
-            if ( $ConfigObject->Get('ChatEngine::Active') ) {
-                my $ChatObject = $Kernel::OM->Get('Kernel::System::Chat');
-                my $Chats      = $ChatObject->ChatList(
-                    Status        => 'request',
-                    TargetType    => 'Customer',
-                    ChatterID     => $Self->{UserID},
-                    ChatterType   => 'Customer',
-                    ChatterActive => 0,
-                );
-
-                my $Count = scalar $Chats;
-
-                $Self->Block(
-                    Name => 'ChatRequests',
-                    Data => {
-                        Count => $Count,
-                        Class => ($Count) ? '' : 'Hidden',
-                    },
-                );
-
-                $Self->AddJSData(
-                    Key   => 'ChatEngine::Active',
-                    Value => $ConfigObject->Get('ChatEngine::Active')
-                );
-            }
-        }
+    if ( defined $MenuBarLastViewsHTML && length $MenuBarLastViewsHTML ) {
+        $Self->Block(
+            Name => 'LastViewsMenuBar',
+            Data => {
+                MenuBarLastViewsHTML => $MenuBarLastViewsHTML,
+            },
+        );
     }
 
     # create & return output
@@ -4825,7 +4866,7 @@ sub Ascii2RichText {
 
     # check needed stuff
     for my $Needed (qw(String)) {
-        if ( !defined $Param{$_} ) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!"
@@ -5468,13 +5509,6 @@ sub _BuildSelectionDataRefCreate {
             push @SortKeys, sort { lc $a cmp lc $b } ( values %List );
         }
 
-        # translate value
-        if ( $OptionRef->{Translation} ) {
-            for my $Row ( sort keys %{$DataLocal} ) {
-                $DataLocal->{$Row} = $Self->{LanguageObject}->Translate( $DataLocal->{$Row} );
-            }
-        }
-
         # sort hash (after the translation)
         if ( $OptionRef->{Sort} eq 'NumericKey' ) {
             @SortKeys = sort { $a <=> $b } ( keys %{$DataLocal} );
@@ -5723,6 +5757,10 @@ sub _BuildSelectionDataRefCreate {
     # SelectedID and SelectedValue option
     if ( defined $OptionRef->{SelectedID} || $OptionRef->{SelectedValue} ) {
         for my $Row ( @{$DataRef} ) {
+            my $CheckValue = $Row->{Value};
+            if ( $OptionRef->{Translation} ) {
+                $CheckValue = $Self->{LanguageObject}->Translate( $Row->{Value} );
+            }
             if (
                 (
                     (
@@ -5732,13 +5770,13 @@ sub _BuildSelectionDataRefCreate {
                     ||
                     (
                         defined $Row->{Value}
-                        && $OptionRef->{SelectedValue}->{ $Row->{Value} }
+                        && $OptionRef->{SelectedValue}->{$CheckValue}
                     )
                 )
                 &&
                 (
                     defined $Row->{Value}
-                    && !$DisabledElements{ $Row->{Value} }
+                    && !$DisabledElements{$CheckValue}
                 )
                 )
             {
@@ -5832,6 +5870,13 @@ sub _BuildSelectionDataRefCreate {
                     }
                 }
             }
+        }
+    }
+
+    # translate value
+    if ( $OptionRef->{Translation} ) {
+        for my $Row ( @{$DataRef} ) {
+            $Row->{Value} = $Self->{LanguageObject}->Translate( $Row->{Value} );
         }
     }
 
@@ -6110,10 +6155,17 @@ sub SetRichTextParameters {
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
     my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
 
+    my %RichTextSettings = %{ $ConfigObject->Get("Frontend::RichText::Settings") || {} };
+
+    # overwrite RichTextSettings if module specific settings exist (e.g. RichTextHeight)
+    for my $RichTextSettingKey ( sort keys %RichTextSettings ) {
+        if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
+            $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
+        }
+    }
+
     # get needed variables
-    my $ScreenRichTextHeight = $Param{Data}->{RichTextHeight} || $ConfigObject->Get("Frontend::RichTextHeight");
-    my $ScreenRichTextWidth  = $Param{Data}->{RichTextWidth}  || $ConfigObject->Get("Frontend::RichTextWidth");
-    my $RichTextType         = $Param{Data}->{RichTextType}   || '';
+    my $RichTextType        = $Param{Data}->{RichTextType}                || '';
     my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
     my $TextDir             = $Self->{TextDirection}                      || '';
     my $EditingAreaCSS      = 'body.cke_editable { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
@@ -6202,8 +6254,7 @@ sub SetRichTextParameters {
     $Self->AddJSData(
         Key   => 'RichText',
         Value => {
-            Height         => $ScreenRichTextHeight,
-            Width          => $ScreenRichTextWidth,
+            TicketID       => $Param{Data}->{TicketID} || '',
             TextDir        => $TextDir,
             EditingAreaCSS => $EditingAreaCSS,
             Lang           => {
@@ -6214,6 +6265,7 @@ sub SetRichTextParameters {
             ToolbarWithoutImage => $ToolbarWithoutImage[0],
             PictureUploadAction => $PictureUploadAction,
             Type                => $RichTextType,
+            %RichTextSettings,
         },
     );
 
@@ -6248,11 +6300,18 @@ sub CustomerSetRichTextParameters {
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
     my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
 
-    my $ScreenRichTextHeight = $ConfigObject->Get("Frontend::RichTextHeight");
-    my $ScreenRichTextWidth  = $ConfigObject->Get("Frontend::RichTextWidth");
-    my $TextDir              = $Self->{TextDirection} || '';
-    my $PictureUploadAction  = $Param{Data}->{RichTextPictureUploadAction} || '';
-    my $EditingAreaCSS       = 'body { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
+    my %RichTextSettings = %{ $ConfigObject->Get("Frontend::RichText::Settings") || {} };
+
+    # overwrite RichTextSettings if module specific settings exist (e.g. RichTextHeight)
+    for my $RichTextSettingKey ( sort keys %RichTextSettings ) {
+        if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
+            $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
+        }
+    }
+
+    my $TextDir             = $Self->{TextDirection}                      || '';
+    my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
+    my $EditingAreaCSS      = 'body { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
 
     # decide if we need to use the enhanced mode (with tables)
     my @Toolbar;
@@ -6331,8 +6390,6 @@ sub CustomerSetRichTextParameters {
     $Self->AddJSData(
         Key   => 'RichText',
         Value => {
-            Height         => $ScreenRichTextHeight,
-            Width          => $ScreenRichTextWidth,
             TextDir        => $TextDir,
             EditingAreaCSS => $EditingAreaCSS,
             Lang           => {
@@ -6341,6 +6398,7 @@ sub CustomerSetRichTextParameters {
             Toolbar             => $Toolbar[0],
             ToolbarWithoutImage => $ToolbarWithoutImage[0],
             PictureUploadAction => $PictureUploadAction,
+            %RichTextSettings,
         },
     );
 
@@ -6399,6 +6457,124 @@ sub UserInitialsGet {
     }
 
     return $UserInitials;
+}
+
+=head2 _BuildLastViewsOutput()
+
+Outputs links to the last views of the (customer) user in the avatar area, tool bar or menu bar.
+
+    my $LastViewsHTML = $LayoutObject->_BuildLastViewsOutput(
+        Interface => 'Agent',       # or Customer
+        Position  => 'ToolBar',     # or MenuBar or Avatar, for customer interface only MenuBar is possible.
+    );
+
+=cut
+
+sub _BuildLastViewsOutput {
+    my ( $Self, %Param ) = @_;
+
+    my $LastViewsObject    = $Kernel::OM->Get('Kernel::System::LastViews');
+    my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+    my $JSONObject         = $Kernel::OM->Get('Kernel::System::JSON');
+    my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+    my $LogObject          = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Interface Position)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my %UserPreferences;
+
+    if ( $Param{Interface} eq 'Agent' ) {
+        %UserPreferences = $UserObject->GetPreferences(
+            UserID => $Self->{UserID},
+        );
+    }
+    elsif ( $Param{Interface} eq 'Customer' ) {
+        %UserPreferences = $CustomerUserObject->GetPreferences(
+            UserID => $Self->{UserID},
+        );
+        $UserPreferences{UserLastViewsLimit} ||= 10;
+        $UserPreferences{UserLastViewsPosition} = 'MenuBar';
+    }
+    else {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'Interface' must be 'Agent' or 'Customer'.",
+        );
+        return;
+    }
+
+    my $LastViewTypes = $JSONObject->Decode(
+        Data => $UserPreferences{UserLastViewsTypes},
+    );
+    return if !IsArrayRefWithData($LastViewTypes);
+
+    my $LastViewsLimit = $UserPreferences{UserLastViewsLimit} || 5;
+
+    my $SelectedPosition = $UserPreferences{UserLastViewsPosition} || 'ToolBar';
+    return if $Param{Position} ne $SelectedPosition;
+
+    my @LastViews = $LastViewsObject->GetList(
+        SessionID => $Self->{SessionID},
+        Types     => $LastViewTypes,
+    );
+    return if !@LastViews;
+
+    my $ReverseCounter  = $LastViewsLimit;
+    my $LastViewCounter = 1;
+    my $LastViewLabel   = $Self->{LanguageObject}->Translate('Last Views');
+
+    LASTVIEW:
+    for my $LastView ( reverse @LastViews ) {
+        last LASTVIEW if $LastViewCounter > $LastViewsLimit;
+
+        my $Name  = $LastView->{Name} || $LastView->{Action};
+        my $Label = $Self->{LanguageObject}->Translate($Name);
+
+        my $Class;
+        if ( $LastView->{PopUp} ) {
+            $Class = 'AsPopup PopupType_LastView' . $LastView->{PopUp};
+        }
+
+        $Self->Block(
+            Name => 'LastView',
+            Data => {
+                %{$LastView},
+                Label   => $Label,
+                Counter => $LastViewCounter,
+                Class   => $Class,
+            },
+        );
+
+        for my $Param ( sort keys %{ $LastView->{Params} } ) {
+            my $Value = $LastView->{Params}->{$Param};
+            $Self->Block(
+                Name => 'LastViewParam',
+                Data => {
+                    Key   => $Param,
+                    Value => $Value,
+                },
+            );
+        }
+
+        $LastViewCounter++;
+        $ReverseCounter--;
+    }
+
+    my $LastViewHTML = $Self->Output(
+        TemplateFile => 'LastViews/' . $Param{Interface} . '/' . $SelectedPosition,
+        Data         => {},
+    );
+
+    return $LastViewHTML;
 }
 
 1;

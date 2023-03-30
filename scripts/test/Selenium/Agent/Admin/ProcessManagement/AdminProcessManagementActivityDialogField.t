@@ -19,11 +19,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
 
         # Create test user.
-        my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         );
 
@@ -92,7 +92,7 @@ $Selenium->RunTest(
             }
         }
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Get all processes.
         my $ProcessList = $ProcessObject->ProcessListGet(
@@ -146,7 +146,7 @@ $Selenium->RunTest(
             );
 
             # Import test Selenium Process.
-            my $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/ProcessManagement/AgentTicketProcess.yml";
+            my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/AgentTicketProcess.yml";
             $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
             $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
             $Selenium->WaitFor(

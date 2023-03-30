@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Reinstall an OTRS package.');
+    $Self->Description('Reinstall a package.');
     $Self->AddOption(
         Name        => 'force',
         Description => 'Force package reinstallation even if validation fails.',
@@ -32,7 +32,7 @@ sub Configure {
     $Self->AddArgument(
         Name => 'location',
         Description =>
-            "Specify a file path, a remote repository (https://download.znuny.org/releases/packages/:Package-1.0.0.opm) or just any online repository (online:Package).",
+            "Specify a file path, a remote repository (https://download.znuny.org/releases/packages/:Package-1.0.0.opm) or just any online repository by its configured name (e.g. 'MyRepository:Package').",
         Required   => 1,
         ValueRegex => qr/.*/smx,
     );
@@ -59,6 +59,12 @@ sub Run {
     my %Structure = $Kernel::OM->Get('Kernel::System::Package')->PackageParse(
         String => $FileString,
     );
+
+    # check if package is installed
+    if ( !$Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled( Name => $Structure{Name}->{Content} ) ) {
+        $Self->PrintError("Package is not installed.");
+        return $Self->ExitCodeError();
+    }
 
     # intro screen
     if ( $Structure{IntroReinstall} ) {

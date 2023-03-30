@@ -66,11 +66,14 @@ add new TransitionAction
 returns the id of the created TransitionAction if success or undef otherwise
 
     my $ID = $TransitionActionObject->TransitionActionAdd(
-        EntityID    => 'TA1'                     # mandatory, exportable unique identifier
-        Name        => 'NameOfTransitionAction', # mandatory
-        Config      => $ConfigHashRef,           # mandatory, transition action configuration to be
-                                                 #    stored in YAML format
-        UserID      => 123,                      # mandatory
+        EntityID => 'TA1',                                              # mandatory, exportable unique identifier
+        Name     => 'NameOfTransitionAction',                           # mandatory
+        Config   => {                                                   # mandatory, transition action configuration to be stored in YAML format
+            Scope         => 'Global',                                  # mandatory, default 'Global' (Process|Global)
+            ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199' # ScopeEntityID, used if specific scope is set e.g. 'Process'
+        },
+
+        ParentID => 123                                                 # parent process id, used if scope is 'Process'
     );
 
 Returns:
@@ -149,6 +152,15 @@ sub TransitionActionAdd {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Config Config must be a Hash!",
+        );
+        return;
+    }
+
+    $Param{Config}->{Scope} //= 'Global';
+    if ( $Param{Config}->{Scope} ne 'Global' && !$Param{Config}->{ScopeEntityID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need ScopeEntityID if specific scope is set.",
         );
         return;
     }
@@ -255,7 +267,10 @@ Returns:
         ID           => 123,
         EntityID     => 'TA1',
         Name         => 'some name',
-        Config       => $ConfigHashRef,
+        Config         => {
+            Scope         => 'Process',
+            ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199',
+        },
         CreateTime   => '2012-07-04 15:08:00',
         ChangeTime   => '2012-07-04 15:08:00',
     };
@@ -364,12 +379,14 @@ update TransitionAction attributes
 returns 1 if success or undef otherwise
 
     my $Success = $TransitionActionObject->TransitionActionUpdate(
-        ID          => 123,                      # mandatory
-        EntityID    => 'TA1'                     # mandatory, exportable unique identifier
-        Name        => 'NameOfTransitionAction', # mandatory
-        Config      => $ConfigHashRef,           # mandatory, actvity dialog configuration to be
-                                                 #   stored in YAML format
-        UserID      => 123,                      # mandatory
+        ID       => 123,                                                 # mandatory
+        EntityID => 'TA1',                                               # mandatory, exportable unique identifier
+        Name     => 'NameOfTransitionAction',                            # mandatory
+        Config   => {                                                    # mandatory, transition action configuration to be stored in YAML format
+            Scope         => 'Global',                                   # mandatory, default 'Global' (Process|Global)
+            ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199', # ScopeEntityID, used if specific scope is set e.g. 'Process'
+        }
+        UserID   => 123,                                                 # mandatory
     );
 
 =cut

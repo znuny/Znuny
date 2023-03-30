@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -31,7 +32,19 @@ Core.Agent.TicketBulk = (function (TargetNS) {
         var TicketBulkURL = Core.Config.Get('TicketBulkURL'),
             $TicketNumberObj = $('#MergeTo'),
             Fields = ['StateID', 'TypeID', 'OwnerID', 'ResponsibleID', 'QueueID', 'PriorityID'],
-            ModifiedFields;
+            DynamicFieldNames = Core.Config.Get('DynamicFieldNames'),
+            ModifiedFields,
+
+            // Fields that are only required if they are visible to the user
+            // when a widget gets expanded.
+            RequiredWidgetFieldIDs = [
+                'Subject', 'Body',
+                'EmailSubject', 'EmailBody'
+            ],
+            TimeUnitsSelectFieldIDs = [
+                'TimeUnitsMinutes', 'TimeUnitsSeconds', 'TimeUnitsHours',
+                'EmailTimeUnitsMinutes', 'EmailTimeUnitsSeconds', 'EmailTimeUnitsHours'
+            ];
 
         // Initialize autocomplete feature on ticket number field.
         Core.UI.Autocomplete.Init($TicketNumberObj, function (Request, Response) {
@@ -81,19 +94,45 @@ Core.Agent.TicketBulk = (function (TargetNS) {
             }
         });
 
+
+        TargetNS.InitDynamicFields(DynamicFieldNames);
+
         // Bind events to specific fields
         $.each(Fields, function(Index, Value) {
-            ModifiedFields = Core.Data.CopyObject(Fields);
+            ModifiedFields = Core.Data.CopyObject(Fields).concat(DynamicFieldNames);
             ModifiedFields.splice(Index, 1);
 
             FieldUpdate(Value, ModifiedFields);
         });
 
-
         // execute function in the parent window
         Core.UI.Popup.ExecuteInParentWindow(function(WindowObject) {
             WindowObject.Core.UI.Popup.FirePopupEvent('URL', { URL: TicketBulkURL }, false);
         });
+
+        if (
+            Core.Config.Get('TimeUnitsInputType') == 'Text'
+            && Core.Config.Get('TimeUnitsRequired')
+        ) {
+            RequiredWidgetFieldIDs = $.merge(RequiredWidgetFieldIDs, ['TimeUnits', 'EmailTimeUnits']);
+        }
+
+        // Toggle required fields of widgets depending on their visibility.
+        $('.WidgetAction.Toggle a').on('click', function() {
+            ToggleRequiredWidgetFields(RequiredWidgetFieldIDs);
+            if (
+                Core.Config.Get('TimeUnitsInputType') == 'Dropdown'
+                && Core.Config.Get('TimeUnitsRequired')
+            ) {
+                ToggleRequiredWidgetFields(TimeUnitsSelectFieldIDs, 'Validate_TimeUnits');
+            }
+        });
+
+        // Initialize required visible fields of widgets once.
+        ToggleRequiredWidgetFields(RequiredWidgetFieldIDs);
+        if (Core.Config.Get('TimeUnitsInputType') == 'Dropdown' && Core.Config.Get('TimeUnitsRequired')) {
+            ToggleRequiredWidgetFields(TimeUnitsSelectFieldIDs, 'Validate_TimeUnits');
+        }
 
         // get the Recipients on expanding of the email widget
         $('#EmailSubject').closest('.WidgetSimple').find('.Header .Toggle a').on('click', function() {
@@ -169,6 +208,105 @@ Core.Agent.TicketBulk = (function (TargetNS) {
         });
     };
 
+    TargetNS.InitDynamicFields = function (DynamicFieldNames) {
+        $.each(DynamicFieldNames, function(Index, DynamicFieldName) {
+
+            var DynamicFieldConfigs = Core.Config.Get('DynamicFieldConfigs'),
+                UsedSuffix = 'Used',
+                UsedType;
+
+            var HasCheckbox = false,
+                IsChecked         = (DynamicFieldConfigs[DynamicFieldName]['IsChecked'] === 'true'),
+                RequireActivation = (DynamicFieldConfigs[DynamicFieldName]['RequireActivation'] === 'true');
+
+            // check if this current DynamicField has a hidden checkbox "DynamicFieldUsed"
+            if ($('#' +  DynamicFieldName + UsedSuffix).length) {
+                HasCheckbox = true;
+            }
+
+            // if Ticket::Frontend::AgentTicketBulk###DynamicFieldRequireActivation is not activated
+            // hide the additional checkbox (Used) of datetime and checkbox
+            if (!RequireActivation) {
+                if (HasCheckbox) {
+                    $('#' + DynamicFieldName + 'Used').hide();
+                    $('#' + DynamicFieldName + 'Used').prop('checked', true);
+                }
+                return;
+            }
+
+            if (HasCheckbox) {
+                UsedType = $('#' + DynamicFieldName + 'Used').prop('type');
+                // show hidden checkbox
+                if (UsedType === 'hidden') {
+                    UsedSuffix = '';
+                    $('#' + DynamicFieldName + 'Used').prop('type', 'checkbox');
+                }
+
+                // move current checkboxUsed to the <for="DynamicField_DynamicFieldName"> tag
+                $('#' + DynamicFieldName + 'Used').prependTo(
+                    $("[for='" + DynamicFieldName + UsedSuffix + "']")
+               );
+            }
+            else {
+                // insert a new checkbox with id=DynamicFieldNameUsed to label
+                $("[for='" + DynamicFieldName + "']").prepend(
+                    '<input type="checkbox" id="' + DynamicFieldName + 'Used" name="' + DynamicFieldName + 'Used" value="1"/>'
+                );
+            }
+
+            // set the label "for" to the CheckboxUsed
+            // otherwise Firefox won't uncheck the CheckboxUsed
+            $("[for='" + DynamicFieldName + "']").prop('for', '' + DynamicFieldName + 'Used');
+
+            if (IsChecked) {
+                $('#' + DynamicFieldName + 'Used').prop('checked',  true);
+            }
+
+            // reset input values for current DynamicField after uncheck CheckboxUsed
+            $('#' + DynamicFieldName + 'Used').on('change', function () {
+                var IsChecked = $('#' + DynamicFieldName + 'Used').prop('checked'),
+                    Tag,
+                    Type;
+
+                if (
+                    IsChecked === false
+                    && $('#' + DynamicFieldName).length
+                ) {
+                    Tag = $('#' + DynamicFieldName).prop('tagName').toLowerCase();
+
+                    if (Tag === 'input') {
+                        Type = $('#' + DynamicFieldName).prop('type').toLowerCase();
+
+                        if (Type === 'checkbox') {
+                            $('#' + DynamicFieldName).prop('checked', false);
+                        }
+                        else {
+                            $('#' + DynamicFieldName).val('');
+                        }
+                    }
+                    else {
+                        $('#' + DynamicFieldName).val('');
+                    }
+                }
+            });
+
+            // set CheckboxUsed to check after clicking into input field
+            $('#' + DynamicFieldName).on('click', function () {
+                $('#' + DynamicFieldName + 'Used').prop('checked', true);
+            });
+
+            // if input field is date dynamic field, loop over every input field to set CheckboxUsed to check
+            $.each(['Year', 'Month', 'Day', 'Hour', 'Minute','DayDatepickerIcon'], function (Index, Element) {
+                if ($('#' +  DynamicFieldName + Element).length) {
+                    $('#' +  DynamicFieldName + Element).on('click', function() {
+                        $('#' + DynamicFieldName + 'Used').prop('checked', true);
+                    });
+                }
+            });
+
+        });
+    };
+
     /**
      * @private
      * @name FieldUpdate
@@ -185,6 +323,42 @@ Core.Agent.TicketBulk = (function (TargetNS) {
         });
     }
 
+    /**
+     * @private
+     * @name ToggleRequiredWidgetFields
+     * @memberof Core.Agent.TicketBulk.Init
+     * @function
+     * @param {Object} RequiredWidgetFieldIDs
+     * @param {String} AdditionalClass
+     * @description
+     *      Toggles mandatory fields if they are visible/being used in an expanded widget.
+     *      Specify AdditionalClass to work with additional class.
+     */
+    function ToggleRequiredWidgetFields(RequiredWidgetFieldIDs, AdditionalClass) {
+
+        // Check each relevant field for visibility and toggle
+        // class Validate_Required (visible: add / invisible: remove).
+        $.each(RequiredWidgetFieldIDs, function(Index, FieldID) {
+            var $Widget = $('#' + FieldID).closest('div.WidgetSimple'),
+                WidgetExpanded = $Widget.hasClass('Expanded');
+
+            if (WidgetExpanded || $('#' + FieldID).is(':visible')) {
+                $('#' + FieldID).addClass('Validate_Required');
+
+                if (AdditionalClass) {
+                    $('#' + FieldID).addClass(AdditionalClass);
+                }
+
+                return;
+            }
+
+            $('#' + FieldID).removeClass('Validate_Required');
+
+            if (AdditionalClass) {
+                $('#' + FieldID).removeClass(AdditionalClass);
+            }
+        });
+    }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 

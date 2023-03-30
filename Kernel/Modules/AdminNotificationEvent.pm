@@ -712,7 +712,7 @@ sub Run {
         if ( !$NotificationImport->{Success} ) {
             my $Message = $NotificationImport->{Message}
                 || Translatable(
-                'Notifications could not be Imported due to a unknown error, please check OTRS logs for more information'
+                'Notifications could not be Imported due to a unknown error, please check Znuny logs for more information'
                 );
             return $LayoutObject->ErrorScreen(
                 Message => $Message,
@@ -822,6 +822,7 @@ sub _Edit {
             Customer                  => Translatable('Customer user of the ticket'),
             AllRecipientsFirstArticle => Translatable('All recipients of the first article'),
             AllRecipientsLastArticle  => Translatable('All recipients of the last article'),
+            AllMentionedUsers         => Translatable('All agents who are mentioned in the ticket'),
         },
         Name       => 'Recipients',
         Multiple   => 1,
@@ -1312,10 +1313,6 @@ sub _Edit {
     # set once per day checked value
     $Param{OncePerDayChecked} = ( $Param{Data}->{OncePerDay} ? 'checked="checked"' : '' );
 
-    my $OTRSBusinessObject      = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    my $OTRSBusinessIsInstalled = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-
-    # Third option is enabled only when OTRSBusiness is installed in the system.
     $Param{VisibleForAgentStrg} = $LayoutObject->BuildSelection(
         Data => [
             {
@@ -1326,11 +1323,6 @@ sub _Edit {
                 Key   => '1',
                 Value => Translatable('Yes'),
             },
-            {
-                Key      => '2',
-                Value    => Translatable('Yes, but require at least one active notification method.'),
-                Disabled => $OTRSBusinessIsInstalled ? 0 : 1,
-            }
         ],
         Name       => 'VisibleForAgent',
         Sort       => 'NumericKey',
@@ -1380,24 +1372,6 @@ sub _Edit {
                         TransportName => $RegisteredTransports{$Transport}->{Name},
                     },
                 );
-
-                # if not standard transport
-                if (
-                    defined $RegisteredTransports{$Transport}->{IsOTRSBusinessTransport}
-                    && $RegisteredTransports{$Transport}->{IsOTRSBusinessTransport} eq '1'
-                    && !$OTRSBusinessIsInstalled
-                    )
-                {
-
-                    # transport
-                    $LayoutObject->Block(
-                        Name => 'TransportRowRecommendation',
-                        Data => {
-                            Transport     => $Transport,
-                            TransportName => $RegisteredTransports{$Transport}->{Name},
-                        },
-                    );
-                }
 
                 next TRANSPORT;
             }
@@ -1454,18 +1428,6 @@ sub _Edit {
                         },
                     );
                 }
-                else {
-
-                    # This trasnport needs to be active before use it.
-                    $LayoutObject->Block(
-                        Name => 'TransportRowNotActive',
-                        Data => {
-                            Transport     => $Transport,
-                            TransportName => $RegisteredTransports{$Transport}->{Name},
-                        },
-                    );
-                }
-
             }
 
         }
@@ -1515,6 +1477,7 @@ sub _Overview {
             my %Data = $NotificationEventObject->NotificationGet(
                 ID => $NotificationID,
             );
+
             $LayoutObject->Block(
                 Name => 'OverviewResultRow',
                 Data => {

@@ -5,6 +5,9 @@ Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
 did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+
+// TODO Denny delete me
+// nofilter(TidyAll::Plugin::Znuny::Common::CustomizationMarkers)
 */
 
 /**
@@ -14,1265 +17,3131 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
-/**
- * @subsection  Widget Tablelike list
- */
-ul.Tablelike {
-    border: 1px solid #CCC;
-}
-
-ul.Tablelike:first-child {
-    margin-right: 8px;
-}
-
-.RTL .Size1of3:first-child ul.Tablelike {
-    margin-left: 8px;
-    margin-right: 0;
-}
-
-.StrikeThrough a {
-    text-decoration: line-through;
-}
-
-ul.Tablelike li {
-    line-height: 20px;
-    padding: 0 4px;
-    min-height: 20px;
-    background-color: #FFF;
-}
-
-ul.Tablelike li.OneRow,
-ul.Tablelike li.OneRow .AsBlock {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-ul.Tablelike li:nth-child(even) {
-    background-color: #F5F5F5;
-}
-
-ul.Tablelike li:hover {
-    background: #FCB24B;
-}
-
-ul.Tablelike li:hover a {
-    color: #000;
-}
-
-ul.Tablelike li.Header {
-    color: #4B4B4B;
-    font-size: 11px;
-    line-height: 20px;
-    text-transform: uppercase;
-    background: #eeeeee;
-    border-top: 1px solid #FFF;
-}
-
-ul.Tablelike + ul.Tablelike.AllocationList {
-    border-top: 0px;
-}
-
-ul.Tablelike li.Header + li {
-    border-top: 1px solid #EEE;
-}
-
-/**
- * @subsection  WidgetSimple
- */
-
-.LayoutPopup .Content > .WidgetSimple:last-child {
-    margin-bottom: 0px;
-}
-
-.WidgetSimple {
-    margin-bottom: 15px;
-    background: #f5f5f5;
-    box-shadow: 1px 1px 0px #e9e9e9;
-    margin-right: 2px;
-}
-
-.WidgetSimple.WidgetLoading i {
-    display: block;
-    text-align: center;
-    margin: 10px 0px;
-}
-
-.WidgetSimple.MobileNotAvailableWidget {
-    display: none;
-}
-
-.WidgetSimple .WidgetSimple {
-    background: #F2EFEF;
-    border: 1px solid #ddd;
-    margin: 15px 10px;
-}
-
-.WidgetSimple .WidgetSimple .WidgetSimple {
-    background: #f5f5f5;
-}
-
-.WidgetSimple .WidgetSimple .WidgetSimple h2 {
-    font-size: 12px;
-}
-
-.WidgetSimple > .Header,
-.WidgetSimple.Collapsed.AnimationRunning > .Header {
-    padding: 2px 5px 2px 5px;
-    position: relative;
-    border-bottom: 1px solid #ddd;
-}
-
-.WidgetSimple.Collapsed > .Header {
-    border-bottom: none;
-}
-
-.WidgetSimple > .Header h2,
-.WidgetSimple > .Header h3 {
-    padding: 4px 3px;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 13px;
-    text-shadow: 1px 1px #fff;
-    color: #555;
-}
-
-.WidgetSimple > .Content {
-    padding: 8px 8px 10px;
-    overflow: auto;
     /**
-     *   START IE9 Hover Bug Workaround
-     *   The problem occurs when you have a container that has a fixed width set, an overflow set to
-     *   auto, content long enough to trigger the horizontal scroll and a hover style set
-     *   on elements inside the container.
-     *   The container mysteriously increases in size.
-     *   (e.g. if you have installed OTRSDashboardOverviewFilters and many dynamic fields are
-     *   shown in the dashboard.)
-     */
-    min-height: 0%;
-    /* END IE9 Hover Bug Workaround */
-}
-
-.WidgetSimple > .Content.OverflowVisible {
-    overflow: visible;
-}
-
-.WidgetSimple.QueueOverview > .Content {
-    padding-bottom: 2px;
-}
-
-.WidgetSimple.Collapsed > .Content {
-    display: none;
-}
-
-.WidgetSimple .WidgetSettingsForm fieldset {
-    margin-bottom: 0px;
-}
-
-.WidgetSimple .Field.LayoutGrid {
-    padding-top: 7px;
-}
-
-.WidgetSimple .Field.LayoutGrid .Tablelike {
-    width: 98%;
-}
-
-.WidgetSimple .Buttons {
-    border-top: 1px solid #ccc;
-    margin: 15px -8px -10px -8px;
-    padding: 10px 10px 9px 10px;
-    text-align: center;
-    font-size: 11px;
-}
-
-.WidgetSimple .Buttons.NoMargin {
-    margin-top: 5px;
-}
-
-.WidgetSimple .Field.LayoutGrid .AllocationList {
-    max-height: 192px;
-}
-
-.WidgetSimple .Field.LayoutGrid .AllocationList.OrderNumbers {
-    list-style: decimal inside;
-}
-
-#FormDraftTable td:nth-child(2) {
-    width: 10px;
-}
-
-/* Legend & Shortcuts */
-
-.WidgetSimple .Legend,
-.WidgetSimple .ShortCuts {
-    margin: 5px;
-}
-
-.WidgetSimple .Legend {
-    margin-left: 8px;
-}
-
-.WidgetSimple .Legend li,
-.WidgetSimple .ShortCuts li {
-    margin-bottom: 7px;
-    font-size: 11px;
-    position: relative;
-    padding-left: 10px;
-    color: #555;
-}
-
-.RTL .WidgetSimple .Legend li,
-.RTL .WidgetSimple .ShortCuts li {
-    padding-left: 0px;
-    padding-right: 10px;
-}
-
-.WidgetSimple .Legend li:last-child,
-.WidgetSimple .ShortCuts li:last-child {
-    margin-bottom: 0px;
-}
-
-.WidgetSimple .Legend li span {
-    position: absolute;
-    left: 0px;
-    top: 50%;
-    height: 12px;
-    margin-top: -6px;
-    width: 5px;
-}
-
-.RTL .WidgetSimple .Legend li span {
-    left: auto;
-    right: 0px;
-}
-
-.WidgetSimple .ShortCuts {
-    margin-top: 7px;
-    display: table;
-}
-
-.WidgetSimple .ShortCuts li {
-    padding-left: 0px;
-    display: table-row;
-}
-
-.WidgetSimple .ShortCuts li em {
-    display: table-cell;
-    padding-top: 5px;
-    font-style: normal;
-}
-
-.WidgetSimple .ShortCuts li em:first-child {
-    text-align: right;
-}
-
-.WidgetSimple .ShortCuts li span {
-    display: inline-block;
-    border: 1px solid #ccc;
-    text-transform: uppercase;
-    font-size: 9px;
-    font-weight: bold;
-    margin-right: 5px;
-    color: #555;
-    padding: 3px;
-    border-radius: 3px;
-}
-
-.RTL .WidgetSimple .ShortCuts li span {
-    margin-right: 0px;
-    margin-left: 5px;
-}
-
-/**
- * @subsection Widgets as notices
- */
-
-.WidgetNotice {
-    background-color: #F39C19
-}
-
-.WidgetNotice .Content {
-    border: 1px solid #F6AF2F;
-    color: #442A0B;
-    font-weight: bold;
-    padding-bottom: 8px;
-    line-height: 140%;
-}
-
-/**
- * @subsection AJAX Loader
- */
-
-.Loading > .Header h2 {
-    position: relative;
-}
-
-.Loading > .Header h2:after {
-    left: auto;
-    top: auto;
-    right: 3px;
-    width: 14px;
-    height: 14px;
-    line-height: 14px;
-}
-
-.RTL .Loading > .Header h2:after {
-    left: 3px;
-    right: auto;
-}
-
-.WidgetIsLoading {
-    text-align: center;
-    padding: 20px;
-    font-size: 14px;
-    color: #777;
-    border: 1px dotted #bbb;
-    margin-bottom: 15px;
-}
-
-/**
- * @subsection  WidgetBox
- */
-.WidgetBox > .Header h2 {
-    font-size: 14px;
-    margin-left: 5px;
-}
-
-.RTL .WidgetBox > .Header h2 {
-    margin-left: 0;
-    margin-right: 5px;
-}
-
-.WidgetBox > .Header .WidgetAction + h2 {
-    margin: 0;
-    padding-left: 30px;
-    padding-right: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.RTL .WidgetBox > .Header .WidgetAction + h2 {
-    padding-left: 200px;
-    padding-right: 30px;
-}
-
-.WidgetBox > .Header h2 + h3 {
-    background-color: #EEE;
-    border-top: 1px solid #FFF;
-    border-bottom: 1px solid #BBB;
-    font-size: 16px;
-    padding: 5px 5px 5px 10px;
-    color: #333;
-}
-
-.RTL .WidgetBox > .Header h2 + h3 {
-    padding: 5px 10px 5px 5px;
-}
-
-.WidgetBox > .Content {
-    background: #ffffff;
-    min-height: 200px;
-    border-left: 1px solid #C6C5C4;
-    border-right: 1px solid #C6C5C4;
-    border-bottom: 1px solid #C6C5C4;
-}
-
-.Collapsed > .Content {
-    display: none;
-}
-
-.WidgetBox > .Content.AutoHeight {
-    min-height: 0;
-}
-
-/**
- * @subaction   ActionMenu
- */
-
-.ActionMenu {
-    top: 4px;
-    right: 7px;
-    padding-left: 3px;
-    position: absolute;
-    display: none;
-}
-
-.RTL .ActionMenu {
-    right: auto;
-    left: 0;
-    padding: 0 2px 0 0;
-    border-left: none;
-    border-right: 1px solid #DDD;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 2px;
-}
-
-.Header:hover .ActionMenu,
-.Header .ActionMenu.Visible {
-    display: block;
-}
-
-/**
- * @subsection  WidgetActions
- */
-
-.WidgetAction {
-    height: 19px;
-    width: 16px;
-    padding-right: 1px;
-    float: left;
-    text-align: center;
-}
-
-.RTL .WidgetAction {
-    padding: 0 0 0 1px;
-    float: right;
-}
-
-.WidgetAction a {
-    font-size: 14px;
-    height: 20px;
-    display: block;
-}
-
-.WidgetAction.WithText {
-    width: auto;
-}
-
-.WidgetAction.WithText a {
-    color: #999;
-    font-size: 11px;
-    white-space: nowrap;
-    line-height: 16px;
-}
-
-.WidgetAction.WithText a i {
-    font-size: 14px;
-    position: relative;
-    top: -2px;
-    display: inline-block !important;
-    margin-left: 5px;
-}
-
-.WidgetAction.Toggle,
-.Expanded.AnimationRunning > .Header > .WidgetAction.Toggle {
-    height: 13px;
-    width: 12px;
-    margin: 5px 0px 5px 2px;
-    float: left;
-}
-
-.WidgetAction.Toggle i {
-    font-size: 17px;
-    position: absolute;
-    left: 7px;
-    top: 2px;
-    color: #555 !important;
-}
-
-.RTL .WidgetAction.Toggle i {
-    left: auto;
-    right: 7px;
-}
-
-.Expanded > .Header > .WidgetAction.Toggle i.fa-caret-right {
-    display: none !important;
-}
-
-.RTL .WidgetSimple .Header > .WidgetAction.Toggle i.fa-caret-right {
-    transform: rotateY(180deg);
-}
-
-.Collapsed > .Header > .WidgetAction.Toggle i.fa-caret-down {
-    display: none !important;
-}
-
-.Header:active > .WidgetAction.Toggle {
-    background-position: 0 -13px;
-}
-
-.Expanded > .Header > .WidgetAction.Toggle,
-.Collapsed.AnimationRunning > .Header > .WidgetAction.Toggle {
-    background-position: 0 -26px;
-}
-
-.RTL .WidgetAction.Toggle {
-    margin: 5px 2px 5px 6px;
-    float: right;
-}
-
-.WidgetAction.Toggle a {
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-}
-
-/* Settings */
-.WidgetAction i {
-    color: #bbb;
-    display: block !important;
-    margin: 2px 0px 0px 2px;
-    vertical-align: middle;
-}
-
-.WidgetAction:hover i,
-.WidgetAction a:focus i {
-    color: #000;
-}
-
-.WidgetTooltip {
-    background-color: #fff;
-    position: absolute;
-    width: 125px;
-    top: 20px;
-    right: 0px;
-}
-
-ul.WidgetTooltip {
-    width: 170px;
-    right: -3px;
-    top: 21px;
-    background: rgba(216, 216, 216, 0.85);
-}
-
-ul.WidgetTooltip li {
-    padding: 7px 13px 2px 23px;
-    text-align: left;
-    position: relative;
-    border-bottom: 1px solid #ccc;
-}
-
-ul.WidgetTooltip li i {
-    position: absolute;
-    left: 6px;
-    top: 7px;
-    color: #aaa !important;
-}
-
-ul.WidgetTooltip li:last-child {
-    border-bottom: 0px;
-}
-
-ul.WidgetTooltip li a {
-    color: #333;
-}
-
-ul.WidgetTooltip li a:hover {
-    text-decoration: underline;
-}
-
-ul.WidgetTooltip li a:hover i {
-    color: #333 !important;
-}
-
-.WidgetTooltip a {
-    padding: 0px;
-    line-height: 150%;
-    font-size: 11px;
-}
-
-/**
- * @subsection      Call for action buttons and search form
- */
-
-.ActionList li {
-    margin-bottom: 7px;
-}
-
-.ActionList li.Separated {
-    border-bottom: 1px solid #CCCCCC;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-}
-
-.ActionList li:last-child {
-    margin-bottom: 0px;
-}
-
-.ActionList p {
-    margin: 0;
-    padding: 2px 2px 5px;
-    font-size: 11px;
-    color: #888;
-}
-
-.WidgetSimple .ActionList select {
-    margin: 0px auto;
-    padding: 2px 3px;
-    display: block;
-    width: 240px;
-}
-
-.WidgetSimple .ActionList select + .FieldExplanation {
-    margin-top: 2px;
-}
-
-.WidgetSimple .ActionList .CallForAction ~ select {
-    margin-top: -5px;
-}
-
-.CallForAction,
-.cke_dialog_footer_buttons a.cke_dialog_ui_button {
-    padding: 0px;
-    background: #eee;
-    border: 1px solid #ccc;
-    border-bottom: 1px solid #bbb;
-    display: inline-block;
-    cursor: pointer;
-    transition: all ease-in 0.2s;
-    border-radius: 0px;
-}
-
-.CallForAction.Inline {
-    position: relative;
-    top: -1px;
-}
-
-.CallForAction:disabled {
-    cursor: default;
-}
-
-.cke_dialog_footer_buttons a.cke_dialog_ui_button {
-    font-weight: bold !important;
-}
-
-.cke_dialog_footer_buttons a.cke_dialog_ui_button:hover {
-    background-color: #e5e5e5;
-    border-color: #999;
-}
-
-.CallForAction.Hidden {
-    display: none;
-}
-
-.CallForAction.LittleSpacingTop {
-    margin-top: 5px;
-}
-
-.ActionList li a.Fullsize,
-.CallForAction.Fullsize {
-    display: block;
-}
-
-.CallForAction.Fullsize {
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-#SystemMaintenanceForm .CallForAction.LittleSpacingTop.Fullsize.Center {
-    width: 248px;
-}
-
-.CallForAction.Fullsize + .FieldExplanation {
-    border: 1px solid #ddd;
-    padding: 5px;
-    margin-top: 5px;
-}
-
-/**
- * @css-for     Firefox
- * @note        bug: button containing an element has an hidden padding
- */
-
-.CallForAction::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-}
-
-.CallForAction:hover,
-.CallForAction:focus {
-    color: #000;
-    border-color: #aaa;
-}
-
-.CallForAction span,
-.cke_dialog_footer_buttons td a.cke_dialog_ui_button span {
-    min-height: 12px;
-    padding: 3px 7px 6px;
-    line-height: 14px;
-    vertical-align: middle;
-    color: #333;
-    font-size: 11px;
-    border: 1px solid #FFF;
-    border-bottom: none;
-    display: block;
-    text-shadow: 0 1px 0 #FFF;
-    cursor: pointer;
-    position: relative;
-}
-
-.CallForAction.Inline span {
-    padding: 2px 7px 4px 7px;
-}
-
-.CallForAction.Small span {
-    padding: 0px 3px 2px 3px;
-    font-size: 10px;
-}
-
-.CallForAction.Fullsize span {
-    padding: 3px 20px 5px 20px;
-}
-
-.CallForAction:disabled span {
-    color: graytext !important;
-    cursor: default;
-}
-
-.cke_dialog_footer_buttons td a.cke_dialog_ui_button span {
-    font-size: 11px;
-    line-height: auto;
-    color: #000;
-    font-weight: bold;
-}
-
-.CallForAction span i {
-    position: relative;
-    left: 0px;
-    top: 1px;
-    font-size: 13px;
-    width: 15px;
-    text-align: center;
-}
-
-.RTL .CallForAction span i {
-    margin-left: 5px;
-}
-
-.CallForAction.Fullsize.Center span i {
-    position: absolute;
-    left: 4px;
-    top: 4px;
-}
-
-.CallForAction:active,
-.CallForAction:hover,
-.CallForAction:focus {
-    background-color: #e5e5e5;
-    border-color: #999;
-}
-
-.CallForAction.Disabled {
-    background: #eee !important;
-    border: 1px solid #ccc !important;
-    border-bottom: 1px solid #bbb !important;
-}
-
-.CallForAction.Disabled, .CallForAction.Disabled span {
-    color: #999;
-    cursor: no-drop;
-}
-
-input.FilterBox {
-    padding: 4px 5px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.SearchBox {
-    position: relative;
-    margin-bottom: 3px;
-}
-
-.SearchBox input[type='text'] {
-    height: 15px;
-    margin: 0px;
-    padding: 4px 5px;
-    font: normal 12px/15px "Helvetica Neue",Helvetica,Arial,sans-serif;
-    border-color: #999;
-    border-right: none;
-    vertical-align: bottom;
-    width: 213px;
-}
-
-.RTL .SearchBox input[type='text']{
-    border-left: none;
-    border-right: 1px solid #999;
-}
-
-.SearchBox input:focus {
-    border-color: #666;
-    border-right: none;
-}
-.RTL .SearchBox input:focus {
-    border-color: #666;
-    border-left: none;
-}
-
-.SearchBox button {
-    height: 25px;
-    width: 25px;
-    margin: 0 0 0 -4px;
-    padding: 3px 3px 4px;
-    color: #333;
-    font: bold 11px/14px "Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: #f2f2f2;
-    border: 1px solid #888;
-    text-shadow: 0 1px 0 #FFF;
-    vertical-align: baseline;
-}
-
-.RTL .SearchBox button {
-    height: 25px;
-    margin: 0 -4px 0 0;
-    text-shadow: 0 1px 0 #FFF;
-    vertical-align: baseline;
-    border-right: 1px solid #888;
-}
-
-.SearchBox button:hover {
-    border-color: #696969;
-    cursor: pointer;
-}
-
-.SearchBox button:active {
-    padding: 4px 3px 3px;
-    background: #e4e4e4;
-    outline: none;
-}
-
-/**
- * @subsection      Drag and Drop
- */
-.CanDrag .Header h2 {
-    cursor: move;
-}
-
-.DropPlaceholder {
-    border: 1px dashed #DDD;
-    background: #EEE url(../img/dnd_placeholder_bg.png);
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-/**
- * @subsection      ProgressBar
- */
-#ProgressBar {
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-    overflow: hidden;
-    width: 950px;
-}
-
-.ProgressBarElements1 li {
-    width: 950px;
-}
-
-.ProgressBarElements2 li {
-    width: 474px;
-}
-
-.ProgressBarElements3 li {
-    width: 316px;
-}
-
-.ProgressBarElements4 li {
-    width: 237px;
-}
-
-.ProgressBarElements5 li {
-    width: 189px;
-}
-
-.ProgressBarElements6 li {
-    width: 158px;
-}
-
-.ProgressBarElements7 li {
-    width: 135px;
-}
-
-/* Because of the minimum screen resolution of 1024px more than 7 elements are not possible at the moment */
-
-#ProgressBar li {
-    float: left;
-    list-style: none;
-    border-style: solid;
-    border-width: 1px 0px;
-    border-color: #CCC;
-    background-color: #EEE;
-}
-
-#ProgressBar li > span {
-    display: block;
-    background-image: url(../img/ProgressBarArrow.png);
-    background-repeat: no-repeat;
-    background-position: center right;
-}
-
-#ProgressBar li a {
-    padding: 12px 7px 13px 12px;
-    color: #484848;
-    text-decoration: none;
-    font: 13px/18px Helvetica Neue, sans-serif;
-    display: block;
-    height: 42px;
-    border-style: solid;
-    border-width: 1px 0px;
-    border-color: #F4F4F4;
-    background: url(../img/ProgressBarIsolator.png) no-repeat left 6px;
-    cursor: default;
-    text-align: left;
-}
-
-#ProgressBar li span a span {
-    color: #ABABAB;
-    font-size: 11px;
-    line-height: 12px;
-    text-shadow: inherit;
-    display: block;
-}
-
-#ProgressBar li:first-child, #ProgressBar li.First {
-    border-left-width: 1px;
-}
-
-#ProgressBar li:first-child a, #ProgressBar li.First a {
-    border-left-width: 1px;
-    padding-left: 14px;
-    background: none;
-}
-
-#ProgressBar li:last-child {
-    border-right-width: 1px;
-}
-
-#ProgressBar li:last-child a {
-    border-right-width: 1px;
-    padding-right: 14px;
-}
-
-#ProgressBar .Highlighted {
-    background-color: #fbb42c;
-    border-top-color: #9b6937;
-    border-bottom-color: #996634;
-}
-
-#ProgressBar li.Highlighted:first-child {
-    border-left-color: #9b6937;
-}
-
-#ProgressBar li.Highlighted > span {
-    background-image: url(../img/ProgressBarArrowActive.png);
-}
-
-#ProgressBar .Highlighted a {
-    color: #562900;
-    text-shadow: 0 1px 0 #FCD891;
-    border-top-color: #ffeec8;
-    border-bottom-color: #eaa350;
-    cursor: pointer;
-}
-
-#ProgressBar .Highlighted.NoLink a {
-    cursor: default;
-}
-
-#ProgressBar li:first-child.Highlighted a {
-    border-left-color: #f2bf5c;
-}
-
-#ProgressBar .Highlighted span a span {
-    color: #a14f00;
-    text-shadow: 0 1px 0 #f5b04e;
-}
-
-#ProgressBar .Active {
-    border-right: 1px solid #9b6937;
-    position: relative;
-    z-index: 2;
-}
-
-#ProgressBar .Active a {
-    border-right: 1px solid #f2bf5c;
-}
-
-#ProgressBar .Active + li {
-    margin-left: -2px;
-    padding-left: 1px;
-}
-
-#ProgressBar .Active + .Active {
-    z-index: 1;
-}
-
-#ProgressBar .Active + li a {
-    background: none;
-}
-
-#ProgressBar .Visited {
-    background-color: #DDD;
-}
-
-#ProgressBar .Visited.Active {
-    border-right-color: #CCC;
-}
-
-#ProgressBar .Visited.Active a {
-    border-right-color: #EEE;
-}
-
-/**
- * @subsection      Widget messages
- */
-
-.WidgetSimple .WidgetMessage {
-    background: #eee;
-    margin: 10px -8px !important;
-    padding: 5px 20px;
-    font-size: 11px;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-    line-height: 150%;
-}
-
-.WidgetSimple .WidgetMessage p + p {
-    margin-top: 2px;
-}
-
-.WidgetSimple .WidgetMessage p + p:last-child {
-    margin-bottom: 2px;
-}
-
-.SidebarColumn .WidgetSimple .WidgetMessage {
-    margin: 5px -8px;
-    padding: 5px 8px;
-}
-
-.WidgetSimple .WidgetMessage.Bottom {
-    margin-bottom: -10px !important;
-}
-
-.WidgetSimple .WidgetMessage.Top {
-    margin-top: 0px !important;
-}
-
-.WidgetSimple .WidgetMessage.Error {
-    background: #b8384e;
-    color: rgba(255, 255, 255, 0.8);
-    border: 0px;
-}
-
-.WidgetSimple .WidgetMessage.Warning {
-    background: #F7AE40;
-    border-color: #D18F2B;
-    color: #774a06;
-}
-
-.WidgetSimple .WidgetMessage.Warning * {
-}
-
-.WidgetSimple .WidgetMessage.Success {
-    background: #6EB22A;
-    color: #fff;
-    border-color: #52891B;
-}
-
-.WidgetSimple .WidgetMessage.Notice {
-    background: #2A61AF;
-    color: #fff;
-    border-color: #15468C;
-}
-
-.WidgetSimple .WidgetMessage button {
-    background: #eee;
-    border: 1px solid #aaa;
-    display: inline-block;
-    margin-right: 5px;
-    transition: all ease 0.3s;
-}
-
-.WidgetSimple .WidgetMessage button:hover {
-    cursor: pointer;
-    background: #ddd;
-}
-
-/**
- * @subsection      Overlays
- */
-
-.WidgetSimple.HasOverlay {
-    position: relative;
-    overflow: hidden;
-}
-
-.WidgetSimple .Overlay {
-    position: absolute;
-    box-sizing: border-box;
-    left: 0px;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    text-align: center;
-    font-size: 16px;
-    z-index: 2;
-}
-
-.WidgetSimple .Overlay i {
-    position: absolute;
-    top: 50%;
-    margin-top: -8px;
-    left: 50%;
-    color: #777;
-    margin-left: -8px;
-}
-
-.WidgetSimple .Overlay i.fa-check {
-    color: #5BAD5B;
-}
-
-/**
- * @subsection      Icon colors
- */
-
-.CallForAction span i.fa-plus-square {
-    color: #35A835;
-}
-
-.CallForAction span i.fa-rocket {
-    color: #C4632F;
-}
-.CallForAction span i.fa-download,
-.CallForAction span i.fa-upload {
-    color: #2D6F9E;
-}
-
-/**
- * @subsection      Chat icons
- */
-
-.UserChatIcons {
-    float: right;
-}
-
-.UserChatIcons.Block {
-    float: none;
-    margin-top: 2px;
-}
-
-.UserChatIcons i {
-    color: #999;
-    margin-right: 3px;
-}
-
-.UserChatIcons .Unavailable i,
-.UserChatIcons .Unsupported i {
-    opacity: 0.4;
-}
-
-.UserStatusIcon {
-    cursor: default;
-    margin-right: 3px;
-}
-
-.UserStatusIcon.Inline {
-    margin-right: 0;
-}
-
-.UserStatusIcon.Active i {
-    color: #0a0;
-}
-
-.UserStatusIcon.Offline i {
-    color: #000;
-}
-
-.UserStatusIcon.Unavailable i {
-    color: #d00;
-    opacity: 1;
-}
-
-.UserStatusIcon.Away i {
-    color: #fb0;
-}
-
-button.HighlightHint {
-    animation: ButtonHint 0.7s infinite alternate;
-}
-
-button.HighlightError {
-    animation: ButtonError 0.7s infinite alternate;
-}
-
-/**
- * @subsection      Tabs
- */
-
-.WidgetSimple.Tabs > .Header {
-    padding: 0px;
-    overflow: hidden;
-}
-
-.WidgetSimple.Tabs > .Header a {
-    display: block;
-    float: left;
-    padding: 7px 9px;
-    color: #333;
-}
-
-.WidgetSimple.Tabs > .Header a.Disabled {
-    color: #999;
-    cursor: not-allowed;
-    text-shadow: 1px 1px 1px #fff;
-}
-
-.WidgetSimple.Tabs > .Header a:not(.Disabled).Active,
-.WidgetSimple.Tabs > .Header a:not(.Disabled):hover,
-.WidgetSimple.Tabs > .Header a:not(.Disabled):active  {
-    background: #777;
-    color: #fff;
-}
-
-.WidgetSimple.Tabs > .Content > div {
-    display: none;
-}
-
-.WidgetSimple.Tabs > .Content > div.Active {
-    display: block;
-}
-
-.LoginScreen .MessageOfTheDayBox {
-    width: 350px;
-    margin: auto;
-    text-align: justify;
-    margin-top: 15px;
-}
-
-.LoginScreen .WidgetSimple.MessageOfTheDayBox h2,
-.LoginScreen .WidgetSimple.MessageOfTheDayBox p {
-    padding: 0px 15px;
-}
-
-.LoginScreen .WidgetSimple.MessageOfTheDayBox h2 {
-    padding: 5px 0px;
-}
-
-@keyframes ButtonHint {
-    from {
-        box-shadow: none;
-        }
-    to {
-        box-shadow: 0 0 10px green;
+    * @subsection  Widget Tablelike list
+    */
+    ul.Tablelike {
+        border: var(--border-width) var(--border-solid) var(--border-color);
     }
-}
 
-@keyframes ButtonError {
-    from {
-        box-shadow: none;
-        }
-    to {
-        box-shadow: 0 0 10px red;
+    .SidebarColumn ul.Tablelike {
+        border: 0;
     }
-}
+
+    .tablelike-wrapper {
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-sm);
+    }
+
+    .tablelike-wrapper ul.Tablelike {
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+    }
+
+    ul.Tablelike:first-child {
+        /*disturbing column width in modal window
+        /*margin-right: 8px;*/
+    }
+
+    .RTL .Size1of3:first-child ul.Tablelike {
+        margin-left: 8px;
+        margin-right: 0;
+    }
+
+    .StrikeThrough a {
+        text-decoration: line-through;
+    }
+
+    ul.Tablelike li {
+        line-height: 20px;
+        padding: var(--padding-md) var(--padding-lg);
+        min-height: 38px;
+        font-weight: var(--semi-bold);
+        background-color: var(--white);
+        color: var(--modal-col-text-color);
+        word-break: break-word;
+    }
+
+    ul.Tablelike li.OneRow,
+    ul.Tablelike li.OneRow .AsBlock {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    ul.Tablelike li:nth-child(even) {
+        background-color: var(--main-bg-color);
+    }
+
+    ul.Tablelike li:hover {
+        background: #ffe8d3;
+    }
+
+    ul.Tablelike li:hover a {
+        color: #000;
+    }
+
+    ul.Tablelike li.Header {
+        color: var(--black);
+        font-size: var(--font-size-md);
+        font-weight: var(--medium);
+        line-height: 20px;
+        padding: var(--padding-md) var(--padding-lg);
+        background: var(--modal-header-bg);
+        border: var(--border-width) var(--border-solid) transparent;
+        border-top-left-radius: var(--border-radius-sm);
+        border-top-right-radius: var(--border-radius-sm);
+        border-bottom: 0;
+        justify-content: flex-start;
+    }
+
+    ul.Tablelike + ul.Tablelike.AllocationList {
+        border-top: 0px;
+    }
+
+    ul.Tablelike li.Header + li {
+        border-top: 1px solid #EEE;
+    }
+
+    ul.cursor-grab > li:hover {
+        cursor: grab;
+    }
+
+    /**
+    * @subsection  WidgetSimple
+    */
+
+    .LayoutPopup .Content > .WidgetSimple:last-child {
+        margin-bottom: 0px;
+    }
+
+    /*
+    .WidgetSimple {
+        position: relative;
+        margin-bottom: var(--widget-margin);
+        background: var(--widget-simple-bg);
+        box-shadow: none;
+        margin-right: 0;
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+    }*/
+
+    .manageLinks .WidgetSimple{
+        border: none;
+        /*border-radius: 0px;*/
+    }
+
+    .WidgetSimple.WidgetLoading i {
+        display: block;
+        text-align: center;
+        margin: 10px 0px;
+    }
+
+    .WidgetSimple.MobileNotAvailableWidget {
+        display: none;
+    }
+
+    /*## Unknown ##
+    .WidgetSimple .WidgetSimple {
+        background: #F2EFEF;
+        border: 1px solid #ddd;
+        margin: 15px 10px;
+    }
+
+    .WidgetSimple .WidgetSimple .WidgetSimple {
+        background: #f5f5f5;
+    }
+
+    .WidgetSimple .WidgetSimple .WidgetSimple h2 {
+        font-size: 12px;
+    }*/
+
+    .WidgetSimple > .Header,
+    .WidgetSimple.Collapsed.AnimationRunning > .Header {
+        padding: var(--padding-xl) var(--padding-xl);
+        position: relative;
+        border: none;
+    }
+
+    /*## Unknown ##
+    .WidgetSimple.Collapsed > .Header {
+        border-bottom: none;
+    }*/
+
+    /*.WidgetSimple > .Header h2,
+    .WidgetSimple > .Header h3 {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: var(--widget-simple-title-size);
+        font-weight: var(--semi-bold);
+        text-shadow: none;
+        color: var(--black);
+        line-height: 120%;
+    }*/
+
+    .MainBox .SidebarColumn .WidgetSimple .Header,
+    .MainBox .SidebarColumn .WidgetSimple.not-collapse .Header,
+    .MainBox .InnerSidebarColumn .WidgetSimple .Header {
+        padding: var(--padding-md);
+        background-color: var(--sidebarcolumn-header-bg);
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    }
+
+    .MainBox.mainStructure .SidebarColumn .WidgetSimple .Header {
+        /*background: transparent;*/
+    }
+
+    .MainBox .SidebarColumn .WidgetSimple .Content,
+    .MainBox .InnerSidebarColumn .WidgetSimple .Content {
+        padding: var(--padding-md);
+    }
+
+    .MainBox .SidebarColumn .WidgetSimple .Content fieldset.TableLike > label{
+        text-align: left;
+        /*width: 40%;*/
+        float: left;
+        display: block;
+        box-sizing: border-box;
+        padding: 0 0 var(--padding-md);
+        color: var(--gray-semi-dark);
+    }
+
+    .MainBox .SidebarColumn .WidgetSimple .Content fieldset.TableLike > .Value{
+        margin: 0;
+        width: 60%;
+        float: left;
+        display: block;
+        box-sizing: border-box;
+        padding: 0 0 var(--padding-md) var(--padding-xs);
+        color: var(--black);
+    }
+
+    /* This is a duplicate -> .WidgetSimple > .Content {*/
+
+        /*padding: 0;
+        overflow: auto;*/
+        /*border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);*/
+        /**
+        *   START IE9 Hover Bug Workaround
+        *   The problem occurs when you have a container that has a fixed width set, an overflow set to
+        *   auto, content long enough to trigger the horizontal scroll and a hover style set
+        *   on elements inside the container.
+        *   The container mysteriously increases in size.
+        *   (e.g. if you have installed OTRSDashboardOverviewFilters and many dynamic fields are
+        *   shown in the dashboard.)
+        */
+        /*min-height: 0%;*/
+        /* END IE9 Hover Bug Workaround */
+    /*}*/
+
+    .ContentColumn .WidgetSimple.CanDrag > .Content {
+        box-shadow: inset 0 40px 0 var(--table-th-bg);
+    }
+
+    .WidgetSimple > .Content.OverflowVisible {
+        overflow: visible;
+    }
+
+    .WidgetSimple > .Content > .WidgetMessage.CalendarEvents span.ShowCalendarEventsInfoOverlay {
+        cursor: pointer;
+    }
+
+    .WidgetSimple > .Content > .WidgetMessage.CalendarEvents span.ShowCalendarEventsInfoOverlay:hover {
+        filter: brightness(70%);
+    }
+
+    .WidgetSimple.QueueOverview > .Content {
+        padding-bottom: 2px;
+    }
+
+    .WidgetSimple.Collapsed > .Content {
+        display: none !important;
+    }
+
+    .WidgetSimple .WidgetSettingsForm fieldset {
+        gap: var(--gap-sm);
+        margin-bottom: 0px;
+        border-bottom-right-radius: var(--border-radius-sm);
+        border-bottom-left-radius: var(--border-radius-sm);
+    }
+
+
+    .WidgetSimple .Field.LayoutGrid {
+        padding-top: 7px;
+    }
+
+    /*.WidgetSimple .Field.LayoutGrid .Tablelike {
+        width: 98%;
+    }*/
+
+    .WidgetSimple .Buttons {
+        border-top: none;
+        margin: 15px -8px -10px -8px;
+        padding: 10px 10px 9px 10px;
+        text-align: center;
+        font-size: 11px;
+    }
+
+    .WidgetSimple .Buttons.NoMargin {
+        margin-top: 5px;
+    }
+
+
+
+    /*.WidgetSimple .Field.LayoutGrid .AllocationList {
+        max-height: 192px;
+    }*/
+
+    .WidgetSimple .Field.LayoutGrid .AllocationList.OrderNumbers {
+        list-style: decimal inside;
+    }
+
+    #FormDraftTable td:nth-child(2) {
+        width: 10px;
+    }
+
+
+    /**
+    * @subsection  inner-content styles
+    */
+
+    .WidgetSimple legend.sub-title {
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .WidgetSimple legend.sub-title span {
+        font-weight: var(--semi-bold);
+        padding-bottom: var(--padding-sm);
+    }
+
+    .WidgetSimple fieldset.TableLike .Value,
+    .WidgetSimple fieldset.TableLike .Value span {
+        line-height: 140%;
+    }
+
+    /* Legend & Shortcuts */
+
+    .WidgetSimple .Legend,
+    .WidgetSimple .ShortCuts {
+    }
+
+    .WidgetSimple .Legend {
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-sm);
+    }
+
+    .WidgetSimple .Legend li,
+    .WidgetSimple .ShortCuts li {
+        font-size: 11px;
+        font-weight: var(--medium);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--gap-xs);
+    }
+
+    .RTL .WidgetSimple .Legend li,
+    .RTL .WidgetSimple .ShortCuts li {
+        padding-left: 0px;
+        padding-right: 10px;
+    }
+
+    .WidgetSimple .Legend li:last-child,
+    .WidgetSimple .ShortCuts li:last-child {
+        margin-bottom: 0px;
+    }
+
+    .WidgetSimple .Legend li span {
+        height: 12px;
+        width: 5px;
+    }
+
+    .RTL .WidgetSimple .Legend li span {
+        left: auto;
+        right: 0px;
+    }
+
+    .WidgetSimple .ShortCuts {
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-xs);
+    }
+
+    .WidgetSimple .ShortCuts li em {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        min-width: 46px;
+        font-style: unset;
+    }
+
+    .WidgetSimple .ShortCuts li span,
+    .SettingsList.Compare .WidgetSimple h2 .Label {
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        text-transform: uppercase;
+        /*font-family: 'Poppins'*/
+        font-size: 9px;
+        font-weight: var(--semi-bold);
+        color: var(--gray-dark);
+        padding: 3px;
+        border-radius: 3px;
+        letter-spacing: .1px;
+    }
+
+    .RTL .WidgetSimple .ShortCuts li span {
+        margin-right: 0px;
+        margin-left: 5px;
+    }
+
+    div.WidgetSimpleSecondary{
+        border: 0;
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+        z-index: 100;
+    }
+
+    div.WidgetSimpleSecondary div.ActionRow {
+        border: 0;
+    }
+
+    /*div.WidgetSimpleSecondary div.ActionRow li {
+        color: var(--table-text-color);
+        font-size: 11px;
+        font-weight: var(--semi-bold);
+        letter-spacing: .8px;
+    }*/
+
+    /*div.WidgetSimpleSecondary div.ActionRow li a,
+    div.WidgetSimpleSecondary div.ActionRow li span.ClusterLink {
+        padding: var(--padding-xs) var(--padding-sm);
+        border-radius: var(--border-radius-xxs);
+    }
+
+    div.WidgetSimpleSecondary div.ActionRow li:hover > a,
+    div.WidgetSimpleSecondary div.ActionRow li span.ClusterLink:hover {
+        background: var(--gray-light);
+    }*/
+
+    div.WidgetSimpleSecondary span.ClusterLink i {
+        margin: -1px 0 0 var(--margin-sm);
+    }
+
+    div.ContentColumn div.WidgetSimple.WidgetSimpleSecondary > div.Content {
+        padding: 0;
+    }
+
+    .WidgetSimpleSecondary li a,
+    .WidgetSimpleSecondary li span{
+        text-transform: uppercase;
+        /*padding: 0 6px;*/
+        color: var(--black);
+    }
+
+    /**
+    * @subsection Widget Expanded/Collapsed
+    */
+
+    .WidgetSimple.Expanded .Header {
+        background: var(--main-bg-color);
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    }
+
+    .WidgetSimple.Collapsed:not(.GridGroups) .Header {
+        background: var(--white);
+        border: 0;
+        border-radius: var(--border-radius-sm);
+    }
+
+    .WidgetSimple .Content fieldset {
+        display: flex;
+        flex-direction: column;
+        gap: var(--padding-lg);
+        padding: var(--padding-lg);
+    }
+
+    .WidgetSimple .Content fieldset > fieldset {
+        padding: 0;
+    }
+
+    .WidgetSimple .Content > form > fieldset {
+        /*padding: 0;  - edit by beatriz on 22/12/23 */
+        width: 100%;
+        margin: auto; /* content needs to be centered when width has a limit */
+    }
+
+    .WidgetSimple .Content fieldset legend span {
+        font-size: var(--main-font-size);
+        display: flex;
+        align-items: center;
+        margin: 0;
+        margin-top: var(--margin-lg);
+    }
+
+
+
+    /**
+    * @subsection WidgetTicketAppointments
+    */
+
+    .WidgetTicketAppointments .TableLike {
+        padding: 0;
+    }
+
+    .WidgetTicketAppointments .Content div fieldset legend {
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+        padding-top: var(--padding-md);
+    }
+
+    .WidgetTicketAppointments .Content div:first-child fieldset legend {
+        border-top: 0;
+        padding-top: 0;
+    }
+
+    .WidgetTicketAppointments .Content fieldset legend div {
+        display: flex;
+        font-weight: var(--semi-bold);
+        font-size: var(--main-font-size);
+        align-items: center;
+        padding-bottom: var(--padding-sm);
+    }
+
+    .WidgetTicketAppointments .Content fieldset legend div .RuleNumber {
+        margin: 0;
+        margin-right: var(--margin-xs);
+    }
+
+    .WidgetTicketAppointments .SearchParamsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+    }
+
+    .WidgetTicketAppointments .top-container-wrapper,
+    .Content fieldset.top-container-wrapper {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-sm);
+        padding: 0;
+    }
+
+    .WidgetTicketAppointments .top-container-wrapper a {
+        display: flex;
+    }
+
+    .WidgetTicketAppointments .new-field-wrapper .Field {
+        display: flex;
+        gap: var(--gap-sm);
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .WidgetTicketAppointments .new-field-wrapper,
+    .Content fieldset.new-field-wrapper {
+        display: flex;
+        padding: 0;
+        padding-left: var(--padding-xxl);
+        gap: var(--padding-sm);
+    }
+
+    .WidgetTicketAppointments .new-field-wrapper .Field .inner-field-wrapper {
+        display: flex;
+        gap: var(--gap-sm);
+        align-items: center;
+    }
+
+    .WidgetTicketAppointments .new-field-wrapper .Field .inner-field-wrapper input[type="text"] {
+        min-width: auto;
+    }
+
+    /**
+    * @subsection WidgetSubmit / WidgetSave
+
+
+    .WidgetSubmit .Header,
+    .WidgetSave .Header {
+        background: var(--main-bg-color);
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    }
+
+    .WidgetSubmit .Content fieldset,
+    .WidgetSave .Content fieldset {
+        display: flex;
+    }
+
+    .WidgetSubmit .Content fieldset .Field,
+    .AdminManagement .WidgetSubmit > .Content fieldset.TableLike > .Field,
+    .WidgetSave .Content fieldset .Field,
+    .AdminManagement .WidgetSave > .Content fieldset.TableLike > .Field {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .WidgetSubmit .Content fieldset .Field div,
+    .WidgetSave .Content fieldset .Field div {
+        display: flex;
+        gap: var(--padding-sm);
+    }
+    */
+
+
+    /**
+    * @subsection Widget Calendar Import
+    */
+
+
+    .WidgetCalendarImport > .Content .ActionList li form > fieldset {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        justify-content: start;
+        gap: var(--padding-sm);
+        align-items: center;
+    }
+
+    /**
+    * @subsection Widgets as notices
+    */
+
+    .WidgetNotice.WidgetSimple {
+        border: 0;
+        overflow: hidden;
+    }
+
+    .WidgetNotice .Content {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-md);
+        background: var(--primary-color-rgb);
+        color: var(--black);
+        border: 0;
+        border-radius: var(--border-radius-xs);
+        /*font-family: 'Inter';*/
+        font-size: var(--font-size-sm);
+        font-weight: var(--normal);
+        letter-spacing: .1px;
+    }
+
+    .WidgetNotice .Content i {
+        color: var(--primary-color);
+    }
+
+    /**
+    * @subsection AJAX Loader
+    */
+
+    .Loading > .Header h2 {
+        position: relative;
+    }
+
+    .Loading > .Header h2:after {
+        left: auto;
+        top: auto;
+        right: 3px;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+    }
+
+    .RTL .Loading > .Header h2:after {
+        left: 3px;
+        right: auto;
+    }
+
+    .WidgetIsLoading {
+        text-align: center;
+        padding: 20px;
+        font-size: 14px;
+        color: #777;
+        border: 1px dotted #bbb;
+        margin-bottom: 15px;
+    }
+
+    /**
+    * @subsection  WidgetBox
+    */
+    /*.WidgetBox > .Header h2 {
+        font-size: 14px;
+        margin-left: 5px;
+    }
+
+    .RTL .WidgetBox > .Header h2 {
+        margin-left: 0;
+        margin-right: 5px;
+    }
+
+    .WidgetBox > .Header .WidgetAction + h2 {
+        margin: 0;
+        padding-left: 30px;
+        padding-right: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .RTL .WidgetBox > .Header .WidgetAction + h2 {
+        padding-left: 200px;
+        padding-right: 30px;
+    }
+
+    .WidgetBox > .Header h2 + h3 {
+        background-color: #EEE;
+        border-top: 1px solid #FFF;
+        border-bottom: 1px solid #BBB;
+        font-size: 16px;
+        padding: 5px 5px 5px 10px;
+        color: #333;
+    }
+
+    .RTL .WidgetBox > .Header h2 + h3 {
+        padding: 5px 10px 5px 5px;
+    }
+
+    .WidgetBox > .Content {
+        background: #ffffff;
+        min-height: 200px;
+        border-left: 1px solid #C6C5C4;
+        border-right: 1px solid #C6C5C4;
+        border-bottom: 1px solid #C6C5C4;
+    }*/
+
+    .Collapsed > .Content {
+        display: none;
+    }
+
+    /*.WidgetBox > .Content.AutoHeight {
+        min-height: 0;
+    }*/
+
+    /************************/
+    /*  Widget - ActionMenu */
+    /************************/
+
+    .ActionMenu {
+        display: flex;
+        top: initial;
+        right: initial;
+        padding-left: initial;
+        position: relative;
+        z-index: 10;
+    }
+
+    .RTL .ActionMenu {
+        right: auto;
+        left: 0;
+        padding: 0 2px 0 0;
+        border-left: none;
+        border-right: 1px solid #DDD;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 2px;
+    }
+
+    .Header:hover .ActionMenu,
+    .Header .ActionMenu.Visible {
+        display: flex;
+    }
+
+
+
+    .WidgetSimple.Expanded:not(.Setting) .ActionMenu,
+    .WidgetSimple.Collapsed:not(.Setting) .ActionMenu  {
+        right: 30px;
+    }
+
+    .ActionMenu .Btn-Menu-Vertical {
+        width: 30px;
+        height: 30px;
+        margin-left: var(--margin-sm);
+    }
+
+    .ActionMenu .Btn-Menu-Vertical span {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        background: transparent;
+        transition: var(--main-transition);
+        cursor: pointer;
+    }
+
+    .ActionMenu .Btn-Menu-Vertical:hover span {
+        background: var(--gray-light);
+    }
+
+    .ActionMenu .Btn-Menu-Vertical span i {
+        font-size: var(--icon-main-size);
+        color: var(--gray-dark);;
+    }
+
+    .ActionMenu:hover .ActionMenuList  {
+        display: flex;
+    }
+
+    /*     ActionMenu > ActionMenuList    */
+    .ActionMenu .ActionMenuList{
+        display: none;
+        flex-direction: column;
+        z-index: 999;
+        position: absolute;
+        top: 30px;
+        right: 0;
+        min-width: 160px;
+        background: var(--menu-bg);
+        margin-top: 0;
+        box-shadow: var(--menu-box-shadow);
+        padding: var(--padding-sm);
+        border-radius: var(--border-radius-xs);
+    }
+
+    .ActionMenu .ActionMenuList li,
+    ul.WidgetTooltip li {
+        height: auto;
+        width: auto;
+        text-indent: 0px;
+        line-height: 18px;
+        white-space: nowrap;
+        color: unset;
+        padding: unset;
+        border: unset;
+        font-size: unset;
+        transition: unset;
+        border-radius: unset;
+        cursor: pointer;
+        border-radius: var(--border-radius-xs);
+    }
+
+    .ActionMenu .ActionMenuList li:hover,
+    ul.WidgetTooltip li:hover {
+        color: var(--menu-font);
+        background: var(--gray-light);
+        border-radius: var(--border-radius-xs);
+    }
+
+    /*     ActionMenu > ActionMenuList > WidgetAction    */
+    .ActionMenu .ActionMenuList li .WidgetAction,
+    ul.WidgetTooltip li {
+        height: auto;
+        width: 100%;
+        padding-right: 0;
+        float: initial;
+        text-align: left;
+
+        border-radius: var(--border-radius-xs);
+        color: var(--menu-font);
+        padding: var(--padding-sm) var(--padding-sm);
+        border-bottom: none;
+        font-size: var(--main-font-size);
+        transition: var(--main-transition);
+    }
+
+    .ActionMenu .ActionMenuList li .WidgetAction a,
+    ul.WidgetTooltip li a {
+        display: flex;
+        height: auto;
+        justify-content: space-between;
+    }
+
+    .ActionMenu .ActionMenuList li .WidgetAction a .iconWrapper,
+    ul.WidgetTooltip li a i {
+        display: flex;
+        height: auto !important;
+        width: 20px;
+        position: relative;
+        background: transparent;
+        padding: 0;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ActionMenu .ActionMenuList li .WidgetAction a .iconWrapper i,
+    .ActionMenu .ActionMenuList li .WidgetAction:hover a .iconWrapper i,
+    ul.WidgetTooltip li a i {
+        color: var(--gray-dark);
+        font-size: var(--main-font-size);
+    }
+
+    .ActionMenu .ActionMenuList li .WidgetAction a .textWrapper,
+    ul.WidgetTooltip li a {
+        display: flex;
+        padding-left: var(--padding-xs);
+        color: var(--menu-font);
+        text-indent: 0;
+        font-size: var(--main-font-size);
+        width: calc(100% - 20px);
+        line-height: 110%;
+        align-items: center;
+    }
+
+
+
+
+    /**
+    * @subsection  WidgetActions
+    */
+
+    .WidgetAction {
+        /*height: 19px;
+        width: 16px;
+        padding-right: 1px;
+        float: left;*/
+        position: relative;
+        width: auto;
+        text-align: center;
+    }
+
+    .RTL .WidgetAction {
+        padding: 0 0 0 1px;
+        float: right;
+    }
+
+    .WidgetAction a {
+        font-size: var(--font-size-md);
+        /*height: 20px;*/
+        display: flex;
+        align-items: center;
+        align-self: center;
+    }
+
+    .WidgetAction.WithText {
+        width: auto;
+    }
+
+    .WidgetAction.WithText a {
+        color: #999;
+        font-size: 11px;
+        white-space: nowrap;
+        line-height: 16px;
+    }
+
+    .WidgetAction.WithText a i {
+        font-size: 14px;
+        position: relative;
+        top: -2px;
+        display: inline-block !important;
+        margin-left: 5px;
+    }
+
+    .WidgetAction.Toggle,
+    .Expanded.AnimationRunning > .Header > .WidgetAction.Toggle {
+        height: auto;
+        width: auto;
+        margin: 0;
+        float: initial;
+        position: absolute;
+        top: 0;
+        min-width: 100%;
+        height: 100%;
+        left: 0;
+    }
+
+    .WidgetAction.Toggle {
+        z-index: 1;
+        transition: var(--main-transition);
+    }
+
+
+    .WidgetAction.Toggle i {
+        display: flex !important;
+        position: relative;
+        font-size: var(--font-size-lg);
+        left: initial;
+        right: initial;
+        top: initial;
+        color: var(--gray-dark) !important;
+        transition: var(--main-transition);
+    }
+
+    .RTL .WidgetAction.Toggle i {
+        left: auto;
+        right: 7px;
+    }
+
+    .Expanded > .Header > .WidgetAction.Toggle i.fa-caret-down {
+        transform: rotate(180deg);
+    }
+
+    .RTL .WidgetSimple .Header > .WidgetAction.Toggle i.fa-caret-right {
+        transform: rotateY(180deg);
+    }
+
+    .Collapsed > .Header > .WidgetAction.Toggle i.fa-caret-down {
+        display: initial !important;
+        transform: rotate(0deg);
+    }
+
+    .Header:active > .WidgetAction.Toggle {
+        background-position: 0 -13px;
+    }
+
+    .Expanded > .Header > .WidgetAction.Toggle,
+    .Collapsed.AnimationRunning > .Header > .WidgetAction.Toggle {
+        background-position: 0 -26px;
+    }
+
+    .RTL .WidgetAction.Toggle {
+        margin: 5px 2px 5px 6px;
+        float: right;
+    }
+
+    .WidgetAction.Toggle a {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        padding-right: var(--padding-xl);
+        box-sizing: border-box;
+    }
+
+    .WidgetSimple.GridGroups .WidgetAction.Toggle a {
+        padding: 0;
+    }
+
+    .WidgetAction i {
+        color: var(--gray-darker);
+        /*display: block !important;*/
+        margin: 0;
+    }
+
+    /*.WidgetAction:hover i,
+    .WidgetAction a:focus i {
+        color: #000;
+    }*/
+
+
+/**
+* @subsection  WidgetTooltip
+*/
+
+    /*.WidgetTooltip {
+        background-color: #fff;
+        position: absolute;
+        width: 125px;
+        top: 20px;
+        right: 0px;
+    }*/
+
+    ul.WidgetTooltip {
+        /*width: 170px;
+        right: -3px;
+        top: 21px;
+        background: rgba(216, 216, 216, 0.85);*/
+        display: none;
+        flex-direction: column;
+        z-index: 999;
+        position: absolute;
+        top: 30px;
+        right: 0;
+
+        min-width: 160px;
+        width: auto;
+        background: var(--menu-bg);
+        margin-top: 0;
+        box-shadow: var(--menu-box-shadow);
+        padding: var(--padding-sm);
+        border-radius: var(--border-radius-xs);
+    }
+
+    ul.WidgetTooltip:not(.Hidden) {
+        display: flex;
+        z-index: 1000;
+    }
+
+    /*ul.WidgetTooltip li {
+        padding: 7px 13px 2px 23px;
+        text-align: left;
+        position: relative;
+        border-bottom: 1px solid #ccc;
+    }
+
+    ul.WidgetTooltip li i {
+        position: absolute;
+        left: 6px;
+        top: 7px;
+        color: #aaa !important;
+    }
+
+    ul.WidgetTooltip li:last-child {
+        border-bottom: 0px;
+    }*/
+
+    ul.WidgetTooltip li a {
+        display: flex;
+        flex-flow: row;
+        align-items: baseline;
+        gap: var(--gap-xs);
+    }
+
+    /*ul.WidgetTooltip li a:hover {
+        text-decoration: underline;
+    }
+
+    ul.WidgetTooltip li a:hover i {
+        color: #333 !important;
+    }
+
+    .WidgetTooltip a {
+        padding: 0px;
+        line-height: 150%;
+        font-size: 11px;
+    }*/
+
+    /**
+    * @subsection      Call for action buttons and search form
+    */
+    .ActionList {
+        gap: var(--gap-sm);
+        display: flex;
+        flex-flow: column;
+    }
+
+    .ActionList li {
+        /*margin-bottom: 12px;*/
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-md);
+    }
+
+    .ActionList li.Separated {
+        border-bottom: 1px solid #CCCCCC;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+
+    /*.ActionList li:last-child {
+        margin-bottom: 0px;
+    }*/
+
+    .ActionList p {
+        margin: 0;
+        padding: 2px 2px 5px;
+        font-size: 11px;
+        color: #888;
+    }
+
+    .WidgetSimple .ActionList select {
+        margin: 0px auto;
+        padding: 2px 3px;
+        display: block;
+        width: 240px;
+    }
+
+    .WidgetSimple .ActionList select + .FieldExplanation {
+        margin-top: 2px;
+    }
+
+    .WidgetSimple .ActionList .CallForAction ~ select {
+        margin-top: -5px;
+    }
+
+    /*.CallForAction,*/
+    .cke_dialog_footer_buttons a.cke_dialog_ui_button {
+        /*width: 100%;
+        background: var(--primary-color);
+        color: var(--white);
+        border: none;*/
+        border-radius: var(--border-radius-sm);
+        min-height: var(--btn-min-height);
+        font-weight: var(--semi-bold);
+    }
+
+    .ActionsSideBar .ActionsSideBarComp .CallForAction {
+        max-width: 100%;
+    }
+
+    .ActionsSideBar .ActionsSideBarComp .CallForAction i{
+        display: none;
+    }
+
+    /*.CallForAction.Inline {
+        position: relative;
+        top: -1px;
+    }*/
+
+    .CallForAction:disabled {
+        cursor: default;
+    }
+
+    .cke_dialog_footer_buttons a.cke_dialog_ui_button {
+        font-weight: bold !important;
+    }
+
+    .cke_dialog_footer_buttons a.cke_dialog_ui_button:hover {
+        background-color: #e5e5e5;
+        border-color: #999;
+    }
+
+    .CallForAction.Hidden {
+        display: none;
+    }
+
+    .CallForAction.LittleSpacingTop {
+        margin-top: 5px;
+    }
+
+    .ActionList li a.Fullsize,
+    .CallForAction.Fullsize {
+        display: block;
+    }
+
+    .CallForAction.Fullsize {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    #SystemMaintenanceForm .CallForAction.LittleSpacingTop.Fullsize.Center {
+        width: 248px;
+    }
+
+    /*.CallForAction.Fullsize + .FieldExplanation {
+        border: 1px solid #ddd;
+        padding: 5px;
+        margin-top: 5px;
+    }*/
+
+    /**
+    * @css-for     Firefox
+    * @note        bug: button containing an element has an hidden padding
+    */
+
+    .CallForAction::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+
+    .CallForAction span,
+    .cke_dialog_footer_buttons td a.cke_dialog_ui_button span {
+        min-height: 12px;
+        /*padding: var(--padding-sm); parent element (btn) already has side paddings */
+        line-height: 14px;
+        /*color: var(--white); -- currently overrides text color in Dashboard Toolbar buttons*/
+        font-size: var(--font-size-sm);
+        border: none;
+        border-bottom: none;
+        display: block;
+        text-shadow: none;
+        cursor: pointer;
+        position: relative;
+        border-radius: var(--border-radius-sm);
+        align-items: center;
+    }
+
+    .CallForAction.Inline span {
+        padding: 0;
+    }
+
+    .CallForAction.Small span {
+        padding: 0;
+        font-size: 10px;
+    }
+
+    .CallForAction.Fullsize span {
+        padding: 0;
+    }
+
+    .CallForAction:disabled {
+        opacity: .5;
+    }
+
+    .cke_dialog_footer_buttons td a.cke_dialog_ui_button span {
+        font-size: 11px;
+        line-height: auto;
+        color: #000;
+        font-weight: bold;
+    }
+
+    #SelectionCustomerID {
+        background: 0;
+        border: 0;
+    }
+
+    .CallForAction span i {
+        position: relative;
+        left: 0px;
+        top: 1px;
+        font-size: 13px;
+        width: 15px;
+        text-align: center;
+    }
+
+    .RTL .CallForAction span i {
+        margin-left: 5px;
+    }
+
+    .CallForAction.Fullsize.Center span i {
+        /* position: absolute;
+        left: 0;
+        top: 4px; */
+    }
+
+    .CallForAction:active,
+    .CallForAction:hover,
+    .CallForAction:focus {
+        /*background: var(--primary-color-darker);*/
+    }
+
+    input.FilterBox {
+        padding: 4px 5px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .SearchBox {
+        position: relative;
+    }
+
+    .SearchBox > i {
+        position: absolute;
+        font-size: var(--font-size-md);
+        color: var(--gray-semi-dark);
+        top: 9px;
+        left: 10px;
+    }
+
+    .SearchBox input[type='text'] {
+        padding-left: var(--padding-xxl);
+    }
+
+    /*.RTL .SearchBox input[type='text']{
+        border-left: none;
+        border-right: 1px solid #999;
+    }
+
+    .SearchBox input:focus {
+        border-color: #666;
+        border-right: none;
+    }
+    .RTL .SearchBox input:focus {
+        border-color: #666;
+        border-left: none;
+    }
+
+    .SearchBox button {
+        height: 25px;
+        width: 25px;
+        margin: 0 0 0 -4px;
+        padding: 3px 3px 4px;
+        color: #333;
+        font: bold 11px/14px "Helvetica Neue",Helvetica,Arial,sans-serif;
+        background: #f2f2f2;
+        border: 1px solid #888;
+        text-shadow: 0 1px 0 #FFF;
+        vertical-align: baseline;
+    }
+
+    .RTL .SearchBox button {
+        height: 25px;
+        margin: 0 -4px 0 0;
+        text-shadow: 0 1px 0 #FFF;
+        vertical-align: baseline;
+        border-right: 1px solid #888;
+    }
+
+    .SearchBox button:hover {
+        border-color: #696969;
+        cursor: pointer;
+    }
+
+    .SearchBox button:active {
+        padding: 4px 3px 3px;
+        background: #e4e4e4;
+        outline: none;
+    }*/
+
+    /**
+    * @subsection      Btns Section
+    */
+
+    .WidgetSimple.WidgetBtns {
+        background: transparent;
+        border: 0;
+    }
+
+    .WidgetSimple.WidgetBtns .TableLike .SaveButtons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /**
+    * @subsection      Drag and Drop
+    */
+    .CanDrag .Header {
+        cursor: move;
+    }
+
+    .DropPlaceholder {
+        border: 1px dashed #DDD;
+        background: #EEE url(../img/dnd_placeholder_bg.png);
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    /**
+    * @subsection      ProgressBar
+    */
+    #ProgressBar {
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+        overflow: hidden;
+        width: 950px;
+    }
+
+    .ProgressBarElements1 li {
+        width: 950px;
+    }
+
+    .ProgressBarElements2 li {
+        width: 474px;
+    }
+
+    .ProgressBarElements3 li {
+        width: 316px;
+    }
+
+    .ProgressBarElements4 li {
+        width: 237px;
+    }
+
+    .ProgressBarElements5 li {
+        width: 189px;
+    }
+
+    .ProgressBarElements6 li {
+        width: 158px;
+    }
+
+    .ProgressBarElements7 li {
+        width: 135px;
+    }
+
+    /* Because of the minimum screen resolution of 1024px more than 7 elements are not possible at the moment */
+
+    #ProgressBar li {
+        float: left;
+        list-style: none;
+        border-style: solid;
+        border-width: 1px 0px;
+        border-color: #CCC;
+        background-color: #EEE;
+    }
+
+    #ProgressBar li > span {
+        display: block;
+        background-image: url(../img/ProgressBarArrow.png);
+        background-repeat: no-repeat;
+        background-position: center right;
+    }
+
+    #ProgressBar li a {
+        padding: 12px 7px 13px 12px;
+        color: #484848;
+        text-decoration: none;
+        font: 13px/18px Helvetica Neue, sans-serif;
+        display: block;
+        height: 42px;
+        border-style: solid;
+        border-width: 1px 0px;
+        border-color: #F4F4F4;
+        background: url(../img/ProgressBarIsolator.png) no-repeat left 6px;
+        cursor: default;
+        text-align: left;
+    }
+
+    #ACLForm .ScreenXL{
+        background-color: transparent;
+        border: none;
+    }
+
+    /*#ACLForm .WidgetSimple{
+        border-radius: var(--border-radius-lg);
+    }*/
+
+    .WidgetDescription{
+        border-radius: 20px;
+    }
+
+    .WidgetDescription .Content{
+        padding: var(--padding-lg) var(--padding-sm);
+    }
+
+    .WidgetDescription .Header{
+        background-color: #E8E8E8;
+        border-radius: 20px 20px 0 0;
+        padding: 12px 18px;
+    }
+
+    #ProgressBar li span a span {
+        color: #ABABAB;
+        font-size: 11px;
+        line-height: 12px;
+        text-shadow: inherit;
+        display: block;
+    }
+
+    #ProgressBar li:first-child, #ProgressBar li.First {
+        border-left-width: 1px;
+    }
+
+    #ProgressBar li:first-child a, #ProgressBar li.First a {
+        border-left-width: 1px;
+        padding-left: 14px;
+        background: none;
+    }
+
+    #ProgressBar li:last-child {
+        border-right-width: 1px;
+    }
+
+    #ProgressBar li:last-child a {
+        border-right-width: 1px;
+        padding-right: 14px;
+    }
+
+    #ProgressBar .Highlighted {
+        background-color: #fbb42c;
+        border-top-color: #9b6937;
+        border-bottom-color: #996634;
+    }
+
+    #ProgressBar li.Highlighted:first-child {
+        border-left-color: #9b6937;
+    }
+
+    #ProgressBar li.Highlighted > span {
+        background-image: url(../img/ProgressBarArrowActive.png);
+    }
+
+    #ProgressBar .Highlighted a {
+        color: #562900;
+        text-shadow: 0 1px 0 #FCD891;
+        border-top-color: #ffeec8;
+        border-bottom-color: #eaa350;
+        cursor: pointer;
+    }
+
+    #ProgressBar .Highlighted.NoLink a {
+        cursor: default;
+    }
+
+    #ProgressBar li:first-child.Highlighted a {
+        border-left-color: #f2bf5c;
+    }
+
+    #ProgressBar .Highlighted span a span {
+        color: #a14f00;
+        text-shadow: 0 1px 0 #f5b04e;
+    }
+
+    #ProgressBar .Active {
+        border-right: 1px solid #9b6937;
+        position: relative;
+        z-index: 2;
+    }
+
+    #ProgressBar .Active a {
+        border-right: 1px solid #f2bf5c;
+    }
+
+    #ProgressBar .Active + li {
+        margin-left: -2px;
+        padding-left: 1px;
+    }
+
+    #ProgressBar .Active + .Active {
+        z-index: 1;
+    }
+
+    #ProgressBar .Active + li a {
+        background: none;
+    }
+
+    #ProgressBar .Visited {
+        background-color: #DDD;
+    }
+
+    #ProgressBar .Visited.Active {
+        border-right-color: #CCC;
+    }
+
+    #ProgressBar .Visited.Active a {
+        border-right-color: #EEE;
+    }
+
+    /**
+    * @subsection      Widget messages
+    */
+
+    .WidgetSimple .WidgetMessage {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: var(--padding-sm);
+        border-radius: var(--border-radius-xxs);
+        margin: var(--margin-lg) 0;
+    }
+
+    .WidgetSimple .WidgetMessage p + p {
+        margin-top: 2px;
+    }
+
+    .WidgetSimple .WidgetMessage p + p:last-child {
+        margin-bottom: 2px;
+    }
+
+    .SidebarColumn .WidgetSimple .WidgetMessage {
+        margin: 5px -8px;
+        padding: 5px 8px;
+    }
+
+    .WidgetSimple .WidgetMessage.Bottom {
+        margin-bottom: -10px !important;
+    }
+
+    /*.WidgetSimple .WidgetMessage.Top {
+        margin-top: 0px !important;
+    }*/
+
+    .WidgetSimple .WidgetMessage.Error {
+        background: #f8d7da;
+        border: 0;
+    }
+
+    .WidgetSimple .WidgetMessage.Error p {
+        color: #721c24;
+    }
+
+    .WidgetSimple .WidgetMessage.Warning {
+        background: #F7AE40;
+        border-color: #D18F2B;
+        color: #774a06;
+    }
+
+    .WidgetSimple .WidgetMessage.Warning * {
+    }
+
+    .WidgetSimple .WidgetMessage.Success {
+        background: #6EB22A;
+        color: #fff;
+        border-color: #52891B;
+    }
+
+    .WidgetSimple .WidgetMessage.Notice {
+        background: #2A61AF;
+        color: #fff;
+        border-color: #15468C;
+    }
+
+    .WidgetSimple .WidgetMessage button {
+        background: #eee;
+        border: 1px solid #aaa;
+        display: inline-block;
+        margin-right: 5px;
+        transition: all ease 0.3s;
+    }
+
+    .WidgetSimple .WidgetMessage button:hover {
+        cursor: pointer;
+        background: #ddd;
+    }
+
+    /**
+    * @subsection      Overlays
+    */
+
+    .WidgetSimple.HasOverlay {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .WidgetSimple .Overlay {
+        position: absolute;
+        box-sizing: border-box;
+        left: 0px;
+        top: 0px;
+        height: 100%;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        text-align: center;
+        font-size: 16px;
+        z-index: 2;
+    }
+
+    .WidgetSimple .Overlay i {
+        position: absolute;
+        top: 50%;
+        margin-top: -8px;
+        left: 50%;
+        color: #777;
+        margin-left: -8px;
+    }
+
+    .WidgetSimple .Overlay i.fa-check {
+        color: #5BAD5B;
+    }
+
+    /**
+    * @subsection      Icon colors
+    */
+
+    .CallForAction span i.fa-plus-square {
+        color: #35A835;
+    }
+
+    .CallForAction span i.fa-rocket {
+        color: #C4632F;
+    }
+    .CallForAction span i.fa-download,
+    .CallForAction span i.fa-upload {
+        color: #2D6F9E;
+    }
+
+    .UserStatusIcon {
+        cursor: default;
+        margin-right: 3px;
+    }
+
+    .UserStatusIcon.Inline {
+        margin-right: 0;
+    }
+
+    .UserStatusIcon.Active i {
+        color: var(--success-color);
+    }
+
+    .UserStatusIcon.Offline i {
+        color: #000;
+    }
+
+    .UserStatusIcon.Unavailable i {
+        color: var(--warning-color);
+        /*color: #d00;*/
+        opacity: 1;
+    }
+
+    .UserStatusIcon.Away i {
+        color: #fb0;
+    }
+
+    button.HighlightHint {
+        animation: ButtonHint 0.7s infinite alternate;
+    }
+
+    button.HighlightError {
+        animation: ButtonError 0.7s infinite alternate;
+    }
+
+    /**
+    *  @widgetPermissions
+    */
+    .WidgetSimple.WidgetPermissions div.scroll-bar-styled {
+        overflow: auto;
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .WidgetSimple.WidgetPermissions div.scroll-bar-styled::-webkit-scrollbar {
+        border: 0;
+    }
+
+    .WidgetSimple.WidgetPermissions table.DataTable {
+        border-collapse: separate;
+        max-height: unset;
+        display: inline-table;
+        border-radius: 0;
+        border: 0;
+        padding: 0;
+    }
+
+    .WidgetPermissions .DataTable thead {
+        border-collapse: collapse;
+        border-radius: 1em;
+        overflow: clip;
+    }
+
+    /* .WidgetPermissions .DataTable thead tr {
+        border-radius: 20px;
+        overflow: hidden;
+    } */
+
+    .WidgetPermissions .DataTable i.fa-check {
+        color: var(--success-color);
+    }
+
+    /**
+    * @subsection      Tabs
+    */
+
+    .WidgetSimple.Tabs > .Header {
+        display: flex;
+        flex-flow: row;
+        overflow: hidden;
+        position: relative;
+        border-bottom: 0 solid var(--border-color);
+        padding: var(--padding-xs);
+        justify-content: flex-start;
+    }
+
+    .WidgetSimple.Tabs > .Header a {
+        min-width: 150px;
+        display: flex;
+        justify-content: center;
+        color: var(--main-font-color);
+        /*font-family: Inter;*/
+        font-size: 14px;
+        letter-spacing: .1px;
+        font-weight: var(--normal);
+    }
+
+    .SidebarColumn .WidgetSimple.Tabs > .Header a {
+        min-width: 120px;
+        font-size: 11px;
+    }
+
+    .WidgetSimple.Tabs > .Header a.Disabled {
+        color: var(--disabled);
+        cursor: not-allowed;
+        text-shadow: none;
+    }
+
+    .WidgetSimple.Tabs > .Header a:not(.Disabled).Active,
+    .WidgetSimple.Tabs > .Header a:not(.Disabled):active  {
+        background-color: white;
+        color: var(--black);
+        position: relative;
+        font-weight: var(--semi-bold);
+    }
+
+    .WidgetSimple.Tabs > .Header a:not(.Disabled).Active::after{
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        background-color: var(--black);
+        height: 2px;
+    }
+
+    .WidgetSimple.Tabs > .Header a:not(.Disabled):hover{
+        color: var(--black);
+    }
+
+    .WidgetSimple.Tabs > .Content > div {
+        display: none;
+    }
+
+    .WidgetSimple.Tabs > .Content > div.Active {
+        display: block;
+    }
+
+    .LoginScreen .MessageOfTheDayBox {
+        width: 350px;
+        margin: auto;
+        text-align: justify;
+        margin-top: 15px;
+    }
+
+    .LoginScreen .WidgetSimple.MessageOfTheDayBox h2,
+    .LoginScreen .WidgetSimple.MessageOfTheDayBox p {
+        padding: 0px 15px;
+    }
+
+    .LoginScreen .WidgetSimple.MessageOfTheDayBox h2 {
+        padding: 5px 0px;
+    }
+
+    @keyframes ButtonHint {
+        from {
+            box-shadow: none;
+            }
+        to {
+            box-shadow: 0 0 10px green;
+        }
+    }
+
+    @keyframes ButtonError {
+        from {
+            box-shadow: none;
+            }
+        to {
+            box-shadow: 0 0 10px red;
+        }
+    }
+
+    /**
+    * @subsection  Admin Menu Nav
+    */
+
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .WidgetSimple,
+    .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple {
+        /*padding: 0;
+        border-radius: 0;*/
+        border: 0;
+        background: transparent;
+    }
+
+    /* Sidebar */
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .WidgetSimple .Header {
+        padding: 0 0 var(--padding-sm);
+        margin: 0 0 var(--margin-md);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        background-color: transparent;
+        border-radius: 0;
+    }
+
+    /* Sidenar Content */
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .WidgetSimple .Content {
+        border-radius: 0;
+        padding: 0 0 var(--padding-md);
+        overflow: unset;
+        /* border: var(--border-width) var(--border-solid) var(--border-color); */
+        display: flex;
+        flex-flow: column;
+        gap: 15px;
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .WidgetSimple .Content
+
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .WidgetSimple .Content .FieldExplanation,
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .WidgetSimple .Content div:not(.FieldExplanation) p {
+        margin: 0;
+        font-size: var(--font-size-sm);
+        padding-top: 12px;
+        padding-bottom: var(--padding-md);
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .WidgetSimple .Content .FieldExplanation:first-child,
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .WidgetSimple .Content p:first-child {
+        padding-top: 0;
+    }
+
+    /* Content Grid Content */
+    .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple .Header {
+        padding: 0;
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple.FilterInput .Content {
+        padding-top: var(--padding-md);
+        border-radius: 0;
+    }
+
+
+    .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple.FilterInput .Content input[type='text'] {
+        border-radius: var(--border-radius-sm);
+        /*line-height: 36px; - This was adding height to the search bar in Admin */
+        background-color: var(--white);
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple.GridGroups .Header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        border: 0;
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple.GridGroups .Header::after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 0;
+        height: 1px;
+        width: calc(100% - 23px);
+        background: var(--border-color);
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple.GridGroups .Header h2 {
+        background: var(--main-bg-color);
+        z-index: 1;
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple.GridGroups .Header h2 span {
+        padding: 0 var(--padding-sm);
+        color: var(--gray-semi-dark);
+        font-size: var(--main-font-size);
+        font-weight: var(--normal);
+    }
+
+    /**
+    * @subsection  Dashboard Widgets
+    */
+
+    .mainStructure .ContentColumn .WidgetSimple .Header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu {
+        display: flex;
+        top: initial;
+        right: initial;
+        padding-left: initial;
+        position: relative;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical {
+        width: 30px;
+        height: 30px;
+        margin-left: 0;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical span {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        background: transparent;
+        transition: var(--main-transition);
+        cursor: pointer;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical:hover span {
+        background: var(--gray-light);
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .Btn-Menu-Vertical span i {
+        font-size: var(--icon-main-size);
+        color: var(--gray-dark);;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu:hover .ActionMenuList  {
+        display: flex;
+    }
+
+    .WidgetSimple .Header .WidgetAction:hover + a + .ActionMenuList {
+        display: none !important;
+    }
+
+    .WidgetSimple .Header .ActionMenu:hover .Btn-Menu-Vertical span {
+        background-color: var(--gray-light) !important;
+    }
+
+    .WidgetSimple .Header .ActionMenu:hover > .WidgetAction:hover + .Btn-Menu-Vertical > span {
+        background: transparent !important;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList {
+        display: none;
+        flex-direction: column;
+        z-index: 999;
+        position: absolute;
+        top: 30px;
+        right: 0;
+
+        min-width: 160px;
+        background: var(--menu-bg);
+        margin-top: 0;
+        box-shadow: var(--menu-box-shadow);
+        padding: var(--padding-sm);
+        border-radius: var(--border-radius-xs);
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li {
+        height: auto;
+        width: auto;
+        text-indent: 0px;
+        line-height: 18px;
+        white-space: nowrap;
+        /*color: var(--menu-font);
+        padding: var(--padding-xs) var(--padding-sm);
+        border-bottom: none;
+        font-size: var(--main-font-size);
+        transition: var(--main-transition);
+        border-radius: var(--border-radius-xs);
+        cursor: pointer;*/
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li:hover {
+        color: var(--menu-font);
+        background: var(--gray-light);
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction {
+        height: auto;
+        width: 100%;
+        padding-right: 0;
+        float: initial;
+        text-align: left;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction a {
+        display: flex;
+        height: auto;
+        font-size: unset;
+        justify-content: space-between;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction a .iconWrapper {
+        display: flex;
+        height: 30px;
+        width: 20px;
+        position: relative;
+        background: transparent;
+        padding: 0;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction a .iconWrapper i,
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction:hover a .iconWrapper i {
+        color: var(--gray-dark);
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction a .textWrapper {
+        display: flex;
+        padding-left: var(--padding-xs);
+        color: var(--menu-font);
+        text-indent: 0;
+        width: calc(100% - 20px);
+        line-height: 110%;
+        align-items: center;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li .WidgetAction.ShowPagination a .iconWrapper i {
+        font-size: 16px;
+    }
+
+
+
+    /*
+    ##################################################################################################
+                                                Forwwward Styles
+    ##################################################################################################
+    */
+
+    .WidgetSimple {
+        position: relative;
+        /* margin-bottom: var(--widget-margin); ed removed on 22/12/14 */
+        background: var(--widget-simple-bg);
+        box-shadow: none;
+        margin-right: 0;
+        /*transition: var(--main-transition);*/
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+        /*overflow: hidden;*/
+    }
+
+    .RealPopup #AppWrapper > .WidgetSimple {
+        border-radius: 0;
+    }
+
+    .SidebarFirst .SidebarColumn .WidgetSimple {
+        border-radius: 0;
+    }
+
+    .MainBox > .WidgetSimple,
+    .ContentColumn > .WidgetSimple:only-child {
+        margin: 0;
+    }
+
+    .WidgetSimple.card .TableLike {
+        flex-flow: row;
+        flex-wrap: wrap;
+        padding: 0;
+        gap: var(--padding-lg);
+    }
+
+    .WidgetSimple.card .TableLike > div {
+        display: flex;
+        flex-flow: column;
+        gap: var(--padding-sm);
+        width: 100%;
+    }
+
+    .WidgetSimple.card .TableLike > div.Size1of2 {
+        width: calc(50% - var(--padding-sm));
+    }
+
+    .WidgetSimple.Collapsed,
+    .WidgetSimple.Expanded {
+        border-color: var(--border-color);
+    }
+
+    .SidebarColumn .WidgetSimple.Collapsed .Header {
+        border-radius: var(--border-radius-sm);
+        border: 0;
+    }
+
+    .WidgetSimple > .Content {
+        transition: var(--main-transition);
+        padding: 0;
+        min-height: 0;
+        border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+        overflow: auto;
+        position: relative;
+        z-index: 5;
+        /*overflow: hidden;*/ /* overflow hidden will break the horizontal scroll */
+    }
+
+    .WidgetSimple > .Content.padding {
+        padding: var(--padding-lg);
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-md);
+    }
+
+    .WidgetSimple.Collapsed .ArticleMailHeader {
+        display: none;
+    }
+
+    .WidgetSimple .Header {
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        padding: var(--padding-md);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        /*z-index: 10; - edited by beatriz on 23/02/16 - was breaking filter dropdown menu */
+    }
+
+    .WidgetSimple.Expanded .Header {
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .WidgetSimple.Collapsed > .Header .StateName,
+    .WidgetSimple.Expanded > .Header .StateName {
+        position: absolute;
+        right: 55px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray-dark);
+        font-size: var(--main-font-size);
+        font-style: italic;
+        font-weight: var(--normal);
+    }
+
+    .ErrorScreen .WidgetSimple .Content {
+        padding: var(--padding-lg);
+    }
+
+    .WidgetSimple > .Header h2,
+    .WidgetSimple > .Header h3 {
+        display: inline; /* - edited by beatriz on 27/1/2023 - so the ellipsis overflow can take place */
+        /*align-items: center; - as the elements become inline */
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: var(--widget-simple-title-size);
+        font-weight: var(--semi-bold);
+        text-shadow: none;
+        color: var(--black);
+        line-height: 120%;
+        z-index: 1;
+    }
+
+    .WidgetSimple.MenuExpanded > .Header h2,
+    .WidgetSimple.MenuExpanded > .Header h3 {
+        text-overflow: unset;
+        white-space: unset;
+        max-width: unset;
+    }
+
+    .WidgetSimple > .Header .FieldExplanation {
+        display: inline;
+    }
+
+    .TicketZoom .WidgetSimple > .Header h2 {
+        width: calc(100% - 65px);
+    }
+
+    /*********************************/
+    /*  Admin & Customer Management  */
+    /*********************************/
+    .AdminManagement .WidgetSimple > .Header {
+        padding: var(--padding-md) var(--padding-lg);
+    }
+
+    /* TO DO - remove this line */
+    .AdminManagement .ContentColumn .WidgetSimple > .Content > :not(table):not(.Size1of2):not(.Size1of3):not(.SettingWrapper):not(.LayoutGrid):not(form>table):not(form.PreventMultipleSubmits):not(.ACLNote):not(.SearchBox):not(i):not(span):not(#TransitionForm .WidgetSimple .WidgetSimple):not(#TransitionForm .WidgetSimple .TableLike):not(.ControlRow):not(.CommunicationPagination):not(.InnerSidebarColumn p),
+    .ImportExport {
+        padding: var(--padding-lg);
+    }
+
+    .AdminManagement .WidgetSimple > .Content > .TableLike {
+        gap: var(--gap-md);
+        /*padding: 0; - see code above*/
+        margin: auto;
+    }
+
+    .AdminManagement .Content fieldset.TableLike,
+    .AdminManagement .Content .TableLike > div {
+        display: flex;
+        flex-flow: column;
+        /*gap: var(--gap-xs); - edited by beatriz on 30/1/2023 */
+        width: 100%;
+        /*max-width: 800px;   - edited by beatriz on 15/2/2023 - overriding width in save field */
+        align-self: start;
+        z-index: 1;
+    }
+
+    .AdminManagement .WidgetSimple > .Content .TableLike > div.Field {
+        display: flex;
+        /*flex-flow: row; .Field should be flex-column by default - needs a special class for row exception*/
+    }
+
+    .AdminManagement .WidgetSimple > .Content .TableLike > div.Field > div:not(.TooltipErrorMessage) {
+        display: flex;
+        flex-flow: row;
+        gap: var(--gap-sm);
+        align-items: center;
+    }
+
+    .AdminManagement .WidgetSimple > .Content .TableLike > div.Field > div > span {
+        flex: 1;
+    }
+
+    .AdminManagement .WidgetSimple > .Content .TableLike > div.Field > div > span:nth-child(1) {
+        max-width: 33%;
+    }
+
+    .AdminManagement .WidgetSimple.card,
+    .AdminManagement .WidgetSimple.card > .Content {
+        padding: 0;
+    }
+
+    .AdminManagement .WidgetSimple.card > .Header {
+        border: 0;
+    }
+
+    .AdminManagement .WidgetSimple.card form {
+        padding: var(--padding-lg);
+    }
+
+    .ProcessManagementEditScreen .Header {
+        background: var(--main-bg-color);
+        border-top-left-radius: var(--border-radius-sm);
+        border-top-right-radius: var(--border-radius-sm);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .ProcessManagementEditScreen .Content > fieldset.TableLike {
+        gap: var(--gap-md);
+    }
+
+    .ProcessManagementEditScreen .Content > fieldset.TableLike > div {
+        gap: var(--padding-sm);
+        display: flex;
+        flex-flow: column;
+    }
+
+    .ProcessManagementEditScreen .WidgetSimple fieldset.TableLike > .SaveButtons {
+        padding: 0;
+    }
+
+    .WidgetSimple.Reference > .Header {
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    /*******************************************************/
+    /*                  Widget - Dashboard                 */
+    /*******************************************************/
+    /**************************/
+    /* Widget - RemoveFilters */
+    /**************************/
+    .WidgetSimple .Header .RemoveFilters,
+    .RemoveFilters {
+        display: flex;
+        align-items: center;
+    }
+
+    .WidgetSimple .Header .RemoveFilters > a,
+    .RemoveFilters > a,
+    .ContextFunctions .ContextSettings a {
+        color: var(--primary-color);
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        /*font-family: Inter;*/
+        transition: var(--main-transition);
+    }
+
+    .WidgetSimple .Header .RemoveFilters > a:hover,
+    .RemoveFilters > a:hover,
+    .ContextFunctions .ContextSettings a:not(.icon-hover):hover {
+        color: var(--primary-color-darker);
+        background: unset;
+        background-color: unset;
+    }
+
+    .WidgetSimple .Header .RemoveFilters > a:hover,
+    .RemoveFilters > a:hover {
+        text-decoration: underline;
+    }
+
+    .RemoveFilters > a {
+        min-width: 78px; /*to make sure there are no line breaks*/
+    }
+
+    /*.ControlRow .RemoveFilters {
+        padding-right: var(--padding-sm);
+    }*/
+
+    .WidgetSimple .Header .ContextFunctions {
+        display: flex;
+        gap: var(--gap-xs);
+        align-items: center;
+    }
+
+    /**********************************/
+    /*          SidebarColumn         */
+    /**********************************/
+
+    .SidebarColumn .WidgetSimple {
+        /*border: 1px solid red;*/
+    }
+
+    .SidebarColumn .DataTable td {
+        padding: var(--padding-sm);
+        font-size: var(--main-font-size);
+    }
+
+    /*     Header    */
+    .mainStructure .SidebarColumn .WidgetSimple .Header {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    /******************************/
+    /* 'Settings' Widget Dropdown */
+    .SettingsWidget .Header {
+        justify-content: flex-start;
+        border-bottom: none;
+        padding: var(--padding-lg) var(--padding-md) !important;
+    }
+
+    .SettingsWidget .Content {
+        padding: 0 !important;
+    }
+
+    .MainBox .SidebarColumn .Collapsed .Header {
+        border-bottom: 0;
+    }
+
+    .SettingsWidget form {
+        display: flex;
+        flex-flow: column;
+        gap: 0;
+    }
+
+    .SettingsWidget form > div {
+        padding: var(--padding-md);
+        display: flex;
+        flex-flow: column;
+    }
+
+    .SettingsWidget input[type=checkbox].active-widget-checkbox {
+        display: none;
+    }
+
+    .SettingsWidget .search-wrapper {
+        position: relative;
+    }
+
+    .SettingsWidget .search-wrapper input {
+        padding-right: var(--padding-xl);
+    }
+
+    .SettingsWidget .search-wrapper i.fa {
+        position: absolute;
+        font-size: var(--font-size-lg);
+        right: 25px;
+        top: 23px;
+        color: var(--gray-dark);
+        transition: var(--main-transition);
+    }
+
+    .SettingsWidget .animate {
+        transform: rotate(180deg);
+    }
+
+
+    /* widget name container */
+    /*.SidebarColumn .WidgetSimple:first-child form */
+    .active-widgets-list li {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--padding-xs) var(--padding-md);
+    }
+
+    /*.SidebarColumn .WidgetSimple:first-child form */
+    .active-widgets-list li:hover {
+        background: var(--table-td-even-bg);
+    }
+
+    /* widget name */
+    /*.SidebarColumn .WidgetSimple:first-child form */
+    .active-widgets-list li span {
+        font-size: var(--main-font-size);
+        color: var(--main-font-color);
+    }
+
+    /* 'Settings' General Window */
+    .SidebarColumn .WidgetSimple .Content fieldset {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .SidebarColumn .WidgetSimple .Content fieldset .row-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: var(--padding-sm);
+    }
+
+    .SidebarColumn .WidgetSimple .Content fieldset .row-wrapper .Field {
+        position: relative;
+    }
+
+    .SidebarColumn .WidgetSimple .Content fieldset .row-wrapper .Field i {
+        right: 15px;
+        position: absolute;
+        /*top: 50%;
+        transform: translateY(-50%); - edited by beatriz on 27/1/2023*/
+    }
+
+    .SidebarColumn .WidgetSimple .Content fieldset .btn-container {
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+    }
+
+    /* widget search menu */
+    ul.dropdown-search-menu {
+        transition: var(--main-transition);
+        position: relative;
+        padding: var(--padding-sm);
+        display: none;
+        flex-direction: column;
+        height: 0;
+        max-height: 0;
+        overflow-y: scroll;
+        top: 5px;
+        font-size: var(--main-font-size);
+    }
+
+    ul.dropdown-search-menu li {
+        position: relative;
+    }
+
+    ul.dropdown-search-menu li::after {
+        font: normal normal normal 14px/1 FontAwesome;
+        content: "\f0fe";
+        position: absolute;
+        right: 10px;
+        color: var(--gray-semi-dark);
+    }
+
+    .SidebarColumn .WidgetSimple:first-child form input:focus + ul.dropdown-search-menu,
+    ul.dropdown-search-menu:hover {
+        display: flex;
+        height: auto;
+        max-height: 225px;
+    }
+
+    ul.dropdown-search-menu:empty {
+        padding: 0;
+    }
+
+
+    ul.dropdown-search-menu .dropdown-item {
+        padding: 0;
+        border-radius: var(--border-radius-sm);
+    }
+
+    ul.dropdown-search-menu .dropdown-item a {
+        padding: var(--padding-md) var(--padding-sm);
+    }
+
+    .SidebarColumn .WidgetSimple .Content fieldset .btn-container button {
+        /* font-weight: var(--semi-bold);
+        width: 100%;
+        border-radius: var(--border-radius-sm);
+        min-height: var(--btn-min-height); */
+        transition: var(--main-transition);
+        margin-top: var(--margin-sm);
+    }
+
+
+
+
+
+
+    /*
+
+    !!!! To resolve: replace "CallForAction" with "btn-main" !!!!
+
+    */
+
+
+
+
+
+
+    /************************/
+    /*       DataTable      */
+    /************************/
+
+    /* General - Table */
+    .Datatable {}
+
+    /* Dashboard Table Form */
+    .Dashboard .ContentColumn form {
+        overflow: auto;
+    }
+
+    /*************************/
+    /* SidebarColumn - Table */
+    .SidebarColumn .DataTable {
+    }
+
+    /*************************/
+    /* ContentColumn - Table */
+    .ContentColumn .DataTable {
+        overflow: hidden;
+    }
+
+    .ContentColumn .Field > .DataTable {
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .ContentColumn .Field > .DataTable tbody tr > th {
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .ContentColumn .Field > .DataTable tbody tr:hover td {
+        background: initial;
+    }
+
+    .ContentColumn .DataTable tbody tr > td > a {
+        color: var(--primary-color);
+    }
+
+    .ContentColumn .DataTable tbody tr:hover > td > a {
+        color: var(--primary-color-darker);
+    }
+
+    .ContentColumn form div.DataTable {
+        overflow: auto;
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+    }
+
+    .ContentColumn form .DataTable .DataTable {
+        border: 0;
+    }
+
+    .ContentColumn div.DataTable.scroll-bar-styled > table {
+        overflow: auto;
+        width: 100%;
+    }
+
+    dd > table.DataTable {
+        padding: 0;
+    }
+
+    /************************/
+    /*    ContentColumn     */
+    /************************/
+
+    .Dashboard .ContentColumn .WidgetSimple .Header {
+
+    }
+
+    .Dashboard .ContentColumn .WidgetSimple .Content {
+
+    }
+
+    /* Widget Settings Form */
+    .WidgetSettingsForm fieldset {
+        background: var(--white);
+    }
+
+    .WidgetSimple .Content .WidgetSettingsForm > fieldset.TableLike {
+        max-width: 100%;
+    }
+
+    .WidgetSettingsForm fieldset .row-wrapper {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: var(--padding-sm);
+    }
+
+    .WidgetSettingsForm fieldset .row-wrapper label {
+        display: flex;
+        width: 130px;
+        color: var(--gray-md);
+        padding-top: var(--padding-sm);
+    }
+
+    .WidgetSettingsForm fieldset .row-wrapper .Field,
+    .WidgetSettingsForm fieldset .Field{
+        display: flex;
+        flex-flow: row;
+        width: calc(100% - 130px);
+        justify-content: space-between;
+        min-width: unset;
+    }
+
+    .WidgetSettingsForm fieldset .row-wrapper .Field .InputField_InputContainer i,
+    .WidgetSettingsForm fieldset .Field .InputField_InputContainer i{
+        right: 15px;
+        position: absolute;
+        /*top: 50%;
+        transform: translateY(-50%); - edited by beatriz on 27/1/2023 */
+    }
+
+    .WidgetSettingsForm fieldset .row-wrapper .Field .InputField_Container,
+    .WidgetSettingsForm fieldset .Field .InputField_Container {
+        width: auto;
+    }
+
+    .WidgetSettingsForm fieldset .row-wrapper .Field .inner-field,
+    .WidgetSettingsForm fieldset .Field .inner-field {
+        position: relative;
+    }
+
+    /*.WidgetSettingsForm fieldset .row-wrapper .Field .inner-field i,
+    .WidgetSettingsForm fieldset .Field .inner-field i*/
+    /*
+    .InputField_Container i {
+        right: 15px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    */
+
+    /* Following code replaced by Modal classes in Core.Dialog.css
+    .WidgetSettingsForm fieldset .row-wrapper .Field .Size1of2 {
+        display: flex;
+        flex-direction: column;
+        width: calc(50% - 10px);
+    }
+
+    .WidgetSettingsForm fieldset .row-wrapper .Field .Size1of2 .Tablelike {
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-bottom: 0;
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+        margin: 0;
+        width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    Merged with "ul.Tablelike li.Header" in same file
+    .WidgetSettingsForm fieldset .row-wrapper .Field .Size1of2 .Tablelike .Header {
+        color: var(--black);
+        font-size: var(--font-size-md);
+        line-height: 1;
+        background: var(--gray-light);
+    }
+
+    Merged with ".FilterInputContainer" in Core.Dialog.css
+    .WidgetSettingsForm fieldset .row-wrapper .Field .Size1of2 .FilterInputContainer {
+        width: 100%;
+        border-left: var(--border-width) var(--border-solid) var(--border-color);
+        border-right: var(--border-width) var(--border-solid) var(--border-color);
+        background-color: var(--gray-light);
+        box-sizing: border-box;
+    }*/
+
+    .WidgetSettingsForm fieldset .row-wrapper .Field .Size1of2 .FilterInputContainer .TableFilterContainer {
+        display: flex;
+        padding: 0 var(--padding-md) var(--padding-md);
+    }
+
+    .WidgetSettingsForm fieldset .row-wrapper .Field .Size1of2 .FilterInputContainer .TableFilterContainer .FilterAvailableFields {
+        margin: 0;
+        background: var(--white);
+    }
+
+    /* Merged with ".modal-col1 ul:last-child, .modal-col2 ul:last-child" in Core.Dialog
+    .WidgetSettingsForm fieldset .row-wrapper .Field .Size1of2 .AllocationList {
+        width: 100%;
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-top: 0;
+        border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+        overflow-y: scroll;
+    }*/
+
+    .WidgetSettingsForm fieldset .row-wrapper .Field .Size1of2 .AllocationList li {
+        font-size: var(--main-font-size);
+        line-height: var(--table-tr-line-hight);
+        padding: 0 var(--padding-md);
+        cursor: move;
+        cursor: -webkit-grab;
+        cursor:    -moz-grab;
+        cursor:         grab;
+    }
+
+    .WidgetSettingsForm fieldset .row-wrapper .Field .Size1of2 .AllocationList li:nth-child(even) {
+        background: var(--gray-ultra-light);
+    }
+
+    /* Widget - Ticket Settings */
+    .ContentColumn .WidgetSimple .Content {
+
+    }
+
+    /************************/
+    /* Widget - Ticket Zoom */
+    /************************/
+
+    /* Header */
+    .TicketZoom .ContentColumn .Header {
+        background: var(--main-bg-color);
+        border-top-left-radius: var(--border-radius-sm);
+        border-top-right-radius: var(--border-radius-sm);
+        padding: var(--padding-md) var(--padding-lg);
+    }
+
+    /* Article Overview Content */
+    .TicketZoom .WidgetSimple div.Content.article-overview-content {
+        padding: 0;
+    }
+
+    .TicketZoom .WidgetSimple div.Content.article-overview-content .ActionRow,
+    .TicketZoom .WidgetSimple div.Content.article-overview-content .DataTable {
+        border: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    /* Widget Customer */
+    .TicketZoom .WidgetSimple.customer {
+
+    }
+
+    /* Widget Agent */
+    .TicketZoom .WidgetSimple.agent {
+
+    }
+
+    /* Widget Agent */
+    .TicketZoom .WidgetSimple.agent {
+
+    }
+
+    /*******************************/
+    /* Widget - Ticket Information */
+    /*******************************/
+    /*.information-widget {}*/
+
+    /*.information-widget */
+    .Content fieldset > span {
+        display: flex;
+        width: 100%;
+        flex-flow: column;
+        align-items: baseline;
+        justify-content: flex-start;
+        line-height: 24px;
+        letter-spacing: .1px;
+        padding-bottom: var(--padding-sm);
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        /*font-family: Inter;*/
+    }
+
+    /*.information-widget */
+    .Content fieldset:last-of-type > span:last-of-type {
+        padding-bottom: 0;
+    }
+
+    /*.information-widget */
+    .Content fieldset > span label {
+        color: var(--gray-semi-dark);
+        flex: 0 0 auto;
+    }
+
+    /*.information-widget */
+    .Content fieldset > span p {
+        color: var(--table-text-color);
+    }
+
+    /*.information-widget */
+    .Content fieldset > span label,
+    .Content fieldset > span p {
+        padding: 0;
+    }
+
+    .MessageBrowser {
+        display: block;
+        top: 0;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .align-right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    /**
+    * @subsection  Filter Ticket
+    */
+
+    .Dashboard.mainStructure.LayoutFixedSidebar .DashboardWidgetExpand {
+        display: flex;
+    }
+
+    .DashboardWidgetExpand {
+        display: flex;
+        /*flex: 1 1 100%; - edited by beatriz on 16/1/2023 - element would get full height when children elements were not visible (pushing 'Settings widget' down) */
+        z-index: 1;
+    }
+
+    .DashboardWidgetExpand ul {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .DashboardWidgetExpand ul li {
+        display: flex;
+        list-style: none;
+        padding: none;
+        height: auto;
+        white-space: nowrap;
+        margin-left: 20px;
+    }
+
+    .DashboardWidgetExpand ul li:first-child {
+        margin-left: 0;
+    }
+
+    .DashboardWidgetExpand ul li a {
+        border-radius: var(--border-radius-sm);
+        border: 1px solid var(--border-color);
+        padding: var(--size-8) var(--size-20);
+        color: var(--main-font-color);
+        background: transparent;
+        transition: var(--main-transition);
+        font-size: var(--font-size-sm);
+        font-weight: var(--semi-bold);
+        cursor: pointer;
+    }
+
+    .DashboardWidgetExpand ul li a:hover {
+        border: 1px solid var(--primary-color-darker);
+        color: var(--white);
+        background: var(--primary-color-darker);
+    }
+
+    .DashboardWidgetExpand ul li a.active,
+    .DashboardWidgetExpand ul li a.active:hover   {
+        border: 1px solid var(--primary-color);
+        background: var(--primary-color-rgb);
+        pointer-events: none;
+    }
+
+
+
+    /*************************************/
+    /*      Calendars - side widget      */
+    /*************************************/
+
+    .Calendars .SpacingTopSmall {
+        display: block;
+        padding: 0;
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+        max-height: 100%;
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .Calendars  .SpacingTopSmall td:first-child input {
+        display: inline-block;
+    }
+
+    .Calendars table#Calendars {
+        width: 100%; /* 140px * 5 column + 16px scrollbar width */
+        border-spacing: 0;
+    }
+
+    .Calendars table#Calendars tbody,
+    .Calendars table#Calendars thead tr {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .Calendars table#Calendars tbody {
+        height: 100%;
+        max-height: 290px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .Calendars table#Calendars tbody td,
+    .Calendars table#Calendars thead th {
+        width: 140px;
+    }
+
+    .Calendars table#Calendars thead th:last-child {
+        width: 100%; /* 140px + 16px scrollbar width */
+    }
+
+    .Calendars table#Calendars thead tr th {
+        height: 30px;
+        line-height: 30px;
+        /*text-align: left;*/
+    }
+
+    .Calendars table#Calendars tbody td:last-child, thead th:last-child {
+        border-right: none !important;
+    }
+
+    .Calendars table#Calendars  .W10pc {
+        width: 100px !important;
+    }
+
+    /**************************************/
+    /*      Information - side widget     */
+    /**************************************/
+    .MainBox .SidebarColumn .WidgetInformation .Content fieldset.TableLike .field-wrapper {
+        gap: var(--padding-xs);
+    }
+
+    .MainBox .SidebarColumn .WidgetInformation .Content fieldset.TableLike .field-wrapper > label {
+        display: flex;
+        padding: 0;
+        color: var(--gray-semi-dark);
+    }
+
+    .MainBox .SidebarColumn .WidgetInformation .Content fieldset.TableLike .field-wrapper > .Value {
+        display: flex;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        color: var(--table-text-color);
+    }
+
+
+
+    /***********************************************************************/
+    /*    Moved from Core.Reset.Forwwward.css                              */
+    /***********************************************************************/
+
+    form.WidgetSettingsForm fieldset.TableLike.FixedLabelSmall > .Field {
+        gap: var(--padding-xl);
+        width: 100%;
+        padding-top: 0;
+    }
+
+    form.WidgetSettingsForm fieldset.TableLike.FixedLabelSmall label {
+        text-align: left;
+        font-size: 14px;
+        /*font-family: Inter;*/
+        font-weight: var(--medium);
+        letter-spacing: 0.2px;
+        color: var(--gray-semi-dark);
+        min-width: 120px;
+    }
+
+    form.WidgetSettingsForm ul.Tablelike .Header {
+        border-bottom: 0;
+        background: var(--modal-header-bg);
+    }
+
+    form.WidgetSettingsForm ul.Tablelike:first-child {
+        border-top-left-radius: var(--border-radius-sm);
+        border-top-right-radius: var(--border-radius-sm);
+        background: var(--modal-header-bg);
+        border-bottom: 0;
+    }
+
+    form.WidgetSettingsForm ul.Tablelike:last-child,
+    form.WidgetSettingsForm ul.Tablelike:last-child li:last-child {
+        border-bottom-left-radius: var(--border-radius-sm);
+        border-bottom-right-radius: var(--border-radius-sm);
+    }
+
+    form.WidgetSettingsForm ul.Tablelike:last-child {
+        max-height: calc(40 * 6px);
+        overflow: auto;
+    }
+
+    form.WidgetSettingsForm .Size1of2 ul.Tablelike:last-child {
+        max-height: 285px;
+    }
+
+    /******************************* Message Container *******************************/
+    div.message-container,
+    span.message-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: var(--gray-semi-light);
+        padding: var(--padding-sm);
+        border-radius: var(--border-radius-xxs);
+        margin: var(--margin-lg) 0;
+    }
+
+    div.message-container:empty,
+    span.message-container:empty {
+        display: none;
+    }
+
+    div.message-container p,
+    span.message-container p {
+        color: var(--black);
+        letter-spacing: 0.1px;
+        font-size: var(--font-size-xs);
+        font-weight: var(--normal);
+        /*font-family: Inter;*/
+    }
+
+    .message-primary {
+        color: var(--primary-color);
+        /*font-family: 'Inter';*/
+        font-size: var(--font-size-md);
+        font-weight: var(--semi-bold);
+        letter-spacing: .2px;
+    }
+
+    /******************************* Search Profile Widget *******************************/
+    .search-profile-widget .Content .Field {
+        padding-bottom: var(--padding-md);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .search-profile-widget .Content .buttons-wrapper {
+        display: flex;
+        gap: var(--gap-sm);
+        padding-top: var(--padding-md);
+    }
+
 
 } /* end @media */

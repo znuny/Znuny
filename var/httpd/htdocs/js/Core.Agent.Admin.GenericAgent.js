@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -23,7 +24,7 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
 
     var RemoveButtonHTML = '<a href="#" title="'
         + Core.Language.Translate('Remove this dynamic field')
-        + '" class="RemoveButton SpacingLeft"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">'
+        + '" class="RemoveButton icon-hover"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">'
         + Core.Language.Translate('Remove') + '</span></a>';
 
     /**
@@ -201,10 +202,18 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
             Data,
             function (Response) {
 
-                var FieldHTML = Response.Label + '<div class="Field" data-id="' + Response.ID + '">' + Response.Field + RemoveButtonHTML + '</div><div class="Clear"></div>';
-
+                // Removed immediate addition of RemoveButtonHTML (see comment below)
+                var FieldHTML = Response.Label + '<div class="Field flex-row" data-id="' + Response.ID + '">' + Response.Field;
                 // Append field HTML from response to selected fields area.
                 $('#' + SelectedFieldsID).append(FieldHTML);
+
+                // Added check for TooltipErrorMessage div, add RemoveButtonHTML before it, in case it exists, proceed as normal if not
+                if(FieldHTML.includes("TooltipErrorMessage")) {
+                    $('div.Field[data-id="' + Response.ID + '"] > .TooltipErrorMessage').before(RemoveButtonHTML);
+                } else {
+                    $('div.Field[data-id="' + Response.ID + '"]').append(RemoveButtonHTML);
+                }
+
                 TargetNS.InitRemoveButtonEvent($('div.Field[data-id="' + Response.ID + '"]').find('.RemoveButton'), AddFieldsID);
 
                 // Remove the field from add fields dropdown and redraw this dropdown.
@@ -260,7 +269,7 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
             });
 
             // Remove a label, div.Clear and div.Field elements from selected fields area.
-            $(this).closest('div.Field').prev('label').remove();
+            $(this).closest('div.Field').prev('div.label-wrapper').remove();
             $(this).closest('div.Field').next('div.Clear').remove();
             $(this).closest('div.Field').remove();
 

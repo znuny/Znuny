@@ -15,7 +15,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
-        my $Helper         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ACLObject      = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
         my $TicketObject   = $Kernel::OM->Get('Kernel::System::Ticket');
         my $TypeObject     = $Kernel::OM->Get('Kernel::System::Type');
@@ -24,31 +24,35 @@ $Selenium->RunTest(
         my $ServiceObject  = $Kernel::OM->Get('Kernel::System::Service');
         my $SLAObject      = $Kernel::OM->Get('Kernel::System::SLA');
         my $CacheObject    = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+        my $UtilObject     = $Kernel::OM->Get('Kernel::System::Util');
 
-        $Helper->ConfigSettingChange(
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
+
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckMXRecord',
             Value => 0,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Ticket::Service',
             Value => 1,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate()
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate()
             || die "Did not get test customer user";
 
         # Enable some fields in AgentTicketFreeText.
         for my $Field (qw(Type Priority Queue Service SLA)) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => "Ticket::Frontend::AgentTicketFreeText###$Field",
                 Value => 1,
@@ -118,11 +122,20 @@ $Selenium->RunTest(
         my @ServiceIDs;
         my @ServiceNames;
         for my $Count ( 1 .. 2 ) {
-            my $Name      = "Service$Count-$RandomID";
-            my $ServiceID = $ServiceObject->ServiceAdd(
+            my $Name = "Service$Count-$RandomID";
+
+            my %ServiceValues = (
                 Name    => $Name,
                 ValidID => 1,
                 UserID  => 1,
+            );
+            if ($IsITSMInstalled) {
+                $ServiceValues{TypeID}      = 1;
+                $ServiceValues{Criticality} = '3 normal';
+            }
+
+            my $ServiceID = $ServiceObject->ServiceAdd(
+                %ServiceValues,
             );
             $Self->True(
                 $ServiceID,
@@ -144,12 +157,20 @@ $Selenium->RunTest(
         my @SLAIDs;
         my @SLANames;
         for my $Count ( 1 .. 2 ) {
-            my $Name  = "SLA$Count-$RandomID";
-            my $SLAID = $SLAObject->SLAAdd(
+            my $Name = "SLA$Count-$RandomID";
+
+            my %SLAValues = (
                 ServiceIDs => \@ServiceIDs,
                 Name       => $Name,
                 ValidID    => 1,
                 UserID     => 1,
+            );
+            if ($IsITSMInstalled) {
+                $SLAValues{TypeID} = 1;
+            }
+
+            my $SLAID = $SLAObject->SLAAdd(
+                %SLAValues,
             );
             $Self->True(
                 $SLAID,
@@ -162,7 +183,7 @@ $Selenium->RunTest(
         # Create 2 ACLs:
         # 1. Disable all
         # 2. PossibleAdd appropriate attributes, Match "Frontend->Action->[RegExp]^Agent".
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TicketAcl',
             Value => {
@@ -220,7 +241,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -230,7 +251,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             {
@@ -365,6 +386,16 @@ $Selenium->RunTest(
 
         # Delete test services.
         for my $ServiceID (@ServiceIDs) {
+            if ($IsITSMInstalled) {
+                $Success = $DBObject->Do(
+                    SQL => "DELETE FROM service_preferences WHERE service_id = $ServiceID",
+                );
+                $Self->True(
+                    $Success,
+                    "Service preferences ID $ServiceID is deleted.",
+                );
+            }
+
             $Success = $DBObject->Do(
                 SQL  => "DELETE FROM service WHERE id = ?",
                 Bind => [ \$ServiceID ],

@@ -26,32 +26,37 @@ sub new {
 
     # global config hash for id dissolution
     $Self->{NameToID} = {
-        Title          => 'Title',
-        State          => 'StateID',
-        StateID        => 'StateID',
-        Priority       => 'PriorityID',
-        PriorityID     => 'PriorityID',
-        Lock           => 'LockID',
-        LockID         => 'LockID',
-        Queue          => 'QueueID',
-        QueueID        => 'QueueID',
-        Customer       => 'CustomerID',
-        CustomerID     => 'CustomerID',
-        CustomerNo     => 'CustomerID',
-        CustomerUserID => 'CustomerUserID',
-        Owner          => 'OwnerID',
-        OwnerID        => 'OwnerID',
-        Type           => 'TypeID',
-        TypeID         => 'TypeID',
-        SLA            => 'SLAID',
-        SLAID          => 'SLAID',
-        Service        => 'ServiceID',
-        ServiceID      => 'ServiceID',
-        Responsible    => 'ResponsibleID',
-        ResponsibleID  => 'ResponsibleID',
-        PendingTime    => 'PendingTime',
-        Article        => 'Article',
+        Title              => 'Title',
+        State              => 'StateID',
+        StateID            => 'StateID',
+        Priority           => 'PriorityID',
+        PriorityID         => 'PriorityID',
+        Lock               => 'LockID',
+        LockID             => 'LockID',
+        Queue              => 'QueueID',
+        QueueID            => 'QueueID',
+        Customer           => 'CustomerID',
+        CustomerID         => 'CustomerID',
+        CustomerNo         => 'CustomerID',
+        CustomerUserID     => 'CustomerUserID',
+        Owner              => 'OwnerID',
+        OwnerID            => 'OwnerID',
+        Type               => 'TypeID',
+        TypeID             => 'TypeID',
+        SLA                => 'SLAID',
+        SLAID              => 'SLAID',
+        Service            => 'ServiceID',
+        ServiceID          => 'ServiceID',
+        StandardTemplateID => 'StandardTemplateID',
+        Responsible        => 'ResponsibleID',
+        ResponsibleID      => 'ResponsibleID',
+        PendingTime        => 'PendingTime',
+        Article            => 'Article',
+        Attachments        => 'Attachments',
     };
+
+    $Self->{IsITSMIncidentProblemManagementInstalled}
+        = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
     return $Self;
 }
@@ -394,7 +399,7 @@ sub Run {
         );
     }
 
-    # if invalid process is detected on a ActivityDilog pop-up screen show an error message
+    # if invalid process is detected on an ActivityDialog pop-up screen show an error message
     elsif (
         $Self->{Subaction} eq 'DisplayActivityDialog'
         && !$FollowupProcessList->{$ProcessEntityID}
@@ -716,6 +721,45 @@ sub _RenderAjax {
                 %{ $Param{GetParam} },
             );
 
+            # check if priority needs to be recalculated
+            if (
+                $Self->{IsITSMIncidentProblemManagementInstalled}
+                && (
+                    $Param{GetParam}->{ElementChanged} eq 'ServiceID'
+                    || $Param{GetParam}->{ElementChanged} eq 'DynamicField_ITSMImpact'
+                )
+                && $Param{GetParam}->{ServiceID}
+                && $Param{GetParam}->{DynamicField_ITSMImpact}
+                )
+            {
+
+                my %Service = $Kernel::OM->Get('Kernel::System::Service')->ServiceGet(
+                    ServiceID => $Param{GetParam}->{ServiceID},
+                    UserID    => $Self->{UserID},
+                );
+
+                # calculate priority from the CIP matrix
+                my $PriorityIDFromImpact = $Kernel::OM->Get('Kernel::System::ITSMCIPAllocate')->PriorityAllocationGet(
+                    Criticality => $Service{Criticality},
+                    Impact      => $Param{GetParam}->{DynamicField_ITSMImpact},
+                );
+
+                # add Priority to the JSONCollector
+                push(
+                    @JSONCollector,
+                    {
+                        Name        => $Self->{NameToID}{$CurrentField},
+                        Data        => $Data,
+                        SelectedID  => $PriorityIDFromImpact,
+                        Translation => 1,
+                        Max         => 100,
+                    },
+                );
+                $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
+
+                next DIALOGFIELD;
+            }
+
             # add Priority to the JSONCollector
             push(
                 @JSONCollector,
@@ -804,6 +848,80 @@ sub _RenderAjax {
             );
             $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
         }
+        elsif (
+            $Self->{NameToID}{$CurrentField} eq 'Article'
+            && $Param{GetParam}->{ElementChanged} eq 'StandardTemplateID'
+            )
+        {
+            next DIALOGFIELD if $FieldsProcessed{ $Self->{NameToID}{$CurrentField} };
+
+            my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
+            my $StandardTemplateObject  = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+            my $StdAttachmentObject     = $Kernel::OM->Get('Kernel::System::StdAttachment');
+            my $UploadCacheObject       = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
+
+            my $StandardTemplateText;
+            my @TicketAttachments;
+
+            if ( IsPositiveInteger( $Param{GetParam}->{StandardTemplateID} ) ) {
+                my %StandardTemplate = $StandardTemplateObject->StandardTemplateGet(
+                    ID => $Param{GetParam}->{StandardTemplateID},
+                );
+
+                # remove pre-submitted attachments
+                $UploadCacheObject->FormIDRemove( FormID => $Self->{FormID} );
+
+                $StandardTemplateText = $TemplateGeneratorObject->_Replace(
+                    RichText => $LayoutObject->{BrowserRichText},
+                    Text     => $StandardTemplate{Template},
+                    Data     => {
+                        %{ $Param{GetParam} },
+                    },
+                    TicketData => {
+                        %{ $Param{GetParam} },
+                    },
+                    UserID => $Self->{UserID},
+                );
+
+                # add standard attachments to ticket
+                my %AllStdAttachments = $StdAttachmentObject->StdAttachmentStandardTemplateMemberList(
+                    StandardTemplateID => $Param{GetParam}->{StandardTemplateID},
+                );
+                for my $ID ( sort keys %AllStdAttachments ) {
+                    my %AttachmentsData = $StdAttachmentObject->StdAttachmentGet( ID => $ID );
+                    $UploadCacheObject->FormIDAddFile(
+                        FormID      => $Self->{FormID},
+                        Disposition => 'attachment',
+                        %AttachmentsData,
+                    );
+                }
+
+                @TicketAttachments = $UploadCacheObject->FormIDGetAllFilesMeta(
+                    FormID => $Self->{FormID},
+                );
+
+                for my $Attachment (@TicketAttachments) {
+                    $Attachment->{Filesize} = $LayoutObject->HumanReadableDataSize(
+                        Size => $Attachment->{Filesize},
+                    );
+                }
+            }
+
+            push(
+                @JSONCollector,
+                {
+                    Name => 'RichText',
+                    Data => $StandardTemplateText // '',
+                },
+                {
+                    Name     => 'TicketAttachments',
+                    Data     => \@TicketAttachments,
+                    KeepData => 1,
+                },
+            );
+
+            $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
+        }
     }
 
     my $JSON = $LayoutObject->BuildSelectionJSON( [@JSONCollector] );
@@ -882,7 +1000,7 @@ sub _GetParam {
     my $ActivityDialogEntityID = $ParamObject->GetParam(
         Param => 'ActivityDialogEntityID',
     );
-    my $ActivityEntityID;
+    my $ActivityEntityID = $ParamObject->GetParam( Param => 'ActivityEntityID' );
     my %ValuesGotten;
     my $Value;
 
@@ -1028,6 +1146,24 @@ sub _GetParam {
                 LayoutObject       => $LayoutObject,
             );
 
+            # set the criticality from the service
+            if (
+                $Self->{IsITSMIncidentProblemManagementInstalled}
+                && $DynamicFieldName eq 'ITSMCriticality'
+                && $ParamObject->GetParam( Param => 'ServiceID' )
+                )
+            {
+
+                # get service
+                my %Service = $Kernel::OM->Get('Kernel::System::Service')->ServiceGet(
+                    ServiceID => $ParamObject->GetParam( Param => 'ServiceID' ),
+                    UserID    => $Self->{UserID},
+                );
+
+                # set the criticality
+                $Value = $Service{Criticality};
+            }
+
             # If we got a submitted param, take it and next out
             if (
                 defined $Value
@@ -1082,6 +1218,14 @@ sub _GetParam {
             next DIALOGFIELD;
         }
 
+        # get attachment fields
+        if ( $CurrentField eq 'Attachments' ) {
+            @{ $GetParam{Attachments} } = $ParamObject->GetArray(
+                Param => 'Attachments',
+            );
+            next DIALOGFIELD;
+        }
+
         # get article fields
         if ( $CurrentField eq 'Article' ) {
 
@@ -1093,7 +1237,8 @@ sub _GetParam {
 
             $ValuesGotten{Article} = 1 if ( $GetParam{Subject} && $GetParam{Body} );
 
-            $GetParam{TimeUnits} = $ParamObject->GetParam( Param => 'TimeUnits' );
+            $GetParam{TimeUnits}          = $ParamObject->GetParam( Param => 'TimeUnits' );
+            $GetParam{StandardTemplateID} = $ParamObject->GetParam( Param => 'StandardTemplateID' );
         }
 
         if ( $CurrentField eq 'CustomerID' ) {
@@ -1548,6 +1693,11 @@ sub _OutputActivityDialog {
     # display process information
     if ( $Self->{IsMainWindow} ) {
 
+        # output SidebarColumn
+        $LayoutObject->Block(
+            Name => 'SidebarColumn',
+        );
+
         # get process data
         my $Process = $ProcessObject->ProcessGet(
             ProcessEntityID => $Param{ProcessEntityID},
@@ -1632,7 +1782,6 @@ sub _OutputActivityDialog {
                 Name => 'CancelLink',
             );
         }
-
     }
 
     $Output .= $LayoutObject->Output(
@@ -1643,6 +1792,7 @@ sub _OutputActivityDialog {
             Subaction              => 'StoreActivityDialog',
             TicketID               => $Ticket{TicketID} || '',
             LinkTicketID           => $Self->{LinkTicketID},
+            ActivityEntityID       => $ActivityActivityDialog->{Activity},
             ActivityDialogEntityID => $ActivityActivityDialog->{ActivityDialog},
             ProcessEntityID        => $Param{ProcessEntityID}
                 || $Ticket{
@@ -1700,8 +1850,8 @@ sub _OutputActivityDialog {
                 FieldName           => $DynamicFieldName,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 ErrorMessages       => \%ErrorMessages || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
@@ -1728,6 +1878,40 @@ sub _OutputActivityDialog {
 
         }
 
+        # render Attachments
+        elsif ( $CurrentField eq 'Attachments' && $TicketID ) {
+            next DIALOGFIELD if $RenderedFields{$CurrentField};
+
+            my $Response = $Self->_RenderAttachment(
+                ActivityDialogField => $ActivityDialog->{Fields}->{$CurrentField},
+                FieldName           => $CurrentField,
+                DescriptionShort    => $ActivityDialog->{Fields}->{$CurrentField}->{DescriptionShort},
+                DescriptionLong     => $ActivityDialog->{Fields}->{$CurrentField}->{DescriptionLong},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
+                FormID              => $Self->{FormID},
+                GetParam            => $Param{GetParam},
+                AJAXUpdatableFields => $AJAXUpdatableFields,
+            );
+
+            if ( !$Response->{Success} ) {
+
+                # does not show header and footer again
+                if ( $Self->{IsMainWindow} ) {
+                    return $LayoutObject->Error(
+                        Message => $Response->{Message},
+                    );
+                }
+
+                $LayoutObject->FatalError(
+                    Message => $Response->{Message},
+                );
+            }
+
+            $Output .= $Response->{HTML};
+            $RenderedFields{$CurrentField} = 1;
+        }
+
         # render State
         elsif ( $Self->{NameToID}->{$CurrentField} eq 'StateID' )
         {
@@ -1741,8 +1925,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1777,8 +1961,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1813,8 +1997,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1848,8 +2032,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1883,8 +2067,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1918,8 +2102,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1953,8 +2137,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1988,8 +2172,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -2023,8 +2207,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -2077,8 +2261,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
             );
@@ -2111,8 +2295,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
             );
@@ -2145,8 +2329,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 InformAgents        => $ActivityDialog->{Fields}->{Article}->{Config}->{InformAgents},
@@ -2183,8 +2367,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -2651,8 +2835,9 @@ sub _RenderTitle {
 sub _RenderArticle {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+    my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
     for my $Needed (qw(FormID Ticket)) {
         if ( !$Param{$Needed} ) {
@@ -2733,13 +2918,41 @@ sub _RenderArticle {
         Name             => 'Article',
         MandatoryClass   => '',
         ValidateRequired => '',
-        Subject          => $Param{GetParam}->{Subject},
-        Body             => $Param{GetParam}->{Body},
+        Subject          => $Param{GetParam}->{Subject} || $Param{ActivityDialogField}->{Config}->{Subject},
+        Body             => $Param{GetParam}->{Body} || $Param{ActivityDialogField}->{Config}->{Body},
         LabelSubject     => $Param{ActivityDialogField}->{Config}->{LabelSubject}
             || $LayoutObject->{LanguageObject}->Translate("Subject"),
         LabelBody => $Param{ActivityDialogField}->{Config}->{LabelBody}
             || $LayoutObject->{LanguageObject}->Translate("Text"),
         AttachmentList => $Param{AttachmentList},
+    );
+
+    $Data{Body} = $TemplateGeneratorObject->_Replace(
+        RichText => 1,
+        Text     => $Data{Body} || '',
+        Data     => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        TicketData => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        UserID => $Self->{UserID},
+    );
+
+    $Data{Subject} = $TemplateGeneratorObject->_Replace(
+        RichText => 0,                      # In this case rich-text support is not needed.
+        Text     => $Data{Subject} || '',
+        Data     => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        TicketData => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        UserID => $Self->{UserID},
     );
 
     # If field is required put in the necessary variables for
@@ -2846,33 +3059,16 @@ sub _RenderArticle {
         )
     {
 
-        if ( $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime') ) {
-
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelMandatory',
-                Data => \%Param,
-            );
-            $Param{TimeUnitsRequired} = 'Validate_Required';
+        $Param{TimeUnitsRequired} = 1;
+        if ( $Param{ActivityDialogField}->{Config}->{TimeUnits} == 2 ) {
+            $Param{TimeUnitsRequired} = 1;
         }
         elsif ( $Param{ActivityDialogField}->{Config}->{TimeUnits} == 1 ) {
-
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabel',
-                Data => \%Param,
-            );
-            $Param{TimeUnitsRequired} = '';
-        }
-        else {
-
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelMandatory',
-                Data => \%Param,
-            );
-            $Param{TimeUnitsRequired} = 'Validate_Required';
+            $Param{TimeUnitsRequired} = 0;
         }
 
         # Get TimeUnits value.
-        $Param{TimeUnits} = $Param{GetParam}{TimeUnits};
+        $Param{TimeUnits} = $Param{GetParam}->{TimeUnits};
 
         if ( !defined $Param{TimeUnits} && $Self->{ArticleID} ) {
             $Param{TimeUnits} = $Self->_GetTimeUnits(
@@ -2880,10 +3076,55 @@ sub _RenderArticle {
             );
         }
 
+        $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
+            %Param,
+        );
         $LayoutObject->Block(
             Name => 'TimeUnits',
             Data => \%Param,
         );
+    }
+
+    # show StandardTemplates
+    if ( IsArrayRefWithData( $Param{ActivityDialogField}->{Config}->{StandardTemplateID} ) ) {
+        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+
+        my %StandardTemplates = $StandardTemplateObject->StandardTemplateList(
+            Valid => 1,
+            Type  => 'ProcessManagement',
+        );
+
+        STANDARDTEMPLATEID:
+        for my $StandardTemplateID ( sort keys %StandardTemplates ) {
+            my $Exists
+                = grep { $StandardTemplateID eq $_ } @{ $Param{ActivityDialogField}->{Config}->{StandardTemplateID} };
+            next STANDARDTEMPLATEID if $Exists;
+
+            delete $StandardTemplates{$StandardTemplateID};
+        }
+
+        if (%StandardTemplates) {
+            $Param{StandardTemplateStrg} = $LayoutObject->BuildSelection(
+                Data         => \%StandardTemplates,
+                Name         => 'StandardTemplateID',
+                SelectedID   => $Param{GetParam}->{StandardTemplateID} || '',
+                Class        => 'Modernize',
+                PossibleNone => 1,
+                Sort         => 'AlphanumericValue',
+                Translation  => 1,
+                Max          => 200,
+            );
+
+            $LayoutObject->AddJSData(
+                Key   => 'StandardTemplateAutoFill',
+                Value => $Param{ActivityDialogField}->{Config}->{StandardTemplateAutoFill} || 0,
+            );
+
+            $LayoutObject->Block(
+                Name => 'StandardTemplate',
+                Data => \%Param,
+            );
+        }
     }
 
     return {
@@ -4191,6 +4432,103 @@ sub _RenderQueue {
     };
 }
 
+sub _RenderAttachment {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    NEEDED:
+    for my $Needed (qw(FormID ActivityDialogField)) {
+        next NEEDED if defined $Param{$Needed};
+        return {
+            Success => 0,
+            Message => $LayoutObject->{LanguageObject}
+                ->Translate( 'Parameter %s is missing in %s.', $Needed, '_RenderAttachment' ),
+        };
+    }
+
+    if ( !IsHashRefWithData( $Param{ActivityDialogField} ) ) {
+        return {
+            Success => 0,
+            Message => $LayoutObject->{LanguageObject}
+                ->Translate( 'Parameter %s is missing in %s.', 'ActivityDialogField', '_RenderAttachment' ),
+        };
+    }
+
+    my $AttachmentList = $Self->_GetAttachments(
+        %{ $Param{GetParam} }
+    );
+
+    my %Data = (
+        Label            => 'Attachments',
+        FieldID          => 'Attachments',
+        FormID           => $Param{FormID},
+        MandatoryClass   => '',
+        ValidateRequired => '',
+    );
+
+    if (
+        $Param{ActivityDialogField}->{Display}
+        && $Param{ActivityDialogField}->{Display} == 2
+        )
+    {
+        $Data{ValidateRequired} = 'Validate_Required';
+        $Data{MandatoryClass}   = 'Mandatory';
+    }
+
+    my $AttachmentsDynamicFieldName = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment');
+
+    my $AttachmentsParam = $Param{GetParam}->{ 'DynamicField_' . $AttachmentsDynamicFieldName };
+    my @SelectedAttachments;
+    if ($AttachmentsParam) {
+        @SelectedAttachments = split( ',', $AttachmentsParam );
+    }
+
+    $Data{Content} = $LayoutObject->BuildSelection(
+        Data        => $AttachmentList,
+        Name        => 'Attachments',
+        Translation => 0,
+        SelectedID  => \@SelectedAttachments,
+        Multiple    => 1,
+        Class       => "Modernize $Data{ValidateRequired}",
+    );
+
+    $LayoutObject->Block(
+        Name => $Param{ActivityDialogField}->{LayoutBlock} // 'rw:Attachment',
+        Data => \%Data,
+    );
+
+    if ( $Data{MandatoryClass} && $Data{MandatoryClass} ne '' ) {
+        $LayoutObject->Block(
+            Name => 'LabelSpan',
+        );
+    }
+
+    $Param{DescriptionShort} //= 'Attachments to be propagated to a subticket on creation.';
+
+    $LayoutObject->Block(
+        Name => $Param{ActivityDialogField}->{LayoutBlock} // 'rw:Attachment:DescriptionShort',
+        Data => {
+            DescriptionShort => $Param{DescriptionShort},
+        },
+    );
+
+    if ( $Param{DescriptionLong} ) {
+        $LayoutObject->Block(
+            Name => 'rw:Attachment:DescriptionLong',
+            Data => {
+                DescriptionLong => $Param{DescriptionLong},
+            },
+        );
+    }
+
+    return {
+        Success => 1,
+        HTML    => $LayoutObject->Output( TemplateFile => 'ProcessManagement/Attachment' ),
+    };
+}
+
 sub _RenderState {
     my ( $Self, %Param ) = @_;
 
@@ -4494,8 +4832,9 @@ sub _StoreActivityDialog {
 
     my %TicketParam;
 
-    # get layout object
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+    my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
     my $ActivityDialogEntityID = $Param{GetParam}->{ActivityDialogEntityID};
     if ( !$ActivityDialogEntityID ) {
@@ -4690,6 +5029,8 @@ sub _StoreActivityDialog {
             # skip if we've already checked ID or Name
             next DIALOGFIELD if $CheckedFields{ $Self->{NameToID}->{$CurrentField} };
 
+            next DIALOGFIELD if $CurrentField eq 'Attachments';
+
             my $Result = $Self->_CheckField(
                 Field => $Self->{NameToID}->{$CurrentField},
                 %{ $ActivityDialog->{Fields}{$CurrentField} },
@@ -4829,6 +5170,20 @@ sub _StoreActivityDialog {
                     $TicketParam{Title} = $Param{GetParam}->{Subject};
                 }
             }
+
+            $TicketParam{Title} = $TemplateGeneratorObject->_Replace(
+                RichText => 0,                           # In this case rich-text support is not needed.
+                Text     => $TicketParam{Title} || '',
+                Data     => {
+                    %{ $Param{GetParam} },
+                    %TicketParam,
+                },
+                TicketData => {
+                    %{ $Param{GetParam} },
+                    %TicketParam,
+                },
+                UserID => $Self->{UserID},
+            );
 
             # create a new ticket
             $TicketID = $TicketObject->TicketCreate(%TicketParam);
@@ -5018,9 +5373,6 @@ sub _StoreActivityDialog {
             );
         }
 
-        # get config object
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
         $ActivityEntityID = $Ticket{
             'DynamicField_'
                 . $ConfigObject->Get('Process::DynamicFieldProcessManagementActivityID')
@@ -5146,6 +5498,47 @@ sub _StoreActivityDialog {
                 );
             }
         }
+        elsif ( $CurrentField eq 'Attachments' ) {
+            if (
+                IsArrayRefWithData( $Param{GetParam}->{Attachments} )
+                || $Param{GetParam}->{Attachments} =~ m{\:\:}
+                )
+            {
+                my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+                my $AttachmentsDynamicFieldName
+                    = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment');
+
+                my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+                    Name => $AttachmentsDynamicFieldName,
+                );
+
+                next DIALOGFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+                my $Value;
+                if ( IsArrayRefWithData( $Param{GetParam}->{Attachments} ) ) {
+                    $Value = join ',', @{ $Param{GetParam}->{Attachments} };
+                }
+                else {
+                    $Value = $Param{GetParam}->{Attachments} // '';
+                }
+
+                my $Success = $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    ObjectID           => $TicketID,
+                    Value              => $Value,
+                    UserID             => $Self->{UserID},
+                );
+                next DIALOGFIELD if $Success;
+
+                $LayoutObject->FatalError(
+                    Message => $LayoutObject->{LanguageObject}->Translate(
+                        'Could not set attachments for ticket with ID %s in activity dialog "%s"!',
+                        $TicketID,
+                        $ActivityDialogEntityID,
+                    ),
+                );
+            }
+        }
         elsif ( $CurrentField eq 'PendingTime' ) {
 
             # This Value is just set if Status was on a Pending state
@@ -5248,6 +5641,32 @@ sub _StoreActivityDialog {
                     $HistoryType    = 'PhoneCallAgent';
                     $HistoryComment = '%%';
                 }
+
+                $Param{GetParam}->{Body} = $TemplateGeneratorObject->_Replace(
+                    RichText => 1,
+                    Text     => $Param{GetParam}->{Body} || '',
+                    Data     => {
+                        %{ $Param{GetParam} },
+                    },
+                    TicketData => {
+                        %{ $Param{GetParam} },
+                        TicketID => $TicketID,
+                    },
+                    UserID => $Self->{UserID},
+                );
+
+                $Param{GetParam}->{Subject} = $TemplateGeneratorObject->_Replace(
+                    RichText => 0,                                   # In this case rich-text support is not needed.
+                    Text     => $Param{GetParam}->{Subject} || '',
+                    Data     => {
+                        %{ $Param{GetParam} },
+                    },
+                    TicketData => {
+                        %{ $Param{GetParam} },
+                        TicketID => $TicketID,
+                    },
+                    UserID => $Self->{UserID},
+                );
 
                 my $From = "\"$Self->{UserFullname}\" <$Self->{UserEmail}>";
                 $ArticleID = $ArticleBackendObject->ArticleCreate(
@@ -5370,6 +5789,7 @@ sub _StoreActivityDialog {
             }
             else {
                 next DIALOGFIELD if $StoredFields{ $Self->{NameToID}->{$CurrentField} };
+                next DIALOGFIELD if $CurrentField eq 'Attachments';
 
                 my $TicketFieldSetSub = $CurrentField;
                 $TicketFieldSetSub =~ s{ID$}{}xms;
@@ -5564,8 +5984,10 @@ sub _DisplayProcessList {
     $Param{Errors}->{ProcessEntityIDInvalid} = ' ServerError'
         if ( $Param{ProcessEntityID} && !$Param{ProcessList}->{ $Param{ProcessEntityID} } );
 
-    # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $Config = $ConfigObject->Get('Ticket::Frontend::AgentTicketProcess');
 
     $Param{ProcessList} = $LayoutObject->BuildSelection(
         Class        => 'Modernize Validate_Required' . ( $Param{Errors}->{ProcessEntityIDInvalid} || ' ' ),
@@ -5574,7 +5996,8 @@ sub _DisplayProcessList {
         SelectedID   => $Param{ProcessEntityID},
         PossibleNone => 1,
         Sort         => 'AlphanumericValue',
-        Translation  => 0,
+        Translation  => 1,
+        TreeView     => $Config->{ProcessListTreeView} || 0,
         AutoComplete => 'off',
     );
 
@@ -5946,10 +6369,12 @@ sub _LookupValue {
 sub _GetResponsibles {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # get users
     my %ShownUsers;
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -6034,7 +6459,16 @@ sub _GetResponsibles {
         UserID        => $Self->{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return \%ShownUsers;
 }
@@ -6042,10 +6476,12 @@ sub _GetResponsibles {
 sub _GetOwners {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # get users
     my %ShownUsers;
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -6130,7 +6566,16 @@ sub _GetOwners {
         UserID        => $Self->{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return \%ShownUsers;
 }
@@ -6275,7 +6720,7 @@ sub _GetQueues {
 
             if ( $ConfigObject->Get('Ticket::Frontend::NewQueueSelectionType') ne 'Queue' )
             {
-                my %SystemAddressData = $Self->{SystemAddress}->SystemAddressGet(
+                my %SystemAddressData = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressGet(
                     ID => $Queues{$QueueID},
                 );
                 $String =~ s/<Realname>/$SystemAddressData{Realname}/g;
@@ -6286,6 +6731,68 @@ sub _GetQueues {
     }
 
     return \%NewQueues;
+}
+
+sub _GetAttachments {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+    my @Articles = $ArticleObject->ArticleList(
+        TicketID => $Param{TicketID},
+    );
+
+    my %ArticleFileData;
+
+    return \%ArticleFileData if !@Articles;
+
+    my $FormatString = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment::FormatString')
+        // 'A#%1$d: %2$s';
+
+    my $TranslatedObjectType      = $LayoutObject->{LanguageObject}->Translate('Article');
+    my $TranslatedAttachmentLabel = $LayoutObject->{LanguageObject}->Translate('Attachment');
+
+    ARTICLE:
+    for my $Article (@Articles) {
+        my %Index = $ArticleObject->ArticleAttachmentIndex(
+            TicketID         => $Param{TicketID},
+            ArticleID        => $Article->{ArticleID},
+            ExcludePlainText => 1,
+            ExcludeHTMLBody  => 1,
+            ExcludeInline    => 0,
+        );
+
+        next ARTICLE if !%Index;
+
+        for my $FileID ( sort keys %Index ) {
+
+            # SelectionText results in something like: "#2: testfile.pdf"
+            # $FormatString = '#%1$d: %2$s'
+            my $SelectionText = sprintf $FormatString, $Article->{ArticleNumber}, $Index{$FileID}->{Filename},
+                $TranslatedObjectType, $TranslatedAttachmentLabel;
+
+            # Create a stringified structure to use data as key in HTML selection.
+            # This info is needed to get the correct attachment from the backend.
+            #
+            # Stringified structure
+            # 'ObjectType=Article;ObjectID=1;ID=5'
+            # 'ObjectType=Article;ObjectID=1;ID=5,ObjectType=Article;ObjectID=3;ID=2'
+            #
+            # Parsed stringified structure
+            # Data = {
+            #     ObjectType => 'Article',
+            #     ObjectID   => '1',
+            #     ID         => '4',
+            # }
+
+            my $Key = 'ObjectType=Article;ObjectID=' . $Article->{ArticleID} . ';ID=' . $FileID;
+            $ArticleFileData{$Key} = $SelectionText;
+        }
+    }
+
+    return \%ArticleFileData;
 }
 
 sub _GetStates {

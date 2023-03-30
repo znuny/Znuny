@@ -39,9 +39,9 @@ sub new {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message  => "Can't write $Self->{DataDir}! try: \$OTRS_HOME/bin/otrs.SetPermissions.pl!",
+            Message  => "Can't write $Self->{DataDir}! try: \$OTRS_HOME/bin/znuny.SetPermissions.pl!",
         );
-        die "Can't write $Self->{DataDir}! try: \$OTRS_HOME/bin/otrs.SetPermissions.pl!";
+        die "Can't write $Self->{DataDir}! try: \$OTRS_HOME/bin/znuny.SetPermissions.pl!";
     }
 
     # config (not used right now)
@@ -171,7 +171,7 @@ sub Delete {
     if ( !$Param{BackendKey} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Need $_!",
+            Message  => "Need BackendKey!",
         );
         return;
     }
@@ -202,7 +202,7 @@ sub _BackendKeyParse {
     if ( !$Param{BackendKey} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Need $_!",
+            Message  => "Need BackendKey!",
         );
         return;
     }
@@ -225,7 +225,7 @@ sub _SplitDir {
     if ( !$Param{Filename} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Need $_!",
+            Message  => "Need Filename!",
         );
         return;
     }

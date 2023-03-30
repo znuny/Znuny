@@ -117,7 +117,7 @@ sub Post {
                 # replace the keyword components
                 for my $Key ( sort keys %KW ) {
                     $KeywordLinkEncode = $LayoutObject->LinkEncode( $KW{$Key} );
-                    $URL =~ s/<MATCH$_>/$KeywordLinkEncode/g;
+                    $URL =~ s/<MATCH$Key>/$KeywordLinkEncode/g;
                 }
 
                 # find out if it is an internal image or an external image

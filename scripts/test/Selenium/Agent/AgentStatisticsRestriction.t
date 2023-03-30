@@ -18,12 +18,18 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $DBObject              = $Kernel::OM->Get('Kernel::System::DB');
+        my $StatsObject           = $Kernel::OM->Get('Kernel::System::Stats');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $TicketObject          = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $MainObject            = $Kernel::OM->Get('Kernel::System::Main');
 
         # Create test Customer.
-        my $RandomID        = $Helper->GetRandomID();
+        my $RandomID        = $HelperObject->GetRandomID();
         my $Customer        = "Company$RandomID";
-        my $KnownCustomerID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $KnownCustomerID = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $Customer,
             CustomerCompanyName    => $Customer . ' Inc',
             CustomerCompanyStreet  => 'Some Street',
@@ -40,7 +46,6 @@ $Selenium->RunTest(
             "CustomerID $KnownCustomerID is created.",
         );
 
-        my $TicketObject      = $Kernel::OM->Get('Kernel::System::Ticket');
         my $UnknownCustomerID = "UnknownCustomer$RandomID";
 
         # Create two test Tickets.
@@ -65,14 +70,12 @@ $Selenium->RunTest(
         }
 
         # Import test sample statistics.
-        my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
-        my $StatisticContent = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
-            Location => $ConfigObject->Get('Home')
+        my $StatisticContent = $MainObject->FileRead(
+            Location => $Selenium->{Home}
                 . '/scripts/test/sample/Stats/Stats.TestTicketList.en.xml',
         );
 
-        my $StatsObject = $Kernel::OM->Get('Kernel::System::Stats');
-        my $StatID      = $StatsObject->Import(
+        my $StatID = $StatsObject->Import(
             Content => $StatisticContent,
             UserID  => 1,
         );
@@ -82,7 +85,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', 'stats' ],
         ) || die "Did not get test user";
 
@@ -110,7 +113,7 @@ $Selenium->RunTest(
         for my $Test (@Tests) {
 
             # Change 'IncludeUnknownTicketCustomers' config.
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Ticket::IncludeUnknownTicketCustomers',
                 Value => $Test->{ConfigValue},
@@ -156,7 +159,7 @@ $Selenium->RunTest(
         }
 
         # Delete statistic.
-        my $Success = $Kernel::OM->Get('Kernel::System::Stats')->StatsDelete(
+        my $Success = $StatsObject->StatsDelete(
             StatID => $StatID,
             UserID => 1,
         );
@@ -178,7 +181,7 @@ $Selenium->RunTest(
         }
 
         # Delete created test entities
-        $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        $Success = $DBObject->Do(
             SQL  => "DELETE FROM customer_company WHERE customer_id = ?",
             Bind => [ \$KnownCustomerID ],
         );

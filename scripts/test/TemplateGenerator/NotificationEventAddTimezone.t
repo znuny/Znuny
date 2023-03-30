@@ -13,16 +13,6 @@ use warnings;
 use utf8;
 use vars (qw($Self));
 
-my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
-my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
-my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
-my $CustomerUserObject      = $Kernel::OM->Get('Kernel::System::CustomerUser');
-my $UserObject              = $Kernel::OM->Get('Kernel::System::User');
-my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
-my $GroupObject             = $Kernel::OM->Get('Kernel::System::Group');
-my $MailQueueObj            = $Kernel::OM->Get('Kernel::System::MailQueue');
-my $TestEmailObject         = $Kernel::OM->Get('Kernel::System::Email::Test');
-
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase  => 1,
@@ -32,7 +22,18 @@ $Kernel::OM->ObjectParamAdd(
         CheckEmailAddresses => 0,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
+my $CustomerUserObject      = $Kernel::OM->Get('Kernel::System::CustomerUser');
+my $UserObject              = $Kernel::OM->Get('Kernel::System::User');
+my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
+my $GroupObject             = $Kernel::OM->Get('Kernel::System::Group');
+my $MailQueueObj            = $Kernel::OM->Get('Kernel::System::MailQueue');
+my $TestEmailObject         = $Kernel::OM->Get('Kernel::System::Email::Test');
+my $QueueObject             = $Kernel::OM->Get('Kernel::System::Queue');
 
 # Ensure mail queue is empty before tests start.
 $MailQueueObj->Delete();
@@ -89,16 +90,16 @@ $Self->IsDeeply(
     'Test backend is empty after initial cleanup',
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # Create test customer user.
-my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 my %TestCustomerUserData  = $CustomerUserObject->CustomerUserDataGet(
     User => $TestCustomerUserLogin,
 );
 
 # Create test user.
-my $TestUserLogin = $Helper->TestUserCreate();
+my $TestUserLogin = $HelperObject->TestUserCreate();
 my %TestUserData  = $UserObject->GetUserData(
     User => $TestUserLogin,
 );
@@ -162,7 +163,7 @@ $Self->True(
 );
 
 # Create test queue with escalations.
-my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+my $QueueID = $QueueObject->QueueAdd(
     Name                => "TestQueue$RandomID",
     ValidID             => 1,
     GroupID             => $GroupID,
@@ -184,7 +185,7 @@ $Self->True(
 );
 
 # Set fixed time.
-$Helper->FixedTimeSet(
+$HelperObject->FixedTimeSet(
     $Kernel::OM->Create(
         'Kernel::System::DateTime',
         ObjectParams => {

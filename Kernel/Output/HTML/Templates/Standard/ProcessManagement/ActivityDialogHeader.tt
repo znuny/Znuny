@@ -8,7 +8,7 @@
 # --
 
 <div class="LayoutFixedSidebar SidebarLast [% Data.MainBoxClass | html %]">
-
+[% RenderBlockStart("SidebarColumn") %]
     <div class="SidebarColumn">
 [% RenderBlockStart("ProcessInfoSidebar") %]
         <div class="WidgetSimple">
@@ -17,29 +17,32 @@
             </div>
             <div class="Content">
                 <fieldset class="TableLike FixedLabelSmall">
-                    <label>[% Translate("Process") | html %]:</label>
-                    <p class="Value FixedValueSmall" title="[% Translate(Data.Process) | html %]">[% Translate(Data.Process) | html %]</p>
-                    <div class="Clear"></div>
+                    <span>
+                        <label>[% Translate("Process") | html %]:</label>
+                        <p class="Value FixedValueSmall" title="[% Translate(Data.Process) | html %]">[% Translate(Data.Process) | html %]</p>
+                    </span>
                 </fieldset>
 
                 <fieldset class="TableLike FixedLabelSmall">
-                    <label>[% Translate("Activity") | html %]:</label>
-                    <p class="Value FixedValueSmall" title="[% Translate(Data.Activity) | html %]">[% Translate(Data.Activity) | html %]</p>
-                    <div class="Clear"></div>
+                    <span>
+                        <label>[% Translate("Activity") | html %]:</label>
+                        <p class="Value FixedValueSmall" title="[% Translate(Data.Activity) | html %]">[% Translate(Data.Activity) | html %]</p>
+                    </span>
 
-                    <label>[% Translate("Dialog") | html %]:</label>
-                    <p class="Value FixedValueSmall" title="[% Data.ActivityDialog | html %]">[% Data.ActivityDialog | html %]</p>
-                    <div class="Clear"></div>
+                    <span>
+                        <label>[% Translate("Dialog") | html %]:</label>
+                        <p class="Value FixedValueSmall" title="[% Data.ActivityDialog | html %]">[% Data.ActivityDialog | html %]</p>
+                    </span>
 [% RenderBlockStart("ProcessInfoSidebarActivityDialogDesc") %]
-                    <label>[% Translate("Description") | html %]:</label>
-                    <p class="Value FixedValueSmall" title="[% Translate(Data.ActivityDialogDescription) | html %]">[% Translate(Data.ActivityDialogDescription) | html %]</p>
-                    <div class="Clear"></div>
+                        <span>
+                            <label>[% Translate("Description") | html %]:</label>
+                            <p class="Value FixedValueSmall" title="[% Translate(Data.ActivityDialogDescription) | html %]">[% Translate(Data.ActivityDialogDescription) | html %]</p>
+                        </span>
 [% RenderBlockEnd("ProcessInfoSidebarActivityDialogDesc") %]
                 </fieldset>
             </div>
         </div>
 [% RenderBlockEnd("ProcessInfoSidebar") %]
-
 [% RenderBlockStart("LongDescriptionSidebar") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -47,11 +50,11 @@
             </div>
             <div class="Content">
                 <p class="Value FixedValueSmall DescriptionLong">[% Translate(Data.Description) | html %]</p>
-                <div class="Clear"></div>
             </div>
         </div>
 [% RenderBlockEnd("LongDescriptionSidebar") %]
     </div>
+[% RenderBlockEnd("SidebarColumn") %]
 
     <div class="ContentColumn">
         <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="[% Data.FormName %]" id="[% Data.FormID %]" class="Validate PreventMultipleSubmits">
@@ -60,6 +63,7 @@
             <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
             <input type="hidden" name="LinkTicketID" value="[% Data.LinkTicketID | html %]"/>
             <input type="hidden" name="ProcessEntityID" value="[% Data.ProcessEntityID | html %]"/>
+            <input type="hidden" name="ActivityEntityID" value="[% Data.ActivityEntityID | html %]"/>
             <input type="hidden" name="ActivityDialogEntityID" value="[% Data.ActivityDialogEntityID | html %]"/>
             <input type="hidden" name="Expand" id="Expand" value=""/>
             <input type="hidden" name="IsMainWindow" id="IsMainWindow" value="[% Data.IsMainWindow | html %]"/>
@@ -71,28 +75,29 @@
                     <h1>
                         [% Data.Name | html %]
 [% RenderBlockStart("DescriptionShort") %]
-                        - [% Data.DescriptionShort | html %]
+                            - [% Data.DescriptionShort | html %]
 [% RenderBlockEnd("DescriptionShort") %]
                     </h1>
 [% RenderBlockStart("DescriptionLong") %]
-                    <p class="DescriptionLong">
-                        [% Data.DescriptionLong | html %]
-                    </p>
+                        <p class="DescriptionLong">
+                            [% Data.DescriptionLong | html %]
+                        </p>
 [% RenderBlockEnd("DescriptionLong") %]
 [% RenderBlockStart("CancelLink") %]
-                    <p>
-                        <a class="CancelClosePopup" href="#">[% Translate("Cancel & close") | html %]</a>
-                    </p>
+                        <div>
+                            <a class="CancelClosePopup btn-main btn-cancel-ghost btn-width-md" href="#">[% Translate("Cancel") | html %]</a>
+                        </div>
 [% RenderBlockEnd("CancelLink") %]
 [% RenderBlockStart("PropertiesLock") %]
-                    <p>
+                    <div>
                         [% Translate("The ticket has been locked") | html %].
-                        <a class="UndoClosePopup" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID %][% IF Data.PreviousOwner %];PreviousOwner=[% Data.PreviousOwner %][% END %];[% Env("ChallengeTokenParam") | html %]">
-                            [% Translate("Undo & close") | html %]
+                        <a class="UndoClosePopup btn-main btn-cancel-ghost btn-width-md" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID %][% IF Data.PreviousOwner %];PreviousOwner=[% Data.PreviousOwner %][% END %];[% Env("ChallengeTokenParam") | html %]">
+                            [% Translate("Cancel") | html %]
                         </a>
-                    </p>
+                    </div>
 [% RenderBlockEnd("PropertiesLock") %]
                 </div>
 [% RenderBlockEnd("Header") %]
+
                 <div class="Content">
-                    <fieldset class="TableLike">
+                    <fieldset class="TableLike card card-item">

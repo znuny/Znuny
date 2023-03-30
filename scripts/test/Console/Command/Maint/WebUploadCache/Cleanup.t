@@ -25,7 +25,7 @@ my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::W
 
 my ( $Result, $ExitCode );
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 for my $Module (qw(DB FS)) {
 
@@ -105,10 +105,10 @@ for my $Module (qw(DB FS)) {
     );
 
     # set fixed time
-    $Helper->FixedTimeSet();
+    $HelperObject->FixedTimeSet();
 
     # wait 24h+1s to expire upload cache
-    $Helper->FixedTimeAddSeconds(86401);
+    $HelperObject->FixedTimeAddSeconds(86401);
 
     # delete upload cache - should remove cached form
     $ExitCode = $CommandObject->Execute();
@@ -137,7 +137,7 @@ for my $Module (qw(DB FS)) {
     );
 
     # unset fixed time
-    $Helper->FixedTimeUnset();
+    $HelperObject->FixedTimeUnset();
 
 }
 

@@ -43,6 +43,16 @@ my @Tests = (
         Name => 'Safety - simple'
     },
     {
+        Input => '<a href = " javascript : alert(
+            \'Hi!\'
+        )" >Some Text</a>',
+        Result => {
+            Output  => '<a href = "" >Some Text</a>',
+            Replace => 1,
+        },
+        Name => 'Safety - simple'
+    },
+    {
         Input =>
             '<a href="https://www.yoururl.tld/sub/online-assessment/index.php" target="_blank">https://www.yoururl.tld/sub/online-assessment/index.php</a>',
         Result => {
@@ -163,6 +173,19 @@ You should be able to continue reading these lessons, however.
         Result => {
             Output => '<center>
 <IMG SRC="">
+</center>',
+            Replace => 1,
+        },
+        Name => 'Safety - img tag'
+    },
+    {
+        Input => '<center>
+<IMG SRC=" javascript:    alert(
+ \'XSS\'    );" >
+</center>',
+        Result => {
+            Output => '<center>
+<IMG SRC="" >
 </center>',
             Replace => 1,
         },
@@ -312,6 +335,20 @@ You should be able to continue reading these lessons, however.
     },
     {
         Input => '<center>
+<TABLE BACKGROUND="   javascript:    alert(
+    \'XSS\'
+    ) " >
+</center>',
+        Result => {
+            Output => '<center>
+<TABLE BACKGROUND="" >
+</center>',
+            Replace => 1,
+        },
+        Name => 'Safety - background'
+    },
+    {
+        Input => '<center>
 <SCRIPT a=">" SRC="http://ha.ckers.org/xss.js"></SCRIPT>
 </center>',
         Result => {
@@ -377,11 +414,25 @@ PT
     },
     {
         Input => '<center>
-  <body style="background: #fff; color: #000;" onmouseover     ="var ga = document.createElement(\'script\'); ga.type = \'text/javascript\'; ga.src = (\'https:\' == document.location.protocol ? \'https://\' : \'http://\') + \'ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js\'; document.body.appendChild(ga); setTimeout(function() { jQuery(\'body\').append(jQuery(\'<div />\').attr(\'id\', \'hack-me\').css(\'display\', \'none\')); jQuery(\'#hack-me\').load(\'/otrs/index.pl?Action=AgentPreferences\', null, function() { jQuery.ajax({url: \'/otrs/index.pl\', type: \'POST\', data: ({Action: \'AgentPreferences\', ChallengeToken: jQuery(\'input[name=ChallengeToken]:first\', \'#hack-me\').val(), Group: \'Language\', \'Subaction\': \'Update\', UserLanguage: \'zh_CN\'})}); }); }, 500);">
+<A
+ HREF="   javascript:   document.location = \'http://www.example.com/\'">XSS</A>
 </center>',
         Result => {
             Output => '<center>
-  <body style="background: #fff; color: #000;" ga = document.createElement(\'script\'); ga.type = \'text/javascript\'; ga.src = (\'https:\' == document.location.protocol ? \'https://\' : \'http://\') + \'ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js\'; document.body.appendChild(ga); setTimeout(function() { jQuery(\'body\').append(jQuery(\'<div />\').attr(\'id\', \'hack-me\').css(\'display\', \'none\')); jQuery(\'#hack-me\').load(\'/otrs/index.pl?Action=AgentPreferences\', null, function() { jQuery.ajax({url: \'/otrs/index.pl\', type: \'POST\', data: ({Action: \'AgentPreferences\', ChallengeToken: jQuery(\'input[name=ChallengeToken]:first\', \'#hack-me\').val(), Group: \'Language\', \'Subaction\': \'Update\', UserLanguage: \'zh_CN\'})}); }); }, 500);">
+<A
+ HREF="">XSS</A>
+</center>',
+            Replace => 1,
+        },
+        Name => 'Safety - script'
+    },
+    {
+        Input => '<center>
+  <body style="background: #fff; color: #000;" onmouseover     ="var ga = document.createElement(\'script\'); ga.type = \'text/javascript\'; ga.src = (\'https:\' == document.location.protocol ? \'https://\' : \'http://\') + \'ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js\'; document.body.appendChild(ga); setTimeout(function() { jQuery(\'body\').append(jQuery(\'<div />\').attr(\'id\', \'hack-me\').css(\'display\', \'none\')); jQuery(\'#hack-me\').load(\'/znuny/index.pl?Action=AgentPreferences\', null, function() { jQuery.ajax({url: \'/znuny/index.pl\', type: \'POST\', data: ({Action: \'AgentPreferences\', ChallengeToken: jQuery(\'input[name=ChallengeToken]:first\', \'#hack-me\').val(), Group: \'Language\', \'Subaction\': \'Update\', UserLanguage: \'zh_CN\'})}); }); }, 500);">
+</center>',
+        Result => {
+            Output => '<center>
+  <body style="background: #fff; color: #000;" ga = document.createElement(\'script\'); ga.type = \'text/javascript\'; ga.src = (\'https:\' == document.location.protocol ? \'https://\' : \'http://\') + \'ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js\'; document.body.appendChild(ga); setTimeout(function() { jQuery(\'body\').append(jQuery(\'<div />\').attr(\'id\', \'hack-me\').css(\'display\', \'none\')); jQuery(\'#hack-me\').load(\'/znuny/index.pl?Action=AgentPreferences\', null, function() { jQuery.ajax({url: \'/znuny/index.pl\', type: \'POST\', data: ({Action: \'AgentPreferences\', ChallengeToken: jQuery(\'input[name=ChallengeToken]:first\', \'#hack-me\').val(), Group: \'Language\', \'Subaction\': \'Update\', UserLanguage: \'zh_CN\'})}); }); }, 500);">
 </center>',
             Replace => 1,
         },
@@ -546,7 +597,9 @@ EOF
     {
         Input => <<EOF,
 <img src="/img1.png"/>
-<iframe src='  javascript:alert("XSS Exploit");'></iframe>
+<iframe src='  javascript:alert(
+    "XSS Exploit"
+);'></iframe>
 <img src="/img2.png"/>
 EOF
         Result => {

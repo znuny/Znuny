@@ -39,8 +39,6 @@ sub Param {
     my ( $Self, %Param ) = @_;
 
     my $PreferencesKey   = $Self->{ConfigItem}->{PrefKey};
-    my $TimeZones        = Kernel::System::DateTime->TimeZoneList();
-    my %TimeZones        = map { $_ => $_ } sort @{$TimeZones};
     my $SelectedTimeZone = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => $PreferencesKey );
 
     # Use stored time zone only if it's valid. It can happen that user preferences store an old-style offset which is
@@ -54,6 +52,13 @@ sub Param {
     }
 
     $SelectedTimeZone ||= Kernel::System::DateTime->UserDefaultTimeZoneGet();
+
+    my $TimeZones = Kernel::System::DateTime->TimeZoneList(
+
+        # Ensure that a selected obsolete (but still valid) time zone shows up in the selection.
+        IncludeTimeZone => $SelectedTimeZone,
+    );
+    my %TimeZones = map { $_ => $_ } sort @{$TimeZones};
 
     my @Params = ();
     push(

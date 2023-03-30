@@ -18,10 +18,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+        my $CacheObject      = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test web service.
         my $WebserviceID = $WebserviceObject->WebserviceAdd(
@@ -46,7 +48,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -56,9 +58,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-        my $ScriptAlias  = $ConfigObject->Get('ScriptAlias');
-        my $Home         = $ConfigObject->Get('Home');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminGenericInterfaceWebservice screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericInterfaceWebservice");
@@ -418,11 +418,11 @@ $Selenium->RunTest(
             ProxyHost            => 'http://proxy_hostname:8080',
             ProxyUser            => 'SSLUser' . $RandomID,
             ProxyPassword        => 'SSLPass' . $RandomID,
-            SSLCertificate       => "$Home/scripts/test/sample/SSL/certificate.pem",
-            SSLKey               => "$Home/scripts/test/sample/SSL/certificate.key.pem",
+            SSLCertificate       => "$Selenium->{Home}/scripts/test/sample/SSL/certificate.pem",
+            SSLKey               => "$Selenium->{Home}/scripts/test/sample/SSL/certificate.key.pem",
             SSLPassword          => 'SSLPass' . $RandomID,
-            SSLCAFile            => "$Home/scripts/test/sample/SSL/ca-certificate.pem",
-            SSLCADir             => "$Home/scripts/test/sample/SSL/",
+            SSLCAFile            => "$Selenium->{Home}/scripts/test/sample/SSL/ca-certificate.pem",
+            SSLCADir             => "$Selenium->{Home}/scripts/test/sample/SSL/",
 
         );
         for my $InputField ( sort keys %RequesterInputData ) {
@@ -465,7 +465,7 @@ $Selenium->RunTest(
         );
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Webservice' );
+        $CacheObject->CleanUp( Type => 'Webservice' );
 
     }
 

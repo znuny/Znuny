@@ -19,11 +19,11 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Set fixed time to create user in pst.
 # Then when it is set to invalid, it have been invalid for more than a month.
-$Helper->FixedTimeSet(
+$HelperObject->FixedTimeSet(
     $Kernel::OM->Create(
         'Kernel::System::DateTime',
         ObjectParams => {
@@ -44,13 +44,13 @@ $Kernel::OM->Get('Kernel::Config')->Set(
 );
 
 # Enable ticket watcher feature.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Watcher',
     Value => 1,
 );
 
-my ( $UserName1, $UserID1 ) = $Helper->TestUserCreate();
+my ( $UserName1, $UserID1 ) = $HelperObject->TestUserCreate();
 
 my $TicketID1 = $TicketObject->TicketCreate(
     Title        => 'A test for ticket unlocking',
@@ -117,9 +117,9 @@ $Self->True(
 
 # Set current time in order to check InvalidUserCleanup console command.
 # Created test user will be invalid for more than a month.
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
-my ( $UserName2, $UserID2 ) = $Helper->TestUserCreate();
+my ( $UserName2, $UserID2 ) = $HelperObject->TestUserCreate();
 my $TicketID2 = $TicketObject->TicketCreate(
     Title        => 'A test for ticket unlocking',
     Queue        => 'Raw',

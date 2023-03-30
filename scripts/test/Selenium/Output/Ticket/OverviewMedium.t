@@ -18,9 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
         my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Get sort attributes config params.
         my %SortOverview = (
@@ -30,11 +34,11 @@ $Selenium->RunTest(
         );
 
         # Defines from which ticket attributes the agent can select the result order.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TicketOverviewMenuSort###SortAttributes',
             Value => \%SortOverview,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TicketOverviewMenuSort###SortAttributes',
             Value => \%SortOverview,
@@ -42,14 +46,14 @@ $Selenium->RunTest(
 
         # Override FirstnameLastnameOrder setting to check if it is taken into account
         #   (see bug#12554 for more information).
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'FirstnameLastnameOrder',
             Value => 3,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -64,8 +68,8 @@ $Selenium->RunTest(
         );
 
         # Create test queue.
-        my $QueueName = 'Queue' . $Helper->GetRandomID();
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueName = 'Queue' . $HelperObject->GetRandomID();
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => 1,
@@ -116,7 +120,7 @@ $Selenium->RunTest(
         );
 
         # Go to queue ticket overview.
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketQueue;QueueID=$QueueID;View=");
 
         # Switch to medium view.
@@ -211,15 +215,13 @@ $Selenium->RunTest(
         }
 
         # Delete created test queue.
-        $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        $Success = $DBObject->Do(
             SQL => "DELETE FROM queue WHERE id = $QueueID",
         );
         $Self->True(
             $Success,
             "Delete queue - $QueueID",
         );
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure cache is correct.
         for my $Cache (qw( Ticket Queue )) {

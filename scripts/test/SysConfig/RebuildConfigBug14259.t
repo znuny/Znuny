@@ -14,7 +14,7 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -42,7 +42,7 @@ for my $ChildIndex ( 1 .. $ChildCount ) {
         $Kernel::OM->ObjectsDiscard();
 
         # Execute console command.
-        `$^X bin/otrs.Console.pl Maint::Config::Rebuild --time 180`;
+        `$^X bin/znuny.Console.pl Maint::Config::Rebuild --time 180`;
         my $ExitCode = $? >> 8;
 
         $Kernel::OM->Get('Kernel::System::Cache')->Set(

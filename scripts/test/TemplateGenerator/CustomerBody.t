@@ -24,11 +24,11 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
 my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my $MailQueueSend = sub {
 
@@ -64,19 +64,19 @@ my $GenerateEmail = sub {
 };
 
 # do not check email addresses
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
 
 # do not really send emails
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'SendmailModule',
     Value => 'Kernel::System::Email::Test',
 );
 
 # change the notification events to not transaction (it means send the notification right away)
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'Ticket::EventModulePost###7000-NotificationEvent',
     Value => {
         Module      => 'Kernel::System::Ticket::Event::NotificationEvent',
@@ -89,7 +89,7 @@ $Helper->ConfigSettingChange(
 $MailQueueObject->Delete();
 
 # create test user
-my $TestUserLogin = $Helper->TestUserCreate(
+my $TestUserLogin = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users' ],
 );
 

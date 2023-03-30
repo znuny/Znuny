@@ -34,9 +34,12 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject      = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+    my $ParamObject           = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LayoutObject          = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $WebserviceObject      = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+    my $LogObject             = $Kernel::OM->Get('Kernel::System::Log');
+    my $JWTObject             = $Kernel::OM->Get('Kernel::System::JSONWebToken');
+    my $X509CertificateObject = $Kernel::OM->Get('Kernel::System::X509Certificate');
 
     my $WebserviceID      = $ParamObject->GetParam( Param => 'WebserviceID' )      || '';
     my $CommunicationType = $ParamObject->GetParam( Param => 'CommunicationType' ) || '';
@@ -118,6 +121,12 @@ sub Run {
     # To store the clean new configuration locally.
     my $TransportConfig;
 
+    my @PossibleParserBackends = qw(JSON);
+
+    # This can be used in the future, when additional parser backends will be added
+    # which need parameters.
+    my %ParserBackendParameters;
+
     # Get requester specific settings.
     if ( $CommunicationType eq 'Requester' ) {
 
@@ -129,6 +138,13 @@ sub Run {
             $Error{ $Needed . 'ServerError' }        = 'ServerError';
             $Error{ $Needed . 'ServerErrorMessage' } = Translatable('This field is required');
         }
+
+        # optional
+        $TransportConfig->{SSLNoHostnameVerification} = $GetParam->{SSLNoHostnameVerification} || 0;
+        $TransportConfig->{ContentType}               = $GetParam->{ContentType};
+
+        my $JWTObjectIsSupported             = $JWTObject->IsSupported();
+        my $X509CertificateObjectIsSupported = $X509CertificateObject->IsSupported();
 
         # Set error for non integer content.
         if ( $GetParam->{Timeout} && !IsInteger( $GetParam->{Timeout} ) ) {
@@ -146,6 +162,144 @@ sub Run {
             NEEDED:
             for my $Needed (qw( BasicAuthUser BasicAuthPassword )) {
                 next NEEDED if defined $GetParam->{$Needed} && length $GetParam->{$Needed};
+
+                $Error{ $Needed . 'ServerError' }        = 'ServerError';
+                $Error{ $Needed . 'ServerErrorMessage' } = Translatable('This field is required');
+            }
+        }
+
+        # JWT
+        elsif (
+            $GetParam->{AuthType}
+            && $GetParam->{AuthType} eq 'JWT'
+            && $JWTObjectIsSupported
+            )
+        {
+            for my $ParamName (
+                qw(
+                AuthType
+                JWTAuthKeyFilePath JWTAuthKeyFilePassword JWTAuthAlgorithm
+                JWTAuthCertificateFilePath JWTAuthTTL JWTAuthPayload JWTAuthAdditionalHeaderData
+                )
+                )
+            {
+                $TransportConfig->{Authentication}->{$ParamName} = $GetParam->{$ParamName};
+            }
+            NEEDED:
+            for my $Needed (qw( JWTAuthKeyFilePath JWTAuthAlgorithm JWTAuthTTL JWTAuthPayload )) {
+                next NEEDED if defined $GetParam->{$Needed} && length $GetParam->{$Needed};
+
+                $Error{ $Needed . 'ServerError' }        = 'ServerError';
+                $Error{ $Needed . 'ServerErrorMessage' } = Translatable('This field is required');
+            }
+
+            #
+            # Check correct content of fields
+            #
+
+            # Check that a JWT can be generated
+            my $PasswordTestJWT = $JWTObject->Encode(
+                Payload     => {},
+                Algorithm   => 'RS512',
+                KeyFilePath => $GetParam->{JWTAuthKeyFilePath},
+                KeyPassword => $GetParam->{JWTAuthKeyFilePassword},    # might be undef or empty
+            );
+            if ( !$PasswordTestJWT ) {
+                $Error{JWTAuthKeyFilePathServerError} = 'ServerError';
+                $Error{JWTAuthKeyFilePathServerErrorMessage}
+                    = Translatable('Invalid key file and/or password (if needed, see below).');
+
+                if (
+                    defined $GetParam->{JWTAuthKeyFilePassword}
+                    && length $GetParam->{JWTAuthKeyFilePassword}
+                    )
+                {
+                    $Error{JWTAuthKeyFilePasswordServerError} = 'ServerError';
+                    $Error{JWTAuthKeyFilePasswordServerErrorMessage}
+                        = Translatable('Invalid password and/or key file (see above).');
+                }
+            }
+
+            # Check certificate file and set flags for template if invalid or expired.
+            if (
+                $GetParam->{JWTAuthCertificateFilePath}
+                && $X509CertificateObjectIsSupported
+                )
+            {
+                my $X509Certificate = $X509CertificateObject->Parse(
+                    FilePath => $GetParam->{JWTAuthCertificateFilePath},
+                );
+
+                if ( IsHashRefWithData($X509Certificate) ) {
+                    if ( $X509Certificate->{IsExpired} ) {
+                        $Error{JWTAuthCertificateFilePathServerError}        = 'ServerError';
+                        $Error{JWTAuthCertificateFilePathServerErrorMessage} = Translatable('Certificate is expired.');
+                    }
+                }
+                else {
+                    $Error{JWTAuthCertificateFilePathServerError} = 'ServerError';
+                    $Error{JWTAuthCertificateFilePathServerErrorMessage}
+                        = Translatable('Certificate file could not be parsed.');
+                }
+            }
+
+            # TTL must be an integer
+            if ( defined $GetParam->{JWTAuthTTL} && $GetParam->{JWTAuthTTL} !~ m{\A[1-9]\d+\z} ) {
+                $Error{JWTAuthTTLServerError} = 'ServerError';
+                $Error{JWTAuthTTLServerErrorMessage}
+                    = Translatable('Please enter a time in seconds (at least 10 seconds).');
+            }
+
+            # Payload and additional header data must be in correct form (Key1=Value1;Key2=Value2 etc.).
+            FIELDNAME:
+            for my $FieldName (qw(JWTAuthPayload JWTAuthAdditionalHeaderData)) {
+                next FIELDNAME if !IsStringWithData( $GetParam->{$FieldName} );
+
+                my %FieldConfig;
+
+                my @KeyValuePairs = split /\s*;\s*/, $GetParam->{$FieldName};
+
+                KEYVALUEPAIR:
+                for my $KeyValuePair (@KeyValuePairs) {
+                    my @KeyValueParts = split /\s*=\s*/, $KeyValuePair;
+                    if ( @KeyValueParts == 2 ) {
+
+                        # Store as hash instead of string.
+                        $FieldConfig{ $KeyValueParts[0] } = $KeyValueParts[1];
+                        next KEYVALUEPAIR;
+                    }
+
+                    $Error{ $FieldName . 'ServerError' } = 'ServerError';
+                    $Error{ $FieldName . 'ServerErrorMessage' }
+                        = Translatable('Please enter data in expected form (see explanation of field).');
+
+                    next FIELDNAME;
+                }
+
+                # Only set config to hash if there were no errors.
+                # If an error occurs, the entered string will be kept to be displayed again.
+                $TransportConfig->{Authentication}->{$FieldName} = \%FieldConfig;
+            }
+        }
+
+        # OAuth2 token config
+        elsif (
+            $GetParam->{AuthType}
+            && $GetParam->{AuthType} eq 'OAuth2Token'
+            )
+        {
+            for my $ParamName (
+                qw(
+                AuthType
+                OAuth2TokenConfigID
+                )
+                )
+            {
+                $TransportConfig->{Authentication}->{$ParamName} = $GetParam->{$ParamName};
+            }
+            NEEDED:
+            for my $Needed (qw( OAuth2TokenConfigID  )) {
+                next NEEDED if IsStringWithData( $GetParam->{$Needed} );
 
                 $Error{ $Needed . 'ServerError' }        = 'ServerError';
                 $Error{ $Needed . 'ServerErrorMessage' } = Translatable('This field is required');
@@ -259,15 +413,46 @@ sub Run {
                 my @RequestMethod = $ParamObject->GetArray(
                     Param => 'RequestMethod' . $CurrentOperation,
                 );
-                next OPERATION if !scalar @RequestMethod;
 
                 $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{RequestMethod} = \@RequestMethod;
+
+                my $ParserBackend = $ParamObject->GetParam( Param => 'ParserBackend' . $CurrentOperation );
+
+                if ( !$ParserBackend ) {
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerError' }        = 'ServerError';
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerErrorMessage' } = 'This field is required';
+                    next OPERATION;
+                }
+
+                if ( !grep { $ParserBackend eq $_ } @PossibleParserBackends ) {
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerError' }        = 'ServerError';
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerErrorMessage' } = 'Invalid selection';
+                    next OPERATION;
+                }
+                $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{ParserBackend} = $ParserBackend;
+
+                next OPERATION if !IsArrayRefWithData( $ParserBackendParameters{$ParserBackend} );
+
+                my @PossibleParserBackendParameters = @{ $ParserBackendParameters{$ParserBackend} };
+
+                BACKENDPARAM:
+                for my $CurrentPossibleBackendParameter (@PossibleParserBackendParameters) {
+
+                    my $CurrentValue = $ParamObject->GetParam(
+                        Param => 'ParserBackendParameter' . $CurrentPossibleBackendParameter . $CurrentOperation
+                    );
+
+                    next BACKENDPARAM if !defined $CurrentValue;
+
+                    $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{ParserBackendParameter}
+                        ->{$CurrentPossibleBackendParameter} = $CurrentValue;
+                }
             }
         }
-
-        # Get additional headers.
-        $TransportConfig->{AdditionalHeaders} = $Self->_GetAdditionalHeaders();
     }
+
+    # Get additional headers.
+    $TransportConfig->{AdditionalHeaders} = $Self->_GetAdditionalHeaders();
 
     # Set new configuration.
     $WebserviceData->{Config}->{$CommunicationType}->{Transport}->{Config} = $TransportConfig;
@@ -316,7 +501,21 @@ sub Run {
 sub _ShowEdit {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
+    my $JWTObject               = $Kernel::OM->Get('Kernel::System::JSONWebToken');
+    my $X509CertificateObject   = $Kernel::OM->Get('Kernel::System::X509Certificate');
+    my $OAuth2TokenConfigObject = $Kernel::OM->Get('Kernel::System::OAuth2TokenConfig');
+    my $ValidObject             = $Kernel::OM->Get('Kernel::System::Valid');
+
+    my @ValidIDs = $ValidObject->ValidIDsGet();
+    my $ValidID  = shift @ValidIDs;
+
+    my $JWTObjectIsSupported = $JWTObject->IsSupported();
+    $Param{JWTObjectIsSupported} = $JWTObjectIsSupported;
+
+    my $X509CertificateObjectIsSupported = $X509CertificateObject->IsSupported();
+    $Param{X509CertificateObjectIsSupported} = $X509CertificateObjectIsSupported;
 
     my $Output = $LayoutObject->Header();
     $Output .= $LayoutObject->NavigationBar();
@@ -335,9 +534,34 @@ sub _ShowEdit {
     {
         $Param{$ParamName} = $TransportConfig->{$ParamName};
     }
-    for my $ParamName (qw( AuthType BasicAuthUser BasicAuthPassword )) {
+    for my $ParamName (
+        qw(
+        AuthType
+
+        BasicAuthUser BasicAuthPassword
+
+        JWTAuthKeyFilePath JWTAuthKeyFilePassword JWTAuthAlgorithm
+        JWTAuthCertificateFilePath JWTAuthTTL JWTAuthPayload JWTAuthAdditionalHeaderData
+
+        OAuth2TokenConfigID
+        )
+        )
+    {
         $Param{$ParamName} = $TransportConfig->{Authentication}->{$ParamName};
     }
+
+    # Turn stored hash with JWT payload and additional headers into string for editing.
+    PARAMNAME:
+    for my $ParamName (qw(JWTAuthPayload JWTAuthAdditionalHeaderData)) {
+        next PARAMNAME if !IsHashRefWithData( $TransportConfig->{Authentication}->{$ParamName} );
+
+        $Param{$ParamName} = '';
+        for my $Key ( sort keys %{ $TransportConfig->{Authentication}->{$ParamName} } ) {
+            my $Value = $TransportConfig->{Authentication}->{$ParamName}->{$Key} // '';
+            $Param{$ParamName} .= "$Key=$Value;";
+        }
+    }
+
     for my $ParamName (qw( UseSSL SSLCertificate SSLKey SSLPassword SSLCAFile SSLCADir )) {
         $Param{$ParamName} = $TransportConfig->{SSL}->{$ParamName};
     }
@@ -345,10 +569,32 @@ sub _ShowEdit {
         $Param{$ParamName} = $TransportConfig->{Proxy}->{$ParamName};
     }
 
+    $Param{SSLNoHostnameVerification} = $TransportConfig->{SSLNoHostnameVerification};
+    $Param{ContentType}               = $TransportConfig->{ContentType};
+
     my @PossibleRequestMethods = qw(GET POST PUT PATCH DELETE HEAD OPTIONS CONNECT TRACE);
+    my @PossibleParserBackends = qw(JSON);
+
+    # This can be used in the future, when additional parser backends will be added
+    # which need parameters.
+    my %ParserBackendParameters;
 
     # Check if communication type is requester.
     if ( $Param{CommunicationType} eq 'Requester' ) {
+
+        # create ContentType select
+        $Param{ContentTypeStrg} = $LayoutObject->BuildSelection(
+            Data          => [ 'JSON', 'FORM', 'XML' ],
+            Name          => 'ContentType',
+            SelectedValue => $Param{ContentType} // '-',
+            PossibleNone  => 1,
+            Sort          => 'AlphanumericValue',
+            Class         => 'Modernize',
+        );
+
+        if ( $Param{SSLNoHostnameVerification} ) {
+            $Param{SSLNoHostnameVerificationChecked} = 'checked="checked"';
+        }
 
         # create default command types select
         $Param{DefaultCommandStrg} = $LayoutObject->BuildSelection(
@@ -369,22 +615,111 @@ sub _ShowEdit {
         );
 
         # Create Authentication types select.
+        my %AuthTypes = (
+            BasicAuth   => 'BasicAuth',
+            OAuth2Token => 'OAuth2 token',
+        );
+        if ($JWTObjectIsSupported) {
+            $AuthTypes{JWT} = 'JWT';
+        }
+
         $Param{AuthenticationStrg} = $LayoutObject->BuildSelection(
-            Data          => ['BasicAuth'],
-            Name          => 'AuthType',
-            SelectedValue => $Param{AuthType} || '-',
-            PossibleNone  => 1,
-            Sort          => 'AlphanumericValue',
-            Class         => 'Modernize',
+            Data         => \%AuthTypes,
+            Name         => 'AuthType',
+            SelectedID   => $Param{AuthType} || '-',
+            PossibleNone => 1,
+            Sort         => 'AlphanumericValue',
+            Class        => 'Modernize',
+            Translation  => 1,
         );
 
         # Hide and disable authentication methods if they are not selected.
         $Param{BasicAuthHidden} = 'Hidden';
         if ( $Param{AuthType} && $Param{AuthType} eq 'BasicAuth' ) {
             $Param{BasicAuthHidden}                   = '';
-            $Param{BasicAuthUserServerError}          = 'Validate_Required';
+            $Param{BasicAuthUserValidateRequired}     = 'Validate_Required';
             $Param{BasicAuthPasswordValidateRequired} = 'Validate_Required';
         }
+
+        if ($JWTObjectIsSupported) {
+
+            # JWT algorithm selection
+            my @JWTAlgorithms = qw(RS256 RS384 RS512);
+            $Param{JWTAuthAlgorithmStrg} = $LayoutObject->BuildSelection(
+                Data          => \@JWTAlgorithms,
+                Name          => 'JWTAuthAlgorithm',
+                SelectedValue => $Param{JWTAuthAlgorithm},
+                PossibleNone  => 0,
+                Sort          => 'AlphanumericValue',
+                Class         => 'Modernize',
+            );
+
+            # Toggle visibility of JWT authentication options.
+            $Param{JWTAuthHidden} = 'Hidden';
+            if ( $Param{AuthType} && $Param{AuthType} eq 'JWT' ) {
+                $Param{JWTAuthHidden}                      = '';
+                $Param{JWTAuthKeyFilePathValidateRequired} = 'Validate_Required';
+                $Param{JWTAuthAlgorithmValidateRequired}   = 'Validate_Required';
+                $Param{JWTAuthTTLValidateRequired}         = 'Validate_Required';
+                $Param{JWTAuthPayloadValidateRequired}     = 'Validate_Required';
+            }
+
+            # Check that a JWT can be generated
+            if ( $Param{JWTAuthKeyFilePath} ) {
+                my $PasswordTestJWT = $JWTObject->Encode(
+                    Payload     => {},
+                    Algorithm   => 'RS512',
+                    KeyFilePath => $Param{JWTAuthKeyFilePath},
+                    KeyPassword => $Param{JWTAuthKeyFilePassword},    # might be undef or empty
+                );
+                if ( !$PasswordTestJWT ) {
+                    $Param{JWTAuthKeyFilePossibleError} = 1;
+
+                    if (
+                        defined $Param{JWTAuthKeyFilePassword}
+                        && length $Param{JWTAuthKeyFilePassword}
+                        )
+                    {
+                        $Param{JWTAuthKeyFilePasswordPossibleError} = 1;
+                    }
+                }
+            }
+
+            # Check certificate file and set flags for template if invalid or expired.
+            if (
+                $Param{JWTAuthCertificateFilePath}
+                && $X509CertificateObjectIsSupported
+                )
+            {
+                my $X509Certificate = $X509CertificateObject->Parse(
+                    FilePath => $Param{JWTAuthCertificateFilePath},
+                );
+
+                if ( IsHashRefWithData($X509Certificate) ) {
+                    $Param{JWTAuthCertificateFileIsExpired} = $X509Certificate->{IsExpired};
+                }
+                else {
+                    $Param{JWTAuthCertificateFileParseError} = 1;
+                }
+            }
+        }
+
+        # OAuth2 token config selection
+        my @OAuth2TokenConfigs = $OAuth2TokenConfigObject->DataListGet(
+            UserID => $Self->{UserID},
+        );
+        my %OAuthTokenConfigSelection = map { $_->{ID} => $_->{Name} }
+            grep { $_->{ValidID} == $ValidID }
+            @OAuth2TokenConfigs;
+
+        $Param{OAuth2TokenConfigIDStrg} = $LayoutObject->BuildSelection(
+            Data         => \%OAuthTokenConfigSelection,
+            Name         => 'OAuth2TokenConfigID',
+            SelectedID   => $Param{OAuth2TokenConfigID} || '-',
+            PossibleNone => 1,
+            Sort         => 'AlphanumericValue',
+            Class        => 'Modernize',
+        );
 
         # Create use Proxy select.
         $Param{UseProxyStrg} = $LayoutObject->BuildSelection(
@@ -414,8 +749,7 @@ sub _ShowEdit {
 
         # Hide and disable Proxy options if they are not selected.
         $Param{ProxyHidden} = 'Hidden';
-        if ( $Param{UseProxy} && $Param{UseProxy} eq 'Yes' )
-        {
+        if ( $Param{UseProxy} && $Param{UseProxy} eq 'Yes' ) {
             $Param{ProxyHidden} = '';
         }
 
@@ -434,8 +768,7 @@ sub _ShowEdit {
 
         # Hide and disable SSL options if they are not selected.
         $Param{SSLHidden} = 'Hidden';
-        if ( $Param{UseSSL} && $Param{UseSSL} eq 'Yes' )
-        {
+        if ( $Param{UseSSL} && $Param{UseSSL} eq 'Yes' ) {
             $Param{SSLHidden} = '';
         }
 
@@ -479,6 +812,7 @@ sub _ShowEdit {
         my $Operations = $Param{WebserviceData}->{Config}->{ $Param{CommunicationType} }->{Operation};
         if ( IsHashRefWithData($Operations) ) {
 
+            OPERATION:
             for my $CurrentOperation ( sort keys %{$Operations} ) {
 
                 my $RequestMethodStrg = $LayoutObject->BuildSelection(
@@ -492,12 +826,23 @@ sub _ShowEdit {
                     Class        => 'Modernize',
                 );
 
+                my $ParserBackendStrg = $LayoutObject->BuildSelection(
+                    Data          => \@PossibleParserBackends,
+                    Name          => 'ParserBackend' . $CurrentOperation,
+                    SelectedValue => $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{ParserBackend}
+                        || 'JSON',
+                    PossibleNone => 0,
+                    Sort         => 'AlphanumericValue',
+                    Class        => 'Modernize',
+                );
+
                 $LayoutObject->Block(
                     Name => 'RouteOperationMapping',
                     Data => {
                         Operation         => $CurrentOperation,
                         Route             => $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{Route},
                         RequestMethodStrg => $RequestMethodStrg,
+                        ParserBackendStrg => $ParserBackendStrg,
                         ServerError => $Param{ 'RouteOperationMapping' . $CurrentOperation . 'ServerError' } || '',
                         ServerErrorMessage => $Param{
                             'RouteOperationMapping'
@@ -521,40 +866,40 @@ sub _ShowEdit {
             Translation  => 1,
             Class        => 'Modernize',
         );
-
-        $LayoutObject->Block(
-            Name => 'AdditionalHeaders',
-            Data => {
-                %Param,
-            },
-        );
-
-        # Output the possible values and errors within (if any).
-        my $ValueCounter = 1;
-        for my $Key ( sort keys %{ $Param{AdditionalHeaders} || {} } ) {
-            $LayoutObject->Block(
-                Name => 'ValueRow',
-                Data => {
-                    Key          => $Key,
-                    ValueCounter => $ValueCounter,
-                    Value        => $Param{AdditionalHeaders}->{$Key},
-                },
-            );
-
-            $ValueCounter++;
-        }
-
-        # Create the possible values template.
-        $LayoutObject->Block(
-            Name => 'ValueTemplate',
-            Data => {
-                %Param,
-            },
-        );
-
-        # Set value counter.
-        $Param{ValueCounter} = $ValueCounter;
     }
+
+    $LayoutObject->Block(
+        Name => 'AdditionalHeaders',
+        Data => {
+            %Param,
+        },
+    );
+
+    # Output the possible values and errors within (if any).
+    my $ValueCounter = 1;
+    for my $Key ( sort keys %{ $Param{AdditionalHeaders} || {} } ) {
+        $LayoutObject->Block(
+            Name => 'ValueRow',
+            Data => {
+                Key          => $Key,
+                ValueCounter => $ValueCounter,
+                Value        => $Param{AdditionalHeaders}->{$Key},
+            },
+        );
+
+        $ValueCounter++;
+    }
+
+    # Create the possible values template.
+    $LayoutObject->Block(
+        Name => 'ValueTemplate',
+        Data => {
+            %Param,
+        },
+    );
+
+    # Set value counter.
+    $Param{ValueCounter} = $ValueCounter;
 
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AdminGenericInterfaceTransportHTTPREST',
@@ -579,6 +924,10 @@ sub _GetParams {
         AuthType BasicAuthUser BasicAuthPassword
         UseProxy ProxyHost ProxyUser ProxyPassword ProxyExclude
         UseSSL SSLCertificate SSLKey SSLPassword SSLCAFile SSLCADir
+        SSLNoHostnameVerification ContentType
+        JWTAuthKeyFilePath JWTAuthKeyFilePassword JWTAuthAlgorithm
+        JWTAuthCertificateFilePath JWTAuthTTL JWTAuthPayload JWTAuthAdditionalHeaderData
+        OAuth2TokenConfigID
         )
         )
     {

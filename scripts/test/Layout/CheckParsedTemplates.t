@@ -23,10 +23,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Unregister all notification modules.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 0,
     Key   => 'Frontend::NotifyModule',
 );

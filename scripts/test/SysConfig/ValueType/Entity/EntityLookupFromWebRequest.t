@@ -27,6 +27,23 @@ my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $RandomID = $HelperObject->GetRandomID();
 
 # Create new entities
+my $DynamicFieldID = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldAdd(
+    Name       => 'DynamicField' . $RandomID,
+    Label      => 'DynamicField' . $RandomID,
+    FieldOrder => 1,
+    FieldType  => 'Text',
+    ObjectType => 'Ticket',
+    Config     => {},
+    ValidID    => 1,
+    UserID     => 1,
+);
+
+$Self->IsNot(
+    $DynamicFieldID,
+    undef,
+    "DynamicFieldAdd() for dynamic field DynamicField$RandomID - ID $DynamicFieldID",
+);
+
 my $PriorityID = $Kernel::OM->Get('Kernel::System::Priority')->PriorityAdd(
     Name    => $RandomID,
     ValidID => 1,
@@ -35,7 +52,7 @@ my $PriorityID = $Kernel::OM->Get('Kernel::System::Priority')->PriorityAdd(
 $Self->IsNot(
     $PriorityID,
     undef,
-    "PriorityAdd() for Priority $RandomID",
+    "PriorityAdd() for priority $RandomID - ID $PriorityID",
 );
 
 my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
@@ -51,7 +68,7 @@ my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
 $Self->IsNot(
     $QueueID,
     undef,
-    "QueueAdd() for Queue $RandomID",
+    "QueueAdd() for queue $RandomID - ID $QueueID",
 );
 
 my $StateID = $Kernel::OM->Get('Kernel::System::State')->StateAdd(
@@ -64,7 +81,7 @@ my $StateID = $Kernel::OM->Get('Kernel::System::State')->StateAdd(
 $Self->IsNot(
     $StateID,
     undef,
-    "StateAdd() for State $RandomID",
+    "StateAdd() for state $RandomID - ID $StateID",
 );
 
 my $TypeID = $Kernel::OM->Get('Kernel::System::Type')->TypeAdd(
@@ -75,81 +92,202 @@ my $TypeID = $Kernel::OM->Get('Kernel::System::Type')->TypeAdd(
 $Self->IsNot(
     $TypeID,
     undef,
-    "TypeAdd() for Type $RandomID",
+    "TypeAdd() for type $RandomID - ID $TypeID",
+);
+
+my $SystemAddressID = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressAdd(
+    Name     => $RandomID,
+    Realname => $RandomID . '@znuny.com',
+    ValidID  => 1,
+    QueueID  => 1,
+    Comment  => $RandomID,
+    UserID   => 1,
+);
+
+$Self->IsNot(
+    $SystemAddressID,
+    undef,
+    "SystemAddressAdd() for system address ID $RandomID \@znuny.com - ID $SystemAddressID",
+);
+
+my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserAdd(
+    UserFirstname => 'Mr',
+    UserLastname  => 'Znuny',
+    UserLogin     => $RandomID . 'znuny',
+    UserEmail     => $RandomID . '@znuny.com',
+    ValidID       => 1,
+    ChangeUserID  => 1,
+);
+
+$Self->IsNot(
+    $UserID,
+    undef,
+    "UserAdd() for user $RandomID znuny - ID $UserID",
+);
+
+my $ServiceID = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+    Name    => $RandomID,
+    ValidID => 1,
+    UserID  => 1,
+);
+
+$Self->IsNot(
+    $ServiceID,
+    undef,
+    "ServiceAdd() for service $RandomID - ID $ServiceID",
+);
+
+my $SLAID = $Kernel::OM->Get('Kernel::System::SLA')->SLAAdd(
+    Name    => $RandomID,
+    ValidID => 1,
+    UserID  => 1,
+);
+
+$Self->IsNot(
+    $SLAID,
+    undef,
+    "SLAAdd() for SLA $RandomID - ID $SLAID",
 );
 
 my @Tests = (
+
+    # false
     {
-        Name        => 'Missing EntityType',
+        Name        => 'Missing entity type',
         QueryString => "Action=AdminQueue;Subaction=Change;QueueID=$QueueID",
         EntityType  => undef,
         Success     => 0,
     },
     {
-        Name          => 'Missing QueueID',
+        Name          => 'Missing queue ID',
         QueryString   => "Action=AdminQueue;Subaction=Change",
         EntityType    => 'Queue',
         Success       => 1,
         ExpectedValue => undef,
     },
     {
-        Name          => 'Wrong EntityType',
+        Name          => 'Wrong entity type',
         QueryString   => "Action=AdminQueue;Subaction=Change;QueueID=$QueueID",
         EntityType    => 'Type',
         Success       => 1,
         ExpectedValue => undef,
     },
     {
-        Name          => 'Wrong Queue EntityType',
+        Name          => 'Wrong dynamic field entity type',
+        QueryString   => "Action=AdminDynamicField;Subaction=Change;ID=$DynamicFieldID" . '1',
+        EntityType    => 'DynamicField',
+        Success       => 1,
+        ExpectedValue => undef,
+    },
+    {
+        Name          => 'Wrong queue entity type',
         QueryString   => "Action=AdminQueue;Subaction=Change;QueueID=$QueueID" . '1',
         EntityType    => 'Queue',
         Success       => 1,
         ExpectedValue => undef,
     },
     {
-        Name          => 'Wrong Priority EntityType',
+        Name          => 'Wrong priority entity type',
         QueryString   => "Action=AdminPriority;Subaction=Change;PriorityID=$PriorityID" . '1',
         EntityType    => 'Priority',
         Success       => 1,
         ExpectedValue => undef,
     },
     {
-        Name          => 'Wrong State EntityType',
+        Name          => 'Wrong service entity type',
+        QueryString   => "Action=AdminService;Subaction=Change;ID=$ServiceID" . '1',
+        EntityType    => 'Service',
+        Success       => 1,
+        ExpectedValue => '',
+    },
+    {
+        Name          => 'Wrong SLA entity type',
+        QueryString   => "Action=AdminSLA;Subaction=Change;ID=$SLAID" . '1',
+        EntityType    => 'SLA',
+        Success       => 1,
+        ExpectedValue => '',
+    },
+    {
+        Name          => 'Wrong state entity type',
         QueryString   => "Action=AdminState;Subaction=Change;ID=$StateID" . '1',
         EntityType    => 'State',
         Success       => 1,
         ExpectedValue => undef,
     },
     {
-        Name          => 'Wrong Type EntityType',
+        Name          => 'Wrong system address entity type',
+        QueryString   => "Action=AdminSystemAddress;Subaction=Change;ID=$SystemAddressID" . '1',
+        EntityType    => 'SystemAddress',
+        Success       => 1,
+        ExpectedValue => undef,
+    },
+    {
+        Name          => 'Wrong type wntity type',
         QueryString   => "Action=AdminType;Subaction=Change;ID=$TypeID" . '1',
         EntityType    => 'Type',
         Success       => 1,
         ExpectedValue => undef,
     },
+
+    # true
     {
-        Name          => 'Correct Queue EntityType',
+        Name          => 'Correct dynamic field entity type',
+        QueryString   => "Action=AdminDynamicField;Subaction=Change;ID=$DynamicFieldID",
+        EntityType    => 'DynamicField',
+        Success       => 1,
+        ExpectedValue => 'DynamicField' . $RandomID,
+    },
+    {
+        Name          => 'Correct queue entity type',
         QueryString   => "Action=AdminQueue;Subaction=Change;QueueID=$QueueID",
         EntityType    => 'Queue',
         Success       => 1,
         ExpectedValue => $RandomID,
     },
     {
-        Name          => 'Correct Priority EntityType',
+        Name          => 'Correct priority entity type',
         QueryString   => "Action=AdminPriority;Subaction=Change;PriorityID=$PriorityID",
         EntityType    => 'Priority',
         Success       => 1,
         ExpectedValue => $RandomID,
     },
     {
-        Name          => 'Correct State EntityType',
+        Name          => 'Correct service entity type',
+        QueryString   => "Action=AdminService;Subaction=Change;ID=$ServiceID",
+        EntityType    => 'Service',
+        Success       => 1,
+        ExpectedValue => $RandomID,
+    },
+    {
+        Name          => 'Correct SLA entity type',
+        QueryString   => "Action=AdminSLA;Subaction=SLASave;SLAID=$SLAID",
+        EntityType    => 'SLA',
+        Success       => 1,
+        ExpectedValue => $RandomID,
+    },
+    {
+        Name          => 'Correct state entity type',
         QueryString   => "Action=AdminState;Subaction=Change;ID=$StateID",
         EntityType    => 'State',
         Success       => 1,
         ExpectedValue => $RandomID,
     },
     {
-        Name          => 'Correct Type EntityType',
+        Name          => 'Correct system address entity type',
+        QueryString   => "Action=AdminSystemAddress;Subaction=Change;ID=$SystemAddressID",
+        EntityType    => 'SystemAddress',
+        Success       => 1,
+        ExpectedValue => $RandomID,
+    },
+    {
+        Name          => 'Correct user entity type',
+        QueryString   => "Action=AdminUser;Subaction=Change;ID=$UserID",
+        EntityType    => 'User',
+        Success       => 1,
+        ExpectedValue => $RandomID . 'znuny',
+    },
+    {
+        Name          => 'Correct type entity type',
         QueryString   => "Action=AdminType;Subaction=Change;ID=$TypeID",
         EntityType    => 'Type',
         Success       => 1,

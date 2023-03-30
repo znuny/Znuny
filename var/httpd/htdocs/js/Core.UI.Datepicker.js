@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -173,6 +174,7 @@ Core.UI.Datepicker = (function (TargetNS) {
             nextText: Core.Language.Translate('Next'),
             firstDay: Element.WeekDayStart,
             showMonthAfterYear: 0,
+            showWeek: (Core.Config.Get('DatepickerShowWeek') == 1 ? true : false),
             monthNames: [
                 Core.Language.Translate('Jan'),
                 Core.Language.Translate('Feb'),
@@ -247,6 +249,10 @@ Core.UI.Datepicker = (function (TargetNS) {
                 Element.Month.val(LeadingZero(Month));
                 Element.Day.val(LeadingZero(Day));
             }
+
+            $(Element.Year).trigger('change');
+            $(Element.Month).trigger('change');
+            $(Element.Day).trigger('change');
         };
         Options.beforeShow = function (Input) {
             $(Input).val('');
@@ -262,8 +268,7 @@ Core.UI.Datepicker = (function (TargetNS) {
         if (!$('#' + Core.App.EscapeSelector(Element.Day.attr('id')) + 'DatepickerIcon').length) {
 
             // add datepicker icon and click event
-            $DatepickerElement.after('<a href="#" class="DatepickerIcon" id="' + Element.Day.attr('id') + 'DatepickerIcon" title="' + Core.Language.Translate('Open date selection') + '"><i class="fa fa-calendar"></i></a>');
-
+            $DatepickerElement.after('<a href="#" class="DatepickerIcon icon-hover" id="' + Element.Day.attr('id') + 'DatepickerIcon" title="' + Core.Language.Translate('Open date selection') + '"><i class="fa fa-calendar"></i></a>');
             if (Element.DateInFuture) {
                 ErrorMessage = Core.Language.Translate('Invalid date (need a future date)!');
             }

@@ -23,10 +23,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # add system data
-my $SystemDataNameRand0 = 'systemdata' . $Helper->GetRandomID();
+my $SystemDataNameRand0 = 'systemdata' . $HelperObject->GetRandomID();
 
 my $Success = $SystemDataObject->SystemDataAdd(
     Key    => $SystemDataNameRand0,
@@ -107,7 +107,7 @@ $Self->False(
 
 # test setting value to empty string
 # add system data 1
-my $SystemDataNameRand1 = 'systemdata' . $Helper->GetRandomID();
+my $SystemDataNameRand1 = 'systemdata' . $HelperObject->GetRandomID();
 
 $Success = $SystemDataObject->SystemDataAdd(
     Key    => $SystemDataNameRand1,
@@ -196,7 +196,7 @@ $Self->True(
     'SystemDataDelete() - removed key',
 );
 
-my $SystemDataGroupRand = 'systemdata' . $Helper->GetRandomID();
+my $SystemDataGroupRand = 'systemdata' . $HelperObject->GetRandomID();
 
 my %Storage = (
     Foo   => 'bar',

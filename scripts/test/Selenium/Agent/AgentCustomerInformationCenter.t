@@ -18,37 +18,40 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
+        my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Get test customer user ID.
-        my @CustomerIDs = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerIDs(
+        my @CustomerIDs = $CustomerUserObject->CustomerIDs(
             User => $TestCustomerUserLogin,
         );
-        my $CustomerID            = $CustomerIDs[0];
-        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
-        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CustomerID = $CustomerIDs[0];
 
-        my $RandomID    = $Helper->GetRandomID();
+        my $RandomID    = $HelperObject->GetRandomID();
         my $CompanyRand = 'Customer-Company' . $RandomID;
 
         my $CustomersID = $CustomerCompanyObject->CustomerCompanyAdd(
@@ -155,7 +158,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminCustomerInformationCenter screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentCustomerInformationCenter");
@@ -365,7 +368,7 @@ $Selenium->RunTest(
         );
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

@@ -16,10 +16,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ACLObject            = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ACLObject     = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
 
@@ -106,7 +109,7 @@ EOF
         );
 
         # create and login test user
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -116,7 +119,7 @@ EOF
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # After login, we need to navigate to the ACL deployment to make the imported ACL work.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminACL;Subaction=ACLDeploy");
@@ -150,7 +153,7 @@ EOF
             ),
             "Split option for 'Email Ticket' is disabled.",
         );
-        $Selenium->find_element( '.Close', 'css' )->click();
+        $Selenium->find_element( '.Dialog .Header .Close', 'css' )->click();
 
         # Update state to 'open' to trigger second test ACL.
         my $Success = $TicketObject->TicketStateSet(
@@ -184,7 +187,7 @@ EOF
             ),
             "Split option for 'Email Ticket' is enabled.",
         );
-        $Selenium->find_element( '.Close', 'css' )->click();
+        $Selenium->find_element( '.Dialog .Header .Close', 'css' )->click();
 
         # Delete test ACLs rules.
         for my $Count ( 1 .. 2 ) {

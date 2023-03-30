@@ -18,9 +18,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TestEmailObject = $Kernel::OM->Get('Kernel::System::Email::Test');
-        my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TestEmailObject    = $Kernel::OM->Get('Kernel::System::Email::Test');
+        my $MailQueueObject    = $Kernel::OM->Get('Kernel::System::MailQueue');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
         my %MailQueueCurrentItems = map { $_->{ID} => $_ } @{ $MailQueueObject->List() || [] };
 
@@ -60,13 +62,13 @@ $Selenium->RunTest(
         $MailQueueClean->();
 
         # Use test email backend.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SendmailModule',
             Value => 'Kernel::System::Email::Test',
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
@@ -85,10 +87,10 @@ $Selenium->RunTest(
         );
 
         # Create test customer user.
-        my $TestCustomerUser = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUser = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to customer login screen.
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?");
@@ -135,7 +137,7 @@ $Selenium->RunTest(
         );
 
         # Update test customer to invalid status.
-        $Success = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserUpdate(
+        $Success = $CustomerUserObject->CustomerUserUpdate(
             Source         => 'CustomerUser',
             ID             => $TestCustomerUser,
             UserCustomerID => $TestCustomerUser,

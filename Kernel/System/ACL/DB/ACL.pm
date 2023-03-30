@@ -69,7 +69,7 @@ add new ACL
 returns the id of the created ACL if success or undef otherwise
 
     my $ID = $ACL->ACLAdd(
-        Name           => 'NameOfACL'           # mandatory
+        Name           => 'NameOfACL',          # mandatory
         Comment        => 'Comment',            # optional
         Description    => 'Description',        # optional
         StopAfterMatch => 1,                    # optional
@@ -519,7 +519,7 @@ sub ACLUpdate {
     my $CurrentConfigChange;
     while ( my @Data = $DBObject->FetchrowArray() ) {
         $CurrentName           = $Data[0];
-        $CurrentComment        = $Data[1];
+        $CurrentComment        = $Data[1] || '';
         $CurrentDescription    = $Data[2] || '';
         $CurrentStopAfterMatch = $Data[3] || 0;
         $CurrentValidID        = $Data[4];
@@ -817,12 +817,12 @@ gets a complete ACL information dump from the DB
 
     my $ACLDump = $ACLObject->ACLDump(
         ResultType  => 'SCALAR'                     # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt'   # mandatory for ResultType = 'FILE'
+        Location    => '/opt/znuny/var/myfile.txt'   # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 
 Returns:
-    $ACLDump = '/opt/otrs/var/myfile.txt';          # or undef if can't write the file
+    $ACLDump = '/opt/znuny/var/myfile.txt';          # or undef if can't write the file
 
 =cut
 
@@ -881,6 +881,18 @@ sub ACLDump {
             $PossibleNot = $ACLData->{ConfigChange}->{PossibleNot};
         }
 
+        # Remove line breaks and quotation marks from name so that
+        # it can be safely used as hash key name in generated ACL Perl file.
+        $ACLData->{Name} =~ s{[\r\n\\'"]}{}smg;
+
+        # Remove any line breaks from comment and user name so that following lines
+        # won't be evaluated as Perl.
+        FIELDNAME:
+        for my $FieldName (qw(CreateBy ChangeBy Comment)) {
+            next FIELDNAME if !IsStringWithData( $ACLData->{$FieldName} );
+            $ACLData->{$FieldName} =~ s{[\r\n]}{}smg;
+        }
+
         $ACLDump{ $ACLData->{Name} } = {
             CreateTime => $ACLData->{CreateTime},
             ChangeTime => $ACLData->{ChangeTime},
@@ -909,12 +921,12 @@ sub ACLDump {
         # create output
         $Output .= $Self->_ACLItemOutput(
             Key        => $ACLName,
-            Value      => $ACLDump{$ACLName}{Values},
-            Comment    => $ACLDump{$ACLName}{Comment},
-            CreateTime => $ACLDump{$ACLName}{CreateTime},
-            ChangeTime => $ACLDump{$ACLName}{ChangeTime},
-            CreateBy   => $ACLDump{$ACLName}{CreateBy},
-            ChangeBy   => $ACLDump{$ACLName}{ChangeBy},
+            Value      => $ACLDump{$ACLName}->{Values},
+            Comment    => $ACLDump{$ACLName}->{Comment},
+            CreateTime => $ACLDump{$ACLName}->{CreateTime},
+            ChangeTime => $ACLDump{$ACLName}->{ChangeTime},
+            CreateBy   => $ACLDump{$ACLName}->{CreateBy},
+            ChangeBy   => $ACLDump{$ACLName}->{ChangeBy},
         );
     }
 

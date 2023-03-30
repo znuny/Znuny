@@ -86,10 +86,25 @@ sub ToAscii {
     my $LinkList = '';
     my $Counter  = 0;
     $Param{String} =~ s{
-        <a\s.*?href=("|')(.+?)("|').*?>
+        <a\s.*?href=("|')(.*?)(\1).*?>
     }
     {
         my $Link = $2;
+
+        my %SafeLink = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+            String       => $Link,
+            NoApplet     => 1,
+            NoObject     => 1,
+            NoEmbed      => 1,
+            NoSVG        => 1,
+            NoImg        => 1,
+            NoIntSrcLoad => 1,
+            NoExtSrcLoad => 1,
+            NoJavaScript => 1,
+        );
+
+        $Link = $SafeLink{String} // '';
+
         $Counter++;
         $LinkList .= "[$Counter] $Link\n";
         "[$Counter]";
@@ -768,6 +783,54 @@ sub DocumentCleanup {
     return $Param{String};
 }
 
+=head2 TruncateBodyQuote()
+
+Strips document content to the limited number of lines.
+
+    $Body = $HTMLUtilsObject->TruncateBodyQuote(
+        Body       => $Body,
+        Limit      => 10000,
+        HTMLOutput => 1|0,
+    );
+
+=cut
+
+sub TruncateBodyQuote {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Body Limit)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!"
+        );
+        return;
+    }
+
+    # split body - one element per line
+    my @Body = split "\n", $Param{Body};
+
+    # only modify if body is longer than allowed
+    return $Param{Body} if scalar @Body <= $Param{Limit};
+
+    # splice to max. allowed lines and reassemble
+    @Body = @Body[ 0 .. ( $Param{Limit} - 1 ) ];
+    $Param{Body} = join "\n", @Body;
+
+    if ( $Param{HTMLOutput} ) {
+        $Param{Body} .= "\n<div class=\"LimitEnabledCharacters\"> [...]</div>";
+    }
+    else {
+        $Param{Body} .= "\n[...]";
+    }
+
+    return $Param{Body};
+}
+
 =head2 LinkQuote()
 
 detect links in HTML code, add C<a href> if missing
@@ -923,6 +986,13 @@ sub LinkQuote {
             $DisplayLink .= $Link;
             $HrefLink    .= $Link;
         }
+
+        # remove trailing dots in href link
+        if( $HrefLink =~ s{\.+\z}{} ){
+            $DisplayLink =~ s{\.+\z}{};
+            $End .= '.';
+        }
+
         $Start . "<a href=\"$HrefLink\"$Target title=\"$HrefLink\">$DisplayLink<\/a>" . $End;
     }egxism;
 
@@ -938,7 +1008,7 @@ sub LinkQuote {
 
 =head2 Safety()
 
-To remove/strip active html tags/addons (javascript, C<applet>s, C<embed>s and C<object>s)
+To remove/strip active html tags/addons (JavaScript, C<applet>s, C<embed>s and C<object>s)
 from html strings.
 
     my %Safe = $HTMLUtilsObject->Safety(
@@ -991,7 +1061,7 @@ sub Safety {
         }
     }
 
-    my $String = $Param{String} || '';
+    my $String = $Param{String} // '';
 
     # check ref
     my $StringScalar;
@@ -1136,7 +1206,7 @@ sub Safety {
 
                 # remove javascript in a href links or src links
                 $Replaced += $Tag =~ s{
-                    ((?:\s|;|/)(?:background|url|src|href)=)
+                    ((?:\s|;|/)(?:background|url|src|href)\s*=\s*)
                     ('|"|)                                  # delimiter, can be empty
                     (?:\s* $JavaScriptPrefixRegex .*?)      # javascript, followed by anything but the delimiter
                     \2                                      # delimiter again

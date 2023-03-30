@@ -16,15 +16,19 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ACLObject            = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ACLObject     = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
 
         # Set to change queue for ticket in a new window.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MoveType',
             Value => 'link'
@@ -64,7 +68,7 @@ EOF
         );
 
         # create and login test user
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -75,7 +79,7 @@ EOF
         );
 
         # Get test user ID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -115,7 +119,7 @@ EOF
             "ArticleID $ArticleID is created",
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # After login, we need to navigate to the ACL deployment to make the imported ACL work.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminACL;Subaction=ACLDeploy");

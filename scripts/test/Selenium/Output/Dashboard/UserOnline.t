@@ -19,18 +19,24 @@ $Selenium->RunTest(
     sub {
 
         # First delete all pre-existing sessions.
-        $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Session::DeleteAll')->Execute();
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
+        my $CommandSessionDeleteAllObject
+            = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Session::DeleteAll');
+
+        $CommandSessionDeleteAllObject->Execute();
 
         # Get UserOnline config.
-        my %UserOnlineSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %UserOnlineSysConfig = $SysConfigObject->SettingGet(
             Name    => 'DashboardBackend###0400-UserOnline',
             Default => 1,
         );
 
         # Enable UserOnline and set it to load as default plugin.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0400-UserOnline',
             Value => {
@@ -40,7 +46,7 @@ $Selenium->RunTest(
         );
 
         # Create test customer user and login several times in order to rack up number of user sessions.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         for ( 1 .. 5 ) {
@@ -55,10 +61,10 @@ $Selenium->RunTest(
         }
 
         # Clean up the dashboard cache.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Dashboard' );
+        $CacheObject->CleanUp( Type => 'Dashboard' );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -75,14 +81,6 @@ $Selenium->RunTest(
             'Agents (1)',
             'Only one agent user accounted for'
         );
-
-        if ( $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Agent::UnavailableForExternalChatsOnLogin') ) {
-            $Self->True(
-                1,
-                "UnavailableForExternalChatsOnLogin config is set, skipping test..."
-            );
-            return 1;
-        }
 
         # Test UserOnline plugin for agent.
         my $ExpectedAgent = "$TestUserLogin";

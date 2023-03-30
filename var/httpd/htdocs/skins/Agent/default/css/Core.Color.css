@@ -16,50 +16,160 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  */
 
 /*
- * Used colors in OTRS:
+ * Used colors in Znuny:
  * ---------------------
  *
- * #XXXXXX  Description
+ * Variable                             Description                         Default
  *
- * #000     Breadcrumb Link,
- *          Navigation 3rd lebel background     Black
- * #333     Top of page Link,
- *          Navigation 1st level background     Grey
- * #555     Filter font color,
- *          DataTable border,
- *          DataTable Head Link Color,
- *          Content Widget H2 border,
- *          Form Label                          Grey
- * #888     AdminScreens Explanation Hover,
- *          Form FieldExplanation,
- *          WidgetSimple Headline font,
- *          WidgetBox Headline font,
- *          Content Widget Rule BG,
- *          Overview Preview Info Tbl Label     Grey
- * #999     Breadcrumb, Footer Font-Color,
- *          Overview label font color,
- *          Gradient Widget border color,
- *          ControlRow background,
- *          ActionRow background                Grey
- * #BBB     Header UserInfo,
- *          Overview Active Preview Border,
- *          Content Widget border color,
- *          Overview Table border               Grey
- * #DDD     AdminScreens Explanation,
- *          Navigation Font color,
- *          Tabs Active font color,
- *          DataTable background,
- *          Content Widget H2 BG,
- *          Content Widget Header BG,
- *          Overview Preview Info Table BG,
- *          PopUpWidget border                  Grey
- * #EEE     Even Rows                           Grey
- * #FFF     Header Font-Color
- *          PopUpWidget background              White
- * #202020  Navigation 2nd level background     Grey
- * #634E2D  Overview Hover Label font color     Grey
- * #8BEF4D  Overview flag new                   Green
- * #E95F53  Overview flag escalated             Red
- * #F39C19  Default Link Color                  Orange
- * #FFDD50  Overview flag warning               Yellow
+ * var(--color-black);                                                      Black
+ * var(--color-red);                                                        Red
+ * var(--color-orange);                                                     Orange
+ * var(--color-yellow);                                                     Yellow
+ * var(--color-green);                                                      Green
+ * var(--color-grey1);                                                      Grey #111
+ * var(--color-grey2);                                                      Grey #222
+ * var(--color-grey3);                                                      Grey #333
+ * var(--color-grey4);                                                      Grey #444
+ * var(--color-grey5);                                                      Grey #555
+ * var(--color-grey6);                                                      Grey #666
+ * var(--color-grey7);                                                      Grey #777
+ * var(--color-grey8);                                                      Grey #888
+ * var(--color-grey9);                                                      Grey #999
+ * var(--color-grey10);                                                     Grey #AAA
+ * var(--color-grey11);                                                     Grey #BBB
+ * var(--color-grey12);                                                     Grey #CCC
+ * var(--color-grey13);                                                     Grey #DDD
+ * var(--color-grey14);                                                     Grey #EEE
  */
+
+:root {
+
+    /* black */
+    --color-black:                    #000;
+
+    /* red */
+    --color-red:                      #b8384e;
+
+    /* orange */
+    --color-orange:                   #FF9050;
+
+    /* yellow */
+    --color-yellow:                   #FFDD50;
+
+    /* green */
+    --color-green:                    #049E35;
+
+    /* white */
+    --color-white:                    #FFF;
+
+    /* grey */
+    --color-grey1:                    #111;
+    --color-grey2:                    #222;
+    --color-grey3:                    #333;
+    --color-grey4:                    #444;
+    --color-grey5:                    #555;
+    --color-grey6:                    #666;
+    --color-grey7:                    #777;
+    --color-grey8:                    #888;
+    --color-grey9:                    #999;
+    --color-grey10:                   #AAA;
+    --color-grey11:                   #BBB;
+    --color-grey12:                   #CCC;
+    --color-grey13:                   #DDD;
+    --color-grey14:                   #EEE;
+
+
+
+
+
+    /* Main Colors */
+    --primary-color: #FF8A25;
+    --primary-color-darker: #ef8000;
+    --primary-color-rgb: rgba(255, 139, 37, 0.2);
+    --primary-color-calendar: #ffe8d3;
+    --secondary-color: red;
+    --white-bg-header: #E2E2EA7A;
+    --white: #ffffff;
+    --black: #171725;
+    --gray-darker: #5E5E68;
+    --gray-dark: #696974;
+    --gray-semi-dark: #92929D;
+    --gray-md: #B5B5BE;
+    --gray-light: #ededed;
+    --gray-semi-light: #EFEFEF;
+    --gray-ultra-light: #f5f5f5;
+    --color-scroll-bar: #92929D;
+    --mail-outgoing-color: #ffeec6;
+
+    --disabled: #C0BFBE;
+    --disabled-text: var(--gray-darker);
+    --disabled-input: var(--gray-semi-light);
+
+    --bread-crumb: var(--gray-semi-dark);
+    --bread-crumb-active: var(--black);
+    --bread-crumb-font-size: var(--font-size-sm);
+
+
+    --color-ticket-header: #F9F9F9;
+    --email-info: #F9F9F9;
+    --ticket-subject: var(--table-text-color);
+
+    --success-color: #3DD598;
+    --warning-color: #FC5A5A;
+    --error-color: var(--warning-color);
+    --confirmation-color: var(--success-color);
+    --plus-color: var(--success-color);
+
+    /* Tables */
+    --tr-disabled-bg: #efefef;
+    --tr-disabled-text: #B6B6B6;
+
+    /* Flag Element */
+    --color-flag-default: #cdcdcd;
+
+    /* Alert Component */
+    --alert-close-icon-color: var(--gray-dark);
+
+        /* Info */
+        --alert-info-bg-color: #50b6ff10;
+        --alert-info-icon-color: #50B5FF;
+        --alert-info-border-color: #50b6ff1a;
+
+        /* Error */
+        --alert-error-bg-solid-color: #FC5A5A;
+        --alert-error-bg-color: #FC5A5A10;
+        --alert-error-icon-color: #FC5A5A;
+        --alert-error-border-color:#FC5A5A1a;
+
+        /* Success */
+        --alert-success-bg-solid-color: #3DD598;
+        --alert-success-bg-color: #3DD59810;
+        --alert-success-icon-color: #3DD598;
+        --alert-success-border-color: #3DD5981a;
+
+        /* Warning */
+        --alert-warning-bg-color: #F2BD0E10;
+        --alert-warning-icon-color: #F2BD0E;
+        --alert-warning-border-color: #F2BD0E1a;
+
+        /* Notice */
+        --alert-notice-bg-color: #cccccc10;
+        --alert-notice-icon-color: #cccccc;
+        --alert-notice-border-color: #cccccc1a;
+
+    --color-icon-favorite: #F2BD0E;
+
+
+    /* Forms */
+    --border-color: #E2E2EA;
+    --border-input-color: #BBBBC4;
+
+
+    /* BG's */
+    --overlay-bg: rgba(23, 23, 37, 0.145);
+
+
+
+
+
+}

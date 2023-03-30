@@ -24,7 +24,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my @TicketIDs;
 my $Limit = 15;
@@ -305,7 +305,7 @@ for my $TicketID (@MergeLinkObjectTicketIDs) {
 
 # Test change time and user ID of main ticket on merge action.
 #   See bug#13092 for more information.
-$Helper->FixedTimeSet(
+$HelperObject->FixedTimeSet(
     $Kernel::OM->Create(
         'Kernel::System::DateTime',
         ObjectParams => {
@@ -367,11 +367,11 @@ $Self->Is(
 );
 
 # Add 5 minutes to fixed time.
-$Helper->FixedTimeAddSeconds(300);
+$HelperObject->FixedTimeAddSeconds(300);
 
 # Create user who will perform merge action.
 my $Language      = 'de';
-my $TestUserLogin = $Helper->TestUserCreate(
+my $TestUserLogin = $HelperObject->TestUserCreate(
     Groups   => ['users'],
     Language => $Language,
 );
@@ -453,7 +453,7 @@ $Self->Is(
 
 # Linking objects and linking tickets.
 # See bug#12994 (https://bugs.otrs.org/show_bug.cgi?id=12994).
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 undef @TicketIDs;
 for my $Item ( 1 .. 6 ) {

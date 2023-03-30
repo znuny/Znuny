@@ -29,10 +29,10 @@ $Kernel::OM->ObjectParamAdd(
 
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Disable email addresses checking.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
@@ -111,20 +111,13 @@ if ( $OpenSSLVersionString =~ m{ \A (?: (?: Open|Libre)SSL )? \s* ( \d )  }xmsi 
     $OpenSSLMajorVersion = $1;
 }
 
-# openssl version 1.0.0 uses different hash algorithm... in the future release of openssl this might
-#change again in such case a better version detection will be needed
-my $UseNewHashes;
-if ( $OpenSSLMajorVersion >= 1 ) {
-    $UseNewHashes = 1;
-}
-
 # set config
 $ConfigObject->Set(
     Key   => 'SMIME',
     Value => 1,
 );
 
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 # use Test email backend
 my $Success = $ConfigObject->Set(
@@ -243,25 +236,13 @@ if ( !$SMIMEObject ) {
 # Setup environment
 #
 
-# OpenSSL 0.9.x hashes
-my $Check1Hash       = '980a83c7';
-my $Check2Hash       = '999bcb2f';
-my $Check3Hash       = 'c3857c0d';
-my $OTRSRootCAHash   = '1a01713f';
-my $OTRSRDCAHash     = '7807c24e';
-my $OTRSLabCAHash    = '2fc24258';
-my $OTRSUserCertHash = 'eab039b6';
-
-# OpenSSL 1.0.0 hashes
-if ($UseNewHashes) {
-    $Check1Hash       = 'f62a2257';
-    $Check2Hash       = '35c7d865';
-    $Check3Hash       = 'a2ba8622';
-    $OTRSRootCAHash   = '7835cf94';
-    $OTRSRDCAHash     = 'b5d19fb9';
-    $OTRSLabCAHash    = '19545811';
-    $OTRSUserCertHash = '4d400195';
-}
+my $Check1Hash       = 'f62a2257';
+my $Check2Hash       = '35c7d865';
+my $Check3Hash       = 'a2ba8622';
+my $ZnunyRootCAHash  = '7835cf94';
+my $ZnunySub2CAHash  = 'b5d19fb9';
+my $ZnunySub1CAHash  = '19545811';
+my $OTRSUserCertHash = '4d400195';
 
 # certificates
 my @Certificates = (
@@ -294,25 +275,25 @@ my @Certificates = (
         PrivateSecretFileName => 'SMIMEPrivateKeyPass-smimeuser1.crt',
     },
     {
-        CertificateName       => 'OTRSLabCA',
-        CertificateHash       => $OTRSLabCAHash,
-        CertificateFileName   => 'SMIMECACertificate-OTRSLab.crt',
-        PrivateKeyFileName    => 'SMIMECAPrivateKey-OTRSLab.pem',
-        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-OTRSLab.crt',
+        CertificateName       => 'ZnunySub1CA',
+        CertificateHash       => $ZnunySub1CAHash,
+        CertificateFileName   => 'SMIMECACertificate-Znuny-Sub1.crt',
+        PrivateKeyFileName    => 'SMIMECAPrivateKey-Znuny-Sub1.pem',
+        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-Znuny-Sub1.crt',
     },
     {
-        CertificateName       => 'OTRSRDCA',
-        CertificateHash       => $OTRSRDCAHash,
-        CertificateFileName   => 'SMIMECACertificate-OTRSRD.crt',
-        PrivateKeyFileName    => 'SMIMECAPrivateKey-OTRSRD.pem',
-        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-OTRSRD.crt',
+        CertificateName       => 'ZnunySub2CA',
+        CertificateHash       => $ZnunySub2CAHash,
+        CertificateFileName   => 'SMIMECACertificate-Znuny-Sub2.crt',
+        PrivateKeyFileName    => 'SMIMECAPrivateKey-Znuny-Sub2.pem',
+        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-Znuny-Sub2.crt',
     },
     {
-        CertificateName       => 'OTRSRootCA',
-        CertificateHash       => $OTRSRootCAHash,
-        CertificateFileName   => 'SMIMECACertificate-OTRSRoot.crt',
-        PrivateKeyFileName    => 'SMIMECAPrivateKey-OTRSRoot.pem',
-        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-OTRSRoot.crt',
+        CertificateName       => 'ZnunyRootCA',
+        CertificateHash       => $ZnunyRootCAHash,
+        CertificateFileName   => 'SMIMECACertificate-Znuny-Root.crt',
+        PrivateKeyFileName    => 'SMIMECAPrivateKey-Znuny-Root.pem',
+        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-Znuny-Root.crt',
     },
 );
 
@@ -605,7 +586,7 @@ for my $Test (@Tests) {
     if ( $Test->{FixedTimeSet} ) {
 
         # create isolated time environment during test
-        $Helper->FixedTimeSet(
+        $HelperObject->FixedTimeSet(
             $Kernel::OM->Create(
                 'Kernel::System::DateTime',
                 ObjectParams => {

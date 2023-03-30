@@ -29,7 +29,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my %Jobs;
 
@@ -78,8 +78,8 @@ $Self->True(
 );
 
 # add a new Job
-my $Name          = 'job' . $Helper->GetRandomID();
-my $TargetAddress = $Helper->GetRandomID() . '@unittest.com';
+my $Name          = 'job' . $HelperObject->GetRandomID();
+my $TargetAddress = $HelperObject->GetRandomID() . '@unittest.com';
 my %NewJob        = (
     Name => $Name,
     Data => {

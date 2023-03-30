@@ -25,9 +25,9 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomNumber = $Helper->GetRandomNumber();
+my $RandomNumber = $HelperObject->GetRandomNumber();
 
 # Use Test email backend.
 $ConfigObject->Set(

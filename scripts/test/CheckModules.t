@@ -19,7 +19,7 @@ my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $Home = $ConfigObject->Get('Home');
 my $TmpSumString;
 
-if ( open( $TmpSumString, '-|', "$^X $Home/bin/otrs.CheckModules.pl --all NoColors" ) )
+if ( open( $TmpSumString, '-|', "$^X $Home/bin/znuny.CheckModules.pl --all NoColors" ) )
 {    ## no critic
 
     LINE:

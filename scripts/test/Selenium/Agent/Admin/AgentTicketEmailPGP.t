@@ -20,30 +20,38 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject                 = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject                 = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject                  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ArticleBackendInternalObject = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Internal');
+        my $SystemAddressObject          = $Kernel::OM->Get('Kernel::System::SystemAddress');
+        my $QueueObject                  = $Kernel::OM->Get('Kernel::System::Queue');
+        my $CryptPGPObject               = $Kernel::OM->Get('Kernel::System::Crypt::PGP');
+        my $TicketObject                 = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ArticleObject                = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $DBObject                     = $Kernel::OM->Get('Kernel::System::DB');
 
         # Create test PGP path and set it in sysConfig.
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
         my $PGPPath  = $ConfigObject->Get('Home') . "/var/tmp/pgp" . $RandomID;
         mkpath( [$PGPPath], 0, 0770 );    ## no critic
 
         # Enable PGP in config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PGP',
             Value => 1,
         );
 
         # Set PGP path in config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PGP::Options',
             Value => "--homedir $PGPPath --batch --no-tty --yes",
         );
 
         # Create test user and login.
-        my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         );
 
@@ -62,15 +70,12 @@ $Selenium->RunTest(
 
             # Add test PGP key.
             $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
-            my $Location = $ConfigObject->Get('Home')
+            my $Location = $Selenium->{Home}
                 . "/scripts/test/sample/Crypt/PGPPrivateKey-$Key.asc";
 
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
         }
-
-        my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
-        my $QueueObject         = $Kernel::OM->Get('Kernel::System::Queue');
 
         # Add system address.
         my $SystemAddressEmail    = 'pgptest@example.com';
@@ -178,9 +183,6 @@ $Selenium->RunTest(
             "There is another signing, that is expired",
         );
 
-        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-
         # create ticket
         my $TicketID = $TicketObject->TicketCreate(
             Title        => 'Ticket One Title',
@@ -200,7 +202,7 @@ $Selenium->RunTest(
             "TicketCreate() successful for Ticket ID $TicketID",
         );
 
-        my $ArticleID = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Internal')->ArticleCreate(
+        my $ArticleID = $ArticleBackendInternalObject->ArticleCreate(
             TicketID             => $TicketID,
             IsVisibleForCustomer => 1,
             SenderType           => 'customer',
@@ -301,7 +303,7 @@ $Selenium->RunTest(
 
         # Delete test PGP keys.
         for my $Count ( 1 .. 2 ) {
-            my @Keys = $Kernel::OM->Get('Kernel::System::Crypt::PGP')->KeySearch(
+            my @Keys = $CryptPGPObject->KeySearch(
                 Search => $SystemAddressEmail,
             );
 
@@ -366,7 +368,6 @@ $Selenium->RunTest(
             "Ticket is deleted - ID $TicketID"
         );
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         $Success = $DBObject->Do(
             SQL  => "DELETE FROM queue WHERE id = ?",
             Bind => [ \$QueueID ],
@@ -387,7 +388,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 
 );

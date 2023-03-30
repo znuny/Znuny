@@ -16,8 +16,12 @@ use vars (qw($Self));
 use Kernel::System::VariableCheck qw(:all);
 
 # get needed objects
-my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-my $ModuleObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::TransitionAction::TicketResponsibleSet');
+my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
+my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+my $TransitionActionObject
+    = $Kernel::OM->Get('Kernel::System::ProcessManagement::TransitionAction::TicketResponsibleSet');
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -26,15 +30,15 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # define variables
 my $UserID     = 1;
 my $ModuleName = 'TicketResponsibleSet';
-my $RandomID   = $Helper->GetRandomID();
+my $RandomID   = $HelperObject->GetRandomID();
 
 # set user details
-my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate();
+my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate();
 
 #
 # Create a test ticket
@@ -254,7 +258,7 @@ for my $Test (@Tests) {
     # make a deep copy to avoid changing the definition
     my $OrigTest = Storable::dclone($Test);
 
-    my $Success = $ModuleObject->Run(
+    my $Success = $TransitionActionObject->Run(
         %{ $Test->{Config} },
         ProcessEntityID          => 'P1',
         ActivityEntityID         => 'A1',
@@ -322,6 +326,77 @@ for my $Test (@Tests) {
         );
     }
 }
+
+# Run TransitionAction with ForeignTicketID
+# create a dynamic field
+my $DFForeignTicketID = 'UnitTestForeignTicketID' . $RandomID;
+my $DFForeignID       = $DynamicFieldObject->DynamicFieldAdd(
+    FieldOrder => 9991,
+    Name       => $DFForeignTicketID,
+    Label      => $DFForeignTicketID,
+    ObjectType => 'Ticket',
+    FieldType  => 'Text',
+    Config     => {
+        DefaultValue => '',
+    },
+    ValidID => 1,
+    UserID  => 1,
+);
+
+my $ForeignTicketID = $HelperObject->TicketCreate();
+
+my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+    Name => $DFForeignTicketID,
+);
+
+my $ValueSet = $DynamicFieldBackendObject->ValueSet(
+    DynamicFieldConfig => $DynamicFieldConfig,
+    ObjectID           => $TicketID,
+    Value              => $ForeignTicketID,
+    UserID             => 1,
+);
+
+$Self->True(
+    $ValueSet,
+    "ValueSet()",
+);
+
+%Ticket = $TicketObject->TicketGet(
+    TicketID      => $TicketID,
+    DynamicFields => 1,
+    UserID        => 1,
+);
+
+my $DynamicFieldSetResult = $TransitionActionObject->Run(
+    UserID                   => 1,
+    Ticket                   => \%Ticket,
+    ProcessEntityID          => 'P123',
+    ActivityEntityID         => 'A123',
+    TransitionEntityID       => 'T123',
+    TransitionActionEntityID => 'TA123',
+    Config                   => {
+        ForeignTicketID => '<OTRS_Ticket_DynamicField_' . $DFForeignTicketID . '>',
+        Responsible     => $TestUserLogin,
+        UserID          => 1,
+    },
+);
+
+$Self->True(
+    $DynamicFieldSetResult,
+    "TransitionActionObject->Run()",
+);
+
+my %ForeignTicket = $TicketObject->TicketGet(
+    TicketID      => $ForeignTicketID,
+    DynamicFields => 1,
+    UserID        => 1,
+);
+
+$Self->Is(
+    $ForeignTicket{Responsible},
+    $TestUserLogin,
+    'value in foreign ticket got set',
+);
 
 # cleanup is done by RestoreDatabase.
 

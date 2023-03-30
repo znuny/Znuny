@@ -18,22 +18,27 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Add test role.
-        my $RoleName = "role" . $Helper->GetRandomID();
+        my $RoleName = "role" . $HelperObject->GetRandomID();
 
-        my $RoleID = $Kernel::OM->Get('Kernel::System::Group')->RoleAdd(
+        my $RoleID = $GroupObject->RoleAdd(
             Name    => $RoleName,
             ValidID => 1,
             UserID  => $UserID,
@@ -50,7 +55,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminRoleUser screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminRoleUser");
@@ -91,19 +96,15 @@ $Selenium->RunTest(
         $Selenium->find_element( $RoleName, 'link_text' )->VerifiedClick();
 
         # Check breadcrumb on change screen.
-        my $Count = 1;
         for my $BreadcrumbText (
             'Manage Role-Agent Relations',
-            'Change Agent Relations for Role \'' . $RoleName . '\''
+            "Change Agent Relations for Role '" . $RoleName . "'"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => '.BreadCrumb>li>[title="' . $BreadcrumbText . '"]',
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         $Self->Is(
@@ -185,7 +186,7 @@ $Selenium->RunTest(
 
         # Since there are no tickets that rely on our test role we can remove it from DB.
         if ($RoleID) {
-            my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+            my $Success = $DBObject->Do(
                 SQL => "DELETE FROM roles WHERE id = $RoleID",
             );
             $Self->True(
@@ -195,7 +196,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Group'
         );
     }

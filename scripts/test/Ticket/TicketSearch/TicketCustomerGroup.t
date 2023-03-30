@@ -28,7 +28,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
@@ -57,7 +57,7 @@ $ConfigObject->Set(
 );
 
 # set user details
-my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate();
+my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate();
 
 my @CustomerUserIDs;
 my @CustomerCompanyIDs;
@@ -66,7 +66,7 @@ my @TicketIDs;
 for ( 1 .. 3 ) {
 
     # create test customer user
-    my $CustomerUserID = $Helper->TestCustomerUserCreate();
+    my $CustomerUserID = $HelperObject->TestCustomerUserCreate();
     $Self->True(
         $CustomerUserID,
         "Created test customer user $CustomerUserID",

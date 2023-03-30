@@ -17,11 +17,10 @@ use warnings;
 use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
-    'Kernel::System::Log',
     'Kernel::Config',
     'Kernel::System::Group',
+    'Kernel::System::Log',
     'Kernel::System::Ticket',
-    'Kernel::Output::HTML::Layout',
 );
 
 sub Run {

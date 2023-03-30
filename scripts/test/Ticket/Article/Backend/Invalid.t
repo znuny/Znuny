@@ -25,8 +25,8 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-$Helper->FixedTimeSet();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+$HelperObject->FixedTimeSet();
 
 # Create test ticket.
 my $TicketID = $TicketObject->TicketCreate(
@@ -45,7 +45,7 @@ $Self->True(
     'TicketCreate()',
 );
 
-my $MessageID   = '<' . $Helper->GetRandomID() . '@example.com>';
+my $MessageID   = '<' . $HelperObject->GetRandomID() . '@example.com>';
 my %ArticleHash = (
     TicketID             => $TicketID,
     SenderType           => 'agent',

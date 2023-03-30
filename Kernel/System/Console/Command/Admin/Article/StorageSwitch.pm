@@ -14,10 +14,12 @@ use warnings;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
+use File::Basename;
 use Time::HiRes qw(usleep);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::Main',
     'Kernel::System::DateTime',
     'Kernel::System::PID',
     'Kernel::System::Ticket',
@@ -26,13 +28,23 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
+    my @Backends     = $Self->_GetStorageBackends();
+    my $BackendRegex = join '|', @Backends;
+
     $Self->Description('Migrate article files from one storage backend to another on the fly.');
     $Self->AddOption(
         Name        => 'target',
-        Description => "Specify the target backend to migrate to (ArticleStorageDB|ArticleStorageFS).",
+        Description => "Specify the target backend to migrate to ($BackendRegex).",
         Required    => 1,
         HasValue    => 1,
-        ValueRegex  => qr/^(?:ArticleStorageDB|ArticleStorageFS)$/smx,
+        ValueRegex  => qr/^(?:$BackendRegex)$/smx,
+    );
+    $Self->AddOption(
+        Name        => 'source',
+        Description => "Specify the source backend to migrate from ($BackendRegex).",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^(?:$BackendRegex)$/smx,
     );
     $Self->AddOption(
         Name        => 'tickets-closed-before-date',
@@ -44,6 +56,20 @@ sub Configure {
     $Self->AddOption(
         Name        => 'tickets-closed-before-days',
         Description => "Only process tickets closed more than ... days ago.",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^\d+$/smx,
+    );
+    $Self->AddOption(
+        Name        => 'tickets-created-before-date',
+        Description => "Only process tickets created before given ISO date.",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^\d{4}-\d{2}-\d{2}[ ]\d{2}:\d{2}:\d{2}$/smx,
+    );
+    $Self->AddOption(
+        Name        => 'tickets-created-before-days',
+        Description => "Only process tickets created more than ... days ago.",
         Required    => 0,
         HasValue    => 1,
         ValueRegex  => qr/^\d+$/smx,
@@ -73,13 +99,13 @@ sub Configure {
     $Self->AdditionalHelp(<<"EOF");
 The <green>$Name</green> command migrates article data from one storage backend to another on the fly, for example from DB to FS:
 
- <green>otrs.Console.pl $Self->{Name} --target ArticleStorageFS</green>
+ <green>znuny.Console.pl $Self->{Name} --target ArticleStorageFS</green>
 
 You can specify limits for the tickets migrated with <yellow>--tickets-closed-before-date</yellow> and <yellow>--tickets-closed-before-days</yellow>.
 
 To reduce load on the database for a running system, you can use the <yellow>--micro-sleep</yellow> parameter. The command will pause for the specified amount of microseconds after each ticket.
 
- <green>otrs.Console.pl $Self->{Name} --target ArticleStorageFS --micro-sleep 1000</green>
+ <green>znuny.Console.pl $Self->{Name} --target ArticleStorageFS --micro-sleep 1000</green>
 EOF
     return;
 }
@@ -117,15 +143,27 @@ sub Run {
         );
     }
     elsif ( $Self->GetOption('tickets-closed-before-days') ) {
-        my $Seconds = $Self->GetOption('tickets-closed-before-days') * 60 * 60 * 24;
+        my $Days = $Self->GetOption('tickets-closed-before-days');
 
         my $OlderDTObject = $Kernel::OM->Create('Kernel::System::DateTime');
-        $OlderDTObject->Subtract( Seconds => $Seconds );
+        $OlderDTObject->Subtract( Days => $Days );
 
         %SearchParams = (
             StateType                => 'Closed',
             TicketCloseTimeOlderDate => $OlderDTObject->ToString(),
         );
+    }
+
+    if ( $Self->GetOption('tickets-created-before-date') ) {
+        $SearchParams{TicketCreateTimeOlderDate} = $Self->GetOption('tickets-created-before-date');
+    }
+    elsif ( $Self->GetOption('tickets-created-before-days') ) {
+        my $Days = $Self->GetOption('tickets-created-before-days');
+
+        my $OlderDTObject = $Kernel::OM->Create('Kernel::System::DateTime');
+        $OlderDTObject->Subtract( Days => $Days );
+
+        $SearchParams{TicketCreateTimeOlderDate} = $OlderDTObject->ToString();
     }
 
     # If Archive system is enabled, take into account archived tickets as well.
@@ -154,6 +192,14 @@ sub Run {
         ArticleStorageDB => 'ArticleStorageFS',
     );
 
+    my $Source = $Target2Source{$Target} // $Self->GetOption('source');
+
+    if ( !$Source ) {
+        $Self->Print("<red>Need source option.</red>\n");
+
+        return $Self->ExitCodeError();
+    }
+
     my $MicroSleep = $Self->GetOption('micro-sleep');
     my $Tolerant   = $Self->GetOption('tolerant');
 
@@ -166,7 +212,7 @@ sub Run {
 
         my $Success = $TicketObject->TicketArticleStorageSwitch(
             TicketID    => $TicketID,
-            Source      => $Target2Source{$Target},
+            Source      => $Source,
             Destination => $Target,
             UserID      => 1,
         );
@@ -186,6 +232,36 @@ sub PostRun {
     my ($Self) = @_;
 
     return $Kernel::OM->Get('Kernel::System::PID')->PIDDelete( Name => $Self->Name() );
+}
+
+sub _GetStorageBackends {
+    my ($Self) = @_;
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    my $Base = 'Kernel/System/Ticket/Article/Backend/MIMEBase';
+    my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+
+    my %Backends;
+    for my $Prefix ( '/', '/Custom/' ) {
+        my @Files = $MainObject->DirectoryRead(
+            Directory => $Home . $Prefix . $Base,
+            Filter    => '*.pm',
+            Silent    => 1,
+        );
+
+        FILE:
+        for my $File (@Files) {
+            my $Basename = basename $File, '.pm';
+
+            next FILE if 'Base' eq $Basename;
+
+            $Backends{$Basename} = 1;
+        }
+    }
+
+    my @BackendList = sort keys %Backends;
+    return @BackendList;
 }
 
 1;

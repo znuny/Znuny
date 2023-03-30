@@ -15,67 +15,178 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
-/**
- * @subsubsection     General
- */
+    /**
+    * @subsubsection     General
+    */
 
-.Preferences .WidgetSimple.Setting.IsLockedByMe {
-    border-left: 0px;
-}
-.Preferences .WidgetSimple.Setting.IsLockedByMe.IsModified {
-    border-left: 5px solid #999;
-}
+    .Preferences .WidgetSimple.Setting.IsLockedByMe {
+        /*border-left: 0px;*/
+        border-left: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm) var(--border-radius-sm);
+    }
+    .Preferences .WidgetSimple.Setting.IsLockedByMe.IsModified {
+        /*border-left: 5px solid #999;*/
+        border-left: var(--border-width) var(--border-solid) var(--border-color);
+    }
 
-.DataTable.NotificationList {
-    width: 98%;
-}
+    .DataTable.NotificationList {
+        width: 100%;
+    }
 
-.Preferences .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox {
-    width: 48px;
-    display: block !important;
-}
+    /* HEADER */
+    .Preferences .WidgetSimple.Setting .Header {
+        background-color: var(--sidebarcolumn-header-bg);
+        /*border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;*/
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
 
-.Preferences .WidgetSimple.Setting.ReadOnly .Content .SettingUpdateBox {
-    width: 48px;
-    display: block !important;
-}
+    .Preferences .WidgetSimple.Setting .Header h2 {
+        padding: 0;
+    }
 
-.WidgetSimple.Setting.ReadOnly .Content .SettingUpdateBox button {
-    margin-top: 7px;
-}
 
-.Preferences .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox button.Cancel {
-    display: none;
-}
+    /* CONTENT */
+    .Preferences .WidgetSimple.Setting .Content .SettingUpdateBox,
+    .Preferences .WidgetSimple.Setting.ReadOnly .Content .SettingUpdateBox,
+    .Preferences .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: transparent;
+        border: none;
+    }
 
-.WidgetSimple.Setting .SettingWrapper > fieldset {
-    padding-right: 30px;
-}
+    .Preferences .WidgetSimple.Setting.IsLockedByMe.HasOverlay .Content .SettingUpdateBox {
+        margin: 0;
+        right: inherit;
+    }
 
-fieldset.TableLike > .Field.NoMargin {
-    margin-left: 0px;
-}
+    .Preferences .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox button,
+    .Preferences .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox button:first-child,
+    .Preferences .WidgetSimple.Setting.ReadOnly .Content .SettingUpdateBox button {
+        margin: 0;
+    }
 
-.WidgetSimple .WidgetMessage.Top {
-	margin-top: 0px !important;
-	margin-bottom: 0px;
-}
+    .Preferences .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox button.Cancel {
+        display: none;
+    }
 
-.PreferenceAvatar img {
-    display: block;
-    float: left;
-    margin-right: 10px;
-    border-radius: 5px;
-    width: 45px;
-    height: 45px;
-}
+    .Preferences .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox button.Update:hover span {
+        color: var(--btn-primary-text);
+    }
 
-#ToggleView.Grid .fa:last-child {
-    display: none !important;
-}
+    .Preferences .WidgetSimple.Setting .SettingWrapper > .SettingDescription,
+    .Preferences .WidgetSimple.Setting.IsLockedByMe .SettingWrapper > .SettingDescription {
+        padding: var(--padding-md);
+    }
 
-#ToggleView.List .fa:first-child {
-    display: none !important;
-}
+    .Preferences .WidgetSimple.Setting .SettingWrapper label {
+        width: 100%;
+        /*padding: 0 0 var(--padding-sm) 0;*/
+        text-align: left;
+    }
+
+
+    .Preferences .PreferenceClassic .SettingWrapper > fieldset {
+        /*
+        display: flex;
+        border-right: var(--border-width) var(--border-solid) var(--border-color);
+        width: calc(100% - 300px);
+        */
+        min-width: 70%;
+        width: 70%;
+        border-right: var(--border-width) var(--border-solid) var(--border-color);
+        display: flex;
+        align-self: stretch;
+        margin: 0;
+    }
+
+    .Preferences .PreferenceClassic .SettingWrapper > fieldset .PreferenceAvatar,
+    .Preferences .PreferenceClassic .SettingWrapper > .SettingDescription {
+        line-height: 17.5px;
+        word-break: break-word;
+        transition: padding ease 0.2s;
+        letter-spacing: .1px;
+        font-size: var(--font-size-sm);
+        color: var(--gray-dark);
+        width: 100%;
+    }
+
+    .Preferences .PreferenceClassic .SettingWrapper > fieldset .OutOfOffice {
+        display: flex;
+        flex-direction: column;
+        gap: var(--padding-lg);
+    }
+
+    .Preferences .PreferenceClassic .SettingWrapper > fieldset .OutOfOffice .field-wrapper .Field {
+        align-items: unset;
+    }
+
+    .Preferences .PreferenceClassic .SettingWrapper > fieldset .field-wrapper .Field {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-sm);
+    }
+
+    .Preferences .PreferenceClassic .SettingWrapper > fieldset .field-wrapper .Field label {
+        padding: 0;
+    }
+
+    fieldset.TableLike > .Field.NoMargin {
+        margin-left: 0px;
+    }
+
+    .WidgetSimple .WidgetMessage.Top {
+        margin-top: 0px !important;
+        margin-bottom: 0px;
+    }
+
+    .PreferenceAvatar img {
+        display: block;
+        float: left;
+        margin-right: 10px;
+        border-radius: 5px;
+        width: 45px;
+        height: 45px;
+    }
+
+    #ToggleView.Grid .fa:last-child {
+        display: none !important;
+    }
+
+    #ToggleView.List .fa:first-child {
+        display: none !important;
+    }
+
+    /***********************************************************************/
+    /*    Moved from Core.Reset.Forwwward.css                              */
+    /***********************************************************************/
+
+    .personal-preferences .ContentColumn .Header,
+    .personal-preferences .ContentColumn .ItemListGrid {
+        padding: var(--padding-xl);
+    }
+
+    .personal-preferences .ContentColumn .ItemListGrid {
+        padding-top: 0;
+    }
+
+    .personal-preferences > div {
+        gap: var(--margin-lg);
+    }
+
+    .personal-preferences .SidebarColumn {
+        max-width: 405px;
+        width: 30%;
+    }
+
+    .personal-preferences .ContentColumn {
+        width: 100%;
+    }
+
+    .personal-preferences .WidgetSimple {
+        border-radius: var(--border-radius-lg);
+    }
 
 } /* end @media*/

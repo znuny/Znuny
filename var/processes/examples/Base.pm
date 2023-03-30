@@ -8,7 +8,7 @@
 # --
 
 package var::processes::examples::Base;
-## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
+## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
 
 use strict;
 use warnings;

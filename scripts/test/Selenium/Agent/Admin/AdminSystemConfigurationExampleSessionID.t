@@ -18,13 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
-        my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
         my $Config          = $Kernel::OM->Get('Kernel::Config');
         my $ScriptAlias     = $Config->Get('ScriptAlias');
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -54,7 +54,7 @@ $Selenium->RunTest(
         );
 
         # Disable cookies.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SessionUseCookie',
             Value => 0,

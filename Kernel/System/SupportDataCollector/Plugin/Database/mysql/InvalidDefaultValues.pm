@@ -65,7 +65,7 @@ sub Run {
             Label      => Translatable('Invalid Default Values'),
             Value      => $ErrorMessage,
             Message    => Translatable(
-                'Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair'
+                'Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair'
             ),
         );
     }

@@ -21,7 +21,7 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -119,7 +119,7 @@ my @Tests = (
     },
 );
 
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 my $SysConfigDBObject = $Kernel::OM->Get('Kernel::System::SysConfig::DB');
 
@@ -143,7 +143,7 @@ for my $Test (@Tests) {
         "$Test->{Name} Deployment exists after DeploymentListCleanup() immediately",
     );
 
-    $Helper->FixedTimeAddSeconds(21);
+    $HelperObject->FixedTimeAddSeconds(21);
 
     $Success = $SysConfigDBObject->DeploymentListCleanup();
     $Self->True(

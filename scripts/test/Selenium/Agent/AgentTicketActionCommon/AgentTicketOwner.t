@@ -18,38 +18,64 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $MailQueueObject         = $Kernel::OM->Get('Kernel::System::MailQueue');
+        my $TestEmailObject         = $Kernel::OM->Get('Kernel::System::Email::Test');
+        my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
+        my $UserObject              = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $ArticleObject           = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $CacheObject             = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Enable change owner to everyone feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::ChangeOwnerToEveryone',
             Value => 1
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Disable check of email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Disable MX record check.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckMXRecord',
             Value => 0,
         );
 
-        my $Config = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::AgentTicketOwner');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Service',
+            Value => 0,
+        );
+
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Type',
+            Value => 0,
+        );
+
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Frontend::AgentTicketNote###Owner',
+            Value => 0,
+        );
+
+        my $Config = $ConfigObject->Get('Ticket::Frontend::AgentTicketOwner');
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketOwner',
             Value => {
@@ -62,7 +88,7 @@ $Selenium->RunTest(
         # Create test users and login first.
         my @TestUser;
         for my $User ( 1 .. 2 ) {
-            my $TestUserLogin = $Helper->TestUserCreate(
+            my $TestUserLogin = $HelperObject->TestUserCreate(
                 Groups => [ 'admin', 'users' ],
             ) || die "Did not get test user";
 
@@ -74,8 +100,6 @@ $Selenium->RunTest(
             User     => $TestUser[0],
             Password => $TestUser[0],
         );
-
-        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
         # Get test users ID.
         my @UserID;
@@ -111,8 +135,6 @@ $Selenium->RunTest(
             Valid  => 0,
         );
 
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-
         # Create test ticket.
         my $TicketID = $TicketObject->TicketCreate(
             Title        => 'Selenium Test Ticket',
@@ -130,7 +152,7 @@ $Selenium->RunTest(
             "Ticket $TicketID is created",
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to owner screen of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketOwner;TicketID=$TicketID");
@@ -230,8 +252,6 @@ $Selenium->RunTest(
         );
 
         # Check <OTRS_CUSTOMER_BODY> tag in NotificationOwnerUpdate notification body (see bug#14678).
-        my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
-        my $TestEmailObject = $Kernel::OM->Get('Kernel::System::Email::Test');
 
         # Cleanup mail queue.
         $MailQueueObject->Delete();
@@ -252,7 +272,7 @@ $Selenium->RunTest(
         };
 
         # Enable Test email backend.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SendmailModule',
             Value => 'Kernel::System::Email::Test',
@@ -266,17 +286,17 @@ $Selenium->RunTest(
         );
 
         # Disable AgentTicketOwner###NoteMandatory.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketOwner###NoteMandatory',
             Value => 0
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
         my $Subject  = "Subject-$RandomID";
         my $Body     = "Body-$RandomID";
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
 
@@ -299,8 +319,7 @@ $Selenium->RunTest(
         );
 
         # Add notification.
-        my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
-        my $NotificationID          = $NotificationEventObject->NotificationAdd(
+        my $NotificationID = $NotificationEventObject->NotificationAdd(
             Name => "Notification-$RandomID",
             Data => {
                 Events          => ['NotificationOwnerUpdate'],
@@ -391,7 +410,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     }

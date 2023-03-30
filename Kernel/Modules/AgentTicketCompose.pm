@@ -66,9 +66,10 @@ sub Run {
     }
 
     # get needed objects
-    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
-    my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
-    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+    my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $ArticleObject   = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
 
     my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
@@ -892,12 +893,18 @@ sub Run {
 
             # When a draft is loaded, inform a user that article subject will be empty
             # if contains only the ticket hook (if nothing is modified).
-            if ( $Error{LoadedFormDraft} ) {
-                $Output .= $LayoutObject->Notify(
-                    Data => $LayoutObject->{LanguageObject}->Translate(
-                        'Article subject will be empty if the subject contains only the ticket hook!'
-                    ),
+            if ( $Error{LoadedFormDraft} && IsStringWithData( $GetParam{Subject} ) ) {
+                my $CleanedSubject = $TicketObject->TicketSubjectClean(
+                    TicketNumber => $Ticket{TicketNumber},
+                    Subject      => $GetParam{Subject},
                 );
+                if ( !IsStringWithData($CleanedSubject) ) {
+                    $Output .= $LayoutObject->Notify(
+                        Data => $LayoutObject->{LanguageObject}->Translate(
+                            'Article subject will be empty if the subject contains only the ticket hook!'
+                        ),
+                    );
+                }
             }
 
             $GetParam{StandardResponse} = $GetParam{Body};
@@ -1295,18 +1302,41 @@ sub Run {
             NoCache     => 1,
         );
     }
+    elsif ( $Self->{Subaction} eq 'CheckSubject' ) {
+
+        # Inform a user that article subject will be empty if contains only the ticket hook (if nothing is modified).
+        my $Message = $LayoutObject->{LanguageObject}->Translate(
+            'Article subject will be empty if the subject contains only the ticket hook!'
+        );
+
+        my $Subject = $ParamObject->GetParam( Param => 'Subject' );
+
+        my $CleanedSubject = $TicketObject->TicketSubjectClean(
+            TicketNumber => $Ticket{TicketNumber},
+            Subject      => $Subject,
+        );
+
+        my $Empty = !length $CleanedSubject;
+
+        my $JSON = $LayoutObject->JSONEncode(
+            Data => {
+                Empty   => $Empty ? 1 : 0,
+                Message => $Message,
+            }
+        );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $JSON,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
     else {
         my $Output = $LayoutObject->Header(
             Value     => $Ticket{TicketNumber},
             Type      => 'Small',
             BodyClass => 'Popup',
-        );
-
-        # Inform a user that article subject will be empty if contains only the ticket hook (if nothing is modified).
-        $Output .= $LayoutObject->Notify(
-            Data => $LayoutObject->{LanguageObject}->Translate(
-                'Article subject will be empty if the subject contains only the ticket hook!'
-            ),
         );
 
         # get std attachment object
@@ -1446,7 +1476,7 @@ sub Run {
             UploadCacheObject => $UploadCacheObject,
         );
 
-        my %SafetyCheckResult = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+        my %SafetyCheckResult = $HTMLUtilsObject->Safety(
             String => $Data{Body},
 
             # Strip out external content if BlockLoadingRemoteContent is enabled.
@@ -1462,23 +1492,17 @@ sub Run {
         $Data{Body} = $SafetyCheckResult{String};
 
         # restrict number of body lines if configured
+        my $ResponseQuoteMaxLines = $ConfigObject->Get('Ticket::Frontend::ResponseQuoteMaxLines');
         if (
-            $Data{Body}
-            && $ConfigObject->Get('Ticket::Frontend::ResponseQuoteMaxLines')
+            IsStringWithData( $Data{Body} )
+            && $ResponseQuoteMaxLines
             )
         {
-            my $MaxLines = $ConfigObject->Get('Ticket::Frontend::ResponseQuoteMaxLines');
-
-            # split body - one element per line
-            my @Body = split "\n", $Data{Body};
-
-            # only modify if body is longer than allowed
-            if ( scalar @Body > $MaxLines ) {
-
-                # splice to max. allowed lines and reassemble
-                @Body = @Body[ 0 .. ( $MaxLines - 1 ) ];
-                $Data{Body} = join "\n", @Body;
-            }
+            $Data{Body} = $HTMLUtilsObject->TruncateBodyQuote(
+                Body       => $Data{Body},
+                Limit      => $ResponseQuoteMaxLines,
+                HTMLOutput => $LayoutObject->{BrowserRichText},
+            ) // $Data{Body};
         }
 
         if ( $LayoutObject->{BrowserRichText} ) {
@@ -1487,6 +1511,7 @@ sub Run {
             # rewrap body if exists
             if ( $Data{Body} ) {
                 $Data{Body} =~ s/\t/ /g;
+
                 my $Quote = $LayoutObject->Ascii2Html(
                     Text           => $ConfigObject->Get('Ticket::Frontend::Quote') || '',
                     HTMLResultMode => 1,
@@ -1535,6 +1560,7 @@ sub Run {
             # re-wrap body if exists
             if ( $Data{Body} ) {
                 $Data{Body} =~ s/\t/ /g;
+
                 my $Quote = $ConfigObject->Get('Ticket::Frontend::Quote');
                 if ($Quote) {
                     $Data{Body} =~ s/\n/\n$Quote /g;
@@ -2253,20 +2279,9 @@ sub _Mask {
 
     # show time accounting box
     if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {
-        if ( $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime') ) {
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelMandatory',
-                Data => \%Param,
-            );
-            $Param{TimeUnitsRequired} = 'Validate_Required';
-        }
-        else {
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabel',
-                Data => \%Param,
-            );
-            $Param{TimeUnitsRequired} = '';
-        }
+        $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
+            %Param,
+        );
         $LayoutObject->Block(
             Name => 'TimeUnits',
             Data => \%Param,

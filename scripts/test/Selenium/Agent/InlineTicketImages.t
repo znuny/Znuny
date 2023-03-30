@@ -17,10 +17,11 @@ use vars (qw($Self));
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 my $CreateTestCustomer = sub {
-    my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+    my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
     my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
-    my $RandomID           = $Helper->GetRandomID();
+    my $RandomID           = $HelperObject->GetRandomID();
     my $TestCustomer       = 'Customer' . $RandomID;
     my $CustomerEmail      = "$TestCustomer\@localhost.com";
     my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
@@ -42,11 +43,11 @@ my $CreateTestCustomer = sub {
 };
 
 my $CreateTestUser = sub {
-    my $Helper     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+    my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
     my $Language      = 'en';
-    my $TestUserLogin = $Helper->TestUserCreate(
+    my $TestUserLogin = $HelperObject->TestUserCreate(
         Groups   => [ 'users', ],
         Language => $Language,
     ) || die "Did not get test user";
@@ -60,7 +61,11 @@ my $CreateTestUser = sub {
 };
 
 my $ImportSampleEmail = sub {
-    my $OTRSDIR = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+
+    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+    my $OTRSDIR = $ConfigObject->Get('Home');
     my $FH      = IO::File->new( "${ OTRSDIR }/scripts/test/sample/PostMaster/InlineImage.box", 'r', );
     my @Lines   = <$FH>;
 
@@ -89,7 +94,7 @@ my $ImportSampleEmail = sub {
         QueueID => 0,
     );
 
-    my @Articles = $Kernel::OM->Get('Kernel::System::Ticket::Article')->ArticleList(
+    my @Articles = $ArticleObject->ArticleList(
         TicketID => $TicketID,
         OnlyLast => 1,
     );
@@ -144,9 +149,11 @@ my $DeleteSampleEmail = sub {
 my $CheckTicketZoom = sub {
     my %Param = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     my $TicketID = $Param{TicketID};
 
-    my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+    my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
     # Go to ticket zoom page.
     $Selenium->VerifiedGet( "${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=" . $TicketID );
@@ -195,11 +202,13 @@ my $CheckEmailContentDisposition = sub {
 my $CheckTicketReplyOrForward = sub {
     my %Param = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     my $TicketID  = $Param{TicketID};
     my $ArticleID = $Param{ArticleID};
     my $Action    = $Param{Action};
 
-    my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+    my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
     if ( $Action eq 'Reply' ) {
 
@@ -267,21 +276,21 @@ my $CheckTicketReplyOrForward = sub {
 
 $Selenium->RunTest(
     sub {
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check service and type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0

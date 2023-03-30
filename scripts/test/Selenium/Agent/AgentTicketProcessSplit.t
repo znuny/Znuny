@@ -18,29 +18,33 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
+        my $ArticleObject         = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Set 'Linked Objects' widget to simple view.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LinkObject::ViewMode',
             Value => 'Simple',
         );
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -49,7 +53,7 @@ $Selenium->RunTest(
         my @DeleteTicketIDs;
 
         # create a test ticket
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
         my $TicketID = $TicketObject->TicketCreate(
             Title        => "Ticket$RandomID",
             Queue        => 'Raw',
@@ -68,7 +72,7 @@ $Selenium->RunTest(
 
         push @DeleteTicketIDs, $TicketID;
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Phone',
         );
 
@@ -102,8 +106,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
 
         # Import test Selenium Process.
-        my $Location
-            = $ConfigObject->Get('Home') . "/scripts/test/sample/ProcessManagement/CustomerTicketOverviewProcess.yml";
+        my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/CustomerTicketOverviewProcess.yml";
         $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
         $Selenium->WaitFor(
@@ -118,7 +121,7 @@ $Selenium->RunTest(
         # Navigate to AgentTicketZoom screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID;");
 
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -163,7 +166,7 @@ $Selenium->RunTest(
 
         # Check if CustomerID read only field can be disabled. See bug#14412.
         # Disable CustomerID read only.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly',
             Value => 0
@@ -176,7 +179,7 @@ $Selenium->RunTest(
             JavaScript => 'return $("#CustomerAutoComplete").length;'
         );
 
-        my $RandomCustomerUser = 'RandomCustomerUser' . $Helper->GetRandomID();
+        my $RandomCustomerUser = 'RandomCustomerUser' . $HelperObject->GetRandomID();
         $Selenium->find_element( "#CustomerAutoComplete", 'css' )->clear();
         $Selenium->find_element( "#CustomerID",           'css' )->clear();
         $Selenium->find_element( "#CustomerAutoComplete", 'css' )->send_keys($RandomCustomerUser);
@@ -192,7 +195,7 @@ $Selenium->RunTest(
         $Selenium->find_element( "#CustomerAutoComplete", 'css' )->clear();
         $Selenium->find_element( "#CustomerID",           'css' )->clear();
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly',
             Value => 1
@@ -233,7 +236,7 @@ $Selenium->RunTest(
         # Check if ticket split with customer created article is preselecting customer user from article. See bug#12956.
         # Create test customer company.
         my $TestCompany = 'Company' . $RandomID;
-        my $CustomerID  = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerID  = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID          => $TestCompany,
             CustomerCompanyName => $TestCompany,
             ValidID             => 1,
@@ -247,7 +250,7 @@ $Selenium->RunTest(
         # Create test customer user.
         my $TestUser      = 'CustomerUser' . $RandomID;
         my $TestUserEmail = "$TestUser\@example.com";
-        my $CustomerUser  = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUser  = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestUser,
             UserLastname   => $TestUser,

@@ -19,13 +19,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # Get needed objects.
-        my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject             = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Create test ticket.
@@ -48,7 +50,7 @@ $Selenium->RunTest(
         );
 
         # Create dynamic field.
-        my $RandomNumber     = $Helper->GetRandomNumber();
+        my $RandomNumber     = $HelperObject->GetRandomNumber();
         my $DynamicFieldName = 'DF' . $RandomNumber;
         my $DynamicFieldLink = "https://www.example.com";
         my $DynamicFieldID   = $DynamicFieldObject->DynamicFieldAdd(
@@ -71,7 +73,7 @@ $Selenium->RunTest(
 
         # Set dynamic field value.
         my $ValueText = 'Click on Link' . $RandomNumber;
-        my $Success   = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueSet(
+        my $Success   = $DynamicFieldValueObject->ValueSet(
             FieldID    => $DynamicFieldID,
             ObjectType => 'Ticket',
             ObjectID   => $TicketID,
@@ -88,7 +90,7 @@ $Selenium->RunTest(
         );
 
         # Set SysConfig to show dynamic field in CustomerTicketZoom screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###DynamicField',
             Value => {
@@ -103,7 +105,7 @@ $Selenium->RunTest(
             Password => $TestCustomerUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
         # Check existence of test dynamic field in 'Information' sidebar.
@@ -182,7 +184,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 );
 

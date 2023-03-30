@@ -54,7 +54,6 @@
 [% RenderBlockStart("ToIsLocalAddressServerErrorMsg") %]
                             <p>[% Translate("This address is registered as system address and cannot be used: %s", Data.To) | html %]</p>
 [% RenderBlockEnd("ToIsLocalAddressServerErrorMsg") %]
-
 [% RenderBlockStart("ToServerErrorMsg") %]
                             <p>[% Translate("Please include at least one recipient") | html %]</p>
 [% RenderBlockEnd("ToServerErrorMsg") %]
@@ -166,7 +165,6 @@
                                     <i class="fa fa-minus-square-o"></i>
                                     <span class="InvisibleText">[% Translate("Remove Cc") | html %]</span>
                                 </a>
-
 [% RenderBlockStart("CcCustomerErrorExplantion") %]
                                 <p class="Explanation Error">[% Translate("Please remove this entry and enter a new one with the correct value.") | html %]</p>
 [% RenderBlockEnd("CcCustomerErrorExplantion") %]
@@ -242,7 +240,6 @@
                                     <i class="fa fa-minus-square-o"></i>
                                     <span class="InvisibleText">[% Translate("Remove Bcc") | html %]</span>
                                 </a>
-
 [% RenderBlockStart("BccCustomerErrorExplantion") %]
                                 <p class="Explanation Error">[% Translate("Please remove this entry and enter a new one with the correct value.") | html %]</p>
 [% RenderBlockEnd("BccCustomerErrorExplantion") %]
@@ -284,7 +281,6 @@
                         <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                     </div>
                     <div class="Clear"></div>
-
 [% RenderBlockStart("Option") %]
                     <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
                     <div class="Field">
@@ -296,7 +292,6 @@
                     </div>
                     <div class="Clear"></div>
 [% RenderBlockEnd("Option") %]
-
 [% RenderBlockStart("TicketOptions") %]
                     <label>[% Translate("Options") | html %]:</label>
                     <div class="Field">
@@ -319,11 +314,10 @@
                     <div class="Clear"></div>
 
                     <label>[% Translate("Attachments") | html %]:</label>
-                    <div class="Field">
-                    [% INCLUDE "FormElements/AttachmentList.tt" %]
+                    <div class="Field component-attachment">
+                        [% INCLUDE "FormElements/AttachmentList.tt" %]
                     </div>
                     <div class="Clear"></div>
-
 [% RenderBlockStart("IsVisibleForCustomer") %]
                     <label for="IsVisibleForCustomer">[% Translate("Visible for customer") | html %]:</label>
                     <div class="Field">
@@ -331,21 +325,10 @@
                     </div>
                     <div class="Clear"></div>
 [% RenderBlockEnd("IsVisibleForCustomer") %]
-
-[% RenderBlockStart("TimeUnitsLabel") %]
-                    <label for="TimeUnits">[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]:</label>
-[% RenderBlockEnd("TimeUnitsLabel") %]
-[% RenderBlockStart("TimeUnitsLabelMandatory") %]
-                    <label class="Mandatory" for="TimeUnits"><span class="Marker">*</span>[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]:</label>
-[% RenderBlockEnd("TimeUnitsLabelMandatory") %]
 [% RenderBlockStart("TimeUnits") %]
-                    <div class="Field">
-                        <input type="text" name="TimeUnits" id="TimeUnits" value="[% Data.TimeUnits | html %]" class="W50pc Validate_TimeUnits [% Data.TimeUnitsRequired | html %] [% Data.TimeUnitsInvalid | html %] " />
-                        <div id="TimeUnitsError" class="TooltipErrorMessage"><p>[% Translate("Invalid time!") | html %]</p></div>
-                        <div id="TimeUnitsServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                    </div>
-                    <div class="Clear"></div>
+                    [% Data.TimeUnitsBlock %]
 [% RenderBlockEnd("TimeUnits") %]
+
                 </fieldset>
             </div>
         </div>

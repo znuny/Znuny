@@ -19,16 +19,18 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'ConfigLevel',
             Value => '300',
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -38,7 +40,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminSysConfig screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSystemConfiguration;");
@@ -55,13 +57,13 @@ $Selenium->RunTest(
             JavaScript => 'return typeof($) === "function" && !$("#AJAXLoaderSysConfigSearch:visible").length;'
         );
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
-        $Selenium->find_element( "button[type='submit']", "css" )->click();
+        $Selenium->find_element( "#SysConfigSearch", "css" )->VerifiedSubmit();
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && $(".fa-exclamation-triangle").length;',
         );
 
         my $Message = $Selenium->find_element( ".fa-exclamation-triangle", "css" )->get_attribute('title');
-        $Kernel::OM->Get('Kernel::System::Log')->Dumper( '$Message', $Message );
+        $LogObject->Dumper( '$Message', $Message );
         $Self->Is(
             'Changing this setting is only available in a higher config level!',
             $Message,

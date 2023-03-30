@@ -1,0 +1,30 @@
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: ''
+FrameworkVersion: 6.1.x git
+Provider:
+  Operation:
+    TimeAccountingGet:
+      Description: ''
+      IncludeTicketData: '0'
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TimeAccountingGet
+  Transport:
+    Config:
+      AdditionalHeaders: ~
+      KeepAlive: ''
+      MaxLength: '1000000'
+      RouteOperationMapping:
+        TimeAccountingGet:
+          ParserBackend: JSON
+          RequestMethod:
+          - POST
+          Route: /TimeAccountingGet
+    Type: HTTP::REST
+RemoteSystem: ''
+Requester:
+  Transport:
+    Type: ''

@@ -6,153 +6,46 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-<div class="MainBox ARIARoleMain AdminSupportDataCollector LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Support Data Collector") | html %]</h1>
 
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Support Data Collector'),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
-
+<div class="MainBox ARIARoleMain AdminSupportDataCollector LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Note") | html %]</h2>
             </div>
             <div class="Content">
                 <ul class="ActionList">
-[% RenderBlockStart("CloudServicesWarning") %]
-                    <li>
-                        <p class="FieldExplanation Error">
-                            [% Translate("Cloud services are currently disabled.") | html %]
-                            </br>
-                            [% Translate("Sending support data to OTRS Group is not possible!") | html %]
-                        </p>
-                        <form action="[% Env("CGIHandle") %]" method="post">
-                            <input type="hidden" name="Action" value="AdminSystemConfiguration"/>
-                            <input type="hidden" name="Subaction" value="Edit"/>
-                            <input type="hidden" name="SysConfigGroup" value="CloudService"/>
-                            <input type="hidden" name="SysConfigSubGroup" value="Core"/>
-                            <fieldset>
-                                <button class="Fullsize CallForAction LittleSpacingTop Center" type="submit" value="[% Translate("Enable Cloud Services") | html %]">
-                                    <span><i class="fa fa-cloud"></i> [% Translate("Enable cloud services") | html %]</span>
-                                </button>
-                            </fieldset>
-                        </form>
-                    </li>
-[% RenderBlockEnd("CloudServicesWarning") %]
-[% RenderBlockStart("NoteRegisteredSending") %]
-                    [%  IF Config("Frontend::Module").AdminRegistration %]
-                    <li>
-                        <p class="FieldExplanation">[% Translate("This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.") | html %]</p>
-                        <a href="[% Env("Baselink") %]Action=AdminRegistration;Subaction=Edit" class="CallForAction Fullsize Center">
-                            <span><i class="fa fa-sign-in"></i> [% Translate("System Registration") | html %]</span>
-                        </a>
-                    </li>
-                    <li class="Separated">
-                        <a href="[% Env("Baselink") %]Action=AdminRegistration;Subaction=SentDataOverview" class="CallForAction Fullsize Center">
-                            <span><i class="fa fa-cloud"></i> [% Translate("Show transmitted data") | html %]</span>
-                        </a>
-                    </li>
-                    [% END %]
-                    <li>
-                        <p class="FieldExplanation">[% Translate("You can manually trigger the Support Data sending by pressing this button:") | html %]</p>
-                        <a class="CallForAction Fullsize Center LittleSpacingTop" id="SendUpdate" name="SendUpdate" >
-                            <span><i class="fa fa-cloud-upload"></i> [% Translate("Send Update") | html %]</span>
-                        </a>
-                    </li>
-[% RenderBlockEnd("NoteRegisteredSending") %]
-
-[% RenderBlockStart("NoteNotRegisteredNotSending") %]
-                    [%  IF Config("Frontend::Module").AdminRegistration %]
-                    <li>
-                        <p class="FieldExplanation">
-                            [% Translate("Currently this data is only shown in this system.") | html %]
-                            [% Translate("It is highly recommended to send this data to OTRS Group in order to get better support.") | html %]
-                            <br/>
-                            [% Translate("To enable data sending, please register your system with OTRS Group or update your system registration information (make sure to activate the 'send support data' option.)") | html %]
-                        </p>
-                        <a href="[% Env("Baselink") %]Action=AdminRegistration" class="CallForAction Fullsize Center">
-                            <span><i class="fa fa-sign-in"></i> [% Translate("System Registration") | html %]</span>
-                        </a>
-                    </li>
-                    [% END %]
-[% RenderBlockEnd("NoteNotRegisteredNotSending") %]
 [% RenderBlockStart("NoteSupportBundle") %]
                     <li>
                         <p class="FieldExplanation">[% Translate("A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:") | html %]</p>
-                        <a class="CallForAction Fullsize Center LittleSpacingTop" id="GenerateSupportBundle" name="GenerateSupportBundle" >
+                        <a class="CallForAction btn-main btn-primary-ghost" id="GenerateSupportBundle" name="GenerateSupportBundle" >
                             <span><i class="fa fa-archive"></i> [% Translate("Generate Support Bundle") | html %]</span>
                         </a>
                     </li>
 [% RenderBlockEnd("NoteSupportBundle") %]
-
                 </ul>
             </div>
         </div>
     </div>
 
     <div id="SupportBundleOptionsDialogContainer" class="Hidden">
-        <div class="Spacing SupportBundleOptionsDialog" id="SupportBundleOptionsDialog">
+        <div class="SupportBundleOptionsDialog" id="SupportBundleOptionsDialog">
             <span class="W50pc" title=""></span>
             <h2>[% Translate("The Support Bundle has been Generated") | html %]</h2>
-                <div class="FieldExplanation">
-                    [% Translate("Please choose one of the following options.") | html %]
-                </div>
-                <div class="Spacing"></div>
-                <fieldset class="TableLike NoSupportBundleSendMessage Hidden">
-                    <legend><span>[% Translate("Send by Email") | html %]</span></legend>
-                    <div class="FieldExplanation SizeMessage Hidden">
-                        [% Translate("The support bundle is too large to send it by email, this option has been disabled.") | html %]
-                    </div>
-                    <div class="FieldExplanation EmailMessage Hidden">
-                        [% Translate("The email address for this user is invalid, this option has been disabled.") | html %]
-                    </div>
-                    <div class="Spacing"></div>
-                </fieldset>
-                <fieldset class="TableLike SupportBundleSendFieldSet">
-                    <legend><span>[% Translate("Send by Email") | html %]</span></legend>
-                    <label for="Name">[% Translate("Name") | html %]:</label>
-                    <div class="Field">
-                        <input type="text" id="Name" name="Name" value="[% Data.SenderName | html %]" class="W50pc" readonly="readonly" />
-                    </div>
-                    <div class="Clear"></div>
-
-                    <label for="Sender">[% Translate("Email") | html %]:</label>
-                    <div class="Field">
-                        <input type="text" id="Sender" name="Sender" value="[% Data.SenderAddress | html %]" class="W50pc" readonly="readonly" />
-                    </div>
-                    <div class="Clear"></div>
-
-                    <div class="Field">
-                        <button class="CallForAction" value="SendByEmail" id="SendSupportBundle">
-                            <span><i class="fa fa-send"></i> [% Translate("Send") | html %]</span>
-                        </button>
-                        <span id="SendingAJAXLoader" class="Hidden" title="[% Translate("Sending") | html %]"></span>
-                        <div class="FieldExplanation">
-                            [% Translate("The support bundle will be sent to OTRS Group via email automatically.") | html %]
-                        </div>
-                    </div>
-                </fieldset>
                 <fieldset class="TableLike">
-                    <legend><span>[% Translate("Download File") | html %]</span></legend>
                     <div class="Field">
-                        <button class="CallForAction" value="DownLoad" id="DownloadSupportBundle">
-                            <span><i class="fa fa-download"></i> [% Translate("Download") | html %]</span>
-                        </button>
                         <div class="FieldExplanation">
-                            [% Translate("A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.") | html %]
+                            [% Translate("A file containing the support bundle will be downloaded to the local system.") | html %]
                         </div>
+                        <button class="CallForAction btn-main btn-primary-ghost btn-width-xl" value="DownLoad" id="DownloadSupportBundle">
+                            <span>
+                                [% Translate("Download") | html %]
+                            </span>
+                        </button>
                     </div>
                 </fieldset>
             </div>
         </div>
-
 [% RenderBlockStart("SupportDataCollectionFailed") %]
         <div class="ContentColumn">
             <h2>[% Translate("Support Data") | html %]</h2>
@@ -165,9 +58,19 @@
             </div>
         </div>
 [% RenderBlockEnd("SupportDataCollectionFailed") %]
-
 [% RenderBlockStart("SupportData") %]
         <div class="ContentColumn">
+            <h1 class="InvisibleText">[% Translate("Support Data Collector") | html %]</h1>
+
+            [% BreadcrumbPath = [
+                    {
+                        Name => Translate('Support Data Collector'),
+                        Link => Env("Action"),
+                    },
+                ]
+            %]
+
+            [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 [% RenderBlockStart("SupportDataGroup") %]
             <div class="WidgetSimple">
                 <div class="Header">
@@ -189,7 +92,7 @@
                             </h3>
 [% RenderBlockStart("SupportDataEntryTableDetails") %]
                             <div class="SupportDataTableScrollbar">
-                                <table class="DataTable SupportDataTable">
+                                <table class="DataTable SupportDataTable TableList">
                                     <thead>
                                     [% FOR Label IN Data.Labels %]
                                         <th>[% Translate(Label) | html %]</th>
@@ -218,7 +121,7 @@
                                 <span class="Value">([% Data.Value | html %])</span>
 [% RenderBlockEnd("SupportDataEntryValueSingleLine") %]
                             </h3>
-                            <p class="SpacingTopSmall">[% Translate(Data.Message) | html %]</p>
+                            <p>[% Translate(Data.Message) | html %]</p>
 [% RenderBlockStart("SupportDataEntryValueMultiLine") %]
                             <textarea rows="5" cols="80" readonly="readonly" class="Value">[% Data.Value | html %]</textarea>
 [% RenderBlockEnd("SupportDataEntryValueMultiLine") %]
@@ -230,33 +133,36 @@
                                 </span>
                                 [% Translate(Data.SubGroup) | html %]
                             </h3>
-                            <table class="DataTable">
-                                <tbody>
+                            <div class="SupportDataTableScrollbar">
+                                <table class="SupportDataTable DataTable TableList">
+
+                                    <tbody>
 [% RenderBlockStart("SupportDataSubEntry") %]
-                                    <tr>
-                                        <td class="Status">
-                                            <span title="[% Translate(Data.StatusName) | html %]" class="Flag Small [% Data.StatusName | html %]">
-                                                <span>[% Data.StatusName | html %]</span>
-                                            </span>
-                                        </td>
-                                        <td class="ItemLabel">[% Translate(Data.Label) | html %]</td>
-                                        <td>[% Data.Value | html %]</td>
-                                        <td>
+                                        <tr>
+                                            <td class="Status">
+                                                <span title="[% Translate(Data.StatusName) | html %]" class="Flag Small [% Data.StatusName | html %]">
+                                                    <span>[% Data.StatusName | html %]</span>
+                                                </span>
+                                            </td>
+                                            <td class="ItemLabel">[% Translate(Data.Label) | html %]</td>
+                                            <td>[% Data.Value | html %]</td>
+                                            <td>
 [% RenderBlockStart("SupportDataSubEntryMessage") %]
-                                            <a href="#" class="ShowItemMessage"><i class="fa fa-info-sign"></i> [% Translate("Details") | html %]</a>
-                                            <div class="Hidden">
-                                                [%  IF Data.Message %]
-                                                <p class="DialogMessage">[% Translate(Data.Message) | html %]</p>
-                                                [% ELSIF Data.MessageFormatted %]
-                                                <pre class="DialogMessage">[% Translate(Data.MessageFormatted) | html %]</pre>
-                                                [% END %]
-                                            </div>
+                                                <a href="#" class="ShowItemMessage"><i class="fa fa-info-sign"></i> [% Translate("Details") | html %]</a>
+                                                <div class="Hidden">
+                                                    [%  IF Data.Message %]
+                                                    <p class="DialogMessage">[% Translate(Data.Message) | html %]</p>
+                                                    [% ELSIF Data.MessageFormatted %]
+                                                    <pre class="DialogMessage">[% Translate(Data.MessageFormatted) | html %]</pre>
+                                                    [% END %]
+                                                </div>
 [% RenderBlockEnd("SupportDataSubEntryMessage") %]
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
 [% RenderBlockEnd("SupportDataSubEntry") %]
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
 [% RenderBlockEnd("SupportDataSubGroup") %]
                         </li>
 [% RenderBlockEnd("SupportDataRow") %]
@@ -266,5 +172,4 @@
 [% RenderBlockEnd("SupportDataGroup") %]
         </div>
 [% RenderBlockEnd("SupportData") %]
-        <div class="Clear"></div>
     </div>

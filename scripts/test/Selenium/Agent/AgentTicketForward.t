@@ -17,36 +17,40 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Do not check service and type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0
         );
 
         # Disable global external content blocking.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::BlockLoadingRemoteContent',
             Value => 0,
@@ -69,7 +73,7 @@ $Selenium->RunTest(
             "TicketCreate - ID $TicketID",
         );
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
 
@@ -92,18 +96,18 @@ $Selenium->RunTest(
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Add test customer for testing.
-        my $TestCustomer       = 'Customer' . $Helper->GetRandomID();
-        my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $TestCustomer       = 'Customer' . $HelperObject->GetRandomID();
+        my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomer,
             UserLastname   => $TestCustomer,
@@ -125,7 +129,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketForward page.
         $Selenium->VerifiedGet(
@@ -167,13 +171,13 @@ $Selenium->RunTest(
 
         # Test external content loading depends on BlockLoadingRemoteContent setting (see bug#14398).
         # Enable RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 1,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create another email article.
         my $ImgSource           = 'http://example.com/image.png';
@@ -237,7 +241,7 @@ $Selenium->RunTest(
         );
 
         # Enable global external content blocking.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::BlockLoadingRemoteContent',
             Value => 1,

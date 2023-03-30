@@ -18,34 +18,37 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Hook',
             Value => 'TestTicket#',
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::HookDivider',
             Value => '::',
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -66,7 +69,7 @@ $Selenium->RunTest(
             "Ticket is created - ID $TicketID1",
         );
 
-        my $TitleRandom = "Title" . $Helper->GetRandomID();
+        my $TitleRandom = "Title" . $HelperObject->GetRandomID();
         my $TicketID2   = $TicketObject->TicketCreate(
             Title        => $TitleRandom,
             Queue        => 'Raw',
@@ -90,12 +93,12 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         for my $TicketID ( $TicketID1, $TicketID2 ) {
 
             if ( $TicketID eq $TicketID2 ) {
-                $Helper->ConfigSettingChange(
+                $HelperObject->ConfigSettingChange(
                     Valid => 1,
                     Key   => 'Ticket::Frontend::RedirectAfterCloseDisabled',
                     Value => '1',
@@ -179,7 +182,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     }

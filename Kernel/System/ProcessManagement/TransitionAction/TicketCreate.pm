@@ -28,6 +28,7 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket::Article',
     'Kernel::System::DateTime',
     'Kernel::System::User',
+    'Kernel::System::HTMLUtils',
 );
 
 =head1 NAME
@@ -60,15 +61,19 @@ sub new {
 
 =head2 Run()
 
-    Run Data
+Runs TransitionAction TicketCreate.
 
     my $TicketCreateResult = $TicketCreateActionObject->Run(
         UserID                   => 123,
+
+        # Ticket contains the result of TicketGet including dynamic fields
         Ticket                   => \%Ticket,   # required
         ProcessEntityID          => 'P123',
         ActivityEntityID         => 'A123',
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
+
+        # Config is the hash stored in a Process::TransitionAction's config key
         Config                   => {
             # ticket required:
             Title         => 'Some Ticket Title',
@@ -98,7 +103,10 @@ sub new {
             %DataPayload,                                               # some parameters depending of each communication channel
 
             # article optional:
-            TimeUnit => 123
+            TimeUnit => 123,
+
+            # Attachment optional:
+            Attachments => '1',                                         #  optional, 1|0
 
             # other:
             DynamicField_NameX => $Value,
@@ -106,18 +114,17 @@ sub new {
             UserID => 123,                                              # optional, to override the UserID from the logged user
         }
     );
-    Ticket contains the result of TicketGet including DynamicFields
-    Config is the Config Hash stored in a Process::TransitionAction's  Config key
-    Returns:
 
-    $TicketCreateResult = 1; # 0
+Returns:
 
-    );
+    my $Success = 1; # 0
 
 =cut
 
 sub Run {
     my ( $Self, %Param ) = @_;
+
+    my $StdAttachmentObject = $Kernel::OM->Get('Kernel::System::StdAttachment');
 
     # define a common message to output in case of any error
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -133,6 +140,39 @@ sub Run {
 
     # override UserID if specified as a parameter in the TA config
     $Param{UserID} = $Self->_OverrideUserID(%Param);
+
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    # Convert DynamicField value to HTML string, see bug#14229.
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+    if (
+        defined $Param{Config}->{Body}
+        && $Param{Config}->{Body} =~ /OTRS_TICKET_DynamicField_/
+        )
+    {
+        MATCH:
+        for my $Match ( sort keys %{ $Param{Ticket} } ) {
+            if ( $Match =~ m/DynamicField_(.*)/ && $Param{Ticket}->{$Match} ) {
+
+                my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+                    Name => $1,
+                );
+
+                # Check if there is HTML content.
+                my $IsHTMLContent = $DynamicFieldBackendObject->HasBehavior(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    Behavior           => 'IsHTMLContent',
+                );
+
+                # Avoid double conversion to HTML for dynamic fields with HTML content.
+                next MATCH if $IsHTMLContent;
+                $Param{Ticket}->{$Match} = $HTMLUtilsObject->ToHTML(
+                    String => $Param{Ticket}->{$Match},
+                );
+            }
+        }
+    }
 
     # use ticket attributes if needed
     $Self->_ReplaceTicketAttributes(%Param);
@@ -289,6 +329,40 @@ sub Run {
             ChannelName => $Param{Config}->{CommunicationChannel},
         );
 
+        # attachments
+        if ( $Param{Config}->{AttachmentsReuse} ) {
+            $Param{Config}->{Attachment} = $Self->_GetAttachments(%Param);
+        }
+
+        if ( $Param{Config}->{Attachments} || $Param{Config}->{AttachmentIDs} ) {
+            my @AttachmentIDs = split /\s*,\s*/, ( $Param{Config}->{AttachmentIDs} || '' );
+
+            my @AttachmentNames = split /\s*,\s*/, ( $Param{Config}->{Attachments} || '' );
+            ATTACHMENT:
+            for my $Name (@AttachmentNames) {
+                my $ID = $StdAttachmentObject->StdAttachmentLookup(
+                    StdAttachment => $Name,
+                );
+                next ATTACHMENT if !$ID;
+
+                push @AttachmentIDs, $ID;
+            }
+
+            ATTACHMENT:
+            for my $ID (@AttachmentIDs) {
+                my %Data = $StdAttachmentObject->StdAttachmentGet(
+                    ID => $ID,
+                );
+                next ATTACHMENT if !%Data;
+
+                push @{ $Param{Config}->{Attachment} }, {
+                    Content     => $Data{Content},
+                    ContentType => $Data{ContentType},
+                    Filename    => $Data{Filename},
+                };
+            }
+        }
+
         # Create article for the new ticket.
         $ArticleID = $ArticleBackendObject->ArticleCreate(
             %{ $Param{Config} },
@@ -327,10 +401,6 @@ sub Run {
             $FieldFilter{$1} = 1;
         }
     }
-
-    # get dynamic field objects
-    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
-    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     # get the dynamic fields for ticket
     my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(

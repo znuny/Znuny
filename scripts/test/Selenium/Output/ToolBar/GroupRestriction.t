@@ -19,28 +19,54 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $GroupObject     = $Kernel::OM->Get('Kernel::System::Group');
+        my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
+        my $ProcessObject   = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+        # create temp process for 160-Ticket::AgentTicketProcess
+        my $RandomID  = $HelperObject->GetRandomID();
+        my $ProcessID = $ProcessObject->ProcessAdd(
+            EntityID      => 'EntityID-1' . $RandomID,
+            Name          => 'Process-1' . $RandomID,
+            StateEntityID => 'S1',
+            Layout        => {},
+            Config        => {
+                Description => 'a Description',
+                Path        => {
+                    'A1-' . $RandomID => {},
+                }
+            },
+            UserID => 1,
+        );
+        my $Location    = $ConfigObject->Get('Home') . '/Kernel/Config/Files/ZZZProcessManagement.pm';
+        my $ProcessDump = $ProcessObject->ProcessDump(
+            ResultType => 'FILE',
+            Location   => $Location,
+            UserID     => 1,
+        );
 
         # enable ticket responsible
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1
         );
 
         # enable ticket watcher feature
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Watcher',
             Value => 1
         );
 
         # create test group
-        my $TestGroup   = 'Group' . $Helper->GetRandomID();
+        my $TestGroup   = 'Group' . $HelperObject->GetRandomID();
         my $TestGroupID = $GroupObject->GroupAdd(
             Name    => $TestGroup,
             ValidID => 1,
@@ -93,7 +119,7 @@ $Selenium->RunTest(
 
         # set group restriction for each toolbar module
         for my $ConfigUpdate (@Tests) {
-            my %ToolBarConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+            my %ToolBarConfig = $SysConfigObject->SettingGet(
                 Name    => 'Frontend::ToolBarModule###' . $ConfigUpdate->{ToolBarModule},
                 Default => 1,
             );
@@ -102,7 +128,7 @@ $Selenium->RunTest(
 
             $ToolBarConfig{Group} = "ro:$TestGroup";
 
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Frontend::ToolBarModule###' . $ConfigUpdate->{ToolBarModule},
                 Value => \%ToolBarConfig,
@@ -110,12 +136,12 @@ $Selenium->RunTest(
         }
 
         # create test user
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -217,7 +243,7 @@ $Selenium->RunTest(
         # delete test group
         $TestGroup = $DBObject->Quote($TestGroup);
         $Success   = $DBObject->Do(
-            SQL  => "DELETE FROM groups WHERE name = ?",
+            SQL  => "DELETE FROM permission_groups WHERE name = ?",
             Bind => [ \$TestGroup ],
         );
         $Self->True(
@@ -249,7 +275,7 @@ $Selenium->RunTest(
             qw (Ticket Group)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

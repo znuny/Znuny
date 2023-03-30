@@ -18,14 +18,18 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $SysConfigObject    = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
 
-        my %DynamicFieldsOverviewPageShownSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %DynamicFieldsOverviewPageShownSysConfig = $SysConfigObject->SettingGet(
             Name => 'PreferencesGroups###DynamicFieldsOverviewPageShown',
         );
 
         # Show more dynamic fields per page as the default value.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PreferencesGroups###DynamicFieldsOverviewPageShown',
             Value => {
@@ -35,7 +39,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -45,7 +49,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminDynamicField screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminDynamicField");
@@ -84,7 +88,7 @@ $Selenium->RunTest(
             );
 
             # Create real text DynamicFieldMultiselect.
-            my $RandomID = $Helper->GetRandomID();
+            my $RandomID = $HelperObject->GetRandomID();
 
             $Selenium->find_element( "#Name",     'css' )->send_keys($RandomID);
             $Selenium->find_element( "#Label",    'css' )->send_keys($RandomID);
@@ -251,8 +255,7 @@ $Selenium->RunTest(
             );
 
             # Delete DynamicFields.
-            my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-            my $DynamicField       = $DynamicFieldObject->DynamicFieldGet(
+            my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
                 Name => $RandomID,
             );
             my $Success = $DynamicFieldObject->DynamicFieldDelete(
@@ -269,7 +272,7 @@ $Selenium->RunTest(
         }
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => "DynamicField" );
+        $CacheObject->CleanUp( Type => "DynamicField" );
     }
 );
 

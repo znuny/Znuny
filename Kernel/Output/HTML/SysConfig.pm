@@ -16,10 +16,8 @@ use Kernel::System::VariableCheck qw( :all );
 use parent qw(Kernel::System::SysConfig::Base::Framework);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::Language',
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::SysConfig',
     'Kernel::System::Log',
     'Kernel::System::Main',
 );
@@ -110,8 +108,11 @@ sub SettingRender {
         UserID                  => $Param{UserID},
     );
 
+    $Result //= '';
+    $Param{Setting}->{ChangeTime} //= '';
+
     my $HTML = <<"EOF";
-                        <div class="Setting" data-change-time="$Param{Setting}->{ChangeTime}">
+                        <div class="Setting scroll-bar-styled bar-no-left-border" data-change-time="$Param{Setting}->{ChangeTime}">
                             $Result
                         </div>
 EOF
@@ -125,11 +126,11 @@ EOF
 
         $HTML .= "
                                 <div class='SettingUpdateBox'>
-                                    <button class='CallForAction Update' aria-controls='fieldset$Param{Setting}->{DefaultID}' type='button' value='$SaveText' title='$SaveText'>
-                                        <span><i class='fa fa-check'></i></span>
-                                    </button>
-                                    <button class='CallForAction Cancel' aria-controls='fieldset$Param{Setting}->{DefaultID}' type='button' value='$CancelText' title='$CancelText'>
+                                    <button class='CallForAction Cancel btn-main btn-cancel-ghost btn-width-md' aria-controls='fieldset$Param{Setting}->{DefaultID}' type='button' value='$CancelText' title='$CancelText'>
                                         <span><i class='fa fa-times'></i></span>
+                                    </button>
+                                    <button class='CallForAction Update btn-main btn-primary btn-width-md' aria-controls='fieldset$Param{Setting}->{DefaultID}' type='button' value='$SaveText' title='$SaveText'>
+                                        <span><i class='fa fa-check'></i></span>
                                     </button>
                                 </div>\n";
     }
@@ -468,7 +469,7 @@ sub SettingAddItem {
                 <div class=\"HashItem\">
                     <input type=\"text\" class=\"Key\" data-suffix=\"$Param{IDSuffix}_Hash###\">
                     <button class=\"AddKey\" value=\"$AddKey\" type=\"button\" title=\"$AddKey\">
-                        <i class=\"fa fa-plus-circle\"></i>
+                        <i class=\"fa fa-plus-square-o\"></i>
                         <span class=\"InvisibleText\">$AddKey</span>
                     </button>
                 </div>
@@ -727,7 +728,7 @@ sub _SettingRender {
                 if ( $Param{RW} ) {
                     $Result
                         .= "<button value=\"$RemoveThisEntry\" title=\"$RemoveThisEntry\" type=\"button\" class=\"RemoveButton\">
-        <i class=\"fa fa-minus-circle\"></i>
+        <i class=\"fa fa-minus-square-o\"></i>
         <span class=\"InvisibleText\">$RemoveThisEntry</span>
     </button>";
                 }
@@ -793,7 +794,7 @@ sub _SettingRender {
 
                         $HashItem .= "
     <button value=\"$RemoveThisEntry\" title=\"$RemoveThisEntry\" type=\"button\" class=\"RemoveButton\">
-        <i class=\"fa fa-minus-circle\"></i>
+        <i class=\"fa fa-minus-square-o\"></i>
         <span class=\"InvisibleText\">$RemoveThisEntry</span>
     </button>";
                     }
@@ -814,7 +815,7 @@ sub _SettingRender {
             $Result .= " Hidden";
         }
         $Result .= "\">
-        <i class=\"fa fa-plus-circle\"></i>
+        <i class=\"fa fa-plus-square-o\"></i>
         <span class=\"InvisibleText\">$AddNewEntry</span>
     </button>";
 
@@ -933,7 +934,7 @@ sub _SettingRender {
                 if ( $Param{RW} ) {
                     $Result .= "
     <button value=\"$RemoveThisEntry\" title=\"$RemoveThisEntry\" type=\"button\" class=\"RemoveButton\">
-        <i class=\"fa fa-minus-circle\"></i>
+        <i class=\"fa fa-minus-square-o\"></i>
         <span class=\"InvisibleText\">$RemoveThisEntry</span>
     </button>";
                 }
@@ -994,7 +995,7 @@ sub _SettingRender {
 
                     $ArrayItem .= "
     <button value=\"$RemoveThisEntry\" title=\"$RemoveThisEntry\" type=\"button\" class=\"RemoveButton\">
-        <i class=\"fa fa-minus-circle\"></i>
+        <i class=\"fa fa-minus-square-o\"></i>
         <span class=\"InvisibleText\">$RemoveThisEntry</span>
     </button>";
                 }
@@ -1016,7 +1017,7 @@ sub _SettingRender {
             $Result .= " Hidden";
         }
         $Result .= "\">
-        <i class=\"fa fa-plus-circle\"></i>
+        <i class=\"fa fa-plus-square-o\"></i>
         <span class=\"InvisibleText\">$AddNewEntry</span>
     </button>\n";
 

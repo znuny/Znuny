@@ -19,16 +19,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-
-        # get config object
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # enable tool bar AgentTicketProcess
         my %AgentTicketProcess = (
             AccessKey => "p",
             Action    => "AgentTicketProcess",
+            Block     => "ToolBarActions",
             CssClass  => "ProcessTicket",
             Icon      => "fa fa-th-large",
             Link      => "Action=AgentTicketProcess",
@@ -37,21 +36,27 @@ $Selenium->RunTest(
             Priority  => "1020030",
         );
 
-        $Helper->ConfigSettingChange(
-            Key   => 'Frontend::ToolBarModule###6-Ticket::AgentTicketProcess',
+        $HelperObject->ConfigSettingChange(
+            Key   => 'Frontend::ToolBarModule###160-Ticket::AgentTicketProcess',
             Value => \%AgentTicketProcess,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###6-Ticket::AgentTicketProcess',
+            Key   => 'Frontend::ToolBarModule###160-Ticket::AgentTicketProcess',
             Value => \%AgentTicketProcess
         );
 
-        # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        # Create test user.
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
+
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
 
         $Selenium->Login(
             Type     => 'Agent',

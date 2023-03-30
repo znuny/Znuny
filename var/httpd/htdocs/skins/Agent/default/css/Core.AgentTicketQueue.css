@@ -13,86 +13,121 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @subsection  AgentTicketQueue
  */
 
-@keyframes blinking {
-    to {
-        color: transparent;
-    }
-}
-@-webkit-keyframes blinking {
-    to {
-        color: transparent;
-    }
-}
-
 @media screen,projection,tv,handheld {
 
 /**
  * @subsubsection     General
  */
 
-.QueueOverview {
-    font-size: 12px;
-    margin: 0 16px 0px 8px;
-    padding: 0 0 4px 0;
-    color: gray;
-}
+ /* OVERVIEW BOX - Element Tree */
+
+/*.QueueOverview{
+    font-size: initial;
+    margin: 0;
+    padding: 20px 20px 0 20px;
+    color: initial;
+    display: flex;
+    justify-content: flex-start;
+}*/
 
 .RTL .QueueOverview {
     margin: 0 8px 10px 16px;
 }
 
 .QueueOverviewSeparator {
-    height: 10px;
-    min-height: 10px;
+    height: 20px;
+    min-height: 20px;
 }
 
-.QueueOverviewList {
+/*.QueueOverviewList {  //*********now referenced in Core.Reset.css
+    display: flex;
     clear: both;
     float: none;
+    padding-bottom: 20px;
 }
 
-.QueueOverviewList.Level_1 {
-    margin-left: 10px;
-}
-
-.QueueOverviewList.Level_2 {
+.QueueOverviewList li {
+    float: none;
+    display: flex;
+    list-style: none;
+    padding: none;
+    height: auto;
+    white-space: nowrap;
+    border: none;
+    border-radius: none;
     margin-left: 20px;
 }
 
+.QueueOverviewList li:first-child {
+    margin-left: 0;
+}
+
+.QueueOverviewList li a {
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    padding: var(--size-8) var(--size-20);
+    color: var(--main-font-color);
+    background: transparent;
+    transition: var(--main-transition);
+    font-size: var(--font-size-sm);
+}
+
+.QueueOverviewList li a:hover {
+    border: 1px solid var(--primary-color-darker);
+    color: var(--white);
+    background: var(--primary-color-darker);
+    opacity: 1;
+}
+
+.QueueOverview .Active  {
+    font-weight: normal;
+    border: 1px solid var(--primary-color);
+    background: var(--primary-color-rgb);
+}
+*/
+
+.QueueOverviewList.Level_1 {
+    margin-left: 0;
+}
+
+.QueueOverviewList.Level_2 {
+    margin-left: 0;
+}
+
 .QueueOverviewList.Level_3 {
-    margin-left: 30px;
+    margin-left: 0;
 }
 
 .QueueOverviewList.Level_4 {
-    margin-left: 40px;
+    margin-left: 0;
 }
 
 .QueueOverviewList.Level_5 {
-    margin-left: 50px;
+    margin-left: 0;
 }
 
 .QueueOverviewList.Level_6 {
-    margin-left: 60px;
+    margin-left: 0;
 }
 
 .QueueOverviewList.Level_7 {
-    margin-left: 70px;
+    margin-left: 0;
 }
 
 .QueueOverviewList.Level_8 {
-    margin-left: 80px;
+    margin-left: 0;
 }
 
 .QueueOverviewList.Level_9 {
-    margin-left: 90px;
+    margin-left: 0;
 }
 
 .QueueOverviewList.Level_10 {
-    margin-left: 100px;
+    margin-left: 0;
 }
 
 .QueueOverviewList.Level_X {
-    margin-left: 100px;
+    margin-left: 0;
 }
 
 .RTL .QueueOverviewList.Level_1 {
@@ -139,14 +174,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     margin-right: 100px;
 }
 
-.QueueOverviewList li {
-    float: left;
-    list-style: none;
-    padding: 2px 5px;
-    height: 14px;
-    white-space:nowrap;
-}
-
 .RTL .QueueOverviewList li {
     float: right;
 }
@@ -161,12 +188,16 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .QueueOverview .Oldest {
     color: red;
-    animation: blinking 1s steps(10, start) infinite;
-    -webkit-animation: blinking 1s steps(10, start) infinite;
+    animation: Blinking 1s steps(10, start) infinite;
+    -webkit-animation: Blinking 1s steps(10, start) infinite;
 }
 
-.QueueOverview .Active {
-    font-weight: bold;
+.QueueOverviewList:not(:last-of-type) li a.Active {
+    opacity: 0.5;
+}
+
+.QueueOverviewList:not(:last-of-type) li a:hover {
+    opacity: 1;
 }
 
 } /* end @media */

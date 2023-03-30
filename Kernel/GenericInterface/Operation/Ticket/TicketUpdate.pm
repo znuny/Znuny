@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 maxence business consulting GmbH, http://www.maxence.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -101,7 +102,7 @@ if applicable the created ArticleID.
 
                 PendingTime {       # optional
                     Year   => 2011,
-                    Month  => 12
+                    Month  => 12,
                     Day    => 03,
                     Hour   => 23,
                     Minute => 05,
@@ -112,13 +113,17 @@ if applicable the created ArticleID.
                 #},
             },
             Article => {                                                          # optional
-                CommunicationChannel            => 'Email',                    # CommunicationChannel or CommunicationChannelID must be provided.
-                CommunicationChannelID          => 1,
+                CommunicationChannel            => 'Email',                    # optional
+                CommunicationChannelID          => 1,                          # optional
                 IsVisibleForCustomer            => 1,                          # optional
                 SenderTypeID                    => 123,                        # optional
                 SenderType                      => 'some sender type name',    # optional
                 AutoResponseType                => 'some auto response type',  # optional
+                ArticleSend                     => 1,                          # optional
                 From                            => 'some from string',         # optional
+                To                              => 'some to address',          # optional, required if ArticleSend => 1
+                Cc                              => 'some Cc address',          # optional
+                Bcc                             => 'some Bcc address',         # optional
                 Subject                         => 'some subject',
                 Body                            => 'some body',
 
@@ -133,6 +138,36 @@ if applicable the created ArticleID.
                 ForceNotificationToUserID       => [1, 2, 3]                   # optional
                 ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
                 ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                Attachment => [
+                    {
+                        Content     => 'content'                                 # base64 encoded
+                        ContentType => 'some content type'
+                        Filename    => 'some fine name'
+                    },
+                    # ...
+                ],
+                # or:
+                Attachment => {
+                    Content     => 'content'                                 # base64 encoded
+                    ContentType => 'some content type'
+                    Filename    => 'some fine name'
+                },
+
+                # Signing and encryption, only used when ArticleSend is set to 1
+                Sign => {
+                    Type    => 'PGP',
+                    SubType => 'Inline|Detached',
+                    Key     => '81877F5E',
+                    Type    => 'SMIME',
+                    Key     => '3b630c80',
+                },
+                Crypt => {
+                    Type    => 'PGP',
+                    SubType => 'Inline|Detached',
+                    Key     => '81877F5E',
+                    Type    => 'SMIME',
+                    Key     => '3b630c80',
+                },
             },
 
             DynamicField => [                                                  # optional
@@ -148,18 +183,18 @@ if applicable the created ArticleID.
             #    Value  => $Value,
             #},
 
-            Attachment [
+            Attachment => [
                 {
-                    Content     => 'content'                                 # base64 encoded
-                    ContentType => 'some content type'
+                    Content     => 'content',                                # base64 encoded
+                    ContentType => 'some content type',
                     Filename    => 'some fine name'
                 },
                 # ...
             ],
             #or
-            #Attachment {
-            #    Content     => 'content'
-            #    ContentType => 'some content type'
+            #Attachment => {
+            #    Content     => 'content',
+            #    ContentType => 'some content type',
             #    Filename    => 'some fine name'
             #},
         },
@@ -169,10 +204,10 @@ if applicable the created ArticleID.
         Success         => 1,                       # 0 or 1
         ErrorMessage    => '',                      # in case of error
         Data            => {                        # result data payload after Operation
-            TicketID    => 123,                     # Ticket  ID number in OTRS (help desk system)
-            ArticleID   => 43,                      # Article ID number in OTRS (help desk system)
+            TicketID    => 123,                     # Ticket ID in Znuny
+            ArticleID   => 43,                      # Article ID in Znuny
             Error => {                              # should not return errors
-                    ErrorCode    => 'TicketUpdate.ErrorCode'
+                    ErrorCode    => 'TicketUpdate.ErrorCode',
                     ErrorMessage => 'Error Description'
             },
 
@@ -204,7 +239,7 @@ if applicable the created ArticleID.
                     Responsible        => 'some_responsible_login',
                     ResponsibleID      => 123,
                     Age                => 3456,
-                    Created            => '2010-10-27 20:15:00'
+                    Created            => '2010-10-27 20:15:00',
                     CreateBy           => 123,
                     Changed            => '2010-10-27 20:15:15',
                     ChangeBy           => 123,
@@ -901,14 +936,6 @@ sub _CheckArticle {
     }
 
     # check Article->CommunicationChannel
-    if ( !$Article->{CommunicationChannel} && !$Article->{CommunicationChannelID} ) {
-
-        # return internal server error
-        return {
-            ErrorMessage => "TicketUpdate: Article->CommunicationChannelID or Article->CommunicationChannel parameter"
-                . " is required and Sysconfig CommunicationChannelID setting could not be read!"
-        };
-    }
     if ( !$Self->ValidateArticleCommunicationChannel( %{$Article} ) ) {
         return {
             ErrorCode    => 'TicketUpdate.InvalidParameter',
@@ -942,6 +969,19 @@ sub _CheckArticle {
                 ErrorMessage => "TicketUpdate: Article->From parameter is invalid!",
             };
         }
+    }
+
+    # check that Article->To is set when Article->ArticleSend is set.
+    if (
+        $Article->{ArticleSend}
+        && !$Kernel::OM->Get('Kernel::System::CheckItem')->AreEmailAddressesValid( EmailAddresses => $Article->{To} )
+        )
+    {
+        return {
+            ErrorCode => 'TicketCreate.InvalidParameter',
+            ErrorMessage =>
+                "TicketCreate: Article->To parameter must be a valid email address when Article->ArticleSend is set!",
+        };
     }
 
     # check Article->ContentType vs Article->MimeType and Article->Charset
@@ -1300,7 +1340,7 @@ sub _CheckAttachment {
 check if user has permissions to update ticket attributes.
 
     my $Response = $OperationObject->_CheckUpdatePermissions(
-        TicketID     => 123
+        TicketID     => 123,
         Ticket       => $Ticket,                  # all ticket parameters
         Article      => $Ticket,                  # all attachment parameters
         DynamicField => $Ticket,                  # all dynamic field parameters
@@ -1483,7 +1523,7 @@ sub _CheckUpdatePermissions {
 updates a ticket and creates an article and sets dynamic fields and attachments if specified.
 
     my $Response = $OperationObject->_TicketUpdate(
-        TicketID     => 123
+        TicketID     => 123,
         Ticket       => $Ticket,                  # all ticket parameters
         Article      => $Article,                 # all attachment parameters
         DynamicField => $DynamicField,            # all dynamic field parameters
@@ -2025,7 +2065,22 @@ sub _TicketUpdate {
 
         # set Article From
         my $From;
-        if ( $Article->{From} ) {
+
+        # When we are sending the article as an email, set the from address to the ticket's system address
+        if (
+            $Article->{ArticleSend}
+            && !$Article->{From}
+            )
+        {
+            my $QueueID = $TicketObject->TicketQueueID(
+                TicketID => $TicketID,
+            );
+            my %Address = $Kernel::OM->Get("Kernel::System::Queue")->GetSystemAddress(
+                QueueID => $QueueID,
+            );
+            $From = $Address{RealName} . " <" . $Address{Email} . ">";
+        }
+        elsif ( $Article->{From} ) {
             $From = $Article->{From};
         }
         elsif ( $Param{UserType} eq 'Customer' ) {
@@ -2061,6 +2116,11 @@ sub _TicketUpdate {
             $Bcc = $Article->{Bcc};
         }
 
+        # ArticleSend() is only possible for channel 'Email', so set it.
+        if ( $Article->{ArticleSend} ) {
+            $Article->{CommunicationChannel} = 'Email';
+        }
+
         # Fallback for To
         if ( !$To && $Article->{CommunicationChannel} eq 'Email' ) {
 
@@ -2092,14 +2152,98 @@ sub _TicketUpdate {
 
         # Convert article body to plain text, if HTML content was supplied. This is necessary since auto response code
         #   expects plain text content. Please see bug#13397 for more information.
-        if ( $Article->{ContentType} =~ /text\/html/i || $Article->{MimeType} =~ /text\/html/i ) {
+        if (
+            ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
+            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
+            )
+        {
             $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
                 String => $Article->{Body},
             );
         }
 
         # Create article.
-        $ArticleID = $ArticleBackendObject->ArticleCreate(
+        my $Subject = $Article->{Subject};
+        if ( $Article->{ArticleSend} ) {
+
+            my $TicketNumber = $TicketObject->TicketNumberLookup(
+                TicketID => $TicketID,
+                UserID   => $Param{UserID},
+            );
+
+            # Build a subject
+            $Subject = $TicketObject->TicketSubjectBuild(
+                TicketNumber => $TicketNumber,
+                Subject      => $Article->{Subject},
+                Type         => 'New',
+                Action       => 'Reply',
+            );
+
+            if ( !$Subject ) {
+                return {
+                    Success => 0,
+                    ErrorMessage =>
+                        'The subject for the e-mail could not be generated. Please contact the system administrator'
+                };
+            }
+
+            my $Signature = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Signature(
+                TicketID => $TicketID,
+                UserID   => $Param{UserID},
+                Data     => $Article,
+            );
+
+            if ($Signature) {
+                $Article->{Body} = $Article->{Body} . $Signature;
+
+                if ( $Article->{ContentType} =~ /text\/html/i || $Article->{MimeType} =~ /text\/html/i ) {
+                    $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
+                        String => $Article->{Body},
+                    );
+                }
+            }
+        }
+
+        # Build Charset if needed (ArticleSend doesn't accept ContentType)
+        my $Charset;
+        if (
+            $Article->{ContentType}
+            && !$Article->{Charset}
+            && $Article->{ContentType} =~ m{\bcharset=("|'|)([^\s"';]+)}ism
+            )
+        {
+            $Charset = $2;
+        }
+        else {
+            $Charset = $Article->{Charset};
+        }
+
+        # Build MimeType if needed (ArticleSend doesn't accept ContentType)
+        my $MimeType;
+        if (
+            $Article->{ContentType}
+            && !$Article->{MimeType}
+            && $Article->{ContentType} =~ m{\A([^;]+)}sm
+            )
+        {
+            $MimeType = $1;
+        }
+        else {
+            $MimeType = $Article->{MimeType};
+        }
+
+        # Base-64-decode attachments.
+        if ( IsHashRefWithData( $Article->{Attachment} ) ) {
+            $Article->{Attachment} = [ $Article->{Attachment} ];
+        }
+        ATTACHMENT:
+        for my $Attachment ( @{ $Article->{Attachment} // [] } ) {
+            next ATTACHMENT if !IsStringWithData( $Attachment->{Content} );
+
+            $Attachment->{Content} = MIME::Base64::decode_base64( $Attachment->{Content} );
+        }
+
+        my %ArticleParams = (
             NoAgentNotify        => $Article->{NoAgentNotify} || 0,
             TicketID             => $TicketID,
             SenderTypeID         => $Article->{SenderTypeID} || '',
@@ -2109,10 +2253,10 @@ sub _TicketUpdate {
             To                   => $To,
             Cc                   => $Cc,
             Bcc                  => $Bcc,
-            Subject              => $Article->{Subject},
+            Subject              => $Subject,
             Body                 => $Article->{Body},
-            MimeType             => $Article->{MimeType} || '',
-            Charset              => $Article->{Charset} || '',
+            MimeType             => $MimeType || '',
+            Charset              => $Charset || '',
             ContentType          => $Article->{ContentType} || '',
             UserID               => $Param{UserID},
             HistoryType          => $Article->{HistoryType},
@@ -2122,10 +2266,66 @@ sub _TicketUpdate {
             OrigHeader           => {
                 From    => $From,
                 To      => $To,
-                Subject => $Article->{Subject},
-                Body    => $PlainBody,
+                Subject => $Subject,
+                Body    => $PlainBody
             },
+            Attachment => $Article->{Attachment} // [],
         );
+
+        # create article
+        if ( $Article->{ArticleSend} ) {
+
+            # decode and set attachments
+            if ( IsArrayRefWithData($AttachmentList) ) {
+
+                my @NewAttachments;
+                for my $Attachment ( @{$AttachmentList} ) {
+
+                    push @NewAttachments, {
+                        %{$Attachment},
+                        Content => MIME::Base64::decode_base64( $Attachment->{Content} ),
+                    };
+                }
+
+                push @{ $ArticleParams{Attachment} }, @NewAttachments;
+            }
+
+            # signing and encryption
+            for my $Key (qw( Sign Crypt )) {
+                if ( IsHashRefWithData( $Article->{$Key} ) ) {
+                    $ArticleParams{$Key} = $Article->{$Key};
+                }
+            }
+
+            $ArticleID = $ArticleBackendObject->ArticleSend(%ArticleParams);
+        }
+        else {
+            $ArticleID = $ArticleBackendObject->ArticleCreate(%ArticleParams);
+
+            # set attachments
+            if ( IsArrayRefWithData($AttachmentList) ) {
+
+                for my $Attachment ( @{$AttachmentList} ) {
+                    my $Result = $Self->CreateAttachment(
+                        TicketID   => $TicketID,
+                        Attachment => $Attachment,
+                        ArticleID  => $ArticleID,
+                        UserID     => $Param{UserID}
+                    );
+
+                    if ( !$Result->{Success} ) {
+                        my $ErrorMessage =
+                            $Result->{ErrorMessage} || "Attachment could not be created, please contact"
+                            . " the system administrator";
+
+                        return {
+                            Success      => 0,
+                            ErrorMessage => $ErrorMessage,
+                        };
+                    }
+                }
+            }
+        }
 
         if ( !$ArticleID ) {
             return {
@@ -2159,28 +2359,6 @@ sub _TicketUpdate {
             my $ErrorMessage =
                 $Result->{ErrorMessage} || "Dynamic Field $DynamicField->{Name} could not be set,"
                 . " please contact the system administrator";
-
-            return {
-                Success      => 0,
-                ErrorMessage => $ErrorMessage,
-            };
-        }
-    }
-
-    # set attachments
-
-    for my $Attachment ( @{$AttachmentList} ) {
-        my $Result = $Self->CreateAttachment(
-            Attachment => $Attachment,
-            TicketID   => $TicketID,
-            ArticleID  => $ArticleID || '',
-            UserID     => $Param{UserID}
-        );
-
-        if ( !$Result->{Success} ) {
-            my $ErrorMessage =
-                $Result->{ErrorMessage} || "Attachment could not be created, please contact the "
-                . " system administrator";
 
             return {
                 Success      => 0,

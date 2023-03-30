@@ -19,12 +19,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # enable ticket responsible and watch feature
         for my $SysConfigResWatch (qw( Responsible Watcher )) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => "Ticket::$SysConfigResWatch",
                 Value => 1
@@ -32,7 +34,7 @@ $Selenium->RunTest(
         }
 
         # Set to change queue for ticket in a new window.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MoveType',
             Value => 'link'
@@ -92,11 +94,11 @@ $Selenium->RunTest(
 
         # enable delete and spam menu in sysconfig
         for my $SysConfigItem (@TicketMenu) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Key   => $SysConfigItem->{Key},
                 Value => $SysConfigItem->{SysConfigItem},
             );
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => $SysConfigItem->{Key},
                 Value => $SysConfigItem->{SysConfigItem},
@@ -104,7 +106,7 @@ $Selenium->RunTest(
         }
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -115,7 +117,7 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -140,7 +142,7 @@ $Selenium->RunTest(
             "TicketID $TicketID - created"
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # go to raw queue view with focus on created test ticket
         $Selenium->VerifiedGet(
@@ -353,7 +355,7 @@ $Selenium->RunTest(
         );
 
         # make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     }

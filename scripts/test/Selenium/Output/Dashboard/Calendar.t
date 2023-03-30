@@ -19,9 +19,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
 
         # use a calendar with the same business hours for every day so that the UT runs correctly
         # on every day of the week and outside usual business hours.
@@ -30,22 +32,22 @@ $Selenium->RunTest(
         for my $Day (@Days) {
             $Week{$Day} = [ 0 .. 23 ];
         }
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TimeWorkingHours',
             Value => \%Week,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TimeWorkingHours',
             Value => \%Week,
         );
 
         # disable default Vacation days
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TimeVacationDays',
             Value => {},
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TimeVacationDays',
             Value => {},
@@ -53,14 +55,14 @@ $Selenium->RunTest(
 
         # disable other dashboard modules
         my $Config = $ConfigObject->Get('DashboardBackend');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'DashboardBackend',
             Value => \%$Config,
         );
 
         # restore ticket calendar sysconfig
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0260-TicketCalendar',
             Value => {
@@ -77,7 +79,7 @@ $Selenium->RunTest(
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -88,13 +90,13 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # create test queue
-        my $QueueName = "Queue" . $Helper->GetRandomID();
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueName = "Queue" . $HelperObject->GetRandomID();
+        my $QueueID   = $QueueObject->QueueAdd(
             Name              => $QueueName,
             ValidID           => 1,
             GroupID           => 1,
@@ -177,7 +179,7 @@ $Selenium->RunTest(
         );
 
         # delete created test queue
-        $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        $Success = $DBObject->Do(
             SQL => "DELETE FROM queue WHERE id = $QueueID",
         );
         $Self->True(

@@ -19,16 +19,16 @@ $Selenium->RunTest(
     sub {
 
         my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
-        my $Helper           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $AttachmentObject = $Kernel::OM->Get('Kernel::System::StdAttachment');
+        my $CacheObject      = $Kernel::OM->Get('Kernel::System::Cache');
 
         my $Home = $ConfigObject->Get('Home');
         my %Attachments;
-        my $Count;
         my $IsLinkedBreadcrumbText;
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -61,15 +61,11 @@ $Selenium->RunTest(
             $Selenium->find_element("//a[contains(\@href, \'Action=AdminAttachment;Subaction=Add' )]")->VerifiedClick();
 
             # check breadcrumb on Add screen
-            $Count = 1;
             for my $BreadcrumbText ( 'Attachment Management', 'Add Attachment' ) {
-                $Self->Is(
-                    $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                    $BreadcrumbText,
-                    "Breadcrumb text '$BreadcrumbText' is found on screen"
+                $Selenium->ElementExists(
+                    Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                    SelectorType => 'css',
                 );
-
-                $Count++;
             }
 
             # check form action
@@ -79,9 +75,9 @@ $Selenium->RunTest(
             );
 
             # file checks
-            my $Location = $Home . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.$File";
+            my $Location = $Selenium->{Home} . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.$File";
 
-            my $AttachmentName = 'StdAttachment' . $Helper->GetRandomNumber();
+            my $AttachmentName = 'StdAttachment' . $HelperObject->GetRandomNumber();
             $Attachments{$File} = $AttachmentName;
 
             $Selenium->find_element( "#Name", 'css' )->send_keys($AttachmentName);
@@ -105,15 +101,11 @@ $Selenium->RunTest(
             $Selenium->find_element( $AttachmentName, 'link_text' )->VerifiedClick();
 
             # check breadcrumb on Edit screen
-            $Count = 1;
             for my $BreadcrumbText ( 'Attachment Management', 'Edit Attachment: ' . $AttachmentName ) {
-                $Self->Is(
-                    $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                    $BreadcrumbText,
-                    "Breadcrumb text '$BreadcrumbText' is found on screen"
+                $Selenium->ElementExists(
+                    Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                    SelectorType => 'css',
                 );
-
-                $Count++;
             }
 
             # check form actions
@@ -153,6 +145,22 @@ $Selenium->RunTest(
 
             # go back to AdminAttachment overview screen
             $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminAttachment");
+
+            # Checks for AdminValidFilter
+            $Self->True(
+                $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+                "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+            );
+            $Selenium->find_element( "#ValidFilter", 'css' )->click();
+            $Self->False(
+                $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+                "AdminValidFilter - All invalid entries are not displayed.",
+            );
+            $Selenium->find_element( "#ValidFilter", 'css' )->click();
+            $Self->True(
+                $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+                "AdminValidFilter - All invalid entries are displayed again.",
+            );
 
             # check class of invalid Attachment in the overview table
             $Self->True(
@@ -286,7 +294,7 @@ $Selenium->RunTest(
             );
         }
 
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 );
 

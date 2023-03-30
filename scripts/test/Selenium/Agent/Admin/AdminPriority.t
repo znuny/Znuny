@@ -18,10 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -31,7 +34,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminPriority screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminPriority");
@@ -65,15 +68,11 @@ $Selenium->RunTest(
         $Selenium->find_element( "#ValidID", 'css' );
 
         # check breadcrumb on Add screen
-        my $Count = 1;
         for my $BreadcrumbText ( 'Priority Management', 'Add Priority' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check client side validation.
@@ -91,7 +90,7 @@ $Selenium->RunTest(
         );
 
         # Create a real test priority.
-        my $RandomID = "Priority" . $Helper->GetRandomID();
+        my $RandomID = "Priority" . $HelperObject->GetRandomID();
 
         $Selenium->find_element( "#Name", 'css' )->send_keys($RandomID);
         $Selenium->InputFieldValueSet(
@@ -128,15 +127,11 @@ $Selenium->RunTest(
         );
 
         # check breadcrumb on Edit screen
-        $Count = 1;
         for my $BreadcrumbText ( 'Priority Management', 'Edit Priority: ' . $RandomID ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Set test priority to invalid.
@@ -156,6 +151,22 @@ $Selenium->RunTest(
                 "return \$('tr.Invalid td a:contains($RandomID)').length === 1"
             ),
             "There is a class 'Invalid' for test Priority",
+        );
+
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
         );
 
         # Go to new priority again.
@@ -178,7 +189,6 @@ $Selenium->RunTest(
 
         # Since there are no tickets that rely on our test priority, we can remove them again from the DB.
         if ($RandomID) {
-            my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
             $RandomID = $DBObject->Quote($RandomID);
             my $Success = $DBObject->Do(
                 SQL  => "DELETE FROM ticket_priority WHERE name = ?",
@@ -191,7 +201,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Priority',
         );
 

@@ -18,38 +18,96 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $CacheObject             = $Kernel::OM->Get('Kernel::System::Cache');
+        my $UserObject              = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+
+        # disable dashboard widget MyLastChangedTickets for this TicketGenericFilter test.
+        $HelperObject->DisableSysConfigs(
+            DisableSysConfigs => [
+                'DashboardBackend###0255-MyLastChangedTickets',
+            ],
+        );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         my @Tests = (
             {
-                TN           => $TicketObject->TicketCreateNumber(),
-                CustomerUser => $Helper->GetRandomID() . '@first.com',
+                TN                => $TicketObject->TicketCreateNumber(),
+                CustomerUser      => $HelperObject->GetRandomID() . '@first.com',
+                DynamicFieldValue => 'Key',
+            },
+            {
+                TN                => $TicketObject->TicketCreateNumber(),
+                CustomerUser      => $HelperObject->GetRandomID() . '@second.com',
+                DynamicFieldValue => 'Key::Sub',
+            },
+            {
+                TN                => $TicketObject->TicketCreateNumber(),
+                CustomerUser      => $HelperObject->GetRandomID() . '@third.com',
+                CustomerID        => 'CustomerCompany' . $HelperObject->GetRandomID() . '(#)',
+                DynamicFieldValue => 'Key;Special',
             },
             {
                 TN           => $TicketObject->TicketCreateNumber(),
-                CustomerUser => $Helper->GetRandomID() . '@second.com',
+                CustomerUser => $HelperObject->GetRandomID() . '@fourth.com',
+                CustomerID   => 'CustomerCompany#%' . $HelperObject->GetRandomID() . '(#)',
             },
-            {
-                TN           => $TicketObject->TicketCreateNumber(),
-                CustomerUser => $Helper->GetRandomID() . '@third.com',
-                CustomerID   => 'CustomerCompany' . $Helper->GetRandomID() . '(#)',
+        );
+
+        # Check if test dynamic field exists in the system, remove it if it does.
+        my $DynamicFieldName = 'DynamicFieldFilterTest';
+        my $DynamicField     = $DynamicFieldObject->DynamicFieldGet(
+            Name => $DynamicFieldName,
+        );
+        my $Success;
+        if ( $DynamicField->{ID} ) {
+            my $ValuesDeleteSuccess = $DynamicFieldValueObject->AllValuesDelete(
+                FieldID => $DynamicField->{ID},
+                UserID  => 1,
+            );
+            $Success = $DynamicFieldObject->DynamicFieldDelete(
+                ID     => $DynamicField->{ID},
+                UserID => 1,
+            );
+            $Self->True(
+                $Success,
+                "DynamicFieldID $DynamicField->{ID} is deleted",
+            );
+        }
+
+        # Create test dynamic field.
+        my $DynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
+            Name       => $DynamicFieldName,
+            Label      => $DynamicFieldName,
+            FieldOrder => 9991,
+            FieldType  => 'Dropdown',
+            ObjectType => 'Ticket',
+            Config     => {
+                PossibleValues => {
+                    'Key'         => 'Value',
+                    'Key::Sub'    => 'SubValue',
+                    'Key;Special' => 'SpecialValue',
+                },
             },
-            {
-                TN           => $TicketObject->TicketCreateNumber(),
-                CustomerUser => $Helper->GetRandomID() . '@fourth.com',
-                CustomerID   => 'CustomerCompany#%' . $Helper->GetRandomID() . '(#)',
-            },
+            ValidID => 1,
+            UserID  => 1,
+        );
+        $Self->True(
+            $DynamicFieldID,
+            "DynamicFieldID $DynamicFieldID is created",
         );
 
         # Create test tickets.
@@ -72,11 +130,31 @@ $Selenium->RunTest(
                 "Ticket ID $TicketID - created"
             );
 
+            # Set dynamic field value for the ticket
+            if ( defined $Test->{DynamicFieldValue} ) {
+                $Success = $DynamicFieldValueObject->ValueSet(
+                    FieldID    => $DynamicFieldID,
+                    ObjectType => 'Ticket',
+                    ObjectID   => $TicketID,
+                    Value      => [
+                        {
+                            ValueText => $Test->{DynamicFieldValue},
+                        },
+                    ],
+                    UserID => 1,
+                );
+                $Self->True(
+                    $Success,
+                    "DynamicFieldID $DynamicFieldID is set to '$Test->{DynamicFieldValue}' successfully",
+                );
+            }
+
             push @Tickets, {
-                TicketID     => $TicketID,
-                TN           => $Test->{TN},
-                CustomerUser => $Test->{CustomerUser},
-                CustomerID   => $Test->{CustomerID}
+                TicketID          => $TicketID,
+                TN                => $Test->{TN},
+                CustomerUser      => $Test->{CustomerUser},
+                CustomerID        => $Test->{CustomerID},
+                DynamicFieldValue => $Test->{DynamicFieldValue},
             };
         }
 
@@ -87,20 +165,19 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-        my $ScriptAlias  = $ConfigObject->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Turn on the 'Customer User ID' column by default.
         my $Config = $ConfigObject->Get('DashboardBackend')->{'0120-TicketNew'};
         $Config->{DefaultColumns}->{CustomerUserID} = '2';
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0120-TicketNew',
             Value => $Config,
         );
 
         # Refresh dashboard screen and clean it's cache.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Dashboard',
         );
 
@@ -133,7 +210,15 @@ $Selenium->RunTest(
 
             # Select the first test 'Customer User ID' as filter for TicketNew generic dashboard overview.
             my $ParentElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
-            $Selenium->find_child_element( $ParentElement, "./input" )->send_keys( $Tickets[0]->{CustomerUser} );
+            $ParentElement->click();
+
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $(".InputField_Search").length'
+            );
+
+            $Selenium->find_child_element( $ParentElement, '.InputField_Search', 'css' )
+                ->send_keys( $Tickets[0]->{CustomerUser} );
             sleep 1;
 
             # Wait for AJAX to finish.
@@ -194,8 +279,17 @@ $Selenium->RunTest(
             );
 
             # Select test 'Customer User ID' as filter for TicketNew generic dashboard overview.
-            $ParentElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
-            $Selenium->find_child_element( $ParentElement, "./input" )->send_keys( $Tickets[1]->{CustomerUser} );
+            $ParentElement = $Selenium->find_element( 'div.ColumnSettingsBox', 'css' );
+            $ParentElement->click();
+
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $(".InputField_Search").length'
+            );
+
+            $Selenium->find_child_element( $ParentElement, '.InputField_Search', 'css' )
+                ->send_keys( $Tickets[1]->{CustomerUser} );
+
             sleep 1;
 
             # Wait for AJAX to finish.
@@ -254,14 +348,14 @@ $Selenium->RunTest(
         $Config                                     = $ConfigObject->Get('DashboardBackend')->{'0120-TicketNew'};
         $Config->{DefaultColumns}->{CustomerUserID} = '0';
         $Config->{DefaultColumns}->{CustomerID}     = '2';
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0120-TicketNew',
             Value => $Config,
         );
 
         # Refresh dashboard screen and clean it's cache.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Dashboard',
         );
 
@@ -294,7 +388,15 @@ $Selenium->RunTest(
 
             # Select the third test Customer ID as filter for TicketNew generic dashboard overview.
             my $ParentElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
-            $Selenium->find_child_element( $ParentElement, "./input" )->send_keys( $Tickets[2]->{CustomerID} );
+            $ParentElement->click();
+
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $(".InputField_Search").length'
+            );
+
+            $Selenium->find_child_element( $ParentElement, '.InputField_Search', 'css' )
+                ->send_keys( $Tickets[2]->{CustomerID} );
             sleep 1;
 
             # Wait for AJAX to finish.
@@ -349,12 +451,16 @@ $Selenium->RunTest(
 
             # Verify if CustomerID containing special characters is filtered correctly. See bug#14982.
             $Selenium->find_element("//a[contains(\@title, \'Customer ID\' )]")->click();
+
             $Selenium->WaitFor(
                 JavaScript =>
-                    "return typeof(\$) === 'function' && \$('.CustomerIDAutoComplete:visible').length;"
+                    'return typeof($) === "function" && $(".InputField_Search").length'
             );
 
-            $Selenium->find_element( ".CustomerIDAutoComplete", 'css' )->send_keys( $Tickets[3]->{CustomerID} );
+            $ParentElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
+            $Selenium->find_child_element( $ParentElement, '.InputField_Search', 'css' )
+                ->send_keys( $Tickets[3]->{CustomerID} );
+            sleep 1;
 
             # Wait for AJAX to finish.
             $Selenium->WaitFor(
@@ -377,6 +483,224 @@ $Selenium->RunTest(
             $Self->True(
                 index( $Selenium->get_page_source(), $Tickets[3]->{TN} ) > -1,
                 "Test ticket with TN $Tickets[3]->{TN} - found on screen after filtering with customer - $Tickets[3]->{CustomerID}",
+            );
+
+            # Cleanup
+            $Selenium->WaitFor(
+                JavaScript =>
+                    "return typeof(\$) === 'function' && \$('a#Dashboard0120-TicketNew-remove-filters').length == 1;"
+            );
+
+            # Delete filter
+            $Selenium->execute_script(
+                "\$('a#Dashboard0120-TicketNew-remove-filters').trigger('click');"
+            );
+
+            # Wait for AJAX to finish.
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && !$("#Dashboard0120-TicketNew-box.Loading").length'
+            );
+        }
+
+        # Update configuration.
+        $Config                                     = $ConfigObject->Get('DashboardBackend')->{'0120-TicketNew'};
+        $Config->{DefaultColumns}->{CustomerUserID} = '0';
+        $Config->{DefaultColumns}->{CustomerID}     = '0';
+        $Config->{DefaultColumns}->{"DynamicField_$DynamicFieldName"} = '2';
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'DashboardBackend###0120-TicketNew',
+            Value => $Config,
+        );
+
+        # Refresh dashboard screen and clean it's cache.
+        $CacheObject->CleanUp(
+            Type => 'Dashboard',
+        );
+
+        $Selenium->VerifiedRefresh();
+
+        # Navigate to dashboard screen.
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?");
+
+        # Check if '$DynamicFieldName' filter for TicketNew dashboard is set.
+        eval {
+            $Self->True(
+                $Selenium->find_element("//a[contains(\@title, \'$DynamicFieldName\' )]"),
+                "'$DynamicFieldName' filter for TicketNew dashboard is set",
+            );
+        };
+        if ($@) {
+            $Self->True(
+                $@,
+                "'$DynamicFieldName' filter for TicketNew dashboard is not set",
+            );
+        }
+        else {
+
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && $("a[title=\"' . $DynamicFieldName . '\"]").length'
+            );
+
+            $Selenium->find_element( "a[title*=\"$DynamicFieldName\"].ColumnSettingsTrigger", 'css' )->click();
+            my $ColumnSettingsBoxElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
+            $ColumnSettingsBoxElement->click();
+
+            # Wait for option to exist
+            $Selenium->WaitFor(
+                JavaScript =>
+                    "return typeof(\$) === \"function\" && \$('#ColumnFilterDynamicField_${DynamicFieldName}0120-TicketNew > option[value=\"$Tickets[0]->{DynamicFieldValue}\"]').length"
+            );
+
+            # Choose the value.
+            $Selenium->execute_script(
+                "\$('#ColumnFilterDynamicField_${DynamicFieldName}0120-TicketNew').val('$Tickets[0]->{DynamicFieldValue}').trigger('change');"
+            );
+
+            # Wait for AJAX to finish.
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && !$("#Dashboard0120-TicketNew-box.Loading").length'
+            );
+
+            # Verify the first test ticket is found by filtering with the first dynamic field value.
+            $Self->True(
+                index( $Selenium->get_page_source(), $Tickets[0]->{TN} ) > -1,
+                "Test ticket with TN $Tickets[0]->{TN} - found on screen after filtering with dynamic field value - $Tickets[0]->{DynamicFieldValue}",
+            );
+
+            # Verify the second test ticket is not found by filtering with the first dynamic field value.
+            $Self->True(
+                index( $Selenium->get_page_source(), $Tickets[1]->{TN} ) == -1,
+                "Test ticket with TN $Tickets[1]->{TN} - not found on screen after filtering with dynamic field value - $Tickets[0]->{DynamicFieldValue}",
+            );
+
+            # Verify the third test ticket is not found by filtering with the first dynamic field value.
+            $Self->True(
+                index( $Selenium->get_page_source(), $Tickets[2]->{TN} ) == -1,
+                "Test ticket with TN $Tickets[2]->{TN} - not found on screen after filtering with dynamic field value - $Tickets[0]->{DynamicFieldValue}",
+            );
+
+            # Cleanup
+            $Selenium->execute_script(
+                "\$('a#Dashboard0120-TicketNew-remove-filters').trigger('click');"
+            );
+
+            # Wait for AJAX to finish.
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && !$("#Dashboard0120-TicketNew-box.Loading").length'
+            );
+
+            # Verify if dynamic field values containing tree seperators (::) are filtered correctly.
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && $("a[title=\"' . $DynamicFieldName . '\"]").length'
+            );
+            $Selenium->find_element( "a[title*=\"$DynamicFieldName\"].ColumnSettingsTrigger", 'css' )->click();
+
+            $ColumnSettingsBoxElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
+            $ColumnSettingsBoxElement->click();
+
+            # Wait for option to exist
+            $Selenium->WaitFor(
+                JavaScript =>
+                    "return typeof(\$) === \"function\" && \$('#ColumnFilterDynamicField_${DynamicFieldName}0120-TicketNew > option[value=\"$Tickets[1]->{DynamicFieldValue}\"]').length"
+            );
+
+            # Choose the value.
+            $Selenium->execute_script(
+                "\$('#ColumnFilterDynamicField_${DynamicFieldName}0120-TicketNew').val('$Tickets[1]->{DynamicFieldValue}').trigger('change');"
+            );
+
+            # Wait for AJAX to finish.
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && !$("#Dashboard0120-TicketNew-box.Loading").length'
+            );
+
+            # Verify the second test ticket is found by filtering with the second dynamic field value.
+            $Self->True(
+                index( $Selenium->get_page_source(), $Tickets[1]->{TN} ) > -1,
+                "Test ticket with TN $Tickets[1]->{TN} - found on screen after filtering with dynamic field value with special characters - $Tickets[1]->{DynamicFieldValue}",
+            );
+
+            # Verify the first test ticket is not found by filtering with the second dynamic field value.
+            $Self->True(
+                index( $Selenium->get_page_source(), $Tickets[0]->{TN} ) == -1,
+                "Test ticket with TN $Tickets[0]->{TN} - not found on screen after filtering with dynamic field value with special characters - $Tickets[1]->{DynamicFieldValue}",
+            );
+
+            # Verify the third test ticket is not found by filtering with the second dynamic field value.
+            $Self->True(
+                index( $Selenium->get_page_source(), $Tickets[2]->{TN} ) == -1,
+                "Test ticket with TN $Tickets[2]->{TN} - not found on screen after filtering with dynamic field value with special characters - $Tickets[1]->{DynamicFieldValue}",
+            );
+
+            # Cleanup
+            $Selenium->execute_script(
+                "\$('a#Dashboard0120-TicketNew-remove-filters').trigger('click');"
+            );
+
+            # Wait for AJAX to finish.
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && !$("#Dashboard0120-TicketNew-box.Loading").length'
+            );
+
+            # Verify if dynamic field values containing special characters is filtered correctly. See bug#14497.
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && $("a[title=\"' . $DynamicFieldName . '\"]").length'
+            );
+            $Selenium->find_element( "a[title*=\"$DynamicFieldName\"].ColumnSettingsTrigger", 'css' )->click();
+
+            $ColumnSettingsBoxElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
+            $ColumnSettingsBoxElement->click();
+
+            # Wait for option to exist
+            $Selenium->WaitFor(
+                JavaScript =>
+                    "return typeof(\$) === \"function\" && \$('#ColumnFilterDynamicField_${DynamicFieldName}0120-TicketNew > option[value=\"$Tickets[2]->{DynamicFieldValue}\"]').length"
+            );
+
+            # Choose the value.
+            $Selenium->execute_script(
+                "\$('#ColumnFilterDynamicField_${DynamicFieldName}0120-TicketNew').val('$Tickets[2]->{DynamicFieldValue}').trigger('change');"
+            );
+
+            # Wait for AJAX to finish.
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && !$("#Dashboard0120-TicketNew-box.Loading").length'
+            );
+
+            # Verify the third test ticket is found by filtering with the third dynamic field value.
+            $Self->True(
+                index( $Selenium->get_page_source(), $Tickets[2]->{TN} ) > -1,
+                "Test ticket with TN $Tickets[2]->{TN} - found on screen after filtering with dynamic field value with special characters - $Tickets[2]->{DynamicFieldValue}",
+            );
+
+            # Verify the first test ticket is not found by filtering with the third dynamic field value.
+            $Self->True(
+                index( $Selenium->get_page_source(), $Tickets[0]->{TN} ) == -1,
+                "Test ticket with TN $Tickets[0]->{TN} - not found on screen after filtering with dynamic field value with special characters - $Tickets[2]->{DynamicFieldValue}",
+            );
+
+            # Verify the second test ticket is not found by filtering with the third dynamic field value.
+            $Self->True(
+                index( $Selenium->get_page_source(), $Tickets[1]->{TN} ) == -1,
+                "Test ticket with TN $Tickets[1]->{TN} - not found on screen after filtering with dynamic field value with special characters - $Tickets[2]->{DynamicFieldValue}",
+            );
+
+            # Cleanup
+            $Selenium->execute_script(
+                "\$('a#Dashboard0120-TicketNew-remove-filters').trigger('click');"
+            );
+
+            # Wait for AJAX to finish.
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && !$("#Dashboard0120-TicketNew-box.Loading").length'
             );
         }
 
@@ -401,8 +725,18 @@ $Selenium->RunTest(
             );
         }
 
+        # Delete dynamic field
+        $Success = $DynamicFieldObject->DynamicFieldDelete(
+            ID     => $DynamicFieldID,
+            UserID => 1,
+        );
+        $Self->True(
+            $Success,
+            "DynamicFieldID $DynamicFieldID is deleted",
+        );
+
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     }

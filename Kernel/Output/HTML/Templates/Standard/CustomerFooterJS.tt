@@ -6,17 +6,16 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::TT::ScriptUsage)
+## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
 
 <script type="text/javascript">//<![CDATA[
     "use strict";
 
-    var CKEDITOR_BASEPATH = [% Config("Frontend::RichTextPath") | JSON %];
+    var CKEDITOR_BASEPATH = [% Config("Frontend::RichText::Path") | JSON %];
 //]]></script>
 [% RenderBlockStart("CommonJS") %]
 <script type="text/javascript" src="[% Config("Frontend::JavaScriptPath") | html %][% Data.JSDirectory | html %][% Data.Filename | html %]"></script>
 [% RenderBlockEnd("CommonJS") %]
-
 [% RenderBlockStart("ModuleJS") %]
 <script type="text/javascript" src="[% Config("Frontend::JavaScriptPath") | html %][% Data.JSDirectory | html %][% Data.Filename | html %]"></script>
 [% RenderBlockEnd("ModuleJS") %]

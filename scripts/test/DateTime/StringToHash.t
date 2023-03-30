@@ -13,6 +13,13 @@ use utf8;
 
 use vars (qw($Self));
 
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+$ConfigObject->Set(
+    Key   => 'OTRSTimeZone',
+    Value => 'UTC',
+);
+
 #
 # Tests for converting date/time string to hash
 #
@@ -152,7 +159,7 @@ my @TestConfigs = (
             Hour     => 7,
             Minute   => 0,
             Second   => 9,
-            TimeZone => 'UTC',
+            TimeZone => 'Z',
         },
     },
 );

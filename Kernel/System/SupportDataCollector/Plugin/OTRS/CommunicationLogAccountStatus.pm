@@ -18,14 +18,13 @@ use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::CommunicationLog::DB',
     'Kernel::System::DateTime',
     'Kernel::System::MailAccount',
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Communication Log Account Status (last 24 hours)');
+    return Translatable('Znuny') . '/' . Translatable('Communication Log Account Status (last 24 hours)');
 }
 
 sub Run {

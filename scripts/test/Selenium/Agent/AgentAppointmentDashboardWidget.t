@@ -17,24 +17,26 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
-        my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
         my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
         my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject          = $Kernel::OM->Get('Kernel::System::DB');
 
         # Dashboard widget config key.
         my $DashboardConfigKey = '0500-AppointmentCalendar';
 
         # Turn on dashboard widget by default.
-        my $DashboardConfig = $Kernel::OM->Get('Kernel::Config')->Get('DashboardBackend')->{$DashboardConfigKey};
+        my $DashboardConfig = $ConfigObject->Get('DashboardBackend')->{$DashboardConfigKey};
         $DashboardConfig->{Default} = 1;
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => "DashboardBackend###$DashboardConfigKey",
             Value => $DashboardConfig,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "test-calendar-group-$RandomID";
@@ -49,7 +51,7 @@ $Selenium->RunTest(
         );
 
         # Create test user.
-        my ( $TestUserLogin, $UserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $UserID ) = $HelperObject->TestUserCreate(
             Groups => [$GroupName],
         );
         $Self->True(
@@ -211,7 +213,7 @@ $Selenium->RunTest(
 
         # Delete test calendar.
         if ( $Calendar{CalendarID} ) {
-            my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+            my $Success = $DBObject->Do(
                 SQL  => 'DELETE FROM calendar WHERE id = ?',
                 Bind => [ \$Calendar{CalendarID} ],
             );

@@ -26,7 +26,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get home directory
 my $HomeDir = $ConfigObject->Get('Home');
@@ -76,11 +76,8 @@ for my $ModuleFile (@BackendModuleFiles) {
 
     next MODULEFILE if !$Module;
 
-    # Reset the AgentSessionLimitPriorWarning, AgentSessionLimit
-    #   and AgentSessionPerUserLimit at the beginning for the different backend modules.
-    $ConfigObject->Set(
-        Key => 'AgentSessionLimitPriorWarning',
-    );
+    # Reset the AgentSessionLimit
+    # and AgentSessionPerUserLimit at the beginning for the different backend modules.
     $ConfigObject->Set(
         Key   => 'AgentSessionLimit',
         Value => 100,
@@ -455,14 +452,6 @@ for my $ModuleFile (@BackendModuleFiles) {
         "#$Module - SessionList() no sessions left",
     );
 
-    # Some special tests for the possible agent session limits.
-    my $AgentSessionLimitPriorWarningMessage = $SessionObject->CheckAgentSessionLimitPriorWarning();
-
-    $Self->False(
-        $AgentSessionLimitPriorWarningMessage,
-        "#$Module - CheckAgentSessionLimitPriorWarning() - AgentSessionLimitPriorWarning not active",
-    );
-
     for my $Count ( 1 .. 2 ) {
 
         my %NewSessionData = (
@@ -482,20 +471,9 @@ for my $ModuleFile (@BackendModuleFiles) {
         Key   => 'AgentSessionPerUserLimit',
         Value => 1,
     );
-    $ConfigObject->Set(
-        Key   => 'AgentSessionLimitPriorWarning',
-        Value => 1,
-    );
 
     # Reset the session object, to get the new config settings.
     $SessionObject = Kernel::System::AuthSession->new();
-
-    $AgentSessionLimitPriorWarningMessage = $SessionObject->CheckAgentSessionLimitPriorWarning();
-
-    $Self->True(
-        $AgentSessionLimitPriorWarningMessage,
-        "#$Module - CheckAgentSessionLimitPriorWarning() - AgentSessionLimitPriorWarning reached",
-    );
 
     my $SessionID = $SessionObject->CreateSessionID(
         UserLogin => 'root1',
@@ -548,12 +526,6 @@ for my $ModuleFile (@BackendModuleFiles) {
         "#$Module - CleanUp after session limit tests()",
     );
 
-    # Test the speical otrs business values from the cloudservice.
-    # First reset the config and session object
-    #   and generate some dummy data in the system data.
-    $ConfigObject->Set(
-        Key => 'AgentSessionLimitPriorWarning',
-    );
     $ConfigObject->Set(
         Key   => 'AgentSessionLimit',
         Value => 100,
@@ -562,217 +534,9 @@ for my $ModuleFile (@BackendModuleFiles) {
         Key   => 'AgentSessionPerUserLimit',
         Value => 20,
     );
-    $SessionObject = Kernel::System::AuthSession->new();
-
-# Create also some webservice sessions, to check that the sessions are not influence the active session and limit check.
-    for my $Count ( 1 .. 2 ) {
-
-        my %NewSessionData = (
-            UserLogin     => 'root' . $Count,
-            UserType      => 'User',
-            SessionSource => 'GenericInterface',
-        );
-
-        my $SessionID = $SessionObject->CreateSessionID(%NewSessionData);
-
-        $Self->True(
-            $SessionID,
-            "#$Module - GenericInterface - CreateSessionID()",
-        );
-    }
-
-    my $SystemDataObject = $Kernel::OM->Get('Kernel::System::SystemData');
-
-    my %OTRSBusinessAgentSessionLimits = (
-        AgentSessionLimit             => 3,
-        AgentSessionLimitPriorWarning => 1,
-    );
-
-    for my $Key ( sort keys %OTRSBusinessAgentSessionLimits ) {
-        my $FullKey = 'OTRSBusiness::' . $Key;
-
-        if ( defined $SystemDataObject->SystemDataGet( Key => $FullKey ) ) {
-            $SystemDataObject->SystemDataUpdate(
-                Key    => $FullKey,
-                Value  => $OTRSBusinessAgentSessionLimits{$Key},
-                UserID => 1,
-            );
-        }
-        else {
-            $SystemDataObject->SystemDataAdd(
-                Key    => $FullKey,
-                Value  => $OTRSBusinessAgentSessionLimits{$Key},
-                UserID => 1,
-            );
-        }
-    }
-
-    $SessionID = $SessionObject->CreateSessionID(
-        UserLogin => 'root',
-        UserType  => 'User',
-    );
-
-    $Self->True(
-        $SessionID,
-        "#$Module - CreateSessionID()",
-    );
-
-    $AgentSessionLimitPriorWarningMessage = $SessionObject->CheckAgentSessionLimitPriorWarning();
-
-    $Self->False(
-        $AgentSessionLimitPriorWarningMessage,
-        "#$Module - CheckAgentSessionLimitPriorWarning() - OTRSBusiness - AgentSessionLimitPriorWarning not reached",
-    );
-
-    for my $Count ( 1 .. 2 ) {
-
-        my %NewSessionData = (
-            UserLogin => 'root' . $Count,
-            UserType  => 'User',
-        );
-
-        my $SessionID = $SessionObject->CreateSessionID(%NewSessionData);
-
-        $Self->True(
-            $SessionID,
-            "#$Module - CreateSessionID()",
-        );
-    }
-
-    $AgentSessionLimitPriorWarningMessage = $SessionObject->CheckAgentSessionLimitPriorWarning();
-
-    $Self->True(
-        $AgentSessionLimitPriorWarningMessage,
-        "#$Module - CheckAgentSessionLimitPriorWarning() - OTRSBusiness - AgentSessionLimitPriorWarning reached",
-    );
-
-    $SessionID = $SessionObject->CreateSessionID(
-        UserLogin => 'limit-reached',
-        UserType  => 'User',
-    );
-
-    $Self->False(
-        $SessionID,
-        "#$Module - CreateSessionID() - OTRSBusiness - AgentSessionLimit reached",
-    );
-
-    %OTRSBusinessAgentSessionLimits = (
-        AgentSessionLimit => 4,
-    );
-
-    for my $Key ( sort keys %OTRSBusinessAgentSessionLimits ) {
-        my $FullKey = 'OTRSBusiness::' . $Key;
-
-        $SystemDataObject->SystemDataUpdate(
-            Key    => $FullKey,
-            Value  => $OTRSBusinessAgentSessionLimits{$Key},
-            UserID => 1,
-        );
-    }
-
-    $SessionID = $SessionObject->CreateSessionID(
-        UserLogin => 'root',
-        UserType  => 'User',
-    );
-
-    $Self->True(
-        $SessionID,
-        "#$Module - CreateSessionID() - OTRSBusiness - AgentSessionLimit not reached (after increase)",
-    );
-
-    $ConfigObject->Set(
-        Key   => 'AgentSessionLimit',
-        Value => 3,
-    );
-    $SessionObject = Kernel::System::AuthSession->new();
-
-    $SessionID = $SessionObject->CreateSessionID(
-        UserLogin => 'config-limit-reached',
-        UserType  => 'User',
-    );
-
-    $Self->False(
-        $SessionID,
-        "#$Module - CreateSessionID() - Config - AgentSessionLimit reached (after change of the config session limit)",
-    );
-
-    $SessionID = $SessionObject->CreateSessionID(
-        UserLogin     => 'root-GenericInterface',
-        UserType      => 'User',
-        SessionSource => 'GenericInterface',
-    );
-
-    $Self->True(
-        $SessionID,
-        "#$Module - CreateSessionID() - GenericInterface - No limit for the GenericInterface sessions.",
-    );
-
-    $CleanUp = $SessionObject->CleanUp();
-
-    $Self->True(
-        $CleanUp,
-        "#$Module - CleanUp after normal session limit tests()",
-    );
-
-    %OTRSBusinessAgentSessionLimits = (
-        AgentSessionLimit             => 0,
-        AgentSessionLimitPriorWarning => 0,
-    );
-
-    for my $Key ( sort keys %OTRSBusinessAgentSessionLimits ) {
-        my $FullKey = 'OTRSBusiness::' . $Key;
-
-        $SystemDataObject->SystemDataUpdate(
-            Key    => $FullKey,
-            Value  => $OTRSBusinessAgentSessionLimits{$Key},
-            UserID => 1,
-        );
-    }
-
-    $ConfigObject->Set(
-        Key   => 'AgentSessionLimit',
-        Value => 100,
-    );
-    $SessionObject = Kernel::System::AuthSession->new();
-
-    for my $Count ( 1 .. 2 ) {
-
-        my %NewSessionData = (
-            UserLogin => 'root' . $Count,
-            UserType  => 'User',
-        );
-
-        my $SessionID = $SessionObject->CreateSessionID(%NewSessionData);
-
-        $Self->True(
-            $SessionID,
-            "#$Module - CreateSessionID() - with emptry OTRSBusiness session limit values.",
-        );
-    }
-
-    $AgentSessionLimitPriorWarningMessage = $SessionObject->CheckAgentSessionLimitPriorWarning();
-
-    $Self->False(
-        $AgentSessionLimitPriorWarningMessage,
-        "#$Module - CheckAgentSessionLimitPriorWarning() - with emptry OTRSBusiness session limit values.",
-    );
-
-    $CleanUp = $SessionObject->CleanUp();
-
-    $Self->True(
-        $CleanUp,
-        "#$Module - CleanUp after normal session limit tests()",
-    );
-
-    for my $Key ( sort keys %OTRSBusinessAgentSessionLimits ) {
-        $SystemDataObject->SystemDataDelete(
-            Key    => 'OTRSBusiness::' . $Key,
-            UserID => 1,
-        );
-    }
 
     # Added some checks for the GetActiveSessions function
-    $Helper->FixedTimeSet();
+    $HelperObject->FixedTimeSet();
 
     $ConfigObject->Set(
         Key   => 'SessionMaxIdleTime',
@@ -833,7 +597,7 @@ for my $ModuleFile (@BackendModuleFiles) {
         "#$Module - GetActiveSessions - correct data",
     );
 
-    $Helper->FixedTimeAddSeconds(90);
+    $HelperObject->FixedTimeAddSeconds(90);
 
     my %NewSessionData = (
         UserLogin => 'root3',
@@ -872,7 +636,7 @@ for my $ModuleFile (@BackendModuleFiles) {
     );
 }
 continue {
-    $Helper->FixedTimeUnset();
+    $HelperObject->FixedTimeUnset();
 }
 
 # restore to the previous state is done by RestoreDatabase

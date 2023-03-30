@@ -19,24 +19,25 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
         my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
 
         # Enable RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 1,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -105,7 +106,7 @@ $Selenium->RunTest(
         );
 
         # Import test Selenium Process.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
         $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
@@ -164,7 +165,7 @@ $Selenium->RunTest(
         $Selenium->execute_script("\$('#FileUpload')[0].scrollIntoView(true);");
 
         # Add an attachment.
-        $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/Main/Main-Test1.txt";
+        $Location = $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.txt";
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
         # Wait until attachment is uploaded, i.e. until it appears in the attachment list table.

@@ -8,43 +8,65 @@
 # --
 
 [% RenderBlockStart("ContentLargeTicketGenericFilter") %]
-<div class="DashboardActions">
+    <div class="DashboardActions dropdown-container dropdown-filter">
+        <label class="btn-main btn-secondary-ghost btn-width-xxl btn-dropdown align-left" href="#" id="Dashboard[% Data.Name | html %]All" data-filter="All">
+            <span class="btn-wrapper space-between">
+                <span class="btn-text">
+                    <span class="regular">[% Translate('Show') | html %]:</span>
+                    <span class="bold"> &nbsp; [% Translate(Data.Filter.Label) | html %] ([% Data.Filter.Count | html %])</span>
+                </span>
+                <i class="fa fa-caret-down"></i>
+            </span>
+        </label>
 
-    <ul class="Tab Actions">
+        <ul class="Tab Actions dropdown-menu">
 [% RenderBlockStart("ContentLargeTicketGenericFilterAssignedToCustomerUser") %]
-        <li class="AdditionalFilter [% Data.item("AssignedToCustomerUser::Selected") | html %]"><a href="#" id="DashboardAdditionalFilter[% Data.Name | html %]AssignedToCustomerUser" data-filter="AssignedToCustomerUser">[% Translate("Assigned to customer user") | html %]</a></li>
+            <li class="AdditionalFilter [% Data.item("AssignedToCustomerUser::Selected") | html %] dropdown-item">
+                <a href="#" id="DashboardAdditionalFilter[% Data.Name | html %]AssignedToCustomerUser" data-filter="AssignedToCustomerUser" data-filter-count="[% Data.AssignedToCustomerUser | html %]">[% Translate("Assigned to customer user") | html %]</a>
+            </li>
 [% RenderBlockEnd("ContentLargeTicketGenericFilterAssignedToCustomerUser") %]
 [% RenderBlockStart("ContentLargeTicketGenericFilterAccessibleForCustomerUser") %]
-        <li class="AdditionalFilter [% Data.item("AccessibleForCustomerUser::Selected") | html %]"><a href="#" id="DashboardAdditionalFilter[% Data.Name | html %]AccessibleForCustomerUser" data-filter="AccessibleForCustomerUser">[% Translate("Accessible for customer user") | html %]</a></li>
+            <li class="AdditionalFilter [% Data.item("AccessibleForCustomerUser::Selected") | html %] dropdown-item">
+                <a href="#" id="DashboardAdditionalFilter[% Data.Name | html %]AccessibleForCustomerUser" data-filter="AccessibleForCustomerUser" data-filter-count="[% Data.AccessibleForCustomerUser | html %]">[% Translate("Accessible for customer user") | html %]</a>
+            </li>
 [% RenderBlockEnd("ContentLargeTicketGenericFilterAccessibleForCustomerUser") %]
 [% RenderBlockStart("ContentLargeTicketGenericFilterLocked") %]
-        <li class="[% Data.item("Locked::Selected") | html %]"><a href="#" id="Dashboard[% Data.Name | html %]Locked" data-filter="Locked">[% Translate("My locked tickets") | html %] ([% Data.Locked | html %])</a></li>
+            <li class="[% Data.item("Locked::Selected") | html %] dropdown-item">
+                <a href="#" id="Dashboard[% Data.Name | html %]Locked" data-filter="Locked" data-filter-count="[% Data.Locked | html %]">[% Translate("My locked tickets") | html %] ([% Data.Locked | html %])</a>
+            </li>
 [% RenderBlockEnd("ContentLargeTicketGenericFilterLocked") %]
+[% RenderBlockStart("ContentLargeTicketGenericFilterOwned") %]
+        <li class="[% Data.item("Owned::Selected") | html %]"><a href="#" id="Dashboard[% Data.Name | html %]Owned" data-filter="Owned">[% Translate("My Owned Tickets") | html %] ([% Data.Owned | html %])</a></li>
+[% RenderBlockEnd("ContentLargeTicketGenericFilterOwned") %]
 [% RenderBlockStart("ContentLargeTicketGenericFilterWatcher") %]
-        <li class="[% Data.item("Watcher::Selected") | html %]"><a href="#" id="Dashboard[% Data.Name | html %]Watcher" data-filter="Watcher">[% Translate("My watched tickets") | html %] ([% Data.Watcher | html %])</a></li>
+            <li class="[% Data.item("Watcher::Selected") | html %] dropdown-item">
+                <a href="#" id="Dashboard[% Data.Name | html %]Watcher" data-filter="Watcher" data-filter-count="[% Data.Watcher | html %]">[% Translate("My watched tickets") | html %] ([% Data.Watcher | html %])</a>
+            </li>
 [% RenderBlockEnd("ContentLargeTicketGenericFilterWatcher") %]
 [% RenderBlockStart("ContentLargeTicketGenericFilterResponsible") %]
-        <li class="[% Data.item("Responsible::Selected") | html %]"><a href="#" id="Dashboard[% Data.Name | html %]Responsible" data-filter="Responsible">[% Translate("My responsibilities") | html %] ([% Data.Responsible | html %])</a></li>
+            <li class="[% Data.item("Responsible::Selected") | html %] dropdown-item">
+                <a href="#" id="Dashboard[% Data.Name | html %]Responsible" data-filter="Responsible" data-filter-count="[% Data.Responsible | html %]">[% Translate("My responsibilities") | html %] ([% Data.Responsible | html %])</a>
+            </li>
 [% RenderBlockEnd("ContentLargeTicketGenericFilterResponsible") %]
 [% RenderBlockStart("ContentLargeTicketGenericFilterMyQueues") %]
-        <li class="[% Data.item("MyQueues::Selected") | html %]"><a href="#" id="Dashboard[% Data.Name | html %]MyQueues" data-filter="MyQueues">[% Translate("Tickets in My Queues") | html %] ([% Data.MyQueues | html %])</a></li>
+            <li class="[% Data.item("MyQueues::Selected") | html %] dropdown-item">
+                <a href="#" id="Dashboard[% Data.Name | html %]MyQueues" data-filter="MyQueues" data-filter-count="[% Data.MyQueues | html %]">[% Translate("Tickets in My Queues") | html %] ([% Data.MyQueues | html %])</a>
+            </li>
 [% RenderBlockEnd("ContentLargeTicketGenericFilterMyQueues") %]
 [% RenderBlockStart("ContentLargeTicketGenericFilterMyServices") %]
-        <li class="[% Data.item("MyServices::Selected") | html %]"><a href="#" id="Dashboard[% Data.Name | html %]MyServices" data-filter="MyServices">[% Translate("Tickets in My Services") | html %] ([% Data.MyServices | html %])</a></li>
+            <li class="[% Data.item("MyServices::Selected") | html %] dropdown-item">
+                <a href="#" id="Dashboard[% Data.Name | html %]MyServices" data-filter="MyServices" data-filter-count="[% Data.MyServices | html %]">[% Translate("Tickets in My Services") | html %] ([% Data.MyServices | html %])</a>
+            </li>
 [% RenderBlockEnd("ContentLargeTicketGenericFilterMyServices") %]
-        <li class="[% Data.item("All::Selected") | html %] Last"><a href="#" id="Dashboard[% Data.Name | html %]All" data-filter="All">[% Translate("All tickets") | html %] ([% Data.All | html %])</a></li>
-    </ul>
-</div>
-
-[% RenderBlockStart("ContentLargeTicketGenericFilterNavBar") %]
-<span class="Pagination">
-    [% Data.SiteNavBar %]
-</span>
-[% RenderBlockEnd("ContentLargeTicketGenericFilterNavBar") %]
+            <li class="[% Data.item("All::Selected") | html %] Last dropdown-item">
+                <a href="#" id="Dashboard[% Data.Name | html %]All" data-filter="All" data-filter-count="[% Data.All | html %]">[% Translate("All tickets") | html %] ([% Data.All | html %])</a>
+            </li>
+        </ul>
+    </div>
 [% RenderBlockEnd("ContentLargeTicketGenericFilter") %]
 
 #<!-- This form will not be submitted, we need it for the AJAX calls. -->
-<form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data">
+<form class="scroll-bar-styled" action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data">
     <input type="hidden" name="CustomerID" value="[% Data.CustomerID | html %]"/>
     <input type="hidden" name="CustomerUserID" value="[% Data.CustomerUserID | html %]"/>
     <input type="hidden" name="Filter[% Data.Name | html %]" id="Filter[% Data.Name | html %]" value="[% Data.FilterValue | html %]" />
@@ -53,93 +75,71 @@
         <thead>
 [% RenderBlockStart("ContentLargeTicketGenericHeader") %]
             <tr>
-
 [% RenderBlockStart("GeneralOverviewHeader") %]
-
 [% RenderBlockStart("ContentLargeTicketGenericHeaderMeta") %]
                 <th class="DashboardHeader [% Data.CSS | html %]" data-column="[% Data.HeaderColumnName | html %]" title="[% Translate(Data.Title) | html %]">
 [% RenderBlockStart("ContentLargeTicketGenericHeaderMetaLink") %]
                     <a id="[% Data.HeaderColumnName | html %]FlagOverviewControl[% Data.Name | html %]" name="[% Data.HeaderColumnName | html %]OverviewControl[% Data.Name | html %]" href="#" title="[% Translate(Data.Title) | html %]"></a>
-
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderMetaLink") %]
 [% RenderBlockStart("ContentLargeTicketGenericHeaderMetaEmpty") %]
                     <span title="[% Translate(Data.HeaderColumnName) | html %]"></span>
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderMetaEmpty") %]
                 </th>
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderMeta") %]
-
 [% RenderBlockStart("ContentLargeTicketGenericHeaderTicketHeader") %]
 [% RenderBlockStart("ContentLargeTicketGenericHeaderTicketNumberColumn") %]
                 <th class="DashboardHeader TicketNumber [% Data.CSS | html %]" data-column="TicketNumber">
                     <a id="TicketNumberOverviewControl[% Data.Name | html %]" name="TicketNumberOverviewControl[% Data.Name | html %]" href="#" title="[% Data.Title | html %]" >[% Config("Ticket::Hook") %]</a>
                 </th>
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderTicketNumberColumn") %]
-
 [% RenderBlockStart("ContentLargeTicketGenericHeaderColumn") %]
                 <th class="DashboardHeader [% Data.HeaderColumnName | html %] [% Data.CSS | html %]" data-column="[% Data.HeaderColumnName | html %]">
 
 [% RenderBlockStart("ContentLargeTicketGenericHeaderColumnFilterLink") %]
+                    <a id="[% Data.HeaderColumnName | html %]OverviewControl[% Data.Name | html %]" name="[% Data.HeaderColumnName | html %]OverviewControl[% Data.Name | html %]" href="#" title="[% Data.Title | html %]" >[% Data.HeaderNameTranslated | html %]</a>
+
                     <a href="#" class="ColumnSettingsTrigger" title="[% Data.FilterTitle | html %]">
                         <i class="fa fa-filter"></i>
                     </a>
+
                     <div class="ColumnSettingsContainer">
                         <div class="ColumnSettingsBox">
                             [% Data.ColumnFilterStrg %]
-[% RenderBlockStart("ContentLargeTicketGenericHeaderColumnFilterLinkCustomerIDSearch") %]
-                            <input type="text" class="CustomerIDAutoComplete" autocomplete="off" />
-[% RenderBlockEnd("ContentLargeTicketGenericHeaderColumnFilterLinkCustomerIDSearch") %]
-
-[% RenderBlockStart("ContentLargeTicketGenericHeaderColumnFilterLinkUserSearch") %]
-                            <input type="text" class="UserAutoComplete" autocomplete="off" />
-[% RenderBlockEnd("ContentLargeTicketGenericHeaderColumnFilterLinkUserSearch") %]
                             <a href="#" class="DeleteFilter Hidden"><i class="fa fa-trash-o"></i></a>
                         </div>
                     </div>
-
-                    <a id="[% Data.HeaderColumnName | html %]OverviewControl[% Data.Name | html %]" name="[% Data.HeaderColumnName | html %]OverviewControl[% Data.Name | html %]" href="#" title="[% Data.Title | html %]" >[% Data.HeaderNameTranslated | html %]</a>
-
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderColumnFilterLink") %]
-
 [% RenderBlockStart("ContentLargeTicketGenericHeaderColumnLink") %]
                     <a id="[% Data.HeaderColumnName | html %]OverviewControl[% Data.Name | html %]" name="[% Data.HeaderColumnName | html %]OverviewControl[% Data.Name | html %]" href="#" title="[% Data.Title | html %]" >[% Data.HeaderNameTranslated | html %]</a>
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderColumnLink") %]
 
 [% RenderBlockStart("ContentLargeTicketGenericHeaderColumnFilter") %]
+                    <span class="Gray" title="[% Data.Title | html %]" >[% Data.HeaderNameTranslated | html %]</span>
                     <a href="#" class="ColumnSettingsTrigger" title="[% Data.FilterTitle | html %]">
                         <i class="fa fa-filter"></i>
                     </a>
                     <div class="ColumnSettingsContainer">
                         <div class="ColumnSettingsBox">
                             [% Data.ColumnFilterStrg %]
-[% RenderBlockStart("ContentLargeTicketGenericHeaderColumnFilterLinkCustomerUserSearch") %]
-                            <input type="text" class="CustomerUserAutoComplete" autocomplete="off" />
-[% RenderBlockEnd("ContentLargeTicketGenericHeaderColumnFilterLinkCustomerUserSearch") %]
                             <a href="#" class="DeleteFilter Hidden"><i class="fa fa-trash-o"></i></a>
                         </div>
                     </div>
-                    <span class="Gray" title="[% Data.Title | html %]" >[% Data.HeaderNameTranslated | html %]</span>
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderColumnFilter") %]
-
 [% RenderBlockStart("ContentLargeTicketGenericHeaderColumnEmpty") %]
                     <span class="Gray" title="[% Data.Title | html %]" >[% Data.HeaderNameTranslated %]</span>
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderColumnEmpty") %]
                 </th>
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderColumn") %]
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderTicketHeader") %]
-
 [% RenderBlockEnd("GeneralOverviewHeader") %]
-
             </tr>
-
 [% RenderBlockEnd("ContentLargeTicketGenericHeader") %]
         </thead>
 
         <tbody>
 [% RenderBlockStart("ContentLargeTicketGenericRow") %]
             <tr class="MasterAction">
-
 [% RenderBlockStart("GeneralOverviewRow") %]
-
 [% RenderBlockStart("ContentLargeTicketGenericRowMeta") %]
                 <td class="[% Data.ClassTable | html %] Flags" title="[% Translate(Data.Title) | html %]">
 [% RenderBlockStart("ContentLargeTicketGenericRowMetaImage") %]
@@ -161,7 +161,6 @@
 #                <div title="[% Data.Title | html %]">[% Data.Title | truncate(70) | html %]</div>
 #            </td>
 #            <td>[% Data.Time | html %]</td>
-
 [% RenderBlockStart("ContentLargeTicketGenericTicketColumn") %]
 [% RenderBlockStart("ContentLargeTicketGenericTicketNumber") %]
                 <td>
@@ -175,7 +174,7 @@
 [% RenderBlockEnd("ContentLargeTicketGenericEscalationTime") %]
 [% RenderBlockStart("ContentLargeTicketGenericColumn") %]
                 <td>
-                    <div title="[% Data.GenericValue | html %]">[% Data.GenericValue | truncate(40) | html %]</div>
+                    <div title="[% Data.GenericValue | html %]" class="[% Data.Class | html %]">[% Data.GenericValue | truncate(40) | html %]</div>
                 </td>
 [% RenderBlockEnd("ContentLargeTicketGenericColumn") %]
 [% RenderBlockStart("ContentLargeTicketTitle") %]
@@ -185,7 +184,7 @@
 [% RenderBlockEnd("ContentLargeTicketTitle") %]
 [% RenderBlockStart("ContentLargeTicketGenericColumnTranslatable") %]
                 <td>
-                    <div title="[% Translate(Data.GenericValue) | html %]">[% Translate(Data.GenericValue) | html %]</div>
+                    <div title="[% Translate(Data.GenericValue) | html %]" class="[% Data.Class | html %]">[% Translate(Data.GenericValue) | html %]</div>
                 </td>
 [% RenderBlockEnd("ContentLargeTicketGenericColumnTranslatable") %]
 [% RenderBlockStart("ContentLargeTicketGenericColumnTime") %]
@@ -199,7 +198,6 @@
                 </td>
 [% RenderBlockEnd("ContentLargeTicketGenericColumnEscalation") %]
 [% RenderBlockEnd("ContentLargeTicketGenericTicketColumn") %]
-
 [% RenderBlockStart("ContentLargeTicketGenericDynamicField") %]
                 <td>
                     <div title="[% Data.Title | html %]">
@@ -212,7 +210,6 @@
                     </div>
                 </td>
 [% RenderBlockEnd("ContentLargeTicketGenericDynamicField") %]
-
 [% RenderBlockEnd("GeneralOverviewRow") %]
             </tr>
 [% RenderBlockEnd("ContentLargeTicketGenericRow") %]
@@ -226,3 +223,13 @@
         </tbody>
     </table>
 </form>
+[% RenderBlockStart("ContentLargeTicketGenericFilterNavBar") %]
+    <span class="Pagination">
+        <ul>
+            <li>
+                <span>[% Data.ResultLong %]</span>
+            </li>
+            <li class="page-links">[% Data.SiteNavBar %]</li>
+        </ul>
+    </span>
+[% RenderBlockEnd("ContentLargeTicketGenericFilterNavBar") %]

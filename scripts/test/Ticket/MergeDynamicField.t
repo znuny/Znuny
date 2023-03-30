@@ -25,9 +25,9 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my @DynamicFields = map { $Helper->GetRandomID() } 1 .. 2;
+my @DynamicFields = map { $HelperObject->GetRandomID() } 1 .. 2;
 my @Config;
 
 for my $DynamicField (@DynamicFields) {

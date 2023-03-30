@@ -28,7 +28,7 @@ $Kernel::OM->ObjectParamAdd(
         CheckEmailAddresses => 0,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $MailQueueObj = $Kernel::OM->Get('Kernel::System::MailQueue');
 
@@ -108,7 +108,7 @@ my %UserData = $UserObject->GetUserData(
 my $UserID = $UserData{UserID};
 
 # Create second test user with 'de' lanugage setting.
-my $UserLoginDE = $Helper->TestUserCreate(
+my $UserLoginDE = $HelperObject->TestUserCreate(
     Groups   => ['users'],
     Language => 'de'
 );
@@ -118,7 +118,7 @@ my %UserDataDE = $UserObject->GetUserData(
 my $UserDEID = $UserDataDE{UserID};
 
 # Create customer test user with 'es' language setting.
-my $CustomerUser = $Helper->TestCustomerUserCreate(
+my $CustomerUser = $HelperObject->TestCustomerUserCreate(
     Language => 'es',
 );
 
@@ -160,7 +160,7 @@ $Self->True(
     "ArticleCreate() successful for Article ID $ArticleID",
 );
 
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 

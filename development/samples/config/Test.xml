@@ -38,29 +38,15 @@
             <Item ValueType="DateTime">2016-12-08 01:02:03</Item>
         </Value>
     </Setting>
-    <Setting Name="TestEntityPriority" Required="1" Valid="1">
-        <Description Translatable="1">Entity priority item.</Description>
-        <Navigation>Test</Navigation>
-        <Value>
-            <Item ValueType="Entity" ValueEntityType="Priority">3 normal</Item>
-        </Value>
-    </Setting>
-    <Setting Name="TestEntityQueue" Required="1" Valid="1">
-        <Description Translatable="1">Entity queue item.</Description>
-        <Navigation>Test</Navigation>
-        <Value>
-            <Item ValueType="Entity" ValueEntityType="Queue">Junk</Item>
-        </Value>
-    </Setting>
     <Setting Name="TestEntityDynamicField" Required="1" Valid="1">
-        <Description Translatable="1">Entity DynamicField item.</Description>
+        <Description Translatable="1">Entity dynamic field item.</Description>
         <Navigation>Test</Navigation>
         <Value>
             <Item ValueType="Entity" ValueEntityType="DynamicField">ProcessManagementProcessID</Item>
         </Value>
     </Setting>
     <Setting Name="TestEntityDynamicFieldTicket" Required="1" Valid="1">
-        <Description Translatable="1">Entity DynamicField (Ticket) item.</Description>
+        <Description Translatable="1">Entity dynamic field (ticket) item.</Description>
         <Navigation>Test</Navigation>
         <Value>
             <Item ValueType="Entity" ValueEntityType="DynamicField" ValueEntitySubType="Ticket">ProcessManagementProcessID</Item>
@@ -76,6 +62,87 @@
         </Value>
     </Setting>
     -->
+    <Setting Name="TestEntityGroup" Required="1" Valid="1">
+        <Description Translatable="1">Entity group item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Group">users</Item>
+        </Value>
+    </Setting>
+ <!--
+    <Setting Name="TestEntityRole" Required="1" Valid="1">
+        <Description Translatable="1">Entity role item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Role">role1</Item>
+        </Value>
+    </Setting>
+-->
+    <Setting Name="TestEntityPriority" Required="1" Valid="1">
+        <Description Translatable="1">Entity priority item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Priority">3 normal</Item>
+        </Value>
+    </Setting>
+    <Setting Name="TestEntityQueue" Required="1" Valid="1">
+        <Description Translatable="1">Entity queue item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Queue">Junk</Item>
+        </Value>
+    </Setting>
+    <!--
+    <Setting Name="TestEntityService" Required="1" Valid="1">
+        <Description Translatable="1">Entity service item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Service"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="TestEntitySLA" Required="1" Valid="1">
+        <Description Translatable="1">Entity SLA item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="SLA">SLA 1</Item>
+        </Value>
+    </Setting>
+    -->
+    <Setting Name="TestEntityState" Required="1" Valid="1">
+        <Description Translatable="1">Entity state item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="State">open</Item>
+        </Value>
+    </Setting>
+    <Setting Name="TestEntitySystemAddress" Required="1" Valid="1">
+        <Description Translatable="1">Entity system address item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="SystemAddress">root@localhost</Item>
+        </Value>
+    </Setting>
+    <Setting Name="TestEntityType" Required="1" Valid="1">
+        <Description Translatable="1">Entity type item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Type">Unclassified</Item>
+        </Value>
+    </Setting>
+    <Setting Name="TestEntityUser" Required="1" Valid="1">
+        <Description Translatable="1">Entity user item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="User">root@localhost</Item>
+        </Value>
+    </Setting>
+    <Setting Name="TestEntityValid" Required="1" Valid="1">
+        <Description Translatable="1">Entity valid item.</Description>
+        <Navigation>Test</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Valid">valid</Item>
+        </Value>
+    </Setting>
     <Setting Name="TestDirectory" Required="1" Valid="1">
         <Description Translatable="1">Directory item.</Description>
         <Navigation>Test</Navigation>

@@ -947,6 +947,7 @@ sub GetStatTable {
                 );
 
                 next DYNAMICFIELD if !$IsStatsCondition;
+                next DYNAMICFIELD if !$Param{Restrictions}->{$ParameterName};
 
                 # get new search parameter
                 my $DynamicFieldStatsSearchParameter = $DynamicFieldBackendObject->StatsSearchFieldParameterBuild(
@@ -1372,7 +1373,7 @@ sub GetStatTable {
                         # change raw value from ticket to a plain text value
                         $Ticket{$ParameterName} = $ValueStrg->{Value};
 
-                        ## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+                        ## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
                         if ( $DynamicFieldConfig->{Name} =~ /ProcessManagementProcessID|ProcessManagementActivityID/ ) {
                             my $DisplayValue = $DynamicFieldBackendObject->DisplayValueRender(
                                 DynamicFieldConfig => $DynamicFieldConfig,
@@ -1638,10 +1639,10 @@ sub _TicketAttributes {
         Number       => Translatable('Number'),               # only a counter for a better readability
         TicketNumber => $ConfigObject->Get('Ticket::Hook'),
 
-        #TicketID       => 'TicketID',
-        Age   => 'Age',
-        Title => 'Title',
-        Queue => 'Queue',
+        TicketID => 'TicketID',
+        Age      => 'Age',
+        Title    => 'Title',
+        Queue    => 'Queue',
 
         #QueueID        => 'QueueID',
         State => 'State',
@@ -1749,6 +1750,7 @@ sub _SortedAttributes {
     my @SortedAttributes = qw(
         Number
         TicketNumber
+        TicketID
         Age
         Title
         Created

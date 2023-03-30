@@ -17,36 +17,37 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Do not check service and type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0
         );
 
         # Set download type to inline.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'AttachmentDownloadType',
             Value => 'inline'
         );
 
         # Create test customer user and login.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         $Selenium->Login(
@@ -59,10 +60,10 @@ $Selenium->RunTest(
         $Selenium->find_element( ".Button", 'css' )->VerifiedClick();
 
         # Create needed variables.
-        my $SubjectRandom  = "Subject" . $Helper->GetRandomID();
-        my $TextRandom     = "Text" . $Helper->GetRandomID();
+        my $SubjectRandom  = "Subject" . $HelperObject->GetRandomID();
+        my $TextRandom     = "Text" . $HelperObject->GetRandomID();
         my $AttachmentName = "StdAttachment-Test1.txt";
-        my $Location       = $Kernel::OM->Get('Kernel::Config')->Get('Home')
+        my $Location       = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/$AttachmentName";
 
         # Hide DnDUpload and show input field.
@@ -103,8 +104,11 @@ $Selenium->RunTest(
         # Click on test created ticket on CustomerTicketOverview screen.
         $Selenium->find_element( $TicketNumber, 'link_text' )->VerifiedClick();
 
+        use Data::Dumper;
+        print STDERR 'Debug Dump -  - $AttachmentName = ' . Dumper( \$AttachmentName ) . "\n";
+
         # Click on attachment to open it.
-        $Selenium->find_element("//*[text()=\"$AttachmentName\"]")->click();
+        $Selenium->find_element( "#VisibleMessageContent span[title*=\"$AttachmentName\"]", 'css' )->click();
 
         # Switch to another window.
         $Selenium->WaitFor( WindowCount => 2 );
@@ -140,7 +144,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

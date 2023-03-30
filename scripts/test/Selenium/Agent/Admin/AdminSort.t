@@ -19,13 +19,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # create and login test user
         my $Language      = 'hu';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users' ],
             Language => $Language,
         ) || die "Did not get test user";
@@ -43,36 +43,25 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=Admin");
 
         my $NavigationModule = $ConfigObject->Get('Frontend::NavigationModule');
-        my @NavigationCheck;
-
-        # Check if needed frontend module is registered in sysconfig.
-        if ( $ConfigObject->Get('Frontend::Module')->{AdminGenericAgent} ) {
-            @NavigationCheck = (
-                'Általános ügyintéző',
-                'Dinamikus mezők',
-                'Folyamatkezelés',
-                'Hozzáférés-vezérlési listák (ACL)',
-                'Webszolgáltatások',
-            );
-        }
-        else {
-            @NavigationCheck = (
-                'Dinamikus mezők',
-                'Folyamatkezelés',
-                'Hozzáférés-vezérlési listák (ACL)',
-                'Webszolgáltatások',
-            );
-        }
+        my @NavigationCheck  = (
+            'Csomagkezelő',
+            'Munkamenet-kezelés',
+            'Naptárak',
+            'Rendszerbeállítások',
+            'Rendszerkarbantartás',
+            'Rendszernapló',
+            'SQL doboz',
+        );
 
         $Selenium->execute_script(
-            "\$('.WidgetSimple:eq(7) ul')[0].scrollIntoView(true);",
+            "\$('.WidgetSimple:eq(8) ul')[0].scrollIntoView(true);",
         );
 
         # Check if items sort well.
         my $Count = 0;
         for my $Item (@NavigationCheck) {
             my $Navigation = $Selenium->execute_script(
-                "return \$('.WidgetSimple:eq(7) ul li:eq($Count) a span.Title').text().trim()"
+                "return \$('.WidgetSimple:eq(8) ul li:eq($Count) a span.Title').text().trim()"
             );
 
             $Navigation =~ s/\n\s+/@/g;
@@ -86,11 +75,11 @@ $Selenium->RunTest(
 
             # Add item to favourite.
             $Selenium->execute_script(
-                "\$('.WidgetSimple:eq(7) ul li:eq($Count) a span.AddAsFavourite').trigger('click')"
+                "\$('.WidgetSimple:eq(8) ul li:eq($Count) a span.AddAsFavourite').trigger('click')"
             );
 
             my $Favourite = $Selenium->execute_script(
-                "return \$('.WidgetSimple:eq(7) ul li:eq($Count) a span.AddAsFavourite').attr('data-module')"
+                "return \$('.WidgetSimple:eq(8) ul li:eq($Count) a span.AddAsFavourite').attr('data-module')"
             );
 
             $Selenium->WaitFor(
@@ -156,11 +145,11 @@ $Selenium->RunTest(
         }
 
         # Create new test user and set it's Admin favorites modules in preferences.
-        my ( $SecondTestUserLogin, $SecondTestUserID ) = $Helper->TestUserCreate(
+        my ( $SecondTestUserLogin, $SecondTestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         );
 
-        my $Success = $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
+        my $Success = $UserObject->SetPreferences(
             UserID => $SecondTestUserID,
             Key    => 'AdminNavigationBarFavourites',
             Value =>

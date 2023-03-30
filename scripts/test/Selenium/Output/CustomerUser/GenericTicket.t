@@ -18,8 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $SysConfigObject    = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Enable CustomerUserGenericTicket sysconfig.
         my @CustomerSysConfig = (
@@ -31,12 +36,12 @@ $Selenium->RunTest(
 
             # Get default sysconfig.
             my $SysConfigName = 'Frontend::CustomerUser::Item###' . $SysConfigChange;
-            my %Config        = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+            my %Config        = $SysConfigObject->SettingGet(
                 Name    => $SysConfigName,
                 Default => 1,
             );
 
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => $SysConfigName,
                 Value => $Config{EffectiveValue},
@@ -44,21 +49,21 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Get test customer user ID.
-        my @CustomerIDs = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerIDs(
+        my @CustomerIDs = $CustomerUserObject->CustomerIDs(
             User => $TestCustomerUserLogin,
         );
         my $CustomerID = $CustomerIDs[0];
@@ -121,7 +126,7 @@ $Selenium->RunTest(
         );
 
         # Go to zoom view of created test ticket.
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet(
             "${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketData{Open}->{TicketIDs}->[0]"
         );
@@ -209,7 +214,7 @@ $Selenium->RunTest(
         }
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

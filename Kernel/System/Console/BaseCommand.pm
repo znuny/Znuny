@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::System::Console::BaseCommand;
 
@@ -22,7 +23,6 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::Encode',
-    'Kernel::System::Main',
 );
 
 our $SuppressANSI = 0;
@@ -381,7 +381,7 @@ sub Execute {
     #   In future we might need to check if it was created and update it on the fly.
     $Kernel::OM->ObjectParamAdd(
         'Kernel::System::Log' => {
-            LogPrefix => 'OTRS-otrs.Console.pl-' . $Self->Name(),
+            LogPrefix => 'Znuny-znuny.Console.pl-' . $Self->Name(),
         },
     );
 
@@ -390,9 +390,9 @@ sub Execute {
     # Don't allow to run these scripts as root.
     if ( !$ParsedGlobalOptions->{'allow-root'} && $> == 0 ) {    # $EFFECTIVE_USER_ID
         $Self->PrintError(
-            "You cannot run otrs.Console.pl as root. Please run it as the 'otrs' user or with the help of su:"
+            "You cannot run znuny.Console.pl as root. Please run it as the 'znuny' user or with the help of su:"
         );
-        $Self->Print("  <yellow>su -c \"bin/otrs.Console.pl MyCommand\" -s /bin/bash otrs</yellow>\n");
+        $Self->Print("  <yellow>su -c \"bin/znuny.Console.pl MyCommand\" -s /bin/bash otrs</yellow>\n");
         return $Self->ExitCodeError();
     }
 
@@ -522,7 +522,7 @@ sub GetUsageHelp {
 
     my $UsageText = "<green>$Self->{Description}</green>\n";
     $UsageText .= "\n<yellow>Usage:</yellow>\n";
-    $UsageText .= " otrs.Console.pl $Self->{Name}";
+    $UsageText .= " znuny.Console.pl $Self->{Name}";
 
     my $OptionsText   = "<yellow>Options:</yellow>\n";
     my $ArgumentsText = "<yellow>Arguments:</yellow>\n";
@@ -909,8 +909,12 @@ sub _ParseCommandlineArguments {
 
     my %OptionValues;
 
+    my %KnownOptions;
+
     OPTION:
     for my $Option ( @{ $Self->{_Options} // [] }, @{ $Self->{_GlobalOptions} } ) {
+        $KnownOptions{ '--' . $Option->{Name} } = 1;
+
         my $Lookup = $Option->{Name};
         if ( $Option->{HasValue} ) {
             $Lookup .= '=s';
@@ -974,6 +978,14 @@ sub _ParseCommandlineArguments {
 
             $OptionValues{ $Option->{Name} } = $Value;
         }
+    }
+
+    # Check for remaining known options that could not be parsed.
+    my @RemainingKnownOptions = grep { exists $KnownOptions{$_} } @{$Arguments};
+    if (@RemainingKnownOptions) {
+        my $OptionsString = join ', ', sort @RemainingKnownOptions;
+        $Self->PrintError("the following options have an unexpected or missing value: $OptionsString.");
+        return;
     }
 
     my %ArgumentValues;

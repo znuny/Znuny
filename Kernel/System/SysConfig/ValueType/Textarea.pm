@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::SysConfig::ValueType::Textarea;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
 use warnings;
@@ -57,7 +57,7 @@ Extracts the effective value from a XML parsed setting.
         Name           => 'SettingName',
         EffectiveValue => 'Textarea content', # (optional)
         DefaultValue   => 'Textarea content', # (optional)
-        Class          => 'My class'          # (optional)
+        Class          => 'My class',         # (optional)
         Item           => [                   # (optional) XML parsed item
             {
                 'ValueType' => 'Textarea',

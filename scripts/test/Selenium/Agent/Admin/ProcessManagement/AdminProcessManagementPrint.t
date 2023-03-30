@@ -18,10 +18,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+        my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -32,14 +36,14 @@ $Selenium->RunTest(
         );
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
-        my $ProcessRandom  = 'Process' . $Helper->GetRandomID();
-        my $ActivityRandom = 'Activity' . $Helper->GetRandomID();
+        my $ProcessRandom  = 'Process' . $HelperObject->GetRandomID();
+        my $ActivityRandom = 'Activity' . $HelperObject->GetRandomID();
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminProcessManagement screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
@@ -79,7 +83,7 @@ $Selenium->RunTest(
         $Selenium->switch_to_window( $Handles->[0] );
 
         # Delete test process.
-        my $Success = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessDelete(
+        my $Success = $ProcessObject->ProcessDelete(
             ID     => $ProcessID,
             UserID => $TestUserID,
         );
@@ -92,8 +96,6 @@ $Selenium->RunTest(
 
         # Synchronize process after deleting test process.
         $Selenium->find_element("//a[contains(\@href, \'Subaction=ProcessSync' )]")->VerifiedClick();
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure cache is correct.
         $CacheObject->CleanUp( Type => 'ProcessManagement_Process' );

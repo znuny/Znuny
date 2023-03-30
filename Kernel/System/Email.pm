@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::Email;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
 
 use strict;
 use warnings;
@@ -22,13 +22,12 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Crypt::PGP',
-    'Kernel::System::Crypt::SMIME',
+    'Kernel::System::CommunicationLog',
+    'Kernel::System::DateTime',
     'Kernel::System::Encode',
     'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
     'Kernel::System::MailQueue',
-    'Kernel::System::CommunicationLog',
 );
 
 =head1 NAME
@@ -703,6 +702,7 @@ Really send the mail
     );
 
     # or
+
     my $Result = $SendObject->SendExecute(
         From                   => $RealFrom,
         To                     => $To, # can be a string with comma separated mail addresses
@@ -797,7 +797,7 @@ Check mail configuration
 sub Check {
     my ( $Self, %Param ) = @_;
 
-    my %Check = $Self->{Backend}->Check();
+    my %Check = $Self->{Backend}->Check(%Param);
 
     if ( $Check{Successful} ) {
         return ( Successful => 1 );

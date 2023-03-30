@@ -28,16 +28,16 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # set user details
-my ( $UserLogin, $UserID ) = $Helper->TestUserCreate();
+my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate();
 my $UserPassword = $UserLogin;
 
 # set customer user details
-my $CustomerUserLogin    = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin    = $HelperObject->TestCustomerUserCreate();
 my $CustomerUserPassword = $CustomerUserLogin;
 my $CustomerUserID       = $CustomerUserLogin;
 
@@ -50,7 +50,7 @@ $Self->Is(
 );
 
 # set web service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Session::SessionCreate-Test-' . $RandomID;
 
 my $WebserviceID = $WebserviceObject->WebserviceAdd(
     Name   => $WebserviceName,
@@ -73,7 +73,7 @@ $Self->True(
 );
 
 # get remote host with some precautions for certain unit test systems
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # prepare web service config
 my $RemoteSystem =
@@ -87,7 +87,6 @@ my $RemoteSystem =
 
 my $WebserviceConfig = {
 
-    #    Name => '',
     Description =>
         'Test for Ticket Connector using SOAP transport backend.',
     Debugger => {

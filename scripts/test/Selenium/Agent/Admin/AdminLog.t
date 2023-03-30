@@ -18,11 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
-        my $Helper    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Set log module in sysconfig.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LogModule',
             Value => 'Kernel::System::Log::SysLog',
@@ -44,7 +46,7 @@ $Selenium->RunTest(
 
         # Create log entries.
         for ( 0 .. 1 ) {
-            my $LogMessage = 'LogMessage' . $Helper->GetRandomNumber();
+            my $LogMessage = 'LogMessage' . $HelperObject->GetRandomNumber();
 
             $LogObject->Log(
                 Priority => 'error',
@@ -55,7 +57,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -65,7 +67,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminLog screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminLog");
@@ -143,11 +145,39 @@ $Selenium->RunTest(
             "Log time stamp is in user preference time zone ($UserTimeZone) format."
         );
 
+        # Login test user again.
+        $Selenium->Login(
+            Type     => 'Agent',
+            User     => $TestUserLogin,
+            Password => $TestUserLogin,
+        );
+
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminLog");
+
+        $Self->True(
+            $Selenium->execute_script(
+                "return \$('#LogEntries tbody tr:visible').length == 2"
+            ),
+            "4 log entries exists in the table",
+        );
+
+        $Selenium->find_element( '#ClearLogEntries', 'css' )->click();
+
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminLog");
+
+        # Check for expected result.
+        $Self->True(
+            $Selenium->execute_script(
+                "return \$(\"#LogEntries tr td:contains('No data found')\").length == 1"
+            ),
+            "No log entries exists in the table",
+        );
+
         # Clear log.
         $LogObject->CleanUp();
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 );
 

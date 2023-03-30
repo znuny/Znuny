@@ -24,13 +24,13 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # set fixed time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 # define needed variables
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 my $UserID   = 1;
 
 # get original ACL list
@@ -388,7 +388,7 @@ for my $Test (@Tests) {
 
 # try to update the ACL
 print "Force a gap between create and update ACL, Sleeping 2s\n";
-$Helper->FixedTimeAddSeconds(2);
+$HelperObject->FixedTimeAddSeconds(2);
 
 TEST:
 for my $Test (@Tests) {

@@ -18,10 +18,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
@@ -31,7 +33,7 @@ $Selenium->RunTest(
         my $Language = "de";
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => ['admin'],
             Language => $Language,
         ) || die "Did not get test user";
@@ -42,7 +44,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminAutoResponse screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminAutoResponse");
@@ -66,16 +68,15 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Add screen.
-        my $Count;
-        $Count = 1;
-        for my $BreadcrumbText ( 'Auto Response Management', 'Add Auto Response' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $LanguageObject->Translate($BreadcrumbText),
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+        for my $BreadcrumbText (
+            $LanguageObject->Translate('Auto Response Management'),
+            $LanguageObject->Translate('Add Auto Response'),
+            )
+        {
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check page.
@@ -109,7 +110,7 @@ $Selenium->RunTest(
             "Submit is found on Add screen.",
         );
 
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
         my @AutoResponseNames;
 
         for my $Item (qw(First Second)) {
@@ -155,19 +156,15 @@ $Selenium->RunTest(
         $Selenium->find_element( $AutoResponseNames[0], 'link_text' )->VerifiedClick();
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText (
             $LanguageObject->Translate('Auto Response Management'),
             $LanguageObject->Translate('Edit Auto Response') . ': ' . $AutoResponseNames[0]
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check form actions.
@@ -232,7 +229,7 @@ $Selenium->RunTest(
             "Auto response '$AutoResponseNames[1]' is not found in the table"
         );
 
-        $Count = 0;
+        my $Count = 0;
         for my $ColumnName (qw(Name Type Comment Validity Changed Created)) {
 
             # Check if column name is translated.
@@ -244,10 +241,26 @@ $Selenium->RunTest(
             $Count++;
         }
 
+        # Checks for AdminValidFilter
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminAutoResponse");
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
+        );
+
         # Cleanup
         # Since there are no tickets that rely on our test auto response,
         # we can remove them from the DB.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         my $Success;
 
         for my $TestARName (@AutoResponseNames) {

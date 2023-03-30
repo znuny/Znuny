@@ -9,10 +9,14 @@
 
 package Kernel::System::CustomerUser::LDAP;
 
+# Throws errors when using LDAP_SIZELIMIT_EXCEEDED constant so disabled for now.
+## nofilter(TidyAll::Plugin::Znuny::Perl::SyntaxCheck)
+
 use strict;
 use warnings;
 
 use Net::LDAP;
+use Net::LDAP::Constant qw(LDAP_SIZELIMIT_EXCEEDED);
 use Net::LDAP::Util qw(escape_filter_value);
 
 use Kernel::System::VariableCheck qw(:all);
@@ -259,10 +263,10 @@ sub CustomerName {
     );
 
     if ( $Result->code() ) {
-        if ( $Result->code() == 4 ) {
+        if ( $Result->code() == LDAP_SIZELIMIT_EXCEEDED ) {
 
-            # Result code 4 (LDAP_SIZELIMIT_EXCEEDED) is normal if there
-            # are more items in LDAP than search limit defined in OTRS or
+            # LDAP_SIZELIMIT_EXCEEDED result is ok if there
+            # are more items in LDAP than search limit defined in Znuny or
             # in LDAP server. Avoid spamming logs with such errors.
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'debug',
@@ -497,10 +501,10 @@ sub CustomerSearch {
 
     # log ldap errors
     if ( $Result->code() ) {
-        if ( $Result->code() == 4 ) {
+        if ( $Result->code() == LDAP_SIZELIMIT_EXCEEDED ) {
 
-            # Result code 4 (LDAP_SIZELIMIT_EXCEEDED) is normal if there
-            # are more items in LDAP than search limit defined in OTRS or
+            # LDAP_SIZELIMIT_EXCEEDED result is ok if there
+            # are more items in LDAP than search limit defined in Znuny or
             # in LDAP server. Avoid spamming logs with such errors.
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'debug',
@@ -1067,10 +1071,22 @@ sub CustomerSearchDetail {
     );
 
     if ( $ResultSearch->code() ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => $ResultSearch->error(),
-        );
+        if ( $ResultSearch->code() == LDAP_SIZELIMIT_EXCEEDED ) {
+
+            # LDAP_SIZELIMIT_EXCEEDED result is ok if there
+            # are more items in LDAP than search limit defined in Znuny or
+            # in LDAP server. Avoid spamming logs with such errors.
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'debug',
+                Message  => 'LDAP size limit exceeded (' . $ResultSearch->error() . ').',
+            );
+        }
+        else {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => 'Search failed! ' . $ResultSearch->error(),
+            );
+        }
     }
 
     my @TmpCustomerUsers;
@@ -1207,10 +1223,10 @@ sub CustomerIDList {
     # log ldap errors
     if ( $Result->code() ) {
 
-        if ( $Result->code() == 4 ) {
+        if ( $Result->code() == LDAP_SIZELIMIT_EXCEEDED ) {
 
-            # Result code 4 (LDAP_SIZELIMIT_EXCEEDED) is normal if there
-            # are more items in LDAP than search limit defined in OTRS or
+            # LDAP_SIZELIMIT_EXCEEDED result is ok if there
+            # are more items in LDAP than search limit defined in Znuny or
             # in LDAP server. Avoid spamming logs with such errors.
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'debug',

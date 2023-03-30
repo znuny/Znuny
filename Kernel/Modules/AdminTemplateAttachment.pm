@@ -308,6 +308,7 @@ sub _Overview {
 
     # no actions in action list
     #    $LayoutObject->Block( Name => 'ActionList' );
+    $LayoutObject->Block( Name => 'NewActions' );
     $LayoutObject->Block( Name => 'OverviewResult' );
 
     my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');

@@ -21,6 +21,7 @@ use parent qw(Kernel::System::Ticket::NumberBase);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::Ticket',
 );
 

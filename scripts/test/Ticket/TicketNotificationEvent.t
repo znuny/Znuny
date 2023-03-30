@@ -23,7 +23,7 @@ $Kernel::OM->ObjectParamAdd(
 
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # force rich text editor
 my $Success = $ConfigObject->Set(
@@ -46,7 +46,7 @@ $Self->True(
 );
 
 # create a new user for current test
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 
@@ -57,7 +57,7 @@ my %UserData = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
 my $UserID = $UserData{UserID};
 
 # create new customer user for current test
-my $CustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 
 my %CustomerUserData = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
     User => $CustomerUserLogin,

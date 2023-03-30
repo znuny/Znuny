@@ -18,18 +18,21 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
         my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject              = $Kernel::OM->Get('Kernel::System::DB');
 
         # disable check email address
-        $Kernel::OM->Get('Kernel::Config')->Set(
+        $ConfigObject->Set(
             Key   => 'CheckEmailAddresses',
             Value => 0
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -94,10 +97,10 @@ $Selenium->RunTest(
             push @CustomerUserListInvalid, $CustomerUser;
         }
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Create test Customer.
-        my $CustomerName = 'Customer' . $Helper->GetRandomID();
+        my $CustomerName = 'Customer' . $HelperObject->GetRandomID();
         my $CustomerID   = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID          => $CustomerName,
             CustomerCompanyName => $CustomerName,
@@ -110,7 +113,7 @@ $Selenium->RunTest(
         );
 
         # create second test Customer (primary Customer of CustomerUser)
-        my $CustomerName2 = 'Customer' . $Helper->GetRandomID();
+        my $CustomerName2 = 'Customer' . $HelperObject->GetRandomID();
         my $CustomerID2   = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID          => $CustomerName2,
             CustomerCompanyName => $CustomerName2,
@@ -123,7 +126,7 @@ $Selenium->RunTest(
         );
 
         # create test CustomerUser
-        my $CustomerUserName = "CustomerUser" . $Helper->GetRandomID();
+        my $CustomerUserName = "CustomerUser" . $HelperObject->GetRandomID();
         my $CustomerUserID   = $CustomerUserObject->CustomerUserAdd(
             UserFirstname  => $CustomerUserName,
             UserLastname   => $CustomerUserName,
@@ -155,7 +158,7 @@ $Selenium->RunTest(
         # test search filter for CustomerUser
         $Selenium->find_element( "#Search", 'css' )->clear();
         $Selenium->find_element( "#Search", 'css' )->send_keys($CustomerUserName);
-        $Selenium->find_element("//button[\@value='Search'][\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
         $Self->True(
             index( $Selenium->get_page_source(), $CustomerUserName ) > -1,
             "CustomerUser $CustomerUserName found on page",
@@ -164,14 +167,14 @@ $Selenium->RunTest(
         # test search filter for Customer
         $Selenium->find_element( "#Search", 'css' )->clear();
         $Selenium->find_element( "#Search", 'css' )->send_keys($CustomerName);
-        $Selenium->find_element("//button[\@value='Search'][\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
         $Self->True(
             index( $Selenium->get_page_source(), $CustomerName ) > -1,
             "Customer $CustomerName found on page",
         );
 
         $Selenium->find_element( "#Search", 'css' )->clear();
-        $Selenium->find_element("//button[\@value='Search'][\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
 
         # assign test customer to test customer user
         $Selenium->VerifiedGet(
@@ -193,20 +196,16 @@ $Selenium->RunTest(
         );
 
         # check breadcrumb on change screen
-        my $Count = 1;
         my $IsLinkedBreadcrumbText;
         for my $BreadcrumbText (
             'Manage Customer User-Customer Relations',
-            'Change Customer User Relations for Customer \'' . $CustomerID . '\''
+            "Change Customer User Relations for Customer '" . $CustomerID . "'"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$(\$('.BreadCrumb li')[$Count]).text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => '.BreadCrumb>li>[title="' . $BreadcrumbText . '"]',
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # remove test customer user assignment from test customer
@@ -231,7 +230,7 @@ $Selenium->RunTest(
         # Search for customer user.
         $Selenium->find_element( "#Search", 'css' )->clear();
         $Selenium->find_element( "#Search", 'css' )->send_keys($CustomerUserName);
-        $Selenium->find_element("//button[\@value='Search'][\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
 
         $Selenium->find_element(
             "//ul[contains(\@id, \'CustomerUsers')]//li//a[contains(\@href, \'ID=$CustomerUserName' )]"
@@ -249,7 +248,7 @@ $Selenium->RunTest(
         # Search for customer.
         $Selenium->find_element( "#Search", 'css' )->clear();
         $Selenium->find_element( "#Search", 'css' )->send_keys($CustomerName);
-        $Selenium->find_element("//button[\@value='Search'][\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
 
         $Selenium->find_element("//ul[contains(\@id, \'Customers')]//li//a[contains(\@href, \'ID=$CustomerName' )]")
             ->VerifiedClick();
@@ -260,8 +259,6 @@ $Selenium->RunTest(
             "1",
             "Customer user is displayed correctly"
         );
-
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
         # delete created test entities
         if ($CustomerID) {
@@ -325,7 +322,7 @@ $Selenium->RunTest(
 
         # make sure the cache is correct.
         for my $Cache (qw(CustomerUser CustomerCompany)) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

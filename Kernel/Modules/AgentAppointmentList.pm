@@ -44,6 +44,20 @@ sub Run {
     for my $Key (@ParamNames) {
         next KEY if $Key eq 'AppointmentIDs';
         $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
+
+        my %SafeGetParam = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+            String       => $GetParam{$Key},
+            NoApplet     => 1,
+            NoObject     => 1,
+            NoEmbed      => 1,
+            NoSVG        => 1,
+            NoImg        => 1,
+            NoIntSrcLoad => 1,
+            NoExtSrcLoad => 1,
+            NoJavaScript => 1,
+        );
+
+        $GetParam{$Key} = $SafeGetParam{String};
     }
 
     my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
@@ -105,9 +119,17 @@ sub Run {
                 }
             }
 
-            my @Appointments = $AppointmentObject->AppointmentList(
-                %GetParam,
+            my $UserHasCalendarPermission = $CalendarObject->CalendarPermissionGet(
+                CalendarID => $GetParam{CalendarID},
+                UserID     => $Self->{UserID},
             );
+
+            my @Appointments;
+            if ($UserHasCalendarPermission) {
+                @Appointments = $AppointmentObject->AppointmentList(
+                    %GetParam,
+                );
+            }
 
             # go through all appointments
             for my $Appointment (@Appointments) {
@@ -234,28 +256,36 @@ sub Run {
                 }
 
                 # include plugin (link) data
-                my $PluginList = $PluginObject->PluginList();
+                my $PluginList  = $PluginObject->PluginList();
+                my %PluginParam = $PluginObject->PluginGetParam(%Param);
+
                 PLUGINKEY:
                 for my $PluginKey ( sort keys %{$PluginList} ) {
-                    my $LinkList = $PluginObject->PluginLinkList(
-                        AppointmentID => $Appointment->{AppointmentID},
-                        PluginKey     => $PluginKey,
-                        UserID        => $Self->{UserID},
+
+                    my %Plugin = (
+                        %{ $PluginList->{$PluginKey} },
+                        PluginKey => $PluginKey,
+                        Param     => $PluginParam{$PluginKey},
                     );
-                    my @LinkArray;
-                    for my $LinkID ( sort keys %{$LinkList} ) {
-                        push @LinkArray, $LinkList->{$LinkID}->{LinkName};
-                    }
-                    last PLUGINKEY if !@LinkArray;
 
-                    # truncate more than three elements
-                    my $LinkCount = scalar @LinkArray;
-                    if ( $LinkCount > 4 ) {
-                        splice @LinkArray, 3;
-                        push @LinkArray, $LayoutObject->{LanguageObject}->Translate( '+%s more', $LinkCount - 3 );
-                    }
+                    my $PluginData = $PluginObject->PluginFunction(
+                        PluginKey      => $PluginKey,
+                        PluginFunction => 'Get',
+                        PluginData     => {
+                            GetParam    => \%GetParam,
+                            Appointment => $Appointment,
+                            Plugin      => \%Plugin,
+                            UserID      => $Self->{UserID},
+                        },
+                    );
 
-                    $Appointment->{PluginData}->{$PluginKey} = join( '\n', @LinkArray );
+                    my $PluginGroup = $PluginList->{$PluginKey}->{Block};
+                    $PluginData->{PluginGroup} = $PluginGroup;
+
+                    if ( $PluginData->{Value} ) {
+                        $Appointment->{PluginData}->{$PluginKey} = $PluginData;
+                        $Appointment->{PluginDataGroup}->{$PluginGroup}->{$PluginKey} = $PluginData;
+                    }
                 }
 
                 # check if dealing with ticket appointment

@@ -28,13 +28,13 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get a random number
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 # create a new user for current test
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 my $Password = $UserLogin;
@@ -47,15 +47,15 @@ $Self->{UserID} = $UserObject->UserLookup(
 );
 
 # create a new user without permissions for current test
-my $UserLogin2 = $Helper->TestUserCreate();
+my $UserLogin2 = $HelperObject->TestUserCreate();
 my $Password2  = $UserLogin2;
 
 # create a customer where a ticket will use and will have permissions
-my $CustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword  = $CustomerUserLogin;
 
 # create a customer that will not have permissions
-my $CustomerUserLogin2 = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin2 = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword2  = $CustomerUserLogin2;
 
 # create dynamic field object
@@ -253,7 +253,7 @@ $Self->True(
 );
 
 # set web service name
-my $WebserviceName = $Helper->GetRandomID();
+my $WebserviceName = $HelperObject->GetRandomID();
 
 # create web-service object
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
@@ -288,7 +288,7 @@ $Self->True(
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
 # get remote host with some precautions for certain unit test systems
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # prepare web-service config
 my $RemoteSystem =

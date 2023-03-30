@@ -21,25 +21,25 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # do not check RichText
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 1,
         );
 
         # do not check RichText enhanced mode
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText::EnhancedMode',
             Value => 0,
         );
 
         my $Language      = 'de';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Language => $Language,
             Groups   => ['admin'],
         ) || die "Did not get test user";
@@ -75,7 +75,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AgentDashboard screen
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");

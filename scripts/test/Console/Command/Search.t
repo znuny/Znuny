@@ -39,12 +39,12 @@ $Self->Is(
 );
 
 $Self->False(
-    index( $Result, 'otrs.Console.pl Help command' ) > -1,
+    index( $Result, 'znuny.Console.pl Help command' ) > -1,
     "Help for 'Help' command not found",
 );
 
 $Self->True(
-    index( $Result, 'List all installed OTRS packages' ) > -1,
+    index( $Result, 'List all installed packages' ) > -1,
     "Found Admin::Package::List command entry",
 );
 
@@ -63,7 +63,7 @@ $Self->Is(
 );
 
 $Self->False(
-    index( $Result, 'otrs.Console.pl Help command' ) > -1,
+    index( $Result, 'znuny.Console.pl Help command' ) > -1,
     "Help for 'Help' command not found",
 );
 

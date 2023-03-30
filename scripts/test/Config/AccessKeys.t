@@ -17,7 +17,7 @@ use vars (qw($Self));
 
 my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
 my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
-my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Get all frontend modules with access key definitions.
 my @Modules = $SysConfigObject->ConfigurationSearch(

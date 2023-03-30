@@ -18,10 +18,8 @@ use Symbol;
 use parent qw(Kernel::System::Daemon::DaemonModules::BaseTaskWorker);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Daemon::SchedulerDB',
     'Kernel::System::DateTime',
-    'Kernel::System::Email',
     'Kernel::System::Log',
 );
 

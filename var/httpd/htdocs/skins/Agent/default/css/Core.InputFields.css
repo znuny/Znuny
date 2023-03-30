@@ -17,16 +17,71 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 /**
  * @subsection  General
  */
+input:hover {
+    cursor: pointer;
+}
 
 div.InputField_Container {
     position: static;
-    display: inline-block;
+    display: flex;
+    width: 100%;
+}
+
+#TransitionForm .Condition fieldset > div:first-child .InputField_Container:first-of-type {
+    background: var(--white);
+    border-radius: var(--border-radius-sm);
+}
+
+div.InputField_Container:hover,
+input.InputField_Search {
+    cursor: pointer;
+}
+
+input.InputField_Search:focus {
+    cursor: text;
 }
 
 div.InputField_InputContainer {
     position: relative;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     line-height: 11px;
+    /*width: var(--main-field-size);*/
+    width: 100%;
+}
+
+.InlineActions div.InputField_InputContainer {
+    background: transparent;
+}
+
+#ticketDetails .Content div.InputField_InputContainer {
+    max-width: 185px;
+}
+
+.ticket-modal div.InputField_InputContainer,
+.mainStructure .SidebarColumn div.InputField_InputContainer {
+    max-width: 80px;
+}
+
+.card-item div.InputField_Container,
+.card-item div.InputField_Container div.InputField_InputContainer {
+    width: 100%;
+    background: var(--white);
+    border-radius: var(--border-radius-sm);
+}
+
+.InputField_InputContainer i.fa.fa-caret-down {
+    position: absolute;
+    right: 12px;
+    /*top: 23%;*/
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+}
+
+.InputField_Search:focus + i {
+    transform: rotate(180deg);
 }
 
 .InputField_Search::-ms-clear {
@@ -37,11 +92,12 @@ div.InputField_InputContainer {
 
 .InputField_Search,
 .InputField_Autocomplete {
-    min-width: 190px;
+    min-width: 120px;
 }
 
 .InputField_Search.Small {
     min-width: 130px;
+    line-height: normal;
 }
 
 .InputField_Search[readonly=readonly]:focus {
@@ -67,7 +123,7 @@ div.InputField_InputContainer {
 }
 
 #ToolBar li.Extended form div.InputField_Container * {
-	float: none;
+    float: none;
 }
 
 #ToolBar div.InputField_Container li {
@@ -89,11 +145,24 @@ div.InputField_InputContainer {
 }
 
 .InputField_Search[disabled="disabled"] {
-    color: #aaa;
+    /*color: #aaa;*/
+    background: var(--disabled);
 }
 
 div.InputField_InputContainer .InputField_Search {
     margin: 0;
+    z-index: 50;
+    background: transparent; /* so <i>, positioned below, is visible */
+    position: relative;
+}
+
+div.InputField_InputContainer .InputField_Search:focus + i {
+    transform-origin: center center;
+    transform: rotate(180deg);
+}
+
+table div.InputField_InputContainer .InputField_Search {
+    min-width: 200px;
 }
 
 #ContextSettingsDialog div.InputField_InputContainer .InputField_Search {
@@ -102,23 +171,67 @@ div.InputField_InputContainer .InputField_Search {
 
 a.InputField_Action {
     position: absolute;
-    display: block;
-    color: #000;
-    top: 5px;
+    color: var(--gray-dark);
+    /* display: block;
+    top: 11px; - parent has display:flex and align-items: center*/
+    transition: var(--main-transition);
+}
+
+.InputField_InputContainer a.InputField_Action.InputField_ClearSearch {
+    color: var(--gray-semi-dark);
+    top: 0;
+    display: flex;
+    align-items: center;
+    z-index: 50;
+    height: 100%;
+    margin-right: 4px;
+}
+
+.InputField_InputContainer a.InputField_Action.InputField_ClearSearch:hover {
+    color: var(--black);
+    text-decoration: none;
 }
 
 a.InputField_Action:hover {
-    color: #f92;
+    color: var(--primary-color);
 }
 
 div.InputField_Selection {
     display: none;
     position: absolute;
     top: 4px;
-    height: 17px;
+    height: 75%;
     line-height: 11px;
     text-shadow: none;
+    /*margin-left: var(--margin-sm);*/
+    border-radius: 6px;
+    padding: 0 var(--padding-xs);
+    z-index: 50;
+    background: var(--pill-color-selected);
+    transition: var(--main-transition);
+    border: var(--border-width) var(--border-solid) var(--border-color);
 }
+
+.ActionRow div.InputField_Selection,
+.InlineActions div.InputField_Selection {
+    background: none;
+    border: 0;
+}
+
+/*div.InputField_Selection {
+    display: flex !important;
+    align-items: center;
+    position: absolute;
+    z-index: 500;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    line-height: var(--main-line-height);
+    background-color: transparent;
+    border-radius: var(--border-radius-xs);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+}*/
+
 
 div.InputField_Selection div {
     display: inline-block;
@@ -126,18 +239,27 @@ div.InputField_Selection div {
 }
 
 div.InputField_Selection div.Text {
-    background: #ddd;
-    padding: 2px 4px;
+    height: 100%;
+    padding: 0 var(--padding-xs);
+    /*line-height: 21px;*/
+    display: inline-flex;
+    align-items: center;
 }
 
 div.InputField_Selection div.Remove {
-    background: #bbb;
-    color: #fff;
+    color: var(--black);
     cursor: pointer;
 }
 
+div.InputField_Selection div.Remove i {
+    font-size: var(--font-size-xs);
+}
+
+div.InputField_Selection div.Remove:hover a {
+    background: var(--icon-hover-color-medium);
+}
+
 .AlreadyDisabled div.InputField_Selection div.Text {
-    background: #f5f5f5;
     cursor: default;
 }
 
@@ -147,46 +269,73 @@ div.InputField_Selection div.Remove {
 }
 
 div.InputField_Selection div.Remove a {
-    color: #fff;
+    color: var(--black);
+    background-color: transparent;
     padding: 2px 4px;
-    display: block;
     border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
 }
 
 div.InputField_More {
     position: absolute;
     white-space: nowrap;
-    top: 6px;
+    /*bottom: 10px; - parent has display:flex and align-items: center */
 }
 
 div.InputField_ListContainer {
     position: absolute;
-    z-index: 6100;
+    z-index: 6103;
     display: none;
     text-shadow: none;
+    padding-top: 1px;
+    border-radius: var(--border-radius-xs);
+    overflow: auto;
+    background: var(--menu-bg);
+    box-shadow: var(--menu-box-shadow);
 }
 
+@media only screen and (max-width: 1024px) {
+    div.InputField_ListContainer {
+        z-index: 999999;
+    }
+}
+
+
 div.InputField_TreeContainer {
-    background-color: #fff;
+    background-color: var(--white);
     border: 1px solid #ccc;
     border-top: none;
     overflow-y: auto;
     box-sizing: content-box;
     line-height: 18px;
+    border: 0;
+    border-top: none;
+    overflow-y: auto;
+    box-sizing: border-box;
+    line-height: 18px;
+    /*border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;*/
+    min-width: 75px;
 }
 
 .ExpandToTop div.InputField_TreeContainer {
-    border-top: 1px solid #ccc;
+    border-top: 0;
     border-bottom: none;
 }
 
 div.InputField_ToolbarContainer {
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-top: none;
     line-height: 21px;
     box-sizing: content-box;
     min-height: 21px;
+    min-width: 275px;
+    background: var(--menu-bg);
+    box-shadow: var(--menu-box-shadow);
+    border-bottom-left-radius: var(--border-radius-xs);
+    border-bottom-right-radius: var(--border-radius-xs);
 }
 
 div.InputField_ToolbarContainer ul {
@@ -197,6 +346,7 @@ div.InputField_ToolbarContainer ul {
 div.InputField_ToolbarContainer ul li {
     display: table-cell;
     text-align: center;
+    padding: var(--padding-xs);
 }
 
 div.InputField_ToolbarContainer ul li:after {
@@ -242,17 +392,15 @@ div.InputField_ToolbarContainer ul li a:hover {
 }
 
 .InputField_FiltersList {
-    background: #fff;
+    display: flex;
+    background: var(--white);
     white-space: nowrap;
-    border-top: 1px solid #ccc;
     z-index: 1500;
-    line-height: 1.5em;
     width: 100%;
     font-size: 11px;
 }
 
 .InputField_FiltersList span {
-    margin-right: 5px;
     cursor: default;
 }
 
@@ -262,10 +410,46 @@ div.InputField_ToolbarContainer ul li a:hover {
 }
 
 /**
+ * @subsection  Select
+ */
+
+.Field select,
+form select {
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    background-color: var(--white);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    /*margin: var(--margin-xs);*/ 
+    padding: var(--padding-xs) var(--padding-sm);
+    font-size: var(--font-size-sm);
+    color: var(--black);
+    border-radius: var(--border-radius-sm);
+    box-sizing: border-box;
+    line-height: var(--input-line-height);
+    transition: var(--main-transition);
+    height: 30px;
+}
+
+form select:first-child {
+    margin-left: 0;
+}
+
+
+.select-field-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-xs);
+    align-items: center;
+}
+
+
+
+/**
  * @subsection  jsTree theme
  */
+
 .jstree-InputField {
-    font-size: 11px;
+    /*font-size: 11px;*/
     border: none;
     box-shadow: none;
     height: 100%;
@@ -278,10 +462,13 @@ div.InputField_ToolbarContainer ul li a:hover {
 .jstree-InputField .jstree-container-ul {
     display: block;
     margin: 0;
-    padding: 0;
     list-style-type: none;
     list-style-image: none;
     text-align: left;
+}
+
+.jstree-container-ul {
+    padding: var(--padding-sm);
 }
 
 .RTL .jstree-InputField .jstree-node,
@@ -290,21 +477,26 @@ div.InputField_ToolbarContainer ul li a:hover {
     text-align: right;
 }
 
+.jstree-InputField .jstree-children .jstree-children {
+    padding-left: 12px;
+}
+
 .jstree-InputField .jstree-node {
     white-space: nowrap;
 }
 
 .jstree-InputField .jstree-node.jstree-hidden {
-    display: none;
+    display: none !important;
 }
 
 .jstree-InputField .jstree-anchor {
     display: inline-block;
-    color: black;
     white-space: nowrap;
-    padding: 0 4px 0 1px;
+    padding: 0;
     margin: 0;
     vertical-align: top;
+    color: var(--black);
+    font-size: var(--font-size-sm);
 }
 
 .jstree-InputField .jstree-anchor:focus {
@@ -337,6 +529,42 @@ div.InputField_ToolbarContainer ul li a:hover {
     padding: 0;
     vertical-align: top;
     text-align: center;
+}
+
+/*.cke_top {
+    background-color: transparent !important;
+}*/
+
+.cke_toolbar_separator {
+    display: none !important;
+}
+
+a.cke_button:hover {
+    background-color: #E2E2EA !important;
+    border-radius: 5px !important ;
+    border: none !important;
+    padding: 4px 6px !important;
+    cursor: pointer;
+}
+
+.RichTextField #cke_RichText,
+.RichTextField #cke_Body,
+.RichTextField #cke_EmailBody,
+.RichTextField .cke {
+    width: 100% !important;
+    max-width: 99.7%; /* to avoid bug where border-right disappears in some containers*/
+    /*max-width: var(--main-field-size) !important;*/
+    border-radius: 10px !important;
+    border: var(--border-width) var(-border-solid) var(--border-color) !important;
+    overflow: hidden;
+}
+
+.cke_inner {
+    border-radius: 10px !important;
+}
+
+.cke_bottom {
+    display: none !important;
 }
 
 .jstree-InputField .jstree-ocl {
@@ -399,8 +627,6 @@ div.InputField_ToolbarContainer ul li a:hover {
 
 .jstree-InputField .jstree-wholerow-ul {
     position: relative;
-    display: inline-block;
-    min-width: 100%;
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-leaf > .jstree-ocl {
@@ -412,49 +638,65 @@ div.InputField_ToolbarContainer ul li a:hover {
     position: relative;
 }
 
+.jstree-InputField-NoTree .jstree-InputField .jstree-wholerow-ul .jstree-anchor,
+.jstree-InputField-NoTree .jstree-InputField .jstree-wholerow-ul .jstree-icon {
+    display: flex;
+    align-items: center;
+}
+
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow {
     width: 100%;
     cursor: pointer;
     position: absolute;
     left: 0;
+    top: 0;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    height: 34px;
+    width: 100%;
+    border-radius: var(--border-radius-xs);
+
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-clicked {
-    background-color: #ddd;
+    background-color: var(--primary-color);
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow:hover,
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-hovered,
 .jstree-InputField .jstree-focused > .jstree-wholerow {
-    background-color: #f92;
+    background-color: var(--gray-light);
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-clicked:hover,
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-clicked.jstree-wholerow-hovered,
 .jstree-InputField .jstree-focused > .jstree-wholerow-clicked {
-    background-color: #f72;
+    background-color: var(--gray-light);
 }
 
 .jstree-InputField .Disabled > .jstree-wholerow:hover,
 .jstree-InputField .Disabled > .jstree-wholerow-hovered {
-    background-color: #eee;
+    background-color: var(--disabled);
     cursor: default;
 }
 
 .jstree-InputField .Disabled.jstree-open > .jstree-anchor,
 .jstree-InputField .Disabled.jstree-closed > .jstree-anchor {
-    cursor: pointer !important;
+    cursor: pointer;
 }
 
-.jstree-InputField .jstree-clicked {
-    background: transparent !important;
-    border: none !important;
-    padding: 0 4px 0 1px !important;
+.jstree-InputField .jstree-clicked, 
+.jstree-InputField .jstree-anchor.jstree-clicked {
+    color: var(--white);
 }
+
+.jstree-InputField .jstree-hovered.jstree-clicked {
+    color: var(--black);
+}
+
 
 .jstree-InputField.jstree-rtl .jstree-node {
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAACAQMAAAB49I5GAAAABlBMVEUAAAAdHRvEkCwcAAAAAXRSTlMAQObYZgAAAAxJREFUCNdjAAMOBgAAGAAJMwQHdQAAAABJRU5ErkJggg==");
@@ -524,10 +766,12 @@ div.InputField_ToolbarContainer ul li a:hover {
  * @subsection  jsTree theme - Tree variant
  */
 .jstree-InputField-Tree .jstree-node {
+    /*
     min-height: 18px;
     line-height: 18px;
     margin-left: 18px;
     min-width: 18px;
+    */
 }
 
 .RTL .jstree-InputField-Tree .jstree-node {
@@ -542,14 +786,17 @@ div.InputField_ToolbarContainer ul li a:hover {
 }
 
 .jstree-InputField-Tree .jstree-anchor {
+    /*
     height: 18px;
     line-height: 18px;
+    */
 }
 
 .jstree-InputField-Tree .jstree-icon {
     width: 18px;
     height: 18px;
     line-height: 18px;
+
 }
 
 .jstree-InputField-Tree .jstree-icon:empty {
@@ -563,7 +810,9 @@ div.InputField_ToolbarContainer ul li a:hover {
 }
 
 .jstree-InputField-Tree .jstree-wholerow {
+/*
     height: 18px;
+*/
 }
 
 .jstree-InputField-Tree .jstree-node,
@@ -612,11 +861,6 @@ div.InputField_ToolbarContainer ul li a:hover {
     background-position: -263px -39px;
 }
 
-.jstree-InputField-Tree > .jstree-no-dots .jstree-node,
-.jstree-InputField-Tree > .jstree-no-dots .jstree-leaf > .jstree-ocl {
-    background: transparent;
-}
-
 .jstree-InputField-Tree > .jstree-no-dots .jstree-open > .jstree-ocl {
     background-position: -39px -7px;
 }
@@ -633,31 +877,323 @@ div.InputField_ToolbarContainer ul li a:hover {
     background-position: -7px -39px;
 }
 
+
+
 /**
  * @subsection  jsTree theme - No Tree variant
  */
-.jstree-InputField-NoTree .jstree-node {
-    min-height: 18px;
-    line-height: 18px;
-    margin-left: 2px;
+
+.jstree-InputField-Tree > .jstree-no-dots .jstree-node {
+    background: transparent;
+    display: inherit;
+    height: auto;
+    padding: 0;
+}
+
+.jstree-InputField-NoTree .jstree-node,
+.jstree-InputField .jstree-node {
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-height: auto;
+    line-height: 1;
+    margin-left: 0;
     min-width: 18px;
+    box-sizing: border-box;
+    height: auto;
 }
 
-.jstree-InputField-NoTree .jstree-anchor {
-    height: 18px;
-    line-height: 18px;
+.jstree-InputField-NoTree .jstree-anchor,
+.jstree-InputField .jstree-anchor {
+    padding: var(--padding-sm) var(--padding-sm) var(--padding-sm) 0;
+    border-bottom: 5px solid transparent;
 }
 
-.jstree-InputField-NoTree .jstree-icon {
+.jstree-InputField-NoTree .jstree-leaf .jstree-icon,
+.jstree-InputField .jstree-leaf .jstree-icon {
     display: none;
 }
 
-.jstree-InputField-NoTree.jstree-rtl .jstree-node {
+.jstree-InputField-NoTree .jstree-leaf a,
+.jstree-InputField .jstree-leaf a {
+    padding-left: var(--padding-sm);
+}
+
+.jstree-InputField .jstree-wholerow-ul .jstree-icon {
+    margin: 8px var(--margin-xs);
+}
+
+.jstree-InputField-NoTree.jstree-rtl .jstree-node,
+.jstree-InputField.jstree-rtl .jstree-node {
     margin-right: 2px;
 }
 
-.jstree-InputField-NoTree .jstree-wholerow {
-    height: 18px;
+.jstree-InputField-NoTree .jstree-wholerow,
+.jstree-InputField .jstree-wholerow {
+    /*height: 18px;*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * @subsection  Checkbox Styles
+ */
+
+.radio-field-wrapper {
+    display: flex;
+    gap: var(--gap-sm);
+    align-content: center;
+    align-items: center;
+}
+
+.SidebarColumn label {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+}
+
+th > input[type=checkbox] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0;
+}
+
+input[type=checkbox] {
+    appearance: none; -webkit-appearance: none;
+    position: relative;
+    display: block;
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    min-height: 16px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+    border: var(--border-width) solid #ccc; 
+    background: transparent;
+    border-radius: 3px;
+    z-index: 100;
+    background: var(--white);
+}
+
+input[type=checkbox]:hover {
+    border-color: var(--success-color);
+}
+  
+input[type=checkbox]:checked {
+    background:var(--success-color);
+    border: 2px solid var(--success-color); 
+}
+
+input[type=checkbox]:checked + label {
+    color: var(--black);
+}
+
+input[type=checkbox]::after {
+    position: absolute;
+    z-index: 10000;
+    content: '';
+    transform: rotate(45deg);
+    height: 8px;
+    width: 4px;
+    border-bottom: 2px solid transparent;
+    border-right: 2px solid transparent;
+    left: 3px;
+    top: 0px;
+    transition: var(--main-transition);
+  }
+
+input[type=checkbox]:checked::after{
+    display: inline-block;
+    border-bottom: 2px solid var(--white);
+    border-right: 2px solid var(--white);
+}
+
+.checkbox-container,
+div.card-item .checkbox-container {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: var(--padding-sm);
+}
+
+.checkbox-container .Field,
+div.card-item .checkbox-container .Field {
+    min-width: unset;
+    width: auto;
+}
+
+.checkbox-container > input {
+    margin: 0;
+}
+
+/******************************/
+/*        Radio Buttons       */
+input[type=radio]{
+    appearance: none; 
+    -webkit-appearance: none;
+}
+
+input[type=radio]::after {
+    position: relative;
+    left: 0;
+}
+
+input[type=radio]:checked::after {
+    border-bottom: 2px solid var(--gray-dark);
+    border-right: 2px solid var(--gray-dark);
+}
+
+input[type=radio]:checked::after,
+input[type=radio].RadioRound:checked::after {
+    border-bottom: 2px solid var(--success-color);
+    border-right: 2px solid var(--success-color);
+}
+
+input[type="radio"], 
+input[type="radio"].RadioRound {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--white);
+    margin: 0;
+    color: var(--black);
+    width: 16px;
+    height: 16px;
+    border: var(--border-width-md) var(--border-solid) var(--black);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    max-width: 16px;
+    min-height: 16px;
+    max-height: 16px;
+}
+
+input[type="radio"]:checked,
+input[type="radio"].RadioRound:checked {
+    border: var(--border-width-md) var(--border-solid) var(--success-color);
+}
+
+input[type="radio"]::before,
+input[type="radio"].RadioRound::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--success-color);
+}
+
+input[type="radio"]:checked::before,
+input[type="radio"].RadioRound:checked::before {
+    transform: scale(1);
+}
+
+input[type="radio"]::after,
+input[type="radio"]:checked::after,
+input[type="radio"].RadioRound::after,
+input[type="radio"].RadioRound:checked::after {
+    display: none;
+}
+
+
+
+/******************************/
+
+/******************************/
+/*        Dynamic Field       */
+div.Row {
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: var(--padding-sm);
+}
+
+div.Row label,
+div.Row .Field {
+    padding: 0;
+}
+
+div.Row .Field > div:not(.InputField_Container):not(.TooltipErrorMessage) {
+    display: flex;
+    gap: var(--gap-xs);
+    align-items: center;
+    /*padding-bottom: 5px;*/
+}
+
+.Row.Row_DynamicField_DynamicFieldCheckBox {
+    display: flex;
+    flex-flow: row-reverse;
+    align-items: center;
+    gap: var(--gap-xs);
+    justify-content: start;
+}
+
+.Row_DynamicField_DynamicFieldCheckBox label {
+    padding: 0;
+}
+
+.Row_DynamicField_DynamicFieldCheckBox div.Field {
+    background: unset;
+    width: auto;
+}
+
+.Row_DynamicField_DynamicFieldCheckBox .Field input:not(:checked),
+.Row_DynamicField_DynamicFieldDate .Field input,
+.Row_DynamicField_DynamicFieldDateTime .Field input {
+    background: var(--white);
+}
+
+.Row.Row_DynamicField_DynamicFieldTextArea {
+    min-width: 100%;
+}
+
+/******************************/
+
+
+
+
+
 
 } /* end @media */

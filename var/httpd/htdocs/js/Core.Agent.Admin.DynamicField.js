@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -91,6 +92,19 @@ Core.Agent.Admin.DynamicField = (function (TargetNS) {
         Core.Form.Validate.AddMethod("Validate_PositiveNegativeNumbers", function (Value) {
             return (/^-?[0-9]+$/.test(Value));
         }, "");
+
+        Core.Form.Validate.AddRule("Validate_LinkReservedKeywordsInData", {
+            /*eslint-disable camelcase */
+            Validate_LinkReservedKeywordsInData: true
+            /*eslint-enable camelcase */
+        });
+        Core.Form.Validate.AddMethod("Validate_LinkReservedKeywordsInData", function (Value) {
+            // \[%\s+Data\.(Link|LinkPreview|Title|Value)\s+%\]
+            if (/\[%\s+Data\.(Link|LinkPreview|Title|Value)\s+%\]/.test(Value) === true) {
+                return false;
+            }
+            return true;
+        }, "");
     };
 
     /**
@@ -112,11 +126,6 @@ Core.Agent.Admin.DynamicField = (function (TargetNS) {
 
                     // reset select value to none
                     $(this).val('');
-                }
-
-                // Show OTRSBusiness upgrade dialog.
-                else if (!parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10)) {
-                    Core.Agent.ShowOTRSBusinessRequiredDialog();
                 }
 
                 return false;

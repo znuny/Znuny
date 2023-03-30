@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::Console::Command::Dev::Code::Generate::ConsoleCommand;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
 use warnings;
@@ -20,8 +20,8 @@ use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Main',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::Main',
 );
 
 sub Configure {

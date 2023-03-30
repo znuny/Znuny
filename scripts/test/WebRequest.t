@@ -23,37 +23,59 @@ use Kernel::System::Web::Request;
     );
 
     CGI->initialize_globals();
-    my $Request = Kernel::System::Web::Request->new();
+    my $ParamObject = Kernel::System::Web::Request->new();
 
-    my @ParamNames = $Request->GetParamNames();
+    my @ParamNames = $ParamObject->GetParamNames();
     $Self->IsDeeply(
         [ sort @ParamNames ],
         [qw/a b/],
         'ParamNames',
     );
 
+    my $Param = $ParamObject->GetParam( Param => 'a' );
     $Self->Is(
-        $Request->GetParam( Param => 'a' ),
+        $Param,
         4,
         'SingleParam',
     );
 
+    $Param = $ParamObject->GetParam( Param => 'aia' );
     $Self->Is(
-        $Request->GetParam( Param => 'aia' ),
+        $Param,
         undef,
         'SingleParam - not defined',
     );
 
+    my %Params = $ParamObject->GetParams();
+    $Self->IsDeeply(
+        \%Params,
+        {
+            'b' => 5,
+            'a' => 4,
+        },
+        'GetParams() from GET',
+    );
+
+    %Params = $ParamObject->GetParams(
+        Params => ['a']
+    );
+    $Self->IsDeeply(
+        \%Params,
+        {
+            'a' => 4
+        },
+        'GetParams() for specific Param from GET',
+    );
+
     local $CGI::POST_MAX = 1024;    ## no critic
 
-    $Request->{Query}->{'.cgi_error'} = 'Unittest failed ;-)';
+    $ParamObject->{Query}->{'.cgi_error'} = 'Unittest failed ;-)';
 
     $Self->Is(
-        $Request->Error(),
+        $ParamObject->Error(),
         'Unittest failed ;-) - POST_MAX=1KB',
         'Error()',
     );
-
 }
 
 {
@@ -61,42 +83,118 @@ use Kernel::System::Web::Request;
     local %ENV = (
         REQUEST_METHOD => 'POST',
         CONTENT_LENGTH => length($PostData),
-        QUERY_STRING   => 'c=4;c=5;b=6',
+        QUERY_STRING   => 'c=4;c=5;b=6;x=',
     );
 
     local *STDIN;
     open STDIN, '<:utf8', \$PostData;    ## no critic
 
     CGI->initialize_globals();
-    my $Request = Kernel::System::Web::Request->new();
+    my $ParamObject = Kernel::System::Web::Request->new();
 
-    my @ParamNames = $Request->GetParamNames();
+    my @ParamNames = $ParamObject->GetParamNames();
     $Self->IsDeeply(
         [ sort @ParamNames ],
-        [qw/a b c d/],
+        [qw/a b c d x/],
         'ParamNames',
     );
 
+    my @Array = $ParamObject->GetArray( Param => 'a' );
     $Self->IsDeeply(
-        [ $Request->GetArray( Param => 'a' ) ],
+        \@Array,
         [4],
         'Param a, from POST',
     );
 
+    @Array = $ParamObject->GetArray( Param => 'b' );
     $Self->IsDeeply(
-        [ $Request->GetArray( Param => 'b' ) ],
+        \@Array,
         [5],
         'Param b, from POST (GET ignored)',
     );
+
+    @Array = $ParamObject->GetArray( Param => 'c' );
     $Self->IsDeeply(
-        [ $Request->GetArray( Param => 'c' ) ],
+        \@Array,
         [ 4, 5 ],
         'Param c, from GET',
     );
+
+    @Array = $ParamObject->GetArray( Param => 'd' );
     $Self->IsDeeply(
-        [ $Request->GetArray( Param => 'd' ) ],
+        \@Array,
         [2],
         'Param d, from POST',
+    );
+
+    my %Params = $ParamObject->GetParams();
+    $Self->IsDeeply(
+        \%Params,
+        {
+            b => 5,
+            a => 4,
+            c => [ 4, 5 ],
+            d => 2,
+            x => '',
+        },
+        'GetParams() from POST',
+    );
+
+    %Params = $ParamObject->GetParams(
+        Params => ['a']
+    );
+    $Self->IsDeeply(
+        \%Params,
+        {
+            'a' => 4
+        },
+        'GetParams() for specific Param from POST',
+    );
+}
+
+{
+    local %ENV = (
+        REQUEST_METHOD => 'GET',
+        QUERY_STRING   => 'a=4;json=%7B%22jsonkey%22:%22jsonvalue%22%7D;b=5;b=6;b=7',
+    );
+
+    CGI->initialize_globals();
+    my $ParamObject = Kernel::System::Web::Request->new();
+
+    my %Params = $ParamObject->GetParams(
+        JSONDecodeParams => ['json'],
+        Params           => [ 'a', 'json' ]
+    );
+
+    $Self->IsDeeply(
+        \%Params,
+        {
+            'a'    => 4,
+            'json' => {
+                'jsonkey' => 'jsonvalue'
+            }
+        },
+        'GetParams() with JSON from GET',
+    );
+
+    %Params = $ParamObject->GetParams(
+        JSONDecodeParams => ['json'],
+    );
+
+    $Self->IsDeeply(
+        \%Params,
+        {
+            'a' => 4,
+            'b' => [
+                5,
+                6,
+                7
+            ],
+            'json' => {
+                'jsonkey' => 'jsonvalue'
+            }
+        },
+        'GetParams() all Params from GET',
     );
 
 }

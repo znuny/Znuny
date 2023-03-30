@@ -39,12 +39,12 @@ fi
 cd "`dirname $0`/../"
 OTRS_HOME="`pwd`"
 
-#OTRS_ROOT=/opt/otrs
+#OTRS_ROOT=/opt/znuny
 if test -e $OTRS_HOME/var/cron; then
     OTRS_ROOT=$OTRS_HOME
 else
     echo "No cronjobs in $OTRS_HOME/var/cron found!";
-    echo " * Check the \$HOME (/etc/passwd) of the OTRS user. It must be the root dir of your OTRS system (e. g. /opt/otrs). ";
+    echo " * Check the \$HOME (/etc/passwd) of the OTRS user. It must be the root dir of your OTRS system (e. g. /opt/znuny). ";
     exit 5;
 fi
 
@@ -64,7 +64,7 @@ case "$1" in
             CRON_USER=" -u $CRON_USER"
         fi
 
-        if mkdir -p $CRON_DIR; cd $CRON_DIR && ls -d * | grep -Ev "(\.(dist|rpm|bak|backup|custom_backup|save|swp)|\~)$" | xargs cat > $CRON_TMP_FILE && crontab $CRON_USER $CRON_TMP_FILE; then
+        if mkdir -p $CRON_DIR; cd $CRON_DIR && ls -d * | grep -Ev "(\.(dist|rpm|rpmnew|bak|backup|custom_backup|save|swp)|~)$" | xargs cat > $CRON_TMP_FILE && crontab $CRON_USER $CRON_TMP_FILE; then
 
             rm -rf $CRON_TMP_FILE
             echo "(using $OTRS_ROOT) done";

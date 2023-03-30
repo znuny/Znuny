@@ -23,10 +23,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
-        my $Helper      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "Calendar-group-$RandomID";
@@ -41,7 +44,7 @@ $Selenium->RunTest(
         );
 
         # Create test queue.
-        my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID = $QueueObject->QueueAdd(
             Name            => "Queue$RandomID",
             ValidID         => 1,
             GroupID         => $GroupID,
@@ -56,14 +59,14 @@ $Selenium->RunTest(
             'Test queue created',
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Change resolution (desktop mode).
         $Selenium->set_window_size( 768, 1050 );
 
         # Create test user.
         my $Language      = 'en';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', $GroupName ],
             Language => $Language,
         ) || die 'Did not get test user';
@@ -168,6 +171,22 @@ $Selenium->RunTest(
         );
         $Selenium->find_element( '#SearchParam_1_Title',            'css' )->send_keys('Test*');
         $Selenium->find_element( 'form#CalendarFrom button#Submit', 'css' )->VerifiedClick();
+
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
+        );
 
         # Filter added calendars.
         $Selenium->find_element( 'input#FilterCalendars', 'css' )->send_keys($RandomID);
@@ -302,7 +321,7 @@ $Selenium->RunTest(
 
         # Delete test group.
         $Success = $DBObject->Do(
-            SQL  => "DELETE FROM groups WHERE name = ?",
+            SQL  => "DELETE FROM permission_groups WHERE name = ?",
             Bind => [ \$GroupName ],
         );
         $Self->True(
@@ -312,7 +331,7 @@ $Selenium->RunTest(
 
         # Make sure cache is correct.
         for my $Cache (qw(Calendar Queue)) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => $Cache );
+            $CacheObject->CleanUp( Type => $Cache );
         }
     },
 );

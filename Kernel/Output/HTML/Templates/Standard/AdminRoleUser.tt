@@ -8,22 +8,8 @@
 # --
 
 [% RenderBlockStart("Overview") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Manage Agent-Role Relations") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Manage Agent-Role Relations'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
-
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -31,10 +17,10 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminUser;Subaction=Add" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add Agent") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminUser;Subaction=Add" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Add Agent") | html %]</span></a>
                     </li>
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminRole;Subaction=Add" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add Role") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminRole;Subaction=Add" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Add Role") | html %]</span></a>
                     </li>
                 </ul>
             </div>
@@ -56,14 +42,49 @@
                 <input type="text" id="FilterRoles" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterRoles" value=""  title="[% Translate("Filter for roles") | html %]"/>
             </div>
         </div>
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminRoleGroup' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Roles ↔ Groups') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminUser' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Agents') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Manage Agent-Role Relations") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Manage Agent-Role Relations'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Overview") | html %]</h2>
             </div>
-            <div class="Content LayoutGrid ColumnsWithSpacing">
+            <div class="Content LayoutGrid ColumnsWithSpacing modal-col-wrapper modal-col-container">
                 <div class="Size1of2">
                     <ul class="Tablelike" id="Users">
                         <li class="Header">[% Translate("Agents") | html %]</li>
@@ -85,35 +106,14 @@
 [% RenderBlockEnd("Listn1") %]
                     </ul>
                 </div>
-                <div class="Clear"></div>
             </div>
         </div>
     </div>
-    <div class="Clear"></div>
 </div>
-
 [% RenderBlockEnd("Overview") %]
 [% RenderBlockStart("Change") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Manage Role-Agent Relations") | html %]</h1>
-
-    [% USE EditTitle = String(Data.BreadcrumbTitle) %]
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Manage Role-Agent Relations'),
-                Link => Env("Action"),
-            },
-            {
-                Name => EditTitle.append( " '", Data.Name, "'" )
-            }
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -121,7 +121,7 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
                 </ul>
             </div>
@@ -139,6 +139,22 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Manage Role-Agent Relations") | html %]</h1>
+
+        [% USE EditTitle = String(Data.BreadcrumbTitle) %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Manage Role-Agent Relations'),
+                    Link => Env("Action"),
+                },
+                {
+                    Name => EditTitle.append( " '", Data.Name, "'" )
+                }
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>
@@ -152,52 +168,55 @@
                     <input type="hidden" name="Subaction" value="Change[% Data.Type | html %]"/>
                     <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
                     <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
-                    <table class="DataTable VariableWidth" id="UserRoles">
-                        <thead>
-                            <tr>
-                                <th>[% Translate(Data.VisibleNeType) | html %]</th>
+                    <div class="DataTable scroll-bar-styled bar-no-left-border">
+                        <table class="DataTable VariableWidth" id="UserRoles">
+                            <thead>
+                                <tr>
+                                    <th>[% Translate(Data.VisibleNeType) | html %]</th>
 [% RenderBlockStart("ChangeHeader") %]
-                                <th class="Center [% Data.Mark | html %]">
-                                    <input type="checkbox" name="[% Data.Type | html %]" id="SelectAll[% Data.Type | html %]" title="[% Translate("Toggle active state for all") | html %]" value="" />
-                                    [% Translate("Active") | html %]
-                                </th>
+                                    <th class="[% Data.Mark | html %]">
+                                        <input type="checkbox" name="[% Data.Type | html %]" id="SelectAll[% Data.Type | html %]" title="[% Translate("Toggle active state for all") | html %]" value="" />
+                                        [% Translate("Active") | html %]
+                                    </th>
 [% RenderBlockEnd("ChangeHeader") %]
-                            </tr>
-                        </thead>
-                        <tbody>
+                                </tr>
+                            </thead>
+                            <tbody>
 [% RenderBlockStart("NoDataFoundMsgList") %]
-                            <tr>
-                                <td colspan="[% Data.ColSpan | html %]">
-                                    [% Translate("No data found.") | html %]
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td colspan="[% Data.ColSpan | html %]">
+                                        [% Translate("No data found.") | html %]
+                                    </td>
+                                </tr>
 [% RenderBlockEnd("NoDataFoundMsgList") %]
 [% RenderBlockStart("ChangeRow") %]
-                            <tr>
-                                <td><a href="[% Env("Baselink") %]Action=Admin[% Data.NeType | uri %];Subaction=Change;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
-                                <td class="[% Data.Mark | html %]">
-                                    <input type="checkbox" name="[% Data.Type | html %]" title="[% Translate("Toggle active state for %s", Data.Name) | html %]" value="[% Data.ID | html %]" [% Data.Selected %]/>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><a href="[% Env("Baselink") %]Action=Admin[% Data.NeType | uri %];Subaction=Change;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
+                                    <td class="[% Data.Mark | html %]">
+                                        <input type="checkbox" name="[% Data.Type | html %]" title="[% Translate("Toggle active state for %s", Data.Name) | html %]" value="[% Data.ID | html %]" [% Data.Selected %]/>
+                                    </td>
+                                </tr>
 [% RenderBlockEnd("ChangeRow") %]
-                            <tr class="FilterMessage Hidden">
-                                <td colspan="2">[% Translate("No matches found.") | html %]</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="Field SpacingTop">
-                        <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                        [% Translate("or") | html %]
-                        <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                        [% Translate("or") | html %]
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                                <tr class="FilterMessage Hidden">
+                                    <td colspan="2">[% Translate("No matches found.") | html %]</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper form-button-actions">
+                        <div class="Field buttons-field">
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                            <button class="btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]">
+                                <span>[% Translate("Save and finish") | html %]</span>
+                            </button>
+                            <button class="btn-primary btn-main btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]">
+                                <span>[% Translate("Save") | html %]</span>
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="Clear"></div>
 </div>
-
 [% RenderBlockEnd("Change") %]

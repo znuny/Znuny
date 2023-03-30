@@ -61,16 +61,18 @@ sub new {
 
 =head2 TransitionAdd()
 
-add new Trnsition
+add new Transition
 
 returns the id of the created Transition if success or undef otherwise
 
     my $ID = $TransitionObject->TransitionAdd(
-        EntityID    => 'T1'                   # mandatory, exportable unique identifier
-        Name        => 'NameOfTransition',     # mandatory
-        Config      => $ConfigHashRef,         # mandatory, transition configuration to be stored in
-                                               #   YAML format
-        UserID      => 123,                    # mandatory
+        EntityID    => 'T1',                                            # mandatory, exportable unique identifier
+        Name        => 'NameOfTransition',                              # mandatory
+        Config   => {                                                   # mandatory, transition configuration to be stored in YAML format
+            Scope         => 'Process',                                 # mandatory, default 'Global' (Process|Global)
+            ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199' # ScopeEntityID, used if specific scope is set e.g. 'Process'
+        },
+        UserID      => 123,                                             # mandatory
     );
 
 Returns:
@@ -143,6 +145,15 @@ sub TransitionAdd {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Config Fields must be a Hash!",
+        );
+        return;
+    }
+
+    $Param{Config}->{Scope} //= 'Global';
+    if ( $Param{Config}->{Scope} ne 'Global' && !$Param{Config}->{ScopeEntityID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need ScopeEntityID if specific scope is set.",
         );
         return;
     }
@@ -249,7 +260,10 @@ Returns:
         ID           => 123,
         EntityID     => 'T1',
         Name         => 'some name',
-        Config       => $ConfigHashRef,
+        Config         => {
+            Scope         => 'Process',
+            ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199',
+        },
         CreateTime   => '2012-07-04 15:08:00',
         ChangeTime   => '2012-07-04 15:08:00',
     };
@@ -334,7 +348,6 @@ sub TransitionGet {
             Config     => $Config,
             CreateTime => $Data[4],
             ChangeTime => $Data[5],
-
         );
     }
 
@@ -358,12 +371,15 @@ update Transition attributes
 returns 1 if success or undef otherwise
 
     my $Success = $TransitionObject->TransitionUpdate(
-        ID          => 123,                # mandatory
-        EntityID    => 'T1'                # mandatory, exportable unique identifier
-        Name        => 'NameOfTransition', # mandatory
-        Config      => $ConfigHashRef,     # mandatory, transition configuration to be stored in
-                                           #   YAML format
-        UserID      => 123,                # mandatory
+        ID          => 123,                                                 # mandatory
+        EntityID    => 'T1',                                                # mandatory, exportable unique identifier
+        Name        => 'NameOfTransition',                                  # mandatory
+        Config   => {                                                       # mandatory, transition configuration to be stored in YAML format
+            Scope         => 'Global',                                      # mandatory, default 'Global' (Process|Global)
+            ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199',    # ScopeEntityID, used if specific scope is set e.g. 'Process'
+        }
+
+        UserID      => 123,                                                 # mandatory
     );
 
 =cut
@@ -576,27 +592,27 @@ sub TransitionList {
 get a Transition list with all Transition details
 
     my $List = $TransitionObject->TransitionListGet(
-        UserID      => 1,
+        UserID => 1,
     );
 
 Returns:
 
     $List = [
         {
-            ID             => 123,
-            EntityID       => 'T1',
-            Name           => 'some name',
-            Config         => $ConfigHashRef,
-            CreateTime     => '2012-07-04 15:08:00',
-            ChangeTime     => '2012-07-04 15:08:00',
+            ID         => 123,
+            EntityID   => 'T1',
+            Name       => 'some name',
+            Config     => $ConfigHashRef,
+            CreateTime => '2012-07-04 15:08:00',
+            ChangeTime => '2012-07-04 15:08:00',
         }
         {
-            ID             => 456,
-            EntityID       => 'T2',
-            Name           => 'some name',
-            Config         => $ConfigHashRef,
-            CreateTime     => '2012-07-04 15:09:00',
-            ChangeTime     => '2012-07-04 15:09:00',
+            ID         => 456,
+            EntityID   => 'T2',
+            Name       => 'some name',
+            Config     => $ConfigHashRef,
+            CreateTime => '2012-07-04 15:09:00',
+            ChangeTime => '2012-07-04 15:09:00',
         }
     ];
 

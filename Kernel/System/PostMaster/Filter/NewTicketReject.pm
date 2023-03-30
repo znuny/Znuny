@@ -16,7 +16,6 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Log',
     'Kernel::System::Email',
     'Kernel::System::Ticket',
 );

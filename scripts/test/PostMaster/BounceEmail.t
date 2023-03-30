@@ -23,7 +23,7 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
 
 # Disable emails validation.
@@ -505,7 +505,7 @@ $MailQueueObject->Delete();
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
 # Force bounce e-mail to use always the normal follow-up flow.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'PostmasterBounceEmailAsFollowUp',
     Value => 1,
 );

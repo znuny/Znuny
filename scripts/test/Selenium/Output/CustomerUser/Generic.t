@@ -19,10 +19,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $SysConfigObject    = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
@@ -34,7 +39,7 @@ $Selenium->RunTest(
 
             # get default sysconfig
             my $SysConfigName  = 'Frontend::CustomerUser::Item###' . $SysConfigChange;
-            my %CustomerConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+            my %CustomerConfig = $SysConfigObject->SettingGet(
                 Name    => $SysConfigName,
                 Default => 1,
             );
@@ -42,7 +47,7 @@ $Selenium->RunTest(
             # get default link text for each CustomerUserGenericTicket module
             push @CustomerUserGenericText, $CustomerConfig{EffectiveValue}->{Text};
 
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => $SysConfigName,
                 Value => $CustomerConfig{EffectiveValue},
@@ -50,7 +55,7 @@ $Selenium->RunTest(
         }
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -61,13 +66,13 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # create test customer user
-        my $TestCustomerName = "Customer" . $Helper->GetRandomID();
-        my $TestCustomerUser = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $TestCustomerName = "Customer" . $HelperObject->GetRandomID();
+        my $TestCustomerUser = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomerName,
             UserLastname   => $TestCustomerName,
@@ -107,7 +112,7 @@ $Selenium->RunTest(
         );
 
         # go to zoom view of created test ticket
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
 
         # Wait until customer info widget has loaded, if necessary.
@@ -144,7 +149,7 @@ $Selenium->RunTest(
         );
 
         # delete created test customer user
-        $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        $Success = $DBObject->Do(
             SQL  => "DELETE FROM customer_user WHERE customer_id = ?",
             Bind => [ \$TestCustomerUser ],
         );
@@ -155,7 +160,7 @@ $Selenium->RunTest(
 
         # make sure the cache is correct
         for my $Cache (qw(Ticket CustomerUser)) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => $Cache );
+            $CacheObject->CleanUp( Type => $Cache );
         }
     }
 );

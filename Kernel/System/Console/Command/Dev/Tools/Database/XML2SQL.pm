@@ -14,7 +14,7 @@ use warnings;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::ObjectManagerCreation)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectManagerCreation)
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -26,7 +26,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Convert OTRS database XML to SQL.');
+    $Self->Description('Convert database XML to SQL.');
     $Self->AddOption(
         Name        => 'database-type',
         Description => "Specify the database to generate SQL for (mysql|postgresql|oracle|all).",

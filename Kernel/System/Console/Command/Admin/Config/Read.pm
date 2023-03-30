@@ -50,7 +50,9 @@ sub Run {
     my $SettingName = $Self->GetOption('setting-name');
 
     my %Setting = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
-        Name => $SettingName,
+        Name            => $SettingName,
+        OverriddenInXML => 1,
+        UserID          => 1,
     );
 
     # Return if there was no setting.

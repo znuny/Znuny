@@ -18,15 +18,17 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
         my $CalendarObject = $Kernel::OM->Get('Kernel::System::Calendar');
+        my $UserObject     = $Kernel::OM->Get('Kernel::System::User');
+        my $GroupObject    = $Kernel::OM->Get('Kernel::System::Group');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "test-calendar-group-$RandomID";
-        my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
+        my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
             UserID  => 1,
@@ -36,18 +38,18 @@ $Selenium->RunTest(
 
         # Create test user.
         my $Language      = 'en';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'users', $GroupName ],
             Language => $Language,
         ) || die "Did not get test user";
 
         # Get UserID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate() || die "Did not get test customer user";
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate() || die "Did not get test customer user";
 
         # Login as test user.
         $Selenium->Login(
@@ -199,20 +201,20 @@ $Selenium->RunTest(
         $Selenium->WaitFor(
             JavaScript => "return typeof(\$) === 'function' && \$('.Dialog.Modal #EditFormDelete').length"
         );
-        sleep 2;
         $Selenium->find_element( "#EditFormDelete", 'css' )->click();
 
-        $Selenium->WaitFor( AlertPresent => 1 );
+        sleep 2;
+        $Selenium->WaitFor( AlertPresent => 1 ) || die "Alert for delete not found";
         $Selenium->accept_alert();
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' &&  \$('tbody tr:contains($AppointmentNames[2])').length === 0;"
         );
 
-        # Verify all third appointment occurences have been removed.
+        # Verify all third appointment occurrences have been removed.
         $Self->False(
             $Selenium->execute_script("return \$('tbody tr:contains($AppointmentNames[2])').length;"),
-            "All third appointment occurences deleted"
+            "All third appointment occurrences deleted"
         );
     },
 );

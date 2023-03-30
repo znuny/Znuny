@@ -19,16 +19,21 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # Get helper object.
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $QueueObject     = $Kernel::OM->Get('Kernel::System::Queue');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
 
         # Reset 'DashboardBackend###0120-TicketNew' SysConfig.
-        $Kernel::OM->Get('Kernel::System::SysConfig')->SettingReset(
+        $SysConfigObject->SettingReset(
             Name => 'DashboardBackend###0120-TicketNew',
         );
 
         # Set 'DashboardBackend###0120-TicketNew' SysConfig.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => "DashboardBackend###0120-TicketNew",
             Value => {
@@ -73,13 +78,13 @@ $Selenium->RunTest(
         );
 
         # Create test user.
-        my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         );
 
         # Create test queue.
-        my $QueueName = "Queue" . $Helper->GetRandomID();
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueName = "Queue" . $HelperObject->GetRandomID();
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => 1,
@@ -93,8 +98,6 @@ $Selenium->RunTest(
             $QueueID,
             "Queue ID $QueueID is created",
         );
-
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Create 11 test tickets.
         my @TicketIDs;
@@ -140,7 +143,7 @@ $Selenium->RunTest(
         );
 
         # Get script alias.
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentPreferences screen.
         $Selenium->VerifiedGet(
@@ -181,6 +184,10 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentDashboard");
 
         # Click on 'Tickets in My Queues'.
+        my $DashboardActionsFilter
+            = $Selenium->find_element( "#Dashboard0120-TicketNew" . "-box .DashboardActions", 'css' );
+        $Selenium->mouse_move_to_location( element => $DashboardActionsFilter );
+
         $Selenium->find_element( "#Dashboard0120-TicketNewMyQueues", 'css' )->click();
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".Loading").length' );
 
@@ -209,7 +216,8 @@ $Selenium->RunTest(
                 "return typeof(\$) === 'function' && \$(\"#ColumnFilterQueue0120-TicketNew option[value='$QueueID']\").length"
         );
 
-        $Selenium->find_element( "#ColumnFilterQueue0120-TicketNew option[value='$QueueID']", 'css' )->click();
+        $Selenium->find_element( '.InputField_Search',     'css' )->send_keys($QueueName);
+        $Selenium->find_element( "li[data-id='$QueueID']", 'css' )->click();
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".Loading").length' );
 
      # Verify ticket with different priority is present on screen with filter, it's still on the first page.
@@ -303,8 +311,6 @@ $Selenium->RunTest(
             );
         }
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         # Delete personal queue for test agent.
         $Success = $DBObject->Do(
             SQL => "DELETE FROM personal_queues WHERE queue_id = $QueueID",
@@ -324,7 +330,6 @@ $Selenium->RunTest(
         );
 
         # Make sure cache is correct.
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
         for my $Cache (qw(Ticket Queue Dashboard DashboardQueueOverview )) {
             $CacheObject->CleanUp( Type => $Cache );
         }

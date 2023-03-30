@@ -19,30 +19,30 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Disable RichText control.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
         # Get RandomID.
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test customer.
         my $TestCustomer       = 'Customer' . $RandomID;
-        my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomer,
             UserLastname   => $TestCustomer,
@@ -99,7 +99,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -110,8 +110,8 @@ $Selenium->RunTest(
         );
 
         # Get script alias.
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
-        my $From        = $Helper->GetRandomID() . "somesender\@localhost";
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
+        my $From        = $HelperObject->GetRandomID() . "somesender\@localhost";
 
         # Navigate AgentTicketCompose for created test ticket.
         $Selenium->VerifiedGet(

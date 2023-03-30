@@ -49,7 +49,7 @@ sub Dispatch {
     $Pw   ||= '';
     local $Kernel::OM = Kernel::System::ObjectManager->new(
         'Kernel::System::Log' => {
-            LogPrefix => 'OTRS-RPC',
+            LogPrefix => 'Znuny-RPC',
         },
     );
 
@@ -68,7 +68,6 @@ sub Dispatch {
     $CommonObject{TicketObject}          = $Kernel::OM->Get('Kernel::System::Ticket');
 
     # We want to keep providing the TimeObject as legacy API for now.
-    ## nofilter(TidyAll::Plugin::OTRS::Migrations::OTRS6::TimeObject)
     $CommonObject{TimeObject} = $Kernel::OM->Get('Kernel::System::Time');
     $CommonObject{UserObject} = $Kernel::OM->Get('Kernel::System::User');
 
@@ -129,7 +128,7 @@ sub DispatchMultipleTicketMethods {
     # common objects
     local $Kernel::OM = Kernel::System::ObjectManager->new(
         'Kernel::System::Log' => {
-            LogPrefix => 'OTRS-RPC',
+            LogPrefix => 'Znuny-RPC',
         },
     );
 

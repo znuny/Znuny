@@ -19,53 +19,54 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
 
         # Do not check RichText and Service.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
 
         # Enable Type feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 1
         );
 
         # Disable CheckEmailAddresses feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckEmailAddresses',
             Value => 0
         );
 
         # Disable CheckMXRecord feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckMXRecord',
             Value => 0
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
-        my $TestUserOwner = $Helper->TestUserCreate(
+        my $TestUserOwner = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -134,7 +135,7 @@ $Selenium->RunTest(
             }
         }
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create Ticket types.
         my $TypeObject = $Kernel::OM->Get('Kernel::System::Type');
@@ -332,7 +333,7 @@ $Selenium->RunTest(
             );
 
             # Import test Selenium Process.
-            my $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/ProcessManagement/AgentTicketProcess.yml";
+            my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/AgentTicketProcess.yml";
             $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
             $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
             $Selenium->WaitFor(
@@ -645,7 +646,6 @@ $Selenium->RunTest(
         $Selenium->find_element( "#OwnerSelectionGetAll", 'css' )->click();
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length;' );
 
-        my $UserObject       = $Kernel::OM->Get('Kernel::System::User');
         my $TestUserOwnwerID = $UserObject->UserLookup( UserLogin => $TestUserOwner );
 
         $Selenium->InputFieldValueSet(

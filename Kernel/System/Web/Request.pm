@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::System::Web::Request;
 
@@ -22,9 +23,9 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::CheckItem',
     'Kernel::System::Encode',
-    'Kernel::System::Web::UploadCache',
     'Kernel::System::FormDraft',
-    'Kernel::System::Main',
+    'Kernel::System::JSON',
+    'Kernel::System::Web::UploadCache',
 );
 
 =head1 NAME
@@ -114,6 +115,11 @@ to get single request parameters. By default, trimming is performed on the data.
         Raw   => 1,       # optional, input data is not changed
     );
 
+
+Returns:
+
+    my $Param = '123';
+
 =cut
 
 sub GetParam {
@@ -146,6 +152,68 @@ sub GetParam {
     return $Value;
 }
 
+=head2 GetParams()
+
+Get all request parameters, Strings and Arrays.
+
+    my %Params = $ParamObject->GetParams(
+        Params           => [ 'TicketID', 'Queue', ]      # optional, only these parameters are fetched and returned
+        Raw              => 1,                            # optional, input data is not changed
+        JSONDecodeParams => ['ParamNameWithJSONData1',]   # optional, this JSON-decodes the given parameters
+    );
+
+Returns:
+
+    my %Params = (
+        TicketID => 1,
+        Queue    => 'Raw',
+        Array    => [
+            1,
+            2,
+        ],
+        'ParamNameWithJSONData1' => {
+            'jsonkey' => 'jsonvalue'
+        },
+    );
+
+=cut
+
+sub GetParams {
+    my ( $Self, %Param ) = @_;
+
+    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
+    my @Params = IsArrayRefWithData( $Param{Params} )
+        ? @{ $Param{Params} }
+        : $Self->GetParamNames();
+
+    my @JSONDecodeParams = @{ $Param{JSONDecodeParams} // [] };
+    my %JSONDecodeParams = map { $_ => 1 } @JSONDecodeParams;
+
+    my %GetParams;
+    PARAM:
+    for my $Param ( sort @Params ) {
+        my @Values = $Self->GetArray(
+            Param => $Param,
+            Raw   => $Param{Raw},
+        );
+        next PARAM if !@Values;
+
+        my @ProcessedValues;
+        for my $Value (@Values) {
+            if ( $JSONDecodeParams{$Param} ) {
+                $Value = $JSONObject->Decode( Data => $Value ) // $Value;
+            }
+
+            push @ProcessedValues, $Value;
+        }
+
+        $GetParams{$Param} = ( @ProcessedValues == 1 ) ? $ProcessedValues[0] : \@ProcessedValues;
+    }
+
+    return %GetParams;
+}
+
 =head2 GetParamNames()
 
 to get names of all parameters passed to the script.
@@ -157,8 +225,17 @@ Example:
 Called URL: index.pl?Action=AdminSystemConfiguration;Subaction=Save;Name=Config::Option::Valid
 
     my @ParamNames = $ParamObject->GetParamNames();
+
     print join " :: ", @ParamNames;
-    #prints Action :: Subaction :: Name
+    # prints Action :: Subaction :: Name
+
+Returns:
+
+    my @ParamNames = (
+        'Array',
+        'TicketID',
+        'Queue',
+    );
 
 =cut
 
@@ -196,6 +273,13 @@ By default, trimming is performed on the data.
     my @Param = $ParamObject->GetArray(
         Param => 'ID',
         Raw   => 1,     # optional, input data is not changed
+    );
+
+Returns:
+
+    my @Param = (
+        1,
+        2,
     );
 
 =cut
@@ -245,7 +329,10 @@ gets file upload data.
         Param  => 'FileParam',  # the name of the request parameter containing the file data
     );
 
-    returns (
+
+Returns:
+
+    my %File = (
         Filename    => 'abc.txt',
         ContentType => 'text/plain',
         Content     => 'Some text',
@@ -447,7 +534,7 @@ Create or replace draft using data from param object and upload cache.
 Specified params can be overwritten if necessary.
 
     my $FormDraftID = $ParamObject->SaveFormDraft(
-        UserID         => 1
+        UserID         => 1,
         ObjectType     => 'Ticket',
         ObjectID       => 123,
         OverrideParams => {               # optional, can contain strings and array references
@@ -541,6 +628,8 @@ sub SaveFormDraft {
     my @FileData = $Kernel::OM->Get('Kernel::System::Web::UploadCache')->FormIDGetAllFilesData(
         FormID => $MetaParams{FormID},
     );
+
+    $FormData{FormID} = $MetaParams{FormID};
 
     # prepare data to add or update draft
     my %FormDraft = (

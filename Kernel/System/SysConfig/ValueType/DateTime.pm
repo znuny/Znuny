@@ -6,7 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 package Kernel::System::SysConfig::ValueType::DateTime;
 
 use strict;
@@ -20,8 +20,9 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Language',
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::Log',
+    'Kernel::System::DateTime',
     'Kernel::System::JSON',
+    'Kernel::System::Log',
     'Kernel::System::User',
 );
 
@@ -192,7 +193,7 @@ Extracts the effective value from a XML parsed setting.
         Name           => 'SettingName',
         EffectiveValue => '2016-02-02 01:00:59', # (optional)
         DefaultValue   => 'Product 5',           # (optional)
-        Class          => 'My class'             # (optional)
+        Class          => 'My class',            # (optional)
         RW             => 1,                     # (optional) Allow editing. Default 0.
         Item           => [                      # (optional) XML parsed item
             {

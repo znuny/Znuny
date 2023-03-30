@@ -20,30 +20,31 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $AuthSessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 
         # Change web max file upload.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'WebMaxFileUpload',
             Value => '50000'
         );
 
         # Disable SessionUseCookie. See bug#14432.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SessionUseCookie',
             Value => 0,
         );
 
         # Get all sessions before login.
-        my $AuthSessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
-        my @PreLoginSessions  = $AuthSessionObject->GetAllSessionIDs();
+        my @PreLoginSessions = $AuthSessionObject->GetAllSessionIDs();
 
         my $Language = 'en';
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users' ],
             Language => $Language,
         ) || die "Did not get test user";
@@ -59,10 +60,8 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-        my $ScriptAlias  = $ConfigObject->Get('ScriptAlias');
-        my $Home         = $ConfigObject->Get('Home');
-        my $SessionName  = $ConfigObject->Get('SessionName');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
+        my $SessionName = $ConfigObject->Get('SessionName');
         my $SessionToken;
 
         # Get all session after login.
@@ -105,7 +104,7 @@ $Selenium->RunTest(
             );
 
             my $CheckFileTypeFilename = 'Test1.png';
-            my $Location              = "$Home/scripts/test/sample/Cache/$CheckFileTypeFilename";
+            my $Location              = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckFileTypeFilename";
             $Selenium->find_element( "#FileUpload", 'css' )->clear();
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->WaitFor(
@@ -135,7 +134,7 @@ $Selenium->RunTest(
                 "\$('#FileUpload').data('max-files', 2)"
             );
 
-            $Location = "$Home/scripts/test/sample/Cache/Test1.pdf";
+            $Location = "$Selenium->{Home}/scripts/test/sample/Cache/Test1.pdf";
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->WaitFor(
                 JavaScript =>
@@ -143,7 +142,7 @@ $Selenium->RunTest(
             );
             sleep 1;
 
-            $Location = "$Home/scripts/test/sample/Cache/Test1.doc";
+            $Location = "$Selenium->{Home}/scripts/test/sample/Cache/Test1.doc";
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->WaitFor(
                 JavaScript =>
@@ -151,7 +150,7 @@ $Selenium->RunTest(
             );
             sleep 1;
 
-            $Location = "$Home/scripts/test/sample/Cache/Test1.txt";
+            $Location = "$Selenium->{Home}/scripts/test/sample/Cache/Test1.txt";
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->WaitFor(
                 AlertPresent => 1,
@@ -173,8 +172,15 @@ $Selenium->RunTest(
             # Remove the existing files.
             for my $DeleteExtension (qw(doc pdf)) {
 
+                my $Child = $Count - 1;
+
                 # Delete Attachment.
-                $Selenium->find_element( "(//a[\@class='AttachmentDelete'])[$Count]", 'xpath' )->click();
+                if ($Child) {
+                    $Selenium->find_element( "a.AttachmentDelete:nth-child($Child)", 'css' )->click();
+                }
+                else {
+                    $Selenium->find_element( "a.AttachmentDelete", 'css' )->click();
+                }
                 $Count--;
                 sleep 2;
 
@@ -207,7 +213,7 @@ $Selenium->RunTest(
 
             # Now try to upload two files of which one exceeds the max size
             # (.pdf should work (5KB), .png shouldn't (20KB)).
-            $Location = "$Home/scripts/test/sample/Cache/Test1.pdf";
+            $Location = "$Selenium->{Home}/scripts/test/sample/Cache/Test1.pdf";
             $Selenium->find_element( "#FileUpload", 'css' )->clear();
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->WaitFor(
@@ -217,7 +223,7 @@ $Selenium->RunTest(
             sleep 1;
 
             my $CheckMaxAllowedSizeFilename = 'Test1.png';
-            $Location = "$Home/scripts/test/sample/Cache/$CheckMaxAllowedSizeFilename";
+            $Location = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckMaxAllowedSizeFilename";
             $Selenium->find_element( "#FileUpload", 'css' )->clear();
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->WaitFor(
@@ -250,7 +256,7 @@ $Selenium->RunTest(
             $Selenium->execute_script("\$('#FileUpload').css('display', 'block')");
 
             # Upload file.
-            $Location = "$Home/scripts/test/sample/Main/Main-Test1.txt";
+            $Location = "$Selenium->{Home}/scripts/test/sample/Main/Main-Test1.txt";
             $Selenium->find_element( "#FileUpload", 'css' )->clear();
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->WaitFor(
@@ -269,7 +275,7 @@ $Selenium->RunTest(
 
             # Upload file again.
             my $CheckUploadAgainFilename = 'Main-Test1.txt';
-            $Location = "$Home/scripts/test/sample/Main/$CheckUploadAgainFilename";
+            $Location = "$Selenium->{Home}/scripts/test/sample/Main/$CheckUploadAgainFilename";
             $Selenium->find_element( "#FileUpload", 'css' )->clear();
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->WaitFor(
@@ -298,7 +304,7 @@ $Selenium->RunTest(
 
             # Check max size.
             my $CheckMaxSizeFilename = 'PostMaster-Test13.box';
-            $Location = "$Home/scripts/test/sample/EmailParser/$CheckMaxSizeFilename";
+            $Location = "$Selenium->{Home}/scripts/test/sample/EmailParser/$CheckMaxSizeFilename";
             $Selenium->find_element( "#FileUpload", 'css' )->clear();
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->WaitFor(

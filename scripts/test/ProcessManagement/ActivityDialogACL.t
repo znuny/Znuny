@@ -26,7 +26,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # define a testing environment, set defined processes to be easy to compare, this are done in memory
 #   no changes to the real system configuration
@@ -163,17 +163,17 @@ $ConfigObject->{ActivityDialog}                   = \%TestProcesses;
 $ConfigObject->{'ActivityDialog::ActivityDialog'} = \%TestActivityDialogs;
 $ConfigObject->{'ActivityDialog::Activity'}       = \%TestActivities;
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # define a set of users
 my $UserID1 = 1;
-my ( $TestUser2, $UserID2 ) = $Helper->TestUserCreate();
+my ( $TestUser2, $UserID2 ) = $HelperObject->TestUserCreate();
 $Self->IsNot(
     $UserID2,
     undef,
     "TestUserCreate() - UserID $UserID2 ID"
 );
-my ( $TestUser3, $UserID3 ) = $Helper->TestUserCreate();
+my ( $TestUser3, $UserID3 ) = $HelperObject->TestUserCreate();
 $Self->IsNot(
     $UserID3,
     undef,

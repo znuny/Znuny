@@ -24,8 +24,8 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $UserID = 1;
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $UserID       = 1;
 
 my @Tests = (
 

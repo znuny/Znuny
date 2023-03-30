@@ -1,0 +1,26 @@
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: ''
+FrameworkVersion: 6.2.x git
+Provider:
+  Transport:
+    Type: ''
+RemoteSystem: ''
+Requester:
+  Invoker:
+    Generic:
+      Description: ''
+      Events:
+      - Asynchronous: '0'
+        Event: TicketCreate
+      - Asynchronous: '0'
+        Event: ArticleCreate
+      MappingInbound:
+        Type: Simple
+      MappingOutbound:
+        Type: Simple
+      Type: Ticket::Generic
+  Transport:
+    Type: HTTP::REST

@@ -17,7 +17,6 @@ use Kernel::System::Console::InterfaceConsole;
 use parent qw(Kernel::System::Console::BaseCommand Kernel::System::Console::Command::List);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Main',
 );
 
@@ -54,7 +53,7 @@ sub Run {
     my $PreviousWord = $Self->GetArgument('previous-word');
 
     # We are looking for the command name
-    if ( $PreviousWord =~ m/otrs\.Console\.pl/xms ) {
+    if ( $PreviousWord =~ m/znuny\.Console\.pl/xms ) {
 
         # Get all matching commands
         my @CommandList = $Self->ListAllCommands();
@@ -69,10 +68,10 @@ sub Run {
     else {
         # We need to extract the command name from the command line if present.
         my $CompLine = $ENV{COMP_LINE};
-        if ( !$CompLine || !$CompLine =~ m/otrs\.Console\.pl/ ) {
+        if ( !$CompLine || !$CompLine =~ m/znuny\.Console\.pl/ ) {
             $Self->ExitCodeError();
         }
-        $CompLine =~ s/.*otrs\.Console\.pl\s*//xms;
+        $CompLine =~ s/.*znuny\.Console\.pl\s*//xms;
         my @Elements = split( m/\s+/, $CompLine );
 
         # Try to create the command object to get its options

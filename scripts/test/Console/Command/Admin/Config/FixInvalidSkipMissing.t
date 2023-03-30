@@ -18,7 +18,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
 my $CommandObject     = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::Config::FixInvalid');
 my $SysConfigObject   = $Kernel::OM->Get('Kernel::System::SysConfig');
@@ -44,7 +44,7 @@ my $RunCommand = sub {
     return ( $ResultErr . $ResultOut, $ExitCode );
 };
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my $PerlModule = $MainObject->FileWrite(
     Directory => "${Home}/Kernel",
@@ -130,7 +130,7 @@ $Self->False(
 $Self->True(
     (
         $Result
-            =~ m{Following settings were not fixed:.*UnitTest::DummyModule::$RandomID.*Please use console command \(bin/otrs\.Console\.pl Admin::Config::Update --help\) or GUI to fix them\.}ms
+            =~ m{Following settings were not fixed:.*UnitTest::DummyModule::$RandomID.*Please use console command \(bin/znuny\.Console\.pl Admin::Config::Update --help\) or GUI to fix them\.}ms
     ) // 0,
     'Check expected command output'
 );

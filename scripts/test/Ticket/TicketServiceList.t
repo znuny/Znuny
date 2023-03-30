@@ -18,14 +18,14 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
 my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 my $TypeObject    = $Kernel::OM->Get('Kernel::System::Type');
 
-my $TestUserLogin = $Helper->TestCustomerUserCreate();
+my $TestUserLogin = $HelperObject->TestCustomerUserCreate();
 
-my $Random = $Helper->GetRandomNumber();
+my $Random = $HelperObject->GetRandomNumber();
 
 my $TypeID1 = $TypeObject->TypeAdd(
     Name    => 'TestType1' . $Random,
@@ -47,10 +47,30 @@ $Self->True(
     'Type 2 created.',
 );
 
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+my %ITSMCoreService;
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    %ITSMCoreService = (
+        TypeID      => $ServiceTypeName2ID{Training},
+        Criticality => '3 normal',
+    );
+}
+
 my $ServiceID1 = $ServiceObject->ServiceAdd(
     Name    => 'TestService1' . $Random,
     ValidID => 1,
     UserID  => 1,
+    %ITSMCoreService,
 );
 $Self->True(
     $ServiceID1,
@@ -60,6 +80,7 @@ my $ServiceID2 = $ServiceObject->ServiceAdd(
     Name    => 'TestService2' . $Random,
     ValidID => 1,
     UserID  => 1,
+    %ITSMCoreService,
 );
 $Self->True(
     $ServiceID2,

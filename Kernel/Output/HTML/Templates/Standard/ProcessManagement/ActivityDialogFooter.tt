@@ -6,23 +6,25 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::TT::Format)
-## nofilter(TidyAll::Plugin::OTRS::TT::ScriptUsage)
+## nofilter(TidyAll::Plugin::Znuny::TT::Format)
+## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
+
                     </fieldset>
                 </div>
 [% RenderBlockStart("Footer") %]
-                <div class="[% Data.FooterCSSClass | html %]">
+                <div class="activity-dialog-footer">
 [% RenderBlockStart("SubmitAdviceText") %]
-                    <p class="SubmitInfo">[% Translate(Data.AdviceText) | html %]</p>
+                    <div class="message-container">
+                        <p class="SubmitInfo">[% Translate(Data.AdviceText) | html %]</p>
+                    </div>
 [% RenderBlockEnd("SubmitAdviceText") %]
-                    <button class="Primary CallForAction" id="[% Data.ButtonID | html %]" accesskey="g" title="[% Translate(Data.ButtonTitle) | html %] (g)" type="submit" value="[% Translate(Data.ButtonText) | html %]"><span>[% Translate(Data.ButtonText) | html %]</span></button>
+                    <button class="btn-main btn-width-md btn-primary CallForAction Primary" id="[% Data.ButtonID | html %]" accesskey="g" title="[% Translate(Data.ButtonTitle) | html %] (g)" type="submit" value="[% Translate(Data.ButtonText) | html %]"><span>[% Translate(Data.ButtonText) | html %]</span></button>
                 </div>
 [% RenderBlockEnd("Footer") %]
             </div>
         </form>
     </div>
 </div>
-
 [% RenderBlockStart("FooterJS") %]
 <script type="text/javascript">
 [% PROCESS JSDataInsert %]

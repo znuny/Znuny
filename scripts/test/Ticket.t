@@ -32,10 +32,10 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # set fixed time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 my $TicketID = $TicketObject->TicketCreate(
     Title        => 'Some Ticket_Title',
@@ -130,7 +130,7 @@ $Self->Is(
     'Ticket created as closed as Close Time = Creation Time',
 );
 
-my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
     Groups => [ 'users', ],
 );
 
@@ -741,7 +741,7 @@ my %TicketData = $TicketObject->TicketGet(
 my $ChangeTime = $TicketData{Changed};
 
 # wait 5 seconds
-$Helper->FixedTimeAddSeconds(5);
+$HelperObject->FixedTimeAddSeconds(5);
 
 my $TicketTitle = $TicketObject->TicketTitleUpdate(
     Title => 'Very long title 01234567890123456789012345678901234567890123456789'
@@ -797,7 +797,7 @@ $Self->Is(
 $ChangeTime = $TicketData{Changed};
 
 # wait 5 seconds
-$Helper->FixedTimeAddSeconds(5);
+$HelperObject->FixedTimeAddSeconds(5);
 
 # set unlock timeout
 my $UnlockTimeout = $TicketObject->TicketUnlockTimeoutUpdate(
@@ -831,7 +831,7 @@ $ChangeTime = $TicketData{Changed};
 my $CurrentQueueID = $TicketData{QueueID};
 
 # wait 5 seconds
-$Helper->FixedTimeAddSeconds(5);
+$HelperObject->FixedTimeAddSeconds(5);
 
 my $NewQueue = $CurrentQueueID != 1 ? 1 : 2;
 
@@ -874,11 +874,11 @@ $ChangeTime = $TicketData{Changed};
 my $CurrentTicketType = $TicketData{TypeID};
 
 # wait 5 seconds
-$Helper->FixedTimeAddSeconds(5);
+$HelperObject->FixedTimeAddSeconds(5);
 
 # create a test type
 my $TypeID = $TypeObject->TypeAdd(
-    Name    => 'Type' . $Helper->GetRandomID(),
+    Name    => 'Type' . $HelperObject->GetRandomID(),
     ValidID => 1,
     UserID  => 1,
 );
@@ -918,21 +918,56 @@ $TicketTypeSet = $TicketObject->TicketTypeSet(
 # set as invalid the test type
 $TypeObject->TypeUpdate(
     ID      => $TypeID,
-    Name    => 'Type' . $Helper->GetRandomID(),
+    Name    => 'Type' . $HelperObject->GetRandomID(),
     ValidID => 2,
     UserID  => 1,
 );
 
-# create a test service
-my $ServiceID = $ServiceObject->ServiceAdd(
-    Name    => 'Service' . $Helper->GetRandomID(),
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+my %ITSMCoreService;
+my %ITSMCoreSLA;
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    # get the list of sla types from general catalog
+    my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::SLA::Type',
+    );
+
+    # build a lookup hash
+    my %SLATypeName2ID = reverse %{$SLATypeList};
+
+    %ITSMCoreSLA = (
+        TypeID => $SLATypeName2ID{Other},
+    );
+
+    %ITSMCoreService = (
+        TypeID      => $ServiceTypeName2ID{Training},
+        Criticality => '3 normal',
+    );
+}
+
+my %ServiceValues = (
+    Name    => 'Service' . $HelperObject->GetRandomID(),
     ValidID => 1,
     Comment => 'Unit Test Comment',
     UserID  => 1,
+    %ITSMCoreService,
 );
 
+# create a test service
+my $ServiceID = $ServiceObject->ServiceAdd(%ServiceValues);
+
 # wait 1 seconds
-$Helper->FixedTimeAddSeconds(1);
+$HelperObject->FixedTimeAddSeconds(1);
 
 # set type
 my $TicketServiceSet = $TicketObject->TicketServiceSet(
@@ -962,7 +997,7 @@ $Self->IsNot(
 # set as invalid the test service
 $ServiceObject->ServiceUpdate(
     ServiceID => $ServiceID,
-    Name      => 'Service' . $Helper->GetRandomID(),
+    Name      => 'Service' . $HelperObject->GetRandomID(),
     ValidID   => 2,
     UserID    => 1,
 );
@@ -971,7 +1006,7 @@ $ServiceObject->ServiceUpdate(
 $ChangeTime = $TicketData{Changed};
 
 # wait 5 seconds
-$Helper->FixedTimeAddSeconds(5);
+$HelperObject->FixedTimeAddSeconds(5);
 
 my $TicketEscalationIndexBuild = $TicketObject->TicketEscalationIndexBuild(
     TicketID => $TicketID,
@@ -999,16 +1034,19 @@ $Self->IsNot(
 # save current change_time
 $ChangeTime = $TicketData{Changed};
 
-# create a test SLA
-my $SLAID = $SLAObject->SLAAdd(
-    Name    => 'SLA' . $Helper->GetRandomID(),
+my %SLAAddValues = (
+    Name    => 'SLA' . $HelperObject->GetRandomID(),
     ValidID => 1,
     Comment => 'Unit Test Comment',
     UserID  => 1,
+    %ITSMCoreSLA,
 );
 
+# create a test SLA
+my $SLAID = $SLAObject->SLAAdd(%SLAAddValues);
+
 # wait 5 seconds
-$Helper->FixedTimeAddSeconds(5);
+$HelperObject->FixedTimeAddSeconds(5);
 
 # set SLA
 my $TicketSLASet = $TicketObject->TicketSLASet(
@@ -1038,7 +1076,7 @@ $Self->IsNot(
 # set as invalid the test SLA
 $SLAObject->SLAUpdate(
     SLAID   => $SLAID,
-    Name    => 'SLA' . $Helper->GetRandomID(),
+    Name    => 'SLA' . $HelperObject->GetRandomID(),
     ValidID => 1,
     Comment => 'Unit Test Comment',
     UserID  => 1,
@@ -1543,7 +1581,7 @@ $Self->False(
     'TicketDelete() worked',
 );
 
-my $CustomerNo = 'CustomerNo' . $Helper->GetRandomID();
+my $CustomerNo = 'CustomerNo' . $HelperObject->GetRandomID();
 
 # ticket search sort/order test
 my $TicketIDSortOrder1 = $TicketObject->TicketCreate(
@@ -1564,7 +1602,7 @@ my %TicketCreated = $TicketObject->TicketGet(
 );
 
 # wait 2 seconds
-$Helper->FixedTimeAddSeconds(2);
+$HelperObject->FixedTimeAddSeconds(2);
 
 my $TicketIDSortOrder2 = $TicketObject->TicketCreate(
     Title        => 'Some Ticket_Title - ticket sort/order by tests2',
@@ -1579,7 +1617,7 @@ my $TicketIDSortOrder2 = $TicketObject->TicketCreate(
 );
 
 # wait 2 seconds
-$Helper->FixedTimeAddSeconds(2);
+$HelperObject->FixedTimeAddSeconds(2);
 
 my $Success = $TicketObject->TicketStateSet(
     State    => 'open',
@@ -1687,7 +1725,7 @@ my $TicketIDSortOrder3 = $TicketObject->TicketCreate(
 );
 
 # wait 2 seconds
-$Helper->FixedTimeAddSeconds(2);
+$HelperObject->FixedTimeAddSeconds(2);
 
 my $TicketIDSortOrder4 = $TicketObject->TicketCreate(
     Title        => 'Some Ticket_Title - ticket sort/order by tests2',
@@ -1702,7 +1740,7 @@ my $TicketIDSortOrder4 = $TicketObject->TicketCreate(
 );
 
 # wait 2 seconds
-$Helper->FixedTimeAddSeconds(2);
+$HelperObject->FixedTimeAddSeconds(2);
 
 my $TicketIDSortOrder5 = $TicketObject->TicketCreate(
     Title        => 'Some Ticket_Title - ticket sort/order by tests5 (with other queue)',
@@ -2118,7 +2156,7 @@ $Self->Is(
 );
 
 # check that searches with NewerDate in the future are not executed
-$Helper->FixedTimeAddSeconds( -60 * 60 );
+$HelperObject->FixedTimeAddSeconds( -60 * 60 );
 
 # Test TicketCreateTimeNewerDate (future date)
 $TicketCreateTimeNewerDate = $Kernel::OM->Create('Kernel::System::DateTime');
@@ -2245,19 +2283,19 @@ for my $SearchParam (qw(ArticleCreateTime TicketCreateTime TicketPendingTime)) {
 my @QueueConfig = (
     {
         # First created Queue does not have Update time set, value is 0 for created ticket.
-        Name              => 'Queue' . $Helper->GetRandomID(),
+        Name              => 'Queue' . $HelperObject->GetRandomID(),
         FirstResponseTime => 50,
         SolutionTime      => 60,
     },
     {
         # Second created Queue does not have First response time set, value is 0 for created ticket.
-        Name         => 'Queue' . $Helper->GetRandomID(),
+        Name         => 'Queue' . $HelperObject->GetRandomID(),
         UpdateTime   => 70,
         SolutionTime => 80,
     },
     {
         # Third created Queue does not have Solution time set, value is 0 for created ticket.
-        Name              => 'Queue' . $Helper->GetRandomID(),
+        Name              => 'Queue' . $HelperObject->GetRandomID(),
         FirstResponseTime => 60,
         UpdateTime        => 30,
     },
@@ -2318,7 +2356,7 @@ for my $QueueID (@QueueIDs) {
     );
 
     # Wait 1 second to have escalations.
-    $Helper->FixedTimeAddSeconds(1);
+    $HelperObject->FixedTimeAddSeconds(1);
 
     # Renew objects because of transaction.
     $Kernel::OM->ObjectsDiscard(
@@ -2406,7 +2444,7 @@ for my $TicketID (@DeleteTicketList) {
 # Test ticket search by fulltext (see bug#13284).
 #   Create a test ticket and add an article for this ticket.
 #   Note that article subject and ticket title differ.
-my $TestTicketTitle  = 'title' . $Helper->GetRandomID();
+my $TestTicketTitle  = 'title' . $HelperObject->GetRandomID();
 my $FulltextTicketID = $TicketObject->TicketCreate(
     Title        => $TestTicketTitle,
     Queue        => 'Raw',
@@ -2419,7 +2457,7 @@ my $FulltextTicketID = $TicketObject->TicketCreate(
     UserID       => 1,
 );
 
-my $TestArticleSubject = 'subject' . $Helper->GetRandomID();
+my $TestArticleSubject = 'subject' . $HelperObject->GetRandomID();
 my $FulltextArticleID  = $ArticleBackendObject->ArticleCreate(
     TicketID             => $FulltextTicketID,
     IsVisibleForCustomer => 0,
@@ -2491,7 +2529,7 @@ $Kernel::OM->Get('Kernel::Config')->Set(
 
 # Create test environment.
 my $PriorityObject = $Kernel::OM->Get('Kernel::System::Priority');
-my $RandomID       = $Helper->GetRandomID();
+my $RandomID       = $HelperObject->GetRandomID();
 my @Priorities;
 my @Services;
 my @SLAs;
@@ -2534,12 +2572,17 @@ for my $Index ( 1 .. 3 ) {
     };
 
     # Create test services.
-    my $ServiceName = $Index . 'Service' . $RandomID;
-    my $ServiceID   = $ServiceObject->ServiceAdd(
+    my $ServiceName   = $Index . 'Service' . $RandomID;
+    my %ServiceValues = (
         Name    => $ServiceName,
         ValidID => 1,
         Comment => 'Unit Test Comment',
         UserID  => 1,
+        %ITSMCoreService,
+    );
+
+    my $ServiceID = $ServiceObject->ServiceAdd(
+        %ServiceValues
     ) || die "ServiceAdd() error.";
 
     push @Services, {
@@ -2548,12 +2591,17 @@ for my $Index ( 1 .. 3 ) {
     };
 
     # Create test SLAs.
-    my $SLAName = $Index . 'SLA' . $RandomID;
-    my $SLAID   = $SLAObject->SLAAdd(
+    my $SLAName      = $Index . 'SLA' . $RandomID;
+    my %SLAAddValues = (
         Name    => $SLAName,
         ValidID => 1,
         Comment => 'Unit Test Comment',
         UserID  => 1,
+        %ITSMCoreSLA,
+    );
+
+    my $SLAID = $SLAObject->SLAAdd(
+        %SLAAddValues
     ) || die "SLAAdd() error.";
 
     push @SLAs, {

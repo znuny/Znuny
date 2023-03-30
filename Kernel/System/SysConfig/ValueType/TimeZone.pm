@@ -8,11 +8,12 @@
 # --
 
 package Kernel::System::SysConfig::ValueType::TimeZone;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
 use warnings;
 
+use Kernel::System::DateTime;
 use Kernel::System::VariableCheck qw(:all);
 
 use parent qw(Kernel::System::SysConfig::BaseValueType);
@@ -20,6 +21,7 @@ use parent qw(Kernel::System::SysConfig::BaseValueType);
 our @ObjectDependencies = (
     'Kernel::Language',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
 );
 
@@ -102,10 +104,10 @@ sub SettingEffectiveValueCheck {
         return %Result;
     }
 
-    my $DateTimeObject = $Kernel::OM->Create(
-        'Kernel::System::DateTime',
+    my $TimeZones = Kernel::System::DateTime->TimeZoneList(
+        IncludeTimeZone => $Param{EffectiveValue},
     );
-    my $TimeZones = $DateTimeObject->TimeZoneList();
+
     if ( !grep { $Param{EffectiveValue} eq $_ } @{$TimeZones} ) {
         $Result{Error} = "$Param{EffectiveValue} is not valid time zone!";
         return %Result;
@@ -125,7 +127,7 @@ Extracts the effective value from a XML parsed setting.
         Name           => 'SettingName',
         EffectiveValue => 'UTC',            # (optional)
         DefaultValue   => 'UTC',            # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         RW             => 1,                # (optional) Allow editing. Default 0.
         Item           => [                 # (optional) XML parsed item
             {
@@ -163,11 +165,6 @@ sub SettingRender {
 
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
 
-    my $DateTimeObject = $Kernel::OM->Create(
-        'Kernel::System::DateTime',
-    );
-    my $TimeZones = $DateTimeObject->TimeZoneList();
-
     my $EffectiveValue = $Param{EffectiveValue};
     if (
         !defined $EffectiveValue
@@ -177,6 +174,10 @@ sub SettingRender {
     {
         $EffectiveValue = $Param{Item}->[0]->{Content};
     }
+
+    my $TimeZones = Kernel::System::DateTime->TimeZoneList(
+        IncludeTimeZone => $EffectiveValue,
+    );
 
     # When displaying diff between current and old value, it can happen that value is missing
     #    since it was renamed, or removed. In this case, we need to add this "old" value also.
@@ -279,10 +280,9 @@ sub AddItem {
     $Param{DefaultValue} //= '';
     $Param{IDSuffix}     //= '';
 
-    my $DateTimeObject = $Kernel::OM->Create(
-        'Kernel::System::DateTime',
+    my $TimeZones = Kernel::System::DateTime->TimeZoneList(
+        IncludeTimeZone => $Param{DefaultItem}->{Content},
     );
-    my $TimeZones = $DateTimeObject->TimeZoneList();
 
     my $Result = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildSelection(
         Data          => $TimeZones,

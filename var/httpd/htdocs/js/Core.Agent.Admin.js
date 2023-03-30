@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -28,7 +29,32 @@ Core.Agent.Admin = (function (TargetNS) {
      *      Initializes Overview screen.
      */
     TargetNS.Init = function () {
+        var Action = Core.Config.Get('Action'),
+        Pattern = new RegExp('^Admin.', 'i');
 
+        // run InitFavourite only for Admin action
+        if (Action === "Admin") {
+            TargetNS.InitFavourite();
+        }
+
+        // run InitFilterInvalidTableEntries for every Admin* action
+        if (Pattern.test(Action) === true) {
+            TargetNS.InitFilterInvalidTableEntries();
+        }
+
+        Core.UI.Table.InitTableFilter($('#Filter'), $('.Filterable'), undefined, true);
+        $('#Filter').focus();
+    };
+
+        /**
+    * @private
+    * @name InitFavourite
+    * @memberof Core.Agent.Admin
+    * @function
+    * @description
+    *      This function handles all about the Favourites-functionality on Admin Dashboard.
+    */
+    TargetNS.InitFavourite = function () {
         var Favourites = Core.Config.Get('Favourites');
 
         window.setTimeout(function() {
@@ -130,9 +156,22 @@ Core.Agent.Admin = (function (TargetNS) {
 
             return false;
         });
+    }
 
-        Core.UI.Table.InitTableFilter($('#Filter'), $('.Filterable'), undefined, true);
-    };
+    /**
+    * @private
+    * @name InitFilterInvalidTableEntries
+    * @memberof Core.Agent.Admin
+    * @function
+    * @description
+    *      If the filter has been activated, this function hides all invalid entries in the table.
+    */
+    TargetNS.InitFilterInvalidTableEntries = function () {
+        $('#ValidFilter').on('click', function() {
+            $('.Invalid').toggle();
+            $('#ValidFilter').parent().toggleClass("ValidFilterActive");
+        });
+    }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 

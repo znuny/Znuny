@@ -17,20 +17,24 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
-        my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+        my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
+        my $UserObject        = $Kernel::OM->Get('Kernel::System::User');
+        my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "test-calendar-group-$RandomID";
-        my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
+        my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
             UserID  => 1,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Get current system time.
         my $StartTimeObject = $Kernel::OM->Create(
@@ -47,18 +51,17 @@ $Selenium->RunTest(
 
         my $StartTimeSettings = $StartTimeObject->Get();
 
-        # Change resolution (desktop mode).
-        $Selenium->set_window_size( 768, 1050 );
+        $Selenium->maximize_window();
 
         # Create test user.
         my $Language      = 'en';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'users', $GroupName ],
             Language => $Language,
         ) || die "Did not get test user";
 
         # Get UserID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -70,7 +73,7 @@ $Selenium->RunTest(
         );
 
         # Create a few test calendars.
-        my %Calendar1 = $Kernel::OM->Get('Kernel::System::Calendar')->CalendarCreate(
+        my %Calendar1 = $CalendarObject->CalendarCreate(
             CalendarName => "My Calendar $RandomID",
             Color        => '#3A87AD',
             GroupID      => $GroupID,
@@ -107,7 +110,8 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => "return \$('#CalendarID').length && \$('#EditFormSubmit').length;" );
 
         # Click on Save, without required input fields.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        my $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $EditFormSubmit->click();
 
         $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Title.Error').length" );
         $Self->Is(
@@ -130,7 +134,9 @@ $Selenium->RunTest(
         );
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -189,7 +195,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for AJAX to finish.
         $Selenium->WaitFor(
@@ -281,7 +289,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for AJAX to finish.
         $Selenium->WaitFor(
@@ -365,7 +375,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for AJAX to finish.
         $Selenium->WaitFor(
@@ -458,7 +470,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -621,7 +635,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('6');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -754,7 +770,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -935,7 +953,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('20');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -1066,7 +1086,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -1244,7 +1266,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('6');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -1376,7 +1400,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(

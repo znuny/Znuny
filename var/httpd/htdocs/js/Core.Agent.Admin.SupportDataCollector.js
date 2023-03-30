@@ -1,6 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 maxence GmbH, https://maxence.de/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -30,50 +30,6 @@ Core.Agent.Admin = Core.Agent.Admin || {};
     *      This function initializes module functionality
     */
     TargetNS.Init = function () {
-
-        // Bind event on SendUpdate button
-        $('#SendUpdate').on('click', function (Event) {
-            var TextClass = '';
-            Core.UI.Dialog.ShowContentDialog('<div class="Spacing Center"><span class="AJAXLoader W33pc" title='+ Core.Language.Translate("Sending Update...") + '></span></div>',Core.Language.Translate("Sending Update..."), '10px', 'Center', true, undefined, true);
-
-            Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), 'Action=' + Core.Config.Get('Action') + ';Subaction=SendUpdate;', function (Response) {
-
-                var ResponseMessage = Core.Language.Translate('Support Data information was successfully sent.');
-
-                    // if the waiting dialog was canceled,
-                    // do not show the search dialog as well
-                    if (!$('.Dialog:visible').length) {
-                        return;
-                    }
-
-                if (Response === 0) {
-                    ResponseMessage = Core.Language.Translate('Was not possible to send Support Data information.');
-                    TextClass = 'Error';
-                }
-
-                Core.UI.Dialog.ShowContentDialog(
-                    '<div class="Spacing Center SendUpdateResultDialog"><span class="W50pc ' + TextClass + '" title="' + ResponseMessage + '">' + ResponseMessage + '</span></div>', Core.Language.Translate("Update Result"),
-                    '10px',
-                    'Center',
-                    true,
-                    [
-                        {
-                            Label: Core.Language.Translate('Close this dialog'),
-                            Class: 'Primary',
-                            Function: function () {
-                                Core.UI.Dialog.CloseDialog($('.SendUpdateResultDialog'));
-                            }
-                        }
-                    ],
-                    true
-                );
-
-            });
-
-            Event.preventDefault();
-            Event.stopPropagation();
-            return false;
-        });
 
         // Bind event on Generate Support bundle button
         $('#GenerateSupportBundle').on('click', function (Event) {
@@ -129,36 +85,6 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                         ],
                         true
                     );
-
-                    // if the support bundle is bigger than 10 MB do not show send option
-                    if (parseInt(Response.Filesize,10)>10) {
-                        $('.SupportBundleSendFieldSet').addClass('Hidden');
-                        $('.NoSupportBundleSendMessage').removeClass('Hidden');
-                        $('.SizeMessage').removeClass('Hidden');
-                    }
-
-                    // if the sender addres is invalid it is set to empty string, send option should not be shown
-                    else if ($('#Sender').val() === '') {
-                        $('.SupportBundleSendFieldSet').addClass('Hidden');
-                        $('.NoSupportBundleSendMessage').removeClass('Hidden');
-                        $('.EmailMessage').removeClass('Hidden');
-                    }
-
-                    // otherwise show full email option
-                    else {
-                        $('#SendSupportBundle').on('click', function () {
-                            $('#SendingAJAXLoader').addClass('AJAXLoader');
-                            $('#SendSupportBundle').prop('disabled', true);
-                            $('#DownloadSupportBundle').prop('disabled', true);
-                            Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), 'Action=' + Core.Config.Get('Action') + ';Subaction=SendSupportBundle;Filename=' + Response.Filename + ';RandomID=' + Response.RandomID, function (SendResponse) {
-
-                                if (!SendResponse || !SendResponse.Success) {
-                                    alert(Core.Language.Translate("The mail could not be sent"));
-                                }
-                                Core.UI.Dialog.CloseDialog($('#SupportBundleOptionsDialog'));
-                            });
-                        });
-                    }
 
                     $('#DownloadSupportBundle').on('click', function () {
                         var Session = '';

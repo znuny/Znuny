@@ -27,9 +27,9 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my @Tests = (
     {
@@ -235,7 +235,7 @@ my $CreateQueryString = sub {
 };
 
 # get remote host with some precautions for certain unit test systems
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # create URL
 my $ScriptAlias   = $ConfigObject->Get('ScriptAlias');
@@ -294,7 +294,7 @@ for my $Test (@Tests) {
                 if ( $RequestMethod eq 'post' ) {
 
                     # prepare CGI environment variables
-                    $ENV{REQUEST_URI}    = "http://localhost/otrs/nph-genericinterface.pl/$WebserviceAccess";
+                    $ENV{REQUEST_URI}    = "http://localhost/znuny/nph-genericinterface.pl/$WebserviceAccess";
                     $ENV{REQUEST_METHOD} = 'POST';
                     $RequestData         = $CreateQueryString->(
                         Data   => $Test->{RequestData},
@@ -312,7 +312,7 @@ for my $Test (@Tests) {
 
                     # prepare CGI environment variables
                     $ENV{REQUEST_URI}
-                        = "http://localhost/otrs/nph-genericinterface.pl/$WebserviceAccess?" . $QueryString;
+                        = "http://localhost/znuny/nph-genericinterface.pl/$WebserviceAccess?" . $QueryString;
                     $ENV{QUERY_STRING}   = $QueryString;
                     $ENV{REQUEST_METHOD} = 'GET';
                 }

@@ -36,13 +36,13 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get a random number
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 # create a new user for current test
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 my $Password = $UserLogin;
@@ -57,12 +57,12 @@ my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueLookup( Queue => '
 my $StateID = $Kernel::OM->Get('Kernel::System::State')->StateLookup( State => 'new' );
 
 # Disable service and type
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Service',
     Value => 0,
 );
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Type',
     Value => 0,
@@ -134,7 +134,7 @@ my $ArticleID1           = $ArticleBackendObject->ArticleCreate(
 );
 
 # set web-service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketHistoryGet-Test-' . $RandomID;
 
 # create web-service object
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
@@ -165,7 +165,7 @@ $Self->True(
 );
 
 # get remote host with some precautions for certain unit test systems
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # prepare web-service config
 my $RemoteSystem =

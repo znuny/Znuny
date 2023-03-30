@@ -18,16 +18,16 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
-        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
-        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $GroupObject     = $Kernel::OM->Get('Kernel::System::Group');
+        my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
+        my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
 
         # get needed variables
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
         my $Success;
 
         # define group names - first will be added to the system, second doesn't exist
@@ -46,7 +46,7 @@ $Selenium->RunTest(
         );
 
         # get original config for menu module 'Close'
-        my %MenuModuleCloseSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %MenuModuleCloseSysConfig = $SysConfigObject->SettingGet(
             Name => 'Ticket::Frontend::MenuModule###450-Close',
         );
 
@@ -68,12 +68,12 @@ $Selenium->RunTest(
         );
 
         # create test user
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', ],
         ) || die "Did not get test user";
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -99,7 +99,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             {
@@ -117,7 +117,7 @@ $Selenium->RunTest(
         for my $Test (@Tests) {
 
             # update config
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Ticket::Frontend::MenuModule###450-Close',
                 Value => {
@@ -149,7 +149,7 @@ $Selenium->RunTest(
 
         # delete group
         $Success = $DBObject->Do(
-            SQL => "DELETE FROM groups WHERE id = $TestGroupID",
+            SQL => "DELETE FROM permission_groups WHERE id = $TestGroupID",
         );
         $Self->True(
             $Success,

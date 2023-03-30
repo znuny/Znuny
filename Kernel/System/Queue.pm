@@ -23,7 +23,6 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::StandardTemplate',
-    'Kernel::System::SysConfig',
     'Kernel::System::Valid',
 );
 
@@ -1083,8 +1082,8 @@ update queue attributes
         UserID              => 123,
         FollowUpID          => 1,
         Comment             => 'Some Comment2',
-        DefaultSignKey      => ''
-        UnlockTimeOut       => ''
+        DefaultSignKey      => '',
+        UnlockTimeOut       => '',
         FollowUpLock        => 1,
         ParentQueueID       => '',
     );

@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::System::Console::Command::Admin::Package::UpgradeAll;
 
@@ -18,16 +19,14 @@ use Kernel::System::VariableCheck qw(:all);
 use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::Package',
-    'Kernel::System::SystemData',
 );
 
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Upgrade all OTRS packages to the latest versions from the on-line repositories.');
+    $Self->Description('Upgrade all packages to the latest versions from the online repositories.');
     $Self->AddOption(
         Name        => 'force',
         Description => 'Force package upgrade/installation even if validation fails.',
@@ -67,50 +66,20 @@ sub Run {
         return $Self->ExitCodeOk();
     }
 
-    my %RepositoryList = $PackageObject->_ConfiguredRepositoryDefinitionGet();
-
-    # Show cloud repositories if system is registered.
-    my $RepositoryCloudList;
-    my $RegistrationState = $Kernel::OM->Get('Kernel::System::SystemData')->SystemDataGet(
-        Key => 'Registration::State',
-    ) || '';
-
-    if (
-        $RegistrationState eq 'registered'
-        && !$Kernel::OM->Get('Kernel::Config')->Get('CloudServices::Disabled')
-        )
-    {
-
-        $Self->Print("<yellow>Getting cloud repositories information...</yellow>\n");
-
-        $RepositoryCloudList = $PackageObject->RepositoryCloudList( NoCache => 1 );
-
-        $Self->Print("  Cloud repositories... <green>Done</green>\n\n");
-    }
-
-    my %RepositoryListAll = ( %RepositoryList, %{ $RepositoryCloudList || {} } );
+    my %RepositoryList = $PackageObject->ConfiguredRepositoryListGet();
 
     my @PackageOnlineList;
     my %PackageSoruceLookup;
 
-    $Self->Print("<yellow>Fetching on-line repositories...</yellow>\n");
+    $Self->Print("<yellow>Fetching online repositories...</yellow>\n");
 
-    URL:
-    for my $URL ( sort keys %RepositoryListAll ) {
+    for my $Source ( sort keys %RepositoryList ) {
+        $Self->Print("  $Source... ");
 
-        $Self->Print("  $RepositoryListAll{$URL}... ");
-
-        my $FromCloud = 0;
-        if ( $RepositoryCloudList->{$URL} ) {
-            $FromCloud = 1;
-
-        }
-
-        my @OnlineList = $PackageObject->PackageOnlineList(
-            URL       => $URL,
-            Lang      => 'en',
-            Cache     => 1,
-            FromCloud => $FromCloud,
+        $PackageObject->RepositoryPackageListGet(
+            Source => $Source,
+            Lang   => 'en',
+            Cache  => 1,
         );
 
         $Self->Print("<green>Done</green>\n");
@@ -130,13 +99,13 @@ sub Run {
     my $ErrorMessage;
     my %Result;
     eval {
+
         # Localize the standard error, everything will be restored after the eval block.
         # Package installation or upgrades always produce messages in STDERR for files and directories.
         local *STDERR;
 
         # Redirect the standard error to a variable.
         open STDERR, ">>", \$ErrorMessage;
-
         %Result = $PackageObject->PackageUpgradeAll(
             Force => $Self->GetOption('force'),
         );
@@ -186,8 +155,8 @@ sub Run {
         UpdateError    => 'could not be upgraded...',
         InstallError   => 'could not be installed...',
         Cyclic         => 'had cyclic dependencies...',
-        NotFound       => 'could not be found in the on-line repositories...',
-        WrongVersion   => 'require a version higher than the one found in the on-line repositories...',
+        NotFound       => 'could not be found in the online repositories...',
+        WrongVersion   => 'require a version higher than the one found in the online repositories...',
         DependencyFail => 'fail to upgrade/install their package dependencies...'
 
     );

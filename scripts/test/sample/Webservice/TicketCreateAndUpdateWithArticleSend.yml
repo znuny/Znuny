@@ -1,0 +1,28 @@
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: ''
+FrameworkVersion: 6.2.x git
+Provider:
+  Operation:
+    TicketCreate:
+      Description: ''
+      IncludeTicketData: ''
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketCreate
+      IncludeTicketData: 1
+    TicketUpdate:
+      Description: ''
+      IncludeTicketData: ''
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TicketUpdate
+      IncludeTicketData: 1
+  Transport:
+    Type: HTTP::REST
+RemoteSystem: ''
+Requester:
+  Transport:
+    Type: ''

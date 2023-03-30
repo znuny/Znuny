@@ -18,19 +18,21 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
         my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $TicketObject          = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
 
         # Disable email checks when create new customer user.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -41,14 +43,14 @@ $Selenium->RunTest(
         );
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         my @CustomerCompanies;
         my @CustomerUsers;
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test customer companies, create customer user and ticket for each one.
         for my $Counter ( 1 .. 2 ) {
@@ -169,7 +171,7 @@ $Selenium->RunTest(
             }
         }
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminCustomerUserInformationCenter screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentCustomerUserInformationCenter");

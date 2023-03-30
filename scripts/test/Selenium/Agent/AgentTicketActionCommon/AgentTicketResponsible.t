@@ -18,32 +18,35 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Enable change owner to everyone feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::ChangeOwnerToEveryone',
             Value => 1,
         );
 
         # Enable ticket responsible feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
-        my $Config = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::AgentTicketResponsible');
-        $Helper->ConfigSettingChange(
+        my $Config = $ConfigObject->Get('Ticket::Frontend::AgentTicketResponsible');
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketResponsible',
             Value => {
@@ -56,7 +59,7 @@ $Selenium->RunTest(
         # Create test users.
         my @TestUser;
         for my $User ( 1 .. 2 ) {
-            my $TestUserLogin = $Helper->TestUserCreate(
+            my $TestUserLogin = $HelperObject->TestUserCreate(
                 Groups => [ 'admin', 'users' ],
             ) || die "Did not get test user";
 
@@ -66,7 +69,7 @@ $Selenium->RunTest(
         # Get test users ID.
         my @UserID;
         for my $UserID (@TestUser) {
-            my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+            my $TestUserID = $UserObject->UserLookup(
                 UserLogin => $UserID,
             );
 
@@ -98,7 +101,7 @@ $Selenium->RunTest(
             Password => $TestUser[0],
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to zoom view of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -171,7 +174,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
 
@@ -207,7 +210,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     }

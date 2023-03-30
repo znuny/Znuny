@@ -24,10 +24,6 @@ $ConfigObject->Set(
     Key   => 'CheckMXRecord',
     Value => 0,
 );
-$ConfigObject->Set(
-    Key   => 'CheckEmailAddresses',
-    Value => 1,
-);
 
 # email address checks
 my @Tests = (
@@ -72,6 +68,16 @@ my @Tests = (
     {
         Email => 'foo=bar@[192.22.2]',
         Valid => 0,
+    },
+    {
+        Email     => 'somebody',
+        Valid     => 0,
+        SysConfig => [
+            {
+                Key   => 'CheckEmailAddresses',
+                Value => 1,
+            }
+        ]
     },
 
     # Valid
@@ -126,6 +132,16 @@ my @Tests = (
     {
         Email => 'foo=bar@[192.123.22.2]',
         Valid => 1,
+    },
+    {
+        Email     => 'somebody',
+        Valid     => 1,
+        SysConfig => [
+            {
+                Key   => 'CheckEmailAddresses',
+                Value => 0,
+            }
+        ]
     },
 
     # Unicode domains
@@ -183,10 +199,21 @@ my @Tests = (
         Email => 'Test <test@home.com> (Test)',
         Valid => 1,
     },
-
 );
 
 for my $Test (@Tests) {
+    $ConfigObject->Set(
+        Key   => 'CheckEmailAddresses',
+        Value => 1,
+    );
+
+    if ( $Test->{SysConfig} ) {
+        for my $SysConfig ( @{ $Test->{SysConfig} } ) {
+            $ConfigObject->Set(
+                %{$SysConfig}
+            );
+        }
+    }
 
     # check address
     my $Valid = $CheckItemObject->CheckEmail( Address => $Test->{Email} );
@@ -202,6 +229,83 @@ for my $Test (@Tests) {
         $Self->False(
             $Valid,
             "CheckEmail() - $Test->{Email}",
+        );
+    }
+}
+
+$ConfigObject->Set(
+    Key   => 'CheckEmailAddresses',
+    Value => 1,
+);
+
+# AreEmailAddressesValid()
+@Tests = (
+
+    # Invalid
+    {
+        EmailAddresses => 'test',
+        Valid          => 0,
+    },
+    {
+        EmailAddresses => [
+            'test',
+        ],
+        Valid => 0,
+    },
+    {
+        EmailAddresses => 'test@somehost.com, test',
+        Valid          => 0,
+    },
+    {
+        EmailAddresses => [
+            'test@somehost.com',
+            'test',
+        ],
+        Valid => 0,
+    },
+
+    # Valid
+    {
+        EmailAddresses => 'test@somehost.com',
+        Valid          => 1,
+    },
+    {
+        EmailAddresses => [
+            'test@somehost.com',
+        ],
+        Valid => 1,
+    },
+    {
+        EmailAddresses => 'test@somehost.com, test2@somehost.com',
+        Valid          => 1,
+    },
+    {
+        EmailAddresses => [
+            'test@somehost.com',
+            'test2@somehost.com',
+        ],
+        Valid => 1,
+    },
+);
+
+for my $Test (@Tests) {
+    my $Valid = $CheckItemObject->AreEmailAddressesValid( EmailAddresses => $Test->{EmailAddresses} );
+
+    my $TestEmailAddresses = $Test->{EmailAddresses};
+    if ( ref $Test->{EmailAddresses} eq 'ARRAY' ) {
+        $TestEmailAddresses = join ', ', @{ $Test->{EmailAddresses} };
+    }
+
+    if ( $Test->{Valid} ) {
+        $Self->True(
+            scalar $Valid,
+            "AreEmailAddressesValid() - $TestEmailAddresses",
+        );
+    }
+    else {
+        $Self->False(
+            scalar $Valid,
+            "AreEmailAddressesValid() - $TestEmailAddresses",
         );
     }
 }
@@ -334,6 +438,114 @@ for my $Test (@Tests) {
             RemoveAllSpaces   => 1,
         },
         Result => "TesttestTest",
+    },
+    {
+        String => "\n\r\t Test\n\r\t test\n\r\t Test\n\r\t ",
+        Params => {
+            TrimLeft              => 1,
+            TrimRight             => 1,
+            RemoveAllNewlines     => 1,
+            RemoveAllTabs         => 0,
+            RemoveAllSpaces       => 0,
+            ReplaceWithWhiteSpace => 1,
+        },
+        Result => "Test \t test \t Test",
+    },
+    {
+        String => "\n\r\t Test\n\r\t test\n\r\t Test\n\r\t ",
+        Params => {
+            TrimLeft              => 1,
+            TrimRight             => 1,
+            RemoveAllNewlines     => 0,
+            RemoveAllTabs         => 1,
+            RemoveAllSpaces       => 0,
+            ReplaceWithWhiteSpace => 1,
+        },
+        Result => "Test\n\r  test\n\r  Test",
+    },
+    {
+        String => "\n\r\t Test\n\r\t test\n\r\t Test\n\r\t ",
+        Params => {
+            TrimLeft              => 1,
+            TrimRight             => 1,
+            RemoveAllNewlines     => 0,
+            RemoveAllTabs         => 0,
+            RemoveAllSpaces       => 1,
+            ReplaceWithWhiteSpace => 1,
+        },
+        Result => "Test\n\r\ttest\n\r\tTest",
+    },
+    {
+        String => "\n\r\t Test\n\r\t test\n\r\t Test\n\r\t ",
+        Params => {
+            TrimLeft              => 0,
+            TrimRight             => 0,
+            RemoveAllNewlines     => 0,
+            RemoveAllTabs         => 0,
+            RemoveAllSpaces       => 0,
+            ReplaceWithWhiteSpace => 1,
+        },
+        Result => "\n\r\t Test\n\r\t test\n\r\t Test\n\r\t ",
+    },
+    {
+        String => "\n\r\t Test\n\r\t test\n\r\t Test\n\r\t ",
+        Params => {
+            TrimLeft              => 0,
+            TrimRight             => 0,
+            RemoveAllNewlines     => 1,
+            RemoveAllTabs         => 0,
+            RemoveAllSpaces       => 0,
+            ReplaceWithWhiteSpace => 1,
+        },
+        Result => " \t Test \t test \t Test \t ",
+    },
+    {
+        String => "\n\r\t Test\n\r\t test\n\r\t Test\n\r\t ",
+        Params => {
+            TrimLeft              => 0,
+            TrimRight             => 0,
+            RemoveAllNewlines     => 0,
+            RemoveAllTabs         => 1,
+            RemoveAllSpaces       => 0,
+            ReplaceWithWhiteSpace => 1,
+        },
+        Result => "\n\r  Test\n\r  test\n\r  Test\n\r  ",
+    },
+    {
+        String => "\n\r\t Test\n\r\t test\n\r\t Test\n\r\t ",
+        Params => {
+            TrimLeft              => 0,
+            TrimRight             => 0,
+            RemoveAllNewlines     => 0,
+            RemoveAllTabs         => 0,
+            RemoveAllSpaces       => 1,
+            ReplaceWithWhiteSpace => 1,
+        },
+        Result => "\n\r\tTest\n\r\ttest\n\r\tTest\n\r\t",
+    },
+    {
+        String => "\n\r\t Test\n\r\t test\n\r\t Test\n\r\t ",
+        Params => {
+            TrimLeft              => 1,
+            TrimRight             => 1,
+            RemoveAllNewlines     => 1,
+            RemoveAllTabs         => 1,
+            RemoveAllSpaces       => 1,
+            ReplaceWithWhiteSpace => 1,
+        },
+        Result => "TesttestTest",
+    },
+    {
+        String => "\n\r\n\r Test\n\r\n\r test\n\r\n\r Test\n\r\n\r ",
+        Params => {
+            TrimLeft              => 1,
+            TrimRight             => 1,
+            RemoveAllNewlines     => 1,
+            RemoveAllTabs         => 1,
+            RemoveAllSpaces       => 0,
+            ReplaceWithWhiteSpace => 1,
+        },
+        Result => "Test  test  Test",
     },
 
     # strip invalid utf8 characters

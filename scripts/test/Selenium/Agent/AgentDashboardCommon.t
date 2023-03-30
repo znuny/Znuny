@@ -19,11 +19,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -33,12 +34,12 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my %DashboardOnlineWidgetConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %DashboardOnlineWidgetConfig = $SysConfigObject->SettingGet(
             Name => 'DashboardBackend###0400-UserOnline',
         );
 
         # Make 'UserOnline' widget mandatory.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0400-UserOnline',
             Value => {
@@ -48,7 +49,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AgentDashboard screen
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentDashboard");

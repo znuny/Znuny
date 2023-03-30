@@ -25,6 +25,7 @@ my $StateObject               = $Kernel::OM->Get('Kernel::System::State');
 my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 my $StorableObject            = $Kernel::OM->Get('Kernel::System::Storable');
+my $IsITSMInstalled           = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -33,20 +34,20 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # set valid options
 my %ValidList = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
 %ValidList = reverse %ValidList;
 
 # set user options
-my ( $UserLogin, $UserID ) = $Helper->TestUserCreate(
+my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate(
     Groups => ['admin'],
 );
 my %UserData = $UserObject->GetUserData(
     UserID => $UserID,
 );
-my ( $NewUserLogin, $NewUserID ) = $Helper->TestUserCreate(
+my ( $NewUserLogin, $NewUserID ) = $HelperObject->TestUserCreate(
     Groups => ['admin'],
 );
 my %NewUserData = $UserObject->GetUserData(
@@ -54,21 +55,21 @@ my %NewUserData = $UserObject->GetUserData(
 );
 
 # set customer user options
-my $CustomerUserLogin = $Helper->TestCustomerUserCreate()
+my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate()
     || die "Did not get test customer user";
 
 my %CustomerUserData = $CustomerUserObject->CustomerUserDataGet(
     User => $CustomerUserLogin,
 );
 
-my $NewCustomerUserLogin = $Helper->TestCustomerUserCreate()
+my $NewCustomerUserLogin = $HelperObject->TestCustomerUserCreate()
     || die "Did not get test customer user";
 
 my %NewCustomerUserData = $CustomerUserObject->CustomerUserDataGet(
     User => $NewCustomerUserLogin,
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # set queue options
 my $QueueName = 'Queue_' . $RandomID;
@@ -107,12 +108,44 @@ $Self->True(
     "QueueAdd() ID ($NewQueueID) added successfully"
 );
 
+my %ITSMCoreSLA;
+my %ITSMCoreService;
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    # get the list of sla types from general catalog
+    my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::SLA::Type',
+    );
+
+    # build a lookup hash
+    my %SLATypeName2ID = reverse %{$SLATypeList};
+
+    %ITSMCoreSLA = (
+        TypeID => $SLATypeName2ID{Other},
+    );
+
+    %ITSMCoreService = (
+        TypeID      => $ServiceTypeName2ID{Training},
+        Criticality => '3 normal',
+    );
+}
+
 # set service options
 my $ServiceName = 'Service_' . $RandomID;
 my $ServiceID   = $ServiceObject->ServiceAdd(
     Name    => $ServiceName,
     ValidID => $ValidList{'valid'},
     UserID  => 1,
+    %ITSMCoreService,
 );
 
 # sanity check
@@ -126,6 +159,7 @@ my $NewServiceID   = $ServiceObject->ServiceAdd(
     Name    => $NewServiceName,
     ValidID => $ValidList{'valid'},
     UserID  => 1,
+    %ITSMCoreService,
 );
 
 # sanity check
@@ -194,6 +228,7 @@ my $SLAID   = $SLAObject->SLAAdd(
     Name    => $SLAName,
     ValidID => $ValidList{'valid'},
     UserID  => 1,
+    %ITSMCoreSLA,
 );
 
 # sanity check
@@ -207,6 +242,7 @@ my $NewSLAID   = $SLAObject->SLAAdd(
     Name    => $NewSLAName,
     ValidID => $ValidList{'valid'},
     UserID  => 1,
+    %ITSMCoreSLA,
 );
 
 # sanity check

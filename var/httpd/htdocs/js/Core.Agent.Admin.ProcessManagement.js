@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -82,6 +83,12 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         if (Core.Config.Get('Action') === 'AdminProcessManagementPath' && Subaction !== 'ClosePopup') {
            TargetNS.InitPathEdit();
         }
+
+        // Initialize ajax call for updating default config parameter
+        TargetNS.InitDefaultConfigParameters();
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilter();
     };
 
     /**
@@ -224,42 +231,42 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             'Center',
             true,
             [
-               {
-                   Label: Core.Language.Translate('Cancel'),
-                   Function: function () {
-                       Core.UI.Dialog.CloseDialog($('.Dialog'));
-                   }
-               },
-               {
-                   Label: Core.Language.Translate('Delete'),
-                   Class: 'Primary',
-                   Function: function () {
-                       var Data = {
-                               Action: 'AdminProcessManagement',
-                               Subaction: 'ProcessDelete',
-                               ID: ProcessID
-                           };
+                {
+                    Label: Core.Language.Translate('Cancel'),
+                    Function: function () {
+                        Core.UI.Dialog.CloseDialog($('.Dialog'));
+                    }
+                },
+                {
+                    Label: Core.Language.Translate('Delete'),
+                    Class: 'Primary',
+                    Function: function () {
+                        var Data = {
+                                Action: 'AdminProcessManagement',
+                                Subaction: 'ProcessDelete',
+                                ID: ProcessID
+                            };
 
-                       // Change the dialog to an ajax loader
-                       $('.Dialog')
-                           .find('.ContentFooter').empty().end()
-                           .find('.InnerContent').empty().append('<div class="Spacing Center"><span class="AJAXLoader"></span></div>');
+                        // Change the dialog to an ajax loader
+                        $('.Dialog')
+                            .find('.ContentFooter').empty().end()
+                            .find('.InnerContent').empty().append('<div class="Spacing Center"><span class="AJAXLoader"></span></div>');
 
-                       // Call the ajax function
-                       Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
-                           if (!Response || !Response.Success) {
-                               alert(Response.Message);
-                               Core.UI.Dialog.CloseDialog($('.Dialog'));
-                               return false;
-                           }
+                        // Call the ajax function
+                        Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
+                            if (!Response || !Response.Success) {
+                                alert(Response.Message);
+                                Core.UI.Dialog.CloseDialog($('.Dialog'));
+                                return false;
+                            }
 
-                           Core.App.InternalRedirect({
-                               Action: Data.Action
-                           });
-                       }, 'json');
-                   }
-               }
-           ]
+                            Core.App.InternalRedirect({
+                                Action: Data.Action
+                            });
+                        }, 'json');
+                    }
+                }
+            ]
         );
     }
 
@@ -290,44 +297,44 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             'Center',
             true,
             [
-               {
-                   Label: Core.Language.Translate('Cancel'),
-                   Function: function () {
-                       Core.UI.Dialog.CloseDialog($('.Dialog'));
-                   }
-               },
-               {
-                   Label: Core.Language.Translate('Delete'),
-                   Class: 'Primary',
-                   Function: function () {
-                       var Data = {
-                               Action: 'AdminProcessManagement',
-                               Subaction: 'EntityDelete',
-                               EntityType: EntityType,
-                               EntityID: EntityID,
-                               ItemID: ItemID
-                           };
+                {
+                    Label: Core.Language.Translate('Cancel'),
+                    Function: function () {
+                        Core.UI.Dialog.CloseDialog($('.Dialog'));
+                    }
+                },
+                {
+                    Label: Core.Language.Translate('Delete'),
+                    Class: 'Primary',
+                    Function: function () {
+                        var Data = {
+                                Action: 'AdminProcessManagement',
+                                Subaction: 'EntityDelete',
+                                EntityType: EntityType,
+                                EntityID: EntityID,
+                                ItemID: ItemID
+                            };
 
-                       // Change the dialog to an ajax loader
-                       $('.Dialog')
-                           .find('.ContentFooter').empty().end()
-                           .find('.InnerContent').empty().append('<div class="Spacing Center"><span class="AJAXLoader"></span></div>');
+                        // Change the dialog to an ajax loader
+                        $('.Dialog')
+                            .find('.ContentFooter').empty().end()
+                            .find('.InnerContent').empty().append('<div class="Spacing Center"><span  class="AJAXLoader"></span></div>');
 
-                       // Call the ajax function
-                       Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
-                           if (!Response || !Response.Success) {
-                               alert(Response.Message);
-                               Core.UI.Dialog.CloseDialog($('.Dialog'));
-                               return false;
-                           }
+                        // Call the ajax function
+                        Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
+                            if (!Response || !Response.Success) {
+                                alert(Response.Message);
+                                Core.UI.Dialog.CloseDialog($('.Dialog'));
+                                return false;
+                            }
 
-                           // Remove element from accordion
-                           $Element.closest('li').remove();
-                           Core.UI.Dialog.CloseDialog($('.Dialog'));
-                       }, 'json');
-                   }
-               }
-           ]
+                            // Remove element from accordion
+                            $Element.closest('li').remove();
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }, 'json');
+                    }
+                }
+            ]
         );
     }
 
@@ -499,7 +506,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     TargetNS.Canvas.MakeDraggable();
                 }
                 else {
-                    alert(Core.Language.Translate('This Activity is already used in the Process. You cannot add it twice!'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('This Activity is already used in the Process. You cannot add it twice!')
+                    );
                 }
             }
             else {
@@ -641,8 +651,11 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             // if a dummy activity exists, another transition was placed to the canvas but not yet
             // connected to an end point. One cannot place two unconnected transitions on the canvas.
             if ($('#Dummy').length && DummyActivityConnected(ProcessEntityID)) {
-              alert(Core.Language.Translate('An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.'));
-              return false;
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate('An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.')
+                );
+                return false;
             }
 
             if (typeof Entity !== 'undefined') {
@@ -654,7 +667,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 // If this transition is already bind to this activity
                 // you cannot bind it a second time
                 if (Path[Activity] && typeof Path[Activity][EntityID] !== 'undefined') {
-                    alert(Core.Language.Translate('This Transition is already used for this Activity. You cannot use it twice!'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('This Transition is already used for this Activity. You cannot use it twice!')
+                    );
                     return false;
                 }
 
@@ -711,7 +727,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     typeof Path[Transition.StartActivity][Transition.TransitionID].TransitionAction !== 'undefined' &&
                     ($.inArray(EntityID, Path[Transition.StartActivity][Transition.TransitionID].TransitionAction) >= 0)
                 ) {
-                    alert(Core.Language.Translate('This TransitionAction is already used in this Path. You cannot use it twice!'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('This TransitionAction is already used in this Path. You cannot use it twice!')
+                    );
                     return false;
                 }
 
@@ -817,8 +836,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         // get new Accordion HTML via AJAX and replace the accordion with this HTML
         // re-initialize accordion functions (accordion, filters, DnD)
         var Data = {
-                Action: 'AdminProcessManagement',
-                Subaction: 'UpdateAccordion'
+                Action:          'AdminProcessManagement',
+                Subaction:       'UpdateAccordion',
+                ProcessEntityID: $('#ProcessEntityID').val()
             },
             ActiveElementIndex = parseInt($('ul#ProcessElements > li.Active').index(), 10),
             ActiveElementValue = $('ul#ProcessElements > li:eq(' + ActiveElementIndex + ') .ProcessElementFilter').val();
@@ -844,6 +864,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             // Init DnD on Accordion
             TargetNS.InitAccordionDnD();
+
+            // init handling of scope filter
+            TargetNS.InitScopeFilter();
 
             // Initialize the different create and edit links/buttons
             InitProcessPopups();
@@ -1040,6 +1063,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             return false;
         });
 
+        // Init Scope Filters
+        TargetNS.InitScopeFilter();
+
         // Init Diagram Canvas
         TargetNS.Canvas.Init();
     };
@@ -1064,6 +1090,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
         // Initialize list filter
         Core.UI.Table.InitTableFilter($('#FilterAvailableActivityDialogs'), $('#AvailableActivityDialogs'));
+        Core.UI.Table.InitTableFilter($('#FilterAssignedActivityDialogs'), $('#AssignedActivityDialogs'));
 
         $('#Submit').on('click', function() {
             $('#ActivityForm').submit();
@@ -1079,6 +1106,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             Form.submit();
         });
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
 
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
@@ -1099,7 +1129,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
      */
     TargetNS.InitActivityDialogEdit = function () {
         var MandatoryFields = ['Queue', 'State', 'Lock', 'Priority', 'Type', 'CustomerID'],
-            FieldsWithoutDefaultValue = ['CustomerID', 'Article'];
+            FieldsWithoutDefaultValue = ['CustomerID', 'Article', 'Attachments'];
 
         function UpdateFields(Event, UI) {
             var Fieldname,
@@ -1135,6 +1165,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
         // Initialize list filter
         Core.UI.Table.InitTableFilter($('#FilterAvailableFields'), $('#AvailableFields'));
+        Core.UI.Table.InitTableFilter($('#FilterAssignedFields'), $('#AssignedFields'));
 
         $('#Submit').on('click', function() {
             $('#ActivityDialogForm').submit();
@@ -1183,58 +1214,76 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             }
 
             // Open dialog
-            Core.UI.Dialog.ShowContentDialog(
-                $('#Dialogs #FieldDetails'),
-                Core.Language.Translate('Edit Field Details') + ': ' + FieldNameTranslated,
-                '200px',
-                'Center',
-                true,
-                [
-                     {
-                         Label: Core.Language.Translate('Save'),
-                         Class: 'Primary',
-                         Function: function () {
-                             var FieldConfigElement = {};
+            Core.UI.Dialog.ShowDialog({
 
-                             FieldConfigElement.DescriptionShort = $('#DescShort').val();
-                             FieldConfigElement.DescriptionLong = $('#DescLong').val();
-                             FieldConfigElement.DefaultValue = $('#DefaultValue').val();
-                             FieldConfigElement.Display = $('#Display').val();
+                HTML: $('#Dialogs #FieldDetails'),
+                Title: Core.Language.Translate('Edit Field Details') + ': ' + FieldNameTranslated,
+                PositionTop: '50px',
+                PositionLeft: 'Center',
+                Modal: true,
+                CloseOnClickOutside: false,
+                CloseOnEscape: true,
+                Buttons: [
+                    {
+                        Label: Core.Language.Translate('Save'),
+                        Class: 'Primary',
+                        Function: function () {
+                            var FieldConfigElement = {},
+                                StandardTemplateIDs = [];
 
-                             if (Fieldname === 'Article') {
-                                 if (typeof FieldConfigElement.Config === 'undefined'){
-                                     FieldConfigElement.Config = {};
-                                 }
-                                 FieldConfigElement.Config.CommunicationChannel = $('#CommunicationChannel').val();
+                            FieldConfigElement.DescriptionShort = $('#DescShort').val();
+                            FieldConfigElement.DescriptionLong = $('#DescLong').val();
+                            FieldConfigElement.DefaultValue = $('#DefaultValue').val();
+                            FieldConfigElement.Display = $('#Display').val();
 
-                                 FieldConfigElement.Config.IsVisibleForCustomer = '0';
-                                 if ($('#IsVisibleForCustomer').prop('checked')) {
+                            if (Fieldname === 'Article') {
+                                if (typeof FieldConfigElement.Config === 'undefined'){
+                                    FieldConfigElement.Config = {};
+                                }
+
+                                CKEDITOR.instances['Body'].updateElement();
+                                FieldConfigElement.Config.Subject = $('#Subject').val();
+                                FieldConfigElement.Config.Body = $('#Body').val();
+
+                                FieldConfigElement.Config.CommunicationChannel = $('#CommunicationChannel').val();
+
+                                FieldConfigElement.Config.IsVisibleForCustomer = '0';
+                                if ($('#IsVisibleForCustomer').prop('checked')) {
                                     FieldConfigElement.Config.IsVisibleForCustomer = '1';
-                                 }
+                                }
 
-                                 // show error if not customer visible article is set for an interface different than AgentInterface
-                                 if ($('#Interface').val() !== 'AgentInterface' && !$('#IsVisibleForCustomer').prop('checked')){
-                                     window.alert(Core.Language.Translate('Customer interface does not support articles not visible for customers.'));
-                                     return false;
-                                 }
+                                // show error if no customer visible article is set for an interface different than AgentInterface
+                                if ($('#Interface').val() !== 'AgentInterface' && !$('#IsVisibleForCustomer').prop('checked')){
+                                    window.alert(Core.Language.Translate('Customer interface does not support articles not visible for customers.'));
+                                    return false;
+                                }
 
-                                 // add the time units value to the fieldconfig
-                                 FieldConfigElement.Config.TimeUnits = $('#TimeUnits').val();
-                             }
+                                // add the time units value to the field config
+                                FieldConfigElement.Config.TimeUnits = $('#TimeUnits').val();
 
-                             $Element.closest('li').data('config', Core.JSON.Stringify(FieldConfigElement));
+                                // add the StandardTemplate IDs to the field config
+                                $('#StandardTemplateID option:selected').each(function() {
+                                    StandardTemplateIDs.push($(this).val());
+                                });
+                                FieldConfigElement.Config.StandardTemplateID = StandardTemplateIDs;
 
-                             Core.UI.Dialog.CloseDialog($('.Dialog'));
-                         }
-                     },
-                     {
-                         Label: Core.Language.Translate('Cancel'),
-                         Function: function () {
-                             Core.UI.Dialog.CloseDialog($('.Dialog'));
-                         }
-                     }
-                ]
-            );
+                                FieldConfigElement.Config.StandardTemplateAutoFill = $('#StandardTemplateAutoFill').prop('checked') ? '1' : '0';
+                            }
+
+                            $Element.closest('li').data('config', Core.JSON.Stringify(FieldConfigElement));
+
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }
+                    },
+                    {
+                        Label: Core.Language.Translate('Cancel'),
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }
+                    }
+                ],
+                AllowAutoGrow: true,
+            });
 
             // some fields must be mandatory, if they are present.
             // remove option from dropdown for these fields
@@ -1269,6 +1318,12 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     if (typeof FieldConfig.Config === 'undefined'){
                         FieldConfig.Config = {};
                     }
+                    if (FieldConfig.Config.Subject) {
+                        $('#Subject').val(FieldConfig.Config.Subject);
+                    }
+                    if (FieldConfig.Config.Body) {
+                        $('#Body').val(FieldConfig.Config.Body);
+                    }
                     if (FieldConfig.Config.CommunicationChannel) {
                         $('#CommunicationChannel').val(FieldConfig.Config.CommunicationChannel);
                     }
@@ -1277,6 +1332,15 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     }
                     if (FieldConfig.Config.TimeUnits) {
                         $('#TimeUnits').val(FieldConfig.Config.TimeUnits);
+                    }
+
+                    if (FieldConfig.Config.StandardTemplateID) {
+                        $.each(FieldConfig.Config.StandardTemplateID, function(Index, ID) {
+                            $('#StandardTemplateID option[value=' + ID + ']').prop('selected', true).trigger('redraw.InputField');
+                        });
+                    }
+                    if (FieldConfig.Config.StandardTemplateAutoFill === '1') {
+                        $('#StandardTemplateAutoFill').prop("checked", true);
                     }
                 }
             }
@@ -1287,11 +1351,20 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             // some fields do not have a default value.
             // disable the input field
             if ($.inArray(Fieldname, FieldsWithoutDefaultValue) > -1) {
-                $('#DefaultValue').prop('readonly', true).prop('disabled', true);
+                $('#DefaultValue').prop('readonly', true).attr('tabindex', '-1').prop('disabled', true);
             }
 
             // only article should show Communication channel select.
             if (Fieldname === 'Article') {
+
+                $('#DefaultValue').parent().addClass('Hidden');
+                $("label[for='DefaultValue']").css('display', 'none');
+
+                $('.ArticleContainer').removeClass('Hidden');
+                $('.ArticleContainer').prev('label').css('display', 'block');
+                $('.ArticleContainer .Modernize').trigger('redraw.InputField');
+
+                Core.UI.RichTextEditor.InitEditor($('textarea.RichTextInDialog'));
 
                 $('#CommunicationChannelContainer').removeClass('Hidden');
                 $('#CommunicationChannelContainer').prev('label').css('display', 'block');
@@ -1303,8 +1376,39 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $('#TimeUnitsContainer').removeClass('Hidden');
                 $('#TimeUnitsContainer').prev('label').css('display', 'block');
                 $('#TimeUnitsContainer .Modernize').trigger('redraw.InputField');
+
+                $('#StandardTemplateContainer').removeClass('Hidden');
+                $('#StandardTemplateContainer').prev('label').css('display', 'block');
+                $('#StandardTemplateContainer .Modernize').trigger('redraw.InputField');
+
+                $('#StandardTemplateID').on('change', function () {
+                    if ($('#StandardTemplateID').val().length == 1){
+                        $('#StandardTemplateAutoFillContainer').removeClass('Hidden');
+                        $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'block');
+                    }
+                    else{
+                        $('#StandardTemplateAutoFillContainer').addClass('Hidden');
+                        $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
+                        $('#StandardTemplateAutoFill').prop('checked', false);
+                    }
+                });
+
+                if ($('#StandardTemplateID').length && $('#StandardTemplateID').val().length >= 2){
+                    $('#StandardTemplateAutoFillContainer').addClass('Hidden');
+                    $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
+                    $('#StandardTemplateAutoFill').prop('checked', false);
+                }
             }
             else {
+
+                $('#DefaultValue').parent().removeClass('Hidden');
+                $("label[for='DefaultValue']").css('display', 'block');
+
+                $('.ArticleContainer').addClass('Hidden');
+                $('.ArticleContainer').prev('label').css('display', 'none');
+
+                $('#ArticleBodyContainer').addClass('Hidden');
+                $('#ArticleBodyContainer').prev('label').css('display', 'none');
 
                 $('#CommunicationChannelContainer').addClass('Hidden');
                 $('#CommunicationChannelContainer').prev('label').css('display', 'none');
@@ -1314,10 +1418,19 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
                 $('#TimeUnitsContainer').addClass('Hidden');
                 $('#TimeUnitsContainer').prev('label').css('display', 'none');
+
+                $('#StandardTemplateContainer').addClass('Hidden');
+                $('#StandardTemplateContainer').prev('label').css('display', 'none');
+
+                $('#StandardTemplateAutoFillContainer').addClass('Hidden');
+                $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
             }
 
             return false;
         });
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
 
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
@@ -1359,7 +1472,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $(this).closest('.WidgetSimple').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing condition can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing condition can't be removed.")
+                );
             }
 
             return false;
@@ -1387,7 +1503,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $(this).parent().closest('fieldset').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing field can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing field can't be removed.")
+                );
             }
 
             return false;
@@ -1408,6 +1527,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             Form.submit();
         });
 
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
+
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
             window.opener.Core.Agent.Admin.ProcessManagement.HandlePopupClose();
@@ -1418,7 +1540,6 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         });
 
         Core.UI.InputFields.Init();
-
     };
 
     /**
@@ -1458,7 +1579,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $(this).closest('fieldset').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing parameter can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing parameter can't be removed.")
+                );
             }
             return false;
         });
@@ -1474,6 +1598,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             Form.submit();
         });
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
 
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
@@ -1506,6 +1633,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
         // Initialize list filter
         Core.UI.Table.InitTableFilter($('#FilterAvailableTransitionActions'), $('#AvailableTransitionActions'));
+        Core.UI.Table.InitTableFilter($('#FilterAssignedTransitionActions'), $('#AssignedTransitionActions'));
 
         // store process data to hidden field for later merging
         $('#ProcessData').val(Core.JSON.Stringify(window.opener.Core.Agent.Admin.ProcessManagement.ProcessData.Process));
@@ -1666,7 +1794,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
      * @returns {Boolean} Returns false, if Config is not defined.
      * @param {Object} Config
      * @description
-     *      Update gloabl process config object after config change e.g. in popup windows.
+     *      Update global process config object after config change e.g. in popup windows.
      */
     TargetNS.UpdateConfig = function (Config) {
         if (typeof Config === 'undefined') {
@@ -1713,6 +1841,195 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 TargetNS.ProcessData.TransitionAction[Key] = Value;
             });
         }
+    };
+
+    TargetNS.InitDefaultConfigParameters = function () {
+        $('#Module').on("change", function () {
+            var Module = $("#Module option:selected").val()
+            var FieldsWithValue;
+            var ConfigParameters;
+            if (!Module) {
+                return;
+            }
+
+            // alert if there is at least one field with user input
+            FieldsWithValue = $('#ConfigParams input[name*="ConfigValue"]').filter(function() { return $(this).val() !== ''; }).length;
+            if (FieldsWithValue) {
+
+                Core.UI.Dialog.ShowDialog({
+                    Title:               Core.Language.Translate('Warning'),
+                    HTML:                Core.Language.Translate('Are you sure you want to overwrite the config parameters?'),
+                    Modal:               true,
+                    CloseOnClickOutside: true,
+                    CloseOnEscape:       true,
+                    PositionTop:         '100px',
+                    PositionLeft:        'Center',
+                    Buttons: [
+                        {
+                            Label: Core.Language.Translate("Yes"),
+                            Class: 'Primary',
+                            Function: function () {
+                                ConfigParameters = TargetNS.GetDefaultConfigParameters(Module)
+                                TargetNS.SetDefaultConfigParameters(ConfigParameters)
+                                Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                            }
+                        },
+                        {
+                            Label: Core.Language.Translate("Cancel"),
+                            Function: function () {
+                                Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                            }
+                        }
+                    ]
+                });
+            } else {
+                ConfigParameters = TargetNS.GetDefaultConfigParameters(Module)
+                TargetNS.SetDefaultConfigParameters(ConfigParameters)
+            }
+        });
+    }
+    TargetNS.GetDefaultConfigParameters = function (Module) {
+        // do AJAX call
+        var ConfigParameters = {},
+            Data = {
+            Action:    'AdminProcessManagementTransitionAction',
+            Subaction: 'GetDefaultConfigParameters',
+            Module:    Module,
+        };
+        Core.AJAX.FunctionCallSynchronous(Core.Config.Get('CGIHandle'), Data, function (Response) {
+            ConfigParameters =  Response;
+        });
+        return ConfigParameters;
+    }
+    TargetNS.SetDefaultConfigParameters = function (ConfigParameters) {
+        if (!ConfigParameters){
+            return;
+        }
+        // delete old params
+        $('#ConfigParams > fieldset').remove();
+        // add one empty element
+        if (!Object.keys(ConfigParameters).length) {
+            $('#ConfigParams').append($('#ConfigParamContainer').html().replace(/_INDEX_/g, 1));
+        }
+        // insert params from config
+        $.each(Object.keys(ConfigParameters).sort(), function(Counter, Key) {
+            var $Element = $($('#ConfigParamContainer').html().replace(/_INDEX_/g, Counter + 1));
+            $Element.find('input[name*="ConfigKey"]').val(Key);
+            $Element.find('input[name*="ConfigValue"]').attr('placeholder', ConfigParameters[Key]);
+            $('#ConfigParams').append($Element);
+        });
+    }
+
+    /**
+     * @private
+     * @name InitScopeFilter
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @description
+     *     initialises all scope filters for AdminProcessManagement
+     */
+    TargetNS.InitScopeFilter = function() {
+
+        var $ScopeFilterElements = $('[data-scope-filter]'),
+            ScopeEntityID = $('#ProcessEntityID').val();
+
+        if(!ScopeEntityID) { return; }
+
+        $ScopeFilterElements.each(function(){
+            var $ProcessElementFilter = $(this).parent().find('input.ProcessElementFilter, input.FilterAvailableProcessItem'),
+                $GlobeIcon            = $(this).next('.fa-globe'),
+                $ScopeFilterCheckbox  = $(this);
+
+            // Add a keydown event to the process element filter because the "global scope" checkbox
+            // shall be automatically set if the filter is used.
+            // This is because Core.UI.Table filters over all elements of the table, not only the visible ones.
+            if ($ProcessElementFilter.length) {
+                $ProcessElementFilter.off('keydown.InitScopeFilter').on('keydown.InitScopeFilter', function() {
+                    $ScopeFilterCheckbox.prop('checked', true).trigger('change');
+                });
+            }
+
+            // Click on globe should also set/unset checkbox.
+            $GlobeIcon.off('click.InitScopeFilter').on('click.InitScopeFilter', function() {
+                $ScopeFilterCheckbox.trigger('click');
+            });
+
+            $(this).off('change.InitScopeFilter').on('change.InitScopeFilter', function () {
+                var EntityType = $(this).data('scopeFilter'),
+                    FilterType         = 'Process',
+                    ScopeEntityID      = $('#ProcessEntityID').val(),
+                    $HideScopeElements = $('[data-entity-type=' + EntityType + ']'),
+                    $ShowGlobalScopeElements,
+                    $ShowScopeElements,
+                    $ElementsToRemove     = $('li[data-scope=Process][data-scope-entity-id != ' + ScopeEntityID + ']');
+
+                // Remove elements from other processes and that are not global.
+                // This is due to Core.UI.Table filtering elements without regard to scope
+                // so the filter would show all elements (also from other processes) instead only the ones from the
+                // current process and global ones.
+                $ElementsToRemove.remove();
+
+                $ShowScopeElements = $('[data-entity-type=' + EntityType + '][data-scope=' + FilterType +'][data-scope-entity-id=' + ScopeEntityID + ']');
+
+                // change / improve this FilterType if you need more types
+                if(this.checked) {
+                    FilterType = 'Global';
+                    $ShowGlobalScopeElements = $('[data-entity-type=' + EntityType + '][data-scope=Global]');
+                }
+
+                $HideScopeElements.each(function(){
+                    $(this).hide();
+                });
+                $ShowScopeElements.each(function(){
+                    $(this).show();
+                });
+                if($ShowGlobalScopeElements){
+                    $ShowGlobalScopeElements.each(function(){
+                        $(this).show();
+                    });
+                }
+            });
+            $(this).trigger('change');
+        });
+    };
+
+    /**
+     * @private
+     * @name InitScopeFilterSelection
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @description
+     *     initialises all Scope Filter Selection
+     *     depending on which scope has been selected, a different selection is displayed
+     */
+    TargetNS.InitScopeFilterSelection = function() {
+
+        var $Scope = $('#Scope'),
+            Scope;
+        if(!$Scope) { return; }
+
+        Scope = $Scope.val();
+        if(Scope == 'Global') {
+            $('label[for="ScopeEntityID"]').hide().next().hide().next().hide();
+        }
+
+        $Scope.change(function() {
+
+            // the ScopeEntityID element will be shown/hidden depending on the scope
+            var $ScopeEntityID = $('#ScopeEntityID'),
+                Scope = $Scope.val();
+
+            if(!$ScopeEntityID) { return; }
+
+            // show/hide the 3 items on the ScopeEntityID Process line depending on the current scope
+            if(Scope == 'Global') {
+                // hide the 3 items on the ScopeEntityID Process line
+                $('label[for="ScopeEntityID"]').hide().next().hide().next().hide();
+            } else {
+                // show the 3 items on the ScopeEntityID Process line
+                $('label[for="ScopeEntityID"]').show().next().show().next().show();
+            }
+        });
     };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

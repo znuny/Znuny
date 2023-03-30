@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get config object
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -46,7 +46,7 @@ $ConfigObject->Set(
 );
 
 my $TestUserID;
-my $UserRand = 'example-user' . $Helper->GetRandomID();
+my $UserRand = 'example-user' . $HelperObject->GetRandomID();
 
 # get user object
 my $UserObject = $Kernel::OM->Get('Kernel::System::User');

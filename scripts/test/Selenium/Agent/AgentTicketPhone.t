@@ -18,8 +18,18 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject            = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject     = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject               = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject            = $Kernel::OM->Get('Kernel::System::Queue');
+        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+        my $TicketObject           = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject             = $Kernel::OM->Get('Kernel::System::User');
+
+        my $IsITSMIncidentProblemManagementInstalled
+            = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
         # Overload CustomerUser => Map setting defined in the Defaults.pm - use external url.
         my $DefaultCustomerUser = $ConfigObject->Get("CustomerUser");
@@ -35,51 +45,89 @@ $Selenium->RunTest(
             '',
             'AsPopup OTRSPopup_TicketAction',
         ];
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CustomerUser',
             Value => $DefaultCustomerUser,
         );
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => 'Ticket::Frontend::AgentTicketPhone###DynamicField',
+                Value => {
+                    'ITSMCriticality' => 1,
+                    'ITSMDueDate'     => 1,
+                    'ITSMImpact'      => 1,
+                },
+            );
+        }
+
         # Do not check service and type.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::Service',
-            Value => 0,
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => 'Ticket::Service',
+                Value => 1,
+            );
+        }
+        else {
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => 'Ticket::Service',
+                Value => 0,
+            );
+        }
+
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => 'Ticket::Type',
+                Value => 1,
+            );
+        }
+        else {
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => 'Ticket::Type',
+                Value => 0,
+            );
+        }
+
+        my %TestUserLoginGroup = (
+            Groups => [ 'admin', 'users' ]
         );
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::Type',
-            Value => 0,
-        );
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $TestUserLoginGroup{Groups} = [ 'admin', 'users', 'itsm-service' ];
+        }
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
-            Groups => [ 'admin', 'users' ],
+        my $TestUserLogin = $HelperObject->TestUserCreate(
+            %TestUserLoginGroup,
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Add test customer for testing.
         my $TestCustomer       = 'Customer' . $RandomID;
-        my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => 'FirstName' . $TestCustomer,
             UserLastname   => $TestCustomer,
@@ -95,9 +143,8 @@ $Selenium->RunTest(
         );
 
         # Add test template of type 'Create'.
-        my $TemplateText           = 'This is selected customer user first name: "<OTRS_CUSTOMER_DATA_UserFirstname>"';
-        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
-        my $TemplateID             = $StandardTemplateObject->StandardTemplateAdd(
+        my $TemplateText = 'This is selected customer user first name: "<OTRS_CUSTOMER_DATA_UserFirstname>"';
+        my $TemplateID   = $StandardTemplateObject->StandardTemplateAdd(
             Name         => 'CreateTemplate' . $RandomID,
             Template     => $TemplateText,
             ContentType  => 'text/plain; charset=utf-8',
@@ -110,8 +157,7 @@ $Selenium->RunTest(
             "Template ID $TemplateID is created.",
         );
 
-        my $QueueObject = $Kernel::OM->Get('Kernel::System::Queue');
-        my $QueueID     = $QueueObject->QueueLookup( Queue => 'Raw' );
+        my $QueueID = $QueueObject->QueueLookup( Queue => 'Raw' );
 
         # Assign test template to queue 'Raw'.
         my $Success = $QueueObject->QueueStandardTemplateMemberAdd(
@@ -137,10 +183,15 @@ $Selenium->RunTest(
         # Navigate to AgentTicketPhone screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");
 
+        my @AdditionalIDs;
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            @AdditionalIDs = qw(TypeID ServiceID OptionLinkTicket DynamicField_ITSMImpact DynamicField_ITSMCriticality);
+        }
+
         # Check page.
         for my $ID (
             qw(FromCustomer CustomerID Dest Subject RichText FileUpload
-            NextStateID PriorityID submitRichText)
+            NextStateID PriorityID submitRichText), @AdditionalIDs
             )
         {
             my $Element = $Selenium->find_element( "#$ID", 'css' );
@@ -168,9 +219,94 @@ $Selenium->RunTest(
         # Create test phone ticket.
         my $TicketSubject = "Selenium Ticket";
         my $TicketBody    = "Selenium body test";
+
+        my $ServiceID;
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
+
+            # Create test service.
+            my $ServiceName = "Selenium" . $HelperObject->GetRandomID();
+            $ServiceID = $ServiceObject->ServiceAdd(
+                Name        => $ServiceName,
+                ValidID     => 1,
+                Comment     => 'Selenium Test Service',
+                TypeID      => 2,
+                Criticality => '5 very high',
+                UserID      => $TestUserID,
+            );
+
+            $Self->True(
+                $ServiceID,
+                "Created service ID - $ServiceID",
+            );
+
+            # Link test service with test customer.
+            my $ServiceMemberAddSuccess = $ServiceObject->CustomerUserServiceMemberAdd(
+                CustomerUserLogin => $TestCustomer,
+                ServiceID         => $ServiceID,
+                Active            => 1,
+                UserID            => $TestUserID,
+            );
+
+            $Self->True(
+                $ServiceMemberAddSuccess,
+                "Added service ID $ServiceID to CustomerUser $TestCustomer.",
+            );
+
+            $Selenium->execute_script(
+                "\$('#TypeID').val(\$('#TypeID option').filter(function () { return \$(this).html() == 'Unclassified'; } ).val() ).trigger('redraw.InputField').trigger('change');"
+            );
+            $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length' );
+        }
+
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys($TestCustomer);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TestCustomer)').click();");
+
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $Selenium->WaitFor( JavaScript => "return \$('#ServiceID option[value=\"$ServiceID\"]').length;" );
+            $Selenium->execute_script(
+                "\$('#ServiceID').val('$ServiceID').trigger('redraw.InputField').trigger('change');"
+            );
+            $Selenium->WaitFor( JavaScript => 'return $("#ServiceIncidentState").length' );
+
+            # Check for service incident state field.
+            my $ServiceIncidentStateElement = $Selenium->find_element( "#ServiceIncidentState", 'css' );
+            $ServiceIncidentStateElement->is_enabled();
+            $ServiceIncidentStateElement->is_displayed();
+
+            $Selenium->WaitFor(
+                JavaScript => "return \$('#DynamicField_ITSMImpact option[value=\"3 normal\"]').length;"
+            );
+            $Selenium->WaitFor( JavaScript => "return \$('#PriorityID option[value=\"4\"]').length;" );
+
+            # Check if ITSMCriticality has correct value, see bug#10550.
+            $Self->Is(
+                $Selenium->find_element( '#DynamicField_ITSMCriticality', 'css' )->get_value(),
+                '5 very high',
+                "#DynamicField_ITSMCriticality updated value",
+            );
+
+            # Test priority update based on impact value.
+            $Self->Is(
+                $Selenium->find_element( '#PriorityID', 'css' )->get_value(),
+                '4',
+                "#PriorityID stored value",
+            );
+
+            $Selenium->execute_script(
+                "\$('#DynamicField_ITSMImpact').val('1 very low').trigger('redraw.InputField').trigger('change');"
+            );
+
+            sleep 2;
+
+            $Self->Is(
+                $Selenium->find_element( '#PriorityID', 'css' )->get_value(),
+                '3',
+                "#PriorityID updated value",
+            );
+        }
+
         $Selenium->InputFieldValueSet(
             Element => '#Dest',
             Value   => '2||Raw',
@@ -222,7 +358,7 @@ $Selenium->RunTest(
             '',
             'AsPopup OTRSPopup_TicketAction',
         ];
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CustomerUser',
             Value => $DefaultCustomerUser,
         );
@@ -242,14 +378,11 @@ $Selenium->RunTest(
             "Customer email is not a link with class AsPopup."
         );
 
-        # Use 'Enter' press instead of 'VerifiedSubmit' on 'Subject' field to check if works (see bug#13056).
-        $Selenium->find_element( "#Subject", 'css' )->send_keys("\N{U+E007}");
+        $Selenium->find_element( "#submitRichText", 'css' )->click();
         $Selenium->WaitFor(
             JavaScript =>
                 'return typeof($) === "function" && $(".MessageBox a[href*=\'AgentTicketZoom;TicketID=\']").length !== 0;'
         );
-
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Get created test ticket ID and number.
         my @Ticket = split( 'TicketID=', $Selenium->get_current_url() );
@@ -288,8 +421,32 @@ $Selenium->RunTest(
             "$TestCustomer found on page",
         ) || die "$TestCustomer not found on page";
 
+        if ($IsITSMIncidentProblemManagementInstalled) {
+
+            # Force sub menus to be visible in order to be able to click one of the links.
+            $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
+
+            # Click on history and switch window.
+            $Selenium->find_element("//*[text()='History']")->click();
+
+            $Selenium->WaitFor( WindowCount => 2 );
+            my $Handles = $Selenium->get_window_handles();
+            $Selenium->switch_to_window( $Handles->[1] );
+
+            # Wait until page has loaded, if necessary.
+            $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".CancelClosePopup").length' );
+
+            # Check for ITSM updated fields.
+            for my $UpdateText (qw(Impact Criticality)) {
+                $Self->True(
+                    index( $Selenium->get_page_source(), "Changed dynamic field ITSM$UpdateText" ) > -1,
+                    "DynamicFieldUpdate $UpdateText - found",
+                );
+            }
+        }
+
         # Test bug #12229.
-        my $QueueID1 = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID1 = $QueueObject->QueueAdd(
             Name            => "<Queue>$RandomID",
             ValidID         => 1,
             GroupID         => 1,
@@ -299,7 +456,7 @@ $Selenium->RunTest(
             Comment         => 'Some comment',
             UserID          => 1,
         );
-        my $QueueID2 = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID2 = $QueueObject->QueueAdd(
             Name            => "Junk::SubQueue $RandomID  $RandomID",
             ValidID         => 1,
             GroupID         => 1,
@@ -323,10 +480,11 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");
 
         # Select <Queue>.
-        my $QueueValue = "$QueueID1||<Queue>$RandomID";
+        my $QueueValue    = "<Queue>$RandomID";
+        my $QueueValueSet = $QueueID1 . "||" . $QueueValue;
         $Selenium->InputFieldValueSet(
             Element => '#Dest',
-            Value   => $QueueValue,
+            Value   => $QueueValueSet,
         );
 
         # Wait for loader.
@@ -334,26 +492,34 @@ $Selenium->RunTest(
 
         # Check Queue #1 is displayed as selected.
         $Self->Is(
-            $Selenium->find_element( '#Dest', 'css' )->get_value(),
+            $Selenium->InputGet(
+                Attribute => 'Dest',
+                Options   => { KeyOrValue => 'Value' }
+            ),
             $QueueValue,
             'Queue #1 is selected.',
         );
 
         # Check Queue #1 is displayed properly.
         $Self->Is(
-            $Selenium->find_element( '#Dest', 'css' )->get_value(),
-            $QueueID1 . "||<Queue>$RandomID",
+            $Selenium->InputGet(
+                Attribute => 'Dest',
+                Options   => { KeyOrValue => 'Value' }
+            ),
+            $QueueValue,
             'Queue #1 is selected.',
         );
 
         # Select SubQueue on loading screen.
         # Bug#12819 ( https://bugs.otrs.org/show_bug.cgi?id=12819 ) - queue contains spaces in the name.
         # Navigate to AgentTicketPhone screen again to check selecting a queue after loading screen.
-        $QueueValue = $QueueID2 . "||Junk::SubQueue $RandomID  $RandomID";
+        $QueueValue    = "Junk::SubQueue $RandomID  $RandomID";
+        $QueueValueSet = $QueueID2 . "||" . $QueueValue;
+
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");
         $Selenium->InputFieldValueSet(
             Element => '#Dest',
-            Value   => $QueueValue,
+            Value   => $QueueValueSet,
         );
 
         # Wait for loader.
@@ -361,13 +527,43 @@ $Selenium->RunTest(
 
         # Check SubQueue is displayed properly.
         $Self->Is(
-            $Selenium->find_element( '#Dest', 'css' )->get_value(),
+            $Selenium->InputGet(
+                Attribute => 'Dest',
+                Options   => { KeyOrValue => 'Value' }
+            ),
             $QueueValue,
             'Queue #2 is selected.',
         );
 
+        if ($IsITSMIncidentProblemManagementInstalled) {
+
+   # Verify Service Incident State is not available when config 'Ticket::Frontend::AgentTicketPhone###ShowIncidentState'
+   #   is disabled. See bug#14150 (https://bugs.otrs.org/show_bug.cgi?id=14150)
+            $HelperObject->ConfigSettingChange(
+                Key   => 'Ticket::Frontend::AgentTicketPhone###ShowIncidentState',
+                Value => 0,
+            );
+            $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");
+
+            $Selenium->find_element( "#FromCustomer", 'css' )->send_keys($TestCustomer);
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length'
+            );
+            $Selenium->execute_script("\$('li.ui-menu-item:contains($TestCustomer)').click()");
+
+            $Selenium->WaitFor( JavaScript => "return \$('#ServiceID option[value=\"$ServiceID\"]').length;" );
+            $Selenium->execute_script(
+                "\$('#ServiceID').val('$ServiceID').trigger('redraw.InputField').trigger('change');"
+            );
+
+            $Self->False(
+                $Selenium->execute_script("return \$('#ServiceIncidentStateContainer').length;"),
+                "Service Incident State is not available when config ShowIncidentState is disabled."
+            );
+        }
+
         # Delete Queues.
-        $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        $Success = $DBObject->Do(
             SQL  => "DELETE FROM queue WHERE id IN (?, ?)",
             Bind => [ \$QueueID1, \$QueueID2 ],
         );
@@ -395,8 +591,37 @@ $Selenium->RunTest(
             "Ticket with ticket ID $TicketID is deleted.",
         );
 
+        if ($IsITSMIncidentProblemManagementInstalled) {
+
+            # Delete test service - test customer connection.
+            $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+                SQL => "DELETE FROM service_customer_user WHERE service_id = $ServiceID",
+            );
+            $Self->True(
+                $Success,
+                "Service-customer connection is deleted",
+            );
+
+            # Delete test service preferences.
+            $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+                SQL => "DELETE FROM service_preferences WHERE service_id = $ServiceID",
+            );
+            $Self->True(
+                $Success,
+                "Service preferences is deleted - ID $ServiceID",
+            );
+
+            # Delete created test service.
+            $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+                SQL => "DELETE FROM service WHERE id = $ServiceID",
+            );
+            $Self->True(
+                $Success,
+                "Service is deleted - ID $ServiceID",
+            );
+        }
+
         # Delete created test customer user.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         $TestCustomer = $DBObject->Quote($TestCustomer);
         $Success      = $DBObject->Do(
             SQL  => "DELETE FROM customer_user WHERE login = ?",
@@ -415,8 +640,6 @@ $Selenium->RunTest(
             $Success,
             "Template ID $TemplateID is deleted.",
         );
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (qw( Ticket CustomerUser )) {

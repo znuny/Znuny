@@ -23,17 +23,19 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Don't check email address validity.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['users'],
         ) || die "Did not get test user";
 
@@ -41,8 +43,8 @@ $Selenium->RunTest(
         my @CustomerIDs;
 
         for my $Counter ( 1 .. 3 ) {
-            my $CustomerName = "Customer-$Counter-" . $Helper->GetRandomID();
-            my $CustomerID   = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+            my $CustomerName = "Customer-$Counter-" . $HelperObject->GetRandomID();
+            my $CustomerID   = $CustomerCompanyObject->CustomerCompanyAdd(
                 CustomerID          => $CustomerName,
                 CustomerCompanyName => $CustomerName,
                 ValidID             => 1,
@@ -59,10 +61,10 @@ $Selenium->RunTest(
         my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
         # Create test customer user.
-        my $TestCustomerUser1 = $Helper->TestCustomerUserCreate()
+        my $TestCustomerUser1 = $HelperObject->TestCustomerUserCreate()
             || die "Did not get test customer user";
 
-        my $CustomerUser = $Helper->GetRandomID();
+        my $CustomerUser = $HelperObject->GetRandomID();
 
         my $Success = $CustomerUserObject->CustomerUserUpdate(
             Source         => 'CustomerUser',
@@ -95,7 +97,7 @@ $Selenium->RunTest(
             "Added a additional CustomerID relation to customer test user 1"
         );
 
-        my $TestCustomerUser2 = $Helper->TestCustomerUserCreate()
+        my $TestCustomerUser2 = $HelperObject->TestCustomerUserCreate()
             || die "Did not get test customer user";
 
         $Success = $CustomerUserObject->CustomerUserUpdate(
@@ -116,14 +118,14 @@ $Selenium->RunTest(
             "Updated test user 2"
         );
 
-        my $TestCustomerUser3 = $Helper->TestCustomerUserCreate()
+        my $TestCustomerUser3 = $HelperObject->TestCustomerUserCreate()
             || die "Did not get test customer user";
 
         # Update customer user 3 with very similar data as customer user 2.
         # Disable customer user email uniqueness check temporarily.
         my $CustomerUserConfig = $ConfigObject->Get('CustomerUser');
         $CustomerUserConfig->{CustomerUserEmailUniqCheck} = 0;
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CustomerUser',
             Value => $CustomerUserConfig,
         );
@@ -170,7 +172,7 @@ $Selenium->RunTest(
             'Button text for the not changeable CustomerID is found on screen',
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Ticket::Frontend::AgentTicketPhone::CustomerIDReadOnly',
             Value => 0,
         );
@@ -299,7 +301,7 @@ $Selenium->RunTest(
         }
 
         # Check autocomplete searching (see bug#14592).
-        my $TestCustomerUser4 = $Helper->TestCustomerUserCreate()
+        my $TestCustomerUser4 = $HelperObject->TestCustomerUserCreate()
             || die "Did not get test customer user";
 
         $Success = $CustomerUserObject->CustomerUserUpdate(
@@ -361,7 +363,7 @@ $Selenium->RunTest(
 
         # Make sure the cache is correct.
         for my $Cache (qw(CustomerUser CustomerCompany)) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

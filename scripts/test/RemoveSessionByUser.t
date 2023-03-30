@@ -21,12 +21,12 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Create test users and a session for every one.
 my @TestUserLogins;
 for my $Count ( 1 .. 3 ) {
-    my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate();
+    my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate();
     push @TestUserLogins, $TestUserLogin;
 
     my %UserData = $UserObject->GetUserData(

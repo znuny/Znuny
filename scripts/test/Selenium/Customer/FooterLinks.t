@@ -19,16 +19,16 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # create test customer user
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate() || die "Did not get test customer user";
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate() || die "Did not get test customer user";
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # First page load, no links shown.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'PublicFrontend::FooterLinks',
             Value => {},
@@ -43,7 +43,7 @@ $Selenium->RunTest(
         );
 
         # Display link for OTRS Homepage.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PublicFrontend::FooterLinks',
             Value => {
@@ -65,7 +65,7 @@ $Selenium->RunTest(
         );
 
         # Check public interface as well.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PublicFrontend::CommonParam###Action',
             Value => 'PublicDefault',

@@ -38,7 +38,7 @@ send a notification using an specified transport
             UserLogin     => 'some login',
             UserTitle     => 'some title',
             UserFirstname => 'some first name',
-            UserLastname  => 'some last name'.
+            UserLastname  => 'some last name',
             # ...
         },
         Event                 => $Param{Event},
@@ -75,6 +75,12 @@ or
 
 =cut
 
+sub GetTransportRecipients {
+    my ( $Self, %Param ) = @_;
+
+    return [];
+}
+
 =head2 TransportSettingsDisplayGet()
 
 generates and returns the HTML code to display exclusive settings for each transport.
@@ -88,6 +94,12 @@ returns
     $HTMLOutput = 'some HTML code';
 
 =cut
+
+sub TransportSettingsDisplayGet {
+    my ( $Self, %Param ) = @_;
+
+    return '';
+}
 
 =head2 TransportParamSettingsGet()
 
@@ -104,6 +116,11 @@ returns
 
 =cut
 
+sub TransportParamSettingsGet {
+    my ( $Self, %Param ) = @_;
+    return 1;
+}
+
 =head2 IsUsable();
 
 returns if the transport can be used in the system environment,
@@ -115,6 +132,12 @@ returns
     $Success = 1;       # or false
 
 =cut
+
+sub IsUsable {
+    my ( $Self, %Param ) = @_;
+
+    return 1;
+}
 
 =head2 GetTransportEventData()
 
@@ -143,18 +166,16 @@ sub GetTransportEventData {
 
 =head2 _ReplaceTicketAttributes()
 
-returns the specified field with replaced OTRS-tags
+returns the specified field with replaced OTRS tags
 
-    $RecipientEmail = $Self->_ReplaceTicketAttributes(
+    my $RecipientEmail = $Self->_ReplaceTicketAttributes(
         Ticket => $Param{Ticket},
-        Field  => $RecipientEmail,
+        Field  => '<OTRS_TICKET_DynamicField_Name1>',       # value of DynamicField_Name1 is 'two@stars.com'
     );
-
-    for example: $RecipientEmail = '<OTRS_TICKET_DynamicField_Name1>';
 
 returns:
 
-    $RecipientEmail = 'foo@bar.com';
+    my $RecipientEmail = 'two@stars.com';
 
 =cut
 
@@ -163,7 +184,6 @@ sub _ReplaceTicketAttributes {
 
     return if !$Param{Field};
 
-    # get needed objects
     my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
@@ -174,7 +194,7 @@ sub _ReplaceTicketAttributes {
     REPLACEMENT:
     while (
         $Param{Field}
-        && $Param{Field} =~ m{<OTRS_TICKET_([A-Za-z0-9_]+)>}msxi
+        && $Param{Field} =~ m{<OTRS_TICKET_([A-Za-z0-9_]+)>}msi
         && $Count++ < 1000
         )
     {
@@ -199,21 +219,25 @@ sub _ReplaceTicketAttributes {
                 Value              => $DisplayValue,
             );
 
-            $Param{Field} =~ s{<OTRS_TICKET_$TicketAttribute>}{$DisplayValueStrg->{Value} // ''}ige;
+            $Param{Field} =~ s{<OTRS_TICKET_$TicketAttribute>}{$DisplayValueStrg->{Value} // ''}ig;
 
             next REPLACEMENT;
         }
 
-        # if ticket value is scalar substitute all instances (as strings)
+        my $TicketAttributeValue = '';
+
+        # if ticket value is scalar, substitute all instances (as strings)
         # this will allow replacements for "<OTRS_TICKET_Title> <OTRS_TICKET_Queue"
-        if ( !ref $Param{Ticket}->{$TicketAttribute} ) {
-            $Param{Field} =~ s{<OTRS_TICKET_$TicketAttribute>}{$Param{Ticket}->{$TicketAttribute} // ''}ige;
+        if ( IsStringWithData( $Param{Ticket}->{$TicketAttribute} ) ) {
+            $TicketAttributeValue = $Param{Ticket}->{$TicketAttribute};
         }
-        else {
-            # if the value is an array (e.g. a multiselect dynamic field) set the value directly
-            # this unfortunately will not let a combination of values to be replaced
-            $Param{Field} = $Param{Ticket}->{$TicketAttribute};
+
+        # if the value is an array (e.g. a multi select dynamic field) replace the value as 'joined' string
+        elsif ( IsArrayRefWithData( $Param{Ticket}->{$TicketAttribute} ) ) {
+            $TicketAttributeValue = join ', ', grep { defined $_ && length $_ } @{ $Param{Ticket}->{$TicketAttribute} };
         }
+
+        $Param{Field} =~ s{<OTRS_TICKET_$TicketAttribute>}{$TicketAttributeValue}ig;
     }
 
     return $Param{Field};

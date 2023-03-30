@@ -18,51 +18,57 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
+        my $GroupObject        = $Kernel::OM->Get('Kernel::System::Group');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject        = $Kernel::OM->Get('Kernel::System::Queue');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Set to change queue for ticket in a new window.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MoveType',
             Value => 'link'
         );
 
         # Enable note in AgentTicketMove screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketMove###Note',
             Value => 1
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Set FirstnameLastnameOrder to 3 - 'Lastname, Firstname (UserLogin)'.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'FirstnameLastnameOrder',
             Value => 3
         );
 
-        my $RandomID  = $Helper->GetRandomID();
+        my $RandomID  = $HelperObject->GetRandomID();
         my $Firstname = "Firstname$RandomID";
         my $Lastname  = "Lastname$RandomID";
         my $UserLogin = "UserLogin$RandomID";
 
         # Create test user.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserAdd(
+        my $UserID = $UserObject->UserAdd(
             UserFirstname => $Firstname,
             UserLastname  => $Lastname,
             UserLogin     => $UserLogin,
@@ -126,7 +132,7 @@ $Selenium->RunTest(
             Password => $UserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketMove;TicketID=$TicketID");
 
@@ -181,8 +187,6 @@ $Selenium->RunTest(
             "TicketID $TicketID is deleted"
         );
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         # Delete group-user relation.
         $Success = $DBObject->Do(
             SQL  => "DELETE FROM group_user WHERE user_id =  ?",
@@ -211,8 +215,6 @@ $Selenium->RunTest(
             $Success,
             "UserID $UserID is deleted",
         );
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (qw( Ticket User )) {

@@ -18,7 +18,6 @@ use parent qw(Kernel::System::DynamicField::Driver::BaseText);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::DynamicFieldValue',
     'Kernel::System::Main',
 );
 
@@ -181,29 +180,24 @@ EOF
     my $ErrorMessage3
         = $Param{LayoutObject}->{LanguageObject}->Translate( "Maximum size is %s characters.", $MaxLength );
 
+    my $ErrorMessage = "$ErrorMessage2 $ErrorMessage3";
     if ( $Param{Mandatory} ) {
-        $HTMLString .= <<"EOF";
+        $ErrorMessage = "$ErrorMessage1 $ErrorMessage";
+    }
+
+    $HTMLString .= <<"EOF";
 <div id="$DivID" class="TooltipErrorMessage">
     <p>
-        $ErrorMessage1 $ErrorMessage2 $ErrorMessage3
+        $ErrorMessage
     </p>
 </div>
 EOF
-    }
-    else {
-        $HTMLString .= <<"EOF";
-<div id="$DivID" class="TooltipErrorMessage">
-    <p>
-        $ErrorMessage2 $ErrorMessage3
-    </p>
-</div>
-EOF
-    }
 
     if ( $Param{ServerError} ) {
+        if ( $Param{ErrorMessage} ) {
+            $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate( $Param{ErrorMessage} );
+        }
 
-        my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
-        $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
         my $DivID = $FieldName . 'ServerError';
 
         # for server side validation

@@ -22,17 +22,18 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::CustomerUser',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::Email',
     'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::PostMaster::LoopProtection',
     'Kernel::System::State',
+    'Kernel::System::SystemAddress',
     'Kernel::System::TemplateGenerator',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::DateTime',
-    'Kernel::System::MailQueue',
+    'Kernel::System::Valid',
 );
 
 =head1 NAME
@@ -139,7 +140,7 @@ Send article via email and create article with attachments.
         Body        => 'the message text',                                     # required
         InReplyTo   => '<asdasdasd.12@example.com>',                           # not required but useful
         References  => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # not required but useful
-        Charset     => 'iso-8859-15'
+        Charset     => 'iso-8859-15',
         MimeType    => 'text/plain',
         Loop        => 0, # 1|0 used for bulk emails
         Attachment => [
@@ -183,7 +184,7 @@ Send article via email and create article with attachments.
         Body        => 'the message text',                                     # required
         InReplyTo   => '<asdasdasd.12@example.com>',                           # not required but useful
         References  => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # not required but useful
-        Charset     => 'iso-8859-15'
+        Charset     => 'iso-8859-15',
         MimeType    => 'text/plain',
         Loop        => 0, # 1|0 used for bulk emails
         Attachment => [
@@ -599,6 +600,27 @@ sub SendAutoResponse {
             next ADDRESS;
         }
 
+        # Don't send auto response if the sender was a system address (don't send to system address).
+        my $SystemAddressID = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressLookup(
+            SystemAddress => $Email,
+        );
+        if ($SystemAddressID) {
+            my %SystemAddress = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressGet(
+                ID => $SystemAddressID,
+            );
+
+            my @ValidIDs = $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
+            my $ValidID  = shift @ValidIDs;
+
+            if ( %SystemAddress && $SystemAddress{ValidID} == $ValidID ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'info',
+                    Message  => "Sent no auto response to '$Email' because it is a system address."
+                );
+                next ADDRESS;
+            }
+        }
+
         push @AutoReplyAddresses, $Address;
     }
 
@@ -810,6 +832,21 @@ sub ArticleCreateTransmissionError {
         Bind => \@Bind,
     );
 
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $TicketID      = $ArticleObject->TicketIDLookup(
+        ArticleID => $Param{ArticleID},
+    );
+
+    # event
+    $Self->EventHandler(
+        Event => 'ArticleCreateTransmissionError',
+        Data  => {
+            ArticleID => $Param{ArticleID},
+            TicketID  => $TicketID,
+        },
+        UserID => $Param{UserID} || 1,
+    );
+
     return 1;
 }
 
@@ -927,6 +964,21 @@ sub ArticleUpdateTransmissionError {
     return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL  => $SQL,
         Bind => \@Bind,
+    );
+
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $TicketID      = $ArticleObject->TicketIDLookup(
+        ArticleID => $Param{ArticleID},
+    );
+
+    # event
+    $Self->EventHandler(
+        Event => 'ArticleUpdateTransmissionError',
+        Data  => {
+            ArticleID => $Param{ArticleID},
+            TicketID  => $TicketID,
+        },
+        UserID => $Param{UserID} || 1,
     );
 
     return 1;

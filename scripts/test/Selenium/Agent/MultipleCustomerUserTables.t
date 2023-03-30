@@ -20,32 +20,35 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                 = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
         my $TicketObject           = $Kernel::OM->Get('Kernel::System::Ticket');
         my $QueueObject            = $Kernel::OM->Get('Kernel::System::Queue');
         my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
         my $DBObject               = $Kernel::OM->Get('Kernel::System::DB');
         my $XMLObject              = $Kernel::OM->Get('Kernel::System::XML');
+        my $CustomerCompanyObject  = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $UserObject             = $Kernel::OM->Get('Kernel::System::User');
+        my $ArticleObject          = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
-        my $RandomID              = $Helper->GetRandomID();
+        my $RandomID              = $HelperObject->GetRandomID();
         my $CustomerUserTableName = "ut_$RandomID";
         my $CustomerCompanyName   = "Co-$RandomID";
         my $EmailAddress          = $RandomID . '@example.com';
         my $Success;
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -92,7 +95,7 @@ $Selenium->RunTest(
         );
 
         # Create test customer company.
-        my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID          => $CustomerCompanyName,
             CustomerCompanyName => $CustomerCompanyName,
             ValidID             => 1,
@@ -316,8 +319,7 @@ $Selenium->RunTest(
             },
         );
 
-        my $ArticleBackendObject
-            = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel( ChannelName => 'Phone' );
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Phone' );
 
         for my $Test (@Tests) {
 

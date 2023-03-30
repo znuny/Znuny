@@ -19,16 +19,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-
-        # get config object
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # enable tool bar AgentTicketQueue
         my %AgentTicketQueue = (
             AccessKey => 'q',
             Action    => 'AgentTicketQueue',
+            Block     => 'ToolBarOverviews',
             CssClass  => 'QueueView',
             Icon      => 'fa fa-folder',
             Link      => 'Action=AgentTicketQueue',
@@ -37,21 +36,27 @@ $Selenium->RunTest(
             Priority  => '1010010',
         );
 
-        $Helper->ConfigSettingChange(
-            Key   => 'Frontend::ToolBarModule###1-Ticket::AgentTicketQueue',
+        $HelperObject->ConfigSettingChange(
+            Key   => 'Frontend::ToolBarModule###110-Ticket::AgentTicketQueue',
             Value => \%AgentTicketQueue,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###1-Ticket::AgentTicketQueue',
+            Key   => 'Frontend::ToolBarModule###110-Ticket::AgentTicketQueue',
             Value => \%AgentTicketQueue
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
+
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
 
         $Selenium->Login(
             Type     => 'Agent',

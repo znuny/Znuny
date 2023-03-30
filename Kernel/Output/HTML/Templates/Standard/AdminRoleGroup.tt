@@ -8,27 +8,9 @@
 # --
 
 [% RenderBlockStart("Overview") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Manage Role-Group Relations") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Manage Role-Group Relations'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% IF Data.Type %]
-            [% USE EditTitle = String(Data.BreadcrumbTitle) %]
-            [% BreadcrumbPath.push({ Name => EditTitle.append( " '", Data.Name, "'" ) }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
 [% RenderBlockStart("OverviewAction") %]
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
 
         <div class="WidgetSimple">
             <div class="Header">
@@ -37,10 +19,10 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminRole;Subaction=Add" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add Role") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminRole;Subaction=Add" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Add Role") | html %]</span></a>
                     </li>
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminGroup;Subaction=Add" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add Group") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminGroup;Subaction=Add" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Add Group") | html %]</span></a>
                     </li>
                 </ul>
             </div>
@@ -62,13 +44,53 @@
                 <input type="text" id="FilterGroups" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterGroups" value="" title="[% Translate("Filter for groups") | html %]" />
             </div>
         </div>
+       <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminRole' class='CallForAction btn-main btn-primary-ghost btn-width-md'>
+                            <span>
+                                [% Translate('Roles') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminRoleUser' class='CallForAction btn-main btn-primary-ghost btn-width-md'>
+                            <span>
+                                [% Translate('Agents ↔ Roles') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="ContentColumn">
+
+        <h1 class="InvisibleText">[% Translate("Manage Role-Group Relations") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Manage Role-Group Relations'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% IF Data.Type %]
+                [% USE EditTitle = String(Data.BreadcrumbTitle) %]
+                [% BreadcrumbPath.push({ Name => EditTitle.append( " '", Data.Name, "'" ) }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Overview") | html %]</h2>
             </div>
-            <div class="Content LayoutGrid ColumnsWithSpacing">
+            <div class="Content LayoutGrid ColumnsWithSpacing modal-col-wrapper modal-col-container">
                 <div class="Size1of2">
                     <ul class="Tablelike" id="Roles">
                         <li class="Header">[% Translate("Roles") | html %]</li>
@@ -93,16 +115,12 @@
 [% RenderBlockEnd("Listn1") %]
                     </ul>
                 </div>
-                <div class="Clear"></div>
             </div>
         </div>
     </div>
-    <div class="Clear"></div>
 [% RenderBlockEnd("OverviewAction") %]
-
 [% RenderBlockStart("Change") %]
-    <div class="SidebarColumn">
-
+    <div class="SidebarColumn ActionsSideBarComp">
 [% RenderBlockStart("ActionList") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -112,7 +130,7 @@
                 <ul class="ActionList">
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
                 </ul>
@@ -142,6 +160,24 @@
     </div>
 
     <div class="ContentColumn">
+
+        <h1 class="InvisibleText">[% Translate("Manage Role-Group Relations") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Manage Role-Group Relations'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% IF Data.Type %]
+                [% USE EditTitle = String(Data.BreadcrumbTitle) %]
+                [% BreadcrumbPath.push({ Name => EditTitle.append( " '", Data.Name, "'" ) }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>
@@ -149,106 +185,128 @@
                     <a href="[% Env("Baselink") %]Action=[% Data.ActionHome | uri %];Subaction=Change;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a>
                 </h2>
             </div>
-            <div class="Content ">
+            <div class="Content">
                 <form action="[% Env("CGIHandle") %]" method="post" name="matrix">
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                     <input type="hidden" name="Subaction" value="Change[% Data.Type | html %]"/>
                     <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
                     <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
-                    <table class="DataTable VariableWidth" id="UserGroups">
-                        <thead>
-                            <tr>
-                                <th>[% Translate(Data.NeType) | html %]</th>
+                    <div class="DataTable scroll-bar-styled bar-no-left-border">
+                        <table class="DataTable VariableWidth" id="UserGroups">
+                            <thead>
+                                <tr>
+                                    <th>[% Translate(Data.NeType) | html %]</th>
 [% RenderBlockStart("ChangeHeader") %]
-                                <th class="Center [% Data.Mark | html %]">
-                                    <input type="checkbox" name="[% Data.Type | html %]" id="SelectAll[% Data.Type | html %]" title="[% Translate("Toggle %s permission for all",  Translate(Data.Type)) | html %]" value="" />
-                                    [% Translate(Data.Type) | html %]
-                                </th>
+                                    <th class="[% Data.Mark | html %]">
+                                        <input type="checkbox" name="[% Data.Type | html %]" id="SelectAll[% Data.Type | html %]" title="[% Translate("Toggle %s permission for all",  Translate(Data.Type)) | html %]" value="" />
+                                        [% Translate(Data.Type) | html %]
+                                    </th>
 [% RenderBlockEnd("ChangeHeader") %]
-                            </tr>
-                        </thead>
-                        <tbody>
+                                </tr>
+                            </thead>
+                            <tbody>
 [% RenderBlockStart("NoDataFoundMsgList") %]
-                            <tr>
-                                <td colspan="[% Data.ColSpan | html %]">
-                                    [% Translate("No data found.") | html %]
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td colspan="[% Data.ColSpan | html %]">
+                                        [% Translate("No data found.") | html %]
+                                    </td>
+                                </tr>
 [% RenderBlockEnd("NoDataFoundMsgList") %]
 [% RenderBlockStart("ChangeRow") %]
-                            <tr>
-                                <td><a href="[% Env("Baselink") %]Action=Admin[% Data.NeType | uri %];Subaction=Change;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
+                                <tr>
+                                    <td><a href="[% Env("Baselink") %]Action=Admin[% Data.NeType | uri %];Subaction=Change;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
 [% RenderBlockStart("ChangeRowItem") %]
-                                <td class="[% Data.Mark | html %]">
-                                    <input type="checkbox" name="[% Data.Type | html %]" title="[% Translate("Toggle %s permission for %s",  Translate(Data.Type), Data.Name) | html %]" value="[% Data.ID | html %]" [% Data.Selected %]/>
-                                </td>
+                                    <td class="[% Data.Mark | html %]">
+                                        <input type="checkbox" name="[% Data.Type | html %]" title="[% Translate("Toggle %s permission for %s",  Translate(Data.Type), Data.Name) | html %]" value="[% Data.ID | html %]" [% Data.Selected %]/>
+                                    </td>
 [% RenderBlockEnd("ChangeRowItem") %]
-                            </tr>
+                                </tr>
 [% RenderBlockEnd("ChangeRow") %]
-                            <tr class="FilterMessage Hidden">
-                                <td colspan="8">[% Translate("No matches found.") | html %]</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="Field SpacingTop">
-                        <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                        [% Translate("or") | html %]
-                        <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                        [% Translate("or") | html %]
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                                <tr class="FilterMessage Hidden">
+                                    <td colspan="8">[% Translate("No matches found.") | html %]</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="Clear"></div>
+
+                    <div class="field-wrapper form-button-actions">
+                        <div class="Field buttons-field">
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+
+
+                            <button class="btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]">
+                                <span>[% Translate("Save and finish") | html %]</span>
+                            </button>
+
+
+                            <button class="btn-primary btn-main btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]">
+                                <span>[% Translate("Save") | html %]</span>
+                            </button>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
-        <div class="WidgetSimple SpacingTop">
+
+        <div class="WidgetSimple Reference">
             <div class="Header">
                 <h2>[% Translate("Reference") | html %]</h2>
             </div>
             <div class="Content">
-
                 <dl>
-                    <dt>[% Translate("ro") | html %]</dt>
-                    <dd>
-                        [% Translate("Read only access to the ticket in this group/queue.") | html %]
-                    </dd>
+                    <div>
+                        <dt>[% Translate("ro") | html %]</dt>
+                        <dd>
+                            [% Translate("Read only access to the ticket in this group/queue.") | html %]
+                        </dd>
+                    </div>
 
-                    <dt>[% Translate("move_into") | html %]</dt>
-                    <dd>
-                        [% Translate("Permissions to move tickets into this group/queue.") | html %]
-                    </dd>
+                    <div>
+                        <dt>[% Translate("move_into") | html %]</dt>
+                        <dd>
+                            [% Translate("Permissions to move tickets into this group/queue.") | html %]
+                        </dd>
+                    </div>
 
-                    <dt>[% Translate("create") | html %]</dt>
-                    <dd>
-                        [% Translate("Permissions to create tickets in this group/queue.") | html %]
-                    </dd>
+                    <div>
+                        <dt>[% Translate("create") | html %]</dt>
+                        <dd>
+                            [% Translate("Permissions to create tickets in this group/queue.") | html %]
+                        </dd>
+                    </div>
 
-                    <dt>[% Translate("note") | html %]</dt>
-                    <dd>
-                        [% Translate("Permissions to add notes to tickets in this group/queue.") | html %]
-                    </dd>
+                    <div>
+                        <dt>[% Translate("note") | html %]</dt>
+                        <dd>
+                            [% Translate("Permissions to add notes to tickets in this group/queue.") | html %]
+                        </dd>
+                    </div>
 
-                    <dt>[% Translate("owner") | html %]</dt>
-                    <dd>
-                        [% Translate("Permissions to change the owner of tickets in this group/queue.") | html %]
-                    </dd>
+                    <div>
+                        <dt>[% Translate("owner") | html %]</dt>
+                        <dd>
+                            [% Translate("Permissions to change the owner of tickets in this group/queue.") | html %]
+                        </dd>
+                    </div>
 
-                    <dt>[% Translate("priority") | html %]</dt>
-                    <dd>
-                        [% Translate("Permissions to change the ticket priority in this group/queue.") | html %]
-                    </dd>
+                    <div>
+                        <dt>[% Translate("priority") | html %]</dt>
+                        <dd>
+                            [% Translate("Permissions to change the ticket priority in this group/queue.") | html %]
+                        </dd>
+                    </div>
 
-                    <dt>[% Translate("rw") | html %]</dt>
-                    <dd>
-                        [% Translate("Full read and write access to the tickets in this group/queue.") | html %]
-                    </dd>
+                    <div>
+                        <dt>[% Translate("rw") | html %]</dt>
+                        <dd>
+                            [% Translate("Full read and write access to the tickets in this group/queue.") | html %]
+                        </dd>
+                    </div>
                 </dl>
-
             </div>
         </div>
-
     </div>
-    <div class="Clear"></div>
 [% RenderBlockEnd("Change") %]
 </div>
 [% RenderBlockEnd("Overview") %]

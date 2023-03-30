@@ -21,11 +21,9 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::CommunicationChannel',
     'Kernel::System::DB',
-    'Kernel::System::DynamicFieldValue',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Ticket::Article::Backend::Invalid',
-    'Kernel::System::Ticket',
     'Kernel::System::Valid',
 );
 
@@ -748,7 +746,7 @@ Set the article flags to indicate if the article search index needs to be rebuil
 
     my $Success = $ArticleObject->ArticleSearchIndexRebuildFlagSet(
         ArticleIDs => [ 123, 234, 345 ]   # (Either 'ArticleIDs' or 'All' must be provided) The ArticleIDs to be updated.
-        All        => 1                   # (Either 'ArticleIDs' or 'All' must be provided) Set all articles to $Value. Default: 0,
+        All        => 1,                  # (Either 'ArticleIDs' or 'All' must be provided) Set all articles to $Value. Default: 0,
         Value      => 1, # 0/1 default 0
     );
 
@@ -961,8 +959,6 @@ Checks the given search parameters for used article backend fields.
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
             ...
         },
     );
@@ -995,8 +991,6 @@ Generates SQL string extensions, including the needed table joins for the articl
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
             ...
         },
     );
@@ -1030,8 +1024,6 @@ SQL queries to the database.
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
             ...
         },
     );
@@ -1259,6 +1251,424 @@ sub _ArticleCacheClear {
     );
 
     return 1;
+}
+
+sub ArticleCreate {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleBackendObject = $Self->BackendForChannel( ChannelName => $Param{ChannelName} );
+    return if !$ArticleBackendObject;
+
+    my $ArticleID = $ArticleBackendObject->ArticleCreate(%Param);
+    return $ArticleID;
+}
+
+sub ArticleGet {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleBackendObject = $Self->BackendForArticle(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID}
+    );
+    return if !$ArticleBackendObject;
+
+    my %Article = $ArticleBackendObject->ArticleGet(%Param);
+    return %Article;
+}
+
+sub ArticleUpdate {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleBackendObject = $Self->BackendForArticle(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID}
+    );
+    return if !$ArticleBackendObject;
+
+    my $ArticleUpdated = $ArticleBackendObject->ArticleUpdate(%Param);
+    return $ArticleUpdated;
+}
+
+sub ArticleSend {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleBackendObject = $Self->BackendForChannel( ChannelName => 'Email' );
+    return if !$ArticleBackendObject;
+
+    my $ArticleID = $ArticleBackendObject->ArticleSend(%Param);
+    return $ArticleID;
+}
+
+sub ArticleBounce {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleBackendObject = $Self->BackendForArticle(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID}
+    );
+    return if !$ArticleBackendObject;
+
+    my $ArticleBounced = $ArticleBackendObject->ArticleBounce(%Param);
+    return $ArticleBounced;
+}
+
+sub SendAutoResponse {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleBackendObject = $Self->BackendForChannel( ChannelName => 'Email' );
+    return if !$ArticleBackendObject;
+
+    my $ArticleID = $ArticleBackendObject->SendAutoResponse(%Param);
+    return $ArticleID;
+}
+
+=head2 ArticleIndex()
+
+returns an array with article IDs
+
+    my @ArticleIDs = $ArticleObject->ArticleIndex(
+        TicketID => 123,
+    );
+
+    my @ArticleIDs = $ArticleObject->ArticleIndex(
+        SenderType => 'customer',                   # optional, to limit to a certain sender type
+        TicketID   => 123,
+    );
+
+=cut
+
+sub ArticleIndex {
+    my ( $Self, %Param ) = @_;
+
+    my @Articles = $Self->ArticleList(
+        TicketID   => $Param{TicketID},
+        SenderType => $Param{SenderType},
+    );
+
+    my @ArticleIDs;
+    return @ArticleIDs if !@Articles;
+
+    @ArticleIDs = map { $_->{ArticleID} } @Articles;
+    return @ArticleIDs;
+}
+
+=head2 ArticleAttachmentIndex()
+
+returns an array with article IDs
+
+    my %AttachmentIndex = $ArticleObject->ArticleAttachmentIndex(
+        TicketID         => 123,
+        ArticleID        => 123,
+        ExcludePlainText => 1,       # (optional) Exclude plain text attachment
+        ExcludeHTMLBody  => 1,       # (optional) Exclude HTML body attachment
+        ExcludeInline    => 1,       # (optional) Exclude inline attachments
+        OnlyHTMLBody     => 1,       # (optional) Return only HTML body attachment, return nothing if not found
+    );
+
+Returns:
+
+    my %AttachmentIndex = (
+        '1' => {
+            'FilesizeRaw'        => '804764',
+            'Disposition'        => 'attachment',
+            'ContentType'        => 'image/jpeg',
+            'ContentAlternative' => '',
+            'Filename'           => 'blub.jpg',
+            'ContentID'          => ''
+        },
+        # ...
+    );
+
+=cut
+
+sub ArticleAttachmentIndex {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleBackendObject = $Self->BackendForArticle(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID}
+    );
+    return if !$ArticleBackendObject;
+
+    my %AttachmentIndex = $ArticleBackendObject->ArticleAttachmentIndex(
+        %Param,
+    );
+
+    return %AttachmentIndex;
+}
+
+=head2 ArticleAttachment()
+
+Get article attachment from storage. This is a delegate method from active backend.
+
+    my %Attachment = $ArticleObject->ArticleAttachment(
+        TicketID  => 123,
+        ArticleID => 123,
+        FileID    => 1,   # as returned by ArticleAttachmentIndex
+    );
+
+Returns:
+
+    %Attachment = (
+        Content            => 'xxxx',     # actual attachment contents
+        ContentAlternative => '',
+        ContentID          => '',
+        ContentType        => 'application/pdf',
+        Filename           => 'StdAttachment-Test1.pdf',
+        FilesizeRaw        => 4722,
+        Disposition        => 'attachment',
+    );
+
+=cut
+
+sub ArticleAttachment {    ## no critic;
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleBackendObject = $Self->BackendForArticle(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID}
+    );
+    return if !$ArticleBackendObject;
+
+    my %Attachment = $ArticleBackendObject->ArticleAttachment(
+        %Param,
+    );
+
+    return %Attachment;
+}
+
+=head2 ArticleWriteAttachment()
+
+Write an article attachment to storage.
+
+    my $Success = $ArticleBackendObject->ArticleWriteAttachment(
+        TicketID           => 503,
+        Content            => $ContentAsString,
+        ContentType        => 'text/html; charset="iso-8859-15"',
+        Filename           => 'lala.html',
+        ContentID          => 'cid-1234',   # optional
+        ContentAlternative => 0,            # optional, alternative content to shown as body
+        Disposition        => 'attachment', # or 'inline'
+        ArticleID          => 123,
+        UserID             => 123,
+    );
+
+=cut
+
+sub ArticleWriteAttachment {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleBackendObject = $Self->BackendForArticle(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID}
+    );
+    return if !$ArticleBackendObject;
+
+    my $Success = $ArticleBackendObject->ArticleWriteAttachment(%Param);
+    return $Success;
+}
+
+=head2 ArticleCount()
+
+Returns count of article.
+
+    my $Count = $ArticleObject->ArticleCount(
+        TicketID  => 123,
+    );
+
+Returns:
+
+    my $Count = 1;
+
+=cut
+
+sub ArticleCount {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(TicketID)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my $Count = 0;
+    my $SQL   = '
+        SELECT COUNT(*)
+        FROM article
+        WHERE ticket_id = ?';
+
+    return if !$DBObject->Prepare(
+        SQL  => $SQL,
+        Bind => [ \$Param{TicketID} ],
+    );
+
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        $Count = $Row[0];
+    }
+
+    return $Count;
+}
+
+=head2 ArticleAttachmentCount()
+
+Returns count of article attachment.
+
+    my $Count = $ArticleObject->ArticleAttachmentCount(
+        TicketID  => 123,
+        ArticleID => 123,
+    );
+
+Returns:
+
+    my $Count = 1;
+
+=cut
+
+sub ArticleAttachmentCount {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    NEEDED:
+    for my $Needed (qw(TicketID ArticleID)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+    my $Count = 0;
+
+    my $ArticleBackendObject = $Self->BackendForArticle(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID}
+    );
+
+    if (
+        $ArticleBackendObject->{ArticleStorageModule} eq
+        'Kernel::System::Ticket::Article::Backend::MIMEBase::ArticleStorageDB'
+        )
+    {
+
+        my $SQL = '
+            SELECT COUNT(*)
+            FROM article_data_mime_attachment
+            WHERE article_id = ?';
+
+        return if !$DBObject->Prepare(
+            SQL  => $SQL,
+            Bind => [ \$Param{ArticleID} ],
+        );
+
+        while ( my @Row = $DBObject->FetchrowArray() ) {
+            $Count = $Row[0];
+        }
+
+    }
+    elsif (
+        $ArticleBackendObject->{ArticleStorageModule} eq
+        'Kernel::System::Ticket::Article::Backend::MIMEBase::ArticleStorageFS'
+        )
+    {
+
+        $Self->{ArticleDataDir} = $ConfigObject->Get('Ticket::Article::Backend::MIMEBase::ArticleDataDir');
+
+        my $ContentPath = $Self->ArticleContentPathGet(
+            ArticleID => $Param{ArticleID},
+        );
+
+        my @Filenames = $MainObject->DirectoryRead(
+            Directory => "$Self->{ArticleDataDir}/$ContentPath/$Param{ArticleID}",
+            Filter    => "*",
+            Silent    => 1,
+        );
+
+        FILENAME:
+        for my $Filename ( sort @Filenames ) {
+
+            # do not use control file
+            next FILENAME if $Filename =~ /\.content_alternative$/;
+            next FILENAME if $Filename =~ /\.content_id$/;
+            next FILENAME if $Filename =~ /\.content_type$/;
+            next FILENAME if $Filename =~ /\.disposition$/;
+            next FILENAME if $Filename =~ /\/plain.txt$/;
+            $Count++;
+        }
+    }
+
+    return $Count;
+}
+
+=head2 ArticleContentPathGet()
+
+Get the stored content path of an article.
+
+    my $Path = $BackendObject->ArticleContentPathGet(
+        ArticleID => 123,
+    );
+
+=cut
+
+sub ArticleContentPathGet {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
+
+    NEEDED:
+    for my $Needed (qw(ArticleID)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my $CacheKey = 'ArticleContentPathGet::' . $Param{ArticleID};
+
+    my $Cache = $CacheObject->Get(
+        Type => $Self->{CacheType},
+        Key  => $CacheKey,
+    );
+    return $Cache if $Cache;
+
+    return if !$DBObject->Prepare(
+        SQL  => 'SELECT content_path FROM article_data_mime WHERE article_id = ?',
+        Bind => [ \$Param{ArticleID} ],
+    );
+
+    my $Result;
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        $Result = $Row[0];
+    }
+
+    $CacheObject->Set(
+        Type  => $Self->{CacheType},
+        TTL   => $Self->{CacheTTL},
+        Key   => $CacheKey,
+        Value => $Result,
+    );
+
+    return $Result;
 }
 
 1;

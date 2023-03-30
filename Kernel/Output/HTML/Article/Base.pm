@@ -16,9 +16,6 @@ use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::Output::HTML::Layout',
-    'Kernel::System::DynamicField',
-    'Kernel::System::DynamicField::Backend',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Queue',
@@ -181,7 +178,7 @@ sub ArticleActions {
     my $ACL = $TicketObject->TicketAcl(
         Data          => \%PossibleActions,
         Action        => 'AgentTicketZoom',
-        TicketID      => $Param{Ticket}->{TicketID},
+        TicketID      => $Param{TicketID},
         ReturnType    => 'Action',
         ReturnSubType => '-',
         UserID        => $Param{UserID},

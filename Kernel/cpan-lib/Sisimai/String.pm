@@ -3,22 +3,20 @@ use feature ':5.10';
 use strict;
 use warnings;
 use Encode;
-use Encode::Guess;
 use Digest::SHA;
 
-sub EOM {
-    # End of email message as a sentinel for parsing bounce messages
-    # @private
-    # @return   [String] Fixed length string like a constant
-    return '__END_OF_EMAIL_MESSAGE__';
-}
+my $EncodingsC = [qw/big5-eten gb2312/];
+my $EncodingsE = [qw/iso-8859-1/];
+my $EncodingsJ = [qw/7bit-jis iso-2022-jp euc-jp shiftjis/];
+use Encode::Guess; Encode::Guess->add_suspects(@$EncodingsC, @$EncodingsE, @$EncodingsJ);
+sub encodenames { return [@$EncodingsC, @$EncodingsE, @$EncodingsJ] };
 
 sub token {
     # Create the message token from an addresser and a recipient
     # @param    [String] addr1  A sender's email address
     # @param    [String] addr2  A recipient's email address
     # @param    [Integer] epoch Machine time of the email bounce
-    # @return   [String]        Message token(MD5 hex digest) or empty string 
+    # @return   [String]        Message token(MD5 hex digest) or empty string
     #                           if the any argument is missing
     # @see       http://en.wikipedia.org/wiki/ASCII
     # @see       https://metacpan.org/pod/Digest::MD5
@@ -28,8 +26,7 @@ sub token {
     my $epoch = shift // return '';
 
     # Format: STX(0x02) Sender-Address RS(0x1e) Recipient-Address ETX(0x03)
-    return Digest::SHA::sha1_hex(
-        sprintf("\x02%s\x1e%s\x1e%d\x03", lc $addr1, lc $addr2, $epoch));
+    return Digest::SHA::sha1_hex(sprintf("\x02%s\x1e%s\x1e%d\x03", lc $addr1, lc $addr2, $epoch));
 }
 
 sub is_8bit {
@@ -40,7 +37,6 @@ sub is_8bit {
     my $class = shift;
     my $argv1 = shift // return undef;
 
-    return undef unless ref $argv1;
     return undef unless ref $argv1 eq 'SCALAR';
     return 1 unless $$argv1 =~ /\A[\x00-\x7f]+\z/;
     return 0;
@@ -58,8 +54,8 @@ sub sweep {
     chomp $argv1;
     $argv1 =~ y/ //s;
     $argv1 =~ y/\t//d;
-    $argv1 =~ s/\A //g;
-    $argv1 =~ s/ \z//g;
+    $argv1 =~ s/\A //g if index($argv1, ' ') == 0;
+    $argv1 =~ s/ \z//g if substr($argv1, -1, 1) eq ' ';
     $argv1 =~ s/ [-]{2,}[^ \t].+\z//;
     return $argv1;
 }
@@ -72,12 +68,10 @@ sub to_plain {
     my $class = shift;
     my $argv1 = shift // return \'';
     my $loose = shift // 0;
-
-    return \'' unless ref $argv1;
     return \'' unless ref $argv1 eq 'SCALAR';
 
     my $plain = $$argv1;
-    my $match = {
+    state $match = {
         'html' => qr|<html[ >].+?</html>|sim,
         'body' => qr|<head>.+</head>.*<body[ >].+</body>|sim,
     };
@@ -123,7 +117,7 @@ sub to_utf8 {
     my $hasencoded = undef;
     my $hasguessed = Encode::Guess->guess($tobeutf8ed);
     my $encodingto = ref $hasguessed ? lc($hasguessed->name) : '';
-    my $dontencode = qr/\A(?>utf[-]?8|(?:us[-])?ascii)\z/;
+    state $dontencode = qr/\A(?>utf[-]?8|(?:us[-])?ascii)\z/;
 
     if( $encodefrom ) {
         # The 2nd argument is a encoding name of the 1st argument
@@ -133,7 +127,7 @@ sub to_utf8 {
             last if $encodefrom =~ $dontencode;
             last if $encodingto =~ $dontencode;
 
-            eval { 
+            eval {
                 # Try to convert the string to UTF-8
                 Encode::from_to($tobeutf8ed, $encodefrom, 'utf8');
                 $hasencoded = 1;
@@ -141,22 +135,14 @@ sub to_utf8 {
             last;
         }
     }
+    return \$tobeutf8ed if $hasencoded;
+    return \$tobeutf8ed unless $encodingto;
+    return \$tobeutf8ed if $encodingto =~ $dontencode;
 
-    unless( $hasencoded ) {
-        # The 2nd argument was not given or failed to convert from $encodefrom
-        # to UTF-8
-        if( $encodingto ) {
-            # Guessed encoding name is available, try to encode using it.
-            unless( $encodingto =~ $dontencode ) {
-                # Encode a given string when the encoding of the string is neigther
-                # utf8 nor ascii.
-                eval { 
-                    Encode::from_to($tobeutf8ed, $encodingto, 'utf8');
-                    $hasencoded = 1;
-                };
-            }
-        }
-    }
+    # a. The 2nd argument was not given or failed to convert from $encodefrom to UTF-8
+    # b. Guessed encoding name is available, try to encode using it.
+    # c. Encode a given string when the encoding of the string is neigther utf8 nor ascii.
+    eval { Encode::from_to($tobeutf8ed, $encodingto, 'utf8') };
     return \$tobeutf8ed;
 }
 
@@ -232,7 +218,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2016,2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2016,2018,2019,2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

@@ -32,8 +32,8 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-$Helper->FixedTimeSet();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+$HelperObject->FixedTimeSet();
 
 my $AgentAddress    = 'agent@example.com';
 my $CustomerAddress = 'external@example.com';

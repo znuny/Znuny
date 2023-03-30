@@ -25,7 +25,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # ------------------------------------------------------------ #
 # make preparations
@@ -47,7 +47,7 @@ for my $Counter ( 1 .. 3 ) {
     my $UserID = $UserObject->UserAdd(
         UserFirstname => 'LinkObject' . $Counter,
         UserLastname  => 'UnitTest',
-        UserLogin     => 'LinkObject-' . $Counter . $Helper->GetRandomID(),
+        UserLogin     => 'LinkObject-' . $Counter . $HelperObject->GetRandomID(),
         UserEmail     => 'UnitTest-LinkObject-' . $Counter . '@localhost',
         ValidID       => 1,
         ChangeUserID  => 1,
@@ -79,7 +79,7 @@ $GroupObject->PermissionGroupUserAdd(
 # create needed random type names
 my @TypeNames;
 for my $Counter ( 1 .. 100 ) {
-    push @TypeNames, 'Type' . $Helper->GetRandomID();
+    push @TypeNames, 'Type' . $HelperObject->GetRandomID();
 }
 
 # read ticket backend file
@@ -100,7 +100,7 @@ for my $Counter ( 1 .. 100 ) {
     my $Content = ${$TicketBackendContent};
 
     # generate name
-    my $Name = 'UnitTestObject' . $Helper->GetRandomNumber();
+    my $Name = 'UnitTestObject' . $HelperObject->GetRandomNumber();
 
     # replace Dummy with the UnitTestName
     $Content =~ s{ Dummy }{$Name}xmsg;

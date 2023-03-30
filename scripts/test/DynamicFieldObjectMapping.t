@@ -23,12 +23,12 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # create some object IDs
 my %ObjectIDByObjectName;
 for my $Count ( 1 .. 5 ) {
-    my $ObjectName = $Helper->GetRandomID();
+    my $ObjectName = $HelperObject->GetRandomID();
     my $ObjectID   = $DynamicFieldObject->ObjectMappingCreate(
         ObjectName => $ObjectName,
         ObjectType => 'CustomerUser',
@@ -55,7 +55,7 @@ $Self->IsDeeply(
 );
 
 # add a mapping for a specific object name
-my $ObjectName = $Helper->GetRandomID();
+my $ObjectName = $HelperObject->GetRandomID();
 my $ObjectID   = $DynamicFieldObject->ObjectMappingCreate(
     ObjectName => $ObjectName,
     ObjectType => 'CustomerUser',
@@ -68,7 +68,7 @@ $Self->True(
 
 # try to fetch an object ID for a non-existing object name
 $RetrievedObjectIDByObjectName = $DynamicFieldObject->ObjectMappingGet(
-    ObjectName => $Helper->GetRandomID(),
+    ObjectName => $HelperObject->GetRandomID(),
     ObjectType => 'CustomerUser',
 );
 
@@ -92,7 +92,7 @@ $Self->IsDeeply(
 
 # change object name
 # use object name/ID from above
-my $NewObjectName = $Helper->GetRandomID();
+my $NewObjectName = $HelperObject->GetRandomID();
 my $Success       = $DynamicFieldObject->ObjectMappingNameChange(
     OldObjectName => $ObjectName,
     NewObjectName => $NewObjectName,

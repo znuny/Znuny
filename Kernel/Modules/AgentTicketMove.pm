@@ -1607,28 +1607,12 @@ sub AgentMove {
 
         # show time accounting box
         if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {
-            if ( $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime') ) {
-                $LayoutObject->Block(
-                    Name => 'TimeUnitsLabelMandatory',
-                    Data => \%Param,
-                );
-            }
-            else {
-                $LayoutObject->Block(
-                    Name => 'TimeUnitsLabel',
-                    Data => \%Param,
-                );
-            }
+            $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
+                %Param,
+            );
             $LayoutObject->Block(
                 Name => 'TimeUnits',
-                Data => {
-                    %Param,
-                    TimeUnitsRequired => (
-                        $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime')
-                        ? 'Validate_Required'
-                        : ''
-                    ),
-                }
+                Data => \%Param,
             );
         }
 
@@ -1746,10 +1730,12 @@ sub AgentMove {
 sub _GetUsers {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # get users
     my %ShownUsers;
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -1801,7 +1787,16 @@ sub _GetUsers {
         UserID        => $Self->{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return \%ShownUsers;
 }

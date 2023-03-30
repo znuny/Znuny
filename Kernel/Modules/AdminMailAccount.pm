@@ -29,13 +29,16 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $MailAccount  = $Kernel::OM->Get('Kernel::System::MailAccount');
+    my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject       = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
 
     my %GetParam = ();
     my @Params   = (
-        qw(ID Login Password Host Type TypeAdd Comment ValidID QueueID IMAPFolder Trusted DispatchingBy)
+        qw(
+            ID Login Password Host Type TypeAdd Comment ValidID QueueID IMAPFolder Trusted DispatchingBy
+            AuthenticationType OAuth2TokenConfigID
+            )
     );
     for my $Parameter (@Params) {
         $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter );
@@ -67,14 +70,14 @@ sub Run {
             return $LayoutObject->Redirect( OP => 'Action=AdminMailAccount;Locked=1' );
         }
 
-        my %Data = $MailAccount->MailAccountGet(%GetParam);
+        my %Data = $MailAccountObject->MailAccountGet(%GetParam);
         if ( !%Data ) {
 
             $PIDObject->PIDDelete( Name => 'MailAccountFetch' );
             return $LayoutObject->ErrorScreen();
         }
 
-        my $Ok = $MailAccount->MailAccountFetch(
+        my $Ok = $MailAccountObject->MailAccountFetch(
             %Data,
             Limit  => 15,
             UserID => $Self->{UserID},
@@ -96,7 +99,7 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Delete = $MailAccount->MailAccountDelete(%GetParam);
+        my $Delete = $MailAccountObject->MailAccountDelete(%GetParam);
         if ( !$Delete ) {
             return $LayoutObject->ErrorScreen();
         }
@@ -137,22 +140,45 @@ sub Run {
         my %Errors;
 
         # check needed data
-        for my $Needed (qw(Login Password Host)) {
+        for my $Needed (qw(Login Host)) {
             if ( !$GetParam{$Needed} ) {
                 $Errors{ $Needed . 'AddInvalid' } = 'ServerError';
             }
         }
-        for my $Needed (qw(TypeAdd ValidID)) {
+        for my $Needed (qw(AuthenticationType TypeAdd ValidID)) {
             if ( !$GetParam{$Needed} ) {
                 $Errors{ $Needed . 'Invalid' } = 'ServerError';
             }
         }
 
+        if (
+            $GetParam{AuthenticationType} eq 'password'
+            && ( !defined $GetParam{Password} || !length $GetParam{Password} )
+            )
+        {
+            $Errors{'PasswordAddInvalid'} = 'ServerError';
+        }
+        elsif (
+            $GetParam{AuthenticationType} eq 'oauth2_token'
+            && ( !defined $GetParam{OAuth2TokenConfigID} || !length $GetParam{OAuth2TokenConfigID} )
+            )
+        {
+            $Errors{'OAuth2TokenConfigIDInvalid'} = 'ServerError';
+        }
+
         # if no errors occurred
         if ( !%Errors ) {
 
+            # Since the password field is mandatory in database, set a fake password.
+            if ( $GetParam{AuthenticationType} eq 'oauth2_token' ) {
+                $GetParam{Password} = 'OAuth2Token';
+            }
+            elsif ( $GetParam{AuthenticationType} eq 'password' ) {
+                $GetParam{OAuth2TokenConfigID} = undef;
+            }
+
             # add mail account
-            my $ID = $MailAccount->MailAccountAdd(
+            my $ID = $MailAccountObject->MailAccountAdd(
                 %GetParam,
                 Type   => $GetParam{'TypeAdd'},
                 UserID => $Self->{UserID},
@@ -192,7 +218,7 @@ sub Run {
     # update
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'Update' ) {
-        my %Data   = $MailAccount->MailAccountGet(%GetParam);
+        my %Data   = $MailAccountObject->MailAccountGet(%GetParam);
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
         $Self->_MaskUpdateMailAccount(
@@ -218,12 +244,12 @@ sub Run {
         my %Errors;
 
         # check needed data
-        for my $Needed (qw(Login Password Host)) {
+        for my $Needed (qw(Login Host)) {
             if ( !$GetParam{$Needed} ) {
                 $Errors{ $Needed . 'EditInvalid' } = 'ServerError';
             }
         }
-        for my $Needed (qw(Type ValidID DispatchingBy QueueID)) {
+        for my $Needed (qw(AuthenticationType Type ValidID DispatchingBy QueueID)) {
             if ( !$GetParam{$Needed} ) {
                 $Errors{ $Needed . 'Invalid' } = 'ServerError';
             }
@@ -232,16 +258,39 @@ sub Run {
             $Errors{TrustedInvalid} = 'ServerError' if ( $GetParam{Trusted} != 0 );
         }
 
+        if (
+            $GetParam{AuthenticationType} eq 'password'
+            && ( !defined $GetParam{Password} || !length $GetParam{Password} )
+            )
+        {
+            $Errors{'PasswordEditInvalid'} = 'ServerError';
+        }
+        elsif (
+            $GetParam{AuthenticationType} eq 'oauth2_token'
+            && ( !defined $GetParam{OAuth2TokenConfigID} || !length $GetParam{OAuth2TokenConfigID} )
+            )
+        {
+            $Errors{'OAuth2TokenConfigIDInvalid'} = 'ServerError';
+        }
+
         # if no errors occurred
         if ( !%Errors ) {
 
-            if ( $GetParam{Password} eq 'otrs-dummy-password-placeholder' ) {
-                my %OriginalData = $MailAccount->MailAccountGet(%GetParam);
+            if ( $GetParam{Password} eq 'dummy-password-placeholder' ) {
+                my %OriginalData = $MailAccountObject->MailAccountGet(%GetParam);
                 $GetParam{Password} = $OriginalData{Password};
             }
 
+            # Since the password field is mandatory in database, set a fake password.
+            if ( $GetParam{AuthenticationType} eq 'oauth2_token' ) {
+                $GetParam{Password} = 'OAuth2Token';
+            }
+            elsif ( $GetParam{AuthenticationType} eq 'password' ) {
+                $GetParam{OAuth2TokenConfigID} = undef;
+            }
+
             # update mail account
-            my $Update = $MailAccount->MailAccountUpdate(
+            my $Update = $MailAccountObject->MailAccountUpdate(
                 %GetParam,
                 UserID => $Self->{UserID},
             );
@@ -316,10 +365,10 @@ sub Run {
 sub _Overview {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $MailAccount  = $Kernel::OM->Get('Kernel::System::MailAccount');
+    my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
 
-    my %Backend = $MailAccount->MailAccountBackendList();
+    my %Backend = $MailAccountObject->MailAccountBackendList();
 
     $LayoutObject->Block(
         Name => 'Overview',
@@ -335,12 +384,13 @@ sub _Overview {
         Data => \%Param,
     );
 
-    my %List = $MailAccount->MailAccountList( Valid => 0 );
+    my %List                = $MailAccountObject->MailAccountList( Valid => 0 );
+    my %AuthenticationTypes = $MailAccountObject->GetAuthenticationTypes();
 
     # if there are any mail accounts, they are shown
     if (%List) {
         for my $ListKey ( sort { $List{$a} cmp $List{$b} } keys %List ) {
-            my %Data = $MailAccount->MailAccountGet( ID => $ListKey );
+            my %Data = $MailAccountObject->MailAccountGet( ID => $ListKey );
             if ( !$Backend{ $Data{Type} } ) {
                 $Data{Type} .= '(not installed!)';
             }
@@ -352,7 +402,10 @@ sub _Overview {
 
             $LayoutObject->Block(
                 Name => 'OverviewResultRow',
-                Data => \%Data,
+                Data => {
+                    %Data,
+                    AuthenticationTypes => \%AuthenticationTypes,
+                },
             );
         }
     }
@@ -389,6 +442,16 @@ sub _MaskUpdateMailAccount {
         Name       => 'Type',
         SelectedID => $Param{Type} || $Param{TypeAdd} || '',
         Class      => 'Modernize Validate_Required ' . ( $Param{Errors}->{'TypeInvalid'} || '' ),
+    );
+
+    $Param{AuthenticationTypeSelection} = $Self->_BuildAuthenticationTypeSelection(
+        SelectedAuthenticationType => $Param{AuthenticationType},
+        Errors                     => $Param{Errors},
+    );
+
+    $Param{OAuth2TokenConfigSelection} = $Self->_BuildOAuth2TokenConfigSelection(
+        SelectedOAuth2TokenConfigID => $Param{OAuth2TokenConfigID},
+        Errors                      => $Param{Errors},
     );
 
     $Param{TrustedOption} = $LayoutObject->BuildSelection(
@@ -460,6 +523,16 @@ sub _MaskAddMailAccount {
         Class      => 'Modernize Validate_Required ' . ( $Param{Errors}->{'TypeAddInvalid'} || '' ),
     );
 
+    $Param{AuthenticationTypeSelection} = $Self->_BuildAuthenticationTypeSelection(
+        SelectedAuthenticationType => $Param{AuthenticationType},
+        Errors                     => $Param{Errors},
+    );
+
+    $Param{OAuth2TokenConfigSelection} = $Self->_BuildOAuth2TokenConfigSelection(
+        SelectedOAuth2TokenConfigID => $Param{OAuth2TokenConfigID},
+        Errors                      => $Param{Errors},
+    );
+
     $Param{TrustedOption} = $LayoutObject->BuildSelection(
         Data       => $Kernel::OM->Get('Kernel::Config')->Get('YesNoOptions'),
         Name       => 'Trusted',
@@ -503,6 +576,55 @@ sub _MaskAddMailAccount {
     );
 
     return 1;
+}
+
+sub _BuildAuthenticationTypeSelection {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
+
+    my %AuthenticationTypes = $MailAccountObject->GetAuthenticationTypes();
+
+    my $SelectionHTML = $LayoutObject->BuildSelection(
+        Data        => \%AuthenticationTypes,
+        Name        => 'AuthenticationType',
+        SelectedID  => $Param{SelectedAuthenticationType} // 'password',
+        Class       => 'Modernize Validate_Required ' . ( $Param{Errors}->{'AuthenticationTypeInvalid'} // '' ),
+        Translation => 1,
+    );
+
+    return $SelectionHTML;
+}
+
+sub _BuildOAuth2TokenConfigSelection {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ValidObject             = $Kernel::OM->Get('Kernel::System::Valid');
+    my $OAuth2TokenConfigObject = $Kernel::OM->Get('Kernel::System::OAuth2TokenConfig');
+
+    my %ValidList        = $ValidObject->ValidList();
+    my %ValidListReverse = reverse %ValidList;
+
+    my @ValidOAuth2TokenConfigs = $OAuth2TokenConfigObject->DataListGet(
+        ValidID => $ValidListReverse{valid},
+        UserID  => $Self->{UserID},
+    );
+
+    my %ValidOAuth2TokenConfigs = map {
+        $_->{ $OAuth2TokenConfigObject->{Identifier} } => $_->{Name}
+    } @ValidOAuth2TokenConfigs;
+
+    my $SelectionHTML = $LayoutObject->BuildSelection(
+        Data       => \%ValidOAuth2TokenConfigs,
+        Name       => 'OAuth2TokenConfigID',
+        SelectedID => $Param{SelectedOAuth2TokenConfigID} // '',
+        Class      => 'Modernize ' . ( $Param{Errors}->{'OAuth2TokenConfigIDInvalid'} || '' ),
+        PossibleNone => 1,    # to be able to set it to empty if a configured token config has gone invalid.
+    );
+
+    return $SelectionHTML;
 }
 
 1;

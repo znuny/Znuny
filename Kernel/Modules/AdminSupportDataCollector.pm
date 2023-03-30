@@ -31,52 +31,24 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # ------------------------------------------------------------ #
-    # Send Support Data Update
-    # ------------------------------------------------------------ #
-
-    if ( $Self->{Subaction} eq 'SendUpdate' ) {
-
-        my %Result = $Kernel::OM->Get('Kernel::System::Registration')->RegistrationUpdateSend();
-
-        return $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Attachment(
-            ContentType => 'text/html',
-            Content     => $Result{Success},
-            Type        => 'inline',
-            NoCache     => 1,
-        );
-    }
-    elsif ( $Self->{Subaction} eq 'GenerateSupportBundle' ) {
+    if ( $Self->{Subaction} eq 'GenerateSupportBundle' ) {
         return $Self->_GenerateSupportBundle();
     }
     elsif ( $Self->{Subaction} eq 'DownloadSupportBundle' ) {
         return $Self->_DownloadSupportBundle();
     }
-    elsif ( $Self->{Subaction} eq 'SendSupportBundle' ) {
-        return $Self->_SendSupportBundle();
-    }
+
     return $Self->_SupportDataCollectorView(%Param);
 }
 
 sub _SupportDataCollectorView {
     my ( $Self, %Param ) = @_;
 
-    my $SystemDataObject  = $Kernel::OM->Get('Kernel::System::SystemData');
-    my $RegistrationState = $SystemDataObject->SystemDataGet(
-        Key => 'Registration::State',
-    ) || '';
-    my $SupportDataSending = $SystemDataObject->SystemDataGet(
-        Key => 'Registration::SupportDataSending',
-    ) || 'No';
-
     my %SupportData = $Kernel::OM->Get('Kernel::System::SupportDataCollector')->Collect(
         UseCache => 1,
     );
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    # check if cloud services are disabled
-    my $CloudServicesDisabled = $Kernel::OM->Get('Kernel::Config')->Get('CloudServices::Disabled') || 0;
 
     if ( !$SupportData{Success} ) {
         $LayoutObject->Block(
@@ -85,25 +57,6 @@ sub _SupportDataCollectorView {
         );
     }
     else {
-        if ($CloudServicesDisabled) {
-            $LayoutObject->Block(
-                Name => 'CloudServicesWarning',
-            );
-        }
-        elsif (
-            $RegistrationState ne 'registered'
-            || $SupportDataSending ne 'Yes'
-            )
-        {
-            $LayoutObject->Block(
-                Name => 'NoteNotRegisteredNotSending',
-            );
-        }
-        else {
-            $LayoutObject->Block(
-                Name => 'NoteRegisteredSending',
-            );
-        }
         $LayoutObject->Block(
             Name => 'NoteSupportBundle',
         );
@@ -408,163 +361,6 @@ sub _DownloadSupportBundle {
         Filename    => $Filename,
         ContentType => 'application/octet-stream; charset=' . $LayoutObject->{UserCharset},
         Content     => $$Content,
-    );
-}
-
-sub _SendSupportBundle {
-    my ( $Self, %Param ) = @_;
-
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
-    my $Filename    = $ParamObject->GetParam( Param => 'Filename' ) || '';
-    my $RandomID    = $ParamObject->GetParam( Param => 'RandomID' ) || '';
-    my $Success;
-
-    if ($Filename) {
-
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-        my $TempDir = $ConfigObject->Get('TempDir')
-            . '/SupportBundleDownloadCache/'
-            . $RandomID;
-        my $Location = $TempDir . '/' . $Filename;
-
-        my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
-
-        my $Content = $MainObject->FileRead(
-            Location => $Location,
-            Mode     => 'binmode',
-            Type     => 'Local',
-            Result   => 'SCALAR',
-        );
-
-        if ($Content) {
-
-            $Success = $MainObject->FileDelete(
-                Location => $Location,
-                Type     => 'Local',
-            );
-
-            if ( !$Success ) {
-                $LogObject->Log(
-                    Priority => 'error',
-                    Message  => "File $Location could not be deleted!",
-                );
-            }
-
-            rmdir $TempDir;
-
-            my %RegistrationInfo = $Kernel::OM->Get('Kernel::System::Registration')->RegistrationDataGet(
-                Extended => 1,
-            );
-
-            my %Data;
-
-            if (%RegistrationInfo) {
-                my $State = $RegistrationInfo{State} || '';
-                if ( $State && lc $State eq 'registered' ) {
-                    $State = 'active';
-                }
-
-                %Data = (
-                    %{ $RegistrationInfo{System} },
-                    State              => $State,
-                    APIVersion         => $RegistrationInfo{APIVersion},
-                    APIKey             => $RegistrationInfo{APIKey},
-                    LastUpdateID       => $RegistrationInfo{LastUpdateID},
-                    RegistrationKey    => $RegistrationInfo{UniqueID},
-                    SupportDataSending => $RegistrationInfo{SupportDataSending},
-                    Type               => $RegistrationInfo{Type},
-                    Description        => $RegistrationInfo{Description},
-                );
-            }
-
-            # get user data
-            my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
-                UserID => $Self->{UserID},
-                Cached => 1,
-            );
-
-            # get sender email address
-            my $SenderAddress = '';
-            if ( $User{UserEmail} && $User{UserEmail} !~ /root\@localhost/ ) {
-                $SenderAddress = $User{UserEmail};
-            }
-            elsif (
-                $ConfigObject->Get('AdminEmail')
-                && $ConfigObject->Get('AdminEmail') !~ /root\@localhost/
-                && $ConfigObject->Get('AdminEmail') !~ /admin\@example.com/
-                )
-            {
-                $SenderAddress = $ConfigObject->Get('AdminEmail');
-            }
-
-            my $SenderName = $User{UserFullname};
-
-            my $Body;
-
-            $Body = "Sender:$SenderName\n";
-            $Body .= "Email:$SenderAddress\n";
-
-            if (%Data) {
-                for my $Key ( sort keys %Data ) {
-                    my $ItemValue = $Data{$Key} || '';
-                    $Body .= "$Key:$ItemValue\n";
-                }
-            }
-            else {
-                $Body .= "Not registered\n";
-            }
-
-            my $Result = $Kernel::OM->Get('Kernel::System::Email')->Send(
-                From          => $SenderAddress,
-                To            => 'SupportBundle@otrs.com',
-                Subject       => 'Support::Bundle::Email',
-                Type          => 'text/plain',
-                Charset       => 'utf-8',
-                Body          => $Body,
-                CustomHeaders => {
-                    'X-OTRS-RegistrationKey' => $Data{'RegistrationKey'} || 'Not registered',
-                },
-                Attachment => [
-                    {
-                        Filename    => $Filename,
-                        Content     => $Content,
-                        ContentType => 'application/octet-stream',
-                        Disposition => 'attachment',
-                    },
-                ],
-            );
-
-            if ( $Result->{Success} ) {
-                $Success = 1;
-            }
-        }
-        else {
-            $LogObject->Log(
-                Priority => 'error',
-                Message  => "$Filename could not be read!",
-            );
-        }
-    }
-    else {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => "Need Filename",
-        );
-    }
-
-    my $JSONString = $Kernel::OM->Get('Kernel::System::JSON')->Encode(
-        Data => {
-            Success => $Success || '',
-        },
-    );
-
-    return $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Attachment(
-        ContentType => 'text/html',
-        Content     => $JSONString,
-        Type        => 'inline',
-        NoCache     => 1,
     );
 }
 

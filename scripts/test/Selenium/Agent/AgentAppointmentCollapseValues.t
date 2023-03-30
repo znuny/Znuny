@@ -15,10 +15,11 @@ use vars (qw($Self));
 
 use Kernel::System::VariableCheck qw(:all);
 
-my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $Selenium   = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
 # Check if team object is registered.
-if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calendar::Team', Silent => 1 ) ) {
+if ( !$MainObject->Require( 'Kernel::System::Calendar::Team', Silent => 1 ) ) {
     $Self->True(
         1,
         "Team object is not registered, skipping test ...",
@@ -28,13 +29,15 @@ if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calend
 
 $Selenium->RunTest(
     sub {
-        my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
         my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
         my $TeamObject        = $Kernel::OM->Get('Kernel::System::Calendar::Team');
         my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "test-calendar-group-$RandomID";
@@ -48,7 +51,7 @@ $Selenium->RunTest(
             "Test group $GroupID created",
         );
 
-        my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', $GroupName ],
         );
 
@@ -88,7 +91,7 @@ $Selenium->RunTest(
         my $NumberOfResources = 5;
         for my $Counter ( 1 .. $NumberOfResources ) {
 
-            my ( $ResourceUserLogin, $ResourceID ) = $Helper->TestUserCreate(
+            my ( $ResourceUserLogin, $ResourceID ) = $HelperObject->TestUserCreate(
                 Groups => [$GroupName],
             );
             $Self->True(
@@ -133,13 +136,13 @@ $Selenium->RunTest(
             CalendarID    => $Calendar{CalendarID},
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Create test user.
         # TODO language will be possible to set on some other languages,
         #     after updating JavaScriptStrings with Dev::Tools::TranslationsUpdate.
         my $Language = 'en';
-        my ( $TestUserRoLogin, $TestUserRoID ) = $Helper->TestUserCreate(
+        my ( $TestUserRoLogin, $TestUserRoID ) = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users' ],
             Language => $Language,
         );
@@ -241,7 +244,7 @@ $Selenium->RunTest(
         );
 
         $Success = $DBObject->Do(
-            SQL  => "DELETE FROM groups WHERE id = ?",
+            SQL  => "DELETE FROM permission_groups WHERE id = ?",
             Bind => [ \$GroupID ],
         );
         $Self->True(
@@ -250,7 +253,7 @@ $Selenium->RunTest(
         );
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     },
 );
 

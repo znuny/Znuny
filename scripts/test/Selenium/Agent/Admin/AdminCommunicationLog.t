@@ -18,29 +18,30 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $MailAccountObject     = $Kernel::OM->Get('Kernel::System::MailAccount');
+        my $CommunicationLogDBObj = $Kernel::OM->Get('Kernel::System::CommunicationLog::DB');
 
         # Disable check of email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Disable the rich text control.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Use test email backend for duration of the test.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SendmailModule',
             Value => 'Kernel::System::Email::DoNotSendEmail',
         );
-
-        my $CommunicationLogDBObj = $Kernel::OM->Get('Kernel::System::CommunicationLog::DB');
 
         # Clean up all existing communications.
         $Self->True(
@@ -48,9 +49,7 @@ $Selenium->RunTest(
             'Cleaned up existing communications'
         );
 
-        my $RandomID = $Helper->GetRandomID();
-
-        my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test mail accounts.
         my %MailAccounts;
@@ -199,7 +198,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die 'Did not get test user';
 
@@ -209,7 +208,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminCommunicationLog screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminCommunicationLog;Expand=1;");
@@ -333,7 +332,7 @@ $Selenium->RunTest(
         );
 
         # Filter for unsuccessful communications.
-        $Selenium->find_element( 'Failed (2)', 'link_text' )->VerifiedClick();
+        $Selenium->VerifiedRefresh();
 
         # Verify two communications are shown.
         $Self->Is(
@@ -399,8 +398,7 @@ $Selenium->RunTest(
             'Failing account status and communications'
         );
 
-        # Filter for unsuccessful communications.
-        $Selenium->find_element( 'Failed (3)', 'link_text' )->VerifiedClick();
+        $Selenium->VerifiedRefresh();
 
         # Verify three communications are shown.
         $Self->Is(
@@ -480,7 +478,7 @@ $Selenium->RunTest(
 
         # Try to navigate to invalid Communication ID,
         #   see bug#13523 (https://bugs.otrs.org/show_bug.cgi?id=13523).
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
         $Selenium->VerifiedGet(
             "${ScriptAlias}index.pl?Action=AdminCommunicationLog;Subaction=Zoom;CommunicationID=$RandomNumber"
         );

@@ -20,59 +20,63 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
         my $StandardTemplateObject    = $Kernel::OM->Get('Kernel::System::StandardTemplate');
         my $CustomerUserObject        = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject               = $Kernel::OM->Get('Kernel::System::Queue');
+        my $UserObject                = $Kernel::OM->Get('Kernel::System::User');
+        my $ArticleObject             = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Do not check service and type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0
         );
 
         # Disable RequiredLock for AgentTicketCompose.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketCompose###RequiredLock',
             Value => 0
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketCompose###MessageIsVisibleForCustomer',
             Value => '1'
         );
 
         # Use test email backend.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SendmailModule',
             Value => 'Kernel::System::Email::Test',
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         my %DynamicFields = (
             Text => {
@@ -214,7 +218,7 @@ $Selenium->RunTest(
         );
 
         # Assign template to the queue.
-        my $Success = $Kernel::OM->Get('Kernel::System::Queue')->QueueStandardTemplateMemberAdd(
+        my $Success = $QueueObject->QueueStandardTemplateMemberAdd(
             QueueID            => 1,
             StandardTemplateID => $TemplateID,
             Active             => 1,
@@ -227,7 +231,7 @@ $Selenium->RunTest(
 
         # Create test user with admin permissions.
         my $UserName = "Name$RandomID";
-        my $UserID   = $Kernel::OM->Get('Kernel::System::User')->UserAdd(
+        my $UserID   = $UserObject->UserAdd(
             UserFirstname => $UserName,
             UserLastname  => $UserName,
             UserLogin     => $UserName,
@@ -342,8 +346,7 @@ $Selenium->RunTest(
             );
         }
 
-        my $ArticleBackendObject
-            = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel( ChannelName => 'Email' );
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
         # Create test email article.
         my $ArticleID = $ArticleBackendObject->ArticleCreate(
@@ -390,7 +393,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -400,7 +403,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketCompose page.
         $Selenium->VerifiedGet(
@@ -412,9 +415,19 @@ $Selenium->RunTest(
         my $Message = 'Article subject will be empty if the subject contains only the ticket hook!';
 
         $Self->True(
+            $Selenium->execute_script("return \$('.MessageBox.Notice:contains(\"$Message\")').length == 0;"),
+            "No Notification about empty subject is shown",
+        );
+
+        $Selenium->execute_script("\$('#Subject').val( \$('#Subject').val().replace(/].*/, ']') ).trigger('change');");
+
+        $Selenium->WaitFor( JavaScript => "return \$('.MessageBox.Notice:contains(\"$Message\")').length;" );
+        $Self->True(
             $Selenium->execute_script("return \$('.MessageBox.Notice:contains(\"$Message\")').length;"),
             "Notification about empty subject is found",
         );
+
+        $Selenium->execute_script("\$('#Subject').val( \$('#Subject').val() + ' some text' );");
 
         # Check duplication of customer user who doesn't exist in the system (see bug#13784).
         $Selenium->find_element( "#ToCustomer", 'css' )->send_keys( 'Test', "\N{U+E007}" );
@@ -587,7 +600,7 @@ $Selenium->RunTest(
             'Compose executed correctly'
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::ResponseFormat',
             Value => '[% Data.TicketNumber | html%]',
@@ -595,7 +608,7 @@ $Selenium->RunTest(
 
         # Test ticket lock and owner after closing AgentTicketCompose popup (see bug#12479).
         # Enable RequiredLock for AgentTicketCompose.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketCompose###RequiredLock',
             Value => 1,
@@ -693,8 +706,7 @@ $Selenium->RunTest(
         ) || die;
 
         # Create article in OTRS channel.
-        my $InternalArticleBackendObject
-            = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel( ChannelName => 'Internal' );
+        my $InternalArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
         $ArticleID = $InternalArticleBackendObject->ArticleCreate(
             TicketID             => $TicketID,
             SenderType           => 'agent',

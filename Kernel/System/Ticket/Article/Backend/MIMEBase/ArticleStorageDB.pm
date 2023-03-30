@@ -20,9 +20,7 @@ use parent qw(Kernel::System::Ticket::Article::Backend::MIMEBase::Base);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::DB',
-    'Kernel::System::DynamicFieldValue',
     'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',

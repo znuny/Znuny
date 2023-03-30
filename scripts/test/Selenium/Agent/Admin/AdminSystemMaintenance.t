@@ -21,46 +21,38 @@ my $CheckBredcrumb = sub {
     my %Param = @_;
 
     my $BreadcrumbText = $Param{BreadcrumbText} || '';
-    my $Count          = 1;
-
     for my $BreadcrumbText ( 'System Maintenance Management', $BreadcrumbText ) {
-        $Self->Is(
-            $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-            $BreadcrumbText,
-            "Breadcrumb text '$BreadcrumbText' is found on screen"
+        $Selenium->ElementExists(
+            Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+            SelectorType => 'css',
         );
-
-        $Count++;
     }
 };
 
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $DBObject                = $Kernel::OM->Get('Kernel::System::DB');
+        my $UserObject              = $Kernel::OM->Get('Kernel::System::User');
+        my $SystemMaintenanceObject = $Kernel::OM->Get('Kernel::System::SystemMaintenance');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
 
         # Make sure system is based on UTC.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'OTRSTimeZone',
             Value => 'UTC',
         );
 
-        # get DB object
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
-        # get SystemMaintenance object
-        my $SystemMaintenanceObject = $Kernel::OM->Get('Kernel::System::SystemMaintenance');
-
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
-            Groups => ['admin'],
+        my $TestUserLogin = $HelperObject->TestUserCreate(
+            Groups   => ['admin'],
+            Language => 'en',
         ) || die "Did not get test user";
 
         # Get UserID for later manipulation of preferences.
-        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-        my $UserID     = $UserObject->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -80,7 +72,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AdminSystemMaintenance screen
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSystemMaintenance");
@@ -136,7 +128,7 @@ $Selenium->RunTest(
         $DTWrongObj->Subtract( Hours => 1 );
         my $DTWrong = $DTWrongObj->Get();
 
-        my $SysMainComment = "sysmaintenance" . $Helper->GetRandomID();
+        my $SysMainComment = "sysmaintenance" . $HelperObject->GetRandomID();
         my $SysMainLogin   = "Selenium test SystemMaintance is progress, please log in later on";
         my $SysMainNotify  = "Currently Selenium SystemMaintenance test is active";
 
@@ -231,7 +223,10 @@ $Selenium->RunTest(
         );
 
         # Get test system maintenance start and end time as formated string.
-        my $LayoutObject    = Kernel::Output::HTML::Layout->new( UserTimeZone => $UserTimeZone );
+        my $LayoutObject = Kernel::Output::HTML::Layout->new(
+            UserTimeZone => $UserTimeZone,
+            Lang         => 'en',
+        );
         my $StartTimeString = $LayoutObject->{LanguageObject}->FormatTimeString(
             $DTStartObj->ToString(),
             'DateFormat',
@@ -255,7 +250,7 @@ $Selenium->RunTest(
         );
 
         # Update TimeNotifyUpcomingMaintenance config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => "SystemMaintenance::TimeNotifyUpcomingMaintenance",
             Value => 61,
         );

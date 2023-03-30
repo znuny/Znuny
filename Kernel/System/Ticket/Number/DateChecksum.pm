@@ -28,6 +28,7 @@ use parent qw(Kernel::System::Ticket::NumberBase);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DateTime',
 );
 
 sub IsDateBased {

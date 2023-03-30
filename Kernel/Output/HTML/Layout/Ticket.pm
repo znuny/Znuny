@@ -216,110 +216,6 @@ sub AgentCustomerViewTable {
                     }
                 }
             }
-
-            if (
-                $ConfigObject->Get('ChatEngine::Active')
-                && $Field->[0] eq 'UserLogin'
-                )
-            {
-                # Check if agent has permission to start chats with the customer users.
-                my $EnableChat = 1;
-                my $ChatStartingAgentsGroup
-                    = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatStartingAgents') || 'users';
-                my $ChatStartingAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-                    UserID    => $Self->{UserID},
-                    GroupName => $ChatStartingAgentsGroup,
-                    Type      => 'rw',
-                );
-
-                if ( !$ChatStartingAgentsGroupPermission ) {
-                    $EnableChat = 0;
-                }
-                if (
-                    $EnableChat
-                    && !$ConfigObject->Get('ChatEngine::ChatDirection::AgentToCustomer')
-                    )
-                {
-                    $EnableChat = 0;
-                }
-
-                if ($EnableChat) {
-                    my $VideoChatEnabled = 0;
-                    my $VideoChatAgentsGroup
-                        = $ConfigObject->Get('ChatEngine::PermissionGroup::VideoChatAgents') || 'users';
-                    my $VideoChatAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-                        UserID    => $Self->{UserID},
-                        GroupName => $VideoChatAgentsGroup,
-                        Type      => 'rw',
-                    );
-
-                    # Enable the video chat feature if system is entitled and agent is a member of configured group.
-                    if ($VideoChatAgentsGroupPermission) {
-                        if ( $Kernel::OM->Get('Kernel::System::Main')
-                            ->Require( 'Kernel::System::VideoChat', Silent => 1 ) )
-                        {
-                            $VideoChatEnabled = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled();
-                        }
-                    }
-
-                    my $CustomerEnableChat = 0;
-                    my $ChatAccess         = 0;
-                    my $VideoChatAvailable = 0;
-                    my $VideoChatSupport   = 0;
-
-                    # Default status is offline.
-                    my $UserState            = Translatable('Offline');
-                    my $UserStateDescription = $Self->{LanguageObject}->Translate('User is currently offline.');
-
-                    my $CustomerChatAvailability = $Kernel::OM->Get('Kernel::System::Chat')->CustomerAvailabilityGet(
-                        UserID => $Param{Data}->{UserID},
-                    );
-
-                    my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
-
-                    my %CustomerUser = $CustomerUserObject->CustomerUserDataGet(
-                        User => $Param{Data}->{UserID},
-                    );
-                    $CustomerUser{UserFullname} = $CustomerUserObject->CustomerName(
-                        UserLogin => $Param{Data}->{UserID},
-                    );
-                    $VideoChatSupport = 1 if $CustomerUser{VideoChatHasWebRTC};
-
-                    if ( $CustomerChatAvailability == 3 ) {
-                        $UserState            = Translatable('Active');
-                        $CustomerEnableChat   = 1;
-                        $UserStateDescription = $Self->{LanguageObject}->Translate('User is currently active.');
-                        $VideoChatAvailable   = 1;
-                    }
-                    elsif ( $CustomerChatAvailability == 2 ) {
-                        $UserState            = Translatable('Away');
-                        $CustomerEnableChat   = 1;
-                        $UserStateDescription = $Self->{LanguageObject}->Translate('User was inactive for a while.');
-                    }
-
-                    $Self->Block(
-                        Name => 'CustomerRowUserStatus',
-                        Data => {
-                            %CustomerUser,
-                            UserState            => $UserState,
-                            UserStateDescription => $UserStateDescription,
-                        },
-                    );
-
-                    if ($CustomerEnableChat) {
-                        $Self->Block(
-                            Name => 'CustomerRowChatIcons',
-                            Data => {
-                                %{ $Param{Data} },
-                                %CustomerUser,
-                                VideoChatEnabled   => $VideoChatEnabled,
-                                VideoChatAvailable => $VideoChatAvailable,
-                                VideoChatSupport   => $VideoChatSupport,
-                            },
-                        );
-                    }
-                }
-            }
         }
     }
 
@@ -480,6 +376,7 @@ sub AgentQueueListOption {
     my $ValueNoQueue;
     my $MoveStr           = $Self->{LanguageObject}->Translate('Move');
     my $ValueOfQueueNoKey = "- " . $MoveStr . " -";
+
     DATA:
     for my $DataKey ( sort { $Data{$a} cmp $Data{$b} } keys %Data ) {
 
@@ -1113,6 +1010,116 @@ sub TicketMetaItems {
     }
 
     return @Result;
+}
+
+=head2 TimeUnits()
+
+Returns HTML block consisting of label and field for time units.
+
+    my $TimeUnitsBlock = $LayoutObject->TimeUnits(
+        ID                => 'TimeUnits',       # (optional) the HTML ID for this element, if not provided, the name will be used as ID as well
+        Name              => 'TimeUnits',       # name of element
+        TimeUnits         => '123',
+        TimeUnitsRequired => '1',
+    );
+
+Returns:
+
+    my $TimeUnitsBlock =  '<label for="TimeUnits">Time units  (work units):</label>
+    <div class="Field">
+        <input type="text" name="TimeUnits" id="TimeUnits" value="" class="W50pc Validate_TimeUnits  "/>
+        <div id="TimeUnitsError" class="TooltipErrorMessage"><p>Invalid time!</p></div>
+        <div id="TimeUnitsServerError" class="TooltipErrorMessage"><p>This field is required.</p></div>
+    </div>
+    <div class="Clear"></div>'
+
+=cut
+
+sub TimeUnits {
+    my ( $Self, %Param ) = @_;
+
+    # Use a new instance of the layout object so that the render block names
+    # of the TimeUnits template don't interfere with render blocks of the same name
+    # that have been used by other templates in the process (e.g. 'TimeUnits' in AgentTicketBulk template).
+    my $LocalLayoutObject = Kernel::Output::HTML::Layout->new();
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    $Param{ID}                ||= 'TimeUnits';
+    $Param{Name}              ||= 'TimeUnits';
+    $Param{TimeUnitsRequired} ||= $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime');
+
+    my $Type = $ConfigObject->Get('Ticket::Frontend::AccountTimeType') || 'Text';
+
+    if ( $Param{TimeUnitsRequired} ) {
+        $LocalLayoutObject->Block(
+            Name => 'TimeUnitsLabelMandatory',
+            Data => \%Param,
+        );
+        $Param{TimeUnitsRequiredClass} ||= 'Validate_Required';
+    }
+    else {
+        $LocalLayoutObject->Block(
+            Name => 'TimeUnitsLabel',
+            Data => \%Param,
+        );
+        $Param{TimeUnitsRequiredClass} = '';
+    }
+
+    $LocalLayoutObject->Block(
+        Name => 'TimeUnits' . $Type,
+        Data => \%Param,
+    );
+
+    if ( $Type eq 'Dropdown' ) {
+
+        my $Config = $ConfigObject->Get( 'Ticket::Frontend::AccountTime::' . $Type );
+        my $DefaultTimeUnits;
+
+        for my $Item ( sort keys %{$Config} ) {
+
+            my $Label = $Config->{$Item}->{Label};
+            $DefaultTimeUnits += $Config->{$Item}->{DataSelected} || 0;
+
+            my $Field = $LocalLayoutObject->BuildSelection(
+                Class => $Param{ID} . ' TimeUnitDropdown Modernize ' . $Param{TimeUnitsRequiredClass},
+                Data  => {
+                    %{ $Config->{$Item}->{Data} },
+                },
+                ID           => $Param{ID} . $Label,
+                Name         => $Param{Name} . $Label,
+                SelectedID   => $Config->{$Item}->{DataSelected},
+                PossibleNone => 1,
+                Sort         => 'NumericValue',
+                Translation  => 0,
+                OnChange     => 'Core.Agent.TicketAction.SetTimeUnits(\'' . $Param{ID} . '\');',
+            );
+
+            $LocalLayoutObject->Block(
+                Name => $Type,
+                Data => {
+                    %Param,
+                    Label => $Label,
+                    Field => $Field,
+                },
+            );
+        }
+
+        $Param{TimeUnits} //= $DefaultTimeUnits;
+        $LocalLayoutObject->Block(
+            Name => 'TimeUnits',
+            Data => \%Param,
+        );
+    }
+
+    my $TimeUnitsStrg = $LocalLayoutObject->Output(
+        TemplateFile => 'Ticket/TimeUnits',
+        Data         => {
+            %Param,
+        },
+    );
+
+    return $TimeUnitsStrg;
 }
 
 1;

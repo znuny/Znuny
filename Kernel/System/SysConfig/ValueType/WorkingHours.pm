@@ -190,7 +190,9 @@ sub EffectiveValueGet {
 
         HOUR:
         for my $Hour ( @{ $Component->{Item} } ) {
-            next HOUR if !$Hour->{Content};
+
+            # $Hour->{Content} must be number(0-23)!
+            next HOUR if $Hour->{Content} !~ m{^([0-9]|1[0-9]|2[0-3])$}msx;
 
             push @{ $Result{ $Component->{ValueName} } }, $Hour->{Content};
         }
@@ -229,18 +231,14 @@ sub ModifiedValueGet {
     # Update Content
     DAY:
     for my $Day (@Days) {
-        if ( !$Param{EffectiveValue}->{$Day} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Missing value for $Day!"
-            );
-            next DAY;
-        }
+
+        # skip if value is missing e.g. Sat, Sun
+        next DAY if !defined $Param{EffectiveValue}->{$Day};
 
         if ( ref $Param{EffectiveValue}->{$Day} ne 'ARRAY' ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "EffectiveValue must be HoA!"
+                Message  => "'$Day' in EffectiveValue must be an array!",
             );
             next DAY;
         }
@@ -288,7 +286,7 @@ Extracts the effective value from a XML parsed setting.
             ...
         },
         DefaultValue   => 'Product 5',      # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         Item           => [                 # (optional) XML parsed item
             {
                 'ValueType' => 'VacationDays',

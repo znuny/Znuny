@@ -24,7 +24,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # enable watcher feature
 $Kernel::OM->Get('Kernel::Config')->Set(
@@ -36,7 +36,7 @@ my @TicketIDs;
 my @TestUserIDs;
 for ( 1 .. 2 ) {
 
-    my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+    my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
         Groups => [ 'users', ],
     );
 

@@ -18,16 +18,18 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test customer users.
         my @CustomerUserLogins;
@@ -51,7 +53,7 @@ $Selenium->RunTest(
         }
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -62,7 +64,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketPhone screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");
@@ -122,7 +124,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'CustomerUser' );
+        $CacheObject->CleanUp( Type => 'CustomerUser' );
 
     }
 );

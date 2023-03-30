@@ -15,7 +15,6 @@ use warnings;
 our @ObjectDependencies = (
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
-    'Kernel::System::Log',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
 );

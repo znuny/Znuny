@@ -15,19 +15,18 @@ use warnings;
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::CustomerUser',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::LinkObject',
-    'Kernel::System::Log',
     'Kernel::System::Priority',
     'Kernel::System::Queue',
+    'Kernel::System::Service',
     'Kernel::System::State',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::DateTime',
     'Kernel::System::Type',
     'Kernel::System::User',
-    'Kernel::System::Service',
 );
 
 sub new {
@@ -271,30 +270,29 @@ sub Run {
         Value         => "Going to create new ticket.",
     );
 
+    # Ticket service handling.
+
     if ( $GetParam{'X-OTRS-Service'} ) {
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
-        # Check if service exists.
-        my %ServiceData = $ServiceObject->ServiceGet(
-            Name   => $GetParam{'X-OTRS-Service'},
-            UserID => $Param{InmailUserID},
-        );
-
-        # Get all service list filtering by KeepChildren SysConfig if available.
-        my %ServiceList = $ServiceObject->ServiceList(
+        # Get all valid services.
+        my %ValidServices = reverse $Kernel::OM->Get('Kernel::System::Service')->ServiceList(
             Valid        => 1,
             KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
             UserID       => $Param{InmailUserID},
         );
 
-        if ( $ServiceData{ServiceID} ne '' && !$ServiceList{ $ServiceData{ServiceID} } ) {
+        if ( !$ValidServices{ $GetParam{'X-OTRS-Service'} } ) {
+
+            # If service with given name does not exist or is invalid don't set it if not active.
+
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::NewTicket',
                 Value =>
-                    "Service $GetParam{'X-OTRS-Service'} does not exists or is invalid or is a child of invalid service.",
+                    "Ticket service won't be set to '$GetParam{'X-OTRS-Service'}' (does not exist or is invalid or is a child of invalid service).",
             );
+
             $GetParam{'X-OTRS-Service'} = '';
         }
     }
@@ -590,7 +588,7 @@ Message
             Key           => 'Kernel::System::PostMaster::NewTicket',
             Value         => "Can't process email with MessageID <$GetParam{'Message-ID'}>! "
                 . "Please create a bug report with this email (From: $GetParam{From}, Located "
-                . "under var/spool/problem-email*) on http://bugs.otrs.org/!",
+                . "under var/spool/problem-email*) on https://github.com/znuny/Znuny/issues/new/choose !",
         );
 
         $Self->{CommunicationLogObject}->ObjectLog(

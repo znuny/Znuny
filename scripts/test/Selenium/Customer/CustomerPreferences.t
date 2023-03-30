@@ -22,21 +22,21 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # enable google authenticator shared secret preference
-        my $SharedSecretConfig
-            = $Kernel::OM->Get('Kernel::Config')->Get('CustomerPreferencesGroups')->{'GoogleAuthenticatorSecretKey'};
+        my $SharedSecretConfig = $ConfigObject->Get('CustomerPreferencesGroups')->{'GoogleAuthenticatorSecretKey'};
+
         $SharedSecretConfig->{Active} = 1;
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => "CustomerPreferencesGroups###GoogleAuthenticatorSecretKey",
             Value => $SharedSecretConfig,
         );
 
         # create test customer user and login
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         $Selenium->Login(
@@ -46,7 +46,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to CustomerPreference screen
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerPreferences");

@@ -8,10 +8,10 @@
 # --
 
 package Kernel::System::ObjectManager;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
-## nofilter(TidyAll::Plugin::OTRS::Perl::PodSpelling)
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
-## nofilter(TidyAll::Plugin::OTRS::Perl::SyntaxCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::Perl::SyntaxCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ParamObject)
 
 use strict;
 use warnings;
@@ -71,7 +71,7 @@ The ObjectManager must always be provided to OTRS by the top level script like t
     local $Kernel::OM = Kernel::System::ObjectManager->new(
         # possible options for module constructors here
         LogObject {
-            LogPrefix => 'OTRS-MyTestScript',
+            LogPrefix => 'MyTestScript',
         },
     );
 
@@ -143,7 +143,7 @@ The hash reference will be flattened and passed to the constructor of the object
 
     local $Kernel::OM = Kernel::System::ObjectManager->new(
         Kernel::System::Log => {
-            LogPrefix => 'OTRS-MyTestScript',
+            LogPrefix => 'MyTestScript',
         },
     );
 
@@ -491,7 +491,7 @@ sub ObjectsDiscard {
         push @AllObjects, $Object;
     }
 
-    # During an OTRS package upgrade the packagesetup code module has just
+    # During a package upgrade the packagesetup code module has just
     # recently been copied to it's location in the file system.
     # In a persistent Perl environment an old version of the module might still be loaded,
     # as watchdogs like Apache2::Reload haven't had a chance to reload it.

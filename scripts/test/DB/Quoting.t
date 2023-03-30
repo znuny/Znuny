@@ -100,6 +100,24 @@ $Self->Is(
     -0.23,
     'Quote() Number - -0.23',
 );
+$Self->Is(
+    $DBObject->Quote( "2022-12-24 12:34:56", 'DateTime' ),
+    "2022-12-24 12:34:56",
+    'Quote() DateTime 2022-12-24 12:34:56',
+);
+$Self->False(
+    scalar $DBObject->Quote( "2022-12-2432 12:34:56", 'DateTime' ),
+    'Quote() DateTime 2022-12-2432 12:34:56',
+);
+$Self->Is(
+    $DBObject->Quote( "2022-12-24", 'Date' ),
+    "2022-12-24",
+    'Quote() Date 2022-12-24',
+);
+$Self->False(
+    scalar $DBObject->Quote( "2022-12-2432", 'Date' ),
+    'Quote() Date 2022-12-2432',
+);
 
 if (
     $DBObject->GetDatabaseFunction('Type') eq 'postgresql' ||

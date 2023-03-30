@@ -25,13 +25,12 @@ our @ObjectDependencies = (
     'Kernel::System::CustomerGroup',
     'Kernel::System::CustomerUser',
     'Kernel::System::DB',
-    'Kernel::System::Group',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Scheduler',
-    'Kernel::System::DateTime',
-    'Kernel::System::Web::Request',
     'Kernel::System::Valid',
+    'Kernel::System::Web::Request',
 );
 
 =head1 NAME
@@ -1240,11 +1239,7 @@ sub Run {
         my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
         # update last request time
-        if (
-            !$ParamObject->IsAJAXRequest()
-            || $Param{Action} eq 'CustomerVideoChat'
-            )
-        {
+        if ( !$ParamObject->IsAJAXRequest() ) {
             my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
 
             $SessionObject->UpdateSessionID(

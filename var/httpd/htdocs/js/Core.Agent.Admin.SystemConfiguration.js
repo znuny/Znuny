@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -41,40 +42,48 @@ Core.Agent.Admin = Core.Agent.Admin || {};
 
          Core.UI.Dialog.ShowContentDialog('<div class="Spacing Center"><span class="AJAXLoader" title="' + Core.Language.Translate('Loading...') + '"></span></div>', Core.Language.Translate('Loading...'), '10px', 'Center', true);
 
-         Core.AJAX.FunctionCall(
-             Core.Config.Get('CGIHandle'),
-             Data,
-             function (HTML) {
+        Core.AJAX.FunctionCall(
+            Core.Config.Get('CGIHandle'),
+            Data,
+            function (HTML) {
 
-                 // if the waiting dialog was cancelled, do not show the search
-                 //  dialog as well
-                 if (!$('.Dialog:visible').length) {
-                     return;
-                 }
-                 Core.UI.Dialog.ShowContentDialog(HTML, Core.Language.Translate('Search the System Configuration'), '10px', 'Center', true);
+                // if the waiting dialog was cancelled, do not show the search
+                //  dialog as well
+                if (!$('.Dialog:visible').length) {
+                    return;
+                }
+                Core.UI.Dialog.ShowContentDialog(HTML, Core.Language.Translate('Search the System Configuration'), '10px', 'Center', true);
 
-                 // register return key
-                 $('.AdminSystemConfigurationSearchForm').off('keypress.FilterInput').on('keypress.FilterInput', function (Event) {
-                     if ((Event.charCode || Event.keyCode) === 13) {
-                         $('#SearchFormSubmit').trigger('click');
-                         return false;
-                     }
-                 });
+                // register return key
+                $('.AdminSystemConfigurationSearchForm').off('keypress.FilterInput').on('keypress.FilterInput', function (Event) {
+                    if ((Event.charCode || Event.keyCode) === 13) {
+                        $('#SearchFormSubmit').trigger('click');
+                        return false;
+                    }
+                });
 
-                 $('#SearchFormSubmit').off('click.StartSearch').on('click.StartSearch', function() {
+                // close dialog on "cancel" button click
+                $('.ContentFooter #Cancel').on('click', function () {
+                    Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                });
 
-                     if (!$('.AdminSystemConfigurationSearchForm input[name=Search]').val()) {
-                         alert(Core.Language.Translate('Please enter at least one search word to find anything.'));
-                         return false;
-                     }
+                $('#SearchFormSubmit').off('click.StartSearch').on('click.StartSearch', function() {
 
-                     $('.AdminSystemConfigurationSearchForm').submit();
-                     Core.UI.Dialog.ShowContentDialog('<div class="Spacing Center"><span class="AJAXLoader" title="' + Core.Language.Translate('Loading...') + '"></span></div>', Core.Language.Translate('Loading...'), '10px', 'Center', true);
-                 });
+                    if (!$('.AdminSystemConfigurationSearchForm input[name=Search]').val()) {
+                        Core.UI.Dialog.ShowAlert(
+                            Core.Language.Translate('An Error Occurred'),
+                            Core.Language.Translate('Please enter at least one search word to find anything.')
+                        );
+                        return false;
+                    }
 
-             }, 'html'
-         );
-     };
+                    $('.AdminSystemConfigurationSearchForm').submit();
+                    Core.UI.Dialog.ShowContentDialog('<div class="Spacing Center"><span class="AJAXLoader" title="' + Core.Language.Translate('Loading...') + '"></span></div>', Core.Language.Translate('Loading...'), '10px', 'Center', true);
+                });
+
+            }, 'html'
+        );
+    };
 
      /**
      * @public
@@ -111,7 +120,7 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                     if (Response && parseInt(Response, 10) === -1) {
                         $DialogObj.find('.Overlay.Preparing').fadeOut();
                         $DialogObj.find('#DeploymentComment').fadeIn();
-                        $DialogFooterObj.find('.ButtonsRegular').fadeIn();
+                        $DialogFooterObj.find('.ButtonsRegular').fadeIn().css('display', 'flex');
                     }
                     else {
 
@@ -158,7 +167,10 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 }
 
                 if ($DialogContentObj.hasClass('Deploying')) {
-                    alert(Core.Language.Translate('The deployment is already running.'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('The deployment is already running.')
+                    );
                     return false;
                 }
 
@@ -233,55 +245,27 @@ Core.Agent.Admin = Core.Agent.Admin || {};
     TargetNS.InitDialogReset = function($Object) {
         var DialogTemplate,
             $DialogObj,
-            URL,
-            Data,
             Name,
-            ModificationAllowed = $Object.attr("data-user-modification"),
-            OTRSBusinessIsInstalled = parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10);
+            ModificationAllowed = $Object.attr("data-user-modification");
 
         Name = $Object.closest(".WidgetSimple").find(".Header h2").text();
         DialogTemplate = Core.Template.Render('SysConfig/DialogReset',{
             Name: Name,
-            ModificationAllowed: ModificationAllowed,
-            OTRSBusinessIsInstalled: OTRSBusinessIsInstalled
+            ModificationAllowed: ModificationAllowed
         });
         $DialogObj = $(DialogTemplate);
 
         Core.UI.Dialog.ShowContentDialog($DialogObj, Core.Language.Translate('Reset setting'), '150px', 'Center', true);
-
-
-        // Check how many users have changed it's value
-        if ($Object.attr("data-user-modification") == "1" && OTRSBusinessIsInstalled == "1") {
-            URL = Core.Config.Get('Baselink') + 'Action=AdminSystemConfiguration;Subaction=UserModificationsCount';
-            Data = {
-                Name: Name,
-            },
-
-            Core.AJAX.FunctionCall(
-                URL,
-                Data,
-                function(Response) {
-                    if (Response == "") {
-                        Response = 0;
-                    }
-
-                    $(".UserModificationCount")
-                        .html(Response)
-                        .parent()
-                        .removeClass("Hidden")
-                        .parent()
-                        .find("i")
-                        .addClass("Hidden");
-                }
-            );
-        }
 
         $("button#ResetConfirm").off("click").on("click", function() {
             var ResetOptions = $("#ResetOptions").val();
 
             // Validation
             if(ResetOptions == "") {
-                alert(Core.Language.Translate("Reset option is required!"));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Reset option is required!")
+                );
                 return;
             }
             Core.UI.Dialog.CloseDialog($(".Dialog"));
@@ -460,7 +444,7 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 OriginalPadding = parseInt($WidgetObj.find('.Content').css('padding-bottom'), 10);
 
             if ($WidgetObj.hasClass('MenuExpanded')) {
-                $WidgetObj.find('.WidgetMenu').slideUp('fast')
+                //$WidgetObj.find('.WidgetMenu').slideUp('fast')
                 $WidgetObj.removeClass('MenuExpanded');
 
                 if ($DefaultObj.length) {
@@ -471,7 +455,7 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 }
             }
             else {
-                $WidgetObj.find('.WidgetMenu').slideDown('fast');
+                //$WidgetObj.find('.WidgetMenu').slideDown('fast');
                 $WidgetObj.addClass('MenuExpanded');
 
                 if ($DefaultObj.length) {
@@ -548,14 +532,6 @@ Core.Agent.Admin = Core.Agent.Admin || {};
             Core.SystemConfiguration.Update($(this), 1, 0);
             return false;
         });
-
-        if (parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10) == "1") {
-            $(".UserModificationActive, .UserModificationNotActive").on('click', function () {
-                EnableModification($(this));
-                Core.SystemConfiguration.Update($(this), 0, 1);
-                return false;
-            });
-        }
     };
 
     /**
@@ -1001,7 +977,10 @@ Core.Agent.Admin = Core.Agent.Admin || {};
             function(Response) {
 
                 if (Response.Error != null) {
-                    alert(Response.Error);
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate(Response.Error)
+                    );
                     // hide loader
                     Core.UI.WidgetOverlayHide($Widget);
                     return;
@@ -1137,7 +1116,10 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                     $Widget;
 
                 if (Response.Error) {
-                    alert(Response.Error);
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate(Response.Error)
+                    );
                     return;
                 }
 

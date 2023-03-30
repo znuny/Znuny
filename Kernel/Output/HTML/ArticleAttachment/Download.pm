@@ -58,6 +58,7 @@ sub Run {
             "Action=AgentTicketAttachment;TicketID=$Param{TicketID};ArticleID=$Param{Article}->{ArticleID};FileID=$Param{File}->{FileID}",
         Image  => 'disk-s.png',
         Target => $Target,
+        Class  => 'DownloadAttachment',
     );
 }
 

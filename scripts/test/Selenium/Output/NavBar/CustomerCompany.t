@@ -19,11 +19,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -33,18 +35,16 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
         # disable frontend AdminCustomerCompany module
         my $AdminCustomerCompany = $ConfigObject->Get('Frontend::Module')->{AdminCustomerCompany};
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'Frontend::Module###AdminCustomerCompany',
             Value => {},
         );
 
         # check for NavBarCustomerCompany button when frontend AdminCustomerCompany module is disabled
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentDashboard");
         $Self->True(
             index( $Selenium->get_page_source(), 'AdminCustomerCompany;Nav=Agent' ) == -1,
@@ -52,7 +52,7 @@ $Selenium->RunTest(
         );
 
         # enable frontend AdminCustomerCompany module
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::Module###AdminCustomerCompany',
             Value => $AdminCustomerCompany,

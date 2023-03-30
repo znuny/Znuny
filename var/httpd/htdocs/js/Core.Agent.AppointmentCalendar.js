@@ -1,6 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 maxence GmbH, https://maxence.de/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -216,6 +216,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 }
             },
             viewRender: function(View) {
+                var FilterViews;
 
                 // Check if we are on a timeline view.
                 if (View.name === 'timelineWeek' || View.name === 'timelineDay') {
@@ -251,6 +252,13 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     );
                 }
                 CurrentView = View.name;
+
+                FilterViews = ["month", "agendaWeek", "agendaDay"];
+                if (FilterViews.includes(CurrentView)){
+                    $('.WidgetSimple.Appointments').show();
+                }else{
+                    $('.WidgetSimple.Appointments').hide();
+                }
             },
             select: function(Start, End, JSEvent, View, Resource) {
                 var Data = {
@@ -292,8 +300,13 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 UpdateAppointment(Data);
             },
             eventRender: function(CalEvent, $Element) {
+
                 var $IconContainer,
-                    $Icon;
+                    $Icon,
+                    pluginData,
+                    Filter = $('#FilterAppointments').val(),
+                    Title,
+                    Description;
 
                 if (CalEvent.allDay
                     || CalEvent.recurring
@@ -318,7 +331,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     }
                     if (CalEvent.parentId) {
                         $Icon.clone()
-                            .addClass('fa-link')
+                            .addClass('fa-child')
                             .appendTo($IconContainer);
                     }
                     if (CalEvent.notification) {
@@ -332,10 +345,43 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                             .appendTo($IconContainer);
                     }
 
+                    if (CalEvent.pluginData) {
+                        pluginData = Object.keys(CalEvent.pluginData).sort();
+
+                        $.each(pluginData, function (Key,PluginKey) {
+                            if (CalEvent.pluginData[PluginKey] && CalEvent.pluginData[PluginKey]['Icon'] !== 'undefined'){
+                                $Icon.clone()
+                                    .addClass('fa-' + CalEvent.pluginData[PluginKey]['Icon'])
+                                    .appendTo($IconContainer);
+                            }
+                        })
+                    }
+
                     // Prepend container to the appointment
                     $Element.find('.fc-content')
                         .prepend($IconContainer);
                 }
+
+                // FilterAppointments
+                Filter ? Filter = Filter.toLowerCase() : '';
+                CalEvent.title ? Title = CalEvent.title.toLowerCase() : {};
+                CalEvent.description ? Description = CalEvent.description.toLowerCase() : {};
+
+                // If we have a description we can try to Filter
+                if (Description) {
+                    Description = Description.includes(Filter);
+                }
+
+                // If we have a title we can try to filter
+                if (Title) {
+                    Title = Title.includes(Filter);
+                }
+
+                if(Title || Description || Filter.length < 1) {
+                    return true;
+                }
+                return false;
+
             },
             eventResizeStart: function(CalEvent) {
                 CurrentAppointment.start = CalEvent.start;
@@ -351,6 +397,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     PosX = 0,
                     PosY = 0,
                     TooltipHTML = Core.Template.Render('Agent/AppointmentCalendar/AppointmentTooltip', {
+                        'PluginGroups': Core.Config.Get('PluginGroups'),
                         'PluginList': Core.Config.Get('PluginList'),
                         'CalEvent': CalEvent,
                         'TooltipTemplateResource': Core.Config.Get('TooltipTemplateResource') || 0,
@@ -426,6 +473,14 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             ],
             resourceLabelText: Core.Language.Translate('Resources')
         });
+
+        // Activate FilterAppointments
+        $('#FilterAppointments').on('keyup',function(){
+            var FilterViews = ["month", "agendaWeek", "agendaDay"];
+            if (FilterViews.includes(CurrentView)){
+                $CalendarObj.fullCalendar('rerenderEvents');
+            }
+        })
 
         // Initialize datepicker
         $DatepickerObj.datepicker({
@@ -559,6 +614,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                         resourceIds: AppointmentData.ResourceID,
                         resourceNames: AppointmentData.ResourceNames,
                         pluginData: AppointmentData.PluginData,
+                        pluginDataGroup: AppointmentData.PluginDataGroup,
                         calendarName: Calendar.CalendarName,
                         calendarColor: Calendar.Color,
                         notification: AppointmentData.NotificationDate.length ? true : false,
@@ -780,7 +836,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 Core.Config.Get('CGIHandle'),
                 Data,
                 function (HTML) {
-                    Core.UI.Dialog.ShowContentDialog(HTML, Core.Language.Translate('Appointment'), '10px', 'Center', true, undefined, true);
+                    Core.UI.Dialog.ShowContentDialog(HTML, Core.Language.Translate('Appointment'), '10px', 'Center', true, undefined, true, 'modal-lg');
                     Core.UI.InputFields.Activate($('.Dialog:visible'));
 
                     TargetNS.AgentAppointmentEdit();
@@ -852,7 +908,8 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             Recurring: AppointmentData.CalEvent.recurring ? '1' : '0',
             TeamID: AppointmentData.CalEvent.teamIds ? AppointmentData.CalEvent.teamIds : undefined,
             ResourceID: AppointmentData.CalEvent.resourceIds ? AppointmentData.CalEvent.resourceIds :
-                AppointmentData.CalEvent.resourceId ? [ AppointmentData.CalEvent.resourceId ] : undefined
+                AppointmentData.CalEvent.resourceId ? [ AppointmentData.CalEvent.resourceId ] : undefined,
+            Plugin: AppointmentData.CalEvent.pluginData,
         };
 
         // Assigned resource didn't change
@@ -1753,15 +1810,20 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             $('.RemoveButton').off('click.AppointmentCalendar').on('click.AppointmentCalendar', function () {
                 var $RemoveObj = $(this),
                     PluginKey = $RemoveObj.data('pluginKey'),
-                    $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey)),
+                    $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey) + '_LinkList'),
                     PluginData = JSON.parse($PluginDataObj.val()),
                     LinkID = $RemoveObj.data('linkId').toString(),
-                    $Parent = $RemoveObj.parent();
+                    $Parent = $RemoveObj.parent(),
+                    $PluginContainer = $Parent.parent();
 
                 PluginData.splice(PluginData.indexOf(LinkID), 1);
                 $PluginDataObj.val(JSON.stringify(PluginData));
 
                 $Parent.remove();
+
+                if ($PluginContainer.children().length == 0) {
+                    $PluginContainer.text('');
+                }
 
                 return false;
             });
@@ -1769,7 +1831,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
 
         function AddLink(PluginKey, PluginURL, LinkID, LinkName) {
             var $PluginContainerObj = $('#PluginContainer_' + Core.App.EscapeSelector(PluginKey)),
-                $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey)),
+                $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey) + '_LinkList'),
                 PluginData = JSON.parse($PluginDataObj.val()),
                 $ExistingLinks = $PluginContainerObj.find('.Link_' + Core.App.EscapeSelector(LinkID)),
                 $LinkContainerObj = $('<div />'),
@@ -1792,11 +1854,11 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 .appendTo($LinkContainerObj);
 
             $RemoveObj.attr('href', '#')
-                .addClass('RemoveButton')
+                .addClass('RemoveButton icon-hover-md')
                 .data('pluginKey', PluginKey)
                 .data('linkId', LinkID)
                 .append(
-                    $('<i />').addClass('fa fa-minus-square-o')
+                    $('<i />').addClass('fa fa-trash-o')
                 )
                 .appendTo($LinkContainerObj);
 
@@ -2089,6 +2151,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 });
             });
         }
+        Core.App.Publish('Core.Agent.AppointmentCalendar.AgentAppointmentEdit');
     }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

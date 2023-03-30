@@ -20,16 +20,13 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Cache',
     'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
     'Kernel::System::Calendar::Plugin',
     'Kernel::System::Calendar::Team',
     'Kernel::System::DateTime',
-    'Kernel::System::DB',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::Package',
     'Kernel::System::User',
 );
 
@@ -382,11 +379,16 @@ sub Export {
         # include plugin (link) data
         my $PluginList = $PluginObject->PluginList();
         for my $PluginKey ( sort keys %{$PluginList} ) {
-            my $LinkList = $PluginObject->PluginLinkList(
-                AppointmentID => $Appointment{AppointmentID},
-                PluginKey     => $PluginKey,
-                UserID        => $Param{UserID},
+            my $LinkList = $PluginObject->PluginFunction(
+                PluginKey      => $PluginKey,
+                PluginFunction => 'LinkList',
+                PluginData     => {
+                    AppointmentID => $Appointment{AppointmentID},
+                    UserID        => $Param{UserID},
+                    URL           => $PluginList->{$PluginKey}->{URL} // '',
+                }
             );
+
             my @LinkArray;
             for my $LinkID ( sort keys %{$LinkList} ) {
                 push @LinkArray, $LinkList->{$LinkID}->{LinkID};
@@ -429,7 +431,17 @@ sub Export {
     # Include product name and version in product ID property for debugging purposes, by redefining
     #   external library method.
     sub Data::ICal::product_id {    ## no critic
-        return 'OTRS ' . $Kernel::OM->Get('Kernel::Config')->Get('Version');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+        my $ProductID      = $ConfigObject->Get('Product') // '';
+        my $ProductVersion = $ConfigObject->Get('Version');
+        my $BannerDisabled = $ConfigObject->Get('Secure::DisableBanner');
+
+        if ( !$BannerDisabled && IsStringWithData($ProductVersion) ) {
+            $ProductID .= ' ' . $ProductVersion;
+        }
+
+        return $ProductID;
     }
 }
 

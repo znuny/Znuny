@@ -27,14 +27,14 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $Kernel::OM->Get('Kernel::Config')->Set(
     Key   => 'Ticket::UnlockOnAway',
     Value => 1,
 );
 
-my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
     Groups => [ 'users', ],
 );
 

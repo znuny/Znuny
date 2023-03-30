@@ -6,30 +6,9 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst AdminGenericInterfaceDebugger">
-    <h1 class="InvisibleText">[% Translate("GenericInterface Web Service Management") | html %]</h1>
 
-    [% USE BreadcrumbLink = String("AdminGenericInterfaceWebservice") %]
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate( 'Web Service Management' ),
-                Link => BreadcrumbLink,
-            },
-            {
-                Name => Data.WebserviceName,
-                Link => BreadcrumbLink.copy.append( ";Subaction=Change;WebserviceID=", Data.WebserviceID ),
-            },
-            {
-                Name => Translate('Debugger'),
-            }
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst AdminGenericInterfaceDebugger ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -37,23 +16,44 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i> [% Translate("Go back to web service") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i> [% Translate("Go back to web service") | html %]</span></a>
                     </li>
                     <li>
-                        <button class="CallForAction Fullsize Center" type="button" id="DeleteButton"><span><i class="fa fa-trash-o"></i> [% Translate("Clear") | html %]</span></button>
+                        <button class="CallForAction btn-main btn-primary-ghost" type="button" id="DeleteButton"><span><i class="fa fa-trash-o"></i> [% Translate("Clear") | html %]</span></button>
                         <div class="Hidden" id="DeleteDialogContainer">
-                            <span class="WarningDialog ">&nbsp;</span>
+                            <span class="WarningDialog ">
+                            </span>
                             <p id="DeleteDialog" class="Center Warning">
                                 [% Translate("Do you really want to clear the debug log of this web service?") | html %]
                             </p>
-                            <div class="SpacingTop"></div>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
+
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("GenericInterface Web Service Management") | html %]</h1>
+
+        [% USE BreadcrumbLink = String("AdminGenericInterfaceWebservice") %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate( 'Web Service Management' ),
+                    Link => BreadcrumbLink,
+                },
+                {
+                    Name => Data.WebserviceName,
+                    Link => BreadcrumbLink.copy.append( ";Subaction=Change;WebserviceID=", Data.WebserviceID ),
+                },
+                {
+                    Name => Translate('Debugger'),
+                }
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 
         <div class="WidgetSimple RequestListWidget">
             <div class="Header">
@@ -62,9 +62,9 @@
                 </h2>
             </div>
             <div class="Content">
-                <div class="LayoutGrid ColumnsWithSpacing">
-                    <div class="Size1of2">
-                        <div class="ListContainer" style="max-height: 220px;"><!-- needed for CSS to limit table height -->
+                <div class="LayoutGrid ColumnsWithSpacing SpacingLeft SpacingRight">
+                    <div class="Size2of3">
+                        <div class="ListContainer TableList" style="max-height: 220px;"><!-- needed for CSS to limit table height -->
                             <table class="DataTable" id="RequestList" summary="List of web service communications recorded by the debugger with the applied filter">
                                 <thead>
                                     <tr>
@@ -83,60 +83,62 @@
                         </div>
                         <p class="FieldExplanation">[% Translate("Select a single request to see its details.") | html %]</p>
                     </div>
-                    <div class="Size1of2">
-                        <fieldset class="TableLike">
-                            <label for="FilterType">[% Translate("Filter by type") | html %]:</label>
-                            <div class="Field">
-                                [% Data.FilterTypeStrg %]
+                    <div class="Size1of3">
+                        <fieldset class="TableLike no-padding">
+                            <div class="field-wrapper">
+                                <label for="FilterType">[% Translate("Filter by type") | html %]</label>
+                                <div class="Field flex-row">
+                                    [% Data.FilterTypeStrg %]
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label>[% Translate("Filter from") | html %]:</label>
-                            <div class="Field">
-                                [% Data.FilterFromStrg %]
+                            <div class="field-wrapper">
+                                <label>[% Translate("Filter from") | html %]</label>
+                                <div class="Field flex-row">
+                                    [% Data.FilterFromStrg %]
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label>[% Translate("Filter to") | html %]:</label>
-                            <div class="Field">
-                                [% Data.FilterToStrg %]
+                            <div class="field-wrapper">
+                                <label>[% Translate("Filter to") | html %]</label>
+                                <div class="Field flex-row">
+                                    [% Data.FilterToStrg %]
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label for="FilterRemoteIP">[% Translate("Filter by remote IP") | html %]:</label>
-                            <div class="Field">
-                                <input type="text" class="w50pc" id="FilterRemoteIP" />
+                            <div class="field-wrapper">
+                                <label for="FilterRemoteIP">[% Translate("Filter by remote IP") | html %]</label>
+                                <div class="Field">
+                                    <input type="text" class="w50pc" id="FilterRemoteIP" />
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label for="FilterLimit">[% Translate("Limit") | html %]:</label>
-                            <div class="Field">
-                                [% Data.FilterLimitStrg %]
+                            <div class="field-wrapper">
+                                <label for="FilterLimit">[% Translate("Limit") | html %]</label>
+                                <div class="Field">
+                                    [% Data.FilterLimitStrg %]
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label for="FilterSort">[% Translate("Order") | html %]:</label>
-                            <div class="Field">
-                                [% Data.FilterSortStrg %]
+                            <div class="field-wrapper">
+                                <label for="FilterSort">[% Translate("Order") | html %]</label>
+                                <div class="Field">
+                                    [% Data.FilterSortStrg %]
+                                </div>
                             </div>
-                            <div class="Clear"></div>
-
-                            <div class="Field">
-                                <button type="button" id="FilterRefresh" class="CallForAction" value="[% Translate("Refresh") | html %]"><span><i class="fa fa-refresh"></i> [% Translate("Refresh") | html %]</span></button>
+                            <div class="field-wrapper form-button-actions SpacingBottom">
+                                <div class="Field buttons-field no-padding SpacingBottom">
+                                    <button type="button" id="FilterRefresh" class="CallForAction btn-main btn-primary btn-width-md" value="[% Translate("Refresh") | html %]"><span><i class="fa fa-refresh"></i> [% Translate("Refresh") | html %]</span></button>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
                         </fieldset>
-
                     </div>
-                    <div class="Clear"></div>
                 </div>
             </div>
         </div>
-
         <div class="WidgetSimple Hidden" id="CommunicationDetails">
             <div class="Header"></div>
             <div class="Content"></div>
         </div>
     </div>
-    <div class="Clear"></div>
 </div>

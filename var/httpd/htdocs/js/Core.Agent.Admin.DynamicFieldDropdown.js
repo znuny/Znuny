@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -157,7 +158,7 @@ Core.Agent.Admin.DynamicFieldDropdown = (function (TargetNS) {
         $('#DefaultValue').append($('<option>', { value: '' }).text('-'));
 
         // find all active possible values keys (this will omit all previously deleted keys)
-        $('.ValueRow > .DefaultValueKeyItem').each(function(){
+        $('.ValueRow .DefaultValueKeyItem').each(function(){
 
             // for each key:
             // Get the ID

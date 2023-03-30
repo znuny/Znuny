@@ -18,9 +18,23 @@ use MIME::Base64;
 use PerlIO;
 use SOAP::Lite;
 
+use parent qw(Kernel::System::EventHandler);
+
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
+
+#
+# Example for debugging/logging
+#
+# use Data::Dumper;
+# use SOAP::Lite +trace => [ all => \&log_all ];
+#
+# sub log_all {
+#   open LOGFILE,">>/tmp/znuny.gi.log";
+#   print LOGFILE Dumper( \@_ ) . "\n";
+#   close LOGFILE;
+# }
 
 =head1 NAME
 
@@ -49,7 +63,13 @@ sub new {
 
     # Set binary mode for STDIN and STDOUT (normally is the same as :raw).
     binmode STDIN;
-    binmode STDOUT;
+
+    # Causes the interface to deliver broken content in charset since it won't be set back to UTF-8
+    # binmode STDOUT;
+
+    $Self->EventHandlerInit(
+        Config => 'SOAP::EventModulePost',
+    );
 
     return $Self;
 }
@@ -97,7 +117,11 @@ sub ProviderProcessRequest {
     my $Config = $Self->{TransportConfig}->{Config};
 
     # Check namespace config.
-    if ( !IsStringWithData( $Config->{NameSpace} ) ) {
+    if (
+        !IsStringWithData( $Config->{NameSpace} )
+        && !$Config->{NoNameSpace}
+        )
+    {
         return $Self->_Error(
             Summary   => 'HTTP::SOAP Have no NameSpace in config',
             HTTPError => 500,
@@ -146,6 +170,39 @@ sub ProviderProcessRequest {
             HTTPCode => 100,
             Content  => '',
         );
+    }
+
+    # do we have a soap action header?
+    my $OperationFromHeader;
+    if ( $ENV{'HTTP_SOAPACTION'} && !$Config->{NoNameSpace} ) {
+        my ( $SOAPAction, $NameSpaceFromHeader );
+        ( $SOAPAction, $NameSpaceFromHeader, $OperationFromHeader ) = $ENV{'HTTP_SOAPACTION'} =~ m{
+             \A
+            ["']{0,1} # optional enclosing single or double quotes
+            (
+                ( .+? )     # namespace
+                [#/]
+                ( [^#/]+? )  # operation
+            )
+            ["']{0,1} # optional enclosing single or double quotes
+            \z
+        }xms;
+
+        # Don't throw an error if SOAPAction header could not be parsed.
+        # Use complete header as operation instead.
+        if ( !defined $OperationFromHeader ) {
+            ($SOAPAction) = $ENV{'HTTP_SOAPACTION'} =~ m{ \A ["'] ( .+ ) ["'] \z }xms;
+            $OperationFromHeader = $SOAPAction;
+        }
+
+        # check name-space for match to configuration
+        if ( defined $NameSpaceFromHeader && $NameSpaceFromHeader ne $Config->{NameSpace} ) {
+            return $Self->_Error(
+                Summary =>
+                    "Namespace from SOAPAction '$NameSpaceFromHeader' does not match namespace"
+                    . " from configuration '$Config->{NameSpace}'",
+            );
+        }
     }
 
     # If no chunked transfer encoding was used, read request directly.
@@ -218,7 +275,20 @@ sub ProviderProcessRequest {
     my $Body = $Deserialized->body();
 
     # Get operation from soap data.
+    # If an operation was set from SOAPAction header, use it.
+    # Otherwise use first tag of message body as operation.
     my $Operation = ( sort keys %{$Body} )[0];
+
+    # check operation against header
+    if ( $OperationFromHeader && $Operation ne $OperationFromHeader ) {
+        return $Self->_Error(
+            Summary =>
+                "Operation from SOAP data '$Operation' does not match operation"
+                . " from SOAPAction '$OperationFromHeader'",
+        );
+    }
+
+    $Operation = $OperationFromHeader // $Operation;
 
     # Determine local operation name from request wrapper name scheme
     #   possible values are 'Append', 'Plain' and 'Request'.
@@ -239,7 +309,12 @@ sub ProviderProcessRequest {
     # Remember operation for response.
     $Self->{Operation} = $LocalOperation;
 
-    my $OperationData = $Body->{$Operation};
+    # Data for operation is retrieved from a tag with the name of the operation.
+    # In cases where the SOAPAction header contains an operation with a name for which no tag exists
+    # in the body, use the body's root tag.
+    my $OperationData = exists $Body->{$Operation}
+        ? $Body->{$Operation}
+        : $Body->{ ( sort keys %{$Body} )[0] };
 
     # Fall-back for backwards compatibility (SOAP::Lite default behavior).
     if ( !IsStringWithData( $Config->{SOAPAction} ) ) {
@@ -334,7 +409,7 @@ The HTTP code is set accordingly
 - C<500> for content syntax errors
 
     my $Result = $TransportObject->ProviderGenerateResponse(
-        Success => 1
+        Success => 1,
         Data    => { # data payload for response, optional
             ...
         },
@@ -416,7 +491,7 @@ sub ProviderGenerateResponse {
     if ( defined $Param{Data} && IsHashRefWithData( $Param{Data} ) ) {
         my $SOAPData = $Self->_SOAPOutputRecursion(
             Data => $Param{Data},
-            Sort => $Config->{Sort},
+            Sort => $Param{Sort} // $Config->{Sort},
         );
 
         # Check output of recursion.
@@ -441,13 +516,26 @@ sub ProviderGenerateResponse {
     if ($SOAPResult) {
         push @CallData, $SOAPResult;
     }
-    my $Serialized      = SOAP::Serializer->autotype(0)->default_ns( $Config->{NameSpace} )->envelope(@CallData);
-    my $SerializedFault = $@ || '';
-    if ($SerializedFault) {
-        return $Self->_Output(
-            HTTPCode => 500,
-            Content  => 'Error serializing message:' . $SerializedFault,
-        );
+    my $Serialized;
+    if ( $Config->{NoNameSpace} ) {
+        $Serialized = SOAP::Serializer->autotype(0)->envelope(@CallData);
+        my $SerializedFault = $@ || '';
+        if ($SerializedFault) {
+            return $Self->_Output(
+                HTTPCode => 500,
+                Content  => 'Error serializing message:' . $SerializedFault,
+            );
+        }
+    }
+    else {
+        $Serialized = SOAP::Serializer->autotype(0)->default_ns( $Config->{NameSpace} )->envelope(@CallData);
+        my $SerializedFault = $@ || '';
+        if ($SerializedFault) {
+            return $Self->_Output(
+                HTTPCode => 500,
+                Content  => 'Error serializing message:' . $SerializedFault,
+            );
+        }
     }
 
     # No error - return output.
@@ -501,6 +589,7 @@ sub RequesterPerformRequest {
     NEEDED:
     for my $Needed (qw(Endpoint NameSpace Timeout)) {
         next NEEDED if IsStringWithData( $Config->{$Needed} );
+        next NEEDED if $Needed eq 'NameSpace' && $Config->{NoNameSpace};
 
         return {
             Success      => 0,
@@ -518,7 +607,10 @@ sub RequesterPerformRequest {
     }
 
     # Check operation param.
-    if ( !IsStringWithData( $Param{Operation} ) ) {
+    my $OperationName = $Param{Webservice}->{Config}->{Requester}->{Invoker}->{ $Param{Operation} }->{OperationName};
+    $OperationName //= $Param{Operation};
+
+    if ( !IsStringWithData($OperationName) ) {
         return {
             Success      => 0,
             ErrorMessage => 'SOAP Transport: Need Operation',
@@ -530,7 +622,7 @@ sub RequesterPerformRequest {
     if ( defined $Param{Data} && IsHashRefWithData( $Param{Data} ) ) {
         $SOAPData = $Self->_SOAPOutputRecursion(
             Data => $Param{Data},
-            Sort => $Config->{Sort},
+            Sort => $Param{Sort} // $Config->{Sort},
         );
 
         # Check output of recursion.
@@ -544,18 +636,35 @@ sub RequesterPerformRequest {
 
     # Build request wrapper name
     #   possible values are 'Append', 'Plain' and 'Request'.
-    my $OperationRequest = $Param{Operation};
+    my $OperationRequest = $OperationName;
     $Config->{RequestNameScheme} ||= 'Plain';
     if ( $Config->{RequestNameScheme} eq 'Request' ) {
         $Config->{RequestNameScheme}   = 'Append';
         $Config->{RequestNameFreeText} = 'Request';
     }
-    if ( $Config->{RequestNameScheme} = 'Append' && $Config->{RequestNameFreeText} ) {
+    if ( $Config->{RequestNameScheme} eq 'Append' && $Config->{RequestNameFreeText} ) {
         $OperationRequest .= $Config->{RequestNameFreeText};
     }
 
     # Prepare method.
-    my $SOAPMethod = SOAP::Data->name($OperationRequest)->uri( $Config->{NameSpace} );
+    my $SOAPMethod;
+    if ( $Config->{NoNameSpace} ) {
+
+        # special behavior to get the xmls without namesp1:
+        if ( $Config->{NameSpace} ) {
+            $SOAPMethod = SOAP::Data->name($OperationRequest)->attr( { 'xmlns' => $Config->{NameSpace} } );
+        }
+        else {
+            $SOAPMethod = SOAP::Data->name($OperationRequest);
+        }
+    }
+    else {
+        $SOAPMethod = SOAP::Data->name($OperationRequest)->uri( $Config->{NameSpace} );
+        if ( defined $Config->{FixedNameSpacePrefix} && length $Config->{FixedNameSpacePrefix} ) {
+            $SOAPMethod->prefix( $Config->{FixedNameSpacePrefix} );
+        }
+    }
+
     if ( ref $SOAPMethod ne 'SOAP::Data' ) {
         return {
             Success      => 0,
@@ -564,18 +673,67 @@ sub RequesterPerformRequest {
     }
 
     # Prepare connect.
-    my $SOAPHandle = eval {
-        SOAP::Lite->autotype(0)->default_ns( $Config->{NameSpace} )->proxy(
-            $Config->{Endpoint},
-            timeout => $Config->{Timeout},
-        );
-    };
-    my $SOAPHandleFault = $@ || '';
-    if ($SOAPHandleFault) {
-        return {
-            Success      => 0,
-            ErrorMessage => 'Error creating SOAPHandle: ' . $SOAPHandleFault,
+    my %AdditionalSOAPLiteOptions;
+    if (
+        IsStringWithData( $Config->{Authentication}->{AuthType} )
+        && $Config->{Authentication}->{AuthType} eq 'NTLM'
+        )
+    {
+        ( my $Host = $Config->{Endpoint} ) =~ s{\A.*?//(.*?)(/.*)?\z}{$1}sm;
+        $AdditionalSOAPLiteOptions{keep_alive} = 1;
+
+        # Add leading backslash to username if it not yet contains one (e. g. like in 'Domain\Username')
+        my $NTLMUsername = $Config->{Authentication}->{BasicAuthUser};
+        if ( index( $NTLMUsername, '\\' ) == -1 ) {
+            $NTLMUsername = '\\' . $NTLMUsername;
+        }
+
+        $AdditionalSOAPLiteOptions{credentials} = [
+            $Host,
+            '',
+            $NTLMUsername,
+            $Config->{Authentication}->{BasicAuthPassword},
+        ];
+    }
+
+    my $SOAPHandle;
+    if ( $Config->{NoNameSpace} ) {
+        $SOAPHandle = eval {
+            SOAP::Lite->autotype(0)->proxy(
+                $Config->{Endpoint},
+                timeout => $Config->{Timeout} || 60,
+                %AdditionalSOAPLiteOptions,
+            );
         };
+        my $SOAPHandleFault = $@ || '';
+        if ($SOAPHandleFault) {
+            return {
+                Success      => 0,
+                ErrorMessage => 'Error creating SOAPHandle: ' . $SOAPHandleFault,
+            };
+        }
+    }
+    else {
+        $SOAPHandle = eval {
+            SOAP::Lite->autotype(0)->default_ns( $Config->{NameSpace} )->proxy(
+                $Config->{Endpoint},
+                timeout => $Config->{Timeout} || 60,
+                %AdditionalSOAPLiteOptions,
+            );
+        };
+        my $SOAPHandleFault = $@ || '';
+        if ($SOAPHandleFault) {
+            return {
+                Success      => 0,
+                ErrorMessage => 'Error creating SOAPHandle: ' . $SOAPHandleFault,
+            };
+        }
+    }
+
+    if ( $Config->{SSLNoHostnameVerification} ) {
+
+        # taken from http://stackoverflow.com/a/20635345
+        $SOAPHandle->{_transport}->{_proxy}->{ssl_opts}->{verify_hostname} = 0;
     }
 
     # Add SSL options if configured.
@@ -609,6 +767,21 @@ sub RequesterPerformRequest {
                 $SSLOptionsMap{$SSLOption} => sub { $Config->{SSL}->{$SSLOption} },
             );
         }
+
+        # Crypt::SSLeay needs the following environment variables for SSL.
+        # See https://metacpan.org/dist/SOAP-Lite/view/lib/SOAP/Transport.pod#SSL-CERTIFICATE-AUTHENTICATION
+        if ( IsStringWithData( $Config->{SSL}->{SSLCertificate} ) ) {
+            $ENV{HTTPS_CERT_FILE} = $Config->{SSL}->{SSLCertificate};    ## no critic
+        }
+        if ( IsStringWithData( $Config->{SSL}->{SSLKey} ) ) {
+            $ENV{HTTPS_KEY_FILE} = $Config->{SSL}->{SSLKey};             ## no critic
+        }
+        if ( IsStringWithData( $Config->{SSL}->{SSLPassword} ) ) {
+            $ENV{HTTPS_CERT_PASS} = $Config->{SSL}->{SSLPassword};       ## no critic
+        }
+
+        # see https://github.com/OTRS/otrs/pull/1474
+        $ENV{PERL_NET_HTTPS_SSL_SOCKET_CLASS} = 'Net::SSL';              ## no critic
     }
 
     # Add proxy options if configured.
@@ -703,14 +876,14 @@ sub RequesterPerformRequest {
             && IsStringWithData( $Config->{SOAPActionSeparator} )
             )
         {
-            $SOAPAction = $Config->{SOAPActionSeparator} . $Param{Operation};
+            $SOAPAction = $Config->{SOAPActionSeparator} . $OperationName;
         }
         elsif (
             $Config->{SOAPActionScheme} eq 'NameSpaceSeparatorOperation'
             && IsStringWithData( $Config->{SOAPActionSeparator} )
             )
         {
-            $SOAPAction = $Config->{NameSpace} . $Config->{SOAPActionSeparator} . $Param{Operation};
+            $SOAPAction = $Config->{NameSpace} . $Config->{SOAPActionSeparator} . $OperationName;
         }
 
         # Fall-back for the following cases:
@@ -733,6 +906,17 @@ sub RequesterPerformRequest {
     #   result is that the data is surrounded by <soapenc:Array>, to avoid this is necessary to
     #   pass each part of the $SOAPData->{Data} Array one by one.
     my @CallData = ($SOAPMethod);
+
+    $Self->EventHandler(
+        Event => 'RequesterPerformRequest_CallData',
+        Data  => {
+            SOAPObject                   => $Self,
+            CallData                     => \@CallData,
+            RequesterPerformRequestParam => \%Param,
+        },
+        UserID => 1,
+    );
+
     if ($SOAPData) {
 
         # Check if $SOAPData->{Data} is an array reference.
@@ -755,6 +939,37 @@ sub RequesterPerformRequest {
     };
     my $SOAPResultFault = $@ || '';
     if ($SOAPResultFault) {
+        my $StorableObject = $Kernel::OM->Get('Kernel::System::Storable');
+
+        my $ConfigClone = $StorableObject->Clone(
+            Data => $Config,
+        );
+        my $EnvClone = $StorableObject->Clone(
+            Data => \%ENV,
+        );
+
+        if ( IsStringWithData( $ConfigClone->{SSL}->{SSLProxyPassword} ) ) {
+            $ConfigClone->{SSL}->{SSLProxyPassword} = '***';
+            $EnvClone->{HTTPS_PROXY_PASSWORD} = '***';
+        }
+        if ( IsStringWithData( $ConfigClone->{SSL}->{SSLP12Password} ) ) {
+            $ConfigClone->{SSL}->{SSLP12Password} = '***';
+            $EnvClone->{HTTPS_PKCS12_PASSWORD} = '***';
+        }
+        if ( IsStringWithData( $ConfigClone->{Authentication}->{Password} ) ) {
+            $ConfigClone->{Authentication}->{Password} = '***';
+        }
+
+        $Self->{DebuggerObject}->Error(
+            Summary => 'Error in SOAP call: ' . $SOAPResultFault,
+            Data    => {
+                Payload => $Param{Data},
+                Config  => $ConfigClone,
+                ENV     => $EnvClone,
+                URL     => $Config->{Endpoint},
+            },
+        );
+
         return {
             Success      => 0,
             ErrorMessage => 'Error in SOAP call: ' . $SOAPResultFault,
@@ -844,7 +1059,7 @@ sub RequesterPerformRequest {
 
     # Build response wrapper name
     #   possible values are 'Append', 'Plain', 'Replace' and 'Response'
-    my $OperationResponse = $Param{Operation};
+    my $OperationResponse = $OperationName;
     $Config->{ResponseNameScheme} ||= 'Response';
     if ( $Config->{ResponseNameScheme} eq 'Response' ) {
         $Config->{ResponseNameScheme}   = 'Append';
@@ -863,12 +1078,20 @@ sub RequesterPerformRequest {
         }
     }
 
+    if (
+        defined $Config->{ResponseTagSuffix}
+        && length $Config->{ResponseTagSuffix}
+        )
+    {
+        $OperationResponse .= $Config->{ResponseTagSuffix};
+    }
+
     # Check if we have response data for the specified operation in the soap result.
     if ( !exists $Body->{$OperationResponse} ) {
         return {
             Success => 0,
             ErrorMessage =>
-                "No response data found for specified operation '$Param{Operation}'"
+                "No response data found for specified operation '$OperationName'"
                 . " in soap response",
         };
     }
@@ -878,6 +1101,15 @@ sub RequesterPerformRequest {
         Success => 1,
         Data    => $Body->{$OperationResponse} || undef,
     };
+}
+
+sub DESTROY {
+    my $Self = shift;
+
+    # execute all transaction events
+    $Self->EventHandlerTransaction();
+
+    return 1;
 }
 
 =begin Internal:

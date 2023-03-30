@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $ListCommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::Config::ListInvalid');
 my $FixCommandObject  = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::Config::FixInvalid');
 my $SysConfigObject   = $Kernel::OM->Get('Kernel::System::SysConfig');

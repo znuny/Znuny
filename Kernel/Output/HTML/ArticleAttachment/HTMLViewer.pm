@@ -15,9 +15,9 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
-    'Kernel::System::Log',
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::Log',
 );
 
 sub Run {
@@ -40,7 +40,7 @@ sub Run {
     # check if config exists
     if ( $ConfigObject->Get('MIME-Viewer') ) {
         for my $Key ( sort keys %{ $ConfigObject->Get('MIME-Viewer') } ) {
-            if ( $Param{File}->{ContentType} =~ /^Key/i ) {
+            if ( $Param{File}->{ContentType} =~ /^$Key/i ) {
                 return (
                     %{ $Param{File} },
                     Action => 'Viewer',

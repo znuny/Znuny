@@ -17,12 +17,11 @@ use parent qw(Kernel::System::SupportDataCollector::PluginBase);
 use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::MailQueue',
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Email Sending Queue');
+    return Translatable('Znuny') . '/' . Translatable('Email Sending Queue');
 }
 
 sub Run {

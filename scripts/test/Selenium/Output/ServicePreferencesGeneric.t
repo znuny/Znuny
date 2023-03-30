@@ -19,11 +19,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
+        my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
 
         # activate Service
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1
@@ -40,19 +43,19 @@ $Selenium->RunTest(
         );
 
         # enable ServicePreferences
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'ServicePreferences###Comment2',
             Value => \%ServicePreferences,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'ServicePreferences###Comment2',
             Value => \%ServicePreferences,
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -62,7 +65,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # go to service admin
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminService");
@@ -81,7 +84,7 @@ $Selenium->RunTest(
         }
 
         # create a real test service
-        my $RandomServiceName = "Service" . $Helper->GetRandomID();
+        my $RandomServiceName = "Service" . $HelperObject->GetRandomID();
         $Selenium->find_element( "#Name",    'css' )->send_keys($RandomServiceName);
         $Selenium->find_element( "#Comment", 'css' )->send_keys("Some service Comment");
 
@@ -128,12 +131,9 @@ $Selenium->RunTest(
         );
 
         # delete test service
-        my $ServiceID = $Kernel::OM->Get('Kernel::System::Service')->ServiceLookup(
+        my $ServiceID = $ServiceObject->ServiceLookup(
             Name => $RandomServiceName,
         );
-
-        # get DB object
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
         my $Success = $DBObject->Do(
             SQL => "DELETE FROM service_preferences WHERE service_id = $ServiceID",
@@ -156,7 +156,7 @@ $Selenium->RunTest(
             qw (ServicePreferencesDB Service SysConfig)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

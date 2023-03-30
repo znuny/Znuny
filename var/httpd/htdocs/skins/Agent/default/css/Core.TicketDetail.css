@@ -18,14 +18,18 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @subsection  Headline
  */
 div.Headline {
-    height: 24px;
-    margin: 5px 0px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding: /*var(--padding-md)*/ 0;
     position: relative;
+    justify-content: flex-start;
+    min-width: 100%;
 }
 
 div.Headline h1 {
-    font-size: 15px;
-    line-height: 24px;
+    font-size: var(--font-size-xl);
+    line-height: 36px;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -37,21 +41,22 @@ div.Headline h1 span {
 }
 
 div.Headline .Flag + h1 {
-    margin-left: 30px;
+    margin-left: var(--margin-sm);
 }
 
 .RTL div.Headline .Flag + h1 {
     margin-left: 0;
-    margin-right: 30px;
+    margin-right: var(--margin-sm);
 }
 
+/*  This flag is already being styled through the .Flag and .Small classes
 div.Headline .Flag {
     position: absolute;
     top: 5px;
     left: 0px;
-    width: 20px;
-    height: 15px;
-}
+    width: 24px;
+    height: 12px;
+}*/
 
 .RTL div.Headline .Flag {
     left: auto;
@@ -63,9 +68,15 @@ div.Headline .Flag {
  */
 
 .ArticleView {
-    position: absolute;
+    /*position: absolute;
     right: 3px;
-    top: 7px;
+    top: 7px;*/
+    position: relative;
+    right: unset;
+    top: unset;
+    display: flex;
+    align-self: baseline;
+    align-items: center;
 }
 
 /**
@@ -80,16 +91,15 @@ div.Headline .Flag {
  * @subsection  Article table body
  */
 
-#ArticleItems .Header h2 {
-    float: left;
-}
-
-#ArticleItems .WidgetSimple .Header {
+#ArticleItems .WidgetSimple .Header,
+#WidgetTicket.WidgetSimple .Header {
+    display: flex;
+    gap: 4px;
     overflow: hidden;
 }
 
 #ArticleItems .WidgetSimple .Header h2 {
-    max-width: 80%;
+    max-width: calc(100% - 60px);
 }
 
 #ArticleItems .WidgetSimple .Header .AdditionalInformation {
@@ -99,9 +109,38 @@ div.Headline .Flag {
     float: right;
 }
 
-#ArticleItems .WidgetMenu .LightRow {
-    background: #E8E8E8;
-    border-bottom: none;
+#ArticleItems .WidgetSimple.Expanded .Content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    padding: var(--padding-lg);
+}
+
+#ArticleItems .WidgetSimple .Content .ArticleMailContent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--gap-md);
+}
+
+#ArticleItems  .Incoming .Content .ArticleMailContent {
+    flex-direction: row-reverse;
+}
+
+#ArticleItems .WidgetSimple .Content .ArticleMailContent .article-inner-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#ArticleItems .WidgetSimple .Content .ArticleMailContent .Avatar {
+    display: flex;
+    width: 100%;
+    max-width: 80px;
+}
+
+#ArticleItems .WidgetSimple .Content .ArticleMailContent .Avatar img {
+    border-radius: var(--border-radius-xxs);
 }
 
 #ArticleTableBody {
@@ -109,14 +148,18 @@ div.Headline .Flag {
     overflow: hidden;
     border-bottom: none;
     margin: 0px;
+    height: 100% !important;
 }
 
 #ArticleTableBody .Scroller {
-    height: 82px;
+    /* temporary forced style to override inline styles */
+    /* height is dynamically changed inline with table size adjustments */
+    height: auto;
+    width: 100% !important;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
+    margin-bottom: 0 !important;
+    border: none;
 }
 
 #ArticleTableBody .Scroller::-webkit-scrollbar-track {
@@ -139,28 +182,51 @@ div.Headline .Flag {
 
 .ArticleMailHeader {
     font-size: 11px;
-    margin: 10px 0px -5px 0px;
+    margin: 0;
+    margin-bottom: 0px;
+    padding: var(--padding-lg);
+    /*border-top: var(--border-width) var(--border-solid) var(--border-color);*/
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    margin-bottom: 10px;
+    background: var(--email-info);
 }
 
-.Outgoing .ArticleMailHeader fieldset.TableLike.FixedLabelSmall > label,
+.ArticleMailHeader fieldset > div {
+    display: flex;
+    flex-flow: row;
+    align-items: baseline;
+    font-size: var(--font-size-sm);
+}
+
+/*.Outgoing .ArticleMailHeader fieldset.TableLike.FixedLabelSmall > label,
 .Outgoing .ArticleMailHeader fieldset.TableLike.FixedLabelSmall > .Row > label {
     width: 105px;
     float: left;
+}*/
+
+.ticketDetails {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+}
+
+.ticketDetails:empty {
+    display: none;
 }
 
 #ArticleItems .ItemActions {
-    padding: 0px 10px;
-    box-sizing: border-box;
-    margin-right: 105px;
-    margin-right: 115px;
-    min-height: 28px;
+    display: flex;
+    flex-flow: row;
     position: relative;
-    top: -4px;
+    padding: var(--padding-lg);
+    box-sizing: border-box;
+    background: var(--main-bg-color);
+    border-top-left-radius: var(--border-radius-md);
+    border-top-right-radius: var(--border-radius-md);
+    border: var(--border-width) var(--border-solid) var(--border-color);
 }
 
-#ArticleItems .ItemActions li .InputField_Container {
-    margin-left: 3px;
-}
+
 
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
 
@@ -171,107 +237,47 @@ div.Headline .Flag {
 }
 
 #ArticleItems .ItemActions li .InputField_Container input[type=text] {
-    padding: 2px;
+    padding: var(--padding-xs);
 }
 
 #ArticleItems .Outgoing .ItemActions {
-    margin-left: 75px;
-    margin-right: 0px;
+    border-top-color: var(--mail-outgoing-color);
+    border-left-color: var(--mail-outgoing-color);
+    border-right-color: var(--mail-outgoing-color);
 }
 
 #ArticleItems .ArticleMailHeader label,
 #ArticleItems .ArticleMailHeader p.Value {
-    display: block;
-    margin: 0px;
-    padding: 0px;
-    line-height: 2.4em;
+    display: flex;
+    line-height: 30px;
+    gap: 0;
+}
+
+#ArticleItems .ArticleMailHeader label {
+    justify-content: flex-end;
+    padding-right: var(--padding-sm);
+    color: var(--gray-semi-dark);
 }
 
 #ArticleItems .ArticleMailHeader p.Value {
     width: calc(100% - 112px);
-    float: right;
 }
 
 #ArticleItems .Incoming .ArticleMailHeader p.Value {
     width: calc(100% - 103px);
 }
 
-.ArticleMailContent {
-    padding: 3px 12px;
-    line-height: 1.3;
-    position: relative;
-}
-
-.ArticleMailContent .ArticleMeta {
-    background: #fff;
-    padding: 12px 12px 4px 12px;
-    text-align: right;
-    box-sizing: border-box;
-    margin-left: 75px;
-    margin-top: -9px;
-    border-top: 1px solid #ddd !important;
-    position: relative;
-    z-index: 2;
-}
-
-.Incoming .ArticleMailContent .ArticleMeta {
-    margin-left: 0px;
-    margin-right: 75px;
-}
-
-.ArticleMailContent .ArticleMeta h2 {
-    font-size: 12px;
-    color: #999;
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.ArticleMailContent .ArticleMeta ul {
-    display: inline-block;
-}
-
-.ArticleMailContent .ArticleMeta ul li {
-    display: inline-block;
-}
-
-.ArticleMailContent .ArticleMeta ul li a {
-    white-space: nowrap;
-    display: block;
-    background: #eee;
-    color: #333;
-    font-size: 11px;
-    padding: 3px 7px;
-    margin-bottom: 4px;
-}
-
-.Avatar {
-    border: 1px solid #eee;
-    position: absolute;
-    top: 30px;
-    background: #fff;
-    padding: 5px;
-    width: 50px;
-    height: 50px;
-}
-
-.Avatar img {
-    width: 100%;
-    height: 100%;
-}
-
-.Outgoing .Avatar {
-    left: 7px;
-}
-
-.Incoming .Avatar {
-    right: 6px;
+#ArticleItems .ArticleMailHeader p.Value .Switch {
+    line-height: 30px;
+    display: flex;
 }
 
 #ArticleItems .ArticleMailContentHTMLWrapper,
 #ArticleItems .ArticleHTML,
 #ArticleItems .ArticleBody {
     -webkit-overflow-scrolling: touch;
-   margin-left: 75px;
+   margin-left: 0;
+   margin-right: 0;
    position: relative;
 }
 
@@ -279,11 +285,19 @@ div.Headline .Flag {
 #ArticleItems .Incoming .ArticleHTML,
 #ArticleItems .Incoming .ArticleBody {
     margin-left: 0px;
-    margin-right: 75px;
+    margin-right: 0;
+    border-radius: var(--border-radius-md);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: 0;
+}
+
+.ticketDetails .ArticleBody {
+
 }
 
 body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
-   overflow-x: scroll;
+   overflow-x: auto;
 }
 
 .Outgoing .ArticleMailContentHTMLWrapper:before,
@@ -298,14 +312,7 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 .Incoming .ArticleHTML:after,
 .Outgoing .ArticleBody:after,
 .Incoming .ArticleBody:after {
-    border-color: rgba(255, 255, 255, 0);
-    top: 24px;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
+    display: none !important;
 }
 
 .Outgoing .ArticleMailContentHTMLWrapper:before,
@@ -314,11 +321,7 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 .Incoming .ArticleHTML:before,
 .Outgoing .ArticleBody:before,
 .Incoming .ArticleBody:before {
-    border-right-color: #fff;
-	border-width: 10px;
-    margin-top: -10px;
-    z-index: 2;
-    left: -18px;
+    display: none !important;
 }
 
 .Outgoing .ArticleMailContentHTMLWrapper:after,
@@ -342,9 +345,7 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 .Incoming .ArticleMailContentHTMLWrapper:after,
 .Incoming .ArticleHTML:after,
 .Incoming .ArticleBody:after {
-	left: auto;
-    right: -24px;
-	border-left-color: #eee;
+	display: none !important;
 }
 
 .Incoming .ArticleBody:after {
@@ -354,10 +355,7 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 .Incoming .ArticleMailContentHTMLWrapper:before,
 .Incoming .ArticleHTML:before,
 .Incoming .ArticleBody:before {
-	left: auto;
-    right: -18px;
-	border-left-color: #fff;
-    border-right-color: transparent;
+	display: none;
 }
 
 .Incoming .ArticleBody:before,
@@ -387,14 +385,28 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     border-right-color: #ffcccc;
 }
 
+
 .ArticleSenderInitials {
-    text-align: center;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    color: var(--gray-semi-dark);
+    background: #ECECEC;
+}
+
+.ArticleSenderInitials,
+.ArticleSenderImage {
+    width: 100%;
+    height: 100%;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: var(--border-radius-xxs);
+    overflow: hidden;
 }
 
 .ArticleSenderInitials span {
-    font-size: 22px;
-    line-height: 50px;
-    color: #CCC;
+    font-size: 35px;
 }
 
 .ArticleMailContent iframe {
@@ -418,8 +430,11 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 
 .ArticleFilter,
 .ArticlePages {
-    float: left;
-    margin-left: 10px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: var(--gap-xs);
+    padding-right: var(--padding-xs);
 }
 
 .RTL .ArticleFilter,
@@ -428,31 +443,32 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 }
 
 .ControlRow .Icons a {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-xs);
+    transition: var(--main-transition);
+    color: var(--gray-semi-dark);
     width: 26px;
-    height: 24px;
-    line-height: 24px;
-    vertical-align: middle;
-    display: block;
-    float: left;
-}
-
-.ControlRow .Icons a.Active {
-    background: #5D5D5D;
+    height: 26px;
 }
 
 .ControlRow .Icons a:hover {
-    background-color: #ccc;
-}
-
-.ControlRow .Icons a {
-    text-align: center;
+    background-color: var(--icon-hover-color-light);
+    color: var(--gray-semi-dark);
+    border-color: var(--border-color);
 }
 
 .ControlRow .Icons a i {
-    color: #777;
+    color: var(--gray-darker);
     font-size: 15px;
-    margin-top: 5px;
     display: block;
+}
+
+.ControlRow .Icons a.Active {
+    color: var(--primary-color);
+    font-weight: bold;
 }
 
 .ControlRow .Icons a.Active i {
@@ -465,6 +481,7 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     height: 16px;
     text-indent: -9999px;
     display: block;
+    position: absolute; /* temporary */
 }
 
 .ControlRow .ArticleFilter.Icons .Active span {
@@ -525,7 +542,8 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
  */
 
 .ItemRow {
-    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .RTL .ItemRow {
@@ -534,7 +552,7 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 }
 
 .ItemRow li {
-    padding: 3px 0 5px 8px;
+    padding: var(--padding-sm) 0 0;
 }
 
 .RTL .ItemRow li {
@@ -556,42 +574,6 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
  * @note        Styles for article body
  */
 
-.SmallBox,
-.MessageBrowser {
-    margin: 11px 11px 6px 11px;
-    position: relative;
-}
-
-.WidgetSimple .WidgetMessage.Top {
-    margin-top: -8px !important;
-}
-
-.MessageBrowser p {
-     padding: 5px 25px 5px 25px;
-     background-color: #DDD;
-     font-size: 11px;
-     text-align: center;
-}
-
-.SmallBox p {
-     padding: 5px 25px 5px 25px;
-     font-size: 11px;
-     text-align: center;
-}
-
-.MessageBrowser a.Close {
-    display: block;
-    width: 12px;
-    height: 12px;
-    position: absolute;
-    right: 4px;
-    top: 4px;
-    color: #5D5D5D;
-}
-
-.MessageBrowser a.Close:hover {
-    color: #000;
-}
 
 /**
  * @subsection  ArticleColors
@@ -599,26 +581,35 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
  */
 
 #ArticleTable.DataTable tbody td {
-    border-right-style: dashed;
+    border-right-style: none;
+}
+
+tbody td.Sender {
+    line-height: normal;
 }
 
 #ArticleTable.DataTable tbody td:last-child {
     border-right: 0px;
 }
 
-.UseArticleColors td,
+
 .UseArticleColors tr:nth-child(even) td {
     transition: background ease 0.3s;
-    background: #fff;
+    background-color: var(--table-td-even-bg);
     border-color: #ccc;
     border-bottom: 1px solid #eee;
 }
 
 .UseArticleColors tr.Active > td,
+.UseArticleColors tr.Active:hover > td {
+    background-color: var(--mail-outgoing-color) !important;
+    border-color: var(--mail-outgoing-color) !important;
+}
+
 .UseArticleColors tr:hover > td {
-    background-color: #f2f2f2 !important;
-    border-color: #f2f2f2;
-    border-right-color: #ccc !important;
+    background-color: var(--primary-color-rgb) !important;
+    border-color: var(--primary-color-rgb);
+    border-right-color: var(--primary-color-rgb) !important;
 }
 
 .UseArticleColors tr.NotVisibleForCustomer > td {
@@ -649,15 +640,22 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 .ArticleMailContent .ArticleBody,
 .ArticleMailContent .ArticleHTML,
 .ArticleMailContent .ArticleMeta {
-    border: 2px solid #eee;
-    border-radius: 3px;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: var(--padding-lg);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: 0;
 }
 
 .UseArticleColors #ArticleItems .NotVisibleForCustomer .ArticleMailContent iframe,
 .UseArticleColors #ArticleItems .NotVisibleForCustomer .ArticleMailContent .ArticleBody,
 .UseArticleColors #ArticleItems .NotVisibleForCustomer .ArticleMailContent .ArticleHTML,
 .UseArticleColors #ArticleItems .NotVisibleForCustomer .ArticleMailContent .ArticleMeta {
-    border: 2px solid #FFCCCC;
+    border: var(--border-width) var(--border-solid) var(--mail-outgoing-color);
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .UseArticleColors .Incoming.NotVisibleForCustomer .ArticleMailContentHTMLWrapper:after,
@@ -692,7 +690,8 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 }
 
 .UseArticleColors #ArticleTable a {
-    color: #000;
+    /* defaults to table color in this way */
+    color: unset;
 }
 
 .UseArticleColors #ArticleTable i.fa-spin {
@@ -775,574 +774,102 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     background: #FCB24B !important;
 }
 
-/**
- * @subsection  Timeline View
- */
-
-.TimelineView {
-    position: relative;
-    padding: 5px 5px 15px 5px;
-}
-
-.TimelineView:after {
-    content: ' ';
-    width: 4px;
-    height: 20px;
-    background-color: #F5F5F5;
-    display: block;
-    position: absolute;
-    left: 50%;
-    margin-left: -2px;
-    top: 16px;
-}
-
-.TimelineView > ul {
-    display: block;
-    width: 49.9%;
-    float: left;
-    margin-top: 20px;
-    border-left: 1px solid #aaa;
-    margin-left: -1px;
-    padding-bottom: 65px;
-}
-
-.TimelineView > ul:first-child {
-    margin-right: 0px;
-    border-right: 1px solid #aaa;
-    border-left: 0px;
-}
-
-.TimelineView > ul > li {
-    background-color: #fff;
-    margin: 0px 20px 0px 25px;
-    padding: 10px 10px 5px 10px;
-    border: 1px solid #ddd;
-}
-
-.TimelineView > ul:first-child > li {
-    margin-right: 25px;
-    margin-left: 20px;
-}
-
-.TimelineView > ul:first-child > li.NoEvents {
-    width: 500px;
-    position: absolute;
-    left: 50%;
-    top: 15px;
-    margin-right: 0px;
-    margin-left: -253px;
-    z-index: 100;
-    padding: 5px;
-    text-align: center;
-    border: 0px;
-    background-color: #F5F5F5;
-}
-
-.TimelineView > ul > li:first-child {
-    margin-top: -7px;
-}
-
-.TimelineView > ul > li h3 {
-    margin: -10px -10px 5px -10px;
-    padding: 6px 10px;
-    background: #fff;
-    font-size: 12px;
-    position: relative;
-}
-
-.TimelineView > ul > li.NewTicket h3 {
-    background: #ddd;
-}
-
-.TimelineView > ul > li h3 .fa-info-circle {
-    display: none;
-}
-
-.TimelineView > ul > li.Important h3 .fa-info-circle {
-    display: inline-block;
-    color: #777;
-}
-
-.TimelineView > ul > li.Important:hover h3 .fa-info-circle {
-    color: #000;
-}
-
-.TimelineView > ul > li.HasArticle h3 strong {
-    font-weight: bold;
-}
-
-.TimelineView > ul > li h3 strong,
-.TimelineView > ul > li.Seen h3 strong {
-    font-weight: normal;
-}
-
-.TimelineView > ul > li h3 a {
-    float: right;
-    color: #666;
-}
-
-.TimelineView > ul > li p {
-    max-height: 106px;
-    white-space: pre;
-    overflow: hidden;
-    position: relative;
-}
-
-.TimelineView > ul > li.TypeTicketAction p {
-    max-height: none;
-}
-
-.TimelineView > ul > li.NoFixedMaxHeight p {
-    max-height: none;
-}
-
-.TimelineView > ul > li p span.FadeOut {
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-8 */
-    position: absolute;
-    width: 100%;
-    height: 20px;
-    bottom: 0px;
-    left: 0px;
-}
-
-.TimelineView > ul > li.NoFadeOut .FadeOut {
-    display: none;
-}
-
-.TimelineView > ul > li.Connected * {
-    font-size: 11px;
-}
-
-.TimelineView > ul > li.Connected h3 {
-    padding: 4px 10px;
-}
-
-.TimelineView > ul > li.Connected p {
-    margin-bottom: -4px;
-}
-
-.TimelineView > ul > li.Connected h3 span {
-    display: none;
-}
-
-.TimelineView > ul > li.Connected {
-    margin-right: 40px !important;
-    margin-left: 40px !important;
-    padding-bottom: 10px;
-}
-
-.TimelineView > ul > li h3 a:hover {
-    color: #000;
-}
-
-.TimelineView > ul > li h3:last-child {
-    margin-bottom: -10px;
-}
-
-.TimelineView > ul > li h3:after {
-    right: 100%;
-    top: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(221, 221, 221, 0);
-    border-right-color: #ccc;
-    border-width: 13px;
-    margin-top: -13px;
-}
-
-.TimelineView ul.ListLeft li h3:after {
-    left: 100%;
-    border-left-color: #ddd;
-    border-right-color: transparent;
-}
-
-.TimelineView > ul > li.Connected h3:after {
-    left: 50%;
-    content: "";
-    right: auto;
-    border-color: #ccc;
-    top: -7px;
-    height: 3px;
-    margin-top: 0px;
-    border-width: 2px;
-}
-
-.TimelineView ul.ListLeft li h3 > span {
-    right: -31px;
-    left: auto;
-}
-
-.TimelineView > ul > li h3 > span {
-    display: block;
-    position: absolute;
-    top: 6px;
-    left: -31px;
-    background-color: #aaa;
-    height: 9px;
-    width: 9px;
-    z-index: 1;
-    -webkit-transition: all 0.1s ease-in;
-    -moz-transition: all 0.1s ease-in;
-    -o-transition: all 0.1s ease-in;
-    transition: all 0.1s ease-in;
-}
-
-.TimelineView > ul > li h3 > span span {
-    position: absolute;
-    width: 160px;
-    background-color: #777;
-    color: #fff;
-    font-size: 11px;
-    text-align: center;
-    left: 50%;
-    top: -37px;
-    margin-left: -80px;
-    padding: 7px 0px;
-    display: none;
-}
-
-.TimelineView > ul > li h3 > span:hover {
-    z-index: 99;
-}
-
-.TimelineView > ul > li h3 > span:hover span {
-    display: block;
-    z-index: 999;
-}
-
-.TimelineView > ul > li h3 > span span:after {
-    top: 100%;
-    left: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(119, 119, 119, 0);
-    border-top-color: #777;
-    border-width: 8px;
-    margin-left: -8px;
-}
-
-.TimelineView > ul > li:hover h3 > span,
-.TimelineView > ul > li h3 > span:hover {
-    width: 15px;
-    height: 15px;
-    left: -34px;
-    top: 4px;
-    background-color: #000;
-}
-
-.TimelineView ul:first-child li:hover h3 > span,
-.TimelineView ul:first-child li h3 > span:hover {
-    right: -34px;
-    left: auto;
-    top: 4px;
-}
-
-.TimelineView li ul {
-    font-size: 11px;
-    background-color: #f2f2f2;
-    margin: -5px -10px 5px -10px;
-    padding: 2px 10px 5px 10px;
-    border-top: 1px solid #ddd;
-    position: relative;
-}
-
-.TimelineView li ul li {
-    margin-top: 3px;
-}
-
-.TimelineView li ul li.subject,
-.TimelineView li ul li.from,
-.TimelineView li ul li.to,
-.TimelineView li ul li.cc {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.TimelineView li ul li.AttachmentsLink {
-    background: #ddd;
-    color: #555;
-    cursor: pointer;
-    font-size: 13px;
-    padding: 3px 5px;
-    position: absolute;
-    right: 0px;
-    top: 5px;
-}
-
-.TimelineView li ul li.AttachmentsLink:hover {
-    color: #000;
-}
-
-.TimelineView > span {
-    display: block;
-    margin: 70px 0px;
-    font-size: 18px;
-    text-align: center;
-}
-
-.TimelineView > .CallForAction {
-    margin: 0px auto;
-    display: block;
-    width: 120px;
-}
-
-.TimelineView > ul > li.NewTicket {
-    left: 50%;
-    bottom: 10px;
-    margin-left: -86px;
-    position: absolute;
-    width: 150px;
-    text-align: center;
-    border: 0px;
-}
-
-.TimelineView > ul > li.NewTicket h3 {
-    font-weight: bold;
-    padding-top: 5px;
-}
-
-.TimelineView > ul > li.NewTicket h3:after {
-    display: none;
-}
-
-.TimelineView > ul > li.NewTicket:after {
-    bottom: 100%;
-    left: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(136, 183, 213, 0);
-    border-bottom-color: #DDDDDD;
-    border-width: 10px;
-    margin-left: -10px;
-}
-
-.TimelineView > ul > li.NewTicket h3 > span {
-    display: block;
-    position: static;
-    text-align: center;
-    background: none;
-    width: auto !important;
-    height: auto !important;
-    font-weight: normal;
-}
-
-.TimelineView > ul > li.NewTicket h3 > span span {
-    display: block;
-    position: static;
-    text-align: center;
-    background: none;
-    width: auto;
-    color: #000;
-    margin: 0px;
-    padding: 0px;
-    margin-top: 4px;
-}
-
-.TimelineView > ul > li.NewTicket h3 > span span:after {
-    display: none;
-}
-
-.TimelinePlainText {
-    white-space: pre-wrap;
-    height: 400px;
-    width: 800px;
-    padding: 10px;
-    overflow: auto;
-}
-
-.TimelineView .PlainText > div.ChatMessage {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-size: 11px;
-}
-
-.TimelineView .PlainText > div.ChatMessage.SystemGenerated {
-    font-style: italic;
-    color: #aaa;
-}
-
-.TimelineView .PlainText > div.ChatMessage span {
-    font-weight: bold;
-    font-style: normal;
-}
-
-.TimelinePlainText .ArticleHTML {
-    max-height: none;
-    line-height: 120%;
-    font-size: 12px;
-}
-
-.TimelineArticleiFrame {
-    width: 800px;
-    height: 400px;
-}
-
-.ActionsTimelineView .Actions li select {
-    max-width: 120px;
-}
-
-.ActionsTimelineView .ItemActions {
-    cursor: default;
-    position: relative;
-    overflow: hidden;
-    background: #EEEEEE;
-    border-bottom: 1px solid #CCC;
-}
-
-/* Define colors for different event types */
-
-.UseArticleColors .TimelineView .TypeIncoming h3 {
-    background-color: #fff;
-}
-
-.UseArticleColors .TimelineView .TypeIncoming h3:after {
-    border-right-color: #ddd;
-}
-
-.UseArticleColors .TimelineView .TypeTicketAction h3 {
-    background-color: #eee;
-    color: #555;
-}
-
-.UseArticleColors .TimelineView .TypeTicketAction {
-    background: #f7f7f7;
-}
-
-.UseArticleColors .TimelineView .TypeIncoming.SenderType_customer.ArticleType_email-internal h3 {
-    background-color: #fff;
-}
-
-.UseArticleColors .TimelineView .TypeIncoming.SenderType_customer.ArticleType_email-internal h3:after {
-    border-right-color: #ddd;
-}
-
-.UseArticleColors .TimelineView .TypeTicketAutoAction h3 {
-    background-color: #ffffd1;
-    color: #000;
-}
-
-.UseArticleColors .TimelineView ul.ListLeft .TypeTicketAutoAction h3:after {
-    border-left-color: #EAEAAF;
-}
-
-.UseArticleColors .TimelineView .TypeNoteInternal h3 {
-    background-color: #FFCCCC;
-    color: #000;
-}
-
-.UseArticleColors .TimelineView ul.ListLeft .TypeNoteInternal h3:after {
-    border-left-color: #EFB1B1;
-}
-
-.TimelineView > ul > li.Seen div.UnreadArticles,
-.TimelineView li div.UnreadArticles {
-    display: none;
-}
-
-.TimelineView li.HasArticle div.UnreadArticles {
-    padding: 0px !important;
-    margin-left: 0px;
-    display: inline-block;
-    height: 10px;
-    width: 12px;
-    cursor: pointer;
-}
-
-.TimelineView div.UnreadArticles i:first-child {
-    font-size: 13px;
-}
-
-.TimelineView div.UnreadArticles i {
-    font-size: 11px;
-}
-
 .ItemRow i.Unsupported,
 .ItemRow a.Unsupported {
     opacity: 0.4;
 }
 
-.ArticleAttachments {
-    clear: both;
-    margin: 10px 0px -10px 75px;
-    overflow: hidden;
+
+
+.approval-container li:after {
+    display: none;
 }
 
-.Incoming .ArticleAttachments {
-    margin: 10px 105px -10px 0px;
+.approval-container .approval-val {
+    font-weight: var(--normal);
+    color: var(--primary-color);
+    margin-left: 8px;
 }
 
-.ArticleAttachments li {
-    float: left;
-    margin: 0px 10px 10px 0px;
-    background: #e8e8e8;
-    padding: 8px 45px 8px 12px;
-    font-size: 11px;
-    color: #777;
+.ContentColumn .WidgetSimple .Content.ProcessInfo {
+    padding:  0;
+}
+
+.ProcessInformation h2 {
+    color: var(--black);
+    font-weight: var(--normal);
+    padding: var(--padding-lg);
+    margin-top: var(--margin-sm);
+    margin-bottom: 0;
+}
+
+.ProcessInformation > fieldset.flex-column {
+    gap: 0;
+    padding: 0;
+}
+
+.ProcessInformation fieldset > div::after {
+    content: '';
     position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    margin-top: var(--margin-sm) 0;
 }
 
-.ArticleAttachments li h5 {
-    font-size: 12px;
-    color: #000;
-    margin-bottom: 1px;
+.ProcessInformation fieldset > div:last-child::after,
+.ProcessInformation fieldset div:empty::after {
+    display: none;
+    border: 0;
+    background: 0;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    width: 0;
+}
+
+.ProcessInformation fieldset > div > div {
+    width: 100% !important;
+    max-width: calc(25% - var(--gap-xs));
+    padding-right: var(--padding-sm);
+    padding-bottom: var(--padding-xl);
+    padding-left: var(--padding-xs);
+}
+
+.ProcessInformation fieldset > div > div:first-child,
+.ProcessInformation fieldset > div > div:nth-child(5),
+.ProcessInformation fieldset > div > div:nth-child(9) {
+    padding-left: var(--padding-lg);
+}
+
+.ProcessInformation fieldset > div > div:nth-child(4),
+.ProcessInformation fieldset > div > div:nth-child(8),
+.ProcessInformation fieldset > div > div:nth-child(12) {
+    padding-right: var(--padding-lg);
+}
+
+
+.ProcessInformation .LightRow label,
+.ProcessInformation .LightRow a {
+    font-size: var(--font-size-sm);
+    color: var(--gray-dark);
+    font-weight: var(--normal);
+    /*font-family: Inter; */
+    overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.ProcessInformation .LightRow a {
+    font-size: var(--font-size-lg);
+}
+
+.WidgetSimple .ProcessInformation p {
+    padding: 0;
     overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
-}
-
-.ArticleAttachments li div {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 30px;
-    height: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-
-.ArticleAttachments li div a {
-    height: 50%;
-    display: block;
-    background: #eee;
-    line-height: 250%;
-    text-align: center;
-    color: #aaa;
-    transition: all ease 0.3s;
-}
-
-.ArticleAttachments li div a:first-child:last-child {
-    height: 100%;
-    line-height: 450%;
-}
-
-.ArticleAttachments li div a:hover {
-    color: #333;
-}
-
-.ArticleAttachments li div a + a {
-    border-top: 1px solid #ccc;
-    margin-top: -1px;
 }
 
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
@@ -1361,8 +888,7 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     #ArticleItems .ArticleHTML,
     #ArticleItems .ArticleBody,
     .ArticleMailContent .ArticleMeta,
-    .ItemActions,
-    .ArticleAttachments {
+    .ItemActions {
         margin-left: 0px !important;
         margin-right: 0px !important;
     }
@@ -1391,7 +917,6 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     #ArticleItems .ItemActions li .InputField_Container {
         opacity: 1;
     }
-
 }
 
 } /* end @media */

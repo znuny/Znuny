@@ -21,41 +21,64 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $QueueObject = $Kernel::OM->Get('Kernel::System::Queue');
-        my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
+        my $ACLObject          = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject        = $Kernel::OM->Get('Kernel::System::Queue');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
         # Defined user language for testing if message is being translated correctly.
         my $Language = "de";
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'Ticket::Frontend::AgentTicketNote###DynamicField',
             Value => 0
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###Queue',
             Value => 0
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###QueueMandatory',
             Value => 0
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Service',
+            Value => 0,
+        );
+
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Type',
+            Value => 0,
+        );
+
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Frontend::AgentTicketNote###Owner',
+            Value => 0,
+        );
+
         # Delete ACL if are any.
-        my $ACLObject = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
-        my $List      = $ACLObject->ACLListGet(
+        my $List = $ACLObject->ACLListGet(
             UserID   => 1,
             ValidIDs => [ '1', '2' ],
         );
@@ -73,7 +96,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users' ],
             Language => $Language,
         ) || die "Did not get test user";
@@ -88,7 +111,7 @@ $Selenium->RunTest(
             UserLanguage => $Language,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminACL screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminACL");
@@ -116,18 +139,14 @@ $Selenium->RunTest(
         }
 
         # Check breadcrumb on Create New screen.
-        my $Count = 1;
         my $IsLinkedBreadcrumbText;
         my $SecondBreadcrumbText = $LanguageObject->Translate('ACL Management');
         my $ThirdBreadcrumbText  = $LanguageObject->Translate('Create New ACL');
         for my $BreadcrumbText ( $SecondBreadcrumbText, $ThirdBreadcrumbText ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check client side validation.
@@ -149,7 +168,7 @@ $Selenium->RunTest(
 
         # Create test ACL names.
         for my $Name (qw(ACL NewACL)) {
-            my $TestACLName = $Name . $Helper->GetRandomNumber() . ' $ @';
+            my $TestACLName = $Name . $HelperObject->GetRandomNumber() . ' $ @';
             push @TestACLNames, $TestACLName;
         }
 
@@ -169,19 +188,15 @@ $Selenium->RunTest(
         $Selenium->find_element( "#Submit", 'css' )->VerifiedClick();
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText (
             $SecondBreadcrumbText,
             $LanguageObject->Translate('Edit ACL') . ': ' . $TestACLNames[0]
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # The next screen should be the edit screen for this ACL
@@ -345,7 +360,7 @@ JAVASCRIPT
 
         # Add all possible prefix values to check for inputed values see bug#12854
         # ( https://bugs.otrs.org/show_bug.cgi?id=12854 ).
-        $Count = 1;
+        my $Count = 1;
         for my $Prefix ( '[Not]', '[RegExp]', '[regexp]', '[NotRegExp]', '[Notregexp]' ) {
             $Selenium->find_element( "#Prefixes option[Value='$Prefix']", 'css' )->click();
             $Selenium->find_element( ".NewDataItem",                      'css' )->send_keys('Test');
@@ -393,6 +408,22 @@ JAVASCRIPT
 
         # Click 'Save and Finish'.
         $Selenium->find_element( "#Submit", 'css' )->VerifiedClick();
+
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
+        );
 
         # Check if both ACL exist in the table.
         $Self->IsNot(
@@ -473,18 +504,15 @@ JAVASCRIPT
         );
 
         # Check if queue based acl works on AgentTicketNote. See bug#14504.
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         $ConfigObject->Set(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
-        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
         my $TestUserID = $UserObject->UserLookup( UserLogin => $TestUserLogin );
 
         # Create dynamic field.
-        my $DynamicFieldObject     = $Kernel::OM->Get('Kernel::System::DynamicField');
-        my $RandomID               = $Helper->GetRandomID();
+        my $RandomID               = $HelperObject->GetRandomID();
         my $DynamicFieldName       = "Produkt$RandomID";
         my $DynamicFieldDropDownID = $DynamicFieldObject->DynamicFieldAdd(
             Name       => $DynamicFieldName,
@@ -531,7 +559,7 @@ JAVASCRIPT
         }
 
         # Set fields to AgentTicketNote screen.
-        my $Success = $Helper->ConfigSettingChange(
+        my $Success = $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###DynamicField',
             Value => {
@@ -543,7 +571,7 @@ JAVASCRIPT
             "'Ticket::Frontend::AgentTicketNote###DynamicField' is updated successfully",
         );
 
-        $Success = $Helper->ConfigSettingChange(
+        $Success = $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###Queue',
             Value => 1
@@ -553,7 +581,7 @@ JAVASCRIPT
             "'Ticket::Frontend::AgentTicketNote###Queue' is updated successfully",
         );
 
-        $Success = $Helper->ConfigSettingChange(
+        $Success = $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###QueueMandatory',
             Value => 1
@@ -627,8 +655,7 @@ JAVASCRIPT
         );
 
         # Create ticket with queue other then ACL queue.
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $TicketID     = $TicketObject->TicketCreate(
+        my $TicketID = $TicketObject->TicketCreate(
             Title        => 'Some Ticket Title',
             QueueID      => $QueueIDs[1],
             Lock         => 'unlock',
@@ -673,6 +700,7 @@ JAVASCRIPT
 
         # Check if AgentTicketHistory contains added note.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketHistory;TicketID=$TicketID");
+
         $Self->Is(
             $Selenium->execute_script(
                 "return \$('.DataTable td[title=AddNote]').length;"
@@ -737,7 +765,7 @@ JAVASCRIPT
         $Selenium->find_element("//a[contains(\@href, 'Action=AdminACL;Subaction=ACLDeploy' )]")->VerifiedClick();
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'ACLEditor_ACL',
         );
     }

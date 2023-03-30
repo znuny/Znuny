@@ -28,7 +28,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $HomeDir = $ConfigObject->Get('Home');
 
@@ -155,7 +155,7 @@ my $CertificateSearch = sub {
         4 => 'unittest4@example.org',
         5 => 'unittest5@example.org',
     );
-    for my $SearchString ( values %Search, 'smimeuser1@test.com' ) {
+    for my $SearchString ( values %Search, 'john.doe@example.com' ) {
 
         my @Certificat = $SMIMEObject->CertificateSearch( Search => $SearchString );
         if ( defined $Certificat[0]->{Filename} && !grep { $_->{Filename} eq $Certificat[0]->{Filename} } @Result ) {

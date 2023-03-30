@@ -14,19 +14,15 @@ use warnings;
 
 use Data::ICal;
 use Data::ICal::Entry::Event;
-use Date::ICal;
 
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Cache',
-    'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
     'Kernel::System::Calendar::Plugin',
     'Kernel::System::Calendar::Team',
     'Kernel::System::DateTime',
-    'Kernel::System::DB',
     'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',
@@ -56,9 +52,12 @@ create an object. Do not use it directly, instead use:
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    $Self->{TimeZonesMap} = $ConfigObject->Get('AppointmentCalendar::NonStandardTimeZonesMapping') // {};
 
     return $Self;
 }
@@ -103,6 +102,10 @@ sub Import {
     }
 
     my $UntilLimitedTimestamp = $Param{UntilLimit} || '';
+
+    # Prevent double \n\n for fix below bug#14791
+    $Param{ICal} =~ s/\r\n/\n/g;
+    $Param{ICal} =~ s/\n\r/\n/g;
 
     # Prevent line ending type errors (see bug#14791).
     $Param{ICal} =~ s/\r/\n/g;
@@ -221,7 +224,7 @@ sub Import {
                 'Kernel::System::DateTime',
                 ObjectParams => {
                     String   => $StartTimeICal,
-                    TimeZone => $TimezoneID,
+                    TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                 },
             );
 
@@ -256,7 +259,7 @@ sub Import {
                 'Kernel::System::DateTime',
                 ObjectParams => {
                     String   => $EndTimeICal,
-                    TimeZone => $TimezoneID,
+                    TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                 },
             );
 
@@ -496,7 +499,7 @@ sub Import {
                             'Kernel::System::DateTime',
                             ObjectParams => {
                                 String   => $ExcludeTimeICal,
-                                TimeZone => $TimezoneID,
+                                TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                             },
                         );
 
@@ -625,7 +628,7 @@ sub Import {
                 'Kernel::System::DateTime',
                 ObjectParams => {
                     String   => $RecurrenceIDICal,
-                    TimeZone => $TimezoneID,
+                    TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                 },
             );
 
@@ -699,11 +702,14 @@ sub Import {
 
                 # add links
                 for my $PluginData ( @{ $LinkedObjects{$PluginKey} } ) {
-                    my $LinkSuccess = $PluginObject->PluginLinkAdd(
-                        AppointmentID => $Success,
-                        PluginKey     => $PluginKey,
-                        PluginData    => $PluginData,
-                        UserID        => $Param{UserID},
+                    my $LinkSuccess = $PluginObject->PluginFunction(
+                        PluginKey      => $PluginKey,
+                        PluginFunction => 'LinkAdd',
+                        PluginData     => {
+                            TargetKey => $PluginData,      # TicketID, depends on TargetObject
+                            SourceKey => $Success,         # AppointmentID
+                            UserID    => $Param{UserID},
+                        }
                     );
 
                     if ( !$LinkSuccess ) {

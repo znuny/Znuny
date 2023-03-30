@@ -18,10 +18,10 @@ use Kernel::System::VariableCheck qw(:all);
 use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::State',
     'Kernel::System::Ticket',
-    'Kernel::System::DateTime',
 );
 
 =head1 NAME
@@ -45,7 +45,6 @@ Don't use the constructor directly, use the ObjectManager instead:
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
 
@@ -54,37 +53,45 @@ sub new {
 
 =head2 Run()
 
-    Run Data
+Runs TransitionAction TicketStateSet.
 
-    my $TicketStateSetResult = $TicketStateSetActionObject->Run(
+    my $Success = $TicketStateSetActionObject->Run(
         UserID                   => 123,
+
+        # Ticket contains the result of TicketGet including dynamic fields
         Ticket                   => \%Ticket,   # required
         ProcessEntityID          => 'P123',
         ActivityEntityID         => 'A123',
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
+
+        # Config is the hash stored in a Process::TransitionAction's config key
         Config                   => {
             State   => 'open',
             # or
             StateID => 3,
 
-            PendingTimeDiff => 123,             # optional, used for pending states, difference in seconds from
-                                                #   current time to desired pending time (e.g. a value of 3600 means
-                                                #   that the pending time will be 1 hr after the Transition Action is
-                                                #   executed)
-            UserID  => 123,                     # optional, to override the UserID from the logged user
+            PendingTime     => '2016-02-13 12:00',  # optional, set the pending time to a fixed value
+            PendingTimeDiff => 123,                 # optional, used for pending states, difference in seconds from
+                                                    # current time to desired pending time (e.g. a value of 3600 means
+                                                    # that the pending time will be 1 hr after the Transition Action is
+                                                    # executed)
+            UserID  => 123,                         # optional, to override the UserID from the logged user
         }
     );
-    Ticket contains the result of TicketGet including DynamicFields
-    Config is the Config Hash stored in a Process::TransitionAction's  Config key
-    Returns:
 
-    $TicketStateSetResult = 1; # 0
+Returns:
+
+    my $Success = 1; # 0
 
 =cut
 
 sub Run {
     my ( $Self, %Param ) = @_;
+
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $StateObject  = $Kernel::OM->Get('Kernel::System::State');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
     # define a common message to output in case of any error
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -106,7 +113,7 @@ sub Run {
     $Self->_ReplaceAdditionalAttributes(%Param);
 
     if ( !$Param{Config}->{StateID} && !$Param{Config}->{State} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => $CommonMessage . "No State or StateID configured!",
         );
@@ -118,20 +125,20 @@ sub Run {
 
     if ( defined $Param{Config}->{StateID} ) {
 
-        %StateData = $Kernel::OM->Get('Kernel::System::State')->StateGet(
+        %StateData = $StateObject->StateGet(
             ID => $Param{Config}->{StateID},
         );
 
         if ( $Param{Config}->{StateID} ne $Param{Ticket}->{StateID} ) {
 
-            $Success = $Kernel::OM->Get('Kernel::System::Ticket')->TicketStateSet(
+            $Success = $TicketObject->TicketStateSet(
                 TicketID => $Param{Ticket}->{TicketID},
                 StateID  => $Param{Config}->{StateID},
                 UserID   => $Param{UserID},
             );
 
             if ( !$Success ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                $LogObject->Log(
                     Priority => 'error',
                     Message  => $CommonMessage
                         . 'Ticket StateID '
@@ -150,19 +157,19 @@ sub Run {
     }
     elsif ( $Param{Config}->{State} ) {
 
-        %StateData = $Kernel::OM->Get('Kernel::System::State')->StateGet(
+        %StateData = $StateObject->StateGet(
             Name => $Param{Config}->{State},
         );
         if ( $Param{Config}->{State} ne $Param{Ticket}->{State} ) {
 
-            $Success = $Kernel::OM->Get('Kernel::System::Ticket')->TicketStateSet(
+            $Success = $TicketObject->TicketStateSet(
                 TicketID => $Param{Ticket}->{TicketID},
                 State    => $Param{Config}->{State},
                 UserID   => $Param{UserID},
             );
 
             if ( !$Success ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                $LogObject->Log(
                     Priority => 'error',
                     Message  => $CommonMessage
                         . 'Ticket State '
@@ -180,7 +187,7 @@ sub Run {
 
     }
     else {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => $CommonMessage
                 . "Couldn't update Ticket State - can't find valid State parameter!",
@@ -190,7 +197,7 @@ sub Run {
 
     # set pending time
     if (
-        IsHashRefWithData( \%StateData )
+        %StateData
         && $StateData{TypeName} =~ m{\A pending}msxi
         && IsNumber( $Param{Config}->{PendingTimeDiff} )
         )
@@ -200,13 +207,27 @@ sub Run {
         my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
         $DateTimeObject->Add( Seconds => $Param{Config}->{PendingTimeDiff} );
 
+        my $DateTimeString = $DateTimeObject->ToString();
+
         # set pending time
-        $Kernel::OM->Get('Kernel::System::Ticket')->TicketPendingTimeSet(
+        $TicketObject->TicketPendingTimeSet(
             UserID   => $Param{UserID},
             TicketID => $Param{Ticket}->{TicketID},
-            String   => $DateTimeObject->ToString(),
+            String   => $DateTimeString,
         );
     }
+
+    return $Success if !$Success;
+    return $Success if !%StateData;
+    return $Success if $StateData{TypeName} !~ m{\A pending}msxi;
+    return $Success if !IsStringWithData( $Param{Config}->{PendingTime} );
+
+    # set pending time
+    $TicketObject->TicketPendingTimeSet(
+        UserID   => $Param{UserID},
+        TicketID => $Param{Ticket}->{TicketID},
+        String   => $Param{Config}->{PendingTime},
+    );
 
     return $Success;
 }

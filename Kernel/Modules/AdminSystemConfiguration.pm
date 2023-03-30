@@ -216,40 +216,11 @@ sub Run {
                 Results     => scalar @SettingList,
                 SettingList => \@SettingList,
                 %OutputData,
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
             },
         );
         $Output .= $LayoutObject->Footer();
 
         return $Output;
-    }
-
-    elsif ( $Self->{Subaction} eq 'UserModificationsCount' ) {
-
-        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
-
-        my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
-        my $SettingName = $ParamObject->GetParam( Param => 'Name' ) || '';
-
-        my %UsersList;
-        if ( $SysConfigObject->can('UserSettingModifiedValueList') ) {    # OTRS Business Solution™
-            %UsersList = $SysConfigObject->UserSettingModifiedValueList(
-                Name => $SettingName,
-            );
-        }
-
-        my $Result = keys %UsersList;
-
-        my $JSON = $LayoutObject->JSONEncode(
-            Data => $Result // 0,
-        );
-
-        return $LayoutObject->Attachment(
-            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
-            Content     => $JSON,
-            Type        => 'inline',
-            NoCache     => 1,
-        );
     }
 
     # Search for settings.
@@ -297,7 +268,6 @@ sub Run {
                 Results     => scalar @SettingList,
                 SettingList => \@SettingList,
                 %OutputData,
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
             },
         );
         $Output .= $LayoutObject->Footer();
@@ -377,7 +347,6 @@ sub Run {
                 Results     => scalar @SettingList,
                 SettingList => \@SettingList,
                 %OutputData,
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
             },
         );
         $Output .= $LayoutObject->Footer();
@@ -426,7 +395,6 @@ sub Run {
                 View         => $SettingName,
                 SettingList  => \@SettingList,
                 %OutputData,
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
             },
         );
         $Output .= $LayoutObject->Footer();
@@ -479,11 +447,10 @@ sub Run {
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AdminSystemConfigurationView',
             Data         => {
-                Type                    => 'CustomList',
-                SettingList             => \@SettingList,
-                SettingListInvalid      => \@SettingListInvalid,
-                CategoriesStrg          => $Self->_GetCategoriesStrg(),
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
+                Type               => 'CustomList',
+                SettingList        => \@SettingList,
+                SettingListInvalid => \@SettingListInvalid,
+                CategoriesStrg     => $Self->_GetCategoriesStrg(),
             },
         );
         $Output .= $LayoutObject->Footer();
@@ -528,7 +495,6 @@ sub Run {
                 Results     => scalar @SettingList,
                 SettingList => \@SettingList,
                 %OutputData,
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
             },
         );
         $Output .= $LayoutObject->Footer();
@@ -542,9 +508,7 @@ sub Run {
         $Output .= $LayoutObject->NavigationBar();
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AdminSystemConfigurationImportExport',
-            Data         => {
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
-            },
+            Data         => {},
         );
         $Output .= $LayoutObject->Footer();
         return $Output;
@@ -601,7 +565,7 @@ sub Run {
             return $LayoutObject->ErrorScreen(
                 Message =>
                     Translatable(
-                    'System Configuration could not be imported due to an unknown error, please check OTRS logs for more information.'
+                    'System Configuration could not be imported due to an unknown error, please check Znuny logs for more information.'
                     ),
             );
         }
@@ -633,9 +597,8 @@ sub Run {
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AdminSystemConfiguration',
             Data         => {
-                ManualVersion           => $ManualVersion,
-                SettingCount            => scalar @SettingList,
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
+                ManualVersion => $ManualVersion,
+                SettingCount  => scalar @SettingList,
                 %OutputData,
             },
         );
@@ -664,7 +627,7 @@ sub _GetCategoriesStrg {
         SelectedID   => $Category || Translatable('All'),
         PossibleNone => 0,
         Translation  => 1,
-        Sort         => 'AlphaNumericKey',
+        Sort         => 'AlphanumericKey',
         Class        => 'Modernize',
         Title        => $Kernel::OM->Get('Kernel::Language')->Translate('Category Search'),
     );

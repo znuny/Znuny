@@ -18,23 +18,24 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Set AvatarEngine to 'none'.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::AvatarEngine',
             Value => 'none',
         );
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test user.
         my $UserID = $UserObject->UserAdd(
@@ -62,7 +63,7 @@ $Selenium->RunTest(
             Password => $User{UserLogin},
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my %Tests = (
             0 => 'FL',
@@ -78,7 +79,7 @@ $Selenium->RunTest(
         );
 
         for my $Order ( sort keys %Tests ) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'FirstnameLastnameOrder',
                 Value => $Order,

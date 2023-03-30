@@ -20,8 +20,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
 
@@ -31,34 +30,41 @@ $Selenium->RunTest(
         mkpath( [$CertPath],    0, 0770 );    ## no critic
         mkpath( [$PrivatePath], 0, 0770 );    ## no critic
 
-        # make sure to enable cloud services
-        $Helper->ConfigSettingChange(
+        # enable SecureMode
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'CloudServices::Disabled',
-            Value => 0,
+            Key   => 'SecureMode',
+            Value => 1,
         );
 
         # enable SMIME in config
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME',
             Value => 1
         );
 
         # set SMIME paths in sysConfig
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::CertPath',
             Value => $CertPath,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::PrivatePath',
             Value => $PrivatePath,
         );
 
+        # enable PerformanceLog
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'PerformanceLog',
+            Value => 1
+        );
+
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -91,7 +97,6 @@ $Selenium->RunTest(
             AdminLog
             AdminMailAccount
             AdminNotificationEvent
-            AdminOTRSBusiness
             AdminPGP
             AdminPackageManager
             AdminPerformanceLog
@@ -103,7 +108,6 @@ $Selenium->RunTest(
             AdminQueueTemplates
             AdminTemplate
             AdminTemplateAttachment
-            AdminRegistration
             AdminRole
             AdminRoleGroup
             AdminRoleUser
@@ -132,10 +136,7 @@ $Selenium->RunTest(
             $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=$AdminModule");
 
             # Check if needed frontend module is registered in sysconfig.
-            # Skip test for unregistered modules (e.g. OTRS Business)
             if ( !$FrontendModules->{$AdminModule} ) {
-
-                next ADMINMODULE if $AdminModule eq 'AdminOTRSBusiness';
                 $Self->True(
                     index(
                         $Selenium->get_page_source(),

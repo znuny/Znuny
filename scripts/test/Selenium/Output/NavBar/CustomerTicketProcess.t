@@ -24,16 +24,18 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         # Create and log in test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -48,7 +50,7 @@ $Selenium->RunTest(
 
         # Import test selenium process.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
         $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
@@ -79,7 +81,7 @@ $Selenium->RunTest(
         );
 
         # Create and log in test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test customer user";
 
@@ -237,10 +239,10 @@ $Selenium->RunTest(
 
         # Check if NavBarCustomerTicketProcess button is available
         # when NavBarCustomerTicketProcess module is disabled and no process is available.
-        my %NavBarCustomerTicketProcess = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %NavBarCustomerTicketProcess = $SysConfigObject->SettingGet(
             Name => 'CustomerFrontend::NavBarModule###10-CustomerTicketProcesses',
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'CustomerFrontend::NavBarModule###10-CustomerTicketProcesses',
             Value => $NavBarCustomerTicketProcess{EffectiveValue},

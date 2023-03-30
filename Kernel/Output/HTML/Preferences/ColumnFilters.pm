@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,6 +14,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::System::Web::Request',
@@ -57,14 +59,28 @@ sub Run {
 
     return 1 if !defined $FilterAction;
 
-    for my $Key ( sort keys %{ $Param{GetParam} } ) {
+    if ( !$Kernel::OM->Get('Kernel::Config')->Get('DemoSystem') ) {
+        KEY:
+        for my $Key ( sort keys %{ $Param{GetParam} } ) {
 
-        # pref update db
-        if ( !$Kernel::OM->Get('Kernel::Config')->Get('DemoSystem') ) {
+            # We require non-empty list of column names - ignore antyhing else.
+            next KEY if !$Param{GetParam}->{$Key};
+            next KEY if !IsArrayRefWithData( $Param{GetParam}->{$Key} );
+
+            # Remove column name duplicates from list preserving column order.
+            my %SeenColumnNames;
+            my @UniqueColumnNames;
+            COLUMNNAME:
+            for my $ColumnName ( @{ $Param{GetParam}->{$Key} } ) {
+                next COLUMNNAME if $SeenColumnNames{$ColumnName};
+                $SeenColumnNames{$ColumnName} = 1;
+                push @UniqueColumnNames, $ColumnName;
+            }
+
             $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
                 UserID => $Param{UserData}->{UserID},
                 Key    => $Key . '-' . $FilterAction,
-                Value  => $Kernel::OM->Get('Kernel::System::JSON')->Encode( Data => $Param{GetParam}->{$Key} ),
+                Value  => $Kernel::OM->Get('Kernel::System::JSON')->Encode( Data => \@UniqueColumnNames ),
             );
         }
     }

@@ -20,20 +20,21 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $CustomerCompanyObject     = $Kernel::OM->Get('Kernel::System::CustomerCompany');
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
         my $CustomerUserObject        = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
         my $LanguageObject            = $Kernel::OM->Get('Kernel::Language');
+        my $JSONObject                = $Kernel::OM->Get('Kernel::System::JSON');
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
 
         my @DynamicFields = (
             {
@@ -149,8 +150,8 @@ $Selenium->RunTest(
         );
 
         # Get the customer company and customer user configs to add the dynamic fields to the map.
-        my $CustomerCompanyConfig = $Kernel::OM->Get('Kernel::Config')->Get('CustomerCompany');
-        my $CustomerUserConfig    = $Kernel::OM->Get('Kernel::Config')->Get('CustomerUser');
+        my $CustomerCompanyConfig = $ConfigObject->Get('CustomerCompany');
+        my $CustomerUserConfig    = $ConfigObject->Get('CustomerUser');
 
         my @DynamicFieldIDs;
         my @DynamicFieldCustomerCompanySearchFields;
@@ -195,7 +196,7 @@ $Selenium->RunTest(
             'United States' => 'United States',
         };
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CustomerCompany',
             Value => $CustomerCompanyConfig,
         );
@@ -211,7 +212,7 @@ $Selenium->RunTest(
             'United States' => 'United States',
         };
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CustomerUser',
             Value => $CustomerUserConfig,
         );
@@ -391,7 +392,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -401,7 +402,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             [
@@ -668,7 +669,7 @@ $Selenium->RunTest(
 
                         if ( IsArrayRefWithData( $SubTest->{SearchParameter}->{Selection}->{$FieldName} ) ) {
 
-                            my $ValuesString = $Kernel::OM->Get('Kernel::System::JSON')->Encode(
+                            my $ValuesString = $JSONObject->Encode(
                                 Data => $SubTest->{SearchParameter}->{Selection}->{$FieldName},
                             );
 
@@ -848,7 +849,7 @@ $Selenium->RunTest(
 
                         if ( IsArrayRefWithData( $SubTest->{SearchParameterChange}->{Selection}->{$FieldName} ) ) {
 
-                            my $ValuesString = $Kernel::OM->Get('Kernel::System::JSON')->Encode(
+                            my $ValuesString = $JSONObject->Encode(
                                 Data => $SubTest->{SearchParameterChange}->{Selection}->{$FieldName},
                             );
 

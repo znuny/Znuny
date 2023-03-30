@@ -14,7 +14,6 @@ use warnings;
 
 our @ObjectDependencies = (
     'Kernel::System::Cache',
-    'Kernel::System::CommunicationLog',
 );
 
 sub new {
@@ -107,6 +106,17 @@ sub CleanUp {
 
     return $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
         Type => $Self->{CacheType},
+    );
+}
+
+sub Check {
+    my ( $Self, %Param ) = @_;
+
+    my $Message = $Param{Test} ? '' : 'Error!';
+
+    return (
+        Successful => $Param{Test},
+        Message    => $Message,
     );
 }
 

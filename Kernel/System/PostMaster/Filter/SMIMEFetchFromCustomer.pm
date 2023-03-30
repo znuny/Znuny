@@ -16,7 +16,6 @@ use Kernel::System::EmailParser;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Log',
     'Kernel::System::Crypt::SMIME',
 );
 

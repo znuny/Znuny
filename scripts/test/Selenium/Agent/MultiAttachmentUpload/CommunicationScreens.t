@@ -20,8 +20,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Create test ticket.
         my $TicketID = $TicketObject->TicketCreate(
@@ -40,7 +43,6 @@ $Selenium->RunTest(
             "Ticket ID $TicketID is created",
         );
 
-        my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
         my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Phone' );
 
         # Create test email Article.
@@ -64,7 +66,7 @@ $Selenium->RunTest(
         my $Language = 'en';
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users' ],
             Language => $Language,
         ) || die "Did not get test user";
@@ -80,9 +82,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-        my $ScriptAlias  = $ConfigObject->Get('ScriptAlias');
-        my $Home         = $ConfigObject->Get('Home');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Check screens.
         for my $Action (
@@ -124,7 +124,7 @@ $Selenium->RunTest(
             $Selenium->execute_script("\$('.DnDUpload').css('display', 'none');");
             $Selenium->execute_script("\$('#FileUpload').css('display', 'block');");
 
-            my $Location = "$Home/scripts/test/sample/Main/Main-Test1.doc";
+            my $Location = "$Selenium->{Home}/scripts/test/sample/Main/Main-Test1.doc";
             $Selenium->find_element( "#FileUpload", 'css' )->clear();
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
@@ -195,7 +195,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

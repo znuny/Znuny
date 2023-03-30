@@ -43,7 +43,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
 my $ArticleObject           = $Kernel::OM->Get('Kernel::System::Ticket::Article');
@@ -109,7 +109,7 @@ for my $Test (@Tests) {
 
     # add signature
     my $SignatureID = $SignatureObject->SignatureAdd(
-        Name => $Helper->GetRandomID() . '-Signature',
+        Name => $HelperObject->GetRandomID() . '-Signature',
         ,
         Text        => $Test->{Signature},
         ContentType => 'text/plain; charset=iso-8859-1',
@@ -123,7 +123,7 @@ for my $Test (@Tests) {
     );
 
     my $QueueID = $QueueObject->QueueAdd(
-        Name            => $Helper->GetRandomID() . '-Queue',
+        Name            => $HelperObject->GetRandomID() . '-Queue',
         ValidID         => 1,
         GroupID         => 1,
         SystemAddressID => 1,

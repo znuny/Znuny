@@ -1,4 +1,4 @@
-The following persons contributed to OTRS:
+The following persons contributed to Znuny:
 
 * 1soproni <csaba@sopron.hu>
 * Alex Kantchev <ak@otrs.com>
@@ -7,32 +7,28 @@ The following persons contributed to OTRS:
 * André Brás <andre.bras@otrs.com>
 * Balazs Ur <balazs.ur@otrs.com>
 * Balázs Úr <balazs.ur@otrs.com>
-* Balázs Úr <urbalazs@gmail.com>
 * Belnet <info@belnet.be>
 * Bernhard Schmalhofer <Bernhard.Schmalhofer@gmx.de>
-* Bernhard Schmalhofer <bernhard.schmalhofer@otrs.com>
 * Bodo Bauer <bodo.bauer@otrs.com>
 * Burchard Steinbild <burchard.steinbild@otrs.com>
 * Carlos Garcia <carlos.garcia@otrs.com>
-* Carlos García <carlos.garcia@otrs.com>
 * Carlos Rodriguez <carlos.rodriguez@otrs.com>
-* Carlos Rodríguez <carlos.rodriguez@otrs.com>
 * Christian Schöpplein <christian.schoepplein@otrs.com>
 * Christopher T. Kuhn <christopher.kuhn@otrs.com>
-* Cyrille Bollu <info@belnet.be>
+* Daniel Lisiecki <lisiecki.daniel@gmail.com>
+* Daniel Sprenger <123074686+sprengerdaniel@users.noreply.github.com>
 * Daniel Zamorano <daniel.zamorano@otrs.com>
 * David Crimi <deathpoison.dc@gmail.com>
 * Denis Nelubin <dnelubin@gmail.com>
 * Dennis Schmelter <dennis.schmelter@otrs.com>
 * Denny Korsukéwitz <dennykorsukewitz@gmail.com>
-* Denny Korsukéwitz <dk@znuny.com>
 * Diego Selzlein <diegoselzlein@gmail.com>
 * Dietmar Berg <dietmar.berg@thalesgroup.com>
 * Dominik Klein <dominik.klein@otrs.com>
 * Dusan Vuckovic <dusan.vuckovic@otrs.com>
-* Dusan Vuckovic <edusan.vuckovic@otrs.com>
 * Elias Probst <elias.probst@otrs.com>
 * Elva Novoa <elva.novoa@otrs.com>
+* Emin Yazi <yazi@efflux.de>
 * Enrique Matías Sánchez (Quique) <cronopios@gmail.com>
 * Felix Niklas <felix.niklas@otrs.com>
 * Florian Edlhuber <florian.edlhuber@otrs.com>
@@ -40,24 +36,27 @@ The following persons contributed to OTRS:
 * Friedrich Delgado <friedel@nomaden.org>
 * Gerald Young <gerald.young@noynim.com>
 * Henning Oschwald <henning.oschwald@otrs.com>
+* Henrik Vetter <hv@znuny.com>
 * IB Development Team <dev@ib.pl>
 * Igor Djuric <igor.djuric@otrs.com>
 * Jan Steinweg <jan.steinweg@otrs.com>
 * Jaroslav Balaz <jaroslav.balaz@otrs.com>
 * Jens Bothe <jens.bothe@otrs.com>
-* Jens Pfeifer <jens.pfeifer@otrs.com>
-* Jens Pfeifer <jens.pfeifer@znuny.com>
 * Jens Pfeifer <jp@znuny.com>
 * Johannes Hörburger <johannes.hoerburger@otrs.com>
-* Johannes Nickel <hanne_hal@me.com>
 * Johannes Nickel <jn@znuny.com>
+* Kai Herlemann <kh@znuny.com>
+* Kamil Furtek <kfurtek@dev.opgksoftware.com>
 * Keith Moore <tenareth@gmail.com>
+* Kevin Janssen <77158891+BuTzZ@users.noreply.github.com>
+* Konrad Gumienny <kgumienny@dev.opgksoftware.com>
+* LotharZok <111051858+LotharZok@users.noreply.github.com>
 * Luca Maranzano <liuk@linux.it>
+* Lukas Bröring <lukas.broering@sectornord.de>
 * Manuel Hecht <manuel.hecht@otrs.com>
 * Marc Bonsels <marc.bonsels@otrs.com>
 * Marc Nilius <marc.nilius@otrs.com>
 * Marco Buchholz <marco.buchholz@otrs.com>
-* Marco Bucholz <marco.buchholz@otrs.com>
 * Marco Ferrante <marco@csita.unige.it>
 * Markus Esche <markus.esche@otrs.com>
 * Martha Pascual <martha.pascual@otrs.com>
@@ -67,17 +66,13 @@ The following persons contributed to OTRS:
 * Mathias Bräunling <mathias.braeunling@otrs.com>
 * Michael Tänzer <neo@nhng.de>
 * Michiel Beijen <michiel.beijen@otrs.com>
-* Milan Rakic <mrakic@7designcreative.com>
-* Milan Rakic <mrakic@S7designcreative.com>
-* Milan Rakic <mrakic@s7designcreatieve.com>
 * Milan Rakic <mrakic@s7designcreative.com>
-* Milan Rakic <mrakic@s7designcreative>
-* Milan Rakid <mrakic@s7designcreative.com>
 * Moritz Lenz <mlenz@noris.net>
+* Never <never.min@gmail.com>
 * NeverMin <never.min@gmail.com>
 * Niels Dimmers <niels@nielsdimmers.nl>
+* Niklas Schmitt <ns@znuny.com>
 * Nils Fiedler <nils.fiedler@otrs.com>
-* Nils Leideck <nils.leideck@leidex.net>
 * Nils Leideck <nils.leideck@otrs.com>
 * Norihiro Tanaka <noritnk@kcn.ne.jp>
 * Oberson Dylan <dylan.oberson@epfl.ch>
@@ -85,53 +80,49 @@ The following persons contributed to OTRS:
 * Olivier Sallou <olivier.sallou@irisa.fr>
 * Patrick Brischler <patrick.brischler@otrs.com>
 * Patrick Rauscher <prauscher@ohai.su>
+* Paul Folkers <paul.folkers@sectornord.de>
 * Paul Waring <paul@xk7.net>
+* Paweł Bogusławski <pawel.boguslawski@ib.pl>
 * Peter Krantz <peter@peterkrantz.se>
 * Ralf Hildebrandt <hildeb@charite.de>
 * Raphaël Doursenaud <rdoursenaud@gpcsolutions.fr>
 * Renée Bäcker <info@perl-services.de>
 * Richard Kammermayer <richard.kammermayer@otrs.com>
 * Richard McCutchan <richard.mccutchan@otrs.com>
+* Robin Naundorf <r.naundorf@fh-muenster.de>
 * Rolf Schmidt <rolf.schmidt@otrs.com>
 * Romain THERRAT <romain42@gmail.com>
 * Roy Kaldung <rk@znuny.com>
-* Roy Kaldung <roy@kaldung.com>
 * Rui Patinha <rui.patinha@otrs.com>
-* Sanjin Vik <scik@s7designcreative.com>
-* Sanjin Vik <svik@s7designcrative.com>
-* Sanjin Vik <svik@s7designcreativa.com>
 * Sanjin Vik <svik@s7designcreative.com>
-* Sanjin Vik <svik@s7sdesigncreative.com>
-* Shawn Beasley <shawn.beasley@otrs.com>
+* Shawn Beasley <shawn.beasley@znuny.com>
 * Stefan Bedorf <stefan.bedorf@otrs.com>
 * Stefan Rother <stefan.rother@otrs.com>
 * Stefan Wintermeyer <stefan@otrs.org>
 * Steva Stevic <svik@s7designcreative.com>
+* Sławomir Niedbała <sniedbala@dev.opgksoftware.com>
 * Theo van Hoesel <Th.J.v.Hoesel+GitHub@gmail.com>
 * Thomas Raith <thomas.raith@otrs.com>
 * Thomas Wouters <thomas@sijn.org>
-* Thorsten Eckel <te@zammad.com>
-* Thorsten Eckel <thorsten.eckel@otrs.com>
-* Thorsten Eckel <thorsten.eckel@zhuny.com>
+* Thorsten Eckel <te@znuny.com>
+* Tim Puettmanns <tim.puettmanns@maxence.de>
 * Torsten Thau <Torsten.Thau@cape-it.de>
 * Udo Bretz <udo.bretz@otrs.com>
 * Uwe Dieckmann <uwe.dieckmann@otrs.com>
 * Walter Souto <walter.souto@saude.go.gov.br>
-* Weblate <noreply@weblate.org>
 * Wojciech Kuchta <klapi85@gmail.com>
-* Wojciech Kuchta <wojciech.kuchta@allegro.pl>
-* Yuri Myasoedov <yuriy.myasoedov@open.ru>
-* Zoran Ilibasic <zilibasic@s7deisgncreative.com>
-* Zoran Ilibasic <zilibasic@s7desigcreative.com>
+* Yuri Myasoedov <ymyasoedov@yandex.ru>
+* Znuny Weblate <do-not-reply@znuny.com>
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
-* Zoran Ilibasic <zilibasic@s7desingcreative.com>
-* anonymous <uknown@anonymous>
+* akmet <akmet@users.noreply.github.com>
+* anonymous <unknown@anonymous>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * djurici <igor.djuric@muehlbauer.de>
+* jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
 * juanmclavero <juanm.clavero@ibsalut.es>
-* otrsintern <otrsintern@gmail.com>
-* reneeb <info@perl-services.de>
-* reneeb <reb@perl-services.de>
+* meisterheister <35762852+meisterheister@users.noreply.github.com>
 * s7design <otrs@s7designcreative.com>
 * sergot <filip@sergot.pl>
+* tipue <tim.puettmanns@maxence.de>
 * vlascoder <vlascoder@gmail.com>
+* vuckovicd <dusan.vuckovic@muehlbauer.de>

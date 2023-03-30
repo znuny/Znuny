@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Cleanup = $Kernel::OM->Get('Kernel::System::DB')->Do(
     SQL => 'DELETE from package_repository',
@@ -36,9 +36,12 @@ my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
 $ConfigObject->Set(
     Key   => 'Package::RepositoryList',
-    Value => {
-        local => 'local',
-    },
+    Value => [
+        {
+            Name => 'local',
+            URL  => 'local',
+        },
+    ],
 );
 $ConfigObject->Set(
     Key   => 'Package::RepositoryRoot',
@@ -46,7 +49,7 @@ $ConfigObject->Set(
 );
 $ConfigObject->Set(
     Key   => 'Version',
-    Value => '6.0.2',
+    Value => '6.2.2',
 );
 
 my @OrigPackageInstalledList
@@ -60,27 +63,27 @@ my $TestPath = "$Home/scripts/test/sample/PackageManager/PackageUpgradeAll";
 
 my @Tests = (
     {
-        Name            => 'ITSM 6.0.1 to 6.0.20',
+        Name            => 'ITSM 6.2.1 to 6.2.20',
         InstallPackages => [
-            'TestGeneralCatalog-6.0.1.opm',
-            'TestImportExport-6.0.1.opm',
-            'TestITSMCore-6.0.1.opm',
-            'TestITSMChangeManagement-6.0.1.opm',
-            'TestITSMConfigurationManagement-6.0.1.opm',
-            'TestITSMIncidentProblemManagement-6.0.1.opm',
-            'TestITSMServiceLevelManagement-6.0.1.opm',
+            'TestGeneralCatalog-6.2.1.opm',
+            'TestImportExport-6.2.1.opm',
+            'TestITSMCore-6.2.1.opm',
+            'TestITSMChangeManagement-6.2.1.opm',
+            'TestITSMConfigurationManagement-6.2.1.opm',
+            'TestITSMIncidentProblemManagement-6.2.1.opm',
+            'TestITSMServiceLevelManagement-6.2.1.opm',
         ],
         RepositoryListBefore => {
-            TestGeneralCatalog                => '6.0.1',
-            TestImportExport                  => '6.0.1',
-            TestITSMCore                      => '6.0.1',
-            TestITSMIncidentProblemManagement => '6.0.1',
-            TestITSMConfigurationManagement   => '6.0.1',
-            TestITSMChangeManagement          => '6.0.1',
-            TestITSMServiceLevelManagement    => '6.0.1',
+            TestGeneralCatalog                => '6.2.1',
+            TestImportExport                  => '6.2.1',
+            TestITSMCore                      => '6.2.1',
+            TestITSMIncidentProblemManagement => '6.2.1',
+            TestITSMConfigurationManagement   => '6.2.1',
+            TestITSMChangeManagement          => '6.2.1',
+            TestITSMServiceLevelManagement    => '6.2.1',
         },
-        PackageOnlineList => 'PackageOnlineListITSM620.asc',
-        ExpectedResult    => {
+        RepositoryPackageList => 'PackageOnlineListITSM6220.asc',
+        ExpectedResult        => {
             Success        => 1,
             AlreadyUpdated => {},
             Failed         => {},
@@ -97,33 +100,33 @@ my @Tests = (
             },
         },
         RepositoryListAfter => {
-            TestGeneralCatalog                => '6.0.20',
-            TestImportExport                  => '6.0.20',
-            TestITSMCore                      => '6.0.20',
-            TestITSMIncidentProblemManagement => '6.0.20',
-            TestITSMConfigurationManagement   => '6.0.20',
-            TestITSMChangeManagement          => '6.0.20',
-            TestITSMServiceLevelManagement    => '6.0.20',
+            TestGeneralCatalog                => '6.2.20',
+            TestImportExport                  => '6.2.20',
+            TestITSMCore                      => '6.2.20',
+            TestITSMIncidentProblemManagement => '6.2.20',
+            TestITSMConfigurationManagement   => '6.2.20',
+            TestITSMChangeManagement          => '6.2.20',
+            TestITSMServiceLevelManagement    => '6.2.20',
         },
     },
     {
-        Name            => 'ITSM 6.0.1 to 6.0.20 (New dependencies)',
+        Name            => 'ITSM 6.2.1 to 6.2.20 (New dependencies)',
         InstallPackages => [
-            'TestImportExport-6.0.1.opm',
-            'TestITSMChangeManagement-NoDep-6.0.1.opm',
-            'TestITSMConfigurationManagement-NoDep-6.0.1.opm',
-            'TestITSMIncidentProblemManagement-NoDep-6.0.1.opm',
-            'TestITSMServiceLevelManagement-NoDep-6.0.1.opm',
+            'TestImportExport-6.2.1.opm',
+            'TestITSMChangeManagement-NoDep-6.2.1.opm',
+            'TestITSMConfigurationManagement-NoDep-6.2.1.opm',
+            'TestITSMIncidentProblemManagement-NoDep-6.2.1.opm',
+            'TestITSMServiceLevelManagement-NoDep-6.2.1.opm',
         ],
         RepositoryListBefore => {
-            TestImportExport                  => '6.0.1',
-            TestITSMIncidentProblemManagement => '6.0.1',
-            TestITSMConfigurationManagement   => '6.0.1',
-            TestITSMChangeManagement          => '6.0.1',
-            TestITSMServiceLevelManagement    => '6.0.1',
+            TestImportExport                  => '6.2.1',
+            TestITSMIncidentProblemManagement => '6.2.1',
+            TestITSMConfigurationManagement   => '6.2.1',
+            TestITSMChangeManagement          => '6.2.1',
+            TestITSMServiceLevelManagement    => '6.2.1',
         },
-        PackageOnlineList => 'PackageOnlineListITSM620.asc',
-        ExpectedResult    => {
+        RepositoryPackageList => 'PackageOnlineListITSM6220.asc',
+        ExpectedResult        => {
             Success        => 1,
             AlreadyUpdated => {},
             Failed         => {},
@@ -141,37 +144,37 @@ my @Tests = (
             },
         },
         RepositoryListAfter => {
-            TestGeneralCatalog                => '6.0.20',
-            TestImportExport                  => '6.0.20',
-            TestITSMCore                      => '6.0.20',
-            TestITSMIncidentProblemManagement => '6.0.20',
-            TestITSMConfigurationManagement   => '6.0.20',
-            TestITSMChangeManagement          => '6.0.20',
-            TestITSMServiceLevelManagement    => '6.0.20',
+            TestGeneralCatalog                => '6.2.20',
+            TestImportExport                  => '6.2.20',
+            TestITSMCore                      => '6.2.20',
+            TestITSMIncidentProblemManagement => '6.2.20',
+            TestITSMConfigurationManagement   => '6.2.20',
+            TestITSMChangeManagement          => '6.2.20',
+            TestITSMServiceLevelManagement    => '6.2.20',
         },
     },
     {
-        Name            => 'ITSM 6.0.1 to 6.0.20 (Missing dependencies)',
+        Name            => 'ITSM 6.2.1 to 6.2.20 (Missing dependencies)',
         InstallPackages => [
-            'TestGeneralCatalog-6.0.1.opm',
-            'TestImportExport-6.0.1.opm',
-            'TestITSMCore-6.0.1.opm',
-            'TestITSMChangeManagement-6.0.1.opm',
-            'TestITSMConfigurationManagement-6.0.1.opm',
-            'TestITSMIncidentProblemManagement-6.0.1.opm',
-            'TestITSMServiceLevelManagement-6.0.1.opm',
+            'TestGeneralCatalog-6.2.1.opm',
+            'TestImportExport-6.2.1.opm',
+            'TestITSMCore-6.2.1.opm',
+            'TestITSMChangeManagement-6.2.1.opm',
+            'TestITSMConfigurationManagement-6.2.1.opm',
+            'TestITSMIncidentProblemManagement-6.2.1.opm',
+            'TestITSMServiceLevelManagement-6.2.1.opm',
         ],
         RepositoryListBefore => {
-            TestGeneralCatalog                => '6.0.1',
-            TestImportExport                  => '6.0.1',
-            TestITSMCore                      => '6.0.1',
-            TestITSMIncidentProblemManagement => '6.0.1',
-            TestITSMConfigurationManagement   => '6.0.1',
-            TestITSMChangeManagement          => '6.0.1',
-            TestITSMServiceLevelManagement    => '6.0.1',
+            TestGeneralCatalog                => '6.2.1',
+            TestImportExport                  => '6.2.1',
+            TestITSMCore                      => '6.2.1',
+            TestITSMIncidentProblemManagement => '6.2.1',
+            TestITSMConfigurationManagement   => '6.2.1',
+            TestITSMChangeManagement          => '6.2.1',
+            TestITSMServiceLevelManagement    => '6.2.1',
         },
-        PackageOnlineList => 'PackageOnlineListITSM620MissingITSMCore.asc',
-        ExpectedResult    => {
+        RepositoryPackageList => 'PackageOnlineListITSM6220MissingITSMCore.asc',
+        ExpectedResult        => {
             Success        => 0,
             AlreadyUpdated => {},
             Failed         => {
@@ -193,13 +196,13 @@ my @Tests = (
             },
         },
         RepositoryListAfter => {
-            TestGeneralCatalog                => '6.0.20',
-            TestImportExport                  => '6.0.20',
-            TestITSMCore                      => '6.0.1',
-            TestITSMIncidentProblemManagement => '6.0.1',
-            TestITSMConfigurationManagement   => '6.0.1',
-            TestITSMChangeManagement          => '6.0.1',
-            TestITSMServiceLevelManagement    => '6.0.1',
+            TestGeneralCatalog                => '6.2.20',
+            TestImportExport                  => '6.2.20',
+            TestITSMCore                      => '6.2.1',
+            TestITSMIncidentProblemManagement => '6.2.1',
+            TestITSMConfigurationManagement   => '6.2.1',
+            TestITSMChangeManagement          => '6.2.1',
+            TestITSMServiceLevelManagement    => '6.2.1',
         },
     },
 );
@@ -240,15 +243,13 @@ for my $Test (@Tests) {
     }
 
     $Kernel::OM->ObjectsDiscard(
-        Objects => [ 'Kernel::System::OTRSBusiness', 'Kernel::System::Package' ],
+        Objects => ['Kernel::System::Package'],
     );
 
     # Redefine key features to prevent real network communications and use local results for this test.
     no warnings qw( once redefine );    ## no critic
-    local *Kernel::System::OTRSBusiness::OTRSBusinessIsInstalled  = sub { return 0; };
-    local *Kernel::System::OTRSBusiness::OTRSBusinessIsUpdateable = sub { return 0; };
-    local *Kernel::System::Package::PackageOnlineList             = sub {
-        return do "$TestPath/$Test->{PackageOnlineList}";
+    local *Kernel::System::Package::RepositoryPackageListGet = sub {
+        return do "$TestPath/$Test->{RepositoryPackageList}";
     };
     local *Kernel::System::Package::PackageOnlineGet = sub {
         my ( $Self, %Param ) = @_;
@@ -263,7 +264,6 @@ for my $Test (@Tests) {
     use warnings;
 
     # Recreate objects with the redefined functions.
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
     $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
     # Check current installed packages
@@ -313,7 +313,7 @@ for my $Test (@Tests) {
 }
 continue {
     $Kernel::OM->ObjectsDiscard(
-        Objects => [ 'Kernel::System::OTRSBusiness', 'Kernel::System::Package' ],
+        Objects => ['Kernel::System::Package'],
     );
 }
 

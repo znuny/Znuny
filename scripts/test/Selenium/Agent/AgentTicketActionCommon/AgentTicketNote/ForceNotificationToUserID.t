@@ -19,10 +19,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
         my $GroupObject     = $Kernel::OM->Get('Kernel::System::Group');
         my $QueueObject     = $Kernel::OM->Get('Kernel::System::Queue');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
+        my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
 
         my %MailQueueCurrentItems = map { $_->{ID} => $_ } @{ $MailQueueObject->List() || [] };
 
@@ -62,56 +65,56 @@ $Selenium->RunTest(
         $MailQueueClean->();
 
         # Enable involved agent feature in AgentTicketNote.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###InvolvedAgent',
             Value => 1,
         );
 
         # Enable inform agent feature in AgentTicketNote.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###InformAgent',
             Value => 1,
         );
 
         # Enable inform agent feature in AgentTicketResponsible.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketResponsible###InformAgent',
             Value => 1,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'AgentSelfNotifyOnAction',
             Value => 1,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SendmailModule',
             Value => 'Kernel::System::Email::Test',
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'SendmailModule',
             Value => 'Kernel::System::Email::Test',
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Ticket::Responsible',
             Value => 1,
         );
@@ -119,7 +122,7 @@ $Selenium->RunTest(
         # Create test users.
         my @TestUser;
         for my $User ( 1 .. 3 ) {
-            my $TestUserLogin = $Helper->TestUserCreate(
+            my $TestUserLogin = $HelperObject->TestUserCreate(
                 Groups => [ 'admin', 'users' ],
             ) || die "Did not get test user";
 
@@ -129,7 +132,7 @@ $Selenium->RunTest(
         # Get test users ID.
         my @UserID;
         for my $UserID (@TestUser) {
-            my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+            my $TestUserID = $UserObject->UserLookup(
                 UserLogin => $UserID,
             );
             push @UserID, $TestUserID;
@@ -176,7 +179,7 @@ $Selenium->RunTest(
             Password => $TestUser[0],
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketNote view of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketNote;TicketID=$TicketID");
@@ -288,7 +291,7 @@ $Selenium->RunTest(
 
         # Clean the article cache, otherwise we'll get the caches result,
         # which are wrong.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Article',
         );
 
@@ -309,7 +312,7 @@ $Selenium->RunTest(
         );
 
         my $NewTicketID;
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Add new groups and queues.
         my $Group0 = $GroupObject->GroupAdd(
@@ -589,7 +592,7 @@ $Selenium->RunTest(
 
         # Delete test groups.
         $Success = $DBObject->Do(
-            SQL  => "DELETE FROM groups WHERE id = ?",
+            SQL  => "DELETE FROM permission_groups WHERE id = ?",
             Bind => [ \$Group0 ],
         );
         $Self->True(
@@ -597,7 +600,7 @@ $Selenium->RunTest(
             "Group is deleted - ID $Group0",
         );
         $Success = $DBObject->Do(
-            SQL  => "DELETE FROM groups WHERE id = ?",
+            SQL  => "DELETE FROM permission_groups WHERE id = ?",
             Bind => [ \$Group1 ],
         );
         $Self->True(
@@ -606,7 +609,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
 

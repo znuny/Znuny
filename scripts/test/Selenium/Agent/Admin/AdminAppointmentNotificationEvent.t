@@ -18,17 +18,19 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Enable SMIME due to 'Enable email security' checkbox must be enabled.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME',
             Value => 1,
@@ -38,7 +40,7 @@ $Selenium->RunTest(
         my $Language = "de";
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => ['admin'],
             Language => $Language,
         ) || die "Did not get test user";
@@ -53,7 +55,7 @@ $Selenium->RunTest(
             UserLanguage => $Language,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminNotificationEvent screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminAppointmentNotificationEvent");
@@ -84,19 +86,15 @@ $Selenium->RunTest(
         }
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText (
             $LanguageObject->Translate('Appointment Notification Management'),
             $LanguageObject->Translate('Add Notification')
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Toggle Ticket filter widget.
@@ -110,7 +108,7 @@ $Selenium->RunTest(
         );
 
         # Create test NotificationEvent.
-        my $NotifEventRandomID = 'NotificationEvent' . $Helper->GetRandomID();
+        my $NotifEventRandomID = 'NotificationEvent' . $HelperObject->GetRandomID();
         my $NotifEventText     = 'Selenium NotificationEvent test';
         $Selenium->find_element( '#Name',    'css' )->send_keys($NotifEventRandomID);
         $Selenium->find_element( '#Comment', 'css' )->send_keys($NotifEventText);
@@ -191,19 +189,15 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText (
             $LanguageObject->Translate('Appointment Notification Management'),
             $LanguageObject->Translate('Edit Notification') . ": $NotifEventRandomID"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Edit test NotificationEvent and set it to invalid.
@@ -296,8 +290,6 @@ $Selenium->RunTest(
             "There is a class 'Invalid' for test NotificationEvent",
         );
 
-        my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
-
         # Get NotificationEventID.
         my %NotifEventID = $NotificationEventObject->NotificationGet(
             Name => $NotifEventRandomID
@@ -343,10 +335,8 @@ JAVASCRIPT
             $Selenium->VerifiedRefresh();
         }
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
         # Import existing template without overwrite.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/NotificationEvent/Export_Notification_Appointment_reminder_notification.yml";
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
@@ -364,7 +354,7 @@ JAVASCRIPT
         );
 
         # Import existing template with overwrite.
-        $Location = $ConfigObject->Get('Home')
+        $Location = $Selenium->{Home}
             . "/scripts/test/sample/NotificationEvent/Export_Notification_Appointment_reminder_notification.yml";
         $Selenium->find_element( "#FileUpload",                     'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingNotifications", 'css' )->click();

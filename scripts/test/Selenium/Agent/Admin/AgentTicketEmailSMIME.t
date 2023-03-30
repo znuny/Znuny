@@ -19,11 +19,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Create directory for certificates and private keys.
-        my $RandomID    = $Helper->GetRandomID();
+        my $RandomID    = $HelperObject->GetRandomID();
         my $CertPath    = $ConfigObject->Get('Home') . "/var/tmp/certs$RandomID";
         my $PrivatePath = $ConfigObject->Get('Home') . "/var/tmp/private$RandomID";
         rmtree($CertPath);
@@ -32,26 +33,26 @@ $Selenium->RunTest(
         mkpath( [$PrivatePath], 0, 0770 );    ## no critic
 
         # Enable SMIME in config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME',
             Value => 1
         );
 
         # Set SMIME paths in sysConfig.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::CertPath',
             Value => $CertPath,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::PrivatePath',
             Value => $PrivatePath,
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -72,7 +73,7 @@ $Selenium->RunTest(
             $Selenium->find_element("//a[contains(\@href, \'Subaction=ShowAddCertificate' )]")->VerifiedClick();
 
             # Add certificate.
-            my $CertLocation = $ConfigObject->Get('Home')
+            my $CertLocation = $Selenium->{Home}
                 . "/scripts/test/sample/SMIME/SMIMEtest3\@example.net-$Key.crt";
 
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($CertLocation);
@@ -82,7 +83,7 @@ $Selenium->RunTest(
             $Selenium->find_element("//a[contains(\@href, \'Subaction=ShowAddPrivate' )]")->VerifiedClick();
 
             # Add private key.
-            my $PrivateLocation = $ConfigObject->Get('Home')
+            my $PrivateLocation = $Selenium->{Home}
                 . "/scripts/test/sample/SMIME/SMIMEtest3\@example.net-$Key.key";
 
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($PrivateLocation);
@@ -283,7 +284,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 );
 

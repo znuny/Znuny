@@ -18,7 +18,6 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Log',
-    'Kernel::System::Queue',
     'Kernel::System::SystemAddress',
     'Kernel::System::Ticket',
 );

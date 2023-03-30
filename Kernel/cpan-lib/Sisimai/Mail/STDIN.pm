@@ -2,29 +2,26 @@ package Sisimai::Mail::STDIN;
 use feature ':5.10';
 use strict;
 use warnings;
-use Class::Accessor::Lite;
 use IO::Handle;
-
-my $roaccessors = [
-    'path',     # [String]  Path to mbox
-    'name',     # [String]  File name of the mbox
-    'size',     # [Integer] File size of the mbox
-];
-my $rwaccessors = [
-    'offset',   # [Integer]  Offset position for seeking
-    'handle',   # [IO::File] File handle
-];
-Class::Accessor::Lite->mk_accessors(@$rwaccessors);
-Class::Accessor::Lite->mk_ro_accessors(@$roaccessors);
+use Class::Accessor::Lite (
+    'new' => 0,
+    'ro'  => [
+        'path',     # [String]  Fixed string "<STDIN>"
+        'size',     # [Integer] Data size which has been read
+    ],
+    'rw'  => [
+        'offset',   # [Integer]  The number of emails which have been read
+        'handle',   # [IO::File] File handle
+    ]
+);
 
 sub new {
     # Constructor of Sisimai::Mail::STDIN
     # @return   [Sisimai::Mail::STDIN] Object
     my $class = shift;
-    my $param = { 
+    my $param = {
         'path'   => '<STDIN>',
-        'name'   => '<STDIN>',
-        'size'   => undef,
+        'size'   => 0,
         'offset' => 0,
         'handle' => IO::Handle->new->fdopen(fileno(STDIN), 'r'),
     };
@@ -48,6 +45,8 @@ sub read {
             $readbuffer .= $r;
         }
     };
+    $self->{'size'}   += length $readbuffer;
+    $self->{'offset'} += 1;
     return $readbuffer;
 }
 
@@ -66,7 +65,6 @@ Sisimai::Mail::STDIN - Mailbox reader
     while( my $r = $mailbox->read ) {
         print $r;   # print data read from STDIN
     }
-    $mailbox->close;
 
 =head1 DESCRIPTION
 
@@ -88,17 +86,11 @@ C<path()> returns "<STDIN>"
 
     print $mailbox->path;   # "<STDIN>"
 
-=head2 C<B<name()>>
-
-C<name()> returns "<STDIN>"
-
-    print $mailbox->name;   # "<STDIN>"
-
 =head2 C<B<size()>>
 
-C<size()> returns "undef"
+C<size()> returns the data size which has been read
 
-    print $mailbox->size;   # undef
+    print $mailbox->size;   # 2202
 
 =head2 C<B<offset()>>
 
@@ -111,7 +103,7 @@ is bytes which have already read.
 
 C<handle()> returns file handle object (IO::Handle) of the mbox.
 
-    $mailbox->handle->close;
+    $mailbox->handle;
 
 =head2 C<B<read()>>
 
@@ -128,7 +120,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2016,2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2016,2018-2020 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

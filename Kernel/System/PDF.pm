@@ -19,7 +19,6 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::DateTime',
     'Kernel::System::Log',
-    'Kernel::System::Main',
 );
 
 =head1 NAME
@@ -345,7 +344,7 @@ sub PageNew {
 
     # get logofile
     my $LogoFile = $Self->{Document}->{LogoFile}
-        || $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/logo-otrs.png';
+        || $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/httpd/htdocs/skins/Agent/default/img/logo.png';
 
     if (
         defined( $Param{LogoFile} )
@@ -360,11 +359,13 @@ sub PageNew {
         $LogoFile = $Param{LogoFile};
     }
 
+    my $LogoSize = $Kernel::OM->Get('Kernel::Config')->Get('PDF::LogoSize');
+
     # output the logo image at header left
     $Self->Image(
         File   => $LogoFile,
-        Width  => 700,
-        Height => 100,
+        Width  => $LogoSize->{Width} || 475,
+        Height => $LogoSize->{Height} || 100,
     );
 
     if ( $Param{HeaderRight} ) {
@@ -1229,7 +1230,7 @@ Output a image
 
     $True = $PDFObject->Image(
         File   => '/path/image.gif',  # (gif|jpg|png)
-        Type   => 'ReturnFalse'       # (optional) default Reduce (ReturnFalse|Reduce)
+        Type   => 'ReturnFalse',      # (optional) default Reduce (ReturnFalse|Reduce)
         Width  => 300,                # width of image
         Height => 150,                # height of image
     );
@@ -1363,7 +1364,7 @@ Output a horizontal line
 
     $True = $PDFObject->HLine(
         Width     => 300,           # (optional) default 'end of printable dimension'
-        Type      => 'ReturnFalse'  # (optional) default Cut (ReturnFalse|Cut)
+        Type      => 'ReturnFalse', # (optional) default Cut (ReturnFalse|Cut)
         Color     => '#101010',     # (optional) default black
         LineWidth => 1,             # (optional) default 1
     );

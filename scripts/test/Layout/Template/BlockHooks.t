@@ -20,7 +20,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my @Tests = (
     {
@@ -80,6 +80,8 @@ Content11
 <!--HookEndBlock1-->
 <!--HookStartBlock1-->
 Content1
+<!--HookStartBlock11-->
+<!--HookEndBlock11-->
 <!--HookEndBlock1-->
 
 <!--HookStartBlock2-->
@@ -92,8 +94,9 @@ EOF
 for my $Test (@Tests) {
 
     $Kernel::OM->ObjectsDiscard();
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    $Kernel::OM->Get('Kernel::Config')->Set(
+    $ConfigObject->Set(
         Key   => 'Frontend::Template::GenerateBlockHooks',
         Value => $Test->{HookConfig},
     );
@@ -105,7 +108,7 @@ for my $Test (@Tests) {
 
     # now add this directory as include path to be able to use the test templates
     my $IncludePaths = $LayoutObject->{TemplateProviderObject}->include_path();
-    unshift @{$IncludePaths}, $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/scripts/test/Layout/Template';
+    unshift @{$IncludePaths}, $ConfigObject->Get('Home') . '/scripts/test/Layout/Template';
     $LayoutObject->{TemplateProviderObject}->include_path($IncludePaths);
 
     for my $Block ( @{ $Test->{Blocks} } ) {

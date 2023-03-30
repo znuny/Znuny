@@ -19,16 +19,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-
-        # get config object
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # enable tool bar AgentTicketEscalationView
         my %AgentTicketEscalationView = (
             AccessKey => 'w',
             Action    => 'AgentTicketEscalationView',
+            Block     => 'ToolBarOverviews',
             CssClass  => 'EscalationView',
             Icon      => 'fa fa-exclamation',
             Link      => 'Action=AgentTicketEscalationView',
@@ -37,21 +36,27 @@ $Selenium->RunTest(
             Priority  => '1010030',
         );
 
-        $Helper->ConfigSettingChange(
-            Key   => 'Frontend::ToolBarModule###3-Ticket::AgentTicketEscalationView',
+        $HelperObject->ConfigSettingChange(
+            Key   => 'Frontend::ToolBarModule###130-Ticket::AgentTicketEscalation',
             Value => \%AgentTicketEscalationView,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###3-Ticket::AgentTicketEscalationView',
+            Key   => 'Frontend::ToolBarModule###130-Ticket::AgentTicketEscalation',
             Value => \%AgentTicketEscalationView
         );
 
-        # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        # Create test user.
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
+
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
 
         $Selenium->Login(
             Type     => 'Agent',

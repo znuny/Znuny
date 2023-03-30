@@ -1,0 +1,58 @@
+---
+- Config:
+    ClientID:
+    ClientSecret:
+    Requests:
+      AuthorizationCode:
+        Request:
+          AutofilledParametersMapping:
+            client_id: ClientID
+            redirect_uri: RedirectURL
+            scope: Scope
+            state: State
+          Parameters:
+            access_type: offline
+            response_type: code
+          URL: https://accounts.google.com/o/oauth2/v2/auth
+        Response:
+          ParametersMapping:
+            code: AuthorizationCode
+            state: State
+      TokenByAuthorizationCode:
+        Request:
+          AutofilledParametersMapping:
+            client_id: ClientID
+            client_secret: ClientSecret
+            code: AuthorizationCode
+            redirect_uri: RedirectURL
+          Parameters:
+            grant_type: authorization_code
+          URL: https://oauth2.googleapis.com/token
+        Response:
+          ParametersMapping:
+            access_token: Token
+            error: ErrorMessage
+            error_description: ErrorDescription
+            expires_in: TokenExpirationDate
+            refresh_token: RefreshToken
+      TokenByRefreshToken:
+        Request:
+          AutofilledParametersMapping:
+            client_id: ClientID
+            client_secret: ClientSecret
+            refresh_token: RefreshToken
+          Parameters:
+            grant_type: refresh_token
+          URL: https://oauth2.googleapis.com/token
+        Response:
+          ParametersMapping:
+            access_token: Token
+            error: ErrorMessage
+            error_description: ErrorDescription
+            expires_in: TokenExpirationDate
+    Scope: https://mail.google.com/
+    Notifications:
+        NotifyOnExpiredToken: 0
+        NotifyOnExpiredRefreshToken: 1
+  Name: Google Mail
+

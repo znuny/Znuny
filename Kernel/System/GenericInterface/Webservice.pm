@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 package Kernel::System::GenericInterface::Webservice;
 
@@ -16,12 +17,13 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
     'Kernel::System::Cache',
     'Kernel::System::DB',
     'Kernel::System::GenericInterface::DebugLog',
     'Kernel::System::GenericInterface::WebserviceHistory',
     'Kernel::System::Log',
-    'Kernel::System::Main',
+    'Kernel::System::Storable',
     'Kernel::System::Valid',
     'Kernel::System::YAML',
 );
@@ -135,9 +137,6 @@ sub WebserviceAdd {
         }
     }
 
-    # Check if web service is using an old configuration type and upgrade if necessary.
-    $Self->_WebserviceConfigUpgrade(%Param);
-
     # dump config as string
     my $Config = $Kernel::OM->Get('Kernel::System::YAML')->Dump( Data => $Param{Config} );
 
@@ -209,7 +208,6 @@ Returns:
 sub WebserviceGet {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !$Param{ID} && !$Param{Name} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -234,7 +232,23 @@ sub WebserviceGet {
         Type => 'Webservice',
         Key  => $CacheKey,
     );
-    return $Cache if $Cache;
+
+    if ( IsHashRefWithData($Cache) ) {
+        if (
+            !exists $Kernel::OM->{Objects}->{'Kernel::Output::HTML::Layout'}
+            || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{Action} !~ m{\AAdmin}
+            )
+        {
+            $Cache = $Kernel::OM->Get('Kernel::System::Storable')->Clone(
+                Data => $Cache,
+            );
+
+            if ( $Cache->{Config} ) {
+                $Cache->{Config} = $Self->WebserviceConfigReplace( $Cache->{Config} );
+            }
+        }
+        return $Cache;
+    }
 
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
@@ -262,7 +276,6 @@ sub WebserviceGet {
 
     my %Data;
     while ( my @Data = $DBObject->FetchrowArray() ) {
-
         my $Config = $YAMLObject->Load( Data => $Data[2] );
 
         %Data = (
@@ -288,6 +301,21 @@ sub WebserviceGet {
         Value => \%Data,
         TTL   => $CacheTTL,
     );
+
+    if (
+        $Data{Config}
+        && (
+            !exists $Kernel::OM->{Objects}->{'Kernel::Output::HTML::Layout'}
+            || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{Action} !~ m{\AAdmin}
+        )
+        )
+    {
+        $Data{Config} = $Kernel::OM->Get('Kernel::System::Storable')->Clone(
+            Data => $Data{Config},
+        );
+
+        $Data{Config} = $Self->WebserviceConfigReplace( $Data{Config} );
+    }
 
     return \%Data;
 }
@@ -373,9 +401,6 @@ sub WebserviceUpdate {
             }
         }
     }
-
-    # Check if web service is using an old configuration type and upgrade if necessary.
-    $Self->_WebserviceConfigUpgrade(%Param);
 
     # dump config as string
     my $Config = $Kernel::OM->Get('Kernel::System::YAML')->Dump( Data => $Param{Config} );
@@ -565,129 +590,41 @@ sub WebserviceList {
     return \%Data;
 }
 
-=begin Internal:
+=head2 WebserviceConfigReplace()
 
-=head2 _WebserviceConfigUpgrade()
+Replaces <OTRS_CONFIG> tags in arrays, hashes and strings recursively.
 
-Update version if webservice config (e.g. for API changes).
+    my $Data   = '<OTRS_CONFIG_Home>';
+    my $Result = $WebserviceObject->WebserviceConfigReplace($Data);
 
-    my $Config = $WebserviceObject->_WebserviceConfigUpgrade( Config => $Config );
+Returns:
+
+    my $Result = '/opt/znuny';
 
 =cut
 
-sub _WebserviceConfigUpgrade {
-    my ( $Self, %Param ) = @_;
+sub WebserviceConfigReplace {
+    my ( $Self, $Data ) = @_;
 
-    return if !IsHashRefWithData( $Param{Config} );
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # Updates of SOAP and REST transport in OTRS 6:
-    #   Authentication, SSL and Proxy option changes, introduction of timeout param.
-    # Upgrade is considered necessary if the new (and now mandatory) parameter 'Timeout' isn't set.
-    if (
-        IsHashRefWithData( $Param{Config}->{Requester} )    # prevent creation of dummy elements
-        && IsStringWithData( $Param{Config}->{Requester}->{Transport}->{Type} )
-        && (
-            $Param{Config}->{Requester}->{Transport}->{Type} eq 'HTTP::REST'
-            || $Param{Config}->{Requester}->{Transport}->{Type} eq 'HTTP::SOAP'
-        )
-        && IsHashRefWithData( $Param{Config}->{Requester}->{Transport}->{Config} )
-        && !IsStringWithData( $Param{Config}->{Requester}->{Transport}->{Config}->{Timeout} )
-        )
-    {
-        my $RequesterTransportConfig = $Param{Config}->{Requester}->{Transport}->{Config};
-        my $RequesterTransportType   = $Param{Config}->{Requester}->{Transport}->{Type};
+    if ( IsStringWithData($Data) ) {
+        $Data =~ s{(?:<|&lt;)OTRS_CONFIG_(.+?)(?:>|&gt;)}{$ConfigObject->{$1} // ''}eg;
+    }
+    elsif ( IsArrayRefWithData($Data) ) {
 
-        # set default timeout
-        if ( $RequesterTransportType eq 'HTTP::SOAP' ) {
-            $RequesterTransportConfig->{Timeout} = 60;
+        for my $Entry ( @{$Data} ) {
+            $Entry = $Self->WebserviceConfigReplace($Entry);
         }
-        else {
-            $RequesterTransportConfig->{Timeout} = 300;
-        }
+    }
+    elsif ( IsHashRefWithData($Data) ) {
 
-        # set default SOAPAction scheme for SOAP
-        if (
-            $RequesterTransportType eq 'HTTP::SOAP'
-            && IsStringWithData( $RequesterTransportConfig->{SOAPAction} )
-            && $RequesterTransportConfig->{SOAPAction} eq 'Yes'
-            )
-        {
-            $RequesterTransportConfig->{SOAPActionScheme} = 'NameSpaceSeparatorOperation';
+        for my $Key ( sort keys %{$Data} ) {
+            $Data->{$Key} = $Self->WebserviceConfigReplace( $Data->{$Key} );
         }
-
-        # convert auth settings
-        my $Authentication = delete $RequesterTransportConfig->{Authentication};
-        if (
-            IsHashRefWithData($Authentication)
-            && $Authentication->{Type}
-            && $Authentication->{Type} eq 'BasicAuth'
-            )
-        {
-            $RequesterTransportConfig->{Authentication} = {
-                AuthType          => $Authentication->{Type},
-                BasicAuthUser     => $Authentication->{User},
-                BasicAuthPassword => $Authentication->{Password},
-            };
-        }
-
-        # convert ssl settings
-        my $SSL  = delete $RequesterTransportConfig->{SSL};
-        my $X509 = delete $RequesterTransportConfig->{X509};
-        if (
-            $RequesterTransportType eq 'HTTP::SOAP'
-            && IsHashRefWithData($SSL)
-            && $SSL->{UseSSL}
-            && $SSL->{UseSSL} eq 'Yes'
-            )
-        {
-            $RequesterTransportConfig->{SSL} = {
-                UseSSL         => 'Yes',
-                SSLPassword    => $SSL->{SSLP12Password},
-                SSLCertificate => $SSL->{SSLP12Certificate},
-                SSLCADir       => $SSL->{SSLCADir},
-                SSLCAFile      => $SSL->{SSLCAFile},
-            };
-        }
-        elsif (
-            IsHashRefWithData($X509)
-            && $X509->{UseX509}
-            && $X509->{UseX509} eq 'Yes'
-            )
-        {
-            $RequesterTransportConfig->{SSL} = {
-                UseSSL         => 'Yes',
-                SSLKey         => $X509->{X509KeyFile},
-                SSLCertificate => $X509->{X509CertFile},
-                SSLCAFile      => $X509->{X509CAFile},
-            };
-        }
-        else {
-            $RequesterTransportConfig->{SSL}->{UseSSL} = 'No';
-        }
-
-        # convert proxy settings
-        if (
-            IsHashRefWithData($SSL)
-            && $SSL->{SSLProxy}
-            )
-        {
-            $RequesterTransportConfig->{Proxy} = {
-                UseProxy      => 'Yes',
-                ProxyHost     => $SSL->{SSLProxy},
-                ProxyUser     => $SSL->{SSLProxyUser},
-                ProxyPassword => $SSL->{SSLProxyPassword},
-                ProxyExclude  => 'No',
-            };
-        }
-        else {
-            $RequesterTransportConfig->{Proxy}->{UseProxy} = 'No';
-        }
-
-        # set updated config
-        $Param{Config}->{Requester}->{Transport}->{Config} = $RequesterTransportConfig;
     }
 
-    return 1;
+    return $Data;
 }
 
 1;

@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Uninstall an OTRS package.');
+    $Self->Description('Uninstall a package.');
     $Self->AddOption(
         Name        => 'force',
         Description => 'Force package uninstallation even if validation fails.',

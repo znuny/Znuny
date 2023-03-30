@@ -21,11 +21,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # enable PGP
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PGP',
             Value => 1
@@ -61,17 +60,17 @@ $Selenium->RunTest(
         my $Home = $ConfigObject->Get('Home');
 
         # create test PGP path and set it in sysConfig
-        my $PGPPath = $Home . '/var/tmp/pgp' . $Helper->GetRandomID();
+        my $PGPPath = $Home . '/var/tmp/pgp' . $HelperObject->GetRandomID();
         mkpath( [$PGPPath], 0, 0770 );    ## no critic
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PGP::Options',
             Value => "--homedir $PGPPath --batch --no-tty --yes",
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestUserLogin = $HelperObject->TestCustomerUserCreate(
             Groups   => ['admin'],
             Language => 'en'
         ) || die "Did not get test user";
@@ -88,7 +87,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerPreferences");
 
         # change customer PGP key preference
-        my $Location = $Home . '/scripts/test/sample/Crypt/PGPPrivateKey-1.asc';
+        my $Location = $Selenium->{Home} . '/scripts/test/sample/Crypt/PGPPrivateKey-1.asc';
         $Selenium->find_element( "#UserPGPKey",       'css' )->send_keys($Location);
         $Selenium->find_element( "#UserPGPKeyUpdate", 'css' )->VerifiedClick();
 

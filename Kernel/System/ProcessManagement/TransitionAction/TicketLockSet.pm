@@ -52,15 +52,19 @@ sub new {
 
 =head2 Run()
 
-    Run Data
+Runs TransitionAction TicketLockSet.
 
-    my $TicketLockSetResult = $TicketLockSetActionObject->Run(
+    my $Success = $TicketLockSetActionObject->Run(
         UserID                   => 123,
+
+        # Ticket contains the result of TicketGet including dynamic fields
         Ticket                   => \%Ticket,   # required
         ProcessEntityID          => 'P123',
         ActivityEntityID         => 'A123',
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
+
+        # Config is the hash stored in a Process::TransitionAction's config key
         Config                   => {
             Lock  => 'lock',
             # or
@@ -68,11 +72,10 @@ sub new {
             UserID => 123,                      # optional, to override the UserID from the logged user
         }
     );
-    Ticket contains the result of TicketGet including DynamicFields
-    Config is the Config Hash stored in a Process::TransitionAction's  Config key
-    Returns:
 
-    $TicketLockSetResult = 1; # 0
+Returns:
+
+    my $Success = 1; # 0
 
 =cut
 

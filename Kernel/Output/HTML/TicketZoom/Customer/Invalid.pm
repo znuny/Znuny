@@ -20,10 +20,9 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::CommunicationChannel',
-    'Kernel::System::Main',
     'Kernel::System::Log',
+    'Kernel::System::Main',
     'Kernel::System::Ticket::Article',
-    'Kernel::Output::HTML::Article::MIMEBase',
 );
 
 =head2 ArticleRender()

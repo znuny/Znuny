@@ -109,7 +109,11 @@ sub new {
 
 Get module options. Currently there is just one option, "PreAuth".
 
-    if ( $AuthObject->GetOption( What => 'PreAuth' ) ) {
+    my $AuthOption = $AuthObject->GetOption(What => 'PreAuth');
+
+    # or
+
+    if ( $AuthObject->GetOption(What => 'PreAuth') ) {
         print "No login screen is needed. Authentication is based on some other options. E. g. $ENV{REMOTE_USER}\n";
     }
 
@@ -124,6 +128,13 @@ sub GetOption {
 =head2 Auth()
 
 The authentication function.
+
+    my $User = $AuthObject->Auth(
+        User => $User,
+        Pw   => $Pw,
+    );
+
+    # or
 
     if ( $AuthObject->Auth( User => $User, Pw => $Pw ) ) {
         print "Auth ok!\n";
@@ -358,9 +369,9 @@ Retrieve $Self->{LastErrorMessage} content.
 
     my $AuthErrorMessage = $AuthObject->GetLastErrorMessage();
 
-    Result:
+Result:
 
-        $AuthErrorMessage = "An error string message.";
+    $AuthErrorMessage = "An error string message.";
 
 =cut
 

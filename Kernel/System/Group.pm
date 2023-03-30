@@ -124,22 +124,25 @@ sub GroupAdd {
         return;
     }
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # insert new group
     return if !$DBObject->Do(
-        SQL => 'INSERT INTO groups (name, comments, valid_id, '
+        SQL => 'INSERT INTO permission_groups (name, comments, valid_id, '
             . ' create_time, create_by, change_time, change_by)'
             . ' VALUES (?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Param{Comment}, \$Param{ValidID}, \$Param{UserID}, \$Param{UserID},
+            \$Param{Name},
+            \$Param{Comment},
+            \$Param{ValidID},
+            \$Param{UserID},
+            \$Param{UserID},
         ],
     );
 
     # get new group id
     return if !$DBObject->Prepare(
-        SQL  => 'SELECT id FROM groups WHERE name = ?',
+        SQL  => 'SELECT id FROM permission_groups WHERE name = ?',
         Bind => [ \$Param{Name} ],
     );
 
@@ -277,12 +280,11 @@ sub GroupUpdate {
 
     return 1 if !$ChangeRequired;
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # update group in database
     return if !$DBObject->Do(
-        SQL => 'UPDATE groups SET name = ?, comments = ?, valid_id = ?, '
+        SQL => 'UPDATE permission_groups SET name = ?, comments = ?, valid_id = ?, '
             . 'change_time = current_timestamp, change_by = ? WHERE id = ?',
         Bind => [
             \$Param{Name}, \$Param{Comment}, \$Param{ValidID}, \$Param{UserID}, \$Param{ID},
@@ -456,12 +458,12 @@ sub GroupDataList {
     );
     return %{$Cache} if $Cache;
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # get all group data from database
     return if !$DBObject->Prepare(
-        SQL => 'SELECT id, name, comments, valid_id, create_time, create_by, change_time, change_by FROM groups',
+        SQL =>
+            'SELECT id, name, comments, valid_id, create_time, create_by, change_time, change_by FROM permission_groups',
     );
 
     # fetch the result

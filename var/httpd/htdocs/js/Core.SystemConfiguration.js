@@ -1,6 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 maxence GmbH, https://maxence.de/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -185,7 +185,7 @@ var Core = Core || {};
         // and use 'All' as default.
         if ($('#Category option').length <= 2) {
             $('.SystemConfigurationCategories').hide();
-            $('.SystemConfigurationCategories').next('.CallForAction').hide();
+            $('.SystemConfigurationCategories').next('a').hide();
             $('#Category').val('All').trigger('change');
             Data["Category"] = 'All';
         }
@@ -251,7 +251,7 @@ var Core = Core || {};
                         Core.UI.InitStickyElement();
                     })
                     .on('hover_node.jstree', function (Node, Selected, Event) {  //eslint-disable-line no-unused-vars
-                        $('#ConfigTree #' + Core.App.EscapeSelector(Selected.node.id)).children('a').append('<span class="OpenNodeInNewWindow" title="' + Core.Language.Translate('Open this node in a new window') + '" data-node="' + Selected.node.id + '"><i class="fa fa-external-link"></i></span>').find('.OpenNodeInNewWindow').fadeIn();
+                        $('#ConfigTree #' + Core.App.EscapeSelector(Selected.node.id)).children('a').append('<span class="OpenNodeInNewWindow" style="display:inline-block" title="' + Core.Language.Translate('Open this node in a new window') + '" data-node="' + Selected.node.id + '"><i class="fa fa-external-link"></i></span>').find('.OpenNodeInNewWindow').fadeIn();
                     })
                     .on('dehover_node.jstree', function (Node, Selected, Event) {  //eslint-disable-line no-unused-vars
                         $('#ConfigTree #' + Core.App.EscapeSelector(Selected.node.id)).find('.OpenNodeInNewWindow').remove();
@@ -323,7 +323,10 @@ var Core = Core || {};
         // for which a key field has been added but no value has been
         // added, hinder the user from saving the setting
         if ($Widget.find('button.AddKey:visible').length) {
-            alert(Core.Language.Translate('Please add values for all keys before saving the setting.'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('Please add values for all keys before saving the setting.')
+            );
             return;
         }
 
@@ -901,7 +904,10 @@ var Core = Core || {};
         }
 
         if (!$KeyElement.val()) {
-            alert(Core.Language.Translate('The key must not be empty.'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('The key must not be empty.')
+            );
             return;
         }
 
@@ -910,7 +916,10 @@ var Core = Core || {};
                 return $(this).val() === Key;
             }).length > 1) {
 
-            alert(Core.Language.Translate("A key with this name ('%s') already exists.", Key));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate("A key with this name ('%s') already exists.", Key)
+            );
             return;
         }
 

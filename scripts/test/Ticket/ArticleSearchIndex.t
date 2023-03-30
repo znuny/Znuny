@@ -23,7 +23,7 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Tests for article search index modules.
 for my $Module (qw(DB)) {

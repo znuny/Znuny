@@ -18,10 +18,9 @@ use parent qw(Kernel::System::DynamicField::Driver::BaseText);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::DynamicFieldValue',
     'Kernel::System::Main',
-    'Kernel::System::ProcessManagement::Process',
     'Kernel::System::ProcessManagement::DB::Process',
+    'Kernel::System::ProcessManagement::Process',
     'Kernel::System::Ticket::ColumnFilter',
 );
 
@@ -119,7 +118,7 @@ sub DisplayValueRender {
     }
 
     my $Value = $Process->{Name} // '';
-
+    $Value = $Param{LayoutObject}->{LanguageObject}->Translate($Value);
     my $Title = $Value;
 
     # HTMLOutput transformations

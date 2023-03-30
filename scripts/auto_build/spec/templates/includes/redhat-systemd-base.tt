@@ -1,6 +1,6 @@
 [% INCLUDE 'includes/copyright.tt' -%]
 
-Summary:      The Znuny help desk.
+Summary:      The Znuny service desk.
 Name:         znuny
 Version:      0.0
 License:      GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
@@ -27,35 +27,35 @@ BuildRoot:    %{_tmppath}/%{name}-%{version}-build
 [% '#' %] delete old RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 [% '#' %] set DESTROOT
-export DESTROOT="/opt/otrs/"
+export DESTROOT="/opt/znuny/"
 [% '#' %] create RPM_BUILD_ROOT DESTROOT
 mkdir -p $RPM_BUILD_ROOT/$DESTROOT/
 [% '#' %] copy files
 cp -R . $RPM_BUILD_ROOT/$DESTROOT
 [% '#' %] configure apache
 install -d -m 755 $RPM_BUILD_ROOT/etc/httpd/conf.d
-install -m 644 scripts/apache2-httpd.include.conf $RPM_BUILD_ROOT/etc/httpd/conf.d/zzz_otrs.conf
+install -m 644 scripts/apache2-httpd.include.conf $RPM_BUILD_ROOT/etc/httpd/conf.d/zzz_znuny.conf
 
 [% '#' %] set permission
 [% webgroup = 'apache' %]
-export OTRSUSER=otrs
-useradd $OTRSUSER || :
+export ZNUNYUSER=znuny
+useradd $ZNUNYUSER || :
 useradd apache || :
 groupadd apache || :
-$RPM_BUILD_ROOT/opt/otrs/bin/otrs.SetPermissions.pl --web-group=apache
+$RPM_BUILD_ROOT/opt/znuny/bin/znuny.SetPermissions.pl --web-group=apache
 
 %pre
 [% '#' %] useradd
-export OTRSUSER=otrs
-echo -n "Check OTRS user ... "
-if id $OTRSUSER >/dev/null 2>&1; then
-    echo "$OTRSUSER exists."
+export ZNUNYUSER=znuny
+echo -n "Check Znuny user ... "
+if id $ZNUNYUSER >/dev/null 2>&1; then
+    echo "$ZNUNYUSER exists."
     [% '#' %] update groups
-    usermod -g apache $OTRSUSER
+    usermod -g apache $ZNUNYUSER
     [% '#' %] update home dir
-    usermod -d /opt/otrs $OTRSUSER
+    usermod -d /opt/znuny $ZNUNYUSER
 else
-    useradd $OTRSUSER -d /opt/otrs/ -s /bin/bash -g apache -c 'OTRS System User' && echo "$OTRSUSER added."
+    useradd $ZNUNYUSER -d /opt/znuny/ -s /bin/bash -g apache -c 'Znuny System User' && echo "$ZNUNYUSER added."
 fi
 
 
@@ -67,5 +67,5 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%config /etc/httpd/conf.d/zzz_otrs.conf
+%config /etc/httpd/conf.d/zzz_znuny.conf
 [% INCLUDE 'includes/files.tt' -%]

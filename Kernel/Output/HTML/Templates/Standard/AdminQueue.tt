@@ -8,47 +8,23 @@
 # --
 
 [% RenderBlockStart("Overview") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Queue Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Queue Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% SWITCH Data.Action %]
-        [% CASE 'Add' %]
-            [% BreadcrumbPath.push({ Name => Translate('Add Queue'),}) %]
-        [% CASE 'Change' %]
-            [% USE EditTitle = String(Translate("Edit Queue")) %]
-            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
-
 [% RenderBlockStart("ActionList") %]
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
             </div>
             <div class="Content">
                 <ul class="ActionList">
-
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
-
 [% RenderBlockStart("ActionAdd") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Add" class="CallForAction Fullsize Center Create"><span><i class="fa fa-plus-square"></i>[% Translate("Add Queue") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Add" class="CallForAction btn-main btn-primary-ghost Create"><span><i class="fa fa-plus-square"></i>[% Translate("Add Queue") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionAdd") %]
 
@@ -67,14 +43,109 @@
             </div>
         </div>
 [% RenderBlockEnd("Filter") %]
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemAddress' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Email Addresses') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminGroup' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Groups') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminMailAccount' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('PostMaster Mail Accounts') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSalutation' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Salutations') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSignature' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Signatures') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminQueueAutoResponse' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Queues ↔ Auto Responses') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminQueueTemplates' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Templates ↔ Queues') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=TimeWorkingHours' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Configure Working Hours') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23Queue' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Configure Queue Related Settings') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Queue Management") | html %]</h1>
 
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Queue Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% SWITCH Data.Action %]
+            [% CASE 'Add' %]
+                [% BreadcrumbPath.push({ Name => Translate('Add Queue'),}) %]
+            [% CASE 'Change' %]
+                [% USE EditTitle = String(Translate("Edit Queue")) %]
+                [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 [% RenderBlockStart("OverviewResult") %]
         <div class="WidgetSimple">
-            <div class="Header">
+            <div class="Header filter-items">
                 <h2>[% Translate("List") | html %]</h2>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+#                    <i class="fa fa-filter"></i>
+                    <span class="show-valid">Show Valid</span>
+                    <span class="show-all">Show All</span>
+                </a>
             </div>
             <div class="Content">
                 <table class="DataTable" id="Queues">
@@ -116,9 +187,8 @@
             </div>
         </div>
 [% RenderBlockEnd("OverviewResult") %]
-
 [% RenderBlockStart("OverviewUpdate") %]
-        <div class="WidgetSimple">
+        <div class="WidgetSimple Widget-title-divider">
             <div class="Header">
                 [% IF Data.Action == 'Add' %]
                     <h2>[% Translate("Add Queue") | html %]</h2>
@@ -134,293 +204,352 @@
                     [% IF Data.Action == 'Change' %]
                         <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
                     [% END %]
-                    <fieldset class="TableLike">
-                        <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="50"/>
-                            <div id="NameError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="NameServerError" class="TooltipErrorMessage">
-                                <p>
+                    <fieldset class="TableLike card-item-wrapper">
+
+                        <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
+                            <h2 class="card-title">General</h2>
+
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]</label>
+                                <div class="Field">
+                                    <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="Validate_Required [% Data.NameInvalid | html %]" maxlength="50"/>
+                                    <div id="NameError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="NameServerError" class="TooltipErrorMessage">
+                                        <p>
 [% RenderBlockStart("NameServerError") %]
-                                [% Translate("This field is required.") | html %]
+                                            [% Translate("This field is required.") | html %]
 [% RenderBlockEnd("NameServerError") %]
 [% RenderBlockStart("ExistNameServerError") %]
-                                [% Translate("A queue with this name already exists!") | html %]
+                                            [% Translate("A queue with this name already exists!") | html %]
 [% RenderBlockEnd("ExistNameServerError") %]
 [% RenderBlockStart("InSettingNameServerError") %]
-                                    [% Translate("This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!") | html %]
+                                            [% Translate("This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!") | html %]
 [% RenderBlockEnd("InSettingNameServerError") %]
-                                </p>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="Clear"></div>
 
-                        <label for="ParentQueueID">[% Translate("Sub-queue of") | html %]:</label>
-                        <div class="Field">
-                            [% Data.QueueOption %]
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label class="Mandatory" for="GroupID"><span class="Marker">*</span> [% Translate("Group") | html %]:</label>
-                        <div class="Field">
-                            [% Data.GroupOption %]
-                            <div id="GroupIDError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                            <div class="field-wrapper">
+                                <label for="ParentQueueID">[% Translate("Sub-queue of") | html %]</label>
+                                <div class="Field">
+                                    [% Data.QueueOption %]
+                                </div>
                             </div>
-                            <div id="GroupIDServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                        </div>
-                        <div class="Clear"></div>
 
-                        <label for="UnlockTimeout">
-                            [% Translate("Unlock timeout") | html %] [% Translate("minutes") | html %]:
-                        </label>
-                        <div class="Field">
-                            <input type="text" name="UnlockTimeout" id="UnlockTimeout" value="[% Data.UnlockTimeout | html %]" class="W20pc" maxlength="10"/>
-                            <p class="FieldExplanation">
-                                [% Translate("0 = no unlock") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
-                            </p>
-                            <p class="FieldExplanation">
-                                [% Translate("If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.") | html %]
-                            </p>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="FirstResponseTime">
-                            [% Translate("Escalation - first response time") | html %] ([% Translate("minutes") | html %]):
-                        </label>
-                        <div class="Field">
-                            <input type="text" name="FirstResponseTime" id="FirstResponseTime" value="[% Data.FirstResponseTime | html %]" class="W20pc" maxlength="10"/>
-                            ( <label>[% Translate("Notify by") | html %]  [% Data.FirstResponseNotifyOptionStrg %] </label> )
-                            <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
-                            </p>
-                            <p class="FieldExplanation">
-                                [% Translate("If there is not added a customer contact, either email-external or phone, to a new ticket before the time defined here expires, the ticket is escalated.") | html %]
-                            </p>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="UpdateTime">
-                            [% Translate("Escalation - update time") | html %] ([% Translate("minutes") | html %]):
-                        </label>
-                        <div class="Field">
-                            <input type="text" name="UpdateTime" id="UpdateTime" value="[% Data.UpdateTime | html %]" class="W20pc" maxlength="10"/>
-                            ( <label>[% Translate("Notify by") | html %]  [% Data.UpdateNotifyOptionStrg %]</label> )
-                            <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
-                            </p>
-                            <p class="FieldExplanation">
-                                [% Translate("If there is an article added, such as a follow-up via email or the customer portal, the escalation update time is reset. If there is no customer contact, either email-external or phone, added to a ticket before the time defined here expires, the ticket is escalated.") | html %]
-                            </p>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="SolutionTime">
-                            [% Translate("Escalation - solution time") | html %] ([% Translate("minutes") | html %]):
-                        </label>
-                        <div class="Field">
-                            <input type="text" name="SolutionTime" id="SolutionTime" value="[% Data.SolutionTime | html %]" class="W20pc" maxlength="10"/>
-                            ( <label>[% Translate("Notify by") | html %]  [% Data.SolutionNotifyOptionStrg %] </label>)
-                            <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
-                            </p>
-                            <p class="FieldExplanation">
-                                [% Translate("If the ticket is not set to closed before the time defined here expires, the ticket is escalated.") | html %]
-                            </p>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label class="Mandatory" for="FollowUpID"><span class="Marker">*</span> [% Translate("Follow up Option") | html %]:</label>
-                        <div class="Field">
-                            [% Data.FollowUpOption %]
-                            <p class="FieldExplanation">
-                                [% Translate("Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.") | html %]
-                            </p>
-                            <div id="FollowUpIDError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="GroupID"><span class="Marker">*</span> [% Translate("Group") | html %]</label>
+                                <div class="Field">
+                                    [% Data.GroupOption %]
+                                    <div id="GroupIDError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="GroupIDServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="FollowUpIDServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                        </div>
-                        <div class="Clear"></div>
 
-                        <label class="Mandatory" for="FollowUpLock"><span class="Marker">*</span> [% Translate("Ticket lock after a follow up") | html %]:</label>
-                        <div class="Field">
-                            [% Data.FollowUpLockYesNoOption %]
-                            <p class="FieldExplanation">
-                                [% Translate("If a ticket is closed and the customer sends a follow up the ticket will be locked to the old owner.") | html %]
-                            </p>
-                            <div id="FollowUpLockError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="FollowUpID"><span class="Marker">*</span> [% Translate("Follow up Option") | html %]</label>
+                                <div class="Field">
+                                    [% Data.FollowUpOption %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.") | html %]
+                                    </p>
+                                    <div id="FollowUpIDError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="FollowUpIDServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="FollowUpLockServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                        </div>
-                        <div class="Clear"></div>
 
-                        <label class="Mandatory" for="SystemAddressID"><span class="Marker">*</span> [% Translate("System address") | html %]:</label>
-                        <div class="Field">
-                            [% Data.SystemAddressOption %]
-                            <p class="FieldExplanation">
-                                [% Translate("Will be the sender address of this queue for email answers.") | html %]
-                            </p>
-                            <div id="SystemAddressIDError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="SystemAddressIDServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                        </div>
-                        <div class="Clear"></div>
-
-[% RenderBlockStart("OptionalField") %]
-                        <label for="DefaultSignKey">[% Translate("Default sign key") | html %][% IF Data.Email %]<em> ([% Data.Email | html %])</em>[% END %]:</label>
-                        <div class="Field">
-                            [% Data.DefaultSignKeyOption %]
-                            [% IF !Data.DefaultSignKeyListAvailable %]
-                                <p class="FieldExplanation">
-                                    [% Translate("To use a sign key, PGP keys or S/MIME certificates need to be added with identifiers for selected queue system address.") | html %]
-                                </p>
-                            [% END %]
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("OptionalField") %]
-
-                        <label class="Mandatory" for="SalutationID"><span class="Marker">*</span> [% Translate("Salutation") | html %]:</label>
-                        <div class="Field">
-                            [% Data.SalutationOption %]
-                            <p class="FieldExplanation">
-                                [% Translate("The salutation for email answers.") | html %]
-                            </p>
-                            <div id="SalutationIDError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="SalutationIDServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label class="Mandatory" for="SignatureID"><span class="Marker">*</span> [% Translate("Signature") | html %]:</label>
-                        <div class="Field">
-                            [% Data.SignatureOption %]
-                            <p class="FieldExplanation">
-                                [% Translate("The signature for email answers.") | html %]
-                            </p>
-                            <div id="SignatureIDError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="SignatureIDServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="Calendar">[% Translate("Calendar") | html %]:</label>
-                        <div class="Field">
-                            [% Data.CalendarOption %]
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
-                        <div class="Field">
-                            [% Data.ValidOption %]
-                            <div id="ValidIDError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="ValidIDServerError" class="TooltipErrorMessage">
-                                <p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]</label>
+                                <div class="Field">
+                                    [% Data.ValidOption %]
+                                    <div id="ValidIDError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="ValidIDServerError" class="TooltipErrorMessage">
+                                        <p>
 [% RenderBlockStart("RequiredValidOptionServerError") %]
-                                    [% Translate("This field is required.") | html %]
+                                            [% Translate("This field is required.") | html %]
 [% RenderBlockEnd("RequiredValidOptionServerError") %]
 [% RenderBlockStart("InSettingValidOptionServerError") %]
-                                    [% Translate("Is not possible to invalidate this entry, all config settings have to be changed beforehand.") | html %]
+                                            [% Translate("Is not possible to invalidate this entry, all config settings have to be changed beforehand.") | html %]
 [% RenderBlockEnd("InSettingValidOptionServerError") %]
-                                </p>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="Clear"></div>
 
-                        <label for="Comment">[% Translate("Comment") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="W50pc" maxlength="250"/>
+                            <div class="field-wrapper">
+                                <label for="Comment">[% Translate("Comment") | html %]</label>
+                                <div class="Field">
+                                    <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" maxlength="250"/>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="Clear"></div>
+
+                        <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
+                            <h2 class="card-title">Service Times</h2>
+
+                            <div class="field-wrapper">
+                                <label for="UnlockTimeout">
+                                    [% Translate("Unlock timeout") | html %] [% Translate("minutes") | html %]
+                                </label>
+                                <div class="Field">
+                                    <input type="text" name="UnlockTimeout" id="UnlockTimeout" value="[% Data.UnlockTimeout | html %]"  maxlength="10"/>
+                                    <p class="FieldExplanation">
+                                        [% Translate("0 = no unlock") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                    </p>
+                                    <p class="FieldExplanation">
+                                        [% Translate("If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.") | html %]
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <div class="Field single-row-inputs">
+                                <div class="field-wrapper">
+                                    <label for="FirstResponseTime">
+                                        [% Translate("Escalation - first response time") | html %] [% Translate("minutes") | html %]
+                                    </label>
+                                    <input type="text" name="FirstResponseTime" id="FirstResponseTime" value="[% Data.FirstResponseTime | html %]"  maxlength="10"/>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label>[% Translate("Notify by") | html %]</label>
+                                    [% Data.FirstResponseNotifyOptionStrg %]
+                                </div>
+
+                                <div class="field-wrapper FieldExplanation">
+                                    <p class="FieldExplanation">
+                                        [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                    </p>
+                                    <p class="FieldExplanation">
+                                        [% Translate("If there is not added a customer contact, either email-external or phone, to a new ticket before the time defined here expires, the ticket is escalated.") | html %]
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="Field single-row-inputs">
+                                <div class="field-wrapper">
+                                    <label for="UpdateTime">
+                                        [% Translate("Escalation - update time") | html %] [% Translate("minutes") | html %]
+                                    </label>
+                                    <input type="text" name="UpdateTime" id="UpdateTime" value="[% Data.UpdateTime | html %]"  maxlength="10"/>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label>[% Translate("Notify by") | html %]</label>
+                                    [% Data.UpdateNotifyOptionStrg %]
+                                </div>
+
+                                <div class="field-wrapper FieldExplanation">
+                                    <p class="FieldExplanation">
+                                        [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                    </p>
+                                    <p class="FieldExplanation">
+                                        [% Translate("If there is an article added, such as a follow-up via email or the customer portal, the escalation update time is reset. If there is no customer contact, either email-external or phone, added to a ticket before the time defined here expires, the ticket is escalated.") | html %]
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="Field single-row-inputs">
+                                <div class="field-wrapper">
+                                    <label for="SolutionTime">
+                                        [% Translate("Escalation - solution time") | html %] ([% Translate("minutes") | html %])
+                                    </label>
+                                    <input type="text" name="SolutionTime" id="SolutionTime" value="[% Data.SolutionTime | html %]"  maxlength="10"/>
+                                </div>
+
+                                <div class="field-wrapper">
+                                    <label>[% Translate("Notify by") | html %]</label>
+                                    [% Data.SolutionNotifyOptionStrg %]
+                                </div>
+
+                                <div class="field-wrapper FieldExplanation">
+                                    <p class="FieldExplanation">
+                                        [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                    </p>
+                                    <p class="FieldExplanation">
+                                        [% Translate("If the ticket is not set to closed before the time defined here expires, the ticket is escalated.") | html %]
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label for="Calendar">[% Translate("Calendar") | html %]</label>
+                                <div class="Field">
+                                    [% Data.CalendarOption %]
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
+                            <h2 class="card-title">Communication Settings</h2>
+
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="FollowUpLock"><span class="Marker">*</span> [% Translate("Ticket lock after a follow up") | html %]</label>
+                                <div class="Field">
+                                    [% Data.FollowUpLockYesNoOption %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("If a ticket is closed and the customer sends a follow up the ticket will be locked to the old owner.") | html %]
+                                    </p>
+                                    <div id="FollowUpLockError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="FollowUpLockServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="SystemAddressID"><span class="Marker">*</span> [% Translate("System address") | html %]</label>
+                                <div class="Field">
+                                    [% Data.SystemAddressOption %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("Will be the sender address of this queue for email answers.") | html %]
+                                    </p>
+                                    <div id="SystemAddressIDError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="SystemAddressIDServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
+[% RenderBlockStart("OptionalField") %]
+                            <div class="field-wrapper">
+                                <label for="DefaultSignKey">[% Translate("Default sign key") | html %][% IF Data.Email %]<em> ([% Data.Email | html %])</em>[% END %]</label>
+                                <div class="Field">
+                                    [% Data.DefaultSignKeyOption %]
+                                    [% IF !Data.DefaultSignKeyListAvailable %]
+                                        <p class="FieldExplanation">
+                                            [% Translate("To use a sign key, PGP keys or S/MIME certificates need to be added with identifiers for selected queue system address.") | html %]
+                                        </p>
+                                    [% END %]
+                                </div>
+                            </div>
+[% RenderBlockEnd("OptionalField") %]
+
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="SalutationID"><span class="Marker">*</span> [% Translate("Salutation") | html %]</label>
+                                <div class="Field">
+                                    [% Data.SalutationOption %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("The salutation for email answers.") | html %]
+                                    </p>
+                                    <div id="SalutationIDError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="SalutationIDServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="SignatureID"><span class="Marker">*</span> [% Translate("Signature") | html %]</label>
+                                <div class="Field">
+                                    [% Data.SignatureOption %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("The signature for email answers.") | html %]
+                                    </p>
+                                    <div id="SignatureIDError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="SignatureIDServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
 
 [% RenderBlockStart("Item") %]
 [% RenderBlockStart("InputKey") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W50pc" maxlength="30"/>
-                        </div>
-                        <div class="Clear"></div>
+                            <div class="field-wrapper">
+                                <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                                <div class="Field">
+                                    <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" maxlength="30"/>
+                                </div>
+                            </div>
 [% RenderBlockEnd("InputKey") %]
 [% RenderBlockStart("Input") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W50pc" maxlength="30"/>
-                            <p class="FieldExplanation">
-                                [% Translate(Data.Desc) | html %]
-                            </p>
-                        </div>
-                        <div class="Clear"></div>
+                            <div class="field-wrapper">
+                                <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                                <div class="Field">
+                                    <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" maxlength="30"/>
+                                    <p class="FieldExplanation">
+                                        [% Translate(Data.Desc) | html %]
+                                    </p>
+                                </div>
+                            </div>
 [% RenderBlockEnd("Input") %]
 [% RenderBlockStart("TextArea") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
-                        <div class="Field">
-                            <textarea name="[% Data.Name | html %]" id="[% Data.Name | html %]" rows="[% Data.Rows | html %]" cols="[% Data.Cols | html %]">[% Data.SelectedID | html %]</textarea>
-                            <p class="FieldExplanation">
-                                [% Translate(Data.Desc) | html %]
-                            </p>
-                        </div>
-                        <div class="Clear"></div>
+                            <div class="field-wrapper">
+                                <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                                <div class="Field">
+                                    <textarea name="[% Data.Name | html %]" id="[% Data.Name | html %]" rows="[% Data.Rows | html %]" cols="[% Data.Cols | html %]">[% Data.SelectedID | html %]</textarea>
+                                    <p class="FieldExplanation">
+                                        [% Translate(Data.Desc) | html %]
+                                    </p>
+                                </div>
+                            </div>
 [% RenderBlockEnd("TextArea") %]
 [% RenderBlockStart("Option") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
-                        <div class="Field">
-                            [% Data.Option %]
-                            <p class="FieldExplanation">
-                                [% Translate(Data.Desc) | html %]
-                            </p>
-                        </div>
-                        <div class="Clear"></div>
+                            <div class="field-wrapper">
+                                <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                                <div class="Field">
+                                    [% Data.Option %]
+                                    <p class="FieldExplanation">
+                                        [% Translate(Data.Desc) | html %]
+                                    </p>
+                                </div>
+                            </div>
 [% RenderBlockEnd("Option") %]
 [% RenderBlockStart("Upload") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
-                        <div class="Field">
-                            <input type="file" name="[% Data.Name | html %]" id="[% Data.Name | html %]" class="W50pc" maxlength="30"/>
-                            <a href="">[% Data.Filename | html %]</a>
-                        </div>
-                        <div class="Clear"></div>
+                            <div class="field-wrapper">
+                                <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                                <div class="Field">
+                                    <input type="file" name="[% Data.Name | html %]" id="[% Data.Name | html %]" maxlength="30"/>
+                                    <a href="">[% Data.Filename | html %]</a>
+                                </div>
+                            </div>
 [% RenderBlockEnd("Upload") %]
 [% RenderBlockStart("Password") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
-                        <div class="Field">
-                            <input type="password" name="[% Data.Name | html %]" id="[% Data.Name | html %]" class="W50pc" maxlength="30" value=""/>
-                            <a href="">[% Data.Filename | html %]</a>
-                        </div>
-                        <div class="Clear"></div>
+                            <div class="field-wrapper">
+                                <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                                <div class="Field">
+                                    <input type="password" name="[% Data.Name | html %]" id="[% Data.Name | html %]" maxlength="30" value=""/>
+                                    <a href="">[% Data.Filename | html %]</a>
+                                </div>
+                            </div>
 [% RenderBlockEnd("Password") %]
 [% RenderBlockEnd("Item") %]
-                        <div class="Field SpacingTop">
-                            [% IF Data.Action == 'Change' %]
-                                <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                                [% Translate("or") | html %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                            [% ELSE %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% END %]
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]"><span>[% Translate("Cancel") | html %]</span></a>
                         </div>
-                        <div class="Clear"></div>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
 
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md"><span>[% Translate("Cancel") | html %]</span></a>
+
+                                [% IF Data.Action == 'Change' %]
+                                    <button class="CallForAction Primary btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% ELSE %]
+                                    <button class="CallForAction Primary btn-primary btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% END %]
+
+                            </div>
+                        </div>
                     </fieldset>
 [% RenderBlockStart("QueueInSysConfig") %]
                     <input type="hidden" name="OldName" id="OldName" value="[% Data.OldName | html %]"/>
@@ -429,9 +558,9 @@
                         <div class="TextDialog">
                             <h1>[% Translate("This queue is used in the following config settings:") | html %]</h1>
                             <ul>
-                                [% RenderBlockStart("QueueInSysConfigRow") %]
+[% RenderBlockStart("QueueInSysConfigRow") %]
                                 <li class="InSysConfigSetting">[% Data.SettingName %]</li>
-                                [% RenderBlockEnd("QueueInSysConfigRow") %]
+[% RenderBlockEnd("QueueInSysConfigRow") %]
                             </ul>
                             <p class="FieldExplanation"></p>
                         </div>
@@ -441,11 +570,9 @@
                     <input type="hidden" name="SysConfigDirty" id="SysConfigDirty" value="1"/>
 [% RenderBlockEnd("QueueInSysConfigDirty") %]
                 </form>
-
             </div>
         </div>
 [% RenderBlockEnd("OverviewUpdate") %]
     </div>
-    <div class="Clear"></div>
 </div>
 [% RenderBlockEnd("Overview") %]

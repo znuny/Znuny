@@ -18,7 +18,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
@@ -27,7 +27,7 @@ $Kernel::OM->Get('Kernel::Config')->Set(
     Value => 0,
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my $UserID = $CustomerUserObject->CustomerUserAdd(
     Source         => 'CustomerUser',
@@ -55,6 +55,9 @@ for my $Key ( sort keys %CustomerData ) {
     next KEY if $Key eq 'Source';
     next KEY if $Key eq 'CustomerCompanyValidID';
     next KEY if $Key eq 'UserLanguage';
+
+    # Skip dropdown-values of last views
+    next KEY if $Key =~ m{\AUserLastViews};
 
     $Self->False(
         $CustomerUserObject->SetPreferences(

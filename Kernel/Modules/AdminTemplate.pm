@@ -268,18 +268,9 @@ sub Run {
                     );
                 }
 
-                $Self->_Overview();
-                my $Output = $LayoutObject->Header();
-                $Output .= $LayoutObject->NavigationBar();
-                $Output .= $LayoutObject->Notify(
-                    Info => Translatable('Template added!'),
+                return $LayoutObject->Redirect(
+                    OP => "Action=AdminQueueTemplates&Subaction=Template&ID=$StandardTemplateID",
                 );
-                $Output .= $LayoutObject->Output(
-                    TemplateFile => 'AdminTemplate',
-                    Data         => \%Param,
-                );
-                $Output .= $LayoutObject->Footer();
-                return $Output;
             }
         }
 

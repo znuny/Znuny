@@ -28,13 +28,19 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    if ( $Self->{Subaction} eq 'Clear' ) {
+        $LogObject->CleanUp();
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
 
     # Print form.
     my $Output = $LayoutObject->Header();
     $Output .= $LayoutObject->NavigationBar();
 
     # Get log data.
-    my $Log = $Kernel::OM->Get('Kernel::System::Log')->GetLog() || '';
+    my $Log = $LogObject->GetLog() || '';
 
     # Split data to lines.
     my $Limit    = 400;

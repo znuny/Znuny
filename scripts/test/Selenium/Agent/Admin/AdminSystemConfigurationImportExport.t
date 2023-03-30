@@ -18,14 +18,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->Login(
             Type     => 'Agent',
@@ -38,10 +39,10 @@ $Selenium->RunTest(
             "${ScriptAlias}index.pl?Action=AdminSystemConfiguration"
         );
 
-        if ( $Kernel::OM->Get('Kernel::Config')->Get('ConfigImportAllowed') ) {
+        if ( $ConfigObject->Get('ConfigImportAllowed') ) {
 
             # Click on Import/Export button.
-            $Selenium->find_element( '.fa-exchange', 'css' )->click();
+            $Selenium->find_element( '#ImportExport', 'css' )->click();
 
             # Make sure that import button is on the page.
             $Selenium->find_element( '#ImportButton', 'css' );
@@ -50,7 +51,7 @@ $Selenium->RunTest(
             $Selenium->find_element( '#ExportButton', 'css' );
 
             # Disable import.
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'ConfigImportAllowed',
                 Value => 0,

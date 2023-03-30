@@ -13,11 +13,11 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Use test database, if configured. Otherwise, skip this test. ProvideTestDatabase() will clean the test database and
 #   change database settings system-wide.
-my $Success = $Helper->ProvideTestDatabase();
+my $Success = $HelperObject->ProvideTestDatabase();
 if ( !$Success ) {
     $Self->False(
         0,
@@ -35,6 +35,8 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
 
         # Parse the TestDatabase hash from configuration to variables.
         my $TestDatabase = $ConfigObject->Get('TestDatabase');
@@ -61,7 +63,7 @@ $Selenium->RunTest(
         #   Enforce exception handling for the whole test, and if something goes wrong, we can always restore original
         #   configuration from the backup.
         my $ConfigPmFile       = $Home . '/Kernel/Config.pm';
-        my $ConfigPmFileBackup = $Home . '/Kernel/Config.pm.' . $Helper->GetRandomID();
+        my $ConfigPmFileBackup = $Home . '/Kernel/Config.pm.' . $HelperObject->GetRandomID();
 
         eval {
 
@@ -74,7 +76,7 @@ $Selenium->RunTest(
 
             # Turn off secure mode setting via additional configuration file. This works on systems where secure mode is
             #   activated outside the main configuration file (Config.pm).
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Key   => 'SecureMode',
                 Value => 0,
             );
@@ -245,14 +247,14 @@ $Selenium->RunTest(
             );
 
             my @DatabaseXMLFiles = (
-                "$Home/scripts/database/otrs-schema.xml",
-                "$Home/scripts/database/otrs-initial_insert.xml",
+                "$Home/scripts/database/schema.xml",
+                "$Home/scripts/database/initial_insert.xml",
             );
 
-            my @Tables = $Kernel::OM->Get('Kernel::System::DB')->ListTables();
+            my @Tables = $DBObject->ListTables();
 
             # Count number of table elements in OTRS schema for comparison.
-            my $XMLString = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+            my $XMLString = $MainObject->FileRead(
                 Location => $DatabaseXMLFiles[0],
             );
             my $TableCount = () = ( ${$XMLString} =~ /<Table/g );
@@ -280,7 +282,7 @@ $Selenium->RunTest(
             );
 
             # Turn on secure mode.
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Key   => 'SecureMode',
                 Value => 1,
             );

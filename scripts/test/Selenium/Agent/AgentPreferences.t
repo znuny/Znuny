@@ -21,27 +21,27 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $RegistrationObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
 
         # enable google authenticator shared secret preference
-        my $SharedSecretConfig
-            = $Kernel::OM->Get('Kernel::Config')->Get('PreferencesGroups')->{'GoogleAuthenticatorSecretKey'};
+        my $SharedSecretConfig = $ConfigObject->Get('PreferencesGroups')->{'GoogleAuthenticatorSecretKey'};
         $SharedSecretConfig->{Active} = 1;
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => "PreferencesGroups###GoogleAuthenticatorSecretKey",
             Value => $SharedSecretConfig,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1,
         );
 
         # Simulate that we have overridden setting in the .pm file.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::ZoomTimeDisplay',
             Value => 1,
@@ -49,7 +49,7 @@ $Selenium->RunTest(
 
         # create test user and login
         my $Language      = "en";
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'users', 'admin' ],
             Language => $Language,
         ) || die "Did not get test user";
@@ -61,7 +61,7 @@ $Selenium->RunTest(
         );
 
         # add a test notification
-        my $RandomID                = $Helper->GetRandomID();
+        my $RandomID                = $HelperObject->GetRandomID();
         my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
         my $NotificationID          = $NotificationEventObject->NotificationAdd(
             Name => 'NotificationTest' . $RandomID,
@@ -87,12 +87,12 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AgentPreferences screen
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentPreferences");
 
-        my $PreferencesGroups = $Kernel::OM->Get('Kernel::Config')->Get('AgentPreferencesGroups');
+        my $PreferencesGroups = $ConfigObject->Get('AgentPreferencesGroups');
 
         my @GroupNames = map { $_->{Key} } @{$PreferencesGroups};
 
@@ -264,7 +264,7 @@ $Selenium->RunTest(
         );
 
         # check if the correct avatar widget is displayed (engine disabled)
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::AvatarEngine',
             Value => 'None',
@@ -279,7 +279,7 @@ $Selenium->RunTest(
         );
 
         # now set engine to 'Gravatar' and reload the screen
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::AvatarEngine',
             Value => 'Gravatar',
@@ -355,22 +355,6 @@ $Selenium->RunTest(
             "Notification correctly marked as mandatory in preferences."
         );
 
-        my $CheckAlertJS = <<"JAVASCRIPT";
-(function () {
-    var lastAlert = undefined;
-    window.alert = function (message) {
-        lastAlert = message;
-    };
-    window.getLastAlert = function () {
-        var result = lastAlert;
-        lastAlert = undefined;
-        return result;
-    };
-}());
-JAVASCRIPT
-
-        $Selenium->execute_script($CheckAlertJS);
-
         # we should not be able to save the notification setting without an error
         $Selenium->execute_script(
             "\$('.NotificationEvent').closest('.WidgetSimple').find('.SettingUpdateBox').find('button').trigger('click');"
@@ -425,11 +409,11 @@ JAVASCRIPT
         # now that the checkbox is checked, it should not be possible to disable it again
         $Selenium->find_element( "#Notification-$NotificationID-Email-checkbox", 'css' )->click();
 
-        $Self->Is(
-            $Selenium->execute_script("return window.getLastAlert()"),
-            $LanguageObject->Translate("Sorry, but you can't disable all methods for this notification."),
-            'Alert message shows up correctly',
+        # Wait until modal dialog has open.
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog.Modal #DialogButton1").length'
         );
+        $Selenium->find_element( "#DialogButton1", 'css' )->click();
 
         # delete notification entry again
         my $SuccessDelete = $NotificationEventObject->NotificationDelete(
@@ -457,7 +441,7 @@ JAVASCRIPT
 
         $Self->Is(
             $Selenium->find_element( '#UserSkin', 'css' )->get_value(),
-            $Kernel::OM->Get('Kernel::Config')->Get('Loader::Agent::DefaultSelectedSkin'),
+            $ConfigObject->Get('Loader::Agent::DefaultSelectedSkin'),
             "#UserSkin stored value",
         );
 
@@ -530,7 +514,7 @@ JAVASCRIPT
 
         # Enable two factor authenticator.
 
-        if ( $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled() ) {
+        if ( $RegistrationObject->OTRSBusinessIsInstalled() ) {
 
             # Open advanced preferences screen.
             $Selenium->VerifiedGet(
@@ -583,7 +567,7 @@ JAVASCRIPT
             );
 
             # Create non-admin user.
-            my $TestUserLogin2 = $Helper->TestUserCreate(
+            my $TestUserLogin2 = $HelperObject->TestUserCreate(
                 Groups   => ['users'],
                 Language => $Language,
             ) || die "Did not get test user";

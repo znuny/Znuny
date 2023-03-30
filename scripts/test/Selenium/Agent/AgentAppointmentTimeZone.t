@@ -18,25 +18,28 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
         my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
         my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
         my $UserObject        = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject          = $Kernel::OM->Get('Kernel::System::DB');
 
         # Make sure system is based on UTC.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'OTRSTimeZone',
             Value => 'UTC',
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'UserDefaultTimeZone',
             Value => 'UTC',
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "test-calendar-group-$RandomID";
@@ -46,14 +49,11 @@ $Selenium->RunTest(
             UserID  => 1,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
-
-        # Change resolution (desktop mode).
-        $Selenium->set_window_size( 768, 1050 );
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Create test user.
         my $Language      = 'en';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'users', $GroupName ],
             Language => $Language,
         ) || die 'Did not get test user';
@@ -99,6 +99,8 @@ $Selenium->RunTest(
         # Click on the timeline view for an appointment dialog.
         $Selenium->find_element( '.fc-timelineWeek-view .fc-slats td.fc-widget-content:nth-child(5)', 'css' )->click();
 
+        sleep 2;
+
         # Wait until form and overlay has loaded, if necessary.
         $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Title').length;" );
 
@@ -123,7 +125,9 @@ $Selenium->RunTest(
         );
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        my $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -183,7 +187,7 @@ $Selenium->RunTest(
 
         # Make sure cache is correct.
         for my $Cache (qw(Calendar Appointment)) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => $Cache );
+            $CacheObject->CleanUp( Type => $Cache );
         }
 
         # Log in again.
@@ -262,7 +266,7 @@ $Selenium->RunTest(
 
         # Delete test calendar.
         if ( $Calendar{CalendarID} ) {
-            my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+            my $Success = $DBObject->Do(
                 SQL  => 'DELETE FROM calendar WHERE id = ?',
                 Bind => [ \$Calendar{CalendarID} ],
             );
@@ -271,8 +275,6 @@ $Selenium->RunTest(
                 "Deleted test calendar - $Calendar{CalendarID}",
             );
         }
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure cache is correct.
         for my $Cache (qw(Calendar Appointment)) {

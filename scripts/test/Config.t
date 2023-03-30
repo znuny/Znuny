@@ -17,7 +17,7 @@ use vars (qw($Self));
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Value = 'Testvalue';
 $ConfigObject->Set(

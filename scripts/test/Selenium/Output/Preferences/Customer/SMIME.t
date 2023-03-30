@@ -21,11 +21,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # enable SMIME in config
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME',
             Value => 1
@@ -41,19 +40,19 @@ $Selenium->RunTest(
         mkpath( [$PrivatePath], 0, 0770 );    ## no critic
 
         # set SMIME paths in sysConfig
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::CertPath',
             Value => $CertPath,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::PrivatePath',
             Value => $PrivatePath,
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestUserLogin = $HelperObject->TestCustomerUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -69,7 +68,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerPreferences");
 
         # change customer SMIME certificate preference
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/SMIME/SMIMECertificate-1.asc";
         $Selenium->find_element( "#UserSMIMEKey",       'css' )->send_keys($Location);
         $Selenium->find_element( "#UserSMIMEKeyUpdate", 'css' )->VerifiedClick();

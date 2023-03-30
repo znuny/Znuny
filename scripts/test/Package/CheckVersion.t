@@ -279,13 +279,13 @@ my @Tests = (
 
 for my $Test (@Tests) {
 
-    my $VersionCheck = $PackageObject->_CheckVersion(
+    my $VersionCheck = $PackageObject->CheckVersion(
         VersionNew       => $Test->{VersionNew},
         VersionInstalled => $Test->{VersionInstalled},
         Type             => $Test->{Type},
     );
 
-    my $Name = "_CheckVersion() - $Test->{Type} ($Test->{VersionNew}:$Test->{VersionInstalled})";
+    my $Name = "CheckVersion() - $Test->{Type} ($Test->{VersionNew}:$Test->{VersionInstalled})";
 
     if ( $Test->{Result} ) {
         $Self->True(

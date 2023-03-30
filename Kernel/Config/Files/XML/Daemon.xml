@@ -23,7 +23,7 @@
         </Value>
     </Setting>
     <Setting Name="Frontend::NotifyModule###8000-Daemon-Check" Required="0" Valid="1">
-        <Description Translatable="1">Defines the module to display a notification in the agent interface if the OTRS Daemon is not running.</Description>
+        <Description Translatable="1">Defines the module to display a notification in the agent interface if the Znuny Daemon is not running.</Description>
         <Navigation>Frontend::Agent::FrontendNotification</Navigation>
         <Value>
             <Hash>
@@ -50,7 +50,7 @@
         </Value>
     </Setting>
     <Setting Name="Daemon::Log::RotationType" Required="1" Valid="1">
-        <Description Translatable="1">Type of daemon log rotation to use: Choose 'OTRS' to let OTRS system to handle the file rotation, or choose 'External' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.</Description>
+        <Description Translatable="1">Type of daemon log rotation to use: Choose 'OTRS' to let Znuny system to handle the file rotation, or choose 'External' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.</Description>
         <Navigation>Daemon::Log</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="otrs"><!-- default OTRS -->
@@ -63,7 +63,7 @@
         <Description Translatable="1">If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.</Description>
         <Navigation>Daemon</Navigation>
         <Value>
-            <Item ValueRegex="" ValueType="Directory">/opt/otrs/var/run/</Item>
+            <Item ValueRegex="" ValueType="Directory">/opt/znuny/var/run/</Item>
         </Value>
     </Setting>
     <Setting Name="Daemon::Log::DaysToKeep" Required="0" Valid="0">
@@ -721,24 +721,7 @@
         </Value>
     </Setting>
     <!-- new tasks -->
-    <Setting Name="Daemon::SchedulerCronTaskManager::Task###RegistrationUpdateSend" Required="1" Valid="1" ReadOnly="1" ConfigLevel="100">
-        <Description Translatable="1">Sends registration information to OTRS group.</Description>
-        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="TaskName">RegistrationUpdateSend</Item>
-                <Item Key="Schedule">30 * * * *</Item> <!-- default: every hour in minute 30 -->
-                <Item Key="Module">Kernel::System::Console::Command::Maint::Registration::UpdateSend</Item>
-                <Item Key="Function">Execute</Item>
-                <Item Key="MaximumParallelInstances">1</Item>
-                <Item Key="Params">
-                    <Array>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Daemon::SchedulerCronTaskManager::Task###SupportDataCollectAsynchronous" Required="1" Valid="1" ReadOnly="1" ConfigLevel="100">
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###SupportDataCollectAsynchronous" Required="0" Valid="1" ConfigLevel="100">
         <Description Translatable="1">Collect support data for asynchronous plug-in modules.</Description>
         <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
         <Value>
@@ -746,40 +729,6 @@
                 <Item Key="TaskName">SupportDataCollectAsynchronous</Item>
                 <Item Key="Schedule">1 * * * *</Item> <!-- default: every hour in minute 1 -->
                 <Item Key="Module">Kernel::System::Console::Command::Maint::SupportData::CollectAsynchronous</Item>
-                <Item Key="Function">Execute</Item>
-                <Item Key="MaximumParallelInstances">1</Item>
-                <Item Key="Params">
-                    <Array>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Daemon::SchedulerCronTaskManager::Task###OTRSBusinessEntitlementCheck" Required="1" Valid="1" ReadOnly="1" ConfigLevel="100">
-        <Description Translatable="1">Checks the entitlement status of OTRS Business Solution™.</Description>
-        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="TaskName">OTRSBusinessEntitlementCheck</Item>
-                <Item Key="Schedule">25,45 */1 * * *</Item> <!-- default: each hour in the minute 15 and 45 -->
-                <Item Key="Module">Kernel::System::Console::Command::Maint::OTRSBusiness::EntitlementCheck</Item>
-                <Item Key="Function">Execute</Item>
-                <Item Key="MaximumParallelInstances">1</Item>
-                <Item Key="Params">
-                    <Array>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Daemon::SchedulerCronTaskManager::Task###OTRSBusinessAvailabilityCheck" Required="1" Valid="1" ReadOnly="1" ConfigLevel="100">
-        <Description Translatable="1">Checks the availability of OTRS Business Solution™ for this system.</Description>
-        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="TaskName">OTRSBusinessAvailabilityCheck</Item>
-                <Item Key="Schedule">15,35,55 */1 * * *</Item> <!-- default: each hour in the minute 15,35 and 55 -->
-                <Item Key="Module">Kernel::System::Console::Command::Maint::OTRSBusiness::AvailabilityCheck</Item>
                 <Item Key="Function">Execute</Item>
                 <Item Key="MaximumParallelInstances">1</Item>
                 <Item Key="Params">
@@ -830,12 +779,12 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Daemon::SchedulerCronTaskManager::Task###GeneticInterfaceDebugLogCleanup" Required="0" Valid="1">
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###GenericInterfaceDebugLogCleanup" Required="0" Valid="1">
         <Description Translatable="1">Removes old generic interface debug log entries created before the specified amount of days.</Description>
         <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
         <Value>
             <Hash>
-                <Item Key="TaskName">GeneticInterfaceDebugLogCleanup</Item>
+                <Item Key="TaskName">GenericInterfaceDebugLogCleanup</Item>
                 <Item Key="Schedule">02 03 * * *</Item> <!-- default each day at 03:02 AM -->
                 <Item Key="Module">Kernel::System::Console::Command::Maint::GenericInterface::DebugLog::Cleanup</Item>
                 <Item Key="Function">Execute</Item>

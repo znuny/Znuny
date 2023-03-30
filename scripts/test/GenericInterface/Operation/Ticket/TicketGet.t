@@ -36,13 +36,13 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get a random number
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 # create a new user for current test
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 my $Password = $UserLogin;
@@ -52,15 +52,15 @@ my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
 );
 
 # create a new user without permissions for current test
-my $UserLogin2 = $Helper->TestUserCreate();
+my $UserLogin2 = $HelperObject->TestUserCreate();
 my $Password2  = $UserLogin2;
 
 # create a customer where a ticket will use and will have permissions
-my $CustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword  = $CustomerUserLogin;
 
 # create a customer that will not have permissions
-my $CustomerUserLogin2 = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin2 = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword2  = $CustomerUserLogin2;
 
 my %SkipFields = (
@@ -1008,7 +1008,7 @@ $ArticleAttachmentContentGet->(
 );
 
 # set web-service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketGet-Test-' . $RandomID;
 
 # create web-service object
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
@@ -1039,7 +1039,7 @@ $Self->True(
 );
 
 # get remote host with some precautions for certain unit test systems
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # prepare web-service config
 my $RemoteSystem =
@@ -2110,23 +2110,67 @@ for my $Test (@Tests) {
         delete $LocalResult->{ErrorMessage};
     }
 
+    my %Result = (
+        RequesterResult          => \%{ $RequesterResult                  || {} },
+        LocalResult              => \%{ $LocalResult                      || {} },
+        ExpectedReturnLocalData  => \%{ $Test->{ExpectedReturnLocalData}  || {} },
+        ExpectedReturnRemoteData => \%{ $Test->{ExpectedReturnRemoteData} || {} },
+    );
+
+    for my $ResultType ( sort keys %Result ) {
+
+        my $Result = $Result{$ResultType};
+
+        # make sure that we have always an array (Ticket)
+        if ( IsHashRefWithData( $Result->{Data}->{Ticket} ) ) {
+            $Result->{Data}->{Ticket} = [ $Result->{Data}->{Ticket} ];
+        }
+
+        for my $Ticket ( @{ $Result->{Data}->{Ticket} } ) {
+
+            # make sure that we have always an array (Article)
+            if ( IsHashRefWithData( $Ticket->{Article} ) ) {
+                $Ticket->{Article} = [ $Ticket->{Article} ];
+            }
+
+            ARTICLE:
+            for my $Article ( @{ $Ticket->{Article} } ) {
+
+                # make sure that we have always an array (Attachment)
+                if ( IsHashRefWithData( $Article->{Attachment} ) ) {
+                    $Article->{Attachment} = [ $Article->{Attachment} ];
+                }
+
+                my @Attachments = sort { $a->{Filename} cmp $b->{Filename} } @{ $Article->{Attachment} || [] };
+                next ARTICLE if !@Attachments;
+
+                # remove FileID because of variable order of attachments
+                for my $Attachment (@Attachments) {
+                    delete $Attachment->{FileID};
+                }
+
+                $Article->{Attachment} = \@Attachments;
+            }
+        }
+    }
+
     $Self->IsDeeply(
-        $RequesterResult,
-        $Test->{ExpectedReturnRemoteData},
+        $Result{RequesterResult},
+        $Result{ExpectedReturnRemoteData},
         "$Test->{Name} - Requester success status (needs configured and running web server)",
     );
 
-    if ( $Test->{ExpectedReturnLocalData} ) {
+    if ( $Result{ExpectedReturnLocalData} ) {
         $Self->IsDeeply(
-            $LocalResult,
-            $Test->{ExpectedReturnLocalData},
+            $Result{LocalResult},
+            $Result{ExpectedReturnLocalData},
             "$Test->{Name} - Local result matched with expected local call result.",
         );
     }
     else {
         $Self->IsDeeply(
-            $LocalResult,
-            $Test->{ExpectedReturnRemoteData},
+            $Result{LocalResult},
+            $Result{ExpectedReturnRemoteData},
             "$Test->{Name} - Local result matched with remote result.",
         );
     }

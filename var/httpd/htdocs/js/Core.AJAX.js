@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -87,8 +88,9 @@ Core.AJAX = (function (TargetNS) {
         Core.Exception.HandleFinalError(new Core.Exception.ApplicationError(ErrorMessage, 'CommunicationError'));
     }
 
+
     /**
-     * @private
+     * @public
      * @name ToggleAJAXLoader
      * @memberof Core.AJAX
      * @function
@@ -97,7 +99,7 @@ Core.AJAX = (function (TargetNS) {
      * @description
      *      Shows and hides an ajax loader for every element which is updates via ajax.
      */
-    function ToggleAJAXLoader(FieldID, Show) {
+    TargetNS.ToggleAJAXLoader = function (FieldID, Show) {
         var $Element = $('#' + FieldID),
             $Loader = $('#' + AJAXLoaderPrefix + FieldID),
             LoaderHTML = '<span id="' + AJAXLoaderPrefix + FieldID + '" class="AJAXLoader"></span>';
@@ -479,7 +481,7 @@ Core.AJAX = (function (TargetNS) {
 
         if (FieldsToUpdate) {
             $.each(FieldsToUpdate, function (Index, Value) {
-                ToggleAJAXLoader(Value, true);
+                TargetNS.ToggleAJAXLoader(Value, true);
             });
         }
 
@@ -511,7 +513,7 @@ Core.AJAX = (function (TargetNS) {
             complete: function () {
                 if (FieldsToUpdate) {
                     $.each(FieldsToUpdate, function (Index, Value) {
-                        ToggleAJAXLoader(Value, false);
+                        TargetNS.ToggleAJAXLoader(Value, false);
                     });
                 }
             },
@@ -626,6 +628,37 @@ Core.AJAX = (function (TargetNS) {
                 HandleAJAXError(XHRObject, Status, Error)
             }
         });
+    };
+
+    TargetNS.FunctionCallSynchronous = function (URL, Data, Callback, DataType) {
+
+        // store the original state
+        // this is basically an example how to access
+        // the current state of the $.ajaxSetup values
+        var OriginalAsyncState = $.ajaxSetup()['async'];
+
+        // make a custom callback that gets passed to the standard Core.AJAX.FunctionCall
+        // that resets back to asynchronous AJAX calls as before and executes the regualar
+        // given Callback function as usual
+        var ResetCallback = function (Response) {
+
+            // set requests back to asynchronous
+            $.ajaxSetup({
+                async: OriginalAsyncState
+            });
+
+            // call given callback function as usual
+            Callback(Response);
+        };
+
+        // set this request as synchronous
+        $.ajaxSetup({
+            async: false
+        });
+
+        // start the wanted request by the framework functionality with our
+        // manipulated callback function and disabled async flag
+        Core.AJAX.FunctionCall(URL, Data, ResetCallback, DataType);
     };
 
     return TargetNS;

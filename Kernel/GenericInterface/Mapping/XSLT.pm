@@ -108,6 +108,9 @@ This data can be included in the C<XSLT> mapping as 'DataInclude' structure via 
 sub Map {
     my ( $Self, %Param ) = @_;
 
+    my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+    my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
+
     # Check data - only accept undef or hash ref or array ref.
     if ( defined $Param{Data} && ref $Param{Data} ne 'HASH' && ref $Param{Data} ne 'ARRAY' ) {
         return $Self->{DebuggerObject}->Error(
@@ -124,7 +127,14 @@ sub Map {
     }
 
     # Return if data is empty.
-    if ( !defined $Param{Data} || !%{ $Param{Data} } ) {
+    if (
+        !defined $Param{Data}
+        || (
+            !IsHashRefWithData( $Param{Data} )
+            && !IsArrayRefWithData( $Param{Data} )
+        )
+        )
+    {
         return {
             Success => 1,
             Data    => {},
@@ -162,11 +172,15 @@ sub Map {
         =~ s{ > [ \t\n]+ (?= [^< \t\n] ) }{>}xmsgr
         =~ s{ (?<! [> \t\n] ) [ \t\n]+ < }{<}xmsgr;
 
+    $Template = $WebserviceObject->WebserviceConfigReplace($Template);
+    my $LibXMLHugeXMLDataSupportEnabled = $ConfigObject->Get('LibXML::EnableHugeXMLDataSupport') ? 1 : 0;
+
     my ( $StyleDoc, $StyleSheet );
     eval {
         $StyleDoc = XML::LibXML->load_xml(
             string   => $Template,
             no_cdata => 1,
+            huge     => $LibXMLHugeXMLDataSupportEnabled,
         );
     };
     if ( !$StyleDoc ) {
@@ -234,6 +248,8 @@ sub Map {
     my $XMLSimple = XML::Simple->new();
     my $XMLPre;
     eval {
+        no warnings;    ## no critic
+
         $XMLPre = $XMLSimple->XMLout(
             $Param{Data},
             AttrIndent => 1,
@@ -256,6 +272,7 @@ sub Map {
         $XMLSource = XML::LibXML->load_xml(
             string   => $XMLPre,
             no_cdata => 1,
+            huge     => $LibXMLHugeXMLDataSupportEnabled,
         );
     };
     if ( !$XMLSource ) {
@@ -281,14 +298,23 @@ sub Map {
     }
 
     # Convert data back to perl structure.
+    my $ForceArray = 0;
+    if ( IsStringWithData( $Config->{ForceArray} ) ) {
+        my @ForceArrayTags = split /\s+/, $Config->{ForceArray};
+        $ForceArray = \@ForceArrayTags;
+    }
+
+    my $KeepAttributes = $Config->{KeepAttributes};
+
     my $ReturnData;
     eval {
         $ReturnData = $XMLSimple->XMLin(
             $XMLPost,
-            ForceArray => 0,
-            ContentKey => '-content',
-            NoAttr     => 1,
-            KeyAttr    => [],
+            ForceArray   => $ForceArray,
+            ContentKey   => '-content',
+            NoAttr       => $KeepAttributes ? 0 : 1,
+            ForceContent => $KeepAttributes ? 1 : 0,
+            KeyAttr      => [],
         );
     };
     if ( !$ReturnData ) {

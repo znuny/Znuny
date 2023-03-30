@@ -8,7 +8,7 @@
 # --
 
 ## no critic (Modules::RequireExplicitPackage)
-## nofilter(TidyAll::Plugin::OTRS::Perl::TestSubs)
+
 use strict;
 use warnings;
 use utf8;

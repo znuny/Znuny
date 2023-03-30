@@ -24,10 +24,19 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+
+        # enable SecureMode
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'SecureMode',
+            Value => 1,
+        );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -36,19 +45,15 @@ $Selenium->RunTest(
             User     => $TestUserLogin,
             Password => $TestUserLogin,
         );
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
-        # Allow custom script and module execution.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomScriptExecution',
-            Value => 1,
-        );
-        $Helper->ConfigSettingChange(
+        # Allow module execution.
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::GenericAgentAllowCustomModuleExecution',
             Value => 1,
@@ -72,54 +77,18 @@ $Selenium->RunTest(
         # Toggle widgets.
         $Selenium->execute_script('$(".WidgetSimple.Collapsed .WidgetAction.Toggle a").click();');
 
-        # Check that custom code elements.
-        $Self->True(
-            $Selenium->execute_script("return \$('#NewCMD').length === 1;"),
-            "CMD input found on page",
-        );
-        $Self->True(
-            $Selenium->execute_script("return \$('#NewModule').length === 1;"),
-            "CMD input found on page",
-        );
-
-        # Allow custom script and restrict module execution.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomScriptExecution',
-            Value => 0,
-        );
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomModuleExecution',
-            Value => 1,
-        );
-
-        # Navigate to AdminGenericAgent screen.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericAgent");
-
-        # Check add job page.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=Update' )]")->VerifiedClick();
-
-        # Toggle widgets.
-        $Selenium->execute_script('$(".WidgetSimple.Collapsed .WidgetAction.Toggle a").click();');
-
-        # Check that custom code elements.
+        # Check custom code elements.
         $Self->False(
             $Selenium->execute_script("return \$('#NewCMD').length === 1;"),
             "CMD input NOT found on page",
         );
         $Self->True(
             $Selenium->execute_script("return \$('#NewModule').length === 1;"),
-            "CMD input NOT found on page",
+            "Custom module input found on page",
         );
 
-        # Restrict custom script and allow module execution.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomScriptExecution',
-            Value => 1,
-        );
-        $Helper->ConfigSettingChange(
+        # Restrict custom module execution.
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::GenericAgentAllowCustomModuleExecution',
             Value => 0,
@@ -134,47 +103,15 @@ $Selenium->RunTest(
         # Toggle widgets.
         $Selenium->execute_script('$(".WidgetSimple.Collapsed .WidgetAction.Toggle a").click();');
 
-        # Check that custom code elements.
-        $Self->True(
-            $Selenium->execute_script("return \$('#NewCMD').length === 1;"),
-            "CMD input NOT found on page",
-        );
-        $Self->False(
-            $Selenium->execute_script("return \$('#NewModule').length === 1;"),
-            "CMD input NOT found on page",
-        );
-
-        # Restrict custom script and module execution.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomScriptExecution',
-            Value => 0,
-        );
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomModuleExecution',
-            Value => 0,
-        );
-
-        # Navigate to AdminGenericAgent screen.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericAgent");
-
-        # Check add job page.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=Update' )]")->VerifiedClick();
-
-        # Toggle widgets.
-        $Selenium->execute_script('$(".WidgetSimple.Collapsed .WidgetAction.Toggle a").click();');
-
-        # Check that custom code elements.
+        # Check custom code elements.
         $Self->False(
             $Selenium->execute_script("return \$('#NewCMD').length === 1;"),
             "CMD input NOT found on page",
         );
         $Self->False(
             $Selenium->execute_script("return \$('#NewModule').length === 1;"),
-            "CMD input NOT found on page",
+            "Custom module input found on page",
         );
-
     },
 );
 

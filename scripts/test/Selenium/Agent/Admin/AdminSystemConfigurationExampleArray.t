@@ -927,20 +927,21 @@ my @Tests = (
 $Selenium->RunTest(
     sub {
 
-        my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $CommandObject   = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Config::Rebuild');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
 
         # Rebuild system configuration.
-        my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Config::Rebuild');
-        my $ExitCode      = $CommandObject->Execute('--cleanup');
+        my $ExitCode = $CommandObject->Execute('--cleanup');
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
         # Load sample XML file.
-        my $Directory = $Kernel::OM->Get('Kernel::Config')->Get('Home')
+        my $Directory = $ConfigObject->Get('Home')
             . '/scripts/test/sample/SysConfig/XML/AdminSystemConfiguration';
 
         my $XMLLoaded = $SysConfigObject->ConfigurationXML2DB(
@@ -973,24 +974,9 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSystemConfiguration");
-
-        my $OTRSBusinessIsInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-        my $OBTeaserFound           = index( $Selenium->get_page_source(), 'supports versioning, rollback and' ) > -1;
-        if ( !$OTRSBusinessIsInstalled ) {
-            $Self->True(
-                $OBTeaserFound,
-                "OTRSBusiness teaser found on page",
-            );
-        }
-        else {
-            $Self->False(
-                $OBTeaserFound,
-                "OTRSBusiness teaser not found on page",
-            );
-        }
 
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSystemConfigurationGroup;RootNavigation=Sample;");
 
@@ -1184,9 +1170,9 @@ $Selenium->RunTest(
                 }
                 elsif ( $CommandType eq 'Navigate' ) {
                     $Selenium->WaitFor(
-                        JavaScript => 'return $("li#' . $Value . ' > i").length',
+                        JavaScript => 'return $("li#' . $Value . ' > a").length',
                     );
-                    $Selenium->find_element( "li#$Value > i", "css" )->click();
+                    $Selenium->find_element( "li#$Value > a", "css" )->click();
                 }
                 elsif ( $CommandType eq 'DatepickerDay' ) {
                     $Selenium->WaitFor(

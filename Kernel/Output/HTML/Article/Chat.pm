@@ -19,7 +19,6 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Language',
-    'Kernel::Output::HTML::Article::Base',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::CustomerUser',
     'Kernel::System::HTMLUtils',

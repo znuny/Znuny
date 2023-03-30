@@ -17,12 +17,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
-        my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
-        my $ScriptAlias     = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Load sample XML file.
-        my $Directory = $Kernel::OM->Get('Kernel::Config')->Get('Home')
+        my $Directory = $ConfigObject->Get('Home')
             . '/scripts/test/sample/SysConfig/XML/AdminSystemConfiguration/Deployment';
 
         my $XMLLoaded = $SysConfigObject->ConfigurationXML2DB(
@@ -69,7 +71,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
