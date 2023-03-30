@@ -1,3 +1,6 @@
+# 7.0.2 2023-03-30
+ - 2023-03-30 Fixed path in setting Frontend::WebPath.
+
 # 7.0.1 2023-03-29
  - 2023-03-29 Redesigned GUI for agents and customers.
  - 2023-03-20 Fixed handling of article attachments in generic interface operations TicketCreate and TicketUpdate.
