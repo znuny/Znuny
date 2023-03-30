@@ -287,7 +287,7 @@ sub LoadDefaults {
 
     # Frontend::WebPath
     # (URL base path of icons, CSS and Java Script.)
-    $Self->{'Frontend::WebPath'} = '/otrs-web/';
+    $Self->{'Frontend::WebPath'} = '/znuny-web/';
 
     # Frontend::JavaScriptPath
     # (URL JavaScript path.)

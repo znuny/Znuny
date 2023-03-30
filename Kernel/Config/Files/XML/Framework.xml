@@ -371,7 +371,7 @@
         <Description Translatable="1">Defines the URL base path of icons, CSS and Java Script.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">/otrs-web/</Item>
+            <Item ValueType="String" ValueRegex="">/znuny-web/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::ImagePath" Required="1" Valid="1" ConfigLevel="200">
