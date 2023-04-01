@@ -111,8 +111,8 @@
                         [% END %]
                     </h2>
                     <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
-                        <span class="show-valid">Show Valid</span>
-                        <span class="show-all">Show All</span>
+                        <span class="show-valid">[% Translate("Show Valid") | html %]</span>
+                        <span class="show-all">[% Translate("Show All") | html %]</span>
                     </a>
                 </div>
 [% RenderBlockEnd("OverviewHeader") %]
