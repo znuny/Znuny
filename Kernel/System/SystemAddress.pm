@@ -534,8 +534,8 @@ sub SystemAddressLookup {
     my $Key;
     my $Value;
     if ( $Param{SystemAddressID} || $Param{ID} ) {
-        $Key        = 'System address ID';
-        $Value      = $Param{SystemAddressID} || $Param{ID};
+        $Key   = 'System address ID';
+        $Value = $Param{SystemAddressID} || $Param{ID};
         return $SystemAddresses{$Value};
     }
     elsif ( $Param{SystemAddress} || $Param{Name} ) {
