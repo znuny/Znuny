@@ -368,6 +368,23 @@ sub GetAllSessionIDs {
     return @SessionIDs;
 }
 
+sub GetOrphanedSessionIDs {
+    my ( $Self, %Param ) = @_;
+
+    my @OrphanedSessionIDs;
+    my @SessionIDs = $Self->GetAllSessionIDs();
+    for my $SessionID (@SessionIDs) {
+        my %SessionData = $Self->GetSessionIDData(
+            SessionID => $SessionID,
+        );
+
+        # missing user-login defines an orphaned session
+        push @OrphanedSessionIDs, $SessionID unless defined $SessionData{UserLogin};
+    }
+
+    return @OrphanedSessionIDs;
+}
+
 sub GetActiveSessions {
     my ( $Self, %Param ) = @_;
 
