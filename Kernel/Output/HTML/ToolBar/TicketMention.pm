@@ -94,7 +94,7 @@ sub Run {
     if ($MentionsCount) {
         $Return{ $Priority++ } = {
             %{ $AdditionalParams{Mentions} },
-            Block       => 'ToolBarItem',
+            Block       => $Param{Config}->{Block} || 'ToolBarItem',
             Description => $MentionLabel,
             Class       => $Param{Config}->{CssClass},
             Icon        => $Icon,
@@ -105,7 +105,7 @@ sub Run {
     if ($NewMentionsCount) {
         $Return{ $Priority++ } = {
             %{ $AdditionalParams{NewMentions} },
-            Block       => 'ToolBarItem',
+            Block       => $Param{Config}->{Block} || 'ToolBarItem',
             Description => $NewMentionLabel,
             Class       => $Param{Config}->{CssClassNew},
             Icon        => $Icon,

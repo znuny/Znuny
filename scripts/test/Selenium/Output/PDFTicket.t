@@ -26,9 +26,21 @@ if ( $Selenium->{browser_name} ne 'firefox' ) {
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $UtilObject            = $Kernel::OM->Get('Kernel::System::Util');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
+        my $QueueObject           = $Kernel::OM->Get('Kernel::System::Queue');
+        my $SysConfigObject       = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $ServiceObject         = $Kernel::OM->Get('Kernel::System::Service');
+        my $SLAObject             = $Kernel::OM->Get('Kernel::System::SLA');
+        my $TypeObject            = $Kernel::OM->Get('Kernel::System::Type');
+        my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
         my $RandomID        = $HelperObject->GetRandomID();
-        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         # Do not check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -59,7 +71,7 @@ $Selenium->RunTest(
 
         # Create Queue.
         my $QueueName = 'Que' . $RandomID;
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => 1,
@@ -79,8 +91,10 @@ $Selenium->RunTest(
 
         if ($IsITSMInstalled) {
 
+            my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
             # get the list of service types from general catalog
-            my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            my $ServiceTypeList = $GeneralCatalogObject->ItemList(
                 Class => 'ITSM::Service::Type',
             );
 
@@ -88,7 +102,7 @@ $Selenium->RunTest(
             my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
 
             # get the list of sla types from general catalog
-            my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            my $SLATypeList = $GeneralCatalogObject->ItemList(
                 Class => 'ITSM::SLA::Type',
             );
 
@@ -105,7 +119,7 @@ $Selenium->RunTest(
             );
 
             # Get the current setting for customer ticket print
-            my %CustomerTicketPrintSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+            my %CustomerTicketPrintSysConfig = $SysConfigObject->SettingGet(
                 Name => 'CustomerFrontend::Module###CustomerTicketPrint',
             );
 
@@ -119,7 +133,7 @@ $Selenium->RunTest(
 
         # Create Service.
         my $ServiceName = 'Servi' . $RandomID;
-        my $ServiceID   = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+        my $ServiceID   = $ServiceObject->ServiceAdd(
             Name    => $ServiceName,
             ValidID => 1,
             Comment => 'Selenium Service',
@@ -133,7 +147,7 @@ $Selenium->RunTest(
 
         # Create SLA.
         my $SLAName = 'SL' . $RandomID;
-        my $SLAID   = $Kernel::OM->Get('Kernel::System::SLA')->SLAAdd(
+        my $SLAID   = $SLAObject->SLAAdd(
             ServiceIDs        => [$ServiceID],
             Name              => $SLAName,
             FirstResponseTime => 50,
@@ -151,7 +165,7 @@ $Selenium->RunTest(
 
         # Create Type.
         my $TypeName = 'Type' . $RandomID;
-        my $TypeID   = $Kernel::OM->Get('Kernel::System::Type')->TypeAdd(
+        my $TypeID   = $TypeObject->TypeAdd(
             Name    => $TypeName,
             ValidID => 1,
             UserID  => 1,
@@ -162,7 +176,6 @@ $Selenium->RunTest(
         );
 
         # Create Users.
-        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
         my @Users;
         for my $UserCount ( 1 .. 2 ) {
 
@@ -190,7 +203,7 @@ $Selenium->RunTest(
             CustomerCompanyURL     => 'URL' . $RandomID,
             CustomerCompanyComment => 'Comment' . $RandomID,
         );
-        my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
             ValidID => 1,
             UserID  => 1,
             %CustomerCompany,
@@ -209,7 +222,7 @@ $Selenium->RunTest(
             UserPassword   => 'CustomerPass' . $RandomID,
             UserEmail      => 'CustomerEmail' . $RandomID . '@example.com',
         );
-        my $CustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source  => 'CustomerUser',
             ValidID => 1,
             UserID  => 1,
@@ -220,7 +233,7 @@ $Selenium->RunTest(
             "Created CustomerUserID $CustomerUserID"
         );
 
-        $Kernel::OM->Get('Kernel::System::CustomerUser')->SetPreferences(
+        $CustomerUserObject->SetPreferences(
             UserID => $CustomerUserID,
             Key    => 'UserLanguage',
             Value  => 'en',
@@ -513,7 +526,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketZoom screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$Tickets[0]->{ID}");
@@ -1130,8 +1143,7 @@ $Selenium->RunTest(
                 SQL     => "DELETE FROM service_preferences WHERE service_id = ?",
                 Bind    => $ServiceID,
                 Message => "Service preferences for $ServiceID is deleted",
-                },
-                ;
+            };
         }
 
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
@@ -1147,7 +1159,7 @@ $Selenium->RunTest(
         }
 
         # Clear cache.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 );
 

@@ -24,7 +24,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Database Records');
+    return Translatable('Znuny') . '/' . Translatable('Database Records');
 }
 
 sub Run {

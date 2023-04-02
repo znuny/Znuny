@@ -202,14 +202,14 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::IndexModule" Required="1" Valid="1">
-        <Description Translatable="1">IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.</Description>
+        <Description Translatable="1">IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.</Description>
         <Navigation>Core::Ticket</Navigation>
         <Value>
             <Item ValueType="PerlModule" ValueFilter="Kernel/System/Ticket/IndexAccelerator/*.pm">Kernel::System::Ticket::IndexAccelerator::RuntimeDB</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Article::Backend::MIMEBase::ArticleStorage" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.</Description>
+        <Description Translatable="1">Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the Znuny user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.</Description>
         <Navigation>Core::CommunicationChannel::MIMEBase</Navigation>
         <Value>
             <Item ValueType="PerlModule" ValueFilter="Kernel/System/Ticket/Article/Backend/MIMEBase/ArticleStorage*.pm">Kernel::System::Ticket::Article::Backend::MIMEBase::ArticleStorageDB</Item>
@@ -418,7 +418,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::SearchIndexModule" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".</Description>
+        <Description Translatable="1">Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".</Description>
         <Navigation>Core::Ticket::FulltextSearch</Navigation>
         <Value>
             <Item ValueType="PerlModule" ValueFilter="Kernel/System/Ticket/ArticleSearchIndex/*.pm">Kernel::System::Ticket::ArticleSearchIndex::DB</Item>
@@ -446,7 +446,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::SearchIndex::Attribute" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.</Description>
+        <Description Translatable="1">Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.</Description>
         <Navigation>Core::Ticket::FulltextSearch</Navigation>
         <Value>
             <Hash>
@@ -1761,14 +1761,14 @@
         <Description Translatable="1">Max size (in characters) of the customer information table (phone and email) in the compose screen.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">22</Item>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">50</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::CustomerInfoZoomMaxSize" Required="1" Valid="1">
         <Description Translatable="1">Maximum size (in characters) of the customer information table in the ticket zoom view.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">22</Item>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">50</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::DynamicFieldsZoomMaxSizeSidebar" Required="1" Valid="1">
@@ -4883,7 +4883,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::UnlockStateType" Required="1" Valid="1">
-        <Description Translatable="1">Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.</Description>
+        <Description Translatable="1">Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.</Description>
         <Navigation>Core::Ticket</Navigation>
         <Value>
             <Array>
@@ -4959,12 +4959,13 @@
             <Item ValueType="String" ValueRegex=""></Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###110-Ticket::AgentTicketQueue" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###110-Ticket::AgentTicketQueue" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarOverviews</Item>
                 <Item Key="Name" Translatable="1">Queue view</Item>
                 <Item Key="Link">Action=AgentTicketQueue</Item>
                 <Item Key="Action">AgentTicketQueue</Item>
@@ -4975,12 +4976,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###120-Ticket::AgentTicketStatus" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###120-Ticket::AgentTicketStatus" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarOverviews</Item>
                 <Item Key="Name" Translatable="1">Status view</Item>
                 <Item Key="Link">Action=AgentTicketStatusView</Item>
                 <Item Key="Action">AgentTicketStatusView</Item>
@@ -4991,12 +4993,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###130-Ticket::AgentTicketEscalation" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###130-Ticket::AgentTicketEscalation" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarOverviews</Item>
                 <Item Key="Name" Translatable="1">Escalation view</Item>
                 <Item Key="Link">Action=AgentTicketEscalationView</Item>
                 <Item Key="Action">AgentTicketEscalationView</Item>
@@ -5007,12 +5010,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###140-Ticket::AgentTicketPhone" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###140-Ticket::AgentTicketPhone" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarActions</Item>
                 <Item Key="Name" Translatable="1">New phone ticket</Item>
                 <Item Key="Link">Action=AgentTicketPhone</Item>
                 <Item Key="Action">AgentTicketPhone</Item>
@@ -5023,12 +5027,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###150-Ticket::AgentTicketEmail" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###150-Ticket::AgentTicketEmail" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarActions</Item>
                 <Item Key="Name" Translatable="1">New email ticket</Item>
                 <Item Key="Link">Action=AgentTicketEmail</Item>
                 <Item Key="Action">AgentTicketEmail</Item>
@@ -5039,12 +5044,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###160-Ticket::AgentTicketProcess" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###160-Ticket::AgentTicketProcess" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketProcess</Item>
+                <Item Key="Block">ToolBarActions</Item>
                 <Item Key="Name" Translatable="1">New process ticket</Item>
                 <Item Key="Link">Action=AgentTicketProcess</Item>
                 <Item Key="Action">AgentTicketProcess</Item>
@@ -5061,6 +5067,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketResponsible</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">Responsible</Item>
                 <Item Key="CssClassNew">Responsible New</Item>
                 <Item Key="CssClassReached">Responsible Reached</Item>
@@ -5080,6 +5087,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketWatcher</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">Watcher</Item>
                 <Item Key="CssClassNew">Watcher New</Item>
                 <Item Key="CssClassReached">Watcher Reached</Item>
@@ -5099,6 +5107,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketLocked</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">Locked</Item>
                 <Item Key="CssClassNew">Locked New</Item>
                 <Item Key="CssClassReached">Locked Reached</Item>
@@ -5115,42 +5124,42 @@
     <!-- TODO: check if the counter is really needed, otherwise the module can be removed and use
     the standard link module
     -->
-    <Setting Name="Frontend::ToolBarModule###200-Ticket::AgentTicketService" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###200-Ticket::AgentTicketService" Required="0" Valid="1">
         <Description Translatable="1">Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketService</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">ServiceView</Item>
                 <Item Key="Icon">fa fa-wrench</Item>
                 <Item Key="Priority">1030035</Item>
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###210-Ticket::TicketSearchProfile" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
-        <Description Translatable="1">Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
-        <Navigation>Frontend::Agent::ToolBar</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketSearchProfile</Item>
-                <Item Key="Description" Translatable="1">Search template</Item>
-                <Item Key="Name" Translatable="1">Search template</Item>
-                <Item Key="Block">ToolBarSearchProfile</Item>
-                <Item Key="MaxWidth">40</Item>
-                <Item Key="Priority">1990010</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::ToolBarModule###220-Ticket::TicketSearchFulltext" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="0">
+
+    <Setting Name="Frontend::ToolBarModule###220-Ticket::TicketSearchFulltext" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Agent interface module to access fulltext search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Generic</Item>
-                <Item Key="Description" Translatable="1">Fulltext search</Item>
                 <Item Key="Name" Translatable="1">Fulltext</Item>
-                <Item Key="Block">ToolBarSearchFulltext</Item>
-                <Item Key="Size">10</Item>
+                <Item Key="Description" Translatable="1">Fulltext search</Item>
+                <Item Key="Block">ToolBarSearch</Item>
+                <Item Key="Priority">1990010</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::ToolBarModule###230-CICSearchCustomerID" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
+        <Navigation>Frontend::Agent::ToolBar</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::Generic</Item>
+                <Item Key="Name" Translatable="1">CustomerID</Item>
+                <Item Key="Description" Translatable="1">CustomerID search</Item>
+                <Item Key="Block">ToolBarSearch</Item>
                 <Item Key="Priority">1990020</Item>
                 <Item Key="Data">
                     <Hash>
@@ -5163,30 +5172,28 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###230-CICSearchCustomerID" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###240-CICSearchCustomerUser" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Generic</Item>
-                <Item Key="Description" Translatable="1">CustomerID search</Item>
-                <Item Key="Name" Translatable="1">CustomerID</Item>
-                <Item Key="Block">ToolBarCICSearchCustomerID</Item>
-                <Item Key="Size">10</Item>
+                <Item Key="Name" Translatable="1">CustomerUser</Item>
+                <Item Key="Description" Translatable="1">Customer user search</Item>
+                <Item Key="Block">ToolBarSearch</Item>
                 <Item Key="Priority">1990030</Item>
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###240-CICSearchCustomerUser" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
-        <Description Translatable="1">Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
+    <Setting Name="Frontend::ToolBarModule###210-Ticket::TicketSearchProfile" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::ToolBar::Generic</Item>
-                <Item Key="Description" Translatable="1">Customer user search</Item>
-                <Item Key="Name" Translatable="1">Customer User</Item>
-                <Item Key="Block">ToolBarCICSearchCustomerUser</Item>
-                <Item Key="Size">10</Item>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketSearchProfile</Item>
+                <Item Key="Name" Translatable="1">SearchTemplate</Item>
+                <Item Key="Description" Translatable="1">Search template</Item>
+                <Item Key="Block">ToolBarSearchProfile</Item>
                 <Item Key="Priority">1990040</Item>
             </Hash>
         </Value>
@@ -7364,11 +7371,11 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::CustomerTicketZoom###CustomerZoomExpand" Required="1" Valid="1">
-        <Description Translatable="1">Shows all the articles of the ticket (expanded) in the customer zoom view.</Description>
+    <Setting Name="Ticket::Frontend::CustomerTicketZoom###ArticleMaxLength" Required="1" Valid="1">
+        <Description Translatable="1">Defines the length of the article preview in the customer interface.</Description>
         <Navigation>Frontend::Customer::View::TicketZoom</Navigation>
         <Value>
-            <Item ValueType="Checkbox">0</Item>
+            <Item ValueType="String">150</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::CustomerTicketZoom###DisplayNoteFrom" Required="1" Valid="1">
@@ -9508,7 +9515,7 @@
                 <Item Key="Block">Ticket</Item>
                 <Item Key="Description" Translatable="1">Link templates to queues.</Item>
                 <Item Key="IconBig">fa-file-text-o</Item>
-                <Item Key="IconSmall">fa-folder</Item>
+                <Item Key="IconSmall">fa-folder-o</Item>
             </Hash>
         </Value>
     </Setting>
@@ -9648,7 +9655,7 @@
                 <Item Key="Block">Ticket</Item>
                 <Item Key="Description" Translatable="1">Link queues to auto responses.</Item>
                 <Item Key="IconBig">fa-reply</Item>
-                <Item Key="IconSmall">fa-folder</Item>
+                <Item Key="IconSmall">fa-folder-o</Item>
             </Hash>
         </Value>
     </Setting>
@@ -10775,7 +10782,7 @@
                             </Array>
                         </Item>
                         <Item Key="Description" Translatable="1">Tickets.</Item>
-                        <Item Key="Name" Translatable="1">Tickets</Item>
+                        <Item Key="Name" Translatable="1">My Tickets</Item>
                         <Item Key="Link">Action=CustomerTicketOverview;Subaction=MyTickets</Item>
                         <Item Key="LinkOption"></Item>
                         <Item Key="NavBar">Ticket</Item>
@@ -10795,33 +10802,12 @@
                             <Array>
                             </Array>
                         </Item>
-                        <Item Key="Description" Translatable="1">My Tickets.</Item>
-                        <Item Key="Name" Translatable="1">My Tickets</Item>
-                        <Item Key="Link">Action=CustomerTicketOverview;Subaction=MyTickets</Item>
-                        <Item Key="LinkOption"></Item>
-                        <Item Key="NavBar">Ticket</Item>
-                        <Item Key="Type">Submenu</Item>
-                        <Item Key="Block"></Item>
-                        <Item Key="AccessKey"></Item>
-                        <Item Key="Prio">110</Item>
-                    </Hash>
-                </Item>
-                <Item>
-                    <Hash>
-                        <Item Key="Group">
-                            <Array>
-                            </Array>
-                        </Item>
-                        <Item Key="GroupRo">
-                            <Array>
-                            </Array>
-                        </Item>
                         <Item Key="Description" Translatable="1">Company Tickets.</Item>
                         <Item Key="Name" Translatable="1">Company Tickets</Item>
                         <Item Key="Link">Action=CustomerTicketOverview;Subaction=CompanyTickets</Item>
                         <Item Key="LinkOption"></Item>
                         <Item Key="NavBar">Ticket</Item>
-                        <Item Key="Type">Submenu</Item>
+                        <Item Key="Type">Menu</Item>
                         <Item Key="Block"></Item>
                         <Item Key="AccessKey">t</Item>
                         <Item Key="Prio">120</Item>
@@ -10846,7 +10832,7 @@
                     </Item>
                     <Item Key="Description" Translatable="1">Create tickets.</Item>
                     <Item Key="NavBarName">Ticket</Item>
-                    <Item Key="Title" Translatable="1">New Ticket</Item>
+                    <Item Key="Title" Translatable="1">Create Ticket</Item>
                 </Hash>
             </Item>
         </Value>
@@ -10884,11 +10870,11 @@
                             </Array>
                         </Item>
                         <Item Key="Description" Translatable="1">Create new Ticket.</Item>
-                        <Item Key="Name" Translatable="1">New Ticket</Item>
+                        <Item Key="Name" Translatable="1">Create Ticket</Item>
                         <Item Key="Link">Action=CustomerTicketMessage</Item>
                         <Item Key="LinkOption"></Item>
                         <Item Key="NavBar">Ticket</Item>
-                        <Item Key="Type">Submenu</Item>
+                        <Item Key="Type">Menu</Item>
                         <Item Key="Block"></Item>
                         <Item Key="AccessKey">n</Item>
                         <Item Key="Prio">100</Item>
@@ -11047,12 +11033,12 @@
                             <Array>
                             </Array>
                         </Item>
-                        <Item Key="Description" Translatable="1">Search.</Item>
-                        <Item Key="Name" Translatable="1">Search</Item>
+                        <Item Key="Description" Translatable="1">Search tickets.</Item>
+                        <Item Key="Name" Translatable="1">Ticket Search</Item>
                         <Item Key="Link">Action=CustomerTicketSearch</Item>
                         <Item Key="LinkOption"></Item>
                         <Item Key="NavBar">Ticket</Item>
-                        <Item Key="Type">Submenu</Item>
+                        <Item Key="Type">Menu</Item>
                         <Item Key="Block"></Item>
                         <Item Key="AccessKey">s</Item>
                         <Item Key="Prio">300</Item>
@@ -11685,7 +11671,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="PostMaster::CheckFollowUpModule###0000-BounceEmail" Required="0" Valid="1">
-        <Description Translatable="1">Executes follow-up checks on OTRS Header 'X-OTRS-Bounce'.</Description>
+        <Description Translatable="1">Executes follow-up checks on Znuny Header 'X-OTRS-Bounce'.</Description>
         <Navigation>Core::Email::PostMaster</Navigation>
         <Value>
             <Hash>
@@ -12702,7 +12688,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element1" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12713,7 +12699,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element2" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12724,7 +12710,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element3" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12735,7 +12721,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element4" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12746,7 +12732,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element5" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12757,7 +12743,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element6" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12768,7 +12754,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element7" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12779,7 +12765,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element8" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12790,7 +12776,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element9" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12801,7 +12787,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element10" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12812,7 +12798,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element11" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12823,7 +12809,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element12" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12834,7 +12820,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element13" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12845,7 +12831,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element14" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12856,7 +12842,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element15" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -12867,7 +12853,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="Ticket::TicketDynamicFieldDefault###Element16" Required="0" Valid="0">
-        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".</Description>
+        <Description Translatable="1">Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".</Description>
         <Navigation>Core::Ticket::DynamicFieldDefault</Navigation>
         <Value>
             <Hash>
@@ -13899,56 +13885,6 @@ Thanks for your help!
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::Article::Actions###Chat" Required="1" Valid="1">
-        <Description Translatable="1">Defines available article actions for Chat articles.</Description>
-        <Navigation>Frontend::Agent::View::TicketZoom::ArticleAction</Navigation>
-        <Value>
-            <Hash>
-                <DefaultItem>
-                    <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
-                    </Hash>
-                </DefaultItem>
-                <Item Key="AgentTicketPrint">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketPrint</Item>
-                        <Item Key="Prio">500</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
-                <Item Key="MarkAsImportant">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::MarkAsImportant</Item>
-                        <Item Key="Prio">700</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
-                <Item Key="AgentTicketForward">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketForward</Item>
-                        <Item Key="Prio">200</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
-                <Item Key="AgentTicketCompose">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketCompose</Item>
-                        <Item Key="Prio">100</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
-                <Item Key="AgentTicketNoteToLinkedTicket">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
-                        <Item Key="Prio">50</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="Ticket::Frontend::Article::Actions###Invalid" Required="1" Valid="1">
         <Description Translatable="1">Defines available article actions for invalid articles.</Description>
         <Navigation>Frontend::Agent::View::TicketZoom::ArticleAction</Navigation>
@@ -13965,13 +13901,6 @@ Thanks for your help!
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::ReinstallPackageLink</Item>
                         <Item Key="Prio">200</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
-                <Item Key="GetHelpLink">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::GetHelpLink</Item>
-                        <Item Key="Prio">100</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>

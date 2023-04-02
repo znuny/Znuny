@@ -990,8 +990,8 @@ gets a complete processes information dump from the DB including: Process State,
 ActivityDialogs, Transitions and TransitionActions
 
     my $ProcessDump = $ProcessObject->ProcessDump(
-        ResultType  => 'SCALAR',                    # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt',  # mandatory for ResultType = 'FILE'
+        ResultType  => 'SCALAR'                     # 'SCALAR' || 'HASH' || 'FILE'
+        Location    => '/opt/znuny/var/myfile.txt'   # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 
@@ -1101,8 +1101,8 @@ Returns:
      ';
 
     my $ProcessDump = $ProcessObject->ProcessDump(
-        ResultType  => 'HASH',                      # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt',  # mandatory for ResultType = 'FILE'
+        ResultType  => 'HASH'                       # 'SCALAR' || 'HASH' || 'FILE'
+        Location    => '/opt/znuny/var/myfile.txt'   # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 
@@ -1212,13 +1212,13 @@ Returns:
     }
 
     my $ProcessDump = $ProcessObject->ProcessDump(
-        ResultType  => 'Location',                    # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt',    # mandatory for ResultType = 'FILE'
+        ResultType  => 'Location'                     # 'SCALAR' || 'HASH' || 'FILE'
+        Location    => '/opt/znuny/var/myfile.txt'     # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 
 Returns:
-    $ProcessDump = '/opt/otrs/var/myfile.txt';      # or undef if can't write the file
+    $ProcessDump = '/opt/znuny/var/myfile.txt';      # or undef if can't write the file
 
 =cut
 

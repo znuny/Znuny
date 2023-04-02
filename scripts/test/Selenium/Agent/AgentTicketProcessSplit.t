@@ -18,7 +18,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
+        my $ArticleObject         = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Set 'Linked Objects' widget to simple view.
         $HelperObject->ConfigSettingChange(
@@ -68,7 +72,7 @@ $Selenium->RunTest(
 
         push @DeleteTicketIDs, $TicketID;
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Phone',
         );
 
@@ -117,7 +121,7 @@ $Selenium->RunTest(
         # Navigate to AgentTicketZoom screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID;");
 
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -232,7 +236,7 @@ $Selenium->RunTest(
         # Check if ticket split with customer created article is preselecting customer user from article. See bug#12956.
         # Create test customer company.
         my $TestCompany = 'Company' . $RandomID;
-        my $CustomerID  = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerID  = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID          => $TestCompany,
             CustomerCompanyName => $TestCompany,
             ValidID             => 1,
@@ -246,7 +250,7 @@ $Selenium->RunTest(
         # Create test customer user.
         my $TestUser      = 'CustomerUser' . $RandomID;
         my $TestUserEmail = "$TestUser\@example.com";
-        my $CustomerUser  = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUser  = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestUser,
             UserLastname   => $TestUser,

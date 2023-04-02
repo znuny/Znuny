@@ -14,1848 +14,2020 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
-/**
- * @subsection  Fonts
- */
-
-body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    text-align: left;
-    position: relative;
-}
-
-.RTL {
-    text-align: right;
-    /* this will inherit to all elements because of reset.css */
-    direction: rtl;
-}
-
-#ViewModeSwitch {
-    margin: 5px 0px;
-}
-
-#AjaxErrorDialog {
-    display: none;
-}
-
-#AjaxErrorDialogInner {
-    width: 550px;
-    text-align: center;
-}
-
-#AjaxErrorDialogInner .Icon {
-    text-align: center;
-    display: block;
-    width: 30px;
-    height: 30px;
-    margin: 0px auto 20px auto;
-    line-height: 30px;
-    border-radius: 50px;
-    background: #f92;
-    color: #fff;
-    transition: background 2s ease;
-    float: none;
-}
-
-#AjaxErrorDialogInner .Icon + p {
-    margin: 0px auto 5px auto;
-    width: 90%;
-}
-
-#AjaxErrorDialogInner .Icon i {
-    font-size: 18px;
-    vertical-align: middle;
-    margin-top: -3px;
-}
-
-#AjaxErrorDialogInner .CommunicationError .Icon {
-    background: #b8384e;
-}
-
-#AjaxErrorDialogInner .Icon.Green {
-    background:green
-}
-
-#AjaxErrorDialogInner .FullErrorMessage {
-    color: red;
-    margin: 5px 0px;
-}
-
-/**
- * @subsection  Loading Dialog
- */
-
-.DialogWaiting {
-    text-align: center;
-}
-
-.DialogWaiting i {
-    display: block;
-    margin: 10px 0px;
-}
-
-.DialogWaiting p {
-    padding: 0px 10px 10px 10px;
-}
-
-.Dialog .InnerContent .Waiting {
-    display: none;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    background: #fff;
-    z-index: 999;
-    line-height: 100%;
-}
-
-.Dialog .InnerContent .Waiting i {
-    font-size: 14px;
-    position: absolute;
-    top: 50%;
-    margin-top: -7px;
-    left: 50%;
-    margin-left: -7px;
-}
-
-/**
- * @subsection  Print elements - Only show when page is printed
- */
-.PrintOnly {
-    display: none;
-}
-
-/**
- * @subsection  Hidden elements - Elements that are hidden at first
- */
-.Hidden {
-    display: none;
-}
-
-.Invisible {
-    visibility: hidden;
-}
-
-/**
- * @subsection      ARIA (Accessibility)
- * @subsubsection   AlertMessage
- * @note            This definition allows to create text on the page
- *                  which is not seen, but will be read by the screen reader.
- *                  display: none; cannot be used in this case.
- */
-
-.ARIAAlertMessage {
-    position: absolute !important;
-    left: -10000px;
-    right: auto;
-    top: -10000px;
-}
-
-.RTL .ARIAAlertMessage {
-    left: auto;
-    right: -10000px;
-}
-
-/**
- * @subsection  ElementPool - Hide elements for later use with JavaScript
- */
-#UIElementPool {
-    display: none;
-}
-
-/**
- * @subsection  Links
- */
-
-a {
-    color: #F92;
-    text-decoration: none;
-}
-
-a:hover,
-a:focus {
-    color: #F72;
-}
-
-/**
- * @subsection  Headings
- */
-h1 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-h2 {
-    font-size: 14px;
-    color: #474747;
-    margin-bottom: 10px;
-}
-
-h3 {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-h4 {
-    color: #333;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-h5 {
-    color: #333;
-    margin-bottom: 5px;
-}
-
-/**
- * @subsection  Paragraphs
- * @note        Use paragraphs instead of <div>s for text-only, multiline content!
- */
-p {
-    /* increase line-height for readability */
-    line-height: 1.3em;
-}
-
-/**
- * @subsection  Code Examples
- */
-code {
-    font-family: monospace;
-}
-
-/**
- * @subsection  Text modifiers
- */
-strong {
-    font-weight: bold;
-}
-
-em {
-    font-style: italic;
-}
-
-/**
- * @subsection  Regular lists
- * @note        List elements (ul, ol) are being reset by default to avoid browser styling, so we
-                need to define our own 'default' lists using a class.
- */
-
-ul.Default {
-    list-style-type: square;
-    margin: 5px 0px;
-    padding-left: 20px;
-}
-
-ul.Default li {
-    line-height: 130%;
-    margin-bottom: 3px;
-}
-
-/**
- * @subsection  Definition lists
- */
-dl {
-    margin: 5px 0;
-}
-
-dt {
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 1.3em;
-    margin-top: 5px;
-}
-
-dd {
-    line-height: 1.3em;
-    margin-left: 15px;
-    margin-right: 0;
-}
-
-.RTL dd {
-    margin-left: 0;
-    margin-right: 15px;
-}
-
-/**
- * @subsection  Text
- */
-.Center {
-    text-align: center;
-}
-
-.Left {
-    text-align: left;
-}
-
-.FloatLeft {
-    text-align: left;
-    float: left;
-}
-
-.Right {
-    text-align: right;
-}
-
-.FloatRight {
-    float: right;
-}
-
-.Error {
-    color: #ff505e;
-}
-
-.Warning {
-    color: #ff9050;
-}
-
-.Notice {
-    color: #333;
-}
-
-.Confirmation {
-    color: #069d07
-}
-
-.Small {
-    font-size: 90%;
-}
-
-/**
- * @subsection  Errors
- * @note        Error fields for forms
- */
-
-.ErrorBox,
-.SuccessBox {
-    display: block;
-    padding: 5px 8px 4px;
-    cursor: default;
-}
-
-.ErrorBox.Hidden,
-.SuccessBox.Hidden {
-    display: none;
-}
-
-.ErrorBox {
-    color: rgba(255, 255, 255, 0.9);
-    background: #B83850;
-}
-
-.SuccessBox {
-    color: #fff;
-    background: #8FB738
-}
-
-.ErrorBox span a,
-.SuccessBox span a {
-    color: #fff;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    transition: all ease 0.2s;
-}
-
-.ErrorBox span a:hover,
-.SuccessBox span a:hover {
-    border-color: #fff;
-}
-
-/**
- * @subsection  Drag & drop upload
- */
-
-div.DnDUploadBox {
-    overflow-y: hidden;
-    width: 622px;
-    padding: 0 !important;
-}
-
-div.DnDUpload {
-    border: 1px solid #ccc;
-    color: #aaa;
-    min-height: 60px;
-    text-align: center;
-    position: relative;
-    margin-bottom: 5px;
-    max-width: 622px;
-    box-sizing: border-box;
-}
-
-span.ReadyForUpload {
-    padding: 30px 0px 5px;
-    display: block;
-}
-
-div.DnDUpload:focus {
-    border-color:#000;
-    color:#000;
-}
-
-input.AjaxDnDUpload.Error + div.DnDUpload {
-    color: #ff505e;
-    border-color: #ff505e;
-}
-
-div.DnDUpload.DragOver {
-    border-style: dashed;
-    background: #eee;
-    color: #444;
-}
-
-div.DnDUpload i {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    margin-left: -20px;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-div.DnDUpload i.fa-spinner {
-    display: none;
-}
-
-div.DnDUpload.Uploading i.fa-download {
-    display: none;
-}
-
-div.DnDUpload.Uploading i.fa-spinner {
-    display: block;
-}
-
-div.DnDUpload .UploadRunning {
-    display: none;
-}
-
-div.DnDUpload.Uploading .ReadyForUpload {
-    display: none;
-}
-
-div.DnDUpload.Uploading .UploadRunning {
-    display: block;
-}
-
-.AttachmentListContainer {
-    position: relative;
-    max-width: 622px;
-}
-
-.AttachmentListContainer .Busy {
-    position: absolute;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    background: rgba(255, 255, 255, 0.5);
-    text-align: center;
-    box-sizing: border-box;
-    display: none;
-}
-
-.AttachmentListContainer .Busy i {
-    vertical-align: middle;
-    line-height: 100%;
-    position: absolute;
-    top: 50%;
-    font-size: 20px;
-    margin-top: -10px;
-}
-
-table.AttachmentList {
-    clear: none;
-    margin-bottom: 10px;
-    margin-top: 0px;
-    max-width: 622px;
-    table-layout: fixed;
-}
-
-table.AttachmentList .Filename {
-    width: 40%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-table.AttachmentList .Progress {
-    display: block;
-    height: 4px;
-    margin: 3px 0px;
-    background: #f92;
-    width: 0px;
-}
-
-table.AttachmentList .Filetype {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-table.AttachmentList .Filesize {
-    width: 15%;
-}
-
-table.AttachmentList .Delete {
-    width: 15px;
-    text-align: center;
-}
-
-table.AttachmentList .AttachmentDelete:focus i {
-    color: #000;
-}
-
-table.AttachmentList.DataTable thead th {
-    line-height: 12px;
-}
-
-/**
- * @note    Use the class InvisibleText to hide text from the screen,
- *          while it is still recognized and read by screen readers.
- */
-.InvisibleText {
-    width: 0;
-    height: 0;
-    display: inline-block;
-    text-indent: -9999px;
-    white-space: nowrap;
-    position: absolute !important;
-}
-
-/**
- * @subsection  Spacings
- */
-.Spacing {
-    margin: 13px;
-}
-
-.SpacingTop {
-    margin-top: 13px;
-}
-
-.SpacingTopSmall {
-    margin-top: 8px;
-}
-
-.SpacingTopLarge {
-    margin-top: 89px;
-}
-
-.SpacingBottom {
-    margin-bottom: 13px;
-}
-
-.SpacingBottomMedium {
-    margin-bottom: 34px !important;
-}
-
-.SpacingBottomLarge {
-    margin-bottom: 89px;
-}
-
-.SpacingLeft {
-    margin-left: 10px;
-}
-
-.SpacingRight {
-    margin-right: 10px;
-}
-
-/**
- * @subsection  Indents
- */
-.Indent {
-    padding-left: 13px !important;
-}
-
-/**
- * @subsection  Box alignment
- */
-.CenterBox {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-/**
- * @subsection  Controlling the display: value
- * @note        This is especially helpful for links. When
- *              they have this class, the entire block will be clickable.
- */
-.AsBlock {
-    display: block;
-}
-
-/**
- * @subsection  Clear
- */
-.Clear {
-    float: none !important;
-    clear: both !important;
-}
-
-.ClearNone {
-    clear: none !important;
-}
-
-.ClearLeft,
-.RTL .ClearRight {
-    float: none !important;
-    clear: left !important;
-}
-
-.ClearRight,
-.RTL .ClearLeft {
-    float: none !important;
-    clear: right !important;
-}
-
-/**
- * @subsection  MainBox
- */
-.MainBox {
-    position: relative;
-    padding: 16px 10px 7px 10px;
-}
-
-.RTL .MainBox {
-    padding: 4px 8px 8px 16px;
-}
-
-.OverviewBox {
-    position: relative;
-}
-
-.MainBox > h1 {
-    margin: 0;
-    padding: 10px 8px 15px 8px;
-    position: relative;
-}
-
-.MainBox > .AsteriskExplanation {
-    padding-left: 8px;
-    margin-bottom: 10px;
-}
-
-.RTL .MainBox > .AsteriskExplanation {
-    padding-left: 0px;
-    padding-right: 8px;
-}
-
-.AsteriskExplanation {
-    color: #999;
-}
-
-.MainBox.FormScreen > h1,
-.MainBox.FormScreen > .AsteriskExplanation {
-    margin-left: 24%;
-}
-
-.MainBox.FormScreen.NoSidebar > h1,
-.MainBox.FormScreen.NoSidebar > .AsteriskExplanation {
-    margin-left: 30%;
-}
-
-.RTL .MainBox.FormScreen > h1,
-.RTL .MainBox.FormScreen > .AsteriskExplanation {
-    margin-right: 24%;
-}
-
-.RTL .MainBox.FormScreen.NoSidebar > h1,
-.RTL .MainBox.FormScreen.NoSidebar > .AsteriskExplanation {
-    margin-right: 30%;
-}
-
-.OverviewBox > h1 {
-    margin: 10px 0px;
-    padding: 8px 11px 7px;
-    position: relative;
-}
-
-/**
- * @subsection  Bread crumb
- */
-
-.BreadCrumb {
-    list-style-type: none;
-    margin: 0px 2px 15px 0px;
-    padding: 7px 15px 4px 0px;
-    background: #f5f5f5;
-    position: relative;
-    padding-left: 0px;
-    padding-right: 15px;
-    overflow-y: hidden;
-    overflow-x: auto;
-    white-space: nowrap;
-    box-shadow: 1px 1px 0px #e9e9e9;
-}
-
-.RTL .BreadCrumb {
-    padding-right: 10px;
-    padding-left: 15px;
-}
-
-.BreadCrumb li {
-    display: inline-block;
-    margin: 0px 2px 0px 2px;
-    padding-left: 35px;
-    color: #777;
-    position: relative;
-    white-space: nowrap;
-    vertical-align: middle;
-}
-
-.BreadCrumb li > a,
-.BreadCrumb li > span {
-    line-height: 14px;
-    display: inline-block;
-    padding: 0px 2px 3px 2px;
-}
-
-.BreadCrumb li:first-child {
-    padding-left: 20px;
-}
-
-.BreadCrumb li:first-child a i {
-    font-size: 16px;
-    color: #777;
-}
-
-.BreadCrumb li:first-child a:hover i {
-    color: #333;
-}
-
-.RTL .BreadCrumb li {
-    padding-left: 0px;
-    padding-right: 35px;
-}
-
-.RTL .BreadCrumb li:first-child {
-    padding-right: 20px;
-}
-
-.BreadCrumb li:first-child:after,
-.BreadCrumb li:first-child:before {
-    display: none;
-}
-
-.BreadCrumb a {
-    color: #000;
-    position: relative;
-}
-
-.BreadCrumb a:after {
-    position: absolute;
-    left: 0px;
-    width: 0px;
-    content: "";
-    bottom: 0px;
-    border-bottom: 1px solid #bbb;
-    transition: all ease 0.3s;
-}
-
-.BreadCrumb a:hover:after,
-.BreadCrumb a:focus:after,
-.BreadCrumb a:active:after {
-    width: 100%;
-}
-
-.BreadCrumb li:before,
-.BreadCrumb li:after {
-    top: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-width: 22px;
-    margin-top: -24px;
-}
-
-.BreadCrumb li:after {
-    left: 0px;
-    border-color: rgba(255, 255, 255, 0);
-    border-left-color: #fff;
-}
-
-.RTL .BreadCrumb li:after {
-    border-left-color: transparent;
-    border-right-color: #fff;
-    left: auto;
-    right: 0px;
-}
-
-.BreadCrumb li:before {
-    left: -5px;
-    border-color: rgba(238, 238, 238, 0);
-    border-left-color: #f5f5f5;
-    z-index: 2;
-}
-
-.RTL .BreadCrumb li:before {
-    left: auto;
-    right: -5px;
-    border-right-color: #f5f5f5;
-    border-left-color: transparent;
-}
-
-/**
- * @subsection  Standard Widths
- */
-.W10pc {
-    width: 10%;
-}
-
-.W20pc {
-    width: 20%;
-}
-
-.W25pc {
-    width: 25%;
-}
-
-.W33pc {
-    width: 33%;
-}
-
-.W50pc {
-    width: 50%;
-}
-
-.W60pc {
-    width: 60%;
-}
-
-.W70pc {
-    width: 70%;
-}
-
-.W75pc {
-    width: 75%;
-}
-
-.W80pc {
-    width: 80%;
-}
-
-.W90pc {
-    width: 90%;
-}
-
-.W95pc {
-    width: 95%;
-}
-
-.W100pc {
-    width: 100%;
-}
-
-.W50px {
-    width: 50px;
-}
-
-.W950px {
-    width: 950px;
-}
-
-/**
- * @subsection  MessageBox
- */
-
-.MessageBox {
-    margin: 0px;
-    background: #F7AE40;
-    position: relative;
-    z-index: 1;
-}
-
-.MessageBox.WithIcon {
-    padding-left: 20px;
-}
-
-.MessageBox.WithIcon > i {
-    position: absolute;
-    left: 12px;
-    top: 12px;
-}
-
-.MessageBox p {
-    padding: 10px 10px 10px 19px;
-}
-
-.MessageBox p,
-.MessageBox a {
-    color: #000;
-}
-
-.MessageBox a:hover {
-    text-decoration: none;
-}
-
-.MessageBox > p + p {
-    margin-top: 2px;
-}
-
-.MessageBox.Error {
-    background: #b8384e;
-}
-
-.MessageBox.Confirmation {
-    background: #049E35;
-}
-
-.MessageBox.Error p,
-.MessageBox.Error a,
-.MessageBox.Confirmation p,
-.MessageBox.Confirmation a {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.MessageBox p a:after {
-    content: "\2192";
-    display: inline-block;
-    font-size: 15px;
-    transition: margin ease 0.3s;
-}
-
-.MessageBox p a:hover:after {
-    margin-left: 5px;
-}
-
-.MessageBox.Info {
-    background-color: #2A5464;
-}
-
-.MessageBox.Info p,
-.MessageBox.Info a {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.MessageBox.Info a,
-.MessageBox.Error a {
-    transition: color ease 0.3s;
-}
-
-.MessageBox.Info a:hover,
-.MessageBox.Error a:hover {
-    color: #fff;
-}
-
-.MessageBox a.Button:after {
-    content: "";
-}
-
-.MessageBox a.Button {
-    display: inline;
-    padding: 3px 7px;
-}
-
-.MessageBox a.Button:hover {
-    text-decoration: none;
-}
-
-.MessageBox.Info a.Button {
-    background-color: #3E6C7C;
-}
-
-.MessageBox.Info a.Button:hover {
-    background-color: #4B7C8E;
-}
-
-.MessageBox.Info a.Button i {
-    color: #89C6D1;
-}
-
-form .MessageBox{
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 0px;
-}
-
-/**
- * @subsection  Flag
- */
-
-.Flag.Small {
-    width: 17px;
-    height: 8px;
-    margin: 0px auto;
-}
-
-.Flag span {
-    display: block;
-    height: 100%;
-    text-indent: -9999px;
-    cursor: pointer;
-    /* set a default color for priorities */
-    background-color: #cdcdcd;
-}
-
-.Flag span.Escalated {
-    background-color: #ff505e;
-}
-
-.Flag span.New {
-    background-color: #8bef4d;
-}
-
-.Flag span.Warning {
-    background-color: #ffdd50;
-}
-
-.Flag span.PriorityID-1 {
-    background-color: #03c4f0;
-}
-
-.Flag span.PriorityID-2 {
-    background-color: #83bfc8;
-}
-
-.Flag span.PriorityID-3 {
-    background-color: #cdcdcd;
-}
-
-.Flag span.PriorityID-4 {
-    background-color: #ffaaaa;
-}
-
-.Flag span.PriorityID-5 {
-    background-color: #ff505e;
-}
-
-/**
- * @subsection  "Unread" star
- */
-span.UnreadArticles,
-div.UnreadArticles {
-    display: block;
-    width: 16px;
-    height: 15px;
-    margin-left: 6px;
-    font-weight: normal;
-    position: relative;
-    padding: 0px 3px !important;
-}
-
-span.UnreadArticles i,
-div.UnreadArticles i {
-    display: block;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    z-index: 2;
-    font-size: 14px;
-    color: #ddd;
-}
-
-span.UnreadArticles em,
-div.UnreadArticles em {
-    display: none;
-}
-
-span.UnreadArticles i:first-child,
-div.UnreadArticles i:first-child {
-    color: #777 !important;
-    font-size: 16px;
-    z-index: 1;
-    left: -1px;
-    top: -1px;
-}
-
-span.UnreadArticles.Remarkable i,
-div.UnreadArticles.Remarkable i {
-    color: #F2BD0E;
-}
-
-span.UnreadArticles.Ordinary,
-div.UnreadArticles.Ordinary {
-    color: #ddd;
-}
-
-tbody tr:hover span.UnreadArticles i {
-    color: #fff;
-}
-
-span.ImportantArticles {
-    display: block;
-    width: 16px;
-    height: 16px;
-    float: right;
-    margin: -2px 0px 0px 23px;
-    color: #C10505;
-    font-size: 13px;
-}
-
-span.ImportantArticles em {
-    display: none;
-}
-
-span.ImportantArticles i {
-    color: #C10505;
-}
-
-/**
- * @subsection  Charts
- */
-.Chart {
-    width: 240px;
-    height: 200px;
-}
-
-#ChartTooltip {
-    padding: 2px 8px 3px;
-    background: #000;
-    color: #FFF;
-    font-size: 11px;
-    opacity: 0.8;
-    border-radius: 8px;
-    position: absolute;
-}
-
-/**
- * @subsection  Datepicker
- */
-.DatepickerIcon {
-    margin: 1px 0 0 4px;
-    height: 16px;
-    width: 16px;
-    display: inline-block;
-    vertical-align: top;
-    color: #333;
-}
-
-.RTL .DatepickerIcon {
-    margin: 0 4px 0 0;
-}
-
-/* Vacation Days */
-td.Highlight a.ui-state-default {
-    border: 1px solid #fad42e;
-    background: #ffe45c !important;
-    background: -moz-linear-gradient(top,  #fff0a5 0%, #ffe45c 100%) !important;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff0a5), color-stop(100%,#ffe45c)) !important;
-    background: -webkit-linear-gradient(top,  #fff0a5 0%,#ffe45c 100%) !important;
-    background: -o-linear-gradient(top,  #fff0a5 0%,#ffe45c 100%) !important;
-    background: -ms-linear-gradient(top,  #fff0a5 0%,#ffe45c 100%) !important;
-    background: linear-gradient(to bottom,  #fff0a5 0%,#ffe45c 100%) !important;
-}
-
-/* Today */
-.ui-datepicker-current-day {
-}
-
-/*Weekend*/
-.ui-datepicker-week-end {
-}
-
-/**
- * @subsection  Autocompletion
- */
-
-.ui-autocomplete {
-    z-index: 20 !important;
-    max-height: 200px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-}
-
-.ui-autocomplete .ui-menu-item {
-    font-size: 11px;
-}
-
-.ui-overlay-autocomplete {
-    z-index: 6103 !important;
-}
-
-.ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
-    border: 0px;
-    margin: 0px;
-}
-
-.ui-menu-item:hover,
-.ui-menu-item:focus,
-.ui-menu-item:active,
-.ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
-    background: #eee;
-}
-
-/**
- * @subsection  Icons
- */
-.IconInline {
-    display: inline-block;
-}
-
-.IconReady {
-    width: 16px;
-    height: 16px;
-    background-image: url(../img/icons/tick.png);
-}
-
-.IconNotReady {
-    width: 16px;
-    height: 16px;
-    background-image: url(../img/icons/cross.png);
-}
-
-.IconNotReadyGrey {
-    width: 16px;
-    height: 16px;
-    background-image: url(../img/icons/cross_sw.png);
-}
-
-/**
- * @subsection  Dialog popup width
- */
-iframe.TextOption {
-    width: 500px;
-    height: 400px;
-}
-
-iframe.TextOption.Customer {
-    width: 800px;
-}
-
-iframe.TextOption.CustomerUserAddressBook {
-    width: 960px;
-    min-height: 65vh;
-    max-height: 80vh;
-}
-
-/**
- * @subsection global search
- */
-#SearchForm,
-#AgentCustomerInformationCenterSearchForm, #AgentCustomerUserInformationCenterSearchForm,
-#AgentTicketCustomerIDSelection {
-    width: 760px;
-    padding-right: 20px;
-}
-
-#SearchForm #SearchProfile,
-#AgentCustomerInformationCenterSearchForm #SearchProfile {
-    max-width: 350px;
-}
-
-#ArticleFilterDialogForm {
-    width: 480px;
-    max-height: 300px;
-}
-
-#ContextSettingsDialog {
-    width: 450px;
-    max-height: 100px;
-}
-
-/**
- * @subsection global message format
- */
-.ArticleBody {
-    font-family: monospace,fixed;
-    word-wrap: break-word;
-    background: #FFF;
-    padding: 10px;
-    min-height: 70px;
-}
-
-.ArticleHTML {
-    padding: 2px 5px;
-    font-size: 11px;
-    max-height: 100px;
-    background: #FFF;
-    min-height: 70px;
-}
-
-.ArticleMailContent .ArticleHTML {
-    max-height: none;
-    font-size: 12px;
-    padding: 10px;
-}
-
-/**
- * @subsection  Chat
- */
-
-.ArticleChat .Name {
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.ArticleChat .Time {
-    padding-right: 5px;
-    color: #888;
-    white-space: nowrap;
-}
-
-.ArticleChat .SystemGenerated .Name {
-    display: none;
-}
-
-.ArticleChat .SystemGenerated .Text {
-    font-style: italic;
-    color: #888;
-}
-
-.ArticleChat .Own .Name {
-    color: red;
-}
-
-.ArticleChat > div {
-    display: table;
-}
-
-.ArticleChat > div > div {
-    display: table-row;
-}
-
-.ArticleChat > div > div > span {
-    display: table-cell;
-}
-
-#ChatStartDialog {
-    width: 500px;
-    position: relative;
-}
-
-#ChatStartDialog form {
-    display: block;
-    padding: 10px;
-}
-
-#ChatStartDialog form textarea {
-    width: 380px;
-    height: 30px;
-    font-family: arial, sans-serif;
-    padding: 3px;
-}
-
-#ChatStartDialog form .Primary {
-    position: absolute;
-    right: 20px;
-    top: 11px;
-}
-
-#ChatStartDialog form .Primary span {
-    line-height: 26px;
-    height: 26px;
-}
-
-#ChatStartDialog form .Primary:focus {
-    border-color: #333;
-}
-
-.ChatProtocol {
-    border: 1px solid #ccc;
-    padding: 2px;
-    overflow-y: auto;
-    max-height: 150px;
-    width: 617px;
-}
-
-/**
- * @subsection global jQuery UI optimizations
- */
-/*
-* Bug #8288: Autocomplete search results show up in Times font when using Internet Explorer
-*/
-.ui-menu-item {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.ui-menu .ui-menu-item a {
-    display: block;
-    padding: 2px;
-    border: 0px;
-}
-
-.ui-corner-all {
-    border-radius: 0px !important;
-}
-
-.ui-widget-header {
-    background: #eee !important;
-    border: 0px !important;
-    font-weight: normal !important;
-}
-
-.ui-state-default,
-.ui-widget-content .ui-state-default,
-.ui-widget-header .ui-state-default {
-    background: #f2f2f2 !important;
-}
-
-.ui-state-hover,
-.ui-widget-content .ui-state-hover,
-.ui-widget-header .ui-state-hover,
-.ui-state-focus,
-.ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus {
-    background: #ddd !important;
-}
-
-/**
- * @subsection global CKEditor fixes/improvements
- */
-
-.cke_combo__fontsize .cke_combo_text {
-    width: 40px !important;
-}
-
-#cke_RichText,
-.cke_toolbar > .cke_toolgroup,
-.cke_toolbar .cke_combo_button,
-.cke_inner .cke_contents,
-.cke_dialog_body,
-input.cke_dialog_ui_input_password,
-input.cke_dialog_ui_input_text,
-textarea.cke_dialog_ui_input_textarea {
-    border-radius: 0px !important;
-}
-
-.cke_toolgroup .cke_button_on {
-    background-color: #ccc;
-}
-
-input.cke_dialog_ui_input_password:focus,
-input.cke_dialog_ui_input_text:focus,
-textarea.cke_dialog_ui_input_textarea:focus {
-    box-shadow: none !important;
-    border-color: #f92 !important;
-}
-
-/**
- * @subsection global nvd3 improvements/fixes
- */
-
-.nvtooltip {
-    font-size: 11px !important;
-    border: 0px !important;
-}
-
-/*
- * @subsection Popup-Iframe (for responsive)
- */
-iframe.PopupIframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-}
-
-/* OTRS Business Solution Dialog */
-
-.OTRSBusinessRequiredDialog {
-    padding: 70px 20px 10px 20px;
-    background: url(../img/logo-business.png) no-repeat top center;
-}
-
-/**
- * @subsection  Floaters
- */
-
-body > div.MetaFloater {
-    width: 600px;
-    height: 400px;
-    background: #fff;
-    box-shadow: 2px 1px 3px #aaa;
-    position: absolute;
-    box-sizing: border-box;
-    z-index: 999;
-    margin-top: -5px;
-    border: 1px solid #eee;
-    border-top: 30px solid #eee;
-}
-
-body > div.MetaFloater:after,
-body > div.MetaFloater:before {
-    bottom: 399px;
-    left: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-}
-
-body > div.MetaFloater.Left:after,
-body > div.MetaFloater.Left:before {
-    left: 15px;
-    margin-top: -1px;
-}
-
-body > div.MetaFloater.Right:after,
-body > div.MetaFloater.Right:before {
-    left: auto;
-    right: 15px;
-}
-
-body > div.MetaFloater.Bottom:after,
-body > div.MetaFloater.Bottom:before {
-    bottom: auto;
-    top: 100%;
-}
-
-body > div.MetaFloater:after {
-    border-bottom-color: #eee;
-    border-width: 15px;
-    margin-left: -15px;
-}
-
-body > div.MetaFloater.Bottom:after {
-    border-color: rgba(255, 255, 255, 0);
-    border-top-color: #fff;
-}
-
-body > div.MetaFloater:before {
-    border-color: rgba(170, 170, 170, 0);
-    border-bottom-color: #aaa;
-    border-width: 16px;
-    margin-left: -16px;
-}
-
-body > div.MetaFloater.Bottom:before {
-    border-color: rgba(170, 170, 170, 0);
-    border-top-color: #aaa;
-}
-
-body > div.MetaFloater > i.fa-spin {
-    position: absolute;
-    left: 50%;
-    font-size: 20px;
-    top: 50%;
-    margin-left: -10px;
-    margin-top: -10px;
-}
-
-body > div.MetaFloater > div.Content > iframe {
-    height: 200%;
-    left: -50%;
-    position: absolute;
-    top: -50%;
-    transform: scale(0.5);
-    width: 200%;
-}
-
-body > div.MetaFloater > div.Content > iframe.NoScale {
-    height: 100%;
-    left: 0px;
-    top: 0px;
-    transform: scale(1.0);
-    width: 100%;
-}
-
-body > div.MetaFloater > a {
-    font-size: 15px;
-    padding: 8px 10px;
-    display: block;
-    position: absolute;
-    top: -30px;
-    text-align: right;
-    box-sizing: border-box;
-    height: 30px;
-    color: #555;
-}
-
-body > div.MetaFloater > div.Content {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    overflow: hidden;
-}
-
-body > div.MetaFloater > div.NoPreview {
-    display: none;
-    text-align: center;
-    width: 50%;
-    margin: 23% auto;
-    line-height: 150%;
-    color: #777;
-}
-
-body > div.MetaFloater > div.NoPreview i {
-    display: block;
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #777;
-}
-
-body > div.MetaFloater > a.Scale {
-    left: 0px;
-}
-
-body > div.MetaFloater > a.Open {
-    left: 25px;
-}
-
-body > div.MetaFloater > a.Close {
-    right: 0px;
-}
-
-/**
- * @subsection  CKEditor Notifications
- */
-
-/*
-Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
-For licensing, see LICENSE.md or http://ckeditor.com/license
-*/
-
-/**
- * Progress notification structure:
- *
- * +---div.cke_notification cke_notification_info--------------------------+
- * |                                                                       |
- * | +---div.cke_notification_progress-----------------------------------+ |
- * | |                                                                   | |
- * | +-------------------------------------------------------------------+ |
- * |                                                                       |
- * | +---p.cke_notification_message--------------------------------------+ |
- * | | Foo                                                               | |
- * | +-------------------------------------------------------------------+ |
- * |                                                                       |
- * | +---a.cke_notification_close----------------------------------------+ |
- * | | +---span.cke_label----------------------------------------------+ | |
- * | | | X                                                             | | |
- * | | +---------------------------------------------------------------+ | |
- * | +-------------------------------------------------------------------+ |
- * |                                                                       |
- * +-----------------------------------------------------------------------+
- *
- *
- * Warning notification structure:
- *
- * +---div.cke_notification cke_notification_warning-----------------------+
- * |                                                                       |
- * | +---p.cke_notification_message--------------------------------------+ |
- * | | Foo                                                               | |
- * | +-------------------------------------------------------------------+ |
- * |                                                                       |
- * | +---a.cke_notification_close----------------------------------------+ |
- * | | +---span.cke_label----------------------------------------------+ | |
- * | | | X                                                             | | |
- * | | +---------------------------------------------------------------+ | |
- * | +-------------------------------------------------------------------+ |
- * |                                                                       |
- * +-----------------------------------------------------------------------+
- *
- * Success and info notifications have the same structure as warning, but use
- * `cke_notification_success` and `cke_notification_info` instead of `cke_notification_warning`.
- */
-
-.cke_notifications_area {
-    /* Prevent notification margin capture clicking. */
-    pointer-events: none;
-}
-.cke_notification {
-    pointer-events: auto;
-    position: relative;
-    margin: 10px;
-    width: 300px;
-    color: white;
-    border-radius: 3px;
-    text-align: center;
-    opacity: 0.95;
-    filter: alpha(opacity = 95);
-    box-shadow: 2px 2px 3px 0px rgba(50, 50, 50, 0.3);
-    -webkit-animation: FadeIn 0.7s;
-    animation: FadeIn 0.7s;
-}
-
-.cke_notification_message a {
-    color: #12306F;
-}
-
-.cke_notification_success {
-    background: #72B572;
-    border: 1px solid #63A563;
-}
-
-.cke_notification_warning {
-    background: #C83939;
-    border: 1px solid #902B2B;
-}
-
-.cke_notification_info {
-    background: #2E9AD0;
-    border: 1px solid #0F74A8;
-}
-
-.cke_notification_info span.cke_notification_progress {
-    background-color: #0F74A8;
-    display: block;
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    z-index: 1;
-}
-
-.cke_notification_message {
-    position: relative;
-    margin: 4px 23px 3px;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    line-height: 18px;
-    z-index: 4;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.cke_notification_close {
-    position: absolute;
-    cursor: pointer;
-    text-align: center;
-    top: 5px;
-    right: 1px;
-    padding: 0;
-    margin: 0;
-    z-index: 5;
-    opacity: 0.6;
-    filter: alpha(opacity = 60);
-}
-
-.cke_notification_close:after {
-    display: block;
-    height: 20px;
-    width: 20px;
-    content: "x";
-    color: #fff;
-}
-
-.cke_notification_close:hover {
-    opacity: 1;
-    filter: alpha(opacity = 100);
-}
-
-.cke_notification_close span {
-    display: none;
-}
-
-.cke_notification_warning a.cke_notification_close {
-    opacity: 0.8;
-    filter: alpha(opacity = 80);
-}
-
-.cke_notification_warning a.cke_notification_close:hover {
-    opacity: 1;
-    filter: alpha(opacity = 100);
-}
-
-/**
- * @subsection AJAX Loader
- */
-
-.AJAXLoader {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    margin: 4px;
-    position: relative;
-    vertical-align: bottom;
-}
-
-.AJAXLoader:after,
-#Canvas .Activity .Loader:after,
-.Loading > .Header h2:after,
-.OverviewControl.Loading .ControlRow:after {
-    -webkit-animation: fa-spin 2s infinite linear;
-    animation: fa-spin 2s infinite linear;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    line-height: 14px;
-    content: "\f1ce";
-    font-family: FontAwesome;
-    font-size: 14px;
-    color: #777;
-}
-
-}
-
-/*
- * @subsection Media Query Reset-CSS (for desktop screen resolutions)
- */
-@media only screen and (min-width: 1025px) {
-
-    /*
-     * @subsection Responsive classes
-     */
-    .ScreenXL {
-        display: block !important;
+    html,
+    body{
+        display: flex;
+        flex-flow: column;
+        min-height: 100vh;
     }
 
-    .SmallerOrEqualScreenXL {
-        display: block !important;
+    @media only screen and (max-width: 1024px) {
+        body, html {
+            font-size: 1em;
+            overflow-x: hidden;
+        }
+
+        html.NoScroll,
+        html.NoScroll body {
+            overflow: hidden;
+        }
+
+        html.NoScroll body {
+            position: static;
+        }
+
+        html.NoScroll #AppWrapper {
+            overflow: hidden;
+            width: 100%;
+        }
     }
 
-    .ScreenL, .ScreenM, .ScreenS, .ScreenXS,
-    .SmallerOrEqualScreenL, .SmallerOrEqualScreenM,
-    .SmallerOrEqualScreenS, .SmallerOrEqualScreenXS {
-        display: none !important;
+    /**
+    * @subsection  Fonts
+    */
+
+    body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        position: relative;
+        background: var(--main-bg-color);
     }
 
-    /*
-     * @subsection Responsive footer classes
-     * @description Used to determinethe active screen size in JavaScript
-     */
-    #ResponsiveFooter .Visible-ScreenXL {
-        display: block !important;
+    #AppWrapper {
+        display: flex;
+        flex-flow: column;
+        min-height: 100vh;
+        overflow: hidden;
     }
 
-    #ResponsiveFooter .Visible-ScreenL,
-    #ResponsiveFooter .Visible-ScreenM,
-    #ResponsiveFooter .Visible-ScreenS,
-    #ResponsiveFooter .Visible-ScreenXS {
-        display: none !important;
+    @media only screen and (max-width: 1024px) {
+        #AppWrapper {
+            padding-top: 48px;
+        }
+
+        .RealPopup #AppWrapper {
+            padding-top: 0;
+        }
+
+        #AppWrapper .LayoutPopup {
+            margin-top: -48px;
+        }
+    }
+
+    .RTL {
+        text-align: right;
+        /* this will inherit to all elements because of reset.css */
+        direction: rtl;
+    }
+
+    /**
+    *  Responsive Sidebar
+    */
+
+    .ResponsiveSidebarContainer {
+        background: rgba(22, 22, 22, 0.7);
+        height: 100%;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        display: none;
+        z-index: 9999;
     }
 
     .ResponsiveHandle {
-        display: none !important;
+        font-size: 1.5em;
+        color: var(--black);
+        cursor: pointer;
+        display: block;
+        position: fixed;
+        top: 11px;
+        width: 25px;
+        height: 30px;
+        padding: var(--padding-xs) 0;
+        background: transparent;
+        background-color: transparent;
+        text-align: center;
+        z-index: 999;
     }
 
-    .ErrorBox, .SuccessBox {
-        margin: 0px 0px 20px 0px;
-        line-height: 150%;
+    #ResponsiveNavigationHandle {
+        left: 20px;
     }
 
-    /* Filters */
-
-    .TableFilterContainer {
-        position: relative;
+    #ResponsiveSidebarHandle {
+        right: 20px;
     }
 
-    .TableFilterContainer .FilterRemove {
-        position: absolute;
-        right: 6px;
-        top: 50%;
-        font-size: 12px;
-        margin-top: -6px;
+    #ResponsiveSidebarNotification {
+        top: 60px;
+        left: -45px;
         display: none;
-        color: #aaa;
-        transition: color ease 0.3s;
+        color: #ccc;
+        cursor: default;
     }
 
-    .TableFilterContainer .FilterRemove:focus,
-    .TableFilterContainer .FilterRemove:hover,
-    .TableFilterContainer .FilterRemove:active {
+
+    #ViewModeSwitch {
+        margin: 5px 0px;
+    }
+
+    /**
+    *  Ajax Error Dialog
+    */
+
+    #AjaxErrorDialog {
+        display: none;
+    }
+
+    #AjaxErrorDialogInner {
+        width: 550px;
+        text-align: center;
+    }
+
+    #AjaxErrorDialogInner .Icon {
+        text-align: center;
+        display: block;
+        width: 30px;
+        height: 30px;
+        margin: 0px auto 20px auto;
+        line-height: 30px;
+        border-radius: 50px;
+        background: #f92;
+        color: #fff;
+        transition: background 2s ease;
+        float: none;
+    }
+
+    #AjaxErrorDialogInner .Icon + p {
+        margin: 0px auto 5px auto;
+        width: 90%;
+    }
+
+    #AjaxErrorDialogInner .Icon i {
+        font-size: 18px;
+        vertical-align: middle;
+        margin-top: -3px;
+    }
+
+    #AjaxErrorDialogInner .CommunicationError .Icon {
+        background: #b8384e;
+    }
+
+    #AjaxErrorDialogInner .Icon.Green {
+        background:green
+    }
+
+    #AjaxErrorDialogInner .FullErrorMessage {
+        color: red;
+        margin: 5px 0px;
+    }
+
+    /**
+    * @subsection  Loading Dialog
+    */
+
+    .DialogWaiting {
+        text-align: center;
+    }
+
+    .DialogWaiting i {
+        display: block;
+        margin: 10px 0px;
+    }
+
+    .DialogWaiting p {
+        padding: 0px 10px 10px 10px;
+    }
+
+    .Dialog .InnerContent .Waiting {
+        display: none;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        background: #fff;
+        z-index: 999;
+        line-height: 100%;
+    }
+
+    .Dialog .InnerContent .Waiting i {
+        font-size: 14px;
+        position: absolute;
+        top: 50%;
+        margin-top: -7px;
+        left: 50%;
+        margin-left: -7px;
+    }
+
+    /**
+    * @subsection  Print elements - Only show when page is printed
+    */
+    .PrintOnly {
+        display: none;
+    }
+
+    /**
+    * @subsection  Hidden elements - Elements that are hidden at first
+    */
+    .Hidden,
+    .Field.Hidden {
+        display: none;
+    }
+
+    /* edited by beatriz on 13/2/2023 - temporary fix
+     - .Hidden class usage needs to be revised for the settings screens (accessed through the "settings" cogwheel in a widget) */
+    .Dialog .Hidden {
+        display: none; /* The "!important" rule can't be used here */
+    }
+
+    .Invisible {
+        visibility: hidden;
+    }
+
+    /**
+    * @subsection      ARIA (Accessibility)
+    * @subsubsection   AlertMessage
+    * @note            This definition allows to create text on the page
+    *                  which is not seen, but will be read by the screen reader.
+    *                  display: none; cannot be used in this case.
+    */
+
+    .ARIAAlertMessage {
+        position: absolute !important;
+        left: -10000px;
+        right: auto;
+        top: -10000px;
+    }
+
+    .RTL .ARIAAlertMessage {
+        left: auto;
+        right: -10000px;
+    }
+
+    /**
+    * @subsection  ElementPool - Hide elements for later use with JavaScript
+    */
+    #UIElementPool {
+        display: none;
+    }
+
+    /**
+    * @subsection  Links
+    */
+
+    a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: var(--main-font-size);
+        cursor: pointer;
+    }
+
+    a:hover,
+    a:focus {
+        color: var(--primary-color-darker);
+    }
+
+    /**
+    * @subsection  Headings
+    */
+    h1 {
+        font-size: 16px;
+        font-weight: bold;
+        /* margin-bottom: 15px; ed removed on 22/12/14 */
+    }
+
+    h2 {
+        font-size: 18px;
+        line-height: 20px;
+        font-weight: normal;
+        /*font-family: Inter;*/
+        gap: var(--gap-sm);
+    }
+
+    h3 {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: var(--margin-sm);
+    }
+
+    h4 {
+        color: #333;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    h5 {
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    /**
+    * @subsection  Paragraphs
+    * @note        Use paragraphs instead of <div>s for text-only, multiline content!
+    */
+    p {
+        /* increase line-height for readability */
+        line-height: 1.3em;
+    }
+
+    /**
+    * @subsection  Code Examples
+    */
+    code {
+        font-family: monospace;
+        /*font-family: "Source Code Pro";*/
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+    }
+
+    /**
+    * @subsection  Text modifiers
+    */
+    strong {
+        font-weight: var(--bold);
+    }
+
+    /*em {
+        font-style: italic;
+    }*/
+
+    /**
+    * @subsection  Regular lists
+    * @note        List elements (ul, ol) are being reset by default to avoid browser styling, so we
+                    need to define our own 'default' lists using a class.
+    */
+
+    ul.Default {
+        list-style-type: square;
+        margin: 5px 0px;
+        padding-left: 20px;
+    }
+
+    ul.Default li {
+        line-height: 130%;
+        margin-bottom: 3px;
+    }
+
+    /**
+    * @subsection  Definition lists
+    */
+    dl {
+        padding-bottom: var(--padding-lg);
+    }
+
+    dt {
+        font-size: 14px;
+        font-weight: var(--medium);
+        padding: var(--padding-lg) 0;
+        color: var(--black);
+        /*font-family: 'Inter'*/
+        line-height: 1.3em;
+    }
+
+    dt:first-child {
+        padding-top: 0;
+    }
+
+    dl > div {
+        display: flex;
+        gap: var(--gap-xs);
+        padding-bottom: var(--padding-lg);
+        align-items: baseline;
+    }
+
+    dl > div:last-child {
+        padding: 0;
+        /*margin-bottom: -20px;*/
+    }
+
+    dl > div > dt {
+        font-weight: var(--bold);
+        padding: 0;
+    }
+
+    dd {
+        line-height: 1.3em;
+    }
+
+    .RTL dd {
+        margin-left: 0;
+        margin-right: 15px;
+    }
+
+    /**
+    * @subsection  Text
+    */
+    .Center {
+        text-align: center;
+    }
+
+    .Left {
+        text-align: left;
+    }
+
+    .FloatLeft {
+        text-align: left;
+        float: left;
+    }
+
+    .Right {
+        text-align: right;
+    }
+
+    .FloatRight {
+        float: right;
+    }
+
+    .Confirmation,
+    .Confirmation i,
+    i.Confirmation {
+        color: var(--confirmation-color);
+    }
+
+    /*.Small {
+        font-size: 90%;
+    }*/
+
+    /**
+    * @subsection  Alerts colors
+    * @note
+    */
+
+    .Info:not(i.fa):not(td) {
+        background: var(--alert-info-bg-color);
+        border: 1px solid var(--alert-info-border-color);
+    }
+
+    .Info i,
+    i.Info {
+        color: var(--alert-info-icon-color);
+    }
+
+    .Error:not(i.fa):not(td) {
+        background: var(--alert-error-bg-color);
+        border: 1px solid var(--alert-error-border-color);
+    }
+
+    .Error i,
+    i.Error,
+    .Error i.Error {
+        color: var(--alert-error-icon-color);
+    }
+
+    .Success:not(i.fa):not(td) {
+        background: var(--alert-success-bg-color);
+        border: 1px solid var(--alert-success-border-color);
+    }
+
+    .Success i,
+    i.Success {
+        color: var(--alert-success-icon-color);
+    }
+
+    .Warning:not(i.fa):not(td) {
+        background: var(--alert-warning-bg-color);
+        border: 1px solid var(--alert-warning-border-color);
+    }
+
+    .MasterAction > td > .Info,
+    .MasterAction > td > .Error,
+    .MasterAction > td > .Success,
+    .MasterAction > td > .Warning {
+        border-radius: var(--border-radius-xs);
+        padding: 2px 4px;
+    }
+
+    .MainBox .WidgetSimple p.Warning,
+    .MainBox .WidgetSimple p.Error {
+        background: none;
+        border: 0;
+        color: var(--warning-color);
+    }
+
+    .Warning i {
+        color: var(--alert-warning-icon-color);
+    }
+
+    .Notice {
+        background: var(--alert-notice-bg-color);
+        border: 1px solid var(--alert-notice-border-color);
+    }
+
+    .Notice i {
+        color: var(--alert-notice-icon-color);
+    }
+
+    /**
+    * @subsection  Errors
+    * @note        Error fields for forms
+    */
+
+    .ErrorBox,
+    .SuccessBox {
+        display: block;
+        padding: var(--padding-md);
+        border-radius: var(--border-radius-xs);
+        cursor: default;
+    }
+
+    .ErrorBox.Hidden,
+    .SuccessBox.Hidden {
+        display: none;
+    }
+
+    .ErrorBox {
+        color: var(--alert-error-icon-color);
+        background: var(--alert-error-bg-color);
+        border-color: var(--alert-error-border-color);
+    }
+
+    .SuccessBox {
+        color: var(--alert-success-icon-color);
+        background: var(--alert-success-bg-color);
+        border-color: var(--alert-success-border-color);
+    }
+
+    .ErrorBox span a,
+    .SuccessBox span a {
+        color: var(--white);
+        border-bottom: var(--border-width) var(--border-solid) rgba(255, 255, 255, 0.5);
+        transition: var(--main-transition);
+    }
+
+    .ErrorBox span a:hover,
+    .SuccessBox span a:hover {
+        border-color: #fff;
+    }
+
+
+
+    /**
+    * @note    Use the class InvisibleText to hide text from the screen,
+    *          while it is still recognized and read by screen readers.
+    */
+    .InvisibleText {
+        width: 0;
+        height: 0;
+        display: inline-block;
+        text-indent: -9999px;
+        white-space: nowrap;
+        position: absolute !important;
+    }
+
+    /**
+    * @subsection  Spacings
+    */
+    .Spacing {
+        margin: var(--margin-md) var(--margin-lg)
+    }
+
+    .SpacingTop {
+        margin: 0;
+        margin-top: var(--margin-md);
+    }
+
+    .SpacingTopSmall {
+        background: var(--white);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: var(--padding-xs) var(--padding-sm);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        max-height: 40px;
+    }
+
+    .SpacingTopLarge {
+        margin-top: 89px;
+    }
+
+    .SpacingBottom {
+        margin-bottom: var(--margin-md);
+    }
+
+    .SpacingBottomMedium {
+        margin-bottom: 34px !important;
+    }
+
+    .SpacingBottomLarge {
+        margin-bottom: 89px;
+    }
+
+    .SpacingLeft {
+        margin-left: var(--margin-lg);
+    }
+
+    .SpacingRight {
+        margin-right: var(--margin-lg);
+    }
+
+    .Spacing.Hidden,
+    .SpacingTop.Hidden,
+    .SpacingTopSmall.Hidden,
+    .SpacingTopLarge.Hidden,
+    .SpacingBottom.Hidden,
+    .SpacingBottomMedium.Hidden,
+    .SpacingBottomLarge.Hidden,
+    .SpacingRight.Hidden,
+    .SpacingLeft.Hidden {
+        display: none;
+    }
+
+
+    /**
+    * @subsection  Indents
+    */
+    .Indent {
+        padding-left: 13px !important;
+    }
+
+    /**
+    * @subsection  Box alignment
+    */
+    .CenterBox {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /**
+    * @subsection  Controlling the display: value
+    * @note        This is especially helpful for links. When
+    *              they have this class, the entire block will be clickable.
+    */
+    .AsBlock {
+        display: block;
+    }
+
+    /**
+    * @subsection  MainBox
+    */
+    .MainBox {
+        position: relative;
+        padding: var(--main-page-padding);
+        background: var(--main-bg-color);
+        display: flex;
+        gap: var(--gap-md);
+        /*flex-wrap: wrap;*/
+        flex-direction: column;
+        flex: 1; /*to make sure the element fills the remaining height space available*/
+        /* this min-heigh is causing a y-axis overflow
+        min-height: calc(100vh - 138px);*/
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .MainBox,
+        .RTL .MainBox {
+            padding: var(--padding-lg);
+        }
+    }
+
+    .MainBox.AdminManagement {
+        gap: unset;
+    }
+
+
+    .OverviewBox {
+        position: relative;
+        padding: var(--main-page-padding) var(--main-page-padding) 0;
+        background-color: var(--main-bg-color);
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-md);
+    }
+
+    .MainBox > h1 {
+        margin: 0;
+        padding: none;
+        position: relative;
+        /*font-family: Poppins;*/
+        font-size: var(--font-size-xxl);
+        font-weight: var(--semi-bold);
+        /*padding-bottom: var(--main-page-padding);*/
+        letter-spacing: .1px;
+        min-width: 100%;
+    }
+
+    .MainBox > h1 + .FieldExplanation {
+        padding-bottom: var(--padding-lg);
+    }
+
+    .MainBox > .AsteriskExplanation {
+        /*padding-left: 8px;
+        margin-bottom: 10px;*/
+    }
+
+    .RTL .MainBox > .AsteriskExplanation {
+        padding-left: 0px;
+        padding-right: 8px;
+    }
+
+    .AsteriskExplanation {
+        color: #999;
+    }
+/*
+    .MainBox.FormScreen > h1,
+    .MainBox.FormScreen > .AsteriskExplanation {
+        margin-left: 24%;
+    }
+
+    .MainBox.FormScreen.NoSidebar > h1,
+    .MainBox.FormScreen.NoSidebar > .AsteriskExplanation {
+        margin-left: 30%;
+    }
+
+    .RTL .MainBox.FormScreen > h1,
+    .RTL .MainBox.FormScreen > .AsteriskExplanation {
+        margin-right: 24%;
+    }
+
+    .RTL .MainBox.FormScreen.NoSidebar > h1,
+    .RTL .MainBox.FormScreen.NoSidebar > .AsteriskExplanation {
+        margin-right: 30%;
+    }
+*/
+    .OverviewBox > h1 {
+        display: flex;
+        font-size: var(--h1-font-size);
+        font-weight: var(--semi-bold);
+        margin: 0;
+        position: relative;
+        align-items: baseline;
+    }
+
+    .OverviewBox > h1 > .overview-breadcrumb {
+        display: flex;
+        gap: var(--gap-sm);
+        font-weight: var(--normal);
+        padding-left: var(--padding-xs);
+    }
+
+    .OverviewBox > h1 > .overview-breadcrumb > div:nth-child(odd) {
+        display: flex;
+        /*font-size: var(--main-font-size);*/
+        color: var(--main-font-color);
+    }
+
+    .OverviewBox > h1 > .overview-breadcrumb > div:nth-child(even) {
+        display: flex;
+        /*font-size: var(--main-font-size);*/
+    }
+
+    .OverviewBox > h1 > .overview-breadcrumb > div:first-child {
+        margin-left: var(--margin-sm);
+    }
+
+    /**
+    * @subsection  Bread crumb
+    */
+
+    .BreadCrumb {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        font-weight: var(--semi-bold);
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        position: relative;
+        overflow-y: hidden;
+        overflow-x: auto;
+        white-space: nowrap;
+        box-shadow: none;
+    }
+
+    .RTL .BreadCrumb {
+        padding-right: 10px;
+        padding-left: 15px;
+    }
+
+    .BreadCrumb li {
+        display: flex;
+        align-content: center;
+        /*margin: 0px 10px 0px 0px;*/
+        padding-left: var(--padding-md);
+        position: relative;
+        white-space: nowrap;
+        text-transform: uppercase;
+    }
+
+    /*.BreadCrumb li > a,
+    .BreadCrumb li > span {
+        line-height: 14px;
+        display: inline-block;
+        padding: 0px 2px 3px 2px;
+    }*/
+
+    .BreadCrumb li i {
+        font-size: var(--font-size-xl);
+        color: var(--bread-crumb);
+    }
+
+    .BreadCrumb li > span {
+        color: var(--bread-crumb-active);
+        /*font-size: var(--font-size-lg);*/
+        font-weight: var(--semi-bold);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .BreadCrumb li:first-child {
+        padding-left: 0;
+    }
+
+    /*
+    .BreadCrumb li:last-child {
+        padding-right: 0;
+        padding-left: var(--padding-md);
+        overflow: hidden;
+    }
+    */
+
+    .BreadCrumb li:last-child a{
+        color: var(--bread-crumb-active);
+    }
+
+    .BreadCrumb li:first-child a i {
+        font-size: 16px;
+        color: #777;
+    }
+
+    .BreadCrumb li:first-child a:hover i {
+        color: #333;
+    }
+
+    .RTL .BreadCrumb li {
+        padding-left: 0px;
+        padding-right: 20px;
+    }
+
+    .RTL .BreadCrumb li:first-child {
+        padding-right: 20px;
+    }
+
+    /*.BreadCrumb li:first-child:after,
+    .BreadCrumb li:first-child:before {
+        display: none;
+    }*/
+
+    .BreadCrumb a {
+        position: relative;
+        color: var(--bread-crumb);
+        font-size: var(--font-size-sm);
+    }
+
+    .BreadCrumb a:hover {
+        text-decoration: underline;
+    }
+
+    /*  'after' and 'before' pseudo-elements have been replaced by <i> icon
+    .BreadCrumb a:after {
+        position: absolute;
+        left: 0px;
+        width: 0px;
+        content: "";
+        bottom: 0px;
+        border-bottom: 1px solid #bbb;
+        transition: all ease 0.3s;
+    }
+
+    .BreadCrumb a:hover:after,
+    .BreadCrumb a:focus:after,
+    .BreadCrumb a:active:after {
+        width: 100%;
+    }
+
+    .BreadCrumb li:before,
+    .BreadCrumb li:after {
+        top: 4px;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-width: 6px;
+        margin-top: 1px;
+    }
+
+    .BreadCrumb li:after {
+        left: 0px;
+        border-color: rgba(255, 255, 255, 0);
+        border-left-color: var(--bread-crumb);
+    }
+
+    .RTL .BreadCrumb li:after {
+        border-left-color: transparent;
+        border-right-color: #fff;
+        left: auto;
+        right: 0px;
+    }
+
+    .BreadCrumb li:before {
+        left: -2px;
+        border-color: rgba(238, 238, 238, 0);
+        border-left-color: var(--main-bg-color);
+        z-index: 2;
+    }
+
+    .RTL .BreadCrumb li:before {
+        left: auto;
+        right: -2px;
+        border-right-color: transparent;
+        border-left-color: transparent;
+    }*/
+
+    /**
+    * @subsection  Standard Widths
+    */
+    .W10pc {
+        width: 10%;
+    }
+
+    .W20pc {
+        width: 20%;
+    }
+
+    .W25pc {
+        width: 25%;
+    }
+
+    .W33pc {
+        width: 33%;
+    }
+
+    .W50pc {
+        width: 50%;
+    }
+
+    .W60pc {
+        width: 60%;
+    }
+
+    .W70pc {
+        width: 70%;
+    }
+
+    .W75pc {
+        width: 75%;
+    }
+
+    .W80pc {
+        width: 80%;
+    }
+
+    .W90pc {
+        width: 90%;
+    }
+
+    .W95pc {
+        width: 95%;
+    }
+
+    .W100pc {
+        width: 100%;
+    }
+
+    .W50px {
+        width: 50px;
+    }
+
+    .W950px {
+        width: 950px;
+    }
+
+    /**
+    * @subsection  MessageBox
+    */
+
+    /*.MessageBox {
+        margin: 0px;
+        background: #F7AE40;
+        position: relative;
+        z-index: 0;
+    }
+
+    .MessageBox.WithIcon {
+        padding-left: 20px;
+    }
+
+    .MessageBox.WithIcon > i {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+    }
+
+    .MessageBox p {
+        padding: 10px 10px 10px 19px;
+    }
+
+    .MessageBox p,
+    .MessageBox a {
         color: #000;
     }
 
-    .TableFilterContainer input,
-    .TableFilterContainer input.FilterBox {
-        padding: 7px !important;
+    .MessageBox a:hover {
+        text-decoration: none;
+    }
+
+    .MessageBox > p + p {
+        margin-top: 2px;
+    }*/
+
+    .MessageBox.Confirmation {
+        background: #049E35;
+    }
+
+    /*.MessageBox.Error p,
+    .MessageBox.Error a,
+    .MessageBox.Confirmation p,
+    .MessageBox.Confirmation a {
+        color: rgba(255, 255, 255, 0.8);
+    }*/
+
+    .MessageBox p a:after {
+        content: "\2192";
+        display: inline-block;
+        font-size: 15px;
+        transition: margin ease 0.3s;
+    }
+
+    /*.MessageBox p a:hover:after {
+        margin-left: 5px;
+    }
+
+    .MessageBox.Info {
+        background-color: #2A5464;
+    }
+
+    .MessageBox.Info p,
+    .MessageBox.Info a {
+        color: rgba(255, 255, 255, 0.8);
+    }*/
+
+    .MessageBox.Info a,
+    .MessageBox.Error a {
+        transition: color ease 0.3s;
+    }
+
+    .MessageBox.Info a:hover,
+    .MessageBox.Error a:hover {
+        color: #fff;
+    }
+
+    .MessageBox a.Button:after {
+        content: "";
+    }
+
+    .MessageBox a.Button {
+        display: inline;
+        padding: 3px 7px;
+    }
+
+    .MessageBox a.Button:hover {
+        text-decoration: none;
+    }
+
+    .MessageBox.Info a.Button {
+        background-color: #3E6C7C;
+    }
+
+    .MessageBox.Info a.Button:hover {
+        background-color: #4B7C8E;
+    }
+
+    .MessageBox.Info a.Button i {
+        color: #89C6D1;
+    }
+
+    form > .MessageBox{
+        margin-top: 0;
+    }
+
+    /**
+    * @subsection  Flag
+    */
+
+    .Flag {
+        line-height: inherit;
+        transition: var(--main-transition);
+        width: var(--flag-width);
+        height: var(--flag-height);
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+    }
+
+    .RTL .Flag {
+        left: auto;
+        right: 6px;
+    }
+
+    .Flag.Small {
+        width: var(--flag-small-width);
+        height: var(--flag-small-height);
+        margin: 0;
+    }
+
+    .Flag span {
+        display: block;
+        height: 100%;
+        text-indent: -9999px;
+        cursor: pointer;
+        /* set a default color for priorities */
+        border-radius: var(--border-radius-xs);
+        background-color: var(--color-flag-default);
+    }
+
+    .Flag span.Escalated {
+        background-color: #ff505e;
+    }
+
+    .Flag span.New {
+        background-color: #8bef4d;
+    }
+
+    .Flag span.Warning {
+        background-color: #ffdd50;
+    }
+
+    /**
+    * @subsection  "Unread" star
+    */
+    span.UnreadArticles,
+    div.UnreadArticles {
+        display: block;
+        width: 16px;
+        height: 15px;
+        margin-left: 0;
+        font-weight: normal;
+        position: relative;
+        /*padding: 0px !important;*/
+    }
+
+    span.UnreadArticles i,
+    div.UnreadArticles i {
+        display: block;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 2;
+        font-size: 16px;
+        color: var(--border-color);
+    }
+
+    span.UnreadArticles em,
+    div.UnreadArticles em {
+        display: none;
+    }
+
+    span.UnreadArticles i:first-child,
+    div.UnreadArticles i:first-child {
+        color: var(--border-color);
+        font-size: 16px;
+        z-index: 1;
+        left: 0;
+        top: 0;
+    }
+
+    span.UnreadArticles.Remarkable i,
+    div.UnreadArticles.Remarkable i {
+        color: var(--color-icon-favorite);
+    }
+
+    span.UnreadArticles.Ordinary,
+    div.UnreadArticles.Ordinary {
+        color: var(--border-color);
+    }
+
+    tbody tr:hover span.UnreadArticles i {
+        color: #fff;
+    }
+
+    span.ImportantArticles {
+        display: inline-block;
+        width: 100%;
+        height: 16px;
+        color: var(--warning-color);
+        font-size: 14px;
+        text-align: center;
+    }
+
+    span.ImportantArticles em {
+        display: none;
+    }
+
+    span.ImportantArticles i {
+        color: var(--warning-color);
+    }
+
+    /**
+    * @subsection  Charts
+    */
+    .Chart {
+        width: 240px;
+        height: 200px;
+    }
+
+    #ChartTooltip {
+        padding: 2px 8px 3px;
+        background: #000;
+        color: #FFF;
+        font-size: 11px;
+        opacity: 0.8;
+        border-radius: 8px;
+        position: absolute;
+    }
+
+    /**
+    * @subsection  Datepicker
+    */
+    .DatepickerIcon i {
+        color: var(--gray-semi-dark);
+        font-size: var(--font-size-md);
+    }
+
+    /*.RTL .DatepickerIcon {
+        margin: 0 4px 0 0;
+    }*/
+
+    /* Vacation Days */
+    td.Highlight a.ui-state-default {
+        border: 1px solid var(--primary-color-calendar) !important;
+        background: var(--primary-color-calendar) !important;
+    }
+
+
+    /**
+    * @subsection  Autocompletion
+    */
+
+    .ui-autocomplete {
+        z-index: 20 !important;
+        max-height: 200px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .ui-autocomplete .ui-menu-item {
+        font-size: 11px;
+    }
+
+    .ui-overlay-autocomplete {
+        z-index: 6103 !important;
+    }
+
+    .ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
+        border: 0px;
+        margin: 0px;
+    }
+
+    .ui-menu-item:hover,
+    .ui-menu-item:focus,
+    .ui-menu-item:active,
+    .ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
+        background: #eee;
+    }
+
+    /**
+    * @subsection  Icons
+    */
+    .IconInline {
+        display: inline-block;
+    }
+
+    .IconReady {
+        width: 16px;
+        height: 16px;
+        background-image: url(../img/icons/tick.png);
+    }
+
+    .IconNotReady {
+        /*width: 16px;
+        height: 16px;
+        background-image: url(../img/icons/cross.png);*/
+        max-width: var(--btn-max-width-md);
+        min-height: var(--btn-min-height);
+        background: var(--primary-color);
+        padding: var(--padding-xs) var(--padding-sm);
+        border-radius: var(--border-radius-xs);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--main-transition);
+    }
+
+    .IconNotReady:hover {
+        background: var(--primary-color-darker);
+        cursor: pointer;
+    }
+
+    .IconNotReady::after {
+        content: 'View changes';
+        color: var(--btn-text-color);
+    }
+
+    .IconNotReady:hover::after {
+        color: var(--btn-primary-text-hover);
+    }
+
+    .IconNotReadyGrey {
+        width: 16px;
+        height: 16px;
+        background-image: url(../img/icons/cross_sw.png);
+    }
+
+    /**
+    * @subsection  Dialog popup width
+    */
+    iframe.TextOption {
+        width: 500px;
+        height: 400px;
+    }
+
+    iframe.TextOption.Customer {
+        width: 800px;
+    }
+
+    iframe.TextOption.CustomerUserAddressBook {
+        width: 960px;
+        min-height: 65vh;
+        max-height: 80vh;
+        margin: 0; /* this serves to nullify the default 20px padding in every widget's .Content */
+    }
+
+    @media only screen and (max-width: 1024px) {
+        iframe.TextOption.CustomerUserAddressBook {
+            width: 100%;
+        }
+    }
+
+    iframe.TextOption.FAQ {
+        width: 1025px;
+        min-height: 600px;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        iframe.TextOption.FAQ {
+            width: 100%;
+        }
+    }
+
+    iframe.FAQField {
+        width: 100%;
+        height: auto;
+    }
+
+
+    /**
+    * @subsection global search
+    */
+    #SearchForm,
+    #AgentCustomerInformationCenterSearchForm,
+    #AgentCustomerUserInformationCenterSearchForm,
+    #AgentTicketCustomerIDSelection {
+        min-width: 760px;
+        overflow-x: hidden;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        #SearchForm,
+        #AgentCustomerInformationCenterSearchForm,
+        #AgentCustomerUserInformationCenterSearchForm,
+        #AgentTicketCustomerIDSelection {
+            min-width: unset;
+            width: 100%;
+        }
+    }
+
+    #SearchForm #SearchProfile,
+    #AgentCustomerInformationCenterSearchForm #SearchProfile {
+        max-width: 350px;
+    }
+
+    /*#ArticleFilterDialogForm {
+        width: 480px;
+        max-height: 300px;
+    } - edit by beatriz on 18/1/2023 */
+
+    #ContextSettingsDialog {
+        /*width: 450px;*/
+        max-height: 100px;
+    }
+
+    /**
+    * @subsection global message format
+    */
+    .ArticleBody {
+        /*font-family: Roboto;*/
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        color: var(--black);
+        word-wrap: break-word;
+        background: var(--white);
+        min-height: 70px;
+    }
+
+    .ArticleHTML {
+        padding: 2px 5px;
+        font-size: 11px;
+        max-height: 100px;
+        background: #FFF;
+        min-height: 70px;
+    }
+
+    .ArticleMailContent .ArticleHTML {
+        max-height: none;
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    /**
+    * @subsection global jQuery UI optimizations
+    */
+    /*
+    * Bug #8288: Autocomplete search results show up in Times font when using Internet Explorer
+    */
+    .ui-menu-item {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .ui-menu .ui-menu-item a {
+        display: block;
+        padding: 2px;
+        border: 0px;
+    }
+
+    .ui-corner-all {
+        border-radius: 0px !important;
+    }
+
+    .ui-widget-header {
+        background: none !important;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: space-between;
+        border: 0 !important;
+        padding: 0 0 var(--padding-md) 0 !important;
+    }
+
+    .ui-widget.ui-widget-content {
+        /*font-family: Inter;*/
+        border-radius: var(--border-radius-sm) !important;
+        padding: var(--padding-md) !important;
+        margin-top: 22px;
+        margin-left: -2px !important;
+        border: var(--border-width) var(--border-solid) var(--border-color) !important;
+        background-color: var(--white);
+        z-index: 999999 !important; /* dialogs z-index are defaulted to 6100, this component's needs to be slightly higher than that */
+    }
+
+    .ui-state-default,
+    .ui-widget-content .ui-state-default,
+    .ui-widget-header .ui-state-default {
+        background: none !important;
+        border: 0 !important;
+        border-radius: var(--border-radius-sm);
+        color: var(--black);
+        font-weight: var(--normal);
+        font-size: 14px;
+        line-height: 32px;
+        text-align: center;
+    }
+
+    .ui-state-hover,
+    .ui-widget-content .ui-state-hover,
+    .ui-widget-header .ui-state-hover,
+    .ui-state-focus,
+    .ui-widget-content .ui-state-focus,
+    .ui-widget-header .ui-state-focus {
+        background: var(--gray-semi-light);
+    }
+
+    /**
+    * @subsection global CKEditor fixes/improvements
+    */
+
+    .cke_combo__fontsize .cke_combo_text {
+        width: 40px !important;
+    }
+
+    #cke_RichText,
+    .cke_toolbar > .cke_toolgroup,
+    .cke_toolbar .cke_combo_button,
+    .cke_inner .cke_contents,
+    .cke_dialog_body,
+    input.cke_dialog_ui_input_password,
+    input.cke_dialog_ui_input_text,
+    textarea.cke_dialog_ui_input_textarea {
+        border-radius: 0px !important;
+    }
+
+    .cke_contents {
+        min-height: 200px;
+    }
+
+    .cke_toolgroup > a {
+        padding: 4px 6px !important;
+    }
+
+    .cke_toolgroup .cke_button_on {
+        background-color: #ccc;
+    }
+
+    input.cke_dialog_ui_input_password:focus,
+    input.cke_dialog_ui_input_text:focus,
+    textarea.cke_dialog_ui_input_textarea:focus {
+        box-shadow: none !important;
+        border-color: var(--black) !important;
+    }
+
+    /**
+    * @subsection global nvd3 improvements/fixes
+    */
+
+    .nvtooltip {
+        font-size: 11px !important;
+        border: 0px !important;
+    }
+
+    /*
+    * @subsection Popup-Iframe (for responsive)
+    */
+    iframe.PopupIframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+    }
+
+    /* OTRS Business Solution Dialog */
+
+    .OTRSBusinessRequiredDialog {
+        background: url(../img/logo-business.png) no-repeat top center;
+    }
+
+    /**
+    * @subsection  Floaters
+    */
+
+    body > div.MetaFloater {
+        width: 600px;
+        height: 400px;
+        background: #fff;
+        box-shadow: 2px 1px 3px #aaa;
+        position: absolute;
         box-sizing: border-box;
+        z-index: 999;
+        margin-top: -5px;
+        border: 1px solid #eee;
+        border-top: 30px solid #eee;
+    }
+
+    body > div.MetaFloater:after,
+    body > div.MetaFloater:before {
+        bottom: 399px;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    body > div.MetaFloater.Left:after,
+    body > div.MetaFloater.Left:before {
+        left: 15px;
+        margin-top: -1px;
+    }
+
+    body > div.MetaFloater.Right:after,
+    body > div.MetaFloater.Right:before {
+        left: auto;
+        right: 15px;
+    }
+
+    body > div.MetaFloater.Bottom:after,
+    body > div.MetaFloater.Bottom:before {
+        bottom: auto;
+        top: 100%;
+    }
+
+    body > div.MetaFloater:after {
+        border-bottom-color: #eee;
+        border-width: 15px;
+        margin-left: -15px;
+    }
+
+    body > div.MetaFloater.Bottom:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-top-color: #fff;
+    }
+
+    body > div.MetaFloater:before {
+        border-color: rgba(170, 170, 170, 0);
+        border-bottom-color: #aaa;
+        border-width: 16px;
+        margin-left: -16px;
+    }
+
+    body > div.MetaFloater.Bottom:before {
+        border-color: rgba(170, 170, 170, 0);
+        border-top-color: #aaa;
+    }
+
+    body > div.MetaFloater > i.fa-spin {
+        position: absolute;
+        left: 50%;
+        font-size: 20px;
+        top: 50%;
+        margin-left: -10px;
+        margin-top: -10px;
+    }
+
+    body > div.MetaFloater > div.Content > iframe {
+        height: 200%;
+        left: -50%;
+        position: absolute;
+        top: -50%;
+        transform: scale(0.5);
+        width: 200%;
+    }
+
+    body > div.MetaFloater > div.Content > iframe.NoScale {
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        transform: scale(1.0);
         width: 100%;
     }
+
+    body > div.MetaFloater > a {
+        font-size: 15px;
+        padding: 8px 10px;
+        display: block;
+        position: absolute;
+        top: -30px;
+        text-align: right;
+        box-sizing: border-box;
+        height: 30px;
+        color: #555;
+    }
+
+    body > div.MetaFloater > div.Content {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        overflow: hidden;
+    }
+
+    body > div.MetaFloater > div.NoPreview {
+        display: none;
+        text-align: center;
+        width: 50%;
+        margin: 23% auto;
+        line-height: 150%;
+        color: #777;
+    }
+
+    body > div.MetaFloater > div.NoPreview i {
+        display: block;
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #777;
+    }
+
+    body > div.MetaFloater > a.Scale {
+        left: 0px;
+    }
+
+    body > div.MetaFloater > a.Open {
+        left: 25px;
+    }
+
+    body > div.MetaFloater > a.Close {
+        right: 0px;
+    }
+
+    /**
+    * @subsection  CKEditor Notifications
+    */
+
+    /*
+    Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
+    For licensing, see LICENSE.md or http://ckeditor.com/license
+    */
+
+    /**
+    * Progress notification structure:
+    *
+    * +---div.cke_notification cke_notification_info--------------------------+
+    * |                                                                       |
+    * | +---div.cke_notification_progress-----------------------------------+ |
+    * | |                                                                   | |
+    * | +-------------------------------------------------------------------+ |
+    * |                                                                       |
+    * | +---p.cke_notification_message--------------------------------------+ |
+    * | | Foo                                                               | |
+    * | +-------------------------------------------------------------------+ |
+    * |                                                                       |
+    * | +---a.cke_notification_close----------------------------------------+ |
+    * | | +---span.cke_label----------------------------------------------+ | |
+    * | | | X                                                             | | |
+    * | | +---------------------------------------------------------------+ | |
+    * | +-------------------------------------------------------------------+ |
+    * |                                                                       |
+    * +-----------------------------------------------------------------------+
+    *
+    *
+    * Warning notification structure:
+    *
+    * +---div.cke_notification cke_notification_warning-----------------------+
+    * |                                                                       |
+    * | +---p.cke_notification_message--------------------------------------+ |
+    * | | Foo                                                               | |
+    * | +-------------------------------------------------------------------+ |
+    * |                                                                       |
+    * | +---a.cke_notification_close----------------------------------------+ |
+    * | | +---span.cke_label----------------------------------------------+ | |
+    * | | | X                                                             | | |
+    * | | +---------------------------------------------------------------+ | |
+    * | +-------------------------------------------------------------------+ |
+    * |                                                                       |
+    * +-----------------------------------------------------------------------+
+    *
+    * Success and info notifications have the same structure as warning, but use
+    * `cke_notification_success` and `cke_notification_info` instead of `cke_notification_warning`.
+    */
+
+    .cke_notifications_area {
+        /* Prevent notification margin capture clicking. */
+        pointer-events: none;
+    }
+    .cke_notification {
+        pointer-events: auto;
+        position: relative;
+        margin: 10px;
+        width: 300px;
+        color: white;
+        border-radius: 3px;
+        text-align: center;
+        opacity: 0.95;
+        filter: alpha(opacity = 95);
+        box-shadow: 2px 2px 3px 0px rgba(50, 50, 50, 0.3);
+        -webkit-animation: FadeIn 0.7s;
+        animation: FadeIn 0.7s;
+    }
+
+    .cke_notification_message a {
+        color: #12306F;
+    }
+
+    .cke_notification_success {
+        background: #72B572;
+        border: 1px solid #63A563;
+    }
+
+    .cke_notification_warning {
+        background: #C83939;
+        border: 1px solid #902B2B;
+    }
+
+    .cke_notification_info {
+        background: #2E9AD0;
+        border: 1px solid #0F74A8;
+    }
+
+    .cke_notification_info span.cke_notification_progress {
+        background-color: #0F74A8;
+        display: block;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .cke_notification_message {
+        position: relative;
+        margin: 4px 23px 3px;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+        z-index: 4;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .cke_notification_close {
+        position: absolute;
+        cursor: pointer;
+        text-align: center;
+        top: 5px;
+        right: 1px;
+        padding: 0;
+        margin: 0;
+        z-index: 5;
+        opacity: 0.6;
+        filter: alpha(opacity = 60);
+    }
+
+    .cke_notification_close:after {
+        display: block;
+        height: 20px;
+        width: 20px;
+        content: "x";
+        color: #fff;
+    }
+
+    .cke_notification_close:hover {
+        opacity: 1;
+        filter: alpha(opacity = 100);
+    }
+
+    .cke_notification_close span {
+        display: none;
+    }
+
+    .cke_notification_warning a.cke_notification_close {
+        opacity: 0.8;
+        filter: alpha(opacity = 80);
+    }
+
+    .cke_notification_warning a.cke_notification_close:hover {
+        opacity: 1;
+        filter: alpha(opacity = 100);
+    }
+
+    /**
+    * @subsection File Upload
+    */
+
+    #FileUpload,
+    .FileUpload  {
+        padding: var(--padding-md) var(--padding-lg);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+        width: 100%;
+        /*margin-top: var(--margin-md);*/
+    }
+
+    input::-webkit-file-upload-button {
+        background: var(--primary-color);
+        color: var(--white);
+        border-radius: var(--border-radius-xs);
+        border: 0;
+        padding: 0 var(--padding-lg);
+        min-height: var(--btn-min-height);
+    }
+
+    input::-webkit-file-upload-button:hover {
+        color: var(--btn-primary-text-hover);
+        background: var(--primary-color-darker);
+        cursor: pointer;
+    }
+
+    input#FileUpload[type="file"] {
+        /*display: none;*/
+    }
+
+
+    /**
+    * @subsection AJAX Loader
+    */
+
+    .AJAXLoader {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        top: 12px;
+        left: -15px;
+        z-index: 100;
+    }
+
+    .AJAXLoader:after,
+    #Canvas .Activity .Loader:after,
+    .Loading > .Header h2:after,
+    .OverviewControl.Loading .ControlRow:after {
+        -webkit-animation: fa-spin 2s infinite linear;
+        animation: fa-spin 2s infinite linear;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        line-height: 12px;
+        content: "\f1ce";
+        font-family: FontAwesome;
+        font-size: 12px;
+        color: #777;
+    }
+
+    /*
+    * @subsection Media Query Reset-CSS (for desktop screen resolutions)
+    */
+    @media only screen and (min-width: 1025px) {
+
+        /*
+        * @subsection Responsive classes
+        */
+        .ScreenXL {
+            display: block !important;
+        }
+
+        .SmallerOrEqualScreenXL {
+            display: block !important;
+        }
+
+        .ScreenL, .ScreenM, .ScreenS, .ScreenXS,
+        .SmallerOrEqualScreenL, .SmallerOrEqualScreenM,
+        .SmallerOrEqualScreenS, .SmallerOrEqualScreenXS {
+            display: none !important;
+        }
+
+        /*
+        * @subsection Responsive footer classes
+        * @description Used to determinethe active screen size in JavaScript
+        */
+        #ResponsiveFooter .Visible-ScreenXL {
+            display: block !important;
+        }
+
+        #ResponsiveFooter .Visible-ScreenL,
+        #ResponsiveFooter .Visible-ScreenM,
+        #ResponsiveFooter .Visible-ScreenS,
+        #ResponsiveFooter .Visible-ScreenXS {
+            display: none !important;
+        }
+
+        .ResponsiveHandle {
+            display: none !important;
+        }
+
+        /*.ErrorBox, .SuccessBox {
+            margin: 0px 0px 20px 0px;
+            line-height: 150%;
+        }*/
+
+    }
+
+    /***********************************************************************/
+    /*    Moved from Core.Reset.Forwwward.css                              */
+    /***********************************************************************/
+
+    .BorderStyle {
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+    }
+    .border-hover:hover:before {
+        content: '';
+        width: 5px;
+        height: 100%;
+        top: -1px;
+        position: absolute;
+        background: var(--primary-color);
+        border-top-right-radius: var(--border-radius-xxl);
+        border-bottom-right-radius: var(--border-radius-xxl);
+        transition: var(--main-transition);
+    }
+
+    .CenterContent {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .text-divider {
+        text-align: center;
+        line-height: var(--btn-min-height);
+        padding: 0 var(--padding-md);
+    }
+
+
+
+    span.no-background,
+    div.no-background,
+    .card-item div.Field.no-background,
+    .no-background {
+        background: transparent;
+    }
+
+    .gray-semi-dark {
+        color: var(--gray-semi-dark) !important;
+    }
+
+
 }

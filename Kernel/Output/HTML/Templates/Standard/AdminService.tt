@@ -8,28 +8,8 @@
 # --
 
 [% RenderBlockStart("Overview") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Service Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Service Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% IF Data.ServiceID == "NEW"  %]
-        [% BreadcrumbPath.push({ Name => Translate("Add Service"),}) %]
-    [% ELSIF Data.ServiceID %]
-        [% USE EditTitle = String(Translate("Edit Service")) %]
-        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.ServiceName ) }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
 [% RenderBlockStart("ActionList") %]
             <div class="Header">
@@ -39,22 +19,21 @@
                 <ul class="ActionList">
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
 [% RenderBlockStart("ActionAdd") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ServiceEdit;ServiceID=NEW" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add Service") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ServiceEdit;ServiceID=NEW" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Add Service") | html %]</span></a>
                     </li>
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminCustomerUserService;Subaction=AllocateCustomerUser" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Edit default services") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminCustomerUserService;Subaction=AllocateCustomerUser" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Edit default services") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionAdd") %]
                 </ul>
             </div>
 [% RenderBlockEnd("ActionList") %]
         </div>
-
 [% RenderBlockStart("Filter") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -70,23 +49,23 @@
                 <h2>[% Translate('Related Actions') | html %]</h2>
             </div>
             <div class='Content'>
-                <ul class='ActionList SpacingTop'>
+                <ul class='ActionList'>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminSLA' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminSLA' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Service Level Agreements') | html %]
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminCustomerUserService' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUserService' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Customer Users ↔ Services') | html %]
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23Service' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23Service' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Configure Service Visibility and Defaults') | html %]
                             </span>
@@ -98,10 +77,33 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Service Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Service Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% IF Data.ServiceID == "NEW"  %]
+            [% BreadcrumbPath.push({ Name => Translate("Add Service"),}) %]
+        [% ELSIF Data.ServiceID %]
+            [% USE EditTitle = String(Translate("Edit Service")) %]
+            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.ServiceName ) }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
 [% RenderBlockStart("OverviewList") %]
-            <div class="Header">
+            <div class="Header filter-items">
                 <h2>[% Translate("List") | html %]</h2>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <span class="show-valid">Show Valid</span>
+                    <span class="show-all">Show All</span>
+                </a>
             </div>
             <div class="Content">
 
@@ -137,10 +139,8 @@
                         </tr>
                     </tbody>
                 </table>
-
             </div>
 [% RenderBlockEnd("OverviewList") %]
-
 [% RenderBlockStart("ServiceEdit") %]
             <div class="Header">
             [% IF Data.ServiceID == 'NEW' %]
@@ -150,7 +150,6 @@
             [% END %]
             </div>
             <div class="Content">
-
                 <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                     <input type="hidden" name="Subaction" value="ServiceSave"/>
@@ -160,118 +159,125 @@
                     [% END %]
 
                     <fieldset class="TableLike">
-
-                        <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Service") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="Name" id="Name" value="[% Data.NameShort | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
-                            <div id="NameError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
-                            [% IF Data.LongName %]
-                            <div id="NameServerError" class="TooltipErrorMessage" ><p>[% Translate("Service name maximum length is 200 characters (with Sub-service).") | html %]</p></div>
-                            [% ELSE %]
-                            <div id="NameServerError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
-                            [% END %]
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Service") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Name" id="Name" value="[% Data.NameShort | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
+                                <div id="NameError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                [% IF Data.LongName %]
+                                <div id="NameServerError" class="TooltipErrorMessage" ><p>[% Translate("Service name maximum length is 200 characters (with Sub-service).") | html %]</p></div>
+                                [% ELSE %]
+                                <div id="NameServerError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                [% END %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="ParentID">[% Translate("Sub-service of") | html %]: </label>
-                        <div class="Field">
-                            [% Data.ParentOptionStrg %]
+                        <div class="field-wrapper">
+                            <label for="ParentID">[% Translate("Sub-service of") | html %]</label>
+                            <div class="Field">
+                                [% Data.ParentOptionStrg %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
                         [% IF Data.IsITSMInstalled %]
-                            <label for="TypeID">[% Translate("Type") | html %]: </label>
-                            <div class="Field">
-                                [% Data.TypeOptionStrg %]
+                            <div class="field-wrapper">
+                                <label for="TypeID">[% Translate("Type") | html %]</label>
+                                <div class="Field">
+                                    [% Data.TypeOptionStrg %]
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label for="Criticality">[% Translate("Criticality") | html %]: </label>
-                            <div class="Field">
-                                [% Data.CriticalityOptionStrg %]
+                            <div class="field-wrapper">
+                                <label for="Criticality">[% Translate("Criticality") | html %]</label>
+                                <div class="Field">
+                                    [% Data.CriticalityOptionStrg %]
+                                </div>
                             </div>
-                            <div class="Clear"></div>
                         [% END %]
 
-                        <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
-                        <div class="Field">
-                            [% Data.ValidOptionStrg %]
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]</label>
+                            <div class="Field">
+                                [% Data.ValidOptionStrg %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="Comment">[% Translate("Comment") | html %]: </label>
-                        <div class="Field">
-                            <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="W50pc" maxlength="250"/>
+                        <div class="field-wrapper">
+                            <label for="Comment">[% Translate("Comment") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="W50pc" maxlength="250"/>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
-
 [% RenderBlockStart("Item") %]
 [% RenderBlockStart("InputKey") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]: </label>
-                        <div class="Field">
-                            <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W25pc"/>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W25pc"/>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("InputKey") %]
 [% RenderBlockStart("Input") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]: </label>
-                        <div class="Field">
-                            <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W25pc"/>
-                            <p class="FieldExplanation">[% Translate(Data.Desc) | html %]</p>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W25pc"/>
+                                <p class="FieldExplanation">[% Translate(Data.Desc) | html %]</p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("Input") %]
 [% RenderBlockStart("TextArea") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]: </label>
-                        <div class="Field">
-                            <textarea name="[% Data.Name | html %]" id="[% Data.Name | html %]" rows="[% Data.Rows | html %]" cols="[% Data.Cols | html %]">[% Data.SelectedID | html %]</textarea>
-                            <p class="FieldExplanation">[% Translate(Data.Desc) | html %]</p>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                            <div class="Field">
+                                <textarea name="[% Data.Name | html %]" id="[% Data.Name | html %]" rows="[% Data.Rows | html %]" cols="[% Data.Cols | html %]">[% Data.SelectedID | html %]</textarea>
+                                <p class="FieldExplanation">[% Translate(Data.Desc) | html %]</p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("TextArea") %]
 [% RenderBlockStart("Option") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
-                        <div class="Field">
-                            [% Data.Option %]
-                            <p class="FieldExplanation">[% Translate(Data.Desc) | html %]</p>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                [% Data.Option %]
+                                <p class="FieldExplanation">[% Translate(Data.Desc) | html %]</p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("Option") %]
 [% RenderBlockStart("Upload") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
-                        <div class="Field">
-                            <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="file" size="30" class="fixed"/><br/>
-                            <a href="">[% Data.Filename | html %]</a>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="file" size="30" class="fixed"/><br/>
+                                <a href="">[% Data.Filename | html %]</a>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("Upload") %]
 [% RenderBlockStart("Password") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]: </label>
-                        <div class="Field">
-                            <input type="password" class="W25pc" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="" />
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                <input type="password" class="W25pc" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="" />
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("Password") %]
 [% RenderBlockEnd("Item") %]
-                        <div class="Field SpacingTop">
-                            [% IF Data.ServiceID != 'NEW' %]
-                                <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                                [% Translate("or") | html %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                            [% ELSE %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% END %]
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-main btn-cancel-ghost btn-width-md">[% Translate("Cancel") | html %]</a>
+                                [% IF Data.ServiceID != 'NEW' %]
+                                    <button class="CallForAction Primary btn-main btn-primary-ghost btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                    <button class="CallForAction Primary btn-main btn-primary btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                [% ELSE %]
+                                    <button class="CallForAction Primary btn-main btn-primary-ghost btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% END %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
                     </fieldset>
-
                 </form>
             </div>
 [% RenderBlockEnd("ServiceEdit") %]
         </div>
     </div>
-    <div class="Clear"></div>
 </div>
 [% RenderBlockEnd("Overview") %]

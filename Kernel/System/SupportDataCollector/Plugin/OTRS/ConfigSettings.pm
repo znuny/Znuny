@@ -21,7 +21,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Config Settings');
+    return Translatable('Znuny') . '/' . Translatable('Config Settings');
 }
 
 sub Run {

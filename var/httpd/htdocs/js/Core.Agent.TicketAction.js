@@ -155,7 +155,7 @@ Core.Agent.TicketAction = (function (TargetNS) {
     function MarkPrimaryCustomer() {
         $('.CustomerContainer').children('div').each(function() {
             var $InputObj = $(this).find('.CustomerTicketText'),
-                $RadioObj = $(this).find('.CustomerTicketRadio');
+                $RadioObj = $(this).find('.RadioRound');
 
             if ($RadioObj.prop('checked')) {
                 $InputObj.addClass('MainCustomer');

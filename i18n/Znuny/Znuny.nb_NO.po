@@ -14,14 +14,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2018-09-20 13:03+0000\n"
-"Last-Translator: LarsMagnusHerland <lars.magnus@herland.priv.no>, 2019\n"
-"Language-Team: Norwegian Bokmål (Norway) (https://www.transifex.com/otrs/teams/23435/nb_NO/)\n"
+"PO-Revision-Date: 2023-03-29 08:46+0000\n"
+"Last-Translator: Peter Værlien <peter.varlien@kdrs.no>\n"
+"Language-Team: Norwegian Bokmål <https://translations.znuny.org/projects/znuny/znuny/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.16.4\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -191,7 +192,7 @@ msgstr "Lagre ACL"
 msgid "Save"
 msgstr "Lagre"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "or"
 msgstr "eller"
 
@@ -327,7 +328,7 @@ msgstr "Kalendernavn"
 msgid "Calendar with same name already exists."
 msgstr "Kalender med samme navn eksisterer allerede."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
 msgid "Color"
 msgstr "Farge"
 
@@ -855,7 +856,7 @@ msgstr "Eksempel på svar"
 msgid "Cloud Service Management"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data Collector"
 msgstr ""
 
@@ -863,7 +864,7 @@ msgstr ""
 msgid "Support data collector"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLog.tt
 msgid "Hint"
 msgstr "Hint"
 
@@ -875,7 +876,7 @@ msgstr ""
 msgid "It is highly recommended to send this data to OTRS Group in order to get better support."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessPrint.tt
 msgid "Configuration"
 msgstr "Konfigurasjon"
 
@@ -887,7 +888,7 @@ msgstr "Send support data"
 msgid "This will allow the system to send additional support data information to OTRS Group."
 msgstr "Dette vil tillate ditt system å sende tilleggsdatainformasjon til OTRS gruppen."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Update"
 msgstr "Oppdater"
 
@@ -3779,7 +3780,7 @@ msgstr ""
 msgid "Filter for Items"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Filter"
 msgstr "Filter"
 
@@ -4031,7 +4032,7 @@ msgstr ""
 msgid "Package installation requires patch level update of OTRS."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Please visit our customer portal and file a request."
 msgstr ""
 
@@ -4059,7 +4060,7 @@ msgstr ""
 msgid "Why should I keep Znuny up to date?"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "You will receive updates about relevant security issues."
 msgstr ""
 
@@ -4087,7 +4088,7 @@ msgstr "Gå til OTRS pakkehåndtereren"
 msgid "Sorry, but currently you can't downgrade due to the following packages which depend on %s:"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Vendor"
 msgstr "Forhandler"
 
@@ -4099,7 +4100,7 @@ msgstr ""
 msgid "You are about to downgrade to ((OTRS)) Community Edition and will lose the following features and all data related to these:"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
+#. Perl Module: Kernel/Output/HTML/Article/Chat.pm
 msgid "Chat"
 msgstr "Chat"
 
@@ -4591,7 +4592,7 @@ msgstr ""
 msgid "The field needs to be a literal word."
 msgstr "Feltet må inneholde et ord bestående av bokstaver"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Header"
 msgstr "Overskrift"
 
@@ -4699,7 +4700,7 @@ msgstr ""
 msgid "Copy Process"
 msgstr "Kopier prosess"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Cancel & close"
 msgstr "Avbryt og lukk"
 
@@ -5549,7 +5550,7 @@ msgstr "Filter for Roller"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
 msgid "Filter for roles"
-msgstr ""
+msgstr "Filter for roller"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
 msgid "Create a role and put groups in it. Then add the role to the users."
@@ -5785,7 +5786,7 @@ msgstr "Lukk denne dialogen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
 msgid "Certificate Details"
-msgstr ""
+msgstr "Detaljer om sertifikatet"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
 msgid "Salutation Management"
@@ -7419,7 +7420,7 @@ msgstr ""
 msgid "Statistics"
 msgstr "Statistikk"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Run"
 msgstr "Kjør"
 
@@ -7511,7 +7512,7 @@ msgstr ""
 msgid "Change Responsible of %s%s%s"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "All fields marked with an asterisk (*) are mandatory."
 msgstr ""
 
@@ -7519,7 +7520,7 @@ msgstr ""
 msgid "The ticket has been locked"
 msgstr "Saken har blitt låst"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Undo & close"
 msgstr ""
 
@@ -7691,7 +7692,7 @@ msgstr ""
 msgid "Please include at least one recipient"
 msgstr "Vennligst oppgi minst en mottaker"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
 msgid "Select one or more recipients from the customer user address book."
 msgstr ""
 
@@ -7759,7 +7760,7 @@ msgstr "Til kunde-bruker"
 msgid "Please include at least one customer user for the ticket."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
 msgid "Select this customer as the main customer."
 msgstr "Velg denne kunden som hovedkunden."
 
@@ -7899,7 +7900,7 @@ msgstr "Oppdateringstid"
 msgid "Solution Time"
 msgstr "Løsningstid"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Move ticket to a different queue"
 msgstr "Flytt saker til annen kø"
 
@@ -8455,7 +8456,7 @@ msgstr "Logg inn"
 msgid "Not yet registered?"
 msgstr "Ikke registrert enda?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
 msgid "Back"
 msgstr "Tilbake"
 
@@ -8499,7 +8500,7 @@ msgstr "Din e-postadresse (Dette vil bli ditt brukernavn)"
 msgid "Incoming Chat Requests"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerNavigationBar.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerHeader.tt
 msgid "Edit personal preferences"
 msgstr "Endre personlige innstillinger"
 
@@ -8703,11 +8704,11 @@ msgstr ""
 msgid "Notifications (OTRS Business Solution™)"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerHeader.tt
 msgid "Personal preferences"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerHeader.tt
 msgid "Logout"
 msgstr "Logg ut"
 
@@ -9583,7 +9584,7 @@ msgstr "Teller"
 msgid "Go back to the previous page"
 msgstr "Tilbake til forrige side"
 
-#. JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/AppointmentCalendar/CalendarSettingsDialog.html.tmpl
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
 msgid "Show"
 msgstr "Vis"
 
@@ -11329,7 +11330,7 @@ msgstr "Endre gruppens koplinger til roller"
 
 #. Perl Module: Kernel/Modules/AdminRoleUser.pm
 msgid "Role"
-msgstr ""
+msgstr "Rolle"
 
 #. Perl Module: Kernel/Modules/AdminRoleUser.pm
 msgid "Change Role Relations for Agent"
@@ -13079,19 +13080,19 @@ msgstr "Vis kunde-bruker"
 msgid "Offline"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/Dashboard/CustomerUserList.pm
+#. Perl Module: Kernel/Output/HTML/Dashboard/UserOnline.pm
 msgid "User is currently offline."
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/Dashboard/CustomerUserList.pm
+#. Perl Module: Kernel/Output/HTML/Dashboard/UserOnline.pm
 msgid "User is currently active."
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/Dashboard/CustomerUserList.pm
+#. Perl Module: Kernel/Output/HTML/Dashboard/UserOnline.pm
 msgid "Away"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/Dashboard/CustomerUserList.pm
+#. Perl Module: Kernel/Output/HTML/Dashboard/UserOnline.pm
 msgid "User was inactive for a while."
 msgstr ""
 
@@ -14279,7 +14280,7 @@ msgstr "Det bør være mer enn 60% ledig swap diskplass."
 msgid "There should be no more than 200 MB swap space used."
 msgstr "Det bær vær ikke være mer enn 200 MB brukt diskplass til swap."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
+#. SysConfig
 msgid "OTRS"
 msgstr "OTRS"
 
@@ -16119,7 +16120,7 @@ msgstr ""
 msgid "Complex %s with %s arguments"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSLineChart.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "No Data Available."
 msgstr ""
 
@@ -17034,7 +17035,7 @@ msgstr ""
 msgid "Christmas Eve"
 msgstr "Julaften"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
 msgid "Close"
 msgstr "Avslutt sak"
 
@@ -17106,7 +17107,7 @@ msgstr "Kommentar for nye historiske innlegg i kundeportalen."
 msgid "Comment2"
 msgstr "Kommentar2"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "Communication"
 msgstr "Kommunikasjon"
 
@@ -20918,7 +20919,7 @@ msgstr ""
 msgid "NameX"
 msgstr "NavnX"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid "New Ticket"
 msgstr "Ny sak"
 
@@ -24330,7 +24331,7 @@ msgstr ""
 msgid "Could not set attachments for ticket with ID %s in activity dialog \"%s\"!"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/Layout.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
 msgid "Last Views"
 msgstr ""
 
@@ -25676,5 +25677,761 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
 msgid "All agents who are mentioned in the ticket"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
+msgid "Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingDefault.tt
+msgid "This Znuny error handling backend module will be called internally to process the error handling mechanism."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "This Znuny invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "The data from the invoker of Znuny will be processed by this mapping, to transform it to the kind of data the remote system expects."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "The response data will be processed by this mapping, to transform it to the kind of data the invoker of Znuny expects."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Asynchronous event triggers are handled by the Znuny Scheduler Daemon in background (recommended)."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingSimple.tt
+msgid "matching"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingSimple.tt
+msgid "new value"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
+msgid "This Znuny operation backend module will be called internally to process the request, generating data for the response."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
+msgid "The request data will be processed by this mapping, to transform it to the kind of data Znuny expects."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Here you can specify the maximum size (in bytes) of REST messages that Znuny will process."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "e.g https://www.example.com:10745/api/v1.0 (without trailing backslash)"
+msgstr "f.eks. https://www.example.com:10745/api/v1.0 (uten skråstrek på slutten)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "e.g. /opt/znuny/var/certificates/SOAP/certificate.pem"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "e.g. /opt/znuny/var/certificates/SOAP/key.pem"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem"
+msgstr "f.eks. /opt/znuny/var/certificates/SOAP/CA/ca.pem"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "e.g. /opt/znuny/var/certificates/SOAP/CA"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
+msgid "e.g. https://example.com:8000/Webservice/Example"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
+msgid "e.g urn:example-com:soap:functions or http://www.example.com/GenericInterface/actions"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
+msgid "Here you can specify the maximum size (in bytes) of SOAP messages that Znuny will process."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
+msgid "Usually Znuny expects a response tag like \"&lt;Operation&gt;Response\". This setting can change the \"Response\" part, e. g. to \"Result\"."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
+msgid "In provider mode, Znuny offers web services which are used by remote systems."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
+msgid "In requester mode, Znuny uses web services of remote systems."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
+msgid "You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPGP.tt
+msgid "To be able to use PGP in Znuny, you have to enable it first."
+msgstr "For å kunne bruke PGP funksjonen i Znuny må du først aktivere den."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Manage Process Widget Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
+msgid "Filter Assigned Activity Dialogs"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid " Filter assigned fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
+msgid "Filter assigned Transition Actions"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
+msgid "To be able to use SMIME in Znuny, you have to enable it first."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
+msgid "There are currently no settings available. Please make sure to run 'znuny.Console.pl Maint::Config::Rebuild' before using the software."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
+msgid "The Znuny Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
+msgid "A running Znuny Daemon is mandatory for correct system operation."
+msgstr "En kjørende Znuny agent er påkrevd for at systemet skal kjøre riktig."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
+msgid "Starting the Znuny Daemon"
+msgstr "Innstillinger for Znuny Agenten"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
+msgid "Make sure that the file '%s' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
+msgid "Execute '%s start' to make sure the cron jobs of the 'znuny' user are active."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
+msgid "After 5 minutes, check that the Znuny Daemon is running in the system ('bin/znuny.Daemon.pl status')."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid " Show or hide the content"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid "Search inactive widgets"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid "Active Widgets"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid " Save changes"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid " Save"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid "Save changes"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid " Settings"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid " Refresh"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid " Close this widget"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid "Hide"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid " Cancel"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid " Filter available fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid " Submit"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
+msgid "Close and Back"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Save setting"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
+msgid "Choose from the groups on the left to find the settings you'd wish to change."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
+msgid "Read more about statistics in Znuny"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+msgid "Team Data"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+msgid "Ticket Data"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+msgid "Dynamic Info"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+msgid "Inform"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+msgid "Communications"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
+msgid "cancel"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid " Select one or more recipients from the customer user address book."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid " Cc"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid " Bcc"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid " Send mail"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
+msgid " Example Template"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
+msgid " To"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
+msgid " Select this customer as the main customer."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
+msgid " To customer user"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
+msgid " Get all"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
+msgid " Message body"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
+msgid "Start typing to filter..."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
+msgid "Expand/Collapse all"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+msgid "Notes"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+msgid " Select all"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+msgid " Open / Close ticket action menu"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+msgid " Select this ticket"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+msgid " Service Time"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+msgid " Move ticket to a different queue"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
+msgid "Clear all filters"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
+msgid "Filter assigned fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
+msgid " Missing channel"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
+msgid " Column Filters Form"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
+msgid " Loading"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
+msgid " Service level agreement"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
+msgid "Dymanic Info"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
+msgid " Subject"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
+msgid "Limitation"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
+msgid "Ticket Details"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
+msgid "Delete all activities"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
+msgid "Delete all"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
+msgid "Mark all activities as seen"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
+msgid "Seen all"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
+msgid "Overviews"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
+msgid "Personal views"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
+msgid "Search tools"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
+msgid "Create a new database for Znuny"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
+msgid "Use an existing database for Znuny"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
+msgid "A new database user with limited permissions will be created for this Znuny system."
+msgstr "En ny databasebruker med begrensede rettigheter vil bli opprettet for denne Znuny-installasjonen."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
+msgid "To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root."
+msgstr "For å kunne bruke Znuny, må følgende linje utføres på kommandolinjen som root."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
+msgid "After doing so your Znuny is up and running."
+msgstr "Etter dette vil Znuny være oppe og kjøre."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
+msgid "Sorry, but this feature of Znuny is currently not available for mobile devices. If you'd like to use it, you can either switch to desktop mode or use your regular desktop device."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
+msgid " Close this message"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/PublicDefault.tt
+msgid "This is the default public interface of Znuny! There was no action parameter given."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Test.tt
+msgid "Znuny Test Page"
+msgstr "Znuny Test-side"
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
+msgid "Select files or drop them here"
+msgstr ""
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
+msgid "Select a file or drop it here"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminACL.pm
+msgid "ACLs could not be Imported due to a unknown error, please check Znuny logs for more information"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
+msgid "Notifications could not be Imported due to a unknown error, please check Znuny logs for more information"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceWebservice.pm
+msgid "The imported file has not valid YAML content! Please check Znuny log for details"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceWebservice.pm
+msgid "Znuny as provider"
+msgstr "Znuny som en leverandør"
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceWebservice.pm
+msgid "Znuny as requester"
+msgstr "Znuny som en etterspørrer"
+
+#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+msgid "Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSystemConfiguration.pm
+msgid "System Configuration could not be imported due to an unknown error, please check Znuny logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+msgid "Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Install Znuny"
+msgstr "Installer Znuny"
+
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Install Znuny - Error"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/Notification/DaemonCheck.pm
+msgid "Znuny Daemon is not running."
+msgstr "Znuny tjenesten kjører ikke"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
+msgid "Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+msgid "Znuny Disk Partition"
+msgstr "Znuny diskpartisjon"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
+msgid "The partition where Znuny is located is almost full."
+msgstr "Partisjonen hvor Znuny er plassert, er nesten full."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
+msgid "The partition where Znuny is located has no disk space problems."
+msgstr "Partisjonen hvor Znuny er plasser, har igjen diskplass problemer."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
+msgid "Znuny"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
+msgid "The file system on your Znuny partition is not writable."
+msgstr "Filsystemet for din Znuny partisjon er ikke mulig å skrive til."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
+msgid "There are emails in var/spool that Znuny could not process."
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
+msgid "Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
+msgid "Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+msgid "Znuny time zone"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+msgid "Znuny time zone is not set."
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+msgid "Znuny Version"
+msgstr "Znuny versjon"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/MPMModel.pm
+msgid "Znuny requires apache to be run with the 'prefork' MPM model."
+msgstr "Znuny krever Apache for å kunne kjøre 'prefork' MPM modellen."
+
+#. XML Definition: Kernel/Config/Files/XML/Calendar.xml
+msgid "Znuny doesn't support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Daemon.xml
+msgid "Defines the module to display a notification in the agent interface if the Znuny Daemon is not running."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Daemon.xml
+msgid "Type of daemon log rotation to use: Choose 'OTRS' to let Znuny system to handle the file rotation, or choose 'External' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of Znuny)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the HTTP hostname for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the Znuny Daemon)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the Znuny Daemon)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Disable HTTP header \"X-Frame-Options: SAMEORIGIN\" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Adds a suffix with the actual year and month to the Znuny log file. A logfile for every month will be created."
+msgstr "Legger til år og måned på loggfilens navn. Dette gjør at man får én logg-fil per måned."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the name of the session key. E.g. Session, SessionID or Znuny."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Sets the time zone that will be assigned to newly created users and will be used for users that haven't yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user's time zone."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your Znuny instance to stop working (probably any mask which takes input from the user)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the Znuny user. Otherwise, there will be problems with the privileges when accessing .gnupg folder."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "If \"LDAP\" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use Znuny. Specify the group, who may access the system."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the shown links in the footer area of the customer and public interface of this Znuny system. The value in \"Key\" is the external URL, the value in \"Content\" is the shown label."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Znuny can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image."
+msgstr "Definerer et filter for HTML-visning for å legge til lenker bak CVE-nummer. Bilde-elementet tillater to typer inn-data. Enten navnet på en bilde-fil (f.eks. bilde01.png), der Znuny vil gå utfra at bildet ligger i Znuny sin bildemappe. Eller man kan oppgi URL til et bilde."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image."
+msgstr "Definerer et filter for HTML-visning som legger til lenker bak BugTraq-numre. Bilde-elementet tillater to typer inn-data. Enten navnet på en bildefil (f.eks. bilde01.png), der Znuny vil gå utfra at bildet ligger i Znuny sin bildemappe. Eller man kan oppgi URL til et bilde."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image."
+msgstr "Definerer et filter i HTML-visningen for å legge til lenker bak MSBulletin-nummer. Bildeelementet tillater to typer inn-data. Enten navnet på en bilde-fil (f.eks. bilde01.png), der Znuny vil gå utfra at bildet ligger i Znuny sin bildemappe. Eller man kan oppgi URL til et bilde."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image."
+msgstr "Sett et filter for HTML-visning som legger til lenker bak en gitt tekst. Bildeelementet tillater to typer inn-data. For det første navnet på et bilde (f.eks. bilde01.png). I det tilfellet vil Znuny sin bilde-sti brukes. Den andre muligheten er å skrive inn URL til bildet"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image."
+msgstr "Definerer et filter for HTML-visning som legger til lenker bak en definert tekst. Bilde-elementet tillater to typer inn-data. Enten navnet på en bilde-fil (f.eks. bilde01.png), der Znuny vil gå utfra at bildet ligger i Znuny sin bildemappe. Eller man kan oppgi URL til et bilde."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "If enabled, the Znuny version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "If enabled, Znuny will deliver all CSS files in minified form."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "If enabled, Znuny will deliver all JavaScript files in minified form."
+msgstr "Hvis slått på vil Znuny levere alle JavaScript-filer i minimert form"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "List of JS files to always be loaded for the admin interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "IndexAccelerator: to choose your backend TicketViewAccelerator module. \"RuntimeDB\" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). \"StaticDB\" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command \"bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild\" for initial index creation."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Saves the attachments of articles. \"DB\" stores all data in the database (not recommended for storing big attachments). \"FS\" stores the data on the filesystem; this is faster but the webserver should run under the Znuny user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when \"FS\" is used."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use \"bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Basic fulltext index settings. Execute \"bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild\" in order to generate a new index."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the valid states for unlocked tickets. To unlock tickets the script \"bin/znuny.Console.pl Maint::Ticket::UnlockTimeout\" can be used."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the length of the article preview in the customer interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Executes follow-up checks on Znuny Header 'X-OTRS-Bounce'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter \"Ticket Event Module\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Assignment between event and type."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the link type for each activity."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "An error occurred"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "The activity could not be created. %s is needed."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "The activity could not be created."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "The activity could not be updated."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "The activity could not be deleted."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "The activity could not be marked as new."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "The activity could not be marked as seen."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "The activities could not be marked as seen."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
+msgid "This option is currently disabled because the Znuny Daemon is not running."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
+msgid "Insert selected customer user(s) into the \"%s:\" field."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
+msgid "Information about the Znuny Daemon"
+msgstr "Informasjon om Znuny Agenten"
+
+#. SysConfig
+msgid "Activity LinkTarget"
+msgstr ""
+
+#. SysConfig
+msgid "Activity Notification"
+msgstr ""
+
+#. SysConfig
+msgid "Activity."
+msgstr ""
+
+#. SysConfig
+msgid "Create Process Ticket"
+msgstr ""
+
+#. SysConfig
+msgid "Search tickets."
+msgstr ""
+
+#. SysConfig
+msgid "SearchTemplate"
+msgstr ""
+
+#. SysConfig
+msgid "Ticket Search"
+msgstr ""
+
+#. SysConfig
+msgid "open in current tab"
+msgstr ""
+
+#. SysConfig
+msgid "open in new tab"
 msgstr ""
 

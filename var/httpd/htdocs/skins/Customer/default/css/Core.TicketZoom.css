@@ -9,481 +9,768 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
-/**
- * @package     OTRS Framework - Skin "Default"
- * @section     TicketZoom
- */
+    /**
+     * @package     OTRS Framework - Skin "Default"
+     * @section     TicketZoom
+     */
+
+    /**
+     * @section     Header
+     */
+
+
+    .TicketHeader {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: var(--gap-sm);
+        padding-bottom: var(--padding-sm);
+        width: 100%;
+    }
+
+    .RTL .TicketHeader h2 {
+        padding: 10px 36px 15px 0px;
+        float: right;
+    }
+
+    #TicketOptions {
+        position: relative;
+        overflow: hidden;
+        margin-left: auto;
+    }
+
+    .RTL #TicketOptions {
+        right: auto;
+        left: 0px;
+    }
+
+    #TicketOptions li {
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+    #TicketOptions .Print,
+    #TicketOptions .ZoomExpand {
+        color: #777;
+        font-size: 15px;
+    }
+
+    #TicketOptions .ZoomExpand {
+        display: none;
+    }
+
+    #TicketOptions .Print:hover,
+    #TicketOptions .ZoomExpand:hover {
+        color: #f92;
+    }
+
+    #TicketOptions .ZoomExpand.ExpandAll .fa-minus {
+        display: none;
+    }
+
+    #TicketOptions .ZoomExpand.ExpandOne .fa-bars {
+        display: none;
+    }
+
+    .RTL #TicketOptions .ZoomExpandAll {
+        margin: -2px 4px 0 0;
+    }
+
+    .TicketZoom .Age {
+        width: auto;
+        padding: 0;
+    }
+
+
+
+    /* #FollowUp  {
+        margin: 0 13px 8px;
+        color: #6A6A6A;
+        background: #eee;
+        border-left: 1px solid #D6D6D6;
+        border-right: 1px solid #D6D6D6;
+        position: relative;
+        width: 77%;
+        float: left;
+    } */
+
+    #FollowUp.Visible {}
+
+    .JavaScriptAvailable #FollowUp #Messenger {
+        /*height: 0;*/
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+    }
+
+    #FollowUp.Visible #Messenger {
+        height: auto;
+        border-top: 1px solid #EEE;
+    }
+
+    #Messenger #Subject {}
+
+    #Messenger textarea {
+        display: block;
+    }
+
+    #Messenger textarea:focus {
+        border-color: #888;
+    }
+
+    #Messenger fieldset {
+    }
+
+    .Attachment {
+        padding: 9px 0 4px 138px;
+    }
+
+    .RTL .Attachment {
+        padding: 9px 138px 4px 0;
+    }
+
+    #Messenger .ActionRow {
+        border: 0;
+    }
+
+    /* #ReplyButton {
+        bottom: -22px;
+        height: 10px;
+        margin: 0 13px;
+        padding: 4px 8px 7px 8px;
+        color: #999;
+        background: #F0F0F0 no-repeat 6px 6px;
+        border: 1px solid #D6D6D6;
+        border-top: none;
+        display: none;
+        position: absolute;
+        -webkit-box-shadow: 0 0 3px #F6F9F9;
+        box-shadow: 0 0 2px #F6F9F9;
+    } */
+
+    .JavaScriptAvailable #ReplyButton {
+        display: block;
+        margin-top: 20px;
+    }
+
+    #ReplyButton:hover {
+        color: #555;
+    }
+
+    .Visible #ReplyButton {
+        display: none;
+    }
+
+
+    /**
+     * @subsection  Ticket Detail
+     */
+
+    .TicketZoom .ZoomForm {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+        width: 100%;
+     }
+
+    /* Ticket Detail - Info */
+
+    .TicketZoom .ZoomForm .ZoomInfo {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+    }
+
+    /* Metadata */
+
+    .TicketZoom .ZoomForm .ZoomInfo .Metadata-wrapper {
+        padding: var(--padding-md);
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Metadata {
+        display: flex;
+        overflow: hidden;
+        flex-wrap: wrap;
+        gap: var(--gap-md);
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .TicketZoom .ZoomForm .ZoomInfo #Metadata {
+            gap: var(--gap-lg);
+        }
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Metadata li.Header {
+        display: none;
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Metadata li {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+        flex-basis: calc(25% - 15px);
+        padding: var(--padding-xs);
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .TicketZoom .ZoomForm .ZoomInfo #Metadata li {
+            flex-basis: 100%;
+            padding: 0;
+        }
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Metadata li::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -10px;
+        width: 1px;
+        height: 100%;
+        background-color: var(--gray-semi-light);
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Metadata li::after {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--gray-semi-light);
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .TicketZoom .ZoomForm .ZoomInfo #Metadata li::after {
+            top: -15px;
+        }
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Metadata li .Key {
+        font-size: var(--main-font-size);
+        font-weight: var(--medium);
+        letter-spacing: 0.2px;
+        color: var(--gray-semi-dark);
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Metadata li .Value {
+        display: flex;
+        align-self: baseline;
+        font-size: var(--font-size-md);
+        color: var(--black);
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .TicketZoom .ZoomForm .ZoomInfo #Metadata li .Value {
+            font-size: var(--font-size-sm);
+        }
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Metadata li .Value.pill {
+        font-size: var(--font-size-sm);
+    }
+
+    /* Activities */
+
+    .TicketZoom .ZoomForm .ZoomInfo .Activities-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo .Activities-wrapper:empty {
+        display: none !important;
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Activities {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+        padding: var(--padding-xs);
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Activities .MessageHeader .Key {
+        font-size: var(--main-font-size);
+        font-weight: var(--medium);
+        letter-spacing: 0.2px;
+        color: var(--gray-semi-dark);
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Activities ul.next-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gap-lg);
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Activities ul.next-links li {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+        /*flex-basis: calc(25% - 15px);*/
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Activities ul.next-links li a {
+        line-height: 160%;
+        display: flex;
+        align-self: baseline;
+        color: var(--primary-color);
+        border-bottom: 1px solid transparent;
+        transition: var(--main-transition);
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Activities ul.next-links li a:hover {
+        border-bottom: 1px solid var(--primary-color);
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Activities .no-activity {
+        display: flex;
+        gap: var(--gap-sm);
+    }
+
+    .TicketZoom .ZoomForm .ZoomInfo #Activities .no-activity p {
+        color: var(--black);
+    }
+
+    /* Ticket Detail - Main Form */
+
+    .TicketZoom .ZoomForm .main-content-wrapper {
+        display: flex;
+        gap: var(--gap-md);
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper .MessageContent iframe {
+        overflow: hidden !important;
+        height: 46px !important;
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper .MessageContent iframe {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper .MessageContent iframe > body {
+        background-color: red;
+    }
+
 
 /**
- * @section     Header
- */
+* @section     Messages List
+*/
 
-.TicketZoom .Content {
-    padding: 8px 10px 0;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages {
+        display: flex;
+        flex-basis: 100%;
+    }
 
-.TicketHeader {
-    width: 80%;
-    overflow: hidden;
-    position: relative;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        gap: var(--gap-md);
+        flex-basis: 100%;
+    }
 
-.TicketHeader h2 {
-    margin: 3px 0 0;
-    padding: 10px 64px 15px 36px;
-    font-size: 24px;
-    line-height: 24px;
-    position: relative;
-    float: left;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background: var(--white);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+        transition: var(--main-transition);
+        cursor: pointer;
+    }
 
-.RTL .TicketHeader h2 {
-    padding: 10px 36px 15px 0px;
-    float: right;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li:hover {
+        background: var(--gray-light);
+    }
 
-.Flag span.PriorityID-1 {
-    background-color:#03c4f0;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li a {
+        position: relative;
+        display: flex;
+        flex-basis: 100%;
+    }
 
-.Flag span.PriorityID-2 {
-    background-color:#83bfc8;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageHeader a  {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        flex-basis: 100%;
+        gap: var(--gap-md);
+        padding: var(--padding-lg) var(--padding-lg) var(--padding-sm) var(--padding-lg);
+        overflow: hidden;
+    }
 
-.Flag span.PriorityID-3 {
-    background-color:#cdcdcd;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageHeader a .message-user-avatar {
+        display: flex;
+        width: 42px;
+        height: 42px;
+        border: 1px solid transparent;
+        border-radius: 50px;
+        cursor: pointer;
+        overflow: hidden;
+    }
 
-.Flag span.PriorityID-4 {
-    background-color:#ffaaaa;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageHeader a .message-user-avatar img {
+        width: 100%;
+    }
 
-.Flag span.PriorityID-5 {
-    background-color:#ff505e;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageHeader a .message-info {
+        display: flex;
+        flex-basis: calc(100% - 63px);
+        flex-direction: column;
+        gap: var(--gap-xs);
+    }
 
-.Flag {
-    top: 15px;
-    left: 6px;
-    width: 21px;
-    height: 16px;
-    line-height: 16px;
-    text-indent: -9999px;
-    position: absolute;
-    display: block;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageHeader a .message-info .message-user {
+        color: var(--primary-color);
+        width: calc(100% - 50px);
+    }
 
-.RTL .Flag {
-    left: auto;
-    right: 6px;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageHeader a .message-info h3 {
+        color: var(--black);
+        font-weight: var(--semi-bold);
+    }
 
-.Flag span {
-    height: 15px;
-    line-height: 15px;
-    border: 1px solid transparent;
-    border-bottom: none;
-    display: block;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageHeader a .message-info .Age {
+        position: absolute;
+        top: var(--padding-lg);
+        right: var(--padding-lg);
+        color: var(--black);
+    }
 
-#ZoomSidebar {
-    float: right;
-    width: 18%;
-}
+    .RTL .MessageHeader .Age {
+        left: 8px;
+        right: auto;
+    }
 
-#Metadata, #Activities {
-    line-height: 20px;
-    float: right;
-    margin-right: 5px;
-    width: 100%;
-    padding: 0px 0px 7px 0px;
-    border: 1px solid #E9E9E9;
-    border-bottom: 1px solid #DDD;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--gap-sm);
+        overflow: hidden;
+        padding: 0 var(--padding-lg) var(--padding-lg) var(--padding-lg)
+    }
 
-#Activities {
-    margin-top: 20px;
-    padding: 0px;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .MessageBody {
+        height: auto;
+    }
 
-#Activities li {
-    padding: 3px 10px;
-    border-bottom: 1px solid #ddd;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .Details {
+        display: flex;
+        justify-content: center;
+        width: 42px;
+    }
 
-#Activities li:last-child {
-    border-bottom: 0px;
-}
+    .Details > div {
 
-.RTL #Metadata {
-    float: left;
-}
+    }
 
-#Metadata li {
-    padding: 2px 10px;
-}
+    .Details .Label {
+        width: 65px;
+        margin: 0 3px;
+        color: #AAA;
+        float: left;
+        text-align: right;
+    }
+    .RTL .Details .Label {
+        text-align: left;
+    }
 
-#Metadata li.Header {
-    padding: 0px;
-    margin-bottom: 7px;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .Details .Attachments {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        padding-top: 10px;
+    }
 
-#Activities li.Header {
-    padding: 0px;
-}
+    .Details .Attachments .Label {
+        text-indent: -9999px;
+        text-align:left;
+    }
+    .RTL .Details .Attachments .Label {
+        text-indent: -9999px;
+        text-align:right;
+    }
 
-#Metadata li.Header div.MessageHeader,
-#Activities li.Header div.MessageHeader {
-    padding: 2px 10px 1px 10px;
-}
+    .Details .Attachments div {
+        display: inline;
+        white-space: normal;
+    }
 
-#Metadata li .Key {
-    color: #666;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .Details .Attachments .DownloadAttachment,
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .Details .Attachments .Label {
+        display: none;
+    }
 
-#TicketOptions {
-    position: absolute;
-    right: 0px;
-    top: 20px;
-    overflow: hidden;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .Details .Attachments i {
+        display: none;
+        color: var(--gray-dark);
+        font-size: var(--font-size-md);
+    }
 
-.RTL #TicketOptions {
-    right: auto;
-    left: 0px;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .Details .Attachments div:nth-child(2) i {
+        display: block;
+    }
 
-#TicketOptions li {
-    display: inline-block;
-    margin-left: 5px;
-}
+    .DownloadAttachment a {
+        color: #000;
+    }
 
-#TicketOptions .Print,
-#TicketOptions .ZoomExpand {
-    color: #777;
-    font-size: 15px;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .MessageContent {
+        display: flex;
+        flex-basis: calc(100% - 63px);
+        -webkit-overflow-scrolling: touch;
+        overflow: auto;
+    }
 
-#TicketOptions .Print:hover,
-#TicketOptions .ZoomExpand:hover {
-    color: #f92;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .MessageContent .ArticleBody {
+        font-family: Arial, sans-serif;
+        color: var(--black);
+    }
 
-#TicketOptions .ZoomExpand.ExpandAll .fa-minus {
-    display: none;
-}
+    #NoArticles {
 
-#TicketOptions .ZoomExpand.ExpandOne .fa-bars {
-    display: none;
-}
+    }
 
-.RTL #TicketOptions .ZoomExpandAll {
-    margin: -2px 4px 0 0;
-}
+    #NoArticles li {
 
-.TicketZoom .Age {
-    width: auto;
-    padding: 0;
-}
+    }
+
+    .TicketZoom iframe {
+        width: 100%;
+        border: none;
+    }
+
+    /* Item List - Selected */
+
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible {
+        background: var(--primary-color);
+    }
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .MessageHeader a .message-info .message-user,
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .MessageHeader a .message-info h3,
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .MessageHeader a .message-info .Age,
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .MessageBody .Details .Attachments i,
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .MessageBody .MessageContent .ArticleBody {
+        color: var(--white);
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .MessageHeader a:hover {
+        background: transparent;
+    }
 
 /**
- * @section     Messages
- */
+* @section     Ticket Detail - Message Form
+*/
 
-#Messages {
-    border: 1px solid #E9E9E9;
-    border-bottom: 1px solid #DDD;
-    position: relative;
-    z-index: 10;
-    width: 80%;
-    float: left;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper {
+        display: flex;
+        flex-direction: column;
+        flex: 2;
+        gap: var(--gap-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        align-self: baseline;
+    }
 
-#Messages li {
-    position: relative;
-}
+    @media only screen and (max-width: 1024px) {
+        .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li{
+            overflow: hidden;
+        }
 
-#Messages li:last-child .MessageHeader,
-#Messages li.Visible:last-child .MessageContent {
-    border-width: 0;
-}
+        .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper {
+            width: 100%;
+            border: none;
+            border-radius: 0;
+        }
 
-#Messages li.Visible:last-child .MessageHeader {
-    border-width: 1px;
-}
+        .Visible #VisibleMessageContent .MessageHeader {
+            display: none;
+        }
 
-.MessageHeader {
-    padding: 5px 8px 3px;
-    color: #6A6A6A;
-    background-color: #eee;
-    border-bottom: 1px solid #D6D6D6;
-    position: relative;
-}
+        .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .main-card-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-lg);
+        }
 
-.Visible .MessageHeader,
-.Visible .MessageHeader a {
-    color: #222;
-}
+        .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .main-card-item .MessageBody {
+            padding: 0;
+        }
 
-.MessageHeader a {
-    color: #6A6A6A;
-}
+        .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .main-card-item .MessageBody .Iframe {
+            width: 100%;
+        }
+    }
 
-.MessageHeader h3 {
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 90%;
-    line-height: 130%;
-}
+    /* MESSAGE HEADER */
 
-.MessageHeader h3 span {
-    font-weight: normal;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageHeader a {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        flex-basis: 100%;
+        gap: var(--gap-md);
+        padding: 0;
+    }
 
-.MessageHeader .Age {
-    position: absolute;
-    top: 5px;
-    right: 8px;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageHeader a .message-user-avatar {
+        display: flex;
+        width: 42px;
+        height: 42px;
+        border: 1px solid transparent;
+        border-radius: 50px;
+        cursor: pointer;
+        overflow: hidden;
+    }
 
-.RTL .MessageHeader .Age {
-    left: 8px;
-    right: auto;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageHeader a .message-user-avatar img {
+        width: 100%;
+    }
 
-.MessageBody {
-    height: 0;
-    overflow: hidden;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageHeader a .message-info {
+        display: flex;
+        flex-basis: calc(100% - 63px);
+        flex-direction: column;
+        justify-content: space-around;
+    }
 
-#Messages li.Visible .MessageBody {
-    height: auto;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageHeader a .message-info h3 {
+        color: var(--black);
+        font-weight: var(--semi-bold);
+        font-size: var(--font-size-lg);
+    }
 
-#NoArticles {
-    border: 1px solid #E9E9E9;
-    border-bottom: 1px solid #DDD;
-    position: relative;
-    z-index: 10;
-    width: 80%;
-    float: left;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageHeader a .message-info .Age {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: var(--black);
+    }
 
-#NoArticles li {
-    line-height: 30px;
-    padding: 2px 10px;
-    border-top: 1px solid #FFF;
-    position: relative;
-}
+    /* MESSAGE BODY */
 
-.SeperatorRow {
-    border-top: 1px solid #FFF;
-    border-bottom: 1px solid #E8E8E8;
-    background: #FCFCFC;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-xs);
+    }
 
-.Details {
-    padding: 4px 13px;
-    font-size: 11px;
-    color: #525252;
-    line-height: 16px;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details {
+        display: flex;
+    }
 
-.Details > div {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .Label {
+        display: none;
+    }
 
-.Details .Label {
-    width: 65px;
-    margin: 0 3px;
-    color: #AAA;
-    float: left;
-    text-align: right;
-}
-.RTL .Details .Label {
-    text-align: left;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gap-sm);
+        padding: var(--padding-md) 0;
+    }
 
-.Details .Attachments {
-    padding-top: 2px;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments div {
+        display: flex;
+        gap: var(--gap-sm);
+        align-items: baseline;
+    }
 
-.Details .Attachments .Label {
-    text-indent: -9999px;
-    text-align:left;
-}
-.RTL .Details .Attachments .Label {
-    text-indent: -9999px;
-    text-align:right;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments i {
+        display: none;
+        height: 20px;
+        color: var(--gray-dark);
+        font-size: var(--font-size-md);
+    }
 
-.Details .Attachments div {
-    display: inline;
-    white-space: normal;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments div:nth-child(2) i {
+        display: block;
+    }
 
-.Details .Attachments span {
-    margin-right: 12px;
-}
 
-.RTL .Details .Attachments span {
-    margin-right: 0;
-    margin-left: 12px;
-}
+    /* .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment {
+        display: flex;
+        align-self: baseline;
+    }
 
-.DownloadAttachment a {
-    color: #000;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a {
+        transition: var(--main-transition);
+        display: flex;
+        gap: var(--gap-sm);
+        padding: var(--padding-xs) var(--padding-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-xl);
+    }
 
-.MessageContent {
-    padding: 13px 8px;
-    background: #FFF;
-    border-bottom: 1px solid #E9E9E9;
-    -webkit-overflow-scrolling: touch;
-    overflow: auto;
-    width: 98%;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a:hover {
+        background: var(--gray-light);
+    }
 
-.TicketZoom iframe {
-    width: 100%;
-    border: none;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .name {
+        font-size: var(--main-font-sm);
+    }
 
-#FollowUp  {
-    margin: 0 13px 8px;
-    color: #6A6A6A;
-    background: #eee;
-    border-left: 1px solid #D6D6D6;
-    border-right: 1px solid #D6D6D6;
-    position: relative;
-    width: 77%;
-    float: left;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-weight {
+        font-size: var(--font-size-xs);
+    } */
 
-#FollowUp.Visible {
-    border-bottom: 1px solid #D6D6D6;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .MessageContent {
+        padding: 0;
+    }
 
-.JavaScriptAvailable #FollowUp {
-    margin-bottom: 30px;
-}
 
-.JavaScriptAvailable #FollowUp #Messenger {
-    height: 0;
-    overflow: hidden;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment {
+        display: flex;
+        width: auto;
+    }
 
-#FollowUp.Visible #Messenger {
-    height: auto;
-    border-top: 1px solid #EEE;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        transition: var(--main-transition);
+    }
 
-#Messenger #Subject {
-    width: 300px;
-    color: #444;
-    background: transparent;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a:hover {
+        background: var(--table-td-even-bg);
+    }
 
-#Messenger textarea {
-    display: block;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-info {
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-sm) var(--padding-xs) var(--padding-sm) var(--padding-sm);
+        gap: var(--gap-sm);
+    }
 
-#Messenger textarea:focus {
-    border-color: #888;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-name {
+        color: var(--primary-color);
+    }
 
-#Messenger fieldset {
-    margin: 8px 7px 10px;
-    border-color: #D6D6D6;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-weight {
+        color: var(--gray-semi-dark);
+    }
 
-.Attachment {
-    padding: 9px 0 4px 138px;
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-icon {
+        display: flex;
+        padding: var(--padding-md);
+        align-items: center;
+    }
 
-.RTL .Attachment {
-    padding: 9px 138px 4px 0;
-}
-
-#Messenger .ActionRow {
-    margin: 0 -1px -1px;
-    padding: 8px 13px;
-    background-position: -30px;
-    border: 1px solid #B8BBBB;
-    text-shadow: none;
-}
-
-#ReplyButton {
-    bottom: -22px;
-    height: 10px;
-    margin: 0 13px;
-    padding: 4px 8px 7px 8px;
-    color: #999;
-    background: #F0F0F0 no-repeat 6px 6px;
-    border: 1px solid #D6D6D6;
-    border-top: none;
-    display: none;
-    position: absolute;
-    -webkit-box-shadow: 0 0 3px #F6F9F9;
-    box-shadow: 0 0 2px #F6F9F9;
-}
-
-.JavaScriptAvailable #ReplyButton {
-    display: block;
-}
-
-#ReplyButton:hover {
-    color: #555;
-}
-
-.Visible #ReplyButton {
-    display: none;
-}
-
-/**
- * @subsection  ArticleBody
- * @note        styles for article body
- */
-.MessageBrowser {
-    margin: 5px 0;
-    padding: 0px;
-    border: 1px solid #999;
-    border-radius: 2px;
-    position: relative;
-}
-
-.MessageBrowser p {
-     margin: 0;
-     padding: 5px 25px 5px 25px;
-     background-color: #DDD;
-     font-size: 11px;
-     text-align: center;
-}
-
-.MessageBrowser a.Close {
-    display: block;
-    width: 12px;
-    height: 12px;
-    position: absolute;
-    right: 4px;
-    top: 4px;
-    color: #5D5D5D;
-}
-
-.MessageBrowser a.Close:hover {
-    color: #000;
-}
-
-/**
- * @subsection  Message colors
- */
-
-.agent {
-
-}
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-icon i {
+        color: var(--gray-semi-dark);
+        font-size: 16px;
+    }
 
 } /* end @media */

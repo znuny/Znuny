@@ -1,0 +1,94 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+
+<div>
+    <a name="Article[% Data.ArticleID | html %]"></a>
+    <div class="WidgetSimple Expanded [% Data.SenderType | html %] [% IF Data.SenderType == 'customer' %]Incoming[% ELSE %]Outgoing[% END %] [% IF Data.IsVisibleForCustomer %]VisibleForCustomer[% ELSE %]NotVisibleForCustomer[% END %]">
+        <div class="Header">
+            <div class="WidgetAction Toggle">
+                <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+            </div>
+            <h2>
+                [% Translate("#%s", Data.ArticleNumber) | html %] &ndash; [% Data.ArticleFields.Subject.Value | truncate(100) | html %]
+                &ndash; <span class="[% Data.ArticleFields.Sender.ValueHidden | html %]">[% Data.ArticleFields.Sender.Value | html %]</span> <span class="[% Data.ArticleFields.Sender.RealnameHidden | html %]">[% Data.ArticleFields.Sender.Realname | html %]</span>
+                &ndash; <span title="[% Translate("Created") | html %]: [% Data.CreateTime | Localize("TimeShort") %]">[% Data.CreateTime | Localize("TimeShort") %]</span> [% Translate("via %s", Translate(Data.CommunicationChannel)) | html %]
+[% IF Data.CreateByUser %]
+                [% Translate("by %s", Data.CreateByUser) | html %]
+[% END %]
+            </h2>
+            <div class="ActionMenu Visible">
+                <div class="WidgetAction Expand">
+                    <a href="#" title="[% Translate("Toggle article details") | html %]"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="WidgetMenu Hidden">
+            <div class="ArticleMailHeader">
+                <fieldset class="TableLike FixedLabelSmall">
+
+                [% FOREACH ArticleField IN Data.ArticleFields.values.nsort("Prio") %]
+                    [% IF ArticleField.Label == "Sender" %]
+                    <label class="Switchable">[% Translate(ArticleField.Label) | html %]:</label>
+                    <p class="Value" title="[% ArticleField.Value | html %]">
+                        <span class="Switch [% ArticleField.ValueHidden | html %]">[% ArticleField.Value | html %]</span>
+                        <span class="Switch [% ArticleField.RealnameHidden | html %]">[% ArticleField.Realname | html %]</span>
+                    </p>
+                    <div class="Clear"></div>
+                [% ELSIF ArticleField.Label == "Subject" %]
+                    <!-- Include the full subject so that it can be copied. The one in the title bar is shortened. -->
+                    <label>[% Translate("Subject") | html %]:</label>
+                    <p class="Value">[% ArticleField.Value | html %]</p>
+                    <div class="Clear"></div>
+                    [% END %]
+                [% END %]
+
+                [% FOREACH ArticleField IN Data.ArticleMetaFields %]
+                    <!-- show accounted time and dynamic fields -->
+                    <label>[% Translate(ArticleField.value.Label) | html %]:</label>
+                    [% IF ArticleField.value.Link %]
+                        <p class="Value" title="[% ArticleField.value.Title %]">
+                            <a href="[% ArticleField.value.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% ArticleField.value.Value %]</a>
+                        </p>
+                    [% ELSE %]
+                        <p class="Value" title="[% ArticleField.value.Title %]">[% ArticleField.value.Value %]</p>
+                    [% END %]
+                    <div class="Clear"></div>
+                [% END %]
+                </fieldset>
+            </div>
+
+        </div>
+
+        <div class="Content">
+            <div class="ArticleMailContent">
+
+                [% PROCESS ArticleActionMenu.tt %]
+                <div class="[% IF Data.HTML %]ArticleHTML[% ELSE %]ArticleBody[% END %] ArticleChat">
+                    [% Data.Body %]
+                </div>
+
+                [% IF Data.ArticleModuleMeta && Data.ArticleModuleMeta.size() %]
+                <div class="ArticleMeta">
+                    [% FOREACH Entry IN Data.ArticleModuleMeta %]
+                    <div>
+                        <h2>[% Entry.Name | html %]</h2>
+                        <ul>
+                            [% FOREACH Item IN Entry.Matches %]
+                            <li><a href="[% Item.URL | html %]"[% IF Item.URLPreview %] data-trigger="floater" data-floater-url="[% Item.URLPreview | html %]"[% END %] target="[% Item.Target | html %]">[% Item.Text | truncate(100) | html %]</a></li>
+                            [% END %]
+                        </ul>
+                    </div>
+                    [% END %]
+                </div>
+                [% END %]
+            </div>
+        </div>
+    </div>
+</div>

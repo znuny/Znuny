@@ -26,7 +26,6 @@
         </div>
         </noscript>
     </div>
-
 [% RenderBlockStart("Steps") %]
     <div class="Center">
         <ul id="ProgressBar" class="ProgressBarElements[% Data.Steps | html %] SpacingTop SpacingBottom">
@@ -61,7 +60,6 @@
         </ul>
     </div>
 [% RenderBlockEnd("Steps") %]
-
 [% RenderBlockStart("Intro") %]
     <div class="W950px SpacingTop SpacingBottom CenterBox">
         <div class="WidgetSimple SpacingTop" id="WebInstallerBox">

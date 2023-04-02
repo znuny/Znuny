@@ -10,30 +10,10 @@
 [% SET global.ClassicPreferenceCounter = 0 %]
 
 [% RenderBlockStart("Body") %]
-<div class="MainBox LayoutFixedSidebar SidebarFirst ARIARoleMain">
-
-    <h1 class="InvisibleText">[% Translate("Edit your preferences") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Personal Preferences'),
-                Link => Env("Action") _ Data.EditingAnotherAgent,
-            },
-            {
-                Name => Translate(Data.GroupName),
-                Link => Env("Action") _ ";Subaction=Group;Group=" _ Data.GroupKey _ Data.EditingAnotherAgent,
-            },
-        ]
-    %]
-    [% FOREACH Item IN Data.Path %]
-        [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AgentPreferences;Subaction=Group;Group=Advanced;RootNavigation=' _ Item.Value }) %]
-    [% END %]
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath Type = 'Agent' %]
-
+<div class="MainBox LayoutFixedSidebar SidebarFirst ARIARoleMain ActionsSideBar">
     <input type="hidden" id="Group" value="[% Data.GroupKey %]" />
     <input type="hidden" id="CurrentUserID" value="[% Data.CurrentUserID %]" />
-
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Preferences") | html %]</h2>
@@ -84,9 +64,26 @@
     </div>
 
     <div class="ContentColumn">
+    <h1 class="InvisibleText">[% Translate("Edit your preferences") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Personal Preferences'),
+                    Link => Env("Action") _ Data.EditingAnotherAgent,
+                },
+                {
+                    Name => Translate(Data.GroupName),
+                    Link => Env("Action") _ ";Subaction=Group;Group=" _ Data.GroupKey _ Data.EditingAnotherAgent,
+                },
+            ]
+        %]
+        [% FOREACH Item IN Data.Path %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AgentPreferences;Subaction=Group;Group=Advanced;RootNavigation=' _ Item.Value }) %]
+        [% END %]
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath Type = 'Agent' %]
 
         <ul class="SettingsList Preferences">
-        [% RenderBlockStart("Item") %]
+[% RenderBlockStart("Item") %]
             [% SET global.ClassicPreferenceCounter = 1 %]
             <li>
                 <form action="[% Env("CGIHandle") %]" enctype="multipart/form-data" method="post" class="Validate">
@@ -100,107 +97,124 @@
                         <div class="Content">
                             <div class="SettingWrapper">
                                 <fieldset class="TableLike">
-    [% RenderBlockStart("Block") %]
-    [% RenderBlockStart("InputKey") %]
-                                    [% IF Data.Key %]
+[% RenderBlockStart("Block") %]
+[% RenderBlockStart("InputKey") %]
+                                        [% IF Data.Key %]
+                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
+                                        [% END %]
+                                        <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
+                                            <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" />
+                                        </div>
+
+[% RenderBlockEnd("InputKey") %]
+
+[% RenderBlockStart("Input") %]
+                                        [% IF Data.Key %]
+                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
+                                        [% END %]
+                                        <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
+                                            <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
+                                        </div>
+
+[% RenderBlockEnd("Input") %]
+
+[% RenderBlockStart("Option") %]
+                                        [% IF Data.Key %]
+                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
+                                        [% END %]
+                                            <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
+                                                [% Data.Option %]
+                                            </div>
+
+[% RenderBlockEnd("Option") %]
+
+[% RenderBlockStart("Upload") %]
                                         <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
-                                    [% END %]
-                                    <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
-                                        <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" />
-                                    </div>
-                                    <div class="Clear"></div>
-    [% RenderBlockEnd("InputKey") %]
-    [% RenderBlockStart("Input") %]
-                                    [% IF Data.Key %]
+                                        <div class="Field">
+                                            <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="file" size="20" class="fixed"/>
+                                            <br/>
+                                            <a href="">[% Data.Filename | html %]</a>
+                                        </div>
+[% RenderBlockEnd("Upload") %]
+
+[% RenderBlockStart("Avatar") %]
+                                        [% IF Data.AvatarEngine == 'None' %]
+                                            <div class="Field NoMargin">
+                                                [% Translate("Avatars have been disabled by the system administrator. You'll see your initials instead.") | html %]
+                                            </div>
+
+                                        [% ELSIF Data.AvatarEngine == 'Gravatar' %]
+                                            <div class="Field NoMargin PreferenceAvatar">
+                                                <a href="https://www.gravatar.com" target="_blank"><img src="[% Data.Avatar %]" /></a>
+                                                [%
+                                                    SET GravatarLink  = '<a href="https://www.gravatar.com" target="_blank"><i class="fa fa-external-link"></i> gravatar.com</a>';
+                                                    SET GravatarEmail = '<strong>' _ Env("UserEmail") _ '</strong>';
+                                                %]
+                                                [% Translate("You can change your avatar image by registering with your email address %s at %s. Please note that it can take some time until your new avatar becomes available because of caching.") | html | ReplacePlaceholders(GravatarEmail, GravatarLink) %]
+                                            </div>
+
+                                        [% END %]
+[% RenderBlockEnd("Avatar") %]
+
+[% RenderBlockStart("Password") %]
                                         <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
-                                    [% END %]
-                                    <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
-                                        <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
-                                    </div>
-                                    <div class="Clear"></div>
-    [% RenderBlockEnd("Input") %]
-    [% RenderBlockStart("Option") %]
-                                [% IF Data.Key %]
-                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
-                                [% END %]
-                                    <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
-                                        [% Data.Option %]
-                                    </div>
-                                    <div class="Clear"></div>
-    [% RenderBlockEnd("Option") %]
-    [% RenderBlockStart("Upload") %]
-                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
-                                    <div class="Field">
-                                        <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="file" size="20" class="fixed"/>
-                                        <br/>
-                                        <a href="">[% Data.Filename | html %]</a>
-                                    </div>
-                                    <div class="Clear"></div>
-    [% RenderBlockEnd("Upload") %]
-    [% RenderBlockStart("Avatar") %]
-                                [% IF Data.AvatarEngine == 'None' %]
-                                    <div class="Field NoMargin">
-                                        [% Translate("Avatars have been disabled by the system administrator. You'll see your initials instead.") | html %]
-                                    </div>
-                                    <div class="Clear"></div>
-                                [% ELSIF Data.AvatarEngine == 'Gravatar' %]
-                                    <div class="Field NoMargin PreferenceAvatar">
-                                        <a href="https://www.gravatar.com" target="_blank"><img src="[% Data.Avatar %]" /></a>
-                                        [%
-                                            SET GravatarLink  = '<a href="https://www.gravatar.com" target="_blank"><i class="fa fa-external-link"></i> gravatar.com</a>';
-                                            SET GravatarEmail = '<strong>' _ Env("UserEmail") _ '</strong>';
-                                        %]
-                                        [% Translate("You can change your avatar image by registering with your email address %s at %s. Please note that it can take some time until your new avatar becomes available because of caching.") | html | ReplacePlaceholders(GravatarEmail, GravatarLink) %]
-                                    </div>
-                                    <div class="Clear"></div>
-                                [% END %]
-    [% RenderBlockEnd("Avatar") %]
-    [% RenderBlockStart("Password") %]
-                                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
-                                    <div class="Field">
-                                        <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="password" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
-                                    </div>
-                                    <div class="Clear"></div>
-    [% RenderBlockEnd("Password") %]
-    [% RenderBlockStart("OutOfOffice") %]
-                                    <div class="Row OutOfOffice">
-                                        <p class="FieldExplanation">[% Translate(Data.Key) | html %]</p>
-                                        <label>[% Translate("Active") | html %]:</label>
                                         <div class="Field">
-                                            <input type="radio" name="OutOfOffice" id="OutOfOfficeOn" value="1" [% Data.OutOfOfficeOn %] />
-                                            <label for="OutOfOfficeOn">[% Translate("On") | html %]</label>
-                                            <input type="radio" name="OutOfOffice" id="OutOfOfficeOff" value="0" [% Data.OutOfOfficeOff %] />
-                                            <label for="OutOfOfficeOff">[% Translate("Off") | html %]</label>
+                                            <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="password" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
                                         </div>
-                                        <div class="Clear"></div>
-                                        <label>[% Translate("Start") | html %]:</label>
-                                        <div class="Field">
-                                            [% Data.OptionStart %]
+[% RenderBlockEnd("Password") %]
+
+[% RenderBlockStart("OutOfOffice") %]
+                                        <div class="Row OutOfOffice">
+                                            <div class="field-wrapper">
+                                                <p class="FieldExplanation">[% Translate(Data.Key) | html %]</p>
+                                                <label>[% Translate("Active") | html %]:</label>
+                                                <div class="Field">
+                                                    <div class="radio-field-wrapper">
+                                                        <input type="radio" name="OutOfOffice" id="OutOfOfficeOn" class="RadioRound" value="1" [% Data.OutOfOfficeOn %] />
+                                                        <label for="OutOfOfficeOn">[% Translate("On") | html %]</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="field-wrapper">
+                                                <div class="Field">
+                                                    <div class="radio-field-wrapper">
+                                                        <input type="radio" name="OutOfOffice" id="OutOfOfficeOff" class="RadioRound" value="0" [% Data.OutOfOfficeOff %] />
+                                                        <label for="OutOfOfficeOff">[% Translate("Off") | html %]</label>
+                                                    </div>
+                                                </div>
+                                                <label>[% Translate("Start") | html %]:</label>
+                                                <div class="Field">
+                                                    <div class="outer-select-date">
+                                                        <div>[% Data.OptionStart %]</div>
+                                                    </div>
+                                                </div>
+                                                <label>[% Translate("End") | html %]:</label>
+                                                <div class="Field">
+                                                    <div class="outer-select-date">
+                                                        <div>[% Data.OptionEnd %]</div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="Clear"></div>
-                                        <label>[% Translate("End") | html %]:</label>
-                                        <div class="Field">
-                                            [% Data.OptionEnd %]
+[% RenderBlockEnd("OutOfOffice") %]
+
+[% RenderBlockStart("RawHTML") %]
+                                        <div class="Field NoMargin">
+                                            [% Data.HTML %]
                                         </div>
-                                        <div class="Clear"></div>
-                                    </div>
-    [% RenderBlockEnd("OutOfOffice") %]
-    [% RenderBlockStart("RawHTML") %]
-                                    <div class="Field NoMargin">
-                                        [% Data.HTML %]
-                                    </div>
-                                    <div class="Clear"></div>
-    [% RenderBlockEnd("RawHTML") %]
-    [% RenderBlockEnd("Block") %]
+[% RenderBlockEnd("RawHTML") %]
+
+[% RenderBlockEnd("Block") %]
 
                                     <div class="SettingUpdateBox">
                                     [% IF Data.Block == 'Avatar' && Config("Frontend::AvatarEngine") != 'Local' %]
-                                        <button class="CallForAction Disabled" type="button" value="[% Translate("This setting can currently not be saved.") | html %]" title="[% Translate("This setting can currently not be saved") | html %]">
-                                            <span><i class="fa fa-check"></i></span>
+                                        <button class="btn-main btn-width-md btn-primary Disabled" type="button" value="[% Translate("This setting can currently not be saved.") | html %]" title="[% Translate("This setting can currently not be saved") | html %]">
+                                            <span>[% Translate('Save setting') | html %]</span>
                                         </button>
                                     [% ELSE %]
-                                        <button class="CallForAction Update" type="button" value="[% Translate("Save this setting") | html %]" title="[% Translate("Save this setting") | html %]">
-                                            <span><i class="fa fa-check"></i></span>
+                                        <button class="btn-main btn-width-md btn-primary Update" type="button" value="[% Translate("Save this setting") | html %]" title="[% Translate("Save this setting") | html %]">
+                                            <span>[% Translate('Save setting') | html %]</span>
                                         </button>
                                     [% END %]
                                     </div>
@@ -218,13 +232,10 @@
                     </div>
                 </form>
             </li>
-        [% RenderBlockEnd("Item") %]
-            [% IF Data.SettingList.size() %]
-                [% INCLUDE "AgentPreferences/SettingsList.tt" %]
-            [% END %]
+[% RenderBlockEnd("Item") %]
         </ul>
 
-        [% IF !global.ClassicPreferenceCounter && !Data.SettingList.size() %]
+        [% IF !global.ClassicPreferenceCounter %]
         <div class="WidgetSimple">
             <div class="Content">
             [% IF !Data.RootNavigation %]

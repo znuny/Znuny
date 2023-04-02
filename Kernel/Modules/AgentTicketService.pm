@@ -305,7 +305,7 @@ sub Run {
     }
 
     # otherwise use Preview as default as in LayoutTicket
-    $View ||= 'Preview';
+    $View ||= 'Small';
 
     # Check if selected view is available.
     my $Backends = $ConfigObject->Get('Ticket::Frontend::Overview');

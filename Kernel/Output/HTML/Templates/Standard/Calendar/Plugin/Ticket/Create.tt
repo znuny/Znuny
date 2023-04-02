@@ -9,7 +9,6 @@
 <div class="Field">
     <b>[% Translate(Data.Plugin.Name) | html %]</b>
 </div>
-<div class="Clear"></div>
 
 <label for="Plugin_[% Data.Plugin.PluginKey | html %]_TicketCreateTimeType">[% Translate("Ticket Creation") | html %]:</label>
 <div class="Field">
@@ -19,12 +18,12 @@
     <label for="Offset">[% Translate("Time") | html %]:</label>
     <div class="Field">
         <div>
-            <input type="number" class="Modernize W75pc" id="Plugin_[% Data.Plugin.PluginKey | html %]_TicketCreateOffset" name="Plugin_[% Data.Plugin.PluginKey | html %]_TicketCreateOffset" value="[% Data.Plugin.Data.TicketCreateOffset | html %]" size="5" maxlength="2" min="0" max="31" />
+            <input type="number" class="Modernize" id="Plugin_[% Data.Plugin.PluginKey | html %]_TicketCreateOffset" name="Plugin_[% Data.Plugin.PluginKey | html %]_TicketCreateOffset" value="[% Data.Plugin.Data.TicketCreateOffset | html %]" size="5" maxlength="2" min="0" max="31" />
         </div>
-        <div class="SpacingTopSmall">
+        <div>
             [% Data.TicketCreateOffsetUnitStrg %]
         </div>
-        <div class="SpacingTopSmall">
+        <div>
             [% Data.TicketCreateOffsetPointStrg %]
         </div>
     </div>
@@ -39,21 +38,21 @@
         [% Data.OwnerStrg %]
     </div>
 [% RenderBlockStart("Responsible") %]
-    <label for="Plugin_[% Data.Plugin.PluginKey | html %]_ResponsibleUserID">[% Translate("Responsible") | html %]:</label>
-    <div class="Field">
-        [% Data.ResponsibleUserStrg %]
-    </div>
+        <label for="Plugin_[% Data.Plugin.PluginKey | html %]_ResponsibleUserID">[% Translate("Responsible") | html %]:</label>
+        <div class="Field">
+            [% Data.ResponsibleUserStrg %]
+        </div>
 [% RenderBlockEnd("Responsible") %]
 
     <input type="hidden" id="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerUserID" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerUserID" value="[% Data.Plugin.Data.CustomerUserID | html %]"/>
     <label for="CustomerAutoComplete" class="[% Data.MandatoryClass | html %]">[% Translate("Customer user") | html %]:</label>
     <div class="Field">
-        <input type="text" id="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerAutoComplete" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerAutoComplete" value="[% Data.Plugin.Data.CustomerAutoComplete | html %]" class="CustomerAutoComplete W75pc [% Data.CustomerUserIDServerError | html %]" autocomplete="off" />
+        <input type="text" id="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerAutoComplete" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerAutoComplete" value="[% Data.Plugin.Data.CustomerAutoComplete | html %]" class="CustomerAutoComplete [% Data.CustomerUserIDServerError | html %]" autocomplete="off" />
     </div>
 
     <label for="CustomerID" class="">[% Translate("Customer") | html %]:</label>
     <div class="Field">
-        <input type="text" id="CustomerID" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerID" readonly value="[% Data.Plugin.Data.CustomerID | html %]" class="W75pc [% Data.CustomerIDServerError | html %]"/>
+        <input type="text" id="CustomerID" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerID" readonly value="[% Data.Plugin.Data.CustomerID | html %]" class="[% Data.CustomerIDServerError | html %]"/>
     </div>
 
     <label for="Plugin_[% Data.Plugin.PluginKey | html %]_StateID">[% Translate("State") | html %]:</label>
@@ -63,9 +62,9 @@
 
     <label>[% Translate("Pending date") | html %]:</label>
     <div class="Field">
-        <input type="hidden" class="Modernize W75pc" id="Plugin_[% Data.Plugin.PluginKey | html %]_PendingStateIDs" name="Plugin_[% Data.Plugin.PluginKey | html %]_PendingStateIDs" value="[% Data.PendingStateIDs | html %]" />
+        <input type="hidden" class="Modernize" id="Plugin_[% Data.Plugin.PluginKey | html %]_PendingStateIDs" name="Plugin_[% Data.Plugin.PluginKey | html %]_PendingStateIDs" value="[% Data.PendingStateIDs | html %]" />
         <div>
-            <input type="number" class="Modernize W75pc" id="Plugin_[% Data.Plugin.PluginKey | html %]_TicketPendingTimeOffset" name="Plugin_[% Data.Plugin.PluginKey | html %]_TicketPendingTimeOffset" value="[% Data.Plugin.Data.TicketPendingTimeOffset | html %]" size="5" maxlength="6" min="0" max="999999" />
+            <input type="number" class="Modernize" id="Plugin_[% Data.Plugin.PluginKey | html %]_TicketPendingTimeOffset" name="Plugin_[% Data.Plugin.PluginKey | html %]_TicketPendingTimeOffset" value="[% Data.Plugin.Data.TicketPendingTimeOffset | html %]" size="5" maxlength="6" min="0" max="999999" />
         </div>
         <div class="SpacingTopSmall">
             [% Data.TicketPendingTimeOffsetUnitStrg %]
@@ -80,24 +79,22 @@
     <div class="Field">
         [% Data.LockStrg %]
     </div>
-
 [% RenderBlockStart("Type") %]
-    <label for="Plugin_[% Data.Plugin.PluginKey | html %]_TypeID">[% Translate("Type") | html %]:</label>
-    <div class="Field">
-        [% Data.TypeStrg %]
-    </div>
+        <label for="Plugin_[% Data.Plugin.PluginKey | html %]_TypeID">[% Translate("Type") | html %]:</label>
+        <div class="Field">
+            [% Data.TypeStrg %]
+        </div>
 [% RenderBlockEnd("Type") %]
-
 [% RenderBlockStart("ServiceSLA") %]
-    <label for="Plugin_[% Data.Plugin.PluginKey | html %]_ServiceID">[% Translate("Service") | html %]:</label>
-    <div class="Field">
-        [% Data.ServiceStrg %]
-    </div>
+        <label for="Plugin_[% Data.Plugin.PluginKey | html %]_ServiceID">[% Translate("Service") | html %]:</label>
+        <div class="Field">
+            [% Data.ServiceStrg %]
+        </div>
 
-    <label for="Plugin_[% Data.Plugin.PluginKey | html %]_SLAID">[% Translate("SLA") | html %]:</label>
-    <div class="Field">
-        [% Data.SLAStrg %]
-    </div>
+        <label for="Plugin_[% Data.Plugin.PluginKey | html %]_SLAID">[% Translate("SLA") | html %]:</label>
+        <div class="Field">
+            [% Data.SLAStrg %]
+        </div>
 [% RenderBlockEnd("ServiceSLA") %]
 
     <label for="Plugin_[% Data.Plugin.PluginKey | html %]_ProcessID">[% Translate("Process") | html %]:</label>

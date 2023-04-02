@@ -276,7 +276,7 @@ Core.Agent.Admin.GenericInterfaceMapping = (function (TargetNS) {
 
         // append to container
         $('#KeyInsert').append(HTML);
-        Object.parent().remove();
+        Object.parents('.ValueTemplateRow').remove();
     };
 
     /**
