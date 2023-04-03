@@ -10,11 +10,13 @@ package Kernel::System::Activity;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(Kernel::System::DBCRUD);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
 );
 
@@ -27,6 +29,14 @@ Kernel::System::Activity - to manage the activity
 All functions to manage the activity.
 
 =head1 PUBLIC INTERFACE
+
+=head2 new()
+
+create an object
+
+    my $ActivityObject = $Kernel::OM->Get('Kernel::System::Activity');
+
+=cut
 
 =head2 Add()
 
