@@ -273,7 +273,7 @@ ul#ProcessElements li.AccordionElement div.Content ul li > span a {
     align-items: center;
     justify-content: center;
     font-size: 15px;
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
 }
 
 #DiagramTooltip {
@@ -608,7 +608,8 @@ em.EntityID:after {
     display: flex;
     flex-flow: row;
     align-items: center;
-    padding-top: var(--padding-xl);
+    padding: 0;
+    padding-top: var(--padding-md);
 }
 
 #TransitionForm .WidgetSimple.FieldWidget fieldset:nth-child(1),
@@ -952,7 +953,7 @@ div.AJAXWaiting {
 ul#ProcessElements .fa-globe,
 ul#ProcessElements > li a > i {
     font-size: var(--main-font-size);
-    /*color: var(--gray-semi-dark);*/
+    /*color: var(--gray-dark-semi);*/
 }
 
 }/* end @media */

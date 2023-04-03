@@ -201,11 +201,11 @@ sub Data {
         'Send to these agents' => 'ارسال به این عوامل',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'ارسال به تمام نقشهای اعضا',
-        'Send on out of office' => 'ارسال در خارج از دفتر',
         'Also send if the user is currently out of office.' => 'همچنین ارسال در صورتی که کاربر در حال حاضر خارج از دفتر.',
-        'Once per day' => 'یک بار در روز',
+        'Send on out of office' => 'ارسال در خارج از دفتر',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'یک بار در روز',
         'Notification Methods' => 'روش های اطلاع رسانی',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'این روش ممکن است که می تواند مورد استفاده برای ارسال این اطلاع رسانی به هر یک از دریافت کنندگان می باشد. لطفا حداقل یک روش زیر انتخاب کنید.',

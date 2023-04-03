@@ -194,11 +194,11 @@ sub Data {
         'Send to these agents' => 'Hantar ke ejen ini',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Hantar ke semua peranan ahli',
-        'Send on out of office' => 'Menghantar di luar pejabat',
         'Also send if the user is currently out of office.' => 'Juga menghantar jika pengguna sedang berada di luar pejabat.',
-        'Once per day' => 'Sekali sehari',
+        'Send on out of office' => 'Menghantar di luar pejabat',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Sekali sehari',
         'Notification Methods' => 'Kaedah pemberitahuan',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Ini adalah kaedah yang mungkin boleh digunakan untuk menghantar pemberitahuan ini kepada setiap penerima. Sila pilih sekurang- kurangnya satu kaedah di bawah.',

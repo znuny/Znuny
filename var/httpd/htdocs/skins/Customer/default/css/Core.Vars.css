@@ -98,7 +98,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     --icon-hover-md-size: 32px;
     --icon-hover-color: #e0e0e0;
     --icon-hover-color-light: var(--gray-light);
-    --icon-hover-color-medium: #B5B5B580;
+    --icon-hover-color-medium: var(--gray-medium-darker);
 
     /* Flags */
     --flag-width: 35px;
@@ -113,7 +113,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         --menu-bg: var(--white);
 
         /* SidebarColumn Header*/
-        --sidebarcolumn-header-bg: #E8E8E8;
+        --sidebarcolumn-header-bg: var(--gray-regular-light);
 
         /* Widget Simple */
         --widget-simple-bg: var(--white);
@@ -127,15 +127,12 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
         /* Tables */
         --table-bg: var(--white);
-        --table-th-bg: #EFEFEF;
-        --table-td-even-bg: #F9F9F9;
         --table-th-font-color: var(--black);
         --table-td-hover-opacity: 0.5;
-        --table-tr-border-bottom: var(--gray-semi-light); 
+        --table-tr-border-bottom: var(--gray-light-semi); 
         --table-tr-py-18: 18px;
         --table-tr-px-18: 10px;
         --table-tr-line-hight: 40px;
-        --table-text-color: #44444F;
 
         --gap-xl: 60px;
         --gap-lg: 30px;
@@ -147,11 +144,11 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         /* Inputs */
 
             /* Selection */
-            --pill-color-selected: #F1F1F5;
+            --pill-color-selected: var(--gray-light-ultra);
             --main-field-size: 620px;
 
             /* Input Fields */
-            --text-message-color: #000000;
+            --text-message-color: var(--black);
             --text-message-min-height: 141px;
             --reply-input-height: var(--btn-height-sm);
             --max-input-field-height: 30px;
@@ -166,7 +163,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         --modal-col-max-height: 326px;
         --modal-col-text-color: var(--gray-darker);
         --modal-input-width: 75px;
-        --modal-header-bg: #E8E8E8;
+        --modal-header-bg: var(--gray-regular-light);
 
         /* Buttons */
 
@@ -187,8 +184,8 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
             --btn-primary-text: var(--white);
             --btn-primary-text-hover: var(--btn-primary-text);
 
-            --btn-text-color: #ffffff;
-            --btn-text-color-ghost: #696974;
+            --btn-text-color: var(--white);
+            --btn-text-color-ghost: var(--gray-darker);
 
             /* Btn Icon */
             --btn-icon-sm: 34px;

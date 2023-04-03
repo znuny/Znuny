@@ -170,7 +170,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .FieldHelpContainer i {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         font-size: var(--font-size-md);
     }
 
@@ -461,7 +461,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     #ActivityDialogContent #LabelDynamicField_PreProcDaysRemaining,
     #ActivityDialogContent #LabelDynamicField_PreProcRepresentationBy {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     /*#ActivityDialogContent .ContentColumn .TableLike > div {

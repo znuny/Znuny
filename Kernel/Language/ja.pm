@@ -198,11 +198,11 @@ sub Data {
         'Send to these agents' => 'これらの担当者に送信',
         'Send to all group members (agents only)' => 'グループ内の全面バーに送信（担当者のみ）',
         'Send to all role members' => 'ロールの全てのメンバーに送付',
-        'Send on out of office' => '外出中の担当者に送信',
         'Also send if the user is currently out of office.' => '現在外出中のユーザーにも送付する。',
-        'Once per day' => '一日に一度',
+        'Send on out of office' => '外出中の担当者に送信',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '選択された通知方法を使って1つの予約に対して1日に1度だけユーザーに通知します。',
+        'Once per day' => '一日に一度',
         'Notification Methods' => '通知方法',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',

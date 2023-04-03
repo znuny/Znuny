@@ -348,18 +348,22 @@
                         </div>
 
                         <div class="field-wrapper">
-                            <label for="SendOnOutOfOffice">[% Translate("Send on out of office") | html %]</label>
-                            <div class="Field">
-                                <input type="checkbox" name="SendOnOutOfOffice" id="SendOnOutOfOffice" value="1" [% Data.SendOnOutOfOfficeChecked %] />
-                                [% Translate("Also send if the user is currently out of office.") | html %]
+                            <div class="CheckboxContainer">
+                                <div class="Field">
+                                    <input type="checkbox" name="SendOnOutOfOffice" id="SendOnOutOfOffice" value="1" [% Data.SendOnOutOfOfficeChecked %] />
+                                    [% Translate("Also send if the user is currently out of office.") | html %]
+                                </div>
+                                <label for="SendOnOutOfOffice">[% Translate("Send on out of office") | html %]</label>
                             </div>
                         </div>
 
                         <div class="field-wrapper">
-                            <label for="OncePerDay">[% Translate("Once per day") | html %]</label>
-                            <div class="Field">
-                                <input type="checkbox" name="OncePerDay" id="OncePerDay" value="1" [% Data.OncePerDayChecked %] />
-                                [% Translate("Notify user just once per day about a single appointment using a selected transport.") | html %]
+                            <div class="CheckboxContainer">
+                                <div class="Field">
+                                    <input type="checkbox" name="OncePerDay" id="OncePerDay" value="1" [% Data.OncePerDayChecked %] />
+                                    [% Translate("Notify user just once per day about a single appointment using a selected transport.") | html %]
+                                </div>
+                                <label for="OncePerDay">[% Translate("Once per day") | html %]</label>
                             </div>
                         </div>
                     </fieldset>

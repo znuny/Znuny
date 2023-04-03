@@ -196,11 +196,11 @@ sub Data {
         'Send to these agents' => 'Изпращане до тези Агенти',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Изпращане до всички членове на ролята',
-        'Send on out of office' => 'Изпрати извън офис',
         'Also send if the user is currently out of office.' => 'Изпрати също ако този потребител и извън офис',
-        'Once per day' => 'Един път на ден',
+        'Send on out of office' => 'Изпрати извън офис',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Един път на ден',
         'Notification Methods' => 'Методи за известие',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Това са възможните методи, които могат да се използват за изпращане на това известие до всеки от получателите. Моля, изберете най-малко един от методите по-долу.',

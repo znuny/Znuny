@@ -291,13 +291,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         font-size: var(--font-size-sm);
         font-weight: var(--medium);
     }
-    
+
     .OverviewMedium table tbody {
         display: flex;
         flex-flow: row;
         justify-content: space-between;
     }
-    
+
     .OverviewMedium table tr {
         display: flex;
         flex: 1;
@@ -305,17 +305,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border-left: var(--border-width) var(--border-solid) var(--border-color);
         padding-left: var(--padding-xl);
     }
-    
+
     .OverviewMedium table tr:first-child {
         border-left: none;
         padding-left: 0;
     }
-    
+
     .OverviewMedium table td {
         padding-bottom: var(--padding-lg);
         flex: 1;
     }
-    
+
     .Overview table label {
         color: var(--gray-dark);
         font-weight: var(--semi-bold);

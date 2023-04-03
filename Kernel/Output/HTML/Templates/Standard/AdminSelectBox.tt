@@ -59,7 +59,7 @@
                 <form action="[% Env("CGIHandle") %]" method="post" class="Validate" id="AdminSelectBoxForm">
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                     <input type="hidden" name="Subaction" value="Select"/>
-                    <fieldset class="TableLike FixedLabelSmall">
+                    <fieldset class="TableLike FixedLabelSmall no-padding">
 
                         <div class="field-wrapper">
                             <label class="Mandatory" for="SQL"><span class="Marker">*</span> [% Translate("SQL") | html %]</label>

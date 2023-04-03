@@ -120,6 +120,7 @@ The following persons contributed to Znuny:
 * anonymous <unknown@anonymous>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * djurici <igor.djuric@muehlbauer.de>
+* forwwward <hello@forwwward.studio>
 * jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
 * juanmclavero <juanm.clavero@ibsalut.es>
 * meisterheister <35762852+meisterheister@users.noreply.github.com>

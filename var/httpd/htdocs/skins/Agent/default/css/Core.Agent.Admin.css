@@ -69,16 +69,35 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .ItemListGrid > li > a > .Favourite {
-    right: -100px;
-    transition: all ease 0.5s;
-    color: var(--white);
+    display: none !important;
+    right: 10px;
+    transition: all ease 0.25s;
+    color: var(--primary-color);
+    background: var(--primary-color);
     font-size: 20px;
     position: absolute;
     top: 10px;
+    opacity: 0;
 }
 
+.ItemListGrid > li > a:hover > .Favourite {
+    color: var(--white);
+    background: var(--white);
+    opacity: 1;
+}
+
+.ItemListGrid > li.IsFavourite > a .Favourite {
+    right: 10px;
+    top: 10px;
+}
+
+.ItemListGrid > li > a:hover > .Favourite,
 .ItemListGrid > li.IsFavourite > a > .Favourite {
-    display: none !important;
+    display: flex !important;
+}
+
+.ItemListGrid > li > a > .Favourite.Clicked .fa-star {
+    display: flex !important;
 }
 
 .ItemListGrid > li > a > .Favourite > .fa {
@@ -87,8 +106,16 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     top: 0px;
 }
 
+.ItemListGrid > li > a:hover > .Favourite .fa-star-o {
+    opacity: 1;
+}
+
 .ItemListGrid > li > a > .Favourite .fa-star {
     opacity: 0;
+}
+
+.ItemListGrid > li.IsFavourite > a:hover > .Favourite .fa-star {
+    opacity: 1;
 }
 
 .ItemListGrid > li > a:hover > .Favourite,
@@ -110,10 +137,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .ItemListGrid > li > a:hover > .Favourite:hover .fa-star {
     opacity: 1;
+    display: block;
 }
 
 .ItemListGrid > li > a > .Favourite .fa-check {
-    color: green !important;
+    color: var(--white) !important;
+    font-size: var(--icon-main-size);
+    background: var(--primary-color);
+    padding: 5px;
+    border-radius: var(--border-radius-xs);
 }
 
 .ToggleView.Grid .fa:last-child {
@@ -133,20 +165,38 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-radius: var(--border-radius-xs);
+    transition: var(--main-transition);
 }
 
 .Favourites tr:hover {
     background-color: var(--table-td-even-bg);
 }
 
-.Favourites tbody tr:hover td,
-.Favourites tbody tr:nth-child(2n) td {
-    background: unset;
-    background-color: unset;
+.FavouriteList .DataTable.Favourites tbody tr:hover td,
+.FavouriteList .DataTable.Favourites tbody tr:nth-child(2n) td {
+    background: transparent;
+    background-color: transparent;
+}
+
+.FavouriteList .DataTable.Favourites tbody tr td:first-child {
+    width: 100%;
+    padding: 0;
+}
+.FavouriteList .DataTable.Favourites tbody tr td:first-child a {
+    padding: var(--padding-sm);
+}
+
+.FavouriteList .DataTable.Favourites tbody tr td:nth-child(2n) {
+    margin-right: 5px;
+}
+
+.FavouriteList .DataTable.Favourites tbody tr td:nth-child(2n) a i {
+    font-size: var(--icon-main-size);
 }
 
 .Favourites tbody tr:hover i {
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
 }
 
 .Favourites tr td:nth-child(2) {

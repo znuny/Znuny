@@ -186,7 +186,7 @@
                     </div>
 [% RenderBlockEnd("ContentLargePreferencesForm") %]
 
-                <div id="[% Data.Name | html %]" class="border-bottom" style="overflow-x:auto">
+                <div id="[% Data.Name | html %]" class="border" style="overflow-x:auto">
                     <table class="DataTable">
                         <thead>
                             <tr>

@@ -196,11 +196,11 @@ sub Data {
         'Send to these agents' => 'Надіслати цим агентам',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Надіслати всім членам ролі',
-        'Send on out of office' => 'Надіслано з «Не при справах»',
         'Also send if the user is currently out of office.' => 'Також надіслати, якщо користувач зараз не при справах.',
-        'Once per day' => 'Один раз на день',
+        'Send on out of office' => 'Надіслано з «Не при справах»',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Повідомляти користувача тільки один раз в день по одній події з використанням обраного способу',
+        'Once per day' => 'Один раз на день',
         'Notification Methods' => 'Методи Сповіщення',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Це можливі методи, що можуть бути використані для відправлення цього сповіщення кожному з одержувачів. Будь ласка, виберіть нижче принаймні один метод.',

@@ -103,7 +103,7 @@
                             </div>
                             <div class="Content" id="ConfigParams">
 [% RenderBlockStart("ConfigItemInitRow") %]
-                                <fieldset class="TableLike">
+                                <fieldset class="TableLike" style="padding-right: 38px">
                                     <div class="field-wrapper">
                                         <label for="ConfigKey[1]">[% Translate("Key") | html %]</label>
                                         <input type="text" name="ConfigKey[1]" id="ConfigKey[1]" />

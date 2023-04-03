@@ -5,8 +5,6 @@ Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
 did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
-// TODO Denny delete me
-// nofilter(TidyAll::Plugin::Znuny::Common::Origin)
 */
 
 /**
@@ -100,6 +98,13 @@ table tr.MasterAction {
     border-collapse: separate;
 }
 
+.DataTable.border {
+    border-radius: var(--border-radius-xs);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow: hidden;
+}
+
 .DataTable#UserRoles,
 .DataTable#UserGroups {
     width: 100%;
@@ -127,7 +132,7 @@ table tr.MasterAction {
 .DataTable thead th,
 .DataTable thead th.DashboardHeader,
 .TableSmall thead th,
-.TableSmall thead a, 
+.TableSmall thead a,
 .TableSmall thead span {
     position: relative;
     padding: 12px var(--padding-lg);
@@ -141,7 +146,7 @@ table tr.MasterAction {
     line-height: 1;
 }
 
-tr th a, 
+tr th a,
 tr th a:hover {
     color: inherit;
 }
@@ -166,7 +171,7 @@ thead tr:not(:only-child):first-child th:last-child {
 }
 
 .TableSmall thead th,
-.TableSmall thead a, 
+.TableSmall thead a,
 .TableSmall thead span {
     padding: 12px var(--padding-sm);
 }
@@ -174,7 +179,7 @@ thead tr:not(:only-child):first-child th:last-child {
 .TicketZoom .DataTable thead th,
 .TicketZoom .DataTable thead th.DashboardHeader,
 .TicketZoom .TableSmall thead th,
-.TicketZoom .TableSmall thead a, 
+.TicketZoom .TableSmall thead a,
 .TicketZoom .TableSmall thead span {
     /*padding: var(--padding-sm) var(--padding-lg);*/
     padding: var(--padding-sm);
@@ -378,7 +383,7 @@ thead tr:not(:only-child):first-child th:last-child {
     color: var(--black);
     /* padding: 4px 10px 3px;*/
     display: block;
-    position: relative; 
+    position: relative;
 }
 
 .Sortable.DataTable th.SortAscending a,
@@ -594,7 +599,7 @@ thead .headerSortDown a {
 }
 
 .TableSmall tbody .Flags{
-    padding: 0 var(--padding-sm); 
+    padding: 0 var(--padding-sm);
 }
 
 .TableSmall tbody td span.Direction,
@@ -904,7 +909,7 @@ th.OverviewHeader .OverviewControl {
     box-shadow: 1px 1px 1px #a9a9a9 inset, -1px -1px 1px #a9a9a9 inset;*/
     background: var(--icon-hover-color);
     opacity: 1.0;
-    
+
 }
 
 /*.DataTable thead th.DashboardHeader.FilterActive .ColumnSettingsTrigger i,
@@ -1246,7 +1251,7 @@ td a:hover i {
 /*          Admin         */
 /**************************/
 .WidgetPermissions table thead tr th,
-table#Users thead tr th, 
+table#Users thead tr th,
 table#Groups thead tr th,
 table#Roles thead tr th,
 table#CustomerUsers thead tr th,
@@ -1260,7 +1265,7 @@ table#AlwaysGroups thead tr th {
 }
 
 .WidgetPermissions table thead tr th:first-child,
-table#Users thead tr th:first-child, 
+table#Users thead tr th:first-child,
 table#Groups thead tr th:first-child,
 table#Roles thead tr th:first-child,
 table#CustomerUsers thead tr th:first-child,

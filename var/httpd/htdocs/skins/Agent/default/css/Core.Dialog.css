@@ -68,7 +68,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 @media only screen and (max-width: 1024px) {
     .Dialog.Fullsize {
         height: auto;
-        top: 50px !important;
+        /*top: 50px !important; edited by b on 29/mar/23 - this setting forces the dialog to a position that makes it not immediately visible if the user has scrolled down */
         left: 0;
         right: 0;
         margin: 0 auto;
@@ -86,7 +86,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     align-items: center;
     position: relative;
     height: auto;
-    background: var(--white-bg-header);
+    background: var(--main-bg-color);
     border-bottom: var(--border-width) var(--border-solid) var(--border-color);
     padding: var(--padding-md) var(--padding-lg);
 }
@@ -275,6 +275,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     padding: 0;
 }
 
+.Dialog .Content fieldset .Field.flex-row {
+    flex-flow: row;
+}
+
 .Dialog .Content .ContentFooter {
     padding: 0;
 }
@@ -414,7 +418,7 @@ ul#Service .Header*/
     font-weight: var(--semi-bold);
     letter-spacing: .8px;
     color: var(--table-text-color);
-    background: var(--gray-semi-light);
+    background: var(--gray-light-semi);
 }
 
 .modal-col1,
@@ -509,7 +513,7 @@ ul#Service .Header*/
 
 .FilterInputContainer i {
     font-size: 14px;
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
 }
 
 .FilterInputContainer input {
@@ -661,7 +665,7 @@ ul#Service .Header*/
 }
 
 .cke_dialog_container .cke_dialog .cke_dialog_tabs a.cke_dialog_tab:hover {
-    background-color: var(--gray-semi-light);
+    background-color: var(--gray-light-semi);
 }
 
 /* Selected Tab */

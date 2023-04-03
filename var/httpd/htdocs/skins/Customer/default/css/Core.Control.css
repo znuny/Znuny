@@ -365,31 +365,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     justify-content: flex-end;
 }
 
-/**
- * @subsection  MessageBox (Notification)
- */
 
-
-.MessageBox {
-    display: flex;
-    padding: var(--padding-sm) var(--padding-xl);
-    align-items: center;
-    gap: var(--gap-sm);
-}
-
-.Content .MessageBox {
-    border: 1px solid #ddd;
-}
-
-.RTL .MessageBox p {
-    padding: 1px 20px 1px 0;
-}
-
-.MessageBox i,
-.MessageBox p,
-.MessageBox a {
-    color: var(--black);
-}
 
 
 
@@ -418,7 +394,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .Filter li a:hover {
-    background-color: var(--gray-semi-light);
+    background-color: var(--gray-light-semi);
     border-radius: var(--border-radius-xxs);
 }
 

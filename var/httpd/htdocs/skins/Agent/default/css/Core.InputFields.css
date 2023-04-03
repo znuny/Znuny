@@ -165,6 +165,13 @@ table div.InputField_InputContainer .InputField_Search {
     min-width: 200px;
 }
 
+@media only screen and (max-width: 1024px) {
+    table div.InputField_InputContainer .InputField_Search {
+        min-width: 140px;
+    }
+}
+
+
 #ContextSettingsDialog div.InputField_InputContainer .InputField_Search {
     min-width: 0px;
 }
@@ -178,7 +185,7 @@ a.InputField_Action {
 }
 
 .InputField_InputContainer a.InputField_Action.InputField_ClearSearch {
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     top: 0;
     display: flex;
     align-items: center;
@@ -235,7 +242,7 @@ div.InputField_Selection {
 
 div.InputField_Selection div {
     display: inline-block;
-    font-size: 11px;
+    font-size: var(--font-size-sm);
 }
 
 div.InputField_Selection div.Text {
@@ -934,44 +941,6 @@ a.cke_button:hover {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * @subsection  Checkbox Styles
  */
@@ -1013,6 +982,10 @@ input[type=checkbox] {
     background: var(--white);
 }
 
+input[type=checkbox] + input[type=checkbox]{
+    margin-top: var(--margin-xs);
+}
+
 input[type=checkbox]:hover {
     border-color: var(--success-color);
 }
@@ -1022,11 +995,17 @@ input[type=checkbox]:checked {
     border: 2px solid var(--success-color); 
 }
 
+input[type=checkbox]:checked:disabled {
+    background: var(--disabled);
+    border: 2px solid var(--disabled); 
+}
+
 input[type=checkbox]:checked + label {
     color: var(--black);
 }
 
-input[type=checkbox]::after {
+input[type=checkbox]::after,
+input[type=checkbox]:disabled::after {
     position: absolute;
     z-index: 10000;
     content: '';
@@ -1038,6 +1017,10 @@ input[type=checkbox]::after {
     left: 3px;
     top: 0px;
     transition: var(--main-transition);
+}
+
+input[type=checkbox]:disabled::after {
+    opacity: 0.8;
   }
 
 input[type=checkbox]:checked::after{

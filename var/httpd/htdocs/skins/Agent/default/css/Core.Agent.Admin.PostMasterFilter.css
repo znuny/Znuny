@@ -20,7 +20,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  */
 
 label.Negate {
-    border: var(--border-width) var(--border-solid) var(--gray-semi-light);
+    border: var(--border-width) var(--border-solid) var(--gray-light-semi);
     padding: 8px var(--padding-sm);
     border-radius: var(--border-radius-xs);
     cursor: pointer;
@@ -31,7 +31,7 @@ label.Negate {
 }*/
 
 label.Negate.Checked {
-    background: var(--gray-semi-light);
+    background: var(--gray-light-semi);
 }
 
 /*label.Negate input {

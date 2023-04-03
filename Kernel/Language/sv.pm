@@ -198,11 +198,11 @@ sub Data {
         'Send to these agents' => 'Skicka till följande handläggare',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Skicka till alla rollmedlemmar',
-        'Send on out of office' => 'Skicka frånvaromeddelande',
         'Also send if the user is currently out of office.' => 'Skicka även om användaren inte är inne.',
-        'Once per day' => 'En gång om dagen',
+        'Send on out of office' => 'Skicka frånvaromeddelande',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'En gång om dagen',
         'Notification Methods' => 'Notifieringsmetoder',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Dessa metoder finns för att skicka den här notifieringen till var och en av mottagarna. Välj minst en metod nedan.',

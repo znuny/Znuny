@@ -234,7 +234,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     * @subsection  Hidden elements - Elements that are hidden at first
     */
     .Hidden,
-    .Field.Hidden {
+    .Field.Hidden,
+    fieldset.Hidden,
+    .AdminManagement .RegExTemplate.Hidden.TableLike {
         display: none;
     }
 
@@ -411,6 +413,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     dd {
         line-height: 1.3em;
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-sm);
     }
 
     .RTL dd {
@@ -1001,113 +1006,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 950px;
     }
 
-    /**
-    * @subsection  MessageBox
-    */
-
-    /*.MessageBox {
-        margin: 0px;
-        background: #F7AE40;
-        position: relative;
-        z-index: 0;
-    }
-
-    .MessageBox.WithIcon {
-        padding-left: 20px;
-    }
-
-    .MessageBox.WithIcon > i {
-        position: absolute;
-        left: 12px;
-        top: 12px;
-    }
-
-    .MessageBox p {
-        padding: 10px 10px 10px 19px;
-    }
-
-    .MessageBox p,
-    .MessageBox a {
-        color: #000;
-    }
-
-    .MessageBox a:hover {
-        text-decoration: none;
-    }
-
-    .MessageBox > p + p {
-        margin-top: 2px;
-    }*/
-
-    .MessageBox.Confirmation {
-        background: #049E35;
-    }
-
-    /*.MessageBox.Error p,
-    .MessageBox.Error a,
-    .MessageBox.Confirmation p,
-    .MessageBox.Confirmation a {
-        color: rgba(255, 255, 255, 0.8);
-    }*/
-
-    .MessageBox p a:after {
-        content: "\2192";
-        display: inline-block;
-        font-size: 15px;
-        transition: margin ease 0.3s;
-    }
-
-    /*.MessageBox p a:hover:after {
-        margin-left: 5px;
-    }
-
-    .MessageBox.Info {
-        background-color: #2A5464;
-    }
-
-    .MessageBox.Info p,
-    .MessageBox.Info a {
-        color: rgba(255, 255, 255, 0.8);
-    }*/
-
-    .MessageBox.Info a,
-    .MessageBox.Error a {
-        transition: color ease 0.3s;
-    }
-
-    .MessageBox.Info a:hover,
-    .MessageBox.Error a:hover {
-        color: #fff;
-    }
-
-    .MessageBox a.Button:after {
-        content: "";
-    }
-
-    .MessageBox a.Button {
-        display: inline;
-        padding: 3px 7px;
-    }
-
-    .MessageBox a.Button:hover {
-        text-decoration: none;
-    }
-
-    .MessageBox.Info a.Button {
-        background-color: #3E6C7C;
-    }
-
-    .MessageBox.Info a.Button:hover {
-        background-color: #4B7C8E;
-    }
-
-    .MessageBox.Info a.Button i {
-        color: #89C6D1;
-    }
-
-    form > .MessageBox{
-        margin-top: 0;
-    }
 
     /**
     * @subsection  Flag
@@ -1248,7 +1146,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     * @subsection  Datepicker
     */
     .DatepickerIcon i {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         font-size: var(--font-size-md);
     }
 
@@ -1507,7 +1405,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .ui-state-focus,
     .ui-widget-content .ui-state-focus,
     .ui-widget-header .ui-state-focus {
-        background: var(--gray-semi-light);
+        background: var(--gray-light-semi);
     }
 
     /**
@@ -2016,7 +1914,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding: 0 var(--padding-md);
     }
 
-
+    .single-row-elements {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+        gap: var(--gap-md);
+        justify-content: space-between;
+        padding-top: var(--padding-xs);
+        align-items: baseline;
+    }
 
     span.no-background,
     div.no-background,
@@ -2026,7 +1932,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .gray-semi-dark {
-        color: var(--gray-semi-dark) !important;
+        color: var(--gray-dark-semi) !important;
     }
 
 

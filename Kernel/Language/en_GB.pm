@@ -198,11 +198,11 @@ sub Data {
         'Send to these agents' => 'Send to these agents',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Send to all role members',
-        'Send on out of office' => 'Send on out of office',
         'Also send if the user is currently out of office.' => 'Also send if the user is currently out of office.',
-        'Once per day' => 'Once per day',
+        'Send on out of office' => 'Send on out of office',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Once per day',
         'Notification Methods' => 'Notification Methods',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.',

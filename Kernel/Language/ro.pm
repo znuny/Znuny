@@ -195,11 +195,11 @@ sub Data {
         'Send to these agents' => 'Trimitere la acești agenți',
         'Send to all group members (agents only)' => 'Trimitere la toți membrii grupului (numai agenții)',
         'Send to all role members' => 'Trimitere la toți membrii cu același rol',
-        'Send on out of office' => 'Trimite când lipsești',
         'Also send if the user is currently out of office.' => 'Trimitere chiar dacă agentul nu este la birou.',
-        'Once per day' => 'Odată pe zi',
+        'Send on out of office' => 'Trimite când lipsești',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Odată pe zi',
         'Notification Methods' => 'Metode de notificare',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Acestea sunt metodele posibile ce pot fi folosite pentru a transmite notificări către destinatari. Vă rugăm să selectați cel puțin o metodă mai jos.',

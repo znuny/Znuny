@@ -195,11 +195,11 @@ sub Data {
         'Send to these agents' => 'Poslať týmto agentom',
         'Send to all group members (agents only)' => 'Odoslať všetkým členom skupiny (iba agenti)',
         'Send to all role members' => 'Poslať všetkým členom role',
-        'Send on out of office' => 'Pošli Neprítomnosť v kancelárii',
         'Also send if the user is currently out of office.' => 'Pošli aj v prípade, že užívateľ je mimo kanceláriu.',
-        'Once per day' => 'Jedenkrát za deň',
+        'Send on out of office' => 'Pošli Neprítomnosť v kancelárii',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Jedenkrát za deň',
         'Notification Methods' => 'Spôsoby notifikácie',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',

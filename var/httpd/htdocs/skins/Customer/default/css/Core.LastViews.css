@@ -134,7 +134,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     
     .ToolTipContent > fieldset label,
     .ToolTipText > fieldset label{
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
     
     /* Avatar */

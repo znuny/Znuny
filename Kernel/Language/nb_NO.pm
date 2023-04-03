@@ -204,11 +204,11 @@ sub Data {
         'Send to these agents' => 'Sent til disse saksbehandlerne',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Send til alle medlemmer av rolle',
-        'Send on out of office' => '',
         'Also send if the user is currently out of office.' => '',
-        'Once per day' => 'En gang per dag',
+        'Send on out of office' => '',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'En gang per dag',
         'Notification Methods' => 'Varslingsmetoder',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',

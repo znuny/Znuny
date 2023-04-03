@@ -201,11 +201,11 @@ sub Data {
         'Send to these agents' => 'Pošalji ovim operaterima',
         'Send to all group members (agents only)' => 'Pošalji svim članovima grupe (samo operaterima)',
         'Send to all role members' => 'Pošalji svim pripadnicima uloge',
-        'Send on out of office' => 'Pošalji i kad je van kancelarije',
         'Also send if the user is currently out of office.' => 'Takođe pošalji i kada je korisnik van kancelarije.',
-        'Once per day' => 'Jednom dnevno',
+        'Send on out of office' => 'Pošalji i kad je van kancelarije',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Obavesti korisnika samo jednom dnevno o pojedinačnom terminu korišćenjem izabranog transporta.',
+        'Once per day' => 'Jednom dnevno',
         'Notification Methods' => 'Metode obaveštavanja',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Ovo su moguće metode koje se mogu koristiti za slanje obaveštenja svakom primaocu. Molimo vas da izaberete bar jednu metodu od ponuđenih.',

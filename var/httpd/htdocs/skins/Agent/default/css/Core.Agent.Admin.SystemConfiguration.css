@@ -49,7 +49,7 @@ textarea:focus, input:focus{
 }
 
 .GettingStarted li i {
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     font-size: 28px;
 }
 
@@ -333,11 +333,6 @@ h2.SearchResults {
     gap: var(--padding-lg);
 }
 
-.WidgetSimple .Warning {
-    color: red;
-    margin: 3px;
-}
-
 .TableLike.DeploymentData label,
 .TableLike.DeploymentData .Field {
     min-height: 0px;
@@ -377,12 +372,12 @@ h2.SearchResults {
 
 .WidgetSimple.Setting.IsModified,
 .Legend span.IsModified {
-    border-left: 8px var(--border-solid) var(--gray-semi-dark);
+    border-left: 8px var(--border-solid) var(--gray-dark-semi);
 }
 
 .RTL .WidgetSimple.Setting.IsModified,
 .RTL .Legend span.IsModified {
-    border-left: 8px var(--border-solid) var(--gray-semi-dark);
+    border-left: 8px var(--border-solid) var(--gray-dark-semi);
 }
 
 .WidgetSimple.Setting.IsDirty,
@@ -447,7 +442,7 @@ h2.SearchResults {
 
 .WidgetSimple.Setting .Header .HeaderMessage {
     font-size: 14px;
-    color: var(--gray-md);
+    color: var(--gray-medium);
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -1049,7 +1044,7 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
 .HashItem button.AddKey {
     position: absolute;
     width: 20px;
-    background: var(--gray-ultra-light);
+    background: var(--gray-light-ultra);
     height: 100%;
     top: 0;
     right: 0;
@@ -1074,7 +1069,7 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
     left: -4px;
     background: unset;
     border-radius: var(--border-radius-xxs);
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
 }
 
 .Array button.AddArrayItem span.InvisibleText,
@@ -1125,7 +1120,8 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
     border: 0;
     position: relative;
     left: -8px;
-    margin: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     min-height: 24px;
     min-width: 24px;
     border-radius: var(--border-radius-xxs);
@@ -1284,6 +1280,7 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
     background: var(--white);
     border: var(--border-width) var(--border-solid) var(--border-color);
     color: var(--black);
+    min-width: 72px;
 }
 
 .Setting > .SettingContent > .Type_String {
@@ -1350,9 +1347,9 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
 .IsLockedByMe .SettingContent .WorkingHoursItem > div > div label:hover,
 .IsLockedByMe .SettingContent .WorkingHoursItem > div > div:hover {
     cursor: pointer;
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     border-color: var(--border-color);
-    background: var(--gray-semi-light);
+    background: var(--gray-light-semi);
 }
 
 .IsLockedByMe .SettingContent .WorkingHoursItem.Checked > div > div {
@@ -1407,6 +1404,8 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
     color: var(--black);
     font-family: FontAwesome;
     font-size: 14px;
+    align-self: start;
+    margin-top: 10px;
 }
 
 .RTL .HashItem > .SettingContent:before {
@@ -1438,7 +1437,9 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
 }
 
 .HashItem .HashItem .SettingContent {
-    min-width: calc(100% - 170px);
+    /*min-width: calc(100% - 170px); - edit by b on 27/MAR/2023 */
+    min-width: unset;
+    width: auto;
 }
 
 .Hash > .HashItem > .SettingContent > .Hash > .HashItem  {

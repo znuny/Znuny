@@ -87,7 +87,7 @@ label {
     font-size: var(--main-font-size);
     font-weight: var(--medium);
     letter-spacing: 0.2px;
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
 }
 
 .RTL label {
@@ -167,7 +167,7 @@ input[type=text].ArticleFreeKey {
 }
 
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: var(--gray-semi-dark);
+   color: var(--gray-dark-semi);
    transition: color ease 0.3s;
    opacity: 1;
 }
@@ -256,10 +256,6 @@ fieldset h2 + p.Description {
 }
 
 fieldset h2 + div {
-
-/* TODO FORWWWARD Denny
- fa1fe0cd58... Sector Nord AG: Fixed popup description long were cut off in Customer Interface. (#331)
-*/
     padding-top: 13px;
     border-top: 1px solid #FFF;
 }
@@ -806,7 +802,7 @@ table.AttachmentList .Filetype {
 }
 
 table.AttachmentList .Filesize {
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
 }
 
 table.AttachmentList .AttachmentDelete {
@@ -868,7 +864,7 @@ div.TooltipErrorMessage {
 .ui-datepicker-calendar thead {
     font-size: var(--font-size-sm);
     font-weight: var(--medium);
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     letter-spacing: .86px;
 }
 
@@ -900,8 +896,8 @@ div.TooltipErrorMessage {
     left: unset !important;
     top: 0 !important;
     border: none !important;
-    color: var(--gray-semi-dark) !important;
-    background: var(--gray-semi-light) !important;
+    color: var(--gray-dark-semi) !important;
+    background: var(--gray-light-semi) !important;
     cursor: pointer;
 }
 
@@ -916,7 +912,7 @@ div.TooltipErrorMessage {
     left: unset !important;
     top: 0 !important;
     background: none;
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     border: var(--border-width) var(--border-solid) var(--border-color);
     padding: 8px;
     border-radius: 8px !important;
@@ -985,7 +981,7 @@ div.TooltipErrorMessage {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-    background: var(--gray-semi-light);
+    background: var(--gray-light-semi);
 }
 
 

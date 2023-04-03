@@ -345,8 +345,8 @@
                         <dl>
                             <dt>[% Translate("Group Permissions") | html %]</dt>
                             <dd>
-                                <div class="scroll-bar-styled">
-                                    <table class="DataTable VariableWidth SpacingTopSmall" id="GroupPermissionsTable">
+                                <div class="scroll-bar-styled SpacingBottom">
+                                    <table class="DataTable VariableWidth SpacingTopSmall TableSmall" id="GroupPermissionsTable">
                                         <thead>
                                             <tr>
                                                 <th>[% Translate("Group") | html %]</th>

@@ -160,7 +160,7 @@
                     [% END %]
                     <fieldset class="TableLike">
                         <div class="field-wrapper">
-                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("SLA") | html %]:</label>
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("SLA") | html %]</label>
                             <div class="Field">
                                 <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
                                 <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
@@ -170,7 +170,7 @@
 
                         [% IF Data.IsITSMInstalled %]
                             <div class="field-wrapper">
-                                <label for="TypeIDs">[% Translate("Type") | html %]:</label>
+                                <label for="TypeIDs">[% Translate("Type") | html %]</label>
                                 <div class="Field">
                                     [% Data.TypeOptionStrg %]
                                 </div>
@@ -178,21 +178,21 @@
                         [% END %]
 
                         <div class="field-wrapper">
-                            <label for="ServiceIDs">[% Translate("Service") | html %]:</label>
+                            <label for="ServiceIDs">[% Translate("Service") | html %]</label>
                             <div class="Field">
                                 [% Data.ServiceOptionStrg %]
                             </div>
                         </div>
 
                         <div class="field-wrapper">
-                            <label for="Calendar">[% Translate("Calendar") | html %]:</label>
+                            <label for="Calendar">[% Translate("Calendar") | html %]</label>
                             <div class="Field">
                                 [% Data.CalendarOptionStrg %]
                             </div>
                         </div>
                         <div class="Field single-row-inputs">
                             <div class="field-wrapper">
-                                <label for="FirstResponseTime">[% Translate("Escalation - first response time") | html %] ([% Translate("minutes") | html %]):</label>
+                                <label for="FirstResponseTime">[% Translate("Escalation - first response time") | html %] ([% Translate("minutes") | html %])</label>
                                 <input type="text" name="FirstResponseTime" id="FirstResponseTime" value="[% Data.FirstResponseTime | html %]" class="W50px Validate_Number" maxlength="10"/>
                                 <div id="FirstResponseTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
                             </div>
@@ -209,7 +209,7 @@
 
                         <div class="Field single-row-inputs">
                             <div class="field-wrapper">
-                                <label for="UpdateTime">[% Translate("Escalation - update time") | html %] ([% Translate("minutes") | html %]):</label>
+                                <label for="UpdateTime">[% Translate("Escalation - update time") | html %] ([% Translate("minutes") | html %])</label>
                                 <input type="text" name="UpdateTime" id="UpdateTime" value="[% Data.UpdateTime | html %]" class="W50px Validate_Number" maxlength="10"/>
                                 <div id="UpdateTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
                             </div>
@@ -226,7 +226,7 @@
 
                         <div class="Field single-row-inputs">
                             <div class="field-wrapper">
-                                <label for="SolutionTime">[% Translate("Escalation - solution time") | html %] ([% Translate("minutes") | html %]):</label>
+                                <label for="SolutionTime">[% Translate("Escalation - solution time") | html %] ([% Translate("minutes") | html %])</label>
                                 <input type="text" name="SolutionTime" id="SolutionTime" value="[% Data.SolutionTime | html %]" class="W50px Validate_Number" maxlength="10"/>
                                 <div id="SolutionTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
                             </div>
@@ -242,7 +242,7 @@
 
                         [% IF Data.IsITSMInstalled %]
                             <div class="field-wrapper">
-                                <label for="MinTimeBetweenIncidents">[% Translate("Minimum Time Between Incidents") | html %] ([% Translate("minutes") | html %]):</label>
+                                <label for="MinTimeBetweenIncidents">[% Translate("Minimum Time Between Incidents") | html %] ([% Translate("minutes") | html %])</label>
                                 <div class="Field">
                                     <input type="text" name="MinTimeBetweenIncidents" id="MinTimeBetweenIncidents" value="[% Data.MinTimeBetweenIncidents | html %]" class="W25pc Validate_Number" maxlength="15"/>
                                     <div id="MinTimeBetweenIncidentsError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
@@ -251,14 +251,14 @@
                         [% END %]
 
                         <div class="field-wrapper">
-                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
+                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]</label>
                             <div class="Field">
                                 [% Data.ValidOptionStrg %]
                             </div>
                         </div>
 
                         <div class="field-wrapper">
-                            <label for="Comment">[% Translate("Comment") | html %]:</label>
+                            <label for="Comment">[% Translate("Comment") | html %]</label>
                             <div class="Field">
                                 <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="W50pc" maxlength="250"/>
                             </div>
@@ -266,7 +266,7 @@
 [% RenderBlockStart("SLAItem") %]
 [% RenderBlockStart("InputKey") %]
                         <div class="field-wrapper">
-                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
                             <div class="Field">
                                 <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W50pc"/>
                             </div>
@@ -274,7 +274,7 @@
 [% RenderBlockEnd("InputKey") %]
 [% RenderBlockStart("Input") %]
                         <div class="field-wrapper">
-                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
                             <div class="Field">
                                 <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W50pc"/>
                                 <p class="FieldExplanation">
@@ -285,7 +285,7 @@
 [% RenderBlockEnd("Input") %]
 [% RenderBlockStart("TextArea") %]
                         <div class="field-wrapper">
-                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
                             <div class="Field">
                                 <textarea name="[% Data.Name | html %]" id="[% Data.Name | html %]" rows="[% Data.Rows | html %]" cols="[% Data.Cols | html %]">[% Data.SelectedID | html %]</textarea>
                                 <p class="FieldExplanation">
@@ -296,7 +296,7 @@
 [% RenderBlockEnd("TextArea") %]
 [% RenderBlockStart("Option") %]
                         <div class="field-wrapper">
-                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
                             <div class="Field">
                                 [% Data.Option %]
                                 <p class="FieldExplanation">
@@ -307,7 +307,7 @@
 [% RenderBlockEnd("Option") %]
 [% RenderBlockStart("Upload") %]
                         <div class="field-wrapper">
-                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
                             <div class="Field">
                                 <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="file" class="fixed"/>
                                 <a href="">[% Data.Filename | html %]</a>
@@ -316,7 +316,7 @@
 [% RenderBlockEnd("Upload") %]
 [% RenderBlockStart("Password") %]
                         <div class="field-wrapper">
-                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
                             <div class="Field">
                                 <input type="password" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="" class="W50pc"/>
                             </div>

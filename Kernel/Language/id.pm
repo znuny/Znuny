@@ -195,11 +195,11 @@ sub Data {
         'Send to these agents' => 'Kirimkan ke beberapa agen',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Kirimkan ke semua tugas anggota',
-        'Send on out of office' => 'Kirimkan selain ke kantor',
         'Also send if the user is currently out of office.' => 'Tetap kirimkan jika pengguna sedang berada diluar kantor',
-        'Once per day' => 'Sekali per hari',
+        'Send on out of office' => 'Kirimkan selain ke kantor',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Sekali per hari',
         'Notification Methods' => 'Pemberitahuan metode',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Ini adalah metode yang dapat digunakan untuk mengirim pemberitahuan ke masing-masing penerima. Silakan pilih minimal satu metode di bawah ini.',

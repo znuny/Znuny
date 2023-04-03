@@ -211,7 +211,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .Option a {
-    color: var(--gray-md);
+    color: var(--gray-medium);
     padding: 2px 0;
     transition: var(--main-transition);
     border-bottom: 1px solid transparent;

@@ -207,11 +207,11 @@ sub Data {
         'Send to these agents' => 'Отправить этим агентам',
         'Send to all group members (agents only)' => 'Отправить всем членам группы (только агенты)',
         'Send to all role members' => 'Отправить всем членам роли',
-        'Send on out of office' => 'Отправить для отсутствующих на месте',
         'Also send if the user is currently out of office.' => 'Также отправить, если пользователь в настоящее время отсутствует на месте.',
-        'Once per day' => 'Один раз в день',
+        'Send on out of office' => 'Отправить для отсутствующих на месте',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Уведомить пользователя только раз в день для каждого отдельного мероприятия, используя указанный способ доставки.',
+        'Once per day' => 'Один раз в день',
         'Notification Methods' => 'Способы уведомлений',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Существует несколько способов для отправки этого уведомления каждому из получателей. Выберите хотя бы один из приведенных ниже.',

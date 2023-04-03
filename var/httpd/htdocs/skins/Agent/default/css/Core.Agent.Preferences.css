@@ -137,11 +137,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin-left: 0px;
     }
 
-    .WidgetSimple .WidgetMessage.Top {
-        margin-top: 0px !important;
-        margin-bottom: 0px;
-    }
-
     .PreferenceAvatar img {
         display: block;
         float: left;

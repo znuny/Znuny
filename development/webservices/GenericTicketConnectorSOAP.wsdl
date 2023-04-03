@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="GenericTicketConnectorSOAP" targetNamespace="http://www.otrs.org/TicketConnector/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.otrs.org/TicketConnector/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions name="GenericTicketConnectorSOAP" targetNamespace="http://www.znuny.org/TicketConnector/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.znuny.org/TicketConnector/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <wsdl:documentation>The Generic Ticket Connector web service for SOAP protocol
 
 WARNING: This WSDL file is for Development and Test purposes ONLY!
 </wsdl:documentation>
     <wsdl:types>
-        <xsd:schema targetNamespace="http://www.otrs.org/TicketConnector/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <xsd:schema targetNamespace="http://www.znuny.org/TicketConnector/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <xsd:element name="TicketCreate">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -730,7 +730,7 @@ WARNING: This WSDL file is for Development and Test purposes ONLY!
     <wsdl:binding name="GenericTicketConnector_Binding" type="tns:GenericTicketConnector_PortType">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="TicketCreate">
-            <soap:operation soapAction="http://www.otrs.org/TicketConnector/TicketCreate"/>
+            <soap:operation soapAction="http://www.znuny.org/TicketConnector/TicketCreate"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -739,7 +739,7 @@ WARNING: This WSDL file is for Development and Test purposes ONLY!
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="TicketUpdate">
-            <soap:operation soapAction="http://www.otrs.org/TicketConnector/TicketUpdate"/>
+            <soap:operation soapAction="http://www.znuny.org/TicketConnector/TicketUpdate"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -748,7 +748,7 @@ WARNING: This WSDL file is for Development and Test purposes ONLY!
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="TicketGet">
-            <soap:operation soapAction="http://www.otrs.org/TicketConnector/TicketGet"/>
+            <soap:operation soapAction="http://www.znuny.org/TicketConnector/TicketGet"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -757,7 +757,7 @@ WARNING: This WSDL file is for Development and Test purposes ONLY!
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="TicketSearch">
-            <soap:operation soapAction="http://www.otrs.org/TicketConnector/TicketSearch"/>
+            <soap:operation soapAction="http://www.znuny.org/TicketConnector/TicketSearch"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -766,7 +766,7 @@ WARNING: This WSDL file is for Development and Test purposes ONLY!
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="TicketHistoryGet">
-            <soap:operation soapAction="http://www.otrs.org/TicketConnector/TicketHistoryGet"/>
+            <soap:operation soapAction="http://www.znuny.org/TicketConnector/TicketHistoryGet"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -775,7 +775,7 @@ WARNING: This WSDL file is for Development and Test purposes ONLY!
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="SessionCreate">
-            <soap:operation soapAction="http://www.otrs.org/TicketConnector/SessionCreate"/>
+            <soap:operation soapAction="http://www.znuny.org/TicketConnector/SessionCreate"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -784,7 +784,7 @@ WARNING: This WSDL file is for Development and Test purposes ONLY!
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="SessionGet">
-            <soap:operation soapAction="http://www.otrs.org/TicketConnector/SessionGet"/>
+            <soap:operation soapAction="http://www.znuny.org/TicketConnector/SessionGet"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

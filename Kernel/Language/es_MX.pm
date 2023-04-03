@@ -195,11 +195,11 @@ sub Data {
         'Send to these agents' => 'Enviar a estos agentes',
         'Send to all group members (agents only)' => 'Enviar a todos los miembros del grupo (sólo agentes)',
         'Send to all role members' => 'Enviar a todos los miembros del rol',
-        'Send on out of office' => 'Enviar en fuera de la oficina',
         'Also send if the user is currently out of office.' => 'También enviar si el usuario se encuentra fuera de la oficina.',
-        'Once per day' => 'Una vez al día',
+        'Send on out of office' => 'Enviar en fuera de la oficina',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Notificar al usuario sólo una vez al día acerca de una sola cita usando el transporte seleccionado.',
+        'Once per day' => 'Una vez al día',
         'Notification Methods' => 'Métodos de notificación',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Estos son los métodos que pueden usarse para enviar notificaciones a cada uno de los destinatarios. Favor de seleccionar al menos uno de los siguientes métodos.',

@@ -13,13 +13,13 @@
         <input type="hidden" name="Subaction" value="Search"/>
         <fieldset class="TableLike">
             <div class="field-wrapper">
-                <label>[% Translate("Text") | html %]:</label>
+                <label>[% Translate("Text") | html %]</label>
                 <div class="Field">
                     <input type="text" name="Search" value="[% Data.SearchTerm | html %]" class="W90pc" />
                 </div>
             </div>
             <div class="field-wrapper">
-                <label>[% Translate("Category") | html %]:</label>
+                <label>[% Translate("Category") | html %]</label>
                 <div class="Field">
                     [% Data.CategoriesStrg %]
                 </div>

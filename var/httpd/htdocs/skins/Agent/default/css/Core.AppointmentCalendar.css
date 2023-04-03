@@ -152,12 +152,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .PluginContainer a:first-child {
         display: flex;
         border-radius: var(--border-radius-sm);
-        border: var(--border-width) var(--border-solid) var(--gray-ultra-light);
+        border: var(--border-width) var(--border-solid) var(--gray-light-ultra);
         line-height: var(--input-line-height);
         padding: 6px var(--padding-sm);
         font-size: var(--font-size-sm);
         flex: 1;
-        background: var(--gray-ultra-light);
+        background: var(--gray-light-ultra);
     }
 
     .fc-agenda-view th.fc-resource-cell {
@@ -484,7 +484,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-left .fc-button-group button:hover,
     .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-left .fc-button-group button.fc-state-hover {
-        background-color: var(--gray-semi-light);
+        background-color: var(--gray-light-semi);
         border-radius: var(--border-radius-xxs);
     }
 
@@ -534,7 +534,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group button.fc-state-default:hover {
-        background-color: var(--gray-semi-light);
+        background-color: var(--gray-light-semi);
     }
 
     .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group button.fc-state-default.fc-today-button {
@@ -717,7 +717,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: flex;
         padding: 0;
         margin: 0;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     /* AGENT APPOINTMENT EDIT */

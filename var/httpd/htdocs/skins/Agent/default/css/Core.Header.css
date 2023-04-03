@@ -4,11 +4,6 @@ Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (AGPL). If you
 did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
-
-// TODO Denny delete me
-// nofilter(TidyAll::Plugin::Znuny::Common::CustomizationMarkers)
-// nofilter(TidyAll::Plugin::Znuny::Common::Origin)
-
 */
 
 /**
@@ -97,7 +92,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
             border-bottom: var(--border-width) var(--border-solid) var(--border-color);
         }
     }
-    
+
 
     #HeaderToolBar:first-child {
         margin-left: 0px;
@@ -125,10 +120,6 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         }
     }
 
-    .UserAvatar {
-        margin-right: 0;
-    }
-
     .RTL #HeaderToolBar li {
         float: right;
     }
@@ -145,30 +136,15 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         margin-top: 1px;
     }
 
-    #HeaderToolBar li.UserAvatar .Initials {
-        background: #777;
-        display: block;
-        height: 35px;
-        width: 35px;
-        border-radius: 50px;
-        color: #ccc;
-        text-indent: 0px;
-        text-align: center;
-        line-height: 37px;
-        text-shadow: 1px 1px 1px #333;
-        border: 1px solid transparent;
+    #HeaderToolBar li .icon-hover-md i,
+    #HeaderToolBar li .icon-hover-md:hover i {
+        color: var(--gray-dark);
     }
 
-    /*#HeaderToolBar li.UserAvatar i {
-        display: block !important;
-    }*/
+    .UserAvatar {
+        margin-right: 0;
+    }
 
-    /* HeaderToolBar Icons */
-    /*#HeaderToolBar i.fa {
-        font-size: var(--font-size-md);
-    }*/
-
-    /*#HeaderToolBar li*/
     .UserAvatar > a {
         display: flex;
         align-items: center;
@@ -184,29 +160,9 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         background-color: var(--gray-light);
     }
 
-    /*#HeaderToolBar li.UserAvatar > a:hover {
-        background: var(--gray-light);
-    }*/
-
-    body.Visible-ScreenXL #HeaderToolBar li.UserAvatar:hover > a,
-    body.Visible-ScreenXL #HeaderToolBar li.UserAvatar > a.Active {
-        animation-name: border-fill;
-        animation-duration: 0.3s;
-        animation-timing-function: ease;
-        animation-fill-mode: forwards;
-    }
-
     body.Visible-ScreenXL #HeaderToolBar li.UserAvatar > a.Active + div.UserAvatar_submenu {
         display: flex !important;
     }
-
-    @keyframes border-fill {
-        0%   { border-bottom: 0 solid #f92; }
-        25%  { border-bottom: 0 solid #f92; border-left: 0 solid #f92; }
-        50%  { border-bottom: 0 solid #f92; border-left: 0 solid #f92; border-top: 0 solid #f92; }
-        100% { border-bottom: 0 solid #f92; border-left: 0 solid #f92; border-top: 0 solid #f92; border-right: 0 solid #f92; }
-    }
-
 
     .UserAvatar img {
         width: 23px;
@@ -297,7 +253,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .UserAvatar_title {
-        color: var(--gray-semi-dark) !important;
+        color: var(--gray-dark-semi) !important;
     }
 
     .UserAvatar div:after {
@@ -421,7 +377,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .logo-navigation-wrapper {
         display: none;
     }
-    
+
     @media only screen and (max-width: 1024px) {
         #HeaderToolBar li.logo-navigation-wrapper {
             display: flex;
@@ -437,7 +393,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
             display: flex !important;
         }
     }
-    
+
     /*****************************/
     /*    Toolbar Search Field   */
     .search-bar-container,
@@ -519,7 +475,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         justify-content: center;
         margin: 0;
         min-width: 15px;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .search-bar-container input.search-bar {
@@ -534,7 +490,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         content: '';
         width: 100%;
         height: 1px;
-        background: var(--gray-semi-light);
+        background: var(--gray-light-semi);
         position: relative;
         display: flex;
         margin: var(--margin-md) 0;
@@ -711,8 +667,8 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         text-transform: none;
     }
 
-    .dropdown-item, 
-    .dropdown-item a, 
+    .dropdown-item,
+    .dropdown-item a,
     .dropdown-item.Selected a {
         color: var(--menu-font);
         font-size: var(--font-size-sm);
@@ -1069,7 +1025,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         color: #555;
     }
 
-    
+
 
     /**
     * @subsection      Navigation Level-0
@@ -1091,7 +1047,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .RTL #NavigationContainer {
         left: auto;
         right: 10px;
-    }    
+    }
 
     @media only screen and (max-width: 1024px) {
         #NavigationContainer,
@@ -1106,7 +1062,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
             overflow: unset;
         }
     }
-    
+
     .NavContainerZIndex{
         z-index: 5500 !important;
     }
@@ -1246,7 +1202,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
             transition: var(--main-transition);
         }
     }
-    
+
 
     #Navigation > li > a {
         display: block;
@@ -1256,6 +1212,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         line-height: var(--main-line-height);
         color: var(--menu-font);
         position: relative;
+        text-align: center;
     }
 
     @media only screen and (max-width: 1024px) {
@@ -1268,7 +1225,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
             flex-direction: row;
             justify-content: space-between;
         }
-    
+
         .RTL #Navigation > li > a {
             padding: 10px 15px;
         }
@@ -1297,14 +1254,6 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         }
     }
 
-    #Navigation > li > a#GlobalSearchNav {
-        padding-right: 21px;
-    }
-
-    #Navigation > li > a#GlobalSearchNav i {
-        font-size: 15px;
-        margin-top: 5px;
-    }
 
     .RTL #Navigation > li {
         float: right;
@@ -1351,7 +1300,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         #Navigation > li:hover {
             color: var(--white);
         }
-    
+
         #Navigation > .Selected a,
         #Navigation > li:focus a,
         #Navigation > li:hover a {
@@ -1407,16 +1356,10 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     /**
     * @subsection      Search icon
     */
-    #Navigation .Search {
-        width: 16px;
-    }
-
     #Navigation .Search i {
         display: block;
-        top: 2px;
-        left: 15px;
-        font-size: 20px;
-        position: absolute;
+        width: 24px;
+        position: relative;
     }
 
     /**
@@ -1494,11 +1437,9 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
 
-    /*
-    ##################################################################################################
-                                                Forwward Styles
-    ##################################################################################################
-    */
+    /* ################################################################################################## */
+    /*                                            Forwward Styles                                         */
+    /* ################################################################################################## */
 
     /*******************************************************/
     /*                    Toolbar Buttons                  */
@@ -1607,7 +1548,8 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         display: flex;
         flex-direction: column;
         margin: 0;
-        transition: all 0.7s;
+        transition: var(--main-transition);
+        padding-bottom: var(--padding-sm);
     }
 
     .toolbar-row-wrapper .toolbar-row {
@@ -1702,7 +1644,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         }
     }
 
-    
+
 
     /*******************************************************/
     /*                    Toolbar Icons                    */

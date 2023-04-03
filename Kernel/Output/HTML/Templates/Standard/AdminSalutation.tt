@@ -150,7 +150,7 @@
                     [% END %]
                     <fieldset class="TableLike">
                         <div class="field-wrapper">
-                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]</label>
                             <div class="Field">
                                 <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
                                 <div id="NameError" class="TooltipErrorMessage">
@@ -163,7 +163,7 @@
                         </div>
 
                         <div class="field-wrapper">
-                            <label class="Mandatory" for="RichText"><span class="Marker">*</span> [% Translate("Salutation") | html %]:</label>
+                            <label class="Mandatory" for="RichText"><span class="Marker">*</span> [% Translate("Salutation") | html %]</label>
                             <div class="RichTextField">
                                 <textarea id="RichText" class="RichText Validate_Required" rows="10" cols="74" name="Text">[% Data.Text | html %]</textarea>
                                 <div id="RichTextError" class="TooltipErrorMessage">
@@ -176,7 +176,7 @@
                         </div>
 
                         <div class="field-wrapper">
-                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
+                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]</label>
                             <div class="Field">
                                 [% Data.ValidOption %]
                                 <div id="ValidIDError" class="TooltipErrorMessage">
@@ -189,7 +189,7 @@
                         </div>
 
                         <div class="field-wrapper">
-                            <label for="Comment">[% Translate("Comment") | html %]:</label>
+                            <label for="Comment">[% Translate("Comment") | html %]</label>
                             <div class="Field">
                                 <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" maxlength="250"/>
                             </div>

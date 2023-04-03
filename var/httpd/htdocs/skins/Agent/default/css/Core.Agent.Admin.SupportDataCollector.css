@@ -42,7 +42,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .AdminSupportDataCollector textarea.Value {
-    background: var(--gray-semi-light);
+    background: var(--gray-light-semi);
     color: var(--gray-darker);
     min-height: 150px;
     min-width: calc(100% - 45px);
@@ -75,12 +75,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 .AdminSupportDataCollector .CheckResults > li.CheckResultUnknown span.Value,
 .AdminSupportDataCollector .CheckResults > li.CheckResultOK span.Value,
 .AdminSupportDataCollector .CheckResults > li.CheckResultInformation span.Value {
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     margin-left: -10px;
 }
 
 .AdminSupportDataCollector .CheckResults > li.CheckResultOK > p {
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
 }
 
 .AdminSupportDataCollector .CheckResults > li > p:empty {

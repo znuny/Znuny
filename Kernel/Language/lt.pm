@@ -195,11 +195,11 @@ sub Data {
         'Send to these agents' => 'Siųsti šiems agentams',
         'Send to all group members (agents only)' => 'Siųsti visiems grupės nariams (tik agentams)',
         'Send to all role members' => 'Siųsti visiems rolių nariams',
-        'Send on out of office' => 'Siųsti "Išvykęs"',
         'Also send if the user is currently out of office.' => 'Taip pat siųsti, jei vartotojas išvykęs.',
-        'Once per day' => 'Vieną kartą per dieną',
+        'Send on out of office' => 'Siųsti "Išvykęs"',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Vartotoją apie vieną susitikimą įspėti tik vieną kartą per dieną.',
+        'Once per day' => 'Vieną kartą per dieną',
         'Notification Methods' => 'Pranešimų būdai',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Čia yra galimi pranešimų siuntimo būdą kiekvienam gavėjui. Pasirinkite bent vieną būdą iš išvardintų.',

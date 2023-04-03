@@ -124,7 +124,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .Overview > li ul.InlineActions li form div.InputField_Container .InputField_InputContainer input:focus {
-        border-color: var(--gray-semi-dark);
+        border-color: var(--gray-dark-semi);
     }
 
 

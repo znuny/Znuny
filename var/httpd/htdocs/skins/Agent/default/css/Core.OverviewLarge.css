@@ -415,7 +415,7 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
     color: var(--table-text-color);
     transition: var(--main-transition);
     padding: var(--padding-sm) var(--padding-lg);
-    background: var(--gray-semi-light);
+    background: var(--gray-light-semi);
 }
 
 .OverviewLarge .Preview li.Active h3 {

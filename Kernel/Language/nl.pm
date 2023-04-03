@@ -201,11 +201,11 @@ sub Data {
         'Send to these agents' => 'Verstuur naar deze gebruikers',
         'Send to all group members (agents only)' => 'Verstuur naar alle groepsleden (alleen behandelaars)',
         'Send to all role members' => 'Verstuur naar alle leden van een rol',
-        'Send on out of office' => 'Verstuur ook wanneer afwezigheidsassistent aan staat',
         'Also send if the user is currently out of office.' => 'Verstuur ook wanneer afwezigheidsassistent aan staat',
-        'Once per day' => 'Eén keer per dag',
+        'Send on out of office' => 'Verstuur ook wanneer afwezigheidsassistent aan staat',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Eén keer per dag',
         'Notification Methods' => 'Meldingsmethoden',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Dit zijn de mogelijke manieren die kunnen worden gebruikt om meldingen te versturen naar elke ontvanger. Selecteer minimaal één methode.',

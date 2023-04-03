@@ -24221,3 +24221,7 @@ msgstr "عكس"
 msgid "stats"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Close this message"
+msgstr ""
+

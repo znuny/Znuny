@@ -201,11 +201,11 @@ sub Data {
         'Send to these agents' => 'Küldés ezeknek az ügyintézőknek',
         'Send to all group members (agents only)' => 'Küldés az összes csoporttagnak (csak ügyintézőknek)',
         'Send to all role members' => 'Küldés az összes szereptagnak',
-        'Send on out of office' => 'Küldés irodán kívüli állapotban',
         'Also send if the user is currently out of office.' => 'Akkor is küldje el, ha a felhasználó jelenleg irodán kívül van.',
-        'Once per day' => 'Naponta egyszer',
+        'Send on out of office' => 'Küldés irodán kívüli állapotban',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'A felhasználó értesítése csak egyszer egy nap egy egyedüli időpontról egy kiválasztott átvitel használatával.',
+        'Once per day' => 'Naponta egyszer',
         'Notification Methods' => 'Értesítési módszerek',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Ezek azok a lehetséges módszerek, amelyek ezen értesítés küldéséhez használhatók az egyes címzettek részére. Válasszon lent legalább egy módszert.',

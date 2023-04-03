@@ -195,11 +195,11 @@ sub Data {
         'Send to these agents' => 'Пошаљи овим оператерима',
         'Send to all group members (agents only)' => 'Пошаљи свим члановима групе (само оператерима)',
         'Send to all role members' => 'Пошаљи свим припадницима улоге',
-        'Send on out of office' => 'Пошаљи и кад је ван канцеларије',
         'Also send if the user is currently out of office.' => 'Такође пошаљи и када је корисник ван канцеларије.',
-        'Once per day' => 'Једном дневно',
+        'Send on out of office' => 'Пошаљи и кад је ван канцеларије',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Обавести корисника само једном дневно о појединачном термину коришћењем изабраног транспорта.',
+        'Once per day' => 'Једном дневно',
         'Notification Methods' => 'Методе обавештавања',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Ово су могуће методе које се могу користити за слање обавештења сваком примаоцу. Молимо вас да изаберете бар једну методу од понуђених.',
