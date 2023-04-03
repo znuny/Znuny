@@ -56,7 +56,7 @@
                     </div>
                     <div class="Content">
                         <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits ImportExport">
-                            <fieldset class="Separated">
+                            <fieldset class="Separated no-padding">
                                 <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                                 <input type="hidden" name="Subaction" value="ConfigurationImport"/>
                                 <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="Content">
                         <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate ImportExport">
-                            <fieldset class="Separated">
+                            <fieldset class="Separated no-padding">
                                 <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                                 <input type="hidden" name="Subaction" value="ConfigurationExport"/>
                                 <p class="FieldExplanation">

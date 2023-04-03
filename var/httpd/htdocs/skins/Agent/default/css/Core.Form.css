@@ -951,7 +951,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         font-weight: var(--semi-bold);
         padding: 0;
         text-indent: 0;
-        margin-bottom: var(--margin-lg);
+        margin-bottom: var(--padding-sm);
         font-size: var(--font-size-md);
     }
 

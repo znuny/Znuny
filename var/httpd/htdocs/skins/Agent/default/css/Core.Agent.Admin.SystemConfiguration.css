@@ -867,12 +867,15 @@ h2.SearchResults {
     position: relative;
     width: 100%;
     padding: var(--padding-sm) 0 0;
+    padding-bottom: var(--padding-xs);
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     z-index: 9;
     box-sizing: border-box;
     margin: 0;
+    color: var(--gray-dark);
+    text-indent: 5px;
 }
 
 .WidgetSimple.Setting .LockedByAnotherUser {
@@ -1440,6 +1443,7 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
     /*min-width: calc(100% - 170px); - edit by b on 27/MAR/2023 */
     min-width: unset;
     width: auto;
+    flex: 1;
 }
 
 .Hash > .HashItem > .SettingContent > .Hash > .HashItem  {
@@ -1685,10 +1689,10 @@ form.ImportExport fieldset {
 
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
 
-    .WidgetSimple .WidgetMenu,
+    /*.WidgetSimple .WidgetMenu,
     .WidgetSimple.Setting .WidgetMessage.Bottom {
         display: block;
-    }
+    }*/
 
     .WidgetSimple .WidgetMenu {
         padding-bottom: 0px;
@@ -1706,30 +1710,30 @@ form.ImportExport fieldset {
         top: 3px;
     }
 
-    .WidgetSimple.Setting .Header .ActionMenu .Expand {
+    /*.WidgetSimple.Setting .Header .ActionMenu .Expand {
         display: none;
-    }
+    }*/
 
     .WidgetSimple.Setting .Header .ActionMenu a {
         font-size: 18px;
+        margin-bottom: 2px;
     }
 
-    .WidgetSimple.Setting .SettingWrapper > form {
+    /*.WidgetSimple.Setting .SettingWrapper > form {
         padding-right: 0px;
-    }
+    }*/
 
     .WidgetSimple.Setting .SettingWrapper > .SettingDescription,
     .WidgetSimple.Setting .SettingWrapper > form {
         display: block;
         width: auto;
-        border-left: 0px;
     }
 
-    .WidgetSimple.Setting .SettingWrapper > .SettingDescription {
+    /*.WidgetSimple.Setting .SettingWrapper > .SettingDescription {
         padding-left: 10px;
     }
 
-    /*.WidgetSimple.Setting div.Content {
+    .WidgetSimple.Setting div.Content {
         padding-bottom: 35px !important;
     }*/
 
@@ -1742,6 +1746,18 @@ form.ImportExport fieldset {
         float: none;
     }
 
+}
+
+@media only screen and (max-width: 1250px) {
+    .WidgetSimple.Setting .SettingWrapper {
+        flex-flow: column-reverse;
+    }
+
+    .WidgetSimple.Setting .SettingWrapper > form {
+        min-width: unset;
+        width: auto;
+        border: 0;
+    }
 }
 
 } /* end @media */
