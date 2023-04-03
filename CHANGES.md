@@ -1,4 +1,6 @@
 # 7.0.2 2023-03-30
+ - 2023-04-03 Updated Agent/Notification.html.tmpl and changed insert position of Notifications (Notify).
+ - 2023-04-03 Fixed Issue - 'Ticket notifications not sent.' Changed return value GetTransportRecipients. [#361](https://github.com/znuny/Znuny/issues/361)
  - 2023-03-30 Fixed path in setting Frontend::WebPath.
 
 # 7.0.1 2023-03-29

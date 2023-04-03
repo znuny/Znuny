@@ -9268,10 +9268,6 @@ msgstr "アラート"
 msgid "Powered by"
 msgstr "Powered by"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-msgid " Close this message"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
 msgid "Show first page"
 msgstr "最初のページを表示"

@@ -9266,10 +9266,6 @@ msgstr ""
 msgid "Powered by"
 msgstr "Teenust käitab"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-msgid " Close this message"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
 msgid "Show first page"
 msgstr ""
