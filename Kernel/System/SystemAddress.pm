@@ -547,15 +547,6 @@ sub SystemAddressLookup {
         $ReturnData = $SystemAddressesReverse{$Value};
     }
 
-    # check if data exists
-    if ( !defined $ReturnData ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => "No $Key for $Value found!",
-        );
-        return;
-    }
-
     return $ReturnData;
 }
 
