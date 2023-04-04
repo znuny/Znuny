@@ -63,18 +63,20 @@
 
                 [% FOREACH ArticleField IN Data.ArticleMetaFields %]
                     <!-- show accounted time and dynamic fields -->
-                    <label>[% Translate(ArticleField.value.Label) | html %]:</label>
-                    [% IF ArticleField.value.Link %]
-                        <p class="Value" title="[% ArticleField.value.Title %]">
-                            <a href="[% ArticleField.value.Link | Interpolate %]"
-                                [% IF ArticleField.value.LinkPreview %] data-trigger="floater" data-floater-url="[% ArticleField.value.LinkPreview | Interpolate %]"[% END %]
-                                target="_blank" class="DynamicFieldLink">
-                                    [% ArticleField.value.Value %]
-                            </a>
-                        </p>
-                    [% ELSE %]
-                        <p class="Value" title="[% ArticleField.value.Title %]">[% ArticleField.value.Value %]</p>
-                    [% END %]
+                    <div class="field-wrapper">
+                        <label>[% Translate(ArticleField.value.Label) | html %]:</label>
+                        [% IF ArticleField.value.Link %]
+                            <p class="Value" title="[% ArticleField.value.Title %]">
+                                <a href="[% ArticleField.value.Link | Interpolate %]"
+                                    [% IF ArticleField.value.LinkPreview %] data-trigger="floater" data-floater-url="[% ArticleField.value.LinkPreview | Interpolate %]"[% END %]
+                                    target="_blank" class="DynamicFieldLink">
+                                        [% ArticleField.value.Value %]
+                                </a>
+                            </p>
+                        [% ELSE %]
+                            <p class="Value" title="[% ArticleField.value.Title %]">[% ArticleField.value.Value %]</p>
+                        [% END %]
+                    </div>
                     <div class="Clear"></div>
                 [% END %]
                 </fieldset>
