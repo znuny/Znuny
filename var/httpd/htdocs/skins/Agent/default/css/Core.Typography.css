@@ -17,13 +17,8 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
 */
 
-/**
-// TODO Denny delete me
-// nofilter(TidyAll::Plugin::Znuny::Common::CustomizationMarkers)
-*/
-
 @media screen,projection,tv,handheld {
-    
+
     /* **************************************** Color **************************************** */
     label.title {
         padding: var(--padding-sm);

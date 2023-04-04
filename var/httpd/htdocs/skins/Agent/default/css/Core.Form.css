@@ -125,52 +125,52 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         transition: color ease 0.3s;
     }
 
     :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         transition: color ease 0.3s;
         opacity: 1;
     }
 
     ::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         transition: color ease 0.3s;
         opacity: 1;
     }
 
     :-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         transition: color ease 0.3s;
     }
 
     ::-ms-input-placeholder { /* Microsoft Edge */
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         transition: color ease 0.3s;
     }
 
     :focus::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-        color: var(--gray-md);
+        color: var(--gray-medium);
     }
 
     :focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color: var(--gray-md);
+        color: var(--gray-medium);
         opacity: 1;
     }
 
     :focus::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color: var(--gray-md);
+        color: var(--gray-medium);
         opacity: 1;
     }
 
     :focus:-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color: var(--gray-md);
+        color: var(--gray-medium);
     }
 
     :focus::-ms-input-placeholder { /* Microsoft Edge */
-        color: var(--gray-md);
+        color: var(--gray-medium);
     }
 
     .Field.flex-row input.DynamicFieldText,
@@ -317,7 +317,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .btn-primary:hover,
-    .btn-primary-ghost:hover {
+    .btn-primary-ghost:hover,
+    .btn-primary-ghost:focus:hover {
         color: var(--btn-primary-text-hover);
         background: var(--primary-color-darker);
         border: var(--border-width) var(--border-solid) var(--primary-color-darker);
@@ -330,10 +331,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         color: var(--btn-dropdown-color);
         border: var(--border-width) var(--border-solid) var(--primary-color);
     }
-
+    /* 
     .btn-primary-ghost:hover {
         border-width: var(--border-width-md);
-    }
+    } */
 
     .btn-cancel-ghost,
     .btn-cancel-ghost:focus {
@@ -620,7 +621,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .GetAllAJAX {
         margin-left: 8px;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         font-size: var(--font-size-md);
         transition: var(--main-transition);
     }
@@ -950,7 +951,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         font-weight: var(--semi-bold);
         padding: 0;
         text-indent: 0;
-        margin-bottom: var(--margin-lg);
+        margin-bottom: var(--padding-sm);
         font-size: var(--font-size-md);
     }
 
@@ -959,10 +960,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         text-indent: 8px;
     }*/
 
-    .WidgetSimple .Content p:not(.ErrorBox):not(.SuccessBox) {
+    .WidgetSimple .Content p:not(.ErrorBox):not(.SuccessBox):not(.Notice) {
         color: var(--table-text-color);
         margin: 0;
-        padding: 0;
+        padding: var(--padding-xs);
         /* padding-bottom: var(--padding-md); ed removed on 22/12/15 */
     }
 
@@ -974,7 +975,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .WidgetSimple .Content p.FieldExplanation {
         /*padding: var(--padding-sm) 0;*/
         padding: 0;
-        color: var(--gray-md);
+        color: var(--gray-medium);
         background: transparent;
         align-self: center;
         width: 100%;
@@ -995,7 +996,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     p.FieldExplanation:last-child,
-    div.WidgetSimple div.Content p:last-child:not(.ErrorBox):not(.SuccessBox){
+    div.WidgetSimple div.Content p:last-child:not(.ErrorBox):not(.SuccessBox):not(:first-child){
         padding-bottom: 0;
     }
 
@@ -1195,8 +1196,16 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         font-size: var(--main-font-size);
         font-weight: var(--medium);
         letter-spacing: 0.2px;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
 
+    }
+
+    @media only screen and (max-width: 1024) {
+        form label[for],
+        form label,
+        .TableLike label {
+            font-size: var(--font-size-sm);
+        }
     }
 
     form label[for].Mandatory,
@@ -1431,7 +1440,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     #ACLForm textarea{
-        max-width: var(--main-field-size);
+        /*max-width: var(--main-field-size); - edited by b on 29/mar/23 - allow for full width within parent */
         box-sizing: border-box;
     }
 
@@ -1567,7 +1576,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     fieldset.TableLike > .Row > label {
         word-wrap: break-word;
         overflow-wrap: break-word;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     iframe.Signature {

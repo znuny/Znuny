@@ -5,7 +5,7 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-<label>[% Translate(Data.Plugin.Name) | html %]:</label>
+<label>[% Translate(Data.Plugin.Name) | html %]</label>
 
 <div class="Field link-wrapper">
     [% IF Data.PermissionLevel >= 2 %]

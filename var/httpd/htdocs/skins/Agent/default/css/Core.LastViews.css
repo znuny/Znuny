@@ -134,7 +134,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     .ToolTipContent > fieldset label,
     .ToolTipText > fieldset label{
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     /* Avatar */
@@ -162,12 +162,12 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         width: 100%;
         height: auto;
         display: flex;
-        padding: var(--padding-sm) var(--main-page-padding) 0 var(--main-page-padding);
+        padding: 0 var(--main-page-padding) var(--padding-sm) var(--main-page-padding);
     }
 
     @media only screen and (max-width: 1024px) {
         .LastViewMenuBar{
-            padding: var(--padding-sm) var(--padding-lg) 0 var(--padding-lg);
+            padding: 0 var(--padding-lg) var(--padding-sm) var(--padding-lg);
         }
     }
     

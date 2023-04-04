@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.90482485128883;
+    $Self->{Completeness}        = 0.904675367586321;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -62,6 +62,8 @@ sub Data {
         'ACL Management' => 'ACL kezelés',
         'ACLs' => 'ACL-ek',
         'Filter' => 'Szűrő',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Ne feledje: Ez a táblázat az ACL-ek végrehajtási sorrendjét tünteti fel. Ha módosítani kell az ACL-ek végrehajtási sorrendjén, változtassa meg az érintett ACL-ek neveit.',
         'ACL name' => 'ACL név',
@@ -201,11 +203,11 @@ sub Data {
         'Send to these agents' => 'Küldés ezeknek az ügyintézőknek',
         'Send to all group members (agents only)' => 'Küldés az összes csoporttagnak (csak ügyintézőknek)',
         'Send to all role members' => 'Küldés az összes szereptagnak',
-        'Send on out of office' => 'Küldés irodán kívüli állapotban',
         'Also send if the user is currently out of office.' => 'Akkor is küldje el, ha a felhasználó jelenleg irodán kívül van.',
-        'Once per day' => 'Naponta egyszer',
+        'Send on out of office' => 'Küldés irodán kívüli állapotban',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'A felhasználó értesítése csak egyszer egy nap egy egyedüli időpontról egy kiválasztott átvitel használatával.',
+        'Once per day' => 'Naponta egyszer',
         'Notification Methods' => 'Értesítési módszerek',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Ezek azok a lehetséges módszerek, amelyek ezen értesítés küldéséhez használhatók az egyes címzettek részére. Válasszon lent legalább egy módszert.',
@@ -3150,9 +3152,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Riasztás',
         'Powered by' => 'A gépházban:',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Első oldal megjelenítése',
@@ -9174,6 +9173,7 @@ Az Ön segélyszolgálat csapata
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

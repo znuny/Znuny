@@ -5,9 +5,6 @@ Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
 did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
-
-// TODO Denny delete me
-// nofilter(TidyAll::Plugin::Znuny::Common::CustomizationMarkers)
 */
 
 /**
@@ -210,7 +207,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: block;
         box-sizing: border-box;
         padding: 0 0 var(--padding-md);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .MainBox .SidebarColumn .WidgetSimple .Content fieldset.TableLike > .Value{
@@ -1310,7 +1307,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .SearchBox > i {
         position: absolute;
         font-size: var(--font-size-md);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         top: 9px;
         left: 10px;
     }
@@ -1596,58 +1593,22 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         justify-content: center;
         padding: var(--padding-sm);
         border-radius: var(--border-radius-xxs);
-        margin: var(--margin-lg) 0;
+        margin: 0;
+        flex-direction: column;
+        gap: var(--gap-xs);
     }
 
-    .WidgetSimple .WidgetMessage p + p {
-        margin-top: 2px;
-    }
-
-    .WidgetSimple .WidgetMessage p + p:last-child {
-        margin-bottom: 2px;
-    }
-
-    .SidebarColumn .WidgetSimple .WidgetMessage {
-        margin: 5px -8px;
-        padding: 5px 8px;
+    .WidgetSimple .WidgetMessage.Top {
+        margin-bottom: var(--margin-sm);
     }
 
     .WidgetSimple .WidgetMessage.Bottom {
-        margin-bottom: -10px !important;
+        margin-top: var(--margin-sm);
     }
 
-    /*.WidgetSimple .WidgetMessage.Top {
-        margin-top: 0px !important;
-    }*/
-
-    .WidgetSimple .WidgetMessage.Error {
-        background: #f8d7da;
-        border: 0;
-    }
-
-    .WidgetSimple .WidgetMessage.Error p {
-        color: #721c24;
-    }
-
-    .WidgetSimple .WidgetMessage.Warning {
-        background: #F7AE40;
-        border-color: #D18F2B;
-        color: #774a06;
-    }
-
-    .WidgetSimple .WidgetMessage.Warning * {
-    }
-
-    .WidgetSimple .WidgetMessage.Success {
-        background: #6EB22A;
-        color: #fff;
-        border-color: #52891B;
-    }
-
-    .WidgetSimple .WidgetMessage.Notice {
-        background: #2A61AF;
-        color: #fff;
-        border-color: #15468C;
+    .SidebarColumn .WidgetSimple .WidgetMessage strong {
+        display: flex;
+        width: 100%;
     }
 
     .WidgetSimple .WidgetMessage button {
@@ -1974,7 +1935,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .ActionsSideBar.LayoutFixedSidebar .ContentGrid .WidgetSimple.GridGroups .Header h2 span {
         padding: 0 var(--padding-sm);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         font-size: var(--main-font-size);
         font-weight: var(--normal);
     }
@@ -2124,12 +2085,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
 
-
-    /*
-    ##################################################################################################
-                                                Forwwward Styles
-    ##################################################################################################
-    */
+    /* ################################################################################################## */
+    /*                                            Forwward Styles                                         */
+    /* ################################################################################################## */
 
     .WidgetSimple {
         position: relative;
@@ -2488,6 +2446,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         justify-content: space-between;
         align-items: center;
         padding: var(--padding-xs) var(--padding-md);
+        transition: var(--main-transition);
     }
 
     /*.SidebarColumn .WidgetSimple:first-child form */
@@ -2558,7 +2517,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         content: "\f0fe";
         position: absolute;
         right: 10px;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .SidebarColumn .WidgetSimple:first-child form input:focus + ul.dropdown-search-menu,
@@ -2658,6 +2617,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         overflow: hidden;
     }
 
+    .ContentColumn .DataTable.scroll-bar-styled {
+        overflow: auto;
+    }
+
     .ContentColumn form .DataTable .DataTable {
         border: 0;
     }
@@ -2701,7 +2664,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .WidgetSettingsForm fieldset .row-wrapper label {
         display: flex;
         width: 130px;
-        color: var(--gray-md);
+        color: var(--gray-medium);
         padding-top: var(--padding-sm);
     }
 
@@ -2807,7 +2770,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .WidgetSettingsForm fieldset .row-wrapper .Field .Size1of2 .AllocationList li:nth-child(even) {
-        background: var(--gray-ultra-light);
+        background: var(--gray-light-ultra);
     }
 
     /* Widget - Ticket Settings */
@@ -2881,7 +2844,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     /*.information-widget */
     .Content fieldset > span label {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         flex: 0 0 auto;
     }
 
@@ -3037,7 +3000,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .MainBox .SidebarColumn .WidgetInformation .Content fieldset.TableLike .field-wrapper > label {
         display: flex;
         padding: 0;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .MainBox .SidebarColumn .WidgetInformation .Content fieldset.TableLike .field-wrapper > .Value {
@@ -3066,7 +3029,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         /*font-family: Inter;*/
         font-weight: var(--medium);
         letter-spacing: 0.2px;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         min-width: 120px;
     }
 
@@ -3103,7 +3066,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
         display: flex;
         justify-content: center;
-        background: var(--gray-semi-light);
+        background: var(--gray-light-semi);
         padding: var(--padding-sm);
         border-radius: var(--border-radius-xxs);
         margin: var(--margin-lg) 0;

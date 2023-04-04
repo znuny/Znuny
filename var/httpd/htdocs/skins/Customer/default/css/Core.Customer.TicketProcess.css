@@ -163,7 +163,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 .TicketProcess .PopupFooter .AdviceText {
     display: flex;
     padding: var(--padding-sm);
-    background: var(--gray-semi-light);
+    background: var(--gray-light-semi);
     color: var(--black);
     border-radius: var(--border-radius-xs);
     justify-content: center;

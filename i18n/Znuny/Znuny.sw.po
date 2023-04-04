@@ -9266,10 +9266,6 @@ msgstr ""
 msgid "Powered by"
 msgstr "Imewezeshwa na"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-msgid " Close this message"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
 msgid "Show first page"
 msgstr "Onyesha ukurasa wa kwanza"
@@ -24232,4 +24228,12 @@ msgstr "Badili"
 #. SysConfig
 msgid "stats"
 msgstr "takwimu"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show Valid"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show All"
+msgstr ""
 

@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="label-wrapper">
                                     <input type="checkbox" id="IsVisibleForCustomer" name="IsVisibleForCustomer" value="1" [% IF Data.IsVisibleForCustomer %]checked="checked"[% END %]/>
-                                    <label for="IsVisibleForCustomer">[% Translate("Visible for customer") | html %]:</label>
+                                    <label for="IsVisibleForCustomer">[% Translate("Visible for customer") | html %]</label>
                                 </div>
                                 <div class="field-wrapper">
 [% RenderBlockStart("TimeUnits") %]
@@ -96,13 +96,13 @@
 
                             <fieldset class="TableLike FixedLabel">
                                 <div class="field-wrapper">
-                                    <label for="Recipients">[% Translate("Recipients") | html %]:</label>
+                                    <label for="Recipients">[% Translate("Recipients") | html %]</label>
                                     <div class="Field">
                                         <span id="EmailRecipientsList"><i class="fa fa-spinner fa-spin"></i></span>
                                     </div>
                                 </div>
                                 <div class="field-wrapper">
-                                    <label class="Mandatory" for="EmailSubject"><span class="Marker">*</span> [% Translate("Subject") | html %]:</label>
+                                    <label class="Mandatory" for="EmailSubject"><span class="Marker">*</span> [% Translate("Subject") | html %]</label>
                                     <div class="Field">
                                         <input type="text" class="Validate_Required  [% Data.SubjectInvalid %] W75pc" id="EmailSubject" name="EmailSubject" value="[% Data.EmailSubject | html %]" />
                                         <div id="EmailSubjectError" class="TooltipErrorMessage">
@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="field-wrapper">
-                                    <label class="Mandatory" for="EmailBody"><span class="Marker">*</span> [% Translate("Text") | html %]:</label>
+                                    <label class="Mandatory" for="EmailBody"><span class="Marker">*</span> [% Translate("Text") | html %]</label>
                                     <div class="RichTextField Field">
                                         <textarea id="EmailBody" class="RichText Validate_Required [% Data.BodyInvalid %]" name="EmailBody" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]">[% Data.EmailBody | html %]</textarea>
                                         <div id="EmailBodyError" class="TooltipErrorMessage">
@@ -136,14 +136,14 @@
                     <fieldset class="TableLike FixedLabel">
 [% RenderBlockStart("State") %]
                         <div class="field-wrapper">
-                            <label for="StateID">[% Translate("Next state") | html %]:</label>
+                            <label for="StateID">[% Translate("Next state") | html %]</label>
                             <div class="Field">
                                 [% Data.NextStatesStrg %]
                             </div>
                         </div>
 [% RenderBlockStart("StatePending") %]
                         <div class="field-wrapper">
-                            <label>[% Translate("Pending date") | html %]:</label>
+                            <label>[% Translate("Pending date") | html %]</label>
                             <div class="Field">
                                 [% Data.DateString %]
                                 <div id="DayServerError" class="TooltipErrorMessage">
@@ -159,7 +159,7 @@
 [% RenderBlockEnd("State") %]
 [% RenderBlockStart("Type") %]
                         <div class="field-wrapper">
-                            <label for="TypeID">[% Translate("Type") | html %]:</label>
+                            <label for="TypeID">[% Translate("Type") | html %]</label>
                             <div class="Field">
                                 [% Data.TypeStrg %]
                             </div>
@@ -167,7 +167,7 @@
 [% RenderBlockEnd("Type") %]
 
                         <div class="field-wrapper">
-                            <label for="QueueID">[% Translate("Queue") | html %]:</label>
+                            <label for="QueueID">[% Translate("Queue") | html %]</label>
                             <div class="Field">
                                 [% Data.MoveQueuesStrg %]
                             </div>
@@ -179,7 +179,7 @@
                                     <span class="Marker">*</span>[% Translate("Service") | html %]:
                                 </label>
                             [% ELSE %]
-                                <label for="ServiceID">[% Translate("Service") | html %]:</label>
+                                <label for="ServiceID">[% Translate("Service") | html %]</label>
                             [% END %]
                             <div class="Field">
                                 [% Data.ServiceStrg %]
@@ -212,7 +212,7 @@
 [% RenderBlockEnd("ServiceMandatory") %]
 [% RenderBlockStart("Owner") %]
                         <div class="field-wrapper">
-                            <label for="OwnerID">[% Translate("Owner") | html %]:</label>
+                            <label for="OwnerID">[% Translate("Owner") | html %]</label>
                             <div class="Field">
                                 [% Data.OwnerStrg %]
                             </div>
@@ -220,7 +220,7 @@
 [% RenderBlockEnd("Owner") %]
 [% RenderBlockStart("Responsible") %]
                         <div class="field-wrapper">
-                            <label for="ResponsibleID">[% Translate("Responsible") | html %]:</label>
+                            <label for="ResponsibleID">[% Translate("Responsible") | html %]</label>
                             <div class="Field">
                                 [% Data.ResponsibleStrg %]
                             </div>
@@ -228,19 +228,19 @@
 [% RenderBlockEnd("Responsible") %]
 [% RenderBlockStart("Priority") %]
                         <div class="field-wrapper">
-                            <label for="PriorityID">[% Translate("Priority") | html %]:</label>
+                            <label for="PriorityID">[% Translate("Priority") | html %]</label>
                             <div class="Field">
                                 [% Data.PriorityStrg %]
                             </div>
                         </div>
 [% RenderBlockEnd("Priority") %]
                         <div class="field-wrapper">
-                            <label>[% Translate("Merge") | html %]:</label>
+                            <label>[% Translate("Merge") | html %]</label>
                             <div class="field-column">
                                 <div class="Field field-column">
                                     <div class="radio-field-wrapper">
                                         <input type="radio" name="MergeToSelection" id="OptionMergeTo" class="RadioRound" value="OptionMergeTo" [% Data.MergeToChecked %]/>
-                                        <label for="MergeTo">[% Translate("Merge to") | html %] [% Config("Ticket::Hook") | html %]:</label>
+                                        <label for="MergeTo">[% Translate("Merge to") | html %] [% Config("Ticket::Hook") | html %]</label>
                                     </div>
                                     <input type="text" class="[% Data.MergeToInvalid | html %] W50pc" id="MergeTo" name="MergeTo" value="[% Data.MergeTo | html %]"/>
                                     <div id="MergeToServerError" class="TooltipErrorMessage">
@@ -256,13 +256,13 @@
                             </div>
                         </div>
                         <div class="field-wrapper">
-                            <label for="LinkTogether">[% Translate("Link together") | html %]:</label>
+                            <label for="LinkTogether">[% Translate("Link together") | html %]</label>
                             <div class="Field">
                                 [% Data.LinkTogetherYesNoOption %]
                             </div>
                         </div>
                         <div class="field-wrapper">
-                            <label for="LinkTogetherParent">[% Translate("Link to parent") | html %]:</label>
+                            <label for="LinkTogetherParent">[% Translate("Link to parent") | html %]</label>
                             <div class="Field">
                                 <input type="text" class="[% Data.LinkTogetherParentInvalid | html %] W50pc" id="LinkTogetherParent" name="LinkTogetherParent" value="[% Data.LinkTogetherParent | html %]"/>
                                 <div id="LinkTogetherParentServerError" class="TooltipErrorMessage">
@@ -271,7 +271,7 @@
                             </div>
                         </div>
                         <div class="field-wrapper">
-                            <label for="Unlock">[% Translate("Unlock tickets") | html %]:</label>
+                            <label for="Unlock">[% Translate("Unlock tickets") | html %]</label>
                             <div class="Field">
                                 [% Data.UnlockYesNoOption %]
                             </div>

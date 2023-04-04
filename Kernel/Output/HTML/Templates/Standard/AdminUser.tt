@@ -143,8 +143,8 @@
                             [% END %]
                         </h2>
                         <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
-                            <span class="show-valid">Show Valid</span>
-                            <span class="show-all">Show All</span>
+                            <span class="show-valid">[% Translate("Show Valid") | html %]</span>
+                            <span class="show-all">[% Translate("Show All") | html %]</span>
                         </a>
                     </div>
 [% RenderBlockEnd("OverviewHeader") %]
@@ -345,8 +345,8 @@
                         <dl>
                             <dt>[% Translate("Group Permissions") | html %]</dt>
                             <dd>
-                                <div class="scroll-bar-styled">
-                                    <table class="DataTable VariableWidth SpacingTopSmall" id="GroupPermissionsTable">
+                                <div class="scroll-bar-styled SpacingBottom">
+                                    <table class="DataTable VariableWidth SpacingTopSmall TableSmall" id="GroupPermissionsTable">
                                         <thead>
                                             <tr>
                                                 <th>[% Translate("Group") | html %]</th>

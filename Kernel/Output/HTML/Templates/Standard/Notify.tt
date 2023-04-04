@@ -25,7 +25,7 @@
         </a>
 [% RenderBlockEnd("LinkStop") %]
     </p>
-    <a class="Close icon-hover" title="[% Translate(" Close this message") | html %]" href="#">
+    <a class="Close icon-hover" title="[% Translate("Close this message") | html %]" href="#">
         <i class="fa fa-times"></i>
     </a>
 </div>

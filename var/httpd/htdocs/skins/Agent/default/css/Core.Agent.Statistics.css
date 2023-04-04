@@ -72,7 +72,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .PreviewContainer .PreviewSettings .Warning {
     display: block;
-    color: var(--gray-md);
+    color: var(--gray-medium);
 }
 
 .PreviewContainer .PreviewSettings .btns-wrapper {

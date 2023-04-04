@@ -498,8 +498,11 @@ var Core = Core || {};
                         LinkURL,
                         function() {
                             Core.UI.InitStickyElement();
-                        }
+                        },
+                        undefined,
+                        'fa-bell'
                     );
+                    Core.UI.InitMessageBoxClose();
                 }
                 else if (Response.Data.DeploymentNeeded == 0) {
                     Core.UI.HideNotification(
@@ -1112,8 +1115,11 @@ var Core = Core || {};
                             LinkURL,
                             function() {
                                 Core.UI.InitStickyElement();
-                            }
+                            },
+                            undefined,
+                            'fa-bell'
                         );
+                        Core.UI.InitMessageBoxClose();
                     }
                 }
                 Core.App.Publish('SystemConfiguration.SettingListUpdate');

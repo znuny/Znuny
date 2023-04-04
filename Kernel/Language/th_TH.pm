@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.527759418374091;
+    $Self->{Completeness}        = 0.527672228646952;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -56,6 +56,8 @@ sub Data {
         'ACL Management' => 'การจัดการ ACL',
         'ACLs' => 'ACLs',
         'Filter' => 'ตัวกรอง',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'โปรดทราบ: ตารางนี้แสดงถึงลำดับการดำเนินการของ ACLsถ้าคุณต้องการที่จะเปลี่ยนลำดับดำเนินการของ ACLs โปรดเปลี่ยนชื่อ ACLs ที่ ได้รับผลกระทบ',
         'ACL name' => 'ชื่อ ACL',
@@ -195,11 +197,11 @@ sub Data {
         'Send to these agents' => 'ส่งให้เอเย่นต์เหล่านี้',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'ส่งให้กับสมาชิกที่มีบทบาททั้งหมด',
-        'Send on out of office' => 'ส่งออกจากสำนักงาน',
         'Also send if the user is currently out of office.' => 'ส่งเช่นกันหากผู้ใช้ปัจจุบันอยู่นอกออฟฟิศ',
-        'Once per day' => 'วันละครั้ง',
+        'Send on out of office' => 'ส่งออกจากสำนักงาน',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'วันละครั้ง',
         'Notification Methods' => 'วิธีการแจ้งเตือน',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'นี่คือวิธีการที่เป็นไปได้ที่สามารถนำมาใช้ในการส่งการแจ้งเตือนนี้ให้กับผู้รับแต่ละคน กรุณาเลือกวิธีการอย่างน้อยหนึ่งวิธีการดังต่อไปนี้',
@@ -3147,9 +3149,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'ให้การสนับสนุนโดย',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'แสดงหน้าแรก',
@@ -9174,6 +9173,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

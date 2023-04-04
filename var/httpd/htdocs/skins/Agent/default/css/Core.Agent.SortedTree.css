@@ -71,7 +71,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .SortableList li span.Icon:hover i {
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
 }
 
 .SortableList li span.Icon i {
@@ -85,7 +85,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .SortableList li span input {
     border: 0;
-    background: var(--gray-semi-light);
+    background: var(--gray-light-semi);
     border: var(--border-width) var(--border-solid) var(--border-color);
     box-shadow: none;
     color: var(--main-font-color);
@@ -128,7 +128,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .SortableList li span i {
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     font-size: 18px;
     position: absolute;
     left: 10px;

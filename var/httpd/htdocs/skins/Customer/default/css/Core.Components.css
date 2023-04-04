@@ -48,7 +48,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     label .icon-hover i,
     button .icon-hover i {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         font-size: var(--font-size-md);
     }
 
@@ -67,8 +67,8 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .icon-hover-md i,
     .icon-hover-sm i {
         font-weight: var(--normal);
-        font-size: var(--font-size-md);
-        color: var(--gray-semi-dark);
+        font-size: var(--icon-main-size);
+        color: var(--gray-dark-semi);
     }
 
     .icon-hover:hover,
@@ -394,6 +394,10 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     /* ************************************** MessageBox *************************************** */
     /* note - previously in Core.TicketDetail */
 
+    /**
+    * @subsection  MessageBox (Notification)
+    */
+
     .SmallBox,
     .MessageBrowser,
     .MessageBox,
@@ -407,6 +411,15 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         border-radius: var(--border-radius-xxs);
         gap: var(--gap-md);
     }
+
+    .Content .MessageBox {
+        border: 1px solid #ddd;
+    }
+
+    form > .MessageBox{
+        margin-top: 0;
+    }
+
 
     .MessageBrowser i,
     .MessageBox i,
@@ -436,6 +449,38 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         text-align: center;
     }
 
+
+    .MessageBox i,
+    .MessageBox p,
+    .MessageBox a {
+        color: var(--black);
+    }
+
+
+    .MessageBox p a:after {
+        content: "\2192";
+        display: inline-block;
+        font-size: 15px;
+        transition: margin ease 0.3s;
+    }
+
+    .MessageBox a {
+        transition: color ease 0.3s;
+    }
+
+    .MessageBox a.Button:after {
+        content: "";
+    }
+
+    .MessageBox a.Button {
+        display: inline;
+        padding: 3px 7px;
+    }
+
+    .MessageBox a.Button:hover {
+        text-decoration: none;
+    }
+
     /**
     * @subsection  Alerts colors
     * @note
@@ -459,6 +504,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         color: var(--alert-error-icon-color);
     }
 
+    .MessageBox.Confirmation, 
     .Success {
         background: var(--alert-success-bg-color);
         border: 1px solid var(--alert-success-border-color);
@@ -485,6 +531,12 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .Notice i {
         color: var(--alert-notice-icon-color);
     }
+
+
+
+
+
+
 
     /* ************************************* Attachment Component ********************************* */
 
@@ -680,7 +732,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     table.AttachmentList .Filesize {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     table.AttachmentList .Progress {
@@ -769,7 +821,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .attachment-widget .message .DownloadAttachment a .file-weight {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .attachment-widget .message .DownloadAttachment a .file-icon {
@@ -779,7 +831,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .attachment-widget .message .DownloadAttachment a .file-icon i {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         font-size: 16px;
     }
 
@@ -829,7 +881,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     .voting .ArticleContent .voting-form .RateButtons > li:first-child,
     .voting .ArticleContent .voting-form .RateButtons > li:last-child {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .Visible-ScreenS .RateButtons > li {
@@ -853,7 +905,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         display: flex;
         font-size: 16px;
         width: 100%;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .voting .ArticleContent .voting-form .RateButton i.fa-star {
@@ -885,7 +937,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     .voting .ArticleContent .voting-form .RateLabelBefore,
     .voting .ArticleContent .voting-form .RateLabelAfter {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         padding-top: 5px;
         font-weight: bold;
     }
@@ -1274,7 +1326,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .Pagination li span {
         align-self: center;
         font-size: var(--font-size-sm);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .Pagination ul li a:first-child {
@@ -1283,7 +1335,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .Pagination a {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .Pagination .page-links a:hover {
@@ -1309,7 +1361,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     .Pagination .page-links a:hover {
         background-color: var(--gray-light);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .Pagination.page-links a:hover {

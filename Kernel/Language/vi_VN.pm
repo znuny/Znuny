@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.147719762062128;
+    $Self->{Completeness}        = 0.147695357673881;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -55,6 +55,8 @@ sub Data {
         'ACL Management' => '',
         'ACLs' => 'Danh sách kiểm soát truy cập',
         'Filter' => 'Lọc',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Xin lưu ý: Bảng này đại diện cho thứ tự thực hiện các ACL. Nếu bạn cần thay đổi thứ tự mà ACL được thực hiện, hãy thay đổi tên của các ACL bị ảnh hưởng.',
         'ACL name' => 'tên ACL = Danh sách kiểm soát truy cập',
@@ -194,11 +196,11 @@ sub Data {
         'Send to these agents' => '',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => '',
-        'Send on out of office' => '',
         'Also send if the user is currently out of office.' => '',
-        'Once per day' => '',
+        'Send on out of office' => '',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => '',
         'Notification Methods' => '',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',
@@ -3143,9 +3145,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'Chạy trên nền',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => '',
@@ -9156,6 +9155,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

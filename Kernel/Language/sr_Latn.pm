@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.90118968935889;
+    $Self->{Completeness}        = 0.901040806211796;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -62,6 +62,8 @@ sub Data {
         'ACL Management' => 'Upravljanje ACL',
         'ACLs' => 'ACL liste',
         'Filter' => 'Filter',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Napomena: Ova tabela predstavlja redosled izvršavanja u ACL listama. Ako je potrebno da promenite redosled kojim se izvršavaju ACL liste, molimo promenite imena tih ACL lista.',
         'ACL name' => 'Naziv ACL',
@@ -201,11 +203,11 @@ sub Data {
         'Send to these agents' => 'Pošalji ovim operaterima',
         'Send to all group members (agents only)' => 'Pošalji svim članovima grupe (samo operaterima)',
         'Send to all role members' => 'Pošalji svim pripadnicima uloge',
-        'Send on out of office' => 'Pošalji i kad je van kancelarije',
         'Also send if the user is currently out of office.' => 'Takođe pošalji i kada je korisnik van kancelarije.',
-        'Once per day' => 'Jednom dnevno',
+        'Send on out of office' => 'Pošalji i kad je van kancelarije',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Obavesti korisnika samo jednom dnevno o pojedinačnom terminu korišćenjem izabranog transporta.',
+        'Once per day' => 'Jednom dnevno',
         'Notification Methods' => 'Metode obaveštavanja',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Ovo su moguće metode koje se mogu koristiti za slanje obaveštenja svakom primaocu. Molimo vas da izaberete bar jednu metodu od ponuđenih.',
@@ -3150,9 +3152,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Upozorenje',
         'Powered by' => 'Pokreće',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Pokaži prvu stranu',
@@ -9174,6 +9173,7 @@ Vaša tehnička podrška
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

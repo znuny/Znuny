@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.383509583608724;
+    $Self->{Completeness}        = 0.383446225012391;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -65,6 +65,8 @@ sub Data {
         'ACL Management' => 'Administrasjon: ACL',
         'ACLs' => 'ACLer',
         'Filter' => 'Filter',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Obs! Denne tabellen representerer eksekveringssekvensen på ACL\'ene. Dersom du trenger å endre på sekvensen på hvilke ACL\'er som utføres, vær vennlig å endre navnet på de berørte ACL\'ene.',
         'ACL name' => 'ACL navn',
@@ -204,11 +206,11 @@ sub Data {
         'Send to these agents' => 'Sent til disse saksbehandlerne',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Send til alle medlemmer av rolle',
-        'Send on out of office' => '',
         'Also send if the user is currently out of office.' => '',
-        'Once per day' => 'En gang per dag',
+        'Send on out of office' => '',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'En gang per dag',
         'Notification Methods' => 'Varslingsmetoder',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',
@@ -3153,9 +3155,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'Drevet av',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Vis første side',
@@ -9166,6 +9165,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

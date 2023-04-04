@@ -90,7 +90,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     label .icon-hover i,
     button .icon-hover i {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         font-size: var(--font-size-md);
     }
 
@@ -112,7 +112,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .icon-hover-sm i {
         font-weight: var(--normal);
         font-size: var(--font-size-md);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .icon-hover:hover,
@@ -179,6 +179,11 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         flex-flow: column;
         gap: var(--gap-xs);
         background: var(--main-bg-color);
+        overflow: hidden; /* needed so its ::after element does not cause horizontal overflow in parent containers */
+    }
+
+    .card-item-wrapper .card-item {
+        gap: var(--gap-md);
     }
 
     .card-title {
@@ -344,7 +349,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     ::-ms-input-placeholder {
         font-size: var(--font-size-sm);
         font-weight: var(--medium);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
 
@@ -358,7 +363,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .ui-datepicker-calendar thead {
         font-size: var(--font-size-sm);
         font-weight: var(--medium);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         letter-spacing: .86px;
     }
     
@@ -395,8 +400,8 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         left: unset !important;
         top: 0 !important;
         border: none !important;
-        color: var(--gray-semi-dark) !important;
-        background: var(--gray-semi-light) !important;
+        color: var(--gray-dark-semi) !important;
+        background: var(--gray-light-semi) !important;
         cursor: pointer;
     }
     
@@ -411,7 +416,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         left: unset !important;
         top: 0 !important;
         background: none;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         border: var(--border-width) var(--border-solid) var(--border-color);
         padding: 8px;
         border-radius: 8px !important;
@@ -454,7 +459,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
     
     .mentions-widget ul li .email-wrapper span:nth-child(2) {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     /* **************************************** Buttons **************************************** */
@@ -491,7 +496,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     
     .voting .ArticleContent .voting-form .RateButtons > li:first-child,
     .voting .ArticleContent .voting-form .RateButtons > li:last-child {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }   
     
     .Visible-ScreenS .RateButtons > li {
@@ -515,7 +520,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         display: flex;
         font-size: 16px;
         width: 100%;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
     
     .voting .ArticleContent .voting-form .RateButton i.fa-star {
@@ -547,7 +552,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     
     .voting .ArticleContent .voting-form .RateLabelBefore,
     .voting .ArticleContent .voting-form .RateLabelAfter {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         padding-top: 5px;
         font-weight: bold;
     }
@@ -600,7 +605,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .RemoveButton i {
         font-weight: var(--normal);
         font-size: var(--font-size-md);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         width: 14px;
         height: 14px;
     }
@@ -912,7 +917,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     table.AttachmentList .Filesize {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     /*table.AttachmentList .Progress {
@@ -991,6 +996,10 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         border-radius: var(--border-radius-sm);
         border: var(--border-width) var(--border-solid) var(--border-color);
         overflow: hidden;
+    }
+
+    .TableList.TableLikeOverflow {
+        overflow: auto;
     }
 
     .TableList thead tr th {
@@ -1284,7 +1293,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .attachment-widget .message .DownloadAttachment a .file-weight {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .attachment-widget .message .DownloadAttachment a .file-icon {
@@ -1294,7 +1303,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .attachment-widget .message .DownloadAttachment a .file-icon i {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         font-size: 16px;
     }
 
@@ -1342,7 +1351,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .ArticleAttachments li .file-weight {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .ArticleAttachments li .file-icon {
@@ -1357,7 +1366,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .ArticleAttachments li .file-icon i {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         font-size: 16px;
     }
 
@@ -1606,7 +1615,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         gap: var(--gap-xs);
         padding: 8px var(--padding-md);
         border: var(--border-width) var(--border-solid) var(--border-color);
-        background: var(--gray-semi-light);
+        background: var(--gray-light-semi);
         color: var(--black);
         line-height: normal;
         border-radius: var(--border-radius-sm);
@@ -1660,7 +1669,8 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     .single-row-inputs .field-wrapper label {
         max-width: 125px;
-        min-width: 65px;
+        /* min-width: 65px; removed by ED on 23/03/28 */ 
+        padding-right: var(--padding-xs);
     }
 
     .single-row-inputs .field-wrapper .Field {
@@ -1768,17 +1778,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         display: flex;
         position: relative;
         height: 26px;
-    }
-
-    .Pagination ul li:after {
-        display: inline-block;
-        content: "";
-        position: absolute;
-        width: 1px;
-        height: 26px;
-        top: 0;
-        background-color: var(--gray-light);
-        left: 0;
+        align-items: center;
     }
 
     .Pagination ul li:first-child:after {
@@ -1791,7 +1791,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .Pagination li span {
         align-self: center;
         font-size: var(--font-size-sm);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .Pagination ul li a:first-child {
@@ -1800,7 +1800,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .Pagination a {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .Pagination .page-links a:hover {
@@ -1810,11 +1810,11 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .Pagination .page-links {
         display: flex;
         flex-flow: row;
-        padding-left: var(--padding-xs);
     }
 
     .Pagination .page-links a {
         display: flex;
+        position: relative;
         width: 26px;
         height: 26px;
         align-items: center;
@@ -1824,9 +1824,25 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         transition: var(--main-transition);
     }
 
+    .Pagination .page-links a:first-child {
+        margin-left: var(--margin-xs);
+    }
+
+    .Pagination .page-links a:first-child::after {
+        display: inline-block;
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 26px;
+        top: 0;
+        background-color: var(--gray-light);
+        left: -7px;
+    }
+
+
     .Pagination .page-links a:hover {
         background-color: var(--gray-light);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .Pagination.page-links a:hover {
@@ -1960,7 +1976,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         right: 15px;
         font-size: 12px;
         display: none;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         transition: color ease 0.3s;
     }
 
@@ -1985,10 +2001,28 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         bottom: 25%;
         left: 10px;
         font-size: var(--font-size-md);
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         background: unset;
         border: 0;
     }
+
+    /* **************************************** Time Units Component *********************************** */
+
+    .time-units-component .time-units-dropdown-element {
+        display: flex;
+        gap: var(--gap-md);
+    }
+
+    .time-units-component .time-units-dropdown-element .field-wrapper {
+        gap: 0;
+    }
+
+    .time-units-component .time-units-dropdown-element .field-wrapper label {
+        font-size: var(--font-size-sm);
+        font-weight: var(--normal);
+    }
+
+
 
 
 }

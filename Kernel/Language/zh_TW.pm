@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.310310641110377;
+    $Self->{Completeness}        = 0.310259375516273;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -59,6 +59,8 @@ sub Data {
         'ACL Management' => 'ACL管理',
         'ACLs' => 'ACLs',
         'Filter' => '過濾器',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             '註意：列表中的ACL名稱排序順序決定了ACL的執行順序。如果需要更改ACL的執行順序，請修改相應的ACL名稱。',
         'ACL name' => 'ACL名稱',
@@ -198,11 +200,11 @@ sub Data {
         'Send to these agents' => '發送至此服務員',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => '',
-        'Send on out of office' => '',
         'Also send if the user is currently out of office.' => '',
-        'Once per day' => '每日一次',
+        'Send on out of office' => '',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => '每日一次',
         'Notification Methods' => '通知方式',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',
@@ -3148,9 +3150,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'Powered by',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => '首頁',
@@ -9162,6 +9161,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

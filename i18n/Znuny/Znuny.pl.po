@@ -26102,10 +26102,6 @@ msgstr "Po zakończeniu tych czynności Twój system Znuny będzie gotowy do pra
 msgid "Sorry, but this feature of Znuny is currently not available for mobile devices. If you'd like to use it, you can either switch to desktop mode or use your regular desktop device."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-msgid " Close this message"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/PublicDefault.tt
 msgid "This is the default public interface of Znuny! There was no action parameter given."
 msgstr ""
@@ -26456,5 +26452,13 @@ msgstr ""
 
 #. SysConfig
 msgid "open in new tab"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show Valid"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show All"
 msgstr ""
 

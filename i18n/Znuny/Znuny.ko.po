@@ -9266,10 +9266,6 @@ msgstr "경보"
 msgid "Powered by"
 msgstr "Powered by"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-msgid " Close this message"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
 msgid "Show first page"
 msgstr "첫 페이지 표시"
@@ -24239,4 +24235,12 @@ msgstr "거꾸로"
 #. SysConfig
 msgid "stats"
 msgstr "통계"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show Valid"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show All"
+msgstr ""
 

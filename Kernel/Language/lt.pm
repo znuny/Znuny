@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.193654990085922;
+    $Self->{Completeness}        = 0.193622996861061;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -56,6 +56,8 @@ sub Data {
         'ACL Management' => 'ACL valdymas',
         'ACLs' => 'ACL taisyklės',
         'Filter' => 'Filtras',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Svarbu: Ši lentelė apibrėžia ACL taisyklių eiliškumą. Norėdami pakeisti šį eiliškumą, pakeiskite susijusių ACL taisyklių pavadinimus.',
         'ACL name' => 'ACL pavadinimas',
@@ -195,11 +197,11 @@ sub Data {
         'Send to these agents' => 'Siųsti šiems agentams',
         'Send to all group members (agents only)' => 'Siųsti visiems grupės nariams (tik agentams)',
         'Send to all role members' => 'Siųsti visiems rolių nariams',
-        'Send on out of office' => 'Siųsti "Išvykęs"',
         'Also send if the user is currently out of office.' => 'Taip pat siųsti, jei vartotojas išvykęs.',
-        'Once per day' => 'Vieną kartą per dieną',
+        'Send on out of office' => 'Siųsti "Išvykęs"',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Vartotoją apie vieną susitikimą įspėti tik vieną kartą per dieną.',
+        'Once per day' => 'Vieną kartą per dieną',
         'Notification Methods' => 'Pranešimų būdai',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Čia yra galimi pranešimų siuntimo būdą kiekvienam gavėjui. Pasirinkite bent vieną būdą iš išvardintų.',
@@ -3144,9 +3146,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'Powered by',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Rodyti pirmą puslapį',
@@ -9157,6 +9156,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

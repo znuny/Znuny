@@ -65,7 +65,7 @@ sub Run {
 
     my %Return;
     $Return{$Priority} = {
-        Block       => 'ToolBarItem',
+        Block       => $Param{Config}->{Block},
         Description => $Text,
         Class       => $CssClass,
         Icon        => $Icon,

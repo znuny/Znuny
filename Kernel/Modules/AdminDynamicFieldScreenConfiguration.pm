@@ -379,7 +379,7 @@ sub _ShowEdit {
     }
     elsif ( $Param{Type} eq 'DynamicFieldScreen' ) {
 
-        # remove AssignedRequiredFieldRow from template if screen is AgentTicketZoom oder CustomTicketZoom
+        # remove AssignedRequiredFieldRow from template if screen is AgentTicketZoom or CustomTicketZoom
         if ( $Param{Element} =~ m{Zoom}msxi ) {
 
             # AssignedRequired is not needed for zoom views

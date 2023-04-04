@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.689193654990086;
+    $Self->{Completeness}        = 0.689079795142904;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -59,6 +59,8 @@ sub Data {
         'ACL Management' => 'ACL管理',
         'ACLs' => 'ACL',
         'Filter' => 'フィルター',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'このテーブルはACLの実行順序に影響を与えます。もし実行順序を変更したい場合には、ACLの名前を変更して下さい。',
         'ACL name' => 'ACL名',
@@ -198,11 +200,11 @@ sub Data {
         'Send to these agents' => 'これらの担当者に送信',
         'Send to all group members (agents only)' => 'グループ内の全面バーに送信（担当者のみ）',
         'Send to all role members' => 'ロールの全てのメンバーに送付',
-        'Send on out of office' => '外出中の担当者に送信',
         'Also send if the user is currently out of office.' => '現在外出中のユーザーにも送付する。',
-        'Once per day' => '一日に一度',
+        'Send on out of office' => '外出中の担当者に送信',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '選択された通知方法を使って1つの予約に対して1日に1度だけユーザーに通知します。',
+        'Once per day' => '一日に一度',
         'Notification Methods' => '通知方法',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',
@@ -3149,9 +3151,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'アラート',
         'Powered by' => 'Powered by',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => '最初のページを表示',
@@ -9182,6 +9181,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

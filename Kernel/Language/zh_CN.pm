@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.90482485128883;
+    $Self->{Completeness}        = 0.904675367586321;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -63,6 +63,8 @@ sub Data {
         'ACL Management' => 'ACL管理',
         'ACLs' => 'ACL',
         'Filter' => '过滤器',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             '注意：列表中的ACL名称排序顺序决定了ACL的执行顺序。如果需要更改ACL的执行顺序，请修改相应的ACL名称。',
         'ACL name' => 'ACL名称',
@@ -202,11 +204,11 @@ sub Data {
         'Send to these agents' => '发送给服务人员',
         'Send to all group members (agents only)' => '发送给组的所有成员（仅服务人员）',
         'Send to all role members' => '发送给角色的所有成员',
-        'Send on out of office' => '不在办公室也发送',
         'Also send if the user is currently out of office.' => '用户设置了不在办公室时仍然发送。',
-        'Once per day' => '一天一次',
+        'Send on out of office' => '不在办公室也发送',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '每个预约的通知使用选择的方式一天只发送一次。',
+        'Once per day' => '一天一次',
         'Notification Methods' => '通知方法',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '这里有几种发送给收件人的方法，请至少选择下面的一种方法。',
@@ -3151,9 +3153,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '警告',
         'Powered by' => '技术支持：',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => '首页',
@@ -9174,6 +9173,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

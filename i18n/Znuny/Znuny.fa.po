@@ -9266,10 +9266,6 @@ msgstr ""
 msgid "Powered by"
 msgstr " قدرت گرفته از "
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-msgid " Close this message"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
 msgid "Show first page"
 msgstr "نمایش اولین صفحه"
@@ -24238,5 +24234,13 @@ msgstr "برگردان"
 
 #. SysConfig
 msgid "stats"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show Valid"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show All"
 msgstr ""
 

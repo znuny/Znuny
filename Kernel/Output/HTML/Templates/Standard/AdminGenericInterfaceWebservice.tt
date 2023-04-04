@@ -213,8 +213,8 @@
             <div class="Header filter-items">
                 <h2>[% Translate("List") | html %]</h2>
                 <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
-                    <span class="show-valid">Show Valid</span>
-                    <span class="show-all">Show All</span>
+                    <span class="show-valid">[% Translate("Show Valid") | html %]</span>
+                    <span class="show-all">[% Translate("Show All") | html %]</span>
                 </a>
             </div>
 [% RenderBlockEnd("OverviewHeader") %]
@@ -416,48 +416,50 @@
                         </p>
 [% RenderBlockEnd("DetailsCommunicationTypeActionsExplanationRequester") %]
                     </div>
-                    <table class="DataTable TableList" id="[% Data.ActionsTitle | html %]Table" summary="list of [% Data.ActionsTitle | html %]">
-                        <thead>
-                            <tr>
-                                <th>[% Translate("Name") | html %]</th>
-                                <th>[% Translate("Description") | html %]</th>
-                                <th>[% Translate("Controller") | html %]</th>
-                                <th>[% Translate("Inbound mapping") | html %]</th>
-                                <th>[% Translate("Outbound mapping") | html %]</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="TableList TableLikeOverflow">
+                        <table class="DataTable" id="[% Data.ActionsTitle | html %]Table" summary="list of [% Data.ActionsTitle | html %]">
+                            <thead>
+                                <tr>
+                                    <th>[% Translate("Name") | html %]</th>
+                                    <th>[% Translate("Description") | html %]</th>
+                                    <th>[% Translate("Controller") | html %]</th>
+                                    <th>[% Translate("Inbound mapping") | html %]</th>
+                                    <th>[% Translate("Outbound mapping") | html %]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 [% RenderBlockStart("DetailsActionsRow") %]
-                            <tr>
-                                <td>
+                                <tr>
+                                    <td>
 [% RenderBlockStart("DetailsActionsRowLink") %]
-                                    <a class="AsBlock HideLinkOnChange" href="[% Env("Baselink") %]Action=[% Data.Module | uri %];[% Data.ActionType | uri %]=[% Data.Name | uri %];Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %];Nav=[% Data.Nav | uri %]">
-                                        [% Data.Name | html %]
-                                    </a>
+                                        <a class="AsBlock HideLinkOnChange" href="[% Env("Baselink") %]Action=[% Data.Module | uri %];[% Data.ActionType | uri %]=[% Data.Name | uri %];Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %];Nav=[% Data.Nav | uri %]">
+                                            [% Data.Name | html %]
+                                        </a>
 [% RenderBlockEnd("DetailsActionsRowLink") %]
 [% RenderBlockStart("DetailsActionsRowDelete") %]
 
-                                    <a id="Delete[% Data.ActionType | html %][% Data.Name | html %]" class="TrashCan Delete[% Data.ActionType | html %] table-icon-hover-md" href="#" title="[% Translate("Delete this action") | html %]">
-                                        <i class="fa fa-trash-o"></i>
-                                    </a>
+                                        <a id="Delete[% Data.ActionType | html %][% Data.Name | html %]" class="TrashCan Delete[% Data.ActionType | html %] table-icon-hover-md" href="#" title="[% Translate("Delete this action") | html %]">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
 #                                    <span>[% Data.Name | html %]</span>
 [% RenderBlockEnd("DetailsActionsRowDelete") %]
-                                </td>
-                                <td>[% Translate(Data.Description) | html %]</td>
-                                <td class="[% Data.ControllerClass | html %]">[% Data.Controller | html %]</td>
-                                <td>[% Translate(Data.MappingInbound) | html %]</td>
-                                <td>[% Translate(Data.MappingOutbound) | html %]</td>
-                            </tr>
+                                    </td>
+                                    <td>[% Translate(Data.Description) | html %]</td>
+                                    <td class="[% Data.ControllerClass | html %]">[% Data.Controller | html %]</td>
+                                    <td>[% Translate(Data.MappingInbound) | html %]</td>
+                                    <td>[% Translate(Data.MappingOutbound) | html %]</td>
+                                </tr>
 [% RenderBlockEnd("DetailsActionsRow") %]
 [% RenderBlockStart("DetailsActionsNoDataFoundMsg") %]
-                            <tr>
-                                <td colspan="5">
-                                    [% Translate("No data found.") | html %]
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        [% Translate("No data found.") | html %]
+                                    </td>
+                                </tr>
 [% RenderBlockEnd("DetailsActionsNoDataFoundMsg") %]
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
 [% RenderBlockStart("DetailsActionsNoControllerFoundMsg") %]
                     <p class="Error">
                         [% Translate("At least one %s has a controller that is either not active or not present, please check the controller registration or delete the %s", Data.ActionType, Data.ActionType) | html %]

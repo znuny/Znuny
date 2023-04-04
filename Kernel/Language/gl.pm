@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.466622604097819;
+    $Self->{Completeness}        = 0.466545514620849;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -56,6 +56,8 @@ sub Data {
         'ACL Management' => 'Xestión de ACL',
         'ACLs' => 'ACL',
         'Filter' => 'Filtro',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Por favor fíxese: Esta táboa representa a execución da orse dos ACLs. Se necesita cambialo orden no que os ACLs son executados, por favor cambie os nomes dos ACLs afectados.',
         'ACL name' => 'Nome de ACL',
@@ -195,11 +197,11 @@ sub Data {
         'Send to these agents' => 'Enviar a estes axentes',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Enviar a todos os membros do rol',
-        'Send on out of office' => 'Enviar fora da oficina',
         'Also send if the user is currently out of office.' => 'Enviar tamén se o usuario está actualmente fóra da oficina.',
-        'Once per day' => 'Unha vez por día',
+        'Send on out of office' => 'Enviar fora da oficina',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Unha vez por día',
         'Notification Methods' => 'Métodos de notificación',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',
@@ -3144,9 +3146,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'Iniciar sesión',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Mostrar primeira páxina',
@@ -9157,6 +9156,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

@@ -78,7 +78,8 @@ or
 sub GetTransportRecipients {
     my ( $Self, %Param ) = @_;
 
-    return [];
+    my @TransportRecipients;
+    return @TransportRecipients;
 }
 
 =head2 TransportSettingsDisplayGet()

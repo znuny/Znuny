@@ -161,7 +161,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 .LayoutPopup .PopupHeader {
     padding: var(--padding-xxl) var(--padding-lg) var(--padding-xl);
     border-bottom: 0;
-    background-color: var(--white-bg-header);
+    background-color: var(--main-bg-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -188,7 +188,7 @@ fieldset.TableLike > .Row > .Field {
 }
 
 .FieldExplanation {
-    color: var(--gray-md);
+    color: var(--gray-medium);
 }
 
 .PopupFooter {

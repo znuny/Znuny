@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.183079973562459;
+    $Self->{Completeness}        = 0.183049727407897;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -56,6 +56,8 @@ sub Data {
         'ACL Management' => 'Správa ACL',
         'ACLs' => 'ACL',
         'Filter' => 'Filter',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             '',
         'ACL name' => 'Názov ACL',
@@ -195,11 +197,11 @@ sub Data {
         'Send to these agents' => 'Poslať týmto agentom',
         'Send to all group members (agents only)' => 'Odoslať všetkým členom skupiny (iba agenti)',
         'Send to all role members' => 'Poslať všetkým členom role',
-        'Send on out of office' => 'Pošli Neprítomnosť v kancelárii',
         'Also send if the user is currently out of office.' => 'Pošli aj v prípade, že užívateľ je mimo kanceláriu.',
-        'Once per day' => 'Jedenkrát za deň',
+        'Send on out of office' => 'Pošli Neprítomnosť v kancelárii',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Jedenkrát za deň',
         'Notification Methods' => 'Spôsoby notifikácie',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',
@@ -3144,9 +3146,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'Prihlásiť sa',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Ukázať prvú stránku',
@@ -9157,6 +9156,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

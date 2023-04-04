@@ -1,3 +1,9 @@
+# 7.0.3 2023-xx-xx
+ - 2023-04-04 Translatable buttons for AdminValidFilter. Thanks to Renée Bäcker @reneeb. [PR#358](https://github.com/znuny/Znuny/pull/358)
+ - 2023-04-03 GUI-Redesign changes - CSS, TT and JS.
+ - 2023-04-03 Updated Agent/Notification.html.tmpl and changed position of agent notifications.
+ - 2023-04-03 Fixed issue 'Ticket notifications not sent'. Fixed return value of GetTransportRecipients. [#361](https://github.com/znuny/Znuny/issues/361)
+
 # 7.0.2 2023-03-30
  - 2023-03-30 Fixed path in setting Frontend::WebPath.
 

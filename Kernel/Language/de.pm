@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.982650363516193;
+    $Self->{Completeness}        = 0.982818437138609;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -56,6 +56,8 @@ sub Data {
         'ACL Management' => 'ACL-Verwaltung',
         'ACLs' => 'ACLs',
         'Filter' => 'Filter',
+        'Show Valid' => 'Zeige nur valide Einträge',
+        'Show All' => 'Zeige alle Einträge',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Hinweis: Diese Tabelle stellt die Ausführungsreihenfolge der ACLs dar. Wenn Sie die Reihenfolge ändern möchten, ändern Sie bitte die Namen der betroffenen ACLs.',
         'ACL name' => 'ACL-Name',
@@ -195,11 +197,11 @@ sub Data {
         'Send to these agents' => 'An diese Agenten senden',
         'Send to all group members (agents only)' => 'An alle Gruppenmitglieder senden (gilt nur für Agenten)',
         'Send to all role members' => 'An alle Rollenmitglieder senden',
-        'Send on out of office' => 'Trotz "nicht im Büro" senden',
         'Also send if the user is currently out of office.' => 'Auch senden, wenn der Benutzer nicht am Arbeitsplatz ist.',
-        'Once per day' => 'Einmal pro Tag',
+        'Send on out of office' => 'Trotz "nicht im Büro" senden',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Nur einmal am Tag pro Termin und Benachrichtigungs-Transportmethode versenden.',
+        'Once per day' => 'Einmal pro Tag',
         'Notification Methods' => 'Benachrichtigungsmethoden',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Dies sind die verfügbaren Methoden für den Versand der Benachrichtigungen an jeden Empfänger. Bitte wählen Sie unten mindestens eine Methode aus.',
@@ -3144,9 +3146,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Warnung',
         'Powered by' => 'Powered by',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Erste Seite anzeigen',
@@ -9167,6 +9166,7 @@ Ihr Helpdesk-Team
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

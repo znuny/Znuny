@@ -107,7 +107,7 @@ li > #ReplyAll2119{
 
 .ControlRow .Tabs a:hover,
 .WidgetSimple.Tabs > .Header > a:hover {
-    background-color: var(--gray-semi-light);
+    background-color: var(--gray-light-semi);
     border-radius: var(--border-radius-xxs);
 }
 
@@ -198,7 +198,8 @@ ul.ContextFunctions li:last-child:hover > a {
  * @subsection  Control Row Additional Information
  */
 
-.AdditionalInformation {
+.AdditionalInformation,
+.WidgetAction + h2 + .AdditionalInformation {
     display: flex;
     align-items: center;
     height: 100%;
@@ -213,6 +214,10 @@ ul.ContextFunctions li:last-child:hover > a {
     /*right: 30px; - edit by b on mar/09/2023*/
     right: 0;
     z-index: 100;
+}
+
+.Header.ticket-zoom-header .AdditionalInformation {
+    right: 30px;
 }
 
 .Header > .WidgetAction + .AdditionalInformation {
@@ -318,7 +323,7 @@ ul.ContextFunctions li:last-child:hover > a {
     position: relative;
     width: 1px;
     height: 16px;
-    background-color: var(--gray-semi-dark);
+    background-color: var(--gray-dark-semi);
     align-self: center;
     margin: 0 8px;
 
@@ -557,7 +562,7 @@ ul.ContextFunctions li:last-child:hover > a {
         position: relative;
         width: 1px;
         height: 13px;
-        background-color: var(--gray-semi-dark);
+        background-color: var(--gray-dark-semi);
         align-self: center;
         margin: 0 10px;
     }
@@ -733,7 +738,7 @@ ul.ContextFunctions li:last-child:hover > a {
 }
 
 .SidebarColumn .DashboardActions .Tab.Actions li:after {
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     margin: 0 var(--padding-sm);
 }
 
@@ -750,7 +755,7 @@ ul.ContextFunctions li:last-child:hover > a {
     font-weight: var(--semi-bold);
     padding: 0;
     /*padding: 5px 5px 8px 2px;*/
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
 }
 
 /*.Tab.Actions li a:hover {

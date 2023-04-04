@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.295935228023794;
+    $Self->{Completeness}        = 0.295886337353378;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -58,6 +58,8 @@ sub Data {
         'ACL Management' => 'Gestão de ACLs',
         'ACLs' => 'ACLs',
         'Filter' => 'Filtro',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Atenção: Esta tabela representa a ordem de execução das Listas de Controle de Acesso (ACLs). Se precisar de alterar a ordem em que as Listas de Controle de Acesso (ACL) são executadas, por favor, altere os nomes das Lista de Controle de Acesso (ACL).',
         'ACL name' => 'Nome da ACL',
@@ -197,11 +199,11 @@ sub Data {
         'Send to these agents' => 'Enviar para estes agentes',
         'Send to all group members (agents only)' => 'Enviar para todos os membros do grupo (apenas agentes)',
         'Send to all role members' => 'Enviar para todos os membros do papel',
-        'Send on out of office' => 'Enviar quando "Fora do Escritório"',
         'Also send if the user is currently out of office.' => 'Enviar também quando o utilizador está "Fora do Escritório"',
-        'Once per day' => 'Uma vez por dia',
+        'Send on out of office' => 'Enviar quando "Fora do Escritório"',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Uma vez por dia',
         'Notification Methods' => 'Métodos de notificação',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',
@@ -3146,9 +3148,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'Produzido por',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Mostrar a primeira página',
@@ -9172,6 +9171,7 @@ Devemos voltar a estar online dentro de momentos.',
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

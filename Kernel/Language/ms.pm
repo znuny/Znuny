@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.541639127561137;
+    $Self->{Completeness}        = 0.541549644804229;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -55,6 +55,8 @@ sub Data {
         'ACL Management' => 'Pengurusan Senarai Kawalan Akses',
         'ACLs' => 'Senarai Kawalan Akses',
         'Filter' => 'Tapisan',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Sila ambil perhatian: Jadual ini menunjukkan  susunan pelaksanaan program Senarai Kawalan Akses. Jika anda perlu mengubah perintah itu di mana Senarai Kawalan Akses dilaksanakan, sila tukar nama-nama Senarai Kawalan Akses yang terjejas.',
         'ACL name' => 'Nama Senarai Kawalan Akses',
@@ -194,11 +196,11 @@ sub Data {
         'Send to these agents' => 'Hantar ke ejen ini',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Hantar ke semua peranan ahli',
-        'Send on out of office' => 'Menghantar di luar pejabat',
         'Also send if the user is currently out of office.' => 'Juga menghantar jika pengguna sedang berada di luar pejabat.',
-        'Once per day' => 'Sekali sehari',
+        'Send on out of office' => 'Menghantar di luar pejabat',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Sekali sehari',
         'Notification Methods' => 'Kaedah pemberitahuan',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Ini adalah kaedah yang mungkin boleh digunakan untuk menghantar pemberitahuan ini kepada setiap penerima. Sila pilih sekurang- kurangnya satu kaedah di bawah.',
@@ -3143,9 +3145,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'Dikuasakan oleh',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Pamer halaman pertama',
@@ -9170,6 +9169,7 @@ Kumpulan MejaBantuan Anda
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

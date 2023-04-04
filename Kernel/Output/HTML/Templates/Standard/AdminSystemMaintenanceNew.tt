@@ -86,9 +86,11 @@
                         </div>
 
                         <div class="field-wrapper">
-                            <label for="ShowLoginMessage">[% Translate("Show login message") | html %]</label>
-                            <div class="Field">
-                                <input type="checkbox" name="ShowLoginMessage" id="ShowLoginMessage" value="1" [% Data.Checked %] />
+                            <div class="CheckboxContainer">
+                                <div class="Field">
+                                    <input type="checkbox" name="ShowLoginMessage" id="ShowLoginMessage" value="1" [% Data.Checked %] />
+                                </div>
+                                <label for="ShowLoginMessage">[% Translate("Show login message") | html %]</label>
                             </div>
                         </div>
 

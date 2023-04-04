@@ -5,9 +5,6 @@ This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (AGPL). If you
 did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
-// TODO Denny delete me
-// nofilter(TidyAll::Plugin::Znuny::Common::CustomizationMarkers)
-// nofilter(TidyAll::Plugin::Znuny::Common::Origin)
 */
 
 /**
@@ -29,9 +26,9 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         max-width: unset;
         width: 100%;
     }
-    
+
     .WidgetSimple .flex-column,
-    div.flex-column, 
+    div.flex-column,
     span.flex-column,
     .flex-column {
         display: flex;
@@ -39,7 +36,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     }
 
     .WidgetSimple .flex-row,
-    div.flex-row, 
+    div.flex-row,
     span.flex-row,
     fieldset.flex-row,
     .AdminManagement .WidgetSimple .Field.flex-row,
@@ -60,7 +57,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     div.flex-row.flex-wrap,
     span.flex-row.flex-wrap,
-    div.flex-column.flex-wrap, 
+    div.flex-column.flex-wrap,
     span.flex-column.flex-wrap,
     div.flex-wrap,
     span.flex-wrap,

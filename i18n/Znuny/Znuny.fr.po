@@ -9266,10 +9266,6 @@ msgstr "Attention"
 msgid "Powered by"
 msgstr "Fonction assurée par"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-msgid " Close this message"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
 msgid "Show first page"
 msgstr "Montrer la première page"
@@ -24228,4 +24224,12 @@ msgstr "inverse"
 #. SysConfig
 msgid "stats"
 msgstr "statistiques"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show Valid"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show All"
+msgstr ""
 

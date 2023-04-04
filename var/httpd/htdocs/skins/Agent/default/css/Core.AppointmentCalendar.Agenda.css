@@ -61,7 +61,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .DateDivider td {
-        background: var(--gray-semi-light);
+        background: var(--gray-light-semi);
         border-top: var(--border-width) var(--border-solid) var(--border-color);
         border-bottom: var(--border-width) var(--border-solid) var(--border-color);
         line-height: 2em;

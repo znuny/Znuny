@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.869134170522141;
+    $Self->{Completeness}        = 0.868990583181893;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -61,6 +61,8 @@ sub Data {
         'ACL Management' => 'Gerenciamento de ACL',
         'ACLs' => 'ACLs',
         'Filter' => 'Filtro',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Por favor note: Esta tabela representa a ordem de execução das ACLs. Se você precisa mudar a ordem em que as ACLs são executadas, por favor mude os nomes das ACLs afetadas.',
         'ACL name' => 'Nome da ACL',
@@ -200,11 +202,11 @@ sub Data {
         'Send to these agents' => 'Enviar para estes atendentes',
         'Send to all group members (agents only)' => 'Enviar para todos os membros do grupo (apenas o agente)',
         'Send to all role members' => 'Enviar para todos os membros da função',
-        'Send on out of office' => 'Enviar em fora do esritório',
         'Also send if the user is currently out of office.' => 'Também enviar se o usuário se encontra fora do escritório..',
-        'Once per day' => 'Uma vez por dia',
+        'Send on out of office' => 'Enviar em fora do esritório',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Notificar o usuário apenas uma vez por dia sobre um único compromisso usando um transporte selecionado.',
+        'Once per day' => 'Uma vez por dia',
         'Notification Methods' => 'Métodos de notificação',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Estes são os possíveis métodos que podem ser usados para enviar esta notificação a cada um dos destinatários. Por favor, selecione pelo menos um método abaixo.',
@@ -3149,9 +3151,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Alerta',
         'Powered by' => 'Desenvolvido por',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Mostrar Primeira Página',
@@ -9173,6 +9172,7 @@ Obrigado pela ajuda!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

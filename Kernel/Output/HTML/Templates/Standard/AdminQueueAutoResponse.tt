@@ -155,7 +155,7 @@
 [% RenderBlockStart("ChangeItemList") %]
 
                         <div class="field-wrapper">
-                            <label for="IDs_[% Data.TypeID %]">[% Translate(Data.Type) | html %]:</label>
+                            <label for="IDs_[% Data.TypeID %]">[% Translate(Data.Type) | html %]</label>
                             <div class="Field">
                                 [% Data.DataStrg %]
                             </div>

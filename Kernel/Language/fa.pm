@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.622273628552545;
+    $Self->{Completeness}        = 0.622170824384603;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -62,6 +62,8 @@ sub Data {
         'ACL Management' => 'مدیریت ACL',
         'ACLs' => 'ACL ها',
         'Filter' => 'فیلتر',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'لطفا توجه داشته باشید: این جدول نشان دهنده حکم اعدام از ACL ها است. اگر شما نیاز به تغییر نظم که در آن ACL ها اجرا می شوند، لطفا نام ACL ها را تحت تاثیر قرار را تغییر دهید.',
         'ACL name' => 'نام ACL',
@@ -201,11 +203,11 @@ sub Data {
         'Send to these agents' => 'ارسال به این عوامل',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'ارسال به تمام نقشهای اعضا',
-        'Send on out of office' => 'ارسال در خارج از دفتر',
         'Also send if the user is currently out of office.' => 'همچنین ارسال در صورتی که کاربر در حال حاضر خارج از دفتر.',
-        'Once per day' => 'یک بار در روز',
+        'Send on out of office' => 'ارسال در خارج از دفتر',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'یک بار در روز',
         'Notification Methods' => 'روش های اطلاع رسانی',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'این روش ممکن است که می تواند مورد استفاده برای ارسال این اطلاع رسانی به هر یک از دریافت کنندگان می باشد. لطفا حداقل یک روش زیر انتخاب کنید.',
@@ -3150,9 +3152,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => ' قدرت گرفته از ',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'نمایش اولین صفحه',
@@ -9174,6 +9173,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

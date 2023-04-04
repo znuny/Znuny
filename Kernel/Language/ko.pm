@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.875743555849306;
+    $Self->{Completeness}        = 0.875598876590121;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -56,6 +56,8 @@ sub Data {
         'ACL Management' => 'ACL 관리',
         'ACLs' => 'ACL',
         'Filter' => '필터',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             '이 테이블은 ACL의 실행 순서를 나타냅니다. ACL이 실행되는 순서를 변경해야하는 경우 영향을받는 ACL의 이름을 변경하십시오',
         'ACL name' => 'ACL 명',
@@ -195,11 +197,11 @@ sub Data {
         'Send to these agents' => '선택 상담원들에게 보내기',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => '모든 역할 멤버들에게 보내기',
-        'Send on out of office' => '부재중인 사람들에게 보내기',
         'Also send if the user is currently out of office.' => '사용자가 현재 부재중인 경우에도 보내기',
-        'Once per day' => '하루 한번',
+        'Send on out of office' => '부재중인 사람들에게 보내기',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '선택한 날짜를 사용하여 약속을 하루에 한 번만 알립니다.',
+        'Once per day' => '하루 한번',
         'Notification Methods' => '알림 방법',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '이러한 알림을 각받는 사람에게 보내는 데 사용할 수있는 방법입니다. 아래에서 하나 이상의 방법을 선택하십시오.',
@@ -3144,9 +3146,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '경보',
         'Powered by' => 'Powered by',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => '첫 페이지 표시',
@@ -9168,6 +9167,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

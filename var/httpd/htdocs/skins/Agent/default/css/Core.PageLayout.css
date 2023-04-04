@@ -179,6 +179,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
     }
 
+    .LayoutFixedSidebar.SidebarFirst {
+        gap: 0;
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
     .LayoutFixedSidebar.SidebarLast > .SidebarColumn,
     .LayoutFixedSidebar.SidebarFirst > .ContentColumn .InnerMainBoxContent .InnerSidebarColumn,
     .InnerMainBoxContent .InnerSidebarColumn .Content {
@@ -665,14 +670,14 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .Popup .SidebarColumn .Header,
     .RealPopup .SidebarColumn .Header {
         padding: var(--padding-lg) var(--padding-md);
-        background: var(--white-bg-header);
+        background: var(--main-bg-color);
     }
 
     .LayoutPopup > .Header {
         /*font-family: Inter;*/
         padding: var(--padding-lg);
         border-bottom: 0;
-        background-color: var(--white-bg-header);
+        background-color: var(--main-bg-color);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -685,7 +690,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .LayoutPopup > .Header .ticket-locked span {
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
     }
 
     .LayoutPopup .OverviewBox,
@@ -1017,19 +1022,18 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: flex;
         flex-direction: column;
         padding: var(--main-page-padding);
-        /*width: calc(100% - 270px);*/
     }
 
     .ActionsSideBar.LayoutFixedSidebar .ContentWrapper .InnerMainBoxContent {
         display: flex;
         flex-direction: row-reverse;
+        gap: var(--gap-md);
     }
 
     .ActionsSideBar.LayoutFixedSidebar .ContentWrapper .InnerMainBoxContent .ContentColumn {
         display: flex;
         flex-flow: column;
         min-width: calc(100% - 270px);
-        padding-right: var(--main-page-padding);
         gap: var(--gap-md);
     }
 
@@ -1168,27 +1172,32 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border-radius: 50%;
         transition: var(--main-transition);
         box-sizing: border-box;
-        background: #EDEDED;
+        background: var(--gray-light-ultra);
     }
 
     .ItemListGrid.WithIcons > li a:not(.Disabled):hover span.Icons,
-    .ItemListGrid.WithIcons > li a:not(.Disabled).Active span.Icons,
-    .ItemListGrid.WithIcons > li a:not(.Disabled):hover span.Icons i.Icon2,
-    .ItemListGrid.WithIcons > li a:not(.Disabled).Active span.Icons i.Icon2 {
+    .ItemListGrid.WithIcons > li a:not(.Disabled).Active span.Icons {
         border-color: var(--white);
         background: rgba(255, 255, 255, 0.3);
         color: var(--white);
     }
 
+    .ItemListGrid.WithIcons > li a:not(.Disabled):hover span.Icons i.Icon2,
+    .ItemListGrid.WithIcons > li a:not(.Disabled).Active span.Icons i.Icon2 {
+        border-color: var(--white);
+        background: var(--white);
+        color: var(--primary-color);
+    }
+
     .ItemListGrid.WithIcons > li span.Icons i {
-        color: #CECECE;
+        color: var(--gray-dark-semi);
         font-size: 25px;
         transition: var(--main-transition);
     }
 
     /*.ItemListGrid > li a:not(.Disabled):focus span.Icons i.Icon2,*/
     .ItemListGrid.WithIcons > li span.Icons i.Icon2 {
-        background: var(--gray-light);
+        background: var(--gray-light-ultra);
         border-radius: 100%;
         font-size: 12px;
         line-height: 15px;
@@ -1202,7 +1211,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--gray-semi-dark);
+        color: var(--gray-dark-semi);
         filter: drop-shadow(0 4px 4px rgba(131, 131, 131, 0.15));
         transition: var(--main-transition);
     }
@@ -1240,7 +1249,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: auto;
         margin: 0px auto;
         font-size: var(--main-font-size);
-        color: var(--gray-md);
+        color: var(--gray-medium);
         font-weight: var(--normal);
         text-align: center;
         white-space: initial;

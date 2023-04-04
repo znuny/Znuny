@@ -256,7 +256,7 @@ div.Headline .Flag {
 #ArticleItems .ArticleMailHeader label {
     justify-content: flex-end;
     padding-right: var(--padding-sm);
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
 }
 
 #ArticleItems .ArticleMailHeader p.Value {
@@ -391,7 +391,7 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     flex-flow: row;
     justify-content: center;
     align-items: center;
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     background: #ECECEC;
 }
 
@@ -449,14 +449,14 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     justify-content: center;
     border-radius: var(--border-radius-xs);
     transition: var(--main-transition);
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     width: 26px;
     height: 26px;
 }
 
 .ControlRow .Icons a:hover {
     background-color: var(--icon-hover-color-light);
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     border-color: var(--border-color);
 }
 

@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.840218109715796;
+    $Self->{Completeness}        = 0.840079299520899;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -68,6 +68,8 @@ sub Data {
         'ACL Management' => 'Управление ACL',
         'ACLs' => 'ACL',
         'Filter' => 'Фильтр',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Помните: Эта таблица отображает порядок выполнения ACL. Если вы хотите изменить порядок в котором они исполняются, измените их имена.',
         'ACL name' => 'Имя ACL',
@@ -207,11 +209,11 @@ sub Data {
         'Send to these agents' => 'Отправить этим агентам',
         'Send to all group members (agents only)' => 'Отправить всем членам группы (только агенты)',
         'Send to all role members' => 'Отправить всем членам роли',
-        'Send on out of office' => 'Отправить для отсутствующих на месте',
         'Also send if the user is currently out of office.' => 'Также отправить, если пользователь в настоящее время отсутствует на месте.',
-        'Once per day' => 'Один раз в день',
+        'Send on out of office' => 'Отправить для отсутствующих на месте',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Уведомить пользователя только раз в день для каждого отдельного мероприятия, используя указанный способ доставки.',
+        'Once per day' => 'Один раз в день',
         'Notification Methods' => 'Способы уведомлений',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Существует несколько способов для отправки этого уведомления каждому из получателей. Выберите хотя бы один из приведенных ниже.',
@@ -3156,9 +3158,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Предупреждение',
         'Powered by' => 'Используется',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Показать первую страницу',
@@ -9180,6 +9179,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

@@ -136,7 +136,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .OverviewControl .ActionRow .HeaderRight .btn-today:hover,
 .OverviewControl .ActionRow .HeaderRight .btn-arrow:hover {
-    background-color: var(--gray-semi-light);
+    background-color: var(--gray-light-semi);
 }
 
 .OverviewControl .ActionRow .Pagination {
@@ -332,7 +332,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .OverviewActions .InputField_InputContainer div.InputField_Selection div.Text:before {
-    color: var(--gray-semi-dark);
+    color: var(--gray-dark-semi);
     position: absolute;
     background: var(--main-bg-color);
     font-weight: var(--medium);

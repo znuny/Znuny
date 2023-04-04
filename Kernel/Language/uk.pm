@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.439193654990086;
+    $Self->{Completeness}        = 0.439121096976706;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -57,6 +57,8 @@ sub Data {
         'ACL Management' => 'Керування ACL',
         'ACLs' => 'ACL-и',
         'Filter' => 'Фільтр',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Будь ласка, зауважте: Ця таблиця відображає порядок виконання ACL-ів. Якщо Вам треба змінити порядок, у якому виконуються ACL-и, будь ласка, змініть назви відповідних ACL-ів.',
         'ACL name' => 'Назва ACL',
@@ -196,11 +198,11 @@ sub Data {
         'Send to these agents' => 'Надіслати цим агентам',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Надіслати всім членам ролі',
-        'Send on out of office' => 'Надіслано з «Не при справах»',
         'Also send if the user is currently out of office.' => 'Також надіслати, якщо користувач зараз не при справах.',
-        'Once per day' => 'Один раз на день',
+        'Send on out of office' => 'Надіслано з «Не при справах»',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             'Повідомляти користувача тільки один раз в день по одній події з використанням обраного способу',
+        'Once per day' => 'Один раз на день',
         'Notification Methods' => 'Методи Сповіщення',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Це можливі методи, що можуть бути використані для відправлення цього сповіщення кожному з одержувачів. Будь ласка, виберіть нижче принаймні один метод.',
@@ -3145,9 +3147,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'Використовується',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Показати першу сторінку',
@@ -9158,6 +9157,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

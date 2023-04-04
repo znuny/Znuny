@@ -24,7 +24,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .AdminPerformanceLog .Progressbar {
-    background: var(--gray-md);
+    background: var(--gray-medium);
     width: 100%;
     height: 10px;
     border-radius: 3px;

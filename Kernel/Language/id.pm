@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.611202908129544;
+    $Self->{Completeness}        = 0.611101932925822;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -56,6 +56,8 @@ sub Data {
         'ACL Management' => 'Manajement ACL',
         'ACLs' => 'ACL',
         'Filter' => 'Saringan',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Harap dicatat: Tabel ini menunjukan urutan eksekusi ACL. Jika anda perlu mengubah urutan eksekusi ACL, Mohon ubah nama-nama dari ACL yang terpengaruh.',
         'ACL name' => 'Nama ACL',
@@ -195,11 +197,11 @@ sub Data {
         'Send to these agents' => 'Kirimkan ke beberapa agen',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'Kirimkan ke semua tugas anggota',
-        'Send on out of office' => 'Kirimkan selain ke kantor',
         'Also send if the user is currently out of office.' => 'Tetap kirimkan jika pengguna sedang berada diluar kantor',
-        'Once per day' => 'Sekali per hari',
+        'Send on out of office' => 'Kirimkan selain ke kantor',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'Sekali per hari',
         'Notification Methods' => 'Pemberitahuan metode',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'Ini adalah metode yang dapat digunakan untuk mengirim pemberitahuan ke masing-masing penerima. Silakan pilih minimal satu metode di bawah ini.',
@@ -3146,9 +3148,6 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
         'Powered by' => 'Dipersembahkan oleh',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
-        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Tampilkan halaman pertama',
@@ -9171,6 +9170,7 @@ Helpdesk Team Anda
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',

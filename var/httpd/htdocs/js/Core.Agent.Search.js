@@ -556,7 +556,8 @@ Core.Agent.Search = (function (TargetNS) {
                     $('#SearchProfileAddBlock').hide();
 
                     // hide save changes in template block
-                    $('#SaveProfile').parent().hide().prev().hide().prev().hide();
+                    $('label[for="SaveProfile"]').hide();
+                    $('#SaveProfile').parent().hide();
 
                     // set SaveProfile to 1
                     $('#SaveProfile').prop('checked', true);

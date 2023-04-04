@@ -145,49 +145,77 @@
 <div class="field-wrapper">
     <label>[% Translate("Additional dynamic field storage") | html %]</label>
     <div class="Field ValueInsert AdditionalDFStorageRow" data-formelement-restore-destination='AdditionalDFStorage'  data-formelement-add-destination="AdditionalDFStorage">
+
 [% RenderBlockStart("AdditionalDFStorageValueCounter") %]
         <input type="hidden" name="AdditionalDFStorageValueCounter" data-formelement-add-counter="AdditionalDFStorageCounter" value="[% Data.AdditionalDFStorageValueCounter | html %]" id="AdditionalDFStorageValueCounter" class="ValueCounter" />
 [% RenderBlockEnd("AdditionalDFStorageValueCounter") %]
+
 [% RenderBlockStart("AdditionalDFStorageRow") %]
         <div class="ValueRow full-width" data-formelement-remove-destination="AdditionalDFStorageRow_[% Data.AdditionalDFStorageValueCounter | html %]" >
 
-            <label class="Mandatory" for="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]"><span class="Marker">*</span>[% Translate("Dynamic field") | html %]</label>
+            <label class="Mandatory" for="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]">
+            <span class="Marker">*</span>[% Translate("Dynamic field") | html %]</label>
             [% Data.DynamicFieldSelection %]
-            <div id="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-            <div id="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DynamicFieldErrorMessage) | html %]</p></div>
+            <div id="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]Error" class="TooltipErrorMessage">
+                <p>[% Translate("This field is required.") | html %]</p>
+            </div>
+            <div id="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]ServerError" class="TooltipErrorMessage">
+                <p>[% Translate(Data.DynamicFieldErrorMessage) | html %]</p>
+            </div>
 
-            <label class="Mandatory" for="Key_[% Data.AdditionalDFStorageValueCounter | html %]"><span class="Marker">*</span>[% Translate("Key") | html %]</label>
+            <label class="Mandatory" for="Key_[% Data.AdditionalDFStorageValueCounter | html %]">
+                <span class="Marker">*</span>[% Translate("Key") | html %]
+            </label>
             <input name="Key_[% Data.AdditionalDFStorageValueCounter | html %]" id="Key_[% Data.AdditionalDFStorageValueCounter | html %]" class="DefaultValueItem Validate_Required DataTable VariableWidth [% Data.KeyError | html %]" type="text" maxlength="100" value="[% Data.Key | html %]"/>
-            <div id="Key_[% Data.AdditionalDFStorageValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-            <div id="Key_[% Data.AdditionalDFStorageValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorMessage) | html %]</p></div>
+            <div id="Key_[% Data.AdditionalDFStorageValueCounter | html %]Error" class="TooltipErrorMessage">
+                <p>[% Translate("This field is required.") | html %]</p>
+            </div>
+            <div id="Key_[% Data.AdditionalDFStorageValueCounter | html %]ServerError" class="TooltipErrorMessage">
+                <p>[% Translate(Data.KeyErrorMessage) | html %]</p>
+            </div>
 
             [% Data.TypeOption %]
 
-            <a href="#" id="RemoveValue_[% Data.AdditionalDFStorageValueCounter | html %]" class="RemoveButton ValueRemove" data-formelement-remove='AdditionalDFStorage'  data-formelement-remove-destination-name="AdditionalDFStorageRow_[% Data.AdditionalDFStorageValueCounter | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
+            <a href="#" id="RemoveValue_[% Data.AdditionalDFStorageValueCounter | html %]" class="RemoveButton ValueRemove" data-formelement-remove='AdditionalDFStorage'  data-formelement-remove-destination-name="AdditionalDFStorageRow_[% Data.AdditionalDFStorageValueCounter | html %]">
+                <i class="fa fa-minus-square-o"></i>
+                <span class="InvisibleText">[% Translate("Remove value") | html %]</span>
+            </a>
             <div class="SpacingTopMini" ></div>
         </div>
 [% RenderBlockEnd("AdditionalDFStorageRow") %]
+
 [% RenderBlockStart("AdditionalDFStorageTemplate") %]
         <div class="ValueTemplate field-wrapper full-width Hidden" data-formelement-add-source="AdditionalDFStorageTemplate">
 
-            <div class="field-wrapper">
-                <label class="Mandatory" for="DynamicField"><span class="Marker">*</span>[% Translate("Dynamic field") | html %]</label>
-                [% Data.DynamicFieldSelectionTemplate %]
-                <div id="DynamicFieldError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                <div id="DynamicFieldServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DynamicFieldErrorMessage) | html %]</p></div>
+            <div class="single-row-inputs full-width ValueRow">
+                <div class="field-wrapper">
+                    <label class="Mandatory" for="DynamicField"><span class="Marker">*</span>[% Translate("Dynamic field") | html %]</label>
+                    [% Data.DynamicFieldSelectionTemplate %]
+                    <div id="DynamicFieldError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                    <div id="DynamicFieldServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DynamicFieldErrorMessage) | html %]</p></div>
+                </div>
+
+                <div class="field-wrapper">
+                    <label class="Mandatory" for="Key"><span class="Marker">*</span>[% Translate("Key") | html %]</label>
+                    <input name="Key" id="Key" class="DefaultValueItem DataTable VariableWidth" type="text" maxlength="100" value=""/>
+                    <div id="KeyError" class="TooltipErrorMessage">
+                        <p>[% Translate("This field is required.") | html %]</p>
+                    </div>
+                    <div id="KeyServerError" class="TooltipErrorMessage">
+                        <p>[% Translate(Data.KeyErrorMessage) | html %]</p>
+                    </div>
+                </div>
+
+                <div class="field-wrapper">
+                    [% Data.TypeOption %]
+                </div>
+
+                <a href="#" id="RemoveValue" class="RemoveButton ValueRemove" data-formelement-remove='AdditionalDFStorage' data-formelement-remove-destination-name="AdditionalDFStorageRow">
+                    <i class="fa fa-minus-square-o"></i>
+                    <span class="InvisibleText">[% Translate("Remove value") | html %]</span>
+                </a>
+
             </div>
-
-            <div class="field-wrapper">
-                <label class="Mandatory" for="Key"><span class="Marker">*</span>[% Translate("Key") | html %]</label>
-                <input name="Key" id="Key" class="DefaultValueItem DataTable VariableWidth" type="text" maxlength="100" value=""/>
-                <div id="KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                <div id="KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorMessage) | html %]</p></div>
-            </div>
-
-            [% Data.TypeOption %]
-
-            <a href="#" id="RemoveValue" class="RemoveButton ValueRemove" data-formelement-remove='AdditionalDFStorage' data-formelement-remove-destination-name="AdditionalDFStorageRow"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
-            <div class="SpacingTopMini" ></div>
         </div>
 [% RenderBlockEnd("AdditionalDFStorageTemplate") %]
     </div>
@@ -196,17 +224,22 @@
 <div class="field-wrapper">
     <label for="AddValue">[% Translate("Add dynamic field") | html %]</label>
     <div class="Field">
-
-        <a href="#" class="AddValue AddButton" id="AddValue"
+        <div class="single-row-elements">
+        <a href="#" class="btn-main btn-primary-ghost btn-width-md" id="AddValue"
             data-formelement-add='AdditionalDFStorage'
             data-formelement-add-destination-name="AdditionalDFStorage"
             data-formelement-add-source-name="AdditionalDFStorageTemplate"
             data-formelement-add-counter-name="AdditionalDFStorageCounter"
-            data-formelement-add-method='append'><i class="fa fa-plus-square-o"></i><span class="InvisibleText">[% Translate("Add Value") | html %]</span></a>
-        <a href="#" id="Restore" class="Restore icon-hover"
-        data-formelement-restore
-        data-formelement-restore-destination-name='AdditionalDFStorage'
-        ><i class="fa fa-undo"></i><span class="InvisibleText">[% Translate("Restore values") | html %]</span></a>
+            data-formelement-add-method='append'>
+            <span>[% Translate("Add Value") | html %]</span>
+        </a>
+
+        <a href="#" id="Restore" class="btn-reset-ghost btn-main btn-width-md"
+            data-formelement-restore
+            data-formelement-restore-destination-name='AdditionalDFStorage'>
+            <span>[% Translate("Restore values") | html %]</span>
+        </a>
+        </div>
         <p class="FieldExplanation">[% Translate("These dynamic fields are also filled with values from the same record.") | html %]</p>
     </div>
 </div>
