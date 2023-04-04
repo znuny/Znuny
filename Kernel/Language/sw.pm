@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.439927284746323;
+    $Self->{Completeness}        = 0.439781926317528;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -59,6 +59,8 @@ sub Data {
         'ACL Management' => 'Usimamizi wa ACL ',
         'ACLs' => 'ACL',
         'Filter' => 'Chuja',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Tafadhali zingatia: jedwali hili linawakilisha mpangilio wa utekelezaji wa ACL. Kama unahitaji kubadilisha mpangilio ambao ACL unatekelezwa, tafadhali badilisha majina ya ACL yaliyoathiwa.',
         'ACL name' => 'Jina la ACL',

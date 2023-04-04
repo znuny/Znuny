@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.622376466699719;
+    $Self->{Completeness}        = 0.622170824384603;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -62,6 +62,8 @@ sub Data {
         'ACL Management' => 'مدیریت ACL',
         'ACLs' => 'ACL ها',
         'Filter' => 'فیلتر',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'لطفا توجه داشته باشید: این جدول نشان دهنده حکم اعدام از ACL ها است. اگر شما نیاز به تغییر نظم که در آن ACL ها اجرا می شوند، لطفا نام ACL ها را تحت تاثیر قرار را تغییر دهید.',
         'ACL name' => 'نام ACL',

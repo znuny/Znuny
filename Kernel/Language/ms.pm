@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.541728639894232;
+    $Self->{Completeness}        = 0.541549644804229;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -55,6 +55,8 @@ sub Data {
         'ACL Management' => 'Pengurusan Senarai Kawalan Akses',
         'ACLs' => 'Senarai Kawalan Akses',
         'Filter' => 'Tapisan',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Sila ambil perhatian: Jadual ini menunjukkan  susunan pelaksanaan program Senarai Kawalan Akses. Jika anda perlu mengubah perintah itu di mana Senarai Kawalan Akses dilaksanakan, sila tukar nama-nama Senarai Kawalan Akses yang terjejas.',
         'ACL name' => 'Nama Senarai Kawalan Akses',

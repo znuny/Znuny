@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.147744174516609;
+    $Self->{Completeness}        = 0.147695357673881;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -55,6 +55,8 @@ sub Data {
         'ACL Management' => '',
         'ACLs' => 'Danh sách kiểm soát truy cập',
         'Filter' => 'Lọc',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Xin lưu ý: Bảng này đại diện cho thứ tự thực hiện các ACL. Nếu bạn cần thay đổi thứ tự mà ACL được thực hiện, hãy thay đổi tên của các ACL bị ảnh hưởng.',
         'ACL name' => 'tên ACL = Danh sách kiểm soát truy cập',

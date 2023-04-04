@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.840356965790778;
+    $Self->{Completeness}        = 0.840079299520899;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -68,6 +68,8 @@ sub Data {
         'ACL Management' => 'Управление ACL',
         'ACLs' => 'ACL',
         'Filter' => 'Фильтр',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Помните: Эта таблица отображает порядок выполнения ACL. Если вы хотите изменить порядок в котором они исполняются, измените их имена.',
         'ACL name' => 'Имя ACL',

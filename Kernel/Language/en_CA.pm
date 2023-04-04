@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.00264419104280284;
+    $Self->{Completeness}        = 0.00264331736329093;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -62,6 +62,8 @@ sub Data {
         'ACL Management' => '',
         'ACLs' => '',
         'Filter' => '',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             '',
         'ACL name' => '',

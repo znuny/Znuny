@@ -24239,3 +24239,11 @@ msgstr "Mundur"
 msgid "stats"
 msgstr "statistik"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show Valid"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show All"
+msgstr ""
+

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.611303916707982;
+    $Self->{Completeness}        = 0.611101932925822;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -56,6 +56,8 @@ sub Data {
         'ACL Management' => 'Manajement ACL',
         'ACLs' => 'ACL',
         'Filter' => 'Saringan',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Harap dicatat: Tabel ini menunjukan urutan eksekusi ACL. Jika anda perlu mengubah urutan eksekusi ACL, Mohon ubah nama-nama dari ACL yang terpengaruh.',
         'ACL name' => 'Nama ACL',
