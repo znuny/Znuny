@@ -395,7 +395,20 @@ missing user-login defines an orphaned session for now
 sub GetOrphanedSessionIDs {
     my ( $Self, %Param ) = @_;
 
-    return $Self->{Backend}->GetOrphanedSessionIDs(%Param);
+    my @OrphanedSessionIDs;
+    my @SessionIDs = $Self->GetAllSessionIDs();
+    for my $SessionID ( @SessionIDs ) {
+        
+        my %SessionData = $Self->{Backend}->GetSessionIDData(
+            SessionID => $SessionID,
+        );
+
+        if ( ! defined $SessionData{UserLogin} ){
+            push @OrphanedSessionIDs, $SessionID; 
+        }
+    }
+
+    return @OrphanedSessionIDs;
 }
 
 
