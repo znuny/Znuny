@@ -1161,6 +1161,7 @@
                 <Item Key="Article">
                     <Hash>
                         <Item Key="Ticket::Frontend::AgentTicketMove###DynamicField">AgentTicketMove</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketZoom###DynamicField">AgentTicketZoom</Item>
                         <Item Key="Ticket::Frontend::CustomerTicketZoom###DynamicField">CustomerTicketZoom</Item>
                         <Item Key="Ticket::Frontend::AgentTicketClose###DynamicField">AgentTicketClose</Item>
                         <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
