@@ -20,6 +20,8 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # create test customer user
         my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate() || die "Did not get test customer user";
@@ -65,7 +67,7 @@ $Selenium->RunTest(
                 '100-CustomerID-other' => { Value => $PermissionContextOtherCustomerID },
             },
         );
-        $Kernel::OM->Get('Kernel::Config')->Set(
+        $ConfigObject->Set(
             Key   => 'CustomerGroupPermissionContext',
             Value => {
                 '001-CustomerID-same'  => { Value => $PermissionContextDirect },
@@ -178,7 +180,7 @@ $Selenium->RunTest(
             Password => $TestCustomerUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
@@ -226,7 +228,6 @@ $Selenium->RunTest(
         );
 
         # check buttons
-        $Selenium->find_element("//a[contains(\@id, \'ReplyButton' )]");
         $Selenium->find_element("//button[contains(\@value, \'Submit' )]");
 
         # clean up test data from the DB
@@ -298,7 +299,7 @@ $Selenium->RunTest(
             qw(Group CustomerGroup CustomerCompany Queue Ticket)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => $Cache );
+            $CacheObject->CleanUp( Type => $Cache );
         }
     },
 );

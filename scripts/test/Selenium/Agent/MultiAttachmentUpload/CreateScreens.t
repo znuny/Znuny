@@ -20,7 +20,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $AuthSessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 
         # Change web max file upload.
         $HelperObject->ConfigSettingChange(
@@ -37,8 +39,7 @@ $Selenium->RunTest(
         );
 
         # Get all sessions before login.
-        my $AuthSessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
-        my @PreLoginSessions  = $AuthSessionObject->GetAllSessionIDs();
+        my @PreLoginSessions = $AuthSessionObject->GetAllSessionIDs();
 
         my $Language = 'en';
 
@@ -59,9 +60,8 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-        my $ScriptAlias  = $ConfigObject->Get('ScriptAlias');
-        my $SessionName  = $ConfigObject->Get('SessionName');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
+        my $SessionName = $ConfigObject->Get('SessionName');
         my $SessionToken;
 
         # Get all session after login.
@@ -172,8 +172,15 @@ $Selenium->RunTest(
             # Remove the existing files.
             for my $DeleteExtension (qw(doc pdf)) {
 
+                my $Child = $Count - 1;
+
                 # Delete Attachment.
-                $Selenium->find_element( "(//a[\@class='AttachmentDelete'])[$Count]", 'xpath' )->click();
+                if ($Child) {
+                    $Selenium->find_element( "a.AttachmentDelete:nth-child($Child)", 'css' )->click();
+                }
+                else {
+                    $Selenium->find_element( "a.AttachmentDelete", 'css' )->click();
+                }
                 $Count--;
                 sleep 2;
 

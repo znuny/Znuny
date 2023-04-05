@@ -20,8 +20,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
 
         # Disable email checks to create new user.
         $ConfigObject->Set(
@@ -40,7 +42,7 @@ $Selenium->RunTest(
 
         # Create customer.
         my $CustomerID        = "CustomerID$RandomNumber";
-        my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $CustomerID,
             CustomerCompanyName    => "CompanyName$RandomNumber",
             CustomerCompanyStreet  => 'Some Street',
@@ -61,7 +63,7 @@ $Selenium->RunTest(
         my $UserFirstname = "Firstname$RandomNumber";
         my $UserLastname  = "Lastname$RandomNumber";
         my $UserEmail     = "email$RandomNumber\@example.com";
-        my $UserLogin     = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $UserLogin     = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $UserFirstname,
             UserLastname   => $UserLastname,

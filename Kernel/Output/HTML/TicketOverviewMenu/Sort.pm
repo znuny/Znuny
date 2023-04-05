@@ -104,6 +104,7 @@ sub Run {
         Data  => \@SortData,
         Name  => 'SortBy',
         Title => $LayoutObject->{LanguageObject}->Translate('Order by'),
+        Class => 'Modernize',
     );
 
     return if !$ReturnData{HTML};

@@ -15,7 +15,6 @@
         <input type="hidden" name="DBType"      value="oracle" />
         <input type="hidden" name="InstallType" value="UseDB" />
 
-
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate(Data.Item) | html %] ([% Data.Step %])</h2>

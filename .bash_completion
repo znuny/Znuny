@@ -21,7 +21,7 @@
 # This file will be automatically found and used for the 'otrs' user if you have the
 #   'bash-completion' package installed. Otherwise you can source it in your ~/.bashrc like this:
 #
-# source /opt/otrs/.bash_completion
+# source /opt/znuny/.bash_completion
 
 # Get path to current file, follow symlinks
 THIS_FILE=$BASH_SOURCE
@@ -33,4 +33,4 @@ fi
 COMP_WORDBREAKS=${COMP_WORDBREAKS//:/}
 
 # Configure bash completion
-complete -C "$(dirname $THIS_FILE)/bin/otrs.Console.pl" otrs.Console.pl
+complete -C "$(dirname $THIS_FILE)/bin/znuny.Console.pl" znuny.Console.pl

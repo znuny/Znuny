@@ -21,7 +21,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Email Sending Queue');
+    return Translatable('Znuny') . '/' . Translatable('Email Sending Queue');
 }
 
 sub Run {

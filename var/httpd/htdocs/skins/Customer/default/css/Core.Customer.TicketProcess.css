@@ -21,90 +21,28 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .TicketProcess .Content {
     margin: 0;
-    padding: 0px;
 }
 
-.TicketProcess > .Content {
-    padding: 10px;
+
+@media only screen and (max-width: 1024px) {
+    .TicketProcess .Content {
+        overflow-x: hidden;
+        gap: 0;
+    }
+
+    .TicketProcess .Content .LayoutPopup .Content {
+        padding: 0;
+    }
 }
 
-.TicketProcess fieldset{
-    margin: 8px 0 13px;
-    padding-bottom: 5px;
-    min-width: 500px;
+.TicketProcess .inner-page-display .LayoutPopup .Content {
+    padding: 0;
 }
 
 .Center {
     text-align: center;
 }
 
-/**
- * @subsection  Extensions for popup dialog
- */
-
-.FieldSetSeparator {
-    float: none;
-    clear: both;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 7px;
-    font-size: 12px;
-}
-
-.FieldContainer + .FieldSetSeparator {
-    padding-top: 10px;
-}
-
-.FieldSeparator {
-    border-top: 1px dotted #ccc;
-    margin: 5px 0px;
-}
-
-.PopupHeader {
-    background: #eceeee;
-    background: -moz-linear-gradient(top,  #f9f9f9 0%, #eceeee 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#eceeee));
-    background: -webkit-linear-gradient(top,  #f9f9f9 0%,#eceeee 100%);
-    background: -o-linear-gradient(top,  #f9f9f9 0%,#eceeee 100%);
-    background: -ms-linear-gradient(top,  #f9f9f9 0%,#eceeee 100%);
-    background: linear-gradient(to bottom,  #f9f9f9 0%,#eceeee 100%);
-    border: 1px solid #B8BBBB;
-    padding: 9px 9px 0px;
-}
-
-.PopupHeader > p > a {
-    color: #777777;
-    font-size: 11px;
-    outline: medium none;
-    padding: 5px 11px;
-    text-shadow: 0 1px 0 #EAEEEE;
-}
-.PopupHeader > p > a:hover {
-    color: #444444;
-}
-
-fieldset.TableLike > .Field,
-fieldset.TableLike > .Row > .Field {
-    line-height: 1.2em;
-    min-height: 16px;
-    padding: 3px 0px;
-}
-
-.FieldExplanation {
-    color: #888888;
-    margin-left: 236px;
-}
-
-.PopupFooter {
-    background: #eceeee;
-    background: -moz-linear-gradient(top,  #f9f9f9 0%, #eceeee 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#eceeee));
-    background: -webkit-linear-gradient(top,  #f9f9f9 0%,#eceeee 100%);
-    background: -o-linear-gradient(top,  #f9f9f9 0%,#eceeee 100%);
-    background: -ms-linear-gradient(top,  #f9f9f9 0%,#eceeee 100%);
-    background: linear-gradient(to bottom,  #f9f9f9 0%,#eceeee 100%);
-    border: 1px solid #B8BBBB;
-    padding: 5px 9px;
-}
 
 .AdviceText {
     padding-left: 13px;
@@ -151,11 +89,6 @@ fieldset.TableLike > .Row > .Field {
     opacity: 0.8;
 }
 
-fieldset label {
-    width: 220px;
-    margin-top: 3px;
-}
-
 #NewProcessTicket fieldset label {
     margin: -1px 6px 0 0 !important;
 }
@@ -163,5 +96,82 @@ fieldset label {
 .DescriptionLong {
     white-space: pre-line;
 }
+
+
+/* TicketProcess Updates */
+
+.TicketProcess .card .Form fieldset {
+    flex-direction: column;
+}
+
+.TicketProcess fieldset .inner-fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    width: 100%;
+    max-width: 800px;
+    align-self: center;
+    padding: var(--padding-xl) 0;
+}
+
+.TicketProcess .inner-page-display {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+    align-self: center;
+}
+
+.TicketProcess .inner-page-display .ContentColumn {
+    padding: var(--padding-xl) 0;
+}
+
+.TicketProcess .inner-page-display .ContentColumn::after {
+    content: '';
+    width: calc(100% + 200px);
+    height: 1px;
+    position: absolute;
+    left: -100px;
+    top: 0;
+    background: var(--border-color);
+  }
+
+.TicketProcess .inner-page-display #MainBox {
+    background-color: transparent;
+    padding: 0;
+}
+
+.TicketProcess .inner-page-display #MainBox .TableLike {
+    gap: var(--gap-md)
+}
+
+.TicketProcess .inner-page-display h2,
+.TicketProcess .inner-page-display .DescriptionLong {
+    display: none;
+}
+
+.TicketProcess .PopupFooter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    background: transparent;
+    border: 0;
+    padding: var(--padding-xl) 0 0;
+}
+
+.TicketProcess .PopupFooter .AdviceText {
+    display: flex;
+    padding: var(--padding-sm);
+    background: var(--gray-light-semi);
+    color: var(--black);
+    border-radius: var(--border-radius-xs);
+    justify-content: center;
+}
+
+.TicketProcess .PopupFooter .btn-primary {
+    align-self: end;
+}
+
 
 } /* end @media */

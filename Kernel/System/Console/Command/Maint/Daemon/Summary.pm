@@ -35,7 +35,7 @@ sub Configure {
     $Self->AdditionalHelp(<<"EOF");
 If no daemon-name is specified as:
 
- <green>otrs.console.pl $Self->{Name}</green>
+ <green>znuny.Console.pl $Self->{Name}</green>
 
 The command will get the summary of all daemon modules available.
 EOF

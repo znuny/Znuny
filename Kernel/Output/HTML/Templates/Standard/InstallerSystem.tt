@@ -52,7 +52,6 @@
                         <input type="text" id="Organization" name="Organization" value="[% Config("Organization") %]" class="W33pc">
                     </div>
                     <div class="Clear"></div>
-
 [% RenderBlockStart("LogModule") %]
                     <h4>
                         [% Translate("Log") | html %]

@@ -21,6 +21,10 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Create test user and login.
         my $Language      = 'de';
@@ -39,7 +43,7 @@ $Selenium->RunTest(
             UserLanguage => $Language,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminRole screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminRole");
@@ -53,7 +57,7 @@ $Selenium->RunTest(
         # Check roles overview screen,
         # if there are roles, check is there table on screen
         # otherwise check is there a message that no roles are defined.
-        my %RoleList = $Kernel::OM->Get('Kernel::System::Group')->RoleList();
+        my %RoleList = $GroupObject->RoleList();
         if (%RoleList) {
             $Selenium->find_element( "table",             'css' );
             $Selenium->find_element( "table thead tr th", 'css' );
@@ -85,19 +89,15 @@ $Selenium->RunTest(
         my $RoleManagement = $LanguageObject->Translate('Role Management');
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText (
             $RoleManagement,
             $LanguageObject->Translate('Add Role')
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check client side validation.
@@ -161,19 +161,15 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText (
             $RoleManagement,
             $LanguageObject->Translate('Edit Role') . ': ' . $RandomID
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Set test role to invalid.
@@ -195,6 +191,22 @@ $Selenium->RunTest(
         $Self->True(
             $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
             "$Notification - notification is found."
+        );
+
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
         );
 
         # Check class of invalid Role in the overview table.
@@ -232,7 +244,6 @@ $Selenium->RunTest(
         # Since there are no tickets that rely on our test roles, we can remove them again
         # from the DB.
         if ($RandomID) {
-            my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
             $RandomID = $DBObject->Quote($RandomID);
             my $Success = $DBObject->Do(
                 SQL  => "DELETE FROM roles WHERE name = ?",
@@ -245,7 +256,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Group',
         );
 

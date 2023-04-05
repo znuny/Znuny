@@ -14,31 +14,38 @@
         <input type="hidden" value="AgentTicketZoom" name="Action"/>
         <input type="hidden" value="ArticleFilterSet" name="Subaction"/>
         <input type="hidden" value="[% Data.TicketID | html %]" name="TicketID"/>
-        <fieldset class="TableLike">
-            <label for="CommunicationChannelFilter">[% Translate("Communication channel") | html %]:</label>
-            <div class="Field">
-                [% Data.Channels %]
+        <fieldset class="TableLike modal-article-filter">
+            <div class="field-wrapper">
+                <label for="CommunicationChannelFilter">[% Translate("Communication channel") | html %]:</label>
+                <div class="Field">
+                    [% Data.Channels %]
+                </div>
             </div>
-            <div class="Clear"></div>
-            <label for="CustomerVisibilityFilter">[% Translate("Customer visibility") | html %]:</label>
-            <div class="Field">
-                [% Data.CustomerVisibility %]
+
+            <div class="field-wrapper">
+                <label for="CustomerVisibilityFilter">[% Translate("Customer visibility") | html %]:</label>
+                <div class="Field">
+                    [% Data.CustomerVisibility %]
+                </div>
             </div>
-            <div class="Clear"></div>
+
+            <div class="field-wrapper">
             <label for="ArticleSenderTypeFilter">[% Translate("Sender Type") | html %]:</label>
             <div class="Field">
                 [% Data.ArticleSenderTypeFilterString %]
+                </div>
             </div>
-            <div class="Clear"></div>
-            <label for="SaveDefaults">[% Translate("Save filter settings as default") | html %]:</label>
-            <div class="Field">
-                <input type="checkbox" id="SaveDefaults" name="SaveDefaults" value="1" />
+
+            <div class="field-wrapper">
+                <label for="SaveDefaults">[% Translate("Save filter settings as default") | html %]:</label>
+                <div class="Field">
+                    <input type="checkbox" id="SaveDefaults" name="SaveDefaults" value="1" />
+                </div>
             </div>
         </fieldset>
     </form>
 </div>
 [% RenderBlockEnd("ArticleFilterDialog") %]
-
 [% RenderBlockStart("EventTypeFilterDialog") %]
 <div id="EventTypeFilterDialog" class="Hidden">
     <form action="[% Env("CGIHandle") %]" method="post" id="EventTypeFilterDialogForm" name="EventTypeFilterDialogForm">
@@ -50,7 +57,7 @@
             <div class="Field">
                 [% Data.EventTypeFilterString %]
             </div>
-            <div class="Clear"></div>
+
             <label for="SaveDefaults">[% Translate("Save as default") | html %]:</label>
             <div class="Field">
                 <input type="checkbox" id="SaveDefaults" name="SaveDefaults" value="1" />
@@ -59,12 +66,10 @@
     </form>
 </div>
 [% RenderBlockEnd("EventTypeFilterDialog") %]
-
 [% RenderBlockStart("Header") %]
-<div class="MainBox ARIARoleMain TicketZoom UseArticleColors">
-    <div class="ClearLeft"></div>
+<div class="MainBox ARIARoleMain TicketZoom UseArticleColors" id="ticketDetails">
     <div class="Headline NoMargin">
-        <div class="Flag" title="[% Translate(Data.Priority) | html %]"><span class="PriorityID-[% Data.PriorityID | html %]">[% Translate(Data.Priority) | html %]</span></div>
+        <div class="Flag Small" title="[% Translate(Data.Priority) | html %]"><span class="PriorityID-[% Data.PriorityID | html %]">[% Translate(Data.Priority) | html %]</span></div>
         <h1>
             [% Data.Hook %][% Config('Ticket::HookDivider') %][% Data.TicketNumber %] &mdash; [% Data.Title | html %]
         </h1>
@@ -79,7 +84,6 @@
 
     <div class="LayoutFixedSidebar SidebarLast">
         <div class="SidebarColumn">
-
 [% RenderBlockStart("FormDraftTable") %]
             <div class="WidgetSimple">
                 <div class="Header">
@@ -109,7 +113,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="FormDraftDelete"
+                                    <a class="FormDraftDelete table-icon-hover-md"
                                         href="[% Env("CGIHandle") %]?Action=AgentTicketZoom;Subaction=FormDraftDelete;FormDraftID=[% FormDraft.FormDraftID | html %];TicketID=[% Data.TicketID %]"
                                         title="[% Translate("Delete") | html %]"
                                         data-title="[% FormDraft.Title | html %]"
@@ -137,127 +141,154 @@
                 [% END; %]
             [% END; %]
         </div>
-        <div class="ContentColumn">
-            <div class="WidgetSimple">
+
+        <div class="ContentColumn card">
+            <div class="WidgetSimple WidgetSimpleSecondary">
                 <div class="Content OverflowVisible">
                     <div class="ActionRow Cluster">
+                        <ul class="Actions-Mobile-List">
+                            <li>Back</li>
+                            <li class="mobile-action-option">Options</li>
+                        </ul>
+
+                        <div class="Actions-overlay">
+                            <div class="Actions-wrapper">
+                            <div class="Actions-top">Options</div>
+                            <ul class="Actions">
+[% RenderBlockStart("TicketMenu") %]
+                                <li id="nav-[% Data.Name | replace(' ', '-') | html %]">
+                                [% IF Data.Type == 'Cluster' %]
+                                    <span class="[% Data.Class %]" >[% Translate(Data.Name) | html %] <i class="fa fa-caret-down"></i></span>
+                                [% ELSE %]
+                                    <a href="[% Env("Baselink") %][% Data.Link | Interpolate %]" class="[% Data.Class %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]" target="[% Data.Target | html %]">[% Translate(Data.Name) | html %]</a>
+                                [% END %]
+[% RenderBlockStart("TicketMenuSubContainer") %]
+                                    <ul id="nav-[% Data.Name | replace(' ', '-') | html %]-container">
+[% RenderBlockStart("TicketMenuSubContainerItem") %]
+                                        <li id="nav-[% Data.Name | replace(' ', '-') | html %]">
+                                            <a href="[% IF !Data.ExternalLink %][% Env("Baselink") %][% END %][% Data.Link | Interpolate %]" class="[% Data.Class | html %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]" target="[% Data.Target | html %]">[% Translate(Data.Name) | html %]</a>
+                                        </li>
+[% RenderBlockEnd("TicketMenuSubContainerItem") %]
+                                    </ul>
+[% RenderBlockEnd("TicketMenuSubContainer") %]
+                                </li>
+[% RenderBlockEnd("TicketMenu") %]
+[% RenderBlockStart("TicketMenuPhoneAsDropdown") %]
+                                <li>
+                                    <form title="[% Translate(Data.Name) | html %]" action="[% Env("CGIHandle") %]" method="get" id="[% Data.FormID | html %]">
+                                        <input type="hidden" name="Action" value="[% Data.Action | html %]"/>
+                                        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+                                        <label for="[% Data.PhoneElementID | html %]" class="InvisibleText">[% Translate(Data.Name) | html %]:</label>
+                                        [% Data.StandardReplyStrg %]
+                                    </form>
+                                </li>
+[% RenderBlockEnd("TicketMenuPhoneAsDropdown") %]
+[% RenderBlockStart("MoveLink") %]
+                                <li class="[% Data.Class | html %]">
+                                    <form title="[% Translate("Move ticket to a different queue") | html %]" action="[% Env("CGIHandle") | html %]" method="post">
+                                        <input type="hidden" name="Action" value="AgentTicketMove"/>
+                                        <input type="hidden" name="QueueID" value="[% Data.QueueID | html %]"/>
+                                        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+                                        <label for="DestQueueID" class="InvisibleText">[% Translate("Queue") | html %]:</label>
+                                        [% Data.MoveQueuesStrg %]
+                                    </form>
+                                </li>
+[% RenderBlockEnd("MoveLink") %]
+[% RenderBlockStart("MoveForm") %]
+                                <li>
+                                    <a href="[% Env("Baselink") %]Action=AgentTicketMove;TicketID=[% Data.TicketID | uri %];" class="AsPopup PopupType_TicketAction" title="[% Translate("Change Queue") | html %]">[% Translate("Queue") | html %]</a>
+                                </li>
+[% RenderBlockEnd("MoveForm") %]
+[% RenderBlockStart("TicketMenuExternalLink") %]
+                                <li>
+                                    <a href="[% Data.Link | Interpolate %]" class="[% Data.Class | html %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]" target="[% Data.Target %]">[% Translate(Data.Name) | html %]</a>
+                                </li>
+[% RenderBlockEnd("TicketMenuExternalLink") %]
+                            </ul>
+                            <div class="Actions-bottom">
+                                <a class="btn-collapse">
+                                    <i class="fa fa-sign-out"></i>
+                                    <span>Collapse</span>
+                                </a>
+                            </div>
+                            </div>
+                            <div class="Actions-close"></div>
+                        </div>
+
                         <div class="WidgetAction ArticleView">
-                            <a id="ArticleViewSettings" href="#" title="[% Translate("Settings") | html %]">
+                            <a class="icon-hover" id="ArticleViewSettings" href="#" title="[% Translate("Settings") | html %]">
                                 <i class="fa fa-cog"></i>
                                 <span class="InvisibleText">[% Translate("Settings") | html %]</span>
                             </a>
                         </div>
-                        <ul class="Actions">
-[% RenderBlockStart("TicketMenu") %]
-                            <li id="nav-[% Data.Name | replace(' ', '-') | html %]">
-                            [% IF Data.Type == 'Cluster' %]
-                                <span class="[% Data.Class %]" >[% Translate(Data.Name) | html %] <i class="fa fa-caret-down"></i></span>
-                            [% ELSE %]
-                                <a href="[% Env("Baselink") %][% Data.Link | Interpolate %]" class="[% Data.Class %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]" target="[% Data.Target | html %]">[% Translate(Data.Name) | html %]</a>
-                            [% END %]
-[% RenderBlockStart("TicketMenuSubContainer") %]
-                                <ul id="nav-[% Data.Name | replace(' ', '-') | html %]-container">
-[% RenderBlockStart("TicketMenuSubContainerItem") %]
-                                    <li id="nav-[% Data.Name | replace(' ', '-') | html %]">
-                                        <a href="[% IF !Data.ExternalLink %][% Env("Baselink") %][% END %][% Data.Link | Interpolate %]" class="[% Data.Class | html %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]" target="[% Data.Target | html %]">[% Translate(Data.Name) | html %]</a>
-                                    </li>
-[% RenderBlockEnd("TicketMenuSubContainerItem") %]
-                                </ul>
-[% RenderBlockEnd("TicketMenuSubContainer") %]
-                            </li>
-[% RenderBlockEnd("TicketMenu") %]
-[% RenderBlockStart("TicketMenuPhoneAsDropdown") %]
-                            <li>
-                                <form title="[% Translate(Data.Name) | html %]" action="[% Env("CGIHandle") %]" method="get" id="[% Data.FormID | html %]">
-                                    <input type="hidden" name="Action" value="[% Data.Action | html %]"/>
-                                    <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
-                                    <label for="[% Data.PhoneElementID | html %]" class="InvisibleText">[% Translate(Data.Name) | html %]:</label>
-                                    [% Data.StandardReplyStrg %]
-                                </form>
-                            </li>
-[% RenderBlockEnd("TicketMenuPhoneAsDropdown") %]
-[% RenderBlockStart("MoveLink") %]
-                            <li class="[% Data.Class | html %]">
-                                <form title="[% Translate("Move ticket to a different queue") | html %]" action="[% Env("CGIHandle") | html %]" method="post">
-                                    <input type="hidden" name="Action" value="AgentTicketMove"/>
-                                    <input type="hidden" name="QueueID" value="[% Data.QueueID | html %]"/>
-                                    <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
-                                    <label for="DestQueueID" class="InvisibleText">[% Translate("Queue") | html %]:</label>
-                                    [% Data.MoveQueuesStrg %]
-                                </form>
-                            </li>
-[% RenderBlockEnd("MoveLink") %]
-[% RenderBlockStart("MoveForm") %]
-                            <li>
-                                <a href="[% Env("Baselink") %]Action=AgentTicketMove;TicketID=[% Data.TicketID | uri %];" class="AsPopup PopupType_TicketAction" title="[% Translate("Change Queue") | html %]">[% Translate("Queue") | html %]</a>
-                            </li>
-[% RenderBlockEnd("MoveForm") %]
-[% RenderBlockStart("TicketMenuExternalLink") %]
-                            <li>
-                                <a href="[% Data.Link | Interpolate %]" class="[% Data.Class | html %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]" target="[% Data.Target %]">[% Translate(Data.Name) | html %]</a>
-                            </li>
-[% RenderBlockEnd("TicketMenuExternalLink") %]
-                        </ul>
-                        <div class="Clear"></div>
+
                     </div>
                 </div>
             </div>
-
 [% RenderBlockStart("ProcessWidget") %]
             <div class="WidgetSimple Expanded" id="DynamicFieldsWidget">
-                <div class="Header">
+                <div class="Header ticket-zoom-header">
                     <div class="WidgetAction Toggle"><a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a></div>
                     <h2>[% Translate(Data.WidgetTitle) | html %]</h2>
                 </div>
 [% RenderBlockStart("NextActivityDialogs") %]
                 <div class="LightRow Bottom">
-                    <ul class="Actions">
+                    <ul class="Actions approval-container">
                         <li><strong>[% Translate(Data.ActivityName) | html %]:</strong></li>
 [% RenderBlockStart("ActivityDialog") %]
                         <li>
-                            <a title="[% Translate(Data.Name) | html %]" class="AsPopup PopupType_TicketAction" href="[% Env("Baselink") %]Action=AgentTicketProcess;Subaction=DisplayActivityDialog;TicketID=[% Data.TicketID | uri %];ProcessEntityID=[% Data.ProcessEntityID | uri %];ActivityDialogEntityID=[% Data.ActivityDialogEntityID | uri %]">[% Translate(Data.Name) | html %]</a>
+                            <a title="[% Translate(Data.Name) | html %]" class="approval-val AsPopup PopupType_TicketAction" href="[% Env("Baselink") %]Action=AgentTicketProcess;Subaction=DisplayActivityDialog;TicketID=[% Data.TicketID | uri %];ProcessEntityID=[% Data.ProcessEntityID | uri %];ActivityDialogEntityID=[% Data.ActivityDialogEntityID | uri %]">[% Translate(Data.Name) | html %]</a>
                         </li>
 [% RenderBlockEnd("ActivityDialog") %]
                     </ul>
 [% RenderBlockStart("NoActivityDialogs") %]
                     <span class="ActionMessage">[% Translate("There are no dialogs available at this point in the process.") | html %]</span>
 [% RenderBlockEnd("NoActivityDialogs") %]
-                    <div class="Clear"></div>
                 </div>
 [% RenderBlockEnd("NextActivityDialogs") %]
+
                 <div class="Content ProcessInfo">
                     <div class="ProcessInformation">
-                        <fieldset>
+                        <fieldset class="flex-column">
 [% RenderBlockStart("ProcessWidgetDynamicFieldGroups") %]
 [% RenderBlockStart("ProcessWidgetDynamicFieldGroupSeparator") %]
                             <h2 class="FieldSetSeparator">[% Translate(Data.Name) | html %]</h2>
 [% RenderBlockEnd("ProcessWidgetDynamicFieldGroupSeparator") %]
+
+                            <div class="flex-row flex-wrap">
 [% RenderBlockStart("ProcessWidgetDynamicField") %]
-                            <div class="FieldContainer DynamicFieldAutoResize">
-                                <label title="[% Data.Label | html %]">
-                                    [% Data.Label | html %]
+                                <div class="FieldContainer DynamicFieldAutoResize">
+                                    <div class="LightRow flex-row space-between">
+                                        <label title="[% Data.Label | html %]">
+                                            [% Data.Label | html %]
+                                        </label>
+
 [% RenderBlockStart("ProcessWidgetDynamicFieldValueOverlayTrigger") %]
-                                    <a href="#" class="ShowFieldInfoOverlay">+</a>
+                                            <a href="#" class="ShowFieldInfoOverlay icon-hover-sm">+</a>
 [% RenderBlockEnd("ProcessWidgetDynamicFieldValueOverlayTrigger") %]
-                                </label>
-                                <p class="Value CutValue DynamicField_[% Data.Name %]">
-<!-- OutputFilterHook_WidgetDynamicFieldBegin -->
+                                    </div>
+
+                                    <div class="BottomRow">
+                                        <p class="Value CutValue DynamicField_[% Data.Name %]">
+                                            <!-- OutputFilterHook_WidgetDynamicFieldBegin -->
 [% RenderBlockStart("ProcessWidgetDynamicFieldLink") %]
-                                    <span title="[% Data.Title %]"><a href="[% Data.Link | Interpolate %]"[% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></span>
+                                            <span title="[% Data.Title %]"><a href="[% Data.Link | Interpolate %]"[% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></span>
 [% RenderBlockEnd("ProcessWidgetDynamicFieldLink") %]
 [% RenderBlockStart("ProcessWidgetDynamicFieldPlain") %]
-                                    [% Data.Value %]
+                                            [% Data.Value %]
 [% RenderBlockEnd("ProcessWidgetDynamicFieldPlain") %]
-<!-- OutputFilterHook_WidgetDynamicFieldEnd -->
-                                </p>
-                                <p class="ValueLong">
+                                            <!-- OutputFilterHook_WidgetDynamicFieldEnd -->
+                                        </p>
+                                        <p class="ValueLong">
 [% RenderBlockStart("ProcessWidgetDynamicFieldValueLong") %]
-                                    [% Data.Value %]
+                                            [% Data.Value %]
 [% RenderBlockEnd("ProcessWidgetDynamicFieldValueLong") %]
-                                </p>
-                                <div class="Clear"></div>
-                            </div>
+                                        </p>
+                                    </div>
+
+                                </div>
 [% RenderBlockEnd("ProcessWidgetDynamicField") %]
+                            </div>
 [% RenderBlockEnd("ProcessWidgetDynamicFieldGroups") %]
                         </fieldset>
                     </div>
@@ -268,16 +299,15 @@
             <div id="ArticleTree">
 [% Data.ArticleTree %]
             </div>
-
 [% RenderBlockStart("HintNoArticles") %]
-            <div class="WidgetSimple">
+            <div class="WidgetSimple has-no-articles">
                 <div class="Content">
-                    [% Translate("This item has no articles yet.") | html %]
+                    <p>[% Translate("This item has no articles yet.") | html %]</p>
                 </div>
             </div>
 [% RenderBlockEnd("HintNoArticles") %]
 
-            <div id="ArticleItems">
+            <div id="ArticleItems"  class="ticketDetails">
 [% Data.ArticleItems %]
             </div>
 
@@ -288,17 +318,14 @@
                     [% Widget.Output %]
                 [% END; %]
             [% END; %]
-
         </div>
-        <div class="Clear"></div>
     </div>
 
 </div>
 [% RenderBlockEnd("Header") %]
-
 [% RenderBlockStart("Tree") %]
 <div class="WidgetSimple">
-    <div class="Header">
+    <div class="Header ticket-zoom-header">
         <div class="WidgetAction Toggle">
             <a href="#" title="[% Translate("Show or hide the content") | html %]">
                 <i class="fa fa-caret-right"></i>
@@ -306,14 +333,9 @@
             </a>
         </div>
         <h2>
-        [% IF Data.ZoomTimeline %]
-            [% Translate("Ticket Timeline View") | html %]
-        [% ELSE %]
             [% Translate("Article Overview - %s Article(s)", Data.ArticleCount) | html %]
-        [% END %]
         </h2>
         <div class="AdditionalInformation ControlRow">
-
 [% RenderBlockStart("ArticlePages") %]
             <div class="ArticlePages Icons">
         [% FOREACH page IN [1 .. Data.Pages]; %]
@@ -329,15 +351,18 @@
                 <a href="#" id="SetArticleFilter" title="[% Translate("Add Filter") | html %]"><i class="fa fa-filter"></i><span>[% Translate("Set") | html %]</span></a>
 #[% RenderBlockEnd("ArticleFilterSetLink") %]
 [% RenderBlockStart("ArticleFilterResetLink") %]
-                <a href="#" id="ResetArticleFilter" title="[% Translate("Reset Filter") | html %]"><i class="fa fa-trash-o"></i><span>[% Translate("Reset") | html %]</span></a>
+
+                <div class="RemoveFilters">
+                    <a href="#" id="ResetArticleFilter" title="[% Translate("Reset Filter") | html %]">
+                        [% Translate("Clear all filters") | html %]
+                    </a>
+                </div>
 [% RenderBlockEnd("ArticleFilterResetLink") %]
             </div>
 [% RenderBlockEnd("ArticleFilterDialogLink") %]
-            <div class="Clear"></div>
         </div>
     </div>
-    <div class="Content">
-
+    <div class="Content article-overview-content">
 [% RenderBlockStart("ArticleList") %]
         <div class="TicketList">
             <div id="ArticleTableBody" class="ActionRow">
@@ -458,76 +483,6 @@
             </div>
         </div>
 [% RenderBlockEnd("ArticleList") %]
-
-[% RenderBlockStart("TimelineView") %]
-
-        <div class="TimelineViewTicketActions Hidden">
-[% RenderBlockStart("TimelineViewTicketActions") %]
-            <div class="TicketActions ArticleID_[% Data.ArticleID | html %]">
-[% PROCESS ArticleActionMenu.tt %]
-            </div>
-[% RenderBlockEnd("TimelineViewTicketActions") %]
-        </div>
-
-        <div class="TimelineViewArticleAttachments Hidden">
-[% RenderBlockStart("TimelineViewArticleAttachments") %]
-            <div class="ArticleAttachments ArticleID_[% Data.ArticleID | html %]">
-[% PROCESS ArticleAttachments.tt %]
-            </div>
-[% RenderBlockEnd("TimelineViewArticleAttachments") %]
-        </div>
-
-        <ul class="Hidden">
-            <li id="TemplateListItem">
-                <h3>
-                    <div class="UnreadArticles Remarkable" title="[% Translate("Mark this article as read") | html %]">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <i class="fa fa-info-circle" title="[% Translate("Important") | html %]"></i>
-                    <em></em>
-                    <strong class="Type"></strong>
-                    <span><span></span></span>
-                    <a href="#" class="ShowFullArticleText" title="[% Translate("Show Full Text") | html %]">
-                        <i class="fa fa-search-plus"></i>
-                    </a>
-                </h3>
-            </li>
-        </ul>
-
-        <div id="TemplateArticleData" class="Hidden">
-            <ul>
-                <li class="subject">
-                    <strong>[% Translate("Subject") | html %]: </strong>
-                </li>
-                <li class="from">
-                    <strong>[% Translate("From") | html %]: </strong>
-                </li>
-                <li class="to">
-                    <strong>[% Translate("To") | html %]: </strong>
-                </li>
-                <li class="cc">
-                    <strong>[% Translate("Cc") | html %]: </strong>
-                </li>
-            </ul>
-            <div class="Hidden FullArticlePlainText" data-title="[% Translate("Full Article Text") | html %]">
-                <div class="TimelinePlainText"></div>
-            </div>
-            <p class="PlainText"></p>
-            <div class="Hidden ArticleIFrame" data-title="[% Translate("Full Article Text") | html %]"></div>
-        </div>
-
-        <div class="TimelineView UseArticleColors">
-            <ul class="ListLeft">
-                <li class="NoEvents">[% Translate("No more events found. Please try changing the filter settings.") | html %]</li>
-            </ul>
-            <ul class="ListRight"></ul>
-            <div class="Clear"></div>
-            <span><i class="fa fa-spinner fa-spin"></i></span>
-        </div>
-
-[% RenderBlockEnd("TimelineView") %]
-
     </div>
 </div>
 [% RenderBlockEnd("Tree") %]

@@ -39,7 +39,7 @@ sub Run {
     chomp $OTRSPartition;
 
     $Self->AddResultInformation(
-        Label => Translatable('OTRS Disk Partition'),
+        Label => Translatable('Znuny Disk Partition'),
         Value => $OTRSPartition,
     );
 

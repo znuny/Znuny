@@ -45,7 +45,7 @@ sub Run {
 
     my %NotificationDetails = (
         Priority => 'Error',
-        Data     => $LayoutObject->{LanguageObject}->Translate("OTRS Daemon is not running."),
+        Data     => $LayoutObject->{LanguageObject}->Translate("Znuny Daemon is not running."),
     );
 
     # check if user needs to be notified

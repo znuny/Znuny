@@ -40,7 +40,7 @@ return if !$DBObject->Prepare(
         FROM sysconfig_default sd
         WHERE
             sd.xml_filename IN (
-                'Calendar.xml' ,'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
+                'Calendar.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
                 'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
             )
             AND is_invisible != '1'

@@ -12,836 +12,1715 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @section     Forms
  */
 
-@media screen,projection,tv,handheld {
-
-/**
- * @subsection  Input focus
- * @note        Does not work in IE6, only partially in IE7 (no focus)
- */
-
-input[type=text],
-input[type=password],
-input[type=email],
-textarea,
-select[multiple=multiple] {
-    border: 1px solid #C9C9C9;
-    border-top-color: #C0C0C0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    /* Opera 10.5 has per default a grey background */
-    background-color: #FFF;
-    -webkit-box-shadow: inset 1px 1px 3px #eee, inset -1px -1px 3px #eee;
-    box-shadow: inset 1px 1px 3px #eee, inset -1px -1px 3px #eee;
-}
-
-select[multiple=multiple] {
-    min-width: 300px;
-    padding: 3px;
-    box-shadow: inset 1px 1px 3px #eee, inset -1px -1px 3px #eee;
-}
-
-.DataTable select[multiple=multiple] {
-    min-width: 0px;
-}
-
-select[multiple=multiple] option {
-    padding: 2px;
-}
-
-select[multiple=multiple] option:nth-child(odd) {
-    background-color: #f9f9f9;
-}
-
-input#Subject {
-    font-size: 13px;
-    padding: 5px;
-    font-weight: bold;
-}
-
-input[type=text],
-input[type=password],
-input[type=email],
-textarea {
-    padding: 3px;
-    font-size: 12px;
-    color: #333;
-}
-
-input[type=text]:focus,
-input[type=password]:focus,
-input[type=email]:focus,
-textarea:focus {
-    border-color: #777;
-    outline: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: #555;
-    transition: color ease 0.3s;
-}
-
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: #555;
-   transition: color ease 0.3s;
-   opacity: 1;
-}
-
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: #555;
-   transition: color ease 0.3s;
-   opacity: 1;
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: #555;
-   transition: color ease 0.3s;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
-   color: #555;
-   transition: color ease 0.3s;
-}
-
-:focus::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: #ccc;
-}
-
-:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: #ccc;
-   opacity: 1;
-}
-
-:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: #ccc;
-   opacity: 1;
-}
-
-:focus:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: #ccc;
-}
-
-:focus::-ms-input-placeholder { /* Microsoft Edge */
-   color: #ccc;
-}
-
-/**
- * @subsection  Textarea
- * @note        Fixed font needed in textareas because otherwise the line wrapping is incorrect.
- */
-textarea {
-    font-family: monospace,fixed;
-}
-
-
-/**
- * @subsection  Input Readonly
- */
-input[type=text][readonly],
-input[type=password][readonly],
-input[type=email][readonly],
-textarea[readonly] {
-    background-color: #DDD;
-}
-
-/**
- * @subsection  Buttons
- */
-button.Primary {
-    font-weight: bold;
-}
-
-a.CertificateRelationAdd,
-button.CertificateRelationAdd,
-a.CertificateRead,
-button.Add,
-a.Add,
-button.Remove,
-a.Remove,
-button.TrashCan,
-a.TrashCan,
-a.Pencil,
-button.Reset,
-a.Reset {
-    height: 16px;
-    width: 16px;
-    padding: 1px;
-    margin-top: 0;
-    margin-bottom: 1px;
-    border-style: none;
-    text-indent: -9999px;
-    display: inline-block;
-    vertical-align: middle;
-    cursor: pointer;
-    position: relative;
-    z-index: 999;
-}
-
-button.Add,
-a.Add {
-    background: url(../img/filter_add.png) no-repeat center;
-}
-
-button.Add:hover,
-button.Add:focus,
-a.Add:hover,
-a.Add:focus {
-    background: url(../img/filter_add_hover.png) no-repeat center;
-}
-
-button.CertificateRelationAdd,
-a.CertificateRelationAdd {
-    background: url(../img/icons/certificate-plus.png) no-repeat center;
-}
-
-a.CertificateRead {
-    background: url(../img/icons/certificate.png) no-repeat center;
-}
-
-button.Remove,
-a.Remove {
-    background: url(../img/filter_remove.png) no-repeat center;
-}
-
-button.Remove:hover,
-button.Remove:focus,
-a.Remove:hover,
-a.Remove:focus {
-    background: url(../img/filter_remove_hover.png) no-repeat center;
-}
-
-a.TrashCan i.fa-trash-o,
-a.Pencil i.fa-edit {
-    text-indent: 0px;
-    position: absolute;
-    left: 0px;
-    top: 4px;
-    z-index: 998;
-}
-
-button.Reset,
-a.Reset{
-    height: 22px;
-    width: 22px;
-    padding: 3px;
-}
-
-.AddButton,
-.RemoveButton {
-    color: #000;
-    font-size: 14px;
-    vertical-align: middle;
-}
-
-/**
- * @note    Push-lookalike for active state
- */
-button.Add:active,
-a.Add:active,
-button.Remove:active,
-a.Remove:active,
-button.TrashCan:active,
-a.TrashCan:active,
-button.Reset:active {
-    margin-top: 1px;
-    margin-bottom: 0;
-}
-
-
-.GetAllAJAX {
-    width: 16px;
-    height: 16px;
-    margin-left: 3px;
-    display: inline-block;
-    color: #333;
-}
-
-.GetAllAJAX span {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
-}
-
-.RTL .GetAllAJAX {
-    margin: 0 3px 0 0;
-}
-
-.AdditionlFieldIcon {
-    width: 16px;
-    height: 16px;
-    margin-left: 3px;
-    display: inline-block;
-    color: #333;
-}
-
-.AdditionlFieldIcon span {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
-}
-
-.RTL .AdditionlFieldIcon {
-    margin: 0 3px 0 0;
-}
-
-/**
- * @subsection    GenericAgent ClearSelect
- */
-
-.GenericAgentClearSelect {
-    width: 16px;
-    height: 16px;
-    margin-left: 3px;
-    color: #333;
-}
-
-.GenericAgentClearSelect span {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
-}
-
-/**
- * @subsection    Tree selection icon and overlay for select boxes
- */
-
-.ShowTreeSelection {
-    width: 16px;
-    height: 16px;
-    margin-left: 3px;
-    display: none;
-    color: #333;
-}
-
-.ShowTreeSelection span {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
-}
-
-.ShowTreeSelection:focus {
-    color: #f92;
-}
-
-.Field .ShowTreeSelection, .WidgetSettingsForm .ShowTreeSelection {
-    display: inline-block;
-}
-
-.WidgetSettingsForm .ShowTreeSelection {
-    position: relative;
-    top: -4px;
-}
-
-#TreeContainer #TreeSearch {
-    position: relative;
-}
-
-#TreeContainer #TreeSearch span {
-    color: #AAAAAA;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    height: 12px;
-    position: absolute;
-    right: 9px;
-    top: 4px;
-    width: 16px;
-}
-
-.DialogTreeSearch span {
-    color: #AAAAAA;
-    cursor: pointer;
-    font-weight: bold;
-    position: relative;
-    right: 10px;
-}
-
-#TreeContainer #TreeSearch input {
-    display: block;
-    margin: 10px 12px 0px 12px;
-    width: 92%;
-}
-
-.JSTreeField {
-    background-color: #FFFFFF;
-    border: 1px solid #ccc;
-    height: 72%;
-    margin: 10px 12px;
-    -moz-box-shadow: inset 0px 0px 6px #ccc;
-    -webkit-box-shadow: inset 0px 0px 6px #ccc;
-    box-shadow: inset 0px 0px 6px #ccc;
-    overflow: auto;
-    padding: 0px 10px 10px 10px;
-}
-
-.JSTreeField.InOverlay {
-    margin: 5px 5px 5px 0px;
-    width: 85%;
-    float: left;
-}
-
-.JSTreeField .Disabled > a {
-    color: #aaa;
-    font-style: italic;
-}
-
-.JSTreeField .jstree-search {
-    color: #E07006;
-}
-
-.JSTreeField .jstree-search.jstree-clicked {
-    color: #000;
-}
-
-.JSTreeField .jstree-clicked {
-    background: #f3960d;
-    background: -moz-linear-gradient(top,  #ffe7bd 0%, #fbba49 20%, #f6ad3e 51%, #f3960d 51%, #e98207 95%, #e07006 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffe7bd), color-stop(20%,#fbba49), color-stop(51%,#f6ad3e), color-stop(51%,#f3960d), color-stop(95%,#e98207), color-stop(100%,#e07006));
-    background: -webkit-linear-gradient(top,  #ffe7bd 0%,#fbba49 20%,#f6ad3e 51%,#f3960d 51%,#e98207 95%,#e07006 100%);
-    background: -o-linear-gradient(top,  #ffe7bd 0%,#fbba49 20%,#f6ad3e 51%,#f3960d 51%,#e98207 95%,#e07006 100%);
-    background: -ms-linear-gradient(top,  #ffe7bd 0%,#fbba49 20%,#f6ad3e 51%,#f3960d 51%,#e98207 95%,#e07006 100%);
-    background: linear-gradient(to bottom,  #ffe7bd 0%,#fbba49 20%,#f6ad3e 51%,#f3960d 51%,#e98207 95%,#e07006 100%);
-    border-color: #f3960d;
-    padding: 0px 3px;
-}
-
-.JSTreeField .jstree-hovered {
-    background-color: #eee;
-    border-color: #ddd;
-}
-
-.JSTreeField a:focus {
-    background-color: #eee;
-    border-color: #ddd;
-}
-
-#SubmitTree {
-    display: block;
-    width: 120px;
-    margin: 0px auto;
-}
-
-.RTL .ShowTreeSelection {
-    margin: 0 3px 0 0;
-}
-
-.OverlayTreeSelector {
-    width: 400px;
-    height: 300px;
-}
-
-/**
- * @subsection  Form
- */
-
-form fieldset {
-    display: block;
-    border: none;
-}
-
-.TableLikeOverflow {
-    overflow: auto;
-    line-height: initial;
-}
-
-fieldset > legend {
-    display: block;
-    width: 100%;
-}
-
-.WidgetSettingsForm fieldset legend {
-    padding-top: 10px;
-}
-
-fieldset > legend > span {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    font-weight: bold;
-    padding: 5px 0px 5px 30%;
-    text-indent: 8px;
-    margin-bottom: 5px;
-}
-
-form fieldset > p.NoValue {
-    padding: 5px 0px 5px 30%;
-    text-indent: 8px;
-}
-
-.FieldExplanation {
-    color: #888;
-    margin: 5px 0;
-}
-
-.SidebarColumn .FieldExplanation.Error {
-    border: 1px solid #F03432;
-    color: #F03432;
-    line-height: 150%;
-    margin: 7px 0px;
-    padding: 7px 10px;
-}
-
-form label.Mandatory {
-    color: black !important;
-}
-
-form label.Mandatory span.Marker {
-    font-size: 18px;
-    font-weight: bold;
-    position: relative;
-    top: 0.35em;
-    line-height: 1px;
-    right: 2px;
-    left: auto;
-}
-
-.RTL form label.Mandatory span.Marker {
-    left: 2px;
-    right: auto;
-}
-
-form label.LabelError {
-    color: #ff505e !important;
-}
-
-.CustomerContainer,
-.CcCustomerContainer,
-.BccCustomerContainer {
-    background-color: #F2F2F2;
-    border: 1px solid #CCCCCC;
-    -moz-box-shadow: inset 1px 1px 5px #ccc;
-    -webkit-box-shadow: inset 1px 1px 5px #ccc;
-    box-shadow: inset 1px 1px 5px #ccc;
-    padding: 5px 7px 10px 6px;
-    width: 74%;
-    position: relative;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-}
-
-.CustomerContainer > div,
-.CcCustomerContainer > div,
-.BccCustomerContainer > div {
-    margin-top: 5px;
-}
-
-.CustomerContainer .CustomerTicketText,
-.CcCustomerContainer .CustomerTicketText,
-.BccCustomerContainer .CustomerTicketText  {
-    width: 89%;
-    margin-left: 7px;
-}
-
-.CustomerContainer .CustomerTicketText {
-    transition: background-color 1s ease, border 1s ease;
-}
-
-.CustomerContainer .CustomerTicketText.MainCustomer {
-    background-color: #F7ECC3;
-    border: 1px solid #E8CC8B;
-}
-
-.CustomerContainer .CustomerTicketText.Radio {
-    width: 84%;
-    margin-left: 0px;
-}
-
-.CustomerContainer .BoxLabel,
-.CcCustomerContainer .BoxLabel,
-.BccCustomerContainer .BoxLabel {
-    background-color: #CCCCCC;
-    font-size: 11px;
-    right: 100%;
-    top: 10px;
-    padding: 0 5px;
-    position: absolute;
-    text-align: center;
-    text-shadow: 1px 1px 1px #FFFFFF;
-    min-width: 20px;
-    color: #555;
-}
-
-#EmailRecipientsList span,
-#EmailRecipientsList a.Collapse {
-    display: none;
-}
-
-#EmailRecipientsList.Expanded span,
-#EmailRecipientsList.Expanded a.Expand {
-    display: inline;
-}
-
-/**
- * @note        Give the user a hint about linked label elements (they are clickable and
- *                  give focus to the linked element.
- */
-
-form label[for] {
-    cursor: pointer;
-}
-
-form input.Error,
-form textarea.Error,
-form input.Error:focus,
-form textarea.Error:focus {
-    border-color: #ff505e;
-}
-
-/*
- * This will be displayed by Core.UI.Tooltips
- */
-div.TooltipErrorMessage {
-    display: none;
-}
-
-/**
- * @subsection  TableLike
- * @description Provides a table-like, aligned label-value structure
- */
-
-fieldset.TableLike > label,
-fieldset.TableLike > .Row > label {
-    display: block;
-    float: left;
-    line-height: 1.9em;
-    width: 30%;
-    text-align: right;
-    color: #929292;
-    min-height: 17px;
-    padding-top: 0.3em;
-    padding-bottom: 1px;
-    text-shadow: 0 1px 0 #FAFAFA;
-}
-
-.RTL fieldset.TableLike > label,
-.RTL fieldset.TableLike > .Row > label {
-    float: right;
-    text-align: left;
-}
-
-fieldset.TableLike > .Field,
-fieldset.TableLike > .Row > .Field {
-    line-height: 1.9em;
-    margin-left: 30%;
-    margin-right: 0;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 10px;
-    padding-right: 0px;
-    min-height: 20px;
-}
-
-.RTL fieldset.TableLike > .Field,
-.RTL fieldset.TableLike > .Row > .Field {
-    margin-left: 0;
-    margin-right: 30%;
-    padding-left: 0;
-    padding-right: 10px;
-}
-
-fieldset.TableLike select {
-    margin-top: 3px;
-}
-
-/**
- * @note     Also make labels grey which occur inside of a field,
- *          for example for complex input elements.
- */
-fieldset.TableLike > .Field label,
-fieldset.TableLike > .Row > .Field label {
-    color: #929292;
-}
-
-fieldset.TableLike > .Field > select,
-fieldset.TableLike > .Row > .Field > select,
-fieldset.TableLike > .Field > input,
-fieldset.TableLike > .Row > .Field > input {
-    max-width: 100%;
-}
-
-/**
- * @note    The RichText field needs to float, otherwise it breaks
- *          in small screens.
- *          Additionally we have a generic FloatingField class,
- *          RichTextField is for backwards compatibility.
- */
-fieldset.TableLike > .Row > .RichTextField,
-fieldset.TableLike > .FloatingField,
-fieldset.TableLike > .Row > .FloatingField {
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 0;
-    float: left;
-}
-
-fieldset.TableLike > .RichTextField {
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: 30%;
-    margin-right: 0;
-}
-
-body.Popup fieldset.TableLike > .Row > .RichTextField,
-body.Popup fieldset.TableLike > .FloatingField,
-body.Popup fieldset.TableLike > .Row > .FloatingField {
-    margin: 7px 7px 0px 7px;
-}
-
-body.Popup fieldset.TableLike > .RichTextField {
-    padding-top: 7px;
-    padding-left: 17px;
-    padding-right: 0px;
-    margin-left: 170px;
-    margin-right: 0;
-}
-
-.RTL fieldset.TableLike > .Row > .RichTextField,
-.RTL fieldset.TableLike > .FloatingField,
-.RTL fieldset.TableLike > .Row > .FloatingField {
-    padding-left: 0;
-    padding-right: 10px;
-    float: right;
-}
-
-.RTL fieldset.TableLike > .RichTextField {
-    padding-bottom: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin-right: 30%;
-    margin-left: 0;
-}
-
-body.RealPopup.RTL fieldset.TableLike > .Row > .RichTextField,
-body.RealPopup.RTL fieldset.TableLike > .FloatingField,
-body.RealPopup.RTL fieldset.TableLike > .Row > .FloatingField {
-    margin: 7px 7px 0px 7px;
-}
-
-body.RealPopup.RTL fieldset.TableLike > .RichTextField {
-    padding-top: 7px;
-    padding-right: 17px;
-    padding-left: 0px;
-    margin-right: 170px;
-    margin-left: 0;
-}
-
-fieldset.TableLike > .Value,
-fieldset.TableLike > .Row > .Value {
-    margin-left: 30%;
-    padding: 5px 0 3px 8px;
-    line-height: 1.9em;
-}
-
-.RTL fieldset.TableLike > .Value,
-.RTL fieldset.TableLike > .Row > .Value {
-    margin: 0 30% 0 0;
-    padding: 5px 8px 3px 0;
-}
-
-fieldset.TableLike > .Value img,
-fieldset.TableLike > .Row > .Value img {
-    vertical-align: top;
-}
-
-/**
- * @note        FixedLabel - this additional class for TableLike
- *              makes the labels have a fixed size
- */
-fieldset.TableLike.FixedLabel > label,
-fieldset.TableLike.FixedLabel > .Row > label {
-    width: 170px;
-}
-
-fieldset.TableLike.FixedLabel > .Field,
-fieldset.TableLike.FixedLabel > .Row > .Field,
-fieldset.TableLike.FixedLabel > .Value,
-fieldset.TableLike.FixedLabel > .Row > .Value {
-    margin-left: 170px;
-    margin-right: 0;
-    padding-left: 17px;
-    padding-right: 0;
-}
-
-.RTL fieldset.TableLike.FixedLabel > .Field,
-.RTL fieldset.TableLike.FixedLabel > .Row > .Field,
-.RTL fieldset.TableLike.FixedLabel > .Value,
-.RTL fieldset.TableLike.FixedLabel > .Row > .Value {
-    margin-left: 0;
-    margin-right: 170px;
-    padding-left: 0;
-    padding-right: 17px;
-}
-
-/**
- * @note        FixedLabelSmall - this additional class for TableLike
- *              makes the labels have a small fixed size
- */
-fieldset.TableLike.FixedLabelSmall > label,
-fieldset.TableLike.FixedLabelSmall > .Row > label {
-    width: 100px;
-}
-
-fieldset.TableLike.FixedLabelSmall > .Field,
-fieldset.TableLike.FixedLabelSmall > .Row > .Field,
-fieldset.TableLike.FixedLabelSmall > .Value,
-fieldset.TableLike.FixedLabelSmall > .Row > .Value {
-    margin-left: 100px;
-    margin-right: 7px;
-    word-wrap: break-word;
-}
-
-.RTL fieldset.TableLike.FixedLabelSmall > .Field,
-.RTL fieldset.TableLike.FixedLabelSmall > .Row > .Field,
-.RTL fieldset.TableLike.FixedLabelSmall > .Value,
-.RTL fieldset.TableLike.FixedLabelSmall > .Row > .Value {
-    margin-left: 0;
-    margin-right: 100px;
-}
-
-fieldset.TableLike.FixedLabelSmall > .FixedValueSmall,
-fieldset.TableLike.FixedLabelSmall > .Row > .FixedValueSmall {
-    width: 143px;
-}
-fieldset.TableLike.FixedLabelSmall > p.FixedValueSmall > em.Error {
-    display: block;
-    font-size: 11px;
-    margin-top: 3px;
-}
-
-fieldset.TableLike.Narrow > label,
-fieldset.TableLike.Narrow > .Row > label,
-fieldset.TableLike.Narrow > .Value,
-fieldset.TableLike.Narrow > .Row > .Value {
-    line-height: 1.3em;
-}
-
-fieldset.TableLike.Narrow > label,
-fieldset.TableLike.Narrow > .Row > label,
-fieldset.TableLike.Narrow > .Value,
-fieldset.TableLike.Narrow > .Row > .Value,
-fieldset.TableLike > label,
-fieldset.TableLike > .Row > label {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-iframe.Signature {
-    border: 1px solid #888;
-}
-
-/**
- * @subsection freetext fields
- */
-
-input[type=text].TicketFreeText,
-input[type=text].ArticleFreeText {
-    width: 75%;
-}
-
-input[type=text].TicketFreeKey,
-input[type=text].ArticleFreeKey {
-    width: 50%;
-}
+ @media screen,projection,tv,handheld {
+
+    form {
+        width: 100%;
+        overflow: auto;
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-md);
+    }
+
+    /**
+    * @subsection  Input focus
+    * @note        Does not work in IE6, only partially in IE7 (no focus)
+    */
+
+    input[type=text],
+    input[type=number],
+    input[type=password],
+    input[type=email],
+    textarea,
+    select[multiple=multiple] {
+        border: var(--border-width) var(--border-solid) var(--border-input-color);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        /* Opera 10.5 has per default a grey background */
+        background: var(--white);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+
+        margin: 0;
+        padding: var(--padding-xs) var(--padding-sm);
+        font-size: var(--font-size-sm);
+        color: var(--black);
+        border-radius: var(--border-radius-sm);
+
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        line-height: var(--input-line-height);
+        transition: var(--main-transition);
+    }
+    /*
+    select[multiple=multiple] {
+        min-width: 300px;
+        box-shadow: none;
+        border-radius: var(--border-radius-sm);
+    }
+
+    .DataTable select[multiple=multiple] {
+        min-width: 0px;
+    }
+
+    select[multiple=multiple] option {
+        padding: 2px;
+    }
+
+    select[multiple=multiple] option:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    input#Subject {
+        font-size: 13px;
+        padding: 5px;
+        font-weight: bold;
+    }
+    */
+    input[type=text],
+    input[type=number],
+    input[type=password],
+    input[type=email],
+    textarea {
+        /*min-width: 120px;
+        min-width: 100%;*/
+        flex: 1;
+        padding: 6px var(--padding-sm);
+    }
+
+    input[type=text]:focus,
+    input[type=number]:focus,
+    input[type=password]:focus,
+    input[type=email]:focus,
+    textarea:focus {
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border-color: var(--black);
+    }
+
+    input[readonly] {
+        background: var(--disabled-input);
+        color: var(--disabled-text);
+    }
+
+    input#ConfigFile {
+        border-radius: var(--border-radius-sm);
+    }
+
+    .outer-select-date {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+    }
+
+    .outer-select-date div {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        gap: var(--gap-sm);
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: var(--gray-dark-semi);
+        transition: color ease 0.3s;
+    }
+
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: var(--gray-dark-semi);
+        transition: color ease 0.3s;
+        opacity: 1;
+    }
+
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: var(--gray-dark-semi);
+        transition: color ease 0.3s;
+        opacity: 1;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: var(--gray-dark-semi);
+        transition: color ease 0.3s;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: var(--gray-dark-semi);
+        transition: color ease 0.3s;
+    }
+
+    :focus::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: var(--gray-medium);
+    }
+
+    :focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: var(--gray-medium);
+        opacity: 1;
+    }
+
+    :focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: var(--gray-medium);
+        opacity: 1;
+    }
+
+    :focus:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: var(--gray-medium);
+    }
+
+    :focus::-ms-input-placeholder { /* Microsoft Edge */
+        color: var(--gray-medium);
+    }
+
+    .Field.flex-row input.DynamicFieldText,
+    .Field.flex-row .DynamicFieldTextArea {
+        min-width: unset;
+        max-width: unset;
+    }
+
+    /**
+    * @subsection  Textarea
+    * @note        Fixed font needed in textareas because otherwise the line wrapping is incorrect.
+    */
+    textarea {
+        font-family: monospace,fixed;
+    }
+
+    /**
+    * @subsection  Input Readonly
+    */
+    div.InputField_InputContainer input[type=text][readonly],
+    div.InputField_InputContainer input[type=number][readonly],
+    div.InputField_InputContainer input[type=password][readonly],
+    div.InputField_InputContainer input[type=email][readonly],
+    div.InputField_InputContainer textarea[readonly] {
+        background-color: var(--disabled-input-color);
+    }
+
+    input[type=text][readonly].CustomerTicketText {
+        background: var(--main-bg-color);
+        border-color: var(--border-color);
+    }
+
+    /**
+    * @subsection  Buttons
+    */
+    /*button.Primary {
+        font-weight: var(--semi-bold);
+        background: var(--primary-color);
+        width: 100%;
+        max-width: var(--btn-width-l);
+        border: none;
+        border-radius: var(--border-radius-sm);
+        min-height: var(--btn-min-height);
+        transition: var(--main-transition);
+    }
+
+    button.Primary:hover {
+        background: var(--primary-color-darker);
+    }*/
+
+
+
+    /*********************************************************/
+    /*                        Buttons                        */
+    /*********************************************************/
+
+
+    .btn-main {
+        width: 100%;
+        min-height: var(--btn-min-height);
+        border: none;
+        border-radius: var(--border-radius-sm);
+        /*line-height: var(--btn-min-height);*/
+        /*font-family: 'Poppins'*/
+        font-weight: var(--semi-bold);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: var(--main-transition);
+        padding: 0 var(--padding-md); /*important width limit for btns with longer text*/
+        text-align: center;
+        font-size: var(--font-size-sm);
+    }
+
+    .btn-main.Hidden {
+        display: none;
+    }
+
+    .btn-main span {
+        font-size: var(--font-size-sm);
+    }
+
+    .btn-main:focus {
+        color: var(--white);
+    }
+
+    .btn-icon {
+        width: var(--btn-icon-sm);
+        height: var(--btn-icon-sm);
+        min-height: unset;
+        min-width: unset;
+    }
+
+    /* btn width */
+    .btn-width-xxl {
+        min-width: var(--btn-max-width-xxl);
+        max-width: var(--btn-max-width-xxl);
+    }
+
+    .btn-width-xl {
+        max-width: var(--btn-max-width-xl);
+        min-width: var(--btn-max-width-xl);
+    }
+
+    .btn-width-lg {
+        max-width: var(--btn-max-width-lg);
+        min-width: var(--btn-max-width-lg);
+    }
+
+    .btn-width-md {
+        max-width: var(--btn-max-width-md);
+        min-width: var(--btn-max-width-md);
+    }
+
+    .btn-width-sm {
+        max-width: var(--btn-max-width-sm);
+        min-width: var(--btn-max-width-sm);
+    }
+
+    .btn-width-xs {
+        max-width: var(--btn-max-width-xs);
+        min-width: var(--btn-max-width-xs);
+    }
+
+    /* btn height */
+    .btn-height-lg {
+        line-height: var(--btn-height-lg);
+    }
+
+    .btn-height-md {
+        line-height: var(--btn-height-md);
+    }
+
+    .btn-height-sm {
+        line-height: var(--btn-height-sm);
+    }
+
+    /* specific btn types */
+    .btn-primary,
+    .btn-primary:focus {
+        color: var(--btn-primary-text);
+        background: var(--primary-color);
+        border: var(--border-width) var(--border-solid) var(--primary-color);
+    }
+
+    .btn-primary:hover,
+    .btn-primary-ghost:hover,
+    .btn-primary-ghost:focus:hover {
+        color: var(--btn-primary-text-hover);
+        background: var(--primary-color-darker);
+        border: var(--border-width) var(--border-solid) var(--primary-color-darker);
+        cursor: pointer;
+    }
+
+    .btn-primary-ghost,
+    .btn-primary-ghost:focus {
+        background: var(--btn-ghost-background);
+        color: var(--btn-dropdown-color);
+        border: var(--border-width) var(--border-solid) var(--primary-color);
+    }
+    /* 
+    .btn-primary-ghost:hover {
+        border-width: var(--border-width-md);
+    } */
+
+    .btn-cancel-ghost,
+    .btn-cancel-ghost:focus {
+        color: var(--btn-cancel-ghost-text);
+        background: transparent;
+        /*margin-right: var(--margin-sm);*/
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .CancelClosePopup.btn-cancel-ghost,
+    .UndoClosePopup.btn-cancel-ghost,
+    .ClosePopup.btn-cancel-ghost ,
+    .GoBack.btn-cancel-ghost {
+        background: transparent;
+        margin: 0;
+    }
+
+    .btn-cancel-ghost:hover {
+        color: var(--btn-cancel-ghost-text);
+        background: var(--btn-cancel-ghost-bg-hover);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        cursor: pointer;
+    }
+
+
+    .btn-reset-ghost,
+    .btn-reset-ghost:focus {
+        color: var(--btn-cancel-ghost-text);
+        background: var(--btn-cancel-ghost-bg);
+        /*margin-right: var(--margin-sm);*/
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .CancelClosePopup.btn-reset-ghost,
+    .UndoClosePopup.btn-reset-ghost,
+    .ClosePopup.btn-reset-ghost ,
+    .GoBack.btn-reset-ghost {
+        background: transparent;
+        margin: 0;
+    }
+
+    .btn-reset-ghost:hover {
+        color: var(--btn-cancel-ghost-text);
+        background: var(--btn-cancel-ghost-bg-hover);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        cursor: pointer;
+    }
+
+
+    /* Caret rotation on btn hover in ContentColumn */
+    .ContentColumn .dropdown-container:hover i.fa {
+        transform: rotate(180deg);
+    }
+
+    /* ***************** NEW vs OLD ******************************* */
+
+
+    button.Primary span {
+        text-shadow: none;
+        border: none;
+        /*color: var(--btn-text-color); - this isn't compatible with .Primary.btn-secondary-ghost btns*/
+        font-size: var(--font-size-sm);
+        padding: 0;
+        min-height: auto;
+    }
+
+    button.btn-ghost-sm,
+    button.btn-ghost-sm:focus {
+        font-weight: var(--semi-bold);
+        background: transparent;
+        width: auto;
+        padding: 0 var(--size-10);
+        border: var(--border-width) var(--border-solid) var(--primary-color);
+        border-radius: var(--border-radius-sm);
+        min-height: var(--btn-min-height-sm);
+        color: var(--primary-color);
+        transition: var(--main-transition);
+    }
+
+    button.btn-ghost-sm:hover {
+        background: var(--primary-color-darker);
+        border: var(--border-width) var(--border-solid) var(--primary-color-darker);
+    }
+
+    button.btn-ghost-sm span {
+        color: var(--primary-color);
+        padding: 0;
+        min-height: auto;
+        font-size: var(--font-size-xs);
+    }
+
+    button.btn-ghost-sm:hover span {
+        color: var(--white);
+    }
+
+    .ticket-form-options .Field {
+        flex-direction: row;
+    }
+
+    .ticket-form-options a {
+        border: none;
+        padding: 0;
+        padding-right: var(--padding-sm);
+        border-radius: var(--border-radius-sm);
+        /*color: var(--btn-text-color-ghost);*/
+    }
+
+    .ticket-form-options a:hover {
+        text-decoration: underline;
+    }
+
+    .btn-secondary-ghost,
+    .Field > a.btn-secondary-ghost,
+    a.btn-secondary-ghost {
+        display: inline-block;
+        font-weight: var(--semi-bold);
+        background: transparent;
+        width: 100%;
+        /*max-width: var(--btn-width-l);*/
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+        min-height: var(--btn-min-height);
+        text-align: center;
+        line-height: var(--btn-min-height);
+        transition: var(--main-transition);
+        color: var(--gray-dark);
+        cursor: pointer;
+        font-size: var(--font-size-sm);
+        box-sizing: border-box;
+    }
+
+    .btn-secondary-ghost:hover,
+    .Field > a.btn-secondary-ghost:hover,
+    a.btn-secondary-ghost:hover {
+        background: var(--border-color);
+    }
+
+
+
+    /*********************************************************/
+    /*                      END Buttons                       */
+    /*********************************************************/
+
+
+    .SidebarFirst .SidebarColumn .CallForAction.Fullsize,
+    .SidebarLast .SidebarColumn .CallForAction.Fullsize,
+    .SidebarFirst .SidebarColumn .CallForAction,
+    .SidebarLast .SidebarColumn .CallForAction {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: var(--semi-bold);
+        background: transparent;
+        width: 100%;
+        max-width: 100%;
+        border: var(--border-width) var(--border-solid) var(--primary-color);
+        border-radius: var(--border-radius-sm);
+        min-height: var(--btn-min-height);
+        color: var(--main-font-color);
+        transition: var(--main-transition);
+    }
+
+    .SidebarFirst .SidebarColumn .CallForAction:hover,
+    .SidebarLast .SidebarColumn .CallForAction:hover {
+        background: var(--primary-color);
+        color: var(--white);
+    }
+
+    .SidebarFirst .SidebarColumn .CallForAction span,
+    .SidebarLast .SidebarColumn .CallForAction span {
+        color: var(--main-font-color);
+    }
+
+    .SidebarFirst .SidebarColumn .CallForAction:hover span,
+    .SidebarLast .SidebarColumn .CallForAction:hover span {
+        color: var(--white);
+    }
+
+    .SidebarFirst .SidebarColumn .CallForAction span i,
+    .SidebarLast .SidebarColumn .CallForAction span i {
+        margin-right: 10px;
+    }
+
+
+    a.CertificateRelationAdd,
+    button.CertificateRelationAdd,
+    a.CertificateRead,
+    button.Add,
+    a.Add,
+    button.Remove,
+    a.Remove,
+    button.TrashCan,
+    a.TrashCan,
+    a.Pencil,
+    button.Reset,
+    a.Reset {
+        /*height: 16px;
+        width: 16px;
+        padding: 1px;
+        margin-top: 0;
+        margin-bottom: 1px;
+        border-style: none;
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+        position: relative; - comment added by beatriz 22/12/22 */
+        z-index: 999;
+        border: 0;
+        background: unset;
+        /*text-indent: -9999px; - comment added by beatriz on 6/2/2023 */
+    }
+
+    /*button.Add,
+    a.Add {
+        background: url(../img/filter_add.png) no-repeat center;
+    }
+
+    button.Add:hover,
+    button.Add:focus,
+    a.Add:hover,
+    a.Add:focus {
+        background: url(../img/filter_add_hover.png) no-repeat center;
+    }*/
+
+    /*button.CertificateRelationAdd,
+    a.CertificateRelationAdd {
+        background: url(../img/icons/certificate-plus.png) no-repeat center;
+    }
+
+    a.CertificateRead {
+        background: url(../img/icons/certificate.png) no-repeat center;
+    }*/
+
+    /*button.Remove,
+    a.Remove {
+        background: url(../img/filter_remove.png) no-repeat center;
+    }
+
+    button.Remove:hover,
+    button.Remove:focus,
+    a.Remove:hover,
+    a.Remove:focus {
+        background: url(../img/filter_remove_hover.png) no-repeat center;
+    }*/
+
+    a.TrashCan i.fa-trash-o,
+    a.Pencil i.fa-edit {
+        text-indent: 0px;
+       /* position: absolute;
+        left: 0px;
+        top: 4px; - comment added by beatriz 22/12/21 */
+        z-index: 998;
+    }
+
+    button.Reset,
+    a.Reset{
+        height: 22px;
+        width: 22px;
+        padding: 3px;
+    }
+
+    .RemoveButton.icon-hover {
+        padding: 8px;
+    }
+
+    .RemoveButton.icon-hover i {
+        font-size: var(--font-size-md);
+    }
+
+    /**
+    * @note    Push-lookalike for active state
+    */
+    button.Add:active,
+    a.Add:active,
+    button.Remove:active,
+    a.Remove:active,
+    button.TrashCan:active,
+    a.TrashCan:active,
+    button.Reset:active {
+        margin-top: 1px;
+        margin-bottom: 0;
+    }
+
+
+    .GetAllAJAX {
+        margin-left: 8px;
+        color: var(--gray-dark-semi);
+        font-size: var(--font-size-md);
+        transition: var(--main-transition);
+    }
+
+    .GetAllAJAX span {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+    }
+
+    .RTL .GetAllAJAX {
+        margin: 0 3px 0 0;
+    }
+
+    /*.AdditionlFieldIcon {
+        width: 16px;
+        height: 16px;
+        margin-left: 3px;
+        display: inline-block;
+        color: #333;
+    }*/
+
+    .AdditionlFieldIcon span {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+    }
+
+    .RTL .AdditionlFieldIcon {
+        margin: 0 3px 0 0;
+    }
+
+    /**
+    * @subsection    GenericAgent ClearSelect
+    */
+
+    .GenericAgentClearSelect {
+        width: 16px;
+        height: 16px;
+        margin-left: 3px;
+        color: #333;
+    }
+
+    .GenericAgentClearSelect span {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+    }
+
+    /**
+    * @subsection    Tree selection icon and overlay for select boxes
+    */
+
+    .ShowTreeSelection {
+        width: 16px;
+        height: 16px;
+        margin-left: 3px;
+        display: none;
+        color: #333;
+    }
+
+    .ShowTreeSelection span {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+    }
+
+    .ShowTreeSelection:focus {
+        color: #f92;
+    }
+
+    .Field .ShowTreeSelection, .WidgetSettingsForm .ShowTreeSelection {
+        display: inline-block;
+    }
+
+    .WidgetSettingsForm .ShowTreeSelection {
+        position: relative;
+        top: -4px;
+    }
+
+    #TreeContainer #TreeSearch {
+        position: relative;
+    }
+
+    #TreeContainer #TreeSearch span {
+        color: #AAAAAA;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: bold;
+        height: 12px;
+        position: absolute;
+        right: 9px;
+        top: 4px;
+        width: 16px;
+    }
+
+    .DialogTreeSearch span {
+        color: #AAAAAA;
+        cursor: pointer;
+        font-weight: bold;
+        position: relative;
+        right: 10px;
+    }
+
+    #TreeContainer #TreeSearch input {
+        display: block;
+        margin: 10px 12px 0px 12px;
+        width: 92%;
+    }
+
+    .JSTreeField {
+        background-color: #FFFFFF;
+        border: 1px solid #ccc;
+        height: 72%;
+        margin: 10px 12px;
+        -moz-box-shadow: inset 0px 0px 6px #ccc;
+        -webkit-box-shadow: inset 0px 0px 6px #ccc;
+        box-shadow: inset 0px 0px 6px #ccc;
+        overflow: auto;
+        padding: 0px 10px 10px 10px;
+    }
+
+    .JSTreeField.InOverlay {
+        margin: 5px 5px 5px 0px;
+        width: 85%;
+        float: left;
+    }
+
+    .JSTreeField .Disabled > a {
+        color: #aaa;
+        font-style: italic;
+    }
+
+    .JSTreeField .jstree-search {
+        color: #E07006;
+    }
+
+    .JSTreeField .jstree-search.jstree-clicked {
+        color: #000;
+    }
+
+    .JSTreeField .jstree-clicked {
+        background: #f3960d;
+        background: -moz-linear-gradient(top,  #ffe7bd 0%, #fbba49 20%, #f6ad3e 51%, #f3960d 51%, #e98207 95%, #e07006 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffe7bd), color-stop(20%,#fbba49), color-stop(51%,#f6ad3e), color-stop(51%,#f3960d), color-stop(95%,#e98207), color-stop(100%,#e07006));
+        background: -webkit-linear-gradient(top,  #ffe7bd 0%,#fbba49 20%,#f6ad3e 51%,#f3960d 51%,#e98207 95%,#e07006 100%);
+        background: -o-linear-gradient(top,  #ffe7bd 0%,#fbba49 20%,#f6ad3e 51%,#f3960d 51%,#e98207 95%,#e07006 100%);
+        background: -ms-linear-gradient(top,  #ffe7bd 0%,#fbba49 20%,#f6ad3e 51%,#f3960d 51%,#e98207 95%,#e07006 100%);
+        background: linear-gradient(to bottom,  #ffe7bd 0%,#fbba49 20%,#f6ad3e 51%,#f3960d 51%,#e98207 95%,#e07006 100%);
+        border-color: #f3960d;
+        padding: 0px 3px;
+    }
+
+    .JSTreeField .jstree-hovered {
+        background-color: #eee;
+        border-color: #ddd;
+    }
+
+    .JSTreeField a:focus {
+        background-color: #eee;
+        border-color: #ddd;
+    }
+
+    #SubmitTree {
+        display: block;
+        width: 120px;
+        margin: 0px auto;
+    }
+
+    .RTL .ShowTreeSelection {
+        margin: 0 3px 0 0;
+    }
+
+    .OverlayTreeSelector {
+        width: 400px;
+        height: 300px;
+    }
+
+    /**
+    * @subsection  Form
+    */
+
+    form fieldset {
+        display: flex;
+        flex-flow: column;
+        border: none;
+        padding: var(--main-page-padding);
+    }
+
+    .RealPopup .LayoutFixedSidebar > .ContentColumn > form > .LayoutPopup > .Content > .TableLike {
+        gap: var(--gap-md);
+    }
+
+    .RealPopup .LayoutFixedSidebar > .ContentColumn > form > .LayoutPopup > .Content > .TableLike .Field {
+        display: flex;
+        flex-flow: column;
+        gap: var(--padding-sm);
+    }
+
+    .RealPopup form .LayoutPopup .Content > .Content .TableLike {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+        padding: 0;
+    }
+
+    .RealPopup .LayoutFixedSidebar > .ContentColumn > form > .LayoutPopup > .activity-dialog-footer {
+        padding: 0 var(--main-page-padding);
+    }
+
+    #ActivityDialogContent .activity-dialog-footer {
+        padding: 0;
+    }
+
+    .RealPopup .LayoutPopup.AgentTicketCustomer form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .RealPopup .LayoutPopup.AgentTicketCustomer .Content .ContentColumn fieldset.TableLike {
+        padding: var(--padding-md);
+        width: 100%;
+    }
+
+    .RealPopup .LayoutPopup.AgentTicketCustomer form fieldset > .card-item {
+        padding: 0;
+    }
+
+    .RealPopup .LayoutPopup.AgentTicketCustomer form fieldset > .card-item,
+    .RealPopup .LayoutPopup.ticketMerge .TableLike > .card-item,
+    .RealPopup .LayoutPopup.manageLinks .TableLike > .card-item {
+        margin: 0;
+        background: 0;
+        border: 0;
+    }
+
+    .RealPopup .LayoutPopup.AgentTicketCustomer form fieldset > .card-item:after {
+        display: none;
+    }
+
+    .RealPopup .AgentTicketCustomer .Field.align-right {
+        padding: var(--padding-lg) 0 0 0;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .LayoutPopup.AgentTicketCustomer form {
+            overflow: hidden;
+        }
+
+        .LayoutPopup.AgentTicketCustomer form .card-item {
+            padding: 0 0 var(--padding-lg);
+        }
+
+        .LayoutPopup.AgentTicketCustomer form .card-item::after {
+            background: transparent;
+        }
+    }
+
+    fieldset > .field-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    fieldset div.Field {
+        position: relative;
+        padding: 0;
+        gap: var(--gap-xs);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* formerly: .AdminManagement .WidgetSimple > .Content .TableLike div.Field */
+
+    /* ed commented on 22/12/22
+    .AdminManagement .TableLike div.Field {
+        gap: var(--gap-sm);
+        display: flex;
+        flex-flow: column;
+    }
+    */
+
+    .card div.Field,
+    .card-item div.Field {
+        background: transparent;
+        border-radius: var(--border-radius-sm);
+        width: 100%;
+    }
+
+    .card div.Field.card,
+    .card-item div.Field.card {
+        background: var(--white);
+    }
+
+    .ticket-form-options {
+        padding-top: var(--padding-xs);
+    }
+
+    .ticket-form-options > div.Field {
+        background: transparent;
+    }
+
+    .Row_DynamicField_DynamicFieldDate div.Field,
+    .Row_DynamicField_DynamicFieldDateTime div.Field {
+        background: unset;
+    }
+
+    .TableLikeOverflow {
+        overflow: auto;
+        line-height: initial;
+    }
+
+    fieldset > legend {
+        display: block;
+        width: 100%;
+    }
+
+    .WidgetSettingsForm fieldset legend {
+        padding-top: 10px;
+    }
+
+    fieldset > legend > span {
+        /*border-bottom: 1px solid #ddd;*/
+        display: block;
+        font-weight: var(--semi-bold);
+        padding: 0;
+        text-indent: 0;
+        margin-bottom: var(--padding-sm);
+        font-size: var(--font-size-md);
+    }
+
+    /*form fieldset > p.NoValue {
+        padding: 5px 0px 5px 30%;
+        text-indent: 8px;
+    }*/
+
+    .WidgetSimple .Content p:not(.ErrorBox):not(.SuccessBox):not(.Notice) {
+        color: var(--table-text-color);
+        margin: 0;
+        padding: var(--padding-xs);
+        /* padding-bottom: var(--padding-md); ed removed on 22/12/15 */
+    }
+
+    .WidgetSimple .Content > p:last-child:first-child {
+        padding: var(--padding-xs);
+    }
+
+    .FieldExplanation,
+    .WidgetSimple .Content p.FieldExplanation {
+        /*padding: var(--padding-sm) 0;*/
+        padding: 0;
+        color: var(--gray-medium);
+        background: transparent;
+        align-self: center;
+        width: 100%;
+    }
+
+    .ContentColumn .FieldExplanation,
+    .ContentColumn .WidgetSimple .Content p.FieldExplanation {
+        display: flex;
+    }
+
+    .WidgetSimple div.Field + p.FieldExplanation,
+    .WidgetSimple div.Field > p.FieldExplanation {
+        align-self: flex-start;
+    }
+
+    .Content > p.FieldExplanation:first-child {
+        padding-top: 0;
+    }
+
+    p.FieldExplanation:last-child,
+    div.WidgetSimple div.Content p:last-child:not(.ErrorBox):not(.SuccessBox):not(:first-child){
+        padding-bottom: 0;
+    }
+
+    .DataTable.DashboardUser p,
+    .ActionsSideBarComp .FieldExplanation,
+    .ActionsSideBarComp .WidgetSimple .Content p {
+        padding: 0;
+    }
+
+    .WidgetSimple .Content dl .FieldExplanation {
+        padding: var(--padding-sm) 0;
+    }
+
+    .CustomerContainer,
+    .CcCustomerContainer,
+    .BccCustomerContainer {
+        background-color: transparent;
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        box-shadow: none;
+        position: relative;
+        border-radius: var(--border-radius-sm);
+
+        padding: var(--padding-md);
+        width: 100%;
+        max-width: 100%;
+        /* max-width: var(--main-field-size); */
+        box-sizing: border-box;
+
+        /*customer container in phone ticket*/
+        background: var(--main-bg-color);
+    }
+
+    .CustomerContainer span.BoxLabel,
+    .CcCustomerContainer span.BoxLabel,
+    .BccCustomerContainer span.BoxLabel {
+        position: relative;
+        top: 0;
+        left: 0;
+        background: transparent;
+        color: var(--black);
+        /*font-family: Inter;*/
+        font-weight: var(--medium);
+        font-size: 14px;
+        letter-spacing: .2px;
+        line-height: normal;
+    }
+
+    .CustomerContainer input,
+    .CcCustomerContainer input,
+    .BccCustomerContainer input {
+        line-height: normal;
+    }
+
+    .CustomerContainer > div,
+    .CcCustomerContainer > div,
+    .BccCustomerContainer > div {
+        margin-top: 5px;
+    }
+
+    .CustomerContainer .CustomerTicketText,
+    .CcCustomerContainer .CustomerTicketText,
+    .BccCustomerContainer .CustomerTicketText  {
+        width: 100%;
+        margin-left: 0;
+        min-width: inherit;
+    }
+
+    .CustomerContainer .CustomerTicketText {
+        transition: background-color 1s ease, border 1s ease;
+    }
+
+    .CustomerContainer .CustomerTicketText {
+        width: 100%;
+        min-width: inherit;
+        margin-left: 0;
+        background: var(--main-bg-color);
+    }
+
+    .CustomerContainer .CustomerTicketText.MainCustomer {
+        background-color: #F7ECC3;
+        border: var(--border-width) var(--border-solid) #E8CC8B;
+    }
+
+    .CustomerContainer .BoxLabel,
+    .CcCustomerContainer .BoxLabel,
+    .BccCustomerContainer .BoxLabel {
+        background-color: var(--border-color);
+        font-size: 11px;
+        right: 100%;
+        padding: 0 5px;
+        text-align: center;
+        text-shadow: none;
+        min-width: 20px;
+        color: var(--black);
+        border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .CustomerContainerField .SpacingTopSmall input[type="text"],
+    .CustomerContainerField .SpacingTopSmall input[type="password"],
+    .CustomerContainerField .SpacingTopSmall input[type="email"] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: unset;
+        width: calc(100% - 40px) !important;
+    }
+
+    #EmailRecipientsList span,
+    #EmailRecipientsList a.Collapse {
+        display: none;
+    }
+
+    #EmailRecipientsList.Expanded span,
+    #EmailRecipientsList.Expanded a.Expand {
+        display: inline;
+    }
+
+    /**
+    * @note         Validation
+    */
+
+    form label.Mandatory,
+    fieldset.TableLike > label.Mandatory,
+    fieldset.TableLike> .Row > label.Mandatory {
+        color: var(--black);
+    }
+
+    form label.Mandatory span.Marker {
+        font-size: 18px;
+        font-weight: bold;
+        position: relative;
+        top: 0.35em;
+        line-height: 1px;
+        right: 2px;
+        left: auto;
+        display: none !important;
+    }
+
+    .RTL form label.Mandatory span.Marker {
+        left: 2px;
+        right: auto;
+    }
+
+    form label.LabelError {
+        color: #ff505e !important;
+    }
+
+    .SidebarColumn .FieldExplanation.Error {
+        border: 1px solid #F03432;
+        color: #F03432;
+        line-height: 150%;
+        margin: 7px 0px;
+        padding: 7px 10px;
+    }
+
+    /**
+    * @note        Give the user a hint about linked label elements (they are clickable and
+    *                  give focus to the linked element.
+    */
+
+    fieldset .field-wrapper .field-column {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+    }
+
+    .outer-label-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .label-wrapper,
+    .AdminManagement form fieldset.TableLike > .label-wrapper {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        gap: var(--gap-xs);
+    }
+
+    .label-wrapper label {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-xs);
+    }
+
+    form label[for],
+    form label,
+    .TableLike label {
+        display: flex;
+        align-items: center;
+        gap: var(--padding-xs);
+        line-height: normal;
+        min-height: 28px;
+        font-size: var(--main-font-size);
+        font-weight: var(--medium);
+        letter-spacing: 0.2px;
+        color: var(--gray-dark-semi);
+
+    }
+
+    @media only screen and (max-width: 1024) {
+        form label[for],
+        form label,
+        .TableLike label {
+            font-size: var(--font-size-sm);
+        }
+    }
+
+    form label[for].Mandatory,
+    form label.Mandatory {
+        color: var(--black);
+    }
+
+    form .card-item label[for],
+    form .card-item label {
+        min-height: 28px;
+    }
+
+    form .card-item > div,
+    fieldset .card-item > .field-wrapper {
+        display: flex;
+        flex-flow: column;
+        gap: var(--padding-xs);
+        /*padding-bottom: var(--padding-sm);*/
+    }
+
+    .CheckboxContainer,
+    .card-item > .CheckboxContainer,
+    div.Field.CheckboxContainer,
+    .WidgetSimple > .Content .TableLike div.Field.CheckboxContainer {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        gap: var(--gap-sm);
+    }
+
+    .CheckboxContainer > div.Field {
+        width: auto;
+    }
+
+    div.Field.CheckboxContainer > div,
+    .CheckboxContainer > div {
+        align-items: center;
+    }
+
+    .CheckboxContainer > label {
+        padding: 0;
+    }
+
+    form input.Error,
+    form textarea.Error,
+    form input.Error:focus,
+    form textarea.Error:focus {
+        border-color: var(--error-color);
+    }
+
+    /*
+    * This will be displayed by Core.UI.Tooltips
+    */
+    div.TooltipErrorMessage,
+    .ParentWidget .WidgetSimple > .Content .TableLike > div.TooltipErrorMessage {
+        display: none;
+        flex: 1 0 100%;
+        padding: var(--padding-xs) 0;
+        color: var(--error-color);
+    }
+
+    .Field > .TooltipErrorMessage {
+        padding: 0;
+    }
+
+    .WidgetSimple .TooltipErrorMessage p {
+        color: var(--error-color);
+    }
+
+    /**
+    * @subsection  TableLike
+    * @description Provides a table-like, aligned label-value structure
+    */
+
+    fieldset.TableLike > label,
+    fieldset.TableLike > .Row > label {
+        /*display: block;
+        width: 170px;
+        text-align: right;
+        min-height: auto;
+        text-shadow: none;
+
+        padding: 0 var(--padding-md) var(--padding-lg) 0;
+        margin: 0px;
+        color: var(--black);
+        font-size: var(--font-size-sm);
+        background: transparent;
+        box-sizing: border-box;*/
+    }
+
+    .RTL fieldset.TableLike > label,
+    .RTL fieldset.TableLike > .Row > label {
+        float: right;
+        text-align: left;
+    }
+
+    fieldset.TableLike > .Field,
+    fieldset.TableLike > .Row > .Field {
+        /*position: relative;
+        display: inherit;
+        margin-left: 0;
+        margin-right: 0;
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0px;
+        min-height: 20px;
+        padding-bottom: var(--padding-xl);
+        float: left;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 0;*/
+    }
+
+    .RTL fieldset.TableLike > .Field,
+    .RTL fieldset.TableLike > .Row > .Field {
+        margin-left: 0;
+        margin-right: 30%;
+        padding-left: 0;
+        padding-right: 10px;
+    }
+
+    /*fieldset.TableLike select {
+        margin-top: 3px;
+    }*/
+
+    /**
+    * @note     Also make labels grey which occur inside of a field,
+    *          for example for complex input elements.
+    */
+    fieldset.TableLike > .Field label,
+    fieldset.TableLike > .Row > .Field label {
+        /*color: #929292;*/
+    }
+
+    fieldset.TableLike > .Field > select,
+    fieldset.TableLike > .Row > .Field > select,
+    fieldset.TableLike > .Field,
+    fieldset.TableLike > .Row > .Field {
+        /*max-width: var(--main-field-size);*/
+        box-sizing: border-box;
+    }
+
+    /**
+    * @note    The RichText field needs to float, otherwise it breaks
+    *          in small screens.
+    *          Additionally we have a generic FloatingField class,
+    *          RichTextField is for backwards compatibility.
+    */
+    fieldset.TableLike > .Row > .RichTextField,
+    fieldset.TableLike > .FloatingField,
+    fieldset.TableLike > .Row > .FloatingField {
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 0;
+        float: left;
+    }
+
+    fieldset.TableLike > .RichTextField {
+        /*padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;*/
+        /*margin-bottom: var(--margin-lg); - edit by beatriz on 23/1/2023 - gap should already exist in parent*/
+    }
+
+    body.Popup fieldset.TableLike > .Row > .RichTextField,
+    body.Popup fieldset.TableLike > .FloatingField,
+    body.Popup fieldset.TableLike > .Row > .FloatingField {
+        margin: 7px 7px 0px 7px;
+    }
+
+    body.Popup fieldset.TableLike > .RichTextField {
+        float: left;
+        width: calc(100% - 170px);
+        max-width: 100%;
+        padding: 0 0 var(--padding-lg) var(--padding-md) !important;
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
+    }
+
+    .RTL fieldset.TableLike > .Row > .RichTextField,
+    .RTL fieldset.TableLike > .FloatingField,
+    .RTL fieldset.TableLike > .Row > .FloatingField {
+        padding-left: 0;
+        padding-right: 10px;
+        float: right;
+    }
+
+    .RTL fieldset.TableLike > .RichTextField {
+        padding-bottom: 10px;
+        padding-right: 10px;
+        padding-left: 10px;
+        margin-right: 30%;
+        margin-left: 0;
+    }
+
+    body.RealPopup.RTL fieldset.TableLike > .Row > .RichTextField,
+    body.RealPopup.RTL fieldset.TableLike > .FloatingField,
+    body.RealPopup.RTL fieldset.TableLike > .Row > .FloatingField {
+        margin: 7px 7px 0px 7px;
+    }
+
+    body.RealPopup.RTL fieldset.TableLike > .RichTextField {
+        padding-top: 7px;
+        padding-right: 17px;
+        padding-left: 0px;
+        margin-right: 170px;
+        margin-left: 0;
+    }
+
+    fieldset.TableLike .Value,
+    fieldset.TableLike .Row .Value {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gap-sm);
+        margin: 0;
+        padding: 0;
+        line-height: 100%;
+        word-break: break-word;
+        align-items: baseline;
+    }
+
+    .RTL fieldset.TableLike > .Value,
+    .RTL fieldset.TableLike > .Row > .Value {
+        margin: 0;
+        padding: 0;
+    }
+
+    fieldset.TableLike > .Value img,
+    fieldset.TableLike > .Row > .Value img {
+        vertical-align: top;
+    }
+
+    #ACLForm textarea{
+        /*max-width: var(--main-field-size); - edited by b on 29/mar/23 - allow for full width within parent */
+        box-sizing: border-box;
+    }
+
+    #ACLForm fieldset.TableLike > label{
+        text-shadow: none;
+        padding-top: 0;
+        line-height: 2.0em
+    }
+
+    #ACLForm .ScreenXL .Content .Field {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0;
+        margin-right: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0px;
+        min-height: 0;
+    }
+
+    /**
+    * @note        FixedLabel - this additional class for TableLike
+    *              makes the labels have a fixed size
+    */
+    /*fieldset.TableLike.FixedLabel > label,
+    fieldset.TableLike.FixedLabel > .Row > label {
+        width: 170px;
+    }*/
+
+    .fieldset.TableLike.FixedLabel > .Field.Hidden{
+        display: none !important;
+    }
+
+    fieldset.TableLike.FixedLabel > .Field,
+    fieldset.TableLike.FixedLabel > .Row > .Field,
+    fieldset.TableLike.FixedLabel > .Value,
+    fieldset.TableLike.FixedLabel > .Row > .Value {
+        /*margin-left: 0;
+        margin-right: 0;
+        padding-left: var(--padding-md);
+        padding-right: 0;
+        float: left;*/
+    }
+
+    /*#ComposeTicket fieldset.TableLike .FieldTo {
+        margin-left: 170px;
+    }*/
+
+    .composeAnswer fieldset.TableLike .Field{
+        padding: 0 0 var(--padding-lg);
+        max-width: calc(100% - 170px);
+        width: 100%;
+    }
+
+    .fieldset.TableLike.FixedLabel > .Field > input{
+        max-width: 100%;
+    }
+
+    .composeAnswer .Footer .CallForAction:first-child{
+        background-color: transparent;
+        border: 1px solid #E2E2EA;
+    }
+
+    .composeAnswer .Footer .CallForAction:first-child span{
+        color: #696974;
+        font-weight: var(--semi-bold);
+
+    }
+
+    .RTL fieldset.TableLike.FixedLabel > .Field,
+    .RTL fieldset.TableLike.FixedLabel > .Row > .Field,
+    .RTL fieldset.TableLike.FixedLabel > .Value,
+    .RTL fieldset.TableLike.FixedLabel > .Row > .Value {
+        margin-left: 0;
+        margin-right: 170px;
+        padding-left: 0;
+        padding-right: 17px;
+    }
+
+    /**
+    * @note        FixedLabelSmall - this additional class for TableLike
+    *              makes the labels have a small fixed size
+    */
+    /*fieldset.TableLike.FixedLabelSmall > label,
+    fieldset.TableLike.FixedLabelSmall > .Row > label {
+        width: 100px;
+    }*/
+
+    fieldset.TableLike.FixedLabelSmall > .Field,
+    fieldset.TableLike.FixedLabelSmall > .Row > .Field,
+    fieldset.TableLike.FixedLabelSmall > .Value,
+    fieldset.TableLike.FixedLabelSmall > .Row > .Value {
+        /*margin-left: 100px;
+        margin-right: 7px;*/
+        word-wrap: break-word;
+        display: flex;
+        flex-flow: row;
+    }
+
+    .RTL fieldset.TableLike.FixedLabelSmall > .Field,
+    .RTL fieldset.TableLike.FixedLabelSmall > .Row > .Field,
+    .RTL fieldset.TableLike.FixedLabelSmall > .Value,
+    .RTL fieldset.TableLike.FixedLabelSmall > .Row > .Value {
+        margin-left: 0;
+        margin-right: 100px;
+    }
+
+    fieldset.TableLike.FixedLabelSmall > .FixedValueSmall,
+    fieldset.TableLike.FixedLabelSmall > .Row > .FixedValueSmall {
+        width: 143px;
+    }
+    fieldset.TableLike.FixedLabelSmall > p.FixedValueSmall > em.Error {
+        display: block;
+        font-size: 11px;
+        margin-top: 3px;
+    }
+
+    fieldset.TableLike.Narrow > label,
+    fieldset.TableLike.Narrow > .Row > label,
+    fieldset.TableLike.Narrow > .Value,
+    fieldset.TableLike.Narrow > .Row > .Value {
+        line-height: 1.3em;
+    }
+
+    fieldset.TableLike.Narrow > label,
+    fieldset.TableLike.Narrow > .Row > label,
+    fieldset.TableLike.Narrow > .Value,
+    fieldset.TableLike.Narrow > .Row > .Value,
+    fieldset.TableLike > label,
+    fieldset.TableLike > .Row > label {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        color: var(--gray-dark-semi);
+    }
+
+    iframe.Signature {
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        width: 100%;
+        /*border: 1px solid #888;*/
+    }
+
+
+
+    fieldset.TableLike.FixedLabel .Field .AdditionlFieldIcon{
+        position: relative;
+        top: initial;
+        right: initial;
+    }
+
+    /**
+    * @subsection freetext fields
+    */
+
+    input[type=text].TicketFreeText,
+    input[type=text].ArticleFreeText {
+        width: 75%;
+    }
+
+    input[type=text].TicketFreeKey,
+    input[type=text].ArticleFreeKey {
+        width: 50%;
+    }
+
+    /**
+    * @subsection  Block Divider
+    */
+
+    .sections-wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-md);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .section-block {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+        padding: var(--padding-xl) 0;
+    }
+
+    .section-block.first {
+        padding: 0 0 var(--padding-xl);
+    }
+
+    .section-block.last {
+        padding: var(--padding-xl) 0 0;
+    }
+
+    .section-block::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--border-color);
+    }
+
+    .section-block.last::after {
+        background: transparent;
+    }
+
+    .active-inner-cols {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: var(--gap-md);
+    }
+
+
+
+
+
+
+
+
+    .field-wrapper:not(.Hidden) {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+    }
+
+    .field-wrapper:empty {
+        display: none !important;
+    }
+
+    .field-wrapper > .title {
+        /*font-family: Poppins*/
+        font-size: var(--font-size-md);
+        font-weight: var(--semi-bold);
+        color: var(--black);
+        line-height: normal;
+        letter-spacing: 0.1px;
+        padding: 0;
+        padding-top: var(--padding-sm);
+    }
+
+    .WidgetSimple .field-wrapper > .Field,
+    .field-wrapper > .Field {
+        line-height: 35px;
+        flex-wrap: wrap;
+    }
+
+
+    /***********************************************************************/
+    /*    Moved from Core.Reset.Forwwward.css                              */
+    /***********************************************************************/
+
+    .FormScreen .TableLike,
+    body.Popup form > .LayoutPopup > .Content .WidgetSimple fieldset,
+    body.Popup form > .LayoutPopup > .Content.card fieldset,
+    body.Popup form > .LayoutPopup > .Content.card fieldset.no-card-item {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        gap: 0;
+        min-width: unset;
+    }
+
+    body.Popup form > .LayoutPopup > .Content.card fieldset.no-card-item {
+        flex-direction: column;
+        padding: var(--padding-lg) 0;
+    }
+
+    div.dynamic-field-col.card-item {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
 
 } /* end @media */

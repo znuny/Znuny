@@ -291,7 +291,7 @@ To use this function you need a DB CRUD module like e.g. Kernel::System::UnitTes
 Update data attributes.
 
     my $Success = $DBCRUDObject->DataUpdate(
-        ID => 1234,
+        ID     => 1234,
         UserID => 1,
         # all other attributes are optional
     );
@@ -328,10 +328,11 @@ sub DataUpdate {
         $Self->{Identifier} => $Param{ $Self->{Identifier} },
         UserID              => $Param{UserID},
     );
+
     if ( !%DataGet ) {
         $LogObject->Log(
             Priority => 'error',
-            Message  => "Entry with the Identifier '$Param{ $Self->{Identifier} }' does not exist!",
+            Message  => "Entry with the Identifier $Self->{Identifier} '$Param{ $Self->{Identifier} }' does not exist!",
         );
         return;
     }

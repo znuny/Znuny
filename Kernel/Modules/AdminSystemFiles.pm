@@ -322,7 +322,7 @@ Returns:
             'Permissions'  => '0660',
             'State'        => 'OK',
             'Package'      => 'Custom',
-            'FullPath'     => '/workspace/otrs/otrs_60New/Kernel/Config/Files/XML/Custom.xml',
+            'FullPath'     => '/workspace/znuny/znuny_70New/Kernel/Config/Files/XML/Custom.xml',
             'Created'      => '2019-10-28 09:36:03',
             'Changed'      => '2019-10-28 09:36:03'
         },
@@ -335,7 +335,7 @@ Returns:
             'Name'         => 'Ticket.pm',
             'Permissions'  => '0660',
             'State'        => 'OK',
-            'FullPath'     => '/workspace/otrs/otrs_60New/Custom/Kernel/System/Ticket.pm',
+            'FullPath'     => '/workspace/znuny/znuny_70New/Custom/Kernel/System/Ticket.pm',
             'Created'      => '2019-10-28 09:36:03',
             'Changed'      => '2019-10-28 09:36:03'
         },
@@ -374,7 +374,7 @@ Returns:
             'Permissions'  => '0660',
             'State'        => 'OK',
             'Package'      => 'Custom',
-            'FullPath'     => '/workspace/otrs/otrs_60New/Kernel/Config/Files/XML/Custom.xml',
+            'FullPath'     => '/workspace/znuny/znuny_70New/Kernel/Config/Files/XML/Custom.xml',
             'Created'      => '2019-10-28 09:36:03',
             'Changed'      => '2019-10-28 09:36:03'
         },
@@ -473,7 +473,7 @@ Returns:
             'Name'         => 'Ticket.pm',
             'Permissions'  => '0660',
             'State'        => 'OK',
-            'FullPath'     => '/workspace/otrs/otrs_60New/Custom/Kernel/System/Ticket.pm',
+            'FullPath'     => '/workspace/znuny/znuny_70New/Custom/Kernel/System/Ticket.pm',
             'Created'      => '2019-10-28 09:36:03',
             'Changed'      => '2019-10-28 09:36:03'
         },
@@ -547,7 +547,7 @@ Returns:
             'Name'         => 'Ticket.pm',
             'Permissions'  => '0660',
             'State'        => 'OK',
-            'FullPath'     => '/workspace/otrs/otrs_60New/Kernel/Config.pm',
+            'FullPath'     => '/workspace/znuny/znuny_70New/Kernel/Config.pm',
             'Created'      => '2019-10-28 09:36:03',
             'Changed'      => '2019-10-28 09:36:03'
         },

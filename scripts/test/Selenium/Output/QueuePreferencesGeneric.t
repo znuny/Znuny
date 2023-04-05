@@ -19,6 +19,8 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
 
         my %QueuePreferences = (
             Module  => "Kernel::Output::HTML::QueuePreferences::Generic",
@@ -53,7 +55,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Go to queue admin.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminQueue");
@@ -167,7 +169,7 @@ $Selenium->RunTest(
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
         # Delete test queue.
-        my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueLookup(
+        my $QueueID = $QueueObject->QueueLookup(
             Queue => $UpdatedName,
         );
         my $Success = $DBObject->Do(

@@ -7,18 +7,18 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="LayoutPopup ARIARoleMain">
+<div class="LayoutPopup ARIARoleMain AdminManagement">
     <div class="Header">
         <h1>[% Translate(Data.Title) | html %]</h1>
 [% RenderBlockStart("ClosePopup") %]
-        <p>
-            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ClosePopup" class="ClosePopup">[% Translate("Cancel & close") | html %]</a>
-        </p>
+        <div>
+            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ClosePopup" class="ClosePopup btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+        </div>
 [% RenderBlockEnd("ClosePopup") %]
 [% RenderBlockStart("GoBack") %]
-        <p>
-            <a class="GoBack" href="[% Env("Baselink") %]Action=[% Data.Action | uri %];Subaction=[% Data.Subaction | uri %];ID=[% Data.ID | uri %];EntityID=[% Data.EntityID | uri %];StartActivityID=[% Data.StartActivityID | uri %]">[% Translate("Go Back") | html %]</a>
-        </p>
+        <div>
+            <a class="GoBack btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=[% Data.Action | uri %];Subaction=[% Data.Subaction | uri %];ID=[% Data.ID | uri %];EntityID=[% Data.EntityID | uri %];StartActivityID=[% Data.StartActivityID | uri %]">[% Translate("Cancel") | html %]</a>
+        </div>
 [% RenderBlockEnd("GoBack") %]
     </div>
     <div class="Content">
@@ -32,7 +32,6 @@
                 <input type="hidden" name="PopupRedirect" value="" id="PopupRedirect"/>
                 <input type="hidden" name="PopupRedirectID" value="" id="PopupRedirectID"/>
                 <input type="hidden" name="PopupRedirectEntityID" value="" id="PopupRedirectEntityID"/>
-
 [% RenderBlockStart("EditWarning") %]
                 <div class="WidgetSimple Expanded WidgetNotice">
                     <div class="Content">[% Translate("Please note that changing this transition action will affect the following processes") | html %]: [% Data.ProcessList | html %]</div>
@@ -48,51 +47,55 @@
                     </div>
                     <div class="Content">
                         <fieldset class="TableLike">
-                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Transition Action Name") | html %]:</label>
-                            <div class="Field">
-                                <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W90pc Validate_Required [% Data.NameServerError | html %]" maxlength="70"/>
-                                <div id="NameError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
-                                </div>
-                                <div id="NameServerError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
-                                </div>
-                            </div>
-                            <div class="Clear"></div>
-                            <label class="Mandatory" for="Module"><span class="Marker">*</span> [% Translate("Transition Action Module") | html %]:</label>
-                            <div class="Field">
-                                [% Data.ModuleStrg %]
-                                <div id="ModuleError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
-                                </div>
-                                <div id="ModuleServerError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Transition Action Name") | html %]</label>
+                                <div class="Field">
+                                    <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="Validate_Required [% Data.NameServerError | html %]" maxlength="70"/>
+                                    <div id="NameError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="NameServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label for="Scope">[% Translate("Scope") | html %]:</label>
-                            <div class="Field">
-                                [% Data.ScopeSelection %]
-                            </div>
-                            <div class="Clear"></div>
-
-                            <label class="Mandatory" for="ScopeEntityID"><span class="Marker">*</span> [% Translate("Scope Entity ID") | html %]:</label>
-                            <div class="Field">
-                                [% Data.ScopeEntityIDSelection %]
-                                <div id="ScopeEntityIDError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required for transition actions with a scope.") | html %]</p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="Module"><span class="Marker">*</span> [% Translate("Transition Action Module") | html %]</label>
+                                <div class="Field">
+                                    [% Data.ModuleStrg %]
+                                    <div id="ModuleError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="ModuleServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="Clear"></div>
 
+                            <div class="field-wrapper">
+                                <label for="Scope">[% Translate("Scope") | html %]</label>
+                                <div class="Field">
+                                    [% Data.ScopeSelection %]
+                                </div>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="ScopeEntityID"><span class="Marker">*</span> [% Translate("Scope Entity ID") | html %]</label>
+                                <div class="Field">
+                                    [% Data.ScopeEntityIDSelection %]
+                                    <div id="ScopeEntityIDError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required for transition actions with a scope.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
                         </fieldset>
 
                         <div class="WidgetSimple">
                             <div class="Header">
                                 <h2 for="Config">[% Translate("Config Parameters") | html %]</h2>
                                 <div class="AdditionalInformation">
-                                    <a class="AddButton" href="#" name="ConfigAdd" id="ConfigAdd" title="[% Translate("Add a new Parameter") | html %]">
+                                    <a class="AddButton icon-hover-sm" href="#" name="ConfigAdd" id="ConfigAdd" title="[% Translate("Add a new Parameter") | html %]">
                                         <i class="fa fa-plus-square-o"></i>
                                         <span class="InvisibleText">[% Translate("Add a new Parameter") | html %]</span>
                                     </a>
@@ -100,20 +103,29 @@
                             </div>
                             <div class="Content" id="ConfigParams">
 [% RenderBlockStart("ConfigItemInitRow") %]
-                                <fieldset>
-                                    <label for="ConfigKey[1]">[% Translate("Key") | html %]:</label>
-                                    <input type="text" name="ConfigKey[1]" id="ConfigKey[1]" />
-                                    <label for="ConfigValue[1]">[% Translate("Value") | html %]:</label>
-                                    <input type="text" name="ConfigValue[1]" id="ConfigValue[1]" />
+                                <fieldset class="TableLike" style="padding-right: 38px">
+                                    <div class="field-wrapper">
+                                        <label for="ConfigKey[1]">[% Translate("Key") | html %]</label>
+                                        <input type="text" name="ConfigKey[1]" id="ConfigKey[1]" />
+                                    </div>
+                                    <div class="field-wrapper">
+                                        <label for="ConfigValue[1]">[% Translate("Value") | html %]</label>
+                                        <input type="text" name="ConfigValue[1]" id="ConfigValue[1]" />
+                                    </div>
                                 </fieldset>
 [% RenderBlockEnd("ConfigItemInitRow") %]
 [% RenderBlockStart("ConfigItemEditRow") %]
-                                <fieldset>
-                                    <label for="ConfigKey[[% Data.Index | html %]]">[% Translate("Key") | html %]:</label>
-                                    <input type="text" value="[% Data.Key | html %]" name="ConfigKey[[% Data.Index | html %]]" id="ConfigKey[[% Data.Index | html %]]" />
-                                    <label for="ConfigValue[[% Data.Index | html %]]">[% Translate("Value") | html %]:</label>
-                                    <input type="text" value="[% Data.Value | html %]" name="ConfigValue[[% Data.Index | html %]]" id="ConfigValue[[% Data.Index | html %]]" />
-                                    <a class="RemoveButton" href="#" title="[% Translate("Remove this Parameter") | html %]">
+                                <fieldset class="TableLike">
+                                    <div class="field-wrapper">
+                                        <label for="ConfigKey[[% Data.Index | html %]]">[% Translate("Key") | html %]</label>
+                                        <input type="text" value="[% Data.Key | html %]" name="ConfigKey[[% Data.Index | html %]]" id="ConfigKey[[% Data.Index | html %]]" />
+                                    </div>
+                                    <div class="field-wrapper">
+                                        <label for="ConfigValue[[% Data.Index | html %]]">[% Translate("Value") | html %]</label>
+                                        <input type="text" value="[% Data.Value | html %]" name="ConfigValue[[% Data.Index | html %]]" id="ConfigValue[[% Data.Index | html %]]" />
+                                    </div>
+
+                                    <a class="RemoveButton icon-hover-sm" href="#" title="[% Translate("Remove this Parameter") | html %]">
                                         <i class="fa fa-minus-square-o"></i>
                                         <span class="InvisibleText">[% Translate("Remove this Parameter") | html %]</span>
                                     </a>
@@ -123,16 +135,21 @@
                         </div>
                     </div>
                 </div>
-<!-- Invisible submit button to allow form submit on pressing enter/return without javascript -->
+                <!-- Invisible submit button to allow form submit on pressing enter/return without javascript -->
                 <input type="image" width="0" height="0" style="display: none;" />
             </form>
             <div id="ConfigParamContainer" style="display:none;">
-                <fieldset>
-                    <label for="ConfigKey[_INDEX_]">[% Translate("Key") | html %]:</label>
-                    <input type="text" name="ConfigKey[_INDEX_]" id="ConfigKey[_INDEX_]" />
-                    <label for="ConfigValue[_INDEX_]">[% Translate("Value") | html %]:</label>
-                    <input type="text" name="ConfigValue[_INDEX_]" id="ConfigValue[_INDEX_]" />
-                    <a class="RemoveButton" href="#" title="[% Translate("Remove this Parameter") | html %]">
+                <fieldset class="TableLike">
+                    <div class="field-wrapper">
+                        <label for="ConfigKey[_INDEX_]">[% Translate("Key") | html %]</label>
+                        <input type="text" name="ConfigKey[_INDEX_]" id="ConfigKey[_INDEX_]" />
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="ConfigValue[_INDEX_]">[% Translate("Value") | html %]</label>
+                        <input type="text" name="ConfigValue[_INDEX_]" id="ConfigValue[_INDEX_]" />
+                    </div>
+
+                    <a class="RemoveButton icon-hover-sm" href="#" title="[% Translate("Remove this Parameter") | html %]">
                         <i class="fa fa-minus-square-o"></i>
                         <span class="InvisibleText">[% Translate("Remove this Parameter") | html %]</span>
                     </a>
@@ -141,6 +158,6 @@
         </div>
     </div>
     <div class="Footer">
-        <button class="Primary CallForAction" id="Submit" title="[% Translate("Save") | html %]" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+        <button class="Primary CallForAction btn-main btn-primary btn-width-md" id="Submit" title="[% Translate("Save") | html %]" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
     </div>
 </div>

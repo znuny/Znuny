@@ -12,26 +12,24 @@
     <input type="hidden" name="Subaction" value="Merge"/>
     <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
 
-    <div class="LayoutPopup ARIARoleMain">
+    <div class="LayoutPopup ARIARoleMain ticketMerge">
         <div class="Header">
             <h1>[% Translate("Merge %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %] &mdash; [% Data.Title | html %]</h1>
-            <p class="AsteriskExplanation">[% Translate("All fields marked with an asterisk (*) are mandatory.") | html %]</p>
-
 [% RenderBlockStart("TicketBack") %]
-            <p>
-                <a class="CancelClosePopup" href="#">[% Translate("Cancel & close") | html %]</a>
-            </p>
+            <div>
+                <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">
+                    [% Translate("Cancel") | html %]
+               </a>
+            </div>
 [% RenderBlockEnd("TicketBack") %]
-
 [% RenderBlockStart("PropertiesLock") %]
-            <p>
+            <div>
                 [% Translate("The ticket has been locked") | html %].
-                <a class="UndoClosePopup" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID | uri %][% IF Data.PreviousOwner %];PreviousOwner=[% Data.PreviousOwner %][% END %];[% Env("ChallengeTokenParam") | html %]">
-                    [% Translate("Undo & close") | html %]
+                <a class="UndoClosePopup btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID | uri %][% IF Data.PreviousOwner %];PreviousOwner=[% Data.PreviousOwner %][% END %];[% Env("ChallengeTokenParam") | html %]">
+                    [% Translate("Cancel") | html %]
                 </a>
-            </p>
+            </div>
 [% RenderBlockEnd("PropertiesLock") %]
-
         </div>
         <div class="Content">
             <div class="WidgetSimple Expanded">
@@ -43,20 +41,25 @@
                 </div>
                 <div class="Content">
                     <fieldset class="TableLike FixedLabel">
-                        <label class="Mandatory" for="MainTicketNumber"><span class="Marker">*</span>[% Translate("Merge to") | html %] [% Config("Ticket::Hook") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" id="MainTicketNumber" name="MainTicketNumber" value="[% Data.MainTicketNumber | html %]" class="Validate_Required [% Data.MainTicketNumberInvalid %] W50pc" />
-                            <div id="MainTicketNumberError" class="TooltipErrorMessage"><p>[% Translate("You need to use a ticket number!") | html %]</p></div>
-                            <div id="MainTicketNumberServerError" class="TooltipErrorMessage"><p>[% Translate("A valid ticket number is required.") | html %]</p></div>
-                            <div class="FieldExplanation">
-                                [% Translate("Try typing part of the ticket number or title in order to search by it.") | html %]
+                        <div class="card-item">
+                            <div>
+                                <label class="Mandatory" for="MainTicketNumber"><span class="Marker">*</span>[% Translate("Merge to") | html %] [% Config("Ticket::Hook") | html %]:</label>
+                                <div class="Field">
+                                    <input type="text" placeholder="[% Translate("Try typing part of the ticket number or title in order to search by it.") | html %]" id="MainTicketNumber" name="MainTicketNumber" value="[% Data.MainTicketNumber | html %]" class="Validate_Required [% Data.MainTicketNumberInvalid %] W50pc" />
+                                    <div id="MainTicketNumberError" class="TooltipErrorMessage"><p>[% Translate("You need to use a ticket number!") | html %]</p></div>
+                                    <div id="MainTicketNumberServerError" class="TooltipErrorMessage"><p>[% Translate("A valid ticket number is required.") | html %]</p></div>
+                                    <div class="FieldExplanation">
+                                        [% Translate("Try typing part of the ticket number or title in order to search by it.") | html %]
+                                    </div>
+                                [% IF Data.CustomerID %]
+                                    <div class="checkbox-container">
+                                        <input type="checkbox" id="TicketSearchFilter" checked="checked" data-ticket-search-filter="CustomerIDRaw" value="[% Data.CustomerID | html %]" />
+                                        <label for="TicketSearchFilter">[% Translate("Limit the search to tickets with same Customer ID (%s).", Data.CustomerID) | html %]</label>
+                                    </div>
+                                [% END %]
+                                </div>
                             </div>
-                        [% IF Data.CustomerID %]
-                            <input type="checkbox" id="TicketSearchFilter" checked="checked" data-ticket-search-filter="CustomerIDRaw" value="[% Data.CustomerID | html %]" />
-                            <label for="TicketSearchFilter">[% Translate("Limit the search to tickets with same Customer ID (%s).", Data.CustomerID) | html %]</label>
-                        [% END %]
                         </div>
-                        <div class="Clear"></div>
                     </fieldset>
                 </div>
             </div>
@@ -70,64 +73,71 @@
                 </div>
                 <div class="Content">
                     <fieldset class="TableLike FixedLabel">
-                        <label for="InformSender">[% Translate("Inform sender") | html %]:</label>
-                        <div class="Field">
-                            <input type="checkbox" id="InformSender" name="InformSender" value="1" [% Data.InformSenderChecked | html %]/>
-                        </div>
-                        <div class="Clear"></div>
+                        <div class="card-item">
+                            <div class="checkbox-container">
+                                <div class="Field">
+                                    <input type="checkbox" id="InformSender" name="InformSender" value="1" [% Data.InformSenderChecked | html %]/>
+                                </div>
+                                <label for="InformSender">[% Translate("Inform sender") | html %]:</label>
+                            </div>
 
-                        <label for="From">[% Translate("From") | html %]:</label>
-                        <div class="Field">
-                            [% Data.From | html %]
-                            <input type="hidden" id="From" name="From" value="[% Data.From | html %]"/>
-                        </div>
-                        <div class="Clear"></div>
+                            <div>
+                                <label for="From">[% Translate("From") | html %]:</label>
+                                <div class="Field">
+                                    [% Data.From | html %]
+                                    <input type="hidden" id="From" name="From" value="[% Data.From | html %]"/>
+                                </div>
+                            </div>
 
-                        <label for="To"><span class="Marker Hidden">*</span>[% Translate("To") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" id="To" name="To" value="[% Data.To | html %]" class="Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.ToInvalid %] W75pc"/>
-                            <div id="ToError" class="TooltipErrorMessage" ><p>[% Translate("Need a valid email address.") | html %]</p></div>
-                            <div id="ToServerError" class="TooltipErrorMessage">
+                            <div>
+                                <label for="To"><span class="Marker Hidden">*</span>[% Translate("To") | html %]:</label>
+                                <div class="Field">
+                                    <input type="text" id="To" name="To" value="[% Data.To | html %]" class="Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.ToInvalid %] W75pc"/>
+                                    <div id="ToError" class="TooltipErrorMessage" ><p>[% Translate("Need a valid email address.") | html %]</p></div>
+                                    <div id="ToServerError" class="TooltipErrorMessage">
 [% RenderBlockStart("ToCustomerGenericServerErrorMsg") %]
-                                <p>[% Translate("Need a valid email address or don't use a local email address.") | html %]</p>
+                                        <p>[% Translate("Need a valid email address or don't use a local email address.") | html %]</p>
 [% RenderBlockEnd("ToCustomerGenericServerErrorMsg") %]
 [% RenderBlockStart("ToInvalidConfigServerErrorMsg") %]
-                                <p>[% Translate("This email address is not allowed due to the system configuration.") | html %]</p>
+                                        <p>[% Translate("This email address is not allowed due to the system configuration.") | html %]</p>
 [% RenderBlockEnd("ToInvalidConfigServerErrorMsg") %]
 [% RenderBlockStart("ToInvalidMXServerErrorMsg") %]
-                                <p>[% Translate("This email address failed MX check.") | html %]</p>
+                                        <p>[% Translate("This email address failed MX check.") | html %]</p>
 [% RenderBlockEnd("ToInvalidMXServerErrorMsg") %]
 [% RenderBlockStart("ToInvalidDNSServerErrorMsg") %]
-                                <p>[% Translate("DNS problem, please check your configuration and the error log.") | html %]</p>
+                                        <p>[% Translate("DNS problem, please check your configuration and the error log.") | html %]</p>
 [% RenderBlockEnd("ToInvalidDNSServerErrorMsg") %]
 [% RenderBlockStart("ToInvalidSyntaxServerErrorMsg") %]
-                                <p>[% Translate("The syntax of this email address is incorrect.") | html %]</p>
+                                        <p>[% Translate("The syntax of this email address is incorrect.") | html %]</p>
 [% RenderBlockEnd("ToInvalidSyntaxServerErrorMsg") %]
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="Subject"><span class="Marker Hidden">*</span>[% Translate("Subject") | html %]:</label>
+                                <div class="Field">
+                                    <input type="text" id="Subject" name="Subject" value="[% Data.Subject | html %]" class="Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.SubjectInvalid %] W75pc"/>
+                                    <div id="SubjectError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="RichText"><span class="Marker Hidden">*</span>[% Translate("Text") | html %]:</label>
+                                <div class="RichTextField">
+                                    <textarea id="RichText" class="RichText Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.RichTextInvalid %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]" >[% Data.Body | html %]</textarea>
+                                    <div id="RichTextError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="RichTextServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="Clear"></div>
-
-                        <label for="Subject"><span class="Marker Hidden">*</span>[% Translate("Subject") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" id="Subject" name="Subject" value="[% Data.Subject | html %]" class="Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.SubjectInvalid %] W75pc"/>
-                            <div id="SubjectError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="RichText"><span class="Marker Hidden">*</span>[% Translate("Text") | html %]:</label>
-                        <div class="RichTextField">
-                            <textarea id="RichText" class="RichText Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.RichTextInvalid %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]" >[% Data.Body | html %]</textarea>
-                            <div id="RichTextError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="RichTextServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
                     </fieldset>
                 </div>
             </div>
         </div>
         <div class="Footer">
-            <button class="CallForAction Primary" id="submitRichText" accesskey="g" title="[% Translate("Submit") | html %] (g)" type="submit" value="[% Translate("Submit") | html %]"><span><i class="fa fa-check-square-o"></i> [% Translate("Submit") | html %]</span></button>
+            <button class="CallForAction Primary btn-main btn-primary btn-width-md" id="submitRichText" accesskey="g" title="[% Translate("Submit") | html %] (g)" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>
         </div>
     </div>
 </form>

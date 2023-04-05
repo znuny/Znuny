@@ -299,6 +299,20 @@ sub Run {
             }
         }
 
+        # add ToolBarSearch
+        my %ToolBarSearchParam;
+        my @ParamNames = $ParamObject->GetParamNames();
+        KEY:
+        for my $Key (@ParamNames) {
+            next KEY if $Key !~ m{^ToolBarSearch(.*)}sm;
+            $ToolBarSearchParam{$Key} = $ParamObject->GetParam( Param => $Key );
+        }
+
+        if ( %ToolBarSearchParam && $ToolBarSearchParam{ToolBarSearchBackend} =~ m{^ToolBarSearchBackend(.*)}xms ) {
+            my $Key = $1;
+            $GetParam{$Key} = $ToolBarSearchParam{ToolBarSearchTerm};
+        }
+
         # get Dynamic fields from param object
         # cycle trough the activated Dynamic Fields for this screen
         DYNAMICFIELD:

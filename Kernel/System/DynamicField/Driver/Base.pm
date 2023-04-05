@@ -138,22 +138,47 @@ sub EditLabelRender {
     my $LabelText = $Param{DynamicFieldConfig}->{Label};
 
     my $LabelID    = 'Label' . $Param{FieldName};
-    my $HTMLString = '';
+    my $HTMLString = "<div class='label-wrapper'>";
+
+    # optional checkbox
+    my $Prefix   = $Param{Prefix}                 || '';
+    my $Optional = $Param{ $Prefix . 'Optional' } || 0;
+
+    if ($Optional) {
+        my $Used  = $Param{ $Prefix . 'Used' }  || 0;
+        my $Class = $Param{ $Prefix . 'Class' } || '';
+        my $Checked = '';
+        if ($Used) {
+            $Checked = ' checked="checked"';
+        }
+
+        $HTMLString .= "<input type='checkbox' name='"
+            . $Prefix
+            . "Used' id='" . $Prefix . "Used' value='1'"
+            . $Checked
+            . " class='$Class'"
+            . " title='"
+            . $Param{LayoutObject}->{LanguageObject}->Translate('Check to activate this date')
+            . "' "
+            . ( $Param{Disabled} ? 'disabled="disabled"' : '' )
+            . "/>";
+    }
+
+    if ( $Param{ConfirmationCheckboxes} ) {
+        $Param{FieldChecked} ||= '';
+        $HTMLString
+            .= "<input type='checkbox' id='$Param{FieldName}' name='$Param{FieldName}' value='1' $Param{FieldChecked} />";
+    }
 
     if ( $Param{Mandatory} ) {
 
         # opening tag
-        $HTMLString = <<"EOF";
-<label id="$LabelID" for="$Name" class="Mandatory">
-    <span class="Marker">*</span>
-EOF
+        $HTMLString .= "<label id='$LabelID' for='$Name' class='Mandatory'>";
+        $HTMLString .= "<span class='Marker'>*</span>";
     }
     else {
-
         # opening tag
-        $HTMLString = <<"EOF";
-<label id="$LabelID" for="$Name">
-EOF
+        $HTMLString .= "<label id='$LabelID' for='$Name'>";
     }
 
     # text
@@ -167,12 +192,9 @@ EOF
         );
         $HTMLString .= ")";
     }
-    $HTMLString .= ":\n";
 
     # closing tag
-    $HTMLString .= <<"EOF";
-</label>
-EOF
+    $HTMLString .= ":</label></div>";
 
     return $HTMLString;
 }

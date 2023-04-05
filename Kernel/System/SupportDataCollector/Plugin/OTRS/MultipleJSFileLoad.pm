@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Views with multiple loaded JavaScript files');
+    return Translatable('Znuny') . '/' . Translatable('Views with multiple loaded JavaScript files');
 }
 
 sub Run {

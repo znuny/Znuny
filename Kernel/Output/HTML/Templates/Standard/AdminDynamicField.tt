@@ -8,22 +8,8 @@
 # --
 
 [% RenderBlockStart("Main") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Dynamic Fields Management") | html %] - [% Translate(Data.Action) | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Dynamic Fields Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -32,10 +18,12 @@
                 <ul class="ActionList">
 [% RenderBlockStart("ActionAddDynamicField") %]
                     <li>
-                        <h4><label for="[% Data.SelectName | html %]">[% Translate( Data.ObjectTypeName ) | html %]</label></h4>
-                        [% Data.AddDynamicFieldStrg %]
-                        <div class="FieldExplanation">
-                            <p>[% Translate("Add new field for object") | html %]: [% Translate(Data.ObjectType) | html %]</p>
+                        <div>
+                            <h4><label for="[% Data.SelectName | html %]">[% Translate( Data.ObjectTypeName ) | html %]</label></h4>
+                            [% Data.AddDynamicFieldStrg %]
+                            <div class="FieldExplanation">
+                                <p>[% Translate("Add new field for object") | html %]: [% Translate(Data.ObjectType) | html %]</p>
+                            </div>
                         </div>
                     </li>
 [% RenderBlockEnd("ActionAddDynamicField") %]
@@ -50,7 +38,6 @@
                 <input type="text" id="FilterDynamicFields" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterDynamicFields" value="" title="[% Translate("Filter for dynamic fields") | html %]">
             </div>
         </div>
-
 [% RenderBlockStart("Hint") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -93,13 +80,13 @@
                                    [% Translate('This field is required.') | html %]
                                 </p>
                             </div>
-                            <fieldset class='SpacingTop'>
+                            <fieldset>
                                 <label for='OverwriteExistingConfigurations'>
                                     <input type='checkbox' id='OverwriteExistingConfigurations' name='OverwriteExistingConfigurations' value='1'/>
                                     [% Translate('Overwrite existing configurations') | html %]
                                 </label>
                             </fieldset>
-                            <button class='CallForAction Fullsize Center SpacingTop' id='DynamicFieldImport' type='submit'>
+                            <button class='CallForAction btn-main btn-primary-ghost' id='DynamicFieldImport' type='submit'>
                                 <span><i class='fa fa-upload'></i>
                                     [% Translate('Import configurations') | html %]
                                 </span>
@@ -107,7 +94,7 @@
                         </form>
                     </li>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldConfigurationImportExport;Subaction=Export' id='DynamicFieldExport' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldConfigurationImportExport;Subaction=Export' id='DynamicFieldExport' class='CallForAction btn-main btn-primary-ghost'>
                             <span><i class='fa fa-download'></i>
                                 [% Translate('Export configurations') | html %]
                             </span>
@@ -122,16 +109,17 @@
                 <h2>[% Translate('Related Actions') | html %]</h2>
             </div>
             <div class='Content'>
-                <ul class='ActionList SpacingTop'>
+                <ul class='ActionList'>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminProcessManagement' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldScreenConfiguration' class='CallForAction btn-main btn-primary-ghost'>
+                        <a href='[% Env("Baselink") %]Action=AdminProcessManagement' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Process Management') | html %]
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldScreenConfiguration' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldScreenConfiguration' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Dynamic fields ↔ Screens') | html %]
                             </span>
@@ -141,15 +129,32 @@
             </div>
         </div>
     </div>
-    <div class="ContentColumn">
-        <div class="WidgetSimple">
-            <div class="Header">
-                <h2>[% Translate("Dynamic Fields List") | html %]</h2>
 
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Dynamic Fields Management") | html %] - [% Translate(Data.Action) | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Dynamic Fields Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+        <div class="WidgetSimple">
+            <div class="Header filter-items">
+                <h2>[% Translate("Dynamic Fields List") | html %]</h2>
 [% RenderBlockStart("ContextSettings") %]
                 <ul class="ContextFunctions">
                     <li class="ContextSettings">
-                        <a href="#" id="ShowContextSettingsDialog" title="[% Translate("Settings") | html %]">
+                        <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                            <span class="show-valid">[% Translate("Show Valid") | html %]</span>
+                            <span class="show-all">[% Translate("Show All") | html %]</span>
+                        </a>
+                    </li>
+                    <li class="ContextSettings">
+                        <a href="#" class="icon-hover" id="ShowContextSettingsDialog" title="[% Translate("Settings") | html %]">
                             <i class="fa fa-cog"></i>
                             <span>[% Translate("Settings") | html %]</span>
                         </a>
@@ -163,11 +168,10 @@
                         <input type="hidden" name="Group" value="[% Data.Group | html %]"/>
                         <input type="hidden" name="RedirectURL" value="[% Data.RequestedURL | html %]"/>
                         <fieldset class="TableLike">
-                            <label for="[% Data.PreferencesKey | html %]">[% Translate("Dynamic fields per page") | html %]:</label>
+                            <label for="[% Data.PreferencesKey | html %]">[% Translate("Dynamic fields per page") | html %]</label>
                             <div class="Field">
                                 [% Data.PageShownString %]
                             </div>
-                            <div class="Clear"></div>
                         </fieldset>
                     </form>
                 </div>
@@ -177,14 +181,14 @@
             <div class="DynamicFieldsPagination">
                 <span class="Pagination">
 [% RenderBlockStart("OverviewNavBarPageNavBar") %]
-                    [% Data.ResultLong %]
-                    [% Data.SiteNavBarLong %]
+                    <ul>
+                        <li>[% Data.ResultLong %]</li>
+                        <li class="page-links">[% Data.SiteNavBarLong %]</li>
+                    </ul>
 [% RenderBlockEnd("OverviewNavBarPageNavBar") %]
                 </span>
             </div>
-            <div class="Clear"></div>
-
-            <div class="DynamicFieldsContent">
+            <div class="DynamicFieldsContent scroll-bar-styled bar-no-left-border">
                 <table class="DataTable" id="DynamicFieldsTable" summary="List of all registered Dynamic Fields">
                     <thead>
                         <tr>
@@ -227,7 +231,7 @@
                             </td>
                             <td class="Center">
 [% RenderBlockStart("DeleteLink") %]
-                                <a class="TrashCan DynamicFieldDelete" href="#" data-query-string="Action=AdminDynamicField;Subaction=DynamicFieldDelete;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this field") | html %]">[% Translate("Delete this field") | html %]
+                                <a class="TrashCan DynamicFieldDelete table-icon-hover-md" href="#" data-query-string="Action=AdminDynamicField;Subaction=DynamicFieldDelete;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this field") | html %]">[% Translate("Delete this field") | html %]
                                     <i class="fa fa-trash-o"></i>
                                 </a>
 [% RenderBlockEnd("DeleteLink") %]
@@ -244,8 +248,6 @@
 [% RenderBlockStart("MaxFieldOrder") %]
         <input id="MaxFieldOrder" type="hidden" name="MaxFieldOrder" value="[% Data.MaxFieldOrder | html %]"/>
 [% RenderBlockEnd("MaxFieldOrder") %]
-
-        <div class="Clear"></div>
     </div>
 </div>
 [% RenderBlockEnd("Main") %]

@@ -19,27 +19,38 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  */
 
 #TicketOverviewLarge {
-    margin-top: 10px;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 .OverviewLarge {
-    margin: 0px 16px 8px 8px;
+    margin: 0;
+    line-height: var(--main-line-height);
+    padding: var(--main-page-padding);
+    background: var(--main-bg-color);
 }
+
+.OverviewLarge li.Active, .OverviewLarge .HiddenBlock {
+    display: flex;
+    flex-flow: column;
+} 
 
 .RTL .OverviewLarge {
     margin-right: 8px;
     margin-left: 16px;
-}
+}…                                                                                                                            
 
 .OverviewLarge .ActionRow {
     cursor: default;
 }
 
-#EmptyMessageLarge {
-   padding: 7px;
-   border: 1px solid #DDD;
-   min-height: 0px;
-}
+/*#EmptyMessageLarge {
+   padding: var(--padding-md);
+   border: var(--border-width) var(--border-solid) var(--border-color);
+   background: var(--white);
+   min-height: 10vh;
+   border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+ }
 
 .OverviewLarge > li {
     position: relative;
@@ -50,18 +61,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .OverviewLarge > li:first-child {
     border-top: 1px solid #ddd;
-}
+}*/
 
-.OverviewLarge > li ul.InlineActions {
-    position: absolute;
-    top: -35px;
-    right: 0px;
-    background-color: #777;
-    padding-left: 5px;
-    height: 35px;
-    cursor: auto;
-    transition: all ease-in 0.2s;
-}
+/*.OverviewLarge > li ul.InlineActions {*/
+    /*  NOTE: moved to Core.Reset under ".InlineActions";*/
+    /*transition: all ease-in 0.2s;*/
+/*}*/
 
 .OverviewLarge > li ul.InlineActions li {
     height: auto;
@@ -69,25 +74,18 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     border: none;
 }
 
-.OverviewLarge > li ul.InlineActions.Actions li:after {
-    margin-top: 5px;
-}
-
 .OverviewLarge > li ul.InlineActions li form {
     padding-top: 7px;
-}
-
-.OverviewLarge > li ul.InlineActions li form select {
-    font-size: 11px;
+    overflow: unset;
 }
 
 .OverviewLarge > li ul.InlineActions li a {
-    color: #fff;
+    color: var(--white);
 }
 
-.OverviewLarge > li ul.InlineActions li:last-child a {
+/*.OverviewLarge > li ul.InlineActions li:last-child a {
     margin-right: 0px;
-}
+}*/
 
 .OverviewLarge > li ul.InlineActions li:nth-child(even) {
     background-color: transparent;
@@ -122,49 +120,45 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
 }
 
 .OverviewLarge .Content {
-    padding-top: 12px;
-    position: relative;
     cursor: pointer;
-    border-left: 5px solid #fff;
-    overflow: hidden;
-    padding-bottom: 10px;
 }
 
 .OverviewLarge .Content.ArticleBody {
     cursor: text;
+    color: var(--text-message-color);
+    font-size: var(--font-size-sm);
+    font-weight: var(--medium);
+    padding: var(--padding-lg);
+    min-height: var(--text-message-min-height);
 }
 
-.OverviewLarge .Content.ShowInlineActions {
+/*.OverviewLarge .Content.ShowInlineActions {
     padding-top: 32px;
-}
+}*/
 
-.OverviewLarge > li:hover > .Content,
+/*.OverviewLarge > li:hover > .Content,
 .OverviewLarge > li:hover {
     border-left-color: #FCB24B !important;
 }
 
 .OverviewLarge > li:last-child {
     border-bottom: 1px solid #ddd;
-}
+}*/
 
+/* Color is transparent/ no color at all
 .OverviewLarge > li:nth-child(even) {
     background-color: #F5F5F5;
-}
+}*/
 
 .OverviewLarge > li:nth-child(even) .Content {
     border-left-color: #f5f5f5;
 }
 
 .OverviewLarge div.Checkbox {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 35px;
-    height: 35px;
     cursor: default !important;
 }
 
-.OverviewLarge div.Checkbox input {
+/*.OverviewLarge div.Checkbox input {
     margin-top: 12px;
     margin-left: 8px;
 }
@@ -186,7 +180,7 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
     width: 25px;
     height: 15px;
     border: 1px solid #bbb;
-}
+}*/
 
 .RTL .OverviewLarge div.Flag {
     left: auto;
@@ -194,9 +188,9 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
 }
 
 .OverviewLarge div.UnreadArticles {
-    position: absolute;
+    /*position: absolute;
     left: 4px;
-    top: 60px;
+    top: 60px;*/
 }
 
 .RTL .OverviewLarge div.UnreadArticles {
@@ -210,18 +204,17 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
 
 .OverviewLarge .Infos {
     width: 40%;
-    float: left;
 }
 
 .RTL .OverviewLarge .Infos {
     float: right;
 }
 
-.OverviewLarge div.Content.ShowInlineActions .Infos {
+/*.OverviewLarge div.Content.ShowInlineActions .Infos {
     margin-top: -20px;
-}
+}*/
 
-.OverviewLarge h2 {
+/*.OverviewLarge h2 {
     width: 90%;
     height: 15px;
     margin: 0 10px 5px 50px;
@@ -233,7 +226,7 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
 
 .RTL .OverviewLarge h2 {
     margin: 0 50px 5px 10px;
-}
+}*/
 
 .OverviewLarge h2 a {
     color: #000;
@@ -243,10 +236,25 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
     text-overflow: ellipsis;
 }
 
+.OverviewLarge .tables-wrapper {
+    display: flex;
+    flex-flow: row;
+}
+
+@media only screen and (max-width: 1024px) {
+    .OverviewLarge .tables-wrapper {
+        flex-direction: column;
+    }
+}
+
 .OverviewLarge .Infos table {
-    margin: 0 10px 0 50px;
     table-layout: fixed;
-    width: 75%;
+}
+
+@media only screen and (max-width: 1024px) {
+    .OverviewLarge .Infos {
+        width: 100%;
+    }
 }
 
 .RTL .OverviewLarge .Infos table {
@@ -258,7 +266,7 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
 }
 
 .OverviewLarge .Infos table tr.Middle {
-    border-top: 1px dotted #CCC;
+    border-top: var(--border-width) var(--border-solid) var(--border-color);
 }
 
 .OverviewLarge .Infos table tr.Middle td {
@@ -267,10 +275,10 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
 
 .OverviewLarge .Infos table td {
     width: 50%;
-    padding: 0 0 8px 10px;
+    padding: 0 0 var(--padding-md) 10px;
     overflow: hidden;
-    border-left: 1px dotted #CCC;
-    line-height: 16px;
+    border-left: var(--border-width) var(--border-solid) var(--border-color);
+    line-height: var(--main-line-height);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -283,7 +291,7 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
 }
 
 .OverviewLarge .Infos table td:first-child {
-    padding: 0 0 8px 0;
+    padding: 0 0 var(--padding-md) 0;
     border-left: none;
 }
 
@@ -291,51 +299,128 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
     padding: 0;
 }
 
-.OverviewLarge .Infos table td label {
+/*.OverviewLarge .Infos table td label {
     display: block;
     color: #888;
     font-weight: bold;
-}
+}*/
 
 .OverviewLarge .ItemActions {
+    display: flex;
+    height: 50px;
     cursor: default;
     position: relative;
     overflow: hidden;
-    background: #EEEEEE;
-    border-bottom: 1px solid #CCC;
-    min-height: 28px;
+    color: var(--black);
+    padding: var(--padding-sm) var(--padding-lg);
+    font-weight: var(--normal);
+    font-size: var(--font-size-sm);
+    background: var(--color-ticket-header);
+    border-top: var(--border-width) var(--border-solid) var(--border-color);
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+.OverviewLarge .ItemActions li {
+    flex-flow: row !important;
+    white-space: nowrap;
+}
+
+/*.OverviewLarge .ItemActions li:hover a {
+    text-decoration: underline;
+}*/
+
+.OverviewLarge .ItemActions .Actions, 
+.OverviewLarge .Actions form {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    width: 100%;
 }
 
 .OverviewLarge .Preview {
     width: 60%;
-    float: right;
+    padding-left: var(--padding-md);
 }
 
-.RTL .OverviewLarge .Preview {
+@media only screen and (max-width: 1024px) {
+    .OverviewLarge .Preview {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+.OverviewLarge .Preview > ul:first-child {
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+}
+
+.OverviewLarge .Preview > ul:first-child > li {
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+.OverviewLarge .Preview>ul li:first-child {
+    border-radius: 0;
+    border-top-right-radius: var(--border-radius-md);
+    border-top-left-radius: var(--border-radius-md);
+}
+
+.OverviewLarge .Preview>ul li:last-child {
+    border-radius: 0;
+    border-bottom-right-radius: var(--border-radius-md);
+    border-bottom-left-radius: var(--border-radius-md);
+    border-bottom: 0;
+}
+
+.OverviewLarge .InputField_Search {
+    height: var(--reply-input-height);
+    max-width: unset;
+}
+
+/*.RTL .OverviewLarge .Preview {
     float: left;
-}
+}*/
 
-.OverviewLarge .Preview > ul {
-    margin: 0 5px 2px;
+/*.OverviewLarge .Preview > ul {
     background-color: #FFF;
-    border: 1px solid #ccc;
-}
+}*/
 
 .OverviewLarge .Preview li {
-    border: none;
-    min-height: 0;
+    display: flex;
+    flex-flow: column;
+    transition: var(--main-transition);
+    font-size: var(--font-size-sm);
+    font-weight: var(--normal);
+    color: var(--black);
+}
+
+.OverviewLarge li:target {
+    flex-flow: column;
+}
+
+.OverviewLarge .Preview li:last-child {
+    width: 100%;
+}
+
+.OverviewLarge ul li:first-child h3 {
+    border-top-left-radius: var(--border-radius-md);
+    border-top-right-radius: var(--border-radius-md);
 }
 
 .OverviewLarge .Preview h3 {
     margin: 0;
-    font-size: 12px;
-    background: #E8E8E8;
-    border: 1px solid #E1E1E1;
+    width: 100%;
+    font-size: var(--font-size-sm);
+    font-weight: var(--medium);
+    color: var(--table-text-color);
+    transition: var(--main-transition);
+    padding: var(--padding-sm) var(--padding-lg);
+    background: var(--gray-light-semi);
 }
 
 .OverviewLarge .Preview li.Active h3 {
-    background: #e0e0e0;
-    border-color: #D7D7D7;
+    background: var(--email-info) !important;
+    border-color: var(--border-color);
 }
 
 .RTL .OverviewLarge .Preview li.Active h3 {
@@ -345,27 +430,35 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
 
 .OverviewLarge .Preview h3 a {
     height: 17px;
-    padding: 0 4px;
     line-height: 16px;
-    color: #A3A09B;
+    color: var(--ticket-subject);
     display: block;
     overflow: hidden;
 }
 
+.OverviewLarge .Preview h3 a .Headline span:first-child {
+    opacity: .5;
+}
+
+.OverviewLarge .Preview .Active h3 a .Headline span:first-child {
+    opacity: 1;
+}
+
 .OverviewLarge li:hover .Preview h3 a {
-    color: #5E584F;
+    /*color: #5E584F;*/
 }
 
 .OverviewLarge .Preview li.Active h3 a {
-    color: #000;
+    /*color: #000;*/
 }
 
 .OverviewLarge li:hover .Preview li.Active h3 a {
-    color: #0E0E0E;
+    /*color: #0E0E0E;*/
 }
 
-.OverviewLarge .Preview h3 .Subject {
-    color: #0F0F0F;
+.OverviewLarge .Preview h3 .Subject,
+.OverviewLarge .Preview h3 .DateTime {
+    color: var(--ticket-subject);
 }
 
 .OverviewLarge .Preview h3 .Headline {
@@ -386,7 +479,6 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
 
 .OverviewLarge .Preview li div.HiddenBlock {
     display: none;
-    border-right: 1px solid #E8E8E8;
     padding-top: 0;
     padding-bottom: 0;
     overflow: auto;
@@ -396,11 +488,9 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
     display: block;
 }
 
-.OverviewLarge .Preview li div.HiddenBlock div.Content {
-    padding: 5px;
-    line-height: 1.3;
-    border: none;
-}
+/*.OverviewLarge .Preview .Content {
+    
+}*/
 
 .OverviewLarge .Preview .ArticleCount5 li div.HiddenBlock div.Content {
     height: 124px;
