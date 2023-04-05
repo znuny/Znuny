@@ -1,4 +1,5 @@
-# 7.0.3 2023-xx-xx
+# 7.0.3 2023-??-??
+ - 2023-04-05 AdminSLA: Sub-services will now be shown as invalid if SLA is set to invalid.
  - 2023-04-04 Translatable buttons for AdminValidFilter. Thanks to Renée Bäcker @reneeb. [PR#358](https://github.com/znuny/Znuny/pull/358)
  - 2023-04-03 GUI-Redesign changes - CSS, TT and JS.
  - 2023-04-03 Updated Agent/Notification.html.tmpl and changed position of agent notifications.
