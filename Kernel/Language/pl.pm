@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.640508838592433;
+    $Self->{Completeness}        = 0.645134643978193;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1687,7 +1687,7 @@ sub Data {
         'Available Fields' => 'Dostępne pola',
         'Filter available fields' => 'Filtruj dostępne pola',
         'Assigned Fields' => 'Przypisane pola',
-        ' Filter assigned fields' => '',
+        ' Filter assigned fields' => ' Filtruj przypisane pola',
         'Communication Channel' => 'Kanał Komunikacji',
         'Is visible for customer' => 'Jest widoczna dla klienta',
         'Text Template' => 'Tekst szablonu',
@@ -2364,22 +2364,22 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
         'No Data Available.' => '',
-        ' Show or hide the content' => '',
+        ' Show or hide the content' => ' Pokaż lub ukryj treść',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
-        ' Save changes' => '',
-        ' Save' => '',
+        ' Save changes' => ' Zapisz zmiany',
+        ' Save' => ' Zapisz',
         'Save changes' => '',
-        ' Settings' => '',
-        ' Refresh' => '',
-        ' Close this widget' => '',
+        ' Settings' => ' Ustawienia',
+        ' Refresh' => ' Odśwież',
+        ' Close this widget' => ' Zamknij widżet',
         'Hide' => '',
-        ' Cancel' => '',
+        ' Cancel' => ' Anuluj',
         'more' => 'więcej',
         'Available Columns' => 'Dostępne kolumny',
-        ' Filter available fields' => '',
+        ' Filter available fields' => ' Filtruj dostępne pola',
         'Visible Columns (order by drag & drop)' => 'Widoczne kolumny (sortuj poprzez przeciągnij i upuść)',
-        ' Submit' => '',
+        ' Submit' => ' Akceptuj',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => '',
@@ -2608,7 +2608,7 @@ sub Data {
         'Compose Answer for %s%s%s' => 'Utwórz Odpowiedź dla %s%s%s',
         'Date Invalid!' => 'Niepoprawna data!',
         ' Select one or more recipients from the customer user address book.' =>
-            '',
+            ' Wybierz jednego lub więcej odbiorców z książki adresowej użytkowników klientów',
         'Customer user address book' => '',
         'This address is registered as system address and cannot be used: %s' =>
             'Ten adres został zarejestrowany jako adres systemowy i nie może zostać użyty: %s',
@@ -2617,12 +2617,12 @@ sub Data {
         'Please remove this entry and enter a new one with the correct value.' =>
             'Usuń ten wpis i wprowadź nowy z poprawną wartością.',
         'This address already exists on the address list.' => 'Ten adres juz istnieje na liście adresów.',
-        ' Cc' => '',
+        ' Cc' => ' Dw',
         'Remove Cc' => 'Usuń DW',
         'Bcc' => 'UDW',
-        ' Bcc' => '',
+        ' Bcc' => ' Udw',
         'Remove Bcc' => 'Usuń UDW',
-        ' Send mail' => '',
+        ' Send mail' => ' Wyślij wiadomość',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => 'Zmień klienta dla %s%s%s',
@@ -2631,18 +2631,18 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Utwórz nowe zgłoszenie e-mail',
-        ' Example Template' => '',
+        ' Example Template' => ' Przykładowy szablon',
         'Example Template' => 'Przykładowy szablon',
         'To customer user' => 'Do użytkownika klienta',
-        ' To' => '',
+        ' To' => ' Do',
         'Please include at least one customer user for the ticket.' => 'Proszę dodaj przynajmniej jednego użytkownika do zgłoszenia.',
-        ' Select this customer as the main customer.' => '',
-        ' To customer user' => '',
+        ' Select this customer as the main customer.' => ' Wybierz tego klienta jako głównego klienta.',
+        ' To customer user' => ' Do użytkownika klienta',
         'Remove Ticket Customer User' => 'Usuń zgłoszenie użytkownika klienta',
         'From queue' => 'Do kolejki',
-        ' Get all' => '',
+        ' Get all' => ' Pobierz wszystko',
         'Get all' => 'Pobierz wszystkich',
-        ' Message body' => '',
+        ' Message body' => ' Treść wiadomości',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => 'Zewnętrzny Email dla %s%s%s',
@@ -2700,10 +2700,10 @@ sub Data {
         'NoteToTicket invalid.' => 'Notatka nieprawidłowa.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
-        ' Select all' => '',
+        ' Select all' => ' Zaznacz wszystko',
         'No ticket data found.' => 'Nie odnaleziono danych zgłoszenia.',
-        ' Open / Close ticket action menu' => '',
-        ' Select this ticket' => '',
+        ' Open / Close ticket action menu' => ' Menu akcji otwartych / zamkniętych zgłoszeń',
+        ' Select this ticket' => ' Wybierz to zgłoszenie',
         'Sender' => 'Nadawca',
         'Impact' => 'Wpływ',
         'CustomerID' => 'Identyfikator klienta',
@@ -2711,7 +2711,7 @@ sub Data {
         'Solution Time' => 'Czas pozostały do rozwiązania',
         'First Response Time' => 'Czas pozostały do pierwszej odpowiedzi',
         ' Service Time' => '',
-        ' Move ticket to a different queue' => '',
+        ' Move ticket to a different queue' => ' Przenieś zgłoszenie na inną kolejkę',
         'Change queue' => 'Zmień kolejkę',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
@@ -2722,7 +2722,7 @@ sub Data {
         'Filter assigned fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
-        ' Missing channel' => '',
+        ' Missing channel' => ' Brakujący kanał',
         'Missing channel' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
@@ -2746,7 +2746,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => 'Utwórz nowe zgłoszenie do procesu',
-        ' Loading' => '',
+        ' Loading' => ' Ładowanie',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => 'Zapisz zgłoszenie jako proces',
@@ -2934,9 +2934,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'New Ticket' => 'Nowe zgłoszenie',
-        ' Service level agreement' => '',
+        ' Service level agreement' => ' Gwarantowany poziom świadczenia usług (SLA)',
         'Dymanic Info' => '',
-        ' Subject' => '',
+        ' Subject' => ' Temat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => 'Witaj!',
