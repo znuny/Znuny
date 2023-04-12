@@ -14472,7 +14472,7 @@ msgstr "Ansichten mit mehrfach geladenen JavaScript Dateien"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
 msgid "The following JavaScript files loaded multiple times:"
-msgstr "Die folgenden JavaScript Dateien werden merfach geladen:"
+msgstr "Die folgenden JavaScript-Dateien werden mehrfach geladen:"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
 msgid "Files"
