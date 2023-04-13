@@ -1,4 +1,5 @@
 # 7.0.3 2023-??-??
+ - 2023-04-05 Fixed format of returned filename in function Kernel::System::Stats::StringAndTimestamp2Filename.
  - 2023-04-05 AdminSLA: Sub-services will now be shown as invalid if SLA is set to invalid.
  - 2023-04-04 Translatable buttons for AdminValidFilter. Thanks to Renée Bäcker @reneeb. [PR#358](https://github.com/znuny/Znuny/pull/358)
  - 2023-04-03 GUI-Redesign changes - CSS, TT and JS.
@@ -41,6 +42,7 @@
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
 
 # 6.5.2 2023-??-??
+ - 2023-04-05 Fixed format of returned filename in function Kernel::System::Stats::StringAndTimestamp2Filename.
  - 2023-03-20 Fixed handling of article attachments in generic interface operations TicketCreate and TicketUpdate.
  - 2023-03-16 Added Appointment::EventModulePost Entry in XML. Thanks to Kevin Janssen (@BuTzZ). [PR#315](https://github.com/znuny/Znuny/pull/315)
  - 2023-03-10 Fixed notification about empty subject for article drafts in AgentTicketCompose and AgentTicketEmailOutbound.
