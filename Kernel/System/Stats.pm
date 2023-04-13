@@ -1851,7 +1851,7 @@ sub StringAndTimestamp2Filename {
     );
 
     my $Filename = $Param{String} . '_';
-    $Filename .= $DateTimeObject->Format( Format => '%Y-%m-%d_%H:%M' );
+    $Filename .= $DateTimeObject->Format( Format => '%Y-%m-%d_%H-%M' );
 
     if ( defined $Param{TimeZone} ) {
         my $TimeZone = $MainObject->FilenameCleanUp(
