@@ -25769,14 +25769,14 @@ msgid "Views with multiple loaded JavaScript files"
 msgstr "Ansichten mit mehrfach geladenen JavaScript Dateien"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
-msgid "The following JavaScript files loaded multiple times:"
-msgstr "Die folgenden JavaScript Dateien werden merfach geladen:"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
 msgid "Files"
 msgstr "Dateien"
 
 #. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
 msgid "All agents who are mentioned in the ticket"
 msgstr "Alle Agenten, die in dem Ticket erwähnt werden."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+msgid "The following JavaScript files loaded multiple times:"
+msgstr "Die folgenden JavaScript-Dateien werden mehrfach geladen:"
 

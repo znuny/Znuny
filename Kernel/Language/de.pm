@@ -5398,7 +5398,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
         'Views with multiple loaded JavaScript files' => 'Ansichten mit mehrfach geladenen JavaScript Dateien',
-        'The following JavaScript files loaded multiple times:' => 'Die folgenden JavaScript Dateien werden merfach geladen:',
+        'The following JavaScript files loaded multiple times:' => 'Die folgenden JavaScript-Dateien werden mehrfach geladen:',
         'Files' => 'Dateien',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
