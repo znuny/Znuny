@@ -11,6 +11,7 @@ package Kernel::System::Console::Command::Maint::Session::DeleteOrphaned;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
@@ -33,7 +34,9 @@ sub Run {
 
     $Self->Print("<yellow>Deleting orphaned sessions...</yellow>\n");
 
-    for my $SessionID ( $SessionObject->GetOrphanedSessionIDs() ) {
+    my @OrphanedSessions = $SessionObject->GetOrphanedSessionIDs();
+
+    for my $SessionID ( @OrphanedSessions ) {
         my $Success = $SessionObject->RemoveSessionID(
             SessionID => $SessionID,
         );
