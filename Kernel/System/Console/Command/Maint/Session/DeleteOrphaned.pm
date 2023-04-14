@@ -29,10 +29,12 @@ sub Configure {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+
     $Self->Print("<yellow>Deleting orphaned sessions...</yellow>\n");
 
-    for my $SessionID ( $Kernel::OM->Get('Kernel::System::AuthSession')->GetOrphanedSessionIDs() ) {
-        my $Success = $Kernel::OM->Get('Kernel::System::AuthSession')->RemoveSessionID(
+    for my $SessionID ( $SessionObject->GetOrphanedSessionIDs() ) {
+        my $Success = $SessionObject->RemoveSessionID(
             SessionID => $SessionID,
         );
 
