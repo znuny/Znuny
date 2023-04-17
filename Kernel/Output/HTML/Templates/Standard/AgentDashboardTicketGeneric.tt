@@ -36,7 +36,9 @@
             </li>
 [% RenderBlockEnd("ContentLargeTicketGenericFilterLocked") %]
 [% RenderBlockStart("ContentLargeTicketGenericFilterOwned") %]
-        <li class="[% Data.item("Owned::Selected") | html %]"><a href="#" id="Dashboard[% Data.Name | html %]Owned" data-filter="Owned">[% Translate("My Owned Tickets") | html %] ([% Data.Owned | html %])</a></li>
+        <li class="[% Data.item("Owned::Selected") | html %] dropdown-item">
+            <a href="#" id="Dashboard[% Data.Name | html %]Owned" data-filter="Owned" data-filter-count="[% Data.Owned | html %]">[% Translate("My owned tickets") | html %] ([% Data.Owned | html %])</a>
+        </li>
 [% RenderBlockEnd("ContentLargeTicketGenericFilterOwned") %]
 [% RenderBlockStart("ContentLargeTicketGenericFilterWatcher") %]
             <li class="[% Data.item("Watcher::Selected") | html %] dropdown-item">

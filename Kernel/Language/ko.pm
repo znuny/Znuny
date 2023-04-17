@@ -2427,7 +2427,7 @@ sub Data {
         'Assigned to customer user' => '고객 사용자에게 할당 됨',
         'Accessible for customer user' => '고객 사용자가 엑세스 가능',
         'My locked tickets' => '내 잠긴 티켓',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => '내가 본 티켓',
         'My responsibilities' => '내 책임',
         'Tickets in My Queues' => '내 대기열의 티켓',

@@ -2430,7 +2430,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Tiketi zangu zilizofungwa',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Tiketi zangu zinazoangaliwa',
         'My responsibilities' => 'Majukumu yangu',
         'Tickets in My Queues' => 'Tiketi katika foleni yangu',

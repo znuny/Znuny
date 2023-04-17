@@ -2427,7 +2427,7 @@ sub Data {
         'Assigned to customer user' => 'Zugewiesen zu Kundenbenutzer',
         'Accessible for customer user' => 'Zugreifbar für Kundenbenutzer',
         'My locked tickets' => 'Meine gesperrten Tickets',
-        'My Owned Tickets' => 'Meine eigenen Tickets',
+        'My owned tickets' => 'Meine eigenen Tickets',
         'My watched tickets' => 'Meine beobachteten Tickets',
         'My responsibilities' => 'Meine Verantwortlichkeiten',
         'Tickets in My Queues' => 'Tickets in "Meine Queues"',

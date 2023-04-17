@@ -2433,7 +2433,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'הפניות הנעולות שלי',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'הפניות במעקב שלי',
         'My responsibilities' => 'באחריות שלי',
         'Tickets in My Queues' => 'פניות בתורים שלי',

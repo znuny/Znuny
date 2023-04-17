@@ -24358,7 +24358,7 @@ msgid "(Files where only the permissions have been changed will not be displayed
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
-msgid "My Owned Tickets"
+msgid "My owned tickets"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentTicketProcess.pm

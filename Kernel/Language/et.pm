@@ -2427,7 +2427,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Minu lukustatud intsidendid',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Minu jälgitavad intsidendid',
         'My responsibilities' => 'Minu vastutusel olevad intsidendid',
         'Tickets in My Queues' => 'Intsidendid minu järjekordades',

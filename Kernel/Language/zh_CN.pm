@@ -2434,7 +2434,7 @@ sub Data {
         'Assigned to customer user' => '分配给客户用户',
         'Accessible for customer user' => '客户用户可访问',
         'My locked tickets' => '我锁定的工单',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => '我关注的工单',
         'My responsibilities' => '我负责的工单',
         'Tickets in My Queues' => '我的队列中的工单',
