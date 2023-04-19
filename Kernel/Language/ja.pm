@@ -1121,8 +1121,6 @@ sub Data {
         'Send Keep-Alive' => 'Keep-Aliveを送信',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             '',
-        'Additional response headers' => '応答ヘッダーを追加',
-        'Add response header' => '応答ヘッダーを追加する',
         'Endpoint' => 'エンドポイント',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1211,7 +1209,9 @@ sub Data {
             'この呼び出し元のリクエストに使用する、特定のHTTPコマンド(オプション)',
         'Default command' => 'デフォルトコマンド',
         'The default HTTP command to use for the requests.' => '要求に使用される標準のHTTPコマンド',
+        'Additional response headers' => '応答ヘッダーを追加',
         'Additional request headers' => '',
+        'Add response header' => '応答ヘッダーを追加する',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

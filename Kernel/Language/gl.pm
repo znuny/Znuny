@@ -1116,8 +1116,6 @@ sub Data {
         'Send Keep-Alive' => 'Envíe Manter-Vivo',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Esta configuración define se conexións entrantes deberían ser pechadas ou mantidas vivas.',
-        'Additional response headers' => '',
-        'Add response header' => '',
         'Endpoint' => 'Final',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1206,7 +1204,9 @@ sub Data {
             'Un comando específico de HTTP  utilizase para as peticións con este Invocador (opcional).',
         'Default command' => 'Orde predeterminada',
         'The default HTTP command to use for the requests.' => 'O comando HTTP utilizase por defecto para estas peticións.',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

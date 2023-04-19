@@ -1121,8 +1121,6 @@ sub Data {
         'Send Keep-Alive' => 'Wysyłaj "Keep-Alive" (podtrzymuj)',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Ta konfiguracja określa czy przychodzące połączenia powinny być zamknięte lub utrzymane. ',
-        'Additional response headers' => '',
-        'Add response header' => 'Dodaj nagłówek odpowiedzi',
         'Endpoint' => 'Punkt końcowy',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1211,7 +1209,9 @@ sub Data {
             '',
         'Default command' => 'Polecenie domyślne',
         'The default HTTP command to use for the requests.' => '',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Add response header' => 'Dodaj nagłówek odpowiedzi',
         'Add request header' => 'Dodaj nagłówek żądania',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

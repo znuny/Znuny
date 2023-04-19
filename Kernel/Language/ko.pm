@@ -1116,8 +1116,6 @@ sub Data {
         'Send Keep-Alive' => 'Keep-Alive 보내기',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             '이 구성은 들어오는 연결이 닫히거나 살아 있어야 하는지를 정의합니다.',
-        'Additional response headers' => '추가 응답 헤더',
-        'Add response header' => '응답 헤더 추가',
         'Endpoint' => '종점',
         'URI to indicate specific location for accessing a web service.' =>
             '웹 서비스에 액세스하기위한 특정 위치를 나타내는 URI.',
@@ -1206,7 +1204,9 @@ sub Data {
             '이 Invoker (선택 사항)로 요청에 사용할 특정 HTTP 명령입니다.',
         'Default command' => '기본 명령',
         'The default HTTP command to use for the requests.' => '요청에 사용할 기본 HTTP 명령입니다.',
+        'Additional response headers' => '추가 응답 헤더',
         'Additional request headers' => '',
+        'Add response header' => '응답 헤더 추가',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

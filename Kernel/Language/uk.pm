@@ -1117,8 +1117,6 @@ sub Data {
         'Send Keep-Alive' => 'Надіслати Keep-аlive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Ця конфігурація визначає які вхідні з\'єднання мають бути зачинені або збережені.',
-        'Additional response headers' => '',
-        'Add response header' => '',
         'Endpoint' => 'Кінцева точка',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1207,7 +1205,9 @@ sub Data {
             'Конкретна HTTP команда  що буде використовуватись для запитів з цим активатором (необов\'язково).',
         'Default command' => 'Типова команда',
         'The default HTTP command to use for the requests.' => 'Типова HTTP команда для використання у запитах.',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

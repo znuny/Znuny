@@ -266,12 +266,12 @@
                             <input type="hidden" name="ValueCounter" value="[% Data.ValueCounter | html %]" id="ValueCounter" class="ValueCounter" />
 [% RenderBlockStart("ValueRow") %]
                             <div class="ValueRow">
-                                <input name="Key_[% Data.ValueCounter | html %]" id="Key_[% Data.ValueCounter | html %]" class="DefaultValueKeyItem Validate_Required W20pc [% Data.KeyError | html %]" type="text" maxlength="150" value="[% Data.Key | html %]" style="width:250px"/>
+                                <input name="Key_[% Data.ValueCounter | html %]" id="Key_[% Data.ValueCounter | html %]" class="DefaultValueKeyItem Validate_Required W20pc [% Data.KeyError | html %]" type="text" maxlength="2000" value="[% Data.Key | html %]" style="width:250px"/>
                                 <div id="Key_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                 <div id="Key_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
 
                                 <label class="Mandatory" for="Value_[% Data.ValueCounter | html %]"><span class="Marker">*</span>[% Translate("Value") | html %]:</label>
-                                <input name="Value_[% Data.ValueCounter | html %]" id="Value_[% Data.ValueCounter | html %]" class="DefaultValueItem Validate_Required W20pc [% Data.ValueError | html %]" type="text" maxlength="150" value="[% Data.Value | html %]"/>
+                                <input name="Value_[% Data.ValueCounter | html %]" id="Value_[% Data.ValueCounter | html %]" class="DefaultValueItem Validate_Required W20pc [% Data.ValueError | html %]" type="text" maxlength="2000" value="[% Data.Value | html %]"/>
                                 <div id="Value_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                 <div id="Value_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
 
@@ -284,12 +284,12 @@
                         </div>
 [% RenderBlockStart("ValueTemplate") %]
                             <div class="ValueTemplate Hidden">
-                                <input name="Key_[% Data.ValueCounter | html %]" id="Key" class="DefaultValueKeyItem W20pc" type="text" maxlength="150" value="[% Data.Key | html %]" style="width:250px"/>
+                                <input name="Key_[% Data.ValueCounter | html %]" id="Key" class="DefaultValueKeyItem W20pc" type="text" maxlength="2000" value="[% Data.Key | html %]" style="width:250px"/>
                                 <div id="KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                 <div id="KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
 
                                 <label class="Mandatory" for="Value"><span class="Marker">*</span>[% Translate("Value") | html %]:</label>
-                                <input name="Value_[% Data.ValueCounter | html %]" id="Value" class="DefaultValueItem W20pc" type="text" maxlength="150" value="[% Data.Value | html %]"/>
+                                <input name="Value_[% Data.ValueCounter | html %]" id="Value" class="DefaultValueItem W20pc" type="text" maxlength="2000" value="[% Data.Value | html %]"/>
                                 <div id="ValueError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                 <div id="ValueServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
 
