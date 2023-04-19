@@ -41,8 +41,10 @@
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
 
-# 6.5.2 2023-??-??
+# 6.5.2 2023-04-19
+ - 2023-04-13 Activated information section and modal dialog for ICS calendar events in AgentTicketZoom view.
  - 2023-04-05 Fixed format of returned filename in function Kernel::System::Stats::StringAndTimestamp2Filename.
+ - 2023-04-03 AdminSLA: Sub-services will now be shown as invalid if SLA is set to invalid.
  - 2023-03-20 Fixed handling of article attachments in generic interface operations TicketCreate and TicketUpdate.
  - 2023-03-16 Added Appointment::EventModulePost Entry in XML. Thanks to Kevin Janssen (@BuTzZ). [PR#315](https://github.com/znuny/Znuny/pull/315)
  - 2023-03-10 Fixed notification about empty subject for article drafts in AgentTicketCompose and AgentTicketEmailOutbound.
