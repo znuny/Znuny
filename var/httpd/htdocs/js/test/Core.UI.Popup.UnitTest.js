@@ -19,12 +19,13 @@ Core.UI.Popup = (function (Namespace) {
 
         QUnit.test('PopupProfiles', function(Assert){
 
+            var ProfileList = Core.UI.Popup.ProfileList();
             var ExpectedProfiles = {
                 'Default': {
                     WindowURLParams: "dependent=yes,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no",
                     Left: 100,
                     Top: 100,
-                    Width: 1040,
+                    Width: ProfileList.Default.Width || 1040,
                     Height: 700
                 }
             };

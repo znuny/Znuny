@@ -24,6 +24,72 @@ All valid functions.
 
 =head1 PUBLIC INTERFACE
 
+=head2 AddPopupProfiles()
+
+Adds user or global popup profiles to JS object 'PopupProfiles'.
+
+    my $Success = $LayoutObject->AddPopupProfiles();
+
+    or
+
+    $Self->{LayoutObject}->AddPopupProfiles();
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub AddPopupProfiles {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+    my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
+
+    $Param{UserID} //= $Self->{UserID};
+
+    my $PopupProfiles = $ConfigObject->Get('Frontend::PopupProfiles');
+    return 1 if $Self->{PopupProfiles};
+
+    my %PopupProfiles;
+    for my $Key ( sort keys %{$PopupProfiles} ) {
+        %PopupProfiles = ( %PopupProfiles, %{ $PopupProfiles->{$Key} } );
+    }
+
+    if ( $Param{UserID} ) {
+        my %Preferences = $UserObject->GetPreferences(
+            UserID => $Param{UserID},
+        );
+
+        KEY:
+        for my $Name (qw(WindowURLParams Left Top Width Height)) {
+            my $Key = 'UserPopupProfile' . $Name;
+
+            next KEY if !$Preferences{$Key};
+            $PopupProfiles{Default}->{$Name} = $Preferences{$Key};
+        }
+    }
+
+    my $JSONPopupProfile = $JSONObject->Encode(
+        Data     => $PopupProfiles{Default},
+        SortKeys => 1,
+        Pretty   => 0,
+    );
+
+    my $PopupProfilesJS = "
+    Core.UI.Popup.ProfileAdd(
+        'Default', $JSONPopupProfile
+    );";
+
+    my $Success = $Self->AddJSOnDocumentCompleteIfNotExists(
+        Key  => 'PopupProfiles',
+        Code => $PopupProfilesJS,
+    );
+
+    return 1;
+}
+
 =head2 PopupClose()
 
 Generate a small HTML page which closes the pop-up window and
@@ -46,8 +112,10 @@ executes an action in the main window.
 sub PopupClose {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     if ( !$Param{URL} && !$Param{Reload} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'Need URL or Reload!'
         );

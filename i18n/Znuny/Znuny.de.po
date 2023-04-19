@@ -20452,7 +20452,7 @@ msgstr "NachnameVorname"
 msgid "Latvian"
 msgstr "Lettisch"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Left"
 msgstr "Links"
 
@@ -24982,7 +24982,7 @@ msgstr "Legt den Standardwert für den Aktionsparameter fest."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate)."
-msgstr ""
+msgstr "Ereignis-Modul Registrierung. Für mehr Leistung können Sie ein Trigger-Ereignis definieren (z. B. Event =&gt; TicketCreate)."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: 'Key =&gt; My Group', 'Content: Name_X, NameY'."
@@ -25559,6 +25559,50 @@ msgstr "Typ-Sichtbarkeit und Standardeinstellungen konfigurieren"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Generic Agent"
 msgstr "Generic Agent"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "The horizontal distance of the window relative to the screen, in pixels."
+msgstr "Der horizontale Abstand des Fensters relativ zum Bildschirm in Pixeln."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Top"
+msgstr "Oben"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "The vertical distance of the window relative to the screen, in pixels."
+msgstr "Der vertikale Abstand des Fensters relativ zum Bildschirm, in Pixeln."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Width"
+msgstr "Breite"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Width in pixels or percent."
+msgstr "Breite in Pixel oder Prozent."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Height"
+msgstr "Höhe"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Height in pixels or percent."
+msgstr "Höhe in Pixel oder Prozent."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Global settings for all popup profiles."
+msgstr "Globale Einstellungen für alle Popup-Profile."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the global users popup profile."
+msgstr "Definiert das globale Popup-Profil."
+
+#. SysConfig
+msgid "Change your default popup profile settings."
+msgstr "Ändern Sie Ihre Standardeinstellungen für Popup-Profile."
+
+#. SysConfig
+msgid "Popup Profile"
+msgstr "Popup-Profil"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
 msgid "Minimum Time Between Incidents"
