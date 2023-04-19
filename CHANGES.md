@@ -1,4 +1,4 @@
-# 6.5.2 2023-??-??
+# 6.5.2 2023-04-19
  - 2023-04-13 Activated information section and modal dialog for ICS calendar events in AgentTicketZoom view.
  - 2023-04-05 Fixed format of returned filename in function Kernel::System::Stats::StringAndTimestamp2Filename.
  - 2023-04-03 AdminSLA: Sub-services will now be shown as invalid if SLA is set to invalid.
