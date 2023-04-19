@@ -1,4 +1,4 @@
-# 7.0.3 2023-??-??
+# 7.0.3 2023-04-19
  - 2023-04-05 Fixed format of returned filename in function Kernel::System::Stats::StringAndTimestamp2Filename.
  - 2023-04-05 AdminSLA: Sub-services will now be shown as invalid if SLA is set to invalid.
  - 2023-04-04 Translatable buttons for AdminValidFilter. Thanks to Renée Bäcker @reneeb. [PR#358](https://github.com/znuny/Znuny/pull/358)
