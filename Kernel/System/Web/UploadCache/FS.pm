@@ -138,7 +138,6 @@ sub FormIDAddFile {
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
-
     # Save original filename if cleanup changes filename;
     # save empty string as original filename otherwise.
 
@@ -148,7 +147,7 @@ sub FormIDAddFile {
 
     if ( $FilenameCleanedUp ne $Param{Filename} ) {
         $Param{FilenameOrig} = $Param{Filename};
-        $Param{Filename} = $FilenameCleanedUp;
+        $Param{Filename}     = $FilenameCleanedUp;
     }
     else {
         $Param{FilenameOrig} = '';
@@ -326,7 +325,7 @@ sub FormIDGetAllFilesData {
 
         my $ContentType = $MainObject->FileRead(
             Location        => "$FilePath.ContentType",
-            Mode            => 'binmode',             # optional - binmode|utf8
+            Mode            => 'binmode',                 # optional - binmode|utf8
             NoFilenameClean => 1,
             DisableWarnings => 1,
         );
@@ -334,7 +333,7 @@ sub FormIDGetAllFilesData {
 
         my $ContentID = $MainObject->FileRead(
             Location        => "$FilePath.ContentID",
-            Mode            => 'binmode',             # optional - binmode|utf8
+            Mode            => 'binmode',                 # optional - binmode|utf8
             NoFilenameClean => 1,
             DisableWarnings => 1,
         );
@@ -347,22 +346,20 @@ sub FormIDGetAllFilesData {
 
         my $Disposition = $MainObject->FileRead(
             Location        => "$FilePath.Disposition",
-            Mode            => 'binmode',             # optional - binmode|utf8
+            Mode            => 'binmode',                 # optional - binmode|utf8
             NoFilenameClean => 1,
             DisableWarnings => 1,
         );
         next FILEPATH if !$Disposition;
 
         my $FilenameOrig = $MainObject->FileRead(
-            Location        => "$File.FilenameOrig",
-            Mode            => 'utf8',                # optional - binmode|utf8
+            Location        => "$FilePath.FilenameOrig",
+            Mode            => 'utf8',                     # optional - binmode|utf8
             NoFilenameClean => 1,
             DisableWarnings => 1,
         );
-        next FILE if !defined($FilenameOrig);
+        next FILEPATH if !defined($FilenameOrig);
 
-        # strip filename
-        $File =~ s/^.*\/(.+?)$/$1/;
         push(
             @Data,
             {
@@ -437,7 +434,7 @@ sub FormIDGetAllFilesMeta {
 
         my $ContentType = $MainObject->FileRead(
             Location        => "$FilePath.ContentType",
-            Mode            => 'binmode',             # optional - binmode|utf8
+            Mode            => 'binmode',                 # optional - binmode|utf8
             NoFilenameClean => 1,
             DisableWarnings => 1,
         );
@@ -445,7 +442,7 @@ sub FormIDGetAllFilesMeta {
 
         my $ContentID = $MainObject->FileRead(
             Location        => "$FilePath.ContentID",
-            Mode            => 'binmode',             # optional - binmode|utf8
+            Mode            => 'binmode',                 # optional - binmode|utf8
             NoFilenameClean => 1,
             DisableWarnings => 1,
         );
@@ -458,22 +455,20 @@ sub FormIDGetAllFilesMeta {
 
         my $Disposition = $MainObject->FileRead(
             Location        => "$FilePath.Disposition",
-            Mode            => 'binmode',             # optional - binmode|utf8
+            Mode            => 'binmode',                 # optional - binmode|utf8
             NoFilenameClean => 1,
             DisableWarnings => 1,
         );
         next FILEPATH if !$Disposition;
 
         my $FilenameOrig = $MainObject->FileRead(
-            Location        => "$File.FilenameOrig",
-            Mode            => 'utf8',                # optional - binmode|utf8
+            Location        => "$FilePath.FilenameOrig",
+            Mode            => 'utf8',                     # optional - binmode|utf8
             NoFilenameClean => 1,
             DisableWarnings => 1,
         );
-        next FILE if !defined($FilenameOrig);
+        next FILEPATH if !defined($FilenameOrig);
 
-        # strip filename
-        $File =~ s/^.*\/(.+?)$/$1/;
         push(
             @Data,
             {

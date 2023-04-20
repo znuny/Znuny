@@ -94,7 +94,7 @@ sub Run {
     }
     elsif ( $Self->{Subaction} eq 'Delete' ) {
 
-        my $Return = {};
+        my $Return           = {};
         my $AttachmentFileID = $ParamObject->GetParam( Param => 'FileID' ) || '';
 
         if ( !$AttachmentFileID ) {

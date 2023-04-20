@@ -259,15 +259,15 @@ sub FilenameCleanUp {
         # form or in the same incoming e-mail article) which may cause problems.
         if ( $Param{Filename} ne $FilenameOrig ) {
             my $FileName = $Param{Filename};
-            my $FileExt = '';
+            my $FileExt  = '';
             if ( $Param{Filename} =~ /(.*)\.+([^.]+)$/ ) {
                 $FileName = $1;
-                $FileExt = '.' . $2;
+                $FileExt  = '.' . $2;
             }
             $Kernel::OM->Get('Kernel::System::Encode')->EncodeOutput( \$FilenameOrig );
 
             # Add _ before md5 if not already exists at the end.
-            if (substr($FileName, -1) ne '_') {
+            if ( substr( $FileName, -1 ) ne '_' ) {
                 $FileName .= '_';
             }
 
@@ -322,7 +322,7 @@ sub FileRead {
     if ( $Param{Filename} && $Param{Directory} ) {
 
         # Filename clean up.
-        if (!$Param{NoFilenameClean}) {
+        if ( !$Param{NoFilenameClean} ) {
             $Param{Filename} = $Self->FilenameCleanUp(
                 Filename => $Param{Filename},
                 Type     => $Param{Type},
@@ -440,7 +440,7 @@ sub FileWrite {
     if ( $Param{Filename} && $Param{Directory} ) {
 
         # Filename clean up.
-        if (!$Param{NoFilenameClean}) {
+        if ( !$Param{NoFilenameClean} ) {
             $Param{Filename} = $Self->FilenameCleanUp(
                 Filename => $Param{Filename},
                 Type     => $Param{Type},
@@ -555,7 +555,7 @@ sub FileDelete {
     if ( $Param{Filename} && $Param{Directory} ) {
 
         # Filename clean up.
-        if (!$Param{NoFilenameClean}) {
+        if ( !$Param{NoFilenameClean} ) {
             $Param{Filename} = $Self->FilenameCleanUp(
                 Filename => $Param{Filename},
                 Type     => $Param{Type},
@@ -623,7 +623,7 @@ sub FileGetMTime {
     if ( $Param{Filename} && $Param{Directory} ) {
 
         # Filename clean up.
-        if (!$Param{NoFilenameClean}) {
+        if ( !$Param{NoFilenameClean} ) {
             $Param{Filename} = $Self->FilenameCleanUp(
                 Filename => $Param{Filename},
                 Type     => $Param{Type},
