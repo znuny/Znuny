@@ -61,6 +61,9 @@ for my $Key ( sort keys %UserData ) {
     # Skip dropdown-values of last views
     next KEY if $Key =~ m{\AUserLastViews};
 
+    # Skip dropdown-values of User Activity LinkTarget
+    next KEY if $Key =~ m{\AUserActivityLinkTarget};
+
     $Self->False(
         $UserObject->SetPreferences(
             Key    => $Key,

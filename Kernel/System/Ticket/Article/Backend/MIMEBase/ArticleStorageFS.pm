@@ -61,9 +61,9 @@ sub new {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message  => "Can't write $ArticleDir! try: \$OTRS_HOME/bin/otrs.SetPermissions.pl!",
+            Message  => "Can't write $ArticleDir! try: \$OTRS_HOME/bin/znuny.SetPermissions.pl!",
         );
-        die "Can't write $ArticleDir! try: \$OTRS_HOME/bin/otrs.SetPermissions.pl!";
+        die "Can't write $ArticleDir! try: \$OTRS_HOME/bin/znuny.SetPermissions.pl!";
     }
 
     # Get activated cache backend configuration.

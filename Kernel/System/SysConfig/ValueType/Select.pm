@@ -220,7 +220,7 @@ Extracts the effective value from a XML parsed setting.
         DefaultID      =>  123,             # (required)
         EffectiveValue => '3 medium',
         DefaultValue   => '3 medium',       # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         RW             => 1,                # (optional) Allow editing. Default 0.
         Item           => [                 # (optional) XML parsed item
             {

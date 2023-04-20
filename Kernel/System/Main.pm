@@ -540,7 +540,7 @@ to delete a file from file system
         Directory       => 'c:\some\location',
         Filename        => 'me_to/alal.xml',
         # or Location
-        Location        => 'c:\some\location\me_to\alal.xml'
+        Location        => 'c:\some\location\me_to\alal.xml',
 
         Type            => 'Name',   # optional - Name|MD5
         DisableWarnings => 1, # optional

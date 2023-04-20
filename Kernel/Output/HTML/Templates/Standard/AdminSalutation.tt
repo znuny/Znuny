@@ -8,28 +8,8 @@
 # --
 
 [% RenderBlockStart("Overview") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Salutation Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Salutation Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% SWITCH Data.Action %]
-        [% CASE 'Add' %]
-            [% BreadcrumbPath.push({ Name => Translate("Add Salutation"),}) %]
-        [% CASE 'Change' %]
-            [% USE EditTitle = String(Translate("Edit Salutation")) %]
-            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
 [% RenderBlockStart("ActionList") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -39,12 +19,12 @@
                 <ul class="ActionList">
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
 [% RenderBlockStart("ActionAdd") %]
                     <li>
-                        <a class="CallForAction Fullsize Center" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Add">
+                        <a class="CallForAction btn-main btn-primary-ghost" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Add">
                             <span><i class="fa fa-plus-square"></i>[% Translate("Add Salutation") | html %]</span>
                         </a>
                     </li>
@@ -53,7 +33,6 @@
             </div>
         </div>
 [% RenderBlockEnd("ActionList") %]
-
 [% RenderBlockStart("Filter") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -69,9 +48,9 @@
                 <h2>[% Translate('Related Actions') | html %]</h2>
             </div>
             <div class='Content'>
-                <ul class='ActionList SpacingTop'>
+                <ul class='ActionList'>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminQueue' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminQueue' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Queues') | html %]
                             </span>
@@ -81,12 +60,35 @@
             </div>
         </div>
     </div>
-    <div class="ContentColumn">
 
+    <div class="ContentColumn">
+    <h1 class="InvisibleText">[% Translate("Salutation Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Salutation Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% SWITCH Data.Action %]
+            [% CASE 'Add' %]
+                [% BreadcrumbPath.push({ Name => Translate("Add Salutation"),}) %]
+            [% CASE 'Change' %]
+                [% USE EditTitle = String(Translate("Edit Salutation")) %]
+                [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 [% RenderBlockStart("OverviewResult") %]
         <div class="WidgetSimple">
-            <div class="Header">
+            <div class="Header filter-items">
                 <h2>[% Translate("List") | html %]</h2>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <span class="show-valid">[% Translate("Show Valid") | html %]</span>
+                    <span class="show-all">[% Translate("Show All") | html %]</span>
+                </a>
             </div>
             <div class="Content">
                 <table class="DataTable" id="Salutations">
@@ -127,7 +129,6 @@
         </div>
 [% RenderBlockEnd("OverviewResult") %]
 [% RenderBlockStart("OverviewUpdate") %]
-
         <div class="WidgetSimple">
             <div class="Header">
 
@@ -148,70 +149,75 @@
                         <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
                     [% END %]
                     <fieldset class="TableLike">
-                        <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
-                            <div id="NameError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="NameServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label class="Mandatory" for="RichText"><span class="Marker">*</span> [% Translate("Salutation") | html %]:</label>
-                        <div class="RichTextField">
-                            <textarea id="RichText" class="RichText Validate_Required" rows="10" cols="74" name="Text">[% Data.Text | html %]</textarea>
-                            <div id="RichTextError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="RichTextServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
+                                <div id="NameError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="NameServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
-                        <div class="Field">
-                            [% Data.ValidOption %]
-                            <div id="ValidIDError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="RichText"><span class="Marker">*</span> [% Translate("Salutation") | html %]</label>
+                            <div class="RichTextField">
+                                <textarea id="RichText" class="RichText Validate_Required" rows="10" cols="74" name="Text">[% Data.Text | html %]</textarea>
+                                <div id="RichTextError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="RichTextServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
                             </div>
-                            <div id="ValidIDServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]</label>
+                            <div class="Field">
+                                [% Data.ValidOption %]
+                                <div id="ValidIDError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="ValidIDServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="Comment">[% Translate("Comment") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="W50pc" maxlength="250"/>
+                        <div class="field-wrapper">
+                            <label for="Comment">[% Translate("Comment") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" maxlength="250"/>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                                [% IF Data.Action == 'Change' %]
 
-                        <div class="Field">
-                            [% IF Data.Action == 'Change' %]
-                                <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                                [% Translate("or") | html %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                            [% ELSE %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% END %]
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                                    <button class="CallForAction Primary btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]">
+                                        <span>[% Translate("Save and finish") | html %]</span>
+                                    </button>
+
+                                    <button class="CallForAction Primary btn-primary btn-main btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]">
+                                        <span>[% Translate("Save") | html %]</span>
+                                    </button>
+
+                                [% ELSE %]
+                                    <button class="CallForAction Primary btn-primary btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% END %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
-
                     </fieldset>
                 </form>
             </div>
         </div>
-
         [% INCLUDE "SmartTags/Default.tt" %]
-
 [% RenderBlockEnd("OverviewUpdate") %]
     </div>
-    <div class="Clear"></div>
 </div>
 [% RenderBlockEnd("Overview") %]

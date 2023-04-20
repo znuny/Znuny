@@ -746,7 +746,7 @@ Set the article flags to indicate if the article search index needs to be rebuil
 
     my $Success = $ArticleObject->ArticleSearchIndexRebuildFlagSet(
         ArticleIDs => [ 123, 234, 345 ]   # (Either 'ArticleIDs' or 'All' must be provided) The ArticleIDs to be updated.
-        All        => 1                   # (Either 'ArticleIDs' or 'All' must be provided) Set all articles to $Value. Default: 0,
+        All        => 1,                  # (Either 'ArticleIDs' or 'All' must be provided) Set all articles to $Value. Default: 0,
         Value      => 1, # 0/1 default 0
     );
 
@@ -959,8 +959,6 @@ Checks the given search parameters for used article backend fields.
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
             ...
         },
     );
@@ -993,8 +991,6 @@ Generates SQL string extensions, including the needed table joins for the articl
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
             ...
         },
     );
@@ -1028,8 +1024,6 @@ SQL queries to the database.
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
             ...
         },
     );

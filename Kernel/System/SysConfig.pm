@@ -84,7 +84,7 @@ sub new {
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     FILENAME:
-    for my $Filename (qw(Framework.pm OTRSBusiness.pm)) {
+    for my $Filename (qw(Framework.pm)) {
         my $BaseFile = $BaseDir . $Filename;
         next FILENAME if !-e $BaseFile;
 
@@ -148,7 +148,7 @@ Returns:
         ChangeTime               => "2016-05-29 11:04:04",
         ChangeBy                 => 1,
         DefaultValue             => 'Old default value',
-        OverriddenFileName        => '/opt/otrs/Kernel/Config/Files/ZZZ.pm',
+        OverriddenFileName        => '/opt/znuny/Kernel/Config/Files/ZZZ.pm',
     );
 
 =cut
@@ -688,20 +688,6 @@ sub SettingUpdate {
                 return %Result;
             }
         }
-    }
-
-    # When a setting is set to invalid all modified settings for users has to be removed.
-    if (
-        !$Param{IsValid}
-        && !$Param{TargetUserID}
-        && $Self->can('UserSettingValueDelete')    # OTRS Business Solution™
-        )
-    {
-        $Self->UserSettingValueDelete(
-            Name       => $Setting{Name},
-            ModifiedID => 'All',
-            UserID     => $Param{UserID},
-        );
     }
 
     if ( !$Param{TargetUserID} ) {
@@ -1354,7 +1340,7 @@ Check if provided EffectiveValue matches structure defined in DefaultSetting. Al
             ],
         },
         StoreCache            => 1,               # (optional) Store result in the Cache. Default 0.
-        SettingUID            => 'Default1234'    # (required if StoreCache)
+        SettingUID            => 'Default1234',   # (required if StoreCache)
         NoValidation          => 1,               # (optional) no value type validation.
         CurrentSystemTime     => 1507894796935,   # (optional) Use provided 1507894796935, otherwise calculate
         ExpireTime            => 1507894896935,   # (optional) Use provided ExpireTime for cache, otherwise calculate
@@ -3599,28 +3585,6 @@ sub ConfigurationDeploy {
             return %Result;
         }
 
-        # If setting is updated on global level, check all user specific settings, maybe it's needed
-        #   to remove duplicates.
-        if ( $Self->can('UserConfigurationResetToGlobal') ) {    # OTRS Business Solution™
-
-            my @DeployedSettings;
-            if ( $Param{DirtySettings} ) {
-                @DeployedSettings = @{ $Param{DirtySettings} };
-            }
-            else {
-                for my $Setting (@Settings) {
-                    push @DeployedSettings, $Setting->{Name};
-                }
-            }
-
-            if ( scalar @DeployedSettings ) {
-                $Self->UserConfigurationResetToGlobal(
-                    Settings => \@DeployedSettings,
-                    UserID   => $Param{UserID},
-                );
-            }
-        }
-
         my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Delete categories cache.
@@ -3762,10 +3726,6 @@ sub ConfigurationDeploySync {
 
         return if !$Success;
     }
-
-    # Sync also user specific settings (if available).
-    return 1 if !$Self->can('UserConfigurationDeploySync');    # OTRS Business Solution™
-    $Self->UserConfigurationDeploySync();
 
     return 1;
 }
@@ -4109,16 +4069,6 @@ sub ConfigurationDump {
                 $Result->{'Modified'}->{ $Setting->{Name} } = $Setting;
             }
         }
-
-        if ( !$Param{SkipUserSettings} && $Self->can('UserConfigurationDump') ) {    # OTRS Business Solution™
-            my %UserSettings = $Self->UserConfigurationDump(
-                SettingList => \@SettingsList,
-                OnlyValues  => $Param{OnlyValues},
-            );
-            if ( scalar keys %UserSettings ) {
-                %{$Result} = ( %{$Result}, %UserSettings );
-            }
-        }
     }
 
     my $YAMLString = $Kernel::OM->Get('Kernel::System::YAML')->Dump(
@@ -4255,17 +4205,6 @@ sub ConfigurationLoad {
                 $Result = '-1';
             }
         }
-
-        # Only deploy user specific settings;
-        next SECTION if !$TargetUserID;
-        next SECTION if !$Self->can('UserConfigurationDeploy');    # OTRS Business Solution™
-
-        # Deploy user configuration requires another package to be installed.
-        my $Success = $Self->UserConfigurationDeploy(
-            TargetUserID => $TargetUserID,
-            UserID       => $Param{UserID},
-        );
-
     }
 
     return $Result;
@@ -4350,7 +4289,7 @@ Returns a list of setting names.
 
     my @Result = $SysConfigObject->ConfigurationSearch(
         Search           => 'The search string', # (optional)
-        Category         => 'OTRS'               # (optional)
+        Category         => 'OTRS',              # (optional)
         IncludeInvisible => 1,                   # (optional) Default 0.
     );
 
@@ -4444,7 +4383,7 @@ Returns:
         },
         OTRS => {
             DisplayName => 'Znuny',
-            Files       => ['Calendar.xml', CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml' ],
+            Files       => ['Calendar.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml' ],
         },
         # ...
     );
@@ -4476,7 +4415,7 @@ sub ConfigurationCategoriesGet {
         OTRS => {
             DisplayName => 'Znuny',
             Files       => [
-                'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml',
+                'Calendar.xml',         'Daemon.xml',            'Framework.xml',
                 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml',
                 'Znuny.xml',
             ],
@@ -4513,11 +4452,6 @@ sub ConfigurationCategoriesGet {
 
         my $PackageName = $Package->{Name}->{Content};
         my $DisplayName = $ConfigObject->Get("SystemConfiguration::Category::Name::$PackageName") || $PackageName;
-
-        # special treatment for OTRS Business Solution™
-        if ( $DisplayName eq 'OTRSBusiness' ) {
-            $DisplayName = 'OTRS Business Solution™';
-        }
 
         $Result{$PackageName} = {
             DisplayName => $DisplayName,
@@ -5933,7 +5867,7 @@ Creates modified versions of dirty settings to deploy and removed the dirty flag
         NotDirty            => 1,                                         # optional - exclusive (1||0)
         AllSettings         => 1,                                         # optional - exclusive (1||0)
         DirtySettings       => [ 'SettingName1', 'SettingName2' ],        # optional - exclusive
-        DeploymentTimeStamp => 2017-12-12 12:00:00'
+        DeploymentTimeStamp => '2017-12-12 12:00:00',
         UserID              => 123,
     );
 

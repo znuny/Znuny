@@ -102,7 +102,7 @@ if applicable the created ArticleID.
 
                 PendingTime {       # optional
                     Year   => 2011,
-                    Month  => 12
+                    Month  => 12,
                     Day    => 03,
                     Hour   => 23,
                     Minute => 05,
@@ -138,6 +138,20 @@ if applicable the created ArticleID.
                 ForceNotificationToUserID       => [1, 2, 3]                   # optional
                 ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
                 ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                Attachment => [
+                    {
+                        Content     => 'content'                                 # base64 encoded
+                        ContentType => 'some content type'
+                        Filename    => 'some fine name'
+                    },
+                    # ...
+                ],
+                # or:
+                Attachment => {
+                    Content     => 'content'                                 # base64 encoded
+                    ContentType => 'some content type'
+                    Filename    => 'some fine name'
+                },
 
                 # Signing and encryption, only used when ArticleSend is set to 1
                 Sign => {
@@ -169,18 +183,18 @@ if applicable the created ArticleID.
             #    Value  => $Value,
             #},
 
-            Attachment [
+            Attachment => [
                 {
-                    Content     => 'content'                                 # base64 encoded
-                    ContentType => 'some content type'
+                    Content     => 'content',                                # base64 encoded
+                    ContentType => 'some content type',
                     Filename    => 'some fine name'
                 },
                 # ...
             ],
             #or
-            #Attachment {
-            #    Content     => 'content'
-            #    ContentType => 'some content type'
+            #Attachment => {
+            #    Content     => 'content',
+            #    ContentType => 'some content type',
             #    Filename    => 'some fine name'
             #},
         },
@@ -193,7 +207,7 @@ if applicable the created ArticleID.
             TicketID    => 123,                     # Ticket ID in Znuny
             ArticleID   => 43,                      # Article ID in Znuny
             Error => {                              # should not return errors
-                    ErrorCode    => 'TicketUpdate.ErrorCode'
+                    ErrorCode    => 'TicketUpdate.ErrorCode',
                     ErrorMessage => 'Error Description'
             },
 
@@ -225,7 +239,7 @@ if applicable the created ArticleID.
                     Responsible        => 'some_responsible_login',
                     ResponsibleID      => 123,
                     Age                => 3456,
-                    Created            => '2010-10-27 20:15:00'
+                    Created            => '2010-10-27 20:15:00',
                     CreateBy           => 123,
                     Changed            => '2010-10-27 20:15:15',
                     ChangeBy           => 123,
@@ -1326,7 +1340,7 @@ sub _CheckAttachment {
 check if user has permissions to update ticket attributes.
 
     my $Response = $OperationObject->_CheckUpdatePermissions(
-        TicketID     => 123
+        TicketID     => 123,
         Ticket       => $Ticket,                  # all ticket parameters
         Article      => $Ticket,                  # all attachment parameters
         DynamicField => $Ticket,                  # all dynamic field parameters
@@ -1509,7 +1523,7 @@ sub _CheckUpdatePermissions {
 updates a ticket and creates an article and sets dynamic fields and attachments if specified.
 
     my $Response = $OperationObject->_TicketUpdate(
-        TicketID     => 123
+        TicketID     => 123,
         Ticket       => $Ticket,                  # all ticket parameters
         Article      => $Article,                 # all attachment parameters
         DynamicField => $DynamicField,            # all dynamic field parameters
@@ -2218,6 +2232,17 @@ sub _TicketUpdate {
             $MimeType = $Article->{MimeType};
         }
 
+        # Base-64-decode attachments.
+        if ( IsHashRefWithData( $Article->{Attachment} ) ) {
+            $Article->{Attachment} = [ $Article->{Attachment} ];
+        }
+        ATTACHMENT:
+        for my $Attachment ( @{ $Article->{Attachment} // [] } ) {
+            next ATTACHMENT if !IsStringWithData( $Attachment->{Content} );
+
+            $Attachment->{Content} = MIME::Base64::decode_base64( $Attachment->{Content} );
+        }
+
         my %ArticleParams = (
             NoAgentNotify        => $Article->{NoAgentNotify} || 0,
             TicketID             => $TicketID,
@@ -2244,6 +2269,7 @@ sub _TicketUpdate {
                 Subject => $Subject,
                 Body    => $PlainBody
             },
+            Attachment => $Article->{Attachment} // [],
         );
 
         # create article
@@ -2261,7 +2287,7 @@ sub _TicketUpdate {
                     };
                 }
 
-                $ArticleParams{Attachment} = \@NewAttachments;
+                push @{ $ArticleParams{Attachment} }, @NewAttachments;
             }
 
             # signing and encryption

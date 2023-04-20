@@ -7,17 +7,16 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-
 <div>
     <div class="InnerContent">
         <p class="Center">{{ 'Do you really want to delete "%s"?' | Translate(Title) }}</p>
     </div>
-    <div class="ContentFooter Center">
-        <button id="DeleteConfirm" class="Primary CallForAction">
-            <span>{{ "Confirm" | Translate }}</span>
-        </button>
-        <button class="CallForAction CloseDialog" value="{{ "Cancel" | Translate }}">
+    <div class="ContentFooter SaveButtons align-right">
+        <button class="CallForAction CloseDialog btn-main btn-cancel-ghost btn-width-md" value="{{ "Cancel" | Translate }}">
             <span>{{ "Cancel" | Translate }}</span>
+        </button>
+        <button id="DeleteConfirm" class="Primary CallForAction btn-main btn-primary btn-width-md">
+            <span>{{ "Confirm" | Translate }}</span>
         </button>
     </div>
 </div>

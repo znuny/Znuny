@@ -18,7 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject             = $Kernel::OM->Get('Kernel::System::User');
+        my $QueueObject            = $Kernel::OM->Get('Kernel::System::Queue');
+        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+        my $CacheObject            = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject               = $Kernel::OM->Get('Kernel::System::DB');
+        my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
 
         # Create test user.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -26,13 +32,13 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Add test queue.
         my $QueueName = "queue" . $HelperObject->GetRandomID();
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => 1,
@@ -47,7 +53,6 @@ $Selenium->RunTest(
             "Created Queue - $QueueName",
         );
 
-        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
         my @Templates;
 
         # Create test templates.
@@ -80,7 +85,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Check overview AdminQueueTemplates screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminQueueTemplates");
@@ -135,19 +140,15 @@ $Selenium->RunTest(
             ->VerifiedClick();
 
         # Check breadcrumb on change screen.
-        my $Count = 1;
         for my $BreadcrumbText (
             'Manage Template-Queue Relations',
-            'Change Queue Relations for Template \'Answer - ' . $Templates[0]->{Name} . '\''
+            "Change Queue Relations for Template 'Answer - " . $Templates[0]->{Name} . "'"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => '.BreadCrumb>li>[title="' . $BreadcrumbText . '"]',
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         $Selenium->find_element("//input[\@value='$QueueID'][\@type='checkbox']")->click();
@@ -211,7 +212,6 @@ $Selenium->RunTest(
 
         # Since there are no tickets that rely on our test QueueTemplate,
         # we can remove test template and  test queue from the DB.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         my $Success;
         if ($QueueID) {
             $Success = $DBObject->Do(
@@ -243,7 +243,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => "Queue",
         );
 

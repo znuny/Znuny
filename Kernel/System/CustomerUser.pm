@@ -962,7 +962,7 @@ to update customer users
 
     $CustomerUserObject->CustomerUserUpdate(
         Source        => 'CustomerUser', # CustomerUser source config
-        ID            => 'mh'            # current user login
+        ID            => 'mh',           # current user login
         UserLogin     => 'mhuber',       # new user login
         UserFirstname => 'Huber',
         UserLastname  => 'Manfred',

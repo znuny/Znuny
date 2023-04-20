@@ -1143,6 +1143,7 @@ $Selenium->RunTest(
 
         my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
 
         # Rebuild system configuration.
         my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Config::Rebuild');
@@ -1154,7 +1155,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Load sample XML file.
-        my $Directory = $Kernel::OM->Get('Kernel::Config')->Get('Home')
+        my $Directory = $ConfigObject->Get('Home')
             . '/scripts/test/sample/SysConfig/XML/AdminSystemConfiguration';
 
         my $XMLLoaded = $SysConfigObject->ConfigurationXML2DB(
@@ -1187,7 +1188,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSystemConfiguration");
 

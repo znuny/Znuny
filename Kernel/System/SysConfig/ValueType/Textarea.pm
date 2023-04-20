@@ -57,7 +57,7 @@ Extracts the effective value from a XML parsed setting.
         Name           => 'SettingName',
         EffectiveValue => 'Textarea content', # (optional)
         DefaultValue   => 'Textarea content', # (optional)
-        Class          => 'My class'          # (optional)
+        Class          => 'My class',         # (optional)
         Item           => [                   # (optional) XML parsed item
             {
                 'ValueType' => 'Textarea',

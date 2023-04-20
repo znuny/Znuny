@@ -96,34 +96,62 @@ my @TestConfigs = (
     {
         String         => '2017-05-09T07:00:09+00:00',
         ExpectedResult => {
-            Year   => 2017,
-            Month  => 5,
-            Day    => 9,
-            Hour   => 7,
-            Minute => 0,
-            Second => 9,
+            Year     => 2017,
+            Month    => 5,
+            Day      => 9,
+            Hour     => 7,
+            Minute   => 0,
+            Second   => 9,
+            TimeZone => 'UTC',
         },
     },
     {
         String         => '2017-05-09T07:00:09+01:00',
         ExpectedResult => {
-            Year   => 2017,
-            Month  => 5,
-            Day    => 9,
-            Hour   => 6,
-            Minute => 0,
-            Second => 9,
+            Year     => 2017,
+            Month    => 5,
+            Day      => 9,
+            Hour     => 6,
+            Minute   => 0,
+            Second   => 9,
+            TimeZone => 'UTC',
         },
     },
     {
         String         => '2017-05-09T07:00:09+0100',
         ExpectedResult => {
-            Year   => 2017,
-            Month  => 5,
-            Day    => 9,
-            Hour   => 6,
-            Minute => 0,
-            Second => 9,
+            Year     => 2017,
+            Month    => 5,
+            Day      => 9,
+            Hour     => 6,
+            Minute   => 0,
+            Second   => 9,
+            TimeZone => 'UTC',
+        },
+    },
+    {
+        String         => '2017-05-09T07:00:09+0400',
+        TimeZone       => 'Europe/Berlin',
+        ExpectedResult => {
+            Year     => 2017,
+            Month    => 5,
+            Day      => 9,
+            Hour     => 5,
+            Minute   => 0,
+            Second   => 9,
+            TimeZone => 'Europe/Berlin',
+        },
+    },
+    {
+        String         => '2017-05-09T07:00:09-02:30',
+        ExpectedResult => {
+            Year     => 2017,
+            Month    => 5,
+            Day      => 9,
+            Hour     => 9,
+            Minute   => 30,
+            Second   => 9,
+            TimeZone => 'UTC',
         },
     },
     {
@@ -168,7 +196,10 @@ TESTCONFIG:
 for my $TestConfig (@TestConfigs) {
     my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
 
-    my $Result = $DateTimeObject->_StringToHash( String => $TestConfig->{String} );
+    my $Result = $DateTimeObject->_StringToHash(
+        String   => $TestConfig->{String},
+        TimeZone => $TestConfig->{TimeZone},    # can be undef
+    );
 
     if ( ref $TestConfig->{ExpectedResult} ) {
         $Self->IsDeeply(

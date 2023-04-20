@@ -135,14 +135,13 @@ sub ArticleRender {
         $ShowHTML = 0;
     }
 
-    my $ArticleContent;
+    my $ArticleContent = $LayoutObject->ArticlePreview(
+        %Param,
+        MaxLength  => $Self->{ArticleMaxLength},
+        ResultType => 'plain',
+    );
 
     if ( !$ShowHTML ) {
-
-        $ArticleContent = $LayoutObject->ArticlePreview(
-            %Param,
-            ResultType => 'plain',
-        );
 
         # html quoting
         $ArticleContent = $LayoutObject->Ascii2Html(

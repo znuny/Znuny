@@ -22,6 +22,8 @@ $Selenium->RunTest(
 
         my $HelperObject     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+        my $CacheObject      = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
 
         # Do not check RichText.
         $HelperObject->ConfigSettingChange(
@@ -82,7 +84,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminGenericInterfaceWebservice screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericInterfaceWebservice");
@@ -140,21 +142,17 @@ $Selenium->RunTest(
         );
 
         # Check for breadcrumb on screen.
-        my $Count = 1;
-        for my $Breadcrumb (
+        my @Breadcrumbs = (
             "Web Service Management",
             "Selenium $RandomID web service",
             "Operation: SeleniumOperation",
             "XSLT Mapping for Incoming Data"
-            )
-        {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $Breadcrumb,
-                "Breadcrumb text '$Breadcrumb' is found on screen"
+        );
+        for my $BreadcrumbText (@Breadcrumbs) {
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Submit empty form and check client side validation.
@@ -361,10 +359,8 @@ $Selenium->RunTest(
         );
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Webservice' );
-
+        $CacheObject->CleanUp( Type => 'Webservice' );
     }
-
 );
 
 1;

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.921230670103093;
+    $Self->{Completeness}        = 0.904675367586321;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -42,7 +42,6 @@ sub Data {
     $Self->{Translation} = {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
-        'ACL Management' => 'ACL管理',
         'Actions' => '操作',
         'Create New ACL' => '创建ACL',
         'Deploy ACLs' => '部署ACL',
@@ -61,7 +60,11 @@ sub Data {
             '为了创建ACL，你可以导入ACL配置或从头创建一个全新的ACL。',
         'Changes to the ACLs here only affect the behavior of the system, if you deploy the ACL data afterwards. By deploying the ACL data, the newly made changes will be written to the configuration.' =>
             '在这里的任何ACL的修改，仅将其保存在系统中。只有在部署ACL后，它才会起作用。',
+        'ACL Management' => 'ACL管理',
         'ACLs' => 'ACL',
+        'Filter' => '过滤器',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             '注意：列表中的ACL名称排序顺序决定了ACL的执行顺序。如果需要更改ACL的执行顺序，请修改相应的ACL名称。',
         'ACL name' => 'ACL名称',
@@ -73,8 +76,6 @@ sub Data {
         'No matches found.' => '没有找到相匹配的.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
-        'Edit ACL %s' => '编辑ACL %s',
-        'Edit ACL' => '编辑ACL',
         'Go to overview' => '返回概览',
         'Delete ACL' => '删除ACL',
         'Delete Invalid ACL' => '删除无效的ACL',
@@ -85,16 +86,16 @@ sub Data {
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             '当匹配条件满足时执行规定的操作动作。记住：\'Possible\'表示允许(白名单)，\'PossibleNot\'表示禁止(黑名单)。',
         'Check the official %sdocumentation%s.' => '查看 %s 的官方文档 %s。',
+        'Edit ACL %s' => '编辑ACL %s',
+        'Edit ACL' => '编辑ACL',
         'Show or hide the content' => '显示或隐藏内容',
         'Edit ACL Information' => '编辑ACL信息',
         'Name' => '名称',
         'Stop after match' => '匹配后停止',
         'Edit ACL Structure' => '编辑ACL结构',
-        'Save ACL' => '保存访问控制列表',
-        'Save' => '保存',
-        'or' => 'or（或）',
-        'Save and finish' => '保存并完成',
         'Cancel' => '取消',
+        'Save' => '保存',
+        'Save and finish' => '保存并完成',
         'Do you really want to delete this ACL?' => '您真的想要删除这个ACL吗？',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt
@@ -102,11 +103,9 @@ sub Data {
             '通过填写表单数据实现ACL控制。创建ACL后，就可在编辑模式中添加ACL配置信息。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
-        'Calendar Management' => '日历管理',
-        'Add Calendar' => '添加日历',
-        'Edit Calendar' => '编辑日历',
         'Calendar Overview' => '日历概览',
         'Add new Calendar' => '添加新的日历',
+        'Add Calendar' => '添加日历',
         'Import Appointments' => '导入预约',
         'Calendar Import' => '日历导入',
         'Here you can upload a configuration file to import a calendar to your system. The file needs to be in .yml format as exported by calendar management module.' =>
@@ -125,6 +124,8 @@ sub Data {
         'Create: users can create and delete appointments in the calendar.' =>
             '创建：用户可以创建和删除日历中的预约。',
         'Read/write: users can manage the calendar itself.' => '读写：用户可以管理日历。',
+        'Calendar Management' => '日历管理',
+        'Edit Calendar' => '编辑日历',
         'Group' => '组',
         'Changed' => '修改时间',
         'Created' => '创建时间',
@@ -136,7 +137,6 @@ sub Data {
         'Calendar' => '日历',
         'Calendar name' => '日历名称',
         'Calendar with same name already exists.' => '已有同名的日历。',
-        'Color' => '颜色',
         'Permission group' => '权限组',
         'Ticket Appointments' => '工单预约',
         'Rule' => '规则',
@@ -157,11 +157,11 @@ sub Data {
         'Submit' => '提交',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentImport.tt
-        'Appointment Import' => '预约导入',
         'Go back' => '返回',
         'Uploaded file must be in valid iCal format (.ics).' => '上传文件必须是有效的iCal格式(.ics)。',
         'If desired Calendar is not listed here, please make sure that you have at least \'create\' permissions.' =>
             '如果此处未列出所需的日历，请确保您至少有“创建”权限。',
+        'Appointment Import' => '预约导入',
         'Upload' => '上传',
         'Update existing appointments?' => '更新已有的预约吗？',
         'All existing appointments in the calendar with same UniqueID will be overwritten.' =>
@@ -170,9 +170,7 @@ sub Data {
         'Import appointments' => '导入预约',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-        'Appointment Notification Management' => '预约通知管理',
         'Add Notification' => '添加通知',
-        'Edit Notification' => '编辑通知',
         'Export Notifications' => '导出通知',
         'Filter for Notifications' => '通知过滤器',
         'Filter for notifications' => '通知过滤器',
@@ -181,6 +179,8 @@ sub Data {
         'Overwrite existing notifications?' => '覆盖现有的通知吗?',
         'Upload Notification configuration' => '上传通知配置',
         'Import Notification configuration' => '导入通知配置',
+        'Appointment Notification Management' => '预约通知管理',
+        'Edit Notification' => '编辑通知',
         'List' => '列表',
         'Delete' => '删除',
         'Delete this notification' => '删除通知',
@@ -204,11 +204,11 @@ sub Data {
         'Send to these agents' => '发送给服务人员',
         'Send to all group members (agents only)' => '发送给组的所有成员（仅服务人员）',
         'Send to all role members' => '发送给角色的所有成员',
-        'Send on out of office' => '不在办公室也发送',
         'Also send if the user is currently out of office.' => '用户设置了不在办公室时仍然发送。',
-        'Once per day' => '一天一次',
+        'Send on out of office' => '不在办公室也发送',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '每个预约的通知使用选择的方式一天只发送一次。',
+        'Once per day' => '一天一次',
         'Notification Methods' => '通知方法',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '这里有几种发送给收件人的方法，请至少选择下面的一种方法。',
@@ -219,7 +219,6 @@ sub Data {
         'This is the default value for assigned recipient agents who didn\'t make a choice for this notification in their preferences yet. If the box is enabled, the notification will be sent to such agents.' =>
             '如果选中这个复选框，即使分配为收件人的服务人员在偏好设置中没有选择接收这个通知，这个通知仍然会发送给该服务人员。',
         'This feature is currently not available.' => '该功能当前不可用。',
-        'Please activate this transport in order to use it.' => '请激活此传输方式以使用它。',
         'No data found' => '没有找到数据',
         'No notification method found.' => '没有找到通知方法。',
         'Notification Text' => '通知内容',
@@ -247,14 +246,14 @@ sub Data {
         'If encryption key/certificate is missing' => '如果加密密钥/证书丢失了',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
-        'Attachment Management' => '附件管理',
         'Add Attachment' => '添加附件',
-        'Edit Attachment' => '编辑附件',
         'Filter for Attachments' => '附件过滤器',
         'Filter for attachments' => '附件过滤器',
         'Related Actions' => '',
         'Templates' => '模板',
         'Templates ↔ Attachments' => '模板 ↔ 附件',
+        'Attachment Management' => '附件管理',
+        'Edit Attachment' => '编辑附件',
         'Filename' => '文件名',
         'Download file' => '下载文件',
         'Delete this attachment' => '删除附件',
@@ -262,57 +261,29 @@ sub Data {
         'Attachment' => '附件',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-        'Auto Response Management' => '自动响应管理',
         'Add Auto Response' => '添加自动响应',
-        'Edit Auto Response' => '编辑自动响应',
         'Filter for Auto Responses' => '自动响应过滤器',
         'Filter for auto responses' => '自动响应过滤器',
         'Queues ↔ Auto Responses' => '队列 ↔ 自动回复',
+        'Auto Response Management' => '自动响应管理',
+        'Edit Auto Response' => '编辑自动响应',
         'Response' => '回复内容',
         'Auto response from' => '自动响应的发件人',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
-        'Cloud Service Management' => '云服务管理',
-        'Support Data Collector' => '支持数据收集工具',
-        'Support data collector' => '支持数据收集工具',
-        'Hint' => '提示',
-        'Currently support data is only shown in this system.' => '当前的支持数据只是在系统中显示。',
-        'It is highly recommended to send this data to OTRS Group in order to get better support.' =>
-            '极力推荐将支持数据发送给OTRS集团以便获得更好的支持。',
-        'Configuration' => '配置',
-        'Send support data' => '发送支持数据',
-        'This will allow the system to send additional support data information to OTRS Group.' =>
-            '允许系统发送额外的支持数据信息给OTRS集团。',
-        'Update' => '更新',
-        'System Registration' => '系统注册',
-        'To enable data sending, please register your system with OTRS Group or update your system registration information (make sure to activate the \'send support data\' option.)' =>
-            '为了启用数据发送功能，请将您的系统注册到OTRS集团或更新您的注册信息（确保激活了“发送支持数据”选项。）',
-        'Register this System' => '注册本系统',
-        'System Registration is disabled for your system. Please check your configuration.' =>
-            '本系统的系统注册功能已被禁用，请检查你的配置。',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServices.tt
-        'System registration is a service of OTRS Group, which provides a lot of advantages!' =>
-            '系统注册是OTRS集团的一项服务，它为您提供了很多好处!',
-        'Please note that the use of OTRS cloud services requires the system to be registered.' =>
-            '请注意：为了使用OTRS云服务，需要先注册系统。',
-        'Here you can configure available cloud services that communicate securely with %s.' =>
-            '你可以在这里配置可用的云服务，其与%s的通信是安全的。',
-        'Available Cloud Services' => '可用的云服务',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLog.tt
-        'Communication Log' => '通信日志',
         'Time Range' => '时间范围',
         'Show only communication logs created in specific time range.' =>
             '仅显示指定时间范围内创建的通信日志。',
         'Filter for Communications' => '交互筛选',
         'Filter for communications' => '通信过滤器',
+        'Hint' => '提示',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             '在此屏幕中，你可以看到有关传入和外发通信的概览。',
         'You can change the sort and order of the columns by clicking on the column header.' =>
             '你可以通过单击列标题来更改列的排序和顺序。',
         'If you click on the different entries, you will get redirected to a detailed screen about the message.' =>
             '如果你点击不同的条目，你将被重定向到关于此消息的详情屏幕。',
+        'Communication Log' => '通信日志',
         'Status for: %s' => '%s的状态',
         'Failing accounts' => '失败的帐户',
         'Some account problems' => '一些帐户问题',
@@ -335,12 +306,12 @@ sub Data {
         '%s s' => '%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
-        'Account Status' => '帐户状态',
         'Back to overview' => '返回总览界面',
         'Filter for Accounts' => '账号筛选',
         'Filter for accounts' => '帐户过滤器',
         'You can change the sort and order of those columns by clicking on the column header.' =>
             '你可以通过单击列标题来更改列的排序和顺序。',
+        'Account Status' => '帐户状态',
         'Account status for: %s' => '%s的帐户状态',
         'Status' => '状态',
         'Account' => '帐户',
@@ -363,24 +334,24 @@ sub Data {
         'No log entries found.' => '没有找到日志条目。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogZoom.tt
-        'Detail view for %s communication started at %s' => '通信%s的详情视图开始于%s',
         'Filter for Log Entries' => '日志条目过滤器',
         'Filter for log entries' => '日志条目过滤器',
         'Show only entries with specific priority and higher:' => '仅显示具有特定和更高优先级的条目：',
+        'Detail view for %s communication started at %s' => '通信%s的详情视图开始于%s',
         'Communication Log Overview (%s)' => '通信日志概览（%s）',
         'No communication objects found.' => '没有找到通信目标。',
         'Communication Log Details' => '通信日志详情',
         'Please select an entry from the list.' => '请从列表中选择一个条目。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
-        'Customer Management' => '客户管理',
-        'Add Customer' => '添加客户',
-        'Edit Customer' => '编辑客户',
         'Search' => '搜索',
         'Wildcards like \'*\' are allowed.' => '允许使用通配置符，例如\'*\'。',
+        'Add Customer' => '添加客户',
         'Select' => '选择',
         'Customer Users' => '客户用户',
         'Customers ↔ Groups' => '客户 ↔ 组',
+        'Customer Management' => '客户管理',
+        'Edit Customer' => '编辑客户',
         'List (only %s shown - more available)' => '列表 (目前显示%s-显示更多)',
         'total' => '总共',
         'Please enter a search term to look for customers.' => '请输入搜索条件以便检索客户资料.',
@@ -389,7 +360,6 @@ sub Data {
         'This customer backend is read only!' => '客户后端是只读的！',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
-        'Manage Customer-Group Relations' => '管理客户与组的关系',
         'Notice' => 'Notice（注意）',
         'This feature is disabled!' => '该功能已关闭！',
         'Just use this feature if you want to define group permissions for customers.' =>
@@ -405,6 +375,7 @@ sub Data {
             '如果没有选择，就不具备该组的任何权限 (客户不能创建或读取工单)。',
         'Customers' => '客户',
         'Groups' => '组',
+        'Manage Customer-Group Relations' => '管理客户与组的关系',
         'Search Results' => '搜索结果',
         'Change Group Relations for Customer' => '此客户属于哪些组',
         'Change Customer Relations for Group' => '哪些客户属于此组',
@@ -420,15 +391,15 @@ sub Data {
             '对于组/队列中的工单具有完整的\'读写\'权限。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
-        'Customer User Management' => '客户用户管理',
-        'Add Customer User' => '添加客户用户',
-        'Edit Customer User' => '编辑客户用户',
         'Back to search results' => '返回到搜索结果',
+        'Add Customer User' => '添加客户用户',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '工单的客户历史信息需要有客户用户，客户界面登录也需要用客户用户。',
         'Customer Users ↔ Customers' => '客户用户 ↔ 客户',
         'Customer Users ↔ Groups' => '客户用户 ↔ 组',
         'Customer Users ↔ Services' => '客户用户 ↔ 服务',
+        'Customer User Management' => '客户用户管理',
+        'Edit Customer User' => '编辑客户用户',
         'List (%s total)' => '列表（总共 %s）',
         'Username' => '用户名',
         'Email' => '邮件地址',
@@ -458,8 +429,8 @@ sub Data {
             '上表显示了通过权限上下文为客户用户授予的客户访问权限。该矩阵考虑了所有继承的访问权限（例如通过客户组）。注意：此表没有考虑对此表单做了更改但没有提交的内容。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
-        'Manage Customer User-Customer Relations' => '管理客户用户和客户的关联',
         'Select the customer user:customer relations.' => '选择客户用户关联的客户。',
+        'Manage Customer User-Customer Relations' => '管理客户用户和客户的关联',
         'Change Customer Relations for Customer User' => '修改客户用户和客户的关联',
         'Change Customer User Relations for Customer' => '修改客户关联的用户',
         'Toggle active state for all' => '全部激活/不激活状态',
@@ -467,7 +438,6 @@ sub Data {
         'Toggle active state for %s' => '%s 激活/不激活状态',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
-        'Manage Customer User-Group Relations' => '管理客户用户与组的关系',
         'Just use this feature if you want to define group permissions for customer users.' =>
             '如果要为客户用户定义组权限，请使用此功能。',
         'Edit Customer User Default Groups' => '编辑客户用户的默认组',
@@ -479,18 +449,18 @@ sub Data {
         'Select the customer user - group permissions.' => '选择客户用户和组权限。',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer user).' =>
             '如果没有选择，就不具备该组的任何权限 (客户用户不能使用工单)。',
+        'Manage Customer User-Group Relations' => '管理客户用户与组的关系',
         'Customer User Default Groups:' => '客户用户的默认组：',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Manage Customer User-Service Relations' => '管理客户-服务之间的联系',
         'Edit default services' => '修改默认服务',
         'Filter for Services' => '服务过滤器',
         'Filter for services' => '服务过滤器',
         'Services' => '服务',
         'Service Level Agreements' => '服务级别协议',
+        'Manage Customer User-Service Relations' => '管理客户-服务之间的联系',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
-        'Dynamic Fields Management' => '动态字段管理',
         'Add new field for object' => '为对象添加新的字段',
         'Filter for Dynamic Fields' => '动态字段过滤器',
         'Filter for dynamic fields' => '动态字段过滤器',
@@ -504,6 +474,7 @@ sub Data {
         'Export configurations' => '',
         'Process Management' => '流程管理',
         'Dynamic fields ↔ Screens' => '',
+        'Dynamic Fields Management' => '动态字段管理',
         'Dynamic Fields List' => '动态字段列表',
         'Dynamic fields per page' => '每页动态字段个数',
         'Label' => '标签',
@@ -512,8 +483,8 @@ sub Data {
         'Delete this field' => '删除这个字段',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
-        'Dynamic Fields' => '动态字段',
         'Go back to overview' => '返回概览',
+        'Dynamic Fields' => '动态字段',
         'General' => '一般',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             '这个字段是必需的，且它的值只能是字母和数字。',
@@ -540,11 +511,11 @@ sub Data {
         'This is the default value for this field.' => '这是该字段的默认值。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldConfigurationImportExport.tt
-        'Dynamic field configurations: %s' => '',
         'Select the dynamic fields you want to import and click on \'Import\'.' =>
             '',
         'Select the dynamic fields whose configuration you want to export and click on \'Export\' to generate a YAML file.' =>
             '',
+        'Dynamic field configurations: %s' => '',
         'Dynamic fields' => '动态字段',
         'For the following dynamic fields a configuration cannot be imported because of an invalid backend.' =>
             '',
@@ -603,7 +574,6 @@ sub Data {
         'Screens' => '',
         'Default columns' => '',
         'Add dynamic field' => '添加动态字段',
-        'Filter' => '过滤器',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
         'Filter available elements' => '',
@@ -676,7 +646,7 @@ sub Data {
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
             '',
         'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in OTRS (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
+        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -701,9 +671,9 @@ sub Data {
         'StoredValue' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminEmail.tt
-        'Admin Message' => '管理消息',
         'With this module, administrators can send messages to agents, group or role members.' =>
             '通过此模块，管理员可以给服务人员、组或角色发送消息。',
+        'Admin Message' => '管理消息',
         'Create Administrative Message' => '创建管理员通知',
         'Your message was sent to' => '你的信息已被发送到',
         'From' => '发件人',
@@ -716,14 +686,14 @@ sub Data {
         'Send' => '发送',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-        'Generic Agent Job Management' => '自动任务管理',
-        'Edit Job' => '编辑任务',
         'Add Job' => '添加任务',
-        'Run Job' => '运行任务',
         'Filter for Jobs' => '任务筛选',
         'Filter for jobs' => '任务筛选',
+        'Generic Agent Job Management' => '自动任务管理',
+        'Edit Job' => '编辑任务',
+        'Run Job' => '运行任务',
         'Last run' => '最后运行',
-        'Run Now!' => '现在运行!',
+        'Run' => '运行',
         'Delete this task' => '删除这个任务',
         'Run this task' => '执行这个任务',
         'Job Settings' => '任务设置',
@@ -842,13 +812,13 @@ sub Data {
         'Age' => '总时长',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceDebugger.tt
-        'GenericInterface Web Service Management' => '通用接口Web服务管理',
-        'Web Service Management' => '管理WEB服务',
-        'Debugger' => '调试器',
         'Go back to web service' => '返回到Web服务',
         'Clear' => '清空',
         'Do you really want to clear the debug log of this web service?' =>
             '您真的想要清空该Web服务的调试日志吗？',
+        'GenericInterface Web Service Management' => '通用接口Web服务管理',
+        'Web Service Management' => '管理WEB服务',
+        'Debugger' => '调试器',
         'Request List' => '请求列表',
         'Time' => '时间',
         'Communication ID' => '通信ID',
@@ -862,17 +832,17 @@ sub Data {
         'Refresh' => '刷新',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingDefault.tt
-        'Add ErrorHandling' => '添加错误处理',
-        'Edit ErrorHandling' => '编辑错误处理',
         'Do you really want to delete this error handling module?' => '你确定要删除这个错误处理模块吗?',
         'All configuration data will be lost.' => '所有配置数据将丢失。',
+        'Add ErrorHandling' => '添加错误处理',
+        'Edit ErrorHandling' => '编辑错误处理',
         'General options' => '一般选项',
         'The name can be used to distinguish different error handling configurations.' =>
             '该名称可用于区分不同的错误处理配置。',
         'Please provide a unique name for this web service.' => '请为这个Web服务提供一个唯一的名称。',
         'Error handling module backend' => '错误处理模块后端',
-        'This OTRS error handling backend module will be called internally to process the error handling mechanism.' =>
-            '这个OTRS错误处理后端模块将被内部调用以处理错误处理机制。',
+        'This Znuny error handling backend module will be called internally to process the error handling mechanism.' =>
+            '这个Znuny错误处理后端模块将被内部调用以处理错误处理机制。',
         'Processing options' => '处理选项',
         'Configure filters to control error handling module execution.' =>
             '配置过滤器来控制错误处理模块执行。',
@@ -956,22 +926,22 @@ sub Data {
             '注意：如果配置了最大重试次数并且较早到达，则可能无法达到最大重试时间。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+        'Do you really want to delete this invoker?' => '您真的想要删除这个调用程序吗？',
         'Add Invoker' => '添加调用程序',
         'Edit Invoker' => '编辑调用程序',
-        'Do you really want to delete this invoker?' => '您真的想要删除这个调用程序吗？',
         'Invoker Details' => '调用程序详情',
         'The name is typically used to call up an operation of a remote web service.' =>
             '该名称通常用于调用远程Web服务的操作。',
         'Invoker backend' => '调用程序后端',
-        'This OTRS invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
-            '这个OTRS调用程序后端模块被调用后，负责准备需要发送给远程系统的数据，并处理它的响应数据。',
+        'This Znuny invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
+            '这个Znuny调用程序后端模块被调用后，负责准备需要发送给远程系统的数据，并处理它的响应数据。',
         'Mapping for outgoing request data' => '映射出站请求数据',
         'Configure' => '配置',
-        'The data from the invoker of OTRS will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
-            '这个映射将对OTRS调用程序输出的数据进行处理，将它转换为远程系统所期待的数据。',
+        'The data from the invoker of Znuny will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
+            '这个映射将对Znuny调用程序输出的数据进行处理，将它转换为远程系统所期待的数据。',
         'Mapping for incoming response data' => '映射入站请求数据',
-        'The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTRS expects.' =>
-            '这个映射将对响应数据进行处理，将它转换为OTRS调用程序所期待的数据。',
+        'The response data will be processed by this mapping, to transform it to the kind of data the invoker of Znuny expects.' =>
+            '这个映射将对响应数据进行处理，将它转换为Znuny调用程序所期待的数据。',
         'Asynchronous' => '异步',
         'Condition' => '条件',
         'Edit this event' => '编辑这个事件',
@@ -979,8 +949,8 @@ sub Data {
         'Add Event' => '添加事件',
         'To add a new event select the event object and event name and click on the "+" button' =>
             '要添加新事件，请选择事件对象和事件名称，然后单击“+”按钮',
-        'Asynchronous event triggers are handled by the OTRS Scheduler Daemon in background (recommended).' =>
-            '异步的事件触发器将由后端的OTRS调度程序守护进程处理（推荐）。',
+        'Asynchronous event triggers are handled by the Znuny Scheduler Daemon in background (recommended).' =>
+            '异步的事件触发器将由后端的Znuny调度程序守护进程处理（推荐）。',
         'Synchronous event triggers would be processed directly during the web request.' =>
             '同步的事件触发器则是在web请求期间直接处理的。',
         'Add all attachments' => '',
@@ -1017,11 +987,11 @@ sub Data {
         'Remove key mapping' => '删除键映射',
         'Key mapping' => '键映射',
         'Map key' => '映射键',
-        'matching the' => '将匹配的',
+        'matching' => '',
         'to new key' => '映射到新键',
         'Value mapping' => '值映射',
         'Map value' => '映射值',
-        'to new value' => '映射到新值',
+        'new value' => '',
         'Remove value mapping' => '删除值映射',
         'New value map' => '新的值映射',
         'Add value mapping' => '添加值映射',
@@ -1084,18 +1054,18 @@ sub Data {
             '这里定义的正则表达式将在XSLT映射之后应用。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
+        'Do you really want to delete this operation?' => '您真的想要删除这个操作吗？',
         'Add Operation' => '添加操作',
         'Edit Operation' => '编辑操作',
-        'Do you really want to delete this operation?' => '您真的想要删除这个操作吗？',
         'Operation Details' => '操作详情',
         'The name is typically used to call up this web service operation from a remote system.' =>
             '这个名称通常用于从一个远程系统调用这个web服务操作。',
         'Operation backend' => '操作后端',
-        'This OTRS operation backend module will be called internally to process the request, generating data for the response.' =>
-            '这个OTRS操作后端模块将被调用，以便处理请求、生成响应数据。',
+        'This Znuny operation backend module will be called internally to process the request, generating data for the response.' =>
+            '这个Znuny操作后端模块将被调用，以便处理请求、生成响应数据。',
         'Mapping for incoming request data' => '映射传入请求数据',
-        'The request data will be processed by this mapping, to transform it to the kind of data OTRS expects.' =>
-            '这个映射将对请求数据进行处理，将它转换为OTRS所期待的数据。',
+        'The request data will be processed by this mapping, to transform it to the kind of data Znuny expects.' =>
+            '这个映射将对请求数据进行处理，将它转换为Znuny所期待的数据。',
         'Mapping for outgoing response data' => '映射出站响应数据',
         'The response data will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
             '这个映射将对响应数据进行处理，以便将它转换成远程系统所期待的数据。',
@@ -1118,18 +1088,19 @@ sub Data {
             '',
         'Maximum message length' => '消息的最大长度',
         'This field should be an integer number.' => '这个字段值应该是一个整数。',
-        'Here you can specify the maximum size (in bytes) of REST messages that OTRS will process.' =>
-            '在这里你可以指定OTRS能够处理的REST消息的最大长度(以字节为单位)。',
+        'Here you can specify the maximum size (in bytes) of REST messages that Znuny will process.' =>
+            '在这里你可以指定Znuny能够处理的REST消息的最大长度(以字节为单位)。',
         'Send Keep-Alive' => '发送Keep-Alive（保持连接）',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             '此配置定义传入的连接应该关闭还是保持连接。',
         'Additional response headers' => '附加响应头',
+        'Header' => '标头',
         'Add response header' => '添加响应头',
         'Endpoint' => '端点',
         'URI to indicate specific location for accessing a web service.' =>
             '用于指示访问Web服务的特定位置的URI。',
-        'e.g https://www.otrs.com:10745/api/v1.0 (without trailing backslash)' =>
-            '例如：https://www.otrs.com:10745/api/v1.0 (最后不带斜杠/)',
+        'e.g https://www.example.com:10745/api/v1.0 (without trailing backslash)' =>
+            '例如：https://www.example.com:10745/api/v1.0 (最后不带斜杠/)',
         'Disable SSL hostname certificate verification' => '',
         'Disables hostname certificate verification. This is not recommended and should only be used in test environments.' =>
             '',
@@ -1189,22 +1160,22 @@ sub Data {
         'Client Certificate' => '客户证书',
         'The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).' =>
             'SSL客户端证书文件的完整路径和名称（必须为PEM、DER或PKCS＃12格式）。',
-        'e.g. /opt/otrs/var/certificates/SOAP/certificate.pem' => '例如： /opt/otrs/var/certificates/SOAP/certificate.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/certificate.pem' => '例如： /opt/znuny/var/certificates/SOAP/certificate.pem',
         'Client Certificate Key' => '客户证书密钥',
         'The full path and name of the SSL client certificate key file (if not already included in certificate file).' =>
             'SSL客户端证书密钥文件的完整路径和名称（如果尚未包含在证书文件中）。',
-        'e.g. /opt/otrs/var/certificates/SOAP/key.pem' => '例如： /opt/otrs/var/certificates/SOAP/key.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/key.pem' => '例如： /opt/znuny/var/certificates/SOAP/key.pem',
         'Client Certificate Key Password' => '客户端证书密钥密码',
         'The password to open the SSL certificate if the key is encrypted.' =>
             '如果密钥被加密，则此密码用于打开SSL证书。',
         'Certification Authority (CA) Certificate' => '认证机构（CA）证书',
         'The full path and name of the certification authority certificate file that validates SSL certificate.' =>
             '用来验证SSL证书的认证机构证书文件的完整路径和名称。',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem' => '例如：/opt/otrs/var/certificates/SOAP/CA/ca.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem' => '例如：/opt/znuny/var/certificates/SOAP/CA/ca.pem',
         'Certification Authority (CA) Directory' => '认证机构(CA)目录',
         'The full path of the certification authority directory where the CA certificates are stored in the file system.' =>
             '认证机构目录的完整路径，文件系统中存储CA证书的地方。',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA' => '例如：/opt/otrs/var/certificates/SOAP/CA',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA' => '例如：/opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => '调用程序的控制器映射',
         'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
             '控制器接受调用程序发送的请求。以“:“作为标记的变量将被数据值和其它传递参数替换。',
@@ -1217,7 +1188,7 @@ sub Data {
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
-        'e.g. https://local.otrs.com:8000/Webservice/Example' => '例如： https://local.otrs.com:8000/Webservice/Example',
+        'e.g. https://example.com:8000/Webservice/Example' => '例如： https://example.com:8000/Webservice/Example',
         'Set SOAPAction' => '设置SOAP动作',
         'Set to "Yes" in order to send a filled SOAPAction header.' => '设置为“是”，发送填写了的SOAPAction 头。',
         'Set to "No" in order to send an empty SOAPAction header.' => '设置为“否”，发送空白SOAPAction 头。',
@@ -1237,8 +1208,8 @@ sub Data {
         'Text to be used to as SOAPAction.' => '要用作SOAPAction的文本。',
         'Namespace' => '命名空间',
         'URI to give SOAP methods a context, reducing ambiguities.' => '为SOAP方法指定URI(通用资源标识符), 以便消除二义性。',
-        'e.g urn:otrs-com:soap:functions or http://www.otrs.com/GenericInterface/actions' =>
-            '例如：urn:otrs-com:soap:functions或http://www.otrs.com/GenericInterface/actions',
+        'e.g urn:example-com:soap:functions or http://www.example.com/GenericInterface/actions' =>
+            '例如：urn:example-com:soap:functions或http://www.example.com/GenericInterface/actions',
         'Omit namespace prefix' => '',
         'Omits the namespace prefix (e. g. namesp1:) in root tag of SOAP message.' =>
             '',
@@ -1258,13 +1229,13 @@ sub Data {
         'Select how SOAP response function wrapper should be constructed.' =>
             '选择如何构建SOAP回复函数封装器。',
         'Response name free text' => '回复名称自由文本',
-        'Here you can specify the maximum size (in bytes) of SOAP messages that OTRS will process.' =>
-            '在这里你可以指定OTRS能够处理的SOAP消息的最大长度(以字节为单位)。',
+        'Here you can specify the maximum size (in bytes) of SOAP messages that Znuny will process.' =>
+            '在这里你可以指定Znuny能够处理的SOAP消息的最大长度(以字节为单位)。',
         'Fixed namespace prefix' => '',
         'Use a fixed namespace prefix (e. g. myns:) for the root tag of a SOAP message.' =>
             '',
         'Suffix for response tag' => '',
-        'Usually OTRS expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
+        'Usually Znuny expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
             '',
         'Encoding' => '编码',
         'The character encoding for the SOAP message contents.' => 'SOAP消息内容的字符编码。',
@@ -1282,7 +1253,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
         'Add Web Service' => '添加Web服务',
-        'Edit Web Service' => '编辑Web服务',
         'Clone Web Service' => '克隆Web服务',
         'The name must be unique.' => '名称必须是唯一的。',
         'Clone' => '克隆',
@@ -1303,14 +1273,15 @@ sub Data {
             '保存配置文件后，页面将再次转到编辑页面。',
         'If you want to return to overview please click the "Go to overview" button.' =>
             '如果你想返回到概览，请点击"返回概览"按钮。',
+        'Edit Web Service' => '编辑Web服务',
         'Remote system' => '远程系统',
         'Provider transport' => '服务提供方传输',
         'Requester transport' => '服务请求方传输',
         'Debug threshold' => '调试阀值',
-        'In provider mode, OTRS offers web services which are used by remote systems.' =>
-            '在提供方模式中，OTRS为远程系统提供Web服务。',
-        'In requester mode, OTRS uses web services of remote systems.' =>
-            '在请求方模式中，OTRS使用远程系统的Web服务。',
+        'In provider mode, Znuny offers web services which are used by remote systems.' =>
+            '在提供方模式中，Znuny为远程系统提供Web服务。',
+        'In requester mode, Znuny uses web services of remote systems.' =>
+            '在请求方模式中，Znuny使用远程系统的Web服务。',
         'Network transport' => '网络传输',
         'Error Handling Modules' => '错误处理模块',
         'Error handling modules are used to react in case of errors during the communication. Those modules are executed in a specific order, which can be changed by drag and drop.' =>
@@ -1328,10 +1299,10 @@ sub Data {
             '至少有一个 %s 的控制器未被激活或根本就不存在，请检查控制器注册或删除这个 %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebserviceHistory.tt
-        'History' => '历史',
         'Go back to Web Service' => '返回到Web服务',
         'Here you can view older versions of the current web service\'s configuration, export or even restore them.' =>
             '在这里，你可以查看当前Web服务配置的旧版本，导出或恢复它们。',
+        'History' => '历史',
         'Configuration History List' => '配置历史列表',
         'Version' => '版本',
         'Create time' => '创建时间',
@@ -1343,9 +1314,7 @@ sub Data {
         'Your current web service configuration will be overwritten.' => '当前的Web服务配置将被覆盖。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
-        'Group Management' => '组管理',
         'Add Group' => '添加组',
-        'Edit Group' => '编辑组',
         'The admin group is to get in the admin area and the stats group to get stats area.' =>
             'admin组允许使用系统管理模块，stats组允许使用统计模块。',
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
@@ -1353,21 +1322,20 @@ sub Data {
         'It\'s useful for ASP solutions. ' => '它对ASP解决方案非常有用。 ',
         'Agents ↔ Groups' => '服务人员 ↔ 组',
         'Roles ↔ Groups' => '角色 ↔ 组',
+        'Group Management' => '组管理',
+        'Edit Group' => '编辑组',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
-        'System Log' => '系统日志',
         'Clear log entries' => '',
         'Here you will find log information about your system.' => '查看系统日志信息。',
         'Hide this message' => '隐藏此消息',
+        'System Log' => '系统日志',
         'Recent Log Entries' => '最近的日志条目',
         'Facility' => '设施',
         'Message' => '消息',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
-        'Mail Account Management' => '邮件帐户管理',
         'Add Mail Account' => '添加邮件帐号',
-        'Edit Mail Account for host' => '编辑邮件帐户，主机',
-        'and user account' => '和用户帐户',
         'Filter for Mail Accounts' => '邮件帐户过滤器',
         'Filter for mail accounts' => '邮件帐户过滤器',
         'All incoming emails with one account will be dispatched in the selected queue.' =>
@@ -1377,10 +1345,13 @@ sub Data {
         'Outgoing email can be configured via the Sendmail* settings in %s.' =>
             '外发电子邮件可以通过%s中的Sendmail开头的设置进行配置。',
         'System Configuration' => '系统配置',
+        'Mail Account Management' => '邮件帐户管理',
+        'Edit Mail Account for host' => '编辑邮件帐户，主机',
+        'and user account' => '和用户帐户',
         'Host' => '主机',
         'Authentication type' => '',
-        'Delete account' => '删除帐号',
         'Fetch mail' => '查收邮件',
+        'Delete account' => '删除帐号',
         'Do you really want to delete this mail account?' => '您确定要删除这个邮件帐户吗？',
         'Example: mail.example.com' => '样例：mail.example.com',
         'IMAP Folder' => 'IMAP文件夹',
@@ -1392,20 +1363,20 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
         'Administration Overview' => '系统管理概览',
-        'Filter for Items' => '条目过滤器',
         'Favorites' => '收藏夹',
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '你可以移动鼠标到条目的右上角并点击星形图标来将条目添加到收藏夹。',
         'Links' => '链接',
         'View the admin manual on Github' => '查看Github上的管理手册',
+        'Filter for Items' => '条目过滤器',
         'No Matches' => '无匹配',
         'Sorry, your search didn\'t match any items.' => '对不起，你的搜索不匹配任何条目。',
         'Set as favorite' => '添加到收藏夹',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-        'Ticket Notification Management' => '工单通知管理',
         'Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module.' =>
             '在这里你可以上传一个配置文件以便导入工单通知，必须是与工单通知模块导出的文件一样的.yml格式。',
+        'Ticket Notification Management' => '工单通知管理',
         'Here you can choose which events will trigger this notification. An additional ticket filter can be applied below to only send for ticket with certain criteria.' =>
             '在这里你可以选择哪个事件将会触发这个通知，下面的工单过滤器可以选择符合特定条件的工单。',
         'Ticket Filter' => '工单过滤',
@@ -1427,8 +1398,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '使用逗号或分号分隔电子邮件地址。',
-        'You can use OTRS-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
-            '你可以使用诸如<OTRS_TICKET_DynamicField_...>之类的OTRS标签来插入当前工单中的值。',
+        'You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
+            '你可以使用诸如<OTRS_TICKET_DynamicField_...>之类的Znuny标签来插入当前工单中的值。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
         'Web service name' => '',
@@ -1490,95 +1461,21 @@ sub Data {
         'Request new token' => '',
         'Delete this token and its configuration.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
-        'Manage %s' => '管理 %s',
-        'Downgrade to ((OTRS)) Community Edition' => '降级为 ((OTRS)) 社区版',
-        'Read documentation' => '阅读文档',
-        '%s makes contact regularly with cloud.otrs.com to check on available updates and the validity of the underlying contract.' =>
-            '%s 定期连接到cloud.otrs.com检查可用更新，并验证合同的有效性。',
-        'Unauthorized Usage Detected' => '检测到未经授权的使用',
-        'This system uses the %s without a proper license! Please make contact with %s to renew or activate your contract!' =>
-            '该系统所使用的 %s 许可证无效！ 请与%s联系续订或激活您的合同！',
-        '%s not Correctly Installed' => '%s 没有正确安装',
-        'Your %s is not correctly installed. Please reinstall it with the button below.' =>
-            '%s 没有正确安装，请点击下面的按钮重新安装。',
-        'Reinstall %s' => '重新安装 %s',
-        'Your %s is not correctly installed, and there is also an update available.' =>
-            '%s 没有正确安装，已经有了可用的更新版本。',
-        'You can either reinstall your current version or perform an update with the buttons below (update recommended).' =>
-            '你可以重新安装当前版本，或者安装新版本（推荐更新到新版本）。',
-        'Update %s' => '更新 %s',
-        '%s Not Yet Available' => '%s 还不可用',
-        '%s will be available soon.' => '%s 很快就可用了。',
-        '%s Update Available' => '%s 更新可用',
-        'An update for your %s is available! Please update at your earliest!' =>
-            '%s 有更新版本可用了！请尽早更新！',
-        '%s Correctly Deployed' => '%s 已经正确地部署',
-        'Congratulations, your %s is correctly installed and up to date!' =>
-            '恭喜，你的%s 已经正确地安装到最新版本！',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
-        'Upgrade to %s' => '升级到 %s',
-        'Go to the OTRS customer portal' => '访问OTRS客户门户',
-        '%s will be available soon. Please check again in a few days.' =>
-            '%s 很快就可用了，请过几天再检查一次。',
-        'Please have a look at %s for more information.' => '有关更多信息,请查看 %s。',
-        'Your ((OTRS)) Community Edition is the base for all future actions. Please register first before you continue with the upgrade process of %s!' =>
-            ' ((OTRS)) 社区版是所有特色功能的基础，继续升级到%s 前请先注册！',
-        'Before you can benefit from %s, please contact %s to get your %s contract.' =>
-            '在从%s 受益之前，请先联系%s 以获得%s 合同。',
-        'Connection to cloud.otrs.com via HTTPS couldn\'t be established. Please make sure that your OTRS can connect to cloud.otrs.com via port 443.' =>
-            '不能通过HTTPS连接到cloud.otrs.com，请确保你的OTRS系统能够通过端口443连接到cloud.otrs.com。',
-        'Package installation requires patch level update of OTRS.' => '软件包安装需要更新OTRS的补丁级别。',
-        'Please visit our customer portal and file a request.' => '请访问我们的客户门户并提出请求。',
-        'Everything else will be done as part of your contract.' => '一切都将作为您的合同的一部分完成。',
-        'Your installed OTRS version is %s.' => '您安装的OTRS版本是%s。',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            '',
-        'To install this package, the Maximum OTRS Version is %s.' => '要安装此软件包，OTRS最高版本为%s。',
-        'To install this package, the required Framework version is %s.' =>
-            '要安装此软件包，所需的框架版本为%s。',
-        'Why should I keep OTRS up to date?' => '',
-        'You will receive updates about relevant security issues.' => '您将收到有关安全问题的更新。',
-        'You will receive updates for all other relevant OTRS issues' => '您将收到所有其他OTRS相关问题的更新',
-        'With your existing contract you can only use a small part of the %s.' =>
-            '当前的合同表明你只能使用%s 的小部分功能。',
-        'If you would like to take full advantage of the %s get your contract upgraded now! Contact %s.' =>
-            '如欲发挥%s 的全部优势，请升级合同！联系%s。',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
-        'Cancel downgrade and go back' => '取消降级并返回',
-        'Go to Package Manager' => '',
-        'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
-            '当前不能降级，因为以下软件包依赖%s：',
-        'Vendor' => '提供者',
-        'Please uninstall the packages first using the package manager and try again.' =>
-            '请在软件包管理模块中先删除这些软件包，然后再试一次。',
-        'You are about to downgrade to ((OTRS)) Community Edition and will lose the following features and all data related to these:' =>
-            '你打算降级到 ((OTRS)) 社区版，以下功能特性和相关数据将全部丢失：',
-        'Chat' => '聊天',
-        'Report Generator' => '报表生成器',
-        'Timeline view in ticket zoom' => '以时间轴视图展开工单',
-        'DynamicField ContactWithData' => '动态字段ContactWithData',
-        'DynamicField Database' => '动态字段Database',
-        'SLA Selection Dialog' => 'SLA选择对话框',
-        'Ticket Attachment View' => '工单附件视图',
-        'The %s skin' => '%s 皮肤',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPGP.tt
-        'PGP Management' => 'PGP管理',
-        'Add PGP Key' => '添加PGP密钥',
         'PGP support is disabled' => 'PGP支持已禁用',
-        'To be able to use PGP in OTRS, you have to enable it first.' => '要在OTRS中使用PGP，你必须首先启用它。',
+        'To be able to use PGP in Znuny, you have to enable it first.' =>
+            '要在Znuny中使用PGP，你必须首先启用它。',
         'Enable PGP support' => '启用PGP支持',
         'Faulty PGP configuration' => '错误的PGP配置',
         'PGP support is enabled, but the relevant configuration contains errors. Please check the configuration using the button below.' =>
             '已启用PGP支持，但是相关的配置包含有错误。请使用下面的按钮检查配置。',
         'Configure it here!' => '在这里配置PGP！',
         'Check PGP configuration' => '检查PGP配置',
+        'Add PGP Key' => '添加PGP密钥',
         'In this way you can directly edit the keyring configured in SysConfig.' =>
             '通过此模块可以直接编辑在SysConfig中配置的密钥环。',
         'Introduction to PGP' => 'PGP介绍',
+        'PGP Management' => 'PGP管理',
         'Identifier' => '标识符',
         'Bit' => '位',
         'Fingerprint' => '指纹',
@@ -1591,6 +1488,7 @@ sub Data {
         'Uninstall Package' => '卸载软件包',
         'Uninstall package' => '卸载软件包',
         'Do you really want to uninstall this package?' => '是否确认卸载该软件包?',
+        'or' => 'or（或）',
         'Reinstall package' => '重新安装软件包',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '您真的想要重新安装该软包吗? 所有该模块的手工设置将丢失.',
@@ -1598,8 +1496,8 @@ sub Data {
         'Go to znuny.org' => '',
         'package information' => '软件包信息',
         'Package installation requires a patch level update of Znuny.' =>
-            '安装软件包需要将OTRS补丁级别更新。',
-        'Package update requires a patch level update of Znuny.' => '升级软件包需要将OTRS补丁级别更新。',
+            '安装软件包需要将Znuny补丁级别更新。',
+        'Package update requires a patch level update of Znuny.' => '升级软件包需要将Znuny补丁级别更新。',
         'Please note that your installed Znuny version is %s.' => '请注意，您安装的Znuny版本是%s。',
         'To install this package, you need to update Znuny to version %s or newer.' =>
             '安装这个软件包，你需要升级Znuny版本到%s或者更高。',
@@ -1607,6 +1505,7 @@ sub Data {
             '这个软件包只能安装在Znuny版本%s或者更低。',
         'This package can only be installed on Znuny version %s.' => '',
         'Why should I keep Znuny up to date?' => '为什么要保持Znuny是最新的？',
+        'You will receive updates about relevant security issues.' => '您将收到有关安全问题的更新。',
         'You will receive updates for all other relevant Znuny issues.' =>
             '你将收到所有其他有关Znuny问题的更新。',
         'How can I do a patch level update if I don’t have a contract?' =>
@@ -1615,6 +1514,7 @@ sub Data {
             '请在升级说明%s中查找所有相关的信息。',
         'In case you would have further questions we would be glad to answer them.' =>
             '如果您还有其它问题，我们非常愿意答复您。',
+        'Please visit our customer portal and file a request.' => '请访问我们的客户门户并提出请求。',
         'Install Package' => '安装软件包',
         'Update Package' => '更新软件包',
         'Package' => '',
@@ -1627,9 +1527,11 @@ sub Data {
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '请确认你的数据库能够接收大于%s MB的数据包（目前能够接收的最大数据包为%s MB）。为了避免程序报错，请调整数据库max_allowed_packet参数。',
         'Install' => '安装',
+        'Update' => '更新',
         'Update repository information' => '更新软件仓库信息',
         'Update all installed packages' => '更新所有已安装的软件包',
         'Online Repository' => '在线软件仓库',
+        'Vendor' => '提供者',
         'Action' => '操作',
         'Module documentation' => '模块文档',
         'Local Repository' => '本地软件仓库',
@@ -1637,9 +1539,9 @@ sub Data {
         'Package not correctly deployed! Please reinstall the package.' =>
             '软件包未正确安装！请重新安装软件包。',
         'Reinstall' => '重新安装',
-        'Package Information' => '软件包信息',
         'Download package' => '下载该软件包',
         'Rebuild package' => '重新编译',
+        'Package Information' => '软件包信息',
         'Metadata' => '元数据',
         'Change Log' => '更新记录',
         'Date' => '日期',
@@ -1655,9 +1557,6 @@ sub Data {
         'File differences for file %s' => '文件跟%s 有差异',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPerformanceLog.tt
-        'Performance Log' => '性能日志',
-        'Range' => '范围',
-        'last' => '最后',
         'This feature is enabled!' => '该功能已启用！',
         'Just use this feature if you want to log each request.' => '如果想详细记录每个请求, 您可以使用该功能.',
         'Activating this feature might affect your system performance!' =>
@@ -1665,6 +1564,9 @@ sub Data {
         'Disable it here!' => '关闭该功能！',
         'Logfile too large!' => '日志文件过大！',
         'The logfile is too large, you need to reset it' => '日志文件太大，请重置日志文件',
+        'Performance Log' => '性能日志',
+        'Range' => '范围',
+        'last' => '最后',
         'Interface' => '界面',
         'Requests' => '请求',
         'Min Response' => '最快响应',
@@ -1677,9 +1579,7 @@ sub Data {
         'Average' => '平均',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
-        'PostMaster Filter Management' => '管理邮箱管理员过滤器',
         'Add PostMaster Filter' => '添加邮箱管理员过滤器',
-        'Edit PostMaster Filter' => '编辑邮箱管理员过滤器',
         'Filter for PostMaster Filters' => '邮箱管理员过滤规则筛选',
         'Filter for PostMaster filters' => '邮箱管理员过滤规则筛选',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
@@ -1690,6 +1590,8 @@ sub Data {
             '如果你使用了正则表达式，你可以取出()中匹配的值(需采用[***]这种格式)，在设置邮件标头的值时使用。',
         'You can also use named captures %s and use the names in the \'Set\' action %s (e.g. Regexp: %s, Set action: %s). A matched EMAILADDRESS has the name \'%s\'.' =>
             '您还可以使用命名捕获%s并在\'Set\'操作中使用名称%s（例如Regexp：%s，Set 操作：%s）。 匹配到的EMAILADDRESS命名为\'%s\'。',
+        'PostMaster Filter Management' => '管理邮箱管理员过滤器',
+        'Edit PostMaster Filter' => '编辑邮箱管理员过滤器',
         'Delete this filter' => '删除此过滤器',
         'Do you really want to delete this postmaster filter?' => '您确定要删除这个邮箱管理员过滤器吗？',
         'A postmaster filter with this name already exists!' => '该邮箱管理员过滤器名称已被使用！',
@@ -1704,15 +1606,15 @@ sub Data {
         'Set email header' => '设置邮件标头',
         'with value' => '使用值',
         'The field needs to be a literal word.' => '该字段需要输入文字。',
-        'Header' => '标头',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
-        'Priority Management' => '优先级管理',
         'Add Priority' => '添加优先级',
-        'Edit Priority' => '编辑优先级',
         'Filter for Priorities' => '优先级过滤器',
         'Filter for priorities' => '优先级过滤器',
         'Configure Priority Visibility and Defaults' => '',
+        'Priority Management' => '优先级管理',
+        'Edit Priority' => '编辑优先级',
+        'Color' => '颜色',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '此优先级已存在于系统配置的一个设置中，需要更新设置以确认指向新的优先级！',
         'This priority is used in the following config settings:' => '这个优先级已用于以下的系统配置设置：',
@@ -1736,7 +1638,7 @@ sub Data {
             '对流程所做的一切修改仅保存在数据库中。只有执行部署流程操作后，才会生成或重新生成流程配置文件。',
         'Access Control Lists (ACL)' => '访问控制列表(ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => '流程',
         'Process name' => '流程名称',
         'Print' => '打印',
@@ -1744,8 +1646,6 @@ sub Data {
         'Copy Process' => '复制流程',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
-        'Cancel & close' => '取消并关闭',
-        'Go Back' => '返回',
         'Please note, that changing this activity will affect the following processes' =>
             '请注意，修改这个活动将影响以下流程',
         'Activity' => '活动',
@@ -1758,12 +1658,13 @@ sub Data {
             '用鼠标将左侧列表中的元素拖放到右侧，你可以为这个活动分配活动对话框。',
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             '利用鼠标拖放动作还可以对元素进行排序。',
+        'Available Activity Dialogs' => '可用的活动对话框',
         'Filter available Activity Dialogs' => '可用的活动对话框过滤器',
         'Also show global %s' => '',
-        'Available Activity Dialogs' => '可用的活动对话框',
         'Name: %s, EntityID: %s' => '名称：%s， EntityID： %s',
         'Create New Activity Dialog' => '创建新的活动对话框',
         'Assigned Activity Dialogs' => '分配的活动对话框',
+        'Filter Assigned Activity Dialogs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
         'Please note that changing this activity dialog will affect the following activities' =>
@@ -1785,9 +1686,10 @@ sub Data {
         'Submit Button Text' => '提交按钮的文本',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
             '用鼠标将左侧列表中的元素拖放到右侧，你可以为这个活动对话框分配字段。',
-        'Filter available fields' => '可用字段的过滤器',
         'Available Fields' => '可用的字段',
+        'Filter available fields' => '可用字段的过滤器',
         'Assigned Fields' => '分配的字段',
+        ' Filter assigned fields' => '',
         'Communication Channel' => '通信渠道',
         'Is visible for customer' => '对客户可见',
         'Text Template' => '内容模板',
@@ -1800,10 +1702,11 @@ sub Data {
         'Transition Actions' => '转换操作',
         'You can assign Transition Actions to this Transition by dragging the elements with the mouse from the left list to the right list.' =>
             '用鼠标将左侧列表中的元素拖放到右侧，你可以为这个转换分配转换动作。',
-        'Filter available Transition Actions' => '可用转换动作的过滤器',
         'Available Transition Actions' => '可用的转换操作',
+        'Filter available Transition Actions' => '可用转换动作的过滤器',
         'Create New Transition Action' => '创建新的转换动作',
         'Assigned Transition Actions' => '分配的转换动作',
+        'Filter assigned Transition Actions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessAccordion.tt
         'Activities' => '活动',
@@ -1816,7 +1719,6 @@ sub Data {
         'Filter Transition Actions...' => '转换动作过滤器...',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
-        'Edit Process' => '编辑流程',
         'Print process information' => '打印流程信息',
         'Delete Process' => '删除流程',
         'Delete Inactive Process' => '删除非活动的流程',
@@ -1831,6 +1733,7 @@ sub Data {
             '要创建两个活动的连接，你可以先拖放转换元素到开始活动上，然后移动连接箭头的尾端到结束活动上。',
         'Actions can be assigned to a Transition by dropping the Action Element onto the label of a Transition.' =>
             '为了给转换分配转换动作，需要将左侧转换动作拖放到转换标签上。',
+        'Edit Process' => '编辑流程',
         'Edit Process Information' => '编辑流程信息',
         'Process Name' => '流程名称',
         'The selected state does not exist.' => '选择的状态不存在。',
@@ -1856,7 +1759,6 @@ sub Data {
             '在这里，你可以创建新的流程。为了使新流程生效，请务必将流程的状态设置为“激活”，并在完成配置工作后执行部署流程操作。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessPrint.tt
-        'cancel & close' => '取消并关闭',
         'Start Activity' => '开始活动',
         'Contains %s dialog(s)' => '包含%s 个对话框',
         'Assigned dialogs' => '分配对话框',
@@ -1866,6 +1768,7 @@ sub Data {
         'Condition linking' => '条件链接',
         'Transitions are not being used in this process.' => '该流程未使用转换。',
         'Module name' => '模块名称',
+        'Configuration' => '配置',
         'Transition actions are not being used in this process.' => '该流程未使用转换动作。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementTransition.tt
@@ -1888,7 +1791,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
         'Add Queue' => '添加队列',
-        'Edit Queue' => '编辑队列',
         'Filter for Queues' => '队列过滤器',
         'Filter for queues' => '队列过滤器',
         'Email Addresses' => '邮件地址',
@@ -1898,10 +1800,14 @@ sub Data {
         'Templates ↔ Queues' => '模板↔队列',
         'Configure Working Hours' => '',
         'Configure Queue Related Settings' => '',
+        'Edit Queue' => '编辑队列',
         'A queue with this name already exists!' => '队列名已存在！',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '这个队列已存在于系统配置的一个设置中，需要更新设置以确认指向新的队列！',
         'Sub-queue of' => '父队列',
+        'Follow up Option' => '跟进选项',
+        'Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.' =>
+            '如果在工单关闭后跟进，指定是重新处理工单、拒绝跟进还是创建新的工单。',
         'Unlock timeout' => '解锁超时',
         '0 = no unlock' => '0 = 不解锁',
         'hours' => '小时',
@@ -1916,9 +1822,6 @@ sub Data {
             '如果有新的信件，例如客户通过门户或邮件发送跟进信件，则升级更新时间重置。 如果在此所定义的时间之前，服务人员没有对新工单添加任何客户联络(无论是外部邮件或电话)，该工单将升级.',
         'If the ticket is not set to closed before the time defined here expires, the ticket is escalated.' =>
             '如果在此所定义的时间之前，工单未被关闭，该工单将升级。',
-        'Follow up Option' => '跟进选项',
-        'Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.' =>
-            '如果在工单关闭后跟进，指定是重新处理工单、拒绝跟进还是创建新的工单。',
         'Ticket lock after a follow up' => '跟进后自动锁定工单',
         'If a ticket is closed and the customer sends a follow up the ticket will be locked to the old owner.' =>
             '如果客户在工单关闭后发送跟进信件，则将该工单锁定给以前的所有者。',
@@ -1934,34 +1837,34 @@ sub Data {
         'This queue is used in the following config settings:' => '这个队列已用于以下的系统配置设置：',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueAutoResponse.tt
-        'Manage Queue-Auto Response Relations' => '管理队列的自动响应',
-        'Change Auto Response Relations for Queue' => '修改队列的自动响应关系',
         'This filter allow you to show queues without auto responses' => '这个过滤器允许显示没有自动响应的队列',
         'Queues without Auto Responses' => '没有自动响应的队列',
         'This filter allow you to show all queues' => '这个过滤器允许显示所有队列',
         'Show All Queues' => '显示所有队列',
         'Auto Responses' => '自动响应',
+        'Manage Queue-Auto Response Relations' => '管理队列的自动响应',
+        'Change Auto Response Relations for Queue' => '修改队列的自动响应关系',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
-        'Manage Template-Queue Relations' => '管理模板与队列的对应关系',
         'Filter for Templates' => '模板过滤器',
         'Filter for templates' => '模板筛选',
+        'Manage Template-Queue Relations' => '管理模板与队列的对应关系',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
-        'Role Management' => '角色管理',
         'Add Role' => '添加角色',
-        'Edit Role' => '编辑角色',
         'Filter for Roles' => '角色过滤器',
         'Filter for roles' => '角色过滤器',
         'Create a role and put groups in it. Then add the role to the users.' =>
             '创建一个角色并将组加入角色,然后将角色赋给用户.',
         'Agents ↔ Roles' => '服务人员 ↔ 角色',
+        'Role Management' => '角色管理',
+        'Edit Role' => '编辑角色',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             '还没有定义角色，请使用“添加”按钮来创建一个新的角色。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleGroup.tt
-        'Manage Role-Group Relations' => '管理角色和组的关系',
         'Roles' => '角色',
+        'Manage Role-Group Relations' => '管理角色和组的关系',
         'Select the role:group permissions.' => '选择角色的组权限。',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the role).' =>
             '如果没有选择，角色就不会具有任何权限 (任何工单都看不见)。',
@@ -1980,34 +1883,33 @@ sub Data {
             '在这个组/队列具有更改工单优先级的权限。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
-        'Manage Agent-Role Relations' => '管理服务人员与角色的关系',
         'Add Agent' => '添加服务人员',
         'Filter for Agents' => '服务人员过滤器',
         'Filter for agents' => '过滤服务人员',
         'Agents' => '服务人员',
+        'Manage Agent-Role Relations' => '管理服务人员与角色的关系',
         'Manage Role-Agent Relations' => '管理角色与服务人员的关系',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
-        'SLA Management' => 'SLA管理',
-        'Edit SLA' => '编辑SLA',
         'Add SLA' => '添加SLA',
         'Filter for SLAs' => 'SLA过滤器',
         'Configure SLA Visibility and Defaults' => '',
+        'SLA Management' => 'SLA管理',
+        'Edit SLA' => '编辑SLA',
         'Please write only numbers!' => '仅可填写数字！',
         'Minimum Time Between Incidents' => '故障间最短时间',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
-        'S/MIME Management' => 'S/MIME管理',
-        'Add Certificate' => '添加证书',
-        'Add Private Key' => '添加私钥',
         'SMIME support is disabled' => 'SMIME支持已禁用',
-        'To be able to use SMIME in OTRS, you have to enable it first.' =>
-            '要在OTRS中使用SMIME，你必须首先启用它。',
+        'To be able to use SMIME in Znuny, you have to enable it first.' =>
+            '要在Znuny中使用SMIME，你必须首先启用它。',
         'Enable SMIME support' => '启用SMIME支持',
         'Faulty SMIME configuration' => '错误的SMIME配置',
         'SMIME support is enabled, but the relevant configuration contains errors. Please check the configuration using the button below.' =>
             '已启用SMIME支持，但是相关的配置包含有错误。请使用下面的按钮检查配置。',
         'Check SMIME configuration' => '检查SMIME配置',
+        'Add Certificate' => '添加证书',
+        'Add Private Key' => '添加私钥',
         'Filter for Certificates' => '证书过滤器',
         'Filter for certificates' => '证书过滤器',
         'To show certificate details click on a certificate icon.' => '点击证书图标可显示证书详细信息。',
@@ -2018,6 +1920,7 @@ sub Data {
         'See also' => '参见',
         'In this way you can directly edit the certification and private keys in file system.' =>
             '这样你能够直接编辑文件系统中的证书和私匙。',
+        'S/MIME Management' => 'S/MIME管理',
         'Hash' => '哈希',
         'Create' => '创建',
         'Handle related certificates' => '处理关联的证书',
@@ -2033,15 +1936,16 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
         'S/MIME Certificate' => 'S/MIME证书',
-        'Close this dialog' => '关闭该对话框',
+        'Close' => '关闭',
         'Certificate Details' => '证书详情',
+        'Close this dialog' => '关闭该对话框',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
-        'Salutation Management' => '问候语管理',
         'Add Salutation' => '添加问候语',
-        'Edit Salutation' => '编辑问候语',
         'Filter for Salutations' => '问候语过滤器',
         'Filter for salutations' => '问候语过滤器',
+        'Salutation Management' => '问候语管理',
+        'Edit Salutation' => '编辑问候语',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '需要启用安全模式！',
@@ -2051,13 +1955,13 @@ sub Data {
             '如果安全模式没有激活，可在系统运行时通过系统配置激活安全模式。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
-        'SQL Box' => 'SQL查询窗口',
         'Filter for Results' => '过滤结果',
         'Filter for results' => '过滤结果',
         'Here you can enter SQL to send it directly to the application database. It is not possible to change the content of the tables, only select queries are allowed.' =>
             '你可以在这里输入SQL语句直接发送给数据库。不能修改表的内容，只允许select查询语句。',
         'Here you can enter SQL to send it directly to the application database.' =>
             '你可以在这里输入SQL语句直接发送给数据库。',
+        'SQL Box' => 'SQL查询窗口',
         'Options' => '选项',
         'Only select queries are allowed.' => '只允许select查询语句。',
         'The syntax of your SQL query has a mistake. Please check it.' =>
@@ -2070,18 +1974,16 @@ sub Data {
         'Query is executed.' => '查询已执行。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
-        'Service Management' => '服务管理',
         'Add Service' => '添加服务',
-        'Edit Service' => '编辑服务',
         'Configure Service Visibility and Defaults' => '',
+        'Service Management' => '服务管理',
+        'Edit Service' => '编辑服务',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '服务名(含子服务)最大长度为200字符。',
         'Sub-service of' => '上一级服务',
         'Criticality' => '紧急度',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
-        'Session Management' => '会话管理',
-        'Detail Session View for %s (%s)' => '%s(%s)会话详情视图',
         'All sessions' => '所有会话数',
         'Agent sessions' => '服务人员会话数',
         'Customer sessions' => '客户会话数',
@@ -2091,27 +1993,29 @@ sub Data {
         'Kill this session' => '终止该会话',
         'Filter for Sessions' => '会话过滤器',
         'Filter for sessions' => '会话过滤器',
+        'Session Management' => '会话管理',
+        'Detail Session View for %s (%s)' => '%s(%s)会话详情视图',
         'Session' => '会话',
         'Kill' => '终止',
         'Detail View for SessionID: %s - %s' => '会话ID：%s - %s的详情视图',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
-        'Signature Management' => '签名管理',
         'Add Signature' => '添加签名',
-        'Edit Signature' => '编辑签名',
         'Filter for Signatures' => '签名过滤器',
         'Filter for signatures' => '签名过滤器',
+        'Signature Management' => '签名管理',
+        'Edit Signature' => '编辑签名',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
-        'State Management' => '工单状态管理',
         'Add State' => '添加工单状态',
-        'Edit State' => '编辑工单状态',
         'Filter for States' => '状态过滤器',
         'Filter for states' => '状态过滤器',
         'Attention' => '注意',
         'Please also update the states in SysConfig where needed.' => '请同时在系统配置中需要的地方更新这些工单状态。',
         'Configure State Visibility and Defaults' => '',
         'Configure State Type Visibility and Defaults' => '',
+        'State Management' => '工单状态管理',
+        'Edit State' => '编辑工单状态',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '这个状态已存在于系统配置的一个设置中，需要更新设置以确认指向新的状态！',
         'State type' => '工单状态类型',
@@ -2120,10 +2024,6 @@ sub Data {
         'This state is used in the following config settings:' => '这个状态已用于以下的系统配置设置：',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-        'Cloud services are currently disabled.' => '云服务当前被禁用了。',
-        'Sending support data to OTRS Group is not possible!' => '不能将支持数据发送给OTRS集团！',
-        'Enable Cloud Services' => '启用云服务',
-        'Enable cloud services' => '启用云服务',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             '点击以下按钮生成支持数据包（包括：系统注册信息、支持数据、已安装软件包列表和本地所有修改过的源代码文件）：',
         'Generate Support Bundle' => '生成支持数据包',
@@ -2132,17 +2032,18 @@ sub Data {
             '包含支持数据包的文件已经可以下载到本地。',
         'Support Data' => '支持数据',
         'Error: Support data could not be collected (%s).' => '错误：%s 无法收集支持数据。',
+        'Support Data Collector' => '支持数据收集工具',
         'Details' => '详情',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
-        'System Email Addresses Management' => '系统邮件地址管理',
-        'Add System Email Address' => '添加统邮件地址',
-        'Edit System Email Address' => '编辑统邮件地址',
         'Add System Address' => '添加系统地址',
         'Filter for System Addresses' => '系统地址过滤器',
         'Filter for system addresses' => '系统地址过滤器',
         'All incoming email with this address in To or Cc will be dispatched to the selected queue.' =>
             '对于所有接收到的邮件，如果在其To或Cc中出现了该系统邮件地址，则将邮件分派到选择的队列中。',
+        'System Email Addresses Management' => '系统邮件地址管理',
+        'Add System Email Address' => '添加统邮件地址',
+        'Edit System Email Address' => '编辑统邮件地址',
         'Email address' => '电子邮件地址',
         'Display name' => '显示名称',
         'This email address is already used as system email address.' => '这个电子邮件地址已经用于系统电子邮件地址。',
@@ -2162,11 +2063,10 @@ sub Data {
         'Find out how to use the system configuration by reading the %s.' =>
             '通过阅读%s来了解如何使用系统配置。',
         'Search in all settings...' => '在所有设置中搜索...',
-        'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
-            '目前没有可用的设置。 在使用软件之前，请确保运行 \'otrs.Console.pl Maint::Config::Rebuild\'。',
+        'There are currently no settings available. Please make sure to run \'znuny.Console.pl Maint::Config::Rebuild\' before using the software.' =>
+            '目前没有可用的设置。 在使用软件之前，请确保运行 \'znuny.Console.pl Maint::Config::Rebuild\'。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
-        'Changes Deployment' => '更改部署',
         'Help' => '帮助',
         'This is an overview of all settings which will be part of the deployment if you start it now. You can compare each setting to its former state by clicking the icon on the top right.' =>
             '这是所有设置的概览，如果现在启动它，它将成为部署的一部分。 可以通过点击右上角的图标来比较每个设置当前与其先前的状态。',
@@ -2179,6 +2079,7 @@ sub Data {
         'Please review the changed settings and deploy afterwards.' => '请查看已更改的设置，然后再进行部署。',
         'An empty list of changes means that there are no differences between the restored and the current state of the affected settings.' =>
             '一个空的更改列表意味着在当前受影响的设置状态和已恢复的状态之间没有差异。',
+        'Changes Deployment' => '更改部署',
         'Changes Overview' => '更改概览',
         'There are %s changed settings which will be deployed in this run.' =>
             '有%s个更改的设置将在本次运行中部署。',
@@ -2205,7 +2106,6 @@ sub Data {
         'Import system configuration' => '导入系统配置',
         'Download current configuration settings of your system in a .yml file.' =>
             '下载当前的系统配置设置到一个.yml文件。',
-        'Include user settings' => '包括用户设置',
         'Export current configuration' => '导出当前配置',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationSearch.tt
@@ -2224,9 +2124,9 @@ sub Data {
         'Run search' => '搜索',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
+        'Go back to Deployment Details' => '返回到部署详情',
         'View a custom List of Settings' => '查看设置的自定义列表',
         'View single Setting: %s' => '查看单个设置：%s',
-        'Go back to Deployment Details' => '返回到部署详情',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2236,7 +2136,6 @@ sub Data {
         'Permissions' => '权限',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
-        'System Maintenance Management' => '系统维护管理',
         'Schedule New System Maintenance' => '安排新的系统维护',
         'Filter for System Maintenances' => '系统维护过滤器',
         'Filter for system maintenances' => '系统维护过滤器',
@@ -2244,6 +2143,7 @@ sub Data {
             '安排一个系统维护期会通知服务人员或用户：本系统在这个时间段停止使用。',
         'Some time before this system maintenance starts the users will receive a notification on each screen announcing about this fact.' =>
             '当到达维护时间之前, 当前登录到系统的用户将会在屏幕上收到一个通知。',
+        'System Maintenance Management' => '系统维护管理',
         'Stop date' => '结束时间',
         'Delete System Maintenance' => '删除系统维护',
 
@@ -2262,12 +2162,12 @@ sub Data {
         'Kill all Sessions, except for your own' => '终止除本会话外的所有会话',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-        'Template Management' => '模板管理',
         'Add Template' => '添加模板',
-        'Edit Template' => '编辑模板',
         'A template is a default text which helps your agents to write faster tickets, answers or forwards.' =>
             '模板就是一些能帮助服务人员快速创建、回复或转发工单的默认文本。',
         'Don\'t forget to add new templates to queues.' => '别忘了将新模板分配给队列。',
+        'Template Management' => '模板管理',
+        'Edit Template' => '编辑模板',
         'Attachments' => '附件',
         'Delete this entry' => '删除该条目',
         'Do you really want to delete this template?' => '您真的想要删除这个模板吗？',
@@ -2279,10 +2179,10 @@ sub Data {
         'Link %s to selected %s' => '链接 %s 到选中的 %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
+        'Import CSV or Excel file' => '',
         'Ticket attribute relations' => '',
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
-        'Import CSV or Excel file' => '',
         'Attribute' => '属性',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
@@ -2295,23 +2195,23 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
-        'Type Management' => '工单类型管理',
         'Add Type' => '添加工单类型',
-        'Edit Type' => '编辑工单类型',
         'Filter for Types' => '类型过滤器',
         'Filter for types' => '类型过滤器',
         'Configure Type Visibility and Defaults' => '',
+        'Type Management' => '工单类型管理',
+        'Edit Type' => '编辑工单类型',
         'A type with this name already exists!' => '类型名字已存在!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '这个类型已存在于系统配置的一个设置中，需要更新设置以确认指向新的类型态！',
         'This type is used in the following config settings:' => '这个类型已用于以下的系统配置设置：',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminUser.tt
-        'Agent Management' => '服务人员管理',
-        'Edit Agent' => '编辑服务人员',
         'Edit personal preferences for this agent' => '编辑这个服务人员的个人偏好设置',
         'Agents will be needed to handle tickets.' => '处理工单是需要服务人员的。',
         'Don\'t forget to add a new agent to groups and/or roles!' => '别忘了为新增的服务人员分配组或角色权限！',
+        'Agent Management' => '服务人员管理',
+        'Edit Agent' => '编辑服务人员',
         'Please enter a search term to look for agents.' => '请输入一个搜索条件以便查找服务人员。',
         'Last login' => '最后一次登录',
         'Switch to agent' => '切换到服务人员',
@@ -2411,9 +2311,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerTableView.tt
         'Note: Customer is invalid!' => '注意：客户是无效的！',
-        'Start chat' => '开始聊天',
-        'Video call' => '视频通话',
-        'Audio call' => '语音通话',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
         'Customer User Address Book' => '客户用户通讯录',
@@ -2441,17 +2338,17 @@ sub Data {
         'Customer User Information Center' => '客户用户信息中心',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-        'The OTRS Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
-            'OTRS守护进程用来执行异步任务，例如：触发工单升级、发送电子邮件等等。',
-        'A running OTRS Daemon is mandatory for correct system operation.' =>
-            'OTRS守护进程正常运行是正确的系统操作所必需的。',
-        'Starting the OTRS Daemon' => '正在启动OTRS守护进程',
-        'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the OTRS Daemon is running and start it if needed.' =>
-            '确保存在文件“%s”（没有.dist扩展名）。这个CRON任务会每5分钟检查一次OTRS守护进程是否在运行，并在需要时启动它。',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            '执行\'%s start\'确保\'otrs\'用户的cron任务是活动的。',
-        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
-            '5分钟后，在系统中执行\'bin/otrs.Daemon.pl status\'，检查OTRS守护进程是否正常运行。',
+        'The Znuny Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
+            'Znuny守护进程用来执行异步任务，例如：触发工单升级、发送电子邮件等等。',
+        'A running Znuny Daemon is mandatory for correct system operation.' =>
+            'Znuny守护进程正常运行是正确的系统操作所必需的。',
+        'Starting the Znuny Daemon' => '正在启动Znuny守护进程',
+        'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
+            '确保存在文件“%s”（没有.dist扩展名）。这个CRON任务会每5分钟检查一次Znuny守护进程是否在运行，并在需要时启动它。',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            '执行\'%s start\'确保\'znuny\'用户的cron任务是活动的。',
+        'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
+            '5分钟后，在系统中执行\'bin/znuny.Daemon.pl status\'，检查Znuny守护进程是否正常运行。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => '仪表板',
@@ -2468,11 +2365,23 @@ sub Data {
         'in' => '之内',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'Save settings' => '保存设置',
-        'Close this widget' => '关闭这个小部件',
+        'No Data Available.' => '没有可用数据。',
+        ' Show or hide the content' => '',
+        'Search inactive widgets' => '',
+        'Active Widgets' => '',
+        ' Save changes' => '',
+        ' Save' => '',
+        'Save changes' => '',
+        ' Settings' => '',
+        ' Refresh' => '',
+        ' Close this widget' => '',
+        'Hide' => '',
+        ' Cancel' => '',
         'more' => '更多',
         'Available Columns' => '可用的字段',
+        ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '显示的字段(可通过拖放调整顺序)',
+        ' Submit' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => '变更客户关系',
@@ -2502,12 +2411,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
-        '%s %s is available!' => '%s %s可用了！',
-        'Please update now.' => '请现在更新。',
-        'Release Note' => '版本说明',
-        'Level' => '级别',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardRSSOverview.tt
         'Posted %s ago.' => '发布于%s之前。',
 
@@ -2527,6 +2430,7 @@ sub Data {
             '这个统计当前还不能使用，需要统计管理员校正配置。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
+        'Show' => '显示',
         'Assigned to customer user' => '分配给客户用户',
         'Accessible for customer user' => '客户用户可访问',
         'My locked tickets' => '我锁定的工单',
@@ -2552,6 +2456,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
         'Manage links for %s' => '管理%s的链接',
+        'Close and Back' => '',
         'Create new links' => '创建新链接',
         'Manage existing links' => '管理现有链接',
         'Link with' => '链接到',
@@ -2559,14 +2464,7 @@ sub Data {
         'There are currently no links. Please click \'Create new Links\' on the top to link this item to other objects.' =>
             '目前没有链接。 请点击顶部的“创建新链接”将此项目链接到其他对象。',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentOTRSBusinessBlockScreen.tt
-        'Unauthorized usage of %s detected' => '检测到未经授权的使用 %s',
-        'If you decide to downgrade to ((OTRS)) Community Edition, you will lose all database tables and data related to %s.' =>
-            '如果决定降级到 ((OTRS)) 社区版，会丢失%s相关的所有数据库表及其数据。',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-        'Edit your preferences' => '编辑个人设置',
-        'Personal Preferences' => '个人偏好设置',
         'Preferences' => '偏好设置',
         'Please note: you\'re currently editing the preferences of %s.' =>
             '请注意：你现在编辑的是%s的偏好设置。',
@@ -2579,6 +2477,8 @@ sub Data {
         'Filter settings...' => '过滤设置...',
         'Filter for settings' => '设置过滤器',
         'Save all settings' => '保存所有设置',
+        'Edit your preferences' => '编辑个人设置',
+        'Personal Preferences' => '个人偏好设置',
         'Avatars have been disabled by the system administrator. You\'ll see your initials instead.' =>
             '头像功能已被系统管理员禁用，此处用你的简称替代。',
         'You can change your avatar image by registering with your email address %s at %s. Please note that it can take some time until your new avatar becomes available because of caching.' =>
@@ -2587,15 +2487,13 @@ sub Data {
         'End' => '结束',
         'This setting can currently not be saved.' => '此设置目前无法保存。',
         'This setting can currently not be saved' => '此设置目前无法保存',
+        'Save setting' => '',
         'Save this setting' => '保存该设置',
         'Did you know? You can help translating Znuny at %s.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences/SettingsList.tt
-        'Reset to default' => '重置为默认',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
-        'Choose from the groups on the right to find the settings you\'d wish to change.' =>
-            '从右侧的组中选择您想要更改的设置。',
+        'Choose from the groups on the left to find the settings you\'d wish to change.' =>
+            '',
         'Did you know?' => '你知道吗？',
         'You can change your avatar by registering with your email address %s on %s' =>
             '你可以注册您的电子邮件地址%s（在%s网站）来更改你的头像',
@@ -2606,9 +2504,9 @@ sub Data {
         'Split' => '拆分',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
+        'Read more about statistics in Znuny' => '详细了解OTR关于统计的信息',
         'Statistics Management' => '统计管理',
         'Add Statistics' => '添加统计',
-        'Read more about statistics in OTRS' => '详细了解OTR关于统计的信息',
         'Dynamic Matrix' => '动态矩阵',
         'Each cell contains a singular data point.' => '每个单元格包含一个单数据点。',
         'Dynamic List' => '动态列表',
@@ -2619,8 +2517,8 @@ sub Data {
         'Create Statistic' => '创建统计',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsEdit.tt
-        'Edit Statistics' => '编辑统计',
         'Run now' => '立即运行',
+        'Edit Statistics' => '编辑统计',
         'Statistics Preview' => '统计预览',
         'Save Statistic' => '保存统计',
 
@@ -2630,7 +2528,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
         'Statistics' => '统计',
-        'Run' => '运行',
         'Edit statistic "%s".' => '编辑统计“%s”。',
         'Export statistic "%s"' => '导出统计“%s”',
         'Export statistic %s' => '导出统计%s',
@@ -2638,8 +2535,6 @@ sub Data {
         'Delete statistic %s' => '删除统计%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
-        'Statistics Overview' => '统计概览',
-        'View Statistics' => '查看统计',
         'Statistics Information' => '统计信息',
         'Created by' => '创建人',
         'Changed by' => '修改人',
@@ -2647,6 +2542,8 @@ sub Data {
         'Sum columns' => '列汇总',
         'Show as dashboard widget' => '以仪表板小部件显示',
         'Cache' => '缓存',
+        'Statistics Overview' => '统计概览',
+        'View Statistics' => '查看统计',
         'This statistic contains configuration errors and can currently not be used.' =>
             '统计包含有错误配置，当前不能使用。',
 
@@ -2658,33 +2555,37 @@ sub Data {
         'Set Pending Time for %s%s%s' => '为%s%s%s添加挂起时间',
         'Change Priority of %s%s%s' => '变更工单%s%s%s的优先级',
         'Change Responsible of %s%s%s' => '变更工单%s%s%s的负责人',
-        'All fields marked with an asterisk (*) are mandatory.' => '所有带“*”的字段都是强制要求输入的字段.',
         'The ticket has been locked' => '工单已锁定',
-        'Undo & close' => '撤销并关闭',
         'Ticket Settings' => '工单设置',
-        'Queue invalid.' => '队列无效。',
         'Service invalid.' => '服务无效。',
         'SLA invalid.' => 'SLA无效。',
+        'Team Data' => '',
+        'Queue invalid.' => '队列无效。',
         'New Owner' => '新的所有者',
         'Please set a new owner!' => '请指定新的所有者！',
         'Owner invalid.' => '所有者无效。',
         'New Responsible' => '新的负责人',
         'Please set a new responsible!' => '请指定新的负责人！',
         'Responsible invalid.' => '负责人无效。',
+        'Ticket Data' => '',
         'Next state' => '工单下一状态',
         'State invalid.' => '状态无效。',
         'For all pending* states.' => '适用于各种挂起状态。',
+        'Dynamic Info' => '',
         'Add Article' => '添加信件',
-        'Create an Article' => '创建一封信件',
+        'Inform' => '',
         'Inform agents' => '通知服务人员',
         'Inform involved agents' => '通知相关服务人员',
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             '你可以在这里选择额外的服务人员，以收到这封信件的通知。',
         'Text will also be received by' => '内容也将被以下人员接收到',
+        'Communications' => '',
+        'Create an Article' => '创建一封信件',
         'Setting a template will overwrite any text or attachment.' => '设置一个模板将覆盖任何文本或附件。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce %s%s%s' => '退回%s%s%s',
+        'cancel' => '',
         'Bounce to' => '退回到',
         'You need a email address.' => '需要一个邮件地址。',
         'Need a valid email address or don\'t use a local email address.' =>
@@ -2707,20 +2608,23 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
         'Compose Answer for %s%s%s' => '撰写工单%s%s%s的回复邮件',
+        'Date Invalid!' => '日期无效！',
+        ' Select one or more recipients from the customer user address book.' =>
+            '',
+        'Customer user address book' => '客户用户通讯录',
         'This address is registered as system address and cannot be used: %s' =>
             '这个邮件地址：%s已被注册为系统邮件地址，不能使用。',
         'Please include at least one recipient' => '请包括至少一个收件人',
-        'Select one or more recipients from the customer user address book.' =>
-            '从客户用户通讯录中选择一个或多个收件人。',
-        'Customer user address book' => '客户用户通讯录',
         'Remove Ticket Customer' => '移除工单客户',
         'Please remove this entry and enter a new one with the correct value.' =>
             '请删除这个条目并重新输入一个正确的值。',
         'This address already exists on the address list.' => '地址列表已有这个地址。',
+        ' Cc' => '',
         'Remove Cc' => '移除Cc',
         'Bcc' => '暗送',
+        ' Bcc' => '',
         'Remove Bcc' => '移除Bcc',
-        'Date Invalid!' => '日期无效！',
+        ' Send mail' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => '变更工单%s%s%s的客户',
@@ -2729,19 +2633,29 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => '创建邮件工单',
+        ' Example Template' => '',
         'Example Template' => '模板样例',
-        'From queue' => '从队列',
         'To customer user' => '选择客户用户',
+        ' To' => '',
         'Please include at least one customer user for the ticket.' => '请包括至少一个客户用户。',
-        'Select this customer as the main customer.' => '选择这个客户用户作为主要联系人。',
+        ' Select this customer as the main customer.' => '',
+        ' To customer user' => '',
         'Remove Ticket Customer User' => '移除客户用户',
+        'From queue' => '从队列',
+        ' Get all' => '',
         'Get all' => '获取全部',
+        ' Message body' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => '%s%s%s的外发邮件',
+        'Select one or more recipients from the customer user address book.' =>
+            '从客户用户通讯录中选择一个或多个收件人。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '重新发送电子邮件给%s%s%s',
+        'All fields marked with an asterisk (*) are mandatory.' => '所有带“*”的字段都是强制要求输入的字段.',
+        'Cancel & close' => '取消并关闭',
+        'Undo & close' => '撤销并关闭',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => '工单%s：首次响应时间已超时(%s/%s)！',
@@ -2756,18 +2670,19 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%s历史',
+        'Start typing to filter...' => '',
         'Filter for history items' => '历史条目过滤器',
-        'Expand/collapse all' => '全部展开/折叠',
+        'Expand/Collapse all' => '',
         'CreateTime' => '创建时间',
         'Article' => '信件',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
         'Merge %s%s%s' => '合并%s%s%s',
         'Merge Settings' => '合并设置',
-        'You need to use a ticket number!' => '您需要使用一个工单编号!',
-        'A valid ticket number is required.' => '需要有效的工单编号。',
         'Try typing part of the ticket number or title in order to search by it.' =>
             '尝试输入工单编号或标题的一部分，以便进行搜索。',
+        'You need to use a ticket number!' => '您需要使用一个工单编号!',
+        'A valid ticket number is required.' => '需要有效的工单编号。',
         'Limit the search to tickets with same Customer ID (%s).' => '仅搜索具有相同客户ID（%s）的工单。',
         'Inform Sender' => '通知发送者',
         'Need a valid email address.' => '需要有效的邮件地址。',
@@ -2775,48 +2690,53 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => '转移%s%s%s',
         'New Queue' => '新队列',
+        'Communication' => '通信',
         'Move' => '转移',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
         'Add note to linked %s%s%s' => '',
+        'Notes' => '',
         'Note to linked Ticket' => '',
         'LinkList invalid.' => '',
         'Note to origin Ticket' => '',
         'NoteToTicket invalid.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+        ' Select all' => '',
         'No ticket data found.' => '没有找到工单数据。',
-        'Open / Close ticket action menu' => '处理/关闭工单动作的菜单',
-        'Select this ticket' => '选择这个工单',
+        ' Open / Close ticket action menu' => '',
+        ' Select this ticket' => '',
         'Sender' => '发件人',
-        'First Response Time' => '首次响应时间',
-        'Update Time' => '更新时间',
-        'Solution Time' => '解决时间',
         'Impact' => '影响',
         'CustomerID' => 'CustomerID',
-        'Move ticket to a different queue' => '将工单转移到另一个队列',
+        'Update Time' => '更新时间',
+        'Solution Time' => '解决时间',
+        'First Response Time' => '首次响应时间',
+        ' Service Time' => '',
+        ' Move ticket to a different queue' => '',
         'Change queue' => '更改队列',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => '清除这个屏幕的过滤器。',
+        'Clear all filters' => '',
         'Remove mention' => '',
         'Tickets per page' => '工单数/页',
+        'Filter assigned fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
+        ' Missing channel' => '',
         'Missing channel' => '频道丢失',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => '刷新概览视图',
-        'Column Filters Form' => '字段过滤器表单',
+        ' Column Filters Form' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => '拆分为新的电话工单',
-        'Save Chat Into New Phone Ticket' => '保存聊天为新的电话工单',
         'Create New Phone Ticket' => '创建电话工单',
         'Please include at least one customer for the ticket.' => '请包括至少一个客户用户。',
+        'Select this customer as the main customer.' => '选择这个客户用户作为主要联系人。',
         'To queue' => '队列',
-        'Chat protocol' => '聊天协议',
-        'The chat will be appended as a separate article.' => '将聊天内容作为单独的信件追加到工单。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
         'Phone Call for %s%s%s' => '%s%s%s的电话',
@@ -2828,6 +2748,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => '创建流程工单',
+        ' Loading' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => '注册工单到一个流程',
@@ -2871,11 +2792,11 @@ sub Data {
         'Save as default' => '保存为默认',
         'Drafts' => '草稿',
         'by' => '由',
+        'Move ticket to a different queue' => '将工单转移到另一个队列',
         'Change Queue' => '改变队列',
         'There are no dialogs available at this point in the process.' =>
             '目前流程中没有可用的活动对话框。',
         'This item has no articles yet.' => '此条目还没有信件。',
-        'Ticket Timeline View' => '工单时间轴视图',
         'Article Overview - %s Article(s)' => '信件概览-%s个信件',
         'Page %s' => '第%s页',
         'Add Filter' => '添加过滤器',
@@ -2891,11 +2812,6 @@ sub Data {
         'Internal message' => '内部消息',
         'Sending of this message has failed.' => '发送这个消息已失败。',
         'Resize' => '调整大小',
-        'Mark this article as read' => '标记该信件为已读',
-        'Show Full Text' => '显示详细内容',
-        'Full Article Text' => '详细内容',
-        'No more events found. Please try changing the filter settings.' =>
-            '没有找到更多的事件，请尝试修改过滤器设置。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
         '#%s' => '#%s',
@@ -2938,10 +2854,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
         'Preview of this article is not possible because %s channel is missing in the system.' =>
             '由于系统丢失了%s频道，无法预览该信件。',
-        'This feature is part of the %s. Please contact us at %s for an upgrade.' =>
-            '此功能是%s的一部分， 请通过%s与我们联系以进行升级。',
-        'Please re-install %s package in order to display this article.' =>
-            '请重新安装%s软件包以显示该信件。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentBlocker.tt
         'To protect your privacy, remote content was blocked.' => '为了保护你的隐私,远程内容被阻挡。',
@@ -2949,7 +2861,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '首页',
-        'Back to admin overview' => '返回到系统管理概览',
+        'Back' => '后退',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -2957,11 +2869,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Link.tt
         'Remove entry' => '删除条目',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/CloudServicesDisabled.tt
-        'This Feature Requires Cloud Services' => '这个功能需要启用云服务',
-        'You can' => '你可以',
-        'go back to the previous page' => '返回上一页',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => '尊敬的客户，',
@@ -2991,6 +2898,11 @@ sub Data {
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             '连接在临时中断后已重连，因此本页面上的元素可能已无法正常工作。为了能重新正常使用所有的元素，强烈建议刷新本页面。',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerHeader.tt
+        'Edit personal preferences' => '编辑个人偏好设置',
+        'Personal preferences' => '个人偏好设置',
+        'Logout' => '注销',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
         'JavaScript Not Available' => '没有启用JavaScript',
         'In order to experience this software, you\'ll need to enable JavaScript in your browser.' =>
@@ -3010,9 +2922,6 @@ sub Data {
         '2 Factor Token' => '双因素令牌',
         'Your 2 Factor Token' => '你的双因素令牌',
         'Log In' => '登录',
-        'Not yet registered?' => '还未注册?',
-        'Sign up now' => '现在注册',
-        'Back' => '后退',
         'Request New Password' => '请求新密码',
         'Your User Name' => '你的用户名',
         'A new password will be sent to your email address.' => '新密码将会发送到您的邮箱中。',
@@ -3022,14 +2931,14 @@ sub Data {
         'Your First Name' => '名字',
         'Your Last Name' => '姓',
         'Your email address (this will become your username)' => '您的邮件地址（这将是你的登录用户名）',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerNavigationBar.tt
-        'Incoming Chat Requests' => '进入的聊天请求',
-        'Edit personal preferences' => '编辑个人偏好设置',
-        'Logout %s' => '注销 %s',
+        'Not yet registered?' => '还未注册?',
+        'Sign up now' => '现在注册',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
-        'Service level agreement' => '服务级别协议',
+        'New Ticket' => '新建工单',
+        ' Service level agreement' => '',
+        'Dymanic Info' => '',
+        ' Subject' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => '欢迎！',
@@ -3039,9 +2948,8 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索条件',
         'e. g. 10*5155 or 105658*' => '例如: 10*5155 或 105658*',
-        'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '对工单进行全文搜索（例如 "John*n" 或 "Will*"）',
         'Types' => '类型',
-        'Time Restrictions' => '时间限制',
+        'Limitation' => '',
         'No time settings' => '没有设置时间',
         'All' => '全部',
         'Specific date' => '指定日期',
@@ -3050,20 +2958,19 @@ sub Data {
         'Only tickets created between' => '仅工单创建时间区间',
         'Ticket Archive System' => '工单归档系统',
         'Save Search as Template?' => '将搜索保存为模板吗？',
-        'Save as Template?' => '保存为模板吗？',
         'Save as Template' => '保存为模板',
+        'Save as Template?' => '保存为模板吗？',
         'Template Name' => '模板名称',
         'Pick a profile name' => '输入模板名称',
         'Output to' => '输出为',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearchResultShort.tt
+        'Remove this Search Term.' => '移除这个搜索词。',
         'of' => '在',
         'Page' => '页',
-        'Search Results for' => '以下条件的搜索结果',
-        'Remove this Search Term.' => '移除这个搜索词。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
-        'Start a chat from this ticket' => '从这个工单开始一次聊天',
+        'Ticket Details' => '',
         'Next Steps' => '下一步',
         'Reply' => '回复',
 
@@ -3096,11 +3003,18 @@ sub Data {
             '请注意，这个草稿已经过时了，因为这个草稿创建后该工单已经被修改过了。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
-        'View notifications' => '查看通知',
-        'Personal preferences' => '个人偏好设置',
-        'Logout' => '注销',
-        'You are logged in as' => '您已登录为',
         'Last viewed' => '',
+        'You are logged in as' => '您已登录为',
+        'Delete all activities' => '',
+        'Delete all' => '',
+        'Mark all activities as seen' => '',
+        'Seen all' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
+        'Overviews' => '',
+        'Personal views' => '',
+        'Last Views' => '',
+        'Search tools' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript没有启用',
@@ -3149,8 +3063,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
         'Install Type' => '安装类型',
-        'Create a new database for OTRS' => '为OTRS创建新的数据库',
-        'Use an existing database for OTRS' => '使用现有的OTRS数据库',
+        'Create a new database for Znuny' => '为Znuny创建新的数据库',
+        'Use an existing database for Znuny' => '使用现有的Znuny数据库',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
         'If you have set a root password for your database, it must be entered here. If not, leave this field empty.' =>
@@ -3161,8 +3075,8 @@ sub Data {
         'Database check successful.' => '数据库检查完成。',
         'Database User' => '数据库用户',
         'New' => 'New（新建）',
-        'A new database user with limited permissions will be created for this OTRS system.' =>
-            '已经为OTRS系统创建了新的数据库普通用户。',
+        'A new database user with limited permissions will be created for this Znuny system.' =>
+            '已经为Znuny系统创建了新的数据库普通用户。',
         'Repeat Password' => '重复输入密码',
         'Generated password' => '自动生成的密码',
         'Database' => '数据库',
@@ -3175,10 +3089,10 @@ sub Data {
         'Port' => '端口',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
-        'To be able to use OTRS you have to enter the following line in your command line (Terminal/Shell) as root.' =>
-            '为了能够使用OTRS, 您必须以root身份在命令行中(Terminal/Shell)输入以下行。',
+        'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
+            '为了能够使用Znuny, 您必须以root身份在命令行中(Terminal/Shell)输入以下行。',
         'Restart your webserver' => '重启web服务器',
-        'After doing so your OTRS is up and running.' => '完成这些后，您的OTRS系统就启动并运行了。',
+        'After doing so your Znuny is up and running.' => '完成这些后，您的Znuny系统就启动并运行了。',
         'Start page' => '开始页面',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerLicense.tt
@@ -3225,8 +3139,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
         'Feature not Available' => '功能不可用',
-        'Sorry, but this feature of OTRS is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
-            '抱歉，当前的OTRS不能用于移动终端。如果你想在移动终端上使用，你可以切换到桌面模式或使用普通桌面终端。',
+        'Sorry, but this feature of Znuny is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
+            '抱歉，当前的Znuny不能用于移动终端。如果你想在移动终端上使用，你可以切换到桌面模式或使用普通桌面终端。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Motd.tt
         'Message of the Day' => '今日消息',
@@ -3266,8 +3180,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/PublicDefault.tt
         'Welcome' => '欢迎',
-        'This is the default public interface of OTRS! There was no action parameter given.' =>
-            '这是OTRS默认的公共界面！没有操作参数。',
+        'This is the default public interface of Znuny! There was no action parameter given.' =>
+            '这是Znuny默认的公共界面！没有操作参数。',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '你可以安装一个定制的有公共界面的公共模块（通过软件包管理器），例如FAQ知识库模块。',
 
@@ -3410,12 +3324,6 @@ sub Data {
         'Enable' => '启用',
         'Reset this setting to its default state' => '将此设置重置为默认状态',
         'Reset setting' => '重置设置',
-        'Allow users to adapt this setting from within their personal preferences' =>
-            '允许用户从个人偏好设置中调整这个设置',
-        'Allow users to update' => '允许用户更新',
-        'Do not longer allow users to adapt this setting from within their personal preferences' =>
-            '不再允许用户在个人偏好设置中调整这个设置',
-        'Forbid users to update' => '禁止用户更新',
         'Show user specific changes for this setting' => '显示这个设置的用户特定变更',
         'Show user settings' => '显示用户设置',
         'Copy a direct link to this setting to your clipboard' => '将这个设置的直接链接复制到剪贴板',
@@ -3465,7 +3373,7 @@ sub Data {
         'Navigation' => '导航',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Test.tt
-        'OTRS Test Page' => 'OTRS测试页',
+        'Znuny Test Page' => 'Znuny测试页',
         'Unlock' => '解锁',
         'Welcome %s %s' => '欢迎使用%s %s',
         'Counter' => '计数器',
@@ -3475,9 +3383,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Warning.tt
         'Go back to the previous page' => '返回前一页',
-
-        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/AppointmentCalendar/CalendarSettingsDialog.html.tmpl
-        'Show' => '显示',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/FormDraftAddDialog.html.tmpl
         'Draft title' => '草稿标题',
@@ -3494,8 +3399,8 @@ sub Data {
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
         'Click to select a file for upload.' => '点击以选择一个文件上传。',
-        'Click to select files or just drop them here.' => '单击以选择文件或将文件拖放到这里。',
-        'Click to select a file or just drop it here.' => '单击以选择一个文件或将文件拖放到这里。',
+        'Select files or drop them here' => '',
+        'Select a file or drop it here' => '',
         'Uploading...' => '上传中...',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
@@ -3519,12 +3424,6 @@ sub Data {
         'Try again' => '重试',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
-        'Reset options' => '重置选项',
-        'Reset setting on global level.' => '在全局级别重置设置。',
-        'Reset globally' => '全局重置',
-        'Remove all user changes.' => '移除所有的用户更改。',
-        'Reset locally' => '本地重置',
-        'user(s) have modified this setting.' => '用户已经修改过此设置。',
         'Do you really want to reset this setting to it\'s default value?' =>
             '你确定要重置这个设置到它的默认值吗？',
 
@@ -3551,12 +3450,12 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
             '数据库中的ACL信息与系统配置不一致，请部署所有ACL。',
-        'ACLs could not be Imported due to a unknown error, please check OTRS logs for more information' =>
-            '由于未知错误不能导入ACL，请检查OTRS日志以获得更多信息',
+        'ACLs could not be Imported due to a unknown error, please check Znuny logs for more information' =>
+            '由于未知错误不能导入ACL，请检查Znuny日志以获得更多信息',
         'The following ACLs have been added successfully: %s' => '下列ACL已经成功添加：%s',
         'The following ACLs have been updated successfully: %s' => '下列ACL已经成功更新：%s',
         'There where errors adding/updating the following ACLs: %s. Please check the log file for more information.' =>
-            '在添加/更新下列ACL：%s 时出现一些错误，请检查OTRS日志以获得更多信息。',
+            '在添加/更新下列ACL：%s 时出现一些错误，请检查Znuny日志以获得更多信息。',
         'This field is required' => '这个字段是必需的',
         'There was an error creating the ACL' => '创建ACL时出现了一个错误',
         'Need ACLID!' => '需要ACLID！',
@@ -3607,21 +3506,20 @@ sub Data {
         'Unknown Notification %s!' => '未知通知 %s！',
         '%s (copy)' => '%s (副本)',
         'There was an error creating the Notification' => '创建通知时出现了一个错误',
-        'Notifications could not be Imported due to a unknown error, please check OTRS logs for more information' =>
-            '由于一个未知错误不能导入通知，请检查OTRS日志以获取更多信息',
+        'Notifications could not be Imported due to a unknown error, please check Znuny logs for more information' =>
+            '由于一个未知错误不能导入通知，请检查Znuny日志以获取更多信息',
         'The following Notifications have been added successfully: %s' =>
             '下列通知已成功添加：%s',
         'The following Notifications have been updated successfully: %s' =>
             '下列通知已成功更新：%s',
         'There where errors adding/updating the following Notifications: %s. Please check the log file for more information.' =>
-            '添加/更新下列通知时出现错误：%s，请检查OTRS日志以获取更多信息。',
+            '添加/更新下列通知时出现错误：%s，请检查Znuny日志以获取更多信息。',
         'Notification updated!' => '通知已更新！',
         'Agent (resources), who are selected within the appointment' => '这个预约选择的服务人员（资源）',
         'All agents with (at least) read permission for the appointment (calendar)' =>
             '所有对这个预约（日历）至少有读权限的服务人员',
         'All agents with write permission for the appointment (calendar)' =>
             '所有对这个预约（日历）有写权限的服务人员',
-        'Yes, but require at least one active notification method.' => '是的，但需要至少一个活动的通知方法。',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '自动响应已添加！',
@@ -3888,12 +3786,12 @@ sub Data {
         'Could not load %s.' => '不能载入 %s。',
         'Could not read %s!' => '不能读取 %s！',
         'Need a file to import!' => '导入需要一个文件！',
-        'The imported file has not valid YAML content! Please check OTRS log for details' =>
-            '导入的文件没有有效的YAML内容！请检查OTRS日志以获取详细信息',
+        'The imported file has not valid YAML content! Please check Znuny log for details' =>
+            '导入的文件没有有效的YAML内容！请检查Znuny日志以获取详细信息',
         'Web service "%s" deleted!' => 'Web服务“%s”已经删除！',
-        'OTRS as provider' => 'OTRS作为服务提供方',
+        'Znuny as provider' => 'Znuny作为服务提供方',
         'Operations' => '操作',
-        'OTRS as requester' => 'OTRS作为服务请求方',
+        'Znuny as requester' => 'Znuny作为服务请求方',
         'Invokers' => '调用程序',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceWebserviceHistory.pm
@@ -3930,16 +3828,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
         'Authorization code parameters not found.' => '',
 
-        # Perl Module: Kernel/Modules/AdminOTRSBusiness.pm
-        'Your system was successfully upgraded to %s.' => '你的系统已成功更新到 %s。',
-        'There was a problem during the upgrade to %s.' => '升级到%s的过程中出现问题。',
-        '%s was correctly reinstalled.' => '%s 已经成功重装。',
-        'There was a problem reinstalling %s.' => '重装 %s 时遇到了一个问题。',
-        'Your %s was successfully updated.' => '你的 %s 已经成功更新。',
-        'There was a problem during the upgrade of %s.' => '升级 %s 时遇到了一个问题。',
-        '%s was correctly uninstalled.' => '%s 已经成功卸载。',
-        'There was a problem uninstalling %s.' => '卸载 %s 时遇到了一个问题。',
-
         # Perl Module: Kernel/Modules/AdminPGP.pm
         'PGP environment is not working. Please check log for more info!' =>
             'PGP环境不能正常工作，请检查日志获取更多信息！',
@@ -3948,8 +3836,8 @@ sub Data {
         'Need param Key to download!' => '需要参数“密钥”才能下载！',
 
         # Perl Module: Kernel/Modules/AdminPackageManager.pm
-        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!' =>
-            '抱歉，在Apache配置文件中需要Apache::Reload作为PerlModule和PerlInitHandler。另请查看scripts/apache2-httpd.include.conf。或者您也可以使用命令行工具bin/otrs.Console.pl来安装软件包！',
+        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!' =>
+            '抱歉，在Apache配置文件中需要Apache::Reload作为PerlModule和PerlInitHandler。另请查看scripts/apache2-httpd.include.conf。或者您也可以使用命令行工具bin/znuny.Console.pl来安装软件包！',
         'No such package!' => '没有这个软件包！',
         'No such file %s in package!' => '软件包中没有%s 文件！',
         'No such file %s in local file system!' => '本地文件系统中没有%s 文件！',
@@ -3974,9 +3862,6 @@ sub Data {
         'Repository List' => '软件仓库列表',
         'No packages found in selected repository. Please check log for more info!' =>
             '在选定的软件仓库中找不到软件包， 请查看日志以获取更多信息！',
-        'Can\'t connect to OTRS Feature Add-on list server!' => '不能连接到OTRS附加功能列表服务器！',
-        'Can\'t get OTRS Feature Add-on list from server!' => '不能从服务器获取OTRS附加功能列表！',
-        'Can\'t get OTRS Feature Add-on from server!' => '不能从服务器获取OTRS附加功能！',
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => '没有这个过滤器：%s',
@@ -4139,13 +4024,13 @@ sub Data {
         'You currently don\'t have any favourite settings.' => '你目前没有收藏任何设置。',
         'The following settings could not be found: %s' => '找不到以下设置：%s',
         'Import not allowed!' => '不允许导入！',
-        'System Configuration could not be imported due to an unknown error, please check OTRS logs for more information.' =>
-            '由于一个未知错误不能导入系统配置，请检查OTRS日志以获取更多信息。',
+        'System Configuration could not be imported due to an unknown error, please check Znuny logs for more information.' =>
+            '由于一个未知错误不能导入系统配置，请检查Znuny日志以获取更多信息。',
         'Category Search' => '搜索类别',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
-        'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the OTRS log for more information.' =>
-            '某些导入的设置不在配置的当前状态中，或者无法进行更新。 请查看OTRS日志了解更多信息。',
+        'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
+            '某些导入的设置不在配置的当前状态中，或者无法进行更新。 请查看Znuny日志了解更多信息。',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationGroup.pm
         'You need to enable the setting before locking!' => '锁定之前需要启用该设置！',
@@ -4264,10 +4149,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentPreferences.pm
         'Param Group is required!' => '参数“组”是必需的！',
-        'Updated user preferences' => '用户偏好设置已更新',
-        'System was unable to deploy your changes.' => '系统无法部署你的变更。',
-        'Setting not found!' => '没有找到设置！',
-        'System was unable to reset the setting!' => '系统无法重置该设置！',
 
         # Perl Module: Kernel/Modules/AgentSplitSelection.pm
         'Process ticket' => '流程工单',
@@ -4379,12 +4260,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => '你需要转换权限！',
 
-        # Perl Module: Kernel/Modules/AgentTicketPhone.pm
-        'Chat is not active.' => '聊天不是活动的。',
-        'No permission.' => '没有权限。',
-        '%s has left the chat.' => '%s已经离开了聊天。',
-        'This chat has been closed and will be removed in %s hours.' => '这个聊天已经关闭，将在%s小时内删除。',
-
         # Perl Module: Kernel/Modules/AgentTicketPhoneCommon.pm
         'Ticket locked.' => '工单已锁定.',
 
@@ -4494,51 +4369,6 @@ sub Data {
         'Feature is not active' => '功能没有激活',
 
         # Perl Module: Kernel/Modules/AgentTicketZoom.pm
-        'Link Deleted' => '连接已删除',
-        'Ticket Locked' => '工单已锁定',
-        'Pending Time Set' => '挂起时间设置',
-        'Dynamic Field Updated' => '动态字段已更新',
-        'Outgoing Email (internal)' => '外发邮件-内部',
-        'Ticket Created' => '工单已创建',
-        'Type Updated' => '类型已更新',
-        'Escalation Update Time In Effect' => '实际升级更新时间',
-        'Escalation Update Time Stopped' => '升级更新时间已停止',
-        'Escalation First Response Time Stopped' => '升级首次响应时间已停止',
-        'Customer Updated' => '客户用户已更新',
-        'Internal Chat' => '内部聊天',
-        'Automatic Follow-Up Sent' => '发送自动跟进',
-        'Note Added' => '已增加备注',
-        'Note Added (Customer)' => '已增加备注-客户用户',
-        'SMS Added' => '短信已添加',
-        'SMS Added (Customer)' => '短信已添加（客户）',
-        'State Updated' => '状态已更新',
-        'Outgoing Answer' => '答复',
-        'Service Updated' => '服务已更新',
-        'Link Added' => '连接已增加',
-        'Incoming Customer Email' => '客户来信',
-        'Incoming Web Request' => '进入的WEB请求',
-        'Priority Updated' => '优先级已更新',
-        'Ticket Unlocked' => '工单已解锁',
-        'Outgoing Email' => '外发邮件',
-        'Title Updated' => '主题已更新',
-        'Ticket Merged' => '工单已合并',
-        'Outgoing Phone Call' => '致电',
-        'Forwarded Message' => '已转发的消息',
-        'Removed User Subscription' => '已移除的用户订阅',
-        'Time Accounted' => '所用时间',
-        'Incoming Phone Call' => '来电',
-        'System Request.' => '系统请求。',
-        'Incoming Follow-Up' => '进入的跟进',
-        'Automatic Reply Sent' => '发送自动回复',
-        'Automatic Reject Sent' => '自动拒绝已发送',
-        'Escalation Solution Time In Effect' => '实际升级解决时间',
-        'Escalation Solution Time Stopped' => '升级解决时间已停止',
-        'Escalation Response Time In Effect' => '实际升级响应时间',
-        'Escalation Response Time Stopped' => '升级响应时间已停止',
-        'SLA Updated' => 'SLA 已更新',
-        'External Chat' => '外部聊天',
-        'Queue Changed' => '队列已变更',
-        'Notification Was Sent' => '通知已发送',
         'This ticket does not exist, or you don\'t have permissions to access it in its current state.' =>
             '这个工单不存在，或者它的当前状态下你无权访问它。',
         'Missing FormDraftID!' => '缺少表单草稿ID！',
@@ -4557,7 +4387,6 @@ sub Data {
             '不能打开信件！或许它在另外一个信件页面上打开了？',
         'Show one article' => '显示单一信件',
         'Show all articles' => '显示所有信件',
-        'Show Ticket Timeline View' => '以时间轴视图显示工单',
 
         # Perl Module: Kernel/Modules/AjaxAttachment.pm
         'Got no FormID.' => '没有获取到表单ID。',
@@ -4604,7 +4433,7 @@ sub Data {
         'Configure "Home" in Kernel/Config.pm first!' => '首先在文件Kernel/Config.pm中配置“Home”！',
         'File "%s/Kernel/Config.pm" not found!' => '没有找到文件“%s/Kernel/Config.pm”！',
         'Directory "%s" not found!' => '没有找到目录“%s”！',
-        'Install OTRS' => '安装OTRS',
+        'Install Znuny' => '安装Znuny',
         'Intro' => '介绍',
         'Kernel/Config.pm isn\'t writable!' => '文件Kernel/Config.pm不可写入！',
         'If you want to use the installer, set the Kernel/Config.pm writable for the webserver user!' =>
@@ -4621,7 +4450,7 @@ sub Data {
         'Unknown database type "%s".' => '未知的数据库类型“%s”。',
         'Please go back.' => '请返回。',
         'Create Database' => '创建数据库',
-        'Install OTRS - Error' => '安装OTRS - 错误',
+        'Install Znuny - Error' => '安装Znuny - 错误',
         'File "%s/%s.xml" not found!' => '没有找到文件“%s/%s.xml”！',
         'Contact your Admin!' => '联系你的系统管理员！',
         'System Settings' => '系统设置',
@@ -4655,6 +4484,9 @@ sub Data {
         'Need config Package::RepositoryAccessRegExp' => '需要配置 Package::RepositoryAccessRegExp',
         'Authentication failed from %s!' => '从 %s 身份认证失败！',
 
+        # Perl Module: Kernel/Output/HTML/Article/Chat.pm
+        'Chat' => '聊天',
+
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketBounce.pm
         'Bounce Article to a different mail address' => '将邮件退回到另一个邮箱地址',
         'Bounce' => '退回',
@@ -4687,18 +4519,12 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => '打印信件',
 
-        # Perl Module: Kernel/Output/HTML/ArticleAction/GetHelpLink.pm
-        'Contact us at sales@otrs.com' => '请通过sales@otrs.com联系我们',
-        'Get Help' => '获取帮助',
-
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => '标记',
         'Unmark' => '取消标记',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/ReinstallPackageLink.pm
-        'Upgrade to OTRS Business Solution™' => '更新到OTRS商业版',
         'Re-install Package' => '重新安装软件包',
-        'Upgrade' => '升级',
         'Re-install' => '重新安装',
 
         # Perl Module: Kernel/Output/HTML/ArticleCheck/PGP.pm
@@ -4756,25 +4582,12 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Dashboard/CustomerUserList.pm
         'Shown customer users' => '显示客户用户',
-        'Offline' => '离线',
-        'User is currently offline.' => '用户当前离线。',
-        'User is currently active.' => '用户当前已激活。',
-        'Away' => '离开',
-        'User was inactive for a while.' => '用户暂时未激活。',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => '工单开始时间被设置在结束时间之后！',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
         'Shown Tickets' => '显示工单',
-
-        # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
-        'Can\'t connect to OTRS News server!' => '无法连接OTRS新闻服务器！',
-        'Can\'t get OTRS News from server!' => '无法从服务器获取OTRS新闻！',
-
-        # Perl Module: Kernel/Output/HTML/Dashboard/ProductNotify.pm
-        'Can\'t connect to Product News server!' => '无法连接到产品新闻服务器！',
-        'Can\'t get Product News from server!' => '无法从服务器获取产品新闻！',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/RSS.pm
         'Can\'t connect to %s!' => '无法连接到%s！',
@@ -4789,8 +4602,11 @@ sub Data {
         '7 Day Stats' => '最近7天统计',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/UserOnline.pm
+        'User is currently offline.' => '用户当前离线。',
+        'User is currently active.' => '用户当前已激活。',
+        'User was inactive for a while.' => '用户暂时未激活。',
         'User set their status to unavailable.' => '用户设置他们的状态为不可用。',
-        'Unavailable' => '不可用',
+        'Away' => '离开',
 
         # Perl Module: Kernel/Output/HTML/Layout.pm
         'Standard' => '标准',
@@ -4818,7 +4634,6 @@ sub Data {
         'Show Tree Selection' => '显示树状选项',
         'Split Quote' => '拆分引用',
         'Remove Quote' => '移除引用',
-        'Last Views' => '',
 
         # Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
         'Linked as' => '链接为',
@@ -4835,13 +4650,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => '归档搜索',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
-        'Please verify your license data!' => '请验证您的许可证数据！',
-        'The license for your %s is about to expire. Please make contact with %s to renew your contract!' =>
-            '您的%s的许可证即将过期， 请与%s联系续订您的合同！',
-        'An update for your %s is available, but there is a conflict with your framework version! Please update your framework first!' =>
-            '您的%s有新版本可用，但是与当前的框架版本不兼容！请先升级当前的框架版本！',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOnline.pm
         'Online Agent: %s' => '在线服务人员：%s',
@@ -4862,7 +4670,7 @@ sub Data {
             '一次系统维护将开始于：%s，预计结束时间为：%s',
 
         # Perl Module: Kernel/Output/HTML/Notification/DaemonCheck.pm
-        'OTRS Daemon is not running.' => 'OTRS守护进程没有运行。',
+        'Znuny Daemon is not running.' => 'Znuny守护进程没有运行。',
 
         # Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
         'OAuth2 token for "%s" has expired.' => '',
@@ -5015,11 +4823,6 @@ sub Data {
             '当前正在执行计划内的系统维护，暂时无法登录。',
 
         # Perl Module: Kernel/System/AuthSession.pm
-        'You have exceeded the number of concurrent agents - contact sales@otrs.com.' =>
-            '你已经超出了并发服务人员的最大数，请联系sales@otrs.com。',
-        'Please note that the session limit is almost reached.' => '请注意，会话数即将达到极限。',
-        'Login rejected! You have exceeded the maximum number of concurrent Agents! Contact sales@otrs.com immediately!' =>
-            '登录被拒绝！已经达到服务人员最大并发数！请立即联系sales@otrs.com！',
         'Session limit reached! Please try again later.' => '会话数量已超，请过会再试。',
         'Session per user limit reached!' => '达到用户会话限制！',
 
@@ -5109,14 +4912,6 @@ sub Data {
         # Perl Module: Kernel/System/ProcessManagement/DB/Process/State.pm
         'Inactive' => '非活动的',
         'FadeAway' => '消退',
-
-        # Perl Module: Kernel/System/Registration.pm
-        'Can\'t contact registration server. Please try again later.' => '不能连接到注册服务器，请稍后重试。',
-        'No content received from registration server. Please try again later.' =>
-            '注册服务器未返回有效信息，请稍后重试。',
-        'Can\'t get Token from sever' => '不能从服务器获取令牌',
-        'Username and password do not match. Please try again.' => '用户名与密码不匹配，请重试。',
-        'Problems processing server result. Please try again later.' => '处理服务器返回信息时出现问题，请稍后重试。',
 
         # Perl Module: Kernel/System/Stats.pm
         'Sum' => '总和',
@@ -5232,8 +5027,8 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
         'Invalid Default Values' => '无效的默认值',
-        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair' =>
-            '找到具有无效的默认值的表。 为了自动修复它，请运行：bin/otrs.Console.pl Maint::Database::Check --repair',
+        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair' =>
+            '找到具有无效的默认值的表。 为了自动修复它，请运行：bin/znuny.Console.pl Maint::Database::Check --repair',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
         'Maximum Query Size' => '最大查询大小',
@@ -5280,13 +5075,13 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
         'Operating System' => '操作系统',
-        'OTRS Disk Partition' => 'OTRS磁盘分区',
+        'Znuny Disk Partition' => 'Znuny磁盘分区',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
         'Disk Usage' => '硬盘使用情况',
-        'The partition where OTRS is located is almost full.' => 'OTRS分区已经快满了。',
-        'The partition where OTRS is located has no disk space problems.' =>
-            'OTRS分区没有磁盘空间问题了。',
+        'The partition where Znuny is located is almost full.' => 'Znuny分区已经快满了。',
+        'The partition where Znuny is located has no disk space problems.' =>
+            'Znuny分区没有磁盘空间问题了。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpacePartitions.pm
         'Disk Partitions Usage' => '硬盘使用情况',
@@ -5326,7 +5121,7 @@ sub Data {
         'There should be no more than 200 MB swap space used.' => '交换空间不应该使用超过200MB。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'OTRS' => 'OTRS',
+        'Znuny' => '',
         'Article Search Index Status' => '信件搜索索引状态',
         'Indexed Articles' => '索引过的信件',
 
@@ -5393,7 +5188,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
         'File System Writable' => '文件系统是可写的',
-        'The file system on your OTRS partition is not writable.' => 'OTRS分区所有文件系统是不可写的。',
+        'The file system on your Znuny partition is not writable.' => 'Znuny分区所有文件系统是不可写的。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
         'Legacy Configuration Backups' => '遗留的配置备份',
@@ -5424,7 +5219,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
         'Spooled Emails' => '假脱机邮件',
-        'There are emails in var/spool that OTRS could not process.' => 'var/spool 目录下有一些OTRS无法处理的邮件。',
+        'There are emails in var/spool that Znuny could not process.' => 'var/spool 目录下有一些Znuny无法处理的邮件。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
         'Your SystemID setting is invalid, it should only contain digits.' =>
@@ -5455,17 +5250,17 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
         'Orphaned Records In ticket_lock_index Table' => 'ticket_lock_index 表中的孤儿记录',
-        'Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'ticket_lock_index 表中包含孤儿记录。请运行bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup"清理静态数据库的索引。',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'ticket_lock_index 表中包含孤儿记录。请运行bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup"清理静态数据库的索引。',
         'Orphaned Records In ticket_index Table' => 'ticket_index 表中的孤儿记录',
-        'Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'ticket_index表中包含孤儿记录，请运行bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup"，清理静态数据库的索引。',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'ticket_index表中包含孤儿记录，请运行bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup"，清理静态数据库的索引。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
         'Time Settings' => '时间设置',
         'Server time zone' => '服务器时区',
-        'OTRS time zone' => 'OTRS时区',
-        'OTRS time zone is not set.' => 'OTRS时区未设置。',
+        'Znuny time zone' => 'Znuny时区',
+        'Znuny time zone is not set.' => 'Znuny时区未设置。',
         'User default time zone' => '用户默认时区',
         'User default time zone is not set.' => '用户默认时区未设置。',
         'Calendar time zone is not set.' => '日历时区未设置。',
@@ -5482,7 +5277,7 @@ sub Data {
         'Agents using favourites for the admin overview' => '服务人员在系统管理概览使用收藏夹',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'OTRS Version' => 'OTRS版本',
+        'Znuny Version' => 'Znuny版本',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'WEB服务器',
@@ -5490,8 +5285,8 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/MPMModel.pm
         'MPM model' => 'MPM多路处理模块',
-        'OTRS requires apache to be run with the \'prefork\' MPM model.' =>
-            'OTRS需要apache运行“prefork”MPM多路处理模块。',
+        'Znuny requires apache to be run with the \'prefork\' MPM model.' =>
+            'Znuny需要apache运行“prefork”MPM多路处理模块。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
         'CGI Accelerator Usage' => 'CGI加速器用法',
@@ -5623,8 +5418,8 @@ sub Data {
             '定义链接对象小部件(LinkObject::ViewMode = \"complex\")设置按钮中的操作。请注意，这些操作必须已经在以下JS和CSS文件中注册：Core.AllocationList.css、Core.UI.AllocationList.js、 Core.UI.Table.Sort.js、Core.Agent.TableFilters.js。',
         'Define which columns are shown in the linked appointment widget (LinkObject::ViewMode = "complex"). Possible settings: 0 = Disabled, 1 = Available, 2 = Enabled by default.' =>
             '定义链接的预约小部件(LinkObject::ViewMode = "complex")要显示的列。可用的设置值为：0 = 禁用，1 = 可用， 2 = 默认启用。',
-        'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
-            'OTRS不支持对没有结束日期或没有重复次数的预约做循环处理。在导入过程中，可能有ICS文件包含了此类预约。作为替代，系统将所有的此类预约创建为已过去的预约，然后加上接下来的N个月(默认120个月或10年)的重复预约。',
+        'Znuny doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
+            'Znuny不支持对没有结束日期或没有重复次数的预约做循环处理。在导入过程中，可能有ICS文件包含了此类预约。作为替代，系统将所有的此类预约创建为已过去的预约，然后加上接下来的N个月(默认120个月或10年)的重复预约。',
         'Defines the ticket appointment type backend for ticket escalation time.' =>
             '定义工单预约类型后端，用于工单升级时间。',
         'Defines the ticket appointment type backend for ticket pending time.' =>
@@ -5660,21 +5455,15 @@ sub Data {
         'Triggers add or update of automatic calendar appointments based on certain ticket times.' =>
             '基于某些工单时间添加或更新自动日历预约的触发器。',
 
-        # XML Definition: Kernel/Config/Files/XML/CloudServices.xml
-        'Defines if the communication between this system and OTRS Group servers that provide cloud services is possible. If set to \'Disable cloud services\', some functionality will be lost such as system registration, support data sending, upgrading to and use of OTRS Business Solution™, OTRS Verify™, OTRS News and product News dashboard widgets, among others.' =>
-            '定义本系统能否与OTRS集团提供云服务的服务器通信。如果设置为“禁用云服务”，某些功能如系统注册、发送支持数据、升级到OTRS Business Solution™（OTRS商业解决方案）、OTRS Verify™（OTRS验证）、仪表板中的OTRS新闻和产品新闻小部件等将失效。',
-        'Cloud service admin module registration for the transport layer.' =>
-            '云服务的传输层管理模块注册。',
-
         # XML Definition: Kernel/Config/Files/XML/Daemon.xml
-        'Defines the module to display a notification in the agent interface if the OTRS Daemon is not running.' =>
-            '定义服务人员界面如果OTRS守护进程没有运行就显示一个通知的模块。',
+        'Defines the module to display a notification in the agent interface if the Znuny Daemon is not running.' =>
+            '定义服务人员界面如果Znuny守护进程没有运行就显示一个通知的模块。',
         'List of CSS files to always be loaded for the agent interface.' =>
             '服务人员界面始终载入的CSS文件列表。',
         'List of JS files to always be loaded for the agent interface.' =>
             '服务人员界面始终载入的JS文件列表。',
-        'Type of daemon log rotation to use: Choose \'OTRS\' to let OTRS system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
-            '要使用的守护程序日志循环类型：选择“OTRS”以使OTRS系统处理文件循环，或选择“外部”以使用第三方循环机制（如logrotate）。 注意：外部循环机制需要使用其自身的配置。',
+        'Type of daemon log rotation to use: Choose \'OTRS\' to let Znuny system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
+            '要使用的守护程序日志循环类型：选择“Znuny”以使Znuny系统处理文件循环，或选择“外部”以使用第三方循环机制（如logrotate）。 注意：外部循环机制需要使用其自身的配置。',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
             '',
         'Defines the number of days to keep the daemon log files.' => '定义保留守护进程日志文件的天数。',
@@ -5734,8 +5523,8 @@ sub Data {
         'Delete expired ticket draft entries.' => '删除过期的工单草稿条目。',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
-        'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
-            '禁用WEB安装程序(http://yourhost.example.com/otrs/installer.pl)，防止系统被劫持。如果不启用，系统能够被重新安装，当前的基本配置将被安装脚本的预设问题替换。如果启用了，还同时禁用了通用代理、软件包管理和SQL查询窗口。',
+        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+            '禁用WEB安装程序(http://yourhost.example.com/znuny/installer.pl)，防止系统被劫持。如果不启用，系统能够被重新安装，当前的基本配置将被安装脚本的预设问题替换。如果启用了，还同时禁用了通用代理、软件包管理和SQL查询窗口。',
         'Enables or disables the debug mode over frontend interface.' => '启用或禁用前端界面的调试模式。',
         'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
             '启用后，如果发生了任何的AJAX错误，就在前端传递扩展的调试信息。',
@@ -5747,14 +5536,14 @@ sub Data {
             '控制系统管理员能否在系统配置中导入一个已保存的配置。',
         'Defines the name of the application, shown in the web interface, tabs and title bar of the web browser.' =>
             '定义本应用的名称，显示在WEB界面WEB浏览器的标签页和标题栏。',
-        'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of OTRS).' =>
-            '定义本系统的标识符。每个工单编号和HTTP会话字符串均包含这个ID。这确保只有属于本系统的工单才会被跟进处理（在两套OTRS实例间通信时有用）。',
+        'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of Znuny).' =>
+            '定义本系统的标识符。每个工单编号和HTTP会话字符串均包含这个ID。这确保只有属于本系统的工单才会被跟进处理（在两套Znuny实例间通信时有用）。',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '定义本系统的正式域名。这个设置用于变量OTRS_CONFIG_FQDN，在所有的消息表单中使用，以创建系统内部到工单的链接。',
-        'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
-            '使用公共模块 \'PublicSupportDataCollector\' （如用于OTRS守护进程的模块）定义用于搜集支持数据的HTTP主机名。',
-        'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
-            '使用公共模块“PublicSupportDataCollector”（例如用于OTRS守护进程的模块）来定义支持数据收集的超时（以秒为单位，最小为20秒）。',
+        'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
+            '使用公共模块 \'PublicSupportDataCollector\' （如用于Znuny守护进程的模块）定义用于搜集支持数据的HTTP主机名。',
+        'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
+            '使用公共模块“PublicSupportDataCollector”（例如用于Znuny守护进程的模块）来定义支持数据收集的超时（以秒为单位，最小为20秒）。',
         'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '定义本系统的WEB服务器使用的协议类型。如果要用HTTPS协议代替明文的HTTP协议，就在这里指定。 因为这个设置并不影响WEB服务器的设置或行为，所以不会改变访问本系统的方式。 如果设置错误，也不会阻止您登录系统。这个设置只是作为一个变量OTRS_CONFIG_HttpType使用，可以在系统使用的所有消息的表单中找到，用来创建在系统内到工单的链接。',
         'Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option.' =>
@@ -5771,8 +5560,8 @@ sub Data {
             '定义本系统可用的所有语言。在这里只指定语言的英文名称。',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '定义本系统可用的所有语言。在这里只指定语言的本地化名称。',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/.' =>
-            '定义服务人员和客户使用的默认前端主题（HTML）。如果您喜欢，您可以添加您自己的主题。请参考管理员手册https://doc.otrs.com/doc/ 。',
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+            '定义服务人员和客户使用的默认前端主题（HTML）。如果您喜欢，您可以添加您自己的主题。请参考管理员手册https://doc.znuny.org/manual/developer/ 。',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '配置不同主题是可能的，例如：区分系统中基于域名的不同服务人员和客户。您可以使用一个正则表达式配置一个键/内容组合来匹配一个域名。“键”应该匹配域名，“值”是一个系统中有效的皮肤。请参照样例条目修改正则表达式的合适格式。',
         'The headline shown in the customer interface.' => '客户界面显示的标题。',
@@ -5815,8 +5604,8 @@ sub Data {
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => '在登录屏幕中禁用自动完成功能。',
-        'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
-            '禁用HHTP头"X-Frame-Options: SAMEORIGIN" 以便允许OTRS可以包含在其它网址的IFrame框架中。禁用这个HTTP头可能有安全问题！仅在您知道您在干什么时才禁用它！',
+        'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
+            '禁用HHTP头"X-Frame-Options: SAMEORIGIN" 以便允许Znuny可以包含在其它网址的IFrame框架中。禁用这个HTTP头可能有安全问题！仅在您知道您在干什么时才禁用它！',
         'Disable HTTP header "Content-Security-Policy" to allow loading of external script contents. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '禁用HHTP头"Content-Security-Policy"以便允许载入扩展的脚本内容。禁用这个HTTP头可能引起安全问题！仅在您知道您在干什么时才禁用它！',
         'Automated line break in text messages after x number of chars.' =>
@@ -5859,8 +5648,8 @@ sub Data {
             '如果日志模块选用了“SysLog”，可以指定记录日志的字符集。',
         'If "file" was selected for LogModule, a logfile must be specified. If the file doesn\'t exist, it will be created by the system.' =>
             '如果日志模块选用了“文件”，必须指定日志文件名。如果文件不存在，系统会创建它。',
-        'Adds a suffix with the actual year and month to the OTRS log file. A logfile for every month will be created.' =>
-            '为OTRS日志文件添加实际年月的后缀，每月创建一个日志文件。',
+        'Adds a suffix with the actual year and month to the Znuny log file. A logfile for every month will be created.' =>
+            '为Znuny日志文件添加实际年月的后缀，每月创建一个日志文件。',
         'Set the minimum log level. If you select \'error\', just errors are logged. With \'debug\' you get all logging messages. The order of log levels is: \'debug\', \'info\', \'notice\' and \'error\'.' =>
             '设置最小日志级别。 如果选择\'error\'，则只会记录错误。 使用\'debug\'可以获取所有日志消息。 日志级别的顺序是：\'debug\'，\'info\'，\'notice\'和\'error\'。',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
@@ -5907,12 +5696,8 @@ sub Data {
             '显示在模块Kernel::Modules::AgentInfo中的文件，位于Kernel/Output/HTML/Templates/Standard/AgentInfo.tt。',
         'Defines the module to generate code for periodic page reloads.' =>
             '定义生成定期页面刷新代码的模块。',
-        'Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.' =>
-            '定义在不同界面不同场合显示OTRS商业版通知的模块。',
         'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
             '定义服务人员界面如果以管理员帐户登录系统（正常情况下您不应该用管理员帐户工作）就显示一个通知的模块。',
-        'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
-            '定义服务人员界面如果服务人员会话数达到预警值时就显示一个通知的模块。',
         'Defines the module that shows all the currently logged in agents in the agent interface.' =>
             '定义服务人员界面显示当前登录的所有服务人员的模块。',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
@@ -5933,8 +5718,8 @@ sub Data {
             '定义服务人员界面显示一个通用通知的模块。可以是“Text（文本）”-如果配置了-，或者是“File（文件）”的内容将被显示。',
         'Defines the module used to store the session data. With "DB" the frontend server can be splitted from the db server. "FS" is faster.' =>
             '定义存储会话数据的模块。使用“DB（数据库）”则前端服务器能从数据库服务器中拆分出来。“FS（文件系统）”更快一些。',
-        'Defines the name of the session key. E.g. Session, SessionID or OTRS.' =>
-            '定义会话中关键词的名称，如Session、SessionID或OTRS。',
+        'Defines the name of the session key. E.g. Session, SessionID or Znuny.' =>
+            '定义会话中关键词的名称，如Session、SessionID或Znuny。',
         'Defines the name of the key for customer sessions.' => '定义客户会话中关键词的名称。',
         'Turns on the remote ip address check. It should not be enabled if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.' =>
             '开启远程IP地址检查。如果通过代理或拨号连接访问系统，应该关闭，因为远程IP在每次请求时可能都不一样。',
@@ -5950,8 +5735,6 @@ sub Data {
         'Stores cookies after the browser has been closed.' => '在浏览器关闭后保存cookies。',
         'Protection against CSRF (Cross Site Request Forgery) exploits (for more info see https://en.wikipedia.org/wiki/Cross-site_request_forgery).' =>
             '针对CSRF(跨站请求伪造)漏洞利用的保护(参阅 https://en.wikipedia.org/wiki/Cross-site_request_forgery 获取更多信息)。',
-        'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime before a prior warning will be visible for the logged in agents.' =>
-            '设置在SessionMaxIdleTime中定义的时间范围内最大的活动服务人员数，之后才能对登录的服务人员显示先前的警告。',
         'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime.' =>
             '设置SessionMaxIdleTime中定义的时间范围内最大的活动服务人员数。',
         'Sets the maximum number of active sessions per agent within the timespan defined in SessionMaxIdleTime.' =>
@@ -5969,10 +5752,10 @@ sub Data {
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '定义由于不活动而将客户标记为“离开”的时间（单位：分钟）（例如：在“已登录的用户”小部件或聊天中）。',
         'This setting is deprecated. Set OTRSTimeZone instead.' => '此设置已弃用。 替代方式是设置OTRSTimeZone。',
-        'Sets the time zone being used internally by OTRS to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
-            '将OTRS内部使用的时区设置如在数据库中存储日期和时间。 警告：此设置一旦设置就不能更改，包含日期/时间的工单或其他数据已据此创建。',
-        'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the OTRS time zone and the user\'s time zone.' =>
-            '设置将分配给新创建的用户的时区，并将用于尚未设置时区的用户。 这是默认使用的时区，用于转换OTRS时区与用户时区之间的日期和时间。',
+        'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
+            '将Znuny内部使用的时区设置如在数据库中存储日期和时间。 警告：此设置一旦设置就不能更改，包含日期/时间的工单或其他数据已据此创建。',
+        'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
+            '设置将分配给新创建的用户的时区，并将用于尚未设置时区的用户。 这是默认使用的时区，用于转换Znuny时区与用户时区之间的日期和时间。',
         'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
             '如果启用，那么尚未选择时区的用户将被通知选择时区。 注意：如果（1）用户尚未选择时区，并且（2）OTRSTimeZone和UserDefaultTimeZone相同，（3）未设置为UTC，则不会显示通知。',
         'Maximum Number of a calendar shown in a dropdown.' => '一个日历显示在下拉选择框中的最大数字。',
@@ -5990,8 +5773,8 @@ sub Data {
         'Adds the one time vacation days for the indicated calendar.' => '为指定日历添加一次假期。',
         'Defines the hours and week days of the indicated calendar, to count the working time.' =>
             '定义指定日历每周天数和小时数，以便计算工作时间。',
-        'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your OTRS instance to stop working (probably any mask which takes input from the user).' =>
-            '定义通过浏览器上传文件的最大尺寸（单位：字节）。警告：这个选项设置过小将使您的OTRS实例出现许多遮罩屏幕导致停止工作（可能是需要用户输入的任何遮罩屏幕）。',
+        'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your Znuny instance to stop working (probably any mask which takes input from the user).' =>
+            '定义通过浏览器上传文件的最大尺寸（单位：字节）。警告：这个选项设置过小将使您的Znuny实例出现许多遮罩屏幕导致停止工作（可能是需要用户输入的任何遮罩屏幕）。',
         'Selects the module to handle uploads via the web interface. "DB" stores all uploads in the database, "FS" uses the file system.' =>
             '选择处理WEB界面上传文件的模块。“数据库”存储所有上传文件到数据库中，“文件系统”存储所有上传文件到文件系统中。',
         'Specifies the text that should appear in the log file to denote a CGI script entry.' =>
@@ -6058,8 +5841,8 @@ sub Data {
             '定义PDF文档中斜体等宽字体的TTF字体文件的路径和文件名。',
         'Defines the path and TTF-File to handle bold italic monospaced font in PDF documents.' =>
             '定义PDF文档中粗斜体等宽字体的TTF字体文件的路径和文件名。',
-        'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the OTRS user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
-            '启用PGP支持。当启用PGP签名和加密邮件时，强烈推荐以OTRS用户运行WEB服务器，否则，访问.pnugp目录会有权限问题。',
+        'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the Znuny user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
+            '启用PGP支持。当启用PGP签名和加密邮件时，强烈推荐以Znuny用户运行WEB服务器，否则，访问.pnugp目录会有权限问题。',
         'Defines the path to PGP binary.' => '定义PGP程序文件的路径。',
         'Sets the options for PGP binary.' => '设置PGP程序的选项。',
         'Sets the preferred digest to be used for PGP binary.' => '设置要用于PGP二进制文件的首选摘要。',
@@ -6077,10 +5860,10 @@ sub Data {
             '指定存储私有SSL证书的目录。',
         'Cache time in seconds for the SSL certificate attributes.' => 'SSL证书属性的缓存时间（秒）。',
         'Enables fetch S/MIME from CustomerUser backend support.' => '在客户用户后端支持模块启用收取S/MIME（邮件）。',
-        'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com).' =>
-            '指定系统发送通知的姓名，这个发件人姓名用于创建通知管理员完整的显示名称（如"OTRS通知"otrs@your.example.com）。',
-        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
-            '指定系统发送通知的邮件地址。这个邮件地址用来创建通知管理员的完整显示名称（如"OTRS通知"otrs@your.example.com），您可以使用配置的变量OTRS_CONFIG_FQDN，或者选择另外的邮件地址。',
+        'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).' =>
+            '指定系统发送通知的姓名，这个发件人姓名用于创建通知管理员完整的显示名称（如"Znuny通知"znuny@your.example.com）。',
+        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
+            '指定系统发送通知的邮件地址。这个邮件地址用来创建通知管理员的完整显示名称（如"Znuny通知"znuny@your.example.com），您可以使用配置的变量OTRS_CONFIG_FQDN，或者选择另外的邮件地址。',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '定义发送给服务人员关于请求的新密码的链接的通知邮件的主题。',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
@@ -6201,8 +5984,8 @@ sub Data {
             '如果Customer::AuthModule（客户认证模块）选择“LDAP”，必须指定BaseDN（基础域名）。',
         'If "LDAP" was selected for Customer::AuthModule, the user identifier must be specified.' =>
             '如果Customer::AuthModule（客户认证模块）选择“LDAP”，必须指定用户标识。',
-        'If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use OTRS. Specify the group, who may access the system.' =>
-            '如果Customer::AuthModule（客户认证模块）选择“LDAP”，您可以检查在posixGroup组中的用户是否允许认证，例如：用户需要在组xyz才能使用OTRS。指定这个有权访问系统的组名。',
+        'If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use Znuny. Specify the group, who may access the system.' =>
+            '如果Customer::AuthModule（客户认证模块）选择“LDAP”，您可以检查在posixGroup组中的用户是否允许认证，例如：用户需要在组xyz才能使用Znuny。指定这个有权访问系统的组名。',
         'If "LDAP" was selected for Customer::AuthModule, you can specify access attributes here.' =>
             '如果Customer::AuthModule（客户认证模块）选择“LDAP”，可以在这里指定访问属性。',
         'If "LDAP" was selected for Customer::AuthModule, user attributes can be specified. For LDAP posixGroups use UID, for non LDAP posixGroups use full user DN.' =>
@@ -6256,8 +6039,8 @@ sub Data {
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '激活系统中的可用主题。值1-代表激活，0-代表不激活。',
         'Defines the default value for the action parameter.' => '',
-        'Defines the shown links in the footer area of the customer and public interface of this OTRS system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
-            '定义OTRS系统的客户和公共界面中页脚区域显示的链接。 “Key（键）”中的值是外部网址，“Content（内容）”中的值是显示的文字。',
+        'Defines the shown links in the footer area of the customer and public interface of this Znuny system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
+            '定义Znuny系统的客户和公共界面中页脚区域显示的链接。 “Key（键）”中的值是外部网址，“Content（内容）”中的值是显示的文字。',
         'Defines the default value for the action parameter for the public frontend. The action parameter is used in the scripts of the system.' =>
             '定义公共界面操作参数的默认值。操作参数用于系统中的脚本。',
         'Sets the stats hook.' => '设置统计Hook。',
@@ -6283,16 +6066,14 @@ sub Data {
             '在一个多选框字段中显示所有的客户用户（如果客户用户过多则不好用）。',
         'Defines the default maximum number of X-axis attributes for the time scale.' =>
             '定义X轴时间刻度属性的默认最大数。',
-        'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
-            'OTRS能够使用一个或多个只读镜像数据库以扩展操作（如全文搜索或生成统计报表）。您可以在这里指定第一个镜像数据库的DSN（数据源名称）。',
+        'Znuny can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
+            'Znuny能够使用一个或多个只读镜像数据库以扩展操作（如全文搜索或生成统计报表）。您可以在这里指定第一个镜像数据库的DSN（数据源名称）。',
         'Specify the username to authenticate for the first mirror database.' =>
             '指定第一个镜像数据库的认证用户名。',
         'Specify the password to authenticate for the first mirror database.' =>
             '指定第一个镜像数据库的认证密码。',
         'Configure any additional readonly mirror databases that you want to use.' =>
             '配置任何您想要使用的额外只读镜像数据库。',
-        'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '定义仪表板后端参数。“GROUP（组）”用于到本插件的访问权限限制（如 Group:admin;group1;group2）。“Default（默认）”代表这个插件是默认启用还是需要用户手动启用。“CacheTTLLocal”表明本插件的缓存过期时间（单位：分钟）。“Mandatory（强制）”确定插件是否始终显示且不能被服务人员移除。',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '定义仪表板后端参数。“Limit（限制”）定义默认显示的条目数。“GROUP（组）”用于到本插件的访问权限限制（如 Group:admin;group1;group2）。“Default（默认）”代表这个插件是默认启用还是需要用户手动启用。“CacheTTL”表明本插件的缓存过期时间（单位：分钟）。“Mandatory（强制）”确定插件是否始终显示且不能被服务人员移除。',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -6303,24 +6084,26 @@ sub Data {
             '在打开链接对象遮罩屏幕后搜索一次所有活动对象。',
         'Defines a filter to process the text in the articles, in order to highlight predefined keywords.' =>
             '定义信件中处理文本的过滤器，以便高亮预定义的关键词。',
-        'Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            '定义HTML输出结果中在CVE号码后面添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用OTRS的图像路径；第二种是插入图像的链接。',
-        'Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            '定义HTML输出结果中在BUG追踪号码后面添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用OTRS的图像路径；第二种是插入图像的链接。',
-        'Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            '定义HTML输出结果中在微软公告号码后面添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用OTRS的图像路径；第二种是插入图像的链接。',
-        'Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            '在HTML输出结果中为预定义字符串添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（例如：faq.png），在这种情况下会使用OTRS的图像路径；第二种是插入图像的链接。',
-        'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            '在HTML输出结果中为预定义字符串添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用OTRS的图像路径；第二种是插入图像的链接。',
-        'If enabled, the OTRS version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
-            '如果启用了此选项，将从WEB界面、HTTP头信息和外发邮件的X-Headers头信息中移除OTRS版本标签。注意：如果你要修改这个选项，请确保清空缓存。',
-        'If enabled, OTRS will deliver all CSS files in minified form.' =>
-            '如果启用，OTRS将以最小化的形式提供所有CSS文件。',
-        'If enabled, OTRS will deliver all JavaScript files in minified form.' =>
-            '如果启用了此选项，OTRS将用压缩格式传送所有的JavaScript文件。',
+        'Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            '定义HTML输出结果中在CVE号码后面添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用Znuny的图像路径；第二种是插入图像的链接。',
+        'Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            '定义HTML输出结果中在BUG追踪号码后面添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用Znuny的图像路径；第二种是插入图像的链接。',
+        'Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            '定义HTML输出结果中在微软公告号码后面添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用Znuny的图像路径；第二种是插入图像的链接。',
+        'Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            '在HTML输出结果中为预定义字符串添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（例如：faq.png），在这种情况下会使用Znuny的图像路径；第二种是插入图像的链接。',
+        'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            '在HTML输出结果中为预定义字符串添加链接的过滤器。图像元素允许两种输入方式：第一种是用图像的名称（如faq.png），在这种情况下会使用Znuny的图像路径；第二种是插入图像的链接。',
+        'If enabled, the Znuny version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
+            '如果启用了此选项，将从WEB界面、HTTP头信息和外发邮件的X-Headers头信息中移除Znuny版本标签。注意：如果你要修改这个选项，请确保清空缓存。',
+        'If enabled, Znuny will deliver all CSS files in minified form.' =>
+            '如果启用，Znuny将以最小化的形式提供所有CSS文件。',
+        'If enabled, Znuny will deliver all JavaScript files in minified form.' =>
+            '如果启用了此选项，Znuny将用压缩格式传送所有的JavaScript文件。',
         'List of responsive CSS files to always be loaded for the agent interface.' =>
             '服务人员界面始终载入的响应CSS文件列表。',
+        'List of JS files to always be loaded for the admin interface.' =>
+            '',
         'List of CSS files to always be loaded for the customer interface.' =>
             '客户界面始终载入的CSS文件列表。',
         'List of responsive CSS files to always be loaded for the customer interface.' =>
@@ -6384,8 +6167,6 @@ sub Data {
             '设置服务人员和客户界面登录屏幕的默认消息，在系统处于维护期时显示。',
         'Sets the default error message for the login screen on Agent and Customer interface, it\'s shown when a running system maintenance period is active.' =>
             '设置服务人员和客户界面登录屏幕的默认错误消息，在系统处于维护期时显示。',
-        'Specify the channel to be used to fetch OTRS Business Solution™ updates. Warning: Development releases might not be complete, your system might experience unrecoverable errors and on extreme cases could become unresponsive!' =>
-            '指定获取OTRS商业版更新的通道。警告：开发版可能无法完成更新，您的系统可能经历无法恢复的错误，并且系统在极端情况下可能变得无法响应！',
         'Use new type of select and autocomplete fields in agent interface, where applicable (InputFields).' =>
             '服务人员界面在合适的地方（输入字段）使用新式选择和自动完成字段。',
         'Use new type of select and autocomplete fields in customer interface, where applicable (InputFields).' =>
@@ -6543,10 +6324,10 @@ sub Data {
             '设置最小的工单计数器大小（如果工单编号生成器选用“自动增量”）。默认是5（位数），意味着计数器从10000开始。',
         'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
             '启用最小的工单计数器大小（如果TicketNumberGenerator工单编号生成器选择为“日期”）。',
-        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
-            '索引加速器：选择您的后端工单视图加速器模块。“RuntimeDB（运行时数据库）”实时生成每个队列视图（工单总数不超过60000个且系统打开的工单不超过6000个时没有性能问题）。“StaticDB（静态数据库）是最强大的模块，它使用额外的类似于视图的工单索引表（工单总数超过80000且系统打开的工单超过6000时推荐使用），使用命令"bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild"来初始化索引。',
-        'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
-            '保存信件的附件。“数据库”在数据库中存储所有数据（不推荐在存储大容量附件时使用）。“文件系统”在文件系统中保存数据；这个选项更快但WEB服务器要以OTRS用户运行。即使是在生产环境您也可以在这两种模式间切换，而不会丢失数据。备注：使用“文件系统”时不能搜索附件名。',
+        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
+            '索引加速器：选择您的后端工单视图加速器模块。“RuntimeDB（运行时数据库）”实时生成每个队列视图（工单总数不超过60000个且系统打开的工单不超过6000个时没有性能问题）。“StaticDB（静态数据库）是最强大的模块，它使用额外的类似于视图的工单索引表（工单总数超过80000且系统打开的工单超过6000时推荐使用），使用命令"bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild"来初始化索引。',
+        'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the Znuny user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
+            '保存信件的附件。“数据库”在数据库中存储所有数据（不推荐在存储大容量附件时使用）。“文件系统”在文件系统中保存数据；这个选项更快但WEB服务器要以Znuny用户运行。即使是在生产环境您也可以在这两种模式间切换，而不会丢失数据。备注：使用“文件系统”时不能搜索附件名。',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
             '指定在搜索附件时是否检查所有的存储后端。这个选项只在安装时选择了一些附件保存在文件系统、一些附件保存到数据库中时才需要设置。',
         'Specifies the directory to store the data in, if "FS" was selected for ArticleStorage.' =>
@@ -6588,16 +6369,16 @@ sub Data {
             '这个事件模块将客户用户的属性存储为工单动态字段，如何配置这个映射请查看DynamicFieldFromCustomerUser::Mapping设置。',
         'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
             '重载（重定义）Kernel::System::Ticket中的函数，以便容易添加定制内容。',
-        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
-            '帮助扩展信件全文搜索（发件人、收件人、抄送、主题和正文搜索）。它将在信件创建后条带化所有信件并建立索引，提升全文搜索50%的效率。可使用命令 "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" 来创建初始索引。',
+        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
+            '帮助扩展信件全文搜索（发件人、收件人、抄送、主题和正文搜索）。它将在信件创建后条带化所有信件并建立索引，提升全文搜索50%的效率。可使用命令 "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" 来创建初始索引。',
         'Defines whether to index archived tickets for fulltext searches.' =>
             '定义全文搜索是否索引已归档的工单。',
         'Force the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
             '强制将原始信件文本存储在信件搜索索引中，而不执行过滤器或应用停用词列表。 这将增加搜索索引的大小，从而可能减慢全文搜索。',
         'Display a warning and prevent search when using stop words within fulltext search.' =>
             '在全文搜索使用了停止词时显示一个警告并阻止搜索。',
-        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
-            '基本的全文索引设置。执行 "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" 以生成一个新索引。',
+        'Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
+            '基本的全文索引设置。执行 "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" 以生成一个新索引。',
         'Fulltext index regex filters to remove parts of the text.' => '全文索引正则表达式过滤器用来删除部分文本。',
         'English stop words for fulltext index. These words will be removed from the search index.' =>
             '全文索引的英语停止词，这些词将从搜索索引中移除。',
@@ -7301,8 +7082,8 @@ sub Data {
             '定义工单能看到的锁定状态。注意：修改这个设置后，请确保删除缓存以便使用新值。默认：未锁定，临时锁定。',
         'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
             '定义工单的有效状态类型。如果一个工单处于此设置中任一状态类型的状态，则该工单将被视为打开，否则将被视为关闭。',
-        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
-            '定义解锁的工单有效的状态。为解锁工单，可以使用脚本"bin/otrs.Console.pl Maint::Ticket::UnlockTimeout"。',
+        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
+            '定义解锁的工单有效的状态。为解锁工单，可以使用脚本"bin/znuny.Console.pl Maint::Ticket::UnlockTimeout"。',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             '在到达提醒时间后发送解锁工单的提醒通知（只发送给工单所有者）。',
         'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>
@@ -7328,12 +7109,12 @@ sub Data {
             '查看锁定工单数的服务人员界面通知模块。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
         'Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '查看服务人员所属服务工单数的服务人员界面通知模块。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
-        'Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '通过导航栏访问搜索模板的服务人员界面模块。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
         'Agent interface module to access fulltext search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '通过导航栏访问全文搜索的服务人员界面模块。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
         'Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '通过导航栏访问客户信息中心的服务人员界面模块。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
+        'Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '通过导航栏访问搜索模板的服务人员界面模块。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
         'Module to generate html OpenSearch profile for short ticket search in the agent interface.' =>
             '在服务人员界面为简化工单搜索生成HTML开放式搜索模板的模块。',
         'Module to show notifications and escalations (ShownMax: max. shown escalations, EscalationInMinutes: Show ticket which will escalation in, CacheTime: Cache of calculated escalations in seconds).' =>
@@ -7571,8 +7352,8 @@ sub Data {
             '定义客户界面客户工单下一个可能的状态。',
         'Shows the enabled ticket attributes in the customer interface (0 = Disabled and 1 = Enabled).' =>
             '在客户界面显示已启用的工单属性（0 = 禁用，1 = 启用）。',
-        'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
-            '在客户的工单详情视图中展开显示这个工单所有的信件。',
+        'Defines the length of the article preview in the customer interface.' =>
+            '',
         'Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting.' =>
             '定义客户可见的注释中“发件人”字段的显示样式。 可以在 Ticket::Frontend::CustomerTicketZoom###DefaultAgentName 设置中定义默认的服务人员姓名。',
         'Defines the default agent name in the ticket zoom view of the customer interface.' =>
@@ -7686,7 +7467,8 @@ sub Data {
             '收取客户用户传入消息的SMIME证书的模块。',
         'Module to check if a incoming e-mail message is bounce.' => '检查传入的电子邮件是否退回的模块。',
         'Module used to detect if attachments are present.' => '用于检测是否存在附件的模块。',
-        'Executes follow-up checks on OTRS Header \'X-OTRS-Bounce\'.' => '对OTRS头\'X-OTRS-Bounce\'执行后续检查。',
+        'Executes follow-up checks on Znuny Header \'X-OTRS-Bounce\'.' =>
+            '对Znuny头\'X-OTRS-Bounce\'执行后续检查。',
         'Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number.' =>
             '通过搜索主题中的有效工单号，检查一个邮件是否是跟进到已存在的工单。',
         'Executes follow-up checks on In-Reply-To or References headers for mails that don\'t have a ticket number in the subject.' =>
@@ -7795,8 +7577,8 @@ sub Data {
             '在客户界面的工单搜索概览屏幕中显示的动态字段。',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".' =>
-            '配置默认的TicketDynamicField（工单动态字段）设置，“Name（名称）”定义要使用的动态字段，“Value（值）”是要设置的数值，“Event（事件）”定义触发的事件。请检查开发手册 (https://doc.otrs.com/doc/) 的“Ticket Event Module（工单事件模块）”章节。',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+            '配置默认的TicketDynamicField（工单动态字段）设置，“Name（名称）”定义要使用的动态字段，“Value（值）”是要设置的数值，“Event（事件）”定义触发的事件。请检查开发手册 (https://doc.znuny.org/manual/developer/) 的“Ticket Event Module（工单事件模块）”章节。',
         'Defines the list of types for templates.' => '定义模板类型的列表。',
         'List of default Standard Templates which are assigned automatically to new Queues upon creation.' =>
             '自动分配给新建队列的默认标准模板列表。',
@@ -7835,7 +7617,6 @@ sub Data {
         'Defines available article actions for Internal articles.' => '定义内部信件的可用信件操作。',
         'Defines available article actions for Phone articles.' => '定义电话信件的可用信件操作。',
         'Defines available article actions for Email articles.' => '定义电子邮件信件的可用信件操作。',
-        'Defines available article actions for Chat articles.' => '定义聊天信件的可用信件操作。',
         'Defines available article actions for invalid articles.' => '定义无效信件的可用信件操作。',
         'Disables the redirection to the last screen overview / dashboard after a ticket is closed.' =>
             '当工单关闭时，取消到最近浏览页/仪表板的重定向。',
@@ -7843,9 +7624,6 @@ sub Data {
             '定义服务人员界面新建工单的默认队列。',
 
         # XML Definition: Kernel/Config/Files/XML/Znuny.xml
-        'Access package repositories via HTTP or HTTPS.' => '',
-        'URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option \'PackageRepositoryURLSchema\'.' =>
-            '',
         'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
             '',
         'Screens for which it is possible to enable or disable dynamic fields.' =>
@@ -8012,6 +7790,10 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Assignment between event and type.' => '',
+        'Defines the link type for each activity.' => '',
+        'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
+            '',
         'Mapping of non-standard time zones to official ones.' => '',
         'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
             '',
@@ -8181,6 +7963,16 @@ sub Data {
         'Error during AJAX communication. Status: %s, Error: %s' => 'AJAX通信时发生错误。 状态：%s，错误：%s',
         'This window must be called from compose window.' => '必须从撰写窗口调用此窗口。',
 
+        # JS File: var/httpd/htdocs/js/Core.Activity.js
+        'An error occurred' => '',
+        'The activity could not be created. %s is needed.' => '',
+        'The activity could not be created.' => '',
+        'The activity could not be updated.' => '',
+        'The activity could not be deleted.' => '',
+        'The activity could not be marked as new.' => '',
+        'The activity could not be marked as seen.' => '',
+        'The activities could not be marked as seen.' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
         'Add all' => '添加所有',
         'An item with this name is already present.' => '名称相同的条目已存在。',
@@ -8188,8 +7980,6 @@ sub Data {
             '该条目中包含子条目。您真的想要删除这个条目及其子条目吗？',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AppointmentCalendar.Manage.js
-        'More' => '更多',
-        'Less' => '更少',
         'Press Ctrl+C (Cmd+C) to copy to clipboard' => '按Ctrl + C（Cmd + C）复制到剪贴板',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Attachment.js
@@ -8280,8 +8070,8 @@ sub Data {
         'Currently not possible' => '目前不可能',
         'This is currently disabled because of an ongoing package upgrade.' =>
             '由于正在进行软件包升级，因此目前已被禁用。',
-        'This option is currently disabled because the OTRS Daemon is not running.' =>
-            '由于OTRS守护进程没有运行，这个选项当前被禁用。',
+        'This option is currently disabled because the Znuny Daemon is not running.' =>
+            '由于Znuny守护进程没有运行，这个选项当前被禁用。',
         'Are you sure you want to update all installed packages?' => '您确定要更新所有已安装的软件包吗？',
         'No response from get package upgrade run status.' => '获取软件包升级运行状态时没有响应。',
 
@@ -8323,10 +8113,6 @@ sub Data {
         'Do you really want to delete this certificate?' => '你确定要删除这个证书吗？',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
-        'Sending Update...' => '正在发送更新...',
-        'Support Data information was successfully sent.' => '诊断信息已发送成功。',
-        'Was not possible to send Support Data information.' => '不能发送支持数据。',
-        'Update Result' => '更新结果',
         'Generating...' => '正在生成...',
         'It was not possible to generate the Support Bundle.' => '无法生成支持数据包。',
         'Generate Result' => '打包结果',
@@ -8406,9 +8192,10 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
         'Please enter at least one search value or * to find anything.' =>
             '请至少输入一个搜索条件或输入*搜索所有。',
+        'Insert selected customer user(s) into the "%s:" field.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
-        'Information about the OTRS Daemon' => '关于OTRS守护进程的信息',
+        'Information about the Znuny Daemon' => '关于Znuny守护进程的信息',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '请检查标记为红色的字段，需要输入有效的值。',
@@ -8476,7 +8263,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.js
         'Slide the navigation bar' => '滑动导航栏',
         'Please turn off Compatibility Mode in Internet Explorer!' => '请关闭IE的兼容模式！',
-        'Find out more' => '了解更多',
 
         # JS File: var/httpd/htdocs/js/Core.App.Responsive.js
         'Switch to mobile mode' => '切换到移动模式',
@@ -8570,9 +8356,6 @@ sub Data {
         'This is %s' => '这是%s',
         'Complex %s with %s arguments' => '复杂%s，带有%s参数',
 
-        # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSLineChart.js
-        'No Data Available.' => '没有可用数据。',
-
         # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js
         'Grouped' => '分组的',
         'Stacked' => '堆叠的',
@@ -8636,6 +8419,9 @@ Thanks for your help!
         'AJAX interface for the web service dynamic field backends.' => '',
         'AccountedTime' => '占用时间',
         'Activation of dynamic fields for screens.' => '',
+        'Activity LinkTarget' => '',
+        'Activity Notification' => '',
+        'Activity.' => '',
         'ActivityID' => '活动ID',
         'Add a note to this ticket' => '添加工单备注',
         'Add an inbound phone call to this ticket' => '为本工单添加一个客户来电',
@@ -8737,14 +8523,11 @@ Thanks for your help!
             '选择你要接收哪些工单变更的通知消息。 请注意，您不能完全禁用标记为强制性的通知。',
         'Choose which notifications you\'d like to receive.' => '选择您想要接收的通知。',
         'Christmas Eve' => '平安夜',
-        'Close' => '关闭',
         'Close this ticket' => '关闭工单',
         'Closed tickets (customer user)' => '已关闭的工单（客户用户）',
         'Closed tickets (customer)' => '已关闭的工单（客户）',
-        'Cloud Services' => '云服务',
         'Column ticket filters for Ticket Overviews type "Small".' => '工单概览简洁版式的字段过滤器。',
         'Comment2' => '注释2',
-        'Communication' => '通信',
         'Communication & Notifications' => '通信和通知',
         'Communication Log GUI' => '通信日志图形用户界面',
         'Communication log limit per page for Communication Log Overview.' =>
@@ -8757,11 +8540,10 @@ Thanks for your help!
         'Compose' => '撰写',
         'Configure Processes.' => '配置流程。',
         'Configure and manage ACLs.' => '配置和管理ACL。',
-        'Configure sending of support data to OTRS Group for improved support.' =>
-            '配置为提升支持效果而发送给OTRDS集团的支持数据。',
         'Configure which screen should be shown after a new ticket has been created.' =>
             '配置创建新工单后显示的界面。',
         'Create New process ticket.' => '创建新的流程工单。',
+        'Create Process Ticket' => '',
         'Create Ticket' => '创建工单',
         'Create a new calendar appointment linked to this ticket' => '创建一个新的日历预约到这个工单',
         'Create a unit test file' => '',
@@ -8800,8 +8582,6 @@ Thanks for your help!
             '',
         'Creates a unit test file for this ticket.' => '',
         'Croatian' => '克罗地亚语',
-        'Custom RSS Feed' => '定制RSS订阅',
-        'Custom RSS feed.' => '定制RSS订阅。',
         'Customer Administration' => '客户管理',
         'Customer Companies' => '客户单位',
         'Customer IDs' => '客户ID',
@@ -8835,14 +8615,11 @@ Thanks for your help!
         'Define the sla comment 2.' => '定义SLA注释2。',
         'Delete this ticket' => '删除这个工单',
         'Deleted link to ticket "%s".' => '到工单“%s”的链接已删除。',
-        'Deploy and manage OTRS Business Solution™.' => '部署并管理OTRS商业版。',
         'Detached' => '已卸下',
         'Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType "<Queue>" shows the names of the queues and for SystemAddress "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '确定服务人员界面电话工单显示为收件人（To:）和邮件工单显示为发件人（From:）的字符串。如果NewQueueSelectionType参数设置为“队列”，"<Queue>"显示队列名称，如果NewQueueSelectionType参数设置“系统邮件地址”，"<Realname> <<Email>>"显示收件人的名称和邮件地址。',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '确定客户界面工单显示为收件人（To:）的字符串。如果NewQueueSelectionType参数设置为“队列”，"<Queue>"显示队列名称，如果NewQueueSelectionType参数设置“系统邮件地址”，"<Realname> <<Email>>"显示收件人的名称和邮件地址。',
-        'Development' => '开发',
-        'Disable cloud services' => '禁用云服务',
         'Display communication log entries.' => '显示通信日志条目。',
         'Down' => '下',
         'Dropdown' => '下拉选择框',
@@ -9002,7 +8779,6 @@ Thanks for your help!
         'Malay' => '马来语',
         'Manage Customer User-Customer Relations.' => '',
         'Manage OAuth2 tokens and their configurations.' => '',
-        'Manage OTRS Group cloud services.' => '管理 OTRS 集团云服务。',
         'Manage PGP keys for email encryption.' => '管理邮件加密的PGP密钥。',
         'Manage POP3 or IMAP accounts to fetch email from.' => '管理收取邮件的POP3或IMAP帐号。',
         'Manage S/MIME certificates for email encryption.' => '管理邮件加密的S/MIME证书。',
@@ -9031,17 +8807,14 @@ Thanks for your help!
         'Multiselect' => '多选框',
         'My Queues' => '我的队列',
         'My Services' => '我的服务',
-        'My Tickets.' => '我的工单。',
         'My last changed tickets' => '',
         'NameX' => 'NameX',
-        'New Ticket' => '新建工单',
         'New Tickets' => '新建工单',
         'New Window' => '新窗口',
         'New Year\'s Day' => '新年',
         'New Year\'s Eve' => '除夕',
         'New process ticket' => '新的流程工单',
         'News' => '',
-        'News about OTRS releases!' => 'OTRS版本新闻！',
         'No public key found.' => '没有找到公钥。',
         'No valid OpenPGP data found.' => '没有找到有效的OpenPGP数据。',
         'None' => '没有',
@@ -9053,7 +8826,7 @@ Thanks for your help!
         'Number of displayed tickets' => '显示工单个数',
         'OAuth2' => '',
         'OAuth2 token' => '',
-        'OTRS Group Services' => 'OTRS集团服务',
+        'OTRS' => 'OTRS',
         'Open an external link!' => '打开一个外部链接！',
         'Open tickets (customer user)' => '处理中的工单（客户用户）',
         'Open tickets (customer)' => '处理中的工单（客户）',
@@ -9103,7 +8876,6 @@ Thanks for your help!
         'Process Ticket.' => '流程工单。',
         'ProcessID' => '流程ID',
         'Processes & Automation' => '流程和自动化',
-        'Product News' => '产品新闻',
         'Provides a matrix overview of the tickets per state per queue' =>
             '提供每个队列每个状态的工单的矩阵概览',
         'Provides customer users access to tickets even if the tickets are not assigned to a customer user of the same customer ID(s), based on permission groups.' =>
@@ -9124,14 +8896,14 @@ Thanks for your help!
         'Running Process Tickets' => '运行中的流程工单',
         'Russian' => '俄语',
         'S/MIME Certificates' => 'S/MIME证书',
-        'SMS' => '短信',
         'Schedule a maintenance period.' => '计划一个系统维护期。',
         'Screen after new ticket' => '创建新工单后的视图',
         'Search Customer' => '搜索客户',
         'Search Ticket.' => '搜索工单。',
         'Search Tickets.' => '搜索工单。',
         'Search User' => '搜索用户',
-        'Search.' => '搜索。',
+        'Search tickets.' => '',
+        'SearchTemplate' => '',
         'Second Christmas Day' => '圣诞节的第二天',
         'Second Queue' => '第二队列',
         'Seconds' => '',
@@ -9151,7 +8923,7 @@ Thanks for your help!
         'Select your personal time zone. All times will be displayed relative to this time zone.' =>
             '选择你的个人时区，所有时间将相对于这个时区显示。',
         'Select your preferred layout for the software.' => '选择你喜欢的软件布局。',
-        'Select your preferred theme for OTRS.' => '选择你喜欢的OTRS界面主题。',
+        'Select your preferred theme for OTRS.' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '从这个工单发送新的外发邮件',
         'Send notifications to users.' => '给用户发送通知。',
@@ -9175,7 +8947,7 @@ Thanks for your help!
         'Show the ticket history' => '显示工单历史信息',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '显示工单概览的预览（如果参数CustomerInfo值为1，还将显示客户信息，参数CustomerInfoMaxSize定义了显示客户信息的最大字符数）。',
-        'Shows information on how to start OTRS Daemon' => '显示如何启动OTRS守护进程的信息',
+        'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '签名数据。',
         'Simple' => '简单',
@@ -9194,7 +8966,6 @@ Thanks for your help!
         'Spanish' => '西班牙语',
         'Spanish (Colombia)' => '西班牙语（哥伦比亚）',
         'Spanish (Mexico)' => '西班牙语（墨西哥）',
-        'Stable' => '稳定的',
         'Started response time escalation.' => '响应时间升级已启动。',
         'Started solution time escalation.' => '解决时间升级已启动。',
         'Started update time escalation.' => '更新时间升级已启动。',
@@ -9231,8 +9002,7 @@ Thanks for your help!
             '这是客户界面默认的橙色-黑色皮肤。',
         'This is the default orange - black skin.' => '这是默认的橙色-黑色皮肤。',
         'This key is not certified with a trusted signature!' => '此密钥未使用可信签名进行认证！',
-        'This module is part of the admin area of OTRS.' => '这个模块是OTRS系统管理的一部分。',
-        'This will allow the system to send text messages via SMS.' => '这个选项允许系统通过短信发送文本消息。',
+        'This module is part of the admin area of OTRS.' => '',
         'Ticket Close.' => '工单关闭。',
         'Ticket Compose Bounce Email.' => '工单编写退回邮件。',
         'Ticket Compose email Answer.' => '工单编写邮件回复。',
@@ -9255,6 +9025,7 @@ Thanks for your help!
         'Ticket Priority.' => '工单优先级。',
         'Ticket Queue Overview' => '工单队列概览',
         'Ticket Responsible.' => '工单负责人。',
+        'Ticket Search' => '',
         'Ticket Watcher' => '工单关注人',
         'Ticket Zoom' => '工单详情',
         'Ticket Zoom.' => '工单详情。',
@@ -9328,6 +9099,8 @@ Thanks for your help!
         'normal' => '正常',
         'not archived tickets' => '',
         'notice' => '注意',
+        'open in current tab' => '',
+        'open in new tab' => '',
         'pending' => '挂起',
         'phone' => '电话',
         'responsible' => '负责人',
@@ -9361,6 +9134,7 @@ Thanks for your help!
         'All occurrences',
         'All-day',
         'An Error Occurred',
+        'An error occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',
@@ -9391,15 +9165,15 @@ Thanks for your help!
         'Cannot proceed',
         'Clear',
         'Clear all',
+        'Clear all filters',
         'Clear debug log',
         'Clear search',
         'Click to delete this attachment.',
         'Click to select a file for upload.',
-        'Click to select a file or just drop it here.',
-        'Click to select files or just drop them here.',
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',
@@ -9473,7 +9247,6 @@ Thanks for your help!
         'Feb',
         'February',
         'Filters',
-        'Find out more',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
         'Fr',
@@ -9487,7 +9260,8 @@ Thanks for your help!
         'Hide EntityIDs',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
-        'Information about the OTRS Daemon',
+        'Information about the Znuny Daemon',
+        'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
@@ -9505,7 +9279,6 @@ Thanks for your help!
         'June',
         'Just this occurrence',
         'Keys with values can\'t be renamed. Please remove this key/value pair instead and re-add it afterwards.',
-        'Less',
         'Loading, please wait...',
         'Loading...',
         'Location',
@@ -9520,7 +9293,6 @@ Thanks for your help!
         'Mon',
         'Monday',
         'Month',
-        'More',
         'Name',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
@@ -9569,7 +9341,6 @@ Thanks for your help!
         'Remove',
         'Remove Entity from canvas',
         'Remove active filters for this widget.',
-        'Remove all user changes.',
         'Remove from favourites',
         'Remove selection',
         'Remove the Transition from this Process',
@@ -9580,12 +9351,8 @@ Thanks for your help!
         'Request Details',
         'Request Details for Communication ID',
         'Reset',
-        'Reset globally',
-        'Reset locally',
         'Reset option is required!',
-        'Reset options',
         'Reset setting',
-        'Reset setting on global level.',
         'Resource',
         'Resources',
         'Restore default settings',
@@ -9604,8 +9371,9 @@ Thanks for your help!
         'Searching for linkable objects. This may take a while...',
         'Select a customer ID to assign to this ticket',
         'Select a customer ID to assign to this ticket.',
+        'Select a file or drop it here',
         'Select all',
-        'Sending Update...',
+        'Select files or drop them here',
         'Sep',
         'September',
         'Setting a template will overwrite any text or attachment.',
@@ -9631,11 +9399,17 @@ Thanks for your help!
         'Sun',
         'Sunday',
         'Support Bundle',
-        'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
         'Team',
         'Th',
+        'The activities could not be marked as seen.',
+        'The activity could not be created.',
+        'The activity could not be created. %s is needed.',
+        'The activity could not be deleted.',
+        'The activity could not be marked as new.',
+        'The activity could not be marked as seen.',
+        'The activity could not be updated.',
         'The browser you are using is too old.',
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
@@ -9656,14 +9430,13 @@ Thanks for your help!
         'This address already exists on the address list.',
         'This element has children elements and can currently not be removed.',
         'This event is already attached to the job, Please use a different one.',
-        'This feature is part of the %s. Please contact us at %s for an upgrade.',
         'This field can have no more than 250 characters.',
         'This field is required.',
         'This is %s',
         'This is a repeating appointment',
         'This is currently disabled because of an ongoing package upgrade.',
         'This item still contains sub items. Are you sure you want to remove this item including its sub items?',
-        'This option is currently disabled because the OTRS Daemon is not running.',
+        'This option is currently disabled because the Znuny Daemon is not running.',
         'This software runs with a huge lists of browsers, please upgrade to one of these.',
         'This window must be called from compose window.',
         'Thu',
@@ -9682,7 +9455,6 @@ Thanks for your help!
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
-        'Update Result',
         'Update all packages',
         'Update manually',
         'Upload information',
@@ -9690,7 +9462,6 @@ Thanks for your help!
         'Use options below to narrow down for which tickets appointments will be automatically created.',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
-        'Was not possible to send Support Data information.',
         'We',
         'Wed',
         'Wednesday',
@@ -9709,9 +9480,7 @@ Thanks for your help!
         'more',
         'no',
         'none',
-        'or',
         'sorting is disabled',
-        'user(s) have modified this setting.',
         'week',
         'yes',
     ];

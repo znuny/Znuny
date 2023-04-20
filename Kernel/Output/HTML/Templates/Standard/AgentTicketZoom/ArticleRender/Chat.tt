@@ -69,7 +69,6 @@
 
         <div class="Content">
             <div class="ArticleMailContent">
-
                 [% PROCESS ArticleActionMenu.tt %]
 
                 <div class="Avatar">

@@ -1844,7 +1844,15 @@ sub StringAndTimestamp2Filename {
     if ( defined $Param{TimeZone} ) {
         $DateTimeObject->ToTimeZone( TimeZone => $Param{TimeZone} );
     }
-    $Filename .= $DateTimeObject->Format( Format => '%Y%m%d_%H%M' );
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+    $Param{String} = $MainObject->FilenameCleanUp(
+        Filename => $Param{String},
+        Type     => 'Attachment',
+    );
+
+    my $Filename = $Param{String} . '_';
+    $Filename .= $DateTimeObject->Format( Format => '%Y-%m-%d_%H-%M' );
 
     if ( defined $Param{TimeZone} ) {
         $Filename .= '_' . $Param{TimeZone};

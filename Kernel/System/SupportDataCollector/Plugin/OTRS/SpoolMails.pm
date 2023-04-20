@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS');
+    return Translatable('Znuny');
 }
 
 sub Run {
@@ -40,7 +40,7 @@ sub Run {
         $Self->AddResultProblem(
             Label   => Translatable('Spooled Emails'),
             Value   => scalar @SpoolMails,
-            Message => Translatable('There are emails in var/spool that OTRS could not process.'),
+            Message => Translatable('There are emails in var/spool that Znuny could not process.'),
         );
     }
     else {

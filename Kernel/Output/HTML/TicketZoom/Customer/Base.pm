@@ -32,6 +32,10 @@ sub new {
     my $Self = {};
     bless( $Self, $Type );
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    $Self->{ArticleMaxLength} = $ConfigObject->Get('Ticket::Frontend::CustomerTicketZoom')->{'ArticleMaxLength'} || 150;
+
     return $Self;
 }
 

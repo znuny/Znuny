@@ -1307,14 +1307,14 @@ Returns:
 
     my $PackageRequired = (
       {
-        'Name'                       => 'ITSMCore'
+        'Name'                       => 'ITSMCore',
         'Version'                    => '',
         'IsInstalled'                => 'Problem',
         'IsRequiredVersionInstalled' => 0,
       },
       {
         'Name'                       => 'Survey',
-        'Version'                    => '6.5.0'
+        'Version'                    => '6.5.0',
         'IsInstalled'                => 'OK',
         'IsRequiredVersionInstalled' => 1,
       }
@@ -1972,12 +1972,12 @@ build an opm package
         ],
         Filelist = [
             {
-                Location   => 'Kernel/System/Lala.pm'
+                Location   => 'Kernel/System/Lala.pm',
                 Permission => '644',
                 Content    => $FileInString,
             },
             {
-                Location   => 'Kernel/System/Lulu.pm'
+                Location   => 'Kernel/System/Lulu.pm',
                 Permission => '644',
                 Content    => $FileInString,
             },
@@ -2606,7 +2606,7 @@ generates a MD5 Sum for all files in a given package
 returns:
 
     $MD5SumLookup = {
-        'Direcoty/File1' => 'f3f30bd59afadf542770d43edb280489'
+        'Direcoty/File1' => 'f3f30bd59afadf542770d43edb280489',
         'Direcoty/File2' => 'ccb8a0b86adf125a36392e388eb96778'
     };
 
@@ -2871,8 +2871,7 @@ sub AnalyzePackageFrameworkRequirements {
 
 =head2 PackageUpgradeAll()
 
-Updates installed packages to their latest version. Also updates OTRS Business Solution™ if system
-    is entitled and there is an update.
+Updates installed packages to their latest version.
 
     my %Result = $PackageObject->PackageUpgradeAll(
         Force           => 1,     # optional 1 or 0, Upgrades packages even if validation fails.
@@ -3248,7 +3247,7 @@ system data.
 Returns:
     %Result = (
         IsRunning      => 1,             # or 0 if it is not running
-        UpgradeStatus  => 'Running'      # (optional) 'Running' or 'Finished' or 'TimedOut',
+        UpgradeStatus  => 'Running',     # (optional) 'Running' or 'Finished' or 'TimedOut',
         UpgradeSuccess => 1,             # (optional) 1 or 0,
     );
 
@@ -4188,7 +4187,7 @@ sub _FileSystemCheck {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "ERROR: Need write permissions for directory $Home$Filepath\n"
-                . " Try: $Home/bin/otrs.SetPermissions.pl!",
+                . " Try: $Home/bin/znuny.SetPermissions.pl!",
         );
 
         return;

@@ -391,7 +391,7 @@ Core.UI = (function (TargetNS) {
         }
         // otherwise insert it on top
         else {
-            $NotificationObj.insertAfter('#NavigationContainer');
+            $NotificationObj.insertAfter('#ToolBar');
         }
 
         // show it finally with animation and execute possible callbacks

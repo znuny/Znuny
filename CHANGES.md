@@ -1,3 +1,53 @@
+# 7.0.3 2023-??-??
+ - 2023-04-05 Fixed format of returned filename in function Kernel::System::Stats::StringAndTimestamp2Filename.
+ - 2023-04-05 AdminSLA: Sub-services will now be shown as invalid if SLA is set to invalid.
+ - 2023-04-04 Translatable buttons for AdminValidFilter. Thanks to Renée Bäcker @reneeb. [PR#358](https://github.com/znuny/Znuny/pull/358)
+ - 2023-04-03 GUI-Redesign changes - CSS, TT and JS.
+ - 2023-04-03 Updated Agent/Notification.html.tmpl and changed position of agent notifications.
+ - 2023-04-03 Fixed issue 'Ticket notifications not sent'. Fixed return value of GetTransportRecipients. [#361](https://github.com/znuny/Znuny/issues/361)
+ - 2023-03-02 Fixed handling of time zone for DateTime objects created with string in ISO 8601 format (e.g. '2017-05-09T07:00:09+0400').
+
+# 7.0.2 2023-03-30
+ - 2023-03-30 Fixed path in setting Frontend::WebPath.
+
+# 7.0.1 2023-03-29
+ - 2023-03-29 Redesigned GUI for agents and customers.
+ - 2023-03-20 Fixed handling of article attachments in generic interface operations TicketCreate and TicketUpdate.
+ - 2023-02-01 Removed Business Solution code.
+ - 2023-02-01 Added additional IconClass for Notifications (Notify's).
+ - 2023-01-26 Integrated Znuny4OTRS-AdminValidFilter into Framework. Filters invalid entries in the admin area.
+ - 2023-01-25 Flattened customer menu to single level.
+ - 2023-01-20 Dashboard Widget Expand - There are now dashboard widget filters that display the selected widget alone and if possible with a larger number of tickets. This way the focus is concentrated on one widget.
+ - 2022-12-21 Removed too bright colors from the default selection (AppointmentCalendar::CalendarColors).
+ - 2022-12-15 CustomerTicketZoom - The CustomerTicketZoom view has been changed as well as the way articles are loaded.
+ - 2022-12-10 Dashboard Summary Counter - For each dashboard filter there is now a correct indicator of the ticket count as pill.
+ - 2022-12-09 Dashboard Widget Header - Added additional Base.pm for Dashboard and added new Header() function (Kernel/Output/HTML/Dashboard/Base.pm). This function can be used in every Kernel/Output/HTML/Dashboard/* module.
+ - 2022-11-21 Moved the additional buttons from Content 'Run()' area to Header 'Header()'. Added new Header() function. Kernel/Output/HTML/Dashboard/CustomerIDList.pm and Kernel/Output/HTML/Dashboard/CustomerUserList.pm
+ - 2022-10-18 Added this SysConfig list of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them. (ColorPicker###Palette)
+ - 2022-11-23 Mentions Widget - Changed the style of Mention Widget in TicketZoom.
+ - 2022-10-21 Breadcrumbs - Moved all Breadcrumbs into the Content / ContentColumn <div> block.
+ - 2022-10-19 CustomerLogin - The login menu has been greatly simplified (HTML / JS).
+ - 2022-10-18 Added ColorPicker for states and priorities. These attributes are now displayed in color as a pill.
+ - 2022-10-18 Added Base module to add additional inline CSS.
+ - 2022-10-13 Added a general ColorPicker function to LayoutObject.
+ - 2022-10-10 Wrapper - Added additional <div> around a lot of fields to use flex technology.
+ - 2022-10-06 Button - The buttons have revised graphics.
+ - 2022-10-04 Core.UI.Dialog DialogClass - Added new DialogClasses (modal-sm | modal-md | modal-lg)
+ - 2022-09-06 New Activity module informs you directly via frontend.
+ - 2022-08-29 TicketOverviewMenu / Sort - Added the Modernize css class to some fields.
+ - 2022-08-29 spectrum-1.8.1. - This JS is removed and replaced by the also existing JScolor.
+ - 2022-08-23 FilterAssigned - Added filters for the already assigned attributes.
+ - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
+ - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
+ - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.2 2023-??-??
+ - 2023-04-05 Fixed format of returned filename in function Kernel::System::Stats::StringAndTimestamp2Filename.
+ - 2023-03-20 Fixed handling of article attachments in generic interface operations TicketCreate and TicketUpdate.
+ - 2023-03-16 Added Appointment::EventModulePost Entry in XML. Thanks to Kevin Janssen (@BuTzZ). [PR#315](https://github.com/znuny/Znuny/pull/315)
+ - 2023-03-10 Fixed notification about empty subject for article drafts in AgentTicketCompose and AgentTicketEmailOutbound.
+ - 2023-03-02 Fixed handling of time zone for DateTime objects created with string in ISO 8601 format (e.g. '2017-05-09T07:00:09+0400').
+
 # 6.5.1 2023-03-09
  - 2023-02-28 Added options tickets-created-before-date and tickets-created-before-days to console command Admin::Article::StorageSwitch.
  - 2023-02-28 Fixed encoding of postmaster filter name in AdminPostMasterFilter.

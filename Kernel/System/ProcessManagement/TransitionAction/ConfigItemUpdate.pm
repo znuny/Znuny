@@ -273,8 +273,8 @@ Returns:
 
     my %ConfigItemParams = (
         ConfigItemID  => 1,
-        DeplStateName => 'Production'
-        InciStateName => 'Operational'
+        DeplStateName => 'Production',
+        InciStateName => 'Operational',
         XMLData => {
             'CPU' => [
                 {

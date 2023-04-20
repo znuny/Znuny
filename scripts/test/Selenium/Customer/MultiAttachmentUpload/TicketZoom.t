@@ -23,6 +23,7 @@ $Selenium->RunTest(
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Change web max file upload.
         $HelperObject->ConfigSettingChange(
@@ -71,9 +72,8 @@ $Selenium->RunTest(
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
-        $Selenium->find_element("//a[contains(\@id, \'ReplyButton' )]")->click();
         $Selenium->WaitFor(
-            JavaScript => "return typeof(\$) === 'function' && \$('#FollowUp.Visible').length"
+            JavaScript => "return typeof(\$) === 'function' && \$('#VisibleMessageContent').length"
         );
 
         # Check DnDUpload.
@@ -194,9 +194,11 @@ $Selenium->RunTest(
         $Selenium->find_element( "#DialogButton1", 'css' )->click();
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length' );
 
+        sleep 2;
+
         # Delete Attachment.
-        $Selenium->find_element( "(//a[\@class='AttachmentDelete'])[1]", 'xpath' )->click();
-        sleep 1;
+        $Selenium->find_element( 'a.AttachmentDelete', 'css' )->click();
+        sleep 2;
 
         # Wait until attachment is deleted.
         $Selenium->WaitFor(
@@ -232,7 +234,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

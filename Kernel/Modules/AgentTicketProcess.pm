@@ -1693,6 +1693,11 @@ sub _OutputActivityDialog {
     # display process information
     if ( $Self->{IsMainWindow} ) {
 
+        # output SidebarColumn
+        $LayoutObject->Block(
+            Name => 'SidebarColumn',
+        );
+
         # get process data
         my $Process = $ProcessObject->ProcessGet(
             ProcessEntityID => $Param{ProcessEntityID},
@@ -1777,7 +1782,6 @@ sub _OutputActivityDialog {
                 Name => 'CancelLink',
             );
         }
-
     }
 
     $Output .= $LayoutObject->Output(

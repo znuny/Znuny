@@ -19,11 +19,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
 
         # disable all dashboard plugins
-        my $Config = $Kernel::OM->Get('Kernel::Config')->Get('DashboardBackend');
+        my $Config = $ConfigObject->Get('DashboardBackend');
         $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'DashboardBackend',
@@ -55,7 +58,7 @@ $Selenium->RunTest(
 
         # create test queue
         my $QueueName = "Queue" . $HelperObject->GetRandomID();
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => 1,
@@ -138,7 +141,7 @@ $Selenium->RunTest(
         }
 
         # delete test queue
-        $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        $Success = $DBObject->Do(
             SQL => "DELETE FROM queue WHERE id = $QueueID",
         );
         $Self->True(
@@ -148,7 +151,7 @@ $Selenium->RunTest(
 
         # make sure cache is correct
         for my $Cache (qw( Ticket Queue Dashboard DashboardQueueOverview )) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

@@ -490,7 +490,7 @@ Exactly one condition (JavaScript or WindowCount) must be specified.
     my $Success = $SeleniumObject->WaitFor(
         AlertPresent   => 1,                                 # Wait until an alert, confirm or prompt dialog is present
         Callback       => sub { ... }                        # Wait until function returns true
-        ElementExists  => 'xpath-selector'                   # Wait until an element is present
+        ElementExists  => 'xpath-selector',                  # Wait until an element is present
         ElementExists  => ['css-selector', 'css'],
         ElementMissing => 'xpath-selector',                  # Wait until an element is not present
         ElementMissing => ['css-selector', 'css'],
@@ -1744,7 +1744,7 @@ This function builds a requestable HTTP GET URL to the given OTRS interface with
         }
     );
 
-    $RequestURL = 'http://localhost/otrs/index.pl?Action=AgentTicketZoom';
+    $RequestURL = 'http://localhost/znuny/index.pl?Action=AgentTicketZoom';
 
 =cut
 
@@ -2096,7 +2096,7 @@ Returns:
 
     my %ScreenshotDirectory = (
         WebPath  => 'SeleniumScreenshots/Captured',
-        FullPath => '/opt/otrs/var/httpd/htdocs/SeleniumScreenshots/Captured',
+        FullPath => '/opt/znuny/var/httpd/htdocs/SeleniumScreenshots/Captured',
     );
 
 =cut
@@ -2165,12 +2165,12 @@ sub GetScreenshotURL {
 =head2 GetSeleniumHome()
 
     my $SeleniumHome = $SeleniumObject->GetSeleniumHome(
-        Directory => '/opt/otrs',
+        Directory => '/opt/znuny',
     );
 
 Returns:
 
-    my $SeleniumHome = '/opt/otrs';
+    my $SeleniumHome = '/opt/znuny';
 
 =cut
 

@@ -185,7 +185,9 @@ Core.Agent.Overview = (function (TargetNS) {
         // click event on table header trigger
         $('.OverviewHeader').off('click').on('click', '.ColumnSettingsTrigger', function() {
             var $TriggerObj = $(this),
-                FilterName;
+                FilterName = $TriggerObj.next('.ColumnSettingsContainer').find('select').attr('name');
+
+            Core.UI.InputFields.InitSelect($('#' + FilterName), {Force: true});
 
             if ($TriggerObj.hasClass('Active')) {
                 $TriggerObj
@@ -212,12 +214,6 @@ Core.Agent.Overview = (function (TargetNS) {
                     .fadeIn('fast', function() {
 
                         $TriggerObj.addClass('Active');
-
-                        // refresh filter dropdown
-                        FilterName = $TriggerObj
-                            .next('.ColumnSettingsContainer')
-                            .find('select')
-                            .attr('name');
 
                         if (
                                 $TriggerObj.closest('th').hasClass('CustomerID') ||

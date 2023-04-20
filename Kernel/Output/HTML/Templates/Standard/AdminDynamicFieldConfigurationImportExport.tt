@@ -6,21 +6,8 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    [% TranslatedSubaction = Translate(Env("Subaction")); %]
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate("Dynamic field configurations: %s", TranslatedSubaction),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -29,12 +16,12 @@
                 <ul class="ActionList">
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminDynamicField" class="CallForAction Fullsize Center">
+                        <a href="[% Env("Baselink") %]Action=AdminDynamicField" class="CallForAction btn-main btn-primary-ghost">
                             <span>[% Translate("Dynamic Fields") | html %]</span>
                         </a>
                     </li>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldScreenConfiguration' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldScreenConfiguration' class='CallForAction btn-main btn-primary-ghost'>
                             <span>[% Translate("Dynamic fields ↔ Screens") | html %]</span>
                         </a>
                     </li>
@@ -64,16 +51,25 @@
     </div>
 
     <div class="ContentColumn">
+        [% TranslatedSubaction = Translate(Env("Subaction")); %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate("Dynamic field configurations: %s", TranslatedSubaction),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Dynamic fields") | html %]</h2>
             </div>
-            <div class="Clear"></div>
             <div class="Content LayoutGrid ColumnsWithSpacing">
-
 [% RenderBlockStart("DynamicFieldsInvalidBackend") %]
                 <h2 style="color:#ff0000;">[% Translate("For the following dynamic fields a configuration cannot be imported because of an invalid backend.") | html %]</h2>
-                <table class="DataTable SpacingBottom id="DynamicFieldsInvalidBackend" style="border-color:#ff0000;">
+                <table class="DataTable SpacingBottom" id="DynamicFieldsInvalidBackend" style="border-color:#ff0000;">
                     <thead>
                         <tr>
 
@@ -173,14 +169,15 @@
 [% RenderBlockEnd("DynamicFieldRow") %]
                             </tbody>
                         </table>
-                        <div class="Field SpacingTop" style="text-align: center;">
-                            <button class="Primary CallForAction" type="submit" id="[% Env("Subaction") | html %]" value="[% TranslatedSubaction | html %]">
-                                <span>[% TranslatedSubaction | html %]</span>
-                            </button>
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=AdminDynamicField" >[% Translate("Cancel") | html %]</a>
+
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a class="btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=AdminDynamicField" >[% Translate("Cancel") | html %]</a>
+                                <button class="Primary CallForAction btn-primary btn-main  btn-width-md" type="submit" id="[% Env("Subaction") | html %]" value="[% TranslatedSubaction | html %]">
+                                    <span>[% TranslatedSubaction | html %]</span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
                     </form>
                 [% ELSE %]
                     <p>
@@ -191,6 +188,5 @@
                 [% END %]
             </div>
         </div>
-        <div class="Clear"></div>
     </div>
 </div>

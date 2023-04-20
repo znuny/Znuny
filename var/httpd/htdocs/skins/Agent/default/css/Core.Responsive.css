@@ -11,12 +11,24 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 /* This code has been moved to Core.Defaults.css */
 
 /*  All devices with a smaller resolution than the current OTRS minimum solution */
+
+
+
+@media only screen and (min-width: 1025px) {
+    #AppWrapper > #NavigationContainer {
+        left: 150px !important;
+        height: 48px !important;
+    }
+}
+
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
 
-    body, html {
-        font-size: 1em;
-        overflow-x: hidden;
-    }
+
+
+    /* #AppWrapper {
+        width: 100%;
+        padding-top: 60px;
+    } */
 
     .ArticleBody {
         font-size: 12px;
@@ -26,60 +38,64 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: block;
     }
 
-    html.NoScroll,
-    html.NoScroll body {
-        overflow: hidden;
-    }
 
-    html.NoScroll body {
-        position: static;
-    }
 
-    html.NoScroll #AppWrapper {
-        overflow: hidden;
-        position: fixed;
-    }
-
-    .MessageBox, .RTL .MessageBox {
+    /* .MessageBox, 
+    .RTL .MessageBox {
         margin: 0px;
     }
 
     #Header {
-        height: 60px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        height: auto !important;
         overflow: hidden;
-        padding: 0px;
-        border-bottom: 0px;
+        padding: var(--padding-md) !important;
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        box-sizing: border-box;
     }
 
     #ToolBar,
     .RTL #ToolBar {
-        position: static;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
         float: none;
         margin: 0px;
+        padding: 7px var(--padding-md) 6px;
         text-align: center;
-        white-space: nowrap;
+        white-space: initial;
         overflow-x: scroll;
         border: 0px;
-        background: #222;
-        overflow: auto;
-        height: 0px;
+        background: transparent;
+        overflow: initial;
+        height: auto !important;
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
     }
 
+    #ToolBar li {
+        display: flex;
+
+    }
     #ToolBar li:not(.UserAvatar),
     .RTL #ToolBar li:not(.UserAvatar),
     #ToolBar li.UserAvatar div a,
     #ToolBar li.UserAvatar div span {
         float: none;
         display: inline-block;
-        padding: 8px;
-        margin-bottom: 10px;
-        margin-top: 10px;
+        padding: 0;
+        margin-bottom: 0;
+        margin-top: 0;
     }
 
     #ToolBar li.UserAvatar > a,
     #ToolBar li.UserAvatar div:after,
     #ToolBar li.UserAvatar div span {
-        display: none;
+        display: block;
     }
 
     #ToolBar li.UserAvatar {
@@ -87,26 +103,20 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         float: none;
         display: inline-block;
         background-color: #444;
-        padding: 8px;
-        margin-bottom: 10px;
-        margin-top: 10px;
+        padding: 0;
+        margin-bottom: 0;
+        margin-top: 0;
         background: none;
-        width: auto;
+        width: calc(100% - 50px);
     }
 
     #ToolBar li.UserAvatar i {
         display: block !important;
-        color: #f92;
+        color: var(--black);
     }
 
     #ToolBar li.UserAvatar div a:last-child {
         padding-bottom: 0px;
-    }
-
-    #ToolBar li.UserAvatar a strong {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
     }
 
     #ToolBar li.UserAvatar {
@@ -114,23 +124,20 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     #ToolBar li.UserAvatar a {
-        width: 24px;
-        height: 34px;
-        margin: 0 5px;
+        display: flex;
+        width: 100%;
+        height: auto;
+        margin: 0;
         float: left;
         position: relative;
     }
 
-    #ToolBar li.UserAvatar div {
-        display: inline-block !important;
-        position: static;
-        background: none;
-        width: auto;
-        margin: 0px;
+    #ToolBar li.UserAvatar > a .UserAvatar_name {
+        font-size: var(--main-font-size);
     }
 
     #ToolBar li i {
-        color: #FF9922;
+        color: var(--black);
         text-shadow: none;
         font-size: 20px;
         top: -15px;
@@ -168,18 +175,79 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: inline;
     }
 
-    #Header #Logo {
-        width: 208px !important;
-        background-size: contain;
-        position: static;
-        margin: -2px auto 0px auto;
-        background-position: center;
-        max-height: 100%;
+
+    #ToolBar li.UserAvatar div {
+        display: none;
+        position: relative;
+        background: none;
+        width: auto;
+        margin: 0px;
+
+
+        position: absolute;
+        width: calc(100% - 40px);
+        box-sizing: border-box;
+        background: var(--menu-bg);
+        z-index: 9999;
+        top: 50px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        box-shadow: var(--menu-box-shadow);
+        padding: var(--padding-sm);
+        border-radius: var(--border-radius-xs);
+
     }
 
-    .MainBox, .RTL .MainBox {
-        padding: 5px 15px;
+    #ToolBar li.UserAvatar div a {
+        display: flex;
+        width: 100%;
+        line-height: 18px;
+        color: var(--menu-font);
+        border-bottom: none;
+        font-size: var(--main-font-size);
+        transition: var(--main-transition);
+        border-radius: var(--border-radius-xs);
+        padding: var(--padding-sm) var(--padding-sm);
+        box-sizing: border-box;
+        border: 0;
     }
+
+
+    #ToolBar li.UserAvatar div a strong {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    #ToolBar li.NotificationItems a.NotificationIcon {
+
+    } */
+
+    body.ShowNotificationList #ToolBar li.NotificationItems .dropdown-menu {
+        display: block;
+    }
+
+    /* #ToolBar li.NotificationItems .dropdown-menu li a .textWrapper {
+        font-size: var(--main-font-size);
+        text-align: left;
+    }
+
+    #ToolBar li.NotificationItems .dropdown-menu li a .iconWrapper i {
+        font-size: 16px;
+    }
+
+    #ToolBar li.NotificationItems .dropdown-menu li a .iconWrapper span.Counter {
+        top: -8px;
+    }
+
+    #ToolBar a.CallForAction {
+        display: flex !important;
+        position: relative;
+        max-width: calc(100% - 40px);
+        right: initial;
+        margin: 10px auto;
+    } */
 
     #UserInfo {
         top: 20px;
@@ -191,88 +259,49 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         top: -5px;
     }
 
-    .ResponsiveSidebarContainer {
-        background: rgba(22, 22, 22, 0.7);
-        height: 100%;
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        display: none;
-        z-index: 998;
-    }
 
-    .ResponsiveHandle {
-        font-size: 30px;
-        color: #FF9922;
-        cursor: pointer;
-        display: block;
-        position: fixed;
-        top: 10px;
-        width: 25px;
-        height: 30px;
-        padding: 5px 10px;
-        background: #222222;
-        background-color: rgba(22, 22, 22, 0.5);
-        text-align: center;
-        z-index: 999;
-    }
 
-    #ResponsiveNavigationHandle {
-        left: 0px;
-    }
 
-    #ResponsiveSidebarHandle {
-        right: 0px;
-    }
 
-    #ResponsiveSidebarNotification {
-        top: 60px;
-        left: -45px;
-        display: none;
-        color: #ccc;
-        cursor: default;
-    }
 
-    #NavigationContainer,
-    .RTL #NavigationContainer {
-        left: -280px;
-        right: auto;
-        top: 0px;
-        height: 100%;
-        position: fixed;
-        background: #222;
-        width: 280px;
-        overflow: auto;
-    }
 
-    #NavigationContainer #Navigation {
-        position: static;
-        width: auto !important;
-        margin-top: 80px;
-    }
+
+
+
+
+
+
+
+
+
+
 
     #NavigationContainer > a {
         display: none !important;
     }
 
-    #Navigation > li {
-        background: none;
-        float: none;
-        box-shadow: none !important;
-        border: 0px !important;
-        border-top: 1px solid #444 !important;
+    #Navigation > li:first-child {
+        border-top: 0px !important;
     }
 
-    #Navigation > li > a {
-        font-size: 14px;
-        font-weight: normal;
-        padding: 10px 15px;
-        height: auto;
+    #Navigation > .Active > ul {
+        position: static;
+        min-width: 0px;
+        box-shadow: none;
+        background: transparent !important;
     }
 
-    .RTL #Navigation > li > a {
-        padding: 10px 15px;
+    #Navigation > li > ul li a {
+        background: transparent !important;
+    }
+
+    #Navigation > .Active > ul li a,
+    #Navigation > .Active:hover > ul li a,
+    #Navigation > .Selected.Active > ul li a,
+    #Navigation > .Selected.Active:hover > ul li a {
+        background: var(--gray-light);
+        padding: var(--padding-sm);
+        border: 0px;
     }
 
     #Navigation > .Active > ul > li > a {
@@ -280,30 +309,39 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin-left: 5px;
     }
 
-    #Navigation > li:first-child {
-        border-top: 0px !important;
-    }
-
-    #Navigation > .Selected,
-    #Navigation > li:hover {
-        color: #FF9922;
-    }
-
-    #Navigation > .Active > ul {
-        position: static;
-        min-width: 0px;
-        box-shadow: none;
-    }
-
-    #Navigation > .Active > ul li a {
-        padding: 7px 10px;
-        border: 0px;
-    }
-
     #Navigation .Search {
         width: auto !important;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
     .WidgetSimple span.Pagination,
     .OverviewActions span.Pagination {
         text-align: center;
@@ -326,6 +364,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin: 10px 0px;
     }
 
+    
     .WidgetSimple span.Pagination a,
     .OverviewActions span.Pagination a {
         display: inline-block;
@@ -341,14 +380,20 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         font-weight: normal;
         background-color: #555;
     }
+    */
 
     .WidgetSimple > .Header h2,
     .WidgetSimple > .Header h3 {
-        font-size: 14px;
+        font-size: var(--widget-simple-title-size);
+    }
+
+    .SidebarColumn .WidgetSimple > .Header h2,
+    .SidebarColumn .WidgetSimple > .Header h3 {
+        font-size: var(--main-font-size);
     }
 
     .Dashboard .ContentColumn .WidgetSimple > .Header {
-        padding: 7px 5px;
+        padding: var(--padding-md) var(--padding-xl);
     }
 
     .WidgetSimple .Buttons {
@@ -356,10 +401,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .WidgetSimple .Buttons span {
-        font-size: 14px;
+        font-size: var(--main-font-size);
     }
 
-    .WidgetSimple .Content form {
+    /* .WidgetSimple .Content form {
         display: block;
         width: 100%;
         overflow-y: hidden;
@@ -368,8 +413,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .WidgetSimple .Content form table.DataTable {
         min-width: 500px;
-    }
+    } */
 
+/*
     .WidgetSimple .ActionMenu {
         margin-right: 10px;
         border: 0px;
@@ -382,13 +428,22 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .WidgetSimple .WidgetAction,
     .RTL .WidgetSimple .WidgetAction {
         display: inline-block;
-        margin-right: 5px;
+        margin-right: 0;
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
     }
-
+*/
     .WidgetSimple .WidgetAction a {
         font-size: 22px;
-        display: inline-block;
-        margin-right: 5px;
+        display: flex;
+        margin-right: 0;
+    }
+
+    .Actions li a {
+        font-size: var(--font-size-sm);
     }
 
     /* Ticket creation screens */
@@ -397,11 +452,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: none !important;
     }
 
-    .MainBox.FormScreen > h1,
+    /* .MainBox.FormScreen > h1,
     .MainBox.FormScreen > .AsteriskExplanation {
         margin-left: 0px !important;
         text-align: center;
-    }
+    } */
 
     .RTL .MainBox.FormScreen > h1,
     .RTL .MainBox.FormScreen > .AsteriskExplanation {
@@ -431,7 +486,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     fieldset.TableLike > .Field input[type=file],
     fieldset.TableLike > .Row > .Field input[type=file] {
-        width: 95%;
+        width: 100%;
     }
 
     fieldset.TableLike > .RichTextField,
@@ -445,7 +500,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     body.Popup fieldset.TableLike > .RichTextField,
     body.RealPopup.RTL fieldset.TableLike > .RichTextField {
-        padding: 0px;
+        padding: 0 0 var(--padding-lg);
         margin: 0;
     }
 
@@ -453,14 +508,20 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     fieldset.TableLike > .Row > .Field > select,
     fieldset.TableLike > .Field > input,
     fieldset.TableLike > .Row > .Field > input {
-        padding: 3px;
+        padding: var(--padding-xs) var(--padding-sm);
         font-size: 0.9em;
-        width: 93%;
+        width: 100%;
+    }
+
+    fieldset.TableLike > .Field > input[type="checkbox"] {
+        width: 16px;
+        padding: 0;
+        margin: 7px 0;
     }
 
     fieldset.TableLike > .Field > input,
     fieldset.TableLike > .Row > .Field > input {
-        width: 90%;
+        width: 100%;
     }
 
     fieldset.TableLike > .Field > input[type=radio],
@@ -469,6 +530,26 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     fieldset.TableLike > .Row > .Field > input[type=checkbox] {
         width: auto;
     }
+/* 
+    fieldset.TableLike .Field a {
+        position: absolute;
+        top: 0;
+        right: -30px;
+        width: auto;
+        height: auto;
+        margin: 0;
+    } */
+
+    fieldset.TableLike .Field.SaveButtons a {
+        position: relative;
+        top: initial;
+        right: initial;
+        width: 100%;
+    }
+
+    /* fieldset.TableLike .Field a i {
+        font-size: 1em;
+    } */
 
     form label.Mandatory span.Marker {
         display: inline-block;
@@ -476,20 +557,20 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         position: static;
     }
 
-    form .FieldExplanation {
+    /*form .FieldExplanation {
         font-size: 0.8em;
-    }
+    }*/
 
     .AJAXLoader {
         position: relative;
         top: -10px;
     }
 
-    iframe.Signature {
+    /*iframe.Signature {
         width: 98% !important;
-    }
+    }*/
 
-    .CustomerContainer,
+    /* .CustomerContainer,
     .CcCustomerContainer,
     .BccCustomerContainer {
         width: auto;
@@ -500,17 +581,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .LayoutPopup .CcCustomerContainer,
     .LayoutPopup .BccCustomerContainer {
         margin-left: 30px;
-    }
+    } */
 
     .ui-overlay-autocomplete li.ui-menu-item {
         font-size: 1em;
         line-height: 150%;
     }
 
-    fieldset.TableLike > .Field > select ~ a i,
+    /* fieldset.TableLike > .Field > select ~ a i,
     fieldset.TableLike > .Row > .Field > select ~ a i {
         font-size: 1.3em;
-    }
+    } */
 
     .DatepickerIcon {
         font-size: 1.2em;
@@ -560,14 +641,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding: 0px;
     }
 
-    fieldset.TableLike > .Field,
+    /* fieldset.TableLike > .Field,
     fieldset.TableLike > .Row > .Field {
-        margin-left: 2px;
-    }
+        margin-left: 0;
+        padding-bottom: var(--padding-xl);
+    } */
 
     .RTL fieldset.TableLike > .Field,
     .RTL fieldset.TableLike > .Row > .Field {
-        margin-right: 2px;
+        margin-right: 0;
     }
 
     .RichTextField > .cke {
@@ -575,13 +657,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         max-width: 100% !important;
     }
 
-    #submitRichText span {
+    /* #submitRichText span {
         font-size: 15px;
-    }
+    } */
 
     .CallForAction,
     .cke_dialog_footer_buttons a.cke_dialog_ui_button {
-        margin: 0px auto;
+        margin: 0;
     }
 
     .CallForAction span,
@@ -596,14 +678,24 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     /* Widget Actions */
 
-    .OverviewActions, .DashboardActions {
+    .OverviewActions {
         position: relative;
     }
 
-    .Actions, .RTL .Actions {
+    /*
+    .DashboardActions {
+        position: absolute;
+    }
+    */
+
+    /* .Actions, .RTL .Actions {
         white-space: nowrap;
         overflow-x: auto;
         float: none;
+    } */
+
+    .ItemActions .Actions {
+        overflow-x: inherit;
     }
 
     .Actions li,
@@ -611,6 +703,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: inline-block;
         font-size: 14px;
         float: none;
+    }
+
+    /*
+    .DashboardActions .Actions {
+        padding: 0;
     }
 
     .DashboardActions .Actions li:after,
@@ -622,60 +719,51 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .DashboardActions .Actions:after {
         bottom: -15px;
     }
+    */
 
-    /* Tables */
-
-    .DataTable tr td,
-    .TableSmall tr td {
-        font-size: 14px;
+    
+    /*
+    .Tab.Actions li a {
+        font-size: var(--font-size-xs);
     }
+    */
 
-    .DataTable tr td,
-    .TableSmall tr td,
-    .DataTable tr td div,
-    .TableSmall tr td div,
-    .DataTable tr td span,
-    .TableSmall tr td span,
-    .DataTable tr td a.AsBlock,
-    .TableSmall tr td a.AsBlock {
-        overflow: hidden;
-        white-space: nowrap;
-        max-width: 200px;
-        text-overflow: ellipsis;
-    }
-
-    .DataTable .ColumnSettingsTrigger,
-    .TableSmall .ColumnSettingsTrigger {
-        display: none !important;
-    }
-
-    /* SidebarColumn */
+    /* Widget */
 
     .ResponsiveSidebarContainer .WidgetSimple {
         background: #fff;
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .InnerSidebarColumn .WidgetSimple {
+        background: var(--white);
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .InnerSidebarColumn .WidgetSimple .Header,
+    .MainBox .InnerSidebarColumn .WidgetSimple .Header {
+        padding: var(--padding-md);
+        background-color: #E8E8E8;
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+        margin: 0;
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .InnerSidebarColumn .WidgetSimple .Content,
+    .MainBox .InnerSidebarColumn .WidgetSimple .Content {
+        padding: var(--padding-md);
     }
 
     .ResponsiveSidebarContainer .SettingsWidget label {
         font-size: 14px;
     }
 
-    .LayoutFixedSidebar.SidebarLast .ResponsiveSidebarContainer > .SidebarColumn,
-    .LayoutFixedSidebar.SidebarFirst .ResponsiveSidebarContainer > .SidebarColumn {
-        position: fixed;
-        height: 100%;
-        top: 0px;
-        z-index: 999;
-        width: 280px;
-        right: -300px;
-        overflow: auto;
-        background: #222;
-        padding: 0px 10px;
+
+
+    .InnerMainBoxContent .ContentColumn .WidgetSimple .Content dl .FieldExplanation {
+        font-size: var(--font-size-sm);
     }
 
-    .LayoutFixedSidebar.SidebarLast .ResponsiveSidebarContainer > .SidebarColumn > :first-child,
-    .LayoutFixedSidebar.SidebarFirst .ResponsiveSidebarContainer > .SidebarColumn > :first-child {
-        margin-top: 60px;
-    }
+
 
     #ContextSettingsDialog,
     #ContextSettingsDialogOverviewSmall {
@@ -683,6 +771,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         max-height: 100%;
     }
 
+    /*
     .OverviewActions > ul.Actions {
         float: none;
         display: block;
@@ -691,9 +780,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         text-align: center;
     }
 
+
     .OverviewActions > span.Pagination {
         height: 22px;
     }
+    */
 
     .OverviewZoom a {
         padding: 5px 7px;
@@ -707,7 +798,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     /* Login */
-    .LoginScreen .W33pc {
+    /* .LoginScreen .W33pc {
         width: 80%;
         text-align: center;
     }
@@ -739,7 +830,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .LoginScreen fieldset button.Primary.CallForAction span {
         padding: 10px;
         font-size: 15px;
-    }
+    } */
 
     /* Dialogs */
     .Dialog > .Content > .ContentFooter button {
@@ -748,6 +839,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     #SearchForm, #AgentCustomerInformationCenterSearchForm, #AgentCustomerUserInformationCenterSearchForm {
         width: auto;
+    }
+
+    #SearchForm {
+        max-height: 60vh;
     }
 
     #AgentCustomerInformationCenterSearchForm fieldset.TableLike > .Field > input,
@@ -773,13 +868,16 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin-right: 0px;
     }
 
-    fieldset.TableLike > label,
+    /* fieldset.TableLike > label,
     fieldset.TableLike > .Row > label,
     fieldset.TableLike.FixedLabelSmall > label,
     fieldset.TableLike.FixedLabelSmall > .Row > label {
-        width: auto;
-        margin-right: 5px;
-    }
+        width: 170px;
+        float: left;
+        text-align: right;
+        margin: 0;
+        padding-right: var(--padding-lg);
+    } */
 
     fieldset.TableLike.FixedLabel > label,
     fieldset.TableLike.FixedLabel > .Row > label {
@@ -832,12 +930,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: auto;
     }
 
-    .TicketZoom .ResponsiveSidebarContainer .ItemRow {
+    /* .TicketZoom .ResponsiveSidebarContainer .ItemRow {
         margin: 10px 0px 0px 0px;
-    }
+    } */
 
     .ResponsiveSidebarContainer fieldset.Narrow {
-        padding: 0px 10px;
+        padding: 0px;
     }
 
     .ResponsiveSidebarContainer div.Content {
@@ -860,6 +958,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .ResponsiveSidebarContainer fieldset.TableLike {
         margin-bottom: 10px;
         line-height: 1.7em;
+        font-size: var(--font-size-sm);
     }
 
     .ResponsiveSidebarContainer fieldset.TableLike:empty {
@@ -876,10 +975,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         max-width: 200px;
     }
 
-    .TicketZoom .Actions li:after {
+    /* .TicketZoom .Actions li:after {
         display: inline-block;
         float: none;
-    }
+    } */
 
     .ArticleMailContent.WithMeta .ArticleBody,
     .ArticleMailContent.WithMeta .ArticleMailContentHTMLWrapper {
@@ -900,6 +999,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .MainBox.ErrorScreen .CenterBox {
         width: auto;
+        margin: unset;
         margin-bottom: 15px;
     }
 
@@ -1008,15 +1108,26 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding: 0px;
     }
 
+    .ActionsSideBar.LayoutFixedSidebar .ContentWrapper {
+        width: 100%;
+    }
+
+    .ActionsSideBar.LayoutFixedSidebar .ContentWrapper .InnerMainBoxContent .ContentColumn {
+        width: 100%;
+        padding-right: 0;
+    }
+
     /*
      * @subsection Ticket Overview Large
      */
 
+    /*
     ul.OverviewZoom {
         text-align: center;
         float: none;
         display: block;
     }
+    
 
     .OverviewLarge .Infos {
         width: 100%;
@@ -1028,6 +1139,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
         float: none;
     }
+    */
 
     .OverviewLarge div.Infos table td {
         border: none;
@@ -1122,29 +1234,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin-left: 5px;
     }
 
-    /* Popups */
+    
 
-    .LayoutPopup fieldset.TableLike.FixedLabel > label,
-    .LayoutPopup fieldset.TableLike.FixedLabel > .Row > label {
-        width: auto;
-    }
-
-    .LayoutPopup > .Header h1 {
-        white-space: normal;
-    }
-
-    .LayoutPopup fieldset.TableLike.FixedLabel > .Field,
-    .LayoutPopup fieldset.TableLike.FixedLabel > .Row > .Field,
-    .LayoutPopup fieldset.TableLike.FixedLabel > .Value,
-    .LayoutPopup fieldset.TableLike.FixedLabel > .Row > .Value {
-        margin-left: 0px;
-        padding-left: 0px;
-    }
-
-    .LayoutPopup fieldset.TableLike > .Field > select,
-    .LayoutPopup fieldset.TableLike > .Row > .Field > select {
-        width: auto;
-    }
 
     /* Statistics */
 
@@ -1173,13 +1264,31 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     /* Process dialogs */
 
-    #ActivityDialogContent .LayoutPopup > .Content {
+    /* #ActivityDialogContent .LayoutPopup > .Content {
         padding: 0px;
         border-top: 1px solid #ccc;
-    }
+    } */
+
+
+
+
+
+
+
+
+
 
     /* Cluster */
 
+
+
+    /* .TicketZoom .ContentColumn .WidgetSimple .Content.OverflowVisible {
+        padding: 0 0 var(--padding-lg);
+    } */
+
+
+
+/* 
     .Cluster .ClusterLink {
         display: none;
     }
@@ -1193,25 +1302,35 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         background: none;
         box-shadow: none;
         min-width: 0px;
+        padding: 0;
     }
 
     .Cluster ul.Actions {
         margin-right: 35px;
     }
 
+    .Cluster ul li#nav-People,
+    .Cluster ul li#nav-Communication, 
+    .Cluster ul li#nav-Miscellaneous {
+        padding: 0;
+    }
+
     .Cluster ul ul li {
+        position: relative;
         display: inline-block;
         border: 0px;
+        padding: 0 var(--padding-sm) !important;
     }
 
     .Cluster ul ul li a {
         display: inline-block;
-        padding: 5px 2px !important;
+        padding: 0 !important;
     }
 
     .Cluster ul ul li:after {
         display: inline-block !important;
         margin: 0px;
+        right: -2px !important;
     }
 
     .Cluster ul ul li a:hover {
@@ -1222,22 +1341,31 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .Cluster .WidgetAction.ArticleView {
         z-index: 100;
-        background: #f5f5f5;
-        background: #f5f5f5;
-        width: 35px;
+        background: transparent;
+        width: 20px;
         text-align: center;
         margin: 0px !important;
         right: 0px;
+        left: inherit;
         top: 0px;
-        line-height: 35px;
-        height: 35px;
+        line-height: 20px;
+        height: 20px;
     }
+ */
+
+
+
+
+
+
+
+
 
     /* Input Fields */
 
     div.InputField_Container {
-        width: 90%;
-        margin-right: 10px;
+        width: 100%;
+        margin-right: 0;
     }
 
     div.InputField_InputContainer {
@@ -1245,25 +1373,21 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     div.InputField_InputContainer input.InputField_Search {
-        padding: 3px;
+        padding: var(--padding-xs) var(--padding-sm);
         font-size: 0.9em;
-        width: 100% !important;
+        width: inherit;
     }
 
-    div.InputField_ListContainer {
-        margin-top: -1px;
-    }
-
-    div.InputField_Selection {
-        height: 1.4em;
-        line-height: 0.8em;
+    /* div.InputField_Selection {
+        height: auto;
+        line-height: var(--main-line-height);
     }
 
     div.InputField_Selection div,
     div.InputField_FiltersList,
     div.InputField_ToolbarContainer ul li a {
         font-size: 0.8em;
-    }
+    } */
 
     div.InputField_More {
         top: 8px;
@@ -1280,6 +1404,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     div.InputField_TreeContainer {
         max-height: 103px;
         line-height: 1.4em;
+    }
+
+    .ticketDetails .Actions li:nth-last-child(2):after {
+        content: '';
     }
 
     .jstree-InputField-Tree .jstree-node,
@@ -1311,14 +1439,48 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .BreadCrumb li:before,
     .BreadCrumb li:after {
-        top: 50%;
-        border-width: 22px;
-        margin-top: -22px;
+        top: 0;
+        border-width: 6px;
+        margin-top: 1px;
+    }
+
+    /* Tables */
+
+    .DataTable tr td,
+    .TableSmall tr td {
+        font-size: 14px;
+    }
+
+    .DataTable tr td,
+    .TableSmall tr td,
+    .DataTable tr td div,
+    .TableSmall tr td div,
+    .DataTable tr td span,
+    .TableSmall tr td span,
+    .DataTable tr td a.AsBlock,
+    .TableSmall tr td a.AsBlock {
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 200px;
+        text-overflow: ellipsis;
+    }
+
+    .DataTable .ColumnSettingsTrigger,
+    .TableSmall .ColumnSettingsTrigger {
+        display: none !important;
     }
 
 
-    #OverviewBody.Overview.TicketList {
-        overflow-y:auto;
+
+    .TicketList form {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .TicketList form table {
+        width: 100%;
+        max-width: 100%;
     }
 
 
@@ -1411,6 +1573,33 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
 }
+
+
+@media only screen and (min-width: 768px) and (max-width: 850px) {
+
+    /* Dashboard */
+    /*
+    .DashboardActions {
+        position: absolute;
+        top: 45px;
+        right: initial;
+        left: 0;
+        background: var(--white);
+        width: 100%;
+        padding: 0 var(--padding-md) var(--padding-sm);
+    }
+    */
+
+    .Dashboard .ContentColumn .WidgetSimple.CanDrag > .Content {
+        /*padding-top: var(--padding-lg);*/
+    }
+
+    /* Admin */
+    /* .ActionsSideBar.LayoutFixedSidebar .GridGroups .ItemListGrid > li {
+        width: calc(33% - var(--margin-md));
+    } */
+}
+
 
 /*  ~ Tablet portrait */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
@@ -1567,3 +1756,129 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: none;
     }
 }
+
+
+
+/***********************************************************************/
+/*    Moved from Core.Reset.Forwwward.css                              */
+/***********************************************************************/
+/*
+@media (min-width: 1600px) {
+
+    div.CustomerContainer, 
+    div.CcCustomerContainer, 
+    div.BccCustomerContainer {
+        background: var(--white);
+        background-color: var(--white);
+    }
+
+    .FormScreen .ContentColumn {
+        padding: var(--padding-sm);
+    }
+
+    .FormScreen .ContentColumn .card-item,
+    .Popup fieldset .card-item{
+        margin: var(--margin-sm);
+    }
+}
+
+
+@media (min-width: 1201px) {
+
+    .LayoutPopup > .Content:not(.LayoutFixedSidebar) .card-item {
+        margin: var(--margin-sm);
+        background: var(--main-bg-color);
+        padding: var(--padding-lg);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .LayoutPopup > .Content:not(.LayoutFixedSidebar) > .TableLike {
+        max-width: unset;
+    }
+
+    .LayoutPopup > .Content:not(.LayoutFixedSidebar) .card-item:after {
+        display: none;
+    }
+
+    .LayoutPopup > .Content:not(.LayoutFixedSidebar) .Content {
+        max-width: unset;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1599px) {
+
+    .Popup .WidgetSimple,
+    .LayoutPopup > .Content.card {
+        display: flex;
+        flex-flow: column;
+    }
+    
+    .Popup .WidgetSimple .Content,
+    .LayoutPopup > .Content.card fieldset {
+        width: 100%;
+        max-width: 800px;
+        align-self: center;
+        flex-flow: column;
+        align-items: center;
+    }
+
+    .FormScreen .ContentColumn{
+        display: flex;
+        flex-flow: column;
+    }
+
+    #ActivityDialogContent div.ContentColumn {
+        display: flex;
+        align-items: center;
+    }
+
+    .FormScreen #NewEmailTicket,
+    .FormScreen #NewPhoneTicket {
+        align-self: center;
+    }
+
+    .FormScreen .ContentColumn > form {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .FormScreen .ContentColumn > form#NewProcessTicket {
+        max-width: unset;
+    }
+
+    #ActivityDialogContent div.ContentColumn > form {
+        display: flex;
+        justify-content: center;
+        align-self: center;
+    }
+    
+    div.card-item,
+    div.card-item > .Row {
+        background: none;
+        border: 0;
+    }
+
+    div.card-item > .Row.col-desktop-50 {
+        width: calc(50% - 10px);
+    }
+
+    div.card-item {
+        padding: var(--padding-lg) var(--padding-sm);
+    }
+
+    div.card-item::after {
+        content: '';
+        width: calc(100% + 200px);
+        height: 1px;
+        position: absolute;
+        left: -100px;
+        bottom: 0;
+        background: var(--border-color);
+    }
+
+    .LayoutPopup .TableLike :nth-last-child(1):after,
+    .MainBox .card .TableLike :nth-last-child(2):after {
+        background: transparent;
+    }
+}
+*/

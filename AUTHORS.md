@@ -84,6 +84,7 @@ The following persons contributed to Znuny:
 * Paul Waring <paul@xk7.net>
 * Paweł Bogusławski <pawel.boguslawski@ib.pl>
 * Peter Krantz <peter@peterkrantz.se>
+* Peter Værlien <peter.varlien@kdrs.no>
 * Ralf Hildebrandt <hildeb@charite.de>
 * Raphaël Doursenaud <rdoursenaud@gpcsolutions.fr>
 * Renée Bäcker <info@perl-services.de>
@@ -94,6 +95,7 @@ The following persons contributed to Znuny:
 * Romain THERRAT <romain42@gmail.com>
 * Roy Kaldung <rk@znuny.com>
 * Rui Patinha <rui.patinha@otrs.com>
+* Rúben Sardinha <ruben.sardinha@outlook.com>
 * Sanjin Vik <svik@s7designcreative.com>
 * Shawn Beasley <shawn.beasley@znuny.com>
 * Stefan Bedorf <stefan.bedorf@otrs.com>
@@ -118,6 +120,7 @@ The following persons contributed to Znuny:
 * anonymous <unknown@anonymous>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * djurici <igor.djuric@muehlbauer.de>
+* forwwward <hello@forwwward.studio>
 * jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
 * juanmclavero <juanm.clavero@ibsalut.es>
 * meisterheister <35762852+meisterheister@users.noreply.github.com>

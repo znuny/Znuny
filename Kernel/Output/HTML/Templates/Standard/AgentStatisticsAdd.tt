@@ -6,26 +6,9 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+<div class="MainBox AriaRoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
 
-<div class="MainBox AriaRoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Statistics Management") | html %]</h1>
-
-    [% USE ActionLink = String( 'AgentStatistics' ) %]
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Statistics Management'),
-                Link => ActionLink.append( ';Subaction=Overview' ),
-            },
-            {
-                Name => Translate("Add Statistics"),
-            }
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath Type = "Agent" %]
-
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -33,10 +16,19 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview" class="CallForAction Fullsize Center">
+                            <span>
+                                <i class="fa fa-caret-left"></i>
+                                [% Translate("Go to overview") | html %]
+                            </span>
+                        </a>
                     </li>
                     <li>
-                        <a href="https://doc.otrs.com/doc/manual/admin/[% Data.ManualVersion | uri %].0/en/html/statistics-module.html" target="_blank" class="CallForAction Fullsize Center"><span><i class="fa fa-book"></i>[% Translate("Read more about statistics in OTRS") | html %]</span></a>
+                        <a href="https://doc.znuny.org/znuny/admin/statistics" target="_blank" class="CallForAction Fullsize Center">
+                            <span>
+                                [% Translate("Read more about statistics in Znuny") | html %]
+                            </span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -44,6 +36,23 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Statistics Management") | html %]</h1>
+
+        [% USE ActionLink = String( 'AgentStatistics' ) %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Statistics Management'),
+                    Link => ActionLink.append( ';Subaction=Overview' ),
+                },
+                {
+                    Name => Translate("Add Statistics"),
+                }
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath Type = "Agent" %]
+
         <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
             <input type="hidden" name="Action" value="[% Env("Action") %]"/>
             <input type="hidden" name="Subaction" value="AddAction"/>
@@ -111,15 +120,16 @@
                     <h2>[% Translate("Create Statistic") | html %]</h2>
                 </div>
                 <div class="Content">
-                    <fieldset class="TableLike">
-                        <div class="Field SpacingTop">
-                            <button class="Primary CallForAction" type="submit" value="[% Translate("Save") | html %]">
-                                <span>[% Translate("Save") | html %]</span>
-                            </button>
-                            [% Translate('or') | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview">
-                                [% Translate('Cancel') | html %]
-                            </a>
+                    <fieldset class="TableLike full-width">
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview" class="btn-cancel-ghost btn-main btn-width-md">
+                                    [% Translate('Cancel') | html %]
+                                </a>
+                                <button class="btn-primary btn-main btn-width-md" type="submit" value="[% Translate("Save") | html %]">
+                                    <span>[% Translate("Save") | html %]</span>
+                                </button>
+                            </div>
                         </div>
                     </fieldset>
                 </div>

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.63611469072165;
+    $Self->{Completeness}        = 0.622170824384603;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -41,7 +41,6 @@ sub Data {
     $Self->{Translation} = {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
-        'ACL Management' => 'مدیریت ACL',
         'Actions' => 'عملیات‌ها',
         'Create New ACL' => 'ایجاد ACL جدید ',
         'Deploy ACLs' => 'استقرار ACL ها',
@@ -60,7 +59,11 @@ sub Data {
             'برای ایجاد یک ACL جدید شما هم می توانید واردات ACL ها که از سیستم دیگری صادر شده و یا ایجاد کنید یک ACL جدید کامل.',
         'Changes to the ACLs here only affect the behavior of the system, if you deploy the ACL data afterwards. By deploying the ACL data, the newly made changes will be written to the configuration.' =>
             'تغییرات به ACL در اینجا تنها رفتار سیستم تاثیر می گذارد، اگر شما اطلاعات ACL اعزام پس از آن. با استقرار داده ACL، تغییرات تازه ساخته شده را به پیکربندی نوشته شده است.',
+        'ACL Management' => 'مدیریت ACL',
         'ACLs' => 'ACL ها',
+        'Filter' => 'فیلتر',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'لطفا توجه داشته باشید: این جدول نشان دهنده حکم اعدام از ACL ها است. اگر شما نیاز به تغییر نظم که در آن ACL ها اجرا می شوند، لطفا نام ACL ها را تحت تاثیر قرار را تغییر دهید.',
         'ACL name' => 'نام ACL',
@@ -72,8 +75,6 @@ sub Data {
         'No matches found.' => 'هیچ موردی یافت نشد.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
-        'Edit ACL %s' => 'ویرایش ACL %s',
-        'Edit ACL' => '',
         'Go to overview' => 'به نمای کلی برو',
         'Delete ACL' => 'حذف ACL',
         'Delete Invalid ACL' => 'حذف نامعتبر ACL',
@@ -84,16 +85,16 @@ sub Data {
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'تنظیم آنچه که می خواهید تغییر دهید اگر بازی معیارهای. به خاطر داشته باشید که ممکن است یک لیست سفید، \'PossibleNot، یک لیست سیاه است.',
         'Check the official %sdocumentation%s.' => '',
+        'Edit ACL %s' => 'ویرایش ACL %s',
+        'Edit ACL' => '',
         'Show or hide the content' => 'نمایش یا عدم نمایش محتوا',
         'Edit ACL Information' => '',
         'Name' => 'نام',
         'Stop after match' => 'توقف بعد از تطبیق',
         'Edit ACL Structure' => '',
-        'Save ACL' => 'ذخیره ACL',
-        'Save' => 'ذخیره',
-        'or' => 'یا',
-        'Save and finish' => 'ذخیره و پایان',
         'Cancel' => 'لغو',
+        'Save' => 'ذخیره',
+        'Save and finish' => 'ذخیره و پایان',
         'Do you really want to delete this ACL?' => 'آیا شما واقعا می خواهید این ACL را حذف کنید؟',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt
@@ -101,11 +102,9 @@ sub Data {
             'درست ACL جدید با ارسال داده های فرم را. پس از ایجاد ACL، شما قادر به اضافه کردن آیتم های پیکربندی در حالت ویرایش خواهد بود.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
-        'Calendar Management' => 'مدیریت تقویم',
-        'Add Calendar' => 'اضافه‌کردن تقویم',
-        'Edit Calendar' => 'ویرایش تقویم',
         'Calendar Overview' => '',
         'Add new Calendar' => 'اضافه کردن تقویم جدید',
+        'Add Calendar' => 'اضافه‌کردن تقویم',
         'Import Appointments' => '',
         'Calendar Import' => '',
         'Here you can upload a configuration file to import a calendar to your system. The file needs to be in .yml format as exported by calendar management module.' =>
@@ -124,6 +123,8 @@ sub Data {
         'Create: users can create and delete appointments in the calendar.' =>
             '',
         'Read/write: users can manage the calendar itself.' => '',
+        'Calendar Management' => 'مدیریت تقویم',
+        'Edit Calendar' => 'ویرایش تقویم',
         'Group' => 'گروه',
         'Changed' => 'تغییر یافت',
         'Created' => 'ایجاد شد',
@@ -135,7 +136,6 @@ sub Data {
         'Calendar' => 'تقویم',
         'Calendar name' => '',
         'Calendar with same name already exists.' => '',
-        'Color' => '',
         'Permission group' => '',
         'Ticket Appointments' => '',
         'Rule' => 'قاعده',
@@ -156,11 +156,11 @@ sub Data {
         'Submit' => 'ارسال',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentImport.tt
-        'Appointment Import' => '',
         'Go back' => 'برگرد',
         'Uploaded file must be in valid iCal format (.ics).' => '',
         'If desired Calendar is not listed here, please make sure that you have at least \'create\' permissions.' =>
             '',
+        'Appointment Import' => '',
         'Upload' => 'ارسال فایل',
         'Update existing appointments?' => '',
         'All existing appointments in the calendar with same UniqueID will be overwritten.' =>
@@ -169,9 +169,7 @@ sub Data {
         'Import appointments' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-        'Appointment Notification Management' => '',
         'Add Notification' => 'افزودن اعلان',
-        'Edit Notification' => 'ویرایش اعلان',
         'Export Notifications' => 'ارسال اطلاعات',
         'Filter for Notifications' => '',
         'Filter for notifications' => '',
@@ -180,6 +178,8 @@ sub Data {
         'Overwrite existing notifications?' => 'بازنویسی اطلاعات موجود؟',
         'Upload Notification configuration' => 'هشدار از طریق بارگذاری پیکربندی ',
         'Import Notification configuration' => ' هشدار از طریق دریافت پیکربندی',
+        'Appointment Notification Management' => '',
+        'Edit Notification' => 'ویرایش اعلان',
         'List' => 'فهرست',
         'Delete' => 'حذف',
         'Delete this notification' => 'حذف این اعلان',
@@ -203,11 +203,11 @@ sub Data {
         'Send to these agents' => 'ارسال به این عوامل',
         'Send to all group members (agents only)' => '',
         'Send to all role members' => 'ارسال به تمام نقشهای اعضا',
-        'Send on out of office' => 'ارسال در خارج از دفتر',
         'Also send if the user is currently out of office.' => 'همچنین ارسال در صورتی که کاربر در حال حاضر خارج از دفتر.',
-        'Once per day' => 'یک بار در روز',
+        'Send on out of office' => 'ارسال در خارج از دفتر',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '',
+        'Once per day' => 'یک بار در روز',
         'Notification Methods' => 'روش های اطلاع رسانی',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             'این روش ممکن است که می تواند مورد استفاده برای ارسال این اطلاع رسانی به هر یک از دریافت کنندگان می باشد. لطفا حداقل یک روش زیر انتخاب کنید.',
@@ -218,7 +218,6 @@ sub Data {
         'This is the default value for assigned recipient agents who didn\'t make a choice for this notification in their preferences yet. If the box is enabled, the notification will be sent to such agents.' =>
             'این مقدار پیش فرض برای عوامل گیرنده اختصاص داده که یک انتخاب برای این اطلاع رسانی در تنظیمات خود را هنوز رتبهدهی نشده است. اگر در کادر فعال باشد، اطلاع رسانی خواهد شد به چنین عوامل فرستاده می شود.',
         'This feature is currently not available.' => 'این قابلیت در حال حاضر در دسترس نیست.',
-        'Please activate this transport in order to use it.' => '',
         'No data found' => 'داده ای یافت نشد',
         'No notification method found.' => 'هیچ روش اطلاع رسانی یافت نشد.',
         'Notification Text' => 'متن اطلاع رسانی',
@@ -246,14 +245,14 @@ sub Data {
         'If encryption key/certificate is missing' => 'اگر کلید رمزنگاری / گواهی از دست رفته است',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
-        'Attachment Management' => 'مدیریت پیوست‌ها',
         'Add Attachment' => 'افزودن پیوست',
-        'Edit Attachment' => 'ویرایش پیوست',
         'Filter for Attachments' => 'فیلتر برای پیوست‌ها',
         'Filter for attachments' => '',
         'Related Actions' => '',
         'Templates' => 'قالب ها',
         'Templates ↔ Attachments' => '',
+        'Attachment Management' => 'مدیریت پیوست‌ها',
+        'Edit Attachment' => 'ویرایش پیوست',
         'Filename' => 'نام فایل',
         'Download file' => 'بارگیری فایل',
         'Delete this attachment' => 'حذف این پیوست',
@@ -261,57 +260,29 @@ sub Data {
         'Attachment' => 'پیوست',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-        'Auto Response Management' => 'مدیریت پاسخ خودکار',
         'Add Auto Response' => 'افزودن پاسخ خودکار',
-        'Edit Auto Response' => 'ویرایش پاسخ خودکار',
         'Filter for Auto Responses' => 'فیلتر برای پاسخ‌های خودکار',
         'Filter for auto responses' => '',
         'Queues ↔ Auto Responses' => '',
+        'Auto Response Management' => 'مدیریت پاسخ خودکار',
+        'Edit Auto Response' => 'ویرایش پاسخ خودکار',
         'Response' => 'پاسخ',
         'Auto response from' => 'پاسخ خودکار از طرف',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
-        'Cloud Service Management' => 'مدیریت سرویس های ابری',
-        'Support Data Collector' => 'پشتیبانی از داده های جمع آوری شده',
-        'Support data collector' => 'پشتیبانی از داده های جمع آوری شده ',
-        'Hint' => 'تذکر',
-        'Currently support data is only shown in this system.' => 'در حال حاضر اطلاعات پشتیبانی داداه ها فقط در این سیستم نمایش داده شد ه . ',
-        'It is highly recommended to send this data to OTRS Group in order to get better support.' =>
-            'آن را بسیار توصیه به ارسال این اطلاعات را به OTRS گروه به منظور رسیدن به پشتیبانی بهتر.',
-        'Configuration' => 'پیکر بندی',
-        'Send support data' => 'ارسال پشتیبانی  داده ها',
-        'This will allow the system to send additional support data information to OTRS Group.' =>
-            'این اجازه خواهد داد این سیستم را به ارسال اطلاعات اضافی داده ها پشتیبانی به OTRS گروه.',
-        'Update' => 'بروزرسانی',
-        'System Registration' => 'ثبت نام سیستم',
-        'To enable data sending, please register your system with OTRS Group or update your system registration information (make sure to activate the \'send support data\' option.)' =>
-            'برای فعال کردن ارسال اطلاعات، لطفا ثبت نام سیستم خود را با OTRS گروه یا به روز رسانی اطلاعات ثبت نام سیستم تان انجام دهید (مطمئن شوید که  گزینه  "ارسال  پشتیبانی داده ها " فعال است.)',
-        'Register this System' => 'ثبت نام این سیستم',
-        'System Registration is disabled for your system. Please check your configuration.' =>
-            'سیستم ثبت نام برای سیستم شما غیر فعال است. لطفا پیکربندی خود را چک کنید.',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServices.tt
-        'System registration is a service of OTRS Group, which provides a lot of advantages!' =>
-            'ثبت نام سیستم یک سرویس از OTRS گروه، فراهم می کند که بسیاری از مزایای است!',
-        'Please note that the use of OTRS cloud services requires the system to be registered.' =>
-            'لطفا توجه داشته باشید که استفاده از سیستم های ابری  OTRS نیاز به این سیستم  ثبت نام دارد . ',
-        'Here you can configure available cloud services that communicate securely with %s.' =>
-            'در اینجا شما می توانید خدمات ابر در دسترس است که امن برقراری ارتباط با پیکربندی %s .',
-        'Available Cloud Services' => 'سرویس های ابری در دسترس',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLog.tt
-        'Communication Log' => '',
         'Time Range' => '',
         'Show only communication logs created in specific time range.' =>
             '',
         'Filter for Communications' => '',
         'Filter for communications' => '',
+        'Hint' => 'تذکر',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             '',
         'You can change the sort and order of the columns by clicking on the column header.' =>
             '',
         'If you click on the different entries, you will get redirected to a detailed screen about the message.' =>
             '',
+        'Communication Log' => '',
         'Status for: %s' => '',
         'Failing accounts' => '',
         'Some account problems' => '',
@@ -334,12 +305,12 @@ sub Data {
         '%s s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
-        'Account Status' => '',
         'Back to overview' => '',
         'Filter for Accounts' => '',
         'Filter for accounts' => '',
         'You can change the sort and order of those columns by clicking on the column header.' =>
             '',
+        'Account Status' => '',
         'Account status for: %s' => '',
         'Status' => 'وضعیت',
         'Account' => '',
@@ -362,24 +333,24 @@ sub Data {
         'No log entries found.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogZoom.tt
-        'Detail view for %s communication started at %s' => '',
         'Filter for Log Entries' => '',
         'Filter for log entries' => '',
         'Show only entries with specific priority and higher:' => '',
+        'Detail view for %s communication started at %s' => '',
         'Communication Log Overview (%s)' => '',
         'No communication objects found.' => '',
         'Communication Log Details' => '',
         'Please select an entry from the list.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
-        'Customer Management' => 'مدیریت مشترک',
-        'Add Customer' => 'افزودن مشترک',
-        'Edit Customer' => 'ویرایش مشترک',
         'Search' => 'جستجو',
         'Wildcards like \'*\' are allowed.' => 'نویسه عام مانند "*" مجاز است.',
+        'Add Customer' => 'افزودن مشترک',
         'Select' => 'انتخاب',
         'Customer Users' => 'مشترکین',
         'Customers ↔ Groups' => '',
+        'Customer Management' => 'مدیریت مشترک',
+        'Edit Customer' => 'ویرایش مشترک',
         'List (only %s shown - more available)' => 'فهرست (فقط %s نشان داده شده است - در دسترس تر)',
         'total' => 'مجموع',
         'Please enter a search term to look for customers.' => 'لطفا عبارت جستجو را وارد نمایید تا مشترکین را جستجو نمایید.',
@@ -388,7 +359,6 @@ sub Data {
         'This customer backend is read only!' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
-        'Manage Customer-Group Relations' => 'مدیریت روابط مشترک-گروه',
         'Notice' => 'توجه',
         'This feature is disabled!' => 'این ویژگی غیر فعال است',
         'Just use this feature if you want to define group permissions for customers.' =>
@@ -404,6 +374,7 @@ sub Data {
             'اگرچیزی انتخاب نشود، هیچ دسترسی در این گروه موجود نیست (درخواست‌ها برای مشترک در دسترس نیست)',
         'Customers' => 'مشترکین',
         'Groups' => 'گروه‌ها',
+        'Manage Customer-Group Relations' => 'مدیریت روابط مشترک-گروه',
         'Search Results' => 'نتیجه جستجو',
         'Change Group Relations for Customer' => 'تغییر ارتباطات گروه برای مشترک',
         'Change Customer Relations for Group' => 'تغییر ارتباطات مشترک برای گروه',
@@ -419,15 +390,15 @@ sub Data {
             'دسترسی کامل به درخواست‌ها در این لیست / گروه.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
-        'Customer User Management' => 'مدیریت کاربری مشترک',
-        'Add Customer User' => 'اضافه کردن کاربر مشترک',
-        'Edit Customer User' => ' ویرایش کاربر مشتری',
         'Back to search results' => 'بازگشت به نتایج جستجو',
+        'Add Customer User' => 'اضافه کردن کاربر مشترک',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'کاربران و ضوابط مورد نیاز برای یک سابقه مشتری و برای ورود به سایت از طریق پنل مشتری می باشد.',
         'Customer Users ↔ Customers' => '',
         'Customer Users ↔ Groups' => '',
         'Customer Users ↔ Services' => '',
+        'Customer User Management' => 'مدیریت کاربری مشترک',
+        'Edit Customer User' => ' ویرایش کاربر مشتری',
         'List (%s total)' => 'فهرست ( تعداد %s)',
         'Username' => 'نام کاربری',
         'Email' => 'ایمیل',
@@ -457,8 +428,8 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
-        'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
+        'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'اعمال وضعیت فعال برای همه',
@@ -466,7 +437,6 @@ sub Data {
         'Toggle active state for %s' => 'اعمال وضعیت فعال برای %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
-        'Manage Customer User-Group Relations' => '',
         'Just use this feature if you want to define group permissions for customer users.' =>
             '',
         'Edit Customer User Default Groups' => '',
@@ -478,18 +448,18 @@ sub Data {
         'Select the customer user - group permissions.' => '',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer user).' =>
             '',
+        'Manage Customer User-Group Relations' => '',
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Manage Customer User-Service Relations' => '',
         'Edit default services' => 'ویرایش خدمات پیش‌فرض',
         'Filter for Services' => 'فیلتر برای خدمات',
         'Filter for services' => '',
         'Services' => 'خدمات',
         'Service Level Agreements' => 'توافقات سطح سرویس',
+        'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
-        'Dynamic Fields Management' => 'مدیریت پویای زمینه',
         'Add new field for object' => 'اضافه کردن فیلد جدید برای موضوع',
         'Filter for Dynamic Fields' => '',
         'Filter for dynamic fields' => '',
@@ -503,6 +473,7 @@ sub Data {
         'Export configurations' => '',
         'Process Management' => 'مدیریت فرآیند',
         'Dynamic fields ↔ Screens' => '',
+        'Dynamic Fields Management' => 'مدیریت پویای زمینه',
         'Dynamic Fields List' => ' فهرست زمینه حرکتی',
         'Dynamic fields per page' => 'زمینه های پویا در هر صفحه',
         'Label' => 'برچسب',
@@ -511,8 +482,8 @@ sub Data {
         'Delete this field' => 'حذف این قسمت',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
-        'Dynamic Fields' => 'رشته های پویا',
         'Go back to overview' => 'برگرد به نمایش مجموعه',
+        'Dynamic Fields' => 'رشته های پویا',
         'General' => 'عمومی',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'این فیلد مورد نیاز است، و بها باید فقط حروف و عدد باشد.',
@@ -539,11 +510,11 @@ sub Data {
         'This is the default value for this field.' => 'این مقدار پیش فرض برای این رشته است.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldConfigurationImportExport.tt
-        'Dynamic field configurations: %s' => '',
         'Select the dynamic fields you want to import and click on \'Import\'.' =>
             '',
         'Select the dynamic fields whose configuration you want to export and click on \'Export\' to generate a YAML file.' =>
             '',
+        'Dynamic field configurations: %s' => '',
         'Dynamic fields' => 'زمینه های پویا',
         'For the following dynamic fields a configuration cannot be imported because of an invalid backend.' =>
             '',
@@ -602,7 +573,6 @@ sub Data {
         'Screens' => '',
         'Default columns' => '',
         'Add dynamic field' => '',
-        'Filter' => 'فیلتر',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
         'Filter available elements' => '',
@@ -675,7 +645,7 @@ sub Data {
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
             '',
         'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in OTRS (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
+        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -700,9 +670,9 @@ sub Data {
         'StoredValue' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminEmail.tt
-        'Admin Message' => '',
         'With this module, administrators can send messages to agents, group or role members.' =>
             'با استفاده از این ماژول، مدیران سیستم می‌توانند پیغام‌ها را به کارشناسان، گروه‌ها و یا اعضای با نقش خاص ارسال کنند.',
+        'Admin Message' => '',
         'Create Administrative Message' => 'ساخت پیغام مدیریتی',
         'Your message was sent to' => 'پیغام شما ارسال شد برای',
         'From' => 'فرستنده',
@@ -715,14 +685,14 @@ sub Data {
         'Send' => 'ارسال',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-        'Generic Agent Job Management' => '',
-        'Edit Job' => '',
         'Add Job' => '',
-        'Run Job' => '',
         'Filter for Jobs' => '',
         'Filter for jobs' => '',
+        'Generic Agent Job Management' => '',
+        'Edit Job' => '',
+        'Run Job' => '',
         'Last run' => 'آخرین اجرا',
-        'Run Now!' => 'اجرا',
+        'Run' => 'اجرا',
         'Delete this task' => 'حذف این وظیفه',
         'Run this task' => 'اجرای این وظیفه',
         'Job Settings' => 'تنظیمات کار',
@@ -841,13 +811,13 @@ sub Data {
         'Age' => 'طول عمر درخواست',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceDebugger.tt
-        'GenericInterface Web Service Management' => 'مدیریت GenericInterface وب سرویس',
-        'Web Service Management' => '',
-        'Debugger' => 'اشکال زدا',
         'Go back to web service' => 'برگشت به وب سرویس',
         'Clear' => 'واضح',
         'Do you really want to clear the debug log of this web service?' =>
             'آیا شما واقعا می خواهید برای روشن ورود به سیستم اشکال زدایی از این وب سرویس؟',
+        'GenericInterface Web Service Management' => 'مدیریت GenericInterface وب سرویس',
+        'Web Service Management' => '',
+        'Debugger' => 'اشکال زدا',
         'Request List' => 'لیست درخواست',
         'Time' => 'زمان',
         'Communication ID' => '',
@@ -861,16 +831,16 @@ sub Data {
         'Refresh' => 'بازیابی',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingDefault.tt
-        'Add ErrorHandling' => '',
-        'Edit ErrorHandling' => '',
         'Do you really want to delete this error handling module?' => '',
         'All configuration data will be lost.' => 'همه داده های پیکربندی  از دست خواهد رفت.',
+        'Add ErrorHandling' => '',
+        'Edit ErrorHandling' => '',
         'General options' => '',
         'The name can be used to distinguish different error handling configurations.' =>
             '',
         'Please provide a unique name for this web service.' => 'لطفا یک نام منحصر به فرد برای این وب سرویس ارائه دهید .',
         'Error handling module backend' => '',
-        'This OTRS error handling backend module will be called internally to process the error handling mechanism.' =>
+        'This Znuny error handling backend module will be called internally to process the error handling mechanism.' =>
             '',
         'Processing options' => '',
         'Configure filters to control error handling module execution.' =>
@@ -955,22 +925,22 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+        'Do you really want to delete this invoker?' => 'آیا شما واقعا می خواهید این invoker را حذف کنید؟',
         'Add Invoker' => '',
         'Edit Invoker' => '',
-        'Do you really want to delete this invoker?' => 'آیا شما واقعا می خواهید این invoker را حذف کنید؟',
         'Invoker Details' => 'Invoker اطلاعات',
         'The name is typically used to call up an operation of a remote web service.' =>
             'نام معمولا برای پاسخ یک عملیات از یک وب سرویس از راه دور.',
         'Invoker backend' => 'باطن Invoker',
-        'This OTRS invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
-            'این invoker ماژول باطن OTRS خواهد شد به نام برای آماده سازی داده ها به سیستم از راه دور ارسال می شود، و برای پردازش داده ها پاسخ آن است.',
+        'This Znuny invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
+            'این invoker ماژول باطن Znuny خواهد شد به نام برای آماده سازی داده ها به سیستم از راه دور ارسال می شود، و برای پردازش داده ها پاسخ آن است.',
         'Mapping for outgoing request data' => 'نقشه برداری برای درخواست داده های خروجی',
         'Configure' => 'تنظیمات',
-        'The data from the invoker of OTRS will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
-            'داده ها از فراخواننده OTRS خواهد شد این نقشه برداری پردازش، آن را تبدیل به نوع داده سیستم از راه دور انتظار.',
+        'The data from the invoker of Znuny will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
+            'داده ها از فراخواننده Znuny خواهد شد این نقشه برداری پردازش، آن را تبدیل به نوع داده سیستم از راه دور انتظار.',
         'Mapping for incoming response data' => 'نگاشت برای پاسخ داده های ورودی ',
-        'The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTRS expects.' =>
-            'پاسخ داده خواهد شد این نقشه برداری پردازش، آن را تبدیل به نوع داده فراخواننده OTRS انتظار.',
+        'The response data will be processed by this mapping, to transform it to the kind of data the invoker of Znuny expects.' =>
+            'پاسخ داده خواهد شد این نقشه برداری پردازش، آن را تبدیل به نوع داده فراخواننده Znuny انتظار.',
         'Asynchronous' => 'ناهمگام',
         'Condition' => 'وضعیت',
         'Edit this event' => '',
@@ -978,8 +948,8 @@ sub Data {
         'Add Event' => 'اضافه کردن رویداد',
         'To add a new event select the event object and event name and click on the "+" button' =>
             'برای اضافه کردن یک رویداد جدید انتخاب موضوع رویداد و نام  رویداد و کلیک بر روی  دکمه \ "+ " میباشد',
-        'Asynchronous event triggers are handled by the OTRS Scheduler Daemon in background (recommended).' =>
-            'باعث رویداد آسنکرون توسط OTRS زمانبند شبح در پس زمینه به کار گرفته (توصیه می شود).',
+        'Asynchronous event triggers are handled by the Znuny Scheduler Daemon in background (recommended).' =>
+            'باعث رویداد آسنکرون توسط Znuny زمانبند شبح در پس زمینه به کار گرفته (توصیه می شود).',
         'Synchronous event triggers would be processed directly during the web request.' =>
             'باعث رویداد همزمان می تواند به طور مستقیم در طول درخواست وب پردازش شده است.',
         'Add all attachments' => '',
@@ -1016,11 +986,11 @@ sub Data {
         'Remove key mapping' => 'حذف نگاشت کلید ',
         'Key mapping' => 'نگاشت کلید',
         'Map key' => 'نگاشت کلیدی ',
-        'matching the' => 'تطبیق با',
+        'matching' => '',
         'to new key' => 'به کلید جدید',
         'Value mapping' => 'ارزش نگاشت ',
         'Map value' => 'ارزش نگاشت',
-        'to new value' => 'به ارزش های جدید',
+        'new value' => '',
         'Remove value mapping' => 'حذف ارزش نگاشت ',
         'New value map' => ' مقدار جدید نگاشت',
         'Add value mapping' => 'اضافه کردن ارزش نگاشت',
@@ -1083,18 +1053,18 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
+        'Do you really want to delete this operation?' => 'آیا واقعا میخواهید این عملیات را حذف کنید؟',
         'Add Operation' => '',
         'Edit Operation' => '',
-        'Do you really want to delete this operation?' => 'آیا واقعا میخواهید این عملیات را حذف کنید؟',
         'Operation Details' => 'جزئیات عملیات',
         'The name is typically used to call up this web service operation from a remote system.' =>
             ' نام بطور معمول از یک سیستم از راه دور برای تماس با این وب سرویس استفاده میشود . ',
         'Operation backend' => 'باطن عمل',
-        'This OTRS operation backend module will be called internally to process the request, generating data for the response.' =>
-            'این عملیات ماژول باطن OTRS صورت داخلی نامیده خواهد شد به پردازش درخواست، تولید داده ها را برای پاسخ.',
+        'This Znuny operation backend module will be called internally to process the request, generating data for the response.' =>
+            'این عملیات ماژول باطن Znuny صورت داخلی نامیده خواهد شد به پردازش درخواست، تولید داده ها را برای پاسخ.',
         'Mapping for incoming request data' => 'نگاشت برای درخواست داده های ورودی',
-        'The request data will be processed by this mapping, to transform it to the kind of data OTRS expects.' =>
-            'داده درخواست خواهد شد این نقشه برداری پردازش، آن را تبدیل به نوع OTRS داده انتظار دارد.',
+        'The request data will be processed by this mapping, to transform it to the kind of data Znuny expects.' =>
+            'داده درخواست خواهد شد این نقشه برداری پردازش، آن را تبدیل به نوع Znuny داده انتظار دارد.',
         'Mapping for outgoing response data' => 'نگاشت برای پاسخ خروجی داده ',
         'The response data will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
             'پاسخ داده خواهد شد این نقشه برداری پردازش، آن را تبدیل به نوع داده سیستم از راه دور انتظار.',
@@ -1117,18 +1087,19 @@ sub Data {
             '',
         'Maximum message length' => 'حداکثر طول پیام',
         'This field should be an integer number.' => 'در این زمینه باید یک عدد صحیح باشد.',
-        'Here you can specify the maximum size (in bytes) of REST messages that OTRS will process.' =>
-            'اینجا شما می توانید حداکثر اندازه (در بایت) از پیام های REST که OTRS پردازش را مشخص کنید.',
+        'Here you can specify the maximum size (in bytes) of REST messages that Znuny will process.' =>
+            'اینجا شما می توانید حداکثر اندازه (در بایت) از پیام های REST که Znuny پردازش را مشخص کنید.',
         'Send Keep-Alive' => 'ارسال حفظ',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'این تنظیمات را تعریف می کند اگر اتصالات ورودی باید بسته شدن و یا زنده نگه داشت.',
         'Additional response headers' => '',
+        'Header' => 'سرصفحه',
         'Add response header' => '',
         'Endpoint' => 'نقطه پایانی',
         'URI to indicate specific location for accessing a web service.' =>
             '',
-        'e.g https://www.otrs.com:10745/api/v1.0 (without trailing backslash)' =>
-            'به عنوان مثال https://www.otrs.com:10745/api/v1.0 (بدون دنباله بک اسلش)',
+        'e.g https://www.example.com:10745/api/v1.0 (without trailing backslash)' =>
+            'به عنوان مثال https://www.example.com:10745/api/v1.0 (بدون دنباله بک اسلش)',
         'Disable SSL hostname certificate verification' => '',
         'Disables hostname certificate verification. This is not recommended and should only be used in test environments.' =>
             '',
@@ -1188,22 +1159,22 @@ sub Data {
         'Client Certificate' => '',
         'The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).' =>
             '',
-        'e.g. /opt/otrs/var/certificates/SOAP/certificate.pem' => '',
+        'e.g. /opt/znuny/var/certificates/SOAP/certificate.pem' => '',
         'Client Certificate Key' => '',
         'The full path and name of the SSL client certificate key file (if not already included in certificate file).' =>
             '',
-        'e.g. /opt/otrs/var/certificates/SOAP/key.pem' => '',
+        'e.g. /opt/znuny/var/certificates/SOAP/key.pem' => '',
         'Client Certificate Key Password' => '',
         'The password to open the SSL certificate if the key is encrypted.' =>
             '',
         'Certification Authority (CA) Certificate' => '',
         'The full path and name of the certification authority certificate file that validates SSL certificate.' =>
             'مسیر کامل و نام فایل گواهی اقتدار صدور گواهینامه که تایید گواهینامه SSL.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem' => 'به عنوان مثال /opt/otrs/var/certificates/SOAP/CA/ca.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem' => 'به عنوان مثال /opt/znuny/var/certificates/SOAP/CA/ca.pem',
         'Certification Authority (CA) Directory' => 'مجوز (CA) راهنمای',
         'The full path of the certification authority directory where the CA certificates are stored in the file system.' =>
             'مسیر کامل دایرکتوری که در آن اقتدار صدور گواهینامه گواهی CA ها در سیستم فایل ذخیره می شود.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'به عنوان مثال / انتخاب کردن / OTRS / ور / گواهی / SOAP / CA',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA' => 'به عنوان مثال / انتخاب کردن / Znuny / ور / گواهی / SOAP / CA',
         'Controller mapping for Invoker' => ' برای  کنترل نگاشت Invoker',
         'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
             'کنترل که فراخواننده باید درخواست برای ارسال. متغیرهای مشخص شده توسط \':\' خواهد شد با مقدار داده جایگزین و سرانجام همراه با درخواست. (به عنوان مثال / درخواست /: TicketID صفحهی =: صفحهی و رمز عبور =: رمز عبور).',
@@ -1216,7 +1187,7 @@ sub Data {
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
-        'e.g. https://local.otrs.com:8000/Webservice/Example' => '',
+        'e.g. https://example.com:8000/Webservice/Example' => '',
         'Set SOAPAction' => '',
         'Set to "Yes" in order to send a filled SOAPAction header.' => '',
         'Set to "No" in order to send an empty SOAPAction header.' => '',
@@ -1236,8 +1207,8 @@ sub Data {
         'Text to be used to as SOAPAction.' => '',
         'Namespace' => 'فضای نام',
         'URI to give SOAP methods a context, reducing ambiguities.' => 'URI به روش SOAP زمینه ای، کاهش ابهامات.',
-        'e.g urn:otrs-com:soap:functions or http://www.otrs.com/GenericInterface/actions' =>
-            'به عنوان مثال کوزه: OTRS-COM: صابون: توابع و یا http://www.otrs.com/GenericInterface/actions',
+        'e.g urn:example-com:soap:functions or http://www.example.com/GenericInterface/actions' =>
+            'به عنوان مثال کوزه: Znuny-COM: صابون: توابع و یا http://www.example.com/GenericInterface/actions',
         'Omit namespace prefix' => '',
         'Omits the namespace prefix (e. g. namesp1:) in root tag of SOAP message.' =>
             '',
@@ -1257,13 +1228,13 @@ sub Data {
         'Select how SOAP response function wrapper should be constructed.' =>
             'انتخاب کنید که چگونه تابع پاسخ SOAP لفاف بسته بندی باید ساخته شود.',
         'Response name free text' => 'نام پاسخ های متنی رایگان',
-        'Here you can specify the maximum size (in bytes) of SOAP messages that OTRS will process.' =>
-            'اینجا شما می توانید حداکثر اندازه (در بایت) از پیام های SOAP که OTRS پردازش می کند را مشخص کنید.',
+        'Here you can specify the maximum size (in bytes) of SOAP messages that Znuny will process.' =>
+            'اینجا شما می توانید حداکثر اندازه (در بایت) از پیام های SOAP که Znuny پردازش می کند را مشخص کنید.',
         'Fixed namespace prefix' => '',
         'Use a fixed namespace prefix (e. g. myns:) for the root tag of a SOAP message.' =>
             '',
         'Suffix for response tag' => '',
-        'Usually OTRS expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
+        'Usually Znuny expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
             '',
         'Encoding' => 'کدگذاری',
         'The character encoding for the SOAP message contents.' => 'رمزگذاری کاراکتر برای محتویات پیام SOAP.',
@@ -1281,7 +1252,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
         'Add Web Service' => '',
-        'Edit Web Service' => '',
         'Clone Web Service' => '',
         'The name must be unique.' => 'این نام باید منحصر به فرد باشد.',
         'Clone' => 'کلون',
@@ -1302,14 +1272,15 @@ sub Data {
             'پس از این که تنظیمات را ذخیره کنید به شما خواهد شد دوباره به صفحه ویرایش هدایت می شوید.',
         'If you want to return to overview please click the "Go to overview" button.' =>
             'اگر می خواهید بازگشت به نمای کلی لطفا با کلیک بر \ "برو به بررسی اجمالی " را فشار دهید.',
+        'Edit Web Service' => '',
         'Remote system' => 'سیستم از راه دور',
         'Provider transport' => 'ارائه دهنده حمل و نقل ',
         'Requester transport' => ' درخواست حمل و نقل',
         'Debug threshold' => 'آستانه اشکال زدایی',
-        'In provider mode, OTRS offers web services which are used by remote systems.' =>
-            'در حالت ارائه دهنده، OTRS ارائه می دهد خدمات وب که توسط سیستم های راه دور استفاده می شود.',
-        'In requester mode, OTRS uses web services of remote systems.' =>
-            'در حالت درخواست، OTRS با استفاده از خدمات وب سیستم های از راه دور.',
+        'In provider mode, Znuny offers web services which are used by remote systems.' =>
+            'در حالت ارائه دهنده، Znuny ارائه می دهد خدمات وب که توسط سیستم های راه دور استفاده می شود.',
+        'In requester mode, Znuny uses web services of remote systems.' =>
+            'در حالت درخواست، Znuny با استفاده از خدمات وب سیستم های از راه دور.',
         'Network transport' => 'انتقال شبکه ای',
         'Error Handling Modules' => '',
         'Error handling modules are used to react in case of errors during the communication. Those modules are executed in a specific order, which can be changed by drag and drop.' =>
@@ -1327,10 +1298,10 @@ sub Data {
             'حداقل یک %s دارای یک کنترلر است که یا فعال و یا وجود ندارد، لطفا ثبت نام کنترل را بررسی کنید و یا حذف %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebserviceHistory.tt
-        'History' => 'سابقه',
         'Go back to Web Service' => 'بازگشت به وب سرویس',
         'Here you can view older versions of the current web service\'s configuration, export or even restore them.' =>
             'در اینجا شما می توانید نسخه های قدیمی تر از پیکربندی وب سرویس فعلی، صادرات مشاهده و یا حتی آنها را بازگرداند.',
+        'History' => 'سابقه',
         'Configuration History List' => 'فهرست تاریخچه پیکربندی',
         'Version' => 'نسخه',
         'Create time' => ' زمان ساخت',
@@ -1342,9 +1313,7 @@ sub Data {
         'Your current web service configuration will be overwritten.' => 'پیکربندی وب سرویس فعلی خود بازنویسی خواهد شد.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
-        'Group Management' => 'مدیریت گروه‌ها',
         'Add Group' => 'ایجاد گروه',
-        'Edit Group' => 'ویرایش گروه',
         'The admin group is to get in the admin area and the stats group to get stats area.' =>
             'گروه admin برای دسترسی به بخش مدیریت سیستم و گروه stats برای دسترسی به بخش گزارش ها است.',
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
@@ -1352,21 +1321,20 @@ sub Data {
         'It\'s useful for ASP solutions. ' => 'این برای راه‌حل‌های ASP مفید می‌باشد.',
         'Agents ↔ Groups' => '',
         'Roles ↔ Groups' => '',
+        'Group Management' => 'مدیریت گروه‌ها',
+        'Edit Group' => 'ویرایش گروه',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
-        'System Log' => 'وقایع ثبت شده سیستم',
         'Clear log entries' => '',
         'Here you will find log information about your system.' => 'در اینجا اطلاعات ثبت شده‌ای در رابطه با سیستم پیدا خواهید کرد.',
         'Hide this message' => 'پنهان کردن این پیغام',
+        'System Log' => 'وقایع ثبت شده سیستم',
         'Recent Log Entries' => 'وقایع ثبت شده جدید',
         'Facility' => 'سهولت',
         'Message' => 'پیام',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
-        'Mail Account Management' => 'مدیریت حساب‌های ایمیل ',
         'Add Mail Account' => 'افزودن حساب ایمیل',
-        'Edit Mail Account for host' => '',
-        'and user account' => '',
         'Filter for Mail Accounts' => '',
         'Filter for mail accounts' => '',
         'All incoming emails with one account will be dispatched in the selected queue.' =>
@@ -1376,10 +1344,13 @@ sub Data {
         'Outgoing email can be configured via the Sendmail* settings in %s.' =>
             '',
         'System Configuration' => '',
+        'Mail Account Management' => 'مدیریت حساب‌های ایمیل ',
+        'Edit Mail Account for host' => '',
+        'and user account' => '',
         'Host' => 'میزبان',
         'Authentication type' => '',
-        'Delete account' => 'حذف حساب',
         'Fetch mail' => 'واکشی ایمیل',
+        'Delete account' => 'حذف حساب',
         'Do you really want to delete this mail account?' => '',
         'Example: mail.example.com' => 'مثال: mail.example.com',
         'IMAP Folder' => 'پوشه IMAP',
@@ -1391,20 +1362,20 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
         'Administration Overview' => '',
-        'Filter for Items' => '',
         'Favorites' => '',
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '',
         'Links' => '',
         'View the admin manual on Github' => '',
+        'Filter for Items' => '',
         'No Matches' => '',
         'Sorry, your search didn\'t match any items.' => '',
         'Set as favorite' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-        'Ticket Notification Management' => 'درخواست مدیریت اطلاع رسانی',
         'Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module.' =>
             'در اینجا شما می توانید یک فایل پیکربندی برای واردات اطلاعیه بلیط را به سیستم خود را بارگذاری کنید. فایل نیاز به در فرمت .yml باشد که توسط ماژول اطلاع رسانی بلیط صادر می شود.',
+        'Ticket Notification Management' => 'درخواست مدیریت اطلاع رسانی',
         'Here you can choose which events will trigger this notification. An additional ticket filter can be applied below to only send for ticket with certain criteria.' =>
             'در اینجا شما می توانید انتخاب کنید که وقایع این اطلاع رسانی را آغاز کند. یک فیلتر بلیط اضافی را می توان زیر اعمال شده به فقط برای بلیط با معیارهای خاصی را ارسال کنید.',
         'Ticket Filter' => 'فیلتر درخواست',
@@ -1426,7 +1397,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
-        'You can use OTRS-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
+        'You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
@@ -1489,95 +1460,21 @@ sub Data {
         'Request new token' => '',
         'Delete this token and its configuration.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
-        'Manage %s' => 'مدیریت %s',
-        'Downgrade to ((OTRS)) Community Edition' => '',
-        'Read documentation' => 'خواندن اسناد',
-        '%s makes contact regularly with cloud.otrs.com to check on available updates and the validity of the underlying contract.' =>
-            '%s باعث می شود تماس به طور منظم با cloud.otrs.com برای بررسی در دسترس به روز رسانی و اعتبار قرارداد زمینه ای است.',
-        'Unauthorized Usage Detected' => 'استفاده غیر مجاز شناسایی',
-        'This system uses the %s without a proper license! Please make contact with %s to renew or activate your contract!' =>
-            'این سیستم با استفاده از %s بدون مجوز مناسب! لطفا تماس با %s به تجدید و یا فعال شدن قرارداد خود را!',
-        '%s not Correctly Installed' => '%s به درستی نصب نشده',
-        'Your %s is not correctly installed. Please reinstall it with the button below.' =>
-            'شما %s به درستی نصب نشده است. لطفا آن را با دکمه زیر نصب کنید.',
-        'Reinstall %s' => 'نصب مجدد %s',
-        'Your %s is not correctly installed, and there is also an update available.' =>
-            'شما %s به درستی نصب نشده است، و نیز یک به روز رسانی در دسترس است.',
-        'You can either reinstall your current version or perform an update with the buttons below (update recommended).' =>
-            'شما هم می توانید نصب مجدد نسخه فعلی خود را و یا انجام یک به روز رسانی را با دکمه های زیر (به روز رسانی توصیه می شود).',
-        'Update %s' => 'بروز رسانی%2$s',
-        '%s Not Yet Available' => '%s هنوز در دسترس است',
-        '%s will be available soon.' => '%s به زودی در دسترس خواهد بود.',
-        '%s Update Available' => '%s به روز رسانی دردسترس است',
-        'An update for your %s is available! Please update at your earliest!' =>
-            'به روز رسانی برای خود %s در دسترس است! لطفا در اولین فرصت به روز رسانی کنید !',
-        '%s Correctly Deployed' => '%s به درستی مستقر شده',
-        'Congratulations, your %s is correctly installed and up to date!' =>
-            'تبریک می گویم، شما %s به درستی نصب شده و بروزرسانی شده است !',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
-        'Upgrade to %s' => 'ارتقا به %s',
-        'Go to the OTRS customer portal' => '',
-        '%s will be available soon. Please check again in a few days.' =>
-            '%s به زودی در دسترس خواهد بود. لطفا پس از چند روز دوباره بررسی کنید.',
-        'Please have a look at %s for more information.' => 'لطفا نگاهی داشته باشید به  %s برای اطلاعات بیشتر.',
-        'Your ((OTRS)) Community Edition is the base for all future actions. Please register first before you continue with the upgrade process of %s!' =>
-            '',
-        'Before you can benefit from %s, please contact %s to get your %s contract.' =>
-            'قبل از اینکه شما می توانید از آن بهره مند %s ، لطفا با %s به خود %s قرارداد.',
-        'Connection to cloud.otrs.com via HTTPS couldn\'t be established. Please make sure that your OTRS can connect to cloud.otrs.com via port 443.' =>
-            'اتصال به cloud.otrs.com از طریق HTTPS برقرار نشد. لطفا مطمئن شوید که OTRS خود را می توانید به cloud.otrs.com از طریق پورت 443 متصل کنید .  ',
-        'Package installation requires patch level update of OTRS.' => '',
-        'Please visit our customer portal and file a request.' => '',
-        'Everything else will be done as part of your contract.' => '',
-        'Your installed OTRS version is %s.' => '',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            '',
-        'To install this package, the Maximum OTRS Version is %s.' => '',
-        'To install this package, the required Framework version is %s.' =>
-            '',
-        'Why should I keep OTRS up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant OTRS issues' => '',
-        'With your existing contract you can only use a small part of the %s.' =>
-            'با قرارداد های موجود خود را شما فقط می توانید یک بخش کوچک از استفاده %s .',
-        'If you would like to take full advantage of the %s get your contract upgraded now! Contact %s.' =>
-            'اگر شما می خواهم به استفاده کامل از %s از قرارداد خود را به روز رسانی در حال حاضر! تماس با %s .',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
-        'Cancel downgrade and go back' => 'لغو کاهش دادن و بازگشت',
-        'Go to Package Manager' => '',
-        'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
-            'با عرض پوزش، اما در حال حاضر شما می توانید با توجه به بسته های زیر که در بستگی دارد جمع و جور کردن %s :',
-        'Vendor' => 'عرضه‌کننده',
-        'Please uninstall the packages first using the package manager and try again.' =>
-            'لطفا ابتدا با استفاده از بسته های مدیر بسته حذف و دوباره امتحان کنید.',
-        'You are about to downgrade to ((OTRS)) Community Edition and will lose the following features and all data related to these:' =>
-            '',
-        'Chat' => 'گپ',
-        'Report Generator' => 'گزارش ژنراتور',
-        'Timeline view in ticket zoom' => 'نمایش جدول زمانی در زوم بلیط',
-        'DynamicField ContactWithData' => 'DynamicField ContactWithData',
-        'DynamicField Database' => 'پایگاه DynamicField',
-        'SLA Selection Dialog' => 'SLA انتخاب گفت و گو',
-        'Ticket Attachment View' => 'نمایش درخواست پیوست ',
-        'The %s skin' => '%s پوست',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPGP.tt
-        'PGP Management' => 'مدیریت رمزگذاری PGP',
-        'Add PGP Key' => 'افزودن کلید PGP',
         'PGP support is disabled' => 'پشتیبانی PGP غیر فعال است',
-        'To be able to use PGP in OTRS, you have to enable it first.' => 'برای اینکه قادر به استفاده از PGP در OTRS باشید، شما باید برای اولین بار آن را فعال کنید .',
+        'To be able to use PGP in Znuny, you have to enable it first.' =>
+            'برای اینکه قادر به استفاده از PGP در Znuny باشید، شما باید برای اولین بار آن را فعال کنید .',
         'Enable PGP support' => 'فعال کردن پشتیبانی از PGP',
         'Faulty PGP configuration' => 'پیکربندی PGP معیوب',
         'PGP support is enabled, but the relevant configuration contains errors. Please check the configuration using the button below.' =>
             'پشتیبانی PGP فعال است، اما پیکربندی های مربوطه دارای خطا است. لطفا پیکربندی با استفاده از دکمه زیر را بررسی کنید.',
         'Configure it here!' => 'پیکربندی آن را در اینجا!',
         'Check PGP configuration' => 'بررسی پیکربندی PGP',
+        'Add PGP Key' => 'افزودن کلید PGP',
         'In this way you can directly edit the keyring configured in SysConfig.' =>
             'از این طریق شما می‌توانید مستقیما کلید‌های خود را درسیستم تنظیم نمائید',
         'Introduction to PGP' => 'معرفی به PGP',
+        'PGP Management' => 'مدیریت رمزگذاری PGP',
         'Identifier' => 'شناسه',
         'Bit' => 'Bit',
         'Fingerprint' => 'اثر انگشت',
@@ -1590,6 +1487,7 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'حذف بسته',
         'Do you really want to uninstall this package?' => 'از حذف این بسته اطمینان دارید؟',
+        'or' => 'یا',
         'Reinstall package' => 'نصب مجدد بسته',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'آیا واقعا می‌خواهید این بسته را مجددا نصب نمایید؟ تمام تغییرات دستی از بین خواهد رفت.',
@@ -1606,6 +1504,7 @@ sub Data {
             '',
         'This package can only be installed on Znuny version %s.' => '',
         'Why should I keep Znuny up to date?' => '',
+        'You will receive updates about relevant security issues.' => '',
         'You will receive updates for all other relevant Znuny issues.' =>
             '',
         'How can I do a patch level update if I don’t have a contract?' =>
@@ -1614,6 +1513,7 @@ sub Data {
             '',
         'In case you would have further questions we would be glad to answer them.' =>
             'در مورد شما می سوال بیشتر دارند ما خوشحال خواهد بود به آنها پاسخ دهد.',
+        'Please visit our customer portal and file a request.' => '',
         'Install Package' => 'نصب بسته',
         'Update Package' => '',
         'Package' => '',
@@ -1626,9 +1526,11 @@ sub Data {
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'لطفا مطمئن شوید که پایگاه داده خود را بسته بر می پذیرد %s MB در اندازه (در حال حاضر تنها بسته می پذیرد تا %s MB). لطفا تنظیمات max_allowed_packet از پایگاه داده خود را به منظور جلوگیری از اشتباهات وفق دهند.',
         'Install' => 'نصب',
+        'Update' => 'بروزرسانی',
         'Update repository information' => 'به‌روز رسانی اطلاعات مخزن',
         'Update all installed packages' => '',
         'Online Repository' => 'مخزن آنلاین بسته‌ها',
+        'Vendor' => 'عرضه‌کننده',
         'Action' => 'فعالیت',
         'Module documentation' => 'مستندات ماژول',
         'Local Repository' => 'مخزن محلی بسته‌ها',
@@ -1636,9 +1538,9 @@ sub Data {
         'Package not correctly deployed! Please reinstall the package.' =>
             'بسته به درستی قرار نگرفته! لطفا بسته رامجدد نصب کنید .',
         'Reinstall' => 'نصب مجدد',
-        'Package Information' => '',
         'Download package' => 'دریافت بسته',
         'Rebuild package' => 'ساخت مجدد بسته',
+        'Package Information' => '',
         'Metadata' => 'ابرداده',
         'Change Log' => 'وقایع ثبت شده تغییرات',
         'Date' => 'تاریخ',
@@ -1654,9 +1556,6 @@ sub Data {
         'File differences for file %s' => 'تفاوت‌های فایل برای فایل %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPerformanceLog.tt
-        'Performance Log' => 'گزارش عملکرد',
-        'Range' => 'حدود',
-        'last' => 'آخرین',
         'This feature is enabled!' => 'این ویژگی فعال است.',
         'Just use this feature if you want to log each request.' => 'این ویژگی امکان ثبت همه درخواست‌ها را می‌دهد',
         'Activating this feature might affect your system performance!' =>
@@ -1664,6 +1563,9 @@ sub Data {
         'Disable it here!' => 'اینجا غیر فعال نمائید',
         'Logfile too large!' => 'فایل ثبت وقایع بیش از حد بزرگ است',
         'The logfile is too large, you need to reset it' => 'فایل ثبت وقایع بیش از حد بزرگ است، نیاز دارید که مجدد آن را بسازید',
+        'Performance Log' => 'گزارش عملکرد',
+        'Range' => 'حدود',
+        'last' => 'آخرین',
         'Interface' => 'واسط',
         'Requests' => 'درخواست‌ها',
         'Min Response' => 'کمترین پاسخ',
@@ -1676,9 +1578,7 @@ sub Data {
         'Average' => 'میانگین',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
-        'PostMaster Filter Management' => 'مدیریت فیلتر پستی',
         'Add PostMaster Filter' => 'افزودن فیلتر پستی',
-        'Edit PostMaster Filter' => 'ویرایش فیلتر پستی',
         'Filter for PostMaster Filters' => '',
         'Filter for PostMaster filters' => '',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
@@ -1689,6 +1589,8 @@ sub Data {
             'اگر از عبارات منظم استفاده می‌کنید، می‌توانید از مقدار تطابق یافته در () به عنوان [***] در عملیات Set استفاده نمایید.',
         'You can also use named captures %s and use the names in the \'Set\' action %s (e.g. Regexp: %s, Set action: %s). A matched EMAILADDRESS has the name \'%s\'.' =>
             '',
+        'PostMaster Filter Management' => 'مدیریت فیلتر پستی',
+        'Edit PostMaster Filter' => 'ویرایش فیلتر پستی',
         'Delete this filter' => 'حذف این فیلتر',
         'Do you really want to delete this postmaster filter?' => '',
         'A postmaster filter with this name already exists!' => '',
@@ -1703,15 +1605,15 @@ sub Data {
         'Set email header' => ' تنظیم هدر ایمیل',
         'with value' => '',
         'The field needs to be a literal word.' => 'زمینه نیاز به یک کلمه دارد .',
-        'Header' => 'سرصفحه',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
-        'Priority Management' => 'مدیریت اولویت‌ها',
         'Add Priority' => 'افزودن اولویت',
-        'Edit Priority' => 'ویرایش الویت',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
         'Configure Priority Visibility and Defaults' => '',
+        'Priority Management' => 'مدیریت اولویت‌ها',
+        'Edit Priority' => 'ویرایش الویت',
+        'Color' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
@@ -1735,7 +1637,7 @@ sub Data {
             'تغییرات در فرایندهای اینجا تنها رفتار سیستم را تحت تاثیر قرار، اگر شما داده های فرایند همگام سازی. با هماهنگ سازی فرآیندها، تغییرات تازه ساخته شده را به پیکربندی نوشته شده است.',
         'Access Control Lists (ACL)' => 'فهرست سطخ دسترسی (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'فرایند ها',
         'Process name' => 'نام فرایند',
         'Print' => 'چاپ',
@@ -1743,8 +1645,6 @@ sub Data {
         'Copy Process' => 'فرایند کپی',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
-        'Cancel & close' => 'لغو کنید و ببندید',
-        'Go Back' => 'بازگشت',
         'Please note, that changing this activity will affect the following processes' =>
             'لطفا توجه داشته باشید، که در حال تغییر این فعالیت مراحل زیر را تحت تاثیر قرار',
         'Activity' => 'فعالیت',
@@ -1757,12 +1657,13 @@ sub Data {
             'شما می توانید فعالیت تبادل به این فعالیت با کشیدن عناصر با ماوس از لیست سمت چپ به لیست راست اختصاص دهید.',
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'مرتب سازی عناصر در لیست با کشیدن و رها کردن نیز ممکن است.',
+        'Available Activity Dialogs' => 'در دسترس تبادل فعالیت',
         'Filter available Activity Dialogs' => 'فیلتر در دسترس تبادل فعالیت',
         'Also show global %s' => '',
-        'Available Activity Dialogs' => 'در دسترس تبادل فعالیت',
         'Name: %s, EntityID: %s' => 'نام: %s ، EntityID: %s',
         'Create New Activity Dialog' => 'ساختن فعالیت جدید گفت و گو',
         'Assigned Activity Dialogs' => 'فعالیتهای واگذارشده به گفتگو',
+        'Filter Assigned Activity Dialogs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
         'Please note that changing this activity dialog will affect the following activities' =>
@@ -1784,9 +1685,10 @@ sub Data {
         'Submit Button Text' => 'ارایه دادن دکمه متن',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
             'شما می توانید زمینه این فعالیت گفت و گو با کشیدن عناصر با ماوس از لیست سمت چپ به لیست راست اختصاص دهید.',
-        'Filter available fields' => 'فیلتر زمینه های موجود',
         'Available Fields' => 'زمینه های موجود',
+        'Filter available fields' => 'فیلتر زمینه های موجود',
         'Assigned Fields' => 'زمینه اختصاص داده',
+        ' Filter assigned fields' => '',
         'Communication Channel' => '',
         'Is visible for customer' => '',
         'Text Template' => 'قالب متن',
@@ -1799,10 +1701,11 @@ sub Data {
         'Transition Actions' => 'عملیات انتقال',
         'You can assign Transition Actions to this Transition by dragging the elements with the mouse from the left list to the right list.' =>
             'شما می توانید عملیات انتقال به این انتقال با کشیدن عناصر با ماوس از لیست سمت چپ به لیست راست اختصاص دهید.',
-        'Filter available Transition Actions' => 'فیلتر عملیات انتقال در دسترس',
         'Available Transition Actions' => 'عملیات انتقال در دسترس',
+        'Filter available Transition Actions' => 'فیلتر عملیات انتقال در دسترس',
         'Create New Transition Action' => 'ایجاد جدید انتقال اقدام',
         'Assigned Transition Actions' => 'عملیات انتقال اختصاص داده',
+        'Filter assigned Transition Actions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessAccordion.tt
         'Activities' => 'فعالیت',
@@ -1815,7 +1718,6 @@ sub Data {
         'Filter Transition Actions...' => 'عملیات فیلتر گذار ...',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
-        'Edit Process' => 'ویرایش فرآیند',
         'Print process information' => 'اطلاعات فرآیند چاپ',
         'Delete Process' => 'حذف فرآیند',
         'Delete Inactive Process' => 'حذف فرآیند های غیر فعال',
@@ -1830,6 +1732,7 @@ sub Data {
             'شما می توانید یک ارتباط بین دو فعالیت با حذف عنصر انتقال بیش از فعالیت شروع اتصال شروع می شود. پس از آن شما می توانید به پایان شل از فلش به پایان فعالیت درسایت حرکت می کند.',
         'Actions can be assigned to a Transition by dropping the Action Element onto the label of a Transition.' =>
             'اقدامات را می توان به انتقال با حذف اقدام عنصر بر روی برچسب از یک انتقال داده می شود.',
+        'Edit Process' => 'ویرایش فرآیند',
         'Edit Process Information' => 'ویرایش اطلاعات فرآیند',
         'Process Name' => 'نام پردازش',
         'The selected state does not exist.' => 'وضعیت انتخاب شده وجود ندارد.',
@@ -1855,7 +1758,6 @@ sub Data {
             'در این صفحه، شما می توانید یک فرآیند جدید ایجاد کنید. به منظور ایجاد فرآیند جدید در دسترس کاربران، لطفا مطمئن شوید که به مجموعه دولت خود را به «فعال» و همگام سازی پس از اتمام کار خود را.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessPrint.tt
-        'cancel & close' => 'لغو و نزدیک',
         'Start Activity' => ' شروع فعالیت',
         'Contains %s dialog(s)' => 'شامل %s گفتگوی (بازدید کنندگان)',
         'Assigned dialogs' => 'گفتگوی معین',
@@ -1865,6 +1767,7 @@ sub Data {
         'Condition linking' => ' شرط ارتباط',
         'Transitions are not being used in this process.' => 'انتقال هستند که در این فرایند استفاده نمی شود.',
         'Module name' => 'نام ماژول',
+        'Configuration' => 'پیکر بندی',
         'Transition actions are not being used in this process.' => 'اقدامات انتقال هستند که در این فرایند استفاده نمی شود.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementTransition.tt
@@ -1887,7 +1790,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
         'Add Queue' => 'افزودن صف درخواست',
-        'Edit Queue' => 'ویرایش صف درخواست',
         'Filter for Queues' => 'فیلتر برای صف‌های درخواست',
         'Filter for queues' => '',
         'Email Addresses' => 'آدرس‌های ایمیل',
@@ -1897,10 +1799,14 @@ sub Data {
         'Templates ↔ Queues' => '',
         'Configure Working Hours' => '',
         'Configure Queue Related Settings' => '',
+        'Edit Queue' => 'ویرایش صف درخواست',
         'A queue with this name already exists!' => 'یک صف با این نام وجود دارد.',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
         'Sub-queue of' => 'زیر صف مربوط به',
+        'Follow up Option' => 'گزینه پیگیری',
+        'Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.' =>
+            'مشخص می‌کند که اگر پیگیری درخواست‌های بسته شده باعث باز شدن مجدد آن شود، رد شده یا به یک درخواست جدید منتهی گردد.',
         'Unlock timeout' => 'مهلت تحویل دادن درخواست',
         '0 = no unlock' => '0 = تحویل داده نشود',
         'hours' => 'ساعت',
@@ -1915,9 +1821,6 @@ sub Data {
             'اگر یک مطلب افزوده شده موجود باشد، مانند یک پیگیری از طریق ایمیل یا پرتال مشتری، زمان به‌روز رسانی برای زمان نهایی پاسخگویی تنظیم مجدد می‌شود. اگر مشخصات تماس مشترک، ایمیل خارجی و یا تلفن، قبل از اینکه زمان تعریف شده در اینجا به پایان برسد، اضافه نشده باشد، درخواست به زمان نهایی پاسخ خود رسیده است.',
         'If the ticket is not set to closed before the time defined here expires, the ticket is escalated.' =>
             'اگر درخواستی تنظیم نشده که قبل از زمان تعریف شده در اینجا بسته شده، زمان پاسخگویی نهایی می‌رسد.',
-        'Follow up Option' => 'گزینه پیگیری',
-        'Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.' =>
-            'مشخص می‌کند که اگر پیگیری درخواست‌های بسته شده باعث باز شدن مجدد آن شود، رد شده یا به یک درخواست جدید منتهی گردد.',
         'Ticket lock after a follow up' => 'درخواست بعد از پیگیری تحویل گرفته شود',
         'If a ticket is closed and the customer sends a follow up the ticket will be locked to the old owner.' =>
             'اگر یک درخواست بسته شده و مشترک یک پیگیری ارسال کند، درخواست تحویل صاحب قدیمی خواهد شد.',
@@ -1933,34 +1836,34 @@ sub Data {
         'This queue is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueAutoResponse.tt
-        'Manage Queue-Auto Response Relations' => 'مدیریت روابط صف درخواست-پاسخ خودکار',
-        'Change Auto Response Relations for Queue' => 'تغییر روابط پاسخ خودکار برای صف درخواست',
         'This filter allow you to show queues without auto responses' => 'این فیلتر به شما اجازه نشان صف بدون پاسخ خودکار',
         'Queues without Auto Responses' => '',
         'This filter allow you to show all queues' => 'این فیلتر به شما اجازه نشان دادن تمام صفها را میدهد',
         'Show All Queues' => '',
         'Auto Responses' => 'پاسخ خودکار',
+        'Manage Queue-Auto Response Relations' => 'مدیریت روابط صف درخواست-پاسخ خودکار',
+        'Change Auto Response Relations for Queue' => 'تغییر روابط پاسخ خودکار برای صف درخواست',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
-        'Manage Template-Queue Relations' => 'مدیریت روابط الگو صف',
         'Filter for Templates' => 'فیلتر برای قالب',
         'Filter for templates' => '',
+        'Manage Template-Queue Relations' => 'مدیریت روابط الگو صف',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
-        'Role Management' => 'مدیریت نقش',
         'Add Role' => 'افزودن نقش',
-        'Edit Role' => 'ویرایش نقش',
         'Filter for Roles' => 'فیلتر برای نقش‌ها',
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'یک نقش بسازید و گروه را در آن قرار دهید سپس نقش را به کاربرها اضافه کنید',
         'Agents ↔ Roles' => '',
+        'Role Management' => 'مدیریت نقش',
+        'Edit Role' => 'ویرایش نقش',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'هیچ نقشی ساخته نشده است. لطفا از کلید «افزودن» برای ساخت نقش جدید استفاده نمایید.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleGroup.tt
-        'Manage Role-Group Relations' => 'مدیریت روابط نقش-گروه',
         'Roles' => 'نقش‌ها',
+        'Manage Role-Group Relations' => 'مدیریت روابط نقش-گروه',
         'Select the role:group permissions.' => 'نقش را انتخاب کنید: دسترسی‌های گروه.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the role).' =>
             'اگر چیزی انتخاب نشود، هیچ دسترسی در این گروه وجود نخواهد داشت (درخواست‌ها برای نقش در دسترس نخواهند بود)',
@@ -1979,34 +1882,33 @@ sub Data {
             'مجوز تغییر اولویت درخواست در این گروه/لیست.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
-        'Manage Agent-Role Relations' => 'مدیریت روابط کارشناس-نقش',
         'Add Agent' => 'افزودن کارشناس',
         'Filter for Agents' => 'فیلتر برای کارشناسان',
         'Filter for agents' => '',
         'Agents' => 'کارشناسان',
+        'Manage Agent-Role Relations' => 'مدیریت روابط کارشناس-نقش',
         'Manage Role-Agent Relations' => 'مدیریت روابط نقش-کارشناس',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
-        'SLA Management' => 'مدیریت SLA',
-        'Edit SLA' => 'ویرایش SLA',
         'Add SLA' => 'افزودن توافقنامه SLA',
         'Filter for SLAs' => '',
         'Configure SLA Visibility and Defaults' => '',
+        'SLA Management' => 'مدیریت SLA',
+        'Edit SLA' => 'ویرایش SLA',
         'Please write only numbers!' => 'لطفا فقط ارقام را بنویسید!',
         'Minimum Time Between Incidents' => 'حداقل زمان بین دو رخداد',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
-        'S/MIME Management' => 'مدیریت S/MIME',
-        'Add Certificate' => 'افزودن گواهینامه',
-        'Add Private Key' => 'افزودن کلید خصوصی',
         'SMIME support is disabled' => 'پشتیبانی SMIME غیر فعال است',
-        'To be able to use SMIME in OTRS, you have to enable it first.' =>
-            'برای اینکه قادر به استفاده از SMIME در OTRS، شما باید آن را فعال کنید برای اولین بار.',
+        'To be able to use SMIME in Znuny, you have to enable it first.' =>
+            'برای اینکه قادر به استفاده از SMIME در Znuny، شما باید آن را فعال کنید برای اولین بار.',
         'Enable SMIME support' => 'فعال کردن پشتیبانی SMIME',
         'Faulty SMIME configuration' => 'پیکربندی SMIME معیوب',
         'SMIME support is enabled, but the relevant configuration contains errors. Please check the configuration using the button below.' =>
             'پشتیبانی SMIME فعال است، اما پیکربندی های مربوطه دارای خطا است. لطفا پیکربندی با استفاده از دکمه زیر را بررسی کنید.',
         'Check SMIME configuration' => 'بررسی پیکربندی SMIME',
+        'Add Certificate' => 'افزودن گواهینامه',
+        'Add Private Key' => 'افزودن کلید خصوصی',
         'Filter for Certificates' => '',
         'Filter for certificates' => 'فیلتر برای گواهی',
         'To show certificate details click on a certificate icon.' => 'برای نشان دادن جزئیات گواهی  بر روی آیکون گواهی کلیک کنید .',
@@ -2017,6 +1919,7 @@ sub Data {
         'See also' => 'همچنین ببنید',
         'In this way you can directly edit the certification and private keys in file system.' =>
             'از این طریق شما میتوانید کلید‌های رمز خود را برای رمز گذاری نامه‌ها و پیامها به سیستم وارد نمائید',
+        'S/MIME Management' => 'مدیریت S/MIME',
         'Hash' => 'Hash',
         'Create' => 'ایجاد',
         'Handle related certificates' => 'رسیدگی به مدارک معتبر',
@@ -2032,15 +1935,16 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
         'S/MIME Certificate' => 'گواهینامه S/MIME',
-        'Close this dialog' => 'بستن این پنجره',
+        'Close' => 'بستن',
         'Certificate Details' => '',
+        'Close this dialog' => 'بستن این پنجره',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
-        'Salutation Management' => 'مدیریت عنوان‌ها',
         'Add Salutation' => 'افزودن عنوان',
-        'Edit Salutation' => 'ویرایش عنوان',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
+        'Salutation Management' => 'مدیریت عنوان‌ها',
+        'Edit Salutation' => 'ویرایش عنوان',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2050,13 +1954,13 @@ sub Data {
             'اگر حالت امن فعال نشده است، آن را از طریق تنظیم سیستم فعال نمایید زیرا نرم‌افزار شما در حال اجرا می‌باشد.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
-        'SQL Box' => 'جعبه SQL',
         'Filter for Results' => '',
         'Filter for results' => '',
         'Here you can enter SQL to send it directly to the application database. It is not possible to change the content of the tables, only select queries are allowed.' =>
             'در اینجا شما می توانید SQL وارد به ارسال آن به طور مستقیم به پایگاه داده نرم افزار. این ممکن است به تغییر محتوای جداول، تنها انتخاب نمایش داده شد مجاز است.',
         'Here you can enter SQL to send it directly to the application database.' =>
             'در اینجا می‌توانید کوئری SQL وارد نمایید تا آن را به صورت مستقیم به پایگاه داده برنامه بفرستید.',
+        'SQL Box' => 'جعبه SQL',
         'Options' => 'گزینه‌ها',
         'Only select queries are allowed.' => 'فقط مجاز هستید نمایش داده شد را انتخاب کنید ',
         'The syntax of your SQL query has a mistake. Please check it.' =>
@@ -2069,18 +1973,16 @@ sub Data {
         'Query is executed.' => 'پرس و جو اجرا است.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
-        'Service Management' => 'مدیریت خدمات',
         'Add Service' => 'افزودن خدمت',
-        'Edit Service' => 'ویرایش خدمت',
         'Configure Service Visibility and Defaults' => '',
+        'Service Management' => 'مدیریت خدمات',
+        'Edit Service' => 'ویرایش خدمت',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'زیرمجموعه‌ای از خدمت',
         'Criticality' => 'اهمیت',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
-        'Session Management' => 'مدیریت Session‌ها',
-        'Detail Session View for %s (%s)' => '',
         'All sessions' => 'تمام sessionها',
         'Agent sessions' => 'session کارشناسان',
         'Customer sessions' => 'session مشترکین',
@@ -2090,27 +1992,29 @@ sub Data {
         'Kill this session' => 'از بین بردن session',
         'Filter for Sessions' => '',
         'Filter for sessions' => '',
+        'Session Management' => 'مدیریت Session‌ها',
+        'Detail Session View for %s (%s)' => '',
         'Session' => 'Session',
         'Kill' => 'کشتن',
         'Detail View for SessionID: %s - %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
-        'Signature Management' => 'مدیریت امضاء',
         'Add Signature' => 'افزودن امضاء',
-        'Edit Signature' => 'ویرایش امضاء',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
+        'Signature Management' => 'مدیریت امضاء',
+        'Edit Signature' => 'ویرایش امضاء',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
-        'State Management' => 'مدیریت وضعیت',
         'Add State' => 'افزودن وضعیت',
-        'Edit State' => 'ویرایش وضعیت',
         'Filter for States' => '',
         'Filter for states' => '',
         'Attention' => 'توجه',
         'Please also update the states in SysConfig where needed.' => 'لطفا کشورهای در SysConfig به روز رسانی که در آن مورد نیاز است.',
         'Configure State Visibility and Defaults' => '',
         'Configure State Type Visibility and Defaults' => '',
+        'State Management' => 'مدیریت وضعیت',
+        'Edit State' => 'ویرایش وضعیت',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'نوع وضعیت',
@@ -2119,10 +2023,6 @@ sub Data {
         'This state is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-        'Cloud services are currently disabled.' => 'خدمات ابر در حال حاضر غیر فعال است.',
-        'Sending support data to OTRS Group is not possible!' => 'ارسال اطلاعات پشتیبانی به OTRS گروه ممکن نیست!',
-        'Enable Cloud Services' => 'فعال کردن خدمات ابر',
-        'Enable cloud services' => 'فعال کردن سرویس های ابری',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'بسته نرم افزاری پشتیبانی (از جمله: اطلاعات ثبت نام سیستم، داده پشتیبانی، یک لیست از بسته های نصب شده و تمامی فایل های کد منبع به صورت محلی تغییر) را می توان با فشار دادن این دکمه تولید:',
         'Generate Support Bundle' => 'تولید پشتیبانی بسته نرم افزاری',
@@ -2131,17 +2031,18 @@ sub Data {
             'فایل حاوی بسته نرم افزاری پشتیبانی خواهد شد به سیستم محلی دریافت کنید.',
         'Support Data' => 'پشتیبانی از داده ها',
         'Error: Support data could not be collected (%s).' => 'خطا: اطلاعات پشتیبانی نمی تواند جمع آوری  شود ( %s ).',
+        'Support Data Collector' => 'پشتیبانی از داده های جمع آوری شده',
         'Details' => 'جزئیات',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
-        'System Email Addresses Management' => 'مدیریت آدرس‌های ایمیل سیستم',
-        'Add System Email Address' => 'افزودن آدرس ایمیل سیستم',
-        'Edit System Email Address' => 'ویرایش آدرس ایمیل سیستم',
         'Add System Address' => '',
         'Filter for System Addresses' => '',
         'Filter for system addresses' => '',
         'All incoming email with this address in To or Cc will be dispatched to the selected queue.' =>
             'تمام ایمیل‌های وارده با این آدرس در To یا Cc به صف درخواست انتخاب شده توزیع خواهد شد.',
+        'System Email Addresses Management' => 'مدیریت آدرس‌های ایمیل سیستم',
+        'Add System Email Address' => 'افزودن آدرس ایمیل سیستم',
+        'Edit System Email Address' => 'ویرایش آدرس ایمیل سیستم',
         'Email address' => 'آدرس ایمیل',
         'Display name' => 'نام نمایش داده شده',
         'This email address is already used as system email address.' => '',
@@ -2161,11 +2062,10 @@ sub Data {
         'Find out how to use the system configuration by reading the %s.' =>
             '',
         'Search in all settings...' => '',
-        'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
+        'There are currently no settings available. Please make sure to run \'znuny.Console.pl Maint::Config::Rebuild\' before using the software.' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
-        'Changes Deployment' => '',
         'Help' => '',
         'This is an overview of all settings which will be part of the deployment if you start it now. You can compare each setting to its former state by clicking the icon on the top right.' =>
             '',
@@ -2178,6 +2078,7 @@ sub Data {
         'Please review the changed settings and deploy afterwards.' => '',
         'An empty list of changes means that there are no differences between the restored and the current state of the affected settings.' =>
             '',
+        'Changes Deployment' => '',
         'Changes Overview' => '',
         'There are %s changed settings which will be deployed in this run.' =>
             '',
@@ -2204,7 +2105,6 @@ sub Data {
         'Import system configuration' => '',
         'Download current configuration settings of your system in a .yml file.' =>
             '',
-        'Include user settings' => '',
         'Export current configuration' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationSearch.tt
@@ -2223,9 +2123,9 @@ sub Data {
         'Run search' => 'اجرا جستجو ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
+        'Go back to Deployment Details' => '',
         'View a custom List of Settings' => '',
         'View single Setting: %s' => '',
-        'Go back to Deployment Details' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2235,7 +2135,6 @@ sub Data {
         'Permissions' => 'دسترسی‌ها',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
-        'System Maintenance Management' => 'سیستم مدیریت نگهداری و تعمیرات',
         'Schedule New System Maintenance' => 'برنامه تعمیر و نگهداری سیستم های جدید',
         'Filter for System Maintenances' => '',
         'Filter for system maintenances' => '',
@@ -2243,6 +2142,7 @@ sub Data {
             'برنامه ریزی یک دوره تعمیر و نگهداری سیستم برای اعلام عوامل و مشتریان سیستم پایین است برای یک دوره زمانی.',
         'Some time before this system maintenance starts the users will receive a notification on each screen announcing about this fact.' =>
             'چند وقت پیش از این تعمیر و نگهداری سیستم شروع می شود کاربران یک اطلاع رسانی در هر صفحه نمایش اعلام در مورد این واقعیت دریافت خواهید کرد.',
+        'System Maintenance Management' => 'سیستم مدیریت نگهداری و تعمیرات',
         'Stop date' => 'تاریخ توقف',
         'Delete System Maintenance' => 'حذف تعمیر و نگهداری سیستم',
 
@@ -2261,12 +2161,12 @@ sub Data {
         'Kill all Sessions, except for your own' => 'کشتن تمام جلسات، به جز مال خود را',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-        'Template Management' => '',
         'Add Template' => 'افزودن قالب',
-        'Edit Template' => 'ویرایش قالب',
         'A template is a default text which helps your agents to write faster tickets, answers or forwards.' =>
             'قالب یک متن پیش فرض است که کمک می کند تا عوامل خود را برای ارسال سریعتر بلیط، پاسخ و یا جلو است.',
         'Don\'t forget to add new templates to queues.' => 'فراموش نکنید که برای اضافه کردن قالب جدید به صف.',
+        'Template Management' => '',
+        'Edit Template' => 'ویرایش قالب',
         'Attachments' => 'پیوست‌ها',
         'Delete this entry' => 'حذف این ورودی',
         'Do you really want to delete this template?' => 'آیا واقعا مایل به حذف این قالب هستید؟',
@@ -2278,10 +2178,10 @@ sub Data {
         'Link %s to selected %s' => 'ارتباط %s به %s انتخاب شده',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
+        'Import CSV or Excel file' => '',
         'Ticket attribute relations' => '',
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
-        'Import CSV or Excel file' => '',
         'Attribute' => 'صفت',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
@@ -2294,23 +2194,23 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
-        'Type Management' => 'مدیریت نوع‌ها',
         'Add Type' => 'افزودن نوع',
-        'Edit Type' => 'ویرایش درخواست',
         'Filter for Types' => '',
         'Filter for types' => '',
         'Configure Type Visibility and Defaults' => '',
+        'Type Management' => 'مدیریت نوع‌ها',
+        'Edit Type' => 'ویرایش درخواست',
         'A type with this name already exists!' => 'یک نوع با این نام وجود دارد.',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'This type is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminUser.tt
-        'Agent Management' => 'مدیریت کارشناس',
-        'Edit Agent' => 'ویرایش کارشناس',
         'Edit personal preferences for this agent' => '',
         'Agents will be needed to handle tickets.' => 'کارشناسان نیاز دارند که به درخواست‌ها رسیدگی کنند.',
         'Don\'t forget to add a new agent to groups and/or roles!' => 'فراموش نکنید که یک کارشناس جدید را به گروه‌ها و/یا نقش‌ها بیفزایید!',
+        'Agent Management' => 'مدیریت کارشناس',
+        'Edit Agent' => 'ویرایش کارشناس',
         'Please enter a search term to look for agents.' => 'لطفا یک عبارت جستجو برای گشتن کارشناسان وارد نمایید.',
         'Last login' => 'آخرین ورود',
         'Switch to agent' => 'سوئیچ به کارشناس',
@@ -2410,9 +2310,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerTableView.tt
         'Note: Customer is invalid!' => 'یادداشت: مشترک نامعتبر است!',
-        'Start chat' => 'شروع گپ',
-        'Video call' => 'تماس تصویری',
-        'Audio call' => 'تماس صوتی',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
         'Customer User Address Book' => '',
@@ -2440,17 +2337,17 @@ sub Data {
         'Customer User Information Center' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-        'The OTRS Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
-            'OTRS شبح یک فرایند شبح که انجام وظایف ناهمزمان، به عنوان مثال تشدید بلیط تحریک، ارسال ایمیل، و غیره است',
-        'A running OTRS Daemon is mandatory for correct system operation.' =>
-            'یک شبح OTRS در حال اجرا برای عملیات سیستم درست الزامی است.',
-        'Starting the OTRS Daemon' => 'شروع OTRS دیمون',
-        'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the OTRS Daemon is running and start it if needed.' =>
-            'مطمئن شوید که فایل \' %s \' وجود دارد (بدون .dist پسوند). این cron در هر 5 دقیقه اگر OTRS دیمون در حال اجرا است را بررسی کنید و شروع به آن در صورت نیاز.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            'اعدام %s شروع به مطمئن شوید که به cron job از کاربر OTRS، فعال هستند.',
-        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
-            'پس از 5 دقیقه، بررسی کنید که OTRS دیمون در حال اجرا در سیستم ( \'وضعیت بن / otrs.Daemon.pl\').',
+        'The Znuny Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
+            'Znuny شبح یک فرایند شبح که انجام وظایف ناهمزمان، به عنوان مثال تشدید بلیط تحریک، ارسال ایمیل، و غیره است',
+        'A running Znuny Daemon is mandatory for correct system operation.' =>
+            'یک شبح Znuny در حال اجرا برای عملیات سیستم درست الزامی است.',
+        'Starting the Znuny Daemon' => 'شروع Znuny دیمون',
+        'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
+            'مطمئن شوید که فایل \' %s \' وجود دارد (بدون .dist پسوند). این cron در هر 5 دقیقه اگر Znuny دیمون در حال اجرا است را بررسی کنید و شروع به آن در صورت نیاز.',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            'اعدام %s شروع به مطمئن شوید که به cron job از کاربر Znuny، فعال هستند.',
+        'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
+            'پس از 5 دقیقه، بررسی کنید که Znuny دیمون در حال اجرا در سیستم ( \'وضعیت بن / znuny.Daemon.pl\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => 'داشبورد',
@@ -2467,11 +2364,23 @@ sub Data {
         'in' => 'در',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'Save settings' => 'ذخیره تنظیمات',
-        'Close this widget' => 'بستن این ویجت',
+        'No Data Available.' => '',
+        ' Show or hide the content' => '',
+        'Search inactive widgets' => '',
+        'Active Widgets' => '',
+        ' Save changes' => '',
+        ' Save' => '',
+        'Save changes' => '',
+        ' Settings' => '',
+        ' Refresh' => '',
+        ' Close this widget' => '',
+        'Hide' => '',
+        ' Cancel' => '',
         'more' => 'بیشتر',
         'Available Columns' => 'ستون در دسترس',
+        ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'ستون قابل مشاهده است (سفارش با کشیدن و رها کردن)',
+        ' Submit' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => '',
@@ -2501,12 +2410,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
-        '%s %s is available!' => '%s %s موجود است.',
-        'Please update now.' => 'لطفا بروزرسانی کنید.',
-        'Release Note' => 'یادداشت انتشار',
-        'Level' => 'سطح',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardRSSOverview.tt
         'Posted %s ago.' => '%s وقت پیش ارسال شد',
 
@@ -2526,6 +2429,7 @@ sub Data {
             'این آمار در حال حاضر می توانید استفاده نیست زیرا پیکربندی آن باید توسط Administrator آمار اصلاح شود.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
+        'Show' => '',
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'درخواست‎های قفل شده من',
@@ -2551,6 +2455,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
         'Manage links for %s' => '',
+        'Close and Back' => '',
         'Create new links' => '',
         'Manage existing links' => '',
         'Link with' => '',
@@ -2558,14 +2463,7 @@ sub Data {
         'There are currently no links. Please click \'Create new Links\' on the top to link this item to other objects.' =>
             '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentOTRSBusinessBlockScreen.tt
-        'Unauthorized usage of %s detected' => 'استفاده غیر مجاز از %s شناسایی',
-        'If you decide to downgrade to ((OTRS)) Community Edition, you will lose all database tables and data related to %s.' =>
-            '',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-        'Edit your preferences' => 'تنظیمات شخصی خودتان را ویرایش نمایید',
-        'Personal Preferences' => '',
         'Preferences' => 'تنظیمات',
         'Please note: you\'re currently editing the preferences of %s.' =>
             '',
@@ -2578,6 +2476,8 @@ sub Data {
         'Filter settings...' => '',
         'Filter for settings' => '',
         'Save all settings' => '',
+        'Edit your preferences' => 'تنظیمات شخصی خودتان را ویرایش نمایید',
+        'Personal Preferences' => '',
         'Avatars have been disabled by the system administrator. You\'ll see your initials instead.' =>
             '',
         'You can change your avatar image by registering with your email address %s at %s. Please note that it can take some time until your new avatar becomes available because of caching.' =>
@@ -2586,14 +2486,12 @@ sub Data {
         'End' => 'پایان',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => '',
+        'Save setting' => '',
         'Save this setting' => '',
         'Did you know? You can help translating Znuny at %s.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences/SettingsList.tt
-        'Reset to default' => '',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
-        'Choose from the groups on the right to find the settings you\'d wish to change.' =>
+        'Choose from the groups on the left to find the settings you\'d wish to change.' =>
             '',
         'Did you know?' => '',
         'You can change your avatar by registering with your email address %s on %s' =>
@@ -2605,9 +2503,9 @@ sub Data {
         'Split' => 'جدا ساختن',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
+        'Read more about statistics in Znuny' => '',
         'Statistics Management' => '',
         'Add Statistics' => '',
-        'Read more about statistics in OTRS' => '',
         'Dynamic Matrix' => 'ماتریس پویا',
         'Each cell contains a singular data point.' => '',
         'Dynamic List' => 'لیست پویا',
@@ -2618,8 +2516,8 @@ sub Data {
         'Create Statistic' => 'آماردرست ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsEdit.tt
-        'Edit Statistics' => '',
         'Run now' => 'الان اجرا کن',
+        'Edit Statistics' => '',
         'Statistics Preview' => ' پیش آمار',
         'Save Statistic' => '',
 
@@ -2629,7 +2527,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
         'Statistics' => 'گزارش ها',
-        'Run' => 'اجرا',
         'Edit statistic "%s".' => 'ویرایش گزارش " %s ".',
         'Export statistic "%s"' => 'آمارارسال \ " %s "',
         'Export statistic %s' => 'استخراج گزارش "%s"',
@@ -2637,8 +2534,6 @@ sub Data {
         'Delete statistic %s' => 'حذف گزارش "%s"',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
-        'Statistics Overview' => 'مرور گزارش ها',
-        'View Statistics' => 'مشاهده گزارش ها',
         'Statistics Information' => 'اطلاعات گزارش ها',
         'Created by' => 'ایجاد شده توسط',
         'Changed by' => 'تغییر یافته توسط',
@@ -2646,6 +2541,8 @@ sub Data {
         'Sum columns' => 'جمع ستون‌ها',
         'Show as dashboard widget' => 'نمایش به عنوان ویجت داشبورد',
         'Cache' => 'نگهداری',
+        'Statistics Overview' => 'مرور گزارش ها',
+        'View Statistics' => 'مشاهده گزارش ها',
         'This statistic contains configuration errors and can currently not be used.' =>
             'این آمار شامل خطاهای پیکربندی هستند و در حال حاضر قابل استفاده نیستند.',
 
@@ -2657,33 +2554,37 @@ sub Data {
         'Set Pending Time for %s%s%s' => 'تنظیم انتظار زمان برای %s %s %s',
         'Change Priority of %s%s%s' => 'تغییر اولویت %s %s %s',
         'Change Responsible of %s%s%s' => 'تغییر مسئول %s %s %s',
-        'All fields marked with an asterisk (*) are mandatory.' => 'همه فیلدهایی که با ستاره مشخص شده اند (*) الزامی است.',
         'The ticket has been locked' => 'درخواست تحویل گرفته شده است',
-        'Undo & close' => 'عملیات را برگردان و پنجره را ببند',
         'Ticket Settings' => 'تنظیمات درخواست',
-        'Queue invalid.' => '',
         'Service invalid.' => 'سرویس نامعتبر',
         'SLA invalid.' => '',
+        'Team Data' => '',
+        'Queue invalid.' => '',
         'New Owner' => 'صاحب جدید',
         'Please set a new owner!' => 'لطفا یک صاحب جدید مشخص نمایید!',
         'Owner invalid.' => '',
         'New Responsible' => ' مسئول جدید',
         'Please set a new responsible!' => '',
         'Responsible invalid.' => '',
+        'Ticket Data' => '',
         'Next state' => 'وضعیت بعدی',
         'State invalid.' => '',
         'For all pending* states.' => 'برای همه کشورهای * در انتظار.',
+        'Dynamic Info' => '',
         'Add Article' => 'اضافه کردن نوشته',
-        'Create an Article' => 'ایجاد یک مقاله',
+        'Inform' => '',
         'Inform agents' => 'اطلاع عوامل',
         'Inform involved agents' => 'اطلاع عوامل درگیر',
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'در اینجا شما می توانید عوامل اضافی که باید اطلاع رسانی در مورد این مقاله جدید دریافت خواهید کرد را انتخاب کنید.',
         'Text will also be received by' => 'متن نیز دریافت می شود  توسط',
+        'Communications' => '',
+        'Create an Article' => 'ایجاد یک مقاله',
         'Setting a template will overwrite any text or attachment.' => 'تنظیم یک قالب هر گونه متن یا پیوست بازنویسی.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce %s%s%s' => 'پریدن %s %s %s',
+        'cancel' => '',
         'Bounce to' => 'ارجاع شده به',
         'You need a email address.' => 'به یک آدرس ایمیل نیاز دارید',
         'Need a valid email address or don\'t use a local email address.' =>
@@ -2706,20 +2607,23 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
         'Compose Answer for %s%s%s' => 'نوشتن پاسخ برای %s %s %s',
+        'Date Invalid!' => 'تاریخ نامعتبر!',
+        ' Select one or more recipients from the customer user address book.' =>
+            '',
+        'Customer user address book' => '',
         'This address is registered as system address and cannot be used: %s' =>
             'این آدرس به عنوان آدرس سیستم ثبت شده و می تواند استفاده شود: %s',
         'Please include at least one recipient' => 'لطفا حداقل یک گیرنده را قراردهید',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
-        'Customer user address book' => '',
         'Remove Ticket Customer' => 'حذف و ضوابط درخواست',
         'Please remove this entry and enter a new one with the correct value.' =>
             'لطفا این مطلب را حذف و یک مطلب جدید با مقدار صحیح را وارد کنید.',
         'This address already exists on the address list.' => 'این آدرس در لیست آدرس ها موجود است.',
+        ' Cc' => '',
         'Remove Cc' => 'حذف رونوشت',
         'Bcc' => 'رونوشت پنهان',
+        ' Bcc' => '',
         'Remove Bcc' => 'حذف کپی به',
-        'Date Invalid!' => 'تاریخ نامعتبر!',
+        ' Send mail' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => 'تغییر مشتری از %s %s %s',
@@ -2728,19 +2632,29 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'ساخت درخواست ایمیلی جدید',
+        ' Example Template' => '',
         'Example Template' => 'به عنوان مثال قالب',
-        'From queue' => 'از صف درخواست',
         'To customer user' => 'به کاربران مشتری',
+        ' To' => '',
         'Please include at least one customer user for the ticket.' => 'لطفا حداقل یک کاربر مشتری برای درخواست قرار دهید',
-        'Select this customer as the main customer.' => 'این مشتری را به عنوان مشتری اصلی انتخاب کنید.',
+        ' Select this customer as the main customer.' => '',
+        ' To customer user' => '',
         'Remove Ticket Customer User' => 'حذف درخواست  کاربرمشتری',
+        'From queue' => 'از صف درخواست',
+        ' Get all' => '',
         'Get all' => 'گرفتن همه',
+        ' Message body' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => 'عازم ناحیه دور دست ایمیل برای %s %s %s',
+        'Select one or more recipients from the customer user address book.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
+        'All fields marked with an asterisk (*) are mandatory.' => 'همه فیلدهایی که با ستاره مشخص شده اند (*) الزامی است.',
+        'Cancel & close' => 'لغو کنید و ببندید',
+        'Undo & close' => 'عملیات را برگردان و پنجره را ببند',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => 'بلیط %s : زمان پاسخ برای اولین بار است که بیش از ( %s / %s )!',
@@ -2755,18 +2669,19 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'تاریخ %s %s %s',
+        'Start typing to filter...' => '',
         'Filter for history items' => '',
-        'Expand/collapse all' => '',
+        'Expand/Collapse all' => '',
         'CreateTime' => 'زمان ساختن',
         'Article' => 'نوشته',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
         'Merge %s%s%s' => 'ادغام %s %s %s',
         'Merge Settings' => 'ادغام تنظیمات',
-        'You need to use a ticket number!' => 'شما باید از شماره درخواست استفاده نمائید!',
-        'A valid ticket number is required.' => 'شماره درخواست معتبر مورد نیاز است.',
         'Try typing part of the ticket number or title in order to search by it.' =>
             '',
+        'You need to use a ticket number!' => 'شما باید از شماره درخواست استفاده نمائید!',
+        'A valid ticket number is required.' => 'شماره درخواست معتبر مورد نیاز است.',
         'Limit the search to tickets with same Customer ID (%s).' => '',
         'Inform Sender' => '',
         'Need a valid email address.' => 'به آدرس ایمیل معتبر نیاز است.',
@@ -2774,48 +2689,53 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => 'حرکت %s %s %s',
         'New Queue' => 'لیست درخواست جدید',
+        'Communication' => 'ارتباطات',
         'Move' => 'انتقال',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
         'Add note to linked %s%s%s' => '',
+        'Notes' => '',
         'Note to linked Ticket' => '',
         'LinkList invalid.' => '',
         'Note to origin Ticket' => '',
         'NoteToTicket invalid.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+        ' Select all' => '',
         'No ticket data found.' => 'اطلاعات درخواست یافت نشد.',
-        'Open / Close ticket action menu' => 'باز / بستن بلیط منوی عمل',
-        'Select this ticket' => 'انتخاب این تیکت',
+        ' Open / Close ticket action menu' => '',
+        ' Select this ticket' => '',
         'Sender' => 'فرستنده',
-        'First Response Time' => 'زمان اولین پاسخ',
-        'Update Time' => 'زمان بروز رسانی',
-        'Solution Time' => 'زمان ارائه راهکار',
         'Impact' => 'اثر',
         'CustomerID' => 'کد اشتراک',
-        'Move ticket to a different queue' => 'انتقال درخواست یه صف درخواست دیگر',
+        'Update Time' => 'زمان بروز رسانی',
+        'Solution Time' => 'زمان ارائه راهکار',
+        'First Response Time' => 'زمان اولین پاسخ',
+        ' Service Time' => '',
+        ' Move ticket to a different queue' => '',
         'Change queue' => 'تغییر لیست درخواست',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'حذف فیلتر فعال برای این صفحه نمایش.',
+        'Clear all filters' => '',
         'Remove mention' => '',
         'Tickets per page' => 'درخواست در هر صفحه',
+        'Filter assigned fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
+        ' Missing channel' => '',
         'Missing channel' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => 'مرور تنظیم مجدد',
-        'Column Filters Form' => 'فرم ستون فیلتر',
+        ' Column Filters Form' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => 'تقسیم درخواست تلفن جدید',
-        'Save Chat Into New Phone Ticket' => 'ذخیره چت به درخواست تلفن جدید',
         'Create New Phone Ticket' => 'ساخت درخواست تلفنی جدید',
         'Please include at least one customer for the ticket.' => 'لطفا حداقل یک مشتری برای درخواست قراردهید',
+        'Select this customer as the main customer.' => 'این مشتری را به عنوان مشتری اصلی انتخاب کنید.',
         'To queue' => 'به صف درخواست',
-        'Chat protocol' => 'موافقت اولیه چت',
-        'The chat will be appended as a separate article.' => 'چت به عنوان یک مقاله جداگانه اضافه خواهد شد.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
         'Phone Call for %s%s%s' => 'تماس بگیرید تلفن تماس برای %s %s %s',
@@ -2827,6 +2747,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => 'ایجاد درخواست جدید فرآیند',
+        ' Loading' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => 'ثبت نام درخواست به یک فرایند',
@@ -2870,11 +2791,11 @@ sub Data {
         'Save as default' => 'ذخیره به عنوان پیش فرض',
         'Drafts' => '',
         'by' => 'توسط',
+        'Move ticket to a different queue' => 'انتقال درخواست یه صف درخواست دیگر',
         'Change Queue' => 'تغییر صف درخواست',
         'There are no dialogs available at this point in the process.' =>
             'هیچ پنجره موجود در این نقطه از این فرآیند وجود ندارد.',
         'This item has no articles yet.' => 'این محصول هنوز دارای هیچ مقاله ای نیست.',
-        'Ticket Timeline View' => 'درخواست گاهشمار مشخصات',
         'Article Overview - %s Article(s)' => '',
         'Page %s' => '',
         'Add Filter' => 'افزودن فیلتر',
@@ -2890,11 +2811,6 @@ sub Data {
         'Internal message' => 'پیغام داخلی',
         'Sending of this message has failed.' => '',
         'Resize' => 'تغییر اندازه',
-        'Mark this article as read' => 'علامت گذاری  این مقاله به عنوان خوانده شده',
-        'Show Full Text' => 'نمایش کامل متن ',
-        'Full Article Text' => ' متن  کامل مقاله',
-        'No more events found. Please try changing the filter settings.' =>
-            'هیچ رویداد بیشتر شده است. لطفا سعی کنید تغییر تنظیمات فیلتر.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
         '#%s' => '',
@@ -2937,10 +2853,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
         'Preview of this article is not possible because %s channel is missing in the system.' =>
             '',
-        'This feature is part of the %s. Please contact us at %s for an upgrade.' =>
-            '',
-        'Please re-install %s package in order to display this article.' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentBlocker.tt
         'To protect your privacy, remote content was blocked.' => 'برای محافظت از حریم خصوصی شما، محتوای راه دور متوقف شد.',
@@ -2948,7 +2860,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back to admin overview' => '',
+        'Back' => 'بازگشت',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -2956,11 +2868,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Link.tt
         'Remove entry' => 'پاک کردن ورودی',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/CloudServicesDisabled.tt
-        'This Feature Requires Cloud Services' => '',
-        'You can' => 'شما می‌توانید',
-        'go back to the previous page' => 'به صفحه قبل برگرد',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => '',
@@ -2990,6 +2897,11 @@ sub Data {
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             'اتصال شده است دوباره برقرار پس از از دست دادن اتصال موقت. با توجه به این، از عناصر این صفحه می تواند متوقف کرده اند به درستی کار کند. به منظور قادر به استفاده از تمام عناصر به درستی دوباره، آن است که شدت توصیه می شود به بارگذاری مجدد این صفحه.',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerHeader.tt
+        'Edit personal preferences' => 'ویرایش تنظیمات شخصی',
+        'Personal preferences' => '',
+        'Logout' => 'خروج',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
         'JavaScript Not Available' => 'جاوااسکریپت در دسترس نیست',
         'In order to experience this software, you\'ll need to enable JavaScript in your browser.' =>
@@ -3009,9 +2921,6 @@ sub Data {
         '2 Factor Token' => '2 فاکتور رمز',
         'Your 2 Factor Token' => ' 2 فاکتور رمزشما',
         'Log In' => 'ورود',
-        'Not yet registered?' => 'هنوز ثبت نام نشده‌اید؟',
-        'Sign up now' => 'اکنون عضو شوید',
-        'Back' => 'بازگشت',
         'Request New Password' => 'درخواست رمز عبور جدید',
         'Your User Name' => 'نام کاربری شما',
         'A new password will be sent to your email address.' => 'رمز عبور جدید برای آدرس ایمیل شما ارسال خواهد شد.',
@@ -3021,14 +2930,14 @@ sub Data {
         'Your First Name' => 'نام شما',
         'Your Last Name' => 'نام خانوادگی شما',
         'Your email address (this will become your username)' => 'نشانی ایمیل شما (این تبدیل خواهد شد به نام کاربری شما)',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerNavigationBar.tt
-        'Incoming Chat Requests' => 'درخواست چت ورودی',
-        'Edit personal preferences' => 'ویرایش تنظیمات شخصی',
-        'Logout %s' => 'خروج %s',
+        'Not yet registered?' => 'هنوز ثبت نام نشده‌اید؟',
+        'Sign up now' => 'اکنون عضو شوید',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
-        'Service level agreement' => 'توافقنامه سطح سرویس',
+        'New Ticket' => 'درخواست جدید',
+        ' Service level agreement' => '',
+        'Dymanic Info' => '',
+        ' Subject' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => 'خوش آمدید',
@@ -3038,9 +2947,8 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'مشخصات کاربری',
         'e. g. 10*5155 or 105658*' => 'به عنوان مثال 10*5155 یا 105658*',
-        'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'انواع',
-        'Time Restrictions' => '',
+        'Limitation' => '',
         'No time settings' => 'بدون تنظیمات زمان',
         'All' => 'همه',
         'Specific date' => 'تاریخ خاص',
@@ -3049,20 +2957,19 @@ sub Data {
         'Only tickets created between' => 'فقط درخواست‌های ساخته شده بین',
         'Ticket Archive System' => '',
         'Save Search as Template?' => '',
-        'Save as Template?' => 'ذخیره به عنوان قالب؟',
         'Save as Template' => 'ذخیره به عنوان الگو',
+        'Save as Template?' => 'ذخیره به عنوان قالب؟',
         'Template Name' => 'نام قالب',
         'Pick a profile name' => 'انتخاب یک نام مشخصات',
         'Output to' => 'خروجی به',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearchResultShort.tt
+        'Remove this Search Term.' => 'حذف این عبارت جستجو.',
         'of' => ' از ',
         'Page' => 'صفحه',
-        'Search Results for' => 'نتایج جستجو برای',
-        'Remove this Search Term.' => 'حذف این عبارت جستجو.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
-        'Start a chat from this ticket' => 'آغاز گپ این درخواست از',
+        'Ticket Details' => '',
         'Next Steps' => 'گام های بعدی',
         'Reply' => 'پاسخ',
 
@@ -3095,11 +3002,18 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
-        'View notifications' => '',
-        'Personal preferences' => '',
-        'Logout' => 'خروج',
-        'You are logged in as' => 'شما با این عنوان وارد شده‌اید',
         'Last viewed' => '',
+        'You are logged in as' => 'شما با این عنوان وارد شده‌اید',
+        'Delete all activities' => '',
+        'Delete all' => '',
+        'Mark all activities as seen' => '',
+        'Seen all' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
+        'Overviews' => '',
+        'Personal views' => '',
+        'Last Views' => '',
+        'Search tools' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'جاوا اسکریپت در دسترس نیست',
@@ -3148,8 +3062,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
         'Install Type' => ' نوع نصب',
-        'Create a new database for OTRS' => 'ایجاد یک پایگاه داده جدید برای OTRS',
-        'Use an existing database for OTRS' => 'استفاده از یک پایگاه داده موجود برای OTRS',
+        'Create a new database for Znuny' => 'ایجاد یک پایگاه داده جدید برای Znuny',
+        'Use an existing database for Znuny' => 'استفاده از یک پایگاه داده موجود برای Znuny',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
         'If you have set a root password for your database, it must be entered here. If not, leave this field empty.' =>
@@ -3160,7 +3074,7 @@ sub Data {
         'Database check successful.' => 'کنترل پایگاه داده با موفقیت انجام شد.',
         'Database User' => 'پایگاه داده کاربر',
         'New' => 'جدید',
-        'A new database user with limited permissions will be created for this OTRS system.' =>
+        'A new database user with limited permissions will be created for this Znuny system.' =>
             'یک کاربر برای پایگاه داده با دسترسی‌های محدود برای این سیستم ساخته خواهند شد.',
         'Repeat Password' => 'تکرار رمز عبور ',
         'Generated password' => 'رمز عبور تولید شده',
@@ -3174,10 +3088,10 @@ sub Data {
         'Port' => 'پورت',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
-        'To be able to use OTRS you have to enter the following line in your command line (Terminal/Shell) as root.' =>
+        'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
             'برای استفاده از سیستم خط زیر را در Command Prompt اجرا نمائید.',
         'Restart your webserver' => 'سرور وب خود را راه اندازی مجدد نمائید',
-        'After doing so your OTRS is up and running.' => 'بعد از انجام سیستم قابل استفاده خواهد بود',
+        'After doing so your Znuny is up and running.' => 'بعد از انجام سیستم قابل استفاده خواهد بود',
         'Start page' => 'صفحه شروع',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerLicense.tt
@@ -3224,8 +3138,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
         'Feature not Available' => '',
-        'Sorry, but this feature of OTRS is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
-            'با عرض پوزش، اما این ویژگی از OTRS در حال حاضر برای دستگاه های تلفن همراه در دسترس نیست. اگر شما می خواهم به استفاده از آن، شما می توانید هر دو سوئیچ به حالت دسکتاپ و یا استفاده از دستگاه دسکتاپ خود را به طور منظم.',
+        'Sorry, but this feature of Znuny is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
+            'با عرض پوزش، اما این ویژگی از Znuny در حال حاضر برای دستگاه های تلفن همراه در دسترس نیست. اگر شما می خواهم به استفاده از آن، شما می توانید هر دو سوئیچ به حالت دسکتاپ و یا استفاده از دستگاه دسکتاپ خود را به طور منظم.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Motd.tt
         'Message of the Day' => 'پیام روز',
@@ -3265,8 +3179,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/PublicDefault.tt
         'Welcome' => 'خوش آمدید',
-        'This is the default public interface of OTRS! There was no action parameter given.' =>
-            'این به طور پیش فرض رابط عمومی OTRS موجود است! هیچ پارامتر action داده شده وجود دارد.',
+        'This is the default public interface of Znuny! There was no action parameter given.' =>
+            'این به طور پیش فرض رابط عمومی Znuny موجود است! هیچ پارامتر action داده شده وجود دارد.',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             'شما می توانید یک ماژول سفارشی عمومی (از طریق مدیر بسته) نصب، به عنوان مثال ماژول پرسش و پاسخ، که دارای یک رابط عمومی است.',
 
@@ -3409,12 +3323,6 @@ sub Data {
         'Enable' => '',
         'Reset this setting to its default state' => '',
         'Reset setting' => '',
-        'Allow users to adapt this setting from within their personal preferences' =>
-            '',
-        'Allow users to update' => '',
-        'Do not longer allow users to adapt this setting from within their personal preferences' =>
-            '',
-        'Forbid users to update' => '',
         'Show user specific changes for this setting' => '',
         'Show user settings' => '',
         'Copy a direct link to this setting to your clipboard' => '',
@@ -3464,7 +3372,7 @@ sub Data {
         'Navigation' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Test.tt
-        'OTRS Test Page' => 'صفحه آزمایش سیستم',
+        'Znuny Test Page' => 'صفحه آزمایش سیستم',
         'Unlock' => 'تحویل دادن',
         'Welcome %s %s' => '%s - %s',
         'Counter' => 'شمارنده',
@@ -3474,9 +3382,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Warning.tt
         'Go back to the previous page' => 'به صفحه قبل بازگرد',
-
-        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/AppointmentCalendar/CalendarSettingsDialog.html.tmpl
-        'Show' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/FormDraftAddDialog.html.tmpl
         'Draft title' => '',
@@ -3493,8 +3398,8 @@ sub Data {
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
         'Click to select a file for upload.' => '',
-        'Click to select files or just drop them here.' => '',
-        'Click to select a file or just drop it here.' => '',
+        'Select files or drop them here' => '',
+        'Select a file or drop it here' => '',
         'Uploading...' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
@@ -3518,12 +3423,6 @@ sub Data {
         'Try again' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
-        'Reset options' => '',
-        'Reset setting on global level.' => '',
-        'Reset globally' => '',
-        'Remove all user changes.' => '',
-        'Reset locally' => '',
-        'user(s) have modified this setting.' => '',
         'Do you really want to reset this setting to it\'s default value?' =>
             '',
 
@@ -3550,8 +3449,8 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
             'اطلاعات ACL از پایگاه اطلاع داده  هماهنگی با پیکربندی سیستم نیست، لطفا تمام ACL ها را مستقر کنید . ',
-        'ACLs could not be Imported due to a unknown error, please check OTRS logs for more information' =>
-            'ACL ها نمی تواند به دلیل یک خطای ناشناخته وارد شود، لطفابرای اطلاعات بیشتر OTRS سیاهه های مربوط را بررسی کنید ',
+        'ACLs could not be Imported due to a unknown error, please check Znuny logs for more information' =>
+            'ACL ها نمی تواند به دلیل یک خطای ناشناخته وارد شود، لطفابرای اطلاعات بیشتر Znuny سیاهه های مربوط را بررسی کنید ',
         'The following ACLs have been added successfully: %s' => 'استفاده از ACL زیر با موفقیت اضافه شده است: %s',
         'The following ACLs have been updated successfully: %s' => 'استفاده از ACL زیر با موفقیت به روز شده است: %s',
         'There where errors adding/updating the following ACLs: %s. Please check the log file for more information.' =>
@@ -3606,8 +3505,8 @@ sub Data {
         'Unknown Notification %s!' => 'هشدار نامشخص  از طریق %s !',
         '%s (copy)' => '',
         'There was an error creating the Notification' => 'خطایی در ایجاد هشدار  وجود دارد',
-        'Notifications could not be Imported due to a unknown error, please check OTRS logs for more information' =>
-            'اطلاعیه نمی تواند به دلیل یک خطای ناشناخته وارد شود، لطفا OTRS سیاهه های مربوط را بررسی کنید برای اطلاعات بیشتر',
+        'Notifications could not be Imported due to a unknown error, please check Znuny logs for more information' =>
+            'اطلاعیه نمی تواند به دلیل یک خطای ناشناخته وارد شود، لطفا Znuny سیاهه های مربوط را بررسی کنید برای اطلاعات بیشتر',
         'The following Notifications have been added successfully: %s' =>
             'این اعلانها با موفقیت اضافه شده است: %s',
         'The following Notifications have been updated successfully: %s' =>
@@ -3620,7 +3519,6 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
-        'Yes, but require at least one active notification method.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -3887,12 +3785,12 @@ sub Data {
         'Could not load %s.' => '',
         'Could not read %s!' => 'قادر به خواندن نیست %s !',
         'Need a file to import!' => 'نیاز به یک فایل برای دریافت است .',
-        'The imported file has not valid YAML content! Please check OTRS log for details' =>
-            'فایل وارد شده است محتوای YAML معتبر نیست! لطفا وارد سیستم شوید OTRS برای جزئیات بیشتر',
+        'The imported file has not valid YAML content! Please check Znuny log for details' =>
+            'فایل وارد شده است محتوای YAML معتبر نیست! لطفا وارد سیستم شوید Znuny برای جزئیات بیشتر',
         'Web service "%s" deleted!' => 'وب سرویس \ " %s " حذف!',
-        'OTRS as provider' => 'OTRS به عنوان ارائه دهنده',
+        'Znuny as provider' => 'Znuny به عنوان ارائه دهنده',
         'Operations' => '',
-        'OTRS as requester' => 'OTRS به عنوان درخواست',
+        'Znuny as requester' => 'Znuny به عنوان درخواست',
         'Invokers' => '',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceWebserviceHistory.pm
@@ -3929,16 +3827,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
         'Authorization code parameters not found.' => '',
 
-        # Perl Module: Kernel/Modules/AdminOTRSBusiness.pm
-        'Your system was successfully upgraded to %s.' => 'سیستم شما با موفقیت در%s به روز رسانی شد  .',
-        'There was a problem during the upgrade to %s.' => '  در طول ارتقاء%s یک مشکلی به وجود آمده بود .',
-        '%s was correctly reinstalled.' => '%s به درستی نصب مجدد شد.',
-        'There was a problem reinstalling %s.' => 'یک مشکل در نصب مجدد %s بوجود آمده بود.',
-        'Your %s was successfully updated.' => ' %s شما با موفقیت به روزرسانی شد.',
-        'There was a problem during the upgrade of %s.' => 'یک مشکل درطی ارتقاء%s وجود دارد  .',
-        '%s was correctly uninstalled.' => '%s به درستی لغو نصب شد.',
-        'There was a problem uninstalling %s.' => 'یک مشکل در پاک کردن%s وجود دارد  .',
-
         # Perl Module: Kernel/Modules/AdminPGP.pm
         'PGP environment is not working. Please check log for more info!' =>
             'محیط زیست PGP کار نمی کند. لطفا وارد سیستم شوید برای اطلاعات بیشتر ',
@@ -3947,8 +3835,8 @@ sub Data {
         'Need param Key to download!' => 'نیاز کلید param برای دانلود!',
 
         # Perl Module: Kernel/Modules/AdminPackageManager.pm
-        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!' =>
-            'با عرض پوزش، آپاچی :: بازنگری به عنوان PerlModule و PerlInitHandler در فایل پیکربندی آپاچی مورد نیاز است. همچنین نگاه اسکریپت / apache2 را-httpd.include.conf. متناوبا، شما می توانید از دستور ابزار خط بن / otrs.Console.pl برای نصب بستههای استفاده کنید!',
+        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!' =>
+            'با عرض پوزش، آپاچی :: بازنگری به عنوان PerlModule و PerlInitHandler در فایل پیکربندی آپاچی مورد نیاز است. همچنین نگاه اسکریپت / apache2 را-httpd.include.conf. متناوبا، شما می توانید از دستور ابزار خط بن / znuny.Console.pl برای نصب بستههای استفاده کنید!',
         'No such package!' => 'بدون چنین بسته!',
         'No such file %s in package!' => 'بدون چنین فایل %s در بسته!',
         'No such file %s in local file system!' => 'بدون چنین فایلی  %s در فایل سیستم محلی!',
@@ -3973,9 +3861,6 @@ sub Data {
         'Repository List' => '',
         'No packages found in selected repository. Please check log for more info!' =>
             '',
-        'Can\'t connect to OTRS Feature Add-on list server!' => 'نمی توانید به OTRS ویژگی اضافه کردن در لیست سرور اتصال!',
-        'Can\'t get OTRS Feature Add-on list from server!' => 'نمی توانید OTRS ویژگی اضافه کردن در لیست از سرور دریافت کنید!',
-        'Can\'t get OTRS Feature Add-on from server!' => 'نمی توانید ویژگی OTRS افزودنی از سرور!',
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => 'بدون چنین فیلتر: %s',
@@ -4138,12 +4023,12 @@ sub Data {
         'You currently don\'t have any favourite settings.' => '',
         'The following settings could not be found: %s' => '',
         'Import not allowed!' => 'دریافت مجاز نیست!',
-        'System Configuration could not be imported due to an unknown error, please check OTRS logs for more information.' =>
+        'System Configuration could not be imported due to an unknown error, please check Znuny logs for more information.' =>
             '',
         'Category Search' => '',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
-        'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the OTRS log for more information.' =>
+        'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
             '',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationGroup.pm
@@ -4263,10 +4148,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentPreferences.pm
         'Param Group is required!' => 'PARAM گروه مورد نیاز است!',
-        'Updated user preferences' => '',
-        'System was unable to deploy your changes.' => '',
-        'Setting not found!' => '',
-        'System was unable to reset the setting!' => '',
 
         # Perl Module: Kernel/Modules/AgentSplitSelection.pm
         'Process ticket' => 'روند درخواست',
@@ -4378,12 +4259,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'شما نیاز به مجوز حرکت دارید !',
 
-        # Perl Module: Kernel/Modules/AgentTicketPhone.pm
-        'Chat is not active.' => 'چت غیر فعال است.',
-        'No permission.' => 'بدون مجوز و اجازه.',
-        '%s has left the chat.' => '%s چت را ترک کرده است.',
-        'This chat has been closed and will be removed in %s hours.' => 'این چت بسته شده است و خواهد شد در حذف %s ساعت است.',
-
         # Perl Module: Kernel/Modules/AgentTicketPhoneCommon.pm
         'Ticket locked.' => 'تیکت قفل شده است.',
 
@@ -4493,51 +4368,6 @@ sub Data {
         'Feature is not active' => 'ویژگی غیر فعال است',
 
         # Perl Module: Kernel/Modules/AgentTicketZoom.pm
-        'Link Deleted' => 'لینک های حذف شده',
-        'Ticket Locked' => 'درخواست قفل شده',
-        'Pending Time Set' => 'انتظار زمان تنظیم',
-        'Dynamic Field Updated' => 'به روز رسانی زمینه پویا ',
-        'Outgoing Email (internal)' => 'خروجی ایمیل (داخلی)',
-        'Ticket Created' => ' ایجاد درخواست',
-        'Type Updated' => 'نوع به روز رسانی',
-        'Escalation Update Time In Effect' => 'تشدید اثر بروز رسانی در',
-        'Escalation Update Time Stopped' => 'تشدید بروز رسانی متوقف',
-        'Escalation First Response Time Stopped' => 'تشدید نخست زمان پاسخ توقف',
-        'Customer Updated' => 'مشتری به روز شده',
-        'Internal Chat' => 'چت داخلی',
-        'Automatic Follow-Up Sent' => ' پیگیری ارسال خودکار',
-        'Note Added' => 'توجه داشته باشید او',
-        'Note Added (Customer)' => 'توجه داشته باشید او (مشتری)',
-        'SMS Added' => '',
-        'SMS Added (Customer)' => '',
-        'State Updated' => 'وضعیت به روز رسانی',
-        'Outgoing Answer' => 'خروجی پاسخ',
-        'Service Updated' => 'خدمات به روز شده',
-        'Link Added' => 'لینک اضافه شده',
-        'Incoming Customer Email' => 'ورودی ایمیل مشتری',
-        'Incoming Web Request' => 'ورودی درخواست وب',
-        'Priority Updated' => 'اولویت به روز رسانی',
-        'Ticket Unlocked' => 'درخواست باز',
-        'Outgoing Email' => 'خروجی ایمیل',
-        'Title Updated' => 'عنوان به روز رسانی',
-        'Ticket Merged' => 'درخواست ها با هم ادغام شدند',
-        'Outgoing Phone Call' => 'تماس های تلفنی خروجی',
-        'Forwarded Message' => 'پیام فرستاده شده',
-        'Removed User Subscription' => 'حذف اشتراک کاربر',
-        'Time Accounted' => 'زمان اختصاص',
-        'Incoming Phone Call' => 'تماس تلفنی ورودی',
-        'System Request.' => 'درخواست پاسخ به سیستم.',
-        'Incoming Follow-Up' => ' پیگیری ورودی',
-        'Automatic Reply Sent' => 'پاسخ به صورت خودکار فرستاده شده',
-        'Automatic Reject Sent' => 'به صورت خودکار رد ارسال',
-        'Escalation Solution Time In Effect' => 'تشدید راه حل زمان در اثر',
-        'Escalation Solution Time Stopped' => 'تشدید راه حل زمان توقف',
-        'Escalation Response Time In Effect' => 'تشدید اثر زمان پاسخ',
-        'Escalation Response Time Stopped' => 'تشدید زمان پاسخ متوقف',
-        'SLA Updated' => 'SLA به روز رسانی',
-        'External Chat' => 'چت خارجی',
-        'Queue Changed' => 'صف تغییر',
-        'Notification Was Sent' => 'اطلاع رسانی فرستاده شد',
         'This ticket does not exist, or you don\'t have permissions to access it in its current state.' =>
             '',
         'Missing FormDraftID!' => '',
@@ -4556,7 +4386,6 @@ sub Data {
             'مقاله نمی تواند باز شود. شاید آن در صفحه مقاله دیگری است؟',
         'Show one article' => 'نمایش یک مطلب',
         'Show all articles' => 'نمایش تمام مطالب',
-        'Show Ticket Timeline View' => 'نشان دادن درخواست گاهشمار مشخصات',
 
         # Perl Module: Kernel/Modules/AjaxAttachment.pm
         'Got no FormID.' => '',
@@ -4603,7 +4432,7 @@ sub Data {
         'Configure "Home" in Kernel/Config.pm first!' => 'پیکربندی \ "خانه " در هسته / Config.pm برای اولین بار!',
         'File "%s/Kernel/Config.pm" not found!' => 'فایل \ " %s /Kernel/Config.pm " یافت نشد!',
         'Directory "%s" not found!' => 'راهنمای \ " %s " یافت نشد!',
-        'Install OTRS' => 'نصب  OTRS',
+        'Install Znuny' => 'نصب  Znuny',
         'Intro' => 'معرفی',
         'Kernel/Config.pm isn\'t writable!' => 'هسته / Config.pm قابل نوشتن نیست!',
         'If you want to use the installer, set the Kernel/Config.pm writable for the webserver user!' =>
@@ -4620,7 +4449,7 @@ sub Data {
         'Unknown database type "%s".' => 'نامشخص نوع پایگاه داده \ " %s ".',
         'Please go back.' => 'لطفا برگردید.',
         'Create Database' => 'ایجاد بانک',
-        'Install OTRS - Error' => 'نصب OTRS - خطا',
+        'Install Znuny - Error' => 'نصب Znuny - خطا',
         'File "%s/%s.xml" not found!' => 'فایل \ " %s / %s .XML " یافت نشد!',
         'Contact your Admin!' => 'تماس با مدیریت خود !',
         'System Settings' => 'تنظیمات سیستم',
@@ -4654,6 +4483,9 @@ sub Data {
         'Need config Package::RepositoryAccessRegExp' => 'نیاز بسته بندی پیکربندی :: RepositoryAccessRegExp',
         'Authentication failed from %s!' => 'احراز هویت از %s !',
 
+        # Perl Module: Kernel/Output/HTML/Article/Chat.pm
+        'Chat' => 'گپ',
+
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketBounce.pm
         'Bounce Article to a different mail address' => 'برگشت زدن نوشته به یک آدرس ایمیل دیگر ',
         'Bounce' => 'ارجاع',
@@ -4686,18 +4518,12 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'چاپ این نوشته ',
 
-        # Perl Module: Kernel/Output/HTML/ArticleAction/GetHelpLink.pm
-        'Contact us at sales@otrs.com' => '',
-        'Get Help' => '',
-
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'علامت دار',
         'Unmark' => 'بدون علامت',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/ReinstallPackageLink.pm
-        'Upgrade to OTRS Business Solution™' => '',
         'Re-install Package' => '',
-        'Upgrade' => 'ارتقاء',
         'Re-install' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleCheck/PGP.pm
@@ -4755,25 +4581,12 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Dashboard/CustomerUserList.pm
         'Shown customer users' => 'مشتری کاربر نشان داده شده است',
-        'Offline' => 'آفلاین',
-        'User is currently offline.' => 'کاربر در حال حاضر آفلاین.',
-        'User is currently active.' => 'کاربر در حال حاضر فعال است.',
-        'Away' => 'دور',
-        'User was inactive for a while.' => 'کاربر غیر فعال در حالی که برای بود.',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => 'زمان شروع یک درخواست پس از زمان پایان تنظیم  شده است!',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
         'Shown Tickets' => 'درخواست‌های نمایش داده شده',
-
-        # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
-        'Can\'t connect to OTRS News server!' => 'نمی توانید به سرور OTRS اخبار اتصال!',
-        'Can\'t get OTRS News from server!' => 'می توانید OTRS اخبار از سرور دریافت کنید!',
-
-        # Perl Module: Kernel/Output/HTML/Dashboard/ProductNotify.pm
-        'Can\'t connect to Product News server!' => 'نمی توانید به سرور اخبار محصولات اتصال!',
-        'Can\'t get Product News from server!' => 'می توانید محصولات اخبار از سرور دریافت کنید!',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/RSS.pm
         'Can\'t connect to %s!' => 'نمی توانید به اتصال %s !',
@@ -4788,8 +4601,11 @@ sub Data {
         '7 Day Stats' => 'گزارش ۷ روز',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/UserOnline.pm
+        'User is currently offline.' => 'کاربر در حال حاضر آفلاین.',
+        'User is currently active.' => 'کاربر در حال حاضر فعال است.',
+        'User was inactive for a while.' => 'کاربر غیر فعال در حالی که برای بود.',
         'User set their status to unavailable.' => 'کاربر وضعیت خود را به در دسترس تنظیم شده است.',
-        'Unavailable' => 'در دسترس نیست',
+        'Away' => 'دور',
 
         # Perl Module: Kernel/Output/HTML/Layout.pm
         'Standard' => 'استاندارد',
@@ -4817,7 +4633,6 @@ sub Data {
         'Show Tree Selection' => ' انتخاب درخت را نشان بده',
         'Split Quote' => 'نقل قول اسپلیت',
         'Remove Quote' => 'حذف نقل قول',
-        'Last Views' => '',
 
         # Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
         'Linked as' => 'مرتبط به عنوان',
@@ -4834,13 +4649,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => 'بایگانی جستجو',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
-        'Please verify your license data!' => '',
-        'The license for your %s is about to expire. Please make contact with %s to renew your contract!' =>
-            'مجوز %s شما رو به پایان است. لطفا برای بستن قرارداد مجدد با  %s تماس بگیرید.',
-        'An update for your %s is available, but there is a conflict with your framework version! Please update your framework first!' =>
-            'یک به روز رسانی برای  %s شماموجود است، اما یک مشکلی با نسخه چارچوب شما وجود دارد! لطفا ابتدا چارچوب خود را به روز رسانی کنید !',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOnline.pm
         'Online Agent: %s' => 'کارشناس فعال: %s',
@@ -4861,7 +4669,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Output/HTML/Notification/DaemonCheck.pm
-        'OTRS Daemon is not running.' => 'سرویس OTRS در حال اجرا نیست.',
+        'Znuny Daemon is not running.' => 'سرویس Znuny در حال اجرا نیست.',
 
         # Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
         'OAuth2 token for "%s" has expired.' => '',
@@ -5014,11 +4822,6 @@ sub Data {
             'در حال حاضر بدلیل تعمیر و نگهداری سیستم برنامه ریزی شده، ورود به سایت امکان پذیر نمیباشد.',
 
         # Perl Module: Kernel/System/AuthSession.pm
-        'You have exceeded the number of concurrent agents - contact sales@otrs.com.' =>
-            'شما بیش از تعدادی از عوامل همزمان - تماس sales@otrs.com.',
-        'Please note that the session limit is almost reached.' => 'لطفا توجه داشته باشید که حد جلسه است که تقریبا رسیده است.',
-        'Login rejected! You have exceeded the maximum number of concurrent Agents! Contact sales@otrs.com immediately!' =>
-            'ورود را رد کرد! شما از حداکثر تعدادی از عوامل همزمان! تماس با sales@otrs.com بلافاصله!',
         'Session limit reached! Please try again later.' => 'محدودیت در ورود! لطفا بعدا دوباره امتحان کنید.',
         'Session per user limit reached!' => 'جلسه در حد کاربران رسیده!',
 
@@ -5108,14 +4911,6 @@ sub Data {
         # Perl Module: Kernel/System/ProcessManagement/DB/Process/State.pm
         'Inactive' => 'غیر فعال',
         'FadeAway' => 'ناپدید شدن',
-
-        # Perl Module: Kernel/System/Registration.pm
-        'Can\'t contact registration server. Please try again later.' => 'در حال حاضرنمی توانید با سرور ثبت نام تماس بگیرید. لطفا بعدا دوباره امتحان کنید.',
-        'No content received from registration server. Please try again later.' =>
-            ' از سرور ثبت نام هیچ محتوایی دریافت نشده است. لطفا بعدا دوباره امتحان کنید.',
-        'Can\'t get Token from sever' => 'نمی توانید رمز از Sever بگیرید',
-        'Username and password do not match. Please try again.' => 'نام کاربری و رمز عبور مطابقت ندارند. لطفا دوباره تلاش کنید.',
-        'Problems processing server result. Please try again later.' => ' نتیجه مشکلات پردازش  سرور . لطفا بعدا دوباره امتحان کنید.',
 
         # Perl Module: Kernel/System/Stats.pm
         'Sum' => 'جمع',
@@ -5231,7 +5026,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
         'Invalid Default Values' => '',
-        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair' =>
+        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
@@ -5279,13 +5074,13 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
         'Operating System' => 'سیستم عامل',
-        'OTRS Disk Partition' => 'پارتیشن OTRS دیسک',
+        'Znuny Disk Partition' => 'پارتیشن Znuny دیسک',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
         'Disk Usage' => 'کاربرد دیسک',
-        'The partition where OTRS is located is almost full.' => 'پارتیشن که در آن واقع شده است OTRS تقریبا کامل است.',
-        'The partition where OTRS is located has no disk space problems.' =>
-            'پارتیشن که در آن واقع شده است OTRS هیچ مشکلی روی هارد دیسک ندارد.',
+        'The partition where Znuny is located is almost full.' => 'پارتیشن که در آن واقع شده است Znuny تقریبا کامل است.',
+        'The partition where Znuny is located has no disk space problems.' =>
+            'پارتیشن که در آن واقع شده است Znuny هیچ مشکلی روی هارد دیسک ندارد.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpacePartitions.pm
         'Disk Partitions Usage' => 'دیسک پارتیشن طریقه استفاده',
@@ -5325,7 +5120,7 @@ sub Data {
         'There should be no more than 200 MB swap space used.' => 'باید فضای swap بیش از 200 MB مورد استفاده وجود داشته باشد.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'OTRS' => 'OTRS',
+        'Znuny' => '',
         'Article Search Index Status' => '',
         'Indexed Articles' => '',
 
@@ -5392,7 +5187,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
         'File System Writable' => 'سیستم فایل قابل نوشتن',
-        'The file system on your OTRS partition is not writable.' => 'سیستم فایل در پارتیشن OTRS  قابل نوشتن نیست.',
+        'The file system on your Znuny partition is not writable.' => 'سیستم فایل در پارتیشن Znuny  قابل نوشتن نیست.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
         'Legacy Configuration Backups' => '',
@@ -5423,7 +5218,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
         'Spooled Emails' => 'ایمیل Spooled',
-        'There are emails in var/spool that OTRS could not process.' => 'هستند ایمیل در مسیر var / قرقره که OTRS نمی تواند فرآیند وجود دارد.',
+        'There are emails in var/spool that Znuny could not process.' => 'هستند ایمیل در مسیر var / قرقره که Znuny نمی تواند فرآیند وجود دارد.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
         'Your SystemID setting is invalid, it should only contain digits.' =>
@@ -5454,17 +5249,17 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
         'Orphaned Records In ticket_lock_index Table' => 'سوابق یتیم در جدول ticket_lock_index',
-        'Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'ticket_lock_index جدول شامل سوابق یتیم. لطفا اجرا بن / otrs.Console.pl \ "سیستم maint :: بلیط :: QueueIndexCleanup " برای تمیز کردن شاخص StaticDB.',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'ticket_lock_index جدول شامل سوابق یتیم. لطفا اجرا بن / znuny.Console.pl \ "سیستم maint :: بلیط :: QueueIndexCleanup " برای تمیز کردن شاخص StaticDB.',
         'Orphaned Records In ticket_index Table' => 'سوابق یتیم در جدول ticket_index',
-        'Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
         'Time Settings' => 'تنظیمات زمان',
         'Server time zone' => 'منطقه زمانی سرور',
-        'OTRS time zone' => '',
-        'OTRS time zone is not set.' => '',
+        'Znuny time zone' => '',
+        'Znuny time zone is not set.' => '',
         'User default time zone' => '',
         'User default time zone is not set.' => '',
         'Calendar time zone is not set.' => '',
@@ -5481,7 +5276,7 @@ sub Data {
         'Agents using favourites for the admin overview' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'OTRS Version' => 'OTRS نسخه',
+        'Znuny Version' => 'Znuny نسخه',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'وب Server',
@@ -5489,8 +5284,8 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/MPMModel.pm
         'MPM model' => 'مدل MPM',
-        'OTRS requires apache to be run with the \'prefork\' MPM model.' =>
-            'OTRS به Apache به با "prefork را مدل MPM اجرا می شود.',
+        'Znuny requires apache to be run with the \'prefork\' MPM model.' =>
+            'Znuny به Apache به با "prefork را مدل MPM اجرا می شود.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
         'CGI Accelerator Usage' => 'CGI استفاده از شتاب دهنده ',
@@ -5622,7 +5417,7 @@ sub Data {
             'تعریف عملیات که در آن یک دکمه تنظیمات در دسترس است در اشیاء مرتبط ویجت (LinkObject :: ViewMode = \ "پیچیده "). لطفا توجه داشته باشید که این اقدامات باید در بر داشت زیر JS و CSS فایل های ثبت نام کرده اند: Core.AllocationList.css، Core.UI.AllocationList.js، Core.UI.Table.Sort.js، Core.Agent.TableFilters.js.',
         'Define which columns are shown in the linked appointment widget (LinkObject::ViewMode = "complex"). Possible settings: 0 = Disabled, 1 = Available, 2 = Enabled by default.' =>
             '',
-        'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
+        'Znuny doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
             '',
         'Defines the ticket appointment type backend for ticket escalation time.' =>
             '',
@@ -5659,20 +5454,14 @@ sub Data {
         'Triggers add or update of automatic calendar appointments based on certain ticket times.' =>
             '',
 
-        # XML Definition: Kernel/Config/Files/XML/CloudServices.xml
-        'Defines if the communication between this system and OTRS Group servers that provide cloud services is possible. If set to \'Disable cloud services\', some functionality will be lost such as system registration, support data sending, upgrading to and use of OTRS Business Solution™, OTRS Verify™, OTRS News and product News dashboard widgets, among others.' =>
-            '',
-        'Cloud service admin module registration for the transport layer.' =>
-            'ابر مدیر خدمات ثبت نام ماژول برای لایه حمل و نقل.',
-
         # XML Definition: Kernel/Config/Files/XML/Daemon.xml
-        'Defines the module to display a notification in the agent interface if the OTRS Daemon is not running.' =>
-            'تعریف می کند که ماژول برای نمایش اطلاع رسانی در رابط عامل اگر OTRS شبح حال اجرا نیست.',
+        'Defines the module to display a notification in the agent interface if the Znuny Daemon is not running.' =>
+            'تعریف می کند که ماژول برای نمایش اطلاع رسانی در رابط عامل اگر Znuny شبح حال اجرا نیست.',
         'List of CSS files to always be loaded for the agent interface.' =>
             'لیستی از فایل های CSS برای همیشه برای رابط عامل بارگذاری می شود.',
         'List of JS files to always be loaded for the agent interface.' =>
             'لیستی از فایل های JS برای همیشه برای رابط عامل بارگذاری می شود.',
-        'Type of daemon log rotation to use: Choose \'OTRS\' to let OTRS system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
+        'Type of daemon log rotation to use: Choose \'OTRS\' to let Znuny system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
             '',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
             '',
@@ -5733,7 +5522,7 @@ sub Data {
         'Delete expired ticket draft entries.' => '',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
-        'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
             '',
         'Enables or disables the debug mode over frontend interface.' => 'فعال یا غیر فعال کردن حالت اشکال زدایی بیش از رابط ظاهر.',
         'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
@@ -5746,13 +5535,13 @@ sub Data {
             'کنترل اگر مدیر مجاز به واردات یک پیکربندی سیستم ذخیره شده در SysConfig. است',
         'Defines the name of the application, shown in the web interface, tabs and title bar of the web browser.' =>
             'تعریف می کند که نام برنامه، نشان داده شده در رابط وب، زبانه ها و نوار عنوان مرورگر وب.',
-        'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of OTRS).' =>
-            'تعریف می کند شناسه سیستم. هر عدد بلیط و جلسه HTTP رشته شامل این ID. این تضمین می کند که تنها بلیط که متعلق به سیستم شما خواهد شد به شرح زیر یو پی اس (در هنگام برقراری ارتباط بین دو نمونه از OTRS مفید) پردازش شده است.',
+        'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of Znuny).' =>
+            'تعریف می کند شناسه سیستم. هر عدد بلیط و جلسه HTTP رشته شامل این ID. این تضمین می کند که تنها بلیط که متعلق به سیستم شما خواهد شد به شرح زیر یو پی اس (در هنگام برقراری ارتباط بین دو نمونه از Znuny مفید) پردازش شده است.',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'تعریف می کند که نام مناسب دامنه از سیستم. این تنظیم به عنوان یک متغیر، OTRS_CONFIG_FQDN است که در تمام اشکال پیام استفاده شده توسط برنامه، برای ساخت لینک به بلیط در سیستم شما یافت استفاده می شود.',
-        'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
-            'تعریف می کند نام میزبان HTTP برای جمع آوری داده ها پشتیبانی با ماژول عمومی PublicSupportDataCollector، (به عنوان مثال استفاده از OTRS شبح).',
-        'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
+        'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
+            'تعریف می کند نام میزبان HTTP برای جمع آوری داده ها پشتیبانی با ماژول عمومی PublicSupportDataCollector، (به عنوان مثال استفاده از Znuny شبح).',
+        'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'تعریف می کند نوع پروتکل مورد استفاده توسط وب سرور، برای خدمت به نرم افزار است. اگر پروتکل HTTPS به جای HTTP ساده استفاده می شود، در اینجا باید مشخص شود. از آنجا که این هیچ در تنظیمات و یا رفتار وب سرور تاثیر می گذارد، آن را به روش دسترسی به برنامه را تغییر دهید، و اگر آن اشتباه است، آن را به شما از ورود به نرم افزار جلوگیری نمی کند. این تنظیم فقط به عنوان یک متغیر، OTRS_CONFIG_HttpType است که در تمام اشکال پیام استفاده شده توسط برنامه پیدا شده است استفاده می شود، برای ساخت لینک به بلیط در سیستم خود را.',
@@ -5770,8 +5559,8 @@ sub Data {
             'تعریف می کند تمام زبان هایی که در دسترس  برنامه می باشد. تنها نام انگلیسی از زبان را در اینجا مشخص کنید.',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             'تعریف می کند تمام زبان های که در دسترس  برنامه می باشد. تنها نام بومی زبان را در اینجا مشخص کنید.',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/.' =>
-            'تعریف می کند که تم پیش فرض جلویی (HTML) به توسط عوامل و مشتریان استفاده می شود. اگر دوست دارید، شما می توانید موضوع خود را اضافه کنید. لطفا کتابچه راهنمای کاربر مدیر واقع در https://doc.otrs.com/doc/ مراجعه کنید.',
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+            'تعریف می کند که تم پیش فرض جلویی (HTML) به توسط عوامل و مشتریان استفاده می شود. اگر دوست دارید، شما می توانید موضوع خود را اضافه کنید. لطفا کتابچه راهنمای کاربر مدیر واقع در https://doc.znuny.org/manual/developer/ مراجعه کنید.',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'ممکن است که به پیکربندی تم های مختلف، به عنوان مثال برای تمایز بین عوامل و مشتریان، به بر اساس هر دامنه در داخل نرم افزار استفاده می شود. با استفاده از یک عبارت منظم (عبارت منظم)، شما می توانید یک جفت محتوا / کلیدی برای مطابقت با یک دامنه پیکربندی کنید. ارزش در \ "کلید " باید دامنه مطابقت، و ارزش در \ "محتوا " باید یک موضوع معتبر بر روی سیستم شما می شود. لطفا برای فرم مناسب از عبارت منظم مشاهده نوشته های مثال.',
         'The headline shown in the customer interface.' => 'تیتر نشان داده شده در رابط مشتری.',
@@ -5814,8 +5603,8 @@ sub Data {
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => '',
-        'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
-            'غیر فعال کردن HTTP هدر \ "X-قاب گزینه ها: SAMEORIGIN " اجازه می دهد OTRS به عنوان یک iframe در وب سایت های دیگر گنجانده شده است. غیر فعال کردن این هدر HTTP می تواند یک مسئله امنیتی! فقط آن را غیر فعال کنید، اگر شما می دانید آنچه شما انجام می دهند!',
+        'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
+            'غیر فعال کردن HTTP هدر \ "X-قاب گزینه ها: SAMEORIGIN " اجازه می دهد Znuny به عنوان یک iframe در وب سایت های دیگر گنجانده شده است. غیر فعال کردن این هدر HTTP می تواند یک مسئله امنیتی! فقط آن را غیر فعال کنید، اگر شما می دانید آنچه شما انجام می دهند!',
         'Disable HTTP header "Content-Security-Policy" to allow loading of external script contents. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'غیر فعال کردن HTTP هدر "Content-Security-Policy" اجازه می دهد تا بارگذاری محتویات اسکریپت های خارجی. غیر فعال کردن این هدر HTTP می تواند یک مسئله امنیتی! فقط آن را غیر فعال کنید، اگر شما می دانید آنچه شما انجام می دهند!',
         'Automated line break in text messages after x number of chars.' =>
@@ -5858,7 +5647,7 @@ sub Data {
             'اگر \ "syslog را " برای LogModule انتخاب شد، مجموعه کاراکتر است که باید برای ورود به سیستم استفاده می شود می تواند مشخص شود.',
         'If "file" was selected for LogModule, a logfile must be specified. If the file doesn\'t exist, it will be created by the system.' =>
             'اگر \ "فایل " برای LogModule انتخاب شد، یک فایل تاریخچه ثبت باید مشخص شود. اگر فایل وجود ندارد، از آن خواهد شد توسط سیستم ایجاد شده است.',
-        'Adds a suffix with the actual year and month to the OTRS log file. A logfile for every month will be created.' =>
+        'Adds a suffix with the actual year and month to the Znuny log file. A logfile for every month will be created.' =>
             'پسوند سال و ماه به فایل ثبت وقایع می‌افزاید. برای هر ماه یک فایل ساخته خواهد شد.',
         'Set the minimum log level. If you select \'error\', just errors are logged. With \'debug\' you get all logging messages. The order of log levels is: \'debug\', \'info\', \'notice\' and \'error\'.' =>
             '',
@@ -5906,12 +5695,8 @@ sub Data {
             'فایل است که در کرنل :: ماژول :: AgentInfo نمایش داده، اگر در هسته / خروجی / HTML / قالب / استاندارد / AgentInfo.tt واقع شده است.',
         'Defines the module to generate code for periodic page reloads.' =>
             'تعریف می کند که ماژول تولید کد برای بارگذاری مجدد صفحه تناوبی است.',
-        'Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.' =>
-            'تعریف می کند که ماژول برای نمایش اطلاع رسانی در رابط های مختلف در مناسبت های مختلف برای OTRS کسب و کار راه حل ™.',
         'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
             'ماژول برای نمایش اطلاع رسانی در رابط عامل، در صورتی که سیستم توسط کاربر مدیریت استفاده را تعریف می کند (به طور معمول شما باید به عنوان مدیر کار نمی کند).',
-        'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
-            'تعریف می کند که ماژول برای نمایش اطلاع رسانی در رابط عامل، اگر عامل محدود جلسه هشدار قبلی رسیده است.',
         'Defines the module that shows all the currently logged in agents in the agent interface.' =>
             'ماژول است که همه به در حال حاضر در عوامل در رابط عامل وارد تعریف می کند.',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
@@ -5932,8 +5717,8 @@ sub Data {
             'تعریف می کند که نشان می دهد یک ماژول است که اطلاع رسانی عمومی در رابط عامل. در هر دو صورت \ "متن " - در صورت پیکربندی - و یا محتویات \ "فایل " نمایش داده خواهد شد.',
         'Defines the module used to store the session data. With "DB" the frontend server can be splitted from the db server. "FS" is faster.' =>
             'تعریف می کند ماژول استفاده می شود برای ذخیره داده ها جلسه. با \ "DB " سرور ظاهر می توانید از سرور دسیبل برابر خرد. \ "FS " سریع تر است.',
-        'Defines the name of the session key. E.g. Session, SessionID or OTRS.' =>
-            'تعریف می کند که نام کلید جلسه. به عنوان مثال جلسه، SESSIONID یا OTRS.',
+        'Defines the name of the session key. E.g. Session, SessionID or Znuny.' =>
+            'تعریف می کند که نام کلید جلسه. به عنوان مثال جلسه، SESSIONID یا Znuny.',
         'Defines the name of the key for customer sessions.' => 'تعریف می کند که نام کلید برای جلسات مشتری می باشد.',
         'Turns on the remote ip address check. It should not be enabled if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.' =>
             '',
@@ -5948,8 +5733,6 @@ sub Data {
             'باعث می شود مدیریت جلسه کوکی استفاده از HTML. اگر کوکی ها اچ غیر فعال و یا اگر کوکی ها مرورگر HTML غیر فعال است مشتری، سپس سیستم به طور معمول کار خواهد کرد و اضافه ID جلسه به لینک ها',
         'Stores cookies after the browser has been closed.' => 'فروشگاه کوکی ها پس از مرورگر بسته شده است.',
         'Protection against CSRF (Cross Site Request Forgery) exploits (for more info see https://en.wikipedia.org/wiki/Cross-site_request_forgery).' =>
-            '',
-        'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime before a prior warning will be visible for the logged in agents.' =>
             '',
         'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime.' =>
             '',
@@ -5968,9 +5751,9 @@ sub Data {
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '',
         'This setting is deprecated. Set OTRSTimeZone instead.' => '',
-        'Sets the time zone being used internally by OTRS to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
+        'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             '',
-        'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the OTRS time zone and the user\'s time zone.' =>
+        'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '',
         'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
             '',
@@ -5989,8 +5772,8 @@ sub Data {
         'Adds the one time vacation days for the indicated calendar.' => '',
         'Defines the hours and week days of the indicated calendar, to count the working time.' =>
             'تعریف می کند که ساعت و روز هفته  برای شمارش زمان کاردر تقویم نشان داده میشود.',
-        'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your OTRS instance to stop working (probably any mask which takes input from the user).' =>
-            'تعریف می کند به اندازه حداکثر (در بایت) برای ارسال فایل از طریق مرورگر. هشدار: تنظیم این گزینه بر یک ارزش است که خیلی کم می تواند از ماسک های بسیاری در مثال OTRS شما می شود برای جلوگیری از کار (احتمالا هر ماسک که طول می کشد ورودی از کاربر).',
+        'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your Znuny instance to stop working (probably any mask which takes input from the user).' =>
+            'تعریف می کند به اندازه حداکثر (در بایت) برای ارسال فایل از طریق مرورگر. هشدار: تنظیم این گزینه بر یک ارزش است که خیلی کم می تواند از ماسک های بسیاری در مثال Znuny شما می شود برای جلوگیری از کار (احتمالا هر ماسک که طول می کشد ورودی از کاربر).',
         'Selects the module to handle uploads via the web interface. "DB" stores all uploads in the database, "FS" uses the file system.' =>
             'ماژول که مسئولیت رسیدگی به ارسال از طریق رابط وب انتخاب می کند. \ "DB " فروشگاه های ارسال همه در پایگاه داده، \ "FS " با استفاده از سیستم فایل.',
         'Specifies the text that should appear in the log file to denote a CGI script entry.' =>
@@ -6057,8 +5840,8 @@ sub Data {
             'تعریف می کند که مسیر و TTF-فایل که مسئولیت رسیدگی به قلم تکفاصله کج در اسناد PDF. را دارد',
         'Defines the path and TTF-File to handle bold italic monospaced font in PDF documents.' =>
             'تعریف می کند که مسیر و TTF-فایل که مسئولیت رسیدگی به جسورانه قلم تکفاصله کج در اسناد PDF.',
-        'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the OTRS user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
-            'پشتیبانی PGP را قادر می سازد. زمانی که حمایت PGP برای امضای و رمزنگاری ایمیل فعال، آن را بسیار توصیه می شود که وب سرور به عنوان کاربر OTRS اجرا می شود. در غیر این صورت، وجود خواهد داشت مشکلات با امتیازات زمانی که دسترسی به .gnupg پوشه.',
+        'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the Znuny user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
+            'پشتیبانی PGP را قادر می سازد. زمانی که حمایت PGP برای امضای و رمزنگاری ایمیل فعال، آن را بسیار توصیه می شود که وب سرور به عنوان کاربر Znuny اجرا می شود. در غیر این صورت، وجود خواهد داشت مشکلات با امتیازات زمانی که دسترسی به .gnupg پوشه.',
         'Defines the path to PGP binary.' => 'تعریف می کند که مسیر به باینری PGP.',
         'Sets the options for PGP binary.' => 'مجموعه گزینه برای باینری PGP.',
         'Sets the preferred digest to be used for PGP binary.' => '',
@@ -6076,10 +5859,10 @@ sub Data {
             ' دایرکتوری که در آن گواهینامه های SSL خصوصی ذخیره شده است را مشخص میکند.',
         'Cache time in seconds for the SSL certificate attributes.' => 'زمان کش در ثانیه برای ویژگی گواهینامه SSL.',
         'Enables fetch S/MIME from CustomerUser backend support.' => 'را قادر می سازد واکشی S / MIME از پشتیبانی باطن CustomerUser.',
-        'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com).' =>
-            'نامی است که باید توسط نرم افزار در هنگام ارسال اطلاعیه استفاده می شود مشخص می کند. نام فرستنده استفاده می شود برای ساخت نام صفحه نمایش کامل برای کارشناسی ارشد اطلاع رسانی (یعنی \ "OTRS اطلاعیه " otrs@your.example.com).',
-        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
-            'آدرس ایمیل که باید توسط نرم افزار در هنگام ارسال اطلاعیه استفاده می شود مشخص می کند. آدرس ایمیل استفاده می شود برای ساخت نام صفحه نمایش کامل برای کارشناسی ارشد اطلاع رسانی (یعنی \ "OTRS اطلاعیه " otrs@your.example.com). شما می توانید متغیر OTRS_CONFIG_FQDN به عنوان مجموعه ای در configuation خود استفاده کنید، یا آدرس ایمیل دیگر را انتخاب کنید.',
+        'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).' =>
+            'نامی است که باید توسط نرم افزار در هنگام ارسال اطلاعیه استفاده می شود مشخص می کند. نام فرستنده استفاده می شود برای ساخت نام صفحه نمایش کامل برای کارشناسی ارشد اطلاع رسانی (یعنی \ "Znuny اطلاعیه " znuny@your.example.com).',
+        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
+            'آدرس ایمیل که باید توسط نرم افزار در هنگام ارسال اطلاعیه استفاده می شود مشخص می کند. آدرس ایمیل استفاده می شود برای ساخت نام صفحه نمایش کامل برای کارشناسی ارشد اطلاع رسانی (یعنی \ "Znuny اطلاعیه " znuny@your.example.com). شما می توانید متغیر OTRS_CONFIG_FQDN به عنوان مجموعه ای در configuation خود استفاده کنید، یا آدرس ایمیل دیگر را انتخاب کنید.',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'تعریف می کند این موضوع برای ایمیل های آگاه سازی فرستاده شده به عوامل، با رمز در مورد کلمه عبور جدید درخواست شده است.',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
@@ -6200,8 +5983,8 @@ sub Data {
             'اگر \ "LDAP " برای مشتریان :: AuthModule انتخاب شد، BaseDN باید مشخص شود.',
         'If "LDAP" was selected for Customer::AuthModule, the user identifier must be specified.' =>
             'اگر \ "LDAP " برای مشتریان :: AuthModule انتخاب شد، شناسه کاربر باید مشخص شود.',
-        'If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use OTRS. Specify the group, who may access the system.' =>
-            'اگر \ "LDAP " برای ضوابط Authmodule انتخاب شد ::، شما می توانید در صورتی که کاربر مجاز به تصدیق چرا که او در یک posixGroup است، به عنوان مثال کاربر نیاز به در یک XYZ گروه به استفاده از OTRS شود تیک بزنید. مشخص گروه، که ممکن است سیستم دسترسی داشته باشید.',
+        'If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use Znuny. Specify the group, who may access the system.' =>
+            'اگر \ "LDAP " برای ضوابط Authmodule انتخاب شد ::، شما می توانید در صورتی که کاربر مجاز به تصدیق چرا که او در یک posixGroup است، به عنوان مثال کاربر نیاز به در یک XYZ گروه به استفاده از Znuny شود تیک بزنید. مشخص گروه، که ممکن است سیستم دسترسی داشته باشید.',
         'If "LDAP" was selected for Customer::AuthModule, you can specify access attributes here.' =>
             'اگر \ "LDAP " برای ضوابط AuthModule انتخاب شد ::.، شما می توانید ویژگی های دسترسی، اینجا را مشخص کنید.',
         'If "LDAP" was selected for Customer::AuthModule, user attributes can be specified. For LDAP posixGroups use UID, for non LDAP posixGroups use full user DN.' =>
@@ -6255,7 +6038,7 @@ sub Data {
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             'پوسته‌های ظاهری را در سیستم فعال می‌کند. مقدار ۱ یعنی فعال و مقدار ۰ یعنی غیرفعال.',
         'Defines the default value for the action parameter.' => '',
-        'Defines the shown links in the footer area of the customer and public interface of this OTRS system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
+        'Defines the shown links in the footer area of the customer and public interface of this Znuny system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
             '',
         'Defines the default value for the action parameter for the public frontend. The action parameter is used in the scripts of the system.' =>
             'مقدار پیش فرض برای پارامتر عمل برای ظاهر عمومی است. پارامتر عمل در اسکریپت از سیستم استفاده می شود.',
@@ -6282,16 +6065,14 @@ sub Data {
             '',
         'Defines the default maximum number of X-axis attributes for the time scale.' =>
             'تعریف می کند که به طور پیش فرض حداکثر تعداد محور X ویژگی برای مقیاس زمانی.',
-        'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
-            'OTRS می توانید یک یا چند پایگاه داده آینه فقط خواندنی برای عملیات گران قیمت مانند جستجو و یا آمار نسل متن استفاده کنید. در اینجا شما می توانید DSN برای پایگاه داده آینه اول را مشخص کنید.',
+        'Znuny can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
+            'Znuny می توانید یک یا چند پایگاه داده آینه فقط خواندنی برای عملیات گران قیمت مانند جستجو و یا آمار نسل متن استفاده کنید. در اینجا شما می توانید DSN برای پایگاه داده آینه اول را مشخص کنید.',
         'Specify the username to authenticate for the first mirror database.' =>
             'نام مشخص کاربری برای تأیید هویت برای پایگاه داده آینه است.',
         'Specify the password to authenticate for the first mirror database.' =>
             'رمز عبور مشخص برای احراز هویت برای پایگاه داده آینه است.',
         'Configure any additional readonly mirror databases that you want to use.' =>
             'پیکربندی هر پایگاه داده آینه فقط خواندنی های اضافی است که شما می خواهید به استفاده از.',
-        'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -6302,24 +6083,26 @@ sub Data {
             'جستجوی کلمات از جسم فعال پس از ماسک لینک شی آغاز شده است.',
         'Defines a filter to process the text in the articles, in order to highlight predefined keywords.' =>
             'تعریف می کند یک فیلتر برای پردازش متن در مقالات، به منظور برجسته کلمات کلیدی از پیش تعریف شده.',
-        'Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'تعریف می کند یک فیلتر برای خروجی HTML برای اضافه کردن لینک در پشت اعداد CVE. عنصر تصویر اجازه می دهد تا دو نوع ورودی. در یک بار نام یک تصویر (به عنوان مثال faq.png). در این مورد مسیر تصویر OTRS استفاده خواهد شد. احتمال و امکان دوم است برای قرار دادن لینک به تصویر.',
-        'Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'تعریف می کند یک فیلتر برای خروجی HTML برای اضافه کردن لینک در پشت اعداد BUGTRAQ. عنصر تصویر اجازه می دهد تا دو نوع ورودی. در یک بار نام یک تصویر (به عنوان مثال faq.png). در این مورد مسیر تصویر OTRS استفاده خواهد شد. احتمال و امکان دوم است برای قرار دادن لینک به تصویر.',
-        'Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'تعریف می کند یک فیلتر برای خروجی HTML برای اضافه کردن لینک در پشت اعداد MSBulletin. عنصر تصویر اجازه می دهد تا دو نوع ورودی. در یک بار نام یک تصویر (به عنوان مثال faq.png). در این مورد مسیر تصویر OTRS استفاده خواهد شد. احتمال و امکان دوم است برای قرار دادن لینک به تصویر.',
-        'Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'تعریف یک فیلتر برای خروجی HTML برای اضافه کردن لینک پشت یک رشته تعریف شده است. عنصر تصویر اجازه می دهد تا دو نوع ورودی. در یک بار نام یک تصویر (به عنوان مثال faq.png). در این مورد مسیر تصویر OTRS استفاده خواهد شد. احتمال و امکان دوم است برای قرار دادن لینک به تصویر.',
-        'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'تعریف می کند یک فیلتر برای خروجی HTML برای اضافه کردن لینک پشت یک رشته تعریف شده است. عنصر تصویر اجازه می دهد تا دو نوع ورودی. در یک بار نام یک تصویر (به عنوان مثال faq.png). در این مورد مسیر تصویر OTRS استفاده خواهد شد. احتمال و امکان دوم است برای قرار دادن لینک به تصویر.',
-        'If enabled, the OTRS version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
-            'اگر فعال باشد، نسخه برچسب OTRS خواهد شد از Webinterface، هدر HTTP و X-هدر از ایمیل های خروجی حذف خواهند شد. توجه: اگر شما این گزینه را تغییر دهید، لطفا مطمئن شوید که به حذف کش.',
-        'If enabled, OTRS will deliver all CSS files in minified form.' =>
+        'Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'تعریف می کند یک فیلتر برای خروجی HTML برای اضافه کردن لینک در پشت اعداد CVE. عنصر تصویر اجازه می دهد تا دو نوع ورودی. در یک بار نام یک تصویر (به عنوان مثال faq.png). در این مورد مسیر تصویر Znuny استفاده خواهد شد. احتمال و امکان دوم است برای قرار دادن لینک به تصویر.',
+        'Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'تعریف می کند یک فیلتر برای خروجی HTML برای اضافه کردن لینک در پشت اعداد BUGTRAQ. عنصر تصویر اجازه می دهد تا دو نوع ورودی. در یک بار نام یک تصویر (به عنوان مثال faq.png). در این مورد مسیر تصویر Znuny استفاده خواهد شد. احتمال و امکان دوم است برای قرار دادن لینک به تصویر.',
+        'Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'تعریف می کند یک فیلتر برای خروجی HTML برای اضافه کردن لینک در پشت اعداد MSBulletin. عنصر تصویر اجازه می دهد تا دو نوع ورودی. در یک بار نام یک تصویر (به عنوان مثال faq.png). در این مورد مسیر تصویر Znuny استفاده خواهد شد. احتمال و امکان دوم است برای قرار دادن لینک به تصویر.',
+        'Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'تعریف یک فیلتر برای خروجی HTML برای اضافه کردن لینک پشت یک رشته تعریف شده است. عنصر تصویر اجازه می دهد تا دو نوع ورودی. در یک بار نام یک تصویر (به عنوان مثال faq.png). در این مورد مسیر تصویر Znuny استفاده خواهد شد. احتمال و امکان دوم است برای قرار دادن لینک به تصویر.',
+        'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'تعریف می کند یک فیلتر برای خروجی HTML برای اضافه کردن لینک پشت یک رشته تعریف شده است. عنصر تصویر اجازه می دهد تا دو نوع ورودی. در یک بار نام یک تصویر (به عنوان مثال faq.png). در این مورد مسیر تصویر Znuny استفاده خواهد شد. احتمال و امکان دوم است برای قرار دادن لینک به تصویر.',
+        'If enabled, the Znuny version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
+            'اگر فعال باشد، نسخه برچسب Znuny خواهد شد از Webinterface، هدر HTTP و X-هدر از ایمیل های خروجی حذف خواهند شد. توجه: اگر شما این گزینه را تغییر دهید، لطفا مطمئن شوید که به حذف کش.',
+        'If enabled, Znuny will deliver all CSS files in minified form.' =>
             '',
-        'If enabled, OTRS will deliver all JavaScript files in minified form.' =>
-            'اگر فعال باشد، OTRS تمام فایل های جاوا اسکریپت را در فرم های Minified ارائه کرده است.',
+        'If enabled, Znuny will deliver all JavaScript files in minified form.' =>
+            'اگر فعال باشد، Znuny تمام فایل های جاوا اسکریپت را در فرم های Minified ارائه کرده است.',
         'List of responsive CSS files to always be loaded for the agent interface.' =>
             'لیستی از فایل های CSS پاسخگو برای همیشه برای رابط عامل بارگذاری می شود.',
+        'List of JS files to always be loaded for the admin interface.' =>
+            '',
         'List of CSS files to always be loaded for the customer interface.' =>
             'لیستی از فایل های CSS برای همیشه برای رابط مشتری بارگذاری می شود.',
         'List of responsive CSS files to always be loaded for the customer interface.' =>
@@ -6383,8 +6166,6 @@ sub Data {
             'مجموعه پیام پیش فرض برای صفحه ورود به سیستم در عامل و رابط مشتری، آن را نشان داده زمانی که یک دوره تعمیر و نگهداری سیستم در حال اجرا فعال است.',
         'Sets the default error message for the login screen on Agent and Customer interface, it\'s shown when a running system maintenance period is active.' =>
             'مجموعه پیغام خطای پیش فرض برای صفحه ورود به سیستم در عامل و رابط مشتری، آن را نشان داده زمانی که یک دوره تعمیر و نگهداری سیستم در حال اجرا فعال است.',
-        'Specify the channel to be used to fetch OTRS Business Solution™ updates. Warning: Development releases might not be complete, your system might experience unrecoverable errors and on extreme cases could become unresponsive!' =>
-            'مشخص کانال مورد استفاده قرار گیرد به بهانه روز رسانی OTRS کسب و کار راه حل ™. هشدار: نسخه توسعه ممکن است کامل، سیستم شما ممکن است اشتباهات غیر قابل بازیابی را تجربه کرده و در موارد شدید می تواند پاسخ نمیدهد!',
         'Use new type of select and autocomplete fields in agent interface, where applicable (InputFields).' =>
             'استفاده از نوع جدیدی از زمینه را انتخاب کنید و تکمیل خودکار در رابط عامل، که در آن قابل اجرا (InputFields).',
         'Use new type of select and autocomplete fields in customer interface, where applicable (InputFields).' =>
@@ -6542,10 +6323,10 @@ sub Data {
             'مجموعه حداقل اندازه بلیط ضد اگر \ "AUTOINCREMENT " به عنوان TicketNumberGenerator انتخاب شد. به طور پیش فرض 5 است، این به معنای ضد از 10،000 شروع می شود.',
         'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
             'حداقل اندازه بلیط ضد قادر می سازد (در صورت \ "تاریخ " به عنوان TicketNumberGenerator انتخاب شد).',
-        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
-            'IndexAccelerator: برای انتخاب ماژول باطن TicketViewAccelerator خود را. \ "RuntimeDB " تولید هر نظر صف در پرواز از جدول بلیط (بدون مشکل در عملکرد تا حدود 60.000 بلیط در کل و 6.000 بلیط باز در سیستم). \ "StaticDB " است که ماژول قدرتمند ترین، آن را با استفاده از یک جدول بلیط شاخص های اضافی است که مانند یک کار می کند (توصیه می شود اگر بیش از 80.000 و 6.000 بلیط باز در سیستم ذخیره می شود). استفاده از دستور \ "بن / otrs.Console.pl سیستم maint :: بلیط :: QueueIndexRebuild " برای ایجاد شاخص اولیه.',
-        'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
-            'موجب صرفه جویی در فایل پیوست مقالات. \ "DB " فروشگاه تمام اطلاعات در پایگاه داده (برای ذخیره سازی فایل پیوست بزرگ توصیه نمی شود). \ "FS " ذخیره اطلاعات در فایل سیستم. این است سریع تر اما وب سرور باید تحت کاربر OTRS اجرا کنید. شما می توانید بین ماژول حتی در یک سیستم است که در حال حاضر در تولید بدون از دست دادن داده ها تغییر دهید. توجه داشته باشید: جستجو برای نام دلبستگی پشتیبانی نمی که \ "FS " استفاده شده است.',
+        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
+            'IndexAccelerator: برای انتخاب ماژول باطن TicketViewAccelerator خود را. \ "RuntimeDB " تولید هر نظر صف در پرواز از جدول بلیط (بدون مشکل در عملکرد تا حدود 60.000 بلیط در کل و 6.000 بلیط باز در سیستم). \ "StaticDB " است که ماژول قدرتمند ترین، آن را با استفاده از یک جدول بلیط شاخص های اضافی است که مانند یک کار می کند (توصیه می شود اگر بیش از 80.000 و 6.000 بلیط باز در سیستم ذخیره می شود). استفاده از دستور \ "بن / znuny.Console.pl سیستم maint :: بلیط :: QueueIndexRebuild " برای ایجاد شاخص اولیه.',
+        'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the Znuny user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
+            'موجب صرفه جویی در فایل پیوست مقالات. \ "DB " فروشگاه تمام اطلاعات در پایگاه داده (برای ذخیره سازی فایل پیوست بزرگ توصیه نمی شود). \ "FS " ذخیره اطلاعات در فایل سیستم. این است سریع تر اما وب سرور باید تحت کاربر Znuny اجرا کنید. شما می توانید بین ماژول حتی در یک سیستم است که در حال حاضر در تولید بدون از دست دادن داده ها تغییر دهید. توجه داشته باشید: جستجو برای نام دلبستگی پشتیبانی نمی که \ "FS " استفاده شده است.',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
             'مشخص میکند که آیا تمام پایانه (Backend) ذخیره سازی باید چک شود که دنبال فایل پیوست کنید. این فقط برای نصب و راه اندازی که در آن برخی از فایل پیوست در فایل سیستم، و دیگران در پایگاه داده مورد نیاز است.',
         'Specifies the directory to store the data in, if "FS" was selected for ArticleStorage.' =>
@@ -6587,7 +6368,7 @@ sub Data {
             '',
         'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
             'اضافه بار (باز تعریف) توابع موجود در هسته :: :: سیستم بلیط. استفاده به راحتی سفارشی اضافه کنید.',
-        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
+        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
             '',
         'Defines whether to index archived tickets for fulltext searches.' =>
             '',
@@ -6595,7 +6376,7 @@ sub Data {
             '',
         'Display a warning and prevent search when using stop words within fulltext search.' =>
             'نمایش اخطار و جلوگیری از جستجو زمانی که با استفاده از کلمات در درون جستجوی متن هست.',
-        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
+        'Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
             '',
         'Fulltext index regex filters to remove parts of the text.' => 'متن فیلتر شاخص عبارت منظم به حذف بخش هایی از متن.',
         'English stop words for fulltext index. These words will be removed from the search index.' =>
@@ -7300,8 +7081,8 @@ sub Data {
             'تعریف می کند که قفل قابل مشاهده یک بلیط. توجه: وقتی که این تنظیم را تغییر دهید، مطمئن شوید که به حذف کش به منظور استفاده از ارزش های جدید است. به طور پیش فرض: باز کردن، tmp_lock.',
         'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
             '',
-        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
-            'تعریف می کند که ایالات معتبر برای بلیط باز شده است. برای باز کردن قفل بلیط اسکریپت \ "بن / otrs.Console.pl سیستم maint :: بلیط :: UnlockTimeout " می تواند استفاده شود.',
+        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
+            'تعریف می کند که ایالات معتبر برای بلیط باز شده است. برای باز کردن قفل بلیط اسکریپت \ "بن / znuny.Console.pl سیستم maint :: بلیط :: UnlockTimeout " می تواند استفاده شود.',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             'می فرستد اطلاعیه یادآور بلیط قفل پس از رسیدن به تاریخ یادآوری (فقط به صاحب بلیط ارسال).',
         'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>
@@ -7327,12 +7108,12 @@ sub Data {
             'عامل ماژول اطلاع رسانی رابط برای دیدن تعدادی از بلیط قفل شده است. کنترل دسترسی اضافی برای نشان دادن یا این لینک نشان می دهد را نمی توان با استفاده از کلید \ "گروه " و محتوا مانند \ ":؛: GROUP2 \ move_into GROUP1 RW" انجام می شود.',
         'Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             'عامل ماژول اطلاع رسانی رابط برای دیدن تعدادی از بلیط در سرویس های من. کنترل دسترسی اضافی برای نشان دادن یا این لینک نشان می دهد را نمی توان با استفاده از کلید \ "گروه " و محتوا مانند \ ":؛: GROUP2 \ move_into GROUP1 RW" انجام می شود.',
-        'Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            'عامل ماژول رابط برای دسترسی به پروفایل جستجو از طریق نوار منو. کنترل دسترسی اضافی برای نشان دادن یا این لینک نشان می دهد را نمی توان با استفاده از کلید \ "گروه " و محتوا مانند \ ":؛: GROUP2 \ move_into GROUP1 RW" انجام می شود.',
         'Agent interface module to access fulltext search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             'عامل ماژول رابط برای دسترسی به جستجوی متن از طریق نوار منو. کنترل دسترسی اضافی برای نشان دادن یا این لینک نشان می دهد را نمی توان با استفاده از کلید \ "گروه " و محتوا مانند \ ":؛: GROUP2 \ move_into GROUP1 RW" انجام می شود.',
         'Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             'عامل ماژول رابط برای دسترسی به جستجوی CIC از طریق نوار منو. کنترل دسترسی اضافی برای نشان دادن یا این لینک نشان می دهد را نمی توان با استفاده از کلید \ "گروه " و محتوا مانند \ ":؛: GROUP2 \ move_into GROUP1 RW" انجام می شود.',
+        'Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            'عامل ماژول رابط برای دسترسی به پروفایل جستجو از طریق نوار منو. کنترل دسترسی اضافی برای نشان دادن یا این لینک نشان می دهد را نمی توان با استفاده از کلید \ "گروه " و محتوا مانند \ ":؛: GROUP2 \ move_into GROUP1 RW" انجام می شود.',
         'Module to generate html OpenSearch profile for short ticket search in the agent interface.' =>
             'ماژول برای تولید مشخصات opensearch بر روی HTML برای جستجو بلیط کوتاه در رابط عامل.',
         'Module to show notifications and escalations (ShownMax: max. shown escalations, EscalationInMinutes: Show ticket which will escalation in, CacheTime: Cache of calculated escalations in seconds).' =>
@@ -7570,7 +7351,7 @@ sub Data {
             'تعریف می کند که حالت ممکن بعدی برای بلیط مشتری در رابط مشتری.',
         'Shows the enabled ticket attributes in the customer interface (0 = Disabled and 1 = Enabled).' =>
             '',
-        'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
+        'Defines the length of the article preview in the customer interface.' =>
             '',
         'Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting.' =>
             '',
@@ -7685,7 +7466,8 @@ sub Data {
             'ماژول به بهانه کاربران مشتری SMIME گواهی از پیام های دریافتی.',
         'Module to check if a incoming e-mail message is bounce.' => '',
         'Module used to detect if attachments are present.' => '',
-        'Executes follow-up checks on OTRS Header \'X-OTRS-Bounce\'.' => '',
+        'Executes follow-up checks on Znuny Header \'X-OTRS-Bounce\'.' =>
+            '',
         'Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number.' =>
             'چک اگر یک ایمیل پیگیری بلیط های موجود به با جستجو در موضوع برای یک تعداد بلیط معتبر است.',
         'Executes follow-up checks on In-Reply-To or References headers for mails that don\'t have a ticket number in the subject.' =>
@@ -7794,8 +7576,8 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".' =>
-            'پیکربندی تنظیمات پیش فرض TicketDynamicField. \ "نام " تعریف می کند زمینه پویا است که باید مورد استفاده قرار گیرد، \ "ارزش " داده است که تعیین خواهد شد، و \ "رویداد " رویداد ماشه تعریف می کند. لطفا کتابچه راهنمای توسعه (https://doc.otrs.com/doc/)، فصل \ "بلیط رویداد ماژول " تیک بزنید.',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+            'پیکربندی تنظیمات پیش فرض TicketDynamicField. \ "نام " تعریف می کند زمینه پویا است که باید مورد استفاده قرار گیرد، \ "ارزش " داده است که تعیین خواهد شد، و \ "رویداد " رویداد ماشه تعریف می کند. لطفا کتابچه راهنمای توسعه (https://doc.znuny.org/manual/developer/)، فصل \ "بلیط رویداد ماژول " تیک بزنید.',
         'Defines the list of types for templates.' => 'لیستی از انواع برای قالب تعریف میکند.',
         'List of default Standard Templates which are assigned automatically to new Queues upon creation.' =>
             'فهرست پیش فرض قالب استاندارد که به طور خودکار به صف جدید بر ایجاد اختصاص داده است.',
@@ -7834,7 +7616,6 @@ sub Data {
         'Defines available article actions for Internal articles.' => '',
         'Defines available article actions for Phone articles.' => '',
         'Defines available article actions for Email articles.' => '',
-        'Defines available article actions for Chat articles.' => '',
         'Defines available article actions for invalid articles.' => '',
         'Disables the redirection to the last screen overview / dashboard after a ticket is closed.' =>
             '',
@@ -7842,9 +7623,6 @@ sub Data {
             '',
 
         # XML Definition: Kernel/Config/Files/XML/Znuny.xml
-        'Access package repositories via HTTP or HTTPS.' => '',
-        'URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option \'PackageRepositoryURLSchema\'.' =>
-            '',
         'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
             '',
         'Screens for which it is possible to enable or disable dynamic fields.' =>
@@ -8011,6 +7789,10 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Assignment between event and type.' => '',
+        'Defines the link type for each activity.' => '',
+        'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
+            '',
         'Mapping of non-standard time zones to official ones.' => '',
         'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
             '',
@@ -8180,6 +7962,16 @@ sub Data {
         'Error during AJAX communication. Status: %s, Error: %s' => '',
         'This window must be called from compose window.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Activity.js
+        'An error occurred' => '',
+        'The activity could not be created. %s is needed.' => '',
+        'The activity could not be created.' => '',
+        'The activity could not be updated.' => '',
+        'The activity could not be deleted.' => '',
+        'The activity could not be marked as new.' => '',
+        'The activity could not be marked as seen.' => '',
+        'The activities could not be marked as seen.' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
         'Add all' => 'اضافه کردن همه',
         'An item with this name is already present.' => 'یک آیتم با این نام از قبل وجود دارد.',
@@ -8187,8 +7979,6 @@ sub Data {
             'این مورد را ارزیابی هنوز شامل آیتم های زیر. آیا مطمئن هستید که می خواهید به حذف این مورد را ارزیابی از جمله آیتم های زیر است؟',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AppointmentCalendar.Manage.js
-        'More' => '',
-        'Less' => '',
         'Press Ctrl+C (Cmd+C) to copy to clipboard' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Attachment.js
@@ -8279,7 +8069,7 @@ sub Data {
         'Currently not possible' => '',
         'This is currently disabled because of an ongoing package upgrade.' =>
             '',
-        'This option is currently disabled because the OTRS Daemon is not running.' =>
+        'This option is currently disabled because the Znuny Daemon is not running.' =>
             '',
         'Are you sure you want to update all installed packages?' => '',
         'No response from get package upgrade run status.' => '',
@@ -8322,10 +8112,6 @@ sub Data {
         'Do you really want to delete this certificate?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
-        'Sending Update...' => 'ارسال به روز رسانی ...',
-        'Support Data information was successfully sent.' => 'پشتیبانی از اطلاعات داده با موفقیت ارسال شد.',
-        'Was not possible to send Support Data information.' => 'ممکن بود به ارسال اطلاعات پشتیبانی اطلاعات.',
-        'Update Result' => 'نتیجه به روز رسانی ',
         'Generating...' => 'تولید ...',
         'It was not possible to generate the Support Bundle.' => 'ممکن بود برای تولید پشتیبانی بسته نرم افزاری.',
         'Generate Result' => ' نتیجه تولید',
@@ -8405,9 +8191,10 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
         'Please enter at least one search value or * to find anything.' =>
             'لطفا حداقل یک مقدار مورد جستجو را وارد کنید یا * به پیدا کردن هر چیزی.',
+        'Insert selected customer user(s) into the "%s:" field.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
-        'Information about the OTRS Daemon' => 'اطلاعات در مورد OTRS دیمون',
+        'Information about the Znuny Daemon' => 'اطلاعات در مورد Znuny دیمون',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'لطفا فیلدهای مشخص شده به عنوان قرمز برای ورودی های معتبر را بررسی کنید.',
@@ -8475,7 +8262,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.js
         'Slide the navigation bar' => 'اسلاید نوار ناوبری',
         'Please turn off Compatibility Mode in Internet Explorer!' => 'لطفا حالت سازگاری در اینترنت اکسپلورر را خاموش کنید !',
-        'Find out more' => '',
 
         # JS File: var/httpd/htdocs/js/Core.App.Responsive.js
         'Switch to mobile mode' => 'تغییر به حالت همراه',
@@ -8569,9 +8355,6 @@ sub Data {
         'This is %s' => '',
         'Complex %s with %s arguments' => '',
 
-        # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSLineChart.js
-        'No Data Available.' => '',
-
         # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js
         'Grouped' => 'گروه بندی شده',
         'Stacked' => 'انباشته',
@@ -8636,6 +8419,9 @@ Thanks for your help!
         'AJAX interface for the web service dynamic field backends.' => '',
         'AccountedTime' => 'AccountedTime',
         'Activation of dynamic fields for screens.' => '',
+        'Activity LinkTarget' => '',
+        'Activity Notification' => '',
+        'Activity.' => '',
         'ActivityID' => 'ActivityID',
         'Add a note to this ticket' => 'اضافه کردن یک یادداشت  به این بلیط',
         'Add an inbound phone call to this ticket' => 'اضافه کردن یک تماس تلفنی بین المللی به درون این درخواست',
@@ -8737,14 +8523,11 @@ Thanks for your help!
             '',
         'Choose which notifications you\'d like to receive.' => '',
         'Christmas Eve' => 'شب کریسمس',
-        'Close' => 'بستن',
         'Close this ticket' => 'بستن این درخواست ',
         'Closed tickets (customer user)' => 'درخواست های بسته (کاربران مشتری)',
         'Closed tickets (customer)' => 'درخواست های بسته (مشتری)',
-        'Cloud Services' => 'خدمات ابر',
         'Column ticket filters for Ticket Overviews type "Small".' => 'فیلتر درخواست ستون برای نوع درخواست مروری \ "کوچک ".',
         'Comment2' => '1 نظر',
-        'Communication' => 'ارتباطات',
         'Communication & Notifications' => '',
         'Communication Log GUI' => '',
         'Communication log limit per page for Communication Log Overview.' =>
@@ -8757,11 +8540,10 @@ Thanks for your help!
         'Compose' => 'ارسال',
         'Configure Processes.' => ' پردازش پیکربندی .',
         'Configure and manage ACLs.' => 'پیکربندی و مدیریت ACL ها است.',
-        'Configure sending of support data to OTRS Group for improved support.' =>
-            'پیکربندی ارسال داده پشتیبانی به OTRS گروه برای پشتیبانی بهبود یافته.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'پیکربندی که صفحه نمایش باید نشان داده شود پس از یک درخواست جدید ایجاد شده است.',
         'Create New process ticket.' => 'ساختن درخواست روند جدید.',
+        'Create Process Ticket' => '',
         'Create Ticket' => '',
         'Create a new calendar appointment linked to this ticket' => '',
         'Create a unit test file' => '',
@@ -8800,8 +8582,6 @@ Thanks for your help!
             '',
         'Creates a unit test file for this ticket.' => '',
         'Croatian' => 'کرواتی',
-        'Custom RSS Feed' => 'سفارشی خوراک RSS',
-        'Custom RSS feed.' => '',
         'Customer Administration' => 'اداره مشتری',
         'Customer Companies' => 'شرکت/سازمان‌های مشترک',
         'Customer IDs' => '',
@@ -8835,14 +8615,11 @@ Thanks for your help!
         'Define the sla comment 2.' => 'تعریف نظر SLA 2.',
         'Delete this ticket' => 'حذف این درخواست ',
         'Deleted link to ticket "%s".' => 'لینک های حذف شده به درخواست \ " %s ".',
-        'Deploy and manage OTRS Business Solution™.' => 'استقرار و مدیریت کسب و کار OTRS راه حل ™.',
         'Detached' => '',
         'Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType "<Queue>" shows the names of the queues and for SystemAddress "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             'تعیین رشته است که به عنوان دریافت کننده نشان داده خواهد شد (برای :) بلیط تلفن و به عنوان فرستنده (از :) از بلیط ایمیل در رابط عامل. برای صف به عنوان NewQueueSelectionType \ "<صف> " نشان می دهد نام از صف و برای SystemAddress \ "<Realname> << >> ایمیل " نام و ایمیل دریافت کننده نشان می دهد.',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             'تعیین رشته است که به عنوان گیرنده (به :) بلیط در رابط مشتری از نشان داده خواهد شد. برای صف به عنوان CustomerPanelSelectionType، \ "<صف> " نشان می دهد نام از صف، و برای SystemAddress، \ "<Realname> << >> ایمیل " نشان می دهد نام و ایمیل دریافت کننده.',
-        'Development' => '',
-        'Disable cloud services' => '',
         'Display communication log entries.' => '',
         'Down' => 'پائین',
         'Dropdown' => 'رها کردن',
@@ -9002,7 +8779,6 @@ Thanks for your help!
         'Malay' => 'مالایا',
         'Manage Customer User-Customer Relations.' => '',
         'Manage OAuth2 tokens and their configurations.' => '',
-        'Manage OTRS Group cloud services.' => 'مدیریت OTRS گروه خدمات ابر.',
         'Manage PGP keys for email encryption.' => 'مدیریت کلیدهای PGP برای رمزنگاری ایمیل',
         'Manage POP3 or IMAP accounts to fetch email from.' => 'مدیریت حساب‌های POP3 و IMAP برای واکشی ایمیل‌ها',
         'Manage S/MIME certificates for email encryption.' => 'مدیریت گواهینامه‌ها برای رمزنگاری ایمیل‌ها',
@@ -9031,17 +8807,14 @@ Thanks for your help!
         'Multiselect' => 'چندین انتخاب',
         'My Queues' => 'لیست درخواست‌های من',
         'My Services' => 'خدمات من',
-        'My Tickets.' => 'درخواست من.',
         'My last changed tickets' => '',
         'NameX' => 'NameX',
-        'New Ticket' => 'درخواست جدید',
         'New Tickets' => 'درخواست‌های جدید',
         'New Window' => 'پنجره جدید',
         'New Year\'s Day' => 'روز اول ژانویه که آغاز سال نو مسیحیان است',
         'New Year\'s Eve' => 'شب سال نو',
         'New process ticket' => 'درخواست فرآیند جدید',
         'News' => '',
-        'News about OTRS releases!' => 'اخبار در مورد انتشار OTRS!',
         'No public key found.' => '',
         'No valid OpenPGP data found.' => '',
         'None' => 'هیچ',
@@ -9053,7 +8826,7 @@ Thanks for your help!
         'Number of displayed tickets' => 'تعداد درخواست‌های نمایش داده شده',
         'OAuth2' => '',
         'OAuth2 token' => '',
-        'OTRS Group Services' => '',
+        'OTRS' => 'OTRS',
         'Open an external link!' => '',
         'Open tickets (customer user)' => 'درخواست باز (کاربران مشتری)',
         'Open tickets (customer)' => 'درخواست گسترش (مشتری)',
@@ -9103,7 +8876,6 @@ Thanks for your help!
         'Process Ticket.' => ' روند درخواست.',
         'ProcessID' => 'ProcessID',
         'Processes & Automation' => '',
-        'Product News' => 'اخبار محصولات',
         'Provides a matrix overview of the tickets per state per queue' =>
             '',
         'Provides customer users access to tickets even if the tickets are not assigned to a customer user of the same customer ID(s), based on permission groups.' =>
@@ -9124,14 +8896,14 @@ Thanks for your help!
         'Running Process Tickets' => 'در حال اجرا فرآیند درخواست',
         'Russian' => 'روسی',
         'S/MIME Certificates' => 'گواهینامه‌های S/MIME',
-        'SMS' => 'پیامک',
         'Schedule a maintenance period.' => 'برنامه ریزی یک دوره تعمیر و نگهداری.',
         'Screen after new ticket' => 'وضعیت نمایش پس از دریافت درخواست جدید',
         'Search Customer' => 'جستجوی مشترک',
         'Search Ticket.' => 'جستجو درخواست.',
         'Search Tickets.' => 'درخواست های جستجو.',
         'Search User' => 'جستجوی کاربر',
-        'Search.' => 'جستجو',
+        'Search tickets.' => '',
+        'SearchTemplate' => '',
         'Second Christmas Day' => 'روز دوم کریسمس',
         'Second Queue' => 'صف دوم',
         'Seconds' => '',
@@ -9175,7 +8947,7 @@ Thanks for your help!
         'Show the ticket history' => 'نمایش تاریخ بلیط',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'یک پیش نمایش کلی بلیط (- نشان می دهد نیز مشتری اطلاعات، CustomerInfoMaxSize حداکثر اندازه در شخصیت مشتری اطلاعات. CustomerInfo => 1) نشان می دهد.',
-        'Shows information on how to start OTRS Daemon' => 'نشان می دهد اطلاعات در مورد چگونگی شروع OTRS دیمون',
+        'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Simple' => 'ساده',
@@ -9194,7 +8966,6 @@ Thanks for your help!
         'Spanish' => 'اسپانیایی',
         'Spanish (Colombia)' => 'اسپانیایی (کلمبیا)',
         'Spanish (Mexico)' => 'اسپانیایی (مکزیک)',
-        'Stable' => '',
         'Started response time escalation.' => '',
         'Started solution time escalation.' => '',
         'Started update time escalation.' => '',
@@ -9231,8 +9002,7 @@ Thanks for your help!
             'پوست سیاه و سفید برای رابط مشتری - این به طور پیش فرض نارنجی است.',
         'This is the default orange - black skin.' => 'پوست سیاه و سفید - این به طور پیش فرض نارنجی است.',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => 'این ماژول بخشی از بخش مدیریت OTRS موجود است.',
-        'This will allow the system to send text messages via SMS.' => 'این اجازه خواهد داد به سیستم برای ارسال پیام های متنی از طریق SMS.',
+        'This module is part of the admin area of OTRS.' => '',
         'Ticket Close.' => 'درخواست نزدیک ',
         'Ticket Compose Bounce Email.' => 'درخواست نوشتن پرش ایمیل.',
         'Ticket Compose email Answer.' => 'درخواست نوشتن برای پاسخ ایمیل.',
@@ -9255,6 +9025,7 @@ Thanks for your help!
         'Ticket Priority.' => 'اولویت درخواست',
         'Ticket Queue Overview' => 'بررسی اجمالی صف درخواست',
         'Ticket Responsible.' => 'درخواست به عهده دارد.',
+        'Ticket Search' => '',
         'Ticket Watcher' => 'نگهبان درخواست',
         'Ticket Zoom' => '',
         'Ticket Zoom.' => 'درخواست زوم.',
@@ -9328,6 +9099,8 @@ Thanks for your help!
         'normal' => 'عادی',
         'not archived tickets' => '',
         'notice' => 'نکته',
+        'open in current tab' => '',
+        'open in new tab' => '',
         'pending' => '',
         'phone' => 'تلفن',
         'responsible' => '',
@@ -9361,6 +9134,7 @@ Thanks for your help!
         'All occurrences',
         'All-day',
         'An Error Occurred',
+        'An error occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',
@@ -9391,15 +9165,15 @@ Thanks for your help!
         'Cannot proceed',
         'Clear',
         'Clear all',
+        'Clear all filters',
         'Clear debug log',
         'Clear search',
         'Click to delete this attachment.',
         'Click to select a file for upload.',
-        'Click to select a file or just drop it here.',
-        'Click to select files or just drop them here.',
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',
@@ -9473,7 +9247,6 @@ Thanks for your help!
         'Feb',
         'February',
         'Filters',
-        'Find out more',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
         'Fr',
@@ -9487,7 +9260,8 @@ Thanks for your help!
         'Hide EntityIDs',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
-        'Information about the OTRS Daemon',
+        'Information about the Znuny Daemon',
+        'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
@@ -9505,7 +9279,6 @@ Thanks for your help!
         'June',
         'Just this occurrence',
         'Keys with values can\'t be renamed. Please remove this key/value pair instead and re-add it afterwards.',
-        'Less',
         'Loading, please wait...',
         'Loading...',
         'Location',
@@ -9520,7 +9293,6 @@ Thanks for your help!
         'Mon',
         'Monday',
         'Month',
-        'More',
         'Name',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
@@ -9569,7 +9341,6 @@ Thanks for your help!
         'Remove',
         'Remove Entity from canvas',
         'Remove active filters for this widget.',
-        'Remove all user changes.',
         'Remove from favourites',
         'Remove selection',
         'Remove the Transition from this Process',
@@ -9580,12 +9351,8 @@ Thanks for your help!
         'Request Details',
         'Request Details for Communication ID',
         'Reset',
-        'Reset globally',
-        'Reset locally',
         'Reset option is required!',
-        'Reset options',
         'Reset setting',
-        'Reset setting on global level.',
         'Resource',
         'Resources',
         'Restore default settings',
@@ -9604,8 +9371,9 @@ Thanks for your help!
         'Searching for linkable objects. This may take a while...',
         'Select a customer ID to assign to this ticket',
         'Select a customer ID to assign to this ticket.',
+        'Select a file or drop it here',
         'Select all',
-        'Sending Update...',
+        'Select files or drop them here',
         'Sep',
         'September',
         'Setting a template will overwrite any text or attachment.',
@@ -9631,11 +9399,17 @@ Thanks for your help!
         'Sun',
         'Sunday',
         'Support Bundle',
-        'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
         'Team',
         'Th',
+        'The activities could not be marked as seen.',
+        'The activity could not be created.',
+        'The activity could not be created. %s is needed.',
+        'The activity could not be deleted.',
+        'The activity could not be marked as new.',
+        'The activity could not be marked as seen.',
+        'The activity could not be updated.',
         'The browser you are using is too old.',
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
@@ -9656,14 +9430,13 @@ Thanks for your help!
         'This address already exists on the address list.',
         'This element has children elements and can currently not be removed.',
         'This event is already attached to the job, Please use a different one.',
-        'This feature is part of the %s. Please contact us at %s for an upgrade.',
         'This field can have no more than 250 characters.',
         'This field is required.',
         'This is %s',
         'This is a repeating appointment',
         'This is currently disabled because of an ongoing package upgrade.',
         'This item still contains sub items. Are you sure you want to remove this item including its sub items?',
-        'This option is currently disabled because the OTRS Daemon is not running.',
+        'This option is currently disabled because the Znuny Daemon is not running.',
         'This software runs with a huge lists of browsers, please upgrade to one of these.',
         'This window must be called from compose window.',
         'Thu',
@@ -9682,7 +9455,6 @@ Thanks for your help!
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
-        'Update Result',
         'Update all packages',
         'Update manually',
         'Upload information',
@@ -9690,7 +9462,6 @@ Thanks for your help!
         'Use options below to narrow down for which tickets appointments will be automatically created.',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
-        'Was not possible to send Support Data information.',
         'We',
         'Wed',
         'Wednesday',
@@ -9709,9 +9480,7 @@ Thanks for your help!
         'more',
         'no',
         'none',
-        'or',
         'sorting is disabled',
-        'user(s) have modified this setting.',
         'week',
         'yes',
     ];

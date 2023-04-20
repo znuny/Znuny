@@ -9,16 +9,16 @@
 
 <div id="DaemonRunDialog" class="InnerContent DaemonInfoContent">
 
-    <p>[% Translate("The OTRS Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.") | html %]</p>
+    <p>[% Translate("The Znuny Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.") | html %]</p>
 
-    <p class="Strong SpacingTop">[% Translate("A running OTRS Daemon is mandatory for correct system operation.") | html %]</p>
+    <p class="Strong SpacingTop">[% Translate("A running Znuny Daemon is mandatory for correct system operation.") | html %]</p>
 
-    <legend class="SpacingTop">[% Translate("Starting the OTRS Daemon") | html %]</legend>
+    <legend class="SpacingTop">[% Translate("Starting the Znuny Daemon") | html %]</legend>
     <div class="InfoParagraph">
         <ul>
-            <li>[% Translate("Make sure that the file '%s' exists (without .dist extension). This cron job will check every 5 minutes if the OTRS Daemon is running and start it if needed.", Data.DaemonCron) | html %]</li>
-            <li>[% Translate("Execute '%s start' to make sure the cron jobs of the 'otrs' user are active.", Data.CronExecutable) | html %]</li>
-            <li>[% Translate("After 5 minutes, check that the OTRS Daemon is running in the system ('bin/otrs.Daemon.pl status').") | html %]</li>
+            <li>[% Translate("Make sure that the file '%s' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.", Data.DaemonCron) | html %]</li>
+            <li>[% Translate("Execute '%s start' to make sure the cron jobs of the 'znuny' user are active.", Data.CronExecutable) | html %]</li>
+            <li>[% Translate("After 5 minutes, check that the Znuny Daemon is running in the system ('bin/znuny.Daemon.pl status').") | html %]</li>
         </ul>
     </div>
     <div class="Clear Spacing"></div>
