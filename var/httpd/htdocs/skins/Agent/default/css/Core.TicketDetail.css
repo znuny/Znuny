@@ -868,28 +868,8 @@ tbody td.Sender {
 .WidgetSimple .ProcessInformation p {
     padding: 0;
     overflow: hidden;
-}
-
-.Incoming .ArticleAttachments {
-    margin: 10px 105px -10px 0px;
-}
-
-.ArticleAttachments li {
-    float: left;
-    margin: 0px 10px 10px 0px;
-    background: #e8e8e8;
-    padding: 8px 45px 8px 12px;
-    font-size: 11px;
-    color: #777;
-    position: relative;
-}
-
-.ArticleAttachments li h5 {
-    font-size: 12px;
-    color: #000;
-    margin-bottom: 1px;
-    overflow-wrap: break-word;
-    max-width: 500px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
