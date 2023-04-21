@@ -2439,7 +2439,7 @@ sub Data {
         'Assigned to customer user' => 'Назначить клиенту',
         'Accessible for customer user' => 'Доступно клиенту',
         'My locked tickets' => 'Мои заблокированные заявки',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Мои наблюдаемые заявки',
         'My responsibilities' => 'Заявки, где я ответственный',
         'Tickets in My Queues' => 'Заявки в моих очередях',

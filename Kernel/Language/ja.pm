@@ -2432,7 +2432,7 @@ sub Data {
         'Assigned to customer user' => '顧客ユーザーに割り当てられた',
         'Accessible for customer user' => '顧客ユーザーにアクセス可能',
         'My locked tickets' => 'ロックチケット',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => '監視チケット',
         'My responsibilities' => '責任チケット',
         'Tickets in My Queues' => '担当キュー内チケット',

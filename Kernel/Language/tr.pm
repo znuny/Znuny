@@ -2427,7 +2427,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Kilitli biletlerim',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'İzlediğim biletler',
         'My responsibilities' => 'Sorumluluklarım',
         'Tickets in My Queues' => 'Kuyruğumdaki biletler',

@@ -2433,7 +2433,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'درخواست‎های قفل شده من',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'درخواست مشاهده شده من',
         'My responsibilities' => 'مسئولیت من',
         'Tickets in My Queues' => 'درخواستهای در صفهای من',

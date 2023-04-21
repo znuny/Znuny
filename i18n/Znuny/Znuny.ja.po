@@ -7225,7 +7225,7 @@ msgid "My locked tickets"
 msgstr "ロックチケット"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
-msgid "My Owned Tickets"
+msgid "My owned tickets"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt

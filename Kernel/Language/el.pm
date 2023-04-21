@@ -2433,7 +2433,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Κλειδωμένα Δελτία μου',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Δελτια που παρακολουθω',
         'My responsibilities' => '',
         'Tickets in My Queues' => 'Δελτια στις ουρές μου',

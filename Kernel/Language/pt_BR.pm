@@ -2432,7 +2432,7 @@ sub Data {
         'Assigned to customer user' => 'Atribuído ao usuário cliente.',
         'Accessible for customer user' => 'Acessível para o usuário cliente.',
         'My locked tickets' => 'Meus Chamados Bloqueados',
-        'My Owned Tickets' => 'Meus Chamados',
+        'My owned tickets' => 'Meus Chamados',
         'My watched tickets' => 'Meus Chamados Monitorados',
         'My responsibilities' => 'Minhas Responsabilidades',
         'Tickets in My Queues' => 'Chamados nas Minhas Filas',

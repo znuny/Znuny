@@ -2434,7 +2434,7 @@ sub Data {
         'Assigned to customer user' => 'Přiřazen uživateli zákazníka',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Moje uzamčené tikety',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Moje sledované tikety',
         'My responsibilities' => 'Moje odpovědné tikety',
         'Tickets in My Queues' => 'Tikety v mých frontách',

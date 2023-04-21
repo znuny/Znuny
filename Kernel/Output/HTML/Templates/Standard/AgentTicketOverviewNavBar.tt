@@ -11,7 +11,7 @@
 <div class="OverviewBox ARIARoleMain [% Data.View | html %]">
     <h1>[% Translate(Data.TitleName) | html %]:
         <div class="overview-breadcrumb">
-            [% IF Env("Action") == 'AgentTicketQueue' %]
+            [% IF Env("Action") == 'AgentTicketQueue' || Env("Action") == 'AgentTicketService' %]
                 [% Data.TitleValue %]
             [% ELSE %]
                 [% Translate(Data.TitleValue) | html %]

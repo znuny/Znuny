@@ -2433,7 +2433,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Mijn vergrendelde tickets',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Mijn gevolgde tickets',
         'My responsibilities' => 'Tickets waarvoor ik verantwoordelijk ben',
         'Tickets in My Queues' => 'Tickets in mijn wachtrijen',

@@ -2430,7 +2430,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Omat lukitut tiketit',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Omat seuratut tiketit',
         'My responsibilities' => 'Omat vastuut',
         'Tickets in My Queues' => 'Tiketit omissa jonoissani',

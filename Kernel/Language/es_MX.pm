@@ -2427,7 +2427,7 @@ sub Data {
         'Assigned to customer user' => 'Asignado al usuario del cliente',
         'Accessible for customer user' => 'Accesible para el usuario del cliente',
         'My locked tickets' => 'Mis tickets bloqueados',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Mis tickes en seguimiento',
         'My responsibilities' => 'Mis responsabilidades',
         'Tickets in My Queues' => 'Tickets en Mis Filas de Espera',

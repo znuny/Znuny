@@ -580,7 +580,7 @@ sub Run {
 
         Bulk       => 1,
         TitleName  => Translatable('Service View'),
-        TitleValue => $NavBar{SelectedService},
+        TitleValue => $NavBar{BreadcrumbService},
 
         Env        => $Self,
         LinkPage   => $LinkPage,
@@ -629,6 +629,8 @@ sub _MaskServiceView {
 
     $Param{SelectedService} = $AllServices{$ServiceID} || $CustomService;
     my @MetaService = split /::/, $Param{SelectedService};
+    $Param{BreadcrumbService} = sprintf '<div>%s</div>' x @MetaService, @MetaService;
+    $Param{BreadcrumbService} =~ s{(</div>)(<div>)}{$1 <div>></div> $2}g;
     $Level = $#MetaService + 2;
 
     # prepare shown Services (short names)
@@ -787,10 +789,11 @@ sub _MaskServiceView {
     }
 
     return (
-        MainName        => 'Services',
-        SelectedService => $Param{SelectedService},
-        MainContent     => $Param{ServiceStrg},
-        Total           => $Param{TicketsShown},
+        MainName          => 'Services',
+        SelectedService   => $Param{SelectedService},
+        BreadcrumbService => $Param{BreadcrumbService},
+        MainContent       => $Param{ServiceStrg},
+        Total             => $Param{TicketsShown},
     );
 }
 

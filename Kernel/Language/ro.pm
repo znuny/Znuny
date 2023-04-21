@@ -2427,7 +2427,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Tichetele mele blocate',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Tichetele urmărite de mine',
         'My responsibilities' => 'Responsabilitățile mele',
         'Tickets in My Queues' => 'Tichete în cozile mele',

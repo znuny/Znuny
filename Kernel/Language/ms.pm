@@ -2426,7 +2426,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Tiket dikunci saya',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Tiket menonton saya',
         'My responsibilities' => 'saya tanggungjawab',
         'Tickets in My Queues' => 'Tiket dalam barisan saya',

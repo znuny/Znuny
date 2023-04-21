@@ -2429,7 +2429,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Mine sager',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Sager, jeg følger',
         'My responsibilities' => 'Sager, jeg er ansvarlig for',
         'Tickets in My Queues' => 'Sager i Mine Køer',
