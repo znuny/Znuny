@@ -44,7 +44,7 @@ sub Run {
 
 \$Self->True(
     \$Success,
-    'TicketSLASet to "$Param{SLA}" was successfull.',
+    'TicketSLASet to "$Param{SLA}" was successful.',
 );
 
 OUTPUT

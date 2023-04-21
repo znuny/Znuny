@@ -1142,7 +1142,7 @@ Core.UI.InputFields = (function (TargetNS) {
      * @name InitSelect
      * @memberof Core.UI.InputFields
      * @function
-     * @returns {Boolean} Returns true if successfull, false otherwise
+     * @returns {Boolean} Returns true if successful, false otherwise
      * @param {jQueryObject} $SelectFields - Fields to initialize.
      * @param {Object} Options - The different options.
      * @param {Object} Options.Force - even if the field is not visible it will be rendered

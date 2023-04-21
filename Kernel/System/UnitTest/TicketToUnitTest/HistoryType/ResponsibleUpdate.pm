@@ -48,7 +48,7 @@ sub Run {
 
 \$Self->True(
     \$Success,
-    'TicketResponsibleSet to "$Param{NewUser}" was successfull.',
+    'TicketResponsibleSet to "$Param{NewUser}" was successful.',
 );
 
 OUTPUT

@@ -217,7 +217,7 @@ my $Success = $MentionObject->AddMention(
 
 $Self->True(
     $Success,
-    "AddMention(): Mention succesfully added for article ID $ArticleIDs[0].",
+    "AddMention(): Mention successfully added for article ID $ArticleIDs[0].",
 );
 
 my $Mentions = $MentionObject->GetUserMentions(
