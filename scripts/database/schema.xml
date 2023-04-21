@@ -2572,7 +2572,7 @@
     </ForeignKey>
 </Table>
 
-<!-- calender appointment plugin -->
+<!-- calendar appointment plugin -->
 <Table Name="calendar_appointment_plugin">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="dbcrud_uuid" Required="false" Size="36" Type="VARCHAR"/> <!-- not required because up until 6.5 this column was added "on the fly" -->

@@ -3471,7 +3471,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminAppointmentCalendarManage.pm
         'System was unable to create Calendar!' => 'Das System konnten den Kalender nicht erstellen!',
         'Please contact the administrator.' => 'Bitte kontaktieren Sie den Administrator.',
-        'No CalendarID!' => 'Keine CalenderID!',
+        'No CalendarID!' => 'Keine CalendarID!',
         'You have no access to this calendar!' => 'Sie haben keine Zugriffsberechtigung auf diesen Kalender!',
         'Error updating the calendar!' => 'Fehler beim Aktualisieren des Kalenders!',
         'Couldn\'t read calendar configuration file.' => 'Kalender-Konfigurationsdatei konnte nicht gelesen werden.',

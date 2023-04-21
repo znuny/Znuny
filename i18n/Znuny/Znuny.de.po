@@ -10084,7 +10084,7 @@ msgstr "Bitte kontaktieren Sie den Administrator."
 
 #. Perl Module: Kernel/Modules/AdminAppointmentCalendarManage.pm
 msgid "No CalendarID!"
-msgstr "Keine CalenderID!"
+msgstr "Keine CalendarID!"
 
 #. Perl Module: Kernel/Modules/AdminAppointmentCalendarManage.pm
 msgid "You have no access to this calendar!"
