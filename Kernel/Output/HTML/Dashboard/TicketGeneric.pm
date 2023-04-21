@@ -2643,7 +2643,9 @@ sub _SearchParamsGet {
         AccessibleForCustomerUser => {
             Label => "Accessible for customer user",
         },
-
+        Owned => {
+            Label => "My owned tickets",
+        },
     );
 
     if ( $Self->{Action} eq 'AgentCustomerUserInformationCenter' ) {

@@ -2430,7 +2430,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => '我鎖定的工單',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => '我訂閱的工單',
         'My responsibilities' => '我負責的工單',
         'Tickets in My Queues' => '我隊列中的工單',

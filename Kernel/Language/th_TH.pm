@@ -2430,7 +2430,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'ตั๋วที่ถูกล็อคของฉัน',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'ตั๋วดูแล้วของฉัน',
         'My responsibilities' => 'ความรับผิดชอบของฉัน',
         'Tickets in My Queues' => 'ตั๋วในคิวของฉัน',

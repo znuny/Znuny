@@ -2433,7 +2433,7 @@ sub Data {
         'Assigned to customer user' => 'Dodeljeni klijent korisnik',
         'Accessible for customer user' => 'Dozvoljen pristup za klijent korisnika',
         'My locked tickets' => 'Moji zaključani tiketi',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Moji praćeni tiketi',
         'My responsibilities' => 'Odgovoran sam za',
         'Tickets in My Queues' => 'Tiketi u mojim redovima',

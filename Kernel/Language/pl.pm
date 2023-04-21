@@ -2432,7 +2432,7 @@ sub Data {
         'Assigned to customer user' => 'Przypisane do użytkownika klienta',
         'Accessible for customer user' => 'Dostępne dla użytkownika klienta',
         'My locked tickets' => 'Zablokowane',
-        'My Owned Tickets' => 'Posiadane zgłoszenia',
+        'My owned tickets' => 'Posiadane zgłoszenia',
         'My watched tickets' => 'Obserwowane',
         'My responsibilities' => 'Odpowiedzialny',
         'Tickets in My Queues' => 'Zgłoszenia w Moich Kolejkach',

@@ -2433,7 +2433,7 @@ sub Data {
         'Assigned to customer user' => 'Hozzárendelve az ügyfél-felhasználóhoz',
         'Accessible for customer user' => 'Hozzáférhető az ügyfél-felhasználónak',
         'My locked tickets' => 'Saját zárolt jegyek',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Saját megfigyelt jegyek',
         'My responsibilities' => 'Saját felelősségek',
         'Tickets in My Queues' => 'Jegyek a várólistáimban',
