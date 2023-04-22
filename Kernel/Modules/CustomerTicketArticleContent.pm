@@ -195,7 +195,7 @@ sub Run {
     # return html attachment
     return $LayoutObject->Attachment(
         %Data,
-        Sandbox => $LoadExternalImages ? 2 : 1,  # Block external content with CSP also (allow only images if required).    
+        Sandbox => $LoadExternalImages ? 2 : 1,  # Block external content with CSP also (allow only images if required).
     );
 }
 

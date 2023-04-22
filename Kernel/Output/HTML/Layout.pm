@@ -2694,7 +2694,7 @@ sub Attachment {
         # referrer:   don't send referrers to prevent referrer-leak attacks
         $Output
             .= "Content-Security-Policy: default-src 'self'; img-src "
-            . (($Param{Sandbox} == 2) ? "*" : "'self'")
+            . ( ( $Param{Sandbox} == 2 ) ? "*" : "'self'" )
             . " data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline'; referrer no-referrer;\n";
 
         # Use Referrer-Policy header to suppress referrer information in modern browsers
