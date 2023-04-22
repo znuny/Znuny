@@ -2609,8 +2609,10 @@ returns browser output to display/download a attachment
         AdditionalHeader => $AdditionalHeader, # optional
         ContentType      => 'image/png',
         Content          => $Content,
-        Sandbox          => 1,                 # optional, default 0; use content security policy to prohibit external
-                                               #   scripts, flash etc.
+        Sandbox          => 1,                 # optional,
+                                               # 0 (default): disable CSP and referrer leaking protection
+                                               # 1: prohibit external content using CSP and protect against referrer leaking
+                                               # 2: like 1 but allow external images
     );
 
     or for AJAX html snippets
@@ -2684,14 +2686,16 @@ sub Attachment {
         #   as this is a common use case in emails.
         # Also disallow referrer headers to prevent referrer leaks via old-style policy directive. Please note this has
         #   been deprecated and will be removed in future OTRS versions in favor of a separate header (see below).
-        # img-src:    allow external and inline (data:) images
+        # img-src:    allow own and inline (data:) images (also external images if $Param{Sandbox} = 2)
         # script-src: block all scripts
         # object-src: allow 'self' so that the browser can load plugins for PDF display
         # frame-src:  block all frames
         # style-src:  allow inline styles for nice email display
         # referrer:   don't send referrers to prevent referrer-leak attacks
         $Output
-            .= "Content-Security-Policy: default-src *; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline'; referrer no-referrer;\n";
+            .= "Content-Security-Policy: default-src 'self'; img-src "
+            . (($Param{Sandbox} == 2) ? "*" : "'self'")
+            . " data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline'; referrer no-referrer;\n";
 
         # Use Referrer-Policy header to suppress referrer information in modern browsers
         #   (to prevent referrer-leak attacks).
