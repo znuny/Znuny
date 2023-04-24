@@ -735,7 +735,8 @@ sub _RecipientsGet {
                 if ( $ConfigObject->Get('CustomerNotificationsDisabled') ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'notice',
-                        Message  => 'Send no customer notification because sending notifications to customers is disabled (see CustomerNotificationsDisabled)!',
+                        Message =>
+                            'Send no customer notification because sending notifications to customers is disabled (see CustomerNotificationsDisabled)!',
                     );
                     next RECIPIENT;
                 }
