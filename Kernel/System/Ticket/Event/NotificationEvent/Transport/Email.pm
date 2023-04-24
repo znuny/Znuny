@@ -434,8 +434,10 @@ sub TransportSettingsDisplayGet {
         Data        => \%Templates,
         Name        => 'TransportEmailTemplate',
         Translation => 0,
-        SelectedID  => $Param{Data}->{TransportEmailTemplate} || $ConfigObject->Get('NotificationEmailDefaultTemplate') || 'Default',
-        Class       => 'Modernize W50pc',
+        SelectedID  => $Param{Data}->{TransportEmailTemplate}
+            || $ConfigObject->Get('NotificationEmailDefaultTemplate')
+            || 'Default',
+        Class => 'Modernize W50pc',
     );
 
     # security fields
