@@ -619,10 +619,10 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
 
                     # Check all attachments.
                     my %Index = $ArticleBackendObject->ArticleAttachmentIndex(
-                        ArticleID => $ArticleIDs[0],
+                        ArticleID        => $ArticleIDs[0],
                         ExcludePlainText => 0,
-                        ExcludeHTMLBody => 0,
-                        ExcludeInline => 0,
+                        ExcludeHTMLBody  => 0,
+                        ExcludeInline    => 0,
                     );
 
                     $Self->Is(
@@ -633,10 +633,10 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
 
                     # Check regular attachments.
                     %Index = $ArticleBackendObject->ArticleAttachmentIndex(
-                        ArticleID => $ArticleIDs[0],
+                        ArticleID        => $ArticleIDs[0],
                         ExcludePlainText => 1,
-                        ExcludeHTMLBody => 1,
-                        ExcludeInline => 1,
+                        ExcludeHTMLBody  => 1,
+                        ExcludeInline    => 1,
                     );
 
                     $Self->Is(
