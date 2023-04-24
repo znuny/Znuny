@@ -219,7 +219,7 @@ sub ArticleGetTicketIDByMessageID {
                 INNER JOIN article_data_mime sadm ON sa.id = sadm.article_id
                 WHERE sadm.a_message_id_md5 = ?
             ',
-            Bind  => [ \$MD5 ],
+            Bind => [ \$MD5 ],
         );
 
         $Count = 0;
@@ -230,7 +230,7 @@ sub ArticleGetTicketIDByMessageID {
         if ( $Count >= $Param{MaxArticles} ) {
             if ( !$Quiet ) {
                 my $Message = "Number of articles with Message-ID '$Param{MessageID}' ($Count) "
-                        . "reached MaxArticles limit (" . $Param{MaxArticles} . ")";
+                    . "reached MaxArticles limit (" . $Param{MaxArticles} . ")";
                 if ( $Param{CommunicationLogObject} ) {
                     $Param{CommunicationLogObject}->ObjectLog(
                         ObjectLogType => 'Message',
@@ -283,8 +283,12 @@ sub ArticleGetTicketIDByMessageID {
         )->ToEpoch();
 
         # Oldest article is older than MaxAge seconds?
-        if ( $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch() - $Param{MaxAge}
-            > $OldestArticleCreateTime ) {
+        if (
+              $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch()
+            - $Param{MaxAge}
+            > $OldestArticleCreateTime
+            )
+        {
             if ( !$Quiet ) {
                 my $Message = "Oldest article with Message-ID '$Param{MessageID}' is "
                     . "older (" . $OldestArticleCreate . ") than MaxAge limit ("
