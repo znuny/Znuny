@@ -284,7 +284,7 @@ sub ArticleGetTicketIDByMessageID {
 
         # Oldest article is older than MaxAge seconds?
         if (
-              $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch()
+            $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch()
             - $Param{MaxAge}
             > $OldestArticleCreateTime
             )
