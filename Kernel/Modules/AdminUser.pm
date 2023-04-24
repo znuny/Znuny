@@ -549,7 +549,7 @@ sub _Overview {
         Valid  => 0,
     );
 
-   my $ListSize = keys %List;
+    my $ListSize = keys %List;
 
     if ( $ListSize <= $Limit ) {
         $LayoutObject->Block(
