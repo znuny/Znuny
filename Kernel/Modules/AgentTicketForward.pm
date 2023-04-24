@@ -1678,8 +1678,10 @@ sub _Mask {
     );
 
     $Param{IsVisibleForCustomer} = $Config->{IsVisibleForCustomerDefault};
-    if ( !$Param{SourceIsVisibleForCustomer} && $ConfigObject->Get('Ticket::Frontend::HideMessageFromCustomerByDefaultIfSourceMessageHidden') ) {
-         $Param{IsVisibleForCustomer} = 0;
+    if (  !$Param{SourceIsVisibleForCustomer}
+        && $ConfigObject->Get('Ticket::Frontend::HideMessageFromCustomerByDefaultIfSourceMessageHidden') )
+    {
+        $Param{IsVisibleForCustomer} = 0;
     }
     if ( $Self->{GetParam}->{IsVisibleForCustomerPresent} ) {
         $Param{IsVisibleForCustomer} = $Self->{GetParam}->{IsVisibleForCustomer} ? 1 : 0;
