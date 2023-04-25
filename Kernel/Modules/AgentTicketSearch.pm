@@ -1686,7 +1686,7 @@ sub Run {
                 }
             }
 
-            if ( $ArchiveSearchAllowed ) {
+            if ($ArchiveSearchAllowed) {
                 push @Attributes, (
                     {
                         Key   => 'SearchInArchive',
@@ -2035,7 +2035,7 @@ sub Run {
                 }
             }
 
-            if ( $ArchiveSearchAllowed ) {
+            if ($ArchiveSearchAllowed) {
 
                 $Param{SearchInArchiveStrg} = $LayoutObject->BuildSelection(
                     Data => {

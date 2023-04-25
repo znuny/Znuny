@@ -836,7 +836,7 @@ sub SearchOptionList {
             }
         }
 
-        if ( $ArchiveSearchAllowed ) {
+        if ($ArchiveSearchAllowed) {
             push @SearchOptionList,
                 {
                 Key  => 'ArchiveID',
