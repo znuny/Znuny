@@ -931,13 +931,16 @@ sub ArticleSearchIndexBuild {
 
     # Don't build index, unset rebuild flag and return indexing failure if ticket is archived
     # and archived ticket indexing is disabled.
-    if ( $ConfigObject->Get('Ticket::ArchiveSystem')
+    if (
+        $ConfigObject->Get('Ticket::ArchiveSystem')
         && !$ConfigObject->Get('Ticket::SearchIndex::IndexArchivedTickets')
-        && $Kernel::OM->Get('Kernel::System::Ticket')->TicketArchiveFlagGet( TicketID => $Param{TicketID} ) ) {
+        && $Kernel::OM->Get('Kernel::System::Ticket')->TicketArchiveFlagGet( TicketID => $Param{TicketID} )
+        )
+    {
 
         $Self->ArticleSearchIndexRebuildFlagSet(
-             ArticleIDs => [$Param{ArticleID}],
-             Value      => 0,
+            ArticleIDs => [ $Param{ArticleID} ],
+            Value      => 0,
         );
 
         return;
@@ -947,8 +950,8 @@ sub ArticleSearchIndexBuild {
 
         # Unset articles search index rebuild flag after successfull rebuild.
         $Self->ArticleSearchIndexRebuildFlagSet(
-             ArticleIDs => [$Param{ArticleID}],
-             Value      => 0,
+            ArticleIDs => [ $Param{ArticleID} ],
+            Value      => 0,
         );
         return 1;
     }

@@ -181,7 +181,7 @@ sub ArticleIndexRebuild {
                         UserID    => 1,
                     );
 
-                    if ( $Success ) {
+                    if ($Success) {
                         $ArticleObject->ArticleSearchIndexRebuildFlagSet(
                             ArticleIDs => [$ArticleID],
                             Value      => 0,
@@ -194,6 +194,7 @@ sub ArticleIndexRebuild {
                         ArticleID => $ArticleID,
                         UserID    => 1,
                     );
+
                     # ArticleSearchIndexBuild() removes rebuild flag on rebuilding
                     # success, so no need to do it here.
                 }
