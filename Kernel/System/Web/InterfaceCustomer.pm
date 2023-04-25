@@ -383,9 +383,10 @@ sub Run {
         }
 
         # Add a asynchronous executor scheduler task to count the concurrent user if enabled.
-        my $PluginDisabled       = $Kernel::OM->Get('Kernel::Config')->Get('SupportDataCollector::DisablePlugins') || [];
+        my $PluginDisabled = $Kernel::OM->Get('Kernel::Config')->Get('SupportDataCollector::DisablePlugins') || [];
         my %LookupPluginDisabled = map { $_ => 1 } @{$PluginDisabled};
-        if ( !$LookupPluginDisabled{'Kernel::System::SupportDataCollector::PluginAsynchronous::OTRS::ConcurrentUsers'} ) {
+        if ( !$LookupPluginDisabled{'Kernel::System::SupportDataCollector::PluginAsynchronous::OTRS::ConcurrentUsers'} )
+        {
 
             # execution in 20 seconds
             my $ExecutionTimeObj = $Kernel::OM->Create('Kernel::System::DateTime');
