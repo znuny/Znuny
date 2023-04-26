@@ -291,7 +291,8 @@ sub ObjectLog {
     # Get minimum communication log level to be sent to syslog also (error if not defined in SysConfig).
     my $SyslogMinimumLogLevelNum =
         $LogObject->LogLevelStr2Num(
-        LogLevelStr => $Kernel::OM->Get('Kernel::Config')->Get('CommunicationLog::SyslogMinimumLogLevel') )
+        LogLevelStr => $Kernel::OM->Get('Kernel::Config')->Get('CommunicationLog::SyslogMinimumLogLevel')
+        )
         // $LogObject->LogLevelStr2Num( LogLevelStr => 'error' );
 
     # Send message to syslog also if level is equal or greater than minimum.
