@@ -72,7 +72,7 @@ sub new {
     }
 
     # Fill log level reverse mapping.
-    while (my ($k, $v) = each %LogLevel) {
+    while ( my ( $k, $v ) = each %LogLevel ) {
         $LogLevelReverse{$v} = $k;
     }
 
@@ -394,7 +394,7 @@ sub LogLevelStr2Num {
     my ( $Self, %Param, ) = @_;
 
     return if !$Param{LogLevelStr};
-    return $LogLevel{ lc($Param{LogLevelStr}) };
+    return $LogLevel{ lc( $Param{LogLevelStr} ) };
 }
 
 =head2 LogLevelNum2Str()
