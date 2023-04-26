@@ -24,11 +24,12 @@ sub Configure {
 
     $Self->Description('Synchronize all users from specified sync backend.');
     $Self->AddOption(
-        Name        => 'count',
-        Description => 'Use AuthSyncModule<count> backend to synchronize from (empty <count> will be used if this parameter is not specified).',
-        Required    => 0,
-        HasValue    => 1,
-        ValueRegex  => qr/\d/smx,
+        Name => 'count',
+        Description =>
+            'Use AuthSyncModule<count> backend to synchronize from (empty <count> will be used if this parameter is not specified).',
+        Required   => 0,
+        HasValue   => 1,
+        ValueRegex => qr/\d/smx,
     );
     $Self->AddOption(
         Name        => 'invalidate-missing',
@@ -52,16 +53,20 @@ sub Run {
     }
 
     if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($GenericModule) ) {
-        $Self->PrintError("Invalid AuthSyncModule${Count} value (" . $GenericModule . ')!');
+        $Self->PrintError( "Invalid AuthSyncModule${Count} value (" . $GenericModule . ')!' );
         return $Self->ExitCodeError();
     }
 
     my $AuthSyncBackend = $GenericModule->new( %{$Self}, Count => $Count );
 
-    $Self->Print("<yellow>Starting all users synchronization from AuthSyncModule${Count} (" . $GenericModule . ")...</yellow>\n");
+    $Self->Print(
+        "<yellow>Starting all users synchronization from AuthSyncModule${Count} ("
+            . $GenericModule
+            . ")...</yellow>\n"
+    );
 
     # Do the sync using specified backend.
-    if (!$AuthSyncBackend->SyncAll(InvalidateMissing => $Self->GetOption('invalidate-missing'))) {
+    if ( !$AuthSyncBackend->SyncAll( InvalidateMissing => $Self->GetOption('invalidate-missing') ) ) {
         $Self->PrintError('Sync failed!');
         return $Self->ExitCodeError();
     }

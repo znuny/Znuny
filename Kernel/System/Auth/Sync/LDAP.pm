@@ -9,7 +9,8 @@
 # --
 
 package Kernel::System::Auth::Sync::LDAP;
-## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
+## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
+## nofilter(TidyAll::Plugin::Znuny::Perl::SyntaxCheck)
 
 use strict;
 use warnings;
@@ -83,7 +84,8 @@ sub new {
 
     # ldap filter always used
     $Self->{AlwaysFilter} = $ConfigObject->Get( 'AuthSyncModule::LDAP::AlwaysFilter' . $Param{Count} ) || '';
-    $Self->{AlwaysFilterReturnsOnlyValidUsers} = $ConfigObject->Get( 'AuthSyncModule::LDAP::AlwaysFilterReturnsOnlyValidUsers' . $Param{Count} ) || '';
+    $Self->{AlwaysFilterReturnsOnlyValidUsers}
+        = $ConfigObject->Get( 'AuthSyncModule::LDAP::AlwaysFilterReturnsOnlyValidUsers' . $Param{Count} ) || '';
 
     # Net::LDAP new params
     if ( $ConfigObject->Get( 'AuthSyncModule::LDAP::Params' . $Param{Count} ) ) {
@@ -393,7 +395,8 @@ sub Sync {
         # update user attributes (only if changed)
         elsif (%SyncUser) {
 
-            if ($Self->{AlwaysFilterReturnsOnlyValidUsers}) {
+            if ( $Self->{AlwaysFilterReturnsOnlyValidUsers} ) {
+
                 # Force updated user to be valid on sync.
                 $SyncUser{ValidID} = 1;
             }
@@ -424,7 +427,7 @@ sub Sync {
                     ChangeUserID => 1,
                 );
 
-                if (!$Result) {
+                if ( !$Result ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'error',
                         Message  => "Error updating user '$Param{User}' data in DB from LDAP DN ${UserDN}!",
@@ -432,8 +435,8 @@ sub Sync {
                 }
                 else {
                     my $MessageExt = '';
-                    if ( ($SyncUser{ValidID} // $UserData{ValidID}) != $UserData{ValidID} ) {
-                        $MessageExt = ' (ValidID changed to ' . ($SyncUser{ValidID} // $UserData{ValidID}) . ')';
+                    if ( ( $SyncUser{ValidID} // $UserData{ValidID} ) != $UserData{ValidID} ) {
+                        $MessageExt = ' (ValidID changed to ' . ( $SyncUser{ValidID} // $UserData{ValidID} ) . ')';
                     }
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'notice',
@@ -893,19 +896,19 @@ sub SyncAll {
 
     $Kernel::OM->Get('Kernel::System::Log')->Log(
         Priority => 'notice',
-        Message => 'Syncing all users from LDAP'
-            . ($Param{InvalidateMissing} ? ' (with missing user invalidation)' : ''),
+        Message  => 'Syncing all users from LDAP'
+            . ( $Param{InvalidateMissing} ? ' (with missing user invalidation)' : '' ),
     );
 
     # Find all valid users from DB; users found in LDAP will be removed from this list
     # during sync and all the remaining users will be invalidated if $Param{InvalidateMissing}
     # is enabled.
     my %UsersToBeInvalidatedInDB;
-    if ($Param{InvalidateMissing}) {
+    if ( $Param{InvalidateMissing} ) {
         %UsersToBeInvalidatedInDB = $UserObject->UserSearch(
             Search => '*',
-            Valid => 1,
-            Limit => 0, # Don't limit results - we need all valid users.
+            Valid  => 1,
+            Limit  => 0,     # Don't limit results - we need all valid users.
         );
 
         # Reverse hash for easy look up (UIDs as keys).
@@ -913,7 +916,7 @@ sub SyncAll {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message => 'Number of valid users in DB before sync: ' . keys %UsersToBeInvalidatedInDB,
+            Message  => 'Number of valid users in DB before sync: ' . keys %UsersToBeInvalidatedInDB,
         );
     }
 
@@ -926,14 +929,14 @@ sub SyncAll {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message => "Can't connect to $Self->{Host}: $@",
+            Message  => "Can't connect to $Self->{Host}: $@",
         );
         return;
     }
     my $Result;
     if ( $Self->{SearchUserDN} && $Self->{SearchUserPw} ) {
         $Result = $LDAP->bind(
-            dn => $Self->{SearchUserDN},
+            dn       => $Self->{SearchUserDN},
             password => $Self->{SearchUserPw}
         );
     }
@@ -943,58 +946,58 @@ sub SyncAll {
     if ( $Result->code() ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message => 'First bind failed! ' . $Result->error(),
+            Message  => 'First bind failed! ' . $Result->error(),
         );
         return;
     }
 
     # Get all users from LDAP in paging mode (every page up to 500 agents).
 
-    my $Page = Net::LDAP::Control::Paged->new(size => 500);
+    my $Page = Net::LDAP::Control::Paged->new( size => 500 );
     my $Cookie;
     my $ProcessedLDAPEntries = 0;
 
     PAGE:
     while (1) {
         $Result = $LDAP->search(
-            base => $Self->{BaseDN},
-            filter => $Self->{AlwaysFilter},
-            attrs   => [$Self->{UID}],
+            base    => $Self->{BaseDN},
+            filter  => $Self->{AlwaysFilter},
+            attrs   => [ $Self->{UID} ],
             control => [$Page]
         );
 
         if ( $Result->code() ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message => 'Error on LDAP search: ' . $Result->error(),
+                Message  => 'Error on LDAP search: ' . $Result->error(),
             );
             return;
         }
 
         # Process every UID in page.
         ENTRY:
-        while (my $Entry = $Result->pop_entry()) {
+        while ( my $Entry = $Result->pop_entry() ) {
 
             # Extract user UID.
-            my $UserLogin = $Entry->get_value($Self->{UID});
-            if (!$UserLogin) {
+            my $UserLogin = $Entry->get_value( $Self->{UID} );
+            if ( !$UserLogin ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message => 'User login not found in LDAP response',
+                    Message  => 'User login not found in LDAP response',
                 );
                 return;
             }
 
             # Synchronize this user from LDAP. Abort job on error.
-            return if !$Self->Sync(User => $UserLogin);
+            return if !$Self->Sync( User => $UserLogin );
 
             $ProcessedLDAPEntries++;
 
-            if ($Param{InvalidateMissing}) {
+            if ( $Param{InvalidateMissing} ) {
 
                 # Synchronized user is valid user so remove this UID
                 # from list of users to be invalidated if exists.
-                if ($UsersToBeInvalidatedInDB{$UserLogin}) {
+                if ( $UsersToBeInvalidatedInDB{$UserLogin} ) {
                     delete $UsersToBeInvalidatedInDB{$UserLogin};
                 }
             }
@@ -1011,11 +1014,11 @@ sub SyncAll {
 
     $Kernel::OM->Get('Kernel::System::Log')->Log(
         Priority => 'notice',
-        Message => 'Number of processed valid users from LDAP: ' . $ProcessedLDAPEntries,
+        Message  => 'Number of processed valid users from LDAP: ' . $ProcessedLDAPEntries,
     );
 
     # Invalidate all users from DB not found in LDAP if $Param{InvalidateMissing} is enabled.
-    if ($Param{InvalidateMissing}) {
+    if ( $Param{InvalidateMissing} ) {
 
         my $InvalidatedUsers = 0;
 
@@ -1024,15 +1027,15 @@ sub SyncAll {
         );
 
         USERLOGIN:
-        for my $UserLogin ( keys %UsersToBeInvalidatedInDB ) {
+        for my $UserLogin ( sort keys %UsersToBeInvalidatedInDB ) {
             my %User = $UserObject->GetUserData(
-                User => $UserLogin,
-                Valid  => 1,
+                User  => $UserLogin,
+                Valid => 1,
             );
-            if (!%User) {
+            if ( !%User ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message => "Cannot invalidate user ${UserLogin} (not found or invalid in DB)",
+                    Message  => "Cannot invalidate user ${UserLogin} (not found or invalid in DB)",
                 );
                 return;
             }
@@ -1042,20 +1045,20 @@ sub SyncAll {
 
             my $Result = $UserObject->UserUpdate(
                 %User,
-                ValidID => $ValidID,
+                ValidID      => $ValidID,
                 ChangeUserID => 1,
             );
-            if (!$Result) {
+            if ( !$Result ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message => "Error invalidating user ${UserLogin}",
+                    Message  => "Error invalidating user ${UserLogin}",
                 );
                 return;
             }
 
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'notice',
-                Message => "User ${UserLogin} invalidated in DB (not found in LDAP)",
+                Message  => "User ${UserLogin} invalidated in DB (not found in LDAP)",
             );
 
             $InvalidatedUsers++;
@@ -1063,7 +1066,7 @@ sub SyncAll {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message => 'Number of users invalidated in DB: ' . $InvalidatedUsers,
+            Message  => 'Number of users invalidated in DB: ' . $InvalidatedUsers,
         );
     }
 
