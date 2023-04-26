@@ -82,9 +82,11 @@ sub Run {
         return;
     }
 
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
     # Get current ticket queue name.
     my $NewQueue = $Kernel::OM->Get('Kernel::System::Queue')->QueueLookup(
-        QueueID => $Kernel::OM->Get('Kernel::System::Ticket')->TicketQueueID(
+        QueueID => $TicketObject->TicketQueueID(
             TicketID => $Param{Data}->{TicketID}
         )
     );
@@ -121,6 +123,23 @@ sub Run {
                 Message  => 'Cannot mark ticket ' . $Param{Data}->{TicketID} . ' as spam!',
             );
             return;
+        }
+
+        # Change ticket state after marking as spam (if configured).
+        if ( $Param{Config}->{NewStateAfterMarkingSpam} ) {
+            $Result = $TicketObject->TicketStateSet(
+                State => $Param{Config}->{NewStateAfterMarkingSpam},
+                TicketID => $Param{Data}->{TicketID},
+                UserID => 1,
+            );
+
+            if (!$Result) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message => 'Cannot change ticket ' . $Param{Data}->{TicketID} . " state to '" . $Param{Config}->{NewStateAfterMarkingSpam} . "' after moving to spam queue.",
+                );
+                return;
+            }
         }
     }
 
