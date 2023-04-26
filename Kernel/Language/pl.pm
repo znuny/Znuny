@@ -1351,7 +1351,6 @@ sub Data {
         'It\'s useful for ASP solutions. ' => 'Przydatne dla rozwiązań ASP. ',
         'Agents ↔ Groups' => 'Agenci ↔ Grupy',
         'Roles ↔ Groups' => 'Role ↔ Grupy',
-        'This group cannot be changed.' => 'Ta grupa nie może być zmieniana.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Log systemu',
