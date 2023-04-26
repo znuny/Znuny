@@ -109,8 +109,7 @@ my %DebugDaemons;
 my $Debug;
 my $Foreground;
 
-
-if ( # Check for foreground mode.
+if (    # Check for foreground mode.
     lc $ARGV[0] eq 'start'
     && $ARGV[1]
     && lc $ARGV[1] eq '--foreground'
@@ -118,7 +117,7 @@ if ( # Check for foreground mode.
 {
     $Foreground = 1;
 }
-elsif ( # Check for debug mode.
+elsif (    # Check for debug mode.
     lc $ARGV[0] eq 'start'
     && $ARGV[1]
     && lc $ARGV[1] eq '--debug'
@@ -188,10 +187,10 @@ sub PrintUsage {
         'Reduce the time the main daemon waits other daemons to stop.' . "\n";
     $UsageText .= sprintf " %-22s - %s", '[--foreground]', 'Run the daemon in foreground.' . "\n";
     $UsageText .= "\nActions:\n";
-    $UsageText .= sprintf " %-22s - %s", 'start', 'Start the daemon process.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'stop', 'Stop the daemon process.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'status', 'Show daemon process current state.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'help', 'Display help for this command.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'start',          'Start the daemon process.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'stop',           'Stop the daemon process.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'status',         'Show daemon process current state.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'help',           'Display help for this command.' . "\n";
     $UsageText .= "\nHelp:\n";
     $UsageText
         .= "In debug mode if a daemon module is specified the debug mode will be activated only for that daemon.\n";
@@ -208,7 +207,7 @@ sub PrintUsage {
 sub Start {
 
     # Detach daemon if should not be run in foreground.
-    if (!$Foreground) {
+    if ( !$Foreground ) {
 
         # Create a fork of the current process.
         #   Parent gets the PID of the child.
