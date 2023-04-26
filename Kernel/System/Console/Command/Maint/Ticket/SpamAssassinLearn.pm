@@ -7,7 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::NoExitInConsoleCommands)
+## nofilter(TidyAll::Plugin::Znuny::Perl::NoExitInConsoleCommands)
 ## nofilter(TidyAll::Plugin::Znuny::Legal::UpdateZnunyCopyright)
 
 package Kernel::System::Console::Command::Maint::Ticket::SpamAssassinLearn;
@@ -35,46 +35,46 @@ sub Configure {
 
     $Self->Description('Send all inbound e-mail articles of tickets marked for spam/ham learning to spamassassin.');
     $Self->AddOption(
-        Name => 'host',
+        Name        => 'host',
         Description => "SpamAssassin host.",
-        Required => 1,
-        HasValue => 1,
-        ValueRegex => qr/^.+$/smx,
+        Required    => 1,
+        HasValue    => 1,
+        ValueRegex  => qr/^.+$/smx,
     );
     $Self->AddOption(
-        Name => 'port',
+        Name        => 'port',
         Description => "SpamAssassin port (default: 783).",
-        Required => 0,
-        HasValue => 1,
-        ValueRegex => qr/^\d+$/smx,
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^\d+$/smx,
     );
     $Self->AddOption(
-        Name => 'username',
+        Name        => 'username',
         Description => "SpamAssassin username.",
-        Required => 1,
-        HasValue => 1,
-        ValueRegex => qr/^.+$/smx,
+        Required    => 1,
+        HasValue    => 1,
+        ValueRegex  => qr/^.+$/smx,
     );
     $Self->AddOption(
-        Name => 'limit',
+        Name        => 'limit',
         Description => "Maximum number of tickets to process (default: 4000).",
-        Required => 0,
-        HasValue => 1,
-        ValueRegex => qr/^\d+$/smx,
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^\d+$/smx,
     );
     $Self->AddOption(
-        Name => 'micro-sleep',
+        Name        => 'micro-sleep',
         Description => "Specify microseconds to sleep after every ticket to reduce system load (e.g. 1000).",
-        Required => 0,
-        HasValue => 1,
-        ValueRegex => qr/^\d+$/smx,
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^\d+$/smx,
     );
     $Self->AddOption(
-        Name => 'timeout',
+        Name        => 'timeout',
         Description => "Connection timeout in seconds (default: 3).",
-        Required => 0,
-        HasValue => 1,
-        ValueRegex => qr/^\d+$/smx,
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^\d+$/smx,
     );
 
     return;
@@ -83,63 +83,65 @@ sub Configure {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $Host = $Self->GetOption('host');
-    my $Port = $Self->GetOption('port') // 783;
-    my $Username = $Self->GetOption('username');
-    my $Limit = $Self->GetOption('limit') // 4000;
+    my $Host       = $Self->GetOption('host');
+    my $Port       = $Self->GetOption('port') // 783;
+    my $Username   = $Self->GetOption('username');
+    my $Limit      = $Self->GetOption('limit') // 4000;
     my $MicroSleep = $Self->GetOption('micro-sleep');
-    my $Timeout = $Self->GetOption('timeout') // 3;
+    my $Timeout    = $Self->GetOption('timeout') // 3;
 
-    $Self->{TicketsLearnedAsSpam} = 0;
-    $Self->{TicketsLearnedAsHam} = 0;
-    $Self->{TicketsLearnTided} = 0;
-    $Self->{TicketsLearnFailed} = 0;
+    $Self->{TicketsLearnedAsSpam}    = 0;
+    $Self->{TicketsLearnedAsHam}     = 0;
+    $Self->{TicketsLearnTided}       = 0;
+    $Self->{TicketsLearnFailed}      = 0;
     $Self->{ArticlesProcessedAsSpam} = 0;
-    $Self->{ArticlesProcessedAsHam} = 0;
-    $Self->{ArticlesLearnedAsSpam} = 0;
-    $Self->{ArticlesLearnedAsHam} = 0;
+    $Self->{ArticlesProcessedAsHam}  = 0;
+    $Self->{ArticlesLearnedAsSpam}   = 0;
+    $Self->{ArticlesLearnedAsHam}    = 0;
 
     # Load required spamassassin client lib.
-    if (!$Kernel::OM->Get('Kernel::System::Main')->Require('Mail::SpamAssassin::Client', Silent => 1) ) {
-        $Self->_Abort(Message => 'Mail::SpamAssassin::Client is required but not found!');
+    if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Mail::SpamAssassin::Client', Silent => 1 ) ) {
+        $Self->_Abort( Message => 'Mail::SpamAssassin::Client is required but not found!' );
     }
 
-    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
-    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $LogObject                 = $Kernel::OM->Get('Kernel::System::Log');
+    my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $ArticleObject             = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-    my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-       Name => 'PendingSpamLearningOperation',
+    my $DynamicFieldConfig        = $DynamicFieldObject->DynamicFieldGet(
+        Name => 'PendingSpamLearningOperation',
     );
-    if (!$DynamicFieldConfig) {
-        $Self->_Abort(Message => 'Need dynamic field PendingSpamLearningOperation present in system!');
+    if ( !$DynamicFieldConfig ) {
+        $Self->_Abort( Message => 'Need dynamic field PendingSpamLearningOperation present in system!' );
     }
 
     my %EmailCommunicationChannel = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelGet(
         ChannelName => 'Email',
     );
-    if (!%EmailCommunicationChannel) {
-        $Self->_Abort(Message => 'Cannot find Email communication channel!');
+    if ( !%EmailCommunicationChannel ) {
+        $Self->_Abort( Message => 'Cannot find Email communication channel!' );
     }
     my $EmailCommunicationChannelID = $EmailCommunicationChannel{'ChannelID'};
-    if (!$EmailCommunicationChannelID) {
-        $Self->_Abort(Message => 'Cannot find Email communication channel ID!');
+    if ( !$EmailCommunicationChannelID ) {
+        $Self->_Abort( Message => 'Cannot find Email communication channel ID!' );
     }
 
     my $SpamAssassinClient;
 
-    $Self->Print("<yellow>Feeding SpamAssassin with inbound e-mail messages content from tickets marked for spam/ham learning...</yellow>\n");
+    $Self->Print(
+        "<yellow>Feeding SpamAssassin with inbound e-mail messages content from tickets marked for spam/ham learning...</yellow>\n"
+    );
 
     # Get all tickets marked for learning (non empty PendingSpamLearningOperation ticket dynamic field).
     my @TicketIDs = $TicketObject->TicketSearch(
         DynamicField_PendingSpamLearningOperation => {
             Empty => 0,
         },
-        Limit => $Limit,
-        UserID => 1,
+        Limit      => $Limit,
+        UserID     => 1,
         Permission => 'ro',
-        Result => 'ARRAY',
+        Result     => 'ARRAY',
     );
 
     TICKET:
@@ -147,98 +149,121 @@ sub Run {
 
         # Get ticket data.
         my %Ticket = $TicketObject->TicketGet(
-            TicketID => $TicketID,
+            TicketID      => $TicketID,
             DynamicFields => 1,
         );
 
         my $TicketProcessedArticles = 0;
-        my $TicketLearnedArticles = 0;
+        my $TicketLearnedArticles   = 0;
 
         my $LearnType = -1;
-        if ($Ticket{'DynamicField_PendingSpamLearningOperation'} =~ /^spam$/i) {
-            $LearnType = 0; # 0 means spam for Mail::SpamAssassin::Client->learn()
+        if ( $Ticket{'DynamicField_PendingSpamLearningOperation'} =~ /^spam$/i ) {
+            $LearnType = 0;    # 0 means spam for Mail::SpamAssassin::Client->learn()
         }
-        elsif ($Ticket{'DynamicField_PendingSpamLearningOperation'} =~ /^ham$/i) {
-            $LearnType = 1; # 1 means ham for Mail::SpamAssassin::Client->learn()
+        elsif ( $Ticket{'DynamicField_PendingSpamLearningOperation'} =~ /^ham$/i ) {
+            $LearnType = 1;    # 1 means ham for Mail::SpamAssassin::Client->learn()
         }
 
-        if (($LearnType == 0) || ($LearnType == 1)) {
+        if ( ( $LearnType == 0 ) || ( $LearnType == 1 ) ) {
 
             # Find all customer (inbound) e-mail articles in ticket and feed it to spamassassin for learning.
 
             my @Articles = $ArticleObject->ArticleList(
-                TicketID => $TicketID,
-                SenderType => 'customer',
+                TicketID               => $TicketID,
+                SenderType             => 'customer',
                 CommunicationChannelID => $EmailCommunicationChannelID,
             );
 
             ARTICLE:
             for my $Article (@Articles) {
                 my $ArticleBackendObject = $ArticleObject->BackendForArticle(
-                    TicketID => $TicketID,
+                    TicketID  => $TicketID,
                     ArticleID => $Article->{ArticleID},
                 );
 
-                next ARTICLE if ($ArticleBackendObject->ChannelNameGet() ne 'Email');
+                next ARTICLE if ( $ArticleBackendObject->ChannelNameGet() ne 'Email' );
 
                 my $EmailContent = $ArticleBackendObject->ArticlePlain(
-                    TicketID => $TicketID,
+                    TicketID  => $TicketID,
                     ArticleID => $Article->{ArticleID},
                 );
 
-                if (!$EmailContent) {
-                    my $Message = sprintf('TicketID=%s ArticleID=%s: learning skipped (cannot get e-mail article plain content)',
+                if ( !$EmailContent ) {
+                    my $Message = sprintf(
+                        'TicketID=%s ArticleID=%s: learning skipped (cannot get e-mail article plain content)',
                         $TicketID,
                         $Article->{ArticleID}
                     );
                     $LogObject->Log(
                         Priority => 'error',
-                        Message => $Message,
+                        Message  => $Message,
                     );
-                    $Self->Print($Message . "\n");
+                    $Self->Print( $Message . "\n" );
                     next ARTICLE;
                 }
 
                 # Initialize connection to SpamAssassin if not already connected.
-                if (!$SpamAssassinClient) {
-                    $SpamAssassinClient = Mail::SpamAssassin::Client->new({
-                        host => $Host,
-                        port => $Port,
-                        username => $Username,
-                        timeout => $Timeout,
-                    });
-                    if ( (!$SpamAssassinClient) || (!$SpamAssassinClient->ping()) ) {
+                if ( !$SpamAssassinClient ) {
+                    $SpamAssassinClient = Mail::SpamAssassin::Client->new(
+                        {
+                            host     => $Host,
+                            port     => $Port,
+                            username => $Username,
+                            timeout  => $Timeout,
+                        }
+                    );
+                    if ( ( !$SpamAssassinClient ) || ( !$SpamAssassinClient->ping() ) ) {
                         $Self->{TicketsLearnFailed}++;
-                        $Self->Print("TicketID=${TicketID}: left marked for learning again (cannot connect to SpamAssassin service)\n");
-                        $Self->_Abort(Message => sprintf('Cannot connect to SpamAssassin service %s@%s:%d (timeout %d)!', $Host, $Port, $Username, $Timeout));
+                        $Self->Print(
+                            "TicketID=${TicketID}: left marked for learning again (cannot connect to SpamAssassin service)\n"
+                        );
+                        $Self->_Abort(
+                            Message => sprintf(
+                                'Cannot connect to SpamAssassin service %s@%s:%d (timeout %d)!',
+                                $Host, $Port, $Username, $Timeout
+                            )
+                        );
                     }
                 }
 
-                my $Result = $SpamAssassinClient->learn($EmailContent, $LearnType);
+                my $Result = $SpamAssassinClient->learn( $EmailContent, $LearnType );
 
-                if (defined($Result)) {
+                if ( defined($Result) ) {
                     if ($Result) {
-                        $Self->Print(sprintf("TicketID=%s ArticleID=%s: message was learned by SpamAssassin (%d bytes)\n", $TicketID, $Article->{ArticleID}, length($EmailContent)));
-                        $Self->{ArticlesLearnedAsSpam}++ if ($LearnType == 0);
-                        $Self->{ArticlesLearnedAsHam}++ if ($LearnType == 1);
+                        $Self->Print(
+                            sprintf(
+                                "TicketID=%s ArticleID=%s: message was learned by SpamAssassin (%d bytes)\n",
+                                $TicketID, $Article->{ArticleID}, length($EmailContent)
+                            )
+                        );
+                        $Self->{ArticlesLearnedAsSpam}++ if ( $LearnType == 0 );
+                        $Self->{ArticlesLearnedAsHam}++  if ( $LearnType == 1 );
                         $TicketLearnedArticles++;
                     }
                     else {
-                        $Self->Print(sprintf("TicketID=%s ArticleID=%s: message was not learned by SpamAssassin (%d bytes)\n", $TicketID, $Article->{ArticleID}, length($EmailContent)));
+                        $Self->Print(
+                            sprintf(
+                                "TicketID=%s ArticleID=%s: message was not learned by SpamAssassin (%d bytes)\n",
+                                $TicketID, $Article->{ArticleID}, length($EmailContent)
+                            )
+                        );
                     }
 
-                    $Self->{ArticlesProcessedAsSpam}++ if ($LearnType == 0);
-                    $Self->{ArticlesProcessedAsHam}++ if ($LearnType == 1);
+                    $Self->{ArticlesProcessedAsSpam}++ if ( $LearnType == 0 );
+                    $Self->{ArticlesProcessedAsHam}++  if ( $LearnType == 1 );
                     $TicketProcessedArticles++;
                 }
                 else {
                     $Self->{TicketsLearnFailed}++;
-                    $Self->_Abort(Message => sprintf('TicketID=%s ArticleID=%s: ticket left marked for learning again (error #%d sending article to SpamAssassin service: %s)',
-                        $TicketID,
-                        $Article->{ArticleID},
-                        $SpamAssassinClient->{resp_code},
-                        $SpamAssassinClient->{resp_msg}
-                    ));
+                    $Self->_Abort(
+                        Message => sprintf(
+                            'TicketID=%s ArticleID=%s: ticket left marked for learning again (error #%d sending article to SpamAssassin service: %s)',
+                            $TicketID,
+                            $Article->{ArticleID},
+                            $SpamAssassinClient->{resp_code},
+                            $SpamAssassinClient->{resp_msg}
+                        )
+                    );
                 }
             }
         }
@@ -246,24 +271,32 @@ sub Run {
         # Reset dynamic field after processing.
         my $Result = $DynamicFieldBackendObject->ValueDelete(
             DynamicFieldConfig => $DynamicFieldConfig,
-            ObjectID => $TicketID,
-            UserID => 1,
+            ObjectID           => $TicketID,
+            UserID             => 1,
         );
-        if (!$Result) {
+        if ( !$Result ) {
             $Self->{TicketsLearnFailed}++;
             $Self->_PrintSummary();
-            $Self->PrintError("TicketID=${TicketID}: left marked for learning again (cannot remove dynamic field PendingSpamLearningOperation)\n");
+            $Self->PrintError(
+                "TicketID=${TicketID}: left marked for learning again (cannot remove dynamic field PendingSpamLearningOperation)\n"
+            );
             return $Self->ExitCodeError();
         }
 
         # Print result for ticket and update counters.
         my $Message;
-        if ($LearnType == 0) {
-            $Message = sprintf('Ticket learned as spam (%d of %d customer e-mail messages learned).', $TicketLearnedArticles, $TicketProcessedArticles);
+        if ( $LearnType == 0 ) {
+            $Message = sprintf(
+                'Ticket learned as spam (%d of %d customer e-mail messages learned).',
+                $TicketLearnedArticles, $TicketProcessedArticles
+            );
             $Self->{TicketsLearnedAsSpam}++;
         }
-        elsif ($LearnType == 1) {
-            $Message = sprintf('Ticket learned as ham (%d of %d customer e-mail messages learned).', $TicketLearnedArticles, $TicketProcessedArticles);
+        elsif ( $LearnType == 1 ) {
+            $Message = sprintf(
+                'Ticket learned as ham (%d of %d customer e-mail messages learned).',
+                $TicketLearnedArticles, $TicketProcessedArticles
+            );
             $Self->{TicketsLearnedAsHam}++;
         }
         else {
@@ -276,9 +309,9 @@ sub Run {
 
         # log the triggered event in the history
         $TicketObject->HistoryAdd(
-            TicketID => $TicketID,
-            HistoryType => 'Misc',
-            Name => $Message,
+            TicketID     => $TicketID,
+            HistoryType  => 'Misc',
+            Name         => $Message,
             CreateUserID => 1,
         );
 
@@ -295,9 +328,13 @@ sub Run {
 sub _PrintSummary {
     my ( $Self, %Param ) = @_;
 
-    my $TicketsProcessed = $Self->{TicketsLearnedAsSpam} + $Self->{TicketsLearnedAsHam} + $Self->{TicketsLearnTided} + $Self->{TicketsLearnFailed};
+    my $TicketsProcessed = $Self->{TicketsLearnedAsSpam}
+        + $Self->{TicketsLearnedAsHam}
+        + $Self->{TicketsLearnTided}
+        + $Self->{TicketsLearnFailed};
 
-    my $Summary = sprintf("Summary: processed tickets: %d (spam=%d ham=%d tided=%d failed=%d), processed articles: %d (spam=%d ham=%d), learned articles: %d (spam=%d ham=%d)",
+    my $Summary = sprintf(
+        "Summary: processed tickets: %d (spam=%d ham=%d tided=%d failed=%d), processed articles: %d (spam=%d ham=%d), learned articles: %d (spam=%d ham=%d)",
         $TicketsProcessed,
         $Self->{TicketsLearnedAsSpam},
         $Self->{TicketsLearnedAsHam},
@@ -312,14 +349,14 @@ sub _PrintSummary {
     );
 
     # Log summary only if any ticket was processed.
-    if ($TicketsProcessed > 0) {
+    if ( $TicketsProcessed > 0 ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message => $Summary,
+            Message  => $Summary,
         );
     }
 
-    $Self->Print($Summary . "\n");
+    $Self->Print( $Summary . "\n" );
 
     return 1;
 }
@@ -335,10 +372,10 @@ sub _Abort {
 
     $Kernel::OM->Get('Kernel::System::Log')->Log(
         Priority => 'error',
-        Message => $Param{Message},
+        Message  => $Param{Message},
     );
 
-    $Self->PrintError($Param{Message} . "\n");
+    $Self->PrintError( $Param{Message} . "\n" );
 
     exit $Self->ExitCodeError();
 }

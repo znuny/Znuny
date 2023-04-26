@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
+# Copyright (C) 2021-2023 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # Based on ArchiveRestore.pm by OTRS AG, http://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
@@ -9,6 +9,7 @@
 
 package Kernel::System::Ticket::Event::TicketLearnSpam;
 ## nofilter(TidyAll::Plugin::Znuny::Legal::UpdateZnunyCopyright)
+## nofilter(TidyAll::Plugin::Znuny::Perl::HashObjectFunctionCall)
 
 use strict;
 use warnings;
@@ -92,17 +93,19 @@ sub Run {
     );
 
     # Mark for learning spam if moved from non-spam queues to spam queues.
-    if ( ( $Param{Config}->{SpamQueues} !~ /(^|:::)$OldQueue(:::|$)/i )
+    if (
+        ( $Param{Config}->{SpamQueues} !~ /(^|:::)$OldQueue(:::|$)/i )
         && ( $Param{Config}->{SpamQueues} =~ /(^|:::)$NewQueue(:::|$)/i )
-    ) {
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        )
+    {
+        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
         my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
             Name => 'PendingSpamLearningOperation',
         );
 
-        if (!$DynamicFieldConfig) {
+        if ( !$DynamicFieldConfig ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => 'Need dynamic field PendingSpamLearningOperation present in system!'
@@ -112,12 +115,12 @@ sub Run {
 
         my $Result = $DynamicFieldBackendObject->ValueSet(
             DynamicFieldConfig => $DynamicFieldConfig,
-            ObjectID => $Param{Data}->{TicketID},
-            Value => 'spam',
-            UserID => 1,
+            ObjectID           => $Param{Data}->{TicketID},
+            Value              => 'spam',
+            UserID             => 1,
         );
 
-        if (!$Result) {
+        if ( !$Result ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => 'Cannot mark ticket ' . $Param{Data}->{TicketID} . ' as spam!',
@@ -128,15 +131,19 @@ sub Run {
         # Change ticket state after marking as spam (if configured).
         if ( $Param{Config}->{NewStateAfterMarkingSpam} ) {
             $Result = $TicketObject->TicketStateSet(
-                State => $Param{Config}->{NewStateAfterMarkingSpam},
+                State    => $Param{Config}->{NewStateAfterMarkingSpam},
                 TicketID => $Param{Data}->{TicketID},
-                UserID => 1,
+                UserID   => 1,
             );
 
-            if (!$Result) {
+            if ( !$Result ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message => 'Cannot change ticket ' . $Param{Data}->{TicketID} . " state to '" . $Param{Config}->{NewStateAfterMarkingSpam} . "' after moving to spam queue.",
+                    Message  => 'Cannot change ticket '
+                        . $Param{Data}->{TicketID}
+                        . " state to '"
+                        . $Param{Config}->{NewStateAfterMarkingSpam}
+                        . "' after moving to spam queue.",
                 );
                 return;
             }
@@ -150,17 +157,18 @@ sub Run {
             ( $Param{Config}->{SpamQueues} =~ /(^|:::)$OldQueue(:::|$)/i )
             || ( $Param{Config}->{TrashQueues} =~ /(^|:::)$OldQueue(:::|$)/i )
         )
-        && ( $Param{Config}->{SpamQueues} !~ /(^|:::)$NewQueue(:::|$)/i )
+        && ( $Param{Config}->{SpamQueues}  !~ /(^|:::)$NewQueue(:::|$)/i )
         && ( $Param{Config}->{TrashQueues} !~ /(^|:::)$NewQueue(:::|$)/i )
-    ) {
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        )
+    {
+        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
         my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
             Name => 'PendingSpamLearningOperation',
         );
 
-        if (!$DynamicFieldConfig) {
+        if ( !$DynamicFieldConfig ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => 'Need dynamic field PendingSpamLearningOperation present in system!'
@@ -170,12 +178,12 @@ sub Run {
 
         my $Result = $DynamicFieldBackendObject->ValueSet(
             DynamicFieldConfig => $DynamicFieldConfig,
-            ObjectID => $Param{Data}->{TicketID},
-            Value => 'ham',
-            UserID => 1,
+            ObjectID           => $Param{Data}->{TicketID},
+            Value              => 'ham',
+            UserID             => 1,
         );
 
-        if (!$Result) {
+        if ( !$Result ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => 'Cannot mark ticket ' . $Param{Data}->{TicketID} . ' as ham!',
@@ -184,7 +192,7 @@ sub Run {
         }
     }
 
-    return 1
+    return 1;
 }
 
 1;
