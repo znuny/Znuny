@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -117,7 +118,7 @@ removes a file from a form id
 
     $UploadCacheObject->FormIDRemoveFile(
         FormID => 12345,
-        FileID => 1,
+        FileName => 'document.txt',
     );
 
 =cut
@@ -136,7 +137,7 @@ returns an array with a hash ref of all files for a Form ID
         FormID => 12345,
     );
 
-    Return data of on hash is Content, ContentType, ContentID, Filename, Filesize, FileID;
+    Return data of on hash is Content, ContentType, ContentID, Filename, Filesize;
 
 =cut
 
@@ -156,7 +157,7 @@ Note: returns no content, only meta data.
         FormID => 12345,
     );
 
-    Return data of hash is ContentType, ContentID, Filename, Filesize, FileID;
+    Return data of hash is ContentType, ContentID, Filename, Filesize;
 
 =cut
 
