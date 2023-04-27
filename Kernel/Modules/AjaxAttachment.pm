@@ -106,7 +106,7 @@ sub Run {
         else {
 
             my $DeleteAttachment = $UploadCacheObject->FormIDRemoveFile(
-                FormID => $Self->{FormID},
+                FormID   => $Self->{FormID},
                 Filename => $AttachmentFilename,
             );
 
@@ -128,7 +128,7 @@ sub Run {
                 }
 
                 $Return = {
-                    Message => 'Success',
+                    Message                 => 'Success',
                     NumberOfAttachmentsLeft => scalar @AttachmentData,
                 };
 

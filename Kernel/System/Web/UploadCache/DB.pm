@@ -143,7 +143,7 @@ sub FormIDRemoveFile {
     # file not found (to avoid error if user double clicks delete icon).
     FILE:
     for my $File (@Index) {
-        if ($File->{Filename} eq $Param{Filename}) {
+        if ( $File->{Filename} eq $Param{Filename} ) {
 
             return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
                 SQL => '
