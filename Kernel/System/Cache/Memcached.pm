@@ -80,7 +80,7 @@ sub Set {
     return if !$Self->{MemcachedObject};
 
     # Get memcached key name for given Type and Key.
-    my $MemcachedKeyName = $Self->_getMemcachedKeyName(
+    my $MemcachedKeyName = $Self->_GetMemcachedKeyName(
         %Param,
         InitNamespaceOnError => 1,
     );
@@ -122,7 +122,7 @@ sub Get {
     # namespace in case of namespace reading error (namespace init after
     # simple communication errors would cause same effect as CleanUp
     # on this object data type).
-    my $MemcachedKeyName = $Self->_getMemcachedKeyName(
+    my $MemcachedKeyName = $Self->_GetMemcachedKeyName(
         %Param,
         InitNamespaceOnError => 0,
     );
@@ -148,7 +148,7 @@ sub Delete {
     return if ( !$Self->{MemcachedObject} );
 
     # Get memcached key name for given Type and Key.
-    my $MemcachedKeyName = $Self->_getMemcachedKeyName(
+    my $MemcachedKeyName = $Self->_GetMemcachedKeyName(
         %Param,
         InitNamespaceOnError => 1,
     );
@@ -187,7 +187,7 @@ sub CleanUp {
     }
 }
 
-=item _getMemcachedKeyName()
+=item _GetMemcachedKeyName()
 
 Use MD5 digest of Type::Namespace::Key for memcached key (memcached key max
 length is 250). Namespace for given cache object type is taken from cache.
@@ -198,7 +198,7 @@ command wraps around the 64 bit mark.
 
 Returns mamcached key name if determined or nothing on error:
 
-    my $PreparedKey = $Self->_getMemcachedKeyName(
+    my $PreparedKey = $Self->_GetMemcachedKeyName(
         Type => 'CacheObjectTypeName',
         Key => 'KeyName',
         InitNamespaceOnError => 0,  # set 1 to initialize namespace if cannot be read
@@ -206,7 +206,7 @@ Returns mamcached key name if determined or nothing on error:
 
 =cut
 
-sub _getMemcachedKeyName {
+sub _GetMemcachedKeyName {
     my ( $Self, %Param ) = @_;
 
     # Try to find namespace for given key object type.
