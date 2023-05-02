@@ -123,13 +123,13 @@ sub ArticleIndexRebuild {
 
     my @ArticleIDs = keys %{ $Param{ArticleTicketIDs} };
 
-    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # Disconnect & destroy memcached object to avoid child processes using same connection.
     if ( $ConfigObject->Get('Cache::Module') eq 'Kernel::System::Cache::Memcached' ) {
         $Kernel::OM->Get('Kernel::System::Cache::Memcached')->Disconnect();
         $Kernel::OM->ObjectsDiscard(
-            Objects => [ 'Kernel::System::Cache::Memcached' ],
+            Objects            => ['Kernel::System::Cache::Memcached'],
             ForcePackageReload => 0,
         );
     }

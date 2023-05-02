@@ -42,7 +42,7 @@ sub new {
 
     # Get memcached connection parameters and open connection to cache.
     $Self->{Config} = $ConfigObject->Get('Cache::Module::Memcached');
-    if ($Self->{Config} && $Self->{Config}->{Servers} && $Self->{Config}->{Parameters}) {
+    if ( $Self->{Config} && $Self->{Config}->{Servers} && $Self->{Config}->{Parameters} ) {
         my $InitParams = {
             servers => $Self->{Config}->{Servers},
             %{ $Self->{Config}->{Parameters} },
@@ -50,7 +50,7 @@ sub new {
 
         $Self->{MemcachedObject} = Cache::Memcached::Fast->new($InitParams);
 
-        if (!$Self->{MemcachedObject}) {
+        if ( !$Self->{MemcachedObject} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Unable to initialize memcached connector: $!",
@@ -87,7 +87,6 @@ sub Disconnect {
 
     return 1;
 }
-
 
 sub Set {
     my ( $Self, %Param ) = @_;
@@ -192,12 +191,13 @@ sub CleanUp {
     return 1 if $Param{Expired};
 
     if ( $Param{Type} ) {
+
         # Invalidate namespace in cache by incrementing it; memcached will
         # take care of removing invalidated keys (LRU). In case of incrementing
         # error try to create new namespace.
-        if (!$Self->{MemcachedObject}->incr('Namespace:' . $Param{Type}, 1)) {
-            my $Miliseconds = int(Time::HiRes::gettimeofday() * 1000);
-            if (!$Self->{MemcachedObject}->add('Namespace:' . $Param{Type}, $Miliseconds)) {
+        if ( !$Self->{MemcachedObject}->incr( 'Namespace:' . $Param{Type}, 1 ) ) {
+            my $Miliseconds = int( Time::HiRes::gettimeofday() * 1000 );
+            if ( !$Self->{MemcachedObject}->add( 'Namespace:' . $Param{Type}, $Miliseconds ) ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
                     Message  => "Error deleting objects of type $Param{Type} in memcached!",
@@ -231,15 +231,16 @@ sub _GetMemcachedKeyName {
     my ( $Self, %Param ) = @_;
 
     # Try to find namespace for given key object type.
-    my $MemcachedNamespace = $Self->{MemcachedObject}->get('Namespace:' . $Param{Type});
+    my $MemcachedNamespace = $Self->{MemcachedObject}->get( 'Namespace:' . $Param{Type} );
 
     # If namespace not found - if allowed, create new one using miliseconds since the epoch.
-    if (!$MemcachedNamespace && $Param{InitNamespaceOnError}) {
-        my $Miliseconds = int(Time::HiRes::gettimeofday() * 1000);
+    if ( !$MemcachedNamespace && $Param{InitNamespaceOnError} ) {
+        my $Miliseconds = int( Time::HiRes::gettimeofday() * 1000 );
 
-        if ($Self->{MemcachedObject}->add('Namespace:' . $Param{Type}, $Miliseconds)) {
+        if ( $Self->{MemcachedObject}->add( 'Namespace:' . $Param{Type}, $Miliseconds ) ) {
+
             # Get namespace from cache in case it was updated meanwhile.
-            $MemcachedNamespace = $Self->{MemcachedObject}->get('Namespace:' . $Param{Type});
+            $MemcachedNamespace = $Self->{MemcachedObject}->get( 'Namespace:' . $Param{Type} );
         }
     }
 
