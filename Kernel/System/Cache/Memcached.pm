@@ -1,14 +1,14 @@
 # --
-# Kernel/System/Cache/Memcached.pm - Memcached module for OTRS cache
-# Copyright (C) 2014-2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
+# Kernel/System/Cache/Memcached.pm - Memcached module for Znuny
+# Copyright (C) 2014-2023 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # Based on:
 #   http://code.google.com/p/memcached/wiki/NewProgrammingTricks#Namespacing
 #   FileStorable.pm by OTRS AG, http://otrs.com/
 #   Memcached.pm by c.a.p.e. IT GmbH, http://www.cape-it.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 package Kernel::System::Cache::Memcached;
