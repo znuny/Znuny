@@ -705,7 +705,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .CustomerUserAdressBookSearch {
         background: var(--white);
-        padding-bottom: 0;
     }
 
     .CustomerUserAdressBookSearch .card {
@@ -1022,6 +1021,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: flex;
         flex-direction: column;
         padding: var(--main-page-padding);
+        max-width: unset;
     }
 
     .ActionsSideBar.LayoutFixedSidebar .ContentWrapper .InnerMainBoxContent {
@@ -1277,6 +1277,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         min-width: 100%;
     }
 
+    .RealPopup .SaveButtons,
+    .LayoutPopup .SaveButtons {
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
     .AdminManagement .ImportExport .SaveButtons {
         padding: 0;
     }
@@ -1506,7 +1511,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     fieldset.TableLike > .Field.SaveButtons, 
     fieldset.TableLike > .Field.SaveButtons:last-child, 
     .AdminManagement .WidgetSimple > .Content > form > fieldset.TableLike > div.SaveButtons, 
-    .SaveButtons:not(:first-child:last-child) {
+    .SaveButtons:not(:first-child:last-child):not(.Footer) {
         min-width: unset;
         padding: 0;
     }

@@ -4434,7 +4434,7 @@ msgstr "패키지 제거"
 msgid "Do you really want to uninstall this package?"
 msgstr "이 패키지를 정말로 제거 하시곘습니까?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "또는"
 
@@ -9970,7 +9970,7 @@ msgstr "Mr."
 msgid "Mrs."
 msgstr "Mrs."
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "주소"
 

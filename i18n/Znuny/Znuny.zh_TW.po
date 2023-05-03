@@ -4434,7 +4434,7 @@ msgstr "卸載軟件包"
 msgid "Do you really want to uninstall this package?"
 msgstr "是否確認卸載該軟件包?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "在"
 
@@ -9971,7 +9971,7 @@ msgstr "先生"
 msgid "Mrs."
 msgstr "女士"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "地址"
 

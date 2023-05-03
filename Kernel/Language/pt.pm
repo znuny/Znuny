@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.295886337353378;
+    $Self->{Completeness}        = 0.295769993390615;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1483,7 +1483,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Desinstalar pacote',
         'Do you really want to uninstall this package?' => 'Deseja mesmo desinstalar este pacote?',
-        'or' => 'ou',
         'Reinstall package' => 'Re-instalar pacote',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Confirma a re-instalação do pacote ? As alterações manuais serão perdidas.',
@@ -2360,7 +2359,6 @@ sub Data {
         'in' => 'em',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2373,6 +2371,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'mais',
+        'No Data Available.' => '',
         'Available Columns' => 'Colunas disponíveis',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Colunas visíveis (arrastar e largar para ordenar)',
@@ -3013,12 +3012,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'Javascript não disponível',
-        'Step %s' => 'Passo %s',
         'License' => 'Licença',
         'Database Settings' => 'Definições de base de dados',
         'General Specifications and Mail Settings' => 'Especificações comuns e definições de email',
         'Finish' => 'Fim',
         'Welcome to %s' => '',
+        'Address' => 'Endereço',
         'Phone' => 'Telefone',
         'Web site' => 'Site',
         'Community' => '',
@@ -3049,6 +3048,7 @@ sub Data {
         'Password for inbound mail.' => 'Password de email de receção',
         'Result of mail configuration check' => 'Resultado da verificação de recepção de email',
         'Check mail configuration' => 'Verifique a configuração de correio',
+        'or' => 'ou',
         'Skip this step' => 'Saltar esta etapa',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3437,7 +3437,6 @@ sub Data {
         'Valid' => 'Válido',
         'Mr.' => 'Sr.',
         'Mrs.' => 'Sra.',
-        'Address' => 'Endereço',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Edite as definições de configuração do sistema.',
         'Update and extend your system with software packages.' => '',

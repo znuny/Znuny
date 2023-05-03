@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y - %T';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.197587972905997;
+    $Self->{Completeness}        = 0.197620621282221;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1482,7 +1482,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '',
         'Do you really want to uninstall this package?' => 'Сигурни ли сте че искате да деинсталирате този софтуерен пакет?',
-        'or' => 'или',
         'Reinstall package' => '',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -2359,7 +2358,6 @@ sub Data {
         'in' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2372,6 +2370,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'Още',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3012,12 +3011,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '',
-        'Step %s' => '',
         'License' => 'Лиценз',
         'Database Settings' => '',
         'General Specifications and Mail Settings' => '',
         'Finish' => 'Край',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'Телефон',
         'Web site' => '',
         'Community' => '',
@@ -3048,6 +3047,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => '',
         'Check mail configuration' => '',
+        'or' => 'или',
         'Skip this step' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3436,7 +3436,6 @@ sub Data {
         'Valid' => 'Валиден',
         'Mr.' => 'Г-н.',
         'Mrs.' => 'Г-жа',
-        'Address' => '',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Редактирайте настройките на системната конфигурация.',
         'Update and extend your system with software packages.' => '',

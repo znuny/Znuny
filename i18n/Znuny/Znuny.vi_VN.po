@@ -4434,7 +4434,7 @@ msgstr ""
 msgid "Do you really want to uninstall this package?"
 msgstr "Bạn có thực sự muốn gỡ cài đặt gói này?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "hoặc"
 
@@ -9970,7 +9970,7 @@ msgstr "Ông"
 msgid "Mrs."
 msgstr "Bà"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Địa chỉ"
 

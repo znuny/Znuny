@@ -200,7 +200,7 @@ msgstr "Guardar ACL"
 msgid "Save"
 msgstr "Guardar"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "ou"
 
@@ -9756,7 +9756,7 @@ msgstr "Sr."
 msgid "Mrs."
 msgstr "Sra."
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Endereço"
 

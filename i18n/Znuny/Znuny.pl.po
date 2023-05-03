@@ -200,7 +200,7 @@ msgstr "Zapisz ACL"
 msgid "Save"
 msgstr "Zapisz"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "lub"
 
@@ -9753,7 +9753,7 @@ msgstr "Pan"
 msgid "Mrs."
 msgstr "Pani"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Adres"
 

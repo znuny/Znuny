@@ -395,7 +395,7 @@ sub Run {
                 DynamicFieldConfig     => $DynamicFieldConfig,
                 Profile                => \%JobData,
                 LayoutObject           => $LayoutObject,
-                ConfirmationCheckboxes => 1,
+                ConfirmationCheckboxes => 0,
                 Type                   => $Type,
             );
         }

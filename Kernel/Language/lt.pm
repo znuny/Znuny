@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.193622996861061;
+    $Self->{Completeness}        = 0.193489755452743;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1481,7 +1481,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Pašalinti paketą',
         'Do you really want to uninstall this package?' => 'Ar tikrai norite pašalinti š paketą?',
-        'or' => 'arba',
         'Reinstall package' => 'Iš naujo įdiegti paketą',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Ar tikrai norite iš naujo įdiegti šį paketą? Bet kokie atlikti rankiniai pakeitimai bus prarasti.',
@@ -2358,7 +2357,6 @@ sub Data {
         'in' => 'in',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2369,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'daugiau',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3011,12 +3010,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript neįjungtas',
-        'Step %s' => 'Žingsnis %s',
         'License' => 'Licenzija',
         'Database Settings' => 'Duomenų bazės nustatymai',
         'General Specifications and Mail Settings' => 'Bendrieji reikalavimai ir Pašto nustatymai',
         'Finish' => 'Baigti',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'Telefonas',
         'Web site' => 'Interneto puslapis',
         'Community' => '',
@@ -3047,6 +3046,7 @@ sub Data {
         'Password for inbound mail.' => 'Slaptažodis įeinančiam el. paštui.',
         'Result of mail configuration check' => 'El. pašto konfigūracijos patikrinimo rezultatas',
         'Check mail configuration' => 'Patikrinti el. pašto konfigūraciją',
+        'or' => 'arba',
         'Skip this step' => 'Praleisti šį žingsnį',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3435,6 @@ sub Data {
         'Valid' => 'Galiojantis',
         'Mr.' => 'Ponas',
         'Mrs.' => 'Ponia',
-        'Address' => '',
         'View system log messages.' => 'Peržiūrėti sistemos registravimo žurnalo žinutes.',
         'Edit the system configuration settings.' => 'Keisti sistemos konfigūracijos nustatymus.',
         'Update and extend your system with software packages.' => 'Atnaujinkite ir išplėskite savo sistemą programinės įrangos paketais.',

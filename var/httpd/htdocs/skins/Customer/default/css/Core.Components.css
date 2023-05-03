@@ -251,14 +251,18 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         min-height: var(--btn-min-height);
         border: none;
         border-radius: var(--border-radius-sm);
-        line-height: var(--btn-min-height);
+        /*line-height: var(--btn-min-height);*/
         font-weight: var(--semi-bold);
         display: flex;
         justify-content: center;
         align-items: center;
         transition: var(--main-transition);
         font-size: var(--font-size-sm);
+        padding: 0 var(--padding-md); /*important width limit for btns with longer text*/
+        text-align: center;
+        font-size: var(--font-size-sm);
     }
+    
 
     .btn-main.Hidden {
         display: none;

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.622170824384603;
+    $Self->{Completeness}        = 0.622108393919365;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1487,7 +1487,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'حذف بسته',
         'Do you really want to uninstall this package?' => 'از حذف این بسته اطمینان دارید؟',
-        'or' => 'یا',
         'Reinstall package' => 'نصب مجدد بسته',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'آیا واقعا می‌خواهید این بسته را مجددا نصب نمایید؟ تمام تغییرات دستی از بین خواهد رفت.',
@@ -2364,7 +2363,6 @@ sub Data {
         'in' => 'در',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2377,6 +2375,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'بیشتر',
+        'No Data Available.' => '',
         'Available Columns' => 'ستون در دسترس',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'ستون قابل مشاهده است (سفارش با کشیدن و رها کردن)',
@@ -3017,12 +3016,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'جاوا اسکریپت در دسترس نیست',
-        'Step %s' => 'مرحله %s',
         'License' => 'مجوز بهره برداری سیستم',
         'Database Settings' => 'تنظیمات پایگاه داده',
         'General Specifications and Mail Settings' => 'مشخصات عمومی و تنظیمات ایمیل',
         'Finish' => 'پایان',
         'Welcome to %s' => 'خوش آمدید به %s',
+        'Address' => 'نشانی',
         'Phone' => 'تلفن',
         'Web site' => 'وب سایت',
         'Community' => '',
@@ -3053,6 +3052,7 @@ sub Data {
         'Password for inbound mail.' => 'رمز عبور برای ایمیل وارده.',
         'Result of mail configuration check' => 'نتیجه کنترل پیکربندی ایمیل',
         'Check mail configuration' => 'کنترل پیکربندی ایمیل',
+        'or' => 'یا',
         'Skip this step' => 'از این مرحله بگذر',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3441,7 +3441,6 @@ sub Data {
         'Valid' => 'معتبر',
         'Mr.' => 'آقای',
         'Mrs.' => 'خانم',
-        'Address' => 'نشانی',
         'View system log messages.' => 'نمایش پیغام‌های ثبت وقایع سیستم',
         'Edit the system configuration settings.' => 'ویرایش تنظیمات پیکربندی سیستم',
         'Update and extend your system with software packages.' => 'به روزرسانی و گسترش سیستم به کمک بسته‌های نرم‌افزاری',

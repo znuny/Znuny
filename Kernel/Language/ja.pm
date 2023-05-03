@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.689079795142904;
+    $Self->{Completeness}        = 0.689028420356907;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1486,7 +1486,6 @@ sub Data {
         'Uninstall Package' => 'パッケージをアンインストール',
         'Uninstall package' => 'パッケージをアンインストール',
         'Do you really want to uninstall this package?' => 'このパッケージを本当にアンインストールしますか？',
-        'or' => 'または',
         'Reinstall package' => 'パッケージを再インストール',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'このパッケージを本当に再インストールしますか？ 全ての手動変更点は失われます。',
@@ -2363,7 +2362,6 @@ sub Data {
         'in' => '＞',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2376,6 +2374,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '続き',
+        'No Data Available.' => '',
         'Available Columns' => '利用可能な列',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '表示する列 (ドラッグ&ドロップで並び替えできます)',
@@ -3016,12 +3015,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScriptが利用できません。',
-        'Step %s' => 'ステップ %s',
         'License' => 'ライセンス',
         'Database Settings' => 'データベース設定',
         'General Specifications and Mail Settings' => '共通仕様とメール設定',
         'Finish' => '完了',
         'Welcome to %s' => '%s にようこそ',
+        'Address' => 'アドレス',
         'Phone' => '電話',
         'Web site' => 'Webサイト',
         'Community' => '',
@@ -3052,6 +3051,7 @@ sub Data {
         'Password for inbound mail.' => '受信メールのパスワード',
         'Result of mail configuration check' => 'メール設定チェックの結果',
         'Check mail configuration' => 'メール設定チェック',
+        'or' => 'または',
         'Skip this step' => 'この手順を飛ばす',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3440,7 +3440,6 @@ sub Data {
         'Valid' => '有効',
         'Mr.' => '様',
         'Mrs.' => '様',
-        'Address' => 'アドレス',
         'View system log messages.' => 'システム・ログ・メッセージを見る。',
         'Edit the system configuration settings.' => 'システム設定の編集',
         'Update and extend your system with software packages.' => 'このシステムのソフトウェアパッケージの更新と展開',

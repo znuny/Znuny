@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.0751693375185858;
+    $Self->{Completeness}        = 0.075181758096497;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1484,7 +1484,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '',
         'Do you really want to uninstall this package?' => '',
-        'or' => ' أو ',
         'Reinstall package' => '',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -2361,7 +2360,6 @@ sub Data {
         'in' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2372,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3014,12 +3013,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '',
-        'Step %s' => '',
         'License' => 'الترخيص',
         'Database Settings' => '',
         'General Specifications and Mail Settings' => '',
         'Finish' => '',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'رقم الهاتف',
         'Web site' => '',
         'Community' => '',
@@ -3050,6 +3049,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => '',
         'Check mail configuration' => '',
+        'or' => ' أو ',
         'Skip this step' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3438,7 +3438,6 @@ sub Data {
         'Valid' => 'فعال',
         'Mr.' => 'سيد ',
         'Mrs.' => 'سيدة ',
-        'Address' => '',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'تحرير إعدادات تكوين النظام.',
         'Update and extend your system with software packages.' => '',

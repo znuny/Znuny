@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.190318850156947;
+    $Self->{Completeness}        = 0.19035029742234;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1484,7 +1484,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Poista paketti',
         'Do you really want to uninstall this package?' => 'Haluatko varmasti poistaa paketin asennuksen?',
-        'or' => 'tai',
         'Reinstall package' => 'Asenna uudestaan',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Haluatko varmasti asentaa tämän paketin uudestaan? Kaikki asetukset poistuvat samalla.',
@@ -2361,7 +2360,6 @@ sub Data {
         'in' => ':',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2372,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'lisää',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3014,12 +3013,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript ei toiminnassa',
-        'Step %s' => '',
         'License' => 'Lisenssi',
         'Database Settings' => 'Tietokanta-asetukset',
         'General Specifications and Mail Settings' => 'Yleiset määritykset ja sähköpostiasetukset',
         'Finish' => 'Loppu',
         'Welcome to %s' => 'Tervetuloa %s järjestelmään',
+        'Address' => '',
         'Phone' => 'Puhelin',
         'Web site' => 'Kotisivu',
         'Community' => '',
@@ -3050,6 +3049,7 @@ sub Data {
         'Password for inbound mail.' => 'Saapuvan postin salasana.',
         'Result of mail configuration check' => 'Asetusten tarkistusten tulos',
         'Check mail configuration' => 'Tarkista sähköpostin asetukset',
+        'or' => 'tai',
         'Skip this step' => 'Ohita tämä vaihe',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3438,7 +3438,6 @@ sub Data {
         'Valid' => 'Käytössä',
         'Mr.' => 'Mr.',
         'Mrs.' => 'Mrs.',
-        'Address' => '',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Muokkaa systeemitason asetuksia.',
         'Update and extend your system with software packages.' => 'Päivitä ja laajenna järjestelmää paketeilla.',

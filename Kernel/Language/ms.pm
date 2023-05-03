@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.541549644804229;
+    $Self->{Completeness}        = 0.541473892927958;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1480,7 +1480,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'buang pakej',
         'Do you really want to uninstall this package?' => 'Adakah anda benar-benar mahu untuk memadam pakej ini?',
-        'or' => 'atau',
         'Reinstall package' => 'Pasang semula pakej',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Adakah anda benar-benar mahu memasang semula pakej ini? Sebarang perubahan manual akan hilang.',
@@ -2357,7 +2356,6 @@ sub Data {
         'in' => 'dalam',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2370,6 +2368,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'lagi',
+        'No Data Available.' => '',
         'Available Columns' => 'Ruangan tersedia',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Ruangan dapat dilihat (susunan secara tarik dan lepas)',
@@ -3010,12 +3009,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript tidak disediakan',
-        'Step %s' => 'langkah %s',
         'License' => 'Lesen',
         'Database Settings' => 'Datenbankeinstellungen',
         'General Specifications and Mail Settings' => 'Spesifikasi Am dan Tetapan Mail',
         'Finish' => 'selesai',
         'Welcome to %s' => 'Selamat datang ke %s',
+        'Address' => 'Alamat',
         'Phone' => 'Telefon',
         'Web site' => 'Laman web',
         'Community' => '',
@@ -3046,6 +3045,7 @@ sub Data {
         'Password for inbound mail.' => 'Kata kunci untuk mel masuk.',
         'Result of mail configuration check' => 'Hasil untuk semakan konfigurasi mel',
         'Check mail configuration' => 'Semak konfigurasi mel',
+        'or' => 'atau',
         'Skip this step' => 'Langkau langkah ini',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3434,7 +3434,6 @@ sub Data {
         'Valid' => 'Sah',
         'Mr.' => 'Encik',
         'Mrs.' => 'Puan',
-        'Address' => 'Alamat',
         'View system log messages.' => 'Melihat mesej log sistem.',
         'Edit the system configuration settings.' => 'Mengaudit aturan konfigurasi sistem',
         'Update and extend your system with software packages.' => 'Naik taraf dan kembangkan sistem anda dengan pakej perisian.',

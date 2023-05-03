@@ -4436,7 +4436,7 @@ msgstr ""
 msgid "Do you really want to uninstall this package?"
 msgstr "Είστε σίγουροι οτι θέλετε να απεγκαταστήσετε αυτό το πακέτο;"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "ή"
 
@@ -9974,7 +9974,7 @@ msgstr "Κος"
 msgid "Mrs."
 msgstr "Κα"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr ""
 

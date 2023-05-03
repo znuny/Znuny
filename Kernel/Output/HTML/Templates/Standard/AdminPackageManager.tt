@@ -65,13 +65,16 @@
                         </p>
                         <div class="Field">
                             <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
-                                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                                <input type="hidden" name="Subaction" value="UninstallAction"/>
-                                <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
-                                <input type="hidden" name="Version" value="[% Data.Version | html %]"/>
-                                <button class="Primary CallForAction" type="submit" value="[% Translate("Uninstall package") | html %]"><span>[% Translate("Uninstall package") | html %]</span></button>
-                                [% Translate("or") | html %]
-                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-secondary-ghost">[% Translate("Cancel") | html %]</a>
+                                <div class="field-wrapper form-button-actions">
+                                    <div class="Field buttons-field">
+                                        <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                                        <input type="hidden" name="Subaction" value="UninstallAction"/>
+                                        <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
+                                        <input type="hidden" name="Version" value="[% Data.Version | html %]"/>
+                                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                                        <button class="btn-primary btn-main btn-width-md" type="submit" value="[% Translate("Uninstall package") | html %]"><span>[% Translate("Uninstall package") | html %]</span></button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -81,6 +84,7 @@
     </div>
 </div>
 [% RenderBlockEnd("Uninstall") %]
+
 [% RenderBlockStart("Reinstall") %]
 <div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
     <div class="SidebarColumn ActionsSideBarComp">
@@ -124,33 +128,36 @@
             <div class="Content">
 
                 <fieldset class="TableLike">
-                    <label>[% Translate("Name") | html %]: </label>
-                    <div class="Value">
-                        [% Data.Name | html %]
+                    <div class="field-wrapper">
+                        <label>[% Translate("Name") | html %] </label>
+                        <div class="Value">
+                            [% Data.Name | html %]
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <label>[% Translate("Version") | html %]: </label>
-                    <div class="Value">
-                        [% Data.Version %]
+                    <div class="field-wrapper">
+                        <label>[% Translate("Version") | html %] </label>
+                        <div class="Value">
+                            [% Data.Version %]
+                        </div>
+                        <p class="Field">
+                            [% Translate("Do you really want to reinstall this package? Any manual changes will be lost.") | html %]
+                        </p>
                     </div>
-                    <div class="Clear"></div>
-                    <p class="Field">
-                        [% Translate("Do you really want to reinstall this package? Any manual changes will be lost.") | html %]
-                    </p>
-                    <div class="Clear"></div>
-                    <div class="Field">
-                        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
-                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                            <input type="hidden" name="Subaction" value="ReinstallAction"/>
-                            <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
-                            <input type="hidden" name="Version" value="[% Data.Version | html %]"/>
-                            <button class="Primary CallForAction" type="submit" value="[% Translate("Reinstall package") | html %]"><span>[% Translate("Reinstall package") | html %]</span></button>
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-secondary-ghost">[% Translate("Cancel") | html %]</a>
-                        </form>
-                    </div>
-                    <div class="Clear"></div>
+
+                    <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                                <input type="hidden" name="Subaction" value="ReinstallAction"/>
+                                <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
+                                <input type="hidden" name="Version" value="[% Data.Version | html %]"/>
+                                <a class="btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-secondary-ghost">[% Translate("Cancel") | html %]</a>
+                                <button class="btn-primary btn-main btn-width-md" type="submit" value="[% Translate("Reinstall package") | html %]"><span>[% Translate("Reinstall package") | html %]</span></button>
+                            </div>
+                        </div>
+                    </form>
+
                 </fieldset>
             </div>
         </div>
@@ -220,7 +227,7 @@
                 </div>
             </div>
         </div>
-        <div class="Clear"></div>
+
     </div>
 </div>
 [% RenderBlockEnd("IncompatibleInfo") %]
@@ -325,31 +332,40 @@
                     <h2>[% Translate(Data.Title) | html %]</h2>
                 </div>
                 <div class="Content">
-                    <div class="IntroInstall [% Data.VerifyCSSClass | html %]">
-                        <h3>[% Data.Name | html %] [% Data.Version | html %]</h3>
-                        [% Data.Description %]
-                    </div>
+                    <fieldset class="TableLike">
+                        <div class="IntroInstall [% Data.VerifyCSSClass | html %]">
+                            <h3>[% Data.Name | html %] [% Data.Version | html %]</h3>
+                            [% Data.Description %]
+                        </div>
 [% RenderBlockStart("IntroForm") %]
-                    <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
-                        <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                        <input type="hidden" name="Subaction" value="[% Data.Subaction | html %]"/>
-                        <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
-                        <input type="hidden" name="Source" value="[% Data.Source | html %]"/>
-                        <input type="hidden" name="File" value="[% Data.File | html %]"/>
-                        <input type="hidden" name="[% Data.Type | html %]" value="1"/>
-                        <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
-                        <input type="hidden" name="Version" value="[% Data.Version | html %]"/>
-                        <button class="Primary CallForAction" type="submit" value="[% Translate("Continue") | html %]"><span>[% Translate("Continue") | html %]</span></button>
+                        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                            <div class="field-wrapper form-button-actions">
+                                <div class="Field buttons-field no-padding">
+                                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                                    <input type="hidden" name="Subaction" value="[% Data.Subaction | html %]"/>
+                                    <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+                                    <input type="hidden" name="Source" value="[% Data.Source | html %]"/>
+                                    <input type="hidden" name="File" value="[% Data.File | html %]"/>
+                                    <input type="hidden" name="[% Data.Type | html %]" value="1"/>
+                                    <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
+                                    <input type="hidden" name="Version" value="[% Data.Version | html %]"/>
 [% RenderBlockStart("IntroCancel") %]
-                        [% Translate("or") | html %]
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-secondary-ghost"><span>[% Translate("Cancel") | html %]</span></a>
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">
+                                        <span>[% Translate("Cancel") | html %]</span>
+                                    </a>
 [% RenderBlockEnd("IntroCancel") %]
-                    </form>
+                                    <button class="btn-primary btn-main btn-width-md" type="submit" value="[% Translate("Continue") | html %]">
+                                        <span>[% Translate("Continue") | html %]</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
 [% RenderBlockEnd("IntroForm") %]
+                    </fieldset>
                 </div>
             </div>
         </div>
-        <div class="Clear"></div>
+
     </div>
 </div>
 [% RenderBlockEnd("Intro") %]
@@ -531,7 +547,7 @@
             </div>
 
         </div>
-        <div class="Clear"></div>
+
     </div>
 [% RenderBlockEnd("Overview") %]
 [% RenderBlockStart("Package") %]

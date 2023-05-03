@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.166363786552123;
+    $Self->{Completeness}        = 0.166391275611368;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1481,7 +1481,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '',
         'Do you really want to uninstall this package?' => 'Kas tõesti eemaldada see pakett?',
-        'or' => 'või',
         'Reinstall package' => '',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -2358,7 +2357,6 @@ sub Data {
         'in' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2369,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'rohkem',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3011,12 +3010,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'Ei saa kasutada JavaScript\'i',
-        'Step %s' => '',
         'License' => 'Litsents',
         'Database Settings' => 'Andmebaasi seaded',
         'General Specifications and Mail Settings' => '',
         'Finish' => 'Finish',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'Telefon',
         'Web site' => '',
         'Community' => '',
@@ -3047,6 +3046,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => 'E-posti häälestuse kontrolli tulemus',
         'Check mail configuration' => 'Kontrolli e-posti häälestust',
+        'or' => 'või',
         'Skip this step' => 'Jäta see samm vahele',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3435,6 @@ sub Data {
         'Valid' => 'Kehtiv',
         'Mr.' => 'Hr.',
         'Mrs.' => 'Pr.',
-        'Address' => '',
         'View system log messages.' => 'Süsteemilogi teadete vaatamine.',
         'Edit the system configuration settings.' => 'Süsteemi konfiguratsiooniseadete muutmine.',
         'Update and extend your system with software packages.' => 'Süsteemi uuendamine ja laiendamine tarkvarapakettide abil.',

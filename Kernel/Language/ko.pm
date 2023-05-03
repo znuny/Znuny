@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.875598876590121;
+    $Self->{Completeness}        = 0.875578321216127;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1481,7 +1481,6 @@ sub Data {
         'Uninstall Package' => '패키지 제거',
         'Uninstall package' => '패키지 제거',
         'Do you really want to uninstall this package?' => '이 패키지를 정말로 제거 하시곘습니까?',
-        'or' => '또는',
         'Reinstall package' => '패키지 다시 설치',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '이 패키지를 정말로 다시 설치 하시겠습니까? 수동으로 변경하면 손실됩니다.',
@@ -2358,7 +2357,6 @@ sub Data {
         'in' => '...에서',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '자료 없음.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2369,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '더',
+        'No Data Available.' => '자료 없음.',
         'Available Columns' => '가능한 컬럼',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '보여지는 컬럼(드래그드롭으로 순서정렬 가능)',
@@ -3011,12 +3010,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '자바스트립트를 사용할 수 없습니다.',
-        'Step %s' => '%s 단계',
         'License' => '특허',
         'Database Settings' => '데이터베이스 설정',
         'General Specifications and Mail Settings' => '일반 사양 및 메일 설정',
         'Finish' => '끝',
         'Welcome to %s' => '%s에 오신 것을 환영합니다.',
+        'Address' => '주소',
         'Phone' => '전화',
         'Web site' => '웹 사이트',
         'Community' => '',
@@ -3047,6 +3046,7 @@ sub Data {
         'Password for inbound mail.' => '인바운드 메일의 비밀번호 입니다.',
         'Result of mail configuration check' => '메일 구성 검사 결과',
         'Check mail configuration' => '메일 구성 확인',
+        'or' => '또는',
         'Skip this step' => '이 단계를 건너뛰기',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3435,6 @@ sub Data {
         'Valid' => '유효한',
         'Mr.' => 'Mr.',
         'Mrs.' => 'Mrs.',
-        'Address' => '주소',
         'View system log messages.' => '시스템 로그 메시지를 봅니다.',
         'Edit the system configuration settings.' => '시스템 구성 설정을 편집 하십시오.',
         'Update and extend your system with software packages.' => '소프트웨어 패키지로 시스템을 업데이트하고 확장하십시오.',

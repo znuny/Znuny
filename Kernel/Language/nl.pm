@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.500743433008426;
+    $Self->{Completeness}        = 0.500660938532716;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1487,7 +1487,6 @@ sub Data {
         'Uninstall Package' => 'Verwijder pakket',
         'Uninstall package' => 'Verwijder pakket',
         'Do you really want to uninstall this package?' => 'Wilt u dit pakket echt verwijderen?',
-        'or' => 'of',
         'Reinstall package' => 'Herinstalleer pakket',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Wilt u dit pakket echt herinstalleren? Eventuele handmatige aanpassingen gaan verloren.',
@@ -2364,7 +2363,6 @@ sub Data {
         'in' => 'over',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2377,6 +2375,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'meer',
+        'No Data Available.' => '',
         'Available Columns' => 'Beschikbare kolommen',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Beschikbare kolommen (sorteer door middel van drag & drop)',
@@ -3017,12 +3016,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript is niet beschikbaar',
-        'Step %s' => 'Stap %s',
         'License' => 'Licentie',
         'Database Settings' => 'Database configuratie',
         'General Specifications and Mail Settings' => 'Algemene instellingen en mailconfiguratie',
         'Finish' => 'Voltooien',
         'Welcome to %s' => 'Welkom bij %s',
+        'Address' => 'Adres',
         'Phone' => 'Telefoon',
         'Web site' => 'Website',
         'Community' => '',
@@ -3053,6 +3052,7 @@ sub Data {
         'Password for inbound mail.' => 'Wachtwoord voor inkomende mail server.',
         'Result of mail configuration check' => 'Resultaat van mailconfiguratie test',
         'Check mail configuration' => 'Test mailconfiguratie',
+        'or' => 'of',
         'Skip this step' => 'Sla dit over',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3441,7 +3441,6 @@ sub Data {
         'Valid' => 'Geldigheid',
         'Mr.' => 'Dhr.',
         'Mrs.' => 'Mevr.',
-        'Address' => 'Adres',
         'View system log messages.' => 'Bekijk het Znuny logboek.',
         'Edit the system configuration settings.' => 'Bewerk de systeemconfiguratie.',
         'Update and extend your system with software packages.' => 'Voeg functies toe aan uw systeem door het installeren van pakketten.',

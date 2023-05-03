@@ -8,7 +8,7 @@
 # --
 
 [% RenderBlockStart("License") %]
-<div class="W950px SpacingTop SpacingBottom CenterBox">
+<div class="CenterBox">
     <div class="WidgetSimple">
         <div class="Header">
             <h2>[% Translate(Data.Item) | html %] ([% Data.Step %])</h2>
@@ -16,21 +16,20 @@
 
         <div class="Content Center">
 [% InsertTemplate("InstallerLicenseText.tt") %]
-
-            <div id="InstallerContinueWithJS" class="SpacingTop Right">
-                <form action="[% Env("CGIHandle") %]" method="post" class="SpacingTop PreventMultipleSubmits">
-                    <button type="submit" class="CallForAction" value="[% Translate("Don't accept license") | html %]">
-                        <span>[% Translate("Don't accept license") | html %]</span>
-                    </button>
-                </form>
-                [% Translate("or") | html %]
-                <form action="[% Env("CGIHandle") %]" method="post" class="PreventMultipleSubmits">
-                    <input type="hidden" name="Subaction" value="Start">
-                    <button class="Primary CallForAction" type="submit" value="[% Translate("Accept license and continue") | html %]">
-                        <span>[% Translate("Accept license and continue") | html %]</span>
-                    </button>
-                </form>
-            </div>
+        </div>
+        <div id="InstallerContinueWithJS">
+            <form action="[% Env("CGIHandle") %]" method="post" class="PreventMultipleSubmits">
+                <button type="submit" class="CallForAction btn-secondary-ghost btn-width-lg" value="[% Translate("Don't accept license") | html %]">
+                    <span>[% Translate("Don't accept license") | html %]</span>
+                </button>
+            </form>
+#                [% Translate("or") | html %]
+            <form action="[% Env("CGIHandle") %]" method="post" class="PreventMultipleSubmits">
+                <input type="hidden" name="Subaction" value="Start">
+                <button class="Primary CallForAction btn-main btn-primary btn-width-xxl" type="submit" value="[% Translate("Accept license and continue") | html %]">
+                    <span>[% Translate("Accept license and continue") | html %]</span>
+                </button>
+            </form>
         </div>
     </div>
 </div>

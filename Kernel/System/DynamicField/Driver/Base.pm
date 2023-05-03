@@ -194,7 +194,7 @@ sub EditLabelRender {
     }
 
     # closing tag
-    $HTMLString .= ":</label></div>";
+    $HTMLString .= "</label></div>";
 
     return $HTMLString;
 }

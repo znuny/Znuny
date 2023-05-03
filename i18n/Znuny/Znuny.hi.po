@@ -4434,7 +4434,7 @@ msgstr "संकुल जिनकी स्थापना रद्द ह�
 msgid "Do you really want to uninstall this package?"
 msgstr "क्या आप वास्तव में इस संकुल की स्थापना रद्द करना चाहते हैं?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "या"
 
@@ -9970,7 +9970,7 @@ msgstr "श्रीमान"
 msgid "Mrs."
 msgstr "श्रीमती"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr ""
 

@@ -1059,7 +1059,7 @@ sub _Edit {
             DynamicFieldConfig     => $DynamicFieldConfig,
             Profile                => $Param{DynamicFieldValues} || {},
             LayoutObject           => $LayoutObject,
-            ConfirmationCheckboxes => 1,
+            ConfirmationCheckboxes => 0,
             UseLabelHints          => 0,
         );
 

@@ -44,10 +44,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .IntroInstall {
-    background: #eee;
-    padding: 15px 20px;
-    margin-bottom: 10px;
-    line-height: 150%;
+    background: var(--main-bg-color);
+    padding: var(--padding-sm);
+    border-radius: var(--border-radius-xs);
+    line-height: 100%;
 }
 
 .IntroInstall.NotVerifiedPackage {

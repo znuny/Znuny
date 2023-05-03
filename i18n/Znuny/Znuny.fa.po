@@ -4434,7 +4434,7 @@ msgstr "حذف بسته"
 msgid "Do you really want to uninstall this package?"
 msgstr "از حذف این بسته اطمینان دارید؟"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "یا"
 
@@ -9970,7 +9970,7 @@ msgstr "آقای"
 msgid "Mrs."
 msgstr "خانم"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "نشانی"
 

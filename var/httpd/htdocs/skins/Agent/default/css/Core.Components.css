@@ -1078,7 +1078,9 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     /* ************************************* Main Search Component ********************************* */
 
     .Dialog > .Content > .InnerContent.main-search-component {
-        overflow-y: auto;
+        overflow-y: scroll;
+        margin: -20px -20px 0;
+        padding: 20px 20px 0;
     }
 
     .main-search-component .search-ticket {

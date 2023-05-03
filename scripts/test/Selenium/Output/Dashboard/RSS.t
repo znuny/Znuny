@@ -32,7 +32,7 @@ $Selenium->RunTest(
 
         # Get dashboard RSS plugin default sysconfig.
         my %RSSConfig = $SysConfigObject->SettingGet(
-            Name    => 'DashboardBackend###0410-RSS',
+            Name    => 'DashboardBackend###0442-RSS',
             Default => 1,
         );
 
@@ -75,7 +75,7 @@ $Selenium->RunTest(
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'DashboardBackend###0410-RSS',
+            Key   => 'DashboardBackend###0442-RSS',
             Value => $RSSConfig{EffectiveValue},
         );
 
@@ -98,12 +98,12 @@ $Selenium->RunTest(
         );
 
         # Wait for RSS plugin to show up.
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#Dashboard0410-RSS").length' );
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#Dashboard0442-RSS").length' );
 
         # Test if RSS feed is shown.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('#Dashboard0410-RSS tbody a[href*=\"www.znuny.com/$RandomRSSTitle\"]').text().trim() === '$RandomRSSTitle'"
+                "return \$('#Dashboard0442-RSS tbody a[href*=\"www.znuny.com/$RandomRSSTitle\"]').text().trim() === '$RandomRSSTitle'"
             ),
             "RSS feed '$RandomRSSTitle' - found",
         );

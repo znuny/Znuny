@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="WidgetMenu">
+            <div class="WidgetMenu Hidden">
                 [% IF !Setting.IsRequired %]
                 <a href="#" class="Button SettingEnabled [% IF Setting.IsValid == 0 %]Hidden[% END %]" title="[% Translate("Disable this setting, so it is no longer effective") | html %]">[% Translate("Disable") | html %]</a>
                 <a href="#" class="Button SettingDisabled [% IF Setting.IsValid == 1 %]Hidden[% END %]" title="[% Translate("Enable this setting, so it becomes effective") | html %]">[% Translate("Enable") | html %]</a>

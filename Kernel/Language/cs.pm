@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.245498100115645;
+    $Self->{Completeness}        = 0.245373430270985;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1488,7 +1488,6 @@ sub Data {
         'Uninstall Package' => 'Odinstalovat balíček',
         'Uninstall package' => 'Odinstaluj balíček',
         'Do you really want to uninstall this package?' => 'Opravdu chcete odinstalovat tento Balíček?',
-        'or' => 'nebo',
         'Reinstall package' => 'Reinstaluj balíček',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -2365,7 +2364,6 @@ sub Data {
         'in' => 'v',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2378,6 +2376,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'další',
+        'No Data Available.' => '',
         'Available Columns' => 'Dostupné sloupce',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Viditelné sloupce (seřadťe přetažením)',
@@ -3018,12 +3017,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '',
-        'Step %s' => 'Krok %s',
         'License' => 'Licence',
         'Database Settings' => '',
         'General Specifications and Mail Settings' => '',
         'Finish' => 'Ukončit',
         'Welcome to %s' => '',
+        'Address' => 'Adresa',
         'Phone' => 'Telefon',
         'Web site' => '',
         'Community' => '',
@@ -3054,6 +3053,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => '',
         'Check mail configuration' => '',
+        'or' => 'nebo',
         'Skip this step' => 'Přeskočit tento krok',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3442,7 +3442,6 @@ sub Data {
         'Valid' => 'Platnost',
         'Mr.' => 'pan',
         'Mrs.' => 'paní',
-        'Address' => 'Adresa',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Editace systémových nastavení.',
         'Update and extend your system with software packages.' => '',

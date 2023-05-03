@@ -747,15 +747,11 @@ h2.SearchResults {
 }*/
 
 /* Widget Menu */
-
-.WidgetSimple.MenuExpanded > .WidgetMenu {
-    display: flex;
-    height: 100%;
-    max-height: 100%;
-    margin-top: 0;
+.WidgetSimple.Setting  > .WidgetMenu.Hidden {
+    margin-top: -58px;
 }
 
-.WidgetSimple > .WidgetMenu {
+.WidgetSimple.Setting  > .WidgetMenu {
     background: var(--main-bg-color);
     padding: var(--padding-sm) var(--padding-lg);
     display: none;
@@ -764,7 +760,10 @@ h2.SearchResults {
     align-items: center;
     gap: var(--gap-sm);
     transition: var(--main-transition);
-    margin-top: -60px;
+    margin-top: 0;
+    display: flex;
+    height: 100%;
+    max-height: 100%;
 }
 
 .WidgetSimple .WidgetMenu > a,
@@ -1702,7 +1701,6 @@ form.ImportExport fieldset {
     .WidgetSimple .WidgetMenu > span {
         opacity: 1 !important;
         zoom: 1.1;
-        margin-bottom: 7px;
     }
 
     .WidgetSimple.Setting .Header .ActionMenu {

@@ -75,7 +75,7 @@
                                     [% IF Config('Ticket::Service') %]
                                     <div class="field-wrapper col-wide-50 col-desktop-50 col-tablet-50">
                                         <div class="label-wrapper">
-                                            <label for="ServiceIDs">[% Translate("Services") | html %]:</label>
+                                            <label for="ServiceIDs">[% Translate("Services") | html %]</label>
                                         </div>
                                         <div class="Field">
                                             [% Data.ServicesStrg %]
@@ -86,7 +86,7 @@
                                     [% IF Config('Ticket::Type') %]
                                     <div class="field-wrapper col-wide-50 col-desktop-50 col-tablet-50">
                                         <div class="label-wrapper">
-                                            <label for="TypeIDs">[% Translate("Types") | html %]:</label>
+                                            <label for="TypeIDs">[% Translate("Types") | html %]</label>
                                         </div>
                                         <div class="Field">
                                             [% Data.TypesStrg %]
@@ -98,7 +98,7 @@
 
                                 <div class="field-wrapper col-wide-50 col-desktop-50 col-tablet-50">
                                     <div class="label-wrapper">
-                                        <label for="PriorityIDs">[% Translate("Priority") | html %]:</label>
+                                        <label for="PriorityIDs">[% Translate("Priority") | html %]</label>
                                     </div>
                                     <div class="Field">
                                         [% Data.PrioritiesStrg %]
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="field-wrapper col-wide-50 col-desktop-50 col-tablet-50">
                                     <div class="label-wrapper">
-                                        <label for="StateIDs">[% Translate("State") | html %]:</label>
+                                        <label for="StateIDs">[% Translate("State") | html %]</label>
                                     </div>
                                     <div class="Field">
                                         [% Data.StatesStrg %]
@@ -200,7 +200,7 @@
                             <fieldset class="section-block">
                                 <h2>[% Translate("Ticket Archive System") | html %]</h2>
                                 <div>
-                                    <label for="SearchInArchive">[% Translate("Archive Search") | html %]:</label>
+                                    <label for="SearchInArchive">[% Translate("Archive Search") | html %]</label>
                                     [% Data.SearchInArchiveStrg %]
                                 </div>
                             </fieldset>

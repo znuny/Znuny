@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.214439121096977;
+    $Self->{Completeness}        = 0.214309319233311;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1485,7 +1485,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Odstrani paket',
         'Do you really want to uninstall this package?' => 'Ali res želite odstraniti ta paket?',
-        'or' => 'ali',
         'Reinstall package' => 'Ponovno namestite paket',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Ali res želite ponovno namestiti ta paket? Vse ročne spremembe bodo izgubljene.',
@@ -2362,7 +2361,6 @@ sub Data {
         'in' => 'v',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2375,6 +2373,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'več',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3015,12 +3014,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript ni dostopen.',
-        'Step %s' => 'Korak %s',
         'License' => 'Licenca',
         'Database Settings' => 'Database nastavitve',
         'General Specifications and Mail Settings' => 'Splošne tehnične zahteve in nastavitve za e-pošto',
         'Finish' => 'Končaj',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'Telefon',
         'Web site' => 'Web stran',
         'Community' => '',
@@ -3051,6 +3050,7 @@ sub Data {
         'Password for inbound mail.' => 'Geslo vstopne E-pošte',
         'Result of mail configuration check' => 'Rezultat preverjanja nastavitev E-pošte',
         'Check mail configuration' => 'Preverite konfiguracijo E-pošte',
+        'or' => 'ali',
         'Skip this step' => 'Preskoči ta korak',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3439,7 +3439,6 @@ sub Data {
         'Valid' => 'Veljavnost',
         'Mr.' => 'G.',
         'Mrs.' => 'Ga.',
-        'Address' => '',
         'View system log messages.' => 'Pregled logiranih sporočil sistema.',
         'Edit the system configuration settings.' => 'Uredite nastavitve konfiguracije sistema.',
         'Update and extend your system with software packages.' => 'Posodobi in nadgradi vaš sistem s programskimi paketi.',
