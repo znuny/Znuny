@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.439121096976706;
+    $Self->{Completeness}        = 0.439028420356907;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1482,7 +1482,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Деінсталювати пакет',
         'Do you really want to uninstall this package?' => 'Вилучити цей пакет?',
-        'or' => 'або',
         'Reinstall package' => 'Переустановити пакет',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Ви дійсно хочете перевстановити цей пакунок? Аби-які ручні зміни буде втрачено!',
@@ -2359,7 +2358,6 @@ sub Data {
         'in' => 'в',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => 'Немає доступних даних.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2372,6 +2370,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'далі',
+        'No Data Available.' => 'Немає доступних даних.',
         'Available Columns' => 'Доступні колонки',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Видимі стовпці (упорядковуйте шляхом тягни-й-пусти)',
@@ -3012,12 +3011,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript не доступний',
-        'Step %s' => 'Крок %s',
         'License' => 'Ліцензія',
         'Database Settings' => 'Налаштування бази даних',
         'General Specifications and Mail Settings' => 'Загальні характеристики та налаштування пошти',
         'Finish' => 'Закінчити',
         'Welcome to %s' => 'Ласкаво просимо до %s',
+        'Address' => 'Адреса',
         'Phone' => 'Телефон',
         'Web site' => 'Веб-сторінка',
         'Community' => '',
@@ -3048,6 +3047,7 @@ sub Data {
         'Password for inbound mail.' => 'Пароль для вхідної пошти.',
         'Result of mail configuration check' => 'Результати перевірки настроювань пошти',
         'Check mail configuration' => 'Перевірити настроювання пошти',
+        'or' => 'або',
         'Skip this step' => 'Пропустити цей крок',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3436,7 +3436,6 @@ sub Data {
         'Valid' => 'Дійсний',
         'Mr.' => 'пан',
         'Mrs.' => 'пані',
-        'Address' => 'Адреса',
         'View system log messages.' => 'Перегляд системних повідомлень.',
         'Edit the system configuration settings.' => 'Редагувати параметри налаштування системи.',
         'Update and extend your system with software packages.' => 'Відновлення й розширення системи за допомогою програмних пакетів.',

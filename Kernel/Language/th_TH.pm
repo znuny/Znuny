@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.527672228646952;
+    $Self->{Completeness}        = 0.527594183740912;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1481,7 +1481,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'ยกเลิกการติดตั้งแพคเกจ',
         'Do you really want to uninstall this package?' => 'คุณต้องการยกเลิกการติดตั้งแพคเกจนี้หรือไม่?',
-        'or' => 'หรือ',
         'Reinstall package' => 'ติดตั้งแพคเกจอีกครั้ง',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'คุณต้องการติดตั้งแพคเกจนี้อีกครั้งหรือไม่? การเปลี่ยนแปลงด้วยตนเองจะหายไป',
@@ -2361,7 +2360,6 @@ sub Data {
         'in' => 'ใน',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2372,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'มากขึ้น',
+        'No Data Available.' => '',
         'Available Columns' => 'คอลัมน์ที่พร้อมใช้งาน',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'คอลัมน์ที่มองเห็นได้ (จัดเรียงโดยการลากและวาง)',
@@ -3014,12 +3013,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'ไม่พร้อมใช้งาน JavaScript',
-        'Step %s' => 'ขั้นตอน %s',
         'License' => 'ใบอนุญาต',
         'Database Settings' => 'การตั้งค่าฐานข้อมูล',
         'General Specifications and Mail Settings' => 'คุณสมบัติทั่วไปและการตั้งค่าเมล์',
         'Finish' => 'เสร็จ',
         'Welcome to %s' => 'ยินดีต้อนรับสู่ %s',
+        'Address' => 'ที่อยู่',
         'Phone' => 'โทรศัพท์',
         'Web site' => 'เว็บไซต์',
         'Community' => '',
@@ -3050,6 +3049,7 @@ sub Data {
         'Password for inbound mail.' => 'รหัสสำหรับผ่านอีเมลขาเข้า',
         'Result of mail configuration check' => 'ผลของการตรวจสอบการตั้งค่าอีเมล',
         'Check mail configuration' => 'ตรวจสอบการตั้งค่าอีเมล',
+        'or' => 'หรือ',
         'Skip this step' => 'ข้ามขั้นตอนนี้',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3438,7 +3438,6 @@ sub Data {
         'Valid' => 'ถูกต้อง',
         'Mr.' => 'นาย',
         'Mrs.' => 'นาง',
-        'Address' => 'ที่อยู่',
         'View system log messages.' => 'ดูข้อความเข้าสู่ระบบ',
         'Edit the system configuration settings.' => 'แก้ไขการตั้งค่าการกำหนดค่าระบบ',
         'Update and extend your system with software packages.' => 'ปรับปรุงและขยายระบบของคุณด้วยซอฟแวร์',

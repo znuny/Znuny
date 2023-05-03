@@ -4434,7 +4434,7 @@ msgstr "Poista paketti"
 msgid "Do you really want to uninstall this package?"
 msgstr "Haluatko varmasti poistaa paketin asennuksen?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "tai"
 
@@ -9970,7 +9970,7 @@ msgstr "Mr."
 msgid "Mrs."
 msgstr "Mrs."
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr ""
 

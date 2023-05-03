@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.00264331736329093;
+    $Self->{Completeness}        = 0.00264375413086583;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1487,7 +1487,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '',
         'Do you really want to uninstall this package?' => '',
-        'or' => '',
         'Reinstall package' => '',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -2364,7 +2363,6 @@ sub Data {
         'in' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2377,6 +2375,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3017,12 +3016,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '',
-        'Step %s' => '',
         'License' => '',
         'Database Settings' => '',
         'General Specifications and Mail Settings' => '',
         'Finish' => '',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => '',
         'Web site' => '',
         'Community' => '',
@@ -3053,6 +3052,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => '',
         'Check mail configuration' => '',
+        'or' => '',
         'Skip this step' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3441,7 +3441,6 @@ sub Data {
         'Valid' => '',
         'Mr.' => '',
         'Mrs.' => '',
-        'Address' => '',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => '',
         'Update and extend your system with software packages.' => '',

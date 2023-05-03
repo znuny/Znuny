@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.147695357673881;
+    $Self->{Completeness}        = 0.147719762062128;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1480,7 +1480,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '',
         'Do you really want to uninstall this package?' => 'Bạn có thực sự muốn gỡ cài đặt gói này?',
-        'or' => 'hoặc',
         'Reinstall package' => '',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -2357,7 +2356,6 @@ sub Data {
         'in' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2370,6 +2368,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'hơn',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3010,12 +3009,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '',
-        'Step %s' => '',
         'License' => 'Giấy phép',
         'Database Settings' => '',
         'General Specifications and Mail Settings' => '',
         'Finish' => 'Kết thúc',
         'Welcome to %s' => '',
+        'Address' => 'Địa chỉ',
         'Phone' => 'Điện thoại',
         'Web site' => '',
         'Community' => '',
@@ -3046,6 +3045,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => '',
         'Check mail configuration' => '',
+        'or' => 'hoặc',
         'Skip this step' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3434,7 +3434,6 @@ sub Data {
         'Valid' => 'Hợp lệ',
         'Mr.' => 'Ông',
         'Mrs.' => 'Bà',
-        'Address' => 'Địa chỉ',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Chỉnh sửa các thiết lập cấu hình hệ thống',
         'Update and extend your system with software packages.' => '',

@@ -4434,7 +4434,7 @@ msgstr "Desinstalar paquete"
 msgid "Do you really want to uninstall this package?"
 msgstr "¿Está seguro de que desea desinstalar este paquete?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "o"
 
@@ -9970,7 +9970,7 @@ msgstr "Sr."
 msgid "Mrs."
 msgstr "Sra."
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Dirección"
 

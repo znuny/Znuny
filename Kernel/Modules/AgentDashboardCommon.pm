@@ -861,6 +861,12 @@ sub Run {
         },
     );
 
+    if ( !$Param{ActiveContentLargeWidgets} || $Param{ActiveContentLargeWidgets} == 0 ) {
+        $LayoutObject->Block(
+            Name => 'NoActiveLargeWidgets',
+        );
+    }
+
     # send data to JS
     $LayoutObject->AddJSData(
         Key   => 'ContainerNames',

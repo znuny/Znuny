@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.258879894267305;
+    $Self->{Completeness}        = 0.258757435558493;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1484,7 +1484,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'संकुल जिनकी स्थापना रद्द हॊ गयी है',
         'Do you really want to uninstall this package?' => 'क्या आप वास्तव में इस संकुल की स्थापना रद्द करना चाहते हैं?',
-        'or' => 'या',
         'Reinstall package' => 'संकुल की पुनर्स्थापना',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'क्या आप वास्तव में इस संकुल की पुनर्स्थापना करना चाहते हैं?सभी हस्तचालित परिवर्तन लुप्त हो जाएंगे।',
@@ -2361,7 +2360,6 @@ sub Data {
         'in' => 'में',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2372,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'अधिक',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3014,12 +3013,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'जावास्क्रिप्ट उपलब्ध नहीं है।',
-        'Step %s' => 'चरण %s',
         'License' => 'स्वच्छंदता',
         'Database Settings' => 'आंकड़ाकोष व्यवस्थाऐं',
         'General Specifications and Mail Settings' => 'सामान्य निर्दिष्टीकरण और मेल व्यवस्थाऐं',
         'Finish' => 'खत्म',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'फोन',
         'Web site' => 'वेबसाइट',
         'Community' => '',
@@ -3050,6 +3049,7 @@ sub Data {
         'Password for inbound mail.' => 'इनबाउंड मेल के लिए कूटशब्द।',
         'Result of mail configuration check' => 'मेल विन्यास की जाँच के नतीजे',
         'Check mail configuration' => 'मेल विन्यास की जाँच करें',
+        'or' => 'या',
         'Skip this step' => 'यह चरण छोड़ें',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3438,7 +3438,6 @@ sub Data {
         'Valid' => 'वैध',
         'Mr.' => 'श्रीमान',
         'Mrs.' => 'श्रीमती',
-        'Address' => '',
         'View system log messages.' => 'प्रणाली अभिलेख संदेशों को देखें।',
         'Edit the system configuration settings.' => 'प्रणाली विन्यास व्यवस्थाऐं संपादित करें।',
         'Update and extend your system with software packages.' => 'सॉफ्टवेयर संकुल के साथ आपकी प्रणाली अद्यतन और विस्तार करें।',

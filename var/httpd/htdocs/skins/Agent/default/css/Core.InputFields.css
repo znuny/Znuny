@@ -1095,6 +1095,26 @@ input[type="radio"].RadioRound:checked {
     border: var(--border-width-md) var(--border-solid) var(--success-color);
 }
 
+input[type="radio"] + label, 
+input[type="radio"].RadioRound + label {
+    cursor: pointer;
+}
+
+input[type="radio"][disabled] + label, 
+input[type="radio"][disabled].RadioRound + label {
+    color: var(--disabled-text);
+    cursor: default;
+}
+
+input[type="radio"][disabled], 
+input[type="radio"][disabled].RadioRound,
+input[type="radio"][disabled]:checked,
+input[type="radio"][disabled].RadioRound:checked {
+    background: var(--disabled);
+    border-color: var(--disabled-input);
+    cursor: not-allowed;
+}
+
 input[type="radio"]::before,
 input[type="radio"].RadioRound::before {
     content: "";
@@ -1114,7 +1134,9 @@ input[type="radio"].RadioRound:checked::before {
 input[type="radio"]::after,
 input[type="radio"]:checked::after,
 input[type="radio"].RadioRound::after,
-input[type="radio"].RadioRound:checked::after {
+input[type="radio"].RadioRound:checked::after,
+input[type="radio"][disabled]::before,
+input[type="radio"][disabled].RadioRound::before {
     display: none;
 }
 

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.332231951098629;
+    $Self->{Completeness}        = 0.33212161269002;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1484,7 +1484,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Avinstallera paket',
         'Do you really want to uninstall this package?' => 'Vill du verkligen avinstallera detta paket?',
-        'or' => 'eller',
         'Reinstall package' => 'Installera om paket',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Vill du verkligen ominstallera det här paketet? Eventuella manuella ändringar kommer försvinna.',
@@ -2361,7 +2360,6 @@ sub Data {
         'in' => 'i',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2372,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'mer',
+        'No Data Available.' => '',
         'Available Columns' => 'Tillgängliga kolumner',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Synliga kolumner (sortera med dra & släpp)',
@@ -3014,12 +3013,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'Javascript är avstängt',
-        'Step %s' => 'Steg %s',
         'License' => 'Licens',
         'Database Settings' => 'Databasinställningar',
         'General Specifications and Mail Settings' => 'E-postinställningar och andra inställningar',
         'Finish' => 'Slut',
         'Welcome to %s' => 'Välkommen till %s',
+        'Address' => 'Adress',
         'Phone' => 'Telefon',
         'Web site' => 'Webbplats',
         'Community' => '',
@@ -3050,6 +3049,7 @@ sub Data {
         'Password for inbound mail.' => 'Lösenord för inkommande e-post.',
         'Result of mail configuration check' => 'Resultat av e-postkonfigurationskontrollen',
         'Check mail configuration' => 'Kontrollera e-postkonfigurationen',
+        'or' => 'eller',
         'Skip this step' => 'Hoppa över detta steg',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3438,7 +3438,6 @@ sub Data {
         'Valid' => 'Giltigt',
         'Mr.' => 'Herr',
         'Mrs.' => 'Fru',
-        'Address' => 'Adress',
         'View system log messages.' => 'Visa systemlogg-meddelanden.',
         'Edit the system configuration settings.' => 'Redigera systemkonfiguration.',
         'Update and extend your system with software packages.' => 'Utöka Znuny-installationen med ytterligare programpaket.',

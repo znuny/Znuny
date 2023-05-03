@@ -4434,7 +4434,7 @@ msgstr "buang pakej"
 msgid "Do you really want to uninstall this package?"
 msgstr "Adakah anda benar-benar mahu untuk memadam pakej ini?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "atau"
 
@@ -9970,7 +9970,7 @@ msgstr "Encik"
 msgid "Mrs."
 msgstr "Puan"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Alamat"
 

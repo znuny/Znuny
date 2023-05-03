@@ -59,7 +59,7 @@
         <span>[% Translate("Cancel") | html %]</span>
     </button>
 
-    <button id="RecipientSelect" class="Primary CallForAction btn-main btn-primary btn-width-xl" value="Confirm Selection">
+    <button id="RecipientSelect" class="Primary CallForAction btn-main btn-primary btn-width-xxl" value="Confirm Selection">
         <span>[% Translate("Add selected customer user to") | html %]</span>
     </button>
 </div>

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.901040806211796;
+    $Self->{Completeness}        = 0.90102445472571;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1481,7 +1481,6 @@ sub Data {
         'Uninstall Package' => 'Деинсталирај пакет',
         'Uninstall package' => 'Деинсталирај пакет',
         'Do you really want to uninstall this package?' => 'Да ли стварно желите да деинсталирате овај пакет?',
-        'or' => 'или',
         'Reinstall package' => 'Инсталирај поново пакет',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Да ли стварно желите да поново инсталирате овај пакет? Све ручне промене ће бити изгубљене.',
@@ -2358,7 +2357,6 @@ sub Data {
         'in' => 'у',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => 'Нема информација.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2369,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'још',
+        'No Data Available.' => 'Нема информација.',
         'Available Columns' => 'Расположиве колоне',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Видљиве колоне (редослед према превуци и пусти)',
@@ -3011,12 +3010,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript nije dostupan.',
-        'Step %s' => 'Корак %s',
         'License' => 'Лиценца',
         'Database Settings' => 'Подешавање базе података',
         'General Specifications and Mail Settings' => 'Опште спецификације и подешавање поште',
         'Finish' => 'Заврши',
         'Welcome to %s' => 'Добродошли у %s',
+        'Address' => 'Адреса',
         'Phone' => 'Позив',
         'Web site' => 'Веб сајт',
         'Community' => '',
@@ -3047,6 +3046,7 @@ sub Data {
         'Password for inbound mail.' => 'Лозинка за долазну пошту.',
         'Result of mail configuration check' => 'Резултат провере подешавања поште',
         'Check mail configuration' => 'Провери конфигурацију мејла',
+        'or' => 'или',
         'Skip this step' => 'Прескочи овај корак',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3435,6 @@ sub Data {
         'Valid' => 'Важећи',
         'Mr.' => 'Г-дин',
         'Mrs.' => 'Г-ђа',
-        'Address' => 'Адреса',
         'View system log messages.' => 'Преглед порука системског лога.',
         'Edit the system configuration settings.' => 'Уреди подешавања системске конфигурације.',
         'Update and extend your system with software packages.' => 'Ажурирај и надогради систем софтверским пакетима.',

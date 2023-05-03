@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.840079299520899;
+    $Self->{Completeness}        = 0.840052875082617;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1493,7 +1493,6 @@ sub Data {
         'Uninstall Package' => 'Деинсталлировать пакет',
         'Uninstall package' => 'Деинсталлировать пакет',
         'Do you really want to uninstall this package?' => 'Удалить этот пакет?',
-        'or' => 'или',
         'Reinstall package' => 'Переустановить пакет',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Вы действительно хотите переустановить этот пакет? Все ручные изменения будут потеряны.',
@@ -2370,7 +2369,6 @@ sub Data {
         'in' => 'в',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => 'Данные недоступны.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2383,6 +2381,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'далее',
+        'No Data Available.' => 'Данные недоступны.',
         'Available Columns' => 'Колонки, доступные для отображения',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Отображаемые (порядок устанавливается перетаскиванием)',
@@ -3023,12 +3022,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript недоступен',
-        'Step %s' => 'Шаг %s',
         'License' => 'Лицензия',
         'Database Settings' => 'Настройки базы данных',
         'General Specifications and Mail Settings' => 'Общие указания и настройки почты',
         'Finish' => 'Закончить',
         'Welcome to %s' => 'Добро пожаловать в %s',
+        'Address' => 'Адрес',
         'Phone' => 'Телефон',
         'Web site' => 'Веб-сайт',
         'Community' => '',
@@ -3059,6 +3058,7 @@ sub Data {
         'Password for inbound mail.' => 'Пароль для входящей почты.',
         'Result of mail configuration check' => 'Результаты проверки настроек почты',
         'Check mail configuration' => 'Проверить настройки почты',
+        'or' => 'или',
         'Skip this step' => 'Пропустить этот шаг',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3447,7 +3447,6 @@ sub Data {
         'Valid' => 'Действительность',
         'Mr.' => 'Г-н',
         'Mrs.' => 'Г-жа',
-        'Address' => 'Адрес',
         'View system log messages.' => 'Просмотр системных сообщений.',
         'Edit the system configuration settings.' => 'Редактировать настройки конфигурации системы',
         'Update and extend your system with software packages.' => 'Обновление и расширение системы с помощью программных пакетов.',

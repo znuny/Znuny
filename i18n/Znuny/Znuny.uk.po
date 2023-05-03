@@ -4434,7 +4434,7 @@ msgstr "Деінсталювати пакет"
 msgid "Do you really want to uninstall this package?"
 msgstr "Вилучити цей пакет?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "або"
 
@@ -9970,7 +9970,7 @@ msgstr "пан"
 msgid "Mrs."
 msgstr "пані"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Адреса"
 

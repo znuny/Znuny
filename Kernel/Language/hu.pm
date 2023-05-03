@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.904675367586321;
+    $Self->{Completeness}        = 0.904659616655651;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1487,7 +1487,6 @@ sub Data {
         'Uninstall Package' => 'Csomag eltávolítása',
         'Uninstall package' => 'Csomag eltávolítása',
         'Do you really want to uninstall this package?' => 'Valóban el szeretné távolítani ezt a csomagot?',
-        'or' => 'vagy',
         'Reinstall package' => 'Csomag újratelepítése',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Valóban újra szeretné telepíteni ezt a csomagot? Minden kézi változtatás el fog veszni.',
@@ -2364,7 +2363,6 @@ sub Data {
         'in' => 'ekkor:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => 'Nem érhető el adat.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2377,6 +2375,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'tovább',
+        'No Data Available.' => 'Nem érhető el adat.',
         'Available Columns' => 'Elérhető oszlopok',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Látható oszlopok (rendezés fogd és vidd módon)',
@@ -3017,12 +3016,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript nem érhető el',
-        'Step %s' => '%s. lépés',
         'License' => 'Licenc',
         'Database Settings' => 'Adatbázis-beállítások',
         'General Specifications and Mail Settings' => 'Általános specifikációk és levelezési beállítások',
         'Finish' => 'Befejezés',
         'Welcome to %s' => 'Üdvözli a(z) %s',
+        'Address' => 'Cím',
         'Phone' => 'Telefon',
         'Web site' => 'Weboldal',
         'Community' => '',
@@ -3053,6 +3052,7 @@ sub Data {
         'Password for inbound mail.' => 'Jelszó a bejövő levélhez.',
         'Result of mail configuration check' => 'A levélbeállítás-ellenőrzés eredménye',
         'Check mail configuration' => 'Levélbeállítás ellenőrzése',
+        'or' => 'vagy',
         'Skip this step' => 'Lépés kihagyása',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3441,7 +3441,6 @@ sub Data {
         'Valid' => 'Érvényes',
         'Mr.' => 'Úr',
         'Mrs.' => 'Úrhölgy',
-        'Address' => 'Cím',
         'View system log messages.' => 'Rendszernapló üzenetek megtekintése.',
         'Edit the system configuration settings.' => 'A rendszer konfigurációs beállításainak szerkesztése.',
         'Update and extend your system with software packages.' => 'A rendszer frissítése vagy kibővítése szoftvercsomagokkal.',

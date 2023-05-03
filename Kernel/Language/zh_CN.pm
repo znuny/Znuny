@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.904675367586321;
+    $Self->{Completeness}        = 0.904659616655651;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1488,7 +1488,6 @@ sub Data {
         'Uninstall Package' => '卸载软件包',
         'Uninstall package' => '卸载软件包',
         'Do you really want to uninstall this package?' => '是否确认卸载该软件包?',
-        'or' => 'or（或）',
         'Reinstall package' => '重新安装软件包',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '您真的想要重新安装该软包吗? 所有该模块的手工设置将丢失.',
@@ -2365,7 +2364,6 @@ sub Data {
         'in' => '之内',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '没有可用数据。',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2378,6 +2376,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '更多',
+        'No Data Available.' => '没有可用数据。',
         'Available Columns' => '可用的字段',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '显示的字段(可通过拖放调整顺序)',
@@ -3018,12 +3017,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript没有启用',
-        'Step %s' => '第%s步',
         'License' => '许可证',
         'Database Settings' => '数据库设置',
         'General Specifications and Mail Settings' => '一般设定和邮件配置',
         'Finish' => '完成',
         'Welcome to %s' => '欢迎使用%s',
+        'Address' => '地址',
         'Phone' => '电话',
         'Web site' => '网址',
         'Community' => '',
@@ -3054,6 +3053,7 @@ sub Data {
         'Password for inbound mail.' => '接收邮件密码。',
         'Result of mail configuration check' => '邮件配置检查结果',
         'Check mail configuration' => '检查邮件配置',
+        'or' => 'or（或）',
         'Skip this step' => '跳过这一步',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3442,7 +3442,6 @@ sub Data {
         'Valid' => '有效',
         'Mr.' => '先生',
         'Mrs.' => '女士',
-        'Address' => '地址',
         'View system log messages.' => '查看系统日志信息。',
         'Edit the system configuration settings.' => '编辑系统配置。',
         'Update and extend your system with software packages.' => '更新或安装系统的软件包或模块。',

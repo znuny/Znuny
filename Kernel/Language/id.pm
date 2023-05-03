@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.611101932925822;
+    $Self->{Completeness}        = 0.611037673496365;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1481,7 +1481,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Uninstal paket',
         'Do you really want to uninstall this package?' => 'Apakah anda ingin menguninstal paket ini?',
-        'or' => 'atau',
         'Reinstall package' => 'Instal ulang paket',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Apakah anda ingin menginstal ulang paket ini? Semua perubahan manual akan hilang.',
@@ -2360,7 +2359,6 @@ bin/znuny.Daemon.pl status\').',
         'in' => 'Masuk',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2373,6 +2371,7 @@ bin/znuny.Daemon.pl status\').',
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'Lebih',
+        'No Data Available.' => '',
         'Available Columns' => 'Kolom tersedia',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Kolom yang terlihat (order dengan drag & drop)',
@@ -3013,12 +3012,12 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript tidak tersedia',
-        'Step %s' => 'Langkah %s',
         'License' => 'Lisensi',
         'Database Settings' => 'Pengaturan database',
         'General Specifications and Mail Settings' => 'Spesifikasi umum dan Pengaturan Surat',
         'Finish' => 'Selesei',
         'Welcome to %s' => 'Selamat datang di %s',
+        'Address' => 'Alamat',
         'Phone' => 'Telepon',
         'Web site' => 'Website',
         'Community' => '',
@@ -3049,6 +3048,7 @@ bin/znuny.Daemon.pl status\').',
         'Password for inbound mail.' => 'Kata sandi untuk surat yang masuk',
         'Result of mail configuration check' => 'Hasil dari pengintaian konfigurasi surat',
         'Check mail configuration' => 'Pengecekan konfigurasi surat',
+        'or' => 'atau',
         'Skip this step' => 'Lewatkan langkah ini',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3437,7 +3437,6 @@ bin/znuny.Daemon.pl status\').',
         'Valid' => 'Valid',
         'Mr.' => 'Tuan.',
         'Mrs.' => 'Nyonya.',
-        'Address' => 'Alamat',
         'View system log messages.' => 'Melihat pesan log sistem.',
         'Edit the system configuration settings.' => 'Ubah pengaturan konfigurasi sistem.',
         'Update and extend your system with software packages.' => 'Memperbarui dan memperluas sistem Anda dengan paket perangkat lunak.',

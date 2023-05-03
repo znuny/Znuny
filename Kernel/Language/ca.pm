@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.207335205683132;
+    $Self->{Completeness}        = 0.207204230006609;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1482,7 +1482,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Desinstal·lar paquet',
         'Do you really want to uninstall this package?' => 'Segur que desitja desinstal·lar aquest paquet?',
-        'or' => 'o',
         'Reinstall package' => 'Tornar a instal·lar paquet',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'De debò vol tornar a instal·lar aquest paquet? Qualsevol canvi manual es perdrà.',
@@ -2359,7 +2358,6 @@ sub Data {
         'in' => 'en',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2372,6 +2370,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'més',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3012,12 +3011,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'Javascript no està disponible',
-        'Step %s' => 'Pas %s',
         'License' => 'Llicència',
         'Database Settings' => 'Configuració de la base de dades',
         'General Specifications and Mail Settings' => 'Especificacions generals i de correu',
         'Finish' => 'Finalitzar',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'Telèfono',
         'Web site' => 'Web',
         'Community' => '',
@@ -3048,6 +3047,7 @@ sub Data {
         'Password for inbound mail.' => 'Contrasenya per al correu entrant.',
         'Result of mail configuration check' => 'Resultat de comprovar la configuració de correu',
         'Check mail configuration' => 'Comprovar la configuració de correu',
+        'or' => 'o',
         'Skip this step' => 'Saltar aquest pas',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3436,7 +3436,6 @@ sub Data {
         'Valid' => 'Vàlid',
         'Mr.' => 'Sr.',
         'Mrs.' => 'Sra.',
-        'Address' => '',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Editar els paràmetres de configuració del sistema.',
         'Update and extend your system with software packages.' => '',

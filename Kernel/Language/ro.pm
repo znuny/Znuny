@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.29010408062118;
+    $Self->{Completeness}        = 0.290152015862525;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1481,7 +1481,6 @@ sub Data {
         'Uninstall Package' => 'Dezinstalare pachet',
         'Uninstall package' => 'Dezinstalare pachet',
         'Do you really want to uninstall this package?' => 'Sunteți sigur că doriți să dezinstalați acest pachet?',
-        'or' => 'sau',
         'Reinstall package' => 'Reinstalare pachet',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Sunteți sigur că doriți să reinstalați acest pachet? Modificările făcute manual se vor pierde.',
@@ -2358,7 +2357,6 @@ sub Data {
         'in' => 'in',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2369,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'mai mult',
+        'No Data Available.' => '',
         'Available Columns' => 'Coloane disponibile',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Coloane vizibile (ordonează-le trăgându-le cu mouse-ul)',
@@ -3011,12 +3010,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '',
-        'Step %s' => '',
         'License' => 'Licență',
         'Database Settings' => '',
         'General Specifications and Mail Settings' => '',
         'Finish' => '',
         'Welcome to %s' => '',
+        'Address' => 'Adresa',
         'Phone' => 'Telefon',
         'Web site' => '',
         'Community' => '',
@@ -3047,6 +3046,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => '',
         'Check mail configuration' => '',
+        'or' => 'sau',
         'Skip this step' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3435,6 @@ sub Data {
         'Valid' => 'Valid',
         'Mr.' => 'Dl.',
         'Mrs.' => 'Dna.',
-        'Address' => 'Adresa',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Editarea setărilor de configurare a sistemului.',
         'Update and extend your system with software packages.' => '',

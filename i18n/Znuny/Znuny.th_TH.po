@@ -4434,7 +4434,7 @@ msgstr "ยกเลิกการติดตั้งแพคเกจ"
 msgid "Do you really want to uninstall this package?"
 msgstr "คุณต้องการยกเลิกการติดตั้งแพคเกจนี้หรือไม่?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "หรือ"
 
@@ -9973,7 +9973,7 @@ msgstr "นาย"
 msgid "Mrs."
 msgstr "นาง"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "ที่อยู่"
 

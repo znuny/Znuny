@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.347596233272757;
+    $Self->{Completeness}        = 0.347488433575677;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1483,7 +1483,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Afinstaller pakke',
         'Do you really want to uninstall this package?' => 'Er du sikker på, du ønsker at afinstallere denne pakke?',
-        'or' => 'eller',
         'Reinstall package' => 'Geninstaller pakke',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Vil du virkelig geninstallere denne pakke? Alle manuelle ændringer vil gå tabt.',
@@ -2360,7 +2359,6 @@ sub Data {
         'in' => 'om',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2373,6 +2371,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'mere',
+        'No Data Available.' => '',
         'Available Columns' => 'Tilgængelige kolonner',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Synlige kolonner (flyt dem med musen)',
@@ -3013,12 +3012,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript ikke tilgængeligt',
-        'Step %s' => 'Skridt %s',
         'License' => 'Licens',
         'Database Settings' => 'Database-indstillinger',
         'General Specifications and Mail Settings' => 'Generelle specifikationer og mail-indstillinger',
         'Finish' => 'Færdig',
         'Welcome to %s' => 'Velkommen til %s',
+        'Address' => 'Adresse',
         'Phone' => 'Telefon',
         'Web site' => 'Webside',
         'Community' => '',
@@ -3049,6 +3048,7 @@ sub Data {
         'Password for inbound mail.' => 'Password for indgående mail.',
         'Result of mail configuration check' => 'Resultat af konfigurationstjek af indgående mail',
         'Check mail configuration' => 'Tjek mail-konfiguration',
+        'or' => 'eller',
         'Skip this step' => 'Spring dette trin over',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3437,7 +3437,6 @@ sub Data {
         'Valid' => 'Gyldig',
         'Mr.' => 'Hr.',
         'Mrs.' => 'Fru',
-        'Address' => 'Adresse',
         'View system log messages.' => 'Se systemets log',
         'Edit the system configuration settings.' => 'Rediger systemets konfiguration',
         'Update and extend your system with software packages.' => 'Opdater ',

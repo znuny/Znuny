@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-04-04 07:25+0000\n"
+"POT-Creation-Date: 2023-05-02 10:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4443,10 +4443,6 @@ msgid "Do you really want to uninstall this package?"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "or"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Reinstall package"
 msgstr ""
 
@@ -7035,10 +7031,6 @@ msgid "in"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-msgid "No Data Available."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Show or hide the content"
 msgstr ""
 
@@ -7084,6 +7076,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "more"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid "No Data Available."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
@@ -8891,10 +8887,6 @@ msgid "JavaScript not available"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
-msgid "Step %s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "License"
 msgstr ""
 
@@ -8912,6 +8904,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Welcome to %s"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
+msgid "Address"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
@@ -9024,6 +9020,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "Check mail configuration"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
+msgid "or"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
@@ -9976,10 +9976,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Config/Defaults.pm
 msgid "Mrs."
-msgstr ""
-
-#. Perl Module: Kernel/Config/Defaults.pm
-msgid "Address"
 msgstr ""
 
 #. Perl Module: Kernel/Config/Defaults.pm

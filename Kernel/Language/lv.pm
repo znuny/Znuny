@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.156120931769371;
+    $Self->{Completeness}        = 0.156146728354263;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1481,7 +1481,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '',
         'Do you really want to uninstall this package?' => 'Vai tiešām vēlaties noņemt šo pakotni?',
-        'or' => 'vai',
         'Reinstall package' => '',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -2358,7 +2357,6 @@ sub Data {
         'in' => 'iekšā',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2369,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'vēl',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3011,12 +3010,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '',
-        'Step %s' => '',
         'License' => 'Licence',
         'Database Settings' => '',
         'General Specifications and Mail Settings' => '',
         'Finish' => 'Beigas',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'Telefons',
         'Web site' => '',
         'Community' => '',
@@ -3047,6 +3046,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => '',
         'Check mail configuration' => '',
+        'or' => 'vai',
         'Skip this step' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3435,6 @@ sub Data {
         'Valid' => 'Vai derīgs?',
         'Mr.' => 'K-gs',
         'Mrs.' => 'K-dze',
-        'Address' => '',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Rediģēt sistēmas konfigurācijas iestatījumus.',
         'Update and extend your system with software packages.' => '',

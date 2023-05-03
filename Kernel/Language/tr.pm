@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.183545349413514;
+    $Self->{Completeness}        = 0.183410442828817;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1481,7 +1481,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Paketi kaldır',
         'Do you really want to uninstall this package?' => 'Gerçekten bu paketi kaldırmak istiyor musunuz?',
-        'or' => 'veya',
         'Reinstall package' => 'Paketi yeniden kur',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Gerçekten bu paketi yeniden kurmak istiyormusunuz? El ile yaptığınız tüm değişiklikler kaybolacak.',
@@ -2358,7 +2357,6 @@ sub Data {
         'in' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2369,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'daha fazla',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -3011,12 +3010,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript kullanılamıyor',
-        'Step %s' => '%s. adım',
         'License' => 'Lisans',
         'Database Settings' => 'Veritabanı ayarları',
         'General Specifications and Mail Settings' => 'Genel Özellikler ve Posta Ayarları',
         'Finish' => 'Bitir',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'Telefon',
         'Web site' => 'Web sitesi',
         'Community' => '',
@@ -3047,6 +3046,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => '',
         'Check mail configuration' => '',
+        'or' => 'veya',
         'Skip this step' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3435,6 @@ sub Data {
         'Valid' => 'Geçerli',
         'Mr.' => 'Bay',
         'Mrs.' => 'Bayan',
-        'Address' => '',
         'View system log messages.' => 'Sistem logu mesajlarını görmek.',
         'Edit the system configuration settings.' => 'Sistem konfigürasyon ayarlarını düzenle',
         'Update and extend your system with software packages.' => 'Sisteminizi yazılım paketleriyle güncelleyin ve genişletin.',

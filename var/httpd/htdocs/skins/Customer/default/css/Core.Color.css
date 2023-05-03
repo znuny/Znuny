@@ -43,7 +43,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     --mail-outgoing-color: #ffeec6;
 
     --disabled: var(--gray-light-semi);
-    --disabled-text: var(--gray-darker);
+    --disabled-text: var(--gray-medium);
     --disabled-input: var(--gray-light-semi);
 
     --bread-crumb: var(--gray-dark-semi);

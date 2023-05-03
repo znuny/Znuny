@@ -15,10 +15,6 @@
             <li class="DashboardWidgetExpandListItem" data-widget-name="All">
                 <a class="[% Data.ClassDashboardWidgetExpandAll | html %]">All</a>
             </li>
-            [% ELSE %]
-            <li>
-                [% Translate('No Data Available.') | html %]
-            </li>
             [% END %]
 [% RenderBlockEnd("DashboardWidgetExpandContent") %]
 [% RenderBlockStart("DashboardWidgetExpandListItem") %]
@@ -59,12 +55,11 @@
                     <ul class="active-widgets-list">
 [% RenderBlockStart("ContentSettings") %]
                         <li data-widget-name="[% Data.Name | html %]">
+                            <a class="icon-hover" data-widget-remove data-widget-name="[% Data.Name | html %]" data-widget-title="[% Translate(Data.Title) | html %]"><i class="fa fa-close"></i></a>
                             <input type="checkbox" name="Backend" id="Settings[% Data.Name | html %]" class="active-widget-checkbox"
                             value="[% Data.Name | html %]" data-widget-name="[% Data.Name | html %]" data-widget-title="[% Translate(Data.Title) | html %]" [% Data.Checked %] [% Data.Readonly %] >
 
                             <span title="[% Translate(Data.Description) | html %]">[% Translate(Data.Title) | html %]</span>
-
-                            <a class="icon-hover" data-widget-remove data-widget-name="[% Data.Name | html %]" data-widget-title="[% Translate(Data.Title) | html %]"><i class="fa fa-close"></i></a>
                         </li>
 [% RenderBlockEnd("ContentSettings") %]
                     </ul>
@@ -220,6 +215,11 @@
             </ul>
         </div>
 [% RenderBlockEnd("MainMenu") %]
+[% RenderBlockStart("NoActiveLargeWidgets") %]
+        <div class="NoActiveWidgets">
+            [% Translate('No Data Available.') | html %]
+        </div>
+[% RenderBlockEnd("NoActiveLargeWidgets") %]
 [% RenderBlockStart("ContentLarge") %]
         <div class="WidgetSimple CanDrag Dashboard[% Data.NameClass | html %]" id="Dashboard[% Data.Name | html %]-box">
             <div class="Header">

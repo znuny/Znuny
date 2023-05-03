@@ -18,9 +18,28 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     padding: 0 0 8px;
 }
 
-#OverviewBody.Overview form.CustomerUserAddressBookForm {
+@media only screen and (max-width: 768px) {
+    .OverviewBox.CustomerUserAdressBook + #OverviewBody.TicketList.CustomerUserAdressBookList {
+        max-height: 73vh;
+    }
+
+    .OverviewBox.CustomerUserAdressBook {
+        gap: var(--gap-sm);
+    }
+}
+
+.OverviewBox.CustomerUserAdressBook + #OverviewBody.TicketList.CustomerUserAdressBookList {
+    max-height: 78vh;
+}
+
+/*#OverviewBody.Overview form.CustomerUserAddressBookForm {
     border-right: 0;
     border-left: 0;
+}*/
+
+.TicketList.CustomerUserAdressBookList form.CustomerUserAddressBookForm {
+    border-top: 0;
+    border: var(--border-width) var(--border-solid) var(--border-color);
 }
 
 .CustomerUserAdressBook .FieldExplanation {

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.439781926317528;
+    $Self->{Completeness}        = 0.439689358889623;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1484,7 +1484,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Futa kifurushi',
         'Do you really want to uninstall this package?' => 'Je unataka kufuta kifurushi hiki?',
-        'or' => 'Au',
         'Reinstall package' => 'Sakinisha kifurushi',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Je unahitaji kusakinisha kifurushi hiki? Mabaidliko yoyote ya mkono yatapotea.',
@@ -2361,7 +2360,6 @@ sub Data {
         'in' => 'Ndani',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2372,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'aidi',
+        'No Data Available.' => '',
         'Available Columns' => 'Safu wima zilizopo',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Safuwima zinazoonekana (kwa oda ya kokota na dondosha)',
@@ -3014,12 +3013,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript haipatikani',
-        'Step %s' => 'Hatua %s',
         'License' => 'Leseni',
         'Database Settings' => 'Mipangilio ya hifadhi data',
         'General Specifications and Mail Settings' => 'Ubainishi wa jumla na mipangilio ya barua pepe',
         'Finish' => 'Maliza',
         'Welcome to %s' => '',
+        'Address' => 'Anwani',
         'Phone' => 'Simu',
         'Web site' => 'Tovuti',
         'Community' => '',
@@ -3050,6 +3049,7 @@ sub Data {
         'Password for inbound mail.' => 'Neno la siri kwa ajili barua pepe zilifungwa ndani.',
         'Result of mail configuration check' => 'Matokeo ya maangalizi usanidi wa barua pepe',
         'Check mail configuration' => 'Angalia usanidi wa barua pepe',
+        'or' => 'Au',
         'Skip this step' => 'Ruka hatua hii',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3438,7 +3438,6 @@ sub Data {
         'Valid' => 'Halali',
         'Mr.' => 'Bwana',
         'Mrs.' => 'Bibi',
-        'Address' => 'Anwani',
         'View system log messages.' => 'Angalia ujumbe wa batli ya mfumo.',
         'Edit the system configuration settings.' => 'Hakiki mipangilio ya usanidishaji wa mfumo. ',
         'Update and extend your system with software packages.' => 'Sasisha na panua mfumo wako kwa vifurushi vya programu.',

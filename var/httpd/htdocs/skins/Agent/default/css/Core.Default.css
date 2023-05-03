@@ -62,8 +62,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     @media only screen and (max-width: 1024px) {
-        #AppWrapper {
-            padding-top: 48px;
+        /*#AppWrapper - using the AppWrapper was interfering with modals */
+        div#ToolBar {
+            padding-top: 49px;
         }
 
         .RealPopup #AppWrapper {
@@ -1253,15 +1254,18 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     iframe.TextOption.CustomerUserAddressBook {
-        width: 960px;
-        min-height: 65vh;
-        max-height: 80vh;
+        max-width: 960px;
+        width: 100%;
+        height: 65vh;
+        overflow: hidden;
+        /*max-height: 80vh;*/
         margin: 0; /* this serves to nullify the default 20px padding in every widget's .Content */
     }
 
     @media only screen and (max-width: 1024px) {
         iframe.TextOption.CustomerUserAddressBook {
             width: 100%;
+            height: 75vh;
         }
     }
 

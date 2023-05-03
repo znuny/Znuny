@@ -159,8 +159,8 @@
                                         [% Translate(Data.ValidIDs.item(TokenConfig.ValidID)) | html %]
                                     </td>
                                     <td>
-                                        <a class="CallForAction AsPopup PopupType_AdminOAuth2TokenManagement table-actions-button" href="[% TokenData.AuthorizationCodeRequestURL | html %]" title="[% Translate("Request new token") | html %]">
-                                            <span>[% Translate("Request new token") | html %]</span>
+                                        <a class="CallForAction AsPopup PopupType_AdminOAuth2TokenManagement table-actions-button table-icon-hover-md" href="[% TokenData.AuthorizationCodeRequestURL | html %]" title="[% Translate("Request new token") | html %]">
+                                            <i class="fa fa-refresh" title="[% Translate("Request new token") | html %]"></i>
                                         </a>
                                     </td>
                                     <td>

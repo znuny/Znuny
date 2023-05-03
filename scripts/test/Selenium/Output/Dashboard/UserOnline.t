@@ -78,7 +78,7 @@ $Selenium->RunTest(
         my $AgentsLink = $Selenium->find_element("//a[contains(\@id, \'UserOnlineAgent' )]");
         $Self->Is(
             $AgentsLink->get_text() // '',
-            'Agents (1)',
+            'AGENTS (1)',
             'Only one agent user accounted for'
         );
 
@@ -99,7 +99,7 @@ $Selenium->RunTest(
         my $CustomersLink = $Selenium->find_element("//a[contains(\@id, \'UserOnlineCustomer' )]");
         $Self->Is(
             $CustomersLink->get_text() // '',
-            'Customers (1)',
+            'CUSTOMERS (1)',
             'Only one customer user accounted for'
         );
 

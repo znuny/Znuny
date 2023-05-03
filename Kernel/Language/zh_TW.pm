@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.310259375516273;
+    $Self->{Completeness}        = 0.310145406477198;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1484,7 +1484,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '卸載軟件包',
         'Do you really want to uninstall this package?' => '是否確認卸載該軟件包?',
-        'or' => '在',
         'Reinstall package' => '重新安裝軟件包',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '您確定要重新安裝該軟包嗎? 所有該模塊的手工設置將丢失.',
@@ -2361,7 +2360,6 @@ sub Data {
         'in' => '之内',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2372,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '更多',
+        'No Data Available.' => '',
         'Available Columns' => '可選擇的字段',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '顯示的字段(通過拖拽可調整順序)',
@@ -3015,12 +3014,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript沒有啟用',
-        'Step %s' => '第 %s 步',
         'License' => '許可証',
         'Database Settings' => '數據庫設置',
         'General Specifications and Mail Settings' => '一般設定和郵件配置',
         'Finish' => '完成',
         'Welcome to %s' => '',
+        'Address' => '地址',
         'Phone' => '電話',
         'Web site' => '網址',
         'Community' => '',
@@ -3051,6 +3050,7 @@ sub Data {
         'Password for inbound mail.' => '接收郵件密碼',
         'Result of mail configuration check' => '郵件服務器配置檢查結果',
         'Check mail configuration' => '檢查郵件配置',
+        'or' => '在',
         'Skip this step' => '跳過這一步',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3439,7 +3439,6 @@ sub Data {
         'Valid' => '有效',
         'Mr.' => '先生',
         'Mrs.' => '女士',
-        'Address' => '地址',
         'View system log messages.' => '查看系統日誌信息',
         'Edit the system configuration settings.' => '編輯系統配置。',
         'Update and extend your system with software packages.' => '更新或安裝系統的軟件包或模塊.',

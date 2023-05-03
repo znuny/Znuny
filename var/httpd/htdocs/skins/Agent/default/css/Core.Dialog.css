@@ -177,8 +177,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     display: flex;
     flex-flow: row;
     justify-content: end;
-    padding: var(--padding-xl) 50px;
+    padding: var(--padding-xl) var(--padding-xxl);
     background: transparent;
+}
+
+.Dialog > .Content + .Footer.SaveButtons {
+    border-top: var(--border-width) var(--border-solid) var(--border-color);
 }
 
 .Dialog > .Footer.ContentFooter,
@@ -432,6 +436,7 @@ ul#Service .Header*/
 .modal-col1 > .SaveButtons,
 .modal-col2 > .SaveButtons {
     padding-top: var(--padding-sm);
+    border: 0;
 }
 
 .modal-col1 ul:first-child,

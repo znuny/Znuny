@@ -26,7 +26,7 @@
             <input type="hidden" name="TicketID" id="TicketID" value="[% Data.TicketID | html %]"/>
             <fieldset class="TableLike card">
 [% RenderBlockStart("ProcessList") %]
-            <div>
+            <div class="field-wrapper">
                 <label class="Mandatory" for="ProcessEntityID"><span class="Marker">*</span>[% Translate("Process") | html %]:</label>
                 <div class="Field">
                     [% Data.ProcessList %]
