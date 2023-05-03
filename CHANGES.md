@@ -28,12 +28,12 @@
  - 2022-11-21 Moved the additional buttons from Content 'Run()' area to Header 'Header()'. Added new Header() function. Kernel/Output/HTML/Dashboard/CustomerIDList.pm and Kernel/Output/HTML/Dashboard/CustomerUserList.pm
  - 2022-10-18 Added this SysConfig list of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them. (ColorPicker###Palette)
  - 2022-11-23 Mentions Widget - Changed the style of Mention Widget in TicketZoom.
- - 2022-10-21 Breadcrumbs - Moved all Breadcrumbs into the Content / ContentColumn <div> block.
+ - 2022-10-21 Breadcrumbs - Moved all Breadcrumbs into the Content / ContentColumn `<div>` block.
  - 2022-10-19 CustomerLogin - The login menu has been greatly simplified (HTML / JS).
  - 2022-10-18 Added ColorPicker for states and priorities. These attributes are now displayed in color as a pill.
  - 2022-10-18 Added Base module to add additional inline CSS.
  - 2022-10-13 Added a general ColorPicker function to LayoutObject.
- - 2022-10-10 Wrapper - Added additional <div> around a lot of fields to use flex technology.
+ - 2022-10-10 Wrapper - Added additional `<div>` around a lot of fields to use flex technology.
  - 2022-10-06 Button - The buttons have revised graphics.
  - 2022-10-04 Core.UI.Dialog DialogClass - Added new DialogClasses (modal-sm | modal-md | modal-lg)
  - 2022-09-06 New Activity module informs you directly via frontend.
@@ -2114,7 +2114,7 @@
  - 2016-06-27 Followup for bug#[12078](http://bugs.otrs.org/show_bug.cgi?id=12078) - Change wording for better translation, thanks to Balázs Úr.
  - 2016-06-24 Don't write error log entry on first LDAP user login, thanks to Pawel Boguslawski.
  - 2016-06-24 Fixed bug#[9000](http://bugs.otrs.org/show_bug.cgi?id=9000) - shm errors on OTRS server startup.
- - 2016-06-23 Fixed bug#[11981](http://bugs.otrs.org/show_bug.cgi?id=11981) - GenericTicketConnector ignoring "<ContentSearch>OR</ContentSearch>" in full text search.
+ - 2016-06-23 Fixed bug#[11981](http://bugs.otrs.org/show_bug.cgi?id=11981) - GenericTicketConnector ignoring `<ContentSearch>OR</ContentSearch>` in full text search.
 
 # 5.0.11 2016-06-28
  - 2016-08-03 Updated translations, thanks to all translators.
