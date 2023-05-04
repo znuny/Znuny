@@ -1,3 +1,6 @@
+# 7.0.5 2023-??-??
+ - 2023-05-04 Fixed CSS for custom logos. [#357](https://github.com/znuny/Znuny/issues/357)
+
 # 7.0.4 2023-05-03
  - 2023-05-03 GUI-Redesign changes - CSS, TT and JS.
  - 2023-04-24 Fixed HTML in template AgentAppointmentEdit that prevented correct creation of calendar entries.

@@ -130,7 +130,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     right: initial;
     width: 200px;
     height: 60px;
-    background: transparent url(../img/znuny-logo-black.svg) no-repeat;
+    background-color:  transparent;
+    background-repeat: no-repeat;
     background-size: auto;
     background-size: contain;
 }
