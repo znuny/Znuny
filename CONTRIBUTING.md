@@ -30,8 +30,8 @@ Have fun!
 
 
 ## Where do I find:
-  * The developer documentation https://doc.znuny.org/manual/developer/
-  * The documentation in general https://doc.znuny.org/manual/
+  * The developer documentation https://doc.znuny.org/znuny/developer/
+  * The documentation in general https://doc.znuny.org/znuny/
 
 
 
