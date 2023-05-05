@@ -137,7 +137,7 @@ sub GetConfig {
         # build HTML string
         my $StandardForwardsStrg = $LayoutObject->BuildSelection(
             Name         => 'ForwardTemplateID',
-            ID           => 'ForwardTemplateID',
+            ID           => 'ForwardTemplateID' . $Param{Article}->{ArticleID},
             Class        => 'Modernize Small',
             Data         => \@StandardForwardArray,
             PossibleNone => 1
@@ -151,7 +151,7 @@ sub GetConfig {
             Class                => 'AsPopup PopupType_TicketAction',
             Action               => 'AgentTicketForward',
             FormID               => 'Forward' . $Param{Article}->{ArticleID},
-            ForwardElementID     => 'ForwardTemplateID',
+            ForwardElementID     => 'ForwardTemplateID' . $Param{Article}->{ArticleID},
             Type                 => $Param{Type},
         };
     }

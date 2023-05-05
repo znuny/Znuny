@@ -1,3 +1,6 @@
+# 6.5.3 2023-??-??
+ - 2023-05-05 Fixed html element id of forward templates in AgentTicketZoom. [#351](https://github.com/znuny/Znuny/issues/351)
+
 # 6.5.2 2023-04-19
  - 2023-04-13 Activated information section and modal dialog for ICS calendar events in AgentTicketZoom view.
  - 2023-04-05 Fixed format of returned filename in function Kernel::System::Stats::StringAndTimestamp2Filename.
