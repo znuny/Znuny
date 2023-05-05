@@ -149,7 +149,7 @@ sub EditLabelRender {
         my $Class = $Param{ $Prefix . 'Class' } || '';
         my $Checked = '';
         if ($Used) {
-            $Checked = ' checked="checked"';
+            $Checked = " checked='checked'";
         }
 
         $HTMLString .= "<input type='checkbox' name='"

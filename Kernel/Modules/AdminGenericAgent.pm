@@ -392,11 +392,10 @@ sub Run {
         # Get field HTML.
         if ( $Widget eq 'Select' ) {
             $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
-                DynamicFieldConfig     => $DynamicFieldConfig,
-                Profile                => \%JobData,
-                LayoutObject           => $LayoutObject,
-                ConfirmationCheckboxes => 0,
-                Type                   => $Type,
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Profile            => \%JobData,
+                LayoutObject       => $LayoutObject,
+                Type               => $Type,
             );
         }
         elsif ( $Widget eq 'Update' ) {
@@ -1164,9 +1163,8 @@ sub _MaskUpdate {
                     Profile            => \%JobData,
                     DefaultValue =>
                         $Self->{Config}->{Defaults}->{DynamicField}->{ $DynamicFieldConfig->{Name} },
-                    LayoutObject           => $LayoutObject,
-                    ConfirmationCheckboxes => 1,
-                    Type                   => $Preference->{Type},
+                    LayoutObject => $LayoutObject,
+                    Type         => $Preference->{Type},
                 );
 
                 next PREFERENCE if !IsHashRefWithData($DynamicFieldHTML);

@@ -1056,11 +1056,10 @@ sub _Edit {
 
         # get field HTML
         my $DynamicFieldHTML = $BackendObject->SearchFieldRender(
-            DynamicFieldConfig     => $DynamicFieldConfig,
-            Profile                => $Param{DynamicFieldValues} || {},
-            LayoutObject           => $LayoutObject,
-            ConfirmationCheckboxes => 0,
-            UseLabelHints          => 0,
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Profile            => $Param{DynamicFieldValues} || {},
+            LayoutObject       => $LayoutObject,
+            UseLabelHints      => 0,
         );
 
         next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldHTML);

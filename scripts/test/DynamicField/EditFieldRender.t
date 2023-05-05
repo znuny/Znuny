@@ -1555,7 +1555,7 @@ EOF
 </select></div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' class='DynamicFieldText DateSelection MyClass' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' checked='checked' class='DynamicFieldText DateSelection MyClass' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -1717,7 +1717,7 @@ EOF
 </select></div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' class='DynamicFieldText DateSelection MyClass' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' checked='checked' class='DynamicFieldText DateSelection MyClass' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -1887,7 +1887,7 @@ EOF
 </select></div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_DateTimeFieldUsed' id='DynamicField_DateTimeFieldUsed' value='1' class='DynamicFieldText DateSelection MyClass' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_DateTimeFieldUsed' id='DynamicField_DateTimeFieldUsed' value='1' checked='checked' class='DynamicFieldText DateSelection MyClass' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -2056,7 +2056,7 @@ EOF
 </select></div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' class='DynamicFieldText DateSelection MyClass' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' checked='checked' class='DynamicFieldText DateSelection MyClass' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -2225,7 +2225,7 @@ EOF
 </select></div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' class='DynamicFieldText DateSelection MyClass' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' checked='checked' class='DynamicFieldText DateSelection MyClass' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -2393,7 +2393,7 @@ EOF
 </div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' class='DynamicFieldText DateSelection MyClass Validate_Required' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' class='Mandatory'><span class='Marker'>*</span>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' checked='checked' class='DynamicFieldText DateSelection MyClass Validate_Required' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' class='Mandatory'><span class='Marker'>*</span>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -2562,7 +2562,7 @@ EOF
 </div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' class='DynamicFieldText DateSelection MyClass ServerError' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' value='1' checked='checked' class='DynamicFieldText DateSelection MyClass ServerError' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used'>$DynamicFieldConfigs{DateTime}->{LabelEscaped}</label></div>"
 
         },
         Success => 1,
@@ -2640,7 +2640,7 @@ EOF
 </select></div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' checked='checked' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -2716,7 +2716,7 @@ EOF
 </select></div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' checked='checked' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -2797,7 +2797,7 @@ EOF
 </select></div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' checked='checked' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -2878,7 +2878,7 @@ EOF
 </select></div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' checked='checked' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -2961,7 +2961,7 @@ EOF
 </select></div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox\' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used\' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used\' value='1\' class='\' title='Check to activate this date\' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox\' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used\' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used\' value='1\' checked='checked\' class='\' title='Check to activate this date\' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -3043,7 +3043,7 @@ EOF
 </div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' class='Mandatory'><span class='Marker'>*</span>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' checked='checked' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' class='Mandatory'><span class='Marker'>*</span>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
@@ -3126,7 +3126,7 @@ EOF
 </div>
 EOF
             Label =>
-                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
+                "<div class='label-wrapper'><input type='checkbox' name='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' id='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used' value='1' checked='checked' class='' title='Check to activate this date' /><label id='LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used' for='DynamicField_$DynamicFieldConfigs{Date}->{Name}Used'>$DynamicFieldConfigs{Date}->{LabelEscaped}</label></div>"
         },
         Success => 1,
     },
