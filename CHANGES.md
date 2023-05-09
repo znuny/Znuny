@@ -1,4 +1,5 @@
 # 7.0.5 2023-??-??
+ - 2023-05-09 Fixed item color in AgentAppointmentCalendarOverview. [#411](https://github.com/znuny/Znuny/issues/411)
  - 2023-05-04 Fixed CSS for custom logos. [#357](https://github.com/znuny/Znuny/issues/357)
 
 # 7.0.4 2023-05-03
