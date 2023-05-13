@@ -3468,7 +3468,7 @@ You can log in via the following URL:
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="PreferencesGroups###PopupProfile" Required="0" Valid="1">
+    <Setting Name="PreferencesGroups###PopupProfile" Required="0" Valid="0">
         <Description Translatable="1">Defines the global users popup profile.</Description>
         <Navigation>Frontend::Agent::View::Preferences</Navigation>
         <Value>
