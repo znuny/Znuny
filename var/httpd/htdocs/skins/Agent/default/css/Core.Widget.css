@@ -2206,6 +2206,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         /*overflow: hidden;*/ /* overflow hidden will break the horizontal scroll */
     }
 
+    .WidgetSimple > .Content > h2,
+    .WidgetSimple > .Content > h1 {
+        padding: var(--padding-md);
+        padding-bottom: var(--padding-sm);
+    }
+
     .WidgetSimple > .Content.padding {
         padding: var(--padding-lg);
         display: flex;

@@ -1293,7 +1293,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     #AgentCustomerInformationCenterSearchForm,
     #AgentCustomerUserInformationCenterSearchForm,
     #AgentTicketCustomerIDSelection {
-        min-width: 760px;
+        /*min-width: 760px; - this was causing content overflow in smaller sized modals*/
         overflow-x: hidden;
     }
 

@@ -265,7 +265,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     padding: 0;
 }
 
-.Dialog .Content fieldset:not(#SearchAttributesHidden):not(.flex-row){
+.Dialog .Content fieldset:not(#SearchAttributesHidden):not(.flex-row):not(.Hidden){
     display: flex;
     flex-direction: column;
     gap: var(--gap-sm);

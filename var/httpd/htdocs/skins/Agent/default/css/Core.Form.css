@@ -1024,7 +1024,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     p.FieldExplanation:last-child,
-    div.WidgetSimple div.Content p:last-child:not(.ErrorBox):not(.SuccessBox):not(:first-child){
+    div.WidgetSimple div.Content p:last-child:not(.ErrorBox):not(.SuccessBox):not(.Value):not(:first-child){
         padding-bottom: 0;
     }
 
