@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.904659616655651;
+    $Self->{Completeness}        = 0.904643860518923;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -695,6 +695,7 @@ sub Data {
         'Run' => 'Futtatás',
         'Delete this task' => 'Feladat törlése',
         'Run this task' => 'Feladat futtatása',
+        'Do you really want to delete this generic agent job?' => 'Valóban törölni szeretné ezt az általános ügyintéző feladatot?',
         'Job Settings' => 'Feladat-beállítások',
         'Job name' => 'Feladatnév',
         'The name you entered already exists.' => 'A megadott név már létezik.',
@@ -2529,8 +2530,8 @@ sub Data {
         'Edit statistic "%s".' => '„%s” statisztika szerkesztése.',
         'Export statistic "%s"' => '„%s” statisztika exportálása',
         'Export statistic %s' => '%s statisztika exportálása',
-        'Delete statistic "%s"' => '„%s” statisztika törlése',
         'Delete statistic %s' => '%s statisztika törlése',
+        'Do you really want to delete this statistic?' => 'Valóban törölni szeretné ezt a statisztikát?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Statisztikák információi',
@@ -7996,14 +7997,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => 'Dinamikus mező eltávolítása',
         'Remove selection' => 'Kijelölés eltávolítása',
-        'Do you really want to delete this generic agent job?' => 'Valóban törölni szeretné ezt az általános ügyintéző feladatot?',
-        'Delete this Event Trigger' => 'Eseményaktiváló törlése',
+        'An error occurred during communication.' => 'Hiba történt a kommunikáció közben.',
         'Duplicate event.' => 'Esemény kettőzése.',
         'This event is already attached to the job, Please use a different one.' =>
             'Ez az esemény már csatolva van a feladathoz, használjon egy másikat.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Hiba történt a kommunikáció közben.',
         'Request Details' => 'Kérés részletei',
         'Request Details for Communication ID' => 'Kérés részletei a kommunikáció-azonosítónál',
         'Show or hide the content.' => 'A tartalom megjelenítése vagy elrejtése.',
@@ -8016,6 +8015,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             'Nem lehetséges új eseményaktiváló hozzáadása, mert az esemény nincs beállítva.',
         'Delete this Invoker' => 'Meghívó törlése',
+        'Delete this Event Trigger' => 'Eseményaktiváló törlése',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => 'Sajnáljuk, de az egyetlen meglévő feltételt nem lehet eltávolítani.',
@@ -8235,9 +8235,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             'Ennek az elemnek gyermekelemei vannak, és jelenleg nem lehet eltávolítani.',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'Valóban törölni szeretné ezt a statisztikát?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => 'Ügyfél-azonosító kiválasztása, hogy hozzárendelje ehhez a jegyhez',
@@ -9199,6 +9196,7 @@ Az Ön segélyszolgálat csapata
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9218,13 +9216,11 @@ Az Ön segélyszolgálat csapata
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

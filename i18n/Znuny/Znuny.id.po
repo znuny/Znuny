@@ -20733,11 +20733,11 @@ msgstr ""
 msgid "Remove selection"
 msgstr "Hapus pilihan"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Hapus pemicu event ini"
 
@@ -20749,7 +20749,7 @@ msgstr "Event duplikat"
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Event ini telah terlampir pada pekerjaan tersebut, mohon gunakan event yang berbeda"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "Kesalahan terjadi selama komunikasi"
 
@@ -21253,7 +21253,7 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "Apakah anda benar-benar ingin menghapus statistik?"
 

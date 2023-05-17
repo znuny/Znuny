@@ -122,7 +122,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     --success-color: #3DD598;
     --warning-color: #FC5A5A;
+    --warning-color-darker: #E44E4E;
     --error-color: var(--warning-color);
+    --error-color-darker: var(--warning-color-darker);
     --confirmation-color: var(--success-color);
     --plus-color: var(--success-color);
 

@@ -20730,11 +20730,11 @@ msgstr "Dieses dynamische Feld entfernen"
 msgid "Remove selection"
 msgstr "Auswahl entfernen"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr "Wollen Sie diesen GenericAgent-Job wirklich löschen?"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Diesen Event-Trigger löschen"
 
@@ -20746,7 +20746,7 @@ msgstr "Ereignis duplizieren."
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Dieses Event ist dem Job bereits zugeordnet. Bitte wählen Sie ein anderes aus."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "Während der Kommunikation ist ein Fehler aufgetreten."
 
@@ -21250,7 +21250,7 @@ msgstr "Generieren"
 msgid "This element has children elements and can currently not be removed."
 msgstr "Dieses Element besitzt Kindelemente und kann derzeit nicht entfernt werden."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "Möchten Sie diese Statistik wirklich löschen?"
 

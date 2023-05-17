@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.982815598149372;
+    $Self->{Completeness}        = 0.982812758221781;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -689,6 +689,7 @@ sub Data {
         'Run' => 'Start',
         'Delete this task' => 'Diesen Auftrag löschen',
         'Run this task' => 'Diesen Auftrag ausführen',
+        'Do you really want to delete this generic agent job?' => 'Wollen Sie diesen GenericAgent-Job wirklich löschen?',
         'Job Settings' => 'Auftragseinstellungen',
         'Job name' => 'Auftragsname',
         'The name you entered already exists.' => 'Der eingegebene Name existiert bereits.',
@@ -2523,8 +2524,8 @@ sub Data {
         'Edit statistic "%s".' => 'Statistik "%s" bearbeiten.',
         'Export statistic "%s"' => 'Statistik "%s" exportieren',
         'Export statistic %s' => 'Statistik %s exportieren',
-        'Delete statistic "%s"' => 'Statistik "%s" löschen',
         'Delete statistic %s' => 'Statistik %s löschen',
+        'Do you really want to delete this statistic?' => 'Möchten Sie diese Statistik wirklich löschen?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Statistik-Informationen',
@@ -7990,14 +7991,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => 'Dieses dynamische Feld entfernen',
         'Remove selection' => 'Auswahl entfernen',
-        'Do you really want to delete this generic agent job?' => 'Wollen Sie diesen GenericAgent-Job wirklich löschen?',
-        'Delete this Event Trigger' => 'Diesen Event-Trigger löschen',
+        'An error occurred during communication.' => 'Während der Kommunikation ist ein Fehler aufgetreten.',
         'Duplicate event.' => 'Ereignis duplizieren.',
         'This event is already attached to the job, Please use a different one.' =>
             'Dieses Event ist dem Job bereits zugeordnet. Bitte wählen Sie ein anderes aus.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Während der Kommunikation ist ein Fehler aufgetreten.',
         'Request Details' => 'Anfragedetails',
         'Request Details for Communication ID' => 'Anfragedetails für Verbindungs-ID',
         'Show or hide the content.' => 'Inhalt anzeigen oder verbergen.',
@@ -8010,6 +8009,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             'Es ist nicht möglich einen neuen Event-Trigger hinzuzufügen, da das Event noch nicht angelegt ist.',
         'Delete this Invoker' => 'Diesen Invoker löschen',
+        'Delete this Event Trigger' => 'Diesen Event-Trigger löschen',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => 'Die einzig existierende Bedingung kann nicht entfernt werden.',
@@ -8229,9 +8229,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             'Dieses Element besitzt Kindelemente und kann derzeit nicht entfernt werden.',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'Möchten Sie diese Statistik wirklich löschen?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => 'Wählen Sie eine Kundennummer aus, die Sie diesem Ticket zuordnen möchten',
@@ -9192,6 +9189,7 @@ Ihr Helpdesk-Team
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9211,13 +9209,11 @@ Ihr Helpdesk-Team
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

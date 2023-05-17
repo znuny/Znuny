@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-05-02 10:21+0000\n"
+"POT-Creation-Date: 2023-05-10 13:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2028,6 +2028,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Run this task"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
+msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
@@ -7487,11 +7491,11 @@ msgid "Export statistic %s"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
-msgid "Delete statistic \"%s\""
+msgid "Delete statistic %s"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
-msgid "Delete statistic %s"
+msgid "Do you really want to delete this statistic?"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
@@ -20735,11 +20739,7 @@ msgid "Remove selection"
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
-msgid "Do you really want to delete this generic agent job?"
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
-msgid "Delete this Event Trigger"
+msgid "An error occurred during communication."
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
@@ -20748,10 +20748,6 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "This event is already attached to the job, Please use a different one."
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-msgid "An error occurred during communication."
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
@@ -20780,6 +20776,10 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Invoker"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
+msgid "Delete this Event Trigger"
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
@@ -21252,10 +21252,6 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
 msgid "This element has children elements and can currently not be removed."
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-msgid "Do you really want to delete this statistic?"
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js

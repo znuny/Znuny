@@ -20730,11 +20730,11 @@ msgstr "删除此动态字段"
 msgid "Remove selection"
 msgstr "删除选择"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr "您真的想要删除这个自动任务吗？"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "删除这个事件触发器"
 
@@ -20746,7 +20746,7 @@ msgstr "复制事件。"
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "该事件已经附加到任务，请重新选择。"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "在通信时发生一个错误。"
 
@@ -21250,7 +21250,7 @@ msgstr "生成"
 msgid "This element has children elements and can currently not be removed."
 msgstr "这个元素有子元素，目前不能被删除。"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "您真的要删除这个统计吗？"
 

@@ -20730,11 +20730,11 @@ msgstr "Dinamikus mező eltávolítása"
 msgid "Remove selection"
 msgstr "Kijelölés eltávolítása"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr "Valóban törölni szeretné ezt az általános ügyintéző feladatot?"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Eseményaktiváló törlése"
 
@@ -20746,7 +20746,7 @@ msgstr "Esemény kettőzése."
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Ez az esemény már csatolva van a feladathoz, használjon egy másikat."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "Hiba történt a kommunikáció közben."
 
@@ -21250,7 +21250,7 @@ msgstr "Előállítás"
 msgid "This element has children elements and can currently not be removed."
 msgstr "Ennek az elemnek gyermekelemei vannak, és jelenleg nem lehet eltávolítani."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "Valóban törölni szeretné ezt a statisztikát?"
 

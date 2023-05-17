@@ -1,4 +1,5 @@
-# 7.0.5 2023-??-??
+# 7.0.5 2023-05-17
+ - 2023-05-17 Updated 'Cancel' buttons in dialogs.
  - 2023-05-11 Fixed ReplyAll in ArticleActionMenu template. [#410](https://github.com/znuny/Znuny/issues/410)
  - 2023-05-09 Fixed item color in AgentAppointmentCalendarOverview. [#411](https://github.com/znuny/Znuny/issues/411)
  - 2023-05-04 Fixed CSS for custom logos. [#357](https://github.com/znuny/Znuny/issues/357)

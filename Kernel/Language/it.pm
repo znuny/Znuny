@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.607072042300066;
+    $Self->{Completeness}        = 0.607007106263428;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -698,6 +698,7 @@ sub Data {
         'Run' => 'Esegui',
         'Delete this task' => 'Elimina questo task',
         'Run this task' => 'Esegui questo task',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Impostazioni job',
         'Job name' => 'Nome job',
         'The name you entered already exists.' => 'Il nome immesso è già esistente.',
@@ -2532,8 +2533,8 @@ sub Data {
         'Edit statistic "%s".' => 'Modifica la statistica "%s".',
         'Export statistic "%s"' => 'Esporta statistica "%s"',
         'Export statistic %s' => 'Esporta statistica %s',
-        'Delete statistic "%s"' => 'Elimina la statistica "%s"',
         'Delete statistic %s' => 'Elimina la statistica %s',
+        'Do you really want to delete this statistic?' => 'Vuoi davvero eliminare questa statistica?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Informazioni statistiche',
@@ -8003,14 +8004,12 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'Rimuovi selezione',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Elimina questo trigger',
+        'An error occurred during communication.' => 'Errore durante la comunicazione',
         'Duplicate event.' => 'Evento duplicato.',
         'This event is already attached to the job, Please use a different one.' =>
             'Questo evento è già collegato al job, specificarne uno diverso',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Errore durante la comunicazione',
         'Request Details' => 'Richiedi dettagli',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'Mostra o nascondi il contenuto',
@@ -8023,6 +8022,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'Elimina questo invoker',
+        'Delete this Event Trigger' => 'Elimina questo trigger',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8242,9 +8242,6 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'Vuoi davvero eliminare questa statistica?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9206,6 +9203,7 @@ Il tuo helpdesk.
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9225,13 +9223,11 @@ Il tuo helpdesk.
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

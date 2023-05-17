@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.875578321216127;
+    $Self->{Completeness}        = 0.875557759048091;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -689,6 +689,7 @@ sub Data {
         'Run' => '실행',
         'Delete this task' => '이 작업 삭제',
         'Run this task' => '이 작업 실행',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => '작업 설정',
         'Job name' => '작업 이름',
         'The name you entered already exists.' => '입렵한 이름이 이미 있습니다.',
@@ -2523,8 +2524,8 @@ sub Data {
         'Edit statistic "%s".' => '통계 "%s"을 수정하십시오.',
         'Export statistic "%s"' => '통계 "%s" 내보내기',
         'Export statistic %s' => '통계 "%s" 내보내기',
-        'Delete statistic "%s"' => '통계 "%s"  삭제',
         'Delete statistic %s' => '통계 "%s" 삭제',
+        'Do you really want to delete this statistic?' => '정말로 이 통계를 삭제 하시겠습니까?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '통계 정보',
@@ -7990,14 +7991,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '선택 항목 삭제',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => '이 이벤트 트리거 삭제',
+        'An error occurred during communication.' => '통신 중에 오류가 발생했습니다.',
         'Duplicate event.' => '중복 이벤트.',
         'This event is already attached to the job, Please use a different one.' =>
             '이 이벤트는 이미 작업에 첨부되어 있습니다. 다른 이벤트를 사용하십시오.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => '통신 중에 오류가 발생했습니다.',
         'Request Details' => '요청 세부 정보',
         'Request Details for Communication ID' => '통신 ID 요청 세부 정보',
         'Show or hide the content.' => '내용을 표시하거나 숨깁니다.',
@@ -8010,6 +8009,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => '이 호출자 삭제',
+        'Delete this Event Trigger' => '이 이벤트 트리거 삭제',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '죄송합니다. 기존 상태만 제거 할 수 없습니다.',
@@ -8229,9 +8229,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '이 요소는 하위 요소를 가지며 현재 제거할 수 없습니다.',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '정말로 이 통계를 삭제 하시겠습니까?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '이 티켓에 지정할 고객 ID를 선택하십시오.',
@@ -9193,6 +9190,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9212,13 +9210,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

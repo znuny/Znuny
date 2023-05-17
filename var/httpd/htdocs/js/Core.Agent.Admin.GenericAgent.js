@@ -100,17 +100,7 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
      */
     TargetNS.Init = function () {
 
-        $('.DeleteEvent').on('click', function (Event) {
-            TargetNS.ShowDeleteEventDialog(Event, $(this));
-            return false;
-        });
-
-        $('#GenericAgentJobs a.TrashCan').on('click', function () {
-            if (window.confirm(Core.Language.Translate('Do you really want to delete this generic agent job?'))) {
-                return true;
-            }
-            return false;
-        });
+        TargetNS.InitDeleteTaskDialog();
 
         $('#TicketEvent').on('change', function (){
             if ($('#EventType').val() !== null) {
@@ -327,13 +317,6 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
         $Clone.find('.EventName').html(EventName);
         $Clone.find('.EventValue').attr('name', 'EventValues').val(EventName);
 
-        // bind delete function
-        $Clone.find('#DeleteEvent').on('click', function (Event) {
-            // remove row
-            TargetNS.ShowDeleteEventDialog(Event, $(this));
-            return false;
-        });
-
         // remove unneeded classes
         $Clone.removeClass('Hidden EventRowTemplate');
 
@@ -343,41 +326,61 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
     };
 
     /**
-     * @name ShowDeleteEventDialog
-     * @memberof Core.Agent.Admin.GenericAgentEvent
+     * @name InitDeleteTaskDialog
+     * @memberof Core.Agent.Admin.GenericAgent
      * @function
-     * @param {EventObject} Event - Object of the clicked element.
-     * @param {jQueryObject} Object
      * @description
      *      This function shows a confirmation dialog with 2 buttons.
      */
-    TargetNS.ShowDeleteEventDialog = function(Event, Object){
-        Core.UI.Dialog.ShowContentDialog(
-            $('#DeleteEventDialogContainer'),
-            Core.Language.Translate('Delete this Event Trigger'),
-            '240px',
-            'Center',
-            true,
-            [
-               {
-                   Label: Core.Language.Translate('Cancel'),
-                   Class: 'Primary',
-                   Function: function () {
-                       Core.UI.Dialog.CloseDialog($('#DeleteEventDialog'));
-                   }
-               },
-               {
-                   Label: Core.Language.Translate('Delete'),
-                   Function: function () {
-                       Object.parents('tr:first').remove();
-                       Core.UI.Dialog.CloseDialog($('#DeleteEventDialog'));
-                   }
-               }
-           ]
-        );
+    TargetNS.InitDeleteTaskDialog = function () {
+        $('.DeleteTask').on('click', function () {
+            var $TaskDeleteElement = $(this);
 
-        Event.stopPropagation();
-        Event.preventDefault();
+            Core.UI.Dialog.ShowContentDialog(
+                $('#DeleteTaskDialogContainer'),
+                Core.Language.Translate('Delete this task'),
+                '240px',
+                'Center',
+                true,
+                [
+                    {
+                        Label: Core.Language.Translate("Cancel"),
+                        Type: 'Secondary',
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('#DeleteTaskDialog'));
+                        }
+                    },
+                    {
+                        Label: Core.Language.Translate("Delete"),
+                        Type: 'Warning',
+                        Function: function () {
+                            var Data = {
+                                Action: 'AdminGenericAgent',
+                                Subaction: 'Delete',
+                                Profile: $TaskDeleteElement.data('name')
+                            };
+                            Core.AJAX.FunctionCall(Core.Config.Get('Baselink'), Data,
+                                function(Reponse) {
+                                    var DialogText = Core.Language.Translate("An error occurred during communication.");
+                                    if (parseInt(Reponse, 10) > 0) {
+                                        DialogText = Core.Language.Translate("Finished");
+                                    }
+                                    $('.Dialog .InnerContent .Center').text(DialogText);
+                                    window.setTimeout(function() {
+                                        Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                                    }, 1000);
+                                    Core.App.InternalRedirect({
+                                        Action: 'AdminGenericAgent'
+                                    });
+                                }
+                            );
+                        }
+
+                    },
+                ]
+            );
+            return false;
+        });
     };
 
     /**

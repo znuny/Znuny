@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.904659616655651;
+    $Self->{Completeness}        = 0.904643860518923;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -696,6 +696,7 @@ sub Data {
         'Run' => '运行',
         'Delete this task' => '删除这个任务',
         'Run this task' => '执行这个任务',
+        'Do you really want to delete this generic agent job?' => '您真的想要删除这个自动任务吗？',
         'Job Settings' => '任务设置',
         'Job name' => '任务名称',
         'The name you entered already exists.' => '你输入的名称已经存在。',
@@ -2530,8 +2531,8 @@ sub Data {
         'Edit statistic "%s".' => '编辑统计“%s”。',
         'Export statistic "%s"' => '导出统计“%s”',
         'Export statistic %s' => '导出统计%s',
-        'Delete statistic "%s"' => '删除统计“%s”',
         'Delete statistic %s' => '删除统计%s',
+        'Do you really want to delete this statistic?' => '您真的要删除这个统计吗？',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '统计信息',
@@ -7997,14 +7998,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '删除此动态字段',
         'Remove selection' => '删除选择',
-        'Do you really want to delete this generic agent job?' => '您真的想要删除这个自动任务吗？',
-        'Delete this Event Trigger' => '删除这个事件触发器',
+        'An error occurred during communication.' => '在通信时发生一个错误。',
         'Duplicate event.' => '复制事件。',
         'This event is already attached to the job, Please use a different one.' =>
             '该事件已经附加到任务，请重新选择。',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => '在通信时发生一个错误。',
         'Request Details' => '请求详细信息',
         'Request Details for Communication ID' => '通信ID的请求详细信息',
         'Show or hide the content.' => '显示或隐藏该内容.',
@@ -8017,6 +8016,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '无法添加一个新的事件触发器，因为没有设置事件。',
         'Delete this Invoker' => '删除这个调用程序',
+        'Delete this Event Trigger' => '删除这个事件触发器',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '对不起，唯一存在的条件是无法删除的。',
@@ -8236,9 +8236,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '这个元素有子元素，目前不能被删除。',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '您真的要删除这个统计吗？',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '选择要分配给这个工单的客户ID',
@@ -9199,6 +9196,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9218,13 +9216,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

@@ -20730,11 +20730,11 @@ msgstr ""
 msgid "Remove selection"
 msgstr "선택 항목 삭제"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "이 이벤트 트리거 삭제"
 
@@ -20746,7 +20746,7 @@ msgstr "중복 이벤트."
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "이 이벤트는 이미 작업에 첨부되어 있습니다. 다른 이벤트를 사용하십시오."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "통신 중에 오류가 발생했습니다."
 
@@ -21250,7 +21250,7 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr "이 요소는 하위 요소를 가지며 현재 제거할 수 없습니다."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "정말로 이 통계를 삭제 하시겠습니까?"
 

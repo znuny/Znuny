@@ -151,8 +151,8 @@ Core.Agent.Statistics = (function (TargetNS) {
                 'Center',
                 true,
                 [
+                    { Label: Core.Language.Translate('Cancel'), Class: '', Type: 'Secondary', Function: EditDialogCancel },
                     { Label: Core.Language.Translate('Save'), Class: 'Primary', Type: '', Function: EditDialogSave },
-                    { Label: Core.Language.Translate('Cancel'), Class: '', Type: 'Close', Function: EditDialogCancel }
                 ],
                 true
             );
@@ -229,6 +229,65 @@ Core.Agent.Statistics = (function (TargetNS) {
     }
 
     /**
+     * @name InitDeleteStatDialog
+     * @memberof Core.Agent.Statistics
+     * @function
+     * @description
+     *      This function shows a confirmation dialog with 2 buttons.
+     */
+    TargetNS.InitDeleteStatDialog = function () {
+        $('.DeleteStat').on('click', function () {
+            var $StatDeleteElement = $(this);
+
+            Core.UI.Dialog.ShowContentDialog(
+                $('#DeleteStatDialogContainer'),
+                Core.Language.Translate('Delete'),
+                '240px',
+                'Center',
+                true,
+                [
+                    {
+                        Label: Core.Language.Translate("Cancel"),
+                        Type: 'Secondary',
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('#DeleteStatDialog'));
+                        }
+                    },
+                    {
+                        Label: Core.Language.Translate("Delete"),
+                        Type: 'Warning',
+                        Function: function () {
+                            var Data = {
+                                Action: 'AgentStatistics',
+                                Subaction: 'DeleteAction',
+                                StatID: $StatDeleteElement.data('statid')
+                            };
+                            Core.AJAX.FunctionCall(Core.Config.Get('Baselink'), Data,
+                                function(Reponse) {
+                                    var DialogText = Core.Language.Translate("An error occurred during communication.");
+                                    if (parseInt(Reponse, 10) > 0) {
+                                        DialogText = Core.Language.Translate("Finished");
+                                    }
+                                    $('.Dialog .InnerContent .Center').text(DialogText);
+                                    window.setTimeout(function() {
+                                        Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                                    }, 1000);
+                                    Core.App.InternalRedirect({
+                                        Action: 'AgentStatistics',
+                                        Subaction: 'Overview'
+                                    });
+                                }
+                            );
+                        }
+
+                    },
+                ]
+            );
+            return false;
+        });
+    };
+
+    /**
      * @name Init
      * @memberof Core.Agent.Statistics
      * @function
@@ -254,14 +313,7 @@ Core.Agent.Statistics = (function (TargetNS) {
         TargetNS.InitEditScreen();
 
         // Bind event on delete stats button
-        $('.StatDelete').on('click', function (Event) {
-            var ConfirmText = '"' + $(this).data('stat-title') + '"\n\n' + Core.Language.Translate("Do you really want to delete this statistic?");
-            if (!window.confirm(ConfirmText)) {
-                Event.stopPropagation();
-                Event.preventDefault();
-                return false;
-            }
-        });
+        TargetNS.InitDeleteStatDialog();
 
         // Bind event on start stats button
         $('#StartStatistic').on('click', function () {

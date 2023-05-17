@@ -121,7 +121,7 @@
                             <td>[% Data.ScheduleLastRun | Localize("TimeLong") %]</td>
                             <td>[% Translate(Data.ShownValid) | html %]</td>
                             <td class="Center">
-                                <a class="TrashCan table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;Profile=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this task") | html %]">
+                                <a class="TrashCan DeleteTask table-icon-hover-md" href="#" data-name="[% Data.Name | html %]" title="[% Translate("Delete this task") | html %]">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
                             </td>
@@ -139,6 +139,12 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="Hidden" id="DeleteTaskDialogContainer">
+                    <div id ="DeleteTaskDialog" class="InnerContent">
+                        <p class="Center Spacing">[% Translate("Do you really want to delete this generic agent job?") | html %]</p>
+                        <div class="SpacingTop"></div>
+                    </div>
+                </div>
         </div>
 [% RenderBlockEnd("Overview") %]
 [% RenderBlockStart("Edit") %]

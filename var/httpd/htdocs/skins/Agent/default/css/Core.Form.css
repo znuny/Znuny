@@ -336,6 +336,34 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border-width: var(--border-width-md);
     } */
 
+    .btn-warning,
+    .btn-warning:focus {
+        color: var(--btn-primary-text);
+        background: var(--warning-color);
+        border: var(--border-width) var(--border-solid) var(--warning-color);
+    }
+
+    .btn-warning:hover,
+    .btn-warning:focus:hover {
+        color: var(--btn-primary-text-hover);
+        background: var(--warning-color-darker);
+        border: var(--border-width) var(--border-solid) var(--warning-color-darker);
+        cursor: pointer;
+    }
+
+    .btn-warning-ghost,
+    .btn-warning-ghost:focus {
+        color: var(--btn-primary-text);
+        border: var(--border-width) var(--border-solid) var(--warning-color);
+    }
+
+    .btn-warning-ghost:hover,
+    .btn-warning-ghost:focus:hover {
+        color: var(--btn-primary-text-hover);
+        background: var(--warning-color-darker);
+        border: var(--border-width) var(--border-solid) var(--warning-color-darker);
+    }
+
     .btn-cancel-ghost,
     .btn-cancel-ghost:focus {
         color: var(--btn-cancel-ghost-text);
