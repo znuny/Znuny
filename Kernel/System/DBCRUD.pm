@@ -36,6 +36,10 @@ our @ObjectDependencies = (
     'Kernel::System::DBCRUD::Format',
 );
 
+=head1 NAME
+
+Kernel::System::DBCRUD
+
 =head2 new()
 
 Don't use the constructor directly, use the ObjectManager instead:
@@ -264,7 +268,7 @@ sub DataAdd {
     # create history if possible
     if ( !$Self->{PreventHistory} && $Self->can('HistoryEventDataAdd') ) {
         $Self->HistoryEventDataAdd(
-            Event => $Self->{Name} . 'Add',
+            Event => 'DBCRUDAdd',
             Data  => {
                 $Self->{Identifier} => $ID,
                 OldData             => {},
@@ -274,8 +278,10 @@ sub DataAdd {
     }
 
     $Self->EventHandler(
-        Event => $Self->{Name} . 'Add',
-        Data  => {
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDAdd',
+        Data              => {
             $Self->{Identifier} => $ID,
         },
         UserID => $Param{UserID} || 1,
@@ -409,8 +415,10 @@ sub DataUpdate {
     }
 
     $Self->EventHandler(
-        Event => $Self->{Name} . 'Update',
-        Data  => {
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDUpdate',
+        Data              => {
             $Self->{Identifier} => $Param{ $Self->{Identifier} },
             OldData             => \%DataGet,
         },
@@ -500,9 +508,11 @@ sub DataProcedureAdd {
     return if !%Entry;
 
     $Self->EventHandler(
-        Event  => $Self->{Name} . 'ProcedureAdd',
-        Data   => \%Entry,
-        UserID => $Param{UserID} || 1,
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDProcedureAdd',
+        Data              => \%Entry,
+        UserID            => $Param{UserID} || 1,
     );
 
     return %Entry;
@@ -677,9 +687,11 @@ sub DataGet {
     );
 
     $Self->EventHandler(
-        Event  => $Self->{Name} . 'Get',
-        Data   => \%Entry,
-        UserID => $Param{UserID} || 1,
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDGet',
+        Data              => \%Entry,
+        UserID            => $Param{UserID} || 1,
     );
 
     return %Entry;
@@ -867,9 +879,11 @@ sub DataListGet {
     }
 
     $Self->EventHandler(
-        Event  => $Self->{Name} . 'ListGet',
-        Data   => \@List,
-        UserID => $Param{UserID} || 1,
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDListGet',
+        Data              => \@List,
+        UserID            => $Param{UserID} || 1,
     );
 
     return @List;
@@ -1078,8 +1092,10 @@ sub DataSearch {
     );
 
     $Self->EventHandler(
-        Event => $Self->{Name} . 'Search',
-        Data  => {
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDSearch',
+        Data              => {
             ID => $Result eq 'ARRAY' ? \@List : \%List,
         },
         UserID => $Param{UserID} || 1,
@@ -1233,9 +1249,11 @@ sub DataDelete {
 
             # trigger event
             $Self->EventHandler(
-                Event  => $Self->{Name} . 'Delete',
-                Data   => \%Param,
-                UserID => $Param{UserID} || 1,
+                ModuleName        => ref $Self,
+                UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+                Event             => 'DBCRUDDelete',
+                Data              => \%Param,
+                UserID            => $Param{UserID} || 1,
             );
 
             return 1;
@@ -1278,9 +1296,11 @@ sub DataDelete {
     }
 
     $Self->EventHandler(
-        Event  => $Self->{Name} . 'Delete',
-        Data   => \%Param,
-        UserID => $Param{UserID} || 1,
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDDelete',
+        Data              => \%Param,
+        UserID            => $Param{UserID} || 1,
     );
 
     return 1;
