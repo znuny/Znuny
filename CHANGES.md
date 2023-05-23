@@ -1,3 +1,6 @@
+# 7.0.6 2023-??-??
+ - 2023-05-23 Fixed event handling for DBCRUD history entries.
+
 # 7.0.5 2023-05-17
  - 2023-05-17 GUI-Redesign changes - CSS, TT and JS.
  - 2023-05-17 Updated 'Cancel' buttons in dialogs.
@@ -51,6 +54,10 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.3 2023-??-??
+ - 2023-05-23 Fixed event handling for DBCRUD history entries.
+ - 2023-05-05 Fixed html element id of forward templates in AgentTicketZoom. [#351](https://github.com/znuny/Znuny/issues/351)
 
 # 6.5.2 2023-04-19
  - 2023-04-13 Activated information section and modal dialog for ICS calendar events in AgentTicketZoom view.
