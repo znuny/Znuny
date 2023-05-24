@@ -1,4 +1,5 @@
 # 6.5.3 2023-??-??
+ - 2023-05-24 Selected value in a dynamic field web service dropdown field can now be removed with 'x' button.
  - 2023-05-23 Fixed event handling for DBCRUD history entries.
  - 2023-05-05 Fixed html element id of forward templates in AgentTicketZoom. [#351](https://github.com/znuny/Znuny/issues/351)
 

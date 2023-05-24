@@ -121,6 +121,13 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                 );
             });
 
+        // The dynamic field driver added an empty option " "->"-" so the
+        // dropdown will not be displayed as disabled initially.
+        // Remove this option here once so it's not selectable.
+        // Note this differs from the option ""->"-" (no space as value) which must be
+        // kept so "x" button will be displayed to be able to remove the selected element.
+        $('#' + SelectedValueFieldName).find('option[value=" "]').remove();
+
         function AutocompleteSelect($AutocompleteElement, SearchTerm) {
             var URL   = Core.Config.Get('Baselink'),
                 Value = SearchTerm || $AutocompleteElement.val() || '',
@@ -186,12 +193,11 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                         });
                     }
 
-                    // add empty option to prevent disabled field
-                    if (jQuery.isEmptyObject(Options)){
-                        Options  = {' ': ' '};
-                    }
+                    // add empty option to be able to remove the selection
+                    // via "x" button in modernized view.
+                    Options[''] = '-';
 
-                    Znuny.Form.Input.Set(SelectedValueFieldName, Options, {SelectOption: true, Modernize: false, TriggerChange: true});
+                    Znuny.Form.Input.Set(SelectedValueFieldName, Options, {SelectOption: true, Modernize: true, TriggerChange: true});
 
                     if (!jQuery.isEmptyObject(SelectedIDs)){
                         Znuny.Form.Input.Set(SelectedValueFieldName, SelectedIDs);
