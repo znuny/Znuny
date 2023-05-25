@@ -1,4 +1,5 @@
 # 7.0.6 2023-??-??
+ - 2023-05-25 Changed article action 'note to linked ticket' to only be visible/usable in agent ticket zoom.
  - 2023-05-23 Fixed event handling for DBCRUD history entries.
 
 # 7.0.5 2023-05-17
@@ -56,6 +57,7 @@
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
 
 # 6.5.3 2023-??-??
+ - 2023-05-25 Changed article action 'note to linked ticket' to only be visible/usable in agent ticket zoom.
  - 2023-05-23 Fixed event handling for DBCRUD history entries.
  - 2023-05-05 Fixed html element id of forward templates in AgentTicketZoom. [#351](https://github.com/znuny/Znuny/issues/351)
 
