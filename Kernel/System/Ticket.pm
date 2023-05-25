@@ -1536,6 +1536,8 @@ sub TicketDeepGet {
     );
     return if !%Ticket;
 
+    $Ticket{TimeUnit} = $TicketObject->TicketAccountedTimeGet( TicketID => $Param{TicketID} ) // 0;
+
     my %Data = %Ticket;
 
     my @Articles = $ArticleObject->ArticleList(
