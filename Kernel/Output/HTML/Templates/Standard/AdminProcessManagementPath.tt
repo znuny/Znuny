@@ -73,7 +73,9 @@
                             </p>
                         </div>
                         <div class="Size1of2">
-                            <input type="text" id="FilterAvailableTransitionActions" class="W75pc" name="FilterAvailableTransitionActions" value="" title="[% Translate("Filter available Transition Actions") | html %]" placeholder="[% Translate("Filter available Transition Actions") | html %]..." />
+                           <a name="ProcessID" id="ProcessID" data-processid="[% Data.ProcessID %]"></a>
+                            <input type="text" id="FilterAvailableTransitionActions" name="FilterAvailableTransitionActions" value="" title="[% Translate("Filter available Transition Actions") | html %]" placeholder="[% Translate("Filter available Transition Actions") | html %]..." />
+                            <input type="checkbox" checked id="TransitionActionScopeFilter" class="ScopeFilter" data-scope-filter="TransitionAction" name="TransitionActionScopeFilter"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Transition Actions')) | html %]"></i>
                             <ul class="Tablelike W90pc SpacingTop">
                                 <li class="Header">
                                     [% Translate("Available Transition Actions") | html %]
@@ -81,7 +83,7 @@
                             </ul>
                             <ul class="AllocationList Tablelike W90pc" id="AvailableTransitionActions">
 [% RenderBlockStart("AvailableTransitionActionRow") %]
-                                <li data-id="[% Data.ID | html %]" id="[% Data.EntityID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]">
+                                <li data-id="[% Data.ID | html %]" id="[% Data.EntityID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]" data-entity-type="TransitionAction" data-scope="[% Data.Scope %]" data-scope-entity-id="[% Data.ScopeEntityID %]">
                                     [% Data.Name | html %] ([% Data.EntityID | html %])
                                     <span class="Functions">
                                         <a href="#" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-action="AdminProcessManagementTransitionAction" data-subaction="TransitionActionEdit" class="AsPopup_Redirect Edit_Confirm PopupType_TransitionAction Icon" title="[% Translate("Edit") | html %]">

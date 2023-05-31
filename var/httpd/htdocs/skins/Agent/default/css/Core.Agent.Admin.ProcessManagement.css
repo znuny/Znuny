@@ -723,7 +723,7 @@ div.AJAXWaiting {
  */
 
 /* input width is set to 80% to leave space for the "global" checkbox */
-#FilterAvailableActivityDialogs {
+#FilterAvailableActivityDialogs, #FilterAvailableTransitionActions {
     width: 80%;
 }
 
