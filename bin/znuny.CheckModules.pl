@@ -400,7 +400,7 @@ my @NeededModules = (
         Comment   => 'Required for calendar events.',
         InstTypes => {
             aptget => 'libical-parser-perl',
-            emerge => 'perl-core/iCal-Parser',
+            emerge => 'dev-perl/iCal-Parser',
             zypper => 'perl-iCal-Parser',
             ports  => 'devel/p5-iCal-Parser',
         },
