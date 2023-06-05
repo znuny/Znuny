@@ -1,4 +1,5 @@
 # 7.0.6 2023-??-??
+ - 2023-06-05 GUI-Redesign changes - CSS, TT and JS.
  - 2023-05-31 Process management: Added missing scope filter for transition actions.
  - 2023-05-25 Changed article action 'note to linked ticket' to only be visible/usable in agent ticket zoom.
  - 2023-05-23 Fixed event handling for DBCRUD history entries.
