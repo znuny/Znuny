@@ -22,15 +22,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2023-03-29 08:46+0000\n"
-"Last-Translator: Rúben Sardinha <ruben.sardinha@outlook.com>\n"
-"Language-Team: Portuguese <https://translations.znuny.org/projects/znuny/znuny/pt/>\n"
+"PO-Revision-Date: 2023-06-08 01:18+0000\n"
+"Last-Translator: José <jjunior@serviceup.com.br>\n"
+"Language-Team: Portuguese <https://translations.znuny.org/projects/znuny/"
+"znuny/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Weblate 4.17\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -25891,7 +25892,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Close this widget"
-msgstr ""
+msgstr " Fechar este widget"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Hide"
@@ -25899,7 +25900,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Cancel"
-msgstr ""
+msgstr " Cancelar"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Filter available fields"
@@ -25955,11 +25956,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Cc"
-msgstr ""
+msgstr " Cc"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Bcc"
-msgstr ""
+msgstr " Cco"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Send mail"
@@ -26035,7 +26036,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
 msgid " Column Filters Form"
-msgstr ""
+msgstr " Formulário de filtros de coluna"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
 msgid " Loading"
@@ -26472,4 +26473,3 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Show All"
 msgstr ""
-
