@@ -10,7 +10,7 @@
 [% IF Data.ProcessList %]
 <div id="MainBox" class="TicketProcess ARIARoleMain FormScreen">
     <div class="ContentWrapper flex-column">
-        <h1 class="PageTitle">New Process Ticket</h1>
+        <h1 class="PageTitle">[% Translate("New Process Ticket") %]</h1>
         <div class="Content card flex-center flex-column">
             <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="compose" id="NewProcessTicket" class="Form Validate PreventMultipleSubmits">
                 <input type="hidden" name="Action" value="[% Env("Action") %]"/>
