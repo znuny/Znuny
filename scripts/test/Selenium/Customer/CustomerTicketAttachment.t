@@ -18,6 +18,7 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check RichText.
         $HelperObject->ConfigSettingChange(
@@ -103,8 +104,11 @@ $Selenium->RunTest(
         # Click on test created ticket on CustomerTicketOverview screen.
         $Selenium->find_element( $TicketNumber, 'link_text' )->VerifiedClick();
 
+        use Data::Dumper;
+        print STDERR 'Debug Dump -  - $AttachmentName = ' . Dumper( \$AttachmentName ) . "\n";
+
         # Click on attachment to open it.
-        $Selenium->find_element("//*[text()=\"$AttachmentName\"]")->click();
+        $Selenium->find_element( "#VisibleMessageContent span[title*=\"$AttachmentName\"]", 'css' )->click();
 
         # Switch to another window.
         $Selenium->WaitFor( WindowCount => 2 );
@@ -140,7 +144,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

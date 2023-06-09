@@ -959,8 +959,6 @@ Checks the given search parameters for used article backend fields.
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
             ...
         },
     );
@@ -993,8 +991,6 @@ Generates SQL string extensions, including the needed table joins for the articl
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
             ...
         },
     );
@@ -1028,8 +1024,6 @@ SQL queries to the database.
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
             ...
         },
     );

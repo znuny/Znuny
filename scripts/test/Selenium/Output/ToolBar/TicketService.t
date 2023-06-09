@@ -19,16 +19,25 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $GroupObject     = $Kernel::OM->Get('Kernel::System::Group');
-        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+        my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
+        my $GroupObject   = $Kernel::OM->Get('Kernel::System::Group');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject   = $Kernel::OM->Get('Kernel::System::Queue');
+        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+        my $UtilObject    = $Kernel::OM->Get('Kernel::System::Util');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
 
         # Get random variable.
         my $RandomID = $HelperObject->GetRandomID();
 
         # Enable AgentTicketService toolbar icon.
         my %AgentTicketService = (
+            Block    => 'ToolBarPersonalViews',
             CssClass => 'ServiceView',
             Icon     => 'fa fa-wrench',
             Module   => 'Kernel::Output::HTML::ToolBar::TicketService',
@@ -59,7 +68,7 @@ $Selenium->RunTest(
             $ServiceValues{TypeID}      = 1;
             $ServiceValues{Criticality} = '3 normal';
         }
-        my $ServiceID = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+        my $ServiceID = $ServiceObject->ServiceAdd(
             %ServiceValues,
         );
         $Self->True(
@@ -81,7 +90,7 @@ $Selenium->RunTest(
 
         # Create test queue.
         my $QueueName = 'Queue' . $RandomID;
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => $GroupID,
@@ -116,18 +125,18 @@ $Selenium->RunTest(
         );
 
         # Create test user.
-        my $TestUserLogin = $HelperObject->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', $GroupName ],
-        ) || die "Did not get test user";
+        );
 
-        # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
-            UserLogin => $TestUserLogin,
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
         );
 
         # Update 'My Service' preference for test created user.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-        my $Success  = $DBObject->Do(
+        my $Success = $DBObject->Do(
             SQL => '
                 INSERT INTO personal_services (service_id, user_id)
                 VALUES (?, ?)
@@ -146,7 +155,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentDashboard");
 
         # Click on tool bar AgentTicketService.
@@ -213,7 +222,7 @@ $Selenium->RunTest(
             UserID   => $TestUserID,
         );
 
-        # Ticket deletion could fail if apache still writes to ticket history. Try again in this case.
+        # Ticket deletion could fail if Apache still writes to ticket history. Try again in this case.
         if ( !$Success ) {
             sleep 3;
             $Success = $TicketObject->TicketDelete(
@@ -278,7 +287,6 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
         for my $Cache (
             qw (Ticket Service Queue Group)
             )

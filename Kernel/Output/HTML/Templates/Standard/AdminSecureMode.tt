@@ -14,7 +14,6 @@
                 <h2>[% Translate("Secure Mode Needs to be Enabled!") | html %]</h2>
             </div>
             <div class="Content">
-
                 <p>
                     [% Translate("Secure mode will (normally) be set after the initial installation is completed.") | html %]
                 </p>

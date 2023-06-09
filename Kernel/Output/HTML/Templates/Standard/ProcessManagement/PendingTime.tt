@@ -6,18 +6,19 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+
 [% RenderBlockStart("rw:PendingTime") %]
 <label>
-[% RenderBlockStart("rw:PendingTime:DescriptionLong") %]
-    <span class="FieldHelpContainer">
-        <i class="fa fa-question-circle FieldHelpTrigger"></i>
-        <span>[% Translate(Data.DescriptionLong) | html %]</span>
-    </span>
-[% RenderBlockEnd("rw:PendingTime:DescriptionLong") %]
     [% Data.Label | html %]:
+[% RenderBlockStart("rw:PendingTime:DescriptionLong") %]
+        <span class="FieldHelpContainer">
+            <i class="fa fa-question-circle FieldHelpTrigger"></i>
+            <span>[% Translate(Data.DescriptionLong) | html %]</span>
+        </span>
+[% RenderBlockEnd("rw:PendingTime:DescriptionLong") %]
 </label>
 <div class="Field">
-    [% Data.Content %]
+    <div class="select-field-wrapper">[% Data.Content %]</div>
     <div id="PendingTimeDayError" class="TooltipErrorMessage"><p>[% Data.PendingtTimeDayError | html %]</p></div>
     <div id="PendingTimeHourError" class="TooltipErrorMessage"><p>[% Data.PendingtTimeHourError | html %]</p></div>
 [% RenderBlockStart("rw:PendingTime:DescriptionShort") %]

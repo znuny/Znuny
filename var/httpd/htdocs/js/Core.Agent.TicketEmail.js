@@ -72,7 +72,7 @@ Core.Agent.TicketEmail = (function (TargetNS) {
         });
 
         // change customer user radio button
-        $('.CustomerTicketRadio').on('change', function () {
+        $('.RadioRound').on('change', function () {
             if ($(this).prop('checked')){
                 CustomerKey = $('#CustomerKey_' + $(this).val()).val();
                 // get customer tickets

@@ -53,7 +53,13 @@
         </table>
     </form>
 </div>
-<div class="RecipientButton Hidden">
-    <button id="RecipientSelect" class="Primary CallForAction" value="Confirm Selection"><span>[% Translate("Add selected customer user to") | html %]</span></button>
-    <button id="FormCancel" class="CallForAction"><span>[% Translate("Cancel") | html %]</span></button>
+
+<div class="RecipientButton Hidden SaveButtons">
+    <button id="FormCancel" class="CallForAction btn-cancel-ghost btn-main btn-width-md">
+        <span>[% Translate("Cancel") | html %]</span>
+    </button>
+
+    <button id="RecipientSelect" class="Primary CallForAction btn-main btn-primary btn-width-xxl" value="Confirm Selection">
+        <span>[% Translate("Add selected customer user to") | html %]</span>
+    </button>
 </div>

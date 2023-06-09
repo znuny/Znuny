@@ -35,7 +35,7 @@ my @Tests = (
         CommandModule => 'Kernel::System::Console::Command::Help',
         Parameter     => 'Help',
         ExitCode      => 0,
-        STDOUT        => 'otrs.Console.pl Help command',
+        STDOUT        => 'znuny.Console.pl Help command',
     },
     {
         Name          => "Functional 'Parameter'",

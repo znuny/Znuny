@@ -245,25 +245,6 @@ Core.Agent.Admin.AppointmentCalendar.Manage = (function (TargetNS) {
                 TargetNS.InitTicketAppointmentRule(RuleID, $('#Rule_' + Core.App.EscapeSelector(RuleID)));
             });
 
-            // Initialize color picker.
-            $('input#Color').spectrum({
-                color: Core.Config.Get('CalendarColor'),
-                containerClassName: 'ColorPaletteContainer',
-                hideAfterPaletteSelect: true,
-                preferredFormat: 'hex',
-                replacerClassName: 'ColorPaletteButton',
-                showInput: true,
-                showPalette: true,
-                showPaletteOnly: true,
-                showSelectionPalette: false,
-                togglePaletteOnly: true,
-                togglePaletteMoreText: Core.Language.Translate('More'),
-                togglePaletteLessText: Core.Language.Translate('Less'),
-                chooseText: Core.Language.Translate('Confirm'),
-                cancelText: Core.Language.Translate('Cancel'),
-                palette: Core.Config.Get('CalendarColorPalette')
-            });
-
             return;
         }
 

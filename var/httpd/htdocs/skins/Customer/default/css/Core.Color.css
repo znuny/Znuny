@@ -1,0 +1,124 @@
+/*
+Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (GPL). If you
+did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ */
+
+/**
+ * @section     Colors
+ */
+
+:root { 
+
+    /* Main Colors */
+    --primary-color: #FF8A25;
+    --primary-color-darker: #ef8000;
+    --primary-color-rgb: rgba(255, 139, 37, 0.2);
+    --primary-color-calendar: #ffe8d3;
+    --secondary-color: #251c17;
+
+    --white: #ffffff;
+    --gray-light-white: #fbfafa;
+    --gray-light-ultra: #f5f5f5;
+    --gray-light-semi: #efefef;
+    --gray-light: #ededed;
+    --gray-regular-light: #E8E8E8;
+    --gray-regular: #e0e0e0;
+    --gray-medium: #beb8b5;
+    --gray-medium-darker: #B5B5B580;
+    --gray-dark-semi: #9D9792;
+    --gray-dark: #746d69;
+    --gray-darker: #68615e;
+    --black: #251c17;
+
+
+    --color-scroll-bar: var(--gray-dark);
+    --mail-outgoing-color: #ffeec6;
+
+    --disabled: var(--gray-light-semi);
+    --disabled-text: var(--gray-medium);
+    --disabled-input: var(--gray-light-semi);
+
+    --bread-crumb: var(--gray-dark-semi);
+    --bread-crumb-active: var(--black);
+    --bread-crumb-font-size: var(--font-size-sm);
+
+
+    --color-ticket-header: var(--gray-light-white);
+    --email-info: var(--gray-light-white);
+    --ticket-subject: var(--table-text-color);
+
+    --success-color: #3DD598;
+    --warning-color: #FC5A5A;
+    --error-color: var(--warning-color);
+    --confirmation-color: var(--success-color);
+    --plus-color: var(--success-color);
+
+    /* Tables */
+    --table-text-color: #4f4444;
+    --table-th-bg: #EFEFEF;
+    --table-td-even-bg: #F9F9F9;
+    --tr-disabled-bg: #efefef;
+    --tr-disabled-text: #B6B6B6;
+    
+    /* Flag Element */
+    --color-flag-default: #cdcdcd;
+
+    /* Alert Component */
+    --alert-close-icon-color: var(--gray-dark);
+
+        /* Info */
+        --alert-info-bg-color: #50b6ff10;
+        --alert-info-icon-color: #50B5FF;
+        --alert-info-border-color: #50b6ff1a;
+
+        /* Error */
+        --alert-error-bg-solid-color: #FC5A5A;
+        --alert-error-bg-color: #FC5A5A10;
+        --alert-error-icon-color: #FC5A5A;
+        --alert-error-border-color:#FC5A5A1a;
+
+        /* Success */
+        --alert-success-bg-solid-color: #3DD598;
+        --alert-success-bg-color: #3DD59810;
+        --alert-success-icon-color: #3DD598;
+        --alert-success-border-color: #3DD5981a;
+
+        /* Warning */
+        --alert-warning-bg-color: #F2BD0E10;
+        --alert-warning-icon-color: #F2BD0E;
+        --alert-warning-border-color: #F2BD0E1a;
+
+        /* Notice */
+        --alert-notice-bg-color: #cccccc10;
+        --alert-notice-icon-color: #cccccc;
+        --alert-notice-border-color: #cccccc1a;
+
+    --color-icon-favorite: #F2BD0E;
+
+
+    /* Forms */
+    --border-color: #eae7e2;
+    --border-input-color: #c4c1bb;
+
+    /* Sections */
+    --main-bg-color: #FAFAFB;
+    --input-field-bg-color: var(--white);
+
+    /* BG's */
+    --overlay-bg: rgba(23, 23, 37, 0.145);
+
+
+
+
+
+
+
+}

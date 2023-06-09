@@ -36,6 +36,7 @@ Core.UI.Table = (function (TargetNS) {
         var Timeout;
 
         $FilterInput.wrap('<span class="TableFilterContainer" />');
+        $FilterInput.before('<i class="fa fa-search"></i>');
 
         $FilterInput.off('keydown.FilterInput').on('keydown.FilterInput', function () {
 

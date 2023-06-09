@@ -828,7 +828,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 Core.Config.Get('CGIHandle'),
                 Data,
                 function (HTML) {
-                    Core.UI.Dialog.ShowContentDialog(HTML, Core.Language.Translate('Appointment'), '10px', 'Center', true, undefined, true);
+                    Core.UI.Dialog.ShowContentDialog(HTML, Core.Language.Translate('Appointment'), '10px', 'Center', true, undefined, true, 'modal-lg');
                     Core.UI.InputFields.Activate($('.Dialog:visible'));
 
                     TargetNS.AgentAppointmentEdit();
@@ -1846,11 +1846,11 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 .appendTo($LinkContainerObj);
 
             $RemoveObj.attr('href', '#')
-                .addClass('RemoveButton')
+                .addClass('RemoveButton icon-hover-md')
                 .data('pluginKey', PluginKey)
                 .data('linkId', LinkID)
                 .append(
-                    $('<i />').addClass('fa fa-minus-square-o')
+                    $('<i />').addClass('fa fa-trash-o')
                 )
                 .appendTo($LinkContainerObj);
 

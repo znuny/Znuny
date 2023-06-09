@@ -20,6 +20,8 @@ $Selenium->RunTest(
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -69,7 +71,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         for my $TicketID (@TicketIDs) {
 
@@ -100,10 +102,6 @@ $Selenium->RunTest(
                 'return typeof($) === "function" && $("a[href*=\'Action=AgentTicketWatchView;SortBy=Age;OrderBy=Up;View=;Filter=All\']").length;'
         );
 
-        $Selenium->find_element(
-            "//a[contains(\@href, \'Action=AgentTicketWatchView;SortBy=Age;OrderBy=Up;View=;Filter=All\' )]"
-        )->VerifiedClick();
-
         # Check different views for filters.
         for my $View (qw(Small Medium Preview)) {
 
@@ -112,14 +110,18 @@ $Selenium->RunTest(
                     "return typeof(\$) === 'function' && \$('a[href*=\"Action=AgentTicketWatchView;Filter=All;View=$View;\"]').length;"
             );
 
-            # Click on viewer controller.
-            $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketWatchView;Filter=All;View=$View;\' )]")
-                ->VerifiedClick();
+            if ( $View ne 'Small' ) {
 
-            $Selenium->WaitFor(
-                JavaScript =>
-                    'return typeof($) === "function" && $("table tbody").length;'
-            );
+                # Click on viewer controller.
+                $Selenium->find_element(
+                    "//a[contains(\@href, \'Action=AgentTicketWatchView;Filter=All;View=$View;\' )]"
+                )->VerifiedClick();
+
+                $Selenium->WaitFor(
+                    JavaScript =>
+                        'return typeof($) === "function" && $("table tbody").length;'
+                );
+            }
 
             # Verify that all tickets are present.
             for my $TicketID (@TicketIDs) {
@@ -159,8 +161,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
-
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

@@ -6,8 +6,10 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+
 [% RenderBlockStart("rw:Title") %]
 <label for="[% Data.FieldID | html %]" class="[% Data.MandatoryClass | html %]">
+    [% Data.Label | html %]:
 [% RenderBlockStart("LabelSpan") %]
     <span class="Marker">*</span>
 [% RenderBlockEnd("LabelSpan") %]
@@ -17,7 +19,6 @@
         <span>[% Translate(Data.DescriptionLong) | html %]</span>
     </span>
 [% RenderBlockEnd("rw:Title:DescriptionLong") %]
-    [% Data.Label | html %]:
 </label>
 <div class="Field">
     <input class="W75pc [% Data.ValidateRequired | html %] [% Data.ServerError | html %]" type="text" name="[% Data.FieldID | html %]" id="[% Data.FieldID | html %]" value="[% Data.Value | html %]"/>

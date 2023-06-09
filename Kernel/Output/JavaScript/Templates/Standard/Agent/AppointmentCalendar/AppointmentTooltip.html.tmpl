@@ -29,84 +29,119 @@
             <i class="fa fa-{{ CalEvent.pluginData[PluginKey]['Icon'] }}"></i>
         {% endfor %}
     {% endif %}
-
     </div>
+
     <fieldset>
-        <legend><span>{{ 'Basic information' | Translate }}</span></legend>
-        <label>{{ 'Title' | Translate }}:</label>
-        <p class="Value">{{ CalEvent.title }}</p>
-        <div class="Clear"></div>
-    {% if CalEvent.description %}
-        <label>{{ 'Description' | Translate }}:</label>
-        <p class="Value">{{ CalEvent.description }}</p>
-        <div class="Clear"></div>
-    {% endif %}
-    {% if CalEvent.location %}
-        <label>{{ 'Location' | Translate }}:</label>
-        <p class="Value">{{ CalEvent.location }}</p>
-        <div class="Clear"></div>
-    {% endif %}
-        <label>{{ 'Calendar' | Translate }}:</label>
-        <p class="Value">
-            <span class="Flag Small">
-                <span class="CalendarColor" style="background-color: {{ CalEvent.calendarColor }}"></span>
-            </span>
-            {{ CalEvent.calendarName }}
-        </p>
-        <div class="Clear"></div>
-    </fieldset>
-{% if TooltipTemplateResource and CalEvent.teamNames %}
-    <fieldset>
-        <legend><span>{{ 'Resource' | Translate }}</span></legend>
-        <label>{{ 'Team' | Translate }}:</label>
-        <p class="Value"> {{ CalEvent.teamNames | escape | replace('\\n', '<br>') | safe }}</p>
-        <div class="Clear"></div>
-    {% if CalEvent.resourceNames %}
-        <label>{{ 'Agent' | Translate }}:</label>
-        <p class="Value">{{ CalEvent.resourceNames | escape | replace('\\n', '<br>') | safe }}</p>
-        <div class="Clear"></div>
-    {% endif %}
-    </fieldset>
-{% endif %}
-    <fieldset>
-        <legend><span>{{ 'Date/Time' | Translate }}</span></legend>
-        <label>{{ 'Start date' | Translate }}:</label>
-        <p class="Value">{{ CalEvent.startDate }}</p>
-        <div class="Clear"></div>
-        <label>{{ 'End date' | Translate }}:</label>
-        <p class="Value">{{ CalEvent.endDate }}</p>
-        <div class="Clear"></div>
-    {% if CalEvent.allDay %}
-        <label>{{ 'All-day' | Translate }}:</label>
-        <p class="Value">{{ 'Yes' | Translate }}</p>
-        <div class="Clear"></div>
-    {% endif %}
-    {% if CalEvent.recurring %}
-        <label>{{ 'Repeat' | Translate }}:</label>
-        <p class="Value">{{ 'Yes' | Translate }}</p>
-        <div class="Clear"></div>
-    {% endif %}
+        <legend>
+            <span>{{ 'Basic information' | Translate }}</span>
+        </legend>
+
+        <div class="item-wrapper">
+            <label>{{ 'Title' | Translate }}:</label>
+            <p class="Value">{{ CalEvent.title }}</p>
+        </div>
+
+        {% if CalEvent.description %}
+        <div class="item-wrapper">
+            <label>{{ 'Description' | Translate }}:</label>
+            <p class="Value">{{ CalEvent.description }}</p>
+        </div>
+        {% endif %}
+
+        {% if CalEvent.location %}
+        <div class="item-wrapper">
+            <label>{{ 'Location' | Translate }}:</label>
+            <p class="Value">{{ CalEvent.location }}</p>
+        </div>
+        {% endif %}
+
+        <div class="item-wrapper">
+            <label>{{ 'Calendar' | Translate }}:</label>
+            <p class="Value">
+                <span class="Flag Small">
+                    <span class="CalendarColor" style="background-color: {{ CalEvent.calendarColor }}"></span>
+                </span>
+                {{ CalEvent.calendarName }}
+            </p>
+        </div>
+
     </fieldset>
 
-{% if CalEvent.pluginDataGroup %}
-    {% for Group, PluginKeyData in CalEvent.pluginDataGroup | dictsort | reverse %}
-        <fieldset>
-            <legend><span>{{ Group | Translate }}</span></legend>
-            {% for PluginKey, PluginData in PluginKeyData %}
-                <label>{{ PluginList[PluginKey].Name | Translate }}:</label>
-                <p class="Value">{{ PluginKeyData[PluginKey]['Value'] | escape | replace('\\n', '<br>') | safe }}</p>
-                <div class="Clear"></div>
-            {% endfor %}
+    {% if TooltipTemplateResource and CalEvent.teamNames %}
+        <fieldset class="divider">
+            <legend>
+                <span>{{ 'Resource' | Translate }}</span>
+            </legend>
+            <div class="item-wrapper">
+                <label>{{ 'Team' | Translate }}:</label>
+                <p class="Value"> {{ CalEvent.teamNames | escape | replace('\\n', '<br>') | safe }}</p>
+            </div>
+        {% if CalEvent.resourceNames %}
+            <div class="item-wrapper">
+                <label>{{ 'Agent' | Translate }}:</label>
+                <p class="Value">{{ CalEvent.resourceNames | escape | replace('\\n', '<br>') | safe }}</p>
+            </div>
+        {% endif %}
         </fieldset>
-    {% endfor %}
-{% endif %}
+    {% endif %}
 
-{% if CalEvent.notificationDate %}
-    <fieldset>
-        <legend><span>{{ 'Notification' | Translate }}</span></legend>
-        <label>{{ 'Notification' | Translate }}:</label>
-        <p class="Value">{{ CalEvent.notificationDate }}</p>
-        <div class="Clear"></div>
+    <fieldset class="divider">
+        <legend>
+            <span>{{ 'Date/Time' | Translate }}</span>
+        </legend>
+
+        <div class="item-wrapper">
+            <label>{{ 'Start date' | Translate }}:</label>
+            <p class="Value">{{ CalEvent.startDate }}</p>
+        </div>
+
+        <div class="item-wrapper">
+            <label>{{ 'End date' | Translate }}:</label>
+            <p class="Value">{{ CalEvent.endDate }}</p>
+        </div>
+
+        {% if CalEvent.allDay %}
+        <div class="item-wrapper">
+            <label>{{ 'All-day' | Translate }}:</label>
+            <p class="Value">{{ 'Yes' | Translate }}</p>
+        </div>
+        {% endif %}
+
+        {% if CalEvent.recurring %}
+        <div class="item-wrapper">
+            <label>{{ 'Repeat' | Translate }}:</label>
+            <p class="Value">{{ 'Yes' | Translate }}</p>
+        </div>
+        {% endif %}
+
     </fieldset>
-{% endif %}
+
+    {% if CalEvent.pluginDataGroup %}
+        {% for Group, PluginKeyData in CalEvent.pluginDataGroup | dictsort | reverse %}
+            <fieldset class="divider">
+                <legend>
+                    <span>{{ Group | Translate }}</span>
+                </legend>
+                {% for PluginKey, PluginData in PluginKeyData %}
+                <div class="item-wrapper">
+                    <label>{{ PluginList[PluginKey].Name | Translate }}:</label>
+                    <p class="Value">{{ PluginKeyData[PluginKey]['Value'] | escape | replace('\\n', '<br>') | safe }}</p>
+                </div>
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+    {% endif %}
+
+    {% if CalEvent.notificationDate %}
+        <fieldset class="divider">
+            <legend>
+                <span>{{ 'Notification' | Translate }}</span>
+            </legend>
+
+            <div class="item-wrapper">
+                <label>{{ 'Notification' | Translate }}:</label>
+                <p class="Value">{{ CalEvent.notificationDate }}</p>
+            </div>
+        </fieldset>
+    {% endif %}
 </div>

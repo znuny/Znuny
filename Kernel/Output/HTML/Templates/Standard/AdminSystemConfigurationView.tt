@@ -7,28 +7,9 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
 
-    <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('System Configuration'),
-                Link => 'AdminSystemConfiguration',
-            },
-        ]
-    %]
-
-[% IF Data.Type and Data.Type == 'CustomList' %]
-    [% BreadcrumbPath.push({ Name => Translate('View a custom List of Settings') }) %]
-[% ELSE %]
-    [% View = Data.View | uri %]
-    [% BreadcrumbPath.push({ Name => Translate('View single Setting: %s', Data.View), Link => 'AdminSystemConfiguration;Subaction=View;Setting=' _ View }) %]
-[% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -37,9 +18,9 @@
                 <ul class="ActionList">
                     <li>
                     [% IF Data.DeploymentID %]
-                        <a href="[% Env("Baselink") %]Action=AdminSystemConfigurationDeploymentHistory;Subaction=DeploymentHistoryDetails;DeploymentID=[% Data.DeploymentID | html %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to Deployment Details") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminSystemConfigurationDeploymentHistory;Subaction=DeploymentHistoryDetails;DeploymentID=[% Data.DeploymentID | html %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to Deployment Details") | html %]</span></a>
                     [% ELSE %]
-                        <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go back") | html %]</span></a>
                     [% END %]
                     </li>
                 </ul>
@@ -48,7 +29,25 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('System Configuration'),
+                    Link => 'AdminSystemConfiguration',
+                },
+            ]
+        %]
+
+    [% IF Data.Type and Data.Type == 'CustomList' %]
+        [% BreadcrumbPath.push({ Name => Translate('View a custom List of Settings') }) %]
+    [% ELSE %]
+        [% View = Data.View | uri %]
+        [% BreadcrumbPath.push({ Name => Translate('View single Setting: %s', Data.View), Link => 'AdminSystemConfiguration;Subaction=View;Setting=' _ View }) %]
+    [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         [% INCLUDE "SystemConfiguration/SettingsList.tt" %]
     </div>
-    <div class="Clear"></div>
 </div>

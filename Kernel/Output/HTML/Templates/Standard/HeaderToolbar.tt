@@ -7,46 +7,122 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-[% RenderBlockStart("ToolBarItem") %]
-            <li class="[% Data.Class | html %]"><a href="[% Data.Link %]" target="[% Data.Target | html %]" accesskey="[% Data.AccessKey | html %]" title="[% Translate(Data.Description) | html %]: [% Data.Count | html %][% Data.AccessKeyReference | html %]">[% Translate(Data.Description) | html %] <i class="icon-small fa fa-clock-o icon-show-reached"></i> <i class="icon-small fa fa-star icon-show-new"></i><i class="[% Data.Icon | html %]"></i> <span class="Counter">[% Data.Count | html %]</span> </a></li>
-[% RenderBlockEnd("ToolBarItem") %]
+<div class="toolbar-row">
+[% RenderBlockStart("ToolBarOverviewsContainer") %]
+    <div class="component-wrapper component-overviews">
+        <label>[% Translate('Overviews') | html %]</label>
+        <ul>
+[% RenderBlockStart("ToolBarOverviews") %]
+            <li class="[% Data.Class | html %]">
+                <a class="dropdown-item" href="[% Data.Link %]" target="[% Data.Target | html %]" accesskey="[% Data.AccessKey | html %]" title="[% Translate(Data.Description) | html %]: [% Data.Count | html %][% Data.AccessKeyReference | html %]">
+                    <span class="iconWrapper">
+                        <i class="icon-small fa fa-clock-o icon-show-reached"></i>
+                        <i class="icon-small fa fa-star icon-show-new"></i>
+                        <i class="[% Data.Icon | html %]"></i>
+                        [% IF Data.Count %]
+                        <span class="Counter">[% Data.Count | html %]</span>
+                        [% END %]
+                    </span>
+                </a>
+            </li>
+[% RenderBlockEnd("ToolBarOverviews") %]
+        </ul>
+    </div>
+[% RenderBlockEnd("ToolBarOverviewsContainer") %]
 
+[% RenderBlockStart("ToolBarActionsContainer") %]
+    <div class="component-wrapper component-actions">
+        <label>[% Translate('Actions') | html %]</label>
+        <ul>
+[% RenderBlockStart("ToolBarActions") %]
+            <li class="[% Data.Class | html %]">
+                <a class="dropdown-item" href="[% Data.Link %]" target="[% Data.Target | html %]" accesskey="[% Data.AccessKey | html %]" title="[% Translate(Data.Description) | html %]: [% Data.Count | html %][% Data.AccessKeyReference | html %]">
+                    <span class="iconWrapper">
+                        <i class="icon-small fa fa-clock-o icon-show-reached"></i>
+                        <i class="icon-small fa fa-star icon-show-new"></i>
+                        <i class="[% Data.Icon | html %]"></i>
+                        [% IF Data.Count %]
+                        <span class="Counter">[% Data.Count | html %]</span>
+                        [% END %]
+                    </span>
+                </a>
+            </li>
+[% RenderBlockEnd("ToolBarActions") %]
+        </ul>
+    </div>
+[% RenderBlockEnd("ToolBarActionsContainer") %]
+
+[% RenderBlockStart("ToolBarPersonalViewsContainer") %]
+    <div class="component-wrapper component-personal-views">
+        <label>[% Translate('Personal views') | html %]</label>
+        <ul>
+[% RenderBlockStart("ToolBarPersonalViews") %]
+            <li class="[% Data.Class | html %]">
+                <a class="dropdown-item" href="[% Data.Link %]" target="[% Data.Target | html %]" accesskey="[% Data.AccessKey | html %]" title="[% Translate(Data.Description) | html %]: [% Data.Count | html %][% Data.AccessKeyReference | html %]">
+                    <span class="iconWrapper">
+                        <i class="icon-small fa fa-clock-o icon-show-reached"></i>
+                        <i class="icon-small fa fa-star icon-show-new"></i>
+                        <i class="[% Data.Icon | html %]"></i>
+                        [% IF Data.Count %]
+                        <span class="Counter">[% Data.Count | html %]</span>
+                        [% END %]
+                    </span>
+                </a>
+            </li>
+[% RenderBlockEnd("ToolBarPersonalViews") %]
+        </ul>
+    </div>
+[% RenderBlockEnd("ToolBarPersonalViewsContainer") %]
+
+[% RenderBlockStart("ToolBarLastViews") %]
+    <div class="component-wrapper component-last-views LastViewToolBar">
+        <label>[% Translate('Last Views') | html %]</label>
+        <ul>
+            [% Data.ToolBarLastViewsHTML %]
+        </ul>
+    </div>
+[% RenderBlockEnd("ToolBarLastViews") %]
+
+    <!-- Search Tools Start -->
+    <div class="component-wrapper component-search align-right-auto">
+        <div class="search-bar-container">
+            <label>[% Translate('Search tools') | html %]</label>
+            <form action="[% Env("CGIHandle") %]" method="post" name="ToolBarSearch">
+                <i class="fa fa-search"></i>
+                <input type="hidden" name="Action" value="AgentTicketSearch"/>
+                <input type="hidden" name="Subaction" value="Search"/>
+                <input type="hidden" name="SearchTemplate" value="[% Translate("Search") | html %]"/>
+                <input type="hidden" name="CheckTicketNumberAndRedirect" value="1"/>
+                [% IF Data.SearchInArchive %]
+                    <input type="hidden" name="SearchInArchive" value="[% Data.SearchInArchive | html %]"/>
+                [% END %]
+                [% FOREACH Parameter IN Data.AdditionalSearchParameters %]
+                    <input type="hidden" name="[% Parameter.key | html %]" value="[% Parameter.value | html %]">
+                [% END %]
+                <input type="text" id="ToolBarSearchTerm" name="ToolBarSearchTerm" class="search-bar" />
+
+                <div class="component-wrapper">
+                    <div class="search-dropdown-top">
+[% RenderBlockStart("ToolBarSearch") %]
+                        <label class="dropdown-item">
+                            <input type="radio" id="ToolBarSearchBackend[% Data.Name %]" name="ToolBarSearchBackend"  value="ToolBarSearchBackend[% Data.Name %]" title="[% Translate(Data.Description) | html %]" [% Data.Checked | html %]/>
+                            [% Translate(Data.Description) | html %]
+                        </label>
+[% RenderBlockEnd("ToolBarSearch") %]
+                    </div>
 [% RenderBlockStart("ToolBarSearchProfile") %]
-            <li class="Extended SearchProfile">
-                <form action="[% Env("CGIHandle") %]" method="post" name="SearchProfile">
-                    <input type="hidden" name="Action" value="AgentTicketSearch"/>
-                    <input type="hidden" name="Subaction" value="LoadProfile"/>
-                    <input type="hidden" name="SearchTemplate" value="[% Translate("Search") | html %]"/>
-                    [% Data.Link %]
-#                    <a href="#" id="ToolbarProfileSearch" title="[% Translate(Data.Description) | html %]  ([% Data.AccessKey | html %])" accesskey="[% Data.AccessKey | html %]" [% Data.LinkOption %]>[% Translate(Data.Name) | html %]</a>
-                </form>
-            </li>
+                    <div class="search-dropdown-bottom">
+                        <div class="title">
+                            <label>Search profiles</label>
+                        </div>
+                        <div class="search-profiles-list">
+                            [% Data.Link %]
+                        </div>
+                    </div>
 [% RenderBlockEnd("ToolBarSearchProfile") %]
-[% RenderBlockStart("ToolBarSearchFulltext") %]
-            <li class="Extended SearchFulltext">
-                <form action="[% Env("CGIHandle") %]" method="post" name="SearchFulltext">
-                    <input type="hidden" name="Action" value="AgentTicketSearch"/>
-                    <input type="hidden" name="Subaction" value="Search"/>
-                    <input type="hidden" name="SearchTemplate" value="[% Translate("Search") | html %]"/>
-                    <input type="hidden" name="CheckTicketNumberAndRedirect" value="1"/>
-                    [% IF Data.SearchInArchive %]
-                        <input type="hidden" name="SearchInArchive" value="[% Data.SearchInArchive | html %]"/>
-                    [% END %]
-                    [% FOREACH Parameter IN Data.AdditionalSearchParameters %]
-                        <input type="hidden" name="[% Parameter.key | html %]" value="[% Parameter.value | html %]">
-                    [% END %]
-                    <input type="text" size="[% Data.Size | html %]" name="Fulltext" id="Fulltext" value="[% Data.Fulltext | html %]" placeholder="[% Translate(Data.Description) | html %]" title="[% Translate(Data.Description) | html %]"/>
-#                    <a href="#" id="ToolbarFulltextSearch" title="[% Translate(Data.Description) | html %] ([% Data.AccessKey | html %])" accesskey="[% Data.AccessKey | html %]" [% Data.LinkOption %]>[% Translate(Data.Name) | html %]</a>
-                </form>
-            </li>
-[% RenderBlockEnd("ToolBarSearchFulltext") %]
-[% RenderBlockStart("ToolBarCICSearchCustomerID") %]
-            <li class="Extended SearchFulltext">
-                <input type="text" size="[% Data.Size | html %]" id="ToolBarCICSearchCustomerID" placeholder="[% Translate(Data.Description) | html %]" title="[% Translate(Data.Description) | html %]"/>
-            </li>
-[% RenderBlockEnd("ToolBarCICSearchCustomerID") %]
-[% RenderBlockStart("ToolBarCICSearchCustomerUser") %]
-            <li class="Extended SearchFulltext">
-                <input type="text" size="[% Data.Size | html %]" id="ToolBarCICSearchCustomerUser" placeholder="[% Translate(Data.Description) | html %]" title="[% Translate(Data.Description) | html %]"/>
-            </li>
-[% RenderBlockEnd("ToolBarCICSearchCustomerUser") %]
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Search Tools End -->
+</div>

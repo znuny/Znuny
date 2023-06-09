@@ -7,12 +7,12 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain">
+<div class="MainBox ARIARoleMain InstallerPage">
 [% RenderBlockStart("Message") %]
     [% Data.Body %]
 [% RenderBlockEnd("Message") %]
 
-    <div class="W33pc SpacingTop SpacingBottom CenterBox">
+    <div class="W33pc CenterBox">
         <noscript>
         <div class="WidgetSimple">
             <div class="Header">
@@ -26,73 +26,112 @@
         </div>
         </noscript>
     </div>
-
 [% RenderBlockStart("Steps") %]
     <div class="Center">
-        <ul id="ProgressBar" class="ProgressBarElements[% Data.Steps | html %] SpacingTop SpacingBottom">
+        <ul id="ProgressBar" class="ProgressBarElements[% Data.Steps | html %] SpacingBottom">
 [% RenderBlockStart("StepLicense") %]
             <li class="First [% Data.Highlight | html %] [% Data.Active | html %]">
                 <span>
-                    <a href="#">[% Translate("Step %s", Data.Step) | html %]<span>[% Translate("License") | html %]</span></a>
+                    <a href="#">
+                    <strong>
+                        <span class="step-number">[% Translate(Data.Step) | html %]</span>
+                        <span class="step-clear"><i class="fa fa-check"></i></span>
+                    </strong>
+                    <span>[% Translate("License") | html %]</span></a>
                 </span>
+                <i class="fa fa-chevron-right"></i>
             </li>
 [% RenderBlockEnd("StepLicense") %]
 [% RenderBlockStart("StepDatabase") %]
             <li class="[% Data.Highlight | html %] [% Data.Active | html %]">
                 <span>
-                    <a href="#">[% Translate("Step %s", Data.Step) | html %]<span>[% Translate("Database Settings") | html %]</span></a>
+                    <a href="#">
+                    <strong>
+                        <span class="step-number">[% Translate(Data.Step) | html %]</span>
+                        <span class="step-clear"><i class="fa fa-check"></i></span>
+                    </strong>
+                    <span>[% Translate("Database Settings") | html %]</span></a>
                 </span>
+                <i class="fa fa-chevron-right"></i>
             </li>
 [% RenderBlockEnd("StepDatabase") %]
 [% RenderBlockStart("StepGeneral") %]
             <li class="[% Data.Highlight | html %] [% Data.Active | html %]">
                 <span>
-                    <a href="#">[% Translate("Step %s", Data.Step) | html %]<span>[% Translate("General Specifications and Mail Settings") | html %]</span></a>
+                    <a href="#">
+                    <strong>
+                        <span class="step-number">[% Translate(Data.Step) | html %]</span>
+                        <span class="step-clear"><i class="fa fa-check"></i></span>
+                    </strong>
+                    <span>[% Translate("General Specifications and Mail Settings") | html %]</span></a>
                 </span>
+                <i class="fa fa-chevron-right"></i>
             </li>
 [% RenderBlockEnd("StepGeneral") %]
 [% RenderBlockStart("StepFinish") %]
             <li class="Last [% Data.Highlight | html %] [% Data.Active | html %]">
                 <span>
-                    <a href="#">[% Translate("Step %s", Data.Step) | html %]<span>[% Translate("Finish") | html %]</span></a>
+                    <a href="#">
+                    <strong>
+                        <span class="step-number">[% Translate(Data.Step) | html %]</span>
+                        <span class="step-clear"><i class="fa fa-check"></i></span>
+                    </strong>
+                    <span>[% Translate("Finish") | html %]</span></a>
                 </span>
             </li>
 [% RenderBlockEnd("StepFinish") %]
         </ul>
     </div>
 [% RenderBlockEnd("Steps") %]
-
 [% RenderBlockStart("Intro") %]
-    <div class="W950px SpacingTop SpacingBottom CenterBox">
-        <div class="WidgetSimple SpacingTop" id="WebInstallerBox">
+    <div class="CenterBox">
+        <div class="WidgetSimple" id="WebInstallerBox">
             <div class="Header">
                 <h2>[% Translate("Welcome to %s", Config("ProductName")) | html %]</h2>
             </div>
             <div class="LayoutGrid Content">
-                <div class="Size1of2">
-                    <h4>Znuny GmbH</h4>
-                    <p>Marienstraße 18</p>
-                    <p>10117 Berlin</p>
-                    <p>Germany</p>
-                    <p>[% Translate("Phone") | html %]: <a href="tel:+4930609854180">+49 (0) 30 60 98 54 18-0</a></p>
+                <div class="card">
+                    <label>[% Translate("Address") | html %]</label>
+                    <p>Znuny GmbH, Marienstraße 18
+                    10117 Berlin, Germany</p>
                 </div>
+
+                <div class="card">
+                    <label>[% Translate("Phone") | html %]</label>
+                    <p><a href="tel:+4930609854180">+49 30 60 98 54 18-0</a></p>
+                </div>
+
+                <div class="card">
+                    <label>[% Translate("Web site") | html %]</label>
+                    <p><a href="https://znuny.org" target="_blank">www.znuny.org</a></p>
+                </div>
+
+                <div class="card">
+                    <label>[% Translate("Email") | html %]</label>
+                    <p><a href="mailto:info@znuny.com">info@znuny.com</a></p>
+                </div>
+
+                <div class="card">
+                    <label>[% Translate("Community") | html %]</label>
+                    <p><a href="https://community.znuny.org" target="_blank">community.znuny.org</a></p>
+                </div>
+
+                <div class="card">
+                    <label>GitHub</label>
+                    <p><a href="https://github.com/znuny/Znuny" target="_blank">github.com/znuny/Znuny</a></p>
+                </div>
+
+            </div> <!--Content-->
+
+            <div id="InstallerContinueWithJS">
+                <form action="[% Env("CGIHandle") %]" method="post" class="PreventMultipleSubmits">
+                    <input type="hidden" name="Action" value="Installer">
+                    <input type="hidden" name="Subaction" value="License">
+                    <button class="Primary CallForAction btn-main btn-primary btn-width-md" type="submit"><span>[% Translate("Next") | html %]</span></button>
+                </form>
             </div>
-            <div class="Clear"></div>
-            <div class="LayoutGrid Content">
-                <p>[% Translate("Web site") | html %]: <a href="https://znuny.org" target="_blank">www.znuny.org</a></p>
-                <p>[% Translate("Email") | html %]: <a href="mailto:info@znuny.com">info@znuny.com</a></p>
-                <p>[% Translate("Community") | html %]: <a href="https://community.znuny.org/" target="_blank">community.znuny.org/</a></p>
-                <p>GitHub: <a href="https://github.com/znuny/Znuny" target="_blank">github.com/znuny/Znuny</a></p>
-            </div>
-            <div class="Clear"></div>
-        </div>
-        <div id="InstallerContinueWithJS" class="SpacingBottom Right">
-            <form action="[% Env("CGIHandle") %]" method="post" class="PreventMultipleSubmits">
-                <input type="hidden" name="Action" value="Installer">
-                <input type="hidden" name="Subaction" value="License">
-                <button class="Primary CallForAction" type="submit"><span>[% Translate("Next") | html %]</span></button>
-            </form>
-        </div>
+
+        </div> <!--WidgetSimple-->
     </div>
 [% RenderBlockEnd("Intro") %]
 

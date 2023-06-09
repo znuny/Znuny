@@ -22,6 +22,7 @@ $Selenium->RunTest(
         my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
         my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
         my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
 
         # Create test user.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -29,7 +30,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
