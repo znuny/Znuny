@@ -135,13 +135,14 @@ get priority attributes
 returns:
 
     %PriorityData = (
-        ID          => '123',
-        Name        => '123 something',
-        ValidID     => '1',
-        CreateTime  => '2021-02-01 12:15:00',
-        CreateBy    => '321',
-        ChangeTime  => '2021-04-01 15:30:00',
-        ChangeBy    => '223',
+        ID         => '123',
+        Name       => '123 something',
+        ValidID    => '1',
+        Color      => '#FF8A25',
+        CreateTime => '2021-02-01 12:15:00',
+        CreateBy   => '321',
+        ChangeTime => '2021-04-01 15:30:00',
+        ChangeBy   => '223',
     );
 
 =cut
@@ -171,7 +172,7 @@ sub PriorityGet {
 
     # ask database
     return if !$DBObject->Prepare(
-        SQL => 'SELECT id, name, valid_id, create_time, create_by, change_time, change_by '
+        SQL => 'SELECT id, name, valid_id, color, create_time, create_by, change_time, change_by '
             . 'FROM ticket_priority WHERE id = ?',
         Bind  => [ \$Param{PriorityID} ],
         Limit => 1,
@@ -183,10 +184,11 @@ sub PriorityGet {
         $Data{ID}         = $Row[0];
         $Data{Name}       = $Row[1];
         $Data{ValidID}    = $Row[2];
-        $Data{CreateTime} = $Row[3];
-        $Data{CreateBy}   = $Row[4];
-        $Data{ChangeTime} = $Row[5];
-        $Data{ChangeBy}   = $Row[6];
+        $Data{Color}      = $Row[3];
+        $Data{CreateTime} = $Row[4];
+        $Data{CreateBy}   = $Row[5];
+        $Data{ChangeTime} = $Row[6];
+        $Data{ChangeBy}   = $Row[7];
     }
 
     # set cache
@@ -207,6 +209,7 @@ add a ticket priority
     my $True = $PriorityObject->PriorityAdd(
         Name    => 'Prio',
         ValidID => 1,
+        Color   => '#FF8A25',
         UserID  => 1,
     );
 
@@ -226,14 +229,16 @@ sub PriorityAdd {
         }
     }
 
+    $Param{Color} //= '#FF8A25';
+
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     return if !$DBObject->Do(
-        SQL => 'INSERT INTO ticket_priority (name, valid_id, create_time, create_by, '
+        SQL => 'INSERT INTO ticket_priority (name, valid_id, color, create_time, create_by, '
             . 'change_time, change_by) VALUES '
-            . '(?, ?, current_timestamp, ?, current_timestamp, ?)',
+            . '(?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Param{ValidID}, \$Param{UserID}, \$Param{UserID},
+            \$Param{Name}, \$Param{ValidID}, \$Param{Color}, \$Param{UserID}, \$Param{UserID},
         ],
     );
 
@@ -265,10 +270,11 @@ sub PriorityAdd {
 update a existing ticket priority
 
     my $True = $PriorityObject->PriorityUpdate(
-        PriorityID     => 123,
-        Name           => 'New Prio',
-        ValidID        => 1,
-        UserID         => 1,
+        PriorityID => 123,
+        Name       => 'New Prio',
+        ValidID    => 1,
+        Color      => '#FF8A25',
+        UserID     => 1,
     );
 
 =cut
@@ -287,13 +293,14 @@ sub PriorityUpdate {
         }
     }
 
+    $Param{Color} //= '#FF8A25';
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     return if !$DBObject->Do(
-        SQL => 'UPDATE ticket_priority SET name = ?, valid_id = ?, '
+        SQL => 'UPDATE ticket_priority SET name = ?, valid_id = ?, color = ?, '
             . 'change_time = current_timestamp, change_by = ? WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{ValidID}, \$Param{UserID}, \$Param{PriorityID},
+            \$Param{Name}, \$Param{ValidID}, \$Param{Color}, \$Param{UserID}, \$Param{PriorityID},
         ],
     );
 

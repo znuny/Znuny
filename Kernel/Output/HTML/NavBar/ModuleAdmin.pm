@@ -172,6 +172,13 @@ sub Run {
             = sort { $Collator->cmp( $a->{NameTranslated}, $b->{NameTranslated} ) } @{ $Modules{$Block} };
     }
 
+    # get count of each group
+    for my $ModuleGroup (@ModuleGroups) {
+        my $Count = scalar @{ $Modules{ $ModuleGroup->{Key} } || [] };
+        $ModuleGroup->{Count}        = $Count || 0;
+        $ModuleGroup->{WidgetStatus} = 'Expanded';
+    }
+
     $LayoutObject->Block(
         Name => 'AdminNavBar',
         Data => {

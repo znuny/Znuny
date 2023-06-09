@@ -1,0 +1,1528 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     Flexbox
+    - Icons
+    - Card
+    - Pill
+    - Buttons
+    - MessageBox
+    - Attachment Component
+    - Attachment Blocker
+    - Alert
+    - Voting / Rate
+    - WidgetSimple
+    - Pagination
+ */
+
+@media screen,projection,tv,handheld {
+
+    /* **************************************** Icons **************************************** */
+    .icon-hover,
+    .icon-hover-md,
+    .icon-hover-sm {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--icon-hover-size);
+        height: var(--icon-hover-size);
+        min-height: 0 !important;
+        border-radius: var(--border-radius-xs);
+        transition: var(--main-transition);
+    }
+
+    label .icon-hover,
+    button .icon-hover {
+        margin: 0;
+        position: relative;
+        left: 2px;
+        transition: var(--main-transition);
+    }
+
+    label .icon-hover i,
+    button .icon-hover i {
+        color: var(--gray-dark-semi);
+        font-size: var(--font-size-md);
+    }
+
+    .icon-hover-md {
+        width: var(--icon-hover-md-size);
+        height: var(--icon-hover-md-size);
+    }
+
+    .icon-hover-sm {
+        width: var(--icon-hover-sm-size);
+        height: var(--icon-hover-sm-size);
+        border-radius: var(--border-radius-xxs);
+    }
+
+    .icon-hover i,
+    .icon-hover-md i,
+    .icon-hover-sm i {
+        font-weight: var(--normal);
+        font-size: var(--icon-main-size);
+        color: var(--gray-dark-semi);
+    }
+
+    .icon-hover:hover,
+    .icon-hover-md:hover,
+    .icon-hover-sm:hover {
+        cursor: pointer;
+        background-color: var(--icon-hover-color-light);
+    }
+
+    /* **************************************** Card **************************************** */
+    .main-card-item {
+        padding: var(--padding-lg);
+        background: var(--white);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .main-card-item:empty {
+        padding: 0;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+    }
+
+    .main-card-item fieldset,
+    .main-card-item .ActionRow {
+        max-width: 100%;
+    }
+
+    div.card,
+    span.card,
+    form.card,
+    fieldset.card,
+    .Field.card,
+    .card,
+    div.card-item,
+    span.card-item,
+    form.card-item,
+    fieldset.card-item,
+    .Field.card-item,
+    #ActivityDialogContent .Field.card,
+    .card-item {
+        gap: var(--gap-md);
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        position: relative;
+        z-index: 1;
+        background: var(--white);
+        padding: var(--padding-lg);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+    }
+
+    div.card-item,
+    span.card-item,
+    form.card-item,
+    fieldset.card-item,
+    .card-item {
+        display: flex;
+        flex-flow: column;
+        gap: 0;
+        background: var(--main-bg-color);
+    }
+
+    .card-title {
+        /*font-family: Poppins;*/
+        color: var(--black);
+        padding-bottom: var(--padding-xs);
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .card-title,
+    h2.card-title {
+        font-size: var(--font-size-md);
+        font-weight: var(--semi-bold);
+        letter-spacing: .1px;
+        line-height: 36px;
+    }
+
+    .card-item label {
+        display: flex;
+        align-items: center;
+        gap: var(--padding-xs);
+        line-height: normal;
+    }
+
+    div.card-item:last-child::after {
+        background: transparent;
+    }
+
+    @media (min-width: 1025px) and (max-width: 1399px) {
+
+        .FormScreen:not(.Preferences) div.card-item,
+        .FormScreen:not(.Preferences) div.card-item > .Row {
+            background: transparent;
+            border: 0;
+            margin: 0;
+        }
+
+        .FormScreen:not(.Preferences) div.card-item:last-child::after {
+            background: transparent;
+        }
+
+        div.card-item {
+            /*padding: var(--padding-lg) var(--padding-sm); - lateral padding was cutting ajax loader icons in half*/
+            padding: var(--padding-lg);
+        }
+
+        div.card-item > .Row.col-desktop-50 {
+            width: calc(50% - 10px);
+        }
+
+
+        .FormScreen:not(.Preferences) div.card-item::after {
+            content: '';
+            width: calc(100% + 200px);
+            height: 1px;
+            position: absolute;
+            left: -100px;
+            bottom: 0;
+            background: var(--border-color);
+        }
+    }
+
+    @media only screen and (max-width: 1024px) {
+
+        div.card-item,
+        div.card-item > .Row {
+            background: none;
+            border: 0;
+            width: 100%;
+            margin: 0;
+        }
+
+        div.card-item::after {
+            content: '';
+            width: 100%;
+            height: 1px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background: var(--border-color);
+        }
+
+
+
+    }
+
+    @media only screen and (max-width: 991px) {
+        div.card-item {
+            padding: var(--padding-lg) 0;
+        }
+
+        div.card-item::after {
+            width: 100%;
+            left: 0;
+        }
+    }
+
+
+    /* **************************************** Pill **************************************** */
+    .pill {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--white) !important;
+        font-size: var(--font-size-sm);
+        font-weight: var(--normal);
+        padding: 6px var(--padding-md);
+        border: 0;
+        float: left;
+        border-radius: var(--border-radius-xl);
+    }
+
+    /* **************************************** Buttons **************************************** */
+    .btn-main {
+        width: 100%;
+        min-height: var(--btn-min-height);
+        border: none;
+        border-radius: var(--border-radius-sm);
+        /*line-height: var(--btn-min-height);*/
+        font-weight: var(--semi-bold);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: var(--main-transition);
+        font-size: var(--font-size-sm);
+        padding: 0 var(--padding-md); /*important width limit for btns with longer text*/
+        text-align: center;
+        font-size: var(--font-size-sm);
+    }
+    
+
+    .btn-main.Hidden {
+        display: none;
+    }
+
+    .btn-main span {
+        font-size: var(--font-size-sm);
+    }
+
+    .btn-main:focus {
+        color: var(--white);
+    }
+
+    .btn-icon {
+        width: var(--btn-icon-sm);
+        height: var(--btn-icon-sm);
+        min-height: unset;
+        min-width: unset;
+      }
+
+    /* btn width */
+    .btn-width-xxl {
+        max-width: var(--btn-max-width-xxl);
+        min-width: var(--btn-max-width-xxl);
+    }
+
+    .btn-width-xl {
+        max-width: var(--btn-max-width-xl);
+        min-width: var(--btn-max-width-xl);
+    }
+
+    .btn-width-lg {
+        max-width: var(--btn-max-width-lg);
+        min-width: var(--btn-max-width-lg);
+    }
+
+    .btn-width-md {
+        max-width: var(--btn-max-width-md);
+        min-width: var(--btn-max-width-md);
+    }
+
+    .btn-width-sm {
+        max-width: var(--btn-max-width-sm);
+        min-width: var(--btn-max-width-sm);
+    }
+
+    .btn-width-xs {
+        max-width: var(--btn-max-width-xs);
+        min-width: var(--btn-max-width-xs);
+    }
+
+    /* btn height */
+    .btn-height-lg {
+        line-height: var(--btn-height-lg);
+    }
+
+    .btn-height-md {
+        line-height: var(--btn-height-md);
+    }
+
+    .btn-height-sm {
+        line-height: var(--btn-height-sm);
+    }
+
+    /* specific btn types */
+    .btn-primary {
+        color: var(--btn-primary-text);
+        background: var(--primary-color);
+        border: var(--border-width) var(--border-solid) var(--primary-color);
+    }
+
+    .btn-primary:hover,
+    .btn-primary-ghost:hover {
+        color: var(--btn-primary-text-hover);
+        background: var(--primary-color-darker);
+        border: var(--border-width) var(--border-solid) var(--primary-color-darker);
+        cursor: pointer;
+    }
+
+    .btn-primary-ghost {
+        background: var(--btn-ghost-background);
+        color: var(--btn-dropdown-color);
+        border: var(--border-width-md) var(--border-solid) var(--primary-color);
+    }
+
+    .btn-primary-ghost:hover {
+        border-width: var(--border-width-md);
+    }
+
+    .btn-cancel-ghost {
+        color: var(--btn-cancel-ghost-text);
+        background: var(--btn-cancel-ghost-bg);
+        margin-right: var(--margin-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .CancelClosePopup.btn-cancel-ghost,
+    .UndoClosePopup.btn-cancel-ghost {
+        background: transparent;
+        margin: 0;
+    }
+
+    .btn-cancel-ghost:hover {
+        color: var(--btn-cancel-ghost-text);
+        background: var(--btn-cancel-ghost-bg-hover);
+        cursor: pointer;
+    }
+
+    /* ******************************************* FORM BUTTON ACTIONS ****************************************** */
+
+    .form-button-actions .buttons-field {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: var(--padding-lg);
+        /*padding-top: var(--padding-lg);*/
+    }
+
+    .field-wrapper.form-button-actions:only-child .buttons-field {
+        padding: 0;
+    }
+
+    .form-button-actions .buttons-field .inner-output-field {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-xs);
+    }
+
+    .form-button-actions .buttons-field .inner-output-field  span {
+        width: 100%;
+     }
+
+    /* ************************************** MessageBox *************************************** */
+    /* note - previously in Core.TicketDetail */
+
+    /**
+    * @subsection  MessageBox (Notification)
+    */
+
+    .SmallBox,
+    .MessageBrowser,
+    .MessageBox,
+    .ACLNote {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        padding: var(--padding-sm) var(--padding-xl);
+        position: relative;
+        background: var(--alert-info-bg-color);
+        border-radius: var(--border-radius-xxs);
+        gap: var(--gap-md);
+    }
+
+    .Content .MessageBox {
+        border: 1px solid #ddd;
+    }
+
+    form > .MessageBox{
+        margin-top: 0;
+    }
+
+
+    .MessageBrowser i,
+    .MessageBox i,
+    .ACLNote i {
+        font-size: var(--font-size-md);
+    }
+
+    .MessageBrowser .p-desc,
+    .MessageBox > span {
+        color: var(--alert-close-icon-color);
+        font-size: var(--font-size-sm);
+        font-weight: var(--normal);
+        padding: 0;
+    }
+
+    .SmallBox .Close,
+    .MessageBrowser .Close,
+    .MessageBox .Close,
+    .ACLNote .Close {
+        margin-left: auto;
+    }
+
+
+    .SmallBox p {
+        padding: 5px 25px 5px 25px;
+        font-size: 11px;
+        text-align: center;
+    }
+
+
+    .MessageBox i,
+    .MessageBox p,
+    .MessageBox a {
+        color: var(--black);
+    }
+
+
+    .MessageBox p a:after {
+        content: "\2192";
+        display: inline-block;
+        font-size: 15px;
+        transition: margin ease 0.3s;
+    }
+
+    .MessageBox a {
+        transition: color ease 0.3s;
+    }
+
+    .MessageBox a.Button:after {
+        content: "";
+    }
+
+    .MessageBox a.Button {
+        display: inline;
+        padding: 3px 7px;
+    }
+
+    .MessageBox a.Button:hover {
+        text-decoration: none;
+    }
+
+    /**
+    * @subsection  Alerts colors
+    * @note
+    */
+
+    .Info {
+        background: var(--alert-info-bg-color);
+        border: 1px solid var(--alert-info-border-color);
+    }
+
+    .Info i {
+        color: var(--alert-info-icon-color);
+    }
+
+    .Error {
+        background: var(--alert-error-bg-color);
+        border: 1px solid var(--alert-error-border-color);
+    }
+
+    .Error i {
+        color: var(--alert-error-icon-color);
+    }
+
+    .MessageBox.Confirmation, 
+    .Success {
+        background: var(--alert-success-bg-color);
+        border: 1px solid var(--alert-success-border-color);
+    }
+
+    .Success i {
+        color: var(--alert-success-icon-color);
+    }
+
+    .Warning {
+        background: var(--alert-warning-bg-color);
+        border: 1px solid var(--alert-warning-border-color);
+    }
+
+    .Warning i {
+        color: var(--alert-warning-icon-color);
+    }
+
+    .Notice {
+        background: var(--alert-notice-bg-color);
+        border: 1px solid var(--alert-notice-border-color);
+    }
+
+    .Notice i {
+        color: var(--alert-notice-icon-color);
+    }
+
+
+
+
+
+
+
+    /* ************************************* Attachment Component ********************************* */
+
+    .component-attachment {
+        display: flex;
+        flex-direction: column;
+        background: var(--white);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+        background: var(--white);
+    }
+
+    fieldset .Field.component-attachment {
+        gap: 0;
+        background: var(--white);
+        margin-top: var(--margin-sm);
+    }
+
+    .AgentTicketActionCommon fieldset .Field.component-attachment {
+        margin-top: var(--margin-sm);
+    }
+
+    .outer-upload-file {
+        display: flex;
+    }
+
+    .outer-upload-file .DnDUpload {
+
+    }
+
+    .outer-upload-file .DnDUpload .ReadyForUpload {
+        display: flex;
+        align-content: center;
+    }
+
+    .AttachmentListContainer {
+        position: relative;
+        /*max-width: 622px;*/
+        min-width: 100%;
+    }
+
+    .AttachmentListContainer table:empty {
+        margin: 0;
+    }
+
+    .AttachmentListContainer .Busy {
+        position: absolute;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        background: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        box-sizing: border-box;
+        display: none;
+        z-index: 11111;
+    }
+
+    .AttachmentListContainer .Busy i {
+        vertical-align: middle;
+        line-height: 100%;
+        position: absolute;
+        top: 50%;
+        font-size: 20px;
+        margin-top: -10px;
+    }
+
+    /**
+    * @subsection  Drag & drop upload
+    */
+
+    div.DnDUploadBox {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: var(--padding-lg);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+        background: var(--white);
+    }
+
+    div.DnDUploadBox:hover {
+        cursor: pointer;
+    }
+
+    div.DnDUpload {
+        display: flex;
+        justify-content: center;
+        padding: var(--padding-lg);
+        width: 100%;
+        font-size: var(--font-size-xs);
+        font-weight: var(--semi-bold);
+        line-height: normal;
+        transition: var(--main-transition);
+    }
+
+    input.AjaxDnDUpload.Error + div.DnDUpload {
+        color: #ff505e;
+        border-color: #ff505e;
+    }
+
+    div.DnDUpload.DragOver {
+        border-style: dashed;
+        background: var(--overlay-bg);
+        color: #444;
+    }
+
+    div.DnDUpload i {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        margin-left: -20px;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    div.DnDUpload i.fa-spinner {
+        display: none;
+    }
+
+    div.DnDUpload.Uploading i.fa-download {
+        display: none;
+    }
+
+    div.DnDUpload.Uploading i.fa-spinner {
+        display: block;
+    }
+
+    div.DnDUpload .UploadRunning {
+        display: none;
+    }
+
+    div.DnDUpload.Uploading .ReadyForUpload {
+        display: none;
+    }
+
+    div.DnDUpload.Uploading .UploadRunning {
+        display: block;
+    }
+
+    table.AttachmentList {
+        width: 100%;
+        table-layout: fixed;
+        border: 0;
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    table.AttachmentList thead {
+        display: none;
+    }
+
+    table.AttachmentList tbody tr {
+        border: 0;
+        border-radius: var(--border-radius-xs);
+    }
+
+    table.AttachmentList tbody tr td {
+        padding: 0 var(--padding-sm);
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: pre;
+        min-width: 125px;
+        max-width: 125px;
+    }
+
+    table.AttachmentList tbody tr:nth-child(2n) td {
+        background-color: transparent;
+    }
+
+    table.AttachmentList tbody tr:hover td {
+        background: var(--table-td-even-bg);
+    }
+
+    table.AttachmentList tbody tr {
+        display: block;
+    }
+
+    table.AttachmentList tbody tr,
+    table.AttachmentList tbody tr td {
+        max-height: 50px;
+        line-height: normal;
+    }
+
+    table.AttachmentList .Filename {
+        color: var(--primary-color);
+    }
+
+    table.AttachmentList .Filetype {
+        display: none;
+    }
+
+    table.AttachmentList .Filesize {
+        color: var(--gray-dark-semi);
+    }
+
+    table.AttachmentList .Progress {
+        display: block;
+        height: 4px;
+        margin: 3px 0px;
+        background: #f92;
+        width: 0px;
+    }
+
+    table.AttachmentList .Delete {
+    }
+
+    table.AttachmentList tbody tr td:last-child {
+        width: 100%;
+        text-align: right;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    table.AttachmentList .AttachmentDelete {
+        display: inline-flex;
+    }
+
+    table.AttachmentList .AttachmentDelete i {
+        width: 16px;
+        height: 16px;
+    }
+
+    table.AttachmentList.DataTable thead th {
+        line-height: 12px;
+    }
+
+    /* ************************************** Attachment Blocker *************************************** */
+
+    .attachment-blocker {
+        padding: 10px 20px;
+        position: relative;
+        background: #50B5FF10;
+        border-radius: 5px;
+    }
+
+    /* ************************************* Attachment Widget ********************************* */
+    .attachment-widget >  .Content.Attachments {
+        padding: 0;
+    }
+
+    .attachment-widget .message {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding-left: var(--padding-md);
+        padding-bottom: var(--padding-md);
+    }
+
+    .attachment-widget .message .DownloadAttachment {
+        display: flex;
+        width: 33.3%;
+        padding-top: var(--padding-md);
+        padding-right: var(--padding-md);
+    }
+
+    .attachment-widget .message .DownloadAttachment a {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        transition: var(--main-transition);
+    }
+
+    .attachment-widget .message .DownloadAttachment a:hover {
+        background: var(--table-td-even-bg);
+    }
+
+    .attachment-widget .message .DownloadAttachment a .file-info {
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-md) var(--padding-xs) var(--padding-md) var(--padding-md);
+        gap: var(--gap-sm);
+    }
+
+    .attachment-widget .message .DownloadAttachment a .file-name {
+        color: var(--primary-color);
+    }
+
+    .attachment-widget .message .DownloadAttachment a .file-weight {
+        color: var(--gray-dark-semi);
+    }
+
+    .attachment-widget .message .DownloadAttachment a .file-icon {
+        display: flex;
+        padding: var(--padding-md);
+        align-items: center;
+    }
+
+    .attachment-widget .message .DownloadAttachment a .file-icon i {
+        color: var(--gray-dark-semi);
+        font-size: 16px;
+    }
+
+
+    /* **************************************** Alert **************************************** */
+    .alert-bloked-content {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--padding-sm) var(--padding-lg);
+        margin-top: var(--margin-lg);
+        position: relative;
+        background: var(--alert-info-bg-color);
+        border-radius: var(--border-radius-xxs);
+    }
+
+    /* **************************************** Voting / Rate **************************************** */
+
+    .voting .ArticleContent {
+        padding: var(--padding-md);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--gap-md);
+    }
+
+    .voting .ArticleContent .voting-form {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+        align-items: center;
+        overflow: unset;
+    }
+
+    .voting .ArticleContent .voting-form  .RateButtons {
+        display: flex;
+        flex-direction: row;
+        gap: var(--gap-md);
+    }
+
+    .voting .ArticleContent .voting-form  .RateButtons > li {
+        display: flex;
+        align-items: center;
+    }
+
+    .voting .ArticleContent .voting-form .RateButtons > li:first-child,
+    .voting .ArticleContent .voting-form .RateButtons > li:last-child {
+        color: var(--gray-dark-semi);
+    }
+
+    .Visible-ScreenS .RateButtons > li {
+        display: flex;
+    }
+
+    .Visible-ScreenS .RateButtons > li span {
+    }
+
+    .voting .ArticleContent .voting-form .RateButton {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-xs);
+        position: relative;
+        cursor: pointer;
+        color: var(--black);
+        text-align: center;
+    }
+
+    .voting .ArticleContent .voting-form .RateButton i {
+        display: flex;
+        font-size: 16px;
+        width: 100%;
+        color: var(--gray-dark-semi);
+    }
+
+    .voting .ArticleContent .voting-form .RateButton i.fa-star {
+        display: none;
+    }
+
+    .voting .ArticleContent .voting-form .RateButton.RateChecked i.fa-star {
+        display: flex;
+        color: var(--primary-color);
+    }
+
+    .voting .ArticleContent .voting-form .RateButton.RateChecked i.fa-star-o {
+        display: none;
+    }
+
+    .voting .ArticleContent .voting-form .RateButton:hover i.fa-star-o {
+        color: var(--black);
+    }
+
+    .voting .ArticleContent .voting-form .RateStar {
+        display: flex;
+        padding-left: 1px;
+        font-size: 10px;
+    }
+
+    .voting .ArticleContent .voting-form .RateStarText {
+        text-indent: 5px;
+    }
+
+    .voting .ArticleContent .voting-form .RateLabelBefore,
+    .voting .ArticleContent .voting-form .RateLabelAfter {
+        color: var(--gray-dark-semi);
+        padding-top: 5px;
+        font-weight: bold;
+    }
+
+    .voting .ArticleContent .voting-form .RateLabelBefore {
+        padding-right: 6px;
+    }
+
+    .voting .ArticleContent .voting-form .RateLabelAfter {
+        padding-left: 5px;
+    }
+
+    /* ************************************* WidgetSimple ********************************* */
+    .WidgetSimple {
+        position: relative;
+        background: var(--widget-simple-bg);
+        box-shadow: none;
+        margin-right: 0;
+        transition: var(--main-transition);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+    }
+
+    /**
+    * @subsection  Header
+    */
+    .WidgetSimple .Header {
+        position: relative;
+        display: flex;
+        gap: var(--gap-smd);
+        align-items: center;
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        padding: var(--padding-md);
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    }
+
+    .WidgetSimple.Expanded .Header {
+        background: var(--main-bg-color);
+      }
+
+    .SidebarColumn .WidgetSimple .Header {
+        background-color: var(--sidebarcolumn-header-bg);
+    }
+
+    .WidgetSimple > .Header h2,
+    .WidgetSimple > .Header h3 {
+        display: flex;
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: var(--widget-simple-title-size);
+        font-weight: var(--semi-bold);
+        text-shadow: none;
+        color: var(--black);
+        line-height: 120%;
+      }
+
+    /**
+    * @subsection  Content
+    */
+    .WidgetSimple .Content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-smd);
+        padding: var(--padding-md);
+    }
+
+    .WidgetSimple  .Content fieldset > span {
+        display: flex;
+        flex-flow: column;
+        align-items: baseline;
+        justify-content: flex-start;
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        gap: var(--gap-xs);
+    }
+
+    .WidgetSimple .Content.outerTable {
+        padding: 0;
+    }
+
+    .WidgetSimple .Content label {
+        color: var(--black);
+    }
+
+    .WidgetSimple textarea {
+        width: 100%;
+        height: 180px;
+    }
+
+    /**
+    * @subsection  WidgetActions
+    */
+
+    .WidgetAction {
+        /*height: 19px;
+        width: 16px;
+        padding-right: 1px;
+        float: left;*/
+        width: auto !important;
+        text-align: center;
+    }
+
+    .RTL .WidgetAction {
+        padding: 0 0 0 1px;
+        float: right;
+    }
+
+    .WidgetAction a {
+        font-size: var(--font-size-md);
+        /*height: 20px;*/
+        display: flex;
+        align-items: center;
+        align-self: center;
+    }
+
+    .WidgetAction.WithText {
+        width: auto;
+    }
+
+    .WidgetAction.WithText a {
+        color: #999;
+        font-size: 11px;
+        white-space: nowrap;
+        line-height: 16px;
+    }
+
+    .WidgetAction.WithText a i {
+        font-size: 14px;
+        position: relative;
+        top: -2px;
+        display: inline-block !important;
+        margin-left: 5px;
+    }
+
+    .WidgetAction.Toggle,
+    .Expanded.AnimationRunning > .Header > .WidgetAction.Toggle {
+        height: auto;
+        width: auto;
+        margin: 0;
+        float: initial;
+        position: absolute;
+        top: 0;
+        min-width: 100%;
+        height: 100%;
+        left: 0;
+    }
+
+    .WidgetAction.Toggle i {
+        display: flex !important;
+        position: relative;
+        font-size: var(--font-size-lg);
+        left: initial;
+        right: initial;
+        top: initial;
+        color: var(--gray-dark) !important;
+        transition: var(--main-transition);
+    }
+
+    .Expanded > .Header > .WidgetAction.Toggle i.fa-caret-down {
+        transform: rotate(180deg);
+    }
+
+    .Collapsed > .Header > .WidgetAction.Toggle i.fa-caret-down {
+        display: initial !important;
+        transform: rotate(0deg);
+    }
+
+    .Header:active > .WidgetAction.Toggle {
+        background-position: 0 -13px;
+    }
+
+    .Expanded > .Header > .WidgetAction.Toggle,
+    .Collapsed.AnimationRunning > .Header > .WidgetAction.Toggle {
+        background-position: 0 -26px;
+    }
+
+    .WidgetAction.Toggle a {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        padding-right: var(--padding-xl);
+        box-sizing: border-box;
+    }
+
+    .WidgetSimple.GridGroups .WidgetAction.Toggle a {
+        padding: 0;
+    }
+
+    .WidgetAction i {
+        color: var(--gray-darker);
+        margin: 0;
+    }
+
+    /**
+    * @subsection  TableLike
+    */
+
+    ul.Tablelike li {
+        line-height: 20px;
+        padding: var(--padding-md);
+        min-height: 38px;
+        font-weight: var(--semi-bold);
+        background-color: var(--white);
+        color: var(--modal-col-text-color);
+    }
+
+    ul.Tablelike li.OneRow,
+    ul.Tablelike li.OneRow .AsBlock {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    ul.Tablelike li:nth-child(even) {
+        background-color: var(--main-bg-color);
+    }
+
+    ul.Tablelike li:hover {
+        background: #ffe8d3;
+    }
+
+    ul.Tablelike li:hover a {
+        color: #000;
+    }
+
+    ul.Tablelike li.Header {
+        color: var(--black);
+        font-size: var(--font-size-md);
+        font-weight: var(--medium);
+        line-height: 20px;
+        padding: var(--padding-md) var(--padding-lg);
+        background: var(--modal-header-bg);
+        border: var(--border-width) var(--border-solid) transparent;
+        border-top-left-radius: var(--border-radius-sm);
+        border-top-right-radius: var(--border-radius-sm);
+        border-bottom: 0;
+        justify-content: flex-start;
+    }
+
+    /**
+    * @subsection  Errors
+    */
+    .WidgetSimple .ErrorMessage .WidgetAction {
+        display: none;
+    }
+
+    .WidgetSimple .Error {
+        color: #FF505E;
+    }
+
+    /* ************************************* FAQ Related Articles Widget ********************************* */
+
+    .FAQ-related-articles-widget {
+        margin: var(--margin-sm) 0;
+    }
+
+    /* ************************************* Search Profile Widget ********************************* */
+
+    .search-profile-widget .Content .field-wrapper {
+        padding-bottom: var(--padding-md);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .search-profile-widget .Content .buttons-wrapper {
+        display: flex;
+    }
+
+    /* ************************************* Search TPL Widget ********************************* */
+    .search-tpl-widget .Content .Field .pill-sm {
+        display: flex;
+        align-self: baseline;
+        padding: var(--padding-xs) var(--padding-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-xl);
+    }
+
+    /* ************************************* Search Widget ********************************* */
+
+    .search-widget .Actionlist li {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm)
+    }
+
+    .search-widget .field-wrapper input[type="text"] {
+        padding-left: var(--padding-sm);
+        padding-right: var(--padding-xxl);
+      }
+
+    .search-widget .field-wrapper button {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    /* ************************************* Mini List Widget ********************************* */
+
+    .mini-list-widget .Tablelike li a  {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mini-list-widget .Tablelike li a div {
+        color: var(--primary-color);
+        font-weight: var(--medium);
+    }
+
+    .mini-list-widget .Tablelike li a p {
+        color: var(--main-font-color);
+        font-weight: var(--normal);
+    }
+
+    /* **************************************** Pagination *********************************** */
+
+    .Pagination {
+        display: flex;
+        flex-flow: row;
+        justify-content: flex-end;
+        margin-right: 0;
+        font-size: var(--main-font-size);
+        padding: var(--padding-sm) var(--padding-xl);
+        background: var(--white);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .Content > .Pagination:first-child {
+        border-top: 0;
+    }
+
+    .Pagination:empty {
+        padding: 0;
+        display: none;
+    }
+
+    .SidebarColumn .Pagination {
+        background: transparent;
+        border-top: 0;
+    }
+
+    .Pagination:empty,
+    .Pagination:is(:empty),
+    .Pagination:has(.page-links:empty) {
+        padding: 0;
+        display: none;
+    }
+
+    .Pagination ul {
+        display: flex;
+        align-items: baseline;
+        flex-flow: row;
+        gap: var(--padding-md);
+    }
+
+    .Pagination ul li {
+        display: flex;
+        position: relative;
+        height: 26px;
+    }
+
+    .Pagination ul li:after {
+        display: inline-block;
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 26px;
+        top: 0;
+        background-color: var(--gray-light);
+        left: 0;
+    }
+
+    .Pagination ul li:first-child:after {
+        width: 0;
+        height: 0;
+        background-color: transparent;
+    }
+
+    .Pagination li,
+    .Pagination li span {
+        align-self: center;
+        font-size: var(--font-size-sm);
+        color: var(--gray-dark-semi);
+    }
+
+    .Pagination ul li a:first-child {
+        margin-left: 0px;
+        position: relative;
+    }
+
+    .Pagination a {
+        color: var(--gray-dark-semi);
+    }
+
+    .Pagination .page-links a:hover {
+        border-radius: var(--border-radius-xs);
+        border-color: var(--border-color);
+    }
+    .Pagination .page-links {
+        display: flex;
+        flex-flow: row;
+        padding-left: var(--padding-xs);
+    }
+
+    .Pagination .page-links a {
+        display: flex;
+        width: 26px;
+        height: 26px;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--border-radius-xs);
+        border: var(--border-width) var(--border-solid) transparent;
+        transition: var(--main-transition);
+    }
+
+    .Pagination .page-links a:hover {
+        background-color: var(--gray-light);
+        color: var(--gray-dark-semi);
+    }
+
+    .Pagination.page-links a:hover {
+        background: rgba(1, 1, 1, 0.08);
+    }
+
+    .Pagination .page-links a.pagination-travel-l,
+    .Pagination .page-links a.pagination-travel-r,
+    .Pagination .page-links a.pagination-travel-one-l,
+    .Pagination .page-links a.pagination-travel-one-r {
+        font-size: var(--main-font-size);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .Pagination .page-links a.pagination-travel-l,
+    .Pagination .page-links a.pagination-travel-one-l {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: 0;
+    }
+
+    .Pagination .page-links a.pagination-travel-r,
+    .Pagination .page-links a.pagination-travel-one-r {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .Pagination .page-links a.pagination-travel-one-l {
+        margin-left: var(--padding-sm);
+    }
+
+    .Pagination .page-links > a.pagination-travel-one-r {
+        margin-right: var(--padding-sm);
+    }
+
+
+    .RTL .Pagination {
+        float: left;
+    }
+
+    form.Pagination > * {
+        float: left;
+    }
+
+    .RTL .Pagination > * {
+        float: right;
+    }
+
+    .Pagination > span {
+        margin-top: 3px;
+    }
+
+    form.Pagination a {
+        height: 24px;
+        width: 24px;
+        display: block;
+    }
+
+    .Pagination a.Selected {
+        font-weight: bold;
+        color: var(--primary-color);
+        pointer-events: none;
+    }
+
+    .Pagination a.Selected:hover {
+        background-color: transparent;
+        color: var(--primary-color);
+    }
+
+    .Pagination .PaginationLimit {
+        color: var(--alert-error-icon-color);
+    }
+
+    .Pagination a span {
+        margin: 7px 6px;
+        height: 9px;
+        width: 11px;
+        text-indent: -9999px;
+        background: url(../img/arrows.png) no-repeat;
+        display: block;
+    }
+
+    /*.Pagination .ArrowLeft span {
+        background-position: left top;
+    }
+
+    .RTL .Pagination .ArrowLeft span {
+        background-position: right top;
+    }
+
+    .Pagination .ArrowRight span {
+        background-position: right top;
+    }
+
+    .RTL .Pagination .ArrowRight span {
+        background-position: left top;
+    }*/
+
+    .Pagination input {
+        width: 16px;
+        margin-right: 2px;
+        padding: 1px 3px;
+        font-size: 11px;
+        font-family: inherit;
+        text-align: right;
+    }
+
+    @media only screen and (max-width: 1024px) {
+
+        .WidgetSimple span.Pagination {
+            display: none;
+        }
+
+        .WidgetSimple span.Pagination.AsBlock {
+            display: flex;
+        }
+    }
+
+
+    /* ************************************* Flags ********************************* */
+
+    .Flag {
+        line-height: inherit;
+        transition: var(--main-transition);
+        width: var(--flag-width);
+        height: var(--flag-height);
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+    }
+
+    .Flag.Small {
+        width: var(--flag-small-width);
+        height: var(--flag-small-height);
+        margin: 0;
+    }
+
+    .Flag span {
+        display: block;
+        height: 100%;
+        text-indent: -9999px;
+        cursor: pointer;
+        /* set a default color for priorities */
+        border-radius: var(--border-radius-xs);
+        background-color: var(--color-flag-default);
+    }
+
+    .Flag span.Escalated {
+        background-color: #ff505e;
+    }
+
+    .Flag span.New {
+        background-color: #8bef4d;
+    }
+
+    .Flag span.Warning {
+        background-color: #ffdd50;
+    }
+
+}

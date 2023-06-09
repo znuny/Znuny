@@ -7,23 +7,8 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Communication Log") | html %] - [% Translate(Data.Action) | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Communication Log'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-
-    <div class="SidebarColumn">
-
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
 [% RenderBlockStart("TimeRange") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -67,8 +52,19 @@
         </div>
 
     </div>
-    <div class="ContentColumn">
 
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Communication Log") | html %] - [% Translate(Data.Action) | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Communication Log'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 [% RenderBlockStart("StatusOverview") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -184,11 +180,10 @@
                     <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
                 </div>
                 <h2>[% Translate("List of communications (%s)", Data.CommunicationCount) | html %]</h2>
-
 [% RenderBlockStart("ContextSettings") %]
                 <div class="ActionMenu">
                     <div class="WidgetAction Settings">
-                        <a href="#" id="ShowContextSettingsDialog" title="[% Translate("Settings") | html %]">
+                        <a href="#" class="icon-hover" id="ShowContextSettingsDialog" title="[% Translate("Settings") | html %]">
                             <i class="fa fa-cog"></i>
                         </a>
                     </div>
@@ -205,7 +200,6 @@
                             <div class="Field">
                                 [% Data.PageShownString %]
                             </div>
-                            <div class="Clear"></div>
                         </fieldset>
                     </form>
                 </div>
@@ -216,7 +210,6 @@
             <div class="Content Overview">
 
                 <div class="ControlRow">
-
 [% RenderBlockStart("CommunicationNavBarFilter") %]
                     <ul class="Tabs">
 [% RenderBlockStart("CommunicationNavBarFilterItem") %]
@@ -232,8 +225,12 @@
                 <div class="CommunicationPagination">
                     <span class="Pagination">
 [% RenderBlockStart("OverviewNavBarPageNavBar") %]
-                        [% Data.ResultLong %]
-                        [% Data.SiteNavBarLong %]
+                            <ul>
+                                <li>
+                                    <span>[% Data.ResultLong %]</span>
+                                </li>
+                                <li class="page-links">[% Data.SiteNavBarLong %]</li>
+                            </ul>
 [% RenderBlockEnd("OverviewNavBarPageNavBar") %]
                     </span>
                 </div>
@@ -265,7 +262,7 @@
 [% RenderBlockStart("CommunicationRow") %]
                         <tr class="MasterAction [% IF Data.Status == 'Failed' %]Error[% END %]">
                             <td class="Status Center" title="[% Translate(Data.Status) | html %]">
-                                <a class="MasterActionLink" href="[% Env("Baselink") %]Action=AdminCommunicationLog;Subaction=Zoom;CommunicationID=[% Data.CommunicationID | uri %]" title="[% Data.Name | html %]">
+                                <a class="MasterActionLink table-icon-hover-md" href="[% Env("Baselink") %]Action=AdminCommunicationLog;Subaction=Zoom;CommunicationID=[% Data.CommunicationID | uri %]" title="[% Data.Name | html %]">
                                 [% IF Data.Status == 'Successful' %]
                                     <i class="fa fa-check Confirmation" aria-hidden="true"></i>
                                 [% ELSIF Data.Status == 'Failed' %]
@@ -321,6 +318,5 @@
             </div>
         </div>
         <div class="Clear"></div>
-
     </div>
 </div>

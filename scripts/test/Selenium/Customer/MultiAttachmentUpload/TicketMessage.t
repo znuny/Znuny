@@ -114,9 +114,11 @@ $Selenium->RunTest(
             "Uploaded 'doc' file still there"
         );
 
+        sleep 2;
+
         # Delete Attachment.
-        $Selenium->find_element( "(//a[\@class='AttachmentDelete'])[1]", 'xpath' )->click();
-        sleep 1;
+        $Selenium->find_element( 'a.AttachmentDelete', 'css' )->click();
+        sleep 2;
 
         # Wait until attachment is deleted.
         $Selenium->WaitFor(

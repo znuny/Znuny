@@ -23,7 +23,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS');
+    return Translatable('Znuny');
 }
 
 sub Run {

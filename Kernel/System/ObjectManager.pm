@@ -71,7 +71,7 @@ The ObjectManager must always be provided to OTRS by the top level script like t
     local $Kernel::OM = Kernel::System::ObjectManager->new(
         # possible options for module constructors here
         LogObject {
-            LogPrefix => 'OTRS-MyTestScript',
+            LogPrefix => 'MyTestScript',
         },
     );
 
@@ -143,7 +143,7 @@ The hash reference will be flattened and passed to the constructor of the object
 
     local $Kernel::OM = Kernel::System::ObjectManager->new(
         Kernel::System::Log => {
-            LogPrefix => 'OTRS-MyTestScript',
+            LogPrefix => 'MyTestScript',
         },
     );
 

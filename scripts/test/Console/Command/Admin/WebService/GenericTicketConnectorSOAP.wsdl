@@ -2330,6 +2330,6 @@ WARNING: This WSDL file is for Development and Test purposes ONLY!
     </wsdl:binding>
     <wsdl:service name="GenericTicketConnector">
         <wsdl:port name="GenericTicketConnector_Port" binding="tns:GenericTicketConnector_Binding">
-            <soap:address location="http://localhost/otrs/nph-genericinterface.pl/Webservice/GenericTicketConnectorSOAP" />
+            <soap:address location="http://localhost/znuny/nph-genericinterface.pl/Webservice/GenericTicketConnectorSOAP" />
         </wsdl:port>
     </wsdl:service></wsdl:definitions>

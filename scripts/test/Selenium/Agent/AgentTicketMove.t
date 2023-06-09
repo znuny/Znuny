@@ -18,9 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ACLObject    = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ACLObject       = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
+        my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject     = $Kernel::OM->Get('Kernel::System::Queue');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
 
         # Set to change queue for ticket in a new window.
         $HelperObject->ConfigSettingChange(
@@ -64,7 +68,7 @@ $Selenium->RunTest(
         my @QueueIDs;
         for my $QueueCreate (qw(Delete Junk)) {
             my $QueueName = $QueueCreate . $HelperObject->GetRandomID();
-            my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+            my $QueueID   = $QueueObject->QueueAdd(
                 Name            => $QueueName,
                 ValidID         => 1,
                 GroupID         => 1,                       # users
@@ -99,7 +103,7 @@ $Selenium->RunTest(
         for my $SysConfigUpdate (@SysConfigData) {
 
             # Enable menu module and modify destination link.
-            my %MenuModuleConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+            my %MenuModuleConfig = $SysConfigObject->SettingGet(
                 Name    => $SysConfigUpdate->{MenuModule},
                 Default => 1,
             );
@@ -185,7 +189,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminACL and synchronize ACL's.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminACL");
@@ -378,7 +382,7 @@ $Selenium->RunTest(
         # Delete created test queues.
         for my $QueueDelete (@QueueIDs) {
 
-            $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+            $Success = $DBObject->Do(
                 SQL => "DELETE FROM queue WHERE id = $QueueDelete",
             );
             $Self->True(

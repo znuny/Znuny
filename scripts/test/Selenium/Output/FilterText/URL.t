@@ -19,8 +19,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         # create test user and login
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -34,7 +36,7 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -86,7 +88,7 @@ somestringbeforeactuallink<www.some-long-url-for-test-purpose-with-many-characte
         );
 
         # navigate to zoom view of created test ticket with attachment
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID;ArticleID=$ArticleID");
 
         my @ExpectedLinks = (
@@ -126,7 +128,7 @@ somestringbeforeactuallink<www.some-long-url-for-test-purpose-with-many-characte
         }
 
         # turn off OutputFilter TextURL in sysconfig
-        my %TextURL = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %TextURL = $SysConfigObject->SettingGet(
             Name    => 'Frontend::Output::FilterText###AAAURL',
             Default => 1,
         );

@@ -18,15 +18,21 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @subsection  Navigation
  */
 #Navigation {
-    height: 25px;
-    width: 100%;
     position: relative;
-    background: #ddd;
-    clear: both;
+    display: flex;
+    align-items: flex-start;
+    padding: 0 var(--padding-xl);
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    transition: var(--main-transition);
+    background: var(--white);
+}
+
+#Navigation #HeaderToolBar .logo-navbar-mobile {
+    display: none;
 }
 
 #Navigation > ul {
-    float: left;
+    display: flex;
 }
 
 .RTL #Navigation > ul {
@@ -34,20 +40,37 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 #Navigation > ul > li > ul {
-    position: absolute;
-    top: 25px;
-    left: 0px;
     display: none;
-    border-top: 0px;
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    z-index: 99;
+    background: var(--menu-bg);
+    min-width: 100%;
+    box-shadow: var(--menu-box-shadow);
+    border-radius: var(--border-radius-xs);
+    padding: var(--padding-sm);
 }
 
 .RTL #Navigation > ul > li > ul {
     right: 1px;
 }
 
-#Navigation > ul > li:hover ul,
-#Navigation > ul > li a:focus + ul,
-#Navigation > ul > li ul.Expanded {
+/*#Navigation > ul > li > ul::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 5px;
+    background: transparent;
+
+}*/
+
+/*#Navigation > ul > li:hover ul:not(:empty),
+#Navigation > ul > li a:focus + ul:not(:empty),*/
+#Navigation > ul > li ul.Expanded:not(:empty:blank) {
     display: block;
     z-index: 1000;
 }
@@ -61,9 +84,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 #Navigation > ul > li {
-    float: left;
     position: relative;
-    border-right: 1px solid #bbb;
+    display: flex;
 }
 
 #Navigation > ul > li:last-child {
@@ -76,39 +98,72 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 #Navigation > ul > li > a {
-    color: #111;
-    font-size: 11px;
     display: block;
-    outline: none;
-    padding: 6px 10px 5px 11px;
+    height: auto;
+    padding: var(--padding-md) var(--padding-sm);
+    font-size: var(--main-font-size);
+    line-height: var(--main-line-height);
+    color: var(--menu-font);
+    position: relative;
+}
+
+#Navigation > ul > li > a:after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: -12px;
+    left: 0px;
+    background: var(--primary-color);
+    transform: scale(0, 1);
+    transform-origin: 0;
+    transition: transform 300ms ease;
+    will-change: transform;
+    border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+}
+
+#Navigation > ul > li:hover > a:after {
+    transform: scale(1, 1);
 }
 
 #Navigation > ul > li.Selected > a:after {
     content: "";
 }
 
-#Navigation > ul > li:last-child > a:after {
+/* #Navigation > ul > li:last-child > a:after {
     display: none;
+} */
+
+#Navigation > ul > li > ul > li {
+    position: relative;
+    display: block;
+    white-space: nowrap;
+    border-top: 2px solid transparent;
+}
+
+#Navigation > ul > li > ul > li:first-child {
+    border-top: 0;
 }
 
 #Navigation > ul > li > ul a {
-    color: #222;
-    font-size: 11px;
-    padding: 4px 15px 4px 6px;
-    white-space: nowrap;
     display: block;
-    background-color: #C4C6C6;
-    border-top: 1px solid #aaa;
+    position: relative;
+    color: var(--menu-font);
+    padding: var(--padding-sm) var(--padding-sm);
+    border-bottom: none;
+    font-size: var(--main-font-size);
+    transition: var(--main-transition);
+    border-radius: var(--border-radius-xs);
+    cursor: pointer;
 }
 
 #Navigation > ul > li > ul li:last-child {
-    border-bottom: 1px solid #aaa;
 }
 
 #Navigation > ul > li > ul a:hover,
 #Navigation > ul > li > ul a:focus,
 #Navigation > ul > li > ul a.SubSelected {
-    background-color: #ddd;
+    background: var(--gray-light);
 }
 
 .RTL #Navigation li:first-child a,
@@ -126,7 +181,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 #Navigation li:active {
-    background: #949494;
 }
 
 #Navigation .Selected + li {
@@ -140,169 +194,266 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 #Navigation .Selected,
 #Navigation .Selected:active,
 #Navigation > ul > li:hover {
-    background: #343435;
+
 }
+
+#Navigation > ul > li > a::after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: var(--primary-color);
+    transform: scale(0, 1);
+    transform-origin: 0;
+    transition: transform 300ms ease;
+    will-change: transform;
+    border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+    z-index: 10;
+  }
+
+#Navigation > ul > li.Selected > a::after {
+    transform: scale(1, 1);
+  }
 
 #Navigation .Selected > a,
 #Navigation > ul > li:hover > a {
-    color: #FFF;
-    background: none;
+    color: var(--primary-color);
 }
+
+
+@media only screen and (max-width: 1024px) {
+    #Navigation {
+        position: fixed;
+        height: 100%;
+        left: -300px;
+        width: 300px;
+        z-index: 998;
+        top: 0px;
+        padding: 0;
+        flex-direction: column;
+    }
+
+    #Navigation #HeaderToolBar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding: var(--padding-md);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        align-items: center;
+    }
+
+    #Navigation #HeaderToolBar .logo-navbar-mobile {
+        width: 120px;
+        height: 27px;
+        background: url(../img/znuny-logo-black.svg) no-repeat;
+        background-size: auto;
+        background-size: contain;
+        position: relative;
+        display: flex;
+    }
+
+    #Navigation > ul.menuItems {
+        flex-direction: column;
+        width: 100%;
+        padding: var(--padding-md) 0 0;
+        overflow: auto;
+    }
+
+    #Navigation > ul.menuItems > li {
+        display: flex;
+        flex-direction: column;
+        padding: 0 var(--padding-md) 0 0;
+    }
+
+    #Navigation ul.menuItems li a {
+        font-weight: normal;
+        padding: var(--padding-md);
+        line-height: 20px;
+        transition: var(--main-transition);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        display: flex;
+        width: 100%;
+        border-radius: 0 var(--border-radius-menu-mobile) var(--border-radius-menu-mobile) 0;
+    }
+
+    #Navigation > ul.menuItems > li > a::after {
+        width: 0;
+        height: 0;
+        border-radius: 0;
+    }
+
+    #Navigation > ul.menuItems > .Selected a, 
+    #Navigation > ul.menuItems > li:focus a, 
+    #Navigation > ul.menuItems > li:hover a {
+        background: var(--primary-color);
+        color: var(--white);
+    }
+
+    #Navigation .Selected + li {
+        margin: 0;
+    }
+
+    #Navigation .Selected + li a {
+        padding: var(--padding-md);
+    }
+
+    #Navigation .Selected > a,
+    #Navigation > ul > li:hover > a {
+        color: var(--white);
+    }
+
+    #Navigation > ul.menuItems > li > ul {
+        display: flex;
+        position: relative;
+        top: unset;
+        left: unset;
+        z-index: 99;
+        background: transparent;
+        min-width: 100%;
+        box-shadow: none;
+        padding: var(--padding-sm);
+        border-radius: var(--border-radius-xs);
+    }
+    
+    .RTL #Navigation > ul.menuItems > li > ul {
+        right: 1px;
+    }
+    
+    #Navigation > ul.menuItems > li > ul > li {
+        font-size: 11px;
+        line-height: 11px;
+        margin-top: 0;
+        position: relative;
+        white-space: nowrap;
+      }
+}
+
 
 /**
- * @subsection  Action Row / MessageBox (Notification)
+ * @subsection  Action Row
  */
 
-.MessageBox,
-.ActionRow {
-    font-size: 11px;
-    background: #ddd;
-    border-top: 1px solid #F0F2F2;
-    border-bottom: 1px solid #B8BBBB;
-    overflow: hidden;
-    text-shadow: 0 1px 0 #F6F9F9;
-    clear: both;
+.ActionRow,
+#BottomActionRow.ActionRow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    padding: 0;
+    flex: 1;
+    width: 100%;
+    max-width: 800px;
+    align-self: center;
+    gap: var(--gap-sm);
 }
 
-#MainBox.TicketView .ActionRow {
-    border-top: 0px;
+#BottomActionRow.ActionRow {
+    border: 0;
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
 }
 
-.Content .MessageBox {
-    border: 1px solid #ddd;
+.FormScreen .ActionRow {
+    padding: 0 var(--padding-lg);
 }
 
-.MessageBox.Notice {
-    background: #F7AE40;
-    border: 0px;
+.ActionRow.ActionRow-full-width,
+#BottomActionRow.ActionRow.ActionRow-full-width {
+    max-width: 100%;
 }
 
-.MessageBox.Error {
-    background: #F25C5C;
+@media only screen and (min-width: 1400px) {
+    .FormScreen .ActionRow {
+        max-width: 100%;
+        padding: 0 var(--padding-sm);
+    }
 }
 
-.MessageBox.Success {
-    background: #95C47D;
-}
-
-.RTL .MessageBox p {
-    padding: 1px 20px 1px 0;
-}
-
-.MessageBox p {
-    text-shadow: none;
-    color: #000;
-    margin: 5px 7px;
-    padding: 1px 0 1px 5px;
-}
-
-.MessageBox a {
-    display: none;
+.ActionRow.tabs-overview {
+    max-width: 100%;
 }
 
 #BottomActionRow {
-    padding: 5px 9px 6px 9px;
-    background: #eee;
-    border: 0px;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.TicketView #BottomActionRow,
-.RTL .TicketView #BottomActionRow {
-    padding: 0;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-}
 
-#BottomActionRow span {
-    padding: 0 5px;
-}
 
-.RTL #BottomActionRow span {
-    padding-left: 0;
-    padding-right: 5px;
-}
+
+
+/**
+ * @subsection  Filter
+ */
 
 .Filter {
-    padding: 0 !important;
-    overflow: hidden;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding: 0 var(--padding-xs);
 }
 
-.Filter a {
-    padding: 5px;
-    text-shadow: 0 1px 0 #ECF0F0;
-    display: block;
+.Filter li {
+    padding: var(--padding-xs) 2px var(--padding-xs) 0;
 }
 
-.Filter a:after {
-    content: "|";
-    display: inline-block;
-    font-weight: normal;
-    color: #777;
-    padding-left: 5px;
-    margin-right: -3px;
+.Filter li a {
+    position: relative;
+    display: flex;
+    padding: var(--padding-sm) var(--padding-md);
+    color: var(--main-font-color);
+    font-size: var(--main-font-size);
+    transition: var(--main-transition);
 }
 
-.Filter li:last-child a:after {
-    display: none;
+.Filter li a:hover {
+    background-color: var(--gray-light-semi);
+    border-radius: var(--border-radius-xxs);
 }
 
-.RTL .Filter a {
+.RTL .Filter li a {
     background-position: left;
 }
 
-.Tabs {
-    padding: 5px 9px;
-    float: left;
-}
-
-.RTL .Tabs {
-    float: right;
-}
-
-.Tabs li {
-    float: left;
-}
-
-.RTL .Tabs li {
-    float: right;
-}
-
-.Tabs a {
-    color: #777;
-}
-
-.Tabs a:hover {
-    color: #444;
-}
-
-.Tabs .Selected {
-    font-weight: bold;
-    color: #444;
-}
-
-.Pagination {
-    float: right;
-}
-
-.RTL .Pagination {
-    float: left;
-}
-
-.Pagination a {
-    padding-left: 3px;
+.Filter li .Selected, 
+.Filter li .Selected:hover, 
+.Filter li .Selected:active {
     background: none;
-    text-shadow: none;
+    position: relative;
+    font-weight: var(--bold);
+    color: var(--black);
+    pointer-events: none;
 }
 
-.ActionRow li:last-child a,
-.Filter li:last-child a {
-    background: none;
+.Filter li .Selected::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    background-color: var(--black);
+    height: 2px;
+    left: 0;
+    bottom: -5px;
 }
 
-.RTL .ActionRow li:last-child a {
-    padding-right: 3px;
-    padding-left: 0;
+
+
+/**
+ * @subsection  OverviewActions
+ */
+
+
+.OverviewActions {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    padding: 0 var(--padding-md);
 }
 
 .Sortable .ActionRow {
@@ -311,7 +462,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .Sortable #BottomActionRow {
     padding-bottom: 0;
-    border-bottom: 1px solid #B8BBBB;
 }
 
 /**

@@ -36,13 +36,6 @@ my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
 my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-# Disable cloud service calls to avoid test failures due to connection problems etc.
-$HelperObject->ConfigSettingChange(
-    Valid => 1,
-    Key   => 'CloudServices::Disabled',
-    Value => 1,
-);
-
 my $TestUserLogin = $HelperObject->TestUserCreate(
     Groups => ['admin'],
 );

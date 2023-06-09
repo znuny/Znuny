@@ -1024,8 +1024,8 @@ All database contents will be automatically dropped when the Helper object is de
         DatabaseXMLString => $XML,      # (optional) database XML schema to execute
                                         # or
         DatabaseXMLFiles => [           # (optional) List of XML files to load and execute
-            '/opt/otrs/scripts/database/schema.xml',
-            '/opt/otrs/scripts/database/initial_insert.xml',
+            '/opt/znuny/scripts/database/schema.xml',
+            '/opt/znuny/scripts/database/initial_insert.xml',
         ],
     );
 

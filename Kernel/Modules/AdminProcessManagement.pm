@@ -1637,7 +1637,6 @@ sub _ShowOverview {
         Translation  => 0,
         Class        => 'Modernize Validate_Required',
     );
-    $Frontend{OTRSBusinessIsInstalled} = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
 
     my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
 

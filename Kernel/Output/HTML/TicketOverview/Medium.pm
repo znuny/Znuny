@@ -578,11 +578,17 @@ sub _Show {
         Subject      => $Article{Subject} || '',
     );
 
+    my $PillClass;
+    if ( IsStringWithData( $Ticket{StateID} ) ) {
+        $PillClass .= 'pill StateID-' . $Ticket{StateID};
+    }
+
     $LayoutObject->Block(
         Name => 'DocumentContent',
         Data => {
             %Param,
             %Article,
+            PillClass                                => $PillClass,
             IsITSMIncidentProblemManagementInstalled => $Self->{IsITSMIncidentProblemManagementInstalled},
         },
     );

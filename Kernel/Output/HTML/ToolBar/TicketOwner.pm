@@ -85,9 +85,11 @@ sub Run {
     my $URL = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{Baselink};
     my %Return;
     my $Priority = $Param{Config}->{Priority};
+    my $Block    = $Param{Config}->{Block};
+
     if ($CountNew) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Count       => $CountNew,
             Description => Translatable('Owned Tickets New'),
             Class       => $ClassNew,
@@ -98,7 +100,7 @@ sub Run {
     }
     if ($CountReached) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Count       => $CountReached,
             Description => Translatable('Owned Tickets Reminder Reached'),
             Class       => $ClassReached,
@@ -109,7 +111,7 @@ sub Run {
     }
     if ($Count) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Count       => $Count,
             Description => Translatable('Owned Tickets Total'),
             Class       => $Class,

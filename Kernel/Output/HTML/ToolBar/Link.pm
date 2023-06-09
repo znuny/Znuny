@@ -46,6 +46,7 @@ sub Run {
     # get item definition
     my $Text      = $LayoutObject->{LanguageObject}->Translate( $Param{Config}->{Name} );
     my $URL       = $LayoutObject->{Baselink} . $Param{Config}->{Link};
+    my $Block     = $Param{Config}->{Block};
     my $Priority  = $Param{Config}->{Priority};
     my $AccessKey = $Param{Config}->{AccessKey};
     my $CssClass  = $Param{Config}->{CssClass};
@@ -53,7 +54,7 @@ sub Run {
 
     my %Return;
     $Return{$Priority} = {
-        Block       => 'ToolBarItem',
+        Block       => $Block,
         Description => $Text,
         Class       => $CssClass,
         Icon        => $Icon,
