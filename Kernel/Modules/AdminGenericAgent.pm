@@ -392,11 +392,10 @@ sub Run {
         # Get field HTML.
         if ( $Widget eq 'Select' ) {
             $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
-                DynamicFieldConfig     => $DynamicFieldConfig,
-                Profile                => \%JobData,
-                LayoutObject           => $LayoutObject,
-                ConfirmationCheckboxes => 1,
-                Type                   => $Type,
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Profile            => \%JobData,
+                LayoutObject       => $LayoutObject,
+                Type               => $Type,
             );
         }
         elsif ( $Widget eq 'Update' ) {
@@ -474,16 +473,24 @@ sub Run {
     # delete an generic agent job
     # ---------------------------------------------------------- #
     if ( $Self->{Subaction} eq 'Delete' && $Self->{Profile} ) {
+        my $Success;
 
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
         if ( $Self->{Profile} ) {
-            $GenericAgentObject->JobDelete(
+            $Success = $GenericAgentObject->JobDelete(
                 Name   => $Self->{Profile},
                 UserID => $Self->{UserID},
             );
         }
+
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Content     => ($Success) ? 1 : 0,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
     }
 
     # ---------------------------------------------------------- #
@@ -1164,9 +1171,8 @@ sub _MaskUpdate {
                     Profile            => \%JobData,
                     DefaultValue =>
                         $Self->{Config}->{Defaults}->{DynamicField}->{ $DynamicFieldConfig->{Name} },
-                    LayoutObject           => $LayoutObject,
-                    ConfirmationCheckboxes => 1,
-                    Type                   => $Preference->{Type},
+                    LayoutObject => $LayoutObject,
+                    Type         => $Preference->{Type},
                 );
 
                 next PREFERENCE if !IsHashRefWithData($DynamicFieldHTML);

@@ -66,6 +66,10 @@ my $CacheClearedCheck = sub {
 
 my $VersionString = '
   <Framework>' . $Version . '</Framework>
+  <Framework>7.0.x</Framework>
+  <Framework>6.5.x</Framework>
+  <Framework>6.4.x</Framework>
+  <Framework>6.3.x</Framework>
   <Framework>6.2.x</Framework>
   <Framework>6.1.x</Framework>
   <Framework>6.0.x</Framework>
@@ -85,8 +89,8 @@ my $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
   <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
   <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
@@ -130,8 +134,8 @@ my $StringSecond = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>TestSecond</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
   <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
   <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
@@ -331,8 +335,8 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
   <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
   <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
@@ -394,8 +398,8 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test2</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
   <PackageRequired Version="0.1">SomeNotExistingModule</PackageRequired>'
@@ -419,8 +423,8 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>TestOSDetection1</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
   <OS>NonExistingOS</OS>'
@@ -444,8 +448,8 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>TestOSDetection2</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
   <OS>darwin</OS>
@@ -479,8 +483,8 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test2</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
   <ModuleRequired Version="0.1">SomeNotExistingModule</ModuleRequired>'
@@ -503,8 +507,8 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test2</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
   <ModuleRequired Version="12.999">Encode</ModuleRequired>'
@@ -529,8 +533,8 @@ my $String1 = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test2</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>'
     . $VersionString .
@@ -551,8 +555,8 @@ my $String2 = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test3</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>'
     . $VersionString .
@@ -574,8 +578,8 @@ my $String3 = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test3</Name>
   <Version>0.0.2</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>'
     . $VersionString .
@@ -592,8 +596,8 @@ my $String3a = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test3</Name>
   <Version>0.0.3</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>'
     . $VersionString .
@@ -618,8 +622,8 @@ my $String3b = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test3</Name>
   <Version>0.0.3</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>'
     . $VersionString .
@@ -720,8 +724,8 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test2</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
   <OS>_non_existing_</OS>
@@ -742,8 +746,8 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test2</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
   <Framework>99.0.x</Framework>
@@ -764,8 +768,8 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test2</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>'
     . $VersionString .
@@ -828,8 +832,8 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test2</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>'
     . $VersionString .
@@ -902,8 +906,8 @@ my $FileNotAllowedString = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>
   <Name>FilesNotAllowed</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang=\"en\">A test package.</Description>
   <Description Lang=\"de\">Ein Test Paket.</Description>"
     . $VersionString .
@@ -963,23 +967,23 @@ if ( !-e $Home . '/ARCHIVE' ) {
 if ( !$DeveloperSystem ) {
 
     # 12 check "do not remove framework file if no backup exists"
-    my $RemoveFile          = $Home . '/' . 'bin/otrs.CheckSum.pl.save';
-    my $RemoveFileFramework = $Home . '/' . 'bin/otrs.CheckSum.pl';
+    my $RemoveFile          = $Home . '/' . 'bin/znuny.CheckSum.pl.save';
+    my $RemoveFileFramework = $Home . '/' . 'bin/znuny.CheckSum.pl';
     copy( $RemoveFileFramework, $RemoveFileFramework . '.orig' );
     $String = '<?xml version="1.0" encoding="utf-8" ?>
     <otrs_package version="1.0">
       <Name>TestFrameworkFileCheck</Name>
       <Version>0.0.1</Version>
       <Vendor>Znuny GmbH</Vendor>
-      <URL>https://otrs.com/</URL>
-      <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+      <URL>https://znuny.com/</URL>
+      <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
       <Description Lang="en">A test package.</Description>
       <Description Lang="de">Ein Test Paket.</Description>'
         . $VersionString .
         '<BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
-        <File Location="bin/otrs.CheckSum.pl" Permission="644" Encode="Base64">aGVsbG8K</File>
+        <File Location="bin/znuny.CheckSum.pl" Permission="644" Encode="Base64">aGVsbG8K</File>
       </Filelist>
     </otrs_package>
     ';
@@ -993,20 +997,20 @@ if ( !$DeveloperSystem ) {
     # check if save file exists
     $Self->True(
         -e $RemoveFile,
-        '#12 PackageInstall() - save file bin/otrs.CheckSum.pl.save exists',
+        '#12 PackageInstall() - save file bin/znuny.CheckSum.pl.save exists',
     );
 
     # check if save file exists (should not anymore)
     my $RemoveFileUnlink = unlink $RemoveFile;
     $Self->True(
         $RemoveFileUnlink,
-        '#12 PackageInstall() - save file bin/otrs.CheckSum.pl.save got removed',
+        '#12 PackageInstall() - save file bin/znuny.CheckSum.pl.save got removed',
     );
 
     # check if save file exists (should not anymore)
     $Self->True(
         !-e $RemoveFile,
-        '#12 PackageInstall() - save file bin/otrs.CheckSum.pl.save does not exists',
+        '#12 PackageInstall() - save file bin/znuny.CheckSum.pl.save does not exists',
     );
 
     # uninstall package
@@ -1019,13 +1023,13 @@ if ( !$DeveloperSystem ) {
     # check if save file exists (should not)
     $Self->True(
         !-e $RemoveFile,
-        '#12 PackageUninstall() - save file bin/otrs.CheckSum.pl.save does not exists',
+        '#12 PackageUninstall() - save file bin/znuny.CheckSum.pl.save does not exists',
     );
 
     # check if framework file exists
     $Self->True(
         -e $RemoveFileFramework,
-        '#12 PackageUninstall() - save file bin/otrs.CheckSum.pl exists',
+        '#12 PackageUninstall() - save file bin/znuny.CheckSum.pl exists',
     );
     move(
         $RemoveFileFramework . '.orig',
@@ -1037,23 +1041,23 @@ if ( !$DeveloperSystem ) {
 if ( !$DeveloperSystem ) {
 
     # 13 check "do create .save file on reinstall if it's a framework file"
-    my $SaveFile          = $Home . '/' . 'bin/otrs.CheckSum.pl.save';
-    my $SaveFileFramework = $Home . '/' . 'bin/otrs.CheckSum.pl';
+    my $SaveFile          = $Home . '/' . 'bin/znuny.CheckSum.pl.save';
+    my $SaveFileFramework = $Home . '/' . 'bin/znuny.CheckSum.pl';
     copy( $SaveFileFramework, $SaveFileFramework . '.orig' );
     $String = '<?xml version="1.0" encoding="utf-8" ?>
     <otrs_package version="1.0">
       <Name>TestFrameworkFileCheck</Name>
       <Version>0.0.1</Version>
       <Vendor>Znuny GmbH</Vendor>
-      <URL>https://otrs.com/</URL>
-      <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+      <URL>https://znuny.com/</URL>
+      <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
       <Description Lang="en">A test package.</Description>
       <Description Lang="de">Ein Test Paket.</Description>'
         . $VersionString .
         '<BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
-        <File Location="bin/otrs.CheckSum.pl" Permission="644" Encode="Base64">aGVsbG8K</File>
+        <File Location="bin/znuny.CheckSum.pl" Permission="644" Encode="Base64">aGVsbG8K</File>
       </Filelist>
     </otrs_package>
     ';
@@ -1074,7 +1078,7 @@ if ( !$DeveloperSystem ) {
     );
     $Self->True(
         $Write,
-        '#13 FileWrite() - bin/otrs.CheckSum.pl modified',
+        '#13 FileWrite() - bin/znuny.CheckSum.pl modified',
     );
     my $ReadOrig = $MainObject->FileRead(
         Location => $SaveFileFramework,
@@ -1089,13 +1093,13 @@ if ( !$DeveloperSystem ) {
     my $SaveFileUnlink = unlink $SaveFile;
     $Self->True(
         $SaveFileUnlink,
-        '#13 PackageInstall() - save file bin/otrs.CheckSum.pl.save got removed',
+        '#13 PackageInstall() - save file bin/znuny.CheckSum.pl.save got removed',
     );
 
     # check if save file exists (should not anymore)
     $Self->True(
         !-e $SaveFile,
-        '#13 PackageInstall() - save file bin/otrs.CheckSum.pl.save does not exists',
+        '#13 PackageInstall() - save file bin/znuny.CheckSum.pl.save does not exists',
     );
 
     # reinstall
@@ -1112,7 +1116,7 @@ if ( !$DeveloperSystem ) {
     # check if save file exists
     $Self->True(
         -e $SaveFile,
-        '#13 PackageReinstall() - save file bin/otrs.CheckSum.pl.save exists',
+        '#13 PackageReinstall() - save file bin/znuny.CheckSum.pl.save exists',
     );
 
     # uninstall package
@@ -1133,15 +1137,15 @@ if ( !$DeveloperSystem ) {
 
     $Self->True(
         ${$ReadOrig} eq ${$ReadLater},
-        '#13 PackageReinstall() - file bin/otrs.CheckSum.pl is still the orig',
+        '#13 PackageReinstall() - file bin/znuny.CheckSum.pl is still the orig',
     );
     move(
         $SaveFileFramework . '.orig',
         $SaveFileFramework
     );
 
-    # return the correct permissions to otrs.CheckSum.pl
-    chmod 0755, $Home . '/' . 'bin/otrs.CheckSum.pl';
+    # return the correct permissions to znuny.CheckSum.pl
+    chmod 0755, $Home . '/' . 'bin/znuny.CheckSum.pl';
 }
 
 # cleanup cache is done by RestoreDatabase

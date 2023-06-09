@@ -30,6 +30,21 @@ CREATE TABLE acl_sync (
     change_time DATETIME NOT NULL
 );
 # ----------------------------------------------------------
+#  create table activity
+# ----------------------------------------------------------
+CREATE TABLE activity (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    user_id INTEGER NOT NULL,
+    activity_type VARCHAR (200) NOT NULL,
+    activity_title VARCHAR (255) NOT NULL,
+    activity_text LONGBLOB NULL,
+    activity_state VARCHAR (255) NULL,
+    activity_link VARCHAR (255) NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
+);
+# ----------------------------------------------------------
 #  create table acl_ticket_attribute_relations
 # ----------------------------------------------------------
 CREATE TABLE acl_ticket_attribute_relations (
@@ -339,6 +354,7 @@ CREATE TABLE ticket_priority (
     id SMALLINT NOT NULL AUTO_INCREMENT,
     name VARCHAR (200) NOT NULL,
     valid_id SMALLINT NOT NULL,
+    color VARCHAR (25) NOT NULL,
     create_time DATETIME NOT NULL,
     create_by INTEGER NOT NULL,
     change_time DATETIME NOT NULL,
@@ -383,6 +399,7 @@ CREATE TABLE ticket_state (
     comments VARCHAR (250) NULL,
     type_id SMALLINT NOT NULL,
     valid_id SMALLINT NOT NULL,
+    color VARCHAR (25) NOT NULL,
     create_time DATETIME NOT NULL,
     create_by INTEGER NOT NULL,
     change_time DATETIME NOT NULL,
@@ -1517,21 +1534,6 @@ CREATE TABLE scheduler_recurrent_task (
     UNIQUE INDEX scheduler_recurrent_task_name_task_type (name, task_type),
     INDEX scheduler_recurrent_task_lock_key_id (lock_key, id),
     INDEX scheduler_recurrent_task_task_type_name (task_type, name)
-);
-# ----------------------------------------------------------
-#  create table cloud_service_config
-# ----------------------------------------------------------
-CREATE TABLE cloud_service_config (
-    id INTEGER NOT NULL AUTO_INCREMENT,
-    name VARCHAR (200) NOT NULL,
-    config LONGBLOB NOT NULL,
-    valid_id SMALLINT NOT NULL,
-    create_time DATETIME NOT NULL,
-    create_by INTEGER NOT NULL,
-    change_time DATETIME NOT NULL,
-    change_by INTEGER NOT NULL,
-    PRIMARY KEY(id),
-    UNIQUE INDEX cloud_service_config_name (name)
 );
 # ----------------------------------------------------------
 #  create table sysconfig_default

@@ -21,8 +21,8 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # make sure that CustomerGroupSupport is disabled
         $HelperObject->ConfigSettingChange(
@@ -158,7 +158,7 @@ $Selenium->RunTest(
             qw (Queue Group)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

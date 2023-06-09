@@ -8,7 +8,7 @@
 # --
 
 [% RenderBlockStart("DatabaseResult") %]
-<div class="W950px SpacingTop SpacingBottom CenterBox">
+<div class="SpacingTop SpacingBottom CenterBox">
     <form action="[% Env("CGIHandle") %]" method="post" class="PreventMultipleSubmits">
         <input type="hidden" name="Action" value="Installer" />
 
@@ -21,32 +21,32 @@
 [% RenderBlockStart("DatabaseResultItem") %]
                 <div class="DBItem">
 [% RenderBlockStart("DatabaseResultItemDone") %]
-                    <img src="[% Config("Frontend::ImagePath") %]/icons/tick.png" alt="[% Translate("Done") | html %]" >
+#                    <img src="[% Config("Frontend::ImagePath") %]/icons/tick.png" alt="[% Translate("Done") | html %]" >
+                    <i class="fa fa-check"></i>
 [% RenderBlockEnd("DatabaseResultItemDone") %]
 [% RenderBlockStart("DatabaseResultItemFalse") %]
-                    <img src="[% Config("Frontend::ImagePath") %]/icons/cross.png" alt="[% Translate("Error") | html %]" >
+#                    <img src="[% Config("Frontend::ImagePath") %]/icons/cross.png" alt="[% Translate("Error") | html %]" >
+                    <i class="fa fa-times"></i>
 [% RenderBlockEnd("DatabaseResultItemFalse") %]
                     [% Data.Item | html %]
 [% RenderBlockStart("DatabaseResultItemMessage") %]
                     <p>[% Data.Message | html %]</p>
 [% RenderBlockEnd("DatabaseResultItemMessage") %]
                 </div>
-                <div class="Clear"></div>
 [% RenderBlockEnd("DatabaseResultItem") %]
 [% RenderBlockStart("DatabaseResultSuccess") %]
                 <div class="Center Result">
                     <p class="">[% Translate("Database setup successful!") | html %]</p>
                 </div>
 [% RenderBlockEnd("DatabaseResultSuccess") %]
-                <div class="Center">
+                <div class="SaveButtons">
 [% RenderBlockStart("DatabaseResultBack") %]
                     <input type="hidden" name="Subaction" value="Start">
-                    <button class="Primary CallForAction" type="submit"><span>[% Translate("Back") | html %]</span></button>
+                    <button class="Primary CallForAction btn-main btn-secondary-ghost btn-width-md" type="submit"><span>[% Translate("Back") | html %]</span></button>
 [% RenderBlockEnd("DatabaseResultBack") %]
-
 [% RenderBlockStart("DatabaseResultNext") %]
                     <input type="hidden" name="Subaction" value="System">
-                    <button class="Primary CallForAction" type="submit"><span>[% Translate("Next") | html %]</span></button>
+                    <button class="Primary CallForAction btn-main btn-primary btn-width-md" type="submit"><span>[% Translate("Next") | html %]</span></button>
 [% RenderBlockEnd("DatabaseResultNext") %]
                 </div>
             </div>

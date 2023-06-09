@@ -124,7 +124,7 @@ my $SeleniumTest = sub {
         $SeleniumObject->find_element( '#AssignSelectedToAssignedRequiredElements', 'css' )->click();
 
         # submit form
-        $SeleniumObject->find_element( '#Form > div.Field.SpacingTop > button[type="submit"]', 'css' )->click();
+        $SeleniumObject->find_element( 'button[type="submit"]', 'css' )->click();
 
         # wait for submit to reload page
         sleep(5);

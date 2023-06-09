@@ -7,21 +7,25 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="InnerContent">
+<div class="InnerContent modal-search">
     <form action="[% Env("CGIHandle") %]" method="post" id="AgentCustomerInformationCenterSearchForm">
         <input type="hidden" name="Action" value="[% Env("Action") %]"/>
         <input type="hidden" name="Subaction" value="Redirect"/>
         <fieldset class="TableLike">
-            <label>[% Translate("Customer") | html %]:</label>
-            <div class="Field">
-                <input type="text" id="AgentCustomerInformationCenterSearchCustomerID" class="W90pc" />
+            <div class="field-wrapper">
+                <label>[% Translate("Customer") | html %]</label>
+                <div class="Field">
+                    <input type="text" id="AgentCustomerInformationCenterSearchCustomerID" class="W90pc" />
+                </div>
             </div>
-            <div class="Clear"></div>
-            <label>[% Translate("Customer User") | html %]:</label>
-            <div class="Field">
-                <input type="text" id="AgentCustomerInformationCenterSearchCustomerUser" class="W90pc" />
+
+            <div class="field-wrapper">
+                <label>[% Translate("Customer User") | html %]</label>
+                <div class="Field">
+                    <input type="text" id="AgentCustomerInformationCenterSearchCustomerUser" class="W90pc" />
+                </div>
             </div>
-            <div class="Clear"></div>
+
         </fieldset>
     </form>
 </div>

@@ -510,6 +510,10 @@ sub TableCreateComplex {
                     else {
                         $Hash{'Content'} = $Ticket->{$Column};
                     }
+
+                    if ( $Column eq 'State' && IsStringWithData( $Ticket->{StateID} ) ) {
+                        $Hash{'CssClass'} .= 'pill StateID-' . $Ticket->{StateID};
+                    }
                 }
 
                 # Dynamic fields

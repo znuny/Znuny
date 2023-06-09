@@ -19,8 +19,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject              = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject          = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
 
         $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
@@ -29,46 +34,46 @@ $Selenium->RunTest(
 
         # enable tool bar CICSearchCustomerID
         my %CICSearchCustomerID = (
-            Block       => 'ToolBarCICSearchCustomerID',
+            Block       => 'ToolBarSearch',
             CSS         => 'Core.Agent.Toolbar.CICSearch.css',
             Description => 'CustomerID search',
             Module      => 'Kernel::Output::HTML::ToolBar::Generic',
-            Name        => 'CustomerID search',
-            Priority    => '1990030',
+            Name        => 'CustomerID',
+            Priority    => '1990020',
             Size        => '10',
         );
 
         $HelperObject->ConfigSettingChange(
-            Key   => 'Frontend::ToolBarModule###13-Ticket::CICSearchCustomerID',
+            Key   => 'Frontend::ToolBarModule###230-CICSearchCustomerID',
             Value => \%CICSearchCustomerID,
         );
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###13-Ticket::CICSearchCustomerID',
+            Key   => 'Frontend::ToolBarModule###230-CICSearchCustomerID',
             Value => \%CICSearchCustomerID,
         );
 
         # create test user and login
-        my $TestUserLogin = $HelperObject->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
 
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
         $Selenium->Login(
             Type     => 'Agent',
             User     => $TestUserLogin,
             Password => $TestUserLogin,
         );
 
-        # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
-            UserLogin => $TestUserLogin,
-        );
-
         # create test company
         my $TestCustomerID    = $HelperObject->GetRandomID() . 'CID';
         my $TestCompanyName   = 'Company' . $HelperObject->GetRandomID();
-        my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $TestCustomerID,
             CustomerCompanyName    => $TestCompanyName,
             CustomerCompanyStreet  => '5201 Blue Lagoon Drive',
@@ -88,7 +93,7 @@ $Selenium->RunTest(
 
         # create test customer
         my $TestCustomerLogin = 'Customer' . $HelperObject->GetRandomID();
-        my $CustomerID        = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerID        = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomerLogin,
             UserLastname   => $TestCustomerLogin,
@@ -104,11 +109,16 @@ $Selenium->RunTest(
             "CustomerUser is created - ID $CustomerID",
         );
 
-        # get ticket object
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-
         # input test user in search CustomerID
-        $Selenium->find_element( "#ToolBarCICSearchCustomerID", 'css' )->send_keys($TestCustomerID);
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#ToolBarSearchTerm").length' );
+        $Selenium->find_element( "#ToolBarSearchTerm", 'css' )->click();
+
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $("#ToolBarSearchBackendCustomerID").length'
+        );
+        $Selenium->find_element( "#ToolBarSearchBackendCustomerID", 'css' )->click();
+        $Selenium->find_element( "#ToolBarSearchTerm",              'css' )->send_keys($TestCustomerID);
+
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TestCustomerID)').click()");
 
@@ -125,9 +135,6 @@ $Selenium->RunTest(
             $Selenium->find_element( '#CustomerInformationCenterHeading', 'css' ),
             "Check heading for CustomerInformationCenter",
         );
-
-        # get DB object
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
         # delete test customer company
         my $Success = $DBObject->Do(
@@ -154,7 +161,7 @@ $Selenium->RunTest(
             qw (CustomerCompany CustomerUser)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

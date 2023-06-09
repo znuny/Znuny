@@ -463,48 +463,6 @@ sub Run {
             },
         );
 
-        # Check if Chat is active
-        if ( $Kernel::OM->Get('Kernel::Config')->Get('ChatEngine::Active') ) {
-            my $ChatReceivingAgentsGroup
-                = $Kernel::OM->Get('Kernel::Config')->Get('ChatEngine::PermissionGroup::ChatReceivingAgents');
-
-            my $ChatReceivingAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-                UserID    => $UserData{UserID},
-                GroupName => $ChatReceivingAgentsGroup,
-                Type      => 'rw',
-            );
-
-            if (
-                $UserData{UserID} != -1
-                && $ChatReceivingAgentsGroup
-                && $ChatReceivingAgentsGroupPermission
-                && $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Agent::UnavailableForExternalChatsOnLogin')
-                )
-            {
-                # Get user preferences
-                my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
-                    UserID => $UserData{UserID},
-                );
-
-                if ( $Preferences{ChatAvailability} && $Preferences{ChatAvailability} == 2 ) {
-
-                    # User is available for external chats. Set his availability to internal only.
-                    $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
-                        Key    => 'ChatAvailability',
-                        Value  => '1',
-                        UserID => $UserData{UserID},
-                    );
-
-                    # Set ChatAvailabilityNotification to display notification in agent interface (only once)
-                    $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
-                        Key    => 'ChatAvailabilityNotification',
-                        Value  => '1',
-                        UserID => $UserData{UserID},
-                    );
-                }
-            }
-        }
-
         # redirect with new session id and old params
         # prepare old redirect URL -- do not redirect to Login or Logout (loop)!
         if ( $Param{RequestedURL} =~ /Action=(Logout|Login|LostPassword|PreLogin)/ ) {
@@ -1025,18 +983,7 @@ sub Run {
         $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::Output::HTML::Layout'] );
 
         # update last request time
-        if (
-            !$ParamObject->IsAJAXRequest()
-            || $Param{Action} eq 'AgentVideoChat'
-            ||
-            (
-                $Param{Action} eq 'AgentChat'
-                &&
-                $Param{Subaction} ne 'ChatGetOpenRequests' &&
-                $Param{Subaction} ne 'ChatMonitorCheck'
-            )
-            )
-        {
+        if ( !$ParamObject->IsAJAXRequest() ) {
             my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
 
             $SessionObject->UpdateSessionID(

@@ -20,20 +20,32 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 .ControlRow {
     position: relative;
     overflow: hidden;
-    min-height: 24px;
-    background-color: #ddd;
-}
-
-.ControlRow a {
-    color: #555;
-}
-
-.ControlRow a:hover {
-    color: #333;
+    min-height: 42px;
+    background-color: var(--white);
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .ControlRow a.Active {
     color: #fff;
+}
+
+.ControlRow ul {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: var(--gap-xs);
+    padding-right: var(--padding-lg);
+}
+
+.WidgetSimple > .ControlRow {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background-color: var(--table-th-bg);
 }
 
 /**
@@ -43,48 +55,71 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     float: right;
 }
 
-.ControlRow li {
-    padding-left: 2px;
-    float: left;
-    position: relative;
-}
-
 .RTL .ControlRow li {
     margin-left: 0;
     margin-right: -3px;
     float: right;
 }
 
-.ControlRow li:hover {
-    background: #bbb;
+.ControlRow li {
+    padding: var(--padding-xs) 0;
 }
 
 .ControlRow li.Active,
 .ControlRow li.Active:hover,
 .ControlRow li.Active:active {
-    background: #5D5D5D;
+    background: none;
+    position: relative;
+    font-weight: var(--bold);
     padding-left: 2px;
 }
 
-.ControlRow li > a {
-    padding: 7px 12px 7px 11px;
-    color: #111;
-    font-size: 11px;
-    display: block;
+.ControlRow li.Active::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    background-color: var(--black);
+    height: 2px;
+    left: 0;
+    bottom: 0;
+}
+
+li > #ReplyAll2119{
+    display: none !important;
+}
+
+.ControlRow .Tabs a,
+.WidgetSimple.Tabs a {
+    display: flex;
+    padding: var(--padding-sm) var(--padding-md);
+    /*var(--padding-md) var(--padding-lg);*/
+    color: var(--main-font-color);
+    font-size: var(--main-font-size);
+    transition: var(--main-transition);
+}
+
+@media (max-width: 768px) {
+    .ControlRow .Tabs a,
+    .WidgetSimple.Tabs a {
+        font-size: var(--font-size-sm);
+    }
+}
+
+.ControlRow .Tabs a:hover,
+.WidgetSimple.Tabs > .Header > a:hover {
+    background-color: var(--gray-light-semi);
+    border-radius: var(--border-radius-xxs);
 }
 
 .RTL .ControlRow li > a {
-    padding: 7px 11px 7px 12px;
-}
-
-.ControlRow li:hover > a {
-    color: #000;
+    padding: 14px;
 }
 
 .ControlRow li.Active > a,
 .ControlRow li.Active:hover > a,
 .ControlRow li.Active:active > a {
-    color: #FFF;
+    color: var(--black);
+    pointer-events: none;
 }
 
 .ControlRow li > a > span {
@@ -94,10 +129,16 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 /**
  * @subsection  Context Functions
  */
+
 ul.ContextFunctions {
-    position: absolute;
-    right: 0;
-    top: 0;
+}
+
+/*ul.ContextFunctions .ContextSettings:last-child {
+    padding-right: var(--padding-sm);   - removed by beatriz on 16/1/2023 (moved padding to parent)
+}*/
+
+ul.ContextFunctions a {
+    color: var(--gray-dark);
 }
 
 .RTL ul.ContextFunctions {
@@ -107,10 +148,6 @@ ul.ContextFunctions {
 
 h1 ul.ContextFunctions {
     top: -4px;
-}
-
-ul.ContextFunctions li {
-    padding-left: 3px;
 }
 
 ul.ContextFunctions li span {
@@ -123,8 +160,7 @@ ul.ContextFunctions li span {
     float: right;
 }
 
-ul.ContextFunctions li.ContextHelp a,
-ul.ContextFunctions li.ContextSettings a {
+ul.ContextFunctions li.ContextHelp a {
     display: block;
     width: 22px;
     height: 24px;
@@ -133,15 +169,15 @@ ul.ContextFunctions li.ContextSettings a {
 
 ul.ContextFunctions li.ContextHelp a span,
 ul.ContextFunctions li.ContextSettings a span {
-    display: block;
-    width: 19px;
-    height: 24px;
+    display: flex;
+    border-radius: var(--border-radius-md);
+    padding: var(--padding-xs) var(--padding-sm);
+    color: var(--gray-dark);
 }
 
 ul.ContextFunctions li.ContextSettings .fa {
     display: block;
-    font-size: 14px;
-    padding: 5px 0px 5px 3px;
+    font-size: var(--font-size-md);
 }
 
 ul.ContextFunctions li:last-child:hover > a {
@@ -152,32 +188,48 @@ ul.ContextFunctions li:last-child:hover > a {
  * @subsection  Control Row Headline
  */
 .ControlRow h2 {
-    padding-top: 1px;
-    margin-left: 8px;
-    height: 24px;
     font-size: 13px;
-    line-height: 24px;
-    font-weight: bold;
-    color: #000;
-    text-shadow: 0 1px 0 #D4D4D4;
-    margin-bottom: 2px;
+    padding: 0 var(--padding-md);
+    font-weight: var(--bold);
+    color: var(--black);
 }
 
 /**
  * @subsection  Control Row Additional Information
  */
 
-.AdditionalInformation {
-    right: 7px;
-    top: 7px;
-    font-size: 11px;
+.AdditionalInformation,
+.WidgetAction + h2 + .AdditionalInformation {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    right: 50px;
+    top: 0;
+    font-size: var(--font-size-sm);
     position: absolute;
 }
 
+.Header > .AdditionalInformation {
+    position: relative;
+    /*right: 30px; - edit by b on mar/09/2023*/
+    right: 0;
+    z-index: 100;
+}
+
+.Header.ticket-zoom-header .AdditionalInformation {
+    right: 40px;
+}
+
+.Header > .WidgetAction + .AdditionalInformation {
+    margin-right: var(--margin-xxl);
+}
+
 .AdditionalInformation.ControlRow {
-    top: 1px;
-    right: 0px;
     background: none;
+    border: 0;
+    overflow: unset;
+    min-height: unset;
+    z-index: 1;
 }
 
 .AdditionalInformation.SpacingLoader {
@@ -198,22 +250,47 @@ ul.ContextFunctions li:last-child:hover > a {
 /**
  * @subsection  Control Row Action Row
  */
+
+/*.DashboardActions {
+    position: absolute;
+    top: 9px;
+    right: 52px;
+}*/
+
+.SidebarColumn .DashboardActions .Actions {
+    display: flex;
+    /*padding-top: var(--padding-md);*/
+}
+
 .ActionRow {
     position: relative;
     overflow: hidden;
-    background: #eeeeee;
-    border-bottom: 1px solid #ccc;
+    background: white;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+
+    margin: 0;
+    background: none;
+    border: 0;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    /* edited by beatriz on 1/2/2023 - merged code block right below */
 }
 
-.WidgetSimple .Content .ActionRow {
-    margin: -5px;
+/*.WidgetSimple .Content .ActionRow {
+    margin: 0;
     background: none;
     border-bottom: 0px;
-}
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+}*/
 
 .Actions {
-    padding: 0;
-    float: left;
+    /*padding: 0;
+    float: left;*/
 }
 
 .RTL .Actions {
@@ -221,19 +298,51 @@ ul.ContextFunctions li:last-child:hover > a {
 }
 
 .Actions li {
-    line-height: 18px;
-    font-size: 11px;
+    position: relative;
     display: inline-block;
+    line-height: var(--main-line-height);
+    font-size: var(--main-font-size);
+    padding: 0;
     z-index: 19;
+    color: var(--table-text-color);
+    font-size: 11px;
+    font-weight: var(--semi-bold);
+    letter-spacing: .8px;
+}
+
+.ItemActions .Actions li {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
 }
 
 .Actions li:after {
-    color: #BBBBBB;
+    display: inline-block;
+    content: "";
+    position: relative;
+    width: 1px;
+    height: 16px;
+    background-color: var(--gray-dark-semi);
+    align-self: center;
+    margin: 0 8px;
+
+    /*color: #BBBBBB;
     content: " | ";
     display: block;
-    float: right;
-    margin: 5px 3px;
+    float: initial;
+    margin: 0px;
+    position: absolute;
+    top: 0;
+    right: 0;*/
 }
+
+@media only screen and (max-width: 1024px) {
+    .Actions li:after {
+        display: none;
+    }
+}
+
 
 .Actions li.Hidden {
     display: none;
@@ -244,8 +353,8 @@ ul.ContextFunctions li:last-child:hover > a {
 }
 
 .Actions li:last-child:after {
-    content: " | ";
-    display: block;
+    content: "";
+    display: none;
     visibility: hidden;
 }
 
@@ -258,7 +367,7 @@ ul.ContextFunctions li:last-child:hover > a {
 
 .Actions li:first-child {
     margin-left: 0;
-    padding-left: 5px;
+    padding-left: 0px;
 }
 
 .RTL .Actions li:first-child {
@@ -267,22 +376,115 @@ ul.ContextFunctions li:last-child:hover > a {
     background: none;
 }
 
-.Actions li:last-child {
+/*.Actions li:last-child {
     background: none;
+}*/
+
+.ItemActions .Actions li:last-child {
+    padding: 0;
+}
+
+.SidebarColumn .Actions li a:first-child {
+    padding: 0 12px 0 0;
 }
 
 .Actions li a,
 .Actions li span {
-    padding: 5px 2px 0;
-    color: #000;
-    display: inline-block;
-    border-bottom: 1px solid transparent;
+    /*padding: 0 !important;
+    display: inline-block;*/
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    border-bottom: var(--border-width) var(--border-solid) var(--border);
+    transition: var(--main-transition);
+    /*letter-spacing: 1px;*/
+    text-transform: uppercase;
+    /*padding: 0 6px;*/
+    color: var(--gray-darker);
+    font-size: var(--font-size-sm);
 }
 
-.Actions li a:hover,
-.Actions li span:hover,
+.ActionRow > .Actions li > a, 
+.ActionRow > .Actions li > span {
+    padding: var(--padding-xs) var(--padding-sm);
+    border-radius: var(--border-radius-xxs);
+}
+
+.ActionRow > .Actions li:hover > a, 
+.ActionRow > .Actions li:hover > span {
+    background: var(--gray-light);
+}
+
+.ItemActions .Actions li a,
+.ItemActions .Actions li span {
+    text-transform: inherit;
+}
+
+.ItemActions .Actions li a,
+.ItemActions .Actions li label,
+.OverviewControl .Actions li a {
+    color: var(--table-text-color);
+    padding: 0 var(--padding-xs);
+    font-size: var(--font-size-sm);
+    font-weight: var(--normal);
+    text-transform: inherit;
+    min-width: unset;
+}
+
+.ItemActions .Actions li a:hover,
+.ItemActions .Actions li label:hover,
+.OverviewControl .Actions li a:hover {
+    text-decoration: underline;
+    background: inherit;
+    cursor: pointer;
+}
+
+.ItemActions .Actions li form .InputField_InputContainer input {
+    padding: 6px var(--padding-sm);
+}
+
+.ticketDetails li form {
+    display: flex;
+    align-items: center;
+    width: auto;
+    flex-direction: row;
+    gap: 0;
+}
+
+.ticketDetails li label {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/*.ticketDetails li:nth-child(6)::after{
+    display: none;
+}*/
+
+#ticketDetails .Actions,
+#ticketDetails .Actions > li,
+.ActionRow .Actions,
+.ActionRow .Actions > li {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--gap-sm) 0;
+    z-index: unset;
+}
+
+/*.Actions li a:hover,*/
+/*.Actions li span:hover,
 .OverviewZoom a:hover {
-    border-color: #FF9922;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}*/
+
+#ticketDetails .Actions > li > form > label {
+    pointer-events: none;
+}
+
+#ticketDetails .Actions > li > form .InputField_Search {
+    background-color: var(--white);
 }
 
 .Actions li.NoHover:hover a {
@@ -290,7 +492,11 @@ ul.ContextFunctions li:last-child:hover > a {
 }
 
 .Actions li input#SelectAllTickets {
-    margin: 0 1px 0 3px;
+    margin: 0;
+}
+
+.Actions li input#SelectAllTickets:hover {
+    border-color: var(--success-color);
 }
 
 .RTL .Actions li input#SelectAllTickets {
@@ -301,82 +507,318 @@ ul.ContextFunctions li:last-child:hover > a {
     background-image: none;
 }
 
-.Actions li.Inactive a {
-    color: #999;
-    text-shadow: 1px 1px #FFF;
-    cursor: default;
+.Actions #BulkAction a:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
-.Actions li.Inactive:hover a {
-    background: none;
-    border-color: transparent;
-    -webkit-box-shadow: 0 0 0;
-    box-shadow: 0 0 0;
+.Actions li.AlwaysPresent.Inactive a:hover {
+    cursor: default;
+    text-decoration: none;
 }
 
 .ActionMessage {
-    display: block;
-    float: left;
-    font-size: 11px;
-    padding: 9px 8px 8px 4px;
+    padding-left: var(--padding-sm);
 }
 
 .Actions form {
-    padding: 4px 4px 4px 0;
+    /*padding: 4px 4px 4px 0;*/
     display: inline-block;
 }
 
 .Actions li.SortBy {
-    padding: 5px 8px;
+    /*padding: 5px 8px;*/
 }
 
 .Actions li select {
-    font-size: 11px;
+    font-size: var(--font-size-sm);
 }
 
-.Tab.Actions li {
+.Actions-Mobile-List,
+.Actions-top,
+.Actions-bottom,
+.Actions-close  {
+    display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .Actions-Mobile-List {
+        display: flex;
+        gap: var(--gap-md);
+        align-items: center;
+    }
+
+    .Actions-Mobile-List li {
+        font-size: var(--main-font-size);
+        position: relative;
+    }
+
+    .Actions-Mobile-List li:not(:first-child)::before {
+        position: absolute;
+        left: -10px;
+        display: inline-block;
+        content: "";
+        position: relative;
+        width: 1px;
+        height: 13px;
+        background-color: var(--gray-dark-semi);
+        align-self: center;
+        margin: 0 10px;
+    }
+
+    #ticketDetails .Actions-overlay {
+        position: fixed;
+        z-index: 999999;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100vh;
+        width: 0;
+    }
+
+    #ticketDetails .Actions-overlay .Actions-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        transition: var(--main-transition);
+        background-color: var(--white);
+    }
+
+    #ticketDetails .Actions-overlay .Actions-wrapper .Actions-top {
+        display: flex;
+        padding: var(--padding-lg) var(--padding-md);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        width: 100%;
+    }
+
+    #ticketDetails .Actions-overlay .Actions {
+        position: relative;
+        display: flex;
+        padding: var(--padding-md) var(--padding-md) 50px var(--padding-md);
+        gap: var(--gap-md);
+        flex-direction: column;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+        overflow: auto;
+    }
+
+    #ticketDetails .Actions {
+        overflow: unset;
+    }
+
+    #ticketDetails .Actions-overlay .Actions-wrapper .Actions-bottom {
+        position: relative;
+        display: flex;
+        padding: var(--padding-md);
+        width: 100%;
+        position: relative;
+        margin-top: auto !important;
+    }
+
+    #ticketDetails .Actions-overlay .Actions-bottom::before {
+        content: '';
+        background: rgb(255,255,255);
+        background: -moz-linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(2,0,36,0) 100%);
+        background: -webkit-linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(2,0,36,0) 100%);
+        background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(2,0,36,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#020024",GradientType=1); 
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        left: 0;
+        top: -50px;
+        z-index: 999999;
+    }
+
+    #ticketDetails .Actions-overlay .Actions-wrapper .Actions-bottom::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 20px;
+        right: 20px;
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        width: calc(100% - 40px);
+        height: 1px;
+    }
+
+    #ticketDetails .Actions-overlay .Actions-wrapper .Actions-bottom .btn-collapse {
+        display: flex;
+        gap: var(--gap-xs);
+        position: relative;
+        color: var(--black);
+    }
+
+    #ticketDetails .Actions-overlay .Actions-wrapper .Actions-bottom .btn-collapse {
+        position: relative;
+        color: var(--black);
+    }
+
+    #ticketDetails .Actions-overlay .Actions-wrapper .Actions-bottom .btn-collapse i {
+        transform: rotate(180deg);
+    }
+
+    #ticketDetails .Actions-overlay .Actions-close {
+        height: 0;
+        width: 0;
+        transition: var(--main-transition);
+    }
+
+    /* 
+     * has-ticket-overlay-opened | has-article-overlay-opened
+    */
+
+    .has-options-overlay-opened {
+        overflow: hidden;
+    }
+
+    .has-options-overlay-opened #ticketDetails .active .Actions-overlay {
+        width: 100%;
+    }
+
+    .has-options-overlay-opened #ticketDetails .active .Actions-overlay .Actions-wrapper {
+        left: 0;
+    }
+
+    .has-options-overlay-opened #ticketDetails .active .Actions-overlay .Actions-close {
+        display: flex;
+        height: 100vh;
+        width: 100%;
+        background: rgba(22, 22, 22, 0.7);
+    }
+
+    .has-options-overlay-opened .WidgetSimple > .Content {
+        z-index: unset;
+    }
+
+    .has-options-overlay-opened #ticketDetails {
+        z-index: 9999;
+    }
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.SidebarColumn .DashboardActions .Tab.Actions li {
     height: auto;
     padding: 0;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    /*float: left;
+    padding: 0 var(--padding-sm);*/
 }
 
-.Tab.Actions li:after {
-    color: #bbb;
+.SidebarColumn .DashboardActions .Tab.Actions li:hover a {
+    text-decoration: underline;
 }
 
-.Tab.Actions li:first-child a {
-    padding-left: 3px;
+.SidebarColumn .DashboardActions .Tab.Actions li.Selected:hover a {
+    text-decoration: none;
+    cursor: default;
+}
+
+.SidebarColumn .DashboardActions .Tab.Actions li:after {
+    color: var(--gray-dark-semi);
+    margin: 0 var(--padding-sm);
+}
+
+.SidebarColumn .Tab.Actions li:first-child a {
+    /*padding-left: 3px;*/
 }
 
 .RTL .Tab.Actions li:first-child a {
     padding: 3px 3px 4px 8px;
 }
 
-.Tab.Actions li a {
-    padding: 5px 5px 8px 2px;
-    color: #999;
+.SidebarColumn .Tab.Actions li a {
+    font-size: var(--font-size-sm);
+    font-weight: var(--semi-bold);
+    padding: 0;
+    /*padding: 5px 5px 8px 2px;*/
+    color: var(--gray-dark-semi);
 }
 
-.Tab.Actions li a:hover {
+/*.Tab.Actions li a:hover {
     color: #777;
     background: none;
     text-decoration: underline;
     border-bottom: 0px;
-}
+}*/
 
-.Tab.Actions li:last-child {
+/*.Tab.Actions li:last-child {
     background: none;
-}
+}*/
 
-.Tab.Actions li.Selected a {
-    color: #474747;
+.SidebarColumn .Tab.Actions li.Selected a {
+    color: var(--black);
     font-weight: bold;
 }
+
+.MainBox.Dashboard .SidebarColumn .DashboardActions {
+    width: 100%;
+    padding: 0;
+    padding-bottom: var(--padding-sm);
+}
+
+.MainBox.Dashboard .SidebarColumn .DashboardActions .AppointmentFilter.Tab.Actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.MainBox.Dashboard .SidebarColumn .DashboardActions .AppointmentFilter.Tab.Actions li {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+/*.MainBox.Dashboard .SidebarColumn .DashboardActions .AppointmentFilter.Tab.Actions li a {
+    padding: 0;
+}*/
+
 
 /**
  * @subsection  LightRow
  */
 
 .LightRow {
+    background: var(--main-bg-color);
+    align-items: center;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-bottom: 0;
+    padding: var(--padding-sm) var(--padding-lg);
+    border-top-left-radius: var(--border-radius-sm);
+    border-top-right-radius: var(--border-radius-sm);
+}
+
+.BottomRow {
+    background: (--white);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    padding: var(--padding-sm) var(--padding-lg);
+    border-bottom-left-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--black);
 }
 
 .LightRow.Header {
@@ -400,15 +842,18 @@ ul.ContextFunctions li:last-child:hover > a {
 }
 
 .LightRow.Bottom {
-    background: #F7F7F7;
-    border-bottom: 1px solid #ccc;
+    border: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    display: flex;
 }
 
 .Collapsed .LightRow.Bottom {
     display: none;
 }
 
-.LightRow h2 {
+/*.LightRow h2 {
     margin: 0;
     padding: 4px 0 5px;
     font-weight: normal;
@@ -419,16 +864,16 @@ ul.ContextFunctions li:last-child:hover > a {
     -webkit-box-shadow: 0 -1px 0 #DDD inset;
     box-shadow: 0 -1px 0 #DDD inset;
     border-bottom-color: #AAA;
-}
+}*/
 
-.LightRow .WidgetAction.Toggle {
+/*.LightRow .WidgetAction.Toggle {
     margin-left: 7px;
 }
 
 .RTL .LightRow .WidgetAction.Toggle {
     margin-left: 6px;
     margin-right: 7px;
-}
+}*/
 
 .LightRow #AJAXImageDestQueueID {
     display: none;
@@ -440,6 +885,14 @@ ul.ContextFunctions li:last-child:hover > a {
 
 .LightRow.Bottom .Actions li span input[type="checkbox"] {
     margin-top: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+    #ticketDetails  .LightRow .Actions.approval-container {
+        flex-direction: row;
+        padding: 0;
+        gap: 0;
+    }
 }
 
 /**
@@ -467,100 +920,6 @@ ul.ContextFunctions li:last-child:hover > a {
     padding-top: 3px;
     font-weight: bold;
     font-size: 14px;
-}
-
-/*
- * @subsection  Dashboard Ticket Filter
- */
-.TicketFilter > a.Selected,
-.UserFilter > a.Selected {
-    text-decoration: underline;
-}
-
-/**
- * @subsection  Control Row Pagination
- */
-/*
- * form.Pagination is the new style pagination, div.Pagination the old style
- * Both should work with this CSS
- */
-.Pagination {
-    float: right;
-    margin-right: 0;
-    font-size: 11px;
-    padding: 3px 0px 5px 0px;
-}
-
-.RTL .Pagination {
-    float: left;
-}
-
-form.Pagination > * {
-    float: left;
-}
-
-.RTL .Pagination > * {
-    float: right;
-}
-
-.Pagination > span {
-    margin-top: 3px;
-}
-
-form.Pagination a {
-    height: 24px;
-    width: 24px;
-    display: block;
-}
-
-span.Pagination a {
-    color: #000;
-}
-
-span.Pagination a:hover {
-    color: #F92;
-}
-
-span.Pagination a.Selected {
-    font-weight: bold;
-}
-
-span.Pagination span.PaginationLimit {
-    color: #FF0000;
-}
-
-.Pagination a span {
-    margin: 7px 6px;
-    height: 9px;
-    width: 11px;
-    text-indent: -9999px;
-    background: url(../img/arrows.png) no-repeat;
-    display: block;
-}
-
-.Pagination .ArrowLeft span {
-    background-position: left top;
-}
-
-.RTL .Pagination .ArrowLeft span {
-    background-position: right top;
-}
-
-.Pagination .ArrowRight span {
-    background-position: right top;
-}
-
-.RTL .Pagination .ArrowRight span {
-    background-position: left top;
-}
-
-.Pagination input {
-    width: 16px;
-    margin-right: 2px;
-    padding: 1px 3px;
-    font-size: 11px;
-    font-family: inherit;
-    text-align: right;
 }
 
 

@@ -19,10 +19,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
-        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
-        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+        my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UtilObject    = $Kernel::OM->Get('Kernel::System::Util');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
 
         # do not check email addresses
         $HelperObject->ConfigSettingChange(
@@ -47,9 +52,6 @@ $Selenium->RunTest(
             User     => $TestUserLogin,
             Password => $TestUserLogin,
         );
-
-        # get service object
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
         # create two test services
         my @ServiceIDs;
@@ -105,9 +107,6 @@ $Selenium->RunTest(
             $Success,
             "Parent Service ID $ServiceIDs[0] is invalid"
         );
-
-        # get ticket object
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # create test tickets
         my @TicketIDs;
@@ -166,10 +165,13 @@ $Selenium->RunTest(
                 "${ScriptAlias}index.pl?Action=AgentTicketService;ServiceID=$ServiceIDs[1];View=Small"
             );
 
-            # click on viewer controller
-            $Selenium->find_element(
-                "//a[contains(\@href, \'Filter=Unlocked;View=$View;ServiceID=$ServiceIDs[1];SortBy=Age;OrderBy=Up;View=Small;\' )]"
-            )->VerifiedClick();
+            if ( $View ne 'Small' ) {
+
+                # click on viewer controller
+                $Selenium->find_element(
+                    "//a[contains(\@href, \'Filter=Unlocked;View=$View;ServiceID=$ServiceIDs[1];SortBy=Age;OrderBy=Up;View=Small;\' )]"
+                )->VerifiedClick();
+            }
 
             # verify that all expected tickets are present
             for my $TicketID (@TicketIDs) {
@@ -181,6 +183,11 @@ $Selenium->RunTest(
 
                 # check for locked and unlocked tickets
                 if ( $TicketData{Lock} eq 'unlock' ) {
+
+                    # click on 'All ticket' filter
+                    $Selenium->find_element(
+                        "//a[contains(\@href, \'ServiceID=$ServiceIDs[1];SortBy=Age;OrderBy=Up;View=$View;Filter=All\' )]"
+                    )->VerifiedClick();
 
                     # click on 'Available ticket' filter
                     $Selenium->find_element(
@@ -216,6 +223,8 @@ $Selenium->RunTest(
                         index( $Selenium->get_page_source(), $TicketData{TicketNumber} ) > -1,
                         "Locked Ticket found on page with 'All tickets' filter on - $TicketData{TicketNumber} ",
                     );
+
+                    print STDERR "Debug Dump - ModuleName - HERE - 2\n";
 
                     # click on 'Available ticket' filter
                     $Selenium->find_element(
@@ -254,7 +263,7 @@ $Selenium->RunTest(
 
         # delete created test service
         for my $ServiceDelete (@ServiceIDs) {
-            $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+            $Success = $DBObject->Do(
                 SQL => "DELETE FROM service WHERE id = $ServiceDelete",
             );
             $Self->True(
@@ -268,7 +277,7 @@ $Selenium->RunTest(
             qw (Ticket Service)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

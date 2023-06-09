@@ -5,7 +5,7 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-<div class="WidgetSimple">
+<div class="WidgetSimple mentions-widget">
     <div class="Header">
         <div class="WidgetAction Mentions Toggle">
             <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
@@ -15,9 +15,15 @@
     <div class="Content">
         <ul>
 [% RenderBlockStart("User") %]
-            <li style="word-wrap: break-word;">-[% Data.UserFullname | html %]
+            <li>
+                <span class="email-wrapper">
+                    <span>[% Data.UserLogin | html %]</span>
+                    <span>([% Data.UserEmail | html %])</span>
+                </span>
                 [% IF Data.Removable %]
-                    <a href="#" data-user-id=[% Data.UserID | html %] class="MentionRow"><i class="fa fa-trash"></i></a>
+                    <a href="#" data-user-id=[% Data.UserID | html %] class="MentionRow icon-hover-sm">
+                        <i class="fa fa-times"></i>
+                    </a>
                 [% END %]
             </li>
 [% RenderBlockEnd("User") %]

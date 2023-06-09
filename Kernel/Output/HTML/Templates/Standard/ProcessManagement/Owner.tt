@@ -6,28 +6,33 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+
 [% RenderBlockStart("rw:Owner") %]
-<input type="hidden" name="OwnerAll" id="OwnerAll" value="[% Data.OwnerAll | html %]"/>
+<input type="hidden" name="OwnerAll" id="OwnerAll" value="[% Data.OwnerAll | html %]" />
 <label for="[% Data.FieldID | html %]" class="[% Data.MandatoryClass | html %]">
+    [% Data.Label | html %]:
 [% RenderBlockStart("LabelSpan") %]
     <span class="Marker">*</span>
 [% RenderBlockEnd("LabelSpan") %]
+    <a href="#" id="OwnerSelectionGetAll" class="GetAllAJAX icon-hover" title="[% Translate(" Get all") | html %]">
+        <span>[% Translate("Get all") | html %]</span>
+        <i class="fa fa-refresh"></i>
+    </a>
 [% RenderBlockStart("rw:Owner:DescriptionLong") %]
     <span class="FieldHelpContainer">
         <i class="fa fa-question-circle FieldHelpTrigger"></i>
         <span>[% Translate(Data.DescriptionLong) | html %]</span>
     </span>
 [% RenderBlockEnd("rw:Owner:DescriptionLong") %]
-    [% Data.Label | html %]:
 </label>
 <div class="Field">
     [% Data.Content %]
-    <a href="#" id="OwnerSelectionGetAll" class="GetAllAJAX" title="[% Translate("Get all") | html %]">
-        <span>[% Translate("Get all") | html %]</span>
-        <i class="fa fa-refresh"></i>
-    </a>
-    <div id="[% Data.FieldID | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-    <div id="[% Data.FieldID | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+    <div id="[% Data.FieldID | html %]Error" class="TooltipErrorMessage">
+        <p>[% Translate("This field is required.") | html %]</p>
+    </div>
+    <div id="[% Data.FieldID | html %]ServerError" class="TooltipErrorMessage">
+        <p>[% Translate("This field is required.") | html %]</p>
+    </div>
 [% RenderBlockStart("rw:Owner:DescriptionShort") %]
     <div class="FieldExplanation">[% Translate(Data.DescriptionShort) | html %]</div>
 [% RenderBlockEnd("rw:Owner:DescriptionShort") %]

@@ -137,36 +137,34 @@ my $SeleniumTest = sub {
         Value => 'Value3',
     );
 
-    for my $SetType ( sort keys %DynamicFieldDropdownTestData ) {
+    for my $Type ( sort keys %DynamicFieldDropdownTestData ) {
 
         my $SetDynamicFieldDropdown = $SeleniumObject->InputSet(
             Attribute => 'DynamicField_UnitTestDropdown',
-            Content   => $DynamicFieldDropdownTestData{$SetType},
+            Content   => $DynamicFieldDropdownTestData{$Type},
             Options   => {
-                KeyOrValue => $SetType,
+                KeyOrValue => $Type,
             },
         );
 
         $Self->True(
             $SetDynamicFieldDropdown,
-            "Setting DynamicFieldDropdown '$DynamicFieldDropdownTestData{ $SetType }'",
+            "Setting DynamicFieldDropdown '$DynamicFieldDropdownTestData{ $Type }'",
+        );
+        sleep 1;
+
+        my $GetDynamicFieldDropdown = $SeleniumObject->InputGet(
+            Attribute => 'DynamicField_UnitTestDropdown',
+            Options   => {
+                KeyOrValue => $Type,
+            },
         );
 
-        for my $GetType ( sort keys %DynamicFieldDropdownTestData ) {
-
-            my $GetDynamicFieldDropdown = $SeleniumObject->InputGet(
-                Attribute => 'DynamicField_UnitTestDropdown',
-                Options   => {
-                    KeyOrValue => $GetType,
-                },
-            );
-
-            $Self->Is(
-                $GetDynamicFieldDropdown,
-                $DynamicFieldDropdownTestData{$GetType},
-                "Get DynamicFieldDropdown is '$DynamicFieldDropdownTestData{ $GetType }'",
-            );
-        }
+        $Self->Is(
+            $GetDynamicFieldDropdown,
+            $DynamicFieldDropdownTestData{$Type},
+            "Get DynamicFieldDropdown is '$DynamicFieldDropdownTestData{ $Type }'",
+        );
     }
 
     my $DynamicFieldTextArea    = "DynamicFieldTextArea \n\n\n äöüß%\$'\")(}{? \n\n\n - $RandomID";

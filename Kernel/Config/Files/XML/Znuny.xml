@@ -31,7 +31,7 @@
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>Znuny.LastViews.css</Item>
+                <Item>Core.LastViews.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -40,7 +40,7 @@
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>Znuny.LastViews.css</Item>
+                <Item>Core.LastViews.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -48,23 +48,6 @@
     <!--
         Repositories
     -->
-    <Setting Name="PackageRepositoryURLSchema" Required="1" Valid="1">
-        <Description Translatable="1">Access package repositories via HTTP or HTTPS.</Description>
-        <Navigation>Core::Repository</Navigation>
-        <Value>
-            <Item ValueType="Select" SelectedID="https">
-                <Item ValueType="Option" Value="https">https</Item>
-                <Item ValueType="Option" Value="http">http</Item>
-            </Item>
-        </Value>
-    </Setting>
-    <Setting Name="CloudServiceProxyURL" Required="1" Valid="1">
-        <Description Translatable="1">URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option 'PackageRepositoryURLSchema'.</Description>
-        <Navigation>Core::Repository</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">addons.znuny.com/api/otrs_cloud_service/</Item>
-        </Value>
-    </Setting>
     <Setting Name="Frontend::Module###AdminSystemFiles" Required="1" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
@@ -1161,6 +1144,7 @@
                 <Item Key="Article">
                     <Hash>
                         <Item Key="Ticket::Frontend::AgentTicketMove###DynamicField">AgentTicketMove</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketZoom###DynamicField">AgentTicketZoom</Item>
                         <Item Key="Ticket::Frontend::CustomerTicketZoom###DynamicField">CustomerTicketZoom</Item>
                         <Item Key="Ticket::Frontend::AgentTicketClose###DynamicField">AgentTicketClose</Item>
                         <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
@@ -1585,7 +1569,7 @@
             <Hash>
                 <Item Key="Module">Kernel::System::DBCRUD::Event::DBCRUD</Item>
                 <Item Key="Transaction">1</Item>
-                <Item Key="Event">.*(Add|Update|Delete|Export|Import|Copy)</Item>
+                <Item Key="Event">DBCRUD(.+)</Item>
             </Hash>
         </Value>
     </Setting>
@@ -2030,6 +2014,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketOwner</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">Owner</Item>
                 <Item Key="CssClassNew">Owner New</Item>
                 <Item Key="CssClassReached">Owner Reached</Item>
@@ -2562,7 +2547,7 @@
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>Znuny.RichTextEditor.css</Item>
+                <Item>Core.RichTextEditor.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -2572,6 +2557,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketMention</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">Mention</Item>
                 <Item Key="CssClassNew">Mention New</Item>
                 <Item Key="Icon">fa fa-comment</Item>
@@ -2634,6 +2620,213 @@
                     </Array>
                 </Item>
             </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###Activity" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Activity.</Item>
+                    <Item Key="Title" Translatable="1">Activity</Item>
+                    <Item Key="NavBarName">Activity</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Activity###TypeIconMapping" Required="1" Valid="1">
+        <Description Translatable="1">Assignment between type and icon.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Appointment">fa fa-calendar</Item>
+                <Item Key="Article">fa fa-align-left></Item>
+                <Item Key="Escalation">fa fa-exclamation</Item>
+                <Item Key="Calendar">fa fa-calendar</Item>
+                <Item Key="CustomerUser">fa fa-male</Item>
+                <Item Key="CustomerCompany">fa fa-building-o</Item>
+                <Item Key="Email">fa fa-envelope-o</Item>
+                <Item Key="FAQ">fa fa-comment-o</Item>
+                <Item Key="Mention">fa fa-comment</Item>
+                <Item Key="Phone">fa fa-phone</Item>
+                <Item Key="Preferences">fa fa-wrench</Item>
+                <Item Key="Process">fa fa-sitemap</Item>
+                <Item Key="Ticket">fa fa-ticket</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Activity###EventTypeMapping" Required="1" Valid="1">
+        <Description Translatable="1">Assignment between event and type.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="AppointmentCreate">Appointment</Item>
+                <Item Key="AppointmentDelete">Appointment</Item>
+                <Item Key="AppointmentNotification">Appointment</Item>
+                <Item Key="AppointmentUpdate">Appointment</Item>
+                <Item Key="ArticleAgentNotification">Article</Item>
+                <Item Key="ArticleAgentNotification">Article</Item>
+                <Item Key="ArticleAutoResponse">Article</Item>
+                <Item Key="ArticleBounce">Article</Item>
+                <Item Key="ArticleCreate">Article</Item>
+                <Item Key="ArticleCustomerNotification">Article</Item>
+                <Item Key="ArticleCustomerNotification">Article</Item>
+                <Item Key="ArticleEmailSendingError">Article</Item>
+                <Item Key="ArticleEmailSendingQueued">Article</Item>
+                <Item Key="ArticleEmailSendingSent">Article</Item>
+                <Item Key="ArticleFlagDelete">Article</Item>
+                <Item Key="ArticleFlagSet">Article</Item>
+                <Item Key="ArticleSend">Article</Item>
+                <Item Key="ArticleUpdate">Article</Item>
+                <Item Key="CustomerCompanyAdd">CustomerCompany</Item>
+                <Item Key="CustomerCompanyUpdate">CustomerCompany</Item>
+                <Item Key="CustomerUserAdd">CustomerUser</Item>
+                <Item Key="CustomerUserUpdate">CustomerUser</Item>
+                <Item Key="EscalationResponseTimeNotifyBefore">Escalation</Item>
+                <Item Key="EscalationResponseTimeStart">Escalation</Item>
+                <Item Key="EscalationResponseTimeStop">Escalation</Item>
+                <Item Key="EscalationSolutionTimeNotifyBefore">Escalation</Item>
+                <Item Key="EscalationSolutionTimeStart">Escalation</Item>
+                <Item Key="EscalationSolutionTimeStop">Escalation</Item>
+                <Item Key="EscalationUpdateTimeNotifyBefore">Escalation</Item>
+                <Item Key="EscalationUpdateTimeStart">Escalation</Item>
+                <Item Key="EscalationUpdateTimeStop">Escalation</Item>
+                <Item Key="HistoryAdd">Ticket</Item>
+                <Item Key="HistoryDelete">Ticket</Item>
+                <Item Key="LinkObjectLinkAdd">Link</Item>
+                <Item Key="LinkObjectLinkDelete">Link</Item>
+                <Item Key="NotificationAddNote">Escalation</Item>
+                <Item Key="NotificationEscalation">Escalation</Item>
+                <Item Key="NotificationEscalationNotifyBefore">Escalation</Item>
+                <Item Key="NotificationFollowUp">Ticket</Item>
+                <Item Key="NotificationLockTimeout">Ticket</Item>
+                <Item Key="NotificationMove">Ticket</Item>
+                <Item Key="NotificationNewTicket">Ticket</Item>
+                <Item Key="NotificationOwnerUpdate">Ticket</Item>
+                <Item Key="NotificationPendingReminder">Ticket</Item>
+                <Item Key="NotificationResponsibleUpdate">Ticket</Item>
+                <Item Key="NotificationServiceUpdate">Ticket</Item>
+                <Item Key="TicketAccountTime">Ticket</Item>
+                <Item Key="TicketAllChildrenClosed">Ticket</Item>
+                <Item Key="TicketArchiveFlagUpdate">Ticket</Item>
+                <Item Key="TicketCreate">Ticket</Item>
+                <Item Key="TicketCustomerUpdate">Ticket</Item>
+                <Item Key="TicketDelete">Ticket</Item>
+                <Item Key="TicketFlagDelete">Ticket</Item>
+                <Item Key="TicketFlagSet">Ticket</Item>
+                <Item Key="TicketLockUpdate">Ticket</Item>
+                <Item Key="TicketMerge">Ticket</Item>
+                <Item Key="TicketOwnerUpdate">Ticket</Item>
+                <Item Key="TicketPendingTimeUpdate">Ticket</Item>
+                <Item Key="TicketPriorityUpdate">Ticket</Item>
+                <Item Key="TicketQueueUpdate">Ticket</Item>
+                <Item Key="TicketResponsibleUpdate">Ticket</Item>
+                <Item Key="TicketSLAUpdate">Ticket</Item>
+                <Item Key="TicketServiceUpdate">Ticket</Item>
+                <Item Key="TicketStateUpdate">Ticket</Item>
+                <Item Key="TicketSubscribe">Ticket</Item>
+                <Item Key="TicketTitleUpdate">Ticket</Item>
+                <Item Key="TicketTypeUpdate">Ticket</Item>
+                <Item Key="TicketUnlockTimeoutUpdate">Ticket</Item>
+                <Item Key="TicketUnsubscribe">Ticket</Item>
+                <Item Key="UserMention">Mention</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PreferencesGroups###ActivityLinkTarget" Required="0" Valid="1">
+        <Description Translatable="1">Defines the link type for each activity.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">NotificationSettings</Item>
+                <Item Key="Label" Translatable="1">Activity Notification</Item>
+                <Item Key="Desc" Translatable="1">Defines the link type for each activity.</Item>
+                <Item Key="Key" Translatable="1">Activity LinkTarget</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="_blank" Translatable="1">open in new tab</Item>
+                        <Item Key="_self" Translatable="1">open in current tab</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DataSelected">_self</Item>
+                <Item Key="PrefKey">UserActivityLinkTarget</Item>
+                <Item Key="Prio">9001</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Notification::Transport###Activity" Required="0" Valid="1">
+        <Description Translatable="1">Defines all the parameters for this notification transport.</Description>
+        <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::NotificationEvent::Transport::Activity</Item>
+                <Item Key="Name" Translatable="1">Activity</Item>
+                <Item Key="Icon">fa fa-bell</Item>
+                <Item Key="Prio">900</Item>
+                <Item Key="AgentEnabledByDefault">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentNotification::Transport###Activity" Required="0" Valid="1">
+        <Description Translatable="1">Defines all the parameters for this notification transport.</Description>
+        <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Calendar::Event::Transport::Activity</Item>
+                <Item Key="Name" Translatable="1">Activity</Item>
+                <Item Key="Icon">fa fa-bell</Item>
+                <Item Key="Prio">200</Item>
+                <Item Key="AgentEnabledByDefault">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ColorPicker###Palette" Required="0" Valid="1">
+        <Description Translatable="1">List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+                <Item>#000000</Item>
+                <Item>#1E1E1E</Item>
+                <Item>#3A3A3A</Item>
+                <Item>#891100</Item>
+                <Item>#894800</Item>
+                <Item>#888501</Item>
+                <Item>#458401</Item>
+                <Item>#028401</Item>
+                <Item>#018448</Item>
+                <Item>#008688</Item>
+                <Item>#004A88</Item>
+                <Item>#001888</Item>
+                <Item>#491A88</Item>
+                <Item>#891E88</Item>
+                <Item>#891648</Item>
+                <Item>#FF2101</Item>
+                <Item>#FF8802</Item>
+                <Item>#FFFA03</Item>
+                <Item>#83F902</Item>
+                <Item>#05F802</Item>
+                <Item>#03F987</Item>
+                <Item>#00FDFF</Item>
+                <Item>#008CFF</Item>
+                <Item>#002EFF</Item>
+                <Item>#8931FF</Item>
+                <Item>#FF39FF</Item>
+                <Item>#FF2987</Item>
+                <Item>#FF726E</Item>
+                <Item>#FFCE6E</Item>
+                <Item>#FFFB6D</Item>
+            </Array>
         </Value>
     </Setting>
 

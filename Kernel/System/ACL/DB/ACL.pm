@@ -816,13 +816,13 @@ sub ACLsNeedSyncReset {
 gets a complete ACL information dump from the DB
 
     my $ACLDump = $ACLObject->ACLDump(
-        ResultType  => 'SCALAR',                    # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt',  # mandatory for ResultType = 'FILE'
+        ResultType  => 'SCALAR'                     # 'SCALAR' || 'HASH' || 'FILE'
+        Location    => '/opt/znuny/var/myfile.txt'   # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 
 Returns:
-    $ACLDump = '/opt/otrs/var/myfile.txt';          # or undef if can't write the file
+    $ACLDump = '/opt/znuny/var/myfile.txt';          # or undef if can't write the file
 
 =cut
 

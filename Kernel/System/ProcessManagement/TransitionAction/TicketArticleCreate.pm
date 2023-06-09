@@ -153,44 +153,6 @@ Returns:
         },
     );
 
-    # Chat article example:
-
-    my $Success = $TicketArticleCreateActionObject->Run(
-        UserID => 123,
-        Ticket => {
-            TicketNumber => '20101027000001',
-            Title        => 'some title',
-            TicketID     => 123,
-            State        => 'some state',
-            # ... (all ticket properties, as the result from Kernel::System::Ticket::TicketGet)
-        },
-        ProcessEntityID            => 'P123',
-        ActivityEntityID           => 'A123',
-        SequenceFlowEntityID       => 'T123',
-        SequenceFlowActionEntityID => 'TA123',
-        Config                   => {
-            SenderType           => 'agent',
-            IsVisibleForCustomer => 1,
-            CommunicationChannel => 'Chat',
-
-            # Chat article data payload.
-            ChatMessageList => [
-                {
-                    ID              => 1,
-                    MessageText     => 'My chat message',
-                    CreateTime      => '2014-04-04 10:10:10',
-                    SystemGenerated => 0,
-                    ChatterID       => '123',
-                    ChatterType     => 'User',
-                    ChatterName     => 'John Doe',
-                },
-                # ...
-            ],
-            HistoryType    => 'Misc',
-            HistoryComment => 'Some free text!',
-        },
-    );
-
 =cut
 
 sub Run {
