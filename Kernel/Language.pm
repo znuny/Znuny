@@ -543,13 +543,30 @@ sub Time {
             $Day   = sprintf( "%02d",           $Day );
             $Month = sprintf( "%02d",           $Month );
         }
-        $ReturnString =~ s/\%T/$Time/g;
+
+        # if we have an dynamic field Date or DateTime, we want to add additional div's
+        # to use the css flex magic in the frontend
+        if ( $Param{DynamicFieldConfig} && $Param{DynamicFieldConfig}->{FieldType} =~ /(Date|DateTime)/ ) {
+            my ( $Date, $Time ) = split / - /, $ReturnString;
+            $ReturnString = '';
+            if ($Date) {
+                $ReturnString .= '<div>' . $Date . '</div>';
+            }
+
+            if ($Time) {
+                $ReturnString .= '<div>' . $Time . '</div>';
+            }
+        }
+
+        if ($Time) {
+            $ReturnString =~ s/\%T/$Time/g;
+        }
         $ReturnString =~ s/\%D/$Day/g;
         $ReturnString =~ s/\%M/$Month/g;
         $ReturnString =~ s/\%Y/$Year/g;
         $ReturnString =~ s{(\%A)}{defined $DayAbbr ? $Self->Translate($DayAbbr) : '';}egx;
-        $ReturnString
-            =~ s{(\%B)}{defined $MonthAbbr ? $Self->Translate($MonthAbbr) : '';}egx;
+        $ReturnString =~ s{(\%B)}{defined $MonthAbbr ? $Self->Translate($MonthAbbr) : '';}egx;
+
         return $ReturnString;
     }
 

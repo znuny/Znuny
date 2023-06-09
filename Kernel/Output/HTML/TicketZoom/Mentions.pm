@@ -45,13 +45,13 @@ sub Run {
         );
 
         $Users{ $User{UserID} } = 1;
-
         $LayoutObject->Block(
             Name => "User",
             Data => {
-                UserFullname => $User{UserFullname},
-                UserID       => $User{UserID},
-                Removable    => $UserCanRemoveMention,
+                UserLogin => $User{UserLogin},
+                UserEmail => $User{UserEmail},
+                UserID    => $User{UserID},
+                Removable => $UserCanRemoveMention,
             }
         );
     }

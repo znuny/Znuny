@@ -38,6 +38,7 @@ sub CheckAccess {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LinkObject   = $Kernel::OM->Get('Kernel::System::LinkObject');
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     for my $Needed (qw(Ticket Article ChannelName UserID)) {
         if ( !$Param{$Needed} ) {
@@ -48,6 +49,10 @@ sub CheckAccess {
             return;
         }
     }
+
+    # Only add article action to agent ticket zoom view.
+    my $Action = $LayoutObject->{Action} // '';
+    return if $Action ne 'AgentTicketZoom';
 
     return if !$ConfigObject->Get('Frontend::Module')->{AgentTicketNoteToLinkedTicket};
     return if !$Param{AclActionLookup}->{AgentTicketNoteToLinkedTicket};
@@ -103,7 +108,7 @@ sub GetConfig {
     # This is necessary to remove the article action menu item after all linked tickets have been removed
     # from within agent ticket zoom because the page will not be reloaded.
     my $LinkObjectViewMode = $ConfigObject->Get('LinkObject::ViewMode') // '';
-    if ( $LinkObjectViewMode eq 'Complex' ) {
+    if ( $LayoutObject->{Action} eq 'AgentTicketZoom' && $LinkObjectViewMode eq 'Complex' ) {
         $LayoutObject->AddJSOnDocumentCompleteIfNotExists(
             Key  => 'Core.Agent.TicketNoteToLinkedTicket',
             Code => 'Core.Agent.TicketNoteToLinkedTicket.Init();',

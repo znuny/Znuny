@@ -37,7 +37,7 @@ Core.Agent.TicketPhone = (function (TargetNS) {
             ModifiedFields;
 
         // Bind event to customer radio button.
-        $('.CustomerTicketRadio').on('change', function () {
+        $('.RadioRound').on('change', function () {
             var CustomerKey;
             if ($(this).prop('checked')){
 

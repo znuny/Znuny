@@ -6,12 +6,13 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+
 <div class="LayoutPopup ARIARoleMain">
     <div class="Header">
         <h1>[% Translate("S/MIME Certificate") | html %]: [% Data.Filename | html %]</h1>
-        <p>
-            <a class="CancelClosePopup" href="#">[% Translate("Close this dialog") | html %]</a>
-        </p>
+        <div>
+            <a class="CancelClosePopup btn-main btn-cancel-ghost btn-width-md" href="#">[% Translate("Close") | html %]</a>
+        </div>
     </div>
     <div class="Content">
         <div class="WidgetSimple">
@@ -23,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div class="Footer">
-        <button class="CancelClosePopup" value="Close" type="button" title="[% Translate("Close this dialog") | html %]" id="Close">[% Translate("Close this dialog") | html %]</button>
-    </div>
+#    <div class="Footer">
+#        <button class="CancelClosePopup" value="Close" type="button" title="[% Translate("Close this dialog") | html %]" id="Close">[% Translate("Close this dialog") | html %]</button>
+#    </div>
 </div>

@@ -19,12 +19,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @subsubsection     General
  */
 
-.ServiceOverview {
+/*.ServiceOverview {
     font-size: 12px;
     margin: 0 16px 0px 8px;
     padding: 0 0 4px 0;
     color: gray;
-}
+}*/
 
 .RTL .ServiceOverview {
     margin: 0 8px 10px 16px;
@@ -40,7 +40,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     float: none;
 }
 
-.ServiceOverviewList.Level_1 {
+/*.ServiceOverviewList.Level_1 {
     margin-left: 0px;
 }
 
@@ -86,14 +86,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     padding: 2px 5px;
     height: 14px;
     white-space:nowrap;
-}
+}*/
 
 .RTL .ServiceOverviewList li {
     float: right;
-}
-
-.ServiceOverview .Active {
-    font-weight: bold;
 }
 
 } /* end @media */

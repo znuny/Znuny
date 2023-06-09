@@ -17,7 +17,6 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
 
@@ -31,7 +30,7 @@ sub Run {
     my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
     my %Data = (
-        DaemonCron     => $Home . '/var/cron/otrs_daemon',
+        DaemonCron     => $Home . '/var/cron/znuny_daemon',
         CronExecutable => $Home . '/bin/Cron.sh',
     );
 

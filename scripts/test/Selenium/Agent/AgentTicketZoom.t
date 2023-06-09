@@ -47,8 +47,15 @@ my $Hex2RGB = sub {
 
 $Selenium->RunTest(
     sub {
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $MainObject         = $Kernel::OM->Get('Kernel::System::Main');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Overload CustomerUser => Map setting defined in the Defaults.pm.
         my $DefaultCustomerUser = $ConfigObject->Get("CustomerUser");
@@ -97,8 +104,6 @@ $Selenium->RunTest(
             Language => $Language,
         ) || die "Did not get test user";
 
-        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-
         # Get UserID for later manipulation of preferences.
         my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
@@ -131,11 +136,9 @@ $Selenium->RunTest(
         ) || die "Did not get test customer user";
 
         # Get test customer user ID.
-        my %TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
+        my %TestCustomerUserID = $CustomerUserObject->CustomerUserDataGet(
             User => $TestCustomerUser,
         );
-
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Create test ticket.
         my $TitleRandom  = "Title$RandomID";
@@ -157,7 +160,7 @@ $Selenium->RunTest(
             "Ticket is created - ID $TicketID",
         );
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Phone',
         );
 
@@ -165,7 +168,7 @@ $Selenium->RunTest(
         my $AttachmentName = "StdAttachment-Test1.png";
         my $Location       = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/$AttachmentName";
-        my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+        my $ContentRef = $MainObject->FileRead(
             Location => $Location,
             Mode     => 'binmode',
         );
@@ -212,7 +215,7 @@ $Selenium->RunTest(
             push @ArticleIDs, $ArticleID;
         }
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketZoom for test created ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -396,7 +399,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
 
     }
 );

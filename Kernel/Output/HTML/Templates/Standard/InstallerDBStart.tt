@@ -8,7 +8,7 @@
 # --
 
 [% RenderBlockStart("DatabaseStart") %]
-<div class="W950px SpacingTop SpacingBottom CenterBox">
+<div class="SpacingTop SpacingBottom CenterBox">
     <form action="[% Env("CGIHandle") %]" method="post" id="FormDB" class="PreventMultipleSubmits">
         <input type="hidden" name="Action"    value="Installer" />
         <input type="hidden" name="Subaction" value="DB" />
@@ -20,30 +20,31 @@
 
             <div class="Content">
                 <fieldset class="TableLike">
-                    <label for="DBType">[% Translate("Type") | html %]:</label>
-                    <div class="Field">
-                        [% Data.SelectDBType %]
+                    <div class="field-wrapper">
+                        <label class="title" for="DBType">[% Translate("Type") | html %]</label>
+                        <div class="Field">
+                            [% Data.SelectDBType %]
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <label>[% Translate("Install Type") | html %]:</label>
-                    <div class="Field">
-                        <div>
-                            <input type="radio" id="DBInstallTypeCreateDB" name="DBInstallType" checked value="CreateDB" />
-                            <label for="DBInstallTypeCreateDB">[% Translate("Create a new database for OTRS") | html %]</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="DBInstallTypeUseDB" name="DBInstallType" value="UseDB" />
-                            <label for="DBInstallTypeUseDB">[% Translate("Use an existing database for OTRS") | html %]</label>
+                    <div class="field-wrapper">
+                        <label class="title">[% Translate("Install Type") | html %]</label>
+                        <div class="Field">
+                            <div class="checkbox-container">
+                                <input type="radio" id="DBInstallTypeCreateDB" name="DBInstallType" checked value="CreateDB" />
+                                <label for="DBInstallTypeCreateDB">[% Translate("Create a new database for Znuny") | html %]</label>
+                            </div>
+                            <div class="checkbox-container">
+                                <input type="radio" id="DBInstallTypeUseDB" name="DBInstallType" value="UseDB" />
+                                <label for="DBInstallTypeUseDB">[% Translate("Use an existing database for Znuny") | html %]</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="Clear"></div>
                 </fieldset>
 
-                <div class="Spacing Right">
-                    <button class="Primary CallForAction" type="submit" id="FormDBSubmit"><span>[% Translate("Next") | html %]</span></button>
+                <div class="SaveButtons">
+                    <button class="Primary CallForAction btn-main btn-primary btn-width-md" type="submit" id="FormDBSubmit"><span>[% Translate("Next") | html %]</span></button>
                 </div>
-                <div class="Clear"></div>
             </div>
         </div>
     </form>

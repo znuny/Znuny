@@ -307,6 +307,7 @@ sub Run {
                         Name => 'OverviewListRow',
                         Data => {
                             Service => $ServiceName,
+                            ValidID => $SLAData{ValidID},
                         },
                     );
                 }

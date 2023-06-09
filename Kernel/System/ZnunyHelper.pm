@@ -3218,7 +3218,7 @@ sub _GeneralCatalogItemCreateIfNotExists {
 adds or updates a definition for a ConfigItemClass. You need to provide the configuration
 of the CMDB class in the following directory:
 
-/opt/otrs/scripts/cmdb_classes/Private_Endgeraete.config
+/opt/znuny/scripts/cmdb_classes/Private_Endgeraete.config
 
 The required general catalog item will be created automatically.
 
@@ -3370,7 +3370,7 @@ sub _ITSMConfigItemDefinitionCreate {
 add if not exists a definition for a ConfigItemClass. You need to provide the configuration
 of the CMDB class in the following directory:
 
-/opt/otrs/scripts/cmdb_classes/Private_Endgeraete.config
+/opt/znuny/scripts/cmdb_classes/Private_Endgeraete.config
 
 The required general catalog item will be created automatically.
 
@@ -5546,7 +5546,7 @@ sub _GenericAgentCreateIfNotExists {
 Adds article action menu items.
 
     my %ArticleActions = (
-        Internal => [ # Channel name (Internal, Phone, Email, Chat or Invalid)
+        Internal => [ # Channel name (Internal, Phone, Email or Invalid)
             {
                 Key      => 'ZnunyMarkTicketSeenUnseen',
                 Module   => 'Kernel::Output::HTML::ArticleAction::MyMenuItem',
@@ -5609,7 +5609,7 @@ sub _ArticleActionsAdd {
 Removes article action menu items.
 
     my %ArticleActions = (
-        Internal => [ # Channel name (Internal, Phone, Email, Chat or Invalid)
+        Internal => [ # Channel name (Internal, Phone, Email or Invalid)
             {
                 Module   => 'Kernel::Output::HTML::ArticleAction::MyMenuItem',
                 Priority => 999,

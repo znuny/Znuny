@@ -94,7 +94,7 @@ Core.UI.Dialog = (function (TargetNS) {
                 .filter(':first'),
             $FocusField;
 
-        if (!$FirstElement || !$FirstElement.length || $('div.Dialog:visible').find('.OTRSBusinessRequiredDialog').length) {
+        if (!$FirstElement || !$FirstElement.length) {
             return;
         }
 
@@ -212,6 +212,8 @@ Core.UI.Dialog = (function (TargetNS) {
      * @param {Boolean} Params.AllowAutoGrow - If true, the InnerContent of the dialog can resize until the max window height is reached, if false (default), InnerContent of small dialogs does not resize over 200px.
      * @param {Boolean} Params.HideHeader - Hide the header by setting this to true
      * @param {Boolean} Params.HideFooter - Hide the footer by setting this to true
+     * @param {Boolean} Params.Class - Optional class parameters for the dialog element.
+     * @param {Boolean} Params.ModalClass - Optional class parameters for the dialogmodal element.
      * @param {Object} Params.Buttons - Array of Hashes with the following properties (buttons are placed in a div "footer" of the dialog):
      * @param {String} Params.Buttons.Label - Text of the button.
      * @param {String} Params.Buttons.Type - 'Submit'|'Close' (default: none) Special type of the button - invokes a standard function.
@@ -224,15 +226,18 @@ Core.UI.Dialog = (function (TargetNS) {
 
         var $Dialog, $Content, $ButtonFooter, HTMLBackup, DialogCopy, DialogCopySelector,
             DialogHTML,
-            FullsizeMode = false;
+            DialogClass = Params.Class || '',
+            DialogModalClass = Params.ModalClass || 'modal-sm',
+            FullsizeMode = false,
+            InnerWidth;
 
-        DialogHTML = '<div class="Dialog">';
+        DialogHTML = '<div class="Dialog ' + DialogClass + '">';
         if (!Params.HideHeader) {
-            DialogHTML += '<div class="Header"><a class="Close" title="' + Core.Language.Translate('Close this dialog') + '" href="#"><i class="fa fa-times"></i></a></div>';
+            DialogHTML += '<div class="Header"><a class="Close icon-hover-md" title="' + Core.Language.Translate('Close this dialog') + '" href="#"><i class="fa fa-times"></i></a></div>';
         }
         DialogHTML += '<div class="Content"></div>';
         if (!Params.HideFooter) {
-            DialogHTML += '<div class="Footer"></div>';
+            DialogHTML += '<div class="Footer SaveButtons"></div>';
         }
         DialogHTML += '</div>';
 
@@ -247,8 +252,6 @@ Core.UI.Dialog = (function (TargetNS) {
          *      which invokes the callback and the closing of the dialog.
          */
         function HandleClosingAction() {
-            var $CloseButton = $('.Dialog:visible button.Close');
-
             // publish close event
             Core.App.Publish('Event.UI.Dialog.CloseDialog.Close', [$Dialog]);
 
@@ -257,12 +260,7 @@ Core.UI.Dialog = (function (TargetNS) {
                 Core.Form.ErrorTooltips.HideTooltip();
             }
 
-            if ($CloseButton.length) {
-                $CloseButton.trigger('click');
-            }
-            else {
-                DefaultCloseFunction();
-            }
+            DefaultCloseFunction();
         }
 
         /**
@@ -392,7 +390,7 @@ Core.UI.Dialog = (function (TargetNS) {
                 Type: 'Close',
                 Function: Params.OnClose
             }];
-            $Content.append('<div class="Center Spacing"><button type="button" id="DialogButton1" class="CallForAction Close"><span>' + Core.Language.Translate('OK') + '</span></button></div>');
+            $Content.append('<div class="Center Spacing"><button type="button" id="DialogButton1" class="CallForAction Close btn-main btn-primary"><span>' + Core.Language.Translate('OK') + '</span></button></div>');
         }
         // Define different other types here...
         else if (Params.Type === 'Search') {
@@ -409,17 +407,26 @@ Core.UI.Dialog = (function (TargetNS) {
             $Content = $Dialog.find('.Content');
             // buttons are defined only in default type
             if (Params.Buttons) {
-                $Content.append('<div class="InnerContent"></div>').find('.InnerContent').append(Params.HTML);
-                $ButtonFooter = $('<div class="ContentFooter Center"></div>');
+                $Content.append('<div class="InnerContent scroll-bar-styled"></div>').find('.InnerContent').append(Params.HTML);
+                $ButtonFooter = $('<div class="ContentFooter SaveButtons"></div>');
                 $.each(Params.Buttons, function (Index, Value) {
-                    var Classes = 'CallForAction';
-                    if (Value.Type === 'Close') {
+                    var Classes = '';
+                    if (Value.Type === 'Close' || Index == 1) {
                         Classes += ' Close';
+                    }
+                    if (Value.Type === 'Secondary') {
+                        // add "btn-primary" or "btn-cancel-ghost" class
+                        Classes += ' btn-cancel-ghost';
+                    } else if (Value.Type === 'Warning') {
+                        Classes += ' btn-warning';
+                    } else {
+                        Classes += ' btn-primary';
                     }
                     if (Value.Class) {
                         Classes += ' ' + Value.Class;
                     }
-                    $ButtonFooter.append('<button id="DialogButton' + (Index - 0 + 1) + '" class="' + Classes + '" type="button"><span>' + Value.Label + '</span></button> ');
+                    // added "btn-primary" & "btn-main" class
+                    $ButtonFooter.append('<button id="DialogButton' + (Index - 0 + 1) + '" class="btn-main ' + Classes + '" type="button"><span>' + Value.Label + '</span></button> ');
                 });
                 $ButtonFooter.appendTo($Content);
             }
@@ -437,6 +444,27 @@ Core.UI.Dialog = (function (TargetNS) {
 
         // Add Dialog to page
         $Dialog.appendTo('body');
+
+        // Get the inner width to define the class
+        if ($Dialog && isJQueryObject($Dialog)){
+            InnerWidth = $Dialog.innerWidth();
+        }
+
+        // default class is modal-sm
+        if  (InnerWidth >= 300){
+            DialogModalClass = 'modal-md';
+        }
+        if (InnerWidth >= 800){
+            DialogModalClass = 'modal-lg';
+        }
+        if (Params.DialogModalClass){
+            DialogModalClass = Params.DialogModalClass;
+        }
+
+        // add DialogModalClass to Dialog
+        if (DialogModalClass){
+            $Dialog.addClass(DialogModalClass);
+        }
 
         // Check if "ContentFooter" is used in Content
         if ($Dialog.find('.Content .ContentFooter').length) {
@@ -595,10 +623,11 @@ Core.UI.Dialog = (function (TargetNS) {
      * @param {Boolean} Modal - If defined and set to true, an overlay is shown for a modal dialog.
      * @param {Array} Buttons - The button array.
      * @param {Boolean} AllowAutoGrow - If true, the InnerContent of the dialog can resize until the max window height is reached, if false (default), InnerContent of small dialogs does not resize over 200px.
+     * @param {Boolean} ModalClass - Optional class parameters for the dialogmodal element.
      * @description
      *      Shows a default dialog.
      */
-    TargetNS.ShowContentDialog = function (HTML, Title, PositionTop, PositionLeft, Modal, Buttons, AllowAutoGrow) {
+    TargetNS.ShowContentDialog = function (HTML, Title, PositionTop, PositionLeft, Modal, Buttons, AllowAutoGrow, ModalClass) {
         TargetNS.ShowDialog({
             HTML: HTML,
             Title: Title,
@@ -608,7 +637,8 @@ Core.UI.Dialog = (function (TargetNS) {
             PositionTop: PositionTop,
             PositionLeft: PositionLeft,
             Buttons: Buttons,
-            AllowAutoGrow: AllowAutoGrow
+            AllowAutoGrow: AllowAutoGrow,
+            ModalClass: ModalClass || ''
         });
     };
 

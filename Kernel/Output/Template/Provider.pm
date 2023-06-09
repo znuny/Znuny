@@ -8,8 +8,10 @@
 # --
 
 package Kernel::Output::Template::Provider;
+## no critic(Perl::Critic::Policy::OTRS::RequireCamelCase)
 ## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
 ## nofilter(TidyAll::Plugin::Znuny::Perl::SyntaxCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::Validator)
 
 use strict;
 use warnings;

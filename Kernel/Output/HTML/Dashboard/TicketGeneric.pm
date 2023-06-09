@@ -251,8 +251,10 @@ sub new {
 
     $Self->{PrefKeyShown}   = 'UserDashboardPref' . $Self->{Name} . '-Shown';
     $Self->{PrefKeyColumns} = 'UserDashboardPref' . $Self->{Name} . '-Columns';
-    $Self->{PageShown}      = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyShown} }
+    $Self->{PageShown}      = $Param{PageShown}
+        || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyShown} }
         || $Self->{Config}->{Limit};
+
     $Self->{StartHit} = int( $ParamObject->GetParam( Param => 'StartHit' ) || 1 );
 
     # define filterable columns
@@ -592,6 +594,7 @@ sub Run {
     my @Columns             = @{ $SearchParams{Columns} };
     my %TicketSearch        = %{ $SearchParams{TicketSearch} };
     my %TicketSearchSummary = %{ $SearchParams{TicketSearchSummary} };
+    my %Filter              = %{ $SearchParams{Filter} };
 
     # Add the additional filter to the ticket search param.
     if ( $Self->{AdditionalFilter} ) {
@@ -924,6 +927,10 @@ sub Run {
         $Summary->{ $Self->{AdditionalFilter} . '::Selected' } = 'Selected';
     }
 
+    for my $Filter ( sort keys %Filter ) {
+        $Filter{$Filter}->{Count} = $Summary->{$Filter} || 0;
+    }
+
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # get filter ticket counts
@@ -934,6 +941,7 @@ sub Run {
             %{ $Self->{Config} },
             Name => $Self->{Name},
             %{$Summary},
+            Filter => $Filter{ $Self->{Filter} },
         },
     );
 
@@ -1084,14 +1092,17 @@ sub Run {
         IDPrefix    => 'Dashboard' . $Self->{Name},
         AJAX        => $Param{AJAX},
     );
-    $LayoutObject->Block(
-        Name => 'ContentLargeTicketGenericFilterNavBar',
-        Data => {
-            %{ $Self->{Config} },
-            Name => $Self->{Name},
-            %PageNav,
-        },
-    );
+
+    if ($Total) {
+        $LayoutObject->Block(
+            Name => 'ContentLargeTicketGenericFilterNavBar',
+            Data => {
+                %{ $Self->{Config} },
+                Name => $Self->{Name},
+                %PageNav,
+            },
+        );
+    }
 
     # show table header
     $LayoutObject->Block(
@@ -1359,36 +1370,38 @@ sub Run {
 
                 if ( $HeaderColumn eq 'CustomerID' ) {
 
-                    # send data to JS
-                    $LayoutObject->AddJSData(
-                        Key   => 'CustomerIDAutocomplete',
-                        Value => {
-                            QueryDelay          => 100,
-                            MaxResultsDisplayed => 20,
-                            MinQueryLength      => 2,
-                        },
-                    );
-                    $LayoutObject->Block(
-                        Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerIDSearch',
-                        Data => {},
-                    );
+                    # #136 - todo this autocomplete has been disabled for now
+                    #                     # send data to JS
+                    #                     $LayoutObject->AddJSData(
+                    #                         Key   => 'CustomerIDAutocomplete',
+                    #                         Value => {
+                    #                             QueryDelay          => 100,
+                    #                             MaxResultsDisplayed => 20,
+                    #                             MinQueryLength      => 2,
+                    #                         },
+                    #                     );
+                    #                     $LayoutObject->Block(
+                    #                         Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerIDSearch',
+                    #                         Data => {},
+                    #                     );
                 }
 
                 elsif ( $HeaderColumn eq 'Responsible' || $HeaderColumn eq 'Owner' ) {
 
-                    # send data to JS
-                    $LayoutObject->AddJSData(
-                        Key   => 'UserAutocomplete',
-                        Value => {
-                            QueryDelay          => 100,
-                            MaxResultsDisplayed => 20,
-                            MinQueryLength      => 2,
-                        },
-                    );
-                    $LayoutObject->Block(
-                        Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkUserSearch',
-                        Data => {},
-                    );
+                    #136 - todo this autocomplete has been disabled for now
+                    #                     # send data to JS
+                    #                     $LayoutObject->AddJSData(
+                    #                         Key   => 'UserAutocomplete',
+                    #                         Value => {
+                    #                             QueryDelay          => 100,
+                    #                             MaxResultsDisplayed => 20,
+                    #                             MinQueryLength      => 2,
+                    #                         },
+                    #                     );
+                    #                     $LayoutObject->Block(
+                    #                         Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkUserSearch',
+                    #                         Data => {},
+                    #                     );
                 }
             }
 
@@ -1433,19 +1446,21 @@ sub Run {
 
                 if ( $HeaderColumn eq 'CustomerUserID' ) {
 
-                    # send data to JS
-                    $LayoutObject->AddJSData(
-                        Key   => 'CustomerUserAutocomplete',
-                        Value => {
-                            QueryDelay          => 100,
-                            MaxResultsDisplayed => 20,
-                            MinQueryLength      => 2,
-                        },
-                    );
-                    $LayoutObject->Block(
-                        Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerUserSearch',
-                        Data => {},
-                    );
+                    #136 - todo this autocomplete has been disabled for now
+                    #                     # send data to JS
+                    #                     $LayoutObject->AddJSData(
+                    #                         Key   => 'CustomerUserAutocomplete',
+                    #                         Value => {
+                    #                             QueryDelay          => 100,
+                    #                             MaxResultsDisplayed => 20,
+                    #                             MinQueryLength      => 2,
+                    #                         },
+                    #                     );
+
+                  #                     $LayoutObject->Block(
+                  #                         Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerUserSearch',
+                  #                         Data => {},
+                  #                     );
                 }
             }
 
@@ -1954,6 +1969,13 @@ sub Run {
                     $DataValue = $Ticket{$Column};
                 }
 
+                # add pill class
+                if ( $Column eq 'State' ) {
+                    if ( IsStringWithData( $Ticket{StateID} ) ) {
+                        $CSSClass .= 'pill StateID-' . $Ticket{StateID};
+                    }
+                }
+
                 if ( $Column eq 'Title' ) {
                     $LayoutObject->Block(
                         Name => "ContentLargeTicketTitle",
@@ -2079,6 +2101,8 @@ sub Run {
             CustomerID     => $Param{CustomerID},
             CustomerUserID => $Param{CustomerUserID},
             FilterActive   => $FilterActive,
+            Filter         => \%Filter,
+            FilterSelected => $Self->{Filter},
             SortBy         => $Self->{SortBy} || 'Age',
             OrderBy        => $TicketSearch{OrderBy},
             SortingColumn  => $Param{SortingColumn},
@@ -2143,10 +2167,11 @@ sub _InitialColumnFilter {
     my $ColumnFilterHTML = $LayoutObject->BuildSelection(
         Name        => 'ColumnFilter' . $Param{ColumnName} . $Self->{Name},
         Data        => $Data,
-        Class       => $Class,
+        Class       => $Class . ' Modernize',
         Translation => $TranslationOption,
         SelectedID  => '',
     );
+
     return $ColumnFilterHTML;
 }
 
@@ -2593,6 +2618,36 @@ sub _SearchParamsGet {
         },
     );
 
+    my %Filter = (
+        Locked => {
+            Label => "My locked tickets",
+        },
+        Watcher => {
+            Label => "My watched tickets",
+        },
+        Responsible => {
+            Label => "My responsibilities",
+        },
+        MyQueues => {
+            Label => "Tickets in My Queues",
+        },
+        MyServices => {
+            Label => "Tickets in My Services",
+        },
+        All => {
+            Label => "All tickets",
+        },
+        AssignedToCustomerUser => {
+            Label => "Assigned to customer user",
+        },
+        AccessibleForCustomerUser => {
+            Label => "Accessible for customer user",
+        },
+        Owned => {
+            Label => "My owned tickets",
+        },
+    );
+
     if ( $Self->{Action} eq 'AgentCustomerUserInformationCenter' ) {
 
         # Add filters for assigend and accessible tickets for the customer user information center as a
@@ -2633,6 +2688,7 @@ sub _SearchParamsGet {
         Columns             => \@Columns,
         TicketSearch        => \%TicketSearch,
         TicketSearchSummary => \%TicketSearchSummary,
+        Filter              => \%Filter,
     );
 }
 

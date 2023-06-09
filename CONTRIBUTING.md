@@ -17,21 +17,21 @@ Have fun!
 
 ## How can I:
 
-  * [Report an Issue or Bug](#Report-an-Error-or-Bug)
-  * [Request community support](#Request-Support)
-  * [Open a Feature Request](#Request-a-Feature)
-  * [Join the Project Team](#Join-the-Project-Team)
+  * [Report an Issue or Bug](#report-an-error-or-bug)
+  * [Request community support](#request-support)
+  * [Open a Feature Request](#request-a-feature)
+  * [Join the Project Team](#join-the-project-team)
 
 
 
 ## How do we:
-  * [Provide Support on Issues](#Provide-Support-on-Issues)
-  * [Clean Up Issues and PRs](#Clean-Up-Issues-and-PRs)
+  * [Provide Support on Issues](#provide-support-on-issues)
+  * [Clean Up Issues and PRs](#clean-up-issues-and-prs)
 
 
 ## Where do I find:
-  * The developer documentation https://doc.znuny.org/manual/developer/
-  * The documentation in general https://doc.znuny.org/manual/
+  * The developer documentation https://doc.znuny.org/znuny/developer/
+  * The documentation in general https://doc.znuny.org/znuny/
 
 
 
@@ -40,12 +40,12 @@ Have fun!
 If you find an error or a bug, please follow this steps
 
 * Open an Issue at https://github.com/znuny/znuny/issues
-* Use the template we provide. Please dont delete it.
-* Include everything we need to know. Especially how to reproduce the problem
+* Use the template we provide. Please don't delete it.
+* Include everything we need to know. Especially how to reproduce the problem.
 
 After you filed the issue:
 
-* A team member will categorize and label the issue [label the issue](#label-issues).
+* A team member will categorize and label the issue.
 * We try to reproduce it and we may ask additional questions.
 * If we are able to reproduce the issue, we will label it accordingly and try to fix it.
 

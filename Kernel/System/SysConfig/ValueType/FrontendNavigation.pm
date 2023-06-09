@@ -343,7 +343,7 @@ sub SettingRender {
                 if ( $Param{RW} ) {
                     $HTML .= "<button class='RemoveButton' type='button' "
                         . "title='$RemoveThisEntry' value='Remove this entry'>\n"
-                        . "    <i class='fa fa-minus-circle'></i>\n"
+                        . "    <i class='fa fa-minus-square-o'></i>\n"
                         . "    <span class='InvisibleText'>$RemoveThisEntry</span>\n"
                         . "</button>\n";
                 }

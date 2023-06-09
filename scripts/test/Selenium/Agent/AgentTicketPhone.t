@@ -18,8 +18,16 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject            = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject     = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject               = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject            = $Kernel::OM->Get('Kernel::System::Queue');
+        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+        my $TicketObject           = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject             = $Kernel::OM->Get('Kernel::System::User');
+
         my $IsITSMIncidentProblemManagementInstalled
             = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
@@ -111,7 +119,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -119,7 +127,7 @@ $Selenium->RunTest(
 
         # Add test customer for testing.
         my $TestCustomer       = 'Customer' . $RandomID;
-        my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => 'FirstName' . $TestCustomer,
             UserLastname   => $TestCustomer,
@@ -135,9 +143,8 @@ $Selenium->RunTest(
         );
 
         # Add test template of type 'Create'.
-        my $TemplateText           = 'This is selected customer user first name: "<OTRS_CUSTOMER_DATA_UserFirstname>"';
-        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
-        my $TemplateID             = $StandardTemplateObject->StandardTemplateAdd(
+        my $TemplateText = 'This is selected customer user first name: "<OTRS_CUSTOMER_DATA_UserFirstname>"';
+        my $TemplateID   = $StandardTemplateObject->StandardTemplateAdd(
             Name         => 'CreateTemplate' . $RandomID,
             Template     => $TemplateText,
             ContentType  => 'text/plain; charset=utf-8',
@@ -150,8 +157,7 @@ $Selenium->RunTest(
             "Template ID $TemplateID is created.",
         );
 
-        my $QueueObject = $Kernel::OM->Get('Kernel::System::Queue');
-        my $QueueID     = $QueueObject->QueueLookup( Queue => 'Raw' );
+        my $QueueID = $QueueObject->QueueLookup( Queue => 'Raw' );
 
         # Assign test template to queue 'Raw'.
         my $Success = $QueueObject->QueueStandardTemplateMemberAdd(
@@ -372,14 +378,11 @@ $Selenium->RunTest(
             "Customer email is not a link with class AsPopup."
         );
 
-        # Use 'Enter' press instead of 'VerifiedSubmit' on 'Subject' field to check if works (see bug#13056).
-        $Selenium->find_element( "#Subject", 'css' )->send_keys("\N{U+E007}");
+        $Selenium->find_element( "#submitRichText", 'css' )->click();
         $Selenium->WaitFor(
             JavaScript =>
                 'return typeof($) === "function" && $(".MessageBox a[href*=\'AgentTicketZoom;TicketID=\']").length !== 0;'
         );
-
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Get created test ticket ID and number.
         my @Ticket = split( 'TicketID=', $Selenium->get_current_url() );
@@ -443,7 +446,7 @@ $Selenium->RunTest(
         }
 
         # Test bug #12229.
-        my $QueueID1 = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID1 = $QueueObject->QueueAdd(
             Name            => "<Queue>$RandomID",
             ValidID         => 1,
             GroupID         => 1,
@@ -453,7 +456,7 @@ $Selenium->RunTest(
             Comment         => 'Some comment',
             UserID          => 1,
         );
-        my $QueueID2 = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID2 = $QueueObject->QueueAdd(
             Name            => "Junk::SubQueue $RandomID  $RandomID",
             ValidID         => 1,
             GroupID         => 1,
@@ -560,7 +563,7 @@ $Selenium->RunTest(
         }
 
         # Delete Queues.
-        $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        $Success = $DBObject->Do(
             SQL  => "DELETE FROM queue WHERE id IN (?, ?)",
             Bind => [ \$QueueID1, \$QueueID2 ],
         );
@@ -619,7 +622,6 @@ $Selenium->RunTest(
         }
 
         # Delete created test customer user.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         $TestCustomer = $DBObject->Quote($TestCustomer);
         $Success      = $DBObject->Do(
             SQL  => "DELETE FROM customer_user WHERE login = ?",
@@ -638,8 +640,6 @@ $Selenium->RunTest(
             $Success,
             "Template ID $TemplateID is deleted.",
         );
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (qw( Ticket CustomerUser )) {

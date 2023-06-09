@@ -21,7 +21,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Session Config Settings');
+    return Translatable('Znuny') . '/' . Translatable('Session Config Settings');
 }
 
 sub Run {
@@ -30,7 +30,6 @@ sub Run {
     my @Settings = qw(
         SessionMaxTime
         SessionMaxIdleTime
-        AgentSessionLimitPriorWarning
         AgentSessionLimit
         AgentSessionPerUserLimit
         CustomerSessionLimit

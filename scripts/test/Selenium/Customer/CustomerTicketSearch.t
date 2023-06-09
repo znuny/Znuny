@@ -18,7 +18,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+        my $DBObject                = $Kernel::OM->Get('Kernel::System::DB');
+        my $ArticleObject           = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Do not check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -105,7 +109,7 @@ $Selenium->RunTest(
             Password => $RandomID,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to CustomerTicketSearch screen.
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketSearch");
@@ -146,7 +150,7 @@ $Selenium->RunTest(
 
         my @TicketIDs = ($TicketID);
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
 
@@ -177,7 +181,7 @@ $Selenium->RunTest(
 
         # Set DynamicField value.
         my $ValueText = 'DFV' . $RandomID;
-        my $Success   = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueSet(
+        my $Success   = $DynamicFieldValueObject->ValueSet(
             FieldID    => $DynamicFieldID,
             ObjectType => 'Ticket',
             ObjectID   => $TicketID,
@@ -215,11 +219,10 @@ $Selenium->RunTest(
         );
 
         # Check for search profile name.
-        my $SearchText = '← '
-            . $LanguageObject->Translate('Change search options') . ' ('
-            . $LanguageObject->Translate('last-search') . ')';
+        my $SearchText = $LanguageObject->Translate('Change search options');
+
         $Self->Is(
-            $Selenium->execute_script("return \$('.ActionRow a').text().trim()"),
+            $Selenium->execute_script("return \$('.btn-primary').text().trim()"),
             $SearchText,
             "Search profile name 'last-search' found on page",
         );
@@ -256,19 +259,19 @@ $Selenium->RunTest(
 
         # Check search filter data.
         $Self->Is(
-            $Selenium->execute_script("return \$('.SearchTerms h2').text().trim();"),
-            $LanguageObject->Translate('Search Results for') . ':',
+            $Selenium->execute_script("return \$('h1.PageTitle').text().trim();"),
+            $LanguageObject->Translate('Search Results'),
             "Filter data is found - Search Results for:",
         );
 
         $Self->Is(
-            $Selenium->execute_script("return \$('.SearchTerms span:eq(0)').text().trim();"),
+            $Selenium->execute_script("return \$('.Field span:eq(0)').text().trim();"),
             $LanguageObject->Translate('TicketNumber') . ': 123456789012345',
             "Filter data is found - TicketNumber: 123456789012345",
         );
 
         $Self->Is(
-            $Selenium->execute_script("return \$('.SearchTerms span:eq(1)').text().trim();"),
+            $Selenium->execute_script("return \$('.Field span:eq(1)').text().trim();"),
             $LanguageObject->Translate('State') . ': '
                 . $LanguageObject->Translate('new') . '+'
                 . $LanguageObject->Translate('open'),
@@ -276,7 +279,7 @@ $Selenium->RunTest(
         );
 
         $Self->Is(
-            $Selenium->execute_script("return \$('.SearchTerms span:eq(2)').text().trim();"),
+            $Selenium->execute_script("return \$('.Field span:eq(2)').text().trim();"),
             $LanguageObject->Translate('Priority') . ': '
                 . $LanguageObject->Translate('2 low') . '+'
                 . $LanguageObject->Translate('3 normal'),
@@ -343,29 +346,29 @@ $Selenium->RunTest(
 
         # Check if pagination shows correct number of displayed tickets.
         $Self->Is(
-            $Selenium->execute_script("return \$('.ActionRow .Tabs.Pagination strong').first().text().trim();"),
-            "1-2",
+            $Selenium->execute_script("return \$('.Pagination span').first().text().trim();"),
+            "1-2 von 5",
             "Pagination displayed correct number of tickets.",
         );
         $Self->Is(
-            $Selenium->execute_script("return \$('.ActionRow .Tabs.Pagination .PaginationLimit').text().trim();"),
+            $Selenium->execute_script("return \$('.Pagination .PaginationLimit').text().trim();"),
             "5",
             "Pagination shows correct limit number of tickets.",
         );
 
         # Check next result page.
-        $Selenium->find_element( ".ActionRow .Tabs.Pagination #CustomerTicketSearchPage2", 'css' )->VerifiedClick();
+        $Selenium->find_element( ".Pagination #CustomerTicketSearchPage2", 'css' )->VerifiedClick();
         $Self->Is(
-            $Selenium->execute_script("return \$('.ActionRow .Tabs.Pagination strong').first().text().trim();"),
-            "3-4",
+            $Selenium->execute_script("return \$('.Pagination span').first().text().trim();"),
+            "3-4 von 5",
             "Second result page, pagination shows correct number of tickets.",
         );
 
         # Check last result page.
-        $Selenium->find_element( ".ActionRow .Tabs.Pagination #CustomerTicketSearchPage3", 'css' )->VerifiedClick();
+        $Selenium->find_element( ".Pagination #CustomerTicketSearchPage3", 'css' )->VerifiedClick();
         $Self->Is(
-            $Selenium->execute_script("return \$('.ActionRow .Tabs.Pagination strong').first().text().trim();"),
-            "5-5",
+            $Selenium->execute_script("return \$('.Pagination span').first().text().trim();"),
+            "5-5 von 5",
             "Last result page, pagination shows correct number of tickets.",
         );
 
@@ -402,7 +405,7 @@ $Selenium->RunTest(
         );
 
         # Delete test created customer user.
-        $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        $Success = $DBObject->Do(
             SQL  => "DELETE FROM customer_user WHERE login = ?",
             Bind => [ \$TestCustomerUserLogin ],
         );

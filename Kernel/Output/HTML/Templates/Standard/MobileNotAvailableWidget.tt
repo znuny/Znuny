@@ -12,6 +12,6 @@
         <h2>[% Translate("Feature not Available") | html %]</h2>
     </div>
     <div class="Content">
-        <p>[% Translate("Sorry, but this feature of OTRS is currently not available for mobile devices. If you'd like to use it, you can either switch to desktop mode or use your regular desktop device.") | html %]</p>
+        <p>[% Translate("Sorry, but this feature of Znuny is currently not available for mobile devices. If you'd like to use it, you can either switch to desktop mode or use your regular desktop device.") | html %]</p>
     </div>
 </div>

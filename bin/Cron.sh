@@ -39,12 +39,12 @@ fi
 cd "`dirname $0`/../"
 OTRS_HOME="`pwd`"
 
-#OTRS_ROOT=/opt/otrs
+#OTRS_ROOT=/opt/znuny
 if test -e $OTRS_HOME/var/cron; then
     OTRS_ROOT=$OTRS_HOME
 else
     echo "No cronjobs in $OTRS_HOME/var/cron found!";
-    echo " * Check the \$HOME (/etc/passwd) of the OTRS user. It must be the root dir of your OTRS system (e. g. /opt/otrs). ";
+    echo " * Check the \$HOME (/etc/passwd) of the OTRS user. It must be the root dir of your OTRS system (e. g. /opt/znuny). ";
     exit 5;
 fi
 

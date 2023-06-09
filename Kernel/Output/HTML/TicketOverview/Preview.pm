@@ -610,17 +610,28 @@ sub _Show {
 
     my $AdditionalClasses = $Param{Config}->{TicketActionsPerTicket} ? 'ShowInlineActions' : '';
 
+    my $CSSSelector = $LayoutObject->CleanUpCSSSelector(
+        CSSSelector => $Ticket{State},
+    );
+
+    my $PillClass;
+    if ( IsStringWithData( $Ticket{StateID} ) ) {
+        $PillClass .= 'pill StateID-' . $Ticket{StateID};
+    }
+
     $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
     my %AdditionalObjectData;
     if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
         %AdditionalObjectData = %Ticket;
     }
+
     $LayoutObject->Block(
         Name => 'DocumentContent',
         Data => {
             %Param,
             %Article,
             Class             => 'ArticleCount' . $ArticleCount,
+            PillClass         => $PillClass,
             AdditionalClasses => $AdditionalClasses,
             Created           => $Ticket{Created},                 # use value from ticket, not article
             %AdditionalObjectData,

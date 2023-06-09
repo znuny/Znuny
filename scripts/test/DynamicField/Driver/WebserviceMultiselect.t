@@ -141,17 +141,14 @@ my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
 $Self->IsDeeply(
     $DynamicFieldHTML,
     {
+        'Label' =>
+            "<div class='label-wrapper'><label id='LabelDynamicField_DynamicFieldWebserviceDriverMultiselect' for='DynamicField_DynamicFieldWebserviceDriverMultiselect'>DynamicFieldWebserviceDriverMultiselect</label></div>",
         'Field' =>
-            '<select  data-dynamic-field-name="DynamicFieldWebserviceDriverMultiselect" data-dynamic-field-type="WebserviceMultiselect" data-selected-value-field-name="DynamicField_DynamicFieldWebserviceDriverMultiselect" data-autocomplete-field-name="DynamicField_DynamicFieldWebserviceDriverMultiselect_Search" data-autocomplete-min-length="3" data-query-delay="1" data-default-search-term="" data-ticket-id="'
+            '<select data-dynamic-field-name="DynamicFieldWebserviceDriverMultiselect" data-dynamic-field-type="WebserviceMultiselect" data-selected-value-field-name="DynamicField_DynamicFieldWebserviceDriverMultiselect" data-autocomplete-field-name="DynamicField_DynamicFieldWebserviceDriverMultiselect_Search" data-autocomplete-min-length="3" data-query-delay="1" data-default-search-term="" data-ticket-id="'
             . $TicketID
             . '" class="DynamicFieldText Modernize W50pc" id="DynamicField_DynamicFieldWebserviceDriverMultiselect" multiple="multiple" name="DynamicField_DynamicFieldWebserviceDriverMultiselect">
   <option value=" ">-</option>
 </select>',
-        'Label' =>
-            '<label id="LabelDynamicField_DynamicFieldWebserviceDriverMultiselect" for="DynamicField_DynamicFieldWebserviceDriverMultiselect">
-DynamicFieldWebserviceDriverMultiselect:
-</label>
-',
     },
     'EditFieldRender',
 );

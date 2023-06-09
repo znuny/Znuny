@@ -37,7 +37,7 @@ Core.Customer.TicketZoom = (function (TargetNS) {
         Iframe = isJQueryObject(Iframe) ? Iframe.get(0) : Iframe;
 
         setTimeout(function () {
-            var $IframeContent = $(Iframe.contentDocument || Iframe.contentWindow.document),
+            var $IframeContent = $(Iframe.contentWindow.document.body || Iframe.contentDocument || ''),
                 NewHeight = $IframeContent.height();
             if (!NewHeight || isNaN(NewHeight)) {
                 NewHeight = 100;
@@ -48,7 +48,7 @@ Core.Customer.TicketZoom = (function (TargetNS) {
                 }
             }
 
-            NewHeight = parseInt(NewHeight, 10) + 25;
+            NewHeight = parseInt(NewHeight, 10) + 20;
             $(Iframe).height(NewHeight + 'px');
         }, 1500);
     }
@@ -114,11 +114,21 @@ Core.Customer.TicketZoom = (function (TargetNS) {
      *      immediately when the site loads. So we set the url in this function.
      */
     function LoadMessage($Message){
-        var $SubjectHolder = $('h3 span', $Message),
-            Subject = $SubjectHolder.text(),
+
+        var $SubjectHolder = $('span h3', $Message),
+            Subject       = $SubjectHolder.text(),
             LoadingString = $SubjectHolder.attr('title'),
-            $Iframe = $('iframe', $Message),
-            Source = $Iframe.attr('title');
+            $SourceIframe = $('.Iframe iframe', $Message).clone(),
+            Source        = $SourceIframe.attr('title'),
+            $Iframe;
+
+        var $MessageContent = $Message.clone().html();
+
+        $('#VisibleMessageContent').html($MessageContent);
+        $('#VisibleMessageContent .ArticleBody').addClass('Hidden');
+        $('#VisibleMessageContent .Iframe').removeClass('Hidden');
+
+        $Iframe = $('#VisibleMessageContent iframe');
 
         /*  Change Subject to Loading */
         $SubjectHolder.text(LoadingString);
@@ -129,11 +139,13 @@ Core.Customer.TicketZoom = (function (TargetNS) {
         }
 
         function Callback(){
-            /*  Set data-articlestate to true and add class Visible */
-            $Message.attr('data-articlestate', "true").addClass('Visible');
+
+            /*  Add class Visible */
+            $Message.addClass('Visible');
 
             /*  Change Subject back from Loading */
             $SubjectHolder.text(Subject).attr('title', Subject);
+            $('#Subject').val('Re: ' + Subject).attr('title', Subject);
         }
 
         if ($Iframe.length) {
@@ -151,26 +163,18 @@ Core.Customer.TicketZoom = (function (TargetNS) {
      * @function
      * @param {jQueryObject} $Message
      * @description
-     *      This function checks the value of data-articlestate attribute containing the state of the article:
-     *      untouched (= not yet loaded), true or false. If the article is already loaded (-> true), and
-     *      user calls this function by clicking on the message head, the article gets hidden by removing
-     *      the class 'Visible' and the status changes to false. If the message head is clicked while the
-     *      status is false (e.g. the article is hidden), the article gets the class 'Visible' again and
-     *      the status gets changed to true.
+     *      This function always load given article in iframe.
      */
     function ToggleMessage($Message){
-        switch ($Message.attr('data-articlestate')) {
-            case "untouched":
-                LoadMessage($Message);
-            break;
-            case "true":
-                $Message.removeClass('Visible');
-                $Message.attr('data-articlestate', "false");
-            break;
-            case "false":
-                $Message.addClass('Visible');
-                $Message.attr('data-articlestate', "true");
-            break;
+        var ActiveScreenSize;
+
+        $('#Messages li').removeClass('Visible');
+        $Message.addClass('Visible');
+        LoadMessage($Message);
+
+        ActiveScreenSize = Core.Config.Get('ActiveScreenSize');
+        if (ActiveScreenSize && ActiveScreenSize !== 'ScreenXL'){
+            $('#FollowUp').detach().appendTo('.Visible');
         }
     }
 
@@ -194,8 +198,10 @@ Core.Customer.TicketZoom = (function (TargetNS) {
             FieldID,
             DynamicFieldNames = Core.Config.Get('DynamicFieldNames');
 
-        $('#Messages > li > .MessageHeader').on('click', function(Event){
-            ToggleMessage($(this).parent());
+        ToggleMessage($('#Messages li:last'));
+
+        $('#Messages li').on('click', function(Event){
+            ToggleMessage($(this));
             Event.preventDefault();
         });
         $('#ReplyButton').on('click', function(Event){
@@ -209,15 +215,13 @@ Core.Customer.TicketZoom = (function (TargetNS) {
             $FollowUp.removeClass('Visible');
             $('html').css({scrollTop: $('#Body').height()});
         });
+
         /* Set statuses saved in the hidden fields for all visible messages if ZoomExpand is present */
         if (!ZoomExpand || isNaN(ZoomExpand)) {
-            $('#Messages > li').attr('data-articlestate', "true");
             ResizeIframe($VisibleIframe);
         }
         else {
             /* Set statuses saved in the hidden fields for all messages */
-            $('#Messages > li:not(:last)').attr('data-articlestate', "untouched");
-            $('#Messages > li:last').attr('data-articlestate', "true");
             ResizeIframe($VisibleIframe.get(0));
         }
 
@@ -272,6 +276,18 @@ Core.Customer.TicketZoom = (function (TargetNS) {
         $('a.AsPopup').on('click', function () {
             Core.UI.Popup.OpenPopup($(this).attr('href'), 'TicketAction');
             return false;
+        });
+
+        Core.App.Subscribe('Event.App.Responsive.ScreenXL', function () {
+            if ($('#FollowUp')) {
+                $('#FollowUp').detach().appendTo('.main-content-wrapper');
+            }
+        });
+
+        Core.App.Subscribe('Event.App.Responsive.SmallerOrEqualScreenL', function () {
+            if ($('#FollowUp')) {
+                $('#FollowUp').detach().appendTo('.Visible');
+            }
         });
     };
 

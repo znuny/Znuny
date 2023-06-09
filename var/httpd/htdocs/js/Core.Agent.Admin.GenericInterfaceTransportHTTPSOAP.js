@@ -61,7 +61,7 @@ Core.Agent.Admin.GenericInterfaceTransportHTTPSOAP = (function (TargetNS) {
         }
 
         // remove possible value
-        $('#' + IDSelector).parent().remove();
+        $('#' + IDSelector).parents('.single-row-inputs').remove();
 
         return false;
     };
