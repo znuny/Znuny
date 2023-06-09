@@ -82,7 +82,9 @@ returns true if check was successful, if it's false, get the error message
 from CheckError()
 
     my $Valid = $CheckItemObject->CheckEmail(
-        Address => 'info@example.com',
+        Address       => 'info@example.com',
+        SkipDNSChecks => 0, # 0 - do DNS checks if enabled in SysConfig with CheckMXRecord (default)
+                            # 1 - skip DNS checks even if enabled in SysConfig with CheckMXRecord
     );
 
 =cut
@@ -97,6 +99,11 @@ sub CheckEmail {
             Message  => 'Need Address!'
         );
         return;
+    }
+
+    # Do DNS check by default if not disabled.
+    if ( !defined $Param{SkipDNSChecks} || $Param{SkipDNSChecks} ne '1' ) {
+        $Param{SkipDNSChecks} = 0;
     }
 
     # get config object
@@ -131,7 +138,8 @@ sub CheckEmail {
 
     # mx check
     elsif (
-        $ConfigObject->Get('CheckMXRecord')
+        !$Param{SkipDNSChecks}
+        && $ConfigObject->Get('CheckMXRecord')
         && eval { require Net::DNS }    ## no critic
         )
     {
@@ -195,7 +203,7 @@ sub CheckEmail {
             }
         }
     }
-    elsif ( $ConfigObject->Get('CheckMXRecord') ) {
+    elsif ( !$Param{SkipDNSChecks} && $ConfigObject->Get('CheckMXRecord') ) {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
