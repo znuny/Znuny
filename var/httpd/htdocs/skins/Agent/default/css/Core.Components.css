@@ -125,13 +125,15 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     /* color exception for icons placed in lists */
     ul:not(#HeaderToolBar) > li .icon-hover:hover,
     ul:not(#HeaderToolBar) > li .icon-hover-sm:hover,
-    ul:not(#HeaderToolBar) > li .icon-hover-md:hover {
+    ul:not(#HeaderToolBar) > li .icon-hover-md:hover,
+    .RemoveFromFavourites.icon-hover:hover {
         background-color: var(--primary-color);
     }
 
     ul > li .icon-hover:hover i,
     ul > li .icon-hover-sm:hover i,
-    ul > li .icon-hover-md:hover i {
+    ul > li .icon-hover-md:hover i,
+    .RemoveFromFavourites.icon-hover:hover i {
         color: var(--white);
     }
 
@@ -1078,7 +1080,13 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     /* ************************************* Main Search Component ********************************* */
 
     .Dialog > .Content > .InnerContent.main-search-component {
-        overflow-y: auto;
+        overflow-y: scroll;
+        margin: -20px -20px 0;
+        padding: 20px 20px 0;
+    }
+
+    .Dialog > .Content > .InnerContent .main-search-component {
+        min-width: 400px;
     }
 
     .main-search-component .search-ticket {
@@ -1089,15 +1097,15 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         overflow: hidden;
     }
 
-    .main-search-component .search-ticket .top-section,
-    .main-search-component .search-ticket .bottom-section {
+    .main-search-component .search-ticket .top-section:not(.Hidden),
+    .main-search-component .search-ticket .bottom-section:not(.Hidden) {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         gap: var(--gap-md);
     }
 
-    .main-search-component .search-ticket fieldset.TableLike {
+    .main-search-component .search-ticket fieldset.TableLike:not(.Hidden) {
         position: relative;
         display: flex;
         flex: 1;
@@ -1135,8 +1143,11 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         flex-direction: row;
         padding: 0;
         margin: 0;
-        width: 100%; 
         align-items: center;
+    }
+
+    .main-search-component .search-ticket fieldset.TableLike div:not(.checkbox-container) > .Field {
+        width: 100%; 
     }
 
     /* SECTION TOP */
@@ -1324,6 +1335,9 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .ArticleAttachments li {
         display: flex;
         width: 33.3%;
+        min-width: 255px;
+        max-width: 350px;
+        flex: 1;
         padding-top: var(--padding-md);
         padding-right: var(--padding-md);
     }
@@ -1632,7 +1646,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         gap: var(--gap-md);
         justify-content: space-between;
         padding-top: var(--padding-xs);
-        align-items: baseline;
+        align-items: center;
     }
 
     .single-row-inputs:first-child,

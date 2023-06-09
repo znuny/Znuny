@@ -4434,7 +4434,7 @@ msgstr "Деінсталювати пакет"
 msgid "Do you really want to uninstall this package?"
 msgstr "Вилучити цей пакет?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "або"
 
@@ -7223,7 +7223,7 @@ msgid "My locked tickets"
 msgstr "Мої заблоковані заявки"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
-msgid "My Owned Tickets"
+msgid "My owned tickets"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
@@ -9970,7 +9970,7 @@ msgstr "пан"
 msgid "Mrs."
 msgstr "пані"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Адреса"
 
@@ -20730,11 +20730,11 @@ msgstr ""
 msgid "Remove selection"
 msgstr "Вилучити обране"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Вилучити цей тригер події"
 
@@ -20746,7 +20746,7 @@ msgstr "Подія-дублікат."
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Ця подія вже прикріплена до цього завдання, будь ласка, використайте іншу."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "Виникла помилка під час звязку"
 
@@ -21250,7 +21250,7 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "Ви справді бажаєте вилучити цю статистику?"
 

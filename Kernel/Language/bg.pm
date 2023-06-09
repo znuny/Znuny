@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y - %T';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.197587972905997;
+    $Self->{Completeness}        = 0.197653280449512;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -690,6 +690,7 @@ sub Data {
         'Run' => '',
         'Delete this task' => 'Изтрийте тази задача',
         'Run this task' => 'Стартирай тази задача',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Настройки на задачата',
         'Job name' => 'Име на задачата',
         'The name you entered already exists.' => 'Името което въведохте вече съществува.',
@@ -1482,7 +1483,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '',
         'Do you really want to uninstall this package?' => 'Сигурни ли сте че искате да деинсталирате този софтуерен пакет?',
-        'or' => 'или',
         'Reinstall package' => '',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -2359,7 +2359,6 @@ sub Data {
         'in' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2372,6 +2371,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'Още',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -2428,7 +2428,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => '',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => '',
         'My responsibilities' => '',
         'Tickets in My Queues' => '',
@@ -2525,8 +2525,8 @@ sub Data {
         'Edit statistic "%s".' => '',
         'Export statistic "%s"' => '',
         'Export statistic %s' => '',
-        'Delete statistic "%s"' => '',
         'Delete statistic %s' => '',
+        'Do you really want to delete this statistic?' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -3012,12 +3012,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '',
-        'Step %s' => '',
         'License' => 'Лиценз',
         'Database Settings' => '',
         'General Specifications and Mail Settings' => '',
         'Finish' => 'Край',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'Телефон',
         'Web site' => '',
         'Community' => '',
@@ -3048,6 +3048,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => '',
         'Check mail configuration' => '',
+        'or' => 'или',
         'Skip this step' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3436,7 +3437,6 @@ sub Data {
         'Valid' => 'Валиден',
         'Mr.' => 'Г-н.',
         'Mrs.' => 'Г-жа',
-        'Address' => '',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Редактирайте настройките на системната конфигурация.',
         'Update and extend your system with software packages.' => '',
@@ -7992,14 +7992,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'Премахнете селекцията',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Изтриване събитие',
+        'An error occurred during communication.' => 'Възникна грешка по време на комуникацията.',
         'Duplicate event.' => 'Дублирано събитие.',
         'This event is already attached to the job, Please use a different one.' =>
             'Това събитие вече е прикачено към задачата, моля, използвайте различно.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Възникна грешка по време на комуникацията.',
         'Request Details' => 'Подробности за заявката',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'Показване или скриване на съдържанието.',
@@ -8012,6 +8010,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'Изтрии заявката',
+        'Delete this Event Trigger' => 'Изтриване събитие',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8231,9 +8230,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9184,6 +9180,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9203,13 +9200,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

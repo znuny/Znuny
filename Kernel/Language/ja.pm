@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.689079795142904;
+    $Self->{Completeness}        = 0.688977028590316;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -692,6 +692,7 @@ sub Data {
         'Run' => '実行',
         'Delete this task' => 'このタスクを削除',
         'Run this task' => 'このタスクを実行',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'ジョブ設定',
         'Job name' => 'ジョブ名',
         'The name you entered already exists.' => '入力された名前は既に存在します。',
@@ -1486,7 +1487,6 @@ sub Data {
         'Uninstall Package' => 'パッケージをアンインストール',
         'Uninstall package' => 'パッケージをアンインストール',
         'Do you really want to uninstall this package?' => 'このパッケージを本当にアンインストールしますか？',
-        'or' => 'または',
         'Reinstall package' => 'パッケージを再インストール',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'このパッケージを本当に再インストールしますか？ 全ての手動変更点は失われます。',
@@ -2363,7 +2363,6 @@ sub Data {
         'in' => '＞',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2376,6 +2375,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '続き',
+        'No Data Available.' => '',
         'Available Columns' => '利用可能な列',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '表示する列 (ドラッグ&ドロップで並び替えできます)',
@@ -2432,7 +2432,7 @@ sub Data {
         'Assigned to customer user' => '顧客ユーザーに割り当てられた',
         'Accessible for customer user' => '顧客ユーザーにアクセス可能',
         'My locked tickets' => 'ロックチケット',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => '監視チケット',
         'My responsibilities' => '責任チケット',
         'Tickets in My Queues' => '担当キュー内チケット',
@@ -2529,8 +2529,8 @@ sub Data {
         'Edit statistic "%s".' => 'レポート"%s"を修正',
         'Export statistic "%s"' => 'レポート"%s"をエクスポート',
         'Export statistic %s' => 'レポート"%s"をエクスポート',
-        'Delete statistic "%s"' => 'レポート"%s"を削除',
         'Delete statistic %s' => 'レポート"%s"を削除',
+        'Do you really want to delete this statistic?' => 'このレポートを削除してよろしいですか？',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'レポート情報',
@@ -3016,12 +3016,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScriptが利用できません。',
-        'Step %s' => 'ステップ %s',
         'License' => 'ライセンス',
         'Database Settings' => 'データベース設定',
         'General Specifications and Mail Settings' => '共通仕様とメール設定',
         'Finish' => '完了',
         'Welcome to %s' => '%s にようこそ',
+        'Address' => 'アドレス',
         'Phone' => '電話',
         'Web site' => 'Webサイト',
         'Community' => '',
@@ -3052,6 +3052,7 @@ sub Data {
         'Password for inbound mail.' => '受信メールのパスワード',
         'Result of mail configuration check' => 'メール設定チェックの結果',
         'Check mail configuration' => 'メール設定チェック',
+        'or' => 'または',
         'Skip this step' => 'この手順を飛ばす',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3440,7 +3441,6 @@ sub Data {
         'Valid' => '有効',
         'Mr.' => '様',
         'Mrs.' => '様',
-        'Address' => 'アドレス',
         'View system log messages.' => 'システム・ログ・メッセージを見る。',
         'Edit the system configuration settings.' => 'システム設定の編集',
         'Update and extend your system with software packages.' => 'このシステムのソフトウェアパッケージの更新と展開',
@@ -8006,14 +8006,12 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '選択項目を削除',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'このイベントトリガーを削除',
+        'An error occurred during communication.' => 'コミュニケーション中にエラーが発生しました。',
         'Duplicate event.' => 'イベントを複製',
         'This event is already attached to the job, Please use a different one.' =>
             'このイベントはすでにジョブにアタッチされています。ほかのイベントをご利用ください。',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'コミュニケーション中にエラーが発生しました。',
         'Request Details' => '要求の詳細',
         'Request Details for Communication ID' => 'Communication IDの要求の詳細',
         'Show or hide the content.' => 'コンテンツの表示・非表示',
@@ -8026,6 +8024,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'このAPI実行元を削除',
+        'Delete this Event Trigger' => 'このイベントトリガーを削除',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8245,9 +8244,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             'この要素は子供が存在するため削除できません。',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'このレポートを削除してよろしいですか？',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => 'チケットに割り当てる顧客IDを選択してください',
@@ -9208,6 +9204,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9227,13 +9224,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

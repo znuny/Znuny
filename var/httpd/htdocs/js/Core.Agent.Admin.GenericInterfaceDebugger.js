@@ -224,12 +224,14 @@ Core.Agent.Admin.GenericInterfaceDebugger = (function (TargetNS) {
             [
                {
                    Label: Core.Language.Translate('Cancel'),
+                   Type: 'Secondary',
                    Function: function () {
                        Core.UI.Dialog.CloseDialog($('#DeleteDialog'));
                    }
                },
                {
                    Label: Core.Language.Translate('Clear'),
+                   Type: 'Warning',
                    Function: function () {
                        var Data = {
                             Action: 'AdminGenericInterfaceDebugger',

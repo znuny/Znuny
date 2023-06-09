@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.607136956880886;
+    $Self->{Completeness}        = 0.607007106263428;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -698,6 +698,7 @@ sub Data {
         'Run' => 'Esegui',
         'Delete this task' => 'Elimina questo task',
         'Run this task' => 'Esegui questo task',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Impostazioni job',
         'Job name' => 'Nome job',
         'The name you entered already exists.' => 'Il nome immesso è già esistente.',
@@ -1490,7 +1491,6 @@ sub Data {
         'Uninstall Package' => 'Disinstalla pacchetto',
         'Uninstall package' => 'Disinstalla pacchetto',
         'Do you really want to uninstall this package?' => 'Vuoi davvero disinstallare questo pacchetto?',
-        'or' => 'oppure',
         'Reinstall package' => 'Reinstalla pacchetto',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Vuoi davvero reinstallare questo pacchetto? Ogni modifica manuale sarà persa.',
@@ -2367,7 +2367,6 @@ sub Data {
         'in' => 'in',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2380,6 +2379,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'altro',
+        'No Data Available.' => '',
         'Available Columns' => 'Colonne disponibili',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Colonne visibili (ordina con trascinamento e rilascio)',
@@ -2436,7 +2436,7 @@ sub Data {
         'Assigned to customer user' => 'Assegnato a utenza cliente',
         'Accessible for customer user' => 'Accessibile per utenza cliente',
         'My locked tickets' => 'Ticket bloccati da me',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Ticket osservati da me',
         'My responsibilities' => 'Mie responsabilità',
         'Tickets in My Queues' => 'Ticket nelle mie code',
@@ -2533,8 +2533,8 @@ sub Data {
         'Edit statistic "%s".' => 'Modifica la statistica "%s".',
         'Export statistic "%s"' => 'Esporta statistica "%s"',
         'Export statistic %s' => 'Esporta statistica %s',
-        'Delete statistic "%s"' => 'Elimina la statistica "%s"',
         'Delete statistic %s' => 'Elimina la statistica %s',
+        'Do you really want to delete this statistic?' => 'Vuoi davvero eliminare questa statistica?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Informazioni statistiche',
@@ -3020,12 +3020,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript non disponibile',
-        'Step %s' => 'Passo %s',
         'License' => 'Licenza',
         'Database Settings' => 'Impostazioni database',
         'General Specifications and Mail Settings' => 'Specifiche generiche ed impostazioni email',
         'Finish' => 'Fine',
         'Welcome to %s' => 'Benvenuto in %s',
+        'Address' => 'Indirizzo',
         'Phone' => 'Telefono',
         'Web site' => 'Sito web',
         'Community' => '',
@@ -3056,6 +3056,7 @@ sub Data {
         'Password for inbound mail.' => 'Password per la posta in entrata',
         'Result of mail configuration check' => 'Risultato del controllo di configurazione della posta',
         'Check mail configuration' => 'Controllo configurazione della posta',
+        'or' => 'oppure',
         'Skip this step' => 'Salta questo passaggio',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3444,7 +3445,6 @@ sub Data {
         'Valid' => 'Valido',
         'Mr.' => 'Sig',
         'Mrs.' => 'Sig.ra',
-        'Address' => 'Indirizzo',
         'View system log messages.' => 'Visualizza messaggi del log di sistema.',
         'Edit the system configuration settings.' => 'Modifica le impostazioni di sistema.',
         'Update and extend your system with software packages.' => 'Aggiorna ed estendi il tuo sistema con i pacchetti software.',
@@ -8004,14 +8004,12 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'Rimuovi selezione',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Elimina questo trigger',
+        'An error occurred during communication.' => 'Errore durante la comunicazione',
         'Duplicate event.' => 'Evento duplicato.',
         'This event is already attached to the job, Please use a different one.' =>
             'Questo evento è già collegato al job, specificarne uno diverso',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Errore durante la comunicazione',
         'Request Details' => 'Richiedi dettagli',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'Mostra o nascondi il contenuto',
@@ -8024,6 +8022,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'Elimina questo invoker',
+        'Delete this Event Trigger' => 'Elimina questo trigger',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8243,9 +8242,6 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'Vuoi davvero eliminare questa statistica?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9207,6 +9203,7 @@ Il tuo helpdesk.
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9226,13 +9223,11 @@ Il tuo helpdesk.
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

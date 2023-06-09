@@ -144,7 +144,7 @@ $Selenium->RunTest(
 
         for my $Test (@Tests) {
             $Selenium->find_element(
-                "//ul[\@class='ArticleAttachments']/li/h5[contains(text(), '$Test->{Attachment}')]"
+                "//ul[\@class='ArticleAttachments']/li/div/div/span[contains(text(), '$Test->{Attachment}')]"
             );
         }
 

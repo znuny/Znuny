@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.875598876590121;
+    $Self->{Completeness}        = 0.875557759048091;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -689,6 +689,7 @@ sub Data {
         'Run' => '실행',
         'Delete this task' => '이 작업 삭제',
         'Run this task' => '이 작업 실행',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => '작업 설정',
         'Job name' => '작업 이름',
         'The name you entered already exists.' => '입렵한 이름이 이미 있습니다.',
@@ -1481,7 +1482,6 @@ sub Data {
         'Uninstall Package' => '패키지 제거',
         'Uninstall package' => '패키지 제거',
         'Do you really want to uninstall this package?' => '이 패키지를 정말로 제거 하시곘습니까?',
-        'or' => '또는',
         'Reinstall package' => '패키지 다시 설치',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '이 패키지를 정말로 다시 설치 하시겠습니까? 수동으로 변경하면 손실됩니다.',
@@ -2358,7 +2358,6 @@ sub Data {
         'in' => '...에서',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '자료 없음.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2370,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '더',
+        'No Data Available.' => '자료 없음.',
         'Available Columns' => '가능한 컬럼',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '보여지는 컬럼(드래그드롭으로 순서정렬 가능)',
@@ -2427,7 +2427,7 @@ sub Data {
         'Assigned to customer user' => '고객 사용자에게 할당 됨',
         'Accessible for customer user' => '고객 사용자가 엑세스 가능',
         'My locked tickets' => '내 잠긴 티켓',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => '내가 본 티켓',
         'My responsibilities' => '내 책임',
         'Tickets in My Queues' => '내 대기열의 티켓',
@@ -2524,8 +2524,8 @@ sub Data {
         'Edit statistic "%s".' => '통계 "%s"을 수정하십시오.',
         'Export statistic "%s"' => '통계 "%s" 내보내기',
         'Export statistic %s' => '통계 "%s" 내보내기',
-        'Delete statistic "%s"' => '통계 "%s"  삭제',
         'Delete statistic %s' => '통계 "%s" 삭제',
+        'Do you really want to delete this statistic?' => '정말로 이 통계를 삭제 하시겠습니까?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '통계 정보',
@@ -3011,12 +3011,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '자바스트립트를 사용할 수 없습니다.',
-        'Step %s' => '%s 단계',
         'License' => '특허',
         'Database Settings' => '데이터베이스 설정',
         'General Specifications and Mail Settings' => '일반 사양 및 메일 설정',
         'Finish' => '끝',
         'Welcome to %s' => '%s에 오신 것을 환영합니다.',
+        'Address' => '주소',
         'Phone' => '전화',
         'Web site' => '웹 사이트',
         'Community' => '',
@@ -3047,6 +3047,7 @@ sub Data {
         'Password for inbound mail.' => '인바운드 메일의 비밀번호 입니다.',
         'Result of mail configuration check' => '메일 구성 검사 결과',
         'Check mail configuration' => '메일 구성 확인',
+        'or' => '또는',
         'Skip this step' => '이 단계를 건너뛰기',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3436,6 @@ sub Data {
         'Valid' => '유효한',
         'Mr.' => 'Mr.',
         'Mrs.' => 'Mrs.',
-        'Address' => '주소',
         'View system log messages.' => '시스템 로그 메시지를 봅니다.',
         'Edit the system configuration settings.' => '시스템 구성 설정을 편집 하십시오.',
         'Update and extend your system with software packages.' => '소프트웨어 패키지로 시스템을 업데이트하고 확장하십시오.',
@@ -7991,14 +7991,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '선택 항목 삭제',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => '이 이벤트 트리거 삭제',
+        'An error occurred during communication.' => '통신 중에 오류가 발생했습니다.',
         'Duplicate event.' => '중복 이벤트.',
         'This event is already attached to the job, Please use a different one.' =>
             '이 이벤트는 이미 작업에 첨부되어 있습니다. 다른 이벤트를 사용하십시오.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => '통신 중에 오류가 발생했습니다.',
         'Request Details' => '요청 세부 정보',
         'Request Details for Communication ID' => '통신 ID 요청 세부 정보',
         'Show or hide the content.' => '내용을 표시하거나 숨깁니다.',
@@ -8011,6 +8009,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => '이 호출자 삭제',
+        'Delete this Event Trigger' => '이 이벤트 트리거 삭제',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '죄송합니다. 기존 상태만 제거 할 수 없습니다.',
@@ -8230,9 +8229,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '이 요소는 하위 요소를 가지며 현재 제거할 수 없습니다.',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '정말로 이 통계를 삭제 하시겠습니까?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '이 티켓에 지정할 고객 ID를 선택하십시오.',
@@ -9194,6 +9190,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9213,13 +9210,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

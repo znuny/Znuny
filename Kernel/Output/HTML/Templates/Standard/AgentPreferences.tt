@@ -100,7 +100,7 @@
 [% RenderBlockStart("Block") %]
 [% RenderBlockStart("InputKey") %]
                                         [% IF Data.Key %]
-                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
+                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
                                         [% END %]
                                         <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
                                             <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" />
@@ -110,7 +110,7 @@
 
 [% RenderBlockStart("Input") %]
                                         [% IF Data.Key %]
-                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
+                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
                                         [% END %]
                                         <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
                                             <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
@@ -120,16 +120,16 @@
 
 [% RenderBlockStart("Option") %]
                                         [% IF Data.Key %]
-                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
+                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
                                         [% END %]
-                                            <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
-                                                [% Data.Option %]
-                                            </div>
+                                        <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
+                                            [% Data.Option %]
+                                        </div>
 
 [% RenderBlockEnd("Option") %]
 
 [% RenderBlockStart("Upload") %]
-                                        <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
+                                        <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
                                         <div class="Field">
                                             <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="file" size="20" class="fixed"/>
                                             <br/>
@@ -145,7 +145,9 @@
 
                                         [% ELSIF Data.AvatarEngine == 'Gravatar' %]
                                             <div class="Field NoMargin PreferenceAvatar">
-                                                <a href="https://www.gravatar.com" target="_blank"><img src="[% Data.Avatar %]" /></a>
+                                                <a href="https://www.gravatar.com" target="_blank">
+                                                    <img src="[% Data.Avatar %]" />
+                                                </a>
                                                 [%
                                                     SET GravatarLink  = '<a href="https://www.gravatar.com" target="_blank"><i class="fa fa-external-link"></i> gravatar.com</a>';
                                                     SET GravatarEmail = '<strong>' _ Env("UserEmail") _ '</strong>';
@@ -157,9 +159,11 @@
 [% RenderBlockEnd("Avatar") %]
 
 [% RenderBlockStart("Password") %]
-                                        <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
-                                        <div class="Field">
-                                            <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="password" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
+                                        <div class="field-wrapper">
+                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
+                                            <div class="Field">
+                                                <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="password" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
+                                            </div>
                                         </div>
 [% RenderBlockEnd("Password") %]
 

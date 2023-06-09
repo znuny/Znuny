@@ -322,9 +322,11 @@ sub _ShowEdit {
         $LayoutObject->Block(
             Name => 'AvailableTransitionActionRow',
             Data => {
-                ID       => $TransitionActionData->{ID},
-                EntityID => $TransitionActionData->{EntityID},
-                Name     => $TransitionActionData->{Name},
+                ID            => $TransitionActionData->{ID},
+                EntityID      => $TransitionActionData->{EntityID},
+                Name          => $TransitionActionData->{Name},
+                Scope         => $TransitionActionData->{Config}->{Scope} || 'Global',
+                ScopeEntityID => $TransitionActionData->{Config}->{ScopeEntityID},
             },
         );
     }

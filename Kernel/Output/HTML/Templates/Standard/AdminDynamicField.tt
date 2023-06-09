@@ -111,7 +111,6 @@
             <div class='Content'>
                 <ul class='ActionList'>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldScreenConfiguration' class='CallForAction btn-main btn-primary-ghost'>
                         <a href='[% Env("Baselink") %]Action=AdminProcessManagement' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Process Management') | html %]

@@ -36,7 +36,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     /* HEADER */
     .Preferences .WidgetSimple.Setting .Header {
         background-color: var(--sidebarcolumn-header-bg);
-        /*border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;*/
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0; /* fixed by ED on 23/04/04*/
         border-bottom: var(--border-width) var(--border-solid) var(--border-color);
     }
 

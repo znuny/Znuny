@@ -194,8 +194,10 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         opacity: 1;
     }
 
-    .QueueOverview .Active, 
-    .ServiceOverview .Active {
+    .QueueOverview a.Active,
+    .QueueOverview .Active > a,
+    .ServiceOverview a.Active,
+    .ServiceOverview .Active> a {
         border: 1.5px var(--border-solid) var(--primary-color);
         background: var(--primary-color-rgb);
         font-weight: var(--bold);

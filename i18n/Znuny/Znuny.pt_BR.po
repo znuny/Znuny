@@ -4434,7 +4434,7 @@ msgstr "Desinstalar Pacote"
 msgid "Do you really want to uninstall this package?"
 msgstr "Você quer realmente desinstalar este pacote?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "ou"
 
@@ -7223,7 +7223,7 @@ msgid "My locked tickets"
 msgstr "Meus Chamados Bloqueados"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
-msgid "My Owned Tickets"
+msgid "My owned tickets"
 msgstr "Meus Chamados"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
@@ -9970,7 +9970,7 @@ msgstr "Sr."
 msgid "Mrs."
 msgstr "Sra."
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Endereço"
 
@@ -20730,11 +20730,11 @@ msgstr "Remover este campo dinâmico"
 msgid "Remove selection"
 msgstr "Remover tradução"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Excluir este disparador de evento"
 
@@ -20746,7 +20746,7 @@ msgstr "Duplicar evento."
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Este evento já está associado a uma tarefa, por favor use um diferente."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "Ocorreu um erro durante a comunicação."
 
@@ -21250,7 +21250,7 @@ msgstr "Gerar"
 msgid "This element has children elements and can currently not be removed."
 msgstr "Este elemento contém elementos filhos e não pode ser removido no momento."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "Você quer realmente excluir esta estatística?"
 

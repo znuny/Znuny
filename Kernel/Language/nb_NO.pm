@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.383446225012391;
+    $Self->{Completeness}        = 0.383242439266237;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -698,6 +698,7 @@ sub Data {
         'Run' => 'Kjør',
         'Delete this task' => 'Slett denne oppgaven',
         'Run this task' => 'Kjør denne oppgaven',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Innstillinger for jobb',
         'Job name' => 'Navn',
         'The name you entered already exists.' => 'Navnet du oppga finnes allerede',
@@ -1490,7 +1491,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Avinstaller pakke',
         'Do you really want to uninstall this package?' => 'Vil du virkelig avinstallere denne pakken?',
-        'or' => 'eller',
         'Reinstall package' => 're-installer pakken',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Vil du virkelig re-installere pakken? Alle manuelle endringer vil bli borte.',
@@ -2367,7 +2367,6 @@ sub Data {
         'in' => 'om',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2380,6 +2379,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'mer',
+        'No Data Available.' => '',
         'Available Columns' => 'Tilgjengelige kolonner',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Tilgjengelige kolonner (sorter ved dra og slipp)',
@@ -2436,7 +2436,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Mine saker',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Mine overvåkede saker',
         'My responsibilities' => 'Mine ansvar',
         'Tickets in My Queues' => 'Saker i Min Kø',
@@ -2533,8 +2533,8 @@ sub Data {
         'Edit statistic "%s".' => 'Editer statistikk "%s".',
         'Export statistic "%s"' => 'Eksporter statistikk "%s"',
         'Export statistic %s' => 'Eksporter statistikk %s',
-        'Delete statistic "%s"' => 'Slett statistikk "%s"',
         'Delete statistic %s' => '',
+        'Do you really want to delete this statistic?' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -3020,12 +3020,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript er ikke tilgjengelig',
-        'Step %s' => 'Steg %s',
         'License' => 'Lisens',
         'Database Settings' => 'Databaseinnstillinger',
         'General Specifications and Mail Settings' => 'Generelle spesifikasjoner og e-post-innstillinger',
         'Finish' => 'Ferdig',
         'Welcome to %s' => 'Velkommen til %s',
+        'Address' => 'Adresse',
         'Phone' => 'Telefon',
         'Web site' => 'Websted',
         'Community' => '',
@@ -3056,6 +3056,7 @@ sub Data {
         'Password for inbound mail.' => 'Passord for innkommende e-post',
         'Result of mail configuration check' => 'Resultat for e-postsjekk',
         'Check mail configuration' => 'Sjekk e-postkonfigurasjonen',
+        'or' => 'eller',
         'Skip this step' => 'Hopp over dette steget',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3444,7 +3445,6 @@ sub Data {
         'Valid' => 'Gyldig',
         'Mr.' => 'Hr.',
         'Mrs.' => 'Fru',
-        'Address' => 'Adresse',
         'View system log messages.' => 'Vis systemloggmeldinger',
         'Edit the system configuration settings.' => 'Endre på systeminnstillingene',
         'Update and extend your system with software packages.' => 'Oppdater og utvid systemet med programvarepakker',
@@ -8000,14 +8000,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Fjern denne Hendelses Utløseren',
+        'An error occurred during communication.' => 'En feil oppstod under kommunikasjonen',
         'Duplicate event.' => 'Klone hendelsen.',
         'This event is already attached to the job, Please use a different one.' =>
             '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'En feil oppstod under kommunikasjonen',
         'Request Details' => '',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'Vis eller skjul innhold.',
@@ -8020,6 +8018,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'Fjern denne Anroperen',
+        'Delete this Event Trigger' => 'Fjern denne Hendelses Utløseren',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8239,9 +8238,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9192,6 +9188,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9211,13 +9208,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

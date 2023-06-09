@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.224186353874112;
+    $Self->{Completeness}        = 0.224095190877541;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -695,6 +695,7 @@ sub Data {
         'Run' => '',
         'Delete this task' => 'מחק משימה זו',
         'Run this task' => 'הרץ משימה זו',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'הגדרות המשימה',
         'Job name' => 'שם המשימה',
         'The name you entered already exists.' => 'השם שהקלדתם כבר קיים.',
@@ -1487,7 +1488,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '',
         'Do you really want to uninstall this package?' => '',
-        'or' => 'או',
         'Reinstall package' => '',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -2364,7 +2364,6 @@ sub Data {
         'in' => 'in',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2377,6 +2376,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'עוד',
+        'No Data Available.' => '',
         'Available Columns' => 'עמודות זמינות',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'עמודות נראות (סדר בגרירה של העמודות)',
@@ -2433,7 +2433,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'הפניות הנעולות שלי',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'הפניות במעקב שלי',
         'My responsibilities' => 'באחריות שלי',
         'Tickets in My Queues' => 'פניות בתורים שלי',
@@ -2530,8 +2530,8 @@ sub Data {
         'Edit statistic "%s".' => '',
         'Export statistic "%s"' => '',
         'Export statistic %s' => '',
-        'Delete statistic "%s"' => '',
         'Delete statistic %s' => '',
+        'Do you really want to delete this statistic?' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -3017,12 +3017,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript לא זמין',
-        'Step %s' => 'שלב %s',
         'License' => 'רישיון',
         'Database Settings' => 'הגדרות בסיס נתונים',
         'General Specifications and Mail Settings' => '',
         'Finish' => 'סיים',
         'Welcome to %s' => '',
+        'Address' => '',
         'Phone' => 'טלפון',
         'Web site' => 'אתר',
         'Community' => '',
@@ -3053,6 +3053,7 @@ sub Data {
         'Password for inbound mail.' => 'סיסמה עבור דואר נכנס.',
         'Result of mail configuration check' => 'תוצאות בדיקת הגדרות דוא"ל',
         'Check mail configuration' => 'בדוק הדגרות דוא"ל',
+        'or' => 'או',
         'Skip this step' => 'דלג על שלב זה',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3441,7 +3442,6 @@ sub Data {
         'Valid' => 'תקף',
         'Mr.' => 'מר',
         'Mrs.' => 'מרת',
-        'Address' => '',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'ערכו את הגדרות המערכת.',
         'Update and extend your system with software packages.' => '',
@@ -7997,14 +7997,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'מחק את טריגר האירוע',
+        'An error occurred during communication.' => '',
         'Duplicate event.' => 'שכפל אירוע',
         'This event is already attached to the job, Please use a different one.' =>
             'אירוע זה כבר משויך למשימה. אנא בחרו אחד אחר.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => '',
         'Request Details' => '',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'הצג או הסתר את התוכן.',
@@ -8017,6 +8015,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => '',
+        'Delete this Event Trigger' => 'מחק את טריגר האירוע',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8236,9 +8235,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9189,6 +9185,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9208,13 +9205,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

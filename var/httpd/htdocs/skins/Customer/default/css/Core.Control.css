@@ -42,21 +42,21 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 #Navigation > ul > li > ul {
     display: none;
     position: absolute;
-    top: 45px;
+    top: 35px;
     left: 0px;
     z-index: 99;
     background: var(--menu-bg);
     min-width: 100%;
     box-shadow: var(--menu-box-shadow);
-    padding: var(--padding-sm);
     border-radius: var(--border-radius-xs);
+    padding: var(--padding-sm);
 }
 
 .RTL #Navigation > ul > li > ul {
     right: 1px;
 }
 
-#Navigation > ul > li > ul::after {
+/*#Navigation > ul > li > ul::after {
     content: '';
     position: absolute;
     top: -5px;
@@ -66,11 +66,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     height: 5px;
     background: transparent;
 
-}
+}*/
 
-#Navigation > ul > li:hover ul,
-#Navigation > ul > li a:focus + ul,
-#Navigation > ul > li ul.Expanded {
+/*#Navigation > ul > li:hover ul:not(:empty),
+#Navigation > ul > li a:focus + ul:not(:empty),*/
+#Navigation > ul > li ul.Expanded:not(:empty:blank) {
     display: block;
     z-index: 1000;
 }
@@ -107,6 +107,25 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     position: relative;
 }
 
+#Navigation > ul > li > a:after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: -12px;
+    left: 0px;
+    background: var(--primary-color);
+    transform: scale(0, 1);
+    transform-origin: 0;
+    transition: transform 300ms ease;
+    will-change: transform;
+    border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+}
+
+#Navigation > ul > li:hover > a:after {
+    transform: scale(1, 1);
+}
+
 #Navigation > ul > li.Selected > a:after {
     content: "";
 }
@@ -135,6 +154,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     font-size: var(--main-font-size);
     transition: var(--main-transition);
     border-radius: var(--border-radius-xs);
+    cursor: pointer;
 }
 
 #Navigation > ul > li > ul li:last-child {

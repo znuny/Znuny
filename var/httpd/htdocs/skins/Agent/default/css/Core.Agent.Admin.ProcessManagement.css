@@ -612,6 +612,11 @@ em.EntityID:after {
     padding-top: var(--padding-md);
 }
 
+#TransitionForm .WidgetSimple.FieldWidget fieldset.padding-right,
+#TransitionForm .WidgetSimple #ConfigParams fieldset.padding-right {
+    padding-right: 38px;
+}
+
 #TransitionForm .WidgetSimple.FieldWidget fieldset:nth-child(1),
 #TransitionForm .WidgetSimple #ConfigParams fieldset:nth-child(1) {
     padding-top: 0;

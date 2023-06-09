@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.439121096976706;
+    $Self->{Completeness}        = 0.438935713105272;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -690,6 +690,7 @@ sub Data {
         'Run' => 'Запустити',
         'Delete this task' => 'Вилучити завдання',
         'Run this task' => 'Запустити завдання',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Настроювання завдання',
         'Job name' => 'Ім\'я завдання',
         'The name you entered already exists.' => 'Ім\'я, що Ви ввели, вже існує.',
@@ -1482,7 +1483,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Деінсталювати пакет',
         'Do you really want to uninstall this package?' => 'Вилучити цей пакет?',
-        'or' => 'або',
         'Reinstall package' => 'Переустановити пакет',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Ви дійсно хочете перевстановити цей пакунок? Аби-які ручні зміни буде втрачено!',
@@ -2359,7 +2359,6 @@ sub Data {
         'in' => 'в',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => 'Немає доступних даних.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2372,6 +2371,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'далі',
+        'No Data Available.' => 'Немає доступних даних.',
         'Available Columns' => 'Доступні колонки',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Видимі стовпці (упорядковуйте шляхом тягни-й-пусти)',
@@ -2428,7 +2428,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Мої заблоковані заявки',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Квитки за якими я спостерігаю',
         'My responsibilities' => 'Мої обов\'язки',
         'Tickets in My Queues' => 'Заявки в моїй черзі',
@@ -2525,8 +2525,8 @@ sub Data {
         'Edit statistic "%s".' => 'Редагувати статистику "%s".',
         'Export statistic "%s"' => 'Експортувати статистику "%s"',
         'Export statistic %s' => 'Експортувати статистику %s',
-        'Delete statistic "%s"' => 'Вилучити статистику "%s"',
         'Delete statistic %s' => 'Вилучити статистику %s',
+        'Do you really want to delete this statistic?' => 'Ви справді бажаєте вилучити цю статистику?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -3012,12 +3012,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript не доступний',
-        'Step %s' => 'Крок %s',
         'License' => 'Ліцензія',
         'Database Settings' => 'Налаштування бази даних',
         'General Specifications and Mail Settings' => 'Загальні характеристики та налаштування пошти',
         'Finish' => 'Закінчити',
         'Welcome to %s' => 'Ласкаво просимо до %s',
+        'Address' => 'Адреса',
         'Phone' => 'Телефон',
         'Web site' => 'Веб-сторінка',
         'Community' => '',
@@ -3048,6 +3048,7 @@ sub Data {
         'Password for inbound mail.' => 'Пароль для вхідної пошти.',
         'Result of mail configuration check' => 'Результати перевірки настроювань пошти',
         'Check mail configuration' => 'Перевірити настроювання пошти',
+        'or' => 'або',
         'Skip this step' => 'Пропустити цей крок',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3436,7 +3437,6 @@ sub Data {
         'Valid' => 'Дійсний',
         'Mr.' => 'пан',
         'Mrs.' => 'пані',
-        'Address' => 'Адреса',
         'View system log messages.' => 'Перегляд системних повідомлень.',
         'Edit the system configuration settings.' => 'Редагувати параметри налаштування системи.',
         'Update and extend your system with software packages.' => 'Відновлення й розширення системи за допомогою програмних пакетів.',
@@ -7992,14 +7992,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'Вилучити обране',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Вилучити цей тригер події',
+        'An error occurred during communication.' => 'Виникла помилка під час звязку',
         'Duplicate event.' => 'Подія-дублікат.',
         'This event is already attached to the job, Please use a different one.' =>
             'Ця подія вже прикріплена до цього завдання, будь ласка, використайте іншу.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Виникла помилка під час звязку',
         'Request Details' => 'Деталі запиту',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'Відобразити чи приховати контент',
@@ -8012,6 +8010,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             'Неможливо додати новий тригер події, бо подія не налаштована.',
         'Delete this Invoker' => 'Вилучити цей активатор.',
+        'Delete this Event Trigger' => 'Вилучити цей тригер події',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8231,9 +8230,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'Ви справді бажаєте вилучити цю статистику?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9184,6 +9180,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9203,13 +9200,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

@@ -336,6 +336,34 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border-width: var(--border-width-md);
     } */
 
+    .btn-warning,
+    .btn-warning:focus {
+        color: var(--btn-primary-text);
+        background: var(--warning-color);
+        border: var(--border-width) var(--border-solid) var(--warning-color);
+    }
+
+    .btn-warning:hover,
+    .btn-warning:focus:hover {
+        color: var(--btn-primary-text-hover);
+        background: var(--warning-color-darker);
+        border: var(--border-width) var(--border-solid) var(--warning-color-darker);
+        cursor: pointer;
+    }
+
+    .btn-warning-ghost,
+    .btn-warning-ghost:focus {
+        color: var(--btn-primary-text);
+        border: var(--border-width) var(--border-solid) var(--warning-color);
+    }
+
+    .btn-warning-ghost:hover,
+    .btn-warning-ghost:focus:hover {
+        color: var(--btn-primary-text-hover);
+        background: var(--warning-color-darker);
+        border: var(--border-width) var(--border-solid) var(--warning-color-darker);
+    }
+
     .btn-cancel-ghost,
     .btn-cancel-ghost:focus {
         color: var(--btn-cancel-ghost-text);
@@ -960,7 +988,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         text-indent: 8px;
     }*/
 
-    .WidgetSimple .Content p:not(.ErrorBox):not(.SuccessBox):not(.Notice) {
+    .WidgetSimple .Content > p:not(.ErrorBox):not(.SuccessBox):not(.Notice) {
         color: var(--table-text-color);
         margin: 0;
         padding: var(--padding-xs);
@@ -996,7 +1024,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     p.FieldExplanation:last-child,
-    div.WidgetSimple div.Content p:last-child:not(.ErrorBox):not(.SuccessBox):not(:first-child){
+    div.WidgetSimple div.Content p:last-child:not(.ErrorBox):not(.SuccessBox):not(.Value):not(:first-child){
         padding-bottom: 0;
     }
 

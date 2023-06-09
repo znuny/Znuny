@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.622170824384603;
+    $Self->{Completeness}        = 0.622045942819369;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -695,6 +695,7 @@ sub Data {
         'Run' => 'اجرا',
         'Delete this task' => 'حذف این وظیفه',
         'Run this task' => 'اجرای این وظیفه',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'تنظیمات کار',
         'Job name' => 'نام کار',
         'The name you entered already exists.' => 'نامی که وارد کردید درحال حاضر وجود دارد.',
@@ -1487,7 +1488,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'حذف بسته',
         'Do you really want to uninstall this package?' => 'از حذف این بسته اطمینان دارید؟',
-        'or' => 'یا',
         'Reinstall package' => 'نصب مجدد بسته',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'آیا واقعا می‌خواهید این بسته را مجددا نصب نمایید؟ تمام تغییرات دستی از بین خواهد رفت.',
@@ -2364,7 +2364,6 @@ sub Data {
         'in' => 'در',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2377,6 +2376,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'بیشتر',
+        'No Data Available.' => '',
         'Available Columns' => 'ستون در دسترس',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'ستون قابل مشاهده است (سفارش با کشیدن و رها کردن)',
@@ -2433,7 +2433,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'درخواست‎های قفل شده من',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'درخواست مشاهده شده من',
         'My responsibilities' => 'مسئولیت من',
         'Tickets in My Queues' => 'درخواستهای در صفهای من',
@@ -2530,8 +2530,8 @@ sub Data {
         'Edit statistic "%s".' => 'ویرایش گزارش " %s ".',
         'Export statistic "%s"' => 'آمارارسال \ " %s "',
         'Export statistic %s' => 'استخراج گزارش "%s"',
-        'Delete statistic "%s"' => 'حذف گزارش "%s"',
         'Delete statistic %s' => 'حذف گزارش "%s"',
+        'Do you really want to delete this statistic?' => 'آیا واقعا میخواهید این آمار را حذف کنید؟',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'اطلاعات گزارش ها',
@@ -3017,12 +3017,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'جاوا اسکریپت در دسترس نیست',
-        'Step %s' => 'مرحله %s',
         'License' => 'مجوز بهره برداری سیستم',
         'Database Settings' => 'تنظیمات پایگاه داده',
         'General Specifications and Mail Settings' => 'مشخصات عمومی و تنظیمات ایمیل',
         'Finish' => 'پایان',
         'Welcome to %s' => 'خوش آمدید به %s',
+        'Address' => 'نشانی',
         'Phone' => 'تلفن',
         'Web site' => 'وب سایت',
         'Community' => '',
@@ -3053,6 +3053,7 @@ sub Data {
         'Password for inbound mail.' => 'رمز عبور برای ایمیل وارده.',
         'Result of mail configuration check' => 'نتیجه کنترل پیکربندی ایمیل',
         'Check mail configuration' => 'کنترل پیکربندی ایمیل',
+        'or' => 'یا',
         'Skip this step' => 'از این مرحله بگذر',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3441,7 +3442,6 @@ sub Data {
         'Valid' => 'معتبر',
         'Mr.' => 'آقای',
         'Mrs.' => 'خانم',
-        'Address' => 'نشانی',
         'View system log messages.' => 'نمایش پیغام‌های ثبت وقایع سیستم',
         'Edit the system configuration settings.' => 'ویرایش تنظیمات پیکربندی سیستم',
         'Update and extend your system with software packages.' => 'به روزرسانی و گسترش سیستم به کمک بسته‌های نرم‌افزاری',
@@ -7997,14 +7997,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'حذف انتخاب',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'حذف این رویداد راه انداز',
+        'An error occurred during communication.' => 'یک خطا در هنگام برقراری ارتباط رخ داده است.',
         'Duplicate event.' => 'تکرار رویداد.',
         'This event is already attached to the job, Please use a different one.' =>
             'این رویداد در حال حاضر به این کار متصل است، لطفا یک رویداد دیگر را استفاده کنید.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'یک خطا در هنگام برقراری ارتباط رخ داده است.',
         'Request Details' => 'جزئیات درخواست',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'نمایش یا مخفی کردن محتوا.',
@@ -8017,6 +8015,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'حذف این Invoker',
+        'Delete this Event Trigger' => 'حذف این رویداد راه انداز',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8236,9 +8235,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'آیا واقعا میخواهید این آمار را حذف کنید؟',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9200,6 +9196,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9219,13 +9216,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

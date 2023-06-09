@@ -252,8 +252,6 @@ Core.UI.Dialog = (function (TargetNS) {
          *      which invokes the callback and the closing of the dialog.
          */
         function HandleClosingAction() {
-            var $CloseButton = $('.Dialog:visible button.Close');
-
             // publish close event
             Core.App.Publish('Event.UI.Dialog.CloseDialog.Close', [$Dialog]);
 
@@ -262,12 +260,7 @@ Core.UI.Dialog = (function (TargetNS) {
                 Core.Form.ErrorTooltips.HideTooltip();
             }
 
-            if ($CloseButton.length) {
-                $CloseButton.trigger('click');
-            }
-            else {
-                DefaultCloseFunction();
-            }
+            DefaultCloseFunction();
         }
 
         /**
@@ -417,16 +410,23 @@ Core.UI.Dialog = (function (TargetNS) {
                 $Content.append('<div class="InnerContent scroll-bar-styled"></div>').find('.InnerContent').append(Params.HTML);
                 $ButtonFooter = $('<div class="ContentFooter SaveButtons"></div>');
                 $.each(Params.Buttons, function (Index, Value) {
-                    var Classes = 'CallForAction';
+                    var Classes = '';
                     if (Value.Type === 'Close' || Index == 1) {
-                        // add "btn-cancel-ghost" class
-                        Classes += ' Close btn-cancel-ghost';
+                        Classes += ' Close';
+                    }
+                    if (Value.Type === 'Secondary') {
+                        // add "btn-primary" or "btn-cancel-ghost" class
+                        Classes += ' btn-cancel-ghost';
+                    } else if (Value.Type === 'Warning') {
+                        Classes += ' btn-warning';
+                    } else {
+                        Classes += ' btn-primary';
                     }
                     if (Value.Class) {
                         Classes += ' ' + Value.Class;
                     }
                     // added "btn-primary" & "btn-main" class
-                    $ButtonFooter.append('<button id="DialogButton' + (Index - 0 + 1) + '" class="btn-primary btn-main ' + Classes + '" type="button"><span>' + Value.Label + '</span></button> ');
+                    $ButtonFooter.append('<button id="DialogButton' + (Index - 0 + 1) + '" class="btn-main ' + Classes + '" type="button"><span>' + Value.Label + '</span></button> ');
                 });
                 $ButtonFooter.appendTo($Content);
             }
@@ -451,7 +451,7 @@ Core.UI.Dialog = (function (TargetNS) {
         }
 
         // default class is modal-sm
-        if  (InnerWidth >= 500){
+        if  (InnerWidth >= 300){
             DialogModalClass = 'modal-md';
         }
         if (InnerWidth >= 800){

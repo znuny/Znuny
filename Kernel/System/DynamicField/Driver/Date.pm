@@ -396,6 +396,7 @@ EOF
         # add optional checkbox to DateTime field
         Prefix                => $FieldName,
         $FieldName . Optional => 1,
+        $FieldName . Used     => $FieldConfig->{ $FieldName . 'Used' } || 0,
     );
 
     my $Data = {

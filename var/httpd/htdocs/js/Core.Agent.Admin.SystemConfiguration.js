@@ -444,7 +444,10 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 OriginalPadding = parseInt($WidgetObj.find('.Content').css('padding-bottom'), 10);
 
             if ($WidgetObj.hasClass('MenuExpanded')) {
-                //$WidgetObj.find('.WidgetMenu').slideUp('fast')
+
+                if(!$WidgetObj.find('.WidgetMenu').hasClass('Hidden')) {
+                    $WidgetObj.find('.WidgetMenu').addClass('Hidden');
+                }
                 $WidgetObj.removeClass('MenuExpanded');
 
                 if ($DefaultObj.length) {
@@ -455,7 +458,11 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 }
             }
             else {
-                //$WidgetObj.find('.WidgetMenu').slideDown('fast');
+
+                if($WidgetObj.find('.WidgetMenu').hasClass('Hidden')) {
+                    $WidgetObj.find('.WidgetMenu').removeClass('Hidden');
+                }
+                $WidgetObj.find('.WidgetMenu').removeClass('Hidden');
                 $WidgetObj.addClass('MenuExpanded');
 
                 if ($DefaultObj.length) {

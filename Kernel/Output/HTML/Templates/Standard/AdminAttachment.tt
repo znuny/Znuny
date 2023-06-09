@@ -134,7 +134,7 @@
                             <td>[% Data.CreateTime | Localize("TimeShort") %]</td>
                             <td class="Center">
                                 <a class="TrashCan AttachmentDelete table-icon-hover-md" href="#" data-id="[% Data.ID %]" title="[% Translate("Delete this attachment") | html %]">
-                                    <i class="fa fa-times"></i>
+                                    <i class="fa fa-trash-o"></i>
                                 </a>
                             </td>
                         </tr>

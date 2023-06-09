@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.439781926317528;
+    $Self->{Completeness}        = 0.439762022806148;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -692,6 +692,7 @@ sub Data {
         'Run' => '',
         'Delete this task' => 'Futa kazi hii',
         'Run this task' => 'Fanya kazi hii',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Mipangilio ya kazi',
         'Job name' => 'Jina la kazi',
         'The name you entered already exists.' => 'Jina uliloingiza tayari lipo',
@@ -1484,7 +1485,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Futa kifurushi',
         'Do you really want to uninstall this package?' => 'Je unataka kufuta kifurushi hiki?',
-        'or' => 'Au',
         'Reinstall package' => 'Sakinisha kifurushi',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Je unahitaji kusakinisha kifurushi hiki? Mabaidliko yoyote ya mkono yatapotea.',
@@ -2361,7 +2361,6 @@ sub Data {
         'in' => 'Ndani',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2373,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'aidi',
+        'No Data Available.' => '',
         'Available Columns' => 'Safu wima zilizopo',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Safuwima zinazoonekana (kwa oda ya kokota na dondosha)',
@@ -2430,7 +2430,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Tiketi zangu zilizofungwa',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Tiketi zangu zinazoangaliwa',
         'My responsibilities' => 'Majukumu yangu',
         'Tickets in My Queues' => 'Tiketi katika foleni yangu',
@@ -2527,8 +2527,8 @@ sub Data {
         'Edit statistic "%s".' => '',
         'Export statistic "%s"' => '',
         'Export statistic %s' => '',
-        'Delete statistic "%s"' => '',
         'Delete statistic %s' => '',
+        'Do you really want to delete this statistic?' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -3014,12 +3014,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript haipatikani',
-        'Step %s' => 'Hatua %s',
         'License' => 'Leseni',
         'Database Settings' => 'Mipangilio ya hifadhi data',
         'General Specifications and Mail Settings' => 'Ubainishi wa jumla na mipangilio ya barua pepe',
         'Finish' => 'Maliza',
         'Welcome to %s' => '',
+        'Address' => 'Anwani',
         'Phone' => 'Simu',
         'Web site' => 'Tovuti',
         'Community' => '',
@@ -3050,6 +3050,7 @@ sub Data {
         'Password for inbound mail.' => 'Neno la siri kwa ajili barua pepe zilifungwa ndani.',
         'Result of mail configuration check' => 'Matokeo ya maangalizi usanidi wa barua pepe',
         'Check mail configuration' => 'Angalia usanidi wa barua pepe',
+        'or' => 'Au',
         'Skip this step' => 'Ruka hatua hii',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3438,7 +3439,6 @@ sub Data {
         'Valid' => 'Halali',
         'Mr.' => 'Bwana',
         'Mrs.' => 'Bibi',
-        'Address' => 'Anwani',
         'View system log messages.' => 'Angalia ujumbe wa batli ya mfumo.',
         'Edit the system configuration settings.' => 'Hakiki mipangilio ya usanidishaji wa mfumo. ',
         'Update and extend your system with software packages.' => 'Sasisha na panua mfumo wako kwa vifurushi vya programu.',
@@ -7997,14 +7997,12 @@ Mfano:
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Futa kichochezi cha tukio hili',
+        'An error occurred during communication.' => 'Kosa limetokea wakati wa mawasiliano.',
         'Duplicate event.' => 'Nakili tukio',
         'This event is already attached to the job, Please use a different one.' =>
             'Tukio hili tayari limeweambatanishwa na kazi, tafadhali tumia lingine.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Kosa limetokea wakati wa mawasiliano.',
         'Request Details' => 'Maelezo ya maombi',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'Onyesha au ficha maudhui.',
@@ -8017,6 +8015,7 @@ Mfano:
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'Tufa kisababishi hiki',
+        'Delete this Event Trigger' => 'Futa kichochezi cha tukio hili',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8236,9 +8235,6 @@ Mfano:
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9189,6 +9185,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9208,13 +9205,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

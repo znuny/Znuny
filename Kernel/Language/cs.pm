@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.245498100115645;
+    $Self->{Completeness}        = 0.245413981160139;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -696,6 +696,7 @@ sub Data {
         'Run' => '',
         'Delete this task' => 'Odstranit tuto úlohu',
         'Run this task' => 'Spustit tuto úlohu',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => '',
         'Job name' => '',
         'The name you entered already exists.' => '',
@@ -1488,7 +1489,6 @@ sub Data {
         'Uninstall Package' => 'Odinstalovat balíček',
         'Uninstall package' => 'Odinstaluj balíček',
         'Do you really want to uninstall this package?' => 'Opravdu chcete odinstalovat tento Balíček?',
-        'or' => 'nebo',
         'Reinstall package' => 'Reinstaluj balíček',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -2365,7 +2365,6 @@ sub Data {
         'in' => 'v',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2378,6 +2377,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'další',
+        'No Data Available.' => '',
         'Available Columns' => 'Dostupné sloupce',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Viditelné sloupce (seřadťe přetažením)',
@@ -2434,7 +2434,7 @@ sub Data {
         'Assigned to customer user' => 'Přiřazen uživateli zákazníka',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Moje uzamčené tikety',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Moje sledované tikety',
         'My responsibilities' => 'Moje odpovědné tikety',
         'Tickets in My Queues' => 'Tikety v mých frontách',
@@ -2531,8 +2531,8 @@ sub Data {
         'Edit statistic "%s".' => '',
         'Export statistic "%s"' => '',
         'Export statistic %s' => '',
-        'Delete statistic "%s"' => '',
         'Delete statistic %s' => '',
+        'Do you really want to delete this statistic?' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -3018,12 +3018,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '',
-        'Step %s' => 'Krok %s',
         'License' => 'Licence',
         'Database Settings' => '',
         'General Specifications and Mail Settings' => '',
         'Finish' => 'Ukončit',
         'Welcome to %s' => '',
+        'Address' => 'Adresa',
         'Phone' => 'Telefon',
         'Web site' => '',
         'Community' => '',
@@ -3054,6 +3054,7 @@ sub Data {
         'Password for inbound mail.' => '',
         'Result of mail configuration check' => '',
         'Check mail configuration' => '',
+        'or' => 'nebo',
         'Skip this step' => 'Přeskočit tento krok',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3442,7 +3443,6 @@ sub Data {
         'Valid' => 'Platnost',
         'Mr.' => 'pan',
         'Mrs.' => 'paní',
-        'Address' => 'Adresa',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Editace systémových nastavení.',
         'Update and extend your system with software packages.' => '',
@@ -7998,14 +7998,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => '',
+        'An error occurred during communication.' => '',
         'Duplicate event.' => '',
         'This event is already attached to the job, Please use a different one.' =>
             '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => '',
         'Request Details' => '',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => '',
@@ -8018,6 +8016,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => '',
+        'Delete this Event Trigger' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8237,9 +8236,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9190,6 +9186,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9209,13 +9206,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

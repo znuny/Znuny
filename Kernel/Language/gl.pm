@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.466545514620849;
+    $Self->{Completeness}        = 0.466369195174351;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -689,6 +689,7 @@ sub Data {
         'Run' => 'Executar',
         'Delete this task' => 'Borre esta tarefa',
         'Run this task' => 'Execute esta tarefa',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Axustes de Traballo',
         'Job name' => 'Nome Traballo',
         'The name you entered already exists.' => 'O nome que introduciu xa existe.',
@@ -1481,7 +1482,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Desinstalar o paquete',
         'Do you really want to uninstall this package?' => 'Confirma que desexa desinstalar este paquete?',
-        'or' => 'ou',
         'Reinstall package' => 'Reinstalar o paquete',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Confirma que desexa reinstalar este paquete? Os cambios manuais hanse perder.',
@@ -2358,7 +2358,6 @@ sub Data {
         'in' => 'en',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2370,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'máis',
+        'No Data Available.' => '',
         'Available Columns' => 'Columnas dispoñíbeis',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Columnas visibles (orde por arrastre & caída)',
@@ -2427,7 +2427,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Os meus tíckets bloqueados',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Os meus tickets mirados',
         'My responsibilities' => 'As miñas responsabilidades',
         'Tickets in My Queues' => 'Tíckets nas miñas filas',
@@ -2524,8 +2524,8 @@ sub Data {
         'Edit statistic "%s".' => 'Editar as estatísticas «%s».',
         'Export statistic "%s"' => 'Exportar as estatísticas «%s»',
         'Export statistic %s' => 'Exportar as estatísticas %s',
-        'Delete statistic "%s"' => 'Eliminar as estatísticas «%s»',
         'Delete statistic %s' => 'Eliminar as estatísticas %s',
+        'Do you really want to delete this statistic?' => 'Confirma que desexa eliminar estas estatísticas?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -3011,12 +3011,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript non dispoñible',
-        'Step %s' => 'Paso %s',
         'License' => 'Licenza',
         'Database Settings' => 'Configuración da base de datos',
         'General Specifications and Mail Settings' => 'Especificacións Xeráis e Axustes de Correo',
         'Finish' => 'Rematar',
         'Welcome to %s' => 'Benvido a %s',
+        'Address' => 'Enderezo',
         'Phone' => 'Teléfono',
         'Web site' => 'Sitio web',
         'Community' => '',
@@ -3047,6 +3047,7 @@ sub Data {
         'Password for inbound mail.' => 'Contrasinal para correo de entrada.',
         'Result of mail configuration check' => 'Resultado da comprobación da configuración do correo',
         'Check mail configuration' => 'Comprobar a configuración do correo',
+        'or' => 'ou',
         'Skip this step' => 'Salte este paso',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3436,6 @@ sub Data {
         'Valid' => 'Correcto',
         'Mr.' => 'Sr.',
         'Mrs.' => 'Sra.',
-        'Address' => 'Enderezo',
         'View system log messages.' => 'Ver mensaxes log do sistema.',
         'Edit the system configuration settings.' => 'Editar as opcións de configuración do sistema.',
         'Update and extend your system with software packages.' => 'Actualice e extenda o seu sistema con paquetes de software.',
@@ -7991,14 +7991,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'Elimine a selección',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Borrar este Desencadeante de Evento',
+        'An error occurred during communication.' => 'Produciuse un erro durante a comunicación.',
         'Duplicate event.' => 'Evento duplicado.',
         'This event is already attached to the job, Please use a different one.' =>
             'Este eventoé xa concedido ao traballo, Por Favor utilizar un diferente.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Produciuse un erro durante a comunicación.',
         'Request Details' => 'Detalles da solicitude',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'Mostrar ou agochar o contido.',
@@ -8011,6 +8009,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'Elimine este Invocador',
+        'Delete this Event Trigger' => 'Borrar este Desencadeante de Evento',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8230,9 +8229,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'Confirma que desexa eliminar estas estatísticas?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9183,6 +9179,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9202,13 +9199,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

@@ -4434,7 +4434,7 @@ msgstr "Desinstalar paquete"
 msgid "Do you really want to uninstall this package?"
 msgstr "¿Realmente desea desinstalar este paquete?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "o"
 
@@ -7223,7 +7223,7 @@ msgid "My locked tickets"
 msgstr "Mis tickets bloqueados"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
-msgid "My Owned Tickets"
+msgid "My owned tickets"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
@@ -9970,7 +9970,7 @@ msgstr "Sr."
 msgid "Mrs."
 msgstr "Sra."
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Dirección"
 
@@ -20737,11 +20737,11 @@ msgstr ""
 msgid "Remove selection"
 msgstr "Eliminar selección"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Borrar este disparador de eventos"
 
@@ -20753,7 +20753,7 @@ msgstr "Duplicar el evento"
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Este evento ya está ligado al trabajo, seleccione uno diferente."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "Se produjo un error durante la comunicación."
 
@@ -21257,7 +21257,7 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "¿Realmente desea eliminar esta estadística?"
 

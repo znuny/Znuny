@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.611101932925822;
+    $Self->{Completeness}        = 0.610973392827632;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -689,6 +689,7 @@ sub Data {
         'Run' => 'Jalankan',
         'Delete this task' => 'Hapus tugas ini',
         'Run this task' => 'Jalankan tugas ini',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Pengaturan pekerjaan',
         'Job name' => 'Nama pekerjaan',
         'The name you entered already exists.' => 'Nama yang anda masukan sudah terpakai',
@@ -1481,7 +1482,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Uninstal paket',
         'Do you really want to uninstall this package?' => 'Apakah anda ingin menguninstal paket ini?',
-        'or' => 'atau',
         'Reinstall package' => 'Instal ulang paket',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Apakah anda ingin menginstal ulang paket ini? Semua perubahan manual akan hilang.',
@@ -2360,7 +2360,6 @@ bin/znuny.Daemon.pl status\').',
         'in' => 'Masuk',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2373,6 +2372,7 @@ bin/znuny.Daemon.pl status\').',
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'Lebih',
+        'No Data Available.' => '',
         'Available Columns' => 'Kolom tersedia',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Kolom yang terlihat (order dengan drag & drop)',
@@ -2429,7 +2429,7 @@ bin/znuny.Daemon.pl status\').',
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Tiket saya terkunci',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => 'Tiket saya menonton',
         'My responsibilities' => 'Tanggung jawab saya',
         'Tickets in My Queues' => 'Tiket di Antrian saya',
@@ -2526,8 +2526,8 @@ bin/znuny.Daemon.pl status\').',
         'Edit statistic "%s".' => 'Edit statistik "%s"',
         'Export statistic "%s"' => 'Ekspor statistik "%s"',
         'Export statistic %s' => 'Expor statistik %s',
-        'Delete statistic "%s"' => 'Hapuskan statistik "%s"',
         'Delete statistic %s' => 'Hapuskan statistik %s',
+        'Do you really want to delete this statistic?' => 'Apakah anda benar-benar ingin menghapus statistik?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -3013,12 +3013,12 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript tidak tersedia',
-        'Step %s' => 'Langkah %s',
         'License' => 'Lisensi',
         'Database Settings' => 'Pengaturan database',
         'General Specifications and Mail Settings' => 'Spesifikasi umum dan Pengaturan Surat',
         'Finish' => 'Selesei',
         'Welcome to %s' => 'Selamat datang di %s',
+        'Address' => 'Alamat',
         'Phone' => 'Telepon',
         'Web site' => 'Website',
         'Community' => '',
@@ -3049,6 +3049,7 @@ bin/znuny.Daemon.pl status\').',
         'Password for inbound mail.' => 'Kata sandi untuk surat yang masuk',
         'Result of mail configuration check' => 'Hasil dari pengintaian konfigurasi surat',
         'Check mail configuration' => 'Pengecekan konfigurasi surat',
+        'or' => 'atau',
         'Skip this step' => 'Lewatkan langkah ini',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3437,7 +3438,6 @@ bin/znuny.Daemon.pl status\').',
         'Valid' => 'Valid',
         'Mr.' => 'Tuan.',
         'Mrs.' => 'Nyonya.',
-        'Address' => 'Alamat',
         'View system log messages.' => 'Melihat pesan log sistem.',
         'Edit the system configuration settings.' => 'Ubah pengaturan konfigurasi sistem.',
         'Update and extend your system with software packages.' => 'Memperbarui dan memperluas sistem Anda dengan paket perangkat lunak.',
@@ -7994,14 +7994,12 @@ bin/znuny.Daemon.pl status\').',
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'Hapus pilihan',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Hapus pemicu event ini',
+        'An error occurred during communication.' => 'Kesalahan terjadi selama komunikasi',
         'Duplicate event.' => 'Event duplikat',
         'This event is already attached to the job, Please use a different one.' =>
             'Event ini telah terlampir pada pekerjaan tersebut, mohon gunakan event yang berbeda',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Kesalahan terjadi selama komunikasi',
         'Request Details' => 'Rincian permintaan',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'Menampilkan atau menyembunyikan konten',
@@ -8014,6 +8012,7 @@ bin/znuny.Daemon.pl status\').',
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'Hapus invoker',
+        'Delete this Event Trigger' => 'Hapus pemicu event ini',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8233,9 +8232,6 @@ bin/znuny.Daemon.pl status\').',
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'Apakah anda benar-benar ingin menghapus statistik?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9197,6 +9193,7 @@ Helpdesk Team Anda
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9216,13 +9213,11 @@ Helpdesk Team Anda
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

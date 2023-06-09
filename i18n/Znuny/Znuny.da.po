@@ -4434,7 +4434,7 @@ msgstr "Afinstaller pakke"
 msgid "Do you really want to uninstall this package?"
 msgstr "Er du sikker på, du ønsker at afinstallere denne pakke?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "eller"
 
@@ -7223,7 +7223,7 @@ msgid "My locked tickets"
 msgstr "Mine sager"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
-msgid "My Owned Tickets"
+msgid "My owned tickets"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
@@ -9970,7 +9970,7 @@ msgstr "Hr."
 msgid "Mrs."
 msgstr "Fru"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Adresse"
 
@@ -20730,11 +20730,11 @@ msgstr ""
 msgid "Remove selection"
 msgstr "Fjern markering"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Slet denne hændelses udløser"
 
@@ -20746,7 +20746,7 @@ msgstr "Dubliker hændelse"
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Denne hændelse er allerede tilknyttet jobbet, brug venligst en anden."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "En fejl skete under kommunikation."
 
@@ -21250,7 +21250,7 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "Vil du virkelig slette denne rapport?"
 

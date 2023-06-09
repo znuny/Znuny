@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2023-03-29 08:46+0000\n"
-"Last-Translator: Daniel Lisiecki <lisiecki.daniel@gmail.com>\n"
+"PO-Revision-Date: 2023-04-11 10:14+0000\n"
+"Last-Translator: Adam Król <adam.krol@hotmail.com>\n"
 "Language-Team: Polish <https://translations.znuny.org/projects/znuny/znuny/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -200,7 +200,7 @@ msgstr "Zapisz ACL"
 msgid "Save"
 msgstr "Zapisz"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "lub"
 
@@ -9753,7 +9753,7 @@ msgstr "Pan"
 msgid "Mrs."
 msgstr "Pani"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Adres"
 
@@ -15341,11 +15341,11 @@ msgstr "Usuń to pole dynamiczne"
 msgid "Remove selection"
 msgstr "Usuń zaznaczenie"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr "Czy na pewno chcesz usunąć to zadanie agenta automatycznego?"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Usuń ten trigger"
 
@@ -15357,7 +15357,7 @@ msgstr "Duplikuj zdarzenie"
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Jeśli zdarzenie jest już dodane do zadania wówczas prosze użyj innego."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "W trakcie komunikacji wystąpił błąd."
 
@@ -15869,7 +15869,7 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "Czy na pewno chcesz usunąć tą statystykę?"
 
@@ -24347,7 +24347,7 @@ msgid "(Files where only the permissions have been changed will not be displayed
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
-msgid "My Owned Tickets"
+msgid "My owned tickets"
 msgstr "Posiadane zgłoszenia"
 
 #. Perl Module: Kernel/Modules/AgentTicketProcess.pm
@@ -25808,7 +25808,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid " Filter assigned fields"
-msgstr ""
+msgstr " Filtruj przypisane pola"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
 msgid "Filter assigned Transition Actions"
@@ -25848,7 +25848,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Show or hide the content"
-msgstr ""
+msgstr " Pokaż lub ukryj treść"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Search inactive widgets"
@@ -25860,11 +25860,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Save changes"
-msgstr ""
+msgstr " Zapisz zmiany"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Save"
-msgstr ""
+msgstr " Zapisz"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Save changes"
@@ -25872,15 +25872,15 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Settings"
-msgstr ""
+msgstr " Ustawienia"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Refresh"
-msgstr ""
+msgstr " Odśwież"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Close this widget"
-msgstr ""
+msgstr " Zamknij widżet"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Hide"
@@ -25888,15 +25888,15 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Cancel"
-msgstr ""
+msgstr " Anuluj"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Filter available fields"
-msgstr ""
+msgstr " Filtruj dostępne pola"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Submit"
-msgstr ""
+msgstr " Akceptuj"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
 msgid "Close and Back"
@@ -25940,43 +25940,43 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Select one or more recipients from the customer user address book."
-msgstr ""
+msgstr " Wybierz jednego lub więcej odbiorców z książki adresowej użytkowników klientów"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Cc"
-msgstr ""
+msgstr " Dw"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Bcc"
-msgstr ""
+msgstr " Udw"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Send mail"
-msgstr ""
+msgstr " Wyślij wiadomość"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid " Example Template"
-msgstr ""
+msgstr " Przykładowy szablon"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid " To"
-msgstr ""
+msgstr " Do"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid " Select this customer as the main customer."
-msgstr ""
+msgstr " Wybierz tego klienta jako głównego klienta."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid " To customer user"
-msgstr ""
+msgstr " Do użytkownika klienta"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid " Get all"
-msgstr ""
+msgstr " Pobierz wszystko"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid " Message body"
-msgstr ""
+msgstr " Treść wiadomości"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
 msgid "Start typing to filter..."
@@ -25992,15 +25992,15 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Select all"
-msgstr ""
+msgstr " Zaznacz wszystko"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Open / Close ticket action menu"
-msgstr ""
+msgstr " Menu akcji otwartych / zamkniętych zgłoszeń"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Select this ticket"
-msgstr ""
+msgstr " Wybierz to zgłoszenie"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Service Time"
@@ -26008,7 +26008,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Move ticket to a different queue"
-msgstr ""
+msgstr " Przenieś zgłoszenie na inną kolejkę"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Clear all filters"
@@ -26020,7 +26020,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
 msgid " Missing channel"
-msgstr ""
+msgstr " Brakujący kanał"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
 msgid " Column Filters Form"
@@ -26028,11 +26028,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
 msgid " Loading"
-msgstr ""
+msgstr " Ładowanie"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid " Service level agreement"
-msgstr ""
+msgstr " Gwarantowany poziom świadczenia usług (SLA)"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid "Dymanic Info"
@@ -26040,7 +26040,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid " Subject"
-msgstr ""
+msgstr " Temat"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "Limitation"

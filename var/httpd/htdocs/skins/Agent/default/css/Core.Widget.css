@@ -458,7 +458,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border-radius: var(--border-radius-sm);
     }
 
-    .WidgetSimple .Content fieldset {
+    .WidgetSimple .Content fieldset:not(.Hidden) {
         display: flex;
         flex-direction: column;
         gap: var(--padding-lg);
@@ -1395,14 +1395,20 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     * @subsection      ProgressBar
     */
     #ProgressBar {
-        margin-left: auto;
-        margin-right: auto;
-        padding: 0;
-        overflow: hidden;
-        width: 950px;
+        display: flex;
+        flex-flow: row;
+        gap: var(--gap-md);
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        max-width: 1440px;
+        height: 55px;
+        border-radius: var(--border-radius-sm);
+        background: var(--white);
+        border: var(--border-width) var(--border-solid) var(--border-color);
     }
 
-    .ProgressBarElements1 li {
+    /*.ProgressBarElements1 li {
         width: 950px;
     }
 
@@ -1428,39 +1434,86 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .ProgressBarElements7 li {
         width: 135px;
-    }
+    }*/
 
     /* Because of the minimum screen resolution of 1024px more than 7 elements are not possible at the moment */
 
-    #ProgressBar li {
+    /*#ProgressBar li {
         float: left;
         list-style: none;
         border-style: solid;
         border-width: 1px 0px;
         border-color: #CCC;
         background-color: #EEE;
+    }*/
+
+    #ProgressBar li {
+        display: flex;
+        flex-flow: row;
+        gap: var(--gap-md);
+        align-items: inherit;
     }
 
-    #ProgressBar li > span {
-        display: block;
-        background-image: url(../img/ProgressBarArrow.png);
-        background-repeat: no-repeat;
-        background-position: center right;
+    #ProgressBar li.Highlighted:not(.Active) {
+        opacity: .5;
+    }
+
+    #ProgressBar li.Highlighted:not(.Active) strong .step-clear {
+        display: flex;
+    }
+
+    #ProgressBar li.Highlighted:not(.Active) strong .step-number {
+        display: none;
+    }
+
+    #ProgressBar li span + i {
+        color: var(--gray-medium);
+        font-size: var(--font-size-md);
+        padding-right: 2px;
     }
 
     #ProgressBar li a {
-        padding: 12px 7px 13px 12px;
-        color: #484848;
-        text-decoration: none;
-        font: 13px/18px Helvetica Neue, sans-serif;
-        display: block;
-        height: 42px;
-        border-style: solid;
-        border-width: 1px 0px;
-        border-color: #F4F4F4;
-        background: url(../img/ProgressBarIsolator.png) no-repeat left 6px;
-        cursor: default;
-        text-align: left;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        gap: var(--gap-sm);
+        color: var(--main-font-color);
+        font-size: var(--font-size-lg);
+        line-height: normal;
+        font-weight: var(--normal);
+        /*font-family: 'Inter';*/
+    }
+
+    @media only screen and (max-width: 768px) {
+        #ProgressBar li a {
+            font-size: 12px;
+        }
+    }
+
+    #ProgressBar li a strong {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+        border-radius: 100%;
+        color: var(--primary-color);
+        font-size: 16px;
+        font-weight: var(--normal);
+        border: var(--border-width) var(--border-solid) var(--primary-color);
+    }
+
+    #ProgressBar li a strong .step-clear {
+        display: none;
+        font-size: 12px;
+    }
+
+    #ProgressBar li.Active a strong,
+    #ProgressBar li.Highlighted:not(.Active) strong {
+        color: var(--white);
+        background: var(--primary-color);
     }
 
     #ACLForm .ScreenXL{
@@ -1486,7 +1539,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding: 12px 18px;
     }
 
-    #ProgressBar li span a span {
+    /*#ProgressBar li span a span {
         color: #ABABAB;
         font-size: 11px;
         line-height: 12px;
@@ -1511,9 +1564,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     #ProgressBar li:last-child a {
         border-right-width: 1px;
         padding-right: 14px;
-    }
+    }*/
 
-    #ProgressBar .Highlighted {
+    /*#ProgressBar .Highlighted {
         background-color: #fbb42c;
         border-top-color: #9b6937;
         border-bottom-color: #996634;
@@ -1533,13 +1586,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border-top-color: #ffeec8;
         border-bottom-color: #eaa350;
         cursor: pointer;
-    }
+    }*/
 
     #ProgressBar .Highlighted.NoLink a {
         cursor: default;
     }
 
-    #ProgressBar li:first-child.Highlighted a {
+    /*#ProgressBar li:first-child.Highlighted a {
         border-left-color: #f2bf5c;
     }
 
@@ -1561,7 +1614,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     #ProgressBar .Active + li {
         margin-left: -2px;
         padding-left: 1px;
-    }
+    }*/
 
     #ProgressBar .Active + .Active {
         z-index: 1;
@@ -2153,6 +2206,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         /*overflow: hidden;*/ /* overflow hidden will break the horizontal scroll */
     }
 
+    .WidgetSimple > .Content > h2,
+    .WidgetSimple > .Content > h1 {
+        padding: var(--padding-md);
+        padding-bottom: var(--padding-sm);
+    }
+
     .WidgetSimple > .Content.padding {
         padding: var(--padding-lg);
         display: flex;
@@ -2443,10 +2502,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .active-widgets-list li {
         display: flex;
         flex-flow: row;
-        justify-content: space-between;
         align-items: center;
+        gap: var(--gap-sm);
         padding: var(--padding-xs) var(--padding-md);
         transition: var(--main-transition);
+        padding-left: var(--padding-sm);
     }
 
     /*.SidebarColumn .WidgetSimple:first-child form */

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.310259375516273;
+    $Self->{Completeness}        = 0.310196661708808;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -692,6 +692,7 @@ sub Data {
         'Run' => '',
         'Delete this task' => '刪除這個任務',
         'Run this task' => '執行這個任務',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => '任務設置',
         'Job name' => '任務名稱',
         'The name you entered already exists.' => '您輸入的名稱已經存在。',
@@ -1484,7 +1485,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '卸載軟件包',
         'Do you really want to uninstall this package?' => '是否確認卸載該軟件包?',
-        'or' => '在',
         'Reinstall package' => '重新安裝軟件包',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '您確定要重新安裝該軟包嗎? 所有該模塊的手工設置將丢失.',
@@ -2361,7 +2361,6 @@ sub Data {
         'in' => '之内',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2373,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '更多',
+        'No Data Available.' => '',
         'Available Columns' => '可選擇的字段',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '顯示的字段(通過拖拽可調整順序)',
@@ -2430,7 +2430,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => '我鎖定的工單',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => '我訂閱的工單',
         'My responsibilities' => '我負責的工單',
         'Tickets in My Queues' => '我隊列中的工單',
@@ -2528,8 +2528,8 @@ sub Data {
         'Edit statistic "%s".' => '',
         'Export statistic "%s"' => '',
         'Export statistic %s' => '',
-        'Delete statistic "%s"' => '',
         'Delete statistic %s' => '',
+        'Do you really want to delete this statistic?' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -3015,12 +3015,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript沒有啟用',
-        'Step %s' => '第 %s 步',
         'License' => '許可証',
         'Database Settings' => '數據庫設置',
         'General Specifications and Mail Settings' => '一般設定和郵件配置',
         'Finish' => '完成',
         'Welcome to %s' => '',
+        'Address' => '地址',
         'Phone' => '電話',
         'Web site' => '網址',
         'Community' => '',
@@ -3051,6 +3051,7 @@ sub Data {
         'Password for inbound mail.' => '接收郵件密碼',
         'Result of mail configuration check' => '郵件服務器配置檢查結果',
         'Check mail configuration' => '檢查郵件配置',
+        'or' => '在',
         'Skip this step' => '跳過這一步',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3439,7 +3440,6 @@ sub Data {
         'Valid' => '有效',
         'Mr.' => '先生',
         'Mrs.' => '女士',
-        'Address' => '地址',
         'View system log messages.' => '查看系統日誌信息',
         'Edit the system configuration settings.' => '編輯系統配置。',
         'Update and extend your system with software packages.' => '更新或安裝系統的軟件包或模塊.',
@@ -7995,14 +7995,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => '刪除這個事件觸發器',
+        'An error occurred during communication.' => '在通訊時發生一個錯誤。',
         'Duplicate event.' => '重複的事件',
         'This event is already attached to the job, Please use a different one.' =>
             '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => '在通訊時發生一個錯誤。',
         'Request Details' => '請求詳細信息',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => '顯示或隱藏該内容.',
@@ -8015,6 +8013,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => '刪除這個調用程序',
+        'Delete this Event Trigger' => '刪除這個事件觸發器',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8235,9 +8234,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
@@ -9188,6 +9184,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9207,13 +9204,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
