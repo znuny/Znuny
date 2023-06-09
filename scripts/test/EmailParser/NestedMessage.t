@@ -39,7 +39,7 @@ $Self->Is(
 
 $Self->Is(
     $Attachments[2]->{Filename} || '',
-    '_Presse-Greenpeace__Morgen_wird_Greenpeace-Einspruch_gegenEmbryonen-Patent_verhandelt_-_NeueDokumentation_ueber_Patente_auf_Leben.eml',
+    '_Presse-Greenpeace_ Morgen wird Greenpeace-Einspruch gegenEmbryonen-Patent verhandelt - NeueDokumentation ueber Patente auf Leben_962fb2b3711f7f233945657da34d17da.eml',
     "Nested message filename",
 );
 

@@ -51,7 +51,6 @@ sub Run {
     $LayoutObject->ChallengeTokenCheck();
 
     if ( $Self->{Subaction} eq 'Upload' ) {
-
         my %UploadStuff = $ParamObject->GetUploadAll(
             Param => 'Files',
         );
@@ -94,7 +93,7 @@ sub Run {
     }
     elsif ( $Self->{Subaction} eq 'Delete' ) {
 
-        my $Return;
+        my $Return           = {};
         my $AttachmentFileID = $ParamObject->GetParam( Param => 'FileID' ) || '';
 
         if ( !$AttachmentFileID ) {

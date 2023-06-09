@@ -718,7 +718,6 @@ sub PartsAttachments {
         # cleanup filename
         $PartData{Filename} = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
             Filename => $PartData{Filename},
-            Type     => 'Local',
         );
 
         $PartData{ContentDisposition} = $Part->head()->get('Content-Disposition');
@@ -750,27 +749,24 @@ sub PartsAttachments {
         my ($SubjectString) = $Part->as_string() =~ m{Subject: *([^\n]*(\n[ \t][^\n]*)*)}m;
         my $Subject = '';
         if ($SubjectString) {
-            $Subject = $Self->_DecodeString( String => $SubjectString ) . '.eml';
+            $Subject = $Self->_DecodeString( String => $SubjectString );
         }
 
         if ($Subject) {
 
-            # cleanup filename
-            $Subject = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
-                Filename => $Subject,
-                Type     => 'Local',
+            # Convert message subject to filename if subject is not empty.
+            $PartData{Filename} = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
+                Filename => $Subject . '.eml',
             );
         }
-
-        if ( $Subject eq '' ) {
+        else {
             $Self->{NoFilenamePartCounter}++;
-            $Subject = "Untitled-$Self->{NoFilenamePartCounter}" . '.eml';
+            $PartData{Filename} = 'file-' . $Self->{NoFilenamePartCounter} . '.eml';
         }
-        $PartData{Filename} = $Subject;
     }
     else {
         $Self->{NoFilenamePartCounter}++;
-        $PartData{Filename} = "file-$Self->{NoFilenamePartCounter}";
+        $PartData{Filename} = 'file-' . $Self->{NoFilenamePartCounter};
     }
 
     # parse/get Content-Id, Content-Location and Disposition for html email attachments

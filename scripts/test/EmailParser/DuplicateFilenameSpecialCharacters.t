@@ -37,13 +37,13 @@ $Self->Is(
 
 $Self->Is(
     $Attachments[1]->{Filename} || '',
-    '_Terminology_Guide_.pdf',
+    '_Terminology_Guide_3d444c64edc7f4eeaa611215329c7b08.pdf',
     "First attachment",
 );
 
 $Self->Is(
     $Attachments[2]->{Filename} || '',
-    '_Terminology_Guide_.pdf',
+    '_Terminology_Guide_3d444c64edc7f4eeaa611215329c7b08.pdf',
     "First attachment",
 );
 

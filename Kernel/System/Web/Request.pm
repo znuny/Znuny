@@ -333,7 +333,7 @@ gets file upload data.
 Returns:
 
     my %File = (
-        Filename    => 'abc.txt',
+        Filename    => 'abc_123.txt',
         ContentType => 'text/plain',
         Content     => 'Some text',
     );
@@ -348,21 +348,7 @@ sub GetUploadAll {
     return if !$Upload;
 
     # get real file name
-    my $UploadFilenameOrig = $Self->GetParam( Param => $Param{Param} ) || 'unknown';
-
-    my $NewFileName = "$UploadFilenameOrig";    # use "" to get filename of anony. object
-    $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$NewFileName );
-
-    # replace all devices like c: or d: and dirs for IE!
-    $NewFileName =~ s/.:\\(.*)/$1/g;
-    $NewFileName =~ s/.*\\(.+?)/$1/g;
-
-    # Remove leading and trailing white space from filename.
-    $Kernel::OM->Get('Kernel::System::CheckItem')->StringClean(
-        StringRef => \$NewFileName,
-        TrimLeft  => 1,
-        TrimRight => 1,
-    );
+    my $UploadFilename = $Self->GetParam( Param => $Param{Param} ) || 'unknown';
 
     # return a string
     my $Content = '';
@@ -372,12 +358,15 @@ sub GetUploadAll {
     close $Upload;
 
     my $ContentType = $Self->_GetUploadInfo(
-        Filename => $UploadFilenameOrig,
+        Filename => $UploadFilename,
         Header   => 'Content-Type',
     );
 
+    $UploadFilename = "${UploadFilename}";
+    $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$UploadFilename );
+
     return (
-        Filename    => $NewFileName,
+        Filename    => $UploadFilename,
         Content     => $Content,
         ContentType => $ContentType,
     );

@@ -314,10 +314,9 @@ sub ArticleWriteAttachment {
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     # Perform FilenameCleanup here already to check for
-    #   conflicting existing attachment files correctly
+    # conflicting existing attachment files correctly
     $Param{Filename} = $MainObject->FilenameCleanUp(
         Filename => $Param{Filename},
-        Type     => 'Local',
     );
 
     my $NewFileName = $Param{Filename};

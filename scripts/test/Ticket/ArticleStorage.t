@@ -221,11 +221,7 @@ for my $Backend (qw(DB FS)) {
         ArticleID => $ArticleID,
     );
 
-    my $TargetFilename = '[Terminology Guide äöß]';
-
-    if ( $Backend eq 'FS' ) {
-        $TargetFilename = '_Terminology_Guide_äöß_';
-    }
+    my $TargetFilename = '_Terminology Guide äöß_a44ae7b443a1504337f5f61c8bce490b';
 
     $Self->Is(
         scalar keys %AttachmentIndex,

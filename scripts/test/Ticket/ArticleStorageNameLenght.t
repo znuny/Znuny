@@ -251,7 +251,6 @@ for my $Test (@Tests) {
         # Get attachment file name.
         my $TargetFileName = $MainObject->FilenameCleanUp(
             Filename => $FileName,
-            Type     => 'Local',
         );
 
         $Self->Is(

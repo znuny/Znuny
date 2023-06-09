@@ -1819,7 +1819,6 @@ sub StatsResultCacheGet {
 =head2 StringAndTimestamp2Filename()
 
 builds a filename with a string and a timestamp.
-(space will be replaced with _ and - e.g. Title-of-File_2006-12-31_11-59)
 
     my $Filename = $StatsObject->StringAndTimestamp2Filename(
         String   => 'Title',
@@ -1839,27 +1838,21 @@ sub StringAndTimestamp2Filename {
         return;
     }
 
+    my $Filename = $Param{String} . '_';
+
     my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
     if ( defined $Param{TimeZone} ) {
         $DateTimeObject->ToTimeZone( TimeZone => $Param{TimeZone} );
     }
-
-    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
-    $Param{String} = $MainObject->FilenameCleanUp(
-        Filename => $Param{String},
-        Type     => 'Attachment',
-    );
-
-    my $Filename = $Param{String} . '_';
-    $Filename .= $DateTimeObject->Format( Format => '%Y-%m-%d_%H-%M' );
+    $Filename .= $DateTimeObject->Format( Format => '%Y%m%d_%H%M' );
 
     if ( defined $Param{TimeZone} ) {
-        my $TimeZone = $MainObject->FilenameCleanUp(
-            Filename => $Param{TimeZone},
-            Type     => 'Attachment',
-        );
-        $Filename .= '_TimeZone_' . $TimeZone;
+        $Filename .= '_' . $Param{TimeZone};
     }
+
+    $Filename = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
+        Filename => $Filename,
+    );
 
     return $Filename;
 }

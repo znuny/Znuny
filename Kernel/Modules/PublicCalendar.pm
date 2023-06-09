@@ -109,7 +109,6 @@ sub Run {
     # prepare the file name
     my $Filename = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
         Filename => "$Calendar{CalendarName}.ics",
-        Type     => 'Attachment',
     );
 
     # send iCal response
