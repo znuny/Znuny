@@ -27,6 +27,7 @@ sub match {
         'local error in processing',
         'loop was found in the mail exchanger',
         'loops back to myself',
+        'queue file write error',
         'mail system configuration error',
         'remote server is misconfigured',
         'server configuration error',
@@ -100,7 +101,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2019,2021 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2019,2021,2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 
