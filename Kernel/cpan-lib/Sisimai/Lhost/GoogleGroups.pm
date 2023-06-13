@@ -19,7 +19,7 @@ sub make {
     return undef unless rindex($mhead->{'from'}, '<mailer-daemon@googlemail.com>') > -1;
     return undef unless index($mhead->{'subject'}, 'Delivery Status Notification') > -1;
     return undef unless exists $mhead->{'x-failed-recipients'};
-    return undef unless index($mhead->{'x-failed-recipients'}, '@googlegroups.com') > -1;
+    return undef unless exists $mhead->{'x-google-smtp-source'};
 
     # Hello kijitora@libsisimai.org,
     #
@@ -63,7 +63,6 @@ sub make {
 
     for my $e ( split(',', $mhead->{'x-failed-recipients'}) ) {
         # X-Failed-Recipients: neko@example.jp, nyaan@example.org, ...
-        next unless index($e, '@googlegroups.com') > -1;
         next unless Sisimai::RFC5322->is_emailaddress($e);
 
         if( $v->{'recipient'} ) {
@@ -116,7 +115,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2020 azumakuniyuki, All rights reserved.
+Copyright (C) 2020,2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 
