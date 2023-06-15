@@ -34,13 +34,11 @@ sub Run {
 
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
-    # TODO: No database upgrade tasks as of now
     my @Tasks = (
-
-        #         {
-        #             Message => 'Create/update table smime_keys',
-        #             Module  => 'SMIMEKeys',
-        #         },
+        {
+            Message => 'Update table smime_keys',
+            Module  => 'SMIME',
+        },
     );
 
     return 1   if !@Tasks;

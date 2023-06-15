@@ -1,3 +1,6 @@
+# 6.5.4 2023-??-??
+ - 2023-06-02 S/MIME: Increased size of column 'email_address' of table 'smime_keys'.
+
 # 6.5.3 2023-06-14
  - 2023-05-31 Added removal of protocol-relative URLs to Kernel::System::HTMLUtils::Safety. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
  - 2023-05-31 Added security relevant check for content type of article and attachments to generic interface operations TicketCreate and TicketUpdate. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
