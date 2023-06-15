@@ -1,3 +1,6 @@
+# 7.0.7 2023-??-??
+ - 2023-06-02 S/MIME: Increased size of column 'email_address' of table 'smime_keys'.
+
 # 7.0.6 2023-06-14
  - 2023-06-07 Fixed ticket priority and state color. [#443](https://github.com/znuny/Znuny/issues/443)
  - 2023-05-31 Added removal of protocol-relative URLs to Kernel::System::HTMLUtils::Safety. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
@@ -60,6 +63,9 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.4 2023-??-??
+ - 2023-06-02 S/MIME: Increased size of column 'email_address' of table 'smime_keys'.
 
 # 6.5.3 2023-06-14
  - 2023-05-31 Added removal of protocol-relative URLs to Kernel::System::HTMLUtils::Safety. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.

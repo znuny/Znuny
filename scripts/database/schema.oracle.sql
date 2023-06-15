@@ -5794,7 +5794,7 @@ CREATE TABLE smime_keys (
     key_hash VARCHAR2 (8) NOT NULL,
     key_type VARCHAR2 (255) NOT NULL,
     file_name VARCHAR2 (255) NOT NULL,
-    email_address VARCHAR2 (255) NULL,
+    email_address CLOB NULL,
     expiration_date DATE NULL,
     fingerprint VARCHAR2 (59) NULL,
     subject CLOB NULL,
