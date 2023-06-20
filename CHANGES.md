@@ -1,4 +1,7 @@
 # 7.0.7 2023-??-??
+ - 2023-06-20 Added ExternalFQDN parameter for better security. Thanks to Paweł Bogusławski (@pboguslawski). [PR#73](https://github.com/znuny/Znuny/pull/73)
+ - 2023-06-20 Changed AgentTicketProcess to always fill rich text editor configs. Thanks to Samuel Diniz Casimiro (@samueldc). [PR#266](https://github.com/znuny/Znuny/pull/266)
+ - 2023-06-20 Added Translate() to CustomerTicketProcess PageTitle. Thanks to Renée Bäcker (@reneeb). [PR#446](https://github.com/znuny/Znuny/pull/446)
  - 2023-06-02 S/MIME: Increased size of column 'email_address' of table 'smime_keys'.
 
 # 7.0.6 2023-06-14

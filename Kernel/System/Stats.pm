@@ -666,7 +666,7 @@ fetches all statistics that the current user may see
     {
         6 => {
             Title => "Title of stat",
-            ...
+            # ...
         }
     }
 
@@ -1111,7 +1111,7 @@ get behaviours that a statistic supports
 
     {
         ProvidesDashboardWidget => 1,
-        ...
+        # ...
     }
 
 =cut

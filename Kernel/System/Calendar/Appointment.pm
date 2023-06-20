@@ -496,7 +496,7 @@ Result => 'HASH':
             NotificationCustomDateTime            => '2016-01-02 16:00:00',
             TicketAppointmentRuleID               => '9bb20ea035e7a9930652a9d82d00c725',    # for ticket appointments only!
         },
-        ...
+        # ...
     ];
 
 Result => 'ARRAY':
