@@ -1749,11 +1749,12 @@ sub GetUniqueID {
     $StartTimeStrg =~ s/[-:]//g;
     $StartTimeStrg =~ s/\s/T/;
 
-    # get system FQDN
-    my $FQDN = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
+    # get system ExternalFQDN
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
 
     # return UniqueID
-    return "$StartTimeStrg-$Hash\@$FQDN";
+    return "$StartTimeStrg-$Hash\@$ExternalFQDN";
 }
 
 =head2 AppointmentUpcomingGet()

@@ -112,9 +112,10 @@ sub FormIDAddFile {
     if ( !$ContentID && lc $Disposition eq 'inline' ) {
 
         my $Random = rand 999999;
-        my $FQDN   = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
 
-        $ContentID = "$Disposition$Random.$Param{FormID}\@$FQDN";
+        $ContentID = "$Disposition$Random.$Param{FormID}\@$ExternalFQDN";
     }
 
     # create cache subdirectory if not exist
