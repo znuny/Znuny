@@ -362,7 +362,7 @@ sub make {
             |smtp[ ]server[ ][<].+[>][ ]rejected[ ]recipient[ ]
             |the[ ]following[ ]recipients[ ]returned[ ]permanent[ ]errors:[ ]
             |the[ ]following[ ]message[ ]to[ ]
-            |unknown[ ]User:[ ]
+            |unknown[ ]user:[ ]
             |undeliverable[ ]to[ ]
             |undeliverable[ ]address:[ ]*
             |you[ ]sent[ ]mail[ ]to[ ]
@@ -485,7 +485,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2020 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2020,2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

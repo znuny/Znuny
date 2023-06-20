@@ -127,6 +127,10 @@ sub get {
         # Message refuse, verification DMARC en echec LPN007_517
         '517' => 'policyviolation',
 
+        # 554 5.7.1 Client host rejected
+        # LPN000_630
+        '630' => 'policyviolation',
+
         # 421 mwinf5c77 ME Service refuse. Veuillez essayer plus tard.
         # Service refused, please try later. OFR_999 [999]
         '999' => 'blocked',
@@ -176,7 +180,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2017-2020 azumakuniyuki, All rights reserved.
+Copyright (C) 2017-2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

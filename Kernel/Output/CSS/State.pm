@@ -10,6 +10,7 @@ package Kernel::Output::CSS::State;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent 'Kernel::Output::CSS::Base';
 
@@ -56,7 +57,7 @@ sub CreateCSS {
         next STATEID if !IsStringWithData( $State{Color} );
 
         $Data{ '.StateID-' . $StateID } = {
-            background => $State{Color},
+            background => $State{Color} . ' !important',
         };
     }
 

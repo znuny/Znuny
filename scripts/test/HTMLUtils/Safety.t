@@ -721,6 +721,18 @@ EOF
         },
         Name => 'Safety - external image with / separator'
     },
+    {
+        Input => <<EOF,
+<img src="//example.com/image.png"/>
+EOF
+        Result => {
+            Output => <<EOF,
+
+EOF
+            Replace => 1,
+        },
+        Name => 'Safety - external image with protocol-relative URL'
+    },
 );
 
 for my $Test (@Tests) {
@@ -895,6 +907,17 @@ You should be able to continue reading these lessons, however.
     {
         Name  => 'Safety - malicious CSS content - remote background image, forbidden',
         Input => '<a href="localhost" style="background-image:url(http://localhost:8000/css-background)">localhost</a>',
+        Config => {
+            NoExtSrcLoad => 1,
+        },
+        Result => {
+            Output  => '<a href="localhost">localhost</a>',
+            Replace => 1,
+        },
+    },
+    {
+        Name   => 'Safety - malicious CSS content - remote background image with protocol-relative URL, forbidden',
+        Input  => '<a href="localhost" style="background-image:url(//localhost:8000/css-background)">localhost</a>',
         Config => {
             NoExtSrcLoad => 1,
         },

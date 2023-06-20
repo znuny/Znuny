@@ -16,6 +16,7 @@ sub match {
 
     # Destination mail server does not accept any message
     state $index = [
+        'does not accept mail (nullmx)',
         'host/domain does not accept mail', # iCloud
         'host does not accept mail',        # Sendmail
         'name server: .: host not found',   # Sendmail
@@ -40,7 +41,7 @@ sub true {
 
     # SMTP Reply Code is 521, 554 or 556
     return 1 if $argvs->replycode =~ /\A(?:521|554|556)\z/;
-    return 0 unless $argvs->smtpcommand eq 'MAIL';
+    return 0 if $argvs->smtpcommand ne 'MAIL';
     return 1 if __PACKAGE__->match(lc $argvs->diagnosticcode);
     return 0;
 }
@@ -94,7 +95,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2016,2018,2020,2021 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2016,2018,2020-2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

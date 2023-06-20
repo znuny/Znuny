@@ -1240,7 +1240,7 @@ sub Safety {
 
                 if (
                     ($Param{NoIntSrcLoad} && $Content =~ m{url\(})
-                    || ($Param{NoExtSrcLoad} && $Content =~ m/(http|ftp|https):\//i)) {
+                    || ($Param{NoExtSrcLoad} && $Content =~ m/((http|ftp|https):|\/\/)/i)) {
                     $Replaced = 1;
                     '';
                 }
@@ -1256,7 +1256,7 @@ sub Safety {
                 }
                 {
                     my $URL = $3;
-                    if ($Param{NoIntSrcLoad} || ($Param{NoExtSrcLoad} && $URL =~ /(http|ftp|https):\//i)) {
+                    if ($Param{NoIntSrcLoad} || ($Param{NoExtSrcLoad} && $URL =~ /((http|ftp|https):|\/\/)/i)) {
                         $Replaced = 1;
                         '';
                     }

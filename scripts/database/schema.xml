@@ -2768,7 +2768,7 @@
     <Column Name="key_hash" Required="true" Size="8" Type="VARCHAR" />
     <Column Name="key_type" Required="true" Size="255" Type="VARCHAR" />
     <Column Name="file_name" Required="true" Size="255" Type="VARCHAR" />
-    <Column Name="email_address" Required="false" Size="255" Type="VARCHAR" />
+    <Column Name="email_address" Required="false" Size="100000" Type="VARCHAR" />
     <Column Name="expiration_date" Required="false" Type="DATE" />
     <Column Name="fingerprint" Required="false" Size="59" Type="VARCHAR" />
     <Column Name="subject" Required="false" Size="100000" Type="VARCHAR" />
