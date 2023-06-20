@@ -111,7 +111,7 @@ sub FormIDAddFile {
     my $Disposition = $Param{Disposition} || '';
     if ( !$ContentID && lc $Disposition eq 'inline' ) {
 
-        my $Random = rand 999999;
+        my $Random       = rand 999999;
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
 

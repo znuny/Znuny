@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.193521731945133;
+    $Self->{Completeness}        = 0.193457789525855;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2938,6 +2938,9 @@ sub Data {
         'Please click the button below to create your first ticket.' => 'Prašome paspausti žemiau esantį mytuką, kad sukurtumėte savo pirmąjį trikties pranešimą.',
         'Create your first ticket' => 'Sukurti pirmąjį trikties pranešimą',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profilis',
         'e. g. 10*5155 or 105658*' => 'pvz. 10*5155 arba 105658*',
@@ -5532,6 +5535,8 @@ sub Data {
         'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of Znuny).' =>
             '',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
+            '',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
             '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',

@@ -280,11 +280,11 @@ sub ArticleSend {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # create article
-    my $Time      = $DateTimeObject->ToEpoch();
-    my $Random    = rand 999999;
-    my $ExternalFQDN   = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
-    my $MessageID = "<$Time.$Random\@$ExternalFQDN>";
-    my $ArticleID = $Self->ArticleCreate(
+    my $Time         = $DateTimeObject->ToEpoch();
+    my $Random       = rand 999999;
+    my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
+    my $MessageID    = "<$Time.$Random\@$ExternalFQDN>";
+    my $ArticleID    = $Self->ArticleCreate(
         %Param,
         MessageID => $MessageID,
     );
@@ -375,7 +375,7 @@ sub ArticleBounce {
     # create message id
     my $Time         = $DateTimeObject->ToEpoch();
     my $Random       = rand 999999;
-    my $ExternalFQDN      = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
+    my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
     my $NewMessageID = "<$Time.$Random.0\@$ExternalFQDN>";
     my $Email        = $Self->ArticlePlain( ArticleID => $Param{ArticleID} );
 
