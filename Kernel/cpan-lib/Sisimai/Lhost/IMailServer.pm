@@ -35,7 +35,7 @@ sub make {
         'hostunknown'   => qr/Unknown host/,
         'userunknown'   => qr/\A(?:Unknown user|Invalid final delivery userid)/,
         'mailboxfull'   => qr/\AUser mailbox exceeds allowed size/,
-        'securityerror' => qr/\ARequested action not taken: virus detected/,
+        'virusdetected' => qr/\ARequested action not taken: virus detected/,
         'undefined'     => qr/\Aundeliverable to/,
         'expired'       => qr/\ADelivery failed \d+ attempts/,
     };
@@ -148,7 +148,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2021 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

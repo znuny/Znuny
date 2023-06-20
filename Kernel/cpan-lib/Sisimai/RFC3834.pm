@@ -25,8 +25,6 @@ sub make {
     state $autoreply1 = {
         # http://www.iana.org/assignments/auto-submitted-keywords/auto-submitted-keywords.xhtml
         'auto-submitted' => qr/\Aauto-(?:generated|replied|notified)/,
-        # https://msdn.microsoft.com/en-us/library/ee219609(v=exchg.80).aspx
-        'x-auto-response-suppress' => qr/(?:oof|autoreply)/,
         'x-apple-action' => qr/\Avacation\z/,
         'precedence' => qr/\Aauto_reply\z/,
         'subject' => qr/\A(?>
@@ -178,7 +176,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2015-2020 azumakuniyuki, All rights reserved.
+Copyright (C) 2015-2020,2023 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

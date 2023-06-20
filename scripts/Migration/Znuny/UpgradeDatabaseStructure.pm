@@ -52,6 +52,10 @@ sub Run {
             Message => 'Add new column color to ticket_state table and also add a default value for initial states.',
             Module  => 'StateColor',
         },
+        {
+            Message => 'Update table smime_keys',
+            Module  => 'SMIME',
+        },
     );
 
     return 1   if !@Tasks;

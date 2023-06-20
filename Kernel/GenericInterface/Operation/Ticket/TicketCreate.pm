@@ -1026,6 +1026,9 @@ sub _CheckArticle {
     # check Article->ContentType
     if ( $Article->{ContentType} ) {
 
+        # Internal issue #595: Remove line breaks from content type.
+        $Article->{ContentType} =~ s{\R}{ }g;
+
         $Article->{ContentType} = lc $Article->{ContentType};
 
         # check Charset part
@@ -1264,6 +1267,9 @@ sub _CheckAttachment {
 
     # check Article->ContentType
     if ( $Attachment->{ContentType} ) {
+
+        # Internal issue #595: Remove line breaks from content type.
+        $Attachment->{ContentType} =~ s{\R}{ }g;
 
         $Attachment->{ContentType} = lc $Attachment->{ContentType};
 
