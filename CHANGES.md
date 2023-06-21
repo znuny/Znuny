@@ -1,4 +1,5 @@
 # 7.0.7 2023-??-??
+ - 2023-06-21 GUI-Redesign changes - CSS, TT and JS.
  - 2023-06-20 Added ExternalFQDN parameter for better security. Thanks to Paweł Bogusławski (@pboguslawski). [PR#73](https://github.com/znuny/Znuny/pull/73)
  - 2023-06-20 Changed AgentTicketProcess to always fill rich text editor configs. Thanks to Samuel Diniz Casimiro (@samueldc). [PR#266](https://github.com/znuny/Znuny/pull/266)
  - 2023-06-20 Added Translate() to CustomerTicketProcess PageTitle. Thanks to Renée Bäcker (@reneeb). [PR#446](https://github.com/znuny/Znuny/pull/446)
@@ -6,7 +7,6 @@
 
 # 7.0.6 2023-06-14
  - 2023-06-07 Fixed ticket priority and state color. [#443](https://github.com/znuny/Znuny/issues/443)
- - 2023-06-05 GUI-Redesign changes - CSS, TT and JS.
  - 2023-05-31 Added removal of protocol-relative URLs to Kernel::System::HTMLUtils::Safety. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
  - 2023-05-31 Added security relevant check for content type of article and attachments to generic interface operations TicketCreate and TicketUpdate. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
  - 2023-05-31 Process management: Added missing scope filter for transition actions.
