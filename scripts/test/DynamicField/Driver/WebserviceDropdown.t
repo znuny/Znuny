@@ -149,7 +149,7 @@ DynamicFieldWebserviceDriverDropdown:
         'Field' =>
             '<select  data-dynamic-field-name="DynamicFieldWebserviceDriverDropdown" data-dynamic-field-type="WebserviceDropdown" data-selected-value-field-name="DynamicField_DynamicFieldWebserviceDriverDropdown" data-autocomplete-field-name="DynamicField_DynamicFieldWebserviceDriverDropdown_Search" data-autocomplete-min-length="3" data-query-delay="1" data-default-search-term="" data-ticket-id="'
             . $TicketID
-            . '" class="DynamicFieldDropdown Modernize W50pc" id="DynamicField_DynamicFieldWebserviceDriverDropdown" name="DynamicField_DynamicFieldWebserviceDriverDropdown">
+            . '" class="DynamicFieldText Modernize W50pc" id="DynamicField_DynamicFieldWebserviceDriverDropdown" name="DynamicField_DynamicFieldWebserviceDriverDropdown">
   <option value="">-</option>
   <option value=" "></option>
 </select>'
