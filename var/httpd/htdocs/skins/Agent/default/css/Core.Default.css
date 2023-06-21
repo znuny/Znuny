@@ -840,6 +840,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        line-height: normal;
     }
 
     .BreadCrumb li:first-child {
