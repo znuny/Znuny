@@ -1,4 +1,6 @@
+
 # 6.5.4 2023-??-??
+ - 2023-06-21 Extend TicketArticleCreate transition action for a possibility to set a dynamic field of object type article and ticket.
  - 2023-06-19 Fixed dynamic field type 'Webservice' admin dialog test field being read-only and not usable.
  - 2023-06-02 S/MIME: Increased size of column 'email_address' of table 'smime_keys'.
 
