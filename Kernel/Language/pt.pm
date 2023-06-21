@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.295721130018173;
+    $Self->{Completeness}        = 0.296547166694201;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2368,9 +2368,9 @@ sub Data {
         'Save changes' => '',
         ' Settings' => '',
         ' Refresh' => '',
-        ' Close this widget' => '',
+        ' Close this widget' => ' Fechar este widget',
         'Hide' => '',
-        ' Cancel' => '',
+        ' Cancel' => ' Cancelar',
         'more' => 'mais',
         'No Data Available.' => '',
         'Available Columns' => 'Colunas disponíveis',
@@ -2614,10 +2614,10 @@ sub Data {
         'Please remove this entry and enter a new one with the correct value.' =>
             '',
         'This address already exists on the address list.' => '',
-        ' Cc' => '',
+        ' Cc' => ' Cc',
         'Remove Cc' => 'Remover CC',
         'Bcc' => 'Bcc',
-        ' Bcc' => '',
+        ' Bcc' => ' Cco',
         'Remove Bcc' => 'Remover BCC',
         ' Send mail' => '',
 
@@ -2724,7 +2724,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => 'Repor',
-        ' Column Filters Form' => '',
+        ' Column Filters Form' => ' Formulário de filtros de coluna',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => 'Dividir para novo ticket telefónico',
