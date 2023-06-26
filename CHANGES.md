@@ -1,4 +1,5 @@
 # 7.0.7 2023-??-??
+ - 2023-06-21 Extend TicketArticleCreate transition action for a possibility to set a dynamic field of object type article and ticket.
  - 2023-06-21 GUI-Redesign changes - CSS, TT and JS.
  - 2023-06-20 Added ExternalFQDN parameter for better security. Thanks to Paweł Bogusławski (@pboguslawski). [PR#73](https://github.com/znuny/Znuny/pull/73)
  - 2023-06-20 Changed AgentTicketProcess to always fill rich text editor configs. Thanks to Samuel Diniz Casimiro (@samueldc). [PR#266](https://github.com/znuny/Znuny/pull/266)
