@@ -15287,22 +15287,6 @@ msgid "The logo shown in the header of the agent interface for the skin \"defaul
 msgstr "O logo mostrado na cabeceira da interface de axente para a aparencia \"defecto\". Vexa \"LogoAxente\" para unha maior descripción."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
-msgstr "O logo mostrado na cabeceira da interface de axente para a aparencia \"slim\". Vexa \"LogoAxente\" para unha maior descripción."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr "O logo mostrado na cabeceira da interface de axente para a aparencia \"ivory\". Vexa \"LogoAxente\" para unha maior descripción."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr "O logo mostrado na cabeceira da interface de axente para a aparencia \"ivory-slim\". Vexa \"LogoAxente\" para unha maior descripción."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"High Contrast\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server."
 msgstr ""
 

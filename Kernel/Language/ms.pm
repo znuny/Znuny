@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.541129831516353;
+    $Self->{Completeness}        = 0.541301109087899;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5568,14 +5568,6 @@ sub Data {
             'Logo ditunjukkan dalam header paparan ejen. URL kepada imej boleh relatif kepada direktori kulit imej, atau URL penuh ke server web jauh.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Logo ditunjukkan di header antara muka ejen bagi kulit "default". Lihat "LogoAgen" untuk keterangan lanjut.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'Logo ditunjukkan di header antara muka ejen bagi kulit "slim". Lihat "LogoAgen" untuk keterangan lanjut.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'Logo ditunjukkan di header antara muka ejen bagi kulit "ivory". Lihat "LogoAgen" untuk keterangan lanjut.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'Logo ditunjukkan di header antara muka ejen bagi kulit "ivory-slim". Lihat "LogoAgen" untuk keterangan lanjut.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Mentakrifkan laluan asas URL dari ikon, CSS dan Java Script.',
@@ -6112,10 +6104,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Menentukan susunan di mana nama pertama dan nama akhir agen akan ditunjukkan.',
         'Default skin for the agent interface.' => 'Kulit default untuk antaramuka agen.',
-        'Default skin for the agent interface (slim version).' => 'Kulit default untuk antaramuka agen (versi kurus).',
-        'Balanced white skin by Felix Niklas.' => 'Kulit puih seimbang oleh Felix Niklas.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Kulit puih seimbang oleh Felix Niklas (versi kurus).',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Kulit InternalName ejen yang patut digunakan dalam paparan ejen. Sila semak kulit yang tersedia dalam Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8389,8 +8377,6 @@ Kumpulan MejaBantuan Anda
         ' 2 minutes' => ' 2 Minit',
         ' 5 minutes' => ' 5 Minit',
         ' 7 minutes' => ' 7 Minit',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(LogmasukPengguna) Namapertama Namaakhir',
         '(UserLogin) Lastname Firstname' => '(LogmasukPengguna) Namaakhir Namapertama',
@@ -8605,7 +8591,6 @@ Kumpulan MejaBantuan Anda
         'Danish' => 'Denmark',
         'Dashboard overview.' => '',
         'Date / Time' => 'Tarikh / Masa',
-        'Default (Slim)' => '',
         'Default agent name' => '',
         'Default value for NameX' => 'Nilai asal untuk NameX',
         'Define the queue comment 2.' => 'Tentukan barisan komen 2.',
@@ -8708,7 +8693,6 @@ Kumpulan MejaBantuan Anda
         'Graph: Stacked Area Chart' => '',
         'Greek' => 'Yunani',
         'Hebrew' => 'Hebrew',
-        'High Contrast' => '',
         'Hindi' => 'Hindi',
         'Hungarian' => 'Hungari',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8729,8 +8713,6 @@ Kumpulan MejaBantuan Anda
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Itali',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => 'Jepun',
         'Korean' => '',
         'Language' => 'Bahasa',

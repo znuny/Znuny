@@ -15287,22 +15287,6 @@ msgid "The logo shown in the header of the agent interface for the skin \"defaul
 msgstr "آرم نشان داده شده در هدر از رابط عامل برای پوست \\\\ \"به طور پیش فرض \". \\\\ \"AgentLogo \" برای توضیحات بیشتر را مشاهده کنید."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
-msgstr "آرم نشان داده شده در هدر از رابط عامل برای پوست \\\\ \"باریک \". \\\\ \"AgentLogo \" برای توضیحات بیشتر را مشاهده کنید."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr "آرم نشان داده شده در هدر از رابط عامل برای پوست \\\\ \"عاج \". \\\\ \"AgentLogo \" برای توضیحات بیشتر را مشاهده کنید."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr "آرم نشان داده شده در هدر از رابط عامل برای پوست \\\\ \"عاج باریک \". \\\\ \"AgentLogo \" برای توضیحات بیشتر را مشاهده کنید."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"High Contrast\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server."
 msgstr ""
 

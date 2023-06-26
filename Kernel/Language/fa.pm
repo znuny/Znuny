@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.621737694086554;
+    $Self->{Completeness}        = 0.621420294653203;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5575,14 +5575,6 @@ sub Data {
             'آرم نشان داده شده است در هدر رابط عامل. URL به تصویر می تواند یک آدرس نسبی به دایرکتوری تصویر پوست، و یا یک URL کامل به یک وب سرور از راه دور.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'آرم نشان داده شده در هدر از رابط عامل برای پوست \ "به طور پیش فرض ". \ "AgentLogo " برای توضیحات بیشتر را مشاهده کنید.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'آرم نشان داده شده در هدر از رابط عامل برای پوست \ "باریک ". \ "AgentLogo " برای توضیحات بیشتر را مشاهده کنید.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'آرم نشان داده شده در هدر از رابط عامل برای پوست \ "عاج ". \ "AgentLogo " برای توضیحات بیشتر را مشاهده کنید.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'آرم نشان داده شده در هدر از رابط عامل برای پوست \ "عاج باریک ". \ "AgentLogo " برای توضیحات بیشتر را مشاهده کنید.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'تعریف می کند که URL مسیر پایه از آیکون ها، CSS و جاوا اسکریپت.',
@@ -6119,10 +6111,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             ' نظمی که در آن نام و نام خانوادگی از عوامل نمایش داده خواهد شد را مشخص میکند.',
         'Default skin for the agent interface.' => 'پوست به طور پیش فرض برای رابط عامل.',
-        'Default skin for the agent interface (slim version).' => 'پوست به طور پیش فرض برای رابط عامل (نسخه باریک).',
-        'Balanced white skin by Felix Niklas.' => 'پوست سفید متعادل کننده شده توسط فلیکس نیکلاس.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'پوست سفید متعادل کننده شده توسط فلیکس نیکلاس (نسخه باریک).',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'InternalName پوست عامل است که باید در رابط عامل استفاده شود. لطفا پوسته های موجود در ظاهر :: :: عامل پوسته را تیک بزنید.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8393,8 +8381,6 @@ Thanks for your help!
         ' 2 minutes' => '۲ دقیقه',
         ' 5 minutes' => '۵ دقیقه',
         ' 7 minutes' => '۷ دقیقه',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '\ "اسلیم " پوست که تلاش می کند برای صرفه جویی در فضای صفحه نمایش برای کاربران قدرت.',
         '%s' => '٪s',
         '(UserLogin) Firstname Lastname' => '(صفحهی) نام نام خانوادگی',
         '(UserLogin) Lastname Firstname' => '(صفحهی) نام خانوادگی FIRSTNAME',
@@ -8609,7 +8595,6 @@ Thanks for your help!
         'Danish' => 'دانمارکی',
         'Dashboard overview.' => '',
         'Date / Time' => 'زمان تاریخ',
-        'Default (Slim)' => 'به طور پیش فرض (لاغر)',
         'Default agent name' => '',
         'Default value for NameX' => 'مقدار پیش فرض برای NameX',
         'Define the queue comment 2.' => 'تعریف نظر صف 2.',
@@ -8712,7 +8697,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => 'نمودار: نمودار محیطی پشتهای',
         'Greek' => 'یونانی',
         'Hebrew' => 'عبری',
-        'High Contrast' => '',
         'Hindi' => 'هندی',
         'Hungarian' => 'مجارستانی',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8733,8 +8717,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'ایتالیایی',
-        'Ivory' => 'عاج',
-        'Ivory (Slim)' => 'عاج (لاغر)',
         'Japanese' => 'ژاپنی',
         'Korean' => '',
         'Language' => 'زبان',

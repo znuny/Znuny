@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.383052527254708;
+    $Self->{Completeness}        = 0.383711306075153;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5578,14 +5578,6 @@ sub Data {
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Definerer URL som basesti for icons, CSS og JavaScript',
@@ -6122,10 +6114,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => '',
-        'Default skin for the agent interface (slim version).' => '',
-        'Balanced white skin by Felix Niklas.' => 'Balansert hvitt tema av Felix Niklas',
-        'Balanced white skin by Felix Niklas (slim version).' => '',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8385,8 +8373,6 @@ Thanks for your help!
         ' 2 minutes' => ' 2 minutter',
         ' 5 minutes' => ' 5 minutter',
         ' 7 minutes' => ' 7 minutter',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Brukernavn) Fornavn Etternavn',
         '(UserLogin) Lastname Firstname' => '(Brukernavn) Etternavn Fornavn',
@@ -8601,7 +8587,6 @@ Thanks for your help!
         'Danish' => 'Dansk',
         'Dashboard overview.' => '',
         'Date / Time' => 'Dato / Tid',
-        'Default (Slim)' => '',
         'Default agent name' => '',
         'Default value for NameX' => 'Standardverdi for NavnX',
         'Define the queue comment 2.' => '',
@@ -8704,7 +8689,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => '',
         'Greek' => 'Gresk',
         'Hebrew' => 'Hebraisk',
-        'High Contrast' => '',
         'Hindi' => 'Hindi',
         'Hungarian' => 'Ungarsk',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8725,8 +8709,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Italiensk',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => 'Japansk',
         'Korean' => '',
         'Language' => 'Språk',

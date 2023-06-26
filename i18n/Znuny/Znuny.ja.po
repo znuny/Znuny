@@ -15290,22 +15290,6 @@ msgid "The logo shown in the header of the agent interface for the skin \"defaul
 msgstr "スキン\"デフォルト\"時に担当者インターフェイスで表示されるロゴ。詳細は\"AgentLogo\"を参照してください。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
-msgstr "スキン\"slim\"時に担当者インターフェイスで表示されるロゴ。詳細は\"AgentLogo\"を参照してください。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr "スキン\"ivory\"時に担当者インターフェイスで表示されるロゴ。詳細は\"AgentLogo\"を参照してください。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr "スキン\"ivory-slim\"時に担当者インターフェイスで表示されるロゴ。詳細は\"AgentLogo\"を参照してください。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"High Contrast\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server."
 msgstr ""
 
@@ -22826,14 +22810,6 @@ msgstr ""
 #. SysConfig
 msgid "Italian"
 msgstr "イタリア語"
-
-#. SysConfig
-msgid "Ivory"
-msgstr ""
-
-#. SysConfig
-msgid "Ivory (Slim)"
-msgstr ""
 
 #. SysConfig
 msgid "Japanese"
