@@ -45,6 +45,12 @@ INSERT INTO permission_groups (name, comments, valid_id, create_by, create_time,
     VALUES
     ('stats', 'Group for statistics access.', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
+--  insert into table permission_groups
+-- ----------------------------------------------------------
+INSERT INTO permission_groups (name, comments, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    ('timeaccounting_webservice', 'Group for time accounting web service access.', 1, 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
 --  insert into table group_user
 -- ----------------------------------------------------------
 INSERT INTO group_user (user_id, group_id, permission_key, create_by, create_time, change_by, change_time)

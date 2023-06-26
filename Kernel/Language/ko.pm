@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.875268461919709;
+    $Self->{Completeness}        = 0.875123885034688;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -7849,6 +7849,7 @@ sub Data {
         'Group for default access.' => '기본 액세스 그룹.',
         'Group of all administrators.' => '모든 관리자 그룹.',
         'Group for statistics access.' => '통계 액세스 그룹.',
+        'Group for time accounting web service access.' => '',
         'new' => '새로운',
         'All new state types (default: viewable).' => '모든 새 상태 유형 (기본값 : 표시 가능).',
         'open' => '열다',

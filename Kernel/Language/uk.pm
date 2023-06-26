@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.438790682306294;
+    $Self->{Completeness}        = 0.438718202841097;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -7850,6 +7850,7 @@ sub Data {
         'Group for default access.' => '',
         'Group of all administrators.' => '',
         'Group for statistics access.' => '',
+        'Group for time accounting web service access.' => '',
         'new' => 'нова',
         'All new state types (default: viewable).' => '',
         'open' => 'відкриті',
