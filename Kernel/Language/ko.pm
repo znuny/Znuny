@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.875020691938421;
+    $Self->{Completeness}        = 0.874875868917577;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2014,6 +2014,7 @@ sub Data {
         'State type' => '상태 유형',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '이 상태는 다음 구성 설정에서 사용됩니다.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt

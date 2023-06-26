@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.982287700711803;
+    $Self->{Completeness}        = 0.98229063224098;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2014,6 +2014,7 @@ sub Data {
         'State type' => 'Statustyp',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             'Es ist nicht möglich, diese Eingabe ungültig zu machen, da es keinen anderen Statustyp für "Zusammenfassen" im System gibt!',
+        'This field must be a hexadecimal color code.' => 'Dieses Feld muss ein hexadezimaler Farbcode beinhalten.',
         'This state is used in the following config settings:' => 'Dieser Status wird in folgenden SysConfig-Einstellungen verwendet:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt

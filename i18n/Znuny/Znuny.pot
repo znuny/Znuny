@@ -6079,6 +6079,10 @@ msgid "It's not possible to invalidate this entry because there is no other merg
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
 msgid "This state is used in the following config settings:"
 msgstr ""
 

@@ -24230,3 +24230,7 @@ msgstr ""
 msgid "Group for time accounting web service access."
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
+msgstr ""
+

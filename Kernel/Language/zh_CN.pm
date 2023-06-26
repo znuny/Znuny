@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.903989405727529;
+    $Self->{Completeness}        = 0.903839788149619;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2021,6 +2021,7 @@ sub Data {
         'State type' => '工单状态类型',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '无法使此条目无效，因为系统中没有其他合并状态！',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '这个状态已用于以下的系统配置设置：',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt

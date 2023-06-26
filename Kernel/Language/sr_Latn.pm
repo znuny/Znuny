@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.900347624565469;
+    $Self->{Completeness}        = 0.900198609731877;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2020,6 +2020,7 @@ sub Data {
         'State type' => 'Tip statusa',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             'Nije moguće obeležiti ovu stavku kao nevažeću jer ne postoji više statusa spojenih tiketa u sistemu!',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Ovo stanje se koristi u sledećim sistemskim podešavanjima: ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt

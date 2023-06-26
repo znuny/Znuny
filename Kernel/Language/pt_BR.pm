@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.868895878165867;
+    $Self->{Completeness}        = 0.868752068851374;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2019,6 +2019,7 @@ sub Data {
         'State type' => 'Tipo de Estado',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             'Não é possível invalidar esta entrada porque não existe nenhum outro estado de agrupamento no sistema!',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Este estato é utilizado nas seguintes configurações:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
