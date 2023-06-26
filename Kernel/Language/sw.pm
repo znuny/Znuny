@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.44187168355041;
+    $Self->{Completeness}        = 0.441800643086817;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8080,6 +8080,7 @@ Mfano:
         'Group for default access.' => '',
         'Group of all administrators.' => '',
         'Group for statistics access.' => '',
+        'Group for time accounting web service access.' => '',
         'new' => 'mpya',
         'All new state types (default: viewable).' => '',
         'open' => 'fungua',

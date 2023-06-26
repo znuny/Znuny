@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.357131371603152;
+    $Self->{Completeness}        = 0.357073954983923;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -8077,6 +8077,7 @@ Opdater venligst dit framework først!',
         'Group for default access.' => '',
         'Group of all administrators.' => '',
         'Group for statistics access.' => 'Gruppe for adgang til rapporter.',
+        'Group for time accounting web service access.' => '',
         'new' => 'ny',
         'All new state types (default: viewable).' => 'Alle nye tilstandstyper (standard: synlig)',
         'open' => 'åben',

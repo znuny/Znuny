@@ -25824,3 +25824,7 @@ msgstr "Alle Agenten, die in dem Ticket erwähnt werden."
 msgid "The following JavaScript files loaded multiple times:"
 msgstr "Die folgenden JavaScript-Dateien werden mehrfach geladen:"
 
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
+

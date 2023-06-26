@@ -25727,3 +25727,7 @@ msgstr ""
 msgid "All agents who are mentioned in the ticket"
 msgstr ""
 
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
+

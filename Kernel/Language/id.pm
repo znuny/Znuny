@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.620678565685802;
+    $Self->{Completeness}        = 0.620578778135048;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8077,6 +8077,7 @@ bin/otrs.Daemon.pl status\').',
         'Group for default access.' => 'Kelompok untuk akses default.',
         'Group of all administrators.' => 'Grup semua administrator',
         'Group for statistics access.' => 'Grup untuk akses statistik',
+        'Group for time accounting web service access.' => '',
         'new' => 'baru',
         'All new state types (default: viewable).' => 'Semua jenis state (default: paparkan).',
         'open' => 'buka',

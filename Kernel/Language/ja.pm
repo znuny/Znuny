@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.703006914294903;
+    $Self->{Completeness}        = 0.702893890675241;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8090,6 +8090,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Group for default access.' => '一般ユーザ用のデフォルトグループ',
         'Group of all administrators.' => '管理者用グループ',
         'Group for statistics access.' => 'レポート・レポート操作用のグループ',
+        'Group for time accounting web service access.' => '',
         'new' => '新規',
         'All new state types (default: viewable).' => '全ての新規ステータス・タイプ（デフォルト：表示可能）',
         'open' => '対応中',

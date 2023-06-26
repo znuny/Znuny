@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.634989548158868;
+    $Self->{Completeness}        = 0.634887459807074;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -8080,6 +8080,7 @@ sub Data {
         'Group for default access.' => 'گروه برای دسترسی پیش فرض.',
         'Group of all administrators.' => 'گروه از همه مدیران.',
         'Group for statistics access.' => 'گروه برای دسترسی آمار.',
+        'Group for time accounting web service access.' => '',
         'new' => 'جدید',
         'All new state types (default: viewable).' => 'تمام انواع حالت جدید (به طور پیش فرض: قابل مشاهده).',
         'open' => 'باز',

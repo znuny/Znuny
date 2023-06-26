@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.616658626788873;
+    $Self->{Completeness}        = 0.616559485530547;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8087,6 +8087,7 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
         'Group for default access.' => 'Grupo para acceso por defecto.',
         'Group of all administrators.' => 'Grupo de todos los administradores.',
         'Group for statistics access.' => 'Grupo para acceso a estadísticas.',
+        'Group for time accounting web service access.' => '',
         'new' => 'nuevo',
         'All new state types (default: viewable).' => 'Todos los nuevos tipos de estado (por defecto: visible). ',
         'open' => 'abierto',
