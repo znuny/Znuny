@@ -1,4 +1,5 @@
 # 7.0.7 2023-??-??
+ - 2023-06-26 Fixed warning about missing article ID in AgentTicketNoteToLinkedTicket. Thanks to Paweł Bogusławski (@pboguslawski). [#431](https://github.com/znuny/Znuny/issues/431)
  - 2023-06-21 Extend TicketArticleCreate transition action for a possibility to set a dynamic field of object type article and ticket.
  - 2023-06-21 GUI-Redesign changes - CSS, TT and JS.
  - 2023-06-20 Added ExternalFQDN parameter for better security. Thanks to Paweł Bogusławski (@pboguslawski). [PR#73](https://github.com/znuny/Znuny/pull/73)
@@ -70,6 +71,9 @@
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
 
 # 6.5.4 2023-??-??
+ - 2023-06-26 Fixed warning about missing article ID in AgentTicketNoteToLinkedTicket. Thanks to Paweł Bogusławski (@pboguslawski). [#431](https://github.com/znuny/Znuny/issues/431)
+ - 2023-06-21 Extend TicketArticleCreate transition action for a possibility to set a dynamic field of object type article and ticket.
+ - 2023-06-19 Fixed dynamic field type 'Webservice' admin dialog test field being read-only and not usable.
  - 2023-06-02 S/MIME: Increased size of column 'email_address' of table 'smime_keys'.
 
 # 6.5.3 2023-06-14
