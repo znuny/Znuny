@@ -1,4 +1,4 @@
-# 7.0.7 2023-??-??
+# 7.0.7 2023-06-28
  - 2023-06-27 Fixed CSS for attachments with long filenames. [#416](https://github.com/znuny/Znuny/issues/416)
  - 2023-06-26 AdminState: Added color code validation.
  - 2023-06-26 Fixed warning about missing article ID in AgentTicketNoteToLinkedTicket. Thanks to Paweł Bogusławski (@pboguslawski). [#431](https://github.com/znuny/Znuny/issues/431)
