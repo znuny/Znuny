@@ -257,9 +257,9 @@ my @NeededModules = (
         Required  => 1,
         Comment   => 'Required to generate UUIDs.',
         InstTypes => {
-            aptget => undef,
+            aptget => 'libdata-uuid-perl',
             emerge => undef,
-            yum    => undef,
+            yum    => 'perl-Data-UUID',
             zypper => undef,
             ports  => undef,
         },
