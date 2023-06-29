@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -26,6 +26,10 @@ $Selenium->RunTest(
         my $StandardTemplateObject    = $Kernel::OM->Get('Kernel::System::StandardTemplate');
         my $CustomerUserObject        = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject               = $Kernel::OM->Get('Kernel::System::Queue');
+        my $UserObject                = $Kernel::OM->Get('Kernel::System::User');
+        my $ArticleObject             = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Disable check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -214,7 +218,7 @@ $Selenium->RunTest(
         );
 
         # Assign template to the queue.
-        my $Success = $Kernel::OM->Get('Kernel::System::Queue')->QueueStandardTemplateMemberAdd(
+        my $Success = $QueueObject->QueueStandardTemplateMemberAdd(
             QueueID            => 1,
             StandardTemplateID => $TemplateID,
             Active             => 1,
@@ -227,7 +231,7 @@ $Selenium->RunTest(
 
         # Create test user with admin permissions.
         my $UserName = "Name$RandomID";
-        my $UserID   = $Kernel::OM->Get('Kernel::System::User')->UserAdd(
+        my $UserID   = $UserObject->UserAdd(
             UserFirstname => $UserName,
             UserLastname  => $UserName,
             UserLogin     => $UserName,
@@ -342,8 +346,7 @@ $Selenium->RunTest(
             );
         }
 
-        my $ArticleBackendObject
-            = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel( ChannelName => 'Email' );
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
         # Create test email article.
         my $ArticleID = $ArticleBackendObject->ArticleCreate(
@@ -400,7 +403,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketCompose page.
         $Selenium->VerifiedGet(
@@ -703,8 +706,7 @@ $Selenium->RunTest(
         ) || die;
 
         # Create article in OTRS channel.
-        my $InternalArticleBackendObject
-            = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel( ChannelName => 'Internal' );
+        my $InternalArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
         $ArticleID = $InternalArticleBackendObject->ArticleCreate(
             TicketID             => $TicketID,
             SenderType           => 'agent',

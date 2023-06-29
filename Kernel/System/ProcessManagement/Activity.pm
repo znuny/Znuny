@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -60,7 +60,7 @@ sub new {
     Returns:
 
     $Activity = {
-          'Name'           => 'Activity 3'
+          'Name'           => 'Activity 3',
           'CreateTime'     => '08-02-2012 13:37:00',
           'ChangeBy'       => '2',
           'ChangeTime'     => '09-02-2012 13:37:00',

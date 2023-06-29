@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,28 +8,8 @@
 # --
 
 [% RenderBlockStart("Overview") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("PostMaster Filter Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('PostMaster Filter Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% SWITCH Data.Action %]
-        [% CASE 'AddAction' %]
-            [% BreadcrumbPath.push({ Name => Translate('Add PostMaster Filter'),}) %]
-        [% CASE 'Update' %]
-            [% USE EditTitle = String(Translate('Edit PostMaster Filter')) %]
-            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
 [% RenderBlockStart("ActionList") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -39,19 +19,18 @@
                 <ul class="ActionList">
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
 [% RenderBlockStart("ActionAdd") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=AddAction" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add PostMaster Filter") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=AddAction" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Add PostMaster Filter") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionAdd") %]
                 </ul>
             </div>
         </div>
 [% RenderBlockEnd("ActionList") %]
-
 [% RenderBlockStart("Filter") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -63,7 +42,7 @@
         </div>
 [% RenderBlockEnd("Filter") %]
 
-[% IF Env("Subaction") == 'Update' || Env("Subaction") == "AddAction" %]
+        [% IF Env("Subaction") == 'Update' || Env("Subaction") == "AddAction" %]
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Hint") | html %]</h2>
@@ -83,12 +62,29 @@
                 </p>
             </div>
         </div>
-[% END %]
-
+        [% END %]
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("PostMaster Filter Management") | html %]</h1>
 
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('PostMaster Filter Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% SWITCH Data.Action %]
+            [% CASE 'AddAction' %]
+                [% BreadcrumbPath.push({ Name => Translate('Add PostMaster Filter'),}) %]
+            [% CASE 'Update' %]
+                [% USE EditTitle = String(Translate('Edit PostMaster Filter')) %]
+                [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 [% RenderBlockStart("OverviewResult") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -116,8 +112,8 @@
                                 <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Update;Name=[% Data.Name | uri %]">[% Translate(Data.Name) | html %]</a>
                             </td>
                             <td class="Center">
-                                <a class="TrashCan PostMasterFilterDelete" href="#" data-query-string="Action=[% Env("Action") %];Subaction=Delete;Name=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this filter") | html %]">
-                                <i class="fa fa-trash-o"></i>
+                                <a class="TrashCan PostMasterFilterDelete table-icon-hover-md" href="#" data-query-string="Action=[% Env("Action") %];Subaction=Delete;Name=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this filter") | html %]">
+                                    <i class="fa fa-trash-o"></i>
                                 </a>
                             </td>
                         </tr>
@@ -136,7 +132,6 @@
             </div>
         </div>
 [% RenderBlockEnd("OverviewResult") %]
-
 [% RenderBlockStart("OverviewUpdate") %]
         <form action="[% Env("CGIHandle") %]" method="post" class="FilterFields Validate">
             <div class="WidgetSimple">
@@ -155,21 +150,23 @@
                         <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
                     [% END %]
                     <fieldset class="TableLike">
-                        <label class="Mandatory" for="EditName"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" class="W50pc Validate_Required [% Data.NameInvalid | html %]" name="Name" id="EditName" value="[% Data.Name | html %]"/>
-                            <div id="EditNameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="EditNameServerError" class="TooltipErrorMessage"><p>[% Translate("A postmaster filter with this name already exists!") | html %]</p></div>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="EditName"><span class="Marker">*</span> [% Translate("Name") | html %]</label>
+                            <div class="Field">
+                                <input type="text" class="W50pc Validate_Required [% Data.NameInvalid | html %]" name="Name" id="EditName" value="[% Data.Name | html %]"/>
+                                <div id="EditNameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="EditNameServerError" class="TooltipErrorMessage"><p>[% Translate("A postmaster filter with this name already exists!") | html %]</p></div>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label class="Mandatory" for="StopAfterMatch"><span class="Marker">*</span> [% Translate("Stop after match") | html %]:</label>
-                        <div class="Field">
-                            [% Data.StopAfterMatch %]
-                            <div id="StopAfterMatchError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="StopAfterMatchServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="StopAfterMatch"><span class="Marker">*</span> [% Translate("Stop after match") | html %]</label>
+                            <div class="Field">
+                                [% Data.StopAfterMatch %]
+                                <div id="StopAfterMatchError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="StopAfterMatchServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
                     </fieldset>
                 </div>
             </div>
@@ -182,26 +179,37 @@
                     <h2>[% Translate("Filter Condition") | html %] <span class="FieldExplanation">([% Translate("AND Condition") | html %])</span></h2>
                 </div>
                 <div class="Content">
-                [% FOREACH [ 1 .. Config("PostmasterHeaderFieldCount") ]  %]
-                    <div class="Field Center SpacingTopSmall">
-                        <label for="MatchHeader[% loop.count %]">[% Translate("Search header field") | html %]:</label>
-                        [% Data.item( "MatchHeader$loop.count")  %]
-                        <div id="MatchHeader[% loop.count %]ServerError" class="TooltipErrorMessage">
-                            <p>[% Translate("This field is required.") | html %]</p>
-                        </div>
+                    <fieldset class="TableLike full-width">
+                    [% FOREACH [ 1 .. Config("PostmasterHeaderFieldCount") ]  %]
+                        <div class="Field single-row-inputs">
+                            <div class="field-wrapper">
+                                <label for="MatchHeader[% loop.count %]">[% Translate("Search header field") | html %]</label>
+                                <div class="Field">
+                                    [% Data.item( "MatchHeader$loop.count")  %]
+                                    <div id="MatchHeader[% loop.count %]ServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <label for="MatchValue[% loop.count %]">[% Translate("for value") | html %]:</label>
-                        <input type="text" name="MatchValue[% loop.count %]" id="MatchValue[% loop.count %]" value="[% Data.item("MatchValue$loop.count") | html %]" class="W33pc [% Data.item('MatchValue' _ loop.count  _ 'Invalid') | html %]" maxlength="200"/>
-                        <div id="MatchValue[% loop.count %]ServerError" class="TooltipErrorMessage">
-                            <p>[% Translate("The field needs to be a valid regular expression or a literal word.") | html %]</p>
-                        </div>
+                            <div class="field-wrapper">
+                                <label for="MatchValue[% loop.count %]">[% Translate("for value") | html %]</label>
+                                <div class="Field">
+                                    <input type="text" name="MatchValue[% loop.count %]" id="MatchValue[% loop.count %]" value="[% Data.item("MatchValue$loop.count") | html %]" class="W33pc [% Data.item('MatchValue' _ loop.count  _ 'Invalid') | html %]" maxlength="200"/>
+                                    <div id="MatchValue[% loop.count %]ServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("The field needs to be a valid regular expression or a literal word.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <label class="Negate" for="MatchNot[% loop.count %]">
-                            [% Translate("Negate") | html %]: <input type="checkbox" name="MatchNot[% loop.count %]" id="MatchNot[% loop.count %]" value="1" [% Data.item( "MatchNot$loop.count") | html %] />
-                        </label>
-                    </div>
-                    <div class="Clear"></div>
-                [% END %]
+                            <div class="field-wrapper checkbox-container">
+                                <label class="Negate checkbox-container" for="MatchNot[% loop.count %]">
+                                    [% Translate("Negate") | html %]: <input type="checkbox" name="MatchNot[% loop.count %]" id="MatchNot[% loop.count %]" value="1" [% Data.item( "MatchNot$loop.count") | html %] />
+                                </label>
+                            </div>
+                        </div>
+                    [% END %]
+                    </fieldset>
                 </div>
             </div>
 
@@ -213,24 +221,31 @@
                     <h2>[% Translate("Set Email Headers") | html %]</h2>
                 </div>
                 <div class="Content">
+                    <fieldset class="TableLike full-width">
+                    [% FOREACH [ 1 .. Config("PostmasterHeaderFieldCount") ]  %]
+                        <div class="Field single-row-inputs">
+                            <div class="field-wrapper">
+                                <label for="SetHeader[% loop.count %]">[% Translate("Set email header") | html %]</label>
+                                <div class="Field">
+                                    [% Data.item("SetHeader$loop.count") %]
+                                    <div id="SetHeader[% loop.count %]ServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                [% FOREACH [ 1 .. Config("PostmasterHeaderFieldCount") ]  %]
-                    <div class="Field Center SpacingTopSmall">
-                        <label for="SetHeader[% loop.count %]">[% Translate("Set email header") | html %]:</label>
-                        [% Data.item("SetHeader$loop.count") %]
-                        <div id="SetHeader[% loop.count %]ServerError" class="TooltipErrorMessage">
-                            <p>[% Translate("This field is required.") | html %]</p>
+                            <div class="field-wrapper">
+                                <label class="RightLabel" for="SetValue[% loop.count %]">[% Translate("with value") | html %]</label>
+                                <div class="Field">
+                                    <input type="text" name="SetValue[% loop.count %]" id="SetValue[% loop.count %]" value="[% Data.item("SetValue$loop.count") | html %]" class="W33pc [% Data.item('SetValue' _ loop.count _ 'Invalid') | html %]" maxlength="200"/>
+                                    <div id="SetValue[% loop.count %]ServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("The field needs to be a literal word.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <label class="RightLabel" for="SetValue[% loop.count %]">[% Translate("with value") | html %]:</label>
-                        <input type="text" name="SetValue[% loop.count %]" id="SetValue[% loop.count %]" value="[% Data.item("SetValue$loop.count") | html %]" class="W33pc [% Data.item('SetValue' _ loop.count _ 'Invalid') | html %]" maxlength="200"/>
-                        <div id="SetValue[% loop.count %]ServerError" class="TooltipErrorMessage">
-                            <p>[% Translate("The field needs to be a literal word.") | html %]</p>
-                        </div>
-                    </div>
-                    <div class="Clear"></div>
-               [% END %]
-
+                    [% END %]
+                    </fieldset>
                 </div>
             </div>
 
@@ -238,19 +253,22 @@
                 <div class="Header">
                     <h2>[% Translate("Save Changes") | html %]</h2>
                 </div>
-                <div class="Content Center">
-                    [% IF Data.Action == 'Update' %]
-                        <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                        [% Translate("or") | html %]
-                        <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                    [% ELSE %]
-                        <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                    [% END %]
-                    [% Translate("or") | html %]
-                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                <div class="Content">
+                    <fieldset class="TableLike full-width">
+                        <div class="field-wrapper form-button-actions">
+                            <div class=" Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                                [% IF Data.Action == 'Update' %]
+                                    <button class="CallForAction Primary btn-primary-ghost btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% ELSE %]
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% END %]
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
             </div>
-
         </form>
 
         <div class="WidgetSimple Collapsed SpacingTop">
@@ -262,30 +280,31 @@
             </div>
             <div class="Content">
                 <fieldset class="TableLike">
-                    <h4>[% Translate("Filter Condition") | html %]</h4>
+                    <div class="field-wrapper">
+                        <h4 class="title">[% Translate("Filter Condition") | html %]</h4>
 
-                    <label for="MatchHeaderExample">[% Translate("Header") | html %] 1:</label>
-                    <div class="Field">
-                        <select name="MatchHeaderExample" id="MatchHeaderExample" class="Modernize W33pc"><option selected="selected" value="To">To</option></select>
-                        <label for="MatchValueExample">[% Translate("Value") | html %] 1:</label>
-                        <input type="text" name="MatchValueExample" id="MatchValueExample" value="(me|test)@example.com" class="W33pc" maxlength="50"/>
+                        <label for="MatchHeaderExample">[% Translate("Header") | html %] 1</label>
+                        <div class="Field">
+                            <select name="MatchHeaderExample" id="MatchHeaderExample" class="Modernize W33pc"><option selected="selected" value="To">To</option></select>
+                            <label for="MatchValueExample">[% Translate("Value") | html %] 1</label>
+                            <input type="text" name="MatchValueExample" id="MatchValueExample" value="(me|test)@example.com" class="W33pc" maxlength="50"/>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <h4>[% Translate("Set Email Headers") | html %]</h4>
+                    <div class="field-wrapper">
+                        <h4 class="title">[% Translate("Set Email Headers") | html %]</h4>
 
-                    <label for="SetHeaderExample">[% Translate("Header") | html %] 1:</label>
-                    <div class="Field">
-                        <select name="SetHeaderExample" id="SetHeaderExample" class="Modernize W33pc"><option selected="selected" value="X-OTRS-Queue">X-OTRS-Queue</option></select>
-                        <label for="SetValueExample">[% Translate("Value") | html %] 1:</label>
-                        <input type="text" name="SetValueExample" id="SetValueExample" value="SomeQueue" class="W33pc" maxlength="50"/>
+                        <label for="SetHeaderExample">[% Translate("Header") | html %] 1</label>
+                        <div class="Field">
+                            <select name="SetHeaderExample" id="SetHeaderExample" class="Modernize W33pc"><option selected="selected" value="X-OTRS-Queue">X-OTRS-Queue</option></select>
+                            <label for="SetValueExample">[% Translate("Value") | html %] 1</label>
+                            <input type="text" name="SetValueExample" id="SetValueExample" value="SomeQueue" class="W33pc" maxlength="50"/>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
                 </fieldset>
             </div>
         </div>
 [% RenderBlockEnd("OverviewUpdate") %]
     </div>
-    <div class="Clear"></div>
 </div>
 [% RenderBlockEnd("Overview") %]

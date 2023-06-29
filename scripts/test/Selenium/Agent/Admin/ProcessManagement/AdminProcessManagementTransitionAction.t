@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject             = $Kernel::OM->Get('Kernel::System::User');
+        my $TransitionActionObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::TransitionAction');
+        my $ProcessObject          = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
 
         # Create test user.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -26,7 +30,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -41,7 +45,7 @@ $Selenium->RunTest(
         my $ProcessRandom          = 'Process' . $RandomID;
         my $TransitionActionRandom = 'TransitionAction' . $RandomID;
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminProcessManagement screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
@@ -96,8 +100,8 @@ $Selenium->RunTest(
             Value   => $TransitionActionModule,
         );
 
-        $Selenium->execute_script( '$("[name=\"ConfigKey[1]\"]").val("")' );
-        $Selenium->execute_script( '$("#ConfigParams fieldset:not(:first-child) a.RemoveButton").click()' );
+        $Selenium->execute_script('$("[name=\"ConfigKey[1]\"]").val("")');
+        $Selenium->execute_script('$("#ConfigParams fieldset:not(:first-child) a.RemoveButton").click()');
 
         $Selenium->find_element(".//*[\@id='ConfigKey[1]']")->send_keys($TransitionActionKey);
         $Selenium->find_element(".//*[\@id='ConfigValue[1]']")->send_keys($TransitionActionValue);
@@ -137,6 +141,7 @@ $Selenium->RunTest(
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && $("#TransitionActionFilter:visible").length'
         );
+        sleep 1;
         $Selenium->find_element( "#TransitionActionFilter", 'css' )->clear();
         $Selenium->find_element( "#TransitionActionFilter", 'css' )->send_keys($TransitionActionRandom);
 
@@ -147,9 +152,10 @@ $Selenium->RunTest(
         );
         $Selenium->WaitFor(
             JavaScript =>
-                "return  \$('#TransitionActions li:visible div').length === 1;",
+                "return \$('#TransitionActions li:visible div').length === 1;",
         );
 
+        sleep 1;
         $Self->True(
             $Selenium->find_element("//*[text()=\"$TransitionActionRandom\"]")->is_displayed(),
             "$TransitionActionRandom transition action found on page",
@@ -211,12 +217,11 @@ $Selenium->RunTest(
         # Try to remove only possible Config Parameters.
         $Selenium->find_element( ".RemoveButton", 'css' )->click();
 
-        $Selenium->WaitFor( AlertPresent => 1 );
-
-        $Self->True(
-            $Selenium->accept_alert(),
-            "Unable to remove only field - JS is success"
+        # Wait until modal dialog has open.
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog.Modal #DialogButton1").length'
         );
+        $Selenium->find_element( "#DialogButton1", 'css' )->click();
 
         # Add new Config key and value.
         $Selenium->find_element( "#ConfigAdd", 'css' )->click();
@@ -329,11 +334,10 @@ $Selenium->RunTest(
         $Selenium->switch_to_window( $Handles->[0] );
 
         # Delete test transition action.
-        my $Success
-            = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::TransitionAction')->TransitionActionDelete(
+        my $Success = $TransitionActionObject->TransitionActionDelete(
             ID     => $TransitionActionID,
             UserID => $TestUserID,
-            );
+        );
 
         $Self->True(
             $Success,
@@ -341,7 +345,7 @@ $Selenium->RunTest(
         );
 
         # Delete test process.
-        $Success = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessDelete(
+        $Success = $ProcessObject->ProcessDelete(
             ID     => $ProcessID,
             UserID => $TestUserID,
         );

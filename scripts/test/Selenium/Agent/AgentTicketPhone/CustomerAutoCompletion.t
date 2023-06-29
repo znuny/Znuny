@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,8 +23,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Don't check email address validity.
         $HelperObject->ConfigSettingChange(
@@ -42,7 +44,7 @@ $Selenium->RunTest(
 
         for my $Counter ( 1 .. 3 ) {
             my $CustomerName = "Customer-$Counter-" . $HelperObject->GetRandomID();
-            my $CustomerID   = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+            my $CustomerID   = $CustomerCompanyObject->CustomerCompanyAdd(
                 CustomerID          => $CustomerName,
                 CustomerCompanyName => $CustomerName,
                 ValidID             => 1,
@@ -361,7 +363,7 @@ $Selenium->RunTest(
 
         # Make sure the cache is correct.
         for my $Cache (qw(CustomerUser CustomerCompany)) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

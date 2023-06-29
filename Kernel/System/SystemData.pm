@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -202,7 +202,7 @@ returns
     %SystemData = (
         UniqueID => 'CDC782BE-E483-11E2-83DA-9FFD99890B3C',
         UpdateID => 'D8F55850-E483-11E2-BD60-9FFD99890B3C'
-        ...
+        # ...
     );
 
 =cut

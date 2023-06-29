@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -7,9 +7,11 @@
 # --
 [% RenderBlockStart("LastView") %]
     <a id="[% Data.URL | html %]" href="index.pl?[% Data.URL | html %]" class="[% Data.Class | html %] LastView LastViewAvatar LastViewAvatarRow ToolTip">
-        <i class="[% Data.Icon | html %] LastViewAvatarIcon FloatLeft"></i>
-        [% Data.Label | html %]
-        <p class="LastViewAvatarCounter FloatRight">[% Data.Counter | html %]</p>
+        <span>
+            <i class="[% Data.Icon | html %] LastViewAvatarIcon"></i>
+            [% Data.Label | html %]
+        </span>
+        <p class="LastViewAvatarCounter">[% Data.Counter | html %]</p>
         <div class="ToolTipContent">
             <p class="ToolTipText">
                 <p>
@@ -19,8 +21,10 @@
                 </p>
                 <fieldset class="TableLike FixedLabelSmall Narrow">
 [% RenderBlockStart("LastViewParam") %]
-                    <label>[% Data.Key | html %]:</label>
-                    <p class="Value" title="[% Data.Value | html %]">[% Data.Value | html %]</p>
+                    <span>
+                        <label>[% Data.Key | html %]:</label>
+                        <p class="Value" title="[% Data.Value | html %]">[% Data.Value | html %]</p>
+                    </span>
                     <div class="Clear"></div>
 [% RenderBlockEnd("LastViewParam") %]
                 </fieldset>

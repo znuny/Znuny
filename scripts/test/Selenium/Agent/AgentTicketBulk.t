@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,6 +25,7 @@ $Selenium->RunTest(
         my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
         my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check email addresses.
         $ConfigObject->Set(
@@ -513,11 +514,11 @@ $Selenium->RunTest(
             JavaScript => 'return typeof($) === "function" && $("#Subject:visible").length'
         );
 
-        $Selenium->find_element( "#Subject",        'css' )->send_keys('Test');
-        $Selenium->find_element( "#Body",           'css' )->send_keys('Test');
+        $Selenium->find_element( "#Subject", 'css' )->send_keys('Test');
+        $Selenium->find_element( "#Body",    'css' )->send_keys('Test');
 
-        $Selenium->find_element( "#EmailSubject",   'css' )->send_keys('Test');
-        $Selenium->find_element( "#EmailBody",      'css' )->send_keys('Test');
+        $Selenium->find_element( "#EmailSubject", 'css' )->send_keys('Test');
+        $Selenium->find_element( "#EmailBody",    'css' )->send_keys('Test');
 
         $Selenium->find_element( "#submitRichText", 'css' )->click();
 
@@ -533,7 +534,7 @@ $Selenium->RunTest(
         );
 
         # Clean the article cache, otherwise we'll get the caches result, which are wrong.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Article',
         );
 
@@ -800,7 +801,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,8 +8,9 @@
 # --
 
 package Kernel::System::DateTime;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Time)
-## nofilter(TidyAll::Plugin::OTRS::Perl::Translatable)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Time)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Translatable)
+## nofilter(TidyAll::Plugin::Znuny::Perl::IsIntegerVariableCheck)
 
 use strict;
 use warnings;
@@ -1747,6 +1748,13 @@ Parses a date/time string and returns a hash ref.
     # Sets hour, minute and second to 0:
     my $DateTimeHash = $DateTimeObject->_StringToHash( String => '2016-08-14' );
 
+    # Format with time zone
+    my $DateTimeHash = $DateTimeObject->_StringToHash(
+        String   => '2023-02-17T11:00:00+03:00'
+        TimeZone => 'Europe/Berlin', # desired time zone of the created DateTime object, optional
+    );
+
+
 Please see C<L</new()>> for the list of supported string formats.
 
 Returns:
@@ -1829,15 +1837,31 @@ sub _StringToHash {
 
         # It's an offset, get the time in GMT/UTC.
         $OffsetOrTZ =~ s/://i;    # Remove the ':'
-        my $DT = DateTime->new(
-            ( map { lcfirst $_ => $DateTimeHash->{$_} } keys %{$DateTimeHash} ),
-            time_zone => $OffsetOrTZ,
-        );
+
+        my $DT;
+        eval {
+            $DT = DateTime->new(
+                ( map { lcfirst $_ => $DateTimeHash->{$_} } keys %{$DateTimeHash} ),
+                time_zone => $OffsetOrTZ,
+            );
+        };
+        return if !$DT || ref $DT ne 'DateTime';
+
         $DT->set_time_zone('UTC');
-        $DT->set_time_zone( $Self->OTRSTimeZoneGet() );
+
+        my $TimeZone = $Param{TimeZone} // $Self->OTRSTimeZoneGet();
+        if (
+            $TimeZone ne 'UTC'    # because it's already UTC
+            && $Self->IsTimeZoneValid( TimeZone => $TimeZone )
+            )
+        {
+            $TimeZone = $Self->GetRealTimeZone( TimeZone => $TimeZone );
+            $DT->set_time_zone($TimeZone);
+        }
 
         return {
-            ( map { ucfirst $_ => $DT->$_() } qw(year month day hour minute second) )
+            ( map { ucfirst $_ => $DT->$_() } qw(year month day hour minute second) ),
+            TimeZone => $TimeZone,
         };
     }
 
@@ -1898,7 +1922,10 @@ sub _CPANDateTimeObjectCreate {
 
     # Create object from string
     if ( defined $Param{String} ) {
-        my $DateTimeHash = $Self->_StringToHash( String => $Param{String} );
+        my $DateTimeHash = $Self->_StringToHash(
+            String   => $Param{String},
+            TimeZone => $Param{TimeZone},
+        );
         if ( !IsHashRefWithData($DateTimeHash) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 'Priority' => 'Error',
@@ -1909,7 +1936,11 @@ sub _CPANDateTimeObjectCreate {
         }
 
         %Param = (
+
+            # put time zone first because $DateTimeHash might contain one that has to be used
+            # and overwrites the one here
             TimeZone => $Param{TimeZone},
+
             %{$DateTimeHash},
         );
     }

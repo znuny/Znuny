@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -151,7 +151,12 @@ sub EditFieldRender {
 
     # add default value if no DataValues exists
     if ( !IsHashRefWithData($DataValues) && $Value ) {
-        $DataValues = { $Value => $Value };
+        if ( ref $Value eq 'ARRAY' ) {
+            %{$DataValues} = map { $_ => $_ } @{$Value};
+        }
+        else {
+            $DataValues = { $Value => $Value };
+        }
     }
     elsif ( !IsHashRefWithData($DataValues) ) {
         $DataValues = { ' ' => ' ' };
@@ -225,13 +230,17 @@ EOF
 
     # Add attributes needed for Znuny.DynamicField.Webservice.InitDynamicField() to created HTML string.
     # BuildSelection() does not support HTML attributes.
-    $HTMLString
-        =~ s{(<select )}{$1 data-dynamic-field-name="$Param{DynamicFieldConfig}->{Name}" data-dynamic-field-type="$Param{DynamicFieldConfig}->{FieldType}" data-selected-value-field-name="$FieldName" data-autocomplete-field-name="${FieldName}_Search" data-autocomplete-min-length="$AutocompleteMinLength" data-query-delay="$QueryDelay" data-default-search-term="$DefaultSearchTerm" data-ticket-id="$TicketID" };
+    my $DynamicFieldName      = $Param{DynamicFieldConfig}->{Name};
+    my $DynamicFieldFieldType = $Param{DynamicFieldConfig}->{FieldType};
+    my $DynamicFieldSearch    = $FieldName . '_Search';
 
-    # Add InitMultiselect for search.
+    $HTMLString
+        =~ s{(<select )}{$1data-dynamic-field-name="$DynamicFieldName" data-dynamic-field-type="$DynamicFieldFieldType" data-selected-value-field-name="$FieldName" data-autocomplete-field-name="$DynamicFieldSearch" data-autocomplete-min-length="$AutocompleteMinLength" data-query-delay="$QueryDelay" data-default-search-term="$DefaultSearchTerm" data-ticket-id="$TicketID" };
+
+    # Add InitSelect for search.
     my $DynamicFieldJS = <<"EOF";
     // Initialize JS for dynamic field.
-    Znuny.DynamicField.Webservice.InitMultiselect('$Param{DynamicFieldConfig}->{Name}', '$FieldName', '${FieldName}_Search', $AutocompleteMinLength, $QueryDelay, '$DefaultSearchTerm', '$TicketID', $AdditionalDFs);
+    Znuny.DynamicField.Webservice.InitSelect('$Param{DynamicFieldConfig}->{Name}', '$FieldName', '${FieldName}_Search', $AutocompleteMinLength, $QueryDelay, '$DefaultSearchTerm', '$TicketID', $AdditionalDFs);
 EOF
     $Param{LayoutObject}->AddJSOnDocumentComplete( Code => $DynamicFieldJS );
 
@@ -653,13 +662,17 @@ sub _AutocompleteSearchFieldRender {
 
     # Add attributes needed for Znuny.DynamicField.Webservice.InitDynamicField() to created HTML string.
     # BuildSelection() does not support HTML attributes.
-    $HTMLString
-        =~ s{(<select )}{$1 data-dynamic-field-name="$Param{DynamicFieldConfig}->{Name}" data-dynamic-field-type="$Param{DynamicFieldConfig}->{FieldType}" data-selected-value-field-name="$FieldName" data-autocomplete-field-name="${FieldName}_Search" data-autocomplete-min-length="$AutocompleteMinLength" data-query-delay="$QueryDelay" data-default-search-term="$DefaultSearchTerm" data-ticket-id="$TicketID" };
+    my $DynamicFieldName      = $Param{DynamicFieldConfig}->{Name};
+    my $DynamicFieldFieldType = $Param{DynamicFieldConfig}->{FieldType};
+    my $DynamicFieldSearch    = $FieldName . '_Search';
 
-    # Add InitMultiselect for search.
+    $HTMLString
+        =~ s{(<select )}{$1 data-dynamic-field-name="$DynamicFieldName" data-dynamic-field-type="$DynamicFieldFieldType" data-selected-value-field-name="$FieldName" data-autocomplete-field-name="$DynamicFieldSearch" data-autocomplete-min-length="$AutocompleteMinLength" data-query-delay="$QueryDelay" data-default-search-term="$DefaultSearchTerm" data-ticket-id="$TicketID" };
+
+    # Add InitSelect for search.
     my $DynamicFieldJS = <<"EOF";
     // Initialize JS for dynamic field.
-    Znuny.DynamicField.Webservice.InitMultiselect('$Param{DynamicFieldConfig}->{Name}', '$FieldName', '${FieldName}_Search', $AutocompleteMinLength, $QueryDelay, '$DefaultSearchTerm', '$TicketID', $AdditionalDFs);
+    Znuny.DynamicField.Webservice.InitSelect('$Param{DynamicFieldConfig}->{Name}', '$FieldName', '${FieldName}_Search', $AutocompleteMinLength, $QueryDelay, '$DefaultSearchTerm', '$TicketID', $AdditionalDFs);
 EOF
     $Param{LayoutObject}->AddJSOnDocumentComplete( Code => $DynamicFieldJS );
 

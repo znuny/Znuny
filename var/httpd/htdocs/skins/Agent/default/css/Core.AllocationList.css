@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -21,29 +21,35 @@ ul.AllocationList {
     min-height: 25px;
     max-height: 300px;
     overflow-y: auto;
+    border-bottom-left-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
 }
 
+ul.AllocationList:hover {
+    cursor: grab;
+}
+
+/* Overwritten by 'ul.Tablelike li' in Core.Widget */
 ul.AllocationList li {
-    padding: 2px 5px;
-    cursor: move;
-    position: relative;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-right: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 ul.AllocationList li span.Functions {
-    position: absolute;
-    right: 5px;
-    top: 2px;
-    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--gap-sm);
+    min-width: 58px;
 }
 
 ul.AllocationList li span.Functions a.Icon {
-    margin-left: 0px !important;
+    margin-left: 0;
 }
 
-
+ul.AllocationList li label {
+    display: -webkit-inline-box;
+}
 
 }/* end @media */

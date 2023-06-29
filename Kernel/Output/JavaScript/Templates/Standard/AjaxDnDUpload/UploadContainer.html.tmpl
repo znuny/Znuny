@@ -1,22 +1,23 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="DnDUpload" tabindex="0" role="button" aria-label="{{ 'Click to select a file for upload.' | Translate }}">
-    <i class="fa fa-spinner fa-spin"></i>
-    <i class="fa fa-download"></i>
-    <span class="ReadyForUpload">
-    {% if IsMultiple %}
-        {{ 'Click to select files or just drop them here.' | Translate }}
-    {% else %}
-        {{ 'Click to select a file or just drop it here.' | Translate }}
-    {% endif %}
-    </span>
+    <div class="DnDUpload" tabindex="0" role="button"
+        aria-label="{{ 'Click to select a file for upload.' | Translate }}">
+        <div class="ReadyForUpload">
+            <span class="btn-main btn-width-xxl btn-primary">
+                {% if IsMultiple %}
+                {{ 'Select files or drop them here' | Translate }}
+                {% else %}
+                {{ 'Select a file or drop it here' | Translate }}
+                {% endif %}
+            </span>
+        </div>
 
-    <span class="UploadRunning">{{ 'Uploading...' | Translate }}</span>
-</div>
+        <span class="UploadRunning">{{ 'Uploading...' | Translate }}</span>
+    </div>

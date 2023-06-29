@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -26,6 +26,7 @@ our @ObjectDependencies = (
     'Kernel::System::DateTime',
     'Kernel::System::Encode',
     'Kernel::System::Main',
+    'Kernel::System::Package',
 );
 
 sub Configure {
@@ -69,13 +70,13 @@ sub Configure {
 
 Make sure that you have a clean system with a current configuration. No modules may be installed or linked into the system!
 
-    <green>otrs.Console.pl $Name --language de</green>
+    <green>znuny.Console.pl $Name --language de</green>
 
 <yellow>Translating Extension Modules</yellow>
 
 Make sure that you have a clean system with a current configuration. The module that needs to be translated has to be installed or linked into the system, but only this one!
 
-    <green>otrs.Console.pl $Name --language de --module-directory \$PathToDirectory</green>
+    <green>znuny.Console.pl $Name --language de --module-directory \$PathToDirectory</green>
 EOF
 
     return;
@@ -85,6 +86,8 @@ my $BreakLineAfterChars = 60;
 
 sub PreRun {
     my ( $Self, %Param ) = @_;
+
+    return $Self->ExitCodeOk() if $Self->GetOption('module-directory');
 
     my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
@@ -115,7 +118,9 @@ sub PreRun {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject    = $Kernel::OM->Get('Kernel::System::Main');
+    my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
     my @Languages;
     my $LanguageOption = $Self->GetOption('language');
@@ -140,12 +145,33 @@ sub Run {
     # Gather some statistics
     my %Stats;
 
+    my $ModuleCopyrightVendor;
+    if ( $Self->GetOption('module-directory') ) {
+        my @Files = $MainObject->DirectoryRead(
+            Directory => $Self->GetOption('module-directory'),
+            Filter    => '*.sopm',
+        );
+
+        my $FileContent = $MainObject->FileRead(
+            Location => $Files[0],
+        );
+
+        my %SOPM = $PackageObject->PackageParse( String => $FileContent );
+
+        if (%SOPM) {
+            $ModuleCopyrightVendor = 'com' if $SOPM{URL}->{Content} =~ m{\bznuny\.com\b}i;
+            $ModuleCopyrightVendor = 'org' if $SOPM{URL}->{Content} =~ m{\bznuny\.org\b}i;
+        }
+
+    }
+
     for my $Language (@Languages) {
         $Self->HandleLanguage(
-            Language => $Language,
-            Module   => $Self->GetOption('module-directory'),
-            WritePO  => $Self->GetOption('generate-po'),
-            Stats    => \%Stats,
+            Language              => $Language,
+            Module                => $Self->GetOption('module-directory'),
+            ModuleCopyrightVendor => $ModuleCopyrightVendor,
+            WritePO               => $Self->GetOption('generate-po'),
+            Stats                 => \%Stats,
         );
     }
 
@@ -217,13 +243,12 @@ sub HandleLanguage {
 
         # extract module name from module path
         $Module = basename $Module;
+        my $LanguageFile = $Module;
 
-        # remove underscores and/or version numbers and following from module name
-        # i.e. FAQ_2_0 or FAQ20
-        $Module =~ s/((_|\-)?(\d+))+$//gix;
+        $LanguageFile =~ s/\-//gix;
 
         # save module directory in target file
-        $TargetFile = "$ModuleDirectory/Kernel/Language/${Language}_$Module.pm";
+        $TargetFile = "$ModuleDirectory/Kernel/Language/${Language}_$LanguageFile.pm";
 
         $TargetPOTFile = "$ModuleDirectory/i18n/$Module/$Module.pot";
         $TargetPOFile  = "$ModuleDirectory/i18n/$Module/$Module.$WeblateLanguage.po";
@@ -389,14 +414,15 @@ sub HandleLanguage {
     }
 
     $Self->WritePerlLanguageFile(
-        IsSubTranslation   => $IsSubTranslation,
-        LanguageCoreObject => $LanguageCoreObject,
-        Language           => $Language,
-        Module             => $Module,
-        LanguageFile       => $LanguageFile,
-        TargetFile         => $TargetFile,
-        TranslationStrings => \@TranslationStrings,
-        UsedInJS           => \%UsedInJS,             # Remember which strings came from JavaScript
+        IsSubTranslation      => $IsSubTranslation,
+        LanguageCoreObject    => $LanguageCoreObject,
+        Language              => $Language,
+        Module                => $Module,
+        ModuleCopyrightVendor => $Param{ModuleCopyrightVendor},
+        LanguageFile          => $LanguageFile,
+        TargetFile            => $TargetFile,
+        TranslationStrings    => \@TranslationStrings,
+        UsedInJS              => \%UsedInJS,                      # Remember which strings came from JavaScript
     );
     return 1;
 }
@@ -641,13 +667,20 @@ sub WritePerlLanguageFile {
         # needed for cvs check-in filter
         my $Separator = "# --";
 
+        my $HeaderString = "# Copyright (C) ";
+
+        if ( $Param{ModuleCopyrightVendor} ) {
+            $HeaderString .= "2012 Znuny GmbH, https://znuny.com/" if $Param{ModuleCopyrightVendor} eq "com";
+            $HeaderString .= "2021 Znuny GmbH, https://znuny.org/" if $Param{ModuleCopyrightVendor} eq "org";
+        }
+
         $NewOut = <<"EOF";
 $Separator
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+$HeaderString
 $Separator
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 $Separator
 
 package Kernel::Language::$Param{Language}_$Param{Module};

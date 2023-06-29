@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,7 +13,7 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Output = qx{"$^X" bin/otrs.Console.pl Maint::Ticket::PendingCheck --quiet};
+my $Output = qx{"$^X" bin/znuny.Console.pl Maint::Ticket::PendingCheck --quiet};
 
 $Self->False( scalar( $Output =~ /\S/ ), "No output with --quiet" );
 

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -27,6 +27,7 @@ $Selenium->RunTest(
         my $CustomerUserObject        = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
         my $LanguageObject            = $Kernel::OM->Get('Kernel::Language');
+        my $JSONObject                = $Kernel::OM->Get('Kernel::System::JSON');
 
         $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
@@ -149,8 +150,8 @@ $Selenium->RunTest(
         );
 
         # Get the customer company and customer user configs to add the dynamic fields to the map.
-        my $CustomerCompanyConfig = $Kernel::OM->Get('Kernel::Config')->Get('CustomerCompany');
-        my $CustomerUserConfig    = $Kernel::OM->Get('Kernel::Config')->Get('CustomerUser');
+        my $CustomerCompanyConfig = $ConfigObject->Get('CustomerCompany');
+        my $CustomerUserConfig    = $ConfigObject->Get('CustomerUser');
 
         my @DynamicFieldIDs;
         my @DynamicFieldCustomerCompanySearchFields;
@@ -401,7 +402,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             [
@@ -668,7 +669,7 @@ $Selenium->RunTest(
 
                         if ( IsArrayRefWithData( $SubTest->{SearchParameter}->{Selection}->{$FieldName} ) ) {
 
-                            my $ValuesString = $Kernel::OM->Get('Kernel::System::JSON')->Encode(
+                            my $ValuesString = $JSONObject->Encode(
                                 Data => $SubTest->{SearchParameter}->{Selection}->{$FieldName},
                             );
 
@@ -848,7 +849,7 @@ $Selenium->RunTest(
 
                         if ( IsArrayRefWithData( $SubTest->{SearchParameterChange}->{Selection}->{$FieldName} ) ) {
 
-                            my $ValuesString = $Kernel::OM->Get('Kernel::System::JSON')->Encode(
+                            my $ValuesString = $JSONObject->Encode(
                                 Data => $SubTest->{SearchParameterChange}->{Selection}->{$FieldName},
                             );
 

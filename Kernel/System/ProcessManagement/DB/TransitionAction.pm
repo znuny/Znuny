@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -66,10 +66,10 @@ add new TransitionAction
 returns the id of the created TransitionAction if success or undef otherwise
 
     my $ID = $TransitionActionObject->TransitionActionAdd(
-        EntityID => 'TA1'                                               # mandatory, exportable unique identifier
+        EntityID => 'TA1',                                              # mandatory, exportable unique identifier
         Name     => 'NameOfTransitionAction',                           # mandatory
         Config   => {                                                   # mandatory, transition action configuration to be stored in YAML format
-            Scope         => 'Global'                                   # mandatory, default 'Global' (Process|Global)
+            Scope         => 'Global',                                  # mandatory, default 'Global' (Process|Global)
             ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199' # ScopeEntityID, used if specific scope is set e.g. 'Process'
         },
 
@@ -380,7 +380,7 @@ returns 1 if success or undef otherwise
 
     my $Success = $TransitionActionObject->TransitionActionUpdate(
         ID       => 123,                                                 # mandatory
-        EntityID => 'TA1'                                                # mandatory, exportable unique identifier
+        EntityID => 'TA1',                                               # mandatory, exportable unique identifier
         Name     => 'NameOfTransitionAction',                            # mandatory
         Config   => {                                                    # mandatory, transition action configuration to be stored in YAML format
             Scope         => 'Global',                                   # mandatory, default 'Global' (Process|Global)

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,7 +21,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Session Config Settings');
+    return Translatable('Znuny') . '/' . Translatable('Session Config Settings');
 }
 
 sub Run {
@@ -30,7 +30,6 @@ sub Run {
     my @Settings = qw(
         SessionMaxTime
         SessionMaxIdleTime
-        AgentSessionLimitPriorWarning
         AgentSessionLimit
         AgentSessionPerUserLimit
         CustomerSessionLimit

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,7 +8,7 @@
 # --
 
 [% RenderBlockStart("ConfigureMail") %]
-<div class="W950px SpacingTop SpacingBottom CenterBox">
+<div class="SpacingTop SpacingBottom CenterBox">
     <form action="[% Env("CGIHandle") %]" method="post" id="FormMail" class="PreventMultipleSubmits">
         <input type="hidden" name="Action" value="Installer">
         <input type="hidden" name="Subaction" value="Finish">
@@ -21,131 +21,141 @@
 
             <div class="Content">
                 <fieldset class="TableLike">
-                    <h4>
-                        [% Translate("Configure Outbound Mail") | html %]
-                    </h4>
-                    <div class="Clear"></div>
 
-                    <label for="OutboundMailType">[% Translate("Outbound mail type") | html %]:</label>
-                    <div class="Field">
-                        [% Data.OutboundMailType %]
-                        [% Data.OutboundPorts %]
-                        <p class="FieldExplanation">
-                            [% Translate("Select outbound mail type.") | html %]
-                        </p>
-                    </div>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <h4 class="title">
+                            [% Translate("Configure Outbound Mail") | html %]
+                        </h4>
 
-                    <label for="SMTPPort">[% Translate("Outbound mail port") | html %]:</label>
-                    <div class="Field">
-                        <input type="text" id="SMTPPort" name="SMTPPort" value="[% Data.SMTPPort | html %]" class="W25pc">
-                        <p class="FieldExplanation">
-                            [% Translate("Select outbound mail port.") | html %]
-                        </p>
+                        <label for="OutboundMailType">[% Translate("Outbound mail type") | html %]</label>
+                        <div class="Field">
+                            [% Data.OutboundMailType %]
+                            [% Data.OutboundPorts %]
+                            <p class="FieldExplanation">
+                                [% Translate("Select outbound mail type.") | html %]
+                            </p>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
+
+                    <div class="field-wrapper">
+                        <label for="SMTPPort">[% Translate("Outbound mail port") | html %]</label>
+                        <div class="Field">
+                            <input type="text" id="SMTPPort" name="SMTPPort" value="[% Data.SMTPPort | html %]" class="W25pc">
+                            <p class="FieldExplanation">
+                                [% Translate("Select outbound mail port.") | html %]
+                            </p>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <fieldset class="TableLike" id="InfoSMTP">
-                    <label for="SMTPHost">[% Translate("SMTP host") | html %]:</label>
-                    <div class="Field">
-                        <input type="text" id="SMTPHost" name="SMTPHost" value="[% Data.SMTPHost | html %]" class="W33pc">
-                        <p class="FieldExplanation">
-                            [% Translate("SMTP host.") | html %]
-                        </p>
+                    <div class="field-wrapper">
+                        <label for="SMTPHost">[% Translate("SMTP host") | html %]</label>
+                        <div class="Field">
+                            <input type="text" id="SMTPHost" name="SMTPHost" value="[% Data.SMTPHost | html %]" class="W33pc">
+                            <p class="FieldExplanation">
+                                [% Translate("SMTP host.") | html %]
+                            </p>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <label for="SMTPAuth">[% Translate("SMTP authentication") | html %]:</label>
-                    <div class="Field">
-                        <input type="checkbox" id="SMTPAuth" name="SMTPAuth">
-                        <p class="FieldExplanation">
-                            [% Translate("Does your SMTP host need authentication?") | html %]
-                        </p>
+                    <div class="field-wrapper">
+                        <label for="SMTPAuth">[% Translate("SMTP authentication") | html %]</label>
+                        <div class="Field">
+                            <input type="checkbox" id="SMTPAuth" name="SMTPAuth">
+                            <p class="FieldExplanation">
+                                [% Translate("Does your SMTP host need authentication?") | html %]
+                            </p>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
                 </fieldset>
 
                 <fieldset class="TableLike Hidden" id="InfoSMTPAuth">
-                    <label for="SMTPAuthUser">[% Translate("SMTP auth user") | html %]:</label>
-                    <div class="Field">
-                        <input type="text" id="SMTPAuthUser" name="SMTPAuthUser" value="[% Data.SMTPAuthUser | html %]" disabled="disabled" class="W33pc" autocomplete="off">
-                        <p class="FieldExplanation">
-                            [% Translate("Username for SMTP auth.") | html %]
-                        </p>
+                    <div class="field-wrapper">
+                        <label for="SMTPAuthUser">[% Translate("SMTP auth user") | html %]</label>
+                        <div class="Field">
+                            <input type="text" id="SMTPAuthUser" name="SMTPAuthUser" value="[% Data.SMTPAuthUser | html %]" disabled="disabled" class="W33pc" autocomplete="off">
+                            <p class="FieldExplanation">
+                                [% Translate("Username for SMTP auth.") | html %]
+                            </p>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <label for="SMTPAuthPassword">[% Translate("SMTP auth password") | html %]:</label>
-                    <div class="Field">
-                        <input type="password" id="SMTPAuthPassword" name="SMTPAuthPassword" value="[% Data.SMTPAuthPassword | html %]" disabled="disabled" class="W33pc" autocomplete="off">
-                        <p class="FieldExplanation">
-                            [% Translate("Password for SMTP auth.") | html %]
-                        </p>
+                    <div class="field-wrapper">
+                        <label for="SMTPAuthPassword">[% Translate("SMTP auth password") | html %]</label>
+                        <div class="Field">
+                            <input type="password" id="SMTPAuthPassword" name="SMTPAuthPassword" value="[% Data.SMTPAuthPassword | html %]" disabled="disabled" class="W33pc" autocomplete="off">
+                            <p class="FieldExplanation">
+                                [% Translate("Password for SMTP auth.") | html %]
+                            </p>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
                 </fieldset>
 
                 <fieldset class="TableLike">
-                    <h4>
-                        [% Translate("Configure Inbound Mail") | html %]
-                    </h4>
-                    <div class="Clear"></div>
 
-                    <label for="InboundMailType">[% Translate("Inbound mail type") | html %]:</label>
-                    <div class="Field">
-                        [% Data.InboundMailType %]
-                        <p class="FieldExplanation">
-                            [% Translate("Select inbound mail type.") | html %]
-                        </p>
-                    </div>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <h4 class="title">
+                            [% Translate("Configure Inbound Mail") | html %]
+                        </h4>
 
-                    <label for="InboundHost">[% Translate("Inbound mail host") | html %]:</label>
-                    <div class="Field">
-                        <input type="text" id="InboundHost" name="InboundHost" value="[% Data.InboundHost | html %]" class="W33pc">
-                        <p class="FieldExplanation">
-                            [% Translate("Inbound mail host.") | html %]
-                        </p>
+                        <label for="InboundMailType">[% Translate("Inbound mail type") | html %]</label>
+                        <div class="Field">
+                            [% Data.InboundMailType %]
+                            <p class="FieldExplanation">
+                                [% Translate("Select inbound mail type.") | html %]
+                            </p>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <label for="InboundUser">[% Translate("Inbound mail user") | html %]:</label>
-                    <div class="Field">
-                        <input type="text" id="InboundUser" name="InboundUser" value="[% Data.InboundUser | html %]" class="W33pc" autocomplete="off">
-                        <p class="FieldExplanation">
-                            [% Translate("User for inbound mail.") | html %]
-                        </p>
+                    <div class="field-wrapper">
+                        <label for="InboundHost">[% Translate("Inbound mail host") | html %]</label>
+                        <div class="Field">
+                            <input type="text" id="InboundHost" name="InboundHost" value="[% Data.InboundHost | html %]" class="W33pc">
+                            <p class="FieldExplanation">
+                                [% Translate("Inbound mail host.") | html %]
+                            </p>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <label for="InboundPassword">[% Translate("Inbound mail password") | html %]:</label>
-                    <div class="Field">
-                        <input type="password" id="InboundPassword" name="InboundPassword" value="[% Data.InboundPassword | html %]" class="W33pc" autocomplete="off">
-                        <p class="FieldExplanation">
-                            [% Translate("Password for inbound mail.") | html %]
-                        </p>
+                    <div class="field-wrapper">
+                        <label for="InboundUser">[% Translate("Inbound mail user") | html %]</label>
+                        <div class="Field">
+                            <input type="text" id="InboundUser" name="InboundUser" value="[% Data.InboundUser | html %]" class="W33pc" autocomplete="off">
+                            <p class="FieldExplanation">
+                                [% Translate("User for inbound mail.") | html %]
+                            </p>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
+
+                    <div class="field-wrapper">
+                        <label for="InboundPassword">[% Translate("Inbound mail password") | html %]</label>
+                        <div class="Field">
+                            <input type="password" id="InboundPassword" name="InboundPassword" value="[% Data.InboundPassword | html %]" class="W33pc" autocomplete="off">
+                            <p class="FieldExplanation">
+                                [% Translate("Password for inbound mail.") | html %]
+                            </p>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <fieldset class="TableLike Hidden ErrorMsg">
-                    <h4>
-                        [% Translate("Result of mail configuration check") | html %]
-                    </h4>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <h4>
+                            [% Translate("Result of mail configuration check") | html %]
+                        </h4>
 
-                    <div class="Field">
-                        <p class="Error" id="FormMailResultMessage"></p>
+                        <div class="Field">
+                            <p class="Error" id="FormMailResultMessage"></p>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
                 </fieldset>
 
-                <div id="InstallerContinueWithJS" class="SpacingTop Right">
-                    <button class="Primary CallForAction" type="button" id="ButtonCheckMail" value="[% Translate("Check mail configuration") | html %]"><span>[% Translate("Check mail configuration") | html %]</span></button>
-                    [% Translate("or") | html %]
-                    <button type="button" id="ButtonSkipMail" class="CallForAction" value="[% Translate("Skip this step") | html %]"><span>[% Translate("Skip this step") | html %]</span></button>
+                <div id="InstallerContinueWithJS" class="SaveButtons">
+                    <button class="Primary CallForAction btn-main btn-secondary-ghost btn-width-md" type="button" id="ButtonCheckMail" value="[% Translate("Check mail configuration") | html %]"><span>[% Translate("Check mail configuration") | html %]</span></button>
+#                    [% Translate("or") | html %]
+                    <button type="button" id="ButtonSkipMail" class="CallForAction btn-main btn-primary btn-width-md" value="[% Translate("Skip this step") | html %]"><span>[% Translate("Skip this step") | html %]</span></button>
                 </div>
 
             </div>

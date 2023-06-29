@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -14,7 +14,6 @@ use warnings;
 
 use Data::ICal;
 use Data::ICal::Entry::Event;
-use Date::ICal;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -53,9 +52,12 @@ create an object. Do not use it directly, instead use:
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    $Self->{TimeZonesMap} = $ConfigObject->Get('AppointmentCalendar::NonStandardTimeZonesMapping') // {};
 
     return $Self;
 }
@@ -72,7 +74,7 @@ Import calendar in C<iCalendar> format.
                 PRODID:Zimbra-Calendar-Provider
                 VERSION:2.0
                 METHOD:REQUEST
-                ...
+                # ...
             ',
         UserID         => 1,                      # (required) UserID
         UpdateExisting => 0,                      # (optional) Delete existing Appointments within same Calendar if UniqueID matches
@@ -100,6 +102,10 @@ sub Import {
     }
 
     my $UntilLimitedTimestamp = $Param{UntilLimit} || '';
+
+    # Prevent double \n\n for fix below bug#14791
+    $Param{ICal} =~ s/\r\n/\n/g;
+    $Param{ICal} =~ s/\n\r/\n/g;
 
     # Prevent line ending type errors (see bug#14791).
     $Param{ICal} =~ s/\r/\n/g;
@@ -218,7 +224,7 @@ sub Import {
                 'Kernel::System::DateTime',
                 ObjectParams => {
                     String   => $StartTimeICal,
-                    TimeZone => $TimezoneID,
+                    TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                 },
             );
 
@@ -253,7 +259,7 @@ sub Import {
                 'Kernel::System::DateTime',
                 ObjectParams => {
                     String   => $EndTimeICal,
-                    TimeZone => $TimezoneID,
+                    TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                 },
             );
 
@@ -493,7 +499,7 @@ sub Import {
                             'Kernel::System::DateTime',
                             ObjectParams => {
                                 String   => $ExcludeTimeICal,
-                                TimeZone => $TimezoneID,
+                                TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                             },
                         );
 
@@ -622,7 +628,7 @@ sub Import {
                 'Kernel::System::DateTime',
                 ObjectParams => {
                     String   => $RecurrenceIDICal,
-                    TimeZone => $TimezoneID,
+                    TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                 },
             );
 

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -60,6 +60,9 @@ for my $Key ( sort keys %UserData ) {
 
     # Skip dropdown-values of last views
     next KEY if $Key =~ m{\AUserLastViews};
+
+    # Skip dropdown-values of User Activity LinkTarget
+    next KEY if $Key =~ m{\AUserActivityLinkTarget};
 
     $Self->False(
         $UserObject->SetPreferences(

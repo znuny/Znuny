@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -10,7 +10,8 @@
 # Default configuration for OTRS. All changes to this file will be lost after an
 #   update, please use AdminSystemConfiguration to configure your system.
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::Config::Defaults;
 
@@ -93,7 +94,7 @@ sub LoadDefaults {
     # ScriptAlias
     # Prefix to index.pl used as ScriptAlias in web config
     # (Used when emailing links to agents).
-    $Self->{ScriptAlias} = 'otrs/';
+    $Self->{ScriptAlias} = 'znuny/';
 
     # AdminEmail
     # (Email of the system admin.)
@@ -117,11 +118,11 @@ sub LoadDefaults {
 
     # Database
     # (The database name.)
-    $Self->{Database} = 'otrs';
+    $Self->{Database} = 'znuny';
 
     # DatabaseUser
     # (The database user.)
-    $Self->{DatabaseUser} = 'otrs';
+    $Self->{DatabaseUser} = 'znuny';
 
     # DatabasePw
     # (The password of database user.)
@@ -286,7 +287,7 @@ sub LoadDefaults {
 
     # Frontend::WebPath
     # (URL base path of icons, CSS and Java Script.)
-    $Self->{'Frontend::WebPath'} = '/otrs-web/';
+    $Self->{'Frontend::WebPath'} = '/znuny-web/';
 
     # Frontend::JavaScriptPath
     # (URL JavaScript path.)
@@ -369,7 +370,7 @@ sub LoadDefaults {
 #    $Self->{'LogModule::SysLog::Charset'} = 'utf-8';
 
     # param for LogModule Kernel::System::Log::File (required!)
-    $Self->{'LogModule::LogFile'} = '/tmp/otrs.log';
+    $Self->{'LogModule::LogFile'} = '/tmp/znuny.log';
 
     # param if the date (yyyy-mm) should be added as suffix to
     # logfile [0|1]
@@ -530,6 +531,7 @@ sub LoadDefaults {
 #    $Self->{'AuthSyncModule::LDAP::Host'} = 'ldap.example.com';
 #    $Self->{'AuthSyncModule::LDAP::BaseDN'} = 'dc=example,dc=com';
 #    $Self->{'AuthSyncModule::LDAP::UID'} = 'uid';
+#    $Self->{'AuthSyncModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
 
     # The following is valid but would only be necessary if the
     # anonymous user do NOT have permission to read from the LDAP tree
@@ -719,15 +721,8 @@ sub LoadDefaults {
     # agent interface notification module to check the admin user id
     # (don't work with user id 1 notification)
     $Self->{'Frontend::NotifyModule'} = {
-        '1100-OTRSBusiness' => {
-            Group  => 'admin',
-            Module => 'Kernel::Output::HTML::Notification::AgentOTRSBusiness',
-        },
         '2000-UID-Check' => {
             Module => 'Kernel::Output::HTML::Notification::UIDCheck',
-        },
-        '2500-AgentSessionLimit' => {
-          'Module' => 'Kernel::Output::HTML::Notification::AgentSessionLimit',
         },
         '5000-SystemConfigurationIsDirty-Check' => {
             Group  => 'admin',
@@ -886,7 +881,7 @@ sub LoadDefaults {
 #    $Self->{WebUploadCacheModule} = 'Kernel::System::Web::UploadCache::FS';
 
     # CGILogPrefix
-    $Self->{CGILogPrefix} = 'OTRS-CGI';
+    $Self->{CGILogPrefix} = 'Znuny-CGI';
 
     # --------------------------------------------------- #
     # Agent Web Interface
@@ -926,7 +921,7 @@ sub LoadDefaults {
     # directories                                         #
     # --------------------------------------------------- #
     # root directory
-    $Self->{Home} = '/opt/otrs';
+    $Self->{Home} = '/opt/znuny';
 
     # tmp dir
     $Self->{TempDir} = '<OTRS_CONFIG_Home>/var/tmp';
@@ -942,29 +937,15 @@ sub LoadDefaults {
     # CommonCSS                                           #
     # --------------------------------------------------- #
 
-    # Customer Common CSS
-    $Self->{'Loader::Customer::CommonCSS'}->{'000-Framework'} = [
-        'Core.Color.css',
-        'Core.Reset.css',
-        'Core.Default.css',
-        'Core.Form.css',
-        'Core.Dialog.css',
-        'Core.Tooltip.css',
-        'Core.Login.css',
-        'Core.Control.css',
-        'Core.Table.css',
-        'Core.TicketZoom.css',
-        'Core.InputFields.css',
-        'Core.Print.css',
-        'Core.Animations.css',
-    ];
-
     # Agent Common CSS
     $Self->{'Loader::Agent::CommonCSS'}->{'000-Framework'} = [
         'Core.Color.css',
+        'Core.Vars.css',
         'Core.Reset.css',
+        'Core.Reset.Forwwward.css',
         'Core.Default.css',
         'Core.Header.css',
+        'Core.Overview.css',
         'Core.OverviewControl.css',
         'Core.OverviewSmall.css',
         'Core.OverviewMedium.css',
@@ -982,6 +963,31 @@ sub LoadDefaults {
         'Core.InputFields.css',
         'Core.Print.css',
         'Core.Animations.css',
+        'Core.Components.css',
+        'Core.FlexboxModel.css',
+        'Core.Typography.css',
+    ];
+
+    # Customer Common CSS
+    $Self->{'Loader::Customer::CommonCSS'}->{'000-Framework'} = [
+        'Core.Color.css',
+        'Core.Vars.css',
+        'Core.Reset.css',
+        'Core.Reset.Forwwward.css',
+        'Core.Default.css',
+        'Core.Form.css',
+        'Core.Dialog.css',
+        'Core.Tooltip.css',
+        'Core.Login.css',
+        'Core.Control.css',
+        'Core.Table.css',
+        'Core.TicketZoom.css',
+        'Core.InputFields.css',
+        'Core.Print.css',
+        'Core.Animations.css',
+        'Core.FlexboxModel.css',
+        'Core.PageLayout.css',
+        'Core.Components.css'
     ];
 
     # --------------------------------------------------- #
@@ -1044,6 +1050,7 @@ sub LoadDefaults {
         'Core.Data.js',
         'Core.Config.js',
         'Core.Language.js',
+        'Core.Activity.js',
         'Core.Template.js',
         'Core.JSON.js',
         'Core.App.js',
@@ -1092,7 +1099,7 @@ sub LoadDefaults {
     # Package::RepositoryList
     # (repository list)
 #    $Self->{'Package::RepositoryList'} = {
-#        'ftp://ftp.example.com/pub/otrs/misc/packages/' => '[Example] ftp://ftp.example.com/',
+#        'ftp://ftp.example.com/pub/znuny/misc/packages/' => '[Example] ftp://ftp.example.com/',
 #    };
 
     # Package::Timeout
@@ -1108,7 +1115,7 @@ sub LoadDefaults {
     # --------------------------------------------------- #
     $Self->{PGP}            = 0;
     $Self->{'PGP::Bin'}     = '/usr/bin/gpg';
-    $Self->{'PGP::Options'} = '--homedir /opt/otrs/.gnupg/ --batch --no-tty --yes';
+    $Self->{'PGP::Options'} = '--homedir /opt/znuny/.gnupg/ --batch --no-tty --yes';
 
 #    $Self->{'PGP::Options'} = '--batch --no-tty --yes';
 #    $Self->{'PGP::Key::Password'}->{'D2DF79FA'} = 1234;
@@ -1251,7 +1258,7 @@ You can log in via the following URL:
 
     # CustomerGroupSupport (0 = compat. to OTRS 1.1 or lower)
     # (if this is 1, the you need to set the group <-> customer user
-    # relations! http://host/otrs/index.pl?Action=AdminCustomerUserGroup
+    # relations! http://host/znuny/index.pl?Action=AdminCustomerUserGroup
     # otherway, each user is ro/rw in each group!)
     $Self->{CustomerGroupSupport} = 0;
 
@@ -1672,6 +1679,8 @@ via the Preferences button after logging in.
         CustomerCompanySearchSuffix    => '*',
         CustomerCompanySearchListLimit => 250,
         CacheTTL                       => 60 * 60 * 24, # use 0 to turn off cache
+#        # Consider this source read only.
+#        ReadOnly => 1,
 
         Map => [
             # Info about dynamic fields:
@@ -1747,12 +1756,11 @@ via the Preferences button after logging in.
         NavBarName => 'Admin',
         Title      => '',
     };
-    $Self->{'Loader::Module::Admin'}->{'000-Defaults'} = {
+    $Self->{'Loader::Module::Admin'}->{'001-Framework'} = {
         CSS => [
             'Core.Agent.Admin.css',
         ],
         JavaScript => [
-            'Core.Agent.Admin.js',
             'Core.UI.AllocationList.js',
             'Core.Agent.TableFilters.js',
         ],
@@ -1805,7 +1813,7 @@ via the Preferences button after logging in.
         NavBarName => 'Admin',
         Title      => 'System Log',
     };
-    $Self->{'Loader::Module::AdminLog'}->{'000-Defaults'} = {
+    $Self->{'Loader::Module::AdminLog'}->{'001-Framework'} = {
         JavaScript => [
           'Core.Agent.Admin.Log.js'
         ],
@@ -1830,7 +1838,7 @@ via the Preferences button after logging in.
         Title        => 'System Configuration',
         NavBarName   => 'Admin',
     };
-    $Self->{'Loader::Module::AdminSystemConfiguration'}->{'000-Defaults'} = {
+    $Self->{'Loader::Module::AdminSystemConfiguration'}->{'001-Framework'} = {
         CSS => [
             'Core.Agent.Admin.SystemConfiguration.css',
         ],
@@ -2102,7 +2110,7 @@ sub Set {
     return 1;
 }
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::Translatable)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Translatable)
 
 # This is a no-op to mark a text as translatable in the Perl code.
 #   We use our own version here instead of importing Language::Translatable to not add a dependency.
@@ -2171,7 +2179,7 @@ sub AutoloadPerlPackages {
             # Don't use the MainObject here to load the file.
             eval {
                 my $FileName = $Package =~ s{::}{/}smxgr;
-                require $FileName . '.pm'; ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+                require $FileName . '.pm'; ## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
             };
         }
     }

@@ -1,11 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::System::UnitTest::Driver;
 
@@ -114,10 +115,10 @@ sub Run {
     # Create a new scope to be sure to destroy local object of the test files.
     {
         # Make sure every UT uses its own clean environment.
-        ## nofilter(TidyAll::Plugin::OTRS::Perl::ObjectManagerCreation)
+        ## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectManagerCreation)
         local $Kernel::OM = Kernel::System::ObjectManager->new(
             'Kernel::System::Log' => {
-                LogPrefix => 'OTRS-otrs.UnitTest',
+                LogPrefix => 'ZNUNY-znuny.UnitTest',
             },
         );
 
@@ -512,8 +513,8 @@ sub AttachSeleniumScreenshot {
 
     push @{ $Self->{ResultData}->{Results}->{ $Self->{TestCount} }->{Screenshots} },
         {
-            Filename => $Param{Filename},
-            Content  => $Param{Content},
+        Filename => $Param{Filename},
+        Content  => $Param{Content},
         };
 
     return;

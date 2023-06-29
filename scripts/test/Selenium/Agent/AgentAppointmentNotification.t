@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,6 +23,7 @@ $Selenium->RunTest(
         my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
         my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
         my $UserObject        = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 
         my $RandomID = $HelperObject->GetRandomID();
 
@@ -34,7 +35,7 @@ $Selenium->RunTest(
             UserID  => 1,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my $NextMonthObject = $Kernel::OM->Create('Kernel::System::DateTime');
         $NextMonthObject->Add(
@@ -292,7 +293,9 @@ $Selenium->RunTest(
         for my $Test (@TemplateCreateTests) {
 
             # Create appointment.
-            $Selenium->find_elements("//td[contains(\@data-date,'$DataDate')]")->[1]->click();
+            my $Element = $Selenium->find_element("//td[contains(\@data-date,'$DataDate')]");
+            $Selenium->mouse_move_to_location( element => $Element );
+            $Element->click();
 
             # Wait until form and overlay has loaded, if neccessary.
             $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Title').length;" );
@@ -318,7 +321,9 @@ $Selenium->RunTest(
             $Selenium->WaitForjQueryEventBound(
                 CSSSelector => "#EditFormSubmit",
             );
-            $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+            my $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+            $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+            $EditFormSubmit->click();
 
             # Wait until all AJAX calls finished.
             $Selenium->WaitFor( JavaScript => "return \$.active == 0" );
@@ -518,7 +523,9 @@ $Selenium->RunTest(
         for my $Test (@TemplateCustomRelativeCreateTests) {
 
             # Create appointment.
-            $Selenium->find_elements("//td[contains(\@data-date,'$DataDate')]")->[1]->click();
+            my $Element = $Selenium->find_element("//td[contains(\@data-date,'$DataDate')]");
+            $Selenium->mouse_move_to_location( element => $Element );
+            $Element->click();
 
             # Wait until form and overlay has loaded, if neccessary.
             $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Title').length;" );
@@ -557,7 +564,9 @@ $Selenium->RunTest(
             );
 
             # Click on Save.
-            $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+            my $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+            $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+            $EditFormSubmit->click();
 
             # Wait for dialog to close and AJAX to finish.
             $Selenium->WaitFor(
@@ -771,7 +780,9 @@ $Selenium->RunTest(
         for my $Test (@TemplateCustomDateTimeCreateTests) {
 
             # Create appointment.
-            $Selenium->find_elements("//td[contains(\@data-date,'$DataDate')]")->[1]->click();
+            my $Element = $Selenium->find_element("//td[contains(\@data-date,'$DataDate')]");
+            $Selenium->mouse_move_to_location( element => $Element );
+            $Element->click();
 
             # Wait until form and overlay has loaded, if neccessary.
             $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Title').length;" );
@@ -790,7 +801,9 @@ $Selenium->RunTest(
             );
 
             # Activate the relative notifications.
-            $Selenium->find_element( "#NotificationCustomDateTimeInput", 'css' )->click();
+            $Element = $Selenium->find_element( "#NotificationCustomDateTimeInput", 'css' );
+            $Selenium->mouse_move_to_location( element => $Element );
+            $Element->click();
             $Selenium->WaitFor( JavaScript => "return \$('#NotificationCustomDateTimeInput:checked').length;" );
 
             # Select day.
@@ -824,7 +837,9 @@ $Selenium->RunTest(
             );
 
             # Click on Save.
-            $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+            my $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+            $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+            $EditFormSubmit->click();
 
             # Wait for dialog to close and AJAX to finish.
             $Selenium->WaitFor(

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,9 +19,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $HelperObject        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject        = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject        = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject         = $Kernel::OM->Get('Kernel::System::Cache');
+        my $GroupObject         = $Kernel::OM->Get('Kernel::System::Group');
+        my $CustomerGroupObject = $Kernel::OM->Get('Kernel::System::CustomerGroup');
 
         # enable customer group support
         $HelperObject->ConfigSettingChange(
@@ -61,7 +64,7 @@ $Selenium->RunTest(
 
         # create test group
         my $GroupName = 'Group' . $HelperObject->GetRandomID();
-        my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
+        my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
             UserID  => 1,
@@ -73,7 +76,7 @@ $Selenium->RunTest(
 
         # Disable frontend service module.
         my $FrontendCustomerTicketOverview
-            = $Kernel::OM->Get('Kernel::Config')->Get('CustomerFrontend::Navigation')->{CustomerTicketOverview}
+            = $ConfigObject->Get('CustomerFrontend::Navigation')->{CustomerTicketOverview}
             ->{'002-Ticket'};
 
         # Change the group for the CompanyTickets.
@@ -97,7 +100,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to CompanyTickets subaction screen
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketOverview;Subaction=CompanyTickets");
@@ -110,7 +113,7 @@ $Selenium->RunTest(
         );
 
         # set customer user in test group with rw and ro permissions
-        my $Success = $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupMemberAdd(
+        my $Success = $CustomerGroupObject->GroupMemberAdd(
             GID        => $GroupID,
             UID        => $TestCustomerUserLogin,
             Permission => {
@@ -190,7 +193,7 @@ $Selenium->RunTest(
             qw (Ticket CustomerGroup Group )
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

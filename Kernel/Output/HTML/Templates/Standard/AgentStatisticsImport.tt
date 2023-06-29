@@ -1,32 +1,14 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-
-<div class="MainBox AriaRoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Statistics Management") | html %]</h1>
-
-    [% USE ActionLink = String( 'AgentStatistics' ) %]
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Statistics Management'),
-                Link => ActionLink.append( ';Subaction=Overview' ),
-            },
-            {
-                Name => Translate('Import Statistics'),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath Type = "Agent" %]
-
-    <div class="SidebarColumn">
+<div class="MainBox AriaRoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -34,7 +16,12 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview" class="CallForAction Fullsize Center">
+                            <span>
+                                <i class="fa fa-caret-left"></i>
+                                [% Translate("Go to overview") | html %]
+                            </span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -42,29 +29,51 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Statistics Management") | html %]</h1>
+
+        [% USE ActionLink = String( 'AgentStatistics' ) %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Statistics Management'),
+                    Link => ActionLink.append( ';Subaction=Overview' ),
+                },
+                {
+                    Name => Translate('Import Statistics'),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath Type = "Agent" %]
+
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Import Statistics Configuration") | html %]</h2>
             </div>
             <div class="Content">
-
-                <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits padding-lg">
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                     <input type="hidden" name="Subaction" value="ImportAction"/>
 
                     <fieldset class="TableLike">
-                        <label for="File">[% Translate("File") | html %]:</label>
-                        <div class="Field">
-                            <input name="File" id="File" type="file" size="30" class="Validate_Required [% Data.FileServerError %]"/>
-                            <p id="FileServerError" class="Hidden">[% Translate(Data.FileServerErrorMessage) | html %]</p>
+                        <div class="field-wrapper">
+                            <label for="File">[% Translate("File") | html %]:</label>
+                            <div class="Field">
+                                <input name="File" id="File" type="file" size="30" class="Validate_Required [% Data.FileServerError %] FileUpload"/>
+                                <p id="FileServerError" class="Hidden">[% Translate(Data.FileServerErrorMessage) | html %]</p>
+                            </div>
                         </div>
-                        <div class="Field SpacingTop">
-                            <button class="Primary CallForAction" accesskey="g" title="[% Translate("Import") | html %] (g)" type="submit" value="[% Translate("Import") | html %]"><span>[% Translate("Import") | html %]</span></button>
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview">[% Translate("Cancel") | html %]</a>
+
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+
+                                <button class="btn-primary btn-main btn-width-md" accesskey="g" title="[% Translate("Import") | html %] (g)" type="submit" value="[% Translate("Import") | html %]">
+                                    <span>[% Translate("Import") | html %]</span>
+                                </button>
+                            </div>
                         </div>
                     </fieldset>
-
                 </form>
             </div>
         </div>

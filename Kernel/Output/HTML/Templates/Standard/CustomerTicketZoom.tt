@@ -1,221 +1,268 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+
 <div id="MainBox" class="TicketZoom ARIARoleMain">
+    <div class="ContentWrapper flex-column">
 [% RenderBlockStart("Back") %]
-    <div class="ActionRow">
-        <ul class="Tabs">
-            <li><a href="[% Env("Baselink") %][% Env("LastScreenOverview") %]">&larr; [% Translate("Back") | html %]</a></li>
-        </ul>
-        <div class="Clear"></div>
-    </div>
-[% RenderBlockEnd("Back") %]
-    <div class="Content">
-        <div class="TicketHeader">
-            <h2 title="[% Data.Title | html %]">
-[% RenderBlockStart("PriorityFlag") %]
-                <div class="Flag" title="[% Translate(Data.Priority) | html %]"><span class="PriorityID-[% Data.PriorityID | html %]">[% Translate(Data.Priority) | html %]</span></div>
-[% RenderBlockEnd("PriorityFlag") %]
-                [% Data.Title | html %]
-            </h2>
-            <ul id="TicketOptions">
-[% RenderBlockStart("Chat") %]
-                <li>
-                    <a target="_blank" href="[% Env("Baselink") %]Action=CustomerChat;Subaction=CreateChatRequest;TicketID=[% Data.TicketID | uri %];" class="Print" title="[% Translate("Start a chat from this ticket") | html %]">
-                        <i class="fa fa-comments-o"></i>
-                        <span class="InvisibleText">[% Translate("Start a chat from this ticket") | html %]</span>
+        <div class="outer-BreadCrumb">
+            <ul class="BreadCrumb">
+                <li class="btn-back">
+                    <a href="[% Env("Baselink") %][% Env("LastScreenOverview") %]">
+                        <i class="arrow-back"></i>[% Translate("Back") | html %]
                     </a>
                 </li>
-[% RenderBlockEnd("Chat") %]
-[% RenderBlockStart("Print") %]
                 <li>
-                    <a href="[% Env("Baselink") %]Action=CustomerTicketPrint;TicketID=[% Data.TicketID | uri %]" class="Print AsPopup" title="[% Translate("Print") | html %]">
-                        <i class="fa fa-print"></i>
-                        <span class="InvisibleText">[% Translate("Print") | html %]</span>
-                    </a>
+                    <i class="fa fa-angle-right"></i>
                 </li>
-[% RenderBlockEnd("Print") %]
-
-[% RenderBlockStart("Expand") %]
                 <li>
-                    <a href="[% Env("Baselink") %]Action=CustomerTicketZoom;TicketID=[% Data.TicketID | uri %];ZoomExpand=[% Data.ZoomExpand | uri %]" class="ZoomExpand Expand[% Data.ExpandOption %]" title="[% Translate(Data.ExpandText) | html %]">
-                        <i class="fa fa-bars"></i>
-                        <i class="fa fa-minus"></i>
-                        <span class="InvisibleText">[% Translate(Data.ExpandText) | html %]</span>
-                    </a>
-                    <input type="hidden" name="ZoomExpand" id="ZoomExpand" value="[% Data.ZoomExpand | html %]" />
+                    <span class="PageTitle">[% Translate("Ticket Details") | html %]</span>
                 </li>
-[% RenderBlockEnd("Expand") %]
             </ul>
-            <div class="Clear"></div>
         </div>
-        <form action="[% Env("CGIHandle") %]#FollowUp" method="post" enctype="multipart/form-data" name="compose" id="ReplyCustomerTicket" class="Validate PreventMultipleSubmits">
-            <input type="hidden" name="Action" value="CustomerTicketZoom" />
-            <input type="hidden" name="Subaction" value="Store" />
-            <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]" />
-            <input type="hidden" name="ArticleID" value="[% Data.ArticleID | html %]" />
-            <input type="hidden" name="FormID" value="[% Data.FormID | html %]" />
-            <input type="hidden" name="FromChatID" value="[% Data.FromChatID | html %]" />
-            <ul id="Messages">
-                [% Data.Articles %]
-            </ul>
-[% IF Data.NoArticles %]
-            <ul id="NoArticles">
-                <li>
-                    [% Translate("This item has no articles yet.") | html %]
-                </li>
-            </ul>
-[% END %]
-            <div id="ZoomSidebar">
-                <ul id="Metadata">
-                    <li class="Header">
-                        <div class="MessageHeader">
-                            <h3>[% Translate("Information") | html %]</h3>
-                            <div class="Clear"></div>
-                        </div>
-                    </li>
-                    <li><span class="Key">[% Data.Hook | html %]:</span> <span>[% Data.TicketNumber | html %]</span></li>
+[% RenderBlockEnd("Back") %]
 
+        <div class="Content">
+
+            <div class="TicketHeader">
+[% RenderBlockStart("PriorityFlag") %]
+                <div class="Flag" title="[% Translate(Data.Priority) | html %]">
+                    <span class="PriorityID-[% Data.PriorityID | html %]">[% Translate(Data.Priority) | html %]</span>
+                </div>
+[% RenderBlockEnd("PriorityFlag") %]
+                <h2 title="[% Data.Title | html %]">[% Data.Title | html %]</h2>
+                <ul id="TicketOptions">
+[% RenderBlockStart("Print") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=CustomerTicketPrint;TicketID=[% Data.TicketID | uri %]" class="Print AsPopup icon-hover" title="[% Translate("Print") | html %]">
+                            <i class="fa fa-print"></i>
+                            <span class="InvisibleText">[% Translate("Print") | html %]</span>
+                        </a>
+                    </li>
+[% RenderBlockEnd("Print") %]
+                </ul>
+            </div>
+
+            <form action="[% Env("CGIHandle") %]#FollowUp" method="post" enctype="multipart/form-data" name="compose" id="ReplyCustomerTicket" class="ZoomForm Validate PreventMultipleSubmits">
+                <input type="hidden" name="Action" value="CustomerTicketZoom" />
+                <input type="hidden" name="Subaction" value="Store" />
+                <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]" />
+                <input type="hidden" name="ArticleID" value="[% Data.ArticleID | html %]" />
+                <input type="hidden" name="FormID" value="[% Data.FormID | html %]" />
+                <div id="ZoomSidebar" class="ZoomInfo SidebarColumn">
+                    <div class="main-card-item Metadata-wrapper">
+                        <ul id="Metadata">
+                            <li class="Header">
+                                <div class="MessageHeader">
+                                    <h3>[% Translate("Information") | html %]</h3>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="Key">[% Data.Hook | html %]:</span>
+                                <span class="Value">[% Data.TicketNumber | html %]</span>
+                            </li>
 [% RenderBlockStart("Type") %]
-                    <li><span class="Key">[% Translate("Type") | html %]:</span> <span title="[% Data.Type | html %]">[% Data.Type | html %]</span></li>
+                            <li>
+                                <span class="Key">[% Translate("Type") | html %]:</span>
+                                <span class="Value" title="[% Data.Type | html %]">[% Data.Type | html %]</span>
+                            </li>
 [% RenderBlockEnd("Type") %]
 [% RenderBlockStart("Service") %]
-                    <li><span class="Key">[% Translate("Service") | html %]:</span> <span title="[% Translate(Data.Service) | html %]">[% Translate(Data.Service) | html %]</span></li>
+                            <li>
+                                <span class="Key">[% Translate("Service") | html %]:</span>
+                                <span class="Value" title="[% Translate(Data.Service) | html %]">[% Translate(Data.Service) | html %]</span>
+                            </li>
 [% RenderBlockEnd("Service") %]
 [% RenderBlockStart("SLA") %]
-                    <li><span class="Key">[% Translate("SLA") | html %]:</span> <span title="[% Translate(Data.SLA) | html %]">[% Translate(Data.SLA) | html %]</span></li>
+                            <li>
+                                <span class="Key">[% Translate("SLA") | html %]:</span>
+                                <span class="Value" title="[% Translate(Data.SLA) | html %]">[% Translate(Data.SLA) | html %]</span>
+                            </li>
 [% RenderBlockEnd("SLA") %]
 [% RenderBlockStart("State") %]
-                    <li><span class="Key">[% Translate("State") | html %]:</span> <span title="[% Translate(Data.State) | html %]">[% Translate(Data.State) | html %]</span></li>
+                            <li>
+                                <span class="Key">[% Translate("State") | html %]:</span>
+                                <span class="Value pill StateID-[% Data.TicketStateID| html %]" title="[% Translate(Data.State) | html %]">[% Translate(Data.State) | html %]</span>
+                            </li>
 [% RenderBlockEnd("State") %]
 [% RenderBlockStart("Priority") %]
-                    <li><span class="Key">[% Translate("Priority") | html %]:</span> <span title="[% Translate(Data.Priority) | html %]">[% Translate(Data.Priority) | html %]</span></li>
+                            <li>
+                                <span class="Key">[% Translate("Priority") | html %]:</span>
+                                <span class="Value pill PriorityID-[% Data.PriorityID| html %]" title="[% Translate(Data.Priority) | html %]">[% Translate(Data.Priority) | html %]</span>
+                            </li>
 [% RenderBlockEnd("Priority") %]
 [% RenderBlockStart("Queue") %]
-                    <li><span class="Key">[% Translate("Queue") | html %]:</span> <span title="[% Data.Queue | html %]">[% Data.Queue | html | replace('::', '<wbr>::<wbr>') %]</span></li>
+                            <li>
+                                <span class="Key">[% Translate("Queue") | html %]:</span>
+                                <span class="Value" title="[% Data.Queue | html %]">[% Data.Queue | html | replace('::', '<wbr>::<wbr>') %]</span>
+                            </li>
 [% RenderBlockEnd("Queue") %]
 [% RenderBlockStart("TicketTimeUnits") %]
-                    <li><span class="Key">[% Translate("Accounted time") | html %]:</span> <span title="[% Data.TicketTimeUnits | html %]">[% Data.TicketTimeUnits %]</span></li>
+                            <li>
+                                <span class="Key">[% Translate("Accounted time") | html %]:</span>
+                                <span class="Value" title="[% Data.TicketTimeUnits | html %]">[% Data.TicketTimeUnits %]</span>
+                            </li>
 [% RenderBlockEnd("TicketTimeUnits") %]
 [% RenderBlockStart("Owner") %]
-                    <li><span class="Key">[% Translate("Owner") | html %]:</span> [% Data.OwnerName | html %]</li>
+                            <li>
+                                <span class="Key">[% Translate("Owner") | html %]:</span>
+                                <span class="Value">[% Data.OwnerName | html %]</span>
+                            </li>
 [% RenderBlockEnd("Owner") %]
 [% RenderBlockStart("Responsible") %]
-                    <li><span class="Key">[% Translate("Responsible") | html %]:</span> [% Data.ResponsibleName | html %]</li>
+                            <li>
+                                <span class="Key">[% Translate("Responsible") | html %]:</span>
+                                <span class="Value">[% Data.ResponsibleName | html %]</span>
+                            </li>
 [% RenderBlockEnd("Responsible") %]
-[% RenderBlockStart("ProcessData") %]
-                    <li><span class="Key">[% Translate("Process") | html %]:</span> <span title="[% Translate(Data.Process) | html %]">[% Translate(Data.Process) | html %]</span></li>
-                    <li><span class="Key">[% Translate("Activity") | html %]:</span> <span title="[% Translate(Data.Activity) | html %]">[% Translate(Data.Activity) | html %]</span></li>
-[% RenderBlockEnd("ProcessData") %]
 
 # show ticket dynamic fields
 [% RenderBlockStart("TicketDynamicField") %]
-                    <li>
-                        <span class="Key">[% Translate(Data.Label) | html %]:</span>
+                            <li>
+                                <span class="Key">[% Translate(Data.Label) | html %]:</span>
 [% RenderBlockStart("TicketDynamicFieldLink") %]
-                        <span title="[% Data.Title | html %]"><a href="[% Data.Link | Interpolate %]" class="DynamicFieldLink" [% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] target="_blank">[% Data.Value %]</a></span>
+                                <span class="Value" title="[% Data.Title | html %]">
+                                <a href="[% Data.Link | Interpolate %]" class="DynamicFieldLink" [% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]"[% END %] target="_blank">[% Data.Value %]</a>
+                                </span>
 [% RenderBlockEnd("TicketDynamicFieldLink") %]
 [% RenderBlockStart("TicketDynamicFieldPlain") %]
-                        <span title="[% Data.Title | html %]">[% Data.Value %]</span>
+                                <span class="Value" title="[% Data.Title | html %]">[% Data.Value %]</span>
 [% RenderBlockEnd("TicketDynamicFieldPlain") %]
-                    </li>
+                            </li>
 [% RenderBlockEnd("TicketDynamicField") %]
 # example of how to use fixed dynamic field blocks for customizations
 # Note: Field1 and Field2 are the names of the fields and had to be replaced with the actual
 # field names
 #[% RenderBlockStart("TicketDynamicField_Field1") %]
-#                    <li>
-#                        <span class="Key">[% Translate(Data.Label) | html %]:</span>
-#                        <span title="[% Data.Title1 | html %]">[% Data.Value %]</span>
-#                    </li>
+#                   <li>
+#                       <span class="Key">[% Translate(Data.Label) | html %]:</span>
+#                       <span class="Value" title="[% Data.Title1 | html %]">[% Data.Value %]</span>
+#                   </li>
 #[% RenderBlockEnd("TicketDynamicField_Field1") %]
 #[% RenderBlockStart("TicketDynamicField_Field2") %]
-#                    <li>
-#                        <span class="Key">[% Translate(Data.Label) | html %]:</span>
-#                        <span title="[% Data.Title2 | html %]">[% Data.Value %]</span>
-#                    </li>
+#                   <li>
+#                       <span class="Key">[% Translate(Data.Label) | html %]:</span>
+#                       <span class="Value" title="[% Data.Title2 | html %]">[% Data.Value %]</span>
+#                   </li>
 #[% RenderBlockEnd("TicketDynamicField_Field2") %]
-
-                </ul>
+                        </ul>
+                    </div>
 [% RenderBlockStart("NextActivities") %]
-                <ul id="Activities">
-                    <li class="Header">
-                        <div class="MessageHeader">
-                            <h3>[% Translate("Next Steps") | html %]</h3>
-                            <div class="Clear"></div>
-                        </div>
-                    </li>
+                    <div class="main-card-item Activities-wrapper">
+[% RenderBlockStart("ProcessData") %]
+                        <ul id="Metadata">
+                            <li>
+                                <span class="Key">[% Translate("Process") | html %]:</span>
+                                <span class="Value" title="[% Translate(Data.Process) | html %]">[% Translate(Data.Process) | html %]</span>
+                            </li>
+                            <li>
+                                <span class="Key">[% Translate("Activity") | html %]:</span>
+                                <span class="Value" title="[% Translate(Data.Activity) | html %]">[% Translate(Data.Activity) | html %]</span>
+                            </li>
+                        </ul>
+[% RenderBlockEnd("ProcessData") %]
+                        <div id="Activities">
+                            <div class="Header">
+                                <div class="MessageHeader">
+                                    <span class="Key">[% Translate("Next Steps") | html %]</span>
+                                </div>
+                            </div>
+
+                            <ul class="next-links">
 [% RenderBlockStart("ActivityDialog") %]
-                    <li><a title="[% Data.Name | html %]" class="AsPopup PopupType_TicketAction" href="[% Env("Baselink") %]Action=CustomerTicketProcess;Subaction=DisplayActivityDialog;TicketID=[% Data.TicketID | uri %];ProcessEntityID=[% Data.ProcessEntityID | uri %];ActivityDialogEntityID=[% Data.ActivityDialogEntityID | uri %]">[% Data.Name | html %]</a></li>
+                                <li class="activity-dialog">
+                                    <a title="[% Data.Name | html %]" class="AsPopup PopupType_TicketAction" href="[% Env("Baselink") %]Action=CustomerTicketProcess;Subaction=DisplayActivityDialog;TicketID=[% Data.TicketID | uri %];ProcessEntityID=[% Data.ProcessEntityID | uri %];ActivityDialogEntityID=[% Data.ActivityDialogEntityID | uri %]">[% Data.Name | html %]</a>
+                                </li>
 [% RenderBlockEnd("ActivityDialog") %]
+                            </ul>
 [% RenderBlockStart("NoActivityDialog") %]
-                    <li>[% Translate("There are no dialogs available at this point in the process.") | html %]</li>
+                            <div class="no-activity">
+                                <p>[% Translate("There are no dialogs available at this point in the process.") | html %]</p>
+                            </div>
 [% RenderBlockEnd("NoActivityDialog") %]
-                </ul>
+                        </div>
+                    </div>
 [% RenderBlockEnd("NextActivities") %]
-            </div>
+                </div>
+
+                <div class="main-content-wrapper">
+                    <div class="messages-wrapper">
+                        [% IF Data.Articles %]
+                        <div id="Messages">
+                            <ul>
+                                [% Data.Articles %]
+                            </ul>
+                        </div>
+                        [% END %]
+
+                        [% IF Data.NoArticles %]
+                        <ul id="NoArticles" class="main-card-item">
+                            <li>
+                                <p>[% Translate("This item has no articles yet.") | html %]</p>
+                            </li>
+                        </ul>
+                        [% END %]
+                    </div>
 [% RenderBlockStart("FollowUp") %]
-            <div id="FollowUp" class="[% Data.FollowUpVisible | html %]">
-                <div id="Messenger">
-                    <fieldset class="DontPrint">
-                        <div>
-                            <label for="Subject">
-                                [% Translate("Subject") | html %]:
-                            </label>
-                            <input class="DontPrint" type="text" name="Subject" id="Subject" title="[% Translate("Subject") | html %]" value="[% Data.Subject | html %]" />
-                            <div class="Clear"></div>
+                    <div id="FollowUp" class="main-card-item followup-wrapper [% Data.FollowUpVisible | html %]">
+                        <div id="VisibleMessageContent">
                         </div>
-                        <div>
-                            <label for="RichText" class="Mandatory">
-                                <span class="Marker">*</span>
-                                [% Translate("Text") | html %]:
-                            </label>
-                            <textarea title="[% Translate("Reply") | html %]" id="RichText" class="RichText DontPrint Validate_RequiredRichText [% Data.RichTextInvalid | html %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") | html %]">[% Data.Body | html %]</textarea>
-                            <div id="RichTextError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="RichTextServerError" class="TooltipErrorMessage NoJavaScriptMessage[% Data.RichTextInvalid | html %]">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset class="DontPrint">
+                        <div id="Messenger">
+                            <fieldset class="DontPrint">
+                                <div class="field-wrapper">
+                                    <label for="Subject">
+                                        [% Translate("Subject") | html %]:
+                                    </label>
+                                    <div class="InputField_Container" tabindex="-1">
+                                        <div class="InputField_InputContainer">
+                                            <input class="DontPrint" type="text" name="Subject" id="Subject" title="[% Translate("Subject") | html %]" value="[% Data.Subject | html %]" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field-wrapper">
+                                    <label for="RichText" class="Mandatory">
+                                        <span class="Marker">*</span>
+                                        [% Translate("Text") | html %]:
+                                    </label>
+                                    <textarea title="[% Translate("Reply") | html %]" id="RichText" class="RichText DontPrint Validate_RequiredRichText [% Data.RichTextInvalid | html %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") | html %]">[% Data.Body | html %]</textarea>
+                                    <div id="RichTextError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="RichTextServerError" class="TooltipErrorMessage NoJavaScriptMessage[% Data.RichTextInvalid | html %]">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="DontPrint">
 
-                        <div id="AttachmentHolder">
-
-                    <label>[% Translate("Attachments") | html %]:</label>
-                        <div class="Field">
-                            <div class="DnDUploadBox">
-[% INCLUDE "FormElements/AttachmentList.tt" %]
-                            </div>
-                        </div>
-                        <div class="Clear"></div>
-
-                        </div>
+                                <div id="AttachmentHolder" class="field-wrapper">
+                                    <div class="Field component-attachment">
+                                        [% INCLUDE "FormElements/AttachmentList.tt" %]
+                                    </div>
+                                </div>
 [% RenderBlockStart("FollowUpState") %]
-                        <div>
-                            <label for="StateID">[% Translate("Next state") | html %]:</label> [% Data.NextStatesStrg %]
-                        </div>
+                                <div class="field-wrapper">
+                                    <label for="StateID">[% Translate("Next state") | html %]:</label> [% Data.NextStatesStrg %]
+                                </div>
 [% RenderBlockEnd("FollowUpState") %]
 [% RenderBlockStart("FollowUpPriority") %]
-                        <div>
-                            <label for="PriorityID">[% Translate("Priority") | html %]:</label> [% Data.PriorityStrg %]
-                        </div>
+                                <div class="field-wrapper">
+                                    <label for="PriorityID">[% Translate("Priority") | html %]:</label> [% Data.PriorityStrg %]
+                                </div>
 [% RenderBlockEnd("FollowUpPriority") %]
-
 [% RenderBlockStart("FollowUpDynamicField") %]
-                        <div class="Row Row_DynamicField_[% Data.Name | html %]">
-                            [% Data.Label %]
-                            <div class="Field">
-                                [% Data.Field %]
-                            </div>
-                            <div class="Clear"></div>
-                        </div>
+                                <div class="Row Row_DynamicField_[% Data.Name | html %]">
+                                    [% Data.Label %]
+                                    <div class="Field">
+                                        [% Data.Field %]
+                                    </div>
+                                    <div class="Clear"></div>
+                                </div>
 [% RenderBlockEnd("FollowUpDynamicField") %]
 
 # example of how to use fixed dynamic field blocks for customizations
@@ -240,15 +287,16 @@
 #                </div>
 #[% RenderBlockEnd("FollowUpDynamicField_Field2") %]
 
-                    </fieldset>
-                    <div class="ActionRow">
-                        <button type="submit" value="[% Translate("Submit") | html %]">[% Translate("Submit") | html %]</button> [% Translate("or") | html %] <a id="CloseButton" href="">[% Translate("Cancel") | html %]</a>
+                            </fieldset>
+                            <div class="ActionRow">
+                                <a id="CloseButton" class="btn-cancel-ghost btn-main btn-width-md" href="">[% Translate("Cancel") | html %]</a>
+                                <button class="btn-primary btn-main btn-width-md" type="submit" value="[% Translate("Submit") | html %]">[% Translate("Submit") | html %]</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <a id="ReplyButton" class="DontPrint" href=""><i class="fa fa-reply"></i> [% Translate("Reply") | html %]</a>
-            </div>
 [% RenderBlockEnd("FollowUp") %]
-            <div class="Clear"></div>
-        </form>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

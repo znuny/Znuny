@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,6 +23,7 @@ $Selenium->RunTest(
         my $StdAttachmentObject    = $Kernel::OM->Get('Kernel::System::StdAttachment');
         my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
         my $MainObject             = $Kernel::OM->Get('Kernel::System::Main');
+        my $UserObject             = $Kernel::OM->Get('Kernel::System::User');
 
         # Create test user.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -30,7 +31,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -142,20 +143,16 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Subaction=Template;ID=$TemplateID' )]")->VerifiedClick();
 
         # Check breadcrumb on relations screen.
-        my $Count = 1;
         my $IsLinkedBreadcrumbText;
         for my $BreadcrumbText (
             'Manage Template-Attachment Relations',
-            'Change Attachment Relations for Template \'' . $TemplateType . ' - ' . $TemplateRandomID . '\''
+            "Change Attachment Relations for Template '" . $TemplateType . " - " . $TemplateRandomID . "'"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => '.BreadCrumb>li>[title="' . $BreadcrumbText . '"]',
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         $Selenium->find_element("//input[\@value='$AttachmentID'][\@type='checkbox']")->click();

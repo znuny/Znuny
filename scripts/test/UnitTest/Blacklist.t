@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,25 +13,29 @@ use utf8;
 
 use vars (qw($Self));
 
-my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $RandomID     = $HelperObject->GetRandomID();
-
+my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Dev::UnitTest::Run');
+my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+my $EncodeObject  = $Kernel::OM->Get('Kernel::System::Encode');
+
+my $Home      = $ConfigObject->Get('Home');
+my $Directory = "$Home/scripts/test";
+my $RandomID  = $HelperObject->GetRandomID();
 
 my @Tests = (
     {
-        Name   => "UnitTest 'User.t' (blacklisted)",
-        Test   => 'User',
+        Name   => "UnitTest 'Signature.t' (blacklisted)",
+        Test   => 'scripts/test/Signature.t',
         Config => {
             Valid => 1,
             Key   => 'UnitTest::Blacklist###1000-UnitTest' . $RandomID,
-            Value => ['User.t'],
+            Value => [ $Directory . '/Signature.t' ],
         },
         TestExecuted => 0,
     },
     {
-        Name   => "UnitTest 'User.t' (whitelisted)",
-        Test   => 'User',
+        Name   => "UnitTest 'Signature.t' (whitelisted)",
+        Test   => 'scripts/test/Signature.t',
         Config => {
             Valid => 1,
             Key   => 'UnitTest::Blacklist###1000-UnitTest' . $RandomID,
@@ -55,7 +59,7 @@ for my $Test (@Tests) {
         open STDOUT, '>:encoding(UTF-8)', \$Result;
 
         $ExitCode = $CommandObject->Execute( '--test', $Test->{Test} );
-        $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$Result );
+        $EncodeObject->EncodeInput( \$Result );
     }
 
     chomp $Result;

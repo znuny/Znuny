@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,24 +13,23 @@
         <h1>
             [% Translate("History of %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %] &mdash; [% Data.Title | html %]
         </h1>
-        <p>
-            <a href="#" class="CancelClosePopup">[% Translate("Close this dialog") | html %]</a>
-        </p>
+        <div>
+            <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">
+                [% Translate("Cancel") | html %]
+            </a>
+        </div>
     </div>
-
-    <div class="Content">
-
-        <div class="WidgetSimple HistoryActions">
+    <div class="Content table-widget-parent">
+        <div class="WidgetSimple inline-filter-field card">
             <div class="Content">
                 <span>
-                    <input type="text" id="FilterHistory" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterHistory" value="" title="[% Translate("Filter for history items") | html %]">
+                    <input type="text" id="FilterHistory" placeholder="[% Translate("Start typing to filter...") | html %]" name="FilterHistory" value="" title="[% Translate("Filter for history items") | html %]">
                 </span>
-                <span class="FloatRight">
-                    <a href="" class="CallForAction" id="ExpandCollapseAll"><span><i class="fa fa-bars"></i>[% Translate("Expand/collapse all") | html %]</span></a>
+                <span>
+                    <a href="" class="CallForAction btn-main btn-primary btn-width-lg" id="ExpandCollapseAll">[% Translate("Expand/Collapse all") | html %]</a>
                 </span>
             </div>
         </div>
-
         <div class="WidgetSimple FilterMessageWidget Hidden">
             <div class="Header">
                 <h2>[% Translate("No Matches") | html %]</h2>
@@ -39,9 +38,8 @@
                 <p>[% Translate("Sorry, your search didn't match any items.") | html %]</p>
             </div>
         </div>
-
-        [% RenderBlockStart("HistoryWidget") %]
-        <div class="WidgetSimple Expanded">
+[% RenderBlockStart("HistoryWidget") %]
+        <div class="WidgetSimple Expanded table-widget">
             <div class="Header">
                 <div class="WidgetAction Toggle"><a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a></div>
                 <h2>
@@ -59,7 +57,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                [% RenderBlockStart("Row") %]
+[% RenderBlockStart("Row") %]
                         <tr class="[% Data.Class | html %]">
                             <td class="UserName">
                             [% IF Data.UserID == Config('CustomerPanelUserID') || Data.UserID == Config('PostmasterUserID') %]
@@ -76,15 +74,15 @@
                             </td>
                             <td class="Center">
                             [% IF Data.ArticleID != '0' %]
-                                <a class="LinkZoomView AsBlock" href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %];ArticleID=[% Data.ArticleID | uri %]"><i class="fa fa-search"></i></a>
+                                <a class="LinkZoomView AsBlock table-icon-hover-md" href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %];ArticleID=[% Data.ArticleID | uri %]"><i class="fa fa-search"></i></a>
                             [% END %]
                             </td>
                         </tr>
-                [% RenderBlockEnd("Row") %]
+[% RenderBlockEnd("Row") %]
                     </tbody>
                 </table>
             </div>
         </div>
-        [% RenderBlockEnd("HistoryWidget") %]
+[% RenderBlockEnd("HistoryWidget") %]
     </div>
 </div>

@@ -46,6 +46,12 @@ INSERT INTO permission_groups (name, comments, valid_id, create_by, create_time,
     VALUES
     ('stats', 'Group for statistics access.', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
+--  insert into table permission_groups
+-- ----------------------------------------------------------
+INSERT INTO permission_groups (name, comments, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    ('timeaccounting_webservice', 'Group for time accounting web service access.', 1, 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
 --  insert into table group_user
 -- ----------------------------------------------------------
 INSERT INTO group_user (user_id, group_id, permission_key, create_by, create_time, change_by, change_time)
@@ -132,57 +138,57 @@ INSERT INTO ticket_state_type (name, comments, create_by, create_time, change_by
 -- ----------------------------------------------------------
 --  insert into table ticket_state
 -- ----------------------------------------------------------
-INSERT INTO ticket_state (name, comments, type_id, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_state (name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('new', 'New ticket created by customer.', 1, 1, 1, current_timestamp, 1, current_timestamp);
+    ('new', 'New ticket created by customer.', 1, 1, '#50B5FF', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_state
 -- ----------------------------------------------------------
-INSERT INTO ticket_state (name, comments, type_id, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_state (name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('closed successful', 'Ticket is closed successful.', 3, 1, 1, current_timestamp, 1, current_timestamp);
+    ('closed successful', 'Ticket is closed successful.', 3, 1, '#3DD598', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_state
 -- ----------------------------------------------------------
-INSERT INTO ticket_state (name, comments, type_id, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_state (name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('closed unsuccessful', 'Ticket is closed unsuccessful.', 3, 1, 1, current_timestamp, 1, current_timestamp);
+    ('closed unsuccessful', 'Ticket is closed unsuccessful.', 3, 1, '#FC5A5A', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_state
 -- ----------------------------------------------------------
-INSERT INTO ticket_state (name, comments, type_id, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_state (name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('open', 'Open tickets.', 2, 1, 1, current_timestamp, 1, current_timestamp);
+    ('open', 'Open tickets.', 2, 1, '#FFC542', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_state
 -- ----------------------------------------------------------
-INSERT INTO ticket_state (name, comments, type_id, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_state (name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('removed', 'Customer removed ticket.', 6, 1, 1, current_timestamp, 1, current_timestamp);
+    ('removed', 'Customer removed ticket.', 6, 1, '#8D8D9B', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_state
 -- ----------------------------------------------------------
-INSERT INTO ticket_state (name, comments, type_id, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_state (name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('pending reminder', 'Ticket is pending for agent reminder.', 4, 1, 1, current_timestamp, 1, current_timestamp);
+    ('pending reminder', 'Ticket is pending for agent reminder.', 4, 1, '#FF8A25', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_state
 -- ----------------------------------------------------------
-INSERT INTO ticket_state (name, comments, type_id, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_state (name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('pending auto close+', 'Ticket is pending for automatic close.', 5, 1, 1, current_timestamp, 1, current_timestamp);
+    ('pending auto close+', 'Ticket is pending for automatic close.', 5, 1, '#FF8A25', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_state
 -- ----------------------------------------------------------
-INSERT INTO ticket_state (name, comments, type_id, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_state (name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('pending auto close-', 'Ticket is pending for automatic close.', 5, 1, 1, current_timestamp, 1, current_timestamp);
+    ('pending auto close-', 'Ticket is pending for automatic close.', 5, 1, '#FF8A25', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_state
 -- ----------------------------------------------------------
-INSERT INTO ticket_state (name, comments, type_id, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_state (name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('merged', 'State for merged tickets.', 7, 1, 1, current_timestamp, 1, current_timestamp);
+    ('merged', 'State for merged tickets.', 7, 1, '#FF8A25', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table salutation
 -- ----------------------------------------------------------
@@ -397,33 +403,33 @@ INSERT INTO ticket_type (name, valid_id, create_by, create_time, change_by, chan
 -- ----------------------------------------------------------
 --  insert into table ticket_priority
 -- ----------------------------------------------------------
-INSERT INTO ticket_priority (name, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_priority (name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('1 very low', 1, 1, current_timestamp, 1, current_timestamp);
+    ('1 very low', 1, '#03c4f0', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_priority
 -- ----------------------------------------------------------
-INSERT INTO ticket_priority (name, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_priority (name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('2 low', 1, 1, current_timestamp, 1, current_timestamp);
+    ('2 low', 1, '#83bfc8', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_priority
 -- ----------------------------------------------------------
-INSERT INTO ticket_priority (name, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_priority (name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('3 normal', 1, 1, current_timestamp, 1, current_timestamp);
+    ('3 normal', 1, '#cdcdcd', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_priority
 -- ----------------------------------------------------------
-INSERT INTO ticket_priority (name, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_priority (name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('4 high', 1, 1, current_timestamp, 1, current_timestamp);
+    ('4 high', 1, '#ffaaaa', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_priority
 -- ----------------------------------------------------------
-INSERT INTO ticket_priority (name, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_priority (name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('5 very high', 1, 1, current_timestamp, 1, current_timestamp);
+    ('5 very high', 1, '#ff505e', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_lock_type
 -- ----------------------------------------------------------
@@ -3193,7 +3199,7 @@ Please note, that the delivery of an email article of [<OTRS_CONFIG_Ticket::Hook
 Error Message:
 <OTRS_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_AGENT_ArticleID>
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
 
 -- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
@@ -3208,7 +3214,7 @@ Felhívjuk a figyelmét, hogy a(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticke
 Hibaüzenet:
 <OTRS_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_AGENT_ArticleID>
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
 
 -- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
@@ -3218,6 +3224,8 @@ INSERT INTO notification_event_message (notification_id, content_type, language,
     VALUES
     (16, 'text/plain', 'en', 'Mention in ticket: <OTRS_TICKET_Title>', 'You have been mentioned in ticket <OTRS_TICKET_NUMBER>
 <OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
             ');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
@@ -3226,6 +3234,8 @@ INSERT INTO notification_event_message (notification_id, content_type, language,
     VALUES
     (16, 'text/plain', 'de', 'Erwähnung in Ticket: <OTRS_TICKET_Title>', 'Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>
 <OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
             ');
 -- ----------------------------------------------------------
 --  insert into table dynamic_field
@@ -3250,6 +3260,28 @@ INSERT INTO dynamic_field (internal_field, name, label, field_order, field_type,
     VALUES
     (1, 'ProcessManagementAttachment', 'Attachment', 1, 'TextArea', 'Ticket', '---
 DefaultValue: ''''
+', 1, 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table dynamic_field
+-- ----------------------------------------------------------
+INSERT INTO dynamic_field (internal_field, name, label, field_order, field_type, object_type, config, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    (0, 'TicketCalendarStartTime', 'Ticket Calendar StartTime', 1, 'DateTime', 'Ticket', '---
+DefaultValue: 0,
+YearsInFuture: 0,
+YearsInPast: 0,
+YearsPeriod: 0,
+', 1, 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table dynamic_field
+-- ----------------------------------------------------------
+INSERT INTO dynamic_field (internal_field, name, label, field_order, field_type, object_type, config, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    (0, 'TicketCalendarEndTime', 'Ticket Calendar EndTime', 1, 'DateTime', 'Ticket', '---
+DefaultValue: 0,
+YearsInFuture: 0,
+YearsInPast: 0,
+YearsPeriod: 0,
 ', 1, 1, current_timestamp, 1, current_timestamp);
 SET DEFINE OFF;
 SET SQLBLANKLINES ON;

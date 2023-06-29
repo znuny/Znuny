@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -210,8 +210,8 @@ creates the field HTML to be used in edit masks.
         },
         Template             => {                         # Optional data structure of GenericAgent etc.
             Owner => 2,                                   # Value is accessable via field name (DynamicField_ + field name)
-            Title => 'Generic Agent Job was here'         # and could be a scalar, Hash- or ArrayRef
-            ...
+            Title => 'Generic Agent Job was here',         # and could be a scalar, Hash- or ArrayRef
+            # ...
             DynamicField_ExampleField1 => 'Value 1'
         },
         Value                => 'Any value',              # Optional
@@ -1156,7 +1156,7 @@ extracts the value of a dynamic field from the param object.
         DynamicFieldConfig   => $DynamicFieldConfig,    # complete config of the DynamicField
         ParamObject          => $ParamObject,           # the current request data
         LayoutObject         => $LayoutObject,          # used to transform dates to user time zone
-        TransformDates       => 1                       # 1 || 0, default 1, to transform the dynamic fields that
+        TransformDates       => 1,                      # 1 || 0, default 1, to transform the dynamic fields that
                                                         #   use dates to the user time zone (i.e. Date, DateTime
                                                         #   dynamic fields)
         Template             => $Template,
@@ -1175,11 +1175,11 @@ extracts the value of a dynamic field from the param object.
     my $Value = $BackendObject->EditFieldValueGet(
         DynamicFieldConfig      => $DynamicFieldConfig, # complete config of the DynamicField
         ParamObject             => $ParamObject,        # the current request data
-        TransformDates          => 0                    # 1 || 0, default 1, to transform the dynamic fields that
+        TransformDates          => 0,                   # 1 || 0, default 1, to transform the dynamic fields that
                                                         #   use dates to the user time zone (i.e. Date, DateTime
                                                         #   dynamic fields)
 
-        Template                => $Template            # stored values from DB like Search profile or Generic Agent job
+        Template                => $Template,           # stored values from DB like Search profile or Generic Agent job
         ReturnTemplateStructure => 1,                   # 0 || 1, default 0
                                                         #   Returns the structured values as got from the http request
                                                         #   (only for backend internal use).
@@ -1934,7 +1934,7 @@ sets a dynamic field random value.
     returns:
 
     $Result {
-        Success => 1                # or undef
+        Success => 1,               # or undef
         Value   => $RandomValue     # or undef
     }
 
@@ -2339,7 +2339,7 @@ an ArrayHashRef, otherwise the result will be a HashRef.
         },
         {
             Key   => '1',
-            Value => 'Item1'
+            Value => 'Item1',
         },
         {
             Key      => '1::A',

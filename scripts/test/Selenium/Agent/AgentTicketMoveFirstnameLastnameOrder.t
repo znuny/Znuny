@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,9 +18,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
+        my $GroupObject        = $Kernel::OM->Get('Kernel::System::Group');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject        = $Kernel::OM->Get('Kernel::System::Queue');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
         # Do not check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -62,7 +68,7 @@ $Selenium->RunTest(
         my $UserLogin = "UserLogin$RandomID";
 
         # Create test user.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserAdd(
+        my $UserID = $UserObject->UserAdd(
             UserFirstname => $Firstname,
             UserLastname  => $Lastname,
             UserLogin     => $UserLogin,
@@ -126,7 +132,7 @@ $Selenium->RunTest(
             Password => $UserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketMove;TicketID=$TicketID");
 
@@ -181,8 +187,6 @@ $Selenium->RunTest(
             "TicketID $TicketID is deleted"
         );
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         # Delete group-user relation.
         $Success = $DBObject->Do(
             SQL  => "DELETE FROM group_user WHERE user_id =  ?",
@@ -211,8 +215,6 @@ $Selenium->RunTest(
             $Success,
             "UserID $UserID is deleted",
         );
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (qw( Ticket User )) {

@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -23,7 +23,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     text-align: center;
 }
 
-.ItemListGrid {
+/*.ItemListGrid {
     display: inline-block;
 }
 
@@ -37,7 +37,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 .ItemListGrid.WithIcons > li span.Title {
     color: #666;
-}
+}*/
 
 .ItemListGrid.WithIcons > li.Successful span.Title,
 .ItemListGrid.WithIcons > li.Successful span.Icons i.Icon,
@@ -70,13 +70,13 @@ td.EndTime {
     white-space: nowrap;
 }
 
-#CommunicationList > .Content > .ControlRow {
+/*#CommunicationList > .Content > .ControlRow {
     margin: -8px -8px 0 -8px;
 }
 
 #AccountList {
     border-top: 1px solid #ccc;
-}
+}*/
 
 #ObjectListTable tr,
 #AccountsTable tr {
@@ -84,11 +84,20 @@ td.EndTime {
 }
 
 .ControlRow {
-    background: #E8E8E8;
+    padding: 0 var(--padding-xs);
+    border: 0;
 }
 
-.ControlRow li > a {
-    color: #888;
+.CommunicationPagination {
+    padding: 0;
 }
+
+.ItemListGrid {
+    padding: 0;
+}
+
+/*.ControlRow li > a {
+    color: #888;
+}*/
 
 } /* end @media print*/

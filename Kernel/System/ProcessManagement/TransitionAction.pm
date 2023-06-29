@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -59,7 +59,7 @@ sub new {
     Returns:
 
     $TransitionAction = {
-          'Name'       => 'TransitionAction 1'
+          'Name'       => 'TransitionAction 1',
           'CreateBy'   => '2',
           'CreateTime' => '07-02-2012 13:37:00',
           'ChangeBy'   => '3',
@@ -135,7 +135,7 @@ sub TransitionActionGet {
     $TransitionActions = [
         {
           'TransitionActionEntityID' => 'TA1',
-          'Name'                     => 'TransitionAction1'
+          'Name'                     => 'TransitionAction1',
           'CreateBy'                 => '2',
           'ChangeBy'                 => '3',
           'CreateTime'               => '25-04-2012 13:37:00',
@@ -148,7 +148,7 @@ sub TransitionActionGet {
         },
         {
           'TransitionActionEntityID' => 'TA2',
-          'Name'                     => 'TransitionAction2'
+          'Name'                     => 'TransitionAction2',
           'CreateBy'                 => '2',
           'ChangeBy'                 => '3',
           'CreateTime'               => '25-04-2012 13:37:00',
@@ -161,7 +161,7 @@ sub TransitionActionGet {
         },
         {
           'TransitionActionEntityID' => 'TA3',
-          'Name'                     => 'TransitionAction3'
+          'Name'                     => 'TransitionAction3',
           'CreateBy'                 => '2',
           'ChangeBy'                 => '3',
           'CreateTime'               => '25-04-2012 13:37:00',

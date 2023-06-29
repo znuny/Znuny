@@ -1,40 +1,14 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate( "GenericInterface Web Service Management" ) | html %]</h1>
 
-    [% USE WebserviceLink = String("AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=") %]
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate( 'Web Service Management' ),
-                Link => BreadcrumbLink,
-            },
-            {
-                Name => Data.WebserviceName,
-                Link => WebserviceLink.append( Data.WebserviceID ),
-            },
-        ]
-    %]
-
-    [% SWITCH Data.Action %]
-        [% CASE 'Add' %]
-            [% USE AddTitle = String(Translate("Add ErrorHandling")) %]
-            [% BreadcrumbPath.push({ Name => AddTitle.append( ': ', Data.ErrorHandlingType ), }) %]
-        [% CASE 'Change' %]
-            [% USE EditTitle = String(Translate("Edit ErrorHandling")) %]
-            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.ErrorHandlingType ), }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -42,13 +16,14 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i> [% Translate("Go back to web service") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i> [% Translate("Go back to web service") | html %]</span></a>
                     </li>
-[% IF Data.Action == 'Change' %]
+                    [% IF Data.Action == 'Change' %]
                     <li>
-                        <button class="CallForAction Fullsize Center" type="button" id="DeleteButton"><span> <i class="fa fa-trash-o"></i> [% Translate("Delete") | html %]</span></button>
+                        <button class="CallForAction btn-main btn-primary-ghost" type="button" id="DeleteButton"><span> <i class="fa fa-trash-o"></i> [% Translate("Delete") | html %]</span></button>
                         <div class="Hidden" id="DeleteDialogContainer">
-                            <span class="WarningDialog ">&nbsp;</span>
+                            <span class="WarningDialog ">
+                            </span>
                             <p id="DeleteDialog" class="Center Warning">
                                 [% Translate("Do you really want to delete this error handling module?") | html %]
                             </p>
@@ -58,12 +33,38 @@
                             <div class="SpacingTop"></div>
                         </div>
                     </li>
-[% END %]
+                    [% END %]
                 </ul>
             </div>
         </div>
     </div>
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate( "GenericInterface Web Service Management" ) | html %]</h1>
+
+        [% USE WebserviceLink = String("AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=") %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate( 'Web Service Management' ),
+                    Link => BreadcrumbLink,
+                },
+                {
+                    Name => Data.WebserviceName,
+                    Link => WebserviceLink.append( Data.WebserviceID ),
+                },
+            ]
+        %]
+
+        [% SWITCH Data.Action %]
+            [% CASE 'Add' %]
+                [% USE AddTitle = String(Translate("Add ErrorHandling")) %]
+                [% BreadcrumbPath.push({ Name => AddTitle.append( ': ', Data.ErrorHandlingType ), }) %]
+            [% CASE 'Change' %]
+                [% USE EditTitle = String(Translate("Edit ErrorHandling")) %]
+                [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.ErrorHandlingType ), }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 
         <form action="[% Env("CGIHandle") %]" class="Validate" method="post">
             <input type="hidden" name="Action" value="AdminGenericInterfaceErrorHandlingDefault" />
@@ -103,7 +104,6 @@
                                 [% Translate("The name you entered already exists.") | html %]
                             </div>
                         </div>
-                        <div class="Clear"></div>
 
                         <label for="Description">
                             [% Translate("Description") | html %]:
@@ -111,16 +111,14 @@
                         <div class="Field">
                             <input type="text" class="W50pc" maxlength="200" id="Description" name="Description" value="[% Data.Description | html %]" />
                         </div>
-                        <div class="Clear"></div>
 
                         <label for="ErrorHandlingTypeDisplay">[% Translate("Error handling module backend") | html %]:</label>
                         <div class="Field">
                             <input type="text" readonly="readonly" class="W50pc" id="ErrorHandlingTypeDisplay" value="[% Data.ErrorHandlingType | html %]" />
                             <p class="FieldExplanation">
-                                [% Translate("This OTRS error handling backend module will be called internally to process the error handling mechanism.") | html %]
+                                [% Translate("This Znuny error handling backend module will be called internally to process the error handling mechanism.") | html %]
                             </p>
                         </div>
-                        <div class="Clear"></div>
 
                     </fieldset>
                 </div>
@@ -144,8 +142,6 @@
                                 [% Translate("Only requests matching all configured filters (if any) will trigger module execution.") | html %]
                             </p>
                         </div>
-                        <div class="Clear"></div>
-
 [% RenderBlockStart("OperationFilter") %]
                         <label for="OperationFilter">
                             [% Translate("Operation filter") | html %]:
@@ -157,7 +153,6 @@
                                 [% Translate("Note: Operation is undetermined for errors occuring while receiving incoming request data. Filters involving this error stage should not use operation filter.") | html %]
                             </p>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("OperationFilter") %]
 [% RenderBlockStart("InvokerFilter") %]
                         <label for="InvokerFilter">
@@ -169,7 +164,6 @@
                                 [% Translate("Only execute error handling module for selected invokers.") | html %]
                             </p>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("InvokerFilter") %]
 
                         <label for="ErrorMessageContentFilter">
@@ -184,7 +178,6 @@
                                 [% Translate("Example: Enter '^.*401 Unauthorized.*\$' to handle only authentication related errors.") | html %]
                             </p>
                         </div>
-                        <div class="Clear"></div>
 
                         <label for="ErrorStageFilter">
                             [% Translate("Error stage filter") | html %]:
@@ -196,7 +189,6 @@
                                 [% Translate("Example: Handle only errors where mapping for outgoing data could not be applied.") | html %]
                             </p>
                         </div>
-                        <div class="Clear"></div>
 
                         <label for="ErrorCode">
                             [% Translate("Error code") | html %]:
@@ -208,7 +200,6 @@
                                 [% Translate("This identifier will be available in XSLT-Mapping and shown in debugger output.") | html %]
                             </p>
                         </div>
-                        <div class="Clear"></div>
 
                         <label for="ErrorMessage">
                             [% Translate("Error message") | html %]:
@@ -220,7 +211,6 @@
                                 [% Translate("This message will be available in XSLT-Mapping and shown in debugger output.") | html %]
                             </p>
                         </div>
-                        <div class="Clear"></div>
 
                         <label for="StopAfterMatch">
                             [% Translate("Stop after match") | html %]:
@@ -232,7 +222,6 @@
                                 [% Translate("Default behavior is to resume, processing the next module.") | html %]
                             </p>
                         </div>
-                        <div class="Clear"></div>
 
                     </fieldset>
                 </div>
@@ -246,24 +235,20 @@
                 <div class="Content">
 
                     <fieldset class="TableLike">
-
-                        <div class="Field SpacingTop">
-                            [% IF Data.Action == 'Change' %]
-                                <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                                [% Translate("or") | html %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                            [% ELSE %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% END %]
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]"><span>[% Translate("Cancel") | html %]</span></a>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a class="btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]"><span>[% Translate("Cancel") | html %]</span></a>
+                                [% IF Data.Action == 'Change' %]
+                                    <button class="CallForAction Primary btn-primary-ghost btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% ELSE %]
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% END %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
-
                     </fieldset>
                 </div>
             </div>
         </form>
     </div>
-    <div class="Clear"></div>
 </div>

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use parent qw(Kernel::Output::HTML::Dashboard::Base);
 
 our $ObjectManagerDisabled = 1;
 
@@ -37,7 +38,7 @@ sub new {
 
     $Self->{PrefKey} = 'UserDashboardPref' . $Self->{Name} . '-Shown';
 
-    $Self->{PageShown} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKey} }
+    $Self->{PageShown} = $Param{PageShown} || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKey} }
         || $Self->{Config}->{Limit};
 
     $Self->{StartHit} = int( $ParamObject->GetParam( Param => 'StartHit' ) || 1 );
@@ -83,6 +84,57 @@ sub Config {
     );
 }
 
+=head2 Header()
+
+Returns additional header content of dashboard (HTML).
+
+    my $Header = $Object->Header();
+
+Returns:
+
+    my $Header = 1;
+
+=cut
+
+sub Header {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $LayoutObject->Block(
+        Name => 'HeaderCustomerIDList',
+        Data => {
+            %Param,
+        },
+    );
+
+    # show change customer relations button if the agent has permission
+    my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
+        Action => 'AdminCustomerUserCustomer',
+        Type   => 'rw',                          # ro|rw possible
+    );
+
+    if ($ChangeCustomerReleationsAccess) {
+        $LayoutObject->Block(
+            Name => 'ContentLargeCustomerIDAdd',
+            Data => {
+                CustomerUserID => $Param{CustomerUserID},
+            },
+        );
+    }
+
+    my $Header = $LayoutObject->Output(
+        TemplateFile => 'AgentDashboardCustomerIDList',
+        Data         => {
+            %{ $Self->{Config} },
+            Name => $Self->{Name},
+        },
+        AJAX => $Param{AJAX},
+    );
+
+    return $Header;
+}
+
 sub Run {
     my ( $Self, %Param ) = @_;
 
@@ -102,6 +154,20 @@ sub Run {
 
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    # show links to edit customer id if the agent has permission
+    my $EditCustomerIDPermission = $LayoutObject->Permission(
+        Action => 'AdminCustomerCompany',
+        Type   => 'rw',                     # ro|rw possible
+    );
+
+    $LayoutObject->Block(
+        Name => 'ContentCustomerIDList',
+        Data => {
+            %Param,
+            EditCustomerIDPermission => $EditCustomerIDPermission,
+        },
+    );
 
     my $LinkPage = 'Subaction=Element;Name='
         . $Self->{Name} . ';'
@@ -126,30 +192,6 @@ sub Run {
             Name => $Self->{Name},
             %PageNav,
         },
-    );
-
-    # get config object
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    # show change customer relations button if the agent has permission
-    my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
-        Action => 'AdminCustomerUserCustomer',
-        Type   => 'rw',                          # ro|rw possible
-    );
-
-    if ($ChangeCustomerReleationsAccess) {
-        $LayoutObject->Block(
-            Name => 'ContentLargeCustomerIDAdd',
-            Data => {
-                CustomerUserID => $Param{CustomerUserID},
-            },
-        );
-    }
-
-    # show links to edit customer id if the agent has permission
-    my $EditCustomerIDPermission = $LayoutObject->Permission(
-        Action => 'AdminCustomerCompany',
-        Type   => 'rw',                     # ro|rw possible
     );
 
     @CustomerIDs = splice @CustomerIDs, $Self->{StartHit} - 1, $Self->{PageShown};

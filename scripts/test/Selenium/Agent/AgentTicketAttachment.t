@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,8 +21,12 @@ $Selenium->RunTest(
         my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
         my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
         my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Internal');
+        my $SysConfigObject      = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $CacheObject          = $Kernel::OM->Get('Kernel::System::Cache');
+        my $MainObject           = $Kernel::OM->Get('Kernel::System::Main');
+        my $WebUserAgentObject   = $Kernel::OM->Get('Kernel::System::WebUserAgent');
 
-        my %OutputFilterTextAutoLink = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %OutputFilterTextAutoLink = $SysConfigObject->SettingGet(
             Name    => 'Frontend::Output::FilterText###OutputFilterTextAutoLink',
             Default => 1,
         );
@@ -33,7 +37,7 @@ $Selenium->RunTest(
             Value => $OutputFilterTextAutoLink{EffectiveValue},
         );
 
-        my %OutputFilterTextAutoLinkCVE = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %OutputFilterTextAutoLinkCVE = $SysConfigObject->SettingGet(
             Name    => 'Frontend::Output::OutputFilterTextAutoLink###CVE',
             Default => 1,
         );
@@ -62,8 +66,6 @@ $Selenium->RunTest(
             Key   => 'Ticket::Frontend::ZoomCollectMeta',
             Value => 1
         );
-
-        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         my $SettingName = 'Ticket::Frontend::ZoomCollectMetaFilters###CVE-Mitre';
 
@@ -135,7 +137,7 @@ $Selenium->RunTest(
             # Create article for test ticket with attachment.
             my $Location = $ConfigObject->Get('Home')
                 . "/scripts/test/sample/StdAttachment/$TestAttachment->{Name}";
-            my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+            my $ContentRef = $MainObject->FileRead(
                 Location => $Location,
                 Mode     => 'binmode',
             );
@@ -202,7 +204,7 @@ Something: $CVENumber): Hard-coded Credentials"
                     "Image for $CVEConfig->{Description} link is found - $CVEConfig->{Image}",
                 );
 
-                my %Response = $Kernel::OM->Get('Kernel::System::WebUserAgent')->Request(
+                my %Response = $WebUserAgentObject->Request(
                     Type => 'GET',
                     URL  => $CVEConfig->{Image},
                 );
@@ -268,7 +270,7 @@ Something: $CVENumber): Hard-coded Credentials"
 
         # Make sure the cache is correct.
         for my $Cache (qw( Ticket CustomerUser )) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => $Cache );
+            $CacheObject->CleanUp( Type => $Cache );
         }
 
     }

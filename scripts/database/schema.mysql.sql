@@ -30,6 +30,21 @@ CREATE TABLE acl_sync (
     change_time DATETIME NOT NULL
 );
 # ----------------------------------------------------------
+#  create table activity
+# ----------------------------------------------------------
+CREATE TABLE activity (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    user_id INTEGER NOT NULL,
+    activity_type VARCHAR (200) NOT NULL,
+    activity_title VARCHAR (255) NOT NULL,
+    activity_text LONGBLOB NULL,
+    activity_state VARCHAR (255) NULL,
+    activity_link VARCHAR (255) NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
+);
+# ----------------------------------------------------------
 #  create table acl_ticket_attribute_relations
 # ----------------------------------------------------------
 CREATE TABLE acl_ticket_attribute_relations (
@@ -339,6 +354,7 @@ CREATE TABLE ticket_priority (
     id SMALLINT NOT NULL AUTO_INCREMENT,
     name VARCHAR (200) NOT NULL,
     valid_id SMALLINT NOT NULL,
+    color VARCHAR (25) NOT NULL,
     create_time DATETIME NOT NULL,
     create_by INTEGER NOT NULL,
     change_time DATETIME NOT NULL,
@@ -383,6 +399,7 @@ CREATE TABLE ticket_state (
     comments VARCHAR (250) NULL,
     type_id SMALLINT NOT NULL,
     valid_id SMALLINT NOT NULL,
+    color VARCHAR (25) NOT NULL,
     create_time DATETIME NOT NULL,
     create_by INTEGER NOT NULL,
     change_time DATETIME NOT NULL,
@@ -1519,21 +1536,6 @@ CREATE TABLE scheduler_recurrent_task (
     INDEX scheduler_recurrent_task_task_type_name (task_type, name)
 );
 # ----------------------------------------------------------
-#  create table cloud_service_config
-# ----------------------------------------------------------
-CREATE TABLE cloud_service_config (
-    id INTEGER NOT NULL AUTO_INCREMENT,
-    name VARCHAR (200) NOT NULL,
-    config LONGBLOB NOT NULL,
-    valid_id SMALLINT NOT NULL,
-    create_time DATETIME NOT NULL,
-    create_by INTEGER NOT NULL,
-    change_time DATETIME NOT NULL,
-    change_by INTEGER NOT NULL,
-    PRIMARY KEY(id),
-    UNIQUE INDEX cloud_service_config_name (name)
-);
-# ----------------------------------------------------------
 #  create table sysconfig_default
 # ----------------------------------------------------------
 CREATE TABLE sysconfig_default (
@@ -1713,6 +1715,7 @@ CREATE TABLE calendar_appointment (
 # ----------------------------------------------------------
 CREATE TABLE calendar_appointment_plugin (
     id INTEGER NOT NULL AUTO_INCREMENT,
+    dbcrud_uuid VARCHAR (36) NULL,
     appointment_id BIGINT NOT NULL,
     plugin_key TEXT NOT NULL,
     config MEDIUMTEXT NULL,
@@ -1720,7 +1723,8 @@ CREATE TABLE calendar_appointment_plugin (
     create_by INTEGER NOT NULL,
     change_time DATETIME NOT NULL,
     change_by INTEGER NOT NULL,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    UNIQUE INDEX calendar_appointment_plugin_uuid (dbcrud_uuid)
 );
 # ----------------------------------------------------------
 #  create table calendar_appointment_ticket
@@ -1851,10 +1855,10 @@ CREATE TABLE smime_keys (
     key_hash VARCHAR (8) NOT NULL,
     key_type VARCHAR (255) NOT NULL,
     file_name VARCHAR (255) NOT NULL,
-    email_address VARCHAR (255) NULL,
+    email_address MEDIUMTEXT NULL,
     expiration_date DATETIME NULL,
     fingerprint VARCHAR (59) NULL,
-    subject VARCHAR (255) NULL,
+    subject MEDIUMTEXT NULL,
     create_time DATETIME NULL,
     change_time DATETIME NULL,
     create_by INTEGER NULL,
@@ -1869,6 +1873,7 @@ CREATE TABLE smime_keys (
 # ----------------------------------------------------------
 CREATE TABLE oauth2_token_config (
     id INTEGER NOT NULL AUTO_INCREMENT,
+    dbcrud_uuid VARCHAR (36) NULL,
     name VARCHAR (250) NOT NULL,
     config MEDIUMTEXT NOT NULL,
     valid_id SMALLINT NOT NULL,
@@ -1877,13 +1882,15 @@ CREATE TABLE oauth2_token_config (
     change_time DATETIME NOT NULL,
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
-    UNIQUE INDEX oauth2_token_config_name (name)
+    UNIQUE INDEX oauth2_token_config_name (name),
+    UNIQUE INDEX oauth2_token_config_uuid (dbcrud_uuid)
 );
 # ----------------------------------------------------------
 #  create table oauth2_token
 # ----------------------------------------------------------
 CREATE TABLE oauth2_token (
     id INTEGER NOT NULL AUTO_INCREMENT,
+    dbcrud_uuid VARCHAR (36) NULL,
     token_config_id INTEGER NOT NULL,
     authorization_code MEDIUMTEXT NULL,
     token MEDIUMTEXT NULL,
@@ -1898,7 +1905,8 @@ CREATE TABLE oauth2_token (
     change_time DATETIME NOT NULL,
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
-    UNIQUE INDEX oauth2_token_config_id (token_config_id)
+    UNIQUE INDEX oauth2_token_config_id (token_config_id),
+    UNIQUE INDEX oauth2_token_uuid (dbcrud_uuid)
 );
 # ----------------------------------------------------------
 #  create table mention

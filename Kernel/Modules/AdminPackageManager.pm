@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,7 +8,7 @@
 # --
 
 package Kernel::Modules::AdminPackageManager;
-## nofilter(TidyAll::Plugin::OTRS::Perl::DBObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::DBObject)
 
 use strict;
 use warnings;
@@ -57,7 +57,7 @@ sub Run {
                 if ( !$ApacheReload ) {
                     return $LayoutObject->ErrorScreen(
                         Message => Translatable(
-                            'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!'
+                            'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!'
                         ),
                     );
                 }
@@ -1941,6 +1941,20 @@ sub _InstallHandling {
         );
     }
 
+    # parse sopm-file and show <PackageRequired> information
+    if ( $Structure{PackageRequired} ) {
+        $Data{PackageRequired} = $PackageObject->GetRequiredPackages(
+            Structure => \%Structure,
+        );
+    }
+
+    # parse sopm-file and show <ModuleRequired> information
+    if ( $Structure{ModuleRequired} ) {
+        $Data{ModuleRequired} = $PackageObject->GetRequiredModules(
+            Structure => \%Structure,
+        );
+    }
+
     my %Response = $PackageObject->AnalyzePackageFrameworkRequirements(
         Framework => $Structure{Framework},
         NoLog     => 1,
@@ -2106,6 +2120,20 @@ sub _UpgradeHandling {
         );
     }
 
+    # parse sopm-file and show <PackageRequired> information
+    if ( $Structure{PackageRequired} ) {
+        $Data{PackageRequired} = $PackageObject->GetRequiredPackages(
+            Structure => \%Structure,
+        );
+    }
+
+    # parse sopm-file and show <ModuleRequired> information
+    if ( $Structure{ModuleRequired} ) {
+        $Data{ModuleRequired} = $PackageObject->GetRequiredModules(
+            Structure => \%Structure,
+        );
+    }
+
     my %Response = $PackageObject->AnalyzePackageFrameworkRequirements(
         Framework => $Structure{Framework},
         NoLog     => 1,
@@ -2224,82 +2252,6 @@ sub _UpgradeHandling {
     }
 
     return $LayoutObject->ErrorScreen();
-}
-
-sub _GetFeatureAddonData {
-    my ( $Self, %Param ) = @_;
-
-    my $Language = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{UserLanguage};
-
-    # cleanup main language for languages like es_MX (es in this case)
-    $Language = substr $Language, 0, 2;
-
-    my $CacheKey  = "FeatureAddonData::$Language";
-    my $CacheTTL  = 60 * 60 * 24;                    # 1 day
-    my $CacheType = 'PackageManager';
-
-    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-    my $CacheResult = $CacheObject->Get(
-        Type => $CacheType,
-        Key  => $CacheKey,
-    );
-
-    return $CacheResult if ref $CacheResult eq 'ARRAY';
-
-    my $CloudService = 'PublicFeeds';
-    my $Operation    = 'FAOFeed';
-
-    # prepare cloud service request
-    my %RequestParams = (
-        RequestData => {
-            $CloudService => [
-                {
-                    Operation => $Operation,
-                    Data      => {
-                        Language => $Language,
-                    },
-                },
-            ],
-        },
-    );
-
-    my $CloudServiceObject = $Kernel::OM->Get('Kernel::System::CloudService::Backend::Run');
-
-    # dispatch the cloud service request
-    my $RequestResult = $CloudServiceObject->Request(%RequestParams);
-
-    # as this is the only operation an unsuccessful request means that the operation was also
-    # unsuccessful
-    if ( !IsHashRefWithData($RequestResult) ) {
-        return Translatable('Can\'t connect to OTRS Feature Add-on list server!');
-    }
-
-    my $OperationResult = $CloudServiceObject->OperationResultGet(
-        RequestResult => $RequestResult,
-        CloudService  => $CloudService,
-        Operation     => $Operation,
-    );
-
-    if ( !IsHashRefWithData($OperationResult) ) {
-        return Translatable('Can\'t get OTRS Feature Add-on list from server!');
-    }
-    elsif ( !$OperationResult->{Success} ) {
-        return $OperationResult->{ErrorMessage} || Translatable('Can\'t get OTRS Feature Add-on from server!');
-    }
-
-    my $FAOFeed = $OperationResult->{Data}->{FAOs};
-
-    return if !IsArrayRefWithData($FAOFeed);
-
-    # set cache
-    $CacheObject->Set(
-        Type  => $CacheType,
-        Key   => $CacheKey,
-        Value => $FAOFeed,
-        TTL   => $CacheTTL,
-    );
-
-    return $FAOFeed;
 }
 
 sub _GetSafeString {

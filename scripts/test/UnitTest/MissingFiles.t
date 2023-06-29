@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -50,9 +50,12 @@ my %Setting = $SysConfigObject->SettingGet(
 
 my @ExpectedSettingClean = (
     'Core.Color.css',
+    'Core.Vars.css',
     'Core.Reset.css',
+    'Core.Reset.Forwwward.css',
     'Core.Default.css',
     'Core.Header.css',
+    'Core.Overview.css',
     'Core.OverviewControl.css',
     'Core.OverviewSmall.css',
     'Core.OverviewMedium.css',
@@ -70,6 +73,9 @@ my @ExpectedSettingClean = (
     'Core.InputFields.css',
     'Core.Print.css',
     'Core.Animations.css',
+    'Core.Components.css',
+    'Core.FlexboxModel.css',
+    'Core.Typography.css',
 );
 
 $Self->IsDeeply(
@@ -89,7 +95,6 @@ $Self->True(
 );
 
 $CacheObject->CleanUp();
-
 #
 # Change relevant setting
 #
@@ -113,18 +118,6 @@ $Result = $HelperObject->ConsoleCommand(
 
 $CacheObject->CleanUp();
 
-$Result = $HelperObject->ConsoleCommand(
-    CommandModule => 'Kernel::System::Console::Command::Admin::Config::FixMissingFrontendFiles',
-    Parameter     => ['--dryrun'],
-);
-
-$Self->True(
-    $Result->{STDOUT} =~ m{\QCore.Animations.css\E}xmsi ? 1 : 0,
-    'MissingFiles console command shows that the animation css file is missing',
-);
-
-$CacheObject->CleanUp();
-
 #
 # Check new setting
 #
@@ -139,9 +132,12 @@ $CacheObject->CleanUp();
 
 my @ExpectedSetting = (
     'Core.Color.css',
+    'Core.Vars.css',
     'Core.Reset.css',
+    'Core.Reset.Forwwward.css',
     'Core.Default.css',
     'Core.Header.css',
+    'Core.Overview.css',
     'Core.OverviewControl.css',
     'Core.OverviewSmall.css',
     'Core.OverviewMedium.css',
@@ -159,6 +155,9 @@ my @ExpectedSetting = (
     'Core.InputFields.css',
     'Core.Print.css',
     'Core.Animations.css',
+    'Core.Components.css',
+    'Core.FlexboxModel.css',
+    'Core.Typography.css',
     'xxx.css',
 );
 

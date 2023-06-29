@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -32,13 +32,6 @@ if ( $NumberOfPackagesInstalled > 8 ) {
     return 1;
 }
 
-# Make sure to enable cloud services.
-$HelperObject->ConfigSettingChange(
-    Valid => 1,
-    Key   => 'CloudServices::Disabled',
-    Value => 0,
-);
-
 my $RandomID = $HelperObject->GetRandomID();
 
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
@@ -48,16 +41,11 @@ my $CheckBreadcrumb = sub {
     my %Param = @_;
 
     my $BreadcrumbText = $Param{BreadcrumbText} || '';
-    my $Count          = 1;
-
     for my $BreadcrumbText ( 'Package Manager', "$BreadcrumbText Test" ) {
-        $Self->Is(
-            $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-            $BreadcrumbText,
-            "Breadcrumb text '$BreadcrumbText' is found on screen"
+        $Selenium->ElementExists(
+            Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+            SelectorType => 'css',
         );
-
-        $Count++;
     }
 };
 
@@ -68,7 +56,7 @@ my $NavigateToAdminPackageManager = sub {
 
     # Go back to overview.
     # Navigate to AdminPackageManager screen.
-    my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+    my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
     $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminPackageManager");
     $Selenium->WaitFor(
         Time => 120,
@@ -158,9 +146,15 @@ $Selenium->RunTest(
         $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
         $Selenium->find_element("//button[contains(.,'Install Package')]")->click();
         $Selenium->WaitFor(
-            Time => 120,
-            JavaScript =>
-                'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
+            Time       => 120,
+            JavaScript => 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
+        );
+
+        $Selenium->find_element( ".Primary.CallForAction", 'css' )->VerifiedClick();
+
+        $Selenium->WaitFor(
+            Time       => 120,
+            JavaScript => 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
         );
 
         my $PackageCheck = $PackageObject->PackageIsInstalled(
@@ -229,10 +223,12 @@ $Selenium->RunTest(
         $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Package::RepositoryList',
-            Value => [{
-                Name => "Example repository 1",
-                URL  => "https://addons.znuny.com/api/addon_repos/",
-            }],
+            Value => [
+                {
+                    Name => "Example repository 1",
+                    URL  => "https://addons.znuny.com/api/addon_repos/",
+                }
+            ],
         );
 
         # Allow web server to pick up the changed SysConfig.

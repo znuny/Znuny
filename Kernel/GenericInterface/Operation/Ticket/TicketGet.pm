@@ -1,7 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Perl-Services.de
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -83,8 +83,8 @@ one or more ticket entries in one call.
             ArticleLimit         => 5,                                             # Optional
             Attachments          => 1,                                             # Optional, 0 as default. If it's set with the value 1,
                                                                                    # attachments for articles will be included on ticket data
-            GetAttachmentContents = 1                                              # Optional, 1 as default. 0|1,
-            HTMLBodyAsAttachment => 1                                              # Optional, If enabled the HTML body version of each article
+            GetAttachmentContents = 1,                                             # Optional, 1 as default. 0|1,
+            HTMLBodyAsAttachment => 1,                                             # Optional, If enabled the HTML body version of each article
                                                                                    #    is added to the attachments list
         },
     );
@@ -120,7 +120,7 @@ one or more ticket entries in one call.
                     Responsible        => 'some_responsible_login',
                     ResponsibleID      => 123,
                     Age                => 3456,
-                    Created            => '2010-10-27 20:15:00'
+                    Created            => '2010-10-27 20:15:00',
                     CreateBy           => 123,
                     Changed            => '2010-10-27 20:15:15',
                     ChangeBy           => 123,

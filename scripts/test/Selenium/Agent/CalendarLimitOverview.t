@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,6 +19,9 @@ $Selenium->RunTest(
     sub {
         my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $CalendarObject = $Kernel::OM->Get('Kernel::System::Calendar');
+        my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+        my $GroupObject    = $Kernel::OM->Get('Kernel::System::Group');
+        my $ValidObject    = $Kernel::OM->Get('Kernel::System::Valid');
 
         my $RandomID = $HelperObject->GetRandomID();
         my $Limit    = 10;
@@ -32,7 +35,7 @@ $Selenium->RunTest(
 
         # Create test group.
         my $GroupName = "test-calendar-group-$RandomID";
-        my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
+        my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
             UserID  => 1,
@@ -43,7 +46,7 @@ $Selenium->RunTest(
             Groups => [ 'users', $GroupName ],
         );
 
-        my $InvalidID = $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup(
+        my $InvalidID = $ValidObject->ValidLookup(
             Valid => 'invalid',
         );
 
@@ -97,7 +100,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Go to calendar overview page.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentAppointmentCalendarOverview");

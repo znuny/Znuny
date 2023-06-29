@@ -1,12 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
 
 package Kernel::System::Loader;
 
@@ -66,8 +66,8 @@ Uses caching internally.
             $Filename,
             $Filename2,
         ],
-        Checksum             => '...'       # optional, pass a checksum for the minified file
-        Content              => '...'       # optional, pass direct (already minified) content instead of a file list
+        Checksum             => '...',      # optional, pass a checksum for the minified file
+        Content              => '...',      # optional, pass direct (already minified) content instead of a file list
         Type                 => 'CSS',      # CSS | JavaScript
         TargetDirectory      => $TargetDirectory,
         TargetFilenamePrefix => 'CommonCSS',    # optional, prefix for the target filename
@@ -419,7 +419,7 @@ sub CacheGenerate {
     my @Result;
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    ## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+    ## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     my %AgentFrontends = %{ $ConfigObject->Get('Frontend::Module') // {} };

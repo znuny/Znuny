@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -126,7 +126,7 @@ sub Run {
 
     # show error screen if ACL prohibits this action
     if ( !$AclActionLookup{ $Self->{Action} } ) {
-        return $LayoutObject->NoPermission( WithHeader => 'yes' );
+        return $LayoutObject->CustomerNoPermission( WithHeader => 'yes' );
     }
 
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
@@ -180,7 +180,7 @@ sub Run {
     }
 
     my %GetParam;
-    for my $Key (qw(Subject Body StateID PriorityID FromChatID FromChat)) {
+    for my $Key (qw(Subject Body StateID PriorityID)) {
         $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
     }
 
@@ -189,27 +189,6 @@ sub Run {
 
     my $Config                     = $ConfigObject->Get("Ticket::Frontend::$Self->{Action}");
     my $FollowUpDynamicFieldFilter = $Config->{FollowUpDynamicField};
-
-    if ( $GetParam{FromChatID} ) {
-        if ( !$ConfigObject->Get('ChatEngine::Active') ) {
-            return $LayoutObject->FatalError(
-                Message => Translatable('Chat is not active.'),
-            );
-        }
-
-        # Check chat participant
-        my %ChatParticipant = $Kernel::OM->Get('Kernel::System::Chat')->ChatParticipantCheck(
-            ChatID      => $GetParam{FromChatID},
-            ChatterType => 'Customer',
-            ChatterID   => $Self->{UserID},
-        );
-
-        if ( !%ChatParticipant ) {
-            return $LayoutObject->FatalError(
-                Message => Translatable('No permission.'),
-            );
-        }
-    }
 
     # get the dynamic fields for ticket object
     my $FollowUpDynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
@@ -414,30 +393,9 @@ sub Run {
 
         my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
 
-        if ( $GetParam{FromChat} ) {
-            $Error{FromChat}           = 1;
+        if ( !$GetParam{Body} || $GetParam{Body} eq '<br />' ) {
+            $Error{RichTextInvalid}    = 'ServerError';
             $GetParam{FollowUpVisible} = 'Visible';
-            if ( $GetParam{FromChatID} ) {
-                my @ChatMessages = $Kernel::OM->Get('Kernel::System::Chat')->ChatMessageList(
-                    ChatID => $GetParam{FromChatID},
-                );
-                if (@ChatMessages) {
-                    for my $Message (@ChatMessages) {
-                        $Message->{MessageText} = $LayoutObject->Ascii2Html(
-                            Text        => $Message->{MessageText},
-                            LinkFeature => 1,
-                        );
-                    }
-                    $GetParam{ChatMessages} = \@ChatMessages;
-                }
-            }
-        }
-
-        if ( !$GetParam{FromChat} ) {
-            if ( !$GetParam{Body} || $GetParam{Body} eq '<br />' ) {
-                $Error{RichTextInvalid}    = 'ServerError';
-                $GetParam{FollowUpVisible} = 'Visible';
-            }
         }
 
         # create html strings for all dynamic fields
@@ -736,45 +694,6 @@ sub Run {
                 Value              => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
                 UserID             => $ConfigObject->Get('CustomerPanelUserID'),
             );
-        }
-
-        # if user clicked submit on the main screen
-        # store also chat protocol
-        if ( !$GetParam{FromChat} && $GetParam{FromChatID} ) {
-            my $ChatObject = $Kernel::OM->Get('Kernel::System::Chat');
-            my %Chat       = $ChatObject->ChatGet(
-                ChatID => $GetParam{FromChatID},
-            );
-            my @ChatMessageList = $ChatObject->ChatMessageList(
-                ChatID => $GetParam{FromChatID},
-            );
-            my $ChatArticleID;
-
-            if (@ChatMessageList) {
-                for my $Message (@ChatMessageList) {
-                    $Message->{MessageText} = $LayoutObject->Ascii2Html(
-                        Text        => $Message->{MessageText},
-                        LinkFeature => 1,
-                    );
-                }
-
-                my $ArticleChatBackend = $ArticleObject->BackendForChannel( ChannelName => 'Chat' );
-
-                $ChatArticleID = $ArticleChatBackend->ArticleCreate(
-                    TicketID             => $Self->{TicketID},
-                    SenderType           => $Config->{SenderType},
-                    ChatMessageList      => \@ChatMessageList,
-                    IsVisibleForCustomer => 1,
-                    UserID               => $ConfigObject->Get('CustomerPanelUserID'),
-                    HistoryType          => $Config->{HistoryType},
-                    HistoryComment       => $Config->{HistoryComment} || '%%',
-                );
-            }
-            if ($ChatArticleID) {
-                $ChatObject->ChatDelete(
-                    ChatID => $GetParam{FromChatID},
-                );
-            }
         }
 
         # remove pre submited attachments
@@ -1144,15 +1063,6 @@ sub _Mask {
             ActivityEntityID => $Param{$ActivityEntityIDField},
         );
 
-        # output process information in the sidebar
-        $LayoutObject->Block(
-            Name => 'ProcessData',
-            Data => {
-                Process  => $ProcessData->{Name}  || '',
-                Activity => $ActivityData->{Name} || '',
-            },
-        );
-
         # output the process widget the the main screen
         $LayoutObject->Block(
             Name => 'ProcessWidget',
@@ -1164,7 +1074,7 @@ sub _Mask {
         # get next activity dialogs
         my $NextActivityDialogs;
         if ( $Param{$ActivityEntityIDField} ) {
-            $NextActivityDialogs = $ActivityData;
+            $NextActivityDialogs = $Kernel::OM->Get('Kernel::System::Storable')->Clone( Data => $ActivityData );
         }
 
         if ( IsHashRefWithData($NextActivityDialogs) ) {
@@ -1236,6 +1146,15 @@ sub _Mask {
 
             $LayoutObject->Block(
                 Name => 'NextActivities',
+            );
+
+            # output process information in the sidebar
+            $LayoutObject->Block(
+                Name => 'ProcessData',
+                Data => {
+                    Process  => $ProcessData->{Name}  || '',
+                    Activity => $ActivityData->{Name} || '',
+                },
             );
 
             for my $NextActivityDialogKey ( sort { $a <=> $b } keys %{$NextActivityDialogs} ) {
@@ -1371,92 +1290,6 @@ sub _Mask {
         );
     }
 
-    # check is chat available and is starting a chat from ticket zoom available
-    my $ChatConfig = $ConfigObject->Get('Ticket::Customer::StartChatFromTicket');
-    if (
-        $ChatConfig->{Allowed}
-        && $ConfigObject->Get('ChatEngine::Active')
-        )
-    {
-        # get all queues to tickets relations
-        my %QueueChatChannelRelations = $Kernel::OM->Get('Kernel::System::ChatChannel')->ChatChannelQueuesGet(
-            CustomerInterface => 1,
-        );
-
-        # if a support chat channel is set for this queue
-        if ( $QueueChatChannelRelations{ $Param{QueueID} } ) {
-
-            # check is starting a chat from ticket zoom allowed to all user or only to ticket customer user_agent
-            if (
-                !$ChatConfig->{Permissions}
-                || ( $Param{CustomerUserID} eq $Self->{UserID} )
-                )
-            {
-                # add chat channelID to Param
-                $Param{ChatChannelID} = $QueueChatChannelRelations{ $Param{QueueID} };
-
-                if ( $Param{ChatChannelID} ) {
-
-                    # check should chat be available only if there are available agents in this chat channelID
-                    if ( !$ChatConfig->{AllowChatOnlyIfAgentsAvailable} ) {
-
-                        # show start a chat icon
-                        $LayoutObject->Block(
-                            Name => 'Chat',
-                            Data => {
-                                %Param,
-                            },
-                        );
-                    }
-                    else {
-                        # Get channels data
-                        my %ChatChannelData = $Kernel::OM->Get('Kernel::System::ChatChannel')->ChatChannelGet(
-                            ChatChannelID => $Param{ChatChannelID},
-                        );
-
-                        # Get all online users
-                        my @OnlineUsers = $Kernel::OM->Get('Kernel::System::Chat')->OnlineUserList(
-                            UserType => 'User',
-                        );
-                        my $AvailabilityCheck
-                            = $Kernel::OM->Get('Kernel::Config')->Get("ChatEngine::CustomerFrontend::AvailabilityCheck")
-                            || 0;
-                        my %AvailableUsers;
-                        if ($AvailabilityCheck) {
-                            %AvailableUsers = $Kernel::OM->Get('Kernel::System::Chat')->AvailableUsersGet(
-                                Key => 'ExternalChannels',
-                            );
-                        }
-
-                        # Rename hash key: ChatChannelID => Key
-                        $ChatChannelData{Key} = delete $ChatChannelData{ChatChannelID};
-
-                        if ($AvailabilityCheck) {
-                            my $UserAvailable = 0;
-
-                            AVAILABLE_USER:
-                            for my $AvailableUser ( sort keys %AvailableUsers ) {
-                                if ( grep {/^$ChatChannelData{Key}$/} @{ $AvailableUsers{$AvailableUser} } ) {
-                                    $UserAvailable = 1;
-                                    last AVAILABLE_USER;
-                                }
-                            }
-
-                            if ($UserAvailable) {
-                                $LayoutObject->Block(
-                                    Name => 'Chat',
-                                    Data => {
-                                        %Param,
-                                    },
-                                );
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     # print option
     if (
         $ConfigObject->Get('CustomerFrontend::Module')->{CustomerTicketPrint}
@@ -1468,25 +1301,6 @@ sub _Mask {
             Data => \%Param,
         );
     }
-
-    # get params
-    my $ZoomExpand = $ParamObject->GetParam( Param => 'ZoomExpand' );
-    if ( !defined $ZoomExpand ) {
-        $ZoomExpand = $ConfigObject->Get('Ticket::Frontend::CustomerTicketZoom')->{CustomerZoomExpand} || '';
-    }
-
-    # Expand option
-    my $ExpandOption = ( $ZoomExpand ? 'One'              : 'All' );
-    my $ExpandText   = ( $ZoomExpand ? 'Show one article' : 'Show all articles' );
-    $LayoutObject->Block(
-        Name => 'Expand',
-        Data => {
-            ZoomExpand   => !$ZoomExpand,
-            ExpandOption => $ExpandOption,
-            ExpandText   => $ExpandText,
-            %Param,
-        },
-    );
 
     my %Ticket = $TicketObject->TicketGet(
         TicketID => $Self->{TicketID},
@@ -1501,12 +1315,6 @@ sub _Mask {
 
     for my $ArticleTmp (@ArticleBox) {
         my %Article = %$ArticleTmp;
-
-        # check if article should be expanded (visible)
-        if ( $SelectedArticleID eq $Article{ArticleID} || $ZoomExpand ) {
-            $Article{Class} = 'Visible';
-            $ShownArticles++;
-        }
 
         # Calculate difference between article create time and now in seconds.
         my $ArticleCreateTimeObject = $Kernel::OM->Create(
@@ -1559,12 +1367,10 @@ sub _Mask {
             Class                  => $Article{Class},
             UserID                 => $Self->{UserID},
             ShowBrowserLinkMessage => $Self->{ShowBrowserLinkMessage},
-            ArticleExpanded        => $SelectedArticleID eq $Article{ArticleID} || $ZoomExpand,
             ArticleAge             => $Article{Age},
         );
     }
 
-    # TODO: Refactor
     # if there are no viewable articles show NoArticles message
     if ( !@ArticleBox ) {
         $Param{NoArticles} = 1;
@@ -1652,6 +1458,8 @@ sub _Mask {
         if ( !$Param{Subject} ) {
             $Param{Subject} = "Re: " . ( $Param{Title} // '' );
         }
+
+        $Param{ArticleID} = $SelectedArticleID;
         $LayoutObject->Block(
             Name => 'FollowUp',
             Data => \%Param,

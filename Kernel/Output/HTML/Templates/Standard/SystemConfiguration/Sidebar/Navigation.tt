@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -15,7 +15,12 @@
         <h2>[% Translate("Navigation") | html %]</h2>
     </div>
     <div class="Content">
-        <span class="SystemConfigurationCategories">[% Data.CategoriesStrg %]</span> <a href="#" class="CallForAction Inline"><span><i class="fa fa-question"></i></span></a>
+        <div class="flex-row">
+            <span class="SystemConfigurationCategories">[% Data.CategoriesStrg %]</span>
+            <a href="#" class="icon-hover">
+                <i class="fa fa-question-circle"></i>
+            </a>
+        </div>
         <input type="hidden" id="SelectedNode" value="[% Data.RootNavigation | html %]"/>
         <div id="ConfigTree">
             <p class="Center"><i class="fa fa-spinner fa-spin"></i></p>

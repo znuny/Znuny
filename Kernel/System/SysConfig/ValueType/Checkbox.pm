@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -120,7 +120,7 @@ Extracts the effective value from a XML parsed setting.
         DefaultID      =>  123,             # (required)
         EffectiveValue => 'Product 6',
         DefaultValue   => 'Product 5',      # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         RW             => 1,                # (optional) Allow editing. Default 0.
         Item           => [                 # (optional) XML parsed item
             {

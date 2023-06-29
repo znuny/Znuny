@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -19,7 +19,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  */
 
 #OverviewBody {
-    margin: 10px 16px 8px 8px;
+    margin: 0;
 }
 
 .RTL #OverviewBody {
@@ -27,28 +27,70 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     margin-left: 16px;
 }
 
-#EmptyMessageSmall {
-    padding: 7px;
-    border: 1px solid #DDD;
-    border-left: 0px;
+#OverviewBody.Overview.TicketList {
+    background-color: var(--main-bg-color);
+    overflow: unset;
+    padding: 0 var(--main-page-padding) var(--main-page-padding);
 }
+
+@media only screen and (max-width: 1024px) {
+    #OverviewBody.Overview.TicketList {
+        overflow-y: auto;
+        display: flex;
+        position: relative;
+        width: 100%;
+        flex-direction: column;
+        border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+        border: 0;
+    }
+
+    #OverviewBody.Overview.TicketList > table {
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+        border-top: 0;
+    }
+}
+
+#OverviewBody.Overview.TicketList form {
+    overflow-x: auto;
+    border: var(--border-width) var(--border-solid) var(--table-tr-border-bottom);
+    border-top: 0;
+    border-bottom-left-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+}
+
+#OverviewBody.Overview.TicketList table.TableSmall.NoCellspacing {
+    overflow: visible;
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 1024px) {
+    #OverviewBody.Overview.TicketList table {
+        border: 0;
+    }
+}
+
+/* #EmptyMessageSmall {
+    font-size: var(--main-font-size);
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    background: var(--white);
+    padding: var(--padding-md);
+} */
 
 .Overview thead tr {
     background: #eaeaea;
     z-index: 15;
 }
 
-.Overview thead tr th {
+/*.Overview thead tr th {
     height: 19px;
     padding-top: 0;
-}
+}*/
 
 .Overview table tbody tr {
     cursor: pointer;
-}
-
-.Overview table tbody tr td.Checkbox{
-    cursor: default  !important;
 }
 
 

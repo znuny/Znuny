@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -62,9 +62,9 @@ returns 1 on success or undef on error
     my $Success = $DebugLogObject->LogAdd(
         CommunicationID   => '6f1ed002ab5595859014ebf0951522d9',
         CommunicationType => 'Provider',        # 'Provider' or 'Requester'
-        Data              => 'additional data' # optional
-        DebugLevel        => 'info',           # 'debug', 'info', 'notice', 'error'
-        RemoteIP          => '192.168.0.1',    # optional, must be valid IPv4 or IPv6 address
+        Data              => 'additional data', # optional
+        DebugLevel        => 'info',            # 'debug', 'info', 'notice', 'error'
+        RemoteIP          => '192.168.0.1',     # optional, must be valid IPv4 or IPv6 address
         Summary           => 'description of log entry',
         WebserviceID      => 1,
     );
@@ -304,7 +304,7 @@ get all individual entries for a communication chain
                 DebugLevel => 'info',
                 Summary    => 'a log bit',
             },
-            ...
+            # ...
         ],
     };
 
@@ -545,10 +545,10 @@ when the parameter 'WithData' is set, the complete communication chains will be 
                     DebugLevel => 'info',
                     Summary    => 'a log bit',
                 },
-                ...
+                # ...
             ],
         },
-        ...
+        # ...
     ];
 
 =cut

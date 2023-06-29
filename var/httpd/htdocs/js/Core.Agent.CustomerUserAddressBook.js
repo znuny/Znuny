@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -69,7 +69,7 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
             }
         });
         if (!SearchValueFlag) {
-           alert(Core.Language.Translate('Please enter at least one search value or * to find anything.'));
+            alert(Core.Language.Translate('Please enter at least one search value or * to find anything.'));
         }
         return SearchValueFlag;
     }
@@ -295,11 +295,14 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
      *      This function init the recipient selection.
      */
     TargetNS.InitRecipientSelection = function () {
-        var InitialRecipients = Core.JSON.Parse($('#RecipientSelectedJSON').val());
+        var InitialRecipients = Core.JSON.Parse($('#RecipientSelectedJSON').val()),
+            RecipientSelectString;
 
         // Add the current field label and move recipient selection button in the dialog footer
         //  for the result view, to have the same view in all dialog widgets.
-        $('#RecipientSelect span').append(' ' +  $('#RecipientFieldLabel').val() + ' (' + Object.keys(InitialRecipients).length + ')');
+        RecipientSelectString = Core.Language.Translate('Insert selected customer user(s) into the "%s:" field.', $('#RecipientFieldLabel').val());
+
+        $('#RecipientSelect span').text(RecipientSelectString);
         $('.Dialog .Footer', parent.document).html($('.RecipientButton').html());
         $('.RecipientButton').remove();
 

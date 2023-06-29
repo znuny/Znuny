@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,6 +21,7 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField::Backend',
     'Kernel::Config',
     'Kernel::System::Group',
+    'Kernel::System::JSON',
     'Kernel::System::Log',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::User',
@@ -40,6 +41,25 @@ sub new {
     # get UserID param
     $Self->{UserID} = $Param{UserID} || die "Got no UserID!";
 
+    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
+    # get JSON object
+    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
+    # set stored filters if present
+    my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action};
+    if ( $Preferences{$StoredFiltersKey} ) {
+        my $StoredFilters = $JSONObject->Decode(
+            Data => $Preferences{$StoredFiltersKey},
+        );
+        $Self->{StoredFilters} = $StoredFilters;
+    }
+
+    $Self->{IsITSMIncidentProblemManagementInstalled}
+        = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
+
     return $Self;
 }
 
@@ -49,6 +69,8 @@ sub ActionRow {
     # get needed object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
 
     # check if bulk feature is enabled
     my $BulkFeature = 0;
@@ -199,6 +221,8 @@ sub Run {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
+
     # check if bulk feature is enabled
     my $BulkFeature = 0;
     if ( $Param{Bulk} && $ConfigObject->Get('Ticket::Frontend::BulkFeature') ) {
@@ -329,6 +353,8 @@ sub _Show {
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
+
     # Get last customer article.
     my @Articles = $ArticleObject->ArticleList(
         TicketID   => $Param{TicketID},
@@ -368,9 +394,11 @@ sub _Show {
     }
 
     # Get ticket data.
+    my $LoadDynamicFields = $Self->{IsITSMIncidentProblemManagementInstalled} ? 1 : 0;
+
     my %Ticket = $TicketObject->TicketGet(
         TicketID      => $Param{TicketID},
-        DynamicFields => 0,
+        DynamicFields => $LoadDynamicFields,
     );
 
     %Article = ( %Article, %Ticket );
@@ -388,6 +416,13 @@ sub _Show {
 
     # show ticket create time in current view
     $Article{Created} = $Ticket{Created};
+
+    if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
+
+        # set criticality and impact
+        $Article{Criticality} = $Article{DynamicField_ITSMCriticality} || '-';
+        $Article{Impact}      = $Article{DynamicField_ITSMImpact}      || '-';
+    }
 
     # user info
     my %UserInfo = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
@@ -543,11 +578,18 @@ sub _Show {
         Subject      => $Article{Subject} || '',
     );
 
+    my $PillClass;
+    if ( IsStringWithData( $Ticket{StateID} ) ) {
+        $PillClass .= 'pill StateID-' . $Ticket{StateID};
+    }
+
     $LayoutObject->Block(
         Name => 'DocumentContent',
         Data => {
             %Param,
             %Article,
+            PillClass                                => $PillClass,
+            IsITSMIncidentProblemManagementInstalled => $Self->{IsITSMIncidentProblemManagementInstalled},
         },
     );
 

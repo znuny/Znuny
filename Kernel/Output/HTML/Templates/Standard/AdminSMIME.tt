@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,26 +8,9 @@
 # --
 
 [% RenderBlockStart("Overview") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("S/MIME Management") | html %][% IF Data.Subtitle %]:[% END %] [% Translate(Data.Subtitle) | html %]</h1>
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
 
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('S/MIME Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% IF Data.Action == "ShowAddCertificate" %]
-        [% BreadcrumbPath.push({ Name => Translate("Add Certificate"),}) %]
-    [% ELSIF Data.Action == "ShowAddPrivate" %]
-        [% BreadcrumbPath.push({ Name => Translate("Add Private Key"),}) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
 [% RenderBlockStart("Notice") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -38,30 +21,29 @@
                     <input type="hidden" name="Action" value="AdminSystemConfigurationGroup"/>
                     <input type="hidden" name="RootNavigation" value="Core::Crypt::SMIME"/>
 [% RenderBlockStart("Disabled") %]
-                    <h3><span class="Warning">[% Translate("SMIME support is disabled") | html %]<span></h3>
+                    <h3><span class="Warning">[% Translate("SMIME support is disabled") | html %]</span></h3>
                     <fieldset>
                         <p class="FieldExplanation">
-                            [% Translate("To be able to use SMIME in OTRS, you have to enable it first.") | html %]
+                            [% Translate("To be able to use SMIME in Znuny, you have to enable it first.") | html %]
                         </p>
                         <div class="Field">
-                            <button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Enable it here!") | html %]">
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Enable it here!") | html %]">
                                 <span><i class="fa fa-unlock-alt"></i> [% Translate("Enable SMIME support") | html %]</span>
                             </button>
                         </div>
 [% RenderBlockEnd("Disabled") %]
 [% RenderBlockStart("NotWorking") %]
-                    <h3><span class="Error">[% Translate("Faulty SMIME configuration") | html %]<span></h3>
+                    <h3><span class="Error">[% Translate("Faulty SMIME configuration") | html %]</span></h3>
                     <fieldset>
                         <p class="FieldExplanation">
                             [% Translate("SMIME support is enabled, but the relevant configuration contains errors. Please check the configuration using the button below.") | html %]
                         </p>
                         <div class="Field">
-                            <button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Configure it here!") | html %]">
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Configure it here!") | html %]">
                                 <span><i class="fa fa-unlock-alt"></i> [% Translate("Check SMIME configuration") | html %]</span>
                             </button>
                         </div>
 [% RenderBlockEnd("NotWorking") %]
-                        <div class="Clear"></div>
                     </fieldset>
                 </form>
             </div>
@@ -76,23 +58,21 @@
                 <ul class="ActionList">
 [% RenderBlockStart("ActionAdd") %]
                     <li>
-                        <a class="CallForAction Fullsize Center" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ShowAddCertificate"><span><i class="fa fa-plus-square"></i> [% Translate("Add Certificate") | html %]</span></a>
+                        <a class="CallForAction btn-main btn-primary-ghost" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ShowAddCertificate"><span><i class="fa fa-plus-square"></i> [% Translate("Add Certificate") | html %]</span></a>
                     </li>
                     <li>
-                        <a class="CallForAction Fullsize Center" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ShowAddPrivate"><span><i class="fa fa-plus-square"></i> [% Translate("Add Private Key") | html %]</span></a>
+                        <a class="CallForAction btn-main btn-primary-ghost" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ShowAddPrivate"><span><i class="fa fa-plus-square"></i> [% Translate("Add Private Key") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionAdd") %]
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
                 </ul>
             </div>
         </div>
-
 [% RenderBlockEnd("ActionList") %]
-
 [% RenderBlockStart("SMIMEFilter") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -111,7 +91,6 @@
             </div>
         </div>
 [% RenderBlockEnd("SMIMEFilter") %]
-
 [% RenderBlockStart("OverviewHint") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -160,6 +139,23 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("S/MIME Management") | html %][% IF Data.Subtitle %]:[% END %] [% Translate(Data.Subtitle) | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('S/MIME Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% IF Data.Action == "ShowAddCertificate" %]
+            [% BreadcrumbPath.push({ Name => Translate("Add Certificate"),}) %]
+        [% ELSIF Data.Action == "ShowAddPrivate" %]
+            [% BreadcrumbPath.push({ Name => Translate("Add Private Key"),}) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 [% RenderBlockStart("OverviewResult") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -191,14 +187,13 @@
 [% RenderBlockStart("Row") %]
                         <tr [% IF Data.Expired %] class="Error" title="Expired"[% END %]>
                             <td>
-
 [% RenderBlockStart("CertificateRelationAdd") %]
-                                <a class="CertificateRelationAdd" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SignerRelations;CertificateID=[% Data.CertificateID %]" title="[% Translate("Handle related certificates") | html %]">
+                                <a class="CertificateRelationAdd table-actions-button" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SignerRelations;CertificateID=[% Data.CertificateID %]" title="[% Translate("Handle related certificates") | html %]">
                                     [% Translate("Handle related certificates") | html %]
                                 </a>
 [% RenderBlockEnd("CertificateRelationAdd") %]
 [% RenderBlockStart("CertificateRead") %]
-                                <a class="CertificateRead" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Read;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %]" title="[% Translate("Read certificate") | html %]">
+                                <a class="CertificateRead table-actions-button" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Read;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %]" title="[% Translate("Read certificate") | html %]">
                                     [% Translate("Read certificate") | html %]
                                 </a>
 [% RenderBlockEnd("CertificateRead") %]
@@ -207,15 +202,15 @@
                             <td>[% Data.Type | html %]</td>
                             <td>[% Data.Subject | html %]</td>
                             <td>
-                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Download;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %]" title="[% Data.Hash | html %]">[% Data.Hash | truncate(12) | html %]</a>
+                                <a class="AsBlock table-actions-button" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Download;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %]" title="[% Data.Hash | html %]">[% Data.Hash | truncate(12) | html %]</a>
                             </td>
                             <td>
-                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadFingerprint;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %]" title="[% Data.Fingerprint | html %]">[% Data.Fingerprint | truncate(12) | html %]</a>
+                                <a class="AsBlock table-actions-button" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadFingerprint;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %]" title="[% Data.Fingerprint | html %]">[% Data.Fingerprint | truncate(12) | html %]</a>
                             </td>
                             <td>[% Data.StartDate | html %]</td>
                             <td>[% Data.EndDate | html %]</td>
                             <td class="Center">
-                                <a class="TrashCan" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this certificate") | html %]">
+                                <a class="TrashCan table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this certificate") | html %]">
                                     [% Translate("Delete this certificate") | html %]
                                     <i class="fa fa-trash-o"></i>
                                 </a>
@@ -238,20 +233,20 @@
                 <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                 <input type="hidden" name="Subaction" value="AddCertificate"/>
                 <fieldset class="TableLike">
-                    <label class="Mandatory" for="File"><span class="Marker">*</span> [% Translate("File") | html %]:</label>
-                    <div class="Field">
-                        <input type="file" size="30" name="FileUpload" id="FileUpload" class="Validate_Required [% Data.FileUploadInvalid | html %]"/>
-                        <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                    <div class="field-wrapper">
+                        <label class="Mandatory" for="File"><span class="Marker">*</span> [% Translate("File") | html %]</label>
+                        <div class="Field">
+                            <input type="file" size="30" name="FileUpload" id="FileUpload" class="Validate_Required [% Data.FileUploadInvalid | html %]"/>
+                            <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
-
-                    <div class="Field SpacingTop">
-                        <button class="Primary CallForAction" type="submit" value="[% Translate("Add") | html %]"><span>[% Translate("Add") | html %]</span></button>
-                        [% Translate("or") | html %]
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                    <div class="field-wrapper form-button-actions">
+                        <div class="Field buttons-field">
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                            <button class="Primary CallForAction btn-primary btn-main btn-width-md" type="submit" value="[% Translate("Add") | html %]"><span>[% Translate("Add") | html %]</span></button>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
                 </fieldset>
             </form>
         </div>
@@ -267,25 +262,28 @@
                 <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                 <input type="hidden" name="Subaction" value="AddPrivate"/>
                 <fieldset class="TableLike">
-                    <label class="Mandatory" for="File"><span class="Marker">*</span> [% Translate("File") | html %]:</label>
-                    <div class="Field">
-                        <input type="file" size="5" name="FileUpload" id="FileUpload" class="Validate_Required [% Data.FileUploadInvalid | html %]"/>
-                        <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                    <div class="field-wrapper">
+                        <label class="Mandatory" for="File"><span class="Marker">*</span> [% Translate("File") | html %]</label>
+                        <div class="Field">
+                            <input type="file" size="5" name="FileUpload" id="FileUpload" class="Validate_Required [% Data.FileUploadInvalid | html %]"/>
+                            <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <label class="Mandatory" for="Secret"><span class="Marker">*</span> [% Translate("Secret") | html %]:</label>
-                    <div class="Field">
-                        <input class="W50pc Validate_Required" type="password" name="Secret" id="Secret" value="[% Data.Secret | html %]" maxlength="50" autocomplete="new-password"/>
-                        <div id="SecretError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                    <div class="field-wrapper">
+                        <label class="Mandatory" for="Secret"><span class="Marker">*</span> [% Translate("Secret") | html %]</label>
+                        <div class="Field">
+                            <input class="W50pc Validate_Required" type="password" name="Secret" id="Secret" value="[% Data.Secret | html %]" maxlength="50" autocomplete="new-password"/>
+                            <div id="SecretError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <div class="Field SpacingTop">
-                        <button class="Primary CallForAction" type="submit"><span>[% Translate("Submit") | html %]</span></button>
-                        [% Translate("or") | html %]
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                    <div class="field-wrapper form-button-actions">
+                        <div class="Field buttons-field">
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                            <button class="Primary CallForAction btn-primary btn-main btn-width-md" type="submit"><span>[% Translate("Submit") | html %]</span></button>
+                        </div>
                     </div>
                 </fieldset>
             </form>
@@ -322,7 +320,7 @@
 [% RenderBlockStart("RelatedCertsRow") %]
                     <tr>
                         <td class="Center">
-                            <a class="Remove" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SignerRelationDelete;CertFingerprint=[% Data.CertFingerprint | uri %];CAFingerprint=[% Data.Fingerprint | uri %];CAID=[% Data.CertificateID | uri %];CertificateID=[% Data.ParentID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this relation") | html %]">
+                            <a class="Remove table-actions-button" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SignerRelationDelete;CertFingerprint=[% Data.CertFingerprint | uri %];CAFingerprint=[% Data.Fingerprint | uri %];CAID=[% Data.CertificateID | uri %];CertificateID=[% Data.ParentID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this relation") | html %]">
                                 [% Translate("Delete this relation") | html %]
                             </a>
                         </td>
@@ -349,7 +347,7 @@
         </div>
         <div class="Content">
             <fieldset>
-                <label for="FilterSMIMECerts">[% Translate("Filter") | html %]: </label>
+                <label for="FilterSMIMECerts">[% Translate("Filter") | html %]</label>
                 <input type="text" id="FilterSMIMECerts" class="W50pc" name="FilterSMIME" value="" title="[% Translate("Filter for S/MIME certs") | html %]" />
             </fieldset>
             <table class="DataTable" id="AvailableCerts">
@@ -376,7 +374,7 @@
 [% RenderBlockStart("AvailableCertsRow") %]
                     <tr>
                         <td>
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SignerRelationAdd;CertFingerprint=[% Data.CertFingerprint | uri %];CAFingerprint=[% Data.Fingerprint | uri %];CAID=[% Data.CertificateID | uri %];CertificateID=[% Data.ParentID | uri %];[% Env("ChallengeTokenParam") | html %]" class="Add" title="[% Translate("Relate this certificate") | html %]">
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SignerRelationAdd;CertFingerprint=[% Data.CertFingerprint | uri %];CAFingerprint=[% Data.Fingerprint | uri %];CAID=[% Data.CertificateID | uri %];CertificateID=[% Data.ParentID | uri %];[% Env("ChallengeTokenParam") | html %]" class="Add table-actions-button" title="[% Translate("Relate this certificate") | html %]">
                                 [% Translate("Relate this certificate") | html %]
                             </a>
                         </td>
@@ -398,5 +396,5 @@
     </div>
 [% RenderBlockEnd("SignerCertificates") %]
 </div>
-<div class="Clear"></div>
+</div>
 [% RenderBlockEnd("Overview") %]

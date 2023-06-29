@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1108,7 +1108,7 @@ Returns:
         Responsible        => 'some_responsible_login',
         ResponsibleID      => 123,
         Age                => 3456,
-        Created            => '2010-10-27 20:15:00'
+        Created            => '2010-10-27 20:15:00',
         CreateBy           => 123,
         Changed            => '2010-10-27 20:15:15',
         ChangeBy           => 123,
@@ -1535,6 +1535,8 @@ sub TicketDeepGet {
         UserID        => $Param{UserID},
     );
     return if !%Ticket;
+
+    $Ticket{TimeUnit} = $Self->TicketAccountedTimeGet( TicketID => $Param{TicketID} ) // 0;
 
     my %Data = %Ticket;
 

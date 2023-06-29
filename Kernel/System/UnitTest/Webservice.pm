@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -77,13 +77,13 @@ Simulates an incoming web service call to test operations and the mapping.
         WebserviceID   => 123,
         Operation      => 'DesiredOperation',
         Payload        => {
-            ...
+            # ...
         },
         Response => {               # optional, you can validate the response manually in the unit test via $Self->IsDeeply()
             Success      => 1,
             ErrorMessage => '',
             Data         => {
-                ...
+               # ...
             },
         }
     );
@@ -92,7 +92,7 @@ Simulates an incoming web service call to test operations and the mapping.
         Success      => 1,
         ErrorMessage => '',
         Data         => {
-            ...
+            # ...
         },
     };
 
@@ -171,9 +171,9 @@ Mocks all outgoing requests to a given mapping.
                     },
                 }
             },
-            ...
+            # ...
         ],
-        ...
+        # ...
     );
 
 
@@ -316,7 +316,7 @@ Result cache will be cleared.
             },
             ResultCounter => 3,
         },
-        ...
+        # ...
     ];
 
 =cut
@@ -376,7 +376,7 @@ If no web service call was mocked, an error will be output.
             },
             ResultCounter => 3,
         },
-        ...
+        # ...
     ];
 
 =cut

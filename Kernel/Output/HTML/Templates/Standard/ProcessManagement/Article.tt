@@ -1,19 +1,18 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-[% RenderBlockStart("rw:Article") %]
 
+[% RenderBlockStart("rw:Article") %]
 [% RenderBlockStart("rw:Article:InformAgent") %]
 <label for="InformUserID">[% Translate("Inform Agent") | html %]:</label>
 <div class="Field">
     [% Data.OptionStrg %]
 </div>
-<div class="Clear"></div>
 [% RenderBlockEnd("rw:Article:InformAgent") %]
 
 <label class="[% Data.MandatoryClass | html %]" for="Subject">
@@ -27,30 +26,26 @@
     <div id="SubjectError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
     <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
 </div>
-<div class="Clear"></div>
-
 [% RenderBlockStart("StandardTemplate") %]
     <label for="StandardTemplateID">[% Translate("Text Template") | html %]:</label>
     <div class="Field">
         [% Data.StandardTemplateStrg %]
         <p class="FieldExplanation">[% Translate("Setting a template will overwrite any text or attachment.") | html %]</p>
     </div>
-    <div class="Clear"></div>
 [% RenderBlockEnd("StandardTemplate") %]
-
 [% RenderBlockStart("rw:Article:DescriptionShort") %]
 <div class="Field FieldExplanation">[% Translate(Data.DescriptionShort) | html %]</div>
 [% RenderBlockEnd("rw:Article:DescriptionShort") %]
 
 <label class="[% Data.MandatoryClass | html %]" for="RichText">
 [% RenderBlockStart("LabelSpanBody") %]
-    <span class="Marker">*</span>
+        <span class="Marker">*</span>
 [% RenderBlockEnd("LabelSpanBody") %]
 [% RenderBlockStart("rw:Article:DescriptionLong") %]
-    <span class="FieldHelpContainer">
-        <i class="fa fa-question-circle FieldHelpTrigger"></i>
-        <span>[% Translate(Data.DescriptionLong) | html %]</span>
-    </span>
+        <span class="FieldHelpContainer">
+            <i class="fa fa-question-circle FieldHelpTrigger"></i>
+            <span>[% Translate(Data.DescriptionLong) | html %]</span>
+        </span>
 [% RenderBlockEnd("rw:Article:DescriptionLong") %]
     [% Data.LabelBody | html %]:
 </label>
@@ -59,19 +54,10 @@
     <div id="RichTextError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
     <div id="RichTextServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
 </div>
-<div class="Clear"></div>
-
-<label>[% Translate("Attachments") | html %]:</label>
-    <div class="Field">
-        <div class="DnDUploadBox">
-[% INCLUDE "FormElements/AttachmentList.tt" %]
-        </div>
-    </div>
-<div class="Clear"></div>
-
+<div class="Field component-attachment">
+    [% INCLUDE "FormElements/AttachmentList.tt" %]
+</div>
 [% RenderBlockStart("TimeUnits") %]
     [% Data.TimeUnitsBlock %]
 [% RenderBlockEnd("TimeUnits") %]
-
-
 [% RenderBlockEnd("rw:Article") %]

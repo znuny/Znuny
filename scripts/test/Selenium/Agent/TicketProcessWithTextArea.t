@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,11 +20,16 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-        my $ProcessObject      = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $ProcessObject           = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
+        my $UserObject              = $Kernel::OM->Get('Kernel::System::User');
+        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+        my $ArticleObject           = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
-        my $Home = $Kernel::OM->Get('Kernel::Config')->Get("Home");
+        my $Home = $ConfigObject->Get("Home");
 
         my $DynamicFieldGet = $DynamicFieldObject->DynamicFieldGet(
             Name => 'TestTextArea',
@@ -64,7 +69,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -103,8 +108,7 @@ $Selenium->RunTest(
             }
         }
 
-        my $ScriptAlias  = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Import test process if does not exist in the system.
         if ( !$TestProcessExists ) {
@@ -139,7 +143,7 @@ $Selenium->RunTest(
         # Get Process entity.
         my %ListReverse = reverse %{$List};
 
-        $Kernel::OM->Get('Kernel::System::Log')->Dumper( '%ListReverse', %ListReverse );
+        $LogObject->Dumper( '%ListReverse', %ListReverse );
 
         my $Process = $ProcessObject->ProcessGet(
             EntityID => $ListReverse{$ProcessName},
@@ -169,7 +173,7 @@ $Selenium->RunTest(
         my @Ticket   = split( 'TicketID=', $Selenium->get_current_url() );
         my $TicketID = $Ticket[1];
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
         my %Article = $ArticleBackendObject->ArticleGet(
@@ -214,7 +218,7 @@ $Selenium->RunTest(
         }
 
         # Delete the dynamic field values.
-        $Success = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->AllValuesDelete(
+        $Success = $DynamicFieldValueObject->AllValuesDelete(
             FieldID => $DynamicFieldID,
             UserID  => 1,
         );

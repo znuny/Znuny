@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject     = $Kernel::OM->Get('Kernel::System::User');
+        my $ActivityObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Activity');
+        my $ProcessObject  = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
 
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -32,14 +36,14 @@ $Selenium->RunTest(
         );
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         my $ProcessRandom  = 'Process' . $HelperObject->GetRandomID();
         my $ActivityRandom = 'Activity' . $HelperObject->GetRandomID();
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminProcessManagement screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
@@ -168,7 +172,7 @@ $Selenium->RunTest(
         );
 
         # Delete test activity.
-        my $Success = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Activity')->ActivityDelete(
+        my $Success = $ActivityObject->ActivityDelete(
             ID     => $ActivityID,
             UserID => $TestUserID,
         );
@@ -178,7 +182,7 @@ $Selenium->RunTest(
         );
 
         # Delete test process.
-        $Success = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessDelete(
+        $Success = $ProcessObject->ProcessDelete(
             ID     => $ProcessID,
             UserID => $TestUserID,
         );

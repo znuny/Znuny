@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -61,7 +61,6 @@ Returns:
 
 =cut
 
-
 =head2 DataUpdate()
 
 Update data attributes.
@@ -85,7 +84,6 @@ Returns:
     my $Success = 1; # 1|0
 
 =cut
-
 
 =head2 DataGet()
 
@@ -145,11 +143,10 @@ Returns:
             ChangeTime => '...',
             ChangeBy   => '...',
         },
-        ...
+        # ...
     );
 
 =cut
-
 
 =head2 DataDelete()
 
@@ -201,7 +198,7 @@ Returns:
             ChangeTime => '...',
             ChangeBy   => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -330,7 +327,7 @@ Returns:
                 ClientID      => 2,
                 Scope         => https://mail.google.com/,
                 ClientSecret  => 3,
-                TemplateName  => Google Mail
+                TemplateName  => Google Mail,
                 Notifications => {
                     NotifyOnExpiredRefreshToken => 1,
                     NotifyOnExpiredToken        => 1

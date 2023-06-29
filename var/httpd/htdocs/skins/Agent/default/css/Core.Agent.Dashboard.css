@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -13,6 +13,54 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  */
 
 @media screen,projection,tv,handheld {
+
+.DashboardWidgetExpand {
+    display: flex;
+    /*padding: 0 0 var(--padding-lg); ed removed on 22/12/14 */
+}
+
+.DashboardWidgetExpand ul {
+    display: flex;
+    overflow-x: auto;
+}
+
+.DashboardWidgetExpand ul li {
+    display: flex;
+    list-style: none;
+    padding: none;
+    height: auto;
+    white-space: nowrap;
+    margin-left: 20px;
+}
+
+.DashboardWidgetExpand ul li:first-child {
+    margin-left: 0;
+}
+
+.DashboardWidgetExpand ul li a {
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    padding: var(--size-8) var(--size-20);
+    color: var(--main-font-color);
+    background: transparent;
+    transition: var(--main-transition);
+    font-size: var(--font-size-sm);
+    font-weight: var(--semi-bold);
+    cursor: pointer;
+}
+
+.DashboardWidgetExpand ul li a:hover {
+    border: 1px solid var(--primary-color-darker);
+    color: var(--white);
+    background: var(--primary-color-darker);
+}
+
+.DashboardWidgetExpand ul li a.active,
+.DashboardWidgetExpand ul li a.active:hover   {
+    border: 1px solid var(--primary-color);
+    background: var(--primary-color-rgb);
+    pointer-events: none;
+}
 
 /**
  * @subsection  Event Graph
@@ -38,58 +86,61 @@ div.EventDetails {
     line-height: 1em;
 }
 
+/* Merged with same class name in Core.Dialog
 .FilterInputContainer {
-    width: 98%;
+    width: 100%;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     background-color: #eee;
-}
+}*/
 
+/* Merged with same reference in Core.Dialog
 .FilterInputContainer input {
-    width: 95%;
+    width: 100%;
     display: block;
     margin: 7px auto;
+}*/
+
+.WidgetSimple.SettingsWidget > .Content {
+    padding: 15px;
 }
 
 .SettingsWidget label {
-    position: relative;
-    display: block;
-    padding: 2px 2px 2px 25px;
-    margin-bottom: 3px;
-    line-height: 150%;
-    -webkit-border-radius-: 3px;
-     -moz-border-radius-: 3px;
-     -ms-border-radius-: 3px;
-     -o-border-radius-: 3px;
-     border-radius-: 3px;
-     color: #777;
+    padding: var(--padding-sm) var(--padding-md);
 }
 
-.SettingsWidget label.Checked {
+/*.SettingsWidget label.Checked {
     color: #000;
-}
-
-.SettingsWidget label:hover {
-    background-color: #ddd;
-    border-color: #ccc;
-    color: #000;
-    border: 1px solid #ccc;
-    padding: 1px 1px 1px 24px;
 }
 
 .SettingsWidget label input {
     position: absolute;
-    left: 1px;
-    top: 1px;
+    left: 8px;
+    top: 8px;
+    margin: 0;
 }
 
 .SettingsWidget label:hover input {
-    left: 0px;
-    top: 0px;
+    left: 8px;
+    top: 8px;
 }
 
 .WidgetSimple svg text {
     font: 11px Arial !important;
+}*/
+
+/* WidgetSimple - Dashboard Sidebar */
+.Dashboard.SidebarColumn > .WidgetSimple.Collapsed > .Header {
+    border-bottom: none;
+}
+
+.Dashboard.SidebarColumn > .WidgetSimple.Expanded > .Header,
+.Dashboard.SidebarColumn > .WidgetSimple > .Header {
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+}
+.Dashboard.SidebarColumn > .WidgetSimple.Collapsed > .Content,
+.Dashboard.SidebarColumn > .WidgetSimple.Expanded > .Content {
+    padding: var(--widget-standard-padding);
 }
 
 /* User lists, DashboardUserOnline */
@@ -97,7 +148,6 @@ div.EventDetails {
 .DashboardUser .UserRow,
 .DashboardUserOnline .UserRow p {
     padding-top: 3px;
-    clear: both;
 }
 
 .DashboardUserOnline .UserRow p {
@@ -108,5 +158,54 @@ div.EventDetails {
 #RefreshUsers {
     margin-top: 5px;
 }
+
+.MainBox .SidebarColumn .WidgetSimple .Content .UserRow span,
+.MainBox .SidebarColumn .WidgetSimple .Content .UserRow p span {
+    font-size: var(--main-font-size);
+    white-space: initial;
+}
+
+.MainBox .SidebarColumn .WidgetSimple .Content .UserRow i {
+    font-size: 10px;
+}
+
+/* WidgetSimple - Dashboard Appointment Calendar */
+
+.DashboardAppointmentCalendar .DashboardActions {
+    position: relative;
+    top: inherit;
+    right: inherit;
+    display: inline-block;
+}
+
+.DashboardAppointmentCalendar .DashboardActions ul {
+    padding: var(--padding-md) 0;
+}
+
+.DashboardAppointmentCalendar .DashboardActions ul li {
+    padding: 0;
+}
+
+/*  
+    *Id exceptions are being avoided as much as possible, 
+    *style now more in comformity with similar widgets
+
+.DashboardAppointmentCalendar.WidgetSimple .DashboardActions ul li a {
+    padding: 0 var(--padding-sm);
+}*/
+
+/* WidgetSimple - Dashboard Users Online*/
+
+
+/*  
+    *Id exceptions are being avoided as much as possible, 
+    *style now more in comformity with similar widgets
+
+#Dashboard0400-UserOnline-box.WidgetSimple #Dashboard0400-UserOnline .DashboardActions {
+    position: relative;
+    top: inherit;
+    right: inherit;
+    display: inline-block;
+}*/
 
 } /* end @media */

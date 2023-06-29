@@ -1,54 +1,64 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<label for="RecipientEmail">[% Translate("Additional recipient email addresses") | html %]: </label>
-<div class="Field">
-    <input type="text" name="RecipientEmail" id="RecipientEmail" class="W50pc Validate_MaxLength [% Data.RecipientEmailServerError | html %]" value="[% Data.RecipientEmail | html %]" data-maxlength="200"/>
-    <div id="RecipientEmailError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 200 characters.") | html %]</p></div>
-    <div id="RecipientEmailServerError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 200 characters.") | html %]</p></div>
-    <p class="FieldExplanation">[% Translate("Use comma or semicolon to separate email addresses.") | html %]</p>
-    <p class="FieldExplanation">[% Translate("You can use OTRS-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.") | html %]</p>
+<div class="field-wrapper">
+    <label for="RecipientEmail">[% Translate("Additional recipient email addresses") | html %]</label>
+    <div class="Field">
+        <input type="text" name="RecipientEmail" id="RecipientEmail" class="W50pc Validate_MaxLength [% Data.RecipientEmailServerError | html %]" value="[% Data.RecipientEmail | html %]" data-maxlength="200"/>
+        <div id="RecipientEmailError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 200 characters.") | html %]</p></div>
+        <div id="RecipientEmailServerError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 200 characters.") | html %]</p></div>
+        <p class="FieldExplanation">[% Translate("Use comma or semicolon to separate email addresses.") | html %]</p>
+        <p class="FieldExplanation">[% Translate("You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
 
-<label for="IsVisibleForCustomer">[% Translate("Article visible for customer") | html %]: </label>
-<div class="Field">
-    <input type="checkbox" name="IsVisibleForCustomer" id="IsVisibleForCustomer" value="1" [% IF Data.Data.IsVisibleForCustomer %] checked="checked" [% END %]/>
-    <p class="FieldExplanation">[% Translate("An article will be created if the notification is sent to the customer or an additional email address.") | html %]</p>
+<div class="field-wrapper">
+    <label for="IsVisibleForCustomer">[% Translate("Article visible for customer") | html %]</label>
+    <div class="Field">
+        <input type="checkbox" name="IsVisibleForCustomer" id="IsVisibleForCustomer" value="1" [% IF Data.Data.IsVisibleForCustomer %] checked="checked" [% END %]/>
+        <p class="FieldExplanation">[% Translate("An article will be created if the notification is sent to the customer or an additional email address.") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
 
-<label for="TransportEmailTemplate">[% Translate("Email template") | html %]: </label>
-<div class="Field">
-    [% Data.TransportEmailTemplateStrg %]
-    <p class="FieldExplanation">[% Translate("Use this template to generate the complete email (only for HTML emails).") | html %]</p>
+<div class="field-wrapper">
+    <label for="TransportEmailTemplate">[% Translate("Email template") | html %]</label>
+    <div class="Field">
+        [% Data.TransportEmailTemplateStrg %]
+        <p class="FieldExplanation">[% Translate("Use this template to generate the complete email (only for HTML emails).") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
 
-<label for="EmailSecuritySettings">[% Translate("Enable email security") | html %]: </label>
-<div class="Field">
-    <input type="checkbox" name="EmailSecuritySettings" id="EmailSecuritySettings" value="1" [% Data.EmailSecuritySettings %] />
-    <p class="FieldExplanation">[% Data.EmailSecurityInfo %]</p>
+<div class="field-wrapper">
+    <label for="EmailSecuritySettings">[% Translate("Enable email security") | html %]</label>
+    <div class="Field">
+        <input type="checkbox" name="EmailSecuritySettings" id="EmailSecuritySettings" value="1" [% Data.EmailSecuritySettings %] />
+        <p class="FieldExplanation">[% Data.EmailSecurityInfo %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
-<label for="EmailSigningCrypting">[% Translate("Email security level") | html %]: </label>
-<div class="Field">
-    [% Data.EmailSigningCrypting %]
+
+<div class="field-wrapper">
+    <label for="EmailSigningCrypting">[% Translate("Email security level") | html %]</label>
+    <div class="Field">
+        [% Data.EmailSigningCrypting %]
+    </div>
 </div>
-<div class="Clear"></div>
-<label for="EmailMissingSigningKeys">[% Translate("If signing key/certificate is missing") | html %]: </label>
-<div class="Field">
-    [% Data.EmailMissingSigningKeys %]
+
+<div class="field-wrapper">
+    <label for="EmailMissingSigningKeys">[% Translate("If signing key/certificate is missing") | html %]</label>
+    <div class="Field">
+        [% Data.EmailMissingSigningKeys %]
+    </div>
 </div>
-<div class="Clear"></div>
-<label for="EmailMissingCryptingKeys">[% Translate("If encryption key/certificate is missing") | html %]: </label>
-<div class="Field">
-    [% Data.EmailMissingCryptingKeys %]
+
+<div class="field-wrapper">
+    <label for="EmailMissingCryptingKeys">[% Translate("If encryption key/certificate is missing") | html %]</label>
+    <div class="Field">
+        [% Data.EmailMissingCryptingKeys %]
+    </div>
 </div>
-<div class="Clear"></div>

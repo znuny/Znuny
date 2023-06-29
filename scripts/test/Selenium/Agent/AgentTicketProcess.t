@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,6 +21,7 @@ $Selenium->RunTest(
 
         my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
 
         # Do not check RichText and Service.
         $HelperObject->ConfigSettingChange(
@@ -65,7 +66,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -645,7 +646,6 @@ $Selenium->RunTest(
         $Selenium->find_element( "#OwnerSelectionGetAll", 'css' )->click();
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length;' );
 
-        my $UserObject       = $Kernel::OM->Get('Kernel::System::User');
         my $TestUserOwnwerID = $UserObject->UserLookup( UserLogin => $TestUserOwner );
 
         $Selenium->InputFieldValueSet(

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -61,6 +61,20 @@ sub Configure {
         ValueRegex  => qr/^\d+$/smx,
     );
     $Self->AddOption(
+        Name        => 'tickets-created-before-date',
+        Description => "Only process tickets created before given ISO date.",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^\d{4}-\d{2}-\d{2}[ ]\d{2}:\d{2}:\d{2}$/smx,
+    );
+    $Self->AddOption(
+        Name        => 'tickets-created-before-days',
+        Description => "Only process tickets created more than ... days ago.",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^\d+$/smx,
+    );
+    $Self->AddOption(
         Name        => 'tolerant',
         Description => "Continue after failures.",
         Required    => 0,
@@ -85,13 +99,13 @@ sub Configure {
     $Self->AdditionalHelp(<<"EOF");
 The <green>$Name</green> command migrates article data from one storage backend to another on the fly, for example from DB to FS:
 
- <green>otrs.Console.pl $Self->{Name} --target ArticleStorageFS</green>
+ <green>znuny.Console.pl $Self->{Name} --target ArticleStorageFS</green>
 
 You can specify limits for the tickets migrated with <yellow>--tickets-closed-before-date</yellow> and <yellow>--tickets-closed-before-days</yellow>.
 
 To reduce load on the database for a running system, you can use the <yellow>--micro-sleep</yellow> parameter. The command will pause for the specified amount of microseconds after each ticket.
 
- <green>otrs.Console.pl $Self->{Name} --target ArticleStorageFS --micro-sleep 1000</green>
+ <green>znuny.Console.pl $Self->{Name} --target ArticleStorageFS --micro-sleep 1000</green>
 EOF
     return;
 }
@@ -129,15 +143,27 @@ sub Run {
         );
     }
     elsif ( $Self->GetOption('tickets-closed-before-days') ) {
-        my $Seconds = $Self->GetOption('tickets-closed-before-days') * 60 * 60 * 24;
+        my $Days = $Self->GetOption('tickets-closed-before-days');
 
         my $OlderDTObject = $Kernel::OM->Create('Kernel::System::DateTime');
-        $OlderDTObject->Subtract( Seconds => $Seconds );
+        $OlderDTObject->Subtract( Days => $Days );
 
         %SearchParams = (
             StateType                => 'Closed',
             TicketCloseTimeOlderDate => $OlderDTObject->ToString(),
         );
+    }
+
+    if ( $Self->GetOption('tickets-created-before-date') ) {
+        $SearchParams{TicketCreateTimeOlderDate} = $Self->GetOption('tickets-created-before-date');
+    }
+    elsif ( $Self->GetOption('tickets-created-before-days') ) {
+        my $Days = $Self->GetOption('tickets-created-before-days');
+
+        my $OlderDTObject = $Kernel::OM->Create('Kernel::System::DateTime');
+        $OlderDTObject->Subtract( Days => $Days );
+
+        $SearchParams{TicketCreateTimeOlderDate} = $OlderDTObject->ToString();
     }
 
     # If Archive system is enabled, take into account archived tickets as well.

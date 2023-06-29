@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -30,7 +30,7 @@ Core.UI.ActionRow = (function (TargetNS) {
      *      The ticket element selectors for the different overviews.
      */
     var TicketElementSelectors = {
-            'Small': 'div.Overview table td input[type="checkbox"][name=TicketID]',
+            'Small': 'ul.Overview table td input[type="checkbox"][name=TicketID]',
             'Medium': 'ul.Overview input[type="checkbox"][name=TicketID]',
             'Large': 'ul.Overview input[type="checkbox"][name=TicketID]'
         },
@@ -136,6 +136,7 @@ Core.UI.ActionRow = (function (TargetNS) {
                     if (Value.HTML) {
                         $(Value.HTML).attr('id', Value.ID).appendTo($ActionRow);
                         ActionRowElement = $ActionRow.find('#' + Value.ID).find('a');
+                        Core.UI.InputFields.InitSelect($('#DestQueueID'), {Force: true});
                         if (typeof Value.Target === 'undefined' || Value.Target === "") {
                             ActionRowElement.attr('href', Value.Link);
                         }

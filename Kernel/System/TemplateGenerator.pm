@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::TemplateGenerator;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
 use warnings;
@@ -358,7 +358,7 @@ sub Sender {
 generate template
 
     my $Template = $TemplateGeneratorObject->Template(
-        TemplateID => 123
+        TemplateID => 123,
         TicketID   => 123,                  # Optional
         Data       => $ArticleHashRef,      # Optional
         UserID     => 123,
@@ -592,7 +592,7 @@ generate attributes
     my %Attributes = $TemplateGeneratorObject->Attributes(
         TicketID   => 123,
         ArticleID  => 123,
-        ResponseID => 123
+        ResponseID => 123,
         UserID     => 123,
         Action     => 'Forward', # Possible values are Reply and Forward, Reply is default.
     );
@@ -1675,6 +1675,17 @@ sub _Replace {
     # replace it
     $HashGlobalReplace->( $Tag, %Ticket, %DynamicFieldDisplayValues );
 
+    # OTRS_TICKET_LAST_ARTICLE_ID
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    if ( $Ticket{TicketID} ) {
+        my @LastTicketArticle = $ArticleObject->ArticleList(
+            TicketID => $Ticket{TicketID},
+            OnlyLast => 1,
+        );
+        my $LastTicketArticleID = @LastTicketArticle ? $LastTicketArticle[0]->{ArticleID} : '';
+        $Param{Text} =~ s{$Start OTRS_TICKET_LAST_ARTICLE_ID $End}{$LastTicketArticleID}gixms;
+    }
+
     # COMPAT
     $Param{Text} =~ s/$Start OTRS_TICKET_ID $End/$Ticket{TicketID}/gixms;
     $Param{Text} =~ s/$Start OTRS_TICKET_NUMBER $End/$Ticket{TicketNumber}/gixms;
@@ -1703,8 +1714,6 @@ sub _Replace {
     # - if ArticleID is sent, data is from selected article.
     # - if ArticleID is not sent, data is from last customer/agent/any article.
     if ( $Param{Template} && $Ticket{TicketID} ) {
-        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-
         if ( $Param{Template} eq 'Note' ) {
 
             # Get last article from agent.

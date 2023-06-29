@@ -1,12 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::ParamObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ParamObject)
 
 package Kernel::System::Calendar::Plugin;
 
@@ -128,7 +128,7 @@ run given plugin function with all existing params.
         PluginKey      => 'TicketLink',
         PluginFunction => 'Search',
         PluginData     => {
-            UserID    => 1
+            UserID    => 1,
             Search    => 'SearchTerm',      # (required) Search string
                                             # or
             ObjectID  => $TicketID          # (required) Object ID
@@ -443,7 +443,7 @@ Returns:
             ChangeTime    => '...',
             ChangeBy      => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -516,7 +516,7 @@ Returns:
             'ChangeTime'    => '...',
             'ChangeBy'      => '...',
         },
-        ...
+        # ...
     );
 
 =cut

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,11 +18,16 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
         # Overload CustomerUser => Map setting defined in the Defaults.pm.
-        my $DefaultCustomerUser = $Kernel::OM->Get('Kernel::Config')->Get("CustomerUser");
+        my $DefaultCustomerUser = $ConfigObject->Get("CustomerUser");
         $DefaultCustomerUser->{Map}->[5] = [
             'UserEmail',
             'Email',
@@ -70,7 +75,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -80,7 +85,7 @@ $Selenium->RunTest(
         for my $Count ( 1 .. 2 )
         {
             my $TestCustomer = 'CustomerUser' . $HelperObject->GetRandomID();
-            my $UserLogin    = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+            my $UserLogin    = $CustomerUserObject->CustomerUserAdd(
                 Source         => 'CustomerUser',
                 UserFirstname  => $TestCustomer,
                 UserLastname   => $TestCustomer,
@@ -126,7 +131,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketIDs[0]");
 
         # Force sub menus to be visible in order to be able to click one of the links.
@@ -351,7 +356,6 @@ $Selenium->RunTest(
 
         # Delete created test customer users.
         for my $TestCustomer (@TestCustomers) {
-            my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
             $TestCustomer = $DBObject->Quote($TestCustomer);
             my $Success = $DBObject->Do(
                 SQL  => "DELETE FROM customer_user WHERE login = ?",
@@ -362,8 +366,6 @@ $Selenium->RunTest(
                 "Delete customer user - $TestCustomer",
             );
         }
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (

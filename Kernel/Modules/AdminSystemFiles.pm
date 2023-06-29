@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -215,7 +215,7 @@ sub _ViewFile {
         TemplateFile => 'AdminSystemFiles/File',
         Data         => {
             File    => $FileDetails{Name},
-            Content => ${$Content},
+            Content => $Content ? ${$Content} : '',
         },
     );
 
@@ -322,7 +322,7 @@ Returns:
             'Permissions'  => '0660',
             'State'        => 'OK',
             'Package'      => 'Custom',
-            'FullPath'     => '/workspace/otrs/otrs_60New/Kernel/Config/Files/XML/Custom.xml',
+            'FullPath'     => '/workspace/znuny/znuny_70New/Kernel/Config/Files/XML/Custom.xml',
             'Created'      => '2019-10-28 09:36:03',
             'Changed'      => '2019-10-28 09:36:03'
         },
@@ -335,7 +335,7 @@ Returns:
             'Name'         => 'Ticket.pm',
             'Permissions'  => '0660',
             'State'        => 'OK',
-            'FullPath'     => '/workspace/otrs/otrs_60New/Custom/Kernel/System/Ticket.pm',
+            'FullPath'     => '/workspace/znuny/znuny_70New/Custom/Kernel/System/Ticket.pm',
             'Created'      => '2019-10-28 09:36:03',
             'Changed'      => '2019-10-28 09:36:03'
         },
@@ -374,7 +374,7 @@ Returns:
             'Permissions'  => '0660',
             'State'        => 'OK',
             'Package'      => 'Custom',
-            'FullPath'     => '/workspace/otrs/otrs_60New/Kernel/Config/Files/XML/Custom.xml',
+            'FullPath'     => '/workspace/znuny/znuny_70New/Kernel/Config/Files/XML/Custom.xml',
             'Created'      => '2019-10-28 09:36:03',
             'Changed'      => '2019-10-28 09:36:03'
         },
@@ -473,7 +473,7 @@ Returns:
             'Name'         => 'Ticket.pm',
             'Permissions'  => '0660',
             'State'        => 'OK',
-            'FullPath'     => '/workspace/otrs/otrs_60New/Custom/Kernel/System/Ticket.pm',
+            'FullPath'     => '/workspace/znuny/znuny_70New/Custom/Kernel/System/Ticket.pm',
             'Created'      => '2019-10-28 09:36:03',
             'Changed'      => '2019-10-28 09:36:03'
         },
@@ -547,7 +547,7 @@ Returns:
             'Name'         => 'Ticket.pm',
             'Permissions'  => '0660',
             'State'        => 'OK',
-            'FullPath'     => '/workspace/otrs/otrs_60New/Kernel/Config.pm',
+            'FullPath'     => '/workspace/znuny/znuny_70New/Kernel/Config.pm',
             'Created'      => '2019-10-28 09:36:03',
             'Changed'      => '2019-10-28 09:36:03'
         },
@@ -617,24 +617,29 @@ sub FileDetails {
     my $File = $Param{File};
 
     my $Stat        = stat($File);
-    my $Changed     = $Stat->mtime();
-    my $Created     = $Stat->ctime();
-    my $Mode        = $Stat->mode();
-    my $Permissions = sprintf '%04o', $Mode & 07777;    ## no critic
-    my $User        = getgrgid( stat($File)->gid );     ## no critic
-    my $Group       = getpwuid( stat($File)->uid );     ## no critic
+    my $Changed     = $Stat ? $Stat->mtime() : '';
+    my $Created     = $Stat ? $Stat->ctime() : '';
+    my $Mode        = $Stat ? $Stat->mode() : '';
+    my $Permissions = $Stat ? ( sprintf '%04o', $Mode & 07777 ) : '';    ## no critic
+    my $User        = $Stat ? getgrgid( $Stat->gid ) : '';               ## no critic
+    my $Group       = $Stat ? getpwuid( $Stat->uid ) : '';               ## no critic
     my $FullPath    = $File;
     my $FileName    = $File;
 
     $FileName =~ s{.+\/(.*)}{$1}smxg;
     $File     =~ s{$Home\/}{}smxg;
 
-    my $ChangedTimeStamp = $TimeObject->SystemTime2TimeStamp(
+    my $ChangedTimeStamp = $Stat
+        ? $TimeObject->SystemTime2TimeStamp(
         SystemTime => $Changed,
-    );
-    my $CreatedTimeStamp = $TimeObject->SystemTime2TimeStamp(
+        )
+        : '';
+
+    my $CreatedTimeStamp = $Stat
+        ? $TimeObject->SystemTime2TimeStamp(
         SystemTime => $Created,
-    );
+        )
+        : '';
 
     my %FileDetails = (
         Type         => $Param{Type},
@@ -647,11 +652,11 @@ sub FileDetails {
         Group        => $Group,
         Permissions  => $Permissions,
         Package      => $Self->{Files}->{$FullPath}->{Package} || '',
-        State        => $Self->{Files}->{$FullPath}->{State} || 'Warning',
+        State        => $Stat ? ( $Self->{Files}->{$FullPath}->{State} || 'Warning' ) : 'Missing or not readable',
         StateMessage => $Self->{Files}->{$FullPath}->{StateMessage} || 'Unknown',
     );
 
-    return %FileDetails if !$Param{Extended};
+    return %FileDetails if !$Param{Extended} || !$Stat;
 
     my %Extended = $Self->FileDetailsExtended(
         %Param,
@@ -759,24 +764,22 @@ sub FileDetailsExtended {
     }
     elsif ( $Param{Type} eq 'Changed' ) {
 
+        # e.g. 6.4.2
         my $Version = $ConfigObject->Get('Version');
 
-        # please, do not delete this
-        # for development
-        #         $Version = "6.0.22";
-        #         $Version =~ s{\.}{_}smxg;
-        #         $Version = 'rel-' . $Version;
+        $Version =~ s{\.x\z}{}i;     # 6.4.x => 6.4 (latest)
+        $Version =~ s{\.}{_}smxg;    # 6.4.2 => 6_4_2
+        $Version = 'rel-' . $Version;    # 6_4_2 => rel-6_4_2
 
         my $WebUserAgentObject = Kernel::System::WebUserAgent->new(
             Timeout => 15,
         );
 
-        #  URL => 'https://raw.githubusercontent.com/OTRS/otrs/rel-5_0/Kernel/GenericInterface/Event/Handler.pm',
-        my $URL      = "https://raw.githubusercontent.com/OTRS/otrs/" . $Version . "/" . $Param{Path};
+        #  e.g.: https://raw.githubusercontent.com/znuny/znuny/rel-6_5/Kernel/GenericInterface/Event/Handler.pm
+        my $URL      = "https://raw.githubusercontent.com/znuny/znuny/" . $Version . "/" . $Param{Path};
         my %Response = $WebUserAgentObject->Request(
-            URL                 => $URL,
-            SkipSSLVerification => 1,
-            NoLog               => 1,
+            URL   => $URL,
+            NoLog => 1,
         );
 
         if ( $Response{Status} eq '200 OK' && $Response{Content} ) {

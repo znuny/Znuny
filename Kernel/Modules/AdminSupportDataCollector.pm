@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -31,27 +31,13 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # ------------------------------------------------------------ #
-    # Send Support Data Update
-    # ------------------------------------------------------------ #
-
-    if ( $Self->{Subaction} eq 'SendUpdate' ) {
-
-        my %Result = $Kernel::OM->Get('Kernel::System::Registration')->RegistrationUpdateSend();
-
-        return $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Attachment(
-            ContentType => 'text/html',
-            Content     => $Result{Success},
-            Type        => 'inline',
-            NoCache     => 1,
-        );
-    }
-    elsif ( $Self->{Subaction} eq 'GenerateSupportBundle' ) {
+    if ( $Self->{Subaction} eq 'GenerateSupportBundle' ) {
         return $Self->_GenerateSupportBundle();
     }
     elsif ( $Self->{Subaction} eq 'DownloadSupportBundle' ) {
         return $Self->_DownloadSupportBundle();
     }
+
     return $Self->_SupportDataCollectorView(%Param);
 }
 
@@ -64,9 +50,6 @@ sub _SupportDataCollectorView {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    # check if cloud services are disabled
-    my $CloudServicesDisabled = $Kernel::OM->Get('Kernel::Config')->Get('CloudServices::Disabled') || 0;
-
     if ( !$SupportData{Success} ) {
         $LayoutObject->Block(
             Name => 'SupportDataCollectionFailed',
@@ -74,11 +57,6 @@ sub _SupportDataCollectorView {
         );
     }
     else {
-        if ($CloudServicesDisabled) {
-            $LayoutObject->Block(
-                Name => 'CloudServicesWarning',
-            );
-        }
         $LayoutObject->Block(
             Name => 'NoteSupportBundle',
         );

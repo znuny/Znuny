@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -64,7 +64,9 @@ sub Run {
         $UserType =~ s/Interface//;
     }
 
-    my %GetParam = $Self->_GetParams();
+    my %GetParam = $ParamObject->GetParams(
+        Raw => 1
+    );
 
     my $FieldValues = $Self->_SerializeFieldValues(
         Params       => \%GetParam,
@@ -327,30 +329,6 @@ sub _Test {
     return $Result;
 }
 
-sub _GetParams {
-    my ( $Self, %Param ) = @_;
-
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
-
-    my %GetParams;
-
-    my @ParamNames = $ParamObject->GetParamNames();
-    for my $ParamName (@ParamNames) {
-        $GetParams{$ParamName} = $ParamObject->GetParam( Param => $ParamName );
-
-        my @Param = $ParamObject->GetArray(
-            Param => $ParamName,
-            Raw   => 1,
-        );
-
-        if ( @Param && scalar @Param gt 1 ) {
-            $GetParams{$ParamName} = \@Param;
-        }
-    }
-
-    return %GetParams;
-}
-
 sub _SerializeFieldValues {
     my ( $Self, %Param ) = @_;
 
@@ -360,12 +338,12 @@ sub _SerializeFieldValues {
     my $FieldMapping       = $ConfigObject->Get('DynamicFieldWebservice::FieldMapping')       // {};
     my $CustomFieldMapping = $ConfigObject->Get('DynamicFieldWebservice::CustomFieldMapping') // {};
 
-    my $AdditionalAttributesConfig = $ConfigObject->Get('DynamicFieldWebservice::AdditionalAttributes') // {};
-    my $StandardAttributesConfig   = $AdditionalAttributesConfig->{Standard}                                      // {};
-    my $SelectableAttributesConfig = $AdditionalAttributesConfig->{Selectable}                                    // {};
-    my $DefaultStandardAttributes  = $StandardAttributesConfig->{Default}                                         // {};
-    my $DefaultSelectableAttributes          = $SelectableAttributesConfig->{Default} // {};
-    my $AdditionalSelectableAttributesConfig = $SelectableAttributesConfig->{Option}  // {};
+    my $AdditionalAttributesConfig           = $ConfigObject->Get('DynamicFieldWebservice::AdditionalAttributes') // {};
+    my $StandardAttributesConfig             = $AdditionalAttributesConfig->{Standard}                            // {};
+    my $SelectableAttributesConfig           = $AdditionalAttributesConfig->{Selectable}                          // {};
+    my $DefaultStandardAttributes            = $StandardAttributesConfig->{Default}                               // {};
+    my $DefaultSelectableAttributes          = $SelectableAttributesConfig->{Default}                             // {};
+    my $AdditionalSelectableAttributesConfig = $SelectableAttributesConfig->{Option}                              // {};
 
     my $Params       = $Param{Params};
     my $View         = $Param{View};

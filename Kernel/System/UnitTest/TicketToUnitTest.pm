@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # $origin: otrs - 0000000000000000000000000000000000000000 - Kernel/System/UnitTest/TicketToUnitTest.pm
 # --
@@ -8,7 +8,6 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 package Kernel::System::UnitTest::TicketToUnitTest;
 
@@ -127,7 +126,7 @@ sub GetHeader {
 
     my $Header = <<'HEADER';
 # ---
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # ---
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -456,29 +455,29 @@ Returns the HistoryTicketGet for a given SystemTime and TicketID.
     );
 
     %HistoryData = (
-        TicketID                => 'TicketID'
-        Type                    => 'Type'
-        TypeID                  => 'TypeID'
-        Queue                   => 'Queue'
-        QueueID                 => 'QueueID'
-        Priority                => 'Priority'
-        PriorityID              => 'PriorityID'
-        State                   => 'State'
-        StateID                 => 'StateID'
-        Owner                   => 'Owner'
-        OwnerID                 => 'OwnerID'
-        CreateUserID            => 'CreateUserID'
-        CreateTime (timestamp)  => 'CreateTime (timestamp)'
-        CreateOwnerID           => 'CreateOwnerID'
-        CreatePriority          => 'CreatePriority'
-        CreatePriorityID        => 'CreatePriorityID'
-        CreateState             => 'CreateState'
-        CreateStateID           => 'CreateStateID'
-        CreateQueue             => 'CreateQueue'
-        CreateQueueID           => 'CreateQueueID'
-        LockFirst (timestamp)   => 'LockFirst (timestamp)'
-        LockLast (timestamp)    => 'LockLast (timestamp)'
-        UnlockFirst (timestamp) => 'UnlockFirst (timestamp)'
+        TicketID                => 'TicketID',
+        Type                    => 'Type',
+        TypeID                  => 'TypeID',
+        Queue                   => 'Queue',
+        QueueID                 => 'QueueID',
+        Priority                => 'Priority',
+        PriorityID              => 'PriorityID',
+        State                   => 'State',
+        StateID                 => 'StateID',
+        Owner                   => 'Owner',
+        OwnerID                 => 'OwnerID',
+        CreateUserID            => 'CreateUserID',
+        CreateTime (timestamp)  => 'CreateTime (timestamp)',
+        CreateOwnerID           => 'CreateOwnerID',
+        CreatePriority          => 'CreatePriority',
+        CreatePriorityID        => 'CreatePriorityID',
+        CreateState             => 'CreateState',
+        CreateStateID           => 'CreateStateID',
+        CreateQueue             => 'CreateQueue',
+        CreateQueueID           => 'CreateQueueID',
+        LockFirst (timestamp)   => 'LockFirst (timestamp)',
+        LockLast (timestamp)    => 'LockLast (timestamp)',
+        UnlockFirst (timestamp) => 'UnlockFirst (timestamp)',
         UnlockLast (timestamp)  => 'UnlockLast (timestamp)'
     );
 

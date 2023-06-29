@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -87,12 +87,55 @@ strong {
     font-weight: bold;
 }
 
+button:focus-visible {
+    outline: unset;
+}
+
 /**
  * @note    Move selects a bit to the top. This is ignored by some browsers,
  *          and seems to be needed for some linux environments (Firefox, Arora / Qt).
  */
 select {
     margin-top: -1px;
+}
+
+
+/***********************************************************************/
+/*    Moved from Core.Reset.Forwwward.css                              */
+/***********************************************************************/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, hr {
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+label:empty {
+    display: none;
+}
+
+div:not(#LoginLogo, #Overlay):empty,
+p:empty,
+span:empty(.ActivityState),
+div.SidebarColumn:empty {
+    display: none;
+    padding: 0;
+    margin: 0;
+    height: 0;
+    width: 0;
+    min-width: 0;
+    min-height: 0;
+    max-width: unset;
+    max-height: unset;
 }
 
 

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -44,7 +44,7 @@ my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
             OTRS => {
                 DisplayName => 'Znuny',
                 Files       => [
-                    'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml',
+                    'Calendar.xml',         'Daemon.xml',            'Framework.xml',
                     'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml',
                     'Znuny.xml',
                 ],

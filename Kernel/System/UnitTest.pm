@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -62,13 +62,14 @@ sub new {
 run all or some tests located in C<scripts/test/**/*.t> and print the result.
 
     $UnitTestObject->Run(
-        Tests                  => ['JSON', 'User'],             # optional, execute certain test files only
+        Tests                  => ['JSON', 'User'],             # optional, execute certain test files
         Directory              => ['Selenium', 'User'],         # optional, execute tests in subdirectory
+        Package                => ['ITSMCore'],                 # optional, execute tests of installed package
         ExcludeDirectory       => ['Selenium/Agent/Admin'],     # optional, all test files in the specified directory will be Excluded.
         SOPMFile               => ['ITSMCore.sopm'],            # optional, execute all test files which are defined in these sopm.
         Verbose                => 1,                            # optional (default 0), only show result details for all tests, not just failing
         SubmitURL              => $URL,                         # optional, send results to unit test result server
-        SubmitAuth             => '0abc86125f0fd37baae'         # optional authentication string for unit test result server
+        SubmitAuth             => $SubmitAuth,                  # optional authentication string for unit test result server
         SubmitResultAsExitCode => 1,                            # optional, specify if exit code should not indicate if tests were ok/not ok, but if submission was successful instead
         JobID                  => 12,                           # optional job ID for unit test submission to server
         Scenario               => 'Znuny 6 git',                # optional scenario identifier for unit test submission to server
@@ -94,50 +95,44 @@ sub Run {
     my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
     my $MainObject    = $Kernel::OM->Get('Kernel::System::Main');
 
-    my $Product = $ConfigObject->Get('Product') . " " . $ConfigObject->Get('Version');
-    my $Home    = $ConfigObject->Get('Home');
-
-    my @TestsToExecute = @{ $Param{Tests} // [] };
-
+    my $Product           = $ConfigObject->Get('Product') . " " . $ConfigObject->Get('Version');
+    my $Home              = $ConfigObject->Get('Home');
     my $UnitTestBlacklist = $ConfigObject->Get('UnitTest::Blacklist');
-    my @BlacklistedTests;
-    my @SkippedTests;
-    if ( IsHashRefWithData($UnitTestBlacklist) ) {
-
-        CONFIGKEY:
-        for my $ConfigKey ( sort keys %{$UnitTestBlacklist} ) {
-
-            next CONFIGKEY if !$ConfigKey;
-            next CONFIGKEY
-                if !$UnitTestBlacklist->{$ConfigKey} || !IsArrayRefWithData( $UnitTestBlacklist->{$ConfigKey} );
-
-            TEST:
-            for my $Test ( @{ $UnitTestBlacklist->{$ConfigKey} } ) {
-
-                next TEST if !$Test;
-
-                push @BlacklistedTests, $Test;
-            }
-        }
-    }
 
     my $StartTime      = CORE::time();                      # Use non-overridden time().
     my $StartTimeHiRes = [ Time::HiRes::gettimeofday() ];
+    my $Directory      = "$Home/scripts/test";
 
-    my $Directory = "$Home/scripts/test";
+    my @TestsToExecute;
+    my @ExcludeFiles;
+    my @BlacklistedTests;
+    my @SkippedTests;
 
-    my @Files;
-    if ( !$Param{Directory} && !$Param{SOPMFile} ) {
-        @Files = $MainObject->DirectoryRead(
-            Directory => $Directory,
-            Filter    => '*.t',
-            Recursive => 1,
-        );
+    # Get all valid UnitTests with full path
+    my @AllTests = $MainObject->DirectoryRead(
+        Directory => $Directory,
+        Filter    => '*.t',
+        Recursive => 1,
+    );
+
+    # Run all test if we have no other explicit params
+    if (
+        !IsArrayRefWithData( $Param{Tests} )
+        && !IsArrayRefWithData( $Param{Directory} )
+        && !IsArrayRefWithData( $Param{SOPMFile} )
+        && !IsArrayRefWithData( $Param{Package} )
+        )
+    {
+        @TestsToExecute = @AllTests;
     }
 
-    if ( IsArrayRefWithData( $Param{Directory} ) ) {
-        @Files = ();
+    # Run individual test files, e.g. 'Ticket' or 'Ticket/ArchiveFlags' (can be specified several times).
+    if ( IsArrayRefWithData( $Param{Tests} ) ) {
+        @TestsToExecute = @{ $Param{Tests} };
+    }
 
+    # Run all test files in the specified directory (can be specified several times).",
+    if ( IsArrayRefWithData( $Param{Directory} ) ) {
         for my $CurrentDirectory ( @{ $Param{Directory} } ) {
             $CurrentDirectory =~ s{scripts\/test/}{}g;
 
@@ -152,11 +147,53 @@ sub Run {
                 Filter    => '*.t',
                 Recursive => 1,
             );
-            push @Files, @CurrentFiles;
+
+            push @TestsToExecute, @CurrentFiles;
         }
     }
 
-    my @ExcludeFiles;
+    # Run all test files contained in the given SOPM file (can be specified several times).",
+    if ( IsArrayRefWithData( $Param{SOPMFile} ) ) {
+        SOPMFILE:
+        for my $SOPMFile ( @{ $Param{SOPMFile} } ) {
+            next SOPMFILE if ( !-f $SOPMFile );
+
+            my $Content = $MainObject->FileRead(
+                Location => $SOPMFile,
+                Mode     => 'utf8',
+                Result   => 'SCALAR',
+            );
+            next SOPMFILE if !$Content;
+
+            my %Structure = $PackageObject->PackageParse(
+                String => $Content,
+            );
+            next SOPMFILE if !%Structure;
+            next SOPMFILE if !IsArrayRefWithData( $Structure{Filelist} );
+
+            push @TestsToExecute,
+                map  { $Home . '/' . $_ }
+                grep {m/\.t$/}
+                map  { $_->{Location} } @{ $Structure{Filelist} };
+        }
+    }
+
+    # Run all test files in the specified package (can be specified several times).",
+    if ( IsArrayRefWithData( $Param{Package} ) ) {
+        my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
+        my @PackagesList  = $PackageObject->RepositoryList();
+
+        for my $InstalledPackage (@PackagesList) {
+            if ( grep { $InstalledPackage->{Name}->{Content} =~ $_ } @{ $Param{Package} } ) {
+                push @TestsToExecute,
+                    map  { $Home . '/' . $_ }
+                    grep {m/\.t$/}
+                    map  { $_->{Location} } @{ $InstalledPackage->{Filelist} };
+            }
+        }
+    }
+
+    # All test files in the specified directory will be excluded (can be specified several times).",
     if ( IsArrayRefWithData( $Param{ExcludeDirectory} ) ) {
         for my $CurrentDirectory ( @{ $Param{ExcludeDirectory} } ) {
             $CurrentDirectory =~ s{scripts\/test/}{}g;
@@ -176,41 +213,23 @@ sub Run {
         }
     }
 
-    if ( IsArrayRefWithData( $Param{SOPMFile} ) ) {
-        SOPMFILE:
-        for my $SOPMFile ( @{ $Param{SOPMFile} } ) {
-            next SOPMFILE if ( !-f $SOPMFile );
+    #  All test files defined in this SysConfig (UnitTest::Blacklist) will not be executed.
+    if ( IsHashRefWithData($UnitTestBlacklist) ) {
+        CONFIGKEY:
+        for my $ConfigKey ( sort keys %{$UnitTestBlacklist} ) {
 
-            my $Content = $MainObject->FileRead(
-                Location => $SOPMFile,
-                Mode     => 'utf8',
-                Result   => 'SCALAR',
-            );
-            next SOPMFILE if !$Content;
+            next CONFIGKEY if !$ConfigKey;
+            next CONFIGKEY
+                if !$UnitTestBlacklist->{$ConfigKey} || !IsArrayRefWithData( $UnitTestBlacklist->{$ConfigKey} );
 
-            my %Structure = $PackageObject->PackageParse(
-                String => $Content,
-            );
-            next SOPMFILE if !%Structure;
-            next SOPMFILE if !IsArrayRefWithData( $Structure{Filelist} );
+            TEST:
+            for my $Test ( @{ $UnitTestBlacklist->{$ConfigKey} } ) {
 
-            push @Files,
-                map  { $Home . '/' . $_ }
-                grep {m/\.t/}
-                map  { $_->{Location} } @{ $Structure{Filelist} };
+                next TEST if !$Test;
+
+                push @BlacklistedTests, $Test;
+            }
         }
-    }
-
-    my %Files        = map { $_ => 1 } @Files;
-    my %ExcludeFiles = map { $_ => 1 } @ExcludeFiles;
-
-    @Files = ();
-    FILE:
-    for my $File ( sort keys %Files ) {
-        my $ExcludeFile = grep { $File eq $_ } sort keys %ExcludeFiles;
-        next FILE if $ExcludeFile;
-
-        push @Files, $File;
     }
 
     my $NumberOfTestRuns = $Param{NumberOfTestRuns};
@@ -218,16 +237,29 @@ sub Run {
         $NumberOfTestRuns = 1;
     }
 
-    FILE:
-    for my $File (@Files) {
+    # Search and replace ".t" but if not found return $_ that tests without ".t" get inserted into the array again.
+    @TestsToExecute = map { $_ =~ s{\.t\z}{}; $_ } @TestsToExecute;    ## no critic
 
-        # check if only some tests are requested
-        if ( @TestsToExecute && !grep { $File =~ /\/\Q$_\E\.t$/smx } @TestsToExecute ) {
+    # Convert array into hash to remove doubled files.
+    my %TestsToExecute = map { $_ => 1 } @TestsToExecute;
+    my %ExcludeFiles   = map { $_ => 1 } @ExcludeFiles;
+
+    FILE:
+    for my $File (@AllTests) {
+
+        # Check if only some tests are requested
+        if ( %TestsToExecute && !grep { $File =~ /\Q$_\E\.t$/smx } sort keys %TestsToExecute ) {
             next FILE;
         }
 
-        # Check blacklisted files.
-        if ( @BlacklistedTests && grep { $File =~ m{\Q$Directory/$_\E$}smx } @BlacklistedTests ) {
+        # Check for excluded UnitTests.
+        if (%ExcludeFiles) {
+            my $ExcludeFile = grep { $File eq $_ } sort keys %ExcludeFiles;
+            next FILE if $ExcludeFile;
+        }
+
+        # Check for blacklisted UnitTests.
+        if ( @BlacklistedTests && grep { $File =~ /\Q$_\E$/smx } @BlacklistedTests ) {
             push @SkippedTests, $File;
             next FILE;
         }

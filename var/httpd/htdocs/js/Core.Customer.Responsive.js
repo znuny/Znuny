@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -23,15 +23,9 @@ Core.Customer.Responsive = (function (TargetNS) {
 
     Core.App.Subscribe('Event.App.Responsive.SmallerOrEqualScreenL', function () {
 
-        var SidebarElem;
-        if ($('#ZoomSidebar').length) {
-            SidebarElem = '#ZoomSidebar';
-        }
-        else if ($('.SidebarColumn').length) {
-            SidebarElem = '.SidebarColumn';
-        }
+        var SidebarElem = '.SidebarColumn';
 
-        // Add switch for Desktopmode
+        // Add switch for Desktop mode
         if (!$('#ViewModeSwitch').length) {
             $('#Footer').append('<div id="ViewModeSwitch"><a href="#">' + Core.Language.Translate('Switch to desktop mode') + '</a></div>');
             $('#ViewModeSwitch a').on('click.Responsive', function() {
@@ -45,6 +39,8 @@ Core.Customer.Responsive = (function (TargetNS) {
         if (!$('.ResponsiveSidebarContainer').length) {
             $(SidebarElem + ', #Navigation').wrap('<div class="ResponsiveSidebarContainer" />');
         }
+
+        $('#HeaderToolBar').detach().prependTo('#Navigation');
 
         // make sure the relevant sidebar is being collapsed on clicking
         // on the background
@@ -97,7 +93,7 @@ Core.Customer.Responsive = (function (TargetNS) {
 
         // add sidebar handling
         if ($(SidebarElem).length && !$('#ResponsiveSidebarHandle').length) {
-            $('#Header').append('<a id="ResponsiveSidebarHandle" href="#"><i class="fa fa-caret-square-o-left"></i></a>');
+            $('#Header').append('<a id="ResponsiveSidebarHandle" href="#"><i class="fa fa-sign-out"></i></a>');
         }
 
         // add sidebar column expansion handling
@@ -125,6 +121,9 @@ Core.Customer.Responsive = (function (TargetNS) {
             return false;
         });
 
+        $('.UserAvatar').click(function() {
+            $('body').toggleClass("ShowDropDown");
+        });
     });
 
     Core.App.Subscribe('Event.App.Responsive.ScreenXL', function () {
@@ -144,6 +143,9 @@ Core.Customer.Responsive = (function (TargetNS) {
 
         // unwrap sidebar
         $('.ResponsiveSidebarContainer').children(SidebarElem + ', #Navigation').unwrap();
+
+        $('#HeaderToolBar').detach().appendTo('#Header');
+
     });
 
     return TargetNS;

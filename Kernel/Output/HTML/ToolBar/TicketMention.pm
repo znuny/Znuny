@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -94,7 +94,7 @@ sub Run {
     if ($MentionsCount) {
         $Return{ $Priority++ } = {
             %{ $AdditionalParams{Mentions} },
-            Block       => 'ToolBarItem',
+            Block       => $Param{Config}->{Block} || 'ToolBarItem',
             Description => $MentionLabel,
             Class       => $Param{Config}->{CssClass},
             Icon        => $Icon,
@@ -105,7 +105,7 @@ sub Run {
     if ($NewMentionsCount) {
         $Return{ $Priority++ } = {
             %{ $AdditionalParams{NewMentions} },
-            Block       => 'ToolBarItem',
+            Block       => $Param{Config}->{Block} || 'ToolBarItem',
             Description => $NewMentionLabel,
             Class       => $Param{Config}->{CssClassNew},
             Icon        => $Icon,

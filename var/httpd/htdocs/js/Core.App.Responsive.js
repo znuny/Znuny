@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -102,6 +102,7 @@ Core.App.Responsive = (function (TargetNS) {
             // the same screen size before.
             Core.App.Publish('Event.App.Responsive.' + ActiveScreenSize);
             Core.App.Publish('Event.App.Responsive.SmallerOrEqual' + ActiveScreenSize);
+            Core.Config.Set('ActiveScreenSize', ActiveScreenSize);
 
             // publish event for "SmallerOrEqual" screen sizes
             for (i = 0; i < ScreenSizes[ActiveScreenSize].length; i++) {

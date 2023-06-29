@@ -1,30 +1,14 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Edit System Maintenance") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate("System Maintenance Management"),
-                Link => Env("Action"),
-            },
-            {
-                Name => Translate("Edit System Maintenance")
-            }
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -32,15 +16,29 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Center Fullsize Back"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost Back"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
                 </ul>
             </div>
         </div>
-
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Edit System Maintenance") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate("System Maintenance Management"),
+                    Link => Env("Action"),
+                },
+                {
+                    Name => Translate("Edit System Maintenance")
+                }
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <form action="[% Env("CGIHandle") %]" method="post" id="SystemMaintenanceForm" class="Validate PreventMultipleSubmits">
             <div class="WidgetSimple Expanded">
                 <div class="Header">
@@ -55,76 +53,80 @@
                     <input type="hidden" name="SystemMaintenanceID" value="[% Data.SystemMaintenanceID | html %]"/>
                     <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
                     <fieldset class="TableLike">
-
-
-                        <label>[% Translate("Start date") | html %]:</label>
-                        <div class="Field">
-                            [% Data.StartDateString %]
-                            <div id="StartDateDayServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
-                            <div id="StartDateHourServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label>[% Translate("Stop date") | html %]:</label>
-                        <div class="Field">
-                            [% Data.StopDateString %]
-                            <div id="StopDateDayServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
-                            <div id="StopDateHourServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="Comment" class="Mandatory"><span class="Marker">*</span> [% Translate("Comment") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="W50pc Validate_Required [% Data.CommentServerError | html %]" maxlength="70"/>
-                            <div id="CommentError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="CommentServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        </div>
-                        <div class="Clear SpacingTop"></div>
-
-                        <label for="LoginMessage">[% Translate("Login message") | html %]:</label>
-                        <div class="Field">
-                            <textarea name="LoginMessage" id="LoginMessage" class="W50pc [% Data.LoginMessageServerError | html %] Validate_MaxLength" rows="5" data-maxlength="250">[% Data.LoginMessage | html %]</textarea>
-                            <div id="LoginMessageError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 250 characters.") | html %]</p></div>
-                            <div id="LoginMessageServerError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 250 characters.") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="ShowLoginMessage">[% Translate("Show login message") | html %]:</label>
-                        <div class="Field">
-                            <input type="checkbox" name="ShowLoginMessage" id="ShowLoginMessage" value="1" [% Data.Checked %] />
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="NotifyMessage">[% Translate("Notify message") | html %]:</label>
-                        <div class="Field">
-                            <textarea name="NotifyMessage" id="NotifyMessage" class="W50pc [% Data.NotifyMessageServerError | html %] Validate_MaxLength" rows="5" data-maxlength="250">[% Data.NotifyMessage | html %]</textarea>
-                            <div id="NotifyMessageError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 250 characters.") | html %]</p></div>
-                            <div id="NotifyMessageServerError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 250 characters.") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
-
-
-                        <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
-                        <div class="Field">
-                            [% Data.ValidOption %]
-                            <div id="ValidIDError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="ValidIDServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                        <div class="field-wrapper">
+                            <label>[% Translate("Start date") | html %]</label>
+                            <div class="Field flex-row">
+                                [% Data.StartDateString %]
+                                <div id="StartDateDayServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
+                                <div id="StartDateHourServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
                             </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <div class="Field SpacingTop">
-                            <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% Translate("or") | html %]
-                            <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]"><span>[% Translate("Cancel") | html %]</span></a>
+                        <div class="field-wrapper">
+                            <label>[% Translate("Stop date") | html %]</label>
+                            <div class="Field flex-row">
+                                [% Data.StopDateString %]
+                                <div id="StopDateDayServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
+                                <div id="StopDateHourServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
+                        <div class="field-wrapper">
+                            <label for="Comment" class="Mandatory"><span class="Marker">*</span> [% Translate("Comment") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="Validate_Required [% Data.CommentServerError | html %]" maxlength="70"/>
+                                <div id="CommentError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="CommentServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="LoginMessage">[% Translate("Login message") | html %]</label>
+                            <div class="Field">
+                                <textarea name="LoginMessage" id="LoginMessage" class="[% Data.LoginMessageServerError | html %] Validate_MaxLength" rows="5" data-maxlength="250">[% Data.LoginMessage | html %]</textarea>
+                                <div id="LoginMessageError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 250 characters.") | html %]</p></div>
+                                <div id="LoginMessageServerError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 250 characters.") | html %]</p></div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <div class="CheckboxContainer">
+                                <div class="Field">
+                                    <input type="checkbox" name="ShowLoginMessage" id="ShowLoginMessage" value="1" [% Data.Checked %] />
+                                </div>
+                                <label for="ShowLoginMessage">[% Translate("Show login message") | html %]</label>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="NotifyMessage">[% Translate("Notify message") | html %]</label>
+                            <div class="Field">
+                                <textarea name="NotifyMessage" id="NotifyMessage" class="[% Data.NotifyMessageServerError | html %] Validate_MaxLength" rows="5" data-maxlength="250">[% Data.NotifyMessage | html %]</textarea>
+                                <div id="NotifyMessageError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 250 characters.") | html %]</p></div>
+                                <div id="NotifyMessageServerError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 250 characters.") | html %]</p></div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]</label>
+                            <div class="Field">
+                                [% Data.ValidOption %]
+                                <div id="ValidIDError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="ValidIDServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md"><span>[% Translate("Cancel") | html %]</span></a>
+                                <button class="CallForAction Primary btn-primary-ghost btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                            </div>
+                        </div>
                     </fieldset>
                 </div>
             </div>
@@ -137,23 +139,24 @@
                     <h2>[% Translate("Manage Sessions") | html %]</h2>
                 </div>
                 <div class="Content">
-                    <fieldset class="TableLike SpacingTop">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper">
+                            <label>[% Translate("All Sessions") | html %]</label>
+                            <div class="Field">[% Data.Counter | html %] </div>
+                        </div>
 
-                        <label>[% Translate("All Sessions") | html %]</label>
-                        <div class="Field">[% Data.Counter | html %] </div>
-                        <div class="Clear"></div>
+                        <div class="field-wrapper">
+                            <label>[% Translate("Unique agents") | html %]</label>
+                            <div class="Field">[% Data.UserSessionUniq | html %] </div>
+                        </div>
 
-                        <label>[% Translate("Unique agents") | html %]</label>
-                        <div class="Field">[% Data.UserSessionUniq | html %] </div>
-                        <div class="Clear"></div>
+                        <div class="field-wrapper">
+                            <label>[% Translate("Unique customers") | html %]</label>
+                            <div class="Field">[% Data.CustomerSessionUniq | html %] </div>
+                        </div>
 
-                        <label>[% Translate("Unique customers") | html %]</label>
-                        <div class="Field">[% Data.CustomerSessionUniq | html %] </div>
-                        <div class="Clear"></div>
-
-
-                        <h4 class="SpacingTop">[% Translate("Agent Sessions") | html %]</h4>
-                        <table class="DataTable">
+                        <h4>[% Translate("Agent Sessions") | html %]</h4>
+                        <table class="DataTable TableList">
                             <thead>
                                 <tr>
                                     <th>[% Translate("Session") | html %]</th>
@@ -169,7 +172,7 @@
                                     <td>[% Data.UserType | html %]</td>
                                     <td>[% Data.UserFullname | html %]</td>
                                     <td>
-                                        <a class="AsBlock" href="[% Env("Baselink") %]Action=AdminSystemMaintenance;Subaction=Kill;WantSessionID=[% Data.SessionID | uri %];[% Env("ChallengeTokenParam") | html %];SystemMaintenanceID=[% Data.SystemMaintenanceID | html %]">[% Translate("Kill this session") | html %]</a>
+                                        <a class="AsBlock table-actions-button" href="[% Env("Baselink") %]Action=AdminSystemMaintenance;Subaction=Kill;WantSessionID=[% Data.SessionID | uri %];[% Env("ChallengeTokenParam") | html %];SystemMaintenanceID=[% Data.SystemMaintenanceID | html %]">[% Translate("Kill this session") | html %]</a>
                                     </td>
                                 </tr>
 [% RenderBlockEnd("AgentSession") %]
@@ -182,10 +185,9 @@
 [% RenderBlockEnd("AgentNoDataRow") %]
                             </tbody>
                         </table>
-                        <div class="Clear"></div>
 
-                        <h4 class="SpacingTop">[% Translate("Customer Sessions") | html %]</h4>
-                        <table class="DataTable">
+                        <h4>[% Translate("Customer Sessions") | html %]</h4>
+                        <table class="DataTable TableList">
                             <thead>
                                 <tr>
                                     <th>[% Translate("Session") | html %]</th>
@@ -201,7 +203,7 @@
                                     <td>[% Data.UserType | html %]</td>
                                     <td>[% Data.UserFullname | html %]</td>
                                     <td>
-                                        <a class="AsBlock" href="[% Env("Baselink") %]Action=AdminSystemMaintenance;Subaction=Kill;WantSessionID=[% Data.SessionID | uri %];[% Env("ChallengeTokenParam") | html %];SystemMaintenanceID=[% Data.SystemMaintenanceID | html %]">[% Translate("Kill this session") | html %]</a>
+                                        <a class="AsBlock table-actions-button" href="[% Env("Baselink") %]Action=AdminSystemMaintenance;Subaction=Kill;WantSessionID=[% Data.SessionID | uri %];[% Env("ChallengeTokenParam") | html %];SystemMaintenanceID=[% Data.SystemMaintenanceID | html %]">[% Translate("Kill this session") | html %]</a>
                                     </td>
                                 </tr>
 [% RenderBlockEnd("CustomerSession") %]
@@ -214,17 +216,15 @@
 [% RenderBlockEnd("CustomerNoDataRow") %]
                             </tbody>
                         </table>
-                        <div class="Clear"></div>
 
-                        <div class="Field SpacingTop">
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=KillAll;WantSessionID=[% Env("SessionID") %];[% Env("ChallengeTokenParam") | html %];SystemMaintenanceID=[% Data.SystemMaintenanceID | html %]" id="KillAllSessions" class="CallForAction LittleSpacingTop Fullsize Center"><span><i class="fa fa-trash-o"></i> [% Translate("Kill all Sessions, except for your own") | html %]</span></a>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=KillAll;WantSessionID=[% Env("SessionID") %];[% Env("ChallengeTokenParam") | html %];SystemMaintenanceID=[% Data.SystemMaintenanceID | html %]" id="KillAllSessions" class="CallForAction btn-main btn-primary-ghost btn-width-xxl"><span><i class="fa fa-trash-o"></i> [% Translate("Kill all Sessions, except for your own") | html %]</span></a>
+                            </div>
                         </div>
-
                     </fieldset>
-
                 </div>
             </div>
         </form>
     </div>
-    <div class="Clear"></div>
 </div>

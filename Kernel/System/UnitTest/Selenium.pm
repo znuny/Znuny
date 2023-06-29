@@ -1,14 +1,13 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-
-## nofilter("TidyAll::Plugin::OTRS::Perl::Pod::FunctionPod")
-## nofilter("TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck")
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::FunctionPod)
 
 package Kernel::System::UnitTest::Selenium;
 
@@ -109,7 +108,7 @@ Then you can use the full API of L<Selenium::Remote::Driver> on this object.
         },
     );
 
-    my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+    my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 =cut
 
@@ -491,7 +490,7 @@ Exactly one condition (JavaScript or WindowCount) must be specified.
     my $Success = $SeleniumObject->WaitFor(
         AlertPresent   => 1,                                 # Wait until an alert, confirm or prompt dialog is present
         Callback       => sub { ... }                        # Wait until function returns true
-        ElementExists  => 'xpath-selector'                   # Wait until an element is present
+        ElementExists  => 'xpath-selector',                  # Wait until an element is present
         ElementExists  => ['css-selector', 'css'],
         ElementMissing => 'xpath-selector',                  # Wait until an element is not present
         ElementMissing => ['css-selector', 'css'],
@@ -1272,9 +1271,9 @@ Sets OR returns the mapping structure of the given Action.
     my $Result = $SeleniumObject->InputFieldIDMapping(
         Action  => 'AgentTicketZoom',
         Mapping => {
-            ...
+            # ...
             QueueID => 'DestQueueID',
-            ...
+            # ...
         },
     );
 
@@ -1745,7 +1744,7 @@ This function builds a requestable HTTP GET URL to the given OTRS interface with
         }
     );
 
-    $RequestURL = 'http://localhost/otrs/index.pl?Action=AgentTicketZoom';
+    $RequestURL = 'http://localhost/znuny/index.pl?Action=AgentTicketZoom';
 
 =cut
 
@@ -2097,7 +2096,7 @@ Returns:
 
     my %ScreenshotDirectory = (
         WebPath  => 'SeleniumScreenshots/Captured',
-        FullPath => '/opt/otrs/var/httpd/htdocs/SeleniumScreenshots/Captured',
+        FullPath => '/opt/znuny/var/httpd/htdocs/SeleniumScreenshots/Captured',
     );
 
 =cut
@@ -2166,12 +2165,12 @@ sub GetScreenshotURL {
 =head2 GetSeleniumHome()
 
     my $SeleniumHome = $SeleniumObject->GetSeleniumHome(
-        Directory => '/opt/otrs',
+        Directory => '/opt/znuny',
     );
 
 Returns:
 
-    my $SeleniumHome = '/opt/otrs';
+    my $SeleniumHome = '/opt/znuny';
 
 =cut
 

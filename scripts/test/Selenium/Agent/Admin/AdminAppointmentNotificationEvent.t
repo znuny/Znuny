@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
 
         # Do not check RichText.
         $HelperObject->ConfigSettingChange(
@@ -53,7 +55,7 @@ $Selenium->RunTest(
             UserLanguage => $Language,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminNotificationEvent screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminAppointmentNotificationEvent");
@@ -84,19 +86,15 @@ $Selenium->RunTest(
         }
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText (
             $LanguageObject->Translate('Appointment Notification Management'),
             $LanguageObject->Translate('Add Notification')
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Toggle Ticket filter widget.
@@ -191,19 +189,15 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText (
             $LanguageObject->Translate('Appointment Notification Management'),
             $LanguageObject->Translate('Edit Notification') . ": $NotifEventRandomID"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Edit test NotificationEvent and set it to invalid.
@@ -296,8 +290,6 @@ $Selenium->RunTest(
             "There is a class 'Invalid' for test NotificationEvent",
         );
 
-        my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
-
         # Get NotificationEventID.
         my %NotifEventID = $NotificationEventObject->NotificationGet(
             Name => $NotifEventRandomID
@@ -342,8 +334,6 @@ JAVASCRIPT
 
             $Selenium->VerifiedRefresh();
         }
-
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Import existing template without overwrite.
         my $Location = $Selenium->{Home}

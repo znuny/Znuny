@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -74,14 +74,14 @@ sub Run {
     #             $Self->AddResultProblem(
     #                 Label   => Translatable('Disk Usage'),
     #                 Value   => join( ', ', @ProblemPartitions ),
-    #                 Message => Translatable('The partition where OTRS is located is almost full.'),
+    #                 Message => Translatable('The partition where Znuny is located is almost full.'),
     #             );
     #         }
     #         else {
     #             $Self->AddResultWarning(
     #                 Label   => Translatable('Disk Usage'),
     #                 Value   => join( ', ', @ProblemPartitions ),
-    #                 Message => Translatable('The partition where OTRS is located is almost full.'),
+    #                 Message => Translatable('The partition where Znuny is located is almost full.'),
     #             );
     #         }
     #     }
@@ -89,7 +89,7 @@ sub Run {
     #         $Self->AddResultOk(
     #             Label   => Translatable('Disk Usage'),
     #             Value   => '',
-    #             Message => Translatable('The partition where OTRS is located has no disk space problems.'),
+    #             Message => Translatable('The partition where Znuny is located has no disk space problems.'),
     #         );
     #     }
     # }

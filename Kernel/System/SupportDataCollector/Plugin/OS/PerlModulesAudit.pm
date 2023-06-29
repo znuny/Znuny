@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,6 +18,7 @@ use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::System::Console::Command::Dev::Code::CPANAudit',
+    'Kernel::System::Environment',
 );
 
 sub GetDisplayPath {
@@ -27,7 +28,13 @@ sub GetDisplayPath {
 sub Run {
     my $Self = shift;
 
-    my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Dev::Code::CPANAudit');
+    my $CommandObject     = $Kernel::OM->Get('Kernel::System::Console::Command::Dev::Code::CPANAudit');
+    my $EnvironmentObject = $Kernel::OM->Get('Kernel::System::Environment');
+
+    my $Version = $EnvironmentObject->ModuleVersionGet( Module => 'CPAN::Audit' );
+    if ( !$Version ) {
+        return $Self->GetResults();
+    }
 
     my ( $CommandOutput, $ExitCode );
 
@@ -37,7 +44,7 @@ sub Run {
         $ExitCode = $CommandObject->Execute();
     }
 
-    if ( $ExitCode != 0 ) {
+    if ( $CommandOutput !~ m{No advisories found}i ) {
         $Self->AddResultWarning(
             Label   => Translatable('Perl Modules Audit'),
             Value   => $CommandOutput,

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -116,9 +116,11 @@ sub Run {
     my $URL = $LayoutObject->{Baselink};
     my %Return;
     my $Priority = $Param{Config}->{Priority};
+    my $Block    = $Param{Config}->{Block};
+
     if ($CountNew) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Description => Translatable('Watched Tickets New'),
             Count       => $CountNew,
             Class       => $ClassNew,
@@ -129,7 +131,7 @@ sub Run {
     }
     if ($CountReached) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Description => Translatable('Watched Tickets Reminder Reached'),
             Count       => $CountReached,
             Class       => $ClassReached,
@@ -140,7 +142,7 @@ sub Run {
     }
     if ($Count) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Description => Translatable('Watched Tickets Total'),
             Count       => $Count,
             Class       => $Class,

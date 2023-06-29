@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,12 +13,14 @@ use strict;
 use warnings;
 
 use MIME::Base64;
+use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
     'Kernel::System::Encode',
     'Kernel::System::Log',
+    'Kernel::System::FormDraft',
 );
 
 sub new {
@@ -95,10 +97,11 @@ sub FormIDAddFile {
     my $Disposition = $Param{Disposition} || '';
     if ( !$ContentID && lc $Disposition eq 'inline' ) {
 
-        my $Random = rand 999999;
-        my $FQDN   = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
+        my $Random       = rand 999999;
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
 
-        $ContentID = "$Disposition$Random.$Param{FormID}\@$FQDN";
+        $ContentID = "$Disposition$Random.$Param{FormID}\@$ExternalFQDN";
     }
 
     # write attachment to db
@@ -253,12 +256,62 @@ sub FormIDGetAllFilesMeta {
 sub FormIDCleanUp {
     my ( $Self, %Param ) = @_;
 
+    # check for draft dependency within cache
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $FormDraftTTL = $ConfigObject->Get('FormDraftTTL');
+
+    my @DraftForms;
+    my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
+    for my $ObjectType ( sort keys %{$FormDraftTTL} ) {
+        my $FormDraftList = $FormDraftObject->FormDraftListGet(
+            ObjectType => $ObjectType,
+            UserID     => 1,
+        );
+
+        DRAFT_FORM:
+        for my $FormDraft ( @{$FormDraftList} ) {
+            my $FormDraftConfig = $FormDraftObject->FormDraftGet(
+                FormDraftID => $FormDraft->{FormDraftID},
+                UserID      => 1,
+            );
+
+            my $FormID = $FormDraftConfig->{FormData}->{FormID};
+
+            # if TTL configuration is missing, use the default
+            next DRAFT_FORM if !$FormDraftTTL->{$ObjectType};
+
+            # check for draft form configuration
+            next DRAFT_FORM if !IsHashRefWithData($FormDraftConfig);
+            next DRAFT_FORM if !$FormID;
+
+            # form draft TTL config for specific object type is given in minutes
+            my $CurrentTile = time() - ( $FormDraftTTL->{$ObjectType} * 60 );
+
+            return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
+                SQL => '
+                    DELETE FROM web_upload_cache
+                    WHERE create_time_unix < ?
+                    AND form_id = ?',
+                Bind => [ \$CurrentTile, \$FormID ],
+            );
+
+            push @DraftForms, $FormID;
+        }
+    }
+
     my $CurrentTile = time() - ( 60 * 60 * 24 * 1 );
 
+    my $SQL = 'DELETE FROM web_upload_cache
+            WHERE create_time_unix < ?';
+
+    # do not include upload cache object type if has defined custom TTL value
+    if (@DraftForms) {
+        my @SeparatedDraftForms = map {"'$_'"} @DraftForms;
+        $SQL .= ' AND form_id NOT IN (' . join( ',', @SeparatedDraftForms ) . ')';
+    }
+
     return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
-        SQL => '
-            DELETE FROM web_upload_cache
-            WHERE create_time_unix < ?',
+        SQL  => $SQL,
         Bind => [ \$CurrentTile ],
     );
 

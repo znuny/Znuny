@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1239,11 +1239,7 @@ sub Run {
         my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
         # update last request time
-        if (
-            !$ParamObject->IsAJAXRequest()
-            || $Param{Action} eq 'CustomerVideoChat'
-            )
-        {
+        if ( !$ParamObject->IsAJAXRequest() ) {
             my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
 
             $SessionObject->UpdateSessionID(

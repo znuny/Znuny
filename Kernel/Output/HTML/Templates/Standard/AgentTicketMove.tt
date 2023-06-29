@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,119 +19,127 @@
     <input type="hidden" name="FormDraftID" value="[% Data.FormDraftID | html %]"/>
     <input type="hidden" name="FormDraftAction" id="FormDraftAction" />
 
-    <div class="LayoutPopup ARIARoleMain">
+    <div class="LayoutPopup ARIARoleMain moveTickets">
         <div class="Header">
             <h1>[% Translate("Move %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %] &mdash; [% Data.Title | html %]</h1>
-            <p class="AsteriskExplanation">[% Translate("All fields marked with an asterisk (*) are mandatory.") | html %]</p>
-
 [% RenderBlockStart("TicketBack") %]
-            <p>
-                <a class="CancelClosePopup" href="#">[% Translate("Cancel & close") | html %]</a>
-            </p>
+                <div>
+                    <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">Cancel</a>
+                </div>
 [% RenderBlockEnd("TicketBack") %]
 [% RenderBlockStart("PropertiesLock") %]
-            <p>
-                [% Translate("The ticket has been locked") | html %].
-                <a class="UndoClosePopup" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID | uri %][% IF Data.PreviousOwner %];PreviousOwner=[% Data.PreviousOwner %][% END %];[% Env("ChallengeTokenParam") | html %]">
-                    [% Translate("Undo & close") | html %]
-                </a>
-            </p>
+                <div class="ticket-locked">
+                    <span>[% Translate("The ticket has been locked") | html %].</span>
+                    <a class="UndoClosePopup btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID | uri %][% IF Data.PreviousOwner %];PreviousOwner=[% Data.PreviousOwner %][% END %];[% Env("ChallengeTokenParam") | html %]">Cancel</a>
+                </div>
 [% RenderBlockEnd("PropertiesLock") %]
-
-
         </div>
+
         <div class="Content">
             [% INCLUDE "FormElements/DraftNotifications.tt" %]
             <div class="WidgetSimple Expanded">
                 <div class="Header">
                     <div class="WidgetAction Toggle">
-                        <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                        <a href="#" title="[% Translate("Toggle this widget") | html %]">
+                            <i class="fa fa-caret-right"></i>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
                     </div>
                     <h2>[% Translate("Ticket Settings") | html %]</h2>
                 </div>
                 <div class="Content">
-                    <fieldset class="TableLike FixedLabel">
-
+                    <fieldset class="TableLike FixedLabel card-item-wrapper">
+                        <div class="card-item col-wide-50 col-desktop-100 col-tablet-100">
+                            <h2 class="card-title">[% Translate("Team Data") | html %]</h2>
 [% RenderBlockStart("Queue") %]
-                        <label class="Mandatory" for="DestQueueID"><span class="Marker">*</span> [% Translate("New Queue") | html %]:</label>
-                        <div class="Field">
-                            [% Data.MoveQueuesStrg %]
-                            <div id="DestQueueIDError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="DestQueueIDServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
+                            <div>
+                                <label class="Mandatory" for="DestQueueID"><span class="Marker">*</span> [% Translate("New Queue") | html %]:</label>
+                                <div class="Field">
+                                    [% Data.MoveQueuesStrg %]
+                                    <div id="DestQueueIDError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="DestQueueIDServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                </div>
+                            </div>
 [% RenderBlockEnd("Queue") %]
-
 [% RenderBlockStart("Owner") %]
-                        <label for="NewUserID">[% Translate("New Owner") | html %]:</label>
-                        <div class="Field">
-                            [% Data.OwnerStrg %]
-                            <a href="#" id="OwnerSelectionGetAll" class="GetAllAJAX" title="[% Translate("Get all") | html %]">
-                                <span>[% Translate("Get all") | html %]</span>
-                                <i class="fa fa-refresh"></i>
-                            </a>
-                        </div>
-                        <div class="Clear"></div>
+                            <div>
+                                <label for="NewUserID">
+                                    [% Translate("New Owner") | html %]:
+                                    <a href="#" id="OwnerSelectionGetAll" class="GetAllAJAX icon-hover" title="[% Translate("Get all") | html %]">
+                                        <span>[% Translate("Get all") | html %]</span>
+                                        <i class="fa fa-refresh"></i>
+                                    </a>
+                                </label>
+                                <div class="Field">
+                                    [% Data.OwnerStrg %]
+                                </div>
+                            </div>
 [% RenderBlockEnd("Owner") %]
+                        </div>
 
+                        <div class="card-item col-wide-50 col-desktop-100 col-tablet-100">
+                            <h2 class="card-title">[% Translate("Ticket Data") | html %]</h2>
 [% RenderBlockStart("State") %]
-                        [% IF Data.StateMandatory %]
-                            <label class="Mandatory" for="NewStateID"><span class="Marker">*</span>[% Translate("Next ticket state") | html %]:</label>
-                        [% ELSE %]
-                            <label for="NewStateID">[% Translate("Next ticket state") | html %]:</label>
-                        [% END %]
-                        <div class="Field">
-                            [% Data.NextStatesStrg %]
-                            [% IF Data.StateMandatory %]
-                                <div id="NewStateIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="NewStateIDServerError" class="TooltipErrorMessage"><p>[% Translate("State invalid.") | html %]</p></div>
-                            [% END %]
-
-                        </div>
-                        <div class="Clear"></div>
+                            <div>
+                                [% IF Data.StateMandatory %]
+                                    <label class="Mandatory" for="NewStateID"><span class="Marker">*</span>[% Translate("Next ticket state") | html %]:</label>
+                                [% ELSE %]
+                                    <label for="NewStateID">[% Translate("Next ticket state") | html %]:</label>
+                                [% END %]
+                                <div class="Field">
+                                    [% Data.NextStatesStrg %]
+                                    [% IF Data.StateMandatory %]
+                                        <div id="NewStateIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="NewStateIDServerError" class="TooltipErrorMessage"><p>[% Translate("State invalid.") | html %]</p></div>
+                                    [% END %]
+                                </div>
+                            </div>
 [% RenderBlockEnd("State") %]
-
 [% RenderBlockStart("StatePending") %]
-                        <label>[% Translate("Pending date") | html %]:</label>
-                        <div class="Field">
-                            [% Data.DateString %]
-                            <div id="DayServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
-                            <div id="HourServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
-                            <p class="FieldExplanation">[% Translate("For all pending* states.") | html %]</p>
-                        </div>
-                        <div class="Clear"></div>
+                            <div>
+                                <label>[% Translate("Pending date") | html %]:</label>
+                                <div class="Field no-background">
+                                    [% Data.DateString %]
+                                    <div id="DayServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
+                                    <div id="HourServerError" class="TooltipErrorMessage"><p>[% Translate("Date invalid!") | html %]</p></div>
+                                    <p class="FieldExplanation">[% Translate("For all pending* states.") | html %]</p>
+                                </div>
+                            </div>
 [% RenderBlockEnd("StatePending") %]
-
 [% RenderBlockStart("Priority") %]
-                        <label for="NewPriorityID">[% Translate("Priority") | html %]:</label>
-                        <div class="Field">
-                            [% Data.NextPrioritiesStrg %]
-                        </div>
-                        <div class="Clear"></div>
+                            <div>
+                                <label for="NewPriorityID">[% Translate("Priority") | html %]:</label>
+                                <div class="Field">
+                                    [% Data.NextPrioritiesStrg %]
+                                </div>
+                            </div>
 [% RenderBlockEnd("Priority") %]
+                        </div>
                     </fieldset>
                 </div>
             </div>
 [% RenderBlockStart("WidgetDynamicFields") %]
-            <div class="WidgetSimple Expanded">
-                <div class="Header">
-                    <div class="WidgetAction Toggle">
-                        <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
-                    </div>
-                    <h2>[% Translate("Dynamic Fields") | html %]</h2>
-                </div>
-                <div class="Content">
-                    <fieldset class="TableLike FixedLabel">
-
-[% RenderBlockStart("DynamicField") %]
-                        <div class="Row Row_DynamicField_[% Data.Name | html %]">
-                            [% Data.Label %]
-                            <div class="Field">
-                                [% Data.Field %]
-                            </div>
-                            <div class="Clear"></div>
+                <div class="WidgetSimple Expanded">
+                    <div class="Header">
+                        <div class="WidgetAction Toggle">
+                            <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
                         </div>
+                        <h2>[% Translate("Dynamic Fields") | html %]</h2>
+                    </div>
+                    <div class="Content">
+                        <fieldset class="TableLike FixedLabel">
+
+                            <div class="dynamic-field-col card-item col-wide-100 col-desktop-100 col-tablet-100">
+                                <h2 class="card-title">[% Translate("Dynamic Info") | html %]</h2>
+[% RenderBlockStart("DynamicField") %]
+                                <div class="Row Row_DynamicField_[% Data.Name | html %] col-wide-33 col-desktop-50 col-tablet-50">
+                                    [% Data.Label %]
+                                    <div class="Field">
+                                        [% Data.Field %]
+                                    </div>
+                                </div>
 [% RenderBlockEnd("DynamicField") %]
+                            </div>
 
 # example of how to use fixed dynamic field blocks for customizations
 # Note: Field1 and Field2 are the names of the fields and had to be replaced with the actual
@@ -155,99 +163,109 @@
 #                    </div>
 #[% RenderBlockEnd("DynamicField_Field2") %]
 
-                    </fieldset>
-                </div>
-            </div>
-[% RenderBlockEnd("WidgetDynamicFields") %]
-
-[% RenderBlockStart("WidgetArticle") %]
-            <div class="WidgetSimple [% Data.WidgetStatus | html %]" id="WidgetArticle">
-                <div class="Header">
-                    <div class="WidgetAction Toggle">
-                        <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                        </fieldset>
                     </div>
-                    <h2>[% Translate("Add Article") | html %]</h2>
                 </div>
-                <div class="Content">
-                    <fieldset class="TableLike FixedLabel">
-[% IF Data.WidgetStatus == 'Expanded' %]
-                        <input type="hidden" id="CreateArticle" name="CreateArticle" value="1" />
-[% ELSE %]
-                        <label for="CreateArticle">[% Translate("Create an Article") | html %]:</label>
-                        <div class="Field">
-                            <input type="checkbox" id="CreateArticle" name="CreateArticle" value="1" />
+[% RenderBlockEnd("WidgetDynamicFields") %]
+[% RenderBlockStart("WidgetArticle") %]
+                <div class="WidgetSimple [% Data.WidgetStatus | html %]" id="WidgetArticle">
+                    <div class="Header">
+                        <div class="WidgetAction Toggle">
+                            <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
                         </div>
-                        <div class="Clear"></div>
-[% END %]
+                        <h2>[% Translate("Add Article") | html %]</h2>
+                    </div>
+                    <div class="Content">
+                        <fieldset class="TableLike FixedLabel card-item-wrapper">
+
+                            <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
+                                <h2 class="card-title">[% Translate("Communication") | html %]</h2>
+
+                                <div>
+                                [% IF Data.WidgetStatus == 'Expanded' %]
+                                    <input type="hidden" id="CreateArticle" name="CreateArticle" value="1" />
+                                [% ELSE %]
+                                    <label for="CreateArticle">[% Translate("Create an Article") | html %]:</label>
+                                    <div class="Field">
+                                        <input type="checkbox" id="CreateArticle" name="CreateArticle" value="1" />
+                                    </div>
+                                [% END %]
+                                </div>
 [% RenderBlockStart("Note") %]
+                                <div>
 [% RenderBlockStart("SubjectLabel") %]
-                        <label for="Subject">[% Translate("Subject") | html %]:</label>
+                                    <label for="Subject">[% Translate("Subject") | html %]:</label>
 [% RenderBlockEnd("SubjectLabel") %]
 [% RenderBlockStart("SubjectLabelMandatory") %]
-                        <label class="Mandatory" for="Subject"><span class="Marker">*</span>[% Translate("Subject") | html %]:</label>
+                                    <label class="Mandatory" for="Subject"><span class="Marker">*</span>[% Translate("Subject") | html %]:</label>
 [% RenderBlockEnd("SubjectLabelMandatory") %]
-                        <div class="Field">
-                            <input type="text" id="Subject" name="Subject" value="[% Data.Subject | html %]" class="Validate Validate_DependingRequiredAND Validate_Depending_CreateArticle [% Data.SubjectRequired %] [% Data.SubjectInvalid %] W75pc"/>
-                            <div id="SubjectError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
+                                    <div class="Field">
+                                        <input type="text" id="Subject" name="Subject" value="[% Data.Subject | html %]" class="Validate Validate_DependingRequiredAND Validate_Depending_CreateArticle [% Data.SubjectRequired %] [% Data.SubjectInvalid %] W75pc"/>
+                                        <div id="SubjectError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    </div>
+                                </div>
 [% RenderBlockStart("TicketOptions") %]
-                        <label>[% Translate("Options") | html %]:</label>
-                        <div class="Field">
-<!-- OutputFilterHook_TicketOptionsBegin -->
-<!-- OutputFilterHook_TicketOptionsEnd -->
-
-                        </div>
-                        <div class="Clear"></div>
+                                <div>
+                                    <label>[% Translate("Options") | html %]:</label>
+                                    <div class="Field">
+                                        <!-- OutputFilterHook_TicketOptionsBegin -->
+                                        <!-- OutputFilterHook_TicketOptionsEnd -->
+                                    </div>
+                                </div>
 [% RenderBlockEnd("TicketOptions") %]
 
-<!-- OutputFilterHook_NoTicketOptionsFallback -->
-
+                                <div>
+                                    <!-- OutputFilterHook_NoTicketOptionsFallback -->
+                                </div>
 [% RenderBlockStart("StandardTemplate") %]
-                        <label for="StandardTemplateID">[% Translate("Text Template") | html %]:</label>
-                        <div class="Field">
-                        [% Data.StandardTemplateStrg %]
-                            <p class="FieldExplanation">[% Translate("Setting a template will overwrite any text or attachment.") | html %]</p>
-                        </div>
-                        <div class="Clear"></div>
+                                <div>
+                                    <label for="StandardTemplateID">[% Translate("Text Template") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.StandardTemplateStrg %]
+                                        <p class="FieldExplanation">[% Translate("Setting a template will overwrite any text or attachment.") | html %]</p>
+                                    </div>
+                                </div>
 [% RenderBlockEnd("StandardTemplate") %]
 
+                                <div>
 [% RenderBlockStart("RichTextLabel") %]
-                        <label for="RichText">[% Translate("Text") | html %]:</label>
+                                    <label for="RichText">[% Translate("Text") | html %]:</label>
 [% RenderBlockEnd("RichTextLabel") %]
 [% RenderBlockStart("RichTextLabelMandatory") %]
-                        <label class="Mandatory" for="RichText"><span class="Marker">*</span>[% Translate("Text") | html %]:</label>
+                                    <label class="Mandatory" for="RichText"><span class="Marker">*</span>[% Translate("Text") | html %]:</label>
 [% RenderBlockEnd("RichTextLabelMandatory") %]
-                        <div id="RichTextField" class="RichTextField">
-                            <textarea id="RichText" class="RichText Validate [% Data.BodyRequired %] [% Data.BodyInvalid %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]">[% Data.Body | html %]</textarea>
-                            <div id="RichTextError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="RichTextServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
+                                    <div id="RichTextField" class="RichTextField">
+                                        <textarea id="RichText" class="RichText Validate [% Data.BodyRequired %] [% Data.BodyInvalid %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]">[% Data.Body | html %]</textarea>
+                                        <div id="RichTextError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="RichTextServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    </div>
+                                </div>
 
-                        <label>[% Translate("Attachments") | html %]:</label>
-                        <div class="Field">
-[% INCLUDE "FormElements/AttachmentList.tt" %]
-                        </div>
-                        <div class="Clear"></div>
-
+                                <div>
+                                    <label>[% Translate("Attachments") | html %]:</label>
+                                    <div class="Field component-attachment">
+                                        [% INCLUDE "FormElements/AttachmentList.tt" %]
+                                    </div>
+                                </div>
 [% RenderBlockEnd("Note") %]
 [% RenderBlockStart("TimeUnits") %]
-                        [% Data.TimeUnitsBlock %]
+                            <div>
+                                [% Data.TimeUnitsBlock %]
+                            </div>
 [% RenderBlockEnd("TimeUnits") %]
-                    </fieldset>
+                        </div>
+                        </fieldset>
+                    </div>
                 </div>
-            </div>
 [% RenderBlockEnd("WidgetArticle") %]
         </div>
+
         <div class="Footer">
-            <button class="CallForAction Primary" id="submitRichText" accesskey="g" title="[% Translate("Move") | html %] (g)" type="submit" value="[% Translate("Move") | html %]">
+            [% INCLUDE "FormElements/DraftButtons.tt" %]
+            <button class="btn-primary btn-main btn-width-md" id="submitRichText" accesskey="g" title="[% Translate("Move") | html %] (g)" type="submit" value="[% Translate("Move") | html %]">
                 <span>[% Translate("Move") | html %]</span>
             </button>
-            [% INCLUDE "FormElements/DraftButtons.tt" %]
         </div>
     </div>
 </form>
-
-#Layers

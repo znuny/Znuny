@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,29 +8,8 @@
 # --
 
 [% RenderBlockStart("Overview") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Customer User Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Customer User Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% SWITCH Data.Action %]
-        [% CASE 'Add' %]
-            [% BreadcrumbPath.push({ Name => Translate('Add Customer User'),}) %]
-        [% CASE 'Change' %]
-            [% USE EditTitle = String(Translate("Edit Customer User")) %]
-            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.ID ) }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
 [% RenderBlockStart("ActionList") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -40,20 +19,20 @@
                 <ul class="ActionList">
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Nav=[% Data.Nav | uri %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Nav=[% Data.Nav | uri %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;Search=[% Data.Search | uri %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Back to search results") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;Search=[% Data.Search | uri %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Back to search results") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
 [% RenderBlockStart("ActionSearch") %]
                     <li>
                         <form class="SearchBox" action="[% Env("CGIHandle") %]" method="post">
+                            <i class="fa fa-search"></i>
                             <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                             <input type="hidden" name="Subaction" value="Search"/>
                             <input type="hidden" name="Nav" value="[% Data.Nav | html %]"/>
                             <input type="text" name="Search" value="[% Data.Search | html %]" id="Search" title="[% Translate("Search") | html %]"/>
-                            <button type="submit" value="[% Translate("Search") | html %]" title="[% Translate("Search") | html %]"><i class="fa fa-search"></i></button>
                         </form>
                         <p class="FieldExplanation">
                             [% Translate("Wildcards like '*' are allowed.") | html %]
@@ -67,8 +46,7 @@
                             <input type="hidden" name="Subaction" value="Add"/>
                             <input type="hidden" name="Nav" value="[% Data.Nav | html %]"/>
 
-                            <button class="CallForAction Fullsize Center" type="submit"><span><i class="fa fa-plus-square"></i> [% Translate("Add Customer User") | html %]</span></button>
-                            <br/>
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit"><span><i class="fa fa-plus-square"></i> [% Translate("Add Customer User") | html %]</span></button>
                             <label class="InvisibleText" for="Source">[% Translate("Select") | html %]</label>
                             [% Data.SourceOption %]
                         </form>
@@ -90,11 +68,68 @@
                 </p>
             </div>
         </div>
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerCompany' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Customers') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUserCustomer' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Customer Users ↔ Customers') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUserGroup' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Customer Users ↔ Groups') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUserService' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Customer Users ↔ Services') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Customer User Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Customer User Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% SWITCH Data.Action %]
+            [% CASE 'Add' %]
+                [% BreadcrumbPath.push({ Name => Translate('Add Customer User'),}) %]
+            [% CASE 'Change' %]
+                [% USE EditTitle = String(Translate("Edit Customer User")) %]
+                [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.ID ) }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
 [% RenderBlockStart("OverviewHeader") %]
-            <div class="Header">
+            <div class="Header filter-items">
                 <h2>
                     [% IF Data.ListAll && Data.Limit && Data.ListAll > Data.Limit %]
                         [% Translate("List (only %s shown - more available)", Data.SearchListSize) | html %]
@@ -102,6 +137,10 @@
                         [% Translate("List (%s total)", Data.ListAll) | html %]
                     [% END %]
                 </h2>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <span class="show-valid">[% Translate("Show Valid") | html %]</span>
+                    <span class="show-all">[% Translate("Show All") | html %]</span>
+                </a>
             </div>
 [% RenderBlockEnd("OverviewHeader") %]
 [% RenderBlockStart("NoSearchTerms") %]
@@ -110,7 +149,7 @@
             </div>
 [% RenderBlockEnd("NoSearchTerms") %]
 [% RenderBlockStart("OverviewResult") %]
-            <div class="Content ">
+            <div class="Content scroll-bar-styled bar-no-left-border">
                 <table class="DataTable" id="CustomerTable">
                     <thead>
                         <tr>
@@ -133,7 +172,6 @@
                             </td>
                         </tr>
 [% RenderBlockEnd("NoDataFoundMsg") %]
-
 [% RenderBlockStart("OverviewResultRow") %]
                         <tr [% IF Data.ValidID && Data.ValidID != 1 %]class="Invalid"[% END %]>
 [% RenderBlockStart("OverviewResultRowLink") %]
@@ -159,7 +197,6 @@
                 </table>
             </div>
 [% RenderBlockEnd("OverviewResult") %]
-
 [% RenderBlockStart("OverviewUpdate") %]
             <div class="Header">
                 [% IF Data.Action == 'Add' %]
@@ -169,11 +206,11 @@
                 [% END %]
             </div>
             <div class="Content">
-[% IF Config(Data.Source).ReadOnly == 1 || Config(Data.Source).Module.match('LDAP') %]
+                [% IF Config(Data.Source).ReadOnly == 1 || Config(Data.Source).Module.match('LDAP') %]
                 <div class="WidgetMessage Top Warning">
-                    <p><strong>[% Translate("Please note") | html %]</strong>: [% Translate("This customer backend is read only, but the customer user preferences can be changed!") | html %]</p>
+                    <p><strong>[% Translate("Please note") | html %]:</strong>[% Translate("This customer backend is read only, but the customer user preferences can be changed!") | html %]</p>
                 </div>
-[% END %]
+                [% END %]
                 <form action="[% Env("CGIHandle") %]" enctype="multipart/form-data" method="post" name="compose" class="Validate PreventMultipleSubmits">
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                     <input type="hidden" name="Subaction" value="[% Data.Action | html %]Action"/>
@@ -192,128 +229,152 @@
                         </div>
 [% RenderBlockEnd("PreferencesGenericInputHidden") %]
 [% RenderBlockStart("PreferencesGenericInput") %]
-                        <label class="[% Data.RequiredLabelClass | html %]" for="[% Data.Name | html %]"><span class="Marker">[% Data.RequiredLabelCharacter | html %]</span> [% Translate(Data.Item) | html %]:</label>
-                        <div class="Field">
-                            <input type="[% IF Data.RequiredClass.match('Validate_Email') %]email[% ELSE %]text[% END %]" id="[% Data.Name | html %]" name="[% Data.Name | html %]" class="W50pc [% Data.RequiredClass | html %] [% Data.InvalidField | html %]" value="[% Data.Value | html %]"[% IF Data.ReadOnly %] readonly="readonly"[% END %]/>
+                        <div class="field-wrapper">
+                            <label class="[% Data.RequiredLabelClass | html %]" for="[% Data.Name | html %]">
+                                [% Translate(Data.Item) | html %] <span class="Marker">[% Data.RequiredLabelCharacter | html %]</span>
+                            </label>
+                            <div class="Field">
+                                <input type="[% IF Data.RequiredClass.match('Validate_Email') %]email[% ELSE %]text[% END %]" id="[% Data.Name | html %]" name="[% Data.Name | html %]" class="W50pc [% Data.RequiredClass | html %] [% Data.InvalidField | html %]" value="[% Data.Value | html %]"[% IF Data.ReadOnly %] readonly="readonly"[% END %]/>
 [% RenderBlockStart("PreferencesGenericErrorMsg") %]
-                            <div id="[% Data.Name | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="[% Data.Name | html %]Error" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
 [% RenderBlockEnd("PreferencesGenericErrorMsg") %]
 [% RenderBlockStart("PreferencesUserEmailErrorMsg") %]
-                            <div id="[% Data.Name | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required and needs to be a valid email address.") | html %]</p></div>
+                                <div id="[% Data.Name | html %]Error" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required and needs to be a valid email address.") | html %]</p>
+                                </div>
 [% RenderBlockEnd("PreferencesUserEmailErrorMsg") %]
 [% RenderBlockStart("PreferencesGenericServerErrorMsg") %]
-                            <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
 [% RenderBlockEnd("PreferencesGenericServerErrorMsg") %]
 [% RenderBlockStart("PreferencesUserEmailInvalidConfigServerErrorMsg") %]
-                            <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This email address is not allowed due to the system configuration.") | html %]</p></div>
+                                <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This email address is not allowed due to the system configuration.") | html %]</p></div>
 [% RenderBlockEnd("PreferencesUserEmailInvalidConfigServerErrorMsg") %]
 [% RenderBlockStart("PreferencesUserEmailInvalidMXServerErrorMsg") %]
-                            <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This email address failed MX check.") | html %]</p></div>
+                                <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This email address failed MX check.") | html %]</p></div>
 [% RenderBlockEnd("PreferencesUserEmailInvalidMXServerErrorMsg") %]
 [% RenderBlockStart("PreferencesUserEmailInvalidDNSServerErrorMsg") %]
-                            <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("DNS problem, please check your configuration and the error log.") | html %]</p></div>
+                                <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("DNS problem, please check your configuration and the error log.") | html %]</p></div>
 [% RenderBlockEnd("PreferencesUserEmailInvalidDNSServerErrorMsg") %]
 [% RenderBlockStart("PreferencesUserEmailInvalidSyntaxServerErrorMsg") %]
-                            <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("The syntax of this email address is incorrect.") | html %]</p></div>
+                                <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("The syntax of this email address is incorrect.") | html %]</p></div>
 [% RenderBlockEnd("PreferencesUserEmailInvalidSyntaxServerErrorMsg") %]
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("PreferencesGenericInput") %]
-[% RenderBlockStart("PreferencesGenericPassword") %]
-                        <label class="[% Data.RequiredLabelClass | html %]" for="[% Data.Name | html %]"><span class="Marker">[% Data.RequiredLabelCharacter | html %]</span> [% Translate(Data.Item) | html %]:</label>
-                        <div class="Field">
-                            <input type="password" id="[% Data.Name | html %]" name="[% Data.Name | html %]" class="W50pc [% Data.RequiredClass | html %] [% Data.InvalidField | html %]" value="" maxlength="100" [% IF Data.ReadOnly %] readonly="readonly"[% END %] autocomplete="new-password" />
-                            <div id="[% Data.Name | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("PreferencesGenericPassword") %]
-[% RenderBlockStart("PreferencesGenericOption") %]
-                        <label class="[% Data.RequiredLabelClass | html %]" for="[% Data.Name | html %]"><span class="Marker">[% Data.RequiredLabelCharacter | html %]</span> [% Translate(Data.Item) | html %]:</label>
-                        <div class="Field">
-                            [% Data.Option %]
-                            <div id="[% Data.Name | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage">
-                            [% IF Data.Name  == 'UserCustomerID' %]
-                                <p>[% Translate("This CustomerID is invalid.") | html %]</p>
-                            [% ELSE %]
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            [% END %]
                             </div>
                         </div>
-                        <div class="Clear"></div>
+[% RenderBlockEnd("PreferencesGenericInput") %]
+[% RenderBlockStart("PreferencesGenericPassword") %]
+                        <div class="field-wrapper">
+                            <label class="[% Data.RequiredLabelClass | html %]" for="[% Data.Name | html %]">
+                                [% Translate(Data.Item) | html %] <span class="Marker">[% Data.RequiredLabelCharacter | html %]</span>
+                            </label>
+                            <div class="Field">
+                                <input type="password" id="[% Data.Name | html %]" name="[% Data.Name | html %]" class="W50pc [% Data.RequiredClass | html %] [% Data.InvalidField | html %]" value="" maxlength="100" [% IF Data.ReadOnly %] readonly="readonly"[% END %] autocomplete="new-password" />
+                                <div id="[% Data.Name | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            </div>
+                        </div>
+[% RenderBlockEnd("PreferencesGenericPassword") %]
+[% RenderBlockStart("PreferencesGenericOption") %]
+                        <div class="field-wrapper">
+                            <label class="[% Data.RequiredLabelClass | html %]" for="[% Data.Name | html %]">[% Translate(Data.Item) | html %] <span class="Marker">[% Data.RequiredLabelCharacter | html %]</span></label>
+                            <div class="Field">
+                                [% Data.Option %]
+                                <div id="[% Data.Name | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage">
+                                [% IF Data.Name  == 'UserCustomerID' %]
+                                    <p>[% Translate("This CustomerID is invalid.") | html %]</p>
+                                [% ELSE %]
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                [% END %]
+                                </div>
+                            </div>
+                        </div>
 [% RenderBlockEnd("PreferencesGenericOption") %]
 [% RenderBlockEnd("PreferencesGeneric") %]
 [% RenderBlockStart("Item") %]
 [% RenderBlockStart("InputKey") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
-                        <div class="Field">
-                            <input id="[% Data.Name | html %]"type="text" name="[% Data.Name | html %]" class="W50pc" value="[% Data.SelectedID | html %]"/>
-                            <div class="FieldExplanation"> [% Translate(Data.Key) | html %] </div>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                            <div class="Field">
+                                <input id="[% Data.Name | html %]"type="text" name="[% Data.Name | html %]" class="W50pc" value="[% Data.SelectedID | html %]"/>
+                                <div class="FieldExplanation"> [% Translate(Data.Key) | html %] </div>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("InputKey") %]
 [% RenderBlockStart("Input") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
-                        <div class="Field">
-                            <input id="[% Data.Name | html %]" type="text" name="[% Data.Name | html %]" class="W50pc" value="[% Data.SelectedID | html %]"/>
-                            <div class="FieldExplanation">[% Translate(Data.Desc) | html %][% Translate(Data.Key) | html %]</div>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                            <div class="Field">
+                                <input id="[% Data.Name | html %]" type="text" name="[% Data.Name | html %]" class="W50pc" value="[% Data.SelectedID | html %]"/>
+                                <div class="FieldExplanation">[% Translate(Data.Desc) | html %][% Translate(Data.Key) | html %]</div>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("Input") %]
 [% RenderBlockStart("Option") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
-                        <div class="Field">
-                            [% Data.Option %]
-                            <div class="FieldExplanation">[% Translate(Data.Desc) | html %][% Translate(Data.Key) | html %]</div>
-                        </div>
-                        <div class="Clear"></div>
+                            <div class="field-wrapper">
+                                <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                                <div class="Field">
+                                    [% Data.Option %]
+                                    <div class="FieldExplanation">[% Translate(Data.Desc) | html %][% Translate(Data.Key) | html %]</div>
+                                </div>
+                            </div>
 [% RenderBlockEnd("Option") %]
 [% RenderBlockStart("Upload") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
-                        <div class="Field">
-                            <input id="[% Data.Name | html %]" name="[% Data.Name | html %]" type="file"/>
-                            <div class="FieldExplanation">[% Translate(Data.Desc) | html %][% Translate(Data.Key) | html %]</div>
-                        </div>
-                        <div class="Clear"></div>
+                            <div class="field-wrapper">
+                                <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                                <div class="Field">
+                                    <input id="[% Data.Name | html %]" name="[% Data.Name | html %]" type="file"/>
+                                    <div class="FieldExplanation">[% Translate(Data.Desc) | html %][% Translate(Data.Key) | html %]</div>
+                                </div>
+                            </div>
 [% RenderBlockEnd("Upload") %]
 [% RenderBlockStart("Password") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
-                        <div class="Field">
-                            <input id="[% Data.Name | html %]" type="password" name="[% Data.Name | html %]" class="W50pc" value="[% Data.SelectedID | html %]" autocomplete="new-password" />
-                            <div>[% Translate(Data.Key) | html %]</div>
-                        </div>
-                        <div class="Clear"></div>
+                            <div class="field-wrapper">
+                                <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                                <div class="Field">
+                                    <input id="[% Data.Name | html %]" type="password" name="[% Data.Name | html %]" class="W50pc" value="[% Data.SelectedID | html %]" autocomplete="new-password" />
+                                    <div>[% Translate(Data.Key) | html %]</div>
+                                </div>
+                            </div>
 [% RenderBlockEnd("Password") %]
 [% RenderBlockStart("DynamicField") %]
-                    <div class="Row Row_DynamicField_[% Data.Name | html %]">
-                        [% Data.Label %]
-                        <div class="Field">
-                            [% Data.Field %]
+                        <div class="field-wrapper Row Row_DynamicField_[% Data.Name | html %]">
+                            [% Data.Label %]
+                            <div class="Field">
+                                [% Data.Field %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
-                    </div>
 [% RenderBlockEnd("DynamicField") %]
 [% RenderBlockEnd("Item") %]
-                        <div class="Field SpacingTop">
+
+                    <div class="field-wrapper form-button-actions">
+                        <div class="Field buttons-field">
+                            <a class="btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Nav=[% Data.Nav | uri %]">[% Translate("Cancel") | html %]</a>
+
                             [% IF Data.Action == 'Change' %]
-                                <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                                [% Translate("or") | html %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                <button class="btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]">
+                                    <span>[% Translate("Save and finish") | html %]</span>
+                                </button>
+
+                                <button class="btn-primary btn-main btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]">
+                                    <span>[% Translate("Save") | html %]</span>
+                                </button>
                             [% ELSE %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                <button class="btn-primary btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]">
+                                    <span>[% Translate("Save") | html %]</span>
+                                </button>
                             [% END %]
-                                [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Nav=[% Data.Nav | uri %]">[% Translate("Cancel") | html %]</a>
                         </div>
-                        <div class="Clear"></div>
+                    </div>
+
                     </fieldset>
                 </form>
             </div>
 [% RenderBlockEnd("OverviewUpdate") %]
         </div>
 [% RenderBlockStart("EffectivePermissions") %]
-        <div class="WidgetSimple">
+        <div class="WidgetSimple WidgetPermissions">
             <div class="Header">
                 <h2>[% Translate("Effective Permissions for Customer User") | html %]</h2>
             </div>
@@ -321,76 +382,80 @@
                 <dl>
                     <dt>[% Translate("Group Permissions") | html %]</dt>
                     <dd>
-                        <table class="DataTable VariableWidth SpacingTopSmall" id="GroupPermissionsTable">
-                            <thead>
-                                <tr>
-                                    <th>[% Translate("Group") | html %]</th>
+                        <div class="scroll-bar-styled bar-no-left-border">
+                            <table class="DataTable" id="GroupPermissionsTable">
+                                <thead>
+                                    <tr>
+                                        <th>[% Translate("Group") | html %]</th>
 [% RenderBlockStart("HeaderGroupPermissionType") %]
-                                    <th class="Center">[% Translate(Data.Type) | html %]</th>
+                                        <th>[% Translate(Data.Type) | html %]</th>
 [% RenderBlockEnd("HeaderGroupPermissionType") %]
-                                </tr>
-                            </thead>
-                            <tbody>
+                                    </tr>
+                                </thead>
+                                <tbody>
 [% RenderBlockStart("NoGroupPermissionsFoundMsg") %]
-                                <tr>
-                                    <td>
-                                        [% Translate("This customer user has no group permissions.") | html %]
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            [% Translate("This customer user has no group permissions.") | html %]
+                                        </td>
+                                    </tr>
 [% RenderBlockEnd("NoGroupPermissionsFoundMsg") %]
 [% RenderBlockStart("GroupPermissionTableRow") %]
-                                <tr>
-                                    <td><a href="[% Env("Baselink") %]Action=AdminGroup;Subaction=Change;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
+                                    <tr>
+                                        <td><a href="[% Env("Baselink") %]Action=AdminGroup;Subaction=Change;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
 [% RenderBlockStart("GroupPermissionMark") %]
 [% RenderBlockStart("GroupPermissionMarkOn") %]
-                                    <td class="Center [% Data.Highlight | html %]"><i class="fa fa-check" style="color: green;" /></td>
+                                        <td class="[% Data.Highlight | html %]"><i class="fa fa-check"/></td>
 [% RenderBlockEnd("GroupPermissionMarkOn") %]
 [% RenderBlockStart("GroupPermissionMarkOff") %]
-                                    <td class="Center [% Data.Highlight | html %]"><i class="fa fa-times" style="color: lightgray;" /></td>
+                                        <td class=" [% Data.Highlight | html %]"><i class="fa fa-times"/></td>
 [% RenderBlockEnd("GroupPermissionMarkOff") %]
 [% RenderBlockEnd("GroupPermissionMark") %]
-                                </tr>
+                                    </tr>
 [% RenderBlockEnd("GroupPermissionTableRow") %]
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                         <p class="FieldExplanation">
                             [% Translate("Table above shows effective group permissions for the customer user. The matrix takes into account all inherited permissions (e.g. via customer groups). Note: The table does not consider changes made to this form without submitting it.") | html %]
                         </p>
                     </dd>
                     <dt>[% Translate("Customer Access") | html %]</dt>
                     <dd>
-                        <table class="DataTable VariableWidth SpacingTopSmall" id="CustomerPermissionsTable">
-                            <thead>
-                                <tr>
-                                    <th>[% Translate("Customer") | html %]</th>
+                        <div class="scroll-bar-styled bar-no-left-border">
+                            <table class="DataTable" id="CustomerPermissionsTable">
+                                <thead>
+                                    <tr>
+                                        <th>[% Translate("Customer") | html %]</th>
 [% RenderBlockStart("HeaderCustomerAccessContext") %]
-                                    <th class="Center">[% Translate(Data.Name) | html %]</th>
+                                        <th class="Center">[% Translate(Data.Name) | html %]</th>
 [% RenderBlockEnd("HeaderCustomerAccessContext") %]
-                                </tr>
-                            </thead>
-                            <tbody>
+                                    </tr>
+                                </thead>
+                                <tbody>
 [% RenderBlockStart("NoCustomerAccessFoundMsg") %]
-                                <tr>
-                                    <td>
-                                        [% Translate("This customer user has no customer access.") | html %]
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            [% Translate("This customer user has no customer access.") | html %]
+                                        </td>
+                                    </tr>
 [% RenderBlockEnd("NoCustomerAccessFoundMsg") %]
 [% RenderBlockStart("CustomerAccessTableRow") %]
-                                <tr>
-                                    <td><a href="[% Env("Baselink") %]Action=AdminCustomerCompany;Subaction=Change;CustomerID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
+                                    <tr>
+                                        <td><a href="[% Env("Baselink") %]Action=AdminCustomerCompany;Subaction=Change;CustomerID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
 [% RenderBlockStart("CustomerAccessMark") %]
 [% RenderBlockStart("CustomerAccessMarkOn") %]
-                                    <td class="Center"><i class="fa fa-check" style="color: green;" /></td>
+                                        <td class="Center"><i class="fa fa-check"/></td>
 [% RenderBlockEnd("CustomerAccessMarkOn") %]
 [% RenderBlockStart("CustomerAccessMarkOff") %]
-                                    <td class="Center"><i class="fa fa-times" style="color: lightgray;" /></td>
+                                        <td class="Center"><i class="fa fa-times"/></td>
 [% RenderBlockEnd("CustomerAccessMarkOff") %]
 [% RenderBlockEnd("CustomerAccessMark") %]
-                                </tr>
+                                    </tr>
 [% RenderBlockEnd("CustomerAccessTableRow") %]
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                         <p class="FieldExplanation">
                             [% Translate("Table above shows granted customer access for the customer user by permission context. The matrix takes into account all inherited access (e.g. via customer groups). Note: The table does not consider changes made to this form without submitting it.") | html %]
                         </p>
@@ -400,6 +465,5 @@
         </div>
 [% RenderBlockEnd("EffectivePermissions") %]
     </div>
-    <div class="Clear"></div>
 </div>
 [% RenderBlockEnd("Overview") %]

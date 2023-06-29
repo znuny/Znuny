@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -101,7 +101,10 @@ sub NotificationEvent {
     # get system default language
     my $DefaultLanguage = $Kernel::OM->Get('Kernel::Config')->Get('DefaultLanguage') || 'en';
 
-    my $Languages = [ $Param{Recipient}->{UserLanguage}, $DefaultLanguage, 'en' ];
+    my $Languages = [ $DefaultLanguage, 'en' ];
+    if ( IsHashRefWithData( $Param{Recipient} ) && IsHashRefWithData( $Param{Recipient}->{UserLanguage} ) ) {
+        unshift @{$Languages}, $Param{Recipient}->{UserLanguage};
+    }
 
     my $Language;
     LANGUAGE:
@@ -302,7 +305,10 @@ sub _Replace {
     # cleanup
     $Param{Text} =~ s/$Tag.+?$End/-/gi;
 
-    my %Recipient = %{ $Param{Recipient} || {} };
+    my %Recipient;
+    if ( IsHashRefWithData( $Param{Recipient} ) ) {
+        %Recipient = %{ $Param{Recipient} || {} };
+    }
 
     # get user object
     my $UserObject = $Kernel::OM->Get('Kernel::System::User');

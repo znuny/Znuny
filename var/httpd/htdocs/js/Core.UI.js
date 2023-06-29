@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -391,7 +391,7 @@ Core.UI = (function (TargetNS) {
         }
         // otherwise insert it on top
         else {
-            $NotificationObj.insertAfter('#NavigationContainer');
+            $NotificationObj.insertAfter('#ToolBar');
         }
 
         // show it finally with animation and execute possible callbacks
@@ -528,6 +528,7 @@ Core.UI = (function (TargetNS) {
                 MaxFiles = $FileuploadFieldObj.data('max-files'),
                 MaxSizePerFile = $FileuploadFieldObj.data('max-size-per-file'),
                 MaxSizePerFileHR = $FileuploadFieldObj.data('max-size-per-file-hr'),
+                MaxFilenameLength = $FileuploadFieldObj.data('max-filename-length'),
                 FileTypes = $FileuploadFieldObj.data('file-types'),
                 Upload,
                 XHRObj,
@@ -535,6 +536,8 @@ Core.UI = (function (TargetNS) {
                 FileTypeNotAllowedText,
                 FilesTooBig = [],
                 FilesTooBigText,
+                FilenamesTooLong = [],
+                FilenamesTooLongText,
                 AttemptedToUploadAgain = [],
                 AttemptedToUploadAgainText,
                 NoSpaceLeft = [],
@@ -563,13 +566,19 @@ Core.UI = (function (TargetNS) {
             // if the original upload field doesn't have the multiple attribute,
             // prevent uploading of more than one file
             if (!IsMultiple && SelectedFiles.length > 1) {
-                alert(Core.Language.Translate("Please only select one file for upload."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Please only select one file for upload.")
+                );
                 return false;
             }
 
             // if multiple is not allowed and a file has already been uploaded, don't allow uploading more
             if (!IsMultiple && $FileuploadFieldObj.closest('.Field').find('.AttachmentList tbody tr').length > 0) {
-                alert(Core.Language.Translate("Sorry, you can only upload one file here."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, you can only upload one file here.")
+                );
                 return false;
             }
 
@@ -579,7 +588,10 @@ Core.UI = (function (TargetNS) {
             }
 
             if (MaxFiles && SelectedFiles.length > MaxFiles) {
-                alert(Core.Language.Translate("Please only select at most %s files for upload.", [ MaxFiles ]));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Please only select at most %s files for upload.", [ MaxFiles ])
+                );
                 return false;
             }
 
@@ -607,7 +619,7 @@ Core.UI = (function (TargetNS) {
                         'Filename' : File.name,
                         'Filetype' : File.type
                     }),
-                    FileExist;
+                    FileExists;
 
                 // check uploaded file size
                 if (File.size > (WebMaxFileUpload - UsedSpace)) {
@@ -630,13 +642,19 @@ Core.UI = (function (TargetNS) {
                     return true;
                 }
 
+                // check for max file name length
+                if (MaxFilenameLength && File.name.length > MaxFilenameLength) {
+                    FilenamesTooLong.push(File.name);
+                    return true;
+                }
+
                 // don't allow uploading multiple files with the same name
-                FileExist = $ContainerObj.find('.AttachmentList tbody tr td.Filename').filter(function() {
+                FileExists = $ContainerObj.find('.AttachmentList tbody tr td.Filename').filter(function() {
                     if ($(this).text() === File.name) {
                         return $(this);
                     }
                 });
-                if (FileExist.length) {
+                if (FileExists.length) {
                     AttemptedToUploadAgain.push(File.name);
                     return true;
                 }
@@ -743,12 +761,18 @@ Core.UI = (function (TargetNS) {
                 });
             });
 
-            if (FileTypeNotAllowed.length || FilesTooBig.length || NoSpaceLeft.length || AttemptedToUploadAgain.length) {
+            if (FileTypeNotAllowed.length || FilesTooBig.length || FilenamesTooLong.length || NoSpaceLeft.length || AttemptedToUploadAgain.length) {
 
-                FileTypeNotAllowedText = '';
-                FilesTooBigText = '';
+                // we need to empty the relevant file upload field because it would otherwise
+                // transfer the selected files again (only on click select, not on drag & drop)
+                $DropObj.prev('input[type=file]').val('');
+                $DropObj.removeClass('Uploading');
+
+                FileTypeNotAllowedText     = '';
+                FilesTooBigText            = '';
+                FilenamesTooLongText       = '';
                 AttemptedToUploadAgainText = '';
-                NoSpaceLeftText = '';
+                NoSpaceLeftText            = '';
 
                 if (FileTypeNotAllowed.length) {
                     FileTypeNotAllowedText =
@@ -764,6 +788,15 @@ Core.UI = (function (TargetNS) {
                             'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
                             MaxSizePerFileHR,
                             '<br>' + FilesTooBig.join(',<br>') + '<br><br>'
+                        );
+                }
+
+                if (FilenamesTooLong.length) {
+                    FilenamesTooLongText =
+                        Core.Language.Translate(
+                            'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s',
+                            MaxFilenameLength,
+                            '<br>' + FilenamesTooLong.join(',<br>') + '<br><br>'
                         );
                 }
 
@@ -788,7 +821,7 @@ Core.UI = (function (TargetNS) {
                             Core.App.HumanReadableDataSize(WebMaxFileUpload)
                         );
                 }
-                Core.UI.Dialog.ShowAlert(Core.Language.Translate('Upload information'), FileTypeNotAllowedText + FilesTooBigText + AttemptedToUploadAgainText + NoSpaceLeftText);
+                Core.UI.Dialog.ShowAlert(Core.Language.Translate('Upload information'), FileTypeNotAllowedText + FilesTooBigText + FilenamesTooLongText + AttemptedToUploadAgainText + NoSpaceLeftText);
             }
         }
 
@@ -840,7 +873,10 @@ Core.UI = (function (TargetNS) {
                     });
                 }
                 else {
-                    alert(Core.Language.Translate('An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.')
+                    );
                     $AttachmentListContainerObj.find('.Busy').hide();
                 }
             });
@@ -882,7 +918,10 @@ Core.UI = (function (TargetNS) {
                     // If this certain upload field does not allow uploading more than one file and a file has
                     // already been uploaded, prevent the user from uploading more files.
                     if (!IsMultiple && $(this).closest('.Field').find('.AttachmentList tbody tr').length > 0) {
-                        alert(Core.Language.Translate("Sorry, you can only upload one file here."));
+                        Core.UI.Dialog.ShowAlert(
+                            Core.Language.Translate('An Error Occurred'),
+                            Core.Language.Translate("Sorry, you can only upload one file here.")
+                        );
                         return false;
                     }
 

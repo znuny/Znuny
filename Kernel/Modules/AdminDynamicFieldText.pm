@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -866,7 +866,7 @@ sub GetParamRegexList {
                 # cut last part of regex error
                 # 'Invalid regular expression (Unmatched [ in regex; marked by
                 # <-- HERE in m/aaa[ <-- HERE / at
-                # /opt/otrs/bin/cgi-bin/../../Kernel/Modules/AdminDynamicFieldText.pm line 452..
+                # /opt/znuny/bin/cgi-bin/../../Kernel/Modules/AdminDynamicFieldText.pm line 452..
                 my $ServerErrorMessage = $@;
                 $ServerErrorMessage =~ s{ (in \s regex); .*$ }{ $1 }xms;
                 $Errors->{ 'RegEx_' . $CurrentRegExEntryID . 'ServerErrorMessage' } = $ServerErrorMessage;

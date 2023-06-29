@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -83,9 +83,11 @@ sub Run {
     my $URL = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{Baselink};
     my %Return;
     my $Priority = $Param{Config}->{Priority};
+    my $Block    = $Param{Config}->{Block};
+
     if ($CountNew) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Count       => $CountNew,
             Description => Translatable('Locked Tickets New'),
             Class       => $ClassNew,
@@ -96,7 +98,7 @@ sub Run {
     }
     if ($CountReached) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Count       => $CountReached,
             Description => Translatable('Locked Tickets Reminder Reached'),
             Class       => $ClassReached,
@@ -107,7 +109,7 @@ sub Run {
     }
     if ($Count) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Count       => $Count,
             Description => Translatable('Locked Tickets Total'),
             Class       => $Class,

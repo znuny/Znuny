@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,6 +24,8 @@ $Selenium->RunTest(
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
         my $SysConfigObject           = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject               = $Kernel::OM->Get('Kernel::System::Queue');
 
         # Do not check email addresses and mx records.
         # Change settings in both runtime and disk configuration.
@@ -49,7 +51,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -57,7 +59,7 @@ $Selenium->RunTest(
 
         # Create test queue.
         my $QueueName = 'Queue' . $RandomID;
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => 1,
@@ -229,7 +231,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Go to status open view, overview small, default sort is Age, default order is Down and remove all filter
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketStatusView;DeleteFilters=DeleteFilters");

@@ -1,24 +1,27 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div>
-    <div class="Field SpacingTopSmall">
+<div class="new-field-wrapper">
+    <div class="Field">
+
         <label for="SearchParam" class="Mandatory">
             <span class="Marker">*</span>
         </label>
-        {{ SearchParamUser | safe }}
-        <input id="SearchParam" name="SearchParam" type="text" class="Validate_Required" />
-        <div id="SearchParamError" class="TooltipErrorMessage"><p>{{ 'This field is required.' | Translate }}</p></div>
-        <a class="RemoveButton" title="{{ 'Remove this entry' | Translate }}" href="#">
-            <i class="fa fa-minus-square-o"></i>
-            <span class="InvisibleText">{{ 'Remove' | Translate }}</span>
-        </a>
+        <div class="inner-field-wrapper">
+            {{ SearchParamUser | safe }}
+            <input id="SearchParam" name="SearchParam" type="text" class="Validate_Required" />
+            <div id="SearchParamError" class="TooltipErrorMessage"><p>{{ 'This field is required.' | Translate }}</p></div>
+
+            <a class="RemoveButton icon-hover-md" title="{{ 'Remove this entry' | Translate }}" href="#">
+                <i class="fa fa-minus-square-o"></i>
+                <span class="InvisibleText">{{ 'Remove' | Translate }}</span>
+            </a>
+        </div>
     </div>
-    <div class="Clear"></div>
 </div>

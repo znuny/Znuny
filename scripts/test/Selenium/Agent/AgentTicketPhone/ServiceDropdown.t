@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,18 +13,19 @@ use utf8;
 
 use vars (qw($Self));
 
-# get config object
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $Selenium     = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+
+my $IsITSMIncidentProblemManagementInstalled
+    = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
 # do not checkmx
-$Kernel::OM->Get('Kernel::System::UnitTest::Helper')->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
-
-# get selenium object
-my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 # this test is to check that when AgentTicketPhone is loaded already with
 # customer data on it (like when doing Split), the dropdown of Service is
@@ -34,8 +35,8 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # update sysconfig settings
         $HelperObject->ConfigSettingChange(
@@ -85,13 +86,21 @@ $Selenium->RunTest(
         my $TestService = "Service-" . $HelperObject->GetRandomID();
 
         # create a test service
-        my $ServiceID = $ServiceObject->ServiceAdd(
+        my %ServiceValues = (
             Name    => $TestService,
             Comment => 'Selenium Test Service',
             ValidID => 1,
             UserID  => 1,
         );
 
+        if ($IsITSMIncidentProblemManagementInstalled) {
+            $ServiceValues{TypeID}      = 1;
+            $ServiceValues{Criticality} = '3 normal';
+        }
+
+        my $ServiceID = $ServiceObject->ServiceAdd(
+            %ServiceValues
+        );
         $Self->True(
             $ServiceID,
             "Service is created - $ServiceID",
@@ -106,7 +115,7 @@ $Selenium->RunTest(
         );
 
         # create an article for the test ticket
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Internal',
         );
         my $ArticleID = $ArticleBackendObject->ArticleCreate(
@@ -188,7 +197,7 @@ $Selenium->RunTest(
             qw (Service Ticket)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

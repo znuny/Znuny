@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -37,30 +37,50 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     border-right: none;
 }
 
+.DataTable tbody tr td,
+.TableSmall tbody tr td,
+.DataTable tbody tr td.Clickable,
+.TableSmall tbody tr td.Clickable,
+.DataTable tr:nth-child(even) td.Highlight {
+    transition: var(--main-transition);
+ }
+
 .DataTable tbody tr:hover td,
 .TableSmall tbody tr:hover td,
 .DataTable tbody tr:active td.Clickable,
 .TableSmall tbody tr:active td.Clickable,
 .DataTable tr:nth-child(even):hover td.Highlight {
-    background: #FCB24B;
+    background: var(--primary-color-rgb);
+}
+
+table thead tr th:first-child,
+table tbody tr td:first-child{
+    padding-left: var(--padding-lg);
 }
 
 /**
  * @subsection  Generic table elements
  */
 tbody tr.UnreadArticles td {
-    font-weight: bold !important;
+    font-weight: var(--bold);
 }
 
 .DataTable td,
 .TableSmall td {
-    line-height: 15px;
+    padding: var(--padding-lg);
     vertical-align: middle;
+    box-sizing: border-box;
+    font-size: var(--main-font-size);
 }
 
 .DataTable tr:hover,
 .TableSmall tr:hover {
     color: #000;
+}
+
+.TableSmall tr td div,
+.TableSmall tr td a {
+    color: var(--table-text-color);
 }
 
 table tr.MasterAction {
@@ -72,10 +92,24 @@ table tr.MasterAction {
  */
 .DataTable {
     width: 100%;
-    background-color: #FDFDFD;
-    border: 1px solid #ddd;
+    background-color: var(--table-bg);
+    border: none;
     clear: both;
     border-collapse: separate;
+}
+
+.DataTable.border {
+    border-radius: var(--border-radius-xs);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow: hidden;
+}
+
+.DataTable#UserRoles,
+.DataTable#UserGroups {
+    width: 100%;
+    border-radius: var(--border-radius-sm);
+    background: none;
 }
 
 .DataTable.FixedLayout {
@@ -87,24 +121,92 @@ table tr.MasterAction {
 }
 
 .DataTable thead {
-    background: #eeeeee;
+    background: var(--table-th-bg);
 }
 
-.DataTable thead th {
-    padding: 4px 10px 3px;
-    color: #4B4B4B;
-    font-size: 11px;
+table thead a {
+    font-size: var(--font-size-sm);
+    font-weight: var(--semi-bold);
+}
+
+.SidebarColumn .DataTable thead th {
+    padding: var(--padding-sm);
+    background: var(--table-td-even-bg);
+}
+
+.DataTable thead th,
+.DataTable thead th.DashboardHeader,
+.TableSmall thead th,
+.TableSmall thead a,
+.TableSmall thead span {
+    position: relative;
+    padding: 12px var(--padding-lg);
+    font-size: var(--font-size-sm);
+    font-weight: var(--semi-bold);
     text-transform: uppercase;
-    background: #eee;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #CCC;
-    vertical-align: bottom;
+    color: var(--table-text-color);
+    background: var(--table-th-bg);
+    vertical-align: middle;
     white-space: nowrap;
+    line-height: 1;
+}
+
+tr th a,
+tr th a:hover {
+    color: inherit;
+}
+
+.ContentColumn .DataTable:not(.TableList) thead th {
+    border-top: var(--border-width) var(--border-solid) var(--border-color);
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+thead tr:not(:only-child):first-child th:last-child {
+    border: 0;
+}
+
+.ContentColumn .DataTable thead th:nth-child(2):last-child {
+    width: 10%;
+}
+
+.AdminManagement .ContentColumn .DataTable thead th,
+.WidgetSimple form:first-child .DataTable thead th,
+.WidgetSimple .Content table.DataTable:first-child thead th {
+    border-top: 0;
+}
+
+.TableSmall thead th,
+.TableSmall thead a,
+.TableSmall thead span {
+    padding: 12px var(--padding-sm);
+}
+
+.TicketZoom .DataTable thead th,
+.TicketZoom .DataTable thead th.DashboardHeader,
+.TicketZoom .TableSmall thead th,
+.TicketZoom .TableSmall thead a,
+.TicketZoom .TableSmall thead span {
+    /*padding: var(--padding-sm) var(--padding-lg);*/
+    padding: var(--padding-sm);
+}
+
+.TicketZoom tbody tr td {
+    padding-top: var(--padding-md);
+    padding-bottom: var(--padding-md);
+}
+
+.TicketZoom tbody tr td a.LinkObjectLink:first-child {
+    color: var(--primary-color);
 }
 
 .DataTable thead th.UnreadArticles {
     padding: 4px 0px 3px 0px;
     text-align: center;
+}
+
+.DataTable thead th.UnreadArticles > div {
+    display: flex;
+    justify-content: center;
 }
 
 .RTL .DataTable thead th {
@@ -113,7 +215,9 @@ table tr.MasterAction {
 }
 
 .DataTable thead th label {
-    color: #4B4B4B !important;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .DataTable thead th:last-child {
@@ -124,20 +228,21 @@ table tr.MasterAction {
     border-left: none;
 }
 
+/*Only seems to be taking effect on table Triggers which are being styled somewhere else
 .DataTable thead th a {
     background-image: none;
     color: #444;
     font-size: 11px;
     height: 12px;
-    line-height: 12px;
+    line-height: 1;
     display: block;
-}
+}*/
 
 .DataTable thead .SortAscending a,
 .DataTable thead .SortDescending a {
-    color: #2A2A2A;
+    /* color: #2A2A2A;
     padding-right: 15px;
-    background: #ccc;
+    background: #ccc; */
 }
 
 .DataTable thead .SortDescending > a:after,
@@ -154,17 +259,25 @@ table tr.MasterAction {
     content: "\25B2";
     display: block;
     position: absolute;
-    left: 2px;
-    top: 3px;
+    left: 0px;
+    top: 0px;
 }
 
-.DataTable tbody tr.Invalid {
-    color: #CCC;
+.DataTable tbody tr.Invalid td {
+    background-color: var(--tr-disabled-bg);
+    color: var(--tr-disabled-text);
 }
 
 .DataTable tbody td {
-    padding: 0 10px;
-    border-right: 1px dotted #CCC;
+    padding: var(--padding-md) var(--padding-lg);
+    border-right: none;
+    font-size: var(--main-font-size);
+    line-height: normal;
+    color: #44444F;
+}
+
+.DataTable[summary = "Execution Schedule"] tbody td {
+    padding: var(--padding-md) var(--padding-sm);
 }
 
 .DataTable.FixedLayout tbody td a.AsBlock {
@@ -177,14 +290,14 @@ table tr.MasterAction {
     padding: 0px;
 }
 
-.RTL .DataTable tbody td {
+/*.RTL .DataTable tbody td {
     border-left: 1px dotted #CCC;
     border-right: none;
 }
 
 .DataTable tbody tr:hover td {
     border-right-color: #fff;
-}
+}*/
 
 .DataTable tbody td:last-child {
     border-right: none;
@@ -194,25 +307,31 @@ table tr.MasterAction {
     border-left: none;
 }
 
+/* DataTable's td already referenced in this file (.DataTable tbody td)
 .DataTable tr td {
-    line-height: 20px;
-}
+    font-size: var(--main-font-size);
+    line-height: var(--table-tr-line-hight);
+}*/
 
 .DataTable tr:first td {
-    border-top: 1px solid #EEE;
+    border-top: none;
 }
 
-.DataTable tr td.Highlight {
+/*.DataTable tr td.Highlight {
     background-color: #EEE;
+}*/
+
+.DataTable tr:nth-child(even) td:not(:first-child:last-child) {
+    background-color: var(--table-td-even-bg);
 }
 
-.DataTable tr:nth-child(even) td {
-    background-color: #F5F5F5;
+.DataTable .FilterMessage tr:nth-child(even) td {
+    background-color: unset;
 }
 
-.DataTable tr:nth-child(even) td.Highlight {
+/*.DataTable tr:nth-child(even) td.Highlight {
     background-color: #E5E5E5;
-}
+}*/
 
 .DataTable tr td.Highlight {
     border-right: 1px solid #CCC;
@@ -222,8 +341,17 @@ table tr.MasterAction {
     border-right: none;
 }
 
+.DataTable tr td a,
 .DataTable tr:hover td a {
-    color: #000;
+    color: var(--main-font-color);
+}
+
+.DataTable tr td em a {
+    color: var(--primary-color);
+}
+
+.DataTable tr:hover td em a {
+    color: var(--primary-color-darker);
 }
 
 .DataTable td:first-child input {
@@ -252,12 +380,13 @@ table tr.MasterAction {
  */
 
 .Sortable.DataTable th {
-    padding: 0;
+    /*padding: 0;*/
 }
 
 .Sortable.DataTable th a,
 .Sortable.DataTable th span {
-    padding: 4px 10px 3px;
+    color: var(--black);
+    /* padding: 4px 10px 3px;*/
     display: block;
     position: relative;
 }
@@ -279,19 +408,16 @@ table tr.MasterAction {
  */
 .TableSmall {
     width: 100%;
-    font-size: 12px;
-    color: #303030;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    background: #FFF;
+    font-size: var(--font-size-sm);
+    color: var(--main-font-color);
+    border-top: 0;
+    border-bottom: 0;
+    background: transparent;
+    border-radius:0;
 }
 
 .TableSmall thead {
     border-bottom: none;
-}
-
-.TableSmall .Checkbox {
-    margin-left: 7px;
 }
 
 th.Checkbox,
@@ -303,8 +429,16 @@ th.Flags {
     width: 34px;
 }
 
-td.Flags {
+tr td.Flags {
     width: 29px;
+}
+
+tr td.Flags:first-child {
+    padding: 0 var(--padding-xs) 0 var(--padding-lg);
+}
+
+.DataTable tr td.Flags {
+    line-height: inherit;
 }
 
 th.UnreadArticles,
@@ -324,38 +458,37 @@ td.Attachment {
     padding-left: 5px !important;
 }
 
-.TableSmall thead th {
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    vertical-align: bottom;
-    background: #EEEEEE;
-}
+/*.TableSmall thead th {
+    vertical-align: middle;
+    border: none;
+    position: relative;
+}*/
 
 .TableSmall thead th:last-child {
     border-right: 0px;
 }
 
-.TableSmall thead th a {
+/*.TableSmall thead th a {
     padding-top: 2px;
     padding-bottom: 2px;
-}
+}*/
 
 .RTL .TableSmall thead th {
     background-position: left bottom;
 }
 
+/* Merged with similar changes being applied to .Datatable
 .TableSmall thead a,
 .TableSmall thead span {
-    margin: 0 2px 1px 1px;
+    margin: 0;
     padding: 0 10px;
     color: #4A4A4A;
-    font-size: 11px;
-    line-height: 15px;
-    height: 15px;
+    line-height: 1;
+    height: auto;
     text-transform: uppercase;
     display: block;
     white-space: nowrap;
-}
+}*/
 
 .RTL .TableSmall thead a,
 .RTL .TableSmall thead span {
@@ -405,22 +538,21 @@ thead .headerSortDown a {
 }
 
 .TableSmall td {
-    padding: 0 10px;
-    background-color: #FDFDFD;
-    border-right: 1px dotted #CCC;
+    background-color: var(--white);
+    border-right: none;
+    border-bottom: var(--border-width) var(--border-solid) var(--table-tr-border-bottom);
 }
 
 .RTL .TableSmall td {
     border-right:none;
-    border-left: 1px dotted #CCC;
+    border-left: none;
 }
 
 .TableSmall td.NonTextContent {
-    padding-left: 0;
-    padding-right: 0;
+    padding: var(--padding-lg);
 }
 
-.TableSmall tbody tr.Active td,
+/*.TableSmall tbody tr.Active td,
 .DataTable tbody tr.Active td {
     color: #1A1A1A;
 }
@@ -447,7 +579,7 @@ thead .headerSortDown a {
 
 .TableSmall tbody tr.Active td:first-child {
     border-left: 1px solid #000;
-}
+}*/
 
 .TableSmall td a {
     color: #303030;
@@ -468,17 +600,11 @@ thead .headerSortDown a {
 }
 
 .TableSmall tr:nth-child(even) td {
-    background-color: #F5F5F5;
+    background-color: var(--table-td-even-bg);
 }
 
-.TableSmall td:first-child {
-    padding-top: 1px;
-}
-
-.TableSmall tbody .Flags {
-    line-height: 11px;
-    padding-top: 2px;
-    padding-left: 5px;
+.TableSmall tbody .Flags{
+    padding: 0 var(--padding-sm);
 }
 
 .TableSmall tbody td span.Direction,
@@ -557,14 +683,24 @@ thead .headerSortDown a {
     overflow: hidden;
 }
 
+.TicketZoom .TicketList table thead th {
+    background: var(--main-bg-color);
+}
+
+.TicketList table i.fa-exchange,
+.TicketList table i.fa-paperclip {
+    color: var(--gray-darker);
+    font-size: 12px;
+}
+
 .TicketList td {
-    line-height: 18px;
+    line-height: 1;
 }
 
 .TicketList td.From div,
 .TicketList td.Subject div,
 .TicketList td.Created a {
-    height: 20px;
+    /*height: 40px;*/
     overflow: hidden;
     display: block;
 }
@@ -575,7 +711,7 @@ thead .headerSortDown a {
 }
 
 .TicketList .Attachments {
-    width: 20px;
+    width: 60px;
 }
 
 #ArticleTable thead {
@@ -586,17 +722,6 @@ thead .headerSortDown a {
     background: -o-linear-gradient(top,  #f0f0f0 0%,#eaeaea 100%);
     background: -ms-linear-gradient(top,  #f0f0f0 0%,#eaeaea 100%);
     background: linear-gradient(to bottom,  #f0f0f0 0%,#eaeaea 100%);
-}
-
-#OverviewBody.Overview.TicketList {
-    overflow-x: auto;
-    min-height: 70px;
-}
-
-#OverviewBody.Overview.TicketList table.TableSmall.NoCellspacing {
-    overflow: visible;
-    border-left: 1px solid #CCC;
-    border-right: 1px solid #CCC;
 }
 
 /**
@@ -634,45 +759,83 @@ thead .headerSortDown a {
  * @subsection  Table headers-filters
  */
  .TableSmall thead span.Gray {
-    color: #444;
+    color: var(--table-text-color);
+    padding: 0 var(--padding-sm);
+    padding-left: 1px;
 }
 
 .DataTable .ColumnFilter {
-    width: 80%;
+    width: 120px;
     text-transform: none;
     float: left;
+    background: var(--gray-light);
+    height: 28px;
 }
 
 .ColumnFilter + .AJAXLoader {
-    float: right;
-    margin: 3px 0px 0px 2px;
-    background-color: #eee;
-    position: relative;
+    /*margin: auto;*/
+    /*width: 14px;*/
+    /*height: 14px;*/
+    padding: 0;
+    background: none;
+    position: absolute;
     z-index: 99;
-    text-align: center;
+    left: 0;
+    top: 22px;
 }
 
+#Ticket {
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-top: 0;
+    overflow: auto;
+}
+
+#Ticket,
+#Ticket .DataTable {
+    border-bottom-left-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+}
+
+#Ticket .DataTable th {
+    padding: var(--padding-lg);
+}
+
+/* Merged with ".DataTable .ColumnFilter"
 select.ColumnFilter {
     width: 100px;
-}
+}*/
 
-.DataTable thead .SortAscendingLarge a,
+/* Note - Code reduction below -                */
+/*        Removed extensive element reference, */
+/*        should work with no problems          */
+
+/*.DataTable thead .SortAscendingLarge a,
 .DataTable thead .SortDescendingLarge a,
 .TableSmall thead .SortAscendingLarge a,
-.TableSmall thead .SortDescendingLarge a {
-    color: #2A2A2A;
+.TableSmall thead .SortDescendingLarge a*/
+.SortAscendingLarge > a,
+.SortDescendingLarge > a {
+    color: red;
     height: 16px;
     font-weight: bold;
     position: relative;
 }
 
-.DataTable thead .SortDescendingLarge > a:after,
-.TableSmall thead .SortDescendingLarge > a:after {
+/*.DataTable thead .SortDescendingLarge > a:after,
+.TableSmall thead .SortDescendingLarge > a:after*/
+.SortDescendingLarge > a:first-child:after {
     content: "\25BC";
     position: absolute;
-    left: -6px;
-    text-shadow: 1px 1px 0px #fff;
-    z-index: 1;
+    left: -13px;
+    top: 1px;
+    z-index: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.SortDescendingLarge > a + a:after {
+    background-color: red;
 }
 
 thead .headerSortUp > a:before,
@@ -689,181 +852,233 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
     margin-right: 2px;
 }
 
-.DataTable thead .SortAscendingLarge > a:after,
-.TableSmall thead .SortAscendingLarge > a:after {
+.DataTable thead .SortAscendingLarge > a:first-child:after,
+.TableSmall thead .SortAscendingLarge > a:first-child:after {
     content: "\25B2";
     position: absolute;
-    left: -6px;
-    text-shadow: 1px 1px 0px #fff;
+    left: -13px;
+    bottom: 0;
     z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .DataTable thead th.DashboardHeader a,
 .TableSmall thead th.OverviewHeader a,
-.DataTable thead th.DashboardHeader span.Gray {
-    height: 16px;
-    line-height: 16px;
-    padding-left: 5px;
+.DataTable thead th.DashboardHeader span.Gray,
+th.OverviewHeader .OverviewControl {
+    height: auto;
+    line-height: 1;
+    padding: 0 var(--padding-sm);
+    padding-left: 1px;
+    color: var(--table-text-color);
 }
 
+/* needs following line in order to override styles above */
 .DataTable thead th.DashboardHeader .ColumnSettingsTrigger,
 .TableSmall thead th.OverviewHeader .ColumnSettingsTrigger {
-    display: block;
-    width: 17px;
-    height: 17px;
-    float: right;
-    opacity: 0.5;
-    padding: 0px;
-    margin: 0px -19px 0px 0px;
+    opacity: 0.8;
+    padding: 5px 6px;
+    top: -1px;
+    margin-left: -10px;
     position: relative;
-    z-index: 2;
+    z-index: 0;
+    border-radius: 3px;
+    transition: var(--main-transition);
 }
 
 .DataTable thead th.DashboardHeader .ColumnSettingsTrigger i,
 .TableSmall thead th.OverviewHeader .ColumnSettingsTrigger i {
-    color: #777777;
-    margin-left: 4px;
+    color: var(--gray-darker);
     vertical-align: middle;
+    font-size: var(--font-size-sm);
 }
 
-.TableSmall thead th.OverviewHeader .ColumnSettingsTrigger {
+/*.TableSmall thead th.OverviewHeader .ColumnSettingsTrigger {
     margin: 2px -18px 0px 0px;
-}
+}*/
 
-.DataTable thead th.DashboardHeader.FilterActive .ColumnSettingsTrigger,
+/*.DataTable thead th.DashboardHeader.FilterActive .ColumnSettingsTrigger,
 .DataTable thead th.DashboardHeader .ColumnSettingsTrigger:hover,
 .DataTable thead th.DashboardHeader .ColumnSettingsTrigger.Active,
 .TableSmall thead th.OverviewHeader.FilterActive .ColumnSettingsTrigger,
 .TableSmall thead th.OverviewHeader .ColumnSettingsTrigger:hover,
-.TableSmall thead th.OverviewHeader .ColumnSettingsTrigger.Active {
-
-    border-radius: 2px;
+.TableSmall thead th.OverviewHeader .ColumnSettingsTrigger.Active,*/
+.FilterActive .ColumnSettingsTrigger,
+.ColumnSettingsTrigger:hover,
+.ColumnSettingsTrigger.Active {
+    /*border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
+    box-shadow: 1px 1px 1px #a9a9a9 inset, -1px -1px 1px #a9a9a9 inset;*/
+    background: var(--icon-hover-color);
     opacity: 1.0;
-    box-shadow: 1px 1px 1px #a9a9a9 inset, -1px -1px 1px #a9a9a9 inset;
+
 }
 
-.DataTable thead th.DashboardHeader.FilterActive .ColumnSettingsTrigger i,
+/*.DataTable thead th.DashboardHeader.FilterActive .ColumnSettingsTrigger i,
 .DataTable thead th.DashboardHeader .ColumnSettingsTrigger.Active i,
 .TableSmall thead th.OverviewHeader.FilterActive .ColumnSettingsTrigger i,
-.TableSmall thead th.OverviewHeader .ColumnSettingsTrigger.Active i {
-
+.TableSmall thead th.OverviewHeader .ColumnSettingsTrigger.Active i*/
+.ColumnSettingsTrigger i,
+.ColumnSettingsTrigger.Active i {
     color: #333333;
 }
 
-.DataTable thead th.DashboardHeader .ColumnSettingsTrigger:after,
-.TableSmall thead th.OverviewHeader .ColumnSettingsTrigger:after {
+/*.DataTable thead th.DashboardHeader .ColumnSettingsTrigger:after,
+.TableSmall thead th.OverviewHeader .ColumnSettingsTrigger:after*/
+.ColumnSettingsTrigger:after {
     content: "";
 }
 
-.DataTable thead th.DashboardHeader .ColumnSettingsContainer,
-.TableSmall thead th.OverviewHeader .ColumnSettingsContainer {
+/*.DataTable thead th.DashboardHeader .ColumnSettingsContainer,
+.TableSmall thead th.OverviewHeader .ColumnSettingsContainer*/
+.ColumnSettingsContainer {
     position: relative;
 }
 
-.DataTable thead th.DashboardHeader .ColumnSettingsBox,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox {
-    background-color: #EEEEEE;
-    border: 1px solid #BBBBBB;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    box-shadow: 1px 1px 3px #CCCCCC, -1px -1px 3px #CCCCCC;
+/*.DataTable thead th.DashboardHeader .ColumnSettingsBox,
+.TableSmall thead th.OverviewHeader .ColumnSettingsBox*/
+.ColumnSettingsBox {
+    background-color: var(--white);
+    border: var(--border-width) var(--border-solid) var(--pill-color-selected);
+    -moz-border-radius: var(--border-radius-sm);
+    -webkit-border-radius: var(--border-radius-sm);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--menu-box-shadow);
     display: none;
-    padding: 4px;
+    padding: var(--padding-md);
     position: absolute;
-    right: 0px;
-    top: 2px;
-    width: 180px;
-    z-index: 100;
+    top: 6px;
+    right: 2px;
+    min-width: 175px;
+    z-index: 80;
 }
 
+.ColumnSettingsBox > input {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    min-width: unset;
+}
+
+.ColumnSettingsBox input.InputField_Search {
+    line-height: normal;
+}
+
+.ColumnSettingsBox div.InputField_InputContainer {
+    max-width: unset;
+    width: unset;
+    display: flex;
+    align-items: center;
+    /*width: min-content;*/
+}
+
+.ColumnSettingsBox div.InputField_InputContainer .InputField_ClearSearch {
+    position: absolute;
+    padding: 0;
+    background: transparent;
+}
+
+/* Merged with style above"
 .MainBox.Dashboard .DataTable thead th.DashboardHeader .ColumnSettingsBox,
 .MainBox.Dashboard .TableSmall thead th.OverviewHeader .ColumnSettingsBox {
-    top: -10px;
-}
+    top: 20px;
+}*/
 
-.DataTable thead th.DashboardHeader .ColumnSettingsBox select,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox select {
+/*.DataTable thead th.DashboardHeader .ColumnSettingsBox select,
+.TableSmall thead th.OverviewHeader .ColumnSettingsBox select*/
+.ColumnSettingsBox select {
     margin-top: 0px;
 }
 
-.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue {
+/*.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue,
+.TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue*/
+.ColumnSettingsBox span.SelectedValue {
     display: block;
     text-transform: none;
     margin-bottom: 8px;
     position: relative;
     padding: 4px;
-    border: 1px solid #ccc;
+    border: var(--border-width) var(--border-solid)  #ccc;
 }
 
-.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue span,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue span {
+/*.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue span,
+.TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue span*/
+.ColumnSettingsBox span.SelectedValue span {
     display: block;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
-.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue a,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue a {
+/*.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue a,
+.TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue a*/
+.ColumnSettingsBox span.SelectedValue a {
     background: #AAAAAA;
     border-radius: 14px;
     color: #FFFFFF;
     display: block;
     font-size: 10px;
-    height: 15px;
-    line-height: 13px;
+    height: auto;
+    line-height: 1;
     left: 0;
     position: absolute;
     text-align: left;
-    top: -1px;
+    top: 0;
     width: 10px;
     padding: 0px 0px 0px 5px;
 }
 
-.DataTable thead th.DashboardHeader .ColumnSettingsBox a.DeleteFilter,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox a.DeleteFilter {
+/*.DataTable thead th.DashboardHeader .ColumnSettingsBox a.DeleteFilter,
+.TableSmall thead th.OverviewHeader .ColumnSettingsBox a.DeleteFilter*/
+.ColumnSettingsBox a.DeleteFilter {
     display: inline-block;
     font-size: 13px;
-    line-height: 12px;
+    line-height: 1;
 }
 
-.DataTable thead th.DashboardHeader .ColumnSettingsBox a.DeleteFilter.Hidden,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox a.DeleteFilter.Hidden {
+/*.DataTable thead th.DashboardHeader .ColumnSettingsBox a.DeleteFilter.Hidden,
+.TableSmall thead th.OverviewHeader .ColumnSettingsBox a.DeleteFilter.Hidden*/
+.ColumnSettingsBox a.DeleteFilter.Hidden {
     display: none;
 }
 
-.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue a:hover,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue a:hover {
+/*.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue a:hover,
+.TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue a:hover*/
+.ColumnSettingsBox span.SelectedValue a:hover {
     background: #888;
 }
 
 .DataTable thead th.OverviewHeader .ColumnSettingsBox input[type="text"] ,
 .TableSmall thead th.OverviewHeader .ColumnSettingsBox input[type="text"] {
     width: 100px;
+    padding-top: var(--padding-xs);
+    padding-bottom: var(--padding-xs);
 }
 
 
-.DataTable thead th.DashboardHeader,
+/*.DataTable thead th.DashboardHeader,
 .TableSmall thead th.OverviewHeader {
-    padding: 0px 20px 0px 1px;
-}
+    padding: 14px 20px 14px 1px;
+}*/
 
-.DataTable thead th.DashboardHeader.SortDescendingLarge,
+/*.DataTable thead th.DashboardHeader.SortDescendingLarge,
 .DataTable thead th.DashboardHeader.SortAscendingLarge,
 .TableSmall thead th.OverviewHeader.SortDescendingLarge,
-.TableSmall thead th.OverviewHeader.SortAscendingLarge {
+.TableSmall thead th.OverviewHeader.SortAscendingLarge*/
+th.DashboardHeader.SortDescendingLarge,
+th.DashboardHeader.SortAscendingLarge {
     padding-left: 8px;
 }
 
+/* display block was sepperating table th and their respective SettingsTrigger */
 .DataTable thead span.Gray {
-    height: 16px !important;
-    display: block !important;
+    height: auto !important;
+    /*display: block !important;*/
     padding-left: 10px;
-    line-height: 12px;
+    line-height: 1;
 }
 
 .TableSmall .ColumnFilter {
@@ -912,15 +1127,172 @@ p.IntroInstall {
  */
 
 td i,
-td a i {
-    color: #999;
-    margin-right: 3px;
+td a > i.fa {
+    color: var(--gray-dark);
+    font-size: var(--font-size-lg);
+    /*margin-right: 3px;*/
 }
 
 tr:hover td i,
 tr:hover td a i,
 td a:hover i {
-    color: #000;
+    color: var(--gray-darker);
 }
+
+
+.table-icon-hover-md {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+    border-radius: var(--border-radius-xs);
+    transition: var(--main-transition);
+    text-indent: -9999px;
+}
+
+.table-icon-hover-md i {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 22%;
+    transition: var(--main-transition);
+    text-indent: initial;
+}
+
+.table-icon-hover-md:hover {
+    background: var(--primary-color);
+}
+
+.table-icon-hover-md:hover i {
+    color: var(--white);
+}
+
+/**
+ * @subsection  Table Custom
+ */
+
+/*.InnerMainBoxContent .Content dl {
+    margin: 0;
+    padding: 0 var(--padding-xl) var(--padding-xl);
+}*/
+
+.InnerMainBoxContent .Content dl dd {
+    margin: 0;
+}
+
+.InnerMainBoxContent .Content dl dd table {
+    width: 100%;
+    padding: var(--padding-xs);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-radius: var(--border-radius-lg);
+}
+
+/**************************/
+/*   Table Filter Search  */
+/**************************/
+/* Note: the following style overrides a jquery class default
+/*/
+
+.ui-menu.ui-widget.ui-widget-content {
+    border: none !important;
+    overflow-x: hidden;
+    /*width: auto !important;*/ /* ED updated on 22/09/28 */
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--menu-box-shadow);
+    padding: var(--padding-xs) !important; /* ED updated on 22/09/28 */
+    margin-left: -1% !important;
+    box-sizing: border-box;
+}
+
+.ui-menu.ui-widget.ui-widget-content .ui-menu-item {
+    max-width: 100%;
+    padding: 0;
+}
+
+.ui-menu.ui-widget.ui-widget-content .ui-menu-item:hover {
+    background: none;
+}
+
+.ui-menu .ui-menu-item a {
+    max-width: 100%;
+    font-weight: var(--medium);
+    color: var(--main-font-color);
+    border-radius: var(--border-radius-xs);
+    padding: var(--padding-sm);
+    transition: var(--main-transition);
+    box-sizing: border-box;
+    word-break: break-all;
+}
+
+/**************************/
+/*       Users Online     */
+/**************************/
+.SidebarColumn .DashboardUserOnline td{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: var(--padding-xs);
+}
+
+.SidebarColumn .DashboardUserOnline .UserStatusIcon {
+    display: flex;
+    flex-flow: row;
+    margin-left: 2px;
+    margin-right: -2px;
+}
+
+.SidebarColumn .DashboardUserOnline td p{
+    padding: 0;
+    line-height: normal;
+}
+
+.SidebarColumn .DashboardUserOnline td p span {
+    font-size: 14px;
+}
+
+/**************************/
+/*          Admin         */
+/**************************/
+.WidgetPermissions table thead tr th,
+table#Users thead tr th,
+table#Groups thead tr th,
+table#Roles thead tr th,
+table#CustomerUsers thead tr th,
+table#Customers thead tr th,
+table#Customer thead tr th,
+table[id='Customer User'] thead tr th,
+table#Group thead tr th,
+table#Group thead tr:nth-child(2) th,
+table#AlwaysGroups thead tr th {
+    width: 100px;
+}
+
+.WidgetPermissions table thead tr th:first-child,
+table#Users thead tr th:first-child,
+table#Groups thead tr th:first-child,
+table#Roles thead tr th:first-child,
+table#CustomerUsers thead tr th:first-child,
+table#Customers thead tr th:first-child,
+table#Customer thead tr th:first-child,
+table[id='Customer User'] thead tr th:first-child,
+table#Group thead tr:first-child th:first-child,
+table#AlwaysGroups thead tr th:first-child {
+    width: auto;
+}
+
+.LinkTable .Content .DataTable tr td {
+    border: none;
+}
+
+/**
+* @subsection  MessageBox
+*/
+
+.MessageBox p, .MessageBox a {
+    font-size: var(--main-font-size);
+}
+
 
 } /* end @media */

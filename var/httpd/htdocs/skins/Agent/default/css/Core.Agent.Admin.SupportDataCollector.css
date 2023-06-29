@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -14,50 +14,73 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @section     General
  */
 
-.AdminSupportDataCollector .CheckResults > li {
+/*.AdminSupportDataCollector .CheckResults > li {
     margin-bottom: 10px;
 }
 
 .AdminSupportDataCollector .CheckResults > li:last-child {
     margin-bottom: 0px;
+}*/
+
+.CheckResults {
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-lg);
 }
 
 .AdminSupportDataCollector .CheckResults > li > p {
-    padding: 3px 5px;
-    margin: 2px 0px 2px 28px;
+    padding: var(--padding-xs) var(--padding-sm);
+    margin: var(--margin-sm) 0 0 45px;
     display: inline-block;
+    border-radius: var(--border-radius-xxs);
+    font-weight: var(--medium);
+    color: var(--black);
+}
+
+.AdminSupportDataCollector .WidgetSimple .CheckResults > li > p:last-child {
+    padding-bottom: var(--padding-xs);
 }
 
 .AdminSupportDataCollector textarea.Value {
+    background: var(--gray-light-semi);
+    color: var(--gray-darker);
     min-height: 150px;
-    width: 96%;
-    line-height: 140%;
-    margin: 5px 0px 5px 28px;
+    min-width: calc(100% - 45px);
+    max-width: calc(100% - 45px);
+    line-height: 300%;
+    margin: var(--margin-sm) 0 0 45px;
+    white-space: pre;
 }
 
 .DialogMessage {
-    padding: 10px;
+    /*padding: 10px;
     width: 350px;
-    min-height: 150px;
+    min-height: 150px;*/
     max-height: 400px;
     overflow-y: auto;
 }
 
 .AdminSupportDataCollector .CheckResults > li h3.Heading {
     position: relative;
-    padding-left: 28px;
-    font-size: 13px;
-    margin-bottom: 0px;
+    font-size: var(--font-size-sm);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md);
+    color: var(--black);
+    letter-spacing: .1px;
+    line-height: 24px;
 }
 
 .AdminSupportDataCollector .CheckResults > li.CheckResultUnknown span.Value,
 .AdminSupportDataCollector .CheckResults > li.CheckResultOK span.Value,
 .AdminSupportDataCollector .CheckResults > li.CheckResultInformation span.Value {
-    color: #888;
+    color: var(--gray-dark-semi);
+    margin-left: -10px;
 }
 
 .AdminSupportDataCollector .CheckResults > li.CheckResultOK > p {
-    color: #888;
+    color: var(--gray-dark-semi);
 }
 
 .AdminSupportDataCollector .CheckResults > li > p:empty {
@@ -65,15 +88,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .AdminSupportDataCollector .CheckResults > li.CheckResultOK:hover > p {
-    color: #000;
+    color: var(--black);
 }
 
 .AdminSupportDataCollector .CheckResultProblem p {
-    background-color: #EDD3D3;
+    background-color: #FC5A5A30;
 }
 
 .AdminSupportDataCollector .CheckResultWarning p {
-    background-color: #F4EBCD;
+    background-color: #FFC54230;
 }
 
 /**
@@ -84,26 +107,35 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     margin-top: 10px;
 }
 
-.AdminSupportDataCollector .CheckResults > li table {
-    margin: 10px 0px 10px 28px;
-    width: 96%;
+.AdminSupportDataCollector .CheckResults .TableList {
+    margin-left: 45px;
+    margin-top: var(--margin-sm);
+    width: calc(100% - 45px);
 }
 
 .AdminSupportDataCollector .CheckResults > li table td.Status {
     width: 27px;
 }
 
-.AdminSupportDataCollector .CheckResults > li table.SupportDataTable {
+.AdminSupportDataCollector .CheckResults > li table.SupportDataTable,
+.AdminSupportDataCollector .CheckResults > li table.SupportDataTable thead {
     margin: 0;
     width: 100%;
+    border: 0;
+    border-radius: 0;
+}
+
+.AdminSupportDataCollector .CheckResults > li table.SupportDataTable th {
+    border-top: 0;
 }
 
 .AdminSupportDataCollector .CheckResults > li .SupportDataTableScrollbar {
-    max-height: 400px;
+    max-height: 560px;
     overflow-y: auto;
-    display: block;
-    margin: 10px 0px 10px 28px;
-    width: 96%;
+    margin-top: var(--margin-sm);
+    margin-left: 45px;
+    border-radius: var(--border-radius-sm);
+    border: var(--border-width) var(--border-solid) var(--border-color);
 }
 
 
@@ -111,11 +143,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @subsection  Flag
  */
 
-.AdminSupportDataCollector .Flag {
+/*.AdminSupportDataCollector .Flag {
     position: absolute;
     left: 0px;
     top: 2px;
-}
+}*/
 
 .AdminSupportDataCollector .DataTable .Flag {
     position: static;
@@ -142,22 +174,37 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     background-color: #ff0000;
 }
 
-#SupportBundleOptionsDialog legend {
-    color: #333333;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-    display: block;
-    width: 100%;
-}
-
-#SupportBundleOptionsDialog fieldset {
-    margin-bottom: 15px;
-}
 #SupportBundleOptionsDialog {
-    width: 560px;
-    padding-right: 20px;
+    /*width: 560px;*/
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-sm);
 }
 
+#SupportBundleOptionsDialog fieldset .Field {
+    gap:var(--gap-xl);
+    flex-flow: row;
+}
 
+/**
+ * @IntroInstallMsg
+ */
+
+ .IntroInstallMsg {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: .2px;
+    line-height: normal;
+    color: var(--black);
+    font-weight: var(--medium);
+    gap: var(--gap-sm);
+ }
+
+ .IntroInstallMsg strong {
+    font-weight: var(--semi-bold);
+    padding: 0;
+ }
 
 } /* end @media */

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,10 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
         my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # Enable ticket watcher feature.
         $HelperObject->ConfigSettingChange(
@@ -90,7 +93,11 @@ $Selenium->RunTest(
         my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', $Groups[0]->{GroupName} ],
         );
-
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
         $Selenium->Login(
             Type     => 'Agent',
             User     => $TestUserLogin,
@@ -121,7 +128,7 @@ $Selenium->RunTest(
         # Refresh dashboard page.
         $Selenium->VerifiedRefresh();
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Go to AgentTicketZoom and check watcher feature - subscribe ticket to watch it
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -230,7 +237,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
 
     }
 );

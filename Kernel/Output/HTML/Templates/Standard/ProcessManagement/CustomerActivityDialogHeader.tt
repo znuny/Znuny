@@ -1,11 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Common::Origin)
 
 <div id="MainBox" class="TicketZoom ARIARoleMain">
     <div class="ContentColumn">
@@ -14,6 +15,7 @@
             <input type="hidden" name="Subaction" value="[% Data.Subaction | html %]"/>
             <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
             <input type="hidden" ID="ProcessEntityID" name="ProcessEntityID" value="[% Data.ProcessEntityID | html %]"/>
+            <input type="hidden" name="ActivityEntityID" value="[% Data.ActivityEntityID | html %]"/>
             <input type="hidden" name="ActivityDialogEntityID" value="[% Data.ActivityDialogEntityID | html %]"/>
             <input type="hidden" name="Expand" id="Expand" value=""/>
             <input type="hidden" name="AJAXDialog" id="AJAXDialog" value="[% Data.AJAXDialog | html %]"/>
@@ -29,20 +31,21 @@
 [% RenderBlockEnd("DescriptionShort") %]
                     </h1>
 [% RenderBlockStart("DescriptionLong") %]
-                    <p class="DescriptionLong">[% Translate(Data.DescriptionLong) | html %]</p>
+                        <p class="DescriptionLong">[% Translate(Data.DescriptionLong) | html %]</p>
 [% RenderBlockEnd("DescriptionLong") %]
 [% RenderBlockStart("CancelLink") %]
                     <p>
-                        <a class="CancelClosePopup" href="#">[% Translate("Cancel & close") | html %]</a>
+                        <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">[% Translate("Cancel") | html %]</a>
                     </p>
 [% RenderBlockEnd("CancelLink") %]
                 </div>
 [% RenderBlockEnd("Header") %]
+
                 <div class="Content">
                     <fieldset class="TableLike">
 [% RenderBlockStart("DescriptionShortAlt") %]
-                        <h2>[% Data.DescriptionShort | html %]</h2>
+                            <h2>[% Data.DescriptionShort | html %]</h2>
 [% RenderBlockEnd("DescriptionShortAlt") %]
 [% RenderBlockStart("DescriptionLongAlt") %]
-                        <p class="Description DescriptionLong">[% Data.DescriptionLong | html %]</p>
+                            <p class="Description DescriptionLong">[% Data.DescriptionLong | html %]</p>
 [% RenderBlockEnd("DescriptionLongAlt") %]

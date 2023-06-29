@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -11,9 +11,7 @@
 
     <div class="Header">
         <h1>[% Translate("View Email Plain Text for %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %] &mdash; [% Data.Title | html %]</h1>
-        <p>
-            <a class="CancelClosePopup" href="#">[% Translate("Close this dialog") | html %]</a>
-        </p>
+        <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">[% Translate("Cancel") | html %]</a>
     </div>
 
     <div class="Content">
@@ -23,7 +21,7 @@
                 <h2>
                     [% Translate("Plain") | html %] [% Config("Ticket::Hook") | html %][% Config("Ticket::HookDivider") | html %][% Data.TicketNumber | html %] / TicketID: [% Data.TicketID | html %] / ArticleID: [% Data.ArticleID | html %]
                     -
-                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Download;ArticleID=[% Data.ArticleID | uri %];TicketID=[% Data.TicketID | uri %]">
+                    <a class="table-actions-button" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Download;ArticleID=[% Data.ArticleID | uri %];TicketID=[% Data.TicketID | uri %]">
                         [% Translate("Download this email") | html %]
                     </a>
                 </h2>

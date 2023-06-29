@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -55,7 +55,7 @@ The values are taken from a backed up ZZZAAuto.pm which contains the old config.
 
     # changed 'Znuny4OTRSDatabaseBackend###Export###CSV###Separator' to 'DBCRUD###Export###CSV###Separator'
     my $Success = $SysConfigMigrationObject->MigrateSysConfigSettings(
-        FilePath  => '/opt/otrs/Kernel/Config/Files/ZZZAAuto.pm',
+        FilePath  => '/opt/znuny/Kernel/Config/Files/ZZZAAuto.pm',
         FileClass => 'Kernel::Config::Files::ZZZAAuto',
         Data      => {
             'Znuny4OTRSDatabaseBackend###Export###CSV###Separator' => {

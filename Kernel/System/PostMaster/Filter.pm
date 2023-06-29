@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -82,22 +82,22 @@ add a filter
             {
                 Key   => 'Subject',
                 Value => '^ADV: 123',
-        },
-            ...
+            },
+            # ...
         ],
         Not = [
             {
                 Key   => 'Subject',
                 Value => '1',
-        },
-            ...
+            },
+            # ...
         ],
         Set = [
             {
                 Key   => 'X-OTRS-Queue',
                 Value => 'Some::Queue',
             },
-            ...
+            # ...
         ],
     );
 

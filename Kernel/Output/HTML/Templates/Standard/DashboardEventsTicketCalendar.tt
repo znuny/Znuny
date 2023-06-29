@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -12,12 +12,10 @@
 [% RenderBlockEnd("CalendarDiv") %]
 
 <div class="Hidden" >
-
 [% RenderBlockStart("EventInfo") %]
     <div class="EventDetails" id="event-content-[% Data.ID | html %]">
         <h3>[% Translate("Event Information") | html %]</h3>
         <fieldset class="TableLike">
-
 [% RenderBlockStart("EventTicketFieldContainer") %]
             <div class="SpacingTopSmall"></div>
             <h4>[% Translate("Ticket fields") | html %]</h4>
@@ -28,7 +26,6 @@
             <div class="Clear"></div>
 [% RenderBlockEnd("CalendarEventInfoTicketFieldElement") %]
 [% RenderBlockEnd("EventTicketFieldContainer") %]
-
 [% RenderBlockStart("EventDynamicFieldContainer") %]
             <div class="SpacingTopSmall"></div>
             <h4>[% Translate("Dynamic fields") | html %]</h4>
@@ -42,5 +39,4 @@
         </fieldset>
     </div>
 [% RenderBlockEnd("EventInfo") %]
-
 </div>

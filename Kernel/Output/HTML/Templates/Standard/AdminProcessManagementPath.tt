@@ -1,24 +1,24 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="LayoutPopup ARIARoleMain">
+<div class="LayoutPopup ARIARoleMain AdminManagement">
     <div class="Header">
         <h1>[% Translate(Data.Title) | html %]</h1>
 [% RenderBlockStart("ClosePopup") %]
-        <p>
-            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ClosePopup" class="ClosePopup">[% Translate("Cancel & close") | html %]</a>
-        </p>
+        <div>
+            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ClosePopup" class="ClosePopup btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+        </div>
 [% RenderBlockEnd("ClosePopup") %]
 [% RenderBlockStart("GoBack") %]
-        <p>
-            <a class="GoBack" href="[% Env("Baselink") %]Action=[% Data.Action | uri %];Subaction=[% Data.Subaction | uri %];ID=[% Data.ID | uri %];EntityID=[% Data.EntityID | uri %]">[% Translate("Go Back") | html %]</a>
-        </p>
+        <div>
+            <a class="GoBack btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=[% Data.Action | uri %];Subaction=[% Data.Subaction | uri %];ID=[% Data.ID | uri %];EntityID=[% Data.EntityID | uri %]">[% Translate("Cancel") | html %]</a>
+        </div>
 [% RenderBlockEnd("GoBack") %]
     </div>
     <div class="Content">
@@ -47,14 +47,18 @@
                     </div>
                     <div class="Content">
                         <ul class="Path">
-                            <li id="StartActivity" class="StartActivity"></li>
+                            <li id="StartActivity" class="StartActivity">
+                            </li>
+                            <i class="fa fa-user"></i>
                             <li class="Transition">
                                 [% Data.Transition %]
                                 <span></span>
                             </li>
-                            <li id="EndActivity" class="EndActivity"></li>
+                            <li id="EndActivity" class="EndActivity">
+                            </li>
+                            <i class="fa fa-user"></i>
                         </ul>
-                        <div id="EditPath"><a href="#" data-action="AdminProcessManagementTransition" data-subaction="TransitionEdit" class="AsPopup_Redirect Edit_Confirm PopupType_Transition">[% Translate("Edit this transition") | html %]</a></div>
+                        <div id="EditPath"><a href="#" data-action="AdminProcessManagementTransition" data-subaction="TransitionEdit" class="AsPopup_Redirect Edit_Confirm PopupType_Transition btn-main btn-primary btn-width-md">[% Translate("Edit this transition") | html %]</a></div>
                     </div>
                 </div>
 
@@ -72,46 +76,58 @@
                                 [% Translate("Ordering the elements within the list is also possible by drag 'n' drop.") | html %]
                             </p>
                         </div>
-                        <div class="Size1of2">
-                            <input type="text" id="FilterAvailableTransitionActions" class="W75pc" name="FilterAvailableTransitionActions" value="" title="[% Translate("Filter available Transition Actions") | html %]" placeholder="[% Translate("Filter available Transition Actions") | html %]..." />
-                            <ul class="Tablelike W90pc SpacingTop">
-                                <li class="Header">
-                                    [% Translate("Available Transition Actions") | html %]
-                                </li>
-                            </ul>
-                            <ul class="AllocationList Tablelike W90pc" id="AvailableTransitionActions">
+
+                        <div class="modal-col-container modal-col-wrapper">
+                            <div class="Size1of2 modal-col1">
+                                <a name="ProcessID" id="ProcessID" data-processid="[% Data.ProcessID %]"></a>
+                                <ul class="Tablelike SpacingTop">
+                                    <li class="Header">
+                                        [% Translate("Available Transition Actions") | html %]
+                                    </li>
+                                </ul>
+                                <div class="FilterInputContainer">
+                                    <input type="text" id="FilterAvailableTransitionActions" name="FilterAvailableTransitionActions" value="" title="[% Translate("Filter available Transition Actions") | html %]" placeholder="[% Translate("Filter available Transition Actions") | html %]..." />
+                                    <input type="checkbox" checked id="TransitionActionScopeFilter" class="ScopeFilter" data-scope-filter="TransitionAction" name="TransitionActionScopeFilter"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Transition Actions')) | html %]"></i>
+                                </div>
+                                <ul class="AllocationList Tablelike" id="AvailableTransitionActions">
 [% RenderBlockStart("AvailableTransitionActionRow") %]
-                                <li data-id="[% Data.ID | html %]" id="[% Data.EntityID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]">
-                                    [% Data.Name | html %] ([% Data.EntityID | html %])
-                                    <span class="Functions">
-                                        <a href="#" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-action="AdminProcessManagementTransitionAction" data-subaction="TransitionActionEdit" class="AsPopup_Redirect Edit_Confirm PopupType_TransitionAction Icon" title="[% Translate("Edit") | html %]">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </span>
-                                </li>
+                                <li data-id="[% Data.ID | html %]" id="[% Data.EntityID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]" data-entity-type="TransitionAction" data-scope="[% Data.Scope %]" data-scope-entity-id="[% Data.ScopeEntityID %]">
+                                    <!-- <li data-id="[% Data.ID | html %]" id="[% Data.EntityID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]"> -->
+                                        [% Data.Name | html %] ([% Data.EntityID | html %])
+                                        <span class="Functions">
+                                            <a href="#" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-action="AdminProcessManagementTransitionAction" data-subaction="TransitionActionEdit" class="AsPopup_Redirect Edit_Confirm PopupType_TransitionAction Icon icon-hover" title="[% Translate("Edit") | html %]">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </span>
+                                    </li>
 [% RenderBlockEnd("AvailableTransitionActionRow") %]
-                            </ul>
-                            <div class="SpacingTop">
-                                <a href="#" data-entity="" data-id="" data-action="AdminProcessManagementTransitionAction" data-subaction="TransitionActionNew" class="CallForAction AsPopup_Redirect Edit_Confirm"><span>[% Translate("Create New Transition Action") | html %]</span></a>
+                                </ul>
+
+                                <div class="SaveButtons">
+                                    <a href="#" data-entity="" data-id="" data-action="AdminProcessManagementTransitionAction" data-subaction="TransitionActionNew" class="CallForAction AsPopup_Redirect Edit_Confirm btn-main btn-primary btn-width-xl"><span>[% Translate("Create New Transition Action") | html %]</span></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="Size1of2">
-                            <ul class="Tablelike W90pc">
-                                <li class="Header">
-                                    [% Translate("Assigned Transition Actions") | html %]
-                                </li>
-                            </ul>
-                            <ul class="AllocationList Tablelike W90pc" id="AssignedTransitionActions">
-                            </ul>
+                            <div class="Size1of2 modal-col2">
+                                <ul class="Tablelike">
+                                    <li class="Header">
+                                        [% Translate("Assigned Transition Actions") | html %]
+                                    </li>
+                                </ul>
+                                <div class="FilterInputContainer">
+                                    <input type="text" id="FilterAssignedTransitionActions" name="FilterAssignedTransitionActions" value="" title="[% Translate("Filter assigned Transition Actions") | html %]" placeholder="[% Translate("Filter assigned Transition Actions") | html %]..." />
+                                </div>
+                                <ul class="AllocationList Tablelike" id="AssignedTransitionActions">
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-<!-- Invisible submit button to allow form submit on pressing enter/return without javascript -->
+                <!-- Invisible submit button to allow form submit on pressing enter/return without javascript -->
                 <input type="image" width="0" height="0" style="display: none;" />
             </form>
         </div>
     </div>
     <div class="Footer">
-        <button class="Primary CallForAction" id="Submit" title="[% Translate("Save") | html %]" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+        <button class="Primary CallForAction btn-main btn-primary btn-width-md" id="Submit" title="[% Translate("Save") | html %]" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
     </div>
 </div>

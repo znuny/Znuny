@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -20,33 +20,36 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .InputField_Container,
 .InputField_InputContainer,
-.InputField_ListContainer,
 .InputField_Container div,
 .InputField_InputContainer div,
-.InputField_ListContainer div,
 fieldset.Columns .Column .InputField_Container,
 fieldset.Columns .Column .InputField_InputContainer,
-fieldset.Columns .Column .InputField_ListContainer,
 fieldset.Columns .Column .InputField_Container div,
-fieldset.Columns .Column .InputField_InputContainer div,
-fieldset.Columns .Column .InputField_ListContainer div {
+fieldset.Columns .Column .InputField_InputContainer div {
     padding: 0;
     overflow: visible;
+    width: 100%;
+}
+
+.InputField_InputContainer,
+.InputField_InputContainer div,
+fieldset.Columns .Column .InputField_InputContainer,
+fieldset.Columns .Column .InputField_InputContainer div {
+    display: flex;
+    width: 100%;
 }
 
 fieldset div.InputField_Container:first-child,
 fieldset div.InputField_InputContainer:first-child,
-fieldset div.InputField_ListContainer:first-child,
 .InputField_Container div:first-child,
-.InputField_InputContainer div:first-child,
-.InputField_ListContainer div:first-child {
+.InputField_InputContainer div:first-child {
     border-top: none;
     padding-top: 0;
 }
 
 div.InputField_Container {
     position: static;
-    display: inline-block;
+    display: flex;
 }
 
 div.InputField_InputContainer {
@@ -54,6 +57,16 @@ div.InputField_InputContainer {
     display: inline-block;
     line-height: 11px;
     text-shadow: none;
+}
+
+.InputField_InputContainer i.fa.fa-caret-down {
+    position: absolute;
+    right: 12px;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 100;
 }
 
 .InputField_Search::-ms-clear {
@@ -83,9 +96,14 @@ div.InputField_InputContainer {
 
 a.InputField_Action {
     position: absolute;
-    display: block;
     color: #000;
-    top: 5px;
+    top: 4px;
+    height: 75%;
+    width: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 a.InputField_Action:hover {
@@ -93,11 +111,19 @@ a.InputField_Action:hover {
 }
 
 div.InputField_Selection {
-    display: none;
     position: absolute;
     top: 4px;
-    height: 17px;
+    height: 75%;
+    width: auto;
     line-height: 11px;
+    text-shadow: none;
+    border-radius: 6px;
+    padding: 6px var(--padding-xs);
+    z-index: 50;
+    background: var(--pill-color-selected);
+    transition: var(--main-transition);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    align-items: center;
 }
 
 div.InputField_Selection div {
@@ -106,26 +132,40 @@ div.InputField_Selection div {
 }
 
 div.InputField_Selection div.Text {
-    background: #ddd;
-    padding: 2px 4px !important;
+    background: transparent;
+    height: 100%;
+    padding: 0 var(--padding-xs);
+    line-height: 100%;
+    display: inline-flex;
+    align-items: center;
 }
 
 div.InputField_Selection div.Remove {
-    background: #bbb;
-    color: #fff;
+    width: auto;
+    color: var(--black);
     cursor: pointer;
 }
 
 .AlreadyDisabled div.InputField_Selection div.Text {
-    background: #f5f5f5;
     cursor: default;
 }
 
 
 div.InputField_Selection div.Remove a {
-    color: #fff;
+    color: var(--black);
+    background-color: transparent;
     padding: 2px 4px;
-    display: block;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+div.InputField_Selection div.Remove i {
+    font-size: var(--font-size-xs);
 }
 
 .AlreadyDisabled div.InputField_Selection div.Remove {
@@ -134,9 +174,15 @@ div.InputField_Selection div.Remove a {
 }
 
 div.InputField_More {
-    position: absolute;
     white-space: nowrap;
-    top: 6px;
+    position: absolute;
+    top: 4px;
+    height: 75%;
+    width: auto;
+    line-height: 11px;
+    text-shadow: none;
+    border-radius: 6px;
+    padding: 6px var(--padding-xs);
 }
 
 div.InputField_ListContainer {
@@ -144,50 +190,54 @@ div.InputField_ListContainer {
     z-index: 1000;
     display: none;
     text-shadow: none;
+    box-shadow: var(--menu-box-shadow);
+    background: var(--menu-bg);
+    border-radius: var(--border-radius-xs);
+    overflow: hidden;
 }
 
 div.InputField_TreeContainer {
-    background-color: #fff;
-    border: 1px solid #ccc;
+    border: 0;
     border-top: none;
-    max-height: 90px;
-    overflow-y: auto !important;
-    box-sizing: content-box;
+    overflow-y: auto;
+    box-sizing: border-box;
     line-height: 18px;
+    min-width: 75px;
 }
 
 .ExpandToTop div.InputField_TreeContainer {
-    border-top: 1px solid #ccc;
+    border-top: 0;
     border-bottom: none;
 }
 
 div.InputField_ToolbarContainer {
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-top: none;
     line-height: 21px;
-    box-sizing: content-box;
     min-height: 21px;
+    min-width: 275px;
+    background: var(--white);
+    box-sizing: border-box;
 }
 
-.div.InputField_ToolbarContainer ul {
-    width:100%;
+div.InputField_ToolbarContainer ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--padding-sm);
+    border-top: var(--border-width) var(--border-solid) var(--border-color);
 }
 
 div.InputField_ToolbarContainer ul li {
-    display: table-cell;
-    width: 1%;
-    text-align: center;
+    display: flex;
 }
 
-div.InputField_ToolbarContainer ul li:after {
+/* div.InputField_ToolbarContainer ul li:after {
     color: #bbb;
     content: "|";
     display: inline-block;
     float: right;
     cursor: default;
     width: 0;
-}
+} */
 
 div.InputField_ToolbarContainer ul li:last-child:after {
     display: none;
@@ -202,12 +252,12 @@ div.InputField_ToolbarContainer ul li:last-child:after {
 }
 
 div.InputField_ToolbarContainer ul li a {
-    color: #000;
     display: inline-block;
     width: 100%;
-    margin: 2px 0;
-    font-size: 11px;
-    line-height: 15px;
+    color: var(--black);
+    font-size: var(--font-size-sm);
+    line-height: 100%;
+    border-bottom: 2px solid transparent;
 }
 
 div.InputField_ToolbarContainer ul li a:hover {
@@ -220,21 +270,21 @@ div.InputField_ToolbarContainer ul li a:hover {
     font-weight: bold;
 }
 
-.InputField_FiltersList {
-    display: none;
-    background: #fff;
+.InputField_ListContainer .InputField_FiltersList {
+    display: flex;
+    gap: var(--gap-sm);
+    align-items: center;
+    background: var(--white);
+    padding: var(--padding-sm);
     white-space: nowrap;
-    border-top: 1px solid #ccc;
     z-index: 1500;
-    line-height: 1.5em;
     width: 100%;
-    font-size: 11px;
+    font-size: var(--main-font-size);
+    border-top: var(--border-width) var(--border-solid) var(--border-color);
 }
 
 .InputField_FiltersList span {
-    margin-right: 5px;
-    vertical-align: 15%;
-    cursor: default;
+    font-size: var(--font-size-sm);
 }
 
 .InputField_FiltersList input[disabled="disabled"] + span {
@@ -243,15 +293,34 @@ div.InputField_ToolbarContainer ul li a:hover {
 }
 
 /**
+ * @subsection  Select
+ */
+
+ form select {
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    background-color: var(--white);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    padding: var(--padding-xs) var(--padding-sm);
+    font-size: var(--font-size-sm);
+    color: var(--black);
+    border-radius: var(--border-radius-sm);
+    box-sizing: border-box;
+    line-height: var(--input-line-height);
+    transition: var(--main-transition);
+    height: 30px;
+}
+
+/**
  * @subsection  jsTree theme
  */
 .jstree-InputField {
-    font-size: 11px !important;
+    /* font-size: 11px !important;
     border: none !important;
     box-shadow: none !important;
     height: 100% !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0 !important; */
 }
 
 .jstree-InputField .jstree-node,
@@ -259,10 +328,24 @@ div.InputField_ToolbarContainer ul li a:hover {
 .jstree-InputField .jstree-container-ul {
     display: block;
     margin: 0;
-    padding: 0;
+    padding: var(--padding-sm);
     list-style-type: none;
     list-style-image: none;
+    text-align: left;
+    /*background-color: var(--white);*/
 }
+
+.jstree-InputField .jstree-container-ul .jstree-children {
+    padding: 0;
+}
+
+.jstree-InputField .jstree-container-ul .jstree-node.jstree-open {
+    padding-bottom: 0;
+}
+
+/* .jstree-InputField .jstree-container-ul:hover .jstree-node.jstree-open .jstree-wholerow .jstree-children .jstree-wholerow  {
+    background-color: var(--gray-light) !important;
+} */
 
 .jstree-InputField .jstree-node {
     white-space: nowrap;
@@ -391,31 +474,40 @@ div.InputField_ToolbarContainer ul li a:hover {
     cursor: pointer;
     position: absolute;
     left: 0;
+    top: 0;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    height: 100%;
+    width: 100%;
+    border-radius: var(--border-radius-xs);
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-clicked {
-    background-color: #ddd;
+    background-color: var(--primary-color);
+}
+
+.jstree-InputField .jstree-clicked, 
+.jstree-InputField .jstree-anchor.jstree-clicked {
+    color: var(--white);
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow:hover,
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-hovered,
 .jstree-InputField .jstree-focused > .jstree-wholerow {
-    background-color: #f92;
+    background-color: var(--gray-light);
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-clicked:hover,
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-clicked.jstree-wholerow-hovered,
 .jstree-InputField .jstree-focused > .jstree-wholerow-clicked {
-    background-color: #f72;
+    background-color: var(--gray-light);
 }
 
 .jstree-InputField .Disabled > .jstree-wholerow:hover,
 .jstree-InputField .Disabled > .jstree-wholerow-hovered {
-    background-color: #eee;
+    background-color: var(--gray-light);
     cursor: default;
 }
 
@@ -611,29 +703,142 @@ div.InputField_ToolbarContainer ul li a:hover {
 /**
  * @subsection  jsTree theme - No Tree variant
  */
-.jstree-InputField-NoTree .jstree-node {
-    min-height: 18px;
-    line-height: 18px;
-    margin-left: 2px;
+ .jstree-InputField-NoTree .jstree-node,
+ .jstree-InputField .jstree-node {
+    position: relative;
+    min-height: auto;
+    line-height: 1;
+    margin-left: 0;
     min-width: 18px;
+    box-sizing: border-box;
+    border-bottom: 2px solid transparent;
 }
 
-.jstree-InputField-NoTree .jstree-anchor {
+.jstree-InputField-NoTree .jstree-anchor,
+.jstree-InputField .jstree-anchor {
     height: 18px;
-    line-height: 19px;
-    overflow-y: hidden;
+    line-height: 18px;
 }
 
-.jstree-InputField-NoTree .jstree-icon {
+.jstree-InputField-NoTree .jstree-icon,
+.jstree-InputField .jstree-icon {
     display: none;
 }
 
-.jstree-InputField-NoTree.jstree-rtl .jstree-node {
+.jstree-InputField-NoTree.jstree-rtl .jstree-node,
+.jstree-InputField.jstree-rtl .jstree-node {
     margin-right: 2px;
 }
 
-.jstree-InputField-NoTree .jstree-wholerow {
+.jstree-InputField-NoTree .jstree-wholerow,
+.jstree-InputField .jstree-wholerow {
     height: 18px;
 }
+
+/**
+ * @subsection  Checkbox Styles
+ */
+
+ input[type=checkbox]{
+    appearance: none; -webkit-appearance: none;
+    position: relative;
+    display: block;
+    width: 16px; 
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+    border: var(--border-width) solid #ccc; 
+    background: transparent;
+    border-radius: 3px;
+    z-index: 100;
+    background: var(--white);
+}
+
+input[type=checkbox]:hover {
+    border-color: var(--success-color);
+}
+  
+input[type=checkbox]:checked {
+    background:var(--success-color);
+    border: 2px solid var(--success-color); 
+}
+
+input[type=checkbox]:checked + label {
+    color: var(--black);
+}
+
+input[type=checkbox]::after {
+    position: absolute;
+    z-index: 10000;
+    content: '';
+    transform: rotate(45deg);
+    height: 8px;
+    width: 4px;
+    border-bottom: 2px solid transparent;
+    border-right: 2px solid transparent;
+    left: 3px;
+    top: 0px;
+    transition: var(--main-transition);
+  }
+
+input[type=checkbox]:checked::after{
+    display: inline-block;
+    border-bottom: 2px solid var(--white);
+    border-right: 2px solid var(--white);
+}
+
+/******************************/
+/*        Radio Buttons       */
+
+.radio-field-wrapper {
+    display: flex;
+    gap: var(--gap-sm);
+    align-content: center;
+    align-items: center;
+}
+
+input[type=radio]{
+    appearance: none; -webkit-appearance: none;
+    position: relative;
+    display: block;
+    width: 16px; 
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+    border: var(--border-width) solid #ccc; 
+    background: transparent;
+    border-radius: var(--border-radius-xl);
+    z-index: 100;
+    background: var(--white);
+}
+
+input[type=radio]:checked {
+    border: 2px solid var(--success-color);
+}
+
+.radio-input:checked + .radio-label {
+    color: var(--black) !important;
+}
+
+input[type=radio]::after {
+    position: absolute;
+    z-index: 10000;
+    content: '';
+    height: 8px;
+    width: 8px;
+    top: 2px;
+    left: 0; right: 0; margin: 0 auto;
+    transition: var(--main-transition);
+    display: none;
+    background:var(--success-color);
+    border-radius: var(--border-radius-xl);
+}
+
+input[type=radio]:checked::after {
+    display: inline-block;
+}
+
 
 } /* end @media */

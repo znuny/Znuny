@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -14,17 +14,18 @@ use utf8;
 use vars (qw($Self));
 use Time::HiRes qw(sleep);
 
-# get needed objects
-my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-my $Selenium     = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
 
+        my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
         my $WebPath = $ConfigObject->Get('Frontend::WebPath');
 
-        my @Files = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
-            Directory => $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/httpd/htdocs/js/test',
+        my @Files = $MainObject->DirectoryRead(
+            Directory => $ConfigObject->Get('Home') . '/var/httpd/htdocs/js/test',
             Filter    => "*.html",
         );
 

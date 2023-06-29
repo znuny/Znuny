@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -194,7 +194,7 @@ sub Run {
         if ($DontKnowSettings) {
             $Output .= $LayoutObject->Notify(
                 Info => $LayoutObject->{LanguageObject}->Translate(
-                    "Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the OTRS log for more information."
+                    "Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information."
                 ),
                 Link => $LayoutObject->{Baselink} . 'Action=AdminLog',
             );
@@ -203,11 +203,10 @@ sub Run {
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AdminSystemConfigurationDeployment',
             Data         => {
-                SettingList             => \@Settings,
-                AdvancedMode            => $AdvancedMode,
-                DeploymentRestore       => $DeploymentRestore,
-                Readonly                => 1,
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
+                SettingList       => \@Settings,
+                AdvancedMode      => $AdvancedMode,
+                DeploymentRestore => $DeploymentRestore,
+                Readonly          => 1,
             },
         );
 

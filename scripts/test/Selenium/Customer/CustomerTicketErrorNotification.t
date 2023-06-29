@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,9 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $Queue        = $Kernel::OM->Get('Kernel::System::Queue');
-        my $Random       = $HelperObject->GetRandomID();
+        my $HelperObject        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $Queue               = $Kernel::OM->Get('Kernel::System::Queue');
+        my $ConfigObject        = $Kernel::OM->Get('Kernel::Config');
+        my $GroupObject         = $Kernel::OM->Get('Kernel::System::Group');
+        my $CustomerGroupObject = $Kernel::OM->Get('Kernel::System::CustomerGroup');
+
+        my $Random = $HelperObject->GetRandomID();
 
         # Do not check RichText.
         $HelperObject->ConfigSettingChange(
@@ -59,7 +63,7 @@ $Selenium->RunTest(
 
         # Create test group.
         my $GroupName = 'Group' . $Random;
-        my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
+        my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
             UserID  => 1,
@@ -97,7 +101,7 @@ $Selenium->RunTest(
         ) || die "Did not get test customer user";
 
         # Set user permissions to not include writing to test queue.
-        my $Success = $Kernel::OM->Get('Kernel::System::CustomerGroup')->GroupMemberAdd(
+        my $Success = $CustomerGroupObject->GroupMemberAdd(
             GID        => $GroupID,
             UID        => $TestCustomerUserLogin,
             Permission => {
@@ -118,7 +122,7 @@ $Selenium->RunTest(
             Password => $TestCustomerUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to CustomerTicketMessage screen.
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketMessage");

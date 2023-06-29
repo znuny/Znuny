@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -33,8 +33,8 @@ sub Run {
     my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
 
     NEEDED:
-    for my $Needed (qw( Data Event Config )) {
-        next NEEDED if $Param{$Needed};
+    for my $Needed (qw( ModuleName UseHistoryBackend Event Data Config UserID )) {
+        next NEEDED if defined $Param{$Needed};
 
         $LogObject->Log(
             Priority => 'error',

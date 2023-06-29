@@ -1,11 +1,11 @@
 // --
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
 // did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 // --
-// nofilter(TidyAll::Plugin::OTRS::JavaScript::ESLint)
+// nofilter(TidyAll::Plugin::Znuny::JavaScript::ESLint)
 'use strict';
 
 var Znuny  = Znuny || {};
@@ -328,7 +328,7 @@ Znuny.Form.Input = (function (TargetNS) {
                     if (Value.length === 0) return true;
 
                     // only get selected customers if option is set
-                    if (Options.Selected && !$(Element).siblings('.CustomerTicketRadio').prop('checked')) return true;
+                    if (Options.Selected && !$(Element).siblings('.RadioRound').prop('checked')) return true;
 
                     Result.push(Value);
                 });
@@ -463,7 +463,7 @@ Znuny.Form.Input = (function (TargetNS) {
 
                     if (DateStructure[Suffix].toString().length < 2) {
                         DateStructure[Suffix] = '0' + DateStructure[ Suffix ];
-                    };
+                    }
                 });
 
                 // 2020-11-25 14:22:00
@@ -1175,18 +1175,18 @@ Znuny.Form.Input = (function (TargetNS) {
         }
 
         if (Readonly) {
-            $('#' + FieldID).prop('readonly', true);
+            $('#' + FieldID).prop('readonly', true).attr('tabindex', '-1');
 
             if (Type == 'select'){
-                $('#' + FieldID + '_Search').prop('readonly', true);
+                $('#' + FieldID + '_Search').prop('readonly', true).attr('tabindex', '-1');
                 $('#' + FieldID + '_Search').next().find('.Remove').remove();
             }
         }
         else {
-            $('#' + FieldID).prop('readonly', false);
+            $('#' + FieldID).prop('readonly', false).attr('tabindex', '0');
 
             if (Type == 'select'){
-                $('#' + FieldID + '_Search').prop('readonly', false);
+                $('#' + FieldID + '_Search').prop('readonly', false).attr('tabindex', '0');
             }
         }
 
@@ -1428,6 +1428,7 @@ Znuny.Form.Input = (function (TargetNS) {
                 'change.PendingStateDateTimeSelectionToggle',
                 function () {
                     var SelectedStateID = $(this).val(),
+                        $ParentField,
                         PendingStateIDsFound = [];
 
                     PendingStateIDsFound = jQuery.grep(
@@ -1438,13 +1439,14 @@ Znuny.Form.Input = (function (TargetNS) {
                     );
 
                     if (PendingStateIDsFound.length) {
-                        $('#Month, #PendingTimeMonth').parent().prev().show();
-                        $('#Month, #PendingTimeMonth').parent().show();
+                        $('#Month, #PendingTimeMonth').closest('div.Field').parent().show();
                         return;
                     }
 
-                    $('#Month, #PendingTimeMonth').parent().prev().hide();
-                    $('#Month, #PendingTimeMonth').parent().hide();
+                    $ParentField = $('#Month, #PendingTimeMonth').closest('div.Field').parent();
+                    if ( $ParentField.is("div") ) {
+                        $ParentField.hide();
+                    }
                 }
             )
             .trigger('change.PendingStateDateTimeSelectionToggle');
@@ -1453,6 +1455,10 @@ Znuny.Form.Input = (function (TargetNS) {
     TargetNS.Init = function () {
         InitDynamicFieldDateTimeAutoCheckboxSet();
         InitPendingStateDateTimeSelectionToggle();
+
+        Core.App.Subscribe('TicketProcess.Init.FirstActivityDialog.Load', function($Element) {
+            InitPendingStateDateTimeSelectionToggle();
+        });
     }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

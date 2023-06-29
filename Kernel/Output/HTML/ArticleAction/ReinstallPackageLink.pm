@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -84,17 +84,12 @@ sub GetConfig {
         ChannelID => $Article{CommunicationChannelID},
     );
 
-    my $OTRSBusiness = $CommunicationChannel{PackageName} eq 'OTRSBusiness';
-
-    # Output either a link for OTRSBusiness or Package Manager screen.
     my %MenuItem = (
         ItemType    => 'Link',
-        Description => $OTRSBusiness
-        ? Translatable('Upgrade to OTRS Business Solution™')
-        : Translatable('Re-install Package'),
-        Name  => $OTRSBusiness ? Translatable('Upgrade')    : Translatable('Re-install'),
-        Link  => $OTRSBusiness ? 'Action=AdminOTRSBusiness' : 'Action=AdminPackageManager',
-        Class => $OTRSBusiness ? 'OTRSBusinessRequired'     : undef,
+        Description => Translatable('Re-install Package'),
+        Name        => Translatable('Re-install'),
+        Link        => 'Action=AdminPackageManager',
+        Class       => undef,
     );
 
     return ( \%MenuItem );

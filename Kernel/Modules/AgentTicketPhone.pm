@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,7 +8,7 @@
 # --
 
 package Kernel::Modules::AgentTicketPhone;
-## nofilter(TidyAll::Plugin::OTRS::Perl::DBObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::DBObject)
 
 use strict;
 use warnings;
@@ -45,6 +45,9 @@ sub new {
         $Self->{FormID} = $Kernel::OM->Get('Kernel::System::Web::UploadCache')->FormIDCreate();
     }
 
+    $Self->{IsITSMIncidentProblemManagementInstalled}
+        = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
+
     return $Self;
 }
 
@@ -62,7 +65,7 @@ sub Run {
         From Subject Body NextStateID TimeUnits
         Year Month Day Hour Minute
         NewResponsibleID ResponsibleAll OwnerAll TypeID ServiceID SLAID
-        StandardTemplateID FromChatID Dest
+        StandardTemplateID Dest
         )
         )
     {
@@ -144,6 +147,9 @@ sub Run {
     # get Dynamic fields form ParamObject
     my %DynamicFieldValues;
 
+    # ITSMIncidentProblemManagement: to store the reference to the dynamic field for the impact
+    my $ImpactDynamicFieldConfig;
+
     # get needed objects
     my $LayoutObject              = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
@@ -166,6 +172,12 @@ sub Run {
             ParamObject        => $ParamObject,
             LayoutObject       => $LayoutObject,
         );
+
+        if ( $Self->{IsITSMIncidentProblemManagementInstalled} && $DynamicFieldConfig->{Name} eq 'ITSMImpact' ) {
+
+            # store the reference to the impact field
+            $ImpactDynamicFieldConfig = $DynamicFieldConfig;
+        }
     }
 
     # convert dynamic field values into a structure for ACLs
@@ -179,6 +191,87 @@ sub Run {
     }
     $GetParam{DynamicField} = \%DynamicFieldACLParameters;
 
+    my %Service;
+
+    if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
+
+        # get needed stuff
+        $GetParam{DynamicField_ITSMCriticality} = $ParamObject->GetParam( Param => 'DynamicField_ITSMCriticality' );
+        $GetParam{DynamicField_ITSMImpact}      = $ParamObject->GetParam( Param => 'DynamicField_ITSMImpact' );
+        $GetParam{PriorityRC}                   = $ParamObject->GetParam( Param => 'PriorityRC' );
+        $GetParam{ElementChanged}               = $ParamObject->GetParam( Param => 'ElementChanged' ) || '';
+
+        # check if priority needs to be recalculated
+        if (
+            $GetParam{ElementChanged} eq 'ServiceID'
+            || $GetParam{ElementChanged} eq 'DynamicField_ITSMImpact'
+            || $GetParam{ElementChanged} eq 'DynamicField_ITSMCriticality'
+            )
+        {
+            $GetParam{PriorityRC} = 1;
+        }
+
+        # service was selected
+        if ( $GetParam{ServiceID} ) {
+
+            # get service
+            %Service = $Kernel::OM->Get('Kernel::System::Service')->ServiceGet(
+                ServiceID     => $GetParam{ServiceID},
+                IncidentState => $Config->{ShowIncidentState} || 0,
+                UserID        => $Self->{UserID},
+            );
+
+            if ( $GetParam{ElementChanged} eq 'ServiceID' ) {
+                $GetParam{DynamicField_ITSMCriticality} = $Service{Criticality};
+            }
+
+            # recalculate impact if impact is not set until now
+            if ( !$GetParam{DynamicField_ITSMImpact} && $GetParam{ElementChanged} ne 'DynamicField_ITSMImpact' ) {
+
+                # get default selection
+                my $DefaultSelection = $ImpactDynamicFieldConfig->{Config}->{DefaultValue};
+
+                if ($DefaultSelection) {
+
+                    # get default impact
+                    $GetParam{DynamicField_ITSMImpact} = $DefaultSelection;
+                    $GetParam{PriorityRC}              = 1;
+                }
+            }
+
+            # recalculate priority
+            if ( $GetParam{PriorityRC} && $GetParam{DynamicField_ITSMImpact} ) {
+
+                # get priority
+                $GetParam{PriorityID} = $Kernel::OM->Get('Kernel::System::ITSMCIPAllocate')->PriorityAllocationGet(
+                    Criticality => $GetParam{DynamicField_ITSMCriticality} || $Service{Criticality},
+                    Impact      => $GetParam{DynamicField_ITSMImpact},
+                );
+            }
+        }
+
+        # no service was selected
+        else {
+
+            # do not show the default selection
+            $ImpactDynamicFieldConfig->{Config}->{DefaultValue} = '';
+
+            # show only the empty selection
+            $ImpactDynamicFieldConfig->{Config}->{PossibleValues} = {};
+            $GetParam{DynamicField_ITSMImpact} = '';
+        }
+
+        # set the selected impact and criticality
+        $DynamicFieldValues{ITSMCriticality} = $GetParam{DynamicField_ITSMCriticality};
+        $DynamicFieldValues{ITSMImpact}      = $GetParam{DynamicField_ITSMImpact};
+
+        # Send config data to JS.
+        $LayoutObject->AddJSData(
+            Key   => $Self->{Action} . 'ShowIncidentState',
+            Value => $Config->{ShowIncidentState},
+        );
+    }
+
     # transform pending time, time stamp based on user time zone
     if (
         defined $GetParam{Year}
@@ -191,42 +284,6 @@ sub Run {
         %GetParam = $LayoutObject->TransformDateSelection(
             %GetParam,
         );
-    }
-
-    if ( $GetParam{FromChatID} ) {
-        if ( !$ConfigObject->Get('ChatEngine::Active') ) {
-            return $LayoutObject->FatalError(
-                Message => Translatable('Chat is not active.'),
-            );
-        }
-
-        # Ok, take the chat
-        my %ChatParticipant = $Kernel::OM->Get('Kernel::System::Chat')->ChatParticipantCheck(
-            ChatID        => $GetParam{FromChatID},
-            ChatterType   => 'User',
-            ChatterID     => $Self->{UserID},
-            ChatterActive => 1,
-        );
-
-        if ( !%ChatParticipant ) {
-            return $LayoutObject->FatalError(
-                Message => Translatable('No permission.'),
-            );
-        }
-
-        # Get permissions
-        my $PermissionLevel = $Kernel::OM->Get('Kernel::System::Chat')->ChatPermissionLevelGet(
-            ChatID => $GetParam{FromChatID},
-            UserID => $Self->{UserID},
-        );
-
-        # Check if observer
-        if ( $PermissionLevel ne 'Owner' && $PermissionLevel ne 'Participant' ) {
-            return $LayoutObject->FatalError(
-                Message => Translatable('No permission.'),
-                Comment => $PermissionLevel,
-            );
-        }
     }
 
     if ( !$Self->{Subaction} || $Self->{Subaction} eq 'Created' ) {
@@ -462,7 +519,7 @@ sub Run {
                 for my $UserLogin ( sort keys %List ) {
 
                     # Set right one if there is more than one customer user with the same email address.
-                    if ( $Phrase && $List{$UserLogin} =~ /$Phrase/ ) {
+                    if ( $Phrase && $List{$UserLogin} =~ m{\Q$Phrase\E} ) {
                         $CustomerKey = $UserLogin;
                     }
                 }
@@ -789,7 +846,6 @@ sub Run {
             CustomerData => \%CustomerData,
             Attachments  => \@Attachments,
             LinkTicketID => $GetParam{LinkTicketID} || '',
-            FromChatID   => $GetParam{FromChatID} || '',
             %SplitTicketParam,
             DynamicFieldHTML => \%DynamicFieldHTML,
             MultipleCustomer => \@MultipleCustomer,
@@ -1316,6 +1372,36 @@ sub Run {
             );
         }
 
+        if (
+            $Self->{IsITSMIncidentProblemManagementInstalled}
+            && $GetParam{ServiceID}
+            && $Service{Criticality}
+            && !$GetParam{DynamicField_ITSMCriticality}
+            )
+        {
+
+            # get config for criticality dynamic field
+            my $CriticalityDynamicFieldConfig = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
+                Name => 'ITSMCriticality',
+            );
+
+            # get possible values for criticality
+            my $CriticalityPossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
+                DynamicFieldConfig => $CriticalityDynamicFieldConfig,
+            );
+
+            # reverse the list to find out the key
+            my %ReverseCriticalityPossibleValues = reverse %{$CriticalityPossibleValues};
+
+            # set the criticality
+            $DynamicFieldBackendObject->ValueSet(
+                DynamicFieldConfig => $CriticalityDynamicFieldConfig,
+                ObjectID           => $TicketID,
+                Value              => $ReverseCriticalityPossibleValues{ $Service{Criticality} },
+                UserID             => $Self->{UserID},
+            );
+        }
+
         # get pre loaded attachment
         my @AttachmentData = $UploadCacheObject->FormIDGetAllFilesData(
             FormID => $Self->{FormID},
@@ -1425,121 +1511,6 @@ sub Run {
                 Value              => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
                 UserID             => $Self->{UserID},
             );
-        }
-
-        # Permissions check were done earlier
-        if ( $GetParam{FromChatID} ) {
-            my $ChatObject = $Kernel::OM->Get('Kernel::System::Chat');
-            my %Chat       = $ChatObject->ChatGet(
-                ChatID => $GetParam{FromChatID},
-            );
-            my @ChatMessageList = $ChatObject->ChatMessageList(
-                ChatID => $GetParam{FromChatID},
-            );
-            my $ChatArticleID;
-
-            if (@ChatMessageList) {
-                for my $Message (@ChatMessageList) {
-                    $Message->{MessageText} = $LayoutObject->Ascii2Html(
-                        Text        => $Message->{MessageText},
-                        LinkFeature => 1,
-                    );
-                }
-
-                my $ArticleChatBackend = $ArticleObject->BackendForChannel( ChannelName => 'Chat' );
-                $ChatArticleID = $ArticleChatBackend->ArticleCreate(
-                    TicketID             => $TicketID,
-                    SenderType           => $Config->{SenderType},
-                    ChatMessageList      => \@ChatMessageList,
-                    IsVisibleForCustomer => $Config->{IsVisibleForCustomer},
-                    UserID               => $Self->{UserID},
-                    HistoryType          => $Config->{HistoryType},
-                    HistoryComment       => $Config->{HistoryComment} || '%%',
-                );
-            }
-            if ($ChatArticleID) {
-
-                # check is customer actively present
-                # it means customer has accepted this chat and not left it!
-                my $CustomerPresent = $ChatObject->CustomerPresent(
-                    ChatID => $GetParam{FromChatID},
-                    Active => 1,
-                );
-
-                my $Success;
-
-                # if there is no customer present in the chat
-                # just remove the chat
-                if ( !$CustomerPresent ) {
-                    $Success = $ChatObject->ChatDelete(
-                        ChatID => $GetParam{FromChatID},
-                    );
-                }
-
-                # otherwise set chat status to closed and inform other agents
-                else {
-                    $Success = $ChatObject->ChatUpdate(
-                        ChatID     => $GetParam{FromChatID},
-                        Status     => 'closed',
-                        Deprecated => 1,
-                    );
-
-                    # get user data
-                    my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
-                        UserID => $Self->{UserID},
-                    );
-
-                    my $RequesterName = $User{UserFullname};
-                    $RequesterName ||= $Self->{UserID};
-
-                    my $LeaveMessage = $Kernel::OM->Get('Kernel::Language')->Translate(
-                        "%s has left the chat.",
-                        $RequesterName,
-                    );
-
-                    $Success = $ChatObject->ChatMessageAdd(
-                        ChatID          => $GetParam{FromChatID},
-                        ChatterID       => $Self->{UserID},
-                        ChatterType     => 'User',
-                        MessageText     => $LeaveMessage,
-                        SystemGenerated => 1,
-                    );
-
-                    # time after chat will be removed
-                    my $ChatTTL = $Kernel::OM->Get('Kernel::Config')->Get('ChatEngine::ChatTTL');
-
-                    my $ChatClosedMessage = $Kernel::OM->Get('Kernel::Language')->Translate(
-                        "This chat has been closed and will be removed in %s hours.",
-                        $ChatTTL,
-                    );
-
-                    $Success = $ChatObject->ChatMessageAdd(
-                        ChatID          => $GetParam{FromChatID},
-                        ChatterID       => $Self->{UserID},
-                        ChatterType     => 'User',
-                        MessageText     => $ChatClosedMessage,
-                        SystemGenerated => 1,
-                    );
-
-                    # remove all AGENT participants from chat
-                    my @ParticipantsList = $ChatObject->ChatParticipantList(
-                        ChatID => $GetParam{FromChatID},
-                    );
-                    CHATPARTICIPANT:
-                    for my $ChatParticipant (@ParticipantsList) {
-
-                        # skip it this participant is not agent
-                        next CHATPARTICIPANT if $ChatParticipant->{ChatterType} ne 'User';
-
-                        # remove this participants from the chat
-                        $Success = $ChatObject->ChatParticipantRemove(
-                            ChatID      => $GetParam{FromChatID},
-                            ChatterID   => $ChatParticipant->{ChatterID},
-                            ChatterType => 'User',
-                        );
-                    }
-                }
-            }
         }
 
         # set owner (if new user id is given)
@@ -1661,6 +1632,71 @@ sub Run {
                 TicketID => $TicketID,
                 %GetParam,
             );
+        }
+
+        if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
+
+            # get the temporarily links
+            my $TempLinkList = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkList(
+                Object => 'Ticket',
+                Key    => $Self->{FormID},
+                State  => 'Temporary',
+                UserID => $Self->{UserID},
+            );
+
+            if ( $TempLinkList && ref $TempLinkList eq 'HASH' && %{$TempLinkList} ) {
+
+                for my $TargetObjectOrg ( sort keys %{$TempLinkList} ) {
+
+                    # extract typelist
+                    my $TypeList = $TempLinkList->{$TargetObjectOrg};
+
+                    for my $Type ( sort keys %{$TypeList} ) {
+
+                        # extract direction list
+                        my $DirectionList = $TypeList->{$Type};
+
+                        for my $Direction ( sort keys %{$DirectionList} ) {
+
+                            for my $TargetKeyOrg ( sort keys %{ $DirectionList->{$Direction} } ) {
+
+                                # delete the temp link
+                                $Kernel::OM->Get('Kernel::System::LinkObject')->LinkDelete(
+                                    Object1 => 'Ticket',
+                                    Key1    => $Self->{FormID},
+                                    Object2 => $TargetObjectOrg,
+                                    Key2    => $TargetKeyOrg,
+                                    Type    => $Type,
+                                    UserID  => $Self->{UserID},
+                                );
+
+                                my $SourceObject = $TargetObjectOrg;
+                                my $SourceKey    = $TargetKeyOrg;
+                                my $TargetObject = 'Ticket';
+                                my $TargetKey    = $TicketID;
+
+                                if ( $Direction eq 'Target' ) {
+                                    $SourceObject = 'Ticket';
+                                    $SourceKey    = $TicketID;
+                                    $TargetObject = $TargetObjectOrg;
+                                    $TargetKey    = $TargetKeyOrg;
+                                }
+
+                                # add the permanently link
+                                my $Success = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkAdd(
+                                    SourceObject => $SourceObject,
+                                    SourceKey    => $SourceKey,
+                                    TargetObject => $TargetObject,
+                                    TargetKey    => $TargetKey,
+                                    Type         => $Type,
+                                    State        => 'Valid',
+                                    UserID       => $Self->{UserID},
+                                );
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         # get redirect screen
@@ -2741,6 +2777,20 @@ sub _MaskPhoneNew {
         );
     }
 
+    # make sure to show the options block so that the "Link Ticket" option is shown
+    # even if spellchecker and OptionCustomer is turned off
+    if ( $Self->{IsITSMIncidentProblemManagementInstalled} && !$ShownOptionsBlock ) {
+        $LayoutObject->Block(
+            Name => 'TicketOptions',
+            Data => {
+                %Param,
+            },
+        );
+
+        # set flag to "true" in order to prevent calling the Options block again
+        $ShownOptionsBlock = 1;
+    }
+
     # show attachments
     ATTACHMENT:
     for my $Attachment ( @{ $Param{Attachments} } ) {
@@ -2767,27 +2817,6 @@ sub _MaskPhoneNew {
         # set up rich text editor
         $LayoutObject->SetRichTextParameters(
             Data => \%Param,
-        );
-    }
-
-    # Permissions have been checked before in Run()
-    if ( $Param{FromChatID} ) {
-        my @ChatMessages = $Kernel::OM->Get('Kernel::System::Chat')->ChatMessageList(
-            ChatID => $Param{FromChatID},
-        );
-
-        for my $Message (@ChatMessages) {
-            $Message->{MessageText} = $LayoutObject->Ascii2Html(
-                Text        => $Message->{MessageText},
-                LinkFeature => 1,
-            );
-        }
-
-        $LayoutObject->Block(
-            Name => 'ChatArticlePreview',
-            Data => {
-                ChatMessages => \@ChatMessages,
-            },
         );
     }
 

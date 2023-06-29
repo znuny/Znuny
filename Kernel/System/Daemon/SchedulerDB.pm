@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -71,7 +71,7 @@ add a new task to scheduler task list
                                                             #   provided) that can exists at the same
                                                             #   time, value of 0 means unlimited
         Data => {                                           # data payload
-            ...
+            # ...
         },
     );
 
@@ -578,13 +578,15 @@ sub TaskCleanup {
         # get expiration time. 7 days ago system time
         my $ExpiredTime = $SystemTime - ( 60 * 60 * 24 * 7 );
 
-        my $LockTime = $Kernel::OM->Create(
-            'Kernel::System::DateTime',
-            ObjectParams => {
-                String => $Task{LockTime},
-            },
-        );
-
+        my $LockTime;
+        if ( $Task{LockTime} ) {
+            $LockTime = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+                ObjectParams => {
+                    String => $Task{LockTime},
+                },
+            );
+        }
         $LockTime = $LockTime ? $LockTime->ToEpoch() : 0;
 
         # skip if task is not expired
@@ -878,7 +880,7 @@ add a new task to scheduler future task list
                                                          #   that can exists at the same time,
                                                          #   value of 0 means unlimited
         Data => {                                        # data payload
-            ...
+            # ...
         },
     );
 
@@ -1555,7 +1557,7 @@ sub CronTaskSummary {
         next JOBNAME if !$JobConfig;
         next JOBNAME if !$JobConfig->{Schedule};
 
-        $TaskLookup{$JobName} = $JobConfig->{Schedule};
+        $TaskLookup{ $Config->{$JobName}->{TaskName} } = $JobConfig->{Schedule};
     }
 
     return $Self->RecurrentTaskSummary(
@@ -1808,9 +1810,9 @@ Returns:
         Type              => 'GenericInterface',
         LastExecutionTime => '2015-01-01 00:00:00',
         LockKey           => 'XYZ',
-        LockTime          => '2015-01-02 00:00:00'
-        CreateTime        => '2015-01-01 00:00:00'
-        ChangeTime        => '2015-01-02 00:00:00'
+        LockTime          => '2015-01-02 00:00:00',
+        CreateTime        => '2015-01-01 00:00:00',
+        ChangeTime        => '2015-01-02 00:00:00',
     );
 
 =cut
@@ -1873,9 +1875,9 @@ Returns:
             Type              => 'GenericInterface',
             LastExecutionTime => '2015-01-01 00:00:00',
             LockKey           => 'XYZ',
-            LockTime          => '2015-01-02 00:00:00'
-            CreateTime        => '2015-01-01 00:00:00'
-            ChangeTime        => '2015-01-02 00:00:00'
+            LockTime          => '2015-01-02 00:00:00',
+            CreateTime        => '2015-01-01 00:00:00',
+            ChangeTime        => '2015-01-02 00:00:00',
         },
         {
             TaskID            => 456,
@@ -1883,9 +1885,9 @@ Returns:
             Type              => 'GenericInterface',
             LastExecutionTime => '2015-01-01 00:00:00',
             LockKey           => 'XYZ',
-            LockTime          => '2015-01-02 00:00:00'
-            CreateTime        => '2015-01-01 00:00:00'
-            ChangeTime        => '2015-01-02 00:00:00'
+            LockTime          => '2015-01-02 00:00:00',
+            CreateTime        => '2015-01-01 00:00:00',
+            ChangeTime        => '2015-01-02 00:00:00',
         },
         # ...
     );
@@ -2000,7 +2002,7 @@ executes recurrent tasks like cron or generic agent tasks
                                                        #    table at the same time, value of 0 means
                                                        #    unlimited
         Data                   => {                    # data payload
-            ...
+            # ...
         },
     );
 

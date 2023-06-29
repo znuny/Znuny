@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject                = $Kernel::OM->Get('Kernel::System::Cache');
+        my $TicketObject               = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ArticleObject              = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $UserObject                 = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject               = $Kernel::OM->Get('Kernel::Config');
+        my $CommunicationChannelObject = $Kernel::OM->Get('Kernel::System::CommunicationChannel');
+        my $ArticleBackendPhoneObject  = $Kernel::OM->Get("Kernel::System::Ticket::Article::Backend::Phone");
 
         # Enable article filter.
         $HelperObject->ConfigSettingChange(
@@ -91,12 +98,9 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
-
-        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Create test ticket.
         my $TicketID = $TicketObject->TicketCreate(
@@ -135,7 +139,7 @@ $Selenium->RunTest(
             );
         }
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketZoom for test created ticket (expanded view).
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID;ZoomExpand=1");
@@ -192,7 +196,7 @@ $Selenium->RunTest(
             JavaScript => 'return $(".Dialog:visible").length === 1;'
         );
 
-        my %CommunicationChannel = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelGet(
+        my %CommunicationChannel = $CommunicationChannelObject->ChannelGet(
             ChannelName => 'Phone',
         );
 
@@ -216,7 +220,7 @@ $Selenium->RunTest(
         $Selenium->execute_script("\$('.InputField_ListContainer').css('display', 'none');");
 
         # Apply filter.
-        $Selenium->find_element("//button[\@id='DialogButton1']")->click();
+        $Selenium->find_element( "#DialogButton2", 'css' )->click();
 
         # Wait for dialog to disappear.
         $Selenium->WaitFor(
@@ -303,7 +307,7 @@ $Selenium->RunTest(
             Value   => "[$AgentSenderTypeID, $CustomerSenderTypeID]",
         );
 
-        $Selenium->find_element("//button[\@id='DialogButton1']")->click();
+        $Selenium->find_element( "#DialogButton2", 'css' )->click();
 
         # Wait for dialog to disappear.
         $Selenium->WaitFor(
@@ -342,7 +346,7 @@ $Selenium->RunTest(
             Value   => "[$AgentSenderTypeID, $CustomerSenderTypeID, $SystemSenderTypeID]",
         );
 
-        $Selenium->find_element("//button[\@id='DialogButton1']")->click();
+        $Selenium->find_element( "#DialogButton2", 'css' )->click();
 
         # Wait for dialog to disappear.
         $Selenium->WaitFor(
@@ -365,143 +369,8 @@ $Selenium->RunTest(
             );
         }
 
-        # Check article filtering by event types in timeline view (see bug#13836).
-        # TimelineView is an OTRSBusiness feature.
-        my $OTRSBusinessIsInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-
-        if ($OTRSBusinessIsInstalled) {
-
-            # Enable TimelineViewEnabled.
-            $HelperObject->ConfigSettingChange(
-                Valid => 1,
-                Key   => 'TimelineViewEnabled',
-                Value => 1,
-            );
-
-            # Change max article per page config.
-            $HelperObject->ConfigSettingChange(
-                Valid => 1,
-                Key   => 'Ticket::Frontend::MaxArticlesPerPage',
-                Value => 100,
-            );
-
-            # Add non 'AddNote' article.
-            my $RandomID          = $HelperObject->GetRandomID();
-            my $NonAddNoteSubject = "Subject-$RandomID";
-            my $NonAddNoteArticleID
-                = $Kernel::OM->Get("Kernel::System::Ticket::Article::Backend::Phone")->ArticleCreate(
-                TicketID             => $TicketID,
-                IsVisibleForCustomer => 1,
-                SenderType           => 'agent',
-                From                 => "From Customer <from$RandomID\@localhost.com>",
-                To                   => "To Customer <to$RandomID\@localhost.com>",
-                Subject              => $NonAddNoteSubject,
-                Body                 => "Body-$RandomID",
-                Charset              => 'ISO-8859-15',
-                MimeType             => 'text/plain',
-                HistoryType          => 'PhoneCallCustomer',
-                HistoryComment       => 'Selenium testing',
-                UserID               => 1,
-                );
-            $Self->True(
-                $NonAddNoteArticleID,
-                "ArticleID $NonAddNoteArticleID is created",
-            );
-
-            # Navigate to AgentTicketZoom.
-            $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
-
-            $Selenium->WaitFor(
-                JavaScript => "return typeof(\$) === 'function' && \$.active == 0;"
-            );
-
-            $Selenium->WaitForjQueryEventBound(
-                CSSSelector => "#ArticleViewSettings",
-            );
-
-            # Set timeline view.
-            $Selenium->execute_script("\$('#ArticleViewSettings').click();");
-            $Selenium->WaitFor( JavaScript => 'return $(".Dialog:visible").length && $("#ArticleView").length;' );
-
-            $Selenium->InputFieldValueSet(
-                Element => '#ArticleView',
-                Value   => 'Timeline',
-            );
-
-            $Selenium->WaitFor(
-                JavaScript =>
-                    "return typeof(\$) === 'function' && \$('.TimelineView #ArticleID_$NonAddNoteArticleID').length;"
-            );
-
-            # Check last created article (PhoneCallCustomer) is shown in timeline view.
-            $Self->True(
-                $Selenium->execute_script("return \$('.TimelineView #ArticleID_$NonAddNoteArticleID').length;"),
-                "ArticleID $NonAddNoteArticleID is shown in timeline view",
-            ) || die;
-
-            # Define article appearances depending on filter.
-            my %ArticleFilters = (
-                AddNote => {
-                    'First Test Article'  => 0,
-                    'Second Test Article' => 1,
-                    'Third Test Article'  => 1,
-                    'Fourth Test Article' => 0,
-                    'Fifth Test Article'  => 1,
-                    'Sixth Test Article'  => 1,
-                    $NonAddNoteSubject    => 0,
-                },
-                AddNoteCustomer => {
-                    'First Test Article'  => 1,
-                    'Second Test Article' => 0,
-                    'Third Test Article'  => 0,
-                    'Fourth Test Article' => 1,
-                    'Fifth Test Article'  => 0,
-                    'Sixth Test Article'  => 0,
-                    $NonAddNoteSubject    => 0,
-                },
-                PhoneCallCustomer => {
-                    'First Test Article'  => 0,
-                    'Second Test Article' => 0,
-                    'Third Test Article'  => 0,
-                    'Fourth Test Article' => 0,
-                    'Fifth Test Article'  => 0,
-                    'Sixth Test Article'  => 0,
-                    $NonAddNoteSubject    => 1,
-                },
-            );
-
-            $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
-
-            for my $FilterValue ( sort keys %ArticleFilters ) {
-                $Selenium->find_element( "#SetArticleFilter", 'css' )->click();
-                $Selenium->WaitFor(
-                    JavaScript => 'return $(".Dialog:visible").length && $("#EventTypeFilter").length;'
-                );
-
-                $Selenium->InputFieldValueSet(
-                    Element => '#EventTypeFilter',
-                    Value   => $FilterValue,
-                );
-
-                $Selenium->find_element( "#DialogButton1", 'css' )->VerifiedClick();
-
-                for my $Subject ( sort keys %{ $ArticleFilters{$FilterValue} } ) {
-                    my $Value   = $ArticleFilters{$FilterValue}->{$Subject};
-                    my $IsShown = $Value ? 'shown' : 'not shown';
-
-                    $Self->Is(
-                        $Selenium->execute_script(
-                            "return \$('.TimelineView li.HasArticle:contains(\"$Subject\")').length;"
-                        ),
-                        $Value,
-                        "Timeline view - Filter '$FilterValue' - Article '$Subject' - $IsShown",
-                    );
-                }
-            }
-        }
-
         # Delete test created ticket.
-        my $Success = $Kernel::OM->Get('Kernel::System::Ticket')->TicketDelete(
+        my $Success = $TicketObject->TicketDelete(
             TicketID => $TicketID,
             UserID   => 1,
         );
@@ -520,7 +389,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

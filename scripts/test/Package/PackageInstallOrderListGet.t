@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -627,29 +627,10 @@ TEST:
 for my $Test (@Tests) {
 
     $Kernel::OM->ObjectsDiscard(
-        Objects => [ 'Kernel::System::OTRSBusiness', 'Kernel::System::Package' ],
+        Objects => ['Kernel::System::Package'],
     );
 
-    $Test->{OTRSBusinessOptions}->{OTRSBusinessIsInstalled}  // 0;
-    $Test->{OTRSBusinessOptions}->{OTRSBusinessIsUpdateable} // 0;
-
-    no warnings 'once';    ## no critic
-    local *Kernel::System::OTRSBusiness::OTRSBusinessIsInstalled = sub {
-        if ( $Test->{OTRSBusinessOptions}->{OTRSBusinessIsInstalled} ) {
-            return 1;
-        }
-        return 0;
-    };
-    local *Kernel::System::OTRSBusiness::OTRSBusinessIsUpdateable = sub {
-        if ( $Test->{OTRSBusinessOptions}->{OTRSBusinessIsUpdateable} ) {
-            return 1;
-        }
-        return 0;
-    };
-    use warnings;
-
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    my $PackageObject      = $Kernel::OM->Get('Kernel::System::Package');
+    my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
     my %Result = $PackageObject->PackageInstallOrderListGet( %{ $Test->{Config} } );
 
@@ -671,7 +652,7 @@ for my $Test (@Tests) {
 }
 continue {
     $Kernel::OM->ObjectsDiscard(
-        Objects => [ 'Kernel::System::OTRSBusiness', 'Kernel::System::Package' ],
+        Objects => ['Kernel::System::Package'],
     );
 }
 

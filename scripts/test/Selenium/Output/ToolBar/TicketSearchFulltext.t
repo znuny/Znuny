@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,22 +18,24 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Enable ToolBar FulltextSearch..
         my %TicketSearchFulltext = (
-            Block       => 'ToolBarSearchFulltext',
-            CSS         => 'Core.Agent.Toolbar.FulltextSearch.css',
-            Description => 'Fulltext search',
             Module      => 'Kernel::Output::HTML::ToolBar::Generic',
-            Name        => 'Fulltext search',
-            Priority    => '1990020',
-            Size        => '10',
+            Name        => 'Fulltext',
+            Description => 'Fulltext search',
+            Block       => 'ToolBarSearch',
+            Priority    => '1990010',
         );
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###12-Ticket::TicketSearchFulltext',
+            Key   => 'Frontend::ToolBarModule###220-Ticket::TicketSearchFulltext',
             Value => \%TicketSearchFulltext,
         );
 
@@ -44,9 +46,16 @@ $Selenium->RunTest(
             Value => 0,
         );
 
-        my $TestUserLogin = $HelperObject->TestUserCreate(
+        # create test user and login
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
+
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
 
         $Selenium->Login(
             Type     => 'Agent',
@@ -54,15 +63,8 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
-        # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
-            UserLogin => $TestUserLogin,
-        );
-
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
         my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
 
         my $RandomID = $HelperObject->GetRandomID();
@@ -117,7 +119,7 @@ $Selenium->RunTest(
         }
 
         # Search for test created ticket in Fulltext search.
-        $Selenium->find_element( "#Fulltext", 'css' )->send_keys( $RandomID, "\N{U+E007}" );
+        $Selenium->find_element( "#ToolBarSearchTerm", 'css' )->send_keys( $RandomID, "\N{U+E007}" );
 
         $Selenium->WaitFor(
             JavaScript =>
@@ -165,7 +167,7 @@ $Selenium->RunTest(
 
         for my $Key ( sort keys %Tests ) {
 
-            # Change sysconfig value and refresh screen.
+            # Change SysConfig value and refresh screen.
             $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Ticket::Frontend::AgentTicketSearch###Defaults###SearchInArchive',
@@ -174,8 +176,8 @@ $Selenium->RunTest(
 
             $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentDashboard");
 
-            # Seach in Fulltext search.
-            $Selenium->find_element( "#Fulltext", 'css' )->send_keys( $RandomID, "\N{U+E007}" );
+            # Search in Fulltext search.
+            $Selenium->find_element( "#ToolBarSearchTerm", 'css' )->send_keys( $RandomID, "\N{U+E007}" );
             $Selenium->WaitFor(
                 JavaScript =>
                     'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'

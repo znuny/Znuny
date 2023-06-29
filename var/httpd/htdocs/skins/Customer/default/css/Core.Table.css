@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -14,33 +14,45 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @section     Customer
  */
 
-.TicketView .Content {
+.Content.outerTable {
+    overflow-x: auto;
+    border-left: var(--border-width) var(--border-solid) var(--table-tr-border-bottom);
+    border-right: var(--border-width) var(--border-solid) var(--table-tr-border-bottom);
+    border-bottom-left-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+    background-color: var(--white);
     padding: 0;
 }
 
 table.Overview {
     width: 100%;
-    color: #444;
-    text-shadow: 0 1px 0 #FFF;
+    color: var(--black);
+    background-color: var(--white);
     zoom: 1;
     clear: both;
     position: relative;
 }
 
 .Overview thead {
-    background: #ccc;
-    display: none;
+    background: var(--table-th-bg);
 }
 
 .Sortable thead {
     display: table-header-group;
+    background: var(--table-th-bg);
 }
 
 .Overview thead th {
-    padding: 0;
-    vertical-align: bottom;
-    border-right: 1px solid #999;
-    border-bottom: 1px solid #999;
+    position: relative;
+    padding: 12px var(--padding-lg);
+    font-size: 11px;
+    font-weight: var(--semi-bold);
+    text-transform: uppercase;
+    color: var(--table-text-color);
+    background: var(--table-th-bg);
+    vertical-align: middle;
+    white-space: nowrap;
+    line-height: 1;
 }
 
 .RTL .Overview thead th {
@@ -53,28 +65,20 @@ table.Overview {
 }
 
 .Overview thead a {
-    padding: 1px 13px 4px 8px;
-    height: 10px;
-    color: #444;
-    font-size: 11px;
-    text-transform: uppercase;
-    display: block;
-    text-shadow: 0 1px 0 #EEE;
-    position: relative;
-    white-space: nowrap;
+    height: auto;
+    line-height: 1;
+    color: var(--table-text-color);
 }
 
 .Overview thead span {
-    padding: 1px 13px 4px 8px;
-    height: 10px;
-    color: #444;
-    font-size: 11px;
-    text-transform: uppercase;
-    display: block;
-    text-shadow: 0 1px 0 #EEE;
+    height: auto;
+    line-height: 1;
+    padding: 0 var(--padding-sm);
+    padding-left: 1px;
+    color: var(--table-text-color);
 }
 
-.Overview thead .SortAscending a,
+/* .Overview thead .SortAscending a,
 .Overview thead .SortDescending a {
     color: #222;
     font-weight: 600;
@@ -82,9 +86,33 @@ table.Overview {
     background: #aaa;
     text-shadow: 0 1px 0 #BBB;
     padding-right: 20px;
+} */
+
+
+.SortDescending > a::after {
+    content: "\25BC";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    z-index: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
-.Overview thead .SortDescending a {
+.SortAscending > a::after {
+    content: "\25B2";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+
+/* .Overview thead .SortDescending a {
     background: #aaa;
 }
 
@@ -102,10 +130,10 @@ table.Overview {
     position: absolute;
     right: 2px;
     top: 0px;
-}
+} */
 
 .Overview tbody {
-    background-color: transparent;
+    background-color: var(--white);
 }
 
 .Overview tbody tr {
@@ -121,9 +149,14 @@ table.Overview {
 }
 
 .Overview tbody td {
-    padding: 6px 8px 3px;
-    white-space: nowrap;
-    border: 0px solid;
+    vertical-align: middle;
+    box-sizing: border-box;
+    background-color: var(--white);
+    border-right: none;
+    border-bottom: var(--border-width) var(--border-solid) var(--table-tr-border-bottom);
+    padding: var(--padding-lg);
+    font-size: var(--main-font-size);
+    line-height: normal;
 }
 
 .Overview tbody a {
@@ -140,11 +173,11 @@ table.Overview {
  * @subsection  OverviewTable zebra style
  */
 .Overview tbody tr td {
-    background-color: #FBFBFB;
+    background-color: var(--white);
 }
 
 .Overview tbody tr:nth-child(even) td {
-    background-color: #F2F2F2;
+    background-color: var(--table-td-even-bg);
 }
 
 /**
@@ -155,14 +188,14 @@ table.Overview {
 }
 
 .Title div {
-    height: 14px;
+    font-size: var(--main-font-size);
     color: #777;
     overflow: hidden;
     white-space: normal;
 }
 .Title h2 {
     margin-bottom: 0;
-    font-size: 12px;
+    font-size: var(--main-font-size);
     font-weight: bold;
     color: #444;
     display: inline;
@@ -183,26 +216,27 @@ table.Overview {
  * @subsection  Table Style Hovered
  */
 .Overview tbody tr:hover td {
-    background: #FCB24B;
+    background: var(--primary-color-rgb);
 }
-.Overview tbody tr:hover {
+
+/* .Overview tbody tr:hover {
     border-color: #CCC;
-}
+} */
+
 .Overview tbody tr:hover td,
 .Overview tbody tr:hover a {
-    color: #452A03;
-    text-shadow: 0 1px 0 #F4B259;
+    color: var(--black);
+    box-shadow: none;
 }
 .Overview tbody tr:hover .Title div {
-    color: #724807;
-    text-shadow: 0 1px 0 #F4B259;
+    color: var(--black);
+    box-shadow: none;
 }
 /**
  * @subsection  Table Style Active
  */
 
 .Overview tbody tr:active td {
-    padding: 7px 8px 2px;
     background-position: bottom;
 }
 
@@ -234,7 +268,11 @@ table.Overview {
 .DataTable tbody tr:active td.Clickable,
 .TableSmall tbody tr:active td.Clickable,
 .DataTable tr:nth-child(even):hover td.Highlight {
-    background: #FCB24B;
+    background: var(--primary-color-rgb);
+}
+
+.Overview tbody tr td {
+    transition: var(--main-transition);
 }
 
 /**
@@ -356,7 +394,6 @@ table tr.MasterAction {
 
 .DataTable tbody td {
     padding: 0 10px;
-    border-right: 1px dotted #CCC;
 }
 
 .DataTable.FixedLayout tbody td a.AsBlock {
@@ -370,7 +407,6 @@ table tr.MasterAction {
 }
 
 .RTL .DataTable tbody td {
-    border-left: 1px dotted #CCC;
     border-right: none;
 }
 
@@ -685,6 +721,43 @@ thead .headerSortDown a {
 .TableSmall td h2 {
     font-size: 12px;
     margin-bottom: 0;
+}
+
+/**************************/
+/*   Table Filter Search  */
+/**************************/
+/* Note: the following style overrides a jquery class default
+/*/
+
+.ui-menu.ui-widget.ui-widget-content {
+    border: none !important;
+    overflow-x: hidden;
+    /*width: auto !important;*/ /* ED updated on 22/09/28 */
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--menu-box-shadow);
+    padding: var(--padding-xs) !important; /* ED updated on 22/09/28 */
+    margin-left: -1% !important;
+    box-sizing: border-box;
+}
+
+.ui-menu.ui-widget.ui-widget-content .ui-menu-item {
+    max-width: 100%;
+    padding: 0;
+}
+
+.ui-menu.ui-widget.ui-widget-content .ui-menu-item:hover {
+    background: none;
+}
+
+.ui-menu .ui-menu-item a {
+    max-width: 100%;
+    font-weight: var(--medium);
+    color: var(--main-font-color);
+    border-radius: var(--border-radius-xs);
+    padding: var(--padding-sm);
+    transition: var(--main-transition);
+    box-sizing: border-box;
+    word-break: break-all;
 }
 
 } /* end @media */

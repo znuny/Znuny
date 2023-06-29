@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $MailAccountObject     = $Kernel::OM->Get('Kernel::System::MailAccount');
+        my $CommunicationLogDBObj = $Kernel::OM->Get('Kernel::System::CommunicationLog::DB');
 
         # Disable check of email addresses.
         $HelperObject->ConfigSettingChange(
@@ -40,8 +43,6 @@ $Selenium->RunTest(
             Value => 'Kernel::System::Email::DoNotSendEmail',
         );
 
-        my $CommunicationLogDBObj = $Kernel::OM->Get('Kernel::System::CommunicationLog::DB');
-
         # Clean up all existing communications.
         $Self->True(
             $CommunicationLogDBObj->CommunicationDelete(),
@@ -49,8 +50,6 @@ $Selenium->RunTest(
         );
 
         my $RandomID = $HelperObject->GetRandomID();
-
-        my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
 
         # Create test mail accounts.
         my %MailAccounts;
@@ -209,7 +208,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminCommunicationLog screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminCommunicationLog;Expand=1;");
@@ -333,7 +332,7 @@ $Selenium->RunTest(
         );
 
         # Filter for unsuccessful communications.
-        $Selenium->find_element( 'Failed (2)', 'link_text' )->VerifiedClick();
+        $Selenium->VerifiedRefresh();
 
         # Verify two communications are shown.
         $Self->Is(
@@ -399,8 +398,7 @@ $Selenium->RunTest(
             'Failing account status and communications'
         );
 
-        # Filter for unsuccessful communications.
-        $Selenium->find_element( 'Failed (3)', 'link_text' )->VerifiedClick();
+        $Selenium->VerifiedRefresh();
 
         # Verify three communications are shown.
         $Self->Is(

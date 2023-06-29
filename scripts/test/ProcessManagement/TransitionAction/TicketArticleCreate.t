@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -90,9 +90,9 @@ my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $RandomID = $HelperObject->GetRandomID();
 
 # create a dynamic field
-my $TextFieldName = "texttest$RandomID";
-my $TextFieldID   = $DynamicFieldObject->DynamicFieldAdd(
-    Name       => $TextFieldName,
+my $TextFieldName1  = 'Field1Ticket' . $RandomID;
+my $DynamicFieldID1 = $DynamicFieldObject->DynamicFieldAdd(
+    Name       => $TextFieldName1,
     Label      => 'a description',
     FieldOrder => 9991,
     FieldType  => 'Text',
@@ -106,8 +106,30 @@ my $TextFieldID   = $DynamicFieldObject->DynamicFieldAdd(
 
 # sanity check
 $Self->True(
-    $TextFieldID,
-    "DynamicFieldAdd() successful for Field ID $TextFieldID",
+    $DynamicFieldID1,
+    "DynamicFieldAdd() successful for Field ID $DynamicFieldID1",
+);
+
+my $TextFieldName2  = 'Field2Article' . $RandomID;
+my $DynamicFieldID2 = $DynamicFieldObject->DynamicFieldAdd(
+    Name       => $TextFieldName2,
+    Label      => 'a description',
+    FieldOrder => 10000,
+    FieldType  => 'Text',
+    ObjectType => 'Article',
+    Config     => {
+        Name        => 'AnyName',
+        Description => 'Description for Dynamic Field.',
+    },
+    Reorder => 1,
+    ValidID => 1,
+    UserID  => 1,
+);
+
+# sanity check
+$Self->True(
+    $DynamicFieldID2,
+    "DynamicFieldAdd() successful for Field ID $DynamicFieldID2",
 );
 
 # create a dynamic field
@@ -166,7 +188,7 @@ $Self->True(
 my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
 my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-    Name => $TextFieldName,
+    Name => $TextFieldName1,
 );
 
 my $Success = $DynamicFieldBackendObject->ValueSet(
@@ -179,7 +201,7 @@ my $Success = $DynamicFieldBackendObject->ValueSet(
 # sanity check
 $Self->True(
     $Success,
-    "DynamicField ValueSet() successful for Field ID $TextFieldID",
+    "DynamicField ValueSet() successful for Field ID $DynamicFieldID1",
 );
 
 $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
@@ -515,7 +537,7 @@ my @Tests = (
                 SenderType           => 'agent',
                 ContentType          => 'text/plain; charset=ISO-8859-15',
                 Subject =>
-                    '<OTRS_TICKET_DynamicField_' . $TextFieldName . '_Value>',
+                    '<OTRS_TICKET_DynamicField_' . $TextFieldName1 . '_Value>',
                 Body =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
                 HistoryType    => 'OwnerUpdate',
@@ -716,6 +738,29 @@ my @Tests = (
         Success        => 1,
         CheckFromValue => 1,
     },
+    {
+        Name   => 'Correct DynamicField',
+        Config => {
+            UserID => $UserID,
+            Ticket => \%Ticket,
+            Config => {
+                SenderType                        => 'agent',
+                IsVisibleForCustomer              => 0,
+                CommunicationChannel              => 'Phone',
+                Subject                           => 'Test Phone',
+                Body                              => 'Test body',
+                HistoryType                       => 'OwnerUpdate',
+                HistoryComment                    => 'Some free text!',
+                To                                => 'Some Customer A <customer-a@example.com>',
+                Charset                           => 'ISO-8859-15',
+                MimeType                          => 'text/plain',
+                UnlockOnAway                      => 1,
+                "DynamicField_" . $TextFieldName2 => 'Article',
+            },
+        },
+        Success        => 1,
+        CheckFromValue => 1,
+    },
 );
 
 my %ExcludedArtributes = (
@@ -758,7 +803,10 @@ for my $Test (@Tests) {
             TicketID => $TicketID,
             OnlyLast => 1,
         );
-        my %Article = $ArticleObject->BackendForArticle( %{ $MetaArticles[-1] } )->ArticleGet( %{ $MetaArticles[-1] } );
+        my %Article = $ArticleObject->BackendForArticle( %{ $MetaArticles[-1] } )->ArticleGet(
+            %{ $MetaArticles[-1] },
+            DynamicFields => 1,
+        );
 
         # Check 'From' value of article (see bug#13867).
         if ( $Test->{CheckFromValue} ) {

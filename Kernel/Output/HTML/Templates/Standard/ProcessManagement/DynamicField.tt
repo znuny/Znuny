@@ -1,27 +1,31 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-
+## nofilter(TidyAll::Plugin::Znuny::Common::Origin)
 [% RenderBlockStart("rw:DynamicField") %]
-<div class="Row Row_DynamicField_[% Data.Name %]">
+<div class="Row Row_DynamicField_[% Data.Name %] field-wrapper">
+
+    <div class="outer-label-wrapper">
+        [% Data.Label %]
 [% RenderBlockStart("rw:DynamicField:DescriptionLong") %]
-    <span class="FieldHelpContainer">
-        <i class="fa fa-question-circle FieldHelpTrigger"></i>
-        <span>[% Translate(Data.DescriptionLong) | html %]</span>
-    </span>
+        <span class="FieldHelpContainer">
+            <i class="fa fa-question-circle FieldHelpTrigger"></i>
+            <span>[% Translate(Data.DescriptionLong) | html %]</span>
+        </span>
 [% RenderBlockEnd("rw:DynamicField:DescriptionLong") %]
-    [% Data.Label %]
+    </div>
+
     <div class="Field">
         [% Data.Content %]
+    </div>
 [% RenderBlockStart("rw:DynamicField:DescriptionShort") %]
         <div class="FieldExplanation">[% Translate(Data.DescriptionShort) | html %]</div>
 [% RenderBlockEnd("rw:DynamicField:DescriptionShort") %]
-    </div>
-    <div class="Clear"></div>
+
 </div>
 [% RenderBlockEnd("rw:DynamicField") %]

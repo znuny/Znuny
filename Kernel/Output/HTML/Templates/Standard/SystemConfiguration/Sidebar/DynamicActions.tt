@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,13 +19,13 @@
         <input type="text" autocomplete="off" id="FilterSettings" class="FilterBox" placeholder="[% Translate("Filter visible settings...") | html %]" name="FilterSettings" value="" title="[% Translate("Filter for settings") | html %]">
         <ul class="ActionList">
             <li>
-                <a href="#" id="EditAll" class="CallForAction Fullsize Center"><span><i class="fa fa-edit"></i>[% Translate("Enable edit mode for all settings") | html %]</span></a>
+                <a href="#" id="EditAll" class="CallForAction btn-main btn-primary-ghost"><span>[% Translate("Enable edit mode for all settings") | html %]</span></a>
             </li>
             <li>
-                <a href="#" id="SaveAll" class="CallForAction Fullsize Center"><span><i class="fa fa-check"></i>[% Translate("Save all edited settings") | html %]</span></a>
+                <a href="#" id="SaveAll" class="CallForAction btn-main btn-primary-ghost"><span>[% Translate("Save all edited settings") | html %]</span></a>
             </li>
             <li>
-                <a href="#" id="CancelAll" class="CallForAction Fullsize Center"><span><i class="fa fa-times"></i>[% Translate("Cancel editing for all settings") | html %]</span></a>
+                <a href="#" id="CancelAll" class="CallForAction btn-main btn-primary-ghost"><span>[% Translate("Cancel editing for all settings") | html %]</span></a>
             </li>
         </ul>
         <p class="WidgetInformation"><i class="fa fa-info"></i> [% Translate("All actions from this widget apply to the visible settings on the right only.") | html %]</p>

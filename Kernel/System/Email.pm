@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::Email;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
 
 use strict;
 use warnings;
@@ -702,6 +702,7 @@ Really send the mail
     );
 
     # or
+
     my $Result = $SendObject->SendExecute(
         From                   => $RealFrom,
         To                     => $To, # can be a string with comma separated mail addresses
@@ -1009,9 +1010,10 @@ sub _EncodeMIMEWords {
 sub _MessageIDCreate {
     my ( $Self, %Param ) = @_;
 
-    my $FQDN = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
 
-    return '<' . time() . '.' . rand(999999) . '@' . $FQDN . '>';
+    return '<' . time() . '.' . rand(999999) . '@' . $ExternalFQDN . '>';
 }
 
 sub _CreateMimeEntity {

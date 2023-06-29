@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -114,7 +114,7 @@ Create a MIME article.
             },
         ],
         NoAgentNotify    => 0,                                      # if you don't want to send agent notifications
-        AutoResponseType => 'auto reply'                            # auto reject|auto follow up|auto reply/new ticket|auto remove
+        AutoResponseType => 'auto reply',                           # auto reject|auto follow up|auto reply/new ticket|auto remove
 
         ForceNotificationToUserID   => [ 1, 43, 56 ],               # if you want to force somebody
         ExcludeNotificationToUserID => [ 43,56 ],                   # if you want full exclude somebody from notfications,
@@ -1086,7 +1086,7 @@ Returns:
         Content-Transfer-Encoding: 8bit
 
         Welcome to OTRS!
-        ...
+        # ...
     ';
 
 =cut
@@ -1208,7 +1208,7 @@ Returns:
             FilesizeRaw        => 183,
             Disposition        => 'attachment',
         },
-        ...
+        # ...
     };
 
 =cut

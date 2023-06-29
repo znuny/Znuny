@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -130,7 +130,8 @@ sub Run {
     my $NavBarName = $FrontendModuleConfig->{NavBarName};
     my $Priority   = sprintf( '%07d', $FrontendNavigationConfig->{'002-ProcessManagement'}->[0]->{Prio} );
 
-    my %Return = %{ $Param{NavBarModule}->{Sub} };
+    return if !$Param{NavBarModule};
+    my %Return = %{ $Param{NavBarModule} };
 
     # remove CustomerTicketProcess from the TicketMenu
     delete $Return{$NavBarName}->{$Priority};

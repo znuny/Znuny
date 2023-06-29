@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,14 +8,12 @@
 # --
 
 [% IF Data.FormDraftID %]
-    &nbsp;[% Translate("or") | html %]&nbsp;
-    <button class="CallForAction" id="FormDraftUpdate" accesskey="u" title="[% Translate("Update draft") | html %] (u)">
-        <span><i class="fa fa-pencil-square-o"></i> [% Translate("Update draft") | html %]</span>
+    <button class="CallForAction btn-cancel-ghost btn-main btn-width-md" id="FormDraftUpdate" accesskey="u" title="[% Translate("Update draft") | html %] (u)">
+        <span>[% Translate("Update draft") | html %]</span>
     </button>
 [% END %]
 [% IF Data.FormDraft %]
-    &nbsp;[% Translate("or") | html %]&nbsp;
-    <button class="CallForAction" id="FormDraftSave" accesskey="s" title="[% Translate("Save as new draft") | html %] (s)">
-        <span><i class="fa fa-pencil-square-o"></i> [% Translate("Save as new draft") | html %]</span>
+    <button class="CallForAction btn-cancel-ghost btn-main btn-width-md" id="FormDraftSave" accesskey="s" title="[% Translate("Save as new draft") | html %] (s)">
+        <span>[% Translate("Save as new draft") | html %]</span>
     </button>
 [% END %]

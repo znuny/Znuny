@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -54,10 +54,10 @@ wwww.example.net
 
 ftp.example.org
 
-https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl
+https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl
 
-lkj https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl lk
-lkj https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl
+lkj https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl lk
+lkj https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl
 lk
 END_STRING
 
@@ -98,10 +98,10 @@ ak@example.com<br/>
 <br/>
 <a href="ftp://ftp.example.org" target="_blank" title="ftp://ftp.example.org">ftp.example.org</a><br/>
 <br/>
-<a href="https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/[..]</a><br/>
+<a href="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=[..]</a><br/>
 <br/>
-lkj <a href="https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/[..]</a> lk<br/>
-lkj <a href="https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/otrs/index.pl?Action=AgentFileManager&Location=/[..]</a><br/>
+lkj <a href="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=[..]</a> lk<br/>
+lkj <a href="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=[..]</a><br/>
 lk<br/>
 END_RESULT
 

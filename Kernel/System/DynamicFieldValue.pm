@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -66,7 +66,7 @@ L</ValueGet()>.
                 ValueDateTime      => '1977-12-12 12:00:00',  # optional
                 ValueInt           => 123,                    # optional
             },
-            ...
+            # ...
         ],
         UserID   => $UserID,
     );

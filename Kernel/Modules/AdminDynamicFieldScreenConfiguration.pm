@@ -1,11 +1,10 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Znuny4OTRS::Perl::ZnunyHelper)
 
 package Kernel::Modules::AdminDynamicFieldScreenConfiguration;
 
@@ -279,7 +278,11 @@ sub _ShowOverview {
 
     $LayoutObject->Block( Name => 'Overview' );
 
-    for my $DynamicFieldScreen ( sort keys %DynamicFieldScreens ) {
+    for my $DynamicFieldScreen (
+        sort { $DynamicFieldScreens{$a} cmp $DynamicFieldScreens{$b} }
+        keys %DynamicFieldScreens
+        )
+    {
         $LayoutObject->Block(
             Name => 'DynamicFieldScreenOverviewRow',
             Data => {
@@ -289,7 +292,11 @@ sub _ShowOverview {
         );
     }
 
-    for my $DefaultColumnsScreen ( sort keys %DefaultColumnsScreens ) {
+    for my $DefaultColumnsScreen (
+        sort { $DefaultColumnsScreens{$a} cmp $DefaultColumnsScreens{$b} }
+        keys %DefaultColumnsScreens
+        )
+    {
         $LayoutObject->Block(
             Name => 'DefaultColumnsScreenOverviewRow',
             Data => {
@@ -372,7 +379,7 @@ sub _ShowEdit {
     }
     elsif ( $Param{Type} eq 'DynamicFieldScreen' ) {
 
-        # remove AssignedRequiredFieldRow from template if screen is AgentTicketZoom oder CustomTicketZoom
+        # remove AssignedRequiredFieldRow from template if screen is AgentTicketZoom or CustomTicketZoom
         if ( $Param{Element} =~ m{Zoom}msxi ) {
 
             # AssignedRequired is not needed for zoom views
@@ -420,7 +427,7 @@ sub _ShowEdit {
         },
     );
 
-    for my $Element ( sort keys %OtherElements ) {
+    for my $Element ( sort { $OtherElements{$a} cmp $OtherElements{$b} } keys %OtherElements ) {
         $LayoutObject->Block(
             Name => 'ActionOverviewRowEdit',
             Data => {

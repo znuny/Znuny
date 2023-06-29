@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,13 +19,14 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->Login(
             Type     => 'Agent',
@@ -38,10 +39,10 @@ $Selenium->RunTest(
             "${ScriptAlias}index.pl?Action=AdminSystemConfiguration"
         );
 
-        if ( $Kernel::OM->Get('Kernel::Config')->Get('ConfigImportAllowed') ) {
+        if ( $ConfigObject->Get('ConfigImportAllowed') ) {
 
             # Click on Import/Export button.
-            $Selenium->find_element( '.fa-exchange', 'css' )->click();
+            $Selenium->find_element( '#ImportExport', 'css' )->click();
 
             # Make sure that import button is on the page.
             $Selenium->find_element( '#ImportButton', 'css' );

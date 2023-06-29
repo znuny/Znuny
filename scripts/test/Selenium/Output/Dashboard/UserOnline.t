@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,12 +19,18 @@ $Selenium->RunTest(
     sub {
 
         # First delete all pre-existing sessions.
-        $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Session::DeleteAll')->Execute();
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
+        my $CommandSessionDeleteAllObject
+            = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Session::DeleteAll');
+
+        $CommandSessionDeleteAllObject->Execute();
 
         # Get UserOnline config.
-        my %UserOnlineSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %UserOnlineSysConfig = $SysConfigObject->SettingGet(
             Name    => 'DashboardBackend###0400-UserOnline',
             Default => 1,
         );
@@ -55,7 +61,7 @@ $Selenium->RunTest(
         }
 
         # Clean up the dashboard cache.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Dashboard' );
+        $CacheObject->CleanUp( Type => 'Dashboard' );
 
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -72,17 +78,9 @@ $Selenium->RunTest(
         my $AgentsLink = $Selenium->find_element("//a[contains(\@id, \'UserOnlineAgent' )]");
         $Self->Is(
             $AgentsLink->get_text() // '',
-            'Agents (1)',
+            'AGENTS (1)',
             'Only one agent user accounted for'
         );
-
-        if ( $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Agent::UnavailableForExternalChatsOnLogin') ) {
-            $Self->True(
-                1,
-                "UnavailableForExternalChatsOnLogin config is set, skipping test..."
-            );
-            return 1;
-        }
 
         # Test UserOnline plugin for agent.
         my $ExpectedAgent = "$TestUserLogin";
@@ -101,7 +99,7 @@ $Selenium->RunTest(
         my $CustomersLink = $Selenium->find_element("//a[contains(\@id, \'UserOnlineCustomer' )]");
         $Self->Is(
             $CustomersLink->get_text() // '',
-            'Customers (1)',
+            'CUSTOMERS (1)',
             'Only one customer user accounted for'
         );
 

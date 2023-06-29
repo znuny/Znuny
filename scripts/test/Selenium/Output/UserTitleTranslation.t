@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,8 +20,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
         # Disable email checks to create new user.
         $ConfigObject->Set(
@@ -52,7 +54,7 @@ $Selenium->RunTest(
 
         # Create customer.
         my $CustomerID        = "CustomerID$RandomNumber";
-        my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $CustomerID,
             CustomerCompanyName    => "CompanyName$RandomNumber",
             CustomerCompanyStreet  => 'Some Street',
@@ -71,7 +73,7 @@ $Selenium->RunTest(
 
         # Add user to customer.
         my $UserFirstname = "Firstname$RandomNumber";
-        my $UserLogin     = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $UserLogin     = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $UserFirstname,
             UserLastname   => "Lastname$RandomNumber",

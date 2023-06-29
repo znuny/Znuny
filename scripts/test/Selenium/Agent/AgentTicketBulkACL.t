@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -15,6 +15,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
+
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ACLObject          = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
 
         my @Fields = (
             {
@@ -67,10 +74,6 @@ $Selenium->RunTest(
                 );
             }
         };
-
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ACLObject    = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         my $RandomID = $HelperObject->GetRandomID();
 
@@ -282,7 +285,7 @@ EOF
             Password => $TestUserLogin1,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # After login, we need to navigate to the ACL deployment to make the imported ACL work.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminACL;Subaction=ACLDeploy");
@@ -296,7 +299,7 @@ EOF
         );
 
         # Add a customer.
-        my $CustomerUserLogin = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUserLogin = $CustomerUserObject->CustomerUserAdd(
             UserFirstname  => 'Huber',
             UserLastname   => 'Manfred',
             UserCustomerID => 'A124',
@@ -540,7 +543,7 @@ EOF
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
 
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -564,8 +567,6 @@ EOF
                 "Deleted Type with ID $TypeID",
             );
         }
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (qw( CustomerUser Type )) {

@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 use strict;
 use warnings;
@@ -41,14 +42,14 @@ getopt( 'hbd', \%Opts );
 if ( exists $Opts{h} ) {
     print <<EOF;
 
-Restore an OTRS system from backup.
+Restore a Znuny system from backup.
 
 Usage:
- restore.pl -b /data_backup/<TIME>/ -d /opt/otrs/
+ restore.pl -b /data_backup/<TIME>/ -d /opt/znuny/
 
 Options:
  -b                     - Directory of the backup files.
- -d                     - Target OTRS home directory.
+ -d                     - Target Znuny home directory.
  [-h]                   - Display help for this command.
 
 EOF
@@ -109,7 +110,7 @@ elsif ( -e $ConfigBackupBz2 ) {
 # create common objects
 local $Kernel::OM = Kernel::System::ObjectManager->new(
     'Kernel::System::Log' => {
-        LogPrefix => 'OTRS-restore.pl',
+        LogPrefix => 'Znuny-restore.pl',
     },
 );
 

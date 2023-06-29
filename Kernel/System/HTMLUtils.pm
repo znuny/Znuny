@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -86,10 +86,25 @@ sub ToAscii {
     my $LinkList = '';
     my $Counter  = 0;
     $Param{String} =~ s{
-        <a\s.*?href=("|')(.+?)("|').*?>
+        <a\s.*?href=("|')(.*?)(\1).*?>
     }
     {
         my $Link = $2;
+
+        my %SafeLink = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+            String       => $Link,
+            NoApplet     => 1,
+            NoObject     => 1,
+            NoEmbed      => 1,
+            NoSVG        => 1,
+            NoImg        => 1,
+            NoIntSrcLoad => 1,
+            NoExtSrcLoad => 1,
+            NoJavaScript => 1,
+        );
+
+        $Link = $SafeLink{String} // '';
+
         $Counter++;
         $LinkList .= "[$Counter] $Link\n";
         "[$Counter]";
@@ -1225,7 +1240,7 @@ sub Safety {
 
                 if (
                     ($Param{NoIntSrcLoad} && $Content =~ m{url\(})
-                    || ($Param{NoExtSrcLoad} && $Content =~ m/(http|ftp|https):\//i)) {
+                    || ($Param{NoExtSrcLoad} && $Content =~ m/((http|ftp|https):|\/\/)/i)) {
                     $Replaced = 1;
                     '';
                 }
@@ -1241,7 +1256,7 @@ sub Safety {
                 }
                 {
                     my $URL = $3;
-                    if ($Param{NoIntSrcLoad} || ($Param{NoExtSrcLoad} && $URL =~ /(http|ftp|https):\//i)) {
+                    if ($Param{NoIntSrcLoad} || ($Param{NoExtSrcLoad} && $URL =~ /((http|ftp|https):|\/\/)/i)) {
                         $Replaced = 1;
                         '';
                     }
@@ -1302,14 +1317,16 @@ sub EmbeddedImagesExtract {
         return;
     }
 
-    my $FQDN = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
+
     ${ $Param{DocumentRef} } =~ s{(src=")(data:image/)(png|gif|jpg|jpeg|bmp)(;base64,)(.+?)(")}{
 
         my $Base64String = $5;
 
         my $FileName     = 'pasted-' . time() . '-' . int(rand(1000000)) . '.' . $3;
         my $ContentType  = "image/$3; name=\"$FileName\"";
-        my $ContentID    = 'pasted.' . time() . '.' . int(rand(1000000)) . '@' . $FQDN;
+        my $ContentID    = 'pasted.' . time() . '.' . int(rand(1000000)) . '@' . $ExternalFQDN;
 
         my $AttachmentData = {
             Content     => decode_base64($Base64String),

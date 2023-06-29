@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -128,14 +128,11 @@ sub _ShowOverview {
         );
     }
 
-    my $OTRSBusinessIsInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-
     # call all needed template blocks
     $LayoutObject->Block(
         Name => 'Main',
         Data => {
             %Param,
-            OTRSBusinessIsInstalled => $OTRSBusinessIsInstalled,
         }
     );
 
@@ -263,14 +260,17 @@ sub _ShowOverview {
     );
 
     $Output .= $LayoutObject->Footer();
+
     return $Output;
 }
 
 sub _DynamicFieldsListShow {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $FieldTypeConfig = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::Driver');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $FieldTypeConfig = $ConfigObject->Get('DynamicFields::Driver');
 
     # check start option, if higher than fields available, set
     # it to the last field page
@@ -283,7 +283,7 @@ sub _DynamicFieldsListShow {
 
     # get data selection
     my %Data;
-    my $Config = $Kernel::OM->Get('Kernel::Config')->Get('PreferencesGroups');
+    my $Config = $ConfigObject->Get('PreferencesGroups');
     if ( $Config && $Config->{$Group} && $Config->{$Group}->{Data} ) {
         %Data = %{ $Config->{$Group}->{Data} };
     }
@@ -353,9 +353,9 @@ sub _DynamicFieldsListShow {
                 );
 
                 # get the object type display name
-                my $ObjectTypeName = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::ObjectType')
-                    ->{ $DynamicFieldData->{ObjectType} }->{DisplayName}
-                    || $DynamicFieldData->{ObjectType};
+                my $ObjectTypeName
+                    = $ConfigObject->Get('DynamicFields::ObjectType')->{ $DynamicFieldData->{ObjectType} }
+                    ->{DisplayName} || $DynamicFieldData->{ObjectType};
 
                 # get the field type display name
                 my $FieldTypeName = $FieldTypeConfig->{ $DynamicFieldData->{FieldType} }->{DisplayName}

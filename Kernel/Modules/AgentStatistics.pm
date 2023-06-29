@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -317,11 +317,19 @@ sub DeleteAction {
 
     # challenge token check for write action
     $LayoutObject->ChallengeTokenCheck();
-    $Kernel::OM->Get('Kernel::System::Stats')->StatsDelete(
+    my $Success = $Kernel::OM->Get('Kernel::System::Stats')->StatsDelete(
         StatID => $StatID,
         UserID => $Self->{UserID},
     );
-    return $LayoutObject->Redirect( OP => "Action=AgentStatistics;Subaction=Overview" );
+
+    return $LayoutObject->Attachment(
+        ContentType => 'text/html',
+        Content     => ($Success) ? 1 : 0,
+        Type        => 'inline',
+        NoCache     => 1,
+    );
+
+    #     return $LayoutObject->Redirect( OP => "Action=AgentStatistics;Subaction=Overview" );
 }
 
 sub EditScreen {

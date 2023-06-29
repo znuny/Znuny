@@ -1,0 +1,236 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     Vars
+
+    Values:
+    - px
+    - font-weight
+
+    --hover-brightness: brightness(1.2);
+    --main-transition: all ease .3s;
+*/
+
+:root {
+
+    /* Page */
+    --main-page-padding: 25px;
+
+    /* Sections */
+    --main-bg-color: var(--gray-light-white);
+    --input-field-bg-color: var(--white);
+    --side-bar-width-desktop: 280px;
+
+    /* Text */
+    --font-size-xxl: 24px;
+    --font-size-xl: 21px;
+    --font-size-lg: 18px;
+    --font-size-md: 16px;
+    --main-font-size: 14px;
+    --font-size-sm: 12px;
+    --font-size-xs: 10px;
+    --font-size-xxs: 8px;
+
+    --h1-font-size: 24px;
+    --label-font-size: 14px;
+
+    --main-line-height: 14px;
+    --input-line-height: 20px;
+    --main-font-color: var(--black);
+
+    /* Weight */
+    --normal: 400;
+    --medium: 500;
+    --semi-bold: 600;
+    --bold: 700;
+
+    /* Spacing */
+    --size-6: 6px;
+    --size-8 : 8px;
+    --size-10: 10px;
+    --size-15: 15px;
+    --size-20: 20px;
+    --size-30: 30px;
+
+    --gap-xl: 60px;
+    --gap-lg: 30px;
+    --gap-md: 20px;
+    --gap-md-sm: 15px;
+    --gap-sm: 10px;
+    --gap-xs: 5px;
+
+    /* Borders */
+    --border-solid: solid;
+    --border-dashed: dashed;
+    --border-width: 1px;
+    --border-width-md: 2px;
+    --border-width-lg: 5px;
+    --border-radius-menu-mobile: 50px;
+    --border-radius-menu-mobile-active: 30px;
+    --border-radius-xxl: 100px;
+    --border-radius-xl: 50px;
+    --border-radius-lg: 20px;
+    --border-radius-md: 15px;
+    --border-radius-sm: 10px;
+    --border-radius-xs: 8px;
+    --border-radius-xxs: 5px;
+
+    /* Margins */
+    --margin-xxl: 30px;
+    --margin-xl: 25px;
+    --margin-lg: 20px;
+    --margin-md: 15px;
+    --margin-sm: 10px;
+    --margin-xs: 5px;
+
+    /* Paddings */
+    --padding-xxl: 30px;
+    --padding-xl: 25px;
+    --padding-lg: 20px;
+    --padding-md: 15px;
+    --padding-sm: 10px;
+    --padding-xs: 5px;
+
+    /* Box Shadow */
+    --menu-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    /* Interaction */
+    --hover-brightness: brightness(1.2);
+    --main-transition: all ease .3s;
+
+    /* Icons */
+    --icon-main-size: 16px;
+    --icon-hover-sm-size: 22px;
+    --icon-hover-size: 28px;
+    --icon-hover-md-size: 30px;
+    --icon-hover-color: var(--gray-regular);
+    --icon-hover-color-light: var(--gray-light);
+    --icon-hover-color-medium: var(--gray-medium-darker);
+
+    /* Flags */
+    --flag-width: 35px;
+    --flag-height: 13px;
+    --flag-small-width: 25px;
+    --flag-small-height: 8px;
+
+    /* COMPONENTS */
+
+        /* Main Menu */
+        --menu-font: var(--black);
+        --menu-bg: var(--white);
+
+        /* SidebarColumn Header*/
+        --sidebarcolumn-header-bg: var(--gray-regular-light);
+
+        /* Widget Simple */
+        --widget-simple-bg: var(--white);
+        --widget-simple-title-size: 14px;
+        --widget-standard-padding: var(--padding-md);
+        --widget-margin: 20px;
+
+        /* ToolBar UserAvatar */
+        --submenu-preferences: var(--gray-dark);
+        --submenu-log: var(--warning-color);
+
+        /* Tables */
+        --table-bg: var(--white);
+        --table-th-font-color: var(--black);
+        --table-td-hover-opacity: 0.5;
+        --table-tr-border-bottom: var(--gray-light-semi);
+        --table-tr-py-18: 18px;
+        --table-tr-px-18: 10px;
+        --table-tr-line-hight: 40px;
+
+        /* Bread Crumb */
+        --bread-crumb: var(--gray-dark-semi);
+        --bread-crumb-active: var(--black);
+        --bread-crumb-font-size: var(--font-size-sm);
+
+        /* Inputs */
+
+            /* Selection */
+            --pill-color-selected: var(--gray-light-ultra);
+            --main-field-size: 620px;
+
+            /* Input Fields */
+            --text-message-color: var(--black);
+            --text-message-min-height: 141px;
+            --text-area-min-height: 72px;
+            --reply-input-height: var(--btn-height-sm);
+            --max-input-field-height: 30px;
+            --disabled-input-color: var(--disabled-input);
+
+        /* InlineActions Dropdown Menu */
+        --inlactions-height: 35px;
+        --inlactions-font-size: var(--font-size-sm);
+        --inlactions-text-color: var(--white);
+        --inlactions-bg-color: var(--black);
+
+        /* Modal Window */
+        --modal-col-max-height: 326px;
+        --modal-col-text-color: var(--gray-darker);
+        --modal-input-width: 75px;
+        --modal-header-bg: var(--gray-regular-light);
+
+        /* Buttons */
+
+            /* Primary */
+            --btn-width-l: 134px;
+            --btn-max-width-xxl: 215px;
+            --btn-max-width-xl: 180px;
+            --btn-max-width-lg: 160px;
+            --btn-max-width-md: 140px;
+            --btn-max-width-sm: 100px;
+            --btn-max-width-xs: 80px;
+
+            --btn-min-height: 38px;
+            --btn-height-lg: 48px;
+            --btn-height-md: var(--btn-min-height);
+            --btn-height-sm: 28px;
+
+            --btn-primary-text: var(--white);
+            --btn-primary-text-hover: var(--btn-primary-text);
+
+            --btn-text-color: var(--white);
+            --btn-text-color-ghost: var(--gray-darker);
+
+            /* Btn Icon */
+            --btn-icon-sm: 34px;
+
+            /* Ghost */
+            --btn-ghost-text: var(--black);
+            --btn-ghost-text-hover: var(--btn-primary-text);
+            --btn-ghost-background: transparent;
+            --btn-ghost-background-hover: var(--primary-color);
+
+            /* Cancel Ghost */
+            --btn-cancel-ghost-text: var(--gray-dark);
+            --btn-cancel-ghost-bg: var(--white);
+            --btn-cancel-ghost-bg-hover: var(--border-color);
+
+            --btn-width-sm: 90px;
+            --btn-min-height-sm: 28px;
+
+            /* Drop-down */
+            --btn-dropdown-padding: var(--padding-md);
+            --btn-dropdown-bg-color: var(--primary-color);
+            --btn-dropdown-min-height: var(--btn-min-height);
+            --btn-dropdown-min-width: var(--btn-width-l);
+            --btn-dropdown-font-size: var(--font-size-sm);
+            --btn-dropdown-font-weight: var(--bold);
+            --btn-dropdown-color: var(--main-font-color);
+            --btn-dropdown-border-width: var(--border-width-md);
+            --btn-dropdown-border-radius: var(--border-radius-md);
+
+            --btn-filter-dropdown-hover-color: var(--gray-light);
+
+
+
+}

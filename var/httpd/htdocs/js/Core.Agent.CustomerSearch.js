@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -277,8 +277,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             if (
                 Core.Config.Get('Action') === 'AgentTicketPhone' ||
                 Core.Config.Get('Action') === 'AgentTicketEmail' ||
-                Core.Config.Get('Action') === 'AgentTicketCustomer' ||
-                Core.Config.Get('Action') === 'AgentChatAppend'
+                Core.Config.Get('Action') === 'AgentTicketCustomer'
                 )
             {
                 CustomerHistoryEvents();
@@ -700,7 +699,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             }
 
             // add event handler to radio button
-            if($(this).hasClass('CustomerTicketRadio')) {
+            if($(this).hasClass('RadioRound')) {
 
                 if (TicketCustomerIDs === 0) {
                     $(this).prop('checked', true);
@@ -733,7 +732,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                     TargetNS.RemoveCustomerTicket($(this));
 
                     // clear CustomerHistory table if there are no selected customer users
-                    if ($('#TicketCustomerContent' + Field + ' .CustomerTicketRadio').length === 0) {
+                    if ($('#TicketCustomerContent' + Field + ' .RadioRound').length === 0) {
                         $('#CustomerTickets').empty();
                     }
                     return false;

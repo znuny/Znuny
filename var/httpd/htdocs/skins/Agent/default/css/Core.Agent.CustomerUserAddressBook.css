@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -15,28 +15,39 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 @media screen,projection,tv,handheld {
 
 .CustomerUserAdressBookSearch h1 {
-    margin: 10px 0px;
-    padding: 4px 0px 7px;
+    padding: 0 0 8px;
 }
 
-.CustomerUserAddressBookForm {
-    width: 100% !important;
-    padding-right: 0 !important;
+@media only screen and (max-width: 768px) {
+    .OverviewBox.CustomerUserAdressBook + #OverviewBody.TicketList.CustomerUserAdressBookList {
+        max-height: 73vh;
+    }
+
+    .OverviewBox.CustomerUserAdressBook {
+        gap: var(--gap-sm);
+    }
 }
 
-.CustomerUserAdressBook h1 {
-    padding-left: 8px;
+.OverviewBox.CustomerUserAdressBook + #OverviewBody.TicketList.CustomerUserAdressBookList {
+    max-height: 78vh;
+}
+
+/*#OverviewBody.Overview form.CustomerUserAddressBookForm {
+    border-right: 0;
+    border-left: 0;
+}*/
+
+.TicketList.CustomerUserAdressBookList form.CustomerUserAddressBookForm {
+    border-top: 0;
+    border: var(--border-width) var(--border-solid) var(--border-color);
 }
 
 .CustomerUserAdressBook .FieldExplanation {
-    padding-left: 8px;
-    padding-right: 8px;
+    align-self: flex-start;
 }
 
 .CustomerUserAdressBook .Pagination {
-    height: 10px;
-    margin-top: 5px;
-    padding-right: 12px;
+    border-top: 0;
 }
 
 .CustomerUserAdressBookList .Disabled > td,

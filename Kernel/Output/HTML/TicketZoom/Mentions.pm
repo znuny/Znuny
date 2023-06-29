@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -45,13 +45,13 @@ sub Run {
         );
 
         $Users{ $User{UserID} } = 1;
-
         $LayoutObject->Block(
             Name => "User",
             Data => {
-                UserFullname => $User{UserFullname},
-                UserID       => $User{UserID},
-                Removable    => $UserCanRemoveMention,
+                UserLogin => $User{UserLogin},
+                UserEmail => $User{UserEmail},
+                UserID    => $User{UserID},
+                Removable => $UserCanRemoveMention,
             }
         );
     }

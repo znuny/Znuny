@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -33,6 +33,7 @@ Core.UI.InputFields = (function (TargetNS) {
         InputFieldPadding: 3,
         SelectionBoxOffsetLeft: 5,
         SelectionBoxOffsetRight: 5,
+        SelectionBoxAdditionalOffsetRight: 10,
         ErrorClass: 'Error',
         ServerErrorClass: 'ServerError',
         FadeDuration: 150,
@@ -414,7 +415,7 @@ Core.UI.InputFields = (function (TargetNS) {
         if ($SelectObj.val()) {
 
             // Maximum available width for boxes
-            MaxWidth = $SearchObj.width() - Config.SelectionBoxOffsetRight - Config.InputFieldPadding;
+            MaxWidth = $SearchObj.width() - Config.SelectionBoxOffsetRight - Config.InputFieldPadding - Config.SelectionBoxAdditionalOffsetRight;
 
             // Check which kind of selection we are dealing with
             if ($.isArray($SelectObj.val())) {
@@ -472,7 +473,7 @@ Core.UI.InputFields = (function (TargetNS) {
                         .append(
                             $('<a />').attr('href', '#')
                                 .attr('title', Core.Language.Translate('Remove selection'))
-                                .text('x')
+                                .append('<i class="fa fa-close"></i>')
                                 .attr('role', 'button')
                                 .attr('tabindex', '-1')
                                 .attr(
@@ -537,6 +538,7 @@ Core.UI.InputFields = (function (TargetNS) {
                             );
                         }
 
+
                         // Offset the box and show it
                         if ($('body').hasClass('RTL')) {
                             $SelectionObj.css('right', OffsetLeft + 'px')
@@ -584,10 +586,10 @@ Core.UI.InputFields = (function (TargetNS) {
 
             if (Multiple && MoreBox) {
                 $SelectionFilterObj = $('<a />').appendTo($InputContainerObj);
-                $SelectionFilterObj.addClass('InputField_Action InputField_SelectionFilter')
+                $SelectionFilterObj.addClass('InputField_Action InputField_SelectionFilter icon-hover')
                     .attr('href', '#')
                     .attr('title', Core.Language.Translate('Show current selection'))
-                    .css(($('body').hasClass('RTL') ? 'left' : 'right'), Config.SelectionBoxOffsetRight + 'px')
+                    .css(($('body').hasClass('RTL') ? 'left' : 'right'), Config.SelectionBoxOffsetRight + Config.SelectionBoxAdditionalOffsetRight * 2 + 'px')
                     .append($('<i />').addClass('fa fa-eye'))
                     .attr('role', 'button')
                     .attr('tabindex', '-1')
@@ -605,8 +607,12 @@ Core.UI.InputFields = (function (TargetNS) {
 
                                     // Refresh the field and get focus
                                     $SearchObj = $('#' + Core.App.EscapeSelector($SelectObj.data('modernized')));
-                                    $SearchObj.width($SelectObj.outerWidth())
-                                        .trigger('blur');
+
+                                    if ($SelectObj.hasClass('DynamicWidth')) {
+                                        $SearchObj.width($SelectObj.outerWidth())
+                                    }
+
+                                    $SearchObj.trigger('blur');
                                     CheckAvailability($SelectObj, $SearchObj, $InputContainerObj);
                                     setTimeout(function () {
                                         $SearchObj.focus();
@@ -911,8 +917,10 @@ Core.UI.InputFields = (function (TargetNS) {
 
                     // Refresh the field and get focus
                     $SearchObj = $('#' + Core.App.EscapeSelector($SelectObj.data('modernized')));
-                    $SearchObj.width($SelectObj.outerWidth())
-                        .trigger('blur');
+                    if ($SelectObj.hasClass('DynamicWidth')) {
+                        $SearchObj.width($SelectObj.outerWidth())
+                    }
+                    $SearchObj.trigger('blur');
                     CheckAvailability($SelectObj, $SearchObj, $InputContainerObj);
                     setTimeout(function () {
                         $SearchObj.focus();
@@ -1136,10 +1144,14 @@ Core.UI.InputFields = (function (TargetNS) {
      * @function
      * @returns {Boolean} Returns true if successfull, false otherwise
      * @param {jQueryObject} $SelectFields - Fields to initialize.
+     * @param {Object} Options - The different options.
+     * @param {Object} Options.Force - even if the field is not visible it will be rendered
      * @description
      *      This function initializes select input fields, based on supplied CSS selector.
      */
-    TargetNS.InitSelect = function ($SelectFields) {
+    TargetNS.InitSelect = function ($SelectFields, Options) {
+
+        Options = Options || {};
 
         // Give up if no select fields are found
         if (!$SelectFields.length) {
@@ -1182,7 +1194,13 @@ Core.UI.InputFields = (function (TargetNS) {
             }
 
             // Only initialize new elements if original field is valid and visible
-            if ($(SelectObj).is(':visible')) {
+            if ($(SelectObj).is(':visible') || (Options && Options.Force)) {
+
+                // run only if InputField_Container does not exists
+                // if (Options && Options.Force && $(SelectObj).parent().find('.InputField_Container').length){
+                if ($(SelectObj).parent().find('.InputField_Container').length){
+                    return;
+                }
 
                 // Initialize variables
                 $SelectObj = $(SelectObj);
@@ -1239,7 +1257,8 @@ Core.UI.InputFields = (function (TargetNS) {
                     .addClass('InputField_Search')
                     .attr('type', 'text')
                     .attr('role', 'search')
-                    .attr('autocomplete', 'off');
+                    .attr('autocomplete', 'off')
+                    .after('<i class="fa fa-caret-down"></i>');
 
                 // If original field has class small, add it to the input field, too
                 if ($SelectObj.hasClass('Small')) {
@@ -1247,25 +1266,27 @@ Core.UI.InputFields = (function (TargetNS) {
                 }
 
                 // Set width of search field to that of the select field
-                $SearchObj.width(SelectWidth);
+                if ($SelectObj.hasClass('DynamicWidth')) {
+                    $SearchObj.width(SelectWidth);
+                }
 
                 // Subscribe on window resize event
                 Core.App.Subscribe('Event.UI.InputFields.Resize', function() {
 
                     // Set width of search field to that of the select field
-                    $SearchObj.blur().hide();
-                    SelectWidth = $SelectObj.show().outerWidth();
-                    $SelectObj.hide();
-                    $SearchObj.width(SelectWidth).show();
+                    if ($SelectObj.hasClass('DynamicWidth')) {
+                        // Set width of search field to that of the select field
+                        $SearchObj.blur().hide();
+                        SelectWidth = $SelectObj.show().outerWidth();
+                        $SearchObj.width(SelectWidth).show();
+                    }
+
                 });
 
                 // Handle clicks on related label
                 if ($SelectObj.attr('id')) {
                     $LabelObj = $('label[for="' + Core.App.EscapeSelector($SelectObj.attr('id')) + '"]');
                     if ($LabelObj.length > 0) {
-                        $LabelObj.on('click.InputField', function () {
-                            $SearchObj.focus();
-                        });
                         $SearchObj.attr('aria-label', $LabelObj.text());
                     }
                 }
@@ -1560,11 +1581,6 @@ Core.UI.InputFields = (function (TargetNS) {
 
                     // Set maximum height of the list to available space
                     $TreeContainerObj.css('max-height', AvailableMaxHeight + 'px');
-
-                    // Calculate width for tree container
-                    $TreeContainerObj.width($SearchObj.width()
-                        + Config.InputFieldPadding * 2
-                    );
 
                     // Deduce ID of original field
                     TreeID = $SelectObj.attr('id');
@@ -1957,8 +1973,7 @@ Core.UI.InputFields = (function (TargetNS) {
 
                     $ToolbarContainerObj = $('<div />').appendTo($ListContainerObj);
                     $ToolbarContainerObj.addClass('InputField_ToolbarContainer')
-                        .attr('tabindex', '-1')
-                        .width($TreeContainerObj.width());
+                        .attr('tabindex', '-1');
 
                     $ToolbarObj = $('<ul />').appendTo($ToolbarContainerObj)
                         .attr('tabindex', '-1')
@@ -2228,9 +2243,9 @@ Core.UI.InputFields = (function (TargetNS) {
                                     },
                                     'li_attr': {
                                         class: 'Disabled jstree-no-match'
-                                    }
+                                    },
                                 };
-                                $TreeObj.jstree('create_node', $TreeObj, NoMatchNodeJSON);
+                                $TreeObj.jstree('create_node','#', NoMatchNodeJSON , 'first');
 
                                 // Hide all other nodes
                                 $TreeObj.find('li:visible')
@@ -2246,8 +2261,8 @@ Core.UI.InputFields = (function (TargetNS) {
                                 $ClearSearchObj.addClass('InputField_Action InputField_ClearSearch')
                                     .attr('href', '#')
                                     .attr('title', Core.Language.Translate('Clear search'))
-                                    .css(($('body').hasClass('RTL') ? 'left' : 'right'), Config.SelectionBoxOffsetRight + 'px')
-                                    .append($('<i />').addClass('fa fa-times-circle'))
+                                    .css(($('body').hasClass('RTL') ? 'left' : 'right'), Config.SelectionBoxOffsetRight + Config.SelectionBoxAdditionalOffsetRight * 2 + 'px')
+                                    .append($('<i />').addClass('fa fa-times'))
                                     .attr('role', 'button')
                                     .attr('tabindex', '-1')
                                     .attr('aria-label', Core.Language.Translate('Clear search'))
@@ -2412,7 +2427,10 @@ Core.UI.InputFields = (function (TargetNS) {
                         }
                     }
                     CheckAvailability($SelectObj, $SearchObj, $InputContainerObj);
-                    $SearchObj.width($SelectObj.outerWidth());
+
+                    if ($SelectObj.hasClass('DynamicWidth')) {
+                        $SearchObj.width($SelectObj.outerWidth());
+                    }
                     ShowSelectionBoxes($SelectObj, $InputContainerObj);
                 })
 

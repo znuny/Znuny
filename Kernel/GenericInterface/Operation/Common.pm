@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -28,7 +28,7 @@ performs user or customer user authorization
 
     my ( $UserID, $UserType ) = $CommonObject->Auth(
         Data => {
-            SessionID         => 'AValidSessionIDValue'     # the ID of the user session
+            SessionID         => 'AValidSessionIDValue',    # the ID of the user session
             UserLogin         => 'Agent1',                  # optional, provide UserLogin or CustomerUserLogin
             # or
             CustomerUserLogin => 'Customer1',               # optional, provide UserLogin or CustomerUserLogin

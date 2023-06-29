@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -59,16 +59,26 @@ Core.Agent.Search = (function (TargetNS) {
      *      This function adds one attributes for search.
      */
     TargetNS.SearchAttributeAdd = function (Attribute) {
-        var $Label = $('#SearchAttributesHidden label#Label' + Attribute);
+        var $Label = $('#SearchAttributesHidden label#Label' + Attribute),
+            $Clone;
 
         if ($Label.length) {
-            $Label.prev().clone().appendTo('#SearchInsert');
-            $Label.clone().appendTo('#SearchInsert');
-            $Label.next().clone().appendTo('#SearchInsert')
+
+            if ($Label.parents('.field-wrapper').length){
+                $Clone = $Label.parents('.field-wrapper').clone();
+            }else{
+                // use old clone calls
+                $Label.prev().clone().appendTo('#SearchInsert');
+                $Label.clone().appendTo('#SearchInsert');
+                $Clone = $Label.next().clone().appendTo('#SearchInsert')
+            }
+
+            $Clone.appendTo('#SearchInsert')
 
                 // bind click function to remove button now
                 .find('.RemoveButton').on('click', function () {
                     var $Element = $(this).parent();
+
                     TargetNS.SearchAttributeRemove($Element);
 
                     // rebuild selection
@@ -103,9 +113,14 @@ Core.Agent.Search = (function (TargetNS) {
      *      This function removes attributes from an element.
      */
     TargetNS.SearchAttributeRemove = function ($Element) {
-        $Element.prev().prev().remove();
-        $Element.prev().remove();
-        $Element.remove();
+
+        if ($Element.parents('.field-wrapper').length){
+            $Element.parent().remove();
+        }else{
+            $Element.prev().prev().remove();
+            $Element.prev().remove();
+            $Element.remove();
+        }
     };
 
     /**
@@ -149,7 +164,7 @@ Core.Agent.Search = (function (TargetNS) {
             var ElementName,
                 $Element,
                 $LabelElement = $(this),
-                $FieldElement = $LabelElement.next('.Field');
+                $FieldElement = $LabelElement.parent().next('.Field');
             // those with ID's are used for searching
             if ($(this).attr('id')) {
 
@@ -162,7 +177,7 @@ Core.Agent.Search = (function (TargetNS) {
                 // If there's no input element with the selected name
                 // find the next "select" element and use that one for checking
                 if (!$Element.length) {
-                    $Element = $(this).next().find('select');
+                    $Element = $(this).parent().next().find('select');
                 }
 
                 // Fix for bug#10845: make sure time slot fields with TimeInputFormat
@@ -260,7 +275,7 @@ Core.Agent.Search = (function (TargetNS) {
                 Core.Form.EnableForm($('#SearchForm'));
 
                 if (FoundStopWords.length) {
-                     CallbackStopWordsFound(FoundStopWords);
+                    CallbackStopWordsFound(FoundStopWords);
                 }
                 else {
                     CallbackNoStopWordsFound();
@@ -391,7 +406,8 @@ Core.Agent.Search = (function (TargetNS) {
                 $('#SearchProfileAddBlock').hide();
 
                 // hide save changes in template block
-                $('#SaveProfile').parent().hide().prev().hide().prev().hide();
+                $('label[for="SaveProfile"]').hide();
+                $('#SaveProfile').parent().hide();
 
                 // search profile is selected
                 if ($('#SearchProfile').val() && $('#SearchProfile').val() !== 'last-search') {
@@ -403,7 +419,8 @@ Core.Agent.Search = (function (TargetNS) {
                     $('#SearchProfileAsLink').show();
 
                     // show save changes in template block
-                    $('#SaveProfile').parent().show().prev().show().prev().show();
+                    $('label[for="SaveProfile"]').show();
+                    $('#SaveProfile').parent().show();
 
                     // set SaveProfile to 0
                     $('#SaveProfile').prop('checked', false);
@@ -539,7 +556,8 @@ Core.Agent.Search = (function (TargetNS) {
                     $('#SearchProfileAddBlock').hide();
 
                     // hide save changes in template block
-                    $('#SaveProfile').parent().hide().prev().hide().prev().hide();
+                    $('label[for="SaveProfile"]').hide();
+                    $('#SaveProfile').parent().hide();
 
                     // set SaveProfile to 1
                     $('#SaveProfile').prop('checked', true);
@@ -601,6 +619,10 @@ Core.Agent.Search = (function (TargetNS) {
                     return false;
                 });
 
+                $('.ContentFooter #Cancel').on('click', function () {
+                    Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                });
+
                 window.setTimeout(function (){
                     TargetNS.AddSearchAttributes();
                     TargetNS.AdditionalAttributeSelectionRebuild();
@@ -619,11 +641,11 @@ Core.Agent.Search = (function (TargetNS) {
     TargetNS.InitToolbarFulltextSearch = function () {
 
         // register return key
-        $('#ToolBar li.Extended.SearchFulltext form[name="SearchFulltext"]').off('keypress.FilterInput').on('keypress.FilterInput', function (Event) {
+        $('#ToolBarSearchTerm').off('keypress.FilterInput').on('keypress.FilterInput', function (Event) {
             var SearchString;
 
             if ((Event.charCode || Event.keyCode) === 13) {
-                SearchString = $('#Fulltext').val();
+                SearchString = $('#ToolBarSearchTerm').val();
 
                 if (!SearchString.length || !Core.Config.Get('CheckSearchStringsForStopWords')) {
                     return true;
@@ -635,7 +657,7 @@ Core.Agent.Search = (function (TargetNS) {
                         alert(Core.Language.Translate('Please remove the following words from your search as they cannot be searched for:') + "\n" + FoundStopWords);
                     },
                     function () {
-                        $('#ToolBar li.Extended.SearchFulltext form[name="SearchFulltext"]').submit();
+                        $('form[name="ToolBarSearch"]').submit();
                     }
                 );
 

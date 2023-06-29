@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,8 +21,11 @@ $Selenium->RunTest(
 
         my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $LogObject          = $Kernel::OM->Get('Kernel::System::Log');
 
-        my $Home = $Kernel::OM->Get('Kernel::Config')->Get("Home");
+        my $Home = $ConfigObject->Get("Home");
 
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -51,11 +54,11 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
 
         # Select Application for leave process.
@@ -106,7 +109,7 @@ $Selenium->RunTest(
         );
 
         # Check imported dynamic fields (from pre .pm file).
-        my $DynamicFieldList = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
+        my $DynamicFieldList = $DynamicFieldObject->DynamicFieldList(
             ObjectType => 'Ticket',
             ResultType => 'HASH',
         );
@@ -223,7 +226,7 @@ $Selenium->RunTest(
             DirtySettings => \@UpdatedSettings,
         );
         if ( !$DeploymentResult{Success} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "System was unable to deploy settings needed for Application for leave process!"
             );

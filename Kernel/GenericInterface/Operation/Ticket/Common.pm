@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1115,8 +1115,8 @@ Sets the value of a dynamic field.
     my $Result = $CommonObject->SetDynamicFieldValue(
         Name      => 'some name',           # the name of the dynamic field
         Value     => 'some value',          # String or Integer or DateTime format
-        TicketID  => 123
-        ArticleID => 123
+        TicketID  => 123,
+        ArticleID => 123,
         UserID    => 123,
     );
 

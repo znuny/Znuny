@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,8 +18,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Do not check RichText.
         $HelperObject->ConfigSettingChange(
@@ -49,7 +53,7 @@ $Selenium->RunTest(
         my $RandomID          = $HelperObject->GetRandomID();
         my $CustomerFirstName = 'FirstName';
         my $CustomerLastName  = 'LastName, test (12345)';
-        $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserUpdate(
+        $CustomerUserObject->CustomerUserUpdate(
             Source         => 'CustomerUser',
             ID             => $TestCustomerUserLogin,
             UserCustomerID => $TestCustomerUserLogin,
@@ -84,7 +88,7 @@ $Selenium->RunTest(
         my $SubjectRandom = "Subject" . $HelperObject->GetRandomID();
         my $TextRandom    = "Text" . $HelperObject->GetRandomID();
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Phone',
         );
 
@@ -143,7 +147,7 @@ $Selenium->RunTest(
             Password => $TestCustomerUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=123123123");
 
@@ -220,8 +224,9 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
         my $NumberOfExpandedArticles = $Selenium->execute_script(
-            'return $("ul#Messages li.Visible").length'
+            'return $("#VisibleMessageContent").length'
         );
+
         $Self->Is(
             $NumberOfExpandedArticles,
             1,
@@ -239,11 +244,11 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
         $NumberOfExpandedArticles = $Selenium->execute_script(
-            'return $("ul#Messages li.Visible").length'
+            'return $("#VisibleMessageContent").length'
         );
         $Self->Is(
             $NumberOfExpandedArticles,
-            2,
+            1,
             'Make sure that all articles are expanded.'
         );
 
@@ -254,8 +259,7 @@ $Selenium->RunTest(
         );
 
         # Check reply button.
-        $Selenium->find_element("//a[contains(\@id, \'ReplyButton' )]")->click();
-        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#FollowUp.Visible').length" );
+        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#VisibleMessageContent').length" );
         $Selenium->find_element( '#RichText', 'css' )->send_keys('TestBody');
         $Selenium->find_element("//button[contains(\@value, \'Submit' )]")->VerifiedClick();
 
@@ -272,13 +276,6 @@ $Selenium->RunTest(
 
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
-        # Check if reply button is missing in merged ticket (bug#7301).
-        $Self->Is(
-            $Selenium->execute_script('return $("a#ReplyButton").length'),
-            0,
-            "Reply button not found",
-        );
-
         # Check if print button exists on the screen.
         $Self->Is(
             $Selenium->execute_script('return $("a[href*=\'Action=CustomerTicketPrint\']").length'),
@@ -286,7 +283,7 @@ $Selenium->RunTest(
             "Print button is found",
         );
 
-        my $ArticleBackendObjectInternal = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObjectInternal = $ArticleObject->BackendForChannel(
             ChannelName => 'Internal',
         );
 
@@ -327,7 +324,7 @@ $Selenium->RunTest(
 
         # Check From field value.
         my $FromString = $Selenium->execute_script(
-            "return \$('.MessageBody:eq(3) span:eq(0)').text().trim();"
+            "return \$('.MessageHeader:eq(4) span.message-user').text().trim();"
         );
         $Self->Is(
             $FromString,
@@ -359,7 +356,7 @@ $Selenium->RunTest(
 
         # Check From field value.
         $FromString = $Selenium->execute_script(
-            "return \$('.MessageBody:eq(3) span:eq(0)').text().trim();"
+            "return \$('.MessageHeader:eq(4) span.message-user').text().trim();"
         );
         $Self->Is(
             $FromString,
@@ -408,7 +405,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

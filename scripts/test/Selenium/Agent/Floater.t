@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,8 +21,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # enable meta floaters for AgentTicketZoom
         $HelperObject->ConfigSettingChange(
@@ -52,12 +55,12 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # create test ticket
-        my $TicketID = $Kernel::OM->Get('Kernel::System::Ticket')->TicketCreate(
+        my $TicketID = $TicketObject->TicketCreate(
             Title        => 'Selenium Ticket',
             Queue        => 'Raw',
             Lock         => 'unlock',
@@ -75,7 +78,7 @@ $Selenium->RunTest(
 
         my @ArticleIDs;
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Phone',
         );
 
@@ -127,7 +130,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         for my $ArticleID (@ArticleIDs) {
 

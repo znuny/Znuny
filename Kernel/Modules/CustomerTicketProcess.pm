@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,7 +8,7 @@
 # --
 
 package Kernel::Modules::CustomerTicketProcess;
-## nofilter(TidyAll::Plugin::OTRS::Perl::DBObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::DBObject)
 
 use strict;
 use warnings;
@@ -49,6 +49,9 @@ sub new {
         StandardTemplateID => 'StandardTemplateID',
         Article            => 'Article',
     };
+
+    $Self->{IsITSMIncidentProblemManagementInstalled}
+        = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
     return $Self;
 }
@@ -585,6 +588,45 @@ sub _RenderAjax {
                 %{ $Param{GetParam} },
             );
 
+            # check if priority needs to be recalculated
+            if (
+                $Self->{IsITSMIncidentProblemManagementInstalled}
+                && (
+                    $Param{GetParam}->{ElementChanged} eq 'ServiceID'
+                    || $Param{GetParam}->{ElementChanged} eq 'DynamicField_ITSMImpact'
+                )
+                && $Param{GetParam}->{ServiceID}
+                && $Param{GetParam}->{DynamicField_ITSMImpact}
+                )
+            {
+
+                my %Service = $Kernel::OM->Get('Kernel::System::Service')->ServiceGet(
+                    ServiceID => $Param{GetParam}->{ServiceID},
+                    UserID    => $Self->{UserID},
+                );
+
+                # calculate priority from the CIP matrix
+                my $PriorityIDFromImpact = $Kernel::OM->Get('Kernel::System::ITSMCIPAllocate')->PriorityAllocationGet(
+                    Criticality => $Service{Criticality},
+                    Impact      => $Param{GetParam}->{DynamicField_ITSMImpact},
+                );
+
+                # add Priority to the JSONCollector
+                push(
+                    @JSONCollector,
+                    {
+                        Name        => $Self->{NameToID}{$CurrentField},
+                        Data        => $Data,
+                        SelectedID  => $PriorityIDFromImpact,
+                        Translation => 1,
+                        Max         => 100,
+                    },
+                );
+                $FieldsProcessed{ $Self->{NameToID}->{$CurrentField} } = 1;
+
+                next DIALOGFIELD;
+            }
+
             # add Priority to the JSONCollector
             push(
                 @JSONCollector,
@@ -820,7 +862,7 @@ sub _GetParam {
     my $ActivityDialogEntityID = $ParamObject->GetParam(
         Param => 'ActivityDialogEntityID',
     );
-    my $ActivityEntityID;
+    my $ActivityEntityID = $ParamObject->GetParam( Param => 'ActivityEntityID' );
     my %ValuesGotten;
     my $Value;
 
@@ -953,7 +995,7 @@ sub _GetParam {
             if ( !IsHashRefWithData($DynamicFieldConfig) ) {
 
                 my $Message
-                    = "DynamicFieldConfig missing for field: $Param{FieldName}, or is not a Ticket Dynamic Field!";
+                    = "DynamicFieldConfig missing for field: $DynamicFieldName, or is not a Ticket Dynamic Field!";
 
                 # log error but does not stop the execution as it could be an old Article
                 # DynamicField, see bug#11666
@@ -971,6 +1013,24 @@ sub _GetParam {
                 ParamObject        => $ParamObject,
                 LayoutObject       => $LayoutObject,
             );
+
+            # set the criticality from the service
+            if (
+                $Self->{IsITSMIncidentProblemManagementInstalled}
+                && $DynamicFieldName eq 'ITSMCriticality'
+                && $ParamObject->GetParam( Param => 'ServiceID' )
+                )
+            {
+
+                # get service
+                my %Service = $Kernel::OM->Get('Kernel::System::Service')->ServiceGet(
+                    ServiceID => $ParamObject->GetParam( Param => 'ServiceID' ),
+                    UserID    => $Self->{UserID},
+                );
+
+                # set the criticality
+                $Value = $Service{Criticality};
+            }
 
             # If we got a submitted param, take it and next out
             if (
@@ -1421,6 +1481,7 @@ sub _OutputActivityDialog {
             Subaction              => 'StoreActivityDialog',
             TicketID               => $Ticket{TicketID} || '',
             ActivityDialogEntityID => $ActivityActivityDialog->{ActivityDialog},
+            ActivityEntityID       => $ActivityActivityDialog->{Activity},
             ProcessEntityID        => $Param{ProcessEntityID}
                 || $Ticket{
                 'DynamicField_'
@@ -3408,7 +3469,7 @@ sub _StoreActivityDialog {
             if ( !IsHashRefWithData($DynamicFieldConfig) ) {
 
                 my $Message
-                    = "DynamicFieldConfig missing for field: $Param{FieldName}, or is not a Ticket Dynamic Field!";
+                    = "DynamicFieldConfig missing for field: $DynamicFieldName, or is not a Ticket Dynamic Field!";
 
                 # log error but does not stop the execution as it could be an old Article
                 # DynamicField, see bug#11666
@@ -3821,7 +3882,7 @@ sub _StoreActivityDialog {
             if ( !IsHashRefWithData($DynamicFieldConfig) ) {
 
                 my $Message
-                    = "DynamicFieldConfig missing for field: $Param{FieldName}, or is not a Ticket Dynamic Field!";
+                    = "DynamicFieldConfig missing for field: $DynamicFieldName, or is not a Ticket Dynamic Field!";
 
                 # log error but does not stop the execution as it could be an old Article
                 # DynamicField, see bug#11666

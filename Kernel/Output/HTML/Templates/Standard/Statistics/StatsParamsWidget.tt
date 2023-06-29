@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,131 +8,129 @@
 # --
 
 <fieldset class="TableLike">
-    <label>[% Translate("Object") | html %]:</label>
-    <div class="Value">[% Translate(Data.ObjectName) | html %]</div>
-    <div class="Clear"></div>
+    <div class="field-wrapper">
+        <label>[% Translate("Object") | html %]:</label>
+        <div class="Value">[% Translate(Data.ObjectName) | html %]</div>
+    </div>
 
-    <label>[% Translate("Description") | html %]:</label>
-    <div class="Value">[% Data.Description | html %]</div>
-    <div class="Clear"></div>
-
+    <div class="field-wrapper">
+        <label>[% Translate("Description") | html %]:</label>
+        <div class="Value">[% Data.Description | html %]</div>
+    </div>
 [% RenderBlockStart("Format") %]
-    <label for="Format">[% Translate("Format") | html %]:</label>
-    <div class="Value">[% Data.SelectFormat %]</div>
-    <div class="Clear"></div>
+    <div class="field-wrapper">
+        <label for="Format">[% Translate("Format") | html %]:</label>
+        <div class="Value">[% Data.SelectFormat %]</div>
+    </div>
 [% RenderBlockEnd("Format") %]
 [% RenderBlockStart("FormatFixed") %]
-    <input type="hidden" id="Format" name="Format" value="[% Data.FormatKey | html %]"/>
-    <label>[% Translate("Format") | html %]:</label>
-    <div class="Value">[% Translate(Data.Format) | html %]</div>
-    <div class="Clear"></div>
+    <div class="field-wrapper">
+        <input type="hidden" id="Format" name="Format" value="[% Data.FormatKey | html %]"/>
+        <label>[% Translate("Format") | html %]:</label>
+        <div class="Value">[% Translate(Data.Format) | html %]</div>
+    </div>
 [% RenderBlockEnd("FormatFixed") %]
-
 [% RenderBlockStart("TimeZone") %]
-    <label for="TimeZone">[% Translate("Time Zone") | html %]:</label>
-    <div class="Value">
-        [% Data.SelectTimeZone %]
-        <p class="FieldExplanation">
-            [% Translate('The selected time periods in the statistic are time zone neutral.') | html %]
-        </p>
+    <div class="field-wrapper">
+        <label for="TimeZone">[% Translate("Time Zone") | html %]:</label>
+        <div class="Value">
+            [% Data.SelectTimeZone %]
+            <p class="FieldExplanation">
+                [% Translate('The selected time periods in the statistic are time zone neutral.') | html %]
+            </p>
+        </div>
     </div>
-    <div class="Clear"></div>
 [% RenderBlockEnd("TimeZone") %]
-
 [% RenderBlockStart("ExchangeAxis") %]
-    <label>[% Translate("Exchange Axis") | html %]:</label>
-    <div class="Value">[% Data.ExchangeAxis %]</div>
-    <div class="Clear"></div>
-[% RenderBlockEnd("ExchangeAxis") %]
-</fieldset>
-
-[% RenderBlockStart("Static") %]
-<h2>
-        [% Translate("Configurable Params of Static Stat") | html %]
-</h2>
-<fieldset class="TableLike">
-[% RenderBlockStart("ItemParam") %]
-    <label for="[% Data.Name | html %]">[% Translate(Data.Param) | html %]:</label>
-    <div class="Value">[% Data.Field %]</div>
-    <div class="Clear"></div>
-[% RenderBlockEnd("ItemParam") %]
-</fieldset>
-[% RenderBlockEnd("Static") %]
-
-
-[% RenderBlockStart("Dynamic") %]
-<fieldset class="TableLike">
-    <legend><span>[% Translate(Data.Name) | html %]</span></legend>
-[% RenderBlockStart("NoElement") %]
-    <div class="Value">
-        <p class="FieldExplanation">[% Translate("No element selected.") | html %]</p>
+    <div class="field-wrapper">
+        <label>[% Translate("Exchange Axis") | html %]:</label>
+        <div class="Value">[% Data.ExchangeAxis %]</div>
     </div>
+[% RenderBlockEnd("ExchangeAxis") %]
+
+</fieldset>
+[% RenderBlockStart("Static") %]
+    <h2>
+        [% Translate("Configurable Params of Static Stat") | html %]
+    </h2>
+    <fieldset class="TableLike">
+[% RenderBlockStart("ItemParam") %]
+        <div class="field-wrapper">
+            <label for="[% Data.Name | html %]">[% Translate(Data.Param) | html %]:</label>
+            <div class="Value">[% Data.Field %]</div>
+        </div>
+[% RenderBlockEnd("ItemParam") %]
+    </fieldset>
+[% RenderBlockEnd("Static") %]
+[% RenderBlockStart("Dynamic") %]
+    <fieldset class="TableLike">
+    <div class="field-wrapper">
+        <legend class="sub-title">
+            <span>[% Translate(Data.Name) | html %]</span>
+        </legend>
+[% RenderBlockStart("NoElement") %]
+            <div class="Value">
+                <p class="FieldExplanation">[% Translate("No element selected.") | html %]</p>
+            </div>
 [% RenderBlockEnd("NoElement") %]
 [% RenderBlockStart("Element") %]
-    <label>[% Translate(Data.Name) | html %]:</label>
-    <div class="Value">
+            <label>[% Translate(Data.Name) | html %]:</label>
+            <div class="Value">
 [% RenderBlockStart("TimePeriodFixed") %]
-        [% Translate("Between %s and %s") | html | ReplacePlaceholders(Data.TimeStart, Data.TimeStop) %]<br/>
+                    [% Translate("Between %s and %s") | html | ReplacePlaceholders(Data.TimeStart, Data.TimeStop) %]<br/>
 [% RenderBlockEnd("TimePeriodFixed") %]
 [% RenderBlockStart("TimeRelativeFixed") %]
-        [% Translate("The past complete %s and the current+upcoming complete %s %s") | html | ReplacePlaceholders(Data.TimeRelativeCount, Data.TimeRelativeUpcomingCount, Data.TimeRelativeUnit) %]<br/>
+                    [% Translate("The past complete %s and the current+upcoming complete %s %s") | html | ReplacePlaceholders(Data.TimeRelativeCount, Data.TimeRelativeUpcomingCount, Data.TimeRelativeUnit) %]<br/>
 [% RenderBlockEnd("TimeRelativeFixed") %]
 [% RenderBlockStart("TimeScaleFixed") %]
-        [% Translate("Scale") | html %]: [% Data.Count %] [% Translate(Data.Scale) | html %]
+                    [% Translate("Scale") | html %]: [% Data.Count %] [% Translate(Data.Scale) | html %]
 [% RenderBlockEnd("TimeScaleFixed") %]
 [% RenderBlockStart("Fixed") %]
-        <div title="[% Data.Value | html %]">
-                <span class="DataTruncated">[% Data.Value | truncate(120) | html %]</span>
-            [% IF Data.Value.length > 120 %]
-                <span class="DataFull Hidden">[% Data.Value | html %]</span>
-                <a href="#" class="DataShowMore">
-                    <span class="More"><i class="fa fa-long-arrow-right"></i> [% Translate("show more") | html %]</span>
-                    <span class="Less Hidden"><i class="fa fa-long-arrow-left"></i> [% Translate("show less") | html %]</span>
-                </a>
-            [% END %]
-        </div>
+                <div title="[% Data.Value | html %]">
+                        <span class="DataTruncated">[% Data.Value | truncate(120) | html %]</span>
+                    [% IF Data.Value.length > 120 %]
+                        <span class="DataFull Hidden">[% Data.Value | html %]</span>
+                        <a href="#" class="DataShowMore">
+                            <span class="More"><i class="fa fa-long-arrow-right"></i> [% Translate("show more") | html %]</span>
+                            <span class="Less Hidden"><i class="fa fa-long-arrow-left"></i> [% Translate("show less") | html %]</span>
+                        </a>
+                    [% END %]
+                </div>
 [% RenderBlockEnd("Fixed") %]
 [% RenderBlockStart("MultiSelectField") %]
-        [% Data.SelectField %]
+                    [% Data.SelectField %]
 [% RenderBlockEnd("MultiSelectField") %]
 [% RenderBlockStart("SelectField") %]
-        [% Data.SelectField %]
+                    [% Data.SelectField %]
 [% RenderBlockEnd("SelectField") %]
 [% RenderBlockStart("InputField") %]
-        <input type="text" id="[% Data.Key | html %]" name="[% Data.Key | html %]" value="[% Data.Value | html %]" class="W25pc [% Data.CSSClass | html %]"[% FOR DataAttribute IN Data.HTMLDataAttributes.keys.sort %] data-[% DataAttribute | html %]="[% Data.HTMLDataAttributes.$DataAttribute | html %]"[% END %]/>
+                    <input type="text" id="[% Data.Key | html %]" name="[% Data.Key | html %]" value="[% Data.Value | html %]" class="W25pc [% Data.CSSClass | html %]"[% FOR DataAttribute IN Data.HTMLDataAttributes.keys.sort %] data-[% DataAttribute | html %]="[% Data.HTMLDataAttributes.$DataAttribute | html %]"[% END %]/>
 [% RenderBlockEnd("InputField") %]
-    </div>
-    <div class="Clear"></div>
-
+            </div>
 [% RenderBlockStart("TimePeriod") %]
-    <label><em>[% Translate("Absolute period") | html %]</em>:</label>
-    <div class="Value">
-        <p>
-            [% Translate("Between %s and %s") | html | ReplacePlaceholders(Data.TimeStart, Data.TimeStop) %]<br/>
-        </p>
-    </div>
-    <div class="Clear"></div>
+                <label><em>[% Translate("Absolute period") | html %]</em>:</label>
+                <div class="Value">
+                    <p>
+                        [% Translate("Between %s and %s") | html | ReplacePlaceholders(Data.TimeStart, Data.TimeStop) %]<br/>
+                    </p>
+                </div>
 [% RenderBlockEnd("TimePeriod") %]
-
 [% RenderBlockStart("TimeScale") %]
-    <label><em>[% Translate("Scale") | html %]</em>:</label>
-    <div class="Value">
-    [% IF Data.TimeScaleCount %]
-        [% Data.TimeScaleCount %]
-    [% END %]
-        [% Data.TimeScaleUnit %]
-    </div>
-    <div class="Clear"></div>
+                <label><em>[% Translate("Scale") | html %]</em>:</label>
+                <div class="Value">
+                [% IF Data.TimeScaleCount %]
+                    [% Data.TimeScaleCount %]
+                [% END %]
+                    [% Data.TimeScaleUnit %]
+                </div>
 [% RenderBlockEnd("TimeScale") %]
-
 [% RenderBlockStart("TimePeriodRelative") %]
-    <label><em>[% Translate("Relative period") | html %]</em>:</label>
-    <div class="Value">
-        [% Translate("The past complete %s and the current+upcoming complete %s %s") | html | ReplacePlaceholders(Data.TimeRelativeCount, Data.TimeRelativeUpcomingCount, Data.TimeRelativeUnit) %]
-    </div>
-    <div class="Clear"></div>
+                <label><em>[% Translate("Relative period") | html %]</em>:</label>
+                <div class="Value">
+                    [% Translate("The past complete %s and the current+upcoming complete %s %s") | html | ReplacePlaceholders(Data.TimeRelativeCount, Data.TimeRelativeUpcomingCount, Data.TimeRelativeUnit) %]
+                </div>
 [% RenderBlockEnd("TimePeriodRelative") %]
-
 [% RenderBlockEnd("Element") %]
-</fieldset>
+        </div>
+    </fieldset>
 [% RenderBlockEnd("Dynamic") %]

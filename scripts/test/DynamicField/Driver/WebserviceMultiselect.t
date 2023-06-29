@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -141,17 +141,14 @@ my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
 $Self->IsDeeply(
     $DynamicFieldHTML,
     {
+        'Label' =>
+            "<div class='label-wrapper'><label id='LabelDynamicField_DynamicFieldWebserviceDriverMultiselect' for='DynamicField_DynamicFieldWebserviceDriverMultiselect'>DynamicFieldWebserviceDriverMultiselect</label></div>",
         'Field' =>
-            '<select  data-dynamic-field-name="DynamicFieldWebserviceDriverMultiselect" data-dynamic-field-type="WebserviceMultiselect" data-selected-value-field-name="DynamicField_DynamicFieldWebserviceDriverMultiselect" data-autocomplete-field-name="DynamicField_DynamicFieldWebserviceDriverMultiselect_Search" data-autocomplete-min-length="3" data-query-delay="1" data-default-search-term="" data-ticket-id="'
+            '<select data-dynamic-field-name="DynamicFieldWebserviceDriverMultiselect" data-dynamic-field-type="WebserviceMultiselect" data-selected-value-field-name="DynamicField_DynamicFieldWebserviceDriverMultiselect" data-autocomplete-field-name="DynamicField_DynamicFieldWebserviceDriverMultiselect_Search" data-autocomplete-min-length="3" data-query-delay="1" data-default-search-term="" data-ticket-id="'
             . $TicketID
             . '" class="DynamicFieldText Modernize W50pc" id="DynamicField_DynamicFieldWebserviceDriverMultiselect" multiple="multiple" name="DynamicField_DynamicFieldWebserviceDriverMultiselect">
   <option value=" ">-</option>
 </select>',
-        'Label' =>
-            '<label id="LabelDynamicField_DynamicFieldWebserviceDriverMultiselect" for="DynamicField_DynamicFieldWebserviceDriverMultiselect">
-DynamicFieldWebserviceDriverMultiselect:
-</label>
-',
     },
     'EditFieldRender',
 );

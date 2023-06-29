@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -893,12 +893,18 @@ sub Run {
 
             # When a draft is loaded, inform a user that article subject will be empty
             # if contains only the ticket hook (if nothing is modified).
-            if ( $Error{LoadedFormDraft} ) {
-                $Output .= $LayoutObject->Notify(
-                    Data => $LayoutObject->{LanguageObject}->Translate(
-                        'Article subject will be empty if the subject contains only the ticket hook!'
-                    ),
+            if ( $Error{LoadedFormDraft} && IsStringWithData( $GetParam{Subject} ) ) {
+                my $CleanedSubject = $TicketObject->TicketSubjectClean(
+                    TicketNumber => $Ticket{TicketNumber},
+                    Subject      => $GetParam{Subject},
                 );
+                if ( !IsStringWithData($CleanedSubject) ) {
+                    $Output .= $LayoutObject->Notify(
+                        Data => $LayoutObject->{LanguageObject}->Translate(
+                            'Article subject will be empty if the subject contains only the ticket hook!'
+                        ),
+                    );
+                }
             }
 
             $GetParam{StandardResponse} = $GetParam{Body};

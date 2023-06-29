@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -7,7 +7,7 @@
 # --
 
 # because of direct open() calls
-## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
+## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
 
 package Kernel::System::DBCRUD;
 
@@ -36,6 +36,9 @@ our @ObjectDependencies = (
     'Kernel::System::DBCRUD::Format',
 );
 
+=head1 NAME
+
+Kernel::System::DBCRUD
 
 =head2 new()
 
@@ -136,7 +139,7 @@ Add data to table.
 
     my $Success = $DBCRUDObject->DataAdd(
         ID          => '...',
-        '...',
+        # ...
         CreateTime  => '...', # optional
         ChangeTime  => '...', # optional
     );
@@ -265,7 +268,7 @@ sub DataAdd {
     # create history if possible
     if ( !$Self->{PreventHistory} && $Self->can('HistoryEventDataAdd') ) {
         $Self->HistoryEventDataAdd(
-            Event => $Self->{Name} . 'Add',
+            Event => 'DBCRUDAdd',
             Data  => {
                 $Self->{Identifier} => $ID,
                 OldData             => {},
@@ -275,8 +278,10 @@ sub DataAdd {
     }
 
     $Self->EventHandler(
-        Event => $Self->{Name} . 'Add',
-        Data  => {
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDAdd',
+        Data              => {
             $Self->{Identifier} => $ID,
         },
         UserID => $Param{UserID} || 1,
@@ -292,7 +297,7 @@ To use this function you need a DB CRUD module like e.g. Kernel::System::UnitTes
 Update data attributes.
 
     my $Success = $DBCRUDObject->DataUpdate(
-        ID => 1234,
+        ID     => 1234,
         UserID => 1,
         # all other attributes are optional
     );
@@ -329,10 +334,11 @@ sub DataUpdate {
         $Self->{Identifier} => $Param{ $Self->{Identifier} },
         UserID              => $Param{UserID},
     );
+
     if ( !%DataGet ) {
         $LogObject->Log(
             Priority => 'error',
-            Message  => "Entry with the Identifier '$Param{ $Self->{Identifier} }' does not exist!",
+            Message  => "Entry with the Identifier $Self->{Identifier} '$Param{ $Self->{Identifier} }' does not exist!",
         );
         return;
     }
@@ -410,8 +416,10 @@ sub DataUpdate {
     }
 
     $Self->EventHandler(
-        Event => $Self->{Name} . 'Update',
-        Data  => {
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDUpdate',
+        Data              => {
             $Self->{Identifier} => $Param{ $Self->{Identifier} },
             OldData             => \%DataGet,
         },
@@ -501,9 +509,11 @@ sub DataProcedureAdd {
     return if !%Entry;
 
     $Self->EventHandler(
-        Event  => $Self->{Name} . 'ProcedureAdd',
-        Data   => \%Entry,
-        UserID => $Param{UserID} || 1,
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDProcedureAdd',
+        Data              => \%Entry,
+        UserID            => $Param{UserID} || 1,
     );
 
     return %Entry;
@@ -678,9 +688,11 @@ sub DataGet {
     );
 
     $Self->EventHandler(
-        Event  => $Self->{Name} . 'Get',
-        Data   => \%Entry,
-        UserID => $Param{UserID} || 1,
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDGet',
+        Data              => \%Entry,
+        UserID            => $Param{UserID} || 1,
     );
 
     return %Entry;
@@ -706,7 +718,7 @@ Returns:
             CreateTime  => '...',
             ChangeTime  => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -868,9 +880,11 @@ sub DataListGet {
     }
 
     $Self->EventHandler(
-        Event  => $Self->{Name} . 'ListGet',
-        Data   => \@List,
-        UserID => $Param{UserID} || 1,
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDListGet',
+        Data              => \@List,
+        UserID            => $Param{UserID} || 1,
     );
 
     return @List;
@@ -897,7 +911,7 @@ Returns:
             CreateTime  => '...',
             ChangeTime  => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -1079,8 +1093,10 @@ sub DataSearch {
     );
 
     $Self->EventHandler(
-        Event => $Self->{Name} . 'Search',
-        Data  => {
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDSearch',
+        Data              => {
             ID => $Result eq 'ARRAY' ? \@List : \%List,
         },
         UserID => $Param{UserID} || 1,
@@ -1234,9 +1250,11 @@ sub DataDelete {
 
             # trigger event
             $Self->EventHandler(
-                Event  => $Self->{Name} . 'Delete',
-                Data   => \%Param,
-                UserID => $Param{UserID} || 1,
+                ModuleName        => ref $Self,
+                UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+                Event             => 'DBCRUDDelete',
+                Data              => \%Param,
+                UserID            => $Param{UserID} || 1,
             );
 
             return 1;
@@ -1279,9 +1297,11 @@ sub DataDelete {
     }
 
     $Self->EventHandler(
-        Event  => $Self->{Name} . 'Delete',
-        Data   => \%Param,
-        UserID => $Param{UserID} || 1,
+        ModuleName        => ref $Self,
+        UseHistoryBackend => $Self->{HistoryBackendIsSet} ? 1 : 0,
+        Event             => 'DBCRUDDelete',
+        Data              => \%Param,
+        UserID            => $Param{UserID} || 1,
     );
 
     return 1;

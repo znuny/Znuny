@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -36,7 +36,7 @@ send a notification using an specified transport
             UserLogin     => 'some login',
             UserTitle     => 'some title',
             UserFirstname => 'some first name',
-            UserLastname  => 'some last name'.
+            UserLastname  => 'some last name',
             # ...
         },
         Event                 => $Param{Event},
@@ -73,6 +73,13 @@ or
 
 =cut
 
+sub GetTransportRecipients {
+    my ( $Self, %Param ) = @_;
+
+    my @TransportRecipients;
+    return @TransportRecipients;
+}
+
 =head2 TransportSettingsDisplayGet()
 
 generates and returns the HTML code to display exclusive settings for each transport.
@@ -86,6 +93,12 @@ returns
     $HTMLOutput = 'some HTML code';
 
 =cut
+
+sub TransportSettingsDisplayGet {
+    my ( $Self, %Param ) = @_;
+
+    return '';
+}
 
 =head2 TransportParamSettingsGet()
 
@@ -102,6 +115,11 @@ returns
 
 =cut
 
+sub TransportParamSettingsGet {
+    my ( $Self, %Param ) = @_;
+    return 1;
+}
+
 =head2 IsUsable();
 
 returns if the transport can be used in the system environment,
@@ -113,6 +131,12 @@ returns
     $Success = 1;       # or false
 
 =cut
+
+sub IsUsable {
+    my ( $Self, %Param ) = @_;
+
+    return 1;
+}
 
 =head2 GetTransportEventData()
 

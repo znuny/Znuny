@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,9 +20,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
+        my $MainObject    = $Kernel::OM->Get('Kernel::System::Main');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # run test only if command exists
         my $Result = qx{pdftohtml};
@@ -41,7 +45,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -62,13 +66,13 @@ $Selenium->RunTest(
         my $Location = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.pdf";
 
-        my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+        my $ContentRef = $MainObject->FileRead(
             Location => $Location,
             Mode     => 'binmode',
         );
         my $Content = ${$ContentRef};
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Internal',
         );
 
@@ -140,7 +144,7 @@ $Selenium->RunTest(
 
         # Import sample email.
         $Location   = $Selenium->{Home} . '/scripts/test/sample/PostMaster/PostMaster-Test20.box';
-        $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+        $ContentRef = $MainObject->FileRead(
             Location => $Location,
             Mode     => 'binmode',
             Result   => 'ARRAY',
@@ -212,7 +216,7 @@ $Selenium->RunTest(
 
         # Get current SessionID and SessionName.
         my $SessionID   = $Selenium->execute_script('return Core.Config.Get("SessionID");');
-        my $SessionName = $Kernel::OM->Get('Kernel::Config')->Get('SessionName');
+        my $SessionName = $ConfigObject->Get('SessionName');
 
         # Append session information to the url, since in the next selenium get request
         # we don't have session information in the cookie.
@@ -250,7 +254,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket'
         );
     }

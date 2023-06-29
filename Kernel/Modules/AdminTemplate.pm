@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -268,18 +268,9 @@ sub Run {
                     );
                 }
 
-                $Self->_Overview();
-                my $Output = $LayoutObject->Header();
-                $Output .= $LayoutObject->NavigationBar();
-                $Output .= $LayoutObject->Notify(
-                    Info => Translatable('Template added!'),
+                return $LayoutObject->Redirect(
+                    OP => "Action=AdminQueueTemplates&Subaction=Template&ID=$StandardTemplateID",
                 );
-                $Output .= $LayoutObject->Output(
-                    TemplateFile => 'AdminTemplate',
-                    Data         => \%Param,
-                );
-                $Output .= $LayoutObject->Footer();
-                return $Output;
             }
         }
 

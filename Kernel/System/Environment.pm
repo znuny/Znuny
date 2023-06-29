@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -63,7 +63,7 @@ returns:
         Hostname     => "servername.example.com",
         OS           => "Linux",
         OSName       => "debian 7.1",
-        Path         => "/home/otrs/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games",
+        Path         => "/home/znuny/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games",
         POSIX        => [
                         "Linux",
                         "servername",
@@ -71,7 +71,7 @@ returns:
                         "#1 SMP Debian 3.2.46-1",
                         "i686",
                       ],
-        User         => "otrs",
+        User         => "znuny",
     );
 
 =cut
@@ -222,7 +222,7 @@ returns:
         Modules => {
             "Algorithm::Diff"  => "1.30",
             "Apache::DBI"      => 1.62,
-            ......
+            # ...
         },
     );
 
@@ -346,7 +346,7 @@ returns:
         Product         => "OTRS",
         Version         => "3.3.1",
         DefaultLanguage => "en",
-        Home            => "/opt/otrs",
+        Home            => "/opt/znuny",
         Host            => "prod.otrs.com",
         SystemID        => 70,
     );

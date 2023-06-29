@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -35,13 +35,6 @@ $Kernel::OM->ObjectParamAdd(
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
 my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-
-# Disable cloud service calls to avoid test failures due to connection problems etc.
-$HelperObject->ConfigSettingChange(
-    Valid => 1,
-    Key   => 'CloudServices::Disabled',
-    Value => 1,
-);
 
 my $TestUserLogin = $HelperObject->TestUserCreate(
     Groups => ['admin'],

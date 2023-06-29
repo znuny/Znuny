@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,6 +24,10 @@ $Selenium->RunTest(
         my $ServiceObject  = $Kernel::OM->Get('Kernel::System::Service');
         my $SLAObject      = $Kernel::OM->Get('Kernel::System::SLA');
         my $CacheObject    = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+        my $UtilObject     = $Kernel::OM->Get('Kernel::System::Util');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
@@ -118,11 +122,20 @@ $Selenium->RunTest(
         my @ServiceIDs;
         my @ServiceNames;
         for my $Count ( 1 .. 2 ) {
-            my $Name      = "Service$Count-$RandomID";
-            my $ServiceID = $ServiceObject->ServiceAdd(
+            my $Name = "Service$Count-$RandomID";
+
+            my %ServiceValues = (
                 Name    => $Name,
                 ValidID => 1,
                 UserID  => 1,
+            );
+            if ($IsITSMInstalled) {
+                $ServiceValues{TypeID}      = 1;
+                $ServiceValues{Criticality} = '3 normal';
+            }
+
+            my $ServiceID = $ServiceObject->ServiceAdd(
+                %ServiceValues,
             );
             $Self->True(
                 $ServiceID,
@@ -144,12 +157,20 @@ $Selenium->RunTest(
         my @SLAIDs;
         my @SLANames;
         for my $Count ( 1 .. 2 ) {
-            my $Name  = "SLA$Count-$RandomID";
-            my $SLAID = $SLAObject->SLAAdd(
+            my $Name = "SLA$Count-$RandomID";
+
+            my %SLAValues = (
                 ServiceIDs => \@ServiceIDs,
                 Name       => $Name,
                 ValidID    => 1,
                 UserID     => 1,
+            );
+            if ($IsITSMInstalled) {
+                $SLAValues{TypeID} = 1;
+            }
+
+            my $SLAID = $SLAObject->SLAAdd(
+                %SLAValues,
             );
             $Self->True(
                 $SLAID,
@@ -230,7 +251,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             {
@@ -365,6 +386,16 @@ $Selenium->RunTest(
 
         # Delete test services.
         for my $ServiceID (@ServiceIDs) {
+            if ($IsITSMInstalled) {
+                $Success = $DBObject->Do(
+                    SQL => "DELETE FROM service_preferences WHERE service_id = $ServiceID",
+                );
+                $Self->True(
+                    $Success,
+                    "Service preferences ID $ServiceID is deleted.",
+                );
+            }
+
             $Success = $DBObject->Do(
                 SQL  => "DELETE FROM service WHERE id = ?",
                 Bind => [ \$ServiceID ],

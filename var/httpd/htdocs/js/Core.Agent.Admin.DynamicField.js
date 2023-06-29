@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -126,11 +126,6 @@ Core.Agent.Admin.DynamicField = (function (TargetNS) {
 
                     // reset select value to none
                     $(this).val('');
-                }
-
-                // Show OTRSBusiness upgrade dialog.
-                else if (!parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10)) {
-                    Core.Agent.ShowOTRSBusinessRequiredDialog();
                 }
 
                 return false;

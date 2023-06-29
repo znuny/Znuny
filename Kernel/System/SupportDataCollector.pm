@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -82,7 +82,7 @@ collect system data
                 Identifier  => 'Kernel::System::SupportDataCollector::OTRS::Version',
                 DisplayPath => 'OTRS',
                 Status      => $StatusOK,
-                Label       => 'OTRS Version'
+                Label       => 'OTRS Version',
                 Value       => '3.3.2',
                 Message     => '',
             },
@@ -90,7 +90,7 @@ collect system data
                 Identifier  => 'Kernel::System::SupportDataCollector::Apache::mod_perl',
                 DisplayPath => 'OTRS',
                 Status      => $StatusProblem,
-                Label       => 'mod_perl usage'
+                Label       => 'mod_perl usage',
                 Value       => '0',
                 Message     => 'Please enable mod_perl to speed up OTRS.',
             },
@@ -98,7 +98,7 @@ collect system data
                 Identifier       => 'Some::Identifier',
                 DisplayPath      => 'SomePath',
                 Status           => $StatusOK,
-                Label            => 'Some Label'
+                Label            => 'Some Label',
                 Value            => '0',
                 MessageFormatted => 'Some \n Formatted \n\t Text.',
             },

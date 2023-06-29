@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ use SOAP::Lite;
 my $User = 'some_user';
 my $Pw   = 'some_pass';
 my $RPC  = SOAP::Lite->new(
-    proxy => 'http://127.0.0.1/otrs/rpc.pl',
+    proxy => 'http://127.0.0.1/znuny/rpc.pl',
     uri   => 'http://localhost/Core'
 );
 
@@ -52,7 +52,7 @@ my %TicketData = (
     Lock         => 'unlock',
     Priority     => '3 normal',
     State        => 'new',
-    CustomerID   => 'www.otrs.com',
+    CustomerID   => 'test-customer',
     CustomerUser => 'customer@example.com',
     OwnerID      => 1,
     UserID       => 1,

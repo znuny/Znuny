@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,65 +8,76 @@
 # --
 
 <div id="RestrictionsContainer" class="Hidden">
-
 [% RenderBlockStart("Attribute") %]
-    <fieldset class="TableLike Element Element[% Data.Element | html %] ElementBlock[% Data.Block | html %]" data-element="[% Data.Element | html %]">
-        <input type="hidden" name="Select[% Data.Element | html %]" value="1" />
-        <legend>
-        <span>[% Translate(Data.Name) | html %]</span>
-        <a class="RemoveButton" href="#"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Delete") | html %]</span></a>
-        </legend>
+        <fieldset class="TableLike Element Element[% Data.Element | html %] ElementBlock[% Data.Block | html %] inner-previewModalContainer" data-element="[% Data.Element | html %]">
+            <input type="hidden" name="Select[% Data.Element | html %]" value="1" />
+
+            <legend>
+                <a class="RemoveButton icon-hover-md" href="#">
+                    <i class="fa fa-minus-square-o"></i>
+                    <span class="InvisibleText">[% Translate("Delete") | html %]</span>
+                </a>
+                <span>[% Translate(Data.Name) | html %]</span>
+            </legend>
 [% RenderBlockStart("MultiSelectField") %]
-        <label></label>
-        <div class="Field">
-            [% Data.SelectField %]
-        </div>
-        <div class="Clear"></div>
+            <div class="field-wrapper">
+                <div class="Field">
+                    [% Data.SelectField %]
+                </div>
+            </div>
 [% RenderBlockEnd("MultiSelectField") %]
 [% RenderBlockStart("SelectField") %]
-        <label></label>
-        <div class="Field">
-            [% Data.SelectField %]
-            <p class="FieldExplanation">[% Translate("Please select only one element or turn off the button 'Fixed'.") | html %]</p>
-        </div>
-        <div class="Clear"></div>
+            <div class="field-wrapper">
+                <div class="Field">
+                    [% Data.SelectField %]
+                    <p class="FieldExplanation">[% Translate("Please select only one element or turn off the button 'Fixed'.") | html %]</p>
+                </div>
+            </div>
 [% RenderBlockEnd("SelectField") %]
 [% RenderBlockStart("InputField") %]
-        <label></label>
-        <div class="Field">
-            <input type="text" name="[% Data.Element | html %]" id="[% Data.Element| html %]" value="[% Data.SelectedValue | html %]" class="W50pc [% Data.Invalid | html %] [% Data.CSSClass | html %]"[% FOR DataAttribute IN Data.HTMLDataAttributes.keys.sort %] data-[% DataAttribute | html %]="[% Data.HTMLDataAttributes.$DataAttribute | html %]"[% END %]/>
-            <div id="[% Data.Element| html %]ServerError" class="TooltipErrorMessage">
-                <p>[% Data.InvalidTooltip | html %]</p>
+            <div class="field-wrapper">
+                <div class="Field">
+                    <input type="text" name="[% Data.Element | html %]" id="[% Data.Element| html %]" value="[% Data.SelectedValue | html %]" class="W50pc [% Data.Invalid | html %] [% Data.CSSClass | html %]"[% FOR DataAttribute IN Data.HTMLDataAttributes.keys.sort %] data-[% DataAttribute | html %]="[% Data.HTMLDataAttributes.$DataAttribute | html %]"[% END %]/>
+                    <div id="[% Data.Element| html %]ServerError" class="TooltipErrorMessage">
+                        <p>[% Data.InvalidTooltip | html %]</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="Clear"></div>
 [% RenderBlockEnd("InputField") %]
 [% RenderBlockStart("Time") %]
-        <label>
-            <input type="radio" name="[% Data.Element | html %]TimeSelect" value="Absolut" [% Data.CheckedAbsolut | html %]/>
-            [% Translate("Absolute period") | html %]:
-        </label>
-        <div class="Field">
-            [% Translate("Between %s and %s") | html | ReplacePlaceholders(Data.TimeStart, Data.TimeStop) %]
-        </div>
-        <div class="Clear"></div>
+                <div class="field-wrapper absolute-period">
+                    <div class="Field">
+                        <div class="radio-field-wrapper">
+                            <input id="absolute-period" type="radio" name="[% Data.Element | html %]TimeSelect" value="Absolut" class="RadioRound" [% Data.CheckedAbsolut | html %]/>
+                            <label for="absolute-period">[% Translate("Absolute period") | html %]</label>
+                        </div>
+                        <div class="outer-select-date">
+                            <div>[% Translate("Between %s and %s") | html | ReplacePlaceholders(Data.TimeStart, Data.TimeStop) %]</div>
+                        </div>
+                    </div>
+                </div>
 
-        <label>
-            <input type="radio" name="[% Data.Element | html %]TimeSelect" value="Relativ" [% Data.CheckedRelative | html %]/>
-            [% Translate("Relative period") | html %]:
-        </label>
-        <div class="Field">
-            [% Translate("The past complete %s and the current+upcoming complete %s %s") | html | ReplacePlaceholders(Data.TimeRelativeCount, Data.TimeRelativeUpcomingCount, Data.TimeRelativeUnit) %]
-        </div>
-        <div class="Clear"></div>
+                <div class="field-wrapper relative-period">
+                    <div class="Field">
+                        <div class="radio-field-wrapper">
+                            <input id="relative-period" type="radio" name="[% Data.Element | html %]TimeSelect" value="Relativ" class="RadioRound" [% Data.CheckedRelative | html %]/>
+                            <label for="relative-period">[% Translate("Relative period") | html %]</label>
+                        </div>
+                        <div class="outer-select-date">
+                            [% Translate("The past complete %s and the current+upcoming complete %s %s") | html | ReplacePlaceholders(Data.TimeRelativeCount, Data.TimeRelativeUpcomingCount, Data.TimeRelativeUnit) %]
+                        </div>
+                    </div>
+                </div>
 [% RenderBlockEnd("Time") %]
-        <label></label>
-        <div class="Field">
-            <input type="checkbox" name="Fixed[% Data.Element | html %]" value="1" [% Data.Fixed %]/>
-            [% Translate("Do not allow changes to this element when the statistic is generated.") | html %]
-        </label>
-        <div class="Clear"></div>
-    </fieldset>
-[% RenderBlockEnd("Attribute") %]
 
+            <div class="field-wrapper">
+                <div class="CheckboxContainer">
+                    <div class="Field">
+                        <input type="checkbox" name="Fixed[% Data.Element | html %]" value="1" [% Data.Fixed %]/>
+                    </div>
+                    <label>[% Translate("Do not allow changes to this element when the statistic is generated.") | html %]</label>
+                </div>
+            </div>
+        </fieldset>
+[% RenderBlockEnd("Attribute") %]
 </div>

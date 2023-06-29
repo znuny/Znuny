@@ -69,6 +69,58 @@ CREATE TABLE acl_sync (
     change_time DATE NOT NULL
 );
 -- ----------------------------------------------------------
+--  create table activity
+-- ----------------------------------------------------------
+CREATE TABLE activity (
+    id NUMBER (12, 0) NOT NULL,
+    user_id NUMBER (12, 0) NOT NULL,
+    activity_type VARCHAR2 (200) NOT NULL,
+    activity_title VARCHAR2 (255) NOT NULL,
+    activity_text CLOB NULL,
+    activity_state VARCHAR2 (255) NULL,
+    activity_link VARCHAR2 (255) NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL
+);
+ALTER TABLE activity ADD CONSTRAINT PK_activity PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_activity';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_activity
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_activity_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_activity_t
+BEFORE INSERT ON activity
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_activity.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
 --  create table acl_ticket_attribute_relations
 -- ----------------------------------------------------------
 CREATE TABLE acl_ticket_attribute_relations (
@@ -904,6 +956,7 @@ CREATE TABLE ticket_priority (
     id NUMBER (5, 0) NOT NULL,
     name VARCHAR2 (200) NOT NULL,
     valid_id NUMBER (5, 0) NOT NULL,
+    color VARCHAR2 (25) NOT NULL,
     create_time DATE NOT NULL,
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
@@ -1059,6 +1112,7 @@ CREATE TABLE ticket_state (
     comments VARCHAR2 (250) NULL,
     type_id NUMBER (5, 0) NOT NULL,
     valid_id NUMBER (5, 0) NOT NULL,
+    color VARCHAR2 (25) NOT NULL,
     create_time DATE NOT NULL,
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
@@ -4717,58 +4771,6 @@ END;
 --
 ;
 -- ----------------------------------------------------------
---  create table cloud_service_config
--- ----------------------------------------------------------
-CREATE TABLE cloud_service_config (
-    id NUMBER (12, 0) NOT NULL,
-    name VARCHAR2 (200) NOT NULL,
-    config CLOB NOT NULL,
-    valid_id NUMBER (5, 0) NOT NULL,
-    create_time DATE NOT NULL,
-    create_by NUMBER (12, 0) NOT NULL,
-    change_time DATE NOT NULL,
-    change_by NUMBER (12, 0) NOT NULL,
-    CONSTRAINT cloud_service_config_name UNIQUE (name)
-);
-ALTER TABLE cloud_service_config ADD CONSTRAINT PK_cloud_service_config PRIMARY KEY (id);
-BEGIN
-    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_cloud_service_config';
-EXCEPTION
-    WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-CREATE SEQUENCE SE_cloud_service_config
-INCREMENT BY 1
-START WITH 1
-NOMAXVALUE
-NOCYCLE
-CACHE 20
-ORDER
-;
-BEGIN
-    EXECUTE IMMEDIATE 'DROP TRIGGER SE_cloud_service_config_t';
-EXCEPTION
-    WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-CREATE OR REPLACE TRIGGER SE_cloud_service_config_t
-BEFORE INSERT ON cloud_service_config
-FOR EACH ROW
-BEGIN
-    IF :new.id IS NULL THEN
-        SELECT SE_cloud_service_config.nextval
-        INTO :new.id
-        FROM DUAL;
-    END IF;
-END;
-/
---
-;
--- ----------------------------------------------------------
 --  create table sysconfig_default
 -- ----------------------------------------------------------
 CREATE TABLE sysconfig_default (
@@ -5251,13 +5253,15 @@ END;
 -- ----------------------------------------------------------
 CREATE TABLE calendar_appointment_plugin (
     id NUMBER (12, 0) NOT NULL,
+    dbcrud_uuid VARCHAR2 (36) NULL,
     appointment_id NUMBER (20, 0) NOT NULL,
     plugin_key VARCHAR2 (1000) NOT NULL,
     config CLOB NULL,
     create_time DATE NOT NULL,
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
-    change_by NUMBER (12, 0) NOT NULL
+    change_by NUMBER (12, 0) NOT NULL,
+    CONSTRAINT calendar_appointment_plugin_47 UNIQUE (dbcrud_uuid)
 );
 ALTER TABLE calendar_appointment_plugin ADD CONSTRAINT PK_calendar_appointment_plugin PRIMARY KEY (id);
 BEGIN
@@ -5790,10 +5794,10 @@ CREATE TABLE smime_keys (
     key_hash VARCHAR2 (8) NOT NULL,
     key_type VARCHAR2 (255) NOT NULL,
     file_name VARCHAR2 (255) NOT NULL,
-    email_address VARCHAR2 (255) NULL,
+    email_address CLOB NULL,
     expiration_date DATE NULL,
     fingerprint VARCHAR2 (59) NULL,
-    subject VARCHAR2 (255) NULL,
+    subject CLOB NULL,
     create_time DATE NULL,
     change_time DATE NULL,
     create_by NUMBER (12, 0) NULL,
@@ -5866,6 +5870,7 @@ END;
 -- ----------------------------------------------------------
 CREATE TABLE oauth2_token_config (
     id NUMBER (12, 0) NOT NULL,
+    dbcrud_uuid VARCHAR2 (36) NULL,
     name VARCHAR2 (250) NOT NULL,
     config CLOB NOT NULL,
     valid_id NUMBER (5, 0) NOT NULL,
@@ -5873,7 +5878,8 @@ CREATE TABLE oauth2_token_config (
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
     change_by NUMBER (12, 0) NOT NULL,
-    CONSTRAINT oauth2_token_config_name UNIQUE (name)
+    CONSTRAINT oauth2_token_config_name UNIQUE (name),
+    CONSTRAINT oauth2_token_config_uuid UNIQUE (dbcrud_uuid)
 );
 ALTER TABLE oauth2_token_config ADD CONSTRAINT PK_oauth2_token_config PRIMARY KEY (id);
 BEGIN
@@ -5918,6 +5924,7 @@ END;
 -- ----------------------------------------------------------
 CREATE TABLE oauth2_token (
     id NUMBER (12, 0) NOT NULL,
+    dbcrud_uuid VARCHAR2 (36) NULL,
     token_config_id NUMBER (12, 0) NOT NULL,
     authorization_code CLOB NULL,
     token CLOB NULL,
@@ -5931,7 +5938,8 @@ CREATE TABLE oauth2_token (
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
     change_by NUMBER (12, 0) NOT NULL,
-    CONSTRAINT oauth2_token_config_id UNIQUE (token_config_id)
+    CONSTRAINT oauth2_token_config_id UNIQUE (token_config_id),
+    CONSTRAINT oauth2_token_uuid UNIQUE (dbcrud_uuid)
 );
 ALTER TABLE oauth2_token ADD CONSTRAINT PK_oauth2_token PRIMARY KEY (id);
 BEGIN

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -42,7 +42,8 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
 
     # get names of all parameters
     my @ParamNames = $ParamObject->GetParamNames();
@@ -64,7 +65,7 @@ sub Run {
             my @SafeParamArray;
             for my $Value (@ParamArray) {
                 if ( defined $Value ) {
-                    my %SafeValue = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+                    my %SafeValue = $HTMLUtilsObject->Safety(
                         String       => $Value,
                         NoApplet     => 1,
                         NoObject     => 1,
@@ -87,20 +88,20 @@ sub Run {
         }
 
         $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
-
-        my %SafeGetParam = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
-            String       => $GetParam{$Key},
-            NoApplet     => 1,
-            NoObject     => 1,
-            NoEmbed      => 1,
-            NoSVG        => 1,
-            NoImg        => 1,
-            NoIntSrcLoad => 1,
-            NoExtSrcLoad => 1,
-            NoJavaScript => 1,
-        );
-
-        $GetParam{$Key} = $SafeGetParam{String};
+        if ( !ref $GetParam{$Key} ) {
+            my %SafeGetParam = $HTMLUtilsObject->Safety(
+                String       => $GetParam{$Key},
+                NoApplet     => 1,
+                NoObject     => 1,
+                NoEmbed      => 1,
+                NoSVG        => 1,
+                NoImg        => 1,
+                NoIntSrcLoad => 1,
+                NoExtSrcLoad => 1,
+                NoJavaScript => 1,
+            );
+            $GetParam{$Key} = $SafeGetParam{String};
+        }
     }
 
     my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -141,22 +142,25 @@ sub Run {
         my $ValidSelection     = $Self->_ValidSelectionGet();
         my %TicketAppointments = $Self->_TicketAppointments();
 
+        my $ColorPicker = $LayoutObject->ColorPicker(
+            Type    => 'InputField',
+            Name    => 'Color',
+            ID      => 'Color',
+            Color   => $Param{Color},
+            Palette => $ColorPalette,
+        );
+
         $LayoutObject->Block(
             Name => 'CalendarEdit',
             Data => {
                 GroupID      => $GroupSelection,
                 ValidID      => $ValidSelection,
                 Subaction    => 'StoreNew',
-                Color        => $ColorPalette->[ int rand( scalar @{$ColorPalette} ) ],
+                ColorPicker  => $ColorPicker,
                 Title        => Translatable('Add new Calendar'),
                 WidgetStatus => 'Collapsed',
                 %TicketAppointments,
             },
-        );
-
-        $LayoutObject->AddJSData(
-            Key   => 'CalendarColorPalette',
-            Value => $ColorPalette,
         );
 
         $Param{Action} = 'New';
@@ -225,6 +229,14 @@ sub Run {
             my $ValidSelection     = $Self->_ValidSelectionGet(%GetParam);
             my %TicketAppointments = $Self->_TicketAppointments();
 
+            my $ColorPicker = $LayoutObject->ColorPicker(
+                Type    => 'InputField',
+                Name    => 'Color',
+                ID      => 'Color',
+                Color   => $Param{Color},
+                Palette => $ColorPalette,
+            );
+
             # get rule count
             my $RuleCount = scalar @{ $GetParam{TicketAppointments} || [] };
 
@@ -238,18 +250,9 @@ sub Run {
                     Subaction    => 'StoreNew',
                     Title        => Translatable('Add new Calendar'),
                     WidgetStatus => $RuleCount ? 'Expanded' : 'Collapsed',
+                    ColorPicker  => $ColorPicker,
                     %TicketAppointments,
                 },
-            );
-
-            $LayoutObject->AddJSData(
-                Key   => 'CalendarColor',
-                Value => $GetParam{Color},
-            );
-
-            $LayoutObject->AddJSData(
-                Key   => 'CalendarColorPalette',
-                Value => $ColorPalette,
             );
 
             $LayoutObject->AddJSData(
@@ -360,6 +363,13 @@ sub Run {
         my $ColorPalette       = $Self->_ColorPaletteGet();
         my $ValidSelection     = $Self->_ValidSelectionGet(%Calendar);
         my %TicketAppointments = $Self->_TicketAppointments();
+        my $ColorPicker        = $LayoutObject->ColorPicker(
+            Type    => 'InputField',
+            Name    => 'Color',
+            ID      => 'Color',
+            Color   => $Calendar{Color},
+            Palette => $ColorPalette,
+        );
 
         my $RuleCount = scalar @{ $Calendar{TicketAppointments} || [] };
 
@@ -372,18 +382,9 @@ sub Run {
                 Subaction    => 'Update',
                 Title        => Translatable('Edit Calendar'),
                 WidgetStatus => $RuleCount ? 'Expanded' : 'Collapsed',
+                ColorPicker  => $ColorPicker,
                 %TicketAppointments,
             },
-        );
-
-        $LayoutObject->AddJSData(
-            Key   => 'CalendarColor',
-            Value => $Calendar{Color},
-        );
-
-        $LayoutObject->AddJSData(
-            Key   => 'CalendarColorPalette',
-            Value => $ColorPalette,
         );
 
         $LayoutObject->AddJSData(
@@ -485,6 +486,13 @@ sub Run {
             my $ColorPalette       = $Self->_ColorPaletteGet();
             my $ValidSelection     = $Self->_ValidSelectionGet(%GetParam);
             my %TicketAppointments = $Self->_TicketAppointments();
+            my $ColorPicker        = $LayoutObject->ColorPicker(
+                Type    => 'InputField',
+                Name    => 'Color',
+                ID      => 'Color',
+                Color   => $Param{Color},
+                Palette => $ColorPalette,
+            );
 
             my $RuleCount = scalar @{ $GetParam{TicketAppointments} || [] };
 
@@ -498,18 +506,9 @@ sub Run {
                     Subaction    => 'Update',
                     Title        => Translatable('Edit Calendar'),
                     WidgetStatus => $RuleCount ? 'Expanded' : 'Collapsed',
+                    ColorPicker  => $ColorPicker,
                     %TicketAppointments,
                 },
-            );
-
-            $LayoutObject->AddJSData(
-                Key   => 'CalendarColor',
-                Value => $Calendar{Color},
-            );
-
-            $LayoutObject->AddJSData(
-                Key   => 'CalendarColorPalette',
-                Value => $ColorPalette,
             );
 
             $LayoutObject->AddJSData(
@@ -816,12 +815,12 @@ sub _ColorPaletteGet {
 
     # get color palette
     my $CalendarColors = $Kernel::OM->Get('Kernel::Config')->Get('AppointmentCalendar::CalendarColors') || [
-        '#000000', '#1E1E1E', '#3A3A3A', '#545453', '#6E6E6E', '#878687', '#888787', '#A09FA0',
-        '#B8B8B8', '#D0D0D0', '#E8E8E8', '#FFFFFF', '#891100', '#894800', '#888501', '#458401',
-        '#028401', '#018448', '#008688', '#004A88', '#001888', '#491A88', '#891E88', '#891648',
-        '#FF2101', '#FF8802', '#FFFA03', '#83F902', '#05F802', '#03F987', '#00FDFF', '#008CFF',
-        '#002EFF', '#8931FF', '#FF39FF', '#FF2987', '#FF726E', '#FFCE6E', '#FFFB6D', '#CEFA6E',
-        '#68F96E', '#68FDFF', '#68FBD0', '#6ACFFF', '#6E76FF', '#D278FF', '#FF7AFF', '#FF7FD3',
+        '#000000', '#1E1E1E', '#3A3A3A', '#891100', '#894800',
+        '#888501', '#458401', '#028401', '#018448', '#008688',
+        '#004A88', '#001888', '#491A88', '#891E88', '#891648',
+        '#FF2101', '#FF8802', '#FFFA03', '#83F902', '#05F802',
+        '#03F987', '#00FDFF', '#008CFF', '#002EFF', '#8931FF',
+        '#FF39FF', '#FF2987', '#FF726E', '#FFCE6E', '#FFFB6D',
     ];
 
     return $CalendarColors;

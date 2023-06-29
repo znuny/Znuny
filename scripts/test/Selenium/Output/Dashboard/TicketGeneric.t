@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,6 +22,10 @@ $Selenium->RunTest(
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Set fixed time for test purposes.
         $HelperObject->FixedTimeSet(
@@ -39,13 +43,13 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Create test queue.
         my $QueueName = "Queue" . $HelperObject->GetRandomID();
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => 1,
@@ -338,7 +342,7 @@ $Selenium->RunTest(
                 Value => \%$Config,
             );
 
-            # Enable current needed dashboard plugin sysconfig.
+            # Enable current needed dashboard plugin SysConfig.
             $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => "DashboardBackend###" . $DashboardName,
@@ -346,7 +350,7 @@ $Selenium->RunTest(
             );
 
             # Refresh dashboard screen and clean it's cache.
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => 'Dashboard',
             );
 
@@ -394,8 +398,13 @@ $Selenium->RunTest(
                 "Priority sort is working",
             );
 
+            my $DashboardActionsFilter
+                = $Selenium->find_element( "#Dashboard$DashboardName" . "-box .DashboardActions", 'css' );
+            $Selenium->mouse_move_to_location( element => $DashboardActionsFilter );
+
             # Set filter by MyQueue.
             my $Filter = "#Dashboard$DashboardName" . "MyQueues";
+
             $Selenium->WaitFor( JavaScript => "return \$('$Filter:visible').length" );
             $Selenium->find_element( $Filter, 'css' )->click();
 
@@ -440,8 +449,6 @@ $Selenium->RunTest(
             "Ticket is deleted - ID $TicketID"
         );
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         # Delete MyQueue from personal_queues.
         $Success = $DBObject->Do(
             SQL => "DELETE FROM personal_queues WHERE queue_id = $QueueID",
@@ -459,8 +466,6 @@ $Selenium->RunTest(
             $Success,
             "Queue is deleted - ID $QueueID",
         );
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure cache is correct.
         for my $Cache (qw(Ticket Queue Dashboard DashboardQueueOverview )) {

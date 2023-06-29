@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -169,7 +169,7 @@ run a generic agent job
     $GenericAgentObject->JobRun(
         Job          => 'JobName',
         OnlyTicketID => 123,     # (optional) for event based Job execution
-        SleepTime    => 100_000  # (optional) sleeptime per ticket in microseconds
+        SleepTime    => 100_000, # (optional) sleeptime per ticket in microseconds
         UserID       => 1,
     );
 
@@ -740,7 +740,7 @@ adds a new job to the database
         Name => 'JobName',
         Data => {
             Queue => 'SomeQueue',
-            ...
+            # ...
             Valid => 1,
         },
         UserID => 123,

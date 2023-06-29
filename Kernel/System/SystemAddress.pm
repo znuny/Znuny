@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -132,7 +132,7 @@ returns:
 
     %SystemAddress = (
         ID         => 1,
-        Name       => 'info@example.com'
+        Name       => 'info@example.com',
         Realname   => 'Hotline',
         QueueID    => 123,
         Comment    => 'some comment',
@@ -545,15 +545,6 @@ sub SystemAddressLookup {
 
         my %SystemAddressesReverse = reverse %SystemAddresses;
         $ReturnData = $SystemAddressesReverse{$Value};
-    }
-
-    # check if data exists
-    if ( !defined $ReturnData ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => "No $Key for $Value found!",
-        );
-        return;
     }
 
     return $ReturnData;

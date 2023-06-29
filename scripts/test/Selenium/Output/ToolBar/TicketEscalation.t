@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,16 +19,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-
-        # get config object
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # enable tool bar AgentTicketEscalationView
         my %AgentTicketEscalationView = (
             AccessKey => 'w',
             Action    => 'AgentTicketEscalationView',
+            Block     => 'ToolBarOverviews',
             CssClass  => 'EscalationView',
             Icon      => 'fa fa-exclamation',
             Link      => 'Action=AgentTicketEscalationView',
@@ -38,20 +37,26 @@ $Selenium->RunTest(
         );
 
         $HelperObject->ConfigSettingChange(
-            Key   => 'Frontend::ToolBarModule###3-Ticket::AgentTicketEscalationView',
+            Key   => 'Frontend::ToolBarModule###130-Ticket::AgentTicketEscalation',
             Value => \%AgentTicketEscalationView,
         );
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###3-Ticket::AgentTicketEscalationView',
+            Key   => 'Frontend::ToolBarModule###130-Ticket::AgentTicketEscalation',
             Value => \%AgentTicketEscalationView
         );
 
-        # create test user and login
-        my $TestUserLogin = $HelperObject->TestUserCreate(
+        # Create test user.
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
+
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
 
         $Selenium->Login(
             Type     => 'Agent',

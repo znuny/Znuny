@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::SysConfig::ValueType::Select;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
 use warnings;
@@ -220,12 +220,12 @@ Extracts the effective value from a XML parsed setting.
         DefaultID      =>  123,             # (required)
         EffectiveValue => '3 medium',
         DefaultValue   => '3 medium',       # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         RW             => 1,                # (optional) Allow editing. Default 0.
         Item           => [                 # (optional) XML parsed item
             {
                 'ValueType' => 'Select',
-                ...
+                # ...
             },
         ],
         IsArray => 1,                       # (optional) Item is part of the array
@@ -398,7 +398,7 @@ Generate HTML for new array/hash item.
 Returns:
 
     $HTML = '<select class="Modernize" id="SettingName" name="SettingName" title="SettingName">
-        ...
+        # ...
         </select>';
 
 =cut
@@ -475,7 +475,7 @@ Returns:
 
     @ForbiddenValueTypes = (
         'Option',
-        ...
+        # ...
     );
 
 =cut

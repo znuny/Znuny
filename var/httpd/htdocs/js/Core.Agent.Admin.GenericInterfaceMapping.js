@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -276,7 +276,7 @@ Core.Agent.Admin.GenericInterfaceMapping = (function (TargetNS) {
 
         // append to container
         $('#KeyInsert').append(HTML);
-        Object.parent().remove();
+        Object.parents('.ValueTemplateRow').remove();
     };
 
     /**
@@ -316,18 +316,20 @@ Core.Agent.Admin.GenericInterfaceMapping = (function (TargetNS) {
             true,
             [
                {
+                   Label: Core.Language.Translate('Cancel'),
+                   Type: 'Secondary',
+                   Function: function () {
+                       Core.UI.Dialog.CloseDialog($('#DeleteDialog'));
+                   }
+               },
+               {
                    Label: Core.Language.Translate('Delete'),
+                   Type: 'Warning',
                    Function: function () {
                        $('#' + IDSelector).closest('.WidgetKey').remove();
                        Core.UI.Dialog.CloseDialog($('#DeleteDialog'));
                    }
                },
-               {
-                   Label: Core.Language.Translate('Cancel'),
-                   Function: function () {
-                       Core.UI.Dialog.CloseDialog($('#DeleteDialog'));
-                   }
-               }
            ]
         );
     };

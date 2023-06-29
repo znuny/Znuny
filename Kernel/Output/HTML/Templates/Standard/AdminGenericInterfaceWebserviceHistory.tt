@@ -1,35 +1,14 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst AdminGenericInterfaceWebserviceHistory">
-    <h1 class="InvisibleText">[% Translate("GenericInterface Web Service Management") | html %]</h1>
 
-    [% USE WebserviceLink = String('AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=') %]
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Web Service Management'),
-                Link => 'AdminGenericInterfaceWebservice',
-            },
-            {
-                Name => Data.WebserviceName,
-                Link => WebserviceLink.append( Data.WebserviceID ),
-            },
-            {
-                Name => Translate('History'),
-            }
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst AdminGenericInterfaceWebserviceHistory ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -37,7 +16,7 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction Fullsize Center">
+                        <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction btn-main btn-primary-ghost">
                             <span><i class="fa fa-caret-left"></i> [% Translate("Go back to Web Service") | html %]</span>
                         </a>
                     </li>
@@ -56,7 +35,28 @@
             </div>
         </div>
     </div>
+
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("GenericInterface Web Service Management") | html %]</h1>
+
+        [% USE WebserviceLink = String('AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=') %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Web Service Management'),
+                    Link => 'AdminGenericInterfaceWebservice',
+                },
+                {
+                    Name => Data.WebserviceName,
+                    Link => WebserviceLink.append( Data.WebserviceID ),
+                },
+                {
+                    Name => Translate('History'),
+                }
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 
         <div class="WidgetSimple WebserviceListWidget">
             <div class="Header">
@@ -66,7 +66,7 @@
             </div>
             <div class="Content">
                 <div class="ColumnsWithSpacing">
-                    <div class="W75pc">
+                    <div>
                         <div id="WebserviceListContainer" class="ListContainer">
                             <table class="DataTable" id="WebserviceList">
                                 <thead>
@@ -82,31 +82,29 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p class="FieldExplanation">[% Translate("Select a single configuration version to see its details.") | html %]</p>
                     </div>
-                    <div class="Clear"></div>
                 </div>
             </div>
         </div>
-
+        <p class="FieldExplanation">[% Translate("Select a single configuration version to see its details.") | html %]</p>
         <div class="WidgetSimple Hidden" id="WebserviceHistoryDetails">
             <div class="ControlRow"></div>
             <div class="LightRow Bottom">
-                <ul class="Actions">
-                    <li id="ExportButton">
-                        <span>[% Translate("Export web service configuration") | html %]</span>
+                <ul class="Actions flex-row">
+                    <li id="ExportButton" class="flex-row">
+                        <a>[% Translate("Export web service configuration") | html %]</a>
                     </li>
-                    <li id="RollbackButton">
-                        <span>[% Translate("Restore web service configuration") | html %]</span>
+                    <li id="RollbackButton" class="flex-row">
+                        <a>[% Translate("Restore web service configuration") | html %]</a>
                     </li>
                 </ul>
-                <div class="ClearLeft"></div>
             </div>
             <div class="Content ConfigCode">
-                <pre></pre>
+                <div class="code-container">
+                    <pre></pre>
+                </div>
             </div>
         </div>
-
         <div class="Hidden" id="RollbackDialogContainer">
             <p id="RollbackDialog" class="Warning">
                 [% Translate("Do you really want to restore this version of the web service configuration?") | html %]
@@ -123,5 +121,4 @@
             </form>
         </div>
     </div>
-    <div class="Clear"></div>
 </div>

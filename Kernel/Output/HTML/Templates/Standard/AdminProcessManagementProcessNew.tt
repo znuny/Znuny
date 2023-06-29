@@ -1,29 +1,15 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Create New Process") | html %]</h1>
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
 
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Process Management'),
-                Link => Env("Action"),
-            },
-            {
-                Name => Translate("Create New Process"),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -31,7 +17,7 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center Back"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Back btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
                 </ul>
             </div>
@@ -50,7 +36,22 @@
     </div>
 
     <div class="ContentColumn">
-        <div class="WidgetSimple">
+        <h1 class="InvisibleText">[% Translate("Create New Process") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Process Management'),
+                    Link => Env("Action"),
+                },
+                {
+                    Name => Translate("Create New Process"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple card">
             <div class="Header">
                 <h2>[% Translate("Create New Process") | html %]</h2>
             </div>
@@ -59,50 +60,49 @@
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                     <input type="hidden" name="Subaction" value="ProcessNewAction"/>
                     <fieldset class="TableLike">
-                        <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Process Name") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameServerError | html %]" maxlength="70"/>
-                            <div id="NameError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
-                            <div id="NameServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Process Name") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="Validate_Required [% Data.NameServerError | html %]" maxlength="70"/>
+                                <div id="NameError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="NameServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label class="Mandatory" for="Description"><span class="Marker">*</span> [% Translate("Description") | html %]:</label>
-                        <div class="Field">
-                            <textarea name="Description" id="Description" class="W50pc Validate_Required [% Data.DescriptionServerError | html %]" rows="5">[% Data.Description | html %]</textarea>
-                            <div id="DescriptionError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Description"><span class="Marker">*</span> [% Translate("Description") | html %]</label>
+                            <div class="Field">
+                                <textarea name="Description" id="Description" class="Validate_Required [% Data.DescriptionServerError | html %]" rows="5">[% Data.Description | html %]</textarea>
+                                <div id="DescriptionError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="DescriptionServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
                             </div>
-                            <div id="DescriptionServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="StateEntityID">[% Translate("State") | html %]</label>
+                            <div class="Field">
+                                [% Data.StateSelection %]
+                            </div>
+                            <div id="StateEntityIDServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("The selected state does not exist.") | html %]</p>
                             </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="StateEntityID">[% Translate("State") | html %]:</label>
-                        <div class="Field">
-                            [% Data.StateSelection %]
+                        <div class="Field SaveButtons">
+                            <button class="Primary CallForAction btn-main btn-primary btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-secondary-ghost btn-width-md"><span>[% Translate("Cancel") | html %]</span></a>
                         </div>
-                        <div id="StateEntityIDServerError" class="TooltipErrorMessage">
-                            <p>[% Translate("The selected state does not exist.") | html %]</p>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <div class="Field SpacingTop">
-                            <button class="Primary CallForAction" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]"><span>[% Translate("Cancel") | html %]</span></a>
-                        </div>
-                        <div class="Clear"></div>
                     </fieldset>
                 </form>
             </div>
-
         </div>
     </div>
-    <div class="Clear"></div>
 </div>

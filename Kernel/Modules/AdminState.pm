@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -11,6 +11,7 @@ package Kernel::Modules::AdminState;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -70,7 +71,7 @@ sub Run {
         $LayoutObject->ChallengeTokenCheck();
 
         my ( %GetParam, %Errors );
-        for my $Parameter (qw(ID Name TypeID Comment ValidID)) {
+        for my $Parameter (qw(ID Name TypeID Comment Color ValidID)) {
             $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
@@ -81,6 +82,11 @@ sub Run {
             }
         }
         my %StateData = $StateObject->StateGet( ID => $GetParam{ID} );
+
+        # Check if Color is a valid hexadeciomal color code
+        if ( $GetParam{Color} !~ /^\#(?:[0-9a-fA-F]{3}){1,2}$/ ) {
+            $Errors{ColorInvalidServerError} = 'ServerError';
+        }
 
         # Check if state is present in SysConfig setting
         my $UpdateEntity    = $ParamObject->GetParam( Param => 'UpdateEntity' ) || '';
@@ -240,7 +246,7 @@ sub Run {
         $LayoutObject->ChallengeTokenCheck();
 
         my ( %GetParam, %Errors );
-        for my $Parameter (qw(ID TypeID Name Comment ValidID)) {
+        for my $Parameter (qw(ID TypeID Name Comment Color ValidID)) {
             $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
@@ -339,6 +345,14 @@ sub _Edit {
     my %ValidList        = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
     my %ValidListReverse = reverse %ValidList;
 
+    $Param{ColorPicker} = $LayoutObject->ColorPicker(
+        Type  => 'InputField',
+        Name  => 'Color',
+        ID    => 'Color',
+        Color => $Param{Color},
+        Class => 'Validate_Color ' . ( $Param{Errors}->{'ColorInvalidServerError'} || '' ),
+    );
+
     $Param{ValidOption} = $LayoutObject->BuildSelection(
         Data       => \%ValidList,
         Name       => 'ValidID',
@@ -370,6 +384,13 @@ sub _Edit {
     $LayoutObject->Block(
         Name => $Param{Errors}->{ValidOptionServerError} . 'ValidOptionServerError',
     );
+
+    # Show ServerError if color code is invalid.
+    if ( $Param{Errors}->{ColorInvalidServerError} ) {
+        $LayoutObject->Block(
+            Name => 'ColorInvalidServerError',
+        );
+    }
 
     if ( $Param{ID} ) {
 

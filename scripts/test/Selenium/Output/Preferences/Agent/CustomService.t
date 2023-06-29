@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,8 +20,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UtilObject   = $Kernel::OM->Get('Kernel::System::Util');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
 
         # enable the services
         $HelperObject->ConfigSettingChange(
@@ -49,7 +54,7 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -59,13 +64,21 @@ $Selenium->RunTest(
         # create two test services
         my @ServiceIDs;
         my @ServiceNames;
+        my %ITSMServiceValues;
+        if ($IsITSMInstalled) {
+            $ITSMServiceValues{TypeID}      = 1;
+            $ITSMServiceValues{Criticality} = '3 normal';
+        }
+
         for my $Service (qw(Parent Child)) {
             my $ServiceName = $Service . 'Service' . $HelperObject->GetRandomID();
-            my $ServiceID   = $ServiceObject->ServiceAdd(
+
+            my $ServiceID = $ServiceObject->ServiceAdd(
                 Name    => $ServiceName,
                 ValidID => 2,                 # invalid
                 Comment => 'Selenium Test',
                 UserID  => 1,
+                %ITSMServiceValues,
             );
             $Self->True(
                 $ServiceID,
@@ -82,13 +95,14 @@ $Selenium->RunTest(
             ParentID  => $ServiceIDs[0],
             ValidID   => 1,
             UserID    => 1,
+            %ITSMServiceValues,
         );
         $Self->True(
             $Success,
             "Service ID $ServiceIDs[1] is now child service"
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # go to agent preferences
         $Selenium->VerifiedGet(
@@ -172,7 +186,7 @@ $Selenium->RunTest(
         }
 
         # make sure the cache is correct
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Service',
         );
     },

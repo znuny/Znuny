@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -588,7 +588,7 @@ Message
             Key           => 'Kernel::System::PostMaster::NewTicket',
             Value         => "Can't process email with MessageID <$GetParam{'Message-ID'}>! "
                 . "Please create a bug report with this email (From: $GetParam{From}, Located "
-                . "under var/spool/problem-email*) on http://bugs.otrs.org/!",
+                . "under var/spool/problem-email*) on https://github.com/znuny/Znuny/issues/new/choose !",
         );
 
         $Self->{CommunicationLogObject}->ObjectLog(

@@ -1,23 +1,24 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Common::Origin)
 [% RenderBlockStart("rw:Priority") %]
 <label for="[% Data.FieldID | html %]" class="[% Data.MandatoryClass | html %]">
+    [% Data.Label | html %]:
 [% RenderBlockStart("LabelSpan") %]
-    <span class="Marker">*</span>
+        <span class="Marker">*</span>
 [% RenderBlockEnd("LabelSpan") %]
 [% RenderBlockStart("rw:Priority:DescriptionLong") %]
-    <span class="FieldHelpContainer">
-        <i class="fa fa-question-circle FieldHelpTrigger"></i>
-        <span>[% Translate(Data.DescriptionLong) | html %]</span>
-    </span>
+        <span class="FieldHelpContainer">
+            <i class="fa fa-question-circle FieldHelpTrigger"></i>
+            <span>[% Translate(Data.DescriptionLong) | html %]</span>
+        </span>
 [% RenderBlockEnd("rw:Priority:DescriptionLong") %]
-    [% Data.Label | html %]:
 </label>
 <div class="Field">
     [% Data.Content %]

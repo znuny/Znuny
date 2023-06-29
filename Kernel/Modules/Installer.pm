@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,8 +8,8 @@
 # --
 
 package Kernel::Modules::Installer;
-## nofilter(TidyAll::Plugin::OTRS::Perl::DBObject)
-## nofilter(TidyAll::Plugin::OTRS::Perl::Print)
+## nofilter(TidyAll::Plugin::Znuny::Perl::DBObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Print)
 
 use strict;
 use warnings;
@@ -161,7 +161,7 @@ sub Run {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # Print intro form.
-    my $Title = $LayoutObject->{LanguageObject}->Translate('Install OTRS');
+    my $Title = $LayoutObject->{LanguageObject}->Translate('Install Znuny');
     if ( $Self->{Subaction} eq 'Intro' ) {
         my $Output =
             $LayoutObject->Header(
@@ -331,7 +331,7 @@ sub Run {
                     Item                => Translatable('Configure MySQL'),
                     Step                => $StepCounter,
                     InstallType         => $DBInstallType,
-                    DefaultDBUser       => $DBInstallType eq 'CreateDB' ? 'root' : 'otrs',
+                    DefaultDBUser       => $DBInstallType eq 'CreateDB' ? 'root' : 'znuny',
                     PasswordExplanation => $PasswordExplanation,
                 },
             );
@@ -374,7 +374,7 @@ sub Run {
                     Item          => Translatable('Database'),
                     Step          => $StepCounter,
                     InstallType   => $DBInstallType,
-                    DefaultDBUser => $DBInstallType eq 'CreateDB' ? 'postgres' : 'otrs',
+                    DefaultDBUser => $DBInstallType eq 'CreateDB' ? 'postgres' : 'znuny',
                 },
             );
             if ( $DBInstallType eq 'CreateDB' ) {
@@ -606,7 +606,7 @@ sub Run {
         if ($ReConfigure) {
             my $Output =
                 $LayoutObject->Header(
-                Title => Translatable('Install OTRS - Error')
+                Title => Translatable('Install Znuny - Error')
                 );
             $Output .= $LayoutObject->Warning(
                 Message => Translatable('Kernel/Config.pm isn\'t writable!'),

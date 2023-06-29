@@ -330,7 +330,6 @@
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketProcess.js</Item>
@@ -507,7 +506,6 @@
                     <Array>
                         <Item>Core.TicketProcess.js</Item>
                         <Item>Core.Customer.TicketProcess.js</Item>
-                        <Item>Core.TicketProcess.js</Item>
                     </Array>
                 </Item>
             </Hash>
@@ -533,14 +531,14 @@
                             </Array>
                         </Item>
                         <Item Key="Description" Translatable="1">Create new process ticket.</Item>
-                        <Item Key="Name" Translatable="1">New process ticket</Item>
+                        <Item Key="Name" Translatable="1">Create Process Ticket</Item>
                         <Item Key="Link">Action=CustomerTicketProcess</Item>
                         <Item Key="LinkOption"></Item>
                         <Item Key="NavBar">Ticket</Item>
-                        <Item Key="Type">Submenu</Item>
+                        <Item Key="Type">Menu</Item>
                         <Item Key="Block"></Item>
                         <Item Key="AccessKey">o</Item>
-                        <Item Key="Prio">220</Item>
+                        <Item Key="Prio">0010</Item>
                     </Hash>
                 </Item>
             </Array>

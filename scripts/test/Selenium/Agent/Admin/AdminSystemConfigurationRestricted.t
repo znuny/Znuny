@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,6 +20,8 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
@@ -38,7 +40,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminSysConfig screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSystemConfiguration;");
@@ -55,13 +57,13 @@ $Selenium->RunTest(
             JavaScript => 'return typeof($) === "function" && !$("#AJAXLoaderSysConfigSearch:visible").length;'
         );
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
-        $Selenium->find_element( "button[type='submit']", "css" )->click();
+        $Selenium->find_element( "#SysConfigSearch", "css" )->VerifiedSubmit();
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && $(".fa-exclamation-triangle").length;',
         );
 
         my $Message = $Selenium->find_element( ".fa-exclamation-triangle", "css" )->get_attribute('title');
-        $Kernel::OM->Get('Kernel::System::Log')->Dumper( '$Message', $Message );
+        $LogObject->Dumper( '$Message', $Message );
         $Self->Is(
             'Changing this setting is only available in a higher config level!',
             $Message,

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -17,6 +17,7 @@ use vars (qw($Self));
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 my $CreateTestCustomer = sub {
+
     my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
     my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
@@ -60,7 +61,11 @@ my $CreateTestUser = sub {
 };
 
 my $ImportSampleEmail = sub {
-    my $OTRSDIR = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+
+    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+    my $OTRSDIR = $ConfigObject->Get('Home');
     my $FH      = IO::File->new( "${ OTRSDIR }/scripts/test/sample/PostMaster/InlineImage.box", 'r', );
     my @Lines   = <$FH>;
 
@@ -89,7 +94,7 @@ my $ImportSampleEmail = sub {
         QueueID => 0,
     );
 
-    my @Articles = $Kernel::OM->Get('Kernel::System::Ticket::Article')->ArticleList(
+    my @Articles = $ArticleObject->ArticleList(
         TicketID => $TicketID,
         OnlyLast => 1,
     );
@@ -144,9 +149,11 @@ my $DeleteSampleEmail = sub {
 my $CheckTicketZoom = sub {
     my %Param = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     my $TicketID = $Param{TicketID};
 
-    my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+    my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
     # Go to ticket zoom page.
     $Selenium->VerifiedGet( "${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=" . $TicketID );
@@ -195,11 +202,13 @@ my $CheckEmailContentDisposition = sub {
 my $CheckTicketReplyOrForward = sub {
     my %Param = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     my $TicketID  = $Param{TicketID};
     my $ArticleID = $Param{ArticleID};
     my $Action    = $Param{Action};
 
-    my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+    my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
     if ( $Action eq 'Reply' ) {
 

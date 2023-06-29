@@ -1,42 +1,20 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">
-        [% Translate("Communication Log") | html %] &ndash;
-        [% Data.CommunicationLog.StartTime = Data.CommunicationLog.StartTime | Localize("TimeLong") %]
-        [% Translate("Detail view for %s communication started at %s", Data.CommunicationLog.Direction.lower, Data.CommunicationLog.StartTime) | html %]
-    </h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Communication Log'),
-                Link => Env("Action"),
-            },
-            {
-                Name => Translate("Detail view for %s communication started at %s", Data.CommunicationLog.Direction.lower, Data.CommunicationLog.StartTime),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-
-    <div class="SidebarColumn">
-
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
             </div>
             <div class="Content">
-                <a id="OverviewButton" class="CallForAction Fullsize Center Back">
+                <a id="OverviewButton" class="CallForAction btn-main btn-primary-ghost Back">
                     <span>
                         <i class="fa fa-caret-left"></i>
                         [% Translate("Back to overview") | html %]
@@ -76,10 +54,27 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <div class="ContentColumn">
 
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">
+            [% Translate("Communication Log") | html %] &ndash;
+            [% Data.CommunicationLog.StartTime = Data.CommunicationLog.StartTime | Localize("TimeLong") %]
+            [% Translate("Detail view for %s communication started at %s", Data.CommunicationLog.Direction.lower, Data.CommunicationLog.StartTime) | html %]
+        </h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Communication Log'),
+                    Link => Env("Action"),
+                },
+                {
+                    Name => Translate("Detail view for %s communication started at %s", Data.CommunicationLog.Direction.lower, Data.CommunicationLog.StartTime),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
         <div id="CommunicationObjectWidget" class="WidgetSimple">
 
             <div class="Header">
@@ -92,7 +87,6 @@
             </div>
 
             <div class="Content">
-
                 <table class="DataTable" id="ObjectListTable">
                     <thead>
                         <tr>
@@ -191,9 +185,7 @@
                     </h2>
                 </div>
                 <div class="Content">
-
                     <p>[% Translate("Please select an entry from the list.") | html %]</p>
-
                 </div>
             </div>
         </div>

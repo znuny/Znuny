@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,6 +20,9 @@ $Selenium->RunTest(
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
 
         # Set link object view mode to simple.
         $HelperObject->ConfigSettingChange(
@@ -48,7 +51,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -84,7 +87,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to link object screen of created test ticket.
         $Selenium->VerifiedGet(
@@ -393,21 +396,21 @@ $Selenium->RunTest(
                 $Selenium->execute_script(
                     "return \$('#WidgetTicket .DataTable thead tr th:nth-child(3)').text();"
                 ),
-                ' Queue ',
+                ' Ticket# ',
                 'Updated 3th column name',
             );
             $Self->Is(
                 $Selenium->execute_script(
                     "return \$('#WidgetTicket .DataTable thead tr th:nth-child(4)').text();"
                 ),
-                ' Created ',
+                ' Queue ',
                 'Updated 4th column name',
             );
             $Self->Is(
                 $Selenium->execute_script(
                     "return \$('#WidgetTicket .DataTable thead tr th:nth-child(5)').text();"
                 ),
-                ' Ticket# ',
+                ' Created ',
                 'Updated 5th column name',
             );
 
@@ -732,7 +735,7 @@ $Selenium->RunTest(
         );
 
         # Delete created test Calendar.
-        $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        $Success = $DBObject->Do(
             SQL => "DELETE FROM calendar WHERE id = $Calendar{CalendarID}",
         );
         $Self->True(

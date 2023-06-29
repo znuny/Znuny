@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -17,9 +17,21 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ACLObject    = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ACLObject               = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
+        my $CacheObject             = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject      = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject                = $Kernel::OM->Get('Kernel::System::DB');
+        my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject             = $Kernel::OM->Get('Kernel::System::Queue');
+        my $SLAObject               = $Kernel::OM->Get('Kernel::System::SLA');
+        my $ServiceObject           = $Kernel::OM->Get('Kernel::System::Service');
+        my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+
+        my $IsITSMIncidentProblemManagementInstalled
+            = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
         my $RandomID = $HelperObject->GetRandomID();
 
@@ -58,8 +70,7 @@ $Selenium->RunTest(
         );
 
         # Create test ticket dynamic field.
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-        my $DynamicFieldID     = $DynamicFieldObject->DynamicFieldAdd(
+        my $DynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
             Name       => 'Field' . $RandomID,
             Label      => 'Field' . $RandomID,
             FieldOrder => 99998,
@@ -246,7 +257,7 @@ EOF
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # After login, we need to navigate to the ACL deployment to make the imported ACL work.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminACL;Subaction=ACLDeploy");
@@ -260,7 +271,7 @@ EOF
         );
 
         # Add a customer.
-        my $CustomerUserLogin = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUserLogin = $CustomerUserObject->CustomerUserAdd(
             UserFirstname  => 'Huber',
             UserLastname   => 'Manfred',
             UserCustomerID => 'A124',
@@ -289,8 +300,6 @@ EOF
         );
 
         # Set test ticket dynamic field to zero-value, please see bug#12273 for more information.
-        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
-
         my $Success = $DynamicFieldValueObject->ValueSet(
             FieldID  => $DynamicFieldID,
             ObjectID => $TicketID,
@@ -302,8 +311,36 @@ EOF
             UserID => 1,
         );
 
-        # Create some test services.
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
+        my %ITSMSLA;
+        my %ITSMService;
+
+        if ($IsITSMIncidentProblemManagementInstalled) {
+
+            # get the list of service types from general catalog
+            my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::Service::Type',
+            );
+
+            # build a lookup hash
+            my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+            # get the list of sla types from general catalog
+            my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::SLA::Type',
+            );
+
+            # build a lookup hash
+            my %SLATypeName2ID = reverse %{$SLATypeList};
+
+            %ITSMSLA = (
+                TypeID => $SLATypeName2ID{Other},
+            );
+
+            %ITSMService = (
+                TypeID      => $ServiceTypeName2ID{Training},
+                Criticality => '3 normal',
+            );
+        }
 
         my $ServiceID;
         my @Services;
@@ -312,6 +349,7 @@ EOF
                 Name    => "UT Test Service $Count $RandomID",
                 ValidID => 1,
                 UserID  => 1,
+                %ITSMService,
             );
             push @Services, $ServiceID;
 
@@ -329,8 +367,6 @@ EOF
         }
 
         # Create several test SLAs.
-        my $SLAObject = $Kernel::OM->Get('Kernel::System::SLA');
-
         my @SLAs;
         for my $Count ( 1 .. 3 ) {
             my $SLAID = $SLAObject->SLAAdd(
@@ -338,6 +374,7 @@ EOF
                 Name       => "UT Test SLA $Count $RandomID",
                 ValidID    => 1,
                 UserID     => 1,
+                %ITSMSLA,
             );
             push @SLAs, $SLAID;
         }
@@ -348,12 +385,7 @@ EOF
         # Wait until page has loaded.
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function";' );
 
-        $Selenium->execute_script("\$('#nav-Communication-container').css('height', 'auto');");
-        $Selenium->execute_script("\$('#nav-Communication-container').css('opacity', '1');");
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return \$('#nav-Communication-container').css('height') !== '0px' && \$('#nav-Communication-container').css('opacity') == '1';"
-        );
+        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
 
         # Click on 'Note' and switch window
         $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketNote;TicketID=$TicketID' )]")->click();
@@ -396,7 +428,7 @@ EOF
         );
 
         # Verify queue is updated on ACL trigger, see bug#12862 ( https://bugs.otrs.org/show_bug.cgi?id=12862 ).
-        my %JunkQueue = $Kernel::OM->Get('Kernel::System::Queue')->QueueGet(
+        my %JunkQueue = $QueueObject->QueueGet(
             Name => 'Junk',
         );
         $Self->True(
@@ -637,10 +669,9 @@ EOF
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
 
         # Delete test SLAs.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         for my $SLAID (@SLAs) {
             my $Success = $DBObject->Do(
                 SQL  => "DELETE FROM service_sla WHERE sla_id = ?",
@@ -662,6 +693,18 @@ EOF
             "Deleted service relations for $CustomerUserLogin",
         );
         for my $ServiceID (@Services) {
+            if ($IsITSMIncidentProblemManagementInstalled) {
+
+                # Clean up servica data.
+                $Success = $DBObject->Do(
+                    SQL  => "DELETE FROM service_preferences WHERE service_id = ?",
+                    Bind => [ \$ServiceID ],
+                );
+                $Self->True(
+                    $Success,
+                    "ServicePreferences is deleted - ID $ServiceID",
+                );
+            }
             $Success = $DBObject->Do(
                 SQL  => "DELETE FROM service WHERE ID = ?",
                 Bind => [ \$ServiceID ],
@@ -699,8 +742,6 @@ EOF
             $Success,
             "DynamicFieldDelete - Deleted test dynamic field $DynamicFieldID2",
         );
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (qw( Service SLA CustomerUser DynamicField )) {

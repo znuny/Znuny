@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -15,10 +15,11 @@ use vars (qw($Self));
 
 use Kernel::System::VariableCheck qw(:all);
 
-my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $Selenium   = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
 # Check if team object is registered.
-if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calendar::Team', Silent => 1 ) ) {
+if ( !$MainObject->Require( 'Kernel::System::Calendar::Team', Silent => 1 ) ) {
     $Self->True(
         1,
         "Team object is not registered, skipping test ...",
@@ -33,6 +34,8 @@ $Selenium->RunTest(
         my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
         my $TeamObject        = $Kernel::OM->Get('Kernel::System::Calendar::Team');
         my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
 
         my $RandomID = $HelperObject->GetRandomID();
 
@@ -133,7 +136,7 @@ $Selenium->RunTest(
             CalendarID    => $Calendar{CalendarID},
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Create test user.
         # TODO language will be possible to set on some other languages,
@@ -250,7 +253,7 @@ $Selenium->RunTest(
         );
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     },
 );
 

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,13 +18,14 @@ use Kernel::System::VariableCheck qw(:all);
 use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
-    'Kernel::System::Log',
-    'Kernel::System::Ticket',
-    'Kernel::System::Ticket::Article',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
-    'Kernel::System::User',
     'Kernel::System::HTMLUtils',
+    'Kernel::System::Log',
+    'Kernel::System::StdAttachment',
+    'Kernel::System::Ticket',
+    'Kernel::System::Ticket::Article',
+    'Kernel::System::User',
 );
 
 =head1 NAME
@@ -141,53 +142,16 @@ Returns:
             CommunicationChannel => 'Email',
 
             # Email article data payload.
-            From             => 'Some Agent <email@example.com>',
-            To               => 'Some Customer A <customer-a@example.com>',
-            Subject          => 'some short description',
-            Body             => 'the message text',
-            Charset          => 'ISO-8859-15',
-            MimeType         => 'text/plain',
-            HistoryType      => 'EmailAgent',
-            HistoryComment   => 'Some free text!',
-            UnlockOnAway     => 1,
-        },
-    );
-
-    # Chat article example:
-
-    my $Success = $TicketArticleCreateActionObject->Run(
-        UserID => 123,
-        Ticket => {
-            TicketNumber => '20101027000001',
-            Title        => 'some title',
-            TicketID     => 123,
-            State        => 'some state',
-            # ... (all ticket properties, as the result from Kernel::System::Ticket::TicketGet)
-        },
-        ProcessEntityID            => 'P123',
-        ActivityEntityID           => 'A123',
-        SequenceFlowEntityID       => 'T123',
-        SequenceFlowActionEntityID => 'TA123',
-        Config                   => {
-            SenderType           => 'agent',
-            IsVisibleForCustomer => 1,
-            CommunicationChannel => 'Chat',
-
-            # Chat article data payload.
-            ChatMessageList => [
-                {
-                    ID              => 1,
-                    MessageText     => 'My chat message',
-                    CreateTime      => '2014-04-04 10:10:10',
-                    SystemGenerated => 0,
-                    ChatterID       => '123',
-                    ChatterType     => 'User',
-                    ChatterName     => 'John Doe',
-                },
-                # ...
-            ],
-            HistoryType    => 'Misc',
-            HistoryComment => 'Some free text!',
+            From               => 'Some Agent <email@example.com>',
+            To                 => 'Some Customer A <customer-a@example.com>',
+            Subject            => 'some short description',
+            Body               => 'the message text',
+            Charset            => 'ISO-8859-15',
+            MimeType           => 'text/plain',
+            HistoryType        => 'EmailAgent',
+            HistoryComment     => 'Some free text!',
+            UnlockOnAway       => 1,
+            DynamicField_NameX => 'Value of DF Article',
         },
     );
 
@@ -195,6 +159,15 @@ Returns:
 
 sub Run {
     my ( $Self, %Param ) = @_;
+
+    my $ArticleObject             = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $HTMLUtilsObject           = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+    my $LogObject                 = $Kernel::OM->Get('Kernel::System::Log');
+    my $StdAttachmentObject       = $Kernel::OM->Get('Kernel::System::StdAttachment');
+    my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $UserObject                = $Kernel::OM->Get('Kernel::System::User');
 
     # Define a common message to output in case of any error.
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -211,7 +184,7 @@ sub Run {
     $Param{Config}->{CommunicationChannel} ||= 'Internal';
 
     if ( !defined $Param{Config}->{IsVisibleForCustomer} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Need Config -> IsVisibleForCustomer",
         );
@@ -222,11 +195,7 @@ sub Run {
     # Override UserID if specified as a parameter in the TA config.
     $Param{UserID} = $Self->_OverrideUserID(%Param);
 
-    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
-    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-
     # Convert DynamicField value to HTML string, see bug#14229.
-    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
     if ( $Param{Config}->{Body} =~ /OTRS_TICKET_DynamicField_/ ) {
         MATCH:
         for my $Match ( sort keys %{ $Param{Ticket} } ) {
@@ -275,7 +244,7 @@ sub Run {
     {
 
         # Get current user data
-        my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
+        my %User = $UserObject->GetUserData(
             UserID => $Param{UserID},
         );
 
@@ -283,13 +252,42 @@ sub Run {
         $Param{Config}->{From} = $User{UserFullname} . ' <' . $User{UserEmail} . '>';
     }
 
-    my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+    my $ArticleBackendObject = $ArticleObject->BackendForChannel(
         ChannelName => $Param{Config}->{CommunicationChannel}
     );
 
-    # check for selected Attachments
-    if ( $Param{Config}->{Attachments} ) {
+    # attachments
+    if ( $Param{Config}->{AttachmentsReuse} ) {
         $Param{Config}->{Attachment} = $Self->_GetAttachments(%Param);
+    }
+
+    if ( $Param{Config}->{Attachments} || $Param{Config}->{AttachmentIDs} ) {
+        my @AttachmentIDs = split /\s*,\s*/, ( $Param{Config}->{AttachmentIDs} || '' );
+
+        my @AttachmentNames = split /\s*,\s*/, ( $Param{Config}->{Attachments} || '' );
+        ATTACHMENT:
+        for my $Name (@AttachmentNames) {
+            my $ID = $StdAttachmentObject->StdAttachmentLookup(
+                StdAttachment => $Name,
+            );
+            next ATTACHMENT if !$ID;
+
+            push @AttachmentIDs, $ID;
+        }
+
+        ATTACHMENT:
+        for my $ID (@AttachmentIDs) {
+            my %Data = $StdAttachmentObject->StdAttachmentGet(
+                ID => $ID,
+            );
+            next ATTACHMENT if !%Data;
+
+            push @{ $Param{Config}->{Attachment} }, {
+                Content     => $Data{Content},
+                ContentType => $Data{ContentType},
+                Filename    => $Data{Filename},
+            };
+        }
     }
 
     my $ArticleID = $ArticleBackendObject->ArticleCreate(
@@ -299,7 +297,7 @@ sub Run {
     );
 
     if ( !$ArticleID ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => $CommonMessage
                 . "Couldn't create article for Ticket: "
@@ -310,12 +308,63 @@ sub Run {
 
     # Set time units.
     if ( $Param{Config}->{TimeUnit} ) {
-        $Kernel::OM->Get('Kernel::System::Ticket')->TicketAccountTime(
+        $TicketObject->TicketAccountTime(
             TicketID  => $Param{Ticket}->{TicketID},
             ArticleID => $ArticleID,
             TimeUnit  => $Param{Config}->{TimeUnit},
             UserID    => $Param{UserID},
         );
+    }
+
+    # set dynamic fields for ticket and article
+
+    # set a field filter (all valid dynamic fields have to have set to 1 like NameX => 1)
+    my %FieldFilter;
+    for my $Attribute ( sort keys %{ $Param{Config} } ) {
+        if ( $Attribute =~ m{\A DynamicField_ ( [a-zA-Z0-9]+ ) \z}msx ) {
+            $FieldFilter{$1} = 1;
+        }
+    }
+
+    # get the dynamic fields for ticket
+    my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
+        Valid       => 1,
+        ObjectType  => [ 'Ticket', 'Article' ],
+        FieldFilter => \%FieldFilter,
+    );
+
+    # cycle through the activated Dynamic Fields for this screen
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
+        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+        my $ObjectID = $Param{Ticket}->{TicketID};
+        if ( $DynamicFieldConfig->{ObjectType} ne 'Ticket' ) {
+
+            # skip article dynamic fields if Article was not created
+            next DYNAMICFIELD if !$ArticleID;
+
+            $ObjectID = $ArticleID;
+        }
+
+        # set the value
+        my $Success = $DynamicFieldBackendObject->ValueSet(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            ObjectID           => $ObjectID,
+            Value              => $Param{Config}->{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
+            UserID             => $Param{UserID},
+        );
+
+        if ( !$Success ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => $CommonMessage
+                    . "Couldn't set DynamicField Value on $DynamicFieldConfig->{ObjectType}:"
+                    . " $ObjectID from Ticket: "
+                    . $Param{Ticket}->{TicketID} . '!',
+            );
+            return;
+        }
     }
 
     return 1;

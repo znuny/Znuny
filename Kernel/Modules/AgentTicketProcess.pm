@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -54,6 +54,9 @@ sub new {
         Article            => 'Article',
         Attachments        => 'Attachments',
     };
+
+    $Self->{IsITSMIncidentProblemManagementInstalled}
+        = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
     return $Self;
 }
@@ -718,6 +721,45 @@ sub _RenderAjax {
                 %{ $Param{GetParam} },
             );
 
+            # check if priority needs to be recalculated
+            if (
+                $Self->{IsITSMIncidentProblemManagementInstalled}
+                && (
+                    $Param{GetParam}->{ElementChanged} eq 'ServiceID'
+                    || $Param{GetParam}->{ElementChanged} eq 'DynamicField_ITSMImpact'
+                )
+                && $Param{GetParam}->{ServiceID}
+                && $Param{GetParam}->{DynamicField_ITSMImpact}
+                )
+            {
+
+                my %Service = $Kernel::OM->Get('Kernel::System::Service')->ServiceGet(
+                    ServiceID => $Param{GetParam}->{ServiceID},
+                    UserID    => $Self->{UserID},
+                );
+
+                # calculate priority from the CIP matrix
+                my $PriorityIDFromImpact = $Kernel::OM->Get('Kernel::System::ITSMCIPAllocate')->PriorityAllocationGet(
+                    Criticality => $Service{Criticality},
+                    Impact      => $Param{GetParam}->{DynamicField_ITSMImpact},
+                );
+
+                # add Priority to the JSONCollector
+                push(
+                    @JSONCollector,
+                    {
+                        Name        => $Self->{NameToID}{$CurrentField},
+                        Data        => $Data,
+                        SelectedID  => $PriorityIDFromImpact,
+                        Translation => 1,
+                        Max         => 100,
+                    },
+                );
+                $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
+
+                next DIALOGFIELD;
+            }
+
             # add Priority to the JSONCollector
             push(
                 @JSONCollector,
@@ -958,7 +1000,7 @@ sub _GetParam {
     my $ActivityDialogEntityID = $ParamObject->GetParam(
         Param => 'ActivityDialogEntityID',
     );
-    my $ActivityEntityID;
+    my $ActivityEntityID = $ParamObject->GetParam( Param => 'ActivityEntityID' );
     my %ValuesGotten;
     my $Value;
 
@@ -1103,6 +1145,24 @@ sub _GetParam {
                 ParamObject        => $ParamObject,
                 LayoutObject       => $LayoutObject,
             );
+
+            # set the criticality from the service
+            if (
+                $Self->{IsITSMIncidentProblemManagementInstalled}
+                && $DynamicFieldName eq 'ITSMCriticality'
+                && $ParamObject->GetParam( Param => 'ServiceID' )
+                )
+            {
+
+                # get service
+                my %Service = $Kernel::OM->Get('Kernel::System::Service')->ServiceGet(
+                    ServiceID => $ParamObject->GetParam( Param => 'ServiceID' ),
+                    UserID    => $Self->{UserID},
+                );
+
+                # set the criticality
+                $Value = $Service{Criticality};
+            }
 
             # If we got a submitted param, take it and next out
             if (
@@ -1560,6 +1620,22 @@ sub _OutputActivityDialog {
         );
     }
 
+    # Add rich text editor parameters to Core.Config.js even if ActivityDialog doesn't use a Article.
+    # This allows an administrator to replace a textarea with a rich text editor just loading a simple js
+    # and accessing Core.Config.js rich text editor parameter to ensure same ckeditor behavior and the
+    # possibility to use plugins like imageUpload.
+    if ( $LayoutObject->{BrowserRichText} ) {
+
+        # use height/width defined for this screen
+        $Param{RichTextHeight} = $Self->{Config}->{RichTextHeight} || 0;
+        $Param{RichTextWidth}  = $Self->{Config}->{RichTextWidth}  || 0;
+
+        # set up rich text editor
+        $LayoutObject->SetRichTextParameters(
+            Data => \%Param,
+        );
+    }
+
     # Add PageHeader, Navbar, Formheader (Process/ActivityDialogHeader)
     my $Output;
     my $MainBoxClass;
@@ -1593,19 +1669,6 @@ sub _OutputActivityDialog {
         )
     {
 
-        # add rich text editor
-        if ( $LayoutObject->{BrowserRichText} ) {
-
-            # use height/width defined for this screen
-            $Param{RichTextHeight} = $Self->{Config}->{RichTextHeight} || 0;
-            $Param{RichTextWidth}  = $Self->{Config}->{RichTextWidth}  || 0;
-
-            # set up rich text editor
-            $LayoutObject->SetRichTextParameters(
-                Data => \%Param,
-            );
-        }
-
         # display complete header and navigation bar in AJAX dialogs when there is a server error
         #    unless we are in a process enrollment (only when IsMainWindow is active)
         my $Type = $Self->{IsMainWindow} ? '' : 'Small';
@@ -1632,6 +1695,11 @@ sub _OutputActivityDialog {
 
     # display process information
     if ( $Self->{IsMainWindow} ) {
+
+        # output SidebarColumn
+        $LayoutObject->Block(
+            Name => 'SidebarColumn',
+        );
 
         # get process data
         my $Process = $ProcessObject->ProcessGet(
@@ -1717,7 +1785,6 @@ sub _OutputActivityDialog {
                 Name => 'CancelLink',
             );
         }
-
     }
 
     $Output .= $LayoutObject->Output(
@@ -1728,6 +1795,7 @@ sub _OutputActivityDialog {
             Subaction              => 'StoreActivityDialog',
             TicketID               => $Ticket{TicketID} || '',
             LinkTicketID           => $Self->{LinkTicketID},
+            ActivityEntityID       => $ActivityActivityDialog->{Activity},
             ActivityDialogEntityID => $ActivityActivityDialog->{ActivityDialog},
             ProcessEntityID        => $Param{ProcessEntityID}
                 || $Ticket{
@@ -2770,8 +2838,9 @@ sub _RenderTitle {
 sub _RenderArticle {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+    my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
     for my $Needed (qw(FormID Ticket)) {
         if ( !$Param{$Needed} ) {
@@ -2852,13 +2921,41 @@ sub _RenderArticle {
         Name             => 'Article',
         MandatoryClass   => '',
         ValidateRequired => '',
-        Subject          => $Param{GetParam}->{Subject},
-        Body             => $Param{GetParam}->{Body},
+        Subject          => $Param{GetParam}->{Subject} || $Param{ActivityDialogField}->{Config}->{Subject},
+        Body             => $Param{GetParam}->{Body} || $Param{ActivityDialogField}->{Config}->{Body},
         LabelSubject     => $Param{ActivityDialogField}->{Config}->{LabelSubject}
             || $LayoutObject->{LanguageObject}->Translate("Subject"),
         LabelBody => $Param{ActivityDialogField}->{Config}->{LabelBody}
             || $LayoutObject->{LanguageObject}->Translate("Text"),
         AttachmentList => $Param{AttachmentList},
+    );
+
+    $Data{Body} = $TemplateGeneratorObject->_Replace(
+        RichText => 1,
+        Text     => $Data{Body} || '',
+        Data     => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        TicketData => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        UserID => $Self->{UserID},
+    );
+
+    $Data{Subject} = $TemplateGeneratorObject->_Replace(
+        RichText => 0,                      # In this case rich-text support is not needed.
+        Text     => $Data{Subject} || '',
+        Data     => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        TicketData => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        UserID => $Self->{UserID},
     );
 
     # If field is required put in the necessary variables for
@@ -4738,8 +4835,9 @@ sub _StoreActivityDialog {
 
     my %TicketParam;
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+    my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
     my $ActivityDialogEntityID = $Param{GetParam}->{ActivityDialogEntityID};
     if ( !$ActivityDialogEntityID ) {
@@ -5075,6 +5173,20 @@ sub _StoreActivityDialog {
                     $TicketParam{Title} = $Param{GetParam}->{Subject};
                 }
             }
+
+            $TicketParam{Title} = $TemplateGeneratorObject->_Replace(
+                RichText => 0,                           # In this case rich-text support is not needed.
+                Text     => $TicketParam{Title} || '',
+                Data     => {
+                    %{ $Param{GetParam} },
+                    %TicketParam,
+                },
+                TicketData => {
+                    %{ $Param{GetParam} },
+                    %TicketParam,
+                },
+                UserID => $Self->{UserID},
+            );
 
             # create a new ticket
             $TicketID = $TicketObject->TicketCreate(%TicketParam);
@@ -5532,6 +5644,32 @@ sub _StoreActivityDialog {
                     $HistoryType    = 'PhoneCallAgent';
                     $HistoryComment = '%%';
                 }
+
+                $Param{GetParam}->{Body} = $TemplateGeneratorObject->_Replace(
+                    RichText => 1,
+                    Text     => $Param{GetParam}->{Body} || '',
+                    Data     => {
+                        %{ $Param{GetParam} },
+                    },
+                    TicketData => {
+                        %{ $Param{GetParam} },
+                        TicketID => $TicketID,
+                    },
+                    UserID => $Self->{UserID},
+                );
+
+                $Param{GetParam}->{Subject} = $TemplateGeneratorObject->_Replace(
+                    RichText => 0,                                   # In this case rich-text support is not needed.
+                    Text     => $Param{GetParam}->{Subject} || '',
+                    Data     => {
+                        %{ $Param{GetParam} },
+                    },
+                    TicketData => {
+                        %{ $Param{GetParam} },
+                        TicketID => $TicketID,
+                    },
+                    UserID => $Self->{UserID},
+                );
 
                 my $From = "\"$Self->{UserFullname}\" <$Self->{UserEmail}>";
                 $ArticleID = $ArticleBackendObject->ArticleCreate(
@@ -6585,7 +6723,7 @@ sub _GetQueues {
 
             if ( $ConfigObject->Get('Ticket::Frontend::NewQueueSelectionType') ne 'Queue' )
             {
-                my %SystemAddressData = $Self->{SystemAddress}->SystemAddressGet(
+                my %SystemAddressData = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressGet(
                     ID => $Queues{$QueueID},
                 );
                 $String =~ s/<Realname>/$SystemAddressData{Realname}/g;

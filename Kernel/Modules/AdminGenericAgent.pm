@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -11,6 +11,8 @@ package Kernel::Modules::AdminGenericAgent;
 
 use strict;
 use warnings;
+
+use URI::Escape;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -302,6 +304,7 @@ sub Run {
                     )
                 {
                     my $Profile = $Self->{Profile} || '';
+                    $Profile = uri_escape($Profile);    # See internal issue #477.
                     return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Subaction=Update;Profile=$Profile" );
                 }
                 else {
@@ -389,11 +392,10 @@ sub Run {
         # Get field HTML.
         if ( $Widget eq 'Select' ) {
             $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
-                DynamicFieldConfig     => $DynamicFieldConfig,
-                Profile                => \%JobData,
-                LayoutObject           => $LayoutObject,
-                ConfirmationCheckboxes => 1,
-                Type                   => $Type,
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Profile            => \%JobData,
+                LayoutObject       => $LayoutObject,
+                Type               => $Type,
             );
         }
         elsif ( $Widget eq 'Update' ) {
@@ -471,16 +473,24 @@ sub Run {
     # delete an generic agent job
     # ---------------------------------------------------------- #
     if ( $Self->{Subaction} eq 'Delete' && $Self->{Profile} ) {
+        my $Success;
 
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
         if ( $Self->{Profile} ) {
-            $GenericAgentObject->JobDelete(
+            $Success = $GenericAgentObject->JobDelete(
                 Name   => $Self->{Profile},
                 UserID => $Self->{UserID},
             );
         }
+
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Content     => ($Success) ? 1 : 0,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
     }
 
     # ---------------------------------------------------------- #
@@ -1161,9 +1171,8 @@ sub _MaskUpdate {
                     Profile            => \%JobData,
                     DefaultValue =>
                         $Self->{Config}->{Defaults}->{DynamicField}->{ $DynamicFieldConfig->{Name} },
-                    LayoutObject           => $LayoutObject,
-                    ConfirmationCheckboxes => 1,
-                    Type                   => $Preference->{Type},
+                    LayoutObject => $LayoutObject,
+                    Type         => $Preference->{Type},
                 );
 
                 next PREFERENCE if !IsHashRefWithData($DynamicFieldHTML);

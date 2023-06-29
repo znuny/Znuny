@@ -1,24 +1,24 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="LayoutPopup ARIARoleMain">
-
+<div class="LayoutPopup ARIARoleMain manageLinks">
     <div class="Header">
         <h1>
             [% Translate("Manage links for %s", Data.SourceObjectLong) | html %]
         </h1>
-        <p>
-            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Close" id="LinkAddCloseLink">[% Translate("Close this dialog") | html %]</a>
-        </p>
+        <div>
+            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Close" id="LinkAddCloseLink" class="btn-cancel-ghost btn-main btn-width-md">
+                [% Translate("Close and Back") | html %]
+            </a>
+        </div>
     </div>
     <div class="Content">
-
         <div class="WidgetSimple Tabs">
             <div class="Header">
                 <a href="#AddNewLinks" [% IF !Data.ActiveTab || Data.ActiveTab == 'AddNewLinks' %]class="Active"[% END %]>[% Translate("Create new links") | html %]</a>
@@ -27,7 +27,7 @@
 
             <div class="Content">
                 <div data-id="AddNewLinks" [% IF !Data.ActiveTab || Data.ActiveTab == 'AddNewLinks' %]class="Active"[% END %]>
-                [% RenderBlockStart("Link") %]
+[% RenderBlockStart("Link") %]
                     <form action="[% Env("CGIHandle") %]" method="post" name="compose" id="LinkSearchForm">
                         <input type="hidden" name="Action" value="[% Env("Action") %]" />
                         <input type="hidden" name="Mode" value="[% Data.Mode | html %]" />
@@ -35,34 +35,39 @@
                         <input type="hidden" name="SourceKey" value="[% Data.SourceKey | html %]" />
                         <input type="hidden" name="InitialSearch" value="y" />
 
-                        <fieldset class="TableLike">
-                            <label for="TargetIdentifier">
-                                [% Translate("Link with") | html %]:
-                            </label>
-                            <div class="Field">
-                                [% Data.TargetObjectStrg %]
-                            </div>
-                            [% RenderBlockStart("LinkSearchRow") %]
-                            <label for="[% Data.FormKey | html %]">
-                                [% Translate(Data.Name) | html %]:
-                            </label>
-                            <div class="Field">
-                                [% Data.InputStrg %]
-                            </div>
-                            [% RenderBlockEnd("LinkSearchRow") %]
-                            <div class="Field SpacingTopSmall">
-                                <button type="submit" id="SubmitSearch" name="SubmitSearch" class="CallForAction" value="[% Translate("Search") | html %]"><span><i class="fa fa-search"></i> [% Translate("Start search") | html %]</span></button>
+                        <fieldset class="TableLike card-item-wrapper">
+                            <div class="card-item">
+                                <div>
+                                    <label for="TargetIdentifier">
+                                        [% Translate("Link with") | html %]:
+                                    </label>
+                                    <div class="Field">
+                                        [% Data.TargetObjectStrg %]
+                                    </div>
+                                </div>
+[% RenderBlockStart("LinkSearchRow") %]
+                                <div>
+                                    <label for="[% Data.FormKey | html %]">
+                                        [% Translate(Data.Name) | html %]:
+                                    </label>
+                                    <div class="Field">
+                                        [% Data.InputStrg %]
+                                    </div>
+                                </div>
+[% RenderBlockEnd("LinkSearchRow") %]
                             </div>
                         </fieldset>
-                        [% RenderBlockStart("LinkTableComplex") %]
+                        <div class="Footer Field">
+                            <button type="submit" id="SubmitSearch" name="SubmitSearch" class="CallForAction Primary btn-main btn-primary btn-width-md" value="[% Translate("Search") | html %]"><span> [% Translate("Start search") | html %]</span></button>
+                        </div>
+[% RenderBlockStart("LinkTableComplex") %]
                             [% Data.LinkTableStrg %]
-                        [% RenderBlockEnd("LinkTableComplex") %]
+[% RenderBlockEnd("LinkTableComplex") %]
                     </form>
-                [% RenderBlockEnd("Link") %]
+[% RenderBlockEnd("Link") %]
                 </div>
-
-                <div data-id="ManageLinks" class="[% IF Data.ActiveTab == 'ManageLinks' %]Active[% END %] [% IF Data.ManageTabDisabled %]Disabled[% END %]">
-                [% RenderBlockStart("Delete") %]
+                <div data-id="ManageLinks" class="innerContent [% IF Data.ActiveTab == 'ManageLinks' %]Active[% END %] [% IF Data.ManageTabDisabled %]Disabled[% END %]">
+[% RenderBlockStart("Delete") %]
                     <form action="[% Env("CGIHandle") %]" method="get">
                         <input type="hidden" name="Action" value="[% Env("Action") %]" />
                         <input type="hidden" name="Subaction" value="LinkDelete" />
@@ -70,15 +75,15 @@
                         <input type="hidden" name="SourceObject" value="[% Data.SourceObject | html %]" />
                         <input type="hidden" name="SourceKey" value="[% Data.SourceKey | html %]" />
                         <input type="hidden" name="TargetIdentifier" value="[% Data.TargetIdentifier | html %]" />
-                        [% RenderBlockStart("DeleteTableComplex") %]
+[% RenderBlockStart("DeleteTableComplex") %]
                             [% IF !Data.LinkTableStrg %]
                                 <p>[% Translate("There are currently no links. Please click 'Create new Links' on the top to link this item to other objects.") | html %]</p>
                             [% ELSE %]
                                 [% Data.LinkTableStrg %]
                             [% END %]
-                        [% RenderBlockEnd("DeleteTableComplex") %]
+[% RenderBlockEnd("DeleteTableComplex") %]
                     </form>
-                [% RenderBlockEnd("Delete") %]
+[% RenderBlockEnd("Delete") %]
                 </div>
             </div>
         </div>

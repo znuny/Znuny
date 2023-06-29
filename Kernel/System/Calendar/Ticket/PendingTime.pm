@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -94,7 +94,7 @@ set ticket pending time to supplied time value.
 
     my $Success = $TicketPendingTimeObject->SetTime(
         Type     => 'PendingTime',
-        Value    => '2016-01-01 00:00:00'
+        Value    => '2016-01-01 00:00:00',
         TicketID => 1,
     );
 

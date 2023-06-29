@@ -1,12 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 package Kernel::System::SysConfig::ValueType::FrontendNavigation;
 
@@ -67,21 +67,21 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
                 {
                     'Item' => [
                         {
-                            ...
+                           # ...
                         },
                     ],
                 },
             ],
         },
         EffectiveValue => {
-            ...
+            # ...
         },
     );
 
 Result:
     %Result = (
         EffectiveValue => {         # Note for FrontendNavigation ValueTypes EffectiveValue is not changed.
-            ...
+            # ...
         },
         Success => 1,
         Error   => undef,
@@ -221,7 +221,7 @@ Extracts the effective value from a XML parsed setting.
         DefaultID      =>  123,             # (required)
         EffectiveValue => '2016-02-02',
         DefaultValue   => 'Product 5',      # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         RW             => 1,                # (optional) Allow editing. Default 0.
         Item           => [                 # (optional) XML parsed item
             {
@@ -343,7 +343,7 @@ sub SettingRender {
                 if ( $Param{RW} ) {
                     $HTML .= "<button class='RemoveButton' type='button' "
                         . "title='$RemoveThisEntry' value='Remove this entry'>\n"
-                        . "    <i class='fa fa-minus-circle'></i>\n"
+                        . "    <i class='fa fa-minus-square-o'></i>\n"
                         . "    <span class='InvisibleText'>$RemoveThisEntry</span>\n"
                         . "</button>\n";
                 }
@@ -415,7 +415,7 @@ Generate HTML for new array/hash item.
 Returns:
 
     $HTML = '<select class="Modernize" id="SettingName" name="SettingName" title="SettingName">
-        ...
+        # ...
         </select>';
 
 =cut

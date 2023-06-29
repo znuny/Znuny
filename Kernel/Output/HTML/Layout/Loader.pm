@@ -1,11 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::Output::HTML::Layout::Loader;
 
@@ -198,6 +199,7 @@ sub LoaderCreateAgentJSCalls {
     my $JSHome   = $ConfigObject->Get('Home') . '/var/httpd/htdocs/js';
     my $DoMinify = $ConfigObject->Get('Loader::Enabled::JS');
 
+    my $ViewFileList = {};
     {
         my @FileList;
 
@@ -207,7 +209,12 @@ sub LoaderCreateAgentJSCalls {
         KEY:
         for my $Key ( sort keys %{$CommonJSList} ) {
             next KEY if $Key eq '100-CKEditor' && !$ConfigObject->Get('Frontend::RichText');
-            push @FileList, @{ $CommonJSList->{$Key} };
+            FILE:
+            for my $File ( @{ $CommonJSList->{$Key} } ) {
+                next FILE if $ViewFileList->{$File};
+                push @FileList, $File;
+                $ViewFileList->{$File} = 1;
+            }
         }
 
         # get toolbar module js
@@ -239,7 +246,12 @@ sub LoaderCreateAgentJSCalls {
         MODULE:
         for my $Module ( sort keys %{$Setting} ) {
             next MODULE if ref $Setting->{$Module}->{JavaScript} ne 'ARRAY';
-            @FileList = ( @FileList, @{ $Setting->{$Module}->{JavaScript} || [] } );
+            FILE:
+            for my $File ( @{ $Setting->{$Module}->{JavaScript} } ) {
+                next FILE if $ViewFileList->{$File};
+                push @FileList, $File;
+                $ViewFileList->{$File} = 1;
+            }
         }
 
         $Self->_HandleJSList(
@@ -694,6 +706,7 @@ sub LoaderCreateCustomerJSCalls {
     my $JSHome   = $ConfigObject->Get('Home') . '/var/httpd/htdocs/js';
     my $DoMinify = $ConfigObject->Get('Loader::Enabled::JS');
 
+    my $ViewFileList = {};
     {
         my $CommonJSList = $ConfigObject->Get('Loader::Customer::CommonJS');
 
@@ -702,7 +715,12 @@ sub LoaderCreateCustomerJSCalls {
         KEY:
         for my $Key ( sort keys %{$CommonJSList} ) {
             next KEY if $Key eq '100-CKEditor' && !$ConfigObject->Get('Frontend::RichText');
-            push @FileList, @{ $CommonJSList->{$Key} };
+            FILE:
+            for my $File ( @{ $CommonJSList->{$Key} } ) {
+                next FILE if $ViewFileList->{$File};
+                push @FileList, $File;
+                $ViewFileList->{$File} = 1;
+            }
         }
 
         $Self->_HandleJSList(
@@ -726,7 +744,12 @@ sub LoaderCreateCustomerJSCalls {
         MODULE:
         for my $Module ( sort keys %{$Setting} ) {
             next MODULE if ref $Setting->{$Module}->{JavaScript} ne 'ARRAY';
-            @FileList = ( @FileList, @{ $Setting->{$Module}->{JavaScript} || [] } );
+            FILE:
+            for my $File ( @{ $Setting->{$Module}->{JavaScript} } ) {
+                next FILE if $ViewFileList->{$File};
+                push @FileList, $File;
+                $ViewFileList->{$File} = 1;
+            }
         }
 
         $Self->_HandleJSList(
@@ -858,6 +881,7 @@ sub _HandleJSList {
             },
         );
     }
+
     return 1;
 }
 
@@ -910,6 +934,63 @@ sub SkinValidate {
 
     $Self->{SkinValidateCache}->{ $Param{SkinType} . '::' . $Param{Skin} } = undef;
     return;
+}
+
+=head2 LoaderCreateDynamicCSS()
+
+Creates CSS string from CSS modules and adds it to HTMLHead.tt.
+
+    my $Success = $LayoutObject->LoaderCreateDynamicCSS();
+
+CSS Result:
+
+    .StateID-1 {
+        background: #50B5FF;
+    }
+    .StateID-2 {
+        background: #3DD598;
+    }
+    .StateID-3 {
+        background: #FC5A5A;
+    }
+    .StateID-4 {
+        background: #FFC542;
+    }
+    .StateID-5 {
+        background: #8D8D9B;
+    }
+    .StateID-6 {
+        background: #FF8A25;
+    }
+    .StateID-7 {
+        background: #3DD598;
+    }
+    .StateID-8 {
+        background: #FC5A5A;
+    }
+    .StateID-9 {
+        background: #8D8D9B;
+    }
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub LoaderCreateDynamicCSS {
+    my ( $Self, %Param ) = @_;
+
+    my $CSS = $Self->CreateDynamicCSS();
+
+    $Self->Block(
+        Name => 'DynamicCSS',
+        Data => {
+            CSS => $CSS,
+        },
+    );
+
+    return 1;
 }
 
 1;

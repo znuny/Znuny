@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -174,7 +174,7 @@ sub _CheckMySQLInvalidDefaultValues {
     }
     else {
         $Error
-            .= "\n\n *** Please correct these problems manually with the following SQL statements or use 'otrs.Console.pl $Self->{Name} --repair'. *** \n\n";
+            .= "\n\n *** Please correct these problems manually with the following SQL statements or use 'znuny.Console.pl $Self->{Name} --repair'. *** \n\n";
     }
 
     my @SQLRepairStatements;

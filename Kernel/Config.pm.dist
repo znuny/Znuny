@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,12 +8,12 @@
 # --
 #  Note:
 #
-#  -->> Most OTRS configuration should be done via the OTRS web interface
+#  -->> Most Znuny configuration should be done via the Znuny web interface
 #       and the SysConfig. Only for some configuration, such as database
 #       credentials and customer data source changes, you should edit this
 #       file. For changes do customer data sources you can copy the definitions
 #       from Kernel/Config/Defaults.pm and paste them in this file.
-#       Config.pm will not be overwritten when updating OTRS.
+#       Config.pm will not be overwritten when updating Znuny.
 # --
 
 package Kernel::Config;
@@ -33,12 +33,12 @@ sub Load {
     $Self->{DatabaseHost} = '127.0.0.1';
 
     # The database name
-    $Self->{Database} = 'otrs';
+    $Self->{Database} = 'znuny';
 
     # The database user
-    $Self->{DatabaseUser} = 'otrs';
+    $Self->{DatabaseUser} = 'znuny';
 
-    # The password of database user. You also can use bin/otrs.Console.pl Maint::Database::PasswordCrypt
+    # The password of database user. You also can use bin/znuny.Console.pl Maint::Database::PasswordCrypt
     # for crypted passwords
     $Self->{DatabasePw} = 'some-pass';
 
@@ -51,10 +51,6 @@ sub Load {
     # if you want to use a TCP/IP connection
 #    $Self->{DatabaseDSN} = "DBI:Pg:dbname=$Self->{Database};host=$Self->{DatabaseHost};";
 
-    # The database DSN for Microsoft SQL Server - only supported if OTRS is
-    # installed on Windows as well
-#    $Self->{DatabaseDSN} = "DBI:ODBC:driver={SQL Server};Database=$Self->{Database};Server=$Self->{DatabaseHost},1433";
-
     # The database DSN for Oracle ==> more: "perldoc DBD::oracle"
 #    $Self->{DatabaseDSN} = "DBI:Oracle://$Self->{DatabaseHost}:1521/$Self->{Database}";
 #
@@ -65,7 +61,7 @@ sub Load {
     # ---------------------------------------------------- #
     # fs root directory
     # ---------------------------------------------------- #
-    $Self->{Home} = '/opt/otrs';
+    $Self->{Home} = '/opt/znuny';
 
     # ---------------------------------------------------- #
     # insert your own config settings "here"               #

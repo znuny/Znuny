@@ -1,69 +1,69 @@
 
-%defattr(-, otrs, [% webgroup %], -)
-%config(noreplace) /opt/otrs/Kernel/Config.pm
-%attr(-, otrs, root,) %config(noreplace) /opt/otrs/.procmailrc
-%config(noreplace) /opt/otrs/.fetchmailrc
-%config(noreplace) /opt/otrs/.mailfilter
+%defattr(-, znuny, [% webgroup %], -)
+%config(noreplace) /opt/znuny/Kernel/Config.pm
+%attr(-, znuny, root,) %config(noreplace) /opt/znuny/.procmailrc
+%config(noreplace) /opt/znuny/.fetchmailrc
+%config(noreplace) /opt/znuny/.mailfilter
 
-%dir /opt/otrs
-/opt/otrs/RELEASE
-/opt/otrs/ARCHIVE
-/opt/otrs/.bash_completion
-/opt/otrs/.procmailrc.dist
-/opt/otrs/.fetchmailrc.dist
-/opt/otrs/.mailfilter.dist
+%dir /opt/znuny
+/opt/znuny/RELEASE
+/opt/znuny/ARCHIVE
+/opt/znuny/.bash_completion
+/opt/znuny/.procmailrc.dist
+/opt/znuny/.fetchmailrc.dist
+/opt/znuny/.mailfilter.dist
 
-%dir /opt/otrs/Custom/
-/opt/otrs/Custom/README
+%dir /opt/znuny/Custom/
+/opt/znuny/Custom/README
 
-%dir /opt/otrs/Kernel/
+%dir /opt/znuny/Kernel/
 
-%dir /opt/otrs/Kernel/Config/
-/opt/otrs/Kernel/Config.pm.dist
-/opt/otrs/Kernel/Config.pod
-/opt/otrs/Kernel/Config/Files/
-/opt/otrs/Kernel/Config/Defaults.pm
+%dir /opt/znuny/Kernel/Config/
+/opt/znuny/Kernel/Config.pm.dist
+/opt/znuny/Kernel/Config.pod
+/opt/znuny/Kernel/Config/Files/
+/opt/znuny/Kernel/Config/Defaults.pm
 
-/opt/otrs/Kernel/GenericInterface*
+/opt/znuny/Kernel/GenericInterface*
 
-/opt/otrs/Kernel/Language.pm
-%dir /opt/otrs/Kernel/Language/
-/opt/otrs/Kernel/Language/*.pm
+/opt/znuny/Kernel/Language.pm
+%dir /opt/znuny/Kernel/Language/
+/opt/znuny/Kernel/Language/*.pm
 
-/opt/otrs/bin*
-/opt/otrs/Kernel/Autoload*
-/opt/otrs/Kernel/Modules*
-/opt/otrs/Kernel/Output*
-/opt/otrs/Kernel/System*
-/opt/otrs/scripts*
-/opt/otrs/i18n/Znuny/*
+/opt/znuny/bin*
+/opt/znuny/Kernel/Autoload*
+/opt/znuny/Kernel/Modules*
+/opt/znuny/Kernel/Output*
+/opt/znuny/Kernel/System*
+/opt/znuny/scripts*
+/opt/znuny/i18n/Znuny/*
 
-%dir /opt/otrs/var/
+%dir /opt/znuny/var/
 # TEMPROARILY DEACTIVATED. There are no packages to embed at present.
-#%dir /opt/otrs/var/packages/
-#/opt/otrs/var/packages/*.opm
-%dir /opt/otrs/var/article/
-/opt/otrs/var/fonts/
-/opt/otrs/var/httpd/
-%dir /opt/otrs/var/cron/
-%dir /opt/otrs/var/log/
-%dir /opt/otrs/var/sessions/
-%dir /opt/otrs/var/spool/
-/opt/otrs/var/cron/*
-%dir /opt/otrs/var/tmp/
-%dir /opt/otrs/var/stats/
-/opt/otrs/var/stats/*.xml
-%dir /opt/otrs/var/stats/formatdefinition/excel/
-/opt/otrs/var/stats/formatdefinition/excel/*
-%dir /opt/otrs/var/processes/examples/
-/opt/otrs/var/processes/examples/*
-%dir /opt/otrs/var/webservices/examples/
-/opt/otrs/var/webservices/examples/*.pm
-/opt/otrs/var/webservices/examples/*.yml
+#%dir /opt/znuny/var/packages/
+#/opt/znuny/var/packages/*.opm
+%dir /opt/znuny/var/article/
+/opt/znuny/var/fonts/
+/opt/znuny/var/httpd/
+%dir /opt/znuny/var/cron/
+%dir /opt/znuny/var/log/
+%dir /opt/znuny/var/sessions/
+%dir /opt/znuny/var/spool/
+/opt/znuny/var/cron/*
+%dir /opt/znuny/var/tmp/
+%dir /opt/znuny/var/stats/
+/opt/znuny/var/stats/*.xml
+%dir /opt/znuny/var/stats/formatdefinition/excel/
+/opt/znuny/var/stats/formatdefinition/excel/*
+%dir /opt/znuny/var/processes/examples/
+/opt/znuny/var/processes/examples/*
+%dir /opt/znuny/var/webservices/examples/
+/opt/znuny/var/webservices/examples/*.pm
+/opt/znuny/var/webservices/examples/*.yml
 
-/opt/otrs/Kernel/cpan-lib*
+/opt/znuny/Kernel/cpan-lib*
 
-%doc /opt/otrs/*.md
-%doc /opt/otrs/COPYING
-%doc /opt/otrs/COPYING-Third-Party
-%doc /opt/otrs/doc*
+%doc /opt/znuny/*.md
+%doc /opt/znuny/COPYING
+%doc /opt/znuny/COPYING-Third-Party
+%doc /opt/znuny/doc*

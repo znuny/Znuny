@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -66,10 +66,10 @@ add new Transition
 returns the id of the created Transition if success or undef otherwise
 
     my $ID = $TransitionObject->TransitionAdd(
-        EntityID    => 'T1'                                             # mandatory, exportable unique identifier
+        EntityID    => 'T1',                                            # mandatory, exportable unique identifier
         Name        => 'NameOfTransition',                              # mandatory
         Config   => {                                                   # mandatory, transition configuration to be stored in YAML format
-            Scope         => 'Process'                                  # mandatory, default 'Global' (Process|Global)
+            Scope         => 'Process',                                 # mandatory, default 'Global' (Process|Global)
             ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199' # ScopeEntityID, used if specific scope is set e.g. 'Process'
         },
         UserID      => 123,                                             # mandatory
@@ -372,7 +372,7 @@ returns 1 if success or undef otherwise
 
     my $Success = $TransitionObject->TransitionUpdate(
         ID          => 123,                                                 # mandatory
-        EntityID    => 'T1'                                                 # mandatory, exportable unique identifier
+        EntityID    => 'T1',                                                # mandatory, exportable unique identifier
         Name        => 'NameOfTransition',                                  # mandatory
         Config   => {                                                       # mandatory, transition configuration to be stored in YAML format
             Scope         => 'Global',                                      # mandatory, default 'Global' (Process|Global)

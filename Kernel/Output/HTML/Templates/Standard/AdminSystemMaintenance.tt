@@ -1,29 +1,14 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<!-- start -->
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("System Maintenance Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate("System Maintenance Management"),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
-
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -31,7 +16,7 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SystemMaintenanceNew" class="CallForAction Fullsize Center Create"><span><i class="fa fa-plus-square"></i>[% Translate("Schedule New System Maintenance") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SystemMaintenanceNew" class="CallForAction btn-main btn-primary-ghost Create"><span><i class="fa fa-plus-square"></i>[% Translate("Schedule New System Maintenance") | html %]</span></a>
                     </li>
 
                 </ul>
@@ -56,13 +41,23 @@
                 <p class="FieldExplanation">
                     [% Translate("Some time before this system maintenance starts the users will receive a notification on each screen announcing about this fact.") | html %]
                 </p>
-
             </div>
         </div>
-
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("System Maintenance Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate("System Maintenance Management"),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
 
             <div class="Header">
@@ -92,14 +87,13 @@
                             <td>[% Translate(Data.ValidID) | html %]</td>
 
                             <td class="Center">
-                                <a class="TrashCan SystemMaintenanceDelete" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;SystemMaintenanceID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete System Maintenance") | html %]">
+                                <a class="TrashCan SystemMaintenanceDelete table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;SystemMaintenanceID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete System Maintenance") | html %]">
                                     <i class="fa fa-trash-o"></i>
                                     <span class="InvisibeText">[% Translate("Delete System Maintenance") | html %]</span>
                                 </a>
                             </td>
                         </tr>
 [% RenderBlockEnd("ViewRow") %]
-
 [% RenderBlockStart("NoDataRow") %]
                         <tr>
                             <td colspan="5">
@@ -116,8 +110,4 @@
             </div>
         </div>
     </div>
-
-    <div class="Clear"></div>
 </div>
-
-<!-- end -->

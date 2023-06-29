@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::SysConfig::BaseValueType;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
 use warnings;
@@ -220,7 +220,7 @@ Extracts the effective value from a XML parsed setting.
         Name           => 'SettingName',
         EffectiveValue => 'Product 6',      # (optional)
         DefaultValue   => 'Product 5',      # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         Item           => [                 # (optional) XML parsed item
             {
                 'ValueType' => 'String',
@@ -477,7 +477,7 @@ Returns:
 
     @ForbiddenValueTypes = (
         'Option',
-        ...
+        # ...
     );
 
 =cut

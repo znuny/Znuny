@@ -1,13 +1,13 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox LayoutFixedSidebar SidebarFirst ARIARoleMain">
+<div class="MainBox LayoutFixedSidebar ARIARoleMain mainStructure SidebarLast personal-preferences">
 
     <h1 class="InvisibleText">[% Translate("Edit your preferences") | html %]</h1>
 
@@ -20,77 +20,68 @@
     %]
     [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath Type = 'Agent' %]
 
-    <div class="SidebarColumn">
-        <div class="WidgetSimple">
-            <div class="Header">
-                <h2>[% Translate("Preferences") | html %]</h2>
-            </div>
-            <div class="Content">
-                [% IF Data.EditingAnotherAgent %]
-                <div class="WidgetMessage Top Warning">
-                    <p>[% Translate("Please note: you're currently editing the preferences of %s.", Data.CurrentUserFullname) | html %]</p>
+    <div class="mainContent">
+        <div class="SidebarColumn">
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Preferences") | html %]</h2>
                 </div>
-                <ul class="ActionList">
-                    <li>
-                        <a href="[% Env("Baselink") %]Action=AdminUser;Subaction=Change;UserID=[% Data.CurrentUserID | html %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to editing this agent") | html %]</span></a>
-                    </li>
-                </ul>
-                [% ELSE %]
-                <p class="FieldExplanation">
-                    [% Translate("Choose from the groups on the right to find the settings you'd wish to change.") | html %]
-                </p>
-                [% END %]
-            </div>
-        </div>
-
-        [% IF !Data.EditingAnotherAgent && Config("Frontend::AvatarEngine") == 'Gravatar' %]
-        <div class="WidgetSimple">
-            <div class="Content">
-                <p class="FieldExplanation">
-                    [% SET GravatarLink = '<a href="https://www.gravatar.com" target="_blank"><i class="fa fa-external-link"></i> gravatar.com</a>'; %]
-                    <p class="FieldExplanation">
-                        <strong>[% Translate("Did you know?") | html %]</strong> [% Translate("You can change your avatar by registering with your email address %s on %s") | html | ReplacePlaceholders(Env("UserEmail"), GravatarLink) %]
-                    </p>
-                </p>
-            </div>
-        </div>
-        [% END %]
-    </div>
-
-
-
-    <div class="ContentColumn">
-
-        <div class="WidgetSimple">
-            <div class="Header">
-                <h2>[% Translate("Preferences") | html %]</h2>
-            </div>
-            <div class="Content">
-
-                <div class="GridView">
-                    <ul class="ItemListGrid WithIcons Filterable">
-                    [% FOREACH Item IN Data.Items %]
+                <div class="Content">
+                    [% IF Data.EditingAnotherAgent %]
+                    <div class="WidgetMessage Top Warning">
+                        <p>[% Translate("Please note: you're currently editing the preferences of %s.", Data.CurrentUserFullname) | html %]</p>
+                    </div>
+                    <ul class="ActionList">
                         <li>
-                            <a class="AsBlock" href="[% Env("Baselink") %]Action=AgentPreferences;Subaction=Group;Group=[% Item.Key | uri %][% IF Data.EditingAnotherAgent %];EditUserID=[% Data.CurrentUserID | uri %][% END %]" title="[% Translate(Item.Name) | html %]
-[% Translate(Item.Description) | html %]">
-                                <span class="Icons">
-                                [% IF Item.Icon %]
-                                    <i class="fa [% Item.Icon %]"></i>
-                                [% ELSE %]
-                                    <i class="fa fa-cog"></i>
-                                [% END %]
-                                </span>
-                                <span class="Title">
-                                    [% Translate(Item.Name) | html %]
-                                </span>
-                                <span class="Description">[% Translate(Item.Description) | html %]</span>
-                            </a>
+                            <a href="[% Env("Baselink") %]Action=AdminUser;Subaction=Change;UserID=[% Data.CurrentUserID | html %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to editing this agent") | html %]</span></a>
                         </li>
-                    [% END %]
                     </ul>
+                    [% ELSE %]
+                    <p class="FieldExplanation">[% Translate("Choose from the groups on the left to find the settings you'd wish to change.") | html %]</p>
+                    [% END %]
+                    [% IF !Data.EditingAnotherAgent && Config("Frontend::AvatarEngine") == 'Gravatar' %]
+                        <p class="FieldExplanation">
+                            [% SET GravatarLink = '<a href="https://www.gravatar.com" target="_blank"><i class="fa fa-external-link"></i> gravatar.com</a>'; %]
+                            <p class="FieldExplanation">
+                                <strong>[% Translate("Did you know?") | html %]</strong> [% Translate("You can change your avatar by registering with your email address %s on %s") | html | ReplacePlaceholders(Env("UserEmail"), GravatarLink) %]
+                            </p>
+                        </p>
+                    [% END %]
                 </div>
             </div>
         </div>
 
+        <div class="ContentColumn">
+
+            <div class="WidgetSimple">
+                <div class="Header no-border-bottom">
+                    <h2>[% Translate("Preferences") | html %]</h2>
+                </div>
+                <div class="Content">
+
+                    <div class="GridView">
+                        <ul class="ItemListGrid WithIcons Filterable">
+                        [% FOREACH Item IN Data.Items %]
+                            <li>
+                                <a class="AsBlock" href="[% Env("Baselink") %]Action=AgentPreferences;Subaction=Group;Group=[% Item.Key | uri %][% IF Data.EditingAnotherAgent %];EditUserID=[% Data.CurrentUserID | uri %][% END %]" title="[% Translate(Item.Name) | html %] [% Translate(Item.Description) | html %]">
+                                    <span class="Icons">
+                                    [% IF Item.Icon %]
+                                        <i class="fa [% Item.Icon %]"></i>
+                                    [% ELSE %]
+                                        <i class="fa fa-cog"></i>
+                                    [% END %]
+                                    </span>
+                                    <span class="Title">
+                                        [% Translate(Item.Name) | html %]
+                                    </span>
+                                    <span class="Description">[% Translate(Item.Description) | html %]</span>
+                                </a>
+                            </li>
+                        [% END %]
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

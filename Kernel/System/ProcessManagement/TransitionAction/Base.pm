@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -130,8 +130,8 @@ Returns an array ref with attachments.
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
         Config                   => {
-            Attachments => '1'
-            ...
+            Attachments => '1',
+            # ...
         }
     );
 
@@ -217,7 +217,7 @@ sub _GetAttachments {
             push @{ $Param{Config}->{Attachment} }, \%Attachment;
         }
 
-        ## nofilter(TidyAll::Plugin::OTRS::Perl::ObjectDependencies)
+        ## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectDependencies)
         # upcoming feature (please do not delete this) # Znuny
         # elsif ($Data{ObjectType} eq 'StdAttachment'){
 
@@ -263,7 +263,7 @@ this ticket id instead of the normal ticket id.
             TicketID
         },
         Config => {
-            ForeignTicketID     => 1
+            ForeignTicketID     => 1,
             # or
             ForeignTicketNumber => 123456789,
         },

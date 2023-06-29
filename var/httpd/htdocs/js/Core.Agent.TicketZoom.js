@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -95,9 +95,6 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
             // Mark old row as readed
             $('#ArticleTable .ArticleID[value=' + ArticleID + ']').closest('tr').removeClass('UnreadArticles').find('span.UnreadArticles').remove();
-            $('.TimelineView li#ArticleID_' + ArticleID).find('.UnreadArticles').fadeOut(function() {
-                $(this).closest('li').addClass('Seen');
-            });
 
             // Mark article as seen in backend
             Core.AJAX.FunctionCall(
@@ -284,39 +281,6 @@ Core.Agent.TicketZoom = (function (TargetNS) {
     };
 
     /**
-     * @name LoadArticleFromExternal
-     * @memberof Core.Agent.TicketZoom
-     * @function
-     * @param {String} ArticleID - The article number of the loaded article
-     * @param {Object} WindowObject
-     * @description
-     *      Used in OTRS Business Solution (TM). Loads an article in the Zoom from another window context (e.g. popup).
-     */
-    TargetNS.LoadArticleFromExternal = function (ArticleID, WindowObject) {
-        var $Element = $('#ArticleTable td.No input.ArticleID[value=' + ArticleID + ']'),
-            ArticleURL;
-
-        // Check if we are in timeline view
-        // in this case we can jump directly to the article
-        if ($('.ArticleView .Timeline').hasClass('Active')) {
-            window.location.hash = '#ArticleID_' + ArticleID;
-        }
-        else {
-            if (!$Element.length) {
-                if (typeof WindowObject === 'undefined') {
-                    WindowObject = window;
-                }
-                WindowObject.alert(Core.Config.Get('Language.AttachmentViewMessage'));
-
-                return;
-            }
-
-            ArticleURL = $Element.siblings('.ArticleInfo').val();
-            LoadArticle(ArticleURL, ArticleID);
-        }
-    };
-
-    /**
      * @name CheckURLHash
      * @memberof Core.Agent.TicketZoom
      * @function
@@ -395,9 +359,8 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
             $('#ArticleView').off('change').on('change', function() {
 
-                if (!parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10) && ($(this).val() === null || $(this).val() === '')) {
+                if ($(this).val() === null || $(this).val() === '') {
                     Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
-                    Core.Agent.ShowOTRSBusinessRequiredDialog();
                     return false;
                 }
                 else {
@@ -429,19 +392,21 @@ Core.Agent.TicketZoom = (function (TargetNS) {
             $('#SetArticleFilter').on('click', function () {
                 Core.UI.Dialog.ShowContentDialog($('#ArticleFilterDialog'), Core.Language.Translate("Article filter"), '20px', 'Center', true, [
                     {
+                        Label: Core.Language.Translate("Reset"),
+                        Type: 'Secondary',
+                        Function: function () {
+                            $('#CommunicationChannelFilter').val('').trigger('redraw.InputField');
+                            $('#ArticleSenderTypeFilter').val('').trigger('redraw.InputField');
+                        },
+                        Class: 'btn-cancel-ghost align-left-auto'
+                    },
+                    {
                         Label: Core.Language.Translate("Apply"),
                         Function: function () {
                             var Data = Core.AJAX.SerializeForm($('#ArticleFilterDialogForm'));
                             Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function () {
                                 location.reload();
                             }, 'text');
-                        }
-                    },
-                    {
-                        Label: Core.Language.Translate("Reset"),
-                        Function: function () {
-                            $('#CommunicationChannelFilter').val('').trigger('redraw.InputField');
-                            $('#ArticleSenderTypeFilter').val('').trigger('redraw.InputField');
                         }
                     }
                 ]);
@@ -474,6 +439,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                     },
                     {
                         Label: Core.Language.Translate("Reset"),
+                        Type: 'Secondary',
                         Function: function () {
                             $('#EventTypeFilter').val('').trigger('redraw.InputField');
                         }
@@ -683,7 +649,6 @@ Core.Agent.TicketZoom = (function (TargetNS) {
             Count, ArticleIDs = Core.Config.Get('ArticleIDs'),
             ArticleFilterDialog = parseInt(Core.Config.Get('ArticleFilterDialog'), 10),
             AsyncWidgetActions = Core.Config.Get('AsyncWidgetActions') || {},
-            TimelineView = Core.Config.Get('TimelineView'),
             ProcessWidget = Core.Config.Get('ProcessWidget');
 
         // create open popup event for dropdown elements
@@ -755,9 +720,6 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                 }
             }
         }
-        $('a.Timeline').on('click', function() {
-            $(this).attr('href', $(this).attr('href') + ';ArticleID=' + URLHash);
-        });
 
         // Start asynchronous loading of widgets
         InitWidgets(AsyncWidgetActions);
@@ -857,11 +819,6 @@ Core.Agent.TicketZoom = (function (TargetNS) {
         // initialize article filter events
         if (typeof ArticleFilterDialog !== 'undefined') {
             ArticleFilterEvents(ArticleFilterDialog, TicketID);
-        }
-
-        // initialize timeline view
-        if (typeof TimelineView !== 'undefined' && parseInt(TimelineView.Enabled, 10) === 1) {
-            Core.Agent.TicketZoom.TimelineView.InitTimelineView(TimelineView);
         }
 
         // initialize events for process widget

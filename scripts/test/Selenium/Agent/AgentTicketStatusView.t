@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,6 +20,8 @@ $Selenium->RunTest(
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -60,7 +62,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketStatusView screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketStatusView");
@@ -74,15 +76,21 @@ $Selenium->RunTest(
             );
             $Element->is_enabled();
             $Element->is_displayed();
-            $Element->VerifiedClick();
+
+            if ( $Filter ne 'Open' ) {
+                $Element->VerifiedClick();
+            }
 
             # Check different views for filters.
             for my $View (qw(Small Medium Preview)) {
 
-                # Click on viewer controller.
-                $Selenium->find_element(
-                    "//a[contains(\@href, \'Action=AgentTicketStatusView;Filter=$Filter;View=$View;\' )]"
-                )->VerifiedClick();
+                if ( $View ne 'Small' ) {
+
+                    # Click on viewer controller.
+                    $Selenium->find_element(
+                        "//a[contains(\@href, \'Action=AgentTicketStatusView;Filter=$Filter;View=$View;\' )]"
+                    )->VerifiedClick();
+                }
 
                 # Check screen output.
                 $Selenium->find_element( "table",             'css' );
@@ -96,11 +104,10 @@ $Selenium->RunTest(
                         UserID   => 1,
                     );
 
-                    $Self->True(
-                        index( $Selenium->get_page_source(), $TicketNumber ) > -1,
-                        "Ticket found on page - $TicketNumber ",
-                    ) || die "Ticket $TicketNumber not found on page";
-
+                    $Selenium->PageContains(
+                        String  => $TicketNumber,
+                        Message => "Ticket found on page - $TicketNumber ",
+                    );
                 }
             }
 
@@ -123,6 +130,10 @@ $Selenium->RunTest(
                 $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketStatusView");
             }
         }
+
+        $Selenium->find_element(
+            "//a[contains(\@href, \'Action=AgentTicketStatusView;Filter=Closed;View=Medium;\' )]"
+        )->VerifiedClick();
 
         # Check if sorting and ordering are saved in small view (see bug#13670).
         # Go to Small view.
@@ -178,7 +189,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

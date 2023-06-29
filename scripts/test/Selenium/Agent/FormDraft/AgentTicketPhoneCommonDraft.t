@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,6 +19,8 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Do not check RichText and hide Fred.
         for my $SySConfig (qw(Frontend::RichText Fred::Active)) {
@@ -37,9 +39,6 @@ $Selenium->RunTest(
                 Value => 1
             );
         }
-
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Create test ticket.
         my $TicketID = $TicketObject->TicketCreate(
@@ -72,7 +71,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to zoom view of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -142,9 +141,7 @@ $Selenium->RunTest(
             my $Title = $Test->{Module} . 'FormDraft' . $RandomID;
 
             # Force sub menus to be visible in order to be able to click one of the links.
-            $Selenium->execute_script(
-                '$("#nav-Communication ul").css({ "height": "auto", "opacity": "100" });'
-            );
+            $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
             $Selenium->WaitFor( JavaScript => "return \$('#nav-Communication ul').css('opacity') == 1;" );
 
             # Click on module and switch window.

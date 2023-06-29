@@ -1,28 +1,30 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::TT::Format)
-## nofilter(TidyAll::Plugin::OTRS::TT::ScriptUsage)
+## nofilter(TidyAll::Plugin::Znuny::TT::Format)
+## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
+
                     </fieldset>
                 </div>
 [% RenderBlockStart("Footer") %]
                 <div class="PopupFooter">
-                    <button class="Primary" id="[% Data.ButtonID | html %]" accesskey="g" title="[% Translate(Data.ButtonTitle) | html %] (g)" type="submit" value="[% Translate(Data.ButtonText) | html %]">[% Translate(Data.ButtonText) | html %]</button>
 [% RenderBlockStart("SubmitAdviceText") %]
-                    <span class="AdviceText">[% Translate(Data.AdviceText) | html %]</span>
+                        <div class="AdviceText">
+                            <span>[% Translate(Data.AdviceText) | html %]</span>
+                        </div>
 [% RenderBlockEnd("SubmitAdviceText") %]
+                    <button class="btn-primary btn-main btn-width-md" id="[% Data.ButtonID | html %]" accesskey="g" title="[% Translate(Data.ButtonTitle) | html %] (g)" type="submit" value="[% Translate(Data.ButtonText) | html %]">[% Translate(Data.ButtonText) | html %]</button>
                 </div>
 [% RenderBlockEnd("Footer") %]
             </div>
         </form>
     </div>
 </div>
-
 [% RenderBlockStart("FooterJS") %]
 <script type="text/javascript">
 [% PROCESS JSDataInsert %]

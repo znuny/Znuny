@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -9,80 +9,86 @@
 
 <li class="[% Data.SenderType | html %]-[% Data.IsVisibleForCustomer | html %] [% Data.Class | html %]">
     <div class="MessageHeader">
-        <h3>
-            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];TicketNumber=[% Data.TicketNumber | uri %];TicketID=[% Data.TicketID | uri %];ArticleID=[% Data.ArticleID | uri %]">
-                [% Data.FromRealname | html %] &ndash;
+        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];TicketNumber=[% Data.TicketNumber | uri %];TicketID=[% Data.TicketID | uri %];ArticleID=[% Data.ArticleID | uri %]">
+            <div class="message-user-avatar">
+                <img src="//www.gravatar.com/avatar/98c188b4d137054757d5659a26994c81?s=100&amp;d=mp">
+            </div>
 
-                [% IF Data.ArticleExpanded %]
-                    <span title="[% Data.ArticleFields.Subject.Value | html %]">
-                        [% Data.ArticleFields.Subject.Value | html %]
-                    </span>
-                [% ELSE %]
-                    <span title="[% Translate("Expand article") | html %]...">
-                        [% Data.ArticleFields.Subject.Value | html %]
-                    </span>
-                [% END %]
-            </a>
-        </h3>
+            <div class="message-info">
+                <span class="message-user">[% Data.FromRealname | html %]</span>
+                <span class="message-title">
+                    [% IF Data.ArticleExpanded %]
+                        <h3 title="[% Data.ArticleFields.Subject.Value | html %]">[% Data.ArticleFields.Subject.Value | html %]</h3>
+                    [% ELSE %]
+                        <h3 title="[% Translate("Expand article") | html %]...">[% Data.ArticleFields.Subject.Value | html %]</h3>
+                    [% END %]
+                </span>
 
-        <span class="Age" title="[% Data.CreateTime | Localize("TimeLong") | html %]">[% Data.Age %]</span>
-        <div class="Clear"></div>
+                <span class="Age" title="[% Data.CreateTime | Localize("TimeLong") | html %]">[% Data.Age %]</span>
+            </div>
+        </a>
     </div>
+
     <input type="hidden" name="ArticleState" />
     <div class="MessageBody">
-        <div class="Details SeperatorRow">
-        [% FOREACH ArticleField IN Data.ArticleFields.values.nsort("Prio") %]
-            [% IF ArticleField.Label == "From" || ArticleField.Label == "To" || ArticleField.Label == "Cc" %]
-            <div>
-                <div class="Label">[% Translate(ArticleField.Label) | html %]:</div>
-                <span title="[% ArticleField.Realname | html %]">[% ArticleField.Realname | html %]</span>
-                <div class="Clear"></div>
-            </div>
-            [% ELSIF ArticleField.Label == "Subject" %]
+        <div class="Details">
+#            [% FOREACH ArticleField IN Data.ArticleFields.values.nsort("Prio") %]
+#                [% IF ArticleField.Label == "From" || ArticleField.Label == "To" || ArticleField.Label == "Cc" %]
+#                <div>
+#                    <div class="Label">[% Translate(ArticleField.Label) | html %]:</div>
+#                    <span title="[% ArticleField.Realname | html %]">[% ArticleField.Realname | html %]</span>
+#                </div>
+#                [% ELSIF ArticleField.Label == "Subject" %]
+#                <div>
+#                    <div class="Label">[% Translate("Subject") | html %]:</div>
+#                    <span title="[% ArticleField.Value | html %]">[% ArticleField.Value | html %]</span>
+#                </div>
+#               [% END %]
+#           [% END %]
+
+            [% FOREACH ArticleField IN Data.ArticleMetaFields %]
                 <div>
-                    <div class="Label">[% Translate("Subject") | html %]:</div>
-                    <span title="[% ArticleField.Value | html %]">[% ArticleField.Value | html %]</span>
-                    <div class="Clear"></div>
+                    <!-- show accounted time and dynamic fields -->
+                    <div class="Label">[% Translate(ArticleField.value.Label) | html %]:</div>
+                    [% IF ArticleField.value.Link %]
+                        <span class="Value" title="[% ArticleField.value.Title %]">
+                            <a href="[% ArticleField.value.Link | Interpolate %]"
+                                [% IF ArticleField.value.LinkPreview %] data-trigger="floater" data-floater-url="[% ArticleField.value.LinkPreview | Interpolate %]"[% END %]
+                                target="_blank" class="DynamicFieldLink">
+                                    [% ArticleField.value.Value %]
+                            </a>
+                        </span>
+                    [% ELSE %]
+                        <span class="Value" title="[% ArticleField.value.Title %]">[% ArticleField.value.Value %]</span>
+                    [% END %]
                 </div>
             [% END %]
-        [% END %]
 
-        [% FOREACH ArticleField IN Data.ArticleMetaFields %]
-            <div>
-                <!-- show accounted time and dynamic fields -->
-                <div class="Label">[% Translate(ArticleField.value.Label) | html %]:</div>
-                [% IF ArticleField.value.Link %]
-                    <span class="Value" title="[% ArticleField.value.Title %]">
-                        <a href="[% ArticleField.value.Link | Interpolate %]"
-                            [% IF ArticleField.value.LinkPreview %] data-trigger="floater" data-floater-url="[% ArticleField.value.LinkPreview | Interpolate %]"[% END %]
-                            target="_blank" class="DynamicFieldLink">
-                                [% ArticleField.value.Value %]
-                        </a>
-                    </span>
-                [% ELSE %]
-                    <span class="Value" title="[% ArticleField.value.Title %]">[% ArticleField.value.Value %]</span>
-                [% END %]
-                <div class="Clear"></div>
-            </div>
-        [% END %]
-
-[% IF Data.Attachments && Data.Attachments.size %]
-            <div class="Attachments">
-                <div class="Label">[% Translate("Attachments") | html %]:</div>
-            [% FOREACH Attachment IN Data.Attachments %]
-                <div>
-                    <i class="fa fa-paperclip"></i>
-                    <span class="DownloadAttachment" title="[% Attachment.Filename | html %][% IF Attachment.FilesizeRaw %] - [% Attachment.FilesizeRaw | Localize('Filesize') | html %][% END %]">
-                        <a href="[% Attachment.Link %]" [% Attachment.Target %] title="[% Translate(Attachment.Action) | html %]">[% Attachment.Filename | html %]</a>
-                        [% IF Attachment.FilesizeRaw %]
-                            ([% Attachment.FilesizeRaw | Localize('Filesize') | html %])
-                        [% END %]
-                    </span>
+            [% IF Data.Attachments && Data.Attachments.size %]
+                <div class="Attachments">
+                    <div class="Label">[% Translate("Attachments") | html %]:</div>
+                    [% FOREACH Attachment IN Data.Attachments %]
+                        <div>
+                            <i class="fa fa-paperclip"></i>
+                            <span class="DownloadAttachment" title="[% Attachment.Filename | html %][% IF Attachment.FilesizeRaw %] - [% Attachment.FilesizeRaw | Localize('Filesize') | html %][% END %]">
+                                <a href="[% Attachment.Link %]" [% Attachment.Target %] title="[% Translate(Attachment.Action) | html %]">
+                                    <div class="file-info">
+                                        <span class="file-name">[% Attachment.Filename | html %]</span>
+                                        <span class="file-weight">
+                                            [% IF Attachment.FilesizeRaw %]
+                                                ([% Attachment.FilesizeRaw | Localize('Filesize') | html %])
+                                            [% END %]
+                                        </span>
+                                    </div>
+                                    <div class="file-icon">
+                                        <i class="fa fa-download"></i>
+                                    </div>
+                                </a>
+                            </span>
+                        </div>
+                    [% END %]
                 </div>
-                <div class="Clear"></div>
             [% END %]
-            </div>
-[% END %]
         </div>
 
         <div class="MessageContent">
@@ -92,26 +98,29 @@
 # Show info, that links within the iframe must be clicked with strg/cmd/shift (depending on the used browser and os)
 # to open the links in a new window without the security permissions given to the iframe
             <div class="MessageBrowser">
-                <p>
+                <span class="p-desc">
                     [% Translate("To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).") | html %]
-                </p>
+                </span>
                 <a class="Close" title="[% Translate("Close this message") | html %]" href="#"><i class="fa fa-times"></i></a>
             </div>
         [% END %]
 # Use the HTML5 sandbox attribute to prevent plugins and scripts from being executed in the browser.
 # Append session info to URL because IE will not send cookies.
 # Set 'allow-popups' to allow IE10+ to open links. ref: http://www.w3.org/html/wg/wiki/ChangeProposals/sandbox_allow_popups
-            <iframe sandbox="allow-same-origin allow-popups ms-allow-popups allow-popups-to-escape-sandbox" title="about:blank" frameborder="0" id="VisibleFrame" class="VisibleFrame" src="[% Env("Baselink") %]Action=CustomerTicketArticleContent;TicketID=[% Data.TicketID | html %];ArticleID=[% Data.ArticleID | html %];[% IF !Config("SessionUseCookie") %][% Env("SessionName") | html %]=[% Env("SessionID") | html %][% END %]"></iframe>
+            <div class="Iframe Hidden">
+                <iframe sandbox="allow-same-origin allow-popups ms-allow-popups allow-popups-to-escape-sandbox" title="about:blank" frameborder="0" id="VisibleFrame" class="VisibleFrame" src="[% Env("Baselink") %]Action=CustomerTicketArticleContent;TicketID=[% Data.TicketID | html %];ArticleID=[% Data.ArticleID | html %];[% IF !Config("SessionUseCookie") %][% Env("SessionName") | html %]=[% Env("SessionID") | html %][% END %]"></iframe>
+            </div>
     [% ELSE %]
 #           <!-- Here we need to append the session info if cookies are disabled, because the layout object cannot automatically do that here, like in the other iframe (only for src attribute). -->
-            <iframe sandbox="allow-same-origin allow-popups ms-allow-popups allow-popups-to-escape-sandbox" src="about:blank" frameborder="0" title="[% Env("Baselink") %]Action=CustomerTicketArticleContent;TicketID=[% Data.TicketID | html %];ArticleID=[% Data.ArticleID | html %];[% Data.SessionInformation | html %];[% IF !Config("SessionUseCookie") %][% Env("SessionName") | html %]=[% Env("SessionID") | html %][% END %]"></iframe>
+            <div class="Iframe Hidden">
+                <iframe sandbox="allow-same-origin allow-popups ms-allow-popups allow-popups-to-escape-sandbox" src="about:blank" frameborder="0" title="[% Env("Baselink") %]Action=CustomerTicketArticleContent;TicketID=[% Data.TicketID | html %];ArticleID=[% Data.ArticleID | html %];[% Data.SessionInformation | html %];[% IF !Config("SessionUseCookie") %][% Env("SessionName") | html %]=[% Env("SessionID") | html %][% END %]"></iframe>
+            </div>
     [% END %]
-[% ELSE %]
+[% END %]
             [% Data.BodyNote %]
             <div class="ArticleBody">
-                [% Data.Body %]
+                [% Data.Body %]...
             </div>
-[% END %]
         </div>
     </div>
 </li>

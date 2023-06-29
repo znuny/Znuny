@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,10 +18,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $SystemAddressObject  = $Kernel::OM->Get('Kernel::System::SystemAddress');
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $HelperObject        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject        = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
+        my $ConfigObject        = $Kernel::OM->Get('Kernel::Config');
+        my $ArticleObject       = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $SysConfigObject     = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
 
@@ -40,7 +44,7 @@ $Selenium->RunTest(
             Value => '0',
         );
 
-        my %AgentTicketEmailConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %AgentTicketEmailConfig = $SysConfigObject->SettingGet(
             Name => 'Frontend::Module###AgentTicketEmail',
         );
 
@@ -151,7 +155,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             {
@@ -495,7 +499,7 @@ $Selenium->RunTest(
                 # Check if the first radio button is selected.
                 $Self->True(
                     $Selenium->execute_script(
-                        "return \$('.CustomerKey[value=$CustomerUserOnLoad->{UserLogin}]').siblings('.CustomerTicketRadio').prop('checked') == true;"
+                        "return \$('.CustomerKey[value=$CustomerUserOnLoad->{UserLogin}]').siblings('.RadioRound').prop('checked') == true;"
                     ),
                     "On page load - Customer user '$CustomerUserOnLoad->{UserLogin}' is checked correctly",
                 );
@@ -534,7 +538,7 @@ $Selenium->RunTest(
                 if ( $Test->{ClickRadioButtons} ) {
                     for my $Number ( 0 .. $#TestCustomerUsers ) {
                         $Selenium->execute_script(
-                            "\$('.CustomerKey[value=$TestCustomerUsers[$Number]->{UserLogin}]').siblings('.CustomerTicketRadio').trigger('click');"
+                            "\$('.CustomerKey[value=$TestCustomerUsers[$Number]->{UserLogin}]').siblings('.RadioRound').trigger('click');"
                         );
                         $Selenium->WaitFor(
                             JavaScript =>

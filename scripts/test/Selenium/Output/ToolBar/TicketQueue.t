@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,16 +19,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-
-        # get config object
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # enable tool bar AgentTicketQueue
         my %AgentTicketQueue = (
             AccessKey => 'q',
             Action    => 'AgentTicketQueue',
+            Block     => 'ToolBarOverviews',
             CssClass  => 'QueueView',
             Icon      => 'fa fa-folder',
             Link      => 'Action=AgentTicketQueue',
@@ -38,20 +37,26 @@ $Selenium->RunTest(
         );
 
         $HelperObject->ConfigSettingChange(
-            Key   => 'Frontend::ToolBarModule###1-Ticket::AgentTicketQueue',
+            Key   => 'Frontend::ToolBarModule###110-Ticket::AgentTicketQueue',
             Value => \%AgentTicketQueue,
         );
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###1-Ticket::AgentTicketQueue',
+            Key   => 'Frontend::ToolBarModule###110-Ticket::AgentTicketQueue',
             Value => \%AgentTicketQueue
         );
 
         # create test user and login
-        my $TestUserLogin = $HelperObject->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
+
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
 
         $Selenium->Login(
             Type     => 'Agent',

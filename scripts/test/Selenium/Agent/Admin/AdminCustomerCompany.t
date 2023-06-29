@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,6 +19,9 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
 
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -31,7 +34,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminCustomerCompany screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminCustomerCompany");
@@ -63,16 +66,12 @@ $Selenium->RunTest(
         }
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         my $IsLinkedBreadcrumbText;
         for my $BreadcrumbText ( 'Customer Management', 'Add Customer' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check client side validation.
@@ -117,7 +116,8 @@ $Selenium->RunTest(
         # Create another test customer company for filter search test.
         my $RandomID2 = 'TestCustomerCompany' . $HelperObject->GetRandomID();
         $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
-        $Selenium->find_element( "button.CallForAction", 'css' )->VerifiedClick();
+
+        $Selenium->find_element( "#Submit",              'css' )->click();
         $Selenium->find_element( "#CustomerID",          'css' )->send_keys($RandomID2);
         $Selenium->find_element( "#CustomerCompanyName", 'css' )->send_keys($RandomID2);
         $Selenium->find_element( "#Submit",              'css' )->VerifiedClick();
@@ -125,7 +125,7 @@ $Selenium->RunTest(
         # Test search filter only for test Customer companies.
         $Selenium->find_element( "#Search", 'css' )->clear();
         $Selenium->find_element( "#Search", 'css' )->send_keys('TestCustomerCompany');
-        $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
 
         # Check for another customer company.
         $Self->True(
@@ -136,7 +136,7 @@ $Selenium->RunTest(
         # Test search filter by test customers $RandomID.
         $Selenium->find_element( "#Search", 'css' )->clear();
         $Selenium->find_element( "#Search", 'css' )->send_keys($RandomID);
-        $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
 
         $Self->True(
             index( $Selenium->get_page_source(), $RandomID ) > -1,
@@ -179,15 +179,11 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText ( 'Customer Management', 'Edit Customer: ' . $RandomID ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Set test customer company to invalid and clear comment.
@@ -205,10 +201,27 @@ $Selenium->RunTest(
             "$Notification - notification is found."
         );
 
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
+        );
+
         # Test search filter.
         $Selenium->find_element( "#Search", 'css' )->clear();
         $Selenium->find_element( "#Search", 'css' )->send_keys($RandomID);
-        $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
 
         # Check class of invalid customer user in the overview table.
         $Self->True(
@@ -218,7 +231,7 @@ $Selenium->RunTest(
 
         # Delete created test customer companies.
         for my $CustomerID ( $RandomID, $RandomID2 ) {
-            my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+            my $Success = $DBObject->Do(
                 SQL  => "DELETE FROM customer_company WHERE customer_id = ?",
                 Bind => [ \$CustomerID ],
             );
@@ -229,7 +242,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'CustomerCompany',
         );
 

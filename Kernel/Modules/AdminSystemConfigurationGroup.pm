@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -15,7 +15,7 @@ use warnings;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(IsArrayRefWithData);
+use Kernel::System::VariableCheck qw(:all);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -48,6 +48,11 @@ sub Run {
             OverriddenInXML => 1,
             UserID          => $Self->{UserID},
         );
+
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
 
         my %Result;
 
@@ -126,6 +131,11 @@ sub Run {
             UserID          => $Self->{UserID},
         );
 
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
+
         my %LockStatus = $SysConfigObject->SettingLockCheck(
             DefaultID           => $Setting{DefaultID},
             ExclusiveLockGUID   => $Setting{ExclusiveLockGUID} || '1',
@@ -199,6 +209,11 @@ sub Run {
             Name => $SettingName,
         );
 
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
+
         if ( grep { $_ eq 'reset-globally' } @Options ) {
 
             # Reset globally
@@ -249,28 +264,6 @@ sub Run {
             $SysConfigObject->SettingUnlock(
                 DefaultID => $Setting{DefaultID},
             );
-        }
-
-        if (
-            ( grep { $_ eq 'reset-locally' } @Options )
-            && $SysConfigObject->can('UserSettingValueDelete')    # OTRS Business Solution™
-            )
-        {
-
-            # Remove user's value
-            my $UserValueDeleted = $SysConfigObject->UserSettingValueDelete(
-                Name       => $SettingName,
-                ModifiedID => 'All',
-                UserID     => $Self->{UserID},
-            );
-
-            if ( !$UserValueDeleted ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message =>
-                        "System was not able to delete setting values for users!"
-                );
-            }
         }
 
         %Setting = $SysConfigObject->SettingGet(
@@ -343,6 +336,11 @@ sub Run {
         my %Setting = $SysConfigObject->SettingGet(
             Name => $SettingName,
         );
+
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
 
         # try to lock to the current user
         if (
@@ -491,9 +489,8 @@ sub Run {
         my $Output = $LayoutObject->Output(
             TemplateFile => 'SystemConfiguration/SettingsList',
             Data         => {
-                SettingList             => \@SettingList,
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
-                ConfigLevel             => $ConfigLevel
+                SettingList => \@SettingList,
+                ConfigLevel => $ConfigLevel
             },
         );
 
@@ -533,6 +530,11 @@ sub Run {
             $Result{Error} = Translatable("Setting not found.");
             return $Self->_ReturnJSON( Response => \%Result );
         }
+
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
 
         my $Value = $Setting{XMLContentParsed}->{Value}->[0];
 
@@ -584,6 +586,11 @@ sub Run {
             $Result{Error} = Translatable("Setting not found.");
             return $Self->_ReturnJSON( Response => \%Result );
         }
+
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
 
         my $Value = $Setting{XMLContentParsed}->{Value}->[0];
 
@@ -733,14 +740,13 @@ sub Run {
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AdminSystemConfigurationGroup',
         Data         => {
-            Tree                    => \%Tree,
-            Path                    => \@Path,
-            RootNavigation          => $RootNavigation,
-            SettingList             => \@SettingList,
-            CategoriesStrg          => $Self->_GetCategoriesStrg(),
-            InvalidSettings         => $Self->_CheckInvalidSettings(),
-            OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
-            ConfigLevel             => $ConfigLevel,
+            Tree            => \%Tree,
+            Path            => \@Path,
+            RootNavigation  => $RootNavigation,
+            SettingList     => \@SettingList,
+            CategoriesStrg  => $Self->_GetCategoriesStrg(),
+            InvalidSettings => $Self->_CheckInvalidSettings(),
+            ConfigLevel     => $ConfigLevel,
         },
     );
     $Output .= $LayoutObject->Footer();
@@ -814,6 +820,55 @@ sub _CheckInvalidSettings {
     return 0 if !@InvalidSettings;
 
     return 1;
+}
+
+sub _ReturnJSONOnInvalidConfigLevel {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
+    my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+    NEEDED:
+    for my $Needed (qw(Setting)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!",
+        );
+        return;
+    }
+
+    return if !IsHashRefWithData( $Param{Setting} );
+    return if !$Param{Setting}->{HasConfigLevel};
+
+    my $ConfigLevel = $ConfigObject->Get('ConfigLevel');
+    return if !defined $ConfigLevel;
+
+    return if $Param{Setting}->{HasConfigLevel} >= $ConfigLevel;
+
+    my %Response;
+
+    $Response{Data}->{Error} = $Kernel::OM->Get('Kernel::Language')->Translate(
+        "System was unable to update setting!",
+    );
+
+    $Response{Data}->{HTMLStrg} = $SysConfigObject->SettingRender(
+        Setting => $Param{Setting},
+
+        #         RW      => $UpdatedSetting{ExclusiveLockGUID} ? 1 : 0,
+        UserID => $Self->{UserID},
+    );
+
+    for my $Key (qw(IsModified IsDirty ExclusiveLockGUID IsValid UserModificationActive)) {
+        $Response{Data}->{SettingData}->{$Key} = $Param{Setting}->{$Key};
+    }
+
+    $Response{Data}->{DeploymentNeeded} = 0;
+    $Response{Data}->{SettingData}->{Invalid} = 1;
+
+    return $Self->_ReturnJSON( Response => \%Response );
 }
 
 1;

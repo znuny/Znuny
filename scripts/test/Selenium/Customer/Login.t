@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,6 +19,7 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Disable autocomplete in login form.
         $HelperObject->ConfigSettingChange(
@@ -29,17 +30,15 @@ $Selenium->RunTest(
         # create test customer user
         my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate() || die "Did not get test customer user";
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # first load the page so we can delete any pre-existing cookies
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl");
         $Selenium->delete_all_cookies();
 
         # Check Secure::DisableBanner functionality.
-        my $Product          = $Kernel::OM->Get('Kernel::Config')->Get('Product');
-        my $Version          = $Kernel::OM->Get('Kernel::Config')->Get('Version');
-        my $STORMInstalled   = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSSTORMIsInstalled();
-        my $CONTROLInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSCONTROLIsInstalled();
+        my $Product = $Kernel::OM->Get('Kernel::Config')->Get('Product');
+        my $Version = $Kernel::OM->Get('Kernel::Config')->Get('Version');
 
         for my $Disabled ( reverse 0 .. 1 ) {
             $HelperObject->ConfigSettingChange(
@@ -49,80 +48,23 @@ $Selenium->RunTest(
             $Selenium->VerifiedRefresh();
 
             if ($Disabled) {
-
-                if ($STORMInstalled) {
-
-                    my $STORMFooter = 0;
-
-                    if ( $Selenium->get_page_source() =~ m{ ^ [ ]+ STORM \s powered }xms ) {
-                        $STORMFooter = 1;
-                    }
-
-                    $Self->False(
-                        $STORMFooter,
-                        'Footer banner hidden',
-                    );
-                }
-                elsif ($CONTROLInstalled) {
-
-                    my $CONTROLFooter = 0;
-
-                    if ( $Selenium->get_page_source() =~ m{ ^ [ ]+ CONTROL \s powered }xms ) {
-                        $CONTROLFooter = 1;
-                    }
-
-                    $Self->False(
-                        $CONTROLFooter,
-                        'Footer banner hidden',
-                    );
-                }
-                else {
-                    $Self->False(
-                        index( $Selenium->get_page_source(), 'Powered' ) > -1,
-                        'Footer banner hidden',
-                    );
-                }
+                $Self->False(
+                    index( $Selenium->get_page_source(), 'Powered' ) > -1,
+                    'Footer banner hidden',
+                );
             }
             else {
 
-                if ($STORMInstalled) {
+                $Self->True(
+                    index( $Selenium->get_page_source(), 'Powered' ) > -1,
+                    'Footer banner shown',
+                );
 
-                    my $STORMFooter = 0;
-
-                    if ( $Selenium->get_page_source() =~ m{ ^ [ ]+ STORM \s powered }xms ) {
-                        $STORMFooter = 1;
-                    }
-
-                    $Self->True(
-                        $STORMFooter,
-                        'Footer banner hidden',
-                    );
-                }
-                elsif ($CONTROLInstalled) {
-
-                    my $CONTROLFooter = 0;
-
-                    if ( $Selenium->get_page_source() =~ m{ ^ [ ]+ CONTROL \s powered }xms ) {
-                        $CONTROLFooter = 1;
-                    }
-
-                    $Self->True(
-                        $CONTROLFooter,
-                        'Footer banner hidden',
-                    );
-                }
-                else {
-                    $Self->True(
-                        index( $Selenium->get_page_source(), 'Powered' ) > -1,
-                        'Footer banner shown',
-                    );
-
-                    # Prevent version information disclosure on login page.
-                    $Self->False(
-                        index( $Selenium->get_page_source(), "$Product $Version" ) > -1,
-                        "No version information disclosure ($Product $Version)",
-                    );
-                }
+                # Prevent version information disclosure on login page.
+                $Self->False(
+                    index( $Selenium->get_page_source(), "$Product $Version" ) > -1,
+                    "No version information disclosure ($Product $Version)",
+                );
             }
         }
 
@@ -165,7 +107,18 @@ $Selenium->RunTest(
         );
 
         # logout again
-        $Element->VerifiedClick();
+        $Selenium->mouse_move_to_location(
+            element => $Selenium->find_element( '.UserAvatar', 'css' ),
+        );
+
+        # Check if submenu is visible now.
+        $Selenium->WaitFor(
+            JavaScript => "return \$('.UserAvatar_submenu').length"
+        );
+        $Selenium->WaitFor(
+            JavaScript => "return \$('a#LogoutButton').length"
+        );
+        $Selenium->find_element( 'a#LogoutButton', 'css' )->click();
 
         # Check if autocomplete is enabled in login form.
         $Self->True(

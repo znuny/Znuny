@@ -1,12 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::NamePod)
 
 package scripts::Migration::Znuny::UpgradeDatabaseStructure;    ## no critic
 
@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 
 =head1 SYNOPSIS
 
-Upgrades the database structure to OTRS 6.
+Upgrades the database structure.
 
 =cut
 
@@ -36,20 +36,25 @@ sub Run {
 
     my @Tasks = (
         {
-            Message => 'Create table smime_keys',
-            Module  => 'SMIMEKeys',
+            Message => 'Add new activity table',
+            Module  => 'Activity',
         },
         {
-            Message => 'Add missing foreign keys that point to database table "article"',
-            Module  => 'RecreateForeignKeysToArticleTable',
+            Message => 'Drop table "cloud_service_config".',
+            Module  => 'CloudServiceConfig',
         },
         {
-            Message => 'Add table and notification event for user mention support',
-            Module  => 'Mentions',
+            Message =>
+                'Add new column "color" to table "ticket_priority" and also add a default value for initial priorities.',
+            Module => 'PriorityColor',
         },
         {
-            Message => 'Increase size of columns of database tables oauth2_token_config and oauth2_token',
-            Module  => 'OAuth2Token',
+            Message => 'Add new column color to ticket_state table and also add a default value for initial states.',
+            Module  => 'StateColor',
+        },
+        {
+            Message => 'Update table smime_keys',
+            Module  => 'SMIME',
         },
         {
             Message => 'Increase size of column of database table calendar_appointment_plugin',

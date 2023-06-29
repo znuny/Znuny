@@ -1,12 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 package Kernel::System::SysConfig::ValueType::VacationDays;
 
 use strict;
@@ -259,10 +259,10 @@ Extracts the effective value from a XML parsed setting.
             '1' => {
                 '1' => 'New Year\'s Day',
             },
-            ...
+            # ...
         },
         DefaultValue   => 'Product 5',      # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         Item           => [                 # (optional) XML parsed item
             {
                 'ValueType' => 'VacationDays',
@@ -401,7 +401,7 @@ sub SettingRender {
             if ( $Param{RW} ) {
                 $HTML .= "<button class='RemoveButton' type='button' "
                     . "title='$RemoveThisEntry' value='Remove this entry'>\n"
-                    . "    <i class='fa fa-minus-circle'></i>\n"
+                    . "    <i class='fa fa-minus-square-o'></i>\n"
                     . "    <span class='InvisibleText'>$RemoveThisEntry</span>\n"
                     . "</button>\n";
             }

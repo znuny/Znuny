@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,8 +18,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject                = $Kernel::OM->Get('Kernel::System::DB');
+        my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
 
         # Do not check RichText.
         $HelperObject->ConfigSettingChange(
@@ -82,15 +84,11 @@ $Selenium->RunTest(
         }
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText ( 'Ticket Notification Management', 'Add Notification' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Toggle Ticket filter widget.
@@ -170,7 +168,7 @@ $Selenium->RunTest(
         $Selenium->find_element( "#Submit", 'css' )->click();
 
         # If database backend is PostgreSQL or Oracle, first test body length validation.
-        my $DBType = $Kernel::OM->Get('Kernel::System::DB')->{'DB::Type'};
+        my $DBType = $DBObject->{'DB::Type'};
         if (
             $DBType eq 'postgresql'
             || $DBType eq 'oracle'
@@ -260,19 +258,15 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText (
             'Ticket Notification Management',
             'Edit Notification: ' . $NotifEventRandomID
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Edit test NotificationEvent and set it to invalid.
@@ -308,6 +302,22 @@ $Selenium->RunTest(
         $Self->True(
             $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length;"),
             "$Notification - notification is found."
+        );
+
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
         );
 
         # Check edited NotifcationEvent values.
@@ -464,7 +474,7 @@ $Selenium->RunTest(
         );
 
         # Get NotificationEventID.
-        my %NotifEventID = $Kernel::OM->Get('Kernel::System::NotificationEvent')->NotificationGet(
+        my %NotifEventID = $NotificationEventObject->NotificationGet(
             Name => $NotifEventRandomID
         );
 
@@ -533,8 +543,7 @@ $Selenium->RunTest(
 
        # For English notification text remove button is added.
        # Notification text it is not shown on add screen if DefaultUsedLanguages has no English included. See bug#14594.
-        my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
-        my $NotificationID          = $NotificationEventObject->NotificationAdd(
+        my $NotificationID = $NotificationEventObject->NotificationAdd(
             Name => "Notification$HelperObject->GetRandomID()",
             Data => {
                 Events => ['TicketQueueUpdate'],

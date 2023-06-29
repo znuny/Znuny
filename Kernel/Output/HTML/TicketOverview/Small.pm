@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -890,20 +890,21 @@ sub Run {
                     }
                     elsif ( $Column eq 'Owner' || $Column eq 'Responsible' ) {
 
-                        $LayoutObject->Block(
-                            Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkUserSearch',
-                            Data => {},
-                        );
+                      #136 - todo this autocomplete has been disabled for now
+                      #                         $LayoutObject->Block(
+                      #                             Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkUserSearch',
+                      #                             Data => {},
+                      #                         );
 
-                        # send data to JS
-                        $LayoutObject->AddJSData(
-                            Key   => 'UserAutocomplete',
-                            Value => {
-                                'QueryDelay'          => 100,
-                                'MaxResultsDisplayed' => 20,
-                                'MinQueryLength'      => 2,
-                            },
-                        );
+                        #                         # send data to JS
+                        #                         $LayoutObject->AddJSData(
+                        #                             Key   => 'UserAutocomplete',
+                        #                             Value => {
+                        #                                 'QueryDelay'          => 100,
+                        #                                 'MaxResultsDisplayed' => 20,
+                        #                                 'MinQueryLength'      => 2,
+                        #                             },
+                        #                         );
                     }
 
                 }
@@ -1093,21 +1094,22 @@ sub Run {
                     );
                     if ( $Column eq 'CustomerUserID' ) {
 
-                        $LayoutObject->Block(
-                            Name =>
-                                'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerUserSearch',
-                            Data => {},
-                        );
+                  #136 - todo this autocomplete has been disabled for now
+                  #                         $LayoutObject->Block(
+                  #                             Name =>
+                  #                                 'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerUserSearch',
+                  #                             Data => {},
+                  #                         );
 
-                        # send data to JS
-                        $LayoutObject->AddJSData(
-                            Key   => 'CustomerUserAutocomplete',
-                            Value => {
-                                'QueryDelay'          => 100,
-                                'MaxResultsDisplayed' => 20,
-                                'MinQueryLength'      => 2,
-                            },
-                        );
+                        #                         # send data to JS
+                        #                         $LayoutObject->AddJSData(
+                        #                             Key   => 'CustomerUserAutocomplete',
+                        #                             Value => {
+                        #                                 'QueryDelay'          => 100,
+                        #                                 'MaxResultsDisplayed' => 20,
+                        #                                 'MinQueryLength'      => 2,
+                        #                             },
+                        #                         );
                     }
                 }
 
@@ -1643,6 +1645,11 @@ sub Run {
                     }
                 }
 
+                # add pill class
+                if ( $TicketColumn eq 'State' && IsStringWithData( $Article{StateID} ) ) {
+                    $CSSClass .= 'pill StateID-' . $Article{StateID};
+                }
+
                 $LayoutObject->Block(
                     Name => "RecordTicketColumn$BlockType",
                     Data => {
@@ -1909,7 +1916,7 @@ sub _InitialColumnFilter {
     my $ColumnFilterHTML = $LayoutObject->BuildSelection(
         Name        => 'ColumnFilter' . $Param{ColumnName},
         Data        => $Data,
-        Class       => $Class,
+        Class       => $Class . ' Modernize',
         Translation => $TranslationOption,
         SelectedID  => '',
     );

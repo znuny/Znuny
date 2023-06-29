@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -66,10 +66,10 @@ add new ActivityDialog
 returns the id of the created activity dialog if success or undef otherwise
 
     my $ID = $ActivityDialogObject->ActivityDialogAdd(
-        EntityID    => 'AD1'                                            # mandatory, exportable unique identifier
+        EntityID    => 'AD1',                                           # mandatory, exportable unique identifier
         Name        => 'NameOfActivityDialog',                          # mandatory
         Config      => {                                                # mandatory, activity dialog configuration to be stored in YAML format
-            Scope         => 'Global'                                   # mandatory, default 'Global' (Process|Global)
+            Scope         => 'Global',                                  # mandatory, default 'Global' (Process|Global)
             ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199' # ScopeEntityID, used if specific scope is set e.g. 'Process'
         },
         UserID      => 123,                                             # mandatory
@@ -379,10 +379,10 @@ returns 1 if success or undef otherwise
 
     my $Success = $ActivityDialogObject->ActivityDialogUpdate(
         ID          => 123,                                             # mandatory
-        EntityID    => 'AD1'                                            # mandatory, exportable unique identifier
+        EntityID    => 'AD1',                                           # mandatory, exportable unique identifier
         Name        => 'NameOfActivityDialog',                          # mandatory
         Config   => {                                                   # mandatory, activity dialog configuration to be stored in YAML format
-            Scope         => 'Global'                                   # mandatory, default 'Global' (Process|Global)
+            Scope         => 'Global',                                  # mandatory, default 'Global' (Process|Global)
             ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199' # ScopeEntityID, used if specific scope is set e.g. 'Process'
         }
         UserID      => 123,                                             # mandatory

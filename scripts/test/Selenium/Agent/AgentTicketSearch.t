@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # Disable warn on stop word usage.
         $HelperObject->ConfigSettingChange(
@@ -33,10 +36,8 @@ $Selenium->RunTest(
             Value => 1,
         );
 
-        my $RandomID = $HelperObject->GetRandomID();
-
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-        my $DFTextName         = 'Text' . $RandomID;
+        my $RandomID   = $HelperObject->GetRandomID();
+        my $DFTextName = 'Text' . $RandomID;
 
         my %DynamicFields = (
             Date => {
@@ -184,7 +185,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Go to agent preferences screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentPreferences;Subaction=Group;Group=UserProfile");
@@ -282,7 +283,7 @@ $Selenium->RunTest(
 
         # Recreate article object and update article index for static DB.
         $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::System::Ticket::Article'] );
-        $Kernel::OM->Get('Kernel::System::Ticket::Article')->ArticleSearchIndexBuild(
+        $ArticleObject->ArticleSearchIndexBuild(
             TicketID  => $TicketID,
             ArticleID => $ArticleID,
             UserID    => 1,
@@ -847,7 +848,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
 
     },
 );

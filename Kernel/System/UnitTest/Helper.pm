@@ -1,11 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Perl::CacheCleanup)
 
 package Kernel::System::UnitTest::Helper;
 
@@ -192,7 +193,7 @@ the login name of the new user, the password is the same.
 
     my $TestUserLogin = $HelperObject->TestUserCreate(
         Groups    => ['admin', 'users'],         # optional, list of groups to add this user to (rw rights)
-        Language  => 'de'                        # optional, defaults to 'en' if not set
+        Language  => 'de',                       # optional, defaults to 'en' if not set
         KeepValid => 1,                          # optional, defaults to 0
     );
 
@@ -205,7 +206,7 @@ To get UserLogin and UserID:
 
     my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
         Groups    => ['admin', 'users'],
-        Language  => 'de'
+        Language  => 'de',
         KeepValid => 1,
     );
 
@@ -495,9 +496,8 @@ sub FixedTimeAddSeconds {
 }
 
 # See http://perldoc.perl.org/5.10.0/perlsub.html#Overriding-Built-in-Functions
-## nofilter(TidyAll::Plugin::OTRS::Perl::Time)
-## nofilter(TidyAll::Plugin::OTRS::Migrations::OTRS6::TimeObject)
-## nofilter(TidyAll::Plugin::OTRS::Migrations::OTRS6::DateTime)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Time)
+
 sub _MockPerlTimeHandling {
     no warnings 'redefine';    ## no critic
     *CORE::GLOBAL::time = sub {
@@ -548,7 +548,7 @@ sub _MockPerlTimeHandling {
         if ( $INC{$FilePath} ) {
             no warnings 'redefine';    ## no critic
             delete $INC{$FilePath};
-            require $FilePath;         ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+            require $FilePath;         ## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
         }
     }
 
@@ -1024,8 +1024,8 @@ All database contents will be automatically dropped when the Helper object is de
         DatabaseXMLString => $XML,      # (optional) database XML schema to execute
                                         # or
         DatabaseXMLFiles => [           # (optional) List of XML files to load and execute
-            '/opt/otrs/scripts/database/schema.xml',
-            '/opt/otrs/scripts/database/initial_insert.xml',
+            '/opt/znuny/scripts/database/schema.xml',
+            '/opt/znuny/scripts/database/initial_insert.xml',
         ],
     );
 
@@ -1547,11 +1547,11 @@ sub CheckNumberOfEventExecution {
 This function calls a list of other helper functions to setup a test environment with various test data.
 
     my $Result = $HelperObject->SetupTestEnvironment(
-        ... # Parameters get passed to the FillTestEnvironment and ConfigureViews function
+        # ... # Parameters get passed to the FillTestEnvironment and ConfigureViews function
     );
 
     $Result = {
-        ... # Combined result of the ActivateDefaultDynamicFields, FillTestEnvironment and ConfigureViews functions
+        # ... # Combined result of the ActivateDefaultDynamicFields, FillTestEnvironment and ConfigureViews functions
     }
 
 =cut
@@ -1657,7 +1657,7 @@ Toggles settings for a given view like AgentTicketNote or CustomerTicketMessage.
             TicketType       => 1,
             Title            => 1,
             HistoryType      => 'Phone',
-            ...
+            # ...
         },
         CustomerTicketMessage => {
             Priority         => 1,
@@ -1668,7 +1668,7 @@ Toggles settings for a given view like AgentTicketNote or CustomerTicketMessage.
             SLAMandatory     => 1,
             TicketType       => 1,
             ArticleType      => 'note-external',
-            ...
+            # ...
         },
     }
 
@@ -2061,7 +2061,7 @@ Default parameters contain various special chars.
     my $Result = $HelperObject->FillTestEnvironment(
         Type => {
             'Type 1::Sub Type' => 1,
-            ...
+            # ...
         }
     );
 

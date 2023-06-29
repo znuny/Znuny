@@ -1,20 +1,26 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-[% RenderBlockStart("ContentLargeCustomerIDListNavBar") %]
-<span class="Pagination">
-    [% Data.SiteNavBar %]
-</span>
-[% RenderBlockEnd("ContentLargeCustomerIDListNavBar") %]
+[% RenderBlockStart("HeaderCustomerIDList") %]
+    <div class="HeaderFilter">
 [% RenderBlockStart("ContentLargeCustomerIDAdd") %]
-<h2><a class="CallForAction" href="[% Env("Baselink") %]Action=AdminCustomerUserCustomer;Subaction=CustomerUser;ID=[% Data.CustomerUserID | uri %]"><span><i class="fa fa-plus-square"></i> [% Translate("Change Customer Relations") | html %]</span></a></h2>
+        <a class="CallForAction" href="[% Env("Baselink") %]Action=AdminCustomerUserCustomer;Subaction=CustomerUser;ID=[% Data.CustomerUserID | uri %]">
+            <i class="fa fa-plus-square"></i>
+            <span>[% Translate("Change Customer Relations") | html %]</span>
+        </a>
 [% RenderBlockEnd("ContentLargeCustomerIDAdd") %]
+    </div>
+[% RenderBlockEnd("HeaderCustomerIDList") %]
+[% RenderBlockStart("ContentCustomerIDList") %]
+[% RenderBlockStart("ContentLargeCustomerIDListNavBar") %]
+<span class="Pagination">[% Data.SiteNavBar %]</span>
+[% RenderBlockEnd("ContentLargeCustomerIDListNavBar") %]
 
 <table class="DataTable">
     <thead>
@@ -55,7 +61,7 @@
 [% RenderBlockEnd("ContentLargeCustomerIDListRowCustomerIDTicketsClosed") %]
             <td class="Center">
             [% IF Data.EditCustomerIDPermission %]
-                <a href="[% Env("Baselink") %]Action=AdminCustomerCompany;Subaction=Change;CustomerID=[% Data.CustomerID | uri %];Nav=Agent" title="[% Translate("Edit customer ID") | html %]">
+                <a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=AdminCustomerCompany;Subaction=Change;CustomerID=[% Data.CustomerID | uri %];Nav=Agent" title="[% Translate("Edit customer ID") | html %]">
                     <i class="fa fa-pencil-square-o"></i>
                 </a>
             [% END %]
@@ -71,3 +77,4 @@
 [% RenderBlockEnd("ContentLargeCustomerIDListNone") %]
     </tbody>
 </table>
+[% RenderBlockEnd("ContentCustomerIDList") %]

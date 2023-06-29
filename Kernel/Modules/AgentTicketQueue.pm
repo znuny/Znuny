@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -282,7 +282,7 @@ sub Run {
     }
 
     # otherwise use Preview as default as in LayoutTicket
-    $View ||= 'Preview';
+    $View ||= 'Small';
 
     # Check if selected view is available.
     my $Backends = $ConfigObject->Get('Ticket::Frontend::Overview');
@@ -505,7 +505,7 @@ sub Run {
 
         Bulk       => 1,
         TitleName  => Translatable('QueueView'),
-        TitleValue => $NavBar{SelectedQueue} . $SubQueueIndicatorTitle,
+        TitleValue => $NavBar{BreadcrumbQueue} . $SubQueueIndicatorTitle,
 
         Env        => $Self,
         LinkPage   => $LinkPage,
@@ -574,6 +574,10 @@ sub _MaskQueueView {
 
     $Param{SelectedQueue} = $AllQueues{$QueueID} || $CustomQueue;
     my @MetaQueue = split /::/, $Param{SelectedQueue};
+
+    $Param{BreadcrumbQueue} = sprintf '<div>%s</div>' x @MetaQueue, @MetaQueue;
+    $Param{BreadcrumbQueue} =~ s{(</div>)(<div>)}{$1 <div>></div> $2}g;
+
     $Level = $#MetaQueue + 2;
 
     # prepare shown queues (short names)
@@ -765,10 +769,11 @@ sub _MaskQueueView {
     }
 
     return (
-        MainName      => 'Queues',
-        SelectedQueue => $Param{SelectedQueue},
-        MainContent   => $Param{QueueStrgLevel},
-        Total         => $Param{TicketsShown},
+        MainName        => 'Queues',
+        SelectedQueue   => $Param{SelectedQueue},
+        BreadcrumbQueue => $Param{BreadcrumbQueue},
+        MainContent     => $Param{QueueStrgLevel},
+        Total           => $Param{TicketsShown},
     );
 }
 

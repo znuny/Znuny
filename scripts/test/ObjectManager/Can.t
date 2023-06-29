@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -31,11 +31,6 @@ if ( !$ConfigObject->Get('PGP') ) {
     $SkipCryptPGP = 1;
 }
 
-my $SkipChat;
-if ( !$ConfigObject->Get('ChatEngine::Active') ) {
-    $SkipChat = 1;
-}
-
 my $SkipCalendar;
 if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calendar', Silent => 1 ) ) {
     $SkipCalendar = 1;
@@ -44,6 +39,12 @@ if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calend
 my $SkipTeam;
 if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calendar::Team', Silent => 1 ) ) {
     $SkipTeam = 1;
+}
+
+my $SkipITSM;
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+if ( !$IsITSMInstalled ) {
+    $SkipITSM = 1;
 }
 
 my $Home = $ConfigObject->Get('Home');
@@ -99,12 +100,11 @@ for my $Directory ( sort @DirectoriesToSearch ) {
             # skip crypt object if it is not configured
             next OPERATION if $1 eq 'Kernel::System::Crypt::SMIME'          && $SkipCryptSMIME;
             next OPERATION if $1 eq 'Kernel::System::Crypt::PGP'            && $SkipCryptPGP;
-            next OPERATION if $1 eq 'Kernel::System::Chat'                  && $SkipChat;
-            next OPERATION if $1 eq 'Kernel::System::ChatChannel'           && $SkipChat;
-            next OPERATION if $1 eq 'Kernel::System::VideoChat'             && $SkipChat;
             next OPERATION if $1 eq 'Kernel::System::Calendar'              && $SkipCalendar;
             next OPERATION if $1 eq 'Kernel::System::Calendar::Appointment' && $SkipCalendar;
             next OPERATION if $1 eq 'Kernel::System::Calendar::Team'        && $SkipTeam;
+            next OPERATION if $1 eq 'Kernel::System::GeneralCatalog'        && $SkipITSM;
+            next OPERATION if $1 eq 'Kernel::System::OTRSBusiness';
 
             # load object
             my $Object = $Kernel::OM->Get("$1");

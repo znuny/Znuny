@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -212,110 +212,6 @@ sub AgentCustomerViewTable {
                     if ( !$CompanyIsValid ) {
                         $Self->Block(
                             Name => 'CustomerRowCustomerCompanyInvalid',
-                        );
-                    }
-                }
-            }
-
-            if (
-                $ConfigObject->Get('ChatEngine::Active')
-                && $Field->[0] eq 'UserLogin'
-                )
-            {
-                # Check if agent has permission to start chats with the customer users.
-                my $EnableChat = 1;
-                my $ChatStartingAgentsGroup
-                    = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatStartingAgents') || 'users';
-                my $ChatStartingAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-                    UserID    => $Self->{UserID},
-                    GroupName => $ChatStartingAgentsGroup,
-                    Type      => 'rw',
-                );
-
-                if ( !$ChatStartingAgentsGroupPermission ) {
-                    $EnableChat = 0;
-                }
-                if (
-                    $EnableChat
-                    && !$ConfigObject->Get('ChatEngine::ChatDirection::AgentToCustomer')
-                    )
-                {
-                    $EnableChat = 0;
-                }
-
-                if ($EnableChat) {
-                    my $VideoChatEnabled = 0;
-                    my $VideoChatAgentsGroup
-                        = $ConfigObject->Get('ChatEngine::PermissionGroup::VideoChatAgents') || 'users';
-                    my $VideoChatAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-                        UserID    => $Self->{UserID},
-                        GroupName => $VideoChatAgentsGroup,
-                        Type      => 'rw',
-                    );
-
-                    # Enable the video chat feature if system is entitled and agent is a member of configured group.
-                    if ($VideoChatAgentsGroupPermission) {
-                        if ( $Kernel::OM->Get('Kernel::System::Main')
-                            ->Require( 'Kernel::System::VideoChat', Silent => 1 ) )
-                        {
-                            $VideoChatEnabled = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled();
-                        }
-                    }
-
-                    my $CustomerEnableChat = 0;
-                    my $ChatAccess         = 0;
-                    my $VideoChatAvailable = 0;
-                    my $VideoChatSupport   = 0;
-
-                    # Default status is offline.
-                    my $UserState            = Translatable('Offline');
-                    my $UserStateDescription = $Self->{LanguageObject}->Translate('User is currently offline.');
-
-                    my $CustomerChatAvailability = $Kernel::OM->Get('Kernel::System::Chat')->CustomerAvailabilityGet(
-                        UserID => $Param{Data}->{UserID},
-                    );
-
-                    my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
-
-                    my %CustomerUser = $CustomerUserObject->CustomerUserDataGet(
-                        User => $Param{Data}->{UserID},
-                    );
-                    $CustomerUser{UserFullname} = $CustomerUserObject->CustomerName(
-                        UserLogin => $Param{Data}->{UserID},
-                    );
-                    $VideoChatSupport = 1 if $CustomerUser{VideoChatHasWebRTC};
-
-                    if ( $CustomerChatAvailability == 3 ) {
-                        $UserState            = Translatable('Active');
-                        $CustomerEnableChat   = 1;
-                        $UserStateDescription = $Self->{LanguageObject}->Translate('User is currently active.');
-                        $VideoChatAvailable   = 1;
-                    }
-                    elsif ( $CustomerChatAvailability == 2 ) {
-                        $UserState            = Translatable('Away');
-                        $CustomerEnableChat   = 1;
-                        $UserStateDescription = $Self->{LanguageObject}->Translate('User was inactive for a while.');
-                    }
-
-                    $Self->Block(
-                        Name => 'CustomerRowUserStatus',
-                        Data => {
-                            %CustomerUser,
-                            UserState            => $UserState,
-                            UserStateDescription => $UserStateDescription,
-                        },
-                    );
-
-                    if ($CustomerEnableChat) {
-                        $Self->Block(
-                            Name => 'CustomerRowChatIcons',
-                            Data => {
-                                %{ $Param{Data} },
-                                %CustomerUser,
-                                VideoChatEnabled   => $VideoChatEnabled,
-                                VideoChatAvailable => $VideoChatAvailable,
-                                VideoChatSupport   => $VideoChatSupport,
-                            },
                         );
                     }
                 }

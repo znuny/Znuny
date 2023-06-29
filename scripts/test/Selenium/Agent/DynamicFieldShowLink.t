@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,9 +18,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+        my $CacheObject             = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Create test ticket.
         my $TicketNumber = $TicketObject->TicketCreateNumber();
@@ -47,7 +50,7 @@ $Selenium->RunTest(
         );
         my $Success;
         if ( $DynamicField->{ID} ) {
-            my $ValuesDeleteSuccess = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->AllValuesDelete(
+            my $ValuesDeleteSuccess = $DynamicFieldValueObject->AllValuesDelete(
                 FieldID => $DynamicField->{ID},
                 UserID  => 1,
             );
@@ -85,7 +88,7 @@ $Selenium->RunTest(
 
         # Set dynamic field value.
         my $ValueText = 'Click on Link' . $RandomNumber;
-        $Success = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueSet(
+        $Success = $DynamicFieldValueObject->ValueSet(
             FieldID    => $DynamicFieldID,
             ObjectType => 'Ticket',
             ObjectID   => $TicketID,
@@ -121,7 +124,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
 
         # Check existence of test dynamic field in 'Ticket Information' widget.
@@ -210,7 +213,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 );
 

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,16 +20,11 @@ my $CheckBredcrumb = sub {
     my %Param = @_;
 
     my $BreadcrumbText = $Param{BreadcrumbText} || '';
-    my $Count          = 1;
-
     for my $BreadcrumbText ( 'Web Service Management', $BreadcrumbText ) {
-        $Self->Is(
-            $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-            $BreadcrumbText,
-            "Breadcrumb text '$BreadcrumbText' is found on screen"
+        $Selenium->ElementExists(
+            Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+            SelectorType => 'css',
         );
-
-        $Count++;
     }
 };
 
@@ -38,6 +33,7 @@ $Selenium->RunTest(
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # Create test user.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -45,7 +41,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -159,6 +155,22 @@ $Selenium->RunTest(
                     "return \$('tr.Invalid td:contains($Name)').length"
                 ),
                 "There is a class 'Invalid' for test web service",
+            );
+
+            # Checks for AdminValidFilter
+            $Self->True(
+                $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+                "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+            );
+            $Selenium->find_element( "#ValidFilter", 'css' )->click();
+            $Self->False(
+                $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+                "AdminValidFilter - All invalid entries are not displayed.",
+            );
+            $Selenium->find_element( "#ValidFilter", 'css' )->click();
+            $Self->True(
+                $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+                "AdminValidFilter - All invalid entries are displayed again.",
             );
 
             # Check web service values.

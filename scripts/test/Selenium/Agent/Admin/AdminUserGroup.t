@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,6 +19,11 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
 
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -32,18 +37,18 @@ $Selenium->RunTest(
         );
 
         # Get test user ID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Group' );
+        $CacheObject->CleanUp( Type => 'Group' );
 
         # Create test group.
         my $GroupName = 'group' . $HelperObject->GetRandomID();
-        my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
+        my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             Comment => 'Selenium test group',
             ValidID => 1,
@@ -71,19 +76,15 @@ $Selenium->RunTest(
         $Selenium->find_element( $GroupName, 'link_text' )->VerifiedClick();
 
         # Check breadcrumb on change screen.
-        my $Count = 1;
         for my $BreadcrumbText (
             'Manage Agent-Group Relations',
-            'Change Agent Relations for Group \'' . $GroupName . '\''
+            "Change Agent Relations for Group '" . $GroupName . "'"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => '.BreadCrumb>li>[title="' . $BreadcrumbText . '"]',
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Give full read and write access to the tickets in test group for test user.
@@ -331,8 +332,7 @@ $Selenium->RunTest(
         # Since there are no tickets that rely on our test group, we can remove them again
         # from the DB.
         if ($GroupName) {
-            my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-            my $Success  = $DBObject->Do(
+            my $Success = $DBObject->Do(
                 SQL => "DELETE FROM group_user WHERE group_id = $GroupID",
             );
             if ($Success) {
@@ -354,7 +354,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Group' );
+        $CacheObject->CleanUp( Type => 'Group' );
     }
 );
 

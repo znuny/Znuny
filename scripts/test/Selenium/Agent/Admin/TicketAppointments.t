@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -17,11 +17,24 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
+        my $QueueObject             = $Kernel::OM->Get('Kernel::System::Queue');
+        my $ArticleObject           = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $MainObject              = $Kernel::OM->Get('Kernel::System::Main');
+        my $GroupObject             = $Kernel::OM->Get('Kernel::System::Group');
+        my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+        my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $CalendarObject          = $Kernel::OM->Get('Kernel::System::Calendar');
+        my $AppointmentObject       = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
+        my $CacheObject             = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject                = $Kernel::OM->Get('Kernel::System::DB');
 
         my $Home           = $ConfigObject->Get('Home');
-        my $Daemon         = $Home . '/bin/otrs.Daemon.pl';
+        my $Daemon         = $Home . '/bin/znuny.Daemon.pl';
         my $DaemonExitCode = 1;
 
         my $RevertDeamonStatus = sub {
@@ -55,10 +68,10 @@ $Selenium->RunTest(
 
             @TaskList = $SchedulerDBObject->TaskList();
             if (@TaskList) {
-                my $Tasks = $Kernel::OM->Get('Kernel::System::Main')->Dump(
+                my $Tasks = $MainObject->Dump(
                     \@TaskList,
                 );
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                $LogObject->Log(
                     Priority => 'error',
                     Message  => "Tasks running: $Tasks!"
                 );
@@ -69,11 +82,7 @@ $Selenium->RunTest(
             }
         };
 
-        my $GroupObject             = $Kernel::OM->Get('Kernel::System::Group');
-        my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
-        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
-        my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleBackendObject    = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
 
@@ -92,7 +101,7 @@ $Selenium->RunTest(
         );
 
         # Create test queue with escalation rules.
-        my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID = $QueueObject->QueueAdd(
             Name                => "Queue$RandomID",
             ValidID             => 1,
             GroupID             => $GroupID,
@@ -380,7 +389,7 @@ $Selenium->RunTest(
         $Selenium->find_element( 'form#CalendarFrom button#Submit', 'css' )->VerifiedClick();
 
         # Get calendar ID.
-        my %Calendar = $Kernel::OM->Get('Kernel::System::Calendar')->CalendarGet(
+        my %Calendar = $CalendarObject->CalendarGet(
             CalendarName => $CalendarName,
         );
         $Self->True(
@@ -392,9 +401,6 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet(
             "${ScriptAlias}index.pl?Action=AdminAppointmentCalendarManage;Subaction=Edit;CalendarID=$Calendar{CalendarID}"
         );
-
-        my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
-        my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
 
         #
         # Tests for ticket appointments
@@ -613,7 +619,10 @@ $Selenium->RunTest(
                 );
                 $Selenium->WaitFor( JavaScript => "return \$('#EditFormSubmit').length;" );
 
-                $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+                my $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+                $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+                $EditFormSubmit->click();
+
                 $Selenium->WaitFor( JavaScript => "return !\$('.Dialog.Modal').length;" );
 
                 $Self->True(
@@ -707,7 +716,7 @@ $Selenium->RunTest(
             );
 
             # Get fresh list of existing appointments in the calendar.
-            @Appointments = $Kernel::OM->Get('Kernel::System::Calendar::Appointment')->AppointmentList(
+            @Appointments = $AppointmentObject->AppointmentList(
                 CalendarID => $Calendar{CalendarID},
             );
             $Self->False(
@@ -722,8 +731,6 @@ $Selenium->RunTest(
         #
         # Cleanup
         #
-
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
         # Delete test calendar.
         $Success = $DBObject->Do(

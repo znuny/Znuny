@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -84,7 +84,7 @@ Runs TransitionAction ArticleSend.
             Body        => 'the message text',                                     # required
             InReplyTo   => '<asdasdasd.12@example.com>',                           # not required but useful
             References  => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # not required but useful
-            Charset     => 'iso-8859-15'
+            Charset     => 'iso-8859-15',
             MimeType    => 'text/plain',
             Loop        => 0, # 1|0 used for bulk emails
             HistoryType    => 'OwnerUpdate',                                       # Move|AddNote|PriorityUpdate|WebRequestCustomer|...
@@ -160,12 +160,11 @@ sub Run {
     # get from address for the mail
     $Param{Config}->{From} = $Self->FromGet(%Param);
 
-    # check for selected Attachments
-    if ( $Param{Config}->{Attachments} eq '1' ) {
+    # attachments
+    if ( $Param{Config}->{AttachmentsReuse} ) {
         $Param{Config}->{Attachment} = $Self->_GetAttachments(%Param);
     }
 
-    # get attachments for the mail
     if ( $Param{Config}->{Attachments} || $Param{Config}->{AttachmentIDs} ) {
         my @AttachmentIDs = split /\s*,\s*/, ( $Param{Config}->{AttachmentIDs} || '' );
 

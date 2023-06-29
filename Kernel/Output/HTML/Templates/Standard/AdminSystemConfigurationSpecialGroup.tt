@@ -1,31 +1,14 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-
-    <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('System Configuration'),
-                Link => 'AdminSystemConfiguration',
-            },
-            {
-                Name => Data.GroupName,
-                Link => Data.GroupLink,
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -33,7 +16,7 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration" class="GoBackButton CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration" class="GoBackButton CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go back") | html %]</span></a>
                     </li>
                 </ul>
             </div>
@@ -43,11 +26,26 @@
     </div>
 
     <div class="ContentColumn">
-    [% IF Data.SettingList.size() %]
-        [% INCLUDE "SystemConfiguration/SettingsList.tt" %]
-    [% ELSE %]
-        <h2 class="SearchResults">[% Data.GroupEmptyMessage | html %]</h2>
-    [% END %]
+        <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('System Configuration'),
+                    Link => 'AdminSystemConfiguration',
+                },
+                {
+                    Name => Data.GroupName,
+                    Link => Data.GroupLink,
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        [% IF Data.SettingList.size() %]
+            [% INCLUDE "SystemConfiguration/SettingsList.tt" %]
+        [% ELSE %]
+            <h2 class="SearchResults">[% Data.GroupEmptyMessage | html %]</h2>
+        [% END %]
     </div>
-    <div class="Clear"></div>
 </div>

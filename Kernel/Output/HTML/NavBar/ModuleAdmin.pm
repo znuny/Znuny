@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -170,6 +170,13 @@ sub Run {
         }
         @{ $Modules{$Block} }
             = sort { $Collator->cmp( $a->{NameTranslated}, $b->{NameTranslated} ) } @{ $Modules{$Block} };
+    }
+
+    # get count of each group
+    for my $ModuleGroup (@ModuleGroups) {
+        my $Count = scalar @{ $Modules{ $ModuleGroup->{Key} } || [] };
+        $ModuleGroup->{Count}        = $Count || 0;
+        $ModuleGroup->{WidgetStatus} = 'Expanded';
     }
 
     $LayoutObject->Block(

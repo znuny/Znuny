@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -44,14 +44,14 @@ sub Run {
     my $OAuth2TokenConfigObject = $Kernel::OM->Get('Kernel::System::OAuth2TokenConfig');
 
     my $UserID = $LayoutObject->{UserID};
-    return if !$UserID;
+    return '' if !$UserID;
 
     my $UserHasPermission = $GroupObject->PermissionCheck(
         UserID    => $UserID,
         GroupName => 'admin',
         Type      => 'rw',
     );
-    return if !$UserHasPermission;
+    return '' if !$UserHasPermission;
 
     my @ValidIDs = $ValidObject->ValidIDsGet();
     return '' if !@ValidIDs;

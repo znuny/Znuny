@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,8 +8,8 @@
 # --
 
 package Kernel::System::Main;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Dumper)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
 
 use strict;
 use warnings;
@@ -559,7 +559,7 @@ to delete a file from file system
         Directory       => 'c:\some\location',
         Filename        => 'me_to/alal.xml',
         # or Location
-        Location        => 'c:\some\location\me_to\alal.xml'
+        Location        => 'c:\some\location\me_to\alal.xml',
 
         Type            => 'Local',   # optional - Local|Attachment|MD5
         DisableWarnings => 1, # optional

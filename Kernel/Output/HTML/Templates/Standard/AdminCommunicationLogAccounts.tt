@@ -1,38 +1,21 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Communication Log") | html %] - [% Translate("Account Status") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Communication Log'),
-                Link => Env("Action"),
-            },
-            {
-                Name => Translate('Account Status'),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
 
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
             </div>
             <div class="Content">
-                <a id="OverviewButton" class="CallForAction Fullsize Center Back">
+                <a id="OverviewButton" class="CallForAction btn-main btn-primary-ghost Back">
                     <span>
                         <i class="fa fa-caret-left"></i>
                         [% Translate("Back to overview") | html %]
@@ -40,7 +23,6 @@
                 </a>
             </div>
         </div>
-
 [% RenderBlockStart("TimeRange") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -91,12 +73,25 @@
                 </div>
             </div>
         </div>
-
     </div>
+
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Communication Log") | html %] - [% Translate("Account Status") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Communication Log'),
+                    Link => Env("Action"),
+                },
+                {
+                    Name => Translate('Account Status'),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 
         <div id="AccountsWidget" class="WidgetSimple">
-
             <div class="Header">
                 <div class="WidgetAction Toggle">
                     <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
@@ -104,11 +99,9 @@
                 <h2>
                     [% Translate("Account status for: %s", Data.TimeRange) | html %]
                 </h2>
-
             </div>
 
             <div class="Content">
-
                 <table class="DataTable" id="AccountsTable">
                     <thead>
                         <tr>
@@ -134,7 +127,7 @@
                             [% ELSIF Data.AccountStatus == 'Warning' %]
                                 <i class="fa fa-exclamation Warning" aria-hidden="true" title="[% Data.AccountStatus %]"></i>
                             [% ELSE %]
-                                <a href="[% Env("Baselink") %]Action=AdminCommunicationLog;[% Data.AccountErrorLink %]" target="_blank">
+                                <a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=AdminCommunicationLog;[% Data.AccountErrorLink %]" target="_blank">
                                     <i class="fa fa-times Error" aria-hidden="true"></i>
                                 </a>
                             [% END %]
@@ -152,7 +145,7 @@
                             </td>
                             <td class="Edit Center">
                             [% IF Data.AccountLink %]
-                                <a href="[% Env("Baselink") %][% Data.AccountLink %]" target="_blank">
+                                <a class="table-icon-hover-md" href="[% Env("Baselink") %][% Data.AccountLink %]" target="_blank">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </a>
                             [% END %]
@@ -182,8 +175,12 @@
 
                     <span class="Pagination">
 [% RenderBlockStart("OverviewNavBarPageNavBar") %]
-                        [% Data.ResultLong %]
-                        [% Data.SiteNavBarLong %]
+                        <ul>
+                            <li>
+                                <span>[% Data.ResultLong %]</span>
+                            </li>
+                            <li class="page-links">[% Data.SiteNavBarLong %]</li>
+                        </ul>
 [% RenderBlockEnd("OverviewNavBarPageNavBar") %]
                     </span>
 
@@ -208,7 +205,7 @@
 [% RenderBlockStart("CommunicationLogRow") %]
                             <tr class="MasterAction [% IF Data.Status == 'Failed' %]Error[% END %]">
                                 <td class="Status Center" title="[% Translate(Data.Status) | html %]">
-                                    <a href="[% Env("Baselink") %]Action=AdminCommunicationLog;Subaction=Zoom;CommunicationID=[% Data.CommunicationID | uri %]" title="[% Data.Name | html %]" class="MasterActionLink">
+                                    <a href="[% Env("Baselink") %]Action=AdminCommunicationLog;Subaction=Zoom;CommunicationID=[% Data.CommunicationID | uri %]" title="[% Data.Name | html %]" class="MasterActionLink table-icon-hover-md">
                                     [% IF Data.Status == 'Successful' %]
                                         <i class="fa fa-check Confirmation" aria-hidden="true"></i>
                                     [% ELSIF Data.Status == 'Failed' %]
@@ -250,6 +247,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

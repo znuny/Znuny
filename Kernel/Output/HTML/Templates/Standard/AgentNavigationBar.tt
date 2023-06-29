@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -10,33 +10,38 @@
 <div id="NavigationContainer">
     <ul id="Navigation" class="Draggable ARIARoleNavigation" style="visibility: hidden;">
 [% RenderBlockStart("ItemArea") %]
-        <li id="nav-[% Data.NameForID | html %]" class="[% Data.CSS | html %]">
-            <a href="[% Env("Baselink") %][% Data.Link %]" title="[% Translate(Data.Name) | html %][% Data.AccessKeyReference | html %]" accesskey="[% Data.AccessKey | html %]" [% Data.LinkOption %]>[% Translate(Data.Name) | html %]</a>
+            <li id="nav-[% Data.NameForID | html %]" class="[% Data.CSS | html %]">
+                <a href="[% Env("Baselink") %][% Data.Link %]" title="[% Translate(Data.Name) | html %][% Data.AccessKeyReference | html %]" accesskey="[% Data.AccessKey | html %]" [% Data.LinkOption %]>
+                    <span>[% Translate(Data.Name) | html %]</span>
+                    <i class="fa fa-caret-down"></i>
+                </a>
 [% RenderBlockStart("ItemAreaSub") %]
-            <ul id="nav-[% Data.NameForID | html %]-container">
+                    <ul id="nav-[% Data.NameForID | html %]-container">
 [% RenderBlockStart("ItemAreaSubItem") %]
-                <li id="nav-[% Data.NameTop | html %]-[% Data.NameForID | html %]">
-                    <a href="[% Env("Baselink") %][% Data.Link %]" title="[% Translate(Data.Description) | html %][% Data.AccessKeyReference | html %]" accesskey="[% Data.AccessKey | html %]" [% Data.LinkOption %]>[% Translate(Data.Name) | html %]</a>
-                </li>
+                        <li id="nav-[% Data.NameTop | html %]-[% Data.NameForID | html %]">
+                            <a href="[% Env("Baselink") %][% Data.Link %]" title="[% Translate(Data.Description) | html %][% Data.AccessKeyReference | html %]" accesskey="[% Data.AccessKey | html %]" [% Data.LinkOption %]>[% Translate(Data.Name) | html %]</a>
+                        </li>
 [% RenderBlockEnd("ItemAreaSubItem") %]
-            </ul>
+                    </ul>
 [% RenderBlockEnd("ItemAreaSub") %]
-        </li>
+            </li>
 [% RenderBlockEnd("ItemArea") %]
 [% RenderBlockStart("SearchIcon") %]
-        <li id="nav-search">
-            <a class="Search ScreenXL ARIARoleSearch ARIAHasPopup" id="GlobalSearchNav" href="[% Env("Baselink") %]Action=AgentTicketSearch" title="[% Translate("Search") | html %]">
-                <i class="fa fa-search"></i>
-            </a>
-            <a class="Search SmallerOrEqualScreenL ARIARoleSearch ARIAHasPopup" id="GlobalSearchNavResponsive" href="[% Env("Baselink") %]Action=AgentTicketSearch" title="[% Translate("Search") | html %]">
-                [% Translate("Search") | html %]
-            </a>
-        </li>
+            <li id="nav-search">
+                <a class="Search ScreenXL ARIARoleSearch ARIAHasPopup" id="GlobalSearchNav" href="[% Env("Baselink") %]Action=AgentTicketSearch" title="[% Translate("Search") | html %]">
+                    <i class="fa fa-search"></i>
+                </a>
+                <a class="Search SmallerOrEqualScreenL ARIARoleSearch ARIAHasPopup" id="GlobalSearchNavResponsive" href="[% Env("Baselink") %]Action=AgentTicketSearch" title="[% Translate("Search") | html %]">
+                    [% Translate("Search") | html %]
+                </a>
+            </li>
 [% RenderBlockEnd("SearchIcon") %]
     </ul>
 </div>
 [% RenderBlockStart("LastViewsMenuBar") %]
-<div class="LastViewMenuBar">
-    [% Data.MenuBarLastViewsHTML %]
-</div>
+    <div class="LastViewMenuBar">
+        <div class="LastViewMenuBarWrapper">
+            [% Data.MenuBarLastViewsHTML %]
+        </div>
+    </div>
 [% RenderBlockEnd("LastViewsMenuBar") %]

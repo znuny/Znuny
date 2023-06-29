@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -20,7 +20,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @subsection transports
  */
 
-.WidgetSimple fieldset.Separated {
+/*.WidgetSimple fieldset.Separated {
     background-color: #E9E9E9;
     border: 1px solid #CCCCCC;
     margin: 9px 0px;
@@ -33,11 +33,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .TransportsContent {
     padding: 10px 10% 20px 10% !important;
-}
+}*/
 
 
 .Field.Info a {
     color: #fff;
+    color: red;
 }
 
 .Field a.Button:after {
@@ -66,3 +67,4 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 /* end @media */
+}

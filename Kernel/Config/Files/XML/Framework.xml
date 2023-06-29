@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_config version="2.0" init="Framework">
     <Setting Name="SecureMode" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.</Description>
+        <Description Translatable="1">Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -54,7 +54,7 @@
         </Value>
     </Setting>
     <Setting Name="SystemID" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of OTRS).</Description>
+        <Description Translatable="1">Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of Znuny).</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^\d+$">10</Item>
@@ -67,15 +67,22 @@
             <Item ValueType="String" ValueRegex="">yourhost.example.com</Item>
         </Value>
     </Setting>
+    <Setting Name="ExternalFQDN" Required="0" Valid="0" ConfigLevel="200">
+        <Description Translatable="1">Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">yourexternaldomain.example.com</Item>
+        </Value>
+    </Setting>
     <Setting Name="SupportDataCollector::HTTPHostname" Required="0" Valid="0" ConfigLevel="200">
-        <Description Translatable="1">Defines the HTTP hostname for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the OTRS Daemon).</Description>
+        <Description Translatable="1">Defines the HTTP hostname for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the Znuny Daemon).</Description>
         <Navigation>Core::SupportDataCollector</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex=""></Item>
         </Value>
     </Setting>
     <Setting Name="SupportDataCollector::WebUserAgent::Timeout" Required="0" Valid="0" ConfigLevel="200">
-        <Description Translatable="1">Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the OTRS Daemon).</Description>
+        <Description Translatable="1">Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the Znuny Daemon).</Description>
         <Navigation>Core::SupportDataCollector</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^[2-9][0-9]{1,}|[1-9][0-9]{2,}$">20</Item>
@@ -102,7 +109,7 @@
         <Description Translatable="1">Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">otrs/</Item>
+            <Item ValueType="String" ValueRegex="">znuny/</Item>
         </Value>
     </Setting>
     <Setting Name="AdminEmail" Required="1" Valid="1">
@@ -243,7 +250,7 @@
         </Value>
     </Setting>
     <Setting Name="DefaultTheme" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/.</Description>
+        <Description Translatable="1">Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">Standard</Item>
@@ -305,58 +312,6 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="AgentLogoCustom###slim" Required="0" Valid="1">
-        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.</Description>
-        <Navigation>Frontend::Agent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
-                <Item Key="StyleTop">10px</Item>
-                <Item Key="StyleRight">50px</Item>
-                <Item Key="StyleHeight">45px</Item>
-                <Item Key="StyleWidth">220px</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="AgentLogoCustom###ivory" Required="0" Valid="1">
-        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.</Description>
-        <Navigation>Frontend::Agent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
-                <Item Key="StyleTop">24px</Item>
-                <Item Key="StyleRight">4px</Item>
-                <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">265px</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="AgentLogoCustom###ivory-slim" Required="0" Valid="1">
-        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.</Description>
-        <Navigation>Frontend::Agent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
-                <Item Key="StyleTop">10px</Item>
-                <Item Key="StyleRight">50px</Item>
-                <Item Key="StyleHeight">45px</Item>
-                <Item Key="StyleWidth">220px</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="AgentLogoCustom###highcontrast" Required="0" Valid="1">
-        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.</Description>
-        <Navigation>Frontend::Agent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
-                <Item Key="StyleTop">24px</Item>
-                <Item Key="StyleRight">4px</Item>
-                <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">265px</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="AgentLoginLogo" Required="0" Valid="1">
         <Description Translatable="1">The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</Description>
         <Navigation>Frontend::Agent</Navigation>
@@ -371,7 +326,7 @@
         <Description Translatable="1">Defines the URL base path of icons, CSS and Java Script.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">/otrs-web/</Item>
+            <Item ValueType="String" ValueRegex="">/znuny-web/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::ImagePath" Required="1" Valid="1" ConfigLevel="200">
@@ -458,6 +413,13 @@
             <Item ValueType="String">Arial/Arial, Helvetica, sans-serif;Calibri/Calibri, sans-serif;Comic Sans MS/Comic Sans MS, cursive;Courier New/Courier New, Courier, monospace;Georgia/Georgia, serif;Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;Tahoma/Tahoma, Geneva, sans-serif;Times New Roman/Times New Roman, Times, serif;Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;Verdana/Verdana, Geneva, sans-serif</Item>
         </Value>
     </Setting>
+    <Setting Name="Frontend::RichText::Settings###FormatTags" Required="1" Valid="1">
+        <Description Translatable="1">Defines the selectable format tags in the rich text editor.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String">p;h1;h2;h3;h4;h5;h6;pre</Item>
+        </Value>
+    </Setting>
     <Setting Name="Frontend::RichText::Settings###ExtraPlugins" Required="0" Valid="1">
         <Description Translatable="1">Defines additional plugins for use in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
@@ -480,7 +442,7 @@
         </Value>
     </Setting>
     <Setting Name="DisableIFrameOriginRestricted" Required="0" Valid="1">
-        <Description Translatable="1">Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!</Description>
+        <Description Translatable="1">Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -666,11 +628,11 @@
         <Description Translatable="1">If "file" was selected for LogModule, a logfile must be specified. If the file doesn't exist, it will be created by the system.</Description>
         <Navigation>Core::Log</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">/tmp/otrs.log</Item>
+            <Item ValueType="String" ValueRegex="">/tmp/znuny.log</Item>
         </Value>
     </Setting>
     <Setting Name="LogModule::LogFile::Date" Required="1" Valid="1">
-        <Description Translatable="1">Adds a suffix with the actual year and month to the OTRS log file. A logfile for every month will be created.</Description>
+        <Description Translatable="1">Adds a suffix with the actual year and month to the Znuny log file. A logfile for every month will be created.</Description>
         <Navigation>Core::Log</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -870,40 +832,12 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::NotifyModule###1100-OTRSBusiness" Required="0" Valid="0">
-        <Description Translatable="1">Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.</Description>
-        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Notification::AgentOTRSBusiness</Item>
-                <Item Key="Group">admin</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="CustomerFrontend::NotifyModule###1-OTRSBusiness" Required="0" Valid="0">
-        <Description Translatable="1">Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.</Description>
-        <Navigation>Frontend::Customer::FrontendNotification</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Notification::CustomerOTRSBusiness</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="Frontend::NotifyModule###2000-UID-Check" Required="1" Valid="1">
         <Description Translatable="1">Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn't work as admin).</Description>
         <Navigation>Frontend::Agent::FrontendNotification</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Notification::UIDCheck</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::NotifyModule###2500-AgentSessionLimit" Required="1" Valid="1">
-        <Description Translatable="1">Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.</Description>
-        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Notification::AgentSessionLimit</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1005,7 +939,7 @@
         </Value>
     </Setting>
     <Setting Name="SessionName" Required="1" Valid="1">
-        <Description Translatable="1">Defines the name of the session key. E.g. Session, SessionID or OTRS.</Description>
+        <Description Translatable="1">Defines the name of the session key. E.g. Session, SessionID or Znuny.</Description>
         <Navigation>Core::Session</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">OTRSAgentInterface</Item>
@@ -1072,13 +1006,6 @@
         <Navigation>Core::Session</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>
-        </Value>
-    </Setting>
-    <Setting Name="AgentSessionLimitPriorWarning" Required="0" Valid="0">
-        <Description Translatable="1">Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime before a prior warning will be visible for the logged in agents.</Description>
-        <Navigation>Core::Session</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="^[0-9]{1,8}$">90</Item>
         </Value>
     </Setting>
     <Setting Name="AgentSessionLimit" Required="0" Valid="1">
@@ -1171,14 +1098,14 @@
         </Value>
     </Setting>
     <Setting Name="OTRSTimeZone" Required="1" Valid="1">
-        <Description Translatable="1">Sets the time zone being used internally by OTRS to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.</Description>
+        <Description Translatable="1">Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.</Description>
         <Navigation>Core::Time</Navigation>
         <Value>
             <Item ValueType="TimeZone">UTC</Item>
         </Value>
     </Setting>
     <Setting Name="UserDefaultTimeZone" Required="1" Valid="1">
-        <Description Translatable="1">Sets the time zone that will be assigned to newly created users and will be used for users that haven't yet set a time zone. This is the time zone being used as default to convert date and time between the OTRS time zone and the user's time zone.</Description>
+        <Description Translatable="1">Sets the time zone that will be assigned to newly created users and will be used for users that haven't yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user's time zone.</Description>
         <Navigation>Core::Time</Navigation>
         <Value>
             <Item ValueType="TimeZone">UTC</Item>
@@ -2575,7 +2502,7 @@
         </Value>
     </Setting>
     <Setting Name="WebMaxFileUpload" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your OTRS instance to stop working (probably any mask which takes input from the user).</Description>
+        <Description Translatable="1">Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your Znuny instance to stop working (probably any mask which takes input from the user).</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^[0-9]{1,11}$">24000000</Item>
@@ -2592,7 +2519,7 @@
         <Description Translatable="1">Specifies the text that should appear in the log file to denote a CGI script entry.</Description>
         <Navigation>Core::Log</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRS-CGI</Item>
+            <Item ValueType="String" ValueRegex="">Znuny-CGI</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::Output::FilterText###AAAURL" Required="0" Valid="1">
@@ -2938,7 +2865,7 @@
         </Value>
     </Setting>
     <Setting Name="PGP" Required="1" Valid="1">
-        <Description Translatable="1">Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the OTRS user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.</Description>
+        <Description Translatable="1">Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the Znuny user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.</Description>
         <Navigation>Core::Crypt::PGP</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -2955,7 +2882,7 @@
         <Description Translatable="1">Sets the options for PGP binary.</Description>
         <Navigation>Core::Crypt::PGP</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">--homedir /opt/otrs/.gnupg/ --batch --no-tty --yes</Item>
+            <Item ValueType="String" ValueRegex="">--homedir /opt/znuny/.gnupg/ --batch --no-tty --yes</Item>
         </Value>
     </Setting>
     <Setting Name="PGP::Options::DigestPreference" Required="0" Valid="1">
@@ -3062,14 +2989,14 @@
         </Value>
     </Setting>
     <Setting Name="NotificationSenderName" Required="1" Valid="1">
-        <Description Translatable="1">Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com).</Description>
+        <Description Translatable="1">Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">OTRS Notifications</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationSenderEmail" Required="1" Valid="1">
-        <Description Translatable="1">Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.</Description>
+        <Description Translatable="1">Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">otrs@&lt;OTRS_CONFIG_FQDN&gt;</Item>
@@ -3861,7 +3788,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Customer::AuthModule::LDAP::GroupDN" Required="0" Valid="0" ConfigLevel="200">
-        <Description Translatable="1">If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use OTRS. Specify the group, who may access the system.</Description>
+        <Description Translatable="1">If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use Znuny. Specify the group, who may access the system.</Description>
         <Navigation>Core::Auth::Customer</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">cn=otrsallow,ou=posixGroups,dc=example,dc=com</Item>
@@ -4870,7 +4797,6 @@ via the Preferences button after logging in.
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.Admin.js</Item>
                         <Item>Core.UI.AllocationList.js</Item>
                         <Item>Core.Agent.TableFilters.js</Item>
                     </Array>
@@ -4962,12 +4888,6 @@ via the Preferences button after logging in.
                     <Hash>
                         <Item Key="Title" Translatable="1">Processes &amp; Automation</Item>
                         <Item Key="Order">4000</Item>
-                    </Hash>
-                </Item>
-                <Item Key="OTRSGroup">
-                    <Hash>
-                        <Item Key="Title" Translatable="1">OTRS Group Services</Item>
-                        <Item Key="Order">5000</Item>
                     </Hash>
                 </Item>
                 <Item Key="Administration">
@@ -6408,111 +6328,6 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Module###AdminOTRSBusiness" Required="0" Valid="0">
-        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
-        <Value>
-            <Item ValueType="FrontendRegistration">
-                <Hash>
-                    <Item Key="GroupRo">
-                        <Array>
-                        </Array>
-                    </Item>
-                    <Item Key="Group">
-                        <Array>
-                            <Item>admin</Item>
-                        </Array>
-                    </Item>
-                    <Item Key="Description">Admin</Item>
-                    <Item Key="Title">OTRS Business Solution™</Item>
-                    <Item Key="NavBarName">Admin</Item>
-                </Hash>
-            </Item>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Module::AdminOTRSBusiness###001-Framework" Required="0" Valid="1">
-        <Description Translatable="1">Loader module registration for the agent interface.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="CSS">
-                    <Array>
-                        <Item>Core.Agent.Admin.OTRSBusiness.css</Item>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::Navigation###AdminOTRSBusiness###001-Framework" Required="0" Valid="0">
-        <Description Translatable="1">Main menu item registration.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
-        <Value>
-            <Array>
-                <DefaultItem ValueType="FrontendNavigation">
-                    <Hash>
-                    </Hash>
-                </DefaultItem>
-            </Array>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::NavigationModule###AdminOTRSBusiness" Required="0" Valid="1">
-        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Group">
-                    <Array>
-                        <Item>admin</Item>
-                    </Array>
-                </Item>
-                <Item Key="GroupRo">
-                    <Array>
-                    </Array>
-                </Item>
-                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
-                <Item Key="Name">OTRS Business Solution™</Item>
-                <Item Key="Block">OTRSGroup</Item>
-                <Item Key="Description" Translatable="1">Deploy and manage OTRS Business Solution™.</Item>
-                <Item Key="IconBig">fa-angle-double-up</Item>
-                <Item Key="IconSmall"></Item>
-                <Item Key="CssClass">OTRSBusiness</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::Module###AgentOTRSBusiness" Required="0" Valid="1">
-        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
-        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
-        <Value>
-            <Item ValueType="FrontendRegistration">
-                <Hash>
-                    <Item Key="Group">
-                        <Array>
-                        </Array>
-                    </Item>
-                    <Item Key="GroupRo">
-                        <Array>
-                        </Array>
-                    </Item>
-                    <Item Key="Description">Agent</Item>
-                    <Item Key="Title">OTRS Business Solution™</Item>
-                    <Item Key="NavBarName"></Item>
-                </Hash>
-            </Item>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Module::AgentOTRSBusiness###001-Framework" Required="0" Valid="1">
-        <Description Translatable="1">Loader module registration for the agent interface.</Description>
-        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="CSS">
-                    <Array>
-                        <Item>Core.Agent.Admin.OTRSBusiness.css</Item>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="Frontend::Module###AdminSupportDataCollector" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
@@ -6584,76 +6399,6 @@ via the Preferences button after logging in.
                 <Item Key="Block">Administration</Item>
                 <Item Key="Description" Translatable="1">Manage support data.</Item>
                 <Item Key="IconBig">fa-search</Item>
-                <Item Key="IconSmall"></Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::Module###AdminCloudServices" Required="0" Valid="1">
-        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
-        <Value>
-            <Item ValueType="FrontendRegistration">
-                <Hash>
-                    <Item Key="GroupRo">
-                        <Array>
-                        </Array>
-                    </Item>
-                    <Item Key="Group">
-                        <Array>
-                            <Item>admin</Item>
-                        </Array>
-                    </Item>
-                    <Item Key="Description">Admin</Item>
-                    <Item Key="Title" Translatable="1">Cloud Services</Item>
-                    <Item Key="NavBarName">Admin</Item>
-                </Hash>
-            </Item>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Module::AdminCloudServices###001-Framework" Required="0" Valid="1">
-        <Description Translatable="1">Loader module registration for the agent interface.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="CSS">
-                    <Array>
-                        <Item>Core.Agent.Admin.CloudServices.css</Item>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::Navigation###AdminCloudServices###001-Framework" Required="0" Valid="0">
-        <Description Translatable="1">Main menu item registration.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
-        <Value>
-            <Array>
-                <DefaultItem ValueType="FrontendNavigation">
-                    <Hash>
-                    </Hash>
-                </DefaultItem>
-            </Array>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::NavigationModule###AdminCloudServices" Required="0" Valid="0">
-        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Group">
-                    <Array>
-                        <Item>admin</Item>
-                    </Array>
-                </Item>
-                <Item Key="GroupRo">
-                    <Array>
-                    </Array>
-                </Item>
-                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
-                <Item Key="Name" Translatable="1">Cloud Services</Item>
-                <Item Key="Block">OTRSGroup</Item>
-                <Item Key="Description" Translatable="1">Manage OTRS Group cloud services.</Item>
-                <Item Key="IconBig">fa-cloud</Item>
                 <Item Key="IconSmall"></Item>
             </Hash>
         </Value>
@@ -7155,7 +6900,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="PublicFrontend::FooterLinks" Required="0" Valid="0">
-        <Description Translatable="1">Defines the shown links in the footer area of the customer and public interface of this OTRS system. The value in "Key" is the external URL, the value in "Content" is the shown label.</Description>
+        <Description Translatable="1">Defines the shown links in the footer area of the customer and public interface of this Znuny system. The value in "Key" is the external URL, the value in "Content" is the shown label.</Description>
         <Navigation>Frontend::Public</Navigation>
         <Value>
             <Hash>
@@ -7318,31 +7063,6 @@ via the Preferences button after logging in.
                         <Item Key="Prio">8500</Item>
                     </Hash>
                 </Item>
-<!--
-                <Item>
-                    <Hash>
-                        <Item Key="Group">
-                            <Array>
-                                <Item>stats</Item>
-                            </Array>
-                        </Item>
-                        <Item Key="GroupRo">
-                            <Array>
-                                <Item>stats</Item>
-                            </Array>
-                        </Item>
-                        <Item Key="Description" Translatable="1">Statistic Reports overview.</Item>
-                        <Item Key="Name" Translatable="1">Reports (OTRS Business Solution™)</Item>
-                        <Item Key="Link">Action=AgentStatisticsReports;Subaction=Overview</Item>
-                        <Item Key="LinkOption">class="OTRSBusinessRequired"</Item>
-                        <Item Key="NavBar">Reports</Item>
-                        <Item Key="Type"></Item>
-                        <Item Key="Block"></Item>
-                        <Item Key="AccessKey"></Item>
-                        <Item Key="Prio">100</Item>
-                    </Hash>
-                </Item>
--->
                 <Item>
                     <Hash>
                         <Item Key="Group">
@@ -7484,7 +7204,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Core::MirrorDB::DSN" Required="0" Valid="0" ConfigLevel="200">
-        <Description Translatable="1">OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.</Description>
+        <Description Translatable="1">Znuny can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.</Description>
         <Navigation>Core::DB::Mirror</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">DBI:mysql:database=mirrordb;host=mirrordbhost</Item>
@@ -7559,22 +7279,6 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="DashboardBackend###0000-ProductNotify" Required="0" Valid="0">
-        <Description Translatable="1">Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
-        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Dashboard::ProductNotify</Item>
-                <Item Key="Title" Translatable="1">Product News</Item>
-                <Item Key="Description" Translatable="1">News about OTRS releases!</Item>
-                <Item Key="Block">ContentLarge</Item>
-                <Item Key="Group">admin</Item>
-                <Item Key="Default">1</Item>
-                <Item Key="CacheTTLLocal">1440</Item>
-                <Item Key="Mandatory">0</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="DashboardBackend###0390-UserOutOfOffice" Required="0" Valid="1">
         <Description Translatable="1">Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
         <Navigation>Frontend::Agent::View::Dashboard</Navigation>
@@ -7609,29 +7313,6 @@ via the Preferences button after logging in.
                 <Item Key="Group"></Item>
                 <Item Key="Default">0</Item>
                 <Item Key="CacheTTLLocal">5</Item>
-                <Item Key="Mandatory">0</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="DashboardBackend###0410-RSS" Required="0" Valid="0">
-        <Description Translatable="1">Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
-        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Dashboard::RSS</Item>
-                <Item Key="Title" Translatable="1">Custom RSS Feed</Item>
-                <Item Key="Description" Translatable="1">Custom RSS feed.</Item>
-                <Item Key="URL">https://www.otrs.com/en/rss.xml</Item>
-                <Item Key="URL_de">https://www.otrs.com/de/rss.xml</Item>
-                <Item Key="URL_es">https://www.otrs.com/es/rss.xml</Item>
-                <Item Key="URL_nl">https://www.otrs.com/nl/rss.xml</Item>
-                <Item Key="URL_ru">https://www.otrs.com/ru/rss.xml</Item>
-                <Item Key="URL_zh">https://www.otrs.com/cn/rss.xml</Item>
-                <Item Key="Block">ContentSmall</Item>
-                <Item Key="Limit">6</Item>
-                <Item Key="Group"></Item>
-                <Item Key="Default">1</Item>
-                <Item Key="CacheTTL">360</Item>
                 <Item Key="Mandatory">0</Item>
             </Hash>
         </Value>
@@ -7736,7 +7417,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Frontend::Output::OutputFilterTextAutoLink###CVE" Required="0" Valid="0">
-        <Description Translatable="1">Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.</Description>
+        <Description Translatable="1">Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.</Description>
         <Navigation>Frontend::Base::OutputFilter</Navigation>
         <Value>
             <Hash>
@@ -7778,7 +7459,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Frontend::Output::OutputFilterTextAutoLink###Bugtraq" Required="0" Valid="0">
-        <Description Translatable="1">Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.</Description>
+        <Description Translatable="1">Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.</Description>
         <Navigation>Frontend::Base::OutputFilter</Navigation>
         <!-- Example strings: BugTraq ID: 23862 | BugTraq ID: 8945 | Bugtraq ID 140 | BUGTRAQ:20070425 | BID 20799 -->
         <!-- Example URL: https://www.securityfocus.com/bid/23862/info  -->
@@ -7819,7 +7500,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Frontend::Output::OutputFilterTextAutoLink###MSBulletins" Required="0" Valid="0">
-        <Description Translatable="1">Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.</Description>
+        <Description Translatable="1">Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.</Description>
         <Navigation>Frontend::Base::OutputFilter</Navigation>
         <!-- Example strings: MS07-021 | MS04-028 | MS-07-002 -->
         <!-- Example URL: https://www.microsoft.com/technet/security/bulletin/MS07-021.mspx  -->
@@ -7855,7 +7536,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Frontend::Output::OutputFilterTextAutoLink###Setting1" Required="0" Valid="0">
-        <Description Translatable="1">Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.</Description>
+        <Description Translatable="1">Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.</Description>
         <Navigation>Frontend::Base::OutputFilter</Navigation>
         <Value>
             <Hash>
@@ -7889,7 +7570,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Frontend::Output::OutputFilterTextAutoLink###Setting2" Required="0" Valid="0">
-        <Description Translatable="1">Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.</Description>
+        <Description Translatable="1">Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.</Description>
         <Navigation>Frontend::Base::OutputFilter</Navigation>
         <Value>
             <Hash>
@@ -7931,21 +7612,21 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Secure::DisableBanner" Required="1" Valid="1">
-        <Description Translatable="1">If enabled, the OTRS version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.</Description>
+        <Description Translatable="1">If enabled, the Znuny version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
     <Setting Name="Loader::Enabled::CSS" Required="1" Valid="1">
-        <Description Translatable="1">If enabled, OTRS will deliver all CSS files in minified form.</Description>
+        <Description Translatable="1">If enabled, Znuny will deliver all CSS files in minified form.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Loader::Enabled::JS" Required="1" Valid="1">
-        <Description Translatable="1">If enabled, OTRS will deliver all JavaScript files in minified form.</Description>
+        <Description Translatable="1">If enabled, Znuny will deliver all JavaScript files in minified form.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>
@@ -7957,9 +7638,12 @@ via the Preferences button after logging in.
         <Value>
             <Array>
                 <Item>Core.Color.css</Item>
+                <Item>Core.Vars.css</Item>
                 <Item>Core.Reset.css</Item>
+                <Item>Core.Reset.Forwwward.css</Item>
                 <Item>Core.Default.css</Item>
                 <Item>Core.Header.css</Item>
+                <Item>Core.Overview.css</Item>
                 <Item>Core.OverviewControl.css</Item>
                 <Item>Core.OverviewSmall.css</Item>
                 <Item>Core.OverviewMedium.css</Item>
@@ -7977,6 +7661,9 @@ via the Preferences button after logging in.
                 <Item>Core.InputFields.css</Item>
                 <Item>Core.Print.css</Item>
                 <Item>Core.Animations.css</Item>
+                <Item>Core.Components.css</Item>
+                <Item>Core.FlexboxModel.css</Item>
+                <Item>Core.Typography.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -8010,6 +7697,7 @@ via the Preferences button after logging in.
                 <Item>Core.Data.js</Item>
                 <Item>Core.Config.js</Item>
                 <Item>Core.Language.js</Item>
+                <Item>Core.Activity.js</Item>
                 <Item>Core.Template.js</Item>
                 <Item>Core.JSON.js</Item>
                 <Item>Core.App.js</Item>
@@ -8062,13 +7750,24 @@ via the Preferences button after logging in.
             </Array>
         </Value>
     </Setting>
+    <Setting Name="Loader::Agent::CommonJS###001-Admin" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the admin interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.Agent.Admin.js</Item>
+            </Array>
+        </Value>
+    </Setting>
     <Setting Name="Loader::Customer::CommonCSS###000-Framework" Required="1" Valid="1">
         <Description Translatable="1">List of CSS files to always be loaded for the customer interface.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
                 <Item>Core.Color.css</Item>
+                <Item>Core.Vars.css</Item>
                 <Item>Core.Reset.css</Item>
+                <Item>Core.Reset.Forwwward.css</Item>
                 <Item>Core.Default.css</Item>
                 <Item>Core.Form.css</Item>
                 <Item>Core.Dialog.css</Item>
@@ -8080,6 +7779,9 @@ via the Preferences button after logging in.
                 <Item>Core.InputFields.css</Item>
                 <Item>Core.Print.css</Item>
                 <Item>Core.Animations.css</Item>
+                <Item>Core.FlexboxModel.css</Item>
+                <Item>Core.PageLayout.css</Item>
+                <Item>Core.Components.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -8188,54 +7890,6 @@ via the Preferences button after logging in.
                 <Item Key="VisibleName" Translatable="1">Default</Item>
                 <Item Key="Description" Translatable="1">This is the default orange - black skin.</Item>
                 <Item Key="HomePage">www.otrs.org</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Agent::Skin###001-slim" Required="0" Valid="1">
-        <Description Translatable="1">Default skin for the agent interface (slim version).</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="InternalName">slim</Item>
-                <Item Key="VisibleName" Translatable="1">Default (Slim)</Item>
-                <Item Key="Description" Translatable="1">"Slim" skin which tries to save screen space for power users.</Item>
-                <Item Key="HomePage">www.otrs.org</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Agent::Skin###001-ivory" Required="0" Valid="1">
-        <Description Translatable="1">Balanced white skin by Felix Niklas.</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="InternalName">ivory</Item>
-                <Item Key="VisibleName" Translatable="1">Ivory</Item>
-                <Item Key="Description" Translatable="1">Balanced white skin by Felix Niklas.</Item>
-                <Item Key="HomePage">www.felixniklas.de</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Agent::Skin###001-ivory-slim" Required="0" Valid="1">
-        <Description Translatable="1">Balanced white skin by Felix Niklas (slim version).</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="InternalName">ivory-slim</Item>
-                <Item Key="VisibleName" Translatable="1">Ivory (Slim)</Item>
-                <Item Key="Description" Translatable="1">Balanced white skin by Felix Niklas (slim version).</Item>
-                <Item Key="HomePage">www.felixniklas.de</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Agent::Skin###002-high-contrast" Required="0" Valid="1">
-        <Description Translatable="1">High contrast skin for visually impaired users.</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="InternalName">highcontrast</Item>
-                <Item Key="VisibleName" Translatable="1">High Contrast</Item>
-                <Item Key="Description" Translatable="1">High contrast skin for visually impaired users.</Item>
-                <Item Key="HomePage">www.otrs.com</Item>
             </Hash>
         </Value>
     </Setting>
@@ -8517,16 +8171,6 @@ via the Preferences button after logging in.
             <Item ValueType="String" ValueRegex="" Translatable="1">We are performing scheduled maintenance. Login is temporarily not available.</Item>
         </Value>
     </Setting>
-    <Setting Name="OTRSBusiness::ReleaseChannel" Required="1" Valid="1" ConfigLevel="100">
-        <Description Translatable="1">Specify the channel to be used to fetch OTRS Business Solution™ updates. Warning: Development releases might not be complete, your system might experience unrecoverable errors and on extreme cases could become unresponsive!</Description>
-        <Navigation>Core::Package</Navigation>
-        <Value>
-            <Item ValueType="Select" SelectedID="1">
-                <Item ValueType="Option" Value="0" Translatable="1">Development</Item>
-                <Item ValueType="Option" Value="1" Translatable="1">Stable</Item>
-            </Item>
-        </Value>
-    </Setting>
     <Setting Name="ModernizeFormFields" Required="1" Valid="1">
         <Description Translatable="1">Use new type of select and autocomplete fields in agent interface, where applicable (InputFields).</Description>
         <Navigation>Frontend::Agent</Navigation>
@@ -8571,7 +8215,6 @@ via the Preferences button after logging in.
                     <Item Key="Group">
                         <Array>
                             <Item>admin</Item>
-                            <Item>users</Item>
                         </Array>
                     </Item>
                     <Item Key="Description" Translatable="1">Manage System Configuration Deployments.</Item>
@@ -8654,7 +8297,6 @@ via the Preferences button after logging in.
                         <Item>Core.SystemConfiguration.VacationDays.js</Item>
                         <Item>Core.SystemConfiguration.VacationDaysOneTime.js</Item>
                         <Item>Core.SystemConfiguration.WorkingHours.js</Item>
-                        <Item>Core.Form.js</Item>
                         <Item>Core.Agent.Admin.SystemConfiguration.js</Item>
                     </Array>
                 </Item>
@@ -8737,7 +8379,6 @@ via the Preferences button after logging in.
                         <Item>Core.SystemConfiguration.VacationDays.js</Item>
                         <Item>Core.SystemConfiguration.VacationDaysOneTime.js</Item>
                         <Item>Core.SystemConfiguration.WorkingHours.js</Item>
-                        <Item>Core.Form.js</Item>
                         <Item>Core.Agent.Admin.SystemConfiguration.js</Item>
                     </Array>
                 </Item>

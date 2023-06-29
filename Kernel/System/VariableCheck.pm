@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -38,7 +38,7 @@ Call this module directly without instantiating:
     use Kernel::System::VariableCheck qw(IsHashRefWitData); # export just one function
 
     if (IsHashRefWithData($HashRef)) {
-        ...
+        # ...
     }
 
 The functions can be grouped as follows:
@@ -137,7 +137,7 @@ returns 1 if data matches criteria or undef otherwise
     my $Result = IsArrayRefWithData(
         [ # data to be tested
             'key',
-            ...
+            # ...
         ],
     );
 
@@ -162,7 +162,7 @@ returns 1 if data matches criteria or undef otherwise
     my $Result = IsHashRefWithData(
         { # data to be tested
             'key' => 'value',
-            ...
+            # ...
         },
     );
 

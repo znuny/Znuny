@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -173,7 +173,7 @@ The returned hash %Result has the following keys:
 
     Successful => '1',        # could the given data be decrypted at all (0 or 1)
     Data       => '...',      # the decrypted data
-    KeyID      => 'FA23FB24'  # hex ID of PGP-(secret-)key that was used for decryption
+    KeyID      => 'FA23FB24', # hex ID of PGP-(secret-)key that was used for decryption
     Message    => '...'       # descriptive text containing the result status
 
 =cut
@@ -332,9 +332,9 @@ The returned hash %Result has the following keys:
 
     SignatureFound => 1,                          # was a signature found at all (0 or 1)
     Successful     => 1,                          # could the signature be verified (0 or 1)
-    KeyID          => 'FA23FB24'                  # hex ID of PGP-key that was used for signing
-    KeyUserID      => 'username <user@test.org>'  # PGP-User-ID (e-mail address) used for signing
-    Message        => '...'                       # descriptive text containing the result status
+    KeyID          => 'FA23FB24',                 # hex ID of PGP-key that was used for signing
+    KeyUserID      => 'username <user@test.org>', # PGP-User-ID (e-mail address) used for signing
+    Message        => '...',                      # descriptive text containing the result status
     MessageLong    => '...'                       # full output of GPG binary
 
 =cut

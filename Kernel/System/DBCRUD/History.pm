@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -7,9 +7,7 @@
 # --
 
 # because of direct open() calls
-## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
-
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
 
 package Kernel::System::DBCRUD::History;
 
@@ -30,6 +28,10 @@ our @ObjectDependencies = (
 our %ConfigBackup;
 our @ConfigBackupColumns
     = qw(Columns Name Identifier DatabaseTable DefaultSortBy DefaultOrderBy CacheType CacheTTL PreventHistory FunctionDataAdd FunctionDataUpdate FunctionDataDelete FunctionDataGet FunctionDataListGet FunctionDataSearch FunctionDataSearchValue);
+
+=head1 NAME
+
+Kernel::System::DBCRUD::History
 
 =head2 HistoryBackendSet()
 
@@ -662,9 +664,11 @@ sub _DataHistoryGet {
 
     # trigger event
     $Self->EventHandler(
-        Event  => $Self->{Name} . 'HistoryGet',
-        Data   => \%Entry,
-        UserID => $Param{UserID} || 1,
+        ModuleName        => ref $Self,
+        UseHistoryBackend => 1,
+        Event             => 'DBCRUDHistoryGet',
+        Data              => \%Entry,
+        UserID            => $Param{UserID} || 1,
     );
 
     return %Entry;
