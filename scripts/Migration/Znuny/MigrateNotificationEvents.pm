@@ -108,15 +108,24 @@ sub _MigrateMentionNotification {
         my $NotificationEvent = $NotificationEvents{$NotificationEventID};
         next NOTIFICATIONEVENTID if !$NotificationEventsToUpdateByName{ $NotificationEvent->{Name} };
 
-        $NotificationEvent->{Message}->{en}->{Body} = 'You have been mentioned in ticket <OTRS_TICKET_NUMBER>
+        $NotificationEvent->{Message}->{en}->{Body} = 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>';
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
 
-        $NotificationEvent->{Message}->{de}->{Body} = 'Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>
+-- <OTRS_CONFIG_NotificationSenderName>';
+
+        $NotificationEvent->{Message}->{de}->{Body}
+            = 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+
+Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>';
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+
+-- <OTRS_CONFIG_NotificationSenderName>';
 
         my $NotificationEventUpdated = $NotificationEventObject->NotificationUpdate(
             %{$NotificationEvent},
