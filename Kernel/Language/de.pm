@@ -981,11 +981,11 @@ sub Data {
         'Remove key mapping' => 'Schlüssel-Mapping entfernen',
         'Key mapping' => 'Schlüssel-Mapping',
         'Map key' => 'Schlüssel',
-        'matching' => '',
+        'matching' => 'Zuordnung',
         'to new key' => 'auf neuen Schlüssel mappen',
         'Value mapping' => 'Wert-Mapping',
         'Map value' => 'Wert',
-        'new value' => '',
+        'new value' => 'Neuer Wert',
         'Remove value mapping' => 'Wert-Mapping entfernen',
         'New value map' => 'Neues Wert-Mapping',
         'Add value mapping' => 'Wert-Mapping hinzufügen',
@@ -1657,7 +1657,7 @@ sub Data {
         'Name: %s, EntityID: %s' => 'Name: %s, EntityID: %s',
         'Create New Activity Dialog' => 'Neuen Aktivitäts-Dialog erstellen',
         'Assigned Activity Dialogs' => 'Zugewiesene Aktivitäts-Dialoge',
-        'Filter Assigned Activity Dialogs' => '',
+        'Filter Assigned Activity Dialogs' => 'Zugewiesene Aktivitäts-Dialoge filtern',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
         'Please note that changing this activity dialog will affect the following activities' =>
@@ -1682,7 +1682,7 @@ sub Data {
         'Available Fields' => 'Verfügbare Felder',
         'Filter available fields' => 'Verfügbare Felder filtern',
         'Assigned Fields' => 'Zugewiesene Felder',
-        ' Filter assigned fields' => '',
+        ' Filter assigned fields' => 'Zugewiesene Felder filtern',
         'Communication Channel' => 'Kommunikationskanal',
         'Is visible for customer' => 'Ist sichtbar für Kunde',
         'Text Template' => 'Textvorlage',
@@ -1699,7 +1699,7 @@ sub Data {
         'Filter available Transition Actions' => 'Verfügbare Übergangs-Aktionen filtern',
         'Create New Transition Action' => 'Neue Übergangs-Aktion erstellen',
         'Assigned Transition Actions' => 'Zugewiesene Übergangs-Aktionen',
-        'Filter assigned Transition Actions' => '',
+        'Filter assigned Transition Actions' => 'Zugewiesene Übergangs-Aktionen filtern',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessAccordion.tt
         'Activities' => 'Aktivitäten',
@@ -2359,23 +2359,23 @@ sub Data {
         'in' => 'in',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        ' Show or hide the content' => '',
-        'Search inactive widgets' => '',
-        'Active Widgets' => '',
-        ' Save changes' => '',
-        ' Save' => '',
-        'Save changes' => '',
-        ' Settings' => '',
-        ' Refresh' => '',
-        ' Close this widget' => '',
-        'Hide' => '',
-        ' Cancel' => '',
+        ' Show or hide the content' => ' Inhalt anzeigen oder verstecken',
+        'Search inactive widgets' => 'Inaktive Widgets durchsuchen',
+        'Active Widgets' => 'Aktive Widgets',
+        ' Save changes' => ' Änderungen speichern',
+        ' Save' => ' Speichern',
+        'Save changes' => 'Änderungen speichern',
+        ' Settings' => ' Einstellungen',
+        ' Refresh' => ' Aktualisieren',
+        ' Close this widget' => ' Widget schließen',
+        'Hide' => 'Verstecken',
+        ' Cancel' => ' Abbrechen',
         'more' => 'mehr',
         'No Data Available.' => 'Keine Daten verfügbar.',
         'Available Columns' => 'Verfügbare Spalten',
-        ' Filter available fields' => '',
+        ' Filter available fields' => ' Verfügbare Felder filtern',
         'Visible Columns (order by drag & drop)' => 'Angezeigte Spalten (Anordnung ändern durch Ziehen)',
-        ' Submit' => '',
+        ' Submit' => ' Abschicken',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => 'Zuordnungen für Kunden ändern',
@@ -2450,7 +2450,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
         'Manage links for %s' => 'Verknüpfungen für %s verwalten',
-        'Close and Back' => '',
+        'Close and Back' => 'Schließen und zurück',
         'Create new links' => 'Neue Verknüpfungen erstellen',
         'Manage existing links' => 'Vorhandene Verknüpfungen verwalten',
         'Link with' => 'Verknüpfen mit',
@@ -2481,13 +2481,13 @@ sub Data {
         'End' => 'Ende',
         'This setting can currently not be saved.' => 'Diese Einstellung kann derzeit nicht gespeichert werden.',
         'This setting can currently not be saved' => 'Diese Einstellung kann derzeit nicht gespeichert werden',
-        'Save setting' => '',
+        'Save setting' => 'Einstellung speichern',
         'Save this setting' => 'Einstellung speichern',
         'Did you know? You can help translating Znuny at %s.' => 'Haben Sie gewusst, dass Sie bei der Übersetzung von Znuny unter %s helfen können?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
         'Choose from the groups on the left to find the settings you\'d wish to change.' =>
-            '',
+            'Wählen Sie aus den Gruppen auf der linken Seite, um die Einstellungen zu finden, die Sie ändern möchten.',
         'Did you know?' => 'Wussten Sie schon?',
         'You can change your avatar by registering with your email address %s on %s' =>
             'Sie können Ihren Avatar ändern, indem Sie sich mit Ihrer E-Mail-Adresse %s unter %s registrieren',
@@ -2553,7 +2553,7 @@ sub Data {
         'Ticket Settings' => 'Ticket-Einstellungen',
         'Service invalid.' => 'Ungültiger Service.',
         'SLA invalid.' => 'SLA ungültig.',
-        'Team Data' => '',
+        'Team Data' => 'Teamdaten',
         'Queue invalid.' => 'Queue ungültig.',
         'New Owner' => 'Neuer Besitzer',
         'Please set a new owner!' => 'Bitte legen Sie einen neuen Besitzer fest!',
@@ -2561,25 +2561,25 @@ sub Data {
         'New Responsible' => 'Neuer Verantwortlicher',
         'Please set a new responsible!' => 'Bitte legen Sie einen neuen Verantwortlichen fest!',
         'Responsible invalid.' => 'Verantwortlicher ungültig.',
-        'Ticket Data' => '',
+        'Ticket Data' => 'Ticketdaten',
         'Next state' => 'Nächster Status',
         'State invalid.' => 'Status ungültig.',
         'For all pending* states.' => 'Für alle warten* Status.',
-        'Dynamic Info' => '',
+        'Dynamic Info' => 'Dynamische Informationen',
         'Add Article' => 'Artikel hinzufügen',
-        'Inform' => '',
+        'Inform' => 'Informieren',
         'Inform agents' => 'Agenten informieren',
         'Inform involved agents' => 'Involvierte Agenten informieren',
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Hier können Sie zusätzliche Agenten auswählen, die eine Benachrichtigung über den neuen Artikel enthalten sollen.',
         'Text will also be received by' => 'Text wird auch gesendet an',
-        'Communications' => '',
+        'Communications' => 'Kommunikation',
         'Create an Article' => 'Artikel erstellen',
         'Setting a template will overwrite any text or attachment.' => 'Die Auswahl einer Vorlage wird bereits bestehenden Text oder Anhänge löschen.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce %s%s%s' => '%s%s%s umleiten',
-        'cancel' => '',
+        'cancel' => 'abbrechen',
         'Bounce to' => 'Umleiten an',
         'You need a email address.' => 'Sie benötigen eine E-Mail-Adresse.',
         'Need a valid email address or don\'t use a local email address.' =>
@@ -2604,7 +2604,7 @@ sub Data {
         'Compose Answer for %s%s%s' => 'Antwort für %s%s%s verfassen',
         'Date Invalid!' => 'Ungültiges Datum!',
         ' Select one or more recipients from the customer user address book.' =>
-            '',
+            'Wählen Sie einen oder mehrere Empfänger aus dem Kundenbenutzer-Adressbuch.',
         'Customer user address book' => 'Kundenbenutzer-Adressbuch',
         'This address is registered as system address and cannot be used: %s' =>
             'Diese Adresse ist als Systemadresse registriert und kann daher nicht verwendet werden: %s',
@@ -2613,12 +2613,12 @@ sub Data {
         'Please remove this entry and enter a new one with the correct value.' =>
             'Bitte entfernen Sie diesen Eintrag und geben Sie einen mit einem gültigen Wert an.',
         'This address already exists on the address list.' => 'Dieser Eintrag existiert bereits in der Adressliste.',
-        ' Cc' => '',
+        ' Cc' => ' CC',
         'Remove Cc' => 'Cc entfernen',
         'Bcc' => 'Bcc',
-        ' Bcc' => '',
+        ' Bcc' => ' Bcc',
         'Remove Bcc' => 'Bcc entfernen',
-        ' Send mail' => '',
+        ' Send mail' => ' E-Mail versenden',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => 'Kunde von %s%s%s ändern',
@@ -2627,18 +2627,18 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Neues E-Mail-Ticket erstellen',
-        ' Example Template' => '',
+        ' Example Template' => ' Beispielvorlage',
         'Example Template' => 'Beispielvorlage',
         'To customer user' => 'An Kundenbenutzer',
-        ' To' => '',
+        ' To' => ' An',
         'Please include at least one customer user for the ticket.' => 'Bitte tragen Sie wenigstens einen Kundenbenutzer für das Ticket ein.',
-        ' Select this customer as the main customer.' => '',
-        ' To customer user' => '',
+        ' Select this customer as the main customer.' => ' Diesen Kunden als Hauptkunden auswählen',
+        ' To customer user' => ' An Kundenbenutzer',
         'Remove Ticket Customer User' => 'Kundenbenutzer des Tickets entfernen',
         'From queue' => 'Aus Queue',
-        ' Get all' => '',
+        ' Get all' => ' Alles holen',
         'Get all' => 'Alles holen',
-        ' Message body' => '',
+        ' Message body' => ' Nachrichteninhalt',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => 'Ausgehende E-Mail für %s%s%s',
@@ -2664,9 +2664,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'Verlauf von %s%s%s',
-        'Start typing to filter...' => '',
+        'Start typing to filter...' => 'Beginnen Sie mit der Eingabe, um zu filtern...',
         'Filter for history items' => 'Filter für Historieneinträge',
-        'Expand/Collapse all' => '',
+        'Expand/Collapse all' => 'Alle aus-/einklappen',
         'CreateTime' => 'Erstellzeit',
         'Article' => 'Artikel',
 
@@ -2689,41 +2689,41 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
         'Add note to linked %s%s%s' => 'Notiz zu verlinktem %s%s%s hinzufügen',
-        'Notes' => '',
+        'Notes' => 'Notiz',
         'Note to linked Ticket' => 'Notiz zu verlinktem Ticket',
         'LinkList invalid.' => 'LinkList ungültig.',
         'Note to origin Ticket' => 'Notiz zu Ursprungsticket',
         'NoteToTicket invalid.' => 'Notiz ungültig.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
-        ' Select all' => '',
+        ' Select all' => ' Alle auswählen',
         'No ticket data found.' => 'Keine Ticket-Daten gefunden.',
-        ' Open / Close ticket action menu' => '',
-        ' Select this ticket' => '',
+        ' Open / Close ticket action menu' => ' Ticket-Aktionsmenü öffnen/schließen',
+        ' Select this ticket' => ' Dieses Ticket auswählen',
         'Sender' => 'Sender',
         'Impact' => 'Auswirkung',
         'CustomerID' => 'Kundennummer',
         'Update Time' => 'Aktualisierungszeit',
         'Solution Time' => 'Lösungszeit',
         'First Response Time' => 'Reaktionszeit',
-        ' Service Time' => '',
-        ' Move ticket to a different queue' => '',
+        ' Service Time' => ' Service-Zeit',
+        ' Move ticket to a different queue' => 'Ticket in eine andere Queue verschieben',
         'Change queue' => 'Queue wechseln',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Aktive Filter für diesen Bildschirm entfernen.',
-        'Clear all filters' => '',
+        'Clear all filters' => 'Alle Filter löschen',
         'Remove mention' => 'Erwähnung entfernen',
         'Tickets per page' => 'Tickets pro Seite',
-        'Filter assigned fields' => '',
+        'Filter assigned fields' => 'Zugewiesene Felder filtern',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
-        ' Missing channel' => '',
+        ' Missing channel' => 'Fehlender Kanal',
         'Missing channel' => 'Fehlender Kanal',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => 'Übersicht zurücksetzen',
-        ' Column Filters Form' => '',
+        ' Column Filters Form' => 'Spaltenfilter-Formular',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => 'In ein neues Telefon-Ticket splitten',
@@ -2742,7 +2742,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => 'Neues Prozess-Ticket',
-        ' Loading' => '',
+        ' Loading' => 'Laden',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => 'Ticket in einen Prozess überführen',
@@ -2930,9 +2930,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'New Ticket' => 'Neues Ticket',
-        ' Service level agreement' => '',
-        'Dymanic Info' => '',
-        ' Subject' => '',
+        ' Service level agreement' => 'Service-Level-Vereinbarungen',
+        'Dymanic Info' => 'Dynamische Informationen',
+        ' Subject' => 'Betreff',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => 'Willkommen!',
@@ -2940,13 +2940,13 @@ sub Data {
         'Create your first ticket' => 'Ihr erstes Ticket erstellen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
-        'New Process Ticket' => '',
+        'New Process Ticket' => 'Neues Prozessticket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'z. B. 10*5155 oder 105658*',
         'Types' => 'Typen',
-        'Limitation' => '',
+        'Limitation' => 'Einschränkung',
         'No time settings' => 'Keine Zeiteinstellungen',
         'All' => 'Alle',
         'Specific date' => 'spezifisches Datum',
@@ -2967,7 +2967,7 @@ sub Data {
         'Page' => 'Seite',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
-        'Ticket Details' => '',
+        'Ticket Details' => 'Ticketdetails',
         'Next Steps' => 'Nächste Schritte',
         'Reply' => 'Antworten',
 
@@ -3002,16 +3002,16 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
         'Last viewed' => 'Zuletzt gesehen',
         'You are logged in as' => 'Sie sind angemeldet als',
-        'Delete all activities' => '',
-        'Delete all' => '',
-        'Mark all activities as seen' => '',
-        'Seen all' => '',
+        'Delete all activities' => 'Alle Aktivitäten löschen',
+        'Delete all' => 'Alle löschen',
+        'Mark all activities as seen' => 'Alle Aktivitäten als gelesen markieren',
+        'Seen all' => 'Alle gelesen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
-        'Overviews' => '',
-        'Personal views' => '',
+        'Overviews' => 'Übersichten',
+        'Personal views' => 'Persönliche Ansichten',
         'Last Views' => 'Zuletzt gesehen',
-        'Search tools' => '',
+        'Search tools' => 'Suchwerkzeuge',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript nicht verfügbar',
@@ -3397,8 +3397,8 @@ sub Data {
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
         'Click to select a file for upload.' => 'Klicken Sie, um eine Datei fürs Hochladen auszuwählen.',
-        'Select files or drop them here' => '',
-        'Select a file or drop it here' => '',
+        'Select files or drop them here' => 'Dateien auswählen oder hier ablegen',
+        'Select a file or drop it here' => 'Datei auswählen oder hier ablegen',
         'Uploading...' => 'Wird hochgeladen...',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
@@ -5118,7 +5118,7 @@ sub Data {
         'There should be no more than 200 MB swap space used.' => 'Es sollten nicht mehr als 200 MB Auslagerungsspeicher verwendet werden.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'Znuny' => '',
+        'Znuny' => 'Znuny',
         'Article Search Index Status' => 'Ticket-Suchindex-Status',
         'Indexed Articles' => 'Indexierte Artikel',
 
@@ -5462,7 +5462,7 @@ sub Data {
         'Type of daemon log rotation to use: Choose \'OTRS\' to let Znuny system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
             'Art der Logrotation, die vom Daemon genutzt werden soll. Wählen Sie "OTRS", um das System die Rotation verwalten zu lassen oder "extern", um eine Drittapplikation dafür zu nutzen (z. B. logrotate). Hinweis: externe Mechanismen erfordern weiterhin eine eigene Konfiguration.',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
-            '',
+            'Wenn diese Option aktiviert ist, verwendet der Daemon dieses Verzeichnis, um seine PID-Dateien zu erstellen. Hinweis: Bitte stoppen Sie den Daemon vor jeder Änderung und verwenden Sie diese Einstellung nur, wenn <$OTRS_HOME>/var/run/ nicht verwendet werden kann.',
         'Defines the number of days to keep the daemon log files.' => 'Definiert die Aufbewahrungszeit für die Daemon Log-Dateien in Tagen.',
         'If enabled the daemon will redirect the standard output stream to a log file.' =>
             'Aktivieren um die Standard-Ausgabe des Daemons in eine Log-Datei umzuleiten.',
@@ -5538,7 +5538,7 @@ sub Data {
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Definiert den Full Qualified Domain Name des Znuny Systems. Diese Einstellung wird als Variable OTRS_CONFIG_FQDN genutzt, welche in allen Nachrichten-Formularen zu finden ist oder um Links zu Tickets in Ihrem Znuny System zu generieren.',
         'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
-            '',
+            'Definiert den voll qualifizierten Domänennamen für die Generierung externer IDs (z. B. Message-ID, ContentID).',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             'Legt den HTTP-Hostnamen fest, der für die Sammlung von Supportdaten über das freie Modul \'PublicSupportDataCollector\' genutzt wird (z. B. durch den Znuny-Daemon).',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5590,7 +5590,7 @@ sub Data {
             'Steuert die Höhe der Richtext-Editor-Komponente. Geben Sie eine Zahl (für die Höhe in Pixeln) oder einen prozentualen Wert (für eine relative Höhe) an.',
         'Defines the selectable font sizes in the rich text editor.' => 'Legt die wählbaren Schriftgrößen im Rich-Text-Editor fest.',
         'Defines the selectable fonts in the rich text editor.' => 'Legt die auswählbaren Schriftarten im Rich-Text-Editor fest.',
-        'Defines the selectable format tags in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => 'Definiert die auswählbaren Format-Tags im Rich-Text-Editor.',
         'Defines additional plugins for use in the rich text editor.' => 'Definiert zusätzliche Plugins für die Verwendung im Rich-Text-Editor.',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             'Definiert zusätzliche Inhalte, die für die Verwendung im Rich-Text-Editor zugelassen sind.',
@@ -6094,7 +6094,7 @@ sub Data {
         'List of responsive CSS files to always be loaded for the agent interface.' =>
             'Liste von Responsive-CSS-Dateien, die im Agenten-Bereich immer geladen werden sollen.',
         'List of JS files to always be loaded for the admin interface.' =>
-            '',
+            'Liste der JS-Dateien, die immer für die Adminoberfläche geladen werden sollen.',
         'List of CSS files to always be loaded for the customer interface.' =>
             'Liste der CSS-Dateien, die immer im Kunden-Interface geladen werden sollen.',
         'List of responsive CSS files to always be loaded for the customer interface.' =>
@@ -6216,7 +6216,7 @@ sub Data {
         'Frontend module registration (disable ticket processes screen if no process available).' =>
             'Frontend-Modulregistrierung (verberge Ticket-Prozesse, falls kein Prozess verfügbar ist).',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate).' =>
-            '',
+            'Event-Modulregistrierung. Für mehr Performance können Sie ein Trigger-Event definieren (z. B. Event => TicketCreate).',
         'This option defines the dynamic field in which a Process Management process entity id is stored.' =>
             'Legt fest, in welchem dynamischen Feld die Prozess-ID im Prozessmanagement gespeichert werden soll.',
         'This option defines the dynamic field in which a Process Management activity entity id is stored.' =>
@@ -6227,7 +6227,7 @@ sub Data {
         'This option defines the process tickets default priority.' => 'Diese Option setzt die Prozess-Ticket Standardpriorität.',
         'Display settings to override defaults for Process Tickets.' => 'Einstellungen zum Überschreiben der Standardwerte für Prozess-Tickets anzeigen.',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key =&gt; My Group\', \'Content: Name_X, NameY\'.' =>
-            '',
+            'Dynamische Feldgruppen für das Prozess-Widget. Der Schlüssel ist der Name der Gruppe, der Wert enthält die Felder, die angezeigt werden sollen. Beispiel: \'Schlüssel => Meine Gruppe\', \'Inhalt: Name_X, NameY\'.',
         'Dynamic fields shown in the process widget in ticket zoom screen of the agent interface.' =>
             'Angezeigte Dynamische Felder im Prozess-Widget in der Ticket-Detailansicht des Agentenbereichs.',
         'Shows a link in the menu to enroll a ticket into a process in the ticket zoom view of the agent interface.' =>
@@ -6251,7 +6251,7 @@ sub Data {
         'Defines the priority in which the information is logged and presented.' =>
             'Definiert die Priorität in welcher die Information aufgezeichnet und präsentiert wird.',
         'Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            '',
+            'Filter zur Fehlersuche bei Übergängen. Hinweis: Weitere Filter können im Format <OTRS_TICKET_Attribute> hinzugefügt werden, z.B. <OTRS_TICKET_Priority>.',
         'Parameters for the dashboard backend of the running process tickets overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Legt die Parameter für das Dashboard-Backend fest. "Limit" legt die Anzahl an Einträgen fest, die standardmäßig angezeigt werden. "Group" beschränkt den Zugang zum jeweiligen Dashlet (z. B. Group: admin;group1;group2). "Default" bestimmt, ob das Dashlet standardmäßig aktiv ist oder vom Nutzer manuell aktiviert werden muss. "CacheTTLLocal" bestimmt die Cachingdauer für das Dashlet in Minuten. Mit "Mandatory" kann das Dashlet so konfiguriert werden, dass Nutzer es nicht ausblenden können.',
         'DynamicField backend registration.' => 'Backend-Registrierung für Dynamische Felder.',
@@ -6382,11 +6382,11 @@ sub Data {
         'Customizable stop words for fulltext index. These words will be removed from the search index.' =>
             'Anpassbare Stopworte für den Volltext-Index. Diese Worte werden aus dem Suchindex entfernt.',
         'Allows having a small format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information).' =>
-            '',
+            'Ermöglicht eine kleinformatige Ticketübersicht (CustomerInfo => 1 - zeigt auch die Kundeninformationen).',
         'Allows having a medium format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information).' =>
-            '',
+            'Ermöglicht eine mittelgroße Ticketübersicht (CustomerInfo => 1 - zeigt auch die Kundeninformationen).',
         'Shows a preview of the ticket overview (CustomerInfo =&gt; 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
-            '',
+            'Zeigt eine Vorschau der Ticketübersicht an (CustomerInfo => 1 - zeigt auch die Kundeninfo an, CustomerInfoMaxSize maximale Größe der Kundeninfo in Zeichen).',
         'Defines which article sender types should be shown in the preview of a ticket.' =>
             'Gibt an, welche Artikel-Sendertypen in der Vorschau eines Tickets angezeigt werden sollen.',
         'Sets the count of articles visible in preview mode of ticket overviews.' =>
@@ -6644,7 +6644,7 @@ sub Data {
         'Defines the recipient target of the phone ticket and the sender of the email ticket ("Queue" shows all queues, "System address" displays all system addresses) in the agent interface.' =>
             'Legt die Art des Empfängers für Telefon-Tickets und des Absenders für E-Mail-Tickets im Agenten-Bereich fest ("Queue" zeigt alle Queues, "System address" alle System-Adressen).',
         'Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType "&lt;Queue&gt;" shows the names of the queues and for SystemAddress "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" shows the name and email of the recipient.' =>
-            '',
+            'Legt die Strings fest, die als Empfänger (To:) des Telefontickets und als Absender (From:) des E-Mail-Tickets in der Agentenoberfläche angezeigt werden. Für Queue als NewQueueSelectionType "<Queue>" werden die Namen der Queues und für SystemAddress "<Realname> <<Email>>" die Namen und die Email des Empfängers angezeigt.',
         'Determines which options will be valid of the recipient (phone ticket) and the sender (email ticket) in the agent interface.' =>
             'Definiert, welche Optionen für den Empfänger (Telefon-Ticket) und den Absender (E-Mail-Ticket) im Agenten-Interface gültig sind.',
         'Shows customer history tickets in AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer.' =>
@@ -7314,7 +7314,7 @@ sub Data {
         'Defines the recipient target of the tickets ("Queue" shows all queues, "SystemAddress" shows only the queues which are assigned to system addresses) in the customer interface.' =>
             'Legt die Art des Empfängers für Tickets im Kunden-Bereich fest ("Queue" zeigt alle Queues, "System address" nur die Queues, die System-Adressen zugewiesen sind).',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "&lt;Queue&gt;" shows the names of the queues, and for SystemAddress, "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" shows the name and email of the recipient.' =>
-            '',
+            'Bestimmt die Zeichenketten, die als Empfänger (To:) des Tickets in der Kundenschnittstelle angezeigt werden. Für Queue als CustomerPanelSelectionType zeigt "<Queue>" die Namen der Queues an, für SystemAddress zeigt "<Realname> <<Email>>" den Namen und die Email des Empfängers an.',
         'Determines which queues will be valid for ticket\'s recepients in the customer interface.' =>
             'Definiert, welche Queues für Ticket-Empfänger im Kunden-Interface gültig sind.',
         'Module for To-selection in new ticket screen in the customer interface.' =>
@@ -7340,7 +7340,7 @@ sub Data {
         'Shows the enabled ticket attributes in the customer interface (0 = Disabled and 1 = Enabled).' =>
             'Zeigt die aktivierten Ticket-Attribute im Kundenbereich (0 = abgeschaltet, 1 = eingeschaltet).',
         'Defines the length of the article preview in the customer interface.' =>
-            '',
+            'Definiert die Länge der Artikelvorschau in der Kundenoberfläche.',
         'Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting.' =>
             'Definiert den angezeigten Stil des Feldes "Von" in Notizen, die für Kunden sichtbar sind. Ein Standard-Agentenname kann in der Einstellung Ticket::Frontend::CustomerTicketZoom####DefaultAgentName definiert werden.',
         'Defines the default agent name in the ticket zoom view of the customer interface.' =>
@@ -7406,7 +7406,7 @@ sub Data {
         'Cache time in seconds for the DB ACL backend.' => 'Cache-Zeit in Sekunden für Datenbank ACL-Backends.',
         'If enabled debugging information for ACLs is logged.' => 'Wenn aktiviert, werden Informationen zur Fehlerbehebung für ACLs geloggt.',
         'Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            '',
+            'Filter zum Debuggen von ACLs. Hinweis: Weitere Ticketattribute können im Format <OTRS_TICKET_Attribute> hinzugefügt werden, z. B. <OTRS_TICKET_Priority>.',
         'Maximal auto email responses to own email-address a day (Loop-Protection).' =>
             'Maximale Anzahl von automatischen E-Mailantworten zur eigenen E-Mail-Adresse pro Tag (Loop-Protection).',
         'Maximal auto email responses to own email-address a day, configurable by email address (Loop-Protection).' =>
@@ -7438,7 +7438,7 @@ sub Data {
         'Module to filter and manipulate incoming messages. Block/ignore all spam email with From: noreply@ address.' =>
             'Modul zum filtern und bearbeiten von eingehenden Nachrichten. Blockiere/Ignoriere alle Nachrichten mit einer noreply@ Absender-Adresse.',
         'Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From =&gt; \'(.+?)@.+?\', and use () as [***] in Set =&gt;.' =>
-            '',
+            'Modul zum Filtern und Manipulieren eingehender Nachrichten. Schreibt eine 4-stellige Zahl in ein ein FreeText-Feld, verwenden Sie einen Regex im Match z.B. From => \'(.+?)@.+?\', und verwenden Sie () als [***] im Set =>.',
         'Blocks all the incoming emails that do not have a valid ticket number in subject with From: @example.com address.' =>
             'Blockiert alle eingehenden E-Mails, die keine gültige Ticketnummer im Betreff mit Absenderadresse: @ example.com besitzen.',
         'Defines the sender for rejected emails.' => 'Definiert die Absendeadresse für abgelehnte E-Mails.',
@@ -7563,7 +7563,7 @@ sub Data {
         'Dynamic fields shown in the ticket search overview results screen of the customer interface.' =>
             'Angezeigte dynamische Felder in der Anzeige von Suchergebnissen der Ticketsuche im Kundenbereich.',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
-            '',
+            'Ereignis-Modulregistrierung. Für mehr Performance können Sie ein Trigger-Ereignis definieren (z. B. Event => TicketCreate). Dies ist nur möglich, wenn alle dynamischen Ticketfelder das gleiche Ereignis benötigen.',
         'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
             'Konfiguriert eine Standardeinstellung für TicketDynamicField. "Name" definiert das Dynamische Feld, das verwendet werden soll, "Wert" sind die Daten, die gesetzt werden sollen, und "Ereignis" definiert das Auslöseereignis. Bitte beachten Sie das Entwicklerhandbuch (https://doc.znuny.org/manual/developer/), Kapitel "Ticket Event Module".',
         'Defines the list of types for templates.' => 'Definiert die Typenliste für Templates.',
@@ -7777,10 +7777,10 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             'Benachrichtigungsmodul für Agenten-Interface, das die Anzahl der Erwähnungen anzeigt.',
         'Module to grant access to the mentioned agents of a ticket.' => 'Modul, das Zugriff für die erwähnten Agenten eines Tickets gewährt.',
-        'Assignment between event and type.' => '',
-        'Defines the link type for each activity.' => '',
+        'Assignment between event and type.' => 'Zuordnung von Ereignis und Typ.',
+        'Defines the link type for each activity.' => 'Legt den Verknüpfungstyp für jede Aktivität fest.',
         'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
-            '',
+            'Liste der Farben in hexadezimaler RGB-Angabe, die zur Auswahl stehen werden. Stellen Sie sicher, dass die Farben dunkel genug sind, damit weißer Text darüber gelegt werden kann.',
         'Mapping of non-standard time zones to official ones.' => 'Mapping von Nicht-Standard-Zeitzonen zu offiziellen Zeitzonen.',
         'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
             'Startdatum (JJJJMMTT) des Bereichs, der beim Parsen von ICS-Dateien verwendet werden soll. Das verwendete CPAN-Modul iCal::Parser benötigt diese Angabe, um ICS-Dateien mit Events in einem Jahr vor dem aktuellen Jahr parsen zu können. Das Enddatum des Bereichs wird automatisch auf 10 Jahre in der Zukunft ab dem Zeitpunkt des Parsens/Ausführens gesetzt.',
@@ -7838,7 +7838,7 @@ sub Data {
         'Group for default access.' => 'Gruppe für den Standardzugriff.',
         'Group of all administrators.' => 'Gruppe aller Administratoren.',
         'Group for statistics access.' => 'Gruppe für den Statistikzugriff.',
-        'Group for time accounting web service access.' => '',
+        'Group for time accounting web service access.' => 'Gruppe für den Zugriff auf den Webservice für die Zeitabrechnung.',
         'new' => 'neu',
         'All new state types (default: viewable).' => 'Alle neuen Statustypen (Standard: sichtbar).',
         'open' => 'offen',
@@ -7952,14 +7952,14 @@ sub Data {
         'This window must be called from compose window.' => 'Dieses Fenster muss aus dem Fenster zum Verfassen von Tickets aufgerufen werden.',
 
         # JS File: var/httpd/htdocs/js/Core.Activity.js
-        'An error occurred' => '',
-        'The activity could not be created. %s is needed.' => '',
-        'The activity could not be created.' => '',
-        'The activity could not be updated.' => '',
-        'The activity could not be deleted.' => '',
-        'The activity could not be marked as new.' => '',
-        'The activity could not be marked as seen.' => '',
-        'The activities could not be marked as seen.' => '',
+        'An error occurred' => 'Ein Fehler ist aufgetreten',
+        'The activity could not be created. %s is needed.' => 'Die Aktivität konnte nicht erstellt werden. %s wird benötigt.',
+        'The activity could not be created.' => 'Die Aktivität konnte nicht erstellt werden.',
+        'The activity could not be updated.' => 'Die Aktivität konnte nicht aktualisiert werden.',
+        'The activity could not be deleted.' => 'Die Aktivität konnte nicht gelöscht werden.',
+        'The activity could not be marked as new.' => 'Die Aktivität konnte nicht als neu markiert werden.',
+        'The activity could not be marked as seen.' => 'Die Aktivität konnte nicht als gelesen markiert werden.',
+        'The activities could not be marked as seen.' => 'Die Aktivitäten konnten nicht als gelesen markiert werden.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
         'Add all' => 'Alle hinzufügen',
@@ -8179,7 +8179,7 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
         'Please enter at least one search value or * to find anything.' =>
             'Bitte geben Sie zumindest einen Suchbegriff ein oder * um nach Allem zu suchen.',
-        'Insert selected customer user(s) into the "%s:" field.' => '',
+        'Insert selected customer user(s) into the "%s:" field.' => 'Ausgewählte(n) Kundenbenutzer in das Feld "%s:" einfügen.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
         'Information about the Znuny Daemon' => 'Informationen über den Znuny Daemon',
@@ -8401,9 +8401,9 @@ Ihr Helpdesk-Team
         'AJAX interface for the web service dynamic field backends.' => 'AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends.',
         'AccountedTime' => 'Erfasste Zeit',
         'Activation of dynamic fields for screens.' => 'Aktivierung dynamischer Felder für Masken.',
-        'Activity LinkTarget' => '',
-        'Activity Notification' => '',
-        'Activity.' => '',
+        'Activity LinkTarget' => 'Link-Ziel der Aktivität',
+        'Activity Notification' => 'Aktivitätsbenachrichtigung',
+        'Activity.' => 'Aktivität.',
         'ActivityID' => 'ActivityID',
         'Add a note to this ticket' => 'Eine Notiz zu diesem Ticket hinzufügen',
         'Add an inbound phone call to this ticket' => 'Einen eingehenden Anruf zu diesem Ticket hinzufügen',
@@ -8525,7 +8525,7 @@ Ihr Helpdesk-Team
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Konfigurieren Sie, welche Oberfläche angezeigt werden soll, nachdem ein neues Ticket erstellt wurde.',
         'Create New process ticket.' => 'Neues Prozess-Ticket erstellen.',
-        'Create Process Ticket' => '',
+        'Create Process Ticket' => 'Prozessticket erstellen',
         'Create Ticket' => 'Ticket erstellen',
         'Create a new calendar appointment linked to this ticket' => 'Erstellt einen neuen Termin in einem Kalender, welcher direkt mit diesem Ticket verknüpft ist',
         'Create a unit test file' => 'Unit-Test-Datei erzeugen',
@@ -8880,8 +8880,8 @@ Ihr Helpdesk-Team
         'Search Ticket.' => 'Ticket suchen.',
         'Search Tickets.' => 'Tickets suchen.',
         'Search User' => 'Benutzer suchen',
-        'Search tickets.' => '',
-        'SearchTemplate' => '',
+        'Search tickets.' => 'Tickets suchen.',
+        'SearchTemplate' => 'Suchvorlage',
         'Second Christmas Day' => '2. Weihachtstag',
         'Second Queue' => 'Zweite Queue',
         'Seconds' => 'Sekunden',
@@ -8901,7 +8901,7 @@ Ihr Helpdesk-Team
         'Select your personal time zone. All times will be displayed relative to this time zone.' =>
             'Wählen Sie Ihre persönliche Zeitzone aus. Alle Zeiten werden relativ zur eingestellten Zeitzone angezeigt.',
         'Select your preferred layout for the software.' => 'Wählen Sie Ihr bevorzugtes Layout aus.',
-        'Select your preferred theme for OTRS.' => '',
+        'Select your preferred theme for OTRS.' => 'Wählen Sie Ihr bevorzugtes Theme für Znuny.',
         'Send a unit test file' => 'Unit-Test-Datei versenden',
         'Send new outgoing mail from this ticket' => 'Neue ausgehende E-Mail aus diesem Ticket heraus senden',
         'Send notifications to users.' => 'Benachrichtigungen an Agenten verschicken.',
@@ -8925,7 +8925,7 @@ Ihr Helpdesk-Team
         'Show the ticket history' => 'Ticket-Historie anzeigen',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Ermöglicht eine Ticket-Übersicht mit einigen Ticketinformationen (Customer => 1 - zeigt auch die Kundeninformation, CustomerInfoMaxSize steuert die maximale Anzahl an Zeichen der Kundeninformation).',
-        'Shows information on how to start OTRS Daemon' => '',
+        'Shows information on how to start OTRS Daemon' => 'Zeigt Informationen, wie der Znuny-Daemon gestartet wird',
         'Shows last mention of tickets.' => 'Zeigt letzte Erwähnung von Tickets.',
         'Signature data.' => 'Signatur-Daten.',
         'Simple' => 'Einfach',
@@ -8980,7 +8980,7 @@ Ihr Helpdesk-Team
             'Der Standard-Skin (grau) für den Kundenbereich.',
         'This is the default orange - black skin.' => 'Dies ist die Standard orange-schwarze Farbgebung.',
         'This key is not certified with a trusted signature!' => 'Dieser Schlüssel ist nicht mit einer vertrauenswürdigen Signatur zertifiziert!',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of OTRS.' => 'Dieses Modul ist Teil des Admin-Bereichs von Znuny.',
         'Ticket Close.' => 'Ticket schließen.',
         'Ticket Compose Bounce Email.' => 'E-Mail-Erstellung für Ticket-Umleitung.',
         'Ticket Compose email Answer.' => 'E-Mail-Erstellung für Ticket-Antwort.',
@@ -9003,7 +9003,7 @@ Ihr Helpdesk-Team
         'Ticket Priority.' => 'Ticket-Priorität.',
         'Ticket Queue Overview' => 'Ticket-Übersicht nach Queues',
         'Ticket Responsible.' => 'Ticket-Verantwortlicher.',
-        'Ticket Search' => '',
+        'Ticket Search' => 'Ticketsuche',
         'Ticket Watcher' => 'Ticket-Beobachter',
         'Ticket Zoom' => 'Ticket-Zoom',
         'Ticket Zoom.' => 'Ticket-Detailansicht.',
@@ -9077,8 +9077,8 @@ Ihr Helpdesk-Team
         'normal' => 'normal',
         'not archived tickets' => 'nicht archivierte Tickets',
         'notice' => 'notice',
-        'open in current tab' => '',
-        'open in new tab' => '',
+        'open in current tab' => 'im aktuellen Tab öffnen',
+        'open in new tab' => 'im neuen Tab öffnen',
         'pending' => 'Warten',
         'phone' => 'Telefonanruf',
         'responsible' => 'Verantwortlicher',
