@@ -3969,11 +3969,14 @@ Hibaüzenet:
         <Data Key="content_type" Type="Quote">text/plain</Data>
         <Data Key="language" Type="Quote">en</Data>
         <Data Key="subject" Type="Quote"><![CDATA[Mention in ticket: <OTRS_TICKET_Title>]]></Data>
-        <Data Key="text" Type="Quote"><![CDATA[You have been mentioned in ticket <OTRS_TICKET_NUMBER>
+        <Data Key="text" Type="Quote"><![CDATA[Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
 
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
-            ]]></Data>
+
+-- <OTRS_CONFIG_NotificationSenderName>]]></Data>
     </Insert>
     <Insert Table="notification_event_message">
         <Data Key="id" Type="AutoIncrement">113</Data>
@@ -3981,11 +3984,14 @@ Hibaüzenet:
         <Data Key="content_type" Type="Quote">text/plain</Data>
         <Data Key="language" Type="Quote">de</Data>
         <Data Key="subject" Type="Quote"><![CDATA[Erwähnung in Ticket: <OTRS_TICKET_Title>]]></Data>
-        <Data Key="text" Type="Quote"><![CDATA[Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>
+        <Data Key="text" Type="Quote"><![CDATA[Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+
+Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
 
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
-            ]]></Data>
+
+-- <OTRS_CONFIG_NotificationSenderName>]]></Data>
     </Insert>
 
     <!-- Internal dynamic fields for ProcessManagement -->

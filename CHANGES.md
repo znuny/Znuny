@@ -1,4 +1,5 @@
 # 6.5.4 2023-??-??
+ - 2023-06-29 Added missing salutation and signature to notification for user mentions. Thanks to Paweł Bogusławski (@pboguslawski). [#420](https://github.com/znuny/Znuny/issues/420)
  - 2023-06-26 Fixed warning about missing article ID in AgentTicketNoteToLinkedTicket. Thanks to Paweł Bogusławski (@pboguslawski). [#431](https://github.com/znuny/Znuny/issues/431)
  - 2023-06-21 Extend TicketArticleCreate transition action for a possibility to set a dynamic field of object type article and ticket.
  - 2023-06-19 Fixed dynamic field type 'Webservice' admin dialog test field being read-only and not usable.
