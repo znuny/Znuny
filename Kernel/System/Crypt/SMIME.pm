@@ -986,7 +986,7 @@ Returns:
     $Result =
     "-----BEGIN CERTIFICATE-----
     MIIEXjCCA0agAwIBAgIJAPIBQyBe/HbpMA0GCSqGSIb3DQEBBQUAMHwxCzAJBgNV
-    ...
+    # ...
     nj2wbQO4KjM12YLUuvahk5se
     -----END CERTIFICATE-----
     ";

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.901008097835069;
+    $Self->{Completeness}        = 0.900198609731877;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2014,6 +2014,7 @@ sub Data {
         'State type' => 'Тип статуса',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             'Није могуће обележити ову ставку као неважећу јер не постоји више статуса спојених тикета у систему!',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Ово стање се користи у следећим системским подешавањима: ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2937,6 +2938,9 @@ sub Data {
         'Welcome!' => 'Добродошли!',
         'Please click the button below to create your first ticket.' => 'Молимо да притиснете дугме испод за креирање вашег првог тикета.',
         'Create your first ticket' => 'Креирајте ваш први тикет',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Профил',
@@ -5533,6 +5537,8 @@ sub Data {
             'Дефинише идентификатор система. Сваки број тикета и низ знакова „http” сесије садрши овај ИД. Ово осигурава да ће само тикети који припадају вашем систему бити обрађени као операције праћења (корисно када се одвија комуникација између две „Znuny” инстанце).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Дефинише потпуно квалификовано име домена система. Ово подешавање се користи као променљива OTRS_CONFIG_FQDN, која се налази у свим формама порука и користи од стране апликације, за грађење веза до тикета унутар вашег система.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             'Дефинише HTTP хост за слање података подршке преко јавног модуле \'PublicSupportDataCollector\' (нпр. од стране Znuny системског сервиса).',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5564,14 +5570,6 @@ sub Data {
             'Лого приказан у заглављу оператерског интерфејса. URL до слике може бити релативан у односу на директоријум са сликама или апсолутан до удаљеног сервера.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Лого приказан у заглављу интерфејса оператера за изглед "подразумевани". Погледајте "AgentLogo" за детаљнији опис.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'Лого приказан у заглављу интерфејса оператера за "упрошћени" изглед. Погледајте "AgentLogo" за детаљнији опис.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'Лого приказан у заглављу интерфејса оператера за изглед Слоновача. Погледајте AgentLogo за детаљнији опис.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'Лого приказан у заглављу интерфејса оператера за изглед Слоновача (упрошћено). Погледајте AgentLogo за детаљнији опис.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            'Лого приказан у заглављу интерфејса оператера за изглед "High Contrast". Погледајте "AgentLogo" за детаљнији опис.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Лого приказан у заглављу интерфејса оператера. URL до слике може бити релативан у односу на директоријум са сликама или апсолутан до удаљеног сервера.',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Дефинише URL основну путању за иконе, CSS и Java Script.',
@@ -6108,10 +6106,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Одређује облик у коме ће бити приказано име и презиме оператера.',
         'Default skin for the agent interface.' => 'Подразумевани изглед окружења за интерфејс оператера.',
-        'Default skin for the agent interface (slim version).' => 'Подразумевани изглед окружења за интерфејс оператера (слаба верзија).',
-        'Balanced white skin by Felix Niklas.' => 'Избалансирани бели изглед, Феликс Никлас.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Избалансирани бели изглед, Феликс Никлас (танка верзија).',
-        'High contrast skin for visually impaired users.' => 'Високо контрастни изглед за особе слабијег вида.',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Излед који ће се користити у интерфејсу оператера. Молимо проверите доступне изгледе у Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7844,6 +7838,7 @@ sub Data {
         'Group for default access.' => 'Група за подразумеван приступ.',
         'Group of all administrators.' => 'Група свих администратора.',
         'Group for statistics access.' => 'Група за приступ статистици.',
+        'Group for time accounting web service access.' => '',
         'new' => 'ново',
         'All new state types (default: viewable).' => 'Сви нови типови стања (подразумевано: видљиво).',
         'open' => 'отворени',
@@ -8381,8 +8376,6 @@ Thanks for your help!
         ' 2 minutes' => ' 2 минута',
         ' 5 minutes' => ' 5 минута',
         ' 7 minutes' => ' 7 минута',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '"Упрошћени" изглед који покушава да уштеди место за напредне кориснике.',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Корисничко име) Име Презиме',
         '(UserLogin) Lastname Firstname' => '(Корисничко име) Презиме Име',
@@ -8597,7 +8590,6 @@ Thanks for your help!
         'Danish' => 'Дански',
         'Dashboard overview.' => 'Преглед командне табле.',
         'Date / Time' => 'Датум / Време',
-        'Default (Slim)' => 'Подразумевано (упрошћено)',
         'Default agent name' => 'Подразумевано име оператера',
         'Default value for NameX' => 'Подразумевана вредност за NameX',
         'Define the queue comment 2.' => 'Дефинише коментар реда 2.',
@@ -8700,7 +8692,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => 'График: Наслагани просторни графикон',
         'Greek' => 'Грчки',
         'Hebrew' => 'Хебрејски',
-        'High Contrast' => 'Високи контраст',
         'Hindi' => 'Хинди',
         'Hungarian' => 'Мађарски',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8721,8 +8712,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Италијански',
-        'Ivory' => 'Слоновача',
-        'Ivory (Slim)' => 'Слоновача (упрошћено)',
         'Japanese' => 'Јапански',
         'Korean' => 'Корејски',
         'Language' => 'Језик',

@@ -1547,11 +1547,11 @@ sub CheckNumberOfEventExecution {
 This function calls a list of other helper functions to setup a test environment with various test data.
 
     my $Result = $HelperObject->SetupTestEnvironment(
-        ... # Parameters get passed to the FillTestEnvironment and ConfigureViews function
+        # ... # Parameters get passed to the FillTestEnvironment and ConfigureViews function
     );
 
     $Result = {
-        ... # Combined result of the ActivateDefaultDynamicFields, FillTestEnvironment and ConfigureViews functions
+        # ... # Combined result of the ActivateDefaultDynamicFields, FillTestEnvironment and ConfigureViews functions
     }
 
 =cut
@@ -1657,7 +1657,7 @@ Toggles settings for a given view like AgentTicketNote or CustomerTicketMessage.
             TicketType       => 1,
             Title            => 1,
             HistoryType      => 'Phone',
-            ...
+            # ...
         },
         CustomerTicketMessage => {
             Priority         => 1,
@@ -1668,7 +1668,7 @@ Toggles settings for a given view like AgentTicketNote or CustomerTicketMessage.
             SLAMandatory     => 1,
             TicketType       => 1,
             ArticleType      => 'note-external',
-            ...
+            # ...
         },
     }
 
@@ -2061,7 +2061,7 @@ Default parameters contain various special chars.
     my $Result = $HelperObject->FillTestEnvironment(
         Type => {
             'Type 1::Sub Type' => 1,
-            ...
+            # ...
         }
     );
 

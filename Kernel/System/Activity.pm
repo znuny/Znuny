@@ -300,7 +300,7 @@ Returns:
             CreateTime => '...',
             CreateBy   => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -374,7 +374,7 @@ Returns:
             'CreateBy'   => '...',
             'UserID'     => 1,
         },
-        ...
+        # ...
     );
 
 =cut

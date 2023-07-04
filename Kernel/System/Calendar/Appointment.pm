@@ -496,7 +496,7 @@ Result => 'HASH':
             NotificationCustomDateTime            => '2016-01-02 16:00:00',
             TicketAppointmentRuleID               => '9bb20ea035e7a9930652a9d82d00c725',    # for ticket appointments only!
         },
-        ...
+        # ...
     ];
 
 Result => 'ARRAY':
@@ -1749,11 +1749,12 @@ sub GetUniqueID {
     $StartTimeStrg =~ s/[-:]//g;
     $StartTimeStrg =~ s/\s/T/;
 
-    # get system FQDN
-    my $FQDN = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
+    # get system ExternalFQDN
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
 
     # return UniqueID
-    return "$StartTimeStrg-$Hash\@$FQDN";
+    return "$StartTimeStrg-$Hash\@$ExternalFQDN";
 }
 
 =head2 AppointmentUpcomingGet()

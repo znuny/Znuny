@@ -124,6 +124,11 @@ table tr.MasterAction {
     background: var(--table-th-bg);
 }
 
+table thead a {
+    font-size: var(--font-size-sm);
+    font-weight: var(--semi-bold);
+}
+
 .SidebarColumn .DataTable thead th {
     padding: var(--padding-sm);
     background: var(--table-td-even-bg);

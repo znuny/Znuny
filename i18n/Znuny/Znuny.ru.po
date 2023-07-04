@@ -15287,22 +15287,6 @@ msgid "The logo shown in the header of the agent interface for the skin \"defaul
 msgstr "Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса \"default\". Смотрите описание \"AgentLogo\" для дальгейших пояснений."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
-msgstr "Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса \"slim\". Смотрите описание \"AgentLogo\" для дальгейших пояснений."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr "Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса \"ivory\". Смотрите описание \"AgentLogo\" для дальгейших пояснений."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr "Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса \"ivory-slim\". Смотрите описание \"AgentLogo\" для дальгейших пояснений."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"High Contrast\". See \"AgentLogo\" for further description."
-msgstr "Логотип, отображаемый в заголовке экрана интерфейса агента для окраса \"High Contrast\". Смотрите описание \"AgentLogo\" для дальнейших пояснений."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server."
 msgstr ""
 
@@ -24242,5 +24226,21 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Show All"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+msgid "New Process Ticket"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
+msgstr ""
+
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
 msgstr ""
 
