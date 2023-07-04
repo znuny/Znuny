@@ -44,7 +44,9 @@ sub ValueIsDifferent {
 sub ValueDelete {
     my ( $Self, %Param ) = @_;
 
-    my $Success = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueDelete(
+    my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+
+    my $Success = $DynamicFieldValueObject->ValueDelete(
         FieldID  => $Param{DynamicFieldConfig}->{ID},
         ObjectID => $Param{ObjectID},
         UserID   => $Param{UserID},
@@ -56,7 +58,9 @@ sub ValueDelete {
 sub AllValuesDelete {
     my ( $Self, %Param ) = @_;
 
-    my $Success = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->AllValuesDelete(
+    my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+
+    my $Success = $DynamicFieldValueObject->AllValuesDelete(
         FieldID => $Param{DynamicFieldConfig}->{ID},
         UserID  => $Param{UserID},
     );
@@ -103,20 +107,23 @@ creates the label HTML to be used in edit masks.
 sub EditLabelRender {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
     for my $Needed (qw(DynamicFieldConfig FieldName)) {
-        if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!"
-            );
-            return;
-        }
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
     }
 
     # check DynamicFieldConfig (general)
     if ( !IsHashRefWithData( $Param{DynamicFieldConfig} ) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "The field configuration is invalid",
         );
@@ -126,7 +133,7 @@ sub EditLabelRender {
     # check DynamicFieldConfig (internally)
     for my $Needed (qw(Label)) {
         if ( !$Param{DynamicFieldConfig}->{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed in DynamicFieldConfig!"
             );
@@ -224,9 +231,12 @@ Searches/fetches dynamic field value.
 sub ValueSearch {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
+    my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+
     # check mandatory parameters
     if ( !IsHashRefWithData( $Param{DynamicFieldConfig} ) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Need DynamicFieldConfig!"
         );
@@ -248,14 +258,14 @@ sub ValueSearch {
     );
 
     if ( !defined $SearchSQL || !length $SearchSQL ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Error generating search SQL!"
         );
         return;
     }
 
-    my $Values = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueSearch(
+    my $Values = $DynamicFieldValueObject->ValueSearch(
         FieldID   => $Param{DynamicFieldConfig}->{ID},
         Search    => $Param{Search},
         SearchSQL => $SearchSQL,
