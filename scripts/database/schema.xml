@@ -2576,7 +2576,7 @@
 <Table Name="calendar_appointment_plugin">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="dbcrud_uuid" Required="false" Size="36" Type="VARCHAR"/> <!-- not required because up until 6.5 this column was added "on the fly" -->
-    <Column Name="appointment_id" Required="true" Type="SMALLINT"/>
+    <Column Name="appointment_id" Required="true" Type="BIGINT"/>
     <Column Name="plugin_key" Required="true" Size="1000" Type="VARCHAR"/>
     <Column Name="config" Required="false" Size="1000000" Type="VARCHAR"/>
     <Column Name="create_time" Required="true" Type="DATE"/>

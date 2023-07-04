@@ -56,6 +56,10 @@ sub Run {
             Message => 'Update table smime_keys',
             Module  => 'SMIME',
         },
+        {
+            Message => 'Increase size of column of database table calendar_appointment_plugin',
+            Module  => 'CalendarAppointmentID',
+        },
     );
 
     return 1   if !@Tasks;

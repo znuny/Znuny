@@ -1716,7 +1716,7 @@ CREATE TABLE calendar_appointment (
 CREATE TABLE calendar_appointment_plugin (
     id INTEGER NOT NULL AUTO_INCREMENT,
     dbcrud_uuid VARCHAR (36) NULL,
-    appointment_id SMALLINT NOT NULL,
+    appointment_id BIGINT NOT NULL,
     plugin_key TEXT NOT NULL,
     config MEDIUMTEXT NULL,
     create_time DATETIME NOT NULL,
