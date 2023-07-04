@@ -16,6 +16,7 @@ use parent qw(scripts::Migration::Base);
 our @ObjectDependencies = (
     'Kernel::System::DB',
 );
+
 =head1 SYNOPSIS
 
 Sets the Datatype of AppointmentID from SmallInt -> BigInt
