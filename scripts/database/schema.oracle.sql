@@ -5252,7 +5252,7 @@ END;
 CREATE TABLE calendar_appointment_plugin (
     id NUMBER (12, 0) NOT NULL,
     dbcrud_uuid VARCHAR2 (36) NULL,
-    appointment_id NUMBER (5, 0) NOT NULL,
+    appointment_id NUMBER (20, 0) NOT NULL,
     plugin_key VARCHAR2 (1000) NOT NULL,
     config CLOB NULL,
     create_time DATE NOT NULL,
