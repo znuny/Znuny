@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.904643860518923;
+    $Self->{Completeness}        = 0.903839788149619;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2021,6 +2021,7 @@ sub Data {
         'State type' => '工单状态类型',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '无法使此条目无效，因为系统中没有其他合并状态！',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '这个状态已用于以下的系统配置设置：',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2944,6 +2945,9 @@ sub Data {
         'Welcome!' => '欢迎！',
         'Please click the button below to create your first ticket.' => '请点击下面的按钮创建第一个工单。',
         'Create your first ticket' => '创建第一个工单',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索条件',
@@ -5540,6 +5544,8 @@ sub Data {
             '定义本系统的标识符。每个工单编号和HTTP会话字符串均包含这个ID。这确保只有属于本系统的工单才会被跟进处理（在两套Znuny实例间通信时有用）。',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '定义本系统的正式域名。这个设置用于变量OTRS_CONFIG_FQDN，在所有的消息表单中使用，以创建系统内部到工单的链接。',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '使用公共模块 \'PublicSupportDataCollector\' （如用于Znuny守护进程的模块）定义用于搜集支持数据的HTTP主机名。',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5571,14 +5577,6 @@ sub Data {
             '服务人员界面显示在顶部的LOGO，图片的URL地址可以是皮肤图片目录的相对URL，也可以是远程WEB服务器的完整URL。',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '服务人员界面“默认”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '服务人员界面“修身版”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '服务人员界面“ivory”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '服务人员界面“象牙白-修身版”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '服务人员界面“High Contrast（高对比度）”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '服务人员界面显示在登录窗口顶部的LOGO，图片的URL地址可以是皮肤图片目录的相对路径，也可以是远程WEB服务器的完整地址。',
         'Defines the URL base path of icons, CSS and Java Script.' => '定义图标、CSS和Javascript的URL基本路径。',
@@ -6115,10 +6113,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '指定服务人员显示姓和名的先后顺序。',
         'Default skin for the agent interface.' => '服务人员界面的默认皮肤。',
-        'Default skin for the agent interface (slim version).' => '服务人员界面的默认皮肤（修身版）。',
-        'Balanced white skin by Felix Niklas.' => 'Felix Niklas制作的平衡白皮肤。',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Felix Niklas制作的平衡白皮肤（修身版）。',
-        'High contrast skin for visually impaired users.' => '用于视力受损用户的高对比度皮肤。',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '服务人员界面皮肤的内部名称，请在Frontend::Agent::Loader::Agent::Skin中检查可用的皮肤。',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7851,6 +7845,7 @@ sub Data {
         'Group for default access.' => '具有默认权限的组。',
         'Group of all administrators.' => '所有管理员的组。',
         'Group for statistics access.' => '具有统计权限的组。',
+        'Group for time accounting web service access.' => '',
         'new' => 'new-新建',
         'All new state types (default: viewable).' => '所有新工单的状态类型（默认：可查看）。',
         'open' => 'open-处理中',
@@ -8387,8 +8382,6 @@ Thanks for your help!
         ' 2 minutes' => ' 2 分钟',
         ' 5 minutes' => ' 5 分钟',
         ' 7 minutes' => ' 7 分钟',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '为高级用户节约屏幕空间的“修身版”皮肤。',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '（登录用户名）名 姓',
         '(UserLogin) Lastname Firstname' => '（登录用户名）姓 名',
@@ -8603,7 +8596,6 @@ Thanks for your help!
         'Danish' => '丹麦语',
         'Dashboard overview.' => '仪表板概览。',
         'Date / Time' => '日期 / 时间',
-        'Default (Slim)' => '默认（修身版）',
         'Default agent name' => '默认的服务人员姓名',
         'Default value for NameX' => 'NameX的默认值',
         'Define the queue comment 2.' => '定义队列注释2。',
@@ -8706,7 +8698,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => '图形：堆叠面积图',
         'Greek' => '希腊语',
         'Hebrew' => '希伯来语',
-        'High Contrast' => '高对比度',
         'Hindi' => '印度语',
         'Hungarian' => '匈牙利语',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8727,8 +8718,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '无法检查PGP签名，这可能是由于缺少公钥或不支持的算法造成的。',
         'Italian' => '意大利语',
-        'Ivory' => '象牙白',
-        'Ivory (Slim)' => '象牙白（修身版）',
         'Japanese' => '日语',
         'Korean' => '韩语',
         'Language' => '语言',

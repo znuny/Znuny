@@ -226,6 +226,18 @@
 
                         <div class="field-wrapper">
                             [% Data.ColorPicker %]
+                            <div id="ColorError" class="TooltipErrorMessage">
+                                <p>
+                                    [% Translate("This field must be a hexadecimal color code.") | html %]
+                                </p>
+                            </div>
+                            <div id="ColorServerError" class="TooltipErrorMessage">
+                                <p>
+[% RenderBlockStart("ColorInvalidServerError") %]
+                                    [% Translate("This field must be a hexadecimal color code.") | html %]
+[% RenderBlockEnd("ColorInvalidServerError") %]
+                                </p>
+                            </div>
                         </div>
 
                         <div class="field-wrapper">

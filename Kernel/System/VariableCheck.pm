@@ -38,7 +38,7 @@ Call this module directly without instantiating:
     use Kernel::System::VariableCheck qw(IsHashRefWitData); # export just one function
 
     if (IsHashRefWithData($HashRef)) {
-        ...
+        # ...
     }
 
 The functions can be grouped as follows:
@@ -137,7 +137,7 @@ returns 1 if data matches criteria or undef otherwise
     my $Result = IsArrayRefWithData(
         [ # data to be tested
             'key',
-            ...
+            # ...
         ],
     );
 
@@ -162,7 +162,7 @@ returns 1 if data matches criteria or undef otherwise
     my $Result = IsHashRefWithData(
         { # data to be tested
             'key' => 'value',
-            ...
+            # ...
         },
     );
 

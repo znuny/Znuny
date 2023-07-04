@@ -2759,7 +2759,7 @@ Returns:
     $TicketCount = {
         Attribute_Value_1 => 1,
         Attribute_Value_2 => 3,
-        ...
+        # ...
     };
 
 =cut

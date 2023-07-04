@@ -5254,7 +5254,7 @@ END;
 CREATE TABLE calendar_appointment_plugin (
     id NUMBER (12, 0) NOT NULL,
     dbcrud_uuid VARCHAR2 (36) NULL,
-    appointment_id NUMBER (5, 0) NOT NULL,
+    appointment_id NUMBER (20, 0) NOT NULL,
     plugin_key VARCHAR2 (1000) NOT NULL,
     config CLOB NULL,
     create_time DATE NOT NULL,
@@ -5794,7 +5794,7 @@ CREATE TABLE smime_keys (
     key_hash VARCHAR2 (8) NOT NULL,
     key_type VARCHAR2 (255) NOT NULL,
     file_name VARCHAR2 (255) NOT NULL,
-    email_address VARCHAR2 (255) NULL,
+    email_address CLOB NULL,
     expiration_date DATE NULL,
     fingerprint VARCHAR2 (59) NULL,
     subject CLOB NULL,
