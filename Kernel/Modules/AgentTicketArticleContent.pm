@@ -79,7 +79,7 @@ sub Run {
         ArticleID => $ArticleID,
     );
 
-    if ( !$ArticleContent ) {
+    if ( !defined($ArticleContent) ) {
         $LogObject->Log(
             Message  => 'No such article!',
             Priority => 'error',
