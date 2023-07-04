@@ -38,7 +38,6 @@ sub _IncreaseColumnsSize {
         '<TableAlter Name="calendar_appointment_plugin">
             <ColumnChange NameOld="appointment_id" NameNew="appointment_id" Required="true" Type="BIGINT"/>
         </TableAlter>'
-        
     );
 
     return if !$Self->ExecuteXMLDBArray(
