@@ -2924,7 +2924,7 @@ sub _RenderArticle {
     );
 
     $Data{Body} = $TemplateGeneratorObject->_Replace(
-        RichText => 1,
+        RichText => $LayoutObject->{BrowserRichText},
         Text     => $Data{Body} || '',
         Data     => {
             %{ $Param{GetParam} },
@@ -2938,7 +2938,7 @@ sub _RenderArticle {
     );
 
     $Data{Subject} = $TemplateGeneratorObject->_Replace(
-        RichText => 0,                      # In this case rich-text support is not needed.
+        RichText => $LayoutObject->{BrowserRichText},
         Text     => $Data{Subject} || '',
         Data     => {
             %{ $Param{GetParam} },
@@ -5168,7 +5168,7 @@ sub _StoreActivityDialog {
             }
 
             $TicketParam{Title} = $TemplateGeneratorObject->_Replace(
-                RichText => 0,                           # In this case rich-text support is not needed.
+                RichText => $LayoutObject->{BrowserRichText},
                 Text     => $TicketParam{Title} || '',
                 Data     => {
                     %{ $Param{GetParam} },
@@ -5639,7 +5639,7 @@ sub _StoreActivityDialog {
                 }
 
                 $Param{GetParam}->{Body} = $TemplateGeneratorObject->_Replace(
-                    RichText => 1,
+                    RichText => $LayoutObject->{BrowserRichText},
                     Text     => $Param{GetParam}->{Body} || '',
                     Data     => {
                         %{ $Param{GetParam} },
@@ -5652,7 +5652,7 @@ sub _StoreActivityDialog {
                 );
 
                 $Param{GetParam}->{Subject} = $TemplateGeneratorObject->_Replace(
-                    RichText => 0,                                   # In this case rich-text support is not needed.
+                    RichText => $LayoutObject->{BrowserRichText},
                     Text     => $Param{GetParam}->{Subject} || '',
                     Data     => {
                         %{ $Param{GetParam} },
