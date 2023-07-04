@@ -222,7 +222,7 @@ returns:
         Modules => {
             "Algorithm::Diff"  => "1.30",
             "Apache::DBI"      => 1.62,
-            ......
+            # ...
         },
     );
 

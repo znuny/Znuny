@@ -74,7 +74,7 @@ Import calendar in C<iCalendar> format.
                 PRODID:Zimbra-Calendar-Provider
                 VERSION:2.0
                 METHOD:REQUEST
-                ...
+                # ...
             ',
         UserID         => 1,                      # (required) UserID
         UpdateExisting => 0,                      # (optional) Delete existing Appointments within same Calendar if UniqueID matches

@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.645017352503718;
+    $Self->{Completeness}        = 0.645150612380007;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2019,6 +2019,7 @@ sub Data {
         'State type' => 'Rodzaj stanu',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2942,6 +2943,9 @@ sub Data {
         'Welcome!' => 'Witaj!',
         'Please click the button below to create your first ticket.' => 'Prosimy, kliknij przycisk poniżej aby utworzyć swoje pierwsze zgłoszenie.',
         'Create your first ticket' => 'Utwórz swoje pierwsze zgłoszenie',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
@@ -5538,6 +5542,8 @@ sub Data {
             '',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5569,14 +5575,6 @@ sub Data {
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            'Logo wyświetlane w nagłówku interfejsu agenta dla skórki "Wysoki kontrast". Zajrzyj do "AgentLogo" w celu uzyskania dalszych wyjaśnień.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Logo wyświetlane nad oknem logowania interfejsu agenta. URL do obrazka może być podany jako relatywny URL do katalogu skórek, lub pełny URL do zewnętrznego serwera.',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Definiuje ścieżkę dla ikon, CSS i skryptów Java.',
@@ -6113,10 +6111,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Określa kolejność wyświetlania imienia i nazwiska agentów.',
         'Default skin for the agent interface.' => 'Domyślna skóra dla interfejsu agentów.',
-        'Default skin for the agent interface (slim version).' => 'Domyślna skóra dla interfejsu agentów (wersja odchudzona).',
-        'Balanced white skin by Felix Niklas.' => 'Biała zbalansowana skórka od Felixa Niklasa.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Biała zbalansowana skórka od Felixa Niklasa (wersja odchudzona).',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7849,6 +7843,7 @@ sub Data {
         'Group for default access.' => 'Grupa z podstawowymi prawami dostępu.',
         'Group of all administrators.' => 'Grupa wszystkich administratorów.',
         'Group for statistics access.' => 'Grupa z dostępem do statystyk.',
+        'Group for time accounting web service access.' => '',
         'new' => 'nowe',
         'All new state types (default: viewable).' => '',
         'open' => 'otwarte',
@@ -8385,8 +8380,6 @@ Twój Zespół Helpdesk.
         ' 2 minutes' => ' 2 minuty',
         ' 5 minutes' => ' 5 minut',
         ' 7 minutes' => ' 7 minut',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            'Skórka "Slim" która wymaga mniej miejsca na ekranie do wyświetlania informacji.',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Login) Imię Nazwisko',
         '(UserLogin) Lastname Firstname' => '(Login) Nazwisko Imię',
@@ -8601,7 +8594,6 @@ Twój Zespół Helpdesk.
         'Danish' => 'Duński',
         'Dashboard overview.' => 'Przegląd pulpitu.',
         'Date / Time' => 'Data / Czas',
-        'Default (Slim)' => '',
         'Default agent name' => '',
         'Default value for NameX' => 'Domyślna wartość dla NazwyX',
         'Define the queue comment 2.' => '',
@@ -8704,7 +8696,6 @@ Twój Zespół Helpdesk.
         'Graph: Stacked Area Chart' => '',
         'Greek' => 'Grecki',
         'Hebrew' => 'Hebrajski',
-        'High Contrast' => '',
         'Hindi' => 'Hindi',
         'Hungarian' => 'Węgierski',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8725,8 +8716,6 @@ Twój Zespół Helpdesk.
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Włoski',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => 'Japoński',
         'Korean' => 'Koreański',
         'Language' => 'Język',

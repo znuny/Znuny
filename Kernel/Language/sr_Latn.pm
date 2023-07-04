@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.901008097835069;
+    $Self->{Completeness}        = 0.900198609731877;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2020,6 +2020,7 @@ sub Data {
         'State type' => 'Tip statusa',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             'Nije moguće obeležiti ovu stavku kao nevažeću jer ne postoji više statusa spojenih tiketa u sistemu!',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Ovo stanje se koristi u sledećim sistemskim podešavanjima: ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2943,6 +2944,9 @@ sub Data {
         'Welcome!' => 'Dobrodošli!',
         'Please click the button below to create your first ticket.' => 'Molimo da pritisnete dugme ispod za kreiranje vašeg prvog tiketa.',
         'Create your first ticket' => 'Kreirajte vaš prvi tiket',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
@@ -5539,6 +5543,8 @@ sub Data {
             'Definiše identifikator sistema. Svaki broj tiketa i niz znakova „http” sesije sadrši ovaj ID. Ovo osigurava da će samo tiketi koji pripadaju vašem sistemu biti obrađeni kao operacije praćenja (korisno kada se odvija komunikacija između dve „Znuny” instance).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Definiše potpuno kvalifikovano ime domena sistema. Ovo podešavanje se koristi kao promenljiva OTRS_CONFIG_FQDN, koja se nalazi u svim formama poruka i koristi od strane aplikacije, za građenje veza do tiketa unutar vašeg sistema.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             'Definiše HTTP host za slanje podataka podrške preko javnog module \'PublicSupportDataCollector\' (npr. od strane Znuny sistemskog servisa).',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5570,14 +5576,6 @@ sub Data {
             'Logo prikazan u zaglavlju operaterskog interfejsa. URL do slike može biti relativan u odnosu na direktorijum sa slikama ili apsolutan do udaljenog servera.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Logo prikazan u zaglavlju interfejsa operatera za izgled "podrazumevani". Pogledajte "AgentLogo" za detaljniji opis.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'Logo prikazan u zaglavlju interfejsa operatera za "uprošćeni" izgled. Pogledajte "AgentLogo" za detaljniji opis.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'Logo prikazan u zaglavlju interfejsa operatera za izgled Slonovača. Pogledajte AgentLogo za detaljniji opis.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'Logo prikazan u zaglavlju interfejsa operatera za izgled Slonovača (uprošćeno). Pogledajte AgentLogo za detaljniji opis.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            'Logo prikazan u zaglavlju interfejsa operatera za izgled "High Contrast". Pogledajte "AgentLogo" za detaljniji opis.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Logo prikazan u zaglavlju interfejsa operatera. URL do slike može biti relativan u odnosu na direktorijum sa slikama ili apsolutan do udaljenog servera.',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Definiše URL osnovnu putanju za ikone, CSS i Java Script.',
@@ -6114,10 +6112,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Određuje oblik u kome će biti prikazano ime i prezime operatera.',
         'Default skin for the agent interface.' => 'Podrazumevani izgled okruženja za interfejs operatera.',
-        'Default skin for the agent interface (slim version).' => 'Podrazumevani izgled okruženja za interfejs operatera (slaba verzija).',
-        'Balanced white skin by Felix Niklas.' => 'Izbalansirani beli izgled, Feliks Niklas.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Izbalansirani beli izgled, Feliks Niklas (tanka verzija).',
-        'High contrast skin for visually impaired users.' => 'Visoko kontrastni izgled za osobe slabijeg vida.',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Izled koji će se koristiti u interfejsu operatera. Molimo proverite dostupne izglede u Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7850,6 +7844,7 @@ sub Data {
         'Group for default access.' => 'Grupa za podrazumevan pristup.',
         'Group of all administrators.' => 'Grupa svih administratora.',
         'Group for statistics access.' => 'Grupa za pristup statistici.',
+        'Group for time accounting web service access.' => '',
         'new' => 'novo',
         'All new state types (default: viewable).' => 'Svi novi tipovi stanja (podrazumevano: vidljivo).',
         'open' => 'otvoreni',
@@ -8387,8 +8382,6 @@ Vaša tehnička podrška
         ' 2 minutes' => ' 2 minuta',
         ' 5 minutes' => ' 5 minuta',
         ' 7 minutes' => ' 7 minuta',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '"Uprošćeni" izgled koji pokušava da uštedi mesto za napredne korisnike.',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Korisničko ime) Ime Prezime',
         '(UserLogin) Lastname Firstname' => '(Korisničko ime) Prezime Ime',
@@ -8603,7 +8596,6 @@ Vaša tehnička podrška
         'Danish' => 'Danski',
         'Dashboard overview.' => 'Pregled komandne table.',
         'Date / Time' => 'Datum / Vreme',
-        'Default (Slim)' => 'Podrazumevano (uprošćeno)',
         'Default agent name' => 'Podrazumevano ime operatera',
         'Default value for NameX' => 'Podrazumevana vrednost za NameX',
         'Define the queue comment 2.' => 'Definiše komentar reda 2.',
@@ -8706,7 +8698,6 @@ Vaša tehnička podrška
         'Graph: Stacked Area Chart' => 'Grafik: Naslagani prostorni grafikon',
         'Greek' => 'Grčki',
         'Hebrew' => 'Hebrejski',
-        'High Contrast' => 'Visoki kontrast',
         'Hindi' => 'Hindi',
         'Hungarian' => 'Mađarski',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8727,8 +8718,6 @@ Vaša tehnička podrška
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Italijanski',
-        'Ivory' => 'Slonovača',
-        'Ivory (Slim)' => 'Slonovača (uprošćeno)',
         'Japanese' => 'Japanski',
         'Korean' => 'Korejski',
         'Language' => 'Jezik',

@@ -1716,7 +1716,7 @@ CREATE TABLE calendar_appointment (
 CREATE TABLE calendar_appointment_plugin (
     id INTEGER NOT NULL AUTO_INCREMENT,
     dbcrud_uuid VARCHAR (36) NULL,
-    appointment_id SMALLINT NOT NULL,
+    appointment_id BIGINT NOT NULL,
     plugin_key TEXT NOT NULL,
     config MEDIUMTEXT NULL,
     create_time DATETIME NOT NULL,
@@ -1855,7 +1855,7 @@ CREATE TABLE smime_keys (
     key_hash VARCHAR (8) NOT NULL,
     key_type VARCHAR (255) NOT NULL,
     file_name VARCHAR (255) NOT NULL,
-    email_address VARCHAR (255) NULL,
+    email_address MEDIUMTEXT NULL,
     expiration_date DATETIME NULL,
     fingerprint VARCHAR (59) NULL,
     subject MEDIUMTEXT NULL,

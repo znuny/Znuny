@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.610973392827632;
+    $Self->{Completeness}        = 0.610228401191658;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2015,6 +2015,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'State type' => 'Jenis pilihan',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2939,6 +2940,9 @@ bin/znuny.Daemon.pl status\').',
         'Welcome!' => 'Selamat datang!',
         'Please click the button below to create your first ticket.' => 'Silahkan tekan tombol dibawah untuk membuat tiket pertama anda.',
         'Create your first ticket' => 'Membuat tiket pertama anda',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
@@ -5535,6 +5539,8 @@ bin/znuny.Daemon.pl status\').',
             'Mendefinisikan sistem identifier. Setiap nomor tiket dan sesi http string berisi ID ini. Hal ini memastikan bahwa hanya tiket yang milik sistem anda akan diproses sebagai tindak lanjut (berguna ketika berkomunikasi antara dua contoh Znuny).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Mendefinisikan nama domain berkualifikasi lengkap dari sistem. Pengaturan ini digunakan sebagai variabel, OTRS_CONFIG_FQDN yang ditemukan dalam semua bentuk pesan yang digunakan oleh aplikasi, untuk membangun link ke tiket dalam sistem Anda.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5566,14 +5572,6 @@ bin/znuny.Daemon.pl status\').',
             'Logo dalam header dari antarmuka agen. URL untuk gambar bisa menjadi URL relatif ke direktori image kulit, atau URL lengkap ke web server jauh.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Logo dalam header dari antarmuka agen untuk kulit "default". Lihat "Agen Logo" untuk deskripsi lebih lanjut.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'Logo dalam header dari antarmuka agen untuk kulit "tipis". Lihat "Agen Logo" untuk deskripsi lebih lanjut.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'Logo dalam header dari antarmuka agen untuk kulit "gading". Lihat "Agen Logo" untuk deskripsi lebih lanjut.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'Logo dalam header dari antarmuka agen untuk kulit "gading-slim". Lihat "Agen Logo" untuk deskripsi lebih lanjut.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Mendefinisikan path basis URL ikon, CSS dan Java Script.',
@@ -6110,10 +6108,6 @@ bin/znuny.Daemon.pl status\').',
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Menentukan urutan nama depan dan nama belakang dari agen akan ditampilkan.',
         'Default skin for the agent interface.' => 'kulit default untuk antarmuka agen.',
-        'Default skin for the agent interface (slim version).' => 'kulit default untuk antarmuka agen (versi slim).',
-        'Balanced white skin by Felix Niklas.' => 'kulit putih yang seimbang oleh Felix Niklas ',
-        'Balanced white skin by Felix Niklas (slim version).' => 'kulit putih yang seimbang oleh Felix Niklas (versi slim).',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'agen menguliti Nama internal yang harus digunakan dalam antarmuka agen. Silakan periksa kulit yang tersedia di  Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7847,6 +7841,7 @@ bin/znuny.Daemon.pl status\').',
         'Group for default access.' => 'Kelompok untuk akses default.',
         'Group of all administrators.' => 'Grup semua administrator',
         'Group for statistics access.' => 'Grup untuk akses statistik',
+        'Group for time accounting web service access.' => '',
         'new' => 'baru',
         'All new state types (default: viewable).' => 'Semua jenis state (default: paparkan).',
         'open' => 'buka',
@@ -8384,8 +8379,6 @@ Helpdesk Team Anda
         ' 2 minutes' => '2 menit',
         ' 5 minutes' => '5 menit',
         ' 7 minutes' => '7 menit',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '"Slim" kulit yang mencoba untuk menghemat ruang layar untuk tenaga pengguna',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Pengguna Masuk) Nama depan Nama akhir',
         '(UserLogin) Lastname Firstname' => '(Pengguna masuk) Nama akhir Nama depan',
@@ -8600,7 +8593,6 @@ Helpdesk Team Anda
         'Danish' => 'Denmark',
         'Dashboard overview.' => '',
         'Date / Time' => 'Tanggal / Waktu',
-        'Default (Slim)' => 'Default (Slim)',
         'Default agent name' => '',
         'Default value for NameX' => 'Nilai default untuk nama',
         'Define the queue comment 2.' => 'Tentukan max kedalaman antrian.',
@@ -8703,7 +8695,6 @@ Helpdesk Team Anda
         'Graph: Stacked Area Chart' => 'Grafik: Tumpukan Bagan Lokasi',
         'Greek' => 'Yunani',
         'Hebrew' => 'Ibrani',
-        'High Contrast' => '',
         'Hindi' => 'Hindi',
         'Hungarian' => 'Hongaria',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8724,8 +8715,6 @@ Helpdesk Team Anda
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Italia',
-        'Ivory' => 'Gading',
-        'Ivory (Slim)' => 'Ivory (slim)',
         'Japanese' => 'Jepang',
         'Korean' => '',
         'Language' => 'Bahasa',

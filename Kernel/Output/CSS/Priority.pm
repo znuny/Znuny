@@ -10,6 +10,7 @@ package Kernel::Output::CSS::Priority;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent 'Kernel::Output::CSS::Base';
 
@@ -57,7 +58,7 @@ sub CreateCSS {
         next PriorityID if !IsStringWithData( $Priority{Color} );
 
         $Data{ '.PriorityID-' . $PriorityID } = {
-            background => $Priority{Color},
+            background => $Priority{Color} . ' !important',
         };
     }
 

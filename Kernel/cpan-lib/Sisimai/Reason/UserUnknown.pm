@@ -85,6 +85,7 @@ sub match {
             |address[ ]rejected:[ ](?:
                  access[ ]denied
                 |invalid[ ]user
+                |invalid-recipient
                 |user[ ][^ ]+[ ]does[ ]not[ ]exist
                 |user[ ]unknown[ ]in[ ][^ ]+[ ]table
                 |unknown[ ]user
@@ -92,6 +93,7 @@ sub match {
             |does[ ]not[ ]exist(?:[ ]on[ ]this[ ]system)?
             |is[ ]not[ ]local
             |not[ ](?:exist|found|ok)
+            |refuses[ ]to[ ]accept[ ]your[ ]mail
             |unknown
             )
         |requested[ ]action[ ]not[ ]taken:[ ]mailbox[ ]unavailable
@@ -101,7 +103,9 @@ sub match {
              user[ ]unknown
             |badrcptto
             |no[ ]mailbox[ ]here[ ]by[ ]that[ ]name
+            |your[ ]envelope[ ]recipient[ ]has[ ]been[ ]denied
             )
+        |that[ ]domain[ ]or[ ]user[ ]isn't[ ]in[ ]my[ ]list[ ]of[ ]allowed[ ]rcpthosts
         |the[ ](?:
              email[ ]account[ ]that[ ]you[ ]tried[ ]to[ ]reach[ ]does[ ]not[ ]exist
             |following[ ]recipients[ ]was[ ]undeliverable
@@ -111,6 +115,8 @@ sub match {
         |this[ ](?:
              address[ ]no[ ]longer[ ]accepts[ ]mail
             |email[ ]address[ ]is[ ]wrong[ ]or[ ]no[ ]longer[ ]valid
+            |recipient[ ]is[ ]in[ ]my[ ]badrecipientto[ ]list
+            |recipient[ ]is[ ]not[ ]in[ ]my[ ]validrcptto[ ]list
             |spectator[ ]does[ ]not[ ]exist
             |user[ ]doesn[']?t[ ]have[ ]a[ ][^ ]+[ ]account
             )
@@ -158,13 +164,14 @@ sub true {
         #   Status: 5.1.1
         #   Diagnostic-Code: SMTP; 550 5.1.1 <***@example.jp>:
         #     Recipient address rejected: User unknown in local recipient table
-        state $prematches = [qw|NoRelaying Blocked MailboxFull HasMoved Rejected|];
+        state $prematches = [qw|NoRelaying Blocked MailboxFull HasMoved Rejected NotAccept|];
         state $ModulePath = {
             'Sisimai::Reason::NoRelaying'  => 'Sisimai/Reason/NoRelaying.pm',
             'Sisimai::Reason::Blocked'     => 'Sisimai/Reason/Blocked.pm',
             'Sisimai::Reason::MailboxFull' => 'Sisimai/Reason/MailboxFull.pm',
             'Sisimai::Reason::HasMoved'    => 'Sisimai/Reason/HasMoved.pm',
             'Sisimai::Reason::Rejected'    => 'Sisimai/Reason/Rejected.pm',
+            'Sisimai::Reason::NotAccept'   => 'Sisimai/Reason/NotAccept.pm',
         };
         my $matchother = 0;
 
@@ -243,7 +250,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2021 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

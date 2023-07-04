@@ -55,7 +55,7 @@ add new WebserviceHistory entry
     my $ID = $WebserviceHistoryObject->WebserviceHistoryAdd(
         WebserviceID => 2134,
         Config       => {
-            ...
+            # ...
         },
         UserID  => 123,
     );

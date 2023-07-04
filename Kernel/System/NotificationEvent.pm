@@ -147,7 +147,7 @@ Returns:
         Name    => 'Agent::Move',
         Data => {
             Events => [ 'TicketQueueUpdate' ],
-            ...
+            # ...
             Queue => [ 'SomeQueue' ],
         },
         Message => {
@@ -267,7 +267,7 @@ adds a new notification to the database
         Name => 'Agent::OwnerUpdate',
         Data => {
             Events => [ 'TicketQueueUpdate' ],
-            ...
+            # ...
             Queue => [ 'SomeQueue' ],
         },
         Message => {
@@ -433,7 +433,7 @@ update a notification in database
         Name    => 'Agent::OwnerUpdate',
         Data => {
             Events => [ 'TicketQueueUpdate' ],
-            ...
+            # ...
             Queue => [ 'SomeQueue' ],
         },
         Message => {

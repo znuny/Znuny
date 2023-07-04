@@ -272,7 +272,7 @@ Returns:
         'Cc'      => 'Test User3 <testuser3@example.com>',
         'Subject' => 'This is a test subject!',
         'Body'    => 'This is a body text!',
-        ...
+        # ...
         },
     ];
 
@@ -625,7 +625,7 @@ Returns article content with dynamic fields.
             ArticleID => 1,
             From      => 'agent@mail.org',
             To        => 'customer@mail.org',
-            ...
+            # ...
         },
     );
 
@@ -635,9 +635,9 @@ Returns:
         ArticleID => 1,
         From      => 'agent@mail.org',
         To        => 'customer@mail.org',
-        ...,
+        # ...,
         DynamicField_A  => 'Value A',
-        ...
+        # ...
     );
 
 =cut

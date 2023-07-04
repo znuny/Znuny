@@ -3988,7 +3988,7 @@ OR:
     my $Result = $ZnunyHelperObject->_WebserviceCreateIfNotExists(
         Webservices => {
             'New Webservice 1234' => '/path/to/Webservice.yml',
-            ...
+            # ...
         }
     );
 
@@ -4085,7 +4085,7 @@ OR:
     my $Result = $ZnunyHelperObject->_WebserviceCreate(
         Webservices => {
             'New Webservice 1234' => '/path/to/Webservice.yml',
-            ...
+            # ...
         }
     );
 
@@ -4188,7 +4188,7 @@ OR:
     my $Result = $ZnunyHelperObject->_WebserviceDelete(
         Webservices => {
             'Not needed Webservice 1234' => 1, # value is not used
-            ...
+            # ...
         }
     );
 
@@ -4337,7 +4337,7 @@ OR:
     my $Success = $ZnunyHelperObject->_ProcessCreateIfNotExists(
         Processes => {
             'New Process 1234' => '/path/to/Process.yml',
-            ...
+            # ...
         }
     );
 
@@ -4507,7 +4507,7 @@ OR:
     my $Success = $ZnunyHelperObject->_ProcessCreate(
         Processes => {
             'New Process 1234' => '/path/to/Process.yml',
-            ...
+            # ...
         }
     );
 
@@ -5501,7 +5501,7 @@ creates generic agents if not exists
             Name => 'JobName',
             Data => {
                 Valid => '1',
-                ...
+                # ...
                 Title => 'Test'
             },
             UserID => 1,

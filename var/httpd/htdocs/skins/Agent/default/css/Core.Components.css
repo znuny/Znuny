@@ -1352,12 +1352,13 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         transition: var(--main-transition);
         overflow: hidden;
     }
-    
+
     .ArticleAttachments li .file-info {
         display: flex;
         flex-direction: column;
         padding: var(--padding-md) var(--padding-xs) var(--padding-md) var(--padding-md);
         gap: var(--gap-sm);
+        overflow: hidden;
     }
 
     .ArticleAttachments li .file-name {
