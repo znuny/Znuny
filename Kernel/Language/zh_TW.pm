@@ -714,9 +714,9 @@ sub Data {
             '此外，為了让此任務定期反復地執行，您需要定義工單事件，以便觸發任務的執行。',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '如果工單事件被觸發，工單過濾器將對工單進行檢查看其條件是否匹配。任務只對匹配的工單發生作用。',
-        'Do you really want to delete this event trigger?' => '您確定要刪除這個事件觸發器嗎？',
         'Add Event Trigger' => '添加事件觸發器',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => '您確定要刪除這個事件觸發器嗎？',
         'Select Tickets' => '選取工單',
         '(e. g. 10*5155 or 105658*)' => '  例如: 10*5144 或者 105658*',
         '(e. g. 234321)' => '例如: 234321',
@@ -9173,6 +9173,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

@@ -710,9 +710,9 @@ sub Data {
             'Ngoài ra hay cách khác để thực hiện một chu kỳ, bạn có thể xác định sự kiện vé sẽ kích hoạt công việc này.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Nếu một sự kiện vé bị sa thải bộ lọc vé sẽ được áp dụng để kiểm tra xem vé phù hợp. Chỉ khi đó công việc được chạy trên vé đó.',
-        'Do you really want to delete this event trigger?' => 'Bạn có thực sự muốn xóa kích hoạt sự kiện này?',
         'Add Event Trigger' => 'Thêm sự kiện kích hoạt',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Bạn có thực sự muốn xóa kích hoạt sự kiện này?',
         'Select Tickets' => 'Chọn Vé',
         '(e. g. 10*5155 or 105658*)' => 'ví dụ: 10*5144 hoặc 105658*',
         '(e. g. 234321)' => 'ví dụ: 234321',
@@ -9167,6 +9167,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

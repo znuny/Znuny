@@ -139,14 +139,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="Hidden" id="DeleteTaskDialogContainer">
-                    <div id ="DeleteTaskDialog" class="InnerContent">
-                        <p class="Center Spacing">[% Translate("Do you really want to delete this generic agent job?") | html %]</p>
-                        <div class="SpacingTop"></div>
-                    </div>
-                </div>
+            </div>
         </div>
 [% RenderBlockEnd("Overview") %]
+        <div class="Hidden" id="DeleteTaskDialogContainer">
+            <div id ="DeleteTaskDialog" class="InnerContent">
+                <p class="Center Spacing">[% Translate("Do you really want to delete this generic agent job?") | html %]</p>
+                <div class="SpacingTop"></div>
+            </div>
+        </div>
 [% RenderBlockStart("Edit") %]
         <form action="[% Env("CGIHandle") %]" method="post" name="compose" class="Validate PreventMultipleSubmits">
             <div class="WidgetSimple">
@@ -266,7 +267,7 @@
                                         <td class="EventType">EventType</td>
                                         <td class="EventName">EventName</td>
                                         <td class="EventDelete Center">
-                                            <a id="DeleteEvent" class="TrashCan DeleteEvent table-icon-hover-md" href="#" title="[% Translate("Delete this event") | html %]">
+                                            <a class="TrashCan DeleteEvent table-icon-hover-md" href="#" title="[% Translate("Delete this event") | html %]">
                                                 [% Translate("Delete this event") | html %]
                                                 <i class="fa fa-trash-o"></i>
                                             </a>
@@ -278,7 +279,7 @@
                                         <td class="AsBlock">[% Data.EventType | html %]</td>
                                         <td>[% Data.Event | html %]</td>
                                         <td class="Center">
-                                            <a id="DeleteEvent[% Data.Event | html %] table-icon-hover-md" class="TrashCan DeleteEvent" href="#" title="[% Translate("Delete this event") | html %]">
+                                            <a id="DeleteEvent[% Data.Event | html %]" class="TrashCan DeleteEvent table-icon-hover-md" href="#" title="[% Translate("Delete this event") | html %]">
                                                 [% Translate("Delete this event") | html %]
                                                 <i class="fa fa-trash-o"></i>
                                             </a>
@@ -292,14 +293,6 @@
                                 [% Translate("Additionally or alternatively to a periodic execution, you can define ticket events that will trigger this job.") | html %]
                                 [% Translate("If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.") | html %]
                             </p>
-                        </div>
-
-                        <div class="Hidden" id="DeleteEventDialogContainer">
-                            <div id ="DeleteEventDialog" class="InnerContent GenericInterfaceDialog">
-                                <span class="WarningDialog ">
-                                </span>
-                                <p class="Center Warning">[% Translate("Do you really want to delete this event trigger?") | html %]</p>
-                            </div>
                         </div>
 
                         <div class="Field HideOnChange">
@@ -321,6 +314,12 @@
                             </p>
                         </div>
                     </fieldset>
+                </div>
+            </div>
+            <div class="Hidden" id="DeleteEventDialogContainer">
+                <div id ="DeleteEventDialog" class="InnerContent">
+                    <p class="Center Spacing">[% Translate("Do you really want to delete this event trigger?") | html %]</p>
+                    <div class="SpacingTop"></div>
                 </div>
             </div>
 

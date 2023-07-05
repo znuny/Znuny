@@ -714,9 +714,9 @@ sub Data {
             'Additionally or alternatively to a periodic execution, you can define ticket events that will trigger this job.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.',
-        'Do you really want to delete this event trigger?' => 'Do you really want to delete this event trigger?',
         'Add Event Trigger' => 'Add Event Trigger',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Do you really want to delete this event trigger?',
         'Select Tickets' => 'Select Tickets',
         '(e. g. 10*5155 or 105658*)' => '(e. g. 10*5155 or 105658*)',
         '(e. g. 234321)' => '(e. g. 234321)',
@@ -9182,6 +9182,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

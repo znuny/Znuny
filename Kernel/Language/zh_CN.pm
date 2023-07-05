@@ -718,9 +718,9 @@ sub Data {
             '作为定期自动执行的补充或替代，您可以定义工单事件来触发这个任务的执行。',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '如果工单事件被触发，工单过滤器将对工单进行检查看其条件是否匹配。任务只对匹配的工单发生作用。',
-        'Do you really want to delete this event trigger?' => '您真的想要删除这个事件触发器吗？',
         'Add Event Trigger' => '添加事件触发器',
         'To add a new event select the event object and event name' => '要添加新事件，请选择事件对象和事件名称',
+        'Do you really want to delete this event trigger?' => '您真的想要删除这个事件触发器吗？',
         'Select Tickets' => '选择工单',
         '(e. g. 10*5155 or 105658*)' => '（例如: 10*5144 或者 105658*）',
         '(e. g. 234321)' => '（例如: 234321）',
@@ -9185,6 +9185,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

@@ -712,9 +712,9 @@ sub Data {
             'Допълнително или алтернативно на периодично изпълнение можете да дефинирате събития на билетите, които ще задействат тази задача.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Ако се удържи събитие за билети, ще се приложи филтърът за билета, за да се провери дали съответният билет съвпада. Само тогава работата се изпълнява върху този билет.',
-        'Do you really want to delete this event trigger?' => 'Найстина ли искате да изтрите това събитие?',
         'Add Event Trigger' => 'Добавяне на Trigger за събития',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Найстина ли искате да изтрите това събитие?',
         'Select Tickets' => 'Изберете Билети',
         '(e. g. 10*5155 or 105658*)' => '(Пример: 10*5155 или 105658)',
         '(e. g. 234321)' => '(Пример: 234321)',
@@ -9169,6 +9169,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

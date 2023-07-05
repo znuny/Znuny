@@ -711,9 +711,9 @@ sub Data {
             'Adicionalmente ou alternativamente a unha execución periódica, vostede pode definir eventos de ticket que desencadearán esta tarefa.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Se un evento de ticket é disparado, o filtro de ticket será aplicado para comprobar se o ticket coincide. Soamente entón a tarefa é executada nese ticket.',
-        'Do you really want to delete this event trigger?' => 'Vostede quere realmente borrar este desencadeante de evento?',
         'Add Event Trigger' => 'Engadir un disparador de eventos',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Vostede quere realmente borrar este desencadeante de evento?',
         'Select Tickets' => 'Seleccione Tickets',
         '(e. g. 10*5155 or 105658*)' => '(p.ex. 10*5155 ou 105658*)',
         '(e. g. 234321)' => '(por exemplo 234321)',
@@ -9168,6 +9168,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

@@ -712,9 +712,9 @@ sub Data {
             'Додатково або альтернативно до періодичного запуску, ви можете визначити події заявок, що будуть тригерами цього завдання.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Якщо сталась подія заявки, фільтр заявки буде застосовано для перевірки чи заявка співпадає. Лише тоді завдання буде запущено для цієї заявки.',
-        'Do you really want to delete this event trigger?' => 'Ви дійсно хочете вилучити цей тригер події?',
         'Add Event Trigger' => 'Додати тригер події',
         'To add a new event select the event object and event name' => 'Щоб додати нову подію, виберіть об\'єкт події і назву події',
+        'Do you really want to delete this event trigger?' => 'Ви дійсно хочете вилучити цей тригер події?',
         'Select Tickets' => 'Обрати заявки',
         '(e. g. 10*5155 or 105658*)' => '(наприклад, 10*5155 або 105658*)',
         '(e. g. 234321)' => '(наприклад, 234321)',
@@ -9169,6 +9169,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

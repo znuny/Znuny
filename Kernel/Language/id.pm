@@ -711,9 +711,9 @@ sub Data {
             'Selain atau alternatif dari eksekusi secara periodik, anda dapat mendefinisikan tiket event yang akan memicu pekerjaan ini.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Jika tiket even diaktifkan, saringan tiket akan di aplikasikan untuk memeriksa jika tiket tersebut sesuai. Setelah itu barulah pekerjaan tersebut dijalankan pada tiket ini.',
-        'Do you really want to delete this event trigger?' => 'Apakah anda benar-benar ingin menghapus pemicu event ini?',
         'Add Event Trigger' => 'Tambahkan Pemicu event',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Apakah anda benar-benar ingin menghapus pemicu event ini?',
         'Select Tickets' => 'Pilih Tiket',
         '(e. g. 10*5155 or 105658*)' => '(Misalnya 10*5155 atau 105658*)',
         '(e. g. 234321)' => '(Misalnya 234321)',
@@ -9182,6 +9182,7 @@ Helpdesk Team Anda
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

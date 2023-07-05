@@ -711,9 +711,9 @@ sub Data {
             'Додатно или алтернативо на периодично извршување, можете да дефинирате тикет настани кои ќе ја предизвикуваат оваа работа.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Ако настанот на билетот е отпуштен, ќе се примени билет филтер  за да се провери дали билетот пости. Само тогаш работата на тикетот ќе започне.',
-        'Do you really want to delete this event trigger?' => 'Дали навистина сакате да го избришете овој предизвикувач на настан?',
         'Add Event Trigger' => 'Додај Настан Предизвикувач',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Дали навистина сакате да го избришете овој предизвикувач на настан?',
         'Select Tickets' => 'Изберете Тикет',
         '(e. g. 10*5155 or 105658*)' => '(пр. 10*5155 or 105658*)',
         '(e. g. 234321)' => '(пр. 234321)',
@@ -9168,6 +9168,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

@@ -710,9 +710,9 @@ sub Data {
             'Sebagai tambahan atau sebagai alternatif kepada pelaksanaan berkala, anda boleh menentukan peristiwa tiket yang akan mencetuskan kerja ini.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Sekiranya peristiwa tiket dihentikan, penapis tiket akan digunakan untuk memeriksa jika tiket adalah padan. Hanya selepas itu tugas akan dijalankan ke atas tiket.',
-        'Do you really want to delete this event trigger?' => 'Anda pasti mahu memadam pencetus acara ini?',
         'Add Event Trigger' => 'Tambah pencetus acara',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Anda pasti mahu memadam pencetus acara ini?',
         'Select Tickets' => 'Memilih Tiket',
         '(e. g. 10*5155 or 105658*)' => 'contoh. 10*5144 atau 105658*',
         '(e. g. 234321)' => 'contoh. 234321',
@@ -9181,6 +9181,7 @@ Kumpulan MejaBantuan Anda
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',
