@@ -2846,7 +2846,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Informace o tiketu',
         'This ticket is archived.' => 'Tiket je archivován.',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => 'Čekání na vyřízení do',
         'Locked' => 'Uzamčeno',
         '%s Ticket(s)' => '',

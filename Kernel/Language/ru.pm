@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.839126117179742;
+    $Self->{Completeness}        = 0.838960609069844;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2851,7 +2851,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Архив',
         'This ticket is archived.' => 'Заявка перемещена в архив.',
-        'Note: Type is invalid!' => 'Внимание: Тип недействителен!',
+        'is invalid' => '',
         'Pending till' => 'В ожидании еще',
         'Locked' => 'Блокировка',
         '%s Ticket(s)' => '%s заявка (ок)',

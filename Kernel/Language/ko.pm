@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.874875868917577;
+    $Self->{Completeness}        = 0.87471036080768;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2839,7 +2839,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '아카이브',
         'This ticket is archived.' => '이 티켓은 보관 처리됩니다.',
-        'Note: Type is invalid!' => '참고 : 유형이 유효하지 않습니다!',
+        'is invalid' => '',
         'Pending till' => '대기 시간까지',
         'Locked' => '잠김',
         '%s Ticket(s)' => '%s개 티켓',

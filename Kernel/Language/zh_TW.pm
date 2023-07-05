@@ -2843,7 +2843,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '歸檔',
         'This ticket is archived.' => '該工單已歸檔',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => '掛起至',
         'Locked' => '鎖定狀態',
         '%s Ticket(s)' => '',

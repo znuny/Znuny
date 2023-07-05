@@ -2839,7 +2839,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archív',
         'This ticket is archived.' => 'Tento ticket je zaarchivovaný',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => 'Odložené do.',
         'Locked' => 'Uzamknutý',
         '%s Ticket(s)' => '',

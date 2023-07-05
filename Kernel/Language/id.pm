@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.610228401191658;
+    $Self->{Completeness}        = 0.610062893081761;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2841,7 +2841,7 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arsip',
         'This ticket is archived.' => 'Tiket ini diarsipkan',
-        'Note: Type is invalid!' => 'Pemberitahuan: Tiket tidak sah!',
+        'is invalid' => '',
         'Pending till' => 'Ditunda hingga',
         'Locked' => 'Dikunci',
         '%s Ticket(s)' => '',

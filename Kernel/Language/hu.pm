@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.903839788149619;
+    $Self->{Completeness}        = 0.903674280039722;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2845,7 +2845,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archiválás',
         'This ticket is archived.' => 'Ez a jegy archiválva van.',
-        'Note: Type is invalid!' => 'Megjegyzés: a típus érvénytelen!',
+        'is invalid' => '',
         'Pending till' => 'Várakozás eddig',
         'Locked' => 'Zárolt',
         '%s Ticket(s)' => '%s jegy',

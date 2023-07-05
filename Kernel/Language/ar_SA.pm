@@ -2842,7 +2842,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '',
         'This ticket is archived.' => '',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => 'معلق حتى',
         'Locked' => 'مقفل',
         '%s Ticket(s)' => '',

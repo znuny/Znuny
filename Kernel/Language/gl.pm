@@ -2839,7 +2839,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arquivo',
         'This ticket is archived.' => 'Este tícket está arquivado.',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => 'Pendente ata',
         'Locked' => 'Bloqueado',
         '%s Ticket(s)' => '',

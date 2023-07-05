@@ -2839,7 +2839,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Архивирај',
         'This ticket is archived.' => 'Овој тикет е архивиран',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => 'На чекање до',
         'Locked' => 'Заклучено',
         '%s Ticket(s)' => '',

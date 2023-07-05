@@ -2842,7 +2842,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arkisto',
         'This ticket is archived.' => 'Tämä tiketti on arkistoitu.',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => 'Odottaa',
         'Locked' => 'Lukitus',
         '%s Ticket(s)' => '%s tiketti(ä)',

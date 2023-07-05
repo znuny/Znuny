@@ -2845,7 +2845,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'ארכיון',
         'This ticket is archived.' => 'פניה זו היא בארכיון.',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => 'ממתין עד',
         'Locked' => 'נעולה',
         '%s Ticket(s)' => '',
