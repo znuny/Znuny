@@ -1415,12 +1415,12 @@ sub QueryCondition {
                         $WordSQL = "'" . $WordSQL . "'";
                     }
 
-        # check if database supports LIKE in large text types
-        # the first condition is a little bit opaque
-        # CaseSensitive of the database defines, if the database handles case sensitivity or not
-        # and the parameter $CaseSensitive defines, if the customer database should do case sensitive statements or not.
-        # so if the database doesn't support case sensitivity or the configuration of the customer database wants to do this
-        # then we prevent the LOWER() statements.
+    # check if database supports LIKE in large text types
+    # the first condition is a little bit opaque
+    # CaseSensitive of the database defines, if the database handles case sensitivity or not
+    # and the parameter $CaseSensitive defines, if the customer database should do case sensitive statements or not.
+    # so if the database doesn't support case sensitivity or the configuration of the customer database wants to do this
+    # then we prevent the LOWER() statements.
                     if ( !$Self->GetDatabaseFunction('CaseSensitive') || $CaseSensitive ) {
                         $SQLA .= "$Key $Type $WordSQL";
                     }
@@ -1464,12 +1464,12 @@ sub QueryCondition {
                         $WordSQL = "'" . $WordSQL . "'";
                     }
 
-        # check if database supports LIKE in large text types
-        # the first condition is a little bit opaque
-        # CaseSensitive of the database defines, if the database handles case sensitivity or not
-        # and the parameter $CaseSensitive defines, if the customer database should do case sensitive statements or not.
-        # so if the database doesn't support case sensitivity or the configuration of the customer database want to do this
-        # then we prevent the LOWER() statements.
+     # check if database supports LIKE in large text types
+     # the first condition is a little bit opaque
+     # CaseSensitive of the database defines, if the database handles case sensitivity or not
+     # and the parameter $CaseSensitive defines, if the customer database should do case sensitive statements or not.
+     # so if the database doesn't support case sensitivity or the configuration of the customer database want to do this
+     # then we prevent the LOWER() statements.
                     if ( !$Self->GetDatabaseFunction('CaseSensitive') || $CaseSensitive ) {
                         $SQLA .= "$Key $Type $WordSQL";
                     }
