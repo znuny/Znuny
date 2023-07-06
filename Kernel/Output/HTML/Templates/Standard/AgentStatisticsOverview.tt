@@ -119,16 +119,15 @@
                                         <span class="InvisibleText">[% Translate('Export statistic %s', Data.Title) | html %]</span>
                                     </a>
                                 </td>
-                                <td class="Center" title="[% Translate('Delete statistic "%s"', Data.Title) | html %]">
-                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DeleteAction;StatID=[% Data.StatID | uri %];[% Env('ChallengeTokenParam') %]" class="AsBlock StatDelete table-icon-hover-md" data-stat-title="[% Data.Title | html %]">
+                                <td class="Center">
+                                    <a class="TrashCan DeleteStat table-icon-hover-md" href="#" data-statid="[% Data.StatID | html %]" title="[% Translate('Delete statistic %s', Data.Title) | html %]">
                                         <i class="fa fa-trash"></i>
-                                        <span class="InvisibleText">[% Translate('Delete statistic %s', Data.Title) | html %]</span>
                                     </a>
                                 </td>
                             [% END %]
                             <td class="Center">
                                 [% IF Data.Valid %]
-                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=View;StatID=[% Data.StatID | uri %]" class="RunNow AsBlock table-icon-hover-md">
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=View;StatID=[% Data.StatID | uri %]" class="RunNow AsBlock table-icon-hover-md" title="[% Translate('Run') | html %]">
                                         <i class="fa fa-caret-square-o-right"></i>
                                     </a>
                                 [% END %]
@@ -137,6 +136,12 @@
 [% RenderBlockEnd("Result") %]
                     </tbody>
                 </table>
+                <div class="Hidden" id="DeleteStatDialogContainer">
+                    <div id ="DeleteStatDialog" class="InnerContent">
+                        <p class="Center Spacing">[% Translate("Do you really want to delete this statistic?") | html %]</p>
+                        <div class="SpacingTop"></div>
+                    </div>
+                </div>
                 <span class="Pagination">
                     <ul>
                         <li>

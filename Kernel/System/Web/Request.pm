@@ -541,7 +541,7 @@ Specified params can be overwritten if necessary.
             Subaction   => undef,
             UserID      => 1,
             CustomParam => [ 1, 2, 3, ],
-            ...
+            # ...
         },
     );
 

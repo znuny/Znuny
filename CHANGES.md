@@ -1,3 +1,42 @@
+# 7.0.8 2023-??-??
+ - 2023-07-05 Fixed deletion dialogs in AdminGenericAgent. Thanks to Mohd Azfar (@mo-azfar). [#448](https://github.com/znuny/Znuny/issues/448)
+ - 2023-07-05 Added information about invalid settings to AgentTicketZoom 'Ticket Information'.
+ - 2023-07-04 Fixed - Incorrect display of empty HTML article body. Thanks to Paweł Bogusławski (@pboguslawski). [#438](https://github.com/znuny/Znuny/pull/438)
+ - 2023-07-04 Sector Nord AG: Fixed Calendar appointment plugin AppointmentID data type. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [#308](https://github.com/znuny/Znuny/pull/308)
+ - 2023-07-04 Fixed - Line breaks in processes when richtext disabled. Used ->{BrowserRichText}. Thanks to Timotheus Pokorra (@tpokorra). [#447](https://github.com/znuny/Znuny/issues/447)
+ - 2023-06-29 Added missing salutation and signature to notification for user mentions. Thanks to Paweł Bogusławski (@pboguslawski). [#420](https://github.com/znuny/Znuny/issues/420)
+
+# 7.0.7 2023-06-28
+ - 2023-06-27 Fixed CSS for attachments with long filenames. [#416](https://github.com/znuny/Znuny/issues/416)
+ - 2023-06-26 AdminState: Added color code validation.
+ - 2023-06-26 Fixed warning about missing article ID in AgentTicketNoteToLinkedTicket. Thanks to Paweł Bogusławski (@pboguslawski). [#431](https://github.com/znuny/Znuny/issues/431)
+ - 2023-06-21 Extend TicketArticleCreate transition action for a possibility to set a dynamic field of object type article and ticket.
+ - 2023-06-21 GUI-Redesign changes - CSS, TT and JS.
+ - 2023-06-20 Added ExternalFQDN parameter for better security. Thanks to Paweł Bogusławski (@pboguslawski). [PR#73](https://github.com/znuny/Znuny/pull/73)
+ - 2023-06-20 Changed AgentTicketProcess to always fill rich text editor configs. Thanks to Samuel Diniz Casimiro (@samueldc). [PR#266](https://github.com/znuny/Znuny/pull/266)
+ - 2023-06-20 Added Translate() to CustomerTicketProcess PageTitle. Thanks to Renée Bäcker (@reneeb). [PR#446](https://github.com/znuny/Znuny/pull/446)
+ - 2023-06-02 S/MIME: Increased size of column 'email_address' of table 'smime_keys'.
+
+# 7.0.6 2023-06-14
+ - 2023-06-07 Fixed ticket priority and state color. [#443](https://github.com/znuny/Znuny/issues/443)
+ - 2023-05-31 Added removal of protocol-relative URLs to Kernel::System::HTMLUtils::Safety. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
+ - 2023-05-31 Added security relevant check for content type of article and attachments to generic interface operations TicketCreate and TicketUpdate. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
+ - 2023-05-31 Process management: Added missing scope filter for transition actions.
+ - 2023-05-30 Updated CPAN library Sisimai to version 4.25.16. [#391](https://github.com/znuny/Znuny/issues/391)
+ - 2023-05-25 Changed article action 'note to linked ticket' to only be visible/usable in agent ticket zoom.
+ - 2023-05-23 Fixed event handling for DBCRUD history entries.
+
+# 7.0.5 2023-05-17
+ - 2023-05-17 GUI-Redesign changes - CSS, TT and JS.
+ - 2023-05-17 Updated 'Cancel' buttons in dialogs.
+ - 2023-05-11 Fixed ReplyAll in ArticleActionMenu template. [#410](https://github.com/znuny/Znuny/issues/410)
+ - 2023-05-09 Fixed item color in AgentAppointmentCalendarOverview. [#411](https://github.com/znuny/Znuny/issues/411)
+ - 2023-05-04 Fixed CSS for custom logos. [#357](https://github.com/znuny/Znuny/issues/357)
+
+# 7.0.4 2023-05-03
+ - 2023-05-03 GUI-Redesign changes - CSS, TT and JS.
+ - 2023-04-24 Fixed HTML in template AgentAppointmentEdit that prevented correct creation of calendar entries.
+
 # 7.0.3 2023-04-19
  - 2023-04-05 Fixed format of returned filename in function Kernel::System::Stats::StringAndTimestamp2Filename.
  - 2023-04-05 AdminSLA: Sub-services will now be shown as invalid if SLA is set to invalid.
@@ -25,12 +64,12 @@
  - 2022-11-21 Moved the additional buttons from Content 'Run()' area to Header 'Header()'. Added new Header() function. Kernel/Output/HTML/Dashboard/CustomerIDList.pm and Kernel/Output/HTML/Dashboard/CustomerUserList.pm
  - 2022-10-18 Added this SysConfig list of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them. (ColorPicker###Palette)
  - 2022-11-23 Mentions Widget - Changed the style of Mention Widget in TicketZoom.
- - 2022-10-21 Breadcrumbs - Moved all Breadcrumbs into the Content / ContentColumn <div> block.
+ - 2022-10-21 Breadcrumbs - Moved all Breadcrumbs into the Content / ContentColumn `<div>` block.
  - 2022-10-19 CustomerLogin - The login menu has been greatly simplified (HTML / JS).
  - 2022-10-18 Added ColorPicker for states and priorities. These attributes are now displayed in color as a pill.
  - 2022-10-18 Added Base module to add additional inline CSS.
  - 2022-10-13 Added a general ColorPicker function to LayoutObject.
- - 2022-10-10 Wrapper - Added additional <div> around a lot of fields to use flex technology.
+ - 2022-10-10 Wrapper - Added additional `<div>` around a lot of fields to use flex technology.
  - 2022-10-06 Button - The buttons have revised graphics.
  - 2022-10-04 Core.UI.Dialog DialogClass - Added new DialogClasses (modal-sm | modal-md | modal-lg)
  - 2022-09-06 New Activity module informs you directly via frontend.
@@ -40,6 +79,22 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.4 2023-??-??
+ - 2023-06-29 Added missing salutation and signature to notification for user mentions. Thanks to Paweł Bogusławski (@pboguslawski). [#420](https://github.com/znuny/Znuny/issues/420)
+ - 2023-06-26 Fixed warning about missing article ID in AgentTicketNoteToLinkedTicket. Thanks to Paweł Bogusławski (@pboguslawski). [#431](https://github.com/znuny/Znuny/issues/431)
+ - 2023-06-21 Extend TicketArticleCreate transition action for a possibility to set a dynamic field of object type article and ticket.
+ - 2023-06-19 Fixed dynamic field type 'Webservice' admin dialog test field being read-only and not usable.
+ - 2023-06-02 S/MIME: Increased size of column 'email_address' of table 'smime_keys'.
+
+# 6.5.3 2023-06-14
+ - 2023-05-31 Added removal of protocol-relative URLs to Kernel::System::HTMLUtils::Safety. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
+ - 2023-05-31 Added security relevant check for content type of article and attachments to generic interface operations TicketCreate and TicketUpdate. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
+ - 2023-05-31 Process management: Added missing scope filter for transition actions.
+ - 2023-05-30 Updated CPAN library Sisimai to version 4.25.16. [#391](https://github.com/znuny/Znuny/issues/391)
+ - 2023-05-25 Changed article action 'note to linked ticket' to only be visible/usable in agent ticket zoom.
+ - 2023-05-23 Fixed event handling for DBCRUD history entries.
+ - 2023-05-05 Fixed html element id of forward templates in AgentTicketZoom. [#351](https://github.com/znuny/Znuny/issues/351)
 
 # 6.5.2 2023-04-19
  - 2023-04-13 Activated information section and modal dialog for ICS calendar events in AgentTicketZoom view.
@@ -2111,7 +2166,7 @@
  - 2016-06-27 Followup for bug#[12078](http://bugs.otrs.org/show_bug.cgi?id=12078) - Change wording for better translation, thanks to Balázs Úr.
  - 2016-06-24 Don't write error log entry on first LDAP user login, thanks to Pawel Boguslawski.
  - 2016-06-24 Fixed bug#[9000](http://bugs.otrs.org/show_bug.cgi?id=9000) - shm errors on OTRS server startup.
- - 2016-06-23 Fixed bug#[11981](http://bugs.otrs.org/show_bug.cgi?id=11981) - GenericTicketConnector ignoring "<ContentSearch>OR</ContentSearch>" in full text search.
+ - 2016-06-23 Fixed bug#[11981](http://bugs.otrs.org/show_bug.cgi?id=11981) - GenericTicketConnector ignoring `<ContentSearch>OR</ContentSearch>` in full text search.
 
 # 5.0.11 2016-06-28
  - 2016-08-03 Updated translations, thanks to all translators.
@@ -2172,7 +2227,7 @@
  - 2016-05-04 Fixed bug#[12040](http://bugs.otrs.org/show_bug.cgi?id=12040) - Emails are incorrectly attached to tickets.
  - 2016-05-04 Fixed bug#[12044](http://bugs.otrs.org/show_bug.cgi?id=12044) - PostMaster process crashed if a non existent ticket type is set via PostMaster filter.
  - 2016-05-04 Fixed bug#[12031](http://bugs.otrs.org/show_bug.cgi?id=12031) - SubSelected class not applied to My Tickets in CustomerTicketOverview Navigation.
- - 2016-05-04 Fixed bug#[12048](http://bugs.otrs.org/show_bug.cgi?id=12048) - error message with HTML <br> code.
+ - 2016-05-04 Fixed bug#[12048](http://bugs.otrs.org/show_bug.cgi?id=12048) - error message with HTML `<br>` code.
  - 2016-05-04 Fixed bug#[12049](http://bugs.otrs.org/show_bug.cgi?id=12049) - Encoding problems in REST transport.
  - 2016-04-29 Fixed bug#[11614](http://bugs.otrs.org/show_bug.cgi?id=11614) - LDAP Auth loses Agent-Group relationships every 2nd login.
  - 2016-04-29 Fixed bug#[12036](http://bugs.otrs.org/show_bug.cgi?id=12036) - Escalation Notification % does not work for short intervals.

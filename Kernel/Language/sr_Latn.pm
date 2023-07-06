@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.901040806211796;
+    $Self->{Completeness}        = 0.900033101621979;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -695,6 +695,7 @@ sub Data {
         'Run' => 'Pokreni',
         'Delete this task' => 'Obriši ovaj posao',
         'Run this task' => 'Pokreni ovaj posao',
+        'Do you really want to delete this generic agent job?' => 'Da li stvarno želite da obrišete ovaj posao generičkog operatera?',
         'Job Settings' => 'Podešavanje posla',
         'Job name' => 'Naziv posla',
         'The name you entered already exists.' => 'Naziv koje ste uneli već postoji.',
@@ -716,9 +717,9 @@ sub Data {
             'Dodatno ili alternativno za periodično izvršenje, možete definisati događaje tiketa koji će pokrenuti ovaj posao.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Ukoliko je događaj tiketa otkazao, biće primenjen tiket filter da potvrdi da li tiket odgovara. Samo tada će se posao na tiketu pokrenuti.',
-        'Do you really want to delete this event trigger?' => 'Da li stvarno želite da obrišete ovaj okidač događaja?',
         'Add Event Trigger' => 'Dodaj okidač događaja',
         'To add a new event select the event object and event name' => 'Za dodavanje novog događaja izaberite objekat i naziv događaja',
+        'Do you really want to delete this event trigger?' => 'Da li stvarno želite da obrišete ovaj okidač događaja?',
         'Select Tickets' => 'Izaberi tikete',
         '(e. g. 10*5155 or 105658*)' => 'npr. 10*5144 ili 105658*',
         '(e. g. 234321)' => 'npr. 234321',
@@ -1487,7 +1488,6 @@ sub Data {
         'Uninstall Package' => 'Deinstaliraj paket',
         'Uninstall package' => 'Deinstaliraj paket',
         'Do you really want to uninstall this package?' => 'Da li stvarno želite da deinstalirate ovaj paket?',
-        'or' => 'ili',
         'Reinstall package' => 'Instaliraj ponovo paket',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Da li stvarno želite da ponovo instalirate ovaj paket? Sve ručne promene će biti izgubljene.',
@@ -2020,6 +2020,7 @@ sub Data {
         'State type' => 'Tip statusa',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             'Nije moguće obeležiti ovu stavku kao nevažeću jer ne postoji više statusa spojenih tiketa u sistemu!',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Ovo stanje se koristi u sledećim sistemskim podešavanjima: ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2364,7 +2365,6 @@ sub Data {
         'in' => 'u',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => 'Nema informacija.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2377,6 +2377,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'još',
+        'No Data Available.' => 'Nema informacija.',
         'Available Columns' => 'Raspoložive kolone',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Vidljive kolone (redosled prema prevuci i pusti)',
@@ -2530,8 +2531,8 @@ sub Data {
         'Edit statistic "%s".' => 'Izmeni statistiku "%s".',
         'Export statistic "%s"' => 'Izvezi statistiku "%s"',
         'Export statistic %s' => 'Izmeni statistiku %s',
-        'Delete statistic "%s"' => 'Obriši statistiku "%s"',
         'Delete statistic %s' => 'Obriši statistiku %s',
+        'Do you really want to delete this statistic?' => 'Da li stvarno želite da obrišete ovu statistiku?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Informacije o statistici',
@@ -2844,7 +2845,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arhiviraj',
         'This ticket is archived.' => 'Ovaj tiket je arhiviran',
-        'Note: Type is invalid!' => 'Napomena: tip je nevažeći!',
+        'is invalid' => '',
         'Pending till' => 'Na čekanju do',
         'Locked' => 'Zaključano',
         '%s Ticket(s)' => '%s tiket(a)',
@@ -2944,6 +2945,9 @@ sub Data {
         'Please click the button below to create your first ticket.' => 'Molimo da pritisnete dugme ispod za kreiranje vašeg prvog tiketa.',
         'Create your first ticket' => 'Kreirajte vaš prvi tiket',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'npr. 10*5155 ili 105658*',
@@ -3017,12 +3021,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript nije dostupan.',
-        'Step %s' => 'Korak %s',
         'License' => 'Licenca',
         'Database Settings' => 'Podešavanje baze podataka',
         'General Specifications and Mail Settings' => 'Opšte specifikacije i podešavanje pošte',
         'Finish' => 'Završi',
         'Welcome to %s' => 'Dobrodošli u %s',
+        'Address' => 'Adresa',
         'Phone' => 'Poziv',
         'Web site' => 'Veb sajt',
         'Community' => '',
@@ -3053,6 +3057,7 @@ sub Data {
         'Password for inbound mail.' => 'Lozinka za dolaznu poštu.',
         'Result of mail configuration check' => 'Rezultat provere podešavanja pošte',
         'Check mail configuration' => 'Proveri konfiguraciju mejla',
+        'or' => 'ili',
         'Skip this step' => 'Preskoči ovaj korak',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3441,7 +3446,6 @@ sub Data {
         'Valid' => 'Važeći',
         'Mr.' => 'G-din',
         'Mrs.' => 'G-đa',
-        'Address' => 'Adresa',
         'View system log messages.' => 'Pregled poruka sistemskog loga.',
         'Edit the system configuration settings.' => 'Uredi podešavanja sistemske konfiguracije.',
         'Update and extend your system with software packages.' => 'Ažuriraj i nadogradi sistem softverskim paketima.',
@@ -5539,6 +5543,8 @@ sub Data {
             'Definiše identifikator sistema. Svaki broj tiketa i niz znakova „http” sesije sadrši ovaj ID. Ovo osigurava da će samo tiketi koji pripadaju vašem sistemu biti obrađeni kao operacije praćenja (korisno kada se odvija komunikacija između dve „Znuny” instance).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Definiše potpuno kvalifikovano ime domena sistema. Ovo podešavanje se koristi kao promenljiva OTRS_CONFIG_FQDN, koja se nalazi u svim formama poruka i koristi od strane aplikacije, za građenje veza do tiketa unutar vašeg sistema.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             'Definiše HTTP host za slanje podataka podrške preko javnog module \'PublicSupportDataCollector\' (npr. od strane Znuny sistemskog servisa).',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5570,14 +5576,6 @@ sub Data {
             'Logo prikazan u zaglavlju operaterskog interfejsa. URL do slike može biti relativan u odnosu na direktorijum sa slikama ili apsolutan do udaljenog servera.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Logo prikazan u zaglavlju interfejsa operatera za izgled "podrazumevani". Pogledajte "AgentLogo" za detaljniji opis.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'Logo prikazan u zaglavlju interfejsa operatera za "uprošćeni" izgled. Pogledajte "AgentLogo" za detaljniji opis.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'Logo prikazan u zaglavlju interfejsa operatera za izgled Slonovača. Pogledajte AgentLogo za detaljniji opis.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'Logo prikazan u zaglavlju interfejsa operatera za izgled Slonovača (uprošćeno). Pogledajte AgentLogo za detaljniji opis.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            'Logo prikazan u zaglavlju interfejsa operatera za izgled "High Contrast". Pogledajte "AgentLogo" za detaljniji opis.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Logo prikazan u zaglavlju interfejsa operatera. URL do slike može biti relativan u odnosu na direktorijum sa slikama ili apsolutan do udaljenog servera.',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Definiše URL osnovnu putanju za ikone, CSS i Java Script.',
@@ -6114,10 +6112,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Određuje oblik u kome će biti prikazano ime i prezime operatera.',
         'Default skin for the agent interface.' => 'Podrazumevani izgled okruženja za interfejs operatera.',
-        'Default skin for the agent interface (slim version).' => 'Podrazumevani izgled okruženja za interfejs operatera (slaba verzija).',
-        'Balanced white skin by Felix Niklas.' => 'Izbalansirani beli izgled, Feliks Niklas.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Izbalansirani beli izgled, Feliks Niklas (tanka verzija).',
-        'High contrast skin for visually impaired users.' => 'Visoko kontrastni izgled za osobe slabijeg vida.',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Izled koji će se koristiti u interfejsu operatera. Molimo proverite dostupne izglede u Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7850,6 +7844,7 @@ sub Data {
         'Group for default access.' => 'Grupa za podrazumevan pristup.',
         'Group of all administrators.' => 'Grupa svih administratora.',
         'Group for statistics access.' => 'Grupa za pristup statistici.',
+        'Group for time accounting web service access.' => '',
         'new' => 'novo',
         'All new state types (default: viewable).' => 'Svi novi tipovi stanja (podrazumevano: vidljivo).',
         'open' => 'otvoreni',
@@ -7997,14 +7992,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => 'Ukloni ovo dinamičko polje',
         'Remove selection' => 'Ukloni izbor',
-        'Do you really want to delete this generic agent job?' => 'Da li stvarno želite da obrišete ovaj posao generičkog operatera?',
-        'Delete this Event Trigger' => 'Obriši ovaj okidač događaja',
+        'An error occurred during communication.' => 'Došlo je do greške prilikom komunikacije.',
         'Duplicate event.' => 'Napravi duplikat događaja.',
         'This event is already attached to the job, Please use a different one.' =>
             'Ovaj događaj je priložen poslu. Molimo koristite neki drugi.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Došlo je do greške prilikom komunikacije.',
         'Request Details' => 'Detalji zahteva',
         'Request Details for Communication ID' => 'Detalji zahteva za ID komunikacije',
         'Show or hide the content.' => 'Pokaži ili sakrij sadržaj.',
@@ -8017,6 +8010,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             'Nije moguće dodati novi okidač događaja zato što događaj još uvek nije definisan.',
         'Delete this Invoker' => 'Obriši ovog pozivaoca',
+        'Delete this Event Trigger' => 'Obriši ovaj okidač događaja',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => 'Žao nam je, poslednji uslov ne može biti uklonjen.',
@@ -8237,9 +8231,6 @@ sub Data {
         'This element has children elements and can currently not be removed.' =>
             'Ovaj element ima decu i trenutno ne može biti uklonjen.',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'Da li stvarno želite da obrišete ovu statistiku?',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => 'Odaberite ID klijenta za dodelu ovom tiketu',
         'Do you really want to continue?' => 'Da li stvarno želite da nastavite?',
@@ -8391,8 +8382,6 @@ Vaša tehnička podrška
         ' 2 minutes' => ' 2 minuta',
         ' 5 minutes' => ' 5 minuta',
         ' 7 minutes' => ' 7 minuta',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '"Uprošćeni" izgled koji pokušava da uštedi mesto za napredne korisnike.',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Korisničko ime) Ime Prezime',
         '(UserLogin) Lastname Firstname' => '(Korisničko ime) Prezime Ime',
@@ -8607,7 +8596,6 @@ Vaša tehnička podrška
         'Danish' => 'Danski',
         'Dashboard overview.' => 'Pregled komandne table.',
         'Date / Time' => 'Datum / Vreme',
-        'Default (Slim)' => 'Podrazumevano (uprošćeno)',
         'Default agent name' => 'Podrazumevano ime operatera',
         'Default value for NameX' => 'Podrazumevana vrednost za NameX',
         'Define the queue comment 2.' => 'Definiše komentar reda 2.',
@@ -8710,7 +8698,6 @@ Vaša tehnička podrška
         'Graph: Stacked Area Chart' => 'Grafik: Naslagani prostorni grafikon',
         'Greek' => 'Grčki',
         'Hebrew' => 'Hebrejski',
-        'High Contrast' => 'Visoki kontrast',
         'Hindi' => 'Hindi',
         'Hungarian' => 'Mađarski',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8731,8 +8718,6 @@ Vaša tehnička podrška
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Italijanski',
-        'Ivory' => 'Slonovača',
-        'Ivory (Slim)' => 'Slonovača (uprošćeno)',
         'Japanese' => 'Japanski',
         'Korean' => 'Korejski',
         'Language' => 'Jezik',
@@ -9200,6 +9185,8 @@ Vaša tehnička podrška
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9219,13 +9206,11 @@ Vaša tehnička podrška
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

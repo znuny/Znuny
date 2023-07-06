@@ -4434,7 +4434,7 @@ msgstr "حذف بسته"
 msgid "Do you really want to uninstall this package?"
 msgstr "از حذف این بسته اطمینان دارید؟"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "یا"
 
@@ -9970,7 +9970,7 @@ msgstr "آقای"
 msgid "Mrs."
 msgstr "خانم"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "نشانی"
 
@@ -15285,22 +15285,6 @@ msgstr "آرم نشان داده شده است در هدر رابط عامل. UR
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown in the header of the agent interface for the skin \"default\". See \"AgentLogo\" for further description."
 msgstr "آرم نشان داده شده در هدر از رابط عامل برای پوست \\\\ \"به طور پیش فرض \". \\\\ \"AgentLogo \" برای توضیحات بیشتر را مشاهده کنید."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
-msgstr "آرم نشان داده شده در هدر از رابط عامل برای پوست \\\\ \"باریک \". \\\\ \"AgentLogo \" برای توضیحات بیشتر را مشاهده کنید."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr "آرم نشان داده شده در هدر از رابط عامل برای پوست \\\\ \"عاج \". \\\\ \"AgentLogo \" برای توضیحات بیشتر را مشاهده کنید."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr "آرم نشان داده شده در هدر از رابط عامل برای پوست \\\\ \"عاج باریک \". \\\\ \"AgentLogo \" برای توضیحات بیشتر را مشاهده کنید."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"High Contrast\". See \"AgentLogo\" for further description."
-msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server."
@@ -20730,11 +20714,11 @@ msgstr ""
 msgid "Remove selection"
 msgstr "حذف انتخاب"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "حذف این رویداد راه انداز"
 
@@ -20746,7 +20730,7 @@ msgstr "تکرار رویداد."
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "این رویداد در حال حاضر به این کار متصل است، لطفا یک رویداد دیگر را استفاده کنید."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "یک خطا در هنگام برقراری ارتباط رخ داده است."
 
@@ -21250,7 +21234,7 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "آیا واقعا میخواهید این آمار را حذف کنید؟"
 
@@ -24242,5 +24226,29 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Show All"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+msgid "New Process Ticket"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
+msgstr ""
+
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid"
 msgstr ""
 

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.736163885676524;
+    $Self->{Completeness}        = 0.736180072823568;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -689,6 +689,7 @@ sub Data {
         'Run' => 'Ejecutar',
         'Delete this task' => 'Eliminar esta tarea',
         'Run this task' => 'Ejecutar esta tarea',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Configuraciones de la Tarea',
         'Job name' => 'Nombre de la tarea',
         'The name you entered already exists.' => 'El nombre que definió ya existe.',
@@ -710,9 +711,9 @@ sub Data {
             'Puede definir eventos de un ticket, de forma adicional o alternativa a un periodo de ejecución, que dispararán este trabajo.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Si se dispara un evento de ticket, se aplicará el filtro de tickets para comprobar si el ticket coincide. Sólo entonces se ejecuta el trabajo sobre ese ticket.',
-        'Do you really want to delete this event trigger?' => '¿Realmente desea eliminar este disparador de evento?',
         'Add Event Trigger' => 'Agregar Disparador de Evento',
         'To add a new event select the event object and event name' => 'Para agregar un nuevo evento, seleccione el objeto del evento y el nombre de evento',
+        'Do you really want to delete this event trigger?' => '¿Realmente desea eliminar este disparador de evento?',
         'Select Tickets' => 'Seleccionar Tickets',
         '(e. g. 10*5155 or 105658*)' => '(ej: 10*5155 o 105658*)',
         '(e. g. 234321)' => '(ej: 234321)',
@@ -1481,7 +1482,6 @@ sub Data {
         'Uninstall Package' => 'Desinstalar Paquete',
         'Uninstall package' => 'Desinstalar paquete',
         'Do you really want to uninstall this package?' => '¿Está seguro de que desea desinstalar este paquete?',
-        'or' => 'o',
         'Reinstall package' => 'Reinstalar paquete',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '¿Está seguro de que desea reinstalar este paquete? Cualquier cambio manual se perderá.',
@@ -2014,6 +2014,7 @@ sub Data {
         'State type' => 'Tipo de Estado',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '¡No es posible invalidar esta entrada porque no hay otros estados de mezclar en el sistema!',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Este estado se usa en los siguientes parámetros de configuración:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2358,7 +2359,6 @@ sub Data {
         'in' => 'en',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => 'Los Datos no están disponibles.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2371,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'más',
+        'No Data Available.' => 'Los Datos no están disponibles.',
         'Available Columns' => 'Columnas Disponibles',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Columnas Visibles (ordenar arrastrando y soltando)',
@@ -2524,8 +2525,8 @@ sub Data {
         'Edit statistic "%s".' => 'Editar estadística "%s".',
         'Export statistic "%s"' => 'Exportar estadística "%s"',
         'Export statistic %s' => 'Exportar estadística %s',
-        'Delete statistic "%s"' => 'Eliminar estadística "%s"',
         'Delete statistic %s' => 'Eliminar estadística %s',
+        'Do you really want to delete this statistic?' => '¿Realmente desea eliminar esta estadística?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Información de Estadísticas',
@@ -2838,7 +2839,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archivar',
         'This ticket is archived.' => 'Este ticket está archivado.',
-        'Note: Type is invalid!' => 'Nota: El tipo es inválido!',
+        'is invalid' => '',
         'Pending till' => 'Pendiente hasta',
         'Locked' => 'Bloqueado',
         '%s Ticket(s)' => '',
@@ -2938,6 +2939,9 @@ sub Data {
         'Please click the button below to create your first ticket.' => 'Por favor haga click en el botón inferior para crear su primer ticket.',
         'Create your first ticket' => 'Crear su primer ticket',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Perfil',
         'e. g. 10*5155 or 105658*' => 'Por ejemplo: 10*5155 ó 105658*',
@@ -3011,12 +3015,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript no disponible',
-        'Step %s' => 'Paso %s',
         'License' => 'Licencia',
         'Database Settings' => 'Configuraciones de la Base de Datos',
         'General Specifications and Mail Settings' => 'Especificaciones Generales y Configuraciones de Correo',
         'Finish' => 'Finalizar',
         'Welcome to %s' => 'Bienvenido a %s',
+        'Address' => 'Dirección',
         'Phone' => 'Teléfono',
         'Web site' => 'Sitio web',
         'Community' => '',
@@ -3047,6 +3051,7 @@ sub Data {
         'Password for inbound mail.' => 'Contraseña para el correo entrante.',
         'Result of mail configuration check' => 'Resultado de la verificación de la configuración de correo.',
         'Check mail configuration' => 'Verificar configuración de correo',
+        'or' => 'o',
         'Skip this step' => 'Omitir este paso',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3440,6 @@ sub Data {
         'Valid' => 'Válido',
         'Mr.' => 'Sr.',
         'Mrs.' => 'Sra.',
-        'Address' => 'Dirección',
         'View system log messages.' => 'Ver los mensajes del log del sistema.',
         'Edit the system configuration settings.' => 'Modificar la configuración del sistema.',
         'Update and extend your system with software packages.' => 'Actualizar y extender su sistema con paquetes de software.',
@@ -5533,6 +5537,8 @@ sub Data {
             'Define el identificador del sistema. Cada número de ticket y cadena sesión de http contiene este identificador. Esto asegura que sólo los tickets que pertenecen a su sistema serán procesados como seguimiento (útil cuando se comunica entre dos instancias de Znuny).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Define el nombre del dominio totalmente calificado del sistema. Esta configuración es usada como la variable OTRS_CONFIG_FQDN, misma que se encuentra en todos los tipos de mensajes usados en la aplicación, para construir vínculos a los tickets del sistema.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5564,14 +5570,6 @@ sub Data {
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            'El logo que se muestra en la cabecera de la interfaz del agente para el tema "Contraste alto". Ver "AgentLogo" para una mayor descripción.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'El logo que se muestra en la parte superior del cuadro de inicio de sesión de la interfaz del agente. La URL de la imagen puede ser una URL relativa al directorio de la imagen del tema, o una URL completa de un servidor web remoto.',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Define la URL de la ruta base para los íconos, CSS y Java Script.',
@@ -6108,10 +6106,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => 'Apariencia(skin) predeterminada para la interfaz de agente.',
-        'Default skin for the agent interface (slim version).' => 'Apariencia predeterminada para la interfaz de agente (versión slim).',
-        'Balanced white skin by Felix Niklas.' => 'Piel blanca balanceda diseñada por Felix Niklas.',
-        'Balanced white skin by Felix Niklas (slim version).' => '',
-        'High contrast skin for visually impaired users.' => 'Piel de alto contraste para usuarios con problemas de visión.',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'El nombre interno de la piel que debe usarse en la interfaz del agente. Por favor, verifique las pieles disponibles en Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7844,6 +7838,7 @@ sub Data {
         'Group for default access.' => 'Grupo de acceso predeterminado.',
         'Group of all administrators.' => 'Grupo para todos los administradores.',
         'Group for statistics access.' => 'Grupo para acceder a las estadísticas.',
+        'Group for time accounting web service access.' => '',
         'new' => 'nuevo',
         'All new state types (default: viewable).' => 'Todos los tipos de estado \'nuevo\' (por defecto: visible).',
         'open' => 'abierto',
@@ -7991,14 +7986,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => 'Quitar este campo dinámico',
         'Remove selection' => 'Quitar selección',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Eliminar este Disparador de Evento',
+        'An error occurred during communication.' => 'Sucedió un error durante la comunicación.',
         'Duplicate event.' => 'Evento duplicado.',
         'This event is already attached to the job, Please use a different one.' =>
             'Este evento ya está ligado al trabajo. Por favor seleccione uno diferente.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Sucedió un error durante la comunicación.',
         'Request Details' => 'Detalles de la petición',
         'Request Details for Communication ID' => 'Detalles de la Solicitud de ID de Comunicación',
         'Show or hide the content.' => 'Muestra u oculta el contenido.',
@@ -8011,6 +8004,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             'No es posible agregar un nuevo detonador de evento porque el evento no está configurado.',
         'Delete this Invoker' => 'Eliminar este invocador',
+        'Delete this Event Trigger' => 'Eliminar este Disparador de Evento',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => 'Disculpa, la única condición existente no se puede eliminar.',
@@ -8231,9 +8225,6 @@ sub Data {
         'This element has children elements and can currently not be removed.' =>
             'Este elemento tiene elementos secundarios y actualmente no se puede eliminar.',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '¿Realmente desea eliminar esta estadística?',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => '¿Desea continuar?',
@@ -8385,8 +8376,6 @@ Tu Equipo de Soporte
         ' 2 minutes' => ' 2 minutos',
         ' 5 minutes' => ' 5 minutos',
         ' 7 minutes' => ' 7 minutos',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Inicio de sesión del Usuario) Nombre Apellido',
         '(UserLogin) Lastname Firstname' => '(Inicio de sesión del Usuario) Apellido Nombre',
@@ -8601,7 +8590,6 @@ Tu Equipo de Soporte
         'Danish' => 'Danés',
         'Dashboard overview.' => '',
         'Date / Time' => 'Fecha / Hora',
-        'Default (Slim)' => '',
         'Default agent name' => 'Nombre de agente predeterminado',
         'Default value for NameX' => 'Valor predeterminado para NombreX',
         'Define the queue comment 2.' => 'Definir el comentario 2 de fila.',
@@ -8704,7 +8692,6 @@ Tu Equipo de Soporte
         'Graph: Stacked Area Chart' => 'Gráfica: Gráfica de Áreas Apiladas',
         'Greek' => 'Griego',
         'Hebrew' => 'Hebrep',
-        'High Contrast' => 'Alto Contraste',
         'Hindi' => 'Hindú',
         'Hungarian' => 'Húngaro',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8725,8 +8712,6 @@ Tu Equipo de Soporte
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             'No fue posible comprobar la firma PGP, esto puede ser causado por la falta de una clave pública o un algoritmo no soportado.',
         'Italian' => 'Italiano',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => 'Japonés',
         'Korean' => 'Coreano',
         'Language' => 'Idioma',
@@ -9194,6 +9179,8 @@ Tu Equipo de Soporte
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9213,13 +9200,11 @@ Tu Equipo de Soporte
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

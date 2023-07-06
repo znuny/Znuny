@@ -66,7 +66,7 @@ L</ValueGet()>.
                 ValueDateTime      => '1977-12-12 12:00:00',  # optional
                 ValueInt           => 123,                    # optional
             },
-            ...
+            # ...
         ],
         UserID   => $UserID,
     );

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.190318850156947;
+    $Self->{Completeness}        = 0.190665342601787;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -692,6 +692,7 @@ sub Data {
         'Run' => '',
         'Delete this task' => '',
         'Run this task' => 'Suorita tehtävä',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Tehtävän asetukset',
         'Job name' => 'Tehtävän nimi',
         'The name you entered already exists.' => '',
@@ -713,9 +714,9 @@ sub Data {
             '',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '',
-        'Do you really want to delete this event trigger?' => '',
         'Add Event Trigger' => '',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => '',
         'Select Tickets' => '',
         '(e. g. 10*5155 or 105658*)' => '(esim. 10*5155 tai 105658*)',
         '(e. g. 234321)' => '(esim. 234321)',
@@ -1484,7 +1485,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Poista paketti',
         'Do you really want to uninstall this package?' => 'Haluatko varmasti poistaa paketin asennuksen?',
-        'or' => 'tai',
         'Reinstall package' => 'Asenna uudestaan',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Haluatko varmasti asentaa tämän paketin uudestaan? Kaikki asetukset poistuvat samalla.',
@@ -2017,6 +2017,7 @@ sub Data {
         'State type' => 'Tilan tyyppi',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2361,7 +2362,6 @@ sub Data {
         'in' => ':',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2374,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'lisää',
+        'No Data Available.' => '',
         'Available Columns' => '',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '',
@@ -2527,8 +2528,8 @@ sub Data {
         'Edit statistic "%s".' => '',
         'Export statistic "%s"' => '',
         'Export statistic %s' => '',
-        'Delete statistic "%s"' => '',
         'Delete statistic %s' => '',
+        'Do you really want to delete this statistic?' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -2841,7 +2842,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arkisto',
         'This ticket is archived.' => 'Tämä tiketti on arkistoitu.',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => 'Odottaa',
         'Locked' => 'Lukitus',
         '%s Ticket(s)' => '%s tiketti(ä)',
@@ -2941,6 +2942,9 @@ sub Data {
         'Please click the button below to create your first ticket.' => 'Klikkaa alla olevaa painiketta luodaksesi ensimmäisen tikettisi.',
         'Create your first ticket' => 'Luo ensimmäinen tikettisi',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profiili',
         'e. g. 10*5155 or 105658*' => 'esim. 10*5155 tai 10568*',
@@ -3014,12 +3018,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript ei toiminnassa',
-        'Step %s' => '',
         'License' => 'Lisenssi',
         'Database Settings' => 'Tietokanta-asetukset',
         'General Specifications and Mail Settings' => 'Yleiset määritykset ja sähköpostiasetukset',
         'Finish' => 'Loppu',
         'Welcome to %s' => 'Tervetuloa %s järjestelmään',
+        'Address' => '',
         'Phone' => 'Puhelin',
         'Web site' => 'Kotisivu',
         'Community' => '',
@@ -3050,6 +3054,7 @@ sub Data {
         'Password for inbound mail.' => 'Saapuvan postin salasana.',
         'Result of mail configuration check' => 'Asetusten tarkistusten tulos',
         'Check mail configuration' => 'Tarkista sähköpostin asetukset',
+        'or' => 'tai',
         'Skip this step' => 'Ohita tämä vaihe',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3438,7 +3443,6 @@ sub Data {
         'Valid' => 'Käytössä',
         'Mr.' => 'Mr.',
         'Mrs.' => 'Mrs.',
-        'Address' => '',
         'View system log messages.' => '',
         'Edit the system configuration settings.' => 'Muokkaa systeemitason asetuksia.',
         'Update and extend your system with software packages.' => 'Päivitä ja laajenna järjestelmää paketeilla.',
@@ -5536,6 +5540,8 @@ sub Data {
             '',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5566,14 +5572,6 @@ sub Data {
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
             '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
@@ -6111,10 +6109,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => '',
-        'Default skin for the agent interface (slim version).' => '',
-        'Balanced white skin by Felix Niklas.' => '',
-        'Balanced white skin by Felix Niklas (slim version).' => '',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7847,6 +7841,7 @@ sub Data {
         'Group for default access.' => '',
         'Group of all administrators.' => '',
         'Group for statistics access.' => '',
+        'Group for time accounting web service access.' => '',
         'new' => 'Uusi',
         'All new state types (default: viewable).' => '',
         'open' => 'Avoin',
@@ -7994,14 +7989,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => '',
+        'An error occurred during communication.' => '',
         'Duplicate event.' => '',
         'This event is already attached to the job, Please use a different one.' =>
             '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => '',
         'Request Details' => '',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => '',
@@ -8014,6 +8007,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => '',
+        'Delete this Event Trigger' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8234,9 +8228,6 @@ sub Data {
         'This element has children elements and can currently not be removed.' =>
             '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => '',
@@ -8377,8 +8368,6 @@ Thanks for your help!
         ' 2 minutes' => ' 2 Minuuttia',
         ' 5 minutes' => ' 5 Minuuttia',
         ' 7 minutes' => ' 7 Minuuttia',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '',
         '(UserLogin) Lastname Firstname' => '',
@@ -8593,7 +8582,6 @@ Thanks for your help!
         'Danish' => '',
         'Dashboard overview.' => '',
         'Date / Time' => 'Päiväys / Aika',
-        'Default (Slim)' => '',
         'Default agent name' => '',
         'Default value for NameX' => '',
         'Define the queue comment 2.' => '',
@@ -8696,7 +8684,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => '',
         'Greek' => '',
         'Hebrew' => '',
-        'High Contrast' => '',
         'Hindi' => '',
         'Hungarian' => '',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8717,8 +8704,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => '',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => '',
         'Korean' => '',
         'Language' => 'Kieli',
@@ -9186,6 +9171,8 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9205,13 +9192,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

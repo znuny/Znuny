@@ -89,7 +89,7 @@ Returns:
     my @Commands = (
         'Kernel::System::Console::Command::Help',
         'Kernel::System::Console::Command::List',
-        ...
+        # ...
     );
 
 =cut

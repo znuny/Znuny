@@ -165,6 +165,12 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         padding: 0 var(--main-page-padding) var(--padding-sm) var(--main-page-padding);
     }
 
+    .LastViewMenuBar + .MainBox:not(.ActionsSideBar),
+    .LastViewMenuBar + #ArticleFilterDialog + .MainBox:not(.ActionsSideBar),
+    .LastViewMenuBar + .OverviewBox {
+        padding-top: var(--padding-sm);
+    }
+
     @media only screen and (max-width: 1024px) {
         .LastViewMenuBar{
             padding: 0 var(--padding-lg) var(--padding-sm) var(--padding-lg);

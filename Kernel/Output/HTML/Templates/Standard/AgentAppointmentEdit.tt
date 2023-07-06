@@ -110,33 +110,33 @@
             <legend>
                 <span>[% Translate("Resource") | html %]</span>
             </legend>
-                [% IF Data.TeamIDStrg %]
-                    <label for="TeamID">[% Translate("Team") | html %]</label>
-                    <div class="Field">
-                    [% IF Data.PermissionLevel < 2 %]
+            [% IF Data.TeamIDStrg %]
+                <label for="TeamID">[% Translate("Team") | html %]</label>
+                <div class="Field">
+                [% IF Data.PermissionLevel < 2 %]
                     <p id="TeamID" class="ReadOnlyValue">[% Data.TeamNames %]</p>
-                    [% ELSE %]
+                [% ELSE %]
                     [% Data.TeamIDStrg %]
                 [% END %]
-            </div>
-
-            <div class="field-wrapper">
-                <label for="ResourceID">[% Translate("Agent") | html %]</label>
-                <div class="Field">
-                    [% IF Data.PermissionLevel < 2 %]
-                        <p id="ResourceID" class="ReadOnlyValue">[% Data.ResourceNames %]</p>
-                    [% ELSE %]
-                    [% Data.ResourceIDStrg %]
-                    [% END %]
                 </div>
-                [% ELSE %]
+
+                <div class="field-wrapper">
+                    <label for="ResourceID">[% Translate("Agent") | html %]</label>
+                    <div class="Field">
+                        [% IF Data.PermissionLevel < 2 %]
+                            <p id="ResourceID" class="ReadOnlyValue">[% Data.ResourceNames %]</p>
+                        [% ELSE %]
+                            [% Data.ResourceIDStrg %]
+                        [% END %]
+                    </div>
+                </div>
+            [% ELSE %]
                 <div class="Field">
                     <p class="FieldExplanation">
                         [% Translate("This feature is currently not available.") | html %]
                     </p>
                 </div>
-                [% END %]
-            </div>
+            [% END %]
         </fieldset>
 
         <fieldset class="TableLike divider">

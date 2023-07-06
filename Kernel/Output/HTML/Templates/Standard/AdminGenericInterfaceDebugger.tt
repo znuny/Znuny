@@ -23,7 +23,7 @@
                         <div class="Hidden" id="DeleteDialogContainer">
                             <span class="WarningDialog ">
                             </span>
-                            <p id="DeleteDialog" class="Center Warning">
+                            <p id="DeleteDialog" class="Center">
                                 [% Translate("Do you really want to clear the debug log of this web service?") | html %]
                             </p>
                         </div>

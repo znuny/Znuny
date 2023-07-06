@@ -217,7 +217,7 @@ ul.ContextFunctions li:last-child:hover > a {
 }
 
 .Header.ticket-zoom-header .AdditionalInformation {
-    right: 30px;
+    right: 40px;
 }
 
 .Header > .WidgetAction + .AdditionalInformation {
@@ -325,7 +325,7 @@ ul.ContextFunctions li:last-child:hover > a {
     height: 16px;
     background-color: var(--gray-dark-semi);
     align-self: center;
-    margin: 0 8px;
+    margin: 0 6px;
 
     /*color: #BBBBBB;
     content: " | ";
@@ -402,6 +402,14 @@ ul.ContextFunctions li:last-child:hover > a {
     /*padding: 0 6px;*/
     color: var(--gray-darker);
     font-size: var(--font-size-sm);
+
+    border-radius: var(--border-radius-xs);
+    padding: var(--padding-xs) var(--padding-sm);
+}
+
+.Actions li:hover > a,
+.Actions li:hover > span {
+    background: var(--gray-light);
 }
 
 .ActionRow > .Actions li > a, 

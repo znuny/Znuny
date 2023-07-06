@@ -65,7 +65,7 @@ Create a chat article.
                 ChatterType     => 'User',
                 ChatterName     => 'John Doe',
             },
-            ...
+            # ...
         ],
         IsVisibleForCustomer => 1,                                # (required) Is article visible for customer?
         UserID               => 123,                              # (required)
@@ -304,7 +304,7 @@ Returns:
                 ChatterType     => 'User',
                 ChatterName     => 'John Doe',
             },
-            ...
+            # ...
         ],
         SenderTypeID         => 1,
         SenderType           => 'agent',
@@ -416,7 +416,7 @@ Note: Keys C<ChatMessageList>, C<SenderType>, C<SenderTypeID> and C<IsVisibleFor
                 ChatterType     => 'User',
                 ChatterName     => 'John Doe',
             },
-            ...
+            # ...
         ],
         UserID => 123,                      # (required)
     );

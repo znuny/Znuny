@@ -602,20 +602,20 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     /* APPOINTMENTS */
     .CalendarWidget .fc-event {
-        background-color: var(--primary-color) !important;
-        border: var(--border-width) var(--border-solid) var(--primary-color) !important;
-        color: var(--white) !important;
+        background-color: var(--primary-color);
+        border: var(--border-width) var(--border-solid) var(--primary-color);
+        color: var(--white);
         border-radius: 5px !important;
         margin-left: 4px !important;
         transition: var(--main-transition);
     }
 
     .CalendarWidget .fc-event:hover {
-        background-color: var(--primary-color-darker) !important;
+        background-color: var(--primary-color-darker);
     }
 
     .CalendarWidget .Icons i {
-        color: var(--white) !important;
+        color: var(--white);
     }
 
     .CalendarWidget .fc-event .fc-content {

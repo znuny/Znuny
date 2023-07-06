@@ -46,6 +46,12 @@ INSERT INTO permission_groups (name, comments, valid_id, create_by, create_time,
     VALUES
     ('stats', 'Group for statistics access.', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
+--  insert into table permission_groups
+-- ----------------------------------------------------------
+INSERT INTO permission_groups (name, comments, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    ('timeaccounting_webservice', 'Group for time accounting web service access.', 1, 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
 --  insert into table group_user
 -- ----------------------------------------------------------
 INSERT INTO group_user (user_id, group_id, permission_key, create_by, create_time, change_by, change_time)
@@ -3216,21 +3222,27 @@ Hibaüzenet:
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (16, 'text/plain', 'en', 'Mention in ticket: <OTRS_TICKET_Title>', 'You have been mentioned in ticket <OTRS_TICKET_NUMBER>
+    (16, 'text/plain', 'en', 'Mention in ticket: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
 
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
-            ');
+
+-- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (16, 'text/plain', 'de', 'Erwähnung in Ticket: <OTRS_TICKET_Title>', 'Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>
+    (16, 'text/plain', 'de', 'Erwähnung in Ticket: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+
+Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
 
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
-            ');
+
+-- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table dynamic_field
 -- ----------------------------------------------------------

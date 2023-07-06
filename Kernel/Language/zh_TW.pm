@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.310259375516273;
+    $Self->{Completeness}        = 0.310658722277392;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -692,6 +692,7 @@ sub Data {
         'Run' => '',
         'Delete this task' => '刪除這個任務',
         'Run this task' => '執行這個任務',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => '任務設置',
         'Job name' => '任務名稱',
         'The name you entered already exists.' => '您輸入的名稱已經存在。',
@@ -713,9 +714,9 @@ sub Data {
             '此外，為了让此任務定期反復地執行，您需要定義工單事件，以便觸發任務的執行。',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '如果工單事件被觸發，工單過濾器將對工單進行檢查看其條件是否匹配。任務只對匹配的工單發生作用。',
-        'Do you really want to delete this event trigger?' => '您確定要刪除這個事件觸發器嗎？',
         'Add Event Trigger' => '添加事件觸發器',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => '您確定要刪除這個事件觸發器嗎？',
         'Select Tickets' => '選取工單',
         '(e. g. 10*5155 or 105658*)' => '  例如: 10*5144 或者 105658*',
         '(e. g. 234321)' => '例如: 234321',
@@ -1484,7 +1485,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '卸載軟件包',
         'Do you really want to uninstall this package?' => '是否確認卸載該軟件包?',
-        'or' => '在',
         'Reinstall package' => '重新安裝軟件包',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '您確定要重新安裝該軟包嗎? 所有該模塊的手工設置將丢失.',
@@ -2017,6 +2017,7 @@ sub Data {
         'State type' => '工單狀態類型',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2361,7 +2362,6 @@ sub Data {
         'in' => '之内',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2374,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '更多',
+        'No Data Available.' => '',
         'Available Columns' => '可選擇的字段',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '顯示的字段(通過拖拽可調整順序)',
@@ -2528,8 +2529,8 @@ sub Data {
         'Edit statistic "%s".' => '',
         'Export statistic "%s"' => '',
         'Export statistic %s' => '',
-        'Delete statistic "%s"' => '',
         'Delete statistic %s' => '',
+        'Do you really want to delete this statistic?' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -2842,7 +2843,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '歸檔',
         'This ticket is archived.' => '該工單已歸檔',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => '掛起至',
         'Locked' => '鎖定狀態',
         '%s Ticket(s)' => '',
@@ -2942,6 +2943,9 @@ sub Data {
         'Please click the button below to create your first ticket.' => '請點擊下面的按鈕創建第一個工單。',
         'Create your first ticket' => '創建第一個工單',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索條件',
         'e. g. 10*5155 or 105658*' => '例如: 10*5155 或 105658*',
@@ -3015,12 +3019,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript沒有啟用',
-        'Step %s' => '第 %s 步',
         'License' => '許可証',
         'Database Settings' => '數據庫設置',
         'General Specifications and Mail Settings' => '一般設定和郵件配置',
         'Finish' => '完成',
         'Welcome to %s' => '',
+        'Address' => '地址',
         'Phone' => '電話',
         'Web site' => '網址',
         'Community' => '',
@@ -3051,6 +3055,7 @@ sub Data {
         'Password for inbound mail.' => '接收郵件密碼',
         'Result of mail configuration check' => '郵件服務器配置檢查結果',
         'Check mail configuration' => '檢查郵件配置',
+        'or' => '在',
         'Skip this step' => '跳過這一步',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3439,7 +3444,6 @@ sub Data {
         'Valid' => '有效',
         'Mr.' => '先生',
         'Mrs.' => '女士',
-        'Address' => '地址',
         'View system log messages.' => '查看系統日誌信息',
         'Edit the system configuration settings.' => '編輯系統配置。',
         'Update and extend your system with software packages.' => '更新或安裝系統的軟件包或模塊.',
@@ -5537,6 +5541,8 @@ sub Data {
             '',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5567,14 +5573,6 @@ sub Data {
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
             '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
@@ -6112,10 +6110,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => '',
-        'Default skin for the agent interface (slim version).' => '',
-        'Balanced white skin by Felix Niklas.' => '',
-        'Balanced white skin by Felix Niklas (slim version).' => '',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7848,6 +7842,7 @@ sub Data {
         'Group for default access.' => '',
         'Group of all administrators.' => '',
         'Group for statistics access.' => '',
+        'Group for time accounting web service access.' => '',
         'new' => '新建',
         'All new state types (default: viewable).' => '',
         'open' => '處理中',
@@ -7995,14 +7990,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => '刪除這個事件觸發器',
+        'An error occurred during communication.' => '在通訊時發生一個錯誤。',
         'Duplicate event.' => '重複的事件',
         'This event is already attached to the job, Please use a different one.' =>
             '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => '在通訊時發生一個錯誤。',
         'Request Details' => '請求詳細信息',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => '顯示或隱藏該内容.',
@@ -8015,6 +8008,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => '刪除這個調用程序',
+        'Delete this Event Trigger' => '刪除這個事件觸發器',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8236,9 +8230,6 @@ sub Data {
         'This element has children elements and can currently not be removed.' =>
             '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => '您確定繼續?',
@@ -8379,8 +8370,6 @@ Thanks for your help!
         ' 2 minutes' => ' 2 分鐘',
         ' 5 minutes' => ' 5 分鐘',
         ' 7 minutes' => ' 7 分鐘',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '',
         '(UserLogin) Lastname Firstname' => '',
@@ -8595,7 +8584,6 @@ Thanks for your help!
         'Danish' => '',
         'Dashboard overview.' => '',
         'Date / Time' => '日期 / 時間',
-        'Default (Slim)' => '',
         'Default agent name' => '',
         'Default value for NameX' => '',
         'Define the queue comment 2.' => '',
@@ -8698,7 +8686,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => '',
         'Greek' => '希臘',
         'Hebrew' => '',
-        'High Contrast' => '',
         'Hindi' => '',
         'Hungarian' => '',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8719,8 +8706,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => '意大利文',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => '日本語',
         'Korean' => '',
         'Language' => '語言',
@@ -9188,6 +9173,8 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9207,13 +9194,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

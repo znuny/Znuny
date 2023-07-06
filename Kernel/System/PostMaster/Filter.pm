@@ -82,22 +82,22 @@ add a filter
             {
                 Key   => 'Subject',
                 Value => '^ADV: 123',
-        },
-            ...
+            },
+            # ...
         ],
         Not = [
             {
                 Key   => 'Subject',
                 Value => '1',
-        },
-            ...
+            },
+            # ...
         ],
         Set = [
             {
                 Key   => 'X-OTRS-Queue',
                 Value => 'Some::Queue',
             },
-            ...
+            # ...
         ],
     );
 

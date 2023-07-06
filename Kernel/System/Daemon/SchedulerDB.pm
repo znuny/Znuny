@@ -71,7 +71,7 @@ add a new task to scheduler task list
                                                             #   provided) that can exists at the same
                                                             #   time, value of 0 means unlimited
         Data => {                                           # data payload
-            ...
+            # ...
         },
     );
 
@@ -880,7 +880,7 @@ add a new task to scheduler future task list
                                                          #   that can exists at the same time,
                                                          #   value of 0 means unlimited
         Data => {                                        # data payload
-            ...
+            # ...
         },
     );
 
@@ -2002,7 +2002,7 @@ executes recurrent tasks like cron or generic agent tasks
                                                        #    table at the same time, value of 0 means
                                                        #    unlimited
         Data                   => {                    # data payload
-            ...
+            # ...
         },
     );
 

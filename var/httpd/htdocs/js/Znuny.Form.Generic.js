@@ -168,9 +168,6 @@ Znuny.Form.Generic = (function (TargetNS) {
                 $(this).parent().find('#' + ID + 'ServerError').attr('name', CounterID + 'ServerError');
             }
 
-
-            $(this).addClass('Validate_Required');
-
             // add event handler to remove button
             if($(this).is('[data-formelement-remove]') && $(this).data('formelementRemove') == Param['formelementAdd']) {
                 var DestinationName        = $(this).data('formelementRemoveDestinationName'),

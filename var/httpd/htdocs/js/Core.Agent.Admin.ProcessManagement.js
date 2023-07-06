@@ -233,13 +233,14 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             [
                 {
                     Label: Core.Language.Translate('Cancel'),
+                    Type: 'Secondary',
                     Function: function () {
                         Core.UI.Dialog.CloseDialog($('.Dialog'));
                     }
                 },
                 {
                     Label: Core.Language.Translate('Delete'),
-                    Class: 'Primary',
+                    Type: 'Warning',
                     Function: function () {
                         var Data = {
                                 Action: 'AdminProcessManagement',
@@ -299,13 +300,14 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             [
                 {
                     Label: Core.Language.Translate('Cancel'),
+                    Type: 'Secondary',
                     Function: function () {
                         Core.UI.Dialog.CloseDialog($('.Dialog'));
                     }
                 },
                 {
                     Label: Core.Language.Translate('Delete'),
-                    Class: 'Primary',
+                    Type: 'Warning',
                     Function: function () {
                         var Data = {
                                 Action: 'AdminProcessManagement',

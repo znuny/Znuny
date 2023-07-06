@@ -393,6 +393,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                 Core.UI.Dialog.ShowContentDialog($('#ArticleFilterDialog'), Core.Language.Translate("Article filter"), '20px', 'Center', true, [
                     {
                         Label: Core.Language.Translate("Reset"),
+                        Type: 'Secondary',
                         Function: function () {
                             $('#CommunicationChannelFilter').val('').trigger('redraw.InputField');
                             $('#ArticleSenderTypeFilter').val('').trigger('redraw.InputField');
@@ -438,6 +439,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                     },
                     {
                         Label: Core.Language.Translate("Reset"),
+                        Type: 'Secondary',
                         Function: function () {
                             $('#EventTypeFilter').val('').trigger('redraw.InputField');
                         }

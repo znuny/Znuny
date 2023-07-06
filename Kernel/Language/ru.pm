@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.840079299520899;
+    $Self->{Completeness}        = 0.838960609069844;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -701,6 +701,7 @@ sub Data {
         'Run' => 'Выполнить',
         'Delete this task' => 'Удалить задачу',
         'Run this task' => 'Запустить задачу',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Настройки задания',
         'Job name' => 'Имя задания',
         'The name you entered already exists.' => 'Введенное вами имя уже существует.',
@@ -722,9 +723,9 @@ sub Data {
             'Дополнительно или или вместо запуска по расписанию, вы можете задать события для заявки, которые запустят эту задачу.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Если событие по заявке наступило, фильтр заявок находит соответствующие заявки. Только после этого стартует задача для этой заявки.',
-        'Do you really want to delete this event trigger?' => 'Вы действительно хотите удалить этот триггер события?',
         'Add Event Trigger' => 'Добавить триггер события',
         'To add a new event select the event object and event name' => 'Чтобы добавить новое событие выберите объект и имя события',
+        'Do you really want to delete this event trigger?' => 'Вы действительно хотите удалить этот триггер события?',
         'Select Tickets' => 'Выбрать заявки',
         '(e. g. 10*5155 or 105658*)' => '(например, 10*5155 или 105658*)',
         '(e. g. 234321)' => '(например, 234321)',
@@ -1493,7 +1494,6 @@ sub Data {
         'Uninstall Package' => 'Деинсталлировать пакет',
         'Uninstall package' => 'Деинсталлировать пакет',
         'Do you really want to uninstall this package?' => 'Удалить этот пакет?',
-        'or' => 'или',
         'Reinstall package' => 'Переустановить пакет',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Вы действительно хотите переустановить этот пакет? Все ручные изменения будут потеряны.',
@@ -2026,6 +2026,7 @@ sub Data {
         'State type' => 'Тип состояния',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Это состояние используется в следующих параметрах конфигурации:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2370,7 +2371,6 @@ sub Data {
         'in' => 'в',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => 'Данные недоступны.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2383,6 +2383,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'далее',
+        'No Data Available.' => 'Данные недоступны.',
         'Available Columns' => 'Колонки, доступные для отображения',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Отображаемые (порядок устанавливается перетаскиванием)',
@@ -2536,8 +2537,8 @@ sub Data {
         'Edit statistic "%s".' => 'Редактировать отчет "%s".',
         'Export statistic "%s"' => 'Экспортировать отчёт «%s»',
         'Export statistic %s' => 'Экспортировать отчёт %s',
-        'Delete statistic "%s"' => 'Удалить отчет "%s".',
         'Delete statistic %s' => 'Удалить отчет %s',
+        'Do you really want to delete this statistic?' => 'Вы действительно желаете удалить этот отчет?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Информация об отчете',
@@ -2850,7 +2851,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Архив',
         'This ticket is archived.' => 'Заявка перемещена в архив.',
-        'Note: Type is invalid!' => 'Внимание: Тип недействителен!',
+        'is invalid' => '',
         'Pending till' => 'В ожидании еще',
         'Locked' => 'Блокировка',
         '%s Ticket(s)' => '%s заявка (ок)',
@@ -2950,6 +2951,9 @@ sub Data {
         'Please click the button below to create your first ticket.' => 'Пожалуйста, нажмите на кнопку ниже, чтобы создать вашу первую заявку.',
         'Create your first ticket' => 'Создать вашу первую заявку.',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Параметры',
         'e. g. 10*5155 or 105658*' => 'например, 10*5155 или 105658*',
@@ -3023,12 +3027,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript недоступен',
-        'Step %s' => 'Шаг %s',
         'License' => 'Лицензия',
         'Database Settings' => 'Настройки базы данных',
         'General Specifications and Mail Settings' => 'Общие указания и настройки почты',
         'Finish' => 'Закончить',
         'Welcome to %s' => 'Добро пожаловать в %s',
+        'Address' => 'Адрес',
         'Phone' => 'Телефон',
         'Web site' => 'Веб-сайт',
         'Community' => '',
@@ -3059,6 +3063,7 @@ sub Data {
         'Password for inbound mail.' => 'Пароль для входящей почты.',
         'Result of mail configuration check' => 'Результаты проверки настроек почты',
         'Check mail configuration' => 'Проверить настройки почты',
+        'or' => 'или',
         'Skip this step' => 'Пропустить этот шаг',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3447,7 +3452,6 @@ sub Data {
         'Valid' => 'Действительность',
         'Mr.' => 'Г-н',
         'Mrs.' => 'Г-жа',
-        'Address' => 'Адрес',
         'View system log messages.' => 'Просмотр системных сообщений.',
         'Edit the system configuration settings.' => 'Редактировать настройки конфигурации системы',
         'Update and extend your system with software packages.' => 'Обновление и расширение системы с помощью программных пакетов.',
@@ -5545,6 +5549,8 @@ sub Data {
             'Задает идентификатор системы. Каждый номер заявки и http-сеанса содержит его. Это дает уверенность в том, что заявки только вашей системы будут обработаны как ответы (дополнения) (может быть полезно при связи между двумя установками Znuny).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Задает полный доменный адрес системы. ОН используется в качестве тэга OTRS_CONFIG_FQDN при написании текстов сообщений для ссылки на заявки. ',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5576,14 +5582,6 @@ sub Data {
             'Логотип, отображаемый в заголовке экрана в интерфейсе агента. URL ссылка может быть относительным URL на каталог с файлами (skin) или быть полным URL на внешний веб-сервер.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса "default". Смотрите описание "AgentLogo" для дальгейших пояснений.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса "slim". Смотрите описание "AgentLogo" для дальгейших пояснений.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса "ivory". Смотрите описание "AgentLogo" для дальгейших пояснений.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса "ivory-slim". Смотрите описание "AgentLogo" для дальгейших пояснений.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            'Логотип, отображаемый в заголовке экрана интерфейса агента для окраса "High Contrast". Смотрите описание "AgentLogo" для дальнейших пояснений.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Задает путь в виде URL к icons, CSS и Java Script.',
@@ -6120,10 +6118,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Задает порядок в котором отображаются Фамилия и Имя агентов.',
         'Default skin for the agent interface.' => 'Стандартная тема оформления для интерфейса агента.',
-        'Default skin for the agent interface (slim version).' => 'Стандартная тема оформления для интерфейса агента (узкая версия).',
-        'Balanced white skin by Felix Niklas.' => 'Сбалансированный белый окрас интерфейса от Felix Niklas.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Сбалансированный белый окрас интерфейса от Felix Niklas (уменьшенная версия).',
-        'High contrast skin for visually impaired users.' => 'Высококонтрастная тема оформления для слабовидящих пользователей',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Внутреннее имя окраса (skin) экрана для интерфейса агента. Доступные варианты заданы в Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7856,6 +7850,7 @@ sub Data {
         'Group for default access.' => 'Группа доступа по умолчанию.',
         'Group of all administrators.' => 'Группа для всех администраторов.',
         'Group for statistics access.' => 'Группа для доступа к отчетам.',
+        'Group for time accounting web service access.' => '',
         'new' => 'новая',
         'All new state types (default: viewable).' => 'Все новые типы состояний (по умолчанию: для просмотра).',
         'open' => 'открыта',
@@ -8003,14 +7998,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'Удалить выбор',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Удалить этот Триггер События',
+        'An error occurred during communication.' => 'Ошибка при попытке связи.',
         'Duplicate event.' => 'Дублировать событие.',
         'This event is already attached to the job, Please use a different one.' =>
             'Это событие уже назначено задаче. Выберите другое.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Ошибка при попытке связи.',
         'Request Details' => 'Детали запроса (Request)',
         'Request Details for Communication ID' => 'Запросить детализацию для Communication ID',
         'Show or hide the content.' => 'Показать или убрать содержимое.',
@@ -8023,6 +8016,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'Удалить этот Invoker',
+        'Delete this Event Trigger' => 'Удалить этот Триггер События',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => 'Извините, единственное существующее условие не может быть удалено.',
@@ -8243,9 +8237,6 @@ sub Data {
         'This element has children elements and can currently not be removed.' =>
             'Этот параметр имеет подчиненные элементы и не может быть удален в настоящее время.',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'Вы действительно желаете удалить этот отчет?',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => 'Выберите Customer ID для назначения этой заявке',
         'Do you really want to continue?' => 'Действительно продолжить?',
@@ -8397,8 +8388,6 @@ Thanks for your help!
         ' 2 minutes' => ' 2 минуты',
         ' 5 minutes' => ' 5 минут',
         ' 7 minutes' => ' 7 минут',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '"Узкая" тема которая позволит сэкономить место для опытных пользователей.',
         '%s' => 'Прочее %s',
         '(UserLogin) Firstname Lastname' => '(UserLogin) Имя Фамилия',
         '(UserLogin) Lastname Firstname' => '(UserLogin) Фамилия Имя',
@@ -8613,7 +8602,6 @@ Thanks for your help!
         'Danish' => 'Датский',
         'Dashboard overview.' => '',
         'Date / Time' => 'Дата/Время',
-        'Default (Slim)' => 'По умолчанию (узкая)',
         'Default agent name' => '',
         'Default value for NameX' => 'Значение по умолчанию для NameX',
         'Define the queue comment 2.' => 'Внести Комментарий 2 для очереди.',
@@ -8716,7 +8704,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => 'Диаграммы: области с накоплениями',
         'Greek' => 'Греческий',
         'Hebrew' => 'Иврит',
-        'High Contrast' => 'Высокий контраст',
         'Hindi' => 'Хинди',
         'Hungarian' => 'Венгерский',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8737,8 +8724,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Итальянский',
-        'Ivory' => 'Ivory ',
-        'Ivory (Slim)' => 'Ivory (узкая)',
         'Japanese' => 'Японский',
         'Korean' => 'Корейский',
         'Language' => 'Язык',
@@ -9206,6 +9191,8 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9225,13 +9212,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

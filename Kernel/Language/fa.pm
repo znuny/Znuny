@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.622170824384603;
+    $Self->{Completeness}        = 0.621151936444886;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -695,6 +695,7 @@ sub Data {
         'Run' => 'اجرا',
         'Delete this task' => 'حذف این وظیفه',
         'Run this task' => 'اجرای این وظیفه',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'تنظیمات کار',
         'Job name' => 'نام کار',
         'The name you entered already exists.' => 'نامی که وارد کردید درحال حاضر وجود دارد.',
@@ -716,9 +717,9 @@ sub Data {
             'علاوه بر این و یا معادل آن به اعدام های دوره ای، شما می توانید حوادث بلیط که این کار را آغاز کند را تعریف کنیم.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'اگر یک رویداد بلیط شلیک می شود، فیلتر بلیط اعمال خواهد شد به بررسی در صورتی که بلیط منطبق است. تنها پس از آن کار است که بر روی بلیط را اجرا کنید.',
-        'Do you really want to delete this event trigger?' => 'آیا شما واقعا می خواهید این محرک رویداد را حذف کنید  .',
         'Add Event Trigger' => 'اضافه کردن رویداد راه انداز',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'آیا شما واقعا می خواهید این محرک رویداد را حذف کنید  .',
         'Select Tickets' => 'درخواست را انتخاب کنید',
         '(e. g. 10*5155 or 105658*)' => '(مثال: ۱۰*۵۱۵۵ یا ۱۰۵۶۵۸*)',
         '(e. g. 234321)' => '(مثال: ۲۳۴۳۲۱)',
@@ -1487,7 +1488,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'حذف بسته',
         'Do you really want to uninstall this package?' => 'از حذف این بسته اطمینان دارید؟',
-        'or' => 'یا',
         'Reinstall package' => 'نصب مجدد بسته',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'آیا واقعا می‌خواهید این بسته را مجددا نصب نمایید؟ تمام تغییرات دستی از بین خواهد رفت.',
@@ -2020,6 +2020,7 @@ sub Data {
         'State type' => 'نوع وضعیت',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2364,7 +2365,6 @@ sub Data {
         'in' => 'در',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2377,6 +2377,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'بیشتر',
+        'No Data Available.' => '',
         'Available Columns' => 'ستون در دسترس',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'ستون قابل مشاهده است (سفارش با کشیدن و رها کردن)',
@@ -2530,8 +2531,8 @@ sub Data {
         'Edit statistic "%s".' => 'ویرایش گزارش " %s ".',
         'Export statistic "%s"' => 'آمارارسال \ " %s "',
         'Export statistic %s' => 'استخراج گزارش "%s"',
-        'Delete statistic "%s"' => 'حذف گزارش "%s"',
         'Delete statistic %s' => 'حذف گزارش "%s"',
+        'Do you really want to delete this statistic?' => 'آیا واقعا میخواهید این آمار را حذف کنید؟',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'اطلاعات گزارش ها',
@@ -2844,7 +2845,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'آرشیو',
         'This ticket is archived.' => 'این درخواست بایگانی شده است.',
-        'Note: Type is invalid!' => 'توجه: نوع نامعتبر است!',
+        'is invalid' => '',
         'Pending till' => 'تا زمانی که',
         'Locked' => 'تحویل گرفته شده',
         '%s Ticket(s)' => '',
@@ -2944,6 +2945,9 @@ sub Data {
         'Please click the button below to create your first ticket.' => 'لطفا دکمه زیر را برای ساخت اولین درخواست خود بفشارید.',
         'Create your first ticket' => 'ساخت اولین درخواست شما',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'مشخصات کاربری',
         'e. g. 10*5155 or 105658*' => 'به عنوان مثال 10*5155 یا 105658*',
@@ -3017,12 +3021,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'جاوا اسکریپت در دسترس نیست',
-        'Step %s' => 'مرحله %s',
         'License' => 'مجوز بهره برداری سیستم',
         'Database Settings' => 'تنظیمات پایگاه داده',
         'General Specifications and Mail Settings' => 'مشخصات عمومی و تنظیمات ایمیل',
         'Finish' => 'پایان',
         'Welcome to %s' => 'خوش آمدید به %s',
+        'Address' => 'نشانی',
         'Phone' => 'تلفن',
         'Web site' => 'وب سایت',
         'Community' => '',
@@ -3053,6 +3057,7 @@ sub Data {
         'Password for inbound mail.' => 'رمز عبور برای ایمیل وارده.',
         'Result of mail configuration check' => 'نتیجه کنترل پیکربندی ایمیل',
         'Check mail configuration' => 'کنترل پیکربندی ایمیل',
+        'or' => 'یا',
         'Skip this step' => 'از این مرحله بگذر',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3441,7 +3446,6 @@ sub Data {
         'Valid' => 'معتبر',
         'Mr.' => 'آقای',
         'Mrs.' => 'خانم',
-        'Address' => 'نشانی',
         'View system log messages.' => 'نمایش پیغام‌های ثبت وقایع سیستم',
         'Edit the system configuration settings.' => 'ویرایش تنظیمات پیکربندی سیستم',
         'Update and extend your system with software packages.' => 'به روزرسانی و گسترش سیستم به کمک بسته‌های نرم‌افزاری',
@@ -5539,6 +5543,8 @@ sub Data {
             'تعریف می کند شناسه سیستم. هر عدد بلیط و جلسه HTTP رشته شامل این ID. این تضمین می کند که تنها بلیط که متعلق به سیستم شما خواهد شد به شرح زیر یو پی اس (در هنگام برقراری ارتباط بین دو نمونه از Znuny مفید) پردازش شده است.',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'تعریف می کند که نام مناسب دامنه از سیستم. این تنظیم به عنوان یک متغیر، OTRS_CONFIG_FQDN است که در تمام اشکال پیام استفاده شده توسط برنامه، برای ساخت لینک به بلیط در سیستم شما یافت استفاده می شود.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             'تعریف می کند نام میزبان HTTP برای جمع آوری داده ها پشتیبانی با ماژول عمومی PublicSupportDataCollector، (به عنوان مثال استفاده از Znuny شبح).',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5570,14 +5576,6 @@ sub Data {
             'آرم نشان داده شده است در هدر رابط عامل. URL به تصویر می تواند یک آدرس نسبی به دایرکتوری تصویر پوست، و یا یک URL کامل به یک وب سرور از راه دور.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'آرم نشان داده شده در هدر از رابط عامل برای پوست \ "به طور پیش فرض ". \ "AgentLogo " برای توضیحات بیشتر را مشاهده کنید.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'آرم نشان داده شده در هدر از رابط عامل برای پوست \ "باریک ". \ "AgentLogo " برای توضیحات بیشتر را مشاهده کنید.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'آرم نشان داده شده در هدر از رابط عامل برای پوست \ "عاج ". \ "AgentLogo " برای توضیحات بیشتر را مشاهده کنید.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'آرم نشان داده شده در هدر از رابط عامل برای پوست \ "عاج باریک ". \ "AgentLogo " برای توضیحات بیشتر را مشاهده کنید.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'تعریف می کند که URL مسیر پایه از آیکون ها، CSS و جاوا اسکریپت.',
@@ -6114,10 +6112,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             ' نظمی که در آن نام و نام خانوادگی از عوامل نمایش داده خواهد شد را مشخص میکند.',
         'Default skin for the agent interface.' => 'پوست به طور پیش فرض برای رابط عامل.',
-        'Default skin for the agent interface (slim version).' => 'پوست به طور پیش فرض برای رابط عامل (نسخه باریک).',
-        'Balanced white skin by Felix Niklas.' => 'پوست سفید متعادل کننده شده توسط فلیکس نیکلاس.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'پوست سفید متعادل کننده شده توسط فلیکس نیکلاس (نسخه باریک).',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'InternalName پوست عامل است که باید در رابط عامل استفاده شود. لطفا پوسته های موجود در ظاهر :: :: عامل پوسته را تیک بزنید.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7850,6 +7844,7 @@ sub Data {
         'Group for default access.' => 'گروه برای دسترسی پیش فرض.',
         'Group of all administrators.' => 'گروه از همه مدیران.',
         'Group for statistics access.' => 'گروه برای دسترسی آمار.',
+        'Group for time accounting web service access.' => '',
         'new' => 'جدید',
         'All new state types (default: viewable).' => 'تمام انواع حالت جدید (به طور پیش فرض: قابل مشاهده).',
         'open' => 'باز',
@@ -7997,14 +7992,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'حذف انتخاب',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'حذف این رویداد راه انداز',
+        'An error occurred during communication.' => 'یک خطا در هنگام برقراری ارتباط رخ داده است.',
         'Duplicate event.' => 'تکرار رویداد.',
         'This event is already attached to the job, Please use a different one.' =>
             'این رویداد در حال حاضر به این کار متصل است، لطفا یک رویداد دیگر را استفاده کنید.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'یک خطا در هنگام برقراری ارتباط رخ داده است.',
         'Request Details' => 'جزئیات درخواست',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'نمایش یا مخفی کردن محتوا.',
@@ -8017,6 +8010,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'حذف این Invoker',
+        'Delete this Event Trigger' => 'حذف این رویداد راه انداز',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8237,9 +8231,6 @@ sub Data {
         'This element has children elements and can currently not be removed.' =>
             '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'آیا واقعا میخواهید این آمار را حذف کنید؟',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => 'آیا واقعا میخواهید ادامه دهید؟',
@@ -8391,8 +8382,6 @@ Thanks for your help!
         ' 2 minutes' => '۲ دقیقه',
         ' 5 minutes' => '۵ دقیقه',
         ' 7 minutes' => '۷ دقیقه',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '\ "اسلیم " پوست که تلاش می کند برای صرفه جویی در فضای صفحه نمایش برای کاربران قدرت.',
         '%s' => '٪s',
         '(UserLogin) Firstname Lastname' => '(صفحهی) نام نام خانوادگی',
         '(UserLogin) Lastname Firstname' => '(صفحهی) نام خانوادگی FIRSTNAME',
@@ -8607,7 +8596,6 @@ Thanks for your help!
         'Danish' => 'دانمارکی',
         'Dashboard overview.' => '',
         'Date / Time' => 'زمان تاریخ',
-        'Default (Slim)' => 'به طور پیش فرض (لاغر)',
         'Default agent name' => '',
         'Default value for NameX' => 'مقدار پیش فرض برای NameX',
         'Define the queue comment 2.' => 'تعریف نظر صف 2.',
@@ -8710,7 +8698,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => 'نمودار: نمودار محیطی پشتهای',
         'Greek' => 'یونانی',
         'Hebrew' => 'عبری',
-        'High Contrast' => '',
         'Hindi' => 'هندی',
         'Hungarian' => 'مجارستانی',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8731,8 +8718,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'ایتالیایی',
-        'Ivory' => 'عاج',
-        'Ivory (Slim)' => 'عاج (لاغر)',
         'Japanese' => 'ژاپنی',
         'Korean' => '',
         'Language' => 'زبان',
@@ -9200,6 +9185,8 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9219,13 +9206,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

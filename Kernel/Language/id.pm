@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.611101932925822;
+    $Self->{Completeness}        = 0.610062893081761;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -689,6 +689,7 @@ sub Data {
         'Run' => 'Jalankan',
         'Delete this task' => 'Hapus tugas ini',
         'Run this task' => 'Jalankan tugas ini',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'Pengaturan pekerjaan',
         'Job name' => 'Nama pekerjaan',
         'The name you entered already exists.' => 'Nama yang anda masukan sudah terpakai',
@@ -710,9 +711,9 @@ sub Data {
             'Selain atau alternatif dari eksekusi secara periodik, anda dapat mendefinisikan tiket event yang akan memicu pekerjaan ini.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Jika tiket even diaktifkan, saringan tiket akan di aplikasikan untuk memeriksa jika tiket tersebut sesuai. Setelah itu barulah pekerjaan tersebut dijalankan pada tiket ini.',
-        'Do you really want to delete this event trigger?' => 'Apakah anda benar-benar ingin menghapus pemicu event ini?',
         'Add Event Trigger' => 'Tambahkan Pemicu event',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Apakah anda benar-benar ingin menghapus pemicu event ini?',
         'Select Tickets' => 'Pilih Tiket',
         '(e. g. 10*5155 or 105658*)' => '(Misalnya 10*5155 atau 105658*)',
         '(e. g. 234321)' => '(Misalnya 234321)',
@@ -1481,7 +1482,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Uninstal paket',
         'Do you really want to uninstall this package?' => 'Apakah anda ingin menguninstal paket ini?',
-        'or' => 'atau',
         'Reinstall package' => 'Instal ulang paket',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Apakah anda ingin menginstal ulang paket ini? Semua perubahan manual akan hilang.',
@@ -2015,6 +2015,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'State type' => 'Jenis pilihan',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2360,7 +2361,6 @@ bin/znuny.Daemon.pl status\').',
         'in' => 'Masuk',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2373,6 +2373,7 @@ bin/znuny.Daemon.pl status\').',
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'Lebih',
+        'No Data Available.' => '',
         'Available Columns' => 'Kolom tersedia',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Kolom yang terlihat (order dengan drag & drop)',
@@ -2526,8 +2527,8 @@ bin/znuny.Daemon.pl status\').',
         'Edit statistic "%s".' => 'Edit statistik "%s"',
         'Export statistic "%s"' => 'Ekspor statistik "%s"',
         'Export statistic %s' => 'Expor statistik %s',
-        'Delete statistic "%s"' => 'Hapuskan statistik "%s"',
         'Delete statistic %s' => 'Hapuskan statistik %s',
+        'Do you really want to delete this statistic?' => 'Apakah anda benar-benar ingin menghapus statistik?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -2840,7 +2841,7 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arsip',
         'This ticket is archived.' => 'Tiket ini diarsipkan',
-        'Note: Type is invalid!' => 'Pemberitahuan: Tiket tidak sah!',
+        'is invalid' => '',
         'Pending till' => 'Ditunda hingga',
         'Locked' => 'Dikunci',
         '%s Ticket(s)' => '',
@@ -2940,6 +2941,9 @@ bin/znuny.Daemon.pl status\').',
         'Please click the button below to create your first ticket.' => 'Silahkan tekan tombol dibawah untuk membuat tiket pertama anda.',
         'Create your first ticket' => 'Membuat tiket pertama anda',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'Contoh : 10*5155 atau 105658*',
@@ -3013,12 +3017,12 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript tidak tersedia',
-        'Step %s' => 'Langkah %s',
         'License' => 'Lisensi',
         'Database Settings' => 'Pengaturan database',
         'General Specifications and Mail Settings' => 'Spesifikasi umum dan Pengaturan Surat',
         'Finish' => 'Selesei',
         'Welcome to %s' => 'Selamat datang di %s',
+        'Address' => 'Alamat',
         'Phone' => 'Telepon',
         'Web site' => 'Website',
         'Community' => '',
@@ -3049,6 +3053,7 @@ bin/znuny.Daemon.pl status\').',
         'Password for inbound mail.' => 'Kata sandi untuk surat yang masuk',
         'Result of mail configuration check' => 'Hasil dari pengintaian konfigurasi surat',
         'Check mail configuration' => 'Pengecekan konfigurasi surat',
+        'or' => 'atau',
         'Skip this step' => 'Lewatkan langkah ini',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3437,7 +3442,6 @@ bin/znuny.Daemon.pl status\').',
         'Valid' => 'Valid',
         'Mr.' => 'Tuan.',
         'Mrs.' => 'Nyonya.',
-        'Address' => 'Alamat',
         'View system log messages.' => 'Melihat pesan log sistem.',
         'Edit the system configuration settings.' => 'Ubah pengaturan konfigurasi sistem.',
         'Update and extend your system with software packages.' => 'Memperbarui dan memperluas sistem Anda dengan paket perangkat lunak.',
@@ -5535,6 +5539,8 @@ bin/znuny.Daemon.pl status\').',
             'Mendefinisikan sistem identifier. Setiap nomor tiket dan sesi http string berisi ID ini. Hal ini memastikan bahwa hanya tiket yang milik sistem anda akan diproses sebagai tindak lanjut (berguna ketika berkomunikasi antara dua contoh Znuny).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Mendefinisikan nama domain berkualifikasi lengkap dari sistem. Pengaturan ini digunakan sebagai variabel, OTRS_CONFIG_FQDN yang ditemukan dalam semua bentuk pesan yang digunakan oleh aplikasi, untuk membangun link ke tiket dalam sistem Anda.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5566,14 +5572,6 @@ bin/znuny.Daemon.pl status\').',
             'Logo dalam header dari antarmuka agen. URL untuk gambar bisa menjadi URL relatif ke direktori image kulit, atau URL lengkap ke web server jauh.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Logo dalam header dari antarmuka agen untuk kulit "default". Lihat "Agen Logo" untuk deskripsi lebih lanjut.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'Logo dalam header dari antarmuka agen untuk kulit "tipis". Lihat "Agen Logo" untuk deskripsi lebih lanjut.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'Logo dalam header dari antarmuka agen untuk kulit "gading". Lihat "Agen Logo" untuk deskripsi lebih lanjut.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'Logo dalam header dari antarmuka agen untuk kulit "gading-slim". Lihat "Agen Logo" untuk deskripsi lebih lanjut.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Mendefinisikan path basis URL ikon, CSS dan Java Script.',
@@ -6110,10 +6108,6 @@ bin/znuny.Daemon.pl status\').',
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Menentukan urutan nama depan dan nama belakang dari agen akan ditampilkan.',
         'Default skin for the agent interface.' => 'kulit default untuk antarmuka agen.',
-        'Default skin for the agent interface (slim version).' => 'kulit default untuk antarmuka agen (versi slim).',
-        'Balanced white skin by Felix Niklas.' => 'kulit putih yang seimbang oleh Felix Niklas ',
-        'Balanced white skin by Felix Niklas (slim version).' => 'kulit putih yang seimbang oleh Felix Niklas (versi slim).',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'agen menguliti Nama internal yang harus digunakan dalam antarmuka agen. Silakan periksa kulit yang tersedia di  Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7847,6 +7841,7 @@ bin/znuny.Daemon.pl status\').',
         'Group for default access.' => 'Kelompok untuk akses default.',
         'Group of all administrators.' => 'Grup semua administrator',
         'Group for statistics access.' => 'Grup untuk akses statistik',
+        'Group for time accounting web service access.' => '',
         'new' => 'baru',
         'All new state types (default: viewable).' => 'Semua jenis state (default: paparkan).',
         'open' => 'buka',
@@ -7994,14 +7989,12 @@ bin/znuny.Daemon.pl status\').',
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'Hapus pilihan',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'Hapus pemicu event ini',
+        'An error occurred during communication.' => 'Kesalahan terjadi selama komunikasi',
         'Duplicate event.' => 'Event duplikat',
         'This event is already attached to the job, Please use a different one.' =>
             'Event ini telah terlampir pada pekerjaan tersebut, mohon gunakan event yang berbeda',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'Kesalahan terjadi selama komunikasi',
         'Request Details' => 'Rincian permintaan',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'Menampilkan atau menyembunyikan konten',
@@ -8014,6 +8007,7 @@ bin/znuny.Daemon.pl status\').',
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'Hapus invoker',
+        'Delete this Event Trigger' => 'Hapus pemicu event ini',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8234,9 +8228,6 @@ bin/znuny.Daemon.pl status\').',
         'This element has children elements and can currently not be removed.' =>
             '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'Apakah anda benar-benar ingin menghapus statistik?',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => 'Apakah anda ingin meneruskannya?',
@@ -8388,8 +8379,6 @@ Helpdesk Team Anda
         ' 2 minutes' => '2 menit',
         ' 5 minutes' => '5 menit',
         ' 7 minutes' => '7 menit',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '"Slim" kulit yang mencoba untuk menghemat ruang layar untuk tenaga pengguna',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Pengguna Masuk) Nama depan Nama akhir',
         '(UserLogin) Lastname Firstname' => '(Pengguna masuk) Nama akhir Nama depan',
@@ -8604,7 +8593,6 @@ Helpdesk Team Anda
         'Danish' => 'Denmark',
         'Dashboard overview.' => '',
         'Date / Time' => 'Tanggal / Waktu',
-        'Default (Slim)' => 'Default (Slim)',
         'Default agent name' => '',
         'Default value for NameX' => 'Nilai default untuk nama',
         'Define the queue comment 2.' => 'Tentukan max kedalaman antrian.',
@@ -8707,7 +8695,6 @@ Helpdesk Team Anda
         'Graph: Stacked Area Chart' => 'Grafik: Tumpukan Bagan Lokasi',
         'Greek' => 'Yunani',
         'Hebrew' => 'Ibrani',
-        'High Contrast' => '',
         'Hindi' => 'Hindi',
         'Hungarian' => 'Hongaria',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8728,8 +8715,6 @@ Helpdesk Team Anda
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Italia',
-        'Ivory' => 'Gading',
-        'Ivory (Slim)' => 'Ivory (slim)',
         'Japanese' => 'Jepang',
         'Korean' => '',
         'Language' => 'Bahasa',
@@ -9197,6 +9182,8 @@ Helpdesk Team Anda
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9216,13 +9203,11 @@ Helpdesk Team Anda
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

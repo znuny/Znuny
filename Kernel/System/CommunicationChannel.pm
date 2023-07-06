@@ -390,7 +390,7 @@ Returns:
             ChangeTime  => '2017-01-01 00:00:00',
             ChangeBy    => 1,
         },
-        ...
+        # ...
     );
 
 =cut

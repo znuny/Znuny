@@ -38,6 +38,7 @@ sub CheckAccess {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LinkObject   = $Kernel::OM->Get('Kernel::System::LinkObject');
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     for my $Needed (qw(Ticket Article ChannelName UserID)) {
         if ( !$Param{$Needed} ) {
@@ -48,6 +49,10 @@ sub CheckAccess {
             return;
         }
     }
+
+    # Only add article action to agent ticket zoom view.
+    my $Action = $LayoutObject->{Action} // '';
+    return if $Action ne 'AgentTicketZoom';
 
     return if !$ConfigObject->Get('Frontend::Module')->{AgentTicketNoteToLinkedTicket};
     return if !$Param{AclActionLookup}->{AgentTicketNoteToLinkedTicket};

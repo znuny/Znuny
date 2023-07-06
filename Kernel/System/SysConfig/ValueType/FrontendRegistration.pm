@@ -59,21 +59,21 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
                 {
                     'Item' => [
                         {
-                            ...
+                            # ...
                         },
                     ],
                 },
             ],
         },
         EffectiveValue => {
-            ...
+            # ...
         },
     );
 
 Result:
     %Result = (
         EffectiveValue => {         # Note for FrontendRegistration ValueTypes EffectiveValue is not changed.
-            ...
+            # ...
         },
         Success => 1,
         Error   => undef,

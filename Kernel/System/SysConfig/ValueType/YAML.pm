@@ -257,7 +257,7 @@ Generate HTML for new array/hash item.
 Returns:
 
     $HTML = '<textarea rows=\'15\' cols=\'50\' class="" type="text" name="SettingName">
-        ...
+        # ...
         </textarea>';
 
 =cut

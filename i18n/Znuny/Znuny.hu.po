@@ -4434,7 +4434,7 @@ msgstr "Csomag eltávolítása"
 msgid "Do you really want to uninstall this package?"
 msgstr "Valóban el szeretné távolítani ezt a csomagot?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "vagy"
 
@@ -9970,7 +9970,7 @@ msgstr "Úr"
 msgid "Mrs."
 msgstr "Úrhölgy"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Cím"
 
@@ -15285,22 +15285,6 @@ msgstr "Az ügyintéző felület fejlécében megjelenített logó. A kép URL l
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown in the header of the agent interface for the skin \"default\". See \"AgentLogo\" for further description."
 msgstr "Az ügyintézői felület fejlécében megjelenített logó az „Alapértelmezett” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
-msgstr "Az ügyintézői felület fejlécében megjelenített logó az „Alapértelmezett (karcsú)” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr "Az ügyintézői felület fejlécében megjelenített logó az „Elefántcsont” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr "Az ügyintézői felület fejlécében megjelenített logó az „Elefántcsont (karcsú)” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"High Contrast\". See \"AgentLogo\" for further description."
-msgstr "Az ügyintézői felület fejlécében megjelenített logó a „Nagy kontraszt” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server."
@@ -20730,11 +20714,11 @@ msgstr "Dinamikus mező eltávolítása"
 msgid "Remove selection"
 msgstr "Kijelölés eltávolítása"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr "Valóban törölni szeretné ezt az általános ügyintéző feladatot?"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Eseményaktiváló törlése"
 
@@ -20746,7 +20730,7 @@ msgstr "Esemény kettőzése."
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Ez az esemény már csatolva van a feladathoz, használjon egy másikat."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "Hiba történt a kommunikáció közben."
 
@@ -21250,7 +21234,7 @@ msgstr "Előállítás"
 msgid "This element has children elements and can currently not be removed."
 msgstr "Ennek az elemnek gyermekelemei vannak, és jelenleg nem lehet eltávolítani."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "Valóban törölni szeretné ezt a statisztikát?"
 
@@ -24242,5 +24226,29 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Show All"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+msgid "New Process Ticket"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
+msgstr ""
+
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid"
 msgstr ""
 

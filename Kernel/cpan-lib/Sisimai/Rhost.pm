@@ -4,14 +4,16 @@ use strict;
 use warnings;
 
 use constant RhostClass => {
+    qr/cox[.]net/                                     => 'Cox',
     qr/[.](?:prod|protection)[.]outlook[.]com\z/      => 'ExchangeOnline',
     qr/\b(?>laposte[.]net|(?:orange|wanadoo)[.]fr)\z/ => 'FrancePTT',
     qr/\A(?:smtp|mailstore1)[.]secureserver[.]net\z/  => 'GoDaddy',
     qr/(?:aspmx|gmail-smtp-in)[.]l[.]google[.]com\z/  => 'GoogleApps',
     qr/[.]email[.]ua\z/                               => 'IUA',
     qr/[.](?:ezweb[.]ne[.]jp|au[.]com)\z/             => 'KDDI',
+    qr/[.]mimecast[.]com\z/                           => 'Mimecast',
+    qr/mfsmax[.]docomo[.]ne[.]jp\z/                   => 'NTTDOCOMO',
     qr/charter[.]net/                                 => 'Spectrum',
-    qr/cox[.]net/                                     => 'Cox',
     qr/mx[0-9]+[.]qq[.]com\z/                         => 'TencentQQ',
 };
 
@@ -96,7 +98,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2020 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2020,2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

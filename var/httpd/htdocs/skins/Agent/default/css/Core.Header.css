@@ -43,15 +43,16 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     * @subsection  Logo
     */
     #Header #Logo {
-        top:             0 !important;
-        right:           0 !important;
-        left:            0 !important;
-        width:           120px !important;
-        height:          27px !important;
-        background:      url(../img/znuny-logo-black.svg) no-repeat !important;
-        background-size: contain;
-        position:        relative;
-        display: inherit;
+        top:               0 !important;
+        right:             0 !important;
+        left:              0 !important;
+        width:             120px !important;
+        height:            27px !important;
+        background-color:  transparent;
+        background-repeat: no-repeat;
+        background-size:   contain;
+        position:          relative;
+        display:           inherit;
     }
 
     .RTL #Header #Logo {

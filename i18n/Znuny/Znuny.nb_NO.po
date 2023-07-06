@@ -192,7 +192,7 @@ msgstr "Lagre ACL"
 msgid "Save"
 msgstr "Lagre"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "eller"
 
@@ -9744,7 +9744,7 @@ msgstr "Hr."
 msgid "Mrs."
 msgstr "Fru"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Adresse"
 
@@ -15328,11 +15328,11 @@ msgstr ""
 msgid "Remove selection"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Fjern denne Hendelses Utløseren"
 
@@ -15344,7 +15344,7 @@ msgstr "Klone hendelsen."
 msgid "This event is already attached to the job, Please use a different one."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "En feil oppstod under kommunikasjonen"
 
@@ -15856,7 +15856,7 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr ""
 
@@ -23060,18 +23060,6 @@ msgid "The logo shown in the header of the agent interface for the skin \"defaul
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server."
 msgstr ""
 
@@ -26437,5 +26425,29 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Show All"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+msgid "New Process Ticket"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
+msgstr ""
+
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid"
 msgstr ""
 

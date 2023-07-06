@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-04-04 07:25+0000\n"
+"POT-Creation-Date: 2023-07-05 07:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2028,6 +2028,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Run this task"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
+msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
@@ -4443,10 +4447,6 @@ msgid "Do you really want to uninstall this package?"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "or"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Reinstall package"
 msgstr ""
 
@@ -6079,6 +6079,10 @@ msgid "It's not possible to invalidate this entry because there is no other merg
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
 msgid "This state is used in the following config settings:"
 msgstr ""
 
@@ -7035,10 +7039,6 @@ msgid "in"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-msgid "No Data Available."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Show or hide the content"
 msgstr ""
 
@@ -7084,6 +7084,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "more"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid "No Data Available."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
@@ -7491,11 +7495,11 @@ msgid "Export statistic %s"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
-msgid "Delete statistic \"%s\""
+msgid "Delete statistic %s"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
-msgid "Delete statistic %s"
+msgid "Do you really want to delete this statistic?"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
@@ -8455,7 +8459,7 @@ msgid "This ticket is archived."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-msgid "Note: Type is invalid!"
+msgid "is invalid"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
@@ -8706,6 +8710,10 @@ msgstr ""
 msgid "Create your first ticket"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+msgid "New Process Ticket"
+msgstr ""
+
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "Profile"
 msgstr ""
@@ -8891,10 +8899,6 @@ msgid "JavaScript not available"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
-msgid "Step %s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "License"
 msgstr ""
 
@@ -8912,6 +8916,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Welcome to %s"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
+msgid "Address"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
@@ -9024,6 +9032,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "Check mail configuration"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
+msgid "or"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
@@ -9976,10 +9988,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Config/Defaults.pm
 msgid "Mrs."
-msgstr ""
-
-#. Perl Module: Kernel/Config/Defaults.pm
-msgid "Address"
 msgstr ""
 
 #. Perl Module: Kernel/Config/Defaults.pm
@@ -15231,6 +15239,10 @@ msgid "Defines the fully qualified domain name of the system. This setting is us
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the HTTP hostname for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the Znuny Daemon)."
 msgstr ""
 
@@ -15292,22 +15304,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown in the header of the agent interface for the skin \"default\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"High Contrast\". See \"AgentLogo\" for further description."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -16528,22 +16524,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Default skin for the agent interface."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Default skin for the agent interface (slim version)."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Balanced white skin by Felix Niklas."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Balanced white skin by Felix Niklas (slim version)."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "High contrast skin for visually impaired users."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -20287,6 +20267,10 @@ msgid "Group for statistics access."
 msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
+
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "new"
 msgstr ""
 
@@ -20739,11 +20723,7 @@ msgid "Remove selection"
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
-msgid "Do you really want to delete this generic agent job?"
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
-msgid "Delete this Event Trigger"
+msgid "An error occurred during communication."
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
@@ -20752,10 +20732,6 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "This event is already attached to the job, Please use a different one."
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-msgid "An error occurred during communication."
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
@@ -20784,6 +20760,10 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Invoker"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
+msgid "Delete this Event Trigger"
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
@@ -21258,10 +21238,6 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-msgid "Do you really want to delete this statistic?"
-msgstr ""
-
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
 msgid "Select a customer ID to assign to this ticket"
 msgstr ""
@@ -21567,10 +21543,6 @@ msgstr ""
 
 #. SysConfig
 msgid " 7 minutes"
-msgstr ""
-
-#. SysConfig
-msgid "\"Slim\" skin which tries to save screen space for power users."
 msgstr ""
 
 #. SysConfig
@@ -22370,10 +22342,6 @@ msgid "Date / Time"
 msgstr ""
 
 #. SysConfig
-msgid "Default (Slim)"
-msgstr ""
-
-#. SysConfig
 msgid "Default agent name"
 msgstr ""
 
@@ -22746,10 +22714,6 @@ msgid "Hebrew"
 msgstr ""
 
 #. SysConfig
-msgid "High Contrast"
-msgstr ""
-
-#. SysConfig
 msgid "Hindi"
 msgstr ""
 
@@ -22811,14 +22775,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Italian"
-msgstr ""
-
-#. SysConfig
-msgid "Ivory"
-msgstr ""
-
-#. SysConfig
-msgid "Ivory (Slim)"
 msgstr ""
 
 #. SysConfig

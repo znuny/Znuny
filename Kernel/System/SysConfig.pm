@@ -789,7 +789,7 @@ Returns:
             UserLogin => ...,
             UserFirstname => ...,
             UserLastname => ...,
-            ...
+            # ...
         },
     );
 
@@ -1201,7 +1201,7 @@ Wrapper for Kernel::Output::HTML::SysConfig::SettingAddItem() - Returns response
             'DefaultValue' => [ 'Item 1', 'Item 2' ],
             'Description' => 'Simple array item(Min 1, Max 3).',
             'Name' => 'TestArray',
-            ...
+            # ...
         },
         Key               => 'HashKey',  # (optional) hash key
         IDSuffix          => '_Array3,   # (optional) suffix that will be added to all input/select fields
@@ -1213,7 +1213,7 @@ Wrapper for Kernel::Output::HTML::SysConfig::SettingAddItem() - Returns response
                         {
                         'Content' => 'Item 1',
                         },
-                        ...
+                       # ...
                     ],
                 ],
             },
@@ -1254,7 +1254,7 @@ Checks which settings has been updated from provided Setting list and returns up
                 ChangeTime            => '2017-01-13 11:23:07',
                 IsLockedByAnotherUser => 0,
             },
-            ...
+            # ...
         ],
         UserID => 1,                                                # (required) Current user id
     );
@@ -1268,7 +1268,7 @@ Returns:
             IsModified            => 1,
             SettingName           => 'SettingName',
         },
-        ...
+        # ...
     ];
 
 =cut
@@ -2094,7 +2094,7 @@ Returns:
             'IsInvisible' => '0',
             'Metadata' => "ACL::CacheTTL--- '3600'
 Cache-Zeit in Sekunden f\x{fc}r Datenbank ACL-Backends.",
-        ...
+        # ...
     );
 
 =cut
@@ -2162,7 +2162,7 @@ Returns:
             'Value' => 'Frontend::Agent',
             'Name' => 'Agent',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -2234,7 +2234,7 @@ Returns:
             '3 normal' => [
                 'Ticket::Frontend::AgentTicketNote###PriorityDefault',
                 'Ticket::Frontend::AgentTicketPhone###Priority',
-                ...
+               # ...
             ],
         },
         'Queue' => {
@@ -2245,7 +2245,7 @@ Returns:
                 'PostmasterDefaultQueue',
             ],
         },
-        ...
+        # ...
     );
 
 =cut
@@ -2328,7 +2328,7 @@ Returns:
         'Ticket::Frontend::AgentTicketNote###PriorityDefault',
         'Ticket::Frontend::AgentTicketPhone###Priority',
         'Ticket::Frontend::AgentTicketBulk###PriorityDefault',
-        ...
+        # ...
     );
 
 =cut
@@ -2758,11 +2758,11 @@ Returns:
             'Core::Daemon' => {
                 'Core::Daemon::ModuleRegistration' => {},
             },
-            ...
+            # ...
         'Crypt' =>{
-            ...
+            # ...
         },
-        ...
+        # ...
     );
 
 =cut
@@ -3153,7 +3153,7 @@ Returns:
             Name      => 'SettingName2',
             IsDirty   => 0
         },
-        ...
+        # ...
     );
 
 =cut
@@ -4480,7 +4480,7 @@ Returns:
     %ForbiddenValueType = (
         String => [],
         Select => ['Option'],
-        ...
+        # ...
     );
 
 =cut
@@ -4615,7 +4615,7 @@ This method locks provided settings(by force), updates them and deploys the chan
                 IsValid                => 1,                # (optional)
                 UserModificationActive => 1,                # (optional)
             },
-            ...
+            # ...
         ],
     );
 
@@ -5688,7 +5688,7 @@ Sets cache for EffectiveValueCheck to the provided value.
             Default180920170714165331 => {
                 Success => 1,
             },
-            ...
+            # ...
         },
         NoValidation => 0,                      (optional)
     );
@@ -6127,7 +6127,7 @@ Returns:
     @ValueTypes = (
         "Checkbox",
         "Select",
-        ...
+        # ...
     );
 
 =cut
@@ -6188,10 +6188,10 @@ Helper method for ConfigurationXML2DB() - bulk insert.
             'SettingName' => {
 
             },
-            ...
+            # ...
         },
         SettingList => [                # (required) List of settings
-            ...
+            # ...
         ],
         UserID => 1,                    # (required) UserID
     );

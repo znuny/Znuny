@@ -22,15 +22,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2023-03-29 08:46+0000\n"
-"Last-Translator: Rúben Sardinha <ruben.sardinha@outlook.com>\n"
+"PO-Revision-Date: 2023-06-08 01:18+0000\n"
+"Last-Translator: José <jjunior@serviceup.com.br>\n"
 "Language-Team: Portuguese <https://translations.znuny.org/projects/znuny/znuny/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Weblate 4.17\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -200,7 +200,7 @@ msgstr "Guardar ACL"
 msgid "Save"
 msgstr "Guardar"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "ou"
 
@@ -9756,7 +9756,7 @@ msgstr "Sr."
 msgid "Mrs."
 msgstr "Sra."
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Endereço"
 
@@ -15344,11 +15344,11 @@ msgstr ""
 msgid "Remove selection"
 msgstr "Remover seleção"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr ""
 
@@ -15360,7 +15360,7 @@ msgstr ""
 msgid "This event is already attached to the job, Please use a different one."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "Ocorreu um erro durante a comunicação"
 
@@ -15872,7 +15872,7 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr ""
 
@@ -23084,23 +23084,7 @@ msgid "The identifier for a ticket, e.g. Ticket#, Call#, MyTicket#. The default 
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"High Contrast\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown in the header of the agent interface for the skin \"default\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -25891,7 +25875,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Close this widget"
-msgstr ""
+msgstr " Fechar este widget"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Hide"
@@ -25899,7 +25883,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Cancel"
-msgstr ""
+msgstr " Cancelar"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Filter available fields"
@@ -25955,11 +25939,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Cc"
-msgstr ""
+msgstr " Cc"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Bcc"
-msgstr ""
+msgstr " Cco"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Send mail"
@@ -26035,7 +26019,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
 msgid " Column Filters Form"
-msgstr ""
+msgstr " Formulário de filtros de coluna"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
 msgid " Loading"
@@ -26471,5 +26455,29 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Show All"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+msgid "New Process Ticket"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
+msgstr ""
+
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid"
 msgstr ""
 

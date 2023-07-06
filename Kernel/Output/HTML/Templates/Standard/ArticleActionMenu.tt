@@ -38,7 +38,7 @@
                         <input type="hidden" name="Action" value="[% Item.Action | html %]"/>
                         <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
                         <input type="hidden" name="ArticleID" value="[% Data.ArticleID | html %]"/>
-                        <!--<input type="hidden" name="ReplyAll" value="[% Item.ReplyAll | html %]"/-->
+                        <input type="hidden" name="ReplyAll" value="[% Item.ReplyAll | html %]"/>
                         <label for="[% Item.ResponseElementID | html %]">[% Translate(Item.Name) | html %]</label>
                         [% Item.StandardResponsesStrg %]
                     </form>

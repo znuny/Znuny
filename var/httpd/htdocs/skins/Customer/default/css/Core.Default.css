@@ -229,14 +229,15 @@ div.Headline h1 {
 }
 
 #Header .info-wrapper #Logo {
-    position: relative;
-    top: initial;
-    right: initial;
-    width: 120px;
-    height: 27px;
-    background: transparent url(../img/znuny-logo-black.svg) no-repeat;
-    background-size: contain;
-    margin-right: 70px;
+    position:          relative;
+    top:               initial;
+    right:             initial;
+    width:             120px;
+    height:            27px;
+    background-color:  transparent;
+    background-repeat: no-repeat;
+    background-size:   contain;
+    margin-right:      70px;
 }
 
 @media only screen and (max-width: 1024px) {

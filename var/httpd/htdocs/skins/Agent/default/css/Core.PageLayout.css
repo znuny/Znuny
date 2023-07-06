@@ -22,13 +22,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         gap: var(--gap-md);
         padding: var(--main-page-padding);
     }
-    
+
     .ContentWrapper .Content {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
     }
-    
+
     .ContentWrapper .Content.Card,
     .ContentWrapper .ContentColumn.Card {
         background-color: var(--white);
@@ -258,7 +258,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
             width: 100%;
         }
     }
-    
+
 
 
 
@@ -269,7 +269,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     */
     .LayoutGrid {
         overflow: hidden;
-        /* - if the code below is causing issues, move it to the following selector: 
+        /* - if the code below is causing issues, move it to the following selector:
           .modal-col-wrapper.modal-col-container .LayoutGrid {} in Core.Dialog */
         display: flex;
         flex-wrap: wrap;
@@ -295,8 +295,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .Size1of3 {
-        width: 33%;
+        width: calc(33% - var(--gap-md));
         overflow: auto;
+    }
+
+
+    .LayoutGrid > .Size1of3 .CallForAction{
+        margin: var(--margin-md) 0;
     }
 
     .LayoutGrid > .Size2of3 {
@@ -479,7 +484,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .table-widget.has-padding .DataTable {
         border-radius: var(--border-radius-xs);
         border: var(--border-width) var(--border-solid) var(--border-color);
-    }  
+    }
 
     .Popup .table-widget.has-padding .Content .DataTable td,
     .RealPopup .table-widget.has-padding .Content .DataTable td,
@@ -611,7 +616,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
 
-    
+
 
     .ticketMerge .card-item:first-child .Field {
         display: flex;
@@ -639,7 +644,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
 
-    
+
 
     .Popup fieldset > div > div,
     .RealPopup fieldset > div > div {
@@ -705,7 +710,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .CustomerUserAdressBookSearch {
         background: var(--white);
-        padding-bottom: 0;
     }
 
     .CustomerUserAdressBookSearch .card {
@@ -831,7 +835,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .CancelClosePopup i{
         font-size: var(--main-font-size) !important;
         color: var(--gray-dark) !important;
-        transition: var(--main-transition) !important; 
+        transition: var(--main-transition) !important;
     }
 
     .CancelClosePopup:hover i{
@@ -878,7 +882,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding: var(--main-page-padding);
         background-color: var(--white);
     }
-    
+
 
     .LayoutPopup > .Content.card {
         display: flex;
@@ -902,7 +906,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
             padding: 0;
         }
     }
-    
+
 
     .LayoutPopup > .Content > fieldset > div,
     .LayoutPopup > .Content > fieldset > .field-wrapper {
@@ -1022,6 +1026,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: flex;
         flex-direction: column;
         padding: var(--main-page-padding);
+        max-width: unset;
     }
 
     .ActionsSideBar.LayoutFixedSidebar .ContentWrapper .InnerMainBoxContent {
@@ -1071,7 +1076,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
             width: calc(16.6% - 16px);
         }
     }
-    
+
     @media only screen and (min-width: 2000px) and (max-width: 2399px) {
         .ItemListGrid > li {
             width: calc(20% - 16px);
@@ -1277,6 +1282,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         min-width: 100%;
     }
 
+    .RealPopup .SaveButtons,
+    .LayoutPopup .SaveButtons {
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
     .AdminManagement .ImportExport .SaveButtons {
         padding: 0;
     }
@@ -1311,7 +1321,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
 
-    
+
 } /* end @media */
 
 
@@ -1324,17 +1334,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
         max-width: calc(33.33% - var(--margin-lg));
     }
-    
+
     .col-wide-50 {
         width: 50%;
         max-width: calc(50% - var(--margin-sm));
     }
-    
+
     .col-wide-66 {
         width: 100%;
         max-width: calc(66.66% - var(--margin-lg));
     }
-    
+
     .col-wide-100 {
         width: 100%;
         max-width: 100%;
@@ -1351,17 +1361,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
         max-width: calc(33.33% - var(--margin-lg));
     }
-    
+
     .LayoutPopup > .Content:not(.LayoutFixedSidebar) .col-wide-50 {
         width: 50%;
         max-width: calc(50% - var(--margin-lg));
     }
-    
+
     .LayoutPopup > .Content:not(.LayoutFixedSidebar) .col-wide-66 {
         width: 100%;
         max-width: calc(66.66% - var(--margin-lg));
     }
-    
+
     .LayoutPopup > .Content:not(.LayoutFixedSidebar) .col-wide-100 {
         width: 100%;
         max-width: 100%;
@@ -1380,17 +1390,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
         max-width: calc(33.33% - var(--margin-lg));
     }
-    
+
     .col-desktop-50 {
         width: 100%;
         max-width: calc(50% - var(--margin-lg));
     }
-    
+
     .col-desktop-66 {
         width: 100%;
         max-width: calc(66.66% - var(--margin-lg));
     }
-    
+
     .col-desktop-100 {
         width: 100%;
         max-width: 100%;
@@ -1407,17 +1417,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
         max-width: 33.33%;
     }
-    
+
     .card-item.col-desktop-50 {
         width: 100%;
         max-width: 50%;
     }
-    
+
     .card-item.col-desktop-66 {
         width: 100%;
         max-width: 66.66%;
     }
-    
+
     .card-item.col-desktop-100 {
         width: 100%;
         max-width: 100%;
@@ -1434,17 +1444,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
         max-width: calc(33.33% - var(--margin-md));
     }
-    
+
     .col-tablet-50 {
         width: 100%;
         max-width: calc(50% - var(--margin-md));
     }
-    
+
     .col-tablet-66 {
         width: 100%;
         max-width: calc(66.66% - var(--margin-md));
     }
-    
+
     .col-tablet-100 {
         width: 100%;
         max-width: 100%;
@@ -1456,17 +1466,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
         max-width: 33.33%;
     }
-    
+
     .card-item.col-tablet-50 {
         width: 100%;
         max-width: 50%;
     }
-    
+
     .card-item.col-tablet-66 {
         width: 100%;
         max-width: 66.66%;
     }
-    
+
     .card-item.col-tablet-100 {
         width: 100%;
         max-width: 100%;
@@ -1478,8 +1488,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media (min-width: 1600px) {
 
-    div.CustomerContainer, 
-    div.CcCustomerContainer, 
+    div.CustomerContainer,
+    div.CcCustomerContainer,
     div.BccCustomerContainer {
         background: var(--white);
         background-color: var(--white);
@@ -1501,12 +1511,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin: var(--margin-sm);
     }
 
-    .AdminManagement .WidgetSimple fieldset.TableLike > .Field.SaveButtons, 
-    .AdminManagement .WidgetSimple > .Content .TableLike > div.Field.SaveButtons, 
-    fieldset.TableLike > .Field.SaveButtons, 
-    fieldset.TableLike > .Field.SaveButtons:last-child, 
-    .AdminManagement .WidgetSimple > .Content > form > fieldset.TableLike > div.SaveButtons, 
-    .SaveButtons:not(:first-child:last-child) {
+    .AdminManagement .WidgetSimple fieldset.TableLike > .Field.SaveButtons,
+    .AdminManagement .WidgetSimple > .Content .TableLike > div.Field.SaveButtons,
+    fieldset.TableLike > .Field.SaveButtons,
+    fieldset.TableLike > .Field.SaveButtons:last-child,
+    .AdminManagement .WidgetSimple > .Content > form > fieldset.TableLike > div.SaveButtons,
+    .SaveButtons:not(:first-child:last-child):not(.Footer) {
         min-width: unset;
         padding: 0;
     }
@@ -1544,7 +1554,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: flex;
         flex-flow: column;
     }
-    
+
     /*
     .Popup .WidgetSimple .Content,
     .LayoutPopup > .Content.card fieldset {
@@ -1556,7 +1566,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     moved to the below media query below which has 1200px max-width
-    
+
     */
 
     .FormScreen .ContentColumn{
@@ -1597,7 +1607,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         justify-content: center;
         align-self: center;
     }
-    
+
     /*
     div.card-item,
     div.card-item > .Row {

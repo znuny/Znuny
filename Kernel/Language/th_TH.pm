@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.527672228646952;
+    $Self->{Completeness}        = 0.526977821913274;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -689,6 +689,7 @@ sub Data {
         'Run' => 'iyo',
         'Delete this task' => 'ลบงานนี้',
         'Run this task' => 'รันงานนี้',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'การตั้งค่าการทำงาน',
         'Job name' => 'ชื่องาน',
         'The name you entered already exists.' => 'ชื่อที่คุณป้อนมีอยู่แล้ว',
@@ -710,9 +711,9 @@ sub Data {
             'นอกจากนี้หรืออีกทางเลือกหนึ่งเพื่อให้การดำเนินการเป็นระยะๆ คุณสามารถกำหนดตั๋วกิจกรรมที่จะส่งสัญญาณให้งานนี้',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'หากตั๋วกิจกรรมถูกยกเลิก ตัวกรองตั๋วจะถูกนำมาใช้เพื่อตรวจสอบว่าตรงกับตั๋ว แล้วงานจะรันบนตั๋วที่ว่า',
-        'Do you really want to delete this event trigger?' => 'คุณต้องการลบตัวกระตุ้นกิจกรรมนี้หรือไม่?',
         'Add Event Trigger' => 'เพิ่มตัวกระตุ้นกิจกรรม',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'คุณต้องการลบตัวกระตุ้นกิจกรรมนี้หรือไม่?',
         'Select Tickets' => 'เลือกตั๋ว',
         '(e. g. 10*5155 or 105658*)' => '(เช่น 10*5155 หรือ 105658*)',
         '(e. g. 234321)' => '(เช่น  234321)',
@@ -1481,7 +1482,6 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'ยกเลิกการติดตั้งแพคเกจ',
         'Do you really want to uninstall this package?' => 'คุณต้องการยกเลิกการติดตั้งแพคเกจนี้หรือไม่?',
-        'or' => 'หรือ',
         'Reinstall package' => 'ติดตั้งแพคเกจอีกครั้ง',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'คุณต้องการติดตั้งแพคเกจนี้อีกครั้งหรือไม่? การเปลี่ยนแปลงด้วยตนเองจะหายไป',
@@ -2016,6 +2016,7 @@ sub Data {
         'State type' => 'ประเภทสถานะ',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2361,7 +2362,6 @@ sub Data {
         'in' => 'ใน',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2374,6 +2374,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => 'มากขึ้น',
+        'No Data Available.' => '',
         'Available Columns' => 'คอลัมน์ที่พร้อมใช้งาน',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'คอลัมน์ที่มองเห็นได้ (จัดเรียงโดยการลากและวาง)',
@@ -2527,8 +2528,8 @@ sub Data {
         'Edit statistic "%s".' => 'แก้ไขสถิติ "%s"',
         'Export statistic "%s"' => 'ส่งออกสถิติ "%s"',
         'Export statistic %s' => 'แก้ไขสถิติ %s',
-        'Delete statistic "%s"' => 'ลบสถิติ "%s"',
         'Delete statistic %s' => 'ลบสถิติ %s',
+        'Do you really want to delete this statistic?' => 'คุณต้องการที่จะลบสถิตินี้หรือไม่?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
@@ -2841,7 +2842,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'เอกสารเก่า',
         'This ticket is archived.' => 'จัดเก็บตั๋วนี่แล้ว',
-        'Note: Type is invalid!' => 'หมายเหตุ: ประเภทไม่ถูกต้อง!',
+        'is invalid' => '',
         'Pending till' => 'รอดำเนินการจนถึง',
         'Locked' => 'ถูกล็อค',
         '%s Ticket(s)' => '',
@@ -2941,6 +2942,9 @@ sub Data {
         'Please click the button below to create your first ticket.' => 'กรุณาคลิกที่ปุ่มด้านล่างเพื่อสร้างตั๋วของคุณครั้งแรก',
         'Create your first ticket' => 'สร้างตั๋วของคุณครั้งแรก',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'โปรไฟล์',
         'e. g. 10*5155 or 105658*' => 'เช่น 10*5155 หรือ 105658*',
@@ -3014,12 +3018,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'ไม่พร้อมใช้งาน JavaScript',
-        'Step %s' => 'ขั้นตอน %s',
         'License' => 'ใบอนุญาต',
         'Database Settings' => 'การตั้งค่าฐานข้อมูล',
         'General Specifications and Mail Settings' => 'คุณสมบัติทั่วไปและการตั้งค่าเมล์',
         'Finish' => 'เสร็จ',
         'Welcome to %s' => 'ยินดีต้อนรับสู่ %s',
+        'Address' => 'ที่อยู่',
         'Phone' => 'โทรศัพท์',
         'Web site' => 'เว็บไซต์',
         'Community' => '',
@@ -3050,6 +3054,7 @@ sub Data {
         'Password for inbound mail.' => 'รหัสสำหรับผ่านอีเมลขาเข้า',
         'Result of mail configuration check' => 'ผลของการตรวจสอบการตั้งค่าอีเมล',
         'Check mail configuration' => 'ตรวจสอบการตั้งค่าอีเมล',
+        'or' => 'หรือ',
         'Skip this step' => 'ข้ามขั้นตอนนี้',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3438,7 +3443,6 @@ sub Data {
         'Valid' => 'ถูกต้อง',
         'Mr.' => 'นาย',
         'Mrs.' => 'นาง',
-        'Address' => 'ที่อยู่',
         'View system log messages.' => 'ดูข้อความเข้าสู่ระบบ',
         'Edit the system configuration settings.' => 'แก้ไขการตั้งค่าการกำหนดค่าระบบ',
         'Update and extend your system with software packages.' => 'ปรับปรุงและขยายระบบของคุณด้วยซอฟแวร์',
@@ -5536,6 +5540,8 @@ sub Data {
             'กำหนดตัวบ่งชี้ระบบ ทุกๆหมายเลขตั๋วและสตริงเซสชั่นของ http ที่มีไอดีนี้เพื่อให้แน่ใจว่าเฉพาะตั๋วที่อยู่ในระบบของคุณที่จะถูกประมวลผลขณะที่ติดตาม (มีประโยชน์เมื่อการติดต่อสื่อสารระหว่างสองกรณีของZnuny)',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'กำหนดชื่อโดเมนที่มีคุณสมบัติครบถ้วนของระบบ การตั้งค่านี้จะถูกใช้เป็นตัวแปร OTRS_CONFIG_FQDN ซึ่งพบได้ในรูปแบบของการส่งข้อความทั้งหมดที่ใช้โดยแอพลิเคชั่นเพื่อใช้ในการสร้างการเชื่อมโยงไปตั๋วภายในระบบของคุณ',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5566,14 +5572,6 @@ sub Data {
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
             '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
@@ -6112,10 +6110,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => 'สกีนเริ่มต้นสำหรับอินเตอร์เฟซเอเย่นต์',
-        'Default skin for the agent interface (slim version).' => 'สกีนเริ่มต้นสำหรับอินเตอร์เฟซเอเย่นต์ (รุ่นบาง)',
-        'Balanced white skin by Felix Niklas.' => 'รักษาความสมดุลของสกีนสีขาวโดย Felix Niklas',
-        'Balanced white skin by Felix Niklas (slim version).' => 'รักษาความสมดุลของสกีนสีขาวโดย Felix Niklas (รุ่นบาง)',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7850,6 +7844,7 @@ sub Data {
         'Group for default access.' => 'กลุ่มสำหรับการเข้าถึงเริ่มต้น',
         'Group of all administrators.' => 'กลุ่มของผู้บริหารทั้งหมด',
         'Group for statistics access.' => 'กลุ่มสำหรับการเข้าถึงสถิติ',
+        'Group for time accounting web service access.' => '',
         'new' => 'ใหม่',
         'All new state types (default: viewable).' => 'ประเภทสถานะใหม่ทั้งหมด (ค่าเริ่มต้น: สามารถดูได้)',
         'open' => 'เปิด',
@@ -7997,14 +7992,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => 'ลบการคัดเลือก',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'ลบกระตุ้นกิจกรรมนี้',
+        'An error occurred during communication.' => 'เกิดข้อผิดพลาดในระหว่างการสื่อสาร',
         'Duplicate event.' => 'กิจกรรมที่ซ้ำกัน',
         'This event is already attached to the job, Please use a different one.' =>
             'กิจกรรมนี้แนบมากับงานเป็นที่เรียบร้อยแล้ว โปรดใช้กิจกรรมอื่นแทน',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'เกิดข้อผิดพลาดในระหว่างการสื่อสาร',
         'Request Details' => 'รายละเอียดการร้องขอ',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'แสดงหรือซ่อนเนื้อหา',
@@ -8017,6 +8010,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'ลบผู้ร้องขอนี้',
+        'Delete this Event Trigger' => 'ลบกระตุ้นกิจกรรมนี้',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8237,9 +8231,6 @@ sub Data {
         'This element has children elements and can currently not be removed.' =>
             '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'คุณต้องการที่จะลบสถิตินี้หรือไม่?',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => 'คุณต้องการที่จะดำเนินการต่อหรือไม่?',
@@ -8391,8 +8382,6 @@ Thanks for your help!
         ' 2 minutes' => '2 นาที',
         ' 5 minutes' => '5 นาที',
         ' 7 minutes' => '7 นาที',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            'สกีน "สลิม" ซึ่งพยายามที่จะประหยัดพื้นที่หน้าจอสำหรับผู้ใช้ไฟฟ้า',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(UserLogin) ชื่อนามสกุล',
         '(UserLogin) Lastname Firstname' => '(UserLogin) ชื่อ นามสกุล',
@@ -8607,7 +8596,6 @@ Thanks for your help!
         'Danish' => 'ภาษาเดนมาร์ก',
         'Dashboard overview.' => '',
         'Date / Time' => 'วัน / เวลา',
-        'Default (Slim)' => 'เริ่มต้น (Slim)',
         'Default agent name' => '',
         'Default value for NameX' => 'ค่าเริ่มต้นสำหรับ NameX',
         'Define the queue comment 2.' => 'กำหนดการแสดงความคิดเห็นเกี่ยวกับคิวที่ 2',
@@ -8710,7 +8698,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => 'กราฟ: ซ้อนแผนภูมิพื้นที่',
         'Greek' => 'ภาษากรีก',
         'Hebrew' => 'ภาษาฮิบรู',
-        'High Contrast' => '',
         'Hindi' => 'ภาษาฮินดี',
         'Hungarian' => 'ภาษาฮังการี',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8731,8 +8718,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'ภาษาอิตาลี',
-        'Ivory' => 'ดิไอวอรี่',
-        'Ivory (Slim)' => 'ดิไอวอรี่ (บาง)',
         'Japanese' => 'ภาษาญี่ปุ่น',
         'Korean' => '',
         'Language' => 'ภาษา',
@@ -9200,6 +9185,8 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9219,13 +9206,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

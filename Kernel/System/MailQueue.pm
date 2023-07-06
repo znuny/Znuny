@@ -288,7 +288,7 @@ This returns something like:
             LastSMTPCode              => '...',
             LastSMTPMessage           => '...',
         },
-        ...,
+        # ...
     ]
 
 =cut

@@ -246,9 +246,9 @@ my @NeededModules = (
         Required  => 1,
         Comment   => 'Required to generate UUIDs.',
         InstTypes => {
-            aptget => undef,
+            aptget => 'libdata-uuid-perl',
             emerge => undef,
-            yum    => undef,
+            yum    => 'perl-Data-UUID',
             zypper => undef,
             ports  => undef,
         },
@@ -400,7 +400,7 @@ my @NeededModules = (
         Comment   => 'Required for calendar events.',
         InstTypes => {
             aptget => 'libical-parser-perl',
-            emerge => 'perl-core/iCal-Parser',
+            emerge => 'dev-perl/iCal-Parser',
             zypper => 'perl-iCal-Parser',
             ports  => 'devel/p5-iCal-Parser',
         },

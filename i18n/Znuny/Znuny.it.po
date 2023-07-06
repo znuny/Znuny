@@ -4434,7 +4434,7 @@ msgstr "Disinstalla pacchetto"
 msgid "Do you really want to uninstall this package?"
 msgstr "Vuoi davvero disinstallare questo pacchetto?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "or"
 msgstr "oppure"
 
@@ -9970,7 +9970,7 @@ msgstr "Sig"
 msgid "Mrs."
 msgstr "Sig.ra"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Address"
 msgstr "Indirizzo"
 
@@ -15289,22 +15289,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown in the header of the agent interface for the skin \"default\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"High Contrast\". See \"AgentLogo\" for further description."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -20735,11 +20719,11 @@ msgstr ""
 msgid "Remove selection"
 msgstr "Rimuovi selezione"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Do you really want to delete this generic agent job?"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Event Trigger"
 msgstr "Elimina questo trigger"
 
@@ -20751,7 +20735,7 @@ msgstr "Evento duplicato."
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Questo evento è già collegato al job, specificarne uno diverso"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "An error occurred during communication."
 msgstr "Errore durante la comunicazione"
 
@@ -21255,7 +21239,7 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Do you really want to delete this statistic?"
 msgstr "Vuoi davvero eliminare questa statistica?"
 
@@ -24247,5 +24231,29 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Show All"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+msgid "New Process Ticket"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
+msgstr ""
+
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid"
 msgstr ""
 

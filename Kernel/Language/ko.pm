@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.875598876590121;
+    $Self->{Completeness}        = 0.87471036080768;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -689,6 +689,7 @@ sub Data {
         'Run' => '실행',
         'Delete this task' => '이 작업 삭제',
         'Run this task' => '이 작업 실행',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => '작업 설정',
         'Job name' => '작업 이름',
         'The name you entered already exists.' => '입렵한 이름이 이미 있습니다.',
@@ -710,9 +711,9 @@ sub Data {
             '주기적 실행에 추가적으로 또는 대신에 이 작업을 트리거 할 티켓 이벤트를 정의할 수 있습니다.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '티켓 이벤트가 발생하면 티켓이 일치하는지 확인하기 위해 티켓 필터가 적용됩니다. 그런 다음에 만 해당 티켓에서 작업이 실행됩니다.',
-        'Do you really want to delete this event trigger?' => '이 이벤트 트리거를 정말로 삭제 하시겠습니까?',
         'Add Event Trigger' => '이벤트 트리거 추가',
         'To add a new event select the event object and event name' => '새 이벤트를 추가하려면 이벤트 객체와 이벤트 이름을 선택하십시오.',
+        'Do you really want to delete this event trigger?' => '이 이벤트 트리거를 정말로 삭제 하시겠습니까?',
         'Select Tickets' => '티켓 선택',
         '(e. g. 10*5155 or 105658*)' => '(예를 들어, 10 * 5155 또는 105658 *)',
         '(e. g. 234321)' => '(예를 들어, 234321)',
@@ -1481,7 +1482,6 @@ sub Data {
         'Uninstall Package' => '패키지 제거',
         'Uninstall package' => '패키지 제거',
         'Do you really want to uninstall this package?' => '이 패키지를 정말로 제거 하시곘습니까?',
-        'or' => '또는',
         'Reinstall package' => '패키지 다시 설치',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '이 패키지를 정말로 다시 설치 하시겠습니까? 수동으로 변경하면 손실됩니다.',
@@ -2014,6 +2014,7 @@ sub Data {
         'State type' => '상태 유형',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '이 상태는 다음 구성 설정에서 사용됩니다.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2358,7 +2359,6 @@ sub Data {
         'in' => '...에서',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'No Data Available.' => '자료 없음.',
         ' Show or hide the content' => '',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
@@ -2371,6 +2371,7 @@ sub Data {
         'Hide' => '',
         ' Cancel' => '',
         'more' => '더',
+        'No Data Available.' => '자료 없음.',
         'Available Columns' => '가능한 컬럼',
         ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '보여지는 컬럼(드래그드롭으로 순서정렬 가능)',
@@ -2524,8 +2525,8 @@ sub Data {
         'Edit statistic "%s".' => '통계 "%s"을 수정하십시오.',
         'Export statistic "%s"' => '통계 "%s" 내보내기',
         'Export statistic %s' => '통계 "%s" 내보내기',
-        'Delete statistic "%s"' => '통계 "%s"  삭제',
         'Delete statistic %s' => '통계 "%s" 삭제',
+        'Do you really want to delete this statistic?' => '정말로 이 통계를 삭제 하시겠습니까?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '통계 정보',
@@ -2838,7 +2839,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '아카이브',
         'This ticket is archived.' => '이 티켓은 보관 처리됩니다.',
-        'Note: Type is invalid!' => '참고 : 유형이 유효하지 않습니다!',
+        'is invalid' => '',
         'Pending till' => '대기 시간까지',
         'Locked' => '잠김',
         '%s Ticket(s)' => '%s개 티켓',
@@ -2938,6 +2939,9 @@ sub Data {
         'Please click the button below to create your first ticket.' => '첫 번째 티켓을 만드려면 아래 버튼을 클릭하십시오.',
         'Create your first ticket' => '첫 번째 티켓 만들기',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '프로필',
         'e. g. 10*5155 or 105658*' => '이자형. 지. 10 * 5155 또는 105658 *',
@@ -3011,12 +3015,12 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '자바스트립트를 사용할 수 없습니다.',
-        'Step %s' => '%s 단계',
         'License' => '특허',
         'Database Settings' => '데이터베이스 설정',
         'General Specifications and Mail Settings' => '일반 사양 및 메일 설정',
         'Finish' => '끝',
         'Welcome to %s' => '%s에 오신 것을 환영합니다.',
+        'Address' => '주소',
         'Phone' => '전화',
         'Web site' => '웹 사이트',
         'Community' => '',
@@ -3047,6 +3051,7 @@ sub Data {
         'Password for inbound mail.' => '인바운드 메일의 비밀번호 입니다.',
         'Result of mail configuration check' => '메일 구성 검사 결과',
         'Check mail configuration' => '메일 구성 확인',
+        'or' => '또는',
         'Skip this step' => '이 단계를 건너뛰기',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3435,7 +3440,6 @@ sub Data {
         'Valid' => '유효한',
         'Mr.' => 'Mr.',
         'Mrs.' => 'Mrs.',
-        'Address' => '주소',
         'View system log messages.' => '시스템 로그 메시지를 봅니다.',
         'Edit the system configuration settings.' => '시스템 구성 설정을 편집 하십시오.',
         'Update and extend your system with software packages.' => '소프트웨어 패키지로 시스템을 업데이트하고 확장하십시오.',
@@ -5533,6 +5537,8 @@ sub Data {
             '시스템 식별자를 정의합니다. 모든 티켓 번호와 http 세션 문자열에는이 ID가 들어 있습니다. 이렇게하면 시스템에 속한 티켓 만 후속 조치로 처리됩니다 (Znuny의 두 인스턴스간에 통신 할 때 유용함).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '시스템의 정규화 된 도메인 이름을 정의합니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에있는 변수 인 OTRS_CONFIG_FQDN으로 사용되어 시스템 내의 티켓에 대한 링크를 만듭니다.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '\'PublicSupportDataCollector\'공용 모듈 (예 : Znuny 데몬에서 사용)을 사용하여 지원 데이터 수집을위한 HTTP 호스트 이름을 정의합니다.',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5564,14 +5570,6 @@ sub Data {
             '에이전트 인터페이스의 헤더에 표시된 로고. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '스킨 "기본"에 대한 에이전트 인터페이스의 머리글에 표시된 로고입니다. 자세한 설명은 "AgentLogo"를 참조하십시오.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '스킨 "슬림"을위한 에이전트 인터페이스의 헤더에 표시된 로고. 자세한 설명은 "AgentLogo"를 참조하십시오.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '피부 "아이보리"의 에이전트 인터페이스 헤더에 표시된 로고입니다. 자세한 설명은 "AgentLogo"를 참조하십시오.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '스킨 "아이보리 - 슬림"을위한 에이전트 인터페이스의 헤더에 표시된 로고. 자세한 설명은 "AgentLogo"를 참조하십시오.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '에이전트 인터페이스의 로그인 상자 상단에 표시된 로고입니다. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
         'Defines the URL base path of icons, CSS and Java Script.' => '아이콘, CSS 및 Java Script의 URL 기본 경로를 정의합니다.',
@@ -6108,10 +6106,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '에이전트의 성 및 성을 표시하는 순서를 지정합니다.',
         'Default skin for the agent interface.' => '에이전트 인터페이스의 기본 스킨입니다.',
-        'Default skin for the agent interface (slim version).' => '에이전트 인터페이스 (슬림버전)의 기본 스킨입니다.',
-        'Balanced white skin by Felix Niklas.' => 'Felix Niklas의 균형 잡힌 하얀 피부.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Felix Niklas (슬림 버전)의 균형 잡힌 하얀 피부.',
-        'High contrast skin for visually impaired users.' => '시각 장애가 있는 사용자를 위한 고 대비 피부.',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '에이전트 인터페이스에서 사용해야하는 에이전트 스킨의 InternalName입니다. Frontend :: Agent :: Skins에서 사용 가능한 스킨을 확인하십시오.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7844,6 +7838,7 @@ sub Data {
         'Group for default access.' => '기본 액세스 그룹.',
         'Group of all administrators.' => '모든 관리자 그룹.',
         'Group for statistics access.' => '통계 액세스 그룹.',
+        'Group for time accounting web service access.' => '',
         'new' => '새로운',
         'All new state types (default: viewable).' => '모든 새 상태 유형 (기본값 : 표시 가능).',
         'open' => '열다',
@@ -7991,14 +7986,12 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '선택 항목 삭제',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => '이 이벤트 트리거 삭제',
+        'An error occurred during communication.' => '통신 중에 오류가 발생했습니다.',
         'Duplicate event.' => '중복 이벤트.',
         'This event is already attached to the job, Please use a different one.' =>
             '이 이벤트는 이미 작업에 첨부되어 있습니다. 다른 이벤트를 사용하십시오.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => '통신 중에 오류가 발생했습니다.',
         'Request Details' => '요청 세부 정보',
         'Request Details for Communication ID' => '통신 ID 요청 세부 정보',
         'Show or hide the content.' => '내용을 표시하거나 숨깁니다.',
@@ -8011,6 +8004,7 @@ sub Data {
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => '이 호출자 삭제',
+        'Delete this Event Trigger' => '이 이벤트 트리거 삭제',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '죄송합니다. 기존 상태만 제거 할 수 없습니다.',
@@ -8231,9 +8225,6 @@ sub Data {
         'This element has children elements and can currently not be removed.' =>
             '이 요소는 하위 요소를 가지며 현재 제거할 수 없습니다.',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => '정말로 이 통계를 삭제 하시겠습니까?',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '이 티켓에 지정할 고객 ID를 선택하십시오.',
         'Do you really want to continue?' => '계속하시겠습니까?',
@@ -8385,8 +8376,6 @@ Thanks for your help!
         ' 2 minutes' => '2분',
         ' 5 minutes' => '5분',
         ' 7 minutes' => '7분',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '고급 사용자를 위해 화면 공간을 절약하려고하는 "슬림"스킨.',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(사용자 로그인) 이름 성',
         '(UserLogin) Lastname Firstname' => '(사용자 로그인) 성 이름',
@@ -8601,7 +8590,6 @@ Thanks for your help!
         'Danish' => '덴마크어',
         'Dashboard overview.' => '현황판 개요',
         'Date / Time' => '날짜 / 시간',
-        'Default (Slim)' => '기본값 (슬림)',
         'Default agent name' => '',
         'Default value for NameX' => 'NameX의 기본값',
         'Define the queue comment 2.' => '큐 설명 정의 2.',
@@ -8704,7 +8692,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => '그래프 : 누적 영역 차트',
         'Greek' => '그리스 사람',
         'Hebrew' => '헤브라이 사람',
-        'High Contrast' => '고 대비',
         'Hindi' => '힌디 어',
         'Hungarian' => '헝가리 인',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8725,8 +8712,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => '이탈리아 사람',
-        'Ivory' => '아이보리',
-        'Ivory (Slim)' => '아이보리(슬림)',
         'Japanese' => '일본어',
         'Korean' => '',
         'Language' => '언어',
@@ -9194,6 +9179,8 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9213,13 +9200,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',

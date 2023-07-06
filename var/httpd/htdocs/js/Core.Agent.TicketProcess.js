@@ -169,14 +169,6 @@ Core.Agent.TicketProcess = (function (TargetNS) {
                         $('#AJAXLoader').addClass('Hidden');
                         $('#AJAXDialog').val('1');
 
-                        // wrap every <label> and <div class="Field"> pair in <div> (necessary structure for proper styling)
-                        $('.TableLike > label').each(function () {
-                            $(this).nextUntil(':not(.Field)').addBack().wrapAll("<div></div>");
-                        });
-
-                        // remove all <div class="Clear" - which were used for spacing and are no longer necessary
-                        $('div.Clear').remove();
-
                         Core.TicketProcess.Init();
 
                         // Publish event when first activity dialog has loaded, so other code can know to execute again.
