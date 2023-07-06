@@ -7272,7 +7272,7 @@ msgstr "Verknüpfungen für %s verwalten"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
 msgid "Close and Back"
-msgstr ""
+msgstr "Schließen und zurück"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
 msgid "Create new links"

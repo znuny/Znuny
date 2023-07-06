@@ -422,7 +422,7 @@
                                 </div>
 
 
-                                <label for="IsVisibleForCustomer">[% Translate("Is visible for customer") | html %]:</label>
+                                <label for="IsVisibleForCustomer">[% Translate("Is visible for customer") | html %]</label>
                                 <div class="Field">
                                     <input type="checkbox" name="IsVisibleForCustomer" id="IsVisibleForCustomer"
                                         [% IF Data.IsVisibleForCustomer %]checked="checked" [% END %]/>
