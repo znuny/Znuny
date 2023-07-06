@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.98229063224098;
+    $Self->{Completeness}        = 0.982456140350877;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2450,7 +2450,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
         'Manage links for %s' => 'Verknüpfungen für %s verwalten',
-        'Close and Back' => '',
+        'Close and Back' => 'Schließen und zurück',
         'Create new links' => 'Neue Verknüpfungen erstellen',
         'Manage existing links' => 'Vorhandene Verknüpfungen verwalten',
         'Link with' => 'Verknüpfen mit',
