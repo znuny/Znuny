@@ -46,6 +46,8 @@ sub Param {
         $Return->{Avatar} = '//www.gravatar.com/avatar/' . md5_hex( lc $Self->{UserEmail} ) . '?s=45&d=mp';
     }
 
+    $Return->{UserEmailAddress} = $Param{UserData}->{UserEmail};
+
     return $Return;
 }
 
