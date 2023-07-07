@@ -858,8 +858,12 @@ $Selenium->RunTest(
             );
         }
 
+        $Selenium->execute_script(
+            "\$('#EditFormCancel')[0].scrollIntoView(true);",
+        );
+
         # Click on cancel.
-        $Selenium->find_element( '.Close', 'css' )->click();
+        $Selenium->find_element( '#EditFormCancel', 'css' )->click();
         $Selenium->WaitFor(
             JavaScript =>
                 'return typeof($) === "function" && !$(".Dialog:visible").length;'

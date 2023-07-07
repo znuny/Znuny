@@ -214,6 +214,10 @@ $Selenium->RunTest(
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketStatusView");
 
+        $Selenium->execute_script(
+            "\$('.TableSmall')[0].scrollLeft = \$('.TableSmall')[0].offsetWidth - \$('.TableSmall')[0].offsetLeft;"
+        );
+
         # Set filter to test CustomerID.
         $Selenium->execute_script("\$('.ColumnSettingsTrigger[title*=\"Customer ID\"]').click();");
 
