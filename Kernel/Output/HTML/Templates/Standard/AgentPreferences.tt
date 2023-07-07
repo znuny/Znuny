@@ -162,7 +162,7 @@
                                         <div class="field-wrapper">
                                             <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
                                             <div class="Field">
-                                                <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="password" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
+                                                <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" class="W100pc" type="password" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
                                             </div>
                                         </div>
 [% RenderBlockEnd("Password") %]
@@ -202,6 +202,43 @@
                                             </div>
                                         </div>
 [% RenderBlockEnd("OutOfOffice") %]
+[% RenderBlockStart("PopupProfile") %]
+                                    <div class="Row PopupProfile">
+
+                                        <label>[% Translate("Left") | html %]:</label>
+                                        <div class="Field">
+                                            <input type="text" id="UserPopupProfileLeft" name="UserPopupProfileLeft" class="W100pc" placeholder="[% Translate('Example') | html %]: 100px" value="[% Data.UserPopupProfileLeft | html %]" />
+                                            <p class="FieldExplanation">
+                                                [% Translate("The horizontal distance of the window relative to the screen, in pixels.") | html %]
+                                            </p>
+                                        </div>
+
+                                        <label>[% Translate("Top") | html %]:</label>
+                                        <div class="Field">
+                                            <input type="text" id="UserPopupProfileTop" name="UserPopupProfileTop" class="W100pc" placeholder="[% Translate('Example') | html %]: 100px" value="[% Data.UserPopupProfileTop | html %]" />
+                                            <p class="FieldExplanation">
+                                                [% Translate("The vertical distance of the window relative to the screen, in pixels.") | html %]
+                                            </p>
+                                        </div>
+
+                                        <label>[% Translate("Width") | html %]:</label>
+                                        <div class="Field">
+                                            <input type="text" id="UserPopupProfileWidth" name="UserPopupProfileWidth" class="W100pc" placeholder="[% Translate('Example') | html %]: 75%" value="[% Data.UserPopupProfileWidth | html %]" />
+                                            <p class="FieldExplanation">
+                                                [% Translate("Width in pixels or percent.") | html %] [% Translate("Example") | html %]: 75% or 500px.
+                                            </p>
+                                        </div>
+
+                                        <label>[% Translate("Height") | html %]:</label>
+                                        <div class="Field">
+                                            <input type="text" id="UserPopupProfileHeight" name="UserPopupProfileHeight" class="W100pc" placeholder="[% Translate('Example') | html %]: 50%" value="[% Data.UserPopupProfileHeight | html %]" />
+                                            <p class="FieldExplanation">
+                                                [% Translate("Height in pixels or percent.") | html %] [% Translate("Example") | html %]: 50% or 400px.
+                                            </p>
+                                        </div>
+                                        <div class="Clear"></div>
+                                    </div>
+[% RenderBlockEnd("PopupProfile") %]
 
 [% RenderBlockStart("RawHTML") %]
                                         <div class="Field NoMargin">

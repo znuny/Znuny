@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.903674280039722;
+    $Self->{Completeness}        = 0.90203205022303;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2485,6 +2485,16 @@ sub Data {
             'Megváltoztathatja a profilképét, ha regisztrálja az e-mail címét (%s) a következő oldalon: %s. Ne feledje, hogy a gyorsítótárazás miatt eltarthat egy ideig, amíg az új profilképe elérhetővé válik.',
         'Off' => 'Ki',
         'End' => 'Befejezés',
+        'Left' => 'Bal',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => 'Ezt a beállítás jelenleg nem lehet elmenteni.',
         'This setting can currently not be saved' => 'Ezt a beállítás jelenleg nem lehet elmenteni',
         'Save setting' => '',
@@ -5600,6 +5610,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => 'Automatikus kiegészítés letiltása a bejelentkező képernyőn.',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Az „X-Frame-Options: SAMEORIGIN” HTTP-fejléc letiltása, hogy lehetővé tegye az Znuny beágyazását IFrame-ként más weboldalakba. Ennek a HTTP-fejlécnek a letiltása biztonsági probléma lehet! Csak akkor tiltsa le, ha tudja, hogy mit csinál!',
@@ -5902,6 +5913,7 @@ sub Data {
             'Megadja a végfelhasználóknak azt a lehetőséget, hogy felülírják a CSV fájloknál a fordítási fájlokban meghatározott elválasztó karaktert. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             'Meghatározza a felhasználók profilképét. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Meghatározza a felhasználói azonosítót az ügyfélpanelhez.',
         'Activates support for customer and customer user groups.' => 'Támogatást aktivál az ügyfelekhez és ügyfél-felhasználó csoportokhoz.',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8487,6 +8499,7 @@ Az Ön segélyszolgálat csapata
         'Change the priority for this ticket' => 'Prioritás módosítása ennél a jegynél',
         'Change the responsible for this ticket' => 'Felelős módosítása ennél a jegynél',
         'Change your avatar image.' => 'A profilkép megváltoztatása.',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'Jelszó és egyebek megváltoztatása.',
         'Changed SLA to "%s" (%s).' => 'SLA megváltoztatva erre: „%s” (%s).',
         'Changed archive state to "%s".' => 'Archívumállapot megváltoztatva erre: „%s”.',
@@ -8734,7 +8747,6 @@ Az Ön segélyszolgálat csapata
         'Lastname, Firstname (UserLogin)' => 'Vezetéknév, Keresztnév (Felhasználónév)',
         'LastnameFirstname' => 'VezetéknévKeresztnév',
         'Latvian' => 'Lett',
-        'Left' => 'Bal',
         'Link Object' => 'Objektum összekapcsolása',
         'Link Object.' => 'Objektum összekapcsolása.',
         'Link agents to groups.' => 'Ügyintézők összekapcsolása csoportokkal.',
@@ -8848,6 +8860,7 @@ Az Ön segélyszolgálat csapata
         'Plugin search' => 'Bővítmény keresés',
         'Plugin search module for autocomplete.' => 'Bővítmény keresési modul az automatikus kiegészítéshez.',
         'Polish' => 'Lengyel',
+        'Popup Profile' => '',
         'Portuguese' => 'Portugál',
         'Portuguese (Brasil)' => 'Portugál (Brazil)',
         'PostMaster Filters' => 'Levelezési szűrők',

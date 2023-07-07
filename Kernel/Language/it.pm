@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.606918238993711;
+    $Self->{Completeness}        = 0.60581529819924;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2488,6 +2488,16 @@ sub Data {
             'Puoi cambiare l\'immagine dell\'avatar registrandoti con il tuo indirizzo email %s a %s. Tieni presente che potrebbe trascorrere del tempo prima che il tuo nuovo avatar diventi disponibile a causa della memorizzazione nella cache.',
         'Off' => 'Spento',
         'End' => 'Fine',
+        'Left' => 'Sinistra',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => 'Questa impostazione al momento non può essere salvata.',
         'This setting can currently not be saved' => 'Questa impostazione al momento non può essere salvata',
         'Save setting' => '',
@@ -5607,6 +5617,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '',
@@ -5909,6 +5920,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8494,6 +8506,7 @@ Il tuo helpdesk.
         'Change the priority for this ticket' => 'Cambia la priorità di questo ticket',
         'Change the responsible for this ticket' => 'Cambia il responsabile di questo ticket',
         'Change your avatar image.' => '',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'Cambia la password ed altro.',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8741,7 +8754,6 @@ Il tuo helpdesk.
         'Lastname, Firstname (UserLogin)' => 'Cognome, Nome (Utente)',
         'LastnameFirstname' => '',
         'Latvian' => 'Lettone',
-        'Left' => 'Sinistra',
         'Link Object' => 'Collega oggetto',
         'Link Object.' => '',
         'Link agents to groups.' => 'Collega gli agenti ai gruppi.',
@@ -8855,6 +8867,7 @@ Il tuo helpdesk.
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => 'Polacco',
+        'Popup Profile' => '',
         'Portuguese' => 'Portoghese',
         'Portuguese (Brasil)' => 'Portoghese (Brasile)',
         'PostMaster Filters' => 'Filtri PostMaster',

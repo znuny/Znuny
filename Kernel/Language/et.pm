@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.166666666666667;
+    $Self->{Completeness}        = 0.166363786552123;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2479,6 +2479,16 @@ sub Data {
             '',
         'Off' => 'Välja',
         'End' => 'Lõpp',
+        'Left' => '',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => '',
         'Save setting' => '',
@@ -5594,6 +5604,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '',
@@ -5896,6 +5907,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8470,6 +8482,7 @@ Thanks for your help!
         'Change the priority for this ticket' => '',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => '',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8717,7 +8730,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => '',
         'LastnameFirstname' => '',
         'Latvian' => 'Läti',
-        'Left' => '',
         'Link Object' => 'Seo objekt',
         'Link Object.' => '',
         'Link agents to groups.' => 'Töötajate sidumine rühmadega.',
@@ -8831,6 +8843,7 @@ Thanks for your help!
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => 'Poola',
+        'Popup Profile' => '',
         'Portuguese' => 'Portugali',
         'Portuguese (Brasil)' => 'Portugali (Brasiilia)',
         'PostMaster Filters' => 'Postiülema filtrid',
