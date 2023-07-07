@@ -37,26 +37,28 @@
 
                 [% FOREACH ArticleField IN Data.ArticleFields.values.nsort("Prio") %]
                     [% IF ArticleField.Label == "From" || ArticleField.Label == "To" || ArticleField.Label == "Cc"  || ArticleField.Label == "Bcc" %]
-                    <div class="field-wrapper">
+                    <div class="field-wrapper flex-row">
                         <label class="Switchable">[% Translate(ArticleField.Label) | html %]:</label>
-                        <p class="Value" title="[% ArticleField.Value | html %]">
+                        <div class="Field">
                             <span class="Switch [% ArticleField.ValueHidden | html %]">[% ArticleField.Value | html %]</span>
                             <span class="Switch [% ArticleField.RealnameHidden | html %]">[% ArticleField.Realname | html %]</span>
-                        </p>
+                        </div>
                     </div>
                     [% ELSIF ArticleField.Type == "ArticleOption" %]
                     <!-- show article options like signed, crypted, ...-->
-                    <div class="field-wrapper">
+                    <div class="field-wrapper flex-row">
                         <label>[% Translate(ArticleField.Label) | html %]:</label>
-                        <p title="[% ArticleField.Value | html %]" class="[% ArticleField.Class | html %] Value">
+                        <div class="[% ArticleField.Class | html %] Field">
                             [% Translate(ArticleField.Value) | html %]
-                        </p>
+                        </div>
                     </div>
                     [% ELSIF ArticleField.Label == "Subject" %]
                     <!-- Include the full subject so that it can be copied. The one in the title bar is shortened. -->
-                    <div class="field-wrapper">
+                    <div class="field-wrapper flex-row">
                         <label>[% Translate("Subject") | html %]:</label>
-                        <p class="Value">[% ArticleField.Value | html %]</p>
+                        <div class="Field">
+                            [% ArticleField.Value | html %]
+                        </div>
                     </div>
                     [% END %]
                 [% END %]

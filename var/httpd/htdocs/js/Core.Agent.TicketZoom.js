@@ -786,7 +786,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
         // add switchable toggle
         $('label.Switchable').off('click.Switch').on('click.Switch', function() {
-            $(this).next('p.Value').find('.Switch').toggleClass('Hidden');
+            $(this).next('div').find('.Switch').toggleClass('Hidden');
         });
 
         // Mark all articles as seen, in case the expanded zoom mode is active.
