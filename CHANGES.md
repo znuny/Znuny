@@ -1,4 +1,6 @@
 # 7.0.8 2023-??-??
+ - 2023-07-07 Added SysConfig/ValueType/Entity/Webservice.pm.
+ - 2023-07-07 Improved popup profiles and Frontend::RichText::Settings###Width.
  - 2023-07-07 Fixed template for article details. [#415](https://github.com/znuny/Znuny/issues/415)
  - 2023-07-05 Added new type 'HTML' to AgentTicketZoom TicketMenu. This allows additional HTML elements to be added using 'Ticket::Frontend::MenuModule###*'.
  - 2023-07-05 Fixed deletion dialogs in AdminGenericAgent. Thanks to Mohd Azfar (@mo-azfar). [#448](https://github.com/znuny/Znuny/issues/448)
