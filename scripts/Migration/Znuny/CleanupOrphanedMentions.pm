@@ -12,6 +12,8 @@ package scripts::Migration::Znuny::CleanupOrphanedMentions;    ## no critic
 use strict;
 use warnings;
 
+use parent qw(scripts::Migration::Base);
+
 our @ObjectDependencies = (
     'Kernel::System::DB',
 );
