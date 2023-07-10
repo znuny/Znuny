@@ -150,7 +150,7 @@
                                                 </a>
                                                 [%
                                                     SET GravatarLink  = '<a href="https://www.gravatar.com" target="_blank"><i class="fa fa-external-link"></i> gravatar.com</a>';
-                                                    SET GravatarEmail = '<strong>' _ Env("UserEmail") _ '</strong>';
+                                                    SET GravatarEmail = '<strong>' _ Data.UserEmailAddress _ '</strong>';
                                                 %]
                                                 [% Translate("You can change your avatar image by registering with your email address %s at %s. Please note that it can take some time until your new avatar becomes available because of caching.") | html | ReplacePlaceholders(GravatarEmail, GravatarLink) %]
                                             </div>
