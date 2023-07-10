@@ -1,4 +1,5 @@
 # 6.5.4 2023-??-??
+ - 2023-07-10 Added console command to import dynamic fields and dynamic field screens configuration.
  - 2023-07-07 Fixed email address shown in user's avatar preferences when editing the preferences of another user (not the own user).
  - 2023-07-04 Fixed - Incorrect display of empty HTML article body. Thanks to Paweł Bogusławski (@pboguslawski). [#438](https://github.com/znuny/Znuny/pull/438)
  - 2023-07-04 Sector Nord AG: Fixed Calendar appointment plugin AppointmentID data type. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [#308](https://github.com/znuny/Znuny/pull/308)
