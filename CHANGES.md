@@ -11,6 +11,8 @@
  - 2023-07-04 Sector Nord AG: Fixed Calendar appointment plugin AppointmentID data type. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [#308](https://github.com/znuny/Znuny/pull/308)
  - 2023-07-04 Fixed - Line breaks in processes when richtext disabled. Used ->{BrowserRichText}. Thanks to Timotheus Pokorra (@tpokorra). [#447](https://github.com/znuny/Znuny/issues/447)
  - 2023-06-29 Added missing salutation and signature to notification for user mentions. Thanks to Paweł Bogusławski (@pboguslawski). [#420](https://github.com/znuny/Znuny/issues/420)
+ - 2023-06-19 Dynamic field type "Webservice": Selected value in a dynamic field can now be removed with 'x' button. Fixed admin dialog test field being read-only and not usable.
+ - 2023-06-02 Fixed initialization of dynamic fields of type 'web service'.
 
 # 7.0.7 2023-06-28
  - 2023-06-27 Fixed CSS for attachments with long filenames. [#416](https://github.com/znuny/Znuny/issues/416)
@@ -86,20 +88,13 @@
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
 
-# 6.5.4 2023-??-??
- - 2023-07-07 Fixed email address shown in user's avatar preferences when editing the preferences of another user (not the own user).
- - 2023-06-29 Added missing salutation and signature to notification for user mentions. Thanks to Paweł Bogusławski (@pboguslawski). [#420](https://github.com/znuny/Znuny/issues/420)
- - 2023-06-26 Fixed warning about missing article ID in AgentTicketNoteToLinkedTicket. Thanks to Paweł Bogusławski (@pboguslawski). [#431](https://github.com/znuny/Znuny/issues/431)
- - 2023-06-21 Extend TicketArticleCreate transition action for a possibility to set a dynamic field of object type article and ticket.
- - 2023-06-19 Fixed dynamic field type 'Webservice' admin dialog test field being read-only and not usable.
- - 2023-06-02 S/MIME: Increased size of column 'email_address' of table 'smime_keys'.
-
 # 6.5.3 2023-06-14
  - 2023-05-31 Added removal of protocol-relative URLs to Kernel::System::HTMLUtils::Safety. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
  - 2023-05-31 Added security relevant check for content type of article and attachments to generic interface operations TicketCreate and TicketUpdate. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
  - 2023-05-31 Process management: Added missing scope filter for transition actions.
  - 2023-05-30 Updated CPAN library Sisimai to version 4.25.16. [#391](https://github.com/znuny/Znuny/issues/391)
  - 2023-05-25 Changed article action 'note to linked ticket' to only be visible/usable in agent ticket zoom.
+ - 2023-05-24 Selected value in a dynamic field web service dropdown field can now be removed with 'x' button.
  - 2023-05-23 Fixed event handling for DBCRUD history entries.
  - 2023-05-05 Fixed html element id of forward templates in AgentTicketZoom. [#351](https://github.com/znuny/Znuny/issues/351)
 
