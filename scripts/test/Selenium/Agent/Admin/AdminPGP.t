@@ -95,16 +95,18 @@ $Selenium->RunTest(
             );
         }
 
-        my $Location1 = $Selenium->{Home}
+        my $LocalFile1 = $Selenium->{Home}
             . "/scripts/test/sample/Crypt/PGPPrivateKey-1.asc";
+        my $Location1 = $Selenium->upload_file($LocalFile1);
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location1);
         $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
 
         # Add second test PGP key.
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
-        my $Location2 = $Selenium->{Home}
+        my $LocalFile2 = $Selenium->{Home}
             . "/scripts/test/sample/Crypt/PGPPrivateKey-2.asc";
+        my $Location2 = $Selenium->upload_file($LocalFile2);
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location2);
         $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();

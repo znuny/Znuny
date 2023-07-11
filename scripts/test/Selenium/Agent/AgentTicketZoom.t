@@ -223,12 +223,12 @@ $Selenium->RunTest(
         my @Test = (
             {
                 Name     => 'Header color',
-                Color    => '#fff',
+                Color    => '#4F4444',
                 Selector => '.UseArticleColors #ArticleTable thead a',
             },
             {
                 Name     => "Article color",
-                Color    => '#000',
+                Color    => '#44444F',
                 Selector => '.UseArticleColors #ArticleTable tbody a',
             }
 

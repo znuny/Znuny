@@ -27,8 +27,8 @@
 [% RenderBlockStart("SearchTerms") %]
                                     <span class="pill-sm">
                                         [% Translate(Data.Attribute) | html %]: [% Data.Value | html %]
-                                    # hide remove link, functionality is not yet implemented
-                                    # <a title="[% Translate("Remove this Search Term.") | html %]" href="[% Data.SearchValue %]">&times;</a>
+#                                    # hide remove link, functionality is not yet implemented
+#                                    # <a title="[% Translate("Remove this Search Term.") | html %]" href="[% Data.SearchValue %]">&times;</a>
                                     </span>
 [% RenderBlockEnd("SearchTerms") %]
                             </div>

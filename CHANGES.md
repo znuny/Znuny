@@ -1,4 +1,10 @@
 # 7.0.8 2023-??-??
+ - 2023-07-07 Fixed email address shown in user's avatar preferences when editing the preferences of another user (not the own user).
+ - 2023-07-10 Added console command to import dynamic fields and dynamic field screens configuration.
+ - 2023-07-07 Added SysConfig/ValueType/Entity/Webservice.pm.
+ - 2023-07-07 Improved popup profiles and Frontend::RichText::Settings###Width.
+ - 2023-07-07 Fixed template for article details. [#415](https://github.com/znuny/Znuny/issues/415)
+ - 2023-07-05 Added new type 'HTML' to AgentTicketZoom TicketMenu. This allows additional HTML elements to be added using 'Ticket::Frontend::MenuModule###*'.
  - 2023-07-05 Fixed deletion dialogs in AdminGenericAgent. Thanks to Mohd Azfar (@mo-azfar). [#448](https://github.com/znuny/Znuny/issues/448)
  - 2023-07-05 Added information about invalid settings to AgentTicketZoom 'Ticket Information'.
  - 2023-07-04 Fixed - Incorrect display of empty HTML article body. Thanks to Paweł Bogusławski (@pboguslawski). [#438](https://github.com/znuny/Znuny/pull/438)
@@ -81,6 +87,7 @@
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
 
 # 6.5.4 2023-??-??
+ - 2023-07-07 Fixed email address shown in user's avatar preferences when editing the preferences of another user (not the own user).
  - 2023-06-29 Added missing salutation and signature to notification for user mentions. Thanks to Paweł Bogusławski (@pboguslawski). [#420](https://github.com/znuny/Znuny/issues/420)
  - 2023-06-26 Fixed warning about missing article ID in AgentTicketNoteToLinkedTicket. Thanks to Paweł Bogusławski (@pboguslawski). [#431](https://github.com/znuny/Znuny/issues/431)
  - 2023-06-21 Extend TicketArticleCreate transition action for a possibility to set a dynamic field of object type article and ticket.

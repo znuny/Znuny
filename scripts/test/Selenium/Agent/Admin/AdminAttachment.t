@@ -75,7 +75,8 @@ $Selenium->RunTest(
             );
 
             # file checks
-            my $Location = $Selenium->{Home} . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.$File";
+            my $LocalFile = $Selenium->{Home} . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.$File";
+            my $Location  = $Selenium->upload_file($LocalFile);
 
             my $AttachmentName = 'StdAttachment' . $HelperObject->GetRandomNumber();
             $Attachments{$File} = $AttachmentName;
@@ -280,7 +281,7 @@ $Selenium->RunTest(
             );
 
             # Confirm delete action.
-            $Selenium->find_element( "#DialogButton1", 'css' )->click();
+            $Selenium->find_element( "#DialogButton2", 'css' )->click();
             $Selenium->WaitFor(
                 JavaScript =>
                     "return !\$('.Dialog:visible').length && !\$('tbody tr:contains($Attachments{$File})').length"
