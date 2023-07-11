@@ -11,6 +11,7 @@
  - 2023-07-04 Fixed - Incorrect display of empty HTML article body. Thanks to Paweł Bogusławski (@pboguslawski). [#438](https://github.com/znuny/Znuny/pull/438)
  - 2023-07-04 Sector Nord AG: Fixed Calendar appointment plugin AppointmentID data type. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [#308](https://github.com/znuny/Znuny/pull/308)
  - 2023-07-04 Fixed - Line breaks in processes when richtext disabled. Used ->{BrowserRichText}. Thanks to Timotheus Pokorra (@tpokorra). [#447](https://github.com/znuny/Znuny/issues/447)
+ - 2023-06-30 LDAP auth sync: Fixed permissions removed in LDAP not being reliably removed from users in Znuny.
  - 2023-06-29 Added missing salutation and signature to notification for user mentions. Thanks to Paweł Bogusławski (@pboguslawski). [#420](https://github.com/znuny/Znuny/issues/420)
  - 2023-06-19 Dynamic field type "Webservice": Selected value in a dynamic field can now be removed with 'x' button. Fixed admin dialog test field being read-only and not usable.
  - 2023-06-02 Fixed initialization of dynamic fields of type 'web service'.
