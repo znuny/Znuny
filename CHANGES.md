@@ -1,6 +1,7 @@
 # 7.0.8 2023-??-??
- - 2023-07-07 Fixed email address shown in user's avatar preferences when editing the preferences of another user (not the own user).
+ - 2023-07-11 Fixed mentions for deleted tickets. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#458](https://github.com/znuny/Znuny/pull/458)
  - 2023-07-10 Added console command to import dynamic fields and dynamic field screens configuration.
+ - 2023-07-07 Fixed email address shown in user's avatar preferences when editing the preferences of another user (not the own user).
  - 2023-07-07 Added SysConfig/ValueType/Entity/Webservice.pm.
  - 2023-07-07 Improved popup profiles and Frontend::RichText::Settings###Width.
  - 2023-07-07 Fixed template for article details. [#415](https://github.com/znuny/Znuny/issues/415)
