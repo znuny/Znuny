@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.687299035369775;
+    $Self->{Completeness}        = 0.687459807073955;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2148,7 +2148,7 @@ sub Data {
             'Wyświetlana nazwa oraz adres e-mail będą umieszczane w wysyłanej poczcie.',
         'This system address cannot be set to invalid.' => '',
         'This system address cannot be set to invalid, because it is used in one or more queue(s) or auto response(s).' =>
-            '',
+            'Ten adres systemowy nie może być  dezaktywowany ponieważ jest używany w jednej lub więcej kolejce lub autoodpowiedzi.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
         'online administrator documentation' => 'dokumentację administratora online',
