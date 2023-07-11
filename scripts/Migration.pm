@@ -253,6 +253,10 @@ sub _TasksGet {
             Message => 'Migrate groups',
             Module  => 'scripts::Migration::Znuny::MigrateGroups',
         },
+        {
+            Message => 'Cleanup orphaned mentions',
+            Module  => 'scripts::Migration::Znuny::CleanupOrphanedMentions',
+        },
 
         # NOTE: UninstallMergedPackages has to be called only after
         # SysConfig settings of the merged packages have been migrated.
