@@ -734,6 +734,11 @@ sub TicketDelete {
         UserID   => $Param{UserID},
     );
 
+    # remove all mentions
+    $Kernel::OM->Get('Kernel::System::Mention')->RemoveAllMentions(
+        TicketID => $Param{TicketID},
+    );
+
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
