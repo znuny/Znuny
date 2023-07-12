@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.541398116013882;
+    $Self->{Completeness}        = 0.540062778787378;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -710,9 +710,9 @@ sub Data {
             'Sebagai tambahan atau sebagai alternatif kepada pelaksanaan berkala, anda boleh menentukan peristiwa tiket yang akan mencetuskan kerja ini.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Sekiranya peristiwa tiket dihentikan, penapis tiket akan digunakan untuk memeriksa jika tiket adalah padan. Hanya selepas itu tugas akan dijalankan ke atas tiket.',
-        'Do you really want to delete this event trigger?' => 'Anda pasti mahu memadam pencetus acara ini?',
         'Add Event Trigger' => 'Tambah pencetus acara',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Anda pasti mahu memadam pencetus acara ini?',
         'Select Tickets' => 'Memilih Tiket',
         '(e. g. 10*5155 or 105658*)' => 'contoh. 10*5144 atau 105658*',
         '(e. g. 234321)' => 'contoh. 234321',
@@ -2013,6 +2013,7 @@ sub Data {
         'State type' => 'Jenis Keadaan',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2477,6 +2478,16 @@ sub Data {
             '',
         'Off' => 'Tutup',
         'End' => 'Tamat',
+        'Left' => 'Kiri',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => '',
         'Save setting' => '',
@@ -2837,7 +2848,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arkib',
         'This ticket is archived.' => 'Sistem ini diarkibkan.',
-        'Note: Type is invalid!' => 'Nota: Jenis tidak sah!',
+        'is invalid' => '',
         'Pending till' => 'Menunggu sehingga',
         'Locked' => 'Terkunci',
         '%s Ticket(s)' => '',
@@ -2936,6 +2947,9 @@ sub Data {
         'Welcome!' => 'Selamat datang!',
         'Please click the button below to create your first ticket.' => 'Sila tekan butang di bawah untuk membuat tiket pertama anda.',
         'Create your first ticket' => 'Buat tiket pertama anda',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
@@ -5532,6 +5546,8 @@ sub Data {
             'Mentakrifkan pengecam sistem. Setiap nombor tiket dan sesi http rentetan mengandungi ID ini. Ini memastikan bahawa hanya tiket yang tergolong dalam sistem anda akan diproses susulan (berguna apabila berkomunikasi antara dua contoh Znuny).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Mentakrifkan nama domain sistem yang layak sepenuhnya. Tetapan ini digunakan sebagai pembolehubah, OTRS_CONFIG_FQDN dimana ia wujud dalam beberapa bentuk mesej yang digunakan oleh aplikasi itu.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5563,14 +5579,6 @@ sub Data {
             'Logo ditunjukkan dalam header paparan ejen. URL kepada imej boleh relatif kepada direktori kulit imej, atau URL penuh ke server web jauh.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Logo ditunjukkan di header antara muka ejen bagi kulit "default". Lihat "LogoAgen" untuk keterangan lanjut.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'Logo ditunjukkan di header antara muka ejen bagi kulit "slim". Lihat "LogoAgen" untuk keterangan lanjut.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'Logo ditunjukkan di header antara muka ejen bagi kulit "ivory". Lihat "LogoAgen" untuk keterangan lanjut.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'Logo ditunjukkan di header antara muka ejen bagi kulit "ivory-slim". Lihat "LogoAgen" untuk keterangan lanjut.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Mentakrifkan laluan asas URL dari ikon, CSS dan Java Script.',
@@ -5595,6 +5603,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Menyahaktif header HTTP "Pilihan Bingkai-X: SAMEORIGIN" untuk membenarkan Znuny untuk dimasukkan sebagai IFrame dalam laman web lain. Menyahaktifkan header HTTP ini boleh menjadi isu keselamatan! Hanya nyahaktifkannya, jika anda tahu apa yang anda lakukan!',
@@ -5897,6 +5906,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Mentakrifkan pengecam pengguna untuk panel pelanggan.',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6107,10 +6117,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Menentukan susunan di mana nama pertama dan nama akhir agen akan ditunjukkan.',
         'Default skin for the agent interface.' => 'Kulit default untuk antaramuka agen.',
-        'Default skin for the agent interface (slim version).' => 'Kulit default untuk antaramuka agen (versi kurus).',
-        'Balanced white skin by Felix Niklas.' => 'Kulit puih seimbang oleh Felix Niklas.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Kulit puih seimbang oleh Felix Niklas (versi kurus).',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Kulit InternalName ejen yang patut digunakan dalam paparan ejen. Sila semak kulit yang tersedia dalam Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7845,6 +7851,7 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         'Group for default access.' => 'Kumpulan untuk akses lalai.',
         'Group of all administrators.' => 'Kumpulan seluruh pentadbir.',
         'Group for statistics access.' => 'Kumpulan untuk akses statistik.',
+        'Group for time accounting web service access.' => '',
         'new' => 'baru',
         'All new state types (default: viewable).' => 'Seluruh jenis keadaan baru (lalai: boleh dilihat).',
         'open' => 'buka',
@@ -8383,8 +8390,6 @@ Kumpulan MejaBantuan Anda
         ' 2 minutes' => ' 2 Minit',
         ' 5 minutes' => ' 5 Minit',
         ' 7 minutes' => ' 7 Minit',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(LogmasukPengguna) Namapertama Namaakhir',
         '(UserLogin) Lastname Firstname' => '(LogmasukPengguna) Namaakhir Namapertama',
@@ -8490,6 +8495,7 @@ Kumpulan MejaBantuan Anda
         'Change the priority for this ticket' => 'Ubah keutamaan untuk tiket ini',
         'Change the responsible for this ticket' => 'Ubah tanggungjawab untuk tiket ini',
         'Change your avatar image.' => '',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8599,7 +8605,6 @@ Kumpulan MejaBantuan Anda
         'Danish' => 'Denmark',
         'Dashboard overview.' => '',
         'Date / Time' => 'Tarikh / Masa',
-        'Default (Slim)' => '',
         'Default agent name' => '',
         'Default value for NameX' => 'Nilai asal untuk NameX',
         'Define the queue comment 2.' => 'Tentukan barisan komen 2.',
@@ -8702,7 +8707,6 @@ Kumpulan MejaBantuan Anda
         'Graph: Stacked Area Chart' => '',
         'Greek' => 'Yunani',
         'Hebrew' => 'Hebrew',
-        'High Contrast' => '',
         'Hindi' => 'Hindi',
         'Hungarian' => 'Hungari',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8723,8 +8727,6 @@ Kumpulan MejaBantuan Anda
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Itali',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => 'Jepun',
         'Korean' => '',
         'Language' => 'Bahasa',
@@ -8741,7 +8743,6 @@ Kumpulan MejaBantuan Anda
         'Lastname, Firstname (UserLogin)' => 'Namaakhir, Namapertama (LogmasukPengguna)',
         'LastnameFirstname' => '',
         'Latvian' => 'Latvia',
-        'Left' => 'Kiri',
         'Link Object' => 'Objek pautan',
         'Link Object.' => '',
         'Link agents to groups.' => 'Pautan ejen kepada kumpulan.',
@@ -8855,6 +8856,7 @@ Kumpulan MejaBantuan Anda
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => 'Poland',
+        'Popup Profile' => '',
         'Portuguese' => 'Portugis',
         'Portuguese (Brasil)' => 'Portugis (Brazil)',
         'PostMaster Filters' => 'Penapis PostMaster',
@@ -9192,6 +9194,7 @@ Kumpulan MejaBantuan Anda
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

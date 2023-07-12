@@ -225,7 +225,7 @@ Extracts the effective value from a XML parsed setting.
         Item           => [                 # (optional) XML parsed item
             {
                 'ValueType' => 'Select',
-                ...
+                # ...
             },
         ],
         IsArray => 1,                       # (optional) Item is part of the array
@@ -398,7 +398,7 @@ Generate HTML for new array/hash item.
 Returns:
 
     $HTML = '<select class="Modernize" id="SettingName" name="SettingName" title="SettingName">
-        ...
+        # ...
         </select>';
 
 =cut
@@ -475,7 +475,7 @@ Returns:
 
     @ForbiddenValueTypes = (
         'Option',
-        ...
+        # ...
     );
 
 =cut

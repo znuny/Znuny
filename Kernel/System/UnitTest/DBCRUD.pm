@@ -112,7 +112,7 @@ Returns:
             CreateTime  => '...',
             ChangeTime  => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -144,7 +144,7 @@ Returns:
             CreateTime  => '...',
             ChangeTime  => '...',
         },
-        ...
+        # ...
     );
 
 =cut

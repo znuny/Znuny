@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.736076681540241;
+    $Self->{Completeness}        = 0.734842226994879;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -711,9 +711,9 @@ sub Data {
             'Puede definir eventos de un ticket, de forma adicional o alternativa a un periodo de ejecución, que dispararán este trabajo.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Si se dispara un evento de ticket, se aplicará el filtro de tickets para comprobar si el ticket coincide. Sólo entonces se ejecuta el trabajo sobre ese ticket.',
-        'Do you really want to delete this event trigger?' => '¿Realmente desea eliminar este disparador de evento?',
         'Add Event Trigger' => 'Agregar Disparador de Evento',
         'To add a new event select the event object and event name' => 'Para agregar un nuevo evento, seleccione el objeto del evento y el nombre de evento',
+        'Do you really want to delete this event trigger?' => '¿Realmente desea eliminar este disparador de evento?',
         'Select Tickets' => 'Seleccionar Tickets',
         '(e. g. 10*5155 or 105658*)' => '(ej: 10*5155 o 105658*)',
         '(e. g. 234321)' => '(ej: 234321)',
@@ -2014,6 +2014,7 @@ sub Data {
         'State type' => 'Tipo de Estado',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '¡No es posible invalidar esta entrada porque no hay otros estados de mezclar en el sistema!',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Este estado se usa en los siguientes parámetros de configuración:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2478,6 +2479,16 @@ sub Data {
             '',
         'Off' => 'Apagado',
         'End' => 'Fin',
+        'Left' => 'Izquierda',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => '',
         'Save setting' => '',
@@ -2838,7 +2849,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archivar',
         'This ticket is archived.' => 'Este ticket está archivado.',
-        'Note: Type is invalid!' => 'Nota: El tipo es inválido!',
+        'is invalid' => '',
         'Pending till' => 'Pendiente hasta',
         'Locked' => 'Bloqueado',
         '%s Ticket(s)' => '',
@@ -2937,6 +2948,9 @@ sub Data {
         'Welcome!' => '¡Bienvenido!',
         'Please click the button below to create your first ticket.' => 'Por favor haga click en el botón inferior para crear su primer ticket.',
         'Create your first ticket' => 'Crear su primer ticket',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Perfil',
@@ -5533,6 +5547,8 @@ sub Data {
             'Define el identificador del sistema. Cada número de ticket y cadena sesión de http contiene este identificador. Esto asegura que sólo los tickets que pertenecen a su sistema serán procesados como seguimiento (útil cuando se comunica entre dos instancias de Znuny).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Define el nombre del dominio totalmente calificado del sistema. Esta configuración es usada como la variable OTRS_CONFIG_FQDN, misma que se encuentra en todos los tipos de mensajes usados en la aplicación, para construir vínculos a los tickets del sistema.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5564,14 +5580,6 @@ sub Data {
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            'El logo que se muestra en la cabecera de la interfaz del agente para el tema "Contraste alto". Ver "AgentLogo" para una mayor descripción.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'El logo que se muestra en la parte superior del cuadro de inicio de sesión de la interfaz del agente. La URL de la imagen puede ser una URL relativa al directorio de la imagen del tema, o una URL completa de un servidor web remoto.',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Define la URL de la ruta base para los íconos, CSS y Java Script.',
@@ -5596,6 +5604,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => 'Deshabilitar el autocompletado en la pantalla de acceso.',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Deshabilite el encabezado HTTP "X-Frame-Options: SAMEORIGIN" para permitir que Znuny se incluya como un IFrame en otros sitios web. ¡Deshabilitar este encabezado HTTP puede ser un problema de seguridad! ¡Sólo deshabilítelo si sabe lo que está haciendo!',
@@ -5898,6 +5907,7 @@ sub Data {
             'Brinda a los usuarios finales la posibilidad de anular el carácter separador para los archivos CSV, definidos en los archivos de traducción. Tenga en cuenta: establecer \'Activo\' en 0 sólo evitará que los agentes editen la configuración de este grupo en sus preferencias personales, pero aún permitirá a los administradores editar la configuración en nombre de otro usuario. Use \'PreferenceGroup\' para controlar en qué área se deben mostrar estas configuraciones en la interfaz de usuario.',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             'Define el avatar de los usuarios. Tenga en cuenta: establecer \'Activo\' en 0 solo evitará que los agentes editen la configuración de este grupo en sus preferencias personales, pero aún permitirá a los administradores editar la configuración en nombre de otro usuario. Use \'PreferenceGroup\' para controlar en qué área se deben mostrar estas configuraciones en la interfaz de usuario.',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Define el identificador de usuario para la interfaz del cliente.',
         'Activates support for customer and customer user groups.' => 'Activa el soporte para el cliente y grupos de usuarios del cliente.',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6108,10 +6118,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => 'Apariencia(skin) predeterminada para la interfaz de agente.',
-        'Default skin for the agent interface (slim version).' => 'Apariencia predeterminada para la interfaz de agente (versión slim).',
-        'Balanced white skin by Felix Niklas.' => 'Piel blanca balanceda diseñada por Felix Niklas.',
-        'Balanced white skin by Felix Niklas (slim version).' => '',
-        'High contrast skin for visually impaired users.' => 'Piel de alto contraste para usuarios con problemas de visión.',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'El nombre interno de la piel que debe usarse en la interfaz del agente. Por favor, verifique las pieles disponibles en Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7844,6 +7850,7 @@ sub Data {
         'Group for default access.' => 'Grupo de acceso predeterminado.',
         'Group of all administrators.' => 'Grupo para todos los administradores.',
         'Group for statistics access.' => 'Grupo para acceder a las estadísticas.',
+        'Group for time accounting web service access.' => '',
         'new' => 'nuevo',
         'All new state types (default: viewable).' => 'Todos los tipos de estado \'nuevo\' (por defecto: visible).',
         'open' => 'abierto',
@@ -8381,8 +8388,6 @@ Tu Equipo de Soporte
         ' 2 minutes' => ' 2 minutos',
         ' 5 minutes' => ' 5 minutos',
         ' 7 minutes' => ' 7 minutos',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Inicio de sesión del Usuario) Nombre Apellido',
         '(UserLogin) Lastname Firstname' => '(Inicio de sesión del Usuario) Apellido Nombre',
@@ -8488,6 +8493,7 @@ Tu Equipo de Soporte
         'Change the priority for this ticket' => 'Cambiar la prioridad para este ticket',
         'Change the responsible for this ticket' => 'Cambiar al responsable para este ticket',
         'Change your avatar image.' => '',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => 'Se cambió SLA a "%s" (%s).',
         'Changed archive state to "%s".' => 'Se cambió el estado del archivo a "% s".',
@@ -8597,7 +8603,6 @@ Tu Equipo de Soporte
         'Danish' => 'Danés',
         'Dashboard overview.' => '',
         'Date / Time' => 'Fecha / Hora',
-        'Default (Slim)' => '',
         'Default agent name' => 'Nombre de agente predeterminado',
         'Default value for NameX' => 'Valor predeterminado para NombreX',
         'Define the queue comment 2.' => 'Definir el comentario 2 de fila.',
@@ -8700,7 +8705,6 @@ Tu Equipo de Soporte
         'Graph: Stacked Area Chart' => 'Gráfica: Gráfica de Áreas Apiladas',
         'Greek' => 'Griego',
         'Hebrew' => 'Hebrep',
-        'High Contrast' => 'Alto Contraste',
         'Hindi' => 'Hindú',
         'Hungarian' => 'Húngaro',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8721,8 +8725,6 @@ Tu Equipo de Soporte
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             'No fue posible comprobar la firma PGP, esto puede ser causado por la falta de una clave pública o un algoritmo no soportado.',
         'Italian' => 'Italiano',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => 'Japonés',
         'Korean' => 'Coreano',
         'Language' => 'Idioma',
@@ -8739,7 +8741,6 @@ Tu Equipo de Soporte
         'Lastname, Firstname (UserLogin)' => 'Apellidos, Nombre (LoginUsuario)',
         'LastnameFirstname' => 'ApellidoNombre',
         'Latvian' => 'Letón',
-        'Left' => 'Izquierda',
         'Link Object' => 'Enlazar Objeto',
         'Link Object.' => '',
         'Link agents to groups.' => 'Vincular agentes con grupos.',
@@ -8853,6 +8854,7 @@ Tu Equipo de Soporte
         'Plugin search' => 'Búsqueda de plug-ins',
         'Plugin search module for autocomplete.' => 'Módulo Plug-in de búsqueda para auto-completar.',
         'Polish' => 'Polaco',
+        'Popup Profile' => '',
         'Portuguese' => 'Portugués',
         'Portuguese (Brasil)' => 'Portugués (Brasil)',
         'PostMaster Filters' => 'Filtros del Administrador de Correos',
@@ -9190,6 +9192,7 @@ Tu Equipo de Soporte
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

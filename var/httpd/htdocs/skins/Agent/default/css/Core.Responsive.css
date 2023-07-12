@@ -40,7 +40,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 
 
-    /* .MessageBox, 
+    /* .MessageBox,
     .RTL .MessageBox {
         margin: 0px;
     }
@@ -364,7 +364,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin: 10px 0px;
     }
 
-    
+
     .WidgetSimple span.Pagination a,
     .OverviewActions span.Pagination a {
         display: inline-block;
@@ -530,7 +530,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     fieldset.TableLike > .Row > .Field > input[type=checkbox] {
         width: auto;
     }
-/* 
+/*
     fieldset.TableLike .Field a {
         position: absolute;
         top: 0;
@@ -721,7 +721,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
     */
 
-    
+
     /*
     .Tab.Actions li a {
         font-size: var(--font-size-xs);
@@ -1127,7 +1127,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         float: none;
         display: block;
     }
-    
+
 
     .OverviewLarge .Infos {
         width: 100%;
@@ -1234,7 +1234,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin-left: 5px;
     }
 
-    
+
 
 
     /* Statistics */
@@ -1288,7 +1288,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 
 
-/* 
+/*
     .Cluster .ClusterLink {
         display: none;
     }
@@ -1310,7 +1310,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .Cluster ul li#nav-People,
-    .Cluster ul li#nav-Communication, 
+    .Cluster ul li#nav-Communication,
     .Cluster ul li#nav-Miscellaneous {
         padding: 0;
     }
@@ -1765,8 +1765,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 /*
 @media (min-width: 1600px) {
 
-    div.CustomerContainer, 
-    div.CcCustomerContainer, 
+    div.CustomerContainer,
+    div.CcCustomerContainer,
     div.BccCustomerContainer {
         background: var(--white);
         background-color: var(--white);
@@ -1812,7 +1812,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: flex;
         flex-flow: column;
     }
-    
+
     .Popup .WidgetSimple .Content,
     .LayoutPopup > .Content.card fieldset {
         width: 100%;
@@ -1851,7 +1851,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         justify-content: center;
         align-self: center;
     }
-    
+
     div.card-item,
     div.card-item > .Row {
         background: none;

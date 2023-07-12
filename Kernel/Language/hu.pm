@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.904643860518923;
+    $Self->{Completeness}        = 0.90203205022303;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -717,9 +717,9 @@ sub Data {
             'Egy időszakos végrehajtás mellett vagy helyett meghatározhat olyan jegyeseményeket, amelyek aktiválni fogják ezt a feladatot.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Ha egy jegyesemény elsül, a jegy szűrő alkalmazásával kerül ellenőrzésre, hogy a jegy illeszkedik-e.',
-        'Do you really want to delete this event trigger?' => 'Valóban törölni szeretné ezt az eseményaktiválót?',
         'Add Event Trigger' => 'Eseményaktiváló hozzáadása',
         'To add a new event select the event object and event name' => 'Egy új esemény hozzáadásához válassza ki az eseményobjektumot és az eseménynevet',
+        'Do you really want to delete this event trigger?' => 'Valóban törölni szeretné ezt az eseményaktiválót?',
         'Select Tickets' => 'Jegyek kijelölése',
         '(e. g. 10*5155 or 105658*)' => '(például 10*5155 vagy 105658*)',
         '(e. g. 234321)' => '(például 234321)',
@@ -2020,6 +2020,7 @@ sub Data {
         'State type' => 'Állapottípus',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             'Nem lehetséges érvényteleníteni ezt a bejegyzést, mert nincsenek egyéb egyesítés állapotok a rendszeren!',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Ez az állapot a következő konfigurációs beállításokban van használva:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2484,6 +2485,16 @@ sub Data {
             'Megváltoztathatja a profilképét, ha regisztrálja az e-mail címét (%s) a következő oldalon: %s. Ne feledje, hogy a gyorsítótárazás miatt eltarthat egy ideig, amíg az új profilképe elérhetővé válik.',
         'Off' => 'Ki',
         'End' => 'Befejezés',
+        'Left' => 'Bal',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => 'Ezt a beállítás jelenleg nem lehet elmenteni.',
         'This setting can currently not be saved' => 'Ezt a beállítás jelenleg nem lehet elmenteni',
         'Save setting' => '',
@@ -2844,7 +2855,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archiválás',
         'This ticket is archived.' => 'Ez a jegy archiválva van.',
-        'Note: Type is invalid!' => 'Megjegyzés: a típus érvénytelen!',
+        'is invalid' => '',
         'Pending till' => 'Várakozás eddig',
         'Locked' => 'Zárolt',
         '%s Ticket(s)' => '%s jegy',
@@ -2943,6 +2954,9 @@ sub Data {
         'Welcome!' => 'Üdvözöljük!',
         'Please click the button below to create your first ticket.' => 'Kattintson a lenti gombra az első jegy létrehozásához.',
         'Create your first ticket' => 'Első jegy létrehozása',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
@@ -5539,6 +5553,8 @@ sub Data {
             'Meghatározza a rendszer azonosítóját. Minden jegyszám és HTTP munkamenet szöveg tartalmazza ezt az azonosítót. Ez biztosítja, hogy csak azok a jegyek legyenek feldolgozva követőként, amelyek a rendszerhez tartoznak (hasznos az Znuny két példánya közötti kommunikációkor).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Meghatározza a rendszer teljes képzésű tartománynevét. Ezt a beállítást az OTRS_CONFIG_FQDN változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül.',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             'Meghatározza a HTTP gépnevet a támogatási adatok gyűjtéséhez a nyilvános „PublicSupportDataCollector” modullal (például az Znuny démonból használva).',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5570,14 +5586,6 @@ sub Data {
             'Az ügyintéző felület fejlécében megjelenített logó. A kép URL lehet relatív URL a felszín képkönyvtárától, vagy egy teljes URL egy távoli webkiszolgálótól.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Az ügyintézői felület fejlécében megjelenített logó az „Alapértelmezett” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'Az ügyintézői felület fejlécében megjelenített logó az „Alapértelmezett (karcsú)” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'Az ügyintézői felület fejlécében megjelenített logó az „Elefántcsont” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'Az ügyintézői felület fejlécében megjelenített logó az „Elefántcsont (karcsú)” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            'Az ügyintézői felület fejlécében megjelenített logó a „Nagy kontraszt” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Az ügyintéző felület bejelentkező doboza fölött megjelenített logó. A kép URL lehet relatív URL a felszín képkönyvtárától, vagy egy teljes URL egy távoli webkiszolgálótól.',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Meghatározza az URL alap útvonalát az ikonok, a CSS és a JavaScript eléréséhez.',
@@ -5602,6 +5610,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => 'Automatikus kiegészítés letiltása a bejelentkező képernyőn.',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Az „X-Frame-Options: SAMEORIGIN” HTTP-fejléc letiltása, hogy lehetővé tegye az Znuny beágyazását IFrame-ként más weboldalakba. Ennek a HTTP-fejlécnek a letiltása biztonsági probléma lehet! Csak akkor tiltsa le, ha tudja, hogy mit csinál!',
@@ -5904,6 +5913,7 @@ sub Data {
             'Megadja a végfelhasználóknak azt a lehetőséget, hogy felülírják a CSV fájloknál a fordítási fájlokban meghatározott elválasztó karaktert. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             'Meghatározza a felhasználók profilképét. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Meghatározza a felhasználói azonosítót az ügyfélpanelhez.',
         'Activates support for customer and customer user groups.' => 'Támogatást aktivál az ügyfelekhez és ügyfél-felhasználó csoportokhoz.',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6114,10 +6124,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Azt a sorrendet adja meg, amelyben az ügyintéző keresztneve és vezetékneve megjelenítve legyen.',
         'Default skin for the agent interface.' => 'Alapértelmezett felszín az ügyintézői felülethez.',
-        'Default skin for the agent interface (slim version).' => 'Alapértelmezett felszín az ügyintézői felülethez (karcsú változat).',
-        'Balanced white skin by Felix Niklas.' => 'Kiegyenlített fehér felszín Felix Niklas-tól.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Kiegyenlített fehér felszín Felix Niklas-tól (karcsú változat).',
-        'High contrast skin for visually impaired users.' => 'Nagy kontrasztú felszín a látássérült felhasználóknak.',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Az ügyintéző felszínének belső neve, amelyet az ügyintézői felületen kell használni. Ellenőrizze az elérhető felszíneket a Frontend::Agent::Skins helyen.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7850,6 +7856,7 @@ sub Data {
         'Group for default access.' => 'Csoport az alapértelmezett hozzáféréshez.',
         'Group of all administrators.' => 'Az összes adminisztrátor csoportja.',
         'Group for statistics access.' => 'Csoport a statisztikák hozzáféréshez.',
+        'Group for time accounting web service access.' => '',
         'new' => 'új',
         'All new state types (default: viewable).' => 'Minden új állapottípus (alapértelmezett: megtekinthető).',
         'open' => 'nyitott',
@@ -8387,8 +8394,6 @@ Az Ön segélyszolgálat csapata
         ' 2 minutes' => ' 2 perc',
         ' 5 minutes' => ' 5 perc',
         ' 7 minutes' => ' 7 perc',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '„Karcsú” felszín, amely képernyőhelyet próbál megspórolni a haladó felhasználóknak.',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Felhasználónév) Keresztnév Vezetéknév',
         '(UserLogin) Lastname Firstname' => '(Felhasználónév) Vezetéknév Keresztnév',
@@ -8494,6 +8499,7 @@ Az Ön segélyszolgálat csapata
         'Change the priority for this ticket' => 'Prioritás módosítása ennél a jegynél',
         'Change the responsible for this ticket' => 'Felelős módosítása ennél a jegynél',
         'Change your avatar image.' => 'A profilkép megváltoztatása.',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'Jelszó és egyebek megváltoztatása.',
         'Changed SLA to "%s" (%s).' => 'SLA megváltoztatva erre: „%s” (%s).',
         'Changed archive state to "%s".' => 'Archívumállapot megváltoztatva erre: „%s”.',
@@ -8603,7 +8609,6 @@ Az Ön segélyszolgálat csapata
         'Danish' => 'Dán',
         'Dashboard overview.' => 'Vezérlőpult áttekintő.',
         'Date / Time' => 'Dátum / Idő',
-        'Default (Slim)' => 'Alapértelmezett (karcsú)',
         'Default agent name' => 'Alapértelmezett ügyintézőnév',
         'Default value for NameX' => 'A NameX alapértelmezett értéke',
         'Define the queue comment 2.' => 'A várólista 2. megjegyzésének meghatározása.',
@@ -8706,7 +8711,6 @@ Az Ön segélyszolgálat csapata
         'Graph: Stacked Area Chart' => 'Grafikon: halmozott területdiagram',
         'Greek' => 'Görög',
         'Hebrew' => 'Héber',
-        'High Contrast' => 'Nagy kontraszt',
         'Hindi' => 'Hindi',
         'Hungarian' => 'Magyar',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8727,8 +8731,6 @@ Az Ön segélyszolgálat csapata
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             'Nem volt lehetséges ellenőrizni a PGP-aláírást. Ezt egy hiányzó nyilvános kulcs vagy egy nem támogatott algoritmus okozhatja.',
         'Italian' => 'Olasz',
-        'Ivory' => 'Elefántcsont',
-        'Ivory (Slim)' => 'Elefántcsont (karcsú)',
         'Japanese' => 'Japán',
         'Korean' => 'Koreai',
         'Language' => 'Nyelv',
@@ -8745,7 +8747,6 @@ Az Ön segélyszolgálat csapata
         'Lastname, Firstname (UserLogin)' => 'Vezetéknév, Keresztnév (Felhasználónév)',
         'LastnameFirstname' => 'VezetéknévKeresztnév',
         'Latvian' => 'Lett',
-        'Left' => 'Bal',
         'Link Object' => 'Objektum összekapcsolása',
         'Link Object.' => 'Objektum összekapcsolása.',
         'Link agents to groups.' => 'Ügyintézők összekapcsolása csoportokkal.',
@@ -8859,6 +8860,7 @@ Az Ön segélyszolgálat csapata
         'Plugin search' => 'Bővítmény keresés',
         'Plugin search module for autocomplete.' => 'Bővítmény keresési modul az automatikus kiegészítéshez.',
         'Polish' => 'Lengyel',
+        'Popup Profile' => '',
         'Portuguese' => 'Portugál',
         'Portuguese (Brasil)' => 'Portugál (Brazil)',
         'PostMaster Filters' => 'Levelezési szűrők',
@@ -9196,6 +9198,7 @@ Az Ön segélyszolgálat csapata
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

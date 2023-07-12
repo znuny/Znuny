@@ -139,9 +139,9 @@ $Selenium->RunTest(
         $Element->is_displayed();
 
         # Install test package.
-        my $Location = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackage.opm';
-
-        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
+        my $Location  = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackage.opm';
+        my $LocalFile = $Selenium->upload_file($Location);
+        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($LocalFile);
 
         $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
         $Selenium->find_element("//button[contains(.,'Install Package')]")->click();
@@ -150,7 +150,7 @@ $Selenium->RunTest(
             JavaScript => 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
         );
 
-        $Selenium->find_element( ".Primary.CallForAction", 'css' )->VerifiedClick();
+        $Selenium->find_element("//button[contains(.,'Continue')]")->VerifiedClick();
 
         $Selenium->WaitFor(
             Time       => 120,
@@ -202,8 +202,9 @@ $Selenium->RunTest(
         $NavigateToAdminPackageManager->();
 
         # Try to install incompatible test package.
-        $Location = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackageIncompatible.opm';
-        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
+        $Location  = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackageIncompatible.opm';
+        $LocalFile = $Selenium->upload_file($Location);
+        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($LocalFile);
 
         $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
 
@@ -245,7 +246,7 @@ $Selenium->RunTest(
         # Check that there is a notification about no packages.
         my $Notification = 'No packages found in selected repository. Please check log for more info!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.MessageBox.Warning p:contains($Notification)').length"),
             "$Notification - notification is found."
         );
     }

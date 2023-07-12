@@ -67,21 +67,21 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
                 {
                     'Item' => [
                         {
-                            ...
+                           # ...
                         },
                     ],
                 },
             ],
         },
         EffectiveValue => {
-            ...
+            # ...
         },
     );
 
 Result:
     %Result = (
         EffectiveValue => {         # Note for FrontendNavigation ValueTypes EffectiveValue is not changed.
-            ...
+            # ...
         },
         Success => 1,
         Error   => undef,
@@ -415,7 +415,7 @@ Generate HTML for new array/hash item.
 Returns:
 
     $HTML = '<select class="Modernize" id="SettingName" name="SettingName" title="SettingName">
-        ...
+        # ...
         </select>';
 
 =cut

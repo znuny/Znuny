@@ -477,7 +477,7 @@ Returns:
 
     @ForbiddenValueTypes = (
         'Option',
-        ...
+        # ...
     );
 
 =cut

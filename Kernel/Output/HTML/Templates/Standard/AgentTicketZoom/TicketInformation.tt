@@ -29,9 +29,8 @@
 
 [% RenderBlockStart("Type") %]
                             <span>
-                                <label>[% Translate("Type") | html %]:</label>
+                                <label>[% Translate("Type") | html %]: [% IF Data.ValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
                                 <p class="Value FixedValueSmall" title="[% Data.Type | html %]">[% Data.Type | html %]
-                                    [% IF Data.Valid != 1 %] <em class="Error">[% Translate("Note: Type is invalid!") | html %]</em> [% END %]
                                 </p>
                             </span>
 [% RenderBlockEnd("Type") %]
@@ -53,8 +52,10 @@
                             </span>
 [% RenderBlockEnd("CreatedBy") %]
                         <span class="state">
-                            <label>[% Translate("State") | html %]:</label>
-                            <span class="Value [% Data.PillClass | html %]" title="[% Translate(Data.State) | html %]">[% Translate(Data.State) | html %]</span>
+                            <label>[% Translate("State") | html %]: [% IF Data.StateValidID != 1 %] <em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
+                            <span class="Value [% Data.PillClass | html %]" title="[% Translate(Data.State) | html %]">
+                                [% Translate(Data.State) | html %]
+                            </span>
                         </span>
 
 [% RenderBlockStart("PendingUntil") %]
@@ -75,25 +76,25 @@
 
 
                         <span>
-                            <label>[% Translate("Priority") | html %]:</label>
+                            <label>[% Translate("Priority") | html %]: [% IF Data.PriorityValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
                             <p class="Value" title="[% Translate(Data.Priority) | html %]">[% Translate(Data.Priority) | html %]</p>
                         </span>
 
                         <span>
-                            <label>[% Translate("Queue") | html %]:</label>
+                            <label>[% Translate("Queue") | html %]:[% IF Data.QueueValidID != 1 %] <em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
                             <p class="Value" title="[% Data.Queue | html %]">[% Data.Queue | html | replace('::', '<wbr>::<wbr>') %]</p>
                         </span>
 
 [% RenderBlockStart("Service") %]
                             <span>
-                                <label>[% Translate("Service") | html %]:</label>
+                                <label>[% Translate("Service") | html %]: [% IF Data.ValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
                                 <p class="Value" title="[% Data.Service | html %]">[% Data.Service | html %]</p>
                             </span>
 [% RenderBlockEnd("Service") %]
 
 [% RenderBlockStart("SLA") %]
                             <span>
-                                <label>[% Translate("Service Level Agreement") | html %]:</label>
+                                <label>[% Translate("Service Level Agreement") | html %]: [% IF Data.ValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
                                 <p class="Value" title="[% Data.SLA | html %]">[% Data.SLA | html %]</p>
                             </span>
 [% RenderBlockEnd("SLA") %]
@@ -157,7 +158,7 @@
 
 [% RenderBlockStart("Owner") %]
                             <span>
-                                <label>[% Translate("Owner") | html %]:</label>
+                                <label>[% Translate("Owner") | html %]: [% IF Data.ValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
                                 <p class="Value" title="[% Data.UserFullname | html %] ([% Data.UserLogin | html %])">
                                     [% Data.UserFullname | html %]
                                 </p>
@@ -166,7 +167,7 @@
 
 [% RenderBlockStart("Responsible") %]
                             <span>
-                                <label>[% Translate("Responsible") | html %]:</label>
+                                <label>[% Translate("Responsible") | html %]: [% IF Data.ValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
                                 <p class="Value" title="[% Data.UserFullname | html %] ([% Data.UserLogin | html %])">
                                     [% Data.UserFullname | html %]
                                 </p>

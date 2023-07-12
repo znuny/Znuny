@@ -137,6 +137,8 @@ sub ValueSet {
 sub ValueValidate {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     my $Prefix          = 'DynamicField_' . $Param{DynamicFieldConfig}->{Name};
     my $DateRestriction = $Param{DynamicFieldConfig}->{Config}->{DateRestriction};
 
@@ -151,7 +153,7 @@ sub ValueValidate {
         && $Param{Value} !~ m{\A \d{4}-\d{2}-\d{2}\s23:59:59 \z}xms
         )
     {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "The value for the Date field ($Param{DynamicFieldConfig}->{Name}) is invalid!\n"
                 . "The date must be valid and the time must be 00:00:00"
@@ -197,7 +199,7 @@ sub ValueValidate {
         }
 
         if ( $DateRestriction eq 'DisableFutureDates' && $ValueSystemTimeObject > $SystemTimeFutureObject ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message =>
                     "The value for the Date field ($Param{DynamicFieldConfig}->{Name}) is in the future! The date needs to be in the past!",
@@ -205,7 +207,7 @@ sub ValueValidate {
             return;
         }
         elsif ( $DateRestriction eq 'DisablePastDates' && $ValueSystemTimeObject < $SystemTimePastObject ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message =>
                     "The value for the Date field ($Param{DynamicFieldConfig}->{Name}) is in the past! The date needs to be in the future!",
@@ -397,6 +399,7 @@ EOF
         Prefix                => $FieldName,
         $FieldName . Optional => 1,
         $FieldName . Used     => $FieldConfig->{ $FieldName . 'Used' } || 0,
+        $FieldName . 'Class'  => $FieldClass,
     );
 
     my $Data = {

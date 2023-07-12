@@ -139,7 +139,7 @@ Add data to table.
 
     my $Success = $DBCRUDObject->DataAdd(
         ID          => '...',
-        '...',
+        # ...
         CreateTime  => '...', # optional
         ChangeTime  => '...', # optional
     );
@@ -718,7 +718,7 @@ Returns:
             CreateTime  => '...',
             ChangeTime  => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -911,7 +911,7 @@ Returns:
             CreateTime  => '...',
             ChangeTime  => '...',
         },
-        ...
+        # ...
     );
 
 =cut

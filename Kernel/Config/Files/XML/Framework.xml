@@ -67,6 +67,13 @@
             <Item ValueType="String" ValueRegex="">yourhost.example.com</Item>
         </Value>
     </Setting>
+    <Setting Name="ExternalFQDN" Required="0" Valid="0" ConfigLevel="200">
+        <Description Translatable="1">Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">yourexternaldomain.example.com</Item>
+        </Value>
+    </Setting>
     <Setting Name="SupportDataCollector::HTTPHostname" Required="0" Valid="0" ConfigLevel="200">
         <Description Translatable="1">Defines the HTTP hostname for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the Znuny Daemon).</Description>
         <Navigation>Core::SupportDataCollector</Navigation>
@@ -305,58 +312,6 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="AgentLogoCustom###slim" Required="0" Valid="1">
-        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.</Description>
-        <Navigation>Frontend::Agent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
-                <Item Key="StyleTop">10px</Item>
-                <Item Key="StyleRight">50px</Item>
-                <Item Key="StyleHeight">45px</Item>
-                <Item Key="StyleWidth">220px</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="AgentLogoCustom###ivory" Required="0" Valid="1">
-        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.</Description>
-        <Navigation>Frontend::Agent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
-                <Item Key="StyleTop">24px</Item>
-                <Item Key="StyleRight">4px</Item>
-                <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">265px</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="AgentLogoCustom###ivory-slim" Required="0" Valid="1">
-        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.</Description>
-        <Navigation>Frontend::Agent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
-                <Item Key="StyleTop">10px</Item>
-                <Item Key="StyleRight">50px</Item>
-                <Item Key="StyleHeight">45px</Item>
-                <Item Key="StyleWidth">220px</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="AgentLogoCustom###highcontrast" Required="0" Valid="1">
-        <Description Translatable="1">The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.</Description>
-        <Navigation>Frontend::Agent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
-                <Item Key="StyleTop">24px</Item>
-                <Item Key="StyleRight">4px</Item>
-                <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">265px</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="AgentLoginLogo" Required="0" Valid="1">
         <Description Translatable="1">The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</Description>
         <Navigation>Frontend::Agent</Navigation>
@@ -434,7 +389,7 @@
         <Description Translatable="1">Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###Height" Required="1" Valid="1">
@@ -477,6 +432,28 @@
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String">div[type]{*}; img[*]; col[width]; style[*]{*}; *[id](*)</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::PopupProfiles###001-Framework" Required="1" Valid="1">
+        <Description Translatable="1">Global settings for all popup profiles.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Hash>
+                        <Item></Item>
+                    </Hash>
+                </DefaultItem>
+                <Item Key="Default">
+                    <Hash>
+                        <Item Key="Left">100px</Item>
+                        <Item Key="Top">100px</Item>
+                        <Item Key="Width">75%</Item>
+                        <Item Key="Height">75%</Item>
+                        <Item Key="WindowURLParams">dependent=yes,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no</Item>
+                    </Hash>
+                </Item>
+            </Hash>
         </Value>
     </Setting>
     <Setting Name="DisableLoginAutocomplete" Required="0" Valid="1">
@@ -3406,6 +3383,22 @@ You can log in via the following URL:
                 <Item Key="Key" Translatable="1">Avatar</Item>
                 <Item Key="Desc" Translatable="1">Change your avatar image.</Item>
                 <Item Key="Block">Avatar</Item>
+                <Item Key="Prio">1000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PreferencesGroups###PopupProfile" Required="0" Valid="1">
+        <Description Translatable="1">Defines the global users popup profile.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::PopupProfile</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Key">UserPopupProfile</Item>
+                <Item Key="Label" Translatable="1">Popup Profile</Item>
+                <Item Key="Desc" Translatable="1">Change your default popup profile settings.</Item>
+                <Item Key="Block">PopupProfile</Item>
                 <Item Key="Prio">1000</Item>
                 <Item Key="Active">1</Item>
             </Hash>
@@ -7935,54 +7928,6 @@ via the Preferences button after logging in.
                 <Item Key="VisibleName" Translatable="1">Default</Item>
                 <Item Key="Description" Translatable="1">This is the default orange - black skin.</Item>
                 <Item Key="HomePage">www.otrs.org</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Agent::Skin###001-slim" Required="0" Valid="1">
-        <Description Translatable="1">Default skin for the agent interface (slim version).</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="InternalName">slim</Item>
-                <Item Key="VisibleName" Translatable="1">Default (Slim)</Item>
-                <Item Key="Description" Translatable="1">"Slim" skin which tries to save screen space for power users.</Item>
-                <Item Key="HomePage">www.otrs.org</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Agent::Skin###001-ivory" Required="0" Valid="1">
-        <Description Translatable="1">Balanced white skin by Felix Niklas.</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="InternalName">ivory</Item>
-                <Item Key="VisibleName" Translatable="1">Ivory</Item>
-                <Item Key="Description" Translatable="1">Balanced white skin by Felix Niklas.</Item>
-                <Item Key="HomePage">www.felixniklas.de</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Agent::Skin###001-ivory-slim" Required="0" Valid="1">
-        <Description Translatable="1">Balanced white skin by Felix Niklas (slim version).</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="InternalName">ivory-slim</Item>
-                <Item Key="VisibleName" Translatable="1">Ivory (Slim)</Item>
-                <Item Key="Description" Translatable="1">Balanced white skin by Felix Niklas (slim version).</Item>
-                <Item Key="HomePage">www.felixniklas.de</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Agent::Skin###002-high-contrast" Required="0" Valid="1">
-        <Description Translatable="1">High contrast skin for visually impaired users.</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="InternalName">highcontrast</Item>
-                <Item Key="VisibleName" Translatable="1">High Contrast</Item>
-                <Item Key="Description" Translatable="1">High contrast skin for visually impaired users.</Item>
-                <Item Key="HomePage">www.otrs.com</Item>
             </Hash>
         </Value>
     </Setting>

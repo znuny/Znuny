@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.840026441910428;
+    $Self->{Completeness}        = 0.837435982157608;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -723,9 +723,9 @@ sub Data {
             'Дополнительно или или вместо запуска по расписанию, вы можете задать события для заявки, которые запустят эту задачу.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Если событие по заявке наступило, фильтр заявок находит соответствующие заявки. Только после этого стартует задача для этой заявки.',
-        'Do you really want to delete this event trigger?' => 'Вы действительно хотите удалить этот триггер события?',
         'Add Event Trigger' => 'Добавить триггер события',
         'To add a new event select the event object and event name' => 'Чтобы добавить новое событие выберите объект и имя события',
+        'Do you really want to delete this event trigger?' => 'Вы действительно хотите удалить этот триггер события?',
         'Select Tickets' => 'Выбрать заявки',
         '(e. g. 10*5155 or 105658*)' => '(например, 10*5155 или 105658*)',
         '(e. g. 234321)' => '(например, 234321)',
@@ -2026,6 +2026,7 @@ sub Data {
         'State type' => 'Тип состояния',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Это состояние используется в следующих параметрах конфигурации:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2490,6 +2491,16 @@ sub Data {
             'Вы можете изменить свое изображение аватара, зарегистрировавшись на ваш адрес электронной почты %s на %s. Обратите внимание, что это может занять некоторое время, пока ваш новый аватар не станет доступен из-за кэширования.',
         'Off' => 'Выключено',
         'End' => 'Окончание',
+        'Left' => 'Левый',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => 'Этот параметр не может быть изменен в настоящее время.',
         'This setting can currently not be saved' => 'Этот параметр не может быть изменен в настоящее время.',
         'Save setting' => '',
@@ -2850,7 +2861,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Архив',
         'This ticket is archived.' => 'Заявка перемещена в архив.',
-        'Note: Type is invalid!' => 'Внимание: Тип недействителен!',
+        'is invalid' => '',
         'Pending till' => 'В ожидании еще',
         'Locked' => 'Блокировка',
         '%s Ticket(s)' => '%s заявка (ок)',
@@ -2949,6 +2960,9 @@ sub Data {
         'Welcome!' => 'Добро пожаловать!',
         'Please click the button below to create your first ticket.' => 'Пожалуйста, нажмите на кнопку ниже, чтобы создать вашу первую заявку.',
         'Create your first ticket' => 'Создать вашу первую заявку.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Параметры',
@@ -5545,6 +5559,8 @@ sub Data {
             'Задает идентификатор системы. Каждый номер заявки и http-сеанса содержит его. Это дает уверенность в том, что заявки только вашей системы будут обработаны как ответы (дополнения) (может быть полезно при связи между двумя установками Znuny).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Задает полный доменный адрес системы. ОН используется в качестве тэга OTRS_CONFIG_FQDN при написании текстов сообщений для ссылки на заявки. ',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5576,14 +5592,6 @@ sub Data {
             'Логотип, отображаемый в заголовке экрана в интерфейсе агента. URL ссылка может быть относительным URL на каталог с файлами (skin) или быть полным URL на внешний веб-сервер.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса "default". Смотрите описание "AgentLogo" для дальгейших пояснений.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса "slim". Смотрите описание "AgentLogo" для дальгейших пояснений.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса "ivory". Смотрите описание "AgentLogo" для дальгейших пояснений.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'Логотип, отображаемый в заголовке экрана в интерфейсе агента для окраса "ivory-slim". Смотрите описание "AgentLogo" для дальгейших пояснений.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            'Логотип, отображаемый в заголовке экрана интерфейса агента для окраса "High Contrast". Смотрите описание "AgentLogo" для дальнейших пояснений.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Задает путь в виде URL к icons, CSS и Java Script.',
@@ -5608,6 +5616,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Отключить HTTP-заголовок "X-Frame-Options: SAMEORIGIN", чтобы разрешить встраивать Znuny в IFrame на других сайтах. Отключение этого заголовка может вызвать проблемы с безопасностью! Отключайте только если уверены в своих действиях!',
@@ -5910,6 +5919,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Задает идентификатор пользователя для клиентской панели.',
         'Activates support for customer and customer user groups.' => 'Включить поддержку компаний и групп клиентов',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6120,10 +6130,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Задает порядок в котором отображаются Фамилия и Имя агентов.',
         'Default skin for the agent interface.' => 'Стандартная тема оформления для интерфейса агента.',
-        'Default skin for the agent interface (slim version).' => 'Стандартная тема оформления для интерфейса агента (узкая версия).',
-        'Balanced white skin by Felix Niklas.' => 'Сбалансированный белый окрас интерфейса от Felix Niklas.',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Сбалансированный белый окрас интерфейса от Felix Niklas (уменьшенная версия).',
-        'High contrast skin for visually impaired users.' => 'Высококонтрастная тема оформления для слабовидящих пользователей',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Внутреннее имя окраса (skin) экрана для интерфейса агента. Доступные варианты заданы в Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7856,6 +7862,7 @@ sub Data {
         'Group for default access.' => 'Группа доступа по умолчанию.',
         'Group of all administrators.' => 'Группа для всех администраторов.',
         'Group for statistics access.' => 'Группа для доступа к отчетам.',
+        'Group for time accounting web service access.' => '',
         'new' => 'новая',
         'All new state types (default: viewable).' => 'Все новые типы состояний (по умолчанию: для просмотра).',
         'open' => 'открыта',
@@ -8393,8 +8400,6 @@ Thanks for your help!
         ' 2 minutes' => ' 2 минуты',
         ' 5 minutes' => ' 5 минут',
         ' 7 minutes' => ' 7 минут',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '"Узкая" тема которая позволит сэкономить место для опытных пользователей.',
         '%s' => 'Прочее %s',
         '(UserLogin) Firstname Lastname' => '(UserLogin) Имя Фамилия',
         '(UserLogin) Lastname Firstname' => '(UserLogin) Фамилия Имя',
@@ -8500,6 +8505,7 @@ Thanks for your help!
         'Change the priority for this ticket' => 'Поменять приоритет заявки',
         'Change the responsible for this ticket' => 'Изменить ответственного за эту заявку',
         'Change your avatar image.' => 'Сменить изображение аватара.',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'Измените свой пароль и остальное.',
         'Changed SLA to "%s" (%s).' => 'SLA изменен на "%s" (%s).',
         'Changed archive state to "%s".' => 'Архивный статус изменен на "%s".',
@@ -8609,7 +8615,6 @@ Thanks for your help!
         'Danish' => 'Датский',
         'Dashboard overview.' => '',
         'Date / Time' => 'Дата/Время',
-        'Default (Slim)' => 'По умолчанию (узкая)',
         'Default agent name' => '',
         'Default value for NameX' => 'Значение по умолчанию для NameX',
         'Define the queue comment 2.' => 'Внести Комментарий 2 для очереди.',
@@ -8712,7 +8717,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => 'Диаграммы: области с накоплениями',
         'Greek' => 'Греческий',
         'Hebrew' => 'Иврит',
-        'High Contrast' => 'Высокий контраст',
         'Hindi' => 'Хинди',
         'Hungarian' => 'Венгерский',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8733,8 +8737,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'Итальянский',
-        'Ivory' => 'Ivory ',
-        'Ivory (Slim)' => 'Ivory (узкая)',
         'Japanese' => 'Японский',
         'Korean' => 'Корейский',
         'Language' => 'Язык',
@@ -8751,7 +8753,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => 'Фамилия, Имя (UserLogin)',
         'LastnameFirstname' => 'ФамилияИмя',
         'Latvian' => 'Латышский',
-        'Left' => 'Левый',
         'Link Object' => 'Связать объект',
         'Link Object.' => 'Связать объект.',
         'Link agents to groups.' => 'Связать агентов с группами.',
@@ -8865,6 +8866,7 @@ Thanks for your help!
         'Plugin search' => 'Поисковый плагин',
         'Plugin search module for autocomplete.' => 'Поисковый плагин для автозавершения.',
         'Polish' => 'Польский',
+        'Popup Profile' => '',
         'Portuguese' => 'Португальский',
         'Portuguese (Brasil)' => 'Португальский (Бразилия)',
         'PostMaster Filters' => 'Фильтры PostMaster (входящей почты)',
@@ -9202,6 +9204,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

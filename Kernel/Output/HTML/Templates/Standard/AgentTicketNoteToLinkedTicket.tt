@@ -13,6 +13,7 @@
     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
     <input type="hidden" name="Subaction" value="Store"/>
     <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+    <input type="hidden" name="ArticleID" value="[% Data.ArticleID | html %]"/>
     <input type="hidden" name="ReplyToArticle" value="[% Data.ReplyToArticle | html %]"/>
     <input type="hidden" name="Expand" id="Expand" value=""/>
     <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
@@ -421,7 +422,7 @@
                                 </div>
 
 
-                                <label for="IsVisibleForCustomer">[% Translate("Is visible for customer") | html %]:</label>
+                                <label for="IsVisibleForCustomer">[% Translate("Is visible for customer") | html %]</label>
                                 <div class="Field">
                                     <input type="checkbox" name="IsVisibleForCustomer" id="IsVisibleForCustomer"
                                         [% IF Data.IsVisibleForCustomer %]checked="checked" [% END %]/>

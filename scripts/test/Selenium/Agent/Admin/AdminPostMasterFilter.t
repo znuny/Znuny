@@ -367,7 +367,7 @@ $Selenium->RunTest(
 
         # Wait for dialog to appears.
         $Selenium->WaitForjQueryEventBound(
-            CSSSelector => '#DialogButton1',
+            CSSSelector => '#DialogButton2',
             Event       => 'click',
         );
 
@@ -379,7 +379,7 @@ $Selenium->RunTest(
         );
 
         # Confirm delete action.
-        $Selenium->find_element( "#DialogButton1", 'css' )->VerifiedClick();
+        $Selenium->find_element( "#DialogButton2", 'css' )->VerifiedClick();
 
         # Wait for the dialog to disappear.
         $Selenium->WaitFor(
@@ -406,12 +406,12 @@ $Selenium->RunTest(
 
         # Wait for dialog to appears.
         $Selenium->WaitForjQueryEventBound(
-            CSSSelector => '#DialogButton1',
+            CSSSelector => '#DialogButton2',
             Event       => 'click',
         );
 
         # Confirm delete action.
-        $Selenium->find_element( "#DialogButton1", 'css' )->VerifiedClick();
+        $Selenium->find_element( "#DialogButton2", 'css' )->VerifiedClick();
 
         # Wait for the dialog to disappear.
         $Selenium->WaitFor(

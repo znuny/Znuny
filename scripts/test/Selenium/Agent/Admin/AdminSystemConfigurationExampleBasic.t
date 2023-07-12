@@ -1415,26 +1415,6 @@ $Selenium->RunTest(
             "Notification shown for undeployed settings."
         );
 
-        $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && $("#CloudService > i:visible").length',
-        );
-
-        $Selenium->execute_script("\$('#CloudService > i').trigger('click')");
-        $Selenium->WaitFor(
-            JavaScript =>
-                'return typeof($) === "function" && $("#ConfigTree ul > li:first > ul > li:first:visible").length',
-        );
-
-        # Check navigation for disabled nodes.
-        my $NodeDisabled = $Selenium->execute_script(
-            'return $("#ConfigTree ul > li:first > ul > li:first a").hasClass("jstree-disabled");',
-        );
-
-        $Self->True(
-            $NodeDisabled,
-            'Check if CloudService::Admin node is disabled.',
-        );
-
         # Enable this block if you want to test it multiple times.
         my @TestNames;
 

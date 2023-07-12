@@ -216,7 +216,6 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketQueue;QueueID=$QueueID;View=");
 
         # Switch to large view.
-        $Selenium->find_element( "a.Small", 'css' )->VerifiedClick();
         $Selenium->find_element( "a.Large", 'css' )->VerifiedClick();
 
         # Check if owner name conforms to current FirstnameLastNameOrder setting.

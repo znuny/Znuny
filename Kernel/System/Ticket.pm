@@ -734,6 +734,11 @@ sub TicketDelete {
         UserID   => $Param{UserID},
     );
 
+    # remove all mentions
+    $Kernel::OM->Get('Kernel::System::Mention')->RemoveAllMentions(
+        TicketID => $Param{TicketID},
+    );
+
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -1535,6 +1540,8 @@ sub TicketDeepGet {
         UserID        => $Param{UserID},
     );
     return if !%Ticket;
+
+    $Ticket{TimeUnit} = $Self->TicketAccountedTimeGet( TicketID => $Param{TicketID} ) // 0;
 
     my %Data = %Ticket;
 

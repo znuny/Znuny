@@ -159,6 +159,8 @@
                                 <li id="nav-[% Data.Name | replace(' ', '-') | html %]">
                                 [% IF Data.Type == 'Cluster' %]
                                     <span class="[% Data.Class %]" >[% Translate(Data.Name) | html %] <i class="fa fa-caret-down"></i></span>
+                                [% ELSIF Data.Type == 'HTML' || Data.Config.Type == 'HTML' %]
+                                    [% Data.HTML %]
                                 [% ELSE %]
                                     <a href="[% Env("Baselink") %][% Data.Link | Interpolate %]" class="[% Data.Class %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]" target="[% Data.Target | html %]">[% Translate(Data.Name) | html %]</a>
                                 [% END %]

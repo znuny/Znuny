@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.500578416790613;
+    $Self->{Completeness}        = 0.499917396332397;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -717,9 +717,9 @@ sub Data {
             'Naast of in plaats van uitvoeren op een tijdschema kunt u ook ticket events selecteren die deze taak triggeren.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Als een ticket-event plaatsvindt zal dit filter worden toegepast om te toetsen of dit ticket voldoet. Alleen dan wordt deze taak uitgevoerd.',
-        'Do you really want to delete this event trigger?' => 'Wilt u deze event trigger verwijderen?',
         'Add Event Trigger' => 'Nieuwe event trigger toevoegen',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Wilt u deze event trigger verwijderen?',
         'Select Tickets' => 'Selecteer Tickets',
         '(e. g. 10*5155 or 105658*)' => '(bijvoorbeeld 10*5155 or 105658*)',
         '(e. g. 234321)' => '(bijvoorbeeld 234321)',
@@ -2020,6 +2020,7 @@ sub Data {
         'State type' => 'Status type',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'Deze status wordt gebruikt in de volgende configuratieinstellingen:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2484,6 +2485,16 @@ sub Data {
             'U kunt uw eigen avatar afbeeling registreren door uw e-mail adres   %s op %s te gebruiken. Let op: het kan enige tijd duren voordat uw avatar beschikbaar is vanwege buffering.',
         'Off' => 'Uit',
         'End' => 'Einde',
+        'Left' => '',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => 'Deze instelling kan op dit moment niet worden opgeslagen.',
         'This setting can currently not be saved' => 'Deze instelling kan op dit moment niet worden opgeslagen',
         'Save setting' => '',
@@ -2844,7 +2855,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archief',
         'This ticket is archived.' => 'Dit ticket is gearchiveerd.',
-        'Note: Type is invalid!' => 'Let op: Type is ongeldig!',
+        'is invalid' => '',
         'Pending till' => 'In de wacht tot',
         'Locked' => 'Vergrendeling',
         '%s Ticket(s)' => '%s Ticket(s)',
@@ -2943,6 +2954,9 @@ sub Data {
         'Welcome!' => 'Welkom!',
         'Please click the button below to create your first ticket.' => 'Klik op de button om uw eerste ticket aan te maken.',
         'Create your first ticket' => 'Maak uw eerste ticket aan',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Sjabloon',
@@ -5539,6 +5553,8 @@ sub Data {
             '',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5570,14 +5586,6 @@ sub Data {
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => '',
@@ -5602,6 +5610,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '',
@@ -5904,6 +5913,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6114,10 +6124,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => '',
-        'Default skin for the agent interface (slim version).' => '',
-        'Balanced white skin by Felix Niklas.' => '',
-        'Balanced white skin by Felix Niklas (slim version).' => '',
-        'High contrast skin for visually impaired users.' => 'Hoog contrast thema voor gebruikers met een visuele beperking.',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7850,6 +7856,7 @@ sub Data {
         'Group for default access.' => 'Groep voor standaard toegang.',
         'Group of all administrators.' => 'Groep voor alle administrators.',
         'Group for statistics access.' => 'Groep voor statistieken toegang.',
+        'Group for time accounting web service access.' => '',
         'new' => 'nieuw',
         'All new state types (default: viewable).' => 'Alle nieuwe status types (standaard: zichtbaar)',
         'open' => 'open',
@@ -8387,8 +8394,6 @@ Het Helpdesk Team
         ' 2 minutes' => ' 2 minuten',
         ' 5 minutes' => ' 5 minuten',
         ' 7 minutes' => ' 7 minuten',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(Loginnaam) Voornaam Achternaam',
         '(UserLogin) Lastname Firstname' => '(Loginnaam) Achternaam Voornaam',
@@ -8494,6 +8499,7 @@ Het Helpdesk Team
         'Change the priority for this ticket' => 'Wijzig de prioriteit voor dit ticket',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => 'Pas uw avatar afbeelding aan.',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8603,7 +8609,6 @@ Het Helpdesk Team
         'Danish' => 'Deens',
         'Dashboard overview.' => '',
         'Date / Time' => 'Datum / tijd',
-        'Default (Slim)' => '',
         'Default agent name' => '',
         'Default value for NameX' => '',
         'Define the queue comment 2.' => '',
@@ -8706,7 +8711,6 @@ Het Helpdesk Team
         'Graph: Stacked Area Chart' => '',
         'Greek' => 'Grieks',
         'Hebrew' => 'Hebreeuws',
-        'High Contrast' => 'Hoog Contrast',
         'Hindi' => 'Hindi',
         'Hungarian' => 'Hongaars',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8727,8 +8731,6 @@ Het Helpdesk Team
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => '',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => 'Japans',
         'Korean' => '',
         'Language' => 'Taal',
@@ -8745,7 +8747,6 @@ Het Helpdesk Team
         'Lastname, Firstname (UserLogin)' => 'Achternaam, Voornaam (Loginnaam)',
         'LastnameFirstname' => 'AchternaamVoornaam',
         'Latvian' => '',
-        'Left' => '',
         'Link Object' => 'Koppel object',
         'Link Object.' => 'Koppel Object',
         'Link agents to groups.' => 'Koppel behandelaars aan groepen.',
@@ -8859,6 +8860,7 @@ Het Helpdesk Team
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => '',
+        'Popup Profile' => '',
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => 'E-mail filters',
@@ -9196,6 +9198,7 @@ Het Helpdesk Team
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

@@ -7272,7 +7272,7 @@ msgstr "Verknüpfungen für %s verwalten"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
 msgid "Close and Back"
-msgstr ""
+msgstr "Schließen und zurück"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
 msgid "Create new links"
@@ -15287,22 +15287,6 @@ msgid "The logo shown in the header of the agent interface for the skin \"defaul
 msgstr "Das Logo, das für das Design \"default\" im Agenten-Interface angezeigt wird. Mehr Informationen finden Sie in der Einstellung \"AgentLogo\"."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"slim\". See \"AgentLogo\" for further description."
-msgstr "Das Logo, das für das Design \"slim\" im Agenten-Interface angezeigt wird. Mehr Informationen finden Sie in der Einstellung \"AgentLogo\"."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory\". See \"AgentLogo\" for further description."
-msgstr "Das Logo, das für das Design \"ivory\" im Agenten-Interface angezeigt wird. Mehr Informationen finden Sie in der Einstellung \"AgentLogo\"."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"ivory-slim\". See \"AgentLogo\" for further description."
-msgstr "Das Logo, das für das Design \"ivory-slim\" im Agenten-Interface angezeigt wird. Mehr Informationen finden Sie in der Einstellung \"AgentLogo\"."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "The logo shown in the header of the agent interface for the skin \"High Contrast\". See \"AgentLogo\" for further description."
-msgstr "Das Logo, das für das Design \"hoher Kontrast\" im Agenten-Interface angezeigt wird. Mehr Informationen finden Sie in der Einstellung \"AgentLogo\"."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server."
 msgstr "Das Logo, das in der Anmelde-Box der Agenten-Oberfläche angezeigt wird. Die URL zu dem Bild kann entweder eine relative URL zum Designverzeichnis mit dem Bild sein, oder eine vollständige URL zu einem anderen Webserver."
 
@@ -22887,7 +22871,7 @@ msgstr "NachnameVorname"
 msgid "Latvian"
 msgstr "Lettisch"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Left"
 msgstr "Links"
 
@@ -24242,4 +24226,72 @@ msgstr "Zeige nur valide Einträge"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Show All"
 msgstr "Zeige alle Einträge"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+msgid "New Process Ticket"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
+msgstr ""
+
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
+msgstr "Dieses Feld muss ein hexadezimaler Farbcode beinhalten."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+msgid "is invalid"
+msgstr "ist ungültig"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Global settings for all popup profiles."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the global users popup profile."
+msgstr ""
+
+#. SysConfig
+msgid "Change your default popup profile settings."
+msgstr ""
+
+#. SysConfig
+msgid "Popup Profile"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "The horizontal distance of the window relative to the screen, in pixels."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Top"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "The vertical distance of the window relative to the screen, in pixels."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Width"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Width in pixels or percent."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Height"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Height in pixels or percent."
+msgstr ""
 

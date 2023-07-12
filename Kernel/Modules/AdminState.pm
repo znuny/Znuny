@@ -11,6 +11,7 @@ package Kernel::Modules::AdminState;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -81,6 +82,11 @@ sub Run {
             }
         }
         my %StateData = $StateObject->StateGet( ID => $GetParam{ID} );
+
+        # Check if Color is a valid hexadeciomal color code
+        if ( $GetParam{Color} !~ /^\#(?:[0-9a-fA-F]{3}){1,2}$/ ) {
+            $Errors{ColorInvalidServerError} = 'ServerError';
+        }
 
         # Check if state is present in SysConfig setting
         my $UpdateEntity    = $ParamObject->GetParam( Param => 'UpdateEntity' ) || '';
@@ -344,6 +350,7 @@ sub _Edit {
         Name  => 'Color',
         ID    => 'Color',
         Color => $Param{Color},
+        Class => 'Validate_Color ' . ( $Param{Errors}->{'ColorInvalidServerError'} || '' ),
     );
 
     $Param{ValidOption} = $LayoutObject->BuildSelection(
@@ -377,6 +384,13 @@ sub _Edit {
     $LayoutObject->Block(
         Name => $Param{Errors}->{ValidOptionServerError} . 'ValidOptionServerError',
     );
+
+    # Show ServerError if color code is invalid.
+    if ( $Param{Errors}->{ColorInvalidServerError} ) {
+        $LayoutObject->Block(
+            Name => 'ColorInvalidServerError',
+        );
+    }
 
     if ( $Param{ID} ) {
 

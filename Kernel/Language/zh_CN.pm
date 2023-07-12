@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.904643860518923;
+    $Self->{Completeness}        = 0.90203205022303;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -718,9 +718,9 @@ sub Data {
             '作为定期自动执行的补充或替代，您可以定义工单事件来触发这个任务的执行。',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '如果工单事件被触发，工单过滤器将对工单进行检查看其条件是否匹配。任务只对匹配的工单发生作用。',
-        'Do you really want to delete this event trigger?' => '您真的想要删除这个事件触发器吗？',
         'Add Event Trigger' => '添加事件触发器',
         'To add a new event select the event object and event name' => '要添加新事件，请选择事件对象和事件名称',
+        'Do you really want to delete this event trigger?' => '您真的想要删除这个事件触发器吗？',
         'Select Tickets' => '选择工单',
         '(e. g. 10*5155 or 105658*)' => '（例如: 10*5144 或者 105658*）',
         '(e. g. 234321)' => '（例如: 234321）',
@@ -2021,6 +2021,7 @@ sub Data {
         'State type' => '工单状态类型',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '无法使此条目无效，因为系统中没有其他合并状态！',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => '这个状态已用于以下的系统配置设置：',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2485,6 +2486,16 @@ sub Data {
             '你可以注册您的电子邮件地址%s（在%s）来更改您的头像图像。 请注意，由于缓存，可能需要一些时间才能使你的新头像变得可用。',
         'Off' => '关',
         'End' => '结束',
+        'Left' => '左',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '此设置目前无法保存。',
         'This setting can currently not be saved' => '此设置目前无法保存',
         'Save setting' => '',
@@ -2845,7 +2856,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '归档',
         'This ticket is archived.' => '该工单已归档。',
-        'Note: Type is invalid!' => '注意：类型无效！',
+        'is invalid' => '',
         'Pending till' => '挂起至',
         'Locked' => '锁定状态',
         '%s Ticket(s)' => '%s个工单',
@@ -2944,6 +2955,9 @@ sub Data {
         'Welcome!' => '欢迎！',
         'Please click the button below to create your first ticket.' => '请点击下面的按钮创建第一个工单。',
         'Create your first ticket' => '创建第一个工单',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索条件',
@@ -5540,6 +5554,8 @@ sub Data {
             '定义本系统的标识符。每个工单编号和HTTP会话字符串均包含这个ID。这确保只有属于本系统的工单才会被跟进处理（在两套Znuny实例间通信时有用）。',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '定义本系统的正式域名。这个设置用于变量OTRS_CONFIG_FQDN，在所有的消息表单中使用，以创建系统内部到工单的链接。',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '使用公共模块 \'PublicSupportDataCollector\' （如用于Znuny守护进程的模块）定义用于搜集支持数据的HTTP主机名。',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5571,14 +5587,6 @@ sub Data {
             '服务人员界面显示在顶部的LOGO，图片的URL地址可以是皮肤图片目录的相对URL，也可以是远程WEB服务器的完整URL。',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '服务人员界面“默认”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '服务人员界面“修身版”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '服务人员界面“ivory”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '服务人员界面“象牙白-修身版”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '服务人员界面“High Contrast（高对比度）”皮肤显示在顶部的LOGO，查看“AgentLogo”以获得更多描述。',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '服务人员界面显示在登录窗口顶部的LOGO，图片的URL地址可以是皮肤图片目录的相对路径，也可以是远程WEB服务器的完整地址。',
         'Defines the URL base path of icons, CSS and Java Script.' => '定义图标、CSS和Javascript的URL基本路径。',
@@ -5603,6 +5611,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '在登录屏幕中禁用自动完成功能。',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '禁用HHTP头"X-Frame-Options: SAMEORIGIN" 以便允许Znuny可以包含在其它网址的IFrame框架中。禁用这个HTTP头可能有安全问题！仅在您知道您在干什么时才禁用它！',
@@ -5905,6 +5914,7 @@ sub Data {
             '使最终用户能够覆盖转换文件中定义的CSV文件分隔符。 请注意：将\'Active（激活）\'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用\'PreferenceGroup\'来控制这些设置应该显示在用户界面的哪个区域。',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '定义用户头像。 请注意：将\'Active（激活）\'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用\'PreferenceGroup\'来控制这些设置应该显示在用户界面的哪个区域。',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '定义客户门户的用户标识符。',
         'Activates support for customer and customer user groups.' => '激活对客户和客户用户组的支持。',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6115,10 +6125,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '指定服务人员显示姓和名的先后顺序。',
         'Default skin for the agent interface.' => '服务人员界面的默认皮肤。',
-        'Default skin for the agent interface (slim version).' => '服务人员界面的默认皮肤（修身版）。',
-        'Balanced white skin by Felix Niklas.' => 'Felix Niklas制作的平衡白皮肤。',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Felix Niklas制作的平衡白皮肤（修身版）。',
-        'High contrast skin for visually impaired users.' => '用于视力受损用户的高对比度皮肤。',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '服务人员界面皮肤的内部名称，请在Frontend::Agent::Loader::Agent::Skin中检查可用的皮肤。',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7851,6 +7857,7 @@ sub Data {
         'Group for default access.' => '具有默认权限的组。',
         'Group of all administrators.' => '所有管理员的组。',
         'Group for statistics access.' => '具有统计权限的组。',
+        'Group for time accounting web service access.' => '',
         'new' => 'new-新建',
         'All new state types (default: viewable).' => '所有新工单的状态类型（默认：可查看）。',
         'open' => 'open-处理中',
@@ -8387,8 +8394,6 @@ Thanks for your help!
         ' 2 minutes' => ' 2 分钟',
         ' 5 minutes' => ' 5 分钟',
         ' 7 minutes' => ' 7 分钟',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '为高级用户节约屏幕空间的“修身版”皮肤。',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '（登录用户名）名 姓',
         '(UserLogin) Lastname Firstname' => '（登录用户名）姓 名',
@@ -8494,6 +8499,7 @@ Thanks for your help!
         'Change the priority for this ticket' => '更改这个工单的优先级',
         'Change the responsible for this ticket' => '更改这个工单的负责人',
         'Change your avatar image.' => '更改你的头像图片。',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '更改你的密码及其它。',
         'Changed SLA to "%s" (%s).' => '已修改SLA为"%s" (%s)。',
         'Changed archive state to "%s".' => '已修改归档状态为"%s" 。',
@@ -8603,7 +8609,6 @@ Thanks for your help!
         'Danish' => '丹麦语',
         'Dashboard overview.' => '仪表板概览。',
         'Date / Time' => '日期 / 时间',
-        'Default (Slim)' => '默认（修身版）',
         'Default agent name' => '默认的服务人员姓名',
         'Default value for NameX' => 'NameX的默认值',
         'Define the queue comment 2.' => '定义队列注释2。',
@@ -8706,7 +8711,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => '图形：堆叠面积图',
         'Greek' => '希腊语',
         'Hebrew' => '希伯来语',
-        'High Contrast' => '高对比度',
         'Hindi' => '印度语',
         'Hungarian' => '匈牙利语',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8727,8 +8731,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '无法检查PGP签名，这可能是由于缺少公钥或不支持的算法造成的。',
         'Italian' => '意大利语',
-        'Ivory' => '象牙白',
-        'Ivory (Slim)' => '象牙白（修身版）',
         'Japanese' => '日语',
         'Korean' => '韩语',
         'Language' => '语言',
@@ -8745,7 +8747,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => '姓, 名（登录用户名）',
         'LastnameFirstname' => '姓名',
         'Latvian' => '拉脱维亚语',
-        'Left' => '左',
         'Link Object' => '链接对象',
         'Link Object.' => '链接对象。',
         'Link agents to groups.' => '链接服务人员到组。',
@@ -8859,6 +8860,7 @@ Thanks for your help!
         'Plugin search' => '搜索插件',
         'Plugin search module for autocomplete.' => '用于自动完成的搜索插件模块。',
         'Polish' => '波兰语',
+        'Popup Profile' => '',
         'Portuguese' => '葡萄牙语',
         'Portuguese (Brasil)' => '葡萄牙语（巴西）',
         'PostMaster Filters' => '邮箱管理员过滤器',
@@ -9196,6 +9198,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

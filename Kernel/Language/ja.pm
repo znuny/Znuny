@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.688977028590316;
+    $Self->{Completeness}        = 0.687758136461259;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -714,9 +714,9 @@ sub Data {
             '',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '',
-        'Do you really want to delete this event trigger?' => 'このイベントトリガーを本当に削除しますか？',
         'Add Event Trigger' => 'イベントトリガーを追加',
         'To add a new event select the event object and event name' => '新しいイベントを追加するには、イベントオブジェクトとイベント名を選択します。',
+        'Do you really want to delete this event trigger?' => 'このイベントトリガーを本当に削除しますか？',
         'Select Tickets' => 'チケットを選択',
         '(e. g. 10*5155 or 105658*)' => '(例 10*5144 または 105658*)',
         '(e. g. 234321)' => '(例 234321)',
@@ -2019,6 +2019,7 @@ sub Data {
         'State type' => 'ステータスのタイプ',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'このステータスは、次の設定で使用されます。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -2483,6 +2484,16 @@ sub Data {
             'アバターイメージを変更するには、%sにあなたのメールアドレス(%s)を登録して下さい。キャッシュの影響により新しいアバターが利用可能になるまでには時間がかかることがあります。',
         'Off' => 'オフ',
         'End' => '終了',
+        'Left' => 'のこり',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => 'この設定は現在保存できません。',
         'Save setting' => '',
@@ -2843,7 +2854,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'アーカイブ',
         'This ticket is archived.' => 'このチケットはアーカイブされています。',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => '保留時間',
         'Locked' => 'ロック状態',
         '%s Ticket(s)' => '%sチケット',
@@ -2942,6 +2953,9 @@ sub Data {
         'Welcome!' => 'ようこそ！',
         'Please click the button below to create your first ticket.' => 'チケットを作成するために下のボタンをクリックしてください。',
         'Create your first ticket' => 'チケット作成',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'プロファイル',
@@ -5539,6 +5553,8 @@ sub Data {
             'システム識別子を定義します。すべてのチケット番号とHTTPセッションの文字列は、このIDが含まれています。これはをシステムに属している唯一のチケットがフォローアップとして処理されることを確実にします。（2つのZnunyのインスタンス間で通信する場合に便利です）',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'フルに認定されたシステムのドメイン名を定義します。この設定は変数OTRS_CONFIG_FQDNとして使用され、アプリケーションによって使用されるメッセージングの全てのフォームに存在し、ご利用のシステム内のチケットへのリンクを作成することとなります。',
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
+            '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5570,14 +5586,6 @@ sub Data {
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'スキン"デフォルト"時に担当者インターフェイスで表示されるロゴ。詳細は"AgentLogo"を参照してください。',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'スキン"slim"時に担当者インターフェイスで表示されるロゴ。詳細は"AgentLogo"を参照してください。',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'スキン"ivory"時に担当者インターフェイスで表示されるロゴ。詳細は"AgentLogo"を参照してください。',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'スキン"ivory-slim"時に担当者インターフェイスで表示されるロゴ。詳細は"AgentLogo"を参照してください。',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'アイコン、CSS、Java ScriptのURLベースのパスを定義します。',
@@ -5602,6 +5610,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'HTTPヘッダ"X-Frame-Options: SAMEORIGIN”を無効化し、Znunyを外部のWebサイトの一部としてiframeに埋め込むことを許可します。 このHTTPヘッダを無効にすることにより、セキュリティ上の問題が生じることがあります! 変更内容をよく理解している場合に限り無効化を実行してください!',
@@ -5904,6 +5913,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '顧客パネルのためのユーザ識別子を定義します。',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6114,10 +6124,6 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '担当者の姓と名を表示する順序を指定してください。',
         'Default skin for the agent interface.' => '担当者インターフェースのデフォルトスキン',
-        'Default skin for the agent interface (slim version).' => '担当者インターフェースのデフォルトスキン (スリムバージョン)',
-        'Balanced white skin by Felix Niklas.' => 'Felix Niklasによるバランスト・ホワイト・スキンです。',
-        'Balanced white skin by Felix Niklas (slim version).' => '',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '担当者インタフェースで使用されるべき、担当者スキンのインターナル・ネームです。Frontend::Agent::Skinsにおける利用可能なスキンをチェックしてください。',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7859,6 +7865,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Group for default access.' => '一般ユーザ用のデフォルトグループ',
         'Group of all administrators.' => '管理者用グループ',
         'Group for statistics access.' => 'レポート・レポート操作用のグループ',
+        'Group for time accounting web service access.' => '',
         'new' => '新規',
         'All new state types (default: viewable).' => '全ての新規ステータス・タイプ（デフォルト：表示可能）',
         'open' => '対応中',
@@ -8394,8 +8401,6 @@ Thanks for your help!
         ' 2 minutes' => ' 2 分',
         ' 5 minutes' => ' 5 分',
         ' 7 minutes' => ' 7 分',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(ユーザー名) 姓 名 ',
         '(UserLogin) Lastname Firstname' => '',
@@ -8501,6 +8506,7 @@ Thanks for your help!
         'Change the priority for this ticket' => 'このチケットの優先度を変更',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => 'あなたのアバターイメージを変更して下さい。',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'パスワードなどを変更してください。',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8610,7 +8616,6 @@ Thanks for your help!
         'Danish' => 'デンマーク語',
         'Dashboard overview.' => 'ダッシュボード一覧',
         'Date / Time' => '日時',
-        'Default (Slim)' => 'デフォルト (Slim)',
         'Default agent name' => '',
         'Default value for NameX' => 'NameX用のデフォルト値',
         'Define the queue comment 2.' => '',
@@ -8713,7 +8718,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => 'グラフ:積み上げ面グラフ',
         'Greek' => 'ギリシャ語',
         'Hebrew' => 'ヘブライ語',
-        'High Contrast' => '',
         'Hindi' => 'ヒンディー語',
         'Hungarian' => 'ハンガリー語',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8734,8 +8738,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'イタリア語',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => '日本語',
         'Korean' => '',
         'Language' => '言語',
@@ -8752,7 +8754,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => '名, 姓 (ユーザー名)',
         'LastnameFirstname' => '',
         'Latvian' => 'ラトビア語',
-        'Left' => 'のこり',
         'Link Object' => '連結対象',
         'Link Object.' => 'リンク・オブジェクト',
         'Link agents to groups.' => '担当者をグループへ連結',
@@ -8867,6 +8868,7 @@ Thanks for your help!
         'Plugin search' => 'プラグイン検索',
         'Plugin search module for autocomplete.' => 'オートコンプリート用のプラグイン検索モジュール',
         'Polish' => 'ポーランド語',
+        'Popup Profile' => '',
         'Portuguese' => 'ポルトガル語',
         'Portuguese (Brasil)' => 'ポルトガル語（ブラジル）',
         'PostMaster Filters' => 'ポストマスター・フィルター',
@@ -9204,6 +9206,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',
