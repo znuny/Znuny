@@ -30,7 +30,7 @@ sub Run {
     my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
     my $Output;
-    open( my $FH, "-|", "perl $Home/bin/otrs.CheckModules.pl nocolors --all" );
+    open( my $FH, "-|", "perl $Home/bin/znuny.CheckModules.pl nocolors --all" );
 
     while (<$FH>) {
         $Output .= $_;

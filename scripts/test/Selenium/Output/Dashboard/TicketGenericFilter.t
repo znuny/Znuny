@@ -18,9 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $CacheObject             = $Kernel::OM->Get('Kernel::System::Cache');
+        my $UserObject              = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
 
         # disable dashboard widget MyLastChangedTickets for this TicketGenericFilter test.
         $HelperObject->DisableSysConfigs(
@@ -35,7 +39,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -70,7 +74,7 @@ $Selenium->RunTest(
         );
         my $Success;
         if ( $DynamicField->{ID} ) {
-            my $ValuesDeleteSuccess = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->AllValuesDelete(
+            my $ValuesDeleteSuccess = $DynamicFieldValueObject->AllValuesDelete(
                 FieldID => $DynamicField->{ID},
                 UserID  => 1,
             );
@@ -128,7 +132,7 @@ $Selenium->RunTest(
 
             # Set dynamic field value for the ticket
             if ( defined $Test->{DynamicFieldValue} ) {
-                $Success = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueSet(
+                $Success = $DynamicFieldValueObject->ValueSet(
                     FieldID    => $DynamicFieldID,
                     ObjectType => 'Ticket',
                     ObjectID   => $TicketID,
@@ -161,8 +165,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-        my $ScriptAlias  = $ConfigObject->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Turn on the 'Customer User ID' column by default.
         my $Config = $ConfigObject->Get('DashboardBackend')->{'0120-TicketNew'};
@@ -174,7 +177,7 @@ $Selenium->RunTest(
         );
 
         # Refresh dashboard screen and clean it's cache.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Dashboard',
         );
 
@@ -207,7 +210,15 @@ $Selenium->RunTest(
 
             # Select the first test 'Customer User ID' as filter for TicketNew generic dashboard overview.
             my $ParentElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
-            $Selenium->find_child_element( $ParentElement, "./input" )->send_keys( $Tickets[0]->{CustomerUser} );
+            $ParentElement->click();
+
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $(".InputField_Search").length'
+            );
+
+            $Selenium->find_child_element( $ParentElement, '.InputField_Search', 'css' )
+                ->send_keys( $Tickets[0]->{CustomerUser} );
             sleep 1;
 
             # Wait for AJAX to finish.
@@ -268,8 +279,17 @@ $Selenium->RunTest(
             );
 
             # Select test 'Customer User ID' as filter for TicketNew generic dashboard overview.
-            $ParentElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
-            $Selenium->find_child_element( $ParentElement, "./input" )->send_keys( $Tickets[1]->{CustomerUser} );
+            $ParentElement = $Selenium->find_element( 'div.ColumnSettingsBox', 'css' );
+            $ParentElement->click();
+
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $(".InputField_Search").length'
+            );
+
+            $Selenium->find_child_element( $ParentElement, '.InputField_Search', 'css' )
+                ->send_keys( $Tickets[1]->{CustomerUser} );
+
             sleep 1;
 
             # Wait for AJAX to finish.
@@ -335,7 +355,7 @@ $Selenium->RunTest(
         );
 
         # Refresh dashboard screen and clean it's cache.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Dashboard',
         );
 
@@ -368,7 +388,15 @@ $Selenium->RunTest(
 
             # Select the third test Customer ID as filter for TicketNew generic dashboard overview.
             my $ParentElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
-            $Selenium->find_child_element( $ParentElement, "./input" )->send_keys( $Tickets[2]->{CustomerID} );
+            $ParentElement->click();
+
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $(".InputField_Search").length'
+            );
+
+            $Selenium->find_child_element( $ParentElement, '.InputField_Search', 'css' )
+                ->send_keys( $Tickets[2]->{CustomerID} );
             sleep 1;
 
             # Wait for AJAX to finish.
@@ -423,12 +451,16 @@ $Selenium->RunTest(
 
             # Verify if CustomerID containing special characters is filtered correctly. See bug#14982.
             $Selenium->find_element("//a[contains(\@title, \'Customer ID\' )]")->click();
+
             $Selenium->WaitFor(
                 JavaScript =>
-                    "return typeof(\$) === 'function' && \$('.CustomerIDAutoComplete:visible').length;"
+                    'return typeof($) === "function" && $(".InputField_Search").length'
             );
 
-            $Selenium->find_element( ".CustomerIDAutoComplete", 'css' )->send_keys( $Tickets[3]->{CustomerID} );
+            $ParentElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
+            $Selenium->find_child_element( $ParentElement, '.InputField_Search', 'css' )
+                ->send_keys( $Tickets[3]->{CustomerID} );
+            sleep 1;
 
             # Wait for AJAX to finish.
             $Selenium->WaitFor(
@@ -483,7 +515,7 @@ $Selenium->RunTest(
         );
 
         # Refresh dashboard screen and clean it's cache.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Dashboard',
         );
 
@@ -507,8 +539,13 @@ $Selenium->RunTest(
         }
         else {
 
-            # Click on column setting filter for the dynamic field in TicketNew generic dashboard overview.
-            $Selenium->find_element("//a[contains(\@title, \'$DynamicFieldName\' )]")->click();
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && $("a[title=\"' . $DynamicFieldName . '\"]").length'
+            );
+
+            $Selenium->find_element( "a[title*=\"$DynamicFieldName\"].ColumnSettingsTrigger", 'css' )->click();
+            my $ColumnSettingsBoxElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
+            $ColumnSettingsBoxElement->click();
 
             # Wait for option to exist
             $Selenium->WaitFor(
@@ -557,7 +594,13 @@ $Selenium->RunTest(
             );
 
             # Verify if dynamic field values containing tree seperators (::) are filtered correctly.
-            $Selenium->find_element("//a[contains(\@title, \'$DynamicFieldName\' )]")->click();
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && $("a[title=\"' . $DynamicFieldName . '\"]").length'
+            );
+            $Selenium->find_element( "a[title*=\"$DynamicFieldName\"].ColumnSettingsTrigger", 'css' )->click();
+
+            $ColumnSettingsBoxElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
+            $ColumnSettingsBoxElement->click();
 
             # Wait for option to exist
             $Selenium->WaitFor(
@@ -606,7 +649,13 @@ $Selenium->RunTest(
             );
 
             # Verify if dynamic field values containing special characters is filtered correctly. See bug#14497.
-            $Selenium->find_element("//a[contains(\@title, \'$DynamicFieldName\' )]")->click();
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && $("a[title=\"' . $DynamicFieldName . '\"]").length'
+            );
+            $Selenium->find_element( "a[title*=\"$DynamicFieldName\"].ColumnSettingsTrigger", 'css' )->click();
+
+            $ColumnSettingsBoxElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
+            $ColumnSettingsBoxElement->click();
 
             # Wait for option to exist
             $Selenium->WaitFor(
@@ -687,7 +736,7 @@ $Selenium->RunTest(
         );
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     }

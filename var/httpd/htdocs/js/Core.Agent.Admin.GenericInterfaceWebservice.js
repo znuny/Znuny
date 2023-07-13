@@ -181,6 +181,7 @@ Core.Agent.Admin.GenericInterfaceWebservice = (function (TargetNS) {
             [
                 {
                      Label: Core.Language.Translate('Cancel'),
+                     Type: 'Secondary',
                      Function: function () {
                          Core.UI.Dialog.CloseDialog($('#DeleteDialog'));
                      }
@@ -188,6 +189,7 @@ Core.Agent.Admin.GenericInterfaceWebservice = (function (TargetNS) {
 
                 {
                      Label: Core.Language.Translate('Delete'),
+                     Type: 'Warning',
                      Function: function () {
                          var Data = {
                              Action: 'AdminGenericInterfaceWebservice',
@@ -374,7 +376,7 @@ Core.Agent.Admin.GenericInterfaceWebservice = (function (TargetNS) {
             [
                {
                    Label: Core.Language.Translate('Cancel'),
-                   Class: 'Primary',
+                   Type: 'Secondary',
                    Function: function () {
                        Core.UI.Dialog.CloseDialog($('#Delete' + ActionType + 'Dialog'));
                    }

@@ -1627,9 +1627,8 @@ sub Run {
                     DefaultValue =>
                         $Config->{Defaults}->{DynamicField}
                         ->{ $DynamicFieldConfig->{Name} },
-                    LayoutObject           => $LayoutObject,
-                    ConfirmationCheckboxes => 1,
-                    Type                   => $Preference->{Type},
+                    LayoutObject => $LayoutObject,
+                    Type         => $Preference->{Type},
                     );
             }
         }

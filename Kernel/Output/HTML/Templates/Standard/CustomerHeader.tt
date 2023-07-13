@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+
 [%- INCLUDE "HTTPHeaders.tt" -%]
 
 <!DOCTYPE html>
@@ -15,15 +16,49 @@
 <body class="NoJavaScript [% Data.BodyClass | html %]">
 <!-- start CI layout -->
     <div id="Header">
+        <div class="info-wrapper">
 [% RenderBlockStart("HeaderLogo") %]
-        <div id="Logo"></div>
+            <a id="Logo" href="[% Env('Baselink') %]"></a>
 [% RenderBlockEnd("HeaderLogo") %]
-        <h1 class="CompanyName">
-            <a href="#">[% Config("CustomerHeadline") %]</a>
-        </h1>
+            <h1 class="CompanyName">
+                <a href="[% Env('Baselink') %]">[% Config("CustomerHeadline") | html%]</a>
+            </h1>
 [% RenderBlockStart("DebugRTLButton") %]
-        <button onclick="Core.Debug.SimulateRTLPage();" type="button">Simulate RTL</button>
+                <button onclick="Core.Debug.SimulateRTLPage();" type="button">Simulate RTL</button>
 [% RenderBlockEnd("DebugRTLButton") %]
+        </div>
+
+[% RenderBlockStart("Actions") %]
+        <div id="HeaderToolBar" class="Actions">
+            <div class="logo-navbar-mobile"></div>
+            <div class="UserAvatar">
+                <a href="#">
+                    <img src="//www.gravatar.com/avatar/98c188b4d137054757d5659a26994c81?s=100&amp;d=mp">
+                </a>
+                <div class="UserAvatar_submenu">
+                    <ul>
+                        [% RenderBlockStart("Preferences") %]
+                        <li class="[% Data.Class | html %]">
+                            <label>Account</label>
+                            <a href="[% Env('Baselink') %]Action=CustomerPreferences" title="[% Translate('Edit personal preferences') | html %]">
+                                <i class="fa fa-gear"></i>
+                                <span>[% Translate("Personal preferences") | html %]</span>
+                            </a>
+                        </li>
+[% RenderBlockEnd("Preferences") %]
+[% RenderBlockStart("Logout") %]
+                        <li class="Last">
+                            <a id="LogoutButton" href="[% Env('Baselink') %]Action=Logout">
+                                <i class="fa fa-sign-out"></i>
+                                <span>[% Translate("Logout") | html %]</span>
+                            </a>
+                        </li>
+[% RenderBlockEnd("Logout") %]
+                    </ul>
+                </div>
+            </div>
+        </div>
+[% RenderBlockEnd("Actions") %]
     </div>
 <!-- end CI layout -->
 <!-- end header -->

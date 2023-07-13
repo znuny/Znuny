@@ -32,13 +32,6 @@ if ( $NumberOfPackagesInstalled > 8 ) {
     return 1;
 }
 
-# Make sure to enable cloud services.
-$HelperObject->ConfigSettingChange(
-    Valid => 1,
-    Key   => 'CloudServices::Disabled',
-    Value => 0,
-);
-
 my $RandomID = $HelperObject->GetRandomID();
 
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
@@ -48,16 +41,11 @@ my $CheckBreadcrumb = sub {
     my %Param = @_;
 
     my $BreadcrumbText = $Param{BreadcrumbText} || '';
-    my $Count          = 1;
-
     for my $BreadcrumbText ( 'Package Manager', "$BreadcrumbText Test" ) {
-        $Self->Is(
-            $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-            $BreadcrumbText,
-            "Breadcrumb text '$BreadcrumbText' is found on screen"
+        $Selenium->ElementExists(
+            Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+            SelectorType => 'css',
         );
-
-        $Count++;
     }
 };
 
@@ -68,7 +56,7 @@ my $NavigateToAdminPackageManager = sub {
 
     # Go back to overview.
     # Navigate to AdminPackageManager screen.
-    my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+    my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
     $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminPackageManager");
     $Selenium->WaitFor(
         Time => 120,
@@ -151,9 +139,9 @@ $Selenium->RunTest(
         $Element->is_displayed();
 
         # Install test package.
-        my $Location = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackage.opm';
-
-        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
+        my $Location  = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackage.opm';
+        my $LocalFile = $Selenium->upload_file($Location);
+        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($LocalFile);
 
         $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
         $Selenium->find_element("//button[contains(.,'Install Package')]")->click();
@@ -162,7 +150,7 @@ $Selenium->RunTest(
             JavaScript => 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
         );
 
-        $Selenium->find_element( ".Primary.CallForAction", 'css' )->VerifiedClick();
+        $Selenium->find_element("//button[contains(.,'Continue')]")->VerifiedClick();
 
         $Selenium->WaitFor(
             Time       => 120,
@@ -214,8 +202,9 @@ $Selenium->RunTest(
         $NavigateToAdminPackageManager->();
 
         # Try to install incompatible test package.
-        $Location = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackageIncompatible.opm';
-        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
+        $Location  = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackageIncompatible.opm';
+        $LocalFile = $Selenium->upload_file($Location);
+        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($LocalFile);
 
         $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
 
@@ -257,7 +246,7 @@ $Selenium->RunTest(
         # Check that there is a notification about no packages.
         my $Notification = 'No packages found in selected repository. Please check log for more info!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.MessageBox.Warning p:contains($Notification)').length"),
             "$Notification - notification is found."
         );
     }

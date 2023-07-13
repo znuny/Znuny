@@ -1232,7 +1232,7 @@ Returns Arrayref of Hashes.
             AccountType     => '...',
             AccountID       => '...',
         },
-        {...},
+        # ...
     ];
 
 =cut
@@ -1382,7 +1382,7 @@ Returns:
             TargetObjectType => '...',
             TargetObjectID   => '...',
         },
-        ...
+        # ...
     ];
 
 =cut

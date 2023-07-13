@@ -8,352 +8,506 @@
 # --
 
 [% RenderBlockStart("SearchAJAX") %]
-<div class="InnerContent">
-    <form action="[% Env("CGIHandle") %]" method="post" id="SearchForm" class="Validate">
+<div class="InnerContent main-search-component">
+    <form action="[% Env("CGIHandle") %]" method="post" id="SearchForm" class="Validate search-ticket">
         <input type="hidden" name="Action" value="[% Env("Action") %]" id="SearchAction"/>
         <input type="hidden" name="Subaction" value="Search"/>
         <input type="hidden" name="EmptySearch" value="[% Data.EmptySearch | html %]" id="EmptySearch"/>
         <input type="hidden" name="ShownAttributes" value="" id="ShownAttributes">
-        <fieldset class="TableLike">
-            <legend><span>[% Translate("Templates") | html %]</span></legend>
-            <label for="SearchProfile">[% Translate("Search template") | html %]:</label>
-            <div class="Field">
-                [% Data.ProfilesStrg %]
-                <div id="SearchProfileAddBlock">
-                    <input type="text" name="Name" id="SearchProfileAddName"/>
-                    <button class="CallForAction" type="button" title="[% Translate("Create Template") | html %]" id="SearchProfileAddAction"><span>[% Translate("Add") | html %]</span></button>
+        <div class="top-section">
+            <fieldset class="TableLike">
+                <legend><span>[% Translate("Templates") | html %]</span></legend>
+                <label for="SearchProfile">[% Translate("Search template") | html %]</label>
+                <div class="Field">
+                    [% Data.ProfilesStrg %]
+                    <div id="SearchProfileAddBlock" class="new-tpl-input">
+                        <input type="text" name="Name" id="SearchProfileAddName"/>
+                        <div class="create-tpm-btn">
+                            <button class="btn-main btn-ghost-sm" type="button" title="[% Translate("Create Template") | html %]" id="SearchProfileAddAction">
+                                <span>[% Translate("Add") | html %]</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="Field">
-                <button class="CallForAction" id="SearchProfileNew" value="[% Translate("Create New") | html %]"><span>[% Translate("Create New") | html %]</span></button>
-                <button id="SearchProfileDelete" class="Hidden CallForAction" value="[% Translate("Delete") | html %]"><span>[% Translate("Delete") | html %]</span></button>
-                <button id="SearchProfileAsLink" class="Hidden CallForAction" value="[% Translate("Profile link") | html %]"><span>[% Translate("Profile link") | html %]</span></button>
-            </div>
-            <div class="Clear"></div>
-            <label>[% Translate("Save changes in template") | html %]:</label>
-            <div class="Field">
-                <input type="checkbox" name="SaveProfile" id="SaveProfile" value="1"/>
-            </div>
-        </fieldset>
-        <fieldset class="TableLike" id="SearchInsert">
-            <legend><span>[% Translate("Filters in use") | html %]</span></legend>
-        </fieldset>
-        <fieldset class="TableLike">
-            <legend><span>[% Translate("Additional filters") | html %]</span></legend>
-            <label>[% Translate("Add another attribute") | html %]:</label>
-            <div class="Field">
-                [% Data.AttributesStrg %]
-            </div>
-            <div class="Clear"></div>
-            <label>[% Translate("Output") | html %]:</label>
-            <div class="Field">
-                [% Data.ResultFormStrg %]
-            </div>
-        </fieldset>
+                <div class="Field create-tpm-btn">
+                    <button id="SearchProfileNew" class="btn-main btn-ghost-sm" value="[% Translate("Create New") | html %]">
+                        <span>[% Translate("Create New") | html %]</span>
+                    </button>
+                    <button id="SearchProfileDelete" class="btn-main Hidden btn-ghost-sm" value="[% Translate("Delete") | html %]">
+                        <span>[% Translate("Delete") | html %]</span>
+                    </button>
+                    <button id="SearchProfileAsLink" class="btn-main Hidden btn-ghost-sm" value="[% Translate("Profile link") | html %]">
+                        <span>[% Translate("Profile link") | html %]</span>
+                    </button>
+                </div>
+
+                <label for="SaveProfile">[% Translate("Save changes in template") | html %]</label>
+                <div class="Field align-item-left">
+                    <input type="checkbox" name="SaveProfile" id="SaveProfile" value="1"/>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="bottom-section">
+            <fieldset class="TableLike" id="SearchInsert">
+                <legend><span>[% Translate("Filters in use") | html %]</span></legend>
+            </fieldset>
+
+            <fieldset class="TableLike">
+                <legend><span>[% Translate("Additional filters") | html %]</span></legend>
+                <div class="field-wrapper">
+                    <label>[% Translate("Add another attribute") | html %]</label>
+                    <div class="Field">
+                        [% Data.AttributesStrg %]
+                    </div>
+                </div>
+                <div class="field-wrapper">
+                    <label>[% Translate("Output") | html %]</label>
+                    <div class="Field">
+                        [% Data.ResultFormStrg %]
+                    </div>
+                </div>
+            </fieldset>
+        </div>
     </form>
 
 
     <fieldset class="TableLike Hidden" id="SearchAttributesHidden">
-        <div class="Clear"></div>
-        <label for="Fulltext" id="LabelFulltext">[% Translate("Fulltext") | html %]:</label>
-        <div class="Field">
-            <input type="text" name="Fulltext" value="[% Data.Fulltext | html %]" class="W50pc" />
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="Fulltext" id="LabelFulltext">[% Translate("Fulltext") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="text" name="Fulltext" value="[% Data.Fulltext | html %]" class="W50pc" />
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]">
+                    <i class="fa fa-times"></i>
+                    <span class="InvisibleText">[% Translate("Remove") | html %]</span>
+                </a>
+            </div>
         </div>
-        <div class="Clear"></div>
-        <label for="TicketNumber" id="LabelTicketNumber">[% Config("Ticket::Hook") %]:</label>
-        <div class="Field">
-            <input type="text" name="TicketNumber" placeholder="[% Translate("(e. g. 10*5155 or 105658*)") | html %]" value="[% Data.TicketNumber | html %]" class="W50pc"/>
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketNumber" id="LabelTicketNumber">[% Config("Ticket::Hook") %]</label>
+            </div>
+            <div class="Field">
+                <input type="text" name="TicketNumber" placeholder="[% Translate("(e. g. 10*5155 or 105658*)") | html %]" value="[% Data.TicketNumber | html %]" class="W50pc"/>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
-        <label for="Title" id="LabelTitle">[% Translate("Title") | html %]:</label>
-        <div class="Field">
-            <input type="text" name="Title" value="[% Data.Title | html %]" class="W50pc"/>
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="Title" id="LabelTitle">[% Translate("Title") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="text" name="Title" value="[% Data.Title | html %]" class="W50pc"/>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
-        <label for="CustomerID" id="LabelCustomerID">[% Translate("Customer ID (complex search)") | html %]:</label>
-        <div class="Field">
-            <input type="text" name="CustomerID" placeholder="[% Translate("(e. g. 234*)") | html %]" value="[% Data.CustomerID | html %]" class="W50pc"/>
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="CustomerID" id="LabelCustomerID">[% Translate("Customer ID (complex search)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="text" name="CustomerID" placeholder="[% Translate("(e. g. 234*)") | html %]" value="[% Data.CustomerID | html %]" class="W50pc"/>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
-        <label for="CustomerIDRaw" id="LabelCustomerIDRaw">[% Translate("Customer ID (exact match)") | html %]:</label>
-        <div class="Field">
-            <input type="text" id="CustomerIDRaw" name="CustomerIDRaw" placeholder="[% Translate("(e. g. 234321)") | html %]" value="[% Data.CustomerIDRaw | html %]" class="W50pc CustomerAutoCompleteSimple" data-customer-search-type="CustomerID"/>
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="CustomerIDRaw" id="LabelCustomerIDRaw">[% Translate("Customer ID (exact match)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="text" id="CustomerIDRaw" name="CustomerIDRaw" placeholder="[% Translate("(e. g. 234321)") | html %]" value="[% Data.CustomerIDRaw | html %]" class="W50pc CustomerAutoCompleteSimple" data-customer-search-type="CustomerID"/>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
-        <label for="CustomerUserLogin" id="LabelCustomerUserLogin">[% Translate("Assigned to Customer User Login (complex search)") | html %]:</label>
-        <div class="Field">
-            <input type="text" name="CustomerUserLogin" placeholder="[% Translate("(e. g. U51*)") | html %]" value="[% Data.CustomerUserLogin | html %]" class="W50pc"/>
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="CustomerUserLogin" id="LabelCustomerUserLogin">[% Translate("Assigned to Customer User Login (complex search)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="text" name="CustomerUserLogin" placeholder="[% Translate("(e. g. U51*)") | html %]" value="[% Data.CustomerUserLogin | html %]" class="W50pc"/>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
-        <label for="CustomerUserLoginRaw" id="LabelCustomerUserLoginRaw">[% Translate("Assigned to Customer User Login (exact match)") | html %]:</label>
-        <div class="Field">
-            <input type="text" id="CustomerUserLoginRaw" name="CustomerUserLoginRaw" placeholder="[% Translate("(e. g. U5150)") | html %]" value="[% Data.CustomerUserLoginRaw | html %]" class="W50pc CustomerAutoCompleteSimple" data-customer-search-type="CustomerUser"/>
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="CustomerUserLoginRaw" id="LabelCustomerUserLoginRaw">[% Translate("Assigned to Customer User Login (exact match)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="text" id="CustomerUserLoginRaw" name="CustomerUserLoginRaw" placeholder="[% Translate("(e. g. U5150)") | html %]" value="[% Data.CustomerUserLoginRaw | html %]" class="W50pc CustomerAutoCompleteSimple" data-customer-search-type="CustomerUser"/>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
-        <label for="CustomerUserID" id="LabelCustomerUserID">[% Translate("Accessible to Customer User Login (exact match)") | html %]:</label>
-        <div class="Field">
-            <input type="text" id="CustomerUserID" name="CustomerUserID" placeholder="[% Translate("(e. g. U5150)") | html %]" value="[% Data.CustomerUserID | html %]" class="W50pc CustomerAutoCompleteSimple" data-customer-search-type="CustomerUser"/>
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="CustomerUserID" id="LabelCustomerUserID">[% Translate("Accessible to Customer User Login (exact match)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="text" id="CustomerUserID" name="CustomerUserID" placeholder="[% Translate("(e. g. U5150)") | html %]" value="[% Data.CustomerUserID | html %]" class="W50pc CustomerAutoCompleteSimple" data-customer-search-type="CustomerUser"/>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
-        <label for="TypeIDs" id="LabelTypeIDs">[% Translate("Type") | html %]:</label>
-        <div class="Field">
-            [% Data.TypesStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TypeIDs" id="LabelTypeIDs">[% Translate("Type") | html %]</label>
+            </div>
+            <div class="Field">
+                [% Data.TypesStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
-
 [% RenderBlockStart("SearchableArticleField") %]
-        <label for="[% Data.ArticleFieldKey | html %]" id="Label[% Data.ArticleFieldKey | html %]">[% Translate(Data.ArticleFieldLabel) | html %]:</label>
-        <div class="Field">
-            <input type="text" name="[% Data.ArticleFieldKey | html %]" value="[% Data.ArticleFieldValue | html %]" class="W50pc"/>
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="[% Data.ArticleFieldKey | html %]" id="Label[% Data.ArticleFieldKey | html %]">[% Translate(Data.ArticleFieldLabel) | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="text" name="[% Data.ArticleFieldKey | html %]" value="[% Data.ArticleFieldValue | html %]" class="W50pc"/>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
 [% RenderBlockEnd("SearchableArticleField") %]
-
 [% RenderBlockStart("DynamicField") %]
-        [% Data.Label %]
-        <div class="Field">
-            [% Data.Field %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            [% Data.Label %]
+            <div class="Field">
+                [% Data.Field %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
 [% RenderBlockEnd("DynamicField") %]
-
-        <label for="ServiceIDs" id="LabelServiceIDs">[% Translate("Service") | html %]:</label>
-        <div class="Field">
-            [% Data.ServicesStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="SLAIDs" id="LabelSLAIDs">[% Translate("Service Level Agreement") | html %]:</label>
-        <div class="Field">
-            [% Data.SLAsStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="PriorityIDs" id="LabelPriorityIDs">[% Translate("Priority") | html %]:</label>
-        <div class="Field">
-            [% Data.PrioritiesStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="StateIDs" id="LabelStateIDs">[% Translate("State") | html %]:</label>
-        <div class="Field">
-            [% Data.StatesStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="QueueIDs" id="LabelQueueIDs">[% Translate("Queue") | html %]:</label>
-        <div class="Field">
-            [% Data.QueuesStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="OwnerIDs" id="LabelOwnerIDs">[% Translate("Agent") | html %]/[% Translate("Owner") | html %]:</label>
-        <div class="Field">
-            [% Data.UserStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="ResponsibleIDs" id="LabelResponsibleIDs">[% Translate("Agent") | html %]/[% Translate("Responsible") | html %]:</label>
-        <div class="Field">
-            [% Data.ResponsibleStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="CreatedQueueIDs" id="LabelCreatedQueueIDs">[% Translate("Created in Queue") | html %]:</label>
-        <div class="Field">
-            [% Data.CreatedQueuesStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="CreatedUserIDs" id="LabelCreatedUserIDs">[% Translate("Created by") | html %] [% Translate("Agent") | html %]/[% Translate("Owner") | html %]:</label>
-        <div class="Field">
-            [% Data.CreatedUserStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="LockIDs" id="LabelLockIDs">[% Translate("Lock state") | html %]:</label>
-        <div class="Field">
-            [% Data.LocksStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="WatchUserIDs" id="LabelWatchUserIDs">[% Translate("Watcher") | html %]:</label>
-        <div class="Field">
-            [% Data.WatchUserStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="ArticleCreateTimePoint" id="LabelArticleCreateTimePoint">[% Translate("Article Create Time (before/after)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="ArticleTimeSearchType" value="TimePoint" [% Data.item("ArticleTimeSearchType::TimePoint") %]/>
-            [% Data.ArticleCreateTimePointStart %] [% Data.ArticleCreateTimePoint %] [% Data.ArticleCreateTimePointFormat %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="ArticleCreateTimeSlot" id="LabelArticleCreateTimeSlot">[% Translate("Article Create Time (between)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="ArticleTimeSearchType" value="TimeSlot" [% Data.item("ArticleTimeSearchType::TimeSlot") %]/>
-            [% Data.ArticleCreateTimeStart %] [% Translate("and") | html %] [% Data.ArticleCreateTimeStop %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-            <div id="ArticleCreateTimeStartDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value before end date.") | html %]</p>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="ServiceIDs" id="LabelServiceIDs">[% Translate("Service") | html %]</label>
             </div>
-            <div id="ArticleCreateTimeStopDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value after start date.") | html %]</p>
+            <div class="Field">
+                [% Data.ServicesStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
             </div>
         </div>
-        <div class="Clear"></div>
-        <label for="TicketCreateTimePoint" id="LabelTicketCreateTimePoint">[% Translate("Ticket Create Time (before/after)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="TimeSearchType" value="TimePoint" [% Data.item("TimeSearchType::TimePoint") %]/>
-            [% Data.TicketCreateTimePointStart %] [% Data.TicketCreateTimePoint %] [% Data.TicketCreateTimePointFormat %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="TicketCreateTimeSlot" id="LabelTicketCreateTimeSlot">[% Translate("Ticket Create Time (between)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="TimeSearchType" value="TimeSlot" [% Data.item("TimeSearchType::TimeSlot") %]/>
-            [% Data.TicketCreateTimeStart %] [% Translate("and") | html %] [% Data.TicketCreateTimeStop %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-            <div id="TicketCreateTimeStartDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value before end date.") | html %]</p>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="SLAIDs" id="LabelSLAIDs">[% Translate("Service Level Agreement") | html %]</label>
             </div>
-            <div id="TicketCreateTimeStopDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value after start date.") | html %]</p>
+            <div class="Field">
+                [% Data.SLAsStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
             </div>
         </div>
-        <div class="Clear"></div>
-        <label for="TicketChangeTimePoint" id="LabelTicketChangeTimePoint">[% Translate("Ticket Change Time (before/after)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="ChangeTimeSearchType" value="TimePoint" [% Data.item("ChangeTimeSearchType::TimePoint") %]/>
-            [% Data.TicketChangeTimePointStart %] [% Data.TicketChangeTimePoint %] [% Data.TicketChangeTimePointFormat %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="TicketChangeTimeSlot" id="LabelTicketChangeTimeSlot">[% Translate("Ticket Change Time (between)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="ChangeTimeSearchType" value="TimeSlot" [% Data.item("ChangeTimeSearchType::TimeSlot") %]/>
-            [% Data.TicketChangeTimeStart %] [% Translate("and") | html %] [% Data.TicketChangeTimeStop %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-            <div id="TicketChangeTimeStartDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value before end date.") | html %]</p>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="PriorityIDs" id="LabelPriorityIDs">[% Translate("Priority") | html %]</label>
             </div>
-            <div id="TicketChangeTimeStopDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value after start date.") | html %]</p>
+            <div class="Field">
+                [% Data.PrioritiesStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
             </div>
         </div>
-        <div class="Clear"></div>
-        <label for="TicketLastChangeTimePoint" id="LabelTicketLastChangeTimePoint">[% Translate("Ticket Last Change Time (before/after)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="LastChangeTimeSearchType" value="TimePoint" [% Data.item("LastChangeTimeSearchType::TimePoint") %]/>
-            [% Data.TicketLastChangeTimePointStart %] [% Data.TicketLastChangeTimePoint %] [% Data.TicketLastChangeTimePointFormat %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="TicketLastChangeTimeSlot" id="LabelTicketLastChangeTimeSlot">[% Translate("Ticket Last Change Time (between)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="LastChangeTimeSearchType" value="TimeSlot" [% Data.item("LastChangeTimeSearchType::TimeSlot") %]/>
-            [% Data.TicketLastChangeTimeStart %] [% Translate("and") | html %] [% Data.TicketLastChangeTimeStop %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-            <div id="TicketLastChangeTimeStartDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value before end date.") | html %]</p>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="StateIDs" id="LabelStateIDs">[% Translate("State") | html %]</label>
             </div>
-            <div id="TicketLastChangeTimeStopDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value after start date.") | html %]</p>
+            <div class="Field">
+                [% Data.StatesStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
             </div>
         </div>
-        <div class="Clear"></div>
-        <label for="TicketPendingTimePoint" id="LabelTicketPendingTimePoint">[% Translate("Ticket Pending Until Time (before/after)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="PendingTimeSearchType" value="TimePoint" [% Data.item("PendingTimeSearchType::TimePoint") %]/>
-            [% Data.TicketPendingTimePointStart %] [% Data.TicketPendingTimePoint %] [% Data.TicketPendingTimePointFormat %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="TicketPendingTimeSlot" id="LabelTicketPendingTimeSlot">[% Translate("Ticket Pending Until Time (between)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="PendingTimeSearchType" value="TimeSlot" [% Data.item("PendingTimeSearchType::TimeSlot") %]/>
-            [% Data.TicketPendingTimeStart %] [% Translate("and") | html %] [% Data.TicketPendingTimeStop %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="TicketCloseTimePoint" id="LabelTicketCloseTimePoint">[% Translate("Ticket Close Time (before/after)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="CloseTimeSearchType" value="TimePoint" [% Data.item("CloseTimeSearchType::TimePoint") %]/>
-            [% Data.TicketCloseTimePointStart %] [% Data.TicketCloseTimePoint %] [% Data.TicketCloseTimePointFormat %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="TicketCloseTimeSlot" id="LabelTicketCloseTimeSlot">[% Translate("Ticket Close Time (between)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="CloseTimeSearchType" value="TimeSlot" [% Data.item("CloseTimeSearchType::TimeSlot") %]/>
-            [% Data.TicketCloseTimeStart %] [% Translate("and") | html %] [% Data.TicketCloseTimeStop %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-            <div id="TicketCloseTimeStartDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value before end date.") | html %]</p>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="QueueIDs" id="LabelQueueIDs">[% Translate("Queue") | html %]</label>
             </div>
-            <div id="TicketCloseTimeStopDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value after start date.") | html %]</p>
+            <div class="Field">
+                [% Data.QueuesStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
             </div>
         </div>
-
-        <div class="Clear"></div>
-        <label for="TicketEscalationTimePoint" id="LabelTicketEscalationTimePoint">[% Translate("Ticket Escalation Time (before/after)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="EscalationTimeSearchType" value="TimePoint" [% Data.item("EscalationTimeSearchType::TimePoint") %]/>
-            [% Data.TicketEscalationTimePointStart %] [% Data.TicketEscalationTimePoint %] [% Data.TicketEscalationTimePointFormat %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-        </div>
-        <div class="Clear"></div>
-        <label for="TicketEscalationTimeSlot" id="LabelTicketEscalationTimeSlot">[% Translate("Ticket Escalation Time (between)") | html %]:</label>
-        <div class="Field">
-            <input type="hidden" name="EscalationTimeSearchType" value="TimeSlot" [% Data.item("EscalationTimeSearchType::TimeSlot") %]/>
-            [% Data.TicketEscalationTimeStart %] [% Translate("and") | html %] [% Data.TicketEscalationTimeStop %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
-            <div id="TicketEscalationTimeStartDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value before end date.") | html %]</p>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="OwnerIDs" id="LabelOwnerIDs">[% Translate("Agent") | html %]/[% Translate("Owner") | html %]</label>
             </div>
-            <div id="TicketEscalationTimeStopDayError" class="TooltipErrorMessage">
-                <p>[% Translate("Invalid date!") | html %]</p>
-                <p>[% Translate("Please set this to value after start date.") | html %]</p>
+            <div class="Field">
+                [% Data.UserStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
             </div>
         </div>
-
-        <div class="Clear"></div>
-        <label for="SearchInArchive" id="LabelSearchInArchive">[% Translate("Archive Search") | html %]:</label>
-        <div class="Field">
-            [% Data.SearchInArchiveStrg %]
-            <a class="RemoveButton" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="ResponsibleIDs" id="LabelResponsibleIDs">[% Translate("Agent") | html %]/[% Translate("Responsible") | html %]</label>
+            </div>
+            <div class="Field">
+                [% Data.ResponsibleStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
         </div>
-        <div class="Clear"></div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="CreatedQueueIDs" id="LabelCreatedQueueIDs">[% Translate("Created in Queue") | html %]</label>
+            </div>
+            <div class="Field">
+                [% Data.CreatedQueuesStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="CreatedUserIDs" id="LabelCreatedUserIDs">[% Translate("Created by") | html %] [% Translate("Agent") | html %]/[% Translate("Owner") | html %]</label>
+            </div>
+            <div class="Field">
+                [% Data.CreatedUserStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="LockIDs" id="LabelLockIDs">[% Translate("Lock state") | html %]</label>
+            </div>
+            <div class="Field">
+                [% Data.LocksStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="WatchUserIDs" id="LabelWatchUserIDs">[% Translate("Watcher") | html %]</label>
+            </div>
+            <div class="Field">
+                [% Data.WatchUserStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="ArticleCreateTimePoint" id="LabelArticleCreateTimePoint">[% Translate("Article Create Time (before/after)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="ArticleTimeSearchType" value="TimePoint" [% Data.item("ArticleTimeSearchType::TimePoint") %]/>
+                [% Data.ArticleCreateTimePointStart %] [% Data.ArticleCreateTimePoint %] [% Data.ArticleCreateTimePointFormat %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="ArticleCreateTimeSlot" id="LabelArticleCreateTimeSlot">[% Translate("Article Create Time (between)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="ArticleTimeSearchType" value="TimeSlot" [% Data.item("ArticleTimeSearchType::TimeSlot") %]/>
+                <div class="outer-select-date">
+                    <div>[% Data.ArticleCreateTimeStart %]</div>
+                    <div>[% Translate("and") | html %]</div>
+                    <div>[% Data.ArticleCreateTimeStop %]</div>
+                </div>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                <div id="ArticleCreateTimeStartDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value before end date.") | html %]</p>
+                </div>
+                <div id="ArticleCreateTimeStopDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value after start date.") | html %]</p>
+                </div>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketCreateTimePoint" id="LabelTicketCreateTimePoint">[% Translate("Ticket Create Time (before/after)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="TimeSearchType" value="TimePoint" [% Data.item("TimeSearchType::TimePoint") %]/>
+                [% Data.TicketCreateTimePointStart %] [% Data.TicketCreateTimePoint %] [% Data.TicketCreateTimePointFormat %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketCreateTimeSlot" id="LabelTicketCreateTimeSlot">[% Translate("Ticket Create Time (between)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="TimeSearchType" value="TimeSlot" [% Data.item("TimeSearchType::TimeSlot") %]/>
+                <div class="outer-select-date">
+                    <div>[% Data.TicketCreateTimeStart %]</div>
+                    <div>[% Translate("and") | html %]</div>
+                    <div>[% Data.TicketCreateTimeStop %]</div>
+                </div>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                <div id="TicketCreateTimeStartDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value before end date.") | html %]</p>
+                </div>
+                <div id="TicketCreateTimeStopDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value after start date.") | html %]</p>
+                </div>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketChangeTimePoint" id="LabelTicketChangeTimePoint">[% Translate("Ticket Change Time (before/after)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="ChangeTimeSearchType" value="TimePoint" [% Data.item("ChangeTimeSearchType::TimePoint") %]/>
+                [% Data.TicketChangeTimePointStart %] [% Data.TicketChangeTimePoint %] [% Data.TicketChangeTimePointFormat %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketChangeTimeSlot" id="LabelTicketChangeTimeSlot">[% Translate("Ticket Change Time (between)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="ChangeTimeSearchType" value="TimeSlot" [% Data.item("ChangeTimeSearchType::TimeSlot") %]/>
+                <div class="outer-select-date">
+                    <div>[% Data.TicketChangeTimeStart %]</div>
+                    <div>[% Translate("and") | html %]</div>
+                    <div>[% Data.TicketChangeTimeStop %]</div>
+                </div>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                <div id="TicketChangeTimeStartDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value before end date.") | html %]</p>
+                </div>
+                <div id="TicketChangeTimeStopDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value after start date.") | html %]</p>
+                </div>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketLastChangeTimePoint" id="LabelTicketLastChangeTimePoint">[% Translate("Ticket Last Change Time (before/after)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="LastChangeTimeSearchType" value="TimePoint" [% Data.item("LastChangeTimeSearchType::TimePoint") %]/>
+                [% Data.TicketLastChangeTimePointStart %] [% Data.TicketLastChangeTimePoint %] [% Data.TicketLastChangeTimePointFormat %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketLastChangeTimeSlot" id="LabelTicketLastChangeTimeSlot">[% Translate("Ticket Last Change Time (between)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="LastChangeTimeSearchType" value="TimeSlot" [% Data.item("LastChangeTimeSearchType::TimeSlot") %]/>
+                <div class="outer-select-date">
+                    <div>[% Data.TicketLastChangeTimeStart %]</div>
+                    <div>[% Translate("and") | html %]</div>
+                    <div>[% Data.TicketLastChangeTimeStop %]</div>
+                </div>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                <div id="TicketLastChangeTimeStartDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value before end date.") | html %]</p>
+                </div>
+                <div id="TicketLastChangeTimeStopDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value after start date.") | html %]</p>
+                </div>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketPendingTimePoint" id="LabelTicketPendingTimePoint">[% Translate("Ticket Pending Until Time (before/after)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="PendingTimeSearchType" value="TimePoint" [% Data.item("PendingTimeSearchType::TimePoint") %]/>
+                [% Data.TicketPendingTimePointStart %] [% Data.TicketPendingTimePoint %] [% Data.TicketPendingTimePointFormat %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketPendingTimeSlot" id="LabelTicketPendingTimeSlot">[% Translate("Ticket Pending Until Time (between)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="PendingTimeSearchType" value="TimeSlot" [% Data.item("PendingTimeSearchType::TimeSlot") %]/>
+                <div class="outer-select-date">
+                    <div>[% Data.TicketPendingTimeStart %]</div>
+                    <div>[% Translate("and") | html %]</div>
+                    <div>[% Data.TicketPendingTimeStop %]</div>
+                </div>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketCloseTimePoint" id="LabelTicketCloseTimePoint">[% Translate("Ticket Close Time (before/after)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="CloseTimeSearchType" value="TimePoint" [% Data.item("CloseTimeSearchType::TimePoint") %]/>
+                [% Data.TicketCloseTimePointStart %] [% Data.TicketCloseTimePoint %] [% Data.TicketCloseTimePointFormat %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketCloseTimeSlot" id="LabelTicketCloseTimeSlot">[% Translate("Ticket Close Time (between)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="CloseTimeSearchType" value="TimeSlot" [% Data.item("CloseTimeSearchType::TimeSlot") %]/>
+                <div class="outer-select-date">
+                    <div>[% Data.TicketCloseTimeStart %]</div>
+                    <div>[% Translate("and") | html %]</div>
+                    <div>[% Data.TicketCloseTimeStop %]</div>
+                </div>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                <div id="TicketCloseTimeStartDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value before end date.") | html %]</p>
+                </div>
+                <div id="TicketCloseTimeStopDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value after start date.") | html %]</p>
+                </div>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketEscalationTimePoint" id="LabelTicketEscalationTimePoint">[% Translate("Ticket Escalation Time (before/after)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="EscalationTimeSearchType" value="TimePoint" [% Data.item("EscalationTimeSearchType::TimePoint") %]/>
+                [% Data.TicketEscalationTimePointStart %] [% Data.TicketEscalationTimePoint %] [% Data.TicketEscalationTimePointFormat %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="TicketEscalationTimeSlot" id="LabelTicketEscalationTimeSlot">[% Translate("Ticket Escalation Time (between)") | html %]</label>
+            </div>
+            <div class="Field">
+                <input type="hidden" name="EscalationTimeSearchType" value="TimeSlot" [% Data.item("EscalationTimeSearchType::TimeSlot") %]/>
+                <div class="outer-select-date">
+                    <div>[% Data.TicketEscalationTimeStart %]</div>
+                    <div>[% Translate("and") | html %]</div>
+                    <div>[% Data.TicketEscalationTimeStop %]</div>
+                </div>
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                <div id="TicketEscalationTimeStartDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value before end date.") | html %]</p>
+                </div>
+                <div id="TicketEscalationTimeStopDayError" class="TooltipErrorMessage">
+                    <p>[% Translate("Invalid date!") | html %]</p>
+                    <p>[% Translate("Please set this to value after start date.") | html %]</p>
+                </div>
+            </div>
+        </div>
+        <div class="field-wrapper">
+            <div class="label-wrapper">
+                <label for="SearchInArchive" id="LabelSearchInArchive">[% Translate("Archive Search") | html %]</label>
+            </div>
+            <div class="Field">
+                [% Data.SearchInArchiveStrg %]
+                <a class="RemoveButton icon-hover" href="#" title="[% Translate("Remove this entry") | html %]"><i class="fa fa-times"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+        </div>
         [% Data.AttributesOrigStrg %]
     </fieldset>
 </div>
 
-<div class="ContentFooter Center">
-    <button id="SearchFormSubmit" class="Primary CallForAction" value="[% Translate("Run search") | html %]"><span><i class="fa fa-search"></i> [% Translate("Run search") | html %]</span></button>
-</div>
+<div class="ContentFooter main-search-component-btns">
+    <button id="Cancel" class="btn-main btn-width-md btn-cancel-ghost DontPrint" type="submit" value=" Cancel"><span>[% Translate("Cancel") | html %]</span></button>
 
+    <button id="SearchFormSubmit" class="btn-primary btn-main btn-width-md" value="[% Translate("Search") | html %]"><span> [% Translate("Search") | html %]</span></button>
+</div>
 [% RenderBlockEnd("SearchAJAX") %]

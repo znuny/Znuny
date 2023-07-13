@@ -6,10 +6,9 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-<div class="WidgetSimple ServiceOverview">
+
+<div class="WidgetSimple ServiceOverview level-filter-view">
     <div class="Content">
         [% Data.MainContent %]
     </div>
-    <div class="Clear"></div>
 </div>
-<div class="ServiceOverviewSeparator"></div>

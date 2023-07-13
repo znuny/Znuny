@@ -138,6 +138,20 @@ perform TicketCreate Operation. This will return the created ticket number.
                 ForceNotificationToUserID       => [1, 2, 3]                   # optional
                 ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
                 ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                Attachment => [
+                    {
+                        Content     => 'content'                                 # base64 encoded
+                        ContentType => 'some content type'
+                        Filename    => 'some fine name'
+                    },
+                    # ...
+                ],
+                # or:
+                Attachment => {
+                    Content     => 'content'                                 # base64 encoded
+                    ContentType => 'some content type'
+                    Filename    => 'some fine name'
+                },
 
                 # Signing and encryption, only used when ArticleSend is set to 1
                 Sign => {
@@ -186,6 +200,12 @@ perform TicketCreate Operation. This will return the created ticket number.
                         },
                         # ...
                     ],
+                    # or:
+                    Attachment => {
+                        Content     => 'content'                                 # base64 encoded
+                        ContentType => 'some content type'
+                        Filename    => 'some fine name'
+                    },
                 },
                 # ...
             ],
@@ -1006,6 +1026,9 @@ sub _CheckArticle {
     # check Article->ContentType
     if ( $Article->{ContentType} ) {
 
+        # Internal issue #595: Remove line breaks from content type.
+        $Article->{ContentType} =~ s{\R}{ }g;
+
         $Article->{ContentType} = lc $Article->{ContentType};
 
         # check Charset part
@@ -1244,6 +1267,9 @@ sub _CheckAttachment {
 
     # check Article->ContentType
     if ( $Attachment->{ContentType} ) {
+
+        # Internal issue #595: Remove line breaks from content type.
+        $Attachment->{ContentType} =~ s{\R}{ }g;
 
         $Attachment->{ContentType} = lc $Attachment->{ContentType};
 
@@ -1668,6 +1694,17 @@ sub _TicketCreate {
             $MimeType = $Article->{MimeType};
         }
 
+        # Base-64-decode attachments.
+        if ( IsHashRefWithData( $Article->{Attachment} ) ) {
+            $Article->{Attachment} = [ $Article->{Attachment} ];
+        }
+        ATTACHMENT:
+        for my $Attachment ( @{ $Article->{Attachment} // [] } ) {
+            next ATTACHMENT if !IsStringWithData( $Attachment->{Content} );
+
+            $Attachment->{Content} = MIME::Base64::decode_base64( $Attachment->{Content} );
+        }
+
         my %ArticleParams = (
             NoAgentNotify        => $Article->{NoAgentNotify} || 0,
             TicketID             => $TicketID,
@@ -1693,6 +1730,7 @@ sub _TicketCreate {
                 Subject => $Subject,
                 Body    => $PlainBody,
             },
+            Attachment => $Article->{Attachment} // [],
         );
 
         # create article
@@ -1710,7 +1748,8 @@ sub _TicketCreate {
                         Content => MIME::Base64::decode_base64( $Attachment->{Content} ),
                     };
                 }
-                $ArticleParams{Attachment} = \@NewAttachments;
+
+                push @{ $ArticleParams{Attachment} }, @NewAttachments;
             }
 
             # signing and encryption

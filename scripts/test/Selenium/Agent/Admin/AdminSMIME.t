@@ -126,20 +126,17 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Subaction=ShowAddCertificate' )]")->VerifiedClick();
 
         # Check breadcrumb on 'Add Certificate' screen.
-        my $Count = 1;
         for my $BreadcrumbText ( 'S/MIME Management', 'Add Certificate' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Add certificate.
-        my $CertLocation = $Selenium->{Home}
+        my $LocalFile1 = $Selenium->{Home}
             . "/scripts/test/sample/SMIME/SMIMECertificate-smimeuser1.crt";
+        my $CertLocation = $Selenium->upload_file($LocalFile1);
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($CertLocation);
         $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
@@ -148,20 +145,17 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Subaction=ShowAddPrivate' )]")->VerifiedClick();
 
         # Check breadcrumb on 'Add Private Key' screen.
-        $Count = 1;
         for my $BreadcrumbText ( 'S/MIME Management', 'Add Private Key' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Add private key.
-        my $PrivateLocation = $Selenium->{Home}
+        my $LocalFile2 = $Selenium->{Home}
             . "/scripts/test/sample/SMIME/SMIMEPrivateKey-smimeuser1.pem";
+        my $PrivateLocation = $Selenium->upload_file($LocalFile2);
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($PrivateLocation);
         $Selenium->find_element("//button[\@type='submit']")->click();

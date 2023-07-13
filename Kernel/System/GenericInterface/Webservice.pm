@@ -599,7 +599,7 @@ Replaces <OTRS_CONFIG> tags in arrays, hashes and strings recursively.
 
 Returns:
 
-    my $Result = '/opt/otrs';
+    my $Result = '/opt/znuny';
 
 =cut
 

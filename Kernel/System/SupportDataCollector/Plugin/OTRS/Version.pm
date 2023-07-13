@@ -21,14 +21,14 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS');
+    return Translatable('Znuny');
 }
 
 sub Run {
     my $Self = shift;
 
     $Self->AddResultInformation(
-        Label => Translatable('OTRS Version'),
+        Label => Translatable('Znuny Version'),
         Value => $Kernel::OM->Get('Kernel::Config')->Get('Version'),
     );
 

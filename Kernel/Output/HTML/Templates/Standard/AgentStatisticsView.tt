@@ -7,29 +7,8 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-
-
-<div class="MainBox AriaRoleMain LayoutFixedSidebar SidebarFirst">
-    <h1>[% Translate("Statistics Overview") | html %]</h1>
-
-    <h1 class="InvisibleText">[% Translate("Statistics Management") | html %]</h1>
-
-    [% USE ActionLink = String( 'AgentStatistics' ) %]
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Statistics Management'),
-                Link => ActionLink.append( ';Subaction=Overview' ),
-            },
-            {
-                Name => Translate('View Statistics'),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath Type = "Agent" %]
-
-    <div class="SidebarColumn">
+<div class="MainBox AriaRoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -37,64 +16,102 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview" class="CallForAction Fullsize Center">
+                            <span>
+                                <i class="fa fa-caret-left"></i>
+                                [% Translate("Go to overview") | html %]
+                            </span>
+                        </a>
                     </li>
                     [% IF Data.AccessRw %]
                         <li>
-                            <a href="[% Env("Baselink") %]Action=AgentStatistics;Subaction=Edit;StatID=[% Data.StatID | uri %]" class="CallForAction Fullsize Center"><span><i class="fa fa-edit"></i>[% Translate("Edit Statistics") | html %]</span></a>
+                            <a href="[% Env("Baselink") %]Action=AgentStatistics;Subaction=Edit;StatID=[% Data.StatID | uri %]" class="CallForAction Fullsize Center">
+                                <span>
+                                    [% Translate("Edit Statistics") | html %]
+                                </span>
+                            </a>
                         </li>
                     [% END %]
                 </ul>
             </div>
         </div>
 
-        <div class="WidgetSimple">
+        <div class="WidgetSimple WidgetInformation">
+
             <div class="Header">
                 <h2>[% Translate("Statistics Information") | html %]</h2>
             </div>
             <div class="Content">
                 <fieldset class="TableLike FixedLabelSmall">
-                    <label>[% Translate("Created") | html %]:</label>
-                    <p class="Value">[% Data.Created | Localize("TimeLong") %]</p>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <label>[% Translate("Created") | html %]:</label>
+                        <p class="Value">[% Data.Created | Localize("TimeLong") %]</p>
+                    </div>
+                    <div class="field-wrapper">
+                        <label>[% Translate("Created by") | html %]:</label>
+                        <p class="Value">[% Data.CreatedBy | html %]</p>
+                    </div>
 
-                    <label>[% Translate("Created by") | html %]:</label>
-                    <p class="Value">[% Data.CreatedBy | html %]</p>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <label>[% Translate("Changed") | html %]:</label>
+                        <p class="Value">[% Data.Changed | Localize("TimeLong") %]</p>
+                    </div>
 
-                    <label>[% Translate("Changed") | html %]:</label>
-                    <p class="Value">[% Data.Changed | Localize("TimeLong") %]</p>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <label>[% Translate("Changed by") | html %]:</label>
+                        <p class="Value">[% Data.ChangedBy | html %]</p>
+                    </div>
 
-                    <label>[% Translate("Changed by") | html %]:</label>
-                    <p class="Value">[% Data.ChangedBy | html %]</p>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <label>[% Translate("Sum rows") | html %]:</label>
+                        <p class="Value">[% Translate(Data.SumRowValue) | html %]</p>
+                    </div>
 
-                    <label>[% Translate("Sum rows") | html %]:</label>
-                    <p class="Value">[% Translate(Data.SumRowValue) | html %]</p>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <label>[% Translate("Sum columns") | html %]:</label>
+                        <p class="Value">[% Translate(Data.SumColValue) | html %]</p>
+                    </div>
 
-                    <label>[% Translate("Sum columns") | html %]:</label>
-                    <p class="Value">[% Translate(Data.SumColValue) | html %]</p>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <label>[% Translate("Show as dashboard widget") | html %]:</label>
+                        <p class="Value">[% Translate(Data.ShowAsDashboardWidgetValue) | html %]</p>
+                    </div>
 
-                    <label>[% Translate("Show as dashboard widget") | html %]:</label>
-                    <p class="Value">[% Translate(Data.ShowAsDashboardWidgetValue) | html %]</p>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <label>[% Translate("Cache") | html %]:</label>
+                        <p class="Value">[% Translate(Data.CacheValue) | html %]</p>
+                    </div>
 
-                    <label>[% Translate("Cache") | html %]:</label>
-                    <p class="Value">[% Translate(Data.CacheValue) | html %]</p>
-                    <div class="Clear"></div>
+                    <div class="field-wrapper">
+                        <label>[% Translate("Validity") | html %]:</label>
+                        <p class="Value">[% Translate(Data.ValidValue) | html %]</p>
+                    </div>
 
-                    <label>[% Translate("Validity") | html %]:</label>
-                    <p class="Value">[% Translate(Data.ValidValue) | html %]</p>
-                    <div class="Clear"></div>
                 </fieldset>
             </div>
         </div>
     </div>
 
     <div class="ContentColumn">
+        <h1>[% Translate("Statistics Overview") | html %]</h1>
+
+        <h1 class="InvisibleText">[% Translate("Statistics Management") | html %]</h1>
+
+        [% USE ActionLink = String( 'AgentStatistics' ) %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Statistics Management'),
+                    Link => ActionLink.append( ';Subaction=Overview' ),
+                },
+                {
+                    Name => Translate('View Statistics'),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath Type = "Agent" %]
+
         <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate">
             <input type="hidden" name="Action" value="[% Env("Action") %]"/>
             <input type="hidden" name="Subaction" value="Run"/>
@@ -114,25 +131,23 @@
                         [% Data.StatsParamsWidget %]
 
                         <fieldset class="TableLike SpacingTop">
-                            <div class="Value">
-                                <button class="Primary CallForAction" type="submit" id="StartStatistic" name="Start" value="[% Translate("Run now") | html %]">
-                                    <span><i class="fa fa-caret-square-o-right"></i> [% Translate("Run now") | html %]</span>
-                                </button>
-                                [% Translate('or') | html %]
-                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview">
-                                    [% Translate('Cancel') | html %]
-                                </a>
+                            <div class="field-wrapper form-button-actions">
+                                <div class="Field buttons-field">
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview" class="btn-cancel-ghost btn-main btn-width-md">[% Translate('Cancel') | html %]</a>
+
+                                    <button class="btn-primary btn-main btn-width-md" type="submit" id="StartStatistic" name="Start" value="[% Translate("Run now") | html %]">
+                                        <span>
+                                            [% Translate("Run now") | html %]
+                                        </span>
+                                    </button>
+                                </div>
                             </div>
                         </fieldset>
-
                     [% ELSE %]
-
                         <div class="MessageBox Warning">
                             <p>[% Translate('This statistic contains configuration errors and can currently not be used.') | html %]</p>
                         </div>
-
                     [% END %]
-
                 </div>
             </div>
         </form>

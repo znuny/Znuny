@@ -20,9 +20,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UtilObject   = $Kernel::OM->Get('Kernel::System::Util');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
 
         # enable the services
         $HelperObject->ConfigSettingChange(
@@ -50,7 +54,7 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -98,7 +102,7 @@ $Selenium->RunTest(
             "Service ID $ServiceIDs[1] is now child service"
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # go to agent preferences
         $Selenium->VerifiedGet(
@@ -182,7 +186,7 @@ $Selenium->RunTest(
         }
 
         # make sure the cache is correct
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Service',
         );
     },

@@ -233,13 +233,14 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             [
                 {
                     Label: Core.Language.Translate('Cancel'),
+                    Type: 'Secondary',
                     Function: function () {
                         Core.UI.Dialog.CloseDialog($('.Dialog'));
                     }
                 },
                 {
                     Label: Core.Language.Translate('Delete'),
-                    Class: 'Primary',
+                    Type: 'Warning',
                     Function: function () {
                         var Data = {
                                 Action: 'AdminProcessManagement',
@@ -299,13 +300,14 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             [
                 {
                     Label: Core.Language.Translate('Cancel'),
+                    Type: 'Secondary',
                     Function: function () {
                         Core.UI.Dialog.CloseDialog($('.Dialog'));
                     }
                 },
                 {
                     Label: Core.Language.Translate('Delete'),
-                    Class: 'Primary',
+                    Type: 'Warning',
                     Function: function () {
                         var Data = {
                                 Action: 'AdminProcessManagement',
@@ -1090,6 +1092,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
         // Initialize list filter
         Core.UI.Table.InitTableFilter($('#FilterAvailableActivityDialogs'), $('#AvailableActivityDialogs'));
+        Core.UI.Table.InitTableFilter($('#FilterAssignedActivityDialogs'), $('#AssignedActivityDialogs'));
 
         $('#Submit').on('click', function() {
             $('#ActivityForm').submit();
@@ -1164,6 +1167,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
         // Initialize list filter
         Core.UI.Table.InitTableFilter($('#FilterAvailableFields'), $('#AvailableFields'));
+        Core.UI.Table.InitTableFilter($('#FilterAssignedFields'), $('#AssignedFields'));
 
         $('#Submit').on('click', function() {
             $('#ActivityDialogForm').submit();
@@ -1349,7 +1353,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             // some fields do not have a default value.
             // disable the input field
             if ($.inArray(Fieldname, FieldsWithoutDefaultValue) > -1) {
-                $('#DefaultValue').prop('readonly', true).prop('disabled', true);
+                $('#DefaultValue').prop('readonly', true).attr('tabindex', '-1').prop('disabled', true);
             }
 
             // only article should show Communication channel select.
@@ -1631,6 +1635,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
         // Initialize list filter
         Core.UI.Table.InitTableFilter($('#FilterAvailableTransitionActions'), $('#AvailableTransitionActions'));
+        Core.UI.Table.InitTableFilter($('#FilterAssignedTransitionActions'), $('#AssignedTransitionActions'));
 
         // store process data to hidden field for later merging
         $('#ProcessData').val(Core.JSON.Stringify(window.opener.Core.Agent.Admin.ProcessManagement.ProcessData.Process));

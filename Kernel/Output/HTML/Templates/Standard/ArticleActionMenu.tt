@@ -8,42 +8,59 @@
 # --
 
 <div class="ItemActions">
-    <ul class="Actions">
+    <ul class="Actions-Mobile-List">
+        <li>Mark</li>
+        <li class="mobile-action-option">Options</li>
+    </ul>
+
+    <div class="Actions-overlay">
+        <div class="Actions-wrapper">
+        <div class="Actions-top">Options</div>
+        <ul class="Actions">
 
 [% FOREACH Item IN Data.MenuItems.reverse %]
 
-    [% IF Item.ItemType == 'Dropdown' %]
-        [% IF Item.DropdownType == 'Forward' %]
+        [% IF Item.ItemType == 'Dropdown' %]
+            [% IF Item.DropdownType == 'Forward' %]
+                <li>
+                    <form title="[% Translate(Data.Name) | html %]" action="[% Env("CGIHandle") %]" method="get" id="[% Item.FormID | html %]">
+                        <input type="hidden" name="Action" value="[% Item.Action | html %]"/>
+                        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+                        <input type="hidden" name="ArticleID" value="[% Data.ArticleID | html %]"/>
+                        <input type="hidden" name="ForwardAll" value="[% Item.ForwardAll | html %]"/>
+                        <label for="[% Item.ForwardElementID | html %]">[% Translate(Item.Name) | html %]</label>
+                        [% Item.StandardForwardsStrg %]
+                    </form>
+                </li>
+            [% ELSIF Item.DropdownType == 'Reply' %]
+                <li>
+                    <form title="[% Translate(Item.Name) | html %]" action="[% Env("CGIHandle") %]" method="get" id="[% Item.FormID | html %]">
+                        <input type="hidden" name="Action" value="[% Item.Action | html %]"/>
+                        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+                        <input type="hidden" name="ArticleID" value="[% Data.ArticleID | html %]"/>
+                        <input type="hidden" name="ReplyAll" value="[% Item.ReplyAll | html %]"/>
+                        <label for="[% Item.ResponseElementID | html %]">[% Translate(Item.Name) | html %]</label>
+                        [% Item.StandardResponsesStrg %]
+                    </form>
+                </li>
+            [% END %]
+
+        [% ELSIF Item.ItemType == 'Link' %]
             <li>
-                <form title="[% Translate(Data.Name) | html %]" action="[% Env("CGIHandle") %]" method="get" id="[% Item.FormID | html %]">
-                    <input type="hidden" name="Action" value="[% Item.Action | html %]"/>
-                    <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
-                    <input type="hidden" name="ArticleID" value="[% Data.ArticleID | html %]"/>
-                    <input type="hidden" name="ForwardAll" value="[% Item.ForwardAll | html %]"/>
-                    <label for="[% Item.ForwardElementID | html %]">[% Translate(Item.Name) | html %]</label>
-                    [% Item.StandardForwardsStrg %]
-                </form>
-            </li>
-        [% ELSIF Item.DropdownType == 'Reply' %]
-            <li>
-                <form title="[% Translate(Item.Name) | html %]" action="[% Env("CGIHandle") %]" method="get" id="[% Item.FormID | html %]">
-                    <input type="hidden" name="Action" value="[% Item.Action | html %]"/>
-                    <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
-                    <input type="hidden" name="ArticleID" value="[% Data.ArticleID | html %]"/>
-                    <input type="hidden" name="ReplyAll" value="[% Item.ReplyAll | html %]"/>
-                    <label for="[% Item.ResponseElementID | html %]">[% Translate(Item.Name) | html %]</label>
-                    [% Item.StandardResponsesStrg %]
-                </form>
+                <a href="[% IF Item.Link.match('^(?!(mailto)|(http(s)?):)') %][% Env("Baselink") %][% END %][% Item.Link %]" class="[% Item.Class | html %]" [% Item.LinkParam %] title="[% Translate(Item.Description) | html %]">[% Translate(Item.Name) | html %]</a>
             </li>
         [% END %]
 
-    [% ELSIF Item.ItemType == 'Link' %]
-        <li>
-            <a href="[% IF Item.Link.match('^(?!(mailto)|(http(s)?):)') %][% Env("Baselink") %][% END %][% Item.Link %]" class="[% Item.Class | html %]" [% Item.LinkParam %] title="[% Translate(Item.Description) | html %]">[% Translate(Item.Name) | html %]</a>
-        </li>
-    [% END %]
-
 [% END %]
-    </ul>
-    <div class="ClearLeft"></div>
+        </ul>
+        <div class="Actions-bottom">
+            <a class="btn-collapse">
+                <i class="fa fa-sign-out"></i>
+                <span>Collapse</span>
+            </a>
+        </div>
+        </div>
+        <div class="Actions-close"></div>
+    </div>
+
 </div>

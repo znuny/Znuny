@@ -25,7 +25,6 @@
                 <p class="SpacingTop">
                     <a href="#" class="ReturnToPreviousPage">[% Translate("Back to the previous page") | html %]</a>
                 </p>
-
 [% RenderBlockStart("PossibleNextActionContainer") %]
                 <p class="SpacingTop">
 [% RenderBlockStart("PossibleNextActionRow") %]

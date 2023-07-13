@@ -48,7 +48,7 @@ sub CheckPreviousRequirement {
     my $Home    = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
     my $PerlBinary = $^X;
-    my $ScriptPath = "$Home/bin/otrs.CheckModules.pl";
+    my $ScriptPath = "$Home/bin/znuny.CheckModules.pl";
 
     # verify check modules script exist
     if ( !-e $ScriptPath ) {
