@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.439424031777557;
+    $Self->{Completeness}        = 0.438625474971089;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -714,9 +714,9 @@ sub Data {
             'Kwa kuongeza au kwa mbadala katika utekelezaji wa muda, unaweza ukafafanua matukio ya tiketi ambayo yatachochea kazi hii.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Kama tukio la tiketi limefutwa, kichuja cha tiketi kitatumika kuangalia kama tiketi zinafanana. Kazi itafanywa kwenye tiketi tu.',
-        'Do you really want to delete this event trigger?' => 'Je unataka kufuta kichocheo hiki cha tukio?',
         'Add Event Trigger' => 'Ongeza kichochezi tukio',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Je unataka kufuta kichocheo hiki cha tukio?',
         'Select Tickets' => 'Chagua tiketi',
         '(e. g. 10*5155 or 105658*)' => '(Mfano 10*5155 au 105658)',
         '(e. g. 234321)' => '(Mfano 234321)',
@@ -2482,6 +2482,16 @@ sub Data {
             '',
         'Off' => 'Zima',
         'End' => 'Mwisho',
+        'Left' => '',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => '',
         'Save setting' => '',
@@ -2842,7 +2852,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Nyaraka',
         'This ticket is archived.' => 'Tiketi hii imewekwa kwenye nyaraka',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => 'Inasubiri hadi',
         'Locked' => 'Fungwa',
         '%s Ticket(s)' => '',
@@ -5597,6 +5607,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '',
@@ -5899,6 +5910,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Inafafanua kitambulishi cha mtumiaji kwa paneli ya mteja.',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8476,6 +8488,7 @@ Thanks for your help!
         'Change the priority for this ticket' => 'Badili kiapumbele cha tiketi hii',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => '',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8723,7 +8736,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => 'Jina la mwisho, Jina la kwanza (Kuingia kwa mtumiaji)',
         'LastnameFirstname' => '',
         'Latvian' => '',
-        'Left' => '',
         'Link Object' => 'Kipengele kiunganishi',
         'Link Object.' => '',
         'Link agents to groups.' => 'Muuanganishe wakala kwenye makundi.',
@@ -8837,6 +8849,7 @@ Thanks for your help!
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => '',
+        'Popup Profile' => '',
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => 'Vichuja vya mkuu wa Posta',
@@ -9174,6 +9187,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

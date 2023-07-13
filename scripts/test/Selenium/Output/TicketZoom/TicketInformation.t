@@ -344,7 +344,7 @@ $Selenium->RunTest(
 
         # Verify there is no collapsed elements on the screen.
         $Self->True(
-            $Selenium->find_element("//div[contains(\@class, \'WidgetSimple Expanded')]"),
+            $Selenium->find_element("//div[contains(\@class, \'WidgetSimple information-widget Expanded')]"),
             "Ticket Information Widget is expanded",
         );
 

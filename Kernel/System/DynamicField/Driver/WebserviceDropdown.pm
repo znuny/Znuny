@@ -92,7 +92,7 @@ sub EditFieldRender {
     }
 
     # check and set class if necessary
-    my $FieldClass = 'DynamicFieldDropdown Modernize';
+    my $FieldClass = 'DynamicFieldText Modernize';
     if ( defined $Param{Class} && $Param{Class} ne '' ) {
         $FieldClass .= ' ' . $Param{Class};
     }
@@ -127,16 +127,13 @@ sub EditFieldRender {
     if ( !IsHashRefWithData($DataValues) && IsStringWithData($Value) ) {
         $DataValues = { $Value => $Value };
     }
-    elsif ( !IsHashRefWithData($DataValues) ) {
-        $DataValues = { ' ' => ' ' };
-    }
 
     my $HTMLString = $Param{LayoutObject}->BuildSelection(
         Data         => $DataValues || {},
         Name         => $FieldName,
         SelectedID   => $Value,
         Translation  => $FieldConfig->{TranslatableValues} || 0,
-        PossibleNone => 0,
+        PossibleNone => 1,
         TreeView     => $FieldConfig->{TreeView} || 0,
         Class        => $FieldClass,
         HTMLQuote    => 1,
@@ -398,7 +395,7 @@ sub SearchFieldRender {
         Name         => $FieldName,
         SelectedID   => $Value,
         Translation  => $FieldConfig->{TranslatableValues} || 0,
-        PossibleNone => 0,
+        PossibleNone => 1,
         TreeView     => $FieldConfig->{TreeView} || 0,
         Class        => $FieldClass,
         Multiple     => 1,
@@ -451,7 +448,7 @@ sub _AutocompleteSearchFieldRender {
     # check and set class if necessary
     my $FieldClass = 'DynamicFieldMultiSelect Modernize';
 
-    my $SelectionData;
+    my $SelectionData = {};
     if ( IsArrayRefWithData($FieldValues) ) {
         $SelectionData = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
@@ -460,18 +457,12 @@ sub _AutocompleteSearchFieldRender {
         );
     }
 
-    if ( !IsHashRefWithData($SelectionData) ) {
-        $SelectionData = {
-            ' ' => ' ',
-        };
-    }
-
     my $HTMLString = $Param{LayoutObject}->BuildSelection(
         Data         => $SelectionData,
         Name         => $FieldName,
         SelectedID   => $FieldValues,
         Translation  => $FieldConfig->{TranslatableValues} || 0,
-        PossibleNone => 0,
+        PossibleNone => 1,
         TreeView     => 0,
         Class        => $FieldClass,
         Multiple     => 0,
@@ -682,15 +673,11 @@ sub PossibleValuesGet {
     my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
     my $LayoutObject                 = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    # to store the possible values
     my %PossibleValues;
 
-    # set PossibleNone attribute
-    my $FieldPossibleNone = 1;
-
-    # set none value if defined on field config
-    if ( $FieldPossibleNone || !$Param{Value} ) {
-        %PossibleValues = ( ' ' => '-' );
+    # Provide empty value if no value is present so the field will not be displayed as disabled.
+    if ( !$Param{Value} ) {
+        $PossibleValues{' '} = '';
     }
 
     if ( $Param{DynamicFieldConfig}->{Config}->{InitialSearchTerm} ) {

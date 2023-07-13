@@ -229,7 +229,7 @@ $Selenium->RunTest(
         );
 
         # click to delete added event, confirmation dialog will appear
-        $Selenium->execute_script("\$('#EventsTable tbody tr:eq(2) #DeleteEvent').click();");
+        $Selenium->execute_script("\$('#EventsTable tbody tr:eq(2) .DeleteEvent').click();");
 
         # wait for dialog to show up, if necessary
         $Selenium->WaitFor(
@@ -518,16 +518,31 @@ $Selenium->RunTest(
             "AdminValidFilter - All invalid entries are displayed again.",
         );
 
-        # Delete test job confirmation dialog. See bug#14197.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=Delete;Profile=$GenericAgentJob\' )]")->click();
-        $Selenium->WaitFor( AlertPresent => 1 );
-        $Selenium->accept_alert();
+        $Selenium->execute_script("\$('#GenericAgentJobs tbody tr:eq(1) .DeleteTask').click();");
+
+        # wait for dialog to show up, if necessary
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 1;'
+        );
+
+        # verify confirmation dialog message
+        $Self->True(
+            index( $Selenium->get_page_source(), 'Do you really want to delete this generic agent job?' ) > -1,
+            "Delete dialog message is found",
+        );
+
+        # confirm delete event
+        $Selenium->find_element( "#DialogButton2", 'css' )->click();
+
+        # wait for dialog to disappear, if necessary
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 0;'
+        );
 
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' && \$('table tbody tr td:contains($GenericAgentJob)').length == 0;"
         );
-        $Selenium->VerifiedRefresh();
 
         # Check if GenericAgentJob is deleted.
         $Self->False(

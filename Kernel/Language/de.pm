@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.98229063224098;
+    $Self->{Completeness}        = 0.980670741780935;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -711,9 +711,9 @@ sub Data {
             'Zusätzlich oder alternativ zur periodischen Ausführung können Sie Ticket-Ereignisse angeben, bei denen dieser Auftrag ausgeführt werden soll.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Wenn ein Ticket-Ereignis ausgelöst wird, wird zunächst der Ticket-Filter angewendet um zu prüfen, ob das Ticket betroffen ist. Erst danach wird der Auftrag ggf. für dieses Ticket ausgeführt.',
-        'Do you really want to delete this event trigger?' => 'Wollen Sie diesen Ereignis-Auslöser wirklich löschen?',
         'Add Event Trigger' => 'Ereignis-Auslöser hinzufügen',
         'To add a new event select the event object and event name' => 'Wählen Sie Ereignisobjekt und -Name, um ein neues Ereignis hinzuzufügen',
+        'Do you really want to delete this event trigger?' => 'Wollen Sie diesen Ereignis-Auslöser wirklich löschen?',
         'Select Tickets' => 'Tickets selektieren',
         '(e. g. 10*5155 or 105658*)' => '(z .B. 10*5155 oder 105658*)',
         '(e. g. 234321)' => '(z. B. 234321)',
@@ -2450,7 +2450,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
         'Manage links for %s' => 'Verknüpfungen für %s verwalten',
-        'Close and Back' => '',
+        'Close and Back' => 'Schließen und zurück',
         'Create new links' => 'Neue Verknüpfungen erstellen',
         'Manage existing links' => 'Vorhandene Verknüpfungen verwalten',
         'Link with' => 'Verknüpfen mit',
@@ -2479,6 +2479,16 @@ sub Data {
             'Sie können Ihr Avatar-Bild ändern, indem Sie sich mit Ihrer E-Mail-Adresse %s unter %s registrieren. Bitte beachten Sie, dass es einige Zeit dauern kann, bis Änderungen sichtbar werden.',
         'Off' => 'Aus',
         'End' => 'Ende',
+        'Left' => 'Links',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => 'Diese Einstellung kann derzeit nicht gespeichert werden.',
         'This setting can currently not be saved' => 'Diese Einstellung kann derzeit nicht gespeichert werden',
         'Save setting' => '',
@@ -2839,7 +2849,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archiv',
         'This ticket is archived.' => 'Dieses Ticket ist archiviert.',
-        'Note: Type is invalid!' => 'Hinweis: Typ ist ungültig!',
+        'is invalid' => 'ist ungültig',
         'Pending till' => 'Warten bis',
         'Locked' => 'Sperre',
         '%s Ticket(s)' => '%s Ticket(s)',
@@ -5594,6 +5604,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => 'Definiert zusätzliche Plugins für die Verwendung im Rich-Text-Editor.',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             'Definiert zusätzliche Inhalte, die für die Verwendung im Rich-Text-Editor zugelassen sind.',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => 'Deaktiviert die Autovervollständigung im Anmeldebildschirm.',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Wenn der HTTP-Header "X-Frame-Options: SAMEORIGIN" ausgeschaltet ist, kann Znuny als IFrame in andere Websites integriert werden. Dies stellt eine Sicherheitslücke dar! Daher sollte diese Einstellung nur deaktivieren werden, wenn Sie sich über die Konsequenzen im Klaren sind!',
@@ -5896,6 +5907,7 @@ sub Data {
             'Gibt dem Endnutzer die Möglichkeit, das Separatorenzeichen von CSV-Dateien in der Übersetzungsdatei zu definieren. Bitte beachte: Wenn \'Active\' auf 0 eingestellt ist, so verhindert dies nur, dass Agenten die Einstellung dieser Gruppe in ihren persönlichen Einstellungen verändern können. Der Administrator kann weiterhin diese Einstellungen im Name von Benutzern verändern. Benutze \'PreferenceGroup\', um zu steuern, in welchem Bereich diese Einstellungen in der Benutzer-Oberfläche angezeigt werden.',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             'Definiert den Avatar des Benutzers. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Definiert den Benutzer-Identifier für das Kunden-Interface.',
         'Activates support for customer and customer user groups.' => 'Aktiviert Unterstützung für Kunden- und Kundenbenutzergruppen.',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8480,6 +8492,7 @@ Ihr Helpdesk-Team
         'Change the priority for this ticket' => 'Priorität des Tickets ändern',
         'Change the responsible for this ticket' => 'Verantwortlichen für dieses Tickets ändern',
         'Change your avatar image.' => 'Avatar-Bild ändern.',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'Passwort und Weiteres ändern.',
         'Changed SLA to "%s" (%s).' => 'SLA geändert auf "%s" (%s).',
         'Changed archive state to "%s".' => 'Archivstatus geändert auf "%s".',
@@ -8727,7 +8740,6 @@ Ihr Helpdesk-Team
         'Lastname, Firstname (UserLogin)' => 'Nachname, Vorname (BenutzerLogin)',
         'LastnameFirstname' => 'NachnameVorname',
         'Latvian' => 'Lettisch',
-        'Left' => 'Links',
         'Link Object' => 'Verknüpfe Objekt',
         'Link Object.' => 'Link-Objekt.',
         'Link agents to groups.' => 'Agenten zu Gruppen zuordnen.',
@@ -8841,6 +8853,7 @@ Ihr Helpdesk-Team
         'Plugin search' => 'Pluginsuche',
         'Plugin search module for autocomplete.' => 'Module zur Pluginsuche für die Autovervollständigung.',
         'Polish' => 'Polnisch',
+        'Popup Profile' => '',
         'Portuguese' => 'Portugiesisch',
         'Portuguese (Brasil)' => 'Portugiesisch (Brasilien)',
         'PostMaster Filters' => 'Postmaster-Filter',
@@ -9178,6 +9191,7 @@ Ihr Helpdesk-Team
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

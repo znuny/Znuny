@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.868752068851374;
+    $Self->{Completeness}        = 0.867008095159425;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -716,9 +716,9 @@ sub Data {
             'Adicionalmente ou alternativamente para uma execução períodica, você pode definir eventos de chamado que irão disparar esta tarefa.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Se um evento de chamado é disparado, o filtro de chamado será aplicado para verificar se o chamado combina. Só depois a tarefa é executada sobre o chamado.',
-        'Do you really want to delete this event trigger?' => 'Você quer realmente excluir este disparador de evento?',
         'Add Event Trigger' => 'Adicionar disparador de evento',
         'To add a new event select the event object and event name' => 'Para adicionar um novo evento, selecione o objeto do evento e o nome do evento',
+        'Do you really want to delete this event trigger?' => 'Você quer realmente excluir este disparador de evento?',
         'Select Tickets' => 'Selecionar Chamados',
         '(e. g. 10*5155 or 105658*)' => '(ex.: 10*5155 ou 105658*)',
         '(e. g. 234321)' => '(ex.: email@empresa.com.br)',
@@ -2484,6 +2484,16 @@ sub Data {
             'Você pode alterar a sua imagem de avatar registrando-se com sua conta de e-mail %s em %s. Por favor note que pode levar algum tempo até que o seu novo avatar fique disponível por conta do cache.',
         'Off' => 'Desligado',
         'End' => 'Fim',
+        'Left' => 'Esquerda',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => 'Esta configuração não pode ser salva no momento.',
         'This setting can currently not be saved' => 'Esta configuração não pode ser salva no momento',
         'Save setting' => '',
@@ -2844,7 +2854,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arquivar',
         'This ticket is archived.' => 'Este chamado está arquivado.',
-        'Note: Type is invalid!' => 'Nota: Tipo é inválido!',
+        'is invalid' => '',
         'Pending till' => 'Pendente até',
         'Locked' => 'Bloqueio',
         '%s Ticket(s)' => '%s Ticket(s)',
@@ -5599,6 +5609,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => 'Desabilitar auto completar na tela de login.',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Desativa o cabeçalho HTTP "X-Frame-Options: SAMEORIGIN" para que o Znuny seja incluído como um IFrame em outras páginas web. Desativar este cabeçalho HTTP pode ser um problema de segurança! Só desative se você souber o que está fazendo.',
@@ -5901,6 +5912,7 @@ sub Data {
             'Permite que usuários possam sobrescrever o caracter de separação de arquivos CSV, definidos nos arquivos de tradução. Observação: definindo \'Active\' como 0 só irá prevenir que agentes editem definições deste grupo nas preferências pessoais, mas administradores ainda poderão editar estas definições em nome de outros usuários. Utilize \'PreferenceGroup\' para controlar em qual área estas dedinições devem ser exibidas na interface de usuário.',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             'Define o avatar do usuário. Favor observar: definindo \'Active\' como 0 só irá prevenir agentes de editar definições deste grupo em suas preferências pessoais, mas ainda irá permitir que administradores editem definições em nome de outros usuários. Utilize \'PreferenceGroup\' para controlar em quais áreas estas definições deveriam ser exibidas na interface de usuário.',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '',
         'Activates support for customer and customer user groups.' => 'Ativa suporte a grupos de cliente e usuário cliente.',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8486,6 +8498,7 @@ Obrigado pela ajuda!
         'Change the priority for this ticket' => 'Alterar a Prioridade Para Este Chamado',
         'Change the responsible for this ticket' => 'Alterar o responsável por este chamado',
         'Change your avatar image.' => 'Alterar a imagem do seu avatar.',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'Alterar sua senha e mais.',
         'Changed SLA to "%s" (%s).' => 'Alterado SLA para "%s" (%s).',
         'Changed archive state to "%s".' => 'Alterado estado de arquivamento para "%s".',
@@ -8733,7 +8746,6 @@ Obrigado pela ajuda!
         'Lastname, Firstname (UserLogin)' => 'Sobrenome, Nome (Login)',
         'LastnameFirstname' => 'ÚltimoNomePrimeiroNome',
         'Latvian' => 'Letão',
-        'Left' => 'Esquerda',
         'Link Object' => 'Associar Objeto',
         'Link Object.' => 'Associar Objeto.',
         'Link agents to groups.' => 'Associar atendentes a grupos.',
@@ -8847,6 +8859,7 @@ Obrigado pela ajuda!
         'Plugin search' => 'Pesquisar Plugin',
         'Plugin search module for autocomplete.' => 'Módulo de pesquisa de autocompletar.',
         'Polish' => 'Polonês',
+        'Popup Profile' => '',
         'Portuguese' => 'Português',
         'Portuguese (Brasil)' => 'Português (Brasil)',
         'PostMaster Filters' => 'Filtros PostMaster',
@@ -9184,6 +9197,7 @@ Obrigado pela ajuda!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

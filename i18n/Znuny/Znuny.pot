@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-06-26 11:33+0000\n"
+"POT-Creation-Date: 2023-07-07 07:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2103,15 +2103,15 @@ msgid "If a ticket event is fired, the ticket filter will be applied to check if
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-msgid "Do you really want to delete this event trigger?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Add Event Trigger"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "To add a new event select the event object and event name"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
+msgid "Do you really want to delete this event trigger?"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
@@ -7367,6 +7367,38 @@ msgid "End"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Left"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "The horizontal distance of the window relative to the screen, in pixels."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Top"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "The vertical distance of the window relative to the screen, in pixels."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Width"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Width in pixels or percent."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Height"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Height in pixels or percent."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "This setting can currently not be saved."
 msgstr ""
 
@@ -8459,7 +8491,7 @@ msgid "This ticket is archived."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-msgid "Note: Type is invalid!"
+msgid "is invalid"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
@@ -15375,6 +15407,10 @@ msgid "Defines extra content that is allowed for use in the rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Global settings for all popup profiles."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Disable autocomplete in the login screen."
 msgstr ""
 
@@ -16060,6 +16096,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the users avatar. Please note: setting 'Active' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user's behalf. Use 'PreferenceGroup' to control in which area these settings should be shown in the user interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the global users popup profile."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -21930,6 +21970,10 @@ msgid "Change your avatar image."
 msgstr ""
 
 #. SysConfig
+msgid "Change your default popup profile settings."
+msgstr ""
+
+#. SysConfig
 msgid "Change your password and more."
 msgstr ""
 
@@ -22842,10 +22886,6 @@ msgid "Latvian"
 msgstr ""
 
 #. SysConfig
-msgid "Left"
-msgstr ""
-
-#. SysConfig
 msgid "Link Object"
 msgstr ""
 
@@ -23291,6 +23331,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Polish"
+msgstr ""
+
+#. SysConfig
+msgid "Popup Profile"
 msgstr ""
 
 #. SysConfig

@@ -239,6 +239,9 @@ $Selenium->RunTest(
 
         # Check the filter for dynamic fields on the AgentTicketStatusView screen (see bug#14497).
         for my $Test (@Tests) {
+            $Selenium->execute_script(
+                "\$('.TableSmall')[0].scrollLeft = \$('.TableSmall')[0].offsetWidth - \$('.TableSmall')[0].offsetLeft;"
+            );
 
             # Open filter selection
             $Selenium->find_element("//a[contains(\@title, \'$DFName, filter not active\' )]")->click();

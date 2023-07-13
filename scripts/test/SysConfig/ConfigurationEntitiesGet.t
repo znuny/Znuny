@@ -66,7 +66,7 @@ my @Tests1 = (
             'AnotherEntity' => {
                 'open' => [
                     'Ticket::Frontend::AgentTicketPriority###AnotherOpenEntity'
-                ],
+                ]
             },
             'AnotherType' => {
                 '123' => [
@@ -74,27 +74,68 @@ my @Tests1 = (
                 ],
                 'AnotherDefaultValue' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
-                ],
+                ]
+            },
+            'DynamicField' => {
+                'ProcessManagementProcessID' => [
+                    'DynamicField'
+                ]
+            },
+            'Group' => {
+                'admin' => [
+                    'Group'
+                ]
+            },
+            'Priority' => {
+                '3 normal' => [
+                    'Priority'
+                ]
+            },
+            'Queue' => {
+                'Junk' => [
+                    'Queue'
+                ]
+            },
+            'Role' => {
+                'admin' => [
+                    'Role'
+                ]
+            },
+            'SLA' => {
+                'SLA 1' => [
+                    'SLA'
+                ]
+            },
+            'Service' => {
+                'Service 1' => [
+                    'Service'
+                ]
             },
             'State' => {
-                'new' => [
-                    'Ticket::Frontend::AgentTicketPriority###StateNext'
-                ],
-                'open' => [
-                    'Ticket::Frontend::AgentTicketPriority###ComplexEntity2',
-                    'Ticket::Frontend::AgentTicketPriority###StateDefault',
-                ],
                 'New' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity'
                 ],
                 'Open' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity'
                 ],
+                'new' => [
+                    'Ticket::Frontend::AgentTicketPriority###StateNext'
+                ],
+                'open' => [
+                    'State',
+                    'Ticket::Frontend::AgentTicketPriority###ComplexEntity2',
+                    'Ticket::Frontend::AgentTicketPriority###StateDefault'
+                ]
             },
             'StateßČĆ£øπ∂' => {
                 'openßČĆ£øπ∂' => [
                     'Ticket::Frontend::AgentTicketPriority###EntityUnicode'
-                ],
+                ]
+            },
+            'SystemAddress' => {
+                'znuny@localhost' => [
+                    'SystemAddress'
+                ]
             },
             'Type' => {
                 '123' => [
@@ -103,6 +144,24 @@ my @Tests1 = (
                 'DefaultValue' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
                 ],
+                'Unclassified' => [
+                    'Type'
+                ]
+            },
+            'User' => {
+                'root@localhost' => [
+                    'User'
+                ]
+            },
+            'Valid' => {
+                'valid' => [
+                    'Valid'
+                ]
+            },
+            'Webservice' => {
+                'OutOfOffice' => [
+                    'Webservice'
+                ]
             },
             'YetAnotherType' => {
                 'YetAnotherDefaultValue1' => [
@@ -110,8 +169,8 @@ my @Tests1 = (
                 ],
                 'YetAnotherDefaultValue2' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
-                ],
-            },
+                ]
+            }
         },
     }
 );
@@ -125,7 +184,7 @@ my @Tests2 = (
             'AnotherEntity' => {
                 'open' => [
                     'Ticket::Frontend::AgentTicketPriority###AnotherOpenEntity'
-                ],
+                ]
             },
             'AnotherType' => {
                 '123' => [
@@ -133,15 +192,44 @@ my @Tests2 = (
                 ],
                 'AnotherDefaultValue' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
-                ],
+                ]
+            },
+            'DynamicField' => {
+                'ProcessManagementProcessID' => [
+                    'DynamicField'
+                ]
+            },
+            'Group' => {
+                'admin' => [
+                    'Group'
+                ]
+            },
+            'Priority' => {
+                '3 normal' => [
+                    'Priority'
+                ]
+            },
+            'Queue' => {
+                'Junk' => [
+                    'Queue'
+                ]
+            },
+            'Role' => {
+                'admin' => [
+                    'Role'
+                ]
+            },
+            'SLA' => {
+                'SLA 1' => [
+                    'SLA'
+                ]
+            },
+            'Service' => {
+                'Service 1' => [
+                    'Service'
+                ]
             },
             'State' => {
-                'new' => [
-                    'Ticket::Frontend::AgentTicketPriority###StateNext'
-                ],
-                'open' => [
-                    'Ticket::Frontend::AgentTicketPriority###ComplexEntity2',
-                ],
                 'New' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity'
                 ],
@@ -149,13 +237,25 @@ my @Tests2 = (
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity'
                 ],
                 'closed' => [
-                    'Ticket::Frontend::AgentTicketPriority###StateDefault',
+                    'Ticket::Frontend::AgentTicketPriority###StateDefault'
+                ],
+                'new' => [
+                    'Ticket::Frontend::AgentTicketPriority###StateNext'
+                ],
+                'open' => [
+                    'State',
+                    'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
                 ]
             },
             'StateßČĆ£øπ∂' => {
                 'openßČĆ£øπ∂' => [
                     'Ticket::Frontend::AgentTicketPriority###EntityUnicode'
-                ],
+                ]
+            },
+            'SystemAddress' => {
+                'znuny@localhost' => [
+                    'SystemAddress'
+                ]
             },
             'Type' => {
                 '123' => [
@@ -164,6 +264,24 @@ my @Tests2 = (
                 'DefaultValue' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
                 ],
+                'Unclassified' => [
+                    'Type'
+                ]
+            },
+            'User' => {
+                'root@localhost' => [
+                    'User'
+                ]
+            },
+            'Valid' => {
+                'valid' => [
+                    'Valid'
+                ]
+            },
+            'Webservice' => {
+                'OutOfOffice' => [
+                    'Webservice'
+                ]
             },
             'YetAnotherType' => {
                 'YetAnotherDefaultValue1' => [
@@ -171,8 +289,8 @@ my @Tests2 = (
                 ],
                 'YetAnotherDefaultValue2' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
-                ],
-            },
+                ]
+            }
         },
     },
 );
@@ -186,7 +304,7 @@ my @Tests3 = (
             'AnotherEntity' => {
                 'open' => [
                     'Ticket::Frontend::AgentTicketPriority###AnotherOpenEntity'
-                ],
+                ]
             },
             'AnotherType' => {
                 '123' => [
@@ -194,23 +312,64 @@ my @Tests3 = (
                 ],
                 'AnotherDefaultValue' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
-                ],
+                ]
+            },
+            'DynamicField' => {
+                'ProcessManagementProcessID' => [
+                    'DynamicField'
+                ]
+            },
+            'Group' => {
+                'admin' => [
+                    'Group'
+                ]
+            },
+            'Priority' => {
+                '3 normal' => [
+                    'Priority'
+                ]
+            },
+            'Queue' => {
+                'Junk' => [
+                    'Queue'
+                ]
+            },
+            'Role' => {
+                'admin' => [
+                    'Role'
+                ]
+            },
+            'SLA' => {
+                'SLA 1' => [
+                    'SLA'
+                ]
+            },
+            'Service' => {
+                'Service 1' => [
+                    'Service'
+                ]
             },
             'State' => {
-                'new' => [
-                    'Ticket::Frontend::AgentTicketPriority###StateNext'
-                ],
-                'open' => [
-                    'Ticket::Frontend::AgentTicketPriority###ComplexEntity2',
-                ],
                 'New' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity'
                 ],
                 'Open' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity'
                 ],
+                'new' => [
+                    'Ticket::Frontend::AgentTicketPriority###StateNext'
+                ],
+                'open' => [
+                    'State',
+                    'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
+                ],
                 'reopened' => [
-                    'Ticket::Frontend::AgentTicketPriority###StateDefault',
+                    'Ticket::Frontend::AgentTicketPriority###StateDefault'
+                ]
+            },
+            'SystemAddress' => {
+                'znuny@localhost' => [
+                    'SystemAddress'
                 ]
             },
             'Type' => {
@@ -220,6 +379,24 @@ my @Tests3 = (
                 'DefaultValue' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
                 ],
+                'Unclassified' => [
+                    'Type'
+                ]
+            },
+            'User' => {
+                'root@localhost' => [
+                    'User'
+                ]
+            },
+            'Valid' => {
+                'valid' => [
+                    'Valid'
+                ]
+            },
+            'Webservice' => {
+                'OutOfOffice' => [
+                    'Webservice'
+                ]
             },
             'YetAnotherType' => {
                 'YetAnotherDefaultValue1' => [
@@ -227,8 +404,8 @@ my @Tests3 = (
                 ],
                 'YetAnotherDefaultValue2' => [
                     'Ticket::Frontend::AgentTicketPriority###ComplexEntity2'
-                ],
-            },
+                ]
+            }
         },
     },
 );

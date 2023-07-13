@@ -306,7 +306,7 @@ $Selenium->RunTest(
         );
 
         # confirm delete action
-        $Selenium->find_element( "#DialogButton1", 'css' )->VerifiedClick();
+        $Selenium->find_element( "#DialogButton2", 'css' )->VerifiedClick();
 
         # check if mail account is deleted
         $Self->True(

@@ -72,8 +72,8 @@ $Selenium->RunTest(
             $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
             my $Location = $Selenium->{Home}
                 . "/scripts/test/sample/Crypt/PGPPrivateKey-$Key.asc";
-
-            $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
+            my $LocalFile = $Selenium->upload_file($Location);
+            $Selenium->find_element( "#FileUpload", 'css' )->send_keys($LocalFile);
             $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
         }
 
