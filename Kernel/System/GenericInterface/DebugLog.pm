@@ -304,7 +304,7 @@ get all individual entries for a communication chain
                 DebugLevel => 'info',
                 Summary    => 'a log bit',
             },
-            ...
+            # ...
         ],
     };
 
@@ -545,10 +545,10 @@ when the parameter 'WithData' is set, the complete communication chains will be 
                     DebugLevel => 'info',
                     Summary    => 'a log bit',
                 },
-                ...
+                # ...
             ],
         },
-        ...
+        # ...
     ];
 
 =cut

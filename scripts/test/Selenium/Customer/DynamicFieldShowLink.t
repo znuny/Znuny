@@ -19,10 +19,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # Get needed objects.
-        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject             = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
 
         # Create test customer user.
         my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
@@ -71,7 +73,7 @@ $Selenium->RunTest(
 
         # Set dynamic field value.
         my $ValueText = 'Click on Link' . $RandomNumber;
-        my $Success   = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueSet(
+        my $Success   = $DynamicFieldValueObject->ValueSet(
             FieldID    => $DynamicFieldID,
             ObjectType => 'Ticket',
             ObjectID   => $TicketID,
@@ -103,7 +105,7 @@ $Selenium->RunTest(
             Password => $TestCustomerUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
         # Check existence of test dynamic field in 'Information' sidebar.
@@ -182,7 +184,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 );
 

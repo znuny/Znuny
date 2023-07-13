@@ -426,7 +426,7 @@ to add a customer to a group
                 priority  => 0,
                 rw        => 0,
             },
-            ...
+            # ...
         },
         UserID => 123,
     );

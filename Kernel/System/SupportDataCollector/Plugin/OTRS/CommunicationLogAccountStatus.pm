@@ -24,7 +24,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Communication Log Account Status (last 24 hours)');
+    return Translatable('Znuny') . '/' . Translatable('Communication Log Account Status (last 24 hours)');
 }
 
 sub Run {

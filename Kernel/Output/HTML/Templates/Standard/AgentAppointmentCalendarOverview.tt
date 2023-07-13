@@ -7,33 +7,37 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1>[% Translate("Calendar Overview") | html %]</h1>
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
     <input type="hidden" value="[% Env("UserChallengeToken") %]" name="ChallengeToken" id="ChallengeToken" />
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
             </div>
             <div class="Content">
                 <ul class="ActionList">
-[% IF Data.ModulePermissions.AdminAppointmentCalendarManage %]
+                    [% IF Data.ModulePermissions.AdminAppointmentCalendarManage %]
                     <li>
                         <a href="[% Env("CGIHandle") %]?Action=AdminAppointmentCalendarManage;Subaction=Overview" class="CallForAction Fullsize Center">
-                            <span><i class="fa fa-calendar-o"></i>[% Translate("Manage Calendars") | html %]</span>
+                            <span>
+                                [% Translate("Manage Calendars") | html %]
+                            </span>
                         </a>
                     </li>
-[% END %]
+                    [% END %]
 [% RenderBlockStart("AppointmentCreateButton") %]
-                    <li>
-                        <a id="AppointmentCreateButton" href="#" class="CallForAction Fullsize Center" title="[% Translate("Add new Appointment") | html %]">
-                            <span><i class="fa fa-plus-square"></i>[% Translate("Add Appointment") | html %]</span>
-                        </a>
-                    </li>
+                        <li>
+                            <a id="AppointmentCreateButton" href="#" class="CallForAction Fullsize Center" title="[% Translate("Add new Appointment") | html %]">
+                                <span>
+                                    [% Translate("Add Appointment") | html %]
+                                </span>
+                            </a>
+                        </li>
 [% RenderBlockEnd("AppointmentCreateButton") %]
                 </ul>
             </div>
         </div>
+
         <div class="WidgetSimple Appointments">
             <div class="Header">
                 <h2>[% Translate("Appointments") | html %]</h2>
@@ -43,7 +47,7 @@
             </div>
         </div>
 [% RenderBlockStart("CalendarWidget") %]
-        <div class="WidgetSimple">
+        <div class="WidgetSimple Calendars">
             <div class="Header">
                 <h2>[% Translate("Calendars") | html %]</h2>
             </div>
@@ -80,7 +84,7 @@
 # Use ampersands (&) instead of semicolons (;) for URL parameter delimiter. This has better compatibility with different
 #   calendar implementations and will prevent them from re-encoding the query string and essentially strip the data.
 #   Please see bug#12667 for more information.
-                                <span class="CopyToClipboard InlineButton" data-clipboard-text="[% Config("HttpType") %]://[% Config("FQDN") %]/[% Config("ScriptAlias") %]public.pl?Action=PublicCalendar&CalendarID=[% Data.CalendarID | uri %]&User=[% Env("UserLogin") | uri %]&Token=[% Data.AccessToken | uri %]" title="[% Translate("Copy public calendar URL") | html %]">
+                                <span class="CopyToClipboard InlineButton table-icon-hover-md" data-clipboard-text="[% Config("HttpType") %]://[% Config("FQDN") %]/[% Config("ScriptAlias") %]public.pl?Action=PublicCalendar&CalendarID=[% Data.CalendarID | uri %]&User=[% Env("UserLogin") | uri %]&Token=[% Data.AccessToken | uri %]" title="[% Translate("Copy public calendar URL") | html %]">
                                     <i class="fa fa-clipboard"></i>
                                     <span class="InvisibleText">[% Translate("Copy public calendar URL") | html %]</span>
                                 </span>
@@ -98,28 +102,26 @@
     </div>
 
     <div class="ContentColumn">
+        <h1>[% Translate("Calendar Overview") | html %]</h1>
         <div class="WidgetSimple CalendarWidget">
             <div class="Header">
+                <h2>[% Translate("Calendar") | html %]</h2>
                 <div class="ActionMenu">
                     <div class="WidgetAction Settings">
-                        <a href="#" id="CalendarSettingsButton" title="[% Translate("Settings") | html %]">
+                        <a href="#" id="CalendarSettingsButton" class="icon-hover" title="[% Translate("Settings") | html %]">
                             <i class="fa fa-cog"></i>
                         </a>
                     </div>
-                    <div class="Clear"></div>
                 </div>
-                <h2>[% Translate("Calendar") | html %]</h2>
             </div>
+
             <div class="Content ">
-
 [% RenderBlockStart("NoCalendar") %]
-                <p>[% Translate("No calendars found. Please add a calendar first by using Manage Calendars page.") | html %]</p>
+                    <p>[% Translate("No calendars found. Please add a calendar first by using Manage Calendars page.") | html %]</p>
 [% RenderBlockEnd("NoCalendar") %]
-
 [% RenderBlockStart("CalendarDiv") %]
-                <div style="width: [% Data.CalendarWidth | html %]%; margin: 0 auto; z-index: 10;" id="calendar"></div>
+                    <div style="width: [% Data.CalendarWidth | html %]%; margin: 0 auto; z-index: 10;" id="calendar"></div>
 [% RenderBlockEnd("CalendarDiv") %]
-
             </div>
         </div>
     </div>

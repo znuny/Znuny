@@ -6,21 +6,9 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Manage OAuth2 tokens and their configurations") | html %] - [% Translate(Data.Action) | html %]</h1>
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
 
-    [% BreadcrumbPath = [
-            {
-                Name => Translate("Manage OAuth2 tokens and their configurations"),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
         [% IF Data.TokenConfigTemplateSelection %]
             <div class="WidgetSimple">
                 <div class="Header">
@@ -49,20 +37,22 @@
                 <p class="FieldExplanation">
                     [% Translate("Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details.") | html %]
                 </p>
-                <ul class="ActionList SpacingTop">
+                <ul class="ActionList">
                     <li>
                         <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
                             <input type="hidden" id="ChallengeToken" name="ChallengeToken" value="[% Env("UserChallengeToken") | JSON %]">
                             <input type="hidden" id="Action" name="Action" value="AdminOAuth2TokenManagement"/>
                             <input type="hidden" id="Subaction" name="Subaction" value="ImportTokenConfigurations"/>
                             <input id="FileUpload" name="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required"/>
-                            <fieldset class="SpacingTop">
-                                <input type="checkbox" id="OverwriteExistingTokenConfigurations" name="OverwriteExistingTokenConfigurations" value="1"/>
-                                <label for="OverwriteExistingTokenConfigurations">
-                                    [% Translate("Overwrite existing token configurations") | html %]
-                                </label>
+                            <fieldset>
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="OverwriteExistingTokenConfigurations" name="OverwriteExistingTokenConfigurations" value="1"/>
+                                    <label for="OverwriteExistingTokenConfigurations">
+                                        [% Translate("Overwrite existing token configurations") | html %]
+                                    </label>
+                                </div>
                             </fieldset>
-                            <button class="CallForAction Fullsize Center SpacingTop" type="submit">
+                            <button class="CallForAction Fullsize Center" type="submit">
                                 <span><i class="fa fa-upload"></i>
                                     [% Translate("Import token configurations") | html %]
                                 </span>
@@ -84,12 +74,23 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Manage OAuth2 tokens and their configurations") | html %] - [% Translate(Data.Action) | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate("Manage OAuth2 tokens and their configurations"),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("OAuth2 token configurations") | html %]</h2>
             </div>
-
-            <div>
+            <div class="Content">
                 <table class="DataTable">
                     <thead>
                         <tr>
@@ -97,7 +98,8 @@
                             <th>[% Translate("Token status") | html %]</th>
                             <th>[% Translate("Refresh token status") | html %]</th>
                             <th>[% Translate("Validity of token configuration") | html %]</th>
-                            <th>[% Translate("Actions") | html %]</th>
+                            <th>[% Translate("Refresh") | html %]</th>
+                            <th>[% Translate("Delete") | html %]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -157,12 +159,14 @@
                                         [% Translate(Data.ValidIDs.item(TokenConfig.ValidID)) | html %]
                                     </td>
                                     <td>
-                                        <a class="CallForAction AsPopup PopupType_AdminOAuth2TokenManagement" href="[% TokenData.AuthorizationCodeRequestURL | html %]" title="[% Translate("Request new token") | html %]">
-                                            <span>[% Translate("Request new token") | html %]</span>
+                                        <a class="CallForAction AsPopup PopupType_AdminOAuth2TokenManagement table-actions-button table-icon-hover-md" href="[% TokenData.AuthorizationCodeRequestURL | html %]" title="[% Translate("Request new token") | html %]">
+                                            <i class="fa fa-refresh" title="[% Translate("Request new token") | html %]"></i>
                                         </a>
-                                        &nbsp;
+                                    </td>
+                                    <td>
                                         [% IF !TokenConfig.Used %]
-                                            <a class="CallForAction" data-action-delete-token-config href="[% Env("Baselink") %]Action=AdminOAuth2TokenManagement;Subaction=DeleteTokenConfig;ID=[% TokenConfig.TokenConfigID | uri %]" title="[% Translate("Delete this token and its configuration.") | html %]">
+                                            <a class="CallForAction table-actions-button table-icon-hover-md" data-action-delete-token-config href="[% Env("Baselink") %]Action=AdminOAuth2TokenManagement;Subaction=DeleteTokenConfig;ID=[% TokenConfig.TokenConfigID | uri %]" title="[% Translate("Delete this token and its configuration.") | html %]">
+                                                <i class="fa fa-trash"></i>
                                                 <span>[% Translate("Delete") | html %]</span>
                                             </a>
                                         [% END %]
@@ -180,8 +184,6 @@
                 </table>
             </div>
         </div>
-
-        <div class="Clear"></div>
 
     </div>
 </div>

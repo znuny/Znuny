@@ -44,7 +44,7 @@ my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
             OTRS => {
                 DisplayName => 'Znuny',
                 Files       => [
-                    'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml',
+                    'Calendar.xml',         'Daemon.xml',            'Framework.xml',
                     'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml',
                     'Znuny.xml',
                 ],

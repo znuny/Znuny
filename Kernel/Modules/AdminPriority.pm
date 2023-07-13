@@ -77,7 +77,7 @@ sub Run {
         my ( %GetParam, %Errors );
 
         # get params
-        for my $Parameter (qw(PriorityID Name ValidID)) {
+        for my $Parameter (qw(PriorityID Name ValidID Color)) {
             $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
@@ -237,7 +237,7 @@ sub Run {
         my ( %GetParam, %Errors );
 
         # get params
-        for my $Parameter (qw(PriorityID Name ValidID)) {
+        for my $Parameter (qw(PriorityID Name ValidID Color)) {
             $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
@@ -319,6 +319,13 @@ sub _Edit {
     # get valid list
     my %ValidList        = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
     my %ValidListReverse = reverse %ValidList;
+
+    $Param{ColorPicker} = $LayoutObject->ColorPicker(
+        Type  => 'InputField',
+        Name  => 'Color',
+        ID    => 'Color',
+        Color => $Param{Color},
+    );
 
     $Param{ValidOptionStrg} = $LayoutObject->BuildSelection(
         Data       => \%ValidList,

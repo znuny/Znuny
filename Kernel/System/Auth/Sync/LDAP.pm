@@ -615,34 +615,31 @@ sub Sync {
     # Compare group permissions from LDAP with current user group permissions.
     my %GroupPermissionsChanged;
 
-    if (%GroupPermissionsFromLDAP) {
+    PERMISSIONTYPE:
+    for my $PermissionType ( @{ $ConfigObject->Get('System::Permission') } ) {
 
-        PERMISSIONTYPE:
-        for my $PermissionType ( @{ $ConfigObject->Get('System::Permission') } ) {
+        # get current permission for type
+        my %GroupPermissions = $GroupObject->PermissionUserGroupGet(
+            UserID => $UserID,
+            Type   => $PermissionType,
+        );
 
-            # get current permission for type
-            my %GroupPermissions = $GroupObject->PermissionUserGroupGet(
-                UserID => $UserID,
-                Type   => $PermissionType,
-            );
+        GROUPID:
+        for my $GroupID ( sort keys %SystemGroups ) {
 
-            GROUPID:
-            for my $GroupID ( sort keys %SystemGroups ) {
+            my $OldPermission = $GroupPermissions{$GroupID} ? 1 : 0;
 
-                my $OldPermission = $GroupPermissions{$GroupID} ? 1 : 0;
+            # Set the new permission (from LDAP) if exist, if not set it to a default value
+            #   regularly 0 but it LDAP has rw permission set it to 1 as PermissionUserGroupGet()
+            #   gets all system permissions to 1 if stored permission is rw.
+            my $NewPermission = $GroupPermissionsFromLDAP{$GroupID}->{$PermissionType}
+                || $GroupPermissionsFromLDAP{$GroupID}->{rw} ? 1 : 0;
 
-                # Set the new permission (from LDAP) if exist, if not set it to a default value
-                #   regularly 0 but it LDAP has rw permission set it to 1 as PermissionUserGroupGet()
-                #   gets all system permissions to 1 if stored permission is rw.
-                my $NewPermission = $GroupPermissionsFromLDAP{$GroupID}->{$PermissionType}
-                    || $GroupPermissionsFromLDAP{$GroupID}->{rw} ? 1 : 0;
+            # Skip permission if is identical as in the DB
+            next GROUPID if $OldPermission == $NewPermission;
 
-                # Skip permission if is identical as in the DB
-                next GROUPID if $OldPermission == $NewPermission;
-
-                # Remember the LDAP permission if they are not identical as in the DB.
-                $GroupPermissionsChanged{$GroupID} = $GroupPermissionsFromLDAP{$GroupID};
-            }
+            # Remember the LDAP permission if they are not identical as in the DB.
+            $GroupPermissionsChanged{$GroupID} = $GroupPermissionsFromLDAP{$GroupID};
         }
     }
 
@@ -808,37 +805,35 @@ sub Sync {
     }
 
     # compare role permissions from ldap with current user role permissions and update if necessary
-    if (%RolePermissionsFromLDAP) {
 
-        # get current user roles
-        my %UserRoles = $GroupObject->PermissionUserRoleGet(
-            UserID => $UserID,
-        );
+    # get current user roles
+    my %UserRoles = $GroupObject->PermissionUserRoleGet(
+        UserID => $UserID,
+    );
 
-        ROLEID:
-        for my $RoleID ( sort keys %SystemRoles ) {
+    ROLEID:
+    for my $RoleID ( sort keys %SystemRoles ) {
 
-            # if old and new permission for role matches, do nothing
-            if (
-                ( $UserRoles{$RoleID} && $RolePermissionsFromLDAP{$RoleID} )
-                ||
-                ( !$UserRoles{$RoleID} && !$RolePermissionsFromLDAP{$RoleID} )
-                )
-            {
-                next ROLEID;
-            }
-
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'notice',
-                Message  => "User: '$Param{User}' sync ldap role $SystemRoles{$RoleID}!",
-            );
-            $GroupObject->PermissionRoleUserAdd(
-                UID    => $UserID,
-                RID    => $RoleID,
-                Active => $RolePermissionsFromLDAP{$RoleID} || 0,
-                UserID => 1,
-            );
+        # if old and new permission for role matches, do nothing
+        if (
+            ( $UserRoles{$RoleID} && $RolePermissionsFromLDAP{$RoleID} )
+            ||
+            ( !$UserRoles{$RoleID} && !$RolePermissionsFromLDAP{$RoleID} )
+            )
+        {
+            next ROLEID;
         }
+
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'notice',
+            Message  => "User: '$Param{User}' sync ldap role $SystemRoles{$RoleID}!",
+        );
+        $GroupObject->PermissionRoleUserAdd(
+            UID    => $UserID,
+            RID    => $RoleID,
+            Active => $RolePermissionsFromLDAP{$RoleID} || 0,
+            UserID => 1,
+        );
     }
 
     # take down session

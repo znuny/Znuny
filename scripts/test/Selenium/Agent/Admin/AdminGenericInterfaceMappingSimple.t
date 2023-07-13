@@ -22,6 +22,8 @@ $Selenium->RunTest(
 
         my $HelperObject     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+        my $CacheObject      = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
 
         my $RandomID = $HelperObject->GetRandomID();
 
@@ -75,7 +77,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminGenericInterfaceWebservice screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericInterfaceWebservice");
@@ -144,29 +146,17 @@ $Selenium->RunTest(
 
         # Check for breadcrumb on screen.
         my @Breadcrumbs = (
-            {
-                Text => 'Web Service Management',
-            },
-            {
-                Text => "Selenium $RandomID web service",
-            },
-            {
-                Text => 'Operation: SeleniumOperation',
-            },
-            {
-                Text => 'Simple Mapping for Incoming Data',
-            }
+            'Web Service Management',
+            "Selenium $RandomID web service",
+            'Operation: SeleniumOperation',
+            'Simple Mapping for Incoming Data',
         );
 
-        my $Count = 1;
-        for my $Breadcrumb (@Breadcrumbs) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $Breadcrumb->{Text},
-                "Breadcrumb text '$Breadcrumb->{Text}' is found on screen"
+        for my $BreadcrumbText (@Breadcrumbs) {
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Verify DefaultKeyMapTo and DefaultValueMapTo are hidden with 'Keep (leave unchanged)' DefaultMapTo
@@ -288,7 +278,7 @@ $Selenium->RunTest(
         );
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Webservice' );
+        $CacheObject->CleanUp( Type => 'Webservice' );
 
     }
 

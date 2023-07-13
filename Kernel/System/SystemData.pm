@@ -202,7 +202,7 @@ returns
     %SystemData = (
         UniqueID => 'CDC782BE-E483-11E2-83DA-9FFD99890B3C',
         UpdateID => 'D8F55850-E483-11E2-BD60-9FFD99890B3C'
-        ...
+        # ...
     );
 
 =cut

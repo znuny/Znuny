@@ -18,7 +18,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ArticleObject         = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject              = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject           = $Kernel::OM->Get('Kernel::System::Queue');
+        my $TicketObject          = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Use a calendar with the same business hours for every day so that the UT runs correctly
         #   on every day of the week and outside usual business hours.
@@ -81,7 +89,6 @@ $Selenium->RunTest(
             },
         );
 
-        my $QueueObject = $Kernel::OM->Get('Kernel::System::Queue');
         my @QueueIDs;
         for my $QueueCreate (@QueueConfig) {
             my $QueueID = $QueueObject->QueueAdd(
@@ -104,7 +111,7 @@ $Selenium->RunTest(
         # Create CustomerCompany.
         my $TestCompany        = 'Company#%' . $RandomNumber;
         my $TestCompanyEncoded = 'Company%23%25' . $RandomNumber;
-        my $CustomerID         = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerID         = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $TestCompany,
             CustomerCompanyName    => $TestCompany,
             CustomerCompanyStreet  => $TestCompany,
@@ -123,7 +130,7 @@ $Selenium->RunTest(
 
         # Create CustomerUser.
         my $TestUser          = 'CustomerUser' . $RandomNumber;
-        my $CustomerUserLogin = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUserLogin = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestUser,
             UserLastname   => $TestUser,
@@ -139,8 +146,6 @@ $Selenium->RunTest(
         );
 
         # Create Tickets.
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
         my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
         my @TicketIDs;
         for my $QueueID (@QueueIDs) {
@@ -206,21 +211,32 @@ $Selenium->RunTest(
         );
 
         # Go to AgentTicketStatusView, overview small, default sort is Age, default order is Down.
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketStatusView");
+
+        $Selenium->execute_script(
+            "\$('.TableSmall')[0].scrollLeft = \$('.TableSmall')[0].offsetWidth - \$('.TableSmall')[0].offsetLeft;"
+        );
 
         # Set filter to test CustomerID.
         $Selenium->execute_script("\$('.ColumnSettingsTrigger[title*=\"Customer ID\"]').click();");
+
+        sleep 3;
+
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('.CustomerIDAutoComplete:visible').length;"
+                'return typeof($) === "function" && $(".InputField_Search").length'
         );
-        $Selenium->find_element( ".CustomerIDAutoComplete", 'css' )->send_keys($TestCompany);
+
+        $Selenium->find_element( '.InputField_Search', 'css' )->send_keys($TestCompany);
+
+        # Wait for AJAX to finish.
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('ul.ui-autocomplete li.ui-menu-item:visible').length;"
+                'return typeof($) === "function" && !$("span.AJAXLoader:visible").length'
         );
-        $Selenium->execute_script("\$('li.ui-menu-item:contains($TestCompany)').click();");
+
+        $Selenium->find_element( "li[data-id='$TestCompany']", 'css' )->click();
 
         $Selenium->WaitFor(
             JavaScript =>
@@ -244,11 +260,10 @@ $Selenium->RunTest(
             "CustomerID $TestCompany is found in the table"
         );
 
-        # TODO: remove limitation to firefox.
         if ( $Selenium->{browser_name} eq 'firefox' ) {
             $Self->True(
                 1,
-                "TODO: DragAndDrop is currently disabled in Firefox",
+                "DragAndDrop is currently disabled in Firefox",
             );
         }
         else {
@@ -358,8 +373,6 @@ $Selenium->RunTest(
             );
         }
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         # Delete test created CustomerUser.
         $Success = $DBObject->Do(
             SQL  => "DELETE FROM customer_user WHERE login = ?",
@@ -393,7 +406,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     },
 );
 

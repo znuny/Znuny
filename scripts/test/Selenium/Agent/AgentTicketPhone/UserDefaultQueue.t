@@ -20,6 +20,7 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Do not check RichText.
         $HelperObject->ConfigSettingChange(
@@ -62,7 +63,7 @@ $Selenium->RunTest(
                 );
             }
 
-            my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+            my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
             # Navigate to new phone ticket.
             $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");

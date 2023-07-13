@@ -23,7 +23,7 @@
         </Value>
     </Setting>
     <Setting Name="Frontend::NotifyModule###8000-Daemon-Check" Required="0" Valid="1">
-        <Description Translatable="1">Defines the module to display a notification in the agent interface if the OTRS Daemon is not running.</Description>
+        <Description Translatable="1">Defines the module to display a notification in the agent interface if the Znuny Daemon is not running.</Description>
         <Navigation>Frontend::Agent::FrontendNotification</Navigation>
         <Value>
             <Hash>
@@ -50,7 +50,7 @@
         </Value>
     </Setting>
     <Setting Name="Daemon::Log::RotationType" Required="1" Valid="1">
-        <Description Translatable="1">Type of daemon log rotation to use: Choose 'OTRS' to let OTRS system to handle the file rotation, or choose 'External' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.</Description>
+        <Description Translatable="1">Type of daemon log rotation to use: Choose 'OTRS' to let Znuny system to handle the file rotation, or choose 'External' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.</Description>
         <Navigation>Daemon::Log</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="otrs"><!-- default OTRS -->
@@ -63,7 +63,7 @@
         <Description Translatable="1">If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.</Description>
         <Navigation>Daemon</Navigation>
         <Value>
-            <Item ValueRegex="" ValueType="Directory">/opt/otrs/var/run/</Item>
+            <Item ValueRegex="" ValueType="Directory">/opt/znuny/var/run/</Item>
         </Value>
     </Setting>
     <Setting Name="Daemon::Log::DaysToKeep" Required="0" Valid="0">

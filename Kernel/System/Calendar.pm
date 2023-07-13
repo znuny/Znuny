@@ -414,7 +414,7 @@ Returns:
             ChangeBy     => 3,
             ValidID      => 0,
         },
-        ...
+        # ...
     ];
 
 =cut
@@ -646,9 +646,9 @@ import a calendar
                     ParentID            => 1,
                     CalendarID          => 1,
                     UniqueID            => '20160101T160000-71E386@localhost',
-                    ...
+                    # ...
                 },
-                ...
+                # ...
             },
         },
         OverwriteExistingEntities => 0,     # (optional) Overwrite existing calendar and appointments, default: 0
@@ -816,9 +816,9 @@ returns calendar hash with data:
                 ParentID            => 1,
                 CalendarID          => 1,
                 UniqueID            => '20160101T160000-71E386@localhost',
-                ...
+                # ...
             },
-            ...
+            # ...
         ),
     );
 
@@ -886,7 +886,7 @@ Get permission level for given CalendarID and UserID.
 
 Returns:
 
-    $Permission = 'rw';    # 'ro', 'rw', ...
+    $Permission = 'rw';    # 'ro', 'rw',
 
 =cut
 
@@ -1222,7 +1222,7 @@ Process the ticket appointment rule and create, update or delete appointment if 
             DynamicField_TestDate => {
                 Module => 'Kernel::System::Calendar::Ticket::DynamicField',
             },
-            ...
+            # ...
         },
         Rule => {
             StartDate => 'DynamicField_TestDate',
@@ -2067,7 +2067,7 @@ Returns list of ticket appointments, where key will be either TicketID (default)
 %Appointments = (
     1 => 1,
     2 => 2,
-    ...
+    # ...
 );
 
 =cut

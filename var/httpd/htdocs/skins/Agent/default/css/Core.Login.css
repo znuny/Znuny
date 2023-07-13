@@ -15,28 +15,49 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 @media screen,projection,tv,handheld {
 
 .LoginScreen {
-    padding-top: 90px;
-    height: calc(100vh - 90px);
-    min-height: 430px;
+    height: 100vh;
+}
+
+.LoginScreen #AppWrapper {
+    height: 100vh;
 }
 
 .LoginScreen .MainBox {
-    padding: 0px;
+    padding: 5em 0 0;
 }
 
 .LoginScreen .ErrorBox,
 .LoginScreen .SuccessBox {
-    margin-bottom: 10px;
-    padding: 10px 25px;
+    margin: 0;
+    cursor: default;
+    width: 100%;
+    max-width: 400px;
+    padding: 7px var(--padding-xs);
+    border-radius: var(--border-radius-xs);
+    text-align: center;
+    margin-bottom: var(--margin-md);
+}
+
+.LoginScreen .ErrorBox {
+    background-color: var(--alert-error-bg-solid-color);
+    color: var(--white);
 }
 
 .LoginScreen .SuccessBox {
-    background-color: #6AC0CF;
+    background-color: var(--alert-success-bg-solid-color);
+    color: var(--white);
 }
 
 #LostPassword,
 #BackToLogin {
-    color: #999;
+    color: var(--gray-medium);
+    transition: var(--main-transition);
+}
+
+#LostPassword:hover,
+#BackToLogin:hover {
+    color: var(--black);
+    text-decoration: underline;
 }
 
 .LoginScreen #Header {
@@ -59,47 +80,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     padding-left: 0px;
 }
 
-#Footer a {
-    color: #999;
-    font-size: 11px;
-    display: inline-block;
-    position: relative;
-    padding-left: 18px;
-    margin-bottom: 5px;
-    transition: all ease 0.4s;
-    text-transform: none;
-}
-
-#Footer a span {
-    display: block;
-    width: 20px;
-    height: 20px;
-    background: url(../img/signet_small_bw.png);
-    background-size: cover;
-    margin: 0px auto 10px auto;
-    opacity: 0.3;
-    transition: all ease 0.4s;
-}
-
-#Footer a:hover {
-    text-decoration: none;
-    color: #555;
-}
-
-#Footer a:hover span {
-    opacity: 1;
-    width: 20px;
-    height: 20px;
-    background: url(../img/signet_small_bw_closed.png);
-    background-size: cover;
-    animation-name: ZnunyEat;
-    animation-duration: 0.7s;
-    animation-iteration-count: infinite
-}
-
 .LoginBox,
 #PasswordBox {
-    width: 350px;
+    width: 100%;
+    max-width: 400px;
     margin: 0px auto;
 }
 
@@ -111,15 +95,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 .LoginBox > .WidgetSimple form > fieldset > div,
 #PasswordBox > .WidgetSimple form > fieldset > div {
     position: relative;
-}
-
-.LoginBox input,
-#PasswordBox input {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    margin-bottom: 5px;
 }
 
 .LoginBox .Error.Center.Spacing:empty,
@@ -138,13 +113,27 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 /**
+ * @subsection  Login Footer
+ */
+
+.LoginScreen #Footer {
+    background: transparent;
+}
+
+
+/**
  * @subsection  Customizable logos
  */
 #LoginLogo {
-    background: transparent url(../img/logo.png) center no-repeat;
+    position: relative;
+    top: initial;
+    right: initial;
+    width: 200px;
+    height: 60px;
+    background-color:  transparent;
+    background-repeat: no-repeat;
+    background-size: auto;
     background-size: contain;
-    height: 70px;
-    margin-bottom: 30px;
 }
 
 } /* end @media */

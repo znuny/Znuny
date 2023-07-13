@@ -259,7 +259,7 @@ Add new SysConfig default entries.
                 "XMLContentRaw" => "<Setting Name=\"ACL::CacheTTL\" Required=\"1\" ...",
                 "XMLFilename" => "Ticket.xml"
             },
-            ...
+            # ...
         },
         SettingList => [                                                # list of current settings in DB
             {
@@ -432,7 +432,7 @@ sub DefaultSettingBulkAdd {
                 "XMLContentRaw" => "<Setting Name=\"ACL::CacheTTL\" Required=\"1\" ...",
                 "XMLFilename" => "Ticket.xml"
             },
-            ...
+            # ...
         },
         SettingList => [                                                # list of current settings in DB
             {
@@ -1091,7 +1091,7 @@ Returns:
     @Result = (
         'ACL::CacheTTL',
         'ACLKeysLevel1Change',
-        ...
+        # ...
     );
 
 =cut
@@ -1464,7 +1464,7 @@ Returns:
             ExclusiveLockGUID => 'fjewifjowj...',
             XMLFilename       => 'Filename.xml',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -5459,7 +5459,7 @@ Add batch entries to the DB into a given table.
         Table   => 'table_name',    # (required) Table name
         Columns => [                # (required) Array of column names
             'column_name',
-            ...
+            # ...
         ],
         Data    => [                # (required) AoA with data
             [
@@ -5467,9 +5467,9 @@ Add batch entries to the DB into a given table.
                 'record 2',
             ],
             [
-                ...
+               # ...
             ],
-            ...
+            # ...
         ],
     );
 

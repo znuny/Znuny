@@ -98,7 +98,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
 
         // Use "live" update for the following events because the autocomplete field might not
         // be present in the DOM yet (e.g. in AdminGenericAgent).
-        $('#LabelDynamicField_' + DynamicFieldName+ ' + div, #LabelSearch_DynamicField_' + DynamicFieldName+ ' + div')
+        $('form')
             .off('click.AutocompleteSelect', '#' + AutocompleteFieldName)
             .on('click.AutocompleteSelect', '#' + AutocompleteFieldName, function() {
                 if (DefaultSearchTerm){
@@ -106,7 +106,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                 }
             });
 
-        $('#LabelDynamicField_' + DynamicFieldName+ ' + div, #LabelSearch_DynamicField_' + DynamicFieldName+ ' + div')
+        $('form')
             .off('keyup.AutocompleteSelect', '#' + AutocompleteFieldName)
             .on('keyup.AutocompleteSelect', '#' + AutocompleteFieldName, function() {
                 var $ThisAutocompleteElement = $(this);
@@ -186,12 +186,11 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                         });
                     }
 
-                    // add empty option to prevent disabled field
-                    if (jQuery.isEmptyObject(Options)){
-                        Options  = {' ': ' '};
-                    }
+                    // add empty option to be able to remove the selection
+                    // via "x" button in modernized view.
+                    Options[''] = '-';
 
-                    Znuny.Form.Input.Set(SelectedValueFieldName, Options, {SelectOption: true, Modernize: false, TriggerChange: true});
+                    Znuny.Form.Input.Set(SelectedValueFieldName, Options, {SelectOption: true, Modernize: true, TriggerChange: true});
 
                     if (!jQuery.isEmptyObject(SelectedIDs)){
                         Znuny.Form.Input.Set(SelectedValueFieldName, SelectedIDs);

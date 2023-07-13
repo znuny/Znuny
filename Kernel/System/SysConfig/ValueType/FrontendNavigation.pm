@@ -67,21 +67,21 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
                 {
                     'Item' => [
                         {
-                            ...
+                           # ...
                         },
                     ],
                 },
             ],
         },
         EffectiveValue => {
-            ...
+            # ...
         },
     );
 
 Result:
     %Result = (
         EffectiveValue => {         # Note for FrontendNavigation ValueTypes EffectiveValue is not changed.
-            ...
+            # ...
         },
         Success => 1,
         Error   => undef,
@@ -343,7 +343,7 @@ sub SettingRender {
                 if ( $Param{RW} ) {
                     $HTML .= "<button class='RemoveButton' type='button' "
                         . "title='$RemoveThisEntry' value='Remove this entry'>\n"
-                        . "    <i class='fa fa-minus-circle'></i>\n"
+                        . "    <i class='fa fa-minus-square-o'></i>\n"
                         . "    <span class='InvisibleText'>$RemoveThisEntry</span>\n"
                         . "</button>\n";
                 }
@@ -415,7 +415,7 @@ Generate HTML for new array/hash item.
 Returns:
 
     $HTML = '<select class="Modernize" id="SettingName" name="SettingName" title="SettingName">
-        ...
+        # ...
         </select>';
 
 =cut

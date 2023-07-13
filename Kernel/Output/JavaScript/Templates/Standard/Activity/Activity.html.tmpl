@@ -1,0 +1,24 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<li class="Activity" data-activity-id="{{ ID }}" data-activity-state="{{ State }}">
+    <a href="{{ Link }}" target="{{ LinkTarget }}" class="activity-link activity dropdown-item">
+        <span class="iconWrapper">
+            <i class="activity-icon {{ Icon }}"></i>
+            <span class="ActivityState activity-{{ State }}"></span>
+        </span>
+        <span class="textWrapper">
+            <p class="activity-title">{{ Title }}</p>
+            <p class="activity-text">{{ Text | truncate(100) }}</p>
+            <p class="activity-time">{{ CreateTime }}</p>
+        </span>
+        <span class="activity-delete icon-hover" data-activity-id="{{ ID }}">
+            <i class="fa fa-close"></i>
+        </span>
+    </a>
+</li>

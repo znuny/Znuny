@@ -1,0 +1,244 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     Overview
+*/
+
+@media screen,projection,tv,handheld {
+
+    /****************************/
+    /*   OVERVIEW ( General )   */
+    /****************************/
+    
+    .OverviewBox.Preview .ActionRow {
+        overflow: visible;
+    }
+
+    .Overview {
+        margin: 0;
+        padding: var(--main-page-padding);
+        padding-top: 0;
+        background: var(--main-bg-color);
+    }
+
+    .Overview div.UnreadArticles {
+        display: flex;
+        flex-flow: row;
+        justify-content: end;
+        align-items: center;
+        width: 100%;
+        padding: var(--padding-sm) 0;
+    }
+
+    .Overview > li {
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-top: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .Overview > li:nth-child(odd) {
+        background: var(--white);
+    }
+
+    .Overview > li:last-child {
+        border-bottom-left-radius: var(--border-radius-sm);
+        border-bottom-right-radius: var(--border-radius-sm);
+    }
+
+    .Overview .Content {
+        display: flex;
+        flex-flow: column;
+        padding: var(--padding-md);
+    }
+
+    .Overview .Content>span {
+        display: flex;
+        flex-flow: row;
+    }
+
+    .Overview .Content ul + span {
+        /*padding-top: var(--padding-sm);*/
+        padding-bottom: var(--padding-xl);
+        align-items: center;
+    }
+
+    .Overview .Content span>.Checkbox, 
+    .flag-container {
+        width: var(--gap-xl);
+        display: flex;
+        flex-flow: column;
+        padding-right: var(--padding-lg);
+    }
+
+    .Overview .Checkbox {
+        margin: 0;
+    }
+
+    .Overview input.Checkbox:hover {
+        border-color: var(--success-color);
+    }
+
+    .Overview table, 
+    .Overview h2 {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* OverviewControl */
+    .OverviewControl .ControlRow .ActionRow .OverviewActions{
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+    }
+
+    /* Input Fields */
+    .Overview > li ul.InlineActions li form div.InputField_Container {
+        position: relative;
+        top: -3px;
+    }
+
+    .Overview > li ul.InlineActions li form div.InputField_Container .InputField_InputContainer,
+    .Overview .ItemActions form .InputField_Container .InputField_InputContainer {
+        max-width: 185px;
+    }
+
+    .Overview .ItemActions form label {
+        min-width: unset;
+        margin-right: var(--margin-xs);
+    }
+
+    .Overview > li ul.InlineActions li form div.InputField_Container .InputField_InputContainer input {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        height: auto;
+        line-height: normal;
+        color: var(--white);
+    }
+
+    .Overview > li ul.InlineActions li form div.InputField_Container .InputField_InputContainer input:focus {
+        border-color: var(--gray-dark-semi);
+    }
+
+
+
+
+
+
+
+    /*******************************************************/
+    /*          TICKET QUEUE / SERVICE OVERVIEW            */
+    /*******************************************************/
+    .level-filter-view {
+        font-size: initial;
+        margin: 0;
+        padding: var(--padding-lg) var(--padding-lg) 0 var(--padding-lg);
+        color: initial;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .level-filter-view .Content {
+        width: 100%;
+    }
+
+    ul.QueueOverviewList, 
+    ul.ServiceOverviewList {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--margin-sm);
+        padding: var(--padding-sm);
+        margin-bottom: var(--margin-lg);
+        background: var(--main-bg-color);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+    }
+
+    ul.QueueOverviewList li, 
+    ul.ServiceOverviewList li {
+        display: flex;
+        white-space: nowrap;
+    }
+
+    ul.QueueOverviewList li:first-child, 
+    ul.ServiceOverviewList li:first-child {
+        margin-left: 0;
+    }
+
+    ul.QueueOverviewList li a, 
+    ul.ServiceOverviewList li a {
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        /*font-family: Inter*/
+        padding: 8px var(--padding-lg);
+        color: var(--main-font-color);
+        background: var(--white);
+        transition: var(--main-transition);
+        font-size: var(--font-size-sm);
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    ul.QueueOverviewList li a:hover, 
+    ul.ServiceOverviewList li a:hover {
+        border: var(--border-width) var(--border-solid) var(--primary-color-darker);
+        color: var(--white);
+        background: var(--primary-color-darker);
+        opacity: 1;
+    }
+
+    .QueueOverview a.Active,
+    .QueueOverview .Active > a,
+    .ServiceOverview a.Active,
+    .ServiceOverview .Active> a {
+        border: 1.5px var(--border-solid) var(--primary-color);
+        background: var(--primary-color-rgb);
+        font-weight: var(--bold);
+    }
+
+
+
+    /******************************/
+    /*  INL-ACTIONS ( Dropdown )  */
+    /******************************/
+    ul.InlineActions {
+        position: absolute;
+        cursor: auto;
+        top: -35px;
+        right: 0px;
+        background-color: var(--inlactions-bg-color);
+        height: var(--inlactions-height);
+        transition: var(--main-transition);
+        border-bottom-left-radius: var(--border-radius-md);
+        padding: 0 var(--padding-lg) !important;
+    }
+    
+    ul.InlineActions li,
+    ul.InlineActions li a {
+        color: var(--inlactions-text-color) !important;
+        font-size: var(--inlactions-font-size) !important;
+    }
+    
+    ul.InlineActions,
+    ul.InlineActions li {
+        display: flex !important;
+        flex-flow: row;
+        align-items: center;
+    }
+    
+    ul.InlineActions li:hover > a {
+        text-decoration: underline;
+        color: blue;
+    }
+    
+    .InlineActions .ResponsiveActionMenu {
+        display: none !important;
+    }
+}

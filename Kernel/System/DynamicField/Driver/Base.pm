@@ -44,7 +44,9 @@ sub ValueIsDifferent {
 sub ValueDelete {
     my ( $Self, %Param ) = @_;
 
-    my $Success = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueDelete(
+    my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+
+    my $Success = $DynamicFieldValueObject->ValueDelete(
         FieldID  => $Param{DynamicFieldConfig}->{ID},
         ObjectID => $Param{ObjectID},
         UserID   => $Param{UserID},
@@ -56,7 +58,9 @@ sub ValueDelete {
 sub AllValuesDelete {
     my ( $Self, %Param ) = @_;
 
-    my $Success = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->AllValuesDelete(
+    my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+
+    my $Success = $DynamicFieldValueObject->AllValuesDelete(
         FieldID => $Param{DynamicFieldConfig}->{ID},
         UserID  => $Param{UserID},
     );
@@ -103,20 +107,23 @@ creates the label HTML to be used in edit masks.
 sub EditLabelRender {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
     for my $Needed (qw(DynamicFieldConfig FieldName)) {
-        if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!"
-            );
-            return;
-        }
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
     }
 
     # check DynamicFieldConfig (general)
     if ( !IsHashRefWithData( $Param{DynamicFieldConfig} ) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "The field configuration is invalid",
         );
@@ -126,7 +133,7 @@ sub EditLabelRender {
     # check DynamicFieldConfig (internally)
     for my $Needed (qw(Label)) {
         if ( !$Param{DynamicFieldConfig}->{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed in DynamicFieldConfig!"
             );
@@ -138,22 +145,47 @@ sub EditLabelRender {
     my $LabelText = $Param{DynamicFieldConfig}->{Label};
 
     my $LabelID    = 'Label' . $Param{FieldName};
-    my $HTMLString = '';
+    my $HTMLString = "<div class='label-wrapper'>";
+
+    # optional checkbox
+    my $Prefix   = $Param{Prefix}                 || '';
+    my $Optional = $Param{ $Prefix . 'Optional' } || 0;
+
+    if ($Optional) {
+        my $Used  = $Param{ $Prefix . 'Used' }  || 0;
+        my $Class = $Param{ $Prefix . 'Class' } || '';
+        my $Checked = '';
+        if ($Used) {
+            $Checked = " checked='checked'";
+        }
+
+        $HTMLString .= "<input type='checkbox' name='"
+            . $Prefix
+            . "Used' id='" . $Prefix . "Used' value='1'"
+            . $Checked
+            . " class='$Class'"
+            . " title='"
+            . $Param{LayoutObject}->{LanguageObject}->Translate('Check to activate this date')
+            . "' "
+            . ( $Param{Disabled} ? 'disabled="disabled"' : '' )
+            . "/>";
+    }
+
+    if ( $Param{ConfirmationCheckboxes} ) {
+        $Param{FieldChecked} ||= '';
+        $HTMLString
+            .= "<input type='checkbox' id='$Param{FieldName}' name='$Param{FieldName}' value='1' $Param{FieldChecked} />";
+    }
 
     if ( $Param{Mandatory} ) {
 
         # opening tag
-        $HTMLString = <<"EOF";
-<label id="$LabelID" for="$Name" class="Mandatory">
-    <span class="Marker">*</span>
-EOF
+        $HTMLString .= "<label id='$LabelID' for='$Name' class='Mandatory'>";
+        $HTMLString .= "<span class='Marker'>*</span>";
     }
     else {
-
         # opening tag
-        $HTMLString = <<"EOF";
-<label id="$LabelID" for="$Name">
-EOF
+        $HTMLString .= "<label id='$LabelID' for='$Name'>";
     }
 
     # text
@@ -167,12 +199,9 @@ EOF
         );
         $HTMLString .= ")";
     }
-    $HTMLString .= ":\n";
 
     # closing tag
-    $HTMLString .= <<"EOF";
-</label>
-EOF
+    $HTMLString .= "</label></div>";
 
     return $HTMLString;
 }
@@ -202,9 +231,12 @@ Searches/fetches dynamic field value.
 sub ValueSearch {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
+    my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+
     # check mandatory parameters
     if ( !IsHashRefWithData( $Param{DynamicFieldConfig} ) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Need DynamicFieldConfig!"
         );
@@ -226,14 +258,14 @@ sub ValueSearch {
     );
 
     if ( !defined $SearchSQL || !length $SearchSQL ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Error generating search SQL!"
         );
         return;
     }
 
-    my $Values = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueSearch(
+    my $Values = $DynamicFieldValueObject->ValueSearch(
         FieldID   => $Param{DynamicFieldConfig}->{ID},
         Search    => $Param{Search},
         SearchSQL => $SearchSQL,

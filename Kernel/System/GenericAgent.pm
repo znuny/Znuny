@@ -740,7 +740,7 @@ adds a new job to the database
         Name => 'JobName',
         Data => {
             Queue => 'SomeQueue',
-            ...
+            # ...
             Valid => 1,
         },
         UserID => 123,

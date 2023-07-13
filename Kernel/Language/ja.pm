@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.704252577319588;
+    $Self->{Completeness}        = 0.687758136461259;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -38,7 +38,6 @@ sub Data {
     $Self->{Translation} = {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
-        'ACL Management' => 'ACL管理',
         'Actions' => '操作',
         'Create New ACL' => '新しいACLを作成',
         'Deploy ACLs' => 'ACLをデプロイ',
@@ -57,7 +56,11 @@ sub Data {
             '新規のACLは、他のシステムからエクスポートしたACLをインポートするか、完全に新規で作成するかのいずれかの方法で作成できます。',
         'Changes to the ACLs here only affect the behavior of the system, if you deploy the ACL data afterwards. By deploying the ACL data, the newly made changes will be written to the configuration.' =>
             'ここでのACLの変更はACLをデプロイした後に反映されます。デプロイにより新規の変更は設定に書き込まれます。',
+        'ACL Management' => 'ACL管理',
         'ACLs' => 'ACL',
+        'Filter' => 'フィルター',
+        'Show Valid' => '',
+        'Show All' => '',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'このテーブルはACLの実行順序に影響を与えます。もし実行順序を変更したい場合には、ACLの名前を変更して下さい。',
         'ACL name' => 'ACL名',
@@ -69,8 +72,6 @@ sub Data {
         'No matches found.' => '一致しませんでした。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
-        'Edit ACL %s' => 'ACLの %s を編集',
-        'Edit ACL' => 'ACLを編集',
         'Go to overview' => '一覧に戻る',
         'Delete ACL' => 'ACLを削除',
         'Delete Invalid ACL' => '無効なACLを削除',
@@ -81,16 +82,16 @@ sub Data {
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'マッチした対象をどのように絞り込むかを指定します。\'Possible\'はホワイトリスト、\'PossibleNot\'はブラックリストです。',
         'Check the official %sdocumentation%s.' => '',
+        'Edit ACL %s' => 'ACLの %s を編集',
+        'Edit ACL' => 'ACLを編集',
         'Show or hide the content' => '内容の表示・非表示',
         'Edit ACL Information' => 'ACL情報を編集',
         'Name' => '名前',
         'Stop after match' => '一致後に停止',
         'Edit ACL Structure' => 'ACL構造を修正',
-        'Save ACL' => 'ACLの保存',
-        'Save' => '保存',
-        'or' => 'または',
-        'Save and finish' => '保存して終了',
         'Cancel' => '取消',
+        'Save' => '保存',
+        'Save and finish' => '保存して終了',
         'Do you really want to delete this ACL?' => 'このACLを本当に削除しますか？',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt
@@ -98,11 +99,9 @@ sub Data {
             'フォームを送信することにより、新規にACLを作成する事ができます。ACLを作成後、編集モードより構成アイテムを追加することができます。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
-        'Calendar Management' => 'カレンダー管理',
-        'Add Calendar' => 'カレンダーの登録',
-        'Edit Calendar' => 'カレンダーを編集',
         'Calendar Overview' => 'カレンダー表示',
         'Add new Calendar' => 'カレンダーの登録',
+        'Add Calendar' => 'カレンダーの登録',
         'Import Appointments' => '予約のインポート',
         'Calendar Import' => 'カレンダーをインポート',
         'Here you can upload a configuration file to import a calendar to your system. The file needs to be in .yml format as exported by calendar management module.' =>
@@ -121,6 +120,8 @@ sub Data {
         'Create: users can create and delete appointments in the calendar.' =>
             '作成: ユーザーはカレンダーにアポイントメントを作成/削除できます。',
         'Read/write: users can manage the calendar itself.' => '読み書き可能：ユーザーはカレンダー自体を管理できます。',
+        'Calendar Management' => 'カレンダー管理',
+        'Edit Calendar' => 'カレンダーを編集',
         'Group' => 'グループ',
         'Changed' => '変更日時',
         'Created' => '作成',
@@ -132,7 +133,6 @@ sub Data {
         'Calendar' => 'カレンダー',
         'Calendar name' => 'カレンダー名',
         'Calendar with same name already exists.' => '同じ名前のカレンダーは既に存在します。',
-        'Color' => '色',
         'Permission group' => '権限グループ',
         'Ticket Appointments' => 'チケットの予約',
         'Rule' => 'ルール',
@@ -153,11 +153,11 @@ sub Data {
         'Submit' => '送信',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentImport.tt
-        'Appointment Import' => '予約のインポート',
         'Go back' => '戻る',
         'Uploaded file must be in valid iCal format (.ics).' => 'アップロードするファイルはiCalフォーマット(拡張子.ics)である必要があります。',
         'If desired Calendar is not listed here, please make sure that you have at least \'create\' permissions.' =>
             'もし意図したカレンダーが表示されていない場合、自身に作成権限が付与されていることを確認してください。',
+        'Appointment Import' => '予約のインポート',
         'Upload' => 'アップロード',
         'Update existing appointments?' => '既存の予定を更新しますか？',
         'All existing appointments in the calendar with same UniqueID will be overwritten.' =>
@@ -166,9 +166,7 @@ sub Data {
         'Import appointments' => '予約のインポート',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-        'Appointment Notification Management' => '予約通知の管理',
         'Add Notification' => '通知の追加',
-        'Edit Notification' => '通知の編集',
         'Export Notifications' => '通知をエクスポート',
         'Filter for Notifications' => '通知でフィルター',
         'Filter for notifications' => '通知でフィルター',
@@ -177,6 +175,8 @@ sub Data {
         'Overwrite existing notifications?' => '存在する通知を上書きしますか。',
         'Upload Notification configuration' => '通知設定のアップロード',
         'Import Notification configuration' => '通知の設定をインポート',
+        'Appointment Notification Management' => '予約通知の管理',
+        'Edit Notification' => '通知の編集',
         'List' => 'リスト',
         'Delete' => '削除',
         'Delete this notification' => 'この通知を削除',
@@ -200,11 +200,11 @@ sub Data {
         'Send to these agents' => 'これらの担当者に送信',
         'Send to all group members (agents only)' => 'グループ内の全面バーに送信（担当者のみ）',
         'Send to all role members' => 'ロールの全てのメンバーに送付',
-        'Send on out of office' => '外出中の担当者に送信',
         'Also send if the user is currently out of office.' => '現在外出中のユーザーにも送付する。',
-        'Once per day' => '一日に一度',
+        'Send on out of office' => '外出中の担当者に送信',
         'Notify user just once per day about a single appointment using a selected transport.' =>
             '選択された通知方法を使って1つの予約に対して1日に1度だけユーザーに通知します。',
+        'Once per day' => '一日に一度',
         'Notification Methods' => '通知方法',
         'These are the possible methods that can be used to send this notification to each of the recipients. Please select at least one method below.' =>
             '',
@@ -215,7 +215,6 @@ sub Data {
         'This is the default value for assigned recipient agents who didn\'t make a choice for this notification in their preferences yet. If the box is enabled, the notification will be sent to such agents.' =>
             'これは、全ての担当者の個々の環境設定に通知にチェックが入ります。そして通知されます。',
         'This feature is currently not available.' => 'この機能は現在利用できません。',
-        'Please activate this transport in order to use it.' => '使用するには、このトランスポートを有効にしてください。',
         'No data found' => 'データがありません',
         'No notification method found.' => '通知方法が見つかりませんでした。',
         'Notification Text' => '通知文書',
@@ -243,14 +242,14 @@ sub Data {
         'If encryption key/certificate is missing' => 'もし暗号化された鍵/証明書が存在しない場合',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
-        'Attachment Management' => '添付ファイル管理',
         'Add Attachment' => '添付ファイルを追加',
-        'Edit Attachment' => '添付ファイルを編集',
         'Filter for Attachments' => '添付ファイルでフィルタ',
         'Filter for attachments' => '添付ファイルのフィルター',
         'Related Actions' => '',
         'Templates' => 'テンプレート',
         'Templates ↔ Attachments' => '',
+        'Attachment Management' => '添付ファイル管理',
+        'Edit Attachment' => '添付ファイルを編集',
         'Filename' => 'ファイル名',
         'Download file' => 'ダウンロードファイル',
         'Delete this attachment' => 'この添付ファイルを削除',
@@ -258,57 +257,29 @@ sub Data {
         'Attachment' => '添付ファイル',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-        'Auto Response Management' => '自動応答管理',
         'Add Auto Response' => '自動応答追加',
-        'Edit Auto Response' => '自動応答編集',
         'Filter for Auto Responses' => '自動応答でフィルタ',
         'Filter for auto responses' => '自動応答でフィルター',
         'Queues ↔ Auto Responses' => '',
+        'Auto Response Management' => '自動応答管理',
+        'Edit Auto Response' => '自動応答編集',
         'Response' => '応答',
         'Auto response from' => '自動応答差出人',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
-        'Cloud Service Management' => 'クラウドサービス管理',
-        'Support Data Collector' => 'サポート情報コレクター',
-        'Support data collector' => 'サポート情報コレクター',
-        'Hint' => 'ヒント',
-        'Currently support data is only shown in this system.' => '現在サポートしているデーターはこのシステムでのみ表示されています。',
-        'It is highly recommended to send this data to OTRS Group in order to get better support.' =>
-            'より良いサポートを提供するために、このデータをOTRSグループにお送りいただくことを強くお勧めします。',
-        'Configuration' => '設定',
-        'Send support data' => 'サポート情報の送信',
-        'This will allow the system to send additional support data information to OTRS Group.' =>
-            'この操作は、システムによる OTRS Group への追加サポート情報の送信を許可します。',
-        'Update' => '更新',
-        'System Registration' => 'システム登録',
-        'To enable data sending, please register your system with OTRS Group or update your system registration information (make sure to activate the \'send support data\' option.)' =>
-            'データ送信を有効にするために、OTRS Group へのシステムの登録・更新をお願いします (併せて「サポート情報の送信」のチェックを有効にするのを忘れずに)。',
-        'Register this System' => 'このシステムをサポート登録する',
-        'System Registration is disabled for your system. Please check your configuration.' =>
-            'システムのサポート登録機能が無効になっています。設定をご確認ください。',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServices.tt
-        'System registration is a service of OTRS Group, which provides a lot of advantages!' =>
-            'OTRSグループへのシステムのサポート登録により、多くのメリットが提供されます。',
-        'Please note that the use of OTRS cloud services requires the system to be registered.' =>
-            'OTRS クラウドサービスのご利用には、システムの登録が必要となりますのでご注意ください。',
-        'Here you can configure available cloud services that communicate securely with %s.' =>
-            'ここで、 %s と安全に通信するために利用可能なクラウドサービスを構成できます。',
-        'Available Cloud Services' => '利用可能なクラウドサービス',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLog.tt
-        'Communication Log' => 'コミュニケーション・ログ',
         'Time Range' => '時間の範囲',
         'Show only communication logs created in specific time range.' =>
             '特定の時間範囲で作成された通信ログのみを表示します。',
         'Filter for Communications' => '',
         'Filter for communications' => 'コミュニケーションでフィルター',
+        'Hint' => 'ヒント',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             'この画面では、着信および発信コミュニケーションの概要を確認できます。',
         'You can change the sort and order of the columns by clicking on the column header.' =>
             '',
         'If you click on the different entries, you will get redirected to a detailed screen about the message.' =>
             '',
+        'Communication Log' => 'コミュニケーション・ログ',
         'Status for: %s' => 'ステータス: %s',
         'Failing accounts' => '失敗したアカウント',
         'Some account problems' => 'いくつかのアカウントの問題',
@@ -331,12 +302,12 @@ sub Data {
         '%s s' => '%s s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
-        'Account Status' => 'アカウントのステータス',
         'Back to overview' => '一覧に戻る',
         'Filter for Accounts' => 'アカウントでフィルター',
         'Filter for accounts' => 'アカウントでフィルター',
         'You can change the sort and order of those columns by clicking on the column header.' =>
             '列ヘッダーをクリックすると、列の並べ替えや順序を変更できます。',
+        'Account Status' => 'アカウントのステータス',
         'Account status for: %s' => 'アカウントステータス：%s',
         'Status' => 'ステータス',
         'Account' => 'アカウント',
@@ -359,24 +330,24 @@ sub Data {
         'No log entries found.' => 'ログ・エントリは見つかりませんでした。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogZoom.tt
-        'Detail view for %s communication started at %s' => '詳細ビューは%sから%sのコミュニケーションが開始されました。',
         'Filter for Log Entries' => 'ログエントリーでフィルター',
         'Filter for log entries' => 'ログエントリーでフィルター',
         'Show only entries with specific priority and higher:' => '',
+        'Detail view for %s communication started at %s' => '詳細ビューは%sから%sのコミュニケーションが開始されました。',
         'Communication Log Overview (%s)' => 'コミュニケーション・ログ一覧（%s）',
         'No communication objects found.' => 'コミュニケーション・オブジェクトが見つかりませんでした。',
         'Communication Log Details' => 'コミュニケーション・ログの詳細',
         'Please select an entry from the list.' => 'リストから項目を選択して下さい。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
-        'Customer Management' => '顧客管理',
-        'Add Customer' => '顧客を追加',
-        'Edit Customer' => '顧客を編集',
         'Search' => '検索',
         'Wildcards like \'*\' are allowed.' => 'ワイルドカード（*）が使用できます。',
+        'Add Customer' => '顧客を追加',
         'Select' => '選択',
         'Customer Users' => '顧客ユーザー',
         'Customers ↔ Groups' => '顧客 ↔ グループ',
+        'Customer Management' => '顧客管理',
+        'Edit Customer' => '顧客を編集',
         'List (only %s shown - more available)' => '一覧 ( %s 件のみ表示、他候補あり)',
         'total' => '合計',
         'Please enter a search term to look for customers.' => '顧客を検索するための条件を入力してください',
@@ -385,7 +356,6 @@ sub Data {
         'This customer backend is read only!' => 'この顧客情報は読み取り専用です！',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
-        'Manage Customer-Group Relations' => '顧客-グループ関連性管理',
         'Notice' => '通知',
         'This feature is disabled!' => 'この機能は無効にされています。',
         'Just use this feature if you want to define group permissions for customers.' =>
@@ -401,6 +371,7 @@ sub Data {
             '何も選択しない場合、このグループは権限がありません (チケットは顧客が使用できません)',
         'Customers' => '顧客',
         'Groups' => 'グループ',
+        'Manage Customer-Group Relations' => '顧客-グループ関連性管理',
         'Search Results' => '検索結果',
         'Change Group Relations for Customer' => '顧客に対するグループの関連性を変更',
         'Change Customer Relations for Group' => 'グループに対する顧客の関連性を変更',
@@ -416,15 +387,15 @@ sub Data {
             'このグループ／キューのチケットに読み書きを含めた全権限を付与します。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
-        'Customer User Management' => '顧客ユーザー管理',
-        'Add Customer User' => '顧客ユーザーを追加',
-        'Edit Customer User' => '顧客ユーザーを編集',
         'Back to search results' => '検索結果に戻る',
+        'Add Customer User' => '顧客ユーザーを追加',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '顧客ユーザーは顧客履歴の使用と顧客パネルからログインするために必要です。',
         'Customer Users ↔ Customers' => '顧客ユーザー ↔ 顧客',
         'Customer Users ↔ Groups' => '顧客ユーザー ↔ グループ',
         'Customer Users ↔ Services' => '顧客ユーザー ↔ サービス',
+        'Customer User Management' => '顧客ユーザー管理',
+        'Edit Customer User' => '顧客ユーザーを編集',
         'List (%s total)' => '一覧 (全 %s 件)',
         'Username' => 'ユーザー名',
         'Email' => 'メール',
@@ -454,8 +425,8 @@ sub Data {
             '上の表は、パーミッションコンテキストによって 顧客ユーザー に許可された顧客アクセスを示します。 マトリックスは、すべての継承されたアクセス許可（たとえば、顧客グループを介したもの）を考慮に入れます。注：この表は、フォーム内の未送信分を考慮していません。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
-        'Manage Customer User-Customer Relations' => '顧客ユーザー - 顧客の関係を管理',
         'Select the customer user:customer relations.' => '顧客ユーザー - 顧客の関係を選択',
+        'Manage Customer User-Customer Relations' => '顧客ユーザー - 顧客の関係を管理',
         'Change Customer Relations for Customer User' => '顧客ユーザーと顧客の関係を変更',
         'Change Customer User Relations for Customer' => '顧客ユーザーと顧客の関係を変更',
         'Toggle active state for all' => 'すべての有効なステータスを切り替え',
@@ -463,7 +434,6 @@ sub Data {
         'Toggle active state for %s' => '有効なステータス %s を切り替え',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
-        'Manage Customer User-Group Relations' => '顧客ユーザー - グループの関係を管理',
         'Just use this feature if you want to define group permissions for customer users.' =>
             '顧客ユーザー のグループ権限を設定する場合のみこの機能を使用できます。',
         'Edit Customer User Default Groups' => '顧客ユーザーのデフォルトグループの編集',
@@ -475,18 +445,18 @@ sub Data {
         'Select the customer user - group permissions.' => '顧客ユーザーを選択 - グループ・パーミッション',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer user).' =>
             '何も選択しない場合、このグループは権限がありません (チケットは 顧客ユーザー が使用できません)',
+        'Manage Customer User-Group Relations' => '顧客ユーザー - グループの関係を管理',
         'Customer User Default Groups:' => '顧客ユーザーのデフォルト・グループ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Manage Customer User-Service Relations' => '',
         'Edit default services' => '既定のサービス編集',
         'Filter for Services' => 'サービスでフィルタ',
         'Filter for services' => 'サービスでフィルター',
         'Services' => 'サービス',
         'Service Level Agreements' => 'サービスレベル契約（SLA）',
+        'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
-        'Dynamic Fields Management' => 'ダイナミック・フィールド の管理',
         'Add new field for object' => 'オブジェクトに新規領域を追加',
         'Filter for Dynamic Fields' => 'ダイナミック・フィールドでフィルター',
         'Filter for dynamic fields' => 'ダイナミック・フィールドでフィルター',
@@ -500,6 +470,7 @@ sub Data {
         'Export configurations' => '',
         'Process Management' => 'プロセス管理',
         'Dynamic fields ↔ Screens' => '',
+        'Dynamic Fields Management' => 'ダイナミック・フィールド の管理',
         'Dynamic Fields List' => 'ダイナミック・フィールド 一覧',
         'Dynamic fields per page' => 'ページ毎の ダイナミック・フィールド',
         'Label' => 'ラベル',
@@ -508,8 +479,8 @@ sub Data {
         'Delete this field' => 'この領域を削除',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
-        'Dynamic Fields' => 'ダイナミック・フィールド',
         'Go back to overview' => '一覧に戻る',
+        'Dynamic Fields' => 'ダイナミック・フィールド',
         'General' => 'ジェネラル',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'この領域は必須であり、値はアルファベットと数値のみでなければなりません。',
@@ -536,11 +507,11 @@ sub Data {
         'This is the default value for this field.' => 'これはこの領域に対するデフォルト値です。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldConfigurationImportExport.tt
-        'Dynamic field configurations: %s' => '',
         'Select the dynamic fields you want to import and click on \'Import\'.' =>
             '',
         'Select the dynamic fields whose configuration you want to export and click on \'Export\' to generate a YAML file.' =>
             '',
+        'Dynamic field configurations: %s' => '',
         'Dynamic fields' => 'ダイナミック・フィールド',
         'For the following dynamic fields a configuration cannot be imported because of an invalid backend.' =>
             '',
@@ -599,7 +570,6 @@ sub Data {
         'Screens' => '',
         'Default columns' => '',
         'Add dynamic field' => 'ダイナミック・フィールドを追加',
-        'Filter' => 'フィルター',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
         'Filter available elements' => '',
@@ -672,7 +642,7 @@ sub Data {
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
             '',
         'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in OTRS (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
+        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -697,9 +667,9 @@ sub Data {
         'StoredValue' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminEmail.tt
-        'Admin Message' => '管理者メッセージ',
         'With this module, administrators can send messages to agents, group or role members.' =>
             '本モジュールにて、管理者からエージェント、グループ、ロールメンバーへメッセージを送信することが可能です。',
+        'Admin Message' => '管理者メッセージ',
         'Create Administrative Message' => '管理者メッセージを作成',
         'Your message was sent to' => '送信されたメッセージ',
         'From' => '差出人',
@@ -712,16 +682,17 @@ sub Data {
         'Send' => '送信',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-        'Generic Agent Job Management' => '',
-        'Edit Job' => '',
         'Add Job' => '',
-        'Run Job' => '',
         'Filter for Jobs' => '',
         'Filter for jobs' => '',
+        'Generic Agent Job Management' => '',
+        'Edit Job' => '',
+        'Run Job' => '',
         'Last run' => '最終実行',
-        'Run Now!' => '今すぐ実行！',
+        'Run' => '実行',
         'Delete this task' => 'このタスクを削除',
         'Run this task' => 'このタスクを実行',
+        'Do you really want to delete this generic agent job?' => '',
         'Job Settings' => 'ジョブ設定',
         'Job name' => 'ジョブ名',
         'The name you entered already exists.' => '入力された名前は既に存在します。',
@@ -743,9 +714,9 @@ sub Data {
             '',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '',
-        'Do you really want to delete this event trigger?' => 'このイベントトリガーを本当に削除しますか？',
         'Add Event Trigger' => 'イベントトリガーを追加',
         'To add a new event select the event object and event name' => '新しいイベントを追加するには、イベントオブジェクトとイベント名を選択します。',
+        'Do you really want to delete this event trigger?' => 'このイベントトリガーを本当に削除しますか？',
         'Select Tickets' => 'チケットを選択',
         '(e. g. 10*5155 or 105658*)' => '(例 10*5144 または 105658*)',
         '(e. g. 234321)' => '(例 234321)',
@@ -838,13 +809,13 @@ sub Data {
         'Age' => '経過時間',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceDebugger.tt
-        'GenericInterface Web Service Management' => 'ジェネリックインターフェース・Webサービス管理',
-        'Web Service Management' => 'ウェブサービスの管理',
-        'Debugger' => 'デバッガー',
         'Go back to web service' => 'Webサービスに戻る',
         'Clear' => 'クリア',
         'Do you really want to clear the debug log of this web service?' =>
             'このWEBサービスのデバッグログを本当にクリアしますか。',
+        'GenericInterface Web Service Management' => 'ジェネリックインターフェース・Webサービス管理',
+        'Web Service Management' => 'ウェブサービスの管理',
+        'Debugger' => 'デバッガー',
         'Request List' => 'リクエストリスト',
         'Time' => '時間',
         'Communication ID' => 'コミュニケーションID',
@@ -858,16 +829,16 @@ sub Data {
         'Refresh' => '自動更新',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingDefault.tt
-        'Add ErrorHandling' => 'エラー処理の追加',
-        'Edit ErrorHandling' => 'エラー処理の修正',
         'Do you really want to delete this error handling module?' => '',
         'All configuration data will be lost.' => 'すべての設定情報は失われます',
+        'Add ErrorHandling' => 'エラー処理の追加',
+        'Edit ErrorHandling' => 'エラー処理の修正',
         'General options' => '一般的なオプション',
         'The name can be used to distinguish different error handling configurations.' =>
             '',
         'Please provide a unique name for this web service.' => 'Webサービスの名称として一意の名前を指定してください。',
         'Error handling module backend' => 'エラー処理モジュールのバックエンド',
-        'This OTRS error handling backend module will be called internally to process the error handling mechanism.' =>
+        'This Znuny error handling backend module will be called internally to process the error handling mechanism.' =>
             '',
         'Processing options' => '処理中オプション',
         'Configure filters to control error handling module execution.' =>
@@ -954,22 +925,22 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+        'Do you really want to delete this invoker?' => 'このAPI実行元を本当に削除しますか。',
         'Add Invoker' => 'API実行元を追加',
         'Edit Invoker' => 'API実行元を修正',
-        'Do you really want to delete this invoker?' => 'このAPI実行元を本当に削除しますか。',
         'Invoker Details' => 'API実行元の詳細',
         'The name is typically used to call up an operation of a remote web service.' =>
             'この名称は、一般的にリモートWebサービスの呼び出しに用いられます。',
         'Invoker backend' => 'API実行元のバックエンド',
-        'This OTRS invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
-            'このOTRSのAPI実行元のバックエンドモジュールは、リモートシステムに送信されるデータを準備し、その応答データを処理するために呼び出されます。',
+        'This Znuny invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
+            'このZnunyのAPI実行元のバックエンドモジュールは、リモートシステムに送信されるデータを準備し、その応答データを処理するために呼び出されます。',
         'Mapping for outgoing request data' => '送信要求データのマッピング',
         'Configure' => '設定',
-        'The data from the invoker of OTRS will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
-            'OTRSのAPI実行元からのデータは、このマッピングによって処理され、リモートシステムが予期している種類のデータに変換されます。',
+        'The data from the invoker of Znuny will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
+            'ZnunyのAPI実行元からのデータは、このマッピングによって処理され、リモートシステムが予期している種類のデータに変換されます。',
         'Mapping for incoming response data' => '着信応答データのマッピング',
-        'The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTRS expects.' =>
-            'レスポンスデータをこのマッピングにのっとって OTRS のAPI実行元が期待するデータの種類に変換します。',
+        'The response data will be processed by this mapping, to transform it to the kind of data the invoker of Znuny expects.' =>
+            'レスポンスデータをこのマッピングにのっとって Znuny のAPI実行元が期待するデータの種類に変換します。',
         'Asynchronous' => '非同期',
         'Condition' => '条件',
         'Edit this event' => 'このイベントを修正',
@@ -977,8 +948,8 @@ sub Data {
         'Add Event' => 'イベントを追加',
         'To add a new event select the event object and event name and click on the "+" button' =>
             '新しいイベントを追加するには、イベントオブジェクトをイベント名を選択してから"+"ボタンをクリックしてください',
-        'Asynchronous event triggers are handled by the OTRS Scheduler Daemon in background (recommended).' =>
-            '非同期型イベントトリガーは、OTRSスケジューラー・デーモンによってバックグラウンドで実行されます（推奨）。',
+        'Asynchronous event triggers are handled by the Znuny Scheduler Daemon in background (recommended).' =>
+            '非同期型イベントトリガーは、Znunyスケジューラー・デーモンによってバックグラウンドで実行されます（推奨）。',
         'Synchronous event triggers would be processed directly during the web request.' =>
             '同期型イベントトリガーは直接Web画面上のリクエストから実行されます。',
         'Add all attachments' => '',
@@ -1015,11 +986,11 @@ sub Data {
         'Remove key mapping' => 'キー割り当ての削除',
         'Key mapping' => 'キー割り当て',
         'Map key' => 'キーの割り当て',
-        'matching the' => '一致',
+        'matching' => '',
         'to new key' => 'へ新しいキーを割り当てる',
         'Value mapping' => '値のマッピング',
         'Map value' => '値の割り当て',
-        'to new value' => 'へ新しい値を割り当てる',
+        'new value' => '',
         'Remove value mapping' => '割り当てた値の削除',
         'New value map' => '新しい値の割り当て',
         'Add value mapping' => '値の割り当てを追加',
@@ -1082,17 +1053,17 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
+        'Do you really want to delete this operation?' => 'このオペレーションを本当に削除しますか？',
         'Add Operation' => 'オペレーションを追加',
         'Edit Operation' => 'オペレーションを修正',
-        'Do you really want to delete this operation?' => 'このオペレーションを本当に削除しますか？',
         'Operation Details' => 'オペレーションの詳細',
         'The name is typically used to call up this web service operation from a remote system.' =>
             'この名称は、一般的にリモートシステムからのWebサービスの呼び出しに用いられます。',
         'Operation backend' => 'オペレーション・バックエンド',
-        'This OTRS operation backend module will be called internally to process the request, generating data for the response.' =>
+        'This Znuny operation backend module will be called internally to process the request, generating data for the response.' =>
             '',
         'Mapping for incoming request data' => '受信したデータのマッピング',
-        'The request data will be processed by this mapping, to transform it to the kind of data OTRS expects.' =>
+        'The request data will be processed by this mapping, to transform it to the kind of data Znuny expects.' =>
             '',
         'Mapping for outgoing response data' => '送信データのマッピング',
         'The response data will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
@@ -1116,18 +1087,19 @@ sub Data {
             '',
         'Maximum message length' => 'メッセージの最長値',
         'This field should be an integer number.' => 'この領域は整数値である必要があります。',
-        'Here you can specify the maximum size (in bytes) of REST messages that OTRS will process.' =>
+        'Here you can specify the maximum size (in bytes) of REST messages that Znuny will process.' =>
             '',
         'Send Keep-Alive' => 'Keep-Aliveを送信',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             '',
         'Additional response headers' => '応答ヘッダーを追加',
+        'Header' => 'ヘッダー',
         'Add response header' => '応答ヘッダーを追加する',
         'Endpoint' => 'エンドポイント',
         'URI to indicate specific location for accessing a web service.' =>
             '',
-        'e.g https://www.otrs.com:10745/api/v1.0 (without trailing backslash)' =>
-            '例… https://www.otrs.com:10745/api/v1.0 (バックスラッシュを除く)',
+        'e.g https://www.example.com:10745/api/v1.0 (without trailing backslash)' =>
+            '例… https://www.example.com:10745/api/v1.0 (バックスラッシュを除く)',
         'Disable SSL hostname certificate verification' => '',
         'Disables hostname certificate verification. This is not recommended and should only be used in test environments.' =>
             '',
@@ -1187,22 +1159,22 @@ sub Data {
         'Client Certificate' => 'クライアント証明書',
         'The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).' =>
             'SSLクライアント証明書ファイルの完全パスと名前（PEM、DERまたはPKCS＃12形式である必要があります）。',
-        'e.g. /opt/otrs/var/certificates/SOAP/certificate.pem' => '例 /opt/otrs/var/certificates/SOAP/certificate.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/certificate.pem' => '例 /opt/znuny/var/certificates/SOAP/certificate.pem',
         'Client Certificate Key' => 'クライアント認証キー',
         'The full path and name of the SSL client certificate key file (if not already included in certificate file).' =>
             'SSLクライアント証明書キーファイルの完全パスと名前（まだ証明書ファイルに含まれていない場合）。',
-        'e.g. /opt/otrs/var/certificates/SOAP/key.pem' => '例 /opt/otrs/var/certificates/SOAP/key.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/key.pem' => '例 /opt/znuny/var/certificates/SOAP/key.pem',
         'Client Certificate Key Password' => 'クライアント認証キーのパスワード',
         'The password to open the SSL certificate if the key is encrypted.' =>
             '',
         'Certification Authority (CA) Certificate' => '',
         'The full path and name of the certification authority certificate file that validates SSL certificate.' =>
             '',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem' => '例… /opt/otrs/var/certificates/SOAP/CA/ca.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem' => '例… /opt/znuny/var/certificates/SOAP/CA/ca.pem',
         'Certification Authority (CA) Directory' => '',
         'The full path of the certification authority directory where the CA certificates are stored in the file system.' =>
             '',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA' => '例… /opt/otrs/var/certificates/SOAP/CA',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA' => '例… /opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'API実行元に対するコントローラ・マッピング',
         'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
             '',
@@ -1215,7 +1187,7 @@ sub Data {
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
-        'e.g. https://local.otrs.com:8000/Webservice/Example' => '例. https://local.otrs.com:8000/Webservice/Example',
+        'e.g. https://example.com:8000/Webservice/Example' => '例. https://example.com:8000/Webservice/Example',
         'Set SOAPAction' => 'SOAPアクションを設定',
         'Set to "Yes" in order to send a filled SOAPAction header.' => '',
         'Set to "No" in order to send an empty SOAPAction header.' => '「いいえ」に設定すると、空のSOAPActionヘッダーが送信されます。',
@@ -1235,8 +1207,8 @@ sub Data {
         'Text to be used to as SOAPAction.' => '',
         'Namespace' => '名前空間',
         'URI to give SOAP methods a context, reducing ambiguities.' => '',
-        'e.g urn:otrs-com:soap:functions or http://www.otrs.com/GenericInterface/actions' =>
-            '例… urn:otrs-com:soap:functions or http://www.otrs.com/GenericInterface/actions',
+        'e.g urn:example-com:soap:functions or http://www.example.com/GenericInterface/actions' =>
+            '例… urn:example-com:soap:functions or http://www.example.com/GenericInterface/actions',
         'Omit namespace prefix' => '',
         'Omits the namespace prefix (e. g. namesp1:) in root tag of SOAP message.' =>
             '',
@@ -1256,13 +1228,13 @@ sub Data {
         'Select how SOAP response function wrapper should be constructed.' =>
             '',
         'Response name free text' => '',
-        'Here you can specify the maximum size (in bytes) of SOAP messages that OTRS will process.' =>
+        'Here you can specify the maximum size (in bytes) of SOAP messages that Znuny will process.' =>
             '',
         'Fixed namespace prefix' => '',
         'Use a fixed namespace prefix (e. g. myns:) for the root tag of a SOAP message.' =>
             '',
         'Suffix for response tag' => '',
-        'Usually OTRS expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
+        'Usually Znuny expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
             '',
         'Encoding' => 'エンコーディング',
         'The character encoding for the SOAP message contents.' => 'SOAPメッセージコンテントの文字エンコード',
@@ -1280,7 +1252,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
         'Add Web Service' => 'Webサービスを追加',
-        'Edit Web Service' => 'Webサービスを修正',
         'Clone Web Service' => 'Webサービスをクローン',
         'The name must be unique.' => '名前は一意である必要があります。',
         'Clone' => '複製',
@@ -1301,14 +1272,15 @@ sub Data {
             '',
         'If you want to return to overview please click the "Go to overview" button.' =>
             '',
+        'Edit Web Service' => 'Webサービスを修正',
         'Remote system' => 'リモートシステム',
         'Provider transport' => '供給者のトランスポート',
         'Requester transport' => '依頼者のトランスポート',
         'Debug threshold' => 'デバックの閾値',
-        'In provider mode, OTRS offers web services which are used by remote systems.' =>
-            'Provider(供給者)モードでは、OTRSは他の外部システムにウェブサービスを提供します。',
-        'In requester mode, OTRS uses web services of remote systems.' =>
-            'Requester(要求者)モードでは、OTRSは他の外部システのウェブサービスを使用します。',
+        'In provider mode, Znuny offers web services which are used by remote systems.' =>
+            'Provider(供給者)モードでは、Znunyは他の外部システムにウェブサービスを提供します。',
+        'In requester mode, Znuny uses web services of remote systems.' =>
+            'Requester(要求者)モードでは、Znunyは他の外部システのウェブサービスを使用します。',
         'Network transport' => 'ネットワーク・トランスポート',
         'Error Handling Modules' => '',
         'Error handling modules are used to react in case of errors during the communication. Those modules are executed in a specific order, which can be changed by drag and drop.' =>
@@ -1326,10 +1298,10 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebserviceHistory.tt
-        'History' => '履歴',
         'Go back to Web Service' => 'Webサービスに戻る',
         'Here you can view older versions of the current web service\'s configuration, export or even restore them.' =>
             '',
+        'History' => '履歴',
         'Configuration History List' => '設定履歴一覧',
         'Version' => 'バージョン',
         'Create time' => '作成日時',
@@ -1341,9 +1313,7 @@ sub Data {
         'Your current web service configuration will be overwritten.' => '現在のWebサービス設定は上書きされます。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
-        'Group Management' => 'グループ管理',
         'Add Group' => 'グループ追加',
-        'Edit Group' => 'グループ編集',
         'The admin group is to get in the admin area and the stats group to get stats area.' =>
             '管理グループは管理エリアで取得します。統計グループは統計エリアを取得します',
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
@@ -1351,21 +1321,20 @@ sub Data {
         'It\'s useful for ASP solutions. ' => 'ASPソリューションが便利です',
         'Agents ↔ Groups' => '担当者 ↔ グループ',
         'Roles ↔ Groups' => 'ロールーグループ',
+        'Group Management' => 'グループ管理',
+        'Edit Group' => 'グループ編集',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
-        'System Log' => 'システムログ',
         'Clear log entries' => '',
         'Here you will find log information about your system.' => 'ここではシステムに関するログ情報が表示されます。',
         'Hide this message' => 'このメッセージを隠す',
+        'System Log' => 'システムログ',
         'Recent Log Entries' => '最近のログ一覧',
         'Facility' => 'ファシリティ',
         'Message' => 'メッセージ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
-        'Mail Account Management' => 'メールアカウント管理',
         'Add Mail Account' => 'メールアカウント追加',
-        'Edit Mail Account for host' => 'ホストのメールアカウントを編集',
-        'and user account' => 'ユーザーアカウントと',
         'Filter for Mail Accounts' => 'メールアカウントでフィルター',
         'Filter for mail accounts' => 'メールアカウントでフィルター',
         'All incoming emails with one account will be dispatched in the selected queue.' =>
@@ -1375,10 +1344,13 @@ sub Data {
         'Outgoing email can be configured via the Sendmail* settings in %s.' =>
             '',
         'System Configuration' => 'システム設定',
+        'Mail Account Management' => 'メールアカウント管理',
+        'Edit Mail Account for host' => 'ホストのメールアカウントを編集',
+        'and user account' => 'ユーザーアカウントと',
         'Host' => 'ホスト',
         'Authentication type' => '',
-        'Delete account' => 'アカウント削除',
         'Fetch mail' => 'メールを取得',
+        'Delete account' => 'アカウント削除',
         'Do you really want to delete this mail account?' => '本当にこのメールアカウントを削除しますか？',
         'Example: mail.example.com' => '例: mail.example.com',
         'IMAP Folder' => 'IMAPフォルダー',
@@ -1390,20 +1362,20 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
         'Administration Overview' => '管理一覧',
-        'Filter for Items' => 'アイテムをフィルター',
         'Favorites' => 'お気に入り',
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '右側のアイテムにカーソルを合わせてスターアイコンをクリックすると、お気に入りを追加できます。',
         'Links' => 'リンク',
         'View the admin manual on Github' => 'Githubの管理マニュアルを表示',
+        'Filter for Items' => 'アイテムをフィルター',
         'No Matches' => 'マッチなし',
         'Sorry, your search didn\'t match any items.' => '申し訳ありませんが、あなたの検索はどのアイテムにも一致しませんでした。',
         'Set as favorite' => 'お気に入りに指定',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-        'Ticket Notification Management' => 'チケット通知管理',
         'Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module.' =>
             '',
+        'Ticket Notification Management' => 'チケット通知管理',
         'Here you can choose which events will trigger this notification. An additional ticket filter can be applied below to only send for ticket with certain criteria.' =>
             '',
         'Ticket Filter' => 'チケットフィルター',
@@ -1425,7 +1397,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
-        'You can use OTRS-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
+        'You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
             '<OTRS_TICKET_DynamicField_...> を指定することで、現在のチケットの値を参照することができます。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
@@ -1488,96 +1460,21 @@ sub Data {
         'Request new token' => '',
         'Delete this token and its configuration.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
-        'Manage %s' => '%s を管理',
-        'Downgrade to ((OTRS)) Community Edition' => '',
-        'Read documentation' => 'ドキュメントを参照',
-        '%s makes contact regularly with cloud.otrs.com to check on available updates and the validity of the underlying contract.' =>
-            '',
-        'Unauthorized Usage Detected' => '',
-        'This system uses the %s without a proper license! Please make contact with %s to renew or activate your contract!' =>
-            '',
-        '%s not Correctly Installed' => '%s は正常にインストールされました',
-        'Your %s is not correctly installed. Please reinstall it with the button below.' =>
-            '%s は正常にインストールされていません。下のボタンを押して再インストールしてください。',
-        'Reinstall %s' => '%s の再インストール',
-        'Your %s is not correctly installed, and there is also an update available.' =>
-            '%s は正常にインストールされていません。また、こちらのパッケージにはアップデートがあります。',
-        'You can either reinstall your current version or perform an update with the buttons below (update recommended).' =>
-            '',
-        'Update %s' => '%s のアップデート',
-        '%s Not Yet Available' => '%sはまだ存在しません',
-        '%s will be available soon.' => '%sはもうすぐ有効となります。',
-        '%s Update Available' => '%s 利用できるアップデーターがあります',
-        'An update for your %s is available! Please update at your earliest!' =>
-            '',
-        '%s Correctly Deployed' => '%s 正しくデプロイされました',
-        'Congratulations, your %s is correctly installed and up to date!' =>
-            'おめでとうございます。 %s は最新版として正常にインストールされました。',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
-        'Upgrade to %s' => '%s にアップグレードする',
-        'Go to the OTRS customer portal' => 'OTRSのカスタマーポータルへアクセス',
-        '%s will be available soon. Please check again in a few days.' =>
-            '%sはもうすぐ有効になります。数日後に確認してください。',
-        'Please have a look at %s for more information.' => '詳細については%sを参照してください。',
-        'Your ((OTRS)) Community Edition is the base for all future actions. Please register first before you continue with the upgrade process of %s!' =>
-            '',
-        'Before you can benefit from %s, please contact %s to get your %s contract.' =>
-            '',
-        'Connection to cloud.otrs.com via HTTPS couldn\'t be established. Please make sure that your OTRS can connect to cloud.otrs.com via port 443.' =>
-            'cloud.otrs.comへのHTTPSでの接続の確立ができませんでした。
-OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認して下さい。',
-        'Package installation requires patch level update of OTRS.' => 'パッケージのインストールには、OTRSのパッチレベルの更新が必要です。',
-        'Please visit our customer portal and file a request.' => '',
-        'Everything else will be done as part of your contract.' => '',
-        'Your installed OTRS version is %s.' => 'インストールされているOTRSのバージョンは%sです。',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            '',
-        'To install this package, the Maximum OTRS Version is %s.' => 'このパッケージがインストールできるOTRSの最大バージョンは%sです。',
-        'To install this package, the required Framework version is %s.' =>
-            'このパッケージをインストールするにはフレームワークのバージョンが%sである必要があります。',
-        'Why should I keep OTRS up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant OTRS issues' => '',
-        'With your existing contract you can only use a small part of the %s.' =>
-            '現在登録されている契約では、%sの機能の一部しか使用できません。',
-        'If you would like to take full advantage of the %s get your contract upgraded now! Contact %s.' =>
-            'もし%sの全機能を使用したい場合には、契約をアップグレードする必要があります！現在の契約: %s',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
-        'Cancel downgrade and go back' => 'ダウングレードを中止して戻る',
-        'Go to Package Manager' => '',
-        'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
-            'パッケージ%sに依存しているため、現在ダウングレードすることは出来ません',
-        'Vendor' => 'ベンダー',
-        'Please uninstall the packages first using the package manager and try again.' =>
-            'パッケージマネージャでパッケージを削除して再度実行して下さい。',
-        'You are about to downgrade to ((OTRS)) Community Edition and will lose the following features and all data related to these:' =>
-            '',
-        'Chat' => 'チャット',
-        'Report Generator' => 'レポート・ジェネレーター',
-        'Timeline view in ticket zoom' => 'チケット・ズームにおけるタイムライン',
-        'DynamicField ContactWithData' => 'ダイナミック・フィールド日付でコンタクトする',
-        'DynamicField Database' => 'ダイナミック・フィールド用データベース',
-        'SLA Selection Dialog' => 'SLA選択画面',
-        'Ticket Attachment View' => 'チケット添付ファイルビュー',
-        'The %s skin' => '%s スキン',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPGP.tt
-        'PGP Management' => 'PGP管理',
-        'Add PGP Key' => 'PGP鍵を追加',
         'PGP support is disabled' => 'PGPサポート機能は無効化されています',
-        'To be able to use PGP in OTRS, you have to enable it first.' => 'OTRSでPGPを使用するにはまず有効にする必要があります。',
+        'To be able to use PGP in Znuny, you have to enable it first.' =>
+            'ZnunyでPGPを使用するにはまず有効にする必要があります。',
         'Enable PGP support' => 'PGPサポートの有効化',
         'Faulty PGP configuration' => '',
         'PGP support is enabled, but the relevant configuration contains errors. Please check the configuration using the button below.' =>
             'PGPサポート機能は有効化されましたが、関連する設定にエラーがあります。以下の設定を確認して下さい。',
         'Configure it here!' => 'ここで設定してください！',
         'Check PGP configuration' => 'PGP設定の確認',
+        'Add PGP Key' => 'PGP鍵を追加',
         'In this way you can directly edit the keyring configured in SysConfig.' =>
             'この方法で直接システム設定からキーリング設定を編集できます。',
         'Introduction to PGP' => 'PGPの導入',
+        'PGP Management' => 'PGP管理',
         'Identifier' => '識別子',
         'Bit' => 'ビット',
         'Fingerprint' => 'フィンガープリント',
@@ -1606,6 +1503,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'このパッケージはZnunyのバージョンが%sかそれより古い必要があります。',
         'This package can only be installed on Znuny version %s.' => '',
         'Why should I keep Znuny up to date?' => 'Znunyのバージョンを最新に保つことが必要な理由',
+        'You will receive updates about relevant security issues.' => '',
         'You will receive updates for all other relevant Znuny issues.' =>
             '',
         'How can I do a patch level update if I don’t have a contract?' =>
@@ -1614,6 +1512,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'In case you would have further questions we would be glad to answer them.' =>
             '',
+        'Please visit our customer portal and file a request.' => '',
         'Install Package' => 'パッケージをインストール',
         'Update Package' => 'パッケージを更新',
         'Package' => '',
@@ -1626,9 +1525,11 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
         'Install' => 'インストール',
+        'Update' => '更新',
         'Update repository information' => 'リポジトリ情報を更新',
         'Update all installed packages' => 'インストールされているパッケージを全て更新する',
         'Online Repository' => 'オンラインリポジトリ',
+        'Vendor' => 'ベンダー',
         'Action' => '操作',
         'Module documentation' => 'モジュールの書類',
         'Local Repository' => 'ローカルリポジトリ',
@@ -1636,9 +1537,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Package not correctly deployed! Please reinstall the package.' =>
             'パッケージが正しくデプロイされません。再インストールしてください。',
         'Reinstall' => '再インストール',
-        'Package Information' => 'パッケージ情報',
         'Download package' => 'パッケージをダウンロード',
         'Rebuild package' => 'パッケージを再構成',
+        'Package Information' => 'パッケージ情報',
         'Metadata' => 'メタデータ',
         'Change Log' => '変更履歴',
         'Date' => '日付',
@@ -1654,9 +1555,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'File differences for file %s' => '%s ファイルが違います',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPerformanceLog.tt
-        'Performance Log' => 'パフォーマンスログ',
-        'Range' => '範囲',
-        'last' => '以内',
         'This feature is enabled!' => 'この機能を有効にする。',
         'Just use this feature if you want to log each request.' => 'この機能は各要求をログに記録したい場合のみ利用してください。',
         'Activating this feature might affect your system performance!' =>
@@ -1664,6 +1562,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Disable it here!' => '無効にする。',
         'Logfile too large!' => 'ログファイルが大きすぎます',
         'The logfile is too large, you need to reset it' => 'ログファイルが大きすぎます。初期化してください。',
+        'Performance Log' => 'パフォーマンスログ',
+        'Range' => '範囲',
+        'last' => '以内',
         'Interface' => 'インターフェイス',
         'Requests' => '要求',
         'Min Response' => '最少応答',
@@ -1676,9 +1577,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Average' => '平均',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
-        'PostMaster Filter Management' => 'ポストマスター・フィルター管理',
         'Add PostMaster Filter' => 'ポストマスター・フィルターを追加',
-        'Edit PostMaster Filter' => 'ポストマスター・フィルターを削除',
         'Filter for PostMaster Filters' => '',
         'Filter for PostMaster filters' => '',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
@@ -1689,6 +1588,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '正規表現を使う場合、設定で一致する値を[***]として使用できます。',
         'You can also use named captures %s and use the names in the \'Set\' action %s (e.g. Regexp: %s, Set action: %s). A matched EMAILADDRESS has the name \'%s\'.' =>
             '',
+        'PostMaster Filter Management' => 'ポストマスター・フィルター管理',
+        'Edit PostMaster Filter' => 'ポストマスター・フィルターを削除',
         'Delete this filter' => 'このフィルタを削除',
         'Do you really want to delete this postmaster filter?' => '本当にこのポストマスター・フィルターを削除しますか？',
         'A postmaster filter with this name already exists!' => 'この名前のポストマスター・フィルターは既に存在します！',
@@ -1703,15 +1604,15 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Set email header' => 'メールヘッダを設定',
         'with value' => '価値のある',
         'The field needs to be a literal word.' => 'このフィールドはリテラル値で入力する必要があります。',
-        'Header' => 'ヘッダー',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
-        'Priority Management' => '優先度管理',
         'Add Priority' => '優先度を追加',
-        'Edit Priority' => '優先度を編集',
         'Filter for Priorities' => '優先度でフィルター',
         'Filter for priorities' => '優先度でフィルター',
         'Configure Priority Visibility and Defaults' => '',
+        'Priority Management' => '優先度管理',
+        'Edit Priority' => '優先度を編集',
+        'Color' => '色',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
@@ -1735,7 +1636,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '変更はプロセスデータを同期させた場合にのみ反映されます。同期により、行われた変更は実際の設定に反映されます。',
         'Access Control Lists (ACL)' => 'アクセス制御リスト (ACL)',
         'Generic Agent' => '',
-        'Manage Process Widiget Groups' => '',
+        'Manage Process Widget Groups' => '',
         'Processes' => 'プロセス',
         'Process name' => 'プロセス名',
         'Print' => '印刷',
@@ -1743,8 +1644,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Copy Process' => 'プロセスをコピー',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
-        'Cancel & close' => '中止して閉じる',
-        'Go Back' => '戻る',
         'Please note, that changing this activity will affect the following processes' =>
             '変更は以下のプロセスに影響を与えます',
         'Activity' => 'アクティビティ',
@@ -1757,12 +1656,13 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '左側のリストから右側のリストへドラッグすることでアクティビティ・ダイアログをアクティビティに関連付けすることが出来ます。',
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'このリストの表示順序はドラッグアンドドロップで変更することが出来ます。',
+        'Available Activity Dialogs' => '利用可能なアクティビティダイアログ',
         'Filter available Activity Dialogs' => '利用可能なアクティビティダイアログをフィルタ',
         'Also show global %s' => '',
-        'Available Activity Dialogs' => '利用可能なアクティビティダイアログ',
         'Name: %s, EntityID: %s' => '名前: %s, エンティティID: %s',
         'Create New Activity Dialog' => '新規アクティビティダイアログを作成',
         'Assigned Activity Dialogs' => '割り当てられたアクティビティダイアログ',
+        'Filter Assigned Activity Dialogs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
         'Please note that changing this activity dialog will affect the following activities' =>
@@ -1784,9 +1684,10 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Submit Button Text' => 'サブミットボタン名',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
             'マウスで左から右にドラッグ・アンド・ドロップすることで、アクティビティ・ダイアログにフィールドを関連付けることが出来ます',
-        'Filter available fields' => '利用可能な領域をフィルタ',
         'Available Fields' => '利用可能な領域',
+        'Filter available fields' => '利用可能な領域をフィルタ',
         'Assigned Fields' => '割り当てられた領域',
+        ' Filter assigned fields' => '',
         'Communication Channel' => 'コミュニケーション・チャネル',
         'Is visible for customer' => '顧客が閲覧可能',
         'Text Template' => '本文テンプレート',
@@ -1799,10 +1700,11 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Transition Actions' => '遷移動作',
         'You can assign Transition Actions to this Transition by dragging the elements with the mouse from the left list to the right list.' =>
             'マウスで左から右にドラッグ・アンド・ドロップすることで、推移アクションをこの推移に関連付けることができます。',
-        'Filter available Transition Actions' => '利用可能な遷移動作をフィルタ',
         'Available Transition Actions' => '利用可能な遷移動作',
+        'Filter available Transition Actions' => '利用可能な遷移動作をフィルタ',
         'Create New Transition Action' => '新しい遷移アクションを作成',
         'Assigned Transition Actions' => '割り当てられた遷移動作',
+        'Filter assigned Transition Actions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessAccordion.tt
         'Activities' => 'アクティビティ',
@@ -1815,7 +1717,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Filter Transition Actions...' => '遷移アクションの絞り込み',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
-        'Edit Process' => 'プロセスを編集',
         'Print process information' => 'プロセス情報を印刷',
         'Delete Process' => 'プロセスを削除',
         'Delete Inactive Process' => '非アクティブなプロセスを削除',
@@ -1830,6 +1731,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Actions can be assigned to a Transition by dropping the Action Element onto the label of a Transition.' =>
             '',
+        'Edit Process' => 'プロセスを編集',
         'Edit Process Information' => 'プロセスの情報を編集',
         'Process Name' => 'プロセス名',
         'The selected state does not exist.' => '選択されたステータスは存在しません。',
@@ -1855,7 +1757,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'この画面では、新規プロセスを作成することが出来ます。作成したプロセスを使用できるようにするには、ステータスを「有効」にした後に変更を同期してください。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessPrint.tt
-        'cancel & close' => 'キャンセルして閉じる',
         'Start Activity' => 'アクティビティを開始',
         'Contains %s dialog(s)' => '%sのダイアログが含まれています',
         'Assigned dialogs' => '割り当てられたダイアログ',
@@ -1865,6 +1766,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Condition linking' => '条件リンク',
         'Transitions are not being used in this process.' => '遷移はこのプロセスで使用されていません。',
         'Module name' => 'モジュール名',
+        'Configuration' => '設定',
         'Transition actions are not being used in this process.' => '遷移アクションはこのプロセスで使用されていません。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementTransition.tt
@@ -1887,7 +1789,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
         'Add Queue' => 'キューを追加',
-        'Edit Queue' => 'キューを編集',
         'Filter for Queues' => 'キューでフィルター',
         'Filter for queues' => 'キューのフィルター',
         'Email Addresses' => 'メールアドレス',
@@ -1897,10 +1798,14 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Templates ↔ Queues' => 'テンプレート ↔ キュー',
         'Configure Working Hours' => '',
         'Configure Queue Related Settings' => '',
+        'Edit Queue' => 'キューを編集',
         'A queue with this name already exists!' => '同じ名前のキューが既に存在しています！',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
         'Sub-queue of' => '親キュー',
+        'Follow up Option' => 'フォローアップ・オプション',
+        'Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.' =>
+            'クローズしたチケットにフォローアップしたい場合、チケットを再度対応中にするか、拒否して新規チケットにするかを指定します。',
         'Unlock timeout' => 'ロックの解除期限',
         '0 = no unlock' => '0 = ロック解除しない',
         'hours' => '時間',
@@ -1915,9 +1820,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'メールでのフォローアップやカスタマーポータルに追加された記事があれば、エスカレーション更新期限はリセットされます。ここで定義された時間内に顧客からの外部メールや電話の記録が追加されない場合、チケットがエスカレーションされます。',
         'If the ticket is not set to closed before the time defined here expires, the ticket is escalated.' =>
             'ここで定義された時間の前にチケットがクローズしない場合、チケットがエスカレーションされます。',
-        'Follow up Option' => 'フォローアップ・オプション',
-        'Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.' =>
-            'クローズしたチケットにフォローアップしたい場合、チケットを再度対応中にするか、拒否して新規チケットにするかを指定します。',
         'Ticket lock after a follow up' => 'フォローアップ後にチケットをロック',
         'If a ticket is closed and the customer sends a follow up the ticket will be locked to the old owner.' =>
             'チケットがクローズした後に顧客がチケットにフォローアップする場合、旧所有者にロックされます。',
@@ -1933,34 +1835,34 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'This queue is used in the following config settings:' => 'このキューは、次の設定で使用されます。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueAutoResponse.tt
-        'Manage Queue-Auto Response Relations' => 'キュー-自動応答の関連性の管理',
-        'Change Auto Response Relations for Queue' => 'キューに対する自動応答の関連性を変更',
         'This filter allow you to show queues without auto responses' => 'このフィルターを使用すると、自動応答なしでキューを表示できます',
         'Queues without Auto Responses' => '自動応答のないキュー',
         'This filter allow you to show all queues' => 'このフィルターを使用すると、全てのキューを表示できます。',
         'Show All Queues' => '全てのキューを表示',
         'Auto Responses' => '自動応答',
+        'Manage Queue-Auto Response Relations' => 'キュー-自動応答の関連性の管理',
+        'Change Auto Response Relations for Queue' => 'キューに対する自動応答の関連性を変更',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
-        'Manage Template-Queue Relations' => 'テンプレート-キューの関連性の管理',
         'Filter for Templates' => 'テンプレートでフィルター',
         'Filter for templates' => '',
+        'Manage Template-Queue Relations' => 'テンプレート-キューの関連性の管理',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
-        'Role Management' => 'ロール管理',
         'Add Role' => 'ロールを追加',
-        'Edit Role' => 'ロールを編集',
         'Filter for Roles' => 'ロールでフィルター',
         'Filter for roles' => 'ロールでフィルター',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'ロールを作成してグループを追加後、ユーザーにロールを追加してください。',
         'Agents ↔ Roles' => '担当者 ↔ ロール',
+        'Role Management' => 'ロール管理',
+        'Edit Role' => 'ロールを編集',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             '未定義のロールがあります。新しいロールを作成し、追加ボタンを押してください。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleGroup.tt
-        'Manage Role-Group Relations' => 'ロール-グループの関連性管理',
         'Roles' => 'ロール',
+        'Manage Role-Group Relations' => 'ロール-グループの関連性管理',
         'Select the role:group permissions.' => 'ロール：グループ権限を選択。',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the role).' =>
             '何も選択しなかった場合は、そのグループへ付与される許可はありません（ロールに関してチケットは利用できません）',
@@ -1979,34 +1881,33 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'このグループ／キューにチケットの優先度変更権限を付与',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
-        'Manage Agent-Role Relations' => '担当者-ロールの関連性管理',
         'Add Agent' => '担当者の追加',
         'Filter for Agents' => '担当者でフィルター',
         'Filter for agents' => '',
         'Agents' => '担当者',
+        'Manage Agent-Role Relations' => '担当者-ロールの関連性管理',
         'Manage Role-Agent Relations' => 'ロール-担当者の関連性管理',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
-        'SLA Management' => 'SLA管理',
-        'Edit SLA' => 'SLAを編集',
         'Add SLA' => 'SLAを追加',
         'Filter for SLAs' => 'SLAでフィルター',
         'Configure SLA Visibility and Defaults' => '',
+        'SLA Management' => 'SLA管理',
+        'Edit SLA' => 'SLAを編集',
         'Please write only numbers!' => '数値しか入力できません。',
         'Minimum Time Between Incidents' => 'インシデント間の最小時間',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
-        'S/MIME Management' => 'S/MIME管理',
-        'Add Certificate' => '証明書を追加',
-        'Add Private Key' => '秘密鍵を追加',
         'SMIME support is disabled' => 'SMIMEのサポートが無効になっています',
-        'To be able to use SMIME in OTRS, you have to enable it first.' =>
+        'To be able to use SMIME in Znuny, you have to enable it first.' =>
             '',
         'Enable SMIME support' => 'SMIMEサポートを有効にする',
         'Faulty SMIME configuration' => '無効なSMIME設定',
         'SMIME support is enabled, but the relevant configuration contains errors. Please check the configuration using the button below.' =>
             'SMIME機能が有効化されましたが関連する設定にエラーがあります。ボタンを押して設定を確認してください。',
         'Check SMIME configuration' => 'SMIME設定の確認',
+        'Add Certificate' => '証明書を追加',
+        'Add Private Key' => '秘密鍵を追加',
         'Filter for Certificates' => '証明書でフィルター',
         'Filter for certificates' => '証明書でフィルタ',
         'To show certificate details click on a certificate icon.' => '',
@@ -2017,6 +1918,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'See also' => '参照',
         'In this way you can directly edit the certification and private keys in file system.' =>
             'この方法で直接認証と秘密鍵を編集できます。',
+        'S/MIME Management' => 'S/MIME管理',
         'Hash' => 'ハッシュ',
         'Create' => '作成',
         'Handle related certificates' => '関連付けられた証明書を利用する',
@@ -2032,15 +1934,16 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
         'S/MIME Certificate' => 'S/MIME証明書',
-        'Close this dialog' => 'このダイアログを閉じる',
+        'Close' => 'クローズ',
         'Certificate Details' => '証明書の詳細',
+        'Close this dialog' => 'このダイアログを閉じる',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
-        'Salutation Management' => '挨拶文管理',
         'Add Salutation' => '挨拶文を追加',
-        'Edit Salutation' => '挨拶文を編集',
         'Filter for Salutations' => '挨拶文でフィルター',
         'Filter for salutations' => '挨拶文でフィルター',
+        'Salutation Management' => '挨拶文管理',
+        'Edit Salutation' => '挨拶文を編集',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => 'セキュアモードを有効にしてください。',
@@ -2050,13 +1953,13 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'セキュアモードが無効の場合、アプリケーションが既に実行されているため、SysConfigを介して有効にします。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
-        'SQL Box' => 'SQLボックス',
         'Filter for Results' => '結果でフィルター',
         'Filter for results' => '結果でフィルター',
         'Here you can enter SQL to send it directly to the application database. It is not possible to change the content of the tables, only select queries are allowed.' =>
             'ここではアプリケーションデータベースに直接送るSQLを入力することができます。表の定義を変更することはできません。選択問合せのみ可能です。',
         'Here you can enter SQL to send it directly to the application database.' =>
             'ここではアプリケーションデータベースに直接送るSQLを入力することができます。',
+        'SQL Box' => 'SQLボックス',
         'Options' => 'オプション',
         'Only select queries are allowed.' => '',
         'The syntax of your SQL query has a mistake. Please check it.' =>
@@ -2069,18 +1972,16 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Query is executed.' => 'クエリは実行されました。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
-        'Service Management' => 'サービス管理',
         'Add Service' => 'サービスの追加',
-        'Edit Service' => 'サービスの編集',
         'Configure Service Visibility and Defaults' => '',
+        'Service Management' => 'サービス管理',
+        'Edit Service' => 'サービスの編集',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'サービス名は、(サブサービス名を含めて) 半角200文字以内にする必要があります。',
         'Sub-service of' => '親サービス',
         'Criticality' => '重要度',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
-        'Session Management' => 'セッション管理',
-        'Detail Session View for %s (%s)' => '',
         'All sessions' => '全てのセッション',
         'Agent sessions' => '担当者のセッション',
         'Customer sessions' => '顧客のセッション',
@@ -2090,39 +1991,38 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Kill this session' => '現在のセッションを切断',
         'Filter for Sessions' => 'セッションでフィルター',
         'Filter for sessions' => 'セッションでフィルター',
+        'Session Management' => 'セッション管理',
+        'Detail Session View for %s (%s)' => '',
         'Session' => 'セッション',
         'Kill' => '切断',
         'Detail View for SessionID: %s - %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
-        'Signature Management' => '署名管理',
         'Add Signature' => '署名を追加',
-        'Edit Signature' => '署名を編集',
         'Filter for Signatures' => '署名でフィルター',
         'Filter for signatures' => '署名でフィルター',
+        'Signature Management' => '署名管理',
+        'Edit Signature' => '署名を編集',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
-        'State Management' => 'ステータス管理',
         'Add State' => 'ステータスを追加',
-        'Edit State' => 'ステータスを編集',
         'Filter for States' => 'ステータスでフィルター',
         'Filter for states' => 'ステータスでフィルター',
         'Attention' => '注意',
         'Please also update the states in SysConfig where needed.' => 'また、必要に応じてシステム設定のステータスを更新して下さい。',
         'Configure State Visibility and Defaults' => '',
         'Configure State Type Visibility and Defaults' => '',
+        'State Management' => 'ステータス管理',
+        'Edit State' => 'ステータスを編集',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'このステータスはシステム設定の設定にあり、新しいタイプを指すように設定を更新する必要があります！',
         'State type' => 'ステータスのタイプ',
         'It\'s not possible to invalidate this entry because there is no other merge states in system!' =>
             '',
+        'This field must be a hexadecimal color code.' => '',
         'This state is used in the following config settings:' => 'このステータスは、次の設定で使用されます。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-        'Cloud services are currently disabled.' => 'クラウドサービスは現在無効化されています',
-        'Sending support data to OTRS Group is not possible!' => 'OTRS Group へのサポートデータの送信ができません！',
-        'Enable Cloud Services' => 'クラウドサービスを有効にする',
-        'Enable cloud services' => 'クラウドサービスの有効化',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'このボタンを押すとサポートバンドル(システム登録情報、サポートに必要なデータ、インストールされているパッケージリスト、変更されているソース)が作成されます。',
         'Generate Support Bundle' => 'サポートバンドルの生成',
@@ -2131,17 +2031,18 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'サポートバンドルを含むファイルをダウンロードします。',
         'Support Data' => 'サポートデータ',
         'Error: Support data could not be collected (%s).' => 'エラー：サポートデータを収集できませんでした。（%s）',
+        'Support Data Collector' => 'サポート情報コレクター',
         'Details' => '詳細',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
-        'System Email Addresses Management' => 'システムメールアドレスの管理',
-        'Add System Email Address' => 'システムメールアドレスの追加',
-        'Edit System Email Address' => 'システムメールアドレスの編集',
         'Add System Address' => 'システムアドレスを追加',
         'Filter for System Addresses' => 'システムアドレスでフィルター',
         'Filter for system addresses' => 'システムアドレスでフィルター',
         'All incoming email with this address in To or Cc will be dispatched to the selected queue.' =>
             '宛先かCcにこのアドレスを持つ全てのメールは選択されたキューに振り分けられます。',
+        'System Email Addresses Management' => 'システムメールアドレスの管理',
+        'Add System Email Address' => 'システムメールアドレスの追加',
+        'Edit System Email Address' => 'システムメールアドレスの編集',
         'Email address' => 'メールアドレス',
         'Display name' => '表示名',
         'This email address is already used as system email address.' => 'このメールアドレスは、すでにシステム用メールアドレスとして利用されています。',
@@ -2161,11 +2062,10 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Find out how to use the system configuration by reading the %s.' =>
             '%sを読んでシステム設定を使い方を確認して下さい。',
         'Search in all settings...' => '全ての設定で検索...',
-        'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
+        'There are currently no settings available. Please make sure to run \'znuny.Console.pl Maint::Config::Rebuild\' before using the software.' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
-        'Changes Deployment' => '変更のデプロイ',
         'Help' => 'ヘルプ',
         'This is an overview of all settings which will be part of the deployment if you start it now. You can compare each setting to its former state by clicking the icon on the top right.' =>
             '',
@@ -2178,6 +2078,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Please review the changed settings and deploy afterwards.' => '変更された設定を確認し、その後にデプロイして下さい。',
         'An empty list of changes means that there are no differences between the restored and the current state of the affected settings.' =>
             '変更差分のリストが空であるということは、影響を受けるであろう現状の設定と復元された設定の間に差異がないことを示します。',
+        'Changes Deployment' => '変更のデプロイ',
         'Changes Overview' => '変更一覧',
         'There are %s changed settings which will be deployed in this run.' =>
             '',
@@ -2204,7 +2105,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Import system configuration' => 'システム設定をインポート',
         'Download current configuration settings of your system in a .yml file.' =>
             '現在のシステム設定のファイル（YML形式）をダウンロードして下さい。',
-        'Include user settings' => 'ユーザー設定を含める',
         'Export current configuration' => '現在の設定をエクスポート',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationSearch.tt
@@ -2223,9 +2123,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Run search' => '検索を実行',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
+        'Go back to Deployment Details' => '',
         'View a custom List of Settings' => 'カスタム設定の一覧を表示',
         'View single Setting: %s' => '単一の設定を表示：%s',
-        'Go back to Deployment Details' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2235,7 +2135,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Permissions' => '権限',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
-        'System Maintenance Management' => 'システムメンテナンス管理',
         'Schedule New System Maintenance' => '新しいシステムメンテナンスをスケジュール',
         'Filter for System Maintenances' => 'システムメンテナンスでフィルター',
         'Filter for system maintenances' => 'システムメンテナンスでフィルター',
@@ -2243,6 +2142,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'このシステムメンテナンスが開始する前に、ユーザはシステムメンテナンスが行われることについてアナウンスする各画面上で通知を受け取ります。',
         'Some time before this system maintenance starts the users will receive a notification on each screen announcing about this fact.' =>
             '',
+        'System Maintenance Management' => 'システムメンテナンス管理',
         'Stop date' => '終了日',
         'Delete System Maintenance' => 'システムメンテナンスを削除',
 
@@ -2261,12 +2161,12 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Kill all Sessions, except for your own' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-        'Template Management' => '',
         'Add Template' => 'テンプレートを追加',
-        'Edit Template' => 'テンプレートを編集',
         'A template is a default text which helps your agents to write faster tickets, answers or forwards.' =>
             'テンプレートは担当者による高速なチケット作成、回答または転送を支援するデフォルトの本文です。',
         'Don\'t forget to add new templates to queues.' => '新しいテンプレートにキューを追加してください。',
+        'Template Management' => '',
+        'Edit Template' => 'テンプレートを編集',
         'Attachments' => '添付ファイル',
         'Delete this entry' => 'この登録を削除',
         'Do you really want to delete this template?' => '本当にこのテンプレートを削除してよろしいですか？',
@@ -2278,10 +2178,10 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Link %s to selected %s' => '%s を選択された %s へリンク',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
+        'Import CSV or Excel file' => '',
         'Ticket attribute relations' => '',
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
-        'Import CSV or Excel file' => '',
         'Attribute' => '属性',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
@@ -2294,23 +2194,23 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
-        'Type Management' => 'タイプ管理',
         'Add Type' => 'タイプの追加',
-        'Edit Type' => 'タイプの編集',
         'Filter for Types' => 'タイプでフィルター',
         'Filter for types' => 'タイプでフィルター',
         'Configure Type Visibility and Defaults' => '',
+        'Type Management' => 'タイプ管理',
+        'Edit Type' => 'タイプの編集',
         'A type with this name already exists!' => 'この名前のタイプは既に存在します!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'This type is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminUser.tt
-        'Agent Management' => '担当者管理',
-        'Edit Agent' => '担当者の編集',
         'Edit personal preferences for this agent' => 'この担当者の個人設定を編集',
         'Agents will be needed to handle tickets.' => '担当者はチケットを処理するために必要です。',
         'Don\'t forget to add a new agent to groups and/or roles!' => '新規担当者をグループまたはロールに追加してください。',
+        'Agent Management' => '担当者管理',
+        'Edit Agent' => '担当者の編集',
         'Please enter a search term to look for agents.' => '担当者を検索するための条件を入力してください。',
         'Last login' => '最終ログイン',
         'Switch to agent' => '担当者を切り替え',
@@ -2410,9 +2310,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerTableView.tt
         'Note: Customer is invalid!' => '注意: 顧客が無効です。',
-        'Start chat' => 'チャットを開始する。',
-        'Video call' => 'ビデオ通話',
-        'Audio call' => '音声通話',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
         'Customer User Address Book' => '顧客ユーザーのアドレス帳',
@@ -2440,16 +2337,16 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Customer User Information Center' => '顧客ユーザー情報センター',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-        'The OTRS Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
+        'The Znuny Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
             '',
-        'A running OTRS Daemon is mandatory for correct system operation.' =>
+        'A running Znuny Daemon is mandatory for correct system operation.' =>
             '',
-        'Starting the OTRS Daemon' => 'OTRS デーモンを起動しています。',
-        'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the OTRS Daemon is running and start it if needed.' =>
+        'Starting the Znuny Daemon' => 'Znuny デーモンを起動しています。',
+        'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             '',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
             '',
-        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
+        'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
@@ -2467,11 +2364,23 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'in' => '＞',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'Save settings' => '設定を保存',
-        'Close this widget' => 'このウィジェットを閉じる',
+        ' Show or hide the content' => '',
+        'Search inactive widgets' => '',
+        'Active Widgets' => '',
+        ' Save changes' => '',
+        ' Save' => '',
+        'Save changes' => '',
+        ' Settings' => '',
+        ' Refresh' => '',
+        ' Close this widget' => '',
+        'Hide' => '',
+        ' Cancel' => '',
         'more' => '続き',
+        'No Data Available.' => '',
         'Available Columns' => '利用可能な列',
+        ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => '表示する列 (ドラッグ&ドロップで並び替えできます)',
+        ' Submit' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => '顧客関係を変更',
@@ -2501,12 +2410,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
-        '%s %s is available!' => '%s %s が利用できます。',
-        'Please update now.' => '更新してください',
-        'Release Note' => 'リリースノート',
-        'Level' => 'レベル',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardRSSOverview.tt
         'Posted %s ago.' => '%s の前の投稿',
 
@@ -2526,10 +2429,11 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'このレポートは、レポート管理者が設定を修正する必要があるため、現在は使用できません。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
+        'Show' => '表示',
         'Assigned to customer user' => '顧客ユーザーに割り当てられた',
         'Accessible for customer user' => '顧客ユーザーにアクセス可能',
         'My locked tickets' => 'ロックチケット',
-        'My Owned Tickets' => '',
+        'My owned tickets' => '',
         'My watched tickets' => '監視チケット',
         'My responsibilities' => '責任チケット',
         'Tickets in My Queues' => '担当キュー内チケット',
@@ -2551,6 +2455,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
         'Manage links for %s' => '%sのリンクを管理',
+        'Close and Back' => '',
         'Create new links' => '新しいリンクを作成',
         'Manage existing links' => '既存のリンクを管理',
         'Link with' => 'リンク先',
@@ -2558,14 +2463,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'There are currently no links. Please click \'Create new Links\' on the top to link this item to other objects.' =>
             '現在、リンクはありません。 このアイテムを他のオブジェクトにリンクするには、上部にある[新しいリンクを作成]をクリックしてください。',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentOTRSBusinessBlockScreen.tt
-        'Unauthorized usage of %s detected' => '',
-        'If you decide to downgrade to ((OTRS)) Community Edition, you will lose all database tables and data related to %s.' =>
-            '',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-        'Edit your preferences' => '個人設定を編集',
-        'Personal Preferences' => '個人設定',
         'Preferences' => '個人設定',
         'Please note: you\'re currently editing the preferences of %s.' =>
             '',
@@ -2578,23 +2476,33 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Filter settings...' => 'フィルターを設定中...',
         'Filter for settings' => '設定でフィルター',
         'Save all settings' => 'すべての設定を保存',
+        'Edit your preferences' => '個人設定を編集',
+        'Personal Preferences' => '個人設定',
         'Avatars have been disabled by the system administrator. You\'ll see your initials instead.' =>
             '',
         'You can change your avatar image by registering with your email address %s at %s. Please note that it can take some time until your new avatar becomes available because of caching.' =>
             'アバターイメージを変更するには、%sにあなたのメールアドレス(%s)を登録して下さい。キャッシュの影響により新しいアバターが利用可能になるまでには時間がかかることがあります。',
         'Off' => 'オフ',
         'End' => '終了',
+        'Left' => 'のこり',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => 'この設定は現在保存できません。',
+        'Save setting' => '',
         'Save this setting' => 'この設定を保存',
         'Did you know? You can help translating Znuny at %s.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences/SettingsList.tt
-        'Reset to default' => 'デフォルトにリセットする',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
-        'Choose from the groups on the right to find the settings you\'d wish to change.' =>
-            '右側のグループから選択して、変更したい設定を見つけて下さい。',
+        'Choose from the groups on the left to find the settings you\'d wish to change.' =>
+            '',
         'Did you know?' => 'ご存知ですか？',
         'You can change your avatar by registering with your email address %s on %s' =>
             '%sで、あなたの電子メールアドレス%sを登録することによって、あなたのアバターに変更することができます。',
@@ -2605,9 +2513,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Split' => '分割',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
+        'Read more about statistics in Znuny' => 'Znunyのレポートについて詳細を読む',
         'Statistics Management' => 'レポート管理',
         'Add Statistics' => 'レポートを追加',
-        'Read more about statistics in OTRS' => 'OTRSのレポートについて詳細を読む',
         'Dynamic Matrix' => '集計',
         'Each cell contains a singular data point.' => '各セルには特異点が含まれています。',
         'Dynamic List' => '一覧',
@@ -2618,8 +2526,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Create Statistic' => 'レポートを作成',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsEdit.tt
-        'Edit Statistics' => 'レポートを編集',
         'Run now' => '今すぐ実行',
+        'Edit Statistics' => 'レポートを編集',
         'Statistics Preview' => 'レポートのプレビュー',
         'Save Statistic' => 'レポートを保存',
 
@@ -2629,16 +2537,13 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
         'Statistics' => 'レポート',
-        'Run' => '実行',
         'Edit statistic "%s".' => 'レポート"%s"を修正',
         'Export statistic "%s"' => 'レポート"%s"をエクスポート',
         'Export statistic %s' => 'レポート"%s"をエクスポート',
-        'Delete statistic "%s"' => 'レポート"%s"を削除',
         'Delete statistic %s' => 'レポート"%s"を削除',
+        'Do you really want to delete this statistic?' => 'このレポートを削除してよろしいですか？',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
-        'Statistics Overview' => 'レポート一覧',
-        'View Statistics' => '統計を閲覧',
         'Statistics Information' => 'レポート情報',
         'Created by' => '作成者',
         'Changed by' => '変更者',
@@ -2646,6 +2551,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Sum columns' => '列の合計',
         'Show as dashboard widget' => 'ダッシュボードウィジェットとして表示',
         'Cache' => 'キャッシュ',
+        'Statistics Overview' => 'レポート一覧',
+        'View Statistics' => '統計を閲覧',
         'This statistic contains configuration errors and can currently not be used.' =>
             'このレポートには構成エラーがあり、現在は使用できません。',
 
@@ -2657,33 +2564,37 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Set Pending Time for %s%s%s' => '%s%s%sの保留時間を設定',
         'Change Priority of %s%s%s' => '%s%s%sの優先度を変更',
         'Change Responsible of %s%s%s' => '%s%s%sの責任者を変更',
-        'All fields marked with an asterisk (*) are mandatory.' => 'アスタリスク（*）が付いている全ての領域は必須入力です。',
         'The ticket has been locked' => 'チケットはロック済です',
-        'Undo & close' => '元に戻して閉じる',
         'Ticket Settings' => 'チケット設定',
-        'Queue invalid.' => '無効なキューです。',
         'Service invalid.' => '無効なサービスです',
         'SLA invalid.' => 'SLAが無効です。',
+        'Team Data' => '',
+        'Queue invalid.' => '無効なキューです。',
         'New Owner' => '新しい所有者',
         'Please set a new owner!' => '新規所有者を設定してください。',
         'Owner invalid.' => '所有者が無効です。',
         'New Responsible' => '新しい責任者',
         'Please set a new responsible!' => '新しい責任者を設定して下さい！',
         'Responsible invalid.' => '責任者が無効です。',
+        'Ticket Data' => '',
         'Next state' => 'ステータス',
         'State invalid.' => 'ステータスが無効です。',
         'For all pending* states.' => '全ての保留ステータスに対して有効',
+        'Dynamic Info' => '',
         'Add Article' => '記事を追加',
-        'Create an Article' => '記事を作成',
+        'Inform' => '',
         'Inform agents' => '担当者に通知する',
         'Inform involved agents' => '関係する担当者に通知する',
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'ここでは、新しい記事に関する通知を受け取るべき担当者をを選択することができます。',
         'Text will also be received by' => 'このテキストは、次の方も閲覧可能です',
+        'Communications' => '',
+        'Create an Article' => '記事を作成',
         'Setting a template will overwrite any text or attachment.' => 'テンプレートを設定すると作成中の本文または添付ファイルは上書きされます。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce %s%s%s' => '%s%s%sをバウンス',
+        'cancel' => '',
         'Bounce to' => 'バウンスto',
         'You need a email address.' => 'メールアドレスが必要です',
         'Need a valid email address or don\'t use a local email address.' =>
@@ -2706,20 +2617,23 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
         'Compose Answer for %s%s%s' => '%s%s%sの返信を作成',
+        'Date Invalid!' => '日時が無効です。',
+        ' Select one or more recipients from the customer user address book.' =>
+            '',
+        'Customer user address book' => '顧客ユーザーのアドレス帳',
         'This address is registered as system address and cannot be used: %s' =>
             '',
         'Please include at least one recipient' => '受信者を少なくとも1人は含めるようにして下さい。',
-        'Select one or more recipients from the customer user address book.' =>
-            '顧客ユーザーのアドレス帳から1人以上の受信者を選択します。',
-        'Customer user address book' => '顧客ユーザーのアドレス帳',
         'Remove Ticket Customer' => 'チケットの顧客を削除',
         'Please remove this entry and enter a new one with the correct value.' =>
             'このエントリーを削除し、正しい値で新しいエントリーを追加してください。',
         'This address already exists on the address list.' => 'この住所はすでにアドレスリストに存在します。',
+        ' Cc' => '',
         'Remove Cc' => 'Ccを削除',
         'Bcc' => 'Bcc',
+        ' Bcc' => '',
         'Remove Bcc' => 'Bccを削除',
-        'Date Invalid!' => '日時が無効です。',
+        ' Send mail' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => '%s%s%sの顧客を変更',
@@ -2728,19 +2642,29 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => '新規メールチケットの作成',
+        ' Example Template' => '',
         'Example Template' => 'テンプレート例',
-        'From queue' => 'キューから',
         'To customer user' => '宛先顧客ユーザー',
+        ' To' => '',
         'Please include at least one customer user for the ticket.' => '',
-        'Select this customer as the main customer.' => '',
+        ' Select this customer as the main customer.' => '',
+        ' To customer user' => '',
         'Remove Ticket Customer User' => 'チケットの顧客ユーザーを削除',
+        'From queue' => 'キューから',
+        ' Get all' => '',
         'Get all' => '全てを取得',
+        ' Message body' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => '%s%s%sの送信メール',
+        'Select one or more recipients from the customer user address book.' =>
+            '顧客ユーザーのアドレス帳から1人以上の受信者を選択します。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '%s%s%sのメールを再送信',
+        'All fields marked with an asterisk (*) are mandatory.' => 'アスタリスク（*）が付いている全ての領域は必須入力です。',
+        'Cancel & close' => '中止して閉じる',
+        'Undo & close' => '元に戻して閉じる',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => '',
@@ -2755,18 +2679,19 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%sの履歴',
+        'Start typing to filter...' => '',
         'Filter for history items' => '履歴アイテムをフィルター',
-        'Expand/collapse all' => 'すべて展開/折りたたむ',
+        'Expand/Collapse all' => '',
         'CreateTime' => '作成日時',
         'Article' => '記事',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
         'Merge %s%s%s' => '%s%s%sをマージ',
         'Merge Settings' => 'マージ設定',
-        'You need to use a ticket number!' => '使用するチケット番号が必要です。',
-        'A valid ticket number is required.' => '有効なチケット番号が必要です。',
         'Try typing part of the ticket number or title in order to search by it.' =>
             '',
+        'You need to use a ticket number!' => '使用するチケット番号が必要です。',
+        'A valid ticket number is required.' => '有効なチケット番号が必要です。',
         'Limit the search to tickets with same Customer ID (%s).' => '',
         'Inform Sender' => '送信者を通知',
         'Need a valid email address.' => '有効なメールアドレスが必要です。',
@@ -2774,48 +2699,53 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => '%s%s%sを移転',
         'New Queue' => '新規キュー',
+        'Communication' => 'コミュニケーション',
         'Move' => '移転',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
         'Add note to linked %s%s%s' => '',
+        'Notes' => '',
         'Note to linked Ticket' => '',
         'LinkList invalid.' => '',
         'Note to origin Ticket' => '',
         'NoteToTicket invalid.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+        ' Select all' => '',
         'No ticket data found.' => 'チケットデータがありません',
-        'Open / Close ticket action menu' => 'チケットアクションメニューを開く/閉じる',
-        'Select this ticket' => 'このチケットを選択',
+        ' Open / Close ticket action menu' => '',
+        ' Select this ticket' => '',
         'Sender' => '送信者',
-        'First Response Time' => '初回応答期限',
-        'Update Time' => '更新期限',
-        'Solution Time' => '解決期限',
         'Impact' => '影響度',
         'CustomerID' => '顧客ID',
-        'Move ticket to a different queue' => '別のキューへチケットを移転',
+        'Update Time' => '更新期限',
+        'Solution Time' => '解決期限',
+        'First Response Time' => '初回応答期限',
+        ' Service Time' => '',
+        ' Move ticket to a different queue' => '',
         'Change queue' => 'キュー変更',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'この画面のアクティブなフィルターを削除します。',
+        'Clear all filters' => '',
         'Remove mention' => '',
         'Tickets per page' => 'ページ毎のチケット数',
+        'Filter assigned fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
+        ' Missing channel' => '',
         'Missing channel' => 'チャンネルがありません。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => '一覧のリセット',
-        'Column Filters Form' => 'カラム・フィルター・フォーム',
+        ' Column Filters Form' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => '新規電話チケットに分割',
-        'Save Chat Into New Phone Ticket' => 'チャットを新規チケットに保存する。',
         'Create New Phone Ticket' => '新規電話チケットの作成',
         'Please include at least one customer for the ticket.' => 'チケットには少なくとも1名のお客様を含めるようにして下さい。',
+        'Select this customer as the main customer.' => '',
         'To queue' => 'キュー',
-        'Chat protocol' => 'チャットプロトコル',
-        'The chat will be appended as a separate article.' => 'チャットは新規記事として追加されます。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
         'Phone Call for %s%s%s' => '%s%s%sの受話',
@@ -2827,6 +2757,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => '新しいプロセスチケットを作成',
+        ' Loading' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => 'チケットをプロセスに登録する',
@@ -2870,11 +2801,11 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Save as default' => 'ドラフトとして保存',
         'Drafts' => '下書き',
         'by' => 'by',
+        'Move ticket to a different queue' => '別のキューへチケットを移転',
         'Change Queue' => 'キューを変更',
         'There are no dialogs available at this point in the process.' =>
             'このプロセスは完了しました。',
         'This item has no articles yet.' => 'このチケットにはまだ記事がありません。',
-        'Ticket Timeline View' => 'チケットのタイムラインビュー',
         'Article Overview - %s Article(s)' => '記事一覧 - %s件',
         'Page %s' => '%sページ',
         'Add Filter' => 'フィルターを追加',
@@ -2890,11 +2821,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Internal message' => '内部メッセージ',
         'Sending of this message has failed.' => 'このメッセージの送信に失敗しました。',
         'Resize' => 'リサイズ',
-        'Mark this article as read' => 'この記事を既読にして下さい。',
-        'Show Full Text' => '全文を表示する',
-        'Full Article Text' => '全ての記事テキスト',
-        'No more events found. Please try changing the filter settings.' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
         '#%s' => '#%s',
@@ -2928,7 +2854,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'アーカイブ',
         'This ticket is archived.' => 'このチケットはアーカイブされています。',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => '保留時間',
         'Locked' => 'ロック状態',
         '%s Ticket(s)' => '%sチケット',
@@ -2937,10 +2863,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
         'Preview of this article is not possible because %s channel is missing in the system.' =>
             '',
-        'This feature is part of the %s. Please contact us at %s for an upgrade.' =>
-            '',
-        'Please re-install %s package in order to display this article.' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentBlocker.tt
         'To protect your privacy, remote content was blocked.' => '',
@@ -2948,7 +2870,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'ホーム',
-        'Back to admin overview' => '管理一覧に戻る',
+        'Back' => '戻る',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -2956,11 +2878,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Link.tt
         'Remove entry' => '登録を削除',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/CloudServicesDisabled.tt
-        'This Feature Requires Cloud Services' => 'この機能にはクラウドサービスが必要',
-        'You can' => '次のことができます: ',
-        'go back to the previous page' => '直前のページに戻る',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'お客様各位',
@@ -2990,6 +2907,11 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerHeader.tt
+        'Edit personal preferences' => '個人設定の編集',
+        'Personal preferences' => '個人設定',
+        'Logout' => 'ログアウト',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
         'JavaScript Not Available' => 'JavaScriptが有効になっていません。',
         'In order to experience this software, you\'ll need to enable JavaScript in your browser.' =>
@@ -3009,9 +2931,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'ログイン',
-        'Not yet registered?' => '未登録ですか？',
-        'Sign up now' => '新規登録する',
-        'Back' => '戻る',
         'Request New Password' => '新規パスワードを申請',
         'Your User Name' => 'ユーザー名',
         'A new password will be sent to your email address.' => '登録されたメールアドレスに新しいパスワードを送信します。',
@@ -3021,26 +2940,28 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Your First Name' => 'あなたの姓',
         'Your Last Name' => 'あなたの名字',
         'Your email address (this will become your username)' => 'あなたの電子メールアドレス (ユーザー名になります)',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerNavigationBar.tt
-        'Incoming Chat Requests' => '受信チャット要求',
-        'Edit personal preferences' => '個人設定の編集',
-        'Logout %s' => '%sをログアウト',
+        'Not yet registered?' => '未登録ですか？',
+        'Sign up now' => '新規登録する',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
-        'Service level agreement' => 'サービスレベル契約 (SLA)',
+        'New Ticket' => '新規チケット',
+        ' Service level agreement' => '',
+        'Dymanic Info' => '',
+        ' Subject' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => 'ようこそ！',
         'Please click the button below to create your first ticket.' => 'チケットを作成するために下のボタンをクリックしてください。',
         'Create your first ticket' => 'チケット作成',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+        'New Process Ticket' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'プロファイル',
         'e. g. 10*5155 or 105658*' => '例: 10*5155 または 105658*',
-        'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => 'チケットにおける全文検索（例えば、「John * n」または「Will *」）',
         'Types' => 'タイプ',
-        'Time Restrictions' => '時間制限',
+        'Limitation' => '',
         'No time settings' => '時間設定なし',
         'All' => '全て',
         'Specific date' => '特定の日付',
@@ -3049,20 +2970,19 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Only tickets created between' => 'この期間に作成されたチケットのみ',
         'Ticket Archive System' => 'チケット・アーカイブシステム',
         'Save Search as Template?' => 'テンプレートとして検索を保存しますか？',
-        'Save as Template?' => 'テンプレートを保存しますか？',
         'Save as Template' => 'テンプレートとして保存',
+        'Save as Template?' => 'テンプレートを保存しますか？',
         'Template Name' => 'テンプレート名',
         'Pick a profile name' => 'テンプレート名',
         'Output to' => '出力: ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearchResultShort.tt
+        'Remove this Search Term.' => 'この検索語を削除して下さい。',
         'of' => '/',
         'Page' => 'ページ',
-        'Search Results for' => '検索結果: ',
-        'Remove this Search Term.' => 'この検索語を削除して下さい。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
-        'Start a chat from this ticket' => 'このチケットからチャットを開始する。',
+        'Ticket Details' => '',
         'Next Steps' => '次のステップ',
         'Reply' => '返信',
 
@@ -3095,20 +3015,27 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'このドラフトは、このドラフトが作成されてから改訂されたため、古くなっています。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
-        'View notifications' => '通知を見る',
-        'Personal preferences' => '個人設定',
-        'Logout' => 'ログアウト',
-        'You are logged in as' => 'ログイン中: ',
         'Last viewed' => '',
+        'You are logged in as' => 'ログイン中: ',
+        'Delete all activities' => '',
+        'Delete all' => '',
+        'Mark all activities as seen' => '',
+        'Seen all' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
+        'Overviews' => '',
+        'Personal views' => '',
+        'Last Views' => '',
+        'Search tools' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScriptが利用できません。',
-        'Step %s' => 'ステップ %s',
         'License' => 'ライセンス',
         'Database Settings' => 'データベース設定',
         'General Specifications and Mail Settings' => '共通仕様とメール設定',
         'Finish' => '完了',
         'Welcome to %s' => '%s にようこそ',
+        'Address' => 'アドレス',
         'Phone' => '電話',
         'Web site' => 'Webサイト',
         'Community' => '',
@@ -3139,6 +3066,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Password for inbound mail.' => '受信メールのパスワード',
         'Result of mail configuration check' => 'メール設定チェックの結果',
         'Check mail configuration' => 'メール設定チェック',
+        'or' => 'または',
         'Skip this step' => 'この手順を飛ばす',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
@@ -3148,8 +3076,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
         'Install Type' => 'インストールタイプ',
-        'Create a new database for OTRS' => '新規にOTRSデータベースを作成する',
-        'Use an existing database for OTRS' => '既存のOTRSデータベースを使用する',
+        'Create a new database for Znuny' => '新規にZnunyデータベースを作成する',
+        'Use an existing database for Znuny' => '既存のZnunyデータベースを使用する',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
         'If you have set a root password for your database, it must be entered here. If not, leave this field empty.' =>
@@ -3160,8 +3088,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Database check successful.' => 'データベースチェックに成功しました。',
         'Database User' => 'データベース・ユーザー',
         'New' => '新規',
-        'A new database user with limited permissions will be created for this OTRS system.' =>
-            'このOTRSシステム用に限られた権限の新規データベースユーザーが作成されます。',
+        'A new database user with limited permissions will be created for this Znuny system.' =>
+            'このZnunyシステム用に限られた権限の新規データベースユーザーが作成されます。',
         'Repeat Password' => 'パスワードを再度入力',
         'Generated password' => 'パスワードを生成しました。',
         'Database' => 'データベース',
@@ -3174,10 +3102,10 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Port' => 'Port',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
-        'To be able to use OTRS you have to enter the following line in your command line (Terminal/Shell) as root.' =>
-            'OTRSを使用するには、rootでコマンドライン上 (ターミナル／シェル) から次の行を入力する必要があります。',
+        'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
+            'Znunyを使用するには、rootでコマンドライン上 (ターミナル／シェル) から次の行を入力する必要があります。',
         'Restart your webserver' => 'Webサーバを再起動してください。',
-        'After doing so your OTRS is up and running.' => 'その後、OTRSの起動を実行してください。',
+        'After doing so your Znuny is up and running.' => 'その後、Znunyの起動を実行してください。',
         'Start page' => 'スタートページ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerLicense.tt
@@ -3224,7 +3152,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
         'Feature not Available' => '',
-        'Sorry, but this feature of OTRS is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
+        'Sorry, but this feature of Znuny is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Motd.tt
@@ -3265,7 +3193,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/PublicDefault.tt
         'Welcome' => 'ようこそ',
-        'This is the default public interface of OTRS! There was no action parameter given.' =>
+        'This is the default public interface of Znuny! There was no action parameter given.' =>
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
@@ -3409,12 +3337,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Enable' => '有効',
         'Reset this setting to its default state' => 'この設定をデフォルトのステータスにリセットする',
         'Reset setting' => 'リセット設定',
-        'Allow users to adapt this setting from within their personal preferences' =>
-            'ユーザーが個人設定内からこの設定を変更できるようにする。',
-        'Allow users to update' => 'ユーザーに更新を許可する',
-        'Do not longer allow users to adapt this setting from within their personal preferences' =>
-            'ユーザーが個人設定からこの設定を変更するのを許可しないようにする。',
-        'Forbid users to update' => 'ユーザーの更新を禁止する',
         'Show user specific changes for this setting' => 'この設定のユーザー固有の変更を表示する',
         'Show user settings' => 'ユーザー設定を表示する',
         'Copy a direct link to this setting to your clipboard' => 'この設定への直接リンクをクリップボードにコピーする',
@@ -3464,7 +3386,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Navigation' => 'ナビゲーション',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Test.tt
-        'OTRS Test Page' => 'OTRS テストページ',
+        'Znuny Test Page' => 'Znuny テストページ',
         'Unlock' => 'ロック解除',
         'Welcome %s %s' => 'ようこそ %s %s',
         'Counter' => 'カウンター',
@@ -3474,9 +3396,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Warning.tt
         'Go back to the previous page' => '前のページへ戻る',
-
-        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/AppointmentCalendar/CalendarSettingsDialog.html.tmpl
-        'Show' => '表示',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/FormDraftAddDialog.html.tmpl
         'Draft title' => '下書きタイトル',
@@ -3493,8 +3412,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
         'Click to select a file for upload.' => '',
-        'Click to select files or just drop them here.' => 'クリックしてファイルを選択するか、ここにドロップして下さい。',
-        'Click to select a file or just drop it here.' => 'クリックしてファイルを選択するか、ここにドロップします。',
+        'Select files or drop them here' => '',
+        'Select a file or drop it here' => '',
         'Uploading...' => 'アップロード中...',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
@@ -3518,12 +3437,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Try again' => '再試行する',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
-        'Reset options' => 'リセットオプション',
-        'Reset setting on global level.' => '',
-        'Reset globally' => '',
-        'Remove all user changes.' => '',
-        'Reset locally' => '',
-        'user(s) have modified this setting.' => '',
         'Do you really want to reset this setting to it\'s default value?' =>
             '',
 
@@ -3542,7 +3455,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Valid' => '有効',
         'Mr.' => '様',
         'Mrs.' => '様',
-        'Address' => 'アドレス',
         'View system log messages.' => 'システム・ログ・メッセージを見る。',
         'Edit the system configuration settings.' => 'システム設定の編集',
         'Update and extend your system with software packages.' => 'このシステムのソフトウェアパッケージの更新と展開',
@@ -3550,7 +3462,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
             'データベースから取得したACLの情報はシステム設定と同期していません。全てのACLをデプロイしてください。',
-        'ACLs could not be Imported due to a unknown error, please check OTRS logs for more information' =>
+        'ACLs could not be Imported due to a unknown error, please check Znuny logs for more information' =>
             '',
         'The following ACLs have been added successfully: %s' => '次のACLは、無事に追加されました。: %s',
         'The following ACLs have been updated successfully: %s' => '次のACLは、無事に更新されました。: %s',
@@ -3607,7 +3519,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Unknown Notification %s!' => '',
         '%s (copy)' => '',
         'There was an error creating the Notification' => '',
-        'Notifications could not be Imported due to a unknown error, please check OTRS logs for more information' =>
+        'Notifications could not be Imported due to a unknown error, please check Znuny logs for more information' =>
             '',
         'The following Notifications have been added successfully: %s' =>
             '次の通知が正常に追加されました：%s',
@@ -3621,7 +3533,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
-        'Yes, but require at least one active notification method.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '自動応答が追加されました！',
@@ -3888,12 +3799,12 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Could not load %s.' => '',
         'Could not read %s!' => '%s を読み込めません！',
         'Need a file to import!' => 'インポートするファイルを指定してください！',
-        'The imported file has not valid YAML content! Please check OTRS log for details' =>
+        'The imported file has not valid YAML content! Please check Znuny log for details' =>
             '',
         'Web service "%s" deleted!' => 'Webサービス "%s" を削除しました。',
-        'OTRS as provider' => 'プロバイダーとしてのOTRS',
+        'Znuny as provider' => 'プロバイダーとしてのZnuny',
         'Operations' => 'オペレーション',
-        'OTRS as requester' => 'リクエスターとしてのOTRS',
+        'Znuny as requester' => 'リクエスターとしてのZnuny',
         'Invokers' => 'API実行元',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceWebserviceHistory.pm
@@ -3930,16 +3841,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
         'Authorization code parameters not found.' => '',
 
-        # Perl Module: Kernel/Modules/AdminOTRSBusiness.pm
-        'Your system was successfully upgraded to %s.' => 'システムは正常に%sにアップグレードされました。',
-        'There was a problem during the upgrade to %s.' => '%sにアップグレード中に問題が発生しました。',
-        '%s was correctly reinstalled.' => '%s は正常に再インストールされました',
-        'There was a problem reinstalling %s.' => '%s をインストール中に問題が発生しました',
-        'Your %s was successfully updated.' => '%sは正常に更新されました。',
-        'There was a problem during the upgrade of %s.' => '%sのアップグレード中に問題が発生しました。',
-        '%s was correctly uninstalled.' => '%sは正常にアンインストールされました。',
-        'There was a problem uninstalling %s.' => '%sのアンインストール時に問題が発生しました。',
-
         # Perl Module: Kernel/Modules/AdminPGP.pm
         'PGP environment is not working. Please check log for more info!' =>
             'PGP 機構が動作していません。詳しくはログをご覧ください！',
@@ -3948,7 +3849,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Need param Key to download!' => 'ダウンロードを行うには、キーを入力する必要があります！',
 
         # Perl Module: Kernel/Modules/AdminPackageManager.pm
-        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!' =>
+        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!' =>
             '',
         'No such package!' => 'そのようなパッケージはありません！',
         'No such file %s in package!' => 'パッケージ内にファイル %s はありません！',
@@ -3974,9 +3875,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Repository List' => 'リポジトリ・リスト',
         'No packages found in selected repository. Please check log for more info!' =>
             '',
-        'Can\'t connect to OTRS Feature Add-on list server!' => 'OTRSアドオンリストサーバーに接続できませんでした！',
-        'Can\'t get OTRS Feature Add-on list from server!' => 'OTRS アドオンリストをサーバーから取得できませんでした！',
-        'Can\'t get OTRS Feature Add-on from server!' => 'OTRS アドオンをサーバーから取得できませんでした！',
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => 'そのようなフィルターはありません: %s',
@@ -4139,12 +4037,12 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'You currently don\'t have any favourite settings.' => '',
         'The following settings could not be found: %s' => '',
         'Import not allowed!' => 'インポートは許可されていません!',
-        'System Configuration could not be imported due to an unknown error, please check OTRS logs for more information.' =>
+        'System Configuration could not be imported due to an unknown error, please check Znuny logs for more information.' =>
             '',
         'Category Search' => 'カテゴリ検索',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
-        'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the OTRS log for more information.' =>
+        'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
             '',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationGroup.pm
@@ -4264,10 +4162,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/Modules/AgentPreferences.pm
         'Param Group is required!' => 'パラメータ Groupが必要です！',
-        'Updated user preferences' => 'ユーザー設定を更新しました',
-        'System was unable to deploy your changes.' => '',
-        'Setting not found!' => '設定が見つかりません！',
-        'System was unable to reset the setting!' => '',
 
         # Perl Module: Kernel/Modules/AgentSplitSelection.pm
         'Process ticket' => 'プロセスチケット',
@@ -4379,12 +4273,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'move許可が必要です！',
 
-        # Perl Module: Kernel/Modules/AgentTicketPhone.pm
-        'Chat is not active.' => 'チャットはアクティブではありません。',
-        'No permission.' => '権限がありません！',
-        '%s has left the chat.' => '%s はチャットから退出しました。',
-        'This chat has been closed and will be removed in %s hours.' => 'このチャットは既にクローズしています。%s 時間後に削除されます。',
-
         # Perl Module: Kernel/Modules/AgentTicketPhoneCommon.pm
         'Ticket locked.' => 'チケットがロックされました。',
 
@@ -4494,51 +4382,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Feature is not active' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketZoom.pm
-        'Link Deleted' => 'リンクが削除されました',
-        'Ticket Locked' => 'チケットがロックされました',
-        'Pending Time Set' => '保留時間を設定',
-        'Dynamic Field Updated' => 'ダイナミック・フィールドを更新しました',
-        'Outgoing Email (internal)' => '',
-        'Ticket Created' => 'チケット作成済み',
-        'Type Updated' => 'タイプが更新されました',
-        'Escalation Update Time In Effect' => '',
-        'Escalation Update Time Stopped' => 'エスカレーション更新期限タイマーが停止されました',
-        'Escalation First Response Time Stopped' => 'エスカレーション初回応答期限タイマーが停止されました',
-        'Customer Updated' => '顧客が更新されました',
-        'Internal Chat' => '内部チャット',
-        'Automatic Follow-Up Sent' => '自動フォローアップの送信',
-        'Note Added' => '注釈作成済み',
-        'Note Added (Customer)' => '注釈作成済み(顧客)',
-        'SMS Added' => '追加されたSMS',
-        'SMS Added (Customer)' => '追加されたSMS（顧客）',
-        'State Updated' => 'ステータスが更新されました',
-        'Outgoing Answer' => '回答',
-        'Service Updated' => 'サービスが更新されました',
-        'Link Added' => 'リンクが追加されました',
-        'Incoming Customer Email' => '顧客からのメール',
-        'Incoming Web Request' => '受信Webリクエスト',
-        'Priority Updated' => '優先度が更新されました',
-        'Ticket Unlocked' => 'チケットのロックが解除されました',
-        'Outgoing Email' => '送信メール',
-        'Title Updated' => 'タイトルが更新されました',
-        'Ticket Merged' => 'チケットが結合されました',
-        'Outgoing Phone Call' => '架電',
-        'Forwarded Message' => '転送されたメッセージ',
-        'Removed User Subscription' => '削除されたユーザーサブスクリプション',
-        'Time Accounted' => 'アカウンテッドタイム',
-        'Incoming Phone Call' => '入電',
-        'System Request.' => 'システム要求',
-        'Incoming Follow-Up' => 'フォローアップがあります',
-        'Automatic Reply Sent' => '自動返信送信',
-        'Automatic Reject Sent' => '自動拒否送信済み',
-        'Escalation Solution Time In Effect' => 'エスカレーションソリューションの有効期間',
-        'Escalation Solution Time Stopped' => 'エスカレーション解決期限タイマーが停止されました',
-        'Escalation Response Time In Effect' => '',
-        'Escalation Response Time Stopped' => 'エスカレーション応答期限タイマーが停止されました',
-        'SLA Updated' => 'SLA 更新済み',
-        'External Chat' => '外部チャット',
-        'Queue Changed' => 'キューが変更されました',
-        'Notification Was Sent' => '',
         'This ticket does not exist, or you don\'t have permissions to access it in its current state.' =>
             '',
         'Missing FormDraftID!' => 'FormDraftIDがありません！',
@@ -4557,7 +4400,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Show one article' => '一つの記事を閲覧',
         'Show all articles' => '全ての記事を閲覧',
-        'Show Ticket Timeline View' => '',
 
         # Perl Module: Kernel/Modules/AjaxAttachment.pm
         'Got no FormID.' => '',
@@ -4604,7 +4446,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Configure "Home" in Kernel/Config.pm first!' => 'まず、 ”Kernel/Config.pm” ファイルの "Home" を設定してください！',
         'File "%s/Kernel/Config.pm" not found!' => '"%s/Kernel/Config.pm" ファイルが見つかりません！',
         'Directory "%s" not found!' => 'ディレクトリ "%s" が見つかりません！',
-        'Install OTRS' => 'OTRSをインストール',
+        'Install Znuny' => 'Znunyをインストール',
         'Intro' => 'イントロ',
         'Kernel/Config.pm isn\'t writable!' => '"Kernel/Config.pm" ファイルに書き込み権限がありません！',
         'If you want to use the installer, set the Kernel/Config.pm writable for the webserver user!' =>
@@ -4621,7 +4463,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Unknown database type "%s".' => '"%s"は不明なデータベース形式です。',
         'Please go back.' => '戻って下さい。',
         'Create Database' => 'データベース作成',
-        'Install OTRS - Error' => 'OTRSをインストール － エラーが発生しました',
+        'Install Znuny - Error' => 'Znunyをインストール － エラーが発生しました',
         'File "%s/%s.xml" not found!' => 'ファイル "%s/%s.xml" が見つかりません！',
         'Contact your Admin!' => '管理者に連絡してください！',
         'System Settings' => 'システム設定',
@@ -4655,6 +4497,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Need config Package::RepositoryAccessRegExp' => 'Package::RepositoryAccessRegExp の設定が必要です',
         'Authentication failed from %s!' => '%s からの認証が失敗しました！',
 
+        # Perl Module: Kernel/Output/HTML/Article/Chat.pm
+        'Chat' => 'チャット',
+
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketBounce.pm
         'Bounce Article to a different mail address' => '異なるメールアドレスに記事をバウンス',
         'Bounce' => 'バウンス',
@@ -4687,18 +4532,12 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'この記事を印刷',
 
-        # Perl Module: Kernel/Output/HTML/ArticleAction/GetHelpLink.pm
-        'Contact us at sales@otrs.com' => 'sales@otrs.comまでご連絡下さい。',
-        'Get Help' => 'ヘルプを得る',
-
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'マーク',
         'Unmark' => 'マーク解除',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/ReinstallPackageLink.pm
-        'Upgrade to OTRS Business Solution™' => 'OTRS Business Solution™ にアップグレードします。',
         'Re-install Package' => 'パッケージを再インストールする',
-        'Upgrade' => 'アップグレード',
         'Re-install' => '再インストール',
 
         # Perl Module: Kernel/Output/HTML/ArticleCheck/PGP.pm
@@ -4756,25 +4595,12 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/Output/HTML/Dashboard/CustomerUserList.pm
         'Shown customer users' => '顧客ユーザーを表示',
-        'Offline' => 'オフライン',
-        'User is currently offline.' => 'ユーザーは現在オフラインです。',
-        'User is currently active.' => 'ユーザーは現在活動中です。',
-        'Away' => '離席',
-        'User was inactive for a while.' => 'ユーザーはしばらくインアクティブです',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => '',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
         'Shown Tickets' => 'チケットを表示',
-
-        # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
-        'Can\'t connect to OTRS News server!' => 'OTRSニュースサーバーに接続できませんでした！',
-        'Can\'t get OTRS News from server!' => 'OTRS Newsをサーバから取得できませんでした！',
-
-        # Perl Module: Kernel/Output/HTML/Dashboard/ProductNotify.pm
-        'Can\'t connect to Product News server!' => '製品ニュースサーバーに接続できませんでした！',
-        'Can\'t get Product News from server!' => '製品ニュースをサーバーから取得できませんでした！',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/RSS.pm
         'Can\'t connect to %s!' => '%sに接続できませんでした！',
@@ -4789,8 +4615,11 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         '7 Day Stats' => '週間統計',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/UserOnline.pm
+        'User is currently offline.' => 'ユーザーは現在オフラインです。',
+        'User is currently active.' => 'ユーザーは現在活動中です。',
+        'User was inactive for a while.' => 'ユーザーはしばらくインアクティブです',
         'User set their status to unavailable.' => '',
-        'Unavailable' => '利用できません',
+        'Away' => '離席',
 
         # Perl Module: Kernel/Output/HTML/Layout.pm
         'Standard' => 'スタンダード',
@@ -4818,7 +4647,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Show Tree Selection' => 'ツリーセレクターを表示する',
         'Split Quote' => '見積を分割',
         'Remove Quote' => '見積を削除',
-        'Last Views' => '',
 
         # Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
         'Linked as' => 'リンク先',
@@ -4835,13 +4663,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => 'アーカイブの検索',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
-        'Please verify your license data!' => '',
-        'The license for your %s is about to expire. Please make contact with %s to renew your contract!' =>
-            'あなたの %s のライセンスはもうすぐ失効します。　 %s にお問い合わせいただき更新を行ってください。',
-        'An update for your %s is available, but there is a conflict with your framework version! Please update your framework first!' =>
-            ' %s のアップデートが利用可能です。しかしあなたのフレームワークのバージョンとコンフリクトしていますので、事前にフレームワークの更新を行ってください。',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOnline.pm
         'Online Agent: %s' => 'オンラインの担当者: %s',
@@ -4862,7 +4683,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
 
         # Perl Module: Kernel/Output/HTML/Notification/DaemonCheck.pm
-        'OTRS Daemon is not running.' => 'OTRSデーモンが起動していません。',
+        'Znuny Daemon is not running.' => 'Znunyデーモンが起動していません。',
 
         # Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
         'OAuth2 token for "%s" has expired.' => '',
@@ -5015,11 +4836,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '予定されていたメンテナンスのため、只今の時間はログインを行うことができません。',
 
         # Perl Module: Kernel/System/AuthSession.pm
-        'You have exceeded the number of concurrent agents - contact sales@otrs.com.' =>
-            '',
-        'Please note that the session limit is almost reached.' => 'セッション数の上限に近づいていますのでご注意ください。',
-        'Login rejected! You have exceeded the maximum number of concurrent Agents! Contact sales@otrs.com immediately!' =>
-            '同時接続ユーザ数の上限に達したため、ログインできませんでした。sales@otrs.comに連絡してください。',
         'Session limit reached! Please try again later.' => 'セッション数が上限に達しました。後で再ログインを試みてください。',
         'Session per user limit reached!' => 'ユーザあたりのセッション数の上限に到達しました！',
 
@@ -5109,14 +4925,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # Perl Module: Kernel/System/ProcessManagement/DB/Process/State.pm
         'Inactive' => '無効',
         'FadeAway' => '未使用',
-
-        # Perl Module: Kernel/System/Registration.pm
-        'Can\'t contact registration server. Please try again later.' => '登録サーバに接続できません。しばらくしてから再試行してください。',
-        'No content received from registration server. Please try again later.' =>
-            '登録サーバから受信した内容がありません。しばらくしてから再試行してください。',
-        'Can\'t get Token from sever' => 'サーバーからトークンを取得できませんでした',
-        'Username and password do not match. Please try again.' => 'ユーザー名とパスワードが一致しません。再試行してください。',
-        'Problems processing server result. Please try again later.' => 'サーバから受信した内容を処理しているときに問題が発生しました。再試行してください。',
 
         # Perl Module: Kernel/System/Stats.pm
         'Sum' => '合計',
@@ -5232,7 +5040,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
         'Invalid Default Values' => 'デフォルト値は不正です',
-        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair' =>
+        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
@@ -5280,16 +5088,16 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
         'Operating System' => 'オペレーションシステム',
-        'OTRS Disk Partition' => 'OTRS ディスクパーティション',
+        'Znuny Disk Partition' => 'Znuny ディスクパーティション',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
         'Disk Usage' => 'ディスク利用率',
-        'The partition where OTRS is located is almost full.' => 'OTRS がインストールされているディスクパーティションがもうすぐいっぱいになります',
-        'The partition where OTRS is located has no disk space problems.' =>
-            'OTRS がインストールされているディスクパーティションはディスクスペースの問題は起こっていません',
+        'The partition where Znuny is located is almost full.' => 'Znuny がインストールされているディスクパーティションがもうすぐいっぱいになります',
+        'The partition where Znuny is located has no disk space problems.' =>
+            'Znuny がインストールされているディスクパーティションはディスクスペースの問題は起こっていません',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpacePartitions.pm
-        'Disk Partitions Usage' => 'OTRS ディスクパーティション使用率',
+        'Disk Partitions Usage' => 'Znuny ディスクパーティション使用率',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Distribution.pm
         'Distribution' => 'ディストリビューション',
@@ -5326,7 +5134,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'There should be no more than 200 MB swap space used.' => '200MB 以上のSwap 領域が存在してはいけない',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'OTRS' => 'OTRS',
+        'Znuny' => '',
         'Article Search Index Status' => '記事検索インデックスのステータス',
         'Indexed Articles' => '',
 
@@ -5393,7 +5201,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
         'File System Writable' => '書き込み可能なファイルシステム',
-        'The file system on your OTRS partition is not writable.' => 'OTRSパーティション上のファイルシステムは書き込み可能ではありません。',
+        'The file system on your Znuny partition is not writable.' => 'Znunyパーティション上のファイルシステムは書き込み可能ではありません。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
         'Legacy Configuration Backups' => '従来構成のバックアップ',
@@ -5424,7 +5232,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
         'Spooled Emails' => 'スプールされたメール',
-        'There are emails in var/spool that OTRS could not process.' => 'OTRSが処理できなかったメールがvar/spool以下に存在しています。',
+        'There are emails in var/spool that Znuny could not process.' => 'Znunyが処理できなかったメールがvar/spool以下に存在しています。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
         'Your SystemID setting is invalid, it should only contain digits.' =>
@@ -5455,17 +5263,17 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
         'Orphaned Records In ticket_lock_index Table' => 'ticket_lock_indexテーブルに孤立したレコード',
-        'Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'テーブル ticket_lock_indexに孤立したレコードが存在しています。 StaticDBのインデックスを正しくするためにbin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup"を実行してください。',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'テーブル ticket_lock_indexに孤立したレコードが存在しています。 StaticDBのインデックスを正しくするためにbin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup"を実行してください。',
         'Orphaned Records In ticket_index Table' => 'ticket_indexテーブルに孤立したレコード',
-        'Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'テーブル ticket_indexに孤立したレコードが存在しています。 StaticDBのインデックスを正しくするためにbin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" を実行してください。',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'テーブル ticket_indexに孤立したレコードが存在しています。 StaticDBのインデックスを正しくするためにbin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" を実行してください。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
         'Time Settings' => '時刻設定',
         'Server time zone' => 'サーバのタイムゾーン',
-        'OTRS time zone' => 'OTRSのタイムゾーン',
-        'OTRS time zone is not set.' => 'OTRSのタイムゾーンが設定されていません。',
+        'Znuny time zone' => 'Znunyのタイムゾーン',
+        'Znuny time zone is not set.' => 'Znunyのタイムゾーンが設定されていません。',
         'User default time zone' => 'ユーザーのデフォルトタイムゾーン',
         'User default time zone is not set.' => 'ユーザーのデフォルトのタイムゾーンが設定されていません。',
         'Calendar time zone is not set.' => 'カレンダーのタイムゾーンが設定されていません。',
@@ -5482,7 +5290,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Agents using favourites for the admin overview' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'OTRS Version' => 'OTRSバージョン',
+        'Znuny Version' => 'Znunyバージョン',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Webサーバー',
@@ -5490,8 +5298,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/MPMModel.pm
         'MPM model' => 'MPMモデル',
-        'OTRS requires apache to be run with the \'prefork\' MPM model.' =>
-            'OTRSはapacheがMPMモデルがpreforkで実行されている必要があります。',
+        'Znuny requires apache to be run with the \'prefork\' MPM model.' =>
+            'ZnunyはapacheがMPMモデルがpreforkで実行されている必要があります。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
         'CGI Accelerator Usage' => 'CGIアクセラレータの有無',
@@ -5623,7 +5431,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Define which columns are shown in the linked appointment widget (LinkObject::ViewMode = "complex"). Possible settings: 0 = Disabled, 1 = Available, 2 = Enabled by default.' =>
             '',
-        'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
+        'Znuny doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
             '',
         'Defines the ticket appointment type backend for ticket escalation time.' =>
             '',
@@ -5660,20 +5468,14 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Triggers add or update of automatic calendar appointments based on certain ticket times.' =>
             '',
 
-        # XML Definition: Kernel/Config/Files/XML/CloudServices.xml
-        'Defines if the communication between this system and OTRS Group servers that provide cloud services is possible. If set to \'Disable cloud services\', some functionality will be lost such as system registration, support data sending, upgrading to and use of OTRS Business Solution™, OTRS Verify™, OTRS News and product News dashboard widgets, among others.' =>
-            '',
-        'Cloud service admin module registration for the transport layer.' =>
-            '',
-
         # XML Definition: Kernel/Config/Files/XML/Daemon.xml
-        'Defines the module to display a notification in the agent interface if the OTRS Daemon is not running.' =>
+        'Defines the module to display a notification in the agent interface if the Znuny Daemon is not running.' =>
             '',
         'List of CSS files to always be loaded for the agent interface.' =>
             '担当者インタフェースに対して、常にロードされるCSSファイルのリストです。',
         'List of JS files to always be loaded for the agent interface.' =>
             '担当者インタフェースに対して、常にロードされるJSファイルのリストです。',
-        'Type of daemon log rotation to use: Choose \'OTRS\' to let OTRS system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
+        'Type of daemon log rotation to use: Choose \'OTRS\' to let Znuny system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
             '',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
             '',
@@ -5734,7 +5536,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Delete expired ticket draft entries.' => '期限切れのチケット下書きエントリを削除します。',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
-        'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
             '',
         'Enables or disables the debug mode over frontend interface.' => '',
         'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
@@ -5747,13 +5549,15 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines the name of the application, shown in the web interface, tabs and title bar of the web browser.' =>
             'ウェブ・インタフェース、ウェブ・ブラウザのタブおよびタイトル・バーに表示されるアプリケーション名を定義します。',
-        'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of OTRS).' =>
-            'システム識別子を定義します。すべてのチケット番号とHTTPセッションの文字列は、このIDが含まれています。これはをシステムに属している唯一のチケットがフォローアップとして処理されることを確実にします。（2つのOTRSのインスタンス間で通信する場合に便利です）',
+        'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of Znuny).' =>
+            'システム識別子を定義します。すべてのチケット番号とHTTPセッションの文字列は、このIDが含まれています。これはをシステムに属している唯一のチケットがフォローアップとして処理されることを確実にします。（2つのZnunyのインスタンス間で通信する場合に便利です）',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'フルに認定されたシステムのドメイン名を定義します。この設定は変数OTRS_CONFIG_FQDNとして使用され、アプリケーションによって使用されるメッセージングの全てのフォームに存在し、ご利用のシステム内のチケットへのリンクを作成することとなります。',
-        'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
+        'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
             '',
-        'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
+        'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
+            '',
+        'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'アプリケーションにサービスを提供するWebサーバが使用するプロトコルの種類を定義します。 HTTPSプロトコルをプレーンHTTPの代わりに使用する場合はここで指定する必要があります。これがないWebサーバの設定や行動に影響を与えるので、アプリケーションへのアクセスの方法を変更しないと、それが間違っている場合、アプリケーションにログインできなくなることがあります。この設定は、システム内でのチケットへのリンクを構成するためにアプリケーションが使用するメッセージングのすべての形態で発見されている変数、OTRS_CONFIG_HttpTypeとして使用されます。',
@@ -5771,7 +5575,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '異なるテーマを、担当者と顧客の間で異なるように、アプリケーション内でドメインごとの単位で使用されるように、設定することができます。regular expression (regex)を使用することにより、ドメインにマッチするようにKey/Contentを設定することが可能です。“Key”の値はドメインにマッチさせるべきであり、“Content”の値はご利用のシステムで有効なテーマとしてください。regrexの適切な形式のための入力例を確認してください。',
@@ -5782,14 +5586,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'スキン"デフォルト"時に担当者インターフェイスで表示されるロゴ。詳細は"AgentLogo"を参照してください。',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            'スキン"slim"時に担当者インターフェイスで表示されるロゴ。詳細は"AgentLogo"を参照してください。',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            'スキン"ivory"時に担当者インターフェイスで表示されるロゴ。詳細は"AgentLogo"を参照してください。',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            'スキン"ivory-slim"時に担当者インターフェイスで表示されるロゴ。詳細は"AgentLogo"を参照してください。',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'アイコン、CSS、Java ScriptのURLベースのパスを定義します。',
@@ -5814,9 +5610,10 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
-        'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
-            'HTTPヘッダ"X-Frame-Options: SAMEORIGIN”を無効化し、OTRSを外部のWebサイトの一部としてiframeに埋め込むことを許可します。 このHTTPヘッダを無効にすることにより、セキュリティ上の問題が生じることがあります! 変更内容をよく理解している場合に限り無効化を実行してください!',
+        'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
+            'HTTPヘッダ"X-Frame-Options: SAMEORIGIN”を無効化し、Znunyを外部のWebサイトの一部としてiframeに埋め込むことを許可します。 このHTTPヘッダを無効にすることにより、セキュリティ上の問題が生じることがあります! 変更内容をよく理解している場合に限り無効化を実行してください!',
         'Disable HTTP header "Content-Security-Policy" to allow loading of external script contents. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'HTTPヘッダ"Content-Security-Policy”を無効化し、外部のスクリプトコンテンツの読み込みを許可します。 このHTTPヘッダを無効にすることにより、セキュリティ上の問題が生じることがあります! 変更内容をよく理解している場合に限り無効化を実行してください!',
         'Automated line break in text messages after x number of chars.' =>
@@ -5859,8 +5656,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'もしログ・モジュールに関して"SysLog"が選択されていた場合、ロギングで使用されるべき文字セットが特定されます。',
         'If "file" was selected for LogModule, a logfile must be specified. If the file doesn\'t exist, it will be created by the system.' =>
             'もしログ・モジュールに関して"File"が選択されていた場合、ログ・ファイルが必ず特定されます。もしファイルが存在しなければ、システムにより作成されます。',
-        'Adds a suffix with the actual year and month to the OTRS log file. A logfile for every month will be created.' =>
-            'OTRSログ・ファイルに対して、実際の年と月による接尾辞を追加します。毎月のログファイルが作成されます。',
+        'Adds a suffix with the actual year and month to the Znuny log file. A logfile for every month will be created.' =>
+            'Znunyログ・ファイルに対して、実際の年と月による接尾辞を追加します。毎月のログファイルが作成されます。',
         'Set the minimum log level. If you select \'error\', just errors are logged. With \'debug\' you get all logging messages. The order of log levels is: \'debug\', \'info\', \'notice\' and \'error\'.' =>
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
@@ -5907,12 +5704,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines the module to generate code for periodic page reloads.' =>
             '',
-        'Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.' =>
-            'OTRS Business Solution™の様々な機会に異なるインタフェースで通知を表示するモジュールを定義します。',
         'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
             'もし、システムがアドミン・ユーザによって使用されている場合、担当者インタフェースにおいて通知を表示させるモジュールを定義します（通常はアドミンとして行動する必要はありません）。',
-        'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
-            '',
         'Defines the module that shows all the currently logged in agents in the agent interface.' =>
             '担当者インタフェースにおいて、現在ログインしている全ユーザを表示させるモジュールを定義します。',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
@@ -5933,8 +5726,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines the module used to store the session data. With "DB" the frontend server can be splitted from the db server. "FS" is faster.' =>
             'セッション・データを格納するために使用されるモジュールを定義します。"DB"により、フロント・エンドのサーバをdbサーバから分離させることができます。"FS"はより速いものです。',
-        'Defines the name of the session key. E.g. Session, SessionID or OTRS.' =>
-            'セッション・キーの名前を定義します。つまり、Session、SessionID、OTRSです。',
+        'Defines the name of the session key. E.g. Session, SessionID or Znuny.' =>
+            'セッション・キーの名前を定義します。つまり、Session、SessionID、Znunyです。',
         'Defines the name of the key for customer sessions.' => '顧客セッションのためのキーの名前を定義します。',
         'Turns on the remote ip address check. It should not be enabled if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.' =>
             '',
@@ -5949,8 +5742,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'セッション管理に、htmlクッキーを使用させるようにします。htmlクッキーが無効にされている場合、またはクライアント・ブラウザがhtmlクッキーを無効にしている場合、システムは通常どおり動作し、またセッションIDをリンクに付け加えます。',
         'Stores cookies after the browser has been closed.' => 'ブラウザが閉じられた後に、クッキーを格納します。',
         'Protection against CSRF (Cross Site Request Forgery) exploits (for more info see https://en.wikipedia.org/wiki/Cross-site_request_forgery).' =>
-            '',
-        'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime before a prior warning will be visible for the logged in agents.' =>
             '',
         'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime.' =>
             '',
@@ -5969,9 +5760,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '顧客が非アクティブのために「不在」としてマークされるまでの期間（分単位）を定義します（たとえば、「ログインユーザー」ウィジェット内またはチャット用）。',
         'This setting is deprecated. Set OTRSTimeZone instead.' => '',
-        'Sets the time zone being used internally by OTRS to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
+        'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             '',
-        'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the OTRS time zone and the user\'s time zone.' =>
+        'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '',
         'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
             '',
@@ -5990,8 +5781,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Adds the one time vacation days for the indicated calendar.' => '',
         'Defines the hours and week days of the indicated calendar, to count the working time.' =>
             '',
-        'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your OTRS instance to stop working (probably any mask which takes input from the user).' =>
-            'ブラウザからOTRSへファイルアップロードする最大サイズ（バイト単位）を定義します。 警告：このオプションを低すぎる値に設定すると、OTRSインスタンス内の多くのインプット機能が機能しなくなる可能性があります。',
+        'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your Znuny instance to stop working (probably any mask which takes input from the user).' =>
+            'ブラウザからZnunyへファイルアップロードする最大サイズ（バイト単位）を定義します。 警告：このオプションを低すぎる値に設定すると、Znunyインスタンス内の多くのインプット機能が機能しなくなる可能性があります。',
         'Selects the module to handle uploads via the web interface. "DB" stores all uploads in the database, "FS" uses the file system.' =>
             'ウェブ・インタフェースを通じてアップロードを取り扱うための、モジュールを選択します。"DB"は全てのアップロードをデータベースに格納し、"FS"はファイル・システムを使用します。',
         'Specifies the text that should appear in the log file to denote a CGI script entry.' =>
@@ -6058,8 +5849,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'PDFドキュメントで、イタリックの等幅フォントを扱うための、パスおよびTTF-Fileを定義します。',
         'Defines the path and TTF-File to handle bold italic monospaced font in PDF documents.' =>
             'PDFドキュメントで、太字でイタリックの等幅のフォントを扱うための、パスおよびTTF-Fileを定義します。',
-        'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the OTRS user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
-            'PGPを有効化します。PGPサポートでメールの署名と暗号化が有効になっている場合は、.gnupgフォルダにアクセスする際の権限問題を回避するため、WebサーバーをOTRSユーザーとして実行することを強くお勧めします。 ',
+        'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the Znuny user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
+            'PGPを有効化します。PGPサポートでメールの署名と暗号化が有効になっている場合は、.gnupgフォルダにアクセスする際の権限問題を回避するため、WebサーバーをZnunyユーザーとして実行することを強くお勧めします。 ',
         'Defines the path to PGP binary.' => 'PGPバイナリへのパスを定義します。',
         'Sets the options for PGP binary.' => 'PGPバイナリのためのオプションを設定します。',
         'Sets the preferred digest to be used for PGP binary.' => '',
@@ -6077,9 +5868,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '秘密SSL認証が格納されるディレクトリを特定します。',
         'Cache time in seconds for the SSL certificate attributes.' => '',
         'Enables fetch S/MIME from CustomerUser backend support.' => '顧客ユーザー情報サポートからS / MIME設定を取得できるようにします。',
-        'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com).' =>
+        'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).' =>
             '',
-        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
+        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '新規にリクエストされたパスワードに関するトークンと共に、担当者に送信される通知メールの件名を定義します。',
@@ -6122,6 +5913,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '顧客パネルのためのユーザ識別子を定義します。',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6201,8 +5993,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'Customer::AuthModuleに関して、“LDAP”が選択されていた場合、BaseDNを特定する必要があります。',
         'If "LDAP" was selected for Customer::AuthModule, the user identifier must be specified.' =>
             'Customer::AuthModuleに関して、“LDAP”が選択されていた場合、ユーザ識別子を特定する必要があります。',
-        'If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use OTRS. Specify the group, who may access the system.' =>
-            'Customer::AuthModuleに関して“LDAP”が選択されていた場合、ユーザについて、例えばOTRSを利用するためグループxyzにいる必要がある場合に、posixGroupにいるという理由で認証することを許可されるかどうかを、確認することができます。システムにアクセスする可能性があるグループを特定してください。',
+        'If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use Znuny. Specify the group, who may access the system.' =>
+            'Customer::AuthModuleに関して“LDAP”が選択されていた場合、ユーザについて、例えばZnunyを利用するためグループxyzにいる必要がある場合に、posixGroupにいるという理由で認証することを許可されるかどうかを、確認することができます。システムにアクセスする可能性があるグループを特定してください。',
         'If "LDAP" was selected for Customer::AuthModule, you can specify access attributes here.' =>
             'Customer::AuthModuleに関して、“LDAP”が選択されていた場合、ここにおいてアクセス属性を特定することができます。',
         'If "LDAP" was selected for Customer::AuthModule, user attributes can be specified. For LDAP posixGroups use UID, for non LDAP posixGroups use full user DN.' =>
@@ -6256,7 +6048,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             'システムで利用可能なテーマをアクティベートします。値1がアクティブ、0が非アクティブを意味します。',
         'Defines the default value for the action parameter.' => '',
-        'Defines the shown links in the footer area of the customer and public interface of this OTRS system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
+        'Defines the shown links in the footer area of the customer and public interface of this Znuny system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
             '',
         'Defines the default value for the action parameter for the public frontend. The action parameter is used in the scripts of the system.' =>
             '',
@@ -6283,15 +6075,13 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines the default maximum number of X-axis attributes for the time scale.' =>
             'タイム・スケールに関するX軸属性の、デフォルト最大数を定義します。',
-        'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
-            'OTRSは、フルテキスト検索や統計生成などの高価な操作に、1つまたは複数の読み取り専用ミラーデータベースを使用できます。 ここでは、最初のミラーデータベースのDSNを指定できます。',
+        'Znuny can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
+            'Znunyは、フルテキスト検索や統計生成などの高価な操作に、1つまたは複数の読み取り専用ミラーデータベースを使用できます。 ここでは、最初のミラーデータベースのDSNを指定できます。',
         'Specify the username to authenticate for the first mirror database.' =>
             '',
         'Specify the password to authenticate for the first mirror database.' =>
             'データベースの第一ミラーの認証パスワードを指定してください。',
         'Configure any additional readonly mirror databases that you want to use.' =>
-            '',
-        'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
@@ -6303,23 +6093,25 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines a filter to process the text in the articles, in order to highlight predefined keywords.' =>
             '事前定義されたキーワードをハイライトするため、項目の中のテキストを処理するフィルタを定義します。',
-        'Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'CVEナンバーの後ろにリンクを追加するhtmlアウトプットのための、フィルタを定義します。エレメント・イメージは、2種類のインプットを許可します。すぐに、イメージの名前です（つまりfaq.png）。この場合、OTRSイメージ・パスが使用されます。2つめの可能性は、イメージにリンクを挿入することです。',
-        'Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'バグトラック・ナンバーの後ろにリンクを追加するhtmlアウトプットのための、フィルタを定義します。エレメント・イメージは、2種類のインプットを許可します。すぐに、イメージの名前です（つまりfaq.png）。この場合、OTRSイメージ・パスが使用されます。2つめの可能性は、イメージにリンクを挿入することです。',
-        'Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'MSBulletinナンバーの後ろにリンクを追加するhtmlアウトプットのための、フィルタを定義します。エレメント・イメージは、2種類のインプットを許可します。すぐに、イメージの名前です（つまりfaq.png）。この場合、OTRSイメージ・パスが使用されます。2つめの可能性は、イメージにリンクを挿入することです。',
-        'Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            '定義された文字列（string）の後ろにリンクを追加するhtmlアウトプットのための、フィルタを定義します。エレメント・イメージは、2種類のインプットを許可します。すぐに、イメージの名前です（つまりfaq.png）。この場合、OTRSイメージ・パスが使用されます。2つめの可能性は、イメージにリンクを挿入することです。',
-        'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            '定義された文字列（string）の後ろにリンクを追加するhtmlアウトプットのための、フィルタを定義します。エレメント・イメージは、2種類のインプットを許可します。すぐに、イメージの名前です（つまりfaq.png）。この場合、OTRSイメージ・パスが使用されます。2つめの可能性は、イメージにリンクを挿入することです。',
-        'If enabled, the OTRS version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
+        'Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'CVEナンバーの後ろにリンクを追加するhtmlアウトプットのための、フィルタを定義します。エレメント・イメージは、2種類のインプットを許可します。すぐに、イメージの名前です（つまりfaq.png）。この場合、Znunyイメージ・パスが使用されます。2つめの可能性は、イメージにリンクを挿入することです。',
+        'Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'バグトラック・ナンバーの後ろにリンクを追加するhtmlアウトプットのための、フィルタを定義します。エレメント・イメージは、2種類のインプットを許可します。すぐに、イメージの名前です（つまりfaq.png）。この場合、Znunyイメージ・パスが使用されます。2つめの可能性は、イメージにリンクを挿入することです。',
+        'Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'MSBulletinナンバーの後ろにリンクを追加するhtmlアウトプットのための、フィルタを定義します。エレメント・イメージは、2種類のインプットを許可します。すぐに、イメージの名前です（つまりfaq.png）。この場合、Znunyイメージ・パスが使用されます。2つめの可能性は、イメージにリンクを挿入することです。',
+        'Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            '定義された文字列（string）の後ろにリンクを追加するhtmlアウトプットのための、フィルタを定義します。エレメント・イメージは、2種類のインプットを許可します。すぐに、イメージの名前です（つまりfaq.png）。この場合、Znunyイメージ・パスが使用されます。2つめの可能性は、イメージにリンクを挿入することです。',
+        'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            '定義された文字列（string）の後ろにリンクを追加するhtmlアウトプットのための、フィルタを定義します。エレメント・イメージは、2種類のインプットを許可します。すぐに、イメージの名前です（つまりfaq.png）。この場合、Znunyイメージ・パスが使用されます。2つめの可能性は、イメージにリンクを挿入することです。',
+        'If enabled, the Znuny version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
             '',
-        'If enabled, OTRS will deliver all CSS files in minified form.' =>
+        'If enabled, Znuny will deliver all CSS files in minified form.' =>
             '',
-        'If enabled, OTRS will deliver all JavaScript files in minified form.' =>
-            '有効にすると、OTRSは全JavaScriptファイルを縮小した形式で配信します。',
+        'If enabled, Znuny will deliver all JavaScript files in minified form.' =>
+            '有効にすると、Znunyは全JavaScriptファイルを縮小した形式で配信します。',
         'List of responsive CSS files to always be loaded for the agent interface.' =>
+            '',
+        'List of JS files to always be loaded for the admin interface.' =>
             '',
         'List of CSS files to always be loaded for the customer interface.' =>
             '顧客インタフェースに対して、常にロードされるCSSファイルのリストです。',
@@ -6332,10 +6124,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '担当者の姓と名を表示する順序を指定してください。',
         'Default skin for the agent interface.' => '担当者インターフェースのデフォルトスキン',
-        'Default skin for the agent interface (slim version).' => '担当者インターフェースのデフォルトスキン (スリムバージョン)',
-        'Balanced white skin by Felix Niklas.' => 'Felix Niklasによるバランスト・ホワイト・スキンです。',
-        'Balanced white skin by Felix Niklas (slim version).' => '',
-        'High contrast skin for visually impaired users.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '担当者インタフェースで使用されるべき、担当者スキンのインターナル・ネームです。Frontend::Agent::Skinsにおける利用可能なスキンをチェックしてください。',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -6383,8 +6171,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Sets the default message for the login screen on Agent and Customer interface, it\'s shown when a running system maintenance period is active.' =>
             '',
         'Sets the default error message for the login screen on Agent and Customer interface, it\'s shown when a running system maintenance period is active.' =>
-            '',
-        'Specify the channel to be used to fetch OTRS Business Solution™ updates. Warning: Development releases might not be complete, your system might experience unrecoverable errors and on extreme cases could become unresponsive!' =>
             '',
         'Use new type of select and autocomplete fields in agent interface, where applicable (InputFields).' =>
             '',
@@ -6543,9 +6329,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
             '',
-        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
+        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
             '',
-        'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
+        'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the Znuny user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             '',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
             '',
@@ -6588,7 +6374,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
             'Kernel::System::Ticketに既に存在している機能を多重定義（再定義）します。簡単にカスタマイズを追加したい場合に使用されます。',
-        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
+        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
             '',
         'Defines whether to index archived tickets for fulltext searches.' =>
             '',
@@ -6596,7 +6382,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Display a warning and prevent search when using stop words within fulltext search.' =>
             '',
-        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
+        'Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
             '',
         'Fulltext index regex filters to remove parts of the text.' => '',
         'English stop words for fulltext index. These words will be removed from the search index.' =>
@@ -7301,7 +7087,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
             '',
-        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
+        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
             '',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             'リマインダ日付を迎えたら、アンロック・チケットのリマインダ通知を送信します（チケット所有者だけに送信されます）。',
@@ -7317,7 +7103,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Defines the target attribute in the link to external customer database. E.g. \'target="cdb"\'.' =>
             '外部顧客データベースへのリンクにおける、ターゲット属性を定義します。例：\'target="cdb"\'',
         'Defines the target attribute in the link to external customer database. E.g. \'AsPopup PopupType_TicketAction\'.' =>
-            'システム識別子を定義します。すべてのチケット番号とHTTPセッションの文字列は、このIDが含まれています。これはをシステムに属している唯一のチケットがフォローアップとして処理されることを確実にします。（2つのOTRSのインスタンス間で通信する場合に便利です）',
+            'システム識別子を定義します。すべてのチケット番号とHTTPセッションの文字列は、このIDが含まれています。これはをシステムに属している唯一のチケットがフォローアップとして処理されることを確実にします。（2つのZnunyのインスタンス間で通信する場合に便利です）',
         'Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
         'Agent interface notification module to see the number of tickets an agent is responsible for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
@@ -7328,11 +7114,11 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '担当者Webインタフェース通知モジュールを使用して、マイサービスのチケット数を確認します。 このリンクを表示するかどうかを示す追加のアクセス制御は、 "グループ"キーと "rw：group1; move_into：group2"のようなコンテンツを使用して行うことができます。',
-        'Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '',
         'Agent interface module to access fulltext search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
         'Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '',
+        'Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
         'Module to generate html OpenSearch profile for short ticket search in the agent interface.' =>
             '担当者インタフェースにおいて、ショート・チケット検索のためのhtml OpenSearchプロフィールを生成するモジュールです。',
@@ -7571,7 +7357,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '顧客インタフェースで顧客チケットに関する、次の可能性ある状態を定義します。',
         'Shows the enabled ticket attributes in the customer interface (0 = Disabled and 1 = Enabled).' =>
             '',
-        'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
+        'Defines the length of the article preview in the customer interface.' =>
             '',
         'Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting.' =>
             '',
@@ -7686,7 +7472,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Module to check if a incoming e-mail message is bounce.' => '',
         'Module used to detect if attachments are present.' => '',
-        'Executes follow-up checks on OTRS Header \'X-OTRS-Bounce\'.' => '',
+        'Executes follow-up checks on Znuny Header \'X-OTRS-Bounce\'.' =>
+            '',
         'Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number.' =>
             '',
         'Executes follow-up checks on In-Reply-To or References headers for mails that don\'t have a ticket number in the subject.' =>
@@ -7804,7 +7591,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
             '',
         'Defines the list of types for templates.' => '',
         'List of default Standard Templates which are assigned automatically to new Queues upon creation.' =>
@@ -7844,7 +7631,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Defines available article actions for Internal articles.' => '',
         'Defines available article actions for Phone articles.' => '',
         'Defines available article actions for Email articles.' => '',
-        'Defines available article actions for Chat articles.' => '',
         'Defines available article actions for invalid articles.' => '',
         'Disables the redirection to the last screen overview / dashboard after a ticket is closed.' =>
             '',
@@ -7852,9 +7638,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
 
         # XML Definition: Kernel/Config/Files/XML/Znuny.xml
-        'Access package repositories via HTTP or HTTPS.' => '',
-        'URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option \'PackageRepositoryURLSchema\'.' =>
-            '',
         'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
             '',
         'Screens for which it is possible to enable or disable dynamic fields.' =>
@@ -8021,6 +7804,10 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Assignment between event and type.' => '',
+        'Defines the link type for each activity.' => '',
+        'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
+            '',
         'Mapping of non-standard time zones to official ones.' => '',
         'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
             '',
@@ -8078,6 +7865,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Group for default access.' => '一般ユーザ用のデフォルトグループ',
         'Group of all administrators.' => '管理者用グループ',
         'Group for statistics access.' => 'レポート・レポート操作用のグループ',
+        'Group for time accounting web service access.' => '',
         'new' => '新規',
         'All new state types (default: viewable).' => '全ての新規ステータス・タイプ（デフォルト：表示可能）',
         'open' => '対応中',
@@ -8190,6 +7978,16 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Error during AJAX communication. Status: %s, Error: %s' => '',
         'This window must be called from compose window.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Activity.js
+        'An error occurred' => '',
+        'The activity could not be created. %s is needed.' => '',
+        'The activity could not be created.' => '',
+        'The activity could not be updated.' => '',
+        'The activity could not be deleted.' => '',
+        'The activity could not be marked as new.' => '',
+        'The activity could not be marked as seen.' => '',
+        'The activities could not be marked as seen.' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
         'Add all' => '全てを追加',
         'An item with this name is already present.' => 'この名前の項目は既に存在します。',
@@ -8197,8 +7995,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             'このアイテムは、配下にサブアイテムを保有しています。このアイテムをサブアイテムと共に削除してもよろしいですか？',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AppointmentCalendar.Manage.js
-        'More' => 'もっと多く',
-        'Less' => 'もっと少なく',
         'Press Ctrl+C (Cmd+C) to copy to clipboard' => 'クリップボードにコピーするにはCtrl+C(Cmd+C)を押してください。',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Attachment.js
@@ -8217,14 +8013,12 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '選択項目を削除',
-        'Do you really want to delete this generic agent job?' => '',
-        'Delete this Event Trigger' => 'このイベントトリガーを削除',
+        'An error occurred during communication.' => 'コミュニケーション中にエラーが発生しました。',
         'Duplicate event.' => 'イベントを複製',
         'This event is already attached to the job, Please use a different one.' =>
             'このイベントはすでにジョブにアタッチされています。ほかのイベントをご利用ください。',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
-        'An error occurred during communication.' => 'コミュニケーション中にエラーが発生しました。',
         'Request Details' => '要求の詳細',
         'Request Details for Communication ID' => 'Communication IDの要求の詳細',
         'Show or hide the content.' => 'コンテンツの表示・非表示',
@@ -8237,6 +8031,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => 'このAPI実行元を削除',
+        'Delete this Event Trigger' => 'このイベントトリガーを削除',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '',
@@ -8289,8 +8084,8 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Currently not possible' => '現在は未対応です',
         'This is currently disabled because of an ongoing package upgrade.' =>
             'こちらは現在パッケージの更新中のため無効化されています。',
-        'This option is currently disabled because the OTRS Daemon is not running.' =>
-            'こちらは現在 OTRS デーモンが停止中のため無効化されています。',
+        'This option is currently disabled because the Znuny Daemon is not running.' =>
+            'こちらは現在 Znuny デーモンが停止中のため無効化されています。',
         'Are you sure you want to update all installed packages?' => '全てのパッケージを更新します。よろしいですか？',
         'No response from get package upgrade run status.' => '',
 
@@ -8332,10 +8127,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Do you really want to delete this certificate?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
-        'Sending Update...' => '更新を送信中…',
-        'Support Data information was successfully sent.' => '',
-        'Was not possible to send Support Data information.' => 'OTRS Group へのサポートデータを送信できませんでした。',
-        'Update Result' => 'アップデート結果',
         'Generating...' => '作成中...',
         'It was not possible to generate the Support Bundle.' => 'サポートバンドルが生成できませんでした。',
         'Generate Result' => '生成結果',
@@ -8415,9 +8206,10 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
         'Please enter at least one search value or * to find anything.' =>
             '少なくとも検索したい単語を１つ（なんでもいい時は*を）入力してください。',
+        'Insert selected customer user(s) into the "%s:" field.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
-        'Information about the OTRS Daemon' => 'OTRS デーモンの紹介',
+        'Information about the Znuny Daemon' => 'Znuny デーモンの紹介',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
@@ -8460,9 +8252,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'This element has children elements and can currently not be removed.' =>
             'この要素は子供が存在するため削除できません。',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
-        'Do you really want to delete this statistic?' => 'このレポートを削除してよろしいですか？',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => 'チケットに割り当てる顧客IDを選択してください',
         'Do you really want to continue?' => '本当にこの操作を継続してよろしいですか？',
@@ -8485,7 +8274,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         # JS File: var/httpd/htdocs/js/Core.Agent.js
         'Slide the navigation bar' => 'ナビゲーションバーを操作してください',
         'Please turn off Compatibility Mode in Internet Explorer!' => 'Internet Explorerの互換モードを無効にして下さい。',
-        'Find out more' => '詳細を参照',
 
         # JS File: var/httpd/htdocs/js/Core.App.Responsive.js
         'Switch to mobile mode' => 'モバイルモードへ',
@@ -8579,9 +8367,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'This is %s' => '',
         'Complex %s with %s arguments' => '',
 
-        # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSLineChart.js
-        'No Data Available.' => '',
-
         # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js
         'Grouped' => '',
         'Stacked' => '',
@@ -8616,8 +8401,6 @@ Thanks for your help!
         ' 2 minutes' => ' 2 分',
         ' 5 minutes' => ' 5 分',
         ' 7 minutes' => ' 7 分',
-        '"Slim" skin which tries to save screen space for power users.' =>
-            '',
         '%s' => '%s',
         '(UserLogin) Firstname Lastname' => '(ユーザー名) 姓 名 ',
         '(UserLogin) Lastname Firstname' => '',
@@ -8644,6 +8427,9 @@ Thanks for your help!
         'AJAX interface for the web service dynamic field backends.' => '',
         'AccountedTime' => '作業時間',
         'Activation of dynamic fields for screens.' => '',
+        'Activity LinkTarget' => '',
+        'Activity Notification' => '',
+        'Activity.' => '',
         'ActivityID' => 'ActivityID',
         'Add a note to this ticket' => 'このチケットにメモを追加',
         'Add an inbound phone call to this ticket' => '受電の記録を追加します。',
@@ -8720,6 +8506,7 @@ Thanks for your help!
         'Change the priority for this ticket' => 'このチケットの優先度を変更',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => 'あなたのアバターイメージを変更して下さい。',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'パスワードなどを変更してください。',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8745,14 +8532,11 @@ Thanks for your help!
             '',
         'Choose which notifications you\'d like to receive.' => '',
         'Christmas Eve' => 'クリスマスイブ',
-        'Close' => 'クローズ',
         'Close this ticket' => 'このチケットをクローズ',
         'Closed tickets (customer user)' => 'クローズ・チケット(顧客ユーザー)',
         'Closed tickets (customer)' => 'クローズ・チケット(顧客)',
-        'Cloud Services' => 'クラウドサービス',
         'Column ticket filters for Ticket Overviews type "Small".' => 'チケット一覧(S)でのカラムチケット・フィルター',
         'Comment2' => '',
-        'Communication' => 'コミュニケーション',
         'Communication & Notifications' => 'コミュニケーション & 通知',
         'Communication Log GUI' => 'コミュニケーション・ログGUI',
         'Communication log limit per page for Communication Log Overview.' =>
@@ -8765,11 +8549,10 @@ Thanks for your help!
         'Compose' => '作成',
         'Configure Processes.' => 'プロセスの構成',
         'Configure and manage ACLs.' => 'ACLの設定と管理',
-        'Configure sending of support data to OTRS Group for improved support.' =>
-            '',
         'Configure which screen should be shown after a new ticket has been created.' =>
             '新規チケットが作成された後に表示する画面を選択してください。',
         'Create New process ticket.' => 'プロセスチケットを作成',
+        'Create Process Ticket' => '',
         'Create Ticket' => 'チケットを作成',
         'Create a new calendar appointment linked to this ticket' => 'このチケットにリンクされている新しい予定を作成',
         'Create a unit test file' => '',
@@ -8808,8 +8591,6 @@ Thanks for your help!
             '',
         'Creates a unit test file for this ticket.' => '',
         'Croatian' => 'クロアチア',
-        'Custom RSS Feed' => 'カスタムRSSフィード',
-        'Custom RSS feed.' => 'カスタムRSSフィード',
         'Customer Administration' => '顧客管理',
         'Customer Companies' => '顧客企業',
         'Customer IDs' => '顧客ID',
@@ -8835,7 +8616,6 @@ Thanks for your help!
         'Danish' => 'デンマーク語',
         'Dashboard overview.' => 'ダッシュボード一覧',
         'Date / Time' => '日時',
-        'Default (Slim)' => 'デフォルト (Slim)',
         'Default agent name' => '',
         'Default value for NameX' => 'NameX用のデフォルト値',
         'Define the queue comment 2.' => '',
@@ -8843,14 +8623,11 @@ Thanks for your help!
         'Define the sla comment 2.' => '',
         'Delete this ticket' => 'このチケットを削除',
         'Deleted link to ticket "%s".' => 'Deleted link to ticket "%s".',
-        'Deploy and manage OTRS Business Solution™.' => 'OTRS Business Solution™のデプロイと管理',
         'Detached' => '',
         'Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType "<Queue>" shows the names of the queues and for SystemAddress "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '',
-        'Development' => 'デプロイ',
-        'Disable cloud services' => 'クラウドサービスの無効化',
         'Display communication log entries.' => 'コミュニケーション・ログのエントリを表示します。',
         'Down' => '降順',
         'Dropdown' => 'ドロップダウン',
@@ -8941,7 +8718,6 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => 'グラフ:積み上げ面グラフ',
         'Greek' => 'ギリシャ語',
         'Hebrew' => 'ヘブライ語',
-        'High Contrast' => '',
         'Hindi' => 'ヒンディー語',
         'Hungarian' => 'ハンガリー語',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
@@ -8962,8 +8738,6 @@ Thanks for your help!
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => 'イタリア語',
-        'Ivory' => '',
-        'Ivory (Slim)' => '',
         'Japanese' => '日本語',
         'Korean' => '',
         'Language' => '言語',
@@ -8980,7 +8754,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => '名, 姓 (ユーザー名)',
         'LastnameFirstname' => '',
         'Latvian' => 'ラトビア語',
-        'Left' => 'のこり',
         'Link Object' => '連結対象',
         'Link Object.' => 'リンク・オブジェクト',
         'Link agents to groups.' => '担当者をグループへ連結',
@@ -9010,7 +8783,6 @@ Thanks for your help!
         'Malay' => 'マレー語',
         'Manage Customer User-Customer Relations.' => '',
         'Manage OAuth2 tokens and their configurations.' => '',
-        'Manage OTRS Group cloud services.' => 'OTRSグループのクラウドサービスの管理',
         'Manage PGP keys for email encryption.' => 'メール暗号用のPGP鍵管理',
         'Manage POP3 or IMAP accounts to fetch email from.' => 'メール受信用POP3/IMAPアカウント管理',
         'Manage S/MIME certificates for email encryption.' => 'メール暗号用のS/MIME証明書管理',
@@ -9040,17 +8812,14 @@ Thanks for your help!
         'Multiselect' => 'Multiselect',
         'My Queues' => '担当キュー',
         'My Services' => '担当サービス',
-        'My Tickets.' => '担当チケット',
         'My last changed tickets' => '',
         'NameX' => '',
-        'New Ticket' => '新規チケット',
         'New Tickets' => '新規チケット',
         'New Window' => '新規ウィンドウ',
         'New Year\'s Day' => '元日',
         'New Year\'s Eve' => '大晦日',
         'New process ticket' => '新規プロセスチケット',
         'News' => '',
-        'News about OTRS releases!' => 'OTRSリリース情報!',
         'No public key found.' => '',
         'No valid OpenPGP data found.' => '',
         'None' => 'なし',
@@ -9062,7 +8831,7 @@ Thanks for your help!
         'Number of displayed tickets' => '表示チケット数',
         'OAuth2' => '',
         'OAuth2 token' => '',
-        'OTRS Group Services' => 'OTRSグループ・サービス',
+        'OTRS' => 'OTRS',
         'Open an external link!' => '外部リンクを開く！',
         'Open tickets (customer user)' => '対応中チケット(顧客ユーザー)',
         'Open tickets (customer)' => '対応中チケット(顧客)',
@@ -9099,6 +8868,7 @@ Thanks for your help!
         'Plugin search' => 'プラグイン検索',
         'Plugin search module for autocomplete.' => 'オートコンプリート用のプラグイン検索モジュール',
         'Polish' => 'ポーランド語',
+        'Popup Profile' => '',
         'Portuguese' => 'ポルトガル語',
         'Portuguese (Brasil)' => 'ポルトガル語（ブラジル）',
         'PostMaster Filters' => 'ポストマスター・フィルター',
@@ -9112,7 +8882,6 @@ Thanks for your help!
         'Process Ticket.' => 'プロセスチケット',
         'ProcessID' => 'プロセスID',
         'Processes & Automation' => 'プロセス & 自動化',
-        'Product News' => '製品ニュース',
         'Provides a matrix overview of the tickets per state per queue' =>
             'キューごとの状態ごとのチケットのマトリックス概要を提供します。',
         'Provides customer users access to tickets even if the tickets are not assigned to a customer user of the same customer ID(s), based on permission groups.' =>
@@ -9133,14 +8902,14 @@ Thanks for your help!
         'Running Process Tickets' => '実行中のプロセスチケット',
         'Russian' => 'ロシア語',
         'S/MIME Certificates' => 'S/MIME証明書',
-        'SMS' => 'SMS',
         'Schedule a maintenance period.' => 'メンテナンス期間をスケジュール',
         'Screen after new ticket' => '新規チケット作成後の画面',
         'Search Customer' => '顧客を検索します。',
         'Search Ticket.' => 'チケットを検索する。',
         'Search Tickets.' => 'チケットを検索する。',
         'Search User' => 'ユーザを検索します。',
-        'Search.' => '検索する',
+        'Search tickets.' => '',
+        'SearchTemplate' => '',
         'Second Christmas Day' => 'セカンド・クリスマスデー',
         'Second Queue' => '第二キュー',
         'Seconds' => '',
@@ -9184,7 +8953,7 @@ Thanks for your help!
         'Show the ticket history' => 'チケットの履歴を表示',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'チケット一覧のプレビューを表示します(CustomerInfo => 1 - 顧客情報も表示しますCustomerInfoMaxSize max ? 顧客情報の文字サイズです)。',
-        'Shows information on how to start OTRS Daemon' => 'OTRSデーモンの起動手順を紹介します。',
+        'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Simple' => 'シンプル',
@@ -9203,7 +8972,6 @@ Thanks for your help!
         'Spanish' => 'スペイン語',
         'Spanish (Colombia)' => 'スペイン語(コロンビア)',
         'Spanish (Mexico)' => 'スペイン語(メキシコ)',
-        'Stable' => '安定',
         'Started response time escalation.' => '応答時間のエスカレーションを開始しました。',
         'Started solution time escalation.' => '解決時間のエスカレーションを開始しました。',
         'Started update time escalation.' => '更新時間のエスカレーションを開始しました。',
@@ -9240,8 +9008,7 @@ Thanks for your help!
             'これは、デフォルトの黒地と橙色をモチーフにした、顧客インタフェース向けのスキンです。',
         'This is the default orange - black skin.' => 'これは、デフォルトの黒地と橙色をモチーフにしたスキンです。',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => 'このモジュールは、OTRS の管理者エリアの一機能です。',
-        'This will allow the system to send text messages via SMS.' => 'この操作は、システムによるSMS経由でのメッセージ送信を許可します。',
+        'This module is part of the admin area of OTRS.' => '',
         'Ticket Close.' => 'チケットをクローズする',
         'Ticket Compose Bounce Email.' => 'バウンスメールを送信する',
         'Ticket Compose email Answer.' => '',
@@ -9264,6 +9031,7 @@ Thanks for your help!
         'Ticket Priority.' => 'チケットの優先度',
         'Ticket Queue Overview' => 'チケット・キュー一覧',
         'Ticket Responsible.' => 'チケット責任者',
+        'Ticket Search' => '',
         'Ticket Watcher' => 'チケット監視者',
         'Ticket Zoom' => 'チケットのズーム',
         'Ticket Zoom.' => 'チケット・ズーム',
@@ -9337,6 +9105,8 @@ Thanks for your help!
         'normal' => '中',
         'not archived tickets' => '',
         'notice' => '通知',
+        'open in current tab' => '',
+        'open in new tab' => '',
         'pending' => '保留',
         'phone' => '電話',
         'responsible' => 'responsible （責任者）',
@@ -9370,6 +9140,7 @@ Thanks for your help!
         'All occurrences',
         'All-day',
         'An Error Occurred',
+        'An error occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',
@@ -9400,15 +9171,15 @@ Thanks for your help!
         'Cannot proceed',
         'Clear',
         'Clear all',
+        'Clear all filters',
         'Clear debug log',
         'Clear search',
         'Click to delete this attachment.',
         'Click to select a file for upload.',
-        'Click to select a file or just drop it here.',
-        'Click to select files or just drop them here.',
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Could not open popup window. Please disable any popup blockers for this application.',
@@ -9435,6 +9206,8 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
+        'Delete this task',
         'Delete web service',
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
@@ -9454,13 +9227,11 @@ Thanks for your help!
         'Do you really want to delete "%s"?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
-        'Do you really want to delete this generic agent job?',
         'Do you really want to delete this key?',
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
-        'Do you really want to delete this statistic?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
@@ -9482,7 +9253,6 @@ Thanks for your help!
         'Feb',
         'February',
         'Filters',
-        'Find out more',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
         'Fr',
@@ -9496,7 +9266,8 @@ Thanks for your help!
         'Hide EntityIDs',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
-        'Information about the OTRS Daemon',
+        'Information about the Znuny Daemon',
+        'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
@@ -9514,7 +9285,6 @@ Thanks for your help!
         'June',
         'Just this occurrence',
         'Keys with values can\'t be renamed. Please remove this key/value pair instead and re-add it afterwards.',
-        'Less',
         'Loading, please wait...',
         'Loading...',
         'Location',
@@ -9529,7 +9299,6 @@ Thanks for your help!
         'Mon',
         'Monday',
         'Month',
-        'More',
         'Name',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
@@ -9578,7 +9347,6 @@ Thanks for your help!
         'Remove',
         'Remove Entity from canvas',
         'Remove active filters for this widget.',
-        'Remove all user changes.',
         'Remove from favourites',
         'Remove selection',
         'Remove the Transition from this Process',
@@ -9589,12 +9357,8 @@ Thanks for your help!
         'Request Details',
         'Request Details for Communication ID',
         'Reset',
-        'Reset globally',
-        'Reset locally',
         'Reset option is required!',
-        'Reset options',
         'Reset setting',
-        'Reset setting on global level.',
         'Resource',
         'Resources',
         'Restore default settings',
@@ -9613,8 +9377,9 @@ Thanks for your help!
         'Searching for linkable objects. This may take a while...',
         'Select a customer ID to assign to this ticket',
         'Select a customer ID to assign to this ticket.',
+        'Select a file or drop it here',
         'Select all',
-        'Sending Update...',
+        'Select files or drop them here',
         'Sep',
         'September',
         'Setting a template will overwrite any text or attachment.',
@@ -9640,11 +9405,17 @@ Thanks for your help!
         'Sun',
         'Sunday',
         'Support Bundle',
-        'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
         'Team',
         'Th',
+        'The activities could not be marked as seen.',
+        'The activity could not be created.',
+        'The activity could not be created. %s is needed.',
+        'The activity could not be deleted.',
+        'The activity could not be marked as new.',
+        'The activity could not be marked as seen.',
+        'The activity could not be updated.',
         'The browser you are using is too old.',
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
@@ -9665,14 +9436,13 @@ Thanks for your help!
         'This address already exists on the address list.',
         'This element has children elements and can currently not be removed.',
         'This event is already attached to the job, Please use a different one.',
-        'This feature is part of the %s. Please contact us at %s for an upgrade.',
         'This field can have no more than 250 characters.',
         'This field is required.',
         'This is %s',
         'This is a repeating appointment',
         'This is currently disabled because of an ongoing package upgrade.',
         'This item still contains sub items. Are you sure you want to remove this item including its sub items?',
-        'This option is currently disabled because the OTRS Daemon is not running.',
+        'This option is currently disabled because the Znuny Daemon is not running.',
         'This software runs with a huge lists of browsers, please upgrade to one of these.',
         'This window must be called from compose window.',
         'Thu',
@@ -9691,7 +9461,6 @@ Thanks for your help!
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
-        'Update Result',
         'Update all packages',
         'Update manually',
         'Upload information',
@@ -9699,7 +9468,6 @@ Thanks for your help!
         'Use options below to narrow down for which tickets appointments will be automatically created.',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
-        'Was not possible to send Support Data information.',
         'We',
         'Wed',
         'Wednesday',
@@ -9718,9 +9486,7 @@ Thanks for your help!
         'more',
         'no',
         'none',
-        'or',
         'sorting is disabled',
-        'user(s) have modified this setting.',
         'week',
         'yes',
     ];

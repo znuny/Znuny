@@ -14,6 +14,7 @@ use warnings;
 
 use parent qw(Kernel::System::SupportDataCollector::PluginBase);
 
+use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
@@ -23,7 +24,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS');
+    return Translatable('Znuny');
 }
 
 sub Run {
@@ -38,8 +39,6 @@ sub Run {
         Valid => '1',
     );
 
-    my $AuthenticatedUser;
-
     my $SuperUserID;
     USER:
     for my $UserID ( sort keys %UserList ) {
@@ -49,15 +48,19 @@ sub Run {
         }
     }
 
+    my $AuthenticatedUser;
     if ($SuperUserID) {
-
         $AuthenticatedUser = $Kernel::OM->Get('Kernel::System::Auth')->Auth(
             User => 'root@localhost',
             Pw   => 'root',
         );
     }
 
-    if ( $AuthenticatedUser eq 'root@localhost' ) {
+    if (
+        IsStringWithData($AuthenticatedUser)
+        && $AuthenticatedUser eq 'root@localhost'
+        )
+    {
         $Self->AddResultProblem(
             Label => Translatable('Default Admin Password'),
             Value => '',

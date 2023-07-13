@@ -6,104 +6,129 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+<div id="MainBox" class="TicketView ARIARoleMain SearchResults [% Config("Ticket::Frontend::CustomerTicketOverviewSortable") %] SidebarLast">
+    <div class="ContentWrapper flex-column">
+        <h1 class="PageTitle">[% Translate("Search Results") | html %]</h1>
+        <div class="Content flex-center SidebarLast">
+            <div class="SidebarColumn">
+                <div class="WidgetSimple search-tpl-widget">
+                    <div class="Header">
+                        <h2>[% Translate("Template") | html %]</h2>
+                    </div>
 
-<div id="MainBox" class="TicketView ARIARoleMain SearchResults [% Config("Ticket::Frontend::CustomerTicketOverviewSortable") %] ">
-    <div class="ActionRow">
-        <ul class="Tabs">
-            <li>
-                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=LoadProfile;[% Data.Link %]">
-                    &larr; [% Translate("Change search options") | html %] [% Data.ProfileName | html %]
-                </a>
-            </li>
-        </ul>
-[% RenderBlockStart("Pagination") %]
-        <div class="Tabs Pagination">
-            <strong>[% Data.Result %]</strong> [% Translate("of") | html %] <strong>[% Data.TotalHits %]</strong> - [% Translate("Page") | html %]: [% Data.SiteNavBar %]
-        </div>
-[% RenderBlockEnd("Pagination") %]
-        <div class="Clear"></div>
-        <div class="SearchTerms">
-            <h2>[% Translate("Search Results for") | html %]:</h2>
+                    <div class="Content">
+
+                        <div class="Field">
+                            <div class="flex-row">
+                                <label>[% Data.ProfileName | html %]</label>
+                            </div>
+
+                            <div class="content-wrapper">
 [% RenderBlockStart("SearchTerms") %]
-            <span>
-                [% Translate(Data.Attribute) | html %]: [% Data.Value | html %]
-# hide remove link, functionality is not yet implemented
-#                <a title="[% Translate("Remove this Search Term.") | html %]" href="[% Data.SearchValue %]">&times;</a>
-            </span>
+                                    <span class="pill-sm">
+                                        [% Translate(Data.Attribute) | html %]: [% Data.Value | html %]
+#                                    # hide remove link, functionality is not yet implemented
+#                                    # <a title="[% Translate("Remove this Search Term.") | html %]" href="[% Data.SearchValue %]">&times;</a>
+                                    </span>
 [% RenderBlockEnd("SearchTerms") %]
-        </div>
-    </div>
-    <div class="Content">
-        <table class="Overview">
-            <thead>
-                <tr>
-                    <th class="Ticket [% Data.TicketSort %]">
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=Ticket;Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
-                            [% Config("Ticket::Hook") %]
-                        </a>
-                    </th>
-                    <th class="Status [% Data.StateSort %]">
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=State;Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
-                            [% Translate("State") | html %]
-                        </a>
-                    </th>
-                    <th class="Title">
-                        <span>[% Translate("Subject") | html %]</span>
-                    </th>
-                    <th class="Age [% Data.AgeSort %]">
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=Age;Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
-                            [% Translate("Age") | html %]
-                        </a>
-                    </th>
+                            </div>
+                        </div>
+
+                        <div class="flex-row">
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=LoadProfile;[% Data.Link %]" class="btn-primary btn-main">[% Translate("Change search options") | html %] </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card ContentColumn padding-none">
+                <div class="OverviewActions">
+[% RenderBlockStart("BottomSubNavigation") %]
+                        <div id="BottomActionRow" class="ActionRow BigButtons">
+                            <ul class="Tabs">
+                                <li>
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=LoadProfile;[% Data.Link | uri %]">
+                                        &larr; [% Translate("Change search options") | html %]
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="Tabs Pagination">
+                                <strong>[% Data.Result %]</strong> [% Translate("of") | html %] <strong>[% Data.TotalHits %]</strong> - [% Translate("Page") | html %]: [% Data.SiteNavBar %]
+                            </div>
+
+                        </div>
+[% RenderBlockEnd("BottomSubNavigation") %]
+
+[% RenderBlockStart("Pagination") %]
+                        <span class="Pagination">
+                            <ul>
+                                <li>
+                                    <span>[% Data.Result %] [% Translate("of") | html %] [% Data.TotalHits %]</span>
+                                </li>
+                                <li class="page-links">[% Data.SiteNavBar %]</li>
+                            </ul>
+                        </span>
+[% RenderBlockEnd("Pagination") %]
+                </div>
+                <table class="Overview">
+                    <thead>
+                        <tr>
+                            <th class="Ticket [% Data.TicketSort %]">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=Ticket;Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
+                                    [% Config("Ticket::Hook") %]
+                                </a>
+                            </th>
+                            <th class="Status [% Data.StateSort %]">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=State;Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
+                                    [% Translate("State") | html %]
+                                </a>
+                            </th>
+                            <th class="Title">
+                                <span>[% Translate("Subject") | html %]</span>
+                            </th>
+                            <th class="Age [% Data.AgeSort %]">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=Age;Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
+                                    [% Translate("Age") | html %]
+                                </a>
+                            </th>
 [% RenderBlockStart("HeaderDynamicField") %]
-                    <th class="DynamicField [% Data.CSS %]">
+                                <th class="DynamicField [% Data.CSS %]">
 [% RenderBlockStart("HeaderDynamicFieldSortable") %]
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=DynamicField_[% Data.DynamicFieldName | uri %];Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
-                            [% Translate(Data.Label) | html %]
-                        </a>
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Search;SortBy=DynamicField_[% Data.DynamicFieldName | uri %];Order=[% Data.Order | uri %];Filter=[% Data.Filter | uri %];Limit=[% Data.Limit | uri %];ShowClosedTickets=[% Data.ShowClosed | uri %];Type=[% Data.Type | uri %];Profile=[% Data.Profile | uri %];TakeLastSearch=1">
+                                        [% Translate(Data.Label) | html %]
+                                    </a>
 [% RenderBlockEnd("HeaderDynamicFieldSortable") %]
 [% RenderBlockStart("HeaderDynamicFieldNotSortable") %]
-                        <span>[% Translate(Data.Label) | html %]</span>
+                                    <span>[% Translate(Data.Label) | html %]</span>
 [% RenderBlockEnd("HeaderDynamicFieldNotSortable") %]
-                    </th>
+                                </th>
 [% RenderBlockEnd("HeaderDynamicField") %]
-                </tr>
-            </thead>
-            <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
 [% RenderBlockStart("NoDataFoundMsg") %]
-                <tr id="EmptyMessage">
-                    <td colspan="4">
-                        [% Translate("No data found.") | html %]
-                    </td>
-                </tr>
+                        <tr id="EmptyMessage">
+                            <td colspan="4">
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
 [% RenderBlockEnd("NoDataFoundMsg") %]
 [% RenderBlockStart("Record") %]
-                <tr class="MasterAction">
-                    <td class="Ticket"><a href="[% Env("Baselink") %]Action=CustomerTicketZoom;TicketNumber=[% Data.TicketNumber | uri %]" class="MasterActionLink">[% Data.TicketNumber | html %]</a></td>
-                    <td class="Status">[% Translate(Data.State) | html %]</td>
-                    <td class="Title"><div><h2>[% Data.Subject | truncate(60) | html %]</h2>&nbsp;-&nbsp; [% Data.Body | truncate(200) | html %]</div></td>
-                    <td class="Age" title="[% Data.Created | Localize("TimeShort") | html %]">[% Data.CustomerAge | truncate(20) | html %]</td>
+                        <tr class="MasterAction">
+                            <td class="Ticket"><a href="[% Env("Baselink") %]Action=CustomerTicketZoom;TicketNumber=[% Data.TicketNumber | uri %]" class="MasterActionLink">[% Data.TicketNumber | html %]</a></td>
+                            <td class="Status">
+                                <div class="pill StateID-[% Data.StateID| html %]">[% Translate(Data.State) | html %]</div>
+                            </td>
+                            <td class="Title"><div><h2>[% Data.Subject | truncate(60) | html %]</h2>&nbsp;-&nbsp; [% Data.Body | truncate(200) | html %]</div></td>
+                            <td class="Age" title="[% Data.Created | Localize("TimeShort") | html %]">[% Data.CustomerAge | truncate(20) | html %]</td>
 [% RenderBlockStart("RecordDynamicField") %]
-                    <td class="DynamicField" title="[% Data.Title | html %]">[% Data.Value %]</td>
+                                <td class="DynamicField" title="[% Data.Title | html %]">[% Data.Value %]</td>
 [% RenderBlockEnd("RecordDynamicField") %]
-                </tr>
+                        </tr>
 [% RenderBlockEnd("Record") %]
-            </tbody>
-        </table>
-    </div>
-[% RenderBlockStart("BottomSubNavigation") %]
-    <div id="BottomActionRow" class="ActionRow BigButtons">
-        <ul class="Tabs">
-            <li>
-                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=LoadProfile;[% Data.Link | uri %]">
-                    &larr; [% Translate("Change search options") | html %]
-                </a>
-            </li>
-        </ul>
-        <div class="Tabs Pagination">
-            <strong>[% Data.Result %]</strong> [% Translate("of") | html %] <strong>[% Data.TotalHits %]</strong> - [% Translate("Page") | html %]: [% Data.SiteNavBar %]
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="Clear"></div>
     </div>
-[% RenderBlockEnd("BottomSubNavigation") %]
 </div>

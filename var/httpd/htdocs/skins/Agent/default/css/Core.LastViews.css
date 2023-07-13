@@ -1,0 +1,207 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "default"
+ * @section
+ */
+
+@media screen,projection,tv,handheld {
+
+    .toolbar-row-wrapper .toolbar-row .component-last-views ul {
+        gap: var(--padding-sm);
+        flex-wrap: wrap;
+    }
+
+    .ToolTip {
+        position: relative;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .LastViewToolBarRow a {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--gap-xs);
+        color: var(--gray-darker);
+        padding: var(--padding-xs);
+        transition: var(--main-transition);
+        border-radius: var(--border-radius-xxs);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        font-size: var(--font-size-sm);
+    }
+
+    .LastView:hover {
+        background: var(--gray-light);
+    }
+
+    .LastViewAvatar {
+        justify-content: space-between;
+    }
+
+    .ToolTipContent:after{
+        border-bottom-color: #333 !important;
+    }
+
+    .LastViewAvatar > span {
+        display: flex;
+        align-items: center;
+        gap: var(--padding-md);
+    }
+
+    .LastViewAvatar a {
+        transition: var(--main-transition);
+    }
+
+    .LastViewAvatar div.ToolTipContent{
+        max-width: 225px;
+        flex-wrap: wrap;
+        white-space: normal;
+        top: 58px;
+    }
+
+    .ToolTip .ToolTipContent {
+        visibility: hidden;
+        width: max-content;
+        padding: var(--padding-sm);
+        position: absolute;
+        z-index: 100;
+        left: 0;
+        top: 34px;
+        background: var(--black);
+        border-radius: var(--border-radius-xxs);
+    }
+
+    .ToolTip .ToolTipContent p {
+        color: var(--white);
+    }
+
+    .ToolTip .ToolTipContent:after {
+        content: "";
+        position: absolute;
+        width: 9px;
+        height: 9px;
+        border-top: 1px solid;
+        border-left: 1px solid;
+        border-color: var(--black);
+        top: -4px;
+        left: 11px;
+        background: var(--black);
+        transform: rotate(45deg);
+    }
+
+    .ToolTip:hover .ToolTipContent {
+        visibility: visible;
+        display: flex;
+    }
+
+    .ToolTipText,
+    .ToolTipText fieldset {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+    }
+
+    .ToolTipText fieldset {
+        padding-top: var(--padding-md);
+        gap: 2px;
+    }
+
+    .LastViewAvatarRow > .ToolTipContent fieldset {
+        display: flex;
+        flex-flow: column;
+        gap: var(--padding-xs);
+        padding-top: var(--padding-sm);
+    }
+
+    .ToolTipText fieldset span {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        width: -moz-fit-content;
+    }
+
+    .ToolTipContent > fieldset label,
+    .ToolTipText > fieldset label{
+        color: var(--gray-dark-semi);
+    }
+
+    /* Avatar */
+
+    #ToolBar > li.UserAvatar > div {
+        width: max-content !important;
+    }
+
+    a.LastView.LastViewAvatar.LastViewAvatarRow {
+       margin-top: 0;
+       margin-bottom: 0;
+    }
+
+    /* ToolBar */
+
+    .LastViewToolBarRow {
+        width: fit-content !important;
+        width: -moz-fit-content !important;
+    }
+
+
+    /* MenuBar */
+
+    .LastViewMenuBar{
+        width: 100%;
+        height: auto;
+        display: flex;
+        padding: 0 var(--main-page-padding) var(--padding-sm) var(--main-page-padding);
+    }
+
+    .LastViewMenuBar + .MainBox:not(.ActionsSideBar),
+    .LastViewMenuBar + #ArticleFilterDialog + .MainBox:not(.ActionsSideBar),
+    .LastViewMenuBar + .OverviewBox {
+        padding-top: var(--padding-sm);
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .LastViewMenuBar{
+            padding: 0 var(--padding-lg) var(--padding-sm) var(--padding-lg);
+        }
+    }
+    
+    .LastViewMenuBarWrapper {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        background: var(--white);
+        border: var(--border-width) var(--border-solid) var(--border-color);  
+        border-radius: var(--border-radius-sm);
+        font-size: var(--font-size-sm);
+    }
+
+    li.LastViewMenuBarRow a {
+        display: flex;
+        gap: var(--gap-xs);
+        transition: var(--main-transition);
+        color: var(--gray-darker);
+        padding: var(--padding-sm) var(--padding-md);
+        border-right: var(--border-width) var(--border-solid) var(--border-color); 
+    }
+
+    li.LastViewMenuBarRow:last-child a { 
+        margin: 0;
+    }
+
+    .LastViewMenuBarRow .ToolTipContent {
+        top: 45px;
+    }
+}

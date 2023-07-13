@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+
 [% RenderBlockStart("TicketEscalationFirstResponseTimeOver") %]
 <a href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]" title="[% Data.Title | html %]">
     [% Translate("Ticket %s: first response time is over (%s/%s)!", Data.TicketNumber, Data.FirstResponseTimeHuman, Localize(Data.FirstResponseTimeDestinationDate, "TimeShort")) | html %]

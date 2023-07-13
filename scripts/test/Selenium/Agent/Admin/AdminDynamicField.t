@@ -23,16 +23,12 @@ my $CheckBredcrumb = sub {
 
     my $OverviewTitle  = $Param{OverviewTitle};
     my $BreadcrumbText = $Param{BreadcrumbText} || '';
-    my $Count          = 1;
 
     for my $BreadcrumbText ( $OverviewTitle, $BreadcrumbText ) {
-        $Self->Is(
-            $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim();"),
-            $BreadcrumbText,
-            "Breadcrumb text '$BreadcrumbText' is found on screen"
+        $Selenium->ElementExists(
+            Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+            SelectorType => 'css',
         );
-
-        $Count++;
     }
 };
 
@@ -42,8 +38,10 @@ $Selenium->RunTest(
         my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $SysConfigObject    = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
 
-        my %DynamicFieldsOverviewPageShownSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %DynamicFieldsOverviewPageShownSysConfig = $SysConfigObject->SettingGet(
             Name => 'PreferencesGroups###DynamicFieldsOverviewPageShown',
         );
 
@@ -70,7 +68,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminDynamiField screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminDynamicField");
@@ -206,6 +204,22 @@ $Selenium->RunTest(
                         "return \$('tr.Invalid td a:contains($RandomID)').length;"
                     ),
                     "There is a class 'Invalid' for test DynamicField",
+                );
+
+                # Checks for AdminValidFilter
+                $Self->True(
+                    $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+                    "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+                );
+                $Selenium->find_element( "#ValidFilter", 'css' )->click();
+                $Self->False(
+                    $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+                    "AdminValidFilter - All invalid entries are not displayed.",
+                );
+                $Selenium->find_element( "#ValidFilter", 'css' )->click();
+                $Self->True(
+                    $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+                    "AdminValidFilter - All invalid entries are displayed again.",
                 );
 
                 # Go to new dynamic field again after update and check values.

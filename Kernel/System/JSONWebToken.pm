@@ -237,7 +237,7 @@ sub Encode {
         CryptJWTParameters => {
 
             # see https://metacpan.org/pod/Crypt::JWT#decode_jwt
-            '...' => '...',
+            # '...' => '...',
 
             # ...
         },

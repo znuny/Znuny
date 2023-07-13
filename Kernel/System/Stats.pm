@@ -666,7 +666,7 @@ fetches all statistics that the current user may see
     {
         6 => {
             Title => "Title of stat",
-            ...
+            # ...
         }
     }
 
@@ -1111,7 +1111,7 @@ get behaviours that a statistic supports
 
     {
         ProvidesDashboardWidget => 1,
-        ...
+        # ...
     }
 
 =cut
@@ -1851,7 +1851,7 @@ sub StringAndTimestamp2Filename {
     );
 
     my $Filename = $Param{String} . '_';
-    $Filename .= $DateTimeObject->Format( Format => '%Y-%m-%d_%H:%M' );
+    $Filename .= $DateTimeObject->Format( Format => '%Y-%m-%d_%H-%M' );
 
     if ( defined $Param{TimeZone} ) {
         my $TimeZone = $MainObject->FilenameCleanUp(

@@ -170,7 +170,7 @@ Checks if one or more Transition Conditions are true.
             Queue         => 'Raw',
             DynamicField1 => 'Value',
             Subject       => 'Testsubject',
-            ...
+            # ...
         },
     );
 

@@ -18,7 +18,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ArticleObject             = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $CacheObject               = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject                  = $Kernel::OM->Get('Kernel::System::DB');
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $HelperObject              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $TypeObject                = $Kernel::OM->Get('Kernel::System::Type');
 
         # Disable check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -30,11 +38,6 @@ $Selenium->RunTest(
             Key   => 'Ticket::Type',
             Value => 1,
         );
-
-        my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleObject             = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
-        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
         my $RandomID      = $HelperObject->GetRandomID();
         my %DynamicFields = (
@@ -145,9 +148,8 @@ $Selenium->RunTest(
         }
 
         # Add TicketType.
-        my $TypeName   = "Type$RandomID";
-        my $TypeObject = $Kernel::OM->Get('Kernel::System::Type');
-        my $TypeID     = $TypeObject->TypeAdd(
+        my $TypeName = "Type$RandomID";
+        my $TypeID   = $TypeObject->TypeAdd(
             Name    => $TypeName,
             ValidID => 1,
             UserID  => 1,
@@ -218,8 +220,7 @@ $Selenium->RunTest(
                 = 'Changed dynamic field ' . $FieldName . ' from "" to "' . $Value . '".';
         }
 
-        my $ArticleBackendObject
-            = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel( ChannelName => 'Phone' );
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Phone' );
 
         # Create two test email articles.
         my @ArticleIDs;
@@ -254,7 +255,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to ticket zoom page of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -266,12 +267,7 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function";' );
 
         # Force sub menus to be visible in order to be able to click one of the links.
-        $Selenium->execute_script("\$('#nav-Miscellaneous ul').css('height', 'auto');");
-        $Selenium->execute_script("\$('#nav-Miscellaneous ul').css('opacity', '1');");
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return \$('#nav-Miscellaneous ul').css('height') !== '0px' && \$('#nav-Miscellaneous ul').css('opacity') == '1';"
-        );
+        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
 
         # Click on 'History' and switch window.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketHistory;TicketID=$TicketID");
@@ -336,8 +332,6 @@ $Selenium->RunTest(
             );
         }
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         # Delete Type.
         $Success = $DBObject->Do(
             SQL => "DELETE FROM ticket_type WHERE id = $TypeID",
@@ -348,7 +342,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

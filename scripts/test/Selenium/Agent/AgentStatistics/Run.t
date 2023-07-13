@@ -20,6 +20,9 @@ $Selenium->RunTest(
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $StatsObject  = $Kernel::OM->Get('Kernel::System::Stats');
 
         # Show more stats per page as the default 50.
         my $Success = $HelperObject->ConfigSettingChange(
@@ -43,7 +46,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentStatistics;Subaction=Import");
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -74,8 +77,6 @@ $Selenium->RunTest(
             "${ScriptAlias}index.pl?Action=AgentStatistics;Subaction=Overview;"
         );
 
-        my $StatsObject = $Kernel::OM->Get('Kernel::System::Stats');
-
         # Get stats IDs.
         my $StatsIDs = $StatsObject->GetStatsList(
             AccessRw => 1,
@@ -96,7 +97,7 @@ $Selenium->RunTest(
             ->VerifiedClick();
 
         # Get stat data.
-        my $StatData = $Kernel::OM->Get('Kernel::System::Stats')->StatsGet(
+        my $StatData = $StatsObject->StatsGet(
             StatID => $StatsIDLast,
             UserID => 1,
         );
@@ -152,7 +153,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => "Stats" );
+        $CacheObject->CleanUp( Type => "Stats" );
 
     }
 );

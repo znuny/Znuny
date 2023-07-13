@@ -18,6 +18,7 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check RichText.
         $HelperObject->ConfigSettingChange(
@@ -56,7 +57,7 @@ $Selenium->RunTest(
         );
 
         # Click on 'Create your first ticket'.
-        $Selenium->find_element( ".Button", 'css' )->VerifiedClick();
+        $Selenium->find_element( ".btn-primary", 'css' )->VerifiedClick();
 
         # Create needed variables.
         my $SubjectRandom  = "Subject" . $HelperObject->GetRandomID();
@@ -64,6 +65,7 @@ $Selenium->RunTest(
         my $AttachmentName = "StdAttachment-Test1.txt";
         my $Location       = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/$AttachmentName";
+        my $LocalFile = $Selenium->upload_file($Location);
 
         # Hide DnDUpload and show input field.
         $Selenium->execute_script(
@@ -80,7 +82,7 @@ $Selenium->RunTest(
         );
         $Selenium->find_element( "#Subject",    'css' )->send_keys($SubjectRandom);
         $Selenium->find_element( "#RichText",   'css' )->send_keys($TextRandom);
-        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
+        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($LocalFile);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".AttachmentList").length' );
         $Selenium->find_element( "#submitRichText", 'css' )->VerifiedClick();
 
@@ -103,8 +105,11 @@ $Selenium->RunTest(
         # Click on test created ticket on CustomerTicketOverview screen.
         $Selenium->find_element( $TicketNumber, 'link_text' )->VerifiedClick();
 
+        use Data::Dumper;
+        print STDERR 'Debug Dump -  - $AttachmentName = ' . Dumper( \$AttachmentName ) . "\n";
+
         # Click on attachment to open it.
-        $Selenium->find_element("//*[text()=\"$AttachmentName\"]")->click();
+        $Selenium->find_element( "#VisibleMessageContent span[title*=\"$AttachmentName\"]", 'css' )->click();
 
         # Switch to another window.
         $Selenium->WaitFor( WindowCount => 2 );
@@ -140,7 +145,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 
