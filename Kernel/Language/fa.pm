@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.621317444554783;
+    $Self->{Completeness}        = 0.620023129026929;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -717,9 +717,9 @@ sub Data {
             'علاوه بر این و یا معادل آن به اعدام های دوره ای، شما می توانید حوادث بلیط که این کار را آغاز کند را تعریف کنیم.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'اگر یک رویداد بلیط شلیک می شود، فیلتر بلیط اعمال خواهد شد به بررسی در صورتی که بلیط منطبق است. تنها پس از آن کار است که بر روی بلیط را اجرا کنید.',
-        'Do you really want to delete this event trigger?' => 'آیا شما واقعا می خواهید این محرک رویداد را حذف کنید  .',
         'Add Event Trigger' => 'اضافه کردن رویداد راه انداز',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'آیا شما واقعا می خواهید این محرک رویداد را حذف کنید  .',
         'Select Tickets' => 'درخواست را انتخاب کنید',
         '(e. g. 10*5155 or 105658*)' => '(مثال: ۱۰*۵۱۵۵ یا ۱۰۵۶۵۸*)',
         '(e. g. 234321)' => '(مثال: ۲۳۴۳۲۱)',
@@ -2485,6 +2485,16 @@ sub Data {
             '',
         'Off' => 'خاموش',
         'End' => 'پایان',
+        'Left' => 'چپ',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => '',
         'Save setting' => '',
@@ -2845,7 +2855,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'آرشیو',
         'This ticket is archived.' => 'این درخواست بایگانی شده است.',
-        'Note: Type is invalid!' => 'توجه: نوع نامعتبر است!',
+        'is invalid' => '',
         'Pending till' => 'تا زمانی که',
         'Locked' => 'تحویل گرفته شده',
         '%s Ticket(s)' => '',
@@ -5600,6 +5610,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'غیر فعال کردن HTTP هدر \ "X-قاب گزینه ها: SAMEORIGIN " اجازه می دهد Znuny به عنوان یک iframe در وب سایت های دیگر گنجانده شده است. غیر فعال کردن این هدر HTTP می تواند یک مسئله امنیتی! فقط آن را غیر فعال کنید، اگر شما می دانید آنچه شما انجام می دهند!',
@@ -5902,6 +5913,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'تعریف می کند که شناسه کاربر برای پنل مشتری می باشد.',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8487,6 +8499,7 @@ Thanks for your help!
         'Change the priority for this ticket' => 'تغییر اولویت  برای این درخواست',
         'Change the responsible for this ticket' => 'تغییر مسئول برای این درخواست',
         'Change your avatar image.' => '',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8734,7 +8747,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => 'نام خانوادگی، نام (صفحهی)',
         'LastnameFirstname' => '',
         'Latvian' => 'لتونی',
-        'Left' => 'چپ',
         'Link Object' => 'لینک',
         'Link Object.' => 'شی لینک.',
         'Link agents to groups.' => 'برقراری ارتباط بین کارشناسان و گروه‌ها',
@@ -8848,6 +8860,7 @@ Thanks for your help!
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => 'لهستانی',
+        'Popup Profile' => '',
         'Portuguese' => 'پرتغالی',
         'Portuguese (Brasil)' => 'پرتغالی (برزیل)',
         'PostMaster Filters' => 'فیلترهای پستی',
@@ -9185,6 +9198,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

@@ -24,7 +24,7 @@ $Selenium->RunTest(
         my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Create test user and login.
-        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -98,7 +98,7 @@ $Selenium->RunTest(
         # Delete test process.
         my $Success = $ProcessObject->ProcessDelete(
             ID     => $ProcessID,
-            UserID => $TestUserID,
+            UserID => 1,
         );
         $Self->True(
             $Success,
@@ -108,7 +108,7 @@ $Selenium->RunTest(
         # Delete test process.
         $Success = $ProcessObject->ProcessDelete(
             ID     => $ProcessID2,
-            UserID => $TestUserID,
+            UserID => 1,
         );
         $Self->True(
             $Success,

@@ -84,7 +84,7 @@ Core.UI.Popup = (function (TargetNS) {
             WindowURLParams: "dependent=yes,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no",
             Left: 100,
             Top: 100,
-            Width: 1040,
+            Width: 1200,
             Height: 700
         }
     };
@@ -428,6 +428,24 @@ Core.UI.Popup = (function (TargetNS) {
     };
 
     /**
+     * @name UpdatePopupProfile
+     * @memberof Core.UI.Popup
+     * @function
+     * @param {Object} Param        - The object contains PopupProfile data.
+     * @param {String} Param.Left   - x (horizontal) coordinates of the window relative to the screen in pixels.
+     * @param {String} Param.Top    - y (vertical) coordinates of the window relative to the screen in pixels.
+     * @param {String} Param.Width  - Width in pixels.
+     * @param {String} Param.Height - Height in pixels.
+     * @description
+     *      This function updates the popup profile preferences of given user.
+     */
+    TargetNS.UpdatePopupProfile = function (Param) {
+        $.each(Param, function (Key, Value) {
+            Core.Agent.PreferencesUpdate('UserPopupProfile' + Key, Value);
+        });
+    };
+
+    /**
      * @name OpenPopup
      * @memberof Core.UI.Popup
      * @function
@@ -444,6 +462,9 @@ Core.UI.Popup = (function (TargetNS) {
             NewWindow,
             WindowName,
             ConfirmClosePopup = true,
+            Regex,
+            WidthResult,
+            HeightResult,
             PopupFeatures;
 
         // If we are in a mobile environment on opening the popup, open it as an iframe
@@ -491,8 +512,25 @@ Core.UI.Popup = (function (TargetNS) {
 
                 if (WindowMode === 'Popup') {
                     PopupFeatures = PopupProfiles[PopupProfile].WindowURLParams;
+
+                    // get pixel or percent of width and height
+                    // convert to a valid pixel value for window.open
+                    Regex        = new RegExp('(%|px)$');
+                    WidthResult  = PopupProfiles[PopupProfile].Width.toString().match(Regex);
+                    HeightResult = PopupProfiles[PopupProfile].Height.toString().match(Regex);
+
+                    if (PopupProfiles[PopupProfile].Width && WidthResult && WidthResult[0]){
+                        PopupProfiles[PopupProfile].Width = PopupProfiles[PopupProfile].Width.replace(WidthResult[0],'');
+                        PopupProfiles[PopupProfile].Width = PopupProfiles[PopupProfile].Width * window.screen.availWidth / 100;
+                    }
+
+                    if (PopupProfiles[PopupProfile].Height && HeightResult && HeightResult[0]){
+                        PopupProfiles[PopupProfile].Height = PopupProfiles[PopupProfile].Height.replace(HeightResult[0],'');
+                        PopupProfiles[PopupProfile].Height = PopupProfiles[PopupProfile].Height * window.screen.availHeight / 100;
+                    }
+
                     // Get the position of the current screen on browsers which support it (non-IE) and
-                    //  use it to open the popup on the same screen
+                    // use it to open the popup on the same screen
                     PopupFeatures += ',left=' + ((window.screen.left || 0) + PopupProfiles[PopupProfile].Left);
                     PopupFeatures += ',width=' + PopupProfiles[PopupProfile].Width;
 
@@ -688,6 +726,7 @@ Core.UI.Popup = (function (TargetNS) {
     TargetNS.Init = function () {
 
         var PopupURL,
+            UpdatePopupProfileTimeout,
             PopupClose = Core.Config.Get('PopupClose');
 
         if (PopupClose === 'LoadParentURLAndClose') {
@@ -731,6 +770,24 @@ Core.UI.Popup = (function (TargetNS) {
             // add a class to the body element, if this popup is a real popup
             if (window.opener) {
                 $('body').addClass('RealPopup');
+
+                $(window).on('resize', function(){
+
+                    if(UpdatePopupProfileTimeout) {
+                        clearTimeout(UpdatePopupProfileTimeout);
+                    }
+
+                    // update popup profile data after 3 seconds
+                    UpdatePopupProfileTimeout = setTimeout(function() {
+                        var Param = {
+                            Height: $(window).height(),
+                            Width:  $(window).width(),
+                            Left:   window.screenX,
+                            Top:    window.screenY,
+                        };
+                       TargetNS.UpdatePopupProfile(Param);
+                    },1000);
+                });
             }
         }
     };

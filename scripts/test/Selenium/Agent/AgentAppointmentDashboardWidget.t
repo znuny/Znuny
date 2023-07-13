@@ -194,7 +194,7 @@ $Selenium->RunTest(
 
             $Self->Is(
                 $FilterLink->get_text(),
-                "$Filter ($FilterCount{$Filter})",
+                uc($Filter) . " ($FilterCount{$Filter})",
                 "Filter count - $Filter",
             );
         }

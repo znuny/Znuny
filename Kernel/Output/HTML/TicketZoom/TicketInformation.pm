@@ -13,6 +13,7 @@ use parent 'Kernel::Output::HTML::Base';
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
@@ -22,13 +23,38 @@ our $ObjectManagerDisabled = 1;
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+    my $StateObject        = $Kernel::OM->Get('Kernel::System::State');
+    my $QueueObject        = $Kernel::OM->Get('Kernel::System::Queue');
+    my $PriorityObject     = $Kernel::OM->Get('Kernel::System::Priority');
+    my $ServiceObject      = $Kernel::OM->Get('Kernel::System::Service');
+    my $SLAObject          = $Kernel::OM->Get('Kernel::System::SLA');
+    my $TypeObject         = $Kernel::OM->Get('Kernel::System::Type');
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $ProcessObject      = $Kernel::OM->Get('Kernel::System::ProcessManagement::Process');
+    my $ActivityObject     = $Kernel::OM->Get('Kernel::System::ProcessManagement::Activity');
 
     my %Ticket    = %{ $Param{Ticket} };
     my %AclAction = %{ $Param{AclAction} };
+
+    my %State = $StateObject->StateGet(
+        ID => $Ticket{StateID},
+    );
+    $Param{StateValidID} = $State{ValidID};
+
+    my %Queue = $QueueObject->QueueGet(
+        ID => $Ticket{QueueID},
+    );
+    $Param{QueueValidID} = $Queue{ValidID};
+
+    my %Priority = $PriorityObject->PriorityGet(
+        PriorityID => $Ticket{PriorityID},
+        UserID     => $Self->{UserID},
+    );
+    $Param{PriorityValidID} = $Priority{ValidID};
 
     # Show created by name, if different then root user (ID=1).
     if ( $Ticket{CreateBy} > 1 ) {
@@ -49,14 +75,14 @@ sub Run {
     # ticket type
     if ( $ConfigObject->Get('Ticket::Type') ) {
 
-        my %Type = $Kernel::OM->Get('Kernel::System::Type')->TypeGet(
+        my %Type = $TypeObject->TypeGet(
             ID => $Ticket{TypeID},
         );
 
         $LayoutObject->Block(
             Name => 'Type',
             Data => {
-                Valid => $Type{ValidID},
+                ValidID => $Type{ValidID},
                 %Ticket,
                 %AclAction
             },
@@ -65,14 +91,34 @@ sub Run {
 
     # ticket service
     if ( $ConfigObject->Get('Ticket::Service') && $Ticket{Service} ) {
+
+        my %Service = $ServiceObject->ServiceGet(
+            ServiceID => $Ticket{ServiceID},
+            UserID    => 1,
+        );
+
         $LayoutObject->Block(
             Name => 'Service',
-            Data => { %Ticket, %AclAction },
+            Data => {
+                %Ticket,
+                %AclAction,
+                %Service,
+            },
         );
         if ( $Ticket{SLA} ) {
+
+            my %SLA = $SLAObject->SLAGet(
+                SLAID  => $Ticket{SLAID},
+                UserID => 1,
+            );
+
             $LayoutObject->Block(
                 Name => 'SLA',
-                Data => { %Ticket, %AclAction },
+                Data => {
+                    %Ticket,
+                    %AclAction,
+                    %SLA,
+                },
             );
         }
     }
@@ -218,7 +264,7 @@ sub Run {
     $Param{Hook}        = $ConfigObject->Get('Ticket::Hook') || 'Ticket#';
 
     # check if ticket is normal or process ticket
-    my $IsProcessTicket = $Kernel::OM->Get('Kernel::System::Ticket')->TicketCheckForProcessType(
+    my $IsProcessTicket = $TicketObject->TicketCheckForProcessType(
         TicketID => $Ticket{TicketID}
     );
 
@@ -237,10 +283,10 @@ sub Run {
         my $ActivityEntityIDField = 'DynamicField_'
             . $ConfigObject->Get("Process::DynamicFieldProcessManagementActivityID");
 
-        my $ProcessData = $Kernel::OM->Get('Kernel::System::ProcessManagement::Process')->ProcessGet(
+        my $ProcessData = $ProcessObject->ProcessGet(
             ProcessEntityID => $Ticket{$ProcessEntityIDField},
         );
-        my $ActivityData = $Kernel::OM->Get('Kernel::System::ProcessManagement::Activity')->ActivityGet(
+        my $ActivityData = $ActivityObject->ActivityGet(
             Interface        => 'AgentInterface',
             ActivityEntityID => $Ticket{$ActivityEntityIDField},
         );
@@ -266,7 +312,7 @@ sub Run {
     };
 
     # get the dynamic fields for ticket object
-    my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+    my $DynamicField = $DynamicFieldObject->DynamicFieldListGet(
         Valid       => 1,
         ObjectType  => ['Ticket'],
         FieldFilter => $DynamicFieldFilter || {},

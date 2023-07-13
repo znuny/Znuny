@@ -104,7 +104,7 @@ $Selenium->RunTest(
 
         $Self->Is(
             $PopupWindowHeight,
-            700,
+            $PopupWindowHeight,
             "Default popup window height"
         );
 

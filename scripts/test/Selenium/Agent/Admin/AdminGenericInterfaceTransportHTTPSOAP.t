@@ -192,14 +192,15 @@ $Selenium->RunTest(
 
         # Add two sort level options.
         $Selenium->find_element("//input[\@name='Element']")->send_keys("$SortLevelOptions[0]");
-        $Selenium->find_element("//button[\@class='CallForAction']")->click();
+        $Selenium->find_element("//button[contains(.,'Add')]")->click();
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' && \$('.SortableList input.SortLevel1').length  && \$('input[name=Element]').val() == ''"
         );
 
         $Selenium->find_element("//input[\@name='Element']")->send_keys("$SortLevelOptions[2]");
-        $Selenium->find_element("//button[\@class='CallForAction']")->click();
+        $Selenium->find_element("//button[contains(.,'Add')]")->click();
+
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' && \$('.SortableList input.SortLevel2').length  && \$('input[name=Element]').val() == ''"

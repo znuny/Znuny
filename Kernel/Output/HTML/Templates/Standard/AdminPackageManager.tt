@@ -354,7 +354,7 @@
                                         <span>[% Translate("Cancel") | html %]</span>
                                     </a>
 [% RenderBlockEnd("IntroCancel") %]
-                                    <button class="btn-primary btn-main btn-width-md" type="submit" value="[% Translate("Continue") | html %]">
+                                    <button class="[% IF !Data.PackageRequired && !Data.ModuleRequired %]btn-primary [% END %]btn-main btn-width-md" type="submit" value="[% Translate("Continue") | html %]"[% IF Data.PackageRequired || Data.ModuleRequired %] disabled[% END %]>
                                         <span>[% Translate("Continue") | html %]</span>
                                     </button>
                                 </div>

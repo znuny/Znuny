@@ -715,6 +715,11 @@ sub Login {
         );
     }
 
+    # add user or global default popup profiles
+    if ( !$Self->{UserPopupProfiles} ) {
+        $Self->{UserPopupProfiles} = $Self->AddPopupProfiles();
+    }
+
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateAgentCSSCalls();
     $Self->LoaderCreateAgentJSCalls();

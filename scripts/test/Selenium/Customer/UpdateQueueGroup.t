@@ -60,7 +60,7 @@ $Selenium->RunTest(
         );
 
         # click on 'Create your first ticket'
-        $Selenium->find_element( ".Button", 'css' )->VerifiedClick();
+        $Selenium->find_element( ".btn-primary", 'css' )->VerifiedClick();
 
         # verify that test queue is available for users group
         $Self->True(

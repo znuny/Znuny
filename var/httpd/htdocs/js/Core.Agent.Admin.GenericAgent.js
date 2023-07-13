@@ -101,10 +101,12 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
     TargetNS.Init = function () {
 
         TargetNS.InitDeleteTaskDialog();
+        TargetNS.InitDeleteEventDialog();
 
         $('#TicketEvent').on('change', function (){
             if ($('#EventType').val() !== null) {
                 TargetNS.AddEvent($('#EventType').val());
+                TargetNS.InitDeleteEventDialog();
             }
         });
 
@@ -376,6 +378,45 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
                             );
                         }
 
+                    },
+                ]
+            );
+            return false;
+        });
+    };
+
+    /**
+     * @name InitDeleteEventDialog
+     * @memberof Core.Agent.Admin.GenericAgent
+     * @function
+     * @description
+     *      This function shows a confirmation dialog with 2 buttons.
+     */
+    TargetNS.InitDeleteEventDialog = function () {
+        $('.DeleteEvent').on('click', function () {
+            var $DeleteElement = $(this);
+
+            Core.UI.Dialog.ShowContentDialog(
+                $('#DeleteEventDialogContainer'),
+                Core.Language.Translate('Delete this event'),
+                '240px',
+                'Center',
+                true,
+                [
+                    {
+                        Label: Core.Language.Translate("Cancel"),
+                        Type: 'Secondary',
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('#DeleteEventDialog'));
+                        }
+                    },
+                    {
+                        Label: Core.Language.Translate("Delete"),
+                        Type: 'Warning',
+                        Function: function () {
+                            $DeleteElement.parents('tr:first').remove();
+                            Core.UI.Dialog.CloseDialog($('#DeleteEventDialog'));
+                        }
                     },
                 ]
             );

@@ -4629,7 +4629,7 @@
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketCompose</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketCompose###RichTextHeight" Required="0" Valid="1">
@@ -8767,7 +8767,7 @@
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketMove</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketMove###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -10663,7 +10663,7 @@
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::Admin::AdminNotificationEvent###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -12867,7 +12867,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketNote</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNote###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -12881,7 +12881,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketOwner###RichTextHeight" Required="0" Valid="1">
@@ -12895,7 +12895,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPending</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPending###RichTextHeight" Required="0" Valid="1">
@@ -12909,7 +12909,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketEmailNew</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmail###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -12923,7 +12923,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneNew</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhone###RichTextHeight" Required="0" Valid="1">
@@ -12937,7 +12937,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneInbound</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">475</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###RichTextHeight" Required="0" Valid="1">
@@ -12951,7 +12951,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">475</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###RichTextHeight" Required="0" Valid="1">
@@ -12965,7 +12965,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketClose</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketClose###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -12979,7 +12979,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketFreeText###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -12993,7 +12993,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPriority###RichTextHeight" Required="0" Valid="1">
@@ -13007,7 +13007,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketResponsible###RichTextHeight" Required="0" Valid="1">
@@ -13021,7 +13021,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketForward</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketForward###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -13035,7 +13035,7 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketEmailOutbound</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailOutbound###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -13049,14 +13049,14 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketMerge</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailResend###RichTextWidth" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketEmailResend</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailResend###RichTextHeight" Required="0" Valid="1">
