@@ -26,24 +26,25 @@ my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $SysConfigObject   = $Kernel::OM->Get('Kernel::System::SysConfig');
 my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 my $SysConfigDBObject = $Kernel::OM->Get('Kernel::System::SysConfig::DB');
+my $DBObject          = $Kernel::OM->Get('Kernel::System::DB');
 
 # Delete sysconfig_modified_version
-return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
+return if !$DBObject->Do(
     SQL => 'DELETE FROM sysconfig_modified_version',
 );
 
 # Delete sysconfig_modified
-return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
+return if !$DBObject->Do(
     SQL => 'DELETE FROM sysconfig_modified',
 );
 
 # Delete sysconfig_default_version
-return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
+return if !$DBObject->Do(
     SQL => 'DELETE FROM sysconfig_default_version',
 );
 
 # Delete sysconfig_default
-return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
+return if !$DBObject->Do(
     SQL => 'DELETE FROM sysconfig_default',
 );
 
@@ -80,6 +81,7 @@ my @Tests1 = (
             EntityType => 'State',
         },
         ExpectedResult => [
+            'State',
             'Ticket::Frontend::AgentTicketPriority###ComplexEntity2',
             'Ticket::Frontend::AgentTicketPriority###StateDefault',
         ],

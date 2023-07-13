@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.310658722277392;
+    $Self->{Completeness}        = 0.310094168181067;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -714,9 +714,9 @@ sub Data {
             '此外，為了让此任務定期反復地執行，您需要定義工單事件，以便觸發任務的執行。',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '如果工單事件被觸發，工單過濾器將對工單進行檢查看其條件是否匹配。任務只對匹配的工單發生作用。',
-        'Do you really want to delete this event trigger?' => '您確定要刪除這個事件觸發器嗎？',
         'Add Event Trigger' => '添加事件觸發器',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => '您確定要刪除這個事件觸發器嗎？',
         'Select Tickets' => '選取工單',
         '(e. g. 10*5155 or 105658*)' => '  例如: 10*5144 或者 105658*',
         '(e. g. 234321)' => '例如: 234321',
@@ -2483,6 +2483,16 @@ sub Data {
 請注意，更換頭像需要一點時間才會生效。',
         'Off' => '關閉',
         'End' => '結束',
+        'Left' => '左',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '目前無法儲存此設定',
         'This setting can currently not be saved' => '目前無法儲存此設定',
         'Save setting' => '',
@@ -2843,7 +2853,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '歸檔',
         'This ticket is archived.' => '該工單已歸檔',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => '掛起至',
         'Locked' => '鎖定狀態',
         '%s Ticket(s)' => '',
@@ -5598,6 +5608,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '',
@@ -5900,6 +5911,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8475,6 +8487,7 @@ Thanks for your help!
         'Change the priority for this ticket' => '更改工單優先級',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => '更換您的頭像',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '變更您的密碼或其他設定｡',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8722,7 +8735,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => '',
         'LastnameFirstname' => '',
         'Latvian' => '',
-        'Left' => '左',
         'Link Object' => '鏈接對象',
         'Link Object.' => '',
         'Link agents to groups.' => '鏈接服務人員到組.',
@@ -8836,6 +8848,7 @@ Thanks for your help!
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => '',
+        'Popup Profile' => '',
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => '收件過濾器',
@@ -9173,6 +9186,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

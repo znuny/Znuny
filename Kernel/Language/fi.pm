@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.190665342601787;
+    $Self->{Completeness}        = 0.190318850156947;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -714,9 +714,9 @@ sub Data {
             '',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '',
-        'Do you really want to delete this event trigger?' => '',
         'Add Event Trigger' => '',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => '',
         'Select Tickets' => '',
         '(e. g. 10*5155 or 105658*)' => '(esim. 10*5155 tai 105658*)',
         '(e. g. 234321)' => '(esim. 234321)',
@@ -2482,6 +2482,16 @@ sub Data {
             '',
         'Off' => 'Pois',
         'End' => 'Lopeta',
+        'Left' => '',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => '',
         'Save setting' => '',
@@ -2842,7 +2852,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arkisto',
         'This ticket is archived.' => 'Tämä tiketti on arkistoitu.',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => 'Odottaa',
         'Locked' => 'Lukitus',
         '%s Ticket(s)' => '%s tiketti(ä)',
@@ -5597,6 +5607,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '',
@@ -5899,6 +5910,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8473,6 +8485,7 @@ Thanks for your help!
         'Change the priority for this ticket' => '',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => '',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8720,7 +8733,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => '',
         'LastnameFirstname' => '',
         'Latvian' => '',
-        'Left' => '',
         'Link Object' => 'Liitoskohde',
         'Link Object.' => '',
         'Link agents to groups.' => 'Linkitä agentit ryhmiin.',
@@ -8834,6 +8846,7 @@ Thanks for your help!
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => '',
+        'Popup Profile' => '',
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => '',
@@ -9171,6 +9184,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

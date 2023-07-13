@@ -15,7 +15,7 @@
         </h1>
         <div>
             <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">
-                [% Translate("Cancel") | html %]
+                [% Translate("Close and Back") | html %]
             </a>
         </div>
     </div>

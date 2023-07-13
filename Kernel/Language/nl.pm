@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.500993048659384;
+    $Self->{Completeness}        = 0.499917396332397;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -717,9 +717,9 @@ sub Data {
             'Naast of in plaats van uitvoeren op een tijdschema kunt u ook ticket events selecteren die deze taak triggeren.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Als een ticket-event plaatsvindt zal dit filter worden toegepast om te toetsen of dit ticket voldoet. Alleen dan wordt deze taak uitgevoerd.',
-        'Do you really want to delete this event trigger?' => 'Wilt u deze event trigger verwijderen?',
         'Add Event Trigger' => 'Nieuwe event trigger toevoegen',
         'To add a new event select the event object and event name' => '',
+        'Do you really want to delete this event trigger?' => 'Wilt u deze event trigger verwijderen?',
         'Select Tickets' => 'Selecteer Tickets',
         '(e. g. 10*5155 or 105658*)' => '(bijvoorbeeld 10*5155 or 105658*)',
         '(e. g. 234321)' => '(bijvoorbeeld 234321)',
@@ -2485,6 +2485,16 @@ sub Data {
             'U kunt uw eigen avatar afbeeling registreren door uw e-mail adres   %s op %s te gebruiken. Let op: het kan enige tijd duren voordat uw avatar beschikbaar is vanwege buffering.',
         'Off' => 'Uit',
         'End' => 'Einde',
+        'Left' => '',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => 'Deze instelling kan op dit moment niet worden opgeslagen.',
         'This setting can currently not be saved' => 'Deze instelling kan op dit moment niet worden opgeslagen',
         'Save setting' => '',
@@ -2845,7 +2855,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archief',
         'This ticket is archived.' => 'Dit ticket is gearchiveerd.',
-        'Note: Type is invalid!' => 'Let op: Type is ongeldig!',
+        'is invalid' => '',
         'Pending till' => 'In de wacht tot',
         'Locked' => 'Vergrendeling',
         '%s Ticket(s)' => '%s Ticket(s)',
@@ -5600,6 +5610,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '',
@@ -5902,6 +5913,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8487,6 +8499,7 @@ Het Helpdesk Team
         'Change the priority for this ticket' => 'Wijzig de prioriteit voor dit ticket',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => 'Pas uw avatar afbeelding aan.',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8734,7 +8747,6 @@ Het Helpdesk Team
         'Lastname, Firstname (UserLogin)' => 'Achternaam, Voornaam (Loginnaam)',
         'LastnameFirstname' => 'AchternaamVoornaam',
         'Latvian' => '',
-        'Left' => '',
         'Link Object' => 'Koppel object',
         'Link Object.' => 'Koppel Object',
         'Link agents to groups.' => 'Koppel behandelaars aan groepen.',
@@ -8848,6 +8860,7 @@ Het Helpdesk Team
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => '',
+        'Popup Profile' => '',
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => 'E-mail filters',
@@ -9185,6 +9198,7 @@ Het Helpdesk Team
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

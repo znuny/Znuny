@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.645150612380007;
+    $Self->{Completeness}        = 0.643812985296547;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -716,9 +716,9 @@ sub Data {
             'Dodatkowo lub alternatywnie dla wykonywania okresowego możesz zdefiniować zdarzenia które spowodują wykonannie tego zadania.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             'Jeśli zgłoszenie zostanie wykonane wówczas filtr zgłoszeń zostanie wykonany dla sprawdzenia dopasowania zgłoszenia. Tylko wówczas zadanie jest wykonane na danym zgłoszeniu.',
-        'Do you really want to delete this event trigger?' => 'Czy na pewno chcesz usunąć ten trigger?',
         'Add Event Trigger' => 'Dodaj trigger',
         'To add a new event select the event object and event name' => 'Aby dodać nowe wydarzenie, wybierz obiekt zdarzenia i nazwę wydarzenia',
+        'Do you really want to delete this event trigger?' => 'Czy na pewno chcesz usunąć ten trigger?',
         'Select Tickets' => 'Zaznacz zgłoszenia',
         '(e. g. 10*5155 or 105658*)' => '(np. 10*5155 lub 105658*)',
         '(e. g. 234321)' => '(np. 3242442)',
@@ -2484,6 +2484,16 @@ sub Data {
             '',
         'Off' => 'Wyłączone',
         'End' => 'Koniec',
+        'Left' => 'Lewo',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => 'To ustawienie nie może być teraz zapisane',
         'This setting can currently not be saved' => 'To ustawienie nie może być teraz zapisane',
         'Save setting' => '',
@@ -2844,7 +2854,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archiwum',
         'This ticket is archived.' => 'To zgłoszenie jest zarchiwizowane.',
-        'Note: Type is invalid!' => 'Uwaga: Typ jest niepoprawny!',
+        'is invalid' => '',
         'Pending till' => 'Oczekuje do',
         'Locked' => 'Blokada',
         '%s Ticket(s)' => '%s Zgłoszenie(a)',
@@ -5599,6 +5609,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '',
@@ -5901,6 +5912,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Określa identyfikator użytkownika w panelu klienta.',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8485,6 +8497,7 @@ Twój Zespół Helpdesk.
         'Change the priority for this ticket' => 'Zmień priorytet zgłoszenia',
         'Change the responsible for this ticket' => 'Zmień odpowiedzialnego za ten ticket',
         'Change your avatar image.' => '',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => 'Zmieniono SLA z "%s" (%s).',
         'Changed archive state to "%s".' => '',
@@ -8732,7 +8745,6 @@ Twój Zespół Helpdesk.
         'Lastname, Firstname (UserLogin)' => 'Nazwisko, Imię (Login)',
         'LastnameFirstname' => '',
         'Latvian' => 'Łotewski',
-        'Left' => 'Lewo',
         'Link Object' => 'Połącz obiekt',
         'Link Object.' => 'Połącz Obiekt.',
         'Link agents to groups.' => 'Zarządzanie relacjami Agenci <-> Grupy',
@@ -8846,6 +8858,7 @@ Twój Zespół Helpdesk.
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => 'Polski',
+        'Popup Profile' => '',
         'Portuguese' => 'Portugalski',
         'Portuguese (Brasil)' => 'Portugalski (Brazylia)',
         'PostMaster Filters' => 'Filtrowanie poczty przychodzącej',
@@ -9183,6 +9196,7 @@ Twój Zespół Helpdesk.
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

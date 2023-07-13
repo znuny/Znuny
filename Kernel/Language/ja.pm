@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.689010261502814;
+    $Self->{Completeness}        = 0.687758136461259;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -714,9 +714,9 @@ sub Data {
             '',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '',
-        'Do you really want to delete this event trigger?' => 'このイベントトリガーを本当に削除しますか？',
         'Add Event Trigger' => 'イベントトリガーを追加',
         'To add a new event select the event object and event name' => '新しいイベントを追加するには、イベントオブジェクトとイベント名を選択します。',
+        'Do you really want to delete this event trigger?' => 'このイベントトリガーを本当に削除しますか？',
         'Select Tickets' => 'チケットを選択',
         '(e. g. 10*5155 or 105658*)' => '(例 10*5144 または 105658*)',
         '(e. g. 234321)' => '(例 234321)',
@@ -2484,6 +2484,16 @@ sub Data {
             'アバターイメージを変更するには、%sにあなたのメールアドレス(%s)を登録して下さい。キャッシュの影響により新しいアバターが利用可能になるまでには時間がかかることがあります。',
         'Off' => 'オフ',
         'End' => '終了',
+        'Left' => 'のこり',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => 'この設定は現在保存できません。',
         'Save setting' => '',
@@ -2844,7 +2854,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'アーカイブ',
         'This ticket is archived.' => 'このチケットはアーカイブされています。',
-        'Note: Type is invalid!' => '',
+        'is invalid' => '',
         'Pending till' => '保留時間',
         'Locked' => 'ロック状態',
         '%s Ticket(s)' => '%sチケット',
@@ -5600,6 +5610,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'HTTPヘッダ"X-Frame-Options: SAMEORIGIN”を無効化し、Znunyを外部のWebサイトの一部としてiframeに埋め込むことを許可します。 このHTTPヘッダを無効にすることにより、セキュリティ上の問題が生じることがあります! 変更内容をよく理解している場合に限り無効化を実行してください!',
@@ -5902,6 +5913,7 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '顧客パネルのためのユーザ識別子を定義します。',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8494,6 +8506,7 @@ Thanks for your help!
         'Change the priority for this ticket' => 'このチケットの優先度を変更',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => 'あなたのアバターイメージを変更して下さい。',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'パスワードなどを変更してください。',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8741,7 +8754,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => '名, 姓 (ユーザー名)',
         'LastnameFirstname' => '',
         'Latvian' => 'ラトビア語',
-        'Left' => 'のこり',
         'Link Object' => '連結対象',
         'Link Object.' => 'リンク・オブジェクト',
         'Link agents to groups.' => '担当者をグループへ連結',
@@ -8856,6 +8868,7 @@ Thanks for your help!
         'Plugin search' => 'プラグイン検索',
         'Plugin search module for autocomplete.' => 'オートコンプリート用のプラグイン検索モジュール',
         'Polish' => 'ポーランド語',
+        'Popup Profile' => '',
         'Portuguese' => 'ポルトガル語',
         'Portuguese (Brasil)' => 'ポルトガル語（ブラジル）',
         'PostMaster Filters' => 'ポストマスター・フィルター',
@@ -9193,6 +9206,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

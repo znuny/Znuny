@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.874875868917577;
+    $Self->{Completeness}        = 0.873120766562035;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -711,9 +711,9 @@ sub Data {
             '주기적 실행에 추가적으로 또는 대신에 이 작업을 트리거 할 티켓 이벤트를 정의할 수 있습니다.',
         'If a ticket event is fired, the ticket filter will be applied to check if the ticket matches. Only then the job is run on that ticket.' =>
             '티켓 이벤트가 발생하면 티켓이 일치하는지 확인하기 위해 티켓 필터가 적용됩니다. 그런 다음에 만 해당 티켓에서 작업이 실행됩니다.',
-        'Do you really want to delete this event trigger?' => '이 이벤트 트리거를 정말로 삭제 하시겠습니까?',
         'Add Event Trigger' => '이벤트 트리거 추가',
         'To add a new event select the event object and event name' => '새 이벤트를 추가하려면 이벤트 객체와 이벤트 이름을 선택하십시오.',
+        'Do you really want to delete this event trigger?' => '이 이벤트 트리거를 정말로 삭제 하시겠습니까?',
         'Select Tickets' => '티켓 선택',
         '(e. g. 10*5155 or 105658*)' => '(예를 들어, 10 * 5155 또는 105658 *)',
         '(e. g. 234321)' => '(예를 들어, 234321)',
@@ -2479,6 +2479,16 @@ sub Data {
             '이메일 주소 %s at %s 에 등록하여 아바타 이미지를 변경할 수 있습니다. 새로운 아바타가 캐싱으로 인해 사용 가능해질 때까지 약간의 시간이 걸릴 수 있습니다.',
         'Off' => '떨어져서',
         'End' => '종료',
+        'Left' => '왼쪽',
+        'The horizontal distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Top' => '',
+        'The vertical distance of the window relative to the screen, in pixels.' =>
+            '',
+        'Width' => '',
+        'Width in pixels or percent.' => '',
+        'Height' => '',
+        'Height in pixels or percent.' => '',
         'This setting can currently not be saved.' => '이 설정은 현재 저장할 수 없습니다.',
         'This setting can currently not be saved' => '이 설정은 현재 저장할 수 없습니다.',
         'Save setting' => '',
@@ -2839,7 +2849,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '아카이브',
         'This ticket is archived.' => '이 티켓은 보관 처리됩니다.',
-        'Note: Type is invalid!' => '참고 : 유형이 유효하지 않습니다!',
+        'is invalid' => '',
         'Pending till' => '대기 시간까지',
         'Locked' => '잠김',
         '%s Ticket(s)' => '%s개 티켓',
@@ -5594,6 +5604,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
+        'Global settings for all popup profiles.' => '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'HTTP 헤더 "X-Frame-Options : SAMEORIGIN"을 사용하지 않도록 설정하여 Znuny를 다른 웹 사이트의 IFrame으로 포함 할 수 있습니다. 이 HTTP 헤더를 비활성화하면 보안 문제가 발생할 수 있습니다! 자신이하는 일을 아는 경우에만 사용을 중지하십시오!',
@@ -5896,6 +5907,7 @@ sub Data {
             '최종 사용자에게 번역 파일에 정의 된 CSV 파일의 구분 문자를 무시할 수 있습니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '사용자 아바타를 정의합니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '고객 패널에 대한 사용자 ID를 정의합니다.',
         'Activates support for customer and customer user groups.' => '고객 및 고객 사용자 그룹에 대한 지원을 활성화합니다.',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8481,6 +8493,7 @@ Thanks for your help!
         'Change the priority for this ticket' => '이 티켓의 우선 순위 변경',
         'Change the responsible for this ticket' => '이 티켓의 책임자를 변경하십시오.',
         'Change your avatar image.' => '아바타 이미지를 변경하십시오.',
+        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '암호 등을 변경하십시오.',
         'Changed SLA to "%s" (%s).' => 'SLA를 "%s"(%s)로 변경했습니다.',
         'Changed archive state to "%s".' => 'Archive 상태를 "%s"로 변경했습니다.',
@@ -8728,7 +8741,6 @@ Thanks for your help!
         'Lastname, Firstname (UserLogin)' => '성, 이름 (UserLogin)',
         'LastnameFirstname' => '성 이름',
         'Latvian' => '라트비아 사람',
-        'Left' => '왼쪽',
         'Link Object' => '링크 개체',
         'Link Object.' => '링크 개체.',
         'Link agents to groups.' => '에이전트를 그룹에 연결하십시오.',
@@ -8842,6 +8854,7 @@ Thanks for your help!
         'Plugin search' => '플러그인 검색',
         'Plugin search module for autocomplete.' => '자동 완성을 위한 플러그인 검색 모듈.',
         'Polish' => '폴란드어',
+        'Popup Profile' => '',
         'Portuguese' => '포르투갈인',
         'Portuguese (Brasil)' => '포르투갈어(브라질)',
         'PostMaster Filters' => 'PostMaster 필터',
@@ -9179,6 +9192,7 @@ Thanks for your help!
         'Delete this Operation',
         'Delete this PostMasterFilter',
         'Delete this Template',
+        'Delete this event',
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',

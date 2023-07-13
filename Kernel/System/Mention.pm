@@ -258,6 +258,43 @@ sub RemoveMention {
     return 1;
 }
 
+=head2 RemoveAllMentions()
+
+Deletes all mentions of a ticket.
+
+    my $Success = $MentionObject->RemoveAllMentions(
+        TicketID => 3252,
+    );
+
+    Returns true value on success.
+
+=cut
+
+sub RemoveAllMentions {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
+
+    NEEDED:
+    for my $Needed (qw(TicketID)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    return if !$DBObject->Do(
+        SQL  => 'DELETE FROM mention WHERE ticket_id = ?',
+        Bind => [ \$Param{TicketID} ],
+    );
+
+    return 1;
+}
+
 =head2 GetTicketMentions()
 
 Retrieves all mentions of a ticket.
