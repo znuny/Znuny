@@ -21,13 +21,6 @@ $Selenium->RunTest(
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-        # Make sure to enable cloud services.
-        $HelperObject->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'CloudServices::Disabled',
-            Value => 0,
-        );
-
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],

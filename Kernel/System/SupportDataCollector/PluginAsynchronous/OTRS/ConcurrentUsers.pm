@@ -72,7 +72,7 @@ sub Run {
         }
 
         $Self->AddResultInformation(
-            DisplayPath => Translatable('OTRS') . '/' . Translatable('Concurrent Users'),
+            DisplayPath => Translatable('Znuny') . '/' . Translatable('Concurrent Users'),
             Identifier  => $Identifier,
             Label       => "Max. $Label",
             Value       => $MaxValue,

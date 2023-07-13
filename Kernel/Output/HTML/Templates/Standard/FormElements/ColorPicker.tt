@@ -1,0 +1,18 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+[% RenderBlockStart("Input") %]
+    <input type="text" id="[% Data.ID | html %]" name="[% Data.Name | html %]" class="[% Data.Class | html %]" value="[% Data.Value | html %]"
+    data-jscolor="[% Data.ColorPickerConfig | html %]">
+[% RenderBlockEnd("Input") %]
+[% RenderBlockStart("InputField") %]
+    <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+    <div class="Field">
+        <input type="text" id="[% Data.ID | html %]" name="[% Data.Name | html %]" class="[% Data.Class | html %]" value="[% Data.Value | html %]"
+        data-jscolor="[% Data.ColorPickerConfig | html %]">
+    </div>
+[% RenderBlockEnd("InputField") %]

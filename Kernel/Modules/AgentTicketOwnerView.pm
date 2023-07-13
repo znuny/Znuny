@@ -388,7 +388,7 @@ sub Run {
         Filters           => \%NavBarFilter,
         LinkFilter        => $LinkFilter,
 
-        TitleName  => Translatable('My Owned Tickets'),
+        TitleName  => Translatable('My owned tickets'),
         TitleValue => $Filters{$Filter}->{Name},
         Bulk       => 1,
 

@@ -1271,9 +1271,9 @@ Sets OR returns the mapping structure of the given Action.
     my $Result = $SeleniumObject->InputFieldIDMapping(
         Action  => 'AgentTicketZoom',
         Mapping => {
-            ...
+            # ...
             QueueID => 'DestQueueID',
-            ...
+            # ...
         },
     );
 
@@ -1744,7 +1744,7 @@ This function builds a requestable HTTP GET URL to the given OTRS interface with
         }
     );
 
-    $RequestURL = 'http://localhost/otrs/index.pl?Action=AgentTicketZoom';
+    $RequestURL = 'http://localhost/znuny/index.pl?Action=AgentTicketZoom';
 
 =cut
 
@@ -2096,7 +2096,7 @@ Returns:
 
     my %ScreenshotDirectory = (
         WebPath  => 'SeleniumScreenshots/Captured',
-        FullPath => '/opt/otrs/var/httpd/htdocs/SeleniumScreenshots/Captured',
+        FullPath => '/opt/znuny/var/httpd/htdocs/SeleniumScreenshots/Captured',
     );
 
 =cut
@@ -2165,12 +2165,12 @@ sub GetScreenshotURL {
 =head2 GetSeleniumHome()
 
     my $SeleniumHome = $SeleniumObject->GetSeleniumHome(
-        Directory => '/opt/otrs',
+        Directory => '/opt/znuny',
     );
 
 Returns:
 
-    my $SeleniumHome = '/opt/otrs';
+    my $SeleniumHome = '/opt/znuny';
 
 =cut
 

@@ -188,7 +188,7 @@ Returns:
             ChangeTime                 => '...',
             ChangeBy                   => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -261,7 +261,7 @@ Returns:
             ChangeTime                 => '...',
             ChangeBy                   => '...',
         },
-        ...
+        # ...
     );
 
 =cut

@@ -266,28 +266,6 @@ sub Run {
             );
         }
 
-        if (
-            ( grep { $_ eq 'reset-locally' } @Options )
-            && $SysConfigObject->can('UserSettingValueDelete')    # OTRS Business Solution™
-            )
-        {
-
-            # Remove user's value
-            my $UserValueDeleted = $SysConfigObject->UserSettingValueDelete(
-                Name       => $SettingName,
-                ModifiedID => 'All',
-                UserID     => $Self->{UserID},
-            );
-
-            if ( !$UserValueDeleted ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message =>
-                        "System was not able to delete setting values for users!"
-                );
-            }
-        }
-
         %Setting = $SysConfigObject->SettingGet(
             Name            => $SettingName,
             OverriddenInXML => 1,
@@ -511,9 +489,8 @@ sub Run {
         my $Output = $LayoutObject->Output(
             TemplateFile => 'SystemConfiguration/SettingsList',
             Data         => {
-                SettingList             => \@SettingList,
-                OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
-                ConfigLevel             => $ConfigLevel
+                SettingList => \@SettingList,
+                ConfigLevel => $ConfigLevel
             },
         );
 
@@ -763,14 +740,13 @@ sub Run {
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AdminSystemConfigurationGroup',
         Data         => {
-            Tree                    => \%Tree,
-            Path                    => \@Path,
-            RootNavigation          => $RootNavigation,
-            SettingList             => \@SettingList,
-            CategoriesStrg          => $Self->_GetCategoriesStrg(),
-            InvalidSettings         => $Self->_CheckInvalidSettings(),
-            OTRSBusinessIsInstalled => $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled(),
-            ConfigLevel             => $ConfigLevel,
+            Tree            => \%Tree,
+            Path            => \@Path,
+            RootNavigation  => $RootNavigation,
+            SettingList     => \@SettingList,
+            CategoriesStrg  => $Self->_GetCategoriesStrg(),
+            InvalidSettings => $Self->_CheckInvalidSettings(),
+            ConfigLevel     => $ConfigLevel,
         },
     );
     $Output .= $LayoutObject->Footer();

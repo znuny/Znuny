@@ -56,11 +56,12 @@ sub match {
             |does[ ]not[ ]exist:
             )
         |dns[ ]lookup[ ]failure:[ ][^ ]+[ ]try[ ]again[ ]later
-        |dnsbl:attrbl
+        |dnsbl:(?:attrbl|rbl[ ]\d+[<][ ].+[ ][>]_is_blocked)
         |dynamic/zombied/spam[ ]ips[ ]blocked
         |email[ ]blocked[ ]by[ ](?:[^ ]+[.]barracudacentral[.]org|spamhaus)
         |error:[ ]no[ ]valid[ ]recipients[ ]from[ ]
         |esmtp[ ]not[ ]accepting[ ]connections  # icloud.com
+        |extreme[ ]bad[ ]ip[ ]profile
         |fix[ ]reverse[ ]dns[ ]for[ ][^ ]+
         |go[ ]away
         |helo[ ]command[ ]rejected:
@@ -231,7 +232,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2021 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

@@ -667,7 +667,7 @@ Returns an array of hash references.
                 'Germany'        => 'Germany',
                 'United Kingdom' => 'United Kingdom',
                 'United States'  => 'United States',
-                ...
+                # ...
             },
         },
         {

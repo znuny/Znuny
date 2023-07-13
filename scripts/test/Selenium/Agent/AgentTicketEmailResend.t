@@ -20,8 +20,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $MailQueueObject    = $Kernel::OM->Get('Kernel::System::MailQueue');
 
         # Disable check of email addresses.
         $HelperObject->ConfigSettingChange(
@@ -59,7 +63,7 @@ $Selenium->RunTest(
         ) || die 'Did not get test customer user';
 
         # Get test customer user data.
-        my %TestCustomerUserData = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
+        my %TestCustomerUserData = $CustomerUserObject->CustomerUserDataGet(
             User => $TestCustomerUserLogin,
         );
 
@@ -82,8 +86,7 @@ $Selenium->RunTest(
             "Ticket is created - ID $TicketID"
         );
 
-        my $ArticleBackendObject
-            = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel( ChannelName => 'Email' );
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
         # Create test email article.
         my $ArticleID = $ArticleBackendObject->ArticleCreate(
@@ -221,7 +224,7 @@ $Selenium->RunTest(
         # Introduce temporary error to mail queue entry, and check if processing message reflects that.
         my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
         $DateTimeObject->Add( Hours => 1 );
-        my $Result = $Kernel::OM->Get('Kernel::System::MailQueue')->Update(
+        my $Result = $MailQueueObject->Update(
             Filters => {
                 ArticleID => $ComposeArticleID,
             },
@@ -399,7 +402,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     }

@@ -26,6 +26,7 @@ $Selenium->RunTest(
         my $TicketObject      = $Kernel::OM->Get('Kernel::System::Ticket');
         my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
         my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 
         # Set link object view mode to 'Complex'.
         $HelperObject->ConfigSettingChange(
@@ -101,7 +102,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentAppointmentCalendarOverview.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentAppointmentCalendarOverview");

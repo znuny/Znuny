@@ -32,9 +32,8 @@ sub Run {
     my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
 
     NEEDED:
-    for my $Needed (qw( Data Event Config )) {
-
-        next NEEDED if $Param{$Needed};
+    for my $Needed (qw( ModuleName UseHistoryBackend Event Data Config UserID )) {
+        next NEEDED if defined $Param{$Needed};
 
         $LogObject->Log(
             Priority => 'error',
@@ -43,22 +42,32 @@ sub Run {
         return;
     }
 
-    return 1 if !$Param{Event};
-    return 1 if !$Param{Data};
+    return if $Param{Event} !~ m{\ADBCRUD(.+)\z};
+    my $Method = 'Data' . $1 . 'Post';
 
-    my $Success;
-    if ( $Param{Event} =~ m{\A(.*)(Add|Update|Delete|Export|Import|Copy)\z} ) {
-        my $Object = $1;
-        my $Method = 'Data' . $2 . 'Post';
+    my $BackendObject = $Kernel::OM->Get( $Param{ModuleName} );
+    return if !$BackendObject;
 
-        my $BackendObject = $Kernel::OM->Get( 'Kernel::System::' . $Object );
-        my $CheckFunction = $BackendObject->can($Method);
-        return 1 if !$CheckFunction;
+    return 1 if !$BackendObject->can($Method);
 
-        $Success = $BackendObject->$Method(
+    if (
+        $Param{UseHistoryBackend}
+        && $BackendObject->can('IsHistoryBackendSet')
+        )
+    {
+        my $HistoryBackendWasAlreadySet = $BackendObject->IsHistoryBackendSet();
+        $BackendObject->HistoryBackendSet() if !$HistoryBackendWasAlreadySet;
+        my $Success = $BackendObject->$Method(
             %{ $Param{Data} },
         );
+        $BackendObject->HistoryBackendUnset() if !$HistoryBackendWasAlreadySet;
+
+        return $Success;
     }
+
+    my $Success = $BackendObject->$Method(
+        %{ $Param{Data} },
+    );
 
     return $Success;
 }

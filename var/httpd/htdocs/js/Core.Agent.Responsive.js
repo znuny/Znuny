@@ -22,7 +22,7 @@ Core.Agent = Core.Agent || {};
 Core.Agent.Responsive = (function (TargetNS) {
 
     Core.App.Subscribe('Event.App.Responsive.SmallerOrEqualScreenL', function () {
-        // Add switch for Desktopmode
+        // Add switch for Desktop mode
         if (!$('#ViewModeSwitch').length) {
             $('#Footer').append('<div id="ViewModeSwitch"><a href="#">' + Core.Language.Translate('Switch to desktop mode') + '</a></div>');
             $('#ViewModeSwitch a').on('click.Responsive', function() {
@@ -32,47 +32,19 @@ Core.Agent.Responsive = (function (TargetNS) {
             });
         }
 
-        $('.Dashboard .WidgetSimple .Header').off('click.Responsive').on('click.Responsive', function() {
-            $(this).find('.ActionMenu').fadeToggle();
-        });
-
         // hide graphs as they're not properly supported on mobile devices
         $('.D3GraphMessage, .D3GraphCanvas').closest('.WidgetSimple').hide();
 
         // Add trigger icon for pagination
         $('span.Pagination a:first-child').parent().closest('.WidgetSimple').each(function() {
             if (!$(this).find('.ShowPagination').length) {
-                $(this).find('.WidgetAction.Close').after('<div class="WidgetAction ShowPagination"><a title="Close" href=""><i class="fa fa-angle-double-right"></i></a></div>');
+                $(this).find('.wrapper-widget-close').after('<li><div class="WidgetAction ShowPagination"><a title="Close" href=""><span class="iconWrapper"><i class="fa fa-angle-right"></i></span><span class="textWrapper">Pagination</span></a></div></li>');
             }
         });
 
         $('.WidgetAction.ShowPagination').off('click.Responsive').on('click.Responsive', function() {
             $(this).closest('.WidgetSimple').find('.Pagination').toggleClass('AsBlock');
             return false;
-        });
-
-        // expand toolbar on click on the header
-        $('#Header').off().on('click', function() {
-
-            var TargetHeight = '70px',
-                TargetFade = 'out';
-
-            if (parseInt($('#ToolBar').height(), 10) > 0) {
-                TargetHeight = '0px';
-                TargetFade = 'in';
-            }
-            $('#ToolBar').animate({
-                height: TargetHeight,
-                easing: 'easeOutQuart'
-            }, 'fast');
-
-            // fade sidebar handles in/out
-            if (TargetFade === 'in') {
-                $('.ResponsiveHandle').fadeIn();
-            }
-            else {
-                $('.ResponsiveHandle').fadeOut();
-            }
         });
 
         // wrap sidebar modules with an additional container
@@ -97,7 +69,7 @@ Core.Agent.Responsive = (function (TargetNS) {
 
         // add handles for navigation and sidebar
         if (!$('#ResponsiveSidebarHandle').length) {
-            $('.SidebarColumn').closest('.ResponsiveSidebarContainer').before('<span class="ResponsiveHandle" id="ResponsiveSidebarHandle"><i class="fa fa-caret-square-o-left"></i></span>');
+            $('.SidebarColumn').closest('.ResponsiveSidebarContainer').before('<span class="ResponsiveHandle" id="ResponsiveSidebarHandle"><i class="fa fa-sign-out"></i></span>');
         }
         if (!$('#ResponsiveNavigationHandle').length) {
             $('#NavigationContainer').closest('.ResponsiveSidebarContainer').before('<span class="ResponsiveHandle" id="ResponsiveNavigationHandle"><i class="fa fa-navicon"></i></span>');
@@ -112,12 +84,12 @@ Core.Agent.Responsive = (function (TargetNS) {
                 $('#NavigationContainer').closest('.ResponsiveSidebarContainer').fadeIn();
                 $('html').addClass('NoScroll');
                 $('#NavigationContainer').animate({
-                    'left': '0px'
+                    'left': '0'
                 });
             }
             else {
                 $('#ResponsiveSidebarHandle').animate({
-                    'right': '0px'
+                    'right': '20px'
                 });
                 $('#NavigationContainer').closest('.ResponsiveSidebarContainer').fadeOut();
                 $('html').removeClass('NoScroll');
@@ -137,12 +109,12 @@ Core.Agent.Responsive = (function (TargetNS) {
                 $('.SidebarColumn').closest('.ResponsiveSidebarContainer').fadeIn();
                 $('html').addClass('NoScroll');
                 $('.SidebarColumn').animate({
-                    'right': '0px'
+                    'right': '0'
                 });
             }
             else {
                 $('#ResponsiveNavigationHandle').animate({
-                    'left': '0px'
+                    'left': '20px'
                 });
                 $('.SidebarColumn').closest('.ResponsiveSidebarContainer').fadeOut();
                 $('html').removeClass('NoScroll');
@@ -167,8 +139,13 @@ Core.Agent.Responsive = (function (TargetNS) {
         // initially hide navigation container
         $('#NavigationContainer').css('left', '-280px');
 
-        // move toolbar to navigation container
-        $('#ToolBar').detach().prependTo('body');
+
+        $('#HeaderToolBar').detach().prependTo('#NavigationContainer');
+        $('.InnerSidebarColumn').detach().insertAfter('.WidgetActions');
+        $('#Logo').detach().prependTo('#Header');
+        $('.NotificationIcon').click(function() {
+            $('body').toggleClass("ShowNotificationList");
+        });
 
         // make fields which have a following icon not as wide as other fields
         $('.FormScreen select').each(function() {
@@ -195,10 +172,10 @@ Core.Agent.Responsive = (function (TargetNS) {
         $('#OptionCustomer').closest('.Field').show().prev('label').show();
 
         // reset navigation container position
-        $('#NavigationContainer').css('left', '10px');
+        $('#NavigationContainer').detach().prependTo('#Header');
 
         // re-add toolbar to header
-        $('#ToolBar').detach().prependTo('#Header');
+        $('#Logo').detach().prependTo('#NavigationContainer');
 
         // reset field widths
         $('.FormScreen select').each(function() {
@@ -209,7 +186,26 @@ Core.Agent.Responsive = (function (TargetNS) {
 
         // re-expand widgets in preferences screen
         $('.PreferencesScreen .WidgetSimple').removeClass('Collapsed').addClass('Expanded');
+
     });
+
+    // MOBILE - Show Actions Menu
+
+    //open
+    $('.mobile-action-option').on('click', function() {
+        $('body').addClass('has-options-overlay-opened');
+        $('html').addClass('NoScroll');
+        $(this).closest('.ItemActions, .ActionRow').addClass('active');
+    });
+
+    //close
+    $('.Actions-close, .btn-collapse').on('click', function() {
+        $('body').removeClass('has-options-overlay-opened');
+        $('html').removeClass('NoScroll');
+        $(this).closest('.ItemActions, .ActionRow').removeClass('active');
+    });
+
+
 
     return TargetNS;
 

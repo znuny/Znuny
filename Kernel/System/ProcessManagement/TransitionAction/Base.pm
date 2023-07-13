@@ -131,7 +131,7 @@ Returns an array ref with attachments.
         TransitionActionEntityID => 'TA123',
         Config                   => {
             Attachments => '1',
-            ...
+            # ...
         }
     );
 

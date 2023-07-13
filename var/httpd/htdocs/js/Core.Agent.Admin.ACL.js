@@ -76,13 +76,14 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
             [
                {
                    Label: Core.Language.Translate('Cancel'),
-                   Class: 'Primary',
+                   Type: 'Secondary',
                    Function: function () {
                        Core.UI.Dialog.CloseDialog($('.Dialog'));
                    }
                },
                {
                    Label: Core.Language.Translate('Delete'),
+                   Type: 'Warning',
                    Function: function () {
                        var Data = {
                                Action: 'AdminACL',

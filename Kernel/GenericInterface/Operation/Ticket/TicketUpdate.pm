@@ -138,6 +138,20 @@ if applicable the created ArticleID.
                 ForceNotificationToUserID       => [1, 2, 3]                   # optional
                 ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
                 ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                Attachment => [
+                    {
+                        Content     => 'content'                                 # base64 encoded
+                        ContentType => 'some content type'
+                        Filename    => 'some fine name'
+                    },
+                    # ...
+                ],
+                # or:
+                Attachment => {
+                    Content     => 'content'                                 # base64 encoded
+                    ContentType => 'some content type'
+                    Filename    => 'some fine name'
+                },
 
                 # Signing and encryption, only used when ArticleSend is set to 1
                 Sign => {
@@ -169,7 +183,7 @@ if applicable the created ArticleID.
             #    Value  => $Value,
             #},
 
-            Attachment [
+            Attachment => [
                 {
                     Content     => 'content',                                # base64 encoded
                     ContentType => 'some content type',
@@ -178,7 +192,7 @@ if applicable the created ArticleID.
                 # ...
             ],
             #or
-            #Attachment {
+            #Attachment => {
             #    Content     => 'content',
             #    ContentType => 'some content type',
             #    Filename    => 'some fine name'
@@ -1022,6 +1036,9 @@ sub _CheckArticle {
     # check Article->ContentType
     if ( $Article->{ContentType} ) {
 
+        # Internal issue #595: Remove line breaks from content type.
+        $Article->{ContentType} =~ s{\R}{ }g;
+
         $Article->{ContentType} = lc $Article->{ContentType};
 
         # check Charset part
@@ -1281,6 +1298,9 @@ sub _CheckAttachment {
 
     # check Article->ContentType
     if ( $Attachment->{ContentType} ) {
+
+        # Internal issue #595: Remove line breaks from content type.
+        $Attachment->{ContentType} =~ s{\R}{ }g;
 
         $Attachment->{ContentType} = lc $Attachment->{ContentType};
 
@@ -2218,6 +2238,17 @@ sub _TicketUpdate {
             $MimeType = $Article->{MimeType};
         }
 
+        # Base-64-decode attachments.
+        if ( IsHashRefWithData( $Article->{Attachment} ) ) {
+            $Article->{Attachment} = [ $Article->{Attachment} ];
+        }
+        ATTACHMENT:
+        for my $Attachment ( @{ $Article->{Attachment} // [] } ) {
+            next ATTACHMENT if !IsStringWithData( $Attachment->{Content} );
+
+            $Attachment->{Content} = MIME::Base64::decode_base64( $Attachment->{Content} );
+        }
+
         my %ArticleParams = (
             NoAgentNotify        => $Article->{NoAgentNotify} || 0,
             TicketID             => $TicketID,
@@ -2244,6 +2275,7 @@ sub _TicketUpdate {
                 Subject => $Subject,
                 Body    => $PlainBody
             },
+            Attachment => $Article->{Attachment} // [],
         );
 
         # create article
@@ -2261,7 +2293,7 @@ sub _TicketUpdate {
                     };
                 }
 
-                $ArticleParams{Attachment} = \@NewAttachments;
+                push @{ $ArticleParams{Attachment} }, @NewAttachments;
             }
 
             # signing and encryption

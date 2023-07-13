@@ -39,7 +39,8 @@ Core.Installer = (function (TargetNS) {
             $('#ButtonCheckDB').closest('.Field').hide();
             $('#FormDBSubmit').removeAttr('disabled').removeClass('Disabled');
             $('fieldset.ErrorMsg, fieldset.CheckDB').hide();
-            $('fieldset.HideMe, div.HideMe, fieldset.Success').show();
+            //$('fieldset.HideMe, div.HideMe, fieldset.Success').show();
+            $('fieldset.HideMe, div.HideMe, fieldset.Success').css("display", "flex");
         }
     }
 
@@ -252,7 +253,8 @@ Core.Installer = (function (TargetNS) {
     TargetNS.Init = function () {
 
         // show 'Next' button
-        $('#InstallerContinueWithJS').show();
+        //$('#InstallerContinueWithJS').show();
+        $('#InstallerContinueWithJS').css('display', 'flex');
 
         // allows CreateDB only if selected database is not Oracle
         InitDatabaseSelection();

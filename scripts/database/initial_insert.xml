@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<database Name="otrs">
+<database Name="znuny">
 
 <!-- framework -->
     <Insert Table="valid">
@@ -64,6 +64,16 @@
         <Data Key="id" Type="AutoIncrement">3</Data>
         <Data Key="name" Type="Quote">stats</Data>
         <Data Key="comments" Type="Quote" Translatable="1">Group for statistics access.</Data>
+        <Data Key="valid_id">1</Data>
+        <Data Key="create_by">1</Data>
+        <Data Key="create_time">current_timestamp</Data>
+        <Data Key="change_by">1</Data>
+        <Data Key="change_time">current_timestamp</Data>
+    </Insert>
+    <Insert Table="permission_groups">
+        <Data Key="id" Type="AutoIncrement">4</Data>
+        <Data Key="name" Type="Quote">timeaccounting_webservice</Data>
+        <Data Key="comments" Type="Quote" Translatable="1">Group for time accounting web service access.</Data>
         <Data Key="valid_id">1</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
@@ -205,6 +215,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">New ticket created by customer.</Data>
         <Data Key="type_id">1</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#50B5FF</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -216,6 +227,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Ticket is closed successful.</Data>
         <Data Key="type_id">3</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#3DD598</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -227,6 +239,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Ticket is closed unsuccessful.</Data>
         <Data Key="type_id">3</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FC5A5A</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -238,6 +251,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Open tickets.</Data>
         <Data Key="type_id">2</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FFC542</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -249,6 +263,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Customer removed ticket.</Data>
         <Data Key="type_id">6</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#8D8D9B</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -260,6 +275,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Ticket is pending for agent reminder.</Data>
         <Data Key="type_id">4</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FF8A25</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -271,6 +287,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Ticket is pending for automatic close.</Data>
         <Data Key="type_id">5</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FF8A25</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -282,6 +299,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Ticket is pending for automatic close.</Data>
         <Data Key="type_id">5</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FF8A25</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -293,6 +311,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">State for merged tickets.</Data>
         <Data Key="type_id">7</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FF8A25</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -677,6 +696,7 @@ Your Znuny Team
         <Data Key="id" Type="AutoIncrement">1</Data>
         <Data Key="name" Type="Quote" Translatable="1">1 very low</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#03c4f0</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -686,6 +706,7 @@ Your Znuny Team
         <Data Key="id" Type="AutoIncrement">2</Data>
         <Data Key="name" Type="Quote" Translatable="1">2 low</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#83bfc8</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -695,6 +716,7 @@ Your Znuny Team
         <Data Key="id" Type="AutoIncrement">3</Data>
         <Data Key="name" Type="Quote" Translatable="1">3 normal</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#cdcdcd</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -704,6 +726,7 @@ Your Znuny Team
         <Data Key="id" Type="AutoIncrement">4</Data>
         <Data Key="name" Type="Quote" Translatable="1">4 high</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#ffaaaa</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -713,6 +736,7 @@ Your Znuny Team
         <Data Key="id" Type="AutoIncrement">5</Data>
         <Data Key="name" Type="Quote" Translatable="1">5 very high</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#ff505e</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -3959,11 +3983,14 @@ Hibaüzenet:
         <Data Key="content_type" Type="Quote">text/plain</Data>
         <Data Key="language" Type="Quote">en</Data>
         <Data Key="subject" Type="Quote"><![CDATA[Mention in ticket: <OTRS_TICKET_Title>]]></Data>
-        <Data Key="text" Type="Quote"><![CDATA[You have been mentioned in ticket <OTRS_TICKET_NUMBER>
+        <Data Key="text" Type="Quote"><![CDATA[Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
 
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
-            ]]></Data>
+
+-- <OTRS_CONFIG_NotificationSenderName>]]></Data>
     </Insert>
     <Insert Table="notification_event_message">
         <Data Key="id" Type="AutoIncrement">113</Data>
@@ -3971,11 +3998,14 @@ Hibaüzenet:
         <Data Key="content_type" Type="Quote">text/plain</Data>
         <Data Key="language" Type="Quote">de</Data>
         <Data Key="subject" Type="Quote"><![CDATA[Erwähnung in Ticket: <OTRS_TICKET_Title>]]></Data>
-        <Data Key="text" Type="Quote"><![CDATA[Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>
+        <Data Key="text" Type="Quote"><![CDATA[Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+
+Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
 
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
-            ]]></Data>
+
+-- <OTRS_CONFIG_NotificationSenderName>]]></Data>
     </Insert>
 
     <!-- Internal dynamic fields for ProcessManagement -->

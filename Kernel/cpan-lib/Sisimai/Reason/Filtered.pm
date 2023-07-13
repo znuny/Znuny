@@ -21,6 +21,7 @@ sub match {
         'has restricted sms e-mail',    # AT&T
         'is not accepting any mail',
         'message rejected due to user rules',
+        'not found recipient account',
         'refused due to recipient preferences', # Facebook
         'resolver.rst.notauthorized',   # Microsoft Exchange
         'this account is protected by',
@@ -49,15 +50,18 @@ sub true {
 
     require Sisimai::Reason::UserUnknown;
     my $alterclass = 'Sisimai::Reason::UserUnknown';
-    my $commandtxt = $argvs->smtpcommand // '';
     my $diagnostic = lc $argvs->diagnosticcode // '';
 
     if( $tempreason eq 'filtered' ) {
         # Delivery status code points "filtered".
-        return 1 if( $alterclass->match($diagnostic) || __PACKAGE__->match($diagnostic) );
+        return 1 if $alterclass->match($diagnostic);
+        return 1 if __PACKAGE__->match($diagnostic);
 
-    } elsif( $commandtxt ne 'RCPT' && $commandtxt ne 'MAIL' ) {
-        # Check the value of Diagnostic-Code and the last SMTP command
+    } else {
+        # The value of "reason" isn't "filtered" when the value of "smtpcommand" is an SMTP command
+        # to be sent before the SMTP DATA command because all the MTAs read the headers and the
+        # entire message body after the DATA command.
+        return 0 if $argvs->{'smtpcommand'} =~ /\A(?:CONN|EHLO|HELO|MAIL|RCPT)\z/;
         return 1 if __PACKAGE__->match($diagnostic);
         return 1 if $alterclass->match($diagnostic);
     }
@@ -123,7 +127,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018,2021 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2018,2021,2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

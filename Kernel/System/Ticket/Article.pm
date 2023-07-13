@@ -811,7 +811,7 @@ Returns:
         1 => 2, # ArticleID => TicketID
         3 => 4,
         5 => 6,
-        ...
+        # ...
     );
 
 =cut
@@ -949,7 +949,7 @@ Checks the given search parameters for used article backend fields.
 
     my $Needed = $ArticleObject->ArticleSearchIndexSQLJoinNeeded(
         SearchParams => {
-            ...
+            # ...
             ConditionInline         => 1,
             ContentSearchPrefix     => '*',
             ContentSearchSuffix     => '*',
@@ -959,9 +959,7 @@ Checks the given search parameters for used article backend fields.
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
-            ...
+            # ...
         },
     );
 
@@ -983,7 +981,7 @@ Generates SQL string extensions, including the needed table joins for the articl
 
     my $SQLExtenion = $ArticleObject->ArticleSearchIndexSQLJoin(
         SearchParams => {
-            ...
+            # ...
             ConditionInline         => 1,
             ContentSearchPrefix     => '*',
             ContentSearchSuffix     => '*',
@@ -993,9 +991,7 @@ Generates SQL string extensions, including the needed table joins for the articl
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
-            ...
+            # ...
         },
     );
 
@@ -1018,7 +1014,7 @@ SQL queries to the database.
 
     my $SQLExtenion = $ArticleObject->ArticleSearchIndexWhereCondition(
         SearchParams => {
-            ...
+            # ...
             ConditionInline         => 1,
             ContentSearchPrefix     => '*',
             ContentSearchSuffix     => '*',
@@ -1028,9 +1024,7 @@ SQL queries to the database.
             MIMEBase_Subject        => '%VIRUS 32%',
             MIMEBase_Body           => '%VIRUS 32%',
             MIMEBase_AttachmentName => '%anyfile.txt%',
-            Chat_ChatterName        => '%Some Chatter Name%',
-            Chat_MessageText        => '%Some Message Text%'
-            ...
+            # ...
         },
     );
 
@@ -1102,7 +1096,7 @@ Returns:
             Label      => 'Subject',
             Type       => 'Text',
         },
-        ...
+        # ...
     );
 
 =cut
