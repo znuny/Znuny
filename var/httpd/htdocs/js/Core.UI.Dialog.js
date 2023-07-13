@@ -481,8 +481,6 @@ Core.UI.Dialog = (function (TargetNS) {
 
         // add resize css attribute
         $('.Dialog:visible .Content').css('resize', 'both');
-        $('.Dialog:visible .Content').css('max-height', 'fit-content');
-        $('.Dialog:visible .Content .InnerContent').css('max-height', 'fit-content');
 
         // Adjust dialog position on mobile devices
         if (FullsizeMode) {
