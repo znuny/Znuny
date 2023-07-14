@@ -337,7 +337,11 @@
                         <input type="hidden" name="[% Data.Type | html %]" value="1"/>
                         <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
                         <input type="hidden" name="Version" value="[% Data.Version | html %]"/>
-                        <button class="Primary CallForAction" type="submit" value="[% Translate("Continue") | html %]"><span>[% Translate("Continue") | html %]</span></button>
+
+
+                        <button class="Primary CallForAction [% IF Data.PackageRequired || Data.ModuleRequired %] Disabled[% END %]" type="submit" value="[% Translate("Continue") | html %]"[% IF Data.PackageRequired || Data.ModuleRequired %] disabled[% END %]>
+                            <span>[% Translate("Continue") | html %]</span>
+                        </button>
 [% RenderBlockStart("IntroCancel") %]
                         [% Translate("or") | html %]
                         <a href="[% Env("Baselink") %]Action=[% Env("Action") %]"><span>[% Translate("Cancel") | html %]</span></a>

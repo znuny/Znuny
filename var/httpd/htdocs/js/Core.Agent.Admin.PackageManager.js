@@ -155,7 +155,7 @@ Core.Agent.Admin = Core.Agent.Admin || {};
       * @memberof Core.Agent.Admin.PackageManager
       * @function
       * @description
-      *      Tis function activate all package actions.
+      *      This function activate all package actions.
       */
     TargetNS.EnablePackageActions = function() {
         $('.PackageAction').removeClass('Disabled').off('click');
