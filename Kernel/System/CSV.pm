@@ -229,8 +229,8 @@ Returns an array with parsed csv data.
 
     my $RefArray = $CSVObject->CSV2Array(
         String    => $CSVString,
-        Separator => ';', # optional separator (default is ;)
-        Quote     => '"', # optional quote (default is ")
+        Separator => ';',           # optional separator (default is ;)
+        Quote     => '"',           # optional quote (default is ")
     );
 
 =cut

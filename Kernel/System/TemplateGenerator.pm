@@ -272,8 +272,8 @@ sub Signature {
 generate sender address (FROM string) for emails
 
     my $Sender = $TemplateGeneratorObject->Sender(
-        QueueID    => 123,
-        UserID     => 123,
+        QueueID => 123,
+        UserID  => 123,
     );
 
 returns:
@@ -366,7 +366,7 @@ generate template
 
 Returns:
 
-    $Template =>  'Some text';
+    $Template => 'Some text';
 
 =cut
 
@@ -491,10 +491,10 @@ sub Template {
 generate internal or external notes
 
     my $GenericAgentArticle = $TemplateGeneratorObject->GenericAgentArticle(
-        Notification    => $NotificationDataHashRef,
-        TicketID        => 123,
-        UserID          => 123,
-        Data            => $ArticleHashRef,             # Optional
+        Notification => $NotificationDataHashRef,
+        TicketID     => 123,
+        UserID       => 123,
+        Data         => $ArticleHashRef,             # Optional
     );
 
 =cut

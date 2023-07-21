@@ -641,10 +641,10 @@ get Follow-Up Option list
 Return:
 
     %FollowUpOptionList = (
-              '1' => 'possible',
-              '3' => 'new ticket',
-              '2' => 'reject'
-            )
+        '1' => 'possible',
+        '3' => 'new ticket',
+        '2' => 'reject',
+    )
 
 =cut
 
@@ -931,7 +931,7 @@ sub QueueAdd {
 get queue attributes
 
     my %Queue = $QueueObject->QueueGet(
-        ID    => 123,
+        ID => 123,
     );
 
     my %Queue = $QueueObject->QueueGet(
@@ -1375,7 +1375,7 @@ return 1 if another queue with this name already exists
 
     $Exist = $QueueObject->NameExistsCheck(
         Name => 'Some::Queue',
-        ID => 1, # optional
+        ID   => 1,              # optional
     );
 
 =cut

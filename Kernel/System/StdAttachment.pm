@@ -420,15 +420,15 @@ sub StdAttachmentLookup {
 get list of standard attachments - return a hash (ID => Name (Filename))
 
     my %List = $StdAttachmentObject->StdAttachmentList(
-        Valid => 0,  # optional, defaults to 1
+        Valid => 0,     # optional, defaults to 1
     );
 
 returns:
 
-        %List = (
-          '1' => 'Some Name' ( Filname ),
-          '2' => 'Some Name' ( Filname ),
-          '3' => 'Some Name' ( Filname ),
+    %List = (
+        '1' => 'Some Name',
+        '2' => 'Some Name',
+        '3' => 'Some Name',
     );
 
 =cut
