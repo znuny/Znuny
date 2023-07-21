@@ -157,9 +157,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     cursor: pointer;
 }
 
-#Navigation > ul > li > ul li:last-child {
-}
-
 #Navigation > ul > li > ul a:hover,
 #Navigation > ul > li > ul a:focus,
 #Navigation > ul > li > ul a.SubSelected {
@@ -180,21 +177,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     white-space: normal;
 }
 
-#Navigation li:active {
-}
-
 #Navigation .Selected + li {
     margin-left: -1px;
 }
 
 #Navigation .Selected + li a {
     padding-left: 10px;
-}
-
-#Navigation .Selected,
-#Navigation .Selected:active,
-#Navigation > ul > li:hover {
-
 }
 
 #Navigation > ul > li > a::after {
