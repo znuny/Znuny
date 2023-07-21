@@ -60,10 +60,10 @@ sub new {
 collect system data
 
     my %Result = $SupportDataCollectorObject->Collect(
-        UseCache   => 1,    # (optional) to get data from cache if any
-        WebTimeout => 60,   # (optional)
-        Debug      => 1,    # (optional)
-        Hostname   => 'my.test.host:8080' # (optional, for testing purposes)
+        UseCache   => 1,                    # (optional) to get data from cache if any
+        WebTimeout => 60,                   # (optional)
+        Debug      => 1,                    # (optional)
+        Hostname   => 'my.test.host:8080'   # (optional, for testing purposes)
     );
 
     returns in case of error

@@ -106,7 +106,7 @@ Returns:
         Frontend => 'Agent',
         Icon     => 'fa fa-table',
         PopUp    => 0,                  # 0 or 1
-        Params => {
+        Params   => {
             Title   => 'Raw',
         },
         FrontendIcon => 'fa fa-user',
@@ -633,7 +633,7 @@ returns all popup actions.
 Returns:
 
     my %PopUpActions = (
-        'AgentTicketMerge'     => 'TicketAction',
+        'AgentTicketMerge'    => 'TicketAction',
         'AgentTicketCustomer' => 'TicketAction',
         'AgentTicketPriority' => 'TicketAction',
         'AgentTicketNote'     => 'TicketAction',
