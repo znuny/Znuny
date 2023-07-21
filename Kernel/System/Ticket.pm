@@ -180,8 +180,8 @@ Get the complete ticket history
 Get current ticket attributes
 
     my %Ticket = $TicketObject->TicketGet(
-        TicketID      => $TicketID,
-        UserID        => 1,
+        TicketID => $TicketID,
+        UserID   => 1,
     );
 
 Delete the ticket
@@ -1736,7 +1736,6 @@ Returns:
             Disposition        => 'attachment',
             FileID             => 2,
         },
-
         # ...
     ];
 
