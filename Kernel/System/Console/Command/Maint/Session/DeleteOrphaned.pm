@@ -35,7 +35,7 @@ sub Run {
 
     my @OrphanedSessions = $SessionObject->GetOrphanedSessionIDs();
 
-    for my $SessionID ( @OrphanedSessions ) {
+    for my $SessionID (@OrphanedSessions) {
         my $Success = $SessionObject->RemoveSessionID(
             SessionID => $SessionID,
         );
