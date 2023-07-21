@@ -1,4 +1,5 @@
 # 6.5.4 2023-??-??
+ - 2023-07-21 Fixed double encoding for dynamic field values in linked-tickets-table. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#300](https://github.com/znuny/Znuny/pull/300)
  - 2023-07-11 Fixed mentions for deleted tickets. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#458](https://github.com/znuny/Znuny/pull/458)
  - 2023-07-10 Added console command to import dynamic fields and dynamic field screens configuration.
  - 2023-07-07 Fixed email address shown in user's avatar preferences when editing the preferences of another user (not the own user).
