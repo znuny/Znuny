@@ -3025,6 +3025,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'ไม่พร้อมใช้งาน JavaScript',
@@ -8901,7 +8902,6 @@ Thanks for your help!
         'Search Tickets.' => 'ค้นหาตั๋ว',
         'Search User' => 'ค้นหาผู้ใช้',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'วันที่สองของ',
         'Second Queue' => 'คิวที่สอง',
         'Seconds' => '',

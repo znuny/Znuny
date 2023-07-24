@@ -113,7 +113,7 @@
 [% RenderBlockStart("ToolBarSearchProfile") %]
                     <div class="search-dropdown-bottom">
                         <div class="title">
-                            <label>Search profiles</label>
+                            <label>[% Translate('SearchTemplate') | html %]</label>
                         </div>
                         <div class="search-profiles-list">
                             [% Data.Link %]

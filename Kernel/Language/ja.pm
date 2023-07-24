@@ -3027,6 +3027,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScriptが利用できません。',
@@ -8909,7 +8910,6 @@ Thanks for your help!
         'Search Tickets.' => 'チケットを検索する。',
         'Search User' => 'ユーザを検索します。',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'セカンド・クリスマスデー',
         'Second Queue' => '第二キュー',
         'Seconds' => '',

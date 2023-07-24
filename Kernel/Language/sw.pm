@@ -3025,6 +3025,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript haipatikani',
@@ -8890,7 +8891,6 @@ Thanks for your help!
         'Search Tickets.' => '',
         'Search User' => 'Tafuta mtumiaji',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'Siku ya pili ya krisimasi',
         'Second Queue' => '',
         'Seconds' => '',

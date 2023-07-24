@@ -3029,6 +3029,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript没有启用',
@@ -8901,7 +8902,6 @@ Thanks for your help!
         'Search Tickets.' => '搜索工单。',
         'Search User' => '搜索用户',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => '圣诞节的第二天',
         'Second Queue' => '第二队列',
         'Seconds' => '',
