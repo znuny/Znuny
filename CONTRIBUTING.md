@@ -21,7 +21,7 @@ Have fun!
   * [Request community support](#request-support)
   * [Open a Feature Request](#request-a-feature)
   * [Join the Project Team](#join-the-project-team)
-
+  * [Translate the Software](#translate-the-software)
 
 
 ## How do we:
@@ -129,3 +129,9 @@ Just let us know and we can discuss details via Discord.
 We need help for:
 - Issue tracking and handling / labeling issues
 - Code reviews
+
+## Translate the software
+
+To translate missing or incorrect strings, please feel free to create an account in our [Weblate](https://translations.znuny.org/projects/znuny/znuny/). Choose your language, and search for the string to be modified. Provide a suggestion. You can also do this without registering an account, if you desire not to be named.
+
+We look forward to you!
