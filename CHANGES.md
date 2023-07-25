@@ -3,6 +3,7 @@
  - 2023-07-24 Added system address check for customer email address given in AgentTicketPhone.
  - 2023-07-21 Fixed double encoding for dynamic field values in linked-tickets-table. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#300](https://github.com/znuny/Znuny/pull/300)
  - 2023-07-21 Clear orphaned session records. Thanks to Markus Raulf (@markusraulf). [PR#368](https://github.com/znuny/Znuny/pull/368)
+ - 2023-07-13 Fixed calendar appointment creation: Missing scrollbar at low resolution / high zoom.
 
 # 7.0.8 2023-07-12
  - 2023-07-11 Fixed mentions for deleted tickets. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#458](https://github.com/znuny/Znuny/pull/458)
