@@ -1,4 +1,4 @@
-# 7.0.9 2023-??-??
+# 7.0.9 2023-07-26
  - 2023-07-25 Fixed search limitations for AgentTicketWatchView. [#372](https://github.com/znuny/Znuny/issues/372)
  - 2023-07-24 Added system address check for customer email address given in AgentTicketPhone.
  - 2023-07-21 Fixed double encoding for dynamic field values in linked-tickets-table. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#300](https://github.com/znuny/Znuny/pull/300)
