@@ -1,7 +1,9 @@
 # 6.5.4 2023-??-??
  - 2023-07-25 Fixed search limitations for AgentTicketWatchView. [#372](https://github.com/znuny/Znuny/issues/372)
+ - 2023-07-24 Fixed removal of all permissions of a user if LDAP auth sync is being executed without any configured group or role definition.
  - 2023-07-21 Fixed double encoding for dynamic field values in linked-tickets-table. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#300](https://github.com/znuny/Znuny/pull/300)
  - 2023-07-20 Added system address check for customer email address given in AgentTicketPhone.
+ - 2023-07-13 Fixed calendar appointment creation: Missing scrollbar at low resolution / high zoom.
  - 2023-07-11 Fixed mentions for deleted tickets. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#458](https://github.com/znuny/Znuny/pull/458)
  - 2023-07-10 Added console command to import dynamic fields and dynamic field screens configuration.
  - 2023-07-07 Fixed email address shown in user's avatar preferences when editing the preferences of another user (not the own user).
