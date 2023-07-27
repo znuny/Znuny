@@ -3022,6 +3022,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '자바스트립트를 사용할 수 없습니다.',
@@ -8895,7 +8896,6 @@ Thanks for your help!
         'Search Tickets.' => '티켓 검색.',
         'Search User' => '사용자 검색',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => '두 번째 크리스마스',
         'Second Queue' => '두 번째 대기열',
         'Seconds' => '',

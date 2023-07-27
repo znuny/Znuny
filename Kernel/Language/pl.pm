@@ -3027,6 +3027,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => 'Ostatnio przeglądane',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaSript nie jest dostępny',
@@ -8899,7 +8900,6 @@ Twój Zespół Helpdesk.
         'Search Tickets.' => 'Szukaj zgłoszeń.',
         'Search User' => 'Szukaj użytkownika',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'Boże Narodzenie (drugi dzień)',
         'Second Queue' => 'Druga kolejka',
         'Seconds' => '',

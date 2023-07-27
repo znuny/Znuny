@@ -310,7 +310,7 @@ sub Run {
             %{ $Filters{$Filter}->{Search} },
             %ColumnFilter,
             Result => 'ARRAY',
-            Limit  => 1_000,
+            Limit  => $Limit,
         );
     }
 
@@ -339,7 +339,7 @@ sub Run {
             %{ $Filters{All}->{Search} },
             %ColumnFilter,
             Result => 'ARRAY',
-            Limit  => 1_000,
+            Limit  => $Limit,
         );
 
         my %ViewableTicketsNotNew;

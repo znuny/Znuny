@@ -3027,6 +3027,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => 'Últimas Visualizações',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript não habilitado ou não é suportado.',
@@ -8900,7 +8901,6 @@ Obrigado pela ajuda!
         'Search Tickets.' => 'Buscar Chamados.',
         'Search User' => 'Procurar Atendente',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'Segundo dia de Natal',
         'Second Queue' => 'Segunda Fila',
         'Seconds' => '',

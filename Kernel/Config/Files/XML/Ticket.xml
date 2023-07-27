@@ -1775,7 +1775,7 @@
         <Description Translatable="1">Maximum length (in characters) of the dynamic field in the sidebar of the ticket zoom view.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">18</Item>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">50</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::DynamicFieldsZoomMaxSizeArticle" Required="1" Valid="1">

@@ -473,7 +473,7 @@ sub StandardTemplateList {
 
         $Exist = $StandardTemplateObject->NameExistsCheck(
             Name => 'Some::Template',
-            ID => 1, # optional
+            ID   => 1,                  # optional
         );
 
 =cut

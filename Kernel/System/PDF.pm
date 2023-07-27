@@ -619,12 +619,12 @@ and an empty list is returned in list context.
     $CellData = [
         [
             {
-                Content => "Cell 1 (Row 1, Column 1)",  # (optional)
-                Font => 'Monospaced',                   # (optional) (see DocumentNew())
-                FontSize => 13,                         # (optional)
-                FontColor => '#00FF00',                 # (optional)
-                Align => 'center',                      # (optional)
-                Lead => 7,                              # (optional)
+                Content         => "Cell 1 (Row 1, Column 1)",  # (optional)
+                Font            => 'Monospaced',                   # (optional) (see DocumentNew())
+                FontSize        => 13,                         # (optional)
+                FontColor       => '#00FF00',                 # (optional)
+                Align           => 'center',                      # (optional)
+                Lead            => 7,                              # (optional)
                 BackgroundColor => '#101010',           # (optional)
             },
             {

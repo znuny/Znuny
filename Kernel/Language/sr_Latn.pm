@@ -3028,6 +3028,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript nije dostupan.',
@@ -8901,7 +8902,6 @@ Vaša tehnička podrška
         'Search Tickets.' => 'Pretraži tikete.',
         'Search User' => 'Traži korisnika',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'Drugi dan Božića',
         'Second Queue' => 'Drugi Red',
         'Seconds' => '',

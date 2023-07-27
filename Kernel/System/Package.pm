@@ -315,7 +315,7 @@ sub RepositoryGet {
 add a package to local repository
 
     $PackageObject->RepositoryAdd(
-        String    => $FileString,
+        String => $FileString,
     );
 
 =cut
@@ -452,8 +452,8 @@ sub RepositoryRemove {
 install a package
 
     $PackageObject->PackageInstall(
-        String    => $FileString,
-        Force     => 1,             # optional 1 or 0, for to install package even if validation fails
+        String => $FileString,
+        Force  => 1,             # optional 1 or 0, for to install package even if validation fails
     );
 
 =cut
@@ -1529,10 +1529,10 @@ sub ConfiguredRepositoryListGet {
 Returns a list of available packages for the given source repository.
 
     my @List = $PackageObject->RepositoryPackageListGet(
-        Source             => 'Example repository 1', # the value of key 'Name' in item of SysConfig option Package::RepositoryList or a direct download URL
+        Source             => 'Example repository 1',   # the value of key 'Name' in item of SysConfig option Package::RepositoryList or a direct download URL
         Lang               => 'en',
-        Cache              => 0,    # (optional) use cached data
-        IncludeSameVersion => 1,    # (optional) also get packages already installed and with the same version
+        Cache              => 0,                        # (optional) use cached data
+        IncludeSameVersion => 1,                        # (optional) also get packages already installed and with the same version
     );
 
 =cut
@@ -1833,7 +1833,7 @@ check if package (files) is deployed, returns true if it's ok
     $PackageObject->DeployCheck(
         Name    => 'Application A',
         Version => '1.0',
-        Log     => 1, # Default: 1
+        Log     => 1,       # Default: 1
     );
 
 =cut
@@ -2599,7 +2599,7 @@ sub PackageInstallDefaultFiles {
 generates a MD5 Sum for all files in a given package
 
     my $MD5Sum = $PackageObject->PackageFileGetMD5Sum(
-        Name => 'Package Name',
+        Name    => 'Package Name',
         Version => 123.0,
     );
 
@@ -2607,7 +2607,7 @@ returns:
 
     $MD5SumLookup = {
         'Direcoty/File1' => 'f3f30bd59afadf542770d43edb280489',
-        'Direcoty/File2' => 'ccb8a0b86adf125a36392e388eb96778'
+        'Direcoty/File2' => 'ccb8a0b86adf125a36392e388eb96778',
     };
 
 =cut
@@ -2681,15 +2681,15 @@ sub PackageFileGetMD5Sum {
 Compare a framework array with the current framework.
 
     my %CheckOk = $PackageObject->AnalyzePackageFrameworkRequirements(
-        Framework       => $Structure{Framework}, # [ { 'Content' => '4.0.x', 'Minimum' => '4.0.4'} ]
-        NoLog           => 1, # optional
+        Framework => $Structure{Framework},     # [ { 'Content' => '4.0.x', 'Minimum' => '4.0.4'} ]
+        NoLog     => 1, # optional
     );
 
     %CheckOK = (
-        Success                     => 1,           # 1 || 0
-        RequiredFramework           => '5.0.x',
-        RequiredFrameworkMinimum    => '5.0.10',
-        RequiredFrameworkMaximum    => '5.0.16',
+        Success                  => 1,           # 1 || 0
+        RequiredFramework        => '5.0.x',
+        RequiredFrameworkMinimum => '5.0.10',
+        RequiredFrameworkMaximum => '5.0.16',
     );
 
 =cut
@@ -4811,12 +4811,12 @@ Returns:
     %OnlinePackages = (
         PackageList => [
             {
-                Name => 'Test',
-                Version => '6.0.20',
-                File => 'Test-6.0.20.opm',
-                ChangeLog => 'InitialRelease',
+                Name        => 'Test',
+                Version     => '6.0.20',
+                File        => 'Test-6.0.20.opm',
+                ChangeLog   => 'InitialRelease',
                 Description => 'Test package.',
-                Framework => [
+                Framework   => [
                     {
                         Content => '6.0.x',
                         Minimum => '6.0.2',
@@ -4831,7 +4831,7 @@ Returns:
                         # ... ,
                     },
                 ],
-                URL => 'http://otrs.org/',
+                URL    => 'http://otrs.org/',
                 Vendor => 'OTRS AG',
             },
             # ...

@@ -276,13 +276,13 @@ sub AreEmailAddressesValid {
 clean a given string.
 
     my $StringRef = $CheckItemObject->StringClean(
-        StringRef               => \'String',
-        TrimLeft                => 0,  # (optional) default 1
-        TrimRight               => 0,  # (optional) default 1
-        RemoveAllNewlines       => 1,  # (optional) default 0
-        RemoveAllTabs           => 1,  # (optional) default 0
-        RemoveAllSpaces         => 1,  # (optional) default 0
-        ReplaceWithWhiteSpace   => 1,  # (optional) default 0
+        StringRef             => \'String',
+        TrimLeft              => 0,  # (optional) default 1
+        TrimRight             => 0,  # (optional) default 1
+        RemoveAllNewlines     => 1,  # (optional) default 0
+        RemoveAllTabs         => 1,  # (optional) default 0
+        RemoveAllSpaces       => 1,  # (optional) default 0
+        ReplaceWithWhiteSpace => 1,  # (optional) default 0
     );
 
 =cut
