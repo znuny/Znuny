@@ -3023,6 +3023,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript не доступний',
@@ -8885,7 +8886,6 @@ Thanks for your help!
         'Search Tickets.' => '',
         'Search User' => '',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'Другий день Різдва',
         'Second Queue' => '',
         'Seconds' => '',

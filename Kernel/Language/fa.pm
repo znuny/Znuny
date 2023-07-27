@@ -3028,6 +3028,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'جاوا اسکریپت در دسترس نیست',
@@ -8901,7 +8902,6 @@ Thanks for your help!
         'Search Tickets.' => 'درخواست های جستجو.',
         'Search User' => 'جستجوی کاربر',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'روز دوم کریسمس',
         'Second Queue' => 'صف دوم',
         'Seconds' => '',

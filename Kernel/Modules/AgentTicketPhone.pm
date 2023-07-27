@@ -1162,6 +1162,13 @@ sub Run {
                 $Error{ErrorType}   = $CheckItemObject->CheckErrorType() . 'ServerErrorMsg';
                 $Error{FromInvalid} = ' ServerError';
             }
+
+            my $IsLocal = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressIsLocalAddress(
+                Address => $Email->address()
+            );
+            if ($IsLocal) {
+                $Error{'FromIsLocalAddress'} = 'ServerError';
+            }
         }
 
         if ( !$ExpandCustomerName ) {
@@ -1221,6 +1228,13 @@ sub Run {
         }
 
         if (%Error) {
+
+            if ( $Error{FromIsLocalAddress} ) {
+                $LayoutObject->Block(
+                    Name => 'FromIsLocalAddressServerErrorMsg',
+                    Data => \%GetParam,
+                );
+            }
 
             # get and format default subject and body
             my $Subject = $LayoutObject->Output(
