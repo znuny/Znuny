@@ -75,8 +75,8 @@ my @RemainingSessionIDs = $SessionObject->GetAllSessionIDs();
 
 $Self->Is(
     scalar @RemainingSessionIDs,
-    2,
-    "Ok, only one session was deleted, two remaining.",
+    scalar(@SessionIDs) - 1,
+    "Ok, only one session was deleted.",
 );
 
 # Check if orphaned session is removed.
