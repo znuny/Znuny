@@ -1,3 +1,7 @@
+# 7.0.10 2023-??-??
+ - 2023-07-27 Fixed remove of mention and unnecessary errors in the log. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#295](https://github.com/znuny/Znuny/pull/295)
+ - 2023-07-27 Sector Nord AG: Fixed responsible user id during appointment ticket creation. Thanks to Marc Pahnke (@MarcPahnke), Sector Nord AG. [#325](https://github.com/znuny/Znuny/pull/325)
+
 # 7.0.9 2023-07-26
  - 2023-07-26 Fixed removal of all permissions of a user if LDAP auth sync is being executed without any configured group or role definition.
  - 2023-07-25 Fixed search limitations for AgentTicketWatchView. [#372](https://github.com/znuny/Znuny/issues/372)
