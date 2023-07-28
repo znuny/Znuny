@@ -56,7 +56,6 @@ The following persons contributed to Znuny:
 * Manuel Hecht <manuel.hecht@otrs.com>
 * Marc Bonsels <marc.bonsels@otrs.com>
 * Marc Nilius <marc.nilius@otrs.com>
-* MarcPahnke <89537707+MarcPahnke@users.noreply.github.com>
 * Marco Buchholz <marco.buchholz@otrs.com>
 * Marco Ferrante <marco@csita.unige.it>
 * Markus Esche <markus.esche@otrs.com>
