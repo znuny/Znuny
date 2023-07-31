@@ -43,25 +43,27 @@
             [% INCLUDE "FormElements/DraftNotifications.tt" %]
             <fieldset class="TableLike FixedLabel card-item-wrapper">
                 <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
-                    <h2 class="card-title">[% Translate("Ticket Data") | html %]</h2>
                     <div>
-                        <label for="StateID">[% Translate("Next ticket state") | html %]:</label>
-                        <div class="Field">
-                            [% Data.NextStatesStrg %]
+                        <h2 class="card-title">[% Translate("Ticket Data") | html %]</h2>
+                        <div>
+                            <label for="StateID">[% Translate("Next ticket state") | html %]:</label>
+                            <div class="Field">
+                                [% Data.NextStatesStrg %]
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <label>[% Translate("Pending date") | html %]:</label>
-                    <div class="Field">
-                        <div class="select-field-wrapper">[% Data.PendingDateString %]</div>
-                        <div id="DayServerError" class="TooltipErrorMessage">
-                            <p>[% Translate("Date Invalid!") | html %]</p>
+                    <div>
+                        <label>[% Translate("Pending date") | html %]:</label>
+                        <div class="Field">
+                            <div class="select-field-wrapper">[% Data.PendingDateString %]</div>
+                            <div id="DayServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("Date Invalid!") | html %]</p>
+                            </div>
+                            <div id="HourServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("Date Invalid!") | html %]</p>
+                            </div>
+                            <p class="FieldExplanation">[% Translate("For all pending* states.") | html %]</p>
                         </div>
-                        <div id="HourServerError" class="TooltipErrorMessage">
-                            <p>[% Translate("Date Invalid!") | html %]</p>
-                        </div>
-                        <p class="FieldExplanation">[% Translate("For all pending* states.") | html %]</p>
                     </div>
                 </div>
                 [% IF !TicketFrontendConfig.DynamicField.empty %]

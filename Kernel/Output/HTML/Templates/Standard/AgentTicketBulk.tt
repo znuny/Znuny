@@ -145,7 +145,7 @@
                         <div class="field-wrapper">
                             <label>[% Translate("Pending date") | html %]</label>
                             <div class="Field">
-                                [% Data.DateString %]
+                                <div class="select-field-wrapper">[% Data.DateString %]</div>
                                 <div id="DayServerError" class="TooltipErrorMessage">
                                     <p>[% Translate("Date invalid!") | html %]</p>
                                 </div>
