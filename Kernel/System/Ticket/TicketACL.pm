@@ -204,7 +204,7 @@ sub TicketAcl {
             else {
 
                 # a scalar, we hope
-                next MODULENAME if !$Module->{ReturnSubType} eq $Param{ReturnSubType};
+                next MODULENAME if $Module->{ReturnSubType} ne $Param{ReturnSubType};
             }
         }
 
