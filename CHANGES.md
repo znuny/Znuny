@@ -1,4 +1,5 @@
 # 7.0.10 2023-??-??
+ - 2023-07-31 Fixed Draft Issue - Using the draft fails if there are any dynamic fields configured as mandatory for the screen where the draft is used.
  - 2023-07-27 Fixed remove of mention and unnecessary errors in the log. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#295](https://github.com/znuny/Znuny/pull/295)
  - 2023-07-27 Sector Nord AG: Fixed responsible user id during appointment ticket creation. Thanks to Marc Pahnke (@MarcPahnke), Sector Nord AG. [#325](https://github.com/znuny/Znuny/pull/325)
  - 2023-07-26 Fixed encoding problem with URL parameters in AdminPostMasterFilter and AdminGenericAgent.

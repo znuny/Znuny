@@ -837,22 +837,25 @@ sub Run {
                 }
             }
 
-            my $ValidationResult = $DynamicFieldBackendObject->EditFieldValueValidate(
-                DynamicFieldConfig   => $DynamicFieldConfig,
-                PossibleValuesFilter => $PossibleValuesFilter,
-                ParamObject          => $ParamObject,
-                Mandatory =>
-                    $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
-            );
-
-            if ( !IsHashRefWithData($ValidationResult) ) {
-                return $LayoutObject->ErrorScreen(
-                    Message => $LayoutObject->{LanguageObject}->Translate(
-                        'Could not perform validation on field %s!',
-                        $DynamicFieldConfig->{Label},
-                    ),
-                    Comment => Translatable('Please contact the administrator.'),
+            my $ValidationResult;
+            if ( $Self->{LoadedFormDraftID} && $Self->{Subaction} && $Self->{Subaction} ne '' ) {
+                $ValidationResult = $DynamicFieldBackendObject->EditFieldValueValidate(
+                    DynamicFieldConfig   => $DynamicFieldConfig,
+                    PossibleValuesFilter => $PossibleValuesFilter,
+                    ParamObject          => $ParamObject,
+                    Mandatory =>
+                        $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 );
+
+                if ( !IsHashRefWithData($ValidationResult) ) {
+                    return $LayoutObject->ErrorScreen(
+                        Message => $LayoutObject->{LanguageObject}->Translate(
+                            'Could not perform validation on field %s!',
+                            $DynamicFieldConfig->{Label},
+                        ),
+                        Comment => Translatable('Please contact the administrator.'),
+                    );
+                }
             }
 
             # propagate validation error to the Error variable to be detected by the frontend
