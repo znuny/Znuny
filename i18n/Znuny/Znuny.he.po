@@ -23466,7 +23466,7 @@ msgstr "חפש משתמש"
 msgid "Search tickets."
 msgstr ""
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
 msgid "SearchTemplate"
 msgstr ""
 

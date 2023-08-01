@@ -1,3 +1,16 @@
+# 7.0.10 2023-??-??
+ - 2023-07-27 Fixed remove of mention and unnecessary errors in the log. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#295](https://github.com/znuny/Znuny/pull/295)
+ - 2023-07-27 Sector Nord AG: Fixed responsible user id during appointment ticket creation. Thanks to Marc Pahnke (@MarcPahnke), Sector Nord AG. [#325](https://github.com/znuny/Znuny/pull/325)
+ - 2023-07-26 Fixed encoding problem with URL parameters in AdminPostMasterFilter and AdminGenericAgent.
+
+# 7.0.9 2023-07-26
+ - 2023-07-26 Fixed removal of all permissions of a user if LDAP auth sync is being executed without any configured group or role definition.
+ - 2023-07-25 Fixed search limitations for AgentTicketWatchView. [#372](https://github.com/znuny/Znuny/issues/372)
+ - 2023-07-24 Added system address check for customer email address given in AgentTicketPhone.
+ - 2023-07-21 Fixed double encoding for dynamic field values in linked-tickets-table. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#300](https://github.com/znuny/Znuny/pull/300)
+ - 2023-07-21 Clear orphaned session records. Thanks to Markus Raulf (@markusraulf). [PR#368](https://github.com/znuny/Znuny/pull/368)
+ - 2023-07-13 Fixed calendar appointment creation: Missing scrollbar at low resolution / high zoom.
+
 # 7.0.8 2023-07-12
  - 2023-07-11 Fixed mentions for deleted tickets. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#458](https://github.com/znuny/Znuny/pull/458)
  - 2023-07-10 Added console command to import dynamic fields and dynamic field screens configuration.

@@ -2968,7 +2968,7 @@ msgstr "Wert"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingSimple.tt
 msgid "new value"
-msgstr ""
+msgstr "Neuer Wert"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingSimple.tt
 msgid "Remove value mapping"
@@ -5004,7 +5004,7 @@ msgstr "Zugewiesene Aktivitäts-Dialoge"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "Filter Assigned Activity Dialogs"
-msgstr ""
+msgstr "Zugewiesene Aktivitäts-Dialoge filtern"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "Please note that changing this activity dialog will affect the following activities"
@@ -5080,7 +5080,7 @@ msgstr "Zugewiesene Felder"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid " Filter assigned fields"
-msgstr ""
+msgstr " Zugewiesene Felder filtern"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "Communication Channel"
@@ -5136,7 +5136,7 @@ msgstr "Zugewiesene Übergangs-Aktionen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
 msgid "Filter assigned Transition Actions"
-msgstr ""
+msgstr "Zugewiesene Übergangs-Aktionen filtern"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessAccordion.tt
 msgid "Activities"
@@ -7032,47 +7032,47 @@ msgstr "Keine Daten verfügbar."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Show or hide the content"
-msgstr ""
+msgstr " Inhalt einblenden oder ausblenden"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Search inactive widgets"
-msgstr ""
+msgstr "Suche deaktivierte Widgets"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Active Widgets"
-msgstr ""
+msgstr "Aktivierte Widget"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Save changes"
-msgstr ""
+msgstr " Änderungen speichern"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Save"
-msgstr ""
+msgstr " Speichern"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Save changes"
-msgstr ""
+msgstr "Änderungen speichern"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Settings"
-msgstr ""
+msgstr " Einstellungen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Refresh"
-msgstr ""
+msgstr " Aktuallisieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Close this widget"
-msgstr ""
+msgstr "Widget schließen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Hide"
-msgstr ""
+msgstr "Ausblenden"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Cancel"
-msgstr ""
+msgstr " Abbrechen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "more"
@@ -7084,7 +7084,7 @@ msgstr "Verfügbare Spalten"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Filter available fields"
-msgstr ""
+msgstr " Filter verfügbare Felder"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Visible Columns (order by drag & drop)"
@@ -7092,7 +7092,7 @@ msgstr "Angezeigte Spalten (Anordnung ändern durch Ziehen)"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Submit"
-msgstr ""
+msgstr " Absenden"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "Change Customer Relations"
@@ -7364,7 +7364,7 @@ msgstr "Diese Einstellung kann derzeit nicht gespeichert werden"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Save setting"
-msgstr ""
+msgstr "Einstellung speichern"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Save this setting"
@@ -7576,7 +7576,7 @@ msgstr "SLA ungültig."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Team Data"
-msgstr ""
+msgstr "Teamdaten"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Queue invalid."
@@ -7608,7 +7608,7 @@ msgstr "Verantwortlicher ungültig."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Ticket Data"
-msgstr ""
+msgstr "Ticketdaten"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Next state"
@@ -7624,7 +7624,7 @@ msgstr "Für alle warten* Status."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Dynamic Info"
-msgstr ""
+msgstr "Dynamische Felder"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Add Article"
@@ -7632,7 +7632,7 @@ msgstr "Artikel hinzufügen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Inform"
-msgstr ""
+msgstr "Informiere"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Inform agents"
@@ -7652,7 +7652,7 @@ msgstr "Text wird auch gesendet an"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Communications"
-msgstr ""
+msgstr "Kommunikation"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Create an Article"
@@ -7668,7 +7668,7 @@ msgstr "%s%s%s umleiten"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
 msgid "cancel"
-msgstr ""
+msgstr "abbrechen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
 msgid "Bounce to"
@@ -7772,7 +7772,7 @@ msgstr "Dieser Eintrag existiert bereits in der Adressliste."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Cc"
-msgstr ""
+msgstr " Cc"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Remove Cc"
@@ -7784,7 +7784,7 @@ msgstr "Bcc"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Bcc"
-msgstr ""
+msgstr " Bcc"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Remove Bcc"
@@ -7792,7 +7792,7 @@ msgstr "Bcc entfernen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid " Send mail"
-msgstr ""
+msgstr " E-Mail senden"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
 msgid "Change Customer of %s%s%s"
@@ -7812,7 +7812,7 @@ msgstr "Neues E-Mail-Ticket erstellen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid " Example Template"
-msgstr ""
+msgstr " Beispielvorlage"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "Example Template"
@@ -7824,7 +7824,7 @@ msgstr "An Kundenbenutzer"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid " To"
-msgstr ""
+msgstr " An"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "Please include at least one customer user for the ticket."
@@ -7836,7 +7836,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid " To customer user"
-msgstr ""
+msgstr " An Kundenbenutzer"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "Remove Ticket Customer User"
@@ -7848,7 +7848,7 @@ msgstr "Aus Queue"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid " Get all"
-msgstr ""
+msgstr " Alles holen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "Get all"
@@ -7916,7 +7916,7 @@ msgstr "Verlauf von %s%s%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
 msgid "Start typing to filter..."
-msgstr ""
+msgstr "Tippen zum filtern..."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
 msgid "Filter for history items"
@@ -7924,7 +7924,7 @@ msgstr "Filter für Historieneinträge"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
 msgid "Expand/Collapse all"
-msgstr ""
+msgstr "Alle einblenden/ausblenden"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
 msgid "CreateTime"
@@ -7988,7 +7988,7 @@ msgstr "Notiz zu verlinktem %s%s%s hinzufügen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "Notes"
-msgstr ""
+msgstr "Notizen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "Note to linked Ticket"
@@ -8064,7 +8064,7 @@ msgstr "Aktive Filter für diesen Bildschirm entfernen."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Clear all filters"
-msgstr ""
+msgstr "Alle Filter zurücksetzen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove mention"
@@ -8076,11 +8076,11 @@ msgstr "Tickets pro Seite"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Filter assigned fields"
-msgstr ""
+msgstr "Gewählte Felder filtern"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
 msgid " Missing channel"
-msgstr ""
+msgstr " Fehlender Kanal"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
 msgid "Missing channel"
@@ -8136,7 +8136,7 @@ msgstr "Neues Prozess-Ticket"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
 msgid " Loading"
-msgstr ""
+msgstr " Laden"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
 msgid "Enroll Ticket into a Process"
@@ -8676,15 +8676,15 @@ msgstr "Neues Ticket"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid " Service level agreement"
-msgstr ""
+msgstr " Service-Level-Vereinbarung"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid "Dymanic Info"
-msgstr ""
+msgstr "Dynamische Felder"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid " Subject"
-msgstr ""
+msgstr " Betreff"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
 msgid "Welcome!"
@@ -8712,7 +8712,7 @@ msgstr "Typen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "Limitation"
-msgstr ""
+msgstr "Limitierung"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "No time settings"
@@ -8780,7 +8780,7 @@ msgstr "Seite"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
 msgid "Ticket Details"
-msgstr ""
+msgstr "Ticketdetails"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
 msgid "Next Steps"
@@ -8864,11 +8864,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
 msgid "Overviews"
-msgstr ""
+msgstr "Ansichten"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
 msgid "Personal views"
-msgstr ""
+msgstr "Persönliche Ansichten"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
 msgid "Last Views"
@@ -8876,7 +8876,7 @@ msgstr "Zuletzt gesehen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
 msgid "Search tools"
-msgstr ""
+msgstr "Suche"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "JavaScript not available"
@@ -9864,11 +9864,11 @@ msgstr "Klicken Sie, um eine Datei fürs Hochladen auszuwählen."
 
 #. JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
 msgid "Select files or drop them here"
-msgstr ""
+msgstr "Dateien auswählen oder hierher ziehen"
 
 #. JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
 msgid "Select a file or drop it here"
-msgstr ""
+msgstr "Datei auswählen oder hierher ziehen"
 
 #. JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
 msgid "Uploading..."
@@ -14276,7 +14276,7 @@ msgstr "Es sollten nicht mehr als 200 MB Auslagerungsspeicher verwendet werden."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
 msgid "Znuny"
-msgstr ""
+msgstr "Znuny"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
 msgid "Article Search Index Status"
@@ -15344,7 +15344,7 @@ msgstr "Legt die auswählbaren Schriftarten im Rich-Text-Editor fest."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the selectable format tags in the rich text editor."
-msgstr ""
+msgstr "Legt die auswählbaren Formatierungen im Rich-Text-Editor fest."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines additional plugins for use in the rich text editor."
@@ -16480,7 +16480,7 @@ msgstr "Liste von Responsive-CSS-Dateien, die im Agenten-Bereich immer geladen w
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "List of JS files to always be loaded for the admin interface."
-msgstr ""
+msgstr "Liste der JavaScript-Dateien, die immer im Admin-Interface geladen werden sollen."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "List of CSS files to always be loaded for the customer interface."
@@ -22109,7 +22109,7 @@ msgstr "Neues Prozess-Ticket erstellen."
 
 #. SysConfig
 msgid "Create Process Ticket"
-msgstr ""
+msgstr "Neues Prozess-Ticket erstellen"
 
 #. SysConfig
 msgid "Create Ticket"
@@ -23473,11 +23473,11 @@ msgstr "Benutzer suchen"
 
 #. SysConfig
 msgid "Search tickets."
-msgstr ""
+msgstr "Tickets suchen."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
 msgid "SearchTemplate"
-msgstr ""
+msgstr "Surchvorlage"
 
 #. SysConfig
 msgid "Second Christmas Day"
@@ -23921,7 +23921,7 @@ msgstr "Ticket-Verantwortlicher."
 
 #. SysConfig
 msgid "Ticket Search"
-msgstr ""
+msgstr "Suche"
 
 #. SysConfig
 msgid "Ticket Watcher"
@@ -24193,11 +24193,11 @@ msgstr "notice"
 
 #. SysConfig
 msgid "open in current tab"
-msgstr ""
+msgstr "im gleichen Tab öffnen"
 
 #. SysConfig
 msgid "open in new tab"
-msgstr ""
+msgstr "in neuem Tab öffnen"
 
 #. SysConfig
 msgid "pending"
@@ -24229,7 +24229,7 @@ msgstr "Zeige alle Einträge"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
 msgid "New Process Ticket"
-msgstr ""
+msgstr "Neues Prozess-Ticket"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
@@ -24253,45 +24253,45 @@ msgstr "ist ungültig"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Global settings for all popup profiles."
-msgstr ""
+msgstr "Globale Einstellungen für alle Popup-Profile."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the global users popup profile."
-msgstr ""
+msgstr "Definiert die globalen Einstellungen des Popup-Profils"
 
 #. SysConfig
 msgid "Change your default popup profile settings."
-msgstr ""
+msgstr "Einstellungen des Popup-Profil ändern"
 
 #. SysConfig
 msgid "Popup Profile"
-msgstr ""
+msgstr "Popup Profil"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "The horizontal distance of the window relative to the screen, in pixels."
-msgstr ""
+msgstr "Der horizontale Abstand des Fensters relativ zum Bildschirm in Pixeln"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Top"
-msgstr ""
+msgstr "Oben"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "The vertical distance of the window relative to the screen, in pixels."
-msgstr ""
+msgstr "Der vertikale Abstand des Fensters relativ zum Bildschirm in Pixeln"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Width"
-msgstr ""
+msgstr "Breite"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Width in pixels or percent."
-msgstr ""
+msgstr "Breite in Pixeln oder Prozent"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Height"
-msgstr ""
+msgstr "Höhe"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Height in pixels or percent."
-msgstr ""
+msgstr "Höhe in Pixeln oder Prozent"
 

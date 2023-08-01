@@ -3028,6 +3028,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript nem érhető el',
@@ -8901,7 +8902,6 @@ Az Ön segélyszolgálat csapata
         'Search Tickets.' => 'Jegyek keresése.',
         'Search User' => 'Felhasználó keresése',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'Karácsony második napja',
         'Second Queue' => 'Második várólista',
         'Seconds' => '',

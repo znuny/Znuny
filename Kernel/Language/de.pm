@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.980670741780935;
+    $Self->{Completeness}        = 0.992070047910127;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -985,7 +985,7 @@ sub Data {
         'to new key' => 'auf neuen Schlüssel mappen',
         'Value mapping' => 'Wert-Mapping',
         'Map value' => 'Wert',
-        'new value' => '',
+        'new value' => 'Neuer Wert',
         'Remove value mapping' => 'Wert-Mapping entfernen',
         'New value map' => 'Neues Wert-Mapping',
         'Add value mapping' => 'Wert-Mapping hinzufügen',
@@ -1657,7 +1657,7 @@ sub Data {
         'Name: %s, EntityID: %s' => 'Name: %s, EntityID: %s',
         'Create New Activity Dialog' => 'Neuen Aktivitäts-Dialog erstellen',
         'Assigned Activity Dialogs' => 'Zugewiesene Aktivitäts-Dialoge',
-        'Filter Assigned Activity Dialogs' => '',
+        'Filter Assigned Activity Dialogs' => 'Zugewiesene Aktivitäts-Dialoge filtern',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
         'Please note that changing this activity dialog will affect the following activities' =>
@@ -1682,7 +1682,7 @@ sub Data {
         'Available Fields' => 'Verfügbare Felder',
         'Filter available fields' => 'Verfügbare Felder filtern',
         'Assigned Fields' => 'Zugewiesene Felder',
-        ' Filter assigned fields' => '',
+        ' Filter assigned fields' => ' Zugewiesene Felder filtern',
         'Communication Channel' => 'Kommunikationskanal',
         'Is visible for customer' => 'Ist sichtbar für Kunde',
         'Text Template' => 'Textvorlage',
@@ -1699,7 +1699,7 @@ sub Data {
         'Filter available Transition Actions' => 'Verfügbare Übergangs-Aktionen filtern',
         'Create New Transition Action' => 'Neue Übergangs-Aktion erstellen',
         'Assigned Transition Actions' => 'Zugewiesene Übergangs-Aktionen',
-        'Filter assigned Transition Actions' => '',
+        'Filter assigned Transition Actions' => 'Zugewiesene Übergangs-Aktionen filtern',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessAccordion.tt
         'Activities' => 'Aktivitäten',
@@ -2359,23 +2359,23 @@ sub Data {
         'in' => 'in',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        ' Show or hide the content' => '',
-        'Search inactive widgets' => '',
-        'Active Widgets' => '',
-        ' Save changes' => '',
-        ' Save' => '',
-        'Save changes' => '',
-        ' Settings' => '',
-        ' Refresh' => '',
-        ' Close this widget' => '',
-        'Hide' => '',
-        ' Cancel' => '',
+        ' Show or hide the content' => ' Inhalt einblenden oder ausblenden',
+        'Search inactive widgets' => 'Suche deaktivierte Widgets',
+        'Active Widgets' => 'Aktivierte Widget',
+        ' Save changes' => ' Änderungen speichern',
+        ' Save' => ' Speichern',
+        'Save changes' => 'Änderungen speichern',
+        ' Settings' => ' Einstellungen',
+        ' Refresh' => ' Aktuallisieren',
+        ' Close this widget' => 'Widget schließen',
+        'Hide' => 'Ausblenden',
+        ' Cancel' => ' Abbrechen',
         'more' => 'mehr',
         'No Data Available.' => 'Keine Daten verfügbar.',
         'Available Columns' => 'Verfügbare Spalten',
-        ' Filter available fields' => '',
+        ' Filter available fields' => ' Filter verfügbare Felder',
         'Visible Columns (order by drag & drop)' => 'Angezeigte Spalten (Anordnung ändern durch Ziehen)',
-        ' Submit' => '',
+        ' Submit' => ' Absenden',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => 'Zuordnungen für Kunden ändern',
@@ -2481,17 +2481,17 @@ sub Data {
         'End' => 'Ende',
         'Left' => 'Links',
         'The horizontal distance of the window relative to the screen, in pixels.' =>
-            '',
-        'Top' => '',
+            'Der horizontale Abstand des Fensters relativ zum Bildschirm in Pixeln',
+        'Top' => 'Oben',
         'The vertical distance of the window relative to the screen, in pixels.' =>
-            '',
-        'Width' => '',
-        'Width in pixels or percent.' => '',
-        'Height' => '',
-        'Height in pixels or percent.' => '',
+            'Der vertikale Abstand des Fensters relativ zum Bildschirm in Pixeln',
+        'Width' => 'Breite',
+        'Width in pixels or percent.' => 'Breite in Pixeln oder Prozent',
+        'Height' => 'Höhe',
+        'Height in pixels or percent.' => 'Höhe in Pixeln oder Prozent',
         'This setting can currently not be saved.' => 'Diese Einstellung kann derzeit nicht gespeichert werden.',
         'This setting can currently not be saved' => 'Diese Einstellung kann derzeit nicht gespeichert werden',
-        'Save setting' => '',
+        'Save setting' => 'Einstellung speichern',
         'Save this setting' => 'Einstellung speichern',
         'Did you know? You can help translating Znuny at %s.' => 'Haben Sie gewusst, dass Sie bei der Übersetzung von Znuny unter %s helfen können?',
 
@@ -2563,7 +2563,7 @@ sub Data {
         'Ticket Settings' => 'Ticket-Einstellungen',
         'Service invalid.' => 'Ungültiger Service.',
         'SLA invalid.' => 'SLA ungültig.',
-        'Team Data' => '',
+        'Team Data' => 'Teamdaten',
         'Queue invalid.' => 'Queue ungültig.',
         'New Owner' => 'Neuer Besitzer',
         'Please set a new owner!' => 'Bitte legen Sie einen neuen Besitzer fest!',
@@ -2571,25 +2571,25 @@ sub Data {
         'New Responsible' => 'Neuer Verantwortlicher',
         'Please set a new responsible!' => 'Bitte legen Sie einen neuen Verantwortlichen fest!',
         'Responsible invalid.' => 'Verantwortlicher ungültig.',
-        'Ticket Data' => '',
+        'Ticket Data' => 'Ticketdaten',
         'Next state' => 'Nächster Status',
         'State invalid.' => 'Status ungültig.',
         'For all pending* states.' => 'Für alle warten* Status.',
-        'Dynamic Info' => '',
+        'Dynamic Info' => 'Dynamische Felder',
         'Add Article' => 'Artikel hinzufügen',
-        'Inform' => '',
+        'Inform' => 'Informiere',
         'Inform agents' => 'Agenten informieren',
         'Inform involved agents' => 'Involvierte Agenten informieren',
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Hier können Sie zusätzliche Agenten auswählen, die eine Benachrichtigung über den neuen Artikel enthalten sollen.',
         'Text will also be received by' => 'Text wird auch gesendet an',
-        'Communications' => '',
+        'Communications' => 'Kommunikation',
         'Create an Article' => 'Artikel erstellen',
         'Setting a template will overwrite any text or attachment.' => 'Die Auswahl einer Vorlage wird bereits bestehenden Text oder Anhänge löschen.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce %s%s%s' => '%s%s%s umleiten',
-        'cancel' => '',
+        'cancel' => 'abbrechen',
         'Bounce to' => 'Umleiten an',
         'You need a email address.' => 'Sie benötigen eine E-Mail-Adresse.',
         'Need a valid email address or don\'t use a local email address.' =>
@@ -2623,12 +2623,12 @@ sub Data {
         'Please remove this entry and enter a new one with the correct value.' =>
             'Bitte entfernen Sie diesen Eintrag und geben Sie einen mit einem gültigen Wert an.',
         'This address already exists on the address list.' => 'Dieser Eintrag existiert bereits in der Adressliste.',
-        ' Cc' => '',
+        ' Cc' => ' Cc',
         'Remove Cc' => 'Cc entfernen',
         'Bcc' => 'Bcc',
-        ' Bcc' => '',
+        ' Bcc' => ' Bcc',
         'Remove Bcc' => 'Bcc entfernen',
-        ' Send mail' => '',
+        ' Send mail' => ' E-Mail senden',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => 'Kunde von %s%s%s ändern',
@@ -2637,16 +2637,16 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Neues E-Mail-Ticket erstellen',
-        ' Example Template' => '',
+        ' Example Template' => ' Beispielvorlage',
         'Example Template' => 'Beispielvorlage',
         'To customer user' => 'An Kundenbenutzer',
-        ' To' => '',
+        ' To' => ' An',
         'Please include at least one customer user for the ticket.' => 'Bitte tragen Sie wenigstens einen Kundenbenutzer für das Ticket ein.',
         ' Select this customer as the main customer.' => '',
-        ' To customer user' => '',
+        ' To customer user' => ' An Kundenbenutzer',
         'Remove Ticket Customer User' => 'Kundenbenutzer des Tickets entfernen',
         'From queue' => 'Aus Queue',
-        ' Get all' => '',
+        ' Get all' => ' Alles holen',
         'Get all' => 'Alles holen',
         ' Message body' => '',
 
@@ -2674,9 +2674,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'Verlauf von %s%s%s',
-        'Start typing to filter...' => '',
+        'Start typing to filter...' => 'Tippen zum filtern...',
         'Filter for history items' => 'Filter für Historieneinträge',
-        'Expand/Collapse all' => '',
+        'Expand/Collapse all' => 'Alle einblenden/ausblenden',
         'CreateTime' => 'Erstellzeit',
         'Article' => 'Artikel',
 
@@ -2699,7 +2699,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
         'Add note to linked %s%s%s' => 'Notiz zu verlinktem %s%s%s hinzufügen',
-        'Notes' => '',
+        'Notes' => 'Notizen',
         'Note to linked Ticket' => 'Notiz zu verlinktem Ticket',
         'LinkList invalid.' => 'LinkList ungültig.',
         'Note to origin Ticket' => 'Notiz zu Ursprungsticket',
@@ -2722,13 +2722,13 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Aktive Filter für diesen Bildschirm entfernen.',
-        'Clear all filters' => '',
+        'Clear all filters' => 'Alle Filter zurücksetzen',
         'Remove mention' => 'Erwähnung entfernen',
         'Tickets per page' => 'Tickets pro Seite',
-        'Filter assigned fields' => '',
+        'Filter assigned fields' => 'Gewählte Felder filtern',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
-        ' Missing channel' => '',
+        ' Missing channel' => ' Fehlender Kanal',
         'Missing channel' => 'Fehlender Kanal',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
@@ -2752,7 +2752,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => 'Neues Prozess-Ticket',
-        ' Loading' => '',
+        ' Loading' => ' Laden',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => 'Ticket in einen Prozess überführen',
@@ -2940,9 +2940,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'New Ticket' => 'Neues Ticket',
-        ' Service level agreement' => '',
-        'Dymanic Info' => '',
-        ' Subject' => '',
+        ' Service level agreement' => ' Service-Level-Vereinbarung',
+        'Dymanic Info' => 'Dynamische Felder',
+        ' Subject' => ' Betreff',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => 'Willkommen!',
@@ -2950,13 +2950,13 @@ sub Data {
         'Create your first ticket' => 'Ihr erstes Ticket erstellen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
-        'New Process Ticket' => '',
+        'New Process Ticket' => 'Neues Prozess-Ticket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'z. B. 10*5155 oder 105658*',
         'Types' => 'Typen',
-        'Limitation' => '',
+        'Limitation' => 'Limitierung',
         'No time settings' => 'Keine Zeiteinstellungen',
         'All' => 'Alle',
         'Specific date' => 'spezifisches Datum',
@@ -2977,7 +2977,7 @@ sub Data {
         'Page' => 'Seite',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
-        'Ticket Details' => '',
+        'Ticket Details' => 'Ticketdetails',
         'Next Steps' => 'Nächste Schritte',
         'Reply' => 'Antworten',
 
@@ -3018,10 +3018,11 @@ sub Data {
         'Seen all' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
-        'Overviews' => '',
-        'Personal views' => '',
+        'Overviews' => 'Ansichten',
+        'Personal views' => 'Persönliche Ansichten',
         'Last Views' => 'Zuletzt gesehen',
-        'Search tools' => '',
+        'Search tools' => 'Suche',
+        'SearchTemplate' => 'Surchvorlage',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript nicht verfügbar',
@@ -3407,8 +3408,8 @@ sub Data {
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
         'Click to select a file for upload.' => 'Klicken Sie, um eine Datei fürs Hochladen auszuwählen.',
-        'Select files or drop them here' => '',
-        'Select a file or drop it here' => '',
+        'Select files or drop them here' => 'Dateien auswählen oder hierher ziehen',
+        'Select a file or drop it here' => 'Datei auswählen oder hierher ziehen',
         'Uploading...' => 'Wird hochgeladen...',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
@@ -5128,7 +5129,7 @@ sub Data {
         'There should be no more than 200 MB swap space used.' => 'Es sollten nicht mehr als 200 MB Auslagerungsspeicher verwendet werden.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'Znuny' => '',
+        'Znuny' => 'Znuny',
         'Article Search Index Status' => 'Ticket-Suchindex-Status',
         'Indexed Articles' => 'Indexierte Artikel',
 
@@ -5600,11 +5601,11 @@ sub Data {
             'Steuert die Höhe der Richtext-Editor-Komponente. Geben Sie eine Zahl (für die Höhe in Pixeln) oder einen prozentualen Wert (für eine relative Höhe) an.',
         'Defines the selectable font sizes in the rich text editor.' => 'Legt die wählbaren Schriftgrößen im Rich-Text-Editor fest.',
         'Defines the selectable fonts in the rich text editor.' => 'Legt die auswählbaren Schriftarten im Rich-Text-Editor fest.',
-        'Defines the selectable format tags in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => 'Legt die auswählbaren Formatierungen im Rich-Text-Editor fest.',
         'Defines additional plugins for use in the rich text editor.' => 'Definiert zusätzliche Plugins für die Verwendung im Rich-Text-Editor.',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             'Definiert zusätzliche Inhalte, die für die Verwendung im Rich-Text-Editor zugelassen sind.',
-        'Global settings for all popup profiles.' => '',
+        'Global settings for all popup profiles.' => 'Globale Einstellungen für alle Popup-Profile.',
         'Disable autocomplete in the login screen.' => 'Deaktiviert die Autovervollständigung im Anmeldebildschirm.',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Wenn der HTTP-Header "X-Frame-Options: SAMEORIGIN" ausgeschaltet ist, kann Znuny als IFrame in andere Websites integriert werden. Dies stellt eine Sicherheitslücke dar! Daher sollte diese Einstellung nur deaktivieren werden, wenn Sie sich über die Konsequenzen im Klaren sind!',
@@ -5907,7 +5908,7 @@ sub Data {
             'Gibt dem Endnutzer die Möglichkeit, das Separatorenzeichen von CSV-Dateien in der Übersetzungsdatei zu definieren. Bitte beachte: Wenn \'Active\' auf 0 eingestellt ist, so verhindert dies nur, dass Agenten die Einstellung dieser Gruppe in ihren persönlichen Einstellungen verändern können. Der Administrator kann weiterhin diese Einstellungen im Name von Benutzern verändern. Benutze \'PreferenceGroup\', um zu steuern, in welchem Bereich diese Einstellungen in der Benutzer-Oberfläche angezeigt werden.',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             'Definiert den Avatar des Benutzers. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.',
-        'Defines the global users popup profile.' => '',
+        'Defines the global users popup profile.' => 'Definiert die globalen Einstellungen des Popup-Profils',
         'Defines the user identifier for the customer panel.' => 'Definiert den Benutzer-Identifier für das Kunden-Interface.',
         'Activates support for customer and customer user groups.' => 'Aktiviert Unterstützung für Kunden- und Kundenbenutzergruppen.',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6106,7 +6107,7 @@ sub Data {
         'List of responsive CSS files to always be loaded for the agent interface.' =>
             'Liste von Responsive-CSS-Dateien, die im Agenten-Bereich immer geladen werden sollen.',
         'List of JS files to always be loaded for the admin interface.' =>
-            '',
+            'Liste der JavaScript-Dateien, die immer im Admin-Interface geladen werden sollen.',
         'List of CSS files to always be loaded for the customer interface.' =>
             'Liste der CSS-Dateien, die immer im Kunden-Interface geladen werden sollen.',
         'List of responsive CSS files to always be loaded for the customer interface.' =>
@@ -8492,7 +8493,7 @@ Ihr Helpdesk-Team
         'Change the priority for this ticket' => 'Priorität des Tickets ändern',
         'Change the responsible for this ticket' => 'Verantwortlichen für dieses Tickets ändern',
         'Change your avatar image.' => 'Avatar-Bild ändern.',
-        'Change your default popup profile settings.' => '',
+        'Change your default popup profile settings.' => 'Einstellungen des Popup-Profil ändern',
         'Change your password and more.' => 'Passwort und Weiteres ändern.',
         'Changed SLA to "%s" (%s).' => 'SLA geändert auf "%s" (%s).',
         'Changed archive state to "%s".' => 'Archivstatus geändert auf "%s".',
@@ -8538,7 +8539,7 @@ Ihr Helpdesk-Team
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Konfigurieren Sie, welche Oberfläche angezeigt werden soll, nachdem ein neues Ticket erstellt wurde.',
         'Create New process ticket.' => 'Neues Prozess-Ticket erstellen.',
-        'Create Process Ticket' => '',
+        'Create Process Ticket' => 'Neues Prozess-Ticket erstellen',
         'Create Ticket' => 'Ticket erstellen',
         'Create a new calendar appointment linked to this ticket' => 'Erstellt einen neuen Termin in einem Kalender, welcher direkt mit diesem Ticket verknüpft ist',
         'Create a unit test file' => 'Unit-Test-Datei erzeugen',
@@ -8853,7 +8854,7 @@ Ihr Helpdesk-Team
         'Plugin search' => 'Pluginsuche',
         'Plugin search module for autocomplete.' => 'Module zur Pluginsuche für die Autovervollständigung.',
         'Polish' => 'Polnisch',
-        'Popup Profile' => '',
+        'Popup Profile' => 'Popup Profil',
         'Portuguese' => 'Portugiesisch',
         'Portuguese (Brasil)' => 'Portugiesisch (Brasilien)',
         'PostMaster Filters' => 'Postmaster-Filter',
@@ -8893,8 +8894,7 @@ Ihr Helpdesk-Team
         'Search Ticket.' => 'Ticket suchen.',
         'Search Tickets.' => 'Tickets suchen.',
         'Search User' => 'Benutzer suchen',
-        'Search tickets.' => '',
-        'SearchTemplate' => '',
+        'Search tickets.' => 'Tickets suchen.',
         'Second Christmas Day' => '2. Weihachtstag',
         'Second Queue' => 'Zweite Queue',
         'Seconds' => 'Sekunden',
@@ -9016,7 +9016,7 @@ Ihr Helpdesk-Team
         'Ticket Priority.' => 'Ticket-Priorität.',
         'Ticket Queue Overview' => 'Ticket-Übersicht nach Queues',
         'Ticket Responsible.' => 'Ticket-Verantwortlicher.',
-        'Ticket Search' => '',
+        'Ticket Search' => 'Suche',
         'Ticket Watcher' => 'Ticket-Beobachter',
         'Ticket Zoom' => 'Ticket-Zoom',
         'Ticket Zoom.' => 'Ticket-Detailansicht.',
@@ -9090,8 +9090,8 @@ Ihr Helpdesk-Team
         'normal' => 'normal',
         'not archived tickets' => 'nicht archivierte Tickets',
         'notice' => 'notice',
-        'open in current tab' => '',
-        'open in new tab' => '',
+        'open in current tab' => 'im gleichen Tab öffnen',
+        'open in new tab' => 'in neuem Tab öffnen',
         'pending' => 'Warten',
         'phone' => 'Telefonanruf',
         'responsible' => 'Verantwortlicher',

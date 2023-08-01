@@ -3024,6 +3024,7 @@ bin/znuny.Daemon.pl status\').',
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript tidak tersedia',
@@ -8898,7 +8899,6 @@ Helpdesk Team Anda
         'Search Tickets.' => 'Cari Tiket.',
         'Search User' => 'Cari Pengguna',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'Hari Natal kedia',
         'Second Queue' => 'Antrian kedua',
         'Seconds' => '',
