@@ -53,7 +53,7 @@ sub Run {
 
 \$Self->True(
     \$Success,
-    'TicketDynamicFieldUpdate "$Param{FieldName}" was successfull.',
+    'TicketDynamicFieldUpdate "$Param{FieldName}" was successful.',
 );
 
 OUTPUT

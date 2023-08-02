@@ -45,7 +45,7 @@ sub Run {
 
 \$Self->True(
     \$Success,
-    'TicketUnlockTimeoutUpdate was successfull.',
+    'TicketUnlockTimeoutUpdate was successful.',
 );
 
 OUTPUT

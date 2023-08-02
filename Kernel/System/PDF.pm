@@ -2706,7 +2706,7 @@ sub _TextCalculate {
                     FontSize => $Param{FontSize},
                 );
 
-                # caculate exactly point of cut
+                # calculate exact point of cut
                 while ( $RowForeWidth < $Param{Width} ) {
                     $RowFore .= substr( $RowRear, 0, 1 );
                     $RowRear      = substr( $RowRear, 1 );
@@ -2750,7 +2750,7 @@ sub _TextCalculate {
             push( @PossibleRows, $Row );
             $Return{RequiredHeight} += $RowHeight;
 
-            # check, if min one character can count (protection of infinite loop)
+            # check, if min one character can count (protection from infinite loop)
             if ( defined( $Param{Text} ) ) {
                 if ( length( $Param{Text} ) >= $TextLength ) {
                     $Return{RequiredWidth}  = 0;

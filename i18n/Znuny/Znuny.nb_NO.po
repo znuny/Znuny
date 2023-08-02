@@ -20084,7 +20084,7 @@ msgid "If \"LDAP\" was selected for Customer::AuthModule and if you want to add 
 msgstr "Hvis \"LDAP\" er valgt som Customer::AuthModule og du vil legge til en tekst til etter brukernavnet (f.eks. endre \"brukernavn\" til \"brukernavn@domene\") kan du spesifisere dette her."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "If \"LDAP\" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See \"perldoc Net::LDAP\" for more information about the parameters."
+msgid "If \"LDAP\" was selected for Customer::AuthModule and special parameters are needed for the Net::LDAP perl module, you can specify them here. See \"perldoc Net::LDAP\" for more information about the parameters."
 msgstr "Hvis \"LDAP\" er valgt som Customer::AuthModule og du trenger spesielle parametre for LDAP-modulen Net::LDAP kan du spesifisere dem her. Se \"perldoc Net::LDAP\" for mer info om parametrene."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml

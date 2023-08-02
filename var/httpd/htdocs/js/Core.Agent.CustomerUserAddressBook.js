@@ -419,7 +419,7 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
      * @memberof Core.Agent.CustomerUserAddressBook
      * @function
      * @description
-     *      This function init the customer user adress book search dialog or the result screen.
+     *      This function init the customer user address book search dialog or the result screen.
      */
     TargetNS.Init = function () {
         var ShowSearchDialog = Core.Config.Get('ShowSearchDialog');
