@@ -379,13 +379,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     * @subsection  Definition lists
     */
     dl {
-        padding-bottom: var(--padding-lg);
+        padding-bottom: var(--padding-sm);
     }
 
     dt {
         font-size: 14px;
         font-weight: var(--medium);
-        padding: var(--padding-lg) 0;
+        padding: var(--padding-sm) 0;
         color: var(--black);
         /*font-family: 'Inter'*/
         line-height: 1.3em;
@@ -398,7 +398,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     dl > div {
         display: flex;
         gap: var(--gap-xs);
-        padding-bottom: var(--padding-lg);
+        padding-bottom: var(--padding-sm);
         align-items: baseline;
     }
 
