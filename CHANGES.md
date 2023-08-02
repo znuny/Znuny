@@ -1,4 +1,5 @@
 # 7.0.10 2023-??-??
+ - 2023-08-02 Fixed Popup profile positioning. Thanks to Paweł Bogusławski (@pboguslawski). [#433](https://github.com/znuny/Znuny/pull/433)
  - 2023-08-02 Fixed some minor spelling mistakes. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#377](https://github.com/znuny/Znuny/pull/377)
  - 2023-08-02 Fixed handling whitespaces around '=' in Content-Type/charset token. Thanks to Paweł Bogusławski (@pboguslawski). [#75](https://github.com/znuny/Znuny/pull/75)
  - 2023-07-31 Fixed Draft Issue - Using the draft fails if there are any dynamic fields configured as mandatory for the screen where the draft is used.

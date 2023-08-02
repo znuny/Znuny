@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.898397488848505;
+    $Self->{Completeness}        = 0.898842975206612;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5914,7 +5914,6 @@ sub Data {
             'Omogućava krajnjim korisnicima da zamene separator za CSV datoteke, definisan u datotekama prevoda. Napomena: podešavanje \'Active\' na 0 će samo onemogućiti operaterima da menjaju svoja lična podešavanja iz ove grupe, ali će administratori i dalje moći da ih menjaju u njihovo ime. Podesite \'PreferenceGroup\' da biste odredili u kom delu interfejsa ova podešavanja treba da budu prikazana.',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             'Definiše korisnikovu avatar sličicu. Napomena: podešavanje \'Active\' na 0 će samo onemogućiti operaterima da menjaju svoja lična podešavanja iz ove grupe, ali će administratori i dalje moći da ih menjaju u njihovo ime. Podesite \'PreferenceGroup\' da biste odredili u kom delu interfejsa ova podešavanja treba da budu prikazana.',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Određuje identifikator klijenta za klijentski panel.',
         'Activates support for customer and customer user groups.' => 'Aktivira podršku za klijentske i klijent korisničke grupe.',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8500,7 +8499,6 @@ Vaša tehnička podrška
         'Change the priority for this ticket' => 'Promeni prioritete za ovaj tiket.',
         'Change the responsible for this ticket' => 'Promeni odgovornog za ovaj tiket',
         'Change your avatar image.' => 'Promenite vašu avatar sličicu.',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'Promenite lozinku i slično.',
         'Changed SLA to "%s" (%s).' => 'Promenjen SLA na "%s" (%s).',
         'Changed archive state to "%s".' => 'Promenjeno stanje arhiviranja na "%s".',
@@ -8861,7 +8859,6 @@ Vaša tehnička podrška
         'Plugin search' => 'Modul pretrage',
         'Plugin search module for autocomplete.' => 'Modul pretrage za automatsko dopunjavanje.',
         'Polish' => 'Poljski',
-        'Popup Profile' => '',
         'Portuguese' => 'Portugalski',
         'Portuguese (Brasil)' => 'Portugalski (Brazil)',
         'PostMaster Filters' => 'PostMaster filteri',

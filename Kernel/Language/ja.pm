@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.687758136461259;
+    $Self->{Completeness}        = 0.688099173553719;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5914,7 +5914,6 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '顧客パネルのためのユーザ識別子を定義します。',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8507,7 +8506,6 @@ Thanks for your help!
         'Change the priority for this ticket' => 'このチケットの優先度を変更',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => 'あなたのアバターイメージを変更して下さい。',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'パスワードなどを変更してください。',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8869,7 +8867,6 @@ Thanks for your help!
         'Plugin search' => 'プラグイン検索',
         'Plugin search module for autocomplete.' => 'オートコンプリート用のプラグイン検索モジュール',
         'Polish' => 'ポーランド語',
-        'Popup Profile' => '',
         'Portuguese' => 'ポルトガル語',
         'Portuguese (Brasil)' => 'ポルトガル語（ブラジル）',
         'PostMaster Filters' => 'ポストマスター・フィルター',
