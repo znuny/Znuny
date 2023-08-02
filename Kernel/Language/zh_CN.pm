@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.919453376205788;
+    $Self->{Completeness}        = 0.919897056458099;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6133,7 +6133,6 @@ sub Data {
             '使最终用户能够覆盖转换文件中定义的CSV文件分隔符。 请注意：将\'Active（激活）\'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用\'PreferenceGroup\'来控制这些设置应该显示在用户界面的哪个区域。',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '定义用户头像。 请注意：将\'Active（激活）\'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用\'PreferenceGroup\'来控制这些设置应该显示在用户界面的哪个区域。',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '定义客户门户的用户标识符。',
         'Activates support for customer and customer user groups.' => '激活对客户和客户用户组的支持。',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8725,7 +8724,6 @@ Thanks for your help!
         'Change the priority for this ticket' => '更改这个工单的优先级',
         'Change the responsible for this ticket' => '更改这个工单的负责人',
         'Change your avatar image.' => '更改你的头像图片。',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '更改你的密码及其它。',
         'Changed SLA to "%s" (%s).' => '已修改SLA为"%s" (%s)。',
         'Changed archive state to "%s".' => '已修改归档状态为"%s" 。',
@@ -9103,7 +9101,6 @@ Thanks for your help!
         'Plugin search' => '搜索插件',
         'Plugin search module for autocomplete.' => '用于自动完成的搜索插件模块。',
         'Polish' => '波兰语',
-        'Popup Profile' => '',
         'Portuguese' => '葡萄牙语',
         'Portuguese (Brasil)' => '葡萄牙语（巴西）',
         'PostMaster Filters' => '邮箱管理员过滤器',

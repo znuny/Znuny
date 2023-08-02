@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.855466237942122;
+    $Self->{Completeness}        = 0.855879041338266;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6138,7 +6138,6 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Задает идентификатор пользователя для клиентской панели.',
         'Activates support for customer and customer user groups.' => 'Включить поддержку компаний и групп клиентов',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -8731,7 +8730,6 @@ Thanks for your help!
         'Change the priority for this ticket' => 'Поменять приоритет заявки',
         'Change the responsible for this ticket' => 'Изменить ответственного за эту заявку',
         'Change your avatar image.' => 'Сменить изображение аватара.',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'Измените свой пароль и остальное.',
         'Changed SLA to "%s" (%s).' => 'SLA изменен на "%s" (%s).',
         'Changed archive state to "%s".' => 'Архивный статус изменен на "%s".',
@@ -9109,7 +9107,6 @@ Thanks for your help!
         'Plugin search' => 'Поисковый плагин',
         'Plugin search module for autocomplete.' => 'Поисковый плагин для автозавершения.',
         'Polish' => 'Польский',
-        'Popup Profile' => '',
         'Portuguese' => 'Португальский',
         'Portuguese (Brasil)' => 'Португальский (Бразилия)',
         'PostMaster Filters' => 'Фильтры PostMaster (входящей почты)',

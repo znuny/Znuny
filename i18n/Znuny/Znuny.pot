@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-06-26 06:33+0000\n"
+"POT-Creation-Date: 2023-08-02 08:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16687,10 +16687,6 @@ msgid "Defines the users avatar. Please note: setting 'Active' to 0 will only pr
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the global users popup profile."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the user identifier for the customer panel."
 msgstr ""
 
@@ -22574,10 +22570,6 @@ msgid "Change your avatar image."
 msgstr ""
 
 #. SysConfig
-msgid "Change your default popup profile settings."
-msgstr ""
-
-#. SysConfig
 msgid "Change your password and more."
 msgstr ""
 
@@ -23999,10 +23991,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Polish"
-msgstr ""
-
-#. SysConfig
-msgid "Popup Profile"
 msgstr ""
 
 #. SysConfig
