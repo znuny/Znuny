@@ -114,8 +114,10 @@ sub GetData {
     # Build autocompletion information for templates.
     my @Data;
     STANDARDTEMPLATEID:
-    for my $StandardTemplateID ( sort { lc $StandardTemplates{$a} cmp lc $StandardTemplates{$b} || $a cmp $b }
-        keys %StandardTemplates )
+    for my $StandardTemplateID (
+        sort { lc $StandardTemplates{$a} cmp lc $StandardTemplates{$b} || $a cmp $b }
+        keys %StandardTemplates
+        )
     {
         my %StandardTemplate = $StandardTemplateObject->StandardTemplateGet(
             ID => $StandardTemplateID,
