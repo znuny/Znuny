@@ -16387,10 +16387,6 @@ msgid "Allows agents to exchange the axis of a stat if they generate one."
 msgstr "에이전트가 통계를 생성할 경우 에이전트가 축을 교환할 수 있습니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Allows agents to generate individual-related stats."
-msgstr "상담원이 개인 관련 통계를 생성할 수 있습니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows invalid agents to generate individual-related stats."
 msgstr "잘못된 에이전트가 개인 관련 통계를 생성할 수 있습니다."
 
@@ -24294,5 +24290,13 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Height in pixels or percent."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
 msgstr ""
 
