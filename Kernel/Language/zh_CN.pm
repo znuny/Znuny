@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.902479338842975;
+    $Self->{Completeness}        = 0.902148760330579;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6068,8 +6068,10 @@ sub Data {
         'Defines all the possible stats output formats.' => '定义所有可能的统计输出格式。',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             '允许服务人员交换生成的统计的X轴和Y轴。',
-        'Allows agents to generate individual-related stats.' => '允许服务人员生成其个人相关的统计。',
-        'Allows invalid agents to generate individual-related stats.' => '允许失效的服务人员生成个人相关的统计。',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             '在多选框字段中显示所有的客户ID（如果客户ID过多则不可用）。',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
