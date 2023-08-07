@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.442013833038443;
+    $Self->{Completeness}        = 0.441692134470002;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -6282,8 +6282,10 @@ sub Data {
         'Defines all the possible stats output formats.' => 'Inafafanua umbizo tokeo la takwimu zote zinazowezekana.',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'Inawaruhusu mawakala kubadilisha jira la takwimu kama wakitengeneza.',
-        'Allows agents to generate individual-related stats.' => 'Inawaruhusu mawakala kutengeneza takwimu zinazohusiana na mtu.',
-        'Allows invalid agents to generate individual-related stats.' => 'Inaruhusu mawakala batili kutengeneza takwimu zinazohusiana na mtu.',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             'Inaonyesha vitambulisho vya mteja katika uga wa uchaguzi wa wingi (haitumiki kama una vitambulisho vya mteja vingi).',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>

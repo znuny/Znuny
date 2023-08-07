@@ -16574,10 +16574,6 @@ msgid "Allows agents to exchange the axis of a stat if they generate one."
 msgstr "आँकड़ॊ की धुरी विनिमय करने के लिए प्रतिनिधि को अनुमति देता है यदि वे एक उत्पन्न करते है।"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Allows agents to generate individual-related stats."
-msgstr "अलग अलग संबंधित आँकड़े उत्पन्न करने के लिए प्रतिनिधि को अनुमति देता है।"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows choosing between showing the attachments of a ticket in the browser (inline) or just make them downloadable (attachment)."
 msgstr "ब्राउज़र (इनलाइन) में एक टिकट के संलग्नक दिखाने या सिर्फ उन्हें डाउनलोड करने योग्य (संलग्नक) के बीच में चुनने की अनुमति देता है।"
 
@@ -25728,5 +25724,13 @@ msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for time accounting web service access."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
 msgstr ""
 

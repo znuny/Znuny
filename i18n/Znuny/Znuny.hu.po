@@ -16587,10 +16587,6 @@ msgid "Allows agents to exchange the axis of a stat if they generate one."
 msgstr "Lehetővé teszi az ügyintézőknek egy statisztika tengelyeinek felcserélését, ha előállítanak egyet."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Allows agents to generate individual-related stats."
-msgstr "Lehetővé teszi az ügyintézőknek egyénhez kapcsolódó statisztikák előállítását."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows choosing between showing the attachments of a ticket in the browser (inline) or just make them downloadable (attachment)."
 msgstr "Lehetővé teszi a jegy mellékleteinek böngészőben történő megjelenítése (beágyazott), vagy azok letölthetővé tétele (melléklet) közötti választást."
 
@@ -25736,5 +25732,13 @@ msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for time accounting web service access."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
 msgstr ""
 

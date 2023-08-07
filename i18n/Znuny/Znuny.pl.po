@@ -16599,10 +16599,6 @@ msgid "Allows agents to exchange the axis of a stat if they generate one."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Allows agents to generate individual-related stats."
-msgstr "Pozwala agentom na generowanie statystyk z indywindualnych działań."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows choosing between showing the attachments of a ticket in the browser (inline) or just make them downloadable (attachment)."
 msgstr "Pozwala na wybranie pomiędzy tym czy załączniki w zgłoszeniach będą widoczne bezpośrednio czy też ściągalne jako załacznik."
 
@@ -25748,5 +25744,13 @@ msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for time accounting web service access."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
 msgstr ""
 

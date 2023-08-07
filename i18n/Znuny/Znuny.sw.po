@@ -16579,10 +16579,6 @@ msgid "Allows agents to exchange the axis of a stat if they generate one."
 msgstr "Inawaruhusu mawakala kubadilisha jira la takwimu kama wakitengeneza."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Allows agents to generate individual-related stats."
-msgstr "Inawaruhusu mawakala kutengeneza takwimu zinazohusiana na mtu."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows choosing between showing the attachments of a ticket in the browser (inline) or just make them downloadable (attachment)."
 msgstr "Inaruhusu kuchagua kati ya kuonyesha viambatisho vya tiketi katika kivinjari (ndani ya mstari) au kuzifanya ziweze kupakuliwa (kiambatisho)"
 
@@ -25737,5 +25733,13 @@ msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for time accounting web service access."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
 msgstr ""
 

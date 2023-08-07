@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.738298214572945;
+    $Self->{Completeness}        = 0.737976516004504;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6279,8 +6279,10 @@ sub Data {
         'Defines all the possible stats output formats.' => 'Define todos los formatos de salida posibles de las estadísticas.',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'Permite a los agentes intercambiar los ejes de la estadística al generar una.',
-        'Allows agents to generate individual-related stats.' => 'Permite a los agentes generar estadísticas relacionadas individualmente.',
-        'Allows invalid agents to generate individual-related stats.' => 'Permite a los agentes no válidos generar estadísticas individuales relacionadas.',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             'Muestra todos los identificadores de clientes en un campo de selección múltiple (no es útil si existen muchos identificadores).',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>

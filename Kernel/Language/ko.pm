@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.890944185298375;
+    $Self->{Completeness}        = 0.890622486729934;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6279,8 +6279,10 @@ sub Data {
         'Defines all the possible stats output formats.' => '가능한 모든 통계 출력형식을 정의합니다.',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             '에이전트가 통계를 생성할 경우 에이전트가 축을 교환할 수 있습니다.',
-        'Allows agents to generate individual-related stats.' => '상담원이 개인 관련 통계를 생성할 수 있습니다.',
-        'Allows invalid agents to generate individual-related stats.' => '잘못된 에이전트가 개인 관련 통계를 생성할 수 있습니다.',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             '다중 선택 필드에 모든 고객 식별자를 표시합니다(많은 고객 식별자가 있는 경우 유용하지 않음).',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.253820170500241;
+    $Self->{Completeness}        = 0.253659321216021;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6282,8 +6282,10 @@ sub Data {
         'Defines all the possible stats output formats.' => 'सभी संभव आँकड़े आउटपुट स्वरूप को परिभाषित करता है।',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'आँकड़ॊ की धुरी विनिमय करने के लिए प्रतिनिधि को अनुमति देता है यदि वे एक उत्पन्न करते है।',
-        'Allows agents to generate individual-related stats.' => 'अलग अलग संबंधित आँकड़े उत्पन्न करने के लिए प्रतिनिधि को अनुमति देता है।',
-        'Allows invalid agents to generate individual-related stats.' => '',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             'बहु चयन क्षेत्र में सभी ग्राहक पहचानकर्ताओं को दिखाता है(उपयोगी नहीं यदि आपके पास ग्राहक पहचानकर्ता बहुत है)।',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>

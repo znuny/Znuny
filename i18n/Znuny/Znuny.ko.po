@@ -16587,10 +16587,6 @@ msgid "Allows agents to exchange the axis of a stat if they generate one."
 msgstr "에이전트가 통계를 생성할 경우 에이전트가 축을 교환할 수 있습니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Allows agents to generate individual-related stats."
-msgstr "상담원이 개인 관련 통계를 생성할 수 있습니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows choosing between showing the attachments of a ticket in the browser (inline) or just make them downloadable (attachment)."
 msgstr "브라우저에서 티켓의 첨부 파일 표시 (인라인) 또는 다운로드 만 가능 (첨부) 중에서 선택할 수 있습니다."
 
@@ -25743,5 +25739,13 @@ msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for time accounting web service access."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
 msgstr ""
 

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.703233070612836;
+    $Self->{Completeness}        = 0.702911372044394;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6286,8 +6286,10 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Defines all the possible stats output formats.' => '全ての可能な統計アウトプットのフォーマットを定義します。',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             '担当者が統計情報を生成する場合、担当者が統計情報の軸を交換できるようにします。',
-        'Allows agents to generate individual-related stats.' => '統計出力において所有者・責任者を選択できるようにします。',
-        'Allows invalid agents to generate individual-related stats.' => '統計出力において無効にされた担当者も出力対象とします。',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             '全ての顧客識別子をマルチ・セレクトのフィールドに表示します（顧客識別子を多く抱えている場合は利便性が低いです）。',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>

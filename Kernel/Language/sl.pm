@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.210873411613318;
+    $Self->{Completeness}        = 0.210712562329098;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6283,8 +6283,10 @@ sub Data {
         'Defines all the possible stats output formats.' => 'Določa vse mogoče izhodne formate statistike.',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'Omogoča zaposlenim, da spremenijo osi statistike, če jo ustvarijo.',
-        'Allows agents to generate individual-related stats.' => 'Omogoča zaposlenim, da ustvarjajo posamezne statistične podatke.',
-        'Allows invalid agents to generate individual-related stats.' => '',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             '',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
