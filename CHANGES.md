@@ -1,4 +1,5 @@
 # 6.5.4 2023-??-??
+ - 2023-08-07 Fixed message subject prefill on Activity dialog only works for Agent. https://github.com/znuny/Znuny/issues/363
  - 2023-08-03 Fixed Bug - Snippets not sorted by name in search results. [#473](https://github.com/znuny/Znuny/issues/473)
  - 2023-08-02 Fixed Popup profile positioning. Thanks to Paweł Bogusławski (@pboguslawski). [#432](https://github.com/znuny/Znuny/pull/432)
  - 2023-07-31 Fixed Draft Issue - Using the draft fails if there are any dynamic fields configured as mandatory for the screen where the draft is used.

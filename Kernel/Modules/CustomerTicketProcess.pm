@@ -2229,8 +2229,8 @@ sub _RenderArticle {
         Name             => 'Article',
         MandatoryClass   => '',
         ValidateRequired => '',
-        Subject          => $Param{GetParam}{Subject},
-        Body             => $Param{GetParam}{Body},
+        Subject          => $Param{GetParam}->{Subject} || $Param{ActivityDialogField}->{Config}->{Subject},
+        Body             => $Param{GetParam}->{Body} || $Param{ActivityDialogField}->{Config}->{Body},
         LabelSubject     => $Param{ActivityDialogField}->{Config}->{LabelSubject}
             || $LayoutObject->{LanguageObject}->Translate("Subject"),
         LabelBody => $Param{ActivityDialogField}->{Config}->{LabelBody}
