@@ -1,4 +1,5 @@
 # 7.0.10 2023-??-??
+ - 2023-08-07 Fixed message subject prefill on Activity dialog only works for Agent. https://github.com/znuny/Znuny/issues/363.
  - 2023-08-07 Changed default spacing in process ProcessWidgetDynamicFieldGroups - reduced padding.
  - 2023-08-07 Fixed - Screens containing 'To:' 'Cc:' and 'Bcc:' doubles the labels.
  - 2023-08-03 Fixed Bug - Snippets not sorted by name in search results. [#473](https://github.com/znuny/Znuny/issues/473)
