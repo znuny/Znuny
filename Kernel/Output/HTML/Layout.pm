@@ -1414,7 +1414,7 @@ sub Header {
             my $DefaultIcon = $ConfigObject->Get('Frontend::Gravatar::DefaultImage') || 'mp';
             $Kernel::OM->Get('Kernel::System::Encode')->EncodeOutput( \$Self->{UserEmail} );
             $Param{Avatar}
-                = '//www.gravatar.com/avatar/' . md5_hex( lc $Self->{UserEmail} ) . '?s=100&d=' . $DefaultIcon;
+                = 'https://www.gravatar.com/avatar/' . md5_hex( lc $Self->{UserEmail} ) . '?s=100&d=' . $DefaultIcon;
         }
         else {
             my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
@@ -4291,6 +4291,32 @@ sub CustomerHeader {
 
     # only on valid session
     if ( $Self->{UserID} ) {
+
+        if ( $Frontend eq 'Customer' ) {
+            my $EncodeObject       = $Kernel::OM->Get('Kernel::System::Encode');
+            my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+
+            # generate avatar for CustomerUser
+            if ( $ConfigObject->Get('Frontend::AvatarEngine') eq 'Gravatar' && $Self->{UserEmail} ) {
+
+                my $DefaultIcon = $ConfigObject->Get('Frontend::Gravatar::DefaultImage') || 'mp';
+
+                $EncodeObject->EncodeOutput( \$Self->{UserEmail} );
+                $Param{Avatar} = 'https://www.gravatar.com/avatar/'
+                    . md5_hex( lc $Self->{UserEmail} )
+                    . '?s=100&d='
+                    . $DefaultIcon;
+            }
+            else {
+                my $Name = $CustomerUserObject->CustomerName(
+                    UserLogin => $Self->{UserID},
+                );
+
+                $Param{UserInitials} = $Self->UserInitialsGet(
+                    Fullname => $Name,
+                );
+            }
+        }
 
         $Self->Block(
             Name => 'Actions',

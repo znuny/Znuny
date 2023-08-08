@@ -1,4 +1,5 @@
 # 7.0.10 2023-??-??
+ - 2023-08-08 Updated protocol to https for a secured communitation with gravatar.com. Updated CustomerInterface so that SysConfig Frontend::AvatarEngine will be respected.
  - 2023-08-08 Changed default value of Frontend::AvatarEngine to None.
  - 2023-08-07 Fixed missing $ on StartDateTimeObject -> $StartDateTimeObject (#475). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [PR#475](https://github.com/znuny/Znuny/pull/475).
  - 2023-08-07 Fixed description for SysConfig Setting 'Stats::UseAgentElementInStats' and 'Stats::UseInvalidAgentInStats'.

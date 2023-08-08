@@ -38,6 +38,7 @@ Returns article HTML.
     );
 
 Result:
+
     $HTML = "<div>...</div>";
 
 =cut
