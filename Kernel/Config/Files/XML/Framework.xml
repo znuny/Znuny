@@ -790,7 +790,7 @@
         <Description Translatable="1">Define which avatar engine should be used for the agent avatar on the header and the sender images in AgentTicketZoom. If 'None' is selected, initials will be displayed instead. Please note that selecting anything other than 'None' will transfer the encrypted email address of the particular user to an external service.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="Select" SelectedID="Gravatar">
+            <Item ValueType="Select" SelectedID="None">
                 <Item ValueType="Option" Value="None" Translatable="1">None</Item>
                 <Item ValueType="Option" Value="Gravatar">Gravatar.com</Item>
             </Item>
@@ -3388,22 +3388,6 @@ You can log in via the following URL:
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="PreferencesGroups###PopupProfile" Required="0" Valid="1">
-        <Description Translatable="1">Defines the global users popup profile.</Description>
-        <Navigation>Frontend::Agent::View::Preferences</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Preferences::PopupProfile</Item>
-                <Item Key="PreferenceGroup">Miscellaneous</Item>
-                <Item Key="Key">UserPopupProfile</Item>
-                <Item Key="Label" Translatable="1">Popup Profile</Item>
-                <Item Key="Desc" Translatable="1">Change your default popup profile settings.</Item>
-                <Item Key="Block">PopupProfile</Item>
-                <Item Key="Prio">1000</Item>
-                <Item Key="Active">1</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="CustomerPanelUserID" Required="1" Valid="1">
         <Description Translatable="1">Defines the user identifier for the customer panel.</Description>
         <Navigation>Frontend::Customer</Navigation>
@@ -3878,7 +3862,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Customer::AuthModule::LDAP::Params" Required="0" Valid="0" ConfigLevel="200">
-        <Description Translatable="1">If "LDAP" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.</Description>
+        <Description Translatable="1">If "LDAP" was selected for Customer::AuthModule and special parameters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.</Description>
         <Navigation>Core::Auth::Customer</Navigation>
         <Value>
             <Hash>
@@ -7207,14 +7191,14 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Stats::UseAgentElementInStats" Required="1" Valid="1">
-        <Description Translatable="1">Allows agents to generate individual-related stats.</Description>
+        <Description Translatable="1">Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".</Description>
         <Navigation>Frontend::Agent::View::Stats</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
     <Setting Name="Stats::UseInvalidAgentInStats" Required="1" Valid="1">
-        <Description Translatable="1">Allows invalid agents to generate individual-related stats.</Description>
+        <Description Translatable="1">Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.</Description>
         <Navigation>Frontend::Agent::View::Stats</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>

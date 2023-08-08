@@ -44,7 +44,7 @@ sub Run {
 
 \$Self->True(
     \$Success,
-    'TicketPrioritySet "$Param{Priority}" was successfull.',
+    'TicketPrioritySet "$Param{Priority}" was successful.',
 );
 
 OUTPUT

@@ -248,7 +248,7 @@ $Selenium->RunTest(
         for my $AccessibleTicketNumber (@AccessibleTicketNumbers) {
             $Self->True(
                 index( $Selenium->get_page_source(), $AccessibleTicketNumber ) > -1,
-                "Accesible ticket $AccessibleTicketNumber found in widget on page",
+                "Accessible ticket $AccessibleTicketNumber found in widget on page",
             );
         }
 

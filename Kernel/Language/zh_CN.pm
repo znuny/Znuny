@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.90203205022303;
+    $Self->{Completeness}        = 0.902148760330579;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5915,7 +5915,6 @@ sub Data {
             '使最终用户能够覆盖转换文件中定义的CSV文件分隔符。 请注意：将\'Active（激活）\'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用\'PreferenceGroup\'来控制这些设置应该显示在用户界面的哪个区域。',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '定义用户头像。 请注意：将\'Active（激活）\'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用\'PreferenceGroup\'来控制这些设置应该显示在用户界面的哪个区域。',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '定义客户门户的用户标识符。',
         'Activates support for customer and customer user groups.' => '激活对客户和客户用户组的支持。',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6009,7 +6008,7 @@ sub Data {
             '如果选用了LDAP，您可以为每个LDAP查询添加一个过滤器，例如：(mail=*)、 (objectclass=user) 或 (!objectclass=computer)。',
         'If "LDAP" was selected for Customer::AuthModule and if you want to add a suffix to every customer login name, specifiy it here, e. g. you just want to write the username user but in your LDAP directory exists user@domain.' =>
             '如果Customer::AuthModule（客户认证模块）选择“LDAP”，并且如果您想给每个客户登录名添加一个前缀，则在这里指定，例如，你只想写入用户名user，但在您的LDAP目录存在user@domain。',
-        'If "LDAP" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
+        'If "LDAP" was selected for Customer::AuthModule and special parameters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
             '如果Customer::AuthModule（客户认证模块）选择“LDAP”，并且perl模块Net::LDAP需要一些特殊参数，您可以在这里指定它们。查阅"perldoc Net::LDAP"获取这些参数的更多信息。',
         'If "LDAP" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
             '如果Customer::AuthModule（客户认证模块）选择“LDAP”，您可以指定系统是否要停止的条件（例如由于网络问题无法建立到服务器的连接）。',
@@ -6069,8 +6068,10 @@ sub Data {
         'Defines all the possible stats output formats.' => '定义所有可能的统计输出格式。',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             '允许服务人员交换生成的统计的X轴和Y轴。',
-        'Allows agents to generate individual-related stats.' => '允许服务人员生成其个人相关的统计。',
-        'Allows invalid agents to generate individual-related stats.' => '允许失效的服务人员生成个人相关的统计。',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             '在多选框字段中显示所有的客户ID（如果客户ID过多则不可用）。',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
@@ -8500,7 +8501,6 @@ Thanks for your help!
         'Change the priority for this ticket' => '更改这个工单的优先级',
         'Change the responsible for this ticket' => '更改这个工单的负责人',
         'Change your avatar image.' => '更改你的头像图片。',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '更改你的密码及其它。',
         'Changed SLA to "%s" (%s).' => '已修改SLA为"%s" (%s)。',
         'Changed archive state to "%s".' => '已修改归档状态为"%s" 。',
@@ -8861,7 +8861,6 @@ Thanks for your help!
         'Plugin search' => '搜索插件',
         'Plugin search module for autocomplete.' => '用于自动完成的搜索插件模块。',
         'Polish' => '波兰语',
-        'Popup Profile' => '',
         'Portuguese' => '葡萄牙语',
         'Portuguese (Brasil)' => '葡萄牙语（巴西）',
         'PostMaster Filters' => '邮箱管理员过滤器',

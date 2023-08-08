@@ -44,7 +44,7 @@ sub Run {
 
 \$Self->True(
     \$Success,
-    'TicketOwnerSet to "$Param{Owner}" was successfull.',
+    'TicketOwnerSet to "$Param{Owner}" was successful.',
 );
 
 OUTPUT

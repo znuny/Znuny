@@ -58,7 +58,7 @@ my \$NotificationEventObject = $Kernel::OM->Get('Kernel::System::Ticket::Event::
 
 \$Self->True(
     \$Success,
-    '_SendRecipientNotification "$Param{NotificationName}" to "$Param{RecipientUserLogin}" was successfull.',
+    '_SendRecipientNotification "$Param{NotificationName}" to "$Param{RecipientUserLogin}" was successful.',
 );
 
 OUTPUT

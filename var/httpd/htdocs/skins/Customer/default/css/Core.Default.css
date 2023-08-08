@@ -263,6 +263,9 @@ div.Headline h1 {
     display: none;
 }
 
+.Actions .UserAvatar .Initials {
+    color: var(--primary-color);
+}
 .Actions .UserAvatar > a {
     display: flex;
     align-items: center;

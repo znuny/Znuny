@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.620023129026929;
+    $Self->{Completeness}        = 0.62;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5914,7 +5914,6 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'تعریف می کند که شناسه کاربر برای پنل مشتری می باشد.',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6008,7 +6007,7 @@ sub Data {
             'اگر \ "LDAP " انتخاب شد، شما می توانید یک فیلتر برای هر پرس و جو LDAP، به عنوان مثال (ایمیل = *)، (objectclass = کاربر) و یا (! objectclass = کامپیوتر) اضافه کنید.',
         'If "LDAP" was selected for Customer::AuthModule and if you want to add a suffix to every customer login name, specifiy it here, e. g. you just want to write the username user but in your LDAP directory exists user@domain.' =>
             'اگر \ "LDAP " برای مشتریان :: AuthModule انتخاب شد و اگر شما می خواهید برای اضافه کردن یک پسوند به هر نام کاربری مشتری، آن را specifiy در اینجا، به عنوان مثال شما فقط می خواهم به ارسال کاربران نام کاربری اما در دایرکتوری LDAP شما وجود دارد کاربران @ دامنه.',
-        'If "LDAP" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
+        'If "LDAP" was selected for Customer::AuthModule and special parameters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
             'اگر \ "LDAP " برای مشتریان :: AuthModule انتخاب شد و پارامتر های ویژه ای را برای شبکه :: LDAP ماژول پرل مورد نیاز، شما می توانید آنها را در اینجا مشخص کنید. \ "خالص perldoc :: LDAP " برای اطلاعات بیشتر در مورد پارامترها را ببینید.',
         'If "LDAP" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
             'اگر \ "LDAP " برای مشتریان :: AuthModule انتخاب شد، شما می توانید مشخص کنید اگر برنامه های کاربردی متوقف خواهد شد اگر به عنوان مثال یک اتصال به یک سرور می تواند به دلیل مشکلات شبکه ایجاد شود.',
@@ -6068,8 +6067,10 @@ sub Data {
         'Defines all the possible stats output formats.' => 'تعریف می کند همه امکانات فرمت آمار خروجی.',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'اجازه می دهد تا عوامل به تبادل محور یک آمار اگر آنها تولید یک.',
-        'Allows agents to generate individual-related stats.' => 'اجازه می دهد تا عوامل به آمار و ارقام مربوط به فرد.',
-        'Allows invalid agents to generate individual-related stats.' => 'اجازه تولید به  عوامل نامعتبر برای آمار و ارقام مربوط به فرد را میدهد. ',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             'همه شناسه های مشتری در یک میدان چند را انتخاب کنید (مفید می کنید اگر شما یک مقدار زیادی از شناسه مشتری).',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
@@ -8500,7 +8501,6 @@ Thanks for your help!
         'Change the priority for this ticket' => 'تغییر اولویت  برای این درخواست',
         'Change the responsible for this ticket' => 'تغییر مسئول برای این درخواست',
         'Change your avatar image.' => '',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8861,7 +8861,6 @@ Thanks for your help!
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => 'لهستانی',
-        'Popup Profile' => '',
         'Portuguese' => 'پرتغالی',
         'Portuguese (Brasil)' => 'پرتغالی (برزیل)',
         'PostMaster Filters' => 'فیلترهای پستی',

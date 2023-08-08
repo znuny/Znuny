@@ -1,4 +1,17 @@
 # 7.0.10 2023-??-??
+ - 2023-08-08 Updated protocol to https for a secured communitation with gravatar.com. Updated CustomerInterface so that SysConfig Frontend::AvatarEngine will be respected.
+ - 2023-08-08 Changed default value of Frontend::AvatarEngine to None.
+ - 2023-08-07 Fixed missing $ on StartDateTimeObject -> $StartDateTimeObject (#475). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [PR#475](https://github.com/znuny/Znuny/pull/475).
+ - 2023-08-07 Fixed description for SysConfig Setting 'Stats::UseAgentElementInStats' and 'Stats::UseInvalidAgentInStats'.
+ - 2023-08-07 Fixed message subject prefill on Activity dialog only works for Agent. https://github.com/znuny/Znuny/issues/363.
+ - 2023-08-07 Changed default spacing in process ProcessWidgetDynamicFieldGroups - reduced padding.
+ - 2023-08-07 Fixed - Screens containing 'To:' 'Cc:' and 'Bcc:' doubles the labels.
+ - 2023-08-03 Fixed Bug - Snippets not sorted by name in search results. [#473](https://github.com/znuny/Znuny/issues/473)
+ - 2023-08-02 Fixed Mentions CSS bug. https://github.com/znuny/Znuny/issues/419.
+ - 2023-08-02 Fixed Popup profile positioning. Thanks to Paweł Bogusławski (@pboguslawski). [#433](https://github.com/znuny/Znuny/pull/433)
+ - 2023-08-02 Fixed some minor spelling mistakes. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#377](https://github.com/znuny/Znuny/pull/377)
+ - 2023-08-02 Fixed handling whitespaces around '=' in Content-Type/charset token. Thanks to Paweł Bogusławski (@pboguslawski). [#75](https://github.com/znuny/Znuny/pull/75)
+ - 2023-07-31 Fixed Draft Issue - Using the draft fails if there are any dynamic fields configured as mandatory for the screen where the draft is used.
  - 2023-07-27 Fixed remove of mention and unnecessary errors in the log. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#295](https://github.com/znuny/Znuny/pull/295)
  - 2023-07-27 Sector Nord AG: Fixed responsible user id during appointment ticket creation. Thanks to Marc Pahnke (@MarcPahnke), Sector Nord AG. [#325](https://github.com/znuny/Znuny/pull/325)
  - 2023-07-26 Fixed encoding problem with URL parameters in AdminPostMasterFilter and AdminGenericAgent.
