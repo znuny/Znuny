@@ -1149,20 +1149,6 @@ sub Run {
             my @UserListWithoutSelection
                 = split( ',', $ParamObject->GetParam( Param => 'UserListWithoutSelection' ) || "" );
 
-            # get inform user list
-            my @InformUserID = $ParamObject->GetArray( Param => 'InformUserID' );
-
-            # get involved user list
-            my @InvolvedUserID = $ParamObject->GetArray( Param => 'InvolvedUserID' );
-
-            if ( $Config->{InformAgent} ) {
-                push @NotifyUserIDs, @InformUserID;
-            }
-
-            if ( $Config->{InvolvedAgent} ) {
-                push @NotifyUserIDs, @InvolvedUserID;
-            }
-
             if ( $Self->{ReplyToArticle} ) {
                 push @NotifyUserIDs, @UserListWithoutSelection;
             }
@@ -2511,12 +2497,6 @@ sub _Mask {
             delete $ReplyToUserIDs{ $Self->{UserID} };
         }
 
-        if ( $Config->{InformAgent} || $Config->{InvolvedAgent} ) {
-            $LayoutObject->Block(
-                Name => 'InformAdditionalAgents',
-            );
-        }
-
         # get param object
         my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
@@ -2571,56 +2551,6 @@ sub _Mask {
             );
 
             # block is called below "inform agents"
-        }
-
-        # agent list
-        if ( $Config->{InformAgent} ) {
-
-            # get inform user list
-            my %InformAgents;
-            my @InformUserID    = $ParamObject->GetArray( Param => 'InformUserID' );
-            my %InformAgentList = $GroupObject->PermissionGroupGet(
-                GroupID => $GID,
-                Type    => 'ro',
-            );
-            for my $UserID ( sort keys %InformAgentList ) {
-                $InformAgents{$UserID} = $AllGroupsMembers{$UserID};
-            }
-
-            if ( $Self->{ReplyToArticle} ) {
-
-                # get email address of all users and compare to replyto-addresses
-                for my $UserID ( sort keys %InformAgents ) {
-                    if ( $ReplyToUserIDs{$UserID} ) {
-                        push @InformUserID, $UserID;
-                        delete $ReplyToUserIDs{$UserID};
-                    }
-                }
-            }
-
-            my $InformAgentSize = $ConfigObject->Get('Ticket::Frontend::InformAgentMaxSize')
-                || 3;
-            $Param{OptionStrg} = $LayoutObject->BuildSelection(
-                Data       => \%InformAgents,
-                SelectedID => \@InformUserID,
-                Name       => 'InformUserID',
-                Class      => 'Modernize',
-                Multiple   => 1,
-                Size       => $InformAgentSize,
-            );
-            $LayoutObject->Block(
-                Name => 'InformAgent',
-                Data => \%Param,
-            );
-        }
-
-        # get involved
-        if ( $Config->{InvolvedAgent} ) {
-
-            $LayoutObject->Block(
-                Name => 'InvolvedAgent',
-                Data => \%Param,
-            );
         }
 
         # show list of agents, that receive this note (ReplyToNote)
