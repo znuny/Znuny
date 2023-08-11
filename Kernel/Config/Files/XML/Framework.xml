@@ -835,7 +835,7 @@
         <Description Translatable="1">Define which avatar engine should be used for the agent avatar on the header and the sender images in AgentTicketZoom. If 'None' is selected, initials will be displayed instead. Please note that selecting anything other than 'None' will transfer the encrypted email address of the particular user to an external service.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="Select" SelectedID="Gravatar">
+            <Item ValueType="Select" SelectedID="None">
                 <Item ValueType="Option" Value="None" Translatable="1">None</Item>
                 <Item ValueType="Option" Value="Gravatar">Gravatar.com</Item>
             </Item>
