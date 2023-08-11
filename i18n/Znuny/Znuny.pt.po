@@ -22,15 +22,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2023-06-08 01:18+0000\n"
-"Last-Translator: José <jjunior@serviceup.com.br>\n"
-"Language-Team: Portuguese <https://translations.znuny.org/projects/znuny/znuny/pt/>\n"
+"PO-Revision-Date: 2023-08-24 23:32+0000\n"
+"Last-Translator: Marcos Silverio <marcos.aurelio@infracerta.com.br>\n"
+"Language-Team: Portuguese <https://translations.znuny.org/projects/znuny/"
+"znuny/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 4.18.2\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -25915,7 +25916,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Ticket Data"
-msgstr ""
+msgstr "Dados do Chamado"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Dynamic Info"
@@ -26524,4 +26525,3 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Height in pixels or percent."
 msgstr ""
-
