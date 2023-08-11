@@ -1096,7 +1096,7 @@
                         <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
                         <Item Key="Ticket::Frontend::CustomerTicketPrint###DynamicField">CustomerTicketPrint</Item>
                         <Item Key="Ticket::Frontend::AgentTicketPending###DynamicField">AgentTicketPending</Item>
-                        <Item Key="Ticket::Frontend::AgentTicketSearch###DynamicField">AgentTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DynamicField">AgentTicketSearch (Screen)</Item>
                         <Item Key="Ticket::Frontend::AgentTicketCompose###DynamicField">AgentTicketCompose</Item>
                         <Item Key="Ticket::Frontend::AgentTicketFreeText###DynamicField">AgentTicketFreeText</Item>
                         <Item Key="Ticket::Frontend::AgentTicketEmail###DynamicField">AgentTicketEmail</Item>
@@ -1124,7 +1124,7 @@
                         <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
                         <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
                         <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
-                        <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch (Overview Screen)</Item>
                         <Item Key="Ticket::Frontend::AgentTicketService###DefaultColumns">AgentTicketService</Item>
 
                         <Item Key="AgentCustomerInformationCenter::Backend###0100-CIC-TicketPendingReminder">DashboardWidget CIC-TicketPendingReminder</Item>
@@ -1151,7 +1151,7 @@
                         <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
                         <Item Key="Ticket::Frontend::CustomerTicketPrint###DynamicField">CustomerTicketPrint</Item>
                         <Item Key="Ticket::Frontend::AgentTicketPending###DynamicField">AgentTicketPending</Item>
-                        <Item Key="Ticket::Frontend::AgentTicketSearch###DynamicField">AgentTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DynamicField">AgentTicketSearch (Screen)</Item>
                         <Item Key="Ticket::Frontend::AgentTicketCompose###DynamicField">AgentTicketCompose</Item>
                         <Item Key="Ticket::Frontend::AgentTicketFreeText###DynamicField">AgentTicketFreeText</Item>
                         <Item Key="Ticket::Frontend::AgentTicketEmail###DynamicField">AgentTicketEmail</Item>
@@ -1165,7 +1165,7 @@
                         <Item Key="Ticket::Frontend::AgentTicketNote###DynamicField">AgentTicketNote</Item>
                         <Item Key="Ticket::Frontend::AgentTicketOwner###DynamicField">AgentTicketOwner</Item>
                         <Item Key="Ticket::Frontend::AgentTicketResponsible###DynamicField">AgentTicketResponsible</Item>
-                        <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch (Overview Screenn)</Item>
                     </Hash>
                 </Item>
                 <Item Key="CustomerCompany">

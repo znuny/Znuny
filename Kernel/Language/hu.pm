@@ -571,7 +571,7 @@ sub Data {
         'Assignment of dynamic fields to screens' => '',
         'Overview' => 'Áttekintés',
         'Screens' => '',
-        'Default columns' => '',
+        'Overview Default Columns' => '',
         'Add dynamic field' => 'Dinamikus mező hozzáadása',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',

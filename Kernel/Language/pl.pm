@@ -570,7 +570,7 @@ sub Data {
         'Assignment of dynamic fields to screens' => '',
         'Overview' => 'Przegląd',
         'Screens' => 'Ekrany',
-        'Default columns' => '',
+        'Overview Default Columns' => '',
         'Add dynamic field' => 'Dodaj pole dynamiczne',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
