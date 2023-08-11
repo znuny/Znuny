@@ -1,4 +1,5 @@
 # 7.0.10 2023-??-??
+ - 2023-08-11 Fixed - Header misaligned in (Agent/Customer)TicketProcess. If you have a long activity dialog name, and a long description, the header is broken. The activity and dialog name needs to be above the text.
  - 2023-08-11 Fixed SelectAll function in AdminDynamicFieldScreenConfiguration. Select only all visible elements.
  - 2023-08-11 Added additional note to DynamicFields::ScreenConfiguration::ConfigKeysOfScreensByObjectType###Framework for AgentTicketSearch (DynamicField|DefaultColumns).
  - 2023-08-11 Refactored AgentTicketNoteToLinkedTicket. Fixed AgentTicketNoteToLinkedTicket Ticket settings not styled. Added AgentTicketNoteToLinkedTicket to DynamicFieldScreens###Framework. Added SysConfig `Ticket::Frontend::AgentTicketNoteToLinkedTicket###DynamicField` to use DynamicFields.
