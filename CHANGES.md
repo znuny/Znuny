@@ -1,4 +1,5 @@
 # 7.0.10 2023-??-??
+ - 2023-08-11 Fixed - Installing a package with dependency not possible - Added additional check if any problem exists - means if any package or module is not installed.
  - 2023-08-09 Fixed display of pending time selection. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#469](https://github.com/znuny/Znuny/pull/469)
  - 2023-08-08 Updated protocol to https for a secured communitation with gravatar.com. Updated CustomerInterface so that SysConfig Frontend::AvatarEngine will be respected.
  - 2023-08-08 Changed default value of Frontend::AvatarEngine to None.

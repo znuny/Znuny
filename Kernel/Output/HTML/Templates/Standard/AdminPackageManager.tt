@@ -295,14 +295,14 @@
                     [% END %]
                     <ul class="PackageRequired">
                         [% FOREACH Item IN Data.$Type %]
-                        <li class="CheckResult[% Item.IsInstalled %]">
+                        <li class="CheckResult[% IF Item.IsInstalled %]OK[% ELSE %]Problem[% END %]">
                             <h3 class="Heading">
-                                <span title="[% Item.IsInstalled %]" class="Flag Small [% Item.IsInstalled %]">
-                                    <span>[% Item.IsInstalled %]</span>
+                                <span title="[% IF Item.IsInstalled %]OK[% ELSE %]Problem[% END %]" class="Flag Small [% IF Item.IsInstalled %]OK[% ELSE %]Problem[% END %]">
+                                    <span>[% IF Item.IsInstalled %]OK[% ELSE %]Problem[% END %]</span>
                                 </span>
                                 [% Item.Name %][% IF Item.Version %] - [% Translate("Version") | html %] [% Item.Version %] [% END %]
                             </h3>
-                            [% IF Item.IsInstalled == 'OK' %]
+                            [% IF Item.IsInstalled == 1 %]
                                 [% IF Type == 'PackageRequired' %]
                                     <p class="Value">[% Translate("Required package %s is already installed.", Item.Name) | html %]</p>
                                 [% ELSE %]
@@ -354,7 +354,7 @@
                                         <span>[% Translate("Cancel") | html %]</span>
                                     </a>
 [% RenderBlockEnd("IntroCancel") %]
-                                    <button class="[% IF !Data.PackageRequired && !Data.ModuleRequired %]btn-primary [% END %]btn-main btn-width-md" type="submit" value="[% Translate("Continue") | html %]"[% IF Data.PackageRequired || Data.ModuleRequired %] disabled[% END %]>
+                                    <button class="[% IF !Data.PackageRequiredProblem && !Data.ModuleRequiredProblem %]btn-primary [% END %]btn-main btn-width-md" type="submit" value="[% Translate("Continue") | html %]"[% IF Data.PackageRequiredProblem || Data.ModuleRequiredProblem %] disabled[% END %]>
                                         <span>[% Translate("Continue") | html %]</span>
                                     </button>
                                 </div>
