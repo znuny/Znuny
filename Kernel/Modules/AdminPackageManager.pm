@@ -1954,7 +1954,7 @@ sub _InstallHandling {
         $Data{ModuleRequired} = $PackageObject->GetRequiredModules(
             Structure => \%Structure,
         );
-        $Data{ModuleRequiredProblem} = grep { $_->{IsInstalled} eq 0 } @{ $Data{PackageRequired} };
+        $Data{ModuleRequiredProblem} = grep { $_->{IsInstalled} eq 0 } @{ $Data{ModuleRequired} };
     }
 
     my %Response = $PackageObject->AnalyzePackageFrameworkRequirements(
