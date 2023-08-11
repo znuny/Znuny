@@ -1439,7 +1439,7 @@ sub Header {
             my $DefaultIcon = $ConfigObject->Get('Frontend::Gravatar::DefaultImage') || 'mp';
             $Kernel::OM->Get('Kernel::System::Encode')->EncodeOutput( \$Self->{UserEmail} );
             $Param{Avatar}
-                = '//www.gravatar.com/avatar/' . md5_hex( lc $Self->{UserEmail} ) . '?s=100&d=' . $DefaultIcon;
+                = 'https://www.gravatar.com/avatar/' . md5_hex( lc $Self->{UserEmail} ) . '?s=100&d=' . $DefaultIcon;
         }
         else {
             my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(

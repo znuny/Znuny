@@ -1,4 +1,5 @@
 # 6.5.4 2023-??-??
+ - 2023-08-11 Updated protocol to https for a secured communitation with gravatar.com.
  - 2023-08-11 Fixed SelectAll function in AdminDynamicFieldScreenConfiguration. Select only all visible elements.
  - 2023-08-11 Added additional note to DynamicFields::ScreenConfiguration::ConfigKeysOfScreensByObjectType###Framework for AgentTicketSearch (DynamicField|DefaultColumns).
  - 2023-08-11 Fixed - Installing a package with dependency not possible - Added additional check if any problem exists - means if any package or module is not installed.
