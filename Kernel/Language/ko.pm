@@ -594,7 +594,7 @@ sub Data {
         'Assignment of dynamic fields to screens' => '',
         'Overview' => '개요',
         'Screens' => '',
-        'Default columns' => '',
+        'Overview Default Columns' => '',
         'Add dynamic field' => '',
         'Filter' => '필터',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>

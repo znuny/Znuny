@@ -594,7 +594,7 @@ sub Data {
         'Assignment of dynamic fields to screens' => 'Zuordnung von dynamischen Feldern zu Masken',
         'Overview' => 'Übersicht',
         'Screens' => 'Masken',
-        'Default columns' => 'Standardspalten',
+        'Overview Default Columns' => 'Übersicht Standardspalten',
         'Add dynamic field' => 'Dynamisches Feld hinzufügen',
         'Filter' => 'Filter',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>

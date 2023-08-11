@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.687308991474988;
+    $Self->{Completeness}        = 0.687148142190767;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -599,7 +599,7 @@ sub Data {
         'Assignment of dynamic fields to screens' => 'Przypisanie pól dynamicznych do ekranów',
         'Overview' => 'Przegląd',
         'Screens' => 'Ekrany',
-        'Default columns' => 'Domyślne kolumny',
+        'Overview Default Columns' => '',
         'Add dynamic field' => 'Dodaj pole dynamiczne',
         'Filter' => 'Filtr',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
