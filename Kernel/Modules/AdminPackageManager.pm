@@ -1946,6 +1946,7 @@ sub _InstallHandling {
         $Data{PackageRequired} = $PackageObject->GetRequiredPackages(
             Structure => \%Structure,
         );
+        $Data{PackageRequiredProblem} = grep { $_->{IsInstalled} eq 0 } @{ $Data{PackageRequired} };
     }
 
     # parse sopm-file and show <ModuleRequired> information
@@ -1953,6 +1954,7 @@ sub _InstallHandling {
         $Data{ModuleRequired} = $PackageObject->GetRequiredModules(
             Structure => \%Structure,
         );
+        $Data{ModuleRequiredProblem} = grep { $_->{IsInstalled} eq 0 } @{ $Data{ModuleRequired} };
     }
 
     my %Response = $PackageObject->AnalyzePackageFrameworkRequirements(

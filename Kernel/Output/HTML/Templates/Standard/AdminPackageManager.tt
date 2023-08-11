@@ -287,14 +287,14 @@
                     [% END %]
                     <ul class="PackageRequired">
                         [% FOREACH Item IN Data.$Type %]
-                        <li class="CheckResult[% Item.IsInstalled %]">
+                        <li class="CheckResult[% IF Item.IsInstalled %]OK[% ELSE %]Problem[% END %]">
                             <h3 class="Heading">
-                                <span title="[% Item.IsInstalled %]" class="Flag Small [% Item.IsInstalled %]">
-                                    <span>[% Item.IsInstalled %]</span>
+                                <span title="[% IF Item.IsInstalled %]OK[% ELSE %]Problem[% END %]" class="Flag Small [% IF Item.IsInstalled %]OK[% ELSE %]Problem[% END %]">
+                                    <span>[% IF Item.IsInstalled %]OK[% ELSE %]Problem[% END %]</span>
                                 </span>
                                 [% Item.Name %][% IF Item.Version %] - [% Translate("Version") | html %] [% Item.Version %] [% END %]
                             </h3>
-                            [% IF Item.IsInstalled == 'OK' %]
+                            [% IF Item.IsInstalled == 1 %]
                                 [% IF Type == 'PackageRequired' %]
                                     <p class="Value">[% Translate("Required package %s is already installed.", Item.Name) | html %]</p>
                                 [% ELSE %]
@@ -337,9 +337,7 @@
                         <input type="hidden" name="[% Data.Type | html %]" value="1"/>
                         <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
                         <input type="hidden" name="Version" value="[% Data.Version | html %]"/>
-
-
-                        <button class="Primary CallForAction [% IF Data.PackageRequired || Data.ModuleRequired %] Disabled[% END %]" type="submit" value="[% Translate("Continue") | html %]"[% IF Data.PackageRequired || Data.ModuleRequired %] disabled[% END %]>
+                        <button class="Primary CallForAction [% IF Data.PackageRequiredProblem || Data.ModuleRequiredProblem %] Disabled[% END %]" type="submit" value="[% Translate("Continue") | html %]"[% IF Data.PackageRequiredProblem || Data.ModuleRequiredProblem %] disabled[% END %]>
                             <span>[% Translate("Continue") | html %]</span>
                         </button>
 [% RenderBlockStart("IntroCancel") %]
