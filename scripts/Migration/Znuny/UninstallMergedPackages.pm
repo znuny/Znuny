@@ -50,6 +50,7 @@ sub Run {
         'Znuny-NoteToLinkedTicket',
         'Znuny4OTRS-NoteToLinkedTicket',
         'Znuny4OTRS-UserMaxArticlesPerPage',
+        'Znuny-BugfixFormInput',
     );
 
     PACKAGENAME:

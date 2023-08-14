@@ -870,10 +870,9 @@ sub PossibleValuesGet {
 
     my %PossibleValues;
 
-    # Provide empty value if no value is present so the field will not be displayed as disabled.
-    if ( !$Param{Value} ) {
-        $PossibleValues{' '} = '';
-    }
+    # Provide empty value so the field will not be displayed as disabled if there are no selectable
+    # values yet.
+    $PossibleValues{' '} = '';
 
     if ( $Param{DynamicFieldConfig}->{Config}->{InitialSearchTerm} ) {
         my $InitialSearchTerm = $LayoutObject->Ascii2Html(
