@@ -148,6 +148,9 @@ Core.UI.ActionRow = (function (TargetNS) {
                     }
                 });
             }
+
+            // Initialize modernized fields, e.g. queue move selection
+            Core.UI.InputFields.Activate();
         }
         // Two ore more checkboxes selected
         else {
