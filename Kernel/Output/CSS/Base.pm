@@ -14,6 +14,10 @@ use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 
+=head1 NAME
+
+Kernel::Output::CSS::Base - output css module base class
+
 =head2 new()
 
 Create an object. Do not use it directly, instead use:

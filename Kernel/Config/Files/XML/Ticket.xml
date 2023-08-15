@@ -4938,10 +4938,6 @@
         <Description Translatable="1">Defines an external link to the database of the customer (e.g. 'http://yourhost/customer.php?CID=[% Data.CustomerID %]' or '').</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <!--
-            TODO: Can this be removed?
-            <Item ValueType="String" ValueRegex="">[% Env("CGIHandle") %]?Action=AgentTicketCustomer;TicketID=[% Data.TicketID | html %]</Item>
-            -->
             <Item ValueType="String" ValueRegex="">[% Env("CGIHandle") %]?Action=AgentCustomerInformationCenter;CustomerID=[% Data.CustomerID | uri %]</Item>
         </Value>
     </Setting>
@@ -5121,9 +5117,6 @@
             </Hash>
         </Value>
     </Setting>
-    <!-- TODO: check if the counter is really needed, otherwise the module can be removed and use
-    the standard link module
-    -->
     <Setting Name="Frontend::ToolBarModule###200-Ticket::AgentTicketService" Required="0" Valid="1">
         <Description Translatable="1">Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
@@ -5137,7 +5130,6 @@
             </Hash>
         </Value>
     </Setting>
-
     <Setting Name="Frontend::ToolBarModule###220-Ticket::TicketSearchFulltext" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Agent interface module to access fulltext search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>

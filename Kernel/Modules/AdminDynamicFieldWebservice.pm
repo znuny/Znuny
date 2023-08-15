@@ -10,6 +10,7 @@ package Kernel::Modules::AdminDynamicFieldWebservice;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',

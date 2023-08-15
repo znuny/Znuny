@@ -11,6 +11,7 @@ package Kernel::Output::HTML::TicketZoom::Customer::Base;
 
 use strict;
 use warnings;
+use utf8;
 
 use Digest::MD5 qw(md5_hex);
 

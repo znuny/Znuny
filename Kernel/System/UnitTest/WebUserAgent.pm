@@ -10,6 +10,7 @@ package Kernel::System::UnitTest::WebUserAgent;
 
 use strict;
 use warnings;
+use utf8;
 
 use HTTP::Response;
 use Sub::Override;

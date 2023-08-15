@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_config version="2.0" init="Framework">
+    <!-- nofilter(TidyAll::Plugin::Znuny::Config::ACLKeysLevel3Actions) -->
     <Setting Name="SecureMode" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.</Description>
         <Navigation>Core</Navigation>

@@ -12,6 +12,7 @@ package Kernel::Modules::AgentTicketPhone;
 
 use strict;
 use warnings;
+use utf8;
 
 use Mail::Address;
 

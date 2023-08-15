@@ -10,6 +10,7 @@ package scripts::Migration::Znuny::UpgradeDatabaseStructure::SMIME;    ## no cri
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(scripts::Migration::Base);
 

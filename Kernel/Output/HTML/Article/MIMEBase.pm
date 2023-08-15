@@ -11,6 +11,7 @@ package Kernel::Output::HTML::Article::MIMEBase;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent 'Kernel::Output::HTML::Article::Base';
 

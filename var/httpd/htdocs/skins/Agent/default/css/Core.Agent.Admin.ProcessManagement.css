@@ -706,7 +706,7 @@ ul.Path li.Transition {
     padding: var(--padding-xxl) 0;
 }
 
-ul.Path li.StartActivity, 
+ul.Path li.StartActivity,
 ul.Path li.EndActivity {
     background-color: var(--white);
     border: 1px solid gray;
@@ -717,7 +717,7 @@ ul.Path li.EndActivity {
     text-overflow: ellipsis;
 }
 
-ul.Path li.StartActivity + i, 
+ul.Path li.StartActivity + i,
 ul.Path li.EndActivity + i {
     position: relative;
     top: -28px;

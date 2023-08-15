@@ -11,6 +11,7 @@ package Kernel::Modules::AgentTicketPhoneCommon;
 
 use strict;
 use warnings;
+use utf8;
 
 use Mail::Address;
 use Kernel::System::VariableCheck qw(:all);

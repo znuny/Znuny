@@ -10,6 +10,7 @@
 
 # to be edited in ISO-8859-2 codepage, with UNIX-style line endings (LF)
 # based on Serbian translation (Croatian translation is still incomplete)
+## nofilter(TidyAll::Plugin::Znuny::Translation::JavaScriptStrings)
 
 package Kernel::Language::hr;
 
