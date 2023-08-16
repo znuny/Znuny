@@ -21,7 +21,6 @@ $Selenium->RunTest(
     sub {
 
         my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
-        my $CryptPGPObject = $Kernel::OM->Get('Kernel::System::Crypt::PGP');
         my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Create test user and login.
@@ -155,7 +154,7 @@ $Selenium->RunTest(
 
         # Delete test PGP keys.
         for my $Count ( 1 .. 2 ) {
-            my @Keys = $CryptPGPObject->KeySearch(
+            my @Keys = $Kernel::OM->Get('Kernel::System::Crypt::PGP')->KeySearch(
                 Search => $PGPKey{$Count},
             );
 
