@@ -518,7 +518,7 @@ $Selenium->RunTest(
             "AdminValidFilter - All invalid entries are displayed again.",
         );
 
-        $Selenium->execute_script("\$('#GenericAgentJobs tbody tr:eq(1) .DeleteTask').click();");
+        $Selenium->execute_script("\$('#GenericAgentJobs tbody tr:eq(0) .DeleteTask').click();");
 
         # wait for dialog to show up, if necessary
         $Selenium->WaitFor(
