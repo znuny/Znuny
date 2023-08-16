@@ -20,8 +20,8 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
-        my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
