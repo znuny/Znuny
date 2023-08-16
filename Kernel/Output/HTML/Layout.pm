@@ -1600,7 +1600,6 @@ sub ToolbarModules {
     }
 
     # show tool bar items
-    my %Settings;
     MODULE:
     for my $Key ( sort keys %Modules ) {
         next MODULE if !%{ $Modules{$Key} };
@@ -1663,7 +1662,6 @@ sub ToolbarModules {
     if ( $Param{ReturnResult} ) {
         return $Self->Output(
             TemplateFile => "HeaderToolbar",
-            Data         => \%Settings,
         );
     }
 }
