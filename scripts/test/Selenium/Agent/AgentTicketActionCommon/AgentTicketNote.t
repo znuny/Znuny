@@ -507,7 +507,7 @@ $Selenium->RunTest(
         );
 
         # open the actions menu.
-        $Selenium->find_element(".mobile-action-option", "css")->click();
+        $Selenium->find_element( ".mobile-action-option", "css" )->click();
 
         # Open the note screen (which should be an iframe now).
         $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketNote;TicketID=$TicketID' )]")->click();

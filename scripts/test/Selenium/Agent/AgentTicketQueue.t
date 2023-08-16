@@ -382,6 +382,7 @@ $Selenium->RunTest(
         );
 
         my $HeaderText = $Selenium->execute_script("return \$('.OverviewBox.Small h1').text().trim();");
+
         # remove whitespaces, that are added by the template
         $HeaderText =~ s/\s+/ /g;
         $Self->Is(

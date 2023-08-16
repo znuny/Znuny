@@ -69,7 +69,7 @@ $Selenium->RunTest(
         );
 
         # open the actions menu.
-        $Selenium->find_element(".mobile-action-option", "css")->click();
+        $Selenium->find_element( ".mobile-action-option", "css" )->click();
 
         my $Element = $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketPriority')]");
         $Self->True(
