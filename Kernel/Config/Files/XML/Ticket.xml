@@ -2414,6 +2414,13 @@
             <Array></Array>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###ResponsibleIDs" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Array></Array>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###PriorityIDs" Required="0" Valid="0">
         <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
         <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
