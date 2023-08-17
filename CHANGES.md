@@ -1,4 +1,6 @@
 # 7.0.10 2023-??-??
+ - 2023-08-17 Fixed Selenium test AdminCustomerUserService.t (#482). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#482](https://github.com/znuny/Znuny/pull/482)
+ - 2023-08-17 Fixed Selenium tests for AgentStatistics (#484). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#484](https://github.com/znuny/Znuny/pull/484)
  - 2023-08-17 Added missing default search for Responsible Ticket::Frontend::AgentTicketSearch###Defaults###ResponsibleID.
  - 2023-08-17 Added NaviagionBar to Layout output functions. Prettify Templates - Added better style.
  - 2023-08-17 Fixed some Selenium tests (#478). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#478](https://github.com/znuny/Znuny/pull/478)
