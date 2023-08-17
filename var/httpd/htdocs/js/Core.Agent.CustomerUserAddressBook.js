@@ -59,7 +59,7 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
                     // If there's no input element with the selected name
                     // find the next "select" element and use that one for checking
                     if (!$Element.length) {
-                        $Element = $(this).next().find('select');
+                        $Element = $(this).parent().next().find('select');
                     }
                     if ($Element.length) {
                         if ($Element.val() && $Element.val() !== '') {
