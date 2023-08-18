@@ -1099,7 +1099,7 @@ sub _CreateMimeEntity {
     }
     else {
         $Header{'X-Mailer'}     = "$Product Mail Service ($Version)";
-        $Header{'X-Powered-By'} = 'OTRS (https://otrs.com/)';
+        $Header{'X-Powered-By'} = 'Znuny (https://www.znuny.com/)';
     }
     $Header{Type} = $Param{MimeType} || 'text/plain';
 
