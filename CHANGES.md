@@ -1,4 +1,5 @@
 # 7.0.10 2023-??-??
+ - 2023-08-18 Fixed - Dropdown arrow does not drop down dropdown box [#466](https://github.com/znuny/Znuny/issues/466).
  - 2023-08-17 Fixed Selenium test AdminCustomerUserService.t (#482). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#482](https://github.com/znuny/Znuny/pull/482)
  - 2023-08-17 Fixed Selenium tests for AgentStatistics (#484). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#484](https://github.com/znuny/Znuny/pull/484)
  - 2023-08-17 Added missing default search for Responsible Ticket::Frontend::AgentTicketSearch###Defaults###ResponsibleID.
@@ -14,7 +15,7 @@
  - 2023-08-08 Changed default value of Frontend::AvatarEngine to None.
  - 2023-08-07 Fixed missing $ on StartDateTimeObject -> $StartDateTimeObject (#475). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [PR#475](https://github.com/znuny/Znuny/pull/475).
  - 2023-08-07 Fixed description for SysConfig Setting 'Stats::UseAgentElementInStats' and 'Stats::UseInvalidAgentInStats'.
- - 2023-08-07 Fixed message subject prefill on Activity dialog only works for Agent. https://github.com/znuny/Znuny/issues/363.
+ - 2023-08-07 Fixed message subject prefill on Activity dialog only works for Agent. [#363](https://github.com/znuny/Znuny/issues/363).
  - 2023-08-07 Changed default spacing in process ProcessWidgetDynamicFieldGroups - reduced padding.
  - 2023-08-07 Fixed - Screens containing 'To:' 'Cc:' and 'Bcc:' doubles the labels.
  - 2023-08-03 Fixed Bug - Snippets not sorted by name in search results. [#473](https://github.com/znuny/Znuny/issues/473)
