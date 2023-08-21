@@ -1,4 +1,5 @@
 # 7.0.10 2023-??-??
+ - 2023-08-21 Fixed - Support Data Collector show wrong section name.
  - 2023-08-18 Fixed - Dropdown arrow does not drop down dropdown box [#466](https://github.com/znuny/Znuny/issues/466).
  - 2023-08-17 Updated JS libraries jQuery, jQuery UI and Moment.js.
  - 2023-08-17 Fixed Selenium test AdminCustomerUserService.t (#482). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#482](https://github.com/znuny/Znuny/pull/482)

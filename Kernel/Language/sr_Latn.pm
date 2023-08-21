@@ -5029,7 +5029,7 @@ sub Data {
         'Client Connection Charset' => 'Karakterset za povezivanje klijenta',
         'Setting character_set_client needs to be utf8.' => 'Podešavanje character_set_client mora biti utf8.',
         'Server Database Charset' => 'Karakterset serverske baze podataka',
-        'This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set \'utf8\'.' =>
+        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
             '',
         'The setting character_set_database needs to be \'utf8\'.' => 'Podešavanje character_set_database mora biti \'utf8\'.',
         'Table Charset' => 'Tabela karakterseta',
@@ -5088,7 +5088,7 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/postgresql/Version.pm
         'PostgreSQL 9.2 or higher is required.' => 'Neophodan je PostgreSQL 9.2 ili više.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
         'Operating System' => 'Operativni sistem',
         'Znuny Disk Partition' => 'Znuny particija na disku',
 
@@ -5135,165 +5135,6 @@ sub Data {
         'There should be more than 60% free swap space.' => 'Mora postojati više od 60 % slobodnog swap prostora',
         'There should be no more than 200 MB swap space used.' => 'Ne treba da bude više od 200 MB upotrebljenog Swap prostora.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'Znuny' => '',
-        'Article Search Index Status' => 'Stanje indeksa pretrage članaka',
-        'Indexed Articles' => 'Indeksiranih članaka',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticlesPerCommunicationChannel.pm
-        'Articles Per Communication Channel' => 'Članaka po komunikacionom kanalu',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
-        'Incoming communications' => 'Dolazne komunikacije',
-        'Outgoing communications' => 'Odlazne komunikacije',
-        'Failed communications' => 'Neuspele komunikacije',
-        'Average processing time of communications (s)' => 'Prosečno vreme trajanja komunikacija (s)',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
-        'Communication Log Account Status (last 24 hours)' => 'Stanje naloga komunikacionog loga (poslednjih 24 sata)',
-        'No connections found.' => 'Nisu pronađene konekcije.',
-        'ok' => 'u redu',
-        'permanent connection errors' => 'trajne greške u konekciji',
-        'intermittent connection errors' => 'povremene greške u konekciji',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
-        'Config Settings' => 'Podešavanja konfiguracije',
-        'Could not determine value.' => 'Nije moguće utvrditi vrednost.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
-        'Daemon' => 'Sistemski servis',
-        'Daemon is running.' => 'Servis radi.',
-        'Daemon is not running.' => 'Servis ne radi.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
-        'Database Records' => 'Zapisi u bazi podataka',
-        'Tickets' => 'Tiketi',
-        'Ticket History Entries' => 'Istorija unosa tiketa',
-        'Articles' => 'Članci',
-        'Attachments (DB, Without HTML)' => 'Prilozi (baza podataka, bez HTML)',
-        'Customers With At Least One Ticket' => 'Klijenti sa bar jednim tiketom',
-        'Dynamic Field Values' => 'Vrednosti dinamičkog polja',
-        'Invalid Dynamic Fields' => 'Nevažeća dinamička polja.',
-        'Invalid Dynamic Field Values' => 'Nevažeće vrednosti dinamičkih polja.',
-        'GenericInterface Webservices' => 'GenericInterface veb servis',
-        'Process Tickets' => 'Proces tiketi',
-        'Months Between First And Last Ticket' => 'Meseci između prvog i poslednjeg tiketa',
-        'Tickets Per Month (avg)' => 'Tiketi mesečno (prosečno)',
-        'Open Tickets' => 'Otvoreni tiketi',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
-        'Default SOAP Username And Password' => 'Podrazumevano SOAP korisničko ime i lozinka',
-        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
-            'Sigurnosni rizik: koristite podrazumevana podešavanja za SOAP::User i SOAP::Password. Molimo promenite ga.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
-        'Default Admin Password' => 'Predefinisana lozinka administratora',
-        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
-            'Sigurnosni rizik: agent nalog root@localhost još uvek ima predefinisanu lozinku. Molimo promenite je ili deaktivirajte nalog.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
-        'Email Sending Queue' => 'Red za slanje imejlova',
-        'Emails queued for sending' => 'Broj imejlova zakazanih za slanje',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
-        'FQDN (domain name)' => 'FQDN (naziv domena)',
-        'Please configure your FQDN setting.' => 'Molimo da konfigurišete FQDN podešavanje.',
-        'Domain Name' => 'Naziv domena',
-        'Your FQDN setting is invalid.' => 'Vaša FQDN podešavanja su nevažeća.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
-        'File System Writable' => 'Omogućeno pisanje u sistem datoteka.',
-        'The file system on your Znuny partition is not writable.' => 'Nije moguće pisanje u sistem datoteka na vašoj Znuny particiji.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
-        'Legacy Configuration Backups' => 'Rezervne kopije prošlih konfiguracija',
-        'No legacy configuration backup files found.' => 'Nisu pronađene rezervne kopije prošlih konfiguracija.',
-        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
-            'Pronađene su rezervne kopije prošlih konfiguracija u Kernel/Config/Backups, međutim mogu biti neophodne za rad instaliranih paketa.',
-        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
-            'Rezervne kopije prošlih konfiguracija više nisu neophodne za rad instaliranih paketa, molimo uklonite ih iz Kernel/Config/Backups.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
-        'The following JavaScript files loaded multiple times:' => '',
-        'Files' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
-        'Package Installation Status' => 'Status instalacije paketa',
-        'Some packages have locally modified files.' => 'Neki paketi sadrže lokalno izmenjene datoteke.',
-        'Some packages are not correctly installed.' => 'Neki paketi nisu ispravno instalirani.',
-        'Package Framework Version Status' => 'Status paketa za verziju sistema',
-        'Some packages are not allowed for the current framework version.' =>
-            'Neki paketi nisu dozvoljeni za verziju vašeg sistema. ',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageList.pm
-        'Package List' => 'Lista paketa',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SessionConfigSettings.pm
-        'Session Config Settings' => 'Podešavanja sesija',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
-        'Spooled Emails' => 'Imejlovi u redu čekanja',
-        'There are emails in var/spool that Znuny could not process.' => 'Postoje imejlovi u var/spool koje Znuny ne može da obradi.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
-        'Your SystemID setting is invalid, it should only contain digits.' =>
-            'Vaša podešavanje SystemID je nevažeće, treba da sadrži samo cifre.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
-        'Default Ticket Type' => 'Podrazumevani tip tiketa',
-        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
-            'Podešeni podrazumevani tip tiketa je nevažeći ili nedostaje. Molimo promenite podešavanje Ticket::Type::Default i izaberite važeći tip tiketa.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
-        'Ticket Index Module' => 'Tiket indeks modul',
-        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
-            'Imate više od 60.000 tiketa i treba da koristite StaticDB modul. Pogledajte administratorsko uputstvo (Podešavanje performansi) za više informacija.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
-        'Invalid Users with Locked Tickets' => 'Neispravni korisnici sa zaključanim tiketima',
-        'There are invalid users with locked tickets.' => 'Postoje neispravni korisnici sa zaključanim tiketima.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/OpenTickets.pm
-        'You should not have more than 8,000 open tickets in your system.' =>
-            'Ne bi trebalo da imate više od 8.000 otvorenih tiketa u sistemu.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
-        'Ticket Search Index Module' => 'Modul za indeksnu pretragu tiketa',
-        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
-            'Proces indeksiranja će uključiti spremanje originalnog teksta članka u indeksu pretrage, bez izvršavanja filtera ili uklanjanja zaustavnih reči. Ovo će uvećati veličinu indeksa pretrage i može usporiti tekstualnu pretragu.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-        'Orphaned Records In ticket_lock_index Table' => 'Napušteni zapisi u ticket_lock_index tabeli',
-        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'Tabela ticket_lock_index sadrži nepovezane zapise. Molimo da pokrenete bin/znuny.Console.pl Maint::Ticket::QueueIndexCleanup da bi očistili StaticDB indeks.',
-        'Orphaned Records In ticket_index Table' => 'Napušteni zapisi u ticket_index tabeli',
-        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'Tabela ticket_lindex sadrži nepovezane zapise. Molimo da pokrenete bin/znuny.Console.pl Maint::Ticket::QueueIndexCleanup da bi očistili StaticDB indeks.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
-        'Time Settings' => 'Podešavanja vremena',
-        'Server time zone' => 'Vremenska zona servera',
-        'Znuny time zone' => 'Znuny vremenska zona',
-        'Znuny time zone is not set.' => 'Znuny vremenska zona nije podešena.',
-        'User default time zone' => 'Podrazumevana vremenska zona korisnika',
-        'User default time zone is not set.' => 'Podrazumevana vremenska zona korisnika nije podešena.',
-        'Calendar time zone is not set.' => 'Vremenska zona kalendara nije podešena.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentSkinUsage.pm
-        'UI - Agent Skin Usage' => 'UI - izgledi interfejsa operatera u korišćenju',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentThemeUsage.pm
-        'UI - Agent Theme Usage' => 'UI - teme interfejsa operatera u korišćenju',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
-        'UI - Special Statistics' => 'UI - posebne statistike',
-        'Agents using custom main menu ordering' => 'Operateri sa prilagođenim redosledom glavnog menija',
-        'Agents using favourites for the admin overview' => 'Operateri sa omiljenim stavkama za administratorski pregled',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'Znuny Version' => 'Znuny verzija',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Veb server',
         'Loaded Apache Modules' => 'Učitani Apache moduli',
@@ -5331,7 +5172,166 @@ sub Data {
         'Webserver Version' => 'Veb server verzija',
         'Could not determine webserver version.' => 'Ne može da prepozna veb server verziju.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
+        'Znuny' => '',
+        'Article Search Index Status' => 'Stanje indeksa pretrage članaka',
+        'Indexed Articles' => 'Indeksiranih članaka',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticlesPerCommunicationChannel.pm
+        'Articles Per Communication Channel' => 'Članaka po komunikacionom kanalu',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
+        'Incoming communications' => 'Dolazne komunikacije',
+        'Outgoing communications' => 'Odlazne komunikacije',
+        'Failed communications' => 'Neuspele komunikacije',
+        'Average processing time of communications (s)' => 'Prosečno vreme trajanja komunikacija (s)',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
+        'Communication Log Account Status (last 24 hours)' => 'Stanje naloga komunikacionog loga (poslednjih 24 sata)',
+        'No connections found.' => 'Nisu pronađene konekcije.',
+        'ok' => 'u redu',
+        'permanent connection errors' => 'trajne greške u konekciji',
+        'intermittent connection errors' => 'povremene greške u konekciji',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
+        'Config Settings' => 'Podešavanja konfiguracije',
+        'Could not determine value.' => 'Nije moguće utvrditi vrednost.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
+        'Daemon' => 'Sistemski servis',
+        'Daemon is running.' => 'Servis radi.',
+        'Daemon is not running.' => 'Servis ne radi.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
+        'Database Records' => 'Zapisi u bazi podataka',
+        'Tickets' => 'Tiketi',
+        'Ticket History Entries' => 'Istorija unosa tiketa',
+        'Articles' => 'Članci',
+        'Attachments (DB, Without HTML)' => 'Prilozi (baza podataka, bez HTML)',
+        'Customers With At Least One Ticket' => 'Klijenti sa bar jednim tiketom',
+        'Dynamic Field Values' => 'Vrednosti dinamičkog polja',
+        'Invalid Dynamic Fields' => 'Nevažeća dinamička polja.',
+        'Invalid Dynamic Field Values' => 'Nevažeće vrednosti dinamičkih polja.',
+        'GenericInterface Webservices' => 'GenericInterface veb servis',
+        'Process Tickets' => 'Proces tiketi',
+        'Months Between First And Last Ticket' => 'Meseci između prvog i poslednjeg tiketa',
+        'Tickets Per Month (avg)' => 'Tiketi mesečno (prosečno)',
+        'Open Tickets' => 'Otvoreni tiketi',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
+        'Default SOAP Username And Password' => 'Podrazumevano SOAP korisničko ime i lozinka',
+        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
+            'Sigurnosni rizik: koristite podrazumevana podešavanja za SOAP::User i SOAP::Password. Molimo promenite ga.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
+        'Default Admin Password' => 'Predefinisana lozinka administratora',
+        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
+            'Sigurnosni rizik: agent nalog root@localhost još uvek ima predefinisanu lozinku. Molimo promenite je ili deaktivirajte nalog.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
+        'Email Sending Queue' => 'Red za slanje imejlova',
+        'Emails queued for sending' => 'Broj imejlova zakazanih za slanje',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
+        'FQDN (domain name)' => 'FQDN (naziv domena)',
+        'Please configure your FQDN setting.' => 'Molimo da konfigurišete FQDN podešavanje.',
+        'Domain Name' => 'Naziv domena',
+        'Your FQDN setting is invalid.' => 'Vaša FQDN podešavanja su nevažeća.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
+        'File System Writable' => 'Omogućeno pisanje u sistem datoteka.',
+        'The file system on your Znuny partition is not writable.' => 'Nije moguće pisanje u sistem datoteka na vašoj Znuny particiji.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
+        'Legacy Configuration Backups' => 'Rezervne kopije prošlih konfiguracija',
+        'No legacy configuration backup files found.' => 'Nisu pronađene rezervne kopije prošlih konfiguracija.',
+        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
+            'Pronađene su rezervne kopije prošlih konfiguracija u Kernel/Config/Backups, međutim mogu biti neophodne za rad instaliranih paketa.',
+        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
+            'Rezervne kopije prošlih konfiguracija više nisu neophodne za rad instaliranih paketa, molimo uklonite ih iz Kernel/Config/Backups.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
+        'Views with multiple loaded JavaScript files' => '',
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
+        'Package Installation Status' => 'Status instalacije paketa',
+        'Some packages have locally modified files.' => 'Neki paketi sadrže lokalno izmenjene datoteke.',
+        'Some packages are not correctly installed.' => 'Neki paketi nisu ispravno instalirani.',
+        'Package Framework Version Status' => 'Status paketa za verziju sistema',
+        'Some packages are not allowed for the current framework version.' =>
+            'Neki paketi nisu dozvoljeni za verziju vašeg sistema. ',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageList.pm
+        'Package List' => 'Lista paketa',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SessionConfigSettings.pm
+        'Session Config Settings' => 'Podešavanja sesija',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
+        'Spooled Emails' => 'Imejlovi u redu čekanja',
+        'There are emails in var/spool that Znuny could not process.' => 'Postoje imejlovi u var/spool koje Znuny ne može da obradi.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SystemID.pm
+        'Your SystemID setting is invalid, it should only contain digits.' =>
+            'Vaša podešavanje SystemID je nevažeće, treba da sadrži samo cifre.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
+        'Default Ticket Type' => 'Podrazumevani tip tiketa',
+        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
+            'Podešeni podrazumevani tip tiketa je nevažeći ili nedostaje. Molimo promenite podešavanje Ticket::Type::Default i izaberite važeći tip tiketa.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
+        'Ticket Index Module' => 'Tiket indeks modul',
+        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
+            'Imate više od 60.000 tiketa i treba da koristite StaticDB modul. Pogledajte administratorsko uputstvo (Podešavanje performansi) za više informacija.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
+        'Invalid Users with Locked Tickets' => 'Neispravni korisnici sa zaključanim tiketima',
+        'There are invalid users with locked tickets.' => 'Postoje neispravni korisnici sa zaključanim tiketima.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/OpenTickets.pm
+        'You should not have more than 8,000 open tickets in your system.' =>
+            'Ne bi trebalo da imate više od 8.000 otvorenih tiketa u sistemu.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
+        'Ticket Search Index Module' => 'Modul za indeksnu pretragu tiketa',
+        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
+            'Proces indeksiranja će uključiti spremanje originalnog teksta članka u indeksu pretrage, bez izvršavanja filtera ili uklanjanja zaustavnih reči. Ovo će uvećati veličinu indeksa pretrage i može usporiti tekstualnu pretragu.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
+        'Orphaned Records In ticket_lock_index Table' => 'Napušteni zapisi u ticket_lock_index tabeli',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'Tabela ticket_lock_index sadrži nepovezane zapise. Molimo da pokrenete bin/znuny.Console.pl Maint::Ticket::QueueIndexCleanup da bi očistili StaticDB indeks.',
+        'Orphaned Records In ticket_index Table' => 'Napušteni zapisi u ticket_index tabeli',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'Tabela ticket_lindex sadrži nepovezane zapise. Molimo da pokrenete bin/znuny.Console.pl Maint::Ticket::QueueIndexCleanup da bi očistili StaticDB indeks.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
+        'Time Settings' => 'Podešavanja vremena',
+        'Server time zone' => 'Vremenska zona servera',
+        'Znuny time zone' => 'Znuny vremenska zona',
+        'Znuny time zone is not set.' => 'Znuny vremenska zona nije podešena.',
+        'User default time zone' => 'Podrazumevana vremenska zona korisnika',
+        'User default time zone is not set.' => 'Podrazumevana vremenska zona korisnika nije podešena.',
+        'Calendar time zone is not set.' => 'Vremenska zona kalendara nije podešena.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentSkinUsage.pm
+        'UI - Agent Skin Usage' => 'UI - izgledi interfejsa operatera u korišćenju',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentThemeUsage.pm
+        'UI - Agent Theme Usage' => 'UI - teme interfejsa operatera u korišćenju',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
+        'UI - Special Statistics' => 'UI - posebne statistike',
+        'Agents using custom main menu ordering' => 'Operateri sa prilagođenim redosledom glavnog menija',
+        'Agents using favourites for the admin overview' => 'Operateri sa omiljenim stavkama za administratorski pregled',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Version.pm
+        'Znuny Version' => 'Znuny verzija',
+
+        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'Detalji istovremenih korisnika',
         'Concurrent Users' => 'Istovremeni korisnici',
 
