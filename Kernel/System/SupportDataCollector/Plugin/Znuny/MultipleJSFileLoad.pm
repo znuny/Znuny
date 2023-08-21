@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('Znuny') . '/' . Translatable('Views with multiple loaded JavaScript files');
+    return Translatable('Znuny');
 }
 
 sub Run {
@@ -31,22 +31,16 @@ sub Run {
     my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
 
+    my $Message = $LanguageObject->Translate('The following JavaScript files loaded multiple times:') . "\n\r";
+    my $FoundMultipleJSFiles;
+
     for my $Interface (qw (Agent Customer)) {
 
         # get global js
         my $CommonJSList = $ConfigObject->Get("Loader::$Interface\::CommonJS");
 
         # load js for agent views.
-        my %ViewFileList;
-        KEY:
-        for my $Key ( sort keys %{$CommonJSList} ) {
-            next KEY if $Key eq '100-CKEditor' && !$ConfigObject->Get('Frontend::RichText');
-            FILE:
-            for my $File ( @{ $CommonJSList->{$Key} } ) {
-                $ViewFileList{$File} ||= 0;
-                $ViewFileList{$File}++;
-            }
-        }
+        my %MultipleJSFileActionSettings;
 
         my $FrontendModuleRoleLabel = $Interface eq 'Agent' ? 'Frontend::Module' : 'CustomerFrontend::Module';
         my $ActionListConfig        = $ConfigObject->Get($FrontendModuleRoleLabel);
@@ -56,7 +50,15 @@ sub Run {
         for my $Action (@Actions) {
             my $Setting = $ConfigObject->Get("Loader::Module::$Action") || {};
 
-            $MultipleJSFileActions{$Action} = {%ViewFileList};
+            KEY:
+            for my $Key ( sort keys %{$CommonJSList} ) {
+                next KEY if $Key eq '100-CKEditor' && !$ConfigObject->Get('Frontend::RichText');
+                FILE:
+                for my $File ( @{ $CommonJSList->{$Key} } ) {
+                    $MultipleJSFileActionSettings{$Action}->{$File} ||= [];
+                    push @{ $MultipleJSFileActionSettings{$Action}->{$File} }, "Loader::$Interface\::CommonJS###$Key";
+                }
+            }
 
             MODULE:
             for my $Module ( sort keys %{$Setting} ) {
@@ -64,42 +66,48 @@ sub Run {
                 FILE:
                 for my $File ( @{ $Setting->{$Module}->{JavaScript} } ) {
 
-                    if ( $MultipleJSFileActions{$Action}{$File} ) {
-                        $MultipleJSFileActions{$Action}{$File}++ if $MultipleJSFileActions{$Action}{$File};
-
-                        next FILE if $MultipleJSFileActions{$Action}{$File};
-                    }
-
-                    $MultipleJSFileActions{$Action}{$File} = 1 if !$MultipleJSFileActions{$Action}{$File};
+                    $MultipleJSFileActionSettings{$Action}->{$File} ||= [];
+                    push @{ $MultipleJSFileActionSettings{$Action}->{$File} }, "Loader::Module::$Action###$Module";
                 }
             }
         }
 
-        for my $Action ( sort keys %MultipleJSFileActions ) {
+        for my $Action ( sort keys %MultipleJSFileActionSettings ) {
             my $MultipleJSFileCount = 0;
-            my @Files;
-            for my $File ( sort keys %{ $MultipleJSFileActions{$Action} } ) {
-                if ( $MultipleJSFileActions{$Action}->{$File} > 1 ) {
+            my $MessageFiles        = '';
+            for my $File ( sort keys %{ $MultipleJSFileActionSettings{$Action} } ) {
+                if ( scalar @{ $MultipleJSFileActionSettings{$Action}->{$File} } > 1 ) {
                     $MultipleJSFileCount++;
-                    push @Files, "$File";
+                    $FoundMultipleJSFiles++;
+                    $MessageFiles .= "\n\n" . $File . ":\n\t○ ";
+                    $MessageFiles .= join "\n\t○ ", @{ $MultipleJSFileActionSettings{$Action}->{$File} };
                 }
             }
 
-            my $Message = $LanguageObject->Translate('The following JavaScript files loaded multiple times:') . "\n\r";
-            $Message .= join "\n\r", @Files;
+            $Message .= $MessageFiles;
 
             my $Value = $MultipleJSFileCount . " ";
             $Value .= (
                 $MultipleJSFileCount > 1 ? $LanguageObject->Translate('Files') : $LanguageObject->Translate('File')
             );
 
-            $Self->AddResultWarning(
-                Identifier       => $Action,
-                Label            => $Action,
-                Value            => $Value,
-                MessageFormatted => $Message,
-            ) if $MultipleJSFileCount > 0;
+            if ( $MultipleJSFileCount > 0 ) {
+                $Self->AddResultInformation(
+                    Identifier       => $Action,
+                    Label            => $Action,
+                    Value            => $Value,
+                    MessageFormatted => $Message,
+                    DisplayPath      => Translatable('Znuny') . '/'
+                        . Translatable('Views with multiple loaded JavaScript files'),
+                );
+            }
         }
+    }
+
+    if ( !$FoundMultipleJSFiles ) {
+        $Self->AddResultInformation(
+            Label => Translatable('Views with multiple loaded JavaScript files'),
+        );
     }
 
     return $Self->GetResults();

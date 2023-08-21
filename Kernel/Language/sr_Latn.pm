@@ -5251,9 +5251,9 @@ sub Data {
             'Rezervne kopije prošlih konfiguracija više nisu neophodne za rad instaliranih paketa, molimo uklonite ih iz Kernel/Config/Backups.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
         'The following JavaScript files loaded multiple times:' => '',
         'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
         'Package Installation Status' => 'Status instalacije paketa',

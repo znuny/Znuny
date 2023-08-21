@@ -5246,9 +5246,9 @@ sub Data {
             'Los archivos de respaldo de configuración anteriores ya no son necesarios para los paquetes instalados, elimínelos de la carpeta Kernel/Config/Backups.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
         'The following JavaScript files loaded multiple times:' => '',
         'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
         'Package Installation Status' => 'Estado de la Instalación del Paquete',

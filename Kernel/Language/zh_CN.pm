@@ -5252,9 +5252,9 @@ sub Data {
             '已安装的软件包不再需要旧的配置备份文件，请从 Kernel/Config/Backups 文件夹中删除它们。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
         'The following JavaScript files loaded multiple times:' => '',
         'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
         'Package Installation Status' => '软件包安装状态',

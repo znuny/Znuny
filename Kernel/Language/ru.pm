@@ -5257,9 +5257,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
         'The following JavaScript files loaded multiple times:' => '',
         'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
         'Package Installation Status' => 'Состояние установки пакетов',
