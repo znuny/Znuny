@@ -13,8 +13,6 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::System::VariableCheck qw(IsString IsStringWithData);
-
 our $ObjectManagerDisabled = 1;
 
 =head1 NAME

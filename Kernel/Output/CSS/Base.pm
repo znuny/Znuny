@@ -12,8 +12,6 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::System::VariableCheck qw(:all);
-
 =head1 NAME
 
 Kernel::Output::CSS::Base - output css module base class
