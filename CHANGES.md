@@ -1,5 +1,6 @@
 # 7.0.10 2023-??-??
  - 2023-08-18 Fixed - Dropdown arrow does not drop down dropdown box [#466](https://github.com/znuny/Znuny/issues/466).
+ - 2023-08-17 Updated JS libraries jQuery, jQuery UI and Moment.js.
  - 2023-08-17 Fixed Selenium test AdminCustomerUserService.t (#482). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#482](https://github.com/znuny/Znuny/pull/482)
  - 2023-08-17 Fixed Selenium tests for AgentStatistics (#484). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#484](https://github.com/znuny/Znuny/pull/484)
  - 2023-08-17 Added missing default search for Responsible Ticket::Frontend::AgentTicketSearch###Defaults###ResponsibleID.
