@@ -1,4 +1,7 @@
 # 7.0.10 2023-??-??
+ - 2023-08-21 Fixed extra space causing uninitialized value error. (#485) Thanks to Ziggy Trotter (@ZTrotter). [PR#485](https://github.com/znuny/Znuny/pull/485)
+ - 2023-08-21 Fixed removing filter parameters not working correctly in AgentCustomerUserAddressBook. (#481) Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#481](https://github.com/znuny/Znuny/pull/481)
+ - 2023-08-21 Fixed AdminPGP missing breadcrumb entry and failing Selenium test. (#480) Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#480](https://github.com/znuny/Znuny/pull/480)
  - 2023-08-21 Improved SupportDataCollector plugin MultipleJSFileLoad. Better representation of multiple loaded files.
  - 2023-08-21 Fixed AdminProcessManagement - Button "Show EntityIDs" and extend the width/height of the canvas is not working.
  - 2023-08-21 Fixed - Support Data Collector show wrong section name.
