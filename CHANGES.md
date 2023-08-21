@@ -1,4 +1,5 @@
 # 7.0.10 2023-??-??
+ - 2023-08-21 Fixed AdminProcessManagement - Button "Show EntityIDs" and extend the width/height of the canvas is not working.
  - 2023-08-21 Fixed - Support Data Collector show wrong section name.
  - 2023-08-18 Fixed - Dropdown arrow does not drop down dropdown box [#466](https://github.com/znuny/Znuny/issues/466).
  - 2023-08-17 Updated JS libraries jQuery, jQuery UI and Moment.js.
