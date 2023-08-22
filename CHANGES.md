@@ -1,4 +1,5 @@
 # 7.0.10 2023-??-??
+ - 2023-08-21 Fixed - Blocked Content is loaded incorrectly in AgentTicketZoom. https://github.com/znuny/Znuny/issues/454
  - 2023-08-21 Fixed extra space causing uninitialized value error. (#485) Thanks to Ziggy Trotter (@ZTrotter). [PR#485](https://github.com/znuny/Znuny/pull/485)
  - 2023-08-21 Fixed removing filter parameters not working correctly in AgentCustomerUserAddressBook. (#481) Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#481](https://github.com/znuny/Znuny/pull/481)
  - 2023-08-21 Fixed AdminPGP missing breadcrumb entry and failing Selenium test. (#480) Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#480](https://github.com/znuny/Znuny/pull/480)
