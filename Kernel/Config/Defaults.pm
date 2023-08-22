@@ -986,6 +986,7 @@ sub LoadDefaults {
         'Core.Print.css',
         'Core.Animations.css',
         'Core.FlexboxModel.css',
+        'Core.Footer.css',,
         'Core.PageLayout.css',
         'Core.Components.css'
     ];
