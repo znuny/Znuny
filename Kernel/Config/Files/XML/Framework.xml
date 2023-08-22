@@ -7803,6 +7803,7 @@ via the Preferences button after logging in.
                 <Item>Core.Print.css</Item>
                 <Item>Core.Animations.css</Item>
                 <Item>Core.FlexboxModel.css</Item>
+                <Item>Core.Footer.css</Item>
                 <Item>Core.PageLayout.css</Item>
                 <Item>Core.Components.css</Item>
             </Array>
