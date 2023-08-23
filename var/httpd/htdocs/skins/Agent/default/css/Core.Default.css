@@ -1368,6 +1368,7 @@ iframe.TextOption.CustomerUserAddressBook {
     display: block;
     padding: 2px;
     border: 0px;
+    color: #333;
 }
 
 .ui-corner-all {
