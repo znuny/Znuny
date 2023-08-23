@@ -1,4 +1,4 @@
-# 7.0.10 2023-??-??
+# 7.0.10 2023-08-23
  - 2023-08-22 Fixed - Customer note is not visible when queue follow-up option is 'reject' or 'new ticket'.
  - 2023-08-22 Fixed - Option 'Customer User' should have no breadcrumb and should not show actions.
  - 2023-08-22 Fixed - Complete footer is an `<a href>` in Customer-Interface. Znuny-Pacman is not animated like in the Agent-Interface.
@@ -10,6 +10,7 @@
  - 2023-08-21 Fixed AdminProcessManagement - Button "Show EntityIDs" and extend the width/height of the canvas is not working.
  - 2023-08-21 Fixed - Support Data Collector show wrong section name.
  - 2023-08-18 Fixed - Dropdown arrow does not drop down dropdown box [#466](https://github.com/znuny/Znuny/issues/466).
+ - 2023-08-17 Fixed XSS issue with customer ID in AdminCustomerUser dialog. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting.
  - 2023-08-17 Updated JS libraries jQuery, jQuery UI and Moment.js.
  - 2023-08-17 Fixed Selenium test AdminCustomerUserService.t (#482). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#482](https://github.com/znuny/Znuny/pull/482)
  - 2023-08-17 Fixed Selenium tests for AgentStatistics (#484). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#484](https://github.com/znuny/Znuny/pull/484)
@@ -139,6 +140,45 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.4 2023-08-23
+ - 2023-08-22 Fixed - Option 'Customer User' should have no breadcrumb and should not show actions.
+ - 2023-08-17 Updated JS libraries jQuery, jQuery UI and Moment.js.
+ - 2023-08-17 Added missing default search for Responsible Ticket::Frontend::AgentTicketSearch###Defaults###ResponsibleID.
+ - 2023-08-16 Fixed XSS issue with customer ID in AdminCustomerUser dialog. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting.
+ - 2023-08-11 Updated protocol to https for a secured communitation with gravatar.com.
+ - 2023-08-11 Fixed SelectAll function in AdminDynamicFieldScreenConfiguration. Select only all visible elements.
+ - 2023-08-11 Added additional note to DynamicFields::ScreenConfiguration::ConfigKeysOfScreensByObjectType###Framework for AgentTicketSearch (DynamicField|DefaultColumns).
+ - 2023-08-11 Fixed - Installing a package with dependency not possible - Added additional check if any problem exists - means if any package or module is not installed.
+ - 2023-08-11 Changed default value of Frontend::AvatarEngine to None.
+ - 2023-08-07 Fixed missing $ on StartDateTimeObject -> $StartDateTimeObject (#475). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [PR#475](https://github.com/znuny/Znuny/pull/475).
+ - 2023-08-07 Fixed description for SysConfig Setting 'Stats::UseAgentElementInStats' and 'Stats::UseInvalidAgentInStats'.
+ - 2023-08-07 Fixed message subject prefill on Activity dialog only works for Agent. https://github.com/znuny/Znuny/issues/363
+ - 2023-08-04 Fixed auto-selection of first found element in dynamic field web service single-select dropdown.
+ - 2023-08-03 Fixed Bug - Snippets not sorted by name in search results. [#473](https://github.com/znuny/Znuny/issues/473)
+ - 2023-08-02 Fixed Popup profile positioning. Thanks to Paweł Bogusławski (@pboguslawski). [#432](https://github.com/znuny/Znuny/pull/432)
+ - 2023-07-31 Fixed Draft Issue - Using the draft fails if there are any dynamic fields configured as mandatory for the screen where the draft is used.
+ - 2023-07-27 Fixed remove of mention and unnecessary errors in the log. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#295](https://github.com/znuny/Znuny/pull/295)
+ - 2023-07-27 Sector Nord AG: Fixed responsible user id during appointment ticket creation. Thanks to Marc Pahnke (@MarcPahnke), Sector Nord AG. [#325](https://github.com/znuny/Znuny/pull/325)
+ - 2023-07-26 Fixed encoding problem with URL parameters in AdminPostMasterFilter and AdminGenericAgent.
+ - 2023-07-25 Fixed search limitations for AgentTicketWatchView. [#372](https://github.com/znuny/Znuny/issues/372)
+ - 2023-07-24 Fixed removal of all permissions of a user if LDAP auth sync is being executed without any configured group or role definition.
+ - 2023-07-21 Fixed double encoding for dynamic field values in linked-tickets-table. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#300](https://github.com/znuny/Znuny/pull/300)
+ - 2023-07-20 Fixed select fields not being modernized in ticket overview dialogs.
+ - 2023-07-20 Added system address check for customer email address given in AgentTicketPhone.
+ - 2023-07-13 Fixed calendar appointment creation: Missing scrollbar at low resolution / high zoom.
+ - 2023-07-11 Fixed mentions for deleted tickets. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#458](https://github.com/znuny/Znuny/pull/458)
+ - 2023-07-10 Added console command to import dynamic fields and dynamic field screens configuration.
+ - 2023-07-07 Fixed email address shown in user's avatar preferences when editing the preferences of another user (not the own user).
+ - 2023-07-04 Fixed - Incorrect display of empty HTML article body. Thanks to Paweł Bogusławski (@pboguslawski). [#438](https://github.com/znuny/Znuny/pull/438)
+ - 2023-07-04 Sector Nord AG: Fixed Calendar appointment plugin AppointmentID data type. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [#308](https://github.com/znuny/Znuny/pull/308)
+ - 2023-07-04 Fixed - Line breaks in processes when richtext disabled. Used ->{BrowserRichText}. Thanks to Timotheus Pokorra (@tpokorra). [#447](https://github.com/znuny/Znuny/issues/447)
+ - 2023-06-30 LDAP auth sync: Fixed permissions removed in LDAP not being reliably removed from users in Znuny.
+ - 2023-06-29 Added missing salutation and signature to notification for user mentions. Thanks to Paweł Bogusławski (@pboguslawski). [#420](https://github.com/znuny/Znuny/issues/420)
+ - 2023-06-26 Fixed warning about missing article ID in AgentTicketNoteToLinkedTicket. Thanks to Paweł Bogusławski (@pboguslawski). [#431](https://github.com/znuny/Znuny/issues/431)
+ - 2023-06-21 Extend TicketArticleCreate transition action for a possibility to set a dynamic field of object type article and ticket.
+ - 2023-06-19 Fixed dynamic field type 'Webservice' admin dialog test field being read-only and not usable.
+ - 2023-06-02 S/MIME: Increased size of column 'email_address' of table 'smime_keys'.
 
 # 6.5.3 2023-06-14
  - 2023-05-31 Added removal of protocol-relative URLs to Kernel::System::HTMLUtils::Safety. Thanks to Tim Püttmanns (@tipue-dev), maxence, for reporting the issue.
