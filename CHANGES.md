@@ -1,5 +1,6 @@
-# 6.5.4 2023-??-??
+# 6.5.4 2023-08-23
  - 2023-08-22 Fixed - Option 'Customer User' should have no breadcrumb and should not show actions.
+ - 2023-08-17 Updated JS libraries jQuery, jQuery UI and Moment.js.
  - 2023-08-17 Added missing default search for Responsible Ticket::Frontend::AgentTicketSearch###Defaults###ResponsibleID.
  - 2023-08-11 Updated protocol to https for a secured communitation with gravatar.com.
  - 2023-08-11 Fixed SelectAll function in AdminDynamicFieldScreenConfiguration. Select only all visible elements.
