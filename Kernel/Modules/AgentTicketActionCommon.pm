@@ -2426,6 +2426,12 @@ sub _Mask {
         );
     }
 
+    if ( IsArrayRefWithData( $Param{TicketTypeDynamicFields} ) ) {
+        $LayoutObject->Block(
+            Name => 'TicketTypeDynamicFields',
+        );
+    }
+
     # Get Ticket type dynamic fields.
     for my $TicketTypeDynamicField ( @{ $Param{TicketTypeDynamicFields} } ) {
         $LayoutObject->Block(

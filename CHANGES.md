@@ -1,3 +1,6 @@
+# 7.0.11 2023-??-??
+ - 2023-08-28 Fixed - display of empty "dynamic fields" area when dynamic field from object type article is configured.
+
 # 7.0.10 2023-08-23
  - 2023-08-22 Fixed - Customer note is not visible when queue follow-up option is 'reject' or 'new ticket'.
  - 2023-08-22 Fixed - Option 'Customer User' should have no breadcrumb and should not show actions.
