@@ -59,6 +59,7 @@ The following persons contributed to Znuny:
 * MarcPahnke <89537707+MarcPahnke@users.noreply.github.com>
 * Marco Buchholz <marco.buchholz@otrs.com>
 * Marco Ferrante <marco@csita.unige.it>
+* Marcos Silverio <marcos.aurelio@infracerta.com.br>
 * Markus Esche <markus.esche@otrs.com>
 * Markus Raulf <mail@markusraulf.de>
 * Martha Pascual <martha.pascual@otrs.com>
