@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.296363636363636;
+    $Self->{Completeness}        = 0.296528925619835;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2575,7 +2575,7 @@ sub Data {
         'New Responsible' => 'Novo responsável',
         'Please set a new responsible!' => '',
         'Responsible invalid.' => '',
-        'Ticket Data' => '',
+        'Ticket Data' => 'Dados do Chamado',
         'Next state' => 'Próximo estado',
         'State invalid.' => '',
         'For all pending* states.' => '',
