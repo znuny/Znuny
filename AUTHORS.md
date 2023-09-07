@@ -79,6 +79,7 @@ The following persons contributed to Znuny:
 * Nils Leideck <nils.leideck@otrs.com>
 * Norihiro Tanaka <noritnk@kcn.ne.jp>
 * Oberson Dylan <dylan.oberson@epfl.ch>
+* Oleksandr Mostovyi <seeusers@gmail.com>
 * Oliver Tappe <oliver.tappe@otrs.com>
 * Olivier Sallou <olivier.sallou@irisa.fr>
 * Patrick Brischler <patrick.brischler@otrs.com>
