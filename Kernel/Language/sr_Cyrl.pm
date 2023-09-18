@@ -1089,9 +1089,6 @@ sub Data {
         'Send Keep-Alive' => 'Пошаљи Keep-Alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Конфигурација дефинише да ли долазна конекција треба да се затвори и одржава.',
-        'Additional response headers' => 'Додатна заглавља у одговорима',
-        'Header' => 'Заглавље',
-        'Add response header' => 'Додај заглавље у одговору',
         'Endpoint' => 'Крајња тачка',
         'URI to indicate specific location for accessing a web service.' =>
             'URI за идентификацију специфичне локације за приступ сервису.',
@@ -1180,7 +1177,10 @@ sub Data {
             'Специфична HTTP команда за примену на захтеве са овим позиваоцем (необавезно).',
         'Default command' => 'Подразумевана команда',
         'The default HTTP command to use for the requests.' => 'Подразумевена HTTP команда за захтеве.',
+        'Additional response headers' => 'Додатна заглавља у одговорима',
         'Additional request headers' => '',
+        'Header' => 'Заглавље',
+        'Add response header' => 'Додај заглавље у одговору',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

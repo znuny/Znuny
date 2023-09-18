@@ -1088,9 +1088,6 @@ sub Data {
         'Send Keep-Alive' => 'Kirim keep-alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Konfigurasi ini mendefinisikan jika koneksi masuk harus bisa ditutup atau tetap hidup ',
-        'Additional response headers' => '',
-        'Header' => 'Header',
-        'Add response header' => '',
         'Endpoint' => 'Endpoint',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1179,7 +1176,10 @@ sub Data {
             'Perintah HTTP tertentu untuk menggunakan permintaan dengan Invoker ini ( opsional ) ',
         'Default command' => 'Perintah default',
         'The default HTTP command to use for the requests.' => 'Perintah default HTTP digunakan untuk permintaan .',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Header' => 'Header',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

@@ -1091,9 +1091,6 @@ sub Data {
         'Send Keep-Alive' => 'Tuna Weka-hai',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Usanidi huu unafafanua kama miunganisho ya kuingia ifungwe au iache hai.',
-        'Additional response headers' => '',
-        'Header' => 'Kichwa',
-        'Add response header' => '',
         'Endpoint' => 'Mwisho',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1182,7 +1179,10 @@ sub Data {
             'Amri maalum ya HTTP ya kutumia kwa ajili ya maombi kwa ajili ya kichochezi hiki (Hiari). ',
         'Default command' => 'Sharti chaguo-msingi',
         'The default HTTP command to use for the requests.' => 'Sharti chaguo-msingi la HTTP kutumia kwa ajili ya maombi.',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Header' => 'Kichwa',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

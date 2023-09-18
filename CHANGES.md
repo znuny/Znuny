@@ -1,6 +1,8 @@
 # 7.0.11 2023-??-??
+ - 2023-08-28 Fixed duplicate usage of render block 'AdditionalHeaders' in dialog AdminGenericInterfaceTransportHTTPREST. Increased maximum length of additional header keys and values from 150 to 2000 characters in dialogs AdminGenericInterfaceTransportHTTPREST and AdminGenericInterfaceTransportHTTPSOAP. [#321](https://github.com/znuny/Znuny/issues/321)
  - 2023-08-28 Fixed - display of empty "dynamic fields" area when dynamic field from object type article is configured.
  - 2023-08-23 Added parameter to enforce account selection for the Microsoft OAuth2 template.
+
 # 7.0.10 2023-08-23
  - 2023-08-22 Fixed - Customer note is not visible when queue follow-up option is 'reject' or 'new ticket'.
  - 2023-08-22 Fixed - Option 'Customer User' should have no breadcrumb and should not show actions.
@@ -200,6 +202,7 @@
  - 2023-03-20 Fixed handling of article attachments in generic interface operations TicketCreate and TicketUpdate.
  - 2023-03-16 Added Appointment::EventModulePost Entry in XML. Thanks to Kevin Janssen (@BuTzZ). [PR#315](https://github.com/znuny/Znuny/pull/315)
  - 2023-03-10 Fixed notification about empty subject for article drafts in AgentTicketCompose and AgentTicketEmailOutbound.
+ - 2023-03-09 Fixed duplicate usage of render block 'AdditionalHeaders' in dialog AdminGenericInterfaceTransportHTTPREST. Increased maximum length of additional header keys and values from 150 to 2000 characters in dialogs AdminGenericInterfaceTransportHTTPREST and AdminGenericInterfaceTransportHTTPSOAP. [#321](https://github.com/znuny/Znuny/issues/321)
  - 2023-03-02 Fixed handling of time zone for DateTime objects created with string in ISO 8601 format (e.g. '2017-05-09T07:00:09+0400').
 
 # 6.5.1 2023-03-09

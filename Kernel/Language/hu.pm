@@ -1094,9 +1094,6 @@ sub Data {
         'Send Keep-Alive' => 'Életben tartás küldése',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Ez a beállítás azt határozza meg, hogy a bejövő kapcsolatok le legyenek-e zárva vagy maradjanak életben.',
-        'Additional response headers' => 'További válasz fejlécek',
-        'Header' => 'Fejléc',
-        'Add response header' => 'Válasz fejléc hozzáadása',
         'Endpoint' => 'Végpont',
         'URI to indicate specific location for accessing a web service.' =>
             'Adott helyet jelző URI egy webszolgáltatáshoz való hozzáféréshez.',
@@ -1185,7 +1182,10 @@ sub Data {
             'A kérésekhez használandó megadott HTTP parancs ezzel a meghívóval (opcionális).',
         'Default command' => 'Alapértelmezett parancs',
         'The default HTTP command to use for the requests.' => 'A kéréseknél használandó alapértelmezett HTTP parancs.',
+        'Additional response headers' => 'További válasz fejlécek',
         'Additional request headers' => '',
+        'Header' => 'Fejléc',
+        'Add response header' => 'Válasz fejléc hozzáadása',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

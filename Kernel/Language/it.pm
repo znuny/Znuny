@@ -1097,9 +1097,6 @@ sub Data {
         'Send Keep-Alive' => 'Invia Keep-Alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Questa configurazione definisce se le connessioni in entrata devono essere chiuse o mantenute attive.',
-        'Additional response headers' => 'Intestazioni di risposta aggiuntive',
-        'Header' => 'Intestazione',
-        'Add response header' => 'Aggiungi intestazione risposta',
         'Endpoint' => 'Terminatore',
         'URI to indicate specific location for accessing a web service.' =>
             'URI per indicare la posizione specifica per l\'accesso a un servizio web.',
@@ -1188,7 +1185,10 @@ sub Data {
             'Uno specifico comando HTTP da utilizzare per le richieste con questo invoker (facoltativo).',
         'Default command' => 'Comando predefinito',
         'The default HTTP command to use for the requests.' => 'Il comando HTTP predefinito da utilizzare per le richieste.',
+        'Additional response headers' => 'Intestazioni di risposta aggiuntive',
         'Additional request headers' => '',
+        'Header' => 'Intestazione',
+        'Add response header' => 'Aggiungi intestazione risposta',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

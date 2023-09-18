@@ -1088,9 +1088,6 @@ sub Data {
         'Send Keep-Alive' => 'Hantar Kekal-Hidup',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Konfigurasi ini mentakrifkan jika sambungan masuk seharusnya ditutup atau kekal hidup.',
-        'Additional response headers' => '',
-        'Header' => 'Permulaan',
-        'Add response header' => '',
         'Endpoint' => 'Titik akhir',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1179,7 +1176,10 @@ sub Data {
             'Arahan HTTP spesifik untuk digunakan bagi permintaan dengan Invoker (pilihan) ini.',
         'Default command' => 'Arahan lalai',
         'The default HTTP command to use for the requests.' => 'Arahan HTTP lalai untuk digunakan untuk permintaan.',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Header' => 'Permulaan',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

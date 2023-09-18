@@ -1088,9 +1088,6 @@ sub Data {
         'Send Keep-Alive' => 'ส่ง Keep-Alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'การกำหนดค่านี้ถูกกำหนดไว้ถ้าการติดต่อเข้ามาควรจะได้รับการปิดหรือคงถูกรักษาไว้',
-        'Additional response headers' => '',
-        'Header' => 'หัวข้อ',
-        'Add response header' => '',
         'Endpoint' => 'จุดสิ้นสุด',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1179,7 +1176,10 @@ sub Data {
             'คำสั่ง HTTP ที่เฉพาะเจาะจงที่จะใช้สำหรับการร้องขอด้วย Invoker นี้ (ถ้ามี)',
         'Default command' => 'คำสั่งเริ่มต้น',
         'The default HTTP command to use for the requests.' => 'คำสั่ง HTTP เริ่มต้นที่จะใช้สำหรับการร้องขอ',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Header' => 'หัวข้อ',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
