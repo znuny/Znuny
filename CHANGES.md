@@ -1,4 +1,4 @@
-# 7.0.11 2023-??-??
+# 7.0.11 2023-09-20
  - 2023-08-28 Fixed duplicate usage of render block 'AdditionalHeaders' in dialog AdminGenericInterfaceTransportHTTPREST. Increased maximum length of additional header keys and values from 150 to 2000 characters in dialogs AdminGenericInterfaceTransportHTTPREST and AdminGenericInterfaceTransportHTTPSOAP. [#321](https://github.com/znuny/Znuny/issues/321)
  - 2023-08-28 Fixed - display of empty "dynamic fields" area when dynamic field from object type article is configured.
  - 2023-08-23 Added parameter to enforce account selection for the Microsoft OAuth2 template.
