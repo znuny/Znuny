@@ -1045,8 +1045,8 @@ CREATE TABLE postmaster_filter (
 # ----------------------------------------------------------
 CREATE TABLE generic_agent_jobs (
     job_name VARCHAR (200) NOT NULL,
-    job_key VARCHAR (200) NOT NULL,
-    job_value VARCHAR (200) NULL,
+    job_key VARCHAR (255) NOT NULL,
+    job_value TEXT NULL,
     INDEX generic_agent_jobs_job_name (job_name)
 );
 # ----------------------------------------------------------

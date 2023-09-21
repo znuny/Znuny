@@ -1,5 +1,7 @@
 # 6.5.5 2023-??-??
+ - 2023-08-29 Updated maximum length of generic agent job database fields and their input fields in dialog AdminGenericAgent to prevent errors storing values too long for the database. [#474](https://github.com/znuny/Znuny/issues/474)
  - 2023-08-23 Added parameter to enforce account selection for the Microsoft OAuth2 template.
+
 # 6.5.4 2023-08-23
  - 2023-08-22 Fixed - Option 'Customer User' should have no breadcrumb and should not show actions.
  - 2023-08-17 Updated JS libraries jQuery, jQuery UI and Moment.js.

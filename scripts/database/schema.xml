@@ -1643,8 +1643,8 @@
 <!-- generic_agent_jobs -->
 <Table Name="generic_agent_jobs">
     <Column Name="job_name" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="job_key" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="job_value" Required="false" Size="200" Type="VARCHAR"/>
+    <Column Name="job_key" Required="true" Size="255" Type="VARCHAR"/>
+    <Column Name="job_value" Required="false" Size="3800" Type="VARCHAR"/>
     <Index Name="generic_agent_jobs_job_name">
         <IndexColumn Name="job_name"/>
     </Index>
