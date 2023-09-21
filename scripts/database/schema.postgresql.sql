@@ -1893,8 +1893,8 @@ END$$;
 -- ----------------------------------------------------------
 CREATE TABLE generic_agent_jobs (
     job_name VARCHAR (200) NOT NULL,
-    job_key VARCHAR (200) NOT NULL,
-    job_value VARCHAR (200) NULL
+    job_key VARCHAR (255) NOT NULL,
+    job_value VARCHAR (3800) NULL
 );
 DO $$
 BEGIN
