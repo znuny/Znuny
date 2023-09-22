@@ -1,4 +1,5 @@
 # 7.0.12 2023-??-??
+ - 2023-09-22 AgentStatistics Overview - Added filter in/valid entries.
  - 2023-09-21 Updated maximum length of generic agent job database fields and their input fields in dialog AdminGenericAgent to prevent errors storing values too long for the database. [#474](https://github.com/znuny/Znuny/issues/474)
 
 # 7.0.11 2023-09-20
