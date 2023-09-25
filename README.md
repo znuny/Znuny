@@ -1,7 +1,7 @@
 <a href="https://www.znuny.org"><img align="center" src="var/httpd/htdocs/skins/Agent/default/img/logo.png"></a>
 
 <p align="center">
-    <a href="https://download.znuny.org/releases/znuny-latest.tar.gz"><img src="https://img.shields.io/github/v/tag/znuny/Znuny?sort=semver&label=latest%20release&color=ff9b00"></a>
+    <a href="https://download.znuny.org/releases/znuny-latest.tar.gz"><img src="https://img.shields.io/github/v/tag/znuny/Znuny?filter=rel-7_0_*&label=latest%20release&color=ff9b00"></a>
     <br>
     <a href="https://github.com/znuny/Znuny/actions"><img src="https://img.shields.io/github/actions/workflow/status/znuny/Znuny/ci.yaml?label=CI"></a>
     <a href="https://github.com/znuny/Znuny/actions"><img src="https://badge.proxy.znuny.com/Znuny/rel-7_0"></a>
@@ -12,7 +12,7 @@
     <a href="https://github.com/znuny/Znuny/pulls"><img src="https://img.shields.io/github/issues-pr-raw/znuny/Znuny?"></a>
     <a href="https://github.com/znuny/Znuny/pulls?q=is%3Apr+is%3Aclosed"><img src="https://img.shields.io/github/issues-pr-closed-raw/znuny/Znuny?color=brightgreen"></a>
     <br>
-    <a href="https://github.com/znuny/Znuny"><img src="https://img.shields.io/github/languages/count/znuny/Znuny?style=flat&label=language&color=brightgreen"></a>
+    <a href="https://github.com/znuny/Znuny"><img src="https://img.shields.io/github/languages/count/znuny/Znuny?style=flat&label=languages&color=brightgreen"></a>
     <a href="https://github.com/znuny/Znuny/graphs/contributors"><img src="https://img.shields.io/github/contributors/znuny/Znuny?"></a>
     <a href="https://discord.gg/XTud3WWZTs"><img src="https://img.shields.io/discord/836533233885773825?style=flat"></a>
 </p>
