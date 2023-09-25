@@ -292,6 +292,16 @@ Core.Form = (function (TargetNS) {
         // Once there was any modification, do not check it any more.
         $("form input, select, textarea").off('change', FormModified);
     }
+    
+    /**
+     * This makes all forms submittable by using Enter inside inputs.
+     */
+    $('body').on('keydown', 'input', function (Event) {
+        if (Event.keyCode == 13) {
+            $('form').find(':submit').last().click();
+        }
+        Event.preventDefault()
+    });
 
     /**
      * This makes all forms submittable by using Ctrl+Enter inside textareas.
@@ -302,7 +312,7 @@ Core.Form = (function (TargetNS) {
         if ((Event.ctrlKey || Event.metaKey) && Event.keyCode == 13) {
             // We need to click() instead of submit(), since click() has
             // a few useful event handlers tied to it, like validation.
-            $(this.form).find(':submit').first().click();
+            $(this.form).find(':submit').last().click();
         }
     });
 
