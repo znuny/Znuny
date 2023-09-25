@@ -65,6 +65,7 @@ The following persons contributed to Znuny:
 * Martin Gross <martin@pc-coholic.de>
 * Martin Gruner <martin.gruner@otrs.com>
 * Mathias Bräunling <mathias.braeunling@otrs.com>
+* Matthias Bethke <mb@znuny.com>
 * Michael Tänzer <neo@nhng.de>
 * Michiel Beijen <michiel.beijen@otrs.com>
 * Milan Rakic <mrakic@s7designcreative.com>
