@@ -292,7 +292,7 @@ Core.Form = (function (TargetNS) {
         // Once there was any modification, do not check it any more.
         $("form input, select, textarea").off('change', FormModified);
     }
-    
+
     /**
      * This makes all forms submittable by using Enter inside inputs.
      */
@@ -314,6 +314,7 @@ Core.Form = (function (TargetNS) {
             // a few useful event handlers tied to it, like validation.
             $(this.form).find(':submit').last().click();
         }
+        Event.preventDefault()
     });
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
