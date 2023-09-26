@@ -1088,9 +1088,6 @@ sub Data {
         'Send Keep-Alive' => 'Keep-Alive 보내기',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             '이 구성은 들어오는 연결이 닫히거나 살아 있어야 하는지를 정의합니다.',
-        'Additional response headers' => '추가 응답 헤더',
-        'Header' => '머리글',
-        'Add response header' => '응답 헤더 추가',
         'Endpoint' => '종점',
         'URI to indicate specific location for accessing a web service.' =>
             '웹 서비스에 액세스하기위한 특정 위치를 나타내는 URI.',
@@ -1179,7 +1176,10 @@ sub Data {
             '이 Invoker (선택 사항)로 요청에 사용할 특정 HTTP 명령입니다.',
         'Default command' => '기본 명령',
         'The default HTTP command to use for the requests.' => '요청에 사용할 기본 HTTP 명령입니다.',
+        'Additional response headers' => '추가 응답 헤더',
         'Additional request headers' => '',
+        'Header' => '머리글',
+        'Add response header' => '응답 헤더 추가',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
@@ -5023,7 +5023,7 @@ sub Data {
         'Client Connection Charset' => '클라이언트 연결 문자 세트',
         'Setting character_set_client needs to be utf8.' => 'character_set_client 설정은 utf8이어야합니다.',
         'Server Database Charset' => '서버 데이터베이스 문자 세트',
-        'This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set \'utf8\'.' =>
+        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
             '',
         'The setting character_set_database needs to be \'utf8\'.' => '설정 character_set_database는 \'utf8\'이어야합니다.',
         'Table Charset' => '표 문자 집합',
@@ -5082,7 +5082,7 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/postgresql/Version.pm
         'PostgreSQL 9.2 or higher is required.' => 'PostgreSQL 9.2 이상이 필요합니다.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
         'Operating System' => '운영 체제',
         'Znuny Disk Partition' => 'Znuny 디스크 파티션',
 
@@ -5129,165 +5129,6 @@ sub Data {
         'There should be more than 60% free swap space.' => '스왑 공간이 60 % 이상 있어야합니다.',
         'There should be no more than 200 MB swap space used.' => '사용 된 스왑 공간은 200MB 이상이어야합니다.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'Znuny' => '',
-        'Article Search Index Status' => '기사 검색 색인 상태',
-        'Indexed Articles' => '색인 생성된 기사',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticlesPerCommunicationChannel.pm
-        'Articles Per Communication Channel' => '커뮤니케이션 채널 당 기사',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
-        'Incoming communications' => '수신 통신',
-        'Outgoing communications' => '나가는 통신',
-        'Failed communications' => '실패한 통신',
-        'Average processing time of communications (s)' => '통신 평균 처리 시간(s)',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
-        'Communication Log Account Status (last 24 hours)' => '통신 로그 계정 상태 (지난 24시간)',
-        'No connections found.' => '연결이 없습니다.',
-        'ok' => '승인',
-        'permanent connection errors' => '영구 연결 오류',
-        'intermittent connection errors' => '간헐적인 연결 오류',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
-        'Config Settings' => '구성 설정',
-        'Could not determine value.' => '가치를 결정할 수 없습니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
-        'Daemon' => '데몬',
-        'Daemon is running.' => '데몬이 실행 중입니다.',
-        'Daemon is not running.' => '데몬이 실행되고 있지 않습니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
-        'Database Records' => '데이터베이스 레코드',
-        'Tickets' => '티켓',
-        'Ticket History Entries' => '티켓 기록 항목',
-        'Articles' => '게시물',
-        'Attachments (DB, Without HTML)' => '첨부 파일 (DB, HTML 제외)',
-        'Customers With At Least One Ticket' => '최소 하나의 티켓을 소지한 고객',
-        'Dynamic Field Values' => '동적 필드 값',
-        'Invalid Dynamic Fields' => '잘못된 동적 필드',
-        'Invalid Dynamic Field Values' => '잘못된 동적 필드 값',
-        'GenericInterface Webservices' => 'GenericInterface 웹 서비스',
-        'Process Tickets' => '티켓 처리',
-        'Months Between First And Last Ticket' => '첫 번째 티켓과 마지막 티켓 간의 개월',
-        'Tickets Per Month (avg)' => '월간 티켓 (평균)',
-        'Open Tickets' => '진행중 티켓',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
-        'Default SOAP Username And Password' => '기본 SOAP 사용자 이름 및 암호',
-        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
-            '보안 위험 : SOAP :: User 및 SOAP :: Password의 기본 설정을 사용합니다. 변경하십시오.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
-        'Default Admin Password' => '기본 관리자 비밀번호',
-        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
-            '보안 위험 : 에이전트 계정 root @ localhost에는 여전히 기본 암호가 있습니다. 계정을 변경하거나 계정을 무효화하십시오.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
-        'Email Sending Queue' => '이메일 전송 대기열',
-        'Emails queued for sending' => '전송 대기중인 이메일',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
-        'FQDN (domain name)' => 'FQDN (도메인 이름)',
-        'Please configure your FQDN setting.' => 'FQDN 설정을 구성하십시오.',
-        'Domain Name' => '도메인 이름',
-        'Your FQDN setting is invalid.' => 'FQDN 설정이 잘못되었습니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
-        'File System Writable' => '파일 시스템 쓰기 가능',
-        'The file system on your Znuny partition is not writable.' => 'Znuny 파티션의 파일 시스템에 쓸 수 없습니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
-        'Legacy Configuration Backups' => '레거시 구성 백업',
-        'No legacy configuration backup files found.' => '레거시 구성 백업 파일이 없습니다.',
-        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
-            '',
-        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
-        'The following JavaScript files loaded multiple times:' => '',
-        'Files' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
-        'Package Installation Status' => '패키지 설치 상태',
-        'Some packages have locally modified files.' => '일부 패키지에는 로컬로 수정된 파일이 있습니다.',
-        'Some packages are not correctly installed.' => '일부 패키지가 올바르게 설치되지 않았습니다.',
-        'Package Framework Version Status' => '패키지 프레임 워크 버전 상태',
-        'Some packages are not allowed for the current framework version.' =>
-            '일부 패키지는 현재 프레임 워크 버전에 허용되지 않습니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageList.pm
-        'Package List' => '패키지 목록',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SessionConfigSettings.pm
-        'Session Config Settings' => '세션 구성 설정',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
-        'Spooled Emails' => '스풀된 전자 메일',
-        'There are emails in var/spool that Znuny could not process.' => 'Znuny가 처리 할 수없는 var / spool에 이메일이 있습니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
-        'Your SystemID setting is invalid, it should only contain digits.' =>
-            '시스템 ID 설정이 잘못되었습니다. 숫자 만 포함해야합니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
-        'Default Ticket Type' => '기본 티켓 유형',
-        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
-            '구성된 기본 티켓 유형이 잘못되었거나 누락되었습니다. Ticket :: Type :: Default 설정을 변경하고 유효한 티켓 유형을 선택하십시오.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
-        'Ticket Index Module' => '티켓 색인 모듈',
-        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
-            '60,000 개 이상의 티켓이 있으며 StaticDB 백엔드를 사용해야합니다. 자세한 내용은 관리자 설명서 (성능 튜닝)를 참조하십시오.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
-        'Invalid Users with Locked Tickets' => '잠긴 티켓이 있는 사용자가 잘못되었습니다.',
-        'There are invalid users with locked tickets.' => '잠긴 티켓이 있는 유효하지 않은 사용자가 있습니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/OpenTickets.pm
-        'You should not have more than 8,000 open tickets in your system.' =>
-            '시스템에 8,000개 이상의 티켓이 없어야합니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
-        'Ticket Search Index Module' => '티켓 검색 Index Module',
-        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
-            '색인 생성 프로세스는 필터를 실행하거나 정지 단어 목록을 적용하지 않고 기사 검색 색인에 원본 기사 텍스트의 저장을 강제합니다. 이렇게하면 검색 색인의 크기가 커지고 전체 텍스트 검색 속도가 느려질 수 있습니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-        'Orphaned Records In ticket_lock_index Table' => 'ticket_lock_index 테이블의 고아 레코드',
-        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            '표 ticket_lock_index에는 분리 된 레코드가 있습니다. bin / znuny.Console.pl "Maint :: Ticket :: QueueIndexCleanup"을 실행하여 StaticDB 색인을 정리하십시오.',
-        'Orphaned Records In ticket_index Table' => 'ticket_index 테이블의 고아 레코드',
-        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            '표 ticket_index에는 분리 된 레코드가 있습니다. bin / znuny.Console.pl "Maint :: Ticket :: QueueIndexCleanup"을 실행하여 StaticDB 색인을 정리하십시오.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
-        'Time Settings' => '시간 설정',
-        'Server time zone' => '서버 시간대',
-        'Znuny time zone' => 'Znuny 시간대',
-        'Znuny time zone is not set.' => 'Znuny 시간대가 설정되지 않았습니다.',
-        'User default time zone' => '사용자 기본 시간대',
-        'User default time zone is not set.' => '사용자 기본 시간대가 설정되지 않았습니다.',
-        'Calendar time zone is not set.' => '달력 표준 시간대가 설정되지 않았습니다.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentSkinUsage.pm
-        'UI - Agent Skin Usage' => 'UI - 에이전트 스킨 사용',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentThemeUsage.pm
-        'UI - Agent Theme Usage' => 'UI - 에이전트 테마 사용법',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
-        'UI - Special Statistics' => 'UI - 특수 통계',
-        'Agents using custom main menu ordering' => '사용자 정의 주 메뉴 순서를 사용하는 에이전트',
-        'Agents using favourites for the admin overview' => '관리자 개요에 즐겨찾기를 사용하는 에이전트',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'Znuny Version' => 'Znuny 버전',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => '웹 서버',
         'Loaded Apache Modules' => '로드 된 Apache 모듈',
@@ -5325,7 +5166,166 @@ sub Data {
         'Webserver Version' => '웹 서버 버전',
         'Could not determine webserver version.' => '웹 서버 버전을 확인할 수 없습니다.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
+        'Znuny' => '',
+        'Article Search Index Status' => '기사 검색 색인 상태',
+        'Indexed Articles' => '색인 생성된 기사',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticlesPerCommunicationChannel.pm
+        'Articles Per Communication Channel' => '커뮤니케이션 채널 당 기사',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
+        'Incoming communications' => '수신 통신',
+        'Outgoing communications' => '나가는 통신',
+        'Failed communications' => '실패한 통신',
+        'Average processing time of communications (s)' => '통신 평균 처리 시간(s)',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
+        'Communication Log Account Status (last 24 hours)' => '통신 로그 계정 상태 (지난 24시간)',
+        'No connections found.' => '연결이 없습니다.',
+        'ok' => '승인',
+        'permanent connection errors' => '영구 연결 오류',
+        'intermittent connection errors' => '간헐적인 연결 오류',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
+        'Config Settings' => '구성 설정',
+        'Could not determine value.' => '가치를 결정할 수 없습니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
+        'Daemon' => '데몬',
+        'Daemon is running.' => '데몬이 실행 중입니다.',
+        'Daemon is not running.' => '데몬이 실행되고 있지 않습니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
+        'Database Records' => '데이터베이스 레코드',
+        'Tickets' => '티켓',
+        'Ticket History Entries' => '티켓 기록 항목',
+        'Articles' => '게시물',
+        'Attachments (DB, Without HTML)' => '첨부 파일 (DB, HTML 제외)',
+        'Customers With At Least One Ticket' => '최소 하나의 티켓을 소지한 고객',
+        'Dynamic Field Values' => '동적 필드 값',
+        'Invalid Dynamic Fields' => '잘못된 동적 필드',
+        'Invalid Dynamic Field Values' => '잘못된 동적 필드 값',
+        'GenericInterface Webservices' => 'GenericInterface 웹 서비스',
+        'Process Tickets' => '티켓 처리',
+        'Months Between First And Last Ticket' => '첫 번째 티켓과 마지막 티켓 간의 개월',
+        'Tickets Per Month (avg)' => '월간 티켓 (평균)',
+        'Open Tickets' => '진행중 티켓',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
+        'Default SOAP Username And Password' => '기본 SOAP 사용자 이름 및 암호',
+        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
+            '보안 위험 : SOAP :: User 및 SOAP :: Password의 기본 설정을 사용합니다. 변경하십시오.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
+        'Default Admin Password' => '기본 관리자 비밀번호',
+        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
+            '보안 위험 : 에이전트 계정 root @ localhost에는 여전히 기본 암호가 있습니다. 계정을 변경하거나 계정을 무효화하십시오.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
+        'Email Sending Queue' => '이메일 전송 대기열',
+        'Emails queued for sending' => '전송 대기중인 이메일',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
+        'FQDN (domain name)' => 'FQDN (도메인 이름)',
+        'Please configure your FQDN setting.' => 'FQDN 설정을 구성하십시오.',
+        'Domain Name' => '도메인 이름',
+        'Your FQDN setting is invalid.' => 'FQDN 설정이 잘못되었습니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
+        'File System Writable' => '파일 시스템 쓰기 가능',
+        'The file system on your Znuny partition is not writable.' => 'Znuny 파티션의 파일 시스템에 쓸 수 없습니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
+        'Legacy Configuration Backups' => '레거시 구성 백업',
+        'No legacy configuration backup files found.' => '레거시 구성 백업 파일이 없습니다.',
+        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
+            '',
+        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
+        'Package Installation Status' => '패키지 설치 상태',
+        'Some packages have locally modified files.' => '일부 패키지에는 로컬로 수정된 파일이 있습니다.',
+        'Some packages are not correctly installed.' => '일부 패키지가 올바르게 설치되지 않았습니다.',
+        'Package Framework Version Status' => '패키지 프레임 워크 버전 상태',
+        'Some packages are not allowed for the current framework version.' =>
+            '일부 패키지는 현재 프레임 워크 버전에 허용되지 않습니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageList.pm
+        'Package List' => '패키지 목록',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SessionConfigSettings.pm
+        'Session Config Settings' => '세션 구성 설정',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
+        'Spooled Emails' => '스풀된 전자 메일',
+        'There are emails in var/spool that Znuny could not process.' => 'Znuny가 처리 할 수없는 var / spool에 이메일이 있습니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SystemID.pm
+        'Your SystemID setting is invalid, it should only contain digits.' =>
+            '시스템 ID 설정이 잘못되었습니다. 숫자 만 포함해야합니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
+        'Default Ticket Type' => '기본 티켓 유형',
+        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
+            '구성된 기본 티켓 유형이 잘못되었거나 누락되었습니다. Ticket :: Type :: Default 설정을 변경하고 유효한 티켓 유형을 선택하십시오.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
+        'Ticket Index Module' => '티켓 색인 모듈',
+        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
+            '60,000 개 이상의 티켓이 있으며 StaticDB 백엔드를 사용해야합니다. 자세한 내용은 관리자 설명서 (성능 튜닝)를 참조하십시오.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
+        'Invalid Users with Locked Tickets' => '잠긴 티켓이 있는 사용자가 잘못되었습니다.',
+        'There are invalid users with locked tickets.' => '잠긴 티켓이 있는 유효하지 않은 사용자가 있습니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/OpenTickets.pm
+        'You should not have more than 8,000 open tickets in your system.' =>
+            '시스템에 8,000개 이상의 티켓이 없어야합니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
+        'Ticket Search Index Module' => '티켓 검색 Index Module',
+        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
+            '색인 생성 프로세스는 필터를 실행하거나 정지 단어 목록을 적용하지 않고 기사 검색 색인에 원본 기사 텍스트의 저장을 강제합니다. 이렇게하면 검색 색인의 크기가 커지고 전체 텍스트 검색 속도가 느려질 수 있습니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
+        'Orphaned Records In ticket_lock_index Table' => 'ticket_lock_index 테이블의 고아 레코드',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            '표 ticket_lock_index에는 분리 된 레코드가 있습니다. bin / znuny.Console.pl "Maint :: Ticket :: QueueIndexCleanup"을 실행하여 StaticDB 색인을 정리하십시오.',
+        'Orphaned Records In ticket_index Table' => 'ticket_index 테이블의 고아 레코드',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            '표 ticket_index에는 분리 된 레코드가 있습니다. bin / znuny.Console.pl "Maint :: Ticket :: QueueIndexCleanup"을 실행하여 StaticDB 색인을 정리하십시오.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
+        'Time Settings' => '시간 설정',
+        'Server time zone' => '서버 시간대',
+        'Znuny time zone' => 'Znuny 시간대',
+        'Znuny time zone is not set.' => 'Znuny 시간대가 설정되지 않았습니다.',
+        'User default time zone' => '사용자 기본 시간대',
+        'User default time zone is not set.' => '사용자 기본 시간대가 설정되지 않았습니다.',
+        'Calendar time zone is not set.' => '달력 표준 시간대가 설정되지 않았습니다.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentSkinUsage.pm
+        'UI - Agent Skin Usage' => 'UI - 에이전트 스킨 사용',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentThemeUsage.pm
+        'UI - Agent Theme Usage' => 'UI - 에이전트 테마 사용법',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
+        'UI - Special Statistics' => 'UI - 특수 통계',
+        'Agents using custom main menu ordering' => '사용자 정의 주 메뉴 순서를 사용하는 에이전트',
+        'Agents using favourites for the admin overview' => '관리자 개요에 즐겨찾기를 사용하는 에이전트',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Version.pm
+        'Znuny Version' => 'Znuny 버전',
+
+        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '동시 사용자 세부 정보',
         'Concurrent Users' => '동시 사용자',
 

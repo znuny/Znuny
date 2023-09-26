@@ -15,7 +15,10 @@ use utf8;
 
 use parent qw(scripts::Migration::Base);
 
+use Kernel::System::VariableCheck qw(:all);
+
 our @ObjectDependencies = (
+    'Kernel::System::HTMLUtils',
     'Kernel::System::NotificationEvent',
 );
 
@@ -92,6 +95,7 @@ sub _MigrateMentionNotification {
     my ( $Self, %Param ) = @_;
 
     my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
+    my $HTMLUtilsObject         = $Kernel::OM->Get('Kernel::System::HTMLUtils');
 
     my %NotificationEvents = $NotificationEventObject->NotificationList(
 
@@ -109,7 +113,8 @@ sub _MigrateMentionNotification {
         my $NotificationEvent = $NotificationEvents{$NotificationEventID};
         next NOTIFICATIONEVENTID if !$NotificationEventsToUpdateByName{ $NotificationEvent->{Name} };
 
-        $NotificationEvent->{Message}->{en}->{Body} = 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+        if ( IsHashRefWithData( $NotificationEvent->{Message}->{en} ) ) {
+            $NotificationEvent->{Message}->{en}->{Body} = 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
 
 you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
@@ -118,8 +123,15 @@ you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 
 -- <OTRS_CONFIG_NotificationSenderName>';
 
-        $NotificationEvent->{Message}->{de}->{Body}
-            = 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+            $NotificationEvent->{Message}->{en}->{Body} = $HTMLUtilsObject->ToHTML(
+                String             => $NotificationEvent->{Message}->{en}->{Body},
+                ReplaceDoubleSpace => 0,
+            );
+        }
+
+        if ( IsHashRefWithData( $NotificationEvent->{Message}->{de} ) ) {
+            $NotificationEvent->{Message}->{de}->{Body}
+                = 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
 
 Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
@@ -128,6 +140,12 @@ Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
 
 -- <OTRS_CONFIG_NotificationSenderName>';
 
+            $NotificationEvent->{Message}->{de}->{Body} = $HTMLUtilsObject->ToHTML(
+                String             => $NotificationEvent->{Message}->{de}->{Body},
+                ReplaceDoubleSpace => 0,
+            );
+        }
+
         my $NotificationEventUpdated = $NotificationEventObject->NotificationUpdate(
             %{$NotificationEvent},
             UserID => 1,
@@ -135,7 +153,6 @@ Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
         next NOTIFICATIONEVENTID if $NotificationEventUpdated;
 
         print "    Error updating notification event with ID $NotificationEventID.\n";
-        return;
     }
 
     return 1;

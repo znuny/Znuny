@@ -321,6 +321,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .WidgetSimple fieldset.TableLike .Value,
     .WidgetSimple fieldset.TableLike .Value span {
         line-height: 140%;
+        gap: 0;
     }
 
     /* Legend & Shortcuts */

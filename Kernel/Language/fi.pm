@@ -1091,9 +1091,6 @@ sub Data {
         'Send Keep-Alive' => '',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             '',
-        'Additional response headers' => '',
-        'Header' => 'Otsikko',
-        'Add response header' => '',
         'Endpoint' => '',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1182,7 +1179,10 @@ sub Data {
             '',
         'Default command' => '',
         'The default HTTP command to use for the requests.' => '',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Header' => 'Otsikko',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
@@ -5026,7 +5026,7 @@ sub Data {
         'Client Connection Charset' => '',
         'Setting character_set_client needs to be utf8.' => '',
         'Server Database Charset' => '',
-        'This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set \'utf8\'.' =>
+        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
             '',
         'The setting character_set_database needs to be \'utf8\'.' => '',
         'Table Charset' => '',
@@ -5085,7 +5085,7 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/postgresql/Version.pm
         'PostgreSQL 9.2 or higher is required.' => '',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
         'Operating System' => '',
         'Znuny Disk Partition' => '',
 
@@ -5132,165 +5132,6 @@ sub Data {
         'There should be more than 60% free swap space.' => '',
         'There should be no more than 200 MB swap space used.' => '',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'Znuny' => '',
-        'Article Search Index Status' => '',
-        'Indexed Articles' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticlesPerCommunicationChannel.pm
-        'Articles Per Communication Channel' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
-        'Incoming communications' => '',
-        'Outgoing communications' => '',
-        'Failed communications' => '',
-        'Average processing time of communications (s)' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
-        'Communication Log Account Status (last 24 hours)' => '',
-        'No connections found.' => '',
-        'ok' => '',
-        'permanent connection errors' => '',
-        'intermittent connection errors' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
-        'Config Settings' => '',
-        'Could not determine value.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
-        'Daemon' => '',
-        'Daemon is running.' => '',
-        'Daemon is not running.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
-        'Database Records' => '',
-        'Tickets' => 'Tiketit',
-        'Ticket History Entries' => '',
-        'Articles' => 'Artikkelit',
-        'Attachments (DB, Without HTML)' => '',
-        'Customers With At Least One Ticket' => '',
-        'Dynamic Field Values' => '',
-        'Invalid Dynamic Fields' => '',
-        'Invalid Dynamic Field Values' => '',
-        'GenericInterface Webservices' => '',
-        'Process Tickets' => '',
-        'Months Between First And Last Ticket' => '',
-        'Tickets Per Month (avg)' => 'Tikettejä kuukaudessa (keskimäärin)',
-        'Open Tickets' => 'Avoimet tiketit',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
-        'Default SOAP Username And Password' => '',
-        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
-        'Default Admin Password' => '',
-        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
-        'Email Sending Queue' => '',
-        'Emails queued for sending' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
-        'FQDN (domain name)' => '',
-        'Please configure your FQDN setting.' => '',
-        'Domain Name' => '',
-        'Your FQDN setting is invalid.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
-        'File System Writable' => '',
-        'The file system on your Znuny partition is not writable.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
-        'Legacy Configuration Backups' => '',
-        'No legacy configuration backup files found.' => '',
-        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
-            '',
-        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
-        'The following JavaScript files loaded multiple times:' => '',
-        'Files' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
-        'Package Installation Status' => '',
-        'Some packages have locally modified files.' => '',
-        'Some packages are not correctly installed.' => '',
-        'Package Framework Version Status' => '',
-        'Some packages are not allowed for the current framework version.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageList.pm
-        'Package List' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SessionConfigSettings.pm
-        'Session Config Settings' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
-        'Spooled Emails' => '',
-        'There are emails in var/spool that Znuny could not process.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
-        'Your SystemID setting is invalid, it should only contain digits.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
-        'Default Ticket Type' => '',
-        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
-        'Ticket Index Module' => '',
-        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
-        'Invalid Users with Locked Tickets' => '',
-        'There are invalid users with locked tickets.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/OpenTickets.pm
-        'You should not have more than 8,000 open tickets in your system.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
-        'Ticket Search Index Module' => '',
-        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-        'Orphaned Records In ticket_lock_index Table' => '',
-        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            '',
-        'Orphaned Records In ticket_index Table' => '',
-        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
-        'Time Settings' => '',
-        'Server time zone' => '',
-        'Znuny time zone' => '',
-        'Znuny time zone is not set.' => '',
-        'User default time zone' => '',
-        'User default time zone is not set.' => '',
-        'Calendar time zone is not set.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentSkinUsage.pm
-        'UI - Agent Skin Usage' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentThemeUsage.pm
-        'UI - Agent Theme Usage' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
-        'UI - Special Statistics' => '',
-        'Agents using custom main menu ordering' => '',
-        'Agents using favourites for the admin overview' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'Znuny Version' => '',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => '',
         'Loaded Apache Modules' => '',
@@ -5328,7 +5169,166 @@ sub Data {
         'Webserver Version' => '',
         'Could not determine webserver version.' => '',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
+        'Znuny' => '',
+        'Article Search Index Status' => '',
+        'Indexed Articles' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticlesPerCommunicationChannel.pm
+        'Articles Per Communication Channel' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
+        'Incoming communications' => '',
+        'Outgoing communications' => '',
+        'Failed communications' => '',
+        'Average processing time of communications (s)' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
+        'Communication Log Account Status (last 24 hours)' => '',
+        'No connections found.' => '',
+        'ok' => '',
+        'permanent connection errors' => '',
+        'intermittent connection errors' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
+        'Config Settings' => '',
+        'Could not determine value.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
+        'Daemon' => '',
+        'Daemon is running.' => '',
+        'Daemon is not running.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
+        'Database Records' => '',
+        'Tickets' => 'Tiketit',
+        'Ticket History Entries' => '',
+        'Articles' => 'Artikkelit',
+        'Attachments (DB, Without HTML)' => '',
+        'Customers With At Least One Ticket' => '',
+        'Dynamic Field Values' => '',
+        'Invalid Dynamic Fields' => '',
+        'Invalid Dynamic Field Values' => '',
+        'GenericInterface Webservices' => '',
+        'Process Tickets' => '',
+        'Months Between First And Last Ticket' => '',
+        'Tickets Per Month (avg)' => 'Tikettejä kuukaudessa (keskimäärin)',
+        'Open Tickets' => 'Avoimet tiketit',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
+        'Default SOAP Username And Password' => '',
+        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
+        'Default Admin Password' => '',
+        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
+        'Email Sending Queue' => '',
+        'Emails queued for sending' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
+        'FQDN (domain name)' => '',
+        'Please configure your FQDN setting.' => '',
+        'Domain Name' => '',
+        'Your FQDN setting is invalid.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
+        'File System Writable' => '',
+        'The file system on your Znuny partition is not writable.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
+        'Legacy Configuration Backups' => '',
+        'No legacy configuration backup files found.' => '',
+        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
+            '',
+        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
+        'Package Installation Status' => '',
+        'Some packages have locally modified files.' => '',
+        'Some packages are not correctly installed.' => '',
+        'Package Framework Version Status' => '',
+        'Some packages are not allowed for the current framework version.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageList.pm
+        'Package List' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SessionConfigSettings.pm
+        'Session Config Settings' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
+        'Spooled Emails' => '',
+        'There are emails in var/spool that Znuny could not process.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SystemID.pm
+        'Your SystemID setting is invalid, it should only contain digits.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
+        'Default Ticket Type' => '',
+        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
+        'Ticket Index Module' => '',
+        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
+        'Invalid Users with Locked Tickets' => '',
+        'There are invalid users with locked tickets.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/OpenTickets.pm
+        'You should not have more than 8,000 open tickets in your system.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
+        'Ticket Search Index Module' => '',
+        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
+        'Orphaned Records In ticket_lock_index Table' => '',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            '',
+        'Orphaned Records In ticket_index Table' => '',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
+        'Time Settings' => '',
+        'Server time zone' => '',
+        'Znuny time zone' => '',
+        'Znuny time zone is not set.' => '',
+        'User default time zone' => '',
+        'User default time zone is not set.' => '',
+        'Calendar time zone is not set.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentSkinUsage.pm
+        'UI - Agent Skin Usage' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentThemeUsage.pm
+        'UI - Agent Theme Usage' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
+        'UI - Special Statistics' => '',
+        'Agents using custom main menu ordering' => '',
+        'Agents using favourites for the admin overview' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Version.pm
+        'Znuny Version' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => '',
 

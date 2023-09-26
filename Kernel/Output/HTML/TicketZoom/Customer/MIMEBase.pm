@@ -15,8 +15,6 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::System::VariableCheck qw(IsPositiveInteger);
-
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Article::MIMEBase',

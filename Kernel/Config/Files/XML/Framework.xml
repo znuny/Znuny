@@ -4174,16 +4174,16 @@ via the Preferences button after logging in.
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>thirdparty/momentjs-2.29.1/moment.min.js</Item>
+                        <Item>thirdparty/momentjs-2.29.4/moment.min.js</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.js</Item>
-                        <Item>thirdparty/d3-3.5.6/d3.min.js</Item>
+                        <Item>thirdparty/d3-3.5.7/d3.min.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/nvd3.min.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js</Item>
-                        <Item>thirdparty/canvg-1.4/rgbcolor.js</Item>
-                        <Item>thirdparty/canvg-1.4/StackBlur.js</Item>
-                        <Item>thirdparty/canvg-1.4/canvg.js</Item>
+                        <Item>thirdparty/canvg-1.5/rgbcolor.js</Item>
+                        <Item>thirdparty/canvg-1.5/StackBlur.js</Item>
+                        <Item>thirdparty/canvg-1.5/canvg.js</Item>
                         <Item>thirdparty/StringView-8/stringview.js</Item>
                         <Item>Core.UI.AdvancedChart.js</Item>
                         <Item>Core.UI.AllocationList.js</Item>
@@ -7037,14 +7037,14 @@ via the Preferences button after logging in.
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>thirdparty/d3-3.5.6/d3.min.js</Item>
+                        <Item>thirdparty/d3-3.5.7/d3.min.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/nvd3.min.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js</Item>
-                        <Item>thirdparty/canvg-1.4/rgbcolor.js</Item>
-                        <Item>thirdparty/canvg-1.4/StackBlur.js</Item>
-                        <Item>thirdparty/canvg-1.4/canvg.js</Item>
+                        <Item>thirdparty/canvg-1.5/rgbcolor.js</Item>
+                        <Item>thirdparty/canvg-1.5/StackBlur.js</Item>
+                        <Item>thirdparty/canvg-1.5/canvg.js</Item>
                         <Item>thirdparty/StringView-8/stringview.js</Item>
                         <Item>Core.Agent.Statistics.js</Item>
                         <Item>Core.UI.AdvancedChart.js</Item>
@@ -7704,9 +7704,9 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/jquery-3.6.0/jquery.js</Item>
+                <Item>thirdparty/jquery-3.7.0/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
-                <Item>thirdparty/jquery-ui-1.13.1/jquery-ui.js</Item>
+                <Item>thirdparty/jquery-ui-1.13.2/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.js</Item>
                 <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
@@ -7803,6 +7803,7 @@ via the Preferences button after logging in.
                 <Item>Core.Print.css</Item>
                 <Item>Core.Animations.css</Item>
                 <Item>Core.FlexboxModel.css</Item>
+                <Item>Core.Footer.css</Item>
                 <Item>Core.PageLayout.css</Item>
                 <Item>Core.Components.css</Item>
             </Array>
@@ -7822,10 +7823,10 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/jquery-3.6.0/jquery.js</Item>
+                <Item>thirdparty/jquery-3.7.0/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
                 <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
-                <Item>thirdparty/jquery-ui-1.13.1/jquery-ui.js</Item>
+                <Item>thirdparty/jquery-ui-1.13.2/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.7/jquery.jstree.js</Item>
                 <Item>thirdparty/nunjucks-3.2.2/nunjucks.min.js</Item>

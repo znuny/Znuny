@@ -14183,11 +14183,11 @@ msgstr ""
 msgid "PostgreSQL 9.2 or higher is required."
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
 msgid "Operating System"
 msgstr "Sistema Operativo"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
 msgid "Znuny Disk Partition"
 msgstr "Partición del Disco Znuny"
 
@@ -14275,351 +14275,351 @@ msgstr "Debe haber mas del 60% de espacio de intercambio libre."
 msgid "There should be no more than 200 MB swap space used."
 msgstr "Debe haber no mas de 200 MB de espacio de intercambio usado."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
 msgid "Znuny"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
 msgid "Article Search Index Status"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
 msgid "Indexed Articles"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticlesPerCommunicationChannel.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticlesPerCommunicationChannel.pm
 msgid "Articles Per Communication Channel"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
 msgid "Incoming communications"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
 msgid "Outgoing communications"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
 msgid "Failed communications"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
 msgid "Average processing time of communications (s)"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
 msgid "Communication Log Account Status (last 24 hours)"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
 msgid "No connections found."
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
 msgid "ok"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
 msgid "permanent connection errors"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
 msgid "intermittent connection errors"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
 msgid "Config Settings"
 msgstr "Configuraciones del sistema"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
 msgid "Could not determine value."
 msgstr "No se pudo determinar el valor."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
 msgid "Daemon"
 msgstr "Daemon"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
 msgid "Daemon is running."
 msgstr "Daemon se esta ejecutando."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
 msgid "Daemon is not running."
 msgstr "Daemon no se está ejecutando."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Database Records"
 msgstr "Registros de la Base de Datos"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Tickets"
 msgstr "Tickets"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Ticket History Entries"
 msgstr "Entradas Del Historial De Ticket"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Articles"
 msgstr "Artículos"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Attachments (DB, Without HTML)"
 msgstr "Archivos adjuntos (BD, Sin HTML)"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Customers With At Least One Ticket"
 msgstr "Clientes con al menos un ticket"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Dynamic Field Values"
 msgstr "Valores de Campos Dinámicos"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Invalid Dynamic Fields"
 msgstr "Campo Dinámico Invalido"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Invalid Dynamic Field Values"
 msgstr "Valor del Campo Dinámico Invalido"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "GenericInterface Webservices"
 msgstr "Servicios Web de la Interfaz Genérica"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Process Tickets"
 msgstr "Tickets de Proceso"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Months Between First And Last Ticket"
 msgstr "Meses entre el Primer y Último Ticket"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Tickets Per Month (avg)"
 msgstr "Tickets al Mes (promedio)"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Open Tickets"
 msgstr "Tickets Abiertos"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
 msgid "Default SOAP Username And Password"
 msgstr "SOAP Nombre de Usuario y Contraseña Por Defecto"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
 msgid "Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it."
 msgstr "Riesgo de Seguridad: Esta usando la configuración por defecto para SOAP::User y SOAP::Password. Por favor cambiela."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
 msgid "Default Admin Password"
 msgstr "Contraseña Por Defecto Para Admin"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
 msgid "Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account."
 msgstr "Riesgo de seguridad: la cuenta del agente root@localhost todavía tiene la contraseña predeterminada. Por favor cámbiala o invalida la cuenta."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
 msgid "Email Sending Queue"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
 msgid "Emails queued for sending"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
 msgid "FQDN (domain name)"
 msgstr "FQDN (nombre de dominio)"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
 msgid "Please configure your FQDN setting."
 msgstr "Por favor configure ajuste de su FQDN."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
 msgid "Domain Name"
 msgstr "Nombre de Dominio"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
 msgid "Your FQDN setting is invalid."
 msgstr "Su configuración FQDN no es válida."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
 msgid "File System Writable"
 msgstr "Sistema de Archivos Grabable"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
 msgid "The file system on your Znuny partition is not writable."
 msgstr "El sistema de archivos de la partición Znuny no es grabable."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
 msgid "Legacy Configuration Backups"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
 msgid "No legacy configuration backup files found."
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
 msgid "Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages."
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
 msgid "Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder."
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
 msgid "Views with multiple loaded JavaScript files"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
 msgid "The following JavaScript files loaded multiple times:"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
 msgid "Files"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
 msgid "Package Installation Status"
 msgstr "Estado de Instalación del Paquete"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
 msgid "Some packages have locally modified files."
 msgstr "Algunos paquetes tienen archivos modificados localmente."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
 msgid "Some packages are not correctly installed."
 msgstr "Algunos paquetes no estan correctamente instalados."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
 msgid "Package Framework Version Status"
 msgstr "Estado de la versión del paquete Framework "
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
 msgid "Some packages are not allowed for the current framework version."
 msgstr "Algunos paquetes no están permitidos para la versión actual del framework."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageList.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageList.pm
 msgid "Package List"
 msgstr "Listado de paquetes"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SessionConfigSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SessionConfigSettings.pm
 msgid "Session Config Settings"
 msgstr "Ajustes de Configuración de Sesión."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
 msgid "Spooled Emails"
 msgstr "Emails están en portapapeles"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
 msgid "There are emails in var/spool that Znuny could not process."
 msgstr "Se encuentran emails en var/spool cuáles no pueden ser procesados por Znuny."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SystemID.pm
 msgid "Your SystemID setting is invalid, it should only contain digits."
 msgstr "El ajuste del ID del Sistema es es valido, debe contener solamente dígitos."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
 msgid "Default Ticket Type"
 msgstr "Tipo de Ticket predeterminado"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
 msgid "The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type."
 msgstr "El tipo predeterminado de ticket configurado está inválido ó se falta. Favor, cambie los ajustes Ticket::Type::Default y seleccione el tipo de ticket válido."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
 msgid "Ticket Index Module"
 msgstr "Módulo De Índice de Tickets"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
 msgid "You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information."
 msgstr "Usted tiene más de 60,000 tickets y debería usar el backend StaticDB. Ver el manual admin (Optimización del Rendimiento) para más información."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
 msgid "Invalid Users with Locked Tickets"
 msgstr "Usuarios no válidos con Tickets bloqueados"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
 msgid "There are invalid users with locked tickets."
 msgstr "Hay usuarios no válidos con Tickets bloqueados."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/OpenTickets.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/OpenTickets.pm
 msgid "You should not have more than 8,000 open tickets in your system."
 msgstr "No debe tener más de 8.000 tickets abiertos en su sistema."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
 msgid "Ticket Search Index Module"
 msgstr "Módulo Índice Búsqueda de Ticket"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
 msgid "The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches."
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
 msgid "Orphaned Records In ticket_lock_index Table"
 msgstr "Registros Huérfanos En La Tabla ticket_lock_index"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
 msgid "Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
 msgstr "La tabla ticket_lock_index contiene registros huérfanos. Por favor ejectute bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" para limpiar el índice StaticDB."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
 msgid "Orphaned Records In ticket_index Table"
 msgstr "Registros Huerfanos en la Tabla ticket_index"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
 msgid "Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
 msgstr "La tabla ticket_index contiene registros perdidos. Favor inicie bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" para limpiar el StaticDB index."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "Time Settings"
 msgstr "Ajustes de hora"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "Server time zone"
 msgstr "Zona horaria del servidor"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "Znuny time zone"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "Znuny time zone is not set."
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "User default time zone"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "User default time zone is not set."
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "Calendar time zone is not set."
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentSkinUsage.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentSkinUsage.pm
 msgid "UI - Agent Skin Usage"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentThemeUsage.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentThemeUsage.pm
 msgid "UI - Agent Theme Usage"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
 msgid "UI - Special Statistics"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
 msgid "Agents using custom main menu ordering"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
 msgid "Agents using favourites for the admin overview"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Version.pm
 msgid "Znuny Version"
 msgstr "Versión De Znuny"
 
@@ -14707,11 +14707,11 @@ msgstr "Versión del Servidor Web"
 msgid "Could not determine webserver version."
 msgstr "No se pudo determinar la versión del servidor web."
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+#. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
 msgid "Concurrent Users Details"
 msgstr "Detalles de Usuarios Concurrentes"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+#. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
 msgid "Concurrent Users"
 msgstr "Usuarios Concurrentes"
 
@@ -24309,5 +24309,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
 msgid "Overview Default Columns"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
+msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
 msgstr ""
 

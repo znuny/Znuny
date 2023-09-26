@@ -20,8 +20,6 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
 );
 
-use Kernel::System::VariableCheck qw(:all);
-
 =head1 NAME
 
 Kernel::System::UnitTest::WebUserAgent - WebUserAgent lib

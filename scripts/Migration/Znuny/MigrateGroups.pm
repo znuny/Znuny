@@ -27,8 +27,6 @@ use utf8;
 
 use parent qw(scripts::Migration::Base);
 
-use Kernel::System::VariableCheck qw(:all);
-
 our @ObjectDependencies = (
     'Kernel::System::DB',
     'Kernel::System::Group',

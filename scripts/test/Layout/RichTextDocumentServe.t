@@ -208,7 +208,7 @@ my @Tests = (
         Result => {
             Content => '
 
-<div class="attachment-blocker">
+<div class="attachment-blocker" style="-moz-border-radius: 5px; -webkit-border-radius: 5px; background-color: #50B5FF10; border-radius: 5px; border: 1px solid #999; font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 11px; margin: 5px 0; padding: 10px 20px; text-align: center;">
     <span>Zum Schutz Ihrer Privatsphäre wurden entfernte Inhalte blockiert.</span>
     <a href="index.pl?;LoadExternalImages=1;SessionID=123">Blockierte Inhalte laden.</a>
 </div>
