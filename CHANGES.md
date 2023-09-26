@@ -1,4 +1,5 @@
 # 6.5.5 2023-??-??
+ - 2023-09-22 Fixed some errors in the customer interface being shown with the agent interface's header navigation. Thanks for reporting/hints to Tim Püttmanns, maxence.
  - 2023-08-29 Updated maximum length of generic agent job database fields and their input fields in dialog AdminGenericAgent to prevent errors storing values too long for the database. [#474](https://github.com/znuny/Znuny/issues/474)
  - 2023-08-23 Added parameter to enforce account selection for the Microsoft OAuth2 template.
 
