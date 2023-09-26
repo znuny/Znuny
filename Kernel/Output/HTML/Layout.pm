@@ -1612,13 +1612,13 @@ sub ToolbarModules {
             $ConfigObject->Get('Ticket::ArchiveSystem')
             && $Modules{$Key}->{Block} eq 'ToolBarSearch'
             && $Modules{$Key}->{Name} eq 'Fulltext'
-            )
-        {
+        ){
+            my $SearchInArchive = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
+
             $Self->Block(
                 Name => 'SearchInArchive',
                 Data => {
-                    SearchInArchive =>
-                        $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive},
+                    SearchInArchive => $SearchInArchive || 'AllTickets',
                 },
             );
         }
