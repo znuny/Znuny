@@ -51,6 +51,7 @@ sub Run {
         'Znuny4OTRS-NoteToLinkedTicket',
         'Znuny4OTRS-UserMaxArticlesPerPage',
         'Znuny-BugfixFormInput',
+        'Znuny-DynamicFieldWebserviceTicketIDPayload',
     );
 
     PACKAGENAME:
