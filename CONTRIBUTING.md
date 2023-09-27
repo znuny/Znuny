@@ -49,7 +49,7 @@ After you filed the issue:
 * If we are able to reproduce the issue, we will label it accordingly and try to fix it.
 
 Special Case:
-Security issues. If you want to report a security issue, please see the [Security.md](https://github.com/znuny/Znuny/blob/dev/SECURITY.md#how-to-report-a-security-vulnerability)
+Security issues. If you want to report a security issue, please see the [Security.md](SECURITY.md#how-to-report-a-security-vulnerability)
 
 Note: if you don't reply on questions, we will close the issue after 30 days. This is just a measure to keep our issue list clean.
 
