@@ -77,67 +77,8 @@ sub Run {
         }
     }
 
-    # show first response time if needed
-    if ( defined $Ticket{FirstResponseTime} ) {
-        $Ticket{FirstResponseTimeHuman} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{FirstResponseTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        $Ticket{FirstResponseTimeWorkingTime} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{FirstResponseTimeWorkingTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        if ( 60 * 60 * 1 > $Ticket{FirstResponseTime} ) {
-            $Ticket{FirstResponseTimeClass} = 'Warning';
-        }
-        $LayoutObject->Block(
-            Name => 'FirstResponseTime',
-            Data => { %Ticket, %AclAction },
-        );
-    }
-
-    # show update time if needed
-    if ( defined $Ticket{UpdateTime} ) {
-        $Ticket{UpdateTimeHuman} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{UpdateTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        $Ticket{UpdateTimeWorkingTime} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{UpdateTimeWorkingTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        if ( 60 * 60 * 1 > $Ticket{UpdateTime} ) {
-            $Ticket{UpdateTimeClass} = 'Warning';
-        }
-        $LayoutObject->Block(
-            Name => 'UpdateTime',
-            Data => { %Ticket, %AclAction },
-        );
-    }
-
-    # show solution time if needed
-    if ( defined $Ticket{SolutionTime} ) {
-        $Ticket{SolutionTimeHuman} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{SolutionTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        $Ticket{SolutionTimeWorkingTime} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{SolutionTimeWorkingTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        if ( 60 * 60 * 1 > $Ticket{SolutionTime} ) {
-            $Ticket{SolutionTimeClass} = 'Warning';
-        }
-        $LayoutObject->Block(
-            Name => 'SolutionTime',
-            Data => { %Ticket, %AclAction },
-        );
+    for my $TimerName (qw( FirstResponseTime UpdateTime SolutionTime )) {
+        $Self->_AddTimeNeededBlock( \%Ticket, $TimerName, \%AclAction ) if defined $Ticket{$TimerName};
     }
 
     # show number of tickets with the same customer id if feature is active:
@@ -491,9 +432,38 @@ sub Run {
         Data         => { %Param, %Ticket, %AclAction },
     );
 
+    my $Config = $Param{Config};
+    my %Rank;
+    %Rank = ( Rank => $Config->{Rank} ) if exists $Config->{Rank} && defined $Config->{Rank};
+
     return {
         Output => $Output,
+        %Rank,
     };
+}
+
+sub _AddTimeNeededBlock {
+    my ( $Self, $Ticket, $TimerName, $AclAction ) = @_;
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Ticket->{"${TimerName}Human"} = $LayoutObject->CustomerAge(
+        Age                => $Ticket->{$TimerName},
+        TimeShowAlwaysLong => 1,
+        Space              => ' ',
+    );
+    $Ticket->{"${TimerName}WorkingTime"} = $LayoutObject->CustomerAge(
+        Age                => $Ticket->{"${TimerName}WorkingTime"},
+        TimeShowAlwaysLong => 1,
+        Space              => ' ',
+    );
+    if ( 60 * 60 * 1 > $Ticket->{$TimerName} ) {
+        $Ticket->{"${TimerName}Class"} = 'Warning';
+    }
+    $LayoutObject->Block(
+        Name => $TimerName,
+        Data => { %$Ticket, %$AclAction },
+    );
+    return;
 }
 
 # Checks if dynamic fields of types WebserviceDropdown and WebserviceMultiselect
