@@ -70,8 +70,13 @@ sub Run {
         Data         => {},
     );
 
+    my $Config = $Param{Config};
+    my %Rank;
+    %Rank = ( Rank => $Config->{Rank} ) if exists $Config->{Rank} && defined $Config->{Rank};
+
     return {
         Output => $Output,
+        %Rank,
     };
 }
 
