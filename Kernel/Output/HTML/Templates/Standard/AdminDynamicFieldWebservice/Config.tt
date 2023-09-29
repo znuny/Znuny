@@ -52,6 +52,14 @@
 </div>
 <div class="Clear"></div>
 
+<label for="CacheTTL">[% Translate("Cache TTL") | html %]:</label>
+<div class="Field">
+    <input id="CacheTTL" class="W50pc [% Data.CacheTTLServerError | html %]" type="text" maxlength="200" value="[% Data.CacheTTL | html %]" name="CacheTTL"/>
+    <div id="CacheTTLServerError" class="TooltipErrorMessage"><p>[% Translate(Data.CacheTTLServerErrorMessage) | html %]</p></div>
+    <p class="FieldExplanation">[% Translate("TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.") | html %]</p>
+</div>
+<div class="Clear"></div>
+
 <label for="SearchKeys">[% Translate("Key for search") | html %]:</label>
 <div class="Field">
     <input id="SearchKeys" class="W50pc [% Data.SearchKeysServerError | html %]" type="text" maxlength="200" value="[% Data.SearchKeys | html %]" name="SearchKeys"/>

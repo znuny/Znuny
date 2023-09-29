@@ -268,7 +268,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                     AutocompleteFieldName,
                     URL                      = Core.Config.Get('Baselink'),
                     Config                   = [
-                        'Webservice', 'InvokerSearch', 'InvokerGet', 'Backend', 'StoredValue', 'SearchKeys', 'DisplayedValues', 'DisplayedValuesSeparator', 'Limit', 'AutocompleteMinLength', 'QueryDelay', 'AdditionalDFStorage', 'InputFieldWidth', 'DefaultValue', 'Link', 'SearchTerms',                     ],
+                        'Webservice', 'InvokerSearch', 'InvokerGet', 'Backend', 'CacheTTL', 'StoredValue', 'SearchKeys', 'DisplayedValues', 'DisplayedValuesSeparator', 'Limit', 'AutocompleteMinLength', 'QueryDelay', 'AdditionalDFStorage', 'InputFieldWidth', 'DefaultValue', 'Link', 'SearchTerms',                     ],
                     Data = {
                         Action:           'AJAXDynamicFieldWebservice',
                         Subaction:        'Test',
