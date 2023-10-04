@@ -825,7 +825,7 @@ sub Run {
         );
     }
     else {
-        return $LayoutObject->ErrorScreen(
+        return $LayoutObject->CustomerErrorScreen(
             Message => Translatable('No Subaction!'),
             Comment => Translatable('Please contact the administrator.'),
         );
