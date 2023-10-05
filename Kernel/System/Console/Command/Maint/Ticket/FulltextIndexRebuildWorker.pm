@@ -21,6 +21,7 @@ use Time::HiRes qw(sleep);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::Cache::Memcached',
     'Kernel::System::DB',
     'Kernel::System::Log',
     'Kernel::System::PID',
@@ -120,6 +121,17 @@ sub ArticleIndexRebuild {
 
     my @ArticleIDs = keys %{ $Param{ArticleTicketIDs} };
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    # Disconnect & destroy memcached object to avoid child processes using same connection.
+    if ( $ConfigObject->Get('Cache::Module') eq 'Kernel::System::Cache::Memcached' ) {
+        $Kernel::OM->Get('Kernel::System::Cache::Memcached')->Disconnect();
+        $Kernel::OM->ObjectsDiscard(
+            Objects            => ['Kernel::System::Cache::Memcached'],
+            ForcePackageReload => 0,
+        );
+    }
+
     $Kernel::OM->Get('Kernel::System::DB')->Disconnect();
 
     # Destroy objects for the child processes.
@@ -138,7 +150,6 @@ sub ArticleIndexRebuild {
         push @{ $ArticleChunks[ $Count++ % $Param{Children} ] }, $ArticleID;
     }
 
-    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
