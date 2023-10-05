@@ -1934,7 +1934,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .AJAXLoader:after,
     #Canvas .Activity .Loader:after,
-    .Loading > .Header h2:after,
+    .Loading > .Header:after,
     .OverviewControl.Loading .ControlRow:after {
         -webkit-animation: fa-spin 2s infinite linear;
         animation: fa-spin 2s infinite linear;

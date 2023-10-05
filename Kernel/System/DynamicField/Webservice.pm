@@ -21,6 +21,7 @@ our @ObjectDependencies = (
     'Kernel::System::Main',
     'Kernel::System::Ticket',
     'Kernel::System::Util',
+    'Kernel::System::Web::Request',
 );
 
 use Kernel::System::VariableCheck qw(:all);
@@ -79,6 +80,7 @@ Tests given web-service configuration by connecting and querying the web-service
         },
         DynamicFieldName => 'DFName1',      # optional
         FieldType        => 'WebserviceDropdown',
+        TicketID         => 65, # optional
         UserID           => 1,
         UserType         => 'Agent',                                        # optional 'Agent' or 'Customer'
     );
@@ -138,6 +140,7 @@ sub Test {
         DynamicFieldConfig => $DynamicFieldConfig,
         SearchTerms        => $Param{SearchTerms} || $DynamicFieldConfig->{SearchTerms} || '***',
         SearchType         => 'LIKE',
+        TicketID           => $Param{TicketID},                                                     # optional
         UserID             => $Param{UserID},
         Attributes         => \@Attributes,
         UserType           => $Param{UserType},
@@ -170,6 +173,7 @@ Retrieves data for auto-complete list of given dynamic field config.
     my $Results = $DynamicFieldWebserviceObject->Autocomplete(
         DynamicFieldConfig => {},
         SearchTerms        => 'my search',
+        TicketID           => 65, # optional
         UserID             => 1,
         UserType           => 'Agent',                # optional 'Agent' or 'Customer'
     );
@@ -204,6 +208,7 @@ sub Autocomplete {
         SearchTerms        => $Param{SearchTerms},
         SearchKeys         => $Param{SearchKeys},
         SearchType         => 'LIKE',
+        TicketID           => $Param{TicketID},                  # optional
         UserID             => $Param{UserID},
         UserType           => $Param{UserType},
         FieldValues        => $Param{GetParam}->{FieldValues},
@@ -236,6 +241,7 @@ Retrieves data for auto-fill list of given dynamic field config.
     my $Results = $DynamicFieldWebserviceObject->AutoFill(
         DynamicFieldConfig => {},
         SearchTerms        => 'my search',
+        TicketID           => 65, # optional
         UserID             => 1,
         UserType           => 'Agent',                # optional 'Agent' or 'Customer'
     );
@@ -274,6 +280,7 @@ sub AutoFill {
         SearchKeys         => [ $BackendConfig->{StoredValue} ],
         SearchType         => 'EQUALS',
         Attributes         => \@Attributes,
+        TicketID           => $Param{TicketID},                    # optional
         UserID             => $Param{UserID},
         UserType           => $Param{UserType},
     );
@@ -318,7 +325,8 @@ Executes search in configured dynamic field web-service.
             'Name',
             'ID',
         ],
-        UserID => 1,
+        TicketID => 65, # optional
+        UserID   => 1,
     );
 
     $Results is an (empty) array ref of the follwing form or undef on failure.
@@ -466,6 +474,26 @@ sub Search {
 
     if ( IsHashRefWithData( $Param{FieldValues} ) ) {
         %Data = ( %Data, %{ $Param{FieldValues} } );
+    }
+
+    if ( !$Data{TicketID} ) {
+        my $IsFrontendContext = $UtilObject->IsFrontendContext();
+
+        if ( $Param{TicketID} ) {
+            $Data{TicketID} = $Param{TicketID};
+        }
+        elsif ($IsFrontendContext) {
+
+            # Fallback: Try to get ticket ID from param object.
+            my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+            $Data{TicketID} = $ParamObject->GetParam( Param => 'TicketID' );
+
+            # Fallback: Try to get ticket ID from layout object.
+            if ( !$Data{TicketID} ) {
+                my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+                $Data{TicketID} = $LayoutObject->{TicketID};
+            }
+        }
     }
 
     # Use one request per search term if InvokerGet is being used because
@@ -840,7 +868,8 @@ Hashref is used for BuildSelection or input fields.
     my $DisplayValue = $DynamicFieldWebserviceObject->DisplayValueGet(
         DynamicFieldConfig => {},
         Value              => 'My value', # or array of values
-        UserID             => 1,
+        TicketID           => 65, # optional
+        UserID             => 1, # optional
     );
 
     If one value was given, it returns its display value as a string
@@ -914,6 +943,7 @@ sub DisplayValueGet {
         SearchTerms        => $Param{Value},
         SearchType         => 'EQUALS',
         SearchKeys         => \@SearchKeys,
+        TicketID           => $Param{TicketID},             # optional
         UserID             => $Param{UserID} || 1,
         UserType           => $Param{UserType},
     );
