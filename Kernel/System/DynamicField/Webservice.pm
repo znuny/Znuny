@@ -14,6 +14,7 @@ use warnings;
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::Cache',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::HTMLUtils',
@@ -49,15 +50,16 @@ sub new {
 
     $Self->{RequiredAttributes} = [ 'Webservice', 'InvokerSearch', 'InvokerGet', 'Backend', 'StoredValue', ];
     $Self->{OptionalAttributes} = [
-        'SearchKeys', 'DisplayedValues', 'DisplayedValuesSeparator', 'Limit', 'AutocompleteMinLength', 'QueryDelay',
-        'AdditionalDFStorage', 'InputFieldWidth',
-        'DefaultValue',        'Link',
+        'SearchKeys', 'CacheTTL', 'DisplayedValues', 'DisplayedValuesSeparator', 'Limit', 'AutocompleteMinLength',
+        'QueryDelay', 'AdditionalDFStorage', 'InputFieldWidth', 'DefaultValue', 'Link',
     ];
 
     $Self->{SupportedDynamicFieldTypes} = {
         WebserviceDropdown    => 1,
         WebserviceMultiselect => 1,
     };
+
+    $Self->{CacheType} = 'DynamicFieldWebservice';
 
     return $Self;
 }
@@ -367,6 +369,7 @@ sub Search {
     my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $UtilObject   = $Kernel::OM->Get('Kernel::System::Util');
+    my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
     NEEDED:
     for my $Needed (qw(DynamicFieldConfig SearchTerms)) {
@@ -513,16 +516,51 @@ sub Search {
                 UserID      => $Param{UserID},
             );
 
-            my $Results = $BackendObject->Request(
-                %{$BackendConfig},
-                %RequestData,
-                Data => \%Data,
-            );
+            my $CacheKey = $Param{DynamicFieldConfig}->{Name}
+                . '::'
+                . $InvokerType
+                . '::'
+                . $InvokerName
+                . '::'
+                . $SearchTerm
+                . '::'
+                . $Param{UserID};
+
+            my $Results;
+            if ( $BackendConfig->{CacheTTL} ) {
+                $Results = $CacheObject->Get(
+                    Type => $Self->{CacheType},
+                    Key  => $CacheKey,
+                );
+            }
+            my $RequestExecuted;
+            if ( !defined $Results ) {
+                $Results = $BackendObject->Request(
+                    %{$BackendConfig},
+                    %RequestData,
+                    Data => \%Data,
+                );
+
+                $RequestExecuted = 1;
+            }
 
             next SEARCHTERM if !IsArrayRefWithData($Results) && !IsHashRefWithData($Results);
 
             if ( !IsArrayRefWithData($Results) ) {
                 $Results = [$Results];
+            }
+
+            if (
+                $BackendConfig->{CacheTTL}
+                && $RequestExecuted
+                )
+            {
+                $CacheObject->Set(
+                    Type  => $Self->{CacheType},
+                    Key   => $CacheKey,
+                    Value => $Results,
+                    TTL   => $BackendConfig->{CacheTTL},
+                );
             }
 
             push @RequestResults, @{$Results};
@@ -538,16 +576,51 @@ sub Search {
             UserID      => $Param{UserID},
         );
 
-        my $Results = $BackendObject->Request(
-            %{$BackendConfig},
-            %RequestData,
-            Data => \%Data,
-        );
+        my $CacheKey = $Param{DynamicFieldConfig}->{Name}
+            . '::'
+            . $InvokerType
+            . '::'
+            . $InvokerName
+            . '::'
+            . $Param{SearchTerms}
+            . '::'
+            . $Param{UserID};
+
+        my $Results;
+        if ( $BackendConfig->{CacheTTL} ) {
+            $Results = $CacheObject->Get(
+                Type => $Self->{CacheType},
+                Key  => $CacheKey,
+            );
+        }
+        my $RequestExecuted;
+        if ( !defined $Results ) {
+            $Results = $BackendObject->Request(
+                %{$BackendConfig},
+                %RequestData,
+                Data => \%Data,
+            );
+
+            $RequestExecuted = 1;
+        }
 
         return if !IsArrayRefWithData($Results) && !IsHashRefWithData($Results);
 
         if ( !IsArrayRefWithData($Results) ) {
             $Results = [$Results];
+        }
+
+        if (
+            $BackendConfig->{CacheTTL}
+            && $RequestExecuted
+            )
+        {
+            $CacheObject->Set(
+                Type  => $Self->{CacheType},
+                Key   => $CacheKey,
+                Value => $Results,
+                TTL   => $BackendConfig->{CacheTTL},
+            );
         }
 
         push @RequestResults, @{$Results};
@@ -1369,6 +1442,7 @@ sub _BackendConfigGet {
     BACKENDCONFIGFIELD:
     for my $BackendConfigField ( @{ $Self->{OptionalAttributes} } ) {
         $BackendConfig->{$BackendConfigField} = $Param{DynamicFieldConfig}->{Config}->{$BackendConfigField};
+
         next BACKENDCONFIGFIELD
             if defined $BackendConfig->{$BackendConfigField} && length $BackendConfig->{$BackendConfigField};
 
