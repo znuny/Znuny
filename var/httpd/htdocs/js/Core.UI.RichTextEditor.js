@@ -419,14 +419,6 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             };
             /* eslint-enable no-unused-vars */
 
-            // Needed for clientside validation of RTE
-            CKEDITOR.instances[EditorID].on('blur', function () {
-                CKEDITOR.instances[EditorID].updateElement();
-                if (!$EditorArea.hasClass('Error')) {
-                    Core.Form.Validate.ValidateElement($EditorArea);
-                }
-            });
-
             // needed for client-side validation
             CKEDITOR.instances[EditorID].on('focus', function () {
 

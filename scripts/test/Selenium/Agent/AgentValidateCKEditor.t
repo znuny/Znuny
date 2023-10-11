@@ -19,9 +19,11 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Create test queue.
-        my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID = $QueueObject->QueueAdd(
             Name            => "Queue" . $HelperObject->GetRandomID(),
             ValidID         => 1,
             GroupID         => 1,
@@ -45,7 +47,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketPhone screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");
@@ -63,7 +65,7 @@ $Selenium->RunTest(
         # After JQuery update, invalid RichText field draws focus,
         #   so dropdown don't stay open. See bug#14997.
         # Queue dropdown should stay open.
-        sleep 1;
+        sleep 2;
 
         $Self->Is(
             $Selenium->execute_script(
