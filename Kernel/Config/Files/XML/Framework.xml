@@ -406,7 +406,7 @@
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.17.1/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.22.1/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::DefaultCSS" Required="1" Valid="1">
@@ -469,7 +469,7 @@
         <Description Translatable="1">Defines additional plugins for use in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String">splitquote,contextmenu_linkopen,textwatcher,autocomplete,textmatch,autolink,image2,mentions</Item>
+            <Item ValueType="String">splitquote,contextmenu_linkopen</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###ExtraAllowedContent" Required="0" Valid="1">
@@ -8087,7 +8087,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/ckeditor-4.17.1/ckeditor.js</Item>
+                <Item>thirdparty/ckeditor-4.22.1/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -8177,7 +8177,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/ckeditor-4.17.1/ckeditor.js</Item>
+                <Item>thirdparty/ckeditor-4.22.1/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>
