@@ -307,17 +307,20 @@ Core.UI.RichTextEditor = (function (TargetNS) {
 
         // set default editor config, but allow custom config for other types for editors
         /*eslint-disable camelcase */
-        RemovedCKEditorPlugins = CheckFormID($EditorArea).length ? 'image' : 'image,uploadimage';
-        RemovedCKEditorPlugins += ',elementspath';
+        RemovedCKEditorPlugins = 'devtools,image,flash,mathjax,embed,exportpdf,sourcedialog,bbcode,divarea,elementspath';
+        if (!CheckFormID($EditorArea).length) {
+            RemovedCKEditorPlugins += ',uploadimage';
+        }
 
         EditorConfig = {
-            customConfig:              '', // avoid loading external config files
+            // customConfig:              '', // avoid loading external config files
             disableNativeSpellChecker: false,
             defaultLanguage:           UserLanguage,
             language:                  UserLanguage,
             width:                     Core.Config.Get('RichText.Width', 620),
             resize_minWidth:           Core.Config.Get('RichText.Width', 620),
             height:                    Core.Config.Get('RichText.Height', 320),
+            autoGrow_minHeight:        Core.Config.Get('RichText.Height', 320),
             removePlugins:             RemovedCKEditorPlugins,
             forcePasteAsPlainText:     false,
             format_tags:               Core.Config.Get('RichText.FormatTags', 'p;h1;h2;h3;h4;h5;h6;pre'),
@@ -330,7 +333,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             toolbar:                   CheckFormID($EditorArea).length ? Core.Config.Get('RichText.Toolbar') : Core.Config.Get('RichText.ToolbarWithoutImage'),
             filebrowserBrowseUrl:      '',
             filebrowserUploadUrl:      UploadURL,
-            extraPlugins:              Core.Config.Get('RichText.ExtraPlugins','splitquote,contextmenu_linkopen,textwatcher,autocomplete,textmatch,autolink,image2,mentions'),
+            extraPlugins:              Core.Config.Get('RichText.ExtraPlugins', 'splitquote,contextmenu_linkopen'),
             entities:                  false,
             skin:                      'moono-lisa'
         };
