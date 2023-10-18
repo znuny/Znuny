@@ -362,7 +362,7 @@
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.17.1/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.22.1/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::DefaultCSS" Required="1" Valid="1">
@@ -425,7 +425,7 @@
         <Description Translatable="1">Defines additional plugins for use in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String">splitquote,contextmenu_linkopen,textwatcher,autocomplete,textmatch,autolink,image2,mentions</Item>
+            <Item ValueType="String">splitquote,contextmenu_linkopen</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###ExtraAllowedContent" Required="0" Valid="1">
@@ -4176,7 +4176,7 @@ via the Preferences button after logging in.
                     <Array>
                         <Item>thirdparty/momentjs-2.29.4/moment.min.js</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.js</Item>
-                        <Item>thirdparty/d3-3.5.7/d3.min.js</Item>
+                        <Item>thirdparty/d3-3.5.7/d3.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/nvd3.min.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js</Item>
@@ -7037,7 +7037,7 @@ via the Preferences button after logging in.
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>thirdparty/d3-3.5.7/d3.min.js</Item>
+                        <Item>thirdparty/d3-3.5.7/d3.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/nvd3.min.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js</Item>
@@ -7769,7 +7769,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/ckeditor-4.17.1/ckeditor.js</Item>
+                <Item>thirdparty/ckeditor-4.22.1/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -7874,7 +7874,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/ckeditor-4.17.1/ckeditor.js</Item>
+                <Item>thirdparty/ckeditor-4.22.1/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>

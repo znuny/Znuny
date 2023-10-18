@@ -1608,13 +1608,15 @@ sub _TicketCreate {
 
         my $PlainBody = $Article->{Body};
 
+        my $ArticleIsHTML = ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
+            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i );
+
+        my $ArticleIsPlainText = ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/plain/i )
+            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/plain/i );
+
         # Convert article body to plain text, if HTML content was supplied. This is necessary since auto response code
         #   expects plain text content. Please see bug#13397 for more information.
-        if (
-            ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
-            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
-            )
-        {
+        if ($ArticleIsHTML) {
             $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
                 String => $Article->{Body},
             );
@@ -1645,20 +1647,31 @@ sub _TicketCreate {
                 };
             }
 
+            #
+            # Template generator implicitly takes Frontend::RichText into account.
+            # Temporarily enable/disable RichText setting according to content type of article,
+            # so that body and signature both are plain text or HTML.
+            #
+            my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+            my $OriginalRichTextSetting = $ConfigObject->Get('Frontend::RichText');
+
+            $ConfigObject->{'Frontend::RichText'} = 0 if $ArticleIsPlainText;
+            $ConfigObject->{'Frontend::RichText'} = 1 if $ArticleIsHTML;
+
             my $Signature = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Signature(
                 TicketID => $TicketID,
                 UserID   => $Param{UserID},
                 Data     => $Article,
             );
 
+            # Restore original RichText setting.
+            $ConfigObject->{'Frontend::RichText'} = $OriginalRichTextSetting;
+
             if ($Signature) {
                 $Article->{Body} = $Article->{Body} . $Signature;
 
-                if (
-                    ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
-                    || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
-                    )
-                {
+                if ($ArticleIsHTML) {
                     $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
                         String => $Article->{Body},
                     );

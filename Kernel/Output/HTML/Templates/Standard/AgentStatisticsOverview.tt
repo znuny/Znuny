@@ -69,6 +69,14 @@
                     <span class="show-all">[% Translate("Show All") | html %]</span>
                 </a>
             </div>
+            <span class="Pagination">
+                <ul>
+                    <li>
+                        <span>[% Data.ResultLong %]</span>
+                    </li>
+                    <li class="page-links">[% Data.SiteNavBar %]</li>
+                </ul>
+            </span>
             <div class="Content">
                 <table class="Sortable DataTable">
                     <thead>
@@ -146,14 +154,6 @@
                         <div class="SpacingTop"></div>
                     </div>
                 </div>
-                <span class="Pagination">
-                    <ul>
-                        <li>
-                            <span>[% Data.ResultLong %]</span>
-                        </li>
-                        <li class="page-links">[% Data.SiteNavBar %]</li>
-                    </ul>
-                </span>
             </div>
         </div>
     </div>

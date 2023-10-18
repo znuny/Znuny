@@ -543,10 +543,12 @@ sub SearchFieldRender {
     # Assemble display values
     # If there are no available values, leave it empty.
     if ( IsHashRefWithData($SelectionData) ) {
+        my $TicketID = $Param{LayoutObject}->{TicketID};
         $SelectionData = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             Value              => [ keys %{$SelectionData} ],
             Limit              => '',
+            TicketID           => $TicketID,
         );
     }
 
@@ -608,12 +610,15 @@ sub _AutocompleteSearchFieldRender {
     # check and set class if necessary
     my $FieldClass = 'DynamicFieldMultiSelect Modernize';
 
+    my $TicketID = $Param{LayoutObject}->{TicketID};
+
     my $SelectionData;
     if ( IsArrayRefWithData($FieldValues) ) {
         $SelectionData = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             Value              => $FieldValues,
             Limit              => '',
+            TicketID           => $TicketID,
         );
     }
 
@@ -638,7 +643,6 @@ sub _AutocompleteSearchFieldRender {
 
     my $AutocompleteMinLength = int( $FieldConfig->{AutocompleteMinLength} || 3 );
     my $QueryDelay            = int( $FieldConfig->{QueryDelay}            || 1 );
-    my $TicketID              = $Param{LayoutObject}->{TicketID};
 
     if ( !IsArrayRefWithData( $FieldConfig->{AdditionalDFStorage} ) ) {
         $FieldConfig->{AdditionalDFStorage} = [];
@@ -874,6 +878,8 @@ sub PossibleValuesGet {
     # values yet.
     $PossibleValues{' '} = '';
 
+    my $TicketID = $Param{LayoutObject}->{TicketID};
+
     if ( $Param{DynamicFieldConfig}->{Config}->{InitialSearchTerm} ) {
         my $InitialSearchTerm = $LayoutObject->Ascii2Html(
             Text => $Param{DynamicFieldConfig}->{Config}->{InitialSearchTerm},
@@ -883,6 +889,7 @@ sub PossibleValuesGet {
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             SearchTerms        => $InitialSearchTerm,
             UserID             => $Param{UserID},
+            TicketID           => $TicketID,
         );
         if ( IsArrayRefWithData($Results) ) {
             for my $Result ( @{$Results} ) {
@@ -903,6 +910,7 @@ sub PossibleValuesGet {
         my $DisplayValue = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             Value              => $Param{Value},
+            TicketID           => $TicketID,
         );
 
         %PossibleValues = (
