@@ -3199,8 +3199,8 @@ END;
 -- ----------------------------------------------------------
 CREATE TABLE generic_agent_jobs (
     job_name VARCHAR2 (200) NOT NULL,
-    job_key VARCHAR2 (200) NOT NULL,
-    job_value VARCHAR2 (200) NULL
+    job_key VARCHAR2 (255) NOT NULL,
+    job_value VARCHAR2 (3800) NULL
 );
 BEGIN
     EXECUTE IMMEDIATE 'CREATE INDEX generic_agent_jobs_job_name ON generic_agent_jobs (job_name)';

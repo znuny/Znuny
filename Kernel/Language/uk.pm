@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.438842975206612;
+    $Self->{Completeness}        = 0.438697951090549;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -617,6 +617,9 @@ sub Data {
         'Backend' => '',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1089,9 +1092,6 @@ sub Data {
         'Send Keep-Alive' => 'Надіслати Keep-аlive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Ця конфігурація визначає які вхідні з\'єднання мають бути зачинені або збережені.',
-        'Additional response headers' => '',
-        'Header' => 'Заголовок',
-        'Add response header' => '',
         'Endpoint' => 'Кінцева точка',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1180,7 +1180,10 @@ sub Data {
             'Конкретна HTTP команда  що буде використовуватись для запитів з цим активатором (необов\'язково).',
         'Default command' => 'Типова команда',
         'The default HTTP command to use for the requests.' => 'Типова HTTP команда для використання у запитах.',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Header' => 'Заголовок',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

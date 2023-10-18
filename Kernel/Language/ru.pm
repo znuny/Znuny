@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.837520661157025;
+    $Self->{Completeness}        = 0.837243886318572;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -628,6 +628,9 @@ sub Data {
         'Backend' => 'Бэкенд',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1100,9 +1103,6 @@ sub Data {
         'Send Keep-Alive' => 'Отправить Keep-Alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Этот параметр определяет закрывать входящие соединения или оставлять открытыми.',
-        'Additional response headers' => 'Дополнительные заголовки ответа',
-        'Header' => 'Заголовок',
-        'Add response header' => 'Добавить заголовок ответа',
         'Endpoint' => 'Конечная точка',
         'URI to indicate specific location for accessing a web service.' =>
             'URI для указания точного расположения для доступа к веб-сервису.',
@@ -1191,7 +1191,10 @@ sub Data {
             'Конкретная команда HTTP для использования в запросах этого Invoker (необязательна).',
         'Default command' => 'Команда по умолчанию',
         'The default HTTP command to use for the requests.' => 'Команда HTTP по умолчанию для использования в запросах.',
+        'Additional response headers' => 'Дополнительные заголовки ответа',
         'Additional request headers' => '',
+        'Header' => 'Заголовок',
+        'Add response header' => 'Добавить заголовок ответа',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

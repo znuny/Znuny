@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.5;
+    $Self->{Completeness}        = 0.499834765366821;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -622,6 +622,9 @@ sub Data {
         'Backend' => '',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1094,9 +1097,6 @@ sub Data {
         'Send Keep-Alive' => 'Verstuur Keep-Alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Deze configuratie bepaalt of binnenkomende verbindingen worden afgesloten of in leven worden gehouden.',
-        'Additional response headers' => '',
-        'Header' => 'Type',
-        'Add response header' => '',
         'Endpoint' => 'Eindpunt',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1185,7 +1185,10 @@ sub Data {
             'Een specifiek HTTP commando om te gebruiken voor de verzoeken met deze Invoker (optioneel).',
         'Default command' => 'Standaard opdracht',
         'The default HTTP command to use for the requests.' => 'De standaard HTTP opdracht die gebruikt wordt bij verzoeken.',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Header' => 'Type',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

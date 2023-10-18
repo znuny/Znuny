@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.898512396694215;
+    $Self->{Completeness}        = 0.898215465961666;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -622,6 +622,9 @@ sub Data {
         'Backend' => 'Modul',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1094,9 +1097,6 @@ sub Data {
         'Send Keep-Alive' => 'Pošalji Keep-Alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Konfiguracija definiše da li dolazna konekcija treba da se zatvori i održava.',
-        'Additional response headers' => 'Dodatna zaglavlja u odgovorima',
-        'Header' => 'Zaglavlje',
-        'Add response header' => 'Dodaj zaglavlje u odgovoru',
         'Endpoint' => 'Krajnja tačka',
         'URI to indicate specific location for accessing a web service.' =>
             'URI za identifikaciju specifične lokacije za pristup servisu.',
@@ -1185,7 +1185,10 @@ sub Data {
             'Specifična HTTP komanda za primenu na zahteve sa ovim pozivaocem (neobavezno).',
         'Default command' => 'Podrazumevana komanda',
         'The default HTTP command to use for the requests.' => 'Podrazumevena HTTP komanda za zahteve.',
+        'Additional response headers' => 'Dodatna zaglavlja u odgovorima',
         'Additional request headers' => '',
+        'Header' => 'Zaglavlje',
+        'Add response header' => 'Dodaj zaglavlje u odgovoru',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

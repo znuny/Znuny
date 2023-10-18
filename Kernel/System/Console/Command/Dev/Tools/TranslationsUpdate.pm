@@ -674,6 +674,8 @@ sub WritePerlLanguageFile {
             $HeaderString .= "2021 Znuny GmbH, https://znuny.org/" if $Param{ModuleCopyrightVendor} eq "org";
         }
 
+        $Param{Module} =~ s/\-//gix;
+
         $NewOut = <<"EOF";
 $Separator
 $HeaderString

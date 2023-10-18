@@ -1113,7 +1113,7 @@ sub _AdditionalParamsGet {
     my %AdditionalParams;
     for my $Param (
         qw(
-        Webservice InvokerSearch InvokerGet Backend SearchKeys StoredValue DisplayedValues
+        Webservice InvokerSearch InvokerGet Backend SearchKeys CacheTTL StoredValue DisplayedValues
         TemplateType DisplayedValuesSeparator Limit AutocompleteMinLength QueryDelay
         InputFieldWidth DefaultSearchTerm InitialSearchTerm AutocompletionForSearchFields
         )
@@ -1146,10 +1146,20 @@ sub _AdditionalParamsValidate {
 
     REQUIREDPARAM:
     for my $RequiredParam (qw(Webservice InvokerSearch InvokerGet Backend)) {
-        next REQUIREDPARAM if defined $Param{$RequiredParam} && length $Param{$RequiredParam};
+        next REQUIREDPARAM if IsStringWithData( $Param{$RequiredParam} );
 
         $Errors{ $RequiredParam . 'ServerError' }        = 'ServerError';
         $Errors{ $RequiredParam . 'ServerErrorMessage' } = 'This field is required.';
+    }
+
+    # Cache TTL must be an integer or empty
+    if (
+        IsStringWithData( $Param{CacheTTL} )
+        && $Param{CacheTTL} !~ m{\A\d+\z}
+        )
+    {
+        $Errors{'CacheTTLServerError'}        = 'ServerError';
+        $Errors{'CacheTTLServerErrorMessage'} = 'This field should be an integer.';
     }
 
     my $DynamicFieldName = $Param{Name};

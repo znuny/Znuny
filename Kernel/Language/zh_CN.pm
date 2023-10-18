@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.90198347107438;
+    $Self->{Completeness}        = 0.901685393258427;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -623,6 +623,9 @@ sub Data {
         'Backend' => '后端',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1095,9 +1098,6 @@ sub Data {
         'Send Keep-Alive' => '发送Keep-Alive（保持连接）',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             '此配置定义传入的连接应该关闭还是保持连接。',
-        'Additional response headers' => '附加响应头',
-        'Header' => '标头',
-        'Add response header' => '添加响应头',
         'Endpoint' => '端点',
         'URI to indicate specific location for accessing a web service.' =>
             '用于指示访问Web服务的特定位置的URI。',
@@ -1186,7 +1186,10 @@ sub Data {
             '调用程序用于请求的特定的HTTP命令。',
         'Default command' => '默认命令',
         'The default HTTP command to use for the requests.' => '用于请求的默认HTTP命令。',
+        'Additional response headers' => '附加响应头',
         'Additional request headers' => '',
+        'Header' => '标头',
+        'Add response header' => '添加响应头',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

@@ -1,6 +1,17 @@
-# 7.0.11 2023-??-??
+# 7.0.12 2023-??-??
+ - 2023-10-13 Updated CKEditor to version 4.22.1.
+ - 2023-09-29 Added optional caching to web service requests of dynamic field types WebserviceDropdown and WebserviceMultiselect.
+ - 2023-09-26 Fixed Bug - Alert dialog position too low to be interactable [#483](https://github.com/znuny/Znuny/issues/483).
+ - 2023-09-22 Fixed some errors in the customer interface being shown with the agent interface's header navigation. Thanks for reporting/hints to Tim Püttmanns, maxence.
+ - 2023-09-22 AgentStatistics Overview - Added filter in/valid entries.
+ - 2023-09-19 Fixed mixed up content types for article body and signature in generic interface operations TicketCreate and TicketUpdate.
+ - 2023-09-21 Updated maximum length of generic agent job database fields and their input fields in dialog AdminGenericAgent to prevent errors storing values too long for the database. [#474](https://github.com/znuny/Znuny/issues/474)
+
+# 7.0.11 2023-09-20
+ - 2023-08-28 Fixed duplicate usage of render block 'AdditionalHeaders' in dialog AdminGenericInterfaceTransportHTTPREST. Increased maximum length of additional header keys and values from 150 to 2000 characters in dialogs AdminGenericInterfaceTransportHTTPREST and AdminGenericInterfaceTransportHTTPSOAP. [#321](https://github.com/znuny/Znuny/issues/321)
  - 2023-08-28 Fixed - display of empty "dynamic fields" area when dynamic field from object type article is configured.
  - 2023-08-23 Added parameter to enforce account selection for the Microsoft OAuth2 template.
+
 # 7.0.10 2023-08-23
  - 2023-08-22 Fixed - Customer note is not visible when queue follow-up option is 'reject' or 'new ticket'.
  - 2023-08-22 Fixed - Option 'Customer User' should have no breadcrumb and should not show actions.
@@ -200,6 +211,7 @@
  - 2023-03-20 Fixed handling of article attachments in generic interface operations TicketCreate and TicketUpdate.
  - 2023-03-16 Added Appointment::EventModulePost Entry in XML. Thanks to Kevin Janssen (@BuTzZ). [PR#315](https://github.com/znuny/Znuny/pull/315)
  - 2023-03-10 Fixed notification about empty subject for article drafts in AgentTicketCompose and AgentTicketEmailOutbound.
+ - 2023-03-09 Fixed duplicate usage of render block 'AdditionalHeaders' in dialog AdminGenericInterfaceTransportHTTPREST. Increased maximum length of additional header keys and values from 150 to 2000 characters in dialogs AdminGenericInterfaceTransportHTTPREST and AdminGenericInterfaceTransportHTTPSOAP. [#321](https://github.com/znuny/Znuny/issues/321)
  - 2023-03-02 Fixed handling of time zone for DateTime objects created with string in ISO 8601 format (e.g. '2017-05-09T07:00:09+0400').
 
 # 6.5.1 2023-03-09

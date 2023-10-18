@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.290082644628099;
+    $Self->{Completeness}        = 0.289986781229346;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -616,6 +616,9 @@ sub Data {
         'Backend' => '',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1088,9 +1091,6 @@ sub Data {
         'Send Keep-Alive' => 'Trimite semnal keep-alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Această setare definește dacă conexiunile sosite se închid sau rămân deschise.',
-        'Additional response headers' => 'Anteturi de răspuns suplimentare',
-        'Header' => 'Antet',
-        'Add response header' => 'Adăugați antetul de răspuns',
         'Endpoint' => 'Punct final',
         'URI to indicate specific location for accessing a web service.' =>
             'URI pentru a indica locația specifică pentru accesarea unui serviciu web.',
@@ -1179,7 +1179,10 @@ sub Data {
             '',
         'Default command' => 'Comanda implicită',
         'The default HTTP command to use for the requests.' => 'Comanda HTTP implicită folosită pentru cereri.',
+        'Additional response headers' => 'Anteturi de răspuns suplimentare',
         'Additional request headers' => '',
+        'Header' => 'Antet',
+        'Add response header' => 'Adăugați antetul de răspuns',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

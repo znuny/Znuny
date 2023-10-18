@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.598347107438017;
+    $Self->{Completeness}        = 0.598149372108394;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -623,6 +623,9 @@ sub Data {
         'Backend' => '',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1095,9 +1098,6 @@ sub Data {
         'Send Keep-Alive' => 'Enviar Mantener-Activo',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Esta configuración define si las conexiones entrantes deben quedar cerrados o mantenerse activas.',
-        'Additional response headers' => 'Encabezados de respuesta adicionales',
-        'Header' => 'Encabezado',
-        'Add response header' => 'Agregar encabezado de respuesta',
         'Endpoint' => 'Puntofinal',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1186,7 +1186,10 @@ sub Data {
             'Comando HTTP específico para usar por peticiones con este invocador (opcional).',
         'Default command' => 'Comando por defecto',
         'The default HTTP command to use for the requests.' => 'El comando HTTP por defecto para usar con las peticiones.',
+        'Additional response headers' => 'Encabezados de respuesta adicionales',
         'Additional request headers' => '',
+        'Header' => 'Encabezado',
+        'Add response header' => 'Agregar encabezado de respuesta',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

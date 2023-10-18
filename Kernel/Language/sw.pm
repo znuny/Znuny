@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.438512396694215;
+    $Self->{Completeness}        = 0.43836748182419;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -619,6 +619,9 @@ sub Data {
         'Backend' => '',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1091,9 +1094,6 @@ sub Data {
         'Send Keep-Alive' => 'Tuna Weka-hai',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Usanidi huu unafafanua kama miunganisho ya kuingia ifungwe au iache hai.',
-        'Additional response headers' => '',
-        'Header' => 'Kichwa',
-        'Add response header' => '',
         'Endpoint' => 'Mwisho',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1182,7 +1182,10 @@ sub Data {
             'Amri maalum ya HTTP ya kutumia kwa ajili ya maombi kwa ajili ya kichochezi hiki (Hiari). ',
         'Default command' => 'Sharti chaguo-msingi',
         'The default HTTP command to use for the requests.' => 'Sharti chaguo-msingi la HTTP kutumia kwa ajili ya maombi.',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Header' => 'Kichwa',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt

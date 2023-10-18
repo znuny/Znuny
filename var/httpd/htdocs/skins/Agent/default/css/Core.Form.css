@@ -331,7 +331,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         color: var(--btn-dropdown-color);
         border: var(--border-width) var(--border-solid) var(--primary-color);
     }
-    /* 
+    /*
     .btn-primary-ghost:hover {
         border-width: var(--border-width-md);
     } */
