@@ -1,4 +1,4 @@
-# 7.0.12 2023-??-??
+# 7.0.12 2023-10-18
  - 2023-10-13 Updated CKEditor to version 4.22.1.
  - 2023-09-29 Added optional caching to web service requests of dynamic field types WebserviceDropdown and WebserviceMultiselect.
  - 2023-09-26 Fixed Bug - Alert dialog position too low to be interactable [#483](https://github.com/znuny/Znuny/issues/483).
