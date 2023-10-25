@@ -1,3 +1,6 @@
+# 7.0.13 2023-??-??
+ - 2023-10-25 Fixed AgentInfo module.
+
 # 7.0.12 2023-10-18
  - 2023-10-13 Updated CKEditor to version 4.22.1.
  - 2023-09-29 Added optional caching to web service requests of dynamic field types WebserviceDropdown and WebserviceMultiselect.
