@@ -218,6 +218,7 @@
                             <div class="Clear"></div>
                         [% END %]
 
+                        [% IF Data.GetAllArticleAttachmentsStrg %]
                         <label for="GetAllArticleAttachments">[% Translate("Add all attachments") | html %]:</label>
                         <div class="Field">
                             [% Data.GetAllArticleAttachmentsStrg %]
@@ -225,6 +226,7 @@
                                 [% Translate("Add all attachments to invoker payload.") | html %]
                             </p>
                         </div>
+                        [% END %]
 
                         <div class="Field SpacingTop">
                             [% IF Data.Mode == 'Change' %]
