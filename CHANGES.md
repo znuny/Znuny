@@ -1,4 +1,5 @@
 # 6.5.5 2023-??-??
+ - 2023-10-26 Added pagination for ArticlePages on AgentTicketZoom.
  - 2023-10-10 Updated CKEditor to version 4.22.1.
  - 2023-09-29 Added optional caching to web service requests of dynamic field types WebserviceDropdown and WebserviceMultiselect.
  - 2023-09-22 Fixed some errors in the customer interface being shown with the agent interface's header navigation. Thanks for reporting/hints to Tim Püttmanns, maxence.
