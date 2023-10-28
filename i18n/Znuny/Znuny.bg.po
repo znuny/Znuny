@@ -12,14 +12,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2018-09-20 13:03+0000\n"
-"Last-Translator: Plamen Petkov <plamen_3592@abv.bg>, 2019\n"
-"Language-Team: Bulgarian (https://www.transifex.com/otrs/teams/23435/bg/)\n"
+"PO-Revision-Date: 2023-10-28 00:00+0000\n"
+"Last-Translator: Dragomir <ddimitrov@datamax.bg>\n"
+"Language-Team: Bulgarian <https://translations.znuny.org/projects/znuny-lts/"
+"znuny/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0.2\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -3959,7 +3961,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
 msgid "%s not Correctly Installed"
-msgstr ""
+msgstr "%s не е правилно инсталиран"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
 msgid "Your %s is not correctly installed. Please reinstall it with the button below."
@@ -3991,7 +3993,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
 msgid "%s Update Available"
-msgstr ""
+msgstr "%s Налична актуализация"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
 msgid "An update for your %s is available! Please update at your earliest!"
@@ -5875,7 +5877,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
 msgid "%s Results"
-msgstr ""
+msgstr "%s Резултати"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
 msgid "Query is executed."
@@ -7055,7 +7057,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "%s closed ticket(s) of %s"
-msgstr ""
+msgstr "%s затворени тикет(и) на %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "Edit customer ID"
@@ -8287,7 +8289,7 @@ msgstr "Заключен"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 msgid "%s Ticket(s)"
-msgstr ""
+msgstr "%s Тикет(и)"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 msgid "Accounted time"
@@ -8388,6 +8390,8 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
 msgid "%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own."
 msgstr ""
+"%s Засечени са възможни интернет проблеми. Може да презаредите тази страница "
+"ръчно или да изчакате, докато вашият браузър сам установи вързка."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
 msgid "The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page."
@@ -11671,15 +11675,15 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
 msgid "%s minute(s) before"
-msgstr ""
+msgstr "преди %s минути"
 
 #. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
 msgid "%s hour(s) before"
-msgstr ""
+msgstr "преди %s часа"
 
 #. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
 msgid "%s day(s) before"
-msgstr ""
+msgstr "преди %s дни"
 
 #. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
 msgid "%s week before"
@@ -11779,7 +11783,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentLinkObject.pm
 msgid "%s links added successfully."
-msgstr ""
+msgstr "%s линка бяха добавени успешно."
 
 #. Perl Module: Kernel/Modules/AgentLinkObject.pm
 msgid "The object %s cannot link with other object!"
@@ -11915,7 +11919,7 @@ msgstr "Край на съобщението"
 
 #. Perl Module: Kernel/Modules/AgentTicketBounce.pm
 msgid "%s is needed!"
-msgstr ""
+msgstr "%s е необходимо!"
 
 #. Perl Module: Kernel/Modules/AgentTicketBounce.pm
 msgid "Plain article not found for article %s!"
@@ -12067,7 +12071,7 @@ msgstr "Напомнянето е достигнато"
 
 #. Perl Module: Kernel/Modules/AgentTicketLockedView.pm
 msgid "My Locked Tickets"
-msgstr "Мойте заключени билети."
+msgstr "Моите заключени билети."
 
 #. Perl Module: Kernel/Modules/AgentTicketMerge.pm
 msgid "Can't merge ticket with itself!"
@@ -12087,7 +12091,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentTicketPhone.pm
 msgid "%s has left the chat."
-msgstr ""
+msgstr "%s напусна чата."
 
 #. Perl Module: Kernel/Modules/AgentTicketPhone.pm
 msgid "This chat has been closed and will be removed in %s hours."
@@ -12291,7 +12295,7 @@ msgstr "Преглед на опашката"
 
 #. Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
 msgid "My Responsible Tickets"
-msgstr "Мойте отворени билети."
+msgstr "Моите отворени билети."
 
 #. Perl Module: Kernel/Modules/AgentTicketSearch.pm
 msgid "last-search"
@@ -12355,7 +12359,7 @@ msgstr "Изглед на състоянието"
 
 #. Perl Module: Kernel/Modules/AgentTicketWatchView.pm
 msgid "My Watched Tickets"
-msgstr "Мойте проверявани билети"
+msgstr "Моите проверявани билети"
 
 #. Perl Module: Kernel/Modules/AgentTicketWatcher.pm
 msgid "Feature is not active"
@@ -13283,7 +13287,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"
-msgstr ""
+msgstr "%s Ъпгрейд до %s сега! %s"
 
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "Please verify your license data!"
@@ -25752,4 +25756,3 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
 msgstr ""
-
