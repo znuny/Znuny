@@ -1,5 +1,6 @@
 # 7.0.13 2023-??-??
  - 2023-10-25 Fixed AgentInfo module.
+ - 2023-10-23 Switched back to d3.min.js because of problems with minifier module JavaScript::Minifier::XS.
 
 # 7.0.12 2023-10-18
  - 2023-10-13 Updated CKEditor to version 4.22.1.
