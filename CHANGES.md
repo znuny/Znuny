@@ -1,6 +1,7 @@
 # 7.0.13 2023-??-??
  - 2023-10-25 Fixed AgentInfo module.
  - 2023-10-23 Switched back to d3.min.js because of problems with minifier module JavaScript::Minifier::XS.
+ - 2023-10-16 Added "ValueKey" to output of link data for dynamic fields, so it's possible to use both the displayed value of a dropdown ("Value") and the stored key ("ValueKey") in a dynamic field link.
 
 # 7.0.12 2023-10-18
  - 2023-10-13 Updated CKEditor to version 4.22.1.
