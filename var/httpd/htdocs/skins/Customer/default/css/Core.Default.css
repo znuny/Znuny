@@ -251,22 +251,28 @@ div.Headline h1 {
 }
 
 /* RTL Button placement - development purpose only */
-#Header button {
+  #Header button {
     position: absolute;
     width: 100px;
     margin: 0;
     top: 17px;
     right: 21px;
-}
+  }
 
-.RTL #Header button {
+  .RTL #Header button {
     display: none;
-}
+  }
 
-.Actions .UserAvatar .Initials {
+  .Actions .UserAvatar .Initials {
     color: var(--primary-color);
-}
-.Actions .UserAvatar > a {
+    font-size: var(--main-font-size);
+  }
+
+  .UserAvatar {
+    margin-right: 0;
+  }
+
+  .UserAvatar > a {
     display: flex;
     align-items: center;
     border: none;
@@ -275,6 +281,10 @@ div.Headline h1 {
     border-radius: 4px;
     background: transparent;
     transition: var(--main-transition);
+  }
+
+  .UserAvatar:hover > a {
+    background-color: var(--gray-light);
   }
 
   .UserAvatar img {
@@ -329,10 +339,6 @@ div.Headline h1 {
       .UserAvatar .UserAvatar_submenu ul li a {
         justify-content: flex-start;
       }
-  }
-
-  .UserAvatar:hover .UserAvatar_submenu {
-    display: flex;
   }
 
   .UserAvatar .UserAvatar_submenu ul {
@@ -398,7 +404,6 @@ div.Headline h1 {
     color: var(--gray-dark);
     font-size: var(--font-size-md);
   }
-
 
 @media only screen and (max-width: 1024px) {
     .ResponsiveSidebarContainer {
