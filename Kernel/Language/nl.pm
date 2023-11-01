@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.506994693680656;
+    $Self->{Completeness}        = 0.509245859462936;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1704,7 +1704,7 @@ sub Data {
         'Negate' => 'Omdraaien (negate)',
         'Set Email Headers' => 'Nieuwe waarden',
         'Set email header' => 'Stel email kop in',
-        'with value' => '',
+        'with value' => 'met waarde',
         'The field needs to be a literal word.' => 'Dit veld moet een letterlijke waarde bevatten.',
         'Header' => 'Type',
 
@@ -2068,7 +2068,7 @@ sub Data {
             'Er mist tenminste een parameter.',
         'Result format' => 'Uitvoeren naar',
         'Run Query' => 'Uitvoeren',
-        '%s Results' => '',
+        '%s Results' => '%s Resultaten',
         'Query is executed.' => 'Query is uitgevoerd.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
@@ -2610,7 +2610,7 @@ sub Data {
             '',
         'Did you know?' => 'Wist je dat?',
         'You can change your avatar by registering with your email address %s on %s' =>
-            '',
+            'U kunt uw avatar aanpassen door u te registreren met uw e-mailadres %s op %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentSplitSelection.tt
         'Target' => '',
@@ -3071,7 +3071,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearchResultShort.tt
         'of' => 'van',
         'Page' => 'Pagina',
-        'Search Results for' => 'Zoekresultaat voor',
+        'Search Results for' => 'Zoekresultaten voor',
         'Remove this Search Term.' => 'Verwijder deze zoekterm',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
@@ -3528,7 +3528,7 @@ sub Data {
         'Deploying, please wait...' => '',
         'Preparing to deploy, please wait...' => '',
         'Deploy now' => 'Nu uitrollen',
-        'Try again' => '',
+        'Try again' => 'Probeer opnieuw',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
         'Reset options' => '',
@@ -3578,7 +3578,7 @@ sub Data {
         'There was an error synchronizing the ACLs.' => 'Er is een fout opgetreden met het synchroniseren van de ACL\'s.',
         'ACL %s could not be deleted' => 'ACL %s kon niet worden verwijderd',
         'There was an error getting data for ACL with ID %s' => 'Er is een fout opgetreden met het ophalen van de gegevens voor ACL met ID %s',
-        '%s (copy) %s' => '',
+        '%s (copy) %s' => '%s (kopie) %s',
         'Please note that ACL restrictions will be ignored for the Superuser account (UserID 1).' =>
             '',
         'Exact match' => 'Exacte overeenkomst',
@@ -3617,7 +3617,7 @@ sub Data {
         'There was an error getting data for Notification with ID:%s!' =>
             'Er is een fout opgetreden bij het ophalen van de gegevens met ID:%s!',
         'Unknown Notification %s!' => 'Onbekende melding %s!',
-        '%s (copy)' => '',
+        '%s (copy)' => '%s (kopie)',
         'There was an error creating the Notification' => 'Er is een fout opgetreden bij het genereren van de melding',
         'Notifications could not be Imported due to a unknown error, please check OTRS logs for more information' =>
             'Meldingen konden niet worden geïmporteerd vanwege een onbekende fout. Kijk de OTRS logbestanden na voor meer informatie.',
@@ -4818,7 +4818,7 @@ sub Data {
         'to open it in a new window.' => 'om deze in een nieuw venster te openen.',
         'Year' => 'Jaar',
         'Hours' => 'Uren',
-        'Minutes' => 'Minuten',
+        'Minutes' => 'minuten',
         'Check to activate this date' => 'Selecteer om deze datum te gebruiken',
         '%s TB' => '',
         '%s GB' => '',
@@ -4834,7 +4834,7 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
         'Linked as' => 'Gekoppeld als',
-        'Search Result' => '',
+        'Search Result' => 'Zoekresultaat',
         'Linked' => 'Gekoppeld',
         'Bulk' => 'Bulk',
 
@@ -8475,8 +8475,8 @@ sub Data {
         'Do you really want to continue?' => 'Weet je zeker dat je door wil gaan?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
-        ' ...and %s more' => '',
-        ' ...show less' => '',
+        ' ...and %s more' => ' ...en %s meer',
+        ' ...show less' => ' ...toon minder',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
         'Add new draft' => '',
@@ -8634,17 +8634,17 @@ Het Helpdesk Team
         '0 - Disabled' => '',
         '1 - Available' => '',
         '1 - Enabled' => '',
-        '10 Minutes' => '',
+        '10 Minutes' => '10 minuten',
         '100 (Expert)' => '',
-        '15 Minutes' => '',
+        '15 Minutes' => '15 minuten',
         '2 - Enabled and required' => '',
         '2 - Enabled and shown by default' => '',
         '2 - Enabled by default' => '',
-        '2 Minutes' => '',
+        '2 Minutes' => '2 minuten',
         '200 (Advanced)' => '',
-        '30 Minutes' => '',
+        '30 Minutes' => '30 minuten',
         '300 (Beginner)' => '',
-        '5 Minutes' => '',
+        '5 Minutes' => '5 minuten',
         'A TicketWatcher Module.' => '',
         'A Website' => 'Een website',
         'A picture' => 'Een afbeelding',

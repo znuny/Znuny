@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y - %T';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.198424183952404;
+    $Self->{Completeness}        = 0.20035375462293;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1496,7 +1496,7 @@ sub Data {
         'Unauthorized Usage Detected' => '',
         'This system uses the %s without a proper license! Please make contact with %s to renew or activate your contract!' =>
             '',
-        '%s not Correctly Installed' => '',
+        '%s not Correctly Installed' => '%s не е правилно инсталиран',
         'Your %s is not correctly installed. Please reinstall it with the button below.' =>
             '',
         'Reinstall %s' => '',
@@ -1507,7 +1507,7 @@ sub Data {
         'Update %s' => '',
         '%s Not Yet Available' => '',
         '%s will be available soon.' => '',
-        '%s Update Available' => '',
+        '%s Update Available' => '%s Налична актуализация',
         'An update for your %s is available! Please update at your earliest!' =>
             '',
         '%s Correctly Deployed' => '',
@@ -2063,7 +2063,7 @@ sub Data {
             '',
         'Result format' => '',
         'Run Query' => '',
-        '%s Results' => '',
+        '%s Results' => '%s Резултати',
         'Query is executed.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
@@ -2476,7 +2476,7 @@ sub Data {
         'Open' => 'Отворено',
         'Closed' => 'Затворено',
         '%s open ticket(s) of %s' => '',
-        '%s closed ticket(s) of %s' => '',
+        '%s closed ticket(s) of %s' => '%s затворени тикет(и) на %s',
         'Edit customer ID' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2939,7 +2939,7 @@ sub Data {
         'Note: Type is invalid!' => '',
         'Pending till' => 'В очакване до',
         'Locked' => 'Заключен',
-        '%s Ticket(s)' => '',
+        '%s Ticket(s)' => '%s Тикет(и)',
         'Accounted time' => 'Отброено време',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2994,7 +2994,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
-            '',
+            '%s Засечени са възможни интернет проблеми. Може да презаредите тази страница ръчно или да изчакате, докато вашият браузър сам установи вързка.',
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             '',
 
@@ -4229,9 +4229,9 @@ sub Data {
         'for ... time(s)' => '',
         'until %s' => '',
         'No notification' => '',
-        '%s minute(s) before' => '',
-        '%s hour(s) before' => '',
-        '%s day(s) before' => '',
+        '%s minute(s) before' => 'преди %s минути',
+        '%s hour(s) before' => 'преди %s часа',
+        '%s day(s) before' => 'преди %s дни',
         '%s week before' => '',
         'before the appointment starts' => '',
         'after the appointment has been started' => '',
@@ -4266,7 +4266,7 @@ sub Data {
         '%s Link(s) deleted successfully.' => '',
         'Can not create link with %s! Object already linked as %s.' => '',
         'Can not create link with %s!' => '',
-        '%s links added successfully.' => '',
+        '%s links added successfully.' => '%s линка бяха добавени успешно.',
         'The object %s cannot link with other object!' => '',
 
         # Perl Module: Kernel/Modules/AgentPreferences.pm
@@ -4311,7 +4311,7 @@ sub Data {
         'End message' => 'Край на съобщението',
 
         # Perl Module: Kernel/Modules/AgentTicketBounce.pm
-        '%s is needed!' => '',
+        '%s is needed!' => '%s е необходимо!',
         'Plain article not found for article %s!' => '',
         'Article does not belong to ticket %s!' => '',
         'Can\'t bounce email!' => '',
@@ -4374,7 +4374,7 @@ sub Data {
         'New Article' => 'Нов текст',
         'Pending' => 'В очакване',
         'Reminder Reached' => 'Напомнянето е достигнато',
-        'My Locked Tickets' => 'Мойте заключени билети.',
+        'My Locked Tickets' => 'Моите заключени билети.',
 
         # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
         'New mention' => '',
@@ -4389,7 +4389,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => '',
         'No permission.' => '',
-        '%s has left the chat.' => '',
+        '%s has left the chat.' => '%s напусна чата.',
         'This chat has been closed and will be removed in %s hours.' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketPhoneCommon.pm
@@ -4471,7 +4471,7 @@ sub Data {
         'QueueView' => 'Преглед на опашката',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
-        'My Responsible Tickets' => 'Мойте отворени билети.',
+        'My Responsible Tickets' => 'Моите отворени билети.',
 
         # Perl Module: Kernel/Modules/AgentTicketSearch.pm
         'last-search' => 'Последно търсено',
@@ -4495,7 +4495,7 @@ sub Data {
         'Status View' => 'Изглед на състоянието',
 
         # Perl Module: Kernel/Modules/AgentTicketWatchView.pm
-        'My Watched Tickets' => 'Мойте проверявани билети',
+        'My Watched Tickets' => 'Моите проверявани билети',
 
         # Perl Module: Kernel/Modules/AgentTicketWatcher.pm
         'Feature is not active' => '',

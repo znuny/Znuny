@@ -24,8 +24,7 @@ msgstr ""
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
 "PO-Revision-Date: 2023-10-28 20:01+0000\n"
 "Last-Translator: Jeffrey van Hal <weblate@jefvhal.nl>\n"
-"Language-Team: Dutch <https://translations.znuny.org/projects/znuny-lts/"
-"znuny/nl/>\n"
+"Language-Team: Dutch <https://translations.znuny.org/projects/znuny-lts/znuny/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -7347,8 +7346,7 @@ msgstr "Wist je dat?"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
 msgid "You can change your avatar by registering with your email address %s on %s"
-msgstr ""
-"U kunt uw avatar aanpassen door u te registreren met uw e-mailadres %s op %s"
+msgstr "U kunt uw avatar aanpassen door u te registreren met uw e-mailadres %s op %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentSplitSelection.tt
 msgid "Target"
@@ -25777,3 +25775,4 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
 msgstr ""
+

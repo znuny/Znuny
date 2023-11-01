@@ -14,8 +14,7 @@ msgstr ""
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
 "PO-Revision-Date: 2023-10-28 00:00+0000\n"
 "Last-Translator: Dragomir <ddimitrov@datamax.bg>\n"
-"Language-Team: Bulgarian <https://translations.znuny.org/projects/znuny-lts/"
-"znuny/bg/>\n"
+"Language-Team: Bulgarian <https://translations.znuny.org/projects/znuny-lts/znuny/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8389,9 +8388,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
 msgid "%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own."
-msgstr ""
-"%s Засечени са възможни интернет проблеми. Може да презаредите тази страница "
-"ръчно или да изчакате, докато вашият браузър сам установи вързка."
+msgstr "%s Засечени са възможни интернет проблеми. Може да презаредите тази страница ръчно или да изчакате, докато вашият браузър сам установи вързка."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
 msgid "The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page."
@@ -25756,3 +25753,4 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
 msgstr ""
+
