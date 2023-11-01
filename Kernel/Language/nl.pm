@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.499834765366821;
+    $Self->{Completeness}        = 0.5;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2379,7 +2379,7 @@ sub Data {
         ' Refresh' => '',
         ' Close this widget' => '',
         'Hide' => '',
-        ' Cancel' => '',
+        ' Cancel' => ' Annuleren',
         'more' => 'meer',
         'No Data Available.' => '',
         'Available Columns' => 'Beschikbare kolommen',
