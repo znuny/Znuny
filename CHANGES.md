@@ -1,4 +1,5 @@
 # 7.0.13 2023-??-??
+ - 2023-11-02 Added pagination for ArticlePages on AgentTicketZoom.
  - 2023-10-30 Fixed Bug - Customer Portal Header Toolbar sub-menu not working [#493](https://github.com/znuny/Znuny/issues/493).
  - 2023-10-25 Fixed AgentInfo module.
  - 2023-10-23 Fixed used email address to decrypt S/MIME messages in Kernel::System::PostMaster::Filter::Decrypt.
