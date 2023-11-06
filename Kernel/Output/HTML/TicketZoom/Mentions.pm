@@ -12,6 +12,8 @@ use parent 'Kernel::Output::HTML::Base';
 
 use strict;
 use warnings;
+use utf8;
+
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -45,13 +47,13 @@ sub Run {
         );
 
         $Users{ $User{UserID} } = 1;
-
         $LayoutObject->Block(
             Name => "User",
             Data => {
-                UserFullname => $User{UserFullname},
-                UserID       => $User{UserID},
-                Removable    => $UserCanRemoveMention,
+                UserLogin => $User{UserLogin},
+                UserEmail => $User{UserEmail},
+                UserID    => $User{UserID},
+                Removable => $UserCanRemoveMention,
             }
         );
     }
@@ -68,8 +70,13 @@ sub Run {
         Data         => {},
     );
 
+    my $Config = $Param{Config};
+    my %Rank;
+    %Rank = ( Rank => $Config->{Rank} ) if exists $Config->{Rank} && defined $Config->{Rank};
+
     return {
         Output => $Output,
+        %Rank,
     };
 }
 

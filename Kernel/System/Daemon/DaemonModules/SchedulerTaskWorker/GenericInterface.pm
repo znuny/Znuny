@@ -66,7 +66,7 @@ Performs the selected Task, causing an Invoker call via GenericInterface.
             WebserviceID => $WebserviceID,
             Invoker      => 'configured_invoker',
             Data         => {                       # data payload for the Invoker
-                ...
+                # ...
             },
         },
     );

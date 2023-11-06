@@ -147,7 +147,7 @@ Returns:
         Name    => 'Agent::Move',
         Data => {
             Events => [ 'TicketQueueUpdate' ],
-            ...
+            # ...
             Queue => [ 'SomeQueue' ],
         },
         Message => {
@@ -267,7 +267,7 @@ adds a new notification to the database
         Name => 'Agent::OwnerUpdate',
         Data => {
             Events => [ 'TicketQueueUpdate' ],
-            ...
+            # ...
             Queue => [ 'SomeQueue' ],
         },
         Message => {
@@ -433,7 +433,7 @@ update a notification in database
         Name    => 'Agent::OwnerUpdate',
         Data => {
             Events => [ 'TicketQueueUpdate' ],
-            ...
+            # ...
             Queue => [ 'SomeQueue' ],
         },
         Message => {
@@ -732,20 +732,20 @@ sub NotificationEventCheck {
 import an Notification YAML file/content
 
     my $NotificationImport = $NotificationEventObject->NotificationImport(
-        Content                   => $YAMLContent, # mandatory, YAML format
-        OverwriteExistingNotifications => 0,            # 0 || 1
-        UserID                    => 1,            # mandatory
+        Content                        => $YAMLContent,  # mandatory, YAML format
+        OverwriteExistingNotifications => 0,             # 0 || 1
+        UserID                         => 1,             # mandatory
     );
 
 Returns:
 
     $NotificationImport = {
-        Success      => 1,                         # 1 if success or undef if operation could not
-                                                   #    be performed
-        Message     => 'The Message to show.',     # error message
-        AddedNotifications   => 'Notification1, Notification2',               # list of Notifications correctly added
-        UpdatedNotifications => 'Notification3, Notification4',               # list of Notifications correctly updated
-        NotificationErrors   => 'Notification5',                     # list of Notifications that could not be added or updated
+        Success              => 1,                                  # 1 if success or undef if operation could not
+                                                                    #    be performed
+        Message              => 'The Message to show.',             # error message
+        AddedNotifications   => 'Notification1, Notification2',     # list of Notifications correctly added
+        UpdatedNotifications => 'Notification3, Notification4',     # list of Notifications correctly updated
+        NotificationErrors   => 'Notification5',                    # list of Notifications that could not be added or updated
     };
 
 =cut

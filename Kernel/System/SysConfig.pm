@@ -84,7 +84,7 @@ sub new {
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     FILENAME:
-    for my $Filename (qw(Framework.pm OTRSBusiness.pm)) {
+    for my $Filename (qw(Framework.pm)) {
         my $BaseFile = $BaseDir . $Filename;
         next FILENAME if !-e $BaseFile;
 
@@ -148,7 +148,7 @@ Returns:
         ChangeTime               => "2016-05-29 11:04:04",
         ChangeBy                 => 1,
         DefaultValue             => 'Old default value',
-        OverriddenFileName        => '/opt/otrs/Kernel/Config/Files/ZZZ.pm',
+        OverriddenFileName        => '/opt/znuny/Kernel/Config/Files/ZZZ.pm',
     );
 
 =cut
@@ -394,15 +394,15 @@ sub SettingGet {
 Update an existing SysConfig Setting.
 
     my %Result = $SysConfigObject->SettingUpdate(
-        Name                   => 'Setting::Name',           # (required) setting name
-        IsValid                => 1,                         # (optional) 1 or 0, modified 0
-        EffectiveValue         => $SettingEffectiveValue,    # (optional)
-        UserModificationActive => 0,                         # (optional) 1 or 0, modified 0
-        TargetUserID           => 2,                         # (optional) ID of the user for which the modified setting is meant,
-                                                             #   leave it undef for global changes.
-        ExclusiveLockGUID      => $LockingString,            # the GUID used to locking the setting
-        UserID                 => 1,                         # (required) UserID
-        NoValidation           => 1,                         # (optional) no value type validation.
+        Name                   => 'Setting::Name',          # (required) setting name
+        IsValid                => 1,                        # (optional) 1 or 0, modified 0
+        EffectiveValue         => $SettingEffectiveValue,   # (optional)
+        UserModificationActive => 0,                        # (optional) 1 or 0, modified 0
+        TargetUserID           => 2,                        # (optional) ID of the user for which the modified setting is meant,
+                                                            #   leave it undef for global changes.
+        ExclusiveLockGUID      => $LockingString,           # the GUID used to locking the setting
+        UserID                 => 1,                        # (required) UserID
+        NoValidation           => 1,                        # (optional) no value type validation.
     );
 
 Returns:
@@ -690,20 +690,6 @@ sub SettingUpdate {
         }
     }
 
-    # When a setting is set to invalid all modified settings for users has to be removed.
-    if (
-        !$Param{IsValid}
-        && !$Param{TargetUserID}
-        && $Self->can('UserSettingValueDelete')    # OTRS Business Solution™
-        )
-    {
-        $Self->UserSettingValueDelete(
-            Name       => $Setting{Name},
-            ModifiedID => 'All',
-            UserID     => $Param{UserID},
-        );
-    }
-
     if ( !$Param{TargetUserID} ) {
 
         # Unlock setting so it can be locked again afterwards.
@@ -800,10 +786,10 @@ Returns:
                                             # 1 - locked to another user
                                             # 2 - locked to provided user
         User   => {                         # User data, provided only if Locked = 1
-            UserLogin => ...,
+            UserLogin     => ...,
             UserFirstname => ...,
-            UserLastname => ...,
-            ...
+            UserLastname  => ...,
+            # ...
         },
     );
 
@@ -872,14 +858,14 @@ Calculate effective value for a given parsed XML structure.
             {
                 'Item' => [
                     {
-                        'ValueType' => 'String',
-                        'Content' => '3600',
+                        'ValueType'  => 'String',
+                        'Content'    => '3600',
                         'ValueRegex' => ''
                     },
                 ],
             },
             Objects => {
-                Select => { ... },
+                Select     => { ... },
                 PerlModule => { ... },
                 # ...
             }
@@ -1211,11 +1197,11 @@ Wrapper for Kernel::Output::HTML::SysConfig::SettingAddItem() - Returns response
         SettingStructure  => [],         # (required) array that contains structure
                                          #  where a new item should be inserted (can be empty)
         Setting           => {           # (required) Setting hash (from SettingGet())
-            'DefaultID' => '8905',
+            'DefaultID'    => '8905',
             'DefaultValue' => [ 'Item 1', 'Item 2' ],
-            'Description' => 'Simple array item(Min 1, Max 3).',
-            'Name' => 'TestArray',
-            ...
+            'Description'  => 'Simple array item(Min 1, Max 3).',
+            'Name'         => 'TestArray',
+            # ...
         },
         Key               => 'HashKey',  # (optional) hash key
         IDSuffix          => '_Array3,   # (optional) suffix that will be added to all input/select fields
@@ -1227,7 +1213,7 @@ Wrapper for Kernel::Output::HTML::SysConfig::SettingAddItem() - Returns response
                         {
                         'Content' => 'Item 1',
                         },
-                        ...
+                       # ...
                     ],
                 ],
             },
@@ -1268,7 +1254,7 @@ Checks which settings has been updated from provided Setting list and returns up
                 ChangeTime            => '2017-01-13 11:23:07',
                 IsLockedByAnotherUser => 0,
             },
-            ...
+            # ...
         ],
         UserID => 1,                                                # (required) Current user id
     );
@@ -1282,7 +1268,7 @@ Returns:
             IsModified            => 1,
             SettingName           => 'SettingName',
         },
-        ...
+        # ...
     ];
 
 =cut
@@ -1341,7 +1327,7 @@ sub SettingsUpdatedList {
 Check if provided EffectiveValue matches structure defined in DefaultSetting. Also returns EffectiveValue that might be changed.
 
     my %Result = $SysConfigObject->SettingEffectiveValueCheck(
-        EffectiveValue => 'open',     # (optional)
+        EffectiveValue   => 'open',     # (optional)
         XMLContentParsed => {         # (required)
             Value => [
                 {
@@ -1353,12 +1339,12 @@ Check if provided EffectiveValue matches structure defined in DefaultSetting. Al
                 },
             ],
         },
-        StoreCache            => 1,               # (optional) Store result in the Cache. Default 0.
-        SettingUID            => 'Default1234',   # (required if StoreCache)
-        NoValidation          => 1,               # (optional) no value type validation.
-        CurrentSystemTime     => 1507894796935,   # (optional) Use provided 1507894796935, otherwise calculate
-        ExpireTime            => 1507894896935,   # (optional) Use provided ExpireTime for cache, otherwise calculate
-        UserID                => 1,               # (required) UserID
+        StoreCache        => 1,               # (optional) Store result in the Cache. Default 0.
+        SettingUID        => 'Default1234',   # (required if StoreCache)
+        NoValidation      => 1,               # (optional) no value type validation.
+        CurrentSystemTime => 1507894796935,   # (optional) Use provided 1507894796935, otherwise calculate
+        ExpireTime        => 1507894896935,   # (optional) Use provided ExpireTime for cache, otherwise calculate
+        UserID            => 1,               # (required) UserID
     );
 
 Returns:
@@ -1997,11 +1983,11 @@ sub SettingEffectiveValueCheck {
 Reset the modified value to the default value.
 
     my $Result = $SysConfigObject->SettingReset(
-        Name                  => 'Setting Name',                # (required) Setting name
-        TargetUserID          => 2,                             # (optional) UserID for settings in AgentPreferences
-                                                                # or
-        ExclusiveLockGUID     => $LockingString,                # (optional) the GUID used to locking the setting
-        UserID                => 1,                             # (required) UserID that creates modification
+        Name              => 'Setting Name',                # (required) Setting name
+        TargetUserID      => 2,                             # (optional) UserID for settings in AgentPreferences
+                                                            # or
+        ExclusiveLockGUID => $LockingString,                # (optional) the GUID used to locking the setting
+        UserID            => 1,                             # (required) UserID that creates modification
     );
 
 Returns:
@@ -2104,11 +2090,11 @@ Returns:
 
     %Result = (
        'ACL::CacheTTL' => {
-            'Category' => 'OTRS',
+            'Category'    => 'OTRS',
             'IsInvisible' => '0',
-            'Metadata' => "ACL::CacheTTL--- '3600'
+            'Metadata'    => "ACL::CacheTTL--- '3600'
 Cache-Zeit in Sekunden f\x{fc}r Datenbank ACL-Backends.",
-        ...
+        # ...
     );
 
 =cut
@@ -2170,13 +2156,13 @@ Returns:
     @Path = (
         {
             'Value' => 'Frontend',
-            'Name' => 'Frontend',
+            'Name'  => 'Frontend',
         },
         {
             'Value' => 'Frontend::Agent',
-            'Name' => 'Agent',
+            'Name'  => 'Agent',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -2248,7 +2234,7 @@ Returns:
             '3 normal' => [
                 'Ticket::Frontend::AgentTicketNote###PriorityDefault',
                 'Ticket::Frontend::AgentTicketPhone###Priority',
-                ...
+               # ...
             ],
         },
         'Queue' => {
@@ -2259,7 +2245,7 @@ Returns:
                 'PostmasterDefaultQueue',
             ],
         },
-        ...
+        # ...
     );
 
 =cut
@@ -2342,7 +2328,7 @@ Returns:
         'Ticket::Frontend::AgentTicketNote###PriorityDefault',
         'Ticket::Frontend::AgentTicketPhone###Priority',
         'Ticket::Frontend::AgentTicketBulk###PriorityDefault',
-        ...
+        # ...
     );
 
 =cut
@@ -2759,24 +2745,24 @@ Returns navigation tree in the hash format.
         RootNavigation         => 'Parent',     # (optional) If provided only sub groups of the root navigation are returned.
         UserModificationActive => 1,            # (optional) Return settings that can be modified on user level only.
         IsValid                => 1,            # (optional) By default, display all settings.
-        Category               => 'OTRS'        # (optional)
+        Category               => 'OTRS',       # (optional)
     );
 
 Returns:
 
     %Result = (
         'Core' => {
-            'Core::Cache' => {},
+            'Core::Cache'           => {},
             'Core::CustomerCompany' => {},
-            'Core::CustomerUser' => {},
-            'Core::Daemon' => {
+            'Core::CustomerUser'    => {},
+            'Core::Daemon'          => {
                 'Core::Daemon::ModuleRegistration' => {},
             },
-            ...
+            # ...
         'Crypt' =>{
-            ...
+            # ...
         },
-        ...
+        # ...
     );
 
 =cut
@@ -2996,7 +2982,7 @@ Returns:
             ExclusiveLockExpiryTime  => '2016-05-29 11:09:04',
             CreateTime               => "2016-05-29 11:04:04",
             ChangeTime               => "2016-05-29 11:04:04",
-            OverriddenFileName        => 'ZZZDefauls.pm'
+            OverriddenFileName       => 'ZZZDefauls.pm',
         },
         {
             DefaultID     => 321,
@@ -3165,9 +3151,9 @@ Returns:
         {
             DefaultID => '124',
             Name      => 'SettingName2',
-            IsDirty   => 0
+            IsDirty   => 0,
         },
-        ...
+        # ...
     );
 
 =cut
@@ -3192,7 +3178,7 @@ Returns list of enabled settings that have invalid effective value.
 
 Returns:
 
-    @List = ( "Setting1", "Setting5", ... );
+    @List = ( "Setting1", "Setting5" );
 
 =cut
 
@@ -3279,13 +3265,13 @@ sub ConfigurationInvalidList {
 Write configuration items from database into a perl module file.
 
     my %Result = $SysConfigObject->ConfigurationDeploy(
-        Comments            => "Some comments",     # (optional)
-        NoValidation        => 0,                   # (optional) 1 or 0, default 0, skips settings validation
-        UserID              => 123,                 # if ExclusiveLockGUID is used, UserID must match the user that creates the lock
-        Force               => 1,                   # (optional) proceed even if lock is set to another user
-        NotDirty            => 1,                   # (optional) do not use any values from modified dirty settings
-        AllSettings         => 1,                   # (optional) use dirty modified settings from all users
-        DirtySettings       => [                    # (optional) use only this dirty modified settings from the current user
+        Comments      => "Some comments",     # (optional)
+        NoValidation  => 0,                   # (optional) 1 or 0, default 0, skips settings validation
+        UserID        => 123,                 # if ExclusiveLockGUID is used, UserID must match the user that creates the lock
+        Force         => 1,                   # (optional) proceed even if lock is set to another user
+        NotDirty      => 1,                   # (optional) do not use any values                 from modified dirty settings
+        AllSettings   => 1,                   # (optional) use dirty modified settings           from all users
+        DirtySettings => [                    # (optional) use only this dirty modified settings from the current user
             'SettingOne',
             'SettingTwo',
         ],
@@ -3599,28 +3585,6 @@ sub ConfigurationDeploy {
             return %Result;
         }
 
-        # If setting is updated on global level, check all user specific settings, maybe it's needed
-        #   to remove duplicates.
-        if ( $Self->can('UserConfigurationResetToGlobal') ) {    # OTRS Business Solution™
-
-            my @DeployedSettings;
-            if ( $Param{DirtySettings} ) {
-                @DeployedSettings = @{ $Param{DirtySettings} };
-            }
-            else {
-                for my $Setting (@Settings) {
-                    push @DeployedSettings, $Setting->{Name};
-                }
-            }
-
-            if ( scalar @DeployedSettings ) {
-                $Self->UserConfigurationResetToGlobal(
-                    Settings => \@DeployedSettings,
-                    UserID   => $Param{UserID},
-                );
-            }
-        }
-
         my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Delete categories cache.
@@ -3762,10 +3726,6 @@ sub ConfigurationDeploySync {
 
         return if !$Success;
     }
-
-    # Sync also user specific settings (if available).
-    return 1 if !$Self->can('UserConfigurationDeploySync');    # OTRS Business Solution™
-    $Self->UserConfigurationDeploySync();
 
     return 1;
 }
@@ -4109,16 +4069,6 @@ sub ConfigurationDump {
                 $Result->{'Modified'}->{ $Setting->{Name} } = $Setting;
             }
         }
-
-        if ( !$Param{SkipUserSettings} && $Self->can('UserConfigurationDump') ) {    # OTRS Business Solution™
-            my %UserSettings = $Self->UserConfigurationDump(
-                SettingList => \@SettingsList,
-                OnlyValues  => $Param{OnlyValues},
-            );
-            if ( scalar keys %UserSettings ) {
-                %{$Result} = ( %{$Result}, %UserSettings );
-            }
-        }
     }
 
     my $YAMLString = $Kernel::OM->Get('Kernel::System::YAML')->Dump(
@@ -4255,17 +4205,6 @@ sub ConfigurationLoad {
                 $Result = '-1';
             }
         }
-
-        # Only deploy user specific settings;
-        next SECTION if !$TargetUserID;
-        next SECTION if !$Self->can('UserConfigurationDeploy');    # OTRS Business Solution™
-
-        # Deploy user configuration requires another package to be installed.
-        my $Success = $Self->UserConfigurationDeploy(
-            TargetUserID => $TargetUserID,
-            UserID       => $Param{UserID},
-        );
-
     }
 
     return $Result;
@@ -4440,11 +4379,11 @@ Returns:
     %Categories = (
         All => {
             DisplayName => 'All Settings',
-            Files => [],
+            Files       => [],
         },
         OTRS => {
             DisplayName => 'Znuny',
-            Files       => ['Calendar.xml', CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml' ],
+            Files       => ['Calendar.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml' ],
         },
         # ...
     );
@@ -4476,7 +4415,7 @@ sub ConfigurationCategoriesGet {
         OTRS => {
             DisplayName => 'Znuny',
             Files       => [
-                'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml',
+                'Calendar.xml',         'Daemon.xml',            'Framework.xml',
                 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml',
                 'Znuny.xml',
             ],
@@ -4514,11 +4453,6 @@ sub ConfigurationCategoriesGet {
         my $PackageName = $Package->{Name}->{Content};
         my $DisplayName = $ConfigObject->Get("SystemConfiguration::Category::Name::$PackageName") || $PackageName;
 
-        # special treatment for OTRS Business Solution™
-        if ( $DisplayName eq 'OTRSBusiness' ) {
-            $DisplayName = 'OTRS Business Solution™';
-        }
-
         $Result{$PackageName} = {
             DisplayName => $DisplayName,
             Files       => \@XMLFiles,
@@ -4546,7 +4480,7 @@ Returns:
     %ForbiddenValueType = (
         String => [],
         Select => ['Option'],
-        ...
+        # ...
     );
 
 =cut
@@ -4681,7 +4615,7 @@ This method locks provided settings(by force), updates them and deploys the chan
                 IsValid                => 1,                # (optional)
                 UserModificationActive => 1,                # (optional)
             },
-            ...
+            # ...
         ],
     );
 
@@ -5754,7 +5688,7 @@ Sets cache for EffectiveValueCheck to the provided value.
             Default180920170714165331 => {
                 Success => 1,
             },
-            ...
+            # ...
         },
         NoValidation => 0,                      (optional)
     );
@@ -6193,7 +6127,7 @@ Returns:
     @ValueTypes = (
         "Checkbox",
         "Select",
-        ...
+        # ...
     );
 
 =cut
@@ -6254,10 +6188,10 @@ Helper method for ConfigurationXML2DB() - bulk insert.
             'SettingName' => {
 
             },
-            ...
+            # ...
         },
         SettingList => [                # (required) List of settings
-            ...
+            # ...
         ],
         UserID => 1,                    # (required) UserID
     );

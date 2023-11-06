@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_config version="2.0" init="Application">
+    <!-- nofilter(TidyAll::Plugin::Znuny::Config::ACLKeysLevel3Actions) -->
     <Setting Name="Frontend::Module###AdminProcessManagement" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
@@ -531,14 +532,14 @@
                             </Array>
                         </Item>
                         <Item Key="Description" Translatable="1">Create new process ticket.</Item>
-                        <Item Key="Name" Translatable="1">New process ticket</Item>
+                        <Item Key="Name" Translatable="1">Create Process Ticket</Item>
                         <Item Key="Link">Action=CustomerTicketProcess</Item>
                         <Item Key="LinkOption"></Item>
                         <Item Key="NavBar">Ticket</Item>
-                        <Item Key="Type">Submenu</Item>
+                        <Item Key="Type">Menu</Item>
                         <Item Key="Block"></Item>
                         <Item Key="AccessKey">o</Item>
-                        <Item Key="Prio">220</Item>
+                        <Item Key="Prio">0010</Item>
                     </Hash>
                 </Item>
             </Array>

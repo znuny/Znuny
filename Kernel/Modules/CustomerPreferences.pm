@@ -44,7 +44,7 @@ sub Run {
         # check group param
         my $Group = $ParamObject->GetParam( Param => 'Group' ) || '';
         if ( !$Group ) {
-            return $LayoutObject->ErrorScreen(
+            return $LayoutObject->CustomerErrorScreen(
                 Message => Translatable('Param Group is required!'),
             );
         }
@@ -52,7 +52,7 @@ sub Run {
         # check preferences setting
         my %Preferences = %{ $Kernel::OM->Get('Kernel::Config')->Get('CustomerPreferencesGroups') };
         if ( !$Preferences{$Group} ) {
-            return $LayoutObject->ErrorScreen(
+            return $LayoutObject->CustomerErrorScreen(
                 Message => $LayoutObject->{LanguageObject}->Translate( 'No such config for %s', $Group ),
             );
         }

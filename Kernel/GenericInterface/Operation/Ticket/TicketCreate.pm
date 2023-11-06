@@ -138,6 +138,20 @@ perform TicketCreate Operation. This will return the created ticket number.
                 ForceNotificationToUserID       => [1, 2, 3]                   # optional
                 ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
                 ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                Attachment => [
+                    {
+                        Content     => 'content'                                 # base64 encoded
+                        ContentType => 'some content type'
+                        Filename    => 'some fine name'
+                    },
+                    # ...
+                ],
+                # or:
+                Attachment => {
+                    Content     => 'content'                                 # base64 encoded
+                    ContentType => 'some content type'
+                    Filename    => 'some fine name'
+                },
 
                 # Signing and encryption, only used when ArticleSend is set to 1
                 Sign => {
@@ -186,6 +200,12 @@ perform TicketCreate Operation. This will return the created ticket number.
                         },
                         # ...
                     ],
+                    # or:
+                    Attachment => {
+                        Content     => 'content'                                 # base64 encoded
+                        ContentType => 'some content type'
+                        Filename    => 'some fine name'
+                    },
                 },
                 # ...
             ],
@@ -1006,13 +1026,16 @@ sub _CheckArticle {
     # check Article->ContentType
     if ( $Article->{ContentType} ) {
 
+        # Internal issue #595: Remove line breaks from content type.
+        $Article->{ContentType} =~ s{\R}{ }g;
+
         $Article->{ContentType} = lc $Article->{ContentType};
 
         # check Charset part
         my $Charset = '';
-        if ( $Article->{ContentType} =~ /charset=/i ) {
+        if ( $Article->{ContentType} =~ /charset\s*=\s*/i ) {
             $Charset = $Article->{ContentType};
-            $Charset =~ s/.+?charset=("|'|)(\w+)/$2/gi;
+            $Charset =~ s/.+?charset\s*=\s*("|'|)(\w+)/$2/gi;
             $Charset =~ s/"|'//g;
             $Charset =~ s/(.+?);.*/$1/g;
         }
@@ -1245,13 +1268,16 @@ sub _CheckAttachment {
     # check Article->ContentType
     if ( $Attachment->{ContentType} ) {
 
+        # Internal issue #595: Remove line breaks from content type.
+        $Attachment->{ContentType} =~ s{\R}{ }g;
+
         $Attachment->{ContentType} = lc $Attachment->{ContentType};
 
         # check Charset part
         my $Charset = '';
-        if ( $Attachment->{ContentType} =~ /charset=/i ) {
+        if ( $Attachment->{ContentType} =~ /charset\s*=\s*/i ) {
             $Charset = $Attachment->{ContentType};
-            $Charset =~ s/.+?charset=("|'|)(\w+)/$2/gi;
+            $Charset =~ s/.+?charset\s*=\s*("|'|)(\w+)/$2/gi;
             $Charset =~ s/"|'//g;
             $Charset =~ s/(.+?);.*/$1/g;
         }
@@ -1582,13 +1608,15 @@ sub _TicketCreate {
 
         my $PlainBody = $Article->{Body};
 
+        my $ArticleIsHTML = ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
+            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i );
+
+        my $ArticleIsPlainText = ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/plain/i )
+            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/plain/i );
+
         # Convert article body to plain text, if HTML content was supplied. This is necessary since auto response code
         #   expects plain text content. Please see bug#13397 for more information.
-        if (
-            ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
-            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
-            )
-        {
+        if ($ArticleIsHTML) {
             $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
                 String => $Article->{Body},
             );
@@ -1619,20 +1647,31 @@ sub _TicketCreate {
                 };
             }
 
+            #
+            # Template generator implicitly takes Frontend::RichText into account.
+            # Temporarily enable/disable RichText setting according to content type of article,
+            # so that body and signature both are plain text or HTML.
+            #
+            my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+            my $OriginalRichTextSetting = $ConfigObject->Get('Frontend::RichText');
+
+            $ConfigObject->{'Frontend::RichText'} = 0 if $ArticleIsPlainText;
+            $ConfigObject->{'Frontend::RichText'} = 1 if $ArticleIsHTML;
+
             my $Signature = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Signature(
                 TicketID => $TicketID,
                 UserID   => $Param{UserID},
                 Data     => $Article,
             );
 
+            # Restore original RichText setting.
+            $ConfigObject->{'Frontend::RichText'} = $OriginalRichTextSetting;
+
             if ($Signature) {
                 $Article->{Body} = $Article->{Body} . $Signature;
 
-                if (
-                    ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
-                    || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
-                    )
-                {
+                if ($ArticleIsHTML) {
                     $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
                         String => $Article->{Body},
                     );
@@ -1668,6 +1707,17 @@ sub _TicketCreate {
             $MimeType = $Article->{MimeType};
         }
 
+        # Base-64-decode attachments.
+        if ( IsHashRefWithData( $Article->{Attachment} ) ) {
+            $Article->{Attachment} = [ $Article->{Attachment} ];
+        }
+        ATTACHMENT:
+        for my $Attachment ( @{ $Article->{Attachment} // [] } ) {
+            next ATTACHMENT if !IsStringWithData( $Attachment->{Content} );
+
+            $Attachment->{Content} = MIME::Base64::decode_base64( $Attachment->{Content} );
+        }
+
         my %ArticleParams = (
             NoAgentNotify        => $Article->{NoAgentNotify} || 0,
             TicketID             => $TicketID,
@@ -1693,6 +1743,7 @@ sub _TicketCreate {
                 Subject => $Subject,
                 Body    => $PlainBody,
             },
+            Attachment => $Article->{Attachment} // [],
         );
 
         # create article
@@ -1710,7 +1761,8 @@ sub _TicketCreate {
                         Content => MIME::Base64::decode_base64( $Attachment->{Content} ),
                     };
                 }
-                $ArticleParams{Attachment} = \@NewAttachments;
+
+                push @{ $ArticleParams{Attachment} }, @NewAttachments;
             }
 
             # signing and encryption

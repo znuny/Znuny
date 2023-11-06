@@ -12,6 +12,7 @@ package Kernel::Modules::AgentTicketPhone;
 
 use strict;
 use warnings;
+use utf8;
 
 use Mail::Address;
 
@@ -65,7 +66,7 @@ sub Run {
         From Subject Body NextStateID TimeUnits
         Year Month Day Hour Minute
         NewResponsibleID ResponsibleAll OwnerAll TypeID ServiceID SLAID
-        StandardTemplateID FromChatID Dest
+        StandardTemplateID Dest
         )
         )
     {
@@ -284,42 +285,6 @@ sub Run {
         %GetParam = $LayoutObject->TransformDateSelection(
             %GetParam,
         );
-    }
-
-    if ( $GetParam{FromChatID} ) {
-        if ( !$ConfigObject->Get('ChatEngine::Active') ) {
-            return $LayoutObject->FatalError(
-                Message => Translatable('Chat is not active.'),
-            );
-        }
-
-        # Ok, take the chat
-        my %ChatParticipant = $Kernel::OM->Get('Kernel::System::Chat')->ChatParticipantCheck(
-            ChatID        => $GetParam{FromChatID},
-            ChatterType   => 'User',
-            ChatterID     => $Self->{UserID},
-            ChatterActive => 1,
-        );
-
-        if ( !%ChatParticipant ) {
-            return $LayoutObject->FatalError(
-                Message => Translatable('No permission.'),
-            );
-        }
-
-        # Get permissions
-        my $PermissionLevel = $Kernel::OM->Get('Kernel::System::Chat')->ChatPermissionLevelGet(
-            ChatID => $GetParam{FromChatID},
-            UserID => $Self->{UserID},
-        );
-
-        # Check if observer
-        if ( $PermissionLevel ne 'Owner' && $PermissionLevel ne 'Participant' ) {
-            return $LayoutObject->FatalError(
-                Message => Translatable('No permission.'),
-                Comment => $PermissionLevel,
-            );
-        }
     }
 
     if ( !$Self->{Subaction} || $Self->{Subaction} eq 'Created' ) {
@@ -882,7 +847,6 @@ sub Run {
             CustomerData => \%CustomerData,
             Attachments  => \@Attachments,
             LinkTicketID => $GetParam{LinkTicketID} || '',
-            FromChatID   => $GetParam{FromChatID} || '',
             %SplitTicketParam,
             DynamicFieldHTML => \%DynamicFieldHTML,
             MultipleCustomer => \@MultipleCustomer,
@@ -1199,6 +1163,13 @@ sub Run {
                 $Error{ErrorType}   = $CheckItemObject->CheckErrorType() . 'ServerErrorMsg';
                 $Error{FromInvalid} = ' ServerError';
             }
+
+            my $IsLocal = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressIsLocalAddress(
+                Address => $Email->address()
+            );
+            if ($IsLocal) {
+                $Error{'FromIsLocalAddress'} = 'ServerError';
+            }
         }
 
         if ( !$ExpandCustomerName ) {
@@ -1258,6 +1229,13 @@ sub Run {
         }
 
         if (%Error) {
+
+            if ( $Error{FromIsLocalAddress} ) {
+                $LayoutObject->Block(
+                    Name => 'FromIsLocalAddressServerErrorMsg',
+                    Data => \%GetParam,
+                );
+            }
 
             # get and format default subject and body
             my $Subject = $LayoutObject->Output(
@@ -1548,121 +1526,6 @@ sub Run {
                 Value              => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
                 UserID             => $Self->{UserID},
             );
-        }
-
-        # Permissions check were done earlier
-        if ( $GetParam{FromChatID} ) {
-            my $ChatObject = $Kernel::OM->Get('Kernel::System::Chat');
-            my %Chat       = $ChatObject->ChatGet(
-                ChatID => $GetParam{FromChatID},
-            );
-            my @ChatMessageList = $ChatObject->ChatMessageList(
-                ChatID => $GetParam{FromChatID},
-            );
-            my $ChatArticleID;
-
-            if (@ChatMessageList) {
-                for my $Message (@ChatMessageList) {
-                    $Message->{MessageText} = $LayoutObject->Ascii2Html(
-                        Text        => $Message->{MessageText},
-                        LinkFeature => 1,
-                    );
-                }
-
-                my $ArticleChatBackend = $ArticleObject->BackendForChannel( ChannelName => 'Chat' );
-                $ChatArticleID = $ArticleChatBackend->ArticleCreate(
-                    TicketID             => $TicketID,
-                    SenderType           => $Config->{SenderType},
-                    ChatMessageList      => \@ChatMessageList,
-                    IsVisibleForCustomer => $Config->{IsVisibleForCustomer},
-                    UserID               => $Self->{UserID},
-                    HistoryType          => $Config->{HistoryType},
-                    HistoryComment       => $Config->{HistoryComment} || '%%',
-                );
-            }
-            if ($ChatArticleID) {
-
-                # check is customer actively present
-                # it means customer has accepted this chat and not left it!
-                my $CustomerPresent = $ChatObject->CustomerPresent(
-                    ChatID => $GetParam{FromChatID},
-                    Active => 1,
-                );
-
-                my $Success;
-
-                # if there is no customer present in the chat
-                # just remove the chat
-                if ( !$CustomerPresent ) {
-                    $Success = $ChatObject->ChatDelete(
-                        ChatID => $GetParam{FromChatID},
-                    );
-                }
-
-                # otherwise set chat status to closed and inform other agents
-                else {
-                    $Success = $ChatObject->ChatUpdate(
-                        ChatID     => $GetParam{FromChatID},
-                        Status     => 'closed',
-                        Deprecated => 1,
-                    );
-
-                    # get user data
-                    my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
-                        UserID => $Self->{UserID},
-                    );
-
-                    my $RequesterName = $User{UserFullname};
-                    $RequesterName ||= $Self->{UserID};
-
-                    my $LeaveMessage = $Kernel::OM->Get('Kernel::Language')->Translate(
-                        "%s has left the chat.",
-                        $RequesterName,
-                    );
-
-                    $Success = $ChatObject->ChatMessageAdd(
-                        ChatID          => $GetParam{FromChatID},
-                        ChatterID       => $Self->{UserID},
-                        ChatterType     => 'User',
-                        MessageText     => $LeaveMessage,
-                        SystemGenerated => 1,
-                    );
-
-                    # time after chat will be removed
-                    my $ChatTTL = $Kernel::OM->Get('Kernel::Config')->Get('ChatEngine::ChatTTL');
-
-                    my $ChatClosedMessage = $Kernel::OM->Get('Kernel::Language')->Translate(
-                        "This chat has been closed and will be removed in %s hours.",
-                        $ChatTTL,
-                    );
-
-                    $Success = $ChatObject->ChatMessageAdd(
-                        ChatID          => $GetParam{FromChatID},
-                        ChatterID       => $Self->{UserID},
-                        ChatterType     => 'User',
-                        MessageText     => $ChatClosedMessage,
-                        SystemGenerated => 1,
-                    );
-
-                    # remove all AGENT participants from chat
-                    my @ParticipantsList = $ChatObject->ChatParticipantList(
-                        ChatID => $GetParam{FromChatID},
-                    );
-                    CHATPARTICIPANT:
-                    for my $ChatParticipant (@ParticipantsList) {
-
-                        # skip it this participant is not agent
-                        next CHATPARTICIPANT if $ChatParticipant->{ChatterType} ne 'User';
-
-                        # remove this participants from the chat
-                        $Success = $ChatObject->ChatParticipantRemove(
-                            ChatID      => $GetParam{FromChatID},
-                            ChatterID   => $ChatParticipant->{ChatterID},
-                            ChatterType => 'User',
-                        );
-                    }
-                }
-            }
         }
 
         # set owner (if new user id is given)
@@ -2969,27 +2832,6 @@ sub _MaskPhoneNew {
         # set up rich text editor
         $LayoutObject->SetRichTextParameters(
             Data => \%Param,
-        );
-    }
-
-    # Permissions have been checked before in Run()
-    if ( $Param{FromChatID} ) {
-        my @ChatMessages = $Kernel::OM->Get('Kernel::System::Chat')->ChatMessageList(
-            ChatID => $Param{FromChatID},
-        );
-
-        for my $Message (@ChatMessages) {
-            $Message->{MessageText} = $LayoutObject->Ascii2Html(
-                Text        => $Message->{MessageText},
-                LinkFeature => 1,
-            );
-        }
-
-        $LayoutObject->Block(
-            Name => 'ChatArticlePreview',
-            Data => {
-                ChatMessages => \@ChatMessages,
-            },
         );
     }
 

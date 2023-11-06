@@ -14,7 +14,6 @@ use strict;
 use warnings;
 
 use Kernel::System::DateTime;
-use Kernel::System::VariableCheck qw(:all);
 
 use parent qw(Kernel::System::SysConfig::BaseValueType);
 
@@ -257,7 +256,7 @@ Generate HTML for new array/hash item.
 Returns:
 
     $HTML = '<select class="Modernize" id="SettingName" name="SettingName" title="SettingName">
-        ...
+        # ...
         </select>';
 
 =cut

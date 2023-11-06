@@ -17,14 +17,16 @@ use Kernel::Language;
 
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
-# TODO: This test does not cancel potential other AJAX calls that might happen in the background,
-#   e. g. when OTRSBusiness is installed and the Chat is active.
+# TODO: This test does not cancel potential other AJAX calls that might happen in the background.
 
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
         # Change "Move" action to be a link instead of dropdown, since there is an issue to click
         # on the "Customer" action (dropdown can be on top is some cases).
@@ -40,7 +42,7 @@ $Selenium->RunTest(
             Groups   => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -75,14 +77,14 @@ $Selenium->RunTest(
         );
 
         # the footer is in the way some times
-        sleep(1);
+        sleep 1;
 
-        # Close dialog.
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        # Reload the page.
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
 
-        # Wait until modal dialog has closed.
         $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length;'
+            JavaScript =>
+                'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete;'
         );
 
         # Wait until all AJAX calls finished.
@@ -159,11 +161,15 @@ JAVASCRIPT
             "ConnectionReEstablished dialog visible"
         );
 
-        # Close the dialog.
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        # Reload the page.
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
         $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length;'
+            JavaScript =>
+                'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete;'
         );
+
+        # Wait until all AJAX calls finished.
+        $Selenium->WaitFor( JavaScript => "return \$.active == 0" );
 
         # Trigger faked ajax request again.
         $Selenium->execute_script($AjaxOverloadJSError);
@@ -181,19 +187,6 @@ JAVASCRIPT
             $Selenium->execute_script("return \$('#AjaxErrorDialogInner .NoConnection:visible').length;"),
             1,
             "Error dialog visible - second try"
-        );
-
-        # Now we close the dialog manually.
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
-        $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length;'
-        );
-
-        # The dialog should be gone.
-        $Self->Is(
-            $Selenium->execute_script("return \$('#AjaxErrorDialogInner .NoConnection:visible').length;"),
-            0,
-            "Error dialog closed"
         );
 
         # Now act as if the connection had been re-established.
@@ -218,7 +211,7 @@ JAVASCRIPT
         my $TestCustomerUser = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
-        my %TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
+        my %TestCustomerUserID = $CustomerUserObject->CustomerUserDataGet(
             User => $TestCustomerUser,
         );
 
@@ -257,8 +250,8 @@ JAVASCRIPT
                 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
         );
 
-        # In some cases, we need a little bit more time to get the page up and running correctly
-        sleep(1);
+        # Wait until all AJAX calls finished.
+        $Selenium->WaitFor( JavaScript => "return \$.active == 0" );
 
         # Trigger faked ajax request again.
         $Selenium->execute_script($AjaxOverloadJSError);
@@ -296,7 +289,7 @@ JAVASCRIPT
             "ConnectionReEstablished dialog visible"
         );
 
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
 
         # Wait until modal dialog has closed.
         $Selenium->WaitFor(
@@ -326,7 +319,7 @@ JAVASCRIPT
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

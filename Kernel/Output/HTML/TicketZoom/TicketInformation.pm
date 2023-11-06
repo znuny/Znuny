@@ -13,22 +13,48 @@ use parent 'Kernel::Output::HTML::Base';
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+    my $StateObject        = $Kernel::OM->Get('Kernel::System::State');
+    my $QueueObject        = $Kernel::OM->Get('Kernel::System::Queue');
+    my $PriorityObject     = $Kernel::OM->Get('Kernel::System::Priority');
+    my $ServiceObject      = $Kernel::OM->Get('Kernel::System::Service');
+    my $SLAObject          = $Kernel::OM->Get('Kernel::System::SLA');
+    my $TypeObject         = $Kernel::OM->Get('Kernel::System::Type');
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $ProcessObject      = $Kernel::OM->Get('Kernel::System::ProcessManagement::Process');
+    my $ActivityObject     = $Kernel::OM->Get('Kernel::System::ProcessManagement::Activity');
 
     my %Ticket    = %{ $Param{Ticket} };
     my %AclAction = %{ $Param{AclAction} };
+
+    my %State = $StateObject->StateGet(
+        ID => $Ticket{StateID},
+    );
+    $Param{StateValidID} = $State{ValidID};
+
+    my %Queue = $QueueObject->QueueGet(
+        ID => $Ticket{QueueID},
+    );
+    $Param{QueueValidID} = $Queue{ValidID};
+
+    my %Priority = $PriorityObject->PriorityGet(
+        PriorityID => $Ticket{PriorityID},
+        UserID     => $Self->{UserID},
+    );
+    $Param{PriorityValidID} = $Priority{ValidID};
 
     # Show created by name, if different then root user (ID=1).
     if ( $Ticket{CreateBy} > 1 ) {
@@ -49,14 +75,14 @@ sub Run {
     # ticket type
     if ( $ConfigObject->Get('Ticket::Type') ) {
 
-        my %Type = $Kernel::OM->Get('Kernel::System::Type')->TypeGet(
+        my %Type = $TypeObject->TypeGet(
             ID => $Ticket{TypeID},
         );
 
         $LayoutObject->Block(
             Name => 'Type',
             Data => {
-                Valid => $Type{ValidID},
+                ValidID => $Type{ValidID},
                 %Ticket,
                 %AclAction
             },
@@ -65,79 +91,40 @@ sub Run {
 
     # ticket service
     if ( $ConfigObject->Get('Ticket::Service') && $Ticket{Service} ) {
+
+        my %Service = $ServiceObject->ServiceGet(
+            ServiceID => $Ticket{ServiceID},
+            UserID    => 1,
+        );
+
         $LayoutObject->Block(
             Name => 'Service',
-            Data => { %Ticket, %AclAction },
+            Data => {
+                %Ticket,
+                %AclAction,
+                %Service,
+            },
         );
         if ( $Ticket{SLA} ) {
+
+            my %SLA = $SLAObject->SLAGet(
+                SLAID  => $Ticket{SLAID},
+                UserID => 1,
+            );
+
             $LayoutObject->Block(
                 Name => 'SLA',
-                Data => { %Ticket, %AclAction },
+                Data => {
+                    %Ticket,
+                    %AclAction,
+                    %SLA,
+                },
             );
         }
     }
 
-    # show first response time if needed
-    if ( defined $Ticket{FirstResponseTime} ) {
-        $Ticket{FirstResponseTimeHuman} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{FirstResponseTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        $Ticket{FirstResponseTimeWorkingTime} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{FirstResponseTimeWorkingTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        if ( 60 * 60 * 1 > $Ticket{FirstResponseTime} ) {
-            $Ticket{FirstResponseTimeClass} = 'Warning';
-        }
-        $LayoutObject->Block(
-            Name => 'FirstResponseTime',
-            Data => { %Ticket, %AclAction },
-        );
-    }
-
-    # show update time if needed
-    if ( defined $Ticket{UpdateTime} ) {
-        $Ticket{UpdateTimeHuman} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{UpdateTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        $Ticket{UpdateTimeWorkingTime} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{UpdateTimeWorkingTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        if ( 60 * 60 * 1 > $Ticket{UpdateTime} ) {
-            $Ticket{UpdateTimeClass} = 'Warning';
-        }
-        $LayoutObject->Block(
-            Name => 'UpdateTime',
-            Data => { %Ticket, %AclAction },
-        );
-    }
-
-    # show solution time if needed
-    if ( defined $Ticket{SolutionTime} ) {
-        $Ticket{SolutionTimeHuman} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{SolutionTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        $Ticket{SolutionTimeWorkingTime} = $LayoutObject->CustomerAge(
-            Age                => $Ticket{SolutionTimeWorkingTime},
-            TimeShowAlwaysLong => 1,
-            Space              => ' ',
-        );
-        if ( 60 * 60 * 1 > $Ticket{SolutionTime} ) {
-            $Ticket{SolutionTimeClass} = 'Warning';
-        }
-        $LayoutObject->Block(
-            Name => 'SolutionTime',
-            Data => { %Ticket, %AclAction },
-        );
+    for my $TimerName (qw( FirstResponseTime UpdateTime SolutionTime )) {
+        $Self->_AddTimeNeededBlock( \%Ticket, $TimerName, \%AclAction ) if defined $Ticket{$TimerName};
     }
 
     # show number of tickets with the same customer id if feature is active:
@@ -189,106 +176,7 @@ sub Run {
         );
     }
 
-    # Check if agent has permission to start chats with agents.
-    my $EnableChat               = 1;
-    my $ChatStartingAgentsGroup  = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatStartingAgents') || 'users';
-    my $ChatReceivingAgentsGroup = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatReceivingAgents') || 'users';
-    my $ChatStartingAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-        UserID    => $Self->{UserID},
-        GroupName => $ChatStartingAgentsGroup,
-        Type      => 'rw',
-    );
-
-    if ( !$ConfigObject->Get('ChatEngine::Active') || !$ChatStartingAgentsGroupPermission ) {
-        $EnableChat = 0;
-    }
-    if (
-        $EnableChat
-        && !$ConfigObject->Get('ChatEngine::ChatDirection::AgentToAgent')
-        )
-    {
-        $EnableChat = 0;
-    }
-
     my %OnlineData;
-    if ($EnableChat) {
-        my $VideoChatEnabled     = 0;
-        my $VideoChatAgentsGroup = $ConfigObject->Get('ChatEngine::PermissionGroup::VideoChatAgents') || 'users';
-        my $VideoChatAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-            UserID    => $Self->{UserID},
-            GroupName => $VideoChatAgentsGroup,
-            Type      => 'rw',
-        );
-
-        # Enable the video chat feature if system is entitled and agent is a member of configured group.
-        if ( $ConfigObject->Get('ChatEngine::Active') && $VideoChatAgentsGroupPermission ) {
-            if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::VideoChat', Silent => 1 ) ) {
-                $VideoChatEnabled = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled();
-            }
-        }
-
-        FIELD:
-        for my $Field (qw(OwnerID ResponsibleID)) {
-            next FIELD if !$Ticket{$Field};
-            next FIELD if $Field eq 'ResponsibleID' && !$ConfigObject->Get('Ticket::Responsible');
-
-            my $UserID = $Ticket{$Field};
-
-            $OnlineData{$Field}->{EnableChat}         = $EnableChat;
-            $OnlineData{$Field}->{AgentEnableChat}    = 0;
-            $OnlineData{$Field}->{ChatAccess}         = 0;
-            $OnlineData{$Field}->{VideoChatAvailable} = 0;
-            $OnlineData{$Field}->{VideoChatSupport}   = 0;
-            $OnlineData{$Field}->{VideoChatEnabled}   = $VideoChatEnabled;
-
-            # Default status is offline.
-            $OnlineData{$Field}->{UserState} = Translatable('Offline');
-            $OnlineData{$Field}->{UserStateDescription}
-                = $LayoutObject->{LanguageObject}->Translate('User is currently offline.');
-
-            # We also need to check if the receiving agent has chat permissions.
-            my %UserGroups = $Kernel::OM->Get('Kernel::System::Group')->PermissionUserGet(
-                UserID => $UserID,
-                Type   => 'rw',
-            );
-
-            my %UserGroupsReverse = reverse %UserGroups;
-            $OnlineData{$Field}->{ChatAccess} = $UserGroupsReverse{$ChatReceivingAgentsGroup} ? 1 : 0;
-
-            my %User = $UserObject->GetUserData(
-                UserID => $UserID,
-            );
-            $OnlineData{$Field}->{VideoChatSupport} = $User{VideoChatHasWebRTC};
-
-            # Check agent's availability.
-            if ( $OnlineData{$Field}->{ChatAccess} ) {
-                $OnlineData{$Field}->{AgentChatAvailability}
-                    = $Kernel::OM->Get('Kernel::System::Chat')->AgentAvailabilityGet(
-                    UserID   => $UserID,
-                    External => 0,
-                    );
-
-                if ( $OnlineData{$Field}->{AgentChatAvailability} == 3 ) {
-                    $OnlineData{$Field}->{UserState}       = Translatable('Active');
-                    $OnlineData{$Field}->{AgentEnableChat} = 1;
-                    $OnlineData{$Field}->{UserStateDescription}
-                        = $LayoutObject->{LanguageObject}->Translate('User is currently active.');
-                    $OnlineData{$Field}->{VideoChatAvailable} = 1;
-                }
-                elsif ( $OnlineData{$Field}->{AgentChatAvailability} == 2 ) {
-                    $OnlineData{$Field}->{UserState}       = Translatable('Away');
-                    $OnlineData{$Field}->{AgentEnableChat} = 1;
-                    $OnlineData{$Field}->{UserStateDescription}
-                        = $LayoutObject->{LanguageObject}->Translate('User was inactive for a while.');
-                }
-                elsif ( $OnlineData{$Field}->{AgentChatAvailability} == 1 ) {
-                    $OnlineData{$Field}->{UserState} = Translatable('Unavailable');
-                    $OnlineData{$Field}->{UserStateDescription}
-                        = $LayoutObject->{LanguageObject}->Translate('User set their status to unavailable.');
-                }
-            }
-        }
-    }
 
     # owner info
     my %OwnerInfo = $UserObject->GetUserData(
@@ -317,7 +205,7 @@ sub Run {
     $Param{Hook}        = $ConfigObject->Get('Ticket::Hook') || 'Ticket#';
 
     # check if ticket is normal or process ticket
-    my $IsProcessTicket = $Kernel::OM->Get('Kernel::System::Ticket')->TicketCheckForProcessType(
+    my $IsProcessTicket = $TicketObject->TicketCheckForProcessType(
         TicketID => $Ticket{TicketID}
     );
 
@@ -336,10 +224,10 @@ sub Run {
         my $ActivityEntityIDField = 'DynamicField_'
             . $ConfigObject->Get("Process::DynamicFieldProcessManagementActivityID");
 
-        my $ProcessData = $Kernel::OM->Get('Kernel::System::ProcessManagement::Process')->ProcessGet(
+        my $ProcessData = $ProcessObject->ProcessGet(
             ProcessEntityID => $Ticket{$ProcessEntityIDField},
         );
-        my $ActivityData = $Kernel::OM->Get('Kernel::System::ProcessManagement::Activity')->ActivityGet(
+        my $ActivityData = $ActivityObject->ActivityGet(
             Interface        => 'AgentInterface',
             ActivityEntityID => $Ticket{$ActivityEntityIDField},
         );
@@ -365,7 +253,7 @@ sub Run {
     };
 
     # get the dynamic fields for ticket object
-    my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+    my $DynamicField = $DynamicFieldObject->DynamicFieldListGet(
         Valid       => 1,
         ObjectType  => ['Ticket'],
         FieldFilter => $DynamicFieldFilter || {},
@@ -373,7 +261,7 @@ sub Run {
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     # to store dynamic fields to be displayed in the process widget and in the sidebar
-    my (@FieldsSidebar);
+    my @FieldsSidebar;
 
     # cycle trough the activated Dynamic Fields for ticket object
     DYNAMICFIELD:
@@ -465,6 +353,7 @@ sub Run {
                     # alias for ticket title, Title will be overwritten
                     TicketTitle => $Ticket{Title},
                     Value       => $Field->{Value},
+                    ValueKey    => $Ticket{"DynamicField_$Field->{Name}"},
                     Title       => $Field->{Title},
                     Link        => $Field->{Link},
                     LinkPreview => $Field->{LinkPreview},
@@ -486,14 +375,47 @@ sub Run {
         }
     }
 
+    if ( IsStringWithData( $Ticket{StateID} ) ) {
+        $Param{PillClass} .= 'pill StateID-' . $Ticket{StateID};
+    }
+
     my $Output = $LayoutObject->Output(
         TemplateFile => 'AgentTicketZoom/TicketInformation',
         Data         => { %Param, %Ticket, %AclAction },
     );
 
+    my $Config = $Param{Config};
+    my %Rank;
+    %Rank = ( Rank => $Config->{Rank} ) if exists $Config->{Rank} && defined $Config->{Rank};
+
     return {
         Output => $Output,
+        %Rank,
     };
+}
+
+sub _AddTimeNeededBlock {
+    my ( $Self, $Ticket, $TimerName, $AclAction ) = @_;
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Ticket->{"${TimerName}Human"} = $LayoutObject->CustomerAge(
+        Age                => $Ticket->{$TimerName},
+        TimeShowAlwaysLong => 1,
+        Space              => ' ',
+    );
+    $Ticket->{"${TimerName}WorkingTime"} = $LayoutObject->CustomerAge(
+        Age                => $Ticket->{"${TimerName}WorkingTime"},
+        TimeShowAlwaysLong => 1,
+        Space              => ' ',
+    );
+    if ( 60 * 60 * 1 > $Ticket->{$TimerName} ) {
+        $Ticket->{"${TimerName}Class"} = 'Warning';
+    }
+    $LayoutObject->Block(
+        Name => $TimerName,
+        Data => { %$Ticket, %$AclAction },
+    );
+    return;
 }
 
 # Checks if dynamic fields of types WebserviceDropdown and WebserviceMultiselect

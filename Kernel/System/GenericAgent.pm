@@ -168,8 +168,8 @@ run a generic agent job
 
     $GenericAgentObject->JobRun(
         Job          => 'JobName',
-        OnlyTicketID => 123,     # (optional) for event based Job execution
-        SleepTime    => 100_000, # (optional) sleeptime per ticket in microseconds
+        OnlyTicketID => 123,        # (optional) for event based Job execution
+        SleepTime    => 100_000,    # (optional) sleeptime per ticket in microseconds
         UserID       => 1,
     );
 
@@ -740,7 +740,7 @@ adds a new job to the database
         Name => 'JobName',
         Data => {
             Queue => 'SomeQueue',
-            ...
+            # ...
             Valid => 1,
         },
         UserID => 123,
@@ -908,12 +908,12 @@ sub JobEventList {
 run a generic agent job on a ticket
 
     $GenericAgentObject->_JobRunTicket(
-        TicketID => 123,
+        TicketID     => 123,
         TicketNumber => '2004081400001',
-        Config => {
+        Config       => {
             %Job,
         },
-        UserID => 1,
+        UserID       => 1,
     );
 
 =cut

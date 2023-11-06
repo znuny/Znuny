@@ -1,0 +1,295 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     PageLayout
+ */
+
+@media screen,projection,tv,handheld {
+
+    .MainBox {
+        position: relative;
+        padding: var(--main-page-padding);
+        background: var(--main-bg-color);
+    }
+
+    .ContentWrapper {
+        display: flex;
+        width: 100%;
+        max-width: 1600px;
+        align-self: center;
+        gap: var(--gap-md);
+        padding: var(--main-page-padding);
+    }
+
+    .ContentWrapper .Content {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .LayoutPopup > .PopupHeader p {
+        padding: var(--padding-xs) 0 0 0;
+        font-size: var(--font-size-sm);
+        color: var(--gray-dark);
+        font-weight: var(--semi-bold);
+        letter-spacing: 0.2px;
+    }
+
+    /**
+    * @subsection  SidebarLast
+    */
+
+    .SidebarLast,
+    .LayoutFixedSidebar.SidebarLast {
+        flex-flow: row-reverse;
+        flex-wrap: nowrap;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: var(--gap-md);
+    }
+
+    .SidebarLast .SidebarColumn {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: var(--side-bar-width-desktop);
+        gap: var(--gap-md)
+    }
+
+    .SidebarLast .ContentColumn {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    /**
+    * @subsection  LayoutFixedSidebar
+    */
+
+    .LayoutFixedSidebar {
+        display: flex;
+        flex-flow: row;
+        flex: 1;
+        padding-bottom: var(--padding-md);
+    }
+
+    .LayoutFixedSidebar > .ContentColumn,
+    .LayoutFixedSidebar > .ContentColumn > .card,
+    .Content .ContentColumn {
+        display: flex;
+        flex-flow: column;
+        align-self: self-start;
+        gap: var(--gap-md);
+        justify-content: unset;
+        flex: 1;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .LayoutFixedSidebar .top-content {
+        display: flex;
+        flex-flow: row;
+    }
+
+    .LayoutFixedSidebar .main-content {
+        display: flex;
+        flex-flow: row;
+    }
+
+    /**
+    * @subsection  mainStructure LayoutFixedSidebar
+    */
+
+    .mainStructure.LayoutFixedSidebar {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+        flex-wrap: nowrap;
+        align-items: initial;
+        overflow-x: hidden;
+    }
+
+    .mainStructure.LayoutFixedSidebar .mainContent {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: var(--main-page-padding);
+    }
+
+    .mainStructure.LayoutFixedSidebar .ContentColumn {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - var(--side-bar-width-desktop));
+        padding: 0;
+        gap: var(--gap-md)
+    }
+
+    .mainStructure.LayoutFixedSidebar .SidebarColumn {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: var(--side-bar-width-desktop);
+        gap: var(--gap-md)
+    }
+
+    .LayoutFixedSidebar > .ContentColumn > form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+    }
+
+    .ContentColumn .widget-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+        padding: var(--main-page-padding);
+    }
+
+    .FormScreen .TableLike {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        gap: 0;
+    }
+
+    @media only screen and (min-width: 1400px) {
+        .FormScreen .TableLike {
+            max-width: 100%;
+        }
+    }
+
+
+    .active-inner-cols {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: var(--gap-md);
+    }
+
+    .padding-md {
+        padding: var(--padding-md) !important;
+    }
+
+    .padding-none {
+        padding: var(--padding-none) !important;
+    }
+
+    .outer-label-wrapper {
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* **************** START RESPONSIVE COLS | Desktop & Wide **************** */
+@media (min-width: 1400px) {
+    /******************/
+    /*      Cols      */
+    .col-wide-33 {
+        width: 100%;
+        max-width: calc(33.33% - var(--margin-lg));
+    }
+
+    .col-wide-50 {
+        width: 50%;
+        max-width: calc(50% - var(--margin-sm));
+    }
+
+    .col-wide-66 {
+        width: 100%;
+        max-width: calc(66.66% - var(--margin-lg));
+    }
+
+    .col-wide-100 {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .col-wide-adapt-elem {
+        width: auto;
+        flex: 1;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1399px) {
+    /******************/
+    /*      Cols      */
+    .col-desktop-33 {
+        width: 33%;
+        max-width: calc(33.33% - var(--margin-lg));
+    }
+
+    .col-desktop-50 {
+        width: 50%;
+        max-width: calc(50% - var(--margin-lg));
+    }
+
+    .col-desktop-66 {
+        width: 66%;
+        max-width: calc(66.66% - var(--margin-lg));
+    }
+
+    .col-desktop-100 {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /******************/
+    /*      Cols      */
+    .col-tablet-33 {
+        width: 100%;
+        max-width: calc(33.33% - var(--margin-md));
+    }
+
+    .col-tablet-50 {
+        width: 100%;
+        max-width: calc(50% - var(--margin-md));
+    }
+
+    .col-tablet-66 {
+        width: 100%;
+        max-width: calc(66.66% - var(--margin-md));
+    }
+
+    .col-tablet-100 {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /************************/
+    /*      Card Items      */
+    .card-item.col-tablet-33 {
+        width: 100%;
+        max-width: 33.33%;
+    }
+
+    .card-item.col-tablet-50 {
+        width: 100%;
+        max-width: 50%;
+    }
+
+    .card-item.col-tablet-66 {
+        width: 100%;
+        max-width: 66.66%;
+    }
+
+    .card-item.col-tablet-100 {
+        width: 100%;
+        max-width: 100%;
+    }
+
+}

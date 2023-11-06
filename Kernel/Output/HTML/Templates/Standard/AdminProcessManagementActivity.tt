@@ -6,19 +6,20 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::TT::Breadcrumb)
 
-<div class="LayoutPopup ARIARoleMain">
+<div class="LayoutPopup ARIARoleMain AdminManagement">
     <div class="Header">
         <h1>[% Translate(Data.Title) | html %]</h1>
 [% RenderBlockStart("ClosePopup") %]
-        <p>
-            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ClosePopup" class="ClosePopup">[% Translate("Cancel & close") | html %]</a>
-        </p>
+        <div>
+            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ClosePopup" class="ClosePopup btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+        </div>
 [% RenderBlockEnd("ClosePopup") %]
 [% RenderBlockStart("GoBack") %]
-        <p>
-            <a class="GoBack" href="[% Env("Baselink") %]Action=[% Data.Action | uri %];Subaction=[% Data.Subaction | uri %];ID=[% Data.ID | uri %];EntityID=[% Data.EntityID | uri %]">[% Translate("Go Back") | html %]</a>
-        </p>
+        <div>
+            <a class="GoBack btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=[% Data.Action | uri %];Subaction=[% Data.Subaction | uri %];ID=[% Data.ID | uri %];EntityID=[% Data.EntityID | uri %]">[% Translate("Cancel") | html %]</a>
+        </div>
 [% RenderBlockEnd("GoBack") %]
     </div>
     <div class="Content">
@@ -35,10 +36,12 @@
                 <input type="hidden" name="PopupRedirectSubaction" value="" id="PopupRedirectSubaction"/>
                 <input type="hidden" name="PopupRedirectID" value="" id="PopupRedirectID"/>
                 <input type="hidden" name="PopupRedirectEntityID" value="" id="PopupRedirectEntityID"/>
-
 [% RenderBlockStart("EditWarning") %]
                 <div class="WidgetSimple Expanded WidgetNotice">
-                    <div class="Content">[% Translate("Please note, that changing this activity will affect the following processes") | html %]: [% Data.ProcessList | html %]</div>
+                    <div class="Content">
+                        <i class="fa fa-info-circle"></i>
+                        <span>[% Translate("Please note, that changing this activity will affect the following processes") | html %]: [% Data.ProcessList | html %]</span>
+                    </div>
                 </div>
 [% RenderBlockEnd("EditWarning") %]
 
@@ -51,32 +54,35 @@
                     </div>
                     <div class="Content">
                         <fieldset class="TableLike">
-                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Activity Name") | html %]:</label>
-                            <div class="Field">
-                                <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameServerError | html %]" maxlength="70"/>
-                                <div id="NameError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Activity Name") | html %]</label>
+                                <div class="Field">
+                                    <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="Validate_Required [% Data.NameServerError | html %]" maxlength="70"/>
+                                    <div id="NameError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label for="Scope">[% Translate("Scope") | html %]:</label>
-                            <div class="Field">
-                                [% Data.ScopeSelection %]
-                                <div id="ScopeError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
+                            <div class="field-wrapper">
+                                <label for="Scope">[% Translate("Scope") | html %]</label>
+                                <div class="Field">
+                                    [% Data.ScopeSelection %]
+                                    <div id="ScopeError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label class="Mandatory" for="ScopeEntityID"><span class="Marker">*</span> [% Translate("Scope Entity ID") | html %]:</label>
-                            <div class="Field">
-                                [% Data.ScopeEntityIDSelection %]
-                                <div id="ScopeEntityIDError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required for activities with a scope.") | html %]</p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="ScopeEntityID"><span class="Marker">*</span> [% Translate("Scope Entity ID") | html %]</label>
+                                <div class="Field">
+                                    [% Data.ScopeEntityIDSelection %]
+                                    <div id="ScopeEntityIDError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required for activities with a scope.") | html %]</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="Clear"></div>
                         </fieldset>
                     </div>
                 </div>
@@ -95,64 +101,69 @@
                                 [% Translate("Ordering the elements within the list is also possible by drag 'n' drop.") | html %]
                             </p>
                         </div>
-                        <div class="Size1of2">
-                           <a name="ProcessID" id="ProcessID" data-processid="[% Data.ProcessID %]"></a>
-                            <input type="text" id="FilterAvailableActivityDialogs" class="FilterAvailableProcessItem" name="FilterAvailableActivityDialogs" value="" title="[% Translate("Filter available Activity Dialogs") | html %]" placeholder="[% Translate("Filter available Activity Dialogs") | html %]..." />
-                            <input type="checkbox" checked id="ActivityDialogScopeFilter" class="ScopeFilter" data-scope-filter="ActivityDialog" name="ActivityDialogScopeFilter"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Activity Dialogs')) | html %]"></i>
-                            <ul class="Tablelike W90pc SpacingTop">
-                                <li class="Header">
-                                    [% Translate("Available Activity Dialogs") | html %]
-                                </li>
-                            </ul>
-                            <ul class="AllocationList Tablelike W90pc" id="AvailableActivityDialogs">
+                        <div class="modal-col-container modal-col-wrapper">
+                            <div class="Size1of2 modal-col1">
+                                <ul class="Tablelike">
+                                    <li class="Header">
+                                        [% Translate("Available Activity Dialogs") | html %]
+                                    </li>
+                                </ul>
+                                <div class="FilterInputContainer">
+                                    <a name="ProcessID" id="ProcessID" data-processid="[% Data.ProcessID %]"></a>
+                                    <input type="text" id="FilterAvailableActivityDialogs" class="FilterAvailableProcessItem" name="FilterAvailableActivityDialogs" value="" title="[% Translate("Filter available Activity Dialogs") | html %]" placeholder="[% Translate("Filter available Activity Dialogs") | html %]..." />
+                                    <input type="checkbox" checked id="ActivityDialogScopeFilter" class="ScopeFilter" data-scope-filter="ActivityDialog" name="ActivityDialogScopeFilter"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Activity Dialogs')) | html %]"></i>
+                                </div>
+                                <ul class="AllocationList Tablelike" id="AvailableActivityDialogs">
 [% RenderBlockStart("AvailableActivityDialogRow") %]
-                                <li data-id="[% Data.ID | html %]" title="[% Translate('Name: %s, EntityID: %s', Data.Name, Data.EntityID) | html %]" data-entity-type="ActivityDialog" data-scope="[% Data.Scope %]" data-scope-entity-id="[% Data.ScopeEntityID %]">
-                                    [% Data.Name | html %]
-                                    <span class="Functions">
-                                        <span class="AvailableIn">[% Translate(Data.AvailableIn) | html %]</span>
-                                        <a href="#" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogEdit" class="AsPopup_Redirect Edit_Confirm PopupType_ActivityDialog Icon" title="[% Translate("Edit") | html %]">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </span>
-                                </li>
+                                    <li data-id="[% Data.ID | html %]" title="[% Translate('Name: %s, EntityID: %s', Data.Name, Data.EntityID) | html %]" data-entity-type="ActivityDialog" data-scope="[% Data.Scope %]" data-scope-entity-id="[% Data.ScopeEntityID %]">
+                                        [% Data.Name | html %]
+                                        <span class="Functions">
+                                            <span class="AvailableIn">[% Translate(Data.AvailableIn) | html %]</span>
+                                            <a href="#" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogEdit" class="AsPopup_Redirect Edit_Confirm PopupType_ActivityDialog Icon icon-hover" title="[% Translate("Edit") | html %]">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </span>
+                                    </li>
 [% RenderBlockEnd("AvailableActivityDialogRow") %]
-                            </ul>
-                            <div class="SpacingTop">
-#                                <button>[% Translate("Create New Activity Dialog") | html %]</button>
-<!-- TODO Re-implemented as link, but it can be a button if needed (button is disabled by leading #)  -->
-                                <a href="#" data-entity="" data-id="" data-processid="[% Data.ProcessID %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogNew" class="CallForAction AsPopup_Redirect" ><span>[% Translate("Create New Activity Dialog") | html %]</span></a>
+                                </ul>
 
-
+                                <div class="SaveButtons">
+                                    <a href="#" data-entity="" data-id="" data-processid="[% Data.ProcessID %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogNew" class="CallForAction AsPopup_Redirect btn-main btn-primary btn-width-xxl" ><span>[% Translate("Create New Activity Dialog") | html %]</span></a>
+                                </div>
+                            </div>
+                            <div class="Size2of2 modal-col2">
+                                <ul class="Tablelike">
+                                    <li class="Header">
+                                        [% Translate("Assigned Activity Dialogs") | html %]
+                                    </li>
+                                </ul>
+                                <div class="FilterInputContainer">
+                                    <input type="text" id="FilterAssignedActivityDialogs" class="FilterAssignedProcessItem" name="FilterAssignedActivityDialogs" value="" title="[% Translate("Filter Assigned Activity Dialogs") | html %]" placeholder="[% Translate("Filter Assigned Activity Dialogs") | html %]..." />
+                                </div>
+                                <ul class="AllocationList Tablelike" id="AssignedActivityDialogs">
+[% RenderBlockStart("AssignedActivityDialogRow") %]
+                                    <li data-id="[% Data.ID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]">
+                                        [% Data.Name | html %]
+                                        <span class="Functions">
+                                            <span class="AvailableIn">[% Translate(Data.AvailableIn) | html %]</span>
+                                            <a href="#" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogEdit" class="AsPopup_Redirect Edit_Confirm PopupType_ActivityDialog Icon icon-hover" title="[% Translate("Edit") | html %]">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </span>
+                                    </li>
+[% RenderBlockEnd("AssignedActivityDialogRow") %]
+                                </ul>
                             </div>
                         </div>
-                        <div class="Size1of2">
-                            <ul class="Tablelike W90pc">
-                                <li class="Header">
-                                    [% Translate("Assigned Activity Dialogs") | html %]
-                                </li>
-                            </ul>
-                            <ul class="AllocationList Tablelike W90pc" id="AssignedActivityDialogs">
-[% RenderBlockStart("AssignedActivityDialogRow") %]
-                                <li data-id="[% Data.ID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]">
-                                    [% Data.Name | html %]
-                                    <span class="Functions">
-                                        <span class="AvailableIn">[% Translate(Data.AvailableIn) | html %]</span>
-                                        <a href="#" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogEdit" class="AsPopup_Redirect Edit_Confirm PopupType_ActivityDialog Icon" title="[% Translate("Edit") | html %]">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </span>
-                                </li>
-[% RenderBlockEnd("AssignedActivityDialogRow") %]
-                            </ul>
-                        </div>
+
                     </div>
                 </div>
-<!-- Invisible submit button to allow form submit on pressing enter/return without javascript -->
+                <!-- Invisible submit button to allow form submit on pressing enter/return without javascript -->
                 <input type="image" width="0" height="0" style="display: none;" />
             </form>
         </div>
     </div>
     <div class="Footer">
-        <button class="Primary CallForAction" id="Submit" title="[% Translate("Save") | html %]" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+        <button class="Primary CallForAction btn-main btn-primary btn-width-md" id="Submit" title="[% Translate("Save") | html %]" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
     </div>
 </div>

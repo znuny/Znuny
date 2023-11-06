@@ -19,9 +19,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # create and login test user
         my $Language      = 'hu';
@@ -149,7 +149,7 @@ $Selenium->RunTest(
             Groups => [ 'admin', 'users' ],
         );
 
-        my $Success = $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
+        my $Success = $UserObject->SetPreferences(
             UserID => $SecondTestUserID,
             Key    => 'AdminNavigationBarFavourites',
             Value =>

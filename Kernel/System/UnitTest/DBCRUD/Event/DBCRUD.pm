@@ -11,8 +11,6 @@ package Kernel::System::UnitTest::DBCRUD::Event::DBCRUD;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Log',
@@ -33,8 +31,8 @@ sub Run {
     my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
 
     NEEDED:
-    for my $Needed (qw( Data Event Config )) {
-        next NEEDED if $Param{$Needed};
+    for my $Needed (qw( ModuleName UseHistoryBackend Event Data Config UserID )) {
+        next NEEDED if defined $Param{$Needed};
 
         $LogObject->Log(
             Priority => 'error',

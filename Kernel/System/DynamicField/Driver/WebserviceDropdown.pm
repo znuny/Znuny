@@ -92,7 +92,7 @@ sub EditFieldRender {
     }
 
     # check and set class if necessary
-    my $FieldClass = 'DynamicFieldDropdown Modernize';
+    my $FieldClass = 'DynamicFieldText Modernize';
     if ( defined $Param{Class} && $Param{Class} ne '' ) {
         $FieldClass .= ' ' . $Param{Class};
     }
@@ -127,16 +127,13 @@ sub EditFieldRender {
     if ( !IsHashRefWithData($DataValues) && IsStringWithData($Value) ) {
         $DataValues = { $Value => $Value };
     }
-    elsif ( !IsHashRefWithData($DataValues) ) {
-        $DataValues = { ' ' => ' ' };
-    }
 
     my $HTMLString = $Param{LayoutObject}->BuildSelection(
         Data         => $DataValues || {},
         Name         => $FieldName,
         SelectedID   => $Value,
         Translation  => $FieldConfig->{TranslatableValues} || 0,
-        PossibleNone => 0,
+        PossibleNone => 1,
         TreeView     => $FieldConfig->{TreeView} || 0,
         Class        => $FieldClass,
         HTMLQuote    => 1,
@@ -204,7 +201,7 @@ EOF
     my $DynamicFieldSearch    = $FieldName . '_Search';
 
     $HTMLString
-        =~ s{(<select )}{$1 data-dynamic-field-name="$DynamicFieldName" data-dynamic-field-type="$DynamicFieldFieldType" data-selected-value-field-name="$FieldName" data-autocomplete-field-name="$DynamicFieldSearch" data-autocomplete-min-length="$AutocompleteMinLength" data-query-delay="$QueryDelay" data-default-search-term="$DefaultSearchTerm" data-ticket-id="$TicketID" };
+        =~ s{(<select )}{$1data-dynamic-field-name="$DynamicFieldName" data-dynamic-field-type="$DynamicFieldFieldType" data-selected-value-field-name="$FieldName" data-autocomplete-field-name="$DynamicFieldSearch" data-autocomplete-min-length="$AutocompleteMinLength" data-query-delay="$QueryDelay" data-default-search-term="$DefaultSearchTerm" data-ticket-id="$TicketID" };
 
     # Add InitSelect for search.
     my $DynamicFieldJS = <<"EOF";
@@ -386,10 +383,12 @@ sub SearchFieldRender {
     # Assemble display values
     # If there are no available values, leave it empty.
     if ( IsHashRefWithData($SelectionData) ) {
+        my $TicketID = $Param{LayoutObject}->{TicketID};
         $SelectionData = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             Value              => [ keys %{$SelectionData} ],
             Limit              => '',
+            TicketID           => $TicketID,
         );
     }
 
@@ -398,7 +397,7 @@ sub SearchFieldRender {
         Name         => $FieldName,
         SelectedID   => $Value,
         Translation  => $FieldConfig->{TranslatableValues} || 0,
-        PossibleNone => 0,
+        PossibleNone => 1,
         TreeView     => $FieldConfig->{TreeView} || 0,
         Class        => $FieldClass,
         Multiple     => 1,
@@ -451,19 +450,15 @@ sub _AutocompleteSearchFieldRender {
     # check and set class if necessary
     my $FieldClass = 'DynamicFieldMultiSelect Modernize';
 
-    my $SelectionData;
+    my $SelectionData = {};
     if ( IsArrayRefWithData($FieldValues) ) {
+        my $TicketID = $Param{LayoutObject}->{TicketID};
         $SelectionData = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             Value              => $FieldValues,
             Limit              => '',
+            TicketID           => $TicketID,
         );
-    }
-
-    if ( !IsHashRefWithData($SelectionData) ) {
-        $SelectionData = {
-            ' ' => ' ',
-        };
     }
 
     my $HTMLString = $Param{LayoutObject}->BuildSelection(
@@ -471,7 +466,7 @@ sub _AutocompleteSearchFieldRender {
         Name         => $FieldName,
         SelectedID   => $FieldValues,
         Translation  => $FieldConfig->{TranslatableValues} || 0,
-        PossibleNone => 0,
+        PossibleNone => 1,
         TreeView     => 0,
         Class        => $FieldClass,
         Multiple     => 0,
@@ -550,9 +545,11 @@ sub ValueLookup {
 
     return $Param{Key} if !IsStringWithData( $Param{Key} );
 
-    my $Value = $DynamicFieldWebserviceObject->DisplayValueGet(
+    my $TicketID = $Param{LayoutObject}->{TicketID};
+    my $Value    = $DynamicFieldWebserviceObject->DisplayValueGet(
         DynamicFieldConfig => $Param{DynamicFieldConfig},
         Value              => $Param{Key},
+        TicketID           => $TicketID,
     );
 
     return $Value;
@@ -682,17 +679,13 @@ sub PossibleValuesGet {
     my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
     my $LayoutObject                 = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    # to store the possible values
     my %PossibleValues;
 
-    # set PossibleNone attribute
-    my $FieldPossibleNone = 1;
+    # Provide empty value so the field will not be displayed as disabled if there are no selectable
+    # values yet.
+    $PossibleValues{' '} = '';
 
-    # set none value if defined on field config
-    if ( $FieldPossibleNone || !$Param{Value} ) {
-        %PossibleValues = ( ' ' => '-' );
-    }
-
+    my $TicketID = $Param{LayoutObject}->{TicketID};
     if ( $Param{DynamicFieldConfig}->{Config}->{InitialSearchTerm} ) {
         my $InitialSearchTerm = $LayoutObject->Ascii2Html(
             Text => $Param{DynamicFieldConfig}->{Config}->{InitialSearchTerm},
@@ -702,6 +695,7 @@ sub PossibleValuesGet {
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             SearchTerms        => $InitialSearchTerm,
             UserID             => $Param{UserID},
+            TicketID           => $TicketID,
         );
         if ( IsArrayRefWithData($Results) ) {
             for my $Result ( @{$Results} ) {
@@ -722,6 +716,7 @@ sub PossibleValuesGet {
         my $DisplayValue = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
             Value              => [ $Param{Value} ],
+            TicketID           => $TicketID,
         );
 
         %PossibleValues = (

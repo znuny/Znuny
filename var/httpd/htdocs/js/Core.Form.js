@@ -105,6 +105,7 @@ Core.Form = (function (TargetNS) {
             $Form
                 .find("input:not([type='hidden']), textarea, select")
                 .attr('readonly', 'readonly')
+                .attr('tabindex', '-1')
                 .end()
                 .find('button')
                 .attr('disabled', 'disabled');
@@ -134,6 +135,7 @@ Core.Form = (function (TargetNS) {
         $Form
             .find("input:not([type=hidden]), textarea, select")
             .removeAttr('readonly')
+            .attr('tabindex', '0')
             .end()
             .find('button')
             .removeAttr('disabled');

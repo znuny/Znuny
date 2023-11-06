@@ -131,7 +131,7 @@ sub Run {
     ITEMS:
     for my $Module ( sort keys %NavBarModule ) {
 
-        # dont show the admin overview as a tile
+        # don't show the admin overview as a tile
         next ITEMS if ( $NavBarModule{$Module}->{'Link'} && $NavBarModule{$Module}->{'Link'} eq 'Action=Admin' );
 
         if ( grep { $_ eq $Module } @{$PrefFavourites} ) {
@@ -170,6 +170,13 @@ sub Run {
         }
         @{ $Modules{$Block} }
             = sort { $Collator->cmp( $a->{NameTranslated}, $b->{NameTranslated} ) } @{ $Modules{$Block} };
+    }
+
+    # get count of each group
+    for my $ModuleGroup (@ModuleGroups) {
+        my $Count = scalar @{ $Modules{ $ModuleGroup->{Key} } || [] };
+        $ModuleGroup->{Count}        = $Count || 0;
+        $ModuleGroup->{WidgetStatus} = 'Expanded';
     }
 
     $LayoutObject->Block(

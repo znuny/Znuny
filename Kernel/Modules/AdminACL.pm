@@ -82,7 +82,7 @@ sub Run {
         if ( !$ACLImport->{Success} ) {
             my $Message = $ACLImport->{Message}
                 || Translatable(
-                'ACLs could not be Imported due to a unknown error, please check OTRS logs for more information'
+                'ACLs could not be Imported due to a unknown error, please check Znuny logs for more information'
                 );
             return $LayoutObject->ErrorScreen(
                 Message => $Message,
@@ -574,7 +574,7 @@ sub _ShowOverview {
 
     if ( $Self->{UserID} == 1 ) {
 
-        # show error notfy, don't work with user id 1
+        # show error notify, don't work with user id 1
         $Output .= $LayoutObject->Notify(
             Priority => 'Error',
             Info =>

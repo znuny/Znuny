@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<database Name="otrs">
+<database Name="znuny">
 
 <!-- acl - all acls from the editor -->
 <Table Name="acl">
@@ -34,6 +34,23 @@
     <Column Name="sync_state" Required="true" Size="30" Type="VARCHAR"/>
     <Column Name="create_time" Required="true" Type="DATE"/>
     <Column Name="change_time" Required="true" Type="DATE"/>
+</Table>
+
+<!-- activity -->
+<Table Name="activity">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
+    <Column Name="user_id" Required="true" Type="INTEGER"/>
+    <Column Name="activity_type" Required="true" Size="200" Type="VARCHAR"/>
+    <Column Name="activity_title" Required="true" Size="255" Type="VARCHAR"/>
+    <Column Name="activity_text" Required="false" Type="LONGBLOB" />
+    <Column Name="activity_state" Required="false" Size="255" Type="VARCHAR"/>
+    <Column Name="activity_link" Required="false" Size="255" Type="VARCHAR"/>
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="user_id" Foreign="id"/>
+        <Reference Local="create_by" Foreign="id"/>
+    </ForeignKey>
 </Table>
 
 <!-- Ticket attribute related ACLs -->
@@ -513,6 +530,7 @@
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="SMALLINT"/>
     <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
     <Column Name="valid_id" Required="true" Type="SMALLINT"/>
+    <Column Name="color" Required="true" Size="25" Type="VARCHAR" />
     <Column Name="create_time" Required="true" Type="DATE"/>
     <Column Name="create_by" Required="true" Type="INTEGER"/>
     <Column Name="change_time" Required="true" Type="DATE"/>
@@ -575,6 +593,7 @@
     <Column Name="comments" Required="false" Size="250" Type="VARCHAR"/>
     <Column Name="type_id" Required="true" Type="SMALLINT"/>
     <Column Name="valid_id" Required="true" Type="SMALLINT"/>
+    <Column Name="color" Required="true" Size="25" Type="VARCHAR" />
     <Column Name="create_time" Required="true" Type="DATE"/>
     <Column Name="create_by" Required="true" Type="INTEGER"/>
     <Column Name="change_time" Required="true" Type="DATE"/>
@@ -1643,8 +1662,8 @@
 <!-- generic_agent_jobs -->
 <Table Name="generic_agent_jobs">
     <Column Name="job_name" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="job_key" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="job_value" Required="false" Size="200" Type="VARCHAR"/>
+    <Column Name="job_key" Required="true" Size="255" Type="VARCHAR"/>
+    <Column Name="job_value" Required="false" Size="3800" Type="VARCHAR"/>
     <Index Name="generic_agent_jobs_job_name">
         <IndexColumn Name="job_name"/>
     </Index>
@@ -2297,28 +2316,6 @@
     </Index>
 </Table>
 
-<!-- cloud_service_config -->
-<Table Name="cloud_service_config">
-    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
-    <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="config" Required="true" Type="LONGBLOB"/>
-    <Column Name="valid_id" Required="true" Type="SMALLINT"/>
-    <Column Name="create_time" Required="true" Type="DATE"/>
-    <Column Name="create_by" Required="true" Type="INTEGER"/>
-    <Column Name="change_time" Required="true" Type="DATE"/>
-    <Column Name="change_by" Required="true" Type="INTEGER"/>
-    <Unique Name="cloud_service_config_name">
-        <UniqueColumn Name="name"/>
-    </Unique>
-    <ForeignKey ForeignTable="valid">
-        <Reference Local="valid_id" Foreign="id"/>
-    </ForeignKey>
-    <ForeignKey ForeignTable="users">
-        <Reference Local="create_by" Foreign="id"/>
-        <Reference Local="change_by" Foreign="id"/>
-    </ForeignKey>
-</Table>
-
 <!-- TODO: Remove un-needed comments -->
 
 <Table Name="sysconfig_default">
@@ -2575,11 +2572,11 @@
     </ForeignKey>
 </Table>
 
-<!-- calender appointment plugin -->
+<!-- calendar appointment plugin -->
 <Table Name="calendar_appointment_plugin">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="dbcrud_uuid" Required="false" Size="36" Type="VARCHAR"/> <!-- not required because up until 6.5 this column was added "on the fly" -->
-    <Column Name="appointment_id" Required="true" Type="SMALLINT"/>
+    <Column Name="appointment_id" Required="true" Type="BIGINT"/>
     <Column Name="plugin_key" Required="true" Size="1000" Type="VARCHAR"/>
     <Column Name="config" Required="false" Size="1000000" Type="VARCHAR"/>
     <Column Name="create_time" Required="true" Type="DATE"/>
@@ -2771,7 +2768,7 @@
     <Column Name="key_hash" Required="true" Size="8" Type="VARCHAR" />
     <Column Name="key_type" Required="true" Size="255" Type="VARCHAR" />
     <Column Name="file_name" Required="true" Size="255" Type="VARCHAR" />
-    <Column Name="email_address" Required="false" Size="255" Type="VARCHAR" />
+    <Column Name="email_address" Required="false" Size="100000" Type="VARCHAR" />
     <Column Name="expiration_date" Required="false" Type="DATE" />
     <Column Name="fingerprint" Required="false" Size="59" Type="VARCHAR" />
     <Column Name="subject" Required="false" Size="100000" Type="VARCHAR" />

@@ -13,8 +13,6 @@ package Kernel::System::Calendar::Plugin;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::JSON',
@@ -443,7 +441,7 @@ Returns:
             ChangeTime    => '...',
             ChangeBy      => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -516,7 +514,7 @@ Returns:
             'ChangeTime'    => '...',
             'ChangeBy'      => '...',
         },
-        ...
+        # ...
     );
 
 =cut

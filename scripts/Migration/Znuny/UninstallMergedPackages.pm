@@ -12,6 +12,7 @@ package scripts::Migration::Znuny::UninstallMergedPackages;    ## no critic
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(scripts::Migration::Base);
 
@@ -50,6 +51,7 @@ sub Run {
         'Znuny-NoteToLinkedTicket',
         'Znuny4OTRS-NoteToLinkedTicket',
         'Znuny4OTRS-UserMaxArticlesPerPage',
+        'Znuny-DynamicFieldWebserviceTicketIDPayload',
     );
 
     PACKAGENAME:

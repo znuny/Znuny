@@ -33,7 +33,7 @@ Core.Agent.TicketNoteToLinkedTicket = (function (TargetNS) {
 
         // Remove article action menu item if no ticket links are left.
         if (!$TicketDeleteLinks.length) {
-            $('a.PopupType_TicketAction[href*="?Action=TicketNoteToLinkedTicket;"]').closest('li').remove();
+            $('a.PopupType_TicketAction[href*="?Action=AgentTicketNoteToLinkedTicket;"]').closest('li').remove();
 
             return true;
         }

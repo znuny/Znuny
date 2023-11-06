@@ -8,6 +8,7 @@
 # --
 
 <div id="Footer" class="ARIARoleContentinfo">
+
 [% IF !Config("Secure::DisableBanner") %]
     <a href="https://www.znuny.org" title="[% Config("Product") | html %][% IF !Data.IsLoginPage %] [% Config("Version") | html %][% END %]" target="_blank">
         <span></span>
@@ -18,7 +19,7 @@
 
 [% InsertTemplate("FooterJS.tt") %]
 
-    </div><!-- end AppWrapper -->
+</div><!-- end AppWrapper -->
 
 </body>
 </html>

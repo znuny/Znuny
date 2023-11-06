@@ -20,6 +20,7 @@ $Selenium->RunTest(
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Set AvatarEngine to 'none'.
         $HelperObject->ConfigSettingChange(
@@ -62,7 +63,7 @@ $Selenium->RunTest(
             Password => $User{UserLogin},
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my %Tests = (
             0 => 'FL',

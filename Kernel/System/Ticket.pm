@@ -180,8 +180,8 @@ Get the complete ticket history
 Get current ticket attributes
 
     my %Ticket = $TicketObject->TicketGet(
-        TicketID      => $TicketID,
-        UserID        => 1,
+        TicketID => $TicketID,
+        UserID   => 1,
     );
 
 Delete the ticket
@@ -732,6 +732,11 @@ sub TicketDelete {
     return if !$ArticleObject->ArticleSearchIndexDelete(
         TicketID => $Param{TicketID},
         UserID   => $Param{UserID},
+    );
+
+    # remove all mentions
+    $Kernel::OM->Get('Kernel::System::Mention')->RemoveAllMentions(
+        TicketID => $Param{TicketID},
     );
 
     # get database object
@@ -1536,6 +1541,8 @@ sub TicketDeepGet {
     );
     return if !%Ticket;
 
+    $Ticket{TimeUnit} = $Self->TicketAccountedTimeGet( TicketID => $Param{TicketID} ) // 0;
+
     my %Data = %Ticket;
 
     my @Articles = $ArticleObject->ArticleList(
@@ -1729,7 +1736,6 @@ Returns:
             Disposition        => 'attachment',
             FileID             => 2,
         },
-
         # ...
     ];
 

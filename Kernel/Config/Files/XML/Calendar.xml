@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_config version="2.0" init="Application">
+    <!-- nofilter(TidyAll::Plugin::Znuny::Config::ACLKeysLevel3Actions) -->
     <Setting Name="PublicFrontend::Module###PublicCalendar" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the public interface.</Description>
         <Navigation>Frontend::Public::ModuleRegistration</Navigation>
@@ -56,7 +57,7 @@
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>thirdparty/momentjs-2.29.1/moment.min.js</Item>
+                        <Item>thirdparty/momentjs-2.29.4/moment.min.js</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.js</Item>
                         <Item>thirdparty/fullcalendar-scheduler-1.10.1/scheduler.min.js</Item>
                         <Item>Core.Agent.AppointmentCalendar.js</Item>
@@ -117,29 +118,6 @@
                         <Item Key="Prio">6000</Item>
                     </Hash>
                 </Item>
-<!--
-                <Item>
-                    <Hash>
-                        <Item Key="Group">
-                            <Array>
-                            </Array>
-                        </Item>
-                        <Item Key="GroupRo">
-                            <Array>
-                            </Array>
-                        </Item>
-                        <Item Key="Description" Translatable="1">Resource Overview (OTRS Business Solution™)</Item>
-                        <Item Key="Name" Translatable="1">Resource Overview (OTRS Business Solution™)</Item>
-                        <Item Key="Link">Action=AgentAppointmentCalendarOverview</Item>
-                        <Item Key="LinkOption">class="OTRSBusinessRequired"</Item>
-                        <Item Key="NavBar">Calendar</Item>
-                        <Item Key="Type"></Item>
-                        <Item Key="Block">ItemArea</Item>
-                        <Item Key="AccessKey"></Item>
-                        <Item Key="Prio">7000</Item>
-                    </Hash>
-                </Item>
--->
                 <Item>
                     <Hash>
                         <Item Key="Group">
@@ -269,13 +247,11 @@
                 <Item Key="CSS">
                     <Array>
                         <Item>Core.AppointmentCalendar.Manage.css</Item>
-                        <Item>thirdparty/spectrum-1.8.1/spectrum.css</Item>
                     </Array>
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
                         <Item>thirdparty/clipboardjs-1.7.1/clipboard.min.js</Item>
-                        <Item>thirdparty/spectrum-1.8.1/spectrum.js</Item>
                         <Item>Core.Agent.Admin.AppointmentCalendar.Manage.js</Item>
                     </Array>
                 </Item>
@@ -376,15 +352,6 @@
                 <Item>#000000</Item>
                 <Item>#1E1E1E</Item>
                 <Item>#3A3A3A</Item>
-                <Item>#545453</Item>
-                <Item>#6E6E6E</Item>
-                <Item>#878687</Item>
-                <Item>#888787</Item>
-                <Item>#A09FA0</Item>
-                <Item>#B8B8B8</Item>
-                <Item>#D0D0D0</Item>
-                <Item>#E8E8E8</Item>
-                <Item>#FFFFFF</Item>
                 <Item>#891100</Item>
                 <Item>#894800</Item>
                 <Item>#888501</Item>
@@ -412,15 +379,6 @@
                 <Item>#FF726E</Item>
                 <Item>#FFCE6E</Item>
                 <Item>#FFFB6D</Item>
-                <Item>#CEFA6E</Item>
-                <Item>#68F96E</Item>
-                <Item>#68FDFF</Item>
-                <Item>#68FBD0</Item>
-                <Item>#6ACFFF</Item>
-                <Item>#6E76FF</Item>
-                <Item>#D278FF</Item>
-                <Item>#FF7AFF</Item>
-                <Item>#FF7FD3</Item>
             </Array>
         </Value>
     </Setting>
@@ -517,7 +475,7 @@
         </Value>
     </Setting>
     <Setting Name="AppointmentCalendar::Import::RecurringMonthsLimit" Required="1" Valid="1">
-        <Description Translatable="1">OTRS doesn't support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).</Description>
+        <Description Translatable="1">Znuny doesn't support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).</Description>
         <Navigation>Core::AppointmentCalendar</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^\d+$">120</Item>
@@ -744,7 +702,7 @@
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::Admin::AdminAppointmentNotificationEvent###RichTextHeight" Required="0" Valid="1">
@@ -875,7 +833,7 @@
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>thirdparty/momentjs-2.29.1/moment.min.js</Item>
+                        <Item>thirdparty/momentjs-2.29.4/moment.min.js</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.js</Item>
                         <Item>Core.Agent.AppointmentCalendar.js</Item>
                         <Item>Core.Agent.AppointmentCalendar.Plugin.TicketCreate.js</Item>

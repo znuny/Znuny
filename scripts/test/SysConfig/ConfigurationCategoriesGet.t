@@ -30,8 +30,8 @@ my $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>TestPackage1</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
   <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
   <BuildDate>2005-11-10 21:17:16</BuildDate>
@@ -47,8 +47,8 @@ my $String2 = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>TestPackage2</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <URL>https://znuny.com/</URL>
+  <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
   <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
   <BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
@@ -87,7 +87,7 @@ my @Tests = (
             OTRS => {
                 DisplayName => 'Znuny',
                 Files       => [
-                    'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
+                    'Calendar.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
                     'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
@@ -108,7 +108,7 @@ my @Tests = (
             OTRS => {
                 DisplayName => 'Znuny',
                 Files       => [
-                    'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
+                    'Calendar.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
                     'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
@@ -133,7 +133,7 @@ my @Tests = (
             OTRS => {
                 DisplayName => 'Znuny',
                 Files       => [
-                    'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
+                    'Calendar.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
                     'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },

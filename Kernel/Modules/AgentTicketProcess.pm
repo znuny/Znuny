@@ -11,6 +11,7 @@ package Kernel::Modules::AgentTicketProcess;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -1620,6 +1621,22 @@ sub _OutputActivityDialog {
         );
     }
 
+    # Add rich text editor parameters to Core.Config.js even if ActivityDialog doesn't use a Article.
+    # This allows an administrator to replace a textarea with a rich text editor just loading a simple js
+    # and accessing Core.Config.js rich text editor parameter to ensure same ckeditor behavior and the
+    # possibility to use plugins like imageUpload.
+    if ( $LayoutObject->{BrowserRichText} ) {
+
+        # use height/width defined for this screen
+        $Param{RichTextHeight} = $Self->{Config}->{RichTextHeight} || 0;
+        $Param{RichTextWidth}  = $Self->{Config}->{RichTextWidth}  || 0;
+
+        # set up rich text editor
+        $LayoutObject->SetRichTextParameters(
+            Data => \%Param,
+        );
+    }
+
     # Add PageHeader, Navbar, Formheader (Process/ActivityDialogHeader)
     my $Output;
     my $MainBoxClass;
@@ -1653,19 +1670,6 @@ sub _OutputActivityDialog {
         )
     {
 
-        # add rich text editor
-        if ( $LayoutObject->{BrowserRichText} ) {
-
-            # use height/width defined for this screen
-            $Param{RichTextHeight} = $Self->{Config}->{RichTextHeight} || 0;
-            $Param{RichTextWidth}  = $Self->{Config}->{RichTextWidth}  || 0;
-
-            # set up rich text editor
-            $LayoutObject->SetRichTextParameters(
-                Data => \%Param,
-            );
-        }
-
         # display complete header and navigation bar in AJAX dialogs when there is a server error
         #    unless we are in a process enrollment (only when IsMainWindow is active)
         my $Type = $Self->{IsMainWindow} ? '' : 'Small';
@@ -1692,6 +1696,11 @@ sub _OutputActivityDialog {
 
     # display process information
     if ( $Self->{IsMainWindow} ) {
+
+        # output SidebarColumn
+        $LayoutObject->Block(
+            Name => 'SidebarColumn',
+        );
 
         # get process data
         my $Process = $ProcessObject->ProcessGet(
@@ -1777,7 +1786,6 @@ sub _OutputActivityDialog {
                 Name => 'CancelLink',
             );
         }
-
     }
 
     $Output .= $LayoutObject->Output(
@@ -2924,7 +2932,7 @@ sub _RenderArticle {
     );
 
     $Data{Body} = $TemplateGeneratorObject->_Replace(
-        RichText => 1,
+        RichText => $LayoutObject->{BrowserRichText},
         Text     => $Data{Body} || '',
         Data     => {
             %{ $Param{GetParam} },
@@ -2938,7 +2946,7 @@ sub _RenderArticle {
     );
 
     $Data{Subject} = $TemplateGeneratorObject->_Replace(
-        RichText => 0,                      # In this case rich-text support is not needed.
+        RichText => $LayoutObject->{BrowserRichText},
         Text     => $Data{Subject} || '',
         Data     => {
             %{ $Param{GetParam} },
@@ -5168,7 +5176,7 @@ sub _StoreActivityDialog {
             }
 
             $TicketParam{Title} = $TemplateGeneratorObject->_Replace(
-                RichText => 0,                           # In this case rich-text support is not needed.
+                RichText => $LayoutObject->{BrowserRichText},
                 Text     => $TicketParam{Title} || '',
                 Data     => {
                     %{ $Param{GetParam} },
@@ -5639,7 +5647,7 @@ sub _StoreActivityDialog {
                 }
 
                 $Param{GetParam}->{Body} = $TemplateGeneratorObject->_Replace(
-                    RichText => 1,
+                    RichText => $LayoutObject->{BrowserRichText},
                     Text     => $Param{GetParam}->{Body} || '',
                     Data     => {
                         %{ $Param{GetParam} },
@@ -5652,7 +5660,7 @@ sub _StoreActivityDialog {
                 );
 
                 $Param{GetParam}->{Subject} = $TemplateGeneratorObject->_Replace(
-                    RichText => 0,                                   # In this case rich-text support is not needed.
+                    RichText => $LayoutObject->{BrowserRichText},
                     Text     => $Param{GetParam}->{Subject} || '',
                     Data     => {
                         %{ $Param{GetParam} },

@@ -615,39 +615,43 @@ sub Sync {
     # Compare group permissions from LDAP with current user group permissions.
     my %GroupPermissionsChanged;
 
-    if (%GroupPermissionsFromLDAP) {
+    PERMISSIONTYPE:
+    for my $PermissionType ( @{ $ConfigObject->Get('System::Permission') } ) {
 
-        PERMISSIONTYPE:
-        for my $PermissionType ( @{ $ConfigObject->Get('System::Permission') } ) {
+        # get current permission for type
+        my %GroupPermissions = $GroupObject->PermissionUserGroupGet(
+            UserID => $UserID,
+            Type   => $PermissionType,
+        );
 
-            # get current permission for type
-            my %GroupPermissions = $GroupObject->PermissionUserGroupGet(
-                UserID => $UserID,
-                Type   => $PermissionType,
-            );
+        GROUPID:
+        for my $GroupID ( sort keys %SystemGroups ) {
 
-            GROUPID:
-            for my $GroupID ( sort keys %SystemGroups ) {
+            my $OldPermission = $GroupPermissions{$GroupID} ? 1 : 0;
 
-                my $OldPermission = $GroupPermissions{$GroupID} ? 1 : 0;
+            # Set the new permission (from LDAP) if exist, if not set it to a default value
+            #   regularly 0 but it LDAP has rw permission set it to 1 as PermissionUserGroupGet()
+            #   gets all system permissions to 1 if stored permission is rw.
+            my $NewPermission = $GroupPermissionsFromLDAP{$GroupID}->{$PermissionType}
+                || $GroupPermissionsFromLDAP{$GroupID}->{rw} ? 1 : 0;
 
-                # Set the new permission (from LDAP) if exist, if not set it to a default value
-                #   regularly 0 but it LDAP has rw permission set it to 1 as PermissionUserGroupGet()
-                #   gets all system permissions to 1 if stored permission is rw.
-                my $NewPermission = $GroupPermissionsFromLDAP{$GroupID}->{$PermissionType}
-                    || $GroupPermissionsFromLDAP{$GroupID}->{rw} ? 1 : 0;
+            # Skip permission if is identical as in the DB
+            next GROUPID if $OldPermission == $NewPermission;
 
-                # Skip permission if is identical as in the DB
-                next GROUPID if $OldPermission == $NewPermission;
-
-                # Remember the LDAP permission if they are not identical as in the DB.
-                $GroupPermissionsChanged{$GroupID} = $GroupPermissionsFromLDAP{$GroupID};
-            }
+            # Remember the LDAP permission if they are not identical as in the DB.
+            $GroupPermissionsChanged{$GroupID} = $GroupPermissionsFromLDAP{$GroupID};
         }
     }
 
     # update changed group permissions
-    if (%GroupPermissionsChanged) {
+    if (
+        %GroupPermissionsChanged
+        && (
+            $UserSyncGroupsDefinition
+            || $UserSyncAttributeGroupsDefinition
+        )
+        )
+    {
         for my $GroupID ( sort keys %GroupPermissionsChanged ) {
 
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -808,7 +812,12 @@ sub Sync {
     }
 
     # compare role permissions from ldap with current user role permissions and update if necessary
-    if (%RolePermissionsFromLDAP) {
+
+    if (
+        $UserSyncRolesDefinition
+        || $UserSyncAttributeRolesDefinition
+        )
+    {
 
         # get current user roles
         my %UserRoles = $GroupObject->PermissionUserRoleGet(

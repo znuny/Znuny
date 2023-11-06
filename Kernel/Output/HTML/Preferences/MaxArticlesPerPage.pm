@@ -14,8 +14,6 @@ use utf8;
 
 use Kernel::Language qw(Translatable);
 
-use Kernel::System::VariableCheck qw(:all);
-
 our @ObjectDependencies = (
     'Kernel::Language',
     'Kernel::System::AuthSession',

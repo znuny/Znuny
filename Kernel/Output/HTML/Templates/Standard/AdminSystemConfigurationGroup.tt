@@ -7,29 +7,9 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
 
-    <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('System Configuration'),
-                Link => 'AdminSystemConfiguration',
-            },
-        ]
-    %]
-
-    [% FOREACH Item IN Data.Path %]
-        [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfigurationGroup;RootNavigation=' _ Item.Value }) %]
-    [% END %]
-
-    [% FOREACH Item IN Data.Parameters %]
-        [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfiguration;Subaction=' _ Item.Value }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
         [% INCLUDE "SystemConfiguration/Sidebar/Actions.tt" %]
         [% INCLUDE "SystemConfiguration/Sidebar/Navigation.tt" %]
         [% INCLUDE "SystemConfiguration/Sidebar/Help.tt" %]
@@ -37,6 +17,27 @@
     </div>
 
     <div class="ContentColumn">
+
+        <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('System Configuration'),
+                    Link => 'AdminSystemConfiguration',
+                },
+            ]
+        %]
+
+        [% FOREACH Item IN Data.Path %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfigurationGroup;RootNavigation=' _ Item.Value }) %]
+        [% END %]
+
+        [% FOREACH Item IN Data.Parameters %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfiguration;Subaction=' _ Item.Value }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
     [% IF Data.SettingList.size() %]
         [% INCLUDE "SystemConfiguration/SettingsList.tt" %]
     [% ELSE %]
@@ -47,5 +48,4 @@
         </div>
     [% END %]
     </div>
-    <div class="Clear"></div>
 </div>

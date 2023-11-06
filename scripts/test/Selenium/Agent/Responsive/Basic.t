@@ -21,6 +21,7 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         $Selenium->set_window_size( 600, 400 );
 
@@ -36,7 +37,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentDashboard screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentDashboard");
@@ -58,13 +59,6 @@ $Selenium->RunTest(
             "Mobile sidebar toggle should be visible"
         );
 
-        # Check for toolbar visibility.
-        $Self->Is(
-            $Selenium->execute_script("return parseInt(\$('#ToolBar').css('height'), 10)"),
-            0,
-            "Toolbar height should be 0"
-        );
-
         # Expand navigation bar.
         $Selenium->find_element( "#ResponsiveNavigationHandle", "css" )->click();
 
@@ -78,7 +72,8 @@ $Selenium->RunTest(
         );
 
         # Collapse navigation bar again.
-        $Selenium->find_element( "#ResponsiveNavigationHandle", "css" )->click();
+        # The navigation button is not visible anymore, but we can't klick to the side of the element
+        $Selenium->execute_script("return \$('#ResponsiveNavigationHandle').click()");
 
         # Wait for animation has finished.
         sleep 2;
@@ -102,7 +97,8 @@ $Selenium->RunTest(
         );
 
         # Collapse sidebar again.
-        $Selenium->find_element( "#ResponsiveSidebarHandle", "css" )->click();
+        # The navigation button is not visible anymore, but we can't klick to the side of the element
+        $Selenium->execute_script("return \$('#ResponsiveSidebarHandle').click()");
 
         # Wait for animation has finished.
         sleep 2;
@@ -111,56 +107,6 @@ $Selenium->RunTest(
             $Selenium->execute_script("return \$('.ResponsiveSidebarContainer:visible').length"),
             0,
             "Sidebar bar should be hidden again"
-        );
-
-        # Expand toolbar.
-        $Selenium->find_element( "#Logo", "css" )->click();
-        $Selenium->WaitFor( JavaScript => "return parseInt(\$('#ToolBar').css('height'), 10) > 0" );
-        $Self->True(
-            $Selenium->execute_script("return parseInt(\$('#ToolBar').css('height'), 10) > 0"),
-            "Toolbar should be visible"
-        );
-
-        # Wait for animation has finished.
-        sleep 2;
-
-        # While the toolbar is expanded, navigation and sidebar toggle should be hidden.
-        $Self->Is(
-            $Selenium->execute_script("return \$('#ResponsiveNavigationHandle:visible').length"),
-            0,
-            "Mobile navigation toggle should be hidden"
-        );
-
-        # The mobile sidebar toggle should be visible.
-        $Self->Is(
-            $Selenium->execute_script("return \$('#ResponsiveSidebarHandle:visible').length"),
-            0,
-            "Mobile sidebar toggle should be hidden"
-        );
-
-        # Collapse toolbar again.
-        $Selenium->find_element( "#Logo", "css" )->click();
-        $Selenium->WaitFor( JavaScript => "return parseInt(\$('#ToolBar').css('height'), 10) === 0" );
-        $Self->True(
-            $Selenium->execute_script("return parseInt(\$('#ToolBar').css('height'), 10) == 0"),
-            "Toolbar should be hidden again"
-        );
-
-        # Wait for animation has finished.
-        sleep 2;
-
-        # Now that the toolbar is collapsed again, navigation and sidebar toggle should be visible.
-        $Self->Is(
-            $Selenium->execute_script("return \$('#ResponsiveNavigationHandle:visible').length"),
-            1,
-            "Mobile navigation toggle should be visible"
-        );
-
-        # The mobile sidebar toggle should be visible.
-        $Self->Is(
-            $Selenium->execute_script("return \$('#ResponsiveSidebarHandle:visible').length"),
-            1,
-            "Mobile sidebar toggle should be visible"
         );
 
         my $LanguageObject = Kernel::Language->new(

@@ -70,13 +70,13 @@ sub Configure {
 
 Make sure that you have a clean system with a current configuration. No modules may be installed or linked into the system!
 
-    <green>otrs.Console.pl $Name --language de</green>
+    <green>znuny.Console.pl $Name --language de</green>
 
 <yellow>Translating Extension Modules</yellow>
 
 Make sure that you have a clean system with a current configuration. The module that needs to be translated has to be installed or linked into the system, but only this one!
 
-    <green>otrs.Console.pl $Name --language de --module-directory \$PathToDirectory</green>
+    <green>znuny.Console.pl $Name --language de --module-directory \$PathToDirectory</green>
 EOF
 
     return;
@@ -673,6 +673,8 @@ sub WritePerlLanguageFile {
             $HeaderString .= "2012 Znuny GmbH, https://znuny.com/" if $Param{ModuleCopyrightVendor} eq "com";
             $HeaderString .= "2021 Znuny GmbH, https://znuny.org/" if $Param{ModuleCopyrightVendor} eq "org";
         }
+
+        $Param{Module} =~ s/\-//gix;
 
         $NewOut = <<"EOF";
 $Separator

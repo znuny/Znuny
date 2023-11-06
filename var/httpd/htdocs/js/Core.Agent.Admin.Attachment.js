@@ -55,8 +55,15 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 true,
                 [
                     {
-                        Class: 'Primary',
-                        Label: Core.Language.Translate("Confirm"),
+                        Label: Core.Language.Translate("Cancel"),
+                        Type: 'Secondary',
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('#DeleteAttachmentDialog'));
+                        }
+                    },
+                    {
+                        Label: Core.Language.Translate("Delete"),
+                        Type: 'Warning',
                         Function: function() {
                             $('.Dialog .InnerContent .Center').text(Core.Language.Translate("Deleting attachment..."));
                             $('.Dialog .Content .ContentFooter').remove();
@@ -80,12 +87,6 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                             );
                         }
                     },
-                    {
-                        Label: Core.Language.Translate("Cancel"),
-                        Function: function () {
-                            Core.UI.Dialog.CloseDialog($('#DeleteAttachmentDialog'));
-                        }
-                    }
                 ]
             );
             return false;

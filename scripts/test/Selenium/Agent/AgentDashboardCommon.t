@@ -19,8 +19,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         # create test user and login
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -33,7 +34,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my %DashboardOnlineWidgetConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %DashboardOnlineWidgetConfig = $SysConfigObject->SettingGet(
             Name => 'DashboardBackend###0400-UserOnline',
         );
 
@@ -48,7 +49,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AgentDashboard screen
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentDashboard");
@@ -113,7 +114,7 @@ $Selenium->RunTest(
         }
 
         # Refresh the user online widget.
-        $Selenium->execute_script("\$('#Dashboard0400-UserOnline-box .ActionMenu').show();");
+        $Selenium->execute_script("\$('#Dashboard0400-UserOnline-box .ActionMenuList').show();");
         $Selenium->find_element( "#Dashboard0400-UserOnline-box .WidgetAction.Refresh a", "css" )->click();
 
         # We should now have been be redirected to the login screen.

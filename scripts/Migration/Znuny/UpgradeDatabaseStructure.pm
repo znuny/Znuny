@@ -12,6 +12,7 @@ package scripts::Migration::Znuny::UpgradeDatabaseStructure;    ## no critic
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(scripts::Migration::Base);
 
@@ -22,7 +23,7 @@ our @ObjectDependencies = (
 
 =head1 SYNOPSIS
 
-Upgrades the database structure to OTRS 6.
+Upgrades the database structure.
 
 =cut
 
@@ -34,13 +35,36 @@ sub Run {
 
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
-    # TODO: No database upgrade tasks as of now
     my @Tasks = (
-
-        #         {
-        #             Message => 'Create/update table smime_keys',
-        #             Module  => 'SMIMEKeys',
-        #         },
+        {
+            Message => 'Add new activity table',
+            Module  => 'Activity',
+        },
+        {
+            Message => 'Drop table "cloud_service_config".',
+            Module  => 'CloudServiceConfig',
+        },
+        {
+            Message =>
+                'Add new column "color" to table "ticket_priority" and also add a default value for initial priorities.',
+            Module => 'PriorityColor',
+        },
+        {
+            Message => 'Add new column color to ticket_state table and also add a default value for initial states.',
+            Module  => 'StateColor',
+        },
+        {
+            Message => 'Update table smime_keys',
+            Module  => 'SMIME',
+        },
+        {
+            Message => 'Increase size of column of database table calendar_appointment_plugin',
+            Module  => 'CalendarAppointmentID',
+        },
+        {
+            Message => 'Increase size of columns of database table generic_agent_jobs',
+            Module  => 'GenericAgentJobs',
+        },
     );
 
     return 1   if !@Tasks;

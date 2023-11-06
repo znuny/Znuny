@@ -79,9 +79,8 @@ sub IsSupported {
         Payload => {
 
             # arbitrary data
-            Subject => '...',
+            Subject       => '...',
             SomeOtherData => {
-
                 # ...
             },
         },
@@ -237,7 +236,7 @@ sub Encode {
         CryptJWTParameters => {
 
             # see https://metacpan.org/pod/Crypt::JWT#decode_jwt
-            '...' => '...',
+            # '...' => '...',
 
             # ...
         },

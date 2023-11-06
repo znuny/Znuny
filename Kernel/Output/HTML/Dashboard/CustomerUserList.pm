@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use parent qw(Kernel::Output::HTML::Dashboard::Base);
 
 our $ObjectManagerDisabled = 1;
 
@@ -37,7 +38,7 @@ sub new {
 
     $Self->{PrefKey} = 'UserDashboardPref' . $Self->{Name} . '-Shown';
 
-    $Self->{PageShown} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKey} }
+    $Self->{PageShown} = $Param{PageShown} || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKey} }
         || $Self->{Config}->{Limit};
 
     $Self->{StartHit} = int( $ParamObject->GetParam( Param => 'StartHit' ) || 1 );
@@ -83,6 +84,88 @@ sub Config {
     );
 }
 
+=head2 Header()
+
+Returns additional header content of dashboard (HTML).
+
+    my $Header = $Object->Header();
+
+Returns:
+
+    my $Header = 1;
+
+=cut
+
+sub Header {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+
+    $LayoutObject->Block(
+        Name => 'HeaderCustomerUserList',
+        Data => {
+            %Param,
+        },
+    );
+
+    # show change customer relations button if the agent has permission
+    my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
+        Action => 'AdminCustomerUserCustomer',
+        Type   => 'rw',
+    );
+
+    if ($ChangeCustomerReleationsAccess) {
+        $LayoutObject->Block(
+            Name => 'ContentLargeCustomerIDAdd',
+            Data => {
+                CustomerID => $Param{CustomerID},
+            },
+        );
+    }
+
+    # Show add new customer button if:
+    #   - The agent has permission to use the module
+    #   - There are writable customer backends
+    my $AddAccess;
+
+    TYPE:
+    for my $Permission (qw(ro rw)) {
+        $AddAccess = $LayoutObject->Permission(
+            Action => 'AdminCustomerUser',
+            Type   => $Permission,
+        );
+        last TYPE if $AddAccess;
+    }
+
+    # Get writable data sources.
+    my %CustomerSource = $CustomerUserObject->CustomerSourceList(
+        ReadOnly => 0,
+    );
+
+    if ( $AddAccess && scalar keys %CustomerSource ) {
+        $LayoutObject->Block(
+            Name => 'ContentLargeCustomerUserAdd',
+            Data => {
+                CustomerID => $Self->{CustomerID},
+            },
+        );
+
+        $Self->{EditCustomerPermission} = 1;
+    }
+
+    my $Header = $LayoutObject->Output(
+        TemplateFile => 'AgentDashboardCustomerUserList',
+        Data         => {
+            %{ $Self->{Config} },
+            Name => $Self->{Name},
+        },
+        AJAX => $Param{AJAX},
+    );
+
+    return $Header;
+}
+
 sub Run {
     my ( $Self, %Param ) = @_;
 
@@ -110,6 +193,13 @@ sub Run {
 
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $LayoutObject->Block(
+        Name => 'ContentCustomerUserList',
+        Data => {
+            %Param,
+        },
+    );
 
     my $LinkPage = 'Subaction=Element;Name='
         . $Self->{Name} . ';'
@@ -167,51 +257,6 @@ sub Run {
         }
     }
 
-    # show change customer relations button if the agent has permission
-    my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
-        Action => 'AdminCustomerUserCustomer',
-        Type   => 'rw',
-    );
-
-    if ($ChangeCustomerReleationsAccess) {
-        $LayoutObject->Block(
-            Name => 'ContentLargeCustomerIDAdd',
-            Data => {
-                CustomerID => $Param{CustomerID},
-            },
-        );
-    }
-
-    # Show add new customer button if:
-    #   - The agent has permission to use the module
-    #   - There are writable customer backends
-    my $AddAccess;
-
-    TYPE:
-    for my $Permission (qw(ro rw)) {
-        $AddAccess = $LayoutObject->Permission(
-            Action => 'AdminCustomerUser',
-            Type   => $Permission,
-        );
-        last TYPE if $AddAccess;
-    }
-
-    # Get writable data sources.
-    my %CustomerSource = $CustomerUserObject->CustomerSourceList(
-        ReadOnly => 0,
-    );
-
-    if ( $AddAccess && scalar keys %CustomerSource ) {
-        $LayoutObject->Block(
-            Name => 'ContentLargeCustomerUserAdd',
-            Data => {
-                CustomerID => $Self->{CustomerID},
-            },
-        );
-
-        $Self->{EditCustomerPermission} = 1;
-    }
-
     # get the permission for the phone ticket creation
     my $NewAgentTicketPhonePermission = $LayoutObject->Permission(
         Action => 'AgentTicketPhone',
@@ -251,110 +296,6 @@ sub Run {
                 CustomerListEntry      => $CustomerIDs->{$CustomerKey},
             },
         );
-
-        if ( $ConfigObject->Get('ChatEngine::Active') ) {
-
-            # Check if agent has permission to start chats with the customer users.
-            my $EnableChat = 1;
-            my $ChatStartingAgentsGroup
-                = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatStartingAgents') || 'users';
-            my $ChatStartingAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-                UserID    => $Self->{UserID},
-                GroupName => $ChatStartingAgentsGroup,
-                Type      => 'rw',
-            );
-
-            if ( !$ChatStartingAgentsGroupPermission ) {
-                $EnableChat = 0;
-            }
-            if (
-                $EnableChat
-                && !$ConfigObject->Get('ChatEngine::ChatDirection::AgentToCustomer')
-                )
-            {
-                $EnableChat = 0;
-            }
-
-            if ($EnableChat) {
-                my $VideoChatEnabled = 0;
-                my $VideoChatAgentsGroup
-                    = $ConfigObject->Get('ChatEngine::PermissionGroup::VideoChatAgents') || 'users';
-                my $VideoChatAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-                    UserID    => $Self->{UserID},
-                    GroupName => $VideoChatAgentsGroup,
-                    Type      => 'rw',
-                );
-
-                # Enable the video chat feature if system is entitled and agent is a member of configured group.
-                if ($VideoChatAgentsGroupPermission) {
-                    if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::VideoChat', Silent => 1 ) )
-                    {
-                        $VideoChatEnabled = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled();
-                    }
-                }
-
-                my $CustomerEnableChat = 0;
-                my $ChatAccess         = 0;
-                my $VideoChatAvailable = 0;
-                my $VideoChatSupport   = 0;
-
-                # Default status is offline.
-                my $UserState            = Translatable('Offline');
-                my $UserStateDescription = $LayoutObject->{LanguageObject}->Translate('User is currently offline.');
-
-                my $CustomerChatAvailability = $Kernel::OM->Get('Kernel::System::Chat')->CustomerAvailabilityGet(
-                    UserID => $CustomerKey,
-                );
-
-                my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
-
-                my %CustomerUser = $CustomerUserObject->CustomerUserDataGet(
-                    User => $CustomerKey,
-                );
-                $CustomerUser{UserFullname} = $CustomerUserObject->CustomerName(
-                    UserLogin => $CustomerKey,
-                );
-                $VideoChatSupport = 1 if $CustomerUser{VideoChatHasWebRTC};
-
-                if ( $CustomerChatAvailability == 3 ) {
-                    $UserState            = Translatable('Active');
-                    $CustomerEnableChat   = 1;
-                    $UserStateDescription = $LayoutObject->{LanguageObject}->Translate('User is currently active.');
-                    $VideoChatAvailable   = 1;
-                }
-                elsif ( $CustomerChatAvailability == 2 ) {
-                    $UserState          = Translatable('Away');
-                    $CustomerEnableChat = 1;
-                    $UserStateDescription
-                        = $LayoutObject->{LanguageObject}->Translate('User was inactive for a while.');
-                }
-
-                $LayoutObject->Block(
-                    Name => 'ContentLargeCustomerUserListRowUserStatus',
-                    Data => {
-                        %CustomerUser,
-                        UserState            => $UserState,
-                        UserStateDescription => $UserStateDescription,
-                    },
-                );
-
-                if (
-                    $CustomerEnableChat
-                    && $ConfigObject->Get('Ticket::Agent::StartChatWOTicket')
-                    )
-                {
-                    $LayoutObject->Block(
-                        Name => 'ContentLargeCustomerUserListRowChatIcons',
-                        Data => {
-                            %CustomerUser,
-                            VideoChatEnabled   => $VideoChatEnabled,
-                            VideoChatAvailable => $VideoChatAvailable,
-                            VideoChatSupport   => $VideoChatSupport,
-                        },
-                    );
-                }
-            }
-        }
 
         # get ticket object
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');

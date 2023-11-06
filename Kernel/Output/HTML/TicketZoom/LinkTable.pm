@@ -75,10 +75,15 @@ sub Run {
         TemplateFile => 'AgentTicketZoom/LinkTable',
         Data         => {},
     );
+
+    my $Config = $Param{Config};
+    my $Rank   = '0300';
+    $Rank = $Config->{Rank} if exists $Config->{Rank} && defined $Config->{Rank};
+
     return {
         Location => $Location,
         Output   => $Output,
-        Rank     => '0300',
+        Rank     => $Rank,
     };
 }
 

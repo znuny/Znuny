@@ -13,8 +13,6 @@ package Kernel::System::SysConfig::ValueType::PerlModule;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 use parent qw(Kernel::System::SysConfig::BaseValueType);
 
 our @ObjectDependencies = (
@@ -346,7 +344,7 @@ Generate HTML for new array/hash item.
 Returns:
 
     $HTML = '<select class="Modernize" id="SettingName" name="SettingName" title="SettingName">
-        ...
+        # ...
         </select>';
 
 =cut

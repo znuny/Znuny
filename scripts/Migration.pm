@@ -15,7 +15,6 @@ use strict;
 use warnings;
 
 use Time::HiRes ();
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::System::Main',
@@ -221,11 +220,10 @@ sub _TasksGet {
             Message => 'Check if database has been backed up',
             Module  => 'scripts::Migration::Base::DatabaseBackupCheck',
         },
-
-        #         {
-        #             Message => 'Upgrade database structure',
-        #             Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
-        #         },
+        {
+            Message => 'Upgrade database structure',
+            Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
+        },
         {
             Message => 'Rebuild configuration',
             Module  => 'scripts::Migration::Base::RebuildConfig',
@@ -249,6 +247,14 @@ sub _TasksGet {
         {
             Message => 'Integrate Znuny-NoteToLinkedTicket',
             Module  => 'scripts::Migration::Znuny::IntegrateZnunyNoteToLinkedTicket',
+        },
+        {
+            Message => 'Migrate groups',
+            Module  => 'scripts::Migration::Znuny::MigrateGroups',
+        },
+        {
+            Message => 'Cleanup orphaned mentions',
+            Module  => 'scripts::Migration::Znuny::CleanupOrphanedMentions',
         },
 
         # NOTE: UninstallMergedPackages has to be called only after

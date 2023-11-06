@@ -27,7 +27,7 @@ $HelperObject->ConfigSettingChange(
     Key   => 'DBCRUDTest::EventModulePost###000-UnitTestAdd',    # setting name
     Value => {
         'Module' => 'Kernel::System::UnitTest::DBCRUD::Event::DBCRUD',
-        'Event'  => '.*(Add|Update|Get|Search|Delete)',
+        'Event'  => 'DBCRUD(.+)',
     },
 );
 
@@ -105,7 +105,7 @@ for my $User (@Users) {
     );
 
     $Self->True(
-        scalar $ConfigObject->{UnitTestDBCRUD}->{DBCRUDTestAdd},
+        scalar $ConfigObject->{UnitTestDBCRUD}->{DBCRUDAdd},
         'DataAdd() - event got executed',
     );
 
@@ -120,7 +120,7 @@ for my $User (@Users) {
         'DataGet() - get user "' . $User->{Name} . '"',
     );
     $Self->True(
-        scalar $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDTestGet},
+        scalar $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDGet},
         'DataGet() - event got executed',
     );
 
@@ -175,7 +175,7 @@ $Self->Is(
     'DataListGet() - count list',
 );
 $Self->True(
-    scalar $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDTestListGet},
+    scalar $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDListGet},
     'DataListGet() - event got executed',
 );
 
@@ -202,7 +202,7 @@ $Self->Is(
     'DataSearch() - count list',
 );
 $Self->True(
-    scalar $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDTestSearch},
+    scalar $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDSearch},
     'DataSearch() - event got executed',
 );
 
@@ -266,7 +266,7 @@ $Self->True(
     'DataDelete() - delete user with undefined age, must not delete any test user',
 );
 $Self->True(
-    $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDTestDelete},
+    $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDDelete},
     'DataDelete() - event got executed',
 );
 
@@ -292,7 +292,7 @@ $Self->True(
     'DataDelete() - delete user with age 21',
 );
 $Self->True(
-    $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDTestDelete},
+    $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDDelete},
     'DataDelete() - event got executed',
 );
 
@@ -364,7 +364,7 @@ for my $User (@Search) {
         "DataUpdate() - update $User->{Name} to age 50",
     );
     $Self->True(
-        scalar $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDTestUpdate},
+        scalar $ConfigObject->{'UnitTestDBCRUD'}->{DBCRUDUpdate},
         'DataUpdate() - event got executed',
     );
 

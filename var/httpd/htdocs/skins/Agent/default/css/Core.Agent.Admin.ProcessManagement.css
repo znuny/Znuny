@@ -43,111 +43,118 @@ a.Print span {
     margin-left: 5px;
 }
 
-.AvailableIn {
-    background-color: #ccc;
-    color: #555;
-    display: inline-block;
-    font-size: 10px !important;
-    height: 13px;
-    line-height: 100%;
-    margin-right: 2px;
-    min-width: 8px;
-    padding: 4px 4px 0px 4px;
+.Icon.icon-hover,
+.Icon.icon-hover-md,
+.Icon.icon-hover-sm {
+    margin: auto;
+    width: 25px;
+    height: 25px;
+    display: flex;
 }
 
-.AllocationList .AvailableIn {
+.AvailableIn {
+    background-color: var(--gray-dark);
+    color: var(--white);
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-xs);
+    border-radius: var(--border-radius-xxs);
+    /*font-family: 'Inter'*/
+    font-size: 11px;
+    font-weight: var(--medium);
+}
+
+.DiagramTooltip .AvailableIn {
+    height: 100%;
+    align-items: baseline;
+}
+
+/*.AllocationList .AvailableIn {
     float: left;
     margin-right: 5px;
     margin-top: 1px;
-}
+}*/
 
 
 /**
  * @subsubsection     Process Element Accordion
  */
 ul#ProcessElements {
-    border: 1px solid #CCC;
+    border: var(--border-width) var(--border-solid) #D6D6E0;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
 }
 
-ul#ProcessElements * {
+/*ul#ProcessElements * {
     font-size: 11px;
-}
-
-ul#ProcessElements i {
-    font-size: 13px;
-}
+}*/
 
 ul#ProcessElements li.AccordionElement h2 {
-    margin-bottom: 0px;
-    border: 1px solid #FFF;
-    border-bottom: 1px solid #CCC;
+    border-bottom: var(--border-width) var(--border-solid) #D6D6E0;
+    background: var(--main-bg-color);
+    margin-bottom: 0;
 }
 
 ul#ProcessElements li.AccordionElement h2 a {
-    padding: 5px 5px 5px 20px;
-    color: #999;
-    font-size: 12px;
     position: relative;
-}
-
-ul#ProcessElements li.AccordionElement h2 a span {
-    display: block;
-    width: 12px;
-    height: 12px;
-    position: absolute;
-    left: 6px;
-    top: 4px;
-    opacity: 0.3;
-    filter: Alpha(opacity=30);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--padding-sm) var(--padding-lg);
+    font-size: 14px;
+    /*font-family: 'Inter';*/
+    font-weight: var(--semi-bold);
+    line-height: 150%;
+    color: var(--black);
 }
 
 ul#ProcessElements li.AccordionElement h2 a span i {
-    color: #333;
-    font-size: 15px;
-    display: block;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-dark);
+    font-size: var(--font-size-lg);
 }
 
-ul#ProcessElements li.AccordionElement h2 a span i.fa-caret-down,
-ul#ProcessElements li.AccordionElement.Active h2 a span i.fa-caret-right {
-    display: none;
-}
-
-ul#ProcessElements li.AccordionElement.Active h2 a span i.fa-caret-down {
-    display: inline-block;
-}
-
-ul#ProcessElements li.AccordionElement.Active h2 a {
-    color: #000;
+ul#ProcessElements li.AccordionElement.Active h2 a span i {
+    transform: rotate(180deg);
 }
 
 ul#ProcessElements li.AccordionElement.Active h2 a span {
     opacity: 1.0;
     filter: Alpha(opacity=100);
     background-position: bottom center;
-    top: 5px;
 }
 
 ul#ProcessElements li.AccordionElement.Active {
-    background-color: #fff;
+    background-color: var(--white);
 }
 
 ul#ProcessElements li.AccordionElement div.Content {
-    border: 1px solid #FFF;
-    border-bottom: 1px solid #CCC;
-    background-color: #FFF;
-    padding: 5px;
+    border-bottom: var(--border-width) var(--border-solid) #D6D6E0;
+    border-top: 0;
+    background-color: var(--white);
+    padding: var(--padding-sm);
     display: none;
 }
 
-ul#ProcessElements li.AccordionElement div.Content .ProcessElementFilter {
-    width: 190px;
-    margin-top: 1px;
-    margin-bottom: -5px;
+ul#ProcessElements li.AccordionElement div.Content .flex-row {
+    align-items: center;
+    gap: var(--gap-xs);
+    padding-bottom: var(--padding-sm);
+}
+
+ul#ProcessElements li.AccordionElement div.Content .TableFilterContainer {
+    width: 100%;
 }
 
 ul#ProcessElements li.AccordionElement.Active div.Content {
-    display: block;
+    display: flex;
+    flex-flow: column;
+    gap: unset;
 }
 
 ul#ProcessElements li.AccordionElement:last-child div.Content {
@@ -163,16 +170,25 @@ ul#ProcessElements li.AccordionElement.Active:last-child h2 {
 }
 
 ul#ProcessElements li.AccordionElement div.Content ul {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    max-height: 150px;
+    max-height: 250px;
     overflow-y: auto;
+    border-radius: var(--border-radius-sm);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    margin-bottom: var(--margin-sm);
 }
 
 ul#ProcessElements li.AccordionElement div.Content ul li {
-    padding: 2px 5px 2px 5px;
+    display: flex;
+    align-items: center;
+    /*font-family: 'Inter';*/
+    font-size: var(--font-size-sm);
+    font-weight: var(--normal);
+    padding: 12px var(--padding-sm);
     position: relative;
     cursor: default;
+    line-height: 24px;
+    letter-spacing: .1px;
+    justify-content: space-between;
 }
 
 ul#ProcessElements li.AccordionElement div.Content ul li.OneRow {
@@ -188,23 +204,18 @@ ul#ProcessElements li.AccordionElement div.Content ul li.OneRow.NotInScope {
 }
 
 ul#ProcessElements li.AccordionElement div.Content ul li > span {
-    position: absolute;
-    right: 5px;
-    top: 2px;
+    display: flex;
+    align-items: center;
 }
 
 ul#ProcessElements li.AccordionElement div.Content ul li > span a {
-    color: #777;
-    line-height: 100%;
-    vertical-align: middle;
-    margin-left: 2px;
+    display: flex;
+    align-items: center;
 }
 
-ul#ProcessElements li.AccordionElement div.Content .ProcessElementButton {
-    width: 234px;
-    display: block;
-    margin: -5px auto 2px auto;
-}
+/*ul#ProcessElements li.AccordionElement div.Content ul li > span a:hover i {
+    color: var(--gray-darker);
+}*/
 
 .EntityDrag {
     display: block;
@@ -213,38 +224,36 @@ ul#ProcessElements li.AccordionElement div.Content .ProcessElementButton {
     border: 1px solid #CCC;
 }
 
-.ScopeFilter {
+/*.ScopeFilter {
     margin-left: 1em;
     vertical-align: baseline;
-}
+}*/
 
 /**
  * @subsubsection     Diagram Canvas
  */
 
 #Canvas {
-    width: 95%;
     position: relative;
 }
 
 .CanvasActions {
-    position: absolute;
-    right: 10px;
-    top: 2px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    right: 30px;
     overflow: hidden;
-}
-
-.CanvasActions a {
-    float: left;
-    width: 20px;
-    height: 20px;
-    opacity: 0.4;
+    gap: var(--gap-sm);
+    z-index: 1;
 }
 
 .CanvasActions a#ShowEntityIDs {
-    width: auto;
-    opacity: 1.0;
-    margin: 4px 10px 0px 0px;
+    margin-right: var(--margin-sm);
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: var(--semi-bold);
+    letter-spacing: .2px;
 }
 
 .CanvasActions a:hover {
@@ -253,53 +262,60 @@ ul#ProcessElements li.AccordionElement div.Content .ProcessElementButton {
 
 .CanvasActions a#ExtendCanvasHeight,
 .CanvasActions a#ExtendCanvasWidth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 15px;
-    color: #555;
-    margin-top: 2px;
-    margin-left: 5px;
+    color: var(--gray-dark-semi);
 }
 
 #DiagramTooltip {
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    background-color: #fff;
+    border: var(--border-width) var(--border-solid) #D6D6E0;
+    border-radius: var(--border-radius-xs);
+    background-color: var(--white);
     width: 200px;
-    opacity: 0.9;
+    opacity: 0.85;
     position: absolute;
     z-index: 999;
 }
 
 #DiagramTooltip h4 {
-    border-bottom: 1px solid #aaa;
-    padding: 7px 10px 5px 10px;
-    margin-bottom: 5px;
-    background-color: #f6f6f6;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-bottom: var(--border-width) var(--border-solid) #D6D6E0;
+    padding: var(--padding-xs) var(--padding-sm);
+    margin-bottom: 0;
+    background-color: var(--main-bg-color);
     border-radius: 5px 5px 0px 0px;
 }
 
 #DiagramTooltip ul {
-    padding: 5px 7px 3px 7px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-xs) var(--padding-sm);
     overflow: hidden;
+    width: 100%;
+    gap: var(--gap-xs);
 }
 
 #DiagramTooltip li {
-    display: block;
-    float: left;
-    background-color: #ddd;
-    padding: 5px 7px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    font-size: 11px;
-    line-height: 110%;
+    display: flex;
+    align-items: center;
+    background-color: #E8E8E8;
+    padding: 2px 4px;
+    font-size: var(--font-size-xs);
+    line-height: 150%;
+    border-radius: var(--border-radius-xxs);
+    font-weight: var(--medium);
+    gap: var(--gap-xs);
+    width: 100%;
 }
 
 #DiagramTooltip li .AvailableIn {
-    float: left;
+    /*float: left;
     margin: -2px 5px -2px -6px;
     background-color: #999;
-    color: #fff;
+    color: #fff;*/
 }
 
 #DiagramTooltip li.NoDialogsAssigned {
@@ -318,19 +334,17 @@ ul#ProcessElements li.AccordionElement div.Content .ProcessElementButton {
 
 .DiagramDeleteLink a,
 .DiagramEditLink a {
-    background: #FFFFFF;
-    border: 1px solid #AAAAAA;
-    border-radius: 13px;
-    display: block;
-    font-family: tahoma;
+    background: var(--white);
+    border: var(--border-width) var(--border-solid) #D6D6E0;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 12px;
-    line-height: 19px;
-    vertical-align: middle;
     font-weight: bold;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    color: #aaa;
+    height: 24px;
+    width: 24px;
+    color: #646473;
 }
 
 .DiagramDeleteLink a:hover,
@@ -373,19 +387,19 @@ ul#ProcessElements li.AccordionElement div.Content .ProcessElementButton {
 em.EntityID {
     position: absolute;
     background: #FF9922;
-    border-radius: 2px;
     display: block;
     font-family: tahoma;
     font-size: 10px;
     white-space: nowrap;
     padding: 3px 4px;
     text-align: center;
-    color: #fff;
+    color: var(--white);
     font-style: normal;
     top: -25px;
     width: 290px;
     left: 50%;
     margin-left: -149px;
+    border-radius: var(--border-radius-xs);
 }
 
 em.EntityID input {
@@ -576,10 +590,39 @@ em.EntityID:after {
     margin-top: 15px;
 }
 
+
 #TransitionForm .WidgetSimple .WidgetSimple {
-    margin-top: 10px;
+    margin-top: var(--margin-lg);
+    background: var(--main-bg-color);
 }
 
+#TransitionForm .WidgetSimple.FieldWidget fieldset,
+#TransitionForm .WidgetSimple #ConfigParams fieldset {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding: 0;
+    padding-top: var(--padding-md);
+}
+
+#TransitionForm .WidgetSimple.FieldWidget fieldset.padding-right,
+#TransitionForm .WidgetSimple #ConfigParams fieldset.padding-right {
+    padding-right: 38px;
+}
+
+#TransitionForm .WidgetSimple.FieldWidget fieldset:nth-child(1),
+#TransitionForm .WidgetSimple #ConfigParams fieldset:nth-child(1) {
+    padding-top: 0;
+}
+
+#TransitionForm .WidgetSimple.FieldWidget fieldset > .RemoveButton,
+#TransitionForm .WidgetSimple #ConfigParams fieldset > .RemoveButton {
+    /*top: 11px;*/
+    align-self: end;
+    position: relative;
+}
+
+/*
 #TransitionForm .WidgetSimple .WidgetSimple + .WidgetSimple {
     margin-top: -5px;
 }
@@ -621,7 +664,7 @@ em.EntityID:after {
 
 #TransitionForm #ConfigParams input + label {
     margin-left: 5px;
-}
+}*/
 
 /**
  * @subsubsection     Path popup
@@ -629,65 +672,75 @@ em.EntityID:after {
 
 ul.Path {
     overflow: hidden;
-    padding: 10px 0px;
-    width: 620px;
-    margin-left: 160px;
+    padding: var(--padding-sm) 0px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 ul.Path li {
     width: 130px;
+    min-height: 100px;
     line-height: 120%;
-    float: left;
-    position: relative;
     text-align: center;
-    padding: 30px 10px;
+    padding: var(--padding-xxl) var(--padding-sm);
     min-height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 8px;
 }
 
 ul.Path li.Transition {
     width: 230px;
-    margin-left: 0px;
-    padding: 30px 0px;
+    margin-left: -14px;
+    padding: var(--padding-xxl) 0;
 }
 
-ul.Path li.StartActivity, ul.Path li.EndActivity {
-    background-color: #e5e5e5;
-    border: 1px solid #444;
-    border-radius: 5px;
-    margin: 0px 20px;
-    position: relative;
+ul.Path li.StartActivity,
+ul.Path li.EndActivity {
+    background-color: var(--white);
+    border: 1px solid gray;
+    border-radius: var(--border-radius-sm);
     z-index: 2;
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+ul.Path li.StartActivity + i,
+ul.Path li.EndActivity + i {
+    position: relative;
+    top: -28px;
+    left: -110px;
+    font-size: var(--font-size-md);
+    z-index: 2;
 }
 
 ul.Path li select {
     width: 180px;
     position: absolute;
-    top: 30px;
     left: 50%;
-    margin-left: -90px;
+    margin-left: -88px;
     z-index: 2;
 }
 
 ul.Path li.Transition span {
-    display: block;
-    position: absolute;
     z-index: 1;
     width: 270px;
-    border-top: 1px solid #444;
-    height: 2px;
-    left: -20px;
-    top: 38px;
+    height: 3px;
+    background: black;
 }
 
 #EditPath {
     position: relative;
-    height: 30px;
+    display: flex;
+    justify-content: center;
 }
 
-#EditPath a {
+/*#EditPath a {
     width: 180px;
     height: 30px;
     line-height: 30px;
@@ -696,7 +749,7 @@ ul.Path li.Transition span {
     left: 50%;
     margin-left: -90px;
     top: -20px;
-}
+}*/
 
 /**
  * @subsubsection     Popup Result
@@ -895,9 +948,11 @@ div.AJAXWaiting {
     line-height: 130%;
 }
 
-ul#ProcessElements .fa-globe {
-    margin: 3px 3px 2px 3px;
-    vertical-align: text-bottom;
+ul#ProcessElements .fa-globe,
+ul#ProcessElements > li a > i {
+    font-size: var(--main-font-size);
+    /*color: var(--gray-dark-semi);*/
 }
 
 }/* end @media */
+}

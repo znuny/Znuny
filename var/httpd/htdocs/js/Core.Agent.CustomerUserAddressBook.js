@@ -59,7 +59,7 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
                     // If there's no input element with the selected name
                     // find the next "select" element and use that one for checking
                     if (!$Element.length) {
-                        $Element = $(this).next().find('select');
+                        $Element = $(this).parent().next().find('select');
                     }
                     if ($Element.length) {
                         if ($Element.val() && $Element.val() !== '') {
@@ -69,7 +69,7 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
             }
         });
         if (!SearchValueFlag) {
-           alert(Core.Language.Translate('Please enter at least one search value or * to find anything.'));
+            alert(Core.Language.Translate('Please enter at least one search value or * to find anything.'));
         }
         return SearchValueFlag;
     }
@@ -295,11 +295,14 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
      *      This function init the recipient selection.
      */
     TargetNS.InitRecipientSelection = function () {
-        var InitialRecipients = Core.JSON.Parse($('#RecipientSelectedJSON').val());
+        var InitialRecipients = Core.JSON.Parse($('#RecipientSelectedJSON').val()),
+            RecipientSelectString;
 
         // Add the current field label and move recipient selection button in the dialog footer
         //  for the result view, to have the same view in all dialog widgets.
-        $('#RecipientSelect span').append(' ' +  $('#RecipientFieldLabel').val() + ' (' + Object.keys(InitialRecipients).length + ')');
+        RecipientSelectString = Core.Language.Translate('Insert selected customer user(s) into the "%s:" field.', $('#RecipientFieldLabel').val());
+
+        $('#RecipientSelect span').text(RecipientSelectString);
         $('.Dialog .Footer', parent.document).html($('.RecipientButton').html());
         $('.RecipientButton').remove();
 
@@ -416,7 +419,7 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
      * @memberof Core.Agent.CustomerUserAddressBook
      * @function
      * @description
-     *      This function init the customer user adress book search dialog or the result screen.
+     *      This function init the customer user address book search dialog or the result screen.
      */
     TargetNS.Init = function () {
         var ShowSearchDialog = Core.Config.Get('ShowSearchDialog');

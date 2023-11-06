@@ -78,12 +78,12 @@ sub new {
 Create a new queue element.
 
     my $Result = $MailQueue->Create(
-        ArticleID       => '...', # optional
-        MessageID       => '...', # optional (in case article id was passed this should be also)
-        Sender          => '...',
-        Recipient       => '...' || [],
-        Message         => '...',
-        Attempts        => '...', # optional
+        ArticleID => '...',         # optional
+        MessageID => '...',         # optional (in case article id was passed this should be also)
+        Sender    => '...',
+        Recipient => '...' || [],
+        Message   => '...',
+        Attempts  => '...',         # optional
     );
 
 Returns 1 or undef.
@@ -267,28 +267,28 @@ sub Create {
 Get a list of the queue elements.
 
     my $List = $MailQueue->List(
-        ID              => '...', # optional
-        ArticleID       => '...', # optional
-        Sender          => '...', # optional
-        Recipient       => '...', # optional
-        Attempts        => '...', # optional
+        ID        => '...', # optional
+        ArticleID => '...', # optional
+        Sender    => '...', # optional
+        Recipient => '...', # optional
+        Attempts  => '...', # optional
     );
 
 This returns something like:
 
     my $List = [
         {
-            ID                        => '...',
-            ArticleID                 => '...',
-            Attempts                  => '...',
-            Sender                    => '...',
-            Recipient                 => ['...'],
-            Message                   => '...',
-            DueTime                   => '...',
-            LastSMTPCode              => '...',
-            LastSMTPMessage           => '...',
+            ID              => '...',
+            ArticleID       => '...',
+            Attempts        => '...',
+            Sender          => '...',
+            Recipient       => ['...'],
+            Message         => '...',
+            DueTime         => '...',
+            LastSMTPCode    => '...',
+            LastSMTPMessage => '...',
         },
-        ...,
+        # ...
     ]
 
 =cut
@@ -369,22 +369,22 @@ sub List {
 Get a queue element.
 
     my $Item = $MailQueue->Get(
-        ID              => '...' # optional
-        ArticleID       => '...' # optional
+        ID        => '...', # optional
+        ArticleID => '...', # optional
     );
 
 This returns something like:
 
     $Item = {
-        ID                        => '...',
-        ArticleID                 => '...',
-        Attempts                  => '...',
-        Sender                    => '...',
-        Recipient                 => ['...'],
-        Message                   => '...',
-        DueTime                   => '...',
-        LastSMTPCode              => '...',
-        LastSMTPMessage           => '...',
+        ID              => '...',
+        ArticleID       => '...',
+        Attempts        => '...',
+        Sender          => '...',
+        Recipient       => ['...'],
+        Message         => '...',
+        DueTime         => '...',
+        LastSMTPCode    => '...',
+        LastSMTPMessage => '...',
     };
 
 or and empty hashref if element not found.
@@ -520,7 +520,7 @@ sub Update {
 Delete queue elements.
 
     my $Result = $MailQueue->Delete(
-        %Filters,                       # See _FiltersSQLAndBinds
+        %Filters,       # See _FiltersSQLAndBinds
     );
 
 Returns 1 or undef.
@@ -587,11 +587,11 @@ sub Delete {
 Send/Process a mail queue element/item.
 
     my $List = $MailQueue->Send(
-        ID              => '...',
-        Sender          => '...',
-        Recipient       => '...',
-        Message         => '...',
-        Force           => '...' # optional, to force the sending even if isn't time
+        ID        => '...',
+        Sender    => '...',
+        Recipient => '...',
+        Message   => '...',
+        Force     => '...',     # optional, to force the sending even if isn't time
     );
 
 This returns something like:
@@ -708,10 +708,10 @@ triggers a Event Notification.
 
     my $Result = $Object->_SendSuccess(
         Item => {
-            ID                        => ...,
-            ArticleID                 => ..., # optional
-            UserID                    => ...,
-            CommunicationLogObject    => ...,
+            ID                     => ...,
+            ArticleID              => ...,  # optional
+            UserID                 => ...,
+            CommunicationLogObject => ...,
         }
     );
 
@@ -804,8 +804,8 @@ Situations where the mail queue item is deleted:
     - reached maximum attempts
 
     $Object->_SendError(
-        Item       => ...,
-        SendResult => ...,
+        Item       => '...',
+        SendResult => '...',
     );
 
 This always returns undef.
@@ -969,12 +969,12 @@ Creates or Updates the Article Transmission Error record with the error message.
 Then, fires a Notification Event.
 
     my $Result = $Object->_SetArticleTransmissionError(
-        ArticleID                 => ...,
-        Message                   => ...,
-        MessageID                 => ...,
-        UserID                    => ...,
-        ForceUpdate               => ...,
-        CommunicationLogObject    => ...,
+        ArticleID              => 123,
+        Message                => '...',
+        MessageID              => 123,
+        UserID                 => 1,
+        ForceUpdate            => '...',
+        CommunicationLogObject => '...',
     );
 
 Returns 1 or undef.
@@ -1094,17 +1094,17 @@ sub _SetArticleTransmissionError {
 Formats a Notification and asks Event Handler to send it.
 
     my $Result = $Object->_SendEventNotification(
-        ArticleID => ...,
+        ArticleID => 123,
         Status    => "Queued|Sent|Error",
-        Message   => ...,
-        UserID    => ...,
+        Message   => '...',
+        UserID    => 1,
     );
 
 This returns something like:
 
     my $Result = {
         Status  => 'Failed',
-        Message => 'Need ArticleID'
+        Message => 'Need ArticleID',
     };
 
 in case of missing or invalid arguments, or the status of the EventHandler call.
@@ -1155,12 +1155,12 @@ sub _SendEventNotification {
 Build the filter sql and associated binds.
 
     my ( $FilterSQL, $Binds ) = $MailQueue->_FiltersSQLAndBinds(
-        ID              => '...', # optional
-        ArticleID       => '...', # optional
-        CommunicationID => '...', # optional
-        Sender          => '...', # optional
-        Recipient       => '...', # optional
-        Attempts        => '...', # optional
+        ID              => 1,       # optional
+        ArticleID       => 123,     # optional
+        CommunicationID => 123,     # optional
+        Sender          => '...',   # optional
+        Recipient       => '...',   # optional
+        Attempts        => '...',   # optional
     );
 
 This returns something like:
@@ -1234,8 +1234,8 @@ sub _FiltersSQLAndBinds {
 Check if the provided email address(es) is valid.
 
     my $IsValid = $MailQueue->_CheckValidEmailAddresses(
-        ParamName => '...'       # name of the parameter that we are checking
-        Addresses => '...' || [] # email addresses to validate
+        ParamName => '...',         # name of the parameter that we are checking
+        Addresses => '...', || []   # email addresses to validate
     );
 
 Returns 1 or undef.
@@ -1300,7 +1300,9 @@ sub _CheckValidEmailAddresses {
 Check if the provided data is a non-empty hash-ref.
 
     my $IsValid = $MailQueue->_CheckValidMessageData(
-        Data => {...}
+        Data => {
+            # ...
+        },
     );
 
 Returns 1 or undef.
@@ -1589,7 +1591,7 @@ sub _SetCommunicationLogLookup {
 Get the communication log associated to the queue item, if not found, creates a new one.
 
     my $CommunicationLog = $Self->_GetCommunicationLog(
-        ID => '...' # mail-queue item ID
+        ID => '...',    # mail-queue item ID
     );
 
 Returns communication-log object.

@@ -172,13 +172,14 @@ Core.Agent.Admin.GenericInterfaceInvokerEvent= (function (TargetNS) {
             [
                 {
                     Label: Core.Language.Translate('Cancel'),
+                    Type: 'Secondary',
                     Function: function () {
                         Core.UI.Dialog.CloseDialog($('#DeleteDialog'));
                     }
                 },
-
                 {
                     Label: Core.Language.Translate('Delete'),
+                    Type: 'Warning',
                     Function: function () {
                         var Data = {
                             Action: 'AdminGenericInterfaceInvokerEvent',

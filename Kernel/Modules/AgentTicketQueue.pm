@@ -11,6 +11,7 @@ package Kernel::Modules::AgentTicketQueue;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -282,7 +283,7 @@ sub Run {
     }
 
     # otherwise use Preview as default as in LayoutTicket
-    $View ||= 'Preview';
+    $View ||= 'Small';
 
     # Check if selected view is available.
     my $Backends = $ConfigObject->Get('Ticket::Frontend::Overview');
@@ -505,7 +506,7 @@ sub Run {
 
         Bulk       => 1,
         TitleName  => Translatable('QueueView'),
-        TitleValue => $NavBar{SelectedQueue} . $SubQueueIndicatorTitle,
+        TitleValue => $NavBar{BreadcrumbQueue} . $SubQueueIndicatorTitle,
 
         Env        => $Self,
         LinkPage   => $LinkPage,
@@ -574,6 +575,10 @@ sub _MaskQueueView {
 
     $Param{SelectedQueue} = $AllQueues{$QueueID} || $CustomQueue;
     my @MetaQueue = split /::/, $Param{SelectedQueue};
+
+    $Param{BreadcrumbQueue} = sprintf '<div>%s</div>' x @MetaQueue, @MetaQueue;
+    $Param{BreadcrumbQueue} =~ s{(</div>)(<div>)}{$1 <div>></div> $2}g;
+
     $Level = $#MetaQueue + 2;
 
     # prepare shown queues (short names)
@@ -765,10 +770,11 @@ sub _MaskQueueView {
     }
 
     return (
-        MainName      => 'Queues',
-        SelectedQueue => $Param{SelectedQueue},
-        MainContent   => $Param{QueueStrgLevel},
-        Total         => $Param{TicketsShown},
+        MainName        => 'Queues',
+        SelectedQueue   => $Param{SelectedQueue},
+        BreadcrumbQueue => $Param{BreadcrumbQueue},
+        MainContent     => $Param{QueueStrgLevel},
+        Total           => $Param{TicketsShown},
     );
 }
 

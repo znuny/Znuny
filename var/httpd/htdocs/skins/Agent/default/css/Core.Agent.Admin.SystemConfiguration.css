@@ -24,8 +24,10 @@ textarea:focus, input:focus{
  */
 
 .GettingStarted {
-    text-align: center;
-    padding: 40px 0px 5px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-md);
 }
 
 .GettingStarted.LittlePadding {
@@ -33,99 +35,64 @@ textarea:focus, input:focus{
 }
 
 .GettingStarted li {
-    display: inline-block;
-    width: 220px;
-    height: 180px;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    position: relative;
-    background: #eee;
-    vertical-align: top;
-}
-
-.GettingStarted li:last-child {
-    margin-right: 0px;
-}
-
-.RTL .GettingStarted li:last-child {
-    margin-right: 10px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-sm);
+    width: 250px;
+    height: 205px;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-radius: var(--border-radius-lg);
+    background: var(--main-bg-color);
+    padding: var(--padding-lg);
 }
 
 .GettingStarted li i {
-    width: 100%;
-    position: absolute;
-    top: 25px;
-    left: 0px;
-    text-align: center;
-    font-size: 50px;
-    color: #999;
-    text-shadow: 1px 1px 2px #fff;
+    color: var(--gray-dark-semi);
+    font-size: 28px;
 }
 
 .GettingStarted li p {
-    font-size: 12px;
-    color: #555;
-    text-shadow: 1px 1px 2px #fff;
-    margin: 95px 10px 0px 10px;
-    position: relative;
-    padding-top: 15px;
+    width: fit-content;
+    max-width: 205px;
+    color: var(--black);
+    font-weight: var(--normal);
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: .1px;
+    text-align: center; 
 }
 
 .GettingStarted li p a {
-    color: #555;
-    border-bottom: 1px solid #aaa;
-    transition: all ease 0.3s;
+    color: var(--primary-color);
+    transition: var(--main-transition);
 }
 
 .GettingStarted li p a:hover {
-    color: #111;
-    border-bottom-color: #ccc;
-}
-
-.GettingStarted li p:before {
-    content: "";
-    top: 0px;
-    left: 50%;
-    margin-left: -20%;
-    width: 40%;
-    position: absolute;
-    border-top: 1px solid #bbb;
-    box-shadow: 1px 1px 1px #fff;
+    text-decoration: underline;
 }
 
 .GettingStarted + .SearchBox {
-    display: block;
-    text-align: center;
-    white-space: nowrap;
-    margin-bottom: 30px;
-}
-
-.GettingStarted + .SearchBox input[type=text] {
-    width: 90%;
-    max-width: 689px;
-    box-sizing: border-box;
-    padding: 10px 5px 9px 10px;
-    display: inline-block;
-    border-right-width: 1px;
-    height: 35px;
-}
-
-.GettingStarted + .SearchBox button {
-    display: inline-block;
-    width: 32px;
-    margin-left: -32px;
-    height: 35px;
+    display: flex;
+    align-items: center;
+    padding: var(--padding-lg);
+    padding-top: 0;
+    max-width: 830px;
+    margin: auto;
+    width: 100%;
 }
 
 #SearchBoxAutoComplete > span {
     position: relative;
+    flex: 1;
+    width: 100%;
 }
 
 #SearchBoxAutoComplete #SysConfigSearch + .AJAXLoader {
     position: absolute;
-    right: 38px;
-    top: -4px;
+    right: 15px;
+    top: 10px;
 }
 
 /**
@@ -162,7 +129,8 @@ p.NoItemsInfo i {
 
 #ConfigTree .OpenNodeInNewWindow {
     display: none;
-    margin-left: 5px;
+    position: absolute;
+    right: -10px;
 }
 
 #ConfigTree .OpenNodeInNewWindow i {
@@ -186,10 +154,10 @@ p.NoItemsInfo i {
     padding: 5px;
 }
 
-#ConfigTree .jstree-hovered:not(.jstree-disabled),
+/*#ConfigTree .jstree-hovered:not(.jstree-disabled),
 #ConfigTree .jstree-wholerow-hovered:not(.jstree-disabled) {
     background: #ddd !important;
-}
+}*/
 
 .UpdateSetting {
     margin: 3px;
@@ -213,16 +181,40 @@ h2.SearchResults {
  * @subsection      Settings
  */
 
-.SettingContent {
-    padding: 3px 10px;
+ div.Setting div.Hash input[type="text"]:not(:checked), 
+ div.Setting div.SettingContent > input[disabled="disabled"].Key,
+ div.Setting div.SettingContent > textarea {
+    background: var(--main-bg-color);
+    color: var(--black);
+    font-size: var(--font-size-sm);
+    border-color: transparent;
 }
 
-.HashItem .Key {
-    float: left;
+.HashItem > input {
+    max-width: 30%;
 }
+
+.Setting > .SettingContent {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    /*padding: var(--padding-lg);*/
+    flex-wrap: wrap;
+}
+
+.IsLockedByMe .Setting > .SettingContent {
+    padding: var(--padding-lg);
+  }
+
+/*.HashItem .Key {
+    float: left;
+}*/
 
 .SettingContent .DatepickerIcon {
-    margin-top: 7px;
+    width: 24px;
+    height: 24px;
+    min-height: 24px;
+    min-width: 24px;
 }
 
 /**
@@ -327,9 +319,7 @@ h2.SearchResults {
  */
 
 #DialogDeployment {
-    width: 450px;
     min-height: 80px;
-    padding-right: 10px;
 }
 
 #DialogDeployment > p {
@@ -340,11 +330,7 @@ h2.SearchResults {
 #DialogDeployment + .ContentFooter .ButtonsFinish,
 #DialogDeployment + .ContentFooter .ButtonsTryAgain {
     display: none;
-}
-
-.WidgetSimple .Warning {
-    color: red;
-    margin: 3px;
+    gap: var(--padding-lg);
 }
 
 .TableLike.DeploymentData label,
@@ -376,17 +362,6 @@ h2.SearchResults {
     overflow: hidden;
 }
 
-.WidgetSimple.Setting input,
-.WidgetSimple.Setting textarea {
-    background: #eee;
-}
-
-.WidgetSimple.Setting input,
-.WidgetSimple.Setting textarea,
-.WidgetSimple.Setting label {
-    color: #777;
-}
-
 .WidgetSimple.Setting .ResetButton {
     display: none;
 }
@@ -397,58 +372,49 @@ h2.SearchResults {
 
 .WidgetSimple.Setting.IsModified,
 .Legend span.IsModified {
-    border-left: 5px solid #999;
+    border-left: 8px var(--border-solid) var(--gray-dark-semi);
 }
 
 .RTL .WidgetSimple.Setting.IsModified,
 .RTL .Legend span.IsModified {
-    border-left: 0px;
-    border-right: 5px solid #999;
+    border-left: 8px var(--border-solid) var(--gray-dark-semi);
 }
 
 .WidgetSimple.Setting.IsDirty,
 .Legend span.IsDirty {
-    border-left: 5px solid #5BAD5B;
+    border-left: 8px var(--border-solid) var(--success-color);
 }
 
 .RTL .WidgetSimple.Setting.IsDirty,
 .RTL .Legend span.IsDirty {
-    border-left: 0px;
-    border-right: 5px solid #5BAD5B;
+    border-left: 8px var(--border-solid) var(--success-color);
 }
 
 .WidgetSimple.Setting.IsLockedByAnotherUser,
 .Legend span.IsLockedByAnotherUser {
-    border-left: 5px solid #b8384e;
+    border-left: 8px var(--border-solid) var(--warning-color);
 }
 
 .RTL .WidgetSimple.Setting.IsLockedByAnotherUser,
 .RTL .Legend span.IsLockedByAnotherUser {
-    border-left: 0px;
-    border-right: 5px solid #b8384e;
+    border-left: 8px var(--border-solid) var(--warning-color);
 }
 
 .WidgetSimple.Setting.IsLockedByMe,
 .Legend span.IsLockedByMe {
-    border-left: 5px solid #f92;
+    border-left: 8px var(--border-solid) var(--primary-color);
 }
 
 .RTL .WidgetSimple.Setting.IsLockedByMe,
 .RTL .Legend span.IsLockedByMe {
-    border-left: 0px;
-    border-right: 5px solid #f92;
+    border-left: 8px var(--border-solid) var(--primary-color);
 }
 
-.WidgetSimple.Setting.IsLockedByMe input,
-.WidgetSimple.Setting.IsLockedByMe textarea {
-    background-color: #fff;
-}
-
-.WidgetSimple.Setting.IsLockedByMe input,
+/*.WidgetSimple.Setting.IsLockedByMe input,
 .WidgetSimple.Setting.IsLockedByMe textarea,
 .WidgetSimple.Setting.IsLockedByMe label {
     color: inherit;
-}
+}*/
 
 .WidgetSimple.Setting.IsLockedByMe {
     position: relative;
@@ -457,39 +423,46 @@ h2.SearchResults {
 .WidgetSimple.Setting .Header {
     cursor: pointer;
     overflow: hidden;
+    z-index: 5;
 }
 
-.WidgetSimple.Setting .Header .ActionMenu {
-    font-size: 17px;
+.Comparing .WidgetSimple.Setting .Header .ActionMenu {
+    padding-left: var(--padding-xs);
 }
 
-.WidgetSimple.Setting .Header h2 {
+/*.WidgetSimple.Setting .Header h2 {
     float: left;
     padding-left: 15px;
-}
+}*
 
 .RTL .WidgetSimple.Setting .Header h2 {
     float: right;
     padding-left: 3px;
     padding-right: 15px;
-}
+}*/
 
 .WidgetSimple.Setting .Header .HeaderMessage {
-    font-size: 11px;
-    margin-top: 5px;
-    color: #999;
-    float: right;
-    margin-right: 30px;
-    margin-top: 3px;
+    font-size: 14px;
+    color: var(--gray-medium);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: var(--normal);
+    margin-left: auto;
+    padding-right: var(--padding-lg);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .WidgetSimple.Setting .Header .HeaderMessage a {
-    color: #999;
-    transition: color ease 0.2s;
+    color: var(--primary-color);
+    transition: var(--main-transition);
+    font-weight: var(--semi-bold);
 }
 
 .WidgetSimple.Setting .Header .HeaderMessage a:hover {
-    color: #333;
+    text-decoration: underline;
 }
 
 .WidgetSimple.Setting .Header .HeaderMessage a,
@@ -503,33 +476,20 @@ h2.SearchResults {
     opacity: 1;
 }
 
-.WidgetSimple.Setting .Header .HeaderMessage span {
-    display: inline-block;
-}
-
 .WidgetSimple.Setting .Header .HeaderMessage span + span:before {
     content: ", ";
     margin-left: -4px;
 }
 
-.WidgetSimple.Setting .Content .SettingUpdateBox {
-    display: none;
-    position: absolute;
-    top: 1px;
-    width: 88px;
-    white-space: nowrap;
-    overflow: hidden;
-    background-color: #f2f2f2;
-    border-left: 1px solid #ddd;
-    box-sizing: border-box;
-    height: 100%;
-    text-align: right;
-    transition: all ease 0.2s;
-    right: 0px;
-    padding-right: 7px;
+.WidgetSimple.Setting .Content fieldset > .SettingUpdateBox {
+    flex-flow: row;
+    justify-content: flex-end;
+    /*padding-top: var(--padding-lg);*/
+    gap: var(--gap-md);
+    max-width: 100%;
 }
 
-.WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox {
+/*.WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox {
     display: block;
 }
 
@@ -557,20 +517,20 @@ h2.SearchResults {
 
 .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox button.Cancel:hover span {
     color: #B8384E;
-}
+}*/
 
 .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox button span {
-    transition: all ease 0.3s;
+    transition: var(--main-transition);
 }
 
-.WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox button {
+/*.WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox button {
     display: inline-block;
     margin: 7px 0px 0px 3px;
 }
 
 .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox button:first-child {
     margin-left: 7px;
-}
+}*/
 
 .WidgetSimple.IsLockedByAnotherUser .SettingEdit,
 .WidgetSimple.IsLockedByMe .SettingEdit,
@@ -585,16 +545,9 @@ h2.SearchResults {
 .WidgetSimple.Setting .SettingEdit,
 .WidgetSimple.Setting .SettingEnable {
     position: absolute;
-    left: 0px;
-    top: 0px;
-    background: #eee;
-    background: repeating-linear-gradient(
-        -45deg,
-        rgba(255, 255, 255, 0.5),
-        rgba(255, 255, 255, 0.5) 10px,
-        rgba(240, 240, 240, 0.5) 10px,
-        rgba(240, 240, 240, 0.5) 20px
-    );
+    left: 0;
+    top: 0;
+    background: #17172525;
     opacity: 0;
     width: 100%;
     height: 100%;
@@ -602,6 +555,8 @@ h2.SearchResults {
     text-align: center;
     line-height: 100%;
     transition: all ease 0.2s;
+    border-bottom-left-radius: var(--border-radius-xs);
+    border-bottom-right-radius: var(--border-radius-xs);
 }
 
 .WidgetSimple.Setting:not(.IsDisabled) .SettingEnable,
@@ -625,16 +580,17 @@ h2.SearchResults {
     opacity: 1;
 }
 
-.WidgetSimple:not(.ReadOnly) > .Content:hover .SettingWrapper,
+/*.WidgetSimple:not(.ReadOnly) > .Content:hover .SettingWrapper,
 .WidgetSimple.Setting.IsLockedByMe.HasOverlay .SettingWrapper,
 .WidgetSimple.Setting.IsLockedByMe.HasOverlay > .Content:hover .SettingWrapper,
 .WidgetSimple.Setting.HasOverlay .SettingWrapper {
     opacity: 0.3;
-}
+}*/
 
 .WidgetSimple.Setting .SettingEdit button,
 .WidgetSimple.Setting .SettingEnable button {
-    height: 26px;
+    height: var(--btn-min-height);
+    margin: auto;
 }
 
 /* To have the edit/enable button really centered both vertically and horizontally (independent from text lengths),
@@ -657,42 +613,67 @@ h2.SearchResults {
 }
 
 .WidgetSimple.Setting > .Content {
-    display: table;
+    /*display: table;*/
     width: 100%;
     box-sizing: border-box;
     min-height: 42px;
+    padding: 0;
 }
 
-.WidgetSimple.Setting .SettingContainer {
+/*.WidgetSimple.Setting .SettingContainer {
     max-height: 285px;
     overflow-y: hidden;
+}*/
+
+.WidgetSimple.Setting .SettingContainer > fieldset {
+    padding: 0;
+    min-width: unset;
+    max-width: unset;
+}
+
+.WidgetSimple.Setting .SettingContainer .Setting {
+    min-width: 100%;
+    overflow: auto;
+    border-radius: var(--border-radius-sm);
+}
+
+.WidgetSimple.Setting.IsLockedByMe .SettingContainer .Setting {
+    border: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+.WidgetSimple.Setting.IsLockedByMe .SettingContainer .Setting {
+    overflow: unset;
 }
 
 .WidgetSimple.Setting:not(.IsLockedByMe):not(.MenuExpanded) .SettingContainer > fieldset {
     position: relative;
+    min-height: 100%;
 }
 
-.WidgetSimple.Setting:not(.IsLockedByMe):not(.MenuExpanded) .SettingContainer > fieldset:before {
+/*.WidgetSimple.Setting:not(.IsLockedByMe):not(.MenuExpanded) .SettingContainer > fieldset:before*/
+.WidgetSimple.Setting:not(.IsLockedByMe):not(.MenuExpanded) .SettingWrapper > form:before {
     content: "";
     position: absolute;
-    left: 0px;
-    top: calc(285px - 20px);
+    left: -20px; /*account for container padding*/
+    bottom: 0;
+    opacity: .4;
     height: 20px;
     z-index: 100;
     background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(244,243,244,1) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(244,243,244,1) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(244,243,244,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    width: 100%;
+    width: calc(100% + 40px);
 }
 
-.Deployment .WidgetSimple.Setting:not(.IsLockedByMe):not(.MenuExpanded) .SettingContainer > fieldset:before {
+/*.Deployment .WidgetSimple.Setting:not(.IsLockedByMe):not(.MenuExpanded) .SettingContainer > fieldset:before*/
+.Deployment .WidgetSimple.Setting:not(.IsLockedByMe):not(.MenuExpanded) .SettingWrapper > form:before {
     display: none;
 }
 
 .WidgetSimple.Setting.IsLockedByMe .SettingContainer,
 .Compare .WidgetSimple.Setting .SettingContainer {
     max-height: none;
-    overflow-y: auto;
+    min-width: 100%;
 }
 
 .WidgetSimple.Setting .SettingContainer::-webkit-scrollbar {
@@ -704,7 +685,7 @@ h2.SearchResults {
     height: 5px;
 }
 
-.WidgetSimple.Setting .SettingContainer::-webkit-scrollbar-track {
+/*.WidgetSimple.Setting .SettingContainer::-webkit-scrollbar-track {
     background: #eee;
 }
 
@@ -714,76 +695,100 @@ h2.SearchResults {
 
 .WidgetSimple.Setting .SettingContainer::-webkit-scrollbar-thumb:hover {
     background: #999;
-}
+}*/
 
 .WidgetSimple.Setting .SettingWrapper {
     transition: opacity ease 0.3s;
-    display: table-row;
+    display: flex;
+    align-items: flex-start;
+}
+
+.WidgetSimple.Setting .SettingWrapper .SettingContainer {
+    min-width: 100%;
+}
+
+.SettingOld .SettingWrapper > .SettingContainer .Setting,
+.SettingNew .SettingWrapper > .SettingContainer .Setting {
+    padding: var(--padding-lg);
+    border-radius: 0;
 }
 
 .WidgetSimple.Setting .SettingWrapper > .SettingDescription,
 .WidgetSimple.Setting .SettingWrapper > form {
-    color: #777;
-    font-size: 11px;
-    display: table-cell;
-    width: 60%;
-    vertical-align: top;
+    padding: var(--padding-lg);
+}
+
+.WidgetSimple.Setting .SettingWrapper > form {
+    overflow: hidden;
+    min-width: 70%;
+    width: 70%;
+    border-right: var(--border-width) var(--border-solid) var(--border-color);
+    display: flex;
+    align-self: stretch;
 }
 
 .WidgetSimple.Setting .SettingWrapper > fieldset {
     color: #777;
 }
 
-.WidgetSimple.Setting .SettingWrapper > form {
-    padding-right: 20px;
-}
-
 .WidgetSimple.Setting .SettingWrapper > .SettingDescription {
-    border-left: 1px solid #ccc;
-    width: 20%;
-    min-width: 159px;
-    padding-left: 20px;
-    line-height: 150%;
-    padding-top: 4px;
+    line-height: 17.5px;
     word-break: break-word;
     transition: padding ease 0.2s;
+    letter-spacing: .1px;
+    font-size: var(--font-size-sm);
+    color: var(--gray-dark);
 }
 
-.RTL .WidgetSimple.Setting .SettingWrapper > .SettingDescription {
+/*.RTL .WidgetSimple.Setting .SettingWrapper > .SettingDescription {
     border-left: 0px;
     border-right: 1px solid #ccc;
     padding-left: 0px;
     padding-right: 20px;
+}*/
+
+/* Widget Menu */
+.WidgetSimple.Setting  > .WidgetMenu.Hidden {
+    margin-top: -58px;
+    opacity: 0;
+    height: 50px;
 }
 
-.WidgetSimple.Setting.IsLockedByMe .SettingWrapper > .SettingDescription {
-    padding-right: 90px;
-}
-
-.WidgetSimple .WidgetMenu {
-    background: #eee;
-    padding: 7px 10px 7px 18px;
+.WidgetSimple.Setting  > .WidgetMenu {
+    background: var(--main-bg-color);
+    padding: var(--padding-sm) var(--padding-lg);
     display: none;
+    min-height: 50px;
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    align-items: center;
+    gap: var(--gap-sm);
+    transition: var(--main-transition);
+    margin-top: 0;
+    display: flex;
+    height: 100%;
+    max-height: 100%;
 }
 
 .WidgetSimple .WidgetMenu > a,
 .WidgetSimple .WidgetMenu > span {
-    display: inline-block;
-    background: #e5e5e5;
-    margin-right: 3px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-    font-size: 11px;
-    color: #777;
-    transition: all ease 1s;
+    display: flex;
+    background: var(--pill-color-selected);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    padding: var(--padding-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--medium);
+    color: var(--black);
+    transition: var(--main-transition);
     cursor: pointer;
-    opacity: 0;
+    border-radius: var(--border-radius-xxs);
+    align-items: center;
+    justify-content: center;
 }
 
 .WidgetSimple .WidgetMenu > a:focus,
 .WidgetSimple .WidgetMenu > span:focus {
-    border-color: #000;
-    color: #000;
+    border-color: var(--black);
+    color: var(--black);
 }
 
 .WidgetSimple.MenuExpanded .WidgetMenu > a,
@@ -793,12 +798,12 @@ h2.SearchResults {
 
 .WidgetSimple .WidgetMenu > a.Right,
 .WidgetSimple .WidgetMenu > span.Right {
-    float: right;
+    margin-left: auto;
 }
 
 .RTL .WidgetSimple .WidgetMenu > a.Right,
 .RTL .WidgetSimple .WidgetMenu > span.Right {
-    float: left;
+    margin-right: auto;
 }
 
 .WidgetSimple .WidgetMenu > a.Hidden {
@@ -811,9 +816,23 @@ h2.SearchResults {
     display: none;
 }
 
-.WidgetSimple.IsLockedByMe .WidgetMenu > a.SaveAlias,
-.WidgetSimple.IsLockedByMe .WidgetMenu > a.CancelAlias {
-    display: inline-block;
+.WidgetSimple > .WidgetMenu > .SaveAlias,
+.WidgetSimple > .WidgetMenu > .CancelAlias,
+.WidgetSimple > .WidgetMenu > .EditAlias {
+    background: var(--primary-color);
+    color: var(--white);
+    border: 0;
+    /*font-family: 'Poppins';*/
+    font-size: var(--font-size-sm);
+    font-weight: var(--semi-bold);
+    border-radius: var(--border-radius-sm);
+    min-height: var(--btn-min-height);
+}
+
+.WidgetSimple > .WidgetMenu > .SaveAlias:hover,
+.WidgetSimple > .WidgetMenu > .CancelAlias:hover,
+.WidgetSimple > .WidgetMenu > .EditAlias:hover {
+    background: var(--primary-color-darker);
 }
 
 .WidgetSimple .WidgetMenu > a.SaveAlias i {
@@ -826,8 +845,8 @@ h2.SearchResults {
 
 .WidgetSimple .WidgetMenu > a:hover,
 .WidgetSimple .WidgetMenu > span:hover {
-    background: #eee;
-    border-color: #777;
+    background: var(--gray-light);
+    border-color: var(--black);
 }
 
 .WidgetSimple .WidgetMenu > a i,
@@ -847,17 +866,18 @@ h2.SearchResults {
 
 .WidgetSimple.Setting .WidgetMessage.Bottom {
     display: none;
-    border: 0px;
-    bottom: 0px;
-    left: 0px;
-    margin: 0px !important;
-    position: absolute;
+    position: relative;
     width: 100%;
+    padding: var(--padding-sm) 0 0;
+    padding-bottom: var(--padding-xs);
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     z-index: 9;
     box-sizing: border-box;
+    margin: 0;
+    color: var(--gray-dark);
+    text-indent: 5px;
 }
 
 .WidgetSimple.Setting .LockedByAnotherUser {
@@ -893,28 +913,32 @@ h2.SearchResults {
 
 .WidgetSimple input#FilterSettings + .ActionList,
 .WidgetSimple .TableFilterContainer + .ActionList {
-    margin-top: 8px;
+    display: flex;
+    flex-flow: column;
+    gap: 15px;
 }
 
-.WidgetSimple p.WidgetInformation {
-    font-size: 11px;
-    margin-top: 8px;
-    color: #333;
-    background: #e4e4e4;
-    padding: 5px 5px 5px 25px;
+.WidgetSimple input#FilterSettings + .ActionList li,
+.WidgetSimple .TableFilterContainer + .ActionList li {
+    margin: 0;
+}
+
+.WidgetSimple p.WidgetInformation,
+.ActionsSideBarComp .WidgetSimple p.WidgetInformation {
+    display: flex;
+    color: var(--black);
+    background: #50B5FF10;
     position: relative;
+    border-radius: var(--border-radius-xxs);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-md);
+    padding: var(--padding-md) var(--padding-lg);
 }
 
 .WidgetSimple p.WidgetInformation i {
-    position: absolute;
-    background: #eee;
-    color: #666;
-    left: 5px;
-    top: 5px;
-    line-height: 14px;
-    width: 14px;
-    text-align: center;
-    box-shadow: 1px 1px 1px #999;
+    font-size: var(--font-size-md);
+    color: var(--alert-info-icon-color);
 }
 
 /**
@@ -923,9 +947,10 @@ h2.SearchResults {
 
 .Array,
 .Hash {
-    position: relative;
-    padding: 0px;
-    margin-left: 8px;
+    display: flex;
+    flex-flow: column;
+    gap: 15px;
+    width: 100%;
 }
 
 .SettingContainer > fieldset > .Setting > .Hash:empty:before,
@@ -933,9 +958,9 @@ h2.SearchResults {
     content: "-";
 }
 
-.IsLockedByMe .ArrayItem > .SettingContent {
+/*.IsLockedByMe .ArrayItem > .SettingContent {
     width: calc(100% - 16px); /* 100% minus the width of the button on the right minus the padding of combined 6px */
-    max-width: none !important;
+    /*max-width: none !important;
 }
 
 .ArrayItem > .SettingContent > div.InputField_Container,
@@ -943,13 +968,31 @@ h2.SearchResults {
 .ArrayItem > .SettingContent > input[type=text]:first-child:last-child,
 .Setting > .SettingContent > input[type=text]:first-child:last-of-type {
     width: calc(100% - 6px); /* minus padding left and right */
-    max-width: none !important;
+    /*border: 0;
+}*/
+
+/*.ArrayItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Search,
+.HashItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Search,
+.HashItem .HashItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Search*/
+.SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Search,
+.Setting .SettingContent > input[type="text"] {
+    border: 0;
+    width: 100%;
+    background: var(--main-bg-color);
 }
 
-.ArrayItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Search,
-.HashItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Search,
-.HashItem .HashItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Search {
-    width: 100% !important;
+/*li > div:not(.IsLockedByMe) .ArrayItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > i,
+li > div:not(.IsLockedByMe) .HashItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > i,
+li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > i */
+.SettingContent > div.InputField_Container > div.InputField_InputContainer > input[disabled="disabled"] + i{
+    visibility: hidden;
+}
+
+/*.ArrayItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Selection,
+.HashItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Selection,
+.HashItem .HashItem > .SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Selection*/
+.WidgetSimple:not(.IsLockedByMe) .SettingContent > div.InputField_Container > div.InputField_InputContainer > .InputField_Selection {
+    background: var(--white);
 }
 
 .HashItem > .SettingContent > div.InputField_Container {
@@ -965,23 +1008,39 @@ h2.SearchResults {
     width: 100%;
 }
 
-.IsLockedByMe .Array > .ArrayItem,
-.Comparing .Array > .ArrayItem {
-    display: block;
+.IsLockedByMe .Array > .ArrayItem > .Array,
+.Comparing .Array > .ArrayItem > .Array,
+.IsLockedByMe .Array > .ArrayItem > .Hash,
+.Comparing .Array > .ArrayItem > .Hash,
+.IsLockedByMe .Setting > .Hash > .HashItem,
+.Comparing .Setting > .Hash > .HashItem {
+    border: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+.IsLockedByMe .Setting > .Hash > .HashItem,
+.Comparing .Setting > .Hash > .HashItem {
+    border-radius: var(--border-radius-sm);
+    padding: var(--padding-lg);
 }
 
 .IsLockedByMe .Array,
 .IsLockedByMe .Hash {
-    margin-left: 0px;
-    min-height: 21px;
-    padding: 0px 22px 0px 0px;
-    border: 1px solid #ddd;
+    padding: var(--padding-lg);
+    padding-right: var(--padding-xxl);
+    position: relative;
+    border-radius: var(--border-radius-sm);
+    /*min-width: calc(100% + 20px);*/
+    border: var(--border-width) var(--border-solid) var(--border-color);
 }
 
-.RTL .IsLockedByMe .Array,
+.Hash.FrontendNavigationHash {
+    border: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+/*.RTL .IsLockedByMe .Array,
 .RTL .IsLockedByMe .Hash {
     padding: 0px 0px 0px 22px;
-}
+}*/
 
 .Array button.AddArrayItem,
 .ArrayItem button.RemoveButton,
@@ -989,29 +1048,33 @@ h2.SearchResults {
 .HashItem button.RemoveButton,
 .HashItem button.AddKey {
     position: absolute;
-    right: 0px;
-    width: 22px;
-    background: #eee;
+    width: 20px;
+    background: var(--gray-light-ultra);
     height: 100%;
-    top: 0px;
-    border: 0px;
+    top: 0;
+    right: 0;
     cursor: pointer;
-    transition: all ease 0.3s;
-    color: #bbb;
-    font-size: 14px;
+    transition: var(--main-transition);
+    color: var(--gray-dark);
+    font-size: var(--font-size-md);
+    border-top-right-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+    border: var(--border-width) var(--border-solid) transparent;
+    border-left: var(--border-width) var(--border-solid) var(--border-color);
+    padding: 0;
 }
 
 .HashItem button.AddKey {
     position: relative;
-    color: #5BAD5B;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    height: 22px;
-    line-height: 14px;
-    text-align: center;
-    border-left: 0px;
-    font-size: 13px;
-    width: 25px;
+    height: 24px;
+    width: 24px;
+    max-height: 24px;
+    max-width: 24px;
+    border: 0;
+    left: -4px;
+    background: unset;
+    border-radius: var(--border-radius-xxs);
+    color: var(--gray-dark-semi);
 }
 
 .Array button.AddArrayItem span.InvisibleText,
@@ -1043,8 +1106,7 @@ h2.SearchResults {
 .Hash button.AddHashKey:focus,
 .HashItem button.RemoveButton:focus,
 .HashItem button.AddKey:focus {
-    background: #e5e5e5;
-    color: #333;
+    background: var(--gray-light);
     outline: none;
 }
 
@@ -1057,25 +1119,50 @@ h2.SearchResults {
     display: none;
 }
 
+.HashItem button.RemoveButton,
+.ArrayItem button.RemoveButton {
+    background: unset;
+    border: 0;
+    position: relative;
+    left: -8px;
+    margin-top: auto;
+    margin-bottom: auto;
+    min-height: 24px;
+    min-width: 24px;
+    border-radius: var(--border-radius-xxs);
+    max-width: 24px;
+    max-height: 24px;
+}
+
 .ArrayItem,
 .HashItem {
     position: relative;
-    transition: background ease 0.3s;
+    transition: var(--main-transition);
     min-height: 10px;
-    overflow: hidden;
+    /*overflow: hidden;*/
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap-sm);
 }
 
-.IsLockedByMe .ArrayItem,
+.HashItem.hasChild {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+
+/*.IsLockedByMe .ArrayItem,
 .IsLockedByMe .HashItem {
     margin-bottom: 5px;
 }
 
 .RTL .HashItem .Key {
-    float: right;
+    margin-left: auto;
 }
 
 .RTL .HashItem .SettingContent {
-    float: right;
+    margin-left: auto;
     margin-right: 30px;
     position: relative;
 }
@@ -1090,15 +1177,6 @@ h2.SearchResults {
     white-space: nowrap;
 }
 
-.IsLockedByMe .ArrayItem,
-.IsLockedByMe .HashItem {
-    padding: 8px 30px 8px 8px;
-    border: 1px solid #ddd;
-    border-left: 0px;
-    border-top: 0px;
-    margin-bottom: 0px;
-}
-
 .RTL .IsLockedByMe .ArrayItem,
 .RTL .IsLockedByMe .HashItem {
     padding: 8px 8px 8px 30px;
@@ -1109,27 +1187,36 @@ h2.SearchResults {
 .IsLockedByMe .ArrayItem:last-of-type,
 .IsLockedByMe .HashItem:last-of-type {
     border-bottom: 0px;
-}
+}*/
 
 .ArrayItem .SettingContent {
-    padding: 3px;
-    margin-left: 0px !important;
-    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    gap: var(--gap-sm);
+}
+
+/*.Setting .ArrayItem .SettingContent > input[type="checkbox"] {
+    border: var(--border-width) var(--border-solid) var(--border-color);
 }
 
 .Array > div:last-of-type .SettingContent {
     margin-bottom: 0px;
-}
+}*/
 
 .ArrayItem .SettingContent textarea {
     width: 100%;
 }
 
 .HashItem .SettingContent textarea {
-    width: calc(100% - 20px);
+    /*width: calc(100% - 20px);*/
+    min-width: unset;
+    min-height: var(--text-area-min-height);
+
 }
 
-.ArrayItem + .ArrayItem,
+/*.ArrayItem + .ArrayItem,
 .HashItem + .HashItem {
     border-top: 0px;
 }
@@ -1139,38 +1226,40 @@ h2.SearchResults {
 .SettingContent .InputField_Search,
 .HashItem .Key {
     width: 90%;
-}
+}*/
 
 .SettingContent input[type=text],
 .SettingContent input[type=password],
 .SettingContent .InputField_Search,
 .Setting input.Key {
+    display: flex;
     text-overflow: ellipsis;
-    min-width: 200px;
-    color: #333;
+    min-width: 170px;
+    color: var(--gray-dark);
+    background: var(--main-bg-color);
+    border-color: transparent;
 }
 
 .IsLockedByMe .SettingContent input[type=text],
 .IsLockedByMe .SettingContent input[type=password],
 .IsLockedByMe .SettingContent .InputField_Search,
 .IsLockedByMe .Setting input.Key {
-    background-color: #fff;
-    box-shadow: inset 1px 1px 3px #eee, inset -1px -1px 3px #eee;
-    border: 1px solid #C9C9C9;
-    border-top-color: #C0C0C0;
     text-overflow: inherit;
-    min-width: 200px;
+    /*min-width: 200px;*/
+    /*min-width: unset;*/
 }
 
-.IsLockedByMe .SettingContent input[type=text][readonly],
-.IsLockedByMe .SettingContent input[type=password][readonly],
-.IsLockedByMe .SettingContent .InputField_Search[readonly],
-.IsLockedByMe .Setting input.Key[readonly] {
-    background-color: #eee;
+/*.IsLockedByMe .SettingContent input[type="text"][readonly], 
+.IsLockedByMe .SettingContent input[type="password"][readonly], 
+.IsLockedByMe .SettingContent .InputField_Search[readonly], 
+.IsLockedByMe .Setting input.Key[readonly],
+.IsLockedByMe .Setting input.Key[readonly]:not(:checked)*/
+.IsLockedByMe .Setting input[type="text"][readonly]:not(:checked) {
+    background-color: var(--gray-light);
     cursor: no-drop;
 }
 
-.Hash .SettingContent input[type=text],
+/*.Hash .SettingContent input[type=text],
 .Hash .SettingContent input[type=password],
 .Hash .SettingContent .InputField_Search {
     width: 45%;
@@ -1179,12 +1268,24 @@ h2.SearchResults {
 .HashItem .HashItem input[type=text].Key,
 .HashItem .Key {
     width: 100px;
-}
+}*/
 
-.HashItem .SettingContent input[type=text],
+/*.HashItem .SettingContent input[type=text],
 .HashItem .SettingContent input[type=password],
 .HashItem .SettingContent .InputField_Search {
-    width: calc(100% - 30px)
+    /*width: calc(100% - 30px)*/
+    /*width: 100%;
+}*/
+
+.Setting.IsLockedByMe .SettingContent input[type="text"]:not(:checked), 
+.Setting.IsLockedByMe .SettingContent input[type="password"], 
+.Setting.IsLockedByMe .SettingContent .InputField_Search, 
+.Setting.IsLockedByMe .SettingContent > input.Entry[type="password"],
+.Setting.IsLockedByMe .SettingContent > textarea {
+    background: var(--white);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    color: var(--black);
+    min-width: 72px;
 }
 
 .Setting > .SettingContent > .Type_String {
@@ -1207,19 +1308,17 @@ h2.SearchResults {
     margin-left: 5px;
 }
 
-.SettingContent span.TimeZoneText {
+/*.SettingContent span.TimeZoneText {
     margin-left: 10px;
+}*/
+
+.SettingContent p.WorkingHoursDayName {
+    min-width: 100%;
+    padding: var(--padding-lg) 0 var(--padding-xs) 0;
 }
 
-.SettingContent .WorkingHoursDayName {
-    float: left;
-    width: 15px;
-    text-align: right;
-    line-height: 30px;
-    margin-right: 5px;
-    font-weight: bold;
-    border-right: 1px solid #ccc;
-    padding-right: 10px;
+.SettingContent p.WorkingHoursDayName:nth-child(1) {
+    padding-top: 0;
 }
 
 .SettingContent .WorkingHoursItem {
@@ -1229,26 +1328,33 @@ h2.SearchResults {
     margin-right: 2px;
 }
 
-.SettingContent .WorkingHoursItem > div {
-    display: table-row;
-}
-
 .SettingContent .WorkingHoursItem > div > div {
-    display: table-cell;
-    text-align: center;
-    width: 25px;
-    background: #eee;
-    line-height: 30px;
-    box-sizing: border-box;
+    border-radius: var(--border-radius-xs);
+    border-color: transparent;
+    background: var(--main-bg-color);
 }
 
-.IsLockedByMe .SettingContent .WorkingHoursItem > div > div:hover {
-    cursor: pointer;
-    background: #ddd;
+.IsLockedByMe .SettingContent .WorkingHoursItem > div > div {
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    background: var(--white);
 }
 
 .SettingContent .WorkingHoursItem.Checked > div > div {
-    background: #ddd;
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.SettingContent .WorkingHoursItem.Checked > div > div > label {
+    transition: var(--main-transition);
+    color: var(--white);
+}
+
+.IsLockedByMe .SettingContent .WorkingHoursItem > div > div label:hover,
+.IsLockedByMe .SettingContent .WorkingHoursItem > div > div:hover {
+    cursor: pointer;
+    color: var(--gray-dark-semi);
+    border-color: var(--border-color);
+    background: var(--gray-light-semi);
 }
 
 .IsLockedByMe .SettingContent .WorkingHoursItem.Checked > div > div {
@@ -1256,7 +1362,7 @@ h2.SearchResults {
     position: relative;
 }
 
-.IsLockedByMe .SettingContent .WorkingHoursItem.Checked > div > div:before {
+/*.IsLockedByMe .SettingContent .WorkingHoursItem.Checked > div > div:before {
     content: "";
     position: absolute;
     width: 30px;
@@ -1265,19 +1371,23 @@ h2.SearchResults {
     top: -4px;
     right: -9px;
     background: #5BAD5B;
-}
+}*/
 
 .SettingContent .WorkingHoursItem > div > div input {
     display: none;
 }
 
 .SettingContent .WorkingHoursItem label {
-    display: block;
-    text-align: center;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: unset;
 }
 
 .SettingContent .BadEffectiveValue p {
-    color: #f00;
+    color: var(--warning-color);
     margin-left: 5px;
 }
 
@@ -1289,10 +1399,6 @@ h2.SearchResults {
     margin-left: 22px;
 }
 
-.HashItem {
-    padding: 3px;
-}
-
 .HashItem .Key {
     float: left;
 }
@@ -1300,12 +1406,11 @@ h2.SearchResults {
 .HashItem > .SettingContent:before,
 .RTL .HashItem > .SettingContent:after {
     content: "\f178";
-    color: #bbb;
-    float: left;
+    color: var(--black);
     font-family: FontAwesome;
-    font-size: 12px;
-    line-height: 23px;
-    margin-right: 5px;
+    font-size: 14px;
+    align-self: start;
+    margin-top: 10px;
 }
 
 .RTL .HashItem > .SettingContent:before {
@@ -1319,80 +1424,132 @@ h2.SearchResults {
 }
 
 .HashItem .SettingContent {
-    padding: 0px;
-    display: inline-block;
-    margin-left: 5px;
-    min-width: calc(100% - 220px); /* full width minus key + arrow width */
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .IsLockedByMe .HashItem .SettingContent {
-    min-width: calc(100% - 220px); /* full width minus key + arrow width */
+    min-width: calc(100% - 190px); /* full width minus key + arrow width */
 }
 
 .ArrayItem .HashItem .SettingContent,
 .HashItem .HashItem .SettingContent {
-    min-width: calc(100% - 220px); /* full width minus key + arrow width */
+    min-width: calc(100% - 170px); /* full width minus key + arrow width */
 }
 
 .HashItem .HashItem .SettingContent {
-    min-width: calc(100% - 220px);
+    /*min-width: calc(100% - 170px); - edit by b on 27/MAR/2023 */
+    min-width: unset;
+    width: auto;
+    flex: 1;
 }
 
+.Hash > .HashItem > .SettingContent > .Hash > .HashItem  {
+    flex-wrap: wrap;
+}
+
+
+
+/*
 .HashItem .SettingContent > .Array,
 .HashItem .SettingContent > .Hash {
     margin-left: 17px;
 }
-
+*/
 /* Comparison Mode */
+
+.SettingsList {
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-md);
+}
+
+.SettingsList.Compare .Content > .WidgetMessage {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-sm) var(--padding-lg);
+    background: var(--main-bg-color);
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    border-radius: 0;
+}
+
+.SettingsList.Compare .Content > .WidgetMessage.Top > p {
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-xs);
+    line-height: normal;
+    width: 50%;
+    padding-bottom: var(--padding-md);
+}
+
+/*.SettingsList.Compare .Setting .WidgetMessage strong {
+    transition: all ease 2s;
+    padding: 0px 3px;
+}*/
 
 .SettingsList.Compare .Setting .WidgetMessage {
     display: none;
 }
 
-.SettingsList.Compare .Setting .WidgetMessage strong {
-    transition: all ease 2s;
-    padding: 0px 3px;
-}
-
 .SettingsList.Compare .Setting .WidgetMessage strong.Different {
-    display: inline-block;
-    background: yellow;
-    color: #333;
+    color: var(--primary-color);
 }
 
 .SettingsList.Compare > li > .SettingContainer {
-    overflow: hidden;
-    white-space: nowrap;
     position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.SettingsList.Compare > li > .SettingContainer.Comparing {
+    gap: var(--gap-lg);
 }
 
 .SettingsList.Compare h2 > input[type=checkbox] {
-    display: none;
+    /*display: none;*/
+    min-width: 16px;
+    min-height: 16px;
 }
 
 .SettingsList.Compare .Comparing h2 + .HeaderMessage {
     display: none;
 }
 
-.SettingsList.Compare.Deployment h2 > input[type=checkbox] {
+/*.SettingsList.Compare.Deployment h2 > input[type=checkbox] {
     display: block;
     position: absolute;
     left: 7px;
     top: 3px;
-}
+}*/
 
 .SettingsList.Compare.Deployment li > .SettingContainer {
     transition: opacity ease 0.5s;
     opacity: 0.5;
 }
 
+.SettingContainer.Comparing .Header > h2 {
+    width: 100%;
+}
+
 .SettingsList.Compare.Deployment li > .SettingContainer.Selected {
     opacity: 1;
 }
 
-.SettingsList.Compare.Deployment .SettingNew h2 {
+/*.SettingsList.Compare.Deployment .SettingNew h2 {
     margin-left: 20px;
     cursor: pointer;
+}*/
+
+.SettingsList .SettingNew .HeaderMessage {
+    padding-bottom: 0;
 }
 
 .SettingsList.Compare > li > .SettingContainer > div {
@@ -1412,13 +1569,13 @@ h2.SearchResults {
     position: relative;
 }
 
-.SettingsList.Compare .SettingOld .WidgetSimple .SettingContent {
+/*.SettingsList.Compare .SettingOld .WidgetSimple .SettingContent {
     white-space: nowrap;
 }
 
 .SettingsList.Compare .Comparing .WidgetSimple .SettingContent {
     margin-bottom: 25px;
-}
+}*/
 
 .SettingsList.Compare .Comparing .WidgetSimple .Hash .SettingContent,
 .SettingsList.Compare .Comparing .WidgetSimple .Array .SettingContent {
@@ -1430,34 +1587,37 @@ h2.SearchResults {
     z-index: 1;
 }
 
+.SettingsList.Compare .WidgetSimple h2 {
+    display: flex;
+    align-items: center;
+}
+
 .SettingsList.Compare .WidgetSimple h2 .Label {
     display: none;
-    font-size: 9px;
-    position: relative;
-    top: -1px;
-    color: #555;
-    text-shadow: 0px 0px 2px #fff;
-    text-transform: uppercase;
-    background-color: #ccc;
-    padding: 1px 3px;
+    background: var(--main-bg-color);
+    line-height: normal;
+    margin-left: auto;
 }
 
 .SettingsList.Compare > li > .SettingContainer:after {
     content: "\f178";
-    color: #bbb;
+    color: var(--black);
     font-family: FontAwesome;
-    font-size: 12px;
-    line-height: 23px;
-    margin-right: -8px;
+    font-size: var(--main-font-color);
+    margin-right: -6px;
     position: absolute;
     right: 50%;
     top: 50%;
 }
 
 .Icon {
-    float: left;
-    height: 12px;
-    color: #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 > .Icon {
+    display: inline;
 }
 
 .RTL .Icon {
@@ -1465,8 +1625,8 @@ h2.SearchResults {
 }
 
 .Icon .fa {
-    margin-left: -10px;
-    margin-right: 5px;
+    /*margin-left: -10px;
+    margin-right: 5px;*/
     cursor: help;
 }
 
@@ -1481,7 +1641,7 @@ h2.SearchResults {
 
 .fa.fa-ban,
 .Icon .fa-exclamation-triangle {
-    color: #b8384e;
+    color: var(--warning-color);
 }
 
 .fa.Hidden {
@@ -1489,9 +1649,8 @@ h2.SearchResults {
 }
 
 /* Sidebar */
-
-.ImportExport .CallForAction {
-    margin-top: 8px;
+form.ImportExport fieldset {
+    padding: 0;
 }
 
 .SidebarColumn .WidgetSimple.SystemConfigurationTree div.InputField_Container,
@@ -1511,23 +1670,22 @@ h2.SearchResults {
     top: -1px;
 }
 
-.SidebarColumn .WidgetSimple.SystemConfigurationTree .SystemConfigurationCategories {
-    display: inline-block;
-    width: 85%;
-}
-
 .RTL .SidebarColumn .WidgetSimple.SystemConfigurationTree .SystemConfigurationCategories {
     float: right;
     margin-left: -1px;
 }
 
-/* Widget Menu */
-
-.MenuExpanded .WidgetAction .fa-bars {
-    color: #333;
+.SystemConfigurationCategories {
+    flex: 1;
 }
 
 /* Responsive */
+@media only screen and (min-width: 0px) and (max-width: 480px) {
+    .WidgetSimple.Setting > .WidgetMenu {
+        flex-flow: column;
+        align-items: stretch;
+    }
+}
 
 @media only screen and (min-width: 0px) and (max-width: 750px) {
 
@@ -1539,10 +1697,10 @@ h2.SearchResults {
 
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
 
-    .WidgetSimple .WidgetMenu,
+    /*.WidgetSimple .WidgetMenu,
     .WidgetSimple.Setting .WidgetMessage.Bottom {
-        display: block !important;
-    }
+        display: block;
+    }*/
 
     .WidgetSimple .WidgetMenu {
         padding-bottom: 0px;
@@ -1552,7 +1710,6 @@ h2.SearchResults {
     .WidgetSimple .WidgetMenu > span {
         opacity: 1 !important;
         zoom: 1.1;
-        margin-bottom: 7px;
     }
 
     .WidgetSimple.Setting .Header .ActionMenu {
@@ -1560,42 +1717,54 @@ h2.SearchResults {
         top: 3px;
     }
 
-    .WidgetSimple.Setting .Header .ActionMenu .Expand {
+    /*.WidgetSimple.Setting .Header .ActionMenu .Expand {
         display: none;
-    }
+    }*/
 
     .WidgetSimple.Setting .Header .ActionMenu a {
         font-size: 18px;
+        margin-bottom: 2px;
     }
 
-    .WidgetSimple.Setting .SettingWrapper > form {
+    /*.WidgetSimple.Setting .SettingWrapper > form {
         padding-right: 0px;
-    }
+    }*/
 
     .WidgetSimple.Setting .SettingWrapper > .SettingDescription,
     .WidgetSimple.Setting .SettingWrapper > form {
         display: block;
         width: auto;
-        border-left: 0px;
     }
 
-    .WidgetSimple.Setting .SettingWrapper > .SettingDescription {
+    /*.WidgetSimple.Setting .SettingWrapper > .SettingDescription {
         padding-left: 10px;
     }
 
     .WidgetSimple.Setting div.Content {
         padding-bottom: 35px !important;
-    }
+    }*/
 
-    .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox {
+    /* .WidgetSimple.Setting.IsLockedByMe .Content .SettingUpdateBox {
         display: none !important;
-    }
+    } */
 
     .WidgetSimple .WidgetMenu > a.Right,
     .WidgetSimple .WidgetMenu > span.Right {
         float: none;
     }
 
+}
+
+@media only screen and (max-width: 1250px) {
+    .WidgetSimple.Setting .SettingWrapper {
+        flex-flow: column-reverse;
+    }
+
+    .WidgetSimple.Setting .SettingWrapper > form {
+        min-width: unset;
+        width: auto;
+        border: 0;
+    }
 }
 
 } /* end @media */

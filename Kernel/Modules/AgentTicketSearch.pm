@@ -12,6 +12,7 @@ package Kernel::Modules::AgentTicketSearch;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -297,6 +298,20 @@ sub Run {
             if (@Array) {
                 $GetParam{$Key} = \@Array;
             }
+        }
+
+        # add ToolBarSearch
+        my %ToolBarSearchParam;
+        my @ParamNames = $ParamObject->GetParamNames();
+        KEY:
+        for my $Key (@ParamNames) {
+            next KEY if $Key !~ m{^ToolBarSearch(.*)}sm;
+            $ToolBarSearchParam{$Key} = $ParamObject->GetParam( Param => $Key );
+        }
+
+        if ( %ToolBarSearchParam && $ToolBarSearchParam{ToolBarSearchBackend} =~ m{^ToolBarSearchBackend(.*)}xms ) {
+            my $Key = $1;
+            $GetParam{$Key} = $ToolBarSearchParam{ToolBarSearchTerm};
         }
 
         # get Dynamic fields from param object

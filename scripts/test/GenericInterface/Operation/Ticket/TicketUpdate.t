@@ -1012,7 +1012,7 @@ for my $Test (@Tests) {
         },
     );
 
-    # TODO prevent failing test if enviroment on SaaS unit test system doesn't work.
+    # TODO prevent failing test if environment on SaaS unit test system doesn't work.
     if (
         $RequesterResult->{ErrorMessage} eq
         'faultcode: Server, faultstring: Attachment could not be created, please contact the  system administrator'

@@ -6,30 +6,10 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst AdminGenericInterfaceTransportHTTPREST">
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst AdminGenericInterfaceTransportHTTPREST ActionsSideBar">
     <h1 class="InvisibleText">[% Translate( "GenericInterface Web Service Management" ) | html %]</h1>
-
-    [% USE BreadcrumbLink = String( "AdminGenericInterfaceWebservice" ) %]
-    [% USE HTTPRESTName   = String( Data.CommunicationType ) %]
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate( 'Web Service Management' ),
-                Link => BreadcrumbLink,
-            },
-            {
-                Name => Data.WebserviceName,
-                Link => BreadcrumbLink.copy.append( ";Subaction=", Data.Action, ";WebserviceID=", Data.WebserviceID ),
-            },
-            {
-                Name => HTTPRESTName.append( " Transport ", Data.Type ),
-            }
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -37,7 +17,7 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i> [% Translate("Go back to web service") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i> [% Translate("Go back to web service") | html %]</span></a>
                     </li>
                 </ul>
             </div>
@@ -45,12 +25,31 @@
     </div>
     <div class="ContentColumn">
 
+        [% USE BreadcrumbLink = String( "AdminGenericInterfaceWebservice" ) %]
+        [% USE HTTPRESTName   = String( Data.CommunicationType ) %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate( 'Web Service Management' ),
+                    Link => BreadcrumbLink,
+                },
+                {
+                    Name => Data.WebserviceName,
+                    Link => BreadcrumbLink.copy.append( ";Subaction=", Data.Action, ";WebserviceID=", Data.WebserviceID ),
+                },
+                {
+                    Name => HTTPRESTName.append( " Transport ", Data.Type ),
+                }
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Network Transport") | html %]</h2>
             </div>
             <div class="Content">
-                <h3>[% Translate("Properties") | html %]</h3>
                 <form id="TransportConfigForm" action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                     <input type="hidden" name="Subaction" value="[% Data.Action | html %]Action"/>
@@ -59,194 +58,166 @@
                     [% IF Data.Action == 'Change' %]
                         <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
                     [% END %]
-                    <div class="LayoutGrid ColumnsWithSpacing">
+                    <div class="LayoutGrid ColumnsWithSpacing no-padding">
                         <fieldset class="TableLike">
 
-                            <label>[% Translate("Type") | html %]:</label>
-                            <div class="Field">[% Data.Type | html %]</div>
-                            <div class="Clear"></div>
+                            <div class="field-wrapper">
+                                <h3 class="title">[% Translate("Properties") | html %]</h3>
+                            </div>
+
+                            <div class="field-wrapper">
+                                <label>[% Translate("Type") | html %]</label>
+                                <div class="Field">[% Data.Type | html %]</div>
+                            </div>
 
 [% IF Data.CommunicationType == 'Provider' %]
-
 [% RenderBlockStart("RouteOperationMapping") %]
-                            <label class="Mandatory" for="RouteOperationMapping[% Data.Operation | html %]"><span class="Marker">*</span>[% Translate("Route mapping for Operation") | html %] '[% Data.Operation | html %]':</label>
-                            <div class="Field">
-                                <input id="RouteOperationMapping[% Data.Operation | html %]" class="W50pc Validate_Required [% Data.ServerError | html %]" type="text" maxlength="250" value="[% Data.Route | html %]" name="RouteOperationMapping[% Data.Operation | html %]"/>
-                                <div id="RouteOperationMapping[% Data.Operation | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="RouteOperationMapping[% Data.Operation | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.ServerErrorMessage) | html %]</p></div>
-                                <p class="FieldExplanation">
-                                    [% Translate("Define the route that should get mapped to this operation. Variables marked by a ':' will get mapped to the entered name and passed along with the others to the mapping. (e.g. /Ticket/:TicketID).") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="RouteOperationMapping[% Data.Operation | html %]"><span class="Marker">*</span>[% Translate("Route mapping for Operation") | html %] '[% Data.Operation | html %]'</label>
+                                <div class="Field">
+                                    <input id="RouteOperationMapping[% Data.Operation | html %]" class="W50pc Validate_Required [% Data.ServerError | html %]" type="text" maxlength="250" value="[% Data.Route | html %]" name="RouteOperationMapping[% Data.Operation | html %]"/>
+                                    <div id="RouteOperationMapping[% Data.Operation | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="RouteOperationMapping[% Data.Operation | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.ServerErrorMessage) | html %]</p></div>
+                                    <p class="FieldExplanation">
+                                        [% Translate("Define the route that should get mapped to this operation. Variables marked by a ':' will get mapped to the entered name and passed along with the others to the mapping. (e.g. /Ticket/:TicketID).") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <label for="RequestMethod[% Data.Operation | html %]">[% Translate("Valid request methods for Operation") | html %] '[% Data.Operation | html %]':</label>
-                            <div class="Field">
-                                [% Data.RequestMethodStrg %]
-                                <p class="FieldExplanation">
-                                    [% Translate("Limit this Operation to specific request methods. If no method is selected all requests will be accepted.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label for="RequestMethod[% Data.Operation | html %]">[% Translate("Valid request methods for Operation") | html %] '[% Data.Operation | html %]'</label>
+                                <div class="Field">
+                                    [% Data.RequestMethodStrg %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("Limit this Operation to specific request methods. If no method is selected all requests will be accepted.") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
-                            <label class="Mandatory" for="ParserBackend[% Data.Operation | html %]"><span class="Marker">*</span>[% Translate("Parser backend for operation") | html %] '[% Data.Operation | html %]':</label>
-                            <div class="Field">
-                                [% Data.ParserBackendStrg %]
-                                <p class="FieldExplanation">
-                                    [% Translate("Defines the incoming data format.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="ParserBackend[% Data.Operation | html %]"><span class="Marker">*</span>[% Translate("Parser backend for operation") | html %] '[% Data.Operation | html %]'</label>
+                                <div class="Field">
+                                    [% Data.ParserBackendStrg %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("Defines the incoming data format.") | html %]
+                                    </p>
+                                </div>
                             </div>
-
 [% RenderBlockStart("RouteOperationMappingParserBackendParameter") %]
-                            <label class="Mandatory" for="ParserBackendParameter[% Data.Parameter | html %][% Data.Operation | html %]"><span class="Marker">*</span>[% Translate("Parser backend parameter") | html %] '[% Data.Parameter | html %]':</label>
-                            <div class="Field">
-                                <input id="ParserBackendParameter[% Data.Parameter | html %][% Data.Operation | html %]" class="W50pc [% Data.BackendParameterServerError | html %]" type="text" maxlength="250" value="[% Data.Value | html %]" name="ParserBackendParameter[% Data.Parameter | html %][% Data.Operation | html %]"/>
-                                <p class="FieldExplanation">
-                                    [% Translate("Please click 'Save' to get the corresponding backend parameter if the parser backend was changed.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="ParserBackendParameter[% Data.Parameter | html %][% Data.Operation | html %]"><span class="Marker">*</span>[% Translate("Parser backend parameter") | html %] '[% Data.Parameter | html %]'</label>
+                                <div class="Field">
+                                    <input id="ParserBackendParameter[% Data.Parameter | html %][% Data.Operation | html %]" class="W50pc [% Data.BackendParameterServerError | html %]" type="text" maxlength="250" value="[% Data.Value | html %]" name="ParserBackendParameter[% Data.Parameter | html %][% Data.Operation | html %]"/>
+                                    <p class="FieldExplanation">
+                                        [% Translate("Please click 'Save' to get the corresponding backend parameter if the parser backend was changed.") | html %]
+                                    </p>
+                                </div>
                             </div>
 [% RenderBlockEnd("RouteOperationMappingParserBackendParameter") %]
-
 [% RenderBlockEnd("RouteOperationMapping") %]
-
-                            <label class="Mandatory" for="MaxLength"><span class="Marker">*</span>[% Translate("Maximum message length") | html %]:</label>
-                            <div class="Field">
-                                <input id="MaxLength" class="W25pc Validate_Required Validate_Number [% Data.MaxLengthServerError | html %]" type="text" maxlength="10" value="[% Data.MaxLength | html %]" name="MaxLength"/>
-                                <div id="MaxLengthError" class="TooltipErrorMessage"><p>[% Translate("This field should be an integer number.") | html %]</p></div>
-                                <div id="MaxLengthServerError" class="TooltipErrorMessage"><p>[% Translate(Data.MaxLengthServerErrorMessage) | html %]</p></div>
-                                <p class="FieldExplanation">
-                                    [% Translate("Here you can specify the maximum size (in bytes) of REST messages that OTRS will process.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="MaxLength"><span class="Marker">*</span>[% Translate("Maximum message length") | html %]</label>
+                                <div class="Field">
+                                    <input id="MaxLength" class="W25pc Validate_Required Validate_Number [% Data.MaxLengthServerError | html %]" type="text" maxlength="10" value="[% Data.MaxLength | html %]" name="MaxLength"/>
+                                    <div id="MaxLengthError" class="TooltipErrorMessage"><p>[% Translate("This field should be an integer number.") | html %]</p></div>
+                                    <div id="MaxLengthServerError" class="TooltipErrorMessage"><p>[% Translate(Data.MaxLengthServerErrorMessage) | html %]</p></div>
+                                    <p class="FieldExplanation">
+                                        [% Translate("Here you can specify the maximum size (in bytes) of REST messages that Znuny will process.") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label class="Mandatory" for="KeepAlive"><span class="Marker">*</span>[% Translate("Send Keep-Alive") | html %]:</label>
-                            <div class="Field">
-                                [% Data.KeepAliveStrg %]
-                                <div id="KeepAliveError" class="TooltipErrorMessage"><p>[% Translate("This field should be an integer number.") | html %]</p></div>
-                                <div id="KeepAliveServerError" class="TooltipErrorMessage"><p>[% Translate(Data.MaxLengthServerErrorMessage) | html %]</p></div>
-                                <p class="FieldExplanation">
-                                    [% Translate("This configuration defines if incoming connections should get closed or kept alive.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="KeepAlive"><span class="Marker">*</span>[% Translate("Send Keep-Alive") | html %]</label>
+                                <div class="Field">
+                                    [% Data.KeepAliveStrg %]
+                                    <div id="KeepAliveError" class="TooltipErrorMessage"><p>[% Translate("This field should be an integer number.") | html %]</p></div>
+                                    <div id="KeepAliveServerError" class="TooltipErrorMessage"><p>[% Translate(Data.MaxLengthServerErrorMessage) | html %]</p></div>
+                                    <p class="FieldExplanation">
+                                        [% Translate("This configuration defines if incoming connections should get closed or kept alive.") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 [% END %]
-
-[% RenderBlockStart("AdditionalHeaders") %]
-                        <label>[% Translate("Additional response headers") | html %]:</label>
-                        <div class="Field ValueInsert">
-
-                            <input type="hidden" name="ValueCounter" value="[% Data.ValueCounter | html %]" id="ValueCounter" class="ValueCounter" />
-[% RenderBlockStart("ValueRow") %]
-                            <div class="ValueRow">
-                                <input name="Key_[% Data.ValueCounter | html %]" id="Key_[% Data.ValueCounter | html %]" class="DefaultValueKeyItem Validate_Required W20pc [% Data.KeyError | html %]" type="text" maxlength="150" value="[% Data.Key | html %]" style="width:250px"/>
-                                <div id="Key_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="Key_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
-
-                                <label class="Mandatory" for="Value_[% Data.ValueCounter | html %]"><span class="Marker">*</span>[% Translate("Value") | html %]:</label>
-                                <input name="Value_[% Data.ValueCounter | html %]" id="Value_[% Data.ValueCounter | html %]" class="DefaultValueItem Validate_Required W20pc [% Data.ValueError | html %]" type="text" maxlength="150" value="[% Data.Value | html %]"/>
-                                <div id="Value_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="Value_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-
-                                <a href="#" id="RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
-                                <div class="SpacingTopMini" ></div>
-                            </div>
-[% RenderBlockEnd("ValueRow") %]
-                        <div class="Field">
-                            <a href="#" id="AddValue" class="CallForAction AddButton Inline"><span><i class="fa fa-plus-square-o">&nbsp;</i>[% Translate("Add response header") | html %]</span></a>
-                        </div>
-[% RenderBlockStart("ValueTemplate") %]
-                            <div class="ValueTemplate Hidden">
-                                <input name="Key_[% Data.ValueCounter | html %]" id="Key" class="DefaultValueKeyItem W20pc" type="text" maxlength="150" value="[% Data.Key | html %]" style="width:250px"/>
-                                <div id="KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
-
-                                <label class="Mandatory" for="Value"><span class="Marker">*</span>[% Translate("Value") | html %]:</label>
-                                <input name="Value_[% Data.ValueCounter | html %]" id="Value" class="DefaultValueItem W20pc" type="text" maxlength="150" value="[% Data.Value | html %]"/>
-                                <div id="ValueError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="ValueServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-
-                                <a href="#" id="RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
-                                <div class="SpacingTopMini" ></div>
-                            </div>
-[% RenderBlockEnd("ValueTemplate") %]
-
-                            <input type="hidden" name="DeletedValue" value="[% Data.DeletedString | html %]" id="DeletedValue" class="DeletedValue" />
-
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("AdditionalHeaders") %]
 
 # requester specific configuration
 [% IF Data.CommunicationType == 'Requester' %]
-                            <label class="Mandatory" for="Host"><span class="Marker">*</span>[% Translate("Endpoint") | html %]:</label>
-                            <div class="Field">
-                                <input id="Host" class="W50pc [% Data.HostServerError | html %] Validate_Required" type="text" maxlength="250" value="[% Data.Host | html %]" name="Host"/>
-                                <div id="HostError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="HostServerError" class="TooltipErrorMessage"><p>[% Translate(Data.HostServerErrorMessage) | html %]</p></div>
-                                <p class="FieldExplanation">
-                                    [% Translate("URI to indicate specific location for accessing a web service.") | html %]
-                                    <br/>
-                                    [% Translate("e.g https://www.otrs.com:10745/api/v1.0 (without trailing backslash)") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="Host"><span class="Marker">*</span>[% Translate("Endpoint") | html %]</label>
+                                <div class="Field">
+                                    <input id="Host" class="W50pc [% Data.HostServerError | html %] Validate_Required" type="text" maxlength="250" value="[% Data.Host | html %]" name="Host"/>
+                                    <div id="HostError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="HostServerError" class="TooltipErrorMessage"><p>[% Translate(Data.HostServerErrorMessage) | html %]</p></div>
+                                    <p class="FieldExplanation">
+                                        [% Translate("URI to indicate specific location for accessing a web service.") | html %]
+                                        <br/>
+                                        [% Translate("e.g https://www.example.com:10745/api/v1.0 (without trailing backslash)") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label for="SSLNoHostnameVerification">[% Translate("Disable SSL hostname certificate verification") | html %]:</label>
-                            <div class="Field">
-                                <input type="checkbox" name="SSLNoHostnameVerification" id="SSLNoHostnameVerification" value="1" class="[% Data.SSLNoHostnameVerificationServerError | html %]" [% Data.SSLNoHostnameVerificationChecked | html %] />
-
+                            <div class="field-wrapper">
+                                <div class="CheckboxContainer">
+                                    <div class="Field">
+                                        <input type="checkbox" name="SSLNoHostnameVerification" id="SSLNoHostnameVerification" value="1" class="[% Data.SSLNoHostnameVerificationServerError | html %]" [% Data.SSLNoHostnameVerificationChecked | html %] />
+                                    </div>
+                                    <label for="SSLNoHostnameVerification">[% Translate("Disable SSL hostname certificate verification") | html %]</label>
+                                </div>
                                 <div id="SSLNoHostnameVerificationError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                 <div id="SSLNoHostnameVerificationServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLNoHostnameVerificationServerErrorMessage) | html %]</p></div>
                                 <p class="FieldExplanation W50pc">
                                     [% Translate("Disables hostname certificate verification. This is not recommended and should only be used in test environments.") | html %]
                                 </p>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label class="Mandatory" for="Timeout">
-                                <span class="Marker">*</span> [% Translate("Timeout") | html %]:
-                            </label>
-                            <div class="Field">
-                                [% Data.TimeoutStrg %]
-                                <div id="TimeoutError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="TimeoutServerError" class="TooltipErrorMessage"><p>[% Translate(Data.TimeoutServerErrorMessage) | html %]</p></div>
-                                <p class="FieldExplanation">
-                                    [% Translate("Timeout value for requests.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="Timeout">
+                                    <span class="Marker">*</span> [% Translate("Timeout") | html %]
+                                </label>
+                                <div class="Field">
+                                    [% Data.TimeoutStrg %]
+                                    <div id="TimeoutError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="TimeoutServerError" class="TooltipErrorMessage"><p>[% Translate(Data.TimeoutServerErrorMessage) | html %]</p></div>
+                                    <p class="FieldExplanation">
+                                        [% Translate("Timeout value for requests.") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label  for="AuthType">[% Translate("Authentication") | html %]:</label>
-                            <div class="Field">
-                                [% Data.AuthenticationStrg %]
-                                <p class="FieldExplanation">
-                                    [% Translate("An optional authentication mechanism to access the remote system.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label  for="AuthType">[% Translate("Authentication") | html %]</label>
+                                <div class="Field">
+                                    [% Data.AuthenticationStrg %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("An optional authentication mechanism to access the remote system.") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
                             <div class="BasicAuthField [% Data.BasicAuthHidden | html %]">
                                 <fieldset class="TableLike">
 
-                                    <label class="Mandatory" for="BasicAuthUser"><span class="Marker">*</span> [% Translate("BasicAuth User") | html %]:</label>
-                                    <div class="Field">
-                                        <input id="BasicAuthUser" class="W50pc [% Data.BasicAuthUserValidateRequired | html %] [% Data.BasicAuthUserServerError | html %]" type="text" maxlength="250" value="[% Data.BasicAuthUser | html %]" name="BasicAuthUser"/>
-                                        <div id="BasicAuthUserError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                        <div id="BasicAuthUserServerError" class="TooltipErrorMessage"><p>[% Translate(Data.BasicAuthUserServerErrorMessage) | html %]</p></div>
-                                        <p class="FieldExplanation">
-                                            [% Translate("The user name to be used to access the remote system.") | html %]
-                                        </p>
+                                    <div class="field-wrapper">
+                                        <label class="Mandatory" for="BasicAuthUser"><span class="Marker">*</span> [% Translate("BasicAuth User") | html %]</label>
+                                        <div class="Field">
+                                            <input id="BasicAuthUser" class="W50pc [% Data.BasicAuthUserValidateRequired | html %] [% Data.BasicAuthUserServerError | html %]" type="text" maxlength="250" value="[% Data.BasicAuthUser | html %]" name="BasicAuthUser"/>
+                                            <div id="BasicAuthUserError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                            <div id="BasicAuthUserServerError" class="TooltipErrorMessage"><p>[% Translate(Data.BasicAuthUserServerErrorMessage) | html %]</p></div>
+                                            <p class="FieldExplanation">
+                                                [% Translate("The user name to be used to access the remote system.") | html %]
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="Clear"></div>
 
-                                    <label class="Mandatory" for="BasicAuthPassword"><span class="Marker">*</span>[% Translate("BasicAuth Password") | html %]:</label>
-                                    <div class="Field">
-                                        <input id="BasicAuthPassword" class="W50pc [% Data.BasicAuthPasswordValidateRequired | html %] [% Data.BasicAuthPasswordServerError | html %]" type="password" maxlength="250" value="[% Data.BasicAuthPassword | html %]" name="BasicAuthPassword"/>
-                                        <div id="BasicAuthPasswordError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                        <div id="BasicAuthPasswordServerError" class="TooltipErrorMessage"><p>[% Translate(Data.BasicAuthPasswordServerErrorMessage) | html %]</p></div>
-                                        <p class="FieldExplanation">
-                                            [% Translate("The password for the privileged user.") | html %]
-                                        </p>
+                                    <div class="field-wrapper">
+                                        <label class="Mandatory" for="BasicAuthPassword"><span class="Marker">*</span>[% Translate("BasicAuth Password") | html %]</label>
+                                        <div class="Field">
+                                            <input id="BasicAuthPassword" class="W50pc [% Data.BasicAuthPasswordValidateRequired | html %] [% Data.BasicAuthPasswordServerError | html %]" type="password" maxlength="250" value="[% Data.BasicAuthPassword | html %]" name="BasicAuthPassword"/>
+                                            <div id="BasicAuthPasswordError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                            <div id="BasicAuthPasswordServerError" class="TooltipErrorMessage"><p>[% Translate(Data.BasicAuthPasswordServerErrorMessage) | html %]</p></div>
+                                            <p class="FieldExplanation">
+                                                [% Translate("The password for the privileged user.") | html %]
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="Clear"></div>
                                 </fieldset>
                             </div>
 
@@ -254,104 +225,111 @@
                                 <div class="JWTAuthField [% Data.JWTAuthHidden | html %]">
                                     <fieldset class="TableLike">
 
-                                        <label class="Mandatory" for="JWTAuthKeyFilePath"><span class="Marker">*</span> [% Translate("JWT authentication: Key file") | html %]:</label>
-                                        <div class="Field">
-                                            <input id="JWTAuthKeyFilePath" class="W50pc [% Data.JWTAuthKeyFilePathValidateRequired | html %] [% Data.JWTAuthKeyFilePathServerError | html %]" type="text" maxlength="255" value="[% Data.JWTAuthKeyFilePath | html %]" name="JWTAuthKeyFilePath"/>
-                                            <div id="JWTAuthKeyFilePathError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                            <div id="JWTAuthKeyFilePathServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthKeyFilePathServerErrorMessage) | html %]</p></div>
-                                            [% IF Data.JWTAuthKeyFilePossibleError %]
-                                                <p class="FieldExplanation">
-                                                    [% Translate("ATTENTION: Key file and/or password (if needed, see below) seem to be invalid.") | html %]
-                                                </p>
-                                            [% END %]
-                                            <p class="FieldExplanation">
-                                                [% Translate("Path to private key file (PEM or DER). The key will be used to sign the JWT.") | html %]
-                                            </p>
-                                        </div>
-                                        <div class="Clear"></div>
-
-                                        <label for="JWTAuthKeyFilePassword">[% Translate("JWT authentication: Key file password") | html %]:</label>
-                                        <div class="Field">
-                                            <input id="JWTAuthKeyFilePassword" class="W50pc [% Data.JWTAuthKeyFilePasswordServerError | html %]" type="password" maxlength="255" value="[% Data.JWTAuthKeyFilePassword | html %]" name="JWTAuthKeyFilePassword"/>
-                                            <div id="JWTAuthKeyFilePasswordError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                            <div id="JWTAuthKeyFilePasswordServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthKeyFilePasswordServerErrorMessage) | html %]</p></div>
-                                            [% IF Data.JWTAuthKeyFilePasswordPossibleError %]
-                                                <p class="FieldExplanation">
-                                                    [% Translate("ATTENTION: Password and/or key file (see above) seem to be invalid.") | html %]
-                                                </p>
-                                            [% END %]
-                                        </div>
-                                        <div class="Clear"></div>
-
-                                        [% IF Data.X509CertificateObjectIsSupported %]
-                                            <label for="JWTAuthCertificateFilePath">[% Translate("JWT authentication: Certificate file") | html %]:</label>
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="JWTAuthKeyFilePath"><span class="Marker">*</span> [% Translate("JWT authentication: Key file") | html %]</label>
                                             <div class="Field">
-                                                <input id="JWTAuthCertificateFilePath" class="W50pc [% Data.JWTAuthCertificateFilePathServerError | html %]" type="text" maxlength="255" value="[% Data.JWTAuthCertificateFilePath | html %]" name="JWTAuthCertificateFilePath"/>
-                                                <div id="JWTAuthCertificateFilePathError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                                <div id="JWTAuthCertificateFilePathServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthCertificateFilePathServerErrorMessage) | html %]</p></div>
-                                                [% IF Data.JWTAuthCertificateFileParseError %]
+                                                <input id="JWTAuthKeyFilePath" class="W50pc [% Data.JWTAuthKeyFilePathValidateRequired | html %] [% Data.JWTAuthKeyFilePathServerError | html %]" type="text" maxlength="255" value="[% Data.JWTAuthKeyFilePath | html %]" name="JWTAuthKeyFilePath"/>
+                                                <div id="JWTAuthKeyFilePathError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                <div id="JWTAuthKeyFilePathServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthKeyFilePathServerErrorMessage) | html %]</p></div>
+                                                [% IF Data.JWTAuthKeyFilePossibleError %]
                                                     <p class="FieldExplanation">
-                                                        [% Translate("ATTENTION: Certificate file could not be parsed.") | html %]
-                                                    </p>
-                                                [% END %]
-                                                [% IF Data.JWTAuthCertificateFileIsExpired %]
-                                                    <p class="FieldExplanation">
-                                                        [% Translate("ATTENTION: Certificate is expired.") | html %]
+                                                        [% Translate("ATTENTION: Key file and/or password (if needed, see below) seem to be invalid.") | html %]
                                                     </p>
                                                 [% END %]
                                                 <p class="FieldExplanation">
-                                                    [% Translate("Path to X.509 certificate file (PEM). Data of the certificate can be used for the payload and/or header data of the JWT.") | html %]
+                                                    [% Translate("Path to private key file (PEM or DER). The key will be used to sign the JWT.") | html %]
                                                 </p>
                                             </div>
-                                            <div class="Clear"></div>
+                                        </div>
+
+                                        <div class="field-wrapper">
+                                            <label for="JWTAuthKeyFilePassword">[% Translate("JWT authentication: Key file password") | html %]</label>
+                                            <div class="Field">
+                                                <input id="JWTAuthKeyFilePassword" class="W50pc [% Data.JWTAuthKeyFilePasswordServerError | html %]" type="password" maxlength="255" value="[% Data.JWTAuthKeyFilePassword | html %]" name="JWTAuthKeyFilePassword"/>
+                                                <div id="JWTAuthKeyFilePasswordError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                <div id="JWTAuthKeyFilePasswordServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthKeyFilePasswordServerErrorMessage) | html %]</p></div>
+                                                [% IF Data.JWTAuthKeyFilePasswordPossibleError %]
+                                                    <p class="FieldExplanation">
+                                                        [% Translate("ATTENTION: Password and/or key file (see above) seem to be invalid.") | html %]
+                                                    </p>
+                                                [% END %]
+                                            </div>
+                                        </div>
+
+                                        [% IF Data.X509CertificateObjectIsSupported %]
+                                            <div class="field-wrapper">
+                                                <label for="JWTAuthCertificateFilePath">[% Translate("JWT authentication: Certificate file") | html %]</label>
+                                                <div class="Field">
+                                                    <input id="JWTAuthCertificateFilePath" class="W50pc [% Data.JWTAuthCertificateFilePathServerError | html %]" type="text" maxlength="255" value="[% Data.JWTAuthCertificateFilePath | html %]" name="JWTAuthCertificateFilePath"/>
+                                                    <div id="JWTAuthCertificateFilePathError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                    <div id="JWTAuthCertificateFilePathServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthCertificateFilePathServerErrorMessage) | html %]</p></div>
+                                                    [% IF Data.JWTAuthCertificateFileParseError %]
+                                                        <p class="FieldExplanation">
+                                                            [% Translate("ATTENTION: Certificate file could not be parsed.") | html %]
+                                                        </p>
+                                                    [% END %]
+                                                    [% IF Data.JWTAuthCertificateFileIsExpired %]
+                                                        <p class="FieldExplanation">
+                                                            [% Translate("ATTENTION: Certificate is expired.") | html %]
+                                                        </p>
+                                                    [% END %]
+                                                    <p class="FieldExplanation">
+                                                        [% Translate("Path to X.509 certificate file (PEM). Data of the certificate can be used for the payload and/or header data of the JWT.") | html %]
+                                                    </p>
+                                                </div>
+                                            </div>
                                         [% END %]
 
-                                        <label class="Mandatory" for="JWTAuthAlgorithm"><span class="Marker">*</span> [% Translate("JWT authentication: Algorithm") | html %]:</label>
-                                        <div class="Field">
-                                            [% Data.JWTAuthAlgorithmStrg %]
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="JWTAuthAlgorithm"><span class="Marker">*</span> [% Translate("JWT authentication: Algorithm") | html %]</label>
+                                            <div class="Field">
+                                                [% Data.JWTAuthAlgorithmStrg %]
+                                            </div>
                                         </div>
-                                        <div class="Clear"></div>
 
-                                        <label class="Mandatory" for="JWTAuthTTL"><span class="Marker">*</span> [% Translate("JWT authentication: TTL") | html %]:</label>
-                                        <div class="Field">
-                                            <input id="JWTAuthTTL" class="W50pc [% Data.JWTAuthTTLValidateRequired | html %] [% Data.JWTAuthTTLServerError | html %]" type="text" maxlength="255" value="[% Data.JWTAuthTTL | html %]" name="JWTAuthTTL"/>
-                                            <div id="JWTAuthTTLError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                            <div id="JWTAuthTTLServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthTTLServerErrorMessage) | html %]</p></div>
-                                            <p class="FieldExplanation">
-                                                [% Translate("TTL (time to live) in seconds for the JWT. This value will be used to calculate the expiration date which will be available in placeholders ExpirationDateTimestamp and ExpirationDateString.") | html %]
-                                            </p>
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="JWTAuthTTL"><span class="Marker">*</span> [% Translate("JWT authentication: TTL") | html %]</label>
+                                            <div class="Field">
+                                                <input id="JWTAuthTTL" class="W50pc [% Data.JWTAuthTTLValidateRequired | html %] [% Data.JWTAuthTTLServerError | html %]" type="text" maxlength="255" value="[% Data.JWTAuthTTL | html %]" name="JWTAuthTTL"/>
+                                                <div id="JWTAuthTTLError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                <div id="JWTAuthTTLServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthTTLServerErrorMessage) | html %]</p></div>
+                                                <p class="FieldExplanation">
+                                                    [% Translate("TTL (time to live) in seconds for the JWT. This value will be used to calculate the expiration date which will be available in placeholders ExpirationDateTimestamp and ExpirationDateString.") | html %]
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="Clear"></div>
 
-                                        <label class="Mandatory" for="JWTAuthPayload"><span class="Marker">*</span> [% Translate("JWT authentication: Payload") | html %]:</label>
-                                        <div class="Field">
-                                            <input id="JWTAuthPayload" class="W50pc [% Data.JWTAuthPayloadValidateRequired | html %] [% Data.JWTAuthPayloadServerError | html %]" type="text" maxlength="255" value="[% Data.JWTAuthPayload | html %]" name="JWTAuthPayload"/>
-                                            <div id="JWTAuthPayloadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                            <div id="JWTAuthPayloadServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthPayloadServerErrorMessage) | html %]</p></div>
-                                            <p class="FieldExplanation">
-                                                [% Translate("Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3") | html %]
-                                                <br />
-                                                [% Translate("Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.") | html %]
-                                                <br />
-                                                [% Translate("Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>") | html %]
-                                            </p>
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="JWTAuthPayload"><span class="Marker">*</span> [% Translate("JWT authentication: Payload") | html %]</label>
+                                            <div class="Field">
+                                                <input id="JWTAuthPayload" class="W50pc [% Data.JWTAuthPayloadValidateRequired | html %] [% Data.JWTAuthPayloadServerError | html %]" type="text" maxlength="255" value="[% Data.JWTAuthPayload | html %]" name="JWTAuthPayload"/>
+                                                <div id="JWTAuthPayloadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                <div id="JWTAuthPayloadServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthPayloadServerErrorMessage) | html %]</p></div>
+                                                <p class="FieldExplanation">
+                                                    [% Translate("Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3") | html %]
+                                                    <br />
+                                                    [% Translate("Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.") | html %]
+                                                    <br />
+                                                    [% Translate("Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>") | html %]
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="Clear"></div>
 
-                                        <label for="JWTAuthAdditionalHeaderData">[% Translate("JWT authentication: Additional header data") | html %]:</label>
-                                        <div class="Field">
-                                            <input id="JWTAuthAdditionalHeaderData" class="W50pc [% Data.JWTAuthAdditionalHeaderDataServerError | html %]" type="text" maxlength="255" value="[% Data.JWTAuthAdditionalHeaderData | html %]" name="JWTAuthAdditionalHeaderData"/>
-                                            <div id="JWTAuthAdditionalHeaderDataError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                            <div id="JWTAuthAdditionalHeaderDataServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthAdditionalHeaderDataServerErrorMessage) | html %]</p></div>
-                                            <p class="FieldExplanation">
-                                                [% Translate("Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3") | html %]
-                                                <br />
-                                                [% Translate("Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.") | html %]
-                                                <br />
-                                                [% Translate("Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>") | html %]
-                                            </p>
+                                        <div class="field-wrapper">
+                                            <label for="JWTAuthAdditionalHeaderData">[% Translate("JWT authentication: Additional header data") | html %]</label>
+                                            <div class="Field">
+                                                <input id="JWTAuthAdditionalHeaderData" class="W50pc [% Data.JWTAuthAdditionalHeaderDataServerError | html %]" type="text" maxlength="255" value="[% Data.JWTAuthAdditionalHeaderData | html %]" name="JWTAuthAdditionalHeaderData"/>
+                                                <div id="JWTAuthAdditionalHeaderDataError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                <div id="JWTAuthAdditionalHeaderDataServerError" class="TooltipErrorMessage"><p>[% Translate(Data.JWTAuthAdditionalHeaderDataServerErrorMessage) | html %]</p></div>
+                                                <p class="FieldExplanation">
+                                                    [% Translate("Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3") | html %]
+                                                    <br />
+                                                    [% Translate("Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.") | html %]
+                                                    <br />
+                                                    [% Translate("Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>") | html %]
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="Clear"></div>
 
                                     </fieldset>
                                 </div>
@@ -359,253 +337,282 @@
 
                             <div class="OAuth2TokenConfigField [% Data.OAuth2TokenConfigHidden | html %]">
                                 <fieldset class="TableLike">
-                                    <label class="Mandatory" for="OAuth2TokenConfigID">
-                                        <span class="Marker">*</span> [% Translate("OAuth2 token configuration") | html %]:
-                                    </label>
-                                    <div class="Field">
-                                        [% Data.OAuth2TokenConfigIDStrg %]
-                                        <div id="OAuth2TokenConfigIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                        <div id="OAuth2TokenConfigIDServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div class="field-wrapper">
+                                        <label class="Mandatory" for="OAuth2TokenConfigID">
+                                            <span class="Marker">*</span> [% Translate("OAuth2 token configuration") | html %]
+                                        </label>
+                                        <div class="Field">
+                                            [% Data.OAuth2TokenConfigIDStrg %]
+                                            <div id="OAuth2TokenConfigIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                            <div id="OAuth2TokenConfigIDServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        </div>
                                     </div>
-                                    <div class="Clear"></div>
                                 </fieldset>
                             </div>
 
-                            <label for="ContentType">[% Translate("Content type") | html %]:</label>
-                            <div class="Field">
-                                [% Data.ContentTypeStrg %]
-                                <p class="FieldExplanation">
-                                    [% Translate("The default content type added to HTTP header to use for POST and PUT requests.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label for="ContentType">[% Translate("Content type") | html %]</label>
+                                <div class="Field">
+                                    [% Data.ContentTypeStrg %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("The default content type added to HTTP header to use for POST and PUT requests.") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 
-                            <label class="Mandatory" for="UseProxy"><span class="Marker">*</span>[% Translate("Use Proxy Options") | html %]:</label>
-                            <div class="Field">
-                                [% Data.UseProxyStrg %]
-                                <p class="FieldExplanation">
-                                    [% Translate("Show or hide Proxy options to connect to the remote system.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="UseProxy"><span class="Marker">*</span>[% Translate("Use Proxy Options") | html %]</label>
+                                <div class="Field">
+                                    [% Data.UseProxyStrg %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("Show or hide Proxy options to connect to the remote system.") | html %]
+                                    </p>
+                                </div>
                             </div>
 
                             <div class="ProxyField [% Data.ProxyHidden | html %]">
                                 <fieldset class="TableLike">
+                                    <div class="field-wrapper">
+                                        <label for="ProxyHost">[% Translate("Proxy Server") | html %]</label>
+                                        <div class="Field">
+                                            <input id="ProxyHost" class="W50pc" type="text" maxlength="250" value="[% Data.ProxyHost | html %]" name="ProxyHost"/>
+                                            <p class="FieldExplanation">
+                                                [% Translate("URI of a proxy server to be used (if needed).") | html %]
+                                                <br/>
+                                                [% Translate("e.g. http://proxy_hostname:8080") | html %]
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="field-wrapper">
+                                        <label for="ProxyUser">[% Translate("Proxy User") | html %]</label>
+                                        <div class="Field">
+                                            <input id="ProxyUser" class="W50pc" type="text" maxlength="250" value="[% Data.ProxyUser | html %]" name="ProxyUser"/>
+                                            <p class="FieldExplanation">
+                                                [% Translate("The user name to be used to access the proxy server.") | html %]
+                                            </p>
+                                        </div>
+                                    </div>
 
-                                    <label for="ProxyHost">[% Translate("Proxy Server") | html %]:</label>
-                                    <div class="Field">
-                                        <input id="ProxyHost" class="W50pc" type="text" maxlength="250" value="[% Data.ProxyHost | html %]" name="ProxyHost"/>
-                                        <p class="FieldExplanation">
-                                            [% Translate("URI of a proxy server to be used (if needed).") | html %]
-                                            <br/>
-                                            [% Translate("e.g. http://proxy_hostname:8080") | html %]
-                                        </p>
+                                    <div class="field-wrapper">
+                                        <label for="ProxyPassword">[% Translate("Proxy Password") | html %]</label>
+                                        <div class="Field">
+                                            <input id="ProxyPassword" class="W50pc" type="password" maxlength="250" value="[% Data.ProxyPassword | html %]" name="ProxyPassword"/>
+                                            <p class="FieldExplanation">
+                                                [% Translate("The password for the proxy user.") | html %]
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="Clear"></div>
-                                    <label for="ProxyUser">[% Translate("Proxy User") | html %]:</label>
-                                    <div class="Field">
-                                        <input id="ProxyUser" class="W50pc" type="text" maxlength="250" value="[% Data.ProxyUser | html %]" name="ProxyUser"/>
-                                        <p class="FieldExplanation">
-                                            [% Translate("The user name to be used to access the proxy server.") | html %]
-                                        </p>
+                                    <div class="field-wrapper">
+                                        <label class="Mandatory" for="ProxyExclude"><span class="Marker">*</span>[% Translate("Skip Proxy") | html %]</label>
+                                        <div class="Field">
+                                            [% Data.ProxyExcludeStrg %]
+                                            <p class="FieldExplanation">
+                                                [% Translate("Skip proxy servers that might be configured globally?") | html %]
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="Clear"></div>
-
-                                    <label for="ProxyPassword">[% Translate("Proxy Password") | html %]:</label>
-                                    <div class="Field">
-                                        <input id="ProxyPassword" class="W50pc" type="password" maxlength="250" value="[% Data.ProxyPassword | html %]" name="ProxyPassword"/>
-                                        <p class="FieldExplanation">
-                                            [% Translate("The password for the proxy user.") | html %]
-                                        </p>
-                                    </div>
-                                    <div class="Clear"></div>
-                                    <label class="Mandatory" for="ProxyExclude"><span class="Marker">*</span>[% Translate("Skip Proxy") | html %]:</label>
-                                    <div class="Field">
-                                        [% Data.ProxyExcludeStrg %]
-                                        <p class="FieldExplanation">
-                                            [% Translate("Skip proxy servers that might be configured globally?") | html %]
-                                        </p>
-                                    </div>
-                                    <div class="Clear"></div>
 
                                 </fieldset>
                             </div>
 
-                            <label class="Mandatory" for="UseSSL"><span class="Marker">*</span>[% Translate("Use SSL Options") | html %]:</label>
-                            <div class="Field">
-                                [% Data.UseSSLStrg %]
-                                <p class="FieldExplanation">
-                                    [% Translate("Show or hide SSL options to connect to the remote system.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="UseSSL"><span class="Marker">*</span>[% Translate("Use SSL Options") | html %]</label>
+                                <div class="Field">
+                                    [% Data.UseSSLStrg %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("Show or hide SSL options to connect to the remote system.") | html %]
+                                    </p>
+                                </div>
                             </div>
 
                             <div class="SSLField [% Data.SSLHidden | html %]">
                                 <fieldset class="TableLike">
-
-                                    <label for="SSLCertificate">[% Translate("Client Certificate") | html %]:</label>
-                                    <div class="Field">
-                                        <input id="SSLCertificate" class="W50pc [% Data.SSLCertificateServerError | html %]" type="text" maxlength="250" value="[% Data.SSLCertificate | html %]" name="SSLCertificate"/>
-                                        <div id="SSLCertificateServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLCertificateServerErrorMessage) | html %]</p></div>
-                                        <p class="FieldExplanation">
-                                            [% Translate("The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).") | html %]
-                                            <br/>
-                                            [% Translate("e.g. /opt/otrs/var/certificates/SOAP/certificate.pem") | html %]
-                                        </p>
+                                    <div class="field-wrapper">
+                                        <label for="SSLCertificate">[% Translate("Client Certificate") | html %]</label>
+                                        <div class="Field">
+                                            <input id="SSLCertificate" class="W50pc [% Data.SSLCertificateServerError | html %]" type="text" maxlength="250" value="[% Data.SSLCertificate | html %]" name="SSLCertificate"/>
+                                            <div id="SSLCertificateServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLCertificateServerErrorMessage) | html %]</p></div>
+                                            <p class="FieldExplanation">
+                                                [% Translate("The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).") | html %]
+                                                <br/>
+                                                [% Translate("e.g. /opt/znuny/var/certificates/SOAP/certificate.pem") | html %]
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="Clear"></div>
 
-                                    <label for="SSLKey">[% Translate("Client Certificate Key") | html %]:</label>
-                                    <div class="Field">
-                                        <input id="SSLKey" class="W50pc [% Data.SSLKeyServerError | html %]" type="text" maxlength="250" value="[% Data.SSLKey | html %]" name="SSLKey"/>
-                                        <div id="SSLKeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLKeyServerErrorMessage) | html %]</p></div>
-                                        <p class="FieldExplanation">
-                                            [% Translate("The full path and name of the SSL client certificate key file (if not already included in certificate file).") | html %]
-                                            <br/>
-                                            [% Translate("e.g. /opt/otrs/var/certificates/SOAP/key.pem") | html %]
-                                        </p>
+                                    <div class="field-wrapper">
+                                        <label for="SSLKey">[% Translate("Client Certificate Key") | html %]</label>
+                                        <div class="Field">
+                                            <input id="SSLKey" class="W50pc [% Data.SSLKeyServerError | html %]" type="text" maxlength="250" value="[% Data.SSLKey | html %]" name="SSLKey"/>
+                                            <div id="SSLKeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLKeyServerErrorMessage) | html %]</p></div>
+                                            <p class="FieldExplanation">
+                                                [% Translate("The full path and name of the SSL client certificate key file (if not already included in certificate file).") | html %]
+                                                <br/>
+                                                [% Translate("e.g. /opt/znuny/var/certificates/SOAP/key.pem") | html %]
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="Clear"></div>
 
-                                    <label for="SSLPassword">[% Translate("Client Certificate Key Password") | html %]:</label>
-                                    <div class="Field">
-                                        <input id="SSLPassword" class="W50pc" type="password" maxlength="250" value="[% Data.SSLPassword | html %]" name="SSLPassword"/>
-                                        <p class="FieldExplanation">
-                                            [% Translate("The password to open the SSL certificate if the key is encrypted.") | html %]
-                                        </p>
+                                    <div class="field-wrapper">
+                                        <label for="SSLPassword">[% Translate("Client Certificate Key Password") | html %]</label>
+                                        <div class="Field">
+                                            <input id="SSLPassword" class="W50pc" type="password" maxlength="250" value="[% Data.SSLPassword | html %]" name="SSLPassword"/>
+                                            <p class="FieldExplanation">
+                                                [% Translate("The password to open the SSL certificate if the key is encrypted.") | html %]
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="Clear"></div>
 
-                                    <label for="SSLCAFile">[% Translate("Certification Authority (CA) Certificate") | html %]:</label>
-                                    <div class="Field">
-                                        <input id="SSLCAFile" class="W50pc [% Data.SSLCAFileServerError | html %]" type="text" maxlength="250" value="[% Data.SSLCAFile | html %]" name="SSLCAFile"/>
-                                        <div id="SSLCAFileServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLCAFileServerErrorMessage) | html %]</p></div>
-                                        <p class="FieldExplanation">
-                                            [% Translate("The full path and name of the certification authority certificate file that validates SSL certificate.") | html %]
-                                            <br/>
-                                            [% Translate("e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem") | html %]
-                                        </p>
+                                    <div class="field-wrapper">
+                                        <label for="SSLCAFile">[% Translate("Certification Authority (CA) Certificate") | html %]</label>
+                                        <div class="Field">
+                                            <input id="SSLCAFile" class="W50pc [% Data.SSLCAFileServerError | html %]" type="text" maxlength="250" value="[% Data.SSLCAFile | html %]" name="SSLCAFile"/>
+                                            <div id="SSLCAFileServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLCAFileServerErrorMessage) | html %]</p></div>
+                                            <p class="FieldExplanation">
+                                                [% Translate("The full path and name of the certification authority certificate file that validates SSL certificate.") | html %]
+                                                <br/>
+                                                [% Translate("e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem") | html %]
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="Clear"></div>
 
-                                    <label for="SSLCADir">[% Translate("Certification Authority (CA) Directory") | html %]:</label>
-                                    <div class="Field">
-                                        <input id="SSLCADir" class="W50pc [% Data.SSLCADirServerError | html %]" type="text" maxlength="250" value="[% Data.SSLCADir | html %]" name="SSLCADir"/>
-                                        <div id="SSLCADirServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLCADirServerErrorMessage) | html %]</p></div>
-                                        <p class="FieldExplanation">
-                                            [% Translate("The full path of the certification authority directory where the CA certificates are stored in the file system.") | html %]
-                                            <br/>
-                                            [% Translate("e.g. /opt/otrs/var/certificates/SOAP/CA") | html %]
-                                        </p>
+                                    <div class="field-wrapper">
+                                        <label for="SSLCADir">[% Translate("Certification Authority (CA) Directory") | html %]</label>
+                                        <div class="Field">
+                                            <input id="SSLCADir" class="W50pc [% Data.SSLCADirServerError | html %]" type="text" maxlength="250" value="[% Data.SSLCADir | html %]" name="SSLCADir"/>
+                                            <div id="SSLCADirServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLCADirServerErrorMessage) | html %]</p></div>
+                                            <p class="FieldExplanation">
+                                                [% Translate("The full path of the certification authority directory where the CA certificates are stored in the file system.") | html %]
+                                                <br/>
+                                                [% Translate("e.g. /opt/znuny/var/certificates/SOAP/CA") | html %]
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="Clear"></div>
                                 </fieldset>
                             </div>
-
 [% RenderBlockStart("InvokerControllerMapping") %]
-                            <label class="Mandatory" for="InvokerControllerMapping[% Data.Invoker | html %]"><span class="Marker">*</span>[% Translate("Controller mapping for Invoker") | html %] '[% Data.Invoker | html %]':</label>
-                            <div class="Field">
-                                <input id="InvokerControllerMapping[% Data.Invoker | html %]" class="W50pc Validate_Required [% Data.ServerError | html %]" type="text" maxlength="250" value="[% Data.Controller | html %]" name="InvokerControllerMapping[% Data.Invoker | html %]"/>
-                                <div id="InvokerControllerMapping[% Data.Invoker | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="InvokerControllerMapping[% Data.Invoker | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.ServerErrorMessage) | html %]</p></div>
-                                <p class="FieldExplanation">
-                                    [% Translate("The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="InvokerControllerMapping[% Data.Invoker | html %]"><span class="Marker">*</span>[% Translate("Controller mapping for Invoker") | html %] '[% Data.Invoker | html %]'</label>
+                                <div class="Field">
+                                    <input id="InvokerControllerMapping[% Data.Invoker | html %]" class="W50pc Validate_Required [% Data.ServerError | html %]" type="text" maxlength="250" value="[% Data.Controller | html %]" name="InvokerControllerMapping[% Data.Invoker | html %]"/>
+                                    <div id="InvokerControllerMapping[% Data.Invoker | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="InvokerControllerMapping[% Data.Invoker | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.ServerErrorMessage) | html %]</p></div>
+                                    <p class="FieldExplanation">
+                                        [% Translate("The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <label for="Command[% Data.Invoker | html %]">[% Translate("Valid request command for Invoker") | html %] '[% Data.Invoker | html %]':</label>
-                            <div class="Field">
-                                [% Data.CommandStrg %]
-                                <p class="FieldExplanation">
-                                    [% Translate("A specific HTTP command to use for the requests with this Invoker (optional).") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label for="Command[% Data.Invoker | html %]">[% Translate("Valid request command for Invoker") | html %] '[% Data.Invoker | html %]'</label>
+                                <div class="Field">
+                                    [% Data.CommandStrg %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("A specific HTTP command to use for the requests with this Invoker (optional).") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
 [% RenderBlockEnd("InvokerControllerMapping") %]
-
-                            <label for="DefaultCommand">[% Translate("Default command") | html %]:</label>
-                            <div class="Field">
-                                [% Data.DefaultCommandStrg %]
-                                <p class="FieldExplanation">
-                                    [% Translate("The default HTTP command to use for the requests.") | html %]
-                                </p>
+                            <div class="field-wrapper">
+                                <label for="DefaultCommand">[% Translate("Default command") | html %]</label>
+                                <div class="Field">
+                                    [% Data.DefaultCommandStrg %]
+                                    <p class="FieldExplanation">
+                                        [% Translate("The default HTTP command to use for the requests.") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
-
 [% END %]
 [% RenderBlockStart("AdditionalHeaders") %]
-                        <label>
-                            [% IF Data.CommunicationType == 'Provider' %]
-                                [% Translate("Additional response headers") | html %]:
-                            [% ELSE %]
-                                [% Translate("Additional request headers") | html %]:
-                            [% END %]
-                        </label>
-                        <div class="Field ValueInsert">
+                            <div class="field-wrapper">
+                                <label>
+                                    [% IF Data.CommunicationType == 'Provider' %]
+                                        [% Translate("Additional response headers") | html %]
+                                    [% ELSE %]
+                                        [% Translate("Additional request headers") | html %]
+                                    [% END %]
+                                </label>
+                                <div class="Field ValueInsert field-wrapper">
 
-                            <input type="hidden" name="ValueCounter" value="[% Data.ValueCounter | html %]" id="ValueCounter" class="ValueCounter" />
+                                    <input type="hidden" name="ValueCounter" value="[% Data.ValueCounter | html %]" id="ValueCounter" class="ValueCounter" />
 [% RenderBlockStart("ValueRow") %]
-                            <div class="ValueRow">
-                                <input name="Key_[% Data.ValueCounter | html %]" id="Key_[% Data.ValueCounter | html %]" class="DefaultValueKeyItem Validate_Required W20pc [% Data.KeyError | html %]" type="text" maxlength="150" value="[% Data.Key | html %]" style="width:250px"/>
-                                <div id="Key_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="Key_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
+                                    <div class="ValueRow single-row-inputs full-width">
+                                        <div class="field-wrapper flex-column">
+                                            <label class="Mandatory"><span class="Marker">*</span>[% Translate("Header") | html %]</label>
+                                            <input name="Key_[% Data.ValueCounter | html %]" id="Key_[% Data.ValueCounter | html %]" class="DefaultValueKeyItem Validate_Required W20pc [% Data.KeyError | html %]" type="text" maxlength="2000" value="[% Data.Key | html %]"/>
+                                            <div id="Key_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                            <div id="Key_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
+                                        </div>
 
-                                <label class="Mandatory" for="Value_[% Data.ValueCounter | html %]"><span class="Marker">*</span>[% Translate("Value") | html %]:</label>
-                                <input name="Value_[% Data.ValueCounter | html %]" id="Value_[% Data.ValueCounter | html %]" class="DefaultValueItem Validate_Required W20pc [% Data.ValueError | html %]" type="text" maxlength="150" value="[% Data.Value | html %]"/>
-                                <div id="Value_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="Value_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div class="field-wrapper flex-column">
+                                            <label class="Mandatory" for="Value_[% Data.ValueCounter | html %]"><span class="Marker">*</span>[% Translate("Value") | html %]</label>
+                                            <div class="single-row-inputs no-padding full-width">
+                                                <div class="field-wrapper flex-column">
+                                                    <input name="Value_[% Data.ValueCounter | html %]" id="Value_[% Data.ValueCounter | html %]" class="DefaultValueItem Validate_Required W20pc [% Data.ValueError | html %]" type="text" maxlength="2000" value="[% Data.Value | html %]"/>
+                                                    <div id="Value_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                    <div id="Value_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                </div>
 
-                                <a href="#" id="RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
-                                <div class="SpacingTopMini" ></div>
-                            </div>
+                                                <a href="#" id="RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
 [% RenderBlockEnd("ValueRow") %]
-                        <div class="Field">
-                            <a href="#" id="AddValue" class="CallForAction AddButton Inline"><span><i class="fa fa-plus-square-o">&nbsp;</i>
-                                [% IF Data.CommunicationType == 'Provider' %]
-                                    [% Translate("Add response header") | html %]
-                                [% ELSE %]
-                                    [% Translate("Add request header") | html %]
-                                [% END %]
-                            </span></a>
-                        </div>
+                                    <div class="Field">
+                                        <a href="#" id="AddValue" class="CallForAction AddButton Inline btn-main btn-primary btn-width-xl">
+                                            <span>
+                                            [% IF Data.CommunicationType == 'Provider' %]
+                                                [% Translate("Add response header") | html %]
+                                            [% ELSE %]
+                                                [% Translate("Add request header") | html %]
+                                            [% END %]
+                                            </span>
+                                        </a>
+                                    </div>
 [% RenderBlockStart("ValueTemplate") %]
-                            <div class="ValueTemplate Hidden">
-                                <input name="Key_[% Data.ValueCounter | html %]" id="Key" class="DefaultValueKeyItem W20pc" type="text" maxlength="150" value="[% Data.Key | html %]" style="width:250px"/>
-                                <div id="KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
+                                    <div class="ValueTemplate single-row-inputs full-width Hidden">
+                                        <div class="field-wrapper flex-column">
+                                            <label class="Mandatory"><span class="Marker">*</span>[% Translate("Header") | html %]</label>
+                                            <input name="Key_[% Data.ValueCounter | html %]" id="Key" class="DefaultValueKeyItem W20pc" type="text" maxlength="2000" value="[% Data.Key | html %]"/>
+                                            <div id="KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                            <div id="KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
+                                        </div>
 
-                                <label class="Mandatory" for="Value"><span class="Marker">*</span>[% Translate("Value") | html %]:</label>
-                                <input name="Value_[% Data.ValueCounter | html %]" id="Value" class="DefaultValueItem W20pc" type="text" maxlength="150" value="[% Data.Value | html %]"/>
-                                <div id="ValueError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <div id="ValueServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div class="field-wrapper flex-column">
+                                            <label class="Mandatory" for="Value"><span class="Marker">*</span>[% Translate("Value") | html %]</label>
+                                            <div class="single-row-inputs no-padding full-width">
+                                                <div class="field-wrapper flex-column">
+                                                    <input name="Value_[% Data.ValueCounter | html %]" id="Value" class="DefaultValueItem W20pc" type="text" maxlength="2000" value="[% Data.Value | html %]"/>
+                                                    <div id="ValueError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                    <div id="ValueServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                </div>
 
-                                <a href="#" id="RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
-                                <div class="SpacingTopMini" ></div>
-                            </div>
+                                                <a href="#" id="RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
 [% RenderBlockEnd("ValueTemplate") %]
 
-                            <input type="hidden" name="DeletedValue" value="[% Data.DeletedString | html %]" id="DeletedValue" class="DeletedValue" />
-
-                        </div>
-                        <div class="Clear"></div>
+                                    <input type="hidden" name="DeletedValue" value="[% Data.DeletedString | html %]" id="DeletedValue" class="DeletedValue" />
+                                </div>
+                            </div>
 [% RenderBlockEnd("AdditionalHeaders") %]
 
-                            <div class="Field SpacingTop">
-                                [% IF Data.Action == 'Change' %]
-                                    <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                                    [% Translate("or") | html %]
-                                    <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                                [% ELSE %]
-                                    <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                                [% END %]
-                                [% Translate("or") | html %]
-                                <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]"><span>[% Translate("Cancel") | html %]</span></a>
+                            <div class="field-wrapper form-button-actions">
+                                <div class="Field buttons-field">
+                                    <a class="btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]"><span>[% Translate("Cancel") | html %]</span></a>
+                                    [% IF Data.Action == 'Change' %]
+                                        <button class="CallForAction Primary btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                        <button class="CallForAction Primary btn-primary btn-main btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                    [% ELSE %]
+                                        <button class="CallForAction Primary btn-primary btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                    [% END %]
+                                </div>
                             </div>
-                            <div class="Clear"></div>
                         </fieldset>
                     </div>
-
                 </form>
             </div>
         </div>
-
     </div>
     <div class="Clear"></div>
 </div>

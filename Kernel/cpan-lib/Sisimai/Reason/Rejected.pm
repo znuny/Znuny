@@ -27,6 +27,7 @@ sub match {
         'batv failed to verify',    # SoniWall
         'batv validation failure',  # SoniWall
         'backscatter protection detected an invalid or expired email address',  # MDaemon
+        "because the sender isn't on the recipient's list of senders to accept mail from",
         'bogus mail from',          # IMail - block empty sender
         'connections not accepted from servers without a valid sender domain',
         'denied [bouncedeny]',      # McAfee
@@ -34,6 +35,7 @@ sub match {
         'delivery not authorized, message refused',
         'does not exist e2110',
         'domain of sender address ',
+        'email address is on senderfilterconfig list',
         'emetteur invalide',
         'empty envelope senders not allowed',
         'envelope blocked – ',
@@ -54,6 +56,7 @@ sub match {
         'rule imposed mailbox access for',  # MailMarshal
         'sender address has been blacklisted',
         'sender email address rejected',
+        'sender is in my black list',
         'sender is spammer',
         'sender not pre-approved',
         'sender rejected',
@@ -64,7 +67,9 @@ sub match {
         'this server does not accept mail from',
         'transaction failed unsigned dsn for',
         'unroutable sender address',
+        'you are not allowed to post to this mailing list',
         'you are sending to/from an address that has been blacklisted',
+        'your access to submit messages to this e-mail system has been rejected'
     ];
     return 0 if grep { rindex($argv1, $_) > -1 } @$isnot;
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
@@ -159,7 +164,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2019,2021 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2019,2021,2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

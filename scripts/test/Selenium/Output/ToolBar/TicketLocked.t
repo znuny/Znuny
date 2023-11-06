@@ -18,10 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
         my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         my $RandomID = $HelperObject->GetRandomID();
         my @Groups;
@@ -78,12 +81,14 @@ $Selenium->RunTest(
             };
 
             # Create test user.
-            my $TestUserLogin = $HelperObject->TestUserCreate(
+            my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
                 Groups => [ 'admin', 'users', $GroupName ],
-            ) || die "Did not get test user $Item";
+            );
 
-            my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
-                UserLogin => $TestUserLogin,
+            $UserObject->SetPreferences(
+                UserID => $TestUserID,
+                Key    => 'UserToolBar',
+                Value  => 1,
             );
 
             push @Users, {
@@ -132,7 +137,7 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@title, \'Locked Tickets Total:\' )]")->VerifiedClick();
 
         # Verify that test is on the correct screen.
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         my $ExpectedURL = "${ScriptAlias}index.pl?Action=AgentTicketLockedView";
 
         $Self->True(
@@ -225,7 +230,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
 
     }
 );

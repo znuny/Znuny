@@ -258,14 +258,51 @@ sub RemoveMention {
     return 1;
 }
 
+=head2 RemoveAllMentions()
+
+Deletes all mentions of a ticket.
+
+    my $Success = $MentionObject->RemoveAllMentions(
+        TicketID => 3252,
+    );
+
+    Returns true value on success.
+
+=cut
+
+sub RemoveAllMentions {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
+
+    NEEDED:
+    for my $Needed (qw(TicketID)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    return if !$DBObject->Do(
+        SQL  => 'DELETE FROM mention WHERE ticket_id = ?',
+        Bind => [ \$Param{TicketID} ],
+    );
+
+    return 1;
+}
+
 =head2 GetTicketMentions()
 
 Retrieves all mentions of a ticket.
 
     my $Mentions = $MentionObject->GetTicketMentions(
         TicketID  => 3252,
-        OrderBy   => 'create_time', # optional; default
-        SortOrder => 'ASC', # or 'DESC', optional; default
+        OrderBy   => 'create_time',     # optional; default
+        SortOrder => 'ASC',             # or 'DESC', optional; default
     );
 
     Returns:
@@ -344,8 +381,8 @@ Retrieves all mentions of a user.
         # if set to 1, all mentions of every article count separately
         PerArticle => 0,
 
-        OrderBy    => 'create_time', # optional; default
-        SortOrder  => 'ASC', # or 'DESC', optional; default
+        OrderBy    => 'create_time',    # optional; default
+        SortOrder  => 'ASC',            # or 'DESC', optional; default
     );
 
     Returns:
@@ -608,7 +645,7 @@ sub GetMentionedUserIDsFromString {
         push @UniqueMentionedUsers, $MentionedUser;
     }
 
-    if ( $Param{Limit} ) {
+    if ( $Param{Limit} && @UniqueMentionedUsers > $Param{Limit} ) {
         @UniqueMentionedUsers = @UniqueMentionedUsers[ 0 .. $Param{Limit} - 1 ];
     }
 

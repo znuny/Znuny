@@ -20,6 +20,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Create test user and login.
@@ -39,8 +40,6 @@ $Selenium->RunTest(
             Key   => 'PGP',
             Value => 0,
         );
-
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Create test PGP path and set it in sysConfig.
         my $PGPPath = $ConfigObject->Get('Home') . "/var/tmp/pgp" . $HelperObject->GetRandomID();
@@ -88,27 +87,25 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText ( 'PGP Management', 'Add PGP Key' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
-        my $Location1 = $Selenium->{Home}
+        my $LocalFile1 = $Selenium->{Home}
             . "/scripts/test/sample/Crypt/PGPPrivateKey-1.asc";
+        my $Location1 = $Selenium->upload_file($LocalFile1);
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location1);
         $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
 
         # Add second test PGP key.
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
-        my $Location2 = $Selenium->{Home}
+        my $LocalFile2 = $Selenium->{Home}
             . "/scripts/test/sample/Crypt/PGPPrivateKey-2.asc";
+        my $Location2 = $Selenium->upload_file($LocalFile2);
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location2);
         $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
@@ -130,7 +127,7 @@ $Selenium->RunTest(
 
         # Test search filter.
         $Selenium->find_element( "#Search", 'css' )->send_keys( $PGPKey{1} );
-        $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
 
         $Self->True(
             index( $Selenium->get_page_source(), $PGPKey{1} ) > -1,
@@ -143,7 +140,7 @@ $Selenium->RunTest(
 
         # Clear search filter.
         $Selenium->find_element( "#Search", 'css' )->clear();
-        $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#Search", 'css' )->VerifiedSubmit();
 
         # Set test PGP in config so we can delete them.
         $HelperObject->ConfigSettingChange(

@@ -13,8 +13,6 @@ package Kernel::System::SysConfig::ValueType::Textarea;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 use parent qw(Kernel::System::SysConfig::BaseValueType);
 
 our @ObjectDependencies = (
@@ -179,7 +177,7 @@ Generate HTML for new array/hash item.
 Returns:
 
     $HTML = '<textarea rows=\'15\' cols=\'50\' class="" type="text" name="SettingName">
-        ...
+        # ...
         </textarea>';
 
 =cut

@@ -541,7 +541,7 @@ Specified params can be overwritten if necessary.
             Subaction   => undef,
             UserID      => 1,
             CustomParam => [ 1, 2, 3, ],
-            ...
+            # ...
         },
     );
 
@@ -610,12 +610,12 @@ sub SaveFormDraft {
             my @Values = $Self->GetArray( Param => $Param );
             next PARAM if !IsArrayRefWithData( \@Values );
 
-            # store single occurances as string
+            # store single occurrences as string
             if ( scalar @Values == 1 ) {
                 $Value = $Values[0];
             }
 
-            # store multiple occurances as array reference
+            # store multiple occurrences as array reference
             else {
                 $Value = \@Values;
             }

@@ -22,6 +22,8 @@ $Selenium->RunTest(
         my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
         my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $TicketObject          = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
 
         # Disable email checks when create new customer user.
         $HelperObject->ConfigSettingChange(
@@ -41,7 +43,7 @@ $Selenium->RunTest(
         );
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -169,7 +171,7 @@ $Selenium->RunTest(
             }
         }
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminCustomerUserInformationCenter screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentCustomerUserInformationCenter");
@@ -231,6 +233,10 @@ $Selenium->RunTest(
             );
         }
 
+        # Show ActionMenu - usually this is done when user hovers, however it's not possible to simulate this behavior.
+        $Selenium->execute_script(
+            "\$('#Dashboard0130-CUIC-TicketOpenAll').next().show();"
+        );
         $Selenium->find_element( "#DashboardAdditionalFilter0130-CUIC-TicketOpenAccessibleForCustomerUser", 'css' )
             ->click();
         $Selenium->WaitFor(
@@ -246,7 +252,7 @@ $Selenium->RunTest(
         for my $AccessibleTicketNumber (@AccessibleTicketNumbers) {
             $Self->True(
                 index( $Selenium->get_page_source(), $AccessibleTicketNumber ) > -1,
-                "Accesible ticket $AccessibleTicketNumber found in widget on page",
+                "Accessible ticket $AccessibleTicketNumber found in widget on page",
             );
         }
 

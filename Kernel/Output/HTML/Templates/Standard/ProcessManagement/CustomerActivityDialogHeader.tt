@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Common::Origin)
 
 <div id="MainBox" class="TicketZoom ARIARoleMain">
     <div class="ContentColumn">
@@ -23,27 +24,30 @@
             <div class="LayoutPopup">
 [% RenderBlockStart("Header") %]
                 <div class="PopupHeader">
-                    <h1>
-                        [% Translate(Data.Name) | html %]
+                    <div>
+                        <h1>
+                            [% Translate(Data.Name) | html %]
 [% RenderBlockStart("DescriptionShort") %]
-                        - [% Translate(Data.DescriptionShort) | html %]
+                            - [% Translate(Data.DescriptionShort) | html %]
 [% RenderBlockEnd("DescriptionShort") %]
-                    </h1>
+                        </h1>
 [% RenderBlockStart("DescriptionLong") %]
-                    <p class="DescriptionLong">[% Translate(Data.DescriptionLong) | html %]</p>
+                        <p class="DescriptionLong">[% Translate(Data.DescriptionLong) | html %]</p>
+                    </div>
 [% RenderBlockEnd("DescriptionLong") %]
 [% RenderBlockStart("CancelLink") %]
                     <p>
-                        <a class="CancelClosePopup" href="#">[% Translate("Cancel & close") | html %]</a>
+                        <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">[% Translate("Cancel") | html %]</a>
                     </p>
 [% RenderBlockEnd("CancelLink") %]
                 </div>
 [% RenderBlockEnd("Header") %]
+
                 <div class="Content">
                     <fieldset class="TableLike">
 [% RenderBlockStart("DescriptionShortAlt") %]
-                        <h2>[% Data.DescriptionShort | html %]</h2>
+                            <h2>[% Data.DescriptionShort | html %]</h2>
 [% RenderBlockEnd("DescriptionShortAlt") %]
 [% RenderBlockStart("DescriptionLongAlt") %]
-                        <p class="Description DescriptionLong">[% Data.DescriptionLong | html %]</p>
+                            <p class="Description DescriptionLong">[% Data.DescriptionLong | html %]</p>
 [% RenderBlockEnd("DescriptionLongAlt") %]
