@@ -139,6 +139,7 @@ sub Run {
             if ($Content) {
                 $MainObject->Require('Text::Diff');
                 my $Diff = Text::Diff::diff( \$File, $Content, { STYLE => 'OldStyle' } );
+                $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$Diff );
                 $LayoutObject->Block(
                     Name => "FileDiff",
                     Data => {

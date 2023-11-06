@@ -959,7 +959,6 @@ sub FatalError {
         Area  => 'Frontend',
         Title => 'Fatal Error'
     );
-    $Output .= $Self->NavigationBar() if $Self->{UserID};
     $Output .= $Self->Error(%Param);
     $Output .= $Self->Footer();
     $Self->Print( Output => \$Output );
@@ -973,7 +972,6 @@ sub SecureMode {
         Area  => 'Frontend',
         Title => 'Secure Mode'
     );
-    $Output .= $Self->NavigationBar() if $Self->{UserID};
     $Output .= $Self->Output(
         TemplateFile => 'AdminSecureMode',
         Data         => \%Param
@@ -4846,7 +4844,6 @@ sub CustomerErrorScreen {
     my ( $Self, %Param ) = @_;
 
     my $Output = $Self->CustomerHeader( Title => 'Error' );
-    $Output .= $Self->CustomerNavigationBar() if $Self->{UserCustomerID};
     $Output .= $Self->CustomerError(%Param);
     $Output .= $Self->CustomerFooter();
     return $Output;
@@ -4885,7 +4882,6 @@ sub CustomerNoPermission {
     # create output
     my $Output;
     $Output = $Self->CustomerHeader( Title => Translatable('No Permission') ) if ( $WithHeader eq 'yes' );
-    $Output .= $Self->CustomerNavigationBar() if $Self->{UserCustomerID};
     $Output .= $Self->Output(
         TemplateFile => 'NoPermission',
         Data         => \%Param

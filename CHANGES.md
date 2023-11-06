@@ -1,4 +1,12 @@
-# 7.0.12 2023-??-??
+# 7.0.13 2023-??-??
+ - 2023-11-02 Added pagination for ArticlePages on AgentTicketZoom.
+ - 2023-10-30 Fixed Bug - Customer Portal Header Toolbar sub-menu not working [#493](https://github.com/znuny/Znuny/issues/493).
+ - 2023-10-25 Fixed AgentInfo module.
+ - 2023-10-23 Fixed used email address to decrypt S/MIME messages in Kernel::System::PostMaster::Filter::Decrypt.
+ - 2023-10-23 Switched back to d3.min.js because of problems with minifier module JavaScript::Minifier::XS.
+ - 2023-10-16 Added "ValueKey" to output of link data for dynamic fields, so it's possible to use both the displayed value of a dropdown ("Value") and the stored key ("ValueKey") in a dynamic field link.
+
+# 7.0.12 2023-10-18
  - 2023-10-13 Updated CKEditor to version 4.22.1.
  - 2023-09-29 Added optional caching to web service requests of dynamic field types WebserviceDropdown and WebserviceMultiselect.
  - 2023-09-26 Fixed Bug - Alert dialog position too low to be interactable [#483](https://github.com/znuny/Znuny/issues/483).
