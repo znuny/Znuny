@@ -891,7 +891,7 @@ Your Znuny Team
 -- ----------------------------------------------------------
 INSERT INTO ticket_history (name, history_type_id, ticket_id, type_id, article_id, priority_id, owner_id, state_id, queue_id, create_by, create_time, change_by, change_time)
     VALUES
-    ('New Ticket [2021012710123456] created.', 1, 1, 1, 1, 3, 1, 1, 1, 1, current_timestamp, 1, current_timestamp);
+    ('New Ticket [2021012710123456] created.', 1, 1, 1, 1, 3, 1, 1, 2, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table notification_event
 -- ----------------------------------------------------------
