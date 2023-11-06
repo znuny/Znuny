@@ -284,7 +284,7 @@ Core.Agent.Overview = (function (TargetNS) {
             // only act if the link was not clicked directly
             if (Event.target !== $MasterActionLink.get(0)) {
                 if (Event.ctrlKey || Event.metaKey) {
-                    Core.UI.Popup.open($MasterActionLink.attr('href'));
+                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'));
                 }
                 else {
                     window.location = $MasterActionLink.attr('href');
@@ -365,7 +365,7 @@ Core.Agent.Overview = (function (TargetNS) {
             // only act if the link was not clicked directly
             if (Event.target !== $MasterActionLink.get(0)) {
                 if (Event.ctrlKey || Event.metaKey) {
-                    Core.UI.Popup.open($MasterActionLink.attr('href'));
+                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'));
                 }
                 else {
                     window.location = $MasterActionLink.attr('href');
@@ -509,7 +509,7 @@ Core.Agent.Overview = (function (TargetNS) {
             // only act if the link was not clicked directly
             if (Event.target !== $MasterActionLink.get(0)) {
                 if (Event.ctrlKey || Event.metaKey) {
-                    Core.UI.Popup.open($MasterActionLink.attr('href'));
+                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'));
                 }
                 else {
                     window.location = $MasterActionLink.attr('href');
