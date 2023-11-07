@@ -24321,7 +24321,3 @@ msgstr ""
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
 msgstr ""
 
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Sets the timeout (in seconds) for resolver DNS queries (i.e. during checking MX record if CheckMXRecord is enabled to protect against long agent UI responses in case of very slow DNS queries)."
-msgstr ""
-

@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.619692714356517;
+    $Self->{Completeness}        = 0.619795109054858;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5638,8 +5638,6 @@ sub Data {
             'باعث می شود نرم افزار چک رکورد MX از آدرس های ایمیل قبل از ارسال ایمیل و یا ارسال یک تلفن و یا ایمیل بلیط.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'تعریف می کند که آدرس یک سرور DNS اختصاص داده شده، در صورت لزوم، برای \ "CheckMXRecord " نگاه یو پی اس.',
-        'Sets the timeout (in seconds) for resolver DNS queries (i.e. during checking MX record if CheckMXRecord is enabled to protect against long agent UI responses in case of very slow DNS queries).' =>
-            '',
         'Makes the application check the syntax of email addresses.' => 'باعث می شود نرم افزار چک نحو آدرس ایمیل.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'تعریف یک عبارت منظم که در آنها از برخی از آدرس های از کنترل و بررسی گرامر (در صورت \ "CheckEmailAddresses " قرار است به \ "بله "). لطفا یک عبارت منظم در این زمینه برای آدرس ایمیل، که از لحاظ دستوری معتبر نیست وارد کنید، اما برای سیستم (یعنی \ "ریشه @ localhost را ") لازم است.',
