@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.866655651024455;
+    $Self->{Completeness}        = 0.866512473153808;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5636,6 +5636,8 @@ sub Data {
             'Faz a aplicação verifica o registro MX de um endereço de e-mail antes de enviar um e-mail ou submeter um ticket de e-mail ou telefone.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Define o endereço de um servidor DNS dedicado, se necessário, para os look-ups "CheckMXRecord".',
+        'Sets the timeout (in seconds) for resolver DNS queries (i.e. during checking MX record if CheckMXRecord is enabled to protect against long agent UI responses in case of very slow DNS queries).' =>
+            '',
         'Makes the application check the syntax of email addresses.' => 'Faz a aplicação verificar a sintaxe de endereços de e-mail.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Define uma expressão regular que exclui alguns endereços da verificação de sintaxe (se "CheckEmailAddresses" está definido como "Sim"). Por favor, insira um regex neste campo para endereços de e-mail, que não são sintaticamente válidos, mas são necessários para o sistema (ou seja, "root@localhost").',

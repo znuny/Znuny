@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.898215465961666;
+    $Self->{Completeness}        = 0.898067074178094;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5633,6 +5633,8 @@ sub Data {
             'Проверава „MX” запис имејл адресе пре слања поруке или телефонских или имејл тикета.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Дефинише адресе наменског „DNS” сервера, уколико је потребно, за „CheckMXRecord” претраге.',
+        'Sets the timeout (in seconds) for resolver DNS queries (i.e. during checking MX record if CheckMXRecord is enabled to protect against long agent UI responses in case of very slow DNS queries).' =>
+            '',
         'Makes the application check the syntax of email addresses.' => 'Приморава апликацију да проверава синтаксу имејл адереса.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Дефинише регуларни израз који искључује неке адресе из провере синтаксе (ако је „CheckEmailAddresses” постављена на „Да”). Молимо вас унесите регуларни израз у ово поље за имејл адресе, које нису синтаксно исправне, али су неопходне за систем (нпр. „root@localhost”).',

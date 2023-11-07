@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.837243886318572;
+    $Self->{Completeness}        = 0.837105567487196;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5644,6 +5644,8 @@ sub Data {
             'Включает проверку MX record почтовых адресов клиента до отправки почты или приема почтовой или телефонной заявки.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Задать адрес выделенного DNS сервера , если необходимо, для проверки "CheckMXRecord".',
+        'Sets the timeout (in seconds) for resolver DNS queries (i.e. during checking MX record if CheckMXRecord is enabled to protect against long agent UI responses in case of very slow DNS queries).' =>
+            '',
         'Makes the application check the syntax of email addresses.' => 'Включает проверку синтаксиса адреса электронной почты.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Задать регулярное выражение для исключения некоторых адресов из проверки правописания (если "CheckEmailAddresses" установлено в "Да"). Введите regex в это поле для почтовых адресов, которые синтаксически неверны, но необходимы в системе (напр. "root@localhost").',

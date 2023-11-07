@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.901685393258427;
+    $Self->{Completeness}        = 0.901536428217413;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5639,6 +5639,8 @@ sub Data {
             '在发送邮件或提交电话工单/邮件工单前让系统检查邮件地址的MX记录。',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             '定义专用的DNS服务器地址，如果需要，用于“检查MX记录”时查找。',
+        'Sets the timeout (in seconds) for resolver DNS queries (i.e. during checking MX record if CheckMXRecord is enabled to protect against long agent UI responses in case of very slow DNS queries).' =>
+            '',
         'Makes the application check the syntax of email addresses.' => '让系统检查邮件地址的语法。',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             '定义一个执行语法检查以排除某些地址的正则表达式（如果参数“检查邮件地址”设置为“是”）。请在这里为语句构成上无效但系统需要的邮件地址输入一个正则表达式（如root@localhost）。',
