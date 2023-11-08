@@ -949,6 +949,7 @@ form select.Error {
  */
 .Center {
     text-align: center;
+    justify-content: center;
 }
 
 /**
@@ -1259,3 +1260,57 @@ iframe.FAQField {
 }
 
 } /* end @media */
+
+/**
+ * @subsection  Container
+ */
+
+#Container {
+    display: flex;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-radius: var(--border-radius-sm);
+    width: 100%;
+    max-width: 400px;
+    overflow: hidden;
+    background: var(--white);
+}
+
+#Container form div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+}
+
+.ContainerCenter {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--main-page-padding);
+    justify-content: center;
+    align-items: center;
+}
+
+#Container h2 {
+    line-height: 22px;
+    padding-bottom: var(--padding-lg);
+}
+
+#Container .header-content {
+    padding-bottom: var(--padding-md);
+}
+
+#Container .header-content h2 {
+    padding-bottom: 0;
+}
+
+#Container form .Marker {
+    display: none;
+}
+
+#Container .ContainerBox {
+    width: 100%;
+    height: 100%;
+    padding-left: 0;
+    position: relative;
+    padding: var(--padding-xxl);
+}
