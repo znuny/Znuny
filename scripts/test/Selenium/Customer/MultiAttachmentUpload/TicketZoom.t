@@ -95,9 +95,12 @@ $Selenium->RunTest(
         );
 
         my $CheckFileTypeFilename = 'Test1.png';
-        my $Location              = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckFileTypeFilename";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
-        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
+
+        my $LocalFile    = $Selenium->{Home} . "/scripts/test/sample/Cache/$CheckFileTypeFilename";
+        my $SeleniumFile = $Selenium->upload_file($LocalFile);
+        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumFile);
+
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length' );
 
         # Verify dialog message.
@@ -130,9 +133,11 @@ $Selenium->RunTest(
         );
 
         # Now try to upload two files of which one exceeds the max size (.pdf should work (5KB), .png shouldn't (20KB))
-        $Location = "$Selenium->{Home}/scripts/test/sample/Cache/Test1.pdf";
+        $LocalFile    = $Selenium->{Home} . "/scripts/test/sample/Cache/Test1.pdf";
+        $SeleniumFile = $Selenium->upload_file($LocalFile);
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
-        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
+        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumFile);
+
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' && \$('.AttachmentDelete i').length"
@@ -140,9 +145,10 @@ $Selenium->RunTest(
         sleep 1;
 
         my $CheckMaxAllowedSizeFilename = 'Test1.png';
-        $Location = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckMaxAllowedSizeFilename";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
-        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
+        $LocalFile    = $Selenium->{Home} . "/scripts/test/sample/Cache/$CheckMaxAllowedSizeFilename";
+        $SeleniumFile = $Selenium->upload_file($LocalFile);
+        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumFile);
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length'
         );
@@ -175,9 +181,11 @@ $Selenium->RunTest(
 
         # Upload file again.
         my $CheckUploadAgainFilename = 'Test1.pdf';
-        $Location = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckUploadAgainFilename";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
-        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
+
+        $LocalFile    = $Selenium->{Home} . "/scripts/test/sample/Cache/$CheckUploadAgainFilename";
+        $SeleniumFile = $Selenium->upload_file($LocalFile);
+        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumFile);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length' );
 
         # Verify dialog message.

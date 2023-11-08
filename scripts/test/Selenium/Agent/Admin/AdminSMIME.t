@@ -138,10 +138,9 @@ $Selenium->RunTest(
         }
 
         # Add certificate.
-        my $CertLocation = $Selenium->{Home}
-            . "/scripts/test/sample/SMIME/SMIMECertificate-smimeuser1.crt";
-
-        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($CertLocation);
+        my $LocalCertFile    = $Selenium->{Home} . "/scripts/test/sample/SMIME/SMIMECertificate-smimeuser1.crt";
+        my $SeleniumCertFile = $Selenium->upload_file($LocalCertFile);
+        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumCertFile);
         $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
 
         # Click 'Add private key'.
@@ -160,10 +159,10 @@ $Selenium->RunTest(
         }
 
         # Add private key.
-        my $PrivateLocation = $Selenium->{Home}
-            . "/scripts/test/sample/SMIME/SMIMEPrivateKey-smimeuser1.pem";
+        my $LocalPrivateFile    = $Selenium->{Home} . "/scripts/test/sample/SMIME/SMIMEPrivateKey-smimeuser1.pem";
+        my $SeleniumPrivateFile = $Selenium->upload_file($LocalPrivateFile);
+        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumPrivateFile);
 
-        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($PrivateLocation);
         $Selenium->find_element("//button[\@type='submit']")->click();
 
         $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Secret.Error').length" );
@@ -176,7 +175,7 @@ $Selenium->RunTest(
             'Client side validation correctly detected missing input value',
         );
 
-        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($PrivateLocation);
+        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumPrivateFile);
         $Selenium->find_element( "#Secret",     'css' )->send_keys("secret");
         $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
 

@@ -74,9 +74,9 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
 
         # import test selenium process scenario
-        my $Location = $Selenium->{Home}
-            . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
-        $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
+        my $LocalFile    = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
+        my $SeleniumFile = $Selenium->upload_file($LocalFile);
+        $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($SeleniumFile);
         $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
         $Selenium->find_element("//button[\@value='Upload process configuration'][\@type='submit']")->VerifiedClick();
 

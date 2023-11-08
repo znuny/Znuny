@@ -57,7 +57,7 @@ my $SeleniumTest = sub {
     );
 
     my @TicketIDs;
-    for my $Count ( 1 .. 2 ) {
+    for my $Count ( 0 .. 2 ) {
 
         # create test Ticket and Articles
         my $TicketID = $HelperObject->TicketCreate();
@@ -174,7 +174,7 @@ my $SeleniumTest = sub {
         #         IsVisibleForCustomer => 1,
     );
     my @ArticleBox;
-    for my $Article (@Articles) {
+    for my $Article ( \@Articles ) {
         my %Article = $ArticleBackendObject->ArticleGet(
             TicketID      => $TicketIDs[1],
             ArticleID     => $Article->{ArticleID},

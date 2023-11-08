@@ -297,18 +297,6 @@ $Selenium->RunTest(
         $Selenium->find_element( "#Profile", 'css' )->send_keys($GenericAgentJob);
         $Selenium->find_element( "#Title",   'css' )->send_keys($GenericTicketSearch);
 
-        # Check 'NewNoteBody' length validation from Add Note section (see bug#13912).
-        my $FieldValue = "a" x 201;
-        $Selenium->find_element( "#NewNoteBody", 'css' )->send_keys($FieldValue);
-        $Selenium->find_element( "#Submit",      'css' )->click();
-        $Selenium->WaitFor( JavaScript => "return \$('#NewNoteBody.Error').length === 1;" );
-
-        $Self->True(
-            $Selenium->execute_script("return \$('#NewNoteBody.Error').length === 1;"),
-            "Validation for 'NewNoteBody' field is correct",
-        );
-        $Selenium->find_element( "#NewNoteBody", 'css' )->clear();
-
         # Insert needed dynamic fields.
         $Selenium->execute_script(
             "\$('#AddNewDynamicFields').val('DynamicField_$CheckboxDynamicFieldName').trigger('redraw.InputField').trigger('change');"

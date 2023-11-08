@@ -72,21 +72,20 @@ $Selenium->RunTest(
             $Selenium->find_element("//a[contains(\@href, \'Subaction=ShowAddCertificate' )]")->VerifiedClick();
 
             # Add certificate.
-            my $CertLocation = $Selenium->{Home}
-                . "/scripts/test/sample/SMIME/SMIMEtest3\@example.net-$Key.crt";
-
-            $Selenium->find_element( "#FileUpload", 'css' )->send_keys($CertLocation);
+            my $LocalCertFile    = $Selenium->{Home} . "/scripts/test/sample/SMIME/SMIMEtest3\@example.net-$Key.crt";
+            my $SeleniumCertFile = $Selenium->upload_file($LocalCertFile);
+            $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumCertFile);
             $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
 
             # Click 'Add private key'.
             $Selenium->find_element("//a[contains(\@href, \'Subaction=ShowAddPrivate' )]")->VerifiedClick();
 
             # Add private key.
-            my $PrivateLocation = $Selenium->{Home}
-                . "/scripts/test/sample/SMIME/SMIMEtest3\@example.net-$Key.key";
+            my $LocalPrivateFile    = $Selenium->{Home} . "/scripts/test/sample/SMIME/SMIMEtest3\@example.net-$Key.key";
+            my $SeleniumPrivateFile = $Selenium->upload_file($LocalPrivateFile);
+            $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumPrivateFile);
 
-            $Selenium->find_element( "#FileUpload", 'css' )->send_keys($PrivateLocation);
-            $Selenium->find_element( "#Secret",     'css' )->send_keys("secret");
+            $Selenium->find_element( "#Secret", 'css' )->send_keys("secret");
             $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
         }
 

@@ -81,6 +81,8 @@ $Selenium->RunTest(
         # Go to calendar overview page.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentAppointmentCalendarOverview");
 
+        sleep 2;
+
         # Wait for AJAX to finish.
         $Selenium->WaitFor(
             JavaScript =>
@@ -90,6 +92,7 @@ $Selenium->RunTest(
         # Hide indicator line if visible. This was causing issue in some of tests in specific execution time.
         if ( $Selenium->execute_script("return \$('.fc-now-indicator.fc-now-indicator-line:visible').length;") ) {
             $Selenium->execute_script("\$('.fc-now-indicator.fc-now-indicator-line').hide();");
+            sleep 2;
             $Selenium->WaitFor(
                 JavaScript =>
                     'return typeof($) === "function" &&  $(".fc-now-indicator.fc-now-indicator-line:visible").length === 0;'
@@ -128,6 +131,8 @@ $Selenium->RunTest(
         my $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
         $Selenium->mouse_move_to_location( element => $EditFormSubmit );
         $EditFormSubmit->click();
+
+        sleep 2;
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -232,12 +237,16 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".CalendarWidget.Loading").length' );
         $Selenium->WaitFor( JavaScript => "return \$.active == 0" );
 
+        sleep 2;
+
         $Selenium->execute_script(
             "\$('.fc-timeline-event')[0].scrollIntoView(true);",
         );
 
         # Click on an appointment.
         $Selenium->execute_script("\$('.fc-timeline-event').click();");
+
+        sleep 2;
 
         # Wait until form and overlay has loaded, if necessary.
         $Selenium->WaitFor(

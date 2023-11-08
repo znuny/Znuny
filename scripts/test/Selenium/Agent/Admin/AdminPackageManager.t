@@ -151,9 +151,10 @@ $Selenium->RunTest(
         $Element->is_displayed();
 
         # Install test package.
-        my $Location = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackage.opm';
+        my $LocalFile    = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackage.opm';
+        my $SeleniumFile = $Selenium->upload_file($LocalFile);
 
-        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
+        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($SeleniumFile);
 
         $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
         $Selenium->find_element("//button[contains(.,'Install Package')]")->click();
@@ -214,8 +215,10 @@ $Selenium->RunTest(
         $NavigateToAdminPackageManager->();
 
         # Try to install incompatible test package.
-        $Location = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackageIncompatible.opm';
-        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
+        $LocalFile    = $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackageIncompatible.opm';
+        $SeleniumFile = $Selenium->upload_file($LocalFile);
+
+        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($SeleniumFile);
 
         $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
 
@@ -239,6 +242,10 @@ $Selenium->RunTest(
                 {
                     Name => "Example repository 1",
                     URL  => "https://addons.znuny.com/api/addon_repos/",
+                },
+                {
+                    Name => "Example repository 2",
+                    URL  => "https://example.com",
                 }
             ],
         );
@@ -249,7 +256,7 @@ $Selenium->RunTest(
         $NavigateToAdminPackageManager->();
         $Selenium->InputFieldValueSet(
             Element => '#Source',
-            Value   => 'Example repository 1',
+            Value   => 'Example repository 2',
         );
 
         $ClickAction->("//button[\@name=\'GetRepositoryList']");
@@ -257,6 +264,18 @@ $Selenium->RunTest(
         # Check that there is a notification about no packages.
         my $Notification = 'No packages found in selected repository. Please check log for more info!';
         $Self->True(
+            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            "$Notification - notification is found."
+        );
+
+        # Check that this notification is not shown on success.
+        $Selenium->InputFieldValueSet(
+            Element => '#Source',
+            Value   => 'Example repository 1',
+        );
+
+        $ClickAction->("//button[\@name=\'GetRepositoryList']");
+        $Self->False(
             $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
             "$Notification - notification is found."
         );

@@ -88,8 +88,10 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerPreferences");
 
         # change customer PGP key preference
-        my $Location = $Selenium->{Home} . '/scripts/test/sample/Crypt/PGPPrivateKey-1.asc';
-        $Selenium->find_element( "#UserPGPKey",       'css' )->send_keys($Location);
+        my $LocalFile    = $Selenium->{Home} . "/scripts/test/sample/Crypt/PGPPrivateKey-1.asc";
+        my $SeleniumFile = $Selenium->upload_file($LocalFile);
+
+        $Selenium->find_element( "#UserPGPKey",       'css' )->send_keys($SeleniumFile);
         $Selenium->find_element( "#UserPGPKeyUpdate", 'css' )->VerifiedClick();
 
         # Check if PGP key was uploaded correctly.

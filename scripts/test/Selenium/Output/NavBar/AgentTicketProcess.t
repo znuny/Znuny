@@ -48,9 +48,10 @@ $Selenium->RunTest(
 
         # Import test selenium process.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
-        my $Location = $Selenium->{Home}
-            . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
-        $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
+        my $LocalFile    = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
+        my $SeleniumFile = $Selenium->upload_file($LocalFile);
+        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumFile);
+
         $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
         $Selenium->WaitFor(
             JavaScript => "return typeof(\$) === 'function' && !\$('#OverwriteExistingEntitiesImport:checked').length"

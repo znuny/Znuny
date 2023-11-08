@@ -89,9 +89,12 @@ $Selenium->RunTest(
             "\$('#FileUpload').css('display', 'block')"
         );
 
-        my $Location = "$Selenium->{Home}/scripts/test/sample/Main/Main-Test1.doc";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
-        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
+
+        my $LocalFile    = $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc";
+        my $SeleniumFile = $Selenium->upload_file($LocalFile);
+        $Selenium->find_element( "#FileUpload", 'css' )->send_keys($SeleniumFile);
+
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' && \$('.AttachmentDelete i').length"
