@@ -1483,13 +1483,16 @@ sub _FlattenDataStructure {
     my @Containers;
     my $DataType;
 
-    if ( IsHashRefWithData( $Param{Data} ) ) {
+    if ( ref $Param{Data} eq 'HASH' ) {
         @Containers = sort keys %{ $Param{Data} };
         $DataType   = 'Hash';
     }
-    else {
+    elsif ( ref $Param{Data} eq 'ARRAY' ) {
         @Containers = @{ $Param{Data} };
         $DataType   = 'Array';
+    }
+    else {
+        return 1;
     }
 
     my $Prefix = $Param{Prefix} // '';

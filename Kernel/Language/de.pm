@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991573033707865;
+    $Self->{Completeness}        = 0.991571641051066;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2882,7 +2882,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'Lieber Kunde,',
         'thank you for using our services.' => 'Danke, dass Sie unsere Services nutzen.',
-        'Yes, I accept your license.' => 'Ja, ich akzeptiere Ihre Lizenz.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>

@@ -1,3 +1,17 @@
+# 7.0.13 2023-??-??
+ - 2023-11-08 Fixed CustomerAccept module.
+ - 2023-11-06 Added SysConfig Setting to configure timeout for DNS resolver queries. Thanks to Paweł Bogusławski (@pboguslawski). [PR#390](https://github.com/znuny/Znuny/pull/390)
+ - 2023-11-06 Sector Nord AG: Fixed encoding of shown changes on subaction ViewDiff of AdminPackageManager. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#486](https://github.com/znuny/Znuny/pull/486)
+ - 2023-11-06 Sector Nord AG: Fixed CTRL+left click in ticket overviews. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#487](https://github.com/znuny/Znuny/pull/487)
+ - 2023-11-06 Sector Nord AG: Textarea element now expands in both directions. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#489](https://github.com/znuny/Znuny/pull/489)
+ - 2023-11-06 Fixed queue_id in ticket history for the initial ticket. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#299](https://github.com/znuny/Znuny/pull/299)
+ - 2023-11-02 Added pagination for ArticlePages on AgentTicketZoom.
+ - 2023-10-30 Fixed Bug - Customer Portal Header Toolbar sub-menu not working [#493](https://github.com/znuny/Znuny/issues/493).
+ - 2023-10-25 Fixed AgentInfo module.
+ - 2023-10-23 Fixed used email address to decrypt S/MIME messages in Kernel::System::PostMaster::Filter::Decrypt.
+ - 2023-10-23 Switched back to d3.min.js because of problems with minifier module JavaScript::Minifier::XS.
+ - 2023-10-16 Added "ValueKey" to output of link data for dynamic fields, so it's possible to use both the displayed value of a dropdown ("Value") and the stored key ("ValueKey") in a dynamic field link.
+
 # 7.0.12 2023-10-18
  - 2023-10-13 Updated CKEditor to version 4.22.1.
  - 2023-09-29 Added optional caching to web service requests of dynamic field types WebserviceDropdown and WebserviceMultiselect.

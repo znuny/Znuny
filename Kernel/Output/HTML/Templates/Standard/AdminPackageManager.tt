@@ -829,7 +829,9 @@
                     </h2>
                 </div>
                 <div class="Content">
-                    <div class="code-container"><code>[% Data.Diff | html %]</code></div>
+                    <div class="code-container">
+                        <pre><code>[% Data.Diff | html %]</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
