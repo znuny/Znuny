@@ -2397,8 +2397,12 @@ sub Data {
         'Change Customer Relations' => 'Изменить Связи клиентов',
         'Open' => 'Открытые',
         'Closed' => 'Закрытые',
+        'Phone ticket' => 'Заявка по телефону',
+        'Email ticket' => 'Заявка по почте',
         '%s open ticket(s) of %s' => '%s открытых заявок из %s',
         '%s closed ticket(s) of %s' => '%s закрытых заявок из %s',
+        'New phone ticket from %s' => 'Новая телефонная заявка от %s',
+        'New email ticket to %s' => 'Новая заявка по почте в %s',
         'Edit customer ID' => 'Редактировать ID клиента',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2413,10 +2417,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Информация о клиенте',
-        'Phone ticket' => 'Заявка по телефону',
-        'Email ticket' => 'Заявка по почте',
-        'New phone ticket from %s' => 'Новая телефонная заявка от %s',
-        'New email ticket to %s' => 'Новая заявка по почте в %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',

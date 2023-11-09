@@ -2392,8 +2392,12 @@ sub Data {
         'Change Customer Relations' => '',
         'Open' => 'פתוח',
         'Closed' => 'סגור',
+        'Phone ticket' => 'פניה בטלפון',
+        'Email ticket' => 'פניה בדוא"ל',
         '%s open ticket(s) of %s' => '%s פניות פתוחות מתוך %s',
         '%s closed ticket(s) of %s' => '%s פניות סגורות מתוך %s',
+        'New phone ticket from %s' => 'פניות טלפון חדשות מ-%s',
+        'New email ticket to %s' => 'פניות דוא"ל חדשות מ-%s',
         'Edit customer ID' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2408,10 +2412,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '',
-        'Phone ticket' => 'פניה בטלפון',
-        'Email ticket' => 'פניה בדוא"ל',
-        'New phone ticket from %s' => 'פניות טלפון חדשות מ-%s',
-        'New email ticket to %s' => 'פניות דוא"ל חדשות מ-%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',

@@ -2392,8 +2392,12 @@ sub Data {
         'Change Customer Relations' => '变更客户关系',
         'Open' => 'Open（处理中）',
         'Closed' => '已关闭',
+        'Phone ticket' => '电话工单',
+        'Email ticket' => '邮件工单',
         '%s open ticket(s) of %s' => '%s个处理中的工单，共%s个',
         '%s closed ticket(s) of %s' => '%s个已关闭的工单，共%s个',
+        'New phone ticket from %s' => '来自于%s新的电话工单',
+        'New email ticket to %s' => '给%s新的邮件工单',
         'Edit customer ID' => '编辑客户ID',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2408,10 +2412,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '客户用户信息',
-        'Phone ticket' => '电话工单',
-        'Email ticket' => '邮件工单',
-        'New phone ticket from %s' => '来自于%s新的电话工单',
-        'New email ticket to %s' => '给%s新的邮件工单',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
