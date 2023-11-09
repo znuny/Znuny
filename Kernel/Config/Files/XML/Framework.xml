@@ -2651,7 +2651,7 @@
                 <Item>
                     <Hash>
                         <Item Key="Name">Example repository 1</Item>
-                        <Item Key="URL">https://addons.znuny.com/api/addon_repos/</Item>
+                        <Item Key="URL">https://addons.znuny.com/private</Item>
                         <Item Key="AuthHeaderKey">Authorization</Item>
                         <Item Key="AuthHeaderValue">Token token=123</Item>
                     </Hash>
