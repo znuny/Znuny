@@ -1,4 +1,4 @@
-# 7.0.13 2023-??-??
+# 7.0.13 2023-11-15
  - 2023-11-09 Added missing links to widget on CustomerUserInformationCenter: create phone ticket, create email ticket, switch to customer.
  - 2023-11-08 Fixed CustomerAccept module.
  - 2023-11-06 Added SysConfig Setting to configure timeout for DNS resolver queries. Thanks to Paweł Bogusławski (@pboguslawski). [PR#390](https://github.com/znuny/Znuny/pull/390)
