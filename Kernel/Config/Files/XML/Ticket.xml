@@ -6068,8 +6068,8 @@
                 <Item Key="Module">Kernel::Output::HTML::Dashboard::TicketGeneric</Item>
                 <Item Key="Title" Translatable="1">Reminder Tickets</Item>
                 <Item Key="Description" Translatable="1">All tickets with a reminder set where the reminder date has been reached</Item>
-                <Item Key="Attributes">TicketPendingTimeOlderMinutes=1;StateType=pending reminder;SortBy=PendingTime;OrderBy=Down;</Item>
-                <Item Key="Filter">Locked</Item>
+                <Item Key="Attributes">StateType=pending reminder;SortBy=PendingTime;OrderBy=Up;</Item>
+                <Item Key="Filter"></Item>
                 <Item Key="Time">UntilTime</Item>
                 <Item Key="Limit">10</Item>
                 <Item Key="Permission">rw</Item>
@@ -6094,11 +6094,11 @@
                         <Item Key="EscalationResponseTime" SelectedID="1"></Item>
                         <Item Key="EscalationSolutionTime" SelectedID="1"></Item>
                         <Item Key="EscalationTime" SelectedID="1"></Item>
+                        <Item Key="PendingTime" SelectedID="2"></Item>
                         <Item Key="EscalationUpdateTime" SelectedID="1"></Item>
                         <Item Key="TicketNumber" SelectedID="2"></Item>
                         <Item Key="Lock" SelectedID="1"></Item>
                         <Item Key="Owner" SelectedID="1"></Item>
-                        <Item Key="PendingTime" SelectedID="1"></Item>
                         <Item Key="Queue" SelectedID="1"></Item>
                         <Item Key="Responsible" SelectedID="1"></Item>
                         <Item Key="Priority" SelectedID="1"></Item>
@@ -6457,8 +6457,8 @@
                 <Item Key="Module">Kernel::Output::HTML::Dashboard::TicketGeneric</Item>
                 <Item Key="Title" Translatable="1">Reminder Tickets</Item>
                 <Item Key="Description" Translatable="1">All tickets with a reminder set where the reminder date has been reached</Item>
-                <Item Key="Attributes">TicketPendingTimeOlderMinutes=1;StateType=pending reminder;SortBy=PendingTime;OrderBy=Down;</Item>
-                <Item Key="Filter">Locked</Item>
+                <Item Key="Attributes">StateType=pending reminder;SortBy=PendingTime;OrderBy=Up;</Item>
+                <Item Key="Filter"></Item>
                 <Item Key="Time">UntilTime</Item>
                 <Item Key="Limit">10</Item>
                 <Item Key="Permission">ro</Item>
@@ -6487,7 +6487,7 @@
                         <Item Key="TicketNumber" SelectedID="2"></Item>
                         <Item Key="Lock" SelectedID="1"></Item>
                         <Item Key="Owner" SelectedID="1"></Item>
-                        <Item Key="PendingTime" SelectedID="1"></Item>
+                        <Item Key="PendingTime" SelectedID="2"></Item>
                         <Item Key="Queue" SelectedID="1"></Item>
                         <Item Key="Responsible" SelectedID="1"></Item>
                         <Item Key="Priority" SelectedID="1"></Item>
@@ -6700,8 +6700,8 @@
                 <Item Key="Module">Kernel::Output::HTML::Dashboard::TicketGeneric</Item>
                 <Item Key="Title" Translatable="1">Reminder Tickets</Item>
                 <Item Key="Description" Translatable="1">All tickets with a reminder set where the reminder date has been reached</Item>
-                <Item Key="Attributes">TicketPendingTimeOlderMinutes=1;StateType=pending reminder;SortBy=PendingTime;OrderBy=Down;</Item>
-                <Item Key="Filter">Locked</Item>
+                <Item Key="Attributes">StateType=pending reminder;SortBy=PendingTime;OrderBy=Up;</Item>
+                <Item Key="Filter"></Item>
                 <Item Key="Time">UntilTime</Item>
                 <Item Key="Limit">10</Item>
                 <Item Key="Permission">ro</Item>
@@ -6730,7 +6730,7 @@
                         <Item Key="TicketNumber" SelectedID="2"></Item>
                         <Item Key="Lock" SelectedID="1"></Item>
                         <Item Key="Owner" SelectedID="1"></Item>
-                        <Item Key="PendingTime" SelectedID="1"></Item>
+                        <Item Key="PendingTime" SelectedID="2"></Item>
                         <Item Key="Queue" SelectedID="1"></Item>
                         <Item Key="Responsible" SelectedID="1"></Item>
                         <Item Key="Priority" SelectedID="1"></Item>

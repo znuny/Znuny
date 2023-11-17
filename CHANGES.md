@@ -1,4 +1,5 @@
 # 6.5.5 2023-??-??
+ - 2023-11-17 Pending dashboards now show all pending tickets.
  - 2023-11-06 Sector Nord AG: Fixed encoding of shown changes on subaction ViewDiff of AdminPackageManager. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#486](https://github.com/znuny/Znuny/pull/486)
  - 2023-11-06 Sector Nord AG: Fixed CTRL+left click in ticket overviews. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#487](https://github.com/znuny/Znuny/pull/487)
  - 2023-11-06 Fixed queue_id in ticket history for the initial ticket. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#299](https://github.com/znuny/Znuny/pull/299)
