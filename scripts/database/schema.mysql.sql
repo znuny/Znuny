@@ -747,7 +747,7 @@ CREATE TABLE time_accounting (
 CREATE TABLE standard_template (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR (200) NOT NULL,
-    text TEXT NULL,
+    text LONGTEXT NULL,
     content_type VARCHAR (250) NULL,
     template_type VARCHAR (100) NOT NULL DEFAULT 'Answer',
     comments VARCHAR (250) NULL,
@@ -1106,7 +1106,7 @@ CREATE TABLE notification_event_message (
     id INTEGER NOT NULL AUTO_INCREMENT,
     notification_id INTEGER NOT NULL,
     subject VARCHAR (200) NOT NULL,
-    text TEXT NOT NULL,
+    text LONGTEXT NOT NULL,
     content_type VARCHAR (250) NOT NULL,
     language VARCHAR (60) NOT NULL,
     PRIMARY KEY(id),

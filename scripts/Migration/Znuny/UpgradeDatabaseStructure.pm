@@ -47,6 +47,14 @@ sub Run {
             Message => 'Increase size of columns of database table generic_agent_jobs',
             Module  => 'GenericAgentJobs',
         },
+        {
+            Message => 'Increase size of columns of database table standard_template',
+            Module  => 'StandardTemplate',
+        },
+        {
+            Message => 'Increase size of columns of database table notification_event_message',
+            Module  => 'NotificationEventMessage',
+        },
     );
 
     return 1   if !@Tasks;
