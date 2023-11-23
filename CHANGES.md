@@ -1,4 +1,9 @@
-# 7.0.13 2023-??-??
+# 7.0.14 2023-??-??
+ - 2023-11-17 Pending dashboards now show all pending tickets.
+ - 2023-11-13 Added option 'send-timeout' to console command Maint::Email::MailQueue.
+
+# 7.0.13 2023-11-15
+ - 2023-11-09 Added missing links to widget on CustomerUserInformationCenter: create phone ticket, create email ticket, switch to customer.
  - 2023-11-08 Fixed CustomerAccept module.
  - 2023-11-06 Added SysConfig Setting to configure timeout for DNS resolver queries. Thanks to Paweł Bogusławski (@pboguslawski). [PR#390](https://github.com/znuny/Znuny/pull/390)
  - 2023-11-06 Sector Nord AG: Fixed encoding of shown changes on subaction ViewDiff of AdminPackageManager. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#486](https://github.com/znuny/Znuny/pull/486)

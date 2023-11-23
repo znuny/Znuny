@@ -2387,8 +2387,12 @@ bin/znuny.Daemon.pl status\').',
         'Change Customer Relations' => '',
         'Open' => 'buka',
         'Closed' => 'tertutup',
+        'Phone ticket' => 'Tiket telepon',
+        'Email ticket' => 'Tiket email',
         '%s open ticket(s) of %s' => '%s tiket dibuka(s) dari %s',
         '%s closed ticket(s) of %s' => '%s tiket ditutup(s) dari %s',
+        'New phone ticket from %s' => 'Tiket telepon baru dari %S',
+        'New email ticket to %s' => 'Tiket email baru untuk %s',
         'Edit customer ID' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2403,10 +2407,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '',
-        'Phone ticket' => 'Tiket telepon',
-        'Email ticket' => 'Tiket email',
-        'New phone ticket from %s' => 'Tiket telepon baru dari %S',
-        'New email ticket to %s' => 'Tiket email baru untuk %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',

@@ -1469,18 +1469,18 @@ Returns:
 
     my %RepositoryList = (
         'Freebie Features' => {
-            URL   => 'https://download.znuny.org/releases/packages/',
+            URL   => 'https://download.znuny.org/releases/packages',
         },
         'Znuny Open Source Add-ons' => {
-            URL   => 'https://addons.znuny.com/api/addon_repos/public/',
+            URL   => 'https://addons.znuny.com/public',
         },
         'Znuny GmbH' => {
-            URL   => 'https://addons.znuny.com/api/addon_repos/',
+            URL   => 'https://addons.znuny.com/private',
             AuthHeaderKey   => '...',
             AuthHeaderValue => '...',
         },
         'Customer Z' => {
-            URL             => 'https://addons.znuny.com/api/addon_repos/',
+            URL             => 'https://addons.znuny.com/private',
             AuthHeaderKey   => '...',
             AuthHeaderValue => '...',
         },
