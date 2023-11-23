@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.866655651024455;
+    $Self->{Completeness}        = 0.866633614278632;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2389,8 +2389,12 @@ sub Data {
         'Change Customer Relations' => 'Alterar relacionamentos de cliente',
         'Open' => 'Aberto',
         'Closed' => 'Fechado',
+        'Phone ticket' => 'Chamado Fone',
+        'Email ticket' => 'Chamado E-mail',
         '%s open ticket(s) of %s' => '%s chamado(s) aberto(s) de %s',
         '%s closed ticket(s) of %s' => '%s chamado(s) fechado(s) de %s',
+        'New phone ticket from %s' => 'Novo chamado via fone de %s',
+        'New email ticket to %s' => 'Novo chamado via e-mail de %s',
         'Edit customer ID' => 'Editar ID de cliente',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2405,10 +2409,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Informações do Usuário Cliente',
-        'Phone ticket' => 'Chamado Fone',
-        'Email ticket' => 'Chamado E-mail',
-        'New phone ticket from %s' => 'Novo chamado via fone de %s',
-        'New email ticket to %s' => 'Novo chamado via e-mail de %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => 'Nenhum chamado encontrado.',
@@ -2885,7 +2885,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'Caro Cliente,',
         'thank you for using our services.' => 'obrigado por utilizar nossos serviços.',
-        'Yes, I accept your license.' => 'Sim, eu aceito a sua licença.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.901685393258427;
+    $Self->{Completeness}        = 0.901669145595769;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2391,8 +2391,12 @@ sub Data {
         'Change Customer Relations' => 'Ügyfélkapcsolatok megváltoztatása',
         'Open' => 'Nyitott',
         'Closed' => 'Lezárva',
+        'Phone ticket' => 'Telefonos jegy',
+        'Email ticket' => 'E-mail jegy',
         '%s open ticket(s) of %s' => '%s nyitott jegye ennek: %s',
         '%s closed ticket(s) of %s' => '%s lezárt jegye ennek: %s',
+        'New phone ticket from %s' => 'Új telefonos jegy tőle: %s',
+        'New email ticket to %s' => 'Új e-mail jegy neki: %s',
         'Edit customer ID' => 'Ügyfél-azonosító szerkesztése',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2407,10 +2411,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Ügyfél-felhasználó információk',
-        'Phone ticket' => 'Telefonos jegy',
-        'Email ticket' => 'E-mail jegy',
-        'New phone ticket from %s' => 'Új telefonos jegy tőle: %s',
-        'New email ticket to %s' => 'Új e-mail jegy neki: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2887,7 +2887,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'Kedves Ügyfelünk!',
         'thank you for using our services.' => 'Köszönjük, hogy a szolgáltatásainkat használta.',
-        'Yes, I accept your license.' => 'Igen, elfogadom a licencet.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>

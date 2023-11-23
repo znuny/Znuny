@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.872934567085261;
+    $Self->{Completeness}        = 0.873078829945464;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2385,8 +2385,12 @@ sub Data {
         'Change Customer Relations' => '고객 관계 변경',
         'Open' => '진행중',
         'Closed' => '종료됨',
+        'Phone ticket' => '폰 티켓',
+        'Email ticket' => '이메일 티켓',
         '%s open ticket(s) of %s' => '진행중 티켓 중 %s / %s',
         '%s closed ticket(s) of %s' => '종료된 티켓 중 %s / %s',
+        'New phone ticket from %s' => '%s로 새 폰 티켓',
+        'New email ticket to %s' => '새 이메일 티켓을 %s로',
         'Edit customer ID' => '고객 ID 수정',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2401,10 +2405,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '고객 사용자 정보',
-        'Phone ticket' => '폰 티켓',
-        'Email ticket' => '이메일 티켓',
-        'New phone ticket from %s' => '%s로 새 폰 티켓',
-        'New email ticket to %s' => '새 이메일 티켓을 %s로',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2881,7 +2881,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => '친애하는 고객,',
         'thank you for using our services.' => '우리의 서비스를 이용해주셔서 감사합니다.',
-        'Yes, I accept your license.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
