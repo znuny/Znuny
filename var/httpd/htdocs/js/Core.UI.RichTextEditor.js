@@ -307,7 +307,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
 
         // set default editor config, but allow custom config for other types for editors
         /*eslint-disable camelcase */
-        RemovedCKEditorPlugins = 'devtools,image,flash,mathjax,embed,exportpdf,sourcedialog,bbcode,divarea,elementspath';
+        RemovedCKEditorPlugins = 'devtools,image,flash,mathjax,embed,exportpdf,sourcedialog,bbcode,divarea,elementspath,stylesheetparser';
         if (!CheckFormID($EditorArea).length) {
             RemovedCKEditorPlugins += ',uploadimage';
         }

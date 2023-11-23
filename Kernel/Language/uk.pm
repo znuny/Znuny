@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.438697951090549;
+    $Self->{Completeness}        = 0.438770451165097;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2386,8 +2386,12 @@ sub Data {
         'Change Customer Relations' => '',
         'Open' => 'Відкриті',
         'Closed' => 'Закриті',
+        'Phone ticket' => 'Телефонний квиток',
+        'Email ticket' => 'Поштовий квиток',
         '%s open ticket(s) of %s' => '%s відкритий квиток(-ки) %s',
         '%s closed ticket(s) of %s' => '%s закритий квиток(-ки) %s',
+        'New phone ticket from %s' => 'Новий телефонний квиток від %s',
+        'New email ticket to %s' => 'Новий поштовий квиток від %s',
         'Edit customer ID' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2402,10 +2406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '',
-        'Phone ticket' => 'Телефонний квиток',
-        'Email ticket' => 'Поштовий квиток',
-        'New phone ticket from %s' => 'Новий телефонний квиток від %s',
-        'New email ticket to %s' => 'Новий поштовий квиток від %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2882,7 +2882,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => '',
         'thank you for using our services.' => '',
-        'Yes, I accept your license.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>

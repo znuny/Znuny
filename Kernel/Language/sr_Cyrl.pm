@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.898215465961666;
+    $Self->{Completeness}        = 0.898198644852091;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2386,8 +2386,12 @@ sub Data {
         'Change Customer Relations' => 'Промени релације клијената',
         'Open' => 'Отворено',
         'Closed' => 'Затворени',
+        'Phone ticket' => 'Тикет позива',
+        'Email ticket' => 'Имејл тикет',
         '%s open ticket(s) of %s' => '%s отворених тикета од %s',
         '%s closed ticket(s) of %s' => '%s затворених тикета од %s',
+        'New phone ticket from %s' => 'Нови тикет позива од %s',
+        'New email ticket to %s' => 'Нови имејл тикет од %s',
         'Edit customer ID' => 'Уреди ID клијента',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2402,10 +2406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Информације о клијент кориснику',
-        'Phone ticket' => 'Тикет позива',
-        'Email ticket' => 'Имејл тикет',
-        'New phone ticket from %s' => 'Нови тикет позива од %s',
-        'New email ticket to %s' => 'Нови имејл тикет од %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2882,7 +2882,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'Драги клијенте,',
         'thank you for using our services.' => 'хвала вам на коришћењу наших услуга.',
-        'Yes, I accept your license.' => 'Да, прихватам вашу лиценцу.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>

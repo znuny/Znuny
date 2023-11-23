@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.643754130865829;
+    $Self->{Completeness}        = 0.643860518922492;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2390,8 +2390,12 @@ sub Data {
         'Change Customer Relations' => '',
         'Open' => 'Otwarte',
         'Closed' => 'Zamknięte',
+        'Phone ticket' => 'Zgłoszenia tel.',
+        'Email ticket' => 'Zgłoszenia e-mail',
         '%s open ticket(s) of %s' => '% otwartych zgłoszeń z %s',
         '%s closed ticket(s) of %s' => '%s zamkniętych zgłoszeń z %s',
+        'New phone ticket from %s' => 'Nowe zgłoszenie tel. od %s',
+        'New email ticket to %s' => 'Nowe zgłoszenie e-mail od %s',
         'Edit customer ID' => 'Zmień ID klienta',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2406,10 +2410,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Informacje o Użytkowniku Klienta',
-        'Phone ticket' => 'Zgłoszenia tel.',
-        'Email ticket' => 'Zgłoszenia e-mail',
-        'New phone ticket from %s' => 'Nowe zgłoszenie tel. od %s',
-        'New email ticket to %s' => 'Nowe zgłoszenie e-mail od %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2886,7 +2886,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'Drogi Kliencie,',
         'thank you for using our services.' => 'dziękujemy za korzystanie z naszych usług.',
-        'Yes, I accept your license.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.499834765366821;
+    $Self->{Completeness}        = 0.499917369029912;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2379,7 +2379,7 @@ sub Data {
         ' Refresh' => '',
         ' Close this widget' => '',
         'Hide' => '',
-        ' Cancel' => '',
+        ' Cancel' => ' Annuleren',
         'more' => 'meer',
         'No Data Available.' => '',
         'Available Columns' => 'Beschikbare kolommen',
@@ -2391,8 +2391,12 @@ sub Data {
         'Change Customer Relations' => 'Bewerk klant koppelingen',
         'Open' => 'Open',
         'Closed' => 'Gesloten',
+        'Phone ticket' => 'Telefoon-ticket',
+        'Email ticket' => 'E-mail-ticket',
         '%s open ticket(s) of %s' => '%s open ticket(s) van %s',
         '%s closed ticket(s) of %s' => '%s gesloten ticket(s) van %s',
+        'New phone ticket from %s' => 'Nieuw telefoonticket van %s',
+        'New email ticket to %s' => 'Nieuw emailticket aan %s',
         'Edit customer ID' => 'Klantcode aanpassen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2407,10 +2411,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Klantgebruiker informatie',
-        'Phone ticket' => 'Telefoon-ticket',
-        'Email ticket' => 'E-mail-ticket',
-        'New phone ticket from %s' => 'Nieuw telefoonticket van %s',
-        'New email ticket to %s' => 'Nieuw emailticket aan %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2887,7 +2887,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => '',
         'thank you for using our services.' => '',
-        'Yes, I accept your license.' => 'Ja, ik accepteer de licentie.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
