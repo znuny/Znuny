@@ -11,6 +11,7 @@ package Kernel::System::SupportDataCollector::Plugin::Database::mysql::Charset;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(Kernel::System::SupportDataCollector::PluginBase);
 
@@ -61,7 +62,7 @@ sub Run {
                 Label      => Translatable('Server Database Charset'),
                 Value      => $Row[1],
                 Message    => Translatable(
-                    "This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set 'utf8'."
+                    "This character set is not yet supported. Please convert your database to the character set 'utf8'."
                 ),
             );
         }

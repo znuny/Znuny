@@ -10,6 +10,7 @@ package Kernel::Modules::AdminDynamicFieldScreenConfiguration;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',

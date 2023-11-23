@@ -52,7 +52,7 @@
                 </div>
                 <div class="Size1of3">
                     <ul class="Tablelike" id="DefaultColumnsScreens">
-                        <li class="Header">[% Translate("Default columns") | html %]</li>
+                        <li class="Header">[% Translate("Overview Default Columns") | html %]</li>
 [% RenderBlockStart("DefaultColumnsScreenOverviewRow") %]
                         <li>
                             <a id="[% Data.Name | uri %]" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Edit;Type=DefaultColumnsScreen;Element=[% Data.DefaultColumnsScreen | uri %]">[% Data.Name | html %]</a>

@@ -10,6 +10,7 @@ package scripts::Migration::Znuny::UpgradeDatabaseStructure::PriorityColor;    #
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(scripts::Migration::Base);
 

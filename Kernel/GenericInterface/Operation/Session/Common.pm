@@ -12,8 +12,6 @@ package Kernel::GenericInterface::Operation::Session::Common;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 our $ObjectManagerDisabled = 1;
 
 =head1 NAME

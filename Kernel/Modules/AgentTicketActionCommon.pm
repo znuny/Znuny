@@ -1319,12 +1319,13 @@ sub Run {
 
         # set dynamic fields
         # cycle through the activated Dynamic Fields for this screen
-        DYNAMICFIELD:
+        DYNAMICFIELDCONFIG:
         for my $DynamicFieldConfig ( @{$DynamicField} ) {
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+            next DYNAMICFIELDCONFIG if !IsHashRefWithData($DynamicFieldConfig);
 
-            # set the object ID (TicketID or ArticleID) depending on the field configration
+            # set the object ID (TicketID or ArticleID) depending on the field configuration
             my $ObjectID = $DynamicFieldConfig->{ObjectType} eq 'Article' ? $ArticleID : $Self->{TicketID};
+            next DYNAMICFIELDCONFIG if !$ObjectID;
 
             # set the value
             my $Success = $DynamicFieldBackendObject->ValueSet(
@@ -2422,6 +2423,12 @@ sub _Mask {
         $LayoutObject->Block(
             Name => 'Priority',
             Data => \%Param,
+        );
+    }
+
+    if ( IsArrayRefWithData( $Param{TicketTypeDynamicFields} ) ) {
+        $LayoutObject->Block(
+            Name => 'TicketTypeDynamicFields',
         );
     }
 

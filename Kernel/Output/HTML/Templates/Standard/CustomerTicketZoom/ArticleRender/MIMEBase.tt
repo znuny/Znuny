@@ -10,8 +10,16 @@
 <li class="[% Data.SenderType | html %]-[% Data.IsVisibleForCustomer | html %] [% Data.Class | html %]">
     <div class="MessageHeader">
         <a href="[% Env("Baselink") %]Action=[% Env("Action") %];TicketNumber=[% Data.TicketNumber | uri %];TicketID=[% Data.TicketID | uri %];ArticleID=[% Data.ArticleID | uri %]">
-            <div class="message-user-avatar">
-                <img src="//www.gravatar.com/avatar/98c188b4d137054757d5659a26994c81?s=100&amp;d=mp">
+            <div class="Avatar">
+                [% IF Config("Frontend::AvatarEngine") == 'Gravatar' && Data.SenderImage %]
+                    <div class="ArticleSenderImage">
+                        <img src="[% Data.SenderImage | url %]" title="[% Data.From | html %]" />
+                    </div>
+                [% ELSE %]
+                    <div class="ArticleSenderInitials">
+                        <span>[% Data.SenderInitials | html %]</span>
+                    </div>
+                [% END %]
             </div>
 
             <div class="message-info">

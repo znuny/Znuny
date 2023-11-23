@@ -798,7 +798,7 @@ tbody td.Sender {
 .ProcessInformation h2 {
     color: var(--black);
     font-weight: var(--normal);
-    padding: var(--padding-lg);
+    padding-left: var(--padding-sm);
     margin-top: var(--margin-sm);
     margin-bottom: 0;
 }
@@ -834,7 +834,7 @@ tbody td.Sender {
     width: 100% !important;
     max-width: calc(25% - var(--gap-xs));
     padding-right: var(--padding-sm);
-    padding-bottom: var(--padding-xl);
+    padding-bottom: var(--padding-sm);
     padding-left: var(--padding-xs);
 }
 

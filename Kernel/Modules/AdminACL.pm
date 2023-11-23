@@ -574,7 +574,7 @@ sub _ShowOverview {
 
     if ( $Self->{UserID} == 1 ) {
 
-        # show error notfy, don't work with user id 1
+        # show error notify, don't work with user id 1
         $Output .= $LayoutObject->Notify(
             Priority => 'Error',
             Info =>

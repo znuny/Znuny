@@ -12,8 +12,6 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::System::VariableCheck qw(:all);
-
 use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
@@ -106,7 +104,7 @@ Runs TransitionAction ArticleSend.
             Signature   => 'Signature 1',                                          # Use signature to replace in Body by Tag <OTRS_TA_SIGNATURE>
             SignatureID => 1,                                                      # Use signature id to replace in Body by Tag <OTRS_TA_SIGNATURE>
 
-            UseTicketHook => 0,                                                    # optional, default: 1 - if you dont want to a ticket hook
+            UseTicketHook => 0,                                                    # optional, default: 1 - if you don't want to a ticket hook
         }
     );
 
