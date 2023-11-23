@@ -12,6 +12,7 @@ package scripts::Migration::Znuny::UpgradeDatabaseStructure;    ## no critic
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(scripts::Migration::Base);
 
@@ -59,6 +60,10 @@ sub Run {
         {
             Message => 'Increase size of column of database table calendar_appointment_plugin',
             Module  => 'CalendarAppointmentID',
+        },
+        {
+            Message => 'Increase size of columns of database table generic_agent_jobs',
+            Module  => 'GenericAgentJobs',
         },
     );
 

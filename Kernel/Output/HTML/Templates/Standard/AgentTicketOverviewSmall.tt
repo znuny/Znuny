@@ -265,7 +265,7 @@
 [% RenderBlockEnd("RecordTicketColumnTranslatable") %]
 [% RenderBlockStart("RecordTicketColumnTime") %]
                     <td>
-                        <div title="[% Data.GenericValue | Localize(" TimeShort") | html %]">[% Data.GenericValue | Localize("TimeShort") | html %]</div>
+                        <div title="[% Data.GenericValue | Localize("TimeShort") | html %]">[% Data.GenericValue | Localize("TimeShort") | html %]</div>
                     </td>
 [% RenderBlockEnd("RecordTicketColumnTime") %]
 [% RenderBlockStart("RecordTicketColumnEscalation") %]

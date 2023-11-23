@@ -35,42 +35,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     margin: 13px 0 26px;
 }
 
-/**
- * @subsection  Container
- */
-#Container {
-    display: flex;
-    border: var(--border-width) var(--border-solid) var(--border-color);
-    border-radius: var(--border-radius-sm);
-    width: 100%;
-    max-width: 400px;
-    overflow: hidden;
-    background: var(--white);
-}
-
-#Container form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-md);
-}
-
-#Container h2 {
-    line-height: 22px;
-    padding-bottom: var(--padding-lg);
-}
-
-#Container .header-content {
-    padding-bottom: var(--padding-md);
-}
-
-#Container .header-content h2 {
-    padding-bottom: 0;
-}
-
-#Container form .Marker {
-    display: none;
-}
-
 #Login,
 #Reset,
 #Signup,

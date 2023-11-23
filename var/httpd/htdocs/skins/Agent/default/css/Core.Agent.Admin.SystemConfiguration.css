@@ -423,6 +423,7 @@ h2.SearchResults {
 .WidgetSimple.Setting .Header {
     cursor: pointer;
     overflow: hidden;
+    z-index: 5;
 }
 
 .Comparing .WidgetSimple.Setting .Header .ActionMenu {
@@ -749,6 +750,8 @@ h2.SearchResults {
 /* Widget Menu */
 .WidgetSimple.Setting  > .WidgetMenu.Hidden {
     margin-top: -58px;
+    opacity: 0;
+    height: 50px;
 }
 
 .WidgetSimple.Setting  > .WidgetMenu {
@@ -1677,6 +1680,12 @@ form.ImportExport fieldset {
 }
 
 /* Responsive */
+@media only screen and (min-width: 0px) and (max-width: 480px) {
+    .WidgetSimple.Setting > .WidgetMenu {
+        flex-flow: column;
+        align-items: stretch;
+    }
+}
 
 @media only screen and (min-width: 0px) and (max-width: 750px) {
 

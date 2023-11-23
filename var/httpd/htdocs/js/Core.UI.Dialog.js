@@ -481,7 +481,7 @@ Core.UI.Dialog = (function (TargetNS) {
         // Set position for Dialog
         if (Params.Type === 'Alert') {
             $Dialog.css({
-                top: $(window).scrollTop() + ($(window).height() * 0.3),
+                top: Math.round($(window).height() * 0.3),
                 left: Math.round(($(window).width() - $Dialog.width()) / 2)
             });
         }

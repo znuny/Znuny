@@ -1147,7 +1147,7 @@ sub Run {
                     UserID     => $Self->{UserID},
                 );
 
-                # show error if cant set
+                # show error if it can't be set
                 if ( !$Success ) {
                     $DeleteResult{Success} = $Success;
                     $DeleteResult{Message} = $LayoutObject->{LanguageObject}->Translate(
@@ -1335,7 +1335,7 @@ sub Run {
                         UserID     => $Self->{UserID},
                     );
 
-                    # show error if cant set
+                    # show error if it can't be set
                     if ( !$Success ) {
                         $Success = 0;
                         $Message = $LayoutObject->{LanguageObject}->Translate(

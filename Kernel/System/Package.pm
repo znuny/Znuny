@@ -1361,16 +1361,16 @@ sub GetRequiredPackages {
             Name => $Element->{Content}
         );
 
-        my $IsInstalled = "Problem";
+        my $IsInstalled = 0;
         if ($PackageIsInstalled) {
-            $IsInstalled = "OK";
+            $IsInstalled = 1;
         }
 
         my $Version                    = $Element->{Version} // "";
         my $IsRequiredVersionInstalled = 1;
 
         # if the required package is already installed, check if the installed version is high enough.
-        if ( $IsInstalled eq "OK" && $Version ne "" ) {
+        if ( $IsInstalled eq 1 && $Version ne "" ) {
             my $InstalledVersion = 0;
 
             LOCAL:
@@ -1389,7 +1389,7 @@ sub GetRequiredPackages {
             );
 
             if ( !$CheckVersion ) {
-                $IsInstalled                = "Problem";
+                $IsInstalled                = 0;
                 $IsRequiredVersionInstalled = 0;
             }
         }
@@ -1469,18 +1469,18 @@ Returns:
 
     my %RepositoryList = (
         'Freebie Features' => {
-            URL   => 'https://download.znuny.org/releases/packages/',
+            URL   => 'https://download.znuny.org/releases/packages',
         },
         'Znuny Open Source Add-ons' => {
-            URL   => 'https://addons.znuny.com/api/addon_repos/public/',
+            URL   => 'https://addons.znuny.com/public',
         },
         'Znuny GmbH' => {
-            URL   => 'https://addons.znuny.com/api/addon_repos/',
+            URL   => 'https://addons.znuny.com/private',
             AuthHeaderKey   => '...',
             AuthHeaderValue => '...',
         },
         'Customer Z' => {
-            URL             => 'https://addons.znuny.com/api/addon_repos/',
+            URL             => 'https://addons.znuny.com/private',
             AuthHeaderKey   => '...',
             AuthHeaderValue => '...',
         },
@@ -3459,9 +3459,9 @@ sub GetRequiredModules {
             Module => $Element->{Content},
         );
 
-        my $IsInstalled = "Problem";
+        my $IsInstalled = 0;
         if ($Version) {
-            $IsInstalled = "OK";
+            $IsInstalled = 1;
         }
 
         push @Requirements, {

@@ -13,17 +13,16 @@ use parent 'Kernel::Output::HTML::TicketZoom::Customer::Base';
 
 use strict;
 use warnings;
-
-use Kernel::System::VariableCheck qw(IsPositiveInteger);
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Output::HTML::Article::MIMEBase',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::CommunicationChannel',
-    'Kernel::System::Main',
     'Kernel::System::Log',
+    'Kernel::System::Main',
     'Kernel::System::Ticket::Article',
-    'Kernel::Output::HTML::Article::MIMEBase',
 );
 
 =head2 ArticleRender()
@@ -39,6 +38,7 @@ Returns article html.
     );
 
 Result:
+
     $HTML = "<div>...</div>";
 
 =cut
@@ -196,6 +196,12 @@ sub ArticleRender {
             BrowserLinkMessage   => $Param{ShowBrowserLinkMessage} && $ShowHTML,
             BodyHTMLLoad         => $Param{ArticleExpanded},
             Age                  => $Param{ArticleAge},
+            SenderImage          => $Self->_ArticleSenderImage(
+                Sender => $Article{From},
+            ),
+            SenderInitials => $LayoutObject->UserInitialsGet(
+                Fullname => $Article{FromRealname},
+            ),
         },
     );
 

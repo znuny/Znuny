@@ -43,25 +43,27 @@
             [% INCLUDE "FormElements/DraftNotifications.tt" %]
             <fieldset class="TableLike FixedLabel card-item-wrapper">
                 <div class="card-item col-wide-100 col-desktop-100 col-tablet-100">
-                    <h2 class="card-title">[% Translate("Ticket Data") | html %]</h2>
                     <div>
-                        <label for="StateID">[% Translate("Next ticket state") | html %]:</label>
-                        <div class="Field">
-                            [% Data.NextStatesStrg %]
+                        <h2 class="card-title">[% Translate("Ticket Data") | html %]</h2>
+                        <div>
+                            <label for="StateID">[% Translate("Next ticket state") | html %]:</label>
+                            <div class="Field">
+                                [% Data.NextStatesStrg %]
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <label>[% Translate("Pending date") | html %]:</label>
-                    <div class="Field">
-                        <div class="select-field-wrapper">[% Data.PendingDateString %]</div>
-                        <div id="DayServerError" class="TooltipErrorMessage">
-                            <p>[% Translate("Date Invalid!") | html %]</p>
+                    <div>
+                        <label>[% Translate("Pending date") | html %]:</label>
+                        <div class="Field">
+                            <div class="select-field-wrapper">[% Data.PendingDateString %]</div>
+                            <div id="DayServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("Date Invalid!") | html %]</p>
+                            </div>
+                            <div id="HourServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("Date Invalid!") | html %]</p>
+                            </div>
+                            <p class="FieldExplanation">[% Translate("For all pending* states.") | html %]</p>
                         </div>
-                        <div id="HourServerError" class="TooltipErrorMessage">
-                            <p>[% Translate("Date Invalid!") | html %]</p>
-                        </div>
-                        <p class="FieldExplanation">[% Translate("For all pending* states.") | html %]</p>
                     </div>
                 </div>
                 [% IF !TicketFrontendConfig.DynamicField.empty %]
@@ -118,7 +120,6 @@
                                 </a>
                             </div>
                             <div id="TicketCustomerContentToCustomer" class="CustomerContainer">
-                                <span class="BoxLabel">[% Translate('To') | html %]</span>
 [% RenderBlockStart("MultipleCustomer") %]
                                 <div class="SpacingTopSmall ">
                                     <input name="CustomerKey_[% Data.Count | html %]" id="CustomerKey_[% Data.Count | html %]" class="CustomerKey" type="hidden" value="[% Data.CustomerKey | html %]" />
@@ -189,7 +190,6 @@
                                 </a>
                             </div>
                             <div id="TicketCustomerContentCcCustomer" class="CcCustomerContainer">
-                                <span class="BoxLabel">[% Translate("Cc") | html %]</span>
 [% RenderBlockStart("CcMultipleCustomer") %]
                                 <div>
                                     <input name="CcCustomerKey_[% Data.Count | html %]" id="CcCustomerKey_[% Data.Count | html %]" class="CustomerKey" type="hidden" value="[% Data.CustomerKey | html %]" />
@@ -260,7 +260,6 @@
                                 </a>
                             </div>
                             <div id="TicketCustomerContentBccCustomer" class="BccCustomerContainer">
-                                <span class="BoxLabel">[% Translate("Bcc") | html %]</span>
 [% RenderBlockStart("BccMultipleCustomer") %]
                                 <div class="SpacingTopSmall ">
                                     <input name="BccCustomerKey_[% Data.Count | html %]" id="BccCustomerKey_[% Data.Count | html %]" class="CustomerKey" type="hidden" value="[% Data.CustomerKey | html %]" />

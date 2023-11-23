@@ -12,6 +12,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Translation::JavaScriptStrings)
 
 package Kernel::Language::hu;
 
@@ -31,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.90203205022303;
+    $Self->{Completeness}        = 0.901669145595769;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -571,7 +572,7 @@ sub Data {
         'Assignment of dynamic fields to screens' => '',
         'Overview' => 'Áttekintés',
         'Screens' => '',
-        'Default columns' => '',
+        'Overview Default Columns' => '',
         'Add dynamic field' => 'Dinamikus mező hozzáadása',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
@@ -621,6 +622,9 @@ sub Data {
         'Backend' => 'Háttérprogram',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1093,9 +1097,6 @@ sub Data {
         'Send Keep-Alive' => 'Életben tartás küldése',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Ez a beállítás azt határozza meg, hogy a bejövő kapcsolatok le legyenek-e zárva vagy maradjanak életben.',
-        'Additional response headers' => 'További válasz fejlécek',
-        'Header' => 'Fejléc',
-        'Add response header' => 'Válasz fejléc hozzáadása',
         'Endpoint' => 'Végpont',
         'URI to indicate specific location for accessing a web service.' =>
             'Adott helyet jelző URI egy webszolgáltatáshoz való hozzáféréshez.',
@@ -1184,7 +1185,10 @@ sub Data {
             'A kérésekhez használandó megadott HTTP parancs ezzel a meghívóval (opcionális).',
         'Default command' => 'Alapértelmezett parancs',
         'The default HTTP command to use for the requests.' => 'A kéréseknél használandó alapértelmezett HTTP parancs.',
+        'Additional response headers' => 'További válasz fejlécek',
         'Additional request headers' => '',
+        'Header' => 'Fejléc',
+        'Add response header' => 'Válasz fejléc hozzáadása',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
@@ -2387,8 +2391,12 @@ sub Data {
         'Change Customer Relations' => 'Ügyfélkapcsolatok megváltoztatása',
         'Open' => 'Nyitott',
         'Closed' => 'Lezárva',
+        'Phone ticket' => 'Telefonos jegy',
+        'Email ticket' => 'E-mail jegy',
         '%s open ticket(s) of %s' => '%s nyitott jegye ennek: %s',
         '%s closed ticket(s) of %s' => '%s lezárt jegye ennek: %s',
+        'New phone ticket from %s' => 'Új telefonos jegy tőle: %s',
+        'New email ticket to %s' => 'Új e-mail jegy neki: %s',
         'Edit customer ID' => 'Ügyfél-azonosító szerkesztése',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2403,10 +2411,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Ügyfél-felhasználó információk',
-        'Phone ticket' => 'Telefonos jegy',
-        'Email ticket' => 'E-mail jegy',
-        'New phone ticket from %s' => 'Új telefonos jegy tőle: %s',
-        'New email ticket to %s' => 'Új e-mail jegy neki: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2883,7 +2887,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'Kedves Ügyfelünk!',
         'thank you for using our services.' => 'Köszönjük, hogy a szolgáltatásainkat használta.',
-        'Yes, I accept your license.' => 'Igen, elfogadom a licencet.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
@@ -5028,8 +5031,8 @@ sub Data {
         'Client Connection Charset' => 'Kliens kapcsolat karakterkészlete',
         'Setting character_set_client needs to be utf8.' => 'A character_set_client beállításnak utf8 értékűnek kell lennie.',
         'Server Database Charset' => 'Kiszolgáló adatbázis karakterkészlete',
-        'This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set \'utf8\'.' =>
-            'Ez a karakterkészlet még nincs támogatva, nézze meg a https://bugs.otrs.org/show_bug.cgi?id=12361 hibajelentést. Alakítsa át az adatbázisát „utf8” karakterkészletre.',
+        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
+            '',
         'The setting character_set_database needs to be \'utf8\'.' => 'A character_set_database beállításnak „utf8” értékűnek kell lennie.',
         'Table Charset' => 'Tábla karakterkészlete',
         'There were tables found which do not have \'utf8\' as charset.' =>
@@ -5087,7 +5090,7 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/postgresql/Version.pm
         'PostgreSQL 9.2 or higher is required.' => 'PostgreSQL 9.2 vagy újabb szükséges.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
         'Operating System' => 'Operációs rendszer',
         'Znuny Disk Partition' => 'Znuny lemezpartíció',
 
@@ -5134,165 +5137,6 @@ sub Data {
         'There should be more than 60% free swap space.' => '60%-nál több szabad lapozófájlnak kellene lennie.',
         'There should be no more than 200 MB swap space used.' => '200 MB-nál nem kellene több lapozófájlt használni.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'Znuny' => '',
-        'Article Search Index Status' => 'Bejegyzés keresési index állapot',
-        'Indexed Articles' => 'Indexelt bejegyzések',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticlesPerCommunicationChannel.pm
-        'Articles Per Communication Channel' => 'Bejegyzések kommunikációs csatornánként',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
-        'Incoming communications' => 'Bejövő kommunikációk',
-        'Outgoing communications' => 'Kimenő kommunikációk',
-        'Failed communications' => 'Sikertelen kommunikációk',
-        'Average processing time of communications (s)' => 'Kommunikációk átlagos feldolgozási ideje (mp)',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
-        'Communication Log Account Status (last 24 hours)' => 'Kommunikációs napló fiókjának állapota (az elmúlt 24 óra)',
-        'No connections found.' => 'Nem találhatók kapcsolatok.',
-        'ok' => 'OK',
-        'permanent connection errors' => 'állandó kommunikációs hibák',
-        'intermittent connection errors' => 'időszakos kommunikációs hibák',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
-        'Config Settings' => 'Konfigurációs beállítások',
-        'Could not determine value.' => 'Nem sikerült meghatározni az értéket.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
-        'Daemon' => 'Démon',
-        'Daemon is running.' => 'A démon fut.',
-        'Daemon is not running.' => 'A démon nem fut.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
-        'Database Records' => 'Adatbázis rekordok',
-        'Tickets' => 'Jegyek',
-        'Ticket History Entries' => 'Jegy előzmény bejegyzések',
-        'Articles' => 'Bejegyzések',
-        'Attachments (DB, Without HTML)' => 'Mellékletek (DB, HTML nélkül)',
-        'Customers With At Least One Ticket' => 'Legalább egy jeggyel rendelkező ügyfelek',
-        'Dynamic Field Values' => 'Dinamikus mező értékek',
-        'Invalid Dynamic Fields' => 'Érvénytelen dinamikus mezők',
-        'Invalid Dynamic Field Values' => 'Érvénytelen dinamikus mező értékek',
-        'GenericInterface Webservices' => 'Általános felület webszolgáltatások',
-        'Process Tickets' => 'Folyamatjegyek',
-        'Months Between First And Last Ticket' => 'Az első és az utolsó jegy közti hónapok',
-        'Tickets Per Month (avg)' => 'Jegyek havonta (átlag)',
-        'Open Tickets' => 'Nyitott jegyek',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
-        'Default SOAP Username And Password' => 'Alapértelmezett SOAP felhasználónév és jelszó',
-        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
-            'Biztonsági kockázat: a SOAP::User és a SOAP::Password alapértelmezett beállításait használja. Változtassa meg.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
-        'Default Admin Password' => 'Alapértelmezett adminisztrátor jelszó',
-        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
-            'Biztonsági kockázat: a root@localhost ügyintéző fióknak még mindig az alapértelmezett jelszava van. Változtassa meg, vagy érvénytelenítse a fiókot.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
-        'Email Sending Queue' => 'E-mail várakozási sor',
-        'Emails queued for sending' => 'Küldéshez sorba állított e-mailek',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
-        'FQDN (domain name)' => 'FQDN (tartománynév)',
-        'Please configure your FQDN setting.' => 'Állítsa be az FQDN beállítását.',
-        'Domain Name' => 'Tartománynév',
-        'Your FQDN setting is invalid.' => 'Az FQDN beállítás érvénytelen.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
-        'File System Writable' => 'Fájlrendszer írhatóság',
-        'The file system on your Znuny partition is not writable.' => 'Az Znuny partíció fájlrendszere nem írható.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
-        'Legacy Configuration Backups' => 'Örökölt konfigurációs biztonsági mentések',
-        'No legacy configuration backup files found.' => 'Nem találhatók örökölt biztonsági mentés fájlok.',
-        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
-            'Örökölt konfigurációs biztonsági mentés fájlok találhatók a Kernel/Config/Backups mappában, de néhány csomagnak még szükségük lehet rájuk.',
-        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
-            'Az örökölt konfigurációs biztonsági mentés fájlok többé nem szükségesek a telepített csomagokhoz, távolítsa el azokat a Kernel/Config/Backups mappából.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
-        'The following JavaScript files loaded multiple times:' => '',
-        'Files' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
-        'Package Installation Status' => 'Csomagtelepítési állapot',
-        'Some packages have locally modified files.' => 'Néhány csomag helyileg módosított fájlokkal rendelkezik.',
-        'Some packages are not correctly installed.' => 'Néhány csomag nincs megfelelően telepítve.',
-        'Package Framework Version Status' => 'Csomag keretrendszer verziójának állapota',
-        'Some packages are not allowed for the current framework version.' =>
-            'Néhány csomag nem engedélyezett a jelenlegi keretrendszer verzióhoz.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageList.pm
-        'Package List' => 'Csomaglista',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SessionConfigSettings.pm
-        'Session Config Settings' => 'Munkamenet-konfigurációs beállítások',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
-        'Spooled Emails' => 'Várakozási sorba helyezett levelek',
-        'There are emails in var/spool that Znuny could not process.' => 'Olyan levelek találhatók a var/spool mappában, amelyeket az Znuny nem tudott feldolgozni.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
-        'Your SystemID setting is invalid, it should only contain digits.' =>
-            'A rendszer-azonosító beállítás érvénytelen, csak számjegyeket tartalmazhat.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
-        'Default Ticket Type' => 'Alapértelmezett jegytípus',
-        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
-            'A beállított alapértelmezett jegytípus érvénytelen vagy hiányzik. Változtassa meg a Ticket::Type::Default beállításait, és válasszon egy érvényes jegytípust.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
-        'Ticket Index Module' => 'Jegyindexelő modul',
-        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
-            'Több mint 60.000 jegye van, ezért a StaticDB háttérprogramot kellene használnia. További információkért nézze meg az adminisztrátori kézikönyvet (Teljesítmény finomhangolás).',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
-        'Invalid Users with Locked Tickets' => 'Érvénytelen felhasználók zárolt jegyekkel',
-        'There are invalid users with locked tickets.' => 'Zárolt jegyekkel rendelkező érvénytelen felhasználók vannak.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/OpenTickets.pm
-        'You should not have more than 8,000 open tickets in your system.' =>
-            'Nem kellene 8.000 nyitott jegynél többel rendelkeznie a rendszeren.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
-        'Ticket Search Index Module' => 'Jegykeresés indexelő modul',
-        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
-            'Az indexelési folyamat kényszeríti az eredeti bejegyzésszöveg tárolását a bejegyzés keresési indexében anélkül, hogy szűrőket hajtana végre vagy a kiszűrendő szavak listáit alkalmazná. Ez meg fogja növelni a keresési index méretét, és ezért lelassíthatja a szabad-szavas kereséseket.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-        'Orphaned Records In ticket_lock_index Table' => 'Árva rekordok a ticket_lock_index táblában',
-        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'A ticket_lock_index tábla árva rekordokat tartalmaz. Futtassa a bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" parancsot a StaticDB index tisztításához.',
-        'Orphaned Records In ticket_index Table' => 'Árva rekordok a ticket_index táblában',
-        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'A ticket_index tábla árva rekordokat tartalmaz. Futtassa a bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" parancsot a StaticDB index tisztításához.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
-        'Time Settings' => 'Időbeállítások',
-        'Server time zone' => 'Kiszolgáló időzónája',
-        'Znuny time zone' => 'Znuny időzóna',
-        'Znuny time zone is not set.' => 'Az Znuny időzónája nincs beállítva.',
-        'User default time zone' => 'Felhasználó alapértelmezett időzónája',
-        'User default time zone is not set.' => 'A felhasználó alapértelmezett időzónája nincs beállítva.',
-        'Calendar time zone is not set.' => 'A naptár időzónája nincs beállítva.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentSkinUsage.pm
-        'UI - Agent Skin Usage' => 'UI – ügyintézői felszín használat',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentThemeUsage.pm
-        'UI - Agent Theme Usage' => 'UI – ügyintézői téma használat',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
-        'UI - Special Statistics' => 'UI – különleges statisztikák',
-        'Agents using custom main menu ordering' => 'Egyéni menürendezést használó ügyintézők',
-        'Agents using favourites for the admin overview' => 'Kedvenceket használó ügyintézők az adminisztrációs áttekintőnél',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'Znuny Version' => 'Znuny verzió',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Webkiszolgáló',
         'Loaded Apache Modules' => 'Betöltött Apache modulok',
@@ -5330,7 +5174,166 @@ sub Data {
         'Webserver Version' => 'Webkiszolgáló verzió',
         'Could not determine webserver version.' => 'Nem sikerült meghatározni a webkiszolgáló verzióját.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
+        'Znuny' => '',
+        'Article Search Index Status' => 'Bejegyzés keresési index állapot',
+        'Indexed Articles' => 'Indexelt bejegyzések',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticlesPerCommunicationChannel.pm
+        'Articles Per Communication Channel' => 'Bejegyzések kommunikációs csatornánként',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
+        'Incoming communications' => 'Bejövő kommunikációk',
+        'Outgoing communications' => 'Kimenő kommunikációk',
+        'Failed communications' => 'Sikertelen kommunikációk',
+        'Average processing time of communications (s)' => 'Kommunikációk átlagos feldolgozási ideje (mp)',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
+        'Communication Log Account Status (last 24 hours)' => 'Kommunikációs napló fiókjának állapota (az elmúlt 24 óra)',
+        'No connections found.' => 'Nem találhatók kapcsolatok.',
+        'ok' => 'OK',
+        'permanent connection errors' => 'állandó kommunikációs hibák',
+        'intermittent connection errors' => 'időszakos kommunikációs hibák',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
+        'Config Settings' => 'Konfigurációs beállítások',
+        'Could not determine value.' => 'Nem sikerült meghatározni az értéket.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
+        'Daemon' => 'Démon',
+        'Daemon is running.' => 'A démon fut.',
+        'Daemon is not running.' => 'A démon nem fut.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
+        'Database Records' => 'Adatbázis rekordok',
+        'Tickets' => 'Jegyek',
+        'Ticket History Entries' => 'Jegy előzmény bejegyzések',
+        'Articles' => 'Bejegyzések',
+        'Attachments (DB, Without HTML)' => 'Mellékletek (DB, HTML nélkül)',
+        'Customers With At Least One Ticket' => 'Legalább egy jeggyel rendelkező ügyfelek',
+        'Dynamic Field Values' => 'Dinamikus mező értékek',
+        'Invalid Dynamic Fields' => 'Érvénytelen dinamikus mezők',
+        'Invalid Dynamic Field Values' => 'Érvénytelen dinamikus mező értékek',
+        'GenericInterface Webservices' => 'Általános felület webszolgáltatások',
+        'Process Tickets' => 'Folyamatjegyek',
+        'Months Between First And Last Ticket' => 'Az első és az utolsó jegy közti hónapok',
+        'Tickets Per Month (avg)' => 'Jegyek havonta (átlag)',
+        'Open Tickets' => 'Nyitott jegyek',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
+        'Default SOAP Username And Password' => 'Alapértelmezett SOAP felhasználónév és jelszó',
+        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
+            'Biztonsági kockázat: a SOAP::User és a SOAP::Password alapértelmezett beállításait használja. Változtassa meg.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
+        'Default Admin Password' => 'Alapértelmezett adminisztrátor jelszó',
+        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
+            'Biztonsági kockázat: a root@localhost ügyintéző fióknak még mindig az alapértelmezett jelszava van. Változtassa meg, vagy érvénytelenítse a fiókot.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
+        'Email Sending Queue' => 'E-mail várakozási sor',
+        'Emails queued for sending' => 'Küldéshez sorba állított e-mailek',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
+        'FQDN (domain name)' => 'FQDN (tartománynév)',
+        'Please configure your FQDN setting.' => 'Állítsa be az FQDN beállítását.',
+        'Domain Name' => 'Tartománynév',
+        'Your FQDN setting is invalid.' => 'Az FQDN beállítás érvénytelen.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
+        'File System Writable' => 'Fájlrendszer írhatóság',
+        'The file system on your Znuny partition is not writable.' => 'Az Znuny partíció fájlrendszere nem írható.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
+        'Legacy Configuration Backups' => 'Örökölt konfigurációs biztonsági mentések',
+        'No legacy configuration backup files found.' => 'Nem találhatók örökölt biztonsági mentés fájlok.',
+        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
+            'Örökölt konfigurációs biztonsági mentés fájlok találhatók a Kernel/Config/Backups mappában, de néhány csomagnak még szükségük lehet rájuk.',
+        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
+            'Az örökölt konfigurációs biztonsági mentés fájlok többé nem szükségesek a telepített csomagokhoz, távolítsa el azokat a Kernel/Config/Backups mappából.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
+        'Package Installation Status' => 'Csomagtelepítési állapot',
+        'Some packages have locally modified files.' => 'Néhány csomag helyileg módosított fájlokkal rendelkezik.',
+        'Some packages are not correctly installed.' => 'Néhány csomag nincs megfelelően telepítve.',
+        'Package Framework Version Status' => 'Csomag keretrendszer verziójának állapota',
+        'Some packages are not allowed for the current framework version.' =>
+            'Néhány csomag nem engedélyezett a jelenlegi keretrendszer verzióhoz.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageList.pm
+        'Package List' => 'Csomaglista',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SessionConfigSettings.pm
+        'Session Config Settings' => 'Munkamenet-konfigurációs beállítások',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
+        'Spooled Emails' => 'Várakozási sorba helyezett levelek',
+        'There are emails in var/spool that Znuny could not process.' => 'Olyan levelek találhatók a var/spool mappában, amelyeket az Znuny nem tudott feldolgozni.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SystemID.pm
+        'Your SystemID setting is invalid, it should only contain digits.' =>
+            'A rendszer-azonosító beállítás érvénytelen, csak számjegyeket tartalmazhat.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
+        'Default Ticket Type' => 'Alapértelmezett jegytípus',
+        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
+            'A beállított alapértelmezett jegytípus érvénytelen vagy hiányzik. Változtassa meg a Ticket::Type::Default beállításait, és válasszon egy érvényes jegytípust.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
+        'Ticket Index Module' => 'Jegyindexelő modul',
+        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
+            'Több mint 60.000 jegye van, ezért a StaticDB háttérprogramot kellene használnia. További információkért nézze meg az adminisztrátori kézikönyvet (Teljesítmény finomhangolás).',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
+        'Invalid Users with Locked Tickets' => 'Érvénytelen felhasználók zárolt jegyekkel',
+        'There are invalid users with locked tickets.' => 'Zárolt jegyekkel rendelkező érvénytelen felhasználók vannak.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/OpenTickets.pm
+        'You should not have more than 8,000 open tickets in your system.' =>
+            'Nem kellene 8.000 nyitott jegynél többel rendelkeznie a rendszeren.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
+        'Ticket Search Index Module' => 'Jegykeresés indexelő modul',
+        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
+            'Az indexelési folyamat kényszeríti az eredeti bejegyzésszöveg tárolását a bejegyzés keresési indexében anélkül, hogy szűrőket hajtana végre vagy a kiszűrendő szavak listáit alkalmazná. Ez meg fogja növelni a keresési index méretét, és ezért lelassíthatja a szabad-szavas kereséseket.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
+        'Orphaned Records In ticket_lock_index Table' => 'Árva rekordok a ticket_lock_index táblában',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'A ticket_lock_index tábla árva rekordokat tartalmaz. Futtassa a bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" parancsot a StaticDB index tisztításához.',
+        'Orphaned Records In ticket_index Table' => 'Árva rekordok a ticket_index táblában',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'A ticket_index tábla árva rekordokat tartalmaz. Futtassa a bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" parancsot a StaticDB index tisztításához.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
+        'Time Settings' => 'Időbeállítások',
+        'Server time zone' => 'Kiszolgáló időzónája',
+        'Znuny time zone' => 'Znuny időzóna',
+        'Znuny time zone is not set.' => 'Az Znuny időzónája nincs beállítva.',
+        'User default time zone' => 'Felhasználó alapértelmezett időzónája',
+        'User default time zone is not set.' => 'A felhasználó alapértelmezett időzónája nincs beállítva.',
+        'Calendar time zone is not set.' => 'A naptár időzónája nincs beállítva.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentSkinUsage.pm
+        'UI - Agent Skin Usage' => 'UI – ügyintézői felszín használat',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentThemeUsage.pm
+        'UI - Agent Theme Usage' => 'UI – ügyintézői téma használat',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
+        'UI - Special Statistics' => 'UI – különleges statisztikák',
+        'Agents using custom main menu ordering' => 'Egyéni menürendezést használó ügyintézők',
+        'Agents using favourites for the admin overview' => 'Kedvenceket használó ügyintézők az adminisztrációs áttekintőnél',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Version.pm
+        'Znuny Version' => 'Znuny verzió',
+
+        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'Egyidejű felhasználók részletei',
         'Concurrent Users' => 'Egyidejű felhasználók',
 
@@ -5914,7 +5917,6 @@ sub Data {
             'Megadja a végfelhasználóknak azt a lehetőséget, hogy felülírják a CSV fájloknál a fordítási fájlokban meghatározott elválasztó karaktert. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             'Meghatározza a felhasználók profilképét. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Meghatározza a felhasználói azonosítót az ügyfélpanelhez.',
         'Activates support for customer and customer user groups.' => 'Támogatást aktivál az ügyfelekhez és ügyfél-felhasználó csoportokhoz.',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6008,7 +6010,7 @@ sub Data {
             'Ha „LDAP” lett kiválasztva, akkor egy szűrőt adhat minden LDAP lekérdezéshez, például (mail=*), (objectclass=user) vagy (!objectclass=computer).',
         'If "LDAP" was selected for Customer::AuthModule and if you want to add a suffix to every customer login name, specifiy it here, e. g. you just want to write the username user but in your LDAP directory exists user@domain.' =>
             'Ha „LDAP” lett kiválasztva a Customer::AuthModule modulnál, és egy utótagot szeretne hozzáadni minden ügyfél bejelentkezési névhez, akkor azt itt adja meg. Például csak a user felhasználónevet szeretné írni, de az LDAP könyvtárban a user@domain létezik.',
-        'If "LDAP" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
+        'If "LDAP" was selected for Customer::AuthModule and special parameters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
             'Ha „LDAP” lett kiválasztva a Customer::AuthModule modulnál, és speciális paraméterek szükségesek a Net::LDAP Perl modulhoz, akkor azokat itt adhatja meg. További információkért nézze meg a „perldoc Net::LDAP” dokumentációt a paraméterekkel kapcsolatban.',
         'If "LDAP" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
             'Ha „LDAP” lett kiválasztva a Customer::AuthModule modulnál, akkor megadhatja, hogy az alkalmazás leálljon, ha például hálózati problémák miatt nem lehet kapcsolatot létesíteni a kiszolgálóval.',
@@ -6068,8 +6070,10 @@ sub Data {
         'Defines all the possible stats output formats.' => 'Meghatározza az összes lehetséges statisztikai kimeneti formátumot.',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'Lehetővé teszi az ügyintézőknek egy statisztika tengelyeinek felcserélését, ha előállítanak egyet.',
-        'Allows agents to generate individual-related stats.' => 'Lehetővé teszi az ügyintézőknek egyénhez kapcsolódó statisztikák előállítását.',
-        'Allows invalid agents to generate individual-related stats.' => 'Lehetővé teszi az érvénytelen ügyintézőknek egyénhez kapcsolódó statisztikák előállítását.',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             'Megjeleníti az összes ügyfél-azonosítót egy többválasztós mezőben (nem hasznos, ha nagyon sok ügyfél-azonosítója van).',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
@@ -8500,7 +8504,6 @@ Az Ön segélyszolgálat csapata
         'Change the priority for this ticket' => 'Prioritás módosítása ennél a jegynél',
         'Change the responsible for this ticket' => 'Felelős módosítása ennél a jegynél',
         'Change your avatar image.' => 'A profilkép megváltoztatása.',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'Jelszó és egyebek megváltoztatása.',
         'Changed SLA to "%s" (%s).' => 'SLA megváltoztatva erre: „%s” (%s).',
         'Changed archive state to "%s".' => 'Archívumállapot megváltoztatva erre: „%s”.',
@@ -8861,7 +8864,6 @@ Az Ön segélyszolgálat csapata
         'Plugin search' => 'Bővítmény keresés',
         'Plugin search module for autocomplete.' => 'Bővítmény keresési modul az automatikus kiegészítéshez.',
         'Polish' => 'Lengyel',
-        'Popup Profile' => '',
         'Portuguese' => 'Portugál',
         'Portuguese (Brasil)' => 'Portugál (Brazil)',
         'PostMaster Filters' => 'Levelezési szűrők',

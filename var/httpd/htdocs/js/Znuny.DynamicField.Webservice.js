@@ -173,7 +173,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                     });
 
                     SelectedIDs = Znuny.Form.Input.Get(SelectedValueFieldName);
-                    if (SelectedIDs){
+                    if (SelectedIDs) {
                         $('#' + SelectedValueFieldName + ' option').each(function(Index, Element) {
                             var Key        = $(Element).val(),
                                 Value      = $(Element).text(),
@@ -186,11 +186,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                         });
                     }
 
-                    // add empty option to be able to remove the selection
-                    // via "x" button in modernized view.
-                    Options[''] = '-';
-
-                    Znuny.Form.Input.Set(SelectedValueFieldName, Options, {SelectOption: true, Modernize: true, TriggerChange: true});
+                    Znuny.Form.Input.Set(SelectedValueFieldName, Options, {SelectOption: true, Modernize: true, TriggerChange: true, AddEmptyOption: true});
 
                     if (!jQuery.isEmptyObject(SelectedIDs)){
                         Znuny.Form.Input.Set(SelectedValueFieldName, SelectedIDs);
@@ -272,7 +268,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                     AutocompleteFieldName,
                     URL                      = Core.Config.Get('Baselink'),
                     Config                   = [
-                        'Webservice', 'InvokerSearch', 'InvokerGet', 'Backend', 'StoredValue', 'SearchKeys', 'DisplayedValues', 'DisplayedValuesSeparator', 'Limit', 'AutocompleteMinLength', 'QueryDelay', 'AdditionalDFStorage', 'InputFieldWidth', 'DefaultValue', 'Link', 'SearchTerms',                     ],
+                        'Webservice', 'InvokerSearch', 'InvokerGet', 'Backend', 'CacheTTL', 'StoredValue', 'SearchKeys', 'DisplayedValues', 'DisplayedValuesSeparator', 'Limit', 'AutocompleteMinLength', 'QueryDelay', 'AdditionalDFStorage', 'InputFieldWidth', 'DefaultValue', 'Link', 'SearchTerms',                     ],
                     Data = {
                         Action:           'AJAXDynamicFieldWebservice',
                         Subaction:        'Test',

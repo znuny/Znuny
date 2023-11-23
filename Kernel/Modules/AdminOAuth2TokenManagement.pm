@@ -10,6 +10,7 @@ package Kernel::Modules::AdminOAuth2TokenManagement;
 
 use strict;
 use warnings;
+use utf8;
 
 use File::Basename;
 

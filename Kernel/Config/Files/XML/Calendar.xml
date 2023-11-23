@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_config version="2.0" init="Application">
+    <!-- nofilter(TidyAll::Plugin::Znuny::Config::ACLKeysLevel3Actions) -->
     <Setting Name="PublicFrontend::Module###PublicCalendar" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the public interface.</Description>
         <Navigation>Frontend::Public::ModuleRegistration</Navigation>
@@ -56,7 +57,7 @@
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>thirdparty/momentjs-2.29.1/moment.min.js</Item>
+                        <Item>thirdparty/momentjs-2.29.4/moment.min.js</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.js</Item>
                         <Item>thirdparty/fullcalendar-scheduler-1.10.1/scheduler.min.js</Item>
                         <Item>Core.Agent.AppointmentCalendar.js</Item>
@@ -832,7 +833,7 @@
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>thirdparty/momentjs-2.29.1/moment.min.js</Item>
+                        <Item>thirdparty/momentjs-2.29.4/moment.min.js</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.js</Item>
                         <Item>Core.Agent.AppointmentCalendar.js</Item>
                         <Item>Core.Agent.AppointmentCalendar.Plugin.TicketCreate.js</Item>
