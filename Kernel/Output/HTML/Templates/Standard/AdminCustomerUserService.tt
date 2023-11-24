@@ -124,7 +124,6 @@
             </div>
         </div>
     </div>
-    </div>
     <div class="ContentColumn">
         <div class="WidgetSimple">
 [% RenderBlockStart("Result") %]
