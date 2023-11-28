@@ -2376,8 +2376,8 @@ sub _AppointmentRecurringCreate {
             my $EndDSTDiff = $EndTimeObject->CompareDST($OriginalEndTimeObject);
             my $CurrentStartTimeObject = $StartTimeObject->Clone();
             my $CurrentEndTimeObject   = $EndTimeObject->Clone();
-            if ( $StartDSTDiff ) {
-                if ( IsPositiveInteger($StartDSTDiff) ) {
+            if ( IsInteger( $StartDSTDiff ) ) {
+                if ( $StartDSTDiff > 0 ) {
                     $CurrentStartTimeObject->Subtract( Seconds => $StartDSTDiff );
                 }
                 elsif ( $StartDSTDiff < 0 ) {
@@ -2385,8 +2385,8 @@ sub _AppointmentRecurringCreate {
                 }
                 $StartTime = $CurrentStartTimeObject->ToString();
             }
-            if ( $EndDSTDiff ) {
-                if ( IsPositiveInteger($EndDSTDiff) ) {
+            if ( IsInteger($EndDSTDiff) ) {
+                if ( $EndDSTDiff > 0 ) {
                     $CurrentEndTimeObject->Subtract( Seconds => $EndDSTDiff );
                 }
                 elsif ( $EndDSTDiff < 0 ) {

@@ -2242,9 +2242,7 @@ sub _OpNotEquals {
 
 sub CompareDST {
     my ($Self, $OtherDateTimeObject) = @_;
-    my $TimeDif = $Self->{CPANDateTimeObject}->offset - $OtherDateTimeObject->{CPANDateTimeObject}->offset;
-
-    return $TimeDif;
+    return $Self->{CPANDateTimeObject}->offset - $OtherDateTimeObject->{CPANDateTimeObject}->offset;
 }
 1;
 
