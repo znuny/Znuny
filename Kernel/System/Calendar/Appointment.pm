@@ -2385,7 +2385,7 @@ sub _AppointmentRecurringCreate {
                 }
                 $StartTime = $CurrentStartTimeObject->ToString();
             }
-            if ( IsInteger($EndDSTDiff) ) {
+            if ( IsInteger( $EndDSTDiff ) ) {
                 if ( $EndDSTDiff > 0 ) {
                     $CurrentEndTimeObject->Subtract( Seconds => $EndDSTDiff );
                 }

@@ -2242,8 +2242,10 @@ sub _OpNotEquals {
 
 sub CompareDST {
     my ($Self, $OtherDateTimeObject) = @_;
+
     return $Self->{CPANDateTimeObject}->offset - $OtherDateTimeObject->{CPANDateTimeObject}->offset;
 }
+
 1;
 
 =end Internal:
