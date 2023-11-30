@@ -2477,8 +2477,12 @@ sub Data {
         'Change Customer Relations' => '',
         'Open' => 'Avoin',
         'Closed' => 'Suljettu',
+        'Phone ticket' => 'Puhelintiketti',
+        'Email ticket' => 'Sähköpostitiketti',
         '%s open ticket(s) of %s' => '%s avointa tikettiä / %s',
         '%s closed ticket(s) of %s' => '%s suljettua tiketti / %s',
+        'New phone ticket from %s' => 'Uusi puhelintiketti kohteelta %s',
+        'New email ticket to %s' => 'Uusi sähköpostitiketti kohteelle %s',
         'Edit customer ID' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2493,10 +2497,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '',
-        'Phone ticket' => 'Puhelintiketti',
-        'Email ticket' => 'Sähköpostitiketti',
-        'New phone ticket from %s' => 'Uusi puhelintiketti kohteelta %s',
-        'New email ticket to %s' => 'Uusi sähköpostitiketti kohteelle %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',

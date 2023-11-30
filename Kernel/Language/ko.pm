@@ -2474,8 +2474,12 @@ sub Data {
         'Change Customer Relations' => '고객 관계 변경',
         'Open' => '진행중',
         'Closed' => '종료됨',
+        'Phone ticket' => '폰 티켓',
+        'Email ticket' => '이메일 티켓',
         '%s open ticket(s) of %s' => '진행중 티켓 중 %s / %s',
         '%s closed ticket(s) of %s' => '종료된 티켓 중 %s / %s',
+        'New phone ticket from %s' => '%s로 새 폰 티켓',
+        'New email ticket to %s' => '새 이메일 티켓을 %s로',
         'Edit customer ID' => '고객 ID 수정',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2490,10 +2494,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '고객 사용자 정보',
-        'Phone ticket' => '폰 티켓',
-        'Email ticket' => '이메일 티켓',
-        'New phone ticket from %s' => '%s로 새 폰 티켓',
-        'New email ticket to %s' => '새 이메일 티켓을 %s로',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',

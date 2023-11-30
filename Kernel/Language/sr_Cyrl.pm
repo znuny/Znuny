@@ -2474,8 +2474,12 @@ sub Data {
         'Change Customer Relations' => 'Промени релације клијената',
         'Open' => 'Отворено',
         'Closed' => 'Затворени',
+        'Phone ticket' => 'Тикет позива',
+        'Email ticket' => 'Имејл тикет',
         '%s open ticket(s) of %s' => '%s отворених тикета од %s',
         '%s closed ticket(s) of %s' => '%s затворених тикета од %s',
+        'New phone ticket from %s' => 'Нови тикет позива од %s',
+        'New email ticket to %s' => 'Нови имејл тикет од %s',
         'Edit customer ID' => 'Уреди ID клијента',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2490,10 +2494,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Информације о клијент кориснику',
-        'Phone ticket' => 'Тикет позива',
-        'Email ticket' => 'Имејл тикет',
-        'New phone ticket from %s' => 'Нови тикет позива од %s',
-        'New email ticket to %s' => 'Нови имејл тикет од %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',

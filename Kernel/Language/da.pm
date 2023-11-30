@@ -2476,8 +2476,12 @@ sub Data {
         'Change Customer Relations' => '',
         'Open' => 'Åben',
         'Closed' => 'Lukket',
+        'Phone ticket' => 'Sager',
+        'Email ticket' => 'Mail-sager',
         '%s open ticket(s) of %s' => '%s åbne sager af %s',
         '%s closed ticket(s) of %s' => '%s lukkede sager af %s',
+        'New phone ticket from %s' => 'Nye sager fra %s',
+        'New email ticket to %s' => 'Nye mail-sager til %s',
         'Edit customer ID' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2492,10 +2496,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '',
-        'Phone ticket' => 'Sager',
-        'Email ticket' => 'Mail-sager',
-        'New phone ticket from %s' => 'Nye sager fra %s',
-        'New email ticket to %s' => 'Nye mail-sager til %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',

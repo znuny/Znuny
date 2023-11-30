@@ -2479,8 +2479,12 @@ sub Data {
         'Change Customer Relations' => 'Alterar relacionamentos de cliente',
         'Open' => 'Aberto',
         'Closed' => 'Fechado',
+        'Phone ticket' => 'Chamado Fone',
+        'Email ticket' => 'Chamado E-mail',
         '%s open ticket(s) of %s' => '%s chamado(s) aberto(s) de %s',
         '%s closed ticket(s) of %s' => '%s chamado(s) fechado(s) de %s',
+        'New phone ticket from %s' => 'Novo chamado via fone de %s',
+        'New email ticket to %s' => 'Novo chamado via e-mail de %s',
         'Edit customer ID' => 'Editar ID de cliente',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2495,10 +2499,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Informações do Usuário Cliente',
-        'Phone ticket' => 'Chamado Fone',
-        'Email ticket' => 'Chamado E-mail',
-        'New phone ticket from %s' => 'Novo chamado via fone de %s',
-        'New email ticket to %s' => 'Novo chamado via e-mail de %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => 'Nenhum chamado encontrado.',

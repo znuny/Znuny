@@ -88,9 +88,11 @@ sub Run {
 
     return if !$Param{CustomerUserID};
 
-    # get needed objects
+    my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
     my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
     my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+    my $GroupObject           = $Kernel::OM->Get('Kernel::System::Group');
+    my $LayoutObject          = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # get all customer ids of this customer user
     my @CustomerIDs = $CustomerUserObject->CustomerIDs(
@@ -99,9 +101,6 @@ sub Run {
 
     # add page nav bar
     my $Total = scalar @CustomerIDs;
-
-    # get layout object
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     my $LinkPage = 'Subaction=Element;Name='
         . $Self->{Name} . ';'
@@ -128,9 +127,6 @@ sub Run {
         },
     );
 
-    # get config object
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
     # show change customer relations button if the agent has permission
     my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
         Action => 'AdminCustomerUserCustomer',
@@ -149,8 +145,42 @@ sub Run {
     # show links to edit customer id if the agent has permission
     my $EditCustomerIDPermission = $LayoutObject->Permission(
         Action => 'AdminCustomerCompany',
-        Type   => 'rw',                     # ro|rw possible
+        Type   => 'rw',
     );
+
+    # show link to create new phone ticket if the agent has permission
+    my $AgentTicketPhonePermission = $LayoutObject->Permission(
+        Action => 'AgentTicketPhone',
+        Type   => 'rw',
+    );
+
+    # show link to create new email ticket if the agent has permission
+    my $AgentTicketEmailPermission = $LayoutObject->Permission(
+        Action => 'AgentTicketEmail',
+        Type   => 'rw',
+    );
+
+    # check the permission for the SwitchToCustomer feature
+    my $SwitchToCustomerPermission = 0;
+    if ( $ConfigObject->Get('SwitchToCustomer') ) {
+
+        # get the group id which is allowed to use the switch to customer feature
+        my $PermissionGroup         = $ConfigObject->Get('SwitchToCustomer::PermissionGroup');
+        my $SwitchToCustomerGroupID = $GroupObject->GroupLookup(
+            Group => $PermissionGroup,
+        );
+
+        # get user groups, where the user has the rw privilege
+        my %Groups = $GroupObject->PermissionUserGet(
+            UserID => $Self->{UserID},
+            Type   => 'rw',
+        );
+
+        # if the user is a member in this group he can access the feature
+        if ( $Groups{$SwitchToCustomerGroupID} ) {
+            $SwitchToCustomerPermission = 1;
+        }
+    }
 
     @CustomerIDs = splice @CustomerIDs, $Self->{StartHit} - 1, $Self->{PageShown};
 
@@ -166,8 +196,11 @@ sub Run {
             Data => {
                 %Param,
                 %CustomerCompany,
-                CustomerID               => $CustomerID,
-                EditCustomerIDPermission => %CustomerCompany ? $EditCustomerIDPermission : 0,
+                CustomerID                 => $CustomerID,
+                EditCustomerIDPermission   => %CustomerCompany ? $EditCustomerIDPermission : 0,
+                AgentTicketPhonePermission => $AgentTicketPhonePermission,
+                AgentTicketEmailPermission => $AgentTicketEmailPermission,
+                SwitchToCustomerPermission => $SwitchToCustomerPermission,
             },
         );
 
@@ -247,8 +280,11 @@ sub Run {
         TemplateFile => 'AgentDashboardCustomerIDList',
         Data         => {
             %{ $Self->{Config} },
-            Name                     => $Self->{Name},
-            EditCustomerIDPermission => $EditCustomerIDPermission,
+            Name                       => $Self->{Name},
+            EditCustomerIDPermission   => $EditCustomerIDPermission,
+            AgentTicketPhonePermission => $AgentTicketPhonePermission,
+            AgentTicketEmailPermission => $AgentTicketEmailPermission,
+            SwitchToCustomerPermission => $SwitchToCustomerPermission,
         },
         AJAX => $Param{AJAX},
     );

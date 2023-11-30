@@ -2474,8 +2474,12 @@ sub Data {
         'Change Customer Relations' => '',
         'Open' => 'Otvorený',
         'Closed' => 'Zatvorený',
+        'Phone ticket' => 'Telefonický tiket',
+        'Email ticket' => 'Emailový tiket',
         '%s open ticket(s) of %s' => '%s otvorených ticketov zo %s',
         '%s closed ticket(s) of %s' => '%s uzatvorených ticketov zo %s',
+        'New phone ticket from %s' => 'Nový telefonický tiket na %s',
+        'New email ticket to %s' => 'Nový emailový tiket na %s',
         'Edit customer ID' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2490,10 +2494,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '',
-        'Phone ticket' => 'Telefonický tiket',
-        'Email ticket' => 'Emailový tiket',
-        'New phone ticket from %s' => 'Nový telefonický tiket na %s',
-        'New email ticket to %s' => 'Nový emailový tiket na %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
