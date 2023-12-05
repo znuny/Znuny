@@ -168,19 +168,6 @@ sub HandleResponse {
     my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
     my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
-    # if there was an error in the response, forward it
-    if ( !$Param{ResponseSuccess} ) {
-        if ( !IsStringWithData( $Param{ResponseErrorMessage} ) ) {
-            return $Self->{DebuggerObject}->Error(
-                Summary => 'Got response error, but no response error message!',
-            );
-        }
-        return {
-            Success      => 0,
-            ErrorMessage => $Param{ResponseErrorMessage},
-        };
-    }
-
     # Pass through response if no hash
     if ( !IsHashRefWithData( $Param{Data} ) ) {
         return {
@@ -189,6 +176,7 @@ sub HandleResponse {
         };
     }
 
+    # Set data and execute functions even in error case.
     RESULT:
     for my $Key ( sort keys %{ $Param{Data} } ) {
 
@@ -398,10 +386,34 @@ sub HandleResponse {
         );
     }
 
+    # if there was an error in the response, forward it
+    if ( !$Param{ResponseSuccess} ) {
+        if ( !IsStringWithData( $Param{ResponseErrorMessage} ) ) {
+            return $Self->{DebuggerObject}->Error(
+                Summary => 'Got response error, but no response error message!',
+            );
+        }
+        return {
+            Success      => 0,
+            ErrorMessage => $Param{ResponseErrorMessage},
+        };
+    }
+
     return {
         Success => 1,
         Data    => $Param{Data},
     };
+}
+
+sub HandleError {
+    my ( $Self, %Param ) = @_;
+
+    # Execute HandleResponse with error data because it might contain further tags
+    # to set data or execute functions (see HandleResponse above) in error case.
+    return $Self->HandleResponse(
+        ResponseSuccess => 0,
+        Data            => $Param{Data},
+    );
 }
 
 1;
