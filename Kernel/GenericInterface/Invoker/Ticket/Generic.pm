@@ -81,12 +81,15 @@ sub PrepareRequest {
     my $GetAllArticleAttachments = $Param{Data}->{GetAllArticleAttachments}
         || $Param{Webservice}->{Config}->{Requester}->{Invoker}->{$InvokerName}->{GetAllArticleAttachments};
 
-    my %Ticket = $TicketObject->TicketDeepGet(
-        TicketID                 => $Param{Data}->{TicketID},
-        ArticleID                => $Param{Data}->{ArticleID},
-        GetAllArticleAttachments => $GetAllArticleAttachments,
-        UserID                   => 1,
-    );
+    my %Ticket;
+    if ( $Param{Data}->{TicketID} ) {
+        %Ticket = $TicketObject->TicketDeepGet(
+            TicketID                 => $Param{Data}->{TicketID},
+            ArticleID                => $Param{Data}->{ArticleID},
+            GetAllArticleAttachments => $GetAllArticleAttachments,
+            UserID                   => 1,
+        );
+    }
 
     # Remove configured fields.
     my $OmittedFields = $ConfigObject->Get(
