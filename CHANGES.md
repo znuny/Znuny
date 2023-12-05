@@ -1,4 +1,6 @@
 # 7.0.14 2023-??-??
+ - 2023-12-01 Fixed SearchInArchive parameter not used in the fulltext search of the toolbar. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#479](https://github.com/znuny/Znuny/pull/479)
+ - 2023-11-30 Fixed URL for CustomerID in AgentTicketOverviewMedium. [#506](https://github.com/znuny/Znuny/issues/506)
  - 2023-11-17 Pending dashboards now show all pending tickets.
  - 2023-11-13 Added option 'send-timeout' to console command Maint::Email::MailQueue.
 
