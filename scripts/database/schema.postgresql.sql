@@ -1815,7 +1815,7 @@ CREATE TABLE customer_company (
 --  create table customer_user_customer
 -- ----------------------------------------------------------
 CREATE TABLE customer_user_customer (
-    user_id VARCHAR (100) NOT NULL,
+    user_id VARCHAR (200) NOT NULL,
     customer_id VARCHAR (150) NOT NULL,
     create_time timestamp(0) NOT NULL,
     create_by INTEGER NOT NULL,

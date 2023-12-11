@@ -1598,7 +1598,7 @@
 
 <!-- customer_user_customer - relation customer user<->customer -->
 <Table Name="customer_user_customer">
-    <Column Name="user_id" Required="true" Size="100" Type="VARCHAR"/>
+    <Column Name="user_id" Required="true" Size="200" Type="VARCHAR"/>
     <Column Name="customer_id" Required="true" Size="150" Type="VARCHAR"/>
     <Column Name="create_time" Required="true" Type="DATE"/>
     <Column Name="create_by" Required="true" Type="INTEGER"/>
