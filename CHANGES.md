@@ -2,6 +2,7 @@
  - 2023-12-07 Customer detail search cache for dynamic field values will now be cleared if a customer will be added or updated.
  - 2023-12-01 Fixed SearchInArchive parameter not used in the fulltext search of the toolbar. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#479](https://github.com/znuny/Znuny/pull/479)
  - 2023-11-30 Fixed URL for CustomerID in AgentTicketOverviewMedium. [#506](https://github.com/znuny/Znuny/issues/506)
+ - 2023-11-28 Fixed hidden text area of RTE not being updated. [#507](https://github.com/znuny/Znuny/issues/507).
  - 2023-11-17 Pending dashboards now show all pending tickets.
  - 2023-11-13 Added option 'send-timeout' to console command Maint::Email::MailQueue.
  - 2023-10-25 Fixed error handling in invoker Ticket::Generic.
