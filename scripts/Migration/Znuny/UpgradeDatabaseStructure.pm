@@ -55,6 +55,11 @@ sub Run {
             Message => 'Increase size of columns of database table notification_event_message',
             Module  => 'NotificationEventMessage',
         },
+        {
+            Message => 'Increase size of column of database table customer_user_customer',
+            Module  => 'CustomerUserCustomerID',
+        },
+
     );
 
     return 1   if !@Tasks;
