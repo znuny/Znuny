@@ -9704,7 +9704,7 @@ msgstr "Да ли стварно желите да поништите ово п�
 msgid "You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built."
 msgstr "Можете одабрати категорију за ограничавање навигационих ставки испод. Чим одаберете категорију, навигација ће бити освежена."
 
-#. Perl Module: Kernel/Config.pm
+#. Perl Module: Kernel/Config/Defaults.pm
 msgid "Database Backend"
 msgstr "База података"
 

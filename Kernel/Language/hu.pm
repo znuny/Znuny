@@ -3544,10 +3544,8 @@ sub Data {
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             'Használhatja a kategóriaválasztást a lenti navigációs fának a kijelölt kategóriából származó bejegyzésekre való korlátozásához. Amint kiválasztja a kategóriát, a fa újraépítésre kerül.',
 
-        # Perl Module: Kernel/Config.pm
-        'Database Backend' => 'Adatbázis háttérprogram',
-
         # Perl Module: Kernel/Config/Defaults.pm
+        'Database Backend' => 'Adatbázis háttérprogram',
         'CustomerIDs' => 'Ügyfél-azonosítók',
         'Fax' => 'Fax',
         'Street' => 'Utca',

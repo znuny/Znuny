@@ -9712,7 +9712,7 @@ msgstr "¿Realmente desea restablecer esta configuración a su valor predetermin
 msgid "You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built."
 msgstr "Puede usar la selección de categoría para limitar el árbol de navegación a las entradas de la categoría seleccionada. Tan pronto como seleccione la categoría, el árbol será reconstruido."
 
-#. Perl Module: Kernel/Config.pm
+#. Perl Module: Kernel/Config/Defaults.pm
 msgid "Database Backend"
 msgstr "Base de Datos de Backend"
 

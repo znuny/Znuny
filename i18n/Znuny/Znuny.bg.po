@@ -9706,7 +9706,7 @@ msgstr ""
 msgid "You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built."
 msgstr ""
 
-#. Perl Module: Kernel/Config.pm
+#. Perl Module: Kernel/Config/Defaults.pm
 msgid "Database Backend"
 msgstr ""
 

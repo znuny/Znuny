@@ -3538,10 +3538,8 @@ sub Data {
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '범주 선택을 사용하여 아래 탐색 트리를 선택한 범주의 항목으로 제한 할 수 있습니다. 카테고리를 선택하자마자 트리가 다시 빌드됩니다.',
 
-        # Perl Module: Kernel/Config.pm
-        'Database Backend' => '데이터베이스 백엔드',
-
         # Perl Module: Kernel/Config/Defaults.pm
+        'Database Backend' => '데이터베이스 백엔드',
         'CustomerIDs' => '고객ID',
         'Fax' => '팩스',
         'Street' => '거리',

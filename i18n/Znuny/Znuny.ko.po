@@ -9700,7 +9700,7 @@ msgstr "이 설정을 기본값으로 재설정 하시겠습니까?"
 msgid "You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built."
 msgstr "범주 선택을 사용하여 아래 탐색 트리를 선택한 범주의 항목으로 제한 할 수 있습니다. 카테고리를 선택하자마자 트리가 다시 빌드됩니다."
 
-#. Perl Module: Kernel/Config.pm
+#. Perl Module: Kernel/Config/Defaults.pm
 msgid "Database Backend"
 msgstr "데이터베이스 백엔드"
 

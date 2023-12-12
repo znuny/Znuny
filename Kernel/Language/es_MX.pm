@@ -3538,10 +3538,8 @@ sub Data {
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             'Puede usar la selección de categoría para limitar el árbol de navegación a las entradas de la categoría seleccionada. Tan pronto como seleccione la categoría, el árbol será reconstruido.',
 
-        # Perl Module: Kernel/Config.pm
-        'Database Backend' => 'Base de Datos de Backend',
-
         # Perl Module: Kernel/Config/Defaults.pm
+        'Database Backend' => 'Base de Datos de Backend',
         'CustomerIDs' => 'Identificadores del cliente',
         'Fax' => 'Fax',
         'Street' => 'Calle',
