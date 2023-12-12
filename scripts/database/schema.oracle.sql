@@ -3318,7 +3318,7 @@ CREATE TABLE notification_event_message (
     id NUMBER (12, 0) NOT NULL,
     notification_id NUMBER (12, 0) NOT NULL,
     subject VARCHAR2 (200) NOT NULL,
-    text VARCHAR2 (4000) NOT NULL,
+    text CLOB NOT NULL,
     content_type VARCHAR2 (250) NOT NULL,
     language VARCHAR2 (60) NOT NULL,
     CONSTRAINT notification_event_message_nb4 UNIQUE (notification_id, language)

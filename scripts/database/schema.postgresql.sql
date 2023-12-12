@@ -1984,7 +1984,7 @@ CREATE TABLE notification_event_message (
     id serial NOT NULL,
     notification_id INTEGER NOT NULL,
     subject VARCHAR (200) NOT NULL,
-    text VARCHAR (4000) NOT NULL,
+    text VARCHAR NOT NULL,
     content_type VARCHAR (250) NOT NULL,
     language VARCHAR (60) NOT NULL,
     PRIMARY KEY(id),

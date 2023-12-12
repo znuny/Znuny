@@ -1245,7 +1245,7 @@
 <Table Name="standard_template">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="text" Required="false" Size="10000" Type="VARCHAR"/>
+    <Column Name="text" Required="false" Size="16777216" Type="VARCHAR"/>
     <Column Name="content_type" Required="false" Size="250" Type="VARCHAR"/>
     <Column Name="template_type" Required="true" Size="100" Type="VARCHAR" Default="Answer"/>
     <Column Name="comments" Required="false" Size="250" Type="VARCHAR"/>
@@ -1732,7 +1732,7 @@
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="notification_id" Required="true" Type="INTEGER"/>
     <Column Name="subject" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="text" Required="true" Size="4000" Type="VARCHAR"/>
+    <Column Name="text" Required="true" Size="16777216" Type="VARCHAR"/>
     <Column Name="content_type" Required="true" Size="250" Type="VARCHAR"/>
     <Column Name="language" Required="true" Size="60" Type="VARCHAR"/>
     <ForeignKey ForeignTable="notification_event">
@@ -2315,8 +2315,6 @@
         <IndexColumn Name="id"/>
     </Index>
 </Table>
-
-<!-- TODO: Remove un-needed comments -->
 
 <Table Name="sysconfig_default">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
