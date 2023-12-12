@@ -9735,7 +9735,7 @@ msgstr "Вы действительно желаете сбросить эту �
 msgid "You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built."
 msgstr "Вы можете воспользоваться выбором категории для перемещения по дереву навигации только в пределах выбранной категории. Как только вы выберете категорию дерево будет перестроено."
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. Perl Module: Kernel/Config.pm
 msgid "Database Backend"
 msgstr "Бэкенд Базы данных"
 

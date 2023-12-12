@@ -3538,8 +3538,10 @@ sub Data {
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '',
 
-        # Perl Module: Kernel/Config/Defaults.pm
+        # Perl Module: Kernel/Config.pm
         'Database Backend' => '',
+
+        # Perl Module: Kernel/Config/Defaults.pm
         'CustomerIDs' => 'Kliendi nr-d',
         'Fax' => 'Telefaks',
         'Street' => 'Tänav',

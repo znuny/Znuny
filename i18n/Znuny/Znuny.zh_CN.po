@@ -9710,7 +9710,7 @@ msgstr "你确定要重置这个设置到它的默认值吗？"
 msgid "You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built."
 msgstr "可以使用类别选择来将导航树限制在选择的类别中。一旦选择了某个类别，导航树将被重新构建。"
 
-#. Perl Module: Kernel/Config/Defaults.pm
+#. Perl Module: Kernel/Config.pm
 msgid "Database Backend"
 msgstr "数据库后端"
 

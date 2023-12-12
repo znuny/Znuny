@@ -3550,8 +3550,10 @@ sub Data {
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             'Вы можете воспользоваться выбором категории для перемещения по дереву навигации только в пределах выбранной категории. Как только вы выберете категорию дерево будет перестроено.',
 
-        # Perl Module: Kernel/Config/Defaults.pm
+        # Perl Module: Kernel/Config.pm
         'Database Backend' => 'Бэкенд Базы данных',
+
+        # Perl Module: Kernel/Config/Defaults.pm
         'CustomerIDs' => 'ID компаний',
         'Fax' => 'Факс',
         'Street' => 'Улица',

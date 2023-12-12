@@ -3545,8 +3545,10 @@ sub Data {
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '可以使用类别选择来将导航树限制在选择的类别中。一旦选择了某个类别，导航树将被重新构建。',
 
-        # Perl Module: Kernel/Config/Defaults.pm
+        # Perl Module: Kernel/Config.pm
         'Database Backend' => '数据库后端',
+
+        # Perl Module: Kernel/Config/Defaults.pm
         'CustomerIDs' => '客户ID',
         'Fax' => '传真',
         'Street' => '街道',

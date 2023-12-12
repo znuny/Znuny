@@ -3544,8 +3544,10 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '',
 
-        # Perl Module: Kernel/Config/Defaults.pm
+        # Perl Module: Kernel/Config.pm
         'Database Backend' => 'データベース・バックエンド',
+
+        # Perl Module: Kernel/Config/Defaults.pm
         'CustomerIDs' => '顧客ID',
         'Fax' => 'Fax',
         'Street' => '建物名',

@@ -3544,8 +3544,10 @@ sub Data {
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             'Možete odabrati kategoriju za ograničavanje navigacionih stavki ispod. Čim odaberete kategoriju, navigacija će biti osvežena.',
 
-        # Perl Module: Kernel/Config/Defaults.pm
+        # Perl Module: Kernel/Config.pm
         'Database Backend' => 'Baza podataka',
+
+        # Perl Module: Kernel/Config/Defaults.pm
         'CustomerIDs' => 'ID-evi klijenta',
         'Fax' => 'Faks',
         'Street' => 'Ulica',
