@@ -5,6 +5,7 @@
  - 2023-11-30 Added missing links to widget on CustomerUserInformationCenter: create phone ticket, create email ticket, switch to customer.
  - 2023-11-17 Increased size of text columns for standard templates and notification event messages. Thanks for reporting to @BurtGummer. [#504](https://github.com/znuny/Znuny/issues/504)
  - 2023-11-17 Pending dashboards now show all pending tickets.
+ - 2023-11-13 Added option 'send-timeout' to console command Maint::Email::MailQueue.
  - 2023-11-10 Sessions will now be removed immediately (instead of by daemon task) if a user will be renamed, leading to a direct logout if a user renames himself.
  - 2023-11-06 Sector Nord AG: Fixed encoding of shown changes on subaction ViewDiff of AdminPackageManager. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#486](https://github.com/znuny/Znuny/pull/486)
  - 2023-11-06 Sector Nord AG: Fixed CTRL+left click in ticket overviews. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#487](https://github.com/znuny/Znuny/pull/487)
