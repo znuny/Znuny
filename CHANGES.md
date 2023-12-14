@@ -1,3 +1,6 @@
+# 6.5.6 2024-??-??
+ - 2023-10-24 Kernel::System::MailQueue::Send now increases number of attempts before sending an email. This prevents the attempts not being increased if the process dies while trying to send an email.
+
 # 6.5.5 2023-12-13
  - 2023-12-11 Increased size of user_id column in table customer_user_customer.
  - 2023-12-07 Customer detail search cache for dynamic field values will now be cleared if a customer will be added or updated.
