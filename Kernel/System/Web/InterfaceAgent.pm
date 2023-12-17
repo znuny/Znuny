@@ -378,22 +378,27 @@ sub Run {
             return;
         }
 
-        # execution in 20 seconds
-        my $ExecutionTimeObj = $DateTimeObj->Clone();
-        $ExecutionTimeObj->Add( Seconds => 20 );
-        my $ExecutionTime = $ExecutionTimeObj->ToString();
+        # Add a asynchronous executor scheduler task to count the concurrent user if enabled.
+        my $PluginDisabled = $Kernel::OM->Get('Kernel::Config')->Get('SupportDataCollector::DisablePlugins') || [];
+        my %LookupPluginDisabled = map { $_ => 1 } @{$PluginDisabled};
+        if ( !$LookupPluginDisabled{'Kernel::System::SupportDataCollector::PluginAsynchronous::OTRS::ConcurrentUsers'} )
+        {
 
-        # add a asychronous executor scheduler task to count the concurrent user
-        $Kernel::OM->Get('Kernel::System::Scheduler')->TaskAdd(
-            ExecutionTime            => $ExecutionTime,
-            Type                     => 'AsynchronousExecutor',
-            Name                     => 'PluginAsynchronous::ConcurrentUser',
-            MaximumParallelInstances => 1,
-            Data                     => {
-                Object   => 'Kernel::System::SupportDataCollector::PluginAsynchronous::OTRS::ConcurrentUsers',
-                Function => 'RunAsynchronous',
-            },
-        );
+            # execution in 20 seconds
+            my $ExecutionTimeObj = $Kernel::OM->Create('Kernel::System::DateTime');
+            $ExecutionTimeObj->Add( Seconds => 20 );
+
+            $Kernel::OM->Get('Kernel::System::Scheduler')->TaskAdd(
+                ExecutionTime            => $ExecutionTimeObj->ToString(),
+                Type                     => 'AsynchronousExecutor',
+                Name                     => 'PluginAsynchronous::ConcurrentUser',
+                MaximumParallelInstances => 1,
+                Data                     => {
+                    Object   => 'Kernel::System::SupportDataCollector::PluginAsynchronous::OTRS::ConcurrentUsers',
+                    Function => 'RunAsynchronous',
+                },
+            );
+        }
 
         my $UserTimeZone = $Self->_UserTimeZoneGet(%UserData);
 
