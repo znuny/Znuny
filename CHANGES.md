@@ -1,6 +1,3 @@
-# 6.5.6 ????-??-??
- - 2023-12-28 CKeditor's autogrow feature disabled.
-
 # 6.5.5 2023-12-13
  - 2023-12-11 Increased size of user_id column in table customer_user_customer.
  - 2023-12-07 Customer detail search cache for dynamic field values will now be cleared if a customer will be added or updated.
