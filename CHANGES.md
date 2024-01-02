@@ -1,4 +1,5 @@
 # 7.0.15 2024-??-??
+ - 2024-01-02 Fixed Bug - Error in Daemon Scheduler Task Worker (Task: PluginAsynchronous::ConcurrentUser). [#524](https://github.com/znuny/Znuny/issues/524)
  - 2024-01-02 Fixed Bug - Empty block (horizontal line) dynamic field group process management. [#513](https://github.com/znuny/Znuny/issues/513)
  - 2023-12-28 Fixed AdminACL: Text in MessageBox Notice should link to acl deployment.
  - 2023-10-24 Kernel::System::MailQueue::Send now increases number of attempts before sending an email. This prevents the attempts not being increased if the process dies while trying to send an email.
