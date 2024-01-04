@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991571641051066;
+    $Self->{Completeness}        = 0.991573033707865;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7850,6 +7850,7 @@ sub Data {
             'Definiert die standardmäßige nächste Priorität des Tickets nach dieser Aktion in der "Notiz übergeben"-Aktion im Agenten-Interface.',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             'Zeigt den Ticket-Titel in der "Notiz übergeben"-Aktion im Agenten-Interface an.',
+        'Loader module registration for the public interface.' => 'Lade-Modulregistrierung für das öffentliche Interface.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',

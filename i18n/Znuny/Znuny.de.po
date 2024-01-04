@@ -24215,6 +24215,10 @@ msgstr "umgekehrt"
 msgid "stats"
 msgstr "stats"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
+msgstr "Lade-Modulregistrierung für das öffentliche Interface."
+
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Show Valid"
 msgstr "Zeige nur valide Einträge"
