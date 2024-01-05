@@ -25844,3 +25844,7 @@ msgstr "Cache-TTL"
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
 msgstr "TTL (in Sekunden) für Cache der Request-Ergebnisse. Leerlassen oder auf 0 setzen, um Cache zu deaktivieren."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
+msgstr "Lade-Modulregistrierung für das öffentliche Interface."
+

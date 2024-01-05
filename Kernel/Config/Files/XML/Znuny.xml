@@ -3148,4 +3148,13 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <!-- PublicModule Template -->
+    <Setting Name="Loader::Module::PublicModule###000-PublicModuleTemplate" Required="0" Valid="0">
+        <Description Translatable="1">Loader module registration for the public interface.</Description>
+        <Navigation>Frontend::Public::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
 </otrs_config>
