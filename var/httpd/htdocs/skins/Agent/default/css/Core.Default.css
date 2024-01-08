@@ -800,7 +800,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding: 0;
         background: transparent;
         position: relative;
-        overflow-y: hidden;
+        overflow-y: visible;
         overflow-x: auto;
         white-space: nowrap;
         box-shadow: none;
@@ -819,6 +819,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         position: relative;
         white-space: nowrap;
         text-transform: uppercase;
+        overflow-y: visible;
     }
 
     /*.BreadCrumb li > a,
@@ -835,9 +836,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .BreadCrumb li > span {
         color: var(--bread-crumb-active);
-        /*font-size: var(--font-size-lg);*/
+        font-size: var(--font-size-sm);
         font-weight: var(--semi-bold);
-        overflow: hidden;
+        overflow-y: visible;
+        overflow-x: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         line-height: normal;
@@ -847,13 +849,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding-left: 0;
     }
 
-    /*
     .BreadCrumb li:last-child {
-        padding-right: 0;
-        padding-left: var(--padding-md);
-        overflow: hidden;
+        overflow-y: visible;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
     }
-    */
 
     .BreadCrumb li:last-child a{
         color: var(--bread-crumb-active);
