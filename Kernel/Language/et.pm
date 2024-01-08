@@ -2933,6 +2933,7 @@ sub Data {
         'Request New Password' => 'Küsi uus parool',
         'Your User Name' => 'Kasutajanimi',
         'A new password will be sent to your email address.' => 'Uus salasõna saadetakse Teie e-posti aadressile,',
+        'Back to login' => 'Tagasi sisselogimisele',
         'Create Account' => 'Loo konto',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => '',
@@ -3141,7 +3142,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Kaotasid parooli?',
-        'Back to login' => 'Tagasi sisselogimisele',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

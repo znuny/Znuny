@@ -2935,6 +2935,7 @@ sub Data {
         'Request New Password' => 'Bed om nyt password',
         'Your User Name' => 'Dit brugernavn',
         'A new password will be sent to your email address.' => 'Et nyt password bliver sendt til din mail-adresse.',
+        'Back to login' => 'Tilbage til login',
         'Create Account' => 'Opret konto',
         'Please fill out this form to receive login credentials.' => 'Udfyld venligst denne formular for at modtage login-oplysninger',
         'How we should address you' => 'Hvordan skal vi tiltale dig',
@@ -3143,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Mistet din adgangskode?',
-        'Back to login' => 'Tilbage til login',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

@@ -2932,6 +2932,7 @@ sub Data {
         'Request New Password' => '',
         'Your User Name' => 'Numele Dvs. de Utilizator',
         'A new password will be sent to your email address.' => 'O nouă parolă va fi trimisă pe adresa dvs. de email.',
+        'Back to login' => '',
         'Create Account' => 'Creare cont',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'Modul de adresare dorit',
@@ -3140,7 +3141,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => '',
-        'Back to login' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

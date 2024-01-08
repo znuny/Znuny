@@ -2941,6 +2941,7 @@ sub Data {
         'Request New Password' => 'Demander un nouveau mot de passe',
         'Your User Name' => 'Votre nom',
         'A new password will be sent to your email address.' => 'Un nouveau mot de passe sera envoyé à votre adresse e-mail',
+        'Back to login' => 'Retour à la page de connexion',
         'Create Account' => 'Créer un compte',
         'Please fill out this form to receive login credentials.' => 'Veuillez remplir ce formulaire pour recevoir vos identifiants de connexion',
         'How we should address you' => 'Comment devons-nous nous adresser à vous',
@@ -3149,7 +3150,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Mot de passe oublié ?',
-        'Back to login' => 'Retour à la page de connexion',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

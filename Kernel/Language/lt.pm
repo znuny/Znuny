@@ -2933,6 +2933,7 @@ sub Data {
         'Request New Password' => 'Prašyti naujo slaptažodžio',
         'Your User Name' => 'Jūsų Naudotojo Vardas',
         'A new password will be sent to your email address.' => 'Naujas slaptažodis bus nusiųstas į Jūsų pašto dėžutę.',
+        'Back to login' => 'Grįžti prie prisijungimo',
         'Create Account' => 'Sukurti paskyrą',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'Kaip turėtume į Jus kreiptis',
@@ -3141,7 +3142,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Pamiršote slaptažodį?',
-        'Back to login' => 'Grįžti prie prisijungimo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

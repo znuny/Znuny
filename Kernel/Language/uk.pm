@@ -2933,6 +2933,7 @@ sub Data {
         'Request New Password' => 'Вислати новий пароль',
         'Your User Name' => 'Логін',
         'A new password will be sent to your email address.' => 'Новий пароль буде надісланий до вашої електронної скриньки.',
+        'Back to login' => 'Повернутися',
         'Create Account' => 'Створити обліковий запис',
         'Please fill out this form to receive login credentials.' => 'Будь ласка, заповніть поля цієї форми щоб отримати реєстраційні дані.',
         'How we should address you' => 'Як ми можемо звертатися до Вас',
@@ -3141,7 +3142,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Забули свій пароль',
-        'Back to login' => 'Повернутися',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Масштабувати перегляд вмісту',

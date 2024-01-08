@@ -9217,7 +9217,7 @@ msgstr "ลบการเชื่อมโยง"
 msgid "Lost your password?"
 msgstr "ลืมรหัสผ่านของคุณ?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "กลับไปเข้าสู่ระบบ"
 

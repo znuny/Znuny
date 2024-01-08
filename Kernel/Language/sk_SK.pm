@@ -2932,6 +2932,7 @@ sub Data {
         'Request New Password' => 'Vyžiadať nové heslo',
         'Your User Name' => 'Vaše prihlasovacie meno',
         'A new password will be sent to your email address.' => 'Nové heslo Vám bude poslané emailom',
+        'Back to login' => 'Naspať k prihláseniu',
         'Create Account' => 'Vytvoriť účet',
         'Please fill out this form to receive login credentials.' => 'Prosím vyplnte formulár na získanie prístupu',
         'How we should address you' => 'Ako Vás oslovovať?',
@@ -3140,7 +3141,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Zabudli ste heslo?',
-        'Back to login' => 'Naspať k prihláseniu',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

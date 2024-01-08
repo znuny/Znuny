@@ -9214,7 +9214,7 @@ msgstr "Eliminar enllaços"
 msgid "Lost your password?"
 msgstr "Va oblidar la seva contrasenya?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Tornar a identificar-se"
 

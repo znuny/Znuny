@@ -9072,7 +9072,7 @@ msgstr "Slett lenker"
 msgid "Lost your password?"
 msgstr "Mistet passord?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Tilbake til innlogging"
 

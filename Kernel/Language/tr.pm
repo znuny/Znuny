@@ -2933,6 +2933,7 @@ sub Data {
         'Request New Password' => 'Yeni Parola Talep Et',
         'Your User Name' => 'Kullanıcı Adı',
         'A new password will be sent to your email address.' => '...',
+        'Back to login' => 'Giriş\'e dön',
         'Create Account' => 'Hesap oluştur',
         'Please fill out this form to receive login credentials.' => 'Giriş bilgilerini almak için bu formu doldurun.',
         'How we should address you' => 'Size nasıl hitap edelim?',
@@ -3141,7 +3142,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Parolanızı mı kaybettiniz?',
-        'Back to login' => 'Giriş\'e dön',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

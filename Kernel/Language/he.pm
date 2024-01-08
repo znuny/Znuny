@@ -2939,6 +2939,7 @@ sub Data {
         'Request New Password' => 'בקש סיסמה חדשה',
         'Your User Name' => 'שם המשתמש שלך',
         'A new password will be sent to your email address.' => 'סיסמה חדשה תישלח לכתובת הדוא"ל שלך.',
+        'Back to login' => 'חזרה להתחברות',
         'Create Account' => 'צור חשבון',
         'Please fill out this form to receive login credentials.' => 'אנא מלאו את הטופס על מנת לקבל פרטי התחברות.',
         'How we should address you' => 'כיצד עלינו לפנות אליכם?',
@@ -3147,7 +3148,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'שכחתם סיסמה?',
-        'Back to login' => 'חזרה להתחברות',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

@@ -9214,7 +9214,7 @@ msgstr "링크 삭제"
 msgid "Lost your password?"
 msgstr "비밀번호를 잊어 버렸습니까?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "로그인으로 돌아 가기"
 

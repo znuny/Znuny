@@ -9215,7 +9215,7 @@ msgstr "מחק קישורים"
 msgid "Lost your password?"
 msgstr "שכחתם סיסמה?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "חזרה להתחברות"
 

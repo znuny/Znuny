@@ -2938,6 +2938,7 @@ sub Data {
         'Request New Password' => 'درخواست رمز عبور جدید',
         'Your User Name' => 'نام کاربری شما',
         'A new password will be sent to your email address.' => 'رمز عبور جدید برای آدرس ایمیل شما ارسال خواهد شد.',
+        'Back to login' => 'بازگشت به صفحه ورود',
         'Create Account' => 'ثبت نام',
         'Please fill out this form to receive login credentials.' => 'لطفا این فرم را  برای دریافت اعتبار ورود پر کنید . ',
         'How we should address you' => 'ما چگونه شما را خطاب کنیم',
@@ -3146,7 +3147,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'رمز عبور خود را فراموش کرده اید؟',
-        'Back to login' => 'بازگشت به صفحه ورود',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'محتوای پیش نمایش مقیاس',

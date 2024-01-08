@@ -9214,7 +9214,7 @@ msgstr "Obriši veze"
 msgid "Lost your password?"
 msgstr "Izgubili ste lozinku?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Natrag na prijavu"
 

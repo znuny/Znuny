@@ -2936,6 +2936,7 @@ sub Data {
         'Request New Password' => 'Zahtjev za novu lozinku',
         'Your User Name' => 'Vaše korisničko ime',
         'A new password will be sent to your email address.' => 'Nova lozinka će Vam biti poslana na Vašu adresu E-pošte.',
+        'Back to login' => 'Natrag na prijavu',
         'Create Account' => 'Napravite korisnički račun',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'Kako da Vas oslovljavamo',
@@ -3144,7 +3145,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Izgubili ste lozinku?',
-        'Back to login' => 'Natrag na prijavu',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

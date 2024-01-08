@@ -2933,6 +2933,7 @@ sub Data {
         'Request New Password' => 'Sol·licitar una nova contrasenya',
         'Your User Name' => 'El seu nom d\'usuari',
         'A new password will be sent to your email address.' => 'Una nova contrasenya li serà enviada a la seva adreça de correu electrònic.',
+        'Back to login' => 'Tornar a identificar-se',
         'Create Account' => 'Crear Compte',
         'Please fill out this form to receive login credentials.' => 'Per favor, empleni aquest formulari per rebre les credencials d\'accés.',
         'How we should address you' => 'Com li hauríem d\'adreçar',
@@ -3141,7 +3142,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Va oblidar la seva contrasenya?',
-        'Back to login' => 'Tornar a identificar-se',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

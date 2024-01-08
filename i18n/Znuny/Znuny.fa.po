@@ -9214,7 +9214,7 @@ msgstr "حذف رابطه‌ها"
 msgid "Lost your password?"
 msgstr "رمز عبور خود را فراموش کرده اید؟"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "بازگشت به صفحه ورود"
 

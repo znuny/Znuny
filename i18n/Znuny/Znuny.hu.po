@@ -9214,7 +9214,7 @@ msgstr "Kapcsolatok törlése"
 msgid "Lost your password?"
 msgstr "Elfelejtette a jelszavát?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Vissza a bejelentkezéshez"
 

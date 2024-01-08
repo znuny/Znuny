@@ -9216,7 +9216,7 @@ msgstr "Hapus penghubung"
 msgid "Lost your password?"
 msgstr "Kehilangan kata sandi anda?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Kembali ke dalam login"
 

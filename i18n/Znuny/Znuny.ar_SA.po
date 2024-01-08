@@ -9210,7 +9210,7 @@ msgstr ""
 msgid "Lost your password?"
 msgstr "فقدت كلمة المرور؟"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr ""
 

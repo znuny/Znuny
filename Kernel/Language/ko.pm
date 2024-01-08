@@ -2932,6 +2932,7 @@ sub Data {
         'Request New Password' => '새 비밀번호 요청',
         'Your User Name' => '사용자 이름',
         'A new password will be sent to your email address.' => '새 비밀번호가 이메일 주소로 전송됩니다.',
+        'Back to login' => '로그인으로 돌아 가기',
         'Create Account' => '계정 만들기',
         'Please fill out this form to receive login credentials.' => '로그인 자격 증명을 받으려면 이 양식을 작성하십시오.',
         'How we should address you' => '우리가 너를 어떻게 대해야하는지',
@@ -3140,7 +3141,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => '비밀번호를 잊어 버렸습니까?',
-        'Back to login' => '로그인으로 돌아 가기',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '미리보기 콘텐츠 크기 조정',

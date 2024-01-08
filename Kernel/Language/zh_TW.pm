@@ -2936,6 +2936,7 @@ sub Data {
         'Request New Password' => '請求新密碼',
         'Your User Name' => '您的用戶名',
         'A new password will be sent to your email address.' => '新密碼將會發送到您的郵箱中',
+        'Back to login' => '重新登錄',
         'Create Account' => '創建帳戶',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => '稱謂',
@@ -3144,7 +3145,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => '忘記密碼?',
-        'Back to login' => '重新登錄',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

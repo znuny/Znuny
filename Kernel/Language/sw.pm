@@ -2935,6 +2935,7 @@ sub Data {
         'Request New Password' => 'Ombi la neno jipya la siri',
         'Your User Name' => 'Jina lako la mtumiaji',
         'A new password will be sent to your email address.' => 'Neno jipya la siri litatumwa kwenye anwani yako ya barua pepe',
+        'Back to login' => 'Rudi kwenye kuingia',
         'Create Account' => 'Tengeneza akaunti',
         'Please fill out this form to receive login credentials.' => 'Tafadhali jaza fomu hii kupokea hati za utambulisho za kuingia.',
         'How we should address you' => 'Jinsi tutakavyokutambulisha',
@@ -3143,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Umepoteza neno lako la siri?',
-        'Back to login' => 'Rudi kwenye kuingia',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

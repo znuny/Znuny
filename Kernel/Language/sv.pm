@@ -2935,6 +2935,7 @@ sub Data {
         'Request New Password' => 'Be om nytt lösenord',
         'Your User Name' => 'Ditt användarnamn',
         'A new password will be sent to your email address.' => 'Ett nytt lösenord kommer skickas till din e-postadress.',
+        'Back to login' => 'Tillbaka till inloggningen',
         'Create Account' => 'Skapa konto',
         'Please fill out this form to receive login credentials.' => 'Fyll i detta formulär för att få dina inloggningsuppgifter.',
         'How we should address you' => '',
@@ -3143,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Glömt lösenordet?',
-        'Back to login' => 'Tillbaka till inloggningen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

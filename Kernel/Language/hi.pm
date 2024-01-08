@@ -2935,6 +2935,7 @@ sub Data {
         'Request New Password' => 'नए कूटशब्द के लिए अनुरोध करे',
         'Your User Name' => 'आपका उपयोगकर्ता नाम',
         'A new password will be sent to your email address.' => 'एक नया कूटशब्द आपके ईमेल पते पर भेजा जाएगा।',
+        'Back to login' => 'प्रवेश करने के लिए वापस जाएँ',
         'Create Account' => 'खाता बनाएँ',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'हम आपको कैसे संबोधित करें',
@@ -3143,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => ' आपने कूटशब्द खो दिया?',
-        'Back to login' => 'प्रवेश करने के लिए वापस जाएँ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

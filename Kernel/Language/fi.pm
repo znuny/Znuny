@@ -2935,6 +2935,7 @@ sub Data {
         'Request New Password' => 'Pyydä uusi salasana',
         'Your User Name' => 'Sinun käyttäjänimi',
         'A new password will be sent to your email address.' => 'Uusi salasana lähetetään sinulle sähköpostilla.',
+        'Back to login' => 'Takaisin kirjautumiseen',
         'Create Account' => 'Luo tunnus',
         'Please fill out this form to receive login credentials.' => 'Täytä kaavake saadaksesi käyttäjätunnukset.',
         'How we should address you' => 'Miten kutsumme sinua',
@@ -3143,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Unohditko salasanan?',
-        'Back to login' => 'Takaisin kirjautumiseen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',

@@ -9084,7 +9084,7 @@ msgstr "Apagar ligações"
 msgid "Lost your password?"
 msgstr "Esqueceu a palavra-passe?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Voltar ao login"
 

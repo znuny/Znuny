@@ -2937,6 +2937,7 @@ sub Data {
         'Request New Password' => 'Zahtevaj novo geslo',
         'Your User Name' => 'Vaše uporabniško ime',
         'A new password will be sent to your email address.' => 'Novo geslo bo poslano na vašo e-pošto.',
+        'Back to login' => 'Nazaj na prijavo',
         'Create Account' => 'Ustvari račun',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'Kako vas naj nasljavljamo',
@@ -3145,7 +3146,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Ste pozabili geslo?',
-        'Back to login' => 'Nazaj na prijavo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
