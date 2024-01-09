@@ -1,6 +1,7 @@
 # 6.5.6 2024-??-??
  - 2024-01-08 Updated AdminSystemFiles: Added additional file check.
  - 2024-01-08 Fixed rich text editor's field height problems by disabling CKEditor's autogrow plugin. Thanks to Paweł Bogusławski (@pboguslawski). [#526](https://github.com/znuny/Znuny/pull/526)
+ - 2023-12-22 Deactivated CKE 4 plugin embedsemantic because it showed the content of a link instead of just the link.
  - 2023-10-24 Kernel::System::MailQueue::Send now increases number of attempts before sending an email. This prevents the attempts not being increased if the process dies while trying to send an email.
 
 # 6.5.5 2023-12-13
