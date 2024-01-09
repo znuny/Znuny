@@ -1,4 +1,5 @@
 # 7.0.15 2024-??-??
+ - 2024-01-08 Updated AdminSystemFiles: Added additional file check.
  - 2024-01-08 Adjustment of Login form.
  - 2024-01-08 Fixed rich text editor's field height problems by disabling CKEditor's autogrow plugin. Thanks to Paweł Bogusławski (@pboguslawski). [#526](https://github.com/znuny/Znuny/pull/526)
  - 2024-01-02 Fixed Bug - Error in Daemon Scheduler Task Worker (Task: PluginAsynchronous::ConcurrentUser). [#524](https://github.com/znuny/Znuny/issues/524)
