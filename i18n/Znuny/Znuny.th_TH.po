@@ -11169,7 +11169,7 @@ msgstr "ไม่มีไฟล์ดังกล่าว% s ในระบ�
 msgid "Can't read %s!"
 msgstr "ไม่สามารถอ่าน% s!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr ""
 
@@ -14717,11 +14717,11 @@ msgstr ""
 msgid "Concurrent Users"
 msgstr "ผู้ใช้งานร่วมกัน"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "โอเค"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "ปัญหา"
 

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.898050231328486;
+    $Self->{Completeness}        = 0.898033382911915;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1550,9 +1550,11 @@ sub Data {
         'Date' => 'Datum',
         'List of Files' => 'Spisak datoteka',
         'Permission' => 'Dozvola',
+        'Size' => 'Veličina',
+        'Problem' => 'Problem',
+        'OK' => 'U redu',
         'Download file from package!' => 'Preuzmi datoteku iz paketa!',
         'Required' => 'Obavezno',
-        'Size' => 'Veličina',
         'Primary Key' => 'Primarni ključ',
         'Auto Increment' => 'Auto uvećanje',
         'SQL' => 'SQL',
@@ -3859,7 +3861,6 @@ sub Data {
         'No such file %s in package!' => 'Nema takve datoteke %s u paketu!',
         'No such file %s in local file system!' => 'Nema takve datoteke %s u lokalnom sistemu!',
         'Can\'t read %s!' => 'Nemoguće čitanje %s!',
-        'File is OK' => 'Datoteka je u redu',
         'Package has locally modified files.' => 'Paket sadrži lokalno izmenjene datoteke.',
         'Not Started' => 'Nije pokrenuto',
         'Updated' => 'Ažurirano',
@@ -5336,10 +5337,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'Detalji istovremenih korisnika',
         'Concurrent Users' => 'Istovremeni korisnici',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'U redu',
-        'Problem' => 'Problem',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => 'Podešavanje %s ne postoji!',

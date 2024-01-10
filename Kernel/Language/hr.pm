@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.219101123595506;
+    $Self->{Completeness}        = 0.219137332672286;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1548,9 +1548,11 @@ sub Data {
         'Date' => 'Datum',
         'List of Files' => 'Spisak datoteka',
         'Permission' => 'Dozvola',
+        'Size' => 'Veličina',
+        'Problem' => '',
+        'OK' => 'U redu',
         'Download file from package!' => 'Preuzmi datoteku iz paketa!',
         'Required' => 'Obavezno',
-        'Size' => 'Veličina',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -3857,7 +3859,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5334,10 +5335,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'U redu',
-        'Problem' => '',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',

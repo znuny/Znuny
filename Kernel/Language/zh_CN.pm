@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.901520158625248;
+    $Self->{Completeness}        = 0.901503883655594;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1551,9 +1551,11 @@ sub Data {
         'Date' => '日期',
         'List of Files' => '文件清单',
         'Permission' => '权限',
+        'Size' => '大小',
+        'Problem' => '问题',
+        'OK' => '好',
         'Download file from package!' => '从软件包中下载这个文件！',
         'Required' => '必需的',
-        'Size' => '大小',
         'Primary Key' => '主密钥',
         'Auto Increment' => '自动增加',
         'SQL' => 'SQL',
@@ -3860,7 +3862,6 @@ sub Data {
         'No such file %s in package!' => '软件包中没有%s 文件！',
         'No such file %s in local file system!' => '本地文件系统中没有%s 文件！',
         'Can\'t read %s!' => '不能读取%s！',
-        'File is OK' => '文件正常',
         'Package has locally modified files.' => '软件包中有本地修改过的文件。',
         'Not Started' => '没有启动',
         'Updated' => '更新时间',
@@ -5337,10 +5338,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '并发用户详细信息',
         'Concurrent Users' => '并发用户数',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => '好',
-        'Problem' => '问题',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '设置%s不存在！',

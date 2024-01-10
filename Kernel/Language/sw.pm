@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.43836748182419;
+    $Self->{Completeness}        = 0.438439927284746;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1547,9 +1547,11 @@ sub Data {
         'Date' => 'Tarehe',
         'List of Files' => 'Orodha ya mafaili',
         'Permission' => 'Ruhusa',
+        'Size' => 'Ukubwa',
+        'Problem' => 'Tatizo',
+        'OK' => 'Sawa',
         'Download file from package!' => 'Pakua faili kutoka kwenye kifurushi',
         'Required' => 'Hitajika',
-        'Size' => 'Ukubwa',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -3856,7 +3858,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5333,10 +5334,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Watumiaji wa kwa pamoja',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'Sawa',
-        'Problem' => 'Tatizo',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',

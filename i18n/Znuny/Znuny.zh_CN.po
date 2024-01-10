@@ -11166,7 +11166,7 @@ msgstr "本地文件系统中没有%s 文件！"
 msgid "Can't read %s!"
 msgstr "不能读取%s！"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "文件正常"
 
@@ -14714,11 +14714,11 @@ msgstr "并发用户详细信息"
 msgid "Concurrent Users"
 msgstr "并发用户数"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "好"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "问题"
 

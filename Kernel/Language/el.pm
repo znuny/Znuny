@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.137805684071381;
+    $Self->{Completeness}        = 0.137828458106098;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1548,9 +1548,11 @@ sub Data {
         'Date' => 'Ημερομηνία',
         'List of Files' => 'Καταλογος Αρχείων',
         'Permission' => 'Δικαίωμα',
+        'Size' => 'Μέγεθος',
+        'Problem' => 'Πρόβλημα',
+        'OK' => 'Εντάξει',
         'Download file from package!' => 'Κατέβασμα αρχείου απο πακέτο !',
         'Required' => 'Απαιτείται',
-        'Size' => 'Μέγεθος',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -3859,7 +3861,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5336,10 +5337,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'Εντάξει',
-        'Problem' => 'Πρόβλημα',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',

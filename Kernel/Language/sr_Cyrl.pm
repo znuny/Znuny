@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.898050231328486;
+    $Self->{Completeness}        = 0.898033382911915;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1545,9 +1545,11 @@ sub Data {
         'Date' => 'Датум',
         'List of Files' => 'Списак датотека',
         'Permission' => 'Дозвола',
+        'Size' => 'Величина',
+        'Problem' => 'Проблем',
+        'OK' => 'У реду',
         'Download file from package!' => 'Преузми датотеку из пакета!',
         'Required' => 'Обавезно',
-        'Size' => 'Величина',
         'Primary Key' => 'Примарни кључ',
         'Auto Increment' => 'Ауто увећање',
         'SQL' => 'SQL',
@@ -3854,7 +3856,6 @@ sub Data {
         'No such file %s in package!' => 'Нема такве датотеке %s у пакету!',
         'No such file %s in local file system!' => 'Нема такве датотеке %s у локалном систему!',
         'Can\'t read %s!' => 'Немогуће читање %s!',
-        'File is OK' => 'Датотека је у реду',
         'Package has locally modified files.' => 'Пакет садржи локално измењене датотеке.',
         'Not Started' => 'Није покренуто',
         'Updated' => 'Ажурирано',
@@ -5331,10 +5332,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'Детаљи истовремених корисника',
         'Concurrent Users' => 'Истовремени корисници',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'У реду',
-        'Problem' => 'Проблем',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => 'Подешавање %s не постоји!',

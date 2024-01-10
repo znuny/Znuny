@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.837243886318572;
+    $Self->{Completeness}        = 0.83721698892745;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1556,9 +1556,11 @@ sub Data {
         'Date' => 'Дата',
         'List of Files' => 'Список файлов',
         'Permission' => 'Права доступа',
+        'Size' => 'Размер',
+        'Problem' => 'Проблема',
+        'OK' => 'О.К.',
         'Download file from package!' => 'Загрузить файл из пакета!',
         'Required' => 'Требуется',
-        'Size' => 'Размер',
         'Primary Key' => 'Главный ключ',
         'Auto Increment' => 'Авто инкремент',
         'SQL' => 'SQL',
@@ -3865,7 +3867,6 @@ sub Data {
         'No such file %s in package!' => 'Отсутствует файл %s в пакете!',
         'No such file %s in local file system!' => 'Отсутствует файл %s в локальной системе!',
         'Can\'t read %s!' => 'Не возможно прочитать %s!',
-        'File is OK' => 'Файлы ОК',
         'Package has locally modified files.' => 'Пакет содержит локально изменённые файлы.',
         'Not Started' => 'Не запущено',
         'Updated' => 'Обновлено',
@@ -5342,10 +5343,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'Подробности о конкурирующих ползователях',
         'Concurrent Users' => 'Конкурентая лицензия',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'О.К.',
-        'Problem' => 'Проблема',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => 'Параметр %s не существует!',

@@ -11166,7 +11166,7 @@ msgstr "Отсутствует файл %s в локальной системе!
 msgid "Can't read %s!"
 msgstr "Не возможно прочитать %s!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "Файлы ОК"
 
@@ -14714,11 +14714,11 @@ msgstr "Подробности о конкурирующих ползовате�
 msgid "Concurrent Users"
 msgstr "Конкурентая лицензия"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "О.К."
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "Проблема"
 

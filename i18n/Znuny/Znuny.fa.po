@@ -11166,7 +11166,7 @@ msgstr "بدون چنین فایلی  %s در فایل سیستم محلی!"
 msgid "Can't read %s!"
 msgstr "نمی تواند بخواند %s !"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "فایل خوب است"
 
@@ -14714,11 +14714,11 @@ msgstr "کاربران همزمان اطلاعات"
 msgid "Concurrent Users"
 msgstr "کاربران موازی"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "خوب"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "مساله است."
 

@@ -11166,7 +11166,7 @@ msgstr "Nincs ilyen %s fájl a helyi fájlrendszeren!"
 msgid "Can't read %s!"
 msgstr "Nem olvasható: %s!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "A fájl rendben van"
 
@@ -14714,11 +14714,11 @@ msgstr "Egyidejű felhasználók részletei"
 msgid "Concurrent Users"
 msgstr "Egyidejű felhasználók"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "OK"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "Probléma"
 

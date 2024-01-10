@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.687541308658295;
+    $Self->{Completeness}        = 0.687489671128739;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1550,9 +1550,11 @@ sub Data {
         'Date' => '日付',
         'List of Files' => 'ファイル一覧',
         'Permission' => '権限',
+        'Size' => 'サイズ',
+        'Problem' => '問題',
+        'OK' => 'OK',
         'Download file from package!' => 'パッケージからファイルをダウンロードしてください。',
         'Required' => '必要項目',
-        'Size' => 'サイズ',
         'Primary Key' => '主キー',
         'Auto Increment' => '自動カウントアップ',
         'SQL' => 'SQL',
@@ -3860,7 +3862,6 @@ sub Data {
         'No such file %s in package!' => 'パッケージ内にファイル %s はありません！',
         'No such file %s in local file system!' => 'ローカルファイルシステム内にファイル %s はありません！',
         'Can\'t read %s!' => '%s を読み込めません！',
-        'File is OK' => 'ファイルは正常です',
         'Package has locally modified files.' => 'パッケージにはローカルに変更されたファイルがあります。',
         'Not Started' => '始まっていない',
         'Updated' => '更新しました',
@@ -5337,10 +5338,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '同時接続ユーザー詳細',
         'Concurrent Users' => '同時実行ユーザー',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => '問題',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '設定 %s は存在しません！',

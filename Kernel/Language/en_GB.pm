@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.607072042300066;
+    $Self->{Completeness}        = 0.607172368203603;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1547,9 +1547,11 @@ sub Data {
         'Date' => 'Date',
         'List of Files' => 'List of FIles',
         'Permission' => 'Permission',
+        'Size' => 'Size',
+        'Problem' => 'Problem',
+        'OK' => 'OK',
         'Download file from package!' => 'Download file from package!',
         'Required' => 'Required',
-        'Size' => 'Size',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -3856,7 +3858,6 @@ sub Data {
         'No such file %s in package!' => 'No such file %s in package!',
         'No such file %s in local file system!' => 'No such file %s in local file system!',
         'Can\'t read %s!' => 'Can\'t read %s!',
-        'File is OK' => '',
         'Package has locally modified files.' => 'Package has locally modified files.',
         'Not Started' => '',
         'Updated' => '',
@@ -5333,10 +5334,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'Concurrent Users Details',
         'Concurrent Users' => 'Concurrent Users',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Problem',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',

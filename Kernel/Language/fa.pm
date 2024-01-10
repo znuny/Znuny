@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.619795109054858;
+    $Self->{Completeness}        = 0.619732275656916;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1550,9 +1550,11 @@ sub Data {
         'Date' => 'تاریخ',
         'List of Files' => 'فهرست فایل‌ها',
         'Permission' => 'حقوق دسترسی',
+        'Size' => 'اندازه',
+        'Problem' => 'مساله است.',
+        'OK' => 'خوب',
         'Download file from package!' => 'دریافت فایل از بسته!',
         'Required' => 'الزامی',
-        'Size' => 'اندازه',
         'Primary Key' => 'کلید اولیه',
         'Auto Increment' => 'افزایش خودکار',
         'SQL' => 'SQL',
@@ -3859,7 +3861,6 @@ sub Data {
         'No such file %s in package!' => 'بدون چنین فایل %s در بسته!',
         'No such file %s in local file system!' => 'بدون چنین فایلی  %s در فایل سیستم محلی!',
         'Can\'t read %s!' => 'نمی تواند بخواند %s !',
-        'File is OK' => 'فایل خوب است',
         'Package has locally modified files.' => 'بسته بندی به صورت محلی فایل های اصلاح شده.',
         'Not Started' => '',
         'Updated' => '',
@@ -5336,10 +5337,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'کاربران همزمان اطلاعات',
         'Concurrent Users' => 'کاربران موازی',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'خوب',
-        'Problem' => 'مساله است.',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',

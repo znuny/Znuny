@@ -11166,7 +11166,7 @@ msgstr "Datei %s existiert nicht im Dateisystem!"
 msgid "Can't read %s!"
 msgstr "Kann %s nicht lesen!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "Datei ist OK"
 
@@ -14714,11 +14714,11 @@ msgstr "Details der gleichzeitigen Benutzer"
 msgid "Concurrent Users"
 msgstr "Gleichzeitige Benutzer"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "OK"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "Problem"
 

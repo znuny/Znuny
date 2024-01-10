@@ -1195,54 +1195,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     /**
-    * @subsection  Icons
-    */
-    .IconInline {
-        display: inline-block;
-    }
-
-    .IconReady {
-        width: 16px;
-        height: 16px;
-        background-image: url(../img/icons/tick.png);
-    }
-
-    .IconNotReady {
-        /*width: 16px;
-        height: 16px;
-        background-image: url(../img/icons/cross.png);*/
-        max-width: var(--btn-max-width-md);
-        min-height: var(--btn-min-height);
-        background: var(--primary-color);
-        padding: var(--padding-xs) var(--padding-sm);
-        border-radius: var(--border-radius-xs);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: var(--main-transition);
-    }
-
-    .IconNotReady:hover {
-        background: var(--primary-color-darker);
-        cursor: pointer;
-    }
-
-    .IconNotReady::after {
-        content: 'View changes';
-        color: var(--btn-text-color);
-    }
-
-    .IconNotReady:hover::after {
-        color: var(--btn-primary-text-hover);
-    }
-
-    .IconNotReadyGrey {
-        width: 16px;
-        height: 16px;
-        background-image: url(../img/icons/cross_sw.png);
-    }
-
-    /**
     * @subsection  Dialog popup width
     */
     iframe.TextOption {

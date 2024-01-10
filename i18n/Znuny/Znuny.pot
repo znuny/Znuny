@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-01-02 19:52+0000\n"
+"POT-Creation-Date: 2024-01-10 15:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4647,15 +4647,23 @@ msgid "Permission"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Size"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Problem"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "OK"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Download file from package!"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Required"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Size"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
@@ -8687,6 +8695,10 @@ msgid "A new password will be sent to your email address."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "Back to login"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Create Account"
 msgstr ""
 
@@ -9272,10 +9284,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
 msgid "Lost your password?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-msgid "Back to login"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
@@ -11220,10 +11228,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "Can't read %s!"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
-msgid "File is OK"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
@@ -14768,14 +14772,6 @@ msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
 msgid "Concurrent Users"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-msgid "OK"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-msgid "Problem"
 msgstr ""
 
 #. Perl Module: Kernel/System/SysConfig.pm
