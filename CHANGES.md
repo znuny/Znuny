@@ -1,5 +1,6 @@
 # 7.0.15 2024-??-??
  - 2024-01-15 Updated Transition Action Default Parameters.
+ - 2024-01-11 Fixed appointment notifications not being sent if crypting/signing options were configured.
  - 2024-01-10 Adjusted styling of file list of an installed package on AdminPackageManager.
  - 2024-01-08 Updated AdminSystemFiles: Added additional file check.
  - 2024-01-08 Adjustment of Login form.
