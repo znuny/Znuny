@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.438770451165097;
+    $Self->{Completeness}        = 0.438605189224921;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1545,9 +1545,11 @@ sub Data {
         'Date' => 'Дата',
         'List of Files' => 'Список файлів',
         'Permission' => 'Права доступу',
+        'Size' => 'Розмір',
+        'Problem' => '',
+        'OK' => '',
         'Download file from package!' => 'Завантажити файл із пакета!',
         'Required' => ' Потрібно',
-        'Size' => 'Розмір',
         'Primary Key' => 'Первинний ключ',
         'Auto Increment' => 'Автоматичний приріст',
         'SQL' => 'SQL',
@@ -2933,6 +2935,7 @@ sub Data {
         'Request New Password' => 'Вислати новий пароль',
         'Your User Name' => 'Логін',
         'A new password will be sent to your email address.' => 'Новий пароль буде надісланий до вашої електронної скриньки.',
+        'Back to login' => 'Повернутися',
         'Create Account' => 'Створити обліковий запис',
         'Please fill out this form to receive login credentials.' => 'Будь ласка, заповніть поля цієї форми щоб отримати реєстраційні дані.',
         'How we should address you' => 'Як ми можемо звертатися до Вас',
@@ -3141,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Забули свій пароль',
-        'Back to login' => 'Повернутися',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Масштабувати перегляд вмісту',
@@ -3854,7 +3856,6 @@ sub Data {
         'No such file %s in package!' => 'Немає файлу %s в пакунку!',
         'No such file %s in local file system!' => 'Немає файлу %s в локальній файловій системі!',
         'Can\'t read %s!' => 'Неможливо прочитати %s!',
-        'File is OK' => 'Файл в нормі',
         'Package has locally modified files.' => 'Пакунок має локально змінені файли.',
         'Not Started' => '',
         'Updated' => '',
@@ -5331,10 +5332,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => '',
-        'Problem' => '',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7850,6 +7847,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'тимчасово недійсний',

@@ -183,9 +183,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .Option a:hover {
-    color: var(--black);
-    border-color: var(--black);
+    color: var(--primary-color);
 }
+
 /**
  * @subsection  Custom Field Sizes
  */
@@ -246,9 +246,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 
-
-
-
 /**
  * @subsection  Login Content
  * @note        if you want to place some content into the login (for example CustomerAccept.tt)
@@ -262,6 +259,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 .RTL .Login .Content {
     margin-right: 142px;
     margin-left: 0;
+}
+
+#Container form div {
+    gap: var(--gap-sm);
 }
 
 } /* end @media */

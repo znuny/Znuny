@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.901669145595769;
+    $Self->{Completeness}        = 0.901503883655594;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1550,9 +1550,11 @@ sub Data {
         'Date' => 'Dátum',
         'List of Files' => 'Fájlok listája',
         'Permission' => 'Jogosultság',
+        'Size' => 'Méret',
+        'Problem' => 'Probléma',
+        'OK' => 'OK',
         'Download file from package!' => 'Fájl letöltése a csomagból!',
         'Required' => 'Kötelező',
-        'Size' => 'Méret',
         'Primary Key' => 'Elsődleges kulcs',
         'Auto Increment' => 'Automatikus növelés',
         'SQL' => 'SQL',
@@ -2938,6 +2940,7 @@ sub Data {
         'Request New Password' => 'Új jelszó kérése',
         'Your User Name' => 'A felhasználóneve',
         'A new password will be sent to your email address.' => 'Az új jelszó el lesz küldve az e-mail címére.',
+        'Back to login' => 'Vissza a bejelentkezéshez',
         'Create Account' => 'Fiók létrehozása',
         'Please fill out this form to receive login credentials.' => 'Töltse ki ezt az űrlapot a bejelentkezési adatok fogadásához.',
         'How we should address you' => 'Hogyan szólítsuk meg',
@@ -3146,7 +3149,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Elfelejtette a jelszavát?',
-        'Back to login' => 'Vissza a bejelentkezéshez',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Előnézet tartalmának méretezése',
@@ -3859,7 +3861,6 @@ sub Data {
         'No such file %s in package!' => 'Nincs ilyen %s fájl a csomagban!',
         'No such file %s in local file system!' => 'Nincs ilyen %s fájl a helyi fájlrendszeren!',
         'Can\'t read %s!' => 'Nem olvasható: %s!',
-        'File is OK' => 'A fájl rendben van',
         'Package has locally modified files.' => 'A csomag helyileg módosított fájlokkal rendelkezik.',
         'Not Started' => 'Nincs elindítva',
         'Updated' => 'Frissítve',
@@ -5336,10 +5337,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'Egyidejű felhasználók részletei',
         'Concurrent Users' => 'Egyidejű felhasználók',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Probléma',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => 'A(z) %s beállítás nem létezik!',
@@ -7855,6 +7852,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'átmenetileg érvénytelen',

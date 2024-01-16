@@ -9214,7 +9214,7 @@ msgstr "Deletar Associações"
 msgid "Lost your password?"
 msgstr "Esqueceu sua senha?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Voltar para o login"
 
@@ -11166,7 +11166,7 @@ msgstr "Arquivo inexistente %s no sistema de arquivos local!"
 msgid "Can't read %s!"
 msgstr "Não pôde ser lido %s!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "Arquivo está ok"
 
@@ -14714,11 +14714,11 @@ msgstr "Detalhes de Usuários Concorrentes"
 msgid "Concurrent Users"
 msgstr "Usuários Concorrentes"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "OK"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "Problema"
 
@@ -24314,5 +24314,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 

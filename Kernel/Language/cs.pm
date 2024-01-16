@@ -1551,9 +1551,11 @@ sub Data {
         'Date' => 'Datum',
         'List of Files' => 'Seznam souborů',
         'Permission' => 'Práva',
+        'Size' => 'Velikost',
+        'Problem' => 'Problém',
+        'OK' => 'Ano',
         'Download file from package!' => 'Stáhnout souboru z balíčku!',
         'Required' => 'Vyžadováno',
-        'Size' => 'Velikost',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'Limit',
@@ -2939,6 +2941,7 @@ sub Data {
         'Request New Password' => '',
         'Your User Name' => 'Vaše uživatelské jméno',
         'A new password will be sent to your email address.' => 'Nové heslo bude zasláno na váš e-mail.',
+        'Back to login' => '',
         'Create Account' => 'Vytvořit účet',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => '',
@@ -3147,7 +3150,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Ztratil/a jste heslo?',
-        'Back to login' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3860,7 +3862,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5337,10 +5338,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Konkurenční Uživatelé',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'Ano',
-        'Problem' => 'Problém',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7856,6 +7853,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'neplatný-dočasně',

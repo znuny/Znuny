@@ -9214,7 +9214,7 @@ msgstr "Обриши везе"
 msgid "Lost your password?"
 msgstr "Изгубили сте лозинку?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Назад на пријављивање"
 
@@ -11166,7 +11166,7 @@ msgstr "Нема такве датотеке %s у локалном систем
 msgid "Can't read %s!"
 msgstr "Немогуће читање %s!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "Датотека је у реду"
 
@@ -14714,11 +14714,11 @@ msgstr "Детаљи истовремених корисника"
 msgid "Concurrent Users"
 msgstr "Истовремени корисници"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "У реду"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "Проблем"
 
@@ -24314,5 +24314,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 

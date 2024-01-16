@@ -9216,7 +9216,7 @@ msgstr "リンクを削除"
 msgid "Lost your password?"
 msgstr "パスワードを忘れた方"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "ログイン画面に戻る"
 
@@ -11169,7 +11169,7 @@ msgstr "ローカルファイルシステム内にファイル %s はありま�
 msgid "Can't read %s!"
 msgstr "%s を読み込めません！"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "ファイルは正常です"
 
@@ -14717,11 +14717,11 @@ msgstr "同時接続ユーザー詳細"
 msgid "Concurrent Users"
 msgstr "同時実行ユーザー"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "OK"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "問題"
 
@@ -24318,5 +24318,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 

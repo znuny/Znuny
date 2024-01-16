@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.643860518922492;
+    $Self->{Completeness}        = 0.643695256982317;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1549,9 +1549,11 @@ sub Data {
         'Date' => 'Data',
         'List of Files' => 'Lista plików',
         'Permission' => 'Prawo dostępu',
+        'Size' => 'Rozmiar',
+        'Problem' => 'Problem',
+        'OK' => 'OK',
         'Download file from package!' => 'Pobierz plik z pakietu!',
         'Required' => 'Wymagany',
-        'Size' => 'Rozmiar',
         'Primary Key' => 'Klucz podstawowy',
         'Auto Increment' => 'Automatycznie zwiększane',
         'SQL' => 'SQL',
@@ -2937,6 +2939,7 @@ sub Data {
         'Request New Password' => 'Prośba o nowe hasło',
         'Your User Name' => 'Nazwa użytkownika',
         'A new password will be sent to your email address.' => 'Nowe hasło będzie wysłane na twój adres e-mail',
+        'Back to login' => 'Powrót do logowania',
         'Create Account' => 'Utwórz konto',
         'Please fill out this form to receive login credentials.' => 'Wypełnij ten formularz aby otrzymać dane logowania.',
         'How we should address you' => 'Jak powinniśmy cię tytułować',
@@ -3145,7 +3148,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Zapomniałeś hasła?',
-        'Back to login' => 'Powrót do logowania',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3858,7 +3860,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => 'Nie można odczytać %s!',
-        'File is OK' => 'Plik jest OK',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5335,10 +5336,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Jednocześni Użytkownicy',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Problem',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7854,6 +7851,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'czasowo nieaktualne',

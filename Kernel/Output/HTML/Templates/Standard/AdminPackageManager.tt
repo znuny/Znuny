@@ -674,36 +674,48 @@
                     <table class="DataTable">
                         <thead>
                             <tr>
-                                <th class="W50pc">[% Translate("Filename") | html %]</th>
-                                <th>[% Translate("Permission") | html %]</th>
                                 <th>[% Translate("Status") | html %]</th>
-                                <th class="W20pc">[% Translate("Download") | html %]</th>
+                                <th>[% Translate("Filename") | html %]</th>
+                                <th class="Center">[% Translate("Permission") | html %]</th>
+                                <th>[% Translate("Size") | html %]</th>
+                                <th class="Center">[% Translate("Download") | html %]</th>
                             </tr>
                         </thead>
                         <tbody>
 [% RenderBlockStart("PackageItemFilelistFile") %]
                             <tr>
-                                <td title="[% Data.Location | html %]">
-                                    <code>[% Data.Location | truncate(65) | html %]</code>
-                                </td>
-                                <td>
-                                    <div title="[% Data.Permission | html %]">([% Data.Permission | html %])</div>
-                                </td>
-                                <td>
 [% RenderBlockStart("PackageItemFilelistFileNoteDiff") %]
-                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ViewDiff;Name=[% Data.Name | uri %];Version=[% Data.Version | uri %];File=[% Data.File | uri %];Location=[% Data.Location | uri %]" title="[% Translate(Data.Message) | html %]" class="AsBlock [% Data.Icon | html %]"></a>
+                                <td>
+                                    <span class="Flag Small Problem" title="[% Translate(Data.Message) | html %]">
+                                        <span>[% Translate("Problem") | html %]</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ViewDiff;Name=[% Data.Name | uri %];Version=[% Data.Version | uri %];File=[% Data.File | uri %];Location=[% Data.Location | uri %]" title="[% Translate(Data.Message) | html %] - [% Data.Location | html %]" class="AsBlock">
+                                        [% Data.Location | truncate(65) | html %]
+                                    </a>
+                                </td>
 [% RenderBlockEnd("PackageItemFilelistFileNoteDiff") %]
 [% RenderBlockStart("PackageItemFilelistFileNote") %]
-                                    <span title="[% Translate(Data.Message) | html %]" class="AsBlock [% Data.Icon | html %]"></span>
-[% RenderBlockEnd("PackageItemFilelistFileNote") %]
+                                <td>
+                                    <span class="Flag Small OK">
+                                        <span>[% Translate("OK") | html %]</span>
+                                    </span>
                                 </td>
                                 <td>
-                                    <div class="flex-row">
+                                    <span title="[% Data.Location | html %]">[% Data.Location | truncate(65) | html %]</span>
+                                </td>
+[% RenderBlockEnd("PackageItemFilelistFileNote") %]
+                                <td class="Center">
+                                    <div title="[% Data.Permission | html %]">[% Data.Permission | html %]</div>
+                                </td>
+                                <td>
+                                    [% Data.Size | html %]
+                                </td>
+                                <td class="Center">
 [% RenderBlockStart("PackageItemFilelistFileLink") %]
-                                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];Name=[% Data.Name | uri %];Version=[% Data.Version | uri %];File=[% Data.File | uri %];Location=[% Data.Location | uri %]" class="IconInline table-icon-hover-md" title="[% Translate("Download file from package!") | html %]"><i class="fa fa-save"></i></a>
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];Name=[% Data.Name | uri %];Version=[% Data.Version | uri %];File=[% Data.File | uri %];Location=[% Data.Location | uri %]" class="AsBlock table-icon-hover-md" title="[% Translate("Download file from package!") | html %]"><i class="fa fa-save"></i></a>
 [% RenderBlockEnd("PackageItemFilelistFileLink") %]
-                                        [% Data.Size | html %]
-                                    </div>
                                 </td>
                             </tr>
 [% RenderBlockEnd("PackageItemFilelistFile") %]

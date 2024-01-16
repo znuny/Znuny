@@ -9214,7 +9214,7 @@ msgstr "Kapcsolatok törlése"
 msgid "Lost your password?"
 msgstr "Elfelejtette a jelszavát?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Vissza a bejelentkezéshez"
 
@@ -11166,7 +11166,7 @@ msgstr "Nincs ilyen %s fájl a helyi fájlrendszeren!"
 msgid "Can't read %s!"
 msgstr "Nem olvasható: %s!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "A fájl rendben van"
 
@@ -14714,11 +14714,11 @@ msgstr "Egyidejű felhasználók részletei"
 msgid "Concurrent Users"
 msgstr "Egyidejű felhasználók"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "OK"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "Probléma"
 
@@ -24314,5 +24314,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 

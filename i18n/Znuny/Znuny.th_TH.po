@@ -9217,7 +9217,7 @@ msgstr "ลบการเชื่อมโยง"
 msgid "Lost your password?"
 msgstr "ลืมรหัสผ่านของคุณ?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "กลับไปเข้าสู่ระบบ"
 
@@ -11169,7 +11169,7 @@ msgstr "ไม่มีไฟล์ดังกล่าว% s ในระบ�
 msgid "Can't read %s!"
 msgstr "ไม่สามารถอ่าน% s!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr ""
 
@@ -14717,11 +14717,11 @@ msgstr ""
 msgid "Concurrent Users"
 msgstr "ผู้ใช้งานร่วมกัน"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "โอเค"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "ปัญหา"
 
@@ -24320,5 +24320,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 

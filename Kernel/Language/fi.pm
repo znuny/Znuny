@@ -1547,9 +1547,11 @@ sub Data {
         'Date' => 'Päiväys',
         'List of Files' => 'Tiedostolista',
         'Permission' => 'Käyttöoikeus',
+        'Size' => 'Koko',
+        'Problem' => '',
+        'OK' => '',
         'Download file from package!' => 'Lataa tiedosto paketista!',
         'Required' => 'Vaadittu',
-        'Size' => 'Koko',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -2935,6 +2937,7 @@ sub Data {
         'Request New Password' => 'Pyydä uusi salasana',
         'Your User Name' => 'Sinun käyttäjänimi',
         'A new password will be sent to your email address.' => 'Uusi salasana lähetetään sinulle sähköpostilla.',
+        'Back to login' => 'Takaisin kirjautumiseen',
         'Create Account' => 'Luo tunnus',
         'Please fill out this form to receive login credentials.' => 'Täytä kaavake saadaksesi käyttäjätunnukset.',
         'How we should address you' => 'Miten kutsumme sinua',
@@ -3143,7 +3146,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Unohditko salasanan?',
-        'Back to login' => 'Takaisin kirjautumiseen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3856,7 +3858,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5333,10 +5334,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => '',
-        'Problem' => '',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7852,6 +7849,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'Poistettu käytöstä välikaikaisesti',

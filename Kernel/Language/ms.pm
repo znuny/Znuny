@@ -1544,9 +1544,11 @@ sub Data {
         'Date' => 'Tarikh',
         'List of Files' => 'Senarai Fail',
         'Permission' => 'Kebenaran',
+        'Size' => 'Saiz',
+        'Problem' => 'Masalah',
+        'OK' => 'OK',
         'Download file from package!' => 'Muat turun fail dari pakej!',
         'Required' => 'Diperlukan',
-        'Size' => 'Saiz',
         'Primary Key' => 'Kunci Utama',
         'Auto Increment' => 'Kenaikan Auto',
         'SQL' => 'SQL',
@@ -2932,6 +2934,7 @@ sub Data {
         'Request New Password' => 'Mohon Kata Kunci Baru',
         'Your User Name' => 'Nama pengguna anda',
         'A new password will be sent to your email address.' => 'Kata kunci yang baru akan dihantar ke alamat emel anda.',
+        'Back to login' => 'Kembali ke log masuk',
         'Create Account' => 'Buat akaun',
         'Please fill out this form to receive login credentials.' => 'Sila isi borang ini untuk menerima butiran log masuk.',
         'How we should address you' => 'Bagaimana harus kami memanggil anda?',
@@ -3140,7 +3143,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Hilang kata kunci anda?',
-        'Back to login' => 'Kembali ke log masuk',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Skala pandangan kandungan',
@@ -3853,7 +3855,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5330,10 +5331,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Pengguna Sedia ada',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Masalah',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7851,6 +7848,7 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak sah-sementara',

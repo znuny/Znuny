@@ -1544,9 +1544,11 @@ sub Data {
         'Date' => 'Tanggal',
         'List of Files' => 'Daftar arsip',
         'Permission' => 'Izin',
+        'Size' => 'Ukuran',
+        'Problem' => 'Masalah',
+        'OK' => 'Oke',
         'Download file from package!' => 'Muat turun arsin dari paket',
         'Required' => 'Diwajibkan',
-        'Size' => 'Ukuran',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -2934,6 +2936,7 @@ bin/znuny.Daemon.pl status\').',
         'Request New Password' => 'Meminta kata sandi baru',
         'Your User Name' => 'Nama pengguna anda',
         'A new password will be sent to your email address.' => 'Kata sandi baru anda akan dihantar ke email anda',
+        'Back to login' => 'Kembali ke dalam login',
         'Create Account' => 'Menciptakan akun',
         'Please fill out this form to receive login credentials.' => 'Silahkan isi formulir ini untuk menerima surat kepercayaan',
         'How we should address you' => 'Bagaimana kami mengalamatkan anda',
@@ -3142,7 +3145,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Kehilangan kata sandi anda?',
-        'Back to login' => 'Kembali ke dalam login',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'konten skala pratinjau ',
@@ -3855,7 +3857,6 @@ bin/znuny.Daemon.pl status\').',
         'No such file %s in package!' => 'Tidak ada file seperti %s dalam paket',
         'No such file %s in local file system!' => 'Tidak ada jenis file %s di dalam file sistem lokal!',
         'Can\'t read %s!' => 'Tidak bisa dibaca %s!',
-        'File is OK' => '',
         'Package has locally modified files.' => 'Paket telah diubah secara lokal',
         'Not Started' => '',
         'Updated' => '',
@@ -5332,10 +5333,6 @@ bin/znuny.Daemon.pl status\').',
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Pengguna bersamaan',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'Oke',
-        'Problem' => 'Masalah',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7852,6 +7849,7 @@ bin/znuny.Daemon.pl status\').',
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak valid sementara',

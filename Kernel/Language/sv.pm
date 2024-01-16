@@ -1547,9 +1547,11 @@ sub Data {
         'Date' => 'Datum',
         'List of Files' => 'Fillista',
         'Permission' => 'Rättighet',
+        'Size' => 'Storlek',
+        'Problem' => 'Problem',
+        'OK' => 'OK',
         'Download file from package!' => 'Ladda ner fil från paket!',
         'Required' => 'Krävs',
-        'Size' => 'Storlek',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -2935,6 +2937,7 @@ sub Data {
         'Request New Password' => 'Be om nytt lösenord',
         'Your User Name' => 'Ditt användarnamn',
         'A new password will be sent to your email address.' => 'Ett nytt lösenord kommer skickas till din e-postadress.',
+        'Back to login' => 'Tillbaka till inloggningen',
         'Create Account' => 'Skapa konto',
         'Please fill out this form to receive login credentials.' => 'Fyll i detta formulär för att få dina inloggningsuppgifter.',
         'How we should address you' => '',
@@ -3143,7 +3146,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Glömt lösenordet?',
-        'Back to login' => 'Tillbaka till inloggningen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3856,7 +3858,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5333,10 +5334,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Samtidiga användare',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Problem',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7852,6 +7849,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '* ogiltig-tillfälligt',

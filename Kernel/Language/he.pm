@@ -1551,9 +1551,11 @@ sub Data {
         'Date' => 'תאריך',
         'List of Files' => 'רשימת קבצים',
         'Permission' => 'הרשאה',
+        'Size' => 'גודל',
+        'Problem' => '',
+        'OK' => 'אישור',
         'Download file from package!' => 'הורדת קובץ מהחבילה!',
         'Required' => 'נדרש',
-        'Size' => 'גודל',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -2939,6 +2941,7 @@ sub Data {
         'Request New Password' => 'בקש סיסמה חדשה',
         'Your User Name' => 'שם המשתמש שלך',
         'A new password will be sent to your email address.' => 'סיסמה חדשה תישלח לכתובת הדוא"ל שלך.',
+        'Back to login' => 'חזרה להתחברות',
         'Create Account' => 'צור חשבון',
         'Please fill out this form to receive login credentials.' => 'אנא מלאו את הטופס על מנת לקבל פרטי התחברות.',
         'How we should address you' => 'כיצד עלינו לפנות אליכם?',
@@ -3147,7 +3150,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'שכחתם סיסמה?',
-        'Back to login' => 'חזרה להתחברות',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3860,7 +3862,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5337,10 +5338,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'אישור',
-        'Problem' => '',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7856,6 +7853,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'לא תקף זמנית',

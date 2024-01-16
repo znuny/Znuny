@@ -9214,7 +9214,7 @@ msgstr "링크 삭제"
 msgid "Lost your password?"
 msgstr "비밀번호를 잊어 버렸습니까?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "로그인으로 돌아 가기"
 
@@ -11166,7 +11166,7 @@ msgstr "로컬 파일 시스템에 %s 파일이 없습니다!"
 msgid "Can't read %s!"
 msgstr "%s를 읽을 수 없습니다!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "파일은 정상입니다."
 
@@ -14714,11 +14714,11 @@ msgstr "동시 사용자 세부 정보"
 msgid "Concurrent Users"
 msgstr "동시 사용자"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "승인"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "문제"
 
@@ -24314,5 +24314,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 
