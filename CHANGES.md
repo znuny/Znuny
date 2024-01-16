@@ -2,6 +2,7 @@
  - 2024-01-15 Updated Transition Action Default Parameters.
  - 2024-01-11 Fixed appointment notifications not being sent if crypting/signing options were configured.
  - 2024-01-10 Adjusted styling of file list of an installed package on AdminPackageManager.
+ - 2024-01-10 Fixed setting default value for time units when using dropdown fields. [#464](https://github.com/znuny/Znuny/issues/464)
  - 2024-01-08 Updated AdminSystemFiles: Added additional file check.
  - 2024-01-08 Adjustment of Login form.
  - 2024-01-08 Fixed rich text editor's field height problems by disabling CKEditor's autogrow plugin. Thanks to Paweł Bogusławski (@pboguslawski). [#526](https://github.com/znuny/Znuny/pull/526)
