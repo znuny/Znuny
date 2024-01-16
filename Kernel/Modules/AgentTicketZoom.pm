@@ -1779,6 +1779,7 @@ sub MaskAgentZoom {
                                     # alias for ticket title, Title will be overwritten
                                     TicketTitle => $Ticket{Title},
                                     Value       => $Field->{Value},
+                                    ValueKey    => $Ticket{"DynamicField_$Field->{Name}"},
                                     Title       => $Field->{Title},
                                     Link        => $Field->{Link},
                                     LinkPreview => $Field->{LinkPreview},
@@ -1860,6 +1861,7 @@ sub MaskAgentZoom {
                         # alias for ticket title, Title will be overwritten
                         TicketTitle => $Ticket{Title},
                         Value       => $Field->{Value},
+                        ValueKey    => $Ticket{"DynamicField_$Field->{Name}"},
                         Title       => $Field->{Title},
                         Link        => $Field->{Link},
 

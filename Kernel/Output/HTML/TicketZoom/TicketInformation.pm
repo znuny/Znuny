@@ -314,7 +314,7 @@ sub Run {
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     # to store dynamic fields to be displayed in the process widget and in the sidebar
-    my (@FieldsSidebar);
+    my @FieldsSidebar;
 
     # cycle trough the activated Dynamic Fields for ticket object
     DYNAMICFIELD:
@@ -406,6 +406,7 @@ sub Run {
                     # alias for ticket title, Title will be overwritten
                     TicketTitle => $Ticket{Title},
                     Value       => $Field->{Value},
+                    ValueKey    => $Ticket{"DynamicField_$Field->{Name}"},
                     Title       => $Field->{Title},
                     Link        => $Field->{Link},
                     LinkPreview => $Field->{LinkPreview},
