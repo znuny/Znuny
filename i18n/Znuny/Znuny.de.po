@@ -21806,7 +21806,7 @@ msgstr "Sendet eine Benachrichtigung, welche im Admin-Interface unter \"Ticket-B
 
 #. SysConfig
 msgid "Sent \"%s\" notification to \"%s\" via \"%s\"."
-msgstr "Benachrichtigung \"%s\" versandt and \"%s\" via \"%s\"."
+msgstr "Benachrichtigung \"%s\" versandt an \"%s\" via \"%s\"."
 
 #. SysConfig
 msgid "Sent auto follow-up to \"%s\"."
