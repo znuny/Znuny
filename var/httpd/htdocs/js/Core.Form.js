@@ -298,9 +298,9 @@ Core.Form = (function (TargetNS) {
      */
     $('body').on('keydown', 'input', function (Event) {
         if (Event.keyCode == 13) {
+            Event.preventDefault()
             $('form').find(':submit').last().click();
         }
-        Event.preventDefault()
     });
 
     /**
@@ -312,9 +312,9 @@ Core.Form = (function (TargetNS) {
         if ((Event.ctrlKey || Event.metaKey) && Event.keyCode == 13) {
             // We need to click() instead of submit(), since click() has
             // a few useful event handlers tied to it, like validation.
+            Event.preventDefault()
             $(this.form).find(':submit').last().click();
         }
-        Event.preventDefault()
     });
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
