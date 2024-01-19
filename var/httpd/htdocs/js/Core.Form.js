@@ -298,7 +298,7 @@ Core.Form = (function (TargetNS) {
      */
     $('body').on('keydown', 'input', function (Event) {
         if (Event.keyCode == 13) {
-            Event.preventDefault()
+            Event.preventDefault();
             $('form').find(':submit').last().click();
         }
     });
