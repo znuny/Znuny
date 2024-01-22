@@ -1,4 +1,5 @@
 # 7.0.15 2024-??-??
+ - 2024-01-22 Added ACL checks in TicketProcess toolbar entry.
  - 2024-01-15 Updated Transition Action Default Parameters.
  - 2024-01-11 Fixed appointment notifications not being sent if crypting/signing options were configured.
  - 2024-01-10 Adjusted styling of file list of an installed package on AdminPackageManager.
