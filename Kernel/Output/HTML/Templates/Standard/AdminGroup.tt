@@ -120,13 +120,6 @@
                             </span>
                         </a>
                     </li>
-                    <li>
-                        <a href='[% Env("Baselink") %]Action=AdminCustomerGroup' class='CallForAction Fullsize Center'>
-                            <span>
-                                [% Translate('Customer Users ↔ Groups') | html %]
-                            </span>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
