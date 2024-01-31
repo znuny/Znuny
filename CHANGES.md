@@ -1,6 +1,6 @@
 # 7.0.15 2024-01-31
  - 2024-01-25 Fixed migration of mention notification.
- - 2024-01-18 Exchanged CKEditor 4.22.1 source version with minified version to improve browser loading times. [#535](https://github.com/znuny/Znuny/issues/533)
+ - 2024-01-18 Exchanged CKEditor 4.22.1 source version with minified version to improve browser loading times. [#533](https://github.com/znuny/Znuny/issues/533)
  - 2024-01-15 Updated Transition Action Default Parameters.
  - 2024-01-19 Fixed slow regular expression in postmaster attachment detection.
  - 2024-01-11 Fixed appointment notifications not being sent if crypting/signing options were configured.
