@@ -2895,8 +2895,8 @@ sub Data {
         'From assigned Customer IDs' => 'Из листе додељених ID клијента',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Грешка',
         'An Error Occurred' => 'Догодила се грешка',
-        'Error Details' => 'Детаљи грешке',
         'Traceback' => 'Испрати уназад',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2999,6 +2999,7 @@ sub Data {
         'Ticket fields' => 'Поља тикета',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Детаљи грешке',
         'Expand' => 'Прошири',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3074,7 +3075,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Урађено',
-        'Error' => 'Грешка',
         'Database setup successful!' => 'Успешно инсталирање базе',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

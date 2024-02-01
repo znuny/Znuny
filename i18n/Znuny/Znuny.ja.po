@@ -8536,7 +8536,7 @@ msgstr "割り当てられた顧客IDから"
 msgid "An Error Occurred"
 msgstr "エラーが発生しました。"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "エラーの詳細"
 
@@ -9028,7 +9028,7 @@ msgstr "この手順を飛ばす"
 msgid "Done"
 msgstr "完了"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "エラー"
 

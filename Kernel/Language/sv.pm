@@ -2897,8 +2897,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Fel',
         'An Error Occurred' => '',
-        'Error Details' => 'Detaljer om felet',
         'Traceback' => 'Återspårning',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3001,6 +3001,7 @@ sub Data {
         'Ticket fields' => 'Ärendefält',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Detaljer om felet',
         'Expand' => 'Expandera',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3076,7 +3077,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Klar',
-        'Error' => 'Fel',
         'Database setup successful!' => 'Databasinstallationen lyckades!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

@@ -1,3 +1,6 @@
+# 7.0.16 2024-??-??
+ - 2024-01-24 Fixed layout of error message in customer interface.
+
 # 7.0.15 2024-01-31
  - 2024-01-25 Fixed migration of mention notification.
  - 2024-01-18 Exchanged CKEditor 4.22.1 source version with minified version to improve browser loading times. [#533](https://github.com/znuny/Znuny/issues/533)

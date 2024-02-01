@@ -8537,7 +8537,7 @@ msgstr ""
 msgid "An Error Occurred"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "รายละเอียด ข้อผิดพลาด"
 
@@ -9029,7 +9029,7 @@ msgstr "ข้ามขั้นตอนนี้"
 msgid "Done"
 msgstr "ดำเนินการเสร็จแล้ว"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "ข้อผิดพลาด"
 

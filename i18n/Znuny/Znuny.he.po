@@ -8535,7 +8535,7 @@ msgstr ""
 msgid "An Error Occurred"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "פרטי השגיאה"
 
@@ -9027,7 +9027,7 @@ msgstr "דלג על שלב זה"
 msgid "Done"
 msgstr "בוצע"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "שגיאה"
 

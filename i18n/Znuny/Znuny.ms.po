@@ -8534,7 +8534,7 @@ msgstr ""
 msgid "An Error Occurred"
 msgstr "Kesalahan Telah Berlaku"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "Butiran kesilapan"
 
@@ -9026,7 +9026,7 @@ msgstr "Langkau langkah ini"
 msgid "Done"
 msgstr "Selesai"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Kesilapan"
 

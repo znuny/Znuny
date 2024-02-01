@@ -8377,7 +8377,7 @@ msgstr ""
 msgid "An Error Occurred"
 msgstr "Wystąpił błąd"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "Szczegóły błędu"
 
@@ -8893,7 +8893,7 @@ msgstr "Pomiń ten krok"
 msgid "Done"
 msgstr "Wykonane"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Błąd"
 

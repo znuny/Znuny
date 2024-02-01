@@ -2894,8 +2894,8 @@ sub Data {
         'From assigned Customer IDs' => '할당 된 고객 ID로부터',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => '오류',
         'An Error Occurred' => '에러 발생됨',
-        'Error Details' => '오류 정보',
         'Traceback' => '역 추적',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2998,6 +2998,7 @@ sub Data {
         'Ticket fields' => '타켓 필드',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => '오류 정보',
         'Expand' => '넓히다',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3073,7 +3074,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '끝난',
-        'Error' => '오류',
         'Database setup successful!' => '데이터베이스 설정이 설공적으로 완료되었습니다!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

@@ -2901,8 +2901,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Chyba',
         'An Error Occurred' => 'Pozor chyba',
-        'Error Details' => 'Detail chyby',
         'Traceback' => 'Jít zpět',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3005,6 +3005,7 @@ sub Data {
         'Ticket fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Detail chyby',
         'Expand' => 'Rozbalit',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3080,7 +3081,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Hotovo',
-        'Error' => 'Chyba',
         'Database setup successful!' => 'Databáze úspěšně nastavena!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
