@@ -1,3 +1,6 @@
+# 6.5.7 2024-??-??
+ - 2024-02-01 Added ACL checks to ticket process toolbar entry.
+
 # 6.5.6 2024-01-31
  - 2024-01-25 Fixed migration of mention notification.
  - 2024-01-19 Fixed slow regular expression in postmaster attachment detection.
