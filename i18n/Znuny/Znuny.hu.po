@@ -7146,19 +7146,19 @@ msgstr "Megjegyzés: Az ügyfél-felhasználó érvénytelen!"
 msgid "Customer user information"
 msgstr "Ügyfél-felhasználó információk"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "Phone ticket"
 msgstr "Telefonos jegy"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "Email ticket"
 msgstr "E-mail jegy"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "New phone ticket from %s"
 msgstr "Új telefonos jegy tőle: %s"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "New email ticket to %s"
 msgstr "Új e-mail jegy neki: %s"
 
@@ -8534,7 +8534,7 @@ msgstr "A hozzárendelt ügyfél-azonosítókból"
 msgid "An Error Occurred"
 msgstr "Hiba történt"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "Hiba részletei"
 
@@ -9026,7 +9026,7 @@ msgstr "Lépés kihagyása"
 msgid "Done"
 msgstr "Kész"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Hiba"
 
@@ -9214,7 +9214,7 @@ msgstr "Kapcsolatok törlése"
 msgid "Lost your password?"
 msgstr "Elfelejtette a jelszavát?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Vissza a bejelentkezéshez"
 
@@ -11166,7 +11166,7 @@ msgstr "Nincs ilyen %s fájl a helyi fájlrendszeren!"
 msgid "Can't read %s!"
 msgstr "Nem olvasható: %s!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "A fájl rendben van"
 
@@ -14182,11 +14182,11 @@ msgstr "A következő, valószínűleg rossz névvel rendelkező sorozatok talá
 msgid "PostgreSQL 9.2 or higher is required."
 msgstr "PostgreSQL 9.2 vagy újabb szükséges."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
 msgid "Operating System"
 msgstr "Operációs rendszer"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
 msgid "Znuny Disk Partition"
 msgstr "Znuny lemezpartíció"
 
@@ -14274,351 +14274,351 @@ msgstr "60%-nál több szabad lapozófájlnak kellene lennie."
 msgid "There should be no more than 200 MB swap space used."
 msgstr "200 MB-nál nem kellene több lapozófájlt használni."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
 msgid "Znuny"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
 msgid "Article Search Index Status"
 msgstr "Bejegyzés keresési index állapot"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
 msgid "Indexed Articles"
 msgstr "Indexelt bejegyzések"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticlesPerCommunicationChannel.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticlesPerCommunicationChannel.pm
 msgid "Articles Per Communication Channel"
 msgstr "Bejegyzések kommunikációs csatornánként"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
 msgid "Incoming communications"
 msgstr "Bejövő kommunikációk"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
 msgid "Outgoing communications"
 msgstr "Kimenő kommunikációk"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
 msgid "Failed communications"
 msgstr "Sikertelen kommunikációk"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
 msgid "Average processing time of communications (s)"
 msgstr "Kommunikációk átlagos feldolgozási ideje (mp)"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
 msgid "Communication Log Account Status (last 24 hours)"
 msgstr "Kommunikációs napló fiókjának állapota (az elmúlt 24 óra)"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
 msgid "No connections found."
 msgstr "Nem találhatók kapcsolatok."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
 msgid "ok"
 msgstr "OK"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
 msgid "permanent connection errors"
 msgstr "állandó kommunikációs hibák"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
 msgid "intermittent connection errors"
 msgstr "időszakos kommunikációs hibák"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
 msgid "Config Settings"
 msgstr "Konfigurációs beállítások"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
 msgid "Could not determine value."
 msgstr "Nem sikerült meghatározni az értéket."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
 msgid "Daemon"
 msgstr "Démon"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
 msgid "Daemon is running."
 msgstr "A démon fut."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
 msgid "Daemon is not running."
 msgstr "A démon nem fut."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Database Records"
 msgstr "Adatbázis rekordok"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Tickets"
 msgstr "Jegyek"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Ticket History Entries"
 msgstr "Jegy előzmény bejegyzések"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Articles"
 msgstr "Bejegyzések"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Attachments (DB, Without HTML)"
 msgstr "Mellékletek (DB, HTML nélkül)"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Customers With At Least One Ticket"
 msgstr "Legalább egy jeggyel rendelkező ügyfelek"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Dynamic Field Values"
 msgstr "Dinamikus mező értékek"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Invalid Dynamic Fields"
 msgstr "Érvénytelen dinamikus mezők"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Invalid Dynamic Field Values"
 msgstr "Érvénytelen dinamikus mező értékek"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "GenericInterface Webservices"
 msgstr "Általános felület webszolgáltatások"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Process Tickets"
 msgstr "Folyamatjegyek"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Months Between First And Last Ticket"
 msgstr "Az első és az utolsó jegy közti hónapok"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Tickets Per Month (avg)"
 msgstr "Jegyek havonta (átlag)"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Open Tickets"
 msgstr "Nyitott jegyek"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
 msgid "Default SOAP Username And Password"
 msgstr "Alapértelmezett SOAP felhasználónév és jelszó"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
 msgid "Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it."
 msgstr "Biztonsági kockázat: a SOAP::User és a SOAP::Password alapértelmezett beállításait használja. Változtassa meg."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
 msgid "Default Admin Password"
 msgstr "Alapértelmezett adminisztrátor jelszó"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
 msgid "Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account."
 msgstr "Biztonsági kockázat: a root@localhost ügyintéző fióknak még mindig az alapértelmezett jelszava van. Változtassa meg, vagy érvénytelenítse a fiókot."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
 msgid "Email Sending Queue"
 msgstr "E-mail várakozási sor"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
 msgid "Emails queued for sending"
 msgstr "Küldéshez sorba állított e-mailek"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
 msgid "FQDN (domain name)"
 msgstr "FQDN (tartománynév)"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
 msgid "Please configure your FQDN setting."
 msgstr "Állítsa be az FQDN beállítását."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
 msgid "Domain Name"
 msgstr "Tartománynév"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
 msgid "Your FQDN setting is invalid."
 msgstr "Az FQDN beállítás érvénytelen."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
 msgid "File System Writable"
 msgstr "Fájlrendszer írhatóság"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
 msgid "The file system on your Znuny partition is not writable."
 msgstr "Az Znuny partíció fájlrendszere nem írható."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
 msgid "Legacy Configuration Backups"
 msgstr "Örökölt konfigurációs biztonsági mentések"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
 msgid "No legacy configuration backup files found."
 msgstr "Nem találhatók örökölt biztonsági mentés fájlok."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
 msgid "Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages."
 msgstr "Örökölt konfigurációs biztonsági mentés fájlok találhatók a Kernel/Config/Backups mappában, de néhány csomagnak még szükségük lehet rájuk."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
 msgid "Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder."
 msgstr "Az örökölt konfigurációs biztonsági mentés fájlok többé nem szükségesek a telepített csomagokhoz, távolítsa el azokat a Kernel/Config/Backups mappából."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
 msgid "Views with multiple loaded JavaScript files"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
 msgid "The following JavaScript files loaded multiple times:"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
 msgid "Files"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
 msgid "Package Installation Status"
 msgstr "Csomagtelepítési állapot"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
 msgid "Some packages have locally modified files."
 msgstr "Néhány csomag helyileg módosított fájlokkal rendelkezik."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
 msgid "Some packages are not correctly installed."
 msgstr "Néhány csomag nincs megfelelően telepítve."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
 msgid "Package Framework Version Status"
 msgstr "Csomag keretrendszer verziójának állapota"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
 msgid "Some packages are not allowed for the current framework version."
 msgstr "Néhány csomag nem engedélyezett a jelenlegi keretrendszer verzióhoz."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageList.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageList.pm
 msgid "Package List"
 msgstr "Csomaglista"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SessionConfigSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SessionConfigSettings.pm
 msgid "Session Config Settings"
 msgstr "Munkamenet-konfigurációs beállítások"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
 msgid "Spooled Emails"
 msgstr "Várakozási sorba helyezett levelek"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
 msgid "There are emails in var/spool that Znuny could not process."
 msgstr "Olyan levelek találhatók a var/spool mappában, amelyeket az Znuny nem tudott feldolgozni."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SystemID.pm
 msgid "Your SystemID setting is invalid, it should only contain digits."
 msgstr "A rendszer-azonosító beállítás érvénytelen, csak számjegyeket tartalmazhat."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
 msgid "Default Ticket Type"
 msgstr "Alapértelmezett jegytípus"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
 msgid "The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type."
 msgstr "A beállított alapértelmezett jegytípus érvénytelen vagy hiányzik. Változtassa meg a Ticket::Type::Default beállításait, és válasszon egy érvényes jegytípust."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
 msgid "Ticket Index Module"
 msgstr "Jegyindexelő modul"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
 msgid "You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information."
 msgstr "Több mint 60.000 jegye van, ezért a StaticDB háttérprogramot kellene használnia. További információkért nézze meg az adminisztrátori kézikönyvet (Teljesítmény finomhangolás)."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
 msgid "Invalid Users with Locked Tickets"
 msgstr "Érvénytelen felhasználók zárolt jegyekkel"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
 msgid "There are invalid users with locked tickets."
 msgstr "Zárolt jegyekkel rendelkező érvénytelen felhasználók vannak."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/OpenTickets.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/OpenTickets.pm
 msgid "You should not have more than 8,000 open tickets in your system."
 msgstr "Nem kellene 8.000 nyitott jegynél többel rendelkeznie a rendszeren."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
 msgid "Ticket Search Index Module"
 msgstr "Jegykeresés indexelő modul"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
 msgid "The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches."
 msgstr "Az indexelési folyamat kényszeríti az eredeti bejegyzésszöveg tárolását a bejegyzés keresési indexében anélkül, hogy szűrőket hajtana végre vagy a kiszűrendő szavak listáit alkalmazná. Ez meg fogja növelni a keresési index méretét, és ezért lelassíthatja a szabad-szavas kereséseket."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
 msgid "Orphaned Records In ticket_lock_index Table"
 msgstr "Árva rekordok a ticket_lock_index táblában"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
 msgid "Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
 msgstr "A ticket_lock_index tábla árva rekordokat tartalmaz. Futtassa a bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" parancsot a StaticDB index tisztításához."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
 msgid "Orphaned Records In ticket_index Table"
 msgstr "Árva rekordok a ticket_index táblában"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
 msgid "Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
 msgstr "A ticket_index tábla árva rekordokat tartalmaz. Futtassa a bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" parancsot a StaticDB index tisztításához."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "Time Settings"
 msgstr "Időbeállítások"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "Server time zone"
 msgstr "Kiszolgáló időzónája"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "Znuny time zone"
 msgstr "Znuny időzóna"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "Znuny time zone is not set."
 msgstr "Az Znuny időzónája nincs beállítva."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "User default time zone"
 msgstr "Felhasználó alapértelmezett időzónája"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "User default time zone is not set."
 msgstr "A felhasználó alapértelmezett időzónája nincs beállítva."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
 msgid "Calendar time zone is not set."
 msgstr "A naptár időzónája nincs beállítva."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentSkinUsage.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentSkinUsage.pm
 msgid "UI - Agent Skin Usage"
 msgstr "UI – ügyintézői felszín használat"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentThemeUsage.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentThemeUsage.pm
 msgid "UI - Agent Theme Usage"
 msgstr "UI – ügyintézői téma használat"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
 msgid "UI - Special Statistics"
 msgstr "UI – különleges statisztikák"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
 msgid "Agents using custom main menu ordering"
 msgstr "Egyéni menürendezést használó ügyintézők"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
 msgid "Agents using favourites for the admin overview"
 msgstr "Kedvenceket használó ügyintézők az adminisztrációs áttekintőnél"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Version.pm
 msgid "Znuny Version"
 msgstr "Znuny verzió"
 
@@ -14706,19 +14706,19 @@ msgstr "Webkiszolgáló verzió"
 msgid "Could not determine webserver version."
 msgstr "Nem sikerült meghatározni a webkiszolgáló verzióját."
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+#. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
 msgid "Concurrent Users Details"
 msgstr "Egyidejű felhasználók részletei"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+#. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
 msgid "Concurrent Users"
 msgstr "Egyidejű felhasználók"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "OK"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "Probléma"
 
@@ -16243,7 +16243,7 @@ msgid "If \"LDAP\" was selected for Customer::AuthModule and if you want to add 
 msgstr "Ha „LDAP” lett kiválasztva a Customer::AuthModule modulnál, és egy utótagot szeretne hozzáadni minden ügyfél bejelentkezési névhez, akkor azt itt adja meg. Például csak a user felhasználónevet szeretné írni, de az LDAP könyvtárban a user@domain létezik."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "If \"LDAP\" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See \"perldoc Net::LDAP\" for more information about the parameters."
+msgid "If \"LDAP\" was selected for Customer::AuthModule and special parameters are needed for the Net::LDAP perl module, you can specify them here. See \"perldoc Net::LDAP\" for more information about the parameters."
 msgstr "Ha „LDAP” lett kiválasztva a Customer::AuthModule modulnál, és speciális paraméterek szükségesek a Net::LDAP Perl modulhoz, akkor azokat itt adhatja meg. További információkért nézze meg a „perldoc Net::LDAP” dokumentációt a paraméterekkel kapcsolatban."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -16385,10 +16385,6 @@ msgstr "Meghatározza az összes lehetséges statisztikai kimeneti formátumot."
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows agents to exchange the axis of a stat if they generate one."
 msgstr "Lehetővé teszi az ügyintézőknek egy statisztika tengelyeinek felcserélését, ha előállítanak egyet."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Allows agents to generate individual-related stats."
-msgstr "Lehetővé teszi az ügyintézőknek egyénhez kapcsolódó statisztikák előállítását."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows invalid agents to generate individual-related stats."
@@ -23476,7 +23472,7 @@ msgstr "Felhasználó keresése"
 msgid "Search tickets."
 msgstr ""
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
 msgid "SearchTemplate"
 msgstr ""
 
@@ -24294,5 +24290,33 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Height in pixels or percent."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
+msgid "Overview Default Columns"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
+msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
+msgid "Cache TTL"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
+msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 

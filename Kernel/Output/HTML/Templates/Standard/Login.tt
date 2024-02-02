@@ -199,6 +199,7 @@ X-OTRS-Login: [% Env("Baselink") %]
             <div id="PasswordBox" class="Hidden">
                 <div class="WidgetSimple">
                     <div class="Content">
+                        <h2>[% Translate("Request New Password") | html %]</h2>
                         <p class="Error Center Spacing"></p>
                         <form action="[% Env("CGIHandle") %]" method="post" enctype="application/x-www-form-urlencoded" class="Validate PreventMultipleSubmits">
                             <input type="hidden" name="Action" value="LostPassword"/>

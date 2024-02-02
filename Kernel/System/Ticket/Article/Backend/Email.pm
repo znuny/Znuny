@@ -869,7 +869,7 @@ Get the Transmission Error entry for a given article.
         CreateTime => '2017-01-01 01:02:03',
         Status     => 'Failed',
     }
-    or undef in case of failure to retrive a record from the database.
+    or undef in case of failure to retrieve a record from the database.
 
 =cut
 

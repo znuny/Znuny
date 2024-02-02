@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Translation::JavaScriptStrings)
 
 package Kernel::Language::id;
 
@@ -25,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.608954237568148;
+    $Self->{Completeness}        = 0.608824987605355;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -565,7 +566,7 @@ sub Data {
         'Assignment of dynamic fields to screens' => '',
         'Overview' => 'Peninjauan luas',
         'Screens' => '',
-        'Default columns' => '',
+        'Overview Default Columns' => '',
         'Add dynamic field' => '',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
@@ -615,6 +616,9 @@ sub Data {
         'Backend' => '',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1087,9 +1091,6 @@ sub Data {
         'Send Keep-Alive' => 'Kirim keep-alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Konfigurasi ini mendefinisikan jika koneksi masuk harus bisa ditutup atau tetap hidup ',
-        'Additional response headers' => '',
-        'Header' => 'Header',
-        'Add response header' => '',
         'Endpoint' => 'Endpoint',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1178,7 +1179,10 @@ sub Data {
             'Perintah HTTP tertentu untuk menggunakan permintaan dengan Invoker ini ( opsional ) ',
         'Default command' => 'Perintah default',
         'The default HTTP command to use for the requests.' => 'Perintah default HTTP digunakan untuk permintaan .',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Header' => 'Header',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
@@ -1540,9 +1544,11 @@ sub Data {
         'Date' => 'Tanggal',
         'List of Files' => 'Daftar arsip',
         'Permission' => 'Izin',
+        'Size' => 'Ukuran',
+        'Problem' => 'Masalah',
+        'OK' => 'Oke',
         'Download file from package!' => 'Muat turun arsin dari paket',
         'Required' => 'Diwajibkan',
-        'Size' => 'Ukuran',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -2383,8 +2389,12 @@ bin/znuny.Daemon.pl status\').',
         'Change Customer Relations' => '',
         'Open' => 'buka',
         'Closed' => 'tertutup',
+        'Phone ticket' => 'Tiket telepon',
+        'Email ticket' => 'Tiket email',
         '%s open ticket(s) of %s' => '%s tiket dibuka(s) dari %s',
         '%s closed ticket(s) of %s' => '%s tiket ditutup(s) dari %s',
+        'New phone ticket from %s' => 'Tiket telepon baru dari %S',
+        'New email ticket to %s' => 'Tiket email baru untuk %s',
         'Edit customer ID' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2399,10 +2409,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '',
-        'Phone ticket' => 'Tiket telepon',
-        'Email ticket' => 'Tiket email',
-        'New phone ticket from %s' => 'Tiket telepon baru dari %S',
-        'New email ticket to %s' => 'Tiket email baru untuk %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2879,7 +2885,6 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => '',
         'thank you for using our services.' => '',
-        'Yes, I accept your license.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
@@ -2891,8 +2896,8 @@ bin/znuny.Daemon.pl status\').',
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Error',
         'An Error Occurred' => 'Terjadi kesalahan',
-        'Error Details' => 'Rincian eror',
         'Traceback' => 'Melacak kembali',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2931,6 +2936,7 @@ bin/znuny.Daemon.pl status\').',
         'Request New Password' => 'Meminta kata sandi baru',
         'Your User Name' => 'Nama pengguna anda',
         'A new password will be sent to your email address.' => 'Kata sandi baru anda akan dihantar ke email anda',
+        'Back to login' => 'Kembali ke dalam login',
         'Create Account' => 'Menciptakan akun',
         'Please fill out this form to receive login credentials.' => 'Silahkan isi formulir ini untuk menerima surat kepercayaan',
         'How we should address you' => 'Bagaimana kami mengalamatkan anda',
@@ -2994,6 +3000,7 @@ bin/znuny.Daemon.pl status\').',
         'Ticket fields' => 'Dasar tiket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Rincian eror',
         'Expand' => 'Perluas',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3024,6 +3031,7 @@ bin/znuny.Daemon.pl status\').',
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript tidak tersedia',
@@ -3068,7 +3076,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Selesai',
-        'Error' => 'Error',
         'Database setup successful!' => 'Berhasil menyediakan database!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3138,7 +3145,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Kehilangan kata sandi anda?',
-        'Back to login' => 'Kembali ke dalam login',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'konten skala pratinjau ',
@@ -3851,7 +3857,6 @@ bin/znuny.Daemon.pl status\').',
         'No such file %s in package!' => 'Tidak ada file seperti %s dalam paket',
         'No such file %s in local file system!' => 'Tidak ada jenis file %s di dalam file sistem lokal!',
         'Can\'t read %s!' => 'Tidak bisa dibaca %s!',
-        'File is OK' => '',
         'Package has locally modified files.' => 'Paket telah diubah secara lokal',
         'Not Started' => '',
         'Updated' => '',
@@ -5023,7 +5028,7 @@ bin/znuny.Daemon.pl status\').',
         'Client Connection Charset' => 'Koneksi klien charset',
         'Setting character_set_client needs to be utf8.' => 'Pengaturan character_set_client perlu utf 8.',
         'Server Database Charset' => 'Server database charset',
-        'This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set \'utf8\'.' =>
+        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
             '',
         'The setting character_set_database needs to be \'utf8\'.' => '',
         'Table Charset' => 'Tabel charset',
@@ -5082,7 +5087,7 @@ bin/znuny.Daemon.pl status\').',
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/postgresql/Version.pm
         'PostgreSQL 9.2 or higher is required.' => '',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
         'Operating System' => 'Sistem operasi',
         'Znuny Disk Partition' => 'Znuny Disk Partisi',
 
@@ -5129,165 +5134,6 @@ bin/znuny.Daemon.pl status\').',
         'There should be more than 60% free swap space.' => 'Harus ada lebih dari 60% ruang swap gratis.',
         'There should be no more than 200 MB swap space used.' => 'Seharusnya tidak ada ruang swap lebih dari 200 MB yang digunakan.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'Znuny' => '',
-        'Article Search Index Status' => '',
-        'Indexed Articles' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticlesPerCommunicationChannel.pm
-        'Articles Per Communication Channel' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
-        'Incoming communications' => '',
-        'Outgoing communications' => '',
-        'Failed communications' => '',
-        'Average processing time of communications (s)' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
-        'Communication Log Account Status (last 24 hours)' => '',
-        'No connections found.' => '',
-        'ok' => '',
-        'permanent connection errors' => '',
-        'intermittent connection errors' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
-        'Config Settings' => '',
-        'Could not determine value.' => 'Tidak dapat menentukan nilai.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
-        'Daemon' => 'Daemon',
-        'Daemon is running.' => '',
-        'Daemon is not running.' => 'Daemon tidak berjalan',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
-        'Database Records' => '',
-        'Tickets' => 'Tiket',
-        'Ticket History Entries' => 'Tiket Sejarah Entries',
-        'Articles' => 'Artikel',
-        'Attachments (DB, Without HTML)' => 'Lampiran (DB, Tanpa HTML)',
-        'Customers With At Least One Ticket' => 'Pelanggan Dengan Sedikitnya Satu Tiket',
-        'Dynamic Field Values' => 'Nilai Bidang dinamis',
-        'Invalid Dynamic Fields' => 'Dinamis Fields valid',
-        'Invalid Dynamic Field Values' => 'Nilai Bidang Dinamis valid',
-        'GenericInterface Webservices' => 'Antarmuka generic webservis',
-        'Process Tickets' => '',
-        'Months Between First And Last Ticket' => 'Bulan diantara Pertama Dan Tiket terakhir',
-        'Tickets Per Month (avg)' => 'Tiket Per Bulan (avg)',
-        'Open Tickets' => 'Buka tiket',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
-        'Default SOAP Username And Password' => 'Standar SOAP Username dan Password',
-        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
-            'Resiko keamanan: Anda menggunakan pengaturan default untuk SOAP::Pengguna dan SOAP::Password. Silahkan mengubahnya.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
-        'Default Admin Password' => 'Katasandi admin default',
-        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
-            'Risiko keamanan: akun agen root@localhost masih memiliki katasandi yang default. Ubah atau membatalkan account.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
-        'Email Sending Queue' => '',
-        'Emails queued for sending' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
-        'FQDN (domain name)' => 'FQDN (domain name)',
-        'Please configure your FQDN setting.' => 'Konfigurasikan pengaturan FQDN Anda.',
-        'Domain Name' => 'Nama domain',
-        'Your FQDN setting is invalid.' => 'Pengaturan FQDN Anda tidak valid.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
-        'File System Writable' => 'File System ditulis',
-        'The file system on your Znuny partition is not writable.' => 'Sistem file pada partisi Znuny Anda tidak dapat ditulis.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
-        'Legacy Configuration Backups' => '',
-        'No legacy configuration backup files found.' => '',
-        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
-            '',
-        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
-        'The following JavaScript files loaded multiple times:' => '',
-        'Files' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
-        'Package Installation Status' => 'Status Instalasi paket',
-        'Some packages have locally modified files.' => 'Beberapa paket telah lokal memodifikasi file.',
-        'Some packages are not correctly installed.' => 'Beberapa paket tidak terpasang dengan benar.',
-        'Package Framework Version Status' => '',
-        'Some packages are not allowed for the current framework version.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageList.pm
-        'Package List' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SessionConfigSettings.pm
-        'Session Config Settings' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
-        'Spooled Emails' => '',
-        'There are emails in var/spool that Znuny could not process.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
-        'Your SystemID setting is invalid, it should only contain digits.' =>
-            'Pengaturan Sistem Anda tidak valid, hanya harus berisi angka.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
-        'Default Ticket Type' => 'Jenis Tiket ',
-        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
-            'Jenis tiket default dikonfigurasi tidak valid atau hilang. Silahkan ubah pengaturan Tiket::Jenis::default dan pilih jenis tiket yang sah.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
-        'Ticket Index Module' => 'Indeks tiket Modul',
-        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
-            'Anda memiliki lebih dari 60.000 tiket dan harus menggunakan backend Static DB. Lihat admin user (Performance Tuning) untuk informasi lebih lanjut.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
-        'Invalid Users with Locked Tickets' => 'Pengguna tidak valid dengan Tiket Terkunci',
-        'There are invalid users with locked tickets.' => 'Ada pengguna yang tidak valid dengan tiket terkunci.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/OpenTickets.pm
-        'You should not have more than 8,000 open tickets in your system.' =>
-            'Anda tidak harus memiliki lebih dari 8.000 tiket yang terbuka di sistem Anda.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
-        'Ticket Search Index Module' => 'Indeks Cari tiket Modul',
-        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-        'Orphaned Records In ticket_lock_index Table' => 'Rekaman yatim Dalam ticket_lock_index Table',
-        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'Tabel ticket_lock_index berisi catatan yatim. Jalankan bin/znuny.Console.pl "Maint::Ticket::AntrianIndeksCleanup" untuk membersihkan indeks StaticDB.',
-        'Orphaned Records In ticket_index Table' => 'Rekaman yatim Dalam Indeks tiket Table',
-        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
-        'Time Settings' => '',
-        'Server time zone' => 'Zona waktu server',
-        'Znuny time zone' => '',
-        'Znuny time zone is not set.' => '',
-        'User default time zone' => '',
-        'User default time zone is not set.' => '',
-        'Calendar time zone is not set.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentSkinUsage.pm
-        'UI - Agent Skin Usage' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentThemeUsage.pm
-        'UI - Agent Theme Usage' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
-        'UI - Special Statistics' => '',
-        'Agents using custom main menu ordering' => '',
-        'Agents using favourites for the admin overview' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'Znuny Version' => 'Versi Znuny',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Webserver',
         'Loaded Apache Modules' => '',
@@ -5325,13 +5171,168 @@ bin/znuny.Daemon.pl status\').',
         'Webserver Version' => 'Versi Webserver',
         'Could not determine webserver version.' => 'Tidak dapat menentukan versi web server.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
+        'Znuny' => '',
+        'Article Search Index Status' => '',
+        'Indexed Articles' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticlesPerCommunicationChannel.pm
+        'Articles Per Communication Channel' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
+        'Incoming communications' => '',
+        'Outgoing communications' => '',
+        'Failed communications' => '',
+        'Average processing time of communications (s)' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
+        'Communication Log Account Status (last 24 hours)' => '',
+        'No connections found.' => '',
+        'ok' => '',
+        'permanent connection errors' => '',
+        'intermittent connection errors' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
+        'Config Settings' => '',
+        'Could not determine value.' => 'Tidak dapat menentukan nilai.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
+        'Daemon' => 'Daemon',
+        'Daemon is running.' => '',
+        'Daemon is not running.' => 'Daemon tidak berjalan',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
+        'Database Records' => '',
+        'Tickets' => 'Tiket',
+        'Ticket History Entries' => 'Tiket Sejarah Entries',
+        'Articles' => 'Artikel',
+        'Attachments (DB, Without HTML)' => 'Lampiran (DB, Tanpa HTML)',
+        'Customers With At Least One Ticket' => 'Pelanggan Dengan Sedikitnya Satu Tiket',
+        'Dynamic Field Values' => 'Nilai Bidang dinamis',
+        'Invalid Dynamic Fields' => 'Dinamis Fields valid',
+        'Invalid Dynamic Field Values' => 'Nilai Bidang Dinamis valid',
+        'GenericInterface Webservices' => 'Antarmuka generic webservis',
+        'Process Tickets' => '',
+        'Months Between First And Last Ticket' => 'Bulan diantara Pertama Dan Tiket terakhir',
+        'Tickets Per Month (avg)' => 'Tiket Per Bulan (avg)',
+        'Open Tickets' => 'Buka tiket',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
+        'Default SOAP Username And Password' => 'Standar SOAP Username dan Password',
+        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
+            'Resiko keamanan: Anda menggunakan pengaturan default untuk SOAP::Pengguna dan SOAP::Password. Silahkan mengubahnya.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
+        'Default Admin Password' => 'Katasandi admin default',
+        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
+            'Risiko keamanan: akun agen root@localhost masih memiliki katasandi yang default. Ubah atau membatalkan account.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
+        'Email Sending Queue' => '',
+        'Emails queued for sending' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
+        'FQDN (domain name)' => 'FQDN (domain name)',
+        'Please configure your FQDN setting.' => 'Konfigurasikan pengaturan FQDN Anda.',
+        'Domain Name' => 'Nama domain',
+        'Your FQDN setting is invalid.' => 'Pengaturan FQDN Anda tidak valid.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
+        'File System Writable' => 'File System ditulis',
+        'The file system on your Znuny partition is not writable.' => 'Sistem file pada partisi Znuny Anda tidak dapat ditulis.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
+        'Legacy Configuration Backups' => '',
+        'No legacy configuration backup files found.' => '',
+        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
+            '',
+        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
+        'Package Installation Status' => 'Status Instalasi paket',
+        'Some packages have locally modified files.' => 'Beberapa paket telah lokal memodifikasi file.',
+        'Some packages are not correctly installed.' => 'Beberapa paket tidak terpasang dengan benar.',
+        'Package Framework Version Status' => '',
+        'Some packages are not allowed for the current framework version.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageList.pm
+        'Package List' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SessionConfigSettings.pm
+        'Session Config Settings' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
+        'Spooled Emails' => '',
+        'There are emails in var/spool that Znuny could not process.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SystemID.pm
+        'Your SystemID setting is invalid, it should only contain digits.' =>
+            'Pengaturan Sistem Anda tidak valid, hanya harus berisi angka.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
+        'Default Ticket Type' => 'Jenis Tiket ',
+        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
+            'Jenis tiket default dikonfigurasi tidak valid atau hilang. Silahkan ubah pengaturan Tiket::Jenis::default dan pilih jenis tiket yang sah.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
+        'Ticket Index Module' => 'Indeks tiket Modul',
+        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
+            'Anda memiliki lebih dari 60.000 tiket dan harus menggunakan backend Static DB. Lihat admin user (Performance Tuning) untuk informasi lebih lanjut.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
+        'Invalid Users with Locked Tickets' => 'Pengguna tidak valid dengan Tiket Terkunci',
+        'There are invalid users with locked tickets.' => 'Ada pengguna yang tidak valid dengan tiket terkunci.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/OpenTickets.pm
+        'You should not have more than 8,000 open tickets in your system.' =>
+            'Anda tidak harus memiliki lebih dari 8.000 tiket yang terbuka di sistem Anda.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
+        'Ticket Search Index Module' => 'Indeks Cari tiket Modul',
+        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
+        'Orphaned Records In ticket_lock_index Table' => 'Rekaman yatim Dalam ticket_lock_index Table',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'Tabel ticket_lock_index berisi catatan yatim. Jalankan bin/znuny.Console.pl "Maint::Ticket::AntrianIndeksCleanup" untuk membersihkan indeks StaticDB.',
+        'Orphaned Records In ticket_index Table' => 'Rekaman yatim Dalam Indeks tiket Table',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
+        'Time Settings' => '',
+        'Server time zone' => 'Zona waktu server',
+        'Znuny time zone' => '',
+        'Znuny time zone is not set.' => '',
+        'User default time zone' => '',
+        'User default time zone is not set.' => '',
+        'Calendar time zone is not set.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentSkinUsage.pm
+        'UI - Agent Skin Usage' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentThemeUsage.pm
+        'UI - Agent Theme Usage' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
+        'UI - Special Statistics' => '',
+        'Agents using custom main menu ordering' => '',
+        'Agents using favourites for the admin overview' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Version.pm
+        'Znuny Version' => 'Versi Znuny',
+
+        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Pengguna bersamaan',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'Oke',
-        'Problem' => 'Masalah',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -5909,7 +5910,6 @@ bin/znuny.Daemon.pl status\').',
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Mendefinisikan identifier pengguna untuk panel pelanggan',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6003,7 +6003,7 @@ bin/znuny.Daemon.pl status\').',
             'Jika "LDAP" dipilih, Anda dapat menambahkan filter untuk setiap query LDAP, (email = *), (objectclass=user) atau (!Objectclass=komputer).',
         'If "LDAP" was selected for Customer::AuthModule and if you want to add a suffix to every customer login name, specifiy it here, e. g. you just want to write the username user but in your LDAP directory exists user@domain.' =>
             'Jika "HTTPBasicAuth" dipilih untuk Customer::AuthModule, dan jika Anda ingin menambahkan akhiran untuk setiap nama login pelanggan, tentukan di sini, e. g. Anda hanya ingin menulis pengguna nama pengguna tetapi dalam direktori LDAP ada user@domain.',
-        'If "LDAP" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
+        'If "LDAP" was selected for Customer::AuthModule and special parameters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
             'Jika "HTTPBasicAuth" dipilih untuk Customer::AuthModule, dan parameter khusus yang diperlukan untuk modul perl, Anda dapat menentukan mereka di sini. Lihat "perldocNet::LDAP" untuk informasi lebih lanjut tentang parameter.',
         'If "LDAP" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
             'Jika "HTTPBasicAuth" dipilih untuk Customer::AuthModule, Anda dapat menentukan apakah aplikasi akan berhenti jika e. g. koneksi ke server tidak dapat dibangun karena masalah jaringan.',
@@ -6063,8 +6063,10 @@ bin/znuny.Daemon.pl status\').',
         'Defines all the possible stats output formats.' => 'Mendefinisikan semua kemungkinan format statistik output.',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'Memungkinkan agen untuk mengubah sumbu bintang jika mereka menghasilkan satu.',
-        'Allows agents to generate individual-related stats.' => 'Memungkinkan agen untuk menghasilkan statistik individu terkait.',
-        'Allows invalid agents to generate individual-related stats.' => 'Memungkinkan agen yang tidak valid untuk menghasilkan statistik individu terkait.',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             'Menunjukkan semua pengidentifikasi pelanggan dalam bidang multi-pilih (tidak berguna jika Anda memiliki banyak pengenal pelanggan).',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
@@ -7847,6 +7849,7 @@ bin/znuny.Daemon.pl status\').',
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak valid sementara',
@@ -8496,7 +8499,6 @@ Helpdesk Team Anda
         'Change the priority for this ticket' => 'Mengubah tingkat prioritas untuk tiket ini',
         'Change the responsible for this ticket' => 'Mengubah ertanggung jawaban untuk tiket ini',
         'Change your avatar image.' => '',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8857,7 +8859,6 @@ Helpdesk Team Anda
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => 'Polandia',
-        'Popup Profile' => '',
         'Portuguese' => 'Portugis',
         'Portuguese (Brasil)' => 'Portugis (Brasil)',
         'PostMaster Filters' => 'Filter PostMaster',
@@ -8898,7 +8899,6 @@ Helpdesk Team Anda
         'Search Tickets.' => 'Cari Tiket.',
         'Search User' => 'Cari Pengguna',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'Hari Natal kedia',
         'Second Queue' => 'Antrian kedua',
         'Seconds' => '',

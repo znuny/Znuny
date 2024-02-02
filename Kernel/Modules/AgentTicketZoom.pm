@@ -1649,19 +1649,32 @@ sub MaskAgentZoom {
 
         # output dynamic fields registered for a group in the process widget
         my @FieldsInAGroup;
+
+        GROUP:
         for my $GroupName (
             sort keys %{ $Self->{DisplaySettings}->{ProcessWidgetDynamicFieldGroups} }
             )
         {
 
-            $LayoutObject->Block(
-                Name => 'ProcessWidgetDynamicFieldGroups',
-            );
-
             my $GroupFieldsString = $Self->{DisplaySettings}->{ProcessWidgetDynamicFieldGroups}->{$GroupName};
 
             $GroupFieldsString =~ s{\s}{}xmsg;
             my @GroupFields = split( ',', $GroupFieldsString );
+
+            my $ShowBlock = 0;
+            for my $FieldChecker (@FieldsWidget) {
+
+                my $DynamicFieldExists = grep { $_ eq $FieldChecker->{Name} } @GroupFields;
+                if ( !$ShowBlock && $DynamicFieldExists ) {
+                    $ShowBlock = 1;
+                }
+            }
+
+            next GROUP if !$ShowBlock;
+
+            $LayoutObject->Block(
+                Name => 'ProcessWidgetDynamicFieldGroups',
+            );
 
             if ( $#GroupFields + 1 ) {
 
@@ -1693,6 +1706,7 @@ sub MaskAgentZoom {
                                     # alias for ticket title, Title will be overwritten
                                     TicketTitle => $Ticket{Title},
                                     Value       => $Field->{Value},
+                                    ValueKey    => $Ticket{"DynamicField_$Field->{Name}"},
                                     Title       => $Field->{Title},
                                     Link        => $Field->{Link},
                                     LinkPreview => $Field->{LinkPreview},
@@ -1774,6 +1788,7 @@ sub MaskAgentZoom {
                         # alias for ticket title, Title will be overwritten
                         TicketTitle => $Ticket{Title},
                         Value       => $Field->{Value},
+                        ValueKey    => $Ticket{"DynamicField_$Field->{Name}"},
                         Title       => $Field->{Title},
                         Link        => $Field->{Link},
 

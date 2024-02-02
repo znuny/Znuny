@@ -11,6 +11,7 @@ package Kernel::Modules::AgentTicketWatchView;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -310,7 +311,7 @@ sub Run {
             %{ $Filters{$Filter}->{Search} },
             %ColumnFilter,
             Result => 'ARRAY',
-            Limit  => 1_000,
+            Limit  => $Limit,
         );
     }
 
@@ -339,7 +340,7 @@ sub Run {
             %{ $Filters{All}->{Search} },
             %ColumnFilter,
             Result => 'ARRAY',
-            Limit  => 1_000,
+            Limit  => $Limit,
         );
 
         my %ViewableTicketsNotNew;

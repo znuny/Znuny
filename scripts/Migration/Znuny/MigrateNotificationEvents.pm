@@ -12,7 +12,11 @@ package scripts::Migration::Znuny::MigrateNotificationEvents;    ## no critic
 use strict;
 use warnings;
 
+use utf8;
+
 use parent qw(scripts::Migration::Base);
+
+use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::System::NotificationEvent',
@@ -108,7 +112,9 @@ sub _MigrateMentionNotification {
         my $NotificationEvent = $NotificationEvents{$NotificationEventID};
         next NOTIFICATIONEVENTID if !$NotificationEventsToUpdateByName{ $NotificationEvent->{Name} };
 
-        $NotificationEvent->{Message}->{en}->{Body} = 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+        if ( IsHashRefWithData( $NotificationEvent->{Message}->{en} ) ) {
+            $NotificationEvent->{Message}->{en}->{ContentType} = 'text/plain';
+            $NotificationEvent->{Message}->{en}->{Body}        = 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
 
 you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
@@ -116,9 +122,12 @@ you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
 
 -- <OTRS_CONFIG_NotificationSenderName>';
+        }
 
-        $NotificationEvent->{Message}->{de}->{Body}
-            = 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+        if ( IsHashRefWithData( $NotificationEvent->{Message}->{de} ) ) {
+            $NotificationEvent->{Message}->{de}->{ContentType} = 'text/plain';
+            $NotificationEvent->{Message}->{de}->{Body}
+                = 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
 
 Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
@@ -126,6 +135,7 @@ Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
 
 -- <OTRS_CONFIG_NotificationSenderName>';
+        }
 
         my $NotificationEventUpdated = $NotificationEventObject->NotificationUpdate(
             %{$NotificationEvent},

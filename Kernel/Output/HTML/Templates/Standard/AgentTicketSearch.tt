@@ -41,9 +41,11 @@
                     </button>
                 </div>
 
-                <label for="SaveProfile">[% Translate("Save changes in template") | html %]</label>
-                <div class="Field align-item-left">
-                    <input type="checkbox" name="SaveProfile" id="SaveProfile" value="1"/>
+                <div class="search-tmp-opt-wrapper">
+                    <div class="align-item-left">
+                        <input type="checkbox" name="SaveProfile" id="SaveProfile" value="1">
+                    </div>
+                    <label for="SaveProfile">[% Translate("Save changes in template") | html %]</label>
                 </div>
             </fieldset>
         </div>

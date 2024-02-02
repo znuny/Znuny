@@ -15,7 +15,6 @@ use strict;
 use warnings;
 
 use Time::HiRes ();
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::System::Main',

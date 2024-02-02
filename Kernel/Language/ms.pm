@@ -6,6 +6,8 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Translation::JavaScriptStrings)
+
 package Kernel::Language::ms;
 
 use strict;
@@ -24,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.540062778787378;
+    $Self->{Completeness}        = 0.539910758552305;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -564,7 +566,7 @@ sub Data {
         'Assignment of dynamic fields to screens' => '',
         'Overview' => 'Gambaran keseluruhan',
         'Screens' => '',
-        'Default columns' => '',
+        'Overview Default Columns' => '',
         'Add dynamic field' => '',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
@@ -614,6 +616,9 @@ sub Data {
         'Backend' => '',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1086,9 +1091,6 @@ sub Data {
         'Send Keep-Alive' => 'Hantar Kekal-Hidup',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Konfigurasi ini mentakrifkan jika sambungan masuk seharusnya ditutup atau kekal hidup.',
-        'Additional response headers' => '',
-        'Header' => 'Permulaan',
-        'Add response header' => '',
         'Endpoint' => 'Titik akhir',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1177,7 +1179,10 @@ sub Data {
             'Arahan HTTP spesifik untuk digunakan bagi permintaan dengan Invoker (pilihan) ini.',
         'Default command' => 'Arahan lalai',
         'The default HTTP command to use for the requests.' => 'Arahan HTTP lalai untuk digunakan untuk permintaan.',
+        'Additional response headers' => '',
         'Additional request headers' => '',
+        'Header' => 'Permulaan',
+        'Add response header' => '',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
@@ -1539,9 +1544,11 @@ sub Data {
         'Date' => 'Tarikh',
         'List of Files' => 'Senarai Fail',
         'Permission' => 'Kebenaran',
+        'Size' => 'Saiz',
+        'Problem' => 'Masalah',
+        'OK' => 'OK',
         'Download file from package!' => 'Muat turun fail dari pakej!',
         'Required' => 'Diperlukan',
-        'Size' => 'Saiz',
         'Primary Key' => 'Kunci Utama',
         'Auto Increment' => 'Kenaikan Auto',
         'SQL' => 'SQL',
@@ -2380,8 +2387,12 @@ sub Data {
         'Change Customer Relations' => '',
         'Open' => 'Buka',
         'Closed' => 'Ditutup',
+        'Phone ticket' => 'Tiket telefon',
+        'Email ticket' => 'Tiket emel',
         '%s open ticket(s) of %s' => '%s membuka tiket(tiket-tiket) %s',
         '%s closed ticket(s) of %s' => '%s menutup tiket(tiket-tiket) %s',
+        'New phone ticket from %s' => 'Tiket telefon baru daripada %s',
+        'New email ticket to %s' => 'Tiket emel baru kepada %s',
         'Edit customer ID' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2396,10 +2407,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '',
-        'Phone ticket' => 'Tiket telefon',
-        'Email ticket' => 'Tiket emel',
-        'New phone ticket from %s' => 'Tiket telefon baru daripada %s',
-        'New email ticket to %s' => 'Tiket emel baru kepada %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2876,7 +2883,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => '',
         'thank you for using our services.' => '',
-        'Yes, I accept your license.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
@@ -2888,8 +2894,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Kesilapan',
         'An Error Occurred' => 'Kesalahan Telah Berlaku',
-        'Error Details' => 'Butiran kesilapan',
         'Traceback' => 'Menjejaki kembali',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2928,6 +2934,7 @@ sub Data {
         'Request New Password' => 'Mohon Kata Kunci Baru',
         'Your User Name' => 'Nama pengguna anda',
         'A new password will be sent to your email address.' => 'Kata kunci yang baru akan dihantar ke alamat emel anda.',
+        'Back to login' => 'Kembali ke log masuk',
         'Create Account' => 'Buat akaun',
         'Please fill out this form to receive login credentials.' => 'Sila isi borang ini untuk menerima butiran log masuk.',
         'How we should address you' => 'Bagaimana harus kami memanggil anda?',
@@ -2991,6 +2998,7 @@ sub Data {
         'Ticket fields' => 'Medan tiket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Butiran kesilapan',
         'Expand' => 'Kembang',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3021,6 +3029,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript tidak disediakan',
@@ -3065,7 +3074,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Selesai',
-        'Error' => 'Kesilapan',
         'Database setup successful!' => 'Penubuhan pangkalan data berjaya!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3135,7 +3143,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Hilang kata kunci anda?',
-        'Back to login' => 'Kembali ke log masuk',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Skala pandangan kandungan',
@@ -3848,7 +3855,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5020,7 +5026,7 @@ sub Data {
         'Client Connection Charset' => 'Setchar Sambungan Pelanggan',
         'Setting character_set_client needs to be utf8.' => 'Tetapan karakter_set_pelanggan haruslah utf8.',
         'Server Database Charset' => 'Setchar Pangkalan data Pelayan',
-        'This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set \'utf8\'.' =>
+        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
             '',
         'The setting character_set_database needs to be \'utf8\'.' => '',
         'Table Charset' => 'Setchar Jadual',
@@ -5079,7 +5085,7 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/postgresql/Version.pm
         'PostgreSQL 9.2 or higher is required.' => '',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
         'Operating System' => 'Sistem Beroperasi',
         'Znuny Disk Partition' => 'Pembahagian Cakera Znuny',
 
@@ -5126,165 +5132,6 @@ sub Data {
         'There should be more than 60% free swap space.' => 'Ia sepatutnya mempunyai lebih daripada 60% ruang tukaran kosong.',
         'There should be no more than 200 MB swap space used.' => 'Ia sepatutnya mempunyai tidak lebih daripada 200 MB ruang tukaran yang digunakan.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'Znuny' => '',
-        'Article Search Index Status' => '',
-        'Indexed Articles' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticlesPerCommunicationChannel.pm
-        'Articles Per Communication Channel' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
-        'Incoming communications' => '',
-        'Outgoing communications' => '',
-        'Failed communications' => '',
-        'Average processing time of communications (s)' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
-        'Communication Log Account Status (last 24 hours)' => '',
-        'No connections found.' => '',
-        'ok' => '',
-        'permanent connection errors' => '',
-        'intermittent connection errors' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
-        'Config Settings' => '',
-        'Could not determine value.' => 'Tidak dapat menentukan nilai.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
-        'Daemon' => 'Daemon',
-        'Daemon is running.' => '',
-        'Daemon is not running.' => 'Daemon tidak berjalan.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
-        'Database Records' => '',
-        'Tickets' => 'Tiket',
-        'Ticket History Entries' => 'Penyertaan Sejarah Tiket ',
-        'Articles' => 'Artikel',
-        'Attachments (DB, Without HTML)' => 'Lampiran (DB, Tanpa HTML)',
-        'Customers With At Least One Ticket' => 'Pelanggan Dengan Sekurang-kurangnya Satu Tiket',
-        'Dynamic Field Values' => 'Nilai Medan Dinamik',
-        'Invalid Dynamic Fields' => 'Medan Dinamik tidak sah',
-        'Invalid Dynamic Field Values' => 'Nilai Medan Dinamik tidak sah',
-        'GenericInterface Webservices' => 'AntaramukaGenerik Servisweb',
-        'Process Tickets' => '',
-        'Months Between First And Last Ticket' => 'Bulan Di antara Tiket Pertama Dan Tiket Terakhir',
-        'Tickets Per Month (avg)' => 'Tiket setiap bulan (purata)',
-        'Open Tickets' => 'TIket Terbuka',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
-        'Default SOAP Username And Password' => 'SOAP default Namapengguna Dan Katalaluan',
-        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
-            'Risiko keselamatan: anda menggunakan tetapan default untuk SOAP::Pengguna dan SOAP::Katalaluan. Sila tukar.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
-        'Default Admin Password' => 'Kata laluan Default Admin',
-        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
-            'Risiko keselamatan: akaun agen root@localhost masih mempunyai kata laluan default. Sila tukar atau batalkan akaun.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
-        'Email Sending Queue' => '',
-        'Emails queued for sending' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
-        'FQDN (domain name)' => 'FQDN (nama domain)',
-        'Please configure your FQDN setting.' => 'Sila konfigurasi tetapan FQDN anda.',
-        'Domain Name' => 'Nama Domain',
-        'Your FQDN setting is invalid.' => 'Tetapan FQDN anda tidak sah.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
-        'File System Writable' => 'Fail Sistem Boleh Disalin',
-        'The file system on your Znuny partition is not writable.' => 'Sistem fail pada bahagian Znuny anda tidak boleh ditulis.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
-        'Legacy Configuration Backups' => '',
-        'No legacy configuration backup files found.' => '',
-        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
-            '',
-        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
-        'The following JavaScript files loaded multiple times:' => '',
-        'Files' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
-        'Package Installation Status' => 'Status Pemasangan Pakej',
-        'Some packages have locally modified files.' => '',
-        'Some packages are not correctly installed.' => 'Sesetengah pakej tidak dipasang dengan betul.',
-        'Package Framework Version Status' => '',
-        'Some packages are not allowed for the current framework version.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageList.pm
-        'Package List' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SessionConfigSettings.pm
-        'Session Config Settings' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
-        'Spooled Emails' => '',
-        'There are emails in var/spool that Znuny could not process.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
-        'Your SystemID setting is invalid, it should only contain digits.' =>
-            'Tetapan IDSistem anda tidak sah, ia sepatutnya hanya mengandungi angka.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
-        'Default Ticket Type' => '',
-        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
-        'Ticket Index Module' => 'Modul Indeks Tiket',
-        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
-            'Anda mempunyai lebih daripada 60,000 tiket dan harus menggunakan backend StaticDB. Lihat manual admin (Penalaan Prestasi) untuk maklumat lanjut.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
-        'Invalid Users with Locked Tickets' => '',
-        'There are invalid users with locked tickets.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/OpenTickets.pm
-        'You should not have more than 8,000 open tickets in your system.' =>
-            'Anda sepatutnya mempunyai tidak lebih dari 8,000 tiket terbuka di dalam sistem anda.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
-        'Ticket Search Index Module' => 'Modul Indeks Carian Tiket',
-        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-        'Orphaned Records In ticket_lock_index Table' => 'Rekod piatu dalam Jadual ticket_lock_index',
-        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'Jadual ticket_lock_index mengandungi rekod piatu. Sila jalankan bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" untuk membersihkan indeks StaticDB.',
-        'Orphaned Records In ticket_index Table' => 'Rekod piatu dalam Jadual ticket_index',
-        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
-        'Time Settings' => '',
-        'Server time zone' => 'Zon waktu pelayan',
-        'Znuny time zone' => '',
-        'Znuny time zone is not set.' => '',
-        'User default time zone' => '',
-        'User default time zone is not set.' => '',
-        'Calendar time zone is not set.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentSkinUsage.pm
-        'UI - Agent Skin Usage' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentThemeUsage.pm
-        'UI - Agent Theme Usage' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
-        'UI - Special Statistics' => '',
-        'Agents using custom main menu ordering' => '',
-        'Agents using favourites for the admin overview' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'Znuny Version' => 'Versi Znuny',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Pelayan web',
         'Loaded Apache Modules' => '',
@@ -5322,13 +5169,168 @@ sub Data {
         'Webserver Version' => 'Versi pelayan web',
         'Could not determine webserver version.' => 'Tidak dapat menentukan versi pelayan web.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
+        'Znuny' => '',
+        'Article Search Index Status' => '',
+        'Indexed Articles' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticlesPerCommunicationChannel.pm
+        'Articles Per Communication Channel' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
+        'Incoming communications' => '',
+        'Outgoing communications' => '',
+        'Failed communications' => '',
+        'Average processing time of communications (s)' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
+        'Communication Log Account Status (last 24 hours)' => '',
+        'No connections found.' => '',
+        'ok' => '',
+        'permanent connection errors' => '',
+        'intermittent connection errors' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
+        'Config Settings' => '',
+        'Could not determine value.' => 'Tidak dapat menentukan nilai.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
+        'Daemon' => 'Daemon',
+        'Daemon is running.' => '',
+        'Daemon is not running.' => 'Daemon tidak berjalan.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
+        'Database Records' => '',
+        'Tickets' => 'Tiket',
+        'Ticket History Entries' => 'Penyertaan Sejarah Tiket ',
+        'Articles' => 'Artikel',
+        'Attachments (DB, Without HTML)' => 'Lampiran (DB, Tanpa HTML)',
+        'Customers With At Least One Ticket' => 'Pelanggan Dengan Sekurang-kurangnya Satu Tiket',
+        'Dynamic Field Values' => 'Nilai Medan Dinamik',
+        'Invalid Dynamic Fields' => 'Medan Dinamik tidak sah',
+        'Invalid Dynamic Field Values' => 'Nilai Medan Dinamik tidak sah',
+        'GenericInterface Webservices' => 'AntaramukaGenerik Servisweb',
+        'Process Tickets' => '',
+        'Months Between First And Last Ticket' => 'Bulan Di antara Tiket Pertama Dan Tiket Terakhir',
+        'Tickets Per Month (avg)' => 'Tiket setiap bulan (purata)',
+        'Open Tickets' => 'TIket Terbuka',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
+        'Default SOAP Username And Password' => 'SOAP default Namapengguna Dan Katalaluan',
+        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
+            'Risiko keselamatan: anda menggunakan tetapan default untuk SOAP::Pengguna dan SOAP::Katalaluan. Sila tukar.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
+        'Default Admin Password' => 'Kata laluan Default Admin',
+        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
+            'Risiko keselamatan: akaun agen root@localhost masih mempunyai kata laluan default. Sila tukar atau batalkan akaun.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
+        'Email Sending Queue' => '',
+        'Emails queued for sending' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
+        'FQDN (domain name)' => 'FQDN (nama domain)',
+        'Please configure your FQDN setting.' => 'Sila konfigurasi tetapan FQDN anda.',
+        'Domain Name' => 'Nama Domain',
+        'Your FQDN setting is invalid.' => 'Tetapan FQDN anda tidak sah.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
+        'File System Writable' => 'Fail Sistem Boleh Disalin',
+        'The file system on your Znuny partition is not writable.' => 'Sistem fail pada bahagian Znuny anda tidak boleh ditulis.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
+        'Legacy Configuration Backups' => '',
+        'No legacy configuration backup files found.' => '',
+        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
+            '',
+        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
+        'Package Installation Status' => 'Status Pemasangan Pakej',
+        'Some packages have locally modified files.' => '',
+        'Some packages are not correctly installed.' => 'Sesetengah pakej tidak dipasang dengan betul.',
+        'Package Framework Version Status' => '',
+        'Some packages are not allowed for the current framework version.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageList.pm
+        'Package List' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SessionConfigSettings.pm
+        'Session Config Settings' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
+        'Spooled Emails' => '',
+        'There are emails in var/spool that Znuny could not process.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SystemID.pm
+        'Your SystemID setting is invalid, it should only contain digits.' =>
+            'Tetapan IDSistem anda tidak sah, ia sepatutnya hanya mengandungi angka.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
+        'Default Ticket Type' => '',
+        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
+        'Ticket Index Module' => 'Modul Indeks Tiket',
+        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
+            'Anda mempunyai lebih daripada 60,000 tiket dan harus menggunakan backend StaticDB. Lihat manual admin (Penalaan Prestasi) untuk maklumat lanjut.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
+        'Invalid Users with Locked Tickets' => '',
+        'There are invalid users with locked tickets.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/OpenTickets.pm
+        'You should not have more than 8,000 open tickets in your system.' =>
+            'Anda sepatutnya mempunyai tidak lebih dari 8,000 tiket terbuka di dalam sistem anda.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
+        'Ticket Search Index Module' => 'Modul Indeks Carian Tiket',
+        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
+        'Orphaned Records In ticket_lock_index Table' => 'Rekod piatu dalam Jadual ticket_lock_index',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'Jadual ticket_lock_index mengandungi rekod piatu. Sila jalankan bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" untuk membersihkan indeks StaticDB.',
+        'Orphaned Records In ticket_index Table' => 'Rekod piatu dalam Jadual ticket_index',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
+        'Time Settings' => '',
+        'Server time zone' => 'Zon waktu pelayan',
+        'Znuny time zone' => '',
+        'Znuny time zone is not set.' => '',
+        'User default time zone' => '',
+        'User default time zone is not set.' => '',
+        'Calendar time zone is not set.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentSkinUsage.pm
+        'UI - Agent Skin Usage' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentThemeUsage.pm
+        'UI - Agent Theme Usage' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
+        'UI - Special Statistics' => '',
+        'Agents using custom main menu ordering' => '',
+        'Agents using favourites for the admin overview' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Version.pm
+        'Znuny Version' => 'Versi Znuny',
+
+        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Pengguna Sedia ada',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Masalah',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -5906,7 +5908,6 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => 'Mentakrifkan pengecam pengguna untuk panel pelanggan.',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6000,7 +6001,7 @@ sub Data {
             'Jika "LDAP" dipilih, anda boleh menambah penapis untuk setiap aturan LDAP, cth: (mail=*), (objectclass=user) atau (!objectclass=computer).',
         'If "LDAP" was selected for Customer::AuthModule and if you want to add a suffix to every customer login name, specifiy it here, e. g. you just want to write the username user but in your LDAP directory exists user@domain.' =>
             'Jika "LDAP" dipilih untuk Customer::AuthModule dan jika anda mahu menambah akhiran kepada setiap nama log masuk pelanggan, tentukan ia disini, cthL anda hanya mahu menulis nama pengguna untuk pengguna tapi dalam direktori LDAP anda wujudnya user@domain.',
-        'If "LDAP" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
+        'If "LDAP" was selected for Customer::AuthModule and special parameters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
             'Jika "LDAP" dipilih untuk Customer::AuthModule dan parameter istimewa diperlkan untuk modul perl Net::LDAP, anda boleh tentukannya di sini. Lihat "perldoc Net::LDAP" untuk maklumat lebih mengenai parameter.',
         'If "LDAP" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
             'Jika "LDAP" dipilih untuk Customer::AuthModule, anda boleh tentukan samada aplikasi akan berhenti jika cth: suatu sambungan kepada server tidak dapat dihubungi disebabkan masalah jaringan.',
@@ -6060,8 +6061,10 @@ sub Data {
         'Defines all the possible stats output formats.' => 'Mentakrifkan semua kemungkinan statistik format output.',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'Membolehkan ejen untuk menukar paksi sesebuah status jika ia menghasilkan satu.',
-        'Allows agents to generate individual-related stats.' => 'Membolehkan ejen untuk menghasilkan status pautan individu.',
-        'Allows invalid agents to generate individual-related stats.' => 'Membenarkan agen sah untuk menghasilkan statistik berkaitan-individu.',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             'Menunjukkan kesemua pengecam pelanggan dalam medan multi-select (tidak berguna jika anda ada banyak pengecam pelanggan).',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
@@ -7845,6 +7848,7 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak sah-sementara',
@@ -8495,7 +8499,6 @@ Kumpulan MejaBantuan Anda
         'Change the priority for this ticket' => 'Ubah keutamaan untuk tiket ini',
         'Change the responsible for this ticket' => 'Ubah tanggungjawab untuk tiket ini',
         'Change your avatar image.' => '',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => '',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8856,7 +8859,6 @@ Kumpulan MejaBantuan Anda
         'Plugin search' => '',
         'Plugin search module for autocomplete.' => '',
         'Polish' => 'Poland',
-        'Popup Profile' => '',
         'Portuguese' => 'Portugis',
         'Portuguese (Brasil)' => 'Portugis (Brazil)',
         'PostMaster Filters' => 'Penapis PostMaster',
@@ -8897,7 +8899,6 @@ Kumpulan MejaBantuan Anda
         'Search Tickets.' => '',
         'Search User' => 'Cari Pengguna',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'Hari Kedua Natal',
         'Second Queue' => 'Barisan kedua',
         'Seconds' => '',

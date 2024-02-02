@@ -1245,7 +1245,7 @@
 <Table Name="standard_template">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="text" Required="false" Size="10000" Type="VARCHAR"/>
+    <Column Name="text" Required="false" Size="16777216" Type="VARCHAR"/>
     <Column Name="content_type" Required="false" Size="250" Type="VARCHAR"/>
     <Column Name="template_type" Required="true" Size="100" Type="VARCHAR" Default="Answer"/>
     <Column Name="comments" Required="false" Size="250" Type="VARCHAR"/>
@@ -1598,7 +1598,7 @@
 
 <!-- customer_user_customer - relation customer user<->customer -->
 <Table Name="customer_user_customer">
-    <Column Name="user_id" Required="true" Size="100" Type="VARCHAR"/>
+    <Column Name="user_id" Required="true" Size="200" Type="VARCHAR"/>
     <Column Name="customer_id" Required="true" Size="150" Type="VARCHAR"/>
     <Column Name="create_time" Required="true" Type="DATE"/>
     <Column Name="create_by" Required="true" Type="INTEGER"/>
@@ -1662,8 +1662,8 @@
 <!-- generic_agent_jobs -->
 <Table Name="generic_agent_jobs">
     <Column Name="job_name" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="job_key" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="job_value" Required="false" Size="200" Type="VARCHAR"/>
+    <Column Name="job_key" Required="true" Size="255" Type="VARCHAR"/>
+    <Column Name="job_value" Required="false" Size="3800" Type="VARCHAR"/>
     <Index Name="generic_agent_jobs_job_name">
         <IndexColumn Name="job_name"/>
     </Index>
@@ -1732,7 +1732,7 @@
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="notification_id" Required="true" Type="INTEGER"/>
     <Column Name="subject" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="text" Required="true" Size="4000" Type="VARCHAR"/>
+    <Column Name="text" Required="true" Size="16777216" Type="VARCHAR"/>
     <Column Name="content_type" Required="true" Size="250" Type="VARCHAR"/>
     <Column Name="language" Required="true" Size="60" Type="VARCHAR"/>
     <ForeignKey ForeignTable="notification_event">
@@ -2316,8 +2316,6 @@
     </Index>
 </Table>
 
-<!-- TODO: Remove un-needed comments -->
-
 <Table Name="sysconfig_default">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="name" Required="true" Size="250" Type="VARCHAR"/>
@@ -2572,7 +2570,7 @@
     </ForeignKey>
 </Table>
 
-<!-- calender appointment plugin -->
+<!-- calendar appointment plugin -->
 <Table Name="calendar_appointment_plugin">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="dbcrud_uuid" Required="false" Size="36" Type="VARCHAR"/> <!-- not required because up until 6.5 this column was added "on the fly" -->

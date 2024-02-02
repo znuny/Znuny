@@ -764,7 +764,7 @@ CREATE TABLE time_accounting (
 CREATE TABLE standard_template (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR (200) NOT NULL,
-    text TEXT NULL,
+    text LONGTEXT NULL,
     content_type VARCHAR (250) NULL,
     template_type VARCHAR (100) NOT NULL DEFAULT 'Answer',
     comments VARCHAR (250) NULL,
@@ -1014,7 +1014,7 @@ CREATE TABLE customer_company (
 #  create table customer_user_customer
 # ----------------------------------------------------------
 CREATE TABLE customer_user_customer (
-    user_id VARCHAR (100) NOT NULL,
+    user_id VARCHAR (200) NOT NULL,
     customer_id VARCHAR (150) NOT NULL,
     create_time DATETIME NOT NULL,
     create_by INTEGER NOT NULL,
@@ -1062,8 +1062,8 @@ CREATE TABLE postmaster_filter (
 # ----------------------------------------------------------
 CREATE TABLE generic_agent_jobs (
     job_name VARCHAR (200) NOT NULL,
-    job_key VARCHAR (200) NOT NULL,
-    job_value VARCHAR (200) NULL,
+    job_key VARCHAR (255) NOT NULL,
+    job_value TEXT NULL,
     INDEX generic_agent_jobs_job_name (job_name)
 );
 # ----------------------------------------------------------
@@ -1123,7 +1123,7 @@ CREATE TABLE notification_event_message (
     id INTEGER NOT NULL AUTO_INCREMENT,
     notification_id INTEGER NOT NULL,
     subject VARCHAR (200) NOT NULL,
-    text TEXT NOT NULL,
+    text LONGTEXT NOT NULL,
     content_type VARCHAR (250) NOT NULL,
     language VARCHAR (60) NOT NULL,
     PRIMARY KEY(id),

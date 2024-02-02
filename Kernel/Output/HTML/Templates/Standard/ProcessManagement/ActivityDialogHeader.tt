@@ -72,21 +72,23 @@
             <div class="LayoutPopup ARIARoleMain">
 [% RenderBlockStart("Header") %]
                 <div class="Header">
-                    <h1>
-                        [% Data.Name | html %]
+                    <div>
+                        <h1>
+                            [% Data.Name | html %]
 [% RenderBlockStart("DescriptionShort") %]
                             - [% Data.DescriptionShort | html %]
 [% RenderBlockEnd("DescriptionShort") %]
-                    </h1>
+                        </h1>
 [% RenderBlockStart("DescriptionLong") %]
                         <p class="DescriptionLong">
                             [% Data.DescriptionLong | html %]
                         </p>
 [% RenderBlockEnd("DescriptionLong") %]
+                    </div>
 [% RenderBlockStart("CancelLink") %]
-                        <div>
-                            <a class="CancelClosePopup btn-main btn-cancel-ghost btn-width-md" href="#">[% Translate("Cancel") | html %]</a>
-                        </div>
+                    <div>
+                        <a class="CancelClosePopup btn-main btn-cancel-ghost btn-width-md" href="#">[% Translate("Cancel") | html %]</a>
+                    </div>
 [% RenderBlockEnd("CancelLink") %]
 [% RenderBlockStart("PropertiesLock") %]
                     <div>

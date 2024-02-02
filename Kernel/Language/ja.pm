@@ -10,6 +10,8 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Translation::JavaScriptStrings)
+
 package Kernel::Language::ja;
 
 use strict;
@@ -28,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.687758136461259;
+    $Self->{Completeness}        = 0.687489671128739;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -568,7 +570,7 @@ sub Data {
         'Assignment of dynamic fields to screens' => '',
         'Overview' => '一覧',
         'Screens' => '',
-        'Default columns' => '',
+        'Overview Default Columns' => '',
         'Add dynamic field' => 'ダイナミック・フィールドを追加',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
@@ -618,6 +620,9 @@ sub Data {
         'Backend' => 'バックエンド',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -1092,9 +1097,6 @@ sub Data {
         'Send Keep-Alive' => 'Keep-Aliveを送信',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             '',
-        'Additional response headers' => '応答ヘッダーを追加',
-        'Header' => 'ヘッダー',
-        'Add response header' => '応答ヘッダーを追加する',
         'Endpoint' => 'エンドポイント',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1183,7 +1185,10 @@ sub Data {
             'この呼び出し元のリクエストに使用する、特定のHTTPコマンド(オプション)',
         'Default command' => 'デフォルトコマンド',
         'The default HTTP command to use for the requests.' => '要求に使用される標準のHTTPコマンド',
+        'Additional response headers' => '応答ヘッダーを追加',
         'Additional request headers' => '',
+        'Header' => 'ヘッダー',
+        'Add response header' => '応答ヘッダーを追加する',
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
@@ -1545,9 +1550,11 @@ sub Data {
         'Date' => '日付',
         'List of Files' => 'ファイル一覧',
         'Permission' => '権限',
+        'Size' => 'サイズ',
+        'Problem' => '問題',
+        'OK' => 'OK',
         'Download file from package!' => 'パッケージからファイルをダウンロードしてください。',
         'Required' => '必要項目',
-        'Size' => 'サイズ',
         'Primary Key' => '主キー',
         'Auto Increment' => '自動カウントアップ',
         'SQL' => 'SQL',
@@ -2386,8 +2393,12 @@ sub Data {
         'Change Customer Relations' => '顧客関係を変更',
         'Open' => '対応中',
         'Closed' => 'クローズ',
+        'Phone ticket' => '電話チケット',
+        'Email ticket' => 'メールチケット',
         '%s open ticket(s) of %s' => '%sのオープンチケット%s',
         '%s closed ticket(s) of %s' => '%sのクローズチケット%s',
+        'New phone ticket from %s' => '%sからの新規電話チケット',
+        'New email ticket to %s' => '%s宛の新規メールチケット',
         'Edit customer ID' => '顧客IDを編集',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2402,10 +2413,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '顧客ユーザー情報',
-        'Phone ticket' => '電話チケット',
-        'Email ticket' => 'メールチケット',
-        'New phone ticket from %s' => '%sからの新規電話チケット',
-        'New email ticket to %s' => '%s宛の新規メールチケット',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2882,7 +2889,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'お客様各位',
         'thank you for using our services.' => '私たちのサービスをご利用いただきありがとうございます。',
-        'Yes, I accept your license.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
@@ -2894,8 +2900,8 @@ sub Data {
         'From assigned Customer IDs' => '割り当てられた顧客IDから',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'エラー',
         'An Error Occurred' => 'エラーが発生しました。',
-        'Error Details' => 'エラーの詳細',
         'Traceback' => 'トレースバック',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2934,6 +2940,7 @@ sub Data {
         'Request New Password' => '新規パスワードを申請',
         'Your User Name' => 'ユーザー名',
         'A new password will be sent to your email address.' => '登録されたメールアドレスに新しいパスワードを送信します。',
+        'Back to login' => 'ログイン画面に戻る',
         'Create Account' => 'アカウント作成',
         'Please fill out this form to receive login credentials.' => '下記のフォームにログイン時に必要となる事項を入力してください。',
         'How we should address you' => '',
@@ -2997,6 +3004,7 @@ sub Data {
         'Ticket fields' => 'チケット・フィールド',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'エラーの詳細',
         'Expand' => '展開',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3027,6 +3035,7 @@ sub Data {
         'Personal views' => '',
         'Last Views' => '',
         'Search tools' => '',
+        'SearchTemplate' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScriptが利用できません。',
@@ -3071,7 +3080,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '完了',
-        'Error' => 'エラー',
         'Database setup successful!' => 'データベース　設定成功',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3141,7 +3149,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'パスワードを忘れた方',
-        'Back to login' => 'ログイン画面に戻る',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3855,7 +3862,6 @@ sub Data {
         'No such file %s in package!' => 'パッケージ内にファイル %s はありません！',
         'No such file %s in local file system!' => 'ローカルファイルシステム内にファイル %s はありません！',
         'Can\'t read %s!' => '%s を読み込めません！',
-        'File is OK' => 'ファイルは正常です',
         'Package has locally modified files.' => 'パッケージにはローカルに変更されたファイルがあります。',
         'Not Started' => '始まっていない',
         'Updated' => '更新しました',
@@ -5027,7 +5033,7 @@ sub Data {
         'Client Connection Charset' => 'クライアントコネクションのキャラクターセット',
         'Setting character_set_client needs to be utf8.' => 'character_set_client は utf8 に設定する必要があります',
         'Server Database Charset' => 'データーベースサーバーのキャラクターセット',
-        'This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set \'utf8\'.' =>
+        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
             '',
         'The setting character_set_database needs to be \'utf8\'.' => '',
         'Table Charset' => 'Table キャラクターセット',
@@ -5086,7 +5092,7 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/postgresql/Version.pm
         'PostgreSQL 9.2 or higher is required.' => '',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionZnuny.pm
         'Operating System' => 'オペレーションシステム',
         'Znuny Disk Partition' => 'Znuny ディスクパーティション',
 
@@ -5133,165 +5139,6 @@ sub Data {
         'There should be more than 60% free swap space.' => '未利用のSwap領域が少なくとも 60 % 必要です',
         'There should be no more than 200 MB swap space used.' => '200MB 以上のSwap 領域が存在してはいけない',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'Znuny' => '',
-        'Article Search Index Status' => '記事検索インデックスのステータス',
-        'Indexed Articles' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticlesPerCommunicationChannel.pm
-        'Articles Per Communication Channel' => 'コミュニケーション・チャンネルごとの記事',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLog.pm
-        'Incoming communications' => '着信コミュニケーション',
-        'Outgoing communications' => '発信コミュニケーション',
-        'Failed communications' => 'コミュニケーションの失敗',
-        'Average processing time of communications (s)' => 'コミュニケーションの平均処理時間(s)',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/CommunicationLogAccountStatus.pm
-        'Communication Log Account Status (last 24 hours)' => 'コミュニケーション・ログのアカウント・ステータス（24時間以内）',
-        'No connections found.' => '',
-        'ok' => '',
-        'permanent connection errors' => '',
-        'intermittent connection errors' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ConfigSettings.pm
-        'Config Settings' => 'Config 設定',
-        'Could not determine value.' => 'value を特定できませんでした',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
-        'Daemon' => 'デーモン',
-        'Daemon is running.' => 'デーモンは稼働中です。',
-        'Daemon is not running.' => 'デーモンは稼働していません。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
-        'Database Records' => 'データーベースレコード',
-        'Tickets' => 'チケット',
-        'Ticket History Entries' => 'チケット履歴エントリ',
-        'Articles' => '記事',
-        'Attachments (DB, Without HTML)' => '添付(DB, HTML以外)',
-        'Customers With At Least One Ticket' => '一つ以上のチケットがある顧客',
-        'Dynamic Field Values' => 'ダイナミック・フィールドの値',
-        'Invalid Dynamic Fields' => '不正なダイナミック・フィールドです',
-        'Invalid Dynamic Field Values' => 'ダイナミック・フィールドの値は不正です',
-        'GenericInterface Webservices' => 'ジェネリックインターフェース・Webサービス',
-        'Process Tickets' => 'プロセス・チケット',
-        'Months Between First And Last Ticket' => '最初と最後のチケットとの間には月間',
-        'Tickets Per Month (avg)' => '月毎のチケット数(平均)',
-        'Open Tickets' => '対応中チケット',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultSOAPUser.pm
-        'Default SOAP Username And Password' => 'デフォルトのSOAPユーザ名とパスワード',
-        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
-            'セキュリティーリスク: SOAP::User 及び SOAP::Password のデフォルト設定を利用しています、変更を行ってください。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DefaultUser.pm
-        'Default Admin Password' => '管理者のデフォルトパスワード',
-        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
-            'セキュリティーリスク: エージェントアカウント root@localhost はいまだにデフォルトパスワードを利用しています、変更を行ってください。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/EmailQueue.pm
-        'Email Sending Queue' => 'Eメール送信キュー',
-        'Emails queued for sending' => '送信待ちのEメール',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FQDN.pm
-        'FQDN (domain name)' => 'FQDN (ドメインネーム)',
-        'Please configure your FQDN setting.' => 'FQDNの設定を確認して下さい。',
-        'Domain Name' => 'ドメインネーム',
-        'Your FQDN setting is invalid.' => 'FQDNの設定が不正です',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
-        'File System Writable' => '書き込み可能なファイルシステム',
-        'The file system on your Znuny partition is not writable.' => 'Znunyパーティション上のファイルシステムは書き込み可能ではありません。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
-        'Legacy Configuration Backups' => '従来構成のバックアップ',
-        'No legacy configuration backup files found.' => '従来構成のバックアップファイルは見つかりませんでした。',
-        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
-            '',
-        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
-        'Views with multiple loaded JavaScript files' => '',
-        'The following JavaScript files loaded multiple times:' => '',
-        'Files' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
-        'Package Installation Status' => 'パッケージの導入状態',
-        'Some packages have locally modified files.' => 'いくつかのパッケージがローカルで修正されています。',
-        'Some packages are not correctly installed.' => '正常にインストールされていないパッケージが存在します',
-        'Package Framework Version Status' => 'パッケージフレームワークバージョン',
-        'Some packages are not allowed for the current framework version.' =>
-            'いくつかのパッケージは現在のフレームワークのバージョンに対応していません。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageList.pm
-        'Package List' => 'パッケージリスト',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SessionConfigSettings.pm
-        'Session Config Settings' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
-        'Spooled Emails' => 'スプールされたメール',
-        'There are emails in var/spool that Znuny could not process.' => 'Znunyが処理できなかったメールがvar/spool以下に存在しています。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
-        'Your SystemID setting is invalid, it should only contain digits.' =>
-            'あなたのSystemID設定は不正です。数字以外は利用できません。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/DefaultType.pm
-        'Default Ticket Type' => '標準のチケットタイプ',
-        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
-            '設定された標準のチケットタイプは不正か存在していません。Ticket::Type::Default設定を確認し、正しいチケットタイプを指定してください。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/IndexModule.pm
-        'Ticket Index Module' => 'チケットインデクスモジュール',
-        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
-            'システムにチケットが60,000以上あるため、バックエンドにはStaticDBを利用するべきです。詳細は管理者マニュアル(パフォーマンスチューニング)を参照してください。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/InvalidUsersWithLockedTickets.pm
-        'Invalid Users with Locked Tickets' => '',
-        'There are invalid users with locked tickets.' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/OpenTickets.pm
-        'You should not have more than 8,000 open tickets in your system.' =>
-            'システム内にチケットが 8,000以上オープンにしないでください',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/SearchIndexModule.pm
-        'Ticket Search Index Module' => 'チケット検索インデックス・モジュール',
-        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
-            '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-        'Orphaned Records In ticket_lock_index Table' => 'ticket_lock_indexテーブルに孤立したレコード',
-        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'テーブル ticket_lock_indexに孤立したレコードが存在しています。 StaticDBのインデックスを正しくするためにbin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup"を実行してください。',
-        'Orphaned Records In ticket_index Table' => 'ticket_indexテーブルに孤立したレコード',
-        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'テーブル ticket_indexに孤立したレコードが存在しています。 StaticDBのインデックスを正しくするためにbin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" を実行してください。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
-        'Time Settings' => '時刻設定',
-        'Server time zone' => 'サーバのタイムゾーン',
-        'Znuny time zone' => 'Znunyのタイムゾーン',
-        'Znuny time zone is not set.' => 'Znunyのタイムゾーンが設定されていません。',
-        'User default time zone' => 'ユーザーのデフォルトタイムゾーン',
-        'User default time zone is not set.' => 'ユーザーのデフォルトのタイムゾーンが設定されていません。',
-        'Calendar time zone is not set.' => 'カレンダーのタイムゾーンが設定されていません。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentSkinUsage.pm
-        'UI - Agent Skin Usage' => 'UI - 担当者スキンの使用状況',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/AgentThemeUsage.pm
-        'UI - Agent Theme Usage' => 'UI - 担当者のテーマ使用状況',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
-        'UI - Special Statistics' => 'UI - 特殊レポート',
-        'Agents using custom main menu ordering' => 'カスタムメインメニューのオーダーを使用する担当者',
-        'Agents using favourites for the admin overview' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'Znuny Version' => 'Znunyバージョン',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Webサーバー',
         'Loaded Apache Modules' => 'ロードされたApacheモジュール',
@@ -5329,13 +5176,168 @@ sub Data {
         'Webserver Version' => 'Webサイトバージョン',
         'Could not determine webserver version.' => 'WEBサーバのバージョンを決定できません。',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/OTRS/ConcurrentUsers.pm
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
+        'Znuny' => '',
+        'Article Search Index Status' => '記事検索インデックスのステータス',
+        'Indexed Articles' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticlesPerCommunicationChannel.pm
+        'Articles Per Communication Channel' => 'コミュニケーション・チャンネルごとの記事',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLog.pm
+        'Incoming communications' => '着信コミュニケーション',
+        'Outgoing communications' => '発信コミュニケーション',
+        'Failed communications' => 'コミュニケーションの失敗',
+        'Average processing time of communications (s)' => 'コミュニケーションの平均処理時間(s)',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/CommunicationLogAccountStatus.pm
+        'Communication Log Account Status (last 24 hours)' => 'コミュニケーション・ログのアカウント・ステータス（24時間以内）',
+        'No connections found.' => '',
+        'ok' => '',
+        'permanent connection errors' => '',
+        'intermittent connection errors' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ConfigSettings.pm
+        'Config Settings' => 'Config 設定',
+        'Could not determine value.' => 'value を特定できませんでした',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DaemonRunning.pm
+        'Daemon' => 'デーモン',
+        'Daemon is running.' => 'デーモンは稼働中です。',
+        'Daemon is not running.' => 'デーモンは稼働していません。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
+        'Database Records' => 'データーベースレコード',
+        'Tickets' => 'チケット',
+        'Ticket History Entries' => 'チケット履歴エントリ',
+        'Articles' => '記事',
+        'Attachments (DB, Without HTML)' => '添付(DB, HTML以外)',
+        'Customers With At Least One Ticket' => '一つ以上のチケットがある顧客',
+        'Dynamic Field Values' => 'ダイナミック・フィールドの値',
+        'Invalid Dynamic Fields' => '不正なダイナミック・フィールドです',
+        'Invalid Dynamic Field Values' => 'ダイナミック・フィールドの値は不正です',
+        'GenericInterface Webservices' => 'ジェネリックインターフェース・Webサービス',
+        'Process Tickets' => 'プロセス・チケット',
+        'Months Between First And Last Ticket' => '最初と最後のチケットとの間には月間',
+        'Tickets Per Month (avg)' => '月毎のチケット数(平均)',
+        'Open Tickets' => '対応中チケット',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultSOAPUser.pm
+        'Default SOAP Username And Password' => 'デフォルトのSOAPユーザ名とパスワード',
+        'Security risk: you use the default setting for SOAP::User and SOAP::Password. Please change it.' =>
+            'セキュリティーリスク: SOAP::User 及び SOAP::Password のデフォルト設定を利用しています、変更を行ってください。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DefaultUser.pm
+        'Default Admin Password' => '管理者のデフォルトパスワード',
+        'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.' =>
+            'セキュリティーリスク: エージェントアカウント root@localhost はいまだにデフォルトパスワードを利用しています、変更を行ってください。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/EmailQueue.pm
+        'Email Sending Queue' => 'Eメール送信キュー',
+        'Emails queued for sending' => '送信待ちのEメール',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FQDN.pm
+        'FQDN (domain name)' => 'FQDN (ドメインネーム)',
+        'Please configure your FQDN setting.' => 'FQDNの設定を確認して下さい。',
+        'Domain Name' => 'ドメインネーム',
+        'Your FQDN setting is invalid.' => 'FQDNの設定が不正です',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/FileSystemWritable.pm
+        'File System Writable' => '書き込み可能なファイルシステム',
+        'The file system on your Znuny partition is not writable.' => 'Znunyパーティション上のファイルシステムは書き込み可能ではありません。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/LegacyConfigBackups.pm
+        'Legacy Configuration Backups' => '従来構成のバックアップ',
+        'No legacy configuration backup files found.' => '従来構成のバックアップファイルは見つかりませんでした。',
+        'Legacy configuration backup files found in Kernel/Config/Backups folder, but they might still be required by some packages.' =>
+            '',
+        'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+        'Views with multiple loaded JavaScript files' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
+        'Package Installation Status' => 'パッケージの導入状態',
+        'Some packages have locally modified files.' => 'いくつかのパッケージがローカルで修正されています。',
+        'Some packages are not correctly installed.' => '正常にインストールされていないパッケージが存在します',
+        'Package Framework Version Status' => 'パッケージフレームワークバージョン',
+        'Some packages are not allowed for the current framework version.' =>
+            'いくつかのパッケージは現在のフレームワークのバージョンに対応していません。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageList.pm
+        'Package List' => 'パッケージリスト',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SessionConfigSettings.pm
+        'Session Config Settings' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SpoolMails.pm
+        'Spooled Emails' => 'スプールされたメール',
+        'There are emails in var/spool that Znuny could not process.' => 'Znunyが処理できなかったメールがvar/spool以下に存在しています。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/SystemID.pm
+        'Your SystemID setting is invalid, it should only contain digits.' =>
+            'あなたのSystemID設定は不正です。数字以外は利用できません。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/DefaultType.pm
+        'Default Ticket Type' => '標準のチケットタイプ',
+        'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.' =>
+            '設定された標準のチケットタイプは不正か存在していません。Ticket::Type::Default設定を確認し、正しいチケットタイプを指定してください。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/IndexModule.pm
+        'Ticket Index Module' => 'チケットインデクスモジュール',
+        'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.' =>
+            'システムにチケットが60,000以上あるため、バックエンドにはStaticDBを利用するべきです。詳細は管理者マニュアル(パフォーマンスチューニング)を参照してください。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/InvalidUsersWithLockedTickets.pm
+        'Invalid Users with Locked Tickets' => '',
+        'There are invalid users with locked tickets.' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/OpenTickets.pm
+        'You should not have more than 8,000 open tickets in your system.' =>
+            'システム内にチケットが 8,000以上オープンにしないでください',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/SearchIndexModule.pm
+        'Ticket Search Index Module' => 'チケット検索インデックス・モジュール',
+        'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
+            '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Ticket/StaticDBOrphanedRecords.pm
+        'Orphaned Records In ticket_lock_index Table' => 'ticket_lock_indexテーブルに孤立したレコード',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'テーブル ticket_lock_indexに孤立したレコードが存在しています。 StaticDBのインデックスを正しくするためにbin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup"を実行してください。',
+        'Orphaned Records In ticket_index Table' => 'ticket_indexテーブルに孤立したレコード',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'テーブル ticket_indexに孤立したレコードが存在しています。 StaticDBのインデックスを正しくするためにbin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" を実行してください。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/TimeSettings.pm
+        'Time Settings' => '時刻設定',
+        'Server time zone' => 'サーバのタイムゾーン',
+        'Znuny time zone' => 'Znunyのタイムゾーン',
+        'Znuny time zone is not set.' => 'Znunyのタイムゾーンが設定されていません。',
+        'User default time zone' => 'ユーザーのデフォルトタイムゾーン',
+        'User default time zone is not set.' => 'ユーザーのデフォルトのタイムゾーンが設定されていません。',
+        'Calendar time zone is not set.' => 'カレンダーのタイムゾーンが設定されていません。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentSkinUsage.pm
+        'UI - Agent Skin Usage' => 'UI - 担当者スキンの使用状況',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/AgentThemeUsage.pm
+        'UI - Agent Theme Usage' => 'UI - 担当者のテーマ使用状況',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/UI/SpecialStats.pm
+        'UI - Special Statistics' => 'UI - 特殊レポート',
+        'Agents using custom main menu ordering' => 'カスタムメインメニューのオーダーを使用する担当者',
+        'Agents using favourites for the admin overview' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/Version.pm
+        'Znuny Version' => 'Znunyバージョン',
+
+        # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '同時接続ユーザー詳細',
         'Concurrent Users' => '同時実行ユーザー',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => '問題',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '設定 %s は存在しません！',
@@ -5913,7 +5915,6 @@ sub Data {
             '',
         'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '',
-        'Defines the global users popup profile.' => '',
         'Defines the user identifier for the customer panel.' => '顧客パネルのためのユーザ識別子を定義します。',
         'Activates support for customer and customer user groups.' => '',
         'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
@@ -6007,7 +6008,7 @@ sub Data {
             '“LDAP”が選択されていた場合、LDAPクエリーそれぞれにフィルタを追加することができます。例えば、(mail=*), (objectclass=user), (!objectclass=computer)などです。',
         'If "LDAP" was selected for Customer::AuthModule and if you want to add a suffix to every customer login name, specifiy it here, e. g. you just want to write the username user but in your LDAP directory exists user@domain.' =>
             'Customer::AuthModuleに関して“LDAP”が選択されていて、全ての顧客ログイン名にsuffix（後ろに付く接尾辞）を追加したい場合、ここで特定してください。例えば、ユーザ名のみを書いても、ユーザがLDAPディレクトリの中ではuser@domainとして存在するなどです。',
-        'If "LDAP" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
+        'If "LDAP" was selected for Customer::AuthModule and special parameters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
             'Customer::AuthModuleに関して“LDAP”が選択されていて、Net::LDAP perl モジュールに対して特別なパラメータが必要な場合、ここで設定できます。パラメータに関するより詳細な情報は、"perldoc Net::LDAPを参照ください。',
         'If "LDAP" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
             'Customer::AuthModuleに関して“LDAP”が選択されている場合に、例えばサーバー接続がネットワークの問題で確立できない際に、アプリケーションを停止させるかどうかを設定できます。',
@@ -6067,8 +6068,10 @@ sub Data {
         'Defines all the possible stats output formats.' => '全ての可能な統計アウトプットのフォーマットを定義します。',
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             '担当者が統計情報を生成する場合、担当者が統計情報の軸を交換できるようにします。',
-        'Allows agents to generate individual-related stats.' => '統計出力において所有者・責任者を選択できるようにします。',
-        'Allows invalid agents to generate individual-related stats.' => '統計出力において無効にされた担当者も出力対象とします。',
+        'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
+            '',
+        'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
+            '',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             '全ての顧客識別子をマルチ・セレクトのフィールドに表示します（顧客識別子を多く抱えている場合は利便性が低いです）。',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
@@ -7859,6 +7862,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '無効-暫定',
@@ -8506,7 +8510,6 @@ Thanks for your help!
         'Change the priority for this ticket' => 'このチケットの優先度を変更',
         'Change the responsible for this ticket' => '',
         'Change your avatar image.' => 'あなたのアバターイメージを変更して下さい。',
-        'Change your default popup profile settings.' => '',
         'Change your password and more.' => 'パスワードなどを変更してください。',
         'Changed SLA to "%s" (%s).' => '',
         'Changed archive state to "%s".' => '',
@@ -8868,7 +8871,6 @@ Thanks for your help!
         'Plugin search' => 'プラグイン検索',
         'Plugin search module for autocomplete.' => 'オートコンプリート用のプラグイン検索モジュール',
         'Polish' => 'ポーランド語',
-        'Popup Profile' => '',
         'Portuguese' => 'ポルトガル語',
         'Portuguese (Brasil)' => 'ポルトガル語（ブラジル）',
         'PostMaster Filters' => 'ポストマスター・フィルター',
@@ -8909,7 +8911,6 @@ Thanks for your help!
         'Search Tickets.' => 'チケットを検索する。',
         'Search User' => 'ユーザを検索します。',
         'Search tickets.' => '',
-        'SearchTemplate' => '',
         'Second Christmas Day' => 'セカンド・クリスマスデー',
         'Second Queue' => '第二キュー',
         'Seconds' => '',

@@ -288,7 +288,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
             max-width: 100%;
         }
     }
-    
+
 
     #NewProcessTicket.NewProcessTicketSmall .TableLike,
     #NewProcessTicket.NewProcessTicketSmall + #AJAXLoader {
@@ -352,9 +352,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
             padding: 0 var(--padding-lg);
         }
     }
-    
 
-    #ActivityDialogContent .ContentColumn .Content, 
+
+    #ActivityDialogContent .ContentColumn .Content,
     #ActivityDialogContent .ContentColumn .TableLike {
         padding: 0;
     }

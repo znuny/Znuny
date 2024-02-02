@@ -1414,7 +1414,7 @@ sub Header {
             my $DefaultIcon = $ConfigObject->Get('Frontend::Gravatar::DefaultImage') || 'mp';
             $Kernel::OM->Get('Kernel::System::Encode')->EncodeOutput( \$Self->{UserEmail} );
             $Param{Avatar}
-                = '//www.gravatar.com/avatar/' . md5_hex( lc $Self->{UserEmail} ) . '?s=100&d=' . $DefaultIcon;
+                = 'https://www.gravatar.com/avatar/' . md5_hex( lc $Self->{UserEmail} ) . '?s=100&d=' . $DefaultIcon;
         }
         else {
             my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
@@ -1608,9 +1608,21 @@ sub ToolbarModules {
 
         # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
         # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
-        if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearch' ) {
-            $Modules{$Key}->{SearchInArchive}
+        if (
+            $ConfigObject->Get('Ticket::ArchiveSystem')
+            && $Modules{$Key}->{Block} eq 'ToolBarSearch'
+            && $Modules{$Key}->{Name} eq 'Fulltext'
+            )
+        {
+            my $SearchInArchive
                 = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
+
+            $Self->Block(
+                Name => 'SearchInArchive',
+                Data => {
+                    SearchInArchive => $SearchInArchive || 'AllTickets',
+                },
+            );
         }
 
         if (
@@ -4292,6 +4304,32 @@ sub CustomerHeader {
     # only on valid session
     if ( $Self->{UserID} ) {
 
+        if ( $Frontend eq 'Customer' ) {
+            my $EncodeObject       = $Kernel::OM->Get('Kernel::System::Encode');
+            my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+
+            # generate avatar for CustomerUser
+            if ( $ConfigObject->Get('Frontend::AvatarEngine') eq 'Gravatar' && $Self->{UserEmail} ) {
+
+                my $DefaultIcon = $ConfigObject->Get('Frontend::Gravatar::DefaultImage') || 'mp';
+
+                $EncodeObject->EncodeOutput( \$Self->{UserEmail} );
+                $Param{Avatar} = 'https://www.gravatar.com/avatar/'
+                    . md5_hex( lc $Self->{UserEmail} )
+                    . '?s=100&d='
+                    . $DefaultIcon;
+            }
+            else {
+                my $Name = $CustomerUserObject->CustomerName(
+                    UserLogin => $Self->{UserID},
+                );
+
+                $Param{UserInitials} = $Self->UserInitialsGet(
+                    Fullname => $Name,
+                );
+            }
+        }
+
         $Self->Block(
             Name => 'Actions',
             Data => \%Param,
@@ -5052,7 +5090,7 @@ sub RichTextDocumentServe {
 
     # Get charset from passed content type parameter.
     my $Charset;
-    if ( $Param{Data}->{ContentType} =~ m/.+?charset=("|'|)(.+)/ig ) {
+    if ( $Param{Data}->{ContentType} =~ m/.+?charset\s*=\s*("|'|)(.+)/ig ) {
         $Charset = $2;
         $Charset =~ s/"|'//g;
     }
@@ -5072,7 +5110,7 @@ sub RichTextDocumentServe {
 
         # Replace charset in content type and content.
         $Param{Data}->{ContentType} =~ s/\Q$Charset\E/utf-8/gi;
-        if ( !( $Param{Data}->{Content} =~ s/(<meta[^>]+charset=("|'|))\Q$Charset\E/$1utf-8/gi ) ) {
+        if ( !( $Param{Data}->{Content} =~ s/(<meta[^>]+charset\s*=\s*("|'|))\Q$Charset\E/$1utf-8/gi ) ) {
 
             # Add explicit charset if missing.
             $Param{Data}->{Content}

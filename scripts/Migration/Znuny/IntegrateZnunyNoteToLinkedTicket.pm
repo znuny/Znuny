@@ -11,8 +11,9 @@ package scripts::Migration::Znuny::IntegrateZnunyNoteToLinkedTicket;    ## no cr
 
 use strict;
 use warnings;
+use utf8;
+
 use IO::Interactive qw(is_interactive);
-use Kernel::System::VariableCheck qw(:all);
 
 use parent qw(scripts::Migration::Base);
 

@@ -13,8 +13,7 @@ use parent 'Kernel::Output::HTML::TicketZoom::Customer::Base';
 
 use strict;
 use warnings;
-
-use Kernel::System::VariableCheck qw(IsPositiveInteger);
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -38,6 +37,7 @@ Returns article HTML.
     );
 
 Result:
+
     $HTML = "<div>...</div>";
 
 =cut

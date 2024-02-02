@@ -301,8 +301,8 @@ Retrieves all mentions of a ticket.
 
     my $Mentions = $MentionObject->GetTicketMentions(
         TicketID  => 3252,
-        OrderBy   => 'create_time', # optional; default
-        SortOrder => 'ASC', # or 'DESC', optional; default
+        OrderBy   => 'create_time',     # optional; default
+        SortOrder => 'ASC',             # or 'DESC', optional; default
     );
 
     Returns:
@@ -381,8 +381,8 @@ Retrieves all mentions of a user.
         # if set to 1, all mentions of every article count separately
         PerArticle => 0,
 
-        OrderBy    => 'create_time', # optional; default
-        SortOrder  => 'ASC', # or 'DESC', optional; default
+        OrderBy    => 'create_time',    # optional; default
+        SortOrder  => 'ASC',            # or 'DESC', optional; default
     );
 
     Returns:
@@ -645,7 +645,7 @@ sub GetMentionedUserIDsFromString {
         push @UniqueMentionedUsers, $MentionedUser;
     }
 
-    if ( $Param{Limit} ) {
+    if ( $Param{Limit} && @UniqueMentionedUsers > $Param{Limit} ) {
         @UniqueMentionedUsers = @UniqueMentionedUsers[ 0 .. $Param{Limit} - 1 ];
     }
 
