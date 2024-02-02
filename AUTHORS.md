@@ -120,6 +120,7 @@ The following persons contributed to Znuny:
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
 * akmet <akmet@users.noreply.github.com>
 * anonymous <unknown@anonymous>
+* arlecchino <kolbma@users.noreply.github.com>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * djurici <igor.djuric@muehlbauer.de>
 * jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
