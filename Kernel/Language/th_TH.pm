@@ -2897,8 +2897,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'ข้อผิดพลาด',
         'An Error Occurred' => '',
-        'Error Details' => 'รายละเอียด ข้อผิดพลาด',
         'Traceback' => 'ตรวจสอบย้อนกลับ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3001,6 +3001,7 @@ sub Data {
         'Ticket fields' => 'ช่องข้อมูลตั๋ว',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'รายละเอียด ข้อผิดพลาด',
         'Expand' => 'การขยาย',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3076,7 +3077,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'ดำเนินการเสร็จแล้ว',
-        'Error' => 'ข้อผิดพลาด',
         'Database setup successful!' => 'การติดตั้งฐานข้อมูลประสบความสำเร็จ!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

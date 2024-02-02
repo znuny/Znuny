@@ -2895,8 +2895,8 @@ sub Data {
         'From assigned Customer IDs' => 'Aus allen zugewiesenen Kundennummern',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Fehler',
         'An Error Occurred' => 'Ein Fehler ist aufgetreten',
-        'Error Details' => 'Fehlerdetails',
         'Traceback' => 'Rückverfolgung',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2999,6 +2999,7 @@ sub Data {
         'Ticket fields' => 'Ticket-Felder',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Fehlerdetails',
         'Expand' => 'Ausklappen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3074,7 +3075,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Fertig',
-        'Error' => 'Fehler',
         'Database setup successful!' => 'Datenbank erfolgreich erstellt!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -8919,7 +8919,7 @@ Ihr Helpdesk-Team
         'Send a unit test file' => 'Unit-Test-Datei versenden',
         'Send new outgoing mail from this ticket' => 'Neue ausgehende E-Mail aus diesem Ticket heraus senden',
         'Send notifications to users.' => 'Benachrichtigungen an Agenten verschicken.',
-        'Sent "%s" notification to "%s" via "%s".' => 'Benachrichtigung "%s" versandt and "%s" via "%s".',
+        'Sent "%s" notification to "%s" via "%s".' => 'Benachrichtigung "%s" versandt an "%s" via "%s".',
         'Sent auto follow-up to "%s".' => 'Automatische Rückfrage versandt an "%s".',
         'Sent auto reject to "%s".' => 'Automatische Ablehnung versandt an "%s".',
         'Sent auto reply to "%s".' => 'Automatische Antwort versandt an "%s".',

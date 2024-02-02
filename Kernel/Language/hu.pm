@@ -2900,8 +2900,8 @@ sub Data {
         'From assigned Customer IDs' => 'A hozzárendelt ügyfél-azonosítókból',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Hiba',
         'An Error Occurred' => 'Hiba történt',
-        'Error Details' => 'Hiba részletei',
         'Traceback' => 'Visszakövetés',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3004,6 +3004,7 @@ sub Data {
         'Ticket fields' => 'Jegymezők',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Hiba részletei',
         'Expand' => 'Kinyitás',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3079,7 +3080,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Kész',
-        'Error' => 'Hiba',
         'Database setup successful!' => 'Az adatbázis beállítása sikeres!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

@@ -2901,8 +2901,8 @@ sub Data {
         'From assigned Customer IDs' => '从已分配的客户ID',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Error（错误）',
         'An Error Occurred' => '发生了一个错误',
-        'Error Details' => '详细错误信息',
         'Traceback' => '追溯',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3005,6 +3005,7 @@ sub Data {
         'Ticket fields' => '工单字段',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => '详细错误信息',
         'Expand' => '展开',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3080,7 +3081,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '完成',
-        'Error' => 'Error（错误）',
         'Database setup successful!' => '数据库设置成功！',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

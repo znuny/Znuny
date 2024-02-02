@@ -2895,8 +2895,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Error',
         'An Error Occurred' => '',
-        'Error Details' => 'Detalls de l\'error',
         'Traceback' => 'Rastrejar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2999,6 +2999,7 @@ sub Data {
         'Ticket fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Detalls de l\'error',
         'Expand' => 'Expandir',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3074,7 +3075,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Fet',
-        'Error' => 'Error',
         'Database setup successful!' => 'Base de dades de configurada amb èxit!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

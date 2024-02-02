@@ -2897,8 +2897,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'त्रुटि',
         'An Error Occurred' => '',
-        'Error Details' => 'त्रुटि का विवरण',
         'Traceback' => 'ट्रेसबैक',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3001,6 +3001,7 @@ sub Data {
         'Ticket fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'त्रुटि का विवरण',
         'Expand' => 'विस्तार',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3076,7 +3077,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'किया',
-        'Error' => 'त्रुटि',
         'Database setup successful!' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

@@ -2894,8 +2894,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Kesilapan',
         'An Error Occurred' => 'Kesalahan Telah Berlaku',
-        'Error Details' => 'Butiran kesilapan',
         'Traceback' => 'Menjejaki kembali',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2998,6 +2998,7 @@ sub Data {
         'Ticket fields' => 'Medan tiket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Butiran kesilapan',
         'Expand' => 'Kembang',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3073,7 +3074,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Selesai',
-        'Error' => 'Kesilapan',
         'Database setup successful!' => 'Penubuhan pangkalan data berjaya!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

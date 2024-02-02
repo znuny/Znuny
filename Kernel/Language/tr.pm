@@ -2895,8 +2895,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Hata',
         'An Error Occurred' => '',
-        'Error Details' => 'Hata detayı',
         'Traceback' => 'Geri iz',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2999,6 +2999,7 @@ sub Data {
         'Ticket fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Hata detayı',
         'Expand' => 'Genişlet',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3074,7 +3075,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Tamam',
-        'Error' => 'Hata',
         'Database setup successful!' => 'Veritabanı kurulumu başarılı!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

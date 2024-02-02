@@ -1,5 +1,14 @@
-# 7.0.15 2024-??-??
+# 7.0.16 2024-??-??
+ - 2024-01-24 Fixed layout of error message in customer interface.
+
+# 7.0.15 2024-01-31
+ - 2024-01-25 Fixed migration of mention notification.
+ - 2024-01-18 Exchanged CKEditor 4.22.1 source version with minified version to improve browser loading times. [#533](https://github.com/znuny/Znuny/issues/533)
+ - 2024-01-15 Updated Transition Action Default Parameters.
+ - 2024-01-19 Fixed slow regular expression in postmaster attachment detection.
+ - 2024-01-11 Fixed appointment notifications not being sent if crypting/signing options were configured.
  - 2024-01-10 Adjusted styling of file list of an installed package on AdminPackageManager.
+ - 2024-01-10 Fixed setting default value for time units when using dropdown fields. [#464](https://github.com/znuny/Znuny/issues/464)
  - 2024-01-08 Updated AdminSystemFiles: Added additional file check.
  - 2024-01-08 Adjustment of Login form.
  - 2024-01-08 Fixed rich text editor's field height problems by disabling CKEditor's autogrow plugin. Thanks to Paweł Bogusławski (@pboguslawski). [#526](https://github.com/znuny/Znuny/pull/526)
@@ -192,6 +201,17 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.6 2024-01-31
+ - 2024-01-25 Fixed migration of mention notification.
+ - 2024-01-19 Fixed slow regular expression in postmaster attachment detection.
+ - 2024-01-18 Exchanged CKEditor 4.22.1 source version with minified version to improve browser loading times. [#533](https://github.com/znuny/Znuny/issues/533)
+ - 2024-01-11 Fixed appointment notifications not being sent if crypting/signing options were configured.
+ - 2024-01-10 Fixed setting default value for time units when using dropdown fields. [#464](https://github.com/znuny/Znuny/issues/464)
+ - 2024-01-08 Updated AdminSystemFiles: Added additional file check.
+ - 2024-01-08 Fixed rich text editor's field height problems by disabling CKEditor's autogrow plugin. Thanks to Paweł Bogusławski (@pboguslawski). [#526](https://github.com/znuny/Znuny/pull/526)
+ - 2023-12-22 Deactivated CKE 4 plugin embedsemantic because it showed the content of a link instead of just the link.
+ - 2023-10-24 Kernel::System::MailQueue::Send now increases number of attempts before sending an email. This prevents the attempts not being increased if the process dies while trying to send an email.
 
 # 6.5.5 2023-12-13
  - 2023-12-11 Increased size of user_id column in table customer_user_customer.

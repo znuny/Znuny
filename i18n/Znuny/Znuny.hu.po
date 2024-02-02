@@ -8534,7 +8534,7 @@ msgstr "A hozzárendelt ügyfél-azonosítókból"
 msgid "An Error Occurred"
 msgstr "Hiba történt"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "Hiba részletei"
 
@@ -9026,7 +9026,7 @@ msgstr "Lépés kihagyása"
 msgid "Done"
 msgstr "Kész"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Hiba"
 

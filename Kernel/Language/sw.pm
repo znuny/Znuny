@@ -2897,8 +2897,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Kasoro',
         'An Error Occurred' => '',
-        'Error Details' => 'Makosa kwa undani',
         'Traceback' => 'Tafuta Nyuma',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3001,6 +3001,7 @@ sub Data {
         'Ticket fields' => 'Uga wa tiketi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Makosa kwa undani',
         'Expand' => 'Panua',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3076,7 +3077,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Maliza',
-        'Error' => 'Kasoro',
         'Database setup successful!' => 'Usanidi wa hifadhi data umefanikiwa!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

@@ -8534,7 +8534,7 @@ msgstr "从已分配的客户ID"
 msgid "An Error Occurred"
 msgstr "发生了一个错误"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "详细错误信息"
 
@@ -9026,7 +9026,7 @@ msgstr "跳过这一步"
 msgid "Done"
 msgstr "完成"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Error（错误）"
 

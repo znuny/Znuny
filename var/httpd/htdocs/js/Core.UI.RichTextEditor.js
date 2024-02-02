@@ -313,7 +313,8 @@ Core.UI.RichTextEditor = (function (TargetNS) {
         }
 
         EditorConfig = {
-            // customConfig:              '', // avoid loading external config files
+            // customConfig:           '', // avoid loading external config files
+            versionCheck:              false,
             disableNativeSpellChecker: false,
             defaultLanguage:           UserLanguage,
             language:                  UserLanguage,

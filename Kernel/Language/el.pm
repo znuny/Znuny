@@ -2900,8 +2900,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Σφάλμα',
         'An Error Occurred' => '',
-        'Error Details' => 'Λεπτομέρειες Σφάλματος',
         'Traceback' => 'Εκτύπωση',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3004,6 +3004,7 @@ sub Data {
         'Ticket fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Λεπτομέρειες Σφάλματος',
         'Expand' => 'Επέκταση',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3079,7 +3080,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Εντάξει',
-        'Error' => 'Σφάλμα',
         'Database setup successful!' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

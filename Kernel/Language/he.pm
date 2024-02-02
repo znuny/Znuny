@@ -2901,8 +2901,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'שגיאה',
         'An Error Occurred' => '',
-        'Error Details' => 'פרטי השגיאה',
         'Traceback' => 'Traceback',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3005,6 +3005,7 @@ sub Data {
         'Ticket fields' => 'שדות הפניה',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'פרטי השגיאה',
         'Expand' => 'הרחב',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3080,7 +3081,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'בוצע',
-        'Error' => 'שגיאה',
         'Database setup successful!' => 'התקנת בסיס הנתונים הצליחה!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
