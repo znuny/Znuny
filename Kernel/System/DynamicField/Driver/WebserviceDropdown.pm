@@ -765,4 +765,10 @@ sub StatsSearchFieldParameterBuild {
     return Kernel::System::DynamicField::Driver::BaseSelect::StatsSearchFieldParameterBuild( $Self, %Param );
 }
 
+sub FieldValueValidate {
+    my ( $Self, %Param ) = @_;
+
+    return 1;
+}
+
 1;

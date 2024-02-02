@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.997266441550088;
+    $Self->{Completeness}        = 0.997266881028939;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8072,6 +8072,7 @@ sub Data {
             'Definiert die standardmäßige nächste Priorität des Tickets nach dieser Aktion in der "Notiz übergeben"-Aktion im Agenten-Interface.',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             'Zeigt den Ticket-Titel in der "Notiz übergeben"-Aktion im Agenten-Interface an.',
+        'Loader module registration for the public interface.' => 'Lade-Modulregistrierung für das öffentliche Interface.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',
@@ -9164,7 +9165,7 @@ Ihr Helpdesk-Team
         'Send a unit test file' => 'Unit-Test-Datei versenden',
         'Send new outgoing mail from this ticket' => 'Neue ausgehende E-Mail aus diesem Ticket heraus senden',
         'Send notifications to users.' => 'Benachrichtigungen an Agenten verschicken.',
-        'Sent "%s" notification to "%s" via "%s".' => 'Benachrichtigung "%s" versandt and "%s" via "%s".',
+        'Sent "%s" notification to "%s" via "%s".' => 'Benachrichtigung "%s" versandt an "%s" via "%s".',
         'Sent auto follow-up to "%s".' => 'Automatische Rückfrage versandt an "%s".',
         'Sent auto reject to "%s".' => 'Automatische Ablehnung versandt an "%s".',
         'Sent auto reply to "%s".' => 'Automatische Antwort versandt an "%s".',

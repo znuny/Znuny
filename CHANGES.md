@@ -1,3 +1,17 @@
+# 6.5.7 2024-??-??
+ - 2024-02-01 Added ACL checks to ticket process toolbar entry.
+
+# 6.5.6 2024-01-31
+ - 2024-01-25 Fixed migration of mention notification.
+ - 2024-01-19 Fixed slow regular expression in postmaster attachment detection.
+ - 2024-01-18 Exchanged CKEditor 4.22.1 source version with minified version to improve browser loading times. [#533](https://github.com/znuny/Znuny/issues/533)
+ - 2024-01-11 Fixed appointment notifications not being sent if crypting/signing options were configured.
+ - 2024-01-10 Fixed setting default value for time units when using dropdown fields. [#464](https://github.com/znuny/Znuny/issues/464)
+ - 2024-01-08 Updated AdminSystemFiles: Added additional file check.
+ - 2024-01-08 Fixed rich text editor's field height problems by disabling CKEditor's autogrow plugin. Thanks to Paweł Bogusławski (@pboguslawski). [#526](https://github.com/znuny/Znuny/pull/526)
+ - 2023-12-22 Deactivated CKE 4 plugin embedsemantic because it showed the content of a link instead of just the link.
+ - 2023-10-24 Kernel::System::MailQueue::Send now increases number of attempts before sending an email. This prevents the attempts not being increased if the process dies while trying to send an email.
+
 # 6.5.5 2023-12-13
  - 2023-12-11 Increased size of user_id column in table customer_user_customer.
  - 2023-12-07 Customer detail search cache for dynamic field values will now be cleared if a customer will be added or updated.
@@ -13,6 +27,7 @@
  - 2023-10-26 Added pagination for ArticlePages on AgentTicketZoom.
  - 2023-10-25 Fixed error handling in invoker Ticket::Generic.
  - 2023-10-23 Fixed used email address to decrypt S/MIME messages in Kernel::System::PostMaster::Filter::Decrypt.
+ - 2023-10-16 Added "ValueKey" to output of link data for dynamic fields, so it's possible to use both the displayed value of a dropdown ("Value") and the stored key ("ValueKey") in a dynamic field link.
  - 2023-10-10 Updated CKEditor to version 4.22.1.
  - 2023-09-29 Added optional caching to web service requests of dynamic field types WebserviceDropdown and WebserviceMultiselect.
  - 2023-09-22 Fixed some errors in the customer interface being shown with the agent interface's header navigation. Thanks for reporting/hints to Tim Püttmanns, maxence.

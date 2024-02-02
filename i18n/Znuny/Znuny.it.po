@@ -835,15 +835,15 @@ msgstr "Opzioni dei dati dell’utenza cliente attuale"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
 msgid "Ticket owner options"
-msgstr "Operazioni proprietario ticket"
+msgstr "Dati del proprietario del ticket"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
 msgid "Ticket responsible options"
-msgstr "Operazione responsabile ticket"
+msgstr "Dati del responsabile del ticket"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
 msgid "Options of the current user who requested this action"
-msgstr "Opzioni dell'utente corrente che ha richiesto questa azione"
+msgstr "Dati dell'utente corrente che ha richiesto questa azione"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
 msgid "Options of the ticket data"
@@ -7187,7 +7187,7 @@ msgstr "Ticket osservati da me"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
 msgid "My responsibilities"
-msgstr "Mie responsabilità"
+msgstr "Ticket di mia responsabilità"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
 msgid "Tickets in My Queues"
@@ -7519,7 +7519,7 @@ msgstr "Cambia priorità di %s%s%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Change Responsible of %s%s%s"
-msgstr "Responsabile del cambiamento di %s%s%s"
+msgstr "Cambia il responsabile di %s%s%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "All fields marked with an asterisk (*) are mandatory."
@@ -12299,7 +12299,7 @@ msgstr "Vista della coda"
 
 #. Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
 msgid "My Responsible Tickets"
-msgstr "Miei ticket di cui sono il responsabile"
+msgstr "Ticket di cui sono il responsabile"
 
 #. Perl Module: Kernel/Modules/AgentTicketSearch.pm
 msgid "last-search"
@@ -25770,5 +25770,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 

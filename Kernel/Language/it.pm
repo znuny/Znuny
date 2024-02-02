@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.621160958353433;
+    $Self->{Completeness}        = 0.621061093247588;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2537,7 +2537,7 @@ sub Data {
         'My locked tickets' => 'Ticket bloccati da me',
         'My Owned Tickets' => '',
         'My watched tickets' => 'Ticket osservati da me',
-        'My responsibilities' => 'Mie responsabilità',
+        'My responsibilities' => 'Ticket di mia responsabilità',
         'Tickets in My Queues' => 'Ticket nelle mie code',
         'Tickets in My Services' => 'Ticket nei miei servizi',
         'Service Time' => 'Tempo di servizio',
@@ -2672,7 +2672,7 @@ sub Data {
         'Add Note to %s%s%s' => 'Aggiungi note a %s%s%s',
         'Set Pending Time for %s%s%s' => 'Imposta tempo di attesa per %s%s%s',
         'Change Priority of %s%s%s' => 'Cambia priorità di %s%s%s',
-        'Change Responsible of %s%s%s' => 'Responsabile del cambiamento di %s%s%s',
+        'Change Responsible of %s%s%s' => 'Cambia il responsabile di %s%s%s',
         'All fields marked with an asterisk (*) are mandatory.' => 'Tutti i campi marcati con un asterisco (*) sono obbligatori.',
         'The ticket has been locked' => 'Il ticket è stato bloccato',
         'Undo & close' => 'Annulla e chiudi',
@@ -3299,7 +3299,7 @@ sub Data {
         'To get the name of the ticket\'s customer user (if given).' => 'Per ottenere il nome dell’utenza cliente del ticket (se fornito).',
         'To get the article attribute' => 'Usa l\'attributo dell\'articolo',
         'Options of the current customer user data' => 'Opzioni dei dati dell’utenza cliente attuale',
-        'Ticket owner options' => 'Operazioni proprietario ticket',
+        'Ticket owner options' => 'Dati del proprietario del ticket',
         'Options of the ticket data' => 'Opzioni dei dati del ticket',
         'Options of ticket dynamic fields internal key values' => 'Opzioni per i valori dei campi dinamici a livello di ticket',
         'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
@@ -3337,8 +3337,8 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
         'Tag Reference' => 'Riferimento tag',
         'You can use the following tags' => 'Puoi usare i seguenti tag',
-        'Ticket responsible options' => 'Operazione responsabile ticket',
-        'Options of the current user who requested this action' => 'Opzioni dell\'utente corrente che ha richiesto questa azione',
+        'Ticket responsible options' => 'Dati del responsabile del ticket',
+        'Options of the current user who requested this action' => 'Dati dell\'utente corrente che ha richiesto questa azione',
         'Config options' => 'Opzioni di configurazione',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
@@ -4479,7 +4479,7 @@ sub Data {
         'QueueView' => 'Vista della coda',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
-        'My Responsible Tickets' => 'Miei ticket di cui sono il responsabile',
+        'My Responsible Tickets' => 'Ticket di cui sono il responsabile',
 
         # Perl Module: Kernel/Modules/AgentTicketSearch.pm
         'last-search' => 'Ultima ricerca',
@@ -8085,6 +8085,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'non valido-temporaneamente',
