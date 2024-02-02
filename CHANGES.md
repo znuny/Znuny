@@ -1,4 +1,6 @@
 # 7.0.16 2024-??-??
+ - 2024-02-02 Prevent error message 'MissingTicketID' of ArticleList in inbound phone call screen. Thanks to Jannis Kleinrensing (@JannisKleinrensing), maxence. [PR#346](https://github.com/znuny/Znuny/pull/346)
+ - 2024-02-02 Add html comment end tag into template file. Thanks to @kolbma. [PR#528](https://github.com/znuny/Znuny/pull/528)
  - 2024-01-24 Fixed layout of error message in customer interface.
 
 # 7.0.15 2024-01-31
