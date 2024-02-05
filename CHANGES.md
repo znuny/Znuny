@@ -1,4 +1,5 @@
 # 7.0.16 2024-??-??
+ - 2024-02-05 AdminOAuth2TokenManagement: Added filter for (in)valid entries.
  - 2024-02-02 Removed session data from support bundle generator.
  - 2024-02-02 Prevent error message 'MissingTicketID' of ArticleList in inbound phone call screen. Thanks to Jannis Kleinrensing (@JannisKleinrensing), maxence. [PR#346](https://github.com/znuny/Znuny/pull/346)
  - 2024-02-02 Add html comment end tag into template file. Thanks to @kolbma. [PR#528](https://github.com/znuny/Znuny/pull/528)
