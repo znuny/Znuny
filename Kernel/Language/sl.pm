@@ -2899,8 +2899,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Napaka',
         'An Error Occurred' => '',
-        'Error Details' => 'Podrobnosti o napaki',
         'Traceback' => 'Slijeđevina',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3003,6 +3003,7 @@ sub Data {
         'Ticket fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Podrobnosti o napaki',
         'Expand' => 'Razširi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3078,7 +3079,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Končano',
-        'Error' => 'Napaka',
         'Database setup successful!' => 'Baza podatkov uspešno nameščena',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

@@ -2896,8 +2896,8 @@ bin/znuny.Daemon.pl status\').',
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Error',
         'An Error Occurred' => 'Terjadi kesalahan',
-        'Error Details' => 'Rincian eror',
         'Traceback' => 'Melacak kembali',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3000,6 +3000,7 @@ bin/znuny.Daemon.pl status\').',
         'Ticket fields' => 'Dasar tiket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Rincian eror',
         'Expand' => 'Perluas',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3075,7 +3076,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Selesai',
-        'Error' => 'Error',
         'Database setup successful!' => 'Berhasil menyediakan database!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

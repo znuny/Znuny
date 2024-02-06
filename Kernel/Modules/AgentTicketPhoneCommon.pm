@@ -870,6 +870,7 @@ sub Run {
                 else {
                     # Use customer data as From, if possible.
                     my @MetaArticles = $ArticleObject->ArticleList(
+                        TicketID   => $Self->{TicketID},
                         SenderType => 'customer',
                         OnlyLast   => 1,
                     );

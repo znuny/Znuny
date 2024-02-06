@@ -2900,8 +2900,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'خطا',
         'An Error Occurred' => 'خطا',
-        'Error Details' => 'جزئیات خطا',
         'Traceback' => 'بازبینی',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3004,6 +3004,7 @@ sub Data {
         'Ticket fields' => 'زمینه های درخواست',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'جزئیات خطا',
         'Expand' => 'گسترش',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3079,7 +3080,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'انجام شد',
-        'Error' => 'خطا',
         'Database setup successful!' => 'راه اندازی پایگاه داده موفق!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

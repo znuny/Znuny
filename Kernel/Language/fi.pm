@@ -2897,8 +2897,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Virhe',
         'An Error Occurred' => '',
-        'Error Details' => 'Virheen tarkemmat tiedot',
         'Traceback' => 'Tiedot',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3001,6 +3001,7 @@ sub Data {
         'Ticket fields' => 'Tiketin kentät',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Virheen tarkemmat tiedot',
         'Expand' => 'Laajenna',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3076,7 +3077,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Valmis',
-        'Error' => 'Virhe',
         'Database setup successful!' => 'Tietokanta asennettu onnistuneesti!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

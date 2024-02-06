@@ -2895,8 +2895,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Viga',
         'An Error Occurred' => '',
-        'Error Details' => 'Vea üksikasjad',
         'Traceback' => 'Traceback',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2999,6 +2999,7 @@ sub Data {
         'Ticket fields' => 'pileti väljad',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Vea üksikasjad',
         'Expand' => 'Laienda',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3074,7 +3075,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Tehtud',
-        'Error' => 'Viga',
         'Database setup successful!' => 'Andmebaasi paigaldus õnnestus!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

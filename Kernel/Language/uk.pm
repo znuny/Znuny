@@ -2895,8 +2895,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Помилка',
         'An Error Occurred' => 'Виникла Помилка',
-        'Error Details' => 'Деталі помилки',
         'Traceback' => 'Відстеження',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2999,6 +2999,7 @@ sub Data {
         'Ticket fields' => 'Поля квитка',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Деталі помилки',
         'Expand' => 'Розгорнути',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3074,7 +3075,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Готово',
-        'Error' => 'Помилка',
         'Database setup successful!' => 'Базу даних успішно налаштовано!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

@@ -40,6 +40,7 @@ The following persons contributed to Znuny:
 * IB Development Team <dev@ib.pl>
 * Igor Djuric <igor.djuric@otrs.com>
 * Jan Steinweg <jan.steinweg@otrs.com>
+* JannisKleinrensing <71767611+JannisKleinrensing@users.noreply.github.com>
 * Jaroslav Balaz <jaroslav.balaz@otrs.com>
 * Jens Bothe <jens.bothe@otrs.com>
 * Jens Pfeifer <jp@znuny.com>
@@ -126,6 +127,7 @@ The following persons contributed to Znuny:
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
 * akmet <akmet@users.noreply.github.com>
 * anonymous <unknown@anonymous>
+* arlecchino <kolbma@users.noreply.github.com>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * djurici <igor.djuric@muehlbauer.de>
 * forwwward <hello@forwwward.studio>

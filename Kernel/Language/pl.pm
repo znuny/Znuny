@@ -2899,8 +2899,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Błąd',
         'An Error Occurred' => 'Wystąpił błąd',
-        'Error Details' => 'Szczegóły błędu',
         'Traceback' => 'Śledź wstecz',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -3003,6 +3003,7 @@ sub Data {
         'Ticket fields' => 'Pola zgłoszenia',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Szczegóły błędu',
         'Expand' => 'Rozwiń',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3078,7 +3079,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Wykonane',
-        'Error' => 'Błąd',
         'Database setup successful!' => 'Konfiguracja bazy danych powiodła się!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
