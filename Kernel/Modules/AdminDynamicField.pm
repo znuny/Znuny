@@ -288,10 +288,8 @@ sub _DynamicFieldsListShow {
     my @DynamicFields = @{$Param{DynamicFields}};
     my $SearchLink;
     if ($Self->{Subaction} eq 'Search' || $Param{Search} ne '') {
-        @DynamicFields = $Self->_SearchDynamicField(
-            DynamicFields => $Param{DynamicFields}, 
-            Search => $Param{Search},
-        );
+        my @DynamicFieldList = @{$Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet()};
+        @DynamicFields =  map { $_->{ID} } grep { $_->{Name} =~ /\Q$Param{Search}\E/i } @DynamicFieldList; 
         $SearchLink = "Search=$Param{Search};";
     }
 
@@ -447,21 +445,6 @@ sub _DynamicFieldOrderReset {
     return $LayoutObject->Redirect(
         OP => "Action=AdminDynamicField",
     );
-}
-
-sub _SearchDynamicField {
-    my ( $Self, %Param ) = @_;
-    my @DynamicFields;
-    for my $DynamicFieldID ( @{ $Param{DynamicFields} } ) {
-        my $DynamicFieldData = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldGet(
-            ID => $DynamicFieldID,
-        ); 
-
-        if ($DynamicFieldData->{Name} =~ /\Q$Param{Search}\E/i){
-            push(@DynamicFields, $DynamicFieldID)
-        }
-    }
-    return @DynamicFields;
 }
 
 1;
