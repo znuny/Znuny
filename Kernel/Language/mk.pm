@@ -1544,9 +1544,11 @@ sub Data {
         'Date' => 'Датум',
         'List of Files' => 'Листа од Датотеки',
         'Permission' => 'Дозвола',
+        'Size' => 'Големина',
+        'Problem' => 'Проблем',
+        'OK' => 'OK',
         'Download file from package!' => 'Преземи документ од пакет!',
         'Required' => 'Потребно',
-        'Size' => 'Големина',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -2892,8 +2894,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Грешка',
         'An Error Occurred' => '',
-        'Error Details' => '',
         'Traceback' => 'Следи',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2932,6 +2934,7 @@ sub Data {
         'Request New Password' => '',
         'Your User Name' => 'Вашето Корисничко Име',
         'A new password will be sent to your email address.' => '',
+        'Back to login' => '',
         'Create Account' => '',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => '',
@@ -2995,6 +2998,7 @@ sub Data {
         'Ticket fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => '',
         'Expand' => 'Прошири',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3070,7 +3074,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Завршено',
-        'Error' => 'Грешка',
         'Database setup successful!' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3140,7 +3143,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => '',
-        'Back to login' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3853,7 +3855,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5330,10 +5331,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Конкурентни Корисници',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Проблем',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7849,6 +7846,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'невалиден-привремено',

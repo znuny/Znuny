@@ -8534,7 +8534,7 @@ msgstr "Из назначенных Customer ID"
 msgid "An Error Occurred"
 msgstr "Произошла ошибка"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "Подробности об ошибке"
 
@@ -9026,7 +9026,7 @@ msgstr "Пропустить этот шаг"
 msgid "Done"
 msgstr "Готово"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Ошибка"
 
@@ -9214,7 +9214,7 @@ msgstr "Удалить связи"
 msgid "Lost your password?"
 msgstr "Забыли свой пароль?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Вернуться к странице входа в систему"
 
@@ -11166,7 +11166,7 @@ msgstr "Отсутствует файл %s в локальной системе!
 msgid "Can't read %s!"
 msgstr "Не возможно прочитать %s!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "Файлы ОК"
 
@@ -14714,11 +14714,11 @@ msgstr "Подробности о конкурирующих ползовате�
 msgid "Concurrent Users"
 msgstr "Конкурентая лицензия"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "О.К."
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "Проблема"
 
@@ -24314,5 +24314,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 

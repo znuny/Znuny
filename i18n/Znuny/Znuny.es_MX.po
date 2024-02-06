@@ -8534,7 +8534,7 @@ msgstr "De los ID de Cliente asignados"
 msgid "An Error Occurred"
 msgstr "Ha ocurrido un error"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "Detalles del error"
 
@@ -9026,7 +9026,7 @@ msgstr "Omitir este paso"
 msgid "Done"
 msgstr "Hecho"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Error"
 
@@ -9214,7 +9214,7 @@ msgstr "Eliminar enlaces"
 msgid "Lost your password?"
 msgstr "¿Perdió su contraseña?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Regresar al inicio de sesión"
 
@@ -11166,7 +11166,7 @@ msgstr "¡No hay tal archivo %s en el sistema de los archivos locales!"
 msgid "Can't read %s!"
 msgstr "¡No se puede leer %s!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "El archivo está bien"
 
@@ -14714,11 +14714,11 @@ msgstr "Detalles de Usuarios Concurrentes"
 msgid "Concurrent Users"
 msgstr "Usuarios Concurrentes"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "Aceptar"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "Problema"
 
@@ -24314,5 +24314,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 

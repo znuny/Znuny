@@ -8534,7 +8534,7 @@ msgstr "Aus allen zugewiesenen Kundennummern"
 msgid "An Error Occurred"
 msgstr "Ein Fehler ist aufgetreten"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "Fehlerdetails"
 
@@ -9026,7 +9026,7 @@ msgstr "Diesen Schritt überspringen"
 msgid "Done"
 msgstr "Fertig"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Fehler"
 
@@ -9214,7 +9214,7 @@ msgstr "Verknüpfungen löschen"
 msgid "Lost your password?"
 msgstr "Haben Sie Ihr Passwort vergessen?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "Zurück zur Anmeldung"
 
@@ -11166,7 +11166,7 @@ msgstr "Datei %s existiert nicht im Dateisystem!"
 msgid "Can't read %s!"
 msgstr "Kann %s nicht lesen!"
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr "Datei ist OK"
 
@@ -14714,11 +14714,11 @@ msgstr "Details der gleichzeitigen Benutzer"
 msgid "Concurrent Users"
 msgstr "Gleichzeitige Benutzer"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr "OK"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr "Problem"
 
@@ -23549,7 +23549,7 @@ msgstr "Benachrichtigungen an Agenten verschicken."
 
 #. SysConfig
 msgid "Sent \"%s\" notification to \"%s\" via \"%s\"."
-msgstr "Benachrichtigung \"%s\" versandt and \"%s\" via \"%s\"."
+msgstr "Benachrichtigung \"%s\" versandt an \"%s\" via \"%s\"."
 
 #. SysConfig
 msgid "Sent auto follow-up to \"%s\"."
@@ -24214,6 +24214,10 @@ msgstr "umgekehrt"
 #. SysConfig
 msgid "stats"
 msgstr "stats"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
+msgstr "Lade-Modulregistrierung für das öffentliche Interface."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Show Valid"

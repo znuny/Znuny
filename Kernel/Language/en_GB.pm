@@ -1547,9 +1547,11 @@ sub Data {
         'Date' => 'Date',
         'List of Files' => 'List of FIles',
         'Permission' => 'Permission',
+        'Size' => 'Size',
+        'Problem' => 'Problem',
+        'OK' => 'OK',
         'Download file from package!' => 'Download file from package!',
         'Required' => 'Required',
-        'Size' => 'Size',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -2895,8 +2897,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Error',
         'An Error Occurred' => 'An Error Occurred',
-        'Error Details' => 'Error Details',
         'Traceback' => 'Traceback',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2935,6 +2937,7 @@ sub Data {
         'Request New Password' => 'Request New Password',
         'Your User Name' => 'Your User Name',
         'A new password will be sent to your email address.' => 'A new password will be sent to your email address.',
+        'Back to login' => 'Back to login',
         'Create Account' => 'Create Account',
         'Please fill out this form to receive login credentials.' => 'Please fill out this form to receive login credentials.',
         'How we should address you' => 'How we should address you',
@@ -2998,6 +3001,7 @@ sub Data {
         'Ticket fields' => 'Ticket fields',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Error Details',
         'Expand' => 'Expand',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3073,7 +3077,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Done',
-        'Error' => 'Error',
         'Database setup successful!' => 'Database setup successful!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3143,7 +3146,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Lost your password?',
-        'Back to login' => 'Back to login',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Scale preview content',
@@ -3856,7 +3858,6 @@ sub Data {
         'No such file %s in package!' => 'No such file %s in package!',
         'No such file %s in local file system!' => 'No such file %s in local file system!',
         'Can\'t read %s!' => 'Can\'t read %s!',
-        'File is OK' => '',
         'Package has locally modified files.' => 'Package has locally modified files.',
         'Not Started' => '',
         'Updated' => '',
@@ -5333,10 +5334,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'Concurrent Users Details',
         'Concurrent Users' => 'Concurrent Users',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Problem',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7852,6 +7849,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'invalid-temporarily',

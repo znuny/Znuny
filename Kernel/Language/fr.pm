@@ -1553,9 +1553,11 @@ sub Data {
         'Date' => 'Date',
         'List of Files' => 'Liste de fichiers',
         'Permission' => 'Droits',
+        'Size' => 'Taille',
+        'Problem' => 'Problème',
+        'OK' => 'OK',
         'Download file from package!' => 'Télécharger le fichier depuis le paquet !',
         'Required' => 'Obligatoire',
-        'Size' => 'Taille',
         'Primary Key' => 'Clef primaire',
         'Auto Increment' => 'Incrément automatique',
         'SQL' => 'SQL',
@@ -2901,8 +2903,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Erreur',
         'An Error Occurred' => 'Une erreur est survenue',
-        'Error Details' => 'Détails de l\'erreur',
         'Traceback' => 'Trace du retour d\'erreur',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2941,6 +2943,7 @@ sub Data {
         'Request New Password' => 'Demander un nouveau mot de passe',
         'Your User Name' => 'Votre nom',
         'A new password will be sent to your email address.' => 'Un nouveau mot de passe sera envoyé à votre adresse e-mail',
+        'Back to login' => 'Retour à la page de connexion',
         'Create Account' => 'Créer un compte',
         'Please fill out this form to receive login credentials.' => 'Veuillez remplir ce formulaire pour recevoir vos identifiants de connexion',
         'How we should address you' => 'Comment devons-nous nous adresser à vous',
@@ -3004,6 +3007,7 @@ sub Data {
         'Ticket fields' => 'Champs du ticket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Détails de l\'erreur',
         'Expand' => 'Etendre',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3079,7 +3083,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Fait',
-        'Error' => 'Erreur',
         'Database setup successful!' => 'Mise en place Base de données réussie!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3149,7 +3152,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Mot de passe oublié ?',
-        'Back to login' => 'Retour à la page de connexion',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3862,7 +3864,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5339,10 +5340,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'Détail des utilisateurs concurrents',
         'Concurrent Users' => 'Utilisateurs concurrents',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Problème',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => 'Le paramètre %s n\'existe pas!',
@@ -7858,6 +7855,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'temporairement invalidé',

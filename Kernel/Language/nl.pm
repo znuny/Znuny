@@ -1550,9 +1550,11 @@ sub Data {
         'Date' => 'Datum',
         'List of Files' => 'Overzicht van bestanden',
         'Permission' => 'Permissie',
+        'Size' => 'Grootte',
+        'Problem' => 'Probleem',
+        'OK' => 'OK',
         'Download file from package!' => 'Download bestand van pakket.',
         'Required' => 'Verplicht',
-        'Size' => 'Grootte',
         'Primary Key' => 'Primaire Sleutel',
         'Auto Increment' => 'Automatisch ophogen',
         'SQL' => 'SQL statement',
@@ -2898,8 +2900,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Fout',
         'An Error Occurred' => '',
-        'Error Details' => 'Error gegevens',
         'Traceback' => 'Traceback',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2938,6 +2940,7 @@ sub Data {
         'Request New Password' => 'Vraag nieuw wachtwoord aan',
         'Your User Name' => 'Uw gebruikersnaam',
         'A new password will be sent to your email address.' => 'Een nieuw wachtwoord wordt naar uw e-mailadres verzonden.',
+        'Back to login' => 'Terug naar inlogscherm',
         'Create Account' => 'Maak account',
         'Please fill out this form to receive login credentials.' => 'Vul dit formulier in om een gebruikersnaam aan te maken.',
         'How we should address you' => 'Hoe moeten we u adresseren?',
@@ -3001,6 +3004,7 @@ sub Data {
         'Ticket fields' => 'Ticket-velden',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Error gegevens',
         'Expand' => 'Klap uit',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3076,7 +3080,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Klaar',
-        'Error' => 'Fout',
         'Database setup successful!' => 'Database-installatie afgerond.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3146,7 +3149,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Wachtwoord vergeten?',
-        'Back to login' => 'Terug naar inlogscherm',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3859,7 +3861,6 @@ sub Data {
         'No such file %s in package!' => 'Geen bestand %s in pakket!',
         'No such file %s in local file system!' => 'Geen bestand %s in bestandssysteem!',
         'Can\'t read %s!' => 'Kan %s niet lezen!',
-        'File is OK' => '',
         'Package has locally modified files.' => 'Pakket heeft lokaal bewerkte bestanden.',
         'Not Started' => '',
         'Updated' => 'Bijgewerkt',
@@ -5336,10 +5337,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Gelijktijdige gebruikers',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Probleem',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7855,6 +7852,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tijdelijk ongeldig',

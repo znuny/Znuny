@@ -1547,9 +1547,11 @@ sub Data {
         'Date' => '日期',
         'List of Files' => '文件清單',
         'Permission' => '權限',
+        'Size' => '大小',
+        'Problem' => '',
+        'OK' => '',
         'Download file from package!' => '從軟件包中下載這個文件',
         'Required' => '必需的',
-        'Size' => '大小',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -2896,8 +2898,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => '錯誤',
         'An Error Occurred' => '',
-        'Error Details' => '詳細錯誤信息',
         'Traceback' => '追溯',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2936,6 +2938,7 @@ sub Data {
         'Request New Password' => '請求新密碼',
         'Your User Name' => '您的用戶名',
         'A new password will be sent to your email address.' => '新密碼將會發送到您的郵箱中',
+        'Back to login' => '重新登錄',
         'Create Account' => '創建帳戶',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => '稱謂',
@@ -2999,6 +3002,7 @@ sub Data {
         'Ticket fields' => '工單字段',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => '詳細錯誤信息',
         'Expand' => '展開',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3074,7 +3078,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '確認',
-        'Error' => '錯誤',
         'Database setup successful!' => '數據庫設置成功！',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3144,7 +3147,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => '忘記密碼?',
-        'Back to login' => '重新登錄',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3857,7 +3859,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5334,10 +5335,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => '並發用戶數',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => '',
-        'Problem' => '',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7853,6 +7850,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '暫時無效',

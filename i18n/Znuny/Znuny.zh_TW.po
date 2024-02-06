@@ -8535,7 +8535,7 @@ msgstr ""
 msgid "An Error Occurred"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Error Details"
 msgstr "詳細錯誤信息"
 
@@ -9027,7 +9027,7 @@ msgstr "跳過這一步"
 msgid "Done"
 msgstr "確認"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "錯誤"
 
@@ -9215,7 +9215,7 @@ msgstr "刪除鏈接"
 msgid "Lost your password?"
 msgstr "忘記密碼?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
 msgstr "重新登錄"
 
@@ -11167,7 +11167,7 @@ msgstr ""
 msgid "Can't read %s!"
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "File is OK"
 msgstr ""
 
@@ -14715,11 +14715,11 @@ msgstr ""
 msgid "Concurrent Users"
 msgstr "並發用戶數"
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "OK"
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Problem"
 msgstr ""
 
@@ -24305,5 +24305,9 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
 msgstr ""
 

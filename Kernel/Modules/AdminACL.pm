@@ -30,7 +30,8 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     $Self->{Subaction} = $ParamObject->GetParam( Param => 'Subaction' ) || '';
 
@@ -50,12 +51,11 @@ sub Run {
         $Param{NotifyData} = [
             {
                 Info => $SynchronizeMessage,
+                Link => $LayoutObject->{Baselink} . 'Action=AdminACL;Subaction=ACLDeploy'
             },
         ];
         $SynchronizedMessageVisible = 1;
     }
-
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # ------------------------------------------------------------ #
     # ACLImport
