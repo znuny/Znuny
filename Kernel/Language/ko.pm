@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.873078829945464;
+    $Self->{Completeness}        = 0.872913568005288;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1544,9 +1544,11 @@ sub Data {
         'Date' => '날짜',
         'List of Files' => '파일 목록',
         'Permission' => '허가',
+        'Size' => '크기',
+        'Problem' => '문제',
+        'OK' => '승인',
         'Download file from package!' => '패키지에서 파일을 다운로드 하십시오!',
         'Required' => '필수',
-        'Size' => '크기',
         'Primary Key' => '기본 키',
         'Auto Increment' => '자동 증가',
         'SQL' => 'SQL',
@@ -2892,8 +2894,8 @@ sub Data {
         'From assigned Customer IDs' => '할당 된 고객 ID로부터',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => '오류',
         'An Error Occurred' => '에러 발생됨',
-        'Error Details' => '오류 정보',
         'Traceback' => '역 추적',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2932,6 +2934,7 @@ sub Data {
         'Request New Password' => '새 비밀번호 요청',
         'Your User Name' => '사용자 이름',
         'A new password will be sent to your email address.' => '새 비밀번호가 이메일 주소로 전송됩니다.',
+        'Back to login' => '로그인으로 돌아 가기',
         'Create Account' => '계정 만들기',
         'Please fill out this form to receive login credentials.' => '로그인 자격 증명을 받으려면 이 양식을 작성하십시오.',
         'How we should address you' => '우리가 너를 어떻게 대해야하는지',
@@ -2995,6 +2998,7 @@ sub Data {
         'Ticket fields' => '타켓 필드',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => '오류 정보',
         'Expand' => '넓히다',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3070,7 +3074,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '끝난',
-        'Error' => '오류',
         'Database setup successful!' => '데이터베이스 설정이 설공적으로 완료되었습니다!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3140,7 +3143,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => '비밀번호를 잊어 버렸습니까?',
-        'Back to login' => '로그인으로 돌아 가기',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '미리보기 콘텐츠 크기 조정',
@@ -3853,7 +3855,6 @@ sub Data {
         'No such file %s in package!' => '패키지에 %s 파일이 없습니다!',
         'No such file %s in local file system!' => '로컬 파일 시스템에 %s 파일이 없습니다!',
         'Can\'t read %s!' => '%s를 읽을 수 없습니다!',
-        'File is OK' => '파일은 정상입니다.',
         'Package has locally modified files.' => '패키지에 로컬로 수정된 파일이 있습니다.',
         'Not Started' => '시작되지 않음',
         'Updated' => '업데이트 됨',
@@ -5330,10 +5331,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '동시 사용자 세부 정보',
         'Concurrent Users' => '동시 사용자',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => '승인',
-        'Problem' => '문제',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '%s 설정이 없습니다!',
@@ -7849,6 +7846,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',

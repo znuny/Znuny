@@ -1545,9 +1545,11 @@ sub Data {
         'Date' => 'Kuupäev',
         'List of Files' => '',
         'Permission' => 'Õigus',
+        'Size' => 'Suurus',
+        'Problem' => '',
+        'OK' => 'OK',
         'Download file from package!' => 'Lae alla fail paketist!',
         'Required' => 'Vajalik',
-        'Size' => 'Suurus',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -2893,8 +2895,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Viga',
         'An Error Occurred' => '',
-        'Error Details' => 'Vea üksikasjad',
         'Traceback' => 'Traceback',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2933,6 +2935,7 @@ sub Data {
         'Request New Password' => 'Küsi uus parool',
         'Your User Name' => 'Kasutajanimi',
         'A new password will be sent to your email address.' => 'Uus salasõna saadetakse Teie e-posti aadressile,',
+        'Back to login' => 'Tagasi sisselogimisele',
         'Create Account' => 'Loo konto',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => '',
@@ -2996,6 +2999,7 @@ sub Data {
         'Ticket fields' => 'pileti väljad',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Vea üksikasjad',
         'Expand' => 'Laienda',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3071,7 +3075,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Tehtud',
-        'Error' => 'Viga',
         'Database setup successful!' => 'Andmebaasi paigaldus õnnestus!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3141,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Kaotasid parooli?',
-        'Back to login' => 'Tagasi sisselogimisele',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3854,7 +3856,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5331,10 +5332,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => '',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7850,6 +7847,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ajutiselt kehtetu',

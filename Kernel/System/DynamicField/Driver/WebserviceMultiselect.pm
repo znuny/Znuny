@@ -431,10 +431,6 @@ sub ReadableValueRender {
 
     my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
 
-    $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
-
-    my $PossibleValues = $Param{DynamicFieldConfig}->{Config}->{PossibleValues};
-
     # set Value and Title variables
     my $Value = '';
     my $Title = '';
@@ -957,6 +953,12 @@ sub StatsSearchFieldParameterBuild {
     my ( $Self, %Param ) = @_;
 
     return Kernel::System::DynamicField::Driver::BaseSelect::StatsSearchFieldParameterBuild( $Self, %Param );
+}
+
+sub FieldValueValidate {
+    my ( $Self, %Param ) = @_;
+
+    return 1;
 }
 
 1;

@@ -439,7 +439,6 @@ sub Run {
                                         Version => $Version,
                                         %{$Hash},
                                         Message => $DeployInfo{File}->{ $Hash->{Location} },
-                                        Icon    => 'IconNotReady',
                                     },
                                 );
                             }
@@ -450,8 +449,6 @@ sub Run {
                                         Name    => $Name,
                                         Version => $Version,
                                         %{$Hash},
-                                        Message => $DeployInfo{File}->{ $Hash->{Location} },
-                                        Icon    => 'IconNotReadyGrey',
                                     },
                                 );
                             }
@@ -463,8 +460,6 @@ sub Run {
                                     Name    => $Name,
                                     Version => $Version,
                                     %{$Hash},
-                                    Message => Translatable('File is OK'),
-                                    Icon    => 'IconReady',
                                 },
                             );
                         }

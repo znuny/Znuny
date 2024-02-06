@@ -18,6 +18,7 @@
                 <input type="hidden" name="Expand" id="Expand" value="" />
                 <input type="hidden" name="FormID" value="[% Data.FormID | html %]" />
                 <fieldset class="TableLike card-item-wrapper">
+                    [% IF Data.RenderTeamData %]
                     <div class="card-item col-wide-33 col-desktop-100 col-tablet-100">
                         <h2 class="card-title">[% Translate("Team Data") | html %]</h2>
                         <div class="active-inner-cols">
@@ -38,6 +39,7 @@
 [% RenderBlockEnd("Queue") %]
                         </div>
                     </div>
+                    [% END %]
                     [% IF Config('Ticket::Service') && TicketFrontendConfig.Service %]
                     <div class="card-item col-wide-33 col-desktop-100 col-tablet-100">
                         <h2 class="card-title">[% Translate("Services") | html %]</h2>
