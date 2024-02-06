@@ -1547,9 +1547,11 @@ sub Data {
         'Date' => 'दिनांक',
         'List of Files' => 'फाइलों की सूची',
         'Permission' => 'अनुमति',
+        'Size' => 'आकार',
+        'Problem' => '',
+        'OK' => '',
         'Download file from package!' => 'संकुल से फ़ाइल डाउनलोड करें ',
         'Required' => 'आवश्यकता',
-        'Size' => 'आकार',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -2895,8 +2897,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'त्रुटि',
         'An Error Occurred' => '',
-        'Error Details' => 'त्रुटि का विवरण',
         'Traceback' => 'ट्रेसबैक',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2935,6 +2937,7 @@ sub Data {
         'Request New Password' => 'नए कूटशब्द के लिए अनुरोध करे',
         'Your User Name' => 'आपका उपयोगकर्ता नाम',
         'A new password will be sent to your email address.' => 'एक नया कूटशब्द आपके ईमेल पते पर भेजा जाएगा।',
+        'Back to login' => 'प्रवेश करने के लिए वापस जाएँ',
         'Create Account' => 'खाता बनाएँ',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'हम आपको कैसे संबोधित करें',
@@ -2998,6 +3001,7 @@ sub Data {
         'Ticket fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'त्रुटि का विवरण',
         'Expand' => 'विस्तार',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3073,7 +3077,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'किया',
-        'Error' => 'त्रुटि',
         'Database setup successful!' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3143,7 +3146,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => ' आपने कूटशब्द खो दिया?',
-        'Back to login' => 'प्रवेश करने के लिए वापस जाएँ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3856,7 +3858,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -5333,10 +5334,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => '',
-        'Problem' => '',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7852,6 +7849,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'अवैध-अस्थायी रूप',

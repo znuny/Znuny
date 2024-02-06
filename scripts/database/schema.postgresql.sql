@@ -1815,7 +1815,7 @@ CREATE TABLE customer_company (
 --  create table customer_user_customer
 -- ----------------------------------------------------------
 CREATE TABLE customer_user_customer (
-    user_id VARCHAR (100) NOT NULL,
+    user_id VARCHAR (200) NOT NULL,
     customer_id VARCHAR (150) NOT NULL,
     create_time timestamp(0) NOT NULL,
     create_by INTEGER NOT NULL,
@@ -1984,7 +1984,7 @@ CREATE TABLE notification_event_message (
     id serial NOT NULL,
     notification_id INTEGER NOT NULL,
     subject VARCHAR (200) NOT NULL,
-    text VARCHAR (4000) NOT NULL,
+    text VARCHAR NOT NULL,
     content_type VARCHAR (250) NOT NULL,
     language VARCHAR (60) NOT NULL,
     PRIMARY KEY(id),

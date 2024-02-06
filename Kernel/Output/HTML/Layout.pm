@@ -1608,9 +1608,21 @@ sub ToolbarModules {
 
         # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
         # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
-        if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearch' ) {
-            $Modules{$Key}->{SearchInArchive}
+        if (
+            $ConfigObject->Get('Ticket::ArchiveSystem')
+            && $Modules{$Key}->{Block} eq 'ToolBarSearch'
+            && $Modules{$Key}->{Name} eq 'Fulltext'
+            )
+        {
+            my $SearchInArchive
                 = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
+
+            $Self->Block(
+                Name => 'SearchInArchive',
+                Data => {
+                    SearchInArchive => $SearchInArchive || 'AllTickets',
+                },
+            );
         }
 
         if (

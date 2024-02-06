@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.619897537597091;
+    $Self->{Completeness}        = 0.619732275656916;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1550,9 +1550,11 @@ sub Data {
         'Date' => 'تاریخ',
         'List of Files' => 'فهرست فایل‌ها',
         'Permission' => 'حقوق دسترسی',
+        'Size' => 'اندازه',
+        'Problem' => 'مساله است.',
+        'OK' => 'خوب',
         'Download file from package!' => 'دریافت فایل از بسته!',
         'Required' => 'الزامی',
-        'Size' => 'اندازه',
         'Primary Key' => 'کلید اولیه',
         'Auto Increment' => 'افزایش خودکار',
         'SQL' => 'SQL',
@@ -2898,8 +2900,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'خطا',
         'An Error Occurred' => 'خطا',
-        'Error Details' => 'جزئیات خطا',
         'Traceback' => 'بازبینی',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2938,6 +2940,7 @@ sub Data {
         'Request New Password' => 'درخواست رمز عبور جدید',
         'Your User Name' => 'نام کاربری شما',
         'A new password will be sent to your email address.' => 'رمز عبور جدید برای آدرس ایمیل شما ارسال خواهد شد.',
+        'Back to login' => 'بازگشت به صفحه ورود',
         'Create Account' => 'ثبت نام',
         'Please fill out this form to receive login credentials.' => 'لطفا این فرم را  برای دریافت اعتبار ورود پر کنید . ',
         'How we should address you' => 'ما چگونه شما را خطاب کنیم',
@@ -3001,6 +3004,7 @@ sub Data {
         'Ticket fields' => 'زمینه های درخواست',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'جزئیات خطا',
         'Expand' => 'گسترش',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3076,7 +3080,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'انجام شد',
-        'Error' => 'خطا',
         'Database setup successful!' => 'راه اندازی پایگاه داده موفق!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3146,7 +3149,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'رمز عبور خود را فراموش کرده اید؟',
-        'Back to login' => 'بازگشت به صفحه ورود',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'محتوای پیش نمایش مقیاس',
@@ -3859,7 +3861,6 @@ sub Data {
         'No such file %s in package!' => 'بدون چنین فایل %s در بسته!',
         'No such file %s in local file system!' => 'بدون چنین فایلی  %s در فایل سیستم محلی!',
         'Can\'t read %s!' => 'نمی تواند بخواند %s !',
-        'File is OK' => 'فایل خوب است',
         'Package has locally modified files.' => 'بسته بندی به صورت محلی فایل های اصلاح شده.',
         'Not Started' => '',
         'Updated' => '',
@@ -5336,10 +5337,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => 'کاربران همزمان اطلاعات',
         'Concurrent Users' => 'کاربران موازی',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'خوب',
-        'Problem' => 'مساله است.',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -7855,6 +7852,7 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'موقتا غیر معتبر',

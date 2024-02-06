@@ -640,6 +640,58 @@ sub Send {
     $Param{CommunicationLogObject} = $Self->_GetCommunicationLog( %Param, );
     $Param{CommunicationID}        = $Param{CommunicationLogObject}->CommunicationIDGet();
 
+    # Increase number of attempts and delete item if limit has been reached.
+    $Param{Attempts} //= 0;
+    $Param{Attempts}++;
+    my %UpdateData = (
+        Attempts => $Param{Attempts},
+    );
+    my $ItemUpdateOK = $Self->Update(
+        Filters => {
+            ID => $Param{ID},
+        },
+        Data => \%UpdateData,
+    );
+
+    if ( !$ItemUpdateOK ) {
+        my $LogMessage = sprintf(
+            'Error while updating mail queue element "%s" with "%s"!',
+            $Param{ID},
+            join( ', ', map { $_ . '=' . $UpdateData{$_} } sort keys %UpdateData ),
+        );
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => $LogMessage,
+        );
+
+        $Param{CommunicationLogObject}->ObjectLog(
+            ObjectLogType => 'Message',
+            Priority      => 'Error',
+            Key           => 'Kernel::System::MailQueue',
+            Value         => $LogMessage,
+        );
+
+        return;
+    }
+
+    my $Config      = $Kernel::OM->Get('Kernel::Config')->Get('MailQueue');
+    my $MaxAttempts = $Config->{ItemMaxAttempts};
+    if ( $Param{Attempts} > $MaxAttempts ) {
+
+        # This will lead to _SendError executing the code for reaching limit of attempts
+        # and hence deleting the item from the queue.
+        $Self->_SendError(
+            Item       => \%Param,
+            SendResult => {},
+        );
+
+        return {
+            Status  => 'Failed',
+            Message => 'Sending has failed.',
+        };
+    }
+
     # If DueTime is bigger than current time, skip, it is not time to run yet.
     my $CurrentSysDTObject = $Kernel::OM->Create('Kernel::System::DateTime');
     my $DueTime            = $Param{DueTime};
@@ -694,7 +746,7 @@ sub Send {
 
     return {
         Status  => 'Failed',
-        Message => 'Sending has Failed.'
+        Message => 'Sending has failed.'
     };
 }
 
@@ -829,7 +881,7 @@ sub _SendError {
     my $SendResult = $Param{SendResult};
 
     my $Item            = $Param{Item};
-    my $ItemAttempts    = $Item->{Attempts} + 1;
+    my $ItemAttempts    = $Item->{Attempts};
     my $ItemMaxAttempts = $Config->{ItemMaxAttempts};
 
     $Item->{CommunicationLogObject}->ObjectLog(
@@ -910,10 +962,10 @@ sub _SendError {
     my $NextAttempt = $CurrentSysDTObject->Clone();
     $NextAttempt->Add( Minutes => $ItemAttempts * $MinutesToIncrement );
 
-    # Update mail-queue with attempt and smtp code and message.
+    # Update mail-queue with smtp code and message.
+    # Note: Attempts already have been incremented in Send().
     my %UpdateData = (
-        Attempts => $ItemAttempts,
-        DueTime  => $NextAttempt->ToString(),
+        DueTime => $NextAttempt->ToString(),
     );
 
     if ( $SendResult->{SMTPError} ) {

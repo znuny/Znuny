@@ -52,6 +52,7 @@ sub Run {
         'Znuny4OTRS-NoteToLinkedTicket',
         'Znuny4OTRS-UserMaxArticlesPerPage',
         'Znuny-DynamicFieldWebserviceTicketIDPayload',
+        'Znuny-RichTextEditorLinkFix',
     );
 
     PACKAGENAME:

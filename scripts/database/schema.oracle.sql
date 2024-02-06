@@ -3093,7 +3093,7 @@ ALTER TABLE customer_company ADD CONSTRAINT PK_customer_company PRIMARY KEY (cus
 --  create table customer_user_customer
 -- ----------------------------------------------------------
 CREATE TABLE customer_user_customer (
-    user_id VARCHAR2 (100) NOT NULL,
+    user_id VARCHAR2 (200) NOT NULL,
     customer_id VARCHAR2 (150) NOT NULL,
     create_time DATE NOT NULL,
     create_by NUMBER (12, 0) NOT NULL,
@@ -3318,7 +3318,7 @@ CREATE TABLE notification_event_message (
     id NUMBER (12, 0) NOT NULL,
     notification_id NUMBER (12, 0) NOT NULL,
     subject VARCHAR2 (200) NOT NULL,
-    text VARCHAR2 (4000) NOT NULL,
+    text CLOB NOT NULL,
     content_type VARCHAR2 (250) NOT NULL,
     language VARCHAR2 (60) NOT NULL,
     CONSTRAINT notification_event_message_nb4 UNIQUE (notification_id, language)

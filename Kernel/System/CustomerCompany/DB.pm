@@ -988,6 +988,9 @@ sub _CustomerCompanyCacheClear {
     $Self->{CacheObject}->CleanUp(
         Type => $Self->{CacheType} . '_CustomerCompanyList',
     );
+    $Self->{CacheObject}->CleanUp(
+        Type => $Self->{CacheType} . '_CustomerSearchDetailDynamicFields',
+    );
 
     for my $Function (qw(CustomerCompanyList)) {
         for my $Valid ( 0 .. 1 ) {

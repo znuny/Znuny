@@ -213,14 +213,10 @@ sub Run {
             if ($Update) {
 
                 # If UserLogin is changed or the user is set to invalid,
-                #   remove asynchronously all sessions from that user.
+                #   remove all sessions of that user.
                 if ( $OldUserLogin ne $GetParam{UserLogin} || !grep { $_ eq $GetParam{ValidID} } @ValidIDList ) {
-                    $Self->AsyncCall(
-                        ObjectName     => 'Kernel::System::AuthSession',
-                        FunctionName   => 'RemoveSessionByUser',
-                        FunctionParams => {
-                            UserLogin => $OldUserLogin,
-                        },
+                    $Kernel::OM->Get('Kernel::System::AuthSession')->RemoveSessionByUser(
+                        UserLogin => $OldUserLogin,
                     );
                 }
 
