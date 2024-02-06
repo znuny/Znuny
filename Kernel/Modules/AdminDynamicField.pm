@@ -288,9 +288,8 @@ sub _DynamicFieldsListShow {
     my @DynamicFields = @{$Param{DynamicFields}};
     my $SearchLink;
     if ($Self->{Subaction} eq 'Search' || $Param{Search} ne '') {
-        my @DynamicFieldList = @{$Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet()};
-        @DynamicFields =  map { $_->{ID} } grep { $_->{Name} =~ /\Q$Param{Search}\E/i } @DynamicFieldList; 
-        $SearchLink = "Search=$Param{Search};";
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        @DynamicFields = grep { $DynamicFieldObject->DynamicFieldGet( ID => $_ )->{Name} =~ /\Q$Param{Search}\E/i } @{ $Param{DynamicFields} };
     }
 
     # limit amount of hits dependent on situation
