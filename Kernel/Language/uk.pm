@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.455627009646302;
+    $Self->{Completeness}        = 0.455787781350482;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -127,7 +127,7 @@ sub Data {
         'Export calendar' => 'Експортувати календар',
         'Download calendar' => 'Завантажити календар',
         'Copy public calendar URL' => 'Копіювати URL публічного календаря',
-        'Calendar' => 'Каландар',
+        'Calendar' => 'Календар',
         'Calendar name' => 'Назва календаря',
         'Calendar with same name already exists.' => 'Календар з такою назвою вже існує.',
         'Color' => 'Колір',
@@ -9077,7 +9077,7 @@ Thanks for your help!
         'Parent' => 'Батьківський',
         'ParentChild' => '',
         'Pending time' => 'час, що залишився',
-        'People' => '',
+        'People' => 'Агенти',
         'Persian' => '',
         'Phone Call Inbound' => 'Вхідний телефонний дзвінок',
         'Phone Call Outbound' => 'Вихідний телефонний дзвінок',
