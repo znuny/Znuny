@@ -1,4 +1,5 @@
 # 6.5.7 2024-??-??
+ - 2024-02-07 Fixed js error in process management while editing a transition within a process if it is not linked to two activities.
  - 2024-02-06 Fixed handling of (un)selecting checkboxes on permissions table for AdminCustomerUserGroup.
  - 2024-02-02 Removed session data from support bundle generator.
  - 2024-02-02 Add html comment end tag into template file. Thanks to @kolbma. [PR#530](https://github.com/znuny/Znuny/pull/530)

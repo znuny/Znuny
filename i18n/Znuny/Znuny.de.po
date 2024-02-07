@@ -25848,3 +25848,7 @@ msgstr "TTL (in Sekunden) für Cache der Request-Ergebnisse. Leerlassen oder auf
 msgid "Loader module registration for the public interface."
 msgstr "Lade-Modulregistrierung für das öffentliche Interface."
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+msgid "You can not edit a transition before it's connected to two activities."
+msgstr "Sie können einen Übergang nicht bearbeiten, bevor er mit zwei Aktivitäten verbunden ist."
+

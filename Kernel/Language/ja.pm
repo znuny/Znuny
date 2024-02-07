@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.702572347266881;
+    $Self->{Completeness}        = 0.702459411670149;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1847,6 +1847,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Do you really want to delete this Activity?' => 'このアクティビティを本当に削除しますか？',
         'Do you really want to delete this Activity Dialog?' => 'このアクティビティダイアログを本当に削除しますか？',
         'Do you really want to delete this Transition?' => 'この遷移を本当に削除しますか？',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'この遷移動作を本当に削除しますか？',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '本当にこのアクティビティをキャンバス上から削除してもよろしいですか？保存せずにこの画面から移動する場合を除いてこの操作の取り消しはできません。',
@@ -9486,6 +9488,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

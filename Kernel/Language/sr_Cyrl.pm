@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.915594855305466;
+    $Self->{Completeness}        = 0.915447677222312;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1841,6 +1841,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Да ли стварно желите да обришете ову активност?',
         'Do you really want to delete this Activity Dialog?' => 'Да ли стварно желите да обришете овај дијалог активности?',
         'Do you really want to delete this Transition?' => 'Да ли стварно желите да обришете ову транзицију?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Да ли стварно желите да обришете ову транзициону активност?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Да ли стварно желите да уклоните ову активност са површине? Ово једино може да се опозове уколико напустите екран, а да претходно не сачувате измене.',
@@ -9471,6 +9473,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

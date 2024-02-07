@@ -25779,3 +25779,7 @@ msgstr ""
 msgid "Loader module registration for the public interface."
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+msgid "You can not edit a transition before it's connected to two activities."
+msgstr ""
+
