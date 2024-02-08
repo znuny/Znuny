@@ -1239,7 +1239,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                                     FieldConfigElement.Config = {};
                                 }
 
-                                CKEDITOR.instances['Body'].updateElement();
+                                if (typeof CKEDITOR !== 'undefined') {
+                                    CKEDITOR.instances['Body'].updateElement();
+                                }
                                 FieldConfigElement.Config.Subject = $('#Subject').val();
                                 FieldConfigElement.Config.Body = $('#Body').val();
 
