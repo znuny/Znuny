@@ -1,4 +1,5 @@
 # 7.0.16 2024-??-??
+ - 2024-02-08 Process management: Fixed js error while editing activity dialog.
  - 2024-02-06 Fixed handling of (un)selecting checkboxes on permissions table for AdminCustomerUserGroup.
  - 2024-02-05 AdminOAuth2TokenManagement: Added filter for (in)valid entries.
  - 2024-02-02 Removed session data from support bundle generator.
