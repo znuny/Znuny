@@ -1,4 +1,5 @@
 # 7.0.16 2024-??-??
+ - 2024-02-09 Added ACL checks to ticket process toolbar entry.
  - 2024-02-08 Pressing 'Ctrl+Enter' in a textarea or 'Enter' in an input field now submits the form instead of saving a draft.
  - 2024-02-08 Sector Nord AG: Pressing 'Enter' inside of `<input>` triggers wrong event. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#498](https://github.com/znuny/Znuny/pull/498)
  - 2024-02-08 Process management: Fixed js error while editing activity dialog.
