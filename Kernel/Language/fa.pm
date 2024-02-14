@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.619732275656916;
+    $Self->{Completeness}        = 0.619322873658134;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6505,6 +6505,13 @@ sub Data {
             'تعریف می کند اگر قبل از مرتب کردن بر اساس اولویت باید در نظر خدمات انجام  شود.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'تعریف می کند که به طور پیش فرض مرتب کردن برای همه خدمات در نظر خدمات، پس از مرتب کردن اولویت است.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'محاسبه زمان را فعال می‌کند.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'مجموعه واحد زمان مورد نظر (به عنوان مثال واحد کار، ساعت، دقیقه).',

@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.901503883655594;
+    $Self->{Completeness}        = 0.900908340214699;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6506,6 +6506,13 @@ sub Data {
             '定义服务视图是否按优先级预先排序。',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '定义在工单服务视图中在优先级排序后默认的排序顺序。',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => '激活工时管理。',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             '设置首选的时间单位（如 工作日、小时、分钟）。',

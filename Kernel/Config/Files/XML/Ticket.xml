@@ -2000,6 +2000,34 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketService###VisualAlarms" Required="0" Valid="1">
+        <Description Translatable="1">Enable highlighting services based on ticket age.</Description>
+        <Navigation>Frontend::Agent::View::TicketService</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketService###HighlightAge1" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the age in minutes (first level) for highlighting services that contain untouched tickets.</Description>
+        <Navigation>Frontend::Agent::View::TicketService</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,7}$">1440</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketService###HighlightAge2" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the age in minutes (second level) for highlighting services that contain untouched tickets.</Description>
+        <Navigation>Frontend::Agent::View::TicketService</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,7}$">2880</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketService###Blink" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Activates a blinking mechanism of the service that contains the oldest ticket.</Description>
+        <Navigation>Frontend::Agent::View::TicketService</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AccountTime" Required="1" Valid="1">
         <Description Translatable="1">Activates time accounting.</Description>
         <Navigation>Frontend::Agent</Navigation>

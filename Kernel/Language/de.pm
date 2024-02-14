@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991571641051066;
+    $Self->{Completeness}        = 0.991577208918249;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6500,6 +6500,13 @@ sub Data {
             'Bestimmt, ob in der Service-Ansicht eine Vorsortierung anhand der Priorität vorgenommen werden soll.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Definiert die standardmäßig eingestellten Sortierkriterien für alle in der Service-Ansicht angezeigten Services, nachdem nach Priorität sortiert wurde.',
+        'Enable highlighting services based on ticket age.' => 'Hervorheben von Services nach Ticketalter aktivieren.',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            'Definiert das Ticket Alter in Minuten bevor die Services mit unbearbeiteten Tickets hervorgehoben werden (erstes Level).',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            'Definiert das Ticket Alter in Minuten bevor die Services mit unbearbeiteten Tickets hervorgehoben werden (zweites Level).',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            'Aktiviert einen Blinkmechanismus des Services, welcher das älteste Ticket enthält.',
         'Activates time accounting.' => 'Aktiviert die Zeitabrechnung.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Legt die bevorzugten Zeiteinheiten fest (z.B. Arbeitseinheiten, Stunden, Minuten).',

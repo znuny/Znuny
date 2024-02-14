@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.872913568005288;
+    $Self->{Completeness}        = 0.87233691164327;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6499,6 +6499,13 @@ sub Data {
             '우선 순위 별 사전 정렬을 서비스 보기에서 수행해야하는지 여부를 정의합니다.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '우선 순위 정렬 후 서비스 보기의 모든 서비스에 대한 기본 정렬 순서를 정의합니다.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => '시간 계산을 활성화 합니다.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             '선호 시간 단위 (예 : 작업 단위, 시간, 분)를 설정합니다.',

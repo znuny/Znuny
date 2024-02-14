@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.46504709965295;
+    $Self->{Completeness}        = 0.464739884393064;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6500,6 +6500,13 @@ sub Data {
             'Define se unha pre-ordenación por prioridades debe ser feita na vista de servizo.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Define a orde de ordenación por defecto para todos os servizos na vista de servizo, despois de ordenación prioritaria.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Activa contador de tempo.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Establece as unidades de tempo preferidas (ex. horas traballo, horas, minutos).',

@@ -685,11 +685,11 @@ sub _MaskQueueView {
             if ( $Queue{QueueID} == $QueueIDOfMaxAge && $Self->{Blink} ) {
                 $QueueStrg .= 'Oldest';
             }
-            elsif ( $Queue{MaxAge} >= $Self->{HighlightAge2} ) {
-                $QueueStrg .= 'OlderLevel2';
+            if ( $Queue{MaxAge} >= $Self->{HighlightAge2} ) {
+                $QueueStrg .= ' OlderLevel2';
             }
             elsif ( $Queue{MaxAge} >= $Self->{HighlightAge1} ) {
-                $QueueStrg .= 'OlderLevel1';
+                $QueueStrg .= ' OlderLevel1';
             }
         }
 
