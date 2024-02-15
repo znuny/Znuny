@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.18298926507019;
+    $Self->{Completeness}        = 0.183815028901734;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3704,8 +3704,8 @@ sub Data {
         '3 minutes' => '3 minuty',
         '4 minutes' => '4 minuty',
         '5 minutes' => '5 minút',
-        '10 minutes' => ' 10 minút',
-        '15 minutes' => ' 15 minút',
+        '10 minutes' => '10 minút',
+        '15 minutes' => '15 minút',
         '30 minutes' => '30 minút',
         '1 hour' => '1 hodina',
         '2 hours' => '2 hodiny',
@@ -8349,7 +8349,7 @@ sub Data {
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
             '',
         'The following files were already uploaded and have not been uploaded again: %s' =>
-            '',
+            'Nasledovné súbory už boli nahrané a nebudú nahrané znova: %s',
         'No space left for the following files: %s' => '',
         'Available space %s of %s.' => '',
         'Upload information' => '',
@@ -8394,13 +8394,13 @@ Thanks for your help!
         '0 - Disabled' => '',
         '1 - Available' => '',
         '1 - Enabled' => '',
-        '10 Minutes' => '',
+        '10 Minutes' => '10 minút',
         '100 (Expert)' => '',
-        '15 Minutes' => '',
-        '2 - Enabled and required' => '',
+        '15 Minutes' => '15 minút',
+        '2 - Enabled and required' => '2 - povolený a povinný',
         '2 - Enabled and shown by default' => '',
         '2 - Enabled by default' => '',
-        '2 Minutes' => '',
+        '2 Minutes' => '2 minúty',
         '200 (Advanced)' => '',
         '30 Minutes' => '',
         '300 (Beginner)' => '',
