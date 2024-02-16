@@ -124,7 +124,7 @@ sub FormIDAddFile {
 sub FormIDRemoveFile {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed (qw(FormID FileID)) {
+    for my $Needed (qw(FormID Filename)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -139,16 +139,23 @@ sub FormIDRemoveFile {
     # finish if files have been already removed by other process
     return if !@Index;
 
-    my $ID = $Param{FileID} - 1;
-    $Param{Filename} = $Index[$ID]->{Filename};
+    # Find and remove file with given filename; return success if
+    # file not found (to avoid error if user double clicks delete icon).
+    FILE:
+    for my $File (@Index) {
+        if ( $File->{Filename} eq $Param{Filename} ) {
 
-    return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
-        SQL => '
-            DELETE FROM web_upload_cache
-            WHERE form_id = ?
-                AND filename = ?',
-        Bind => [ \$Param{FormID}, \$Param{Filename} ],
-    );
+            return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
+                SQL => '
+                    DELETE FROM web_upload_cache
+                    WHERE form_id = ?
+                        AND filename = ?',
+                Bind => [ \$Param{FormID}, \$Param{Filename} ],
+            );
+
+            last FILE;
+        }
+    }
 
     return 1;
 }
@@ -156,7 +163,6 @@ sub FormIDRemoveFile {
 sub FormIDGetAllFilesData {
     my ( $Self, %Param ) = @_;
 
-    my $Counter = 0;
     my @Data;
     for my $Needed (qw(FormID)) {
         if ( !$Param{$Needed} ) {
@@ -182,7 +188,6 @@ sub FormIDGetAllFilesData {
     );
 
     while ( my @Row = $DBObject->FetchrowArray() ) {
-        $Counter++;
 
         # encode attachment if it's a postgresql backend!!!
         if ( !$DBObject->GetDatabaseFunction('DirectBlob') ) {
@@ -199,7 +204,6 @@ sub FormIDGetAllFilesData {
                 Filename    => $Row[0],
                 Filesize    => $Row[2],
                 Disposition => $Row[5],
-                FileID      => $Counter,
             }
         );
     }
@@ -210,7 +214,6 @@ sub FormIDGetAllFilesData {
 sub FormIDGetAllFilesMeta {
     my ( $Self, %Param ) = @_;
 
-    my $Counter = 0;
     my @Data;
     for my $Needed (qw(FormID)) {
         if ( !$Param{$Needed} ) {
@@ -235,7 +238,6 @@ sub FormIDGetAllFilesMeta {
     );
 
     while ( my @Row = $DBObject->FetchrowArray() ) {
-        $Counter++;
 
         # add the info
         push(
@@ -246,7 +248,6 @@ sub FormIDGetAllFilesMeta {
                 Filename    => $Row[0],
                 Filesize    => $Row[2],
                 Disposition => $Row[4],
-                FileID      => $Counter,
             }
         );
     }

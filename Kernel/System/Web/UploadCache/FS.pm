@@ -177,7 +177,7 @@ sub FormIDAddFile {
 sub FormIDRemoveFile {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed (qw(FormID FileID)) {
+    for my $Needed (qw(FormID Filename)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -194,38 +194,44 @@ sub FormIDRemoveFile {
     # finish if files have been already removed by other process
     return if !@Index;
 
-    my $ID   = $Param{FileID} - 1;
-    my %File = %{ $Index[$ID] };
+    # Find and remove file with given filename; return success if
+    # file not found (to avoid error if user double clicks delete icon).
+    FILE:
+    for my $File (@Index) {
+        if ( $File->{Filename} eq $Param{Filename} ) {
+            my $Directory = $Self->{TempDir} . '/' . $Param{FormID};
 
-    my $Directory = $Self->{TempDir} . '/' . $Param{FormID};
+            if ( !-d $Directory ) {
+                return 1;
+            }
 
-    if ( !-d $Directory ) {
-        return 1;
+            # Get main object.
+            my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+            $MainObject->FileDelete(
+                Directory       => $Directory,
+                Filename        => $File->{Filename},
+                NoFilenameClean => 1,
+            );
+            $MainObject->FileDelete(
+                Directory       => $Directory,
+                Filename        => $File->{Filename} . '.ContentType',
+                NoFilenameClean => 1,
+            );
+            $MainObject->FileDelete(
+                Directory       => $Directory,
+                Filename        => $File->{Filename} . '.ContentID',
+                NoFilenameClean => 1,
+            );
+            $MainObject->FileDelete(
+                Directory       => $Directory,
+                Filename        => $File->{Filename} . '.Disposition',
+                NoFilenameClean => 1,
+            );
+
+            last FILE;
+        }
     }
-
-    # get main object
-    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
-
-    $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}",
-        NoReplace => 1,
-    );
-    $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}.ContentType",
-        NoReplace => 1,
-    );
-    $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}.ContentID",
-        NoReplace => 1,
-    );
-    $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}.Disposition",
-        NoReplace => 1,
-    );
 
     return 1;
 }
@@ -259,8 +265,6 @@ sub FormIDGetAllFilesData {
         Filter    => "*",
     );
 
-    my $Counter = 0;
-
     FILEPATH:
     for my $FilePath (@List) {
 
@@ -269,7 +273,6 @@ sub FormIDGetAllFilesData {
         next FILEPATH if $FilePath =~ /\.ContentID$/;
         next FILEPATH if $FilePath =~ /\.Disposition$/;
 
-        $Counter++;
         my $FileSize = -s $FilePath;
 
         my $Filename = basename($FilePath);
@@ -319,7 +322,6 @@ sub FormIDGetAllFilesData {
                 ContentType => ${$ContentType},
                 Filename    => $Filename,
                 Filesize    => $FileSize,
-                FileID      => $Counter,
                 Disposition => ${$Disposition},
             },
         );
@@ -357,8 +359,6 @@ sub FormIDGetAllFilesMeta {
         Filter    => "*",
     );
 
-    my $Counter = 0;
-
     FILEPATH:
     for my $FilePath (@List) {
 
@@ -367,7 +367,6 @@ sub FormIDGetAllFilesMeta {
         next FILEPATH if $FilePath =~ /\.ContentID$/;
         next FILEPATH if $FilePath =~ /\.Disposition$/;
 
-        $Counter++;
         my $FileSize = -s $FilePath;
 
         my $Filename = basename($FilePath);
@@ -411,7 +410,6 @@ sub FormIDGetAllFilesMeta {
                 ContentType => ${$ContentType},
                 Filename    => $Filename,
                 Filesize    => $FileSize,
-                FileID      => $Counter,
                 Disposition => ${$Disposition},
             },
         );
