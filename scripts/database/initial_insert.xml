@@ -2152,11 +2152,6 @@ Your Znuny Team
     </Insert>
     <Insert Table="notification_event_item">
         <Data Key="notification_id">15</Data>
-        <Data Key="event_key" Type="Quote">TransportEmailTemplate</Data>
-        <Data Key="event_value" Type="Quote">Default</Data>
-    </Insert>
-    <Insert Table="notification_event_item">
-        <Data Key="notification_id">15</Data>
         <Data Key="event_key" Type="Quote">Transports</Data>
         <Data Key="event_value" Type="Quote">Email</Data>
     </Insert>
@@ -2195,11 +2190,6 @@ Your Znuny Team
         <Data Key="notification_id">16</Data>
         <Data Key="event_key" Type="Quote">LanguageID</Data>
         <Data Key="event_value" Type="Quote">en</Data>
-    </Insert>
-    <Insert Table="notification_event_item">
-        <Data Key="notification_id">16</Data>
-        <Data Key="event_key" Type="Quote">TransportEmailTemplate</Data>
-        <Data Key="event_value" Type="Quote">Default</Data>
     </Insert>
     <Insert Table="notification_event_item">
         <Data Key="notification_id">16</Data>
