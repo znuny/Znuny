@@ -1325,7 +1325,7 @@ sub Run {
 
         # only create one Article and time for merging
         # add note
-        if ( $MainTicketID ) {
+        if ($MainTicketID) {
             my $ArticleID;
             if (
                 $GetParam{'Subject'}
