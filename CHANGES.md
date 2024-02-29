@@ -1,4 +1,5 @@
 # 6.5.7 2024-??-??
+ - 2024-02-29 Hide unknown content-type on article attachments.
  - 2024-02-28 Process management: Transition actions TicketCreate, TicketArticleCreate, ArticleSend now skip on invalid attachment IDs.
  - 2024-02-13 Dashboard widget "My last changed tickets": Increased performance of database query.
  - 2024-02-27 Fixed a variable for sha512 in Auth::DB. [#379](https://github.com/znuny/Znuny/issues/379)

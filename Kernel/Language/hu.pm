@@ -2931,7 +2931,6 @@ sub Data {
         'Close this message' => 'Üzenet bezárása',
         'Image' => 'Kép',
         'PDF' => 'PDF',
-        'Unknown' => 'Ismeretlen',
         'View' => 'Nézet',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3516,6 +3515,7 @@ sub Data {
         'Process state' => 'Folyamat állapota',
         'Running' => 'Fut',
         'Finished' => 'Befejezve',
+        'Unknown' => 'Ismeretlen',
         'No package information available.' => 'Nem érhetők el csomaginformációk.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl

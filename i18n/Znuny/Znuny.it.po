@@ -8261,7 +8261,7 @@ msgstr "Immagine"
 msgid "PDF"
 msgstr "PDF"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
 msgid "Unknown"
 msgstr "Sconosciuto"
 

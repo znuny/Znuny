@@ -2931,7 +2931,6 @@ sub Data {
         'Close this message' => 'Zatvori ovu poruku',
         'Image' => 'Slika',
         'PDF' => 'PDF',
-        'Unknown' => 'Nepoznato',
         'View' => 'Pregled',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3516,6 +3515,7 @@ sub Data {
         'Process state' => 'Stanje procesa',
         'Running' => 'U toku',
         'Finished' => 'Završeno',
+        'Unknown' => 'Nepoznato',
         'No package information available.' => 'Nema informacija o paketu.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl

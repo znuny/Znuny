@@ -2925,7 +2925,6 @@ sub Data {
         'Close this message' => '이 메시지를 닫습니다.',
         'Image' => '이미지',
         'PDF' => 'PDF',
-        'Unknown' => '알 수 없는',
         'View' => '전망',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3510,6 +3509,7 @@ sub Data {
         'Process state' => '프로세스 상태',
         'Running' => '달리는',
         'Finished' => '끝마친',
+        'Unknown' => '알 수 없는',
         'No package information available.' => '사용할 수있는 패키지 정보가 없습니다.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl

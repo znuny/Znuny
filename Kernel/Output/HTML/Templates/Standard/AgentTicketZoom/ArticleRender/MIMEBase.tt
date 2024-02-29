@@ -233,12 +233,11 @@ function CheckIFrameHeight(IFrameID) {
                         <h5>[% Attachment.Filename | truncate( Config("Ticket::Frontend::AgentTicketZoom::DisplayedAttachmentFilenameMaxLength") ) | html %]</h5>
                         [% IF Attachment.ContentType.match('image') %]
                             [% Translate("Image") | html %]
+                            &ndash;
                         [% ELSIF Attachment.ContentType == "application/pdf" %]
                             [% Translate("PDF") | html %]
-                        [% ELSE %]
-                            [% Translate("Unknown") | html %]
+                            &ndash;
                         [% END %]
-                        &ndash;
                         [% Attachment.FilesizeRaw | Localize("Filesize") %]
                         <div>
                         [% FOREACH Item IN Attachment.Links %]

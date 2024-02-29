@@ -2928,7 +2928,6 @@ sub Data {
         'Close this message' => 'Funga ujumbe huu',
         'Image' => '',
         'PDF' => 'PDF',
-        'Unknown' => 'Haijulikani',
         'View' => 'Angalia',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3513,6 +3512,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Maliza',
+        'Unknown' => 'Haijulikani',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl

@@ -2927,7 +2927,6 @@ bin/otrs.Daemon.pl status\').',
         'Close this message' => 'Tutup pesan ini',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => 'Tidak diketahui',
         'View' => 'Lihat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3512,6 +3511,7 @@ bin/otrs.Daemon.pl status\').',
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Selesai',
+        'Unknown' => 'Tidak diketahui',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
