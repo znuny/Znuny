@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.87233691164327;
+    $Self->{Completeness}        = 0.8721928665786;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1747,6 +1747,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '이 활동을 정말로 삭제 하시겠습니까?',
         'Do you really want to delete this Activity Dialog?' => '이 활동 대화 상자를 정말로 삭제 하시겠습니까?',
         'Do you really want to delete this Transition?' => '이 전환을 정말로 삭제 하시겠습니까?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '이 전환 액션을 정말로 삭제 하시겠습니까?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '이 활동을 캔버스에서 정말로 제거 하시겠습니까? 저장하지 않고이 화면을 나가면 취소 할 수 있습니다.',
@@ -9233,6 +9235,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

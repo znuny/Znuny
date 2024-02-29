@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.900908340214699;
+    $Self->{Completeness}        = 0.900759577278732;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1753,6 +1753,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Valóban törölni szeretné ezt a tevékenységet?',
         'Do you really want to delete this Activity Dialog?' => 'Valóban törölni szeretné ezt a tevékenység párbeszédet?',
         'Do you really want to delete this Transition?' => 'Valóban törölni szeretné ezt az átmenetet?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Valóban törölni szeretné ezt az átmenet műveletet?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Valóban el szeretné távolítani ezt a tevékenységet a vászonról? Ezt csak akkor lehet változatlanul hagyni, ha mentés nélkül hagyja el ezt a képernyőt.',
@@ -9239,6 +9241,7 @@ Az Ön segélyszolgálat csapata
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

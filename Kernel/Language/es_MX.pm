@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.733938893476466;
+    $Self->{Completeness}        = 0.733817701453104;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1748,6 +1748,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '¿Está Usted seguro de querer eliminar esta Actividad?',
         'Do you really want to delete this Activity Dialog?' => '',
         'Do you really want to delete this Transition?' => '',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '¿Realmente desea eliminar la actividad del canvas? Esto únicamente puede ser deshecho abandonando esta pantalla sin guardar.',
@@ -9234,6 +9236,7 @@ Tu Equipo de Soporte
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

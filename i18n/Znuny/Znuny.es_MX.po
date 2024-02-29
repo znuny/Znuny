@@ -24336,3 +24336,7 @@ msgstr ""
 msgid "Activates a blinking mechanism of the service that contains the oldest ticket."
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+msgid "You can not edit a transition before it's connected to two activities."
+msgstr ""
+

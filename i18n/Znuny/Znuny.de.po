@@ -24335,3 +24335,7 @@ msgstr "Definiert das Ticket Alter in Minuten bevor die Services mit unbearbeite
 msgid "Activates a blinking mechanism of the service that contains the oldest ticket."
 msgstr "Aktiviert einen Blinkmechanismus des Services, welcher das älteste Ticket enthält."
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+msgid "You can not edit a transition before it's connected to two activities."
+msgstr "Sie können einen Übergang nicht bearbeiten, bevor er mit zwei Aktivitäten verbunden ist."
+

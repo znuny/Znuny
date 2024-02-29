@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.438150289017341;
+    $Self->{Completeness}        = 0.438077939233818;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1750,6 +1750,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Je unataka kufuta shughuli hii?',
         'Do you really want to delete this Activity Dialog?' => 'Je unataka kufuta Kidadisi kitendo?',
         'Do you really want to delete this Transition?' => 'Je unataka kufuta mpito huu?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Je unataka kufuta kitendo hiki cha mpito?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Je unataka kutoa kitendo hiki kwenye kanvasi? Hii inaweza kutokufanywa kwa kutoka kwenye skrini hii bila kuhifadhi. ',
@@ -9228,6 +9230,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',
