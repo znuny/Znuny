@@ -2851,7 +2851,6 @@ sub Data {
         'Close this message' => 'このメッセージを閉じる',
         'Image' => '画像',
         'PDF' => 'PDF',
-        'Unknown' => 'アンノウン',
         'View' => 'ビュー',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3429,6 +3428,7 @@ sub Data {
         'Process state' => 'プロセス・ステータス',
         'Running' => '実行中',
         'Finished' => '終了しました',
+        'Unknown' => 'アンノウン',
         'No package information available.' => '利用可能なパッケージ情報はありません。',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl

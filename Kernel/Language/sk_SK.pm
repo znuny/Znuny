@@ -2845,7 +2845,6 @@ sub Data {
         'Close this message' => 'Uzatvoriť túto správu',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => 'Neznámy',
         'View' => 'Zobraziť',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3423,6 +3422,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Ukončený',
+        'Unknown' => 'Neznámy',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl

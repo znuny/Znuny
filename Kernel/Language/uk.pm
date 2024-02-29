@@ -2846,7 +2846,6 @@ sub Data {
         'Close this message' => 'Закрити це повідомлення',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => '',
         'View' => 'Перегляд',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3424,6 +3423,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Закінчено',
+        'Unknown' => '',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl

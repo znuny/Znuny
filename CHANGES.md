@@ -1,4 +1,5 @@
 # 7.0.16 2024-??-??
+ - 2024-02-29 Hide unknown content-type on article attachments.
  - 2024-02-29 Fixed js error in process management while editing a transition within a process if it is not linked to two activities.
  - 2024-02-28 Process management: Transition actions TicketCreate, TicketArticleCreate, ArticleSend now skip on invalid attachment IDs.
  - 2024-02-27 Fixed a variable for sha512 in Auth::DB. [#379](https://github.com/znuny/Znuny/issues/379)

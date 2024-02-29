@@ -2854,7 +2854,6 @@ sub Data {
         'Close this message' => 'Lukk denne meldingen',
         'Image' => '',
         'PDF' => 'PDF',
-        'Unknown' => 'Ukjent',
         'View' => 'Bilde',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3432,6 +3431,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Ferdig',
+        'Unknown' => 'Ukjent',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl

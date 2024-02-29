@@ -2846,7 +2846,6 @@ sub Data {
         'Close this message' => 'Затвори ову поруку',
         'Image' => 'Слика',
         'PDF' => 'PDF',
-        'Unknown' => 'Непознато',
         'View' => 'Преглед',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3424,6 +3423,7 @@ sub Data {
         'Process state' => 'Стање процеса',
         'Running' => 'У току',
         'Finished' => 'Завршено',
+        'Unknown' => 'Непознато',
         'No package information available.' => 'Нема информација о пакету.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl

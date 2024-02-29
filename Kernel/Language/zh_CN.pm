@@ -2852,7 +2852,6 @@ sub Data {
         'Close this message' => '关闭本消息',
         'Image' => '图片',
         'PDF' => 'PDF',
-        'Unknown' => '未知',
         'View' => '查看',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3430,6 +3429,7 @@ sub Data {
         'Process state' => '流程状态',
         'Running' => '正在运行',
         'Finished' => '完成',
+        'Unknown' => '未知',
         'No package information available.' => '没有可用的软件包信息。',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl

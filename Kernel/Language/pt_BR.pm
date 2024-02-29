@@ -2849,7 +2849,6 @@ sub Data {
         'Close this message' => 'Fechar esta mensagem',
         'Image' => 'Imagem',
         'PDF' => 'PDF',
-        'Unknown' => 'Desconhecido',
         'View' => 'Ver',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3427,6 +3426,7 @@ sub Data {
         'Process state' => 'Estado de processo',
         'Running' => 'Executando',
         'Finished' => 'Finalizado',
+        'Unknown' => 'Desconhecido',
         'No package information available.' => 'Nenhuma informação de pacote disponível.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
