@@ -58,12 +58,8 @@ sub Run {
         );
     }
 
-    if ( !IsArrayRefWithData($Mentions) ) {
-        $LayoutObject->Block(
-            Name => "NoMentions",
-            Data => {},
-        );
-    }
+    # Hide widget when empty.
+    return if !IsArrayRefWithData($Mentions);
 
     my $Output = $LayoutObject->Output(
         TemplateFile => 'AgentTicketZoom/MentionsTable',
