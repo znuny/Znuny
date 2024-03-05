@@ -1,4 +1,5 @@
 # 7.0.16 2024-??-??
+ - 2024-03-05 Hide ticket zoom widgets when no data is available to show.
  - 2024-03-04 Hide mentions widget on ticket zoom when no mentions are available.
  - 2024-02-29 Hide unknown content-type on article attachments.
  - 2024-02-29 Fixed js error in process management while editing a transition within a process if it is not linked to two activities.
