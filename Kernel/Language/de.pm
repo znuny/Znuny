@@ -8531,7 +8531,7 @@ sub Data {
         'Not available' => 'Nicht verfügbar',
         'and %s more...' => 'und %s weitere...',
         'Show current selection' => 'Aktuelle Auswahl anzeigen',
-        'Current selection' => 'Aktuelle Auwahl',
+        'Current selection' => 'Aktuelle Auswahl',
         'Clear all' => 'Alles löschen',
         'Filters' => 'Filter',
         'Clear search' => 'Suche löschen',
