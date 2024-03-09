@@ -2,13 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-03-09 18:34+0000\n"
+"Last-Translator: Vu Anh <vuanhsignal@gmail.com>\n"
+"Language-Team: Vietnamese <https://translations.znuny.org/projects/znuny/"
+"znuny/vi/>\n"
+"Language: vi_VN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.0.2\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Actions"
@@ -21244,11 +21247,11 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
 msgid " ...and %s more"
-msgstr ""
+msgstr " ...và %s khác"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
 msgid " ...show less"
-msgstr ""
+msgstr " ...hiển thị ít hơn"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
 msgid "Add new draft"
@@ -21524,10 +21527,22 @@ msgid ""
 "\n"
 " Your Helpdesk Team\n"
 msgstr ""
+"\n"
+"Kính gửi Khách hàng,\n"
+"\n"
+"Thật không may chúng tôi không thể xác định được ID\n"
+"của ticket trong chủ đề của bạn, vì vậy chúng tôi không\n"
+"thể xử lý thư này. \n"
+"\n"
+"Xin hãy tạo một ticket mới trong bảng điều khiển CSKH.\n"
+"\n"
+"Cảm ơn sự giúp đỡ của bạn!\n"
+"\n"
+" Đội ngũ CSKH của bạn\n"
 
 #. SysConfig
 msgid " (work units)"
-msgstr ""
+msgstr " (đơn vị công tác)"
 
 #. SysConfig
 msgid " 2 minutes"
@@ -24328,4 +24343,3 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
 msgid "You can not edit a transition before it's connected to two activities."
 msgstr ""
-
