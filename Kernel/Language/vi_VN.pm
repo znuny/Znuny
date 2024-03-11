@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.147622192866579;
+    $Self->{Completeness}        = 0.148282694848085;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8254,8 +8254,8 @@ sub Data {
         'Do you really want to continue?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
-        ' ...and %s more' => '',
-        ' ...show less' => '',
+        ' ...and %s more' => ' ...và %s khác',
+        ' ...show less' => ' ...hiển thị ít hơn',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
         'Add new draft' => '',
@@ -8384,8 +8384,20 @@ Please create a new ticket via the customer panel.
 Thanks for your help!
 
  Your Helpdesk Team
-' => '',
-        ' (work units)' => '',
+' => '
+Kính gửi Khách hàng,
+
+Thật không may chúng tôi không thể xác định được ID
+của ticket trong chủ đề của bạn, vì vậy chúng tôi không
+thể xử lý thư này. 
+
+Xin hãy tạo một ticket mới trong bảng điều khiển CSKH.
+
+Cảm ơn sự giúp đỡ của bạn!
+
+ Đội ngũ CSKH của bạn
+',
+        ' (work units)' => ' (đơn vị công tác)',
         ' 2 minutes' => '2 phút',
         ' 5 minutes' => '5 phút',
         ' 7 minutes' => '7 phút',
