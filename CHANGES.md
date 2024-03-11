@@ -1,4 +1,5 @@
 # 7.0.16 2024-??-??
+ - 2024-03-11 Split Blink feature from VisualAlarms feature.
  - 2024-03-05 Hide ticket zoom widgets when no data is available to show.
  - 2024-03-04 Hide mentions widget on ticket zoom when no mentions are available.
  - 2024-02-29 Hide unknown content-type on article attachments.

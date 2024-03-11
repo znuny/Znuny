@@ -743,11 +743,11 @@ sub _MaskServiceView {
 
         $ServiceStrg .= ' class="';
 
-        if ( $Config->{VisualAlarms} ) {
-            if ( $Service{ServiceID} != 0 && $Service{ServiceID} == $ServiceIDForOldestTicket ) {
-                if ( $Self->{Blink} ) {
-                    $ServiceStrg .= 'Oldest';
-                }
+        if ( $Service{ServiceID} != 0 && $Service{ServiceID} == $ServiceIDForOldestTicket ) {
+            if ( $Self->{Blink} ) {
+                $ServiceStrg .= 'Oldest ';
+            }
+            if ( $Config->{VisualAlarms} ) {
                 if ( $TicketAgeForOldestTicket >= $Self->{HighlightAge2} ) {
                     $ServiceStrg .= ' OlderLevel2';
                 }
@@ -755,6 +755,8 @@ sub _MaskServiceView {
                     $ServiceStrg .= ' OlderLevel1';
                 }
             }
+        }
+        if ( $Config->{VisualAlarms} ) {
             if (
                 $Service{ServiceID} == $ServiceIDForHighlightAge2
                 && $TicketAgeForHighlightAge2 >= $Self->{HighlightAge2}
