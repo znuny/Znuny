@@ -8389,7 +8389,7 @@ Kính gửi Khách hàng,
 
 Thật không may chúng tôi không thể xác định được ID
 của ticket trong chủ đề của bạn, vì vậy chúng tôi không
-thể xử lý thư này.
+thể xử lý thư này. 
 
 Xin hãy tạo một ticket mới trong bảng điều khiển CSKH.
 
