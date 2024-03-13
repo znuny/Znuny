@@ -1,4 +1,5 @@
 # 6.5.7 2024-??-??
+ - 2024-03-13 Fixed usage of sysconfig setting `Ticket::Frontend::Overview::PreviewArticleSenderTypes`. [#542](https://github.com/znuny/Znuny/issues/542)
  - 2024-03-04 Hide mentions widget on ticket zoom when no mentions are available.
  - 2024-02-29 Hide unknown content-type on article attachments.
  - 2024-02-28 Process management: Transition actions TicketCreate, TicketArticleCreate, ArticleSend now skip on invalid attachment IDs.
