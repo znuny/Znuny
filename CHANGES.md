@@ -1,4 +1,5 @@
 # 7.0.16 2024-??-??
+ - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
  - 2024-03-13 Fixed usage of sysconfig setting `Ticket::Frontend::Overview::PreviewArticleSenderTypes`. [#542](https://github.com/znuny/Znuny/issues/542)
  - 2024-03-11 Split Blink feature from VisualAlarms feature.
  - 2024-03-05 Hide ticket zoom widgets when no data is available to show.
