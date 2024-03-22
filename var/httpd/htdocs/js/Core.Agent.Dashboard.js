@@ -198,6 +198,32 @@ Core.Agent.Dashboard = (function (TargetNS) {
                     InitContainer = Core.Config.Get('InitContainer' + ElementID),
                     ValidationErrors = false;
 
+                // Disallow saving of config if mandatory fields are not present
+                var DataMandatoryJSON = $ClickedElement.closest('form').find('input.ColumnsMandatoryJSON').val(),
+                    AvailableFields = $ClickedElement.closest('form').find('ul.AvailableFields'),
+                    DataMandatory,
+                    MissingColumns = [],
+                    MissingColumnsText;
+
+                if (DataMandatoryJSON) {
+                    DataMandatory = Core.JSON.Parse(DataMandatoryJSON);
+                }
+        
+                $.each(DataMandatory, function(Index, Field) {
+                    if (AvailableFields.find('li[data-fieldname="' + Field.trim() + '"]').length > 0) {
+                        var ColumnTitle = AvailableFields.find('li[data-fieldname="' + Field.trim() + '"]').attr('title');
+                        MissingColumns.push(ColumnTitle);  
+                    }               
+                });
+
+                if (MissingColumns.length > 0) {
+                    MissingColumnsText = MissingColumns.map(function(column) {
+                        return '- ' + column;
+                    }).join('\n');
+                    alert(Core.Language.Translate('This field is required.') + "\n" + MissingColumnsText);
+                    return false;
+                }
+
                 // check for elements to validate
                 $ClickedElement.closest('fieldset').find('.StatsSettingsBox').find('.TimeRelativeUnitView').each(function() {
                     var MaxXaxisAttributes = Core.Config.Get('StatsMaxXaxisAttributes') || 1000,
