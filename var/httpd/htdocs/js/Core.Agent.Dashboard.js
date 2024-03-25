@@ -202,8 +202,7 @@ Core.Agent.Dashboard = (function (TargetNS) {
                 var DataMandatoryJSON = $ClickedElement.closest('form').find('input.ColumnsMandatoryJSON').val(),
                     AvailableFields = $ClickedElement.closest('form').find('ul.AvailableFields'),
                     DataMandatory,
-                    MissingColumns = [],
-                    MissingColumnsText;
+                    MissingColumns = [];
 
                 if (DataMandatoryJSON) {
                     DataMandatory = Core.JSON.Parse(DataMandatoryJSON);
@@ -217,10 +216,10 @@ Core.Agent.Dashboard = (function (TargetNS) {
                 });
 
                 if (MissingColumns.length > 0) {
-                    MissingColumnsText = MissingColumns.map(function(column) {
-                        return '- ' + column;
-                    }).join('\n');
-                    alert(Core.Language.Translate('This field is required.') + "\n" + MissingColumnsText);
+                     Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('This field is required.') + ' ' + MissingColumns.join(', ') + "."
+                    );
                     return false;
                 }
 
