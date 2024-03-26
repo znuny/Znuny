@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.277970583374649;
+    $Self->{Completeness}        = 0.27774108322325;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1747,6 +1747,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Дали сте сигурни дека сакате да ја избришете оваа Активност?',
         'Do you really want to delete this Activity Dialog?' => 'Дали сте сигурни дека сакате да го избришете овој Дијалог на Активности?',
         'Do you really want to delete this Transition?' => 'Дали сте сигурни дека сакате да ја избришете оваа Транзиција?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Дали сте сигурни дека сакате да ја избришете оваа Акција на Транзиција?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Дали сигурно сакате да ја избришете оваа активност од канвасот? Овој процес може да биде прекинат со напуштање на прозорецот без зачувување.',
@@ -2843,7 +2845,6 @@ sub Data {
         'Close this message' => 'Затвори ја оваа порака.',
         'Image' => '',
         'PDF' => 'PDF',
-        'Unknown' => 'Непознат ',
         'View' => 'Преглед',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3421,6 +3422,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Завршено',
+        'Unknown' => 'Непознат ',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6499,6 +6501,13 @@ sub Data {
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => '',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             '',
@@ -9215,6 +9224,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

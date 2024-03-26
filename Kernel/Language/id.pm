@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.608824987605355;
+    $Self->{Completeness}        = 0.608322324966975;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1748,6 +1748,8 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Do you really want to delete this Activity?' => 'Apakah anda ingin menghapus aktivitas?',
         'Do you really want to delete this Activity Dialog?' => 'Apakah anda ingin menghapus aktivitas dialog?',
         'Do you really want to delete this Transition?' => 'Apakah anda ingin menghapus transisi ini?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Apakah anda ingin menghapus aksi transisi ini?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Apakah anda benar-benar ingin menghapus kegiatan ini dari kanvas? Ini hanya bisa dibatalkan dengan meninggalkan layar tanpa menyimpan.',
@@ -2845,7 +2847,6 @@ bin/znuny.Daemon.pl status\').',
         'Close this message' => 'Tutup pesan ini',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => 'Tidak diketahui',
         'View' => 'Lihat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3423,6 +3424,7 @@ bin/znuny.Daemon.pl status\').',
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Selesai',
+        'Unknown' => 'Tidak diketahui',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6501,6 +6503,13 @@ bin/znuny.Daemon.pl status\').',
             'Mendefinisikan jika pra-pemilahan berdasarkan prioritas harus dilakukan dalam tampilan layanan.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Mendefinisikan urutan default untuk semua layanan dalam tampilan layanan, setelah  prioritas.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Mengaktifkan akuntansi waktu.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Mengatur unit waktu prefered (misalnya unit kerja, jam, menit).',
@@ -9229,6 +9238,7 @@ Helpdesk Team Anda
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

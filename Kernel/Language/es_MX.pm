@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.73442406213849;
+    $Self->{Completeness}        = 0.733817701453104;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1748,6 +1748,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '¿Está Usted seguro de querer eliminar esta Actividad?',
         'Do you really want to delete this Activity Dialog?' => '',
         'Do you really want to delete this Transition?' => '',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '¿Realmente desea eliminar la actividad del canvas? Esto únicamente puede ser deshecho abandonando esta pantalla sin guardar.',
@@ -2844,7 +2846,6 @@ sub Data {
         'Close this message' => 'Cerrar este mensaje',
         'Image' => 'Imágen',
         'PDF' => 'PDF',
-        'Unknown' => 'Desconocido',
         'View' => 'Ver',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3422,6 +3423,7 @@ sub Data {
         'Process state' => 'Estado del proceso',
         'Running' => 'Ejecutándose',
         'Finished' => 'Finalizado',
+        'Unknown' => 'Desconocido',
         'No package information available.' => 'No hay información del paquete disponible.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6500,6 +6502,13 @@ sub Data {
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Activa la contatibilidad de tiempo.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Define las unidades de tiempo preferidas (por ejemplo: unidades laborales, horas, minutos).',
@@ -9227,6 +9236,7 @@ Tu Equipo de Soporte
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

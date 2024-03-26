@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.687489671128739;
+    $Self->{Completeness}        = 0.686922060766182;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1753,6 +1753,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'このアクティビティを本当に削除しますか？',
         'Do you really want to delete this Activity Dialog?' => 'このアクティビティダイアログを本当に削除しますか？',
         'Do you really want to delete this Transition?' => 'この遷移を本当に削除しますか？',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'この遷移動作を本当に削除しますか？',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '本当にこのアクティビティをキャンバス上から削除してもよろしいですか？保存せずにこの画面から移動する場合を除いてこの操作の取り消しはできません。',
@@ -2849,7 +2851,6 @@ sub Data {
         'Close this message' => 'このメッセージを閉じる',
         'Image' => '画像',
         'PDF' => 'PDF',
-        'Unknown' => 'アンノウン',
         'View' => 'ビュー',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3427,6 +3428,7 @@ sub Data {
         'Process state' => 'プロセス・ステータス',
         'Running' => '実行中',
         'Finished' => '終了しました',
+        'Unknown' => 'アンノウン',
         'No package information available.' => '利用可能なパッケージ情報はありません。',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6506,6 +6508,13 @@ sub Data {
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'タイム・アカウンティングを有効にします。',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             '優先される時間の単位（例：作業時間、時間、分）を設定します。',
@@ -9241,6 +9250,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

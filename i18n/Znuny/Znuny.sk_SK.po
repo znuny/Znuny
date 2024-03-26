@@ -8422,7 +8422,7 @@ msgstr ""
 msgid "PDF"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
 msgid "Unknown"
 msgstr "Neznámy"
 
@@ -10732,11 +10732,11 @@ msgstr "5 minút"
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceErrorHandlingRequestRetry.pm
 msgid "10 minutes"
-msgstr " 10 minút"
+msgstr "10 minút"
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceErrorHandlingRequestRetry.pm
 msgid "15 minutes"
-msgstr " 15 minút"
+msgstr "15 minút"
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceErrorHandlingRequestRetry.pm
 msgid "30 minutes"
@@ -21460,7 +21460,7 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The following files were already uploaded and have not been uploaded again: %s"
-msgstr ""
+msgstr "Nasledovné súbory už boli nahrané a nebudú nahrané znova: %s"
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "No space left for the following files: %s"
@@ -21575,7 +21575,7 @@ msgstr ""
 
 #. SysConfig
 msgid "10 Minutes"
-msgstr ""
+msgstr "10 minút"
 
 #. SysConfig
 msgid "100 (Expert)"
@@ -21583,11 +21583,11 @@ msgstr ""
 
 #. SysConfig
 msgid "15 Minutes"
-msgstr ""
+msgstr "15 minút"
 
 #. SysConfig
 msgid "2 - Enabled and required"
-msgstr ""
+msgstr "2 - povolený a povinný"
 
 #. SysConfig
 msgid "2 - Enabled and shown by default"
@@ -21599,7 +21599,7 @@ msgstr ""
 
 #. SysConfig
 msgid "2 Minutes"
-msgstr ""
+msgstr "2 minúty"
 
 #. SysConfig
 msgid "200 (Advanced)"
@@ -24307,5 +24307,25 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Loader module registration for the public interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable highlighting services based on ticket age."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Sets the age in minutes (first level) for highlighting services that contain untouched tickets."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Sets the age in minutes (second level) for highlighting services that contain untouched tickets."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Activates a blinking mechanism of the service that contains the oldest ticket."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+msgid "You can not edit a transition before it's connected to two activities."
 msgstr ""
 

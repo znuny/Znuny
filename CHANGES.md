@@ -1,4 +1,23 @@
 # 7.0.16 2024-??-??
+ - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
+ - 2024-03-13 Fixed usage of sysconfig setting `Ticket::Frontend::Overview::PreviewArticleSenderTypes`. [#542](https://github.com/znuny/Znuny/issues/542)
+ - 2024-03-11 Split Blink feature from VisualAlarms feature.
+ - 2024-03-05 Hide ticket zoom widgets when no data is available to show.
+ - 2024-03-04 Hide mentions widget on ticket zoom when no mentions are available.
+ - 2024-02-29 Hide unknown content-type on article attachments.
+ - 2024-02-29 Fixed js error in process management while editing a transition within a process if it is not linked to two activities.
+ - 2024-02-28 Process management: Transition actions TicketCreate, TicketArticleCreate, ArticleSend now skip on invalid attachment IDs.
+ - 2024-02-27 Fixed a variable for sha512 in Auth::DB. [#379](https://github.com/znuny/Znuny/issues/379)
+ - 2024-02-22 Fix for generic agent: Scheduled job immediate executed after schedule was changed. Thanks to Paweł Bogusławski (@pboguslawski). [#406](https://github.com/znuny/Znuny/pull/406)
+ - 2022-02-22 Removed initial insert of `TransportEmailTemplate` in `notification_event_item` table for mention notification and ticket email delivery failure notification. Thanks to Paweł Bogusławski (@pboguslawski). [#397](https://github.com/znuny/Znuny/pull/397)
+ - 2024-02-14 Fixed popup profiles only being loaded on login.
+ - 2024-02-14 Implemented features 'VisualAlarms' and 'Blink' into AgentTicketService like already done in AgentTicketQueue.
+ - 2024-02-13 Dashboard widget "My last changed tickets": Increased performance of database query.
+ - 2024-02-12 Fixed AdminProcessMangement: Text in MessageBox Notice should link to sync processes.
+ - 2024-02-09 Added ACL checks to ticket process toolbar entry.
+ - 2024-02-08 Pressing 'Ctrl+Enter' in a textarea or 'Enter' in an input field now submits the form instead of saving a draft.
+ - 2024-02-08 Sector Nord AG: Pressing 'Enter' inside of `<input>` triggers wrong event. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#498](https://github.com/znuny/Znuny/pull/498)
+ - 2024-02-08 Process management: Fixed js error while editing activity dialog.
  - 2024-02-06 Fixed handling of (un)selecting checkboxes on permissions table for AdminCustomerUserGroup.
  - 2024-02-05 AdminOAuth2TokenManagement: Added filter for (in)valid entries.
  - 2024-02-02 Removed session data from support bundle generator.

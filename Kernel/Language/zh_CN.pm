@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.901503883655594;
+    $Self->{Completeness}        = 0.900759577278732;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1754,6 +1754,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '您真的想要删除这个活动吗？',
         'Do you really want to delete this Activity Dialog?' => '您真的想要删除这个活动对话框吗？',
         'Do you really want to delete this Transition?' => '您真的想要删除这个转换吗？',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '您真的想要删除这个转换动作吗？',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '您真的想要从画布中删除这个活动吗？不保存并离开此屏幕可撤销删除操作。',
@@ -2850,7 +2852,6 @@ sub Data {
         'Close this message' => '关闭本消息',
         'Image' => '图片',
         'PDF' => 'PDF',
-        'Unknown' => '未知',
         'View' => '查看',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3428,6 +3429,7 @@ sub Data {
         'Process state' => '流程状态',
         'Running' => '正在运行',
         'Finished' => '完成',
+        'Unknown' => '未知',
         'No package information available.' => '没有可用的软件包信息。',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6506,6 +6508,13 @@ sub Data {
             '定义服务视图是否按优先级预先排序。',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '定义在工单服务视图中在优先级排序后默认的排序顺序。',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => '激活工时管理。',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             '设置首选的时间单位（如 工作日、小时、分钟）。',
@@ -9232,6 +9241,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

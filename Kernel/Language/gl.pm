@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.46504709965295;
+    $Self->{Completeness}        = 0.464663143989432;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1748,6 +1748,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Quere realmente borrar esta Actividade?',
         'Do you really want to delete this Activity Dialog?' => 'Confirma que desexa eliminar este diálogo de actividade?',
         'Do you really want to delete this Transition?' => 'Quere realmente borrar esta Transición?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Quere realmente borrar esta Acción de Transición?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Quere realmente borrar esta actividade do canvas? Esto só pode ser desfeito deixando esta pantalla sen gardar.',
@@ -2844,7 +2846,6 @@ sub Data {
         'Close this message' => 'Pechar esta mensaxe',
         'Image' => '',
         'PDF' => 'PDF',
-        'Unknown' => 'Descoñecido',
         'View' => 'Ver',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3422,6 +3423,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Rematado',
+        'Unknown' => 'Descoñecido',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6500,6 +6502,13 @@ sub Data {
             'Define se unha pre-ordenación por prioridades debe ser feita na vista de servizo.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Define a orde de ordenación por defecto para todos os servizos na vista de servizo, despois de ordenación prioritaria.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Activa contador de tempo.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Establece as unidades de tempo preferidas (ex. horas traballo, horas, minutos).',
@@ -9216,6 +9225,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

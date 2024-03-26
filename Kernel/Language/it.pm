@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.605519748801851;
+    $Self->{Completeness}        = 0.605019815059445;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1756,6 +1756,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Vuoi davvero eliminare questa attività?',
         'Do you really want to delete this Activity Dialog?' => 'Vuoi davvero eliminare questa finestra dell\'attività?',
         'Do you really want to delete this Transition?' => 'Vuoi davvero eliminare questa transizione?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Vuoi davvero eliminare questa azione di transizione?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Vuoi davvero rimuovere questa attività dal riquadro? Ciò può essere annullato solo uscendo dalla schermata senza salvare.',
@@ -2852,7 +2854,6 @@ sub Data {
         'Close this message' => 'Chiudi questo messaggio',
         'Image' => 'Immagine',
         'PDF' => 'PDF',
-        'Unknown' => 'Sconosciuto',
         'View' => 'Vista',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3430,6 +3431,7 @@ sub Data {
         'Process state' => 'Stato processo',
         'Running' => 'Avvio',
         'Finished' => 'Operazione terminata',
+        'Unknown' => 'Sconosciuto',
         'No package information available.' => 'Nessuna informazione sul pacchetto disponibile.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6512,6 +6514,13 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Attiva Rendicontazione Tempo.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Imposta le unità di tempo preferite (ad es. unità di lavoro, ore, minuti).',
@@ -9239,6 +9248,7 @@ Il tuo helpdesk.
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

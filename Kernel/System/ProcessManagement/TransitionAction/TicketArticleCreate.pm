@@ -282,6 +282,19 @@ sub Run {
             );
             next ATTACHMENT if !%Data;
 
+            if ( $Data{ValidID} != 1 ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  => $CommonMessage
+                        . 'Attachment (ID: '
+                        . $ID
+                        . ', Name: '
+                        . $Data{Name}
+                        . ') is invalid. Skip Attachment!',
+                );
+                next ATTACHMENT;
+            }
+
             push @{ $Param{Config}->{Attachment} }, {
                 Content     => $Data{Content},
                 ContentType => $Data{ContentType},

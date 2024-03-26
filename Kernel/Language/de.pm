@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991571641051066;
+    $Self->{Completeness}        = 0.991578599735799;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1748,6 +1748,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Möchten Sie diese Aktivität wirklich löschen?',
         'Do you really want to delete this Activity Dialog?' => 'Möchten Sie diesen Aktivitäts-Dialog wirklich löschen?',
         'Do you really want to delete this Transition?' => 'Möchten Sie diesen Übergang wirklich löschen?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            'Sie können einen Übergang nicht bearbeiten, bevor er mit zwei Aktivitäten verbunden ist.',
         'Do you really want to delete this Transition Action?' => 'Möchten Sie diese Übergangs-Aktion wirklich löschen?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Möchten Sie diese Aktivität wirklich vom Zeichenbereich entfernen? Das kann nur rückgängig gemacht werden, wenn Sie diese Ansicht ohne Speichern verlassen.',
@@ -2844,7 +2846,6 @@ sub Data {
         'Close this message' => 'Diese Nachricht schließen',
         'Image' => 'Bild',
         'PDF' => 'PDF',
-        'Unknown' => 'Unbekannt',
         'View' => 'Ansehen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3422,6 +3423,7 @@ sub Data {
         'Process state' => 'Prozess-Status',
         'Running' => 'Laufend',
         'Finished' => 'Fertig',
+        'Unknown' => 'Unbekannt',
         'No package information available.' => 'Keine Paketinformationen verfügbar.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6500,6 +6502,13 @@ sub Data {
             'Bestimmt, ob in der Service-Ansicht eine Vorsortierung anhand der Priorität vorgenommen werden soll.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Definiert die standardmäßig eingestellten Sortierkriterien für alle in der Service-Ansicht angezeigten Services, nachdem nach Priorität sortiert wurde.',
+        'Enable highlighting services based on ticket age.' => 'Hervorheben von Services nach Ticketalter aktivieren.',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            'Definiert das Ticket Alter in Minuten bevor die Services mit unbearbeiteten Tickets hervorgehoben werden (erstes Level).',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            'Definiert das Ticket Alter in Minuten bevor die Services mit unbearbeiteten Tickets hervorgehoben werden (zweites Level).',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            'Aktiviert einen Blinkmechanismus des Services, welcher das älteste Ticket enthält.',
         'Activates time accounting.' => 'Aktiviert die Zeitabrechnung.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Legt die bevorzugten Zeiteinheiten fest (z.B. Arbeitseinheiten, Stunden, Minuten).',
@@ -8304,7 +8313,7 @@ sub Data {
         'Not available' => 'Nicht verfügbar',
         'and %s more...' => 'und %s weitere...',
         'Show current selection' => 'Aktuelle Auswahl anzeigen',
-        'Current selection' => 'Aktuelle Auwahl',
+        'Current selection' => 'Aktuelle Auswahl',
         'Clear all' => 'Alles löschen',
         'Filters' => 'Filter',
         'Clear search' => 'Suche löschen',
@@ -9226,6 +9235,7 @@ Ihr Helpdesk-Team
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

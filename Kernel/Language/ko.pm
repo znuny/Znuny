@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.872913568005288;
+    $Self->{Completeness}        = 0.8721928665786;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1747,6 +1747,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '이 활동을 정말로 삭제 하시겠습니까?',
         'Do you really want to delete this Activity Dialog?' => '이 활동 대화 상자를 정말로 삭제 하시겠습니까?',
         'Do you really want to delete this Transition?' => '이 전환을 정말로 삭제 하시겠습니까?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '이 전환 액션을 정말로 삭제 하시겠습니까?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '이 활동을 캔버스에서 정말로 제거 하시겠습니까? 저장하지 않고이 화면을 나가면 취소 할 수 있습니다.',
@@ -2843,7 +2845,6 @@ sub Data {
         'Close this message' => '이 메시지를 닫습니다.',
         'Image' => '이미지',
         'PDF' => 'PDF',
-        'Unknown' => '알 수 없는',
         'View' => '전망',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3421,6 +3422,7 @@ sub Data {
         'Process state' => '프로세스 상태',
         'Running' => '달리는',
         'Finished' => '끝마친',
+        'Unknown' => '알 수 없는',
         'No package information available.' => '사용할 수있는 패키지 정보가 없습니다.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6499,6 +6501,13 @@ sub Data {
             '우선 순위 별 사전 정렬을 서비스 보기에서 수행해야하는지 여부를 정의합니다.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '우선 순위 정렬 후 서비스 보기의 모든 서비스에 대한 기본 정렬 순서를 정의합니다.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => '시간 계산을 활성화 합니다.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             '선호 시간 단위 (예 : 작업 단위, 시간, 분)를 설정합니다.',
@@ -9226,6 +9235,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

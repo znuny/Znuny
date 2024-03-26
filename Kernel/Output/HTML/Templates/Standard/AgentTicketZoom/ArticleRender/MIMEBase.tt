@@ -251,8 +251,6 @@ function CheckIFrameHeight(IFrameID) {
                                                     [% Translate("Image") | html %]
                                                 [% ELSIF Attachment.ContentType == "application/pdf" %]
                                                     [% Translate("PDF") | html %]
-                                                [% ELSE %]
-                                                    [% Translate("Unknown") | html %]
                                                 [% END %]
 
                                                 [% Attachment.FilesizeRaw | Localize("Filesize") %]

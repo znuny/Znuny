@@ -19,16 +19,17 @@ use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
+    'Kernel::System::HTMLUtils',
     'Kernel::System::LinkObject',
     'Kernel::System::Log',
     'Kernel::System::State',
+    'Kernel::System::StdAttachment',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::DateTime',
     'Kernel::System::User',
-    'Kernel::System::HTMLUtils',
 );
 
 =head1 NAME
@@ -124,7 +125,11 @@ Returns:
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $StdAttachmentObject = $Kernel::OM->Get('Kernel::System::StdAttachment');
+    my $StdAttachmentObject       = $Kernel::OM->Get('Kernel::System::StdAttachment');
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $HTMLUtilsObject           = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+    my $LogObject                 = $Kernel::OM->Get('Kernel::System::Log');
 
     # define a common message to output in case of any error
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -141,11 +146,6 @@ sub Run {
     # override UserID if specified as a parameter in the TA config
     $Param{UserID} = $Self->_OverrideUserID(%Param);
 
-    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
-    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-
-    # Convert DynamicField value to HTML string, see bug#14229.
-    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
     if (
         defined $Param{Config}->{Body}
         && $Param{Config}->{Body} =~ /OTRS_TICKET_DynamicField_/
@@ -230,7 +230,7 @@ sub Run {
         UserID => $Param{UserID},
     );
     if ( !$TicketID ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => $CommonMessage
                 . "Couldn't create New Ticket from Ticket: "
@@ -355,6 +355,19 @@ sub Run {
                 );
                 next ATTACHMENT if !%Data;
 
+                if ( $Data{ValidID} != 1 ) {
+                    $LogObject->Log(
+                        Priority => 'error',
+                        Message  => $CommonMessage
+                            . 'Attachment (ID: '
+                            . $ID
+                            . ', Name: '
+                            . $Data{Name}
+                            . ') is invalid. Skip Attachment!',
+                    );
+                    next ATTACHMENT;
+                }
+
                 push @{ $Param{Config}->{Attachment} }, {
                     Content     => $Data{Content},
                     ContentType => $Data{ContentType},
@@ -371,7 +384,7 @@ sub Run {
         );
 
         if ( !$ArticleID ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => $CommonMessage
                     . "Couldn't create Article on Ticket: $TicketID from Ticket: "
@@ -432,7 +445,7 @@ sub Run {
         );
 
         if ( !$Success ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => $CommonMessage
                     . "Couldn't set DynamicField Value on $DynamicFieldConfig->{ObjectType}:"
@@ -475,7 +488,7 @@ sub Run {
         }
 
         if ( !$SelectedType ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => $CommonMessage
                     . "LinkAs $Param{LinkAs} is invalid!"
@@ -501,7 +514,7 @@ sub Run {
         );
 
         if ( !$Success ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => $CommonMessage
                     . "Couldn't Link Tickets $SourceObjectID with $TargetObjectID as $Param{LinkAs}!",

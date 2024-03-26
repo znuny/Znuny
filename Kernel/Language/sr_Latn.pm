@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.898033382911915;
+    $Self->{Completeness}        = 0.897291941875826;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1753,6 +1753,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Da li stvarno želite da obrišete ovu aktivnost?',
         'Do you really want to delete this Activity Dialog?' => 'Da li stvarno želite da obrišete ovaj dijalog aktivnosti?',
         'Do you really want to delete this Transition?' => 'Da li stvarno želite da obrišete ovu tranziciju?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Da li stvarno želite da obrišete ovu tranzicionu aktivnost?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Da li stvarno želite da uklonite ovu aktivnost sa površine? Ovo jedino može da se opozove ukoliko napustite ekran, a da prethodno ne sačuvate izmene.',
@@ -2849,7 +2851,6 @@ sub Data {
         'Close this message' => 'Zatvori ovu poruku',
         'Image' => 'Slika',
         'PDF' => 'PDF',
-        'Unknown' => 'Nepoznato',
         'View' => 'Pregled',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3427,6 +3428,7 @@ sub Data {
         'Process state' => 'Stanje procesa',
         'Running' => 'U toku',
         'Finished' => 'Završeno',
+        'Unknown' => 'Nepoznato',
         'No package information available.' => 'Nema informacija o paketu.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6505,6 +6507,13 @@ sub Data {
             'Određuje da li prethodno sortiranje po prioritetu treba da se uradi u servisnom prikazu.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Definiše podrazumevani kriterijum sortiranja za sve servise u servisnom pregledu, posle  sortiranja po prioritu.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Aktivira merenje vremena.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Podesi prioritetne vremenske jedinice (npr jedinice posla, sate, minute)',
@@ -9232,6 +9241,7 @@ Vaša tehnička podrška
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

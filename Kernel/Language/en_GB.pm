@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.607172368203603;
+    $Self->{Completeness}        = 0.60667107001321;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1750,6 +1750,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Do you really want to delete this Activity?',
         'Do you really want to delete this Activity Dialog?' => 'Do you really want to delete this Activity Dialog?',
         'Do you really want to delete this Transition?' => 'Do you really want to delete this Transition?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Do you really want to delete this Transition Action?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.',
@@ -2846,7 +2848,6 @@ sub Data {
         'Close this message' => 'Close this message',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => 'Unknown',
         'View' => 'View',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3424,6 +3425,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Finished',
+        'Unknown' => 'Unknown',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6502,6 +6504,13 @@ sub Data {
             'Defines if a pre-sorting by priority should be done in the service view.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Defines the default sort order for all services in the service view, after priority sort.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Activates time accounting.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Sets the prefered time units (e.g. work units, hours, minutes).',
@@ -9229,6 +9238,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

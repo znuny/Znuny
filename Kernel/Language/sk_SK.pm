@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.183110229714097;
+    $Self->{Completeness}        = 0.183784676354029;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1747,6 +1747,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '',
         'Do you really want to delete this Activity Dialog?' => '',
         'Do you really want to delete this Transition?' => '',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '',
@@ -2843,7 +2845,6 @@ sub Data {
         'Close this message' => 'Uzatvoriť túto správu',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => 'Neznámy',
         'View' => 'Zobraziť',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3421,6 +3422,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Ukončený',
+        'Unknown' => 'Neznámy',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -3704,8 +3706,8 @@ sub Data {
         '3 minutes' => '3 minuty',
         '4 minutes' => '4 minuty',
         '5 minutes' => '5 minút',
-        '10 minutes' => ' 10 minút',
-        '15 minutes' => ' 15 minút',
+        '10 minutes' => '10 minút',
+        '15 minutes' => '15 minút',
         '30 minutes' => '30 minút',
         '1 hour' => '1 hodina',
         '2 hours' => '2 hodiny',
@@ -6499,6 +6501,13 @@ sub Data {
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => '',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             '',
@@ -8342,7 +8351,7 @@ sub Data {
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
             '',
         'The following files were already uploaded and have not been uploaded again: %s' =>
-            '',
+            'Nasledovné súbory už boli nahrané a nebudú nahrané znova: %s',
         'No space left for the following files: %s' => '',
         'Available space %s of %s.' => '',
         'Upload information' => '',
@@ -8387,13 +8396,13 @@ Thanks for your help!
         '0 - Disabled' => '',
         '1 - Available' => '',
         '1 - Enabled' => '',
-        '10 Minutes' => '',
+        '10 Minutes' => '10 minút',
         '100 (Expert)' => '',
-        '15 Minutes' => '',
-        '2 - Enabled and required' => '',
+        '15 Minutes' => '15 minút',
+        '2 - Enabled and required' => '2 - povolený a povinný',
         '2 - Enabled and shown by default' => '',
         '2 - Enabled by default' => '',
-        '2 Minutes' => '',
+        '2 Minutes' => '2 minúty',
         '200 (Advanced)' => '',
         '30 Minutes' => '',
         '300 (Beginner)' => '',
@@ -9215,6 +9224,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

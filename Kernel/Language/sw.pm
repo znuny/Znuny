@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.438439927284746;
+    $Self->{Completeness}        = 0.438077939233818;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1750,6 +1750,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Je unataka kufuta shughuli hii?',
         'Do you really want to delete this Activity Dialog?' => 'Je unataka kufuta Kidadisi kitendo?',
         'Do you really want to delete this Transition?' => 'Je unataka kufuta mpito huu?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Je unataka kufuta kitendo hiki cha mpito?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Je unataka kutoa kitendo hiki kwenye kanvasi? Hii inaweza kutokufanywa kwa kutoka kwenye skrini hii bila kuhifadhi. ',
@@ -2846,7 +2848,6 @@ sub Data {
         'Close this message' => 'Funga ujumbe huu',
         'Image' => '',
         'PDF' => 'PDF',
-        'Unknown' => 'Haijulikani',
         'View' => 'Angalia',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3424,6 +3425,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Maliza',
+        'Unknown' => 'Haijulikani',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6502,6 +6504,13 @@ sub Data {
             'Inafafanua kama upangaji wa awali kwa kipaumbele ufanywe kwenye mandhari ya kuona ya huduma.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Inafafanua utaratibu wa kupanga chaguo-msingi kwa huduma zote katika mazingira ya huduma, baada ya kupanga vipaumbele.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Amilisha muda wa kusebiwa.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Inaweka vigawe vya muda vinavyopendelewa (mfano vigawe vya kazi, masaa, dakika).',
@@ -9221,6 +9230,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

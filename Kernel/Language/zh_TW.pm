@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.310196661708808;
+    $Self->{Completeness}        = 0.309940554821664;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1750,6 +1750,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '您確定要刪除這個環節嗎？',
         'Do you really want to delete this Activity Dialog?' => '您確定要刪除這個環節操作嗎？',
         'Do you really want to delete this Transition?' => '您確定要刪除這個轉向嗎？',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '您確定要刪除這個轉向動作嗎？',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '您確定要從畫布中刪除這個環節嗎？不保存並退出此窗口可撤銷刪除操作。',
@@ -2847,7 +2849,6 @@ sub Data {
         'Close this message' => '',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => '',
         'View' => '瀏覽',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3425,6 +3426,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => '完成',
+        'Unknown' => '',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6503,6 +6505,13 @@ sub Data {
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => '',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             '',
@@ -9220,6 +9229,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

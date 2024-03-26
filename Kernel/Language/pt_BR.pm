@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.866468352338456;
+    $Self->{Completeness}        = 0.865752972258917;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1751,6 +1751,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Você realmente deseja excluir esta Atividade?',
         'Do you really want to delete this Activity Dialog?' => 'Você realmente deseja excluir esta Janela de Atividade?',
         'Do you really want to delete this Transition?' => 'Você realmente deseja excluir esta Transição?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Você realmente deseja excluir esta Ação de Transição?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Você realmente deseja excluir esta atividade da tela? Esta ação poderá ser desfeita saindo desta tela sem salvar.',
@@ -2847,7 +2849,6 @@ sub Data {
         'Close this message' => 'Fechar esta mensagem',
         'Image' => 'Imagem',
         'PDF' => 'PDF',
-        'Unknown' => 'Desconhecido',
         'View' => 'Ver',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3425,6 +3426,7 @@ sub Data {
         'Process state' => 'Estado de processo',
         'Running' => 'Executando',
         'Finished' => 'Finalizado',
+        'Unknown' => 'Desconhecido',
         'No package information available.' => 'Nenhuma informação de pacote disponível.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6503,6 +6505,13 @@ sub Data {
             'Define se uma pre-classificação por prioridade pode ser feita na visão de serviço.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Define o critério padrão de ordenamento para todos serviços apresentados na visão de serviços, após o ordenamento por prioridade.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Ativa a contabilização de tempo.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Configura as unidades de tempo preferidas (ex. unidades de trabalho, horas, minutos).',
@@ -9230,6 +9239,7 @@ Obrigado pela ajuda!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

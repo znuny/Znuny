@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.147744174516609;
+    $Self->{Completeness}        = 0.148282694848085;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1747,6 +1747,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '',
         'Do you really want to delete this Activity Dialog?' => '',
         'Do you really want to delete this Transition?' => '',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '',
@@ -2843,7 +2845,6 @@ sub Data {
         'Close this message' => '',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => 'Không biết',
         'View' => 'Xem',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3421,6 +3422,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Kết thúc',
+        'Unknown' => 'Không biết',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6499,6 +6501,13 @@ sub Data {
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => '',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             '',
@@ -8245,8 +8254,8 @@ sub Data {
         'Do you really want to continue?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
-        ' ...and %s more' => '',
-        ' ...show less' => '',
+        ' ...and %s more' => ' ...và %s khác',
+        ' ...show less' => ' ...hiển thị ít hơn',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
         'Add new draft' => '',
@@ -8375,8 +8384,20 @@ Please create a new ticket via the customer panel.
 Thanks for your help!
 
  Your Helpdesk Team
-' => '',
-        ' (work units)' => '',
+' => '
+Kính gửi Khách hàng,
+
+Thật không may chúng tôi không thể xác định được ID
+của ticket trong chủ đề của bạn, vì vậy chúng tôi không
+thể xử lý thư này.
+
+Xin hãy tạo một ticket mới trong bảng điều khiển CSKH.
+
+Cảm ơn sự giúp đỡ của bạn!
+
+ Đội ngũ CSKH của bạn
+',
+        ' (work units)' => ' (đơn vị công tác)',
         ' 2 minutes' => '2 phút',
         ' 5 minutes' => '5 phút',
         ' 7 minutes' => '7 phút',
@@ -9215,6 +9236,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

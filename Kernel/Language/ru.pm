@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.83721698892745;
+    $Self->{Completeness}        = 0.836525759577279;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1759,6 +1759,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Вы действительно желаете удалить эту Активность?',
         'Do you really want to delete this Activity Dialog?' => 'Вы действительно желаете удалить этот Диалог Активности?',
         'Do you really want to delete this Transition?' => 'Вы действительно желаете удалить этот Переход?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Действительно удалить это переходное действие?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Вы действительно желаете удалить эту Актвность из схемы? Это можно отменить только покинув этот экран без сохранения.',
@@ -2855,7 +2857,6 @@ sub Data {
         'Close this message' => 'Закрыть это сообщение',
         'Image' => 'Изображение',
         'PDF' => 'PDF',
-        'Unknown' => 'Неизвестный',
         'View' => 'Просмотр',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -3433,6 +3434,7 @@ sub Data {
         'Process state' => 'Состояние процесса',
         'Running' => 'Выполняется',
         'Finished' => 'Закончено',
+        'Unknown' => 'Неизвестный',
         'No package information available.' => 'Информация о пакете недоступна.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -6511,6 +6513,13 @@ sub Data {
             'Устанавливает, должна ли быть выполнена предварительная сортировка по приоритету в обзоре заявок по сервисам.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Задаёт порядок сортировки по умолчанию для всех сервисов при просмотре сервисов после сортировки по приоритету.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Включить учет времени выполнения',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Задает единицы измерения для единиц времени (например: рабочие часы, часы, минуты).',
@@ -9238,6 +9247,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',
