@@ -17,7 +17,12 @@ use Kernel::Output::HTML::Layout;
 
 use Kernel::System::VariableCheck qw(:all);
 
-# get needed objects
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+$ConfigObject->Set(
+    Key   => 'DefaultLanguage',
+    Value => 'en',
+);
+
 my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $DFBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
@@ -232,6 +237,16 @@ my @Tests = (
         ExpectedResults => {
             Field => <<"EOF",
 <input type="text" class="DynamicFieldText W50pc MyClass" id="DynamicField_$DynamicFieldConfigs{Text}->{Name}" name="DynamicField_$DynamicFieldConfigs{Text}->{Name}" title="$DynamicFieldConfigs{Text}->{LabelEscaped}" value="" />
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Text}->{Name}" for="DynamicField_$DynamicFieldConfigs{Text}->{Name}">
@@ -252,6 +267,16 @@ EOF
         ExpectedResults => {
             Field => <<"EOF",
 <input type="text" class="DynamicFieldText W50pc MyClass" id="DynamicField_$DynamicFieldConfigs{Text}->{Name}" name="DynamicField_$DynamicFieldConfigs{Text}->{Name}" title="$DynamicFieldConfigs{Text}->{LabelEscaped}" value="Default" />
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Text}->{Name}" for="DynamicField_$DynamicFieldConfigs{Text}->{Name}">
@@ -273,6 +298,16 @@ EOF
         ExpectedResults => {
             Field => <<"EOF",
 <input type="text" class="DynamicFieldText W50pc MyClass" id="DynamicField_$DynamicFieldConfigs{Text}->{Name}" name="DynamicField_$DynamicFieldConfigs{Text}->{Name}" title="$DynamicFieldConfigs{Text}->{LabelEscaped}" value="&lt;special chars=&quot;äüø&quot;&gt;" />
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Text}->{Name}" for="DynamicField_$DynamicFieldConfigs{Text}->{Name}">
@@ -295,6 +330,16 @@ EOF
         ExpectedResults => {
             Field => <<"EOF",
 <input type="text" class="DynamicFieldText W50pc MyClass" id="DynamicField_$DynamicFieldConfigs{Text}->{Name}" name="DynamicField_$DynamicFieldConfigs{Text}->{Name}" title="$DynamicFieldConfigs{Text}->{LabelEscaped}" value="äëïöüÄËÏÖÜáéíóúÁÉÍÓÚñÑ€исß" />
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Text}->{Name}" for="DynamicField_$DynamicFieldConfigs{Text}->{Name}">
@@ -319,6 +364,16 @@ EOF
         ExpectedResults => {
             Field => <<"EOF",
 <input type="text" class="DynamicFieldText W50pc MyClass" id="DynamicField_$DynamicFieldConfigs{Text}->{Name}" name="DynamicField_$DynamicFieldConfigs{Text}->{Name}" title="$DynamicFieldConfigs{Text}->{LabelEscaped}" value="äëïöüÄËÏÖÜáéíóúÁÉÍÓÚñÑ€исß" />
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Text}->{Name}" for="DynamicField_$DynamicFieldConfigs{Text}->{Name}">
@@ -343,6 +398,16 @@ EOF
         ExpectedResults => {
             Field => <<"EOF",
 <input type="text" class="DynamicFieldText W50pc MyClass" id="DynamicField_$DynamicFieldConfigs{Text}->{Name}" name="DynamicField_$DynamicFieldConfigs{Text}->{Name}" title="$DynamicFieldConfigs{Text}->{LabelEscaped}" value="äëïöüÄËÏÖÜáéíóúÁÉÍÓÚñÑ€исß" />
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Text}->{Name}" for="DynamicField_$DynamicFieldConfigs{Text}->{Name}">
@@ -367,6 +432,11 @@ EOF
             Field => <<"EOF",
 <input type="text" class="DynamicFieldText W50pc MyClass Validate_Required" id="DynamicField_$DynamicFieldConfigs{Text}->{Name}" name="DynamicField_$DynamicFieldConfigs{Text}->{Name}" title="$DynamicFieldConfigs{Text}->{LabelEscaped}" value="A Value" />
 <div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         This field is required.
     </p>
@@ -396,6 +466,11 @@ EOF
         ExpectedResults => {
             Field => <<"EOF",
 <input type="text" class="DynamicFieldText W50pc MyClass ServerError" id="DynamicField_$DynamicFieldConfigs{Text}->{Name}" name="DynamicField_$DynamicFieldConfigs{Text}->{Name}" title="$DynamicFieldConfigs{Text}->{LabelEscaped}" value="A Value" />
+<div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 <div id="DynamicField_$DynamicFieldConfigs{Text}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         This is an error.
@@ -429,6 +504,11 @@ EOF
         The field content is too long! Maximum size is 3800 characters.
     </p>
 </div>
+<div id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        The field content is too long! Maximum size is 3800 characters.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{TextArea}->{Name}" for="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}">
@@ -451,6 +531,11 @@ EOF
 <textarea class="DynamicFieldTextArea MyClass Validate_MaxLength" id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}" name="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}" title="$DynamicFieldConfigs{TextArea}->{LabelEscaped}" rows="7" cols="42" data-maxlength="3800">Multi
 Line</textarea>
 <div id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        The field content is too long! Maximum size is 3800 characters.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         The field content is too long! Maximum size is 3800 characters.
     </p>
@@ -481,6 +566,11 @@ EOF
         The field content is too long! Maximum size is 3800 characters.
     </p>
 </div>
+<div id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        The field content is too long! Maximum size is 3800 characters.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{TextArea}->{Name}" for="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}">
@@ -504,6 +594,11 @@ EOF
             Field => <<"EOF",
 <textarea class="DynamicFieldTextArea MyClass Validate_MaxLength" id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}" name="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}" title="$DynamicFieldConfigs{TextArea}->{LabelEscaped}" rows="7" cols="42" data-maxlength="3800">äëïöüÄËÏÖÜáéíóúÁÉÍÓÚñÑ€исß</textarea>
 <div id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        The field content is too long! Maximum size is 3800 characters.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         The field content is too long! Maximum size is 3800 characters.
     </p>
@@ -538,6 +633,11 @@ EOF
         The field content is too long! Maximum size is 3800 characters.
     </p>
 </div>
+<div id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        The field content is too long! Maximum size is 3800 characters.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{TextArea}->{Name}" for="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}">
@@ -568,6 +668,11 @@ EOF
         The field content is too long! Maximum size is 3800 characters.
     </p>
 </div>
+<div id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        The field content is too long! Maximum size is 3800 characters.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{TextArea}->{Name}" for="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}">
@@ -592,6 +697,11 @@ EOF
             Field => <<"EOF",
 <textarea class="DynamicFieldTextArea MyClass Validate_Required Validate_MaxLength" id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}" name="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}" title="$DynamicFieldConfigs{TextArea}->{LabelEscaped}" rows="7" cols="42" data-maxlength="3800">A Value</textarea>
 <div id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required or The field content is too long! Maximum size is 3800 characters.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{TextArea}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         This field is required or The field content is too long! Maximum size is 3800 characters.
     </p>
@@ -655,6 +765,16 @@ EOF
             Field => <<"EOF",
 <input type="hidden" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" value="1" />
 <input type="checkbox" class="DynamicFieldCheckbox MyClass" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" title="$DynamicFieldConfigs{Checkbox}->{LabelEscaped}"  value="1" />
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" for="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}">
@@ -676,6 +796,16 @@ EOF
             Field => <<"EOF",
 <input type="hidden" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" value="1" />
 <input type="checkbox" class="DynamicFieldCheckbox MyClass" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" title="$DynamicFieldConfigs{Checkbox}->{LabelEscaped}" checked="checked" value="1" />
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" for="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}">
@@ -699,6 +829,16 @@ EOF
             Field => <<"EOF",
 <input type="hidden" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" value="1" />
 <input type="checkbox" class="DynamicFieldCheckbox MyClass" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" title="$DynamicFieldConfigs{Checkbox}->{LabelEscaped}" checked="checked" value="1" />
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" for="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}">
@@ -725,6 +865,16 @@ EOF
             Field => <<"EOF",
 <input type="hidden" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" value="1" />
 <input type="checkbox" class="DynamicFieldCheckbox MyClass" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" title="$DynamicFieldConfigs{Checkbox}->{LabelEscaped}" checked="checked" value="1" />
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" for="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}">
@@ -751,6 +901,16 @@ EOF
             Field => <<"EOF",
 <input type="hidden" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" value="1" />
 <input type="checkbox" class="DynamicFieldCheckbox MyClass" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" title="$DynamicFieldConfigs{Checkbox}->{LabelEscaped}"  value="1" />
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" for="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}">
@@ -777,6 +937,16 @@ EOF
             Field => <<"EOF",
 <input type="hidden" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" value="1" />
 <input type="checkbox" class="DynamicFieldCheckbox MyClass" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" title="$DynamicFieldConfigs{Checkbox}->{LabelEscaped}" checked="checked" value="1" />
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" for="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}">
@@ -803,6 +973,16 @@ EOF
             Field => <<"EOF",
 <input type="hidden" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" value="1" />
 <input type="checkbox" class="DynamicFieldCheckbox MyClass" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" title="$DynamicFieldConfigs{Checkbox}->{LabelEscaped}"  value="1" />
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" for="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}">
@@ -828,6 +1008,11 @@ EOF
 <input type="hidden" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" value="1" />
 <input type="checkbox" class="DynamicFieldCheckbox MyClass Validate_Required" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" title="$DynamicFieldConfigs{Checkbox}->{LabelEscaped}" checked="checked" value="1" />
 <div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         This field is required.
     </p>
@@ -858,6 +1043,11 @@ EOF
             Field => <<"EOF",
 <input type="hidden" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" value="1" />
 <input type="checkbox" class="DynamicFieldCheckbox MyClass ServerError" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" title="$DynamicFieldConfigs{Checkbox}->{LabelEscaped}" checked="checked" value="1" />
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 <div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         This is an error.
@@ -890,6 +1080,16 @@ Ignore this field.
 <div class="clear"></div>
 <input type="radio" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used1" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Used" value="1"  />
 <input type="checkbox" class="DynamicFieldCheckbox MyClass" id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" name="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" title="$DynamicFieldConfigs{Checkbox}->{LabelEscaped}" checked="checked" value="1" />
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Checkbox}->{Name}" for="DynamicField_$DynamicFieldConfigs{Checkbox}->{Name}">
@@ -911,11 +1111,23 @@ EOF
             UseDefaultValue    => 0,
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" name="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" size="1">
   <option value="">-</option>
   <option value="1">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" for="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}">
@@ -934,11 +1146,23 @@ EOF
             Class              => 'MyClass',
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" name="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" size="1">
   <option value="">-</option>
   <option value="1">A</option>
   <option value="2" selected="selected">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" for="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}">
@@ -959,11 +1183,23 @@ EOF
             UseDefaultValue    => 0,
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" name="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" size="1">
   <option value="">-</option>
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" for="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}">
@@ -986,11 +1222,23 @@ EOF
             },
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" name="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" size="1">
   <option value="">-</option>
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" for="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}">
@@ -1013,11 +1261,23 @@ EOF
             },
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" name="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" size="1">
   <option value="">-</option>
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" for="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}">
@@ -1046,6 +1306,12 @@ EOF
   <option value="2" selected="selected">B</option>
 </select>
 <div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         This field is required.
     </p>
@@ -1079,6 +1345,12 @@ EOF
   <option value="1">A</option>
   <option value="2" selected="selected">B</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
 <div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         This is an error.
@@ -1107,9 +1379,21 @@ EOF
             },
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" name="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" size="1">
   <option value="2" selected="selected">Value2</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" for="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}">
@@ -1131,10 +1415,22 @@ EOF
             OverridePossibleNone => 0,
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" name="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" size="1">
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" for="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}">
@@ -1156,11 +1452,23 @@ EOF
             ConfirmationNeeded => 1,
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" name="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" size="5">
   <option value="">-</option>
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" for="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}">
@@ -1189,6 +1497,17 @@ EOF
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Dropdown}->{Name}" for="DynamicField_$DynamicFieldConfigs{Dropdown}->{Name}">
@@ -1210,11 +1529,23 @@ EOF
             UseDefaultValue    => 0,
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" multiple="multiple" name="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
   <option value="">-</option>
   <option value="1">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1233,11 +1564,23 @@ EOF
             Class              => 'MyClass',
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" multiple="multiple" name="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
   <option value="">-</option>
   <option value="1">A</option>
   <option value="2" selected="selected">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1258,11 +1601,23 @@ EOF
             UseDefaultValue    => 0,
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" multiple="multiple" name="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
   <option value="">-</option>
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1283,11 +1638,23 @@ EOF
             UseDefaultValue    => 0,
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" multiple="multiple" name="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
   <option value="">-</option>
   <option value="1" selected="selected">A</option>
   <option value="2" selected="selected">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1310,11 +1677,23 @@ EOF
             },
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" multiple="multiple" name="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
   <option value="">-</option>
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1337,11 +1716,23 @@ EOF
             },
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" multiple="multiple" name="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
   <option value="">-</option>
   <option value="1" selected="selected">A</option>
   <option value="2" selected="selected">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1364,11 +1755,23 @@ EOF
             },
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" multiple="multiple" name="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
   <option value="">-</option>
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1391,11 +1794,23 @@ EOF
             },
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" multiple="multiple" name="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
   <option value="">-</option>
   <option value="1" selected="selected">A</option>
   <option value="2" selected="selected">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1424,6 +1839,12 @@ EOF
   <option value="2" selected="selected">B</option>
 </select>
 <div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         This field is required.
     </p>
@@ -1457,6 +1878,12 @@ EOF
   <option value="1">A</option>
   <option value="2" selected="selected">B</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
 <div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
     <p>
         This is an error.
@@ -1485,9 +1912,21 @@ EOF
             },
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" multiple="multiple" name="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
   <option value="2" selected="selected">Value2</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1509,10 +1948,22 @@ EOF
             OverridePossibleNone => 0,
         },
         ExpectedResults => {
-            Field => <<"EOF" . '</select>',
+            Field => <<"EOF",
 <select class="DynamicFieldText Modernize MyClass" id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" multiple="multiple" name="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
+</select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1541,6 +1992,17 @@ EOF
   <option value="1" selected="selected">A</option>
   <option value="2">B</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}Error" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}ServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Multiselect}->{Name}" for="DynamicField_$DynamicFieldConfigs{Multiselect}->{Name}">
@@ -1707,6 +2169,17 @@ EOF
   <option value="58">58</option>
   <option value="59">59</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used" for="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used">
@@ -1872,6 +2345,17 @@ EOF
   <option value="58">58</option>
   <option value="59">59</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used" for="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used">
@@ -2044,6 +2528,17 @@ EOF
   <option value="58">58</option>
   <option value="59">59</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used" for="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used">
@@ -2216,6 +2711,17 @@ EOF
   <option value="58">58</option>
   <option value="59">59</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used" for="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used">
@@ -2388,6 +2894,17 @@ EOF
   <option value="58">58</option>
   <option value="59">59</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used" for="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Used">
@@ -2555,6 +3072,12 @@ EOF
   <option value="59">59</option>
 </select>
 <div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedServerError" class="TooltipErrorMessage">
     <p>
         This field is required.
     </p>
@@ -2727,6 +3250,12 @@ EOF
   <option value="58">58</option>
   <option value="59">59</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
 <div id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}UsedServerError" class="TooltipErrorMessage">
     <p>
         This is an error.
@@ -2813,6 +3342,17 @@ EOF
   <option value="2017">2017</option>
   <option value="2018">2018</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used" for="DynamicField_$DynamicFieldConfigs{Date}->{Name}Used">
@@ -2892,6 +3432,17 @@ EOF
   <option value="2017">2017</option>
   <option value="2018">2018</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used" for="DynamicField_$DynamicFieldConfigs{Date}->{Name}Used">
@@ -2976,6 +3527,17 @@ EOF
   <option value="2017">2017</option>
   <option value="2018">2018</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used" for="DynamicField_$DynamicFieldConfigs{Date}->{Name}Used">
@@ -3060,6 +3622,17 @@ EOF
   <option value="2017">2017</option>
   <option value="2018">2018</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used" for="DynamicField_$DynamicFieldConfigs{Date}->{Name}Used">
@@ -3146,6 +3719,17 @@ EOF
   <option value="2017">2017</option>
   <option value="2018">2018</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
 EOF
             Label => <<"EOF",
 <label id="LabelDynamicField_$DynamicFieldConfigs{Date}->{Name}Used" for="DynamicField_$DynamicFieldConfigs{Date}->{Name}Used">
@@ -3227,6 +3811,12 @@ EOF
   <option value="2018">2018</option>
 </select>
 <div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedServerError" class="TooltipErrorMessage">
     <p>
         This field is required.
     </p>
@@ -3313,6 +3903,12 @@ EOF
   <option value="2017">2017</option>
   <option value="2018">2018</option>
 </select>
+<div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+
 <div id="DynamicField_$DynamicFieldConfigs{Date}->{Name}UsedServerError" class="TooltipErrorMessage">
     <p>
         This is an error.

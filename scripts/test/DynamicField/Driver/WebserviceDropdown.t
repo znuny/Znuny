@@ -20,6 +20,13 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+$ConfigObject->Set(
+    Key   => 'DefaultLanguage',
+    Value => 'en',
+);
+
+my $HelperObject              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $ZnunyHelperObject         = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
 my $LayoutObject              = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -27,7 +34,6 @@ my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::
 my $ParamObject               = $Kernel::OM->Get('Kernel::System::Web::Request');
 my $UnitTestWebserviceObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Webservice');
 my $WebserviceObject          = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
-my $HelperObject              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $WebserviceName = 'DynamicFieldWebservice';
 my $DynamicField   = $WebserviceName . 'Driver';
@@ -152,7 +158,17 @@ DynamicFieldWebserviceDriverDropdown:
             . '" class="DynamicFieldText Modernize W50pc" id="DynamicField_DynamicFieldWebserviceDriverDropdown" name="DynamicField_DynamicFieldWebserviceDriverDropdown">
   <option value="">-</option>
   <option value=" "></option>
-</select>'
+</select><div id="DynamicField_DynamicFieldWebserviceDriverDropdownError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+<div id="DynamicField_DynamicFieldWebserviceDriverDropdownServerError" class="TooltipErrorMessage">
+    <p>
+        This field is required.
+    </p>
+</div>
+',
     },
     'EditFieldRender',
 );
