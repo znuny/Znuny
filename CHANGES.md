@@ -1,4 +1,6 @@
-# 6.5.7 2024-??-??
+# 6.5.8 2024-??-??
+
+# 6.5.7 2024-04-03
  - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
  - 2024-03-13 Fixed usage of sysconfig setting `Ticket::Frontend::Overview::PreviewArticleSenderTypes`. [#542](https://github.com/znuny/Znuny/issues/542)
  - 2024-03-04 Hide mentions widget on ticket zoom when no mentions are available.
