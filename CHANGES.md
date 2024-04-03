@@ -1,4 +1,6 @@
-# 7.0.16 2024-??-??
+# 7.0.17 2024-??-??
+
+# 7.0.16 2024-04-03
  - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
  - 2024-03-19 Fixed button to edit customer user in widget of customer information center. [#543](https://github.com/znuny/Znuny/issues/543)
  - 2024-03-13 Fixed usage of sysconfig setting `Ticket::Frontend::Overview::PreviewArticleSenderTypes`. [#542](https://github.com/znuny/Znuny/issues/542)
@@ -20,6 +22,7 @@
  - 2024-02-08 Process management: Fixed js error while editing activity dialog.
  - 2024-02-06 Fixed handling of (un)selecting checkboxes on permissions table for AdminCustomerUserGroup.
  - 2024-02-05 AdminOAuth2TokenManagement: Added filter for (in)valid entries.
+ - 2024-02-02 Fixed form parameter evaluation in dialog for assignment of dynamic fields to screens (AdminDynamicFieldScreenConfiguration).
  - 2024-02-02 Removed session data from support bundle generator.
  - 2024-02-02 Prevent error message 'MissingTicketID' of ArticleList in inbound phone call screen. Thanks to Jannis Kleinrensing (@JannisKleinrensing), maxence. [PR#346](https://github.com/znuny/Znuny/pull/346)
  - 2024-02-02 Add html comment end tag into template file. Thanks to @kolbma. [PR#528](https://github.com/znuny/Znuny/pull/528)
