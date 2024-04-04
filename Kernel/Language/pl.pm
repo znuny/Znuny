@@ -1333,7 +1333,7 @@ sub Data {
         'Here you will find log information about your system.' => 'Tutaj znajdziesz informacje o swoim systemie OTRS',
         'Hide this message' => 'Ukryj tę wiadomość',
         'System Log' => 'Log systemu',
-        'Recent Log Entries' => 'Ostatnie pozycje loga',
+        'Recent Log Entries' => 'Ostatnie pozycje logu',
         'Facility' => 'Obiekt',
         'Message' => 'Informacja',
 
@@ -8024,7 +8024,7 @@ sub Data {
         'Request Details' => 'Szczegóły żądania',
         'Request Details for Communication ID' => '',
         'Show or hide the content.' => 'Pokaż lub ukryj zawartość.',
-        'Clear debug log' => 'Wyczyść log debug',
+        'Clear debug log' => 'Wyczyść log debugu',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceErrorHandling.js
         'Delete error handling module' => 'Moduł obsługi błędów usuwania',
@@ -8318,7 +8318,7 @@ sub Data {
         'and %s more...' => 'oraz %s więcej...',
         'Show current selection' => '',
         'Current selection' => '',
-        'Clear all' => 'Wyczyść',
+        'Clear all' => 'Wyczyść wszystko',
         'Filters' => 'Filtry',
         'Clear search' => 'Wyczyść szukanie',
 

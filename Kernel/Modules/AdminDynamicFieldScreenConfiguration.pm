@@ -424,7 +424,6 @@ sub _ShowEdit {
         Name => 'Edit',
         Data => {
             %Param,
-            %Data,
         },
     );
 

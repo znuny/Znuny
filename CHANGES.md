@@ -1,5 +1,8 @@
-# 7.0.16 2024-??-??
+# 7.0.17 2024-??-??
+
+# 7.0.16 2024-04-03
  - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
+ - 2024-03-19 Fixed button to edit customer user in widget of customer information center. [#543](https://github.com/znuny/Znuny/issues/543)
  - 2024-03-13 Fixed usage of sysconfig setting `Ticket::Frontend::Overview::PreviewArticleSenderTypes`. [#542](https://github.com/znuny/Znuny/issues/542)
  - 2024-03-11 Split Blink feature from VisualAlarms feature.
  - 2024-03-05 Hide ticket zoom widgets when no data is available to show.
@@ -16,10 +19,10 @@
  - 2024-02-12 Fixed AdminProcessMangement: Text in MessageBox Notice should link to sync processes.
  - 2024-02-09 Added ACL checks to ticket process toolbar entry.
  - 2024-02-08 Pressing 'Ctrl+Enter' in a textarea or 'Enter' in an input field now submits the form instead of saving a draft.
- - 2024-02-08 Sector Nord AG: Pressing 'Enter' inside of `<input>` triggers wrong event. Thanks to Ziggy Trotter (@ZTrotter), Sector Nord AG. [PR#498](https://github.com/znuny/Znuny/pull/498)
  - 2024-02-08 Process management: Fixed js error while editing activity dialog.
  - 2024-02-06 Fixed handling of (un)selecting checkboxes on permissions table for AdminCustomerUserGroup.
  - 2024-02-05 AdminOAuth2TokenManagement: Added filter for (in)valid entries.
+ - 2024-02-02 Fixed form parameter evaluation in dialog for assignment of dynamic fields to screens (AdminDynamicFieldScreenConfiguration).
  - 2024-02-02 Removed session data from support bundle generator.
  - 2024-02-02 Prevent error message 'MissingTicketID' of ArticleList in inbound phone call screen. Thanks to Jannis Kleinrensing (@JannisKleinrensing), maxence. [PR#346](https://github.com/znuny/Znuny/pull/346)
  - 2024-02-02 Add html comment end tag into template file. Thanks to @kolbma. [PR#528](https://github.com/znuny/Znuny/pull/528)
