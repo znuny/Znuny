@@ -297,9 +297,9 @@ Core.Form = (function (TargetNS) {
      * This makes all forms submittable by using Enter inside inputs.
      */
     $('body').on('keydown', 'input', function (Event) {
-        if (Event.keyCode == 13) {
+        if (Event.keyCode == 13 && $(this).closest('form').find(':submit').length > 0) {
             Event.preventDefault();
-            $('form').find(':submit').last().click();
+            $(this.form).find(':submit').last().click();
         }
     });
 
