@@ -1,4 +1,5 @@
 # 7.0.17 2024-??-??
+ - 2024-04-09 Fixed session handling while saving user preferences.
 
 # 7.0.16 2024-04-03
  - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
