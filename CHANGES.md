@@ -1,4 +1,5 @@
 # 6.5.8 2024-??-??
+ - 2024-04-10 Fixed mixed usage of database objects in customer and customer user database backend. [#540](https://github.com/znuny/Znuny/issues/540)
 
 # 6.5.7 2024-04-03
  - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
