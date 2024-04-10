@@ -1,4 +1,5 @@
 # 7.0.17 2024-??-??
+ - 2024-04-10 Fixed mixed usage of database objects in customer and customer user database backend. [#540](https://github.com/znuny/Znuny/issues/540)
  - 2024-04-09 Fixed session handling while saving user preferences.
 
 # 7.0.16 2024-04-03
