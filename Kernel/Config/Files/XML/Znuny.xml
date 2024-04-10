@@ -1167,7 +1167,7 @@
                         <Item Key="Ticket::Frontend::AgentTicketNote###DynamicField">AgentTicketNote</Item>
                         <Item Key="Ticket::Frontend::AgentTicketOwner###DynamicField">AgentTicketOwner</Item>
                         <Item Key="Ticket::Frontend::AgentTicketResponsible###DynamicField">AgentTicketResponsible</Item>
-                        <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch (Overview Screenn)</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch (Overview Screen)</Item>
                         <Item Key="Ticket::Frontend::AgentTicketNoteToLinkedTicket###DynamicField">AgentTicketNoteToLinkedTicket</Item>
                     </Hash>
                 </Item>
