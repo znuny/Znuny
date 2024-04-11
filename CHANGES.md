@@ -1,4 +1,6 @@
 # 7.0.17 2024-??-??
+ - 2024-04-10 Fixed mixed usage of database objects in customer and customer user database backend. [#540](https://github.com/znuny/Znuny/issues/540)
+ - 2024-04-09 Fixed session handling while saving user preferences.
 
 # 7.0.16 2024-04-03
  - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
@@ -228,6 +230,24 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.7 2024-04-03
+ - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
+ - 2024-03-13 Fixed usage of sysconfig setting `Ticket::Frontend::Overview::PreviewArticleSenderTypes`. [#542](https://github.com/znuny/Znuny/issues/542)
+ - 2024-03-04 Hide mentions widget on ticket zoom when no mentions are available.
+ - 2024-02-29 Hide unknown content-type on article attachments.
+ - 2024-02-28 Process management: Transition actions TicketCreate, TicketArticleCreate, ArticleSend now skip on invalid attachment IDs.
+ - 2024-02-13 Dashboard widget "My last changed tickets": Increased performance of database query.
+ - 2024-02-27 Fixed a variable for sha512 in Auth::DB. [#379](https://github.com/znuny/Znuny/issues/379)
+ - 2024-02-22 Fix for generic agent: Scheduled job immediate executed after schedule was changed. Thanks to Paweł Bogusławski (@pboguslawski). [#406](https://github.com/znuny/Znuny/pull/406)
+ - 2022-02-22 Removed initial insert of `TransportEmailTemplate` in `notification_event_item` table for mention notification and ticket email delivery failure notification. Thanks to Paweł Bogusławski (@pboguslawski). [#397](https://github.com/znuny/Znuny/pull/397)
+ - 2024-02-08 Process management: Fixed js error while editing activity dialog.
+ - 2024-02-07 Fixed js error in process management while editing a transition within a process if it is not linked to two activities.
+ - 2024-02-06 Fixed handling of (un)selecting checkboxes on permissions table for AdminCustomerUserGroup.
+ - 2024-02-02 Fixed form parameter evaluation in dialog for assignment of dynamic fields to screens (AdminDynamicFieldScreenConfiguration).
+ - 2024-02-02 Removed session data from support bundle generator.
+ - 2024-02-02 Add html comment end tag into template file. Thanks to @kolbma. [PR#530](https://github.com/znuny/Znuny/pull/530)
+ - 2024-02-01 Added ACL checks to ticket process toolbar entry.
 
 # 6.5.6 2024-01-31
  - 2024-01-25 Fixed migration of mention notification.
