@@ -428,7 +428,7 @@ sub FormIDCleanUp {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $FormDraftTTL = $ConfigObject->Get('FormDraftTTL');
 
-    my %DraftForms;
+    my %FormDrafts;
     my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
     for my $ObjectType ( sort keys %{$FormDraftTTL} ) {
         my $FormDraftList = $FormDraftObject->FormDraftListGet(
@@ -436,26 +436,25 @@ sub FormIDCleanUp {
             UserID     => 1,
         );
 
-        DRAFT:
+        FORMDRAFT:
         for my $FormDraft ( @{$FormDraftList} ) {
             my $FormDraftConfig = $FormDraftObject->FormDraftGet(
                 FormDraftID => $FormDraft->{FormDraftID},
                 UserID      => 1,
             );
 
+            next FORMDRAFT if !IsHashRefWithData($FormDraftConfig);
             my $FormID = $FormDraftConfig->{FormData}->{FormID};
 
-            # if TTL configuration is missing, use the default
-            next DRAFT if !$FormDraftTTL->{$ObjectType};
+            next FORMDRAFT if !$Self->_FormIDValidate($FormID);
 
-            # check for draft form configuration
-            next DRAFT if !IsHashRefWithData($FormDraftConfig);
-            next DRAFT if !$FormID;
+            # if TTL configuration is missing, use the default
+            next FORMDRAFT if !$FormDraftTTL->{$ObjectType};
 
             # form draft TTL config for specific object type is given in minutes
-            my $CurrentTile = time() - ( $FormDraftTTL->{$ObjectType} * 60 );
+            my $CurrentTime = time() - ( $FormDraftTTL->{$ObjectType} * 60 );
 
-            $DraftForms{$FormID} = $CurrentTile;
+            $FormDrafts{$FormID} = $CurrentTime;
         }
     }
 
@@ -483,9 +482,9 @@ sub FormIDCleanUp {
         }
 
         if (
-            ( $DraftForms{$Filename} && $DraftForms{$Filename} > $SubdirTime )
+            ( $FormDrafts{$Filename} && $FormDrafts{$Filename} > $SubdirTime )
             ||
-            ( !$DraftForms{$Filename} && $RetentionTime > $SubdirTime )
+            ( !$FormDrafts{$Filename} && $RetentionTime > $SubdirTime )
             )
         {
             my @Sublist = $MainObject->DirectoryRead(
