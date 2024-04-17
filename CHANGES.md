@@ -1,6 +1,7 @@
 # 7.0.17 2024-??-??
  - 2024-04-10 Fixed mixed usage of database objects in customer and customer user database backend. [#540](https://github.com/znuny/Znuny/issues/540)
  - 2024-04-09 Fixed session handling while saving user preferences.
+ - 2024-04-08 CVE-2024-32492: Fixed security issue with JavaScript in body of article being executed in customer ticket zoom. Thanks to Martino Spagnuolo for reporting this issue.
 
 # 7.0.16 2024-04-03
  - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
