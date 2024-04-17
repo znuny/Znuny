@@ -12,8 +12,9 @@ package Kernel::System::Web::UploadCache::DB;
 use strict;
 use warnings;
 
-use MIME::Base64;
 use Kernel::System::VariableCheck qw(:all);
+use MIME::Base64;
+use File::Basename;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -111,13 +112,15 @@ sub FormIDAddFile {
     # write attachment to db
     my $Time = time();
 
+    my $Filename = basename( $Param{Filename} );
+
     return if !$DBObject->Do(
         SQL => '
             INSERT INTO web_upload_cache (form_id, filename, content_type, content_size, content,
                 create_time_unix, content_id, disposition)
             VALUES  (?, ?, ?, ?, ?, ?, ?, ?)',
         Bind => [
-            \$Param{FormID}, \$Param{Filename}, \$Param{ContentType}, \$Param{Filesize},
+            \$Param{FormID}, \$Filename, \$Param{ContentType}, \$Param{Filesize},
             \$Param{Content}, \$Time, \$ContentID, \$Param{Disposition}
         ],
     );
