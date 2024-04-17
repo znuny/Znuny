@@ -53,6 +53,7 @@ sub Run {
         'Znuny-BugfixFormInput',
         'Znuny-DynamicFieldWebserviceTicketIDPayload',
         'Znuny-RichTextEditorLinkFix',
+        'Znuny-BugfixFileUploadPathTraversal',
     );
 
     PACKAGENAME:

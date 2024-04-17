@@ -137,10 +137,12 @@ sub FormIDAddFile {
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
-    # files must readable for creator
+    my $Filename = basename( $Param{Filename} );
+
+    # files must be readable for creator
     return if !$MainObject->FileWrite(
         Directory  => $Directory,
-        Filename   => "$Param{Filename}",
+        Filename   => $Filename,
         Content    => \$Param{Content},
         Mode       => 'binmode',
         Permission => '640',
@@ -148,7 +150,7 @@ sub FormIDAddFile {
     );
     return if !$MainObject->FileWrite(
         Directory  => $Directory,
-        Filename   => "$Param{Filename}.ContentType",
+        Filename   => "$Filename.ContentType",
         Content    => \$Param{ContentType},
         Mode       => 'binmode',
         Permission => '640',
@@ -156,7 +158,7 @@ sub FormIDAddFile {
     );
     return if !$MainObject->FileWrite(
         Directory  => $Directory,
-        Filename   => "$Param{Filename}.ContentID",
+        Filename   => "$Filename.ContentID",
         Content    => \$ContentID,
         Mode       => 'binmode',
         Permission => '640',
@@ -164,7 +166,7 @@ sub FormIDAddFile {
     );
     return if !$MainObject->FileWrite(
         Directory  => $Directory,
-        Filename   => "$Param{Filename}.Disposition",
+        Filename   => "$Filename.Disposition",
         Content    => \$Disposition,
         Mode       => 'binmode',
         Permission => '644',
