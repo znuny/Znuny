@@ -1,4 +1,4 @@
-# 6.5.8 2024-??-??
+# 6.5.8 2024-04-17
  - 2024-04-11 Fixed session handling while saving user preferences.
  - 2024-04-10 Fixed mixed usage of database objects in customer and customer user database backend. [#540](https://github.com/znuny/Znuny/issues/540)
  - 2024-04-05 CVE-2024-32493: Fixed SQL injection issue regarding Form IDs when cleaning up drafts. Thanks to Martino Spagnuolo for reporting the issue.
