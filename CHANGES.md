@@ -1,3 +1,6 @@
+# 7.0.18 2024-??-??
+ - 2024-04-18 Improved AJAX subactions for AgentTicketEmailOutbound.
+
 # 7.0.17 2024-04-17
  - 2024-04-10 Fixed mixed usage of database objects in customer and customer user database backend. [#540](https://github.com/znuny/Znuny/issues/540)
  - 2024-04-09 Fixed session handling while saving user preferences.
