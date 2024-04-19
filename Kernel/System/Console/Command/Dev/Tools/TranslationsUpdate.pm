@@ -232,13 +232,7 @@ sub HandleLanguage {
     my $WeblateLanguage = $WeblateLanguagesMap{$Language} // $Language;
     my $Home            = $ConfigObject->Get('Home');
 
-    if ( !$Module ) {
-        $LanguageFile  = "$Home/Kernel/Language/$Language.pm";
-        $TargetFile    = "$Home/Kernel/Language/$Language.pm";
-        $TargetPOTFile = "$Home/i18n/Znuny/Znuny.pot";
-        $TargetPOFile  = "$Home/i18n/Znuny/Znuny.$WeblateLanguage.po";
-    }
-    else {
+    if ($Module) {
         $IsSubTranslation = 1;
 
         # extract module name from module path
@@ -252,6 +246,12 @@ sub HandleLanguage {
 
         $TargetPOTFile = "$ModuleDirectory/i18n/$Module/$Module.pot";
         $TargetPOFile  = "$ModuleDirectory/i18n/$Module/$Module.$WeblateLanguage.po";
+    }
+    else {
+        $LanguageFile  = "$Home/Kernel/Language/$Language.pm";
+        $TargetFile    = "$Home/Kernel/Language/$Language.pm";
+        $TargetPOTFile = "$Home/i18n/Znuny/Znuny.pot";
+        $TargetPOFile  = "$Home/i18n/Znuny/Znuny.$WeblateLanguage.po";
     }
 
     my $WritePOT = $Param{WritePO} || -e $TargetPOTFile;
@@ -642,7 +642,7 @@ sub WritePerlLanguageFile {
     my $JSData = "    \$Self->{JavaScriptStrings} = [\n";
 
     if ( $Param{IsSubTranslation} ) {
-        $JSData = '    push @{ $Self->{JavaScriptStrings} // [] }, (' . "\n";
+        $JSData = '    push @{ $Self->{JavaScriptStrings} //= [] }, (' . "\n";
     }
 
     for my $String ( sort keys %{ $Param{UsedInJS} // {} } ) {
