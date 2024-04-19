@@ -170,6 +170,7 @@
                 <Item Key="Ticket::Frontend::AgentTicketFreeText###DynamicField">AgentTicketFreeText</Item>
                 <Item Key="Ticket::Frontend::AgentTicketMove###DynamicField">AgentTicketMove</Item>
                 <Item Key="Ticket::Frontend::AgentTicketNote###DynamicField">AgentTicketNote</Item>
+                <Item Key="Ticket::Frontend::AgentTicketNoteToLinkedTicket###DynamicField">AgentTicketNoteToLinkedTicket</Item>
                 <Item Key="Ticket::Frontend::AgentTicketOwner###DynamicField">AgentTicketOwner</Item>
                 <Item Key="Ticket::Frontend::AgentTicketPending###DynamicField">AgentTicketPending</Item>
                 <Item Key="Ticket::Frontend::AgentTicketPhone###DynamicField">AgentTicketPhone</Item>
@@ -2968,6 +2969,13 @@
             <Item ValueType="String" ValueRegex="">note</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###RequiredLock" Required="0" Valid="1">
+        <Description Translatable="1">Defines if a ticket lock is required in the ticket owner screen of a zoomed ticket in the agent interface (if the ticket isn't locked yet, the ticket gets locked and the current agent will be set automatically as its owner).</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###LinkedTicketState" Required="0" Valid="1">
         <Description Translatable="1">Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
@@ -3080,6 +3088,13 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###QueueMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Sets if queue must be selected by the agent.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###Owner" Required="0" Valid="1">
         <Description Translatable="1">Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
@@ -3101,8 +3116,22 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###ResponsibleMandatory" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Sets if ticket responsible must be selected by the agent.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###State" Required="0" Valid="1">
         <Description Translatable="1">Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###StateMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Sets if state must be selected by the agent.</Description>
         <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -3146,6 +3175,40 @@
         <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###FormDraft" Required="0" Valid="1">
+        <Description Translatable="1">Allows to save current work as draft in the ticket pending screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###RichTextWidth" Required="0" Valid="1">
+        <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###RichTextHeight" Required="0" Valid="1">
+        <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###DynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic fields shown in the ticket move screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled and required</Item>
+                </DefaultItem>
+            </Hash>
         </Value>
     </Setting>
     <!-- PublicModule Template -->
