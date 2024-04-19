@@ -9405,30 +9405,6 @@ msgid "Reset setting"
 msgstr "Поништи подешавање"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Allow users to adapt this setting from within their personal preferences"
-msgstr "Омогући корисницима да мењају ово подешавање у њиховим личним подешавањима"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Allow users to update"
-msgstr "Дозволи корисницима да мењају"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Do not longer allow users to adapt this setting from within their personal preferences"
-msgstr "Онемогући корисницима да мењају ово подешавање у њиховим личним подешавањима"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Forbid users to update"
-msgstr "Забрани корисницима да мењају"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user specific changes for this setting"
-msgstr "Прикажи корисничке промене за ово подешавање"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user settings"
-msgstr "Прикажи корисничке промене"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Copy a direct link to this setting to your clipboard"
 msgstr "Копирај директну везу за ово подешавање"
 

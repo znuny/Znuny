@@ -9428,30 +9428,6 @@ msgid "Reset setting"
 msgstr "Einstellung zurücksetzen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Allow users to adapt this setting from within their personal preferences"
-msgstr "Nutzern erlauben, diese Einstellung in ihren persönlichen Einstellungen anzupassen"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Allow users to update"
-msgstr "Aktualisieren durch Nutzer erlauben"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Do not longer allow users to adapt this setting from within their personal preferences"
-msgstr "Nutzern nicht länger erlauben, diese Einstellung in ihren persönlichen Einstellungen anzupassen"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Forbid users to update"
-msgstr "Aktualisieren durch Nutzer nicht erlauben"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user specific changes for this setting"
-msgstr "Änderungen anzeigen, die Nutzer für diese Einstellung vorgenommen haben"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user settings"
-msgstr "Nutzereinstellungen anzeigen"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Copy a direct link to this setting to your clipboard"
 msgstr "Direkt-Link zu dieser Einstellung in die Zwischenablage kopieren"
 

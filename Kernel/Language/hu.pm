@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.919144832020576;
+    $Self->{Completeness}        = 0.919066773934031;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3423,14 +3423,6 @@ sub Data {
         'Enable' => 'Engedélyezés',
         'Reset this setting to its default state' => 'A beállítás visszaállítása az alapértelmezett állapotára',
         'Reset setting' => 'Beállítás visszaállítása',
-        'Allow users to adapt this setting from within their personal preferences' =>
-            'Lehetővé teszi a felhasználóknak ezen beállítás elfogadását a személyes beállításaikon belülről',
-        'Allow users to update' => 'Engedélyezés a felhasználóknak a frissítéshez',
-        'Do not longer allow users to adapt this setting from within their personal preferences' =>
-            'Többé ne tegye lehetővé a felhasználóknak ezen beállítás elfogadását a személyes beállításaikon belülről',
-        'Forbid users to update' => 'Tiltás a felhasználóknak a frissítéshez',
-        'Show user specific changes for this setting' => 'Felhasználóra jellemző változások megjelenítése ennél a beállításnál',
-        'Show user settings' => 'Felhasználói beállítások megjelenítése',
         'Copy a direct link to this setting to your clipboard' => 'Erre a beállításra mutató közvetlen hivatkozás másolása a vágólapra',
         'Copy direct link' => 'Közvetlen hivatkozás másolása',
         'Remove this setting from your favorites setting' => 'A beállítás eltávolítása a kedvenc beállításokból',

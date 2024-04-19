@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.509082141134866;
+    $Self->{Completeness}        = 0.509412711182623;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3423,14 +3423,6 @@ sub Data {
         'Enable' => 'Inschakelen',
         'Reset this setting to its default state' => '',
         'Reset setting' => '',
-        'Allow users to adapt this setting from within their personal preferences' =>
-            '',
-        'Allow users to update' => '',
-        'Do not longer allow users to adapt this setting from within their personal preferences' =>
-            'Sta niet langer toe dat gebruikers deze instelling aanpassen aan hun persoonlijke voorkeuren',
-        'Forbid users to update' => '',
-        'Show user specific changes for this setting' => '',
-        'Show user settings' => '',
         'Copy a direct link to this setting to your clipboard' => '',
         'Copy direct link' => 'Directe link kopieren',
         'Remove this setting from your favorites setting' => '',

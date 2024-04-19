@@ -9416,30 +9416,6 @@ msgid "Reset setting"
 msgstr "リセット設定"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Allow users to adapt this setting from within their personal preferences"
-msgstr "ユーザーが個人設定内からこの設定を変更できるようにする。"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Allow users to update"
-msgstr "ユーザーに更新を許可する"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Do not longer allow users to adapt this setting from within their personal preferences"
-msgstr "ユーザーが個人設定からこの設定を変更するのを許可しないようにする。"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Forbid users to update"
-msgstr "ユーザーの更新を禁止する"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user specific changes for this setting"
-msgstr "この設定のユーザー固有の変更を表示する"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user settings"
-msgstr "ユーザー設定を表示する"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Copy a direct link to this setting to your clipboard"
 msgstr "この設定への直接リンクをクリップボードにコピーする"
 

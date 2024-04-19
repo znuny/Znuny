@@ -9411,30 +9411,6 @@ msgid "Reset setting"
 msgstr "重置设置"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Allow users to adapt this setting from within their personal preferences"
-msgstr "允许用户从个人偏好设置中调整这个设置"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Allow users to update"
-msgstr "允许用户更新"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Do not longer allow users to adapt this setting from within their personal preferences"
-msgstr "不再允许用户在个人偏好设置中调整这个设置"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Forbid users to update"
-msgstr "禁止用户更新"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user specific changes for this setting"
-msgstr "显示这个设置的用户特定变更"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user settings"
-msgstr "显示用户设置"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Copy a direct link to this setting to your clipboard"
 msgstr "将这个设置的直接链接复制到剪贴板"
 

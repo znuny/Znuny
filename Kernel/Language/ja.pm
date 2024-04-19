@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.702459411670149;
+    $Self->{Completeness}        = 0.702172164119067;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3423,14 +3423,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Enable' => '有効',
         'Reset this setting to its default state' => 'この設定をデフォルトのステータスにリセットする',
         'Reset setting' => 'リセット設定',
-        'Allow users to adapt this setting from within their personal preferences' =>
-            'ユーザーが個人設定内からこの設定を変更できるようにする。',
-        'Allow users to update' => 'ユーザーに更新を許可する',
-        'Do not longer allow users to adapt this setting from within their personal preferences' =>
-            'ユーザーが個人設定からこの設定を変更するのを許可しないようにする。',
-        'Forbid users to update' => 'ユーザーの更新を禁止する',
-        'Show user specific changes for this setting' => 'この設定のユーザー固有の変更を表示する',
-        'Show user settings' => 'ユーザー設定を表示する',
         'Copy a direct link to this setting to your clipboard' => 'この設定への直接リンクをクリップボードにコピーする',
         'Copy direct link' => 'ダイレクトリンクをコピーする',
         'Remove this setting from your favorites setting' => 'この設定をお気に入り設定から削除',

@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.915447677222312;
+    $Self->{Completeness}        = 0.915366049879324;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3423,14 +3423,6 @@ sub Data {
         'Enable' => 'Uključi',
         'Reset this setting to its default state' => 'Poništi ovo podešavanje na podrazumevanu vrednost',
         'Reset setting' => 'Poništi podešavanje',
-        'Allow users to adapt this setting from within their personal preferences' =>
-            'Omogući korisnicima da menjaju ovo podešavanje u njihovim ličnim podešavanjima',
-        'Allow users to update' => 'Dozvoli korisnicima da menjaju',
-        'Do not longer allow users to adapt this setting from within their personal preferences' =>
-            'Onemogući korisnicima da menjaju ovo podešavanje u njihovim ličnim podešavanjima',
-        'Forbid users to update' => 'Zabrani korisnicima da menjaju',
-        'Show user specific changes for this setting' => 'Prikaži korisničke promene za ovo podešavanje',
-        'Show user settings' => 'Prikaži korisničke promene',
         'Copy a direct link to this setting to your clipboard' => 'Kopiraj direktnu vezu za ovo podešavanje',
         'Copy direct link' => 'Kopiraj direktnu vezu',
         'Remove this setting from your favorites setting' => 'Ukloni ovo podešavanje iz omiljenih',

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.918984086159781;
+    $Self->{Completeness}        = 0.918905872888174;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -3424,14 +3424,6 @@ sub Data {
         'Enable' => '启用',
         'Reset this setting to its default state' => '将此设置重置为默认状态',
         'Reset setting' => '重置设置',
-        'Allow users to adapt this setting from within their personal preferences' =>
-            '允许用户从个人偏好设置中调整这个设置',
-        'Allow users to update' => '允许用户更新',
-        'Do not longer allow users to adapt this setting from within their personal preferences' =>
-            '不再允许用户在个人偏好设置中调整这个设置',
-        'Forbid users to update' => '禁止用户更新',
-        'Show user specific changes for this setting' => '显示这个设置的用户特定变更',
-        'Show user settings' => '显示用户设置',
         'Copy a direct link to this setting to your clipboard' => '将这个设置的直接链接复制到剪贴板',
         'Copy direct link' => '复制直接链接',
         'Remove this setting from your favorites setting' => '从你的收藏夹中删除这个设置',
