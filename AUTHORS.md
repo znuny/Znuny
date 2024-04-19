@@ -33,6 +33,7 @@ The following persons contributed to Znuny:
 * Felix Niklas <felix.niklas@otrs.com>
 * Florian Edlhuber <florian.edlhuber@otrs.com>
 * Florian Liebe <florian.liebe@otrs.com>
+* Flávio Marta <7440579+CallMeFlanby@users.noreply.github.com>
 * Friedrich Delgado <friedel@nomaden.org>
 * Gerald Young <gerald.young@noynim.com>
 * Henning Oschwald <henning.oschwald@otrs.com>
