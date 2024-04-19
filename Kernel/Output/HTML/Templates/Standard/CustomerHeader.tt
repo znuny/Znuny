@@ -19,7 +19,7 @@
         <div id="Logo"></div>
 [% RenderBlockEnd("HeaderLogo") %]
         <h1 class="CompanyName">
-            <a href="#">[% Config("CustomerHeadline") %]</a>
+            <a href="[% Env('Baselink') %]">[% Config("CustomerHeadline") %]</a>
         </h1>
 [% RenderBlockStart("DebugRTLButton") %]
         <button onclick="Core.Debug.SimulateRTLPage();" type="button">Simulate RTL</button>
