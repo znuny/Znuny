@@ -2938,7 +2938,7 @@ sub _RenderArticle {
     );
 
     $Data{Subject} = $TemplateGeneratorObject->_Replace(
-        RichText => $LayoutObject->{BrowserRichText},
+        RichText => 0,
         Text     => $Data{Subject} || '',
         Data     => {
             %{ $Param{GetParam} },
@@ -5652,7 +5652,7 @@ sub _StoreActivityDialog {
                 );
 
                 $Param{GetParam}->{Subject} = $TemplateGeneratorObject->_Replace(
-                    RichText => $LayoutObject->{BrowserRichText},
+                    RichText => 0,
                     Text     => $Param{GetParam}->{Subject} || '',
                     Data     => {
                         %{ $Param{GetParam} },
