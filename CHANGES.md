@@ -1,4 +1,5 @@
 # 7.0.18 2024-??-??
+ - 2024-04-22 Integrated package Znuny4OTRS-BugfixCustomerUserDBPasswordCryptType.
  - 2024-04-19 Added support for two factor auth token parameter to generic interface. Thanks to Flávio Marta (@CallMeFlanby). [#502](https://github.com/znuny/Znuny/pull/502)
  - 2024-04-18 Improved AJAX subactions for AgentTicketEmailOutbound.
 
