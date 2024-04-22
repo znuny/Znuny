@@ -112,6 +112,9 @@ sub new {
     my @DynamicFieldMapEntries = grep { $_->[5] eq 'dynamic_field' } @{ $Self->{CustomerUserMap}->{Map} };
     $Self->{ConfiguredDynamicFieldNames} = { map { $_->[2] => 1 } @DynamicFieldMapEntries };
 
+    # Use given count as backend source.
+    $Self->{Source} = $Param{Count};
+
     return $Self;
 }
 
@@ -1680,14 +1683,12 @@ sub SetPassword {
         );
         return;
     }
-    my $CryptedPw = '';
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    my $CryptType = $ConfigObject->Get('Customer::AuthModule::DB::CryptType') || 'sha2';
-
-    # get encode object
     my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
+
+    my $CryptedPw = '';
+    my $CryptType = $ConfigObject->Get( 'Customer::AuthModule::DB::CryptType' . $Self->{Source} ) || 'sha2';
 
     # crypt plain (no crypt at all)
     if ( $CryptType eq 'plain' ) {
