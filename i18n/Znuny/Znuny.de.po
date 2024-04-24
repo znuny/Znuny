@@ -24341,3 +24341,7 @@ msgstr "Aktiviert einen Blinkmechanismus des Services, welcher das älteste Tick
 msgid "You can not edit a transition before it's connected to two activities."
 msgstr "Sie können einen Übergang nicht bearbeiten, bevor er mit zwei Aktivitäten verbunden ist."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
+msgstr "Falsche Datenbank-Speicherengine (%s ist %s, muss aber InnoDB sein)."
+

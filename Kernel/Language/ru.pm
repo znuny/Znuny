@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.836525759577279;
+    $Self->{Completeness}        = 0.836387650652138;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4493,6 +4493,8 @@ sub Data {
             'Ошибка: Убедитесь что ваша СУБД принимает пакеты размером больше %s MB (текущее значение размера пакета - до %s MB). Измените значение параметра max_allowed_packet для вашей СУБД во избежание ошибок.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Ошибка: Установите значение параметра  innodb_log_file_size для вашей СУБД по крайней мере %s MB (текущее: %s MB, рекомендуемое: %s MB) Более подробно смотрите в %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             'Неверный collation базы данных (%s - %s, а требуется utf8)',
 

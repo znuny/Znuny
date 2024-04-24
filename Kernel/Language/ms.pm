@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.53946499339498;
+    $Self->{Completeness}        = 0.539375928677563;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4481,6 +4481,8 @@ sub Data {
             'Ralat: Sila pastikan pangkalan data anda menerima pakej melebihi saiz %s MB (buat masa ini ia hanya menerima pakej sehingga %s MB). Sila sesuaikan tetapan max_paket_dibenarkan pada pangkalan data anda agar tidak terdapat ralat.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Ralat: Sila tetapkan nilai untuk innodb_log_file_size pada pangkalan data anda kepada sekurang-kurangnya %s MB ( semasa: %s MB, disyorkan: %s MB) . Untuk maklumat lanjut, sila lihat di %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 

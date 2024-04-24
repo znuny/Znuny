@@ -24347,3 +24347,7 @@ msgstr ""
 msgid "You can not edit a transition before it's connected to two activities."
 msgstr ""
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
+msgstr ""
+

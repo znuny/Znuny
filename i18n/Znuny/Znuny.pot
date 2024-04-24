@@ -12903,6 +12903,10 @@ msgid "Error: Please set the value for innodb_log_file_size on your database to 
 msgstr ""
 
 #. Perl Module: Kernel/Modules/Installer.pm
+msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/Installer.pm
 msgid "Wrong database collation (%s is %s, but it needs to be utf8)."
 msgstr ""
 

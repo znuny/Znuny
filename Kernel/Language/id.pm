@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.608322324966975;
+    $Self->{Completeness}        = 0.608221892025755;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4483,6 +4483,8 @@ bin/znuny.Daemon.pl status\').',
             'Kesalahan: Pastikan database Anda menerima paket lebih dari %s MB (itu saat ini hanya menerima paket sampai %s MB). Silahkan menyesuaikan pengaturan max_allowed_packet dari database Anda untuk menghindari kesalahan.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Kesalahan: Silakan menetapkan nilai untuk innodb_log_file_size pada database Anda untuk setidaknya%s MB (saat ini: %s MB, direkomendasikan: %s MB). Untuk informasi lebih lanjut, silakan lihat di %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 

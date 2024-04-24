@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.686922060766182;
+    $Self->{Completeness}        = 0.686808651147433;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4488,6 +4488,8 @@ sub Data {
             '',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'innodb_log_file_sizeの設定を少なくとも%s MB以上にしてください(現在: %s MB, 推奨: %s MB)。詳細は%sを参照して下さい。',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 

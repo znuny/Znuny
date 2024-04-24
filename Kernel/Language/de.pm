@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991578599735799;
+    $Self->{Completeness}        = 0.991579990094106;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4482,6 +4482,8 @@ sub Data {
             'Fehler: Bitte stellen Sie sicher, dass Ihre Datenbank Pakete größer als %s MB akzeptiert (derzeit werden nur Pakete bis zu einer Größe von %s MB akzeptiert). Bitte passen Sie die Einstellung max_allowed_packet Ihrer Datenbank an, um Fehler zu vermeiden.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Fehler: Bitte erhöhen Sie den Wert für innodb_log_file_size in Ihrer Datenbank-Konfiguration auf mindestens %s MB (aktuell: %s MB, empfohlen: %s MB). Mehr Informationen finden Sie unter %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            'Falsche Datenbank-Speicherengine (%s ist %s, muss aber InnoDB sein).',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             'Falsche Datenbank-Sortierfolge (%s ist %s, muss aber utf8 sein).',
 

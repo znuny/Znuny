@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.329260237780713;
+    $Self->{Completeness}        = 0.329205877497111;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4488,6 +4488,8 @@ sub Data {
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            '',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',

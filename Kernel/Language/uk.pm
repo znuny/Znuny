@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.438243064729194;
+    $Self->{Completeness}        = 0.438170711573386;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4482,6 +4482,8 @@ sub Data {
             'Помилка: Будь ласка, переконайтеся в тому. що ваша база даних приймає пакунки розміром завбільшки %s МБ (в даний час приймаються пакунки за розміром до %s МБ). Будь ласка адаптуйте установку max_allowed_packet вашої бази даних, щоб уникнути помилок.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Помилка: Будь ласка, встановіть значення для innodb_log_file_size вашої бази даних, принаймні %s МБ (зараз: %s МБ, рекомендовано: %s МБ). Для отримання додаткової інформації, будь ласка, перегляньте %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 

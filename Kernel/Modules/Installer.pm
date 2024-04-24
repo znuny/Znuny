@@ -1253,6 +1253,14 @@ sub CheckDBRequirements {
                 );
             }
         }
+        else {
+            $Result{Successful} = 0;
+            $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
+                "Wrong default storage engine (%s is %s, but it needs to be InnoDB).",
+                'default_storage_engine',
+                $DefaultStorageEngine,
+            );
+        }
 
         # Check character_set_database value.
         my $Charset = $Result{DBH}->selectall_arrayref("SHOW variables LIKE 'character_set_database'");

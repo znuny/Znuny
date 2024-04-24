@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.8721928665786;
+    $Self->{Completeness}        = 0.872048869077101;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4481,6 +4481,8 @@ sub Data {
             '오류 : 데이터베이스가 크기가 %s를 넘는 패킷을 수락하는지 확인하십시오 (패키지는 현재 최대 %s MB 만 허용). 오류를 피하기 위해 데이터베이스의 max_allowed_packet 설정을 조정하십시오.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '오류 : 데이터베이스의 innodb_log_file_size 값을 최소 %s MB (현재 : %s MB, 권장 : %s MB)로 설정하십시오. 자세한 내용은 %s를보십시오.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '잘못된 데이터베이스 정렬 (%s는 %s이지만 utf8이어야합니다).',
 

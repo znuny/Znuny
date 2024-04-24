@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.346928665785997;
+    $Self->{Completeness}        = 0.346871388476143;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4484,6 +4484,8 @@ sub Data {
             'Fejl: Sørg for at din database accepterer pakker over %s MB i størrelse (I øjeblikket accepterer den kun pakker op til %s MB). Tilpas max_allowed_packet indstillingen i din database for at undgå fejl.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Fejl: Sæt venligst værdien for innodb_log_file_size i din database til mindst %s MB (nuværende: %s MB, anbefalet: %s MB). For mere info, se %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 

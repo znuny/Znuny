@@ -213,6 +213,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::DatabaseCharsetCheck',
         },
         {
+            Message => 'Check database default storage engine',
+            Module  => 'scripts::Migration::Base::DatabaseDefaultStorageEngineCheck',
+        },
+        {
             Message => 'Check required Perl modules',
             Module  => 'scripts::Migration::Base::PerlModulesCheck',
         },

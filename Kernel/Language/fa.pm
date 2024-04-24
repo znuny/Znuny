@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.619220607661823;
+    $Self->{Completeness}        = 0.619118375433383;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4487,6 +4487,8 @@ sub Data {
             'خطا: لطفا مطمئن شوید که پایگاه داده خود را بسته بر می پذیرد %s MB در اندازه (در حال حاضر تنها بسته می پذیرد تا %s MB). لطفا تنظیمات max_allowed_packet از پایگاه داده خود را به منظور جلوگیری از اشتباهات وفق دهند.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'خطا: لطفا مقدار را برای innodb_log_file_size در پایگاه داده خود را به حداقل مجموعه %s (: در حال حاضر MB %s MB، توصیه می شود: %s MB). برای کسب اطلاعات بیشتر، لطفا یک نگاهی به %s .',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 

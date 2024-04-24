@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.900759577278732;
+    $Self->{Completeness}        = 0.900610863463761;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4488,6 +4488,8 @@ sub Data {
             '错误：请确认你的数据库能够接收大于%sMB的数据包（目前能够接收的最大数据包为%sMB）。为了避免程序报错，请调整数据库max_allowed_packet参数。',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '错误：请设置数据库参数innodb_log_file_size至少为%s MB（当前：%s MB，推荐：%s MB），请参阅 %s 获取更多信息。',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '错误的数据库排序规则（%s是%s，但需要是utf8）。',
 

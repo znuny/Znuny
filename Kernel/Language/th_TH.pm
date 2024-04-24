@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.525429326287979;
+    $Self->{Completeness}        = 0.525342578834406;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4484,6 +4484,8 @@ sub Data {
             'ข้อผิดพลาด: โปรดตรวจสอบฐานข้อมูลของคุณว่าสามารถรับแพคเกจได้มากกว่า% s MB (ปัจจุบันรับเฉพาะแพคเกจขนาด% s MB) กรุณาปรับให้เข้าการตั้งค่า max_allowed_packet ของฐานข้อมูลของคุณเพื่อหลีกเลี่ยงข้อผิดพลาด',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'ข้อผิดพลาด: กรุณาระบุค่าสำหรับ innodb_log_file_size ในฐานข้อมูลของคุณอย่างน้อย% s MB (ปัจจุบัน:% s MB แนะนำ:% s MB) สำหรับข้อมูลเพิ่มเติมโปรดดูได้ที่',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 

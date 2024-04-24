@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.897291941875826;
+    $Self->{Completeness}        = 0.897143800561334;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4487,6 +4487,8 @@ sub Data {
             'Greška: Molimo da proverite da vaša baza podataka prihvata pakete po veličini veće od %s MB  (trenutno prihvata pakete veličine do %s MB). Molimo da prilagodite parametar max_allowed_packet podešavanje u vašoj bazi podataka kako bi izbegli greške.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Greška: Molimo da podesete vrednost za innodb_log_file_size u vašoj bazi podataka na najmanje %s MB (trenutno: %s MB, preporučeno: %s MB). Za više informacija, molimo pogledajte na %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             'Neispravno podešena baza podataka (%s je %s, a trebalo bi da bude utf8).',
 
