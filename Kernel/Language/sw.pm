@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.438005613339937;
+    $Self->{Completeness}        = 0.437933311323869;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -7863,6 +7863,7 @@ Mfano:
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml

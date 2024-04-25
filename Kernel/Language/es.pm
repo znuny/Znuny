@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.597490506851577;
+    $Self->{Completeness}        = 0.597391878507758;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7871,6 +7871,7 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml

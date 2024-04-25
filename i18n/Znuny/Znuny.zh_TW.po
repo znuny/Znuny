@@ -11167,7 +11167,7 @@ msgstr ""
 msgid "Can't read %s!"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "File is OK"
 msgstr ""
 
@@ -24305,6 +24305,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "User preferences backend to use."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml

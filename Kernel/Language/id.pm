@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.608221892025755;
+    $Self->{Completeness}        = 0.608121492241664;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -7860,6 +7860,7 @@ bin/znuny.Daemon.pl status\').',
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml

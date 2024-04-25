@@ -1,3 +1,6 @@
+# 7.1.1 2024-??-??
+ - 2023-10-11 Added user preferences backend DBJSON.
+
 # 7.0.18 2024-??-??
  - 2024-04-24 InnoDB is now the required default storage engine.
  - 2024-04-22 Integrated package Znuny4OTRS-BugfixCustomerUserDBPasswordCryptType.

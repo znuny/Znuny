@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-02-01 13:47+0000\n"
+"POT-Creation-Date: 2024-04-04 12:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8487,10 +8487,6 @@ msgid "PDF"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
-msgid "Unknown"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
 msgid "View"
 msgstr ""
 
@@ -9956,6 +9952,10 @@ msgstr ""
 
 #. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
 msgid "Finished"
+msgstr ""
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
+msgid "Unknown"
 msgstr ""
 
 #. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
@@ -20312,6 +20312,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Shows the title field in the NoteToLinkedTicket screen of the agent interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "User preferences backend to use."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml

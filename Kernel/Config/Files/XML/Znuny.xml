@@ -3406,6 +3406,18 @@
             </Hash>
         </Value>
     </Setting>
+
+    <!--
+        User preferences
+    -->
+    <Setting Name="User::PreferencesModule" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">User preferences backend to use.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="PerlModule" ValueFilter="Kernel/System/User/Preferences/*.pm">Kernel::System::User::Preferences::DB</Item>
+        </Value>
+    </Setting>
+
     <!-- PublicModule Template -->
     <Setting Name="Loader::Module::PublicModule###000-PublicModuleTemplate" Required="0" Valid="0">
         <Description Translatable="1">Loader module registration for the public interface.</Description>
