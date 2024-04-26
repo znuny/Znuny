@@ -83,6 +83,14 @@ msgid "Filter"
 msgstr "Tapisan"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show Valid"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
+msgid "Show All"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs."
 msgstr "Sila ambil perhatian: Jadual ini menunjukkan  susunan pelaksanaan program Senarai Kawalan Akses. Jika anda perlu mengubah perintah itu di mana Senarai Kawalan Akses dilaksanakan, sila tukar nama-nama Senarai Kawalan Akses yang terjejas."
 
@@ -535,20 +543,20 @@ msgid "Send to all role members"
 msgstr "Hantar ke semua peranan ahli"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Send on out of office"
-msgstr "Menghantar di luar pejabat"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Also send if the user is currently out of office."
 msgstr "Juga menghantar jika pengguna sedang berada di luar pejabat."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Once per day"
-msgstr "Sekali sehari"
+msgid "Send on out of office"
+msgstr "Menghantar di luar pejabat"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Notify user just once per day about a single appointment using a selected transport."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
+msgid "Once per day"
+msgstr "Sekali sehari"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Notification Methods"
@@ -1659,7 +1667,7 @@ msgid "Screens"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
-msgid "Default columns"
+msgid "Overview Default Columns"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
@@ -1804,6 +1812,14 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "Backend documentation"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
+msgid "Cache TTL"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
+msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
@@ -2023,6 +2039,10 @@ msgid "Run this task"
 msgstr "Jalankan tugas ini"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
+msgid "Do you really want to delete this generic agent job?"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Job Settings"
 msgstr "kerja Tetapan"
 
@@ -2091,16 +2111,16 @@ msgid "If a ticket event is fired, the ticket filter will be applied to check if
 msgstr "Sekiranya peristiwa tiket dihentikan, penapis tiket akan digunakan untuk memeriksa jika tiket adalah padan. Hanya selepas itu tugas akan dijalankan ke atas tiket."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-msgid "Do you really want to delete this event trigger?"
-msgstr "Anda pasti mahu memadam pencetus acara ini?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Add Event Trigger"
 msgstr "Tambah pencetus acara"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "To add a new event select the event object and event name"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
+msgid "Do you really want to delete this event trigger?"
+msgstr "Anda pasti mahu memadam pencetus acara ini?"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Select Tickets"
@@ -3259,18 +3279,6 @@ msgid "This configuration defines if incoming connections should get closed or k
 msgstr "Konfigurasi ini mentakrifkan jika sambungan masuk seharusnya ditutup atau kekal hidup."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Additional response headers"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Header"
-msgstr "Permulaan"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Add response header"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Endpoint"
 msgstr "Titik akhir"
 
@@ -3539,7 +3547,19 @@ msgid "The default HTTP command to use for the requests."
 msgstr "Arahan HTTP lalai untuk digunakan untuk permintaan."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Additional response headers"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Additional request headers"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Header"
+msgstr "Permulaan"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Add response header"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
@@ -4434,10 +4454,6 @@ msgstr "buang pakej"
 msgid "Do you really want to uninstall this package?"
 msgstr "Adakah anda benar-benar mahu untuk memadam pakej ini?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
-msgid "or"
-msgstr "atau"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Reinstall package"
 msgstr "Pasang semula pakej"
@@ -4631,16 +4647,24 @@ msgid "Permission"
 msgstr "Kebenaran"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Size"
+msgstr "Saiz"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Problem"
+msgstr "Masalah"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "OK"
+msgstr "OK"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Download file from package!"
 msgstr "Muat turun fail dari pakej!"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Required"
 msgstr "Diperlukan"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Size"
-msgstr "Saiz"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Primary Key"
@@ -5265,6 +5289,10 @@ msgstr "Adakah anda benar-benar mahu untuk memadam Aktiviti Dialog ini?"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
 msgid "Do you really want to delete this Transition?"
 msgstr "Anda pasti mahu memadam Peralihan ini?"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+msgid "You can not edit a transition before it's connected to two activities."
+msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
 msgid "Do you really want to delete this Transition Action?"
@@ -6068,6 +6096,10 @@ msgstr "Jenis Keadaan"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
 msgid "It's not possible to invalidate this entry because there is no other merge states in system!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "This field must be a hexadecimal color code."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
@@ -7027,10 +7059,6 @@ msgid "in"
 msgstr "dalam"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-msgid "No Data Available."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid " Show or hide the content"
 msgstr ""
 
@@ -7079,6 +7107,10 @@ msgid "more"
 msgstr "lagi"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid "No Data Available."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Available Columns"
 msgstr "Ruangan tersedia"
 
@@ -7107,12 +7139,28 @@ msgid "Closed"
 msgstr "Ditutup"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
+msgid "Phone ticket"
+msgstr "Tiket telefon"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
+msgid "Email ticket"
+msgstr "Tiket emel"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "%s open ticket(s) of %s"
 msgstr "%s membuka tiket(tiket-tiket) %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "%s closed ticket(s) of %s"
 msgstr "%s menutup tiket(tiket-tiket) %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
+msgid "New phone ticket from %s"
+msgstr "Tiket telefon baru daripada %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
+msgid "New email ticket to %s"
+msgstr "Tiket emel baru kepada %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "Edit customer ID"
@@ -7145,22 +7193,6 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
 msgid "Customer user information"
 msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
-msgid "Phone ticket"
-msgstr "Tiket telefon"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
-msgid "Email ticket"
-msgstr "Tiket emel"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
-msgid "New phone ticket from %s"
-msgstr "Tiket telefon baru daripada %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
-msgid "New email ticket to %s"
-msgstr "Tiket emel baru kepada %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
 msgid "No tickets found."
@@ -7355,6 +7387,38 @@ msgid "End"
 msgstr "Tamat"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Left"
+msgstr "Kiri"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "The horizontal distance of the window relative to the screen, in pixels."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Top"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "The vertical distance of the window relative to the screen, in pixels."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Width"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Width in pixels or percent."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Height"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Height in pixels or percent."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "This setting can currently not be saved."
 msgstr ""
 
@@ -7483,12 +7547,12 @@ msgid "Export statistic %s"
 msgstr "Eksport statistik %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
-msgid "Delete statistic \"%s\""
-msgstr "Padam statistik \"%s\""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
 msgid "Delete statistic %s"
 msgstr "Padam statistik %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
+msgid "Do you really want to delete this statistic?"
+msgstr "Adakah anda betul-betul ingin memadam statistik ini?"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
 msgid "Statistics Information"
@@ -8422,10 +8486,6 @@ msgstr ""
 msgid "PDF"
 msgstr ""
 
-#. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
-msgid "Unknown"
-msgstr "Tidak diketahui"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
 msgid "View"
 msgstr "Melihat"
@@ -8447,8 +8507,8 @@ msgid "This ticket is archived."
 msgstr "Sistem ini diarkibkan."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-msgid "Note: Type is invalid!"
-msgstr "Nota: Jenis tidak sah!"
+msgid "is invalid"
+msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 msgid "Pending till"
@@ -8506,10 +8566,6 @@ msgstr ""
 msgid "thank you for using our services."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
-msgid "Yes, I accept your license."
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
 msgid "The customer ID is not changeable, no other customer ID can be assigned to this ticket."
 msgstr ""
@@ -8531,12 +8587,12 @@ msgid "From assigned Customer IDs"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+msgid "Error"
+msgstr "Kesilapan"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "An Error Occurred"
 msgstr "Kesalahan Telah Berlaku"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-msgid "Error Details"
-msgstr "Butiran kesilapan"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Traceback"
@@ -8639,6 +8695,10 @@ msgid "A new password will be sent to your email address."
 msgstr "Kata kunci yang baru akan dihantar ke alamat emel anda."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "Back to login"
+msgstr "Kembali ke log masuk"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Create Account"
 msgstr "Buat akaun"
 
@@ -8697,6 +8757,10 @@ msgstr "Sila tekan butang di bawah untuk membuat tiket pertama anda."
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
 msgid "Create your first ticket"
 msgstr "Buat tiket pertama anda"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
+msgid "New Process Ticket"
+msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "Profile"
@@ -8807,6 +8871,10 @@ msgid "Ticket fields"
 msgstr "Medan tiket"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+msgid "Error Details"
+msgstr "Butiran kesilapan"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
 msgid "Expand"
 msgstr "Kembang"
 
@@ -8878,13 +8946,13 @@ msgstr ""
 msgid "Search tools"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
+msgid "SearchTemplate"
+msgstr ""
+
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "JavaScript not available"
 msgstr "JavaScript tidak disediakan"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
-msgid "Step %s"
-msgstr "langkah %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "License"
@@ -8905,6 +8973,10 @@ msgstr "selesai"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Welcome to %s"
 msgstr "Selamat datang ke %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
+msgid "Address"
+msgstr "Alamat"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Phone"
@@ -9019,16 +9091,16 @@ msgid "Check mail configuration"
 msgstr "Semak konfigurasi mel"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
+msgid "or"
+msgstr "atau"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "Skip this step"
 msgstr "Langkau langkah ini"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
 msgid "Done"
 msgstr "Selesai"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
-msgid "Error"
-msgstr "Kesilapan"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
 msgid "Database setup successful!"
@@ -9213,10 +9285,6 @@ msgstr "Padam pautan"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
 msgid "Lost your password?"
 msgstr "Hilang kata kunci anda?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "Back to login"
-msgstr "Kembali ke log masuk"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
 msgid "Scale preview content"
@@ -9887,6 +9955,10 @@ msgid "Finished"
 msgstr "Ditamatkan"
 
 #. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
+msgid "Unknown"
+msgstr "Tidak diketahui"
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
 msgid "No package information available."
 msgstr ""
 
@@ -9969,10 +10041,6 @@ msgstr "Encik"
 #. Perl Module: Kernel/Config/Defaults.pm
 msgid "Mrs."
 msgstr "Puan"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
-msgid "Address"
-msgstr "Alamat"
 
 #. Perl Module: Kernel/Config/Defaults.pm
 msgid "View system log messages."
@@ -11164,10 +11232,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "Can't read %s!"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
-msgid "File is OK"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
@@ -12839,6 +12903,10 @@ msgid "Error: Please set the value for innodb_log_file_size on your database to 
 msgstr "Ralat: Sila tetapkan nilai untuk innodb_log_file_size pada pangkalan data anda kepada sekurang-kurangnya %s MB ( semasa: %s MB, disyorkan: %s MB) . Untuk maklumat lanjut, sila lihat di %s."
 
 #. Perl Module: Kernel/Modules/Installer.pm
+msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/Installer.pm
 msgid "Wrong database collation (%s is %s, but it needs to be utf8)."
 msgstr ""
 
@@ -14071,7 +14139,7 @@ msgid "Server Database Charset"
 msgstr "Setchar Pangkalan data Pelayan"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set 'utf8'."
+msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
@@ -14274,6 +14342,90 @@ msgstr "Ia sepatutnya mempunyai lebih daripada 60% ruang tukaran kosong."
 msgid "There should be no more than 200 MB swap space used."
 msgstr "Ia sepatutnya mempunyai tidak lebih daripada 200 MB ruang tukaran yang digunakan."
 
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
+msgid "Webserver"
+msgstr "Pelayan web"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
+msgid "Loaded Apache Modules"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/MPMModel.pm
+msgid "MPM model"
+msgstr "Model MPM"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/MPMModel.pm
+msgid "Znuny requires apache to be run with the 'prefork' MPM model."
+msgstr "Znuny memerlukan apache dijalankan dengan model MPM 'prefork'."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "CGI Accelerator Usage"
+msgstr "Penggunaan Pemecut CGI"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "You should use FastCGI or mod_perl to increase your performance."
+msgstr "Anda harus menggunakan FastCGI atau mod_perl untuk meningkatkan prestasi anda."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "mod_deflate Usage"
+msgstr "Penggunaan mod_deflate"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "Please install mod_deflate to improve GUI speed."
+msgstr "Sila pasang mod_deflate untuk meningkatkan kelajuan GUI."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "mod_filter Usage"
+msgstr "Penggunaan mod_filter"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "Please install mod_filter if mod_deflate is used."
+msgstr "Sila pasang mod_filter jika mod_deflate digunakan."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "mod_headers Usage"
+msgstr "Penggunaan mod_headers"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "Please install mod_headers to improve GUI speed."
+msgstr "Sila pasang mod_headers untuk meningkatkan kelajuan GUI."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "Apache::Reload Usage"
+msgstr "Penggunaan Apache::Reload"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "Apache::Reload or Apache2::Reload should be used as PerlModule and PerlInitHandler to prevent web server restarts when installing and upgrading modules."
+msgstr "Apache::Reload atau Apache2::Muat semula harus digunakan sebagai ModulPerl dan PengendaliAwalPerl untuk mengelak pelayan web bermula semula apabila memasang dan menaik taraf modul. "
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "Apache2::DBI Usage"
+msgstr "Penggunaan Apache2::DBI"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
+msgid "Apache2::DBI should be used to get a better performance  with pre-established database connections."
+msgstr "Apache2::DBI harus digunakan untuk mendapatkan prestasi yang lebih baik dengan sambungan pangkalan data sebelum ditubuhkan."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/EnvironmentVariables.pm
+msgid "Environment Variables"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/InternalWebRequest.pm
+msgid "Support Data Collection"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/InternalWebRequest.pm
+msgid "Support data could not be collected from the web server."
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Version.pm
+msgid "Webserver Version"
+msgstr "Versi pelayan web"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Version.pm
+msgid "Could not determine webserver version."
+msgstr "Tidak dapat menentukan versi pelayan web."
+
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/ArticleSearchIndexStatus.pm
 msgid "Znuny"
 msgstr ""
@@ -14467,15 +14619,15 @@ msgid "Legacy configuration backup files are no longer needed for the installed 
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
-msgid "Views with multiple loaded JavaScript files"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
 msgid "The following JavaScript files loaded multiple times:"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
 msgid "Files"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/MultipleJSFileLoad.pm
+msgid "Views with multiple loaded JavaScript files"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/PackageDeployment.pm
@@ -14622,90 +14774,6 @@ msgstr ""
 msgid "Znuny Version"
 msgstr "Versi Znuny"
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
-msgid "Webserver"
-msgstr "Pelayan web"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
-msgid "Loaded Apache Modules"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/MPMModel.pm
-msgid "MPM model"
-msgstr "Model MPM"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/MPMModel.pm
-msgid "Znuny requires apache to be run with the 'prefork' MPM model."
-msgstr "Znuny memerlukan apache dijalankan dengan model MPM 'prefork'."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "CGI Accelerator Usage"
-msgstr "Penggunaan Pemecut CGI"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "You should use FastCGI or mod_perl to increase your performance."
-msgstr "Anda harus menggunakan FastCGI atau mod_perl untuk meningkatkan prestasi anda."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "mod_deflate Usage"
-msgstr "Penggunaan mod_deflate"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "Please install mod_deflate to improve GUI speed."
-msgstr "Sila pasang mod_deflate untuk meningkatkan kelajuan GUI."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "mod_filter Usage"
-msgstr "Penggunaan mod_filter"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "Please install mod_filter if mod_deflate is used."
-msgstr "Sila pasang mod_filter jika mod_deflate digunakan."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "mod_headers Usage"
-msgstr "Penggunaan mod_headers"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "Please install mod_headers to improve GUI speed."
-msgstr "Sila pasang mod_headers untuk meningkatkan kelajuan GUI."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "Apache::Reload Usage"
-msgstr "Penggunaan Apache::Reload"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "Apache::Reload or Apache2::Reload should be used as PerlModule and PerlInitHandler to prevent web server restarts when installing and upgrading modules."
-msgstr "Apache::Reload atau Apache2::Muat semula harus digunakan sebagai ModulPerl dan PengendaliAwalPerl untuk mengelak pelayan web bermula semula apabila memasang dan menaik taraf modul. "
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "Apache2::DBI Usage"
-msgstr "Penggunaan Apache2::DBI"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
-msgid "Apache2::DBI should be used to get a better performance  with pre-established database connections."
-msgstr "Apache2::DBI harus digunakan untuk mendapatkan prestasi yang lebih baik dengan sambungan pangkalan data sebelum ditubuhkan."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/EnvironmentVariables.pm
-msgid "Environment Variables"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/InternalWebRequest.pm
-msgid "Support Data Collection"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/InternalWebRequest.pm
-msgid "Support data could not be collected from the web server."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Version.pm
-msgid "Webserver Version"
-msgstr "Versi pelayan web"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Version.pm
-msgid "Could not determine webserver version."
-msgstr "Tidak dapat menentukan versi pelayan web."
-
 #. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
 msgid "Concurrent Users Details"
 msgstr ""
@@ -14713,14 +14781,6 @@ msgstr ""
 #. Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
 msgid "Concurrent Users"
 msgstr "Pengguna Sedia ada"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "OK"
-msgstr "OK"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Problem"
-msgstr "Masalah"
 
 #. Perl Module: Kernel/System/SysConfig.pm
 msgid "Setting %s does not exists!"
@@ -15223,6 +15283,10 @@ msgid "Defines the fully qualified domain name of the system. This setting is us
 msgstr "Mentakrifkan nama domain sistem yang layak sepenuhnya. Tetapan ini digunakan sebagai pembolehubah, OTRS_CONFIG_FQDN dimana ia wujud dalam beberapa bentuk mesej yang digunakan oleh aplikasi itu."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the HTTP hostname for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the Znuny Daemon)."
 msgstr ""
 
@@ -15352,6 +15416,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines extra content that is allowed for use in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Global settings for all popup profiles."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -16387,8 +16455,12 @@ msgid "Allows agents to exchange the axis of a stat if they generate one."
 msgstr "Membolehkan ejen untuk menukar paksi sesebuah status jika ia menghasilkan satu."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Allows invalid agents to generate individual-related stats."
-msgstr "Membenarkan agen sah untuk menghasilkan statistik berkaitan-individu."
+msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
+msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers)."
@@ -16501,22 +16573,6 @@ msgstr "Menentukan susunan di mana nama pertama dan nama akhir agen akan ditunju
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Default skin for the agent interface."
 msgstr "Kulit default untuk antaramuka agen."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Default skin for the agent interface (slim version)."
-msgstr "Kulit default untuk antaramuka agen (versi kurus)."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Balanced white skin by Felix Niklas."
-msgstr "Kulit puih seimbang oleh Felix Niklas."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Balanced white skin by Felix Niklas (slim version)."
-msgstr "Kulit puih seimbang oleh Felix Niklas (versi kurus)."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "High contrast skin for visually impaired users."
-msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The agent skin's InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins."
@@ -17353,6 +17409,22 @@ msgstr "Mentakrifkan jika pra-pengasingan mengikut keutamaan perlu dilakukan dal
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the default sort order for all services in the service view, after priority sort."
 msgstr "Mentakrifkan turutan susunan asal untuk kesemua perkhidmatan dalam paparan perkhidmatan, selepas pengkelasan keutamaan."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable highlighting services based on ticket age."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Sets the age in minutes (first level) for highlighting services that contain untouched tickets."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Sets the age in minutes (second level) for highlighting services that contain untouched tickets."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Activates a blinking mechanism of the service that contains the oldest ticket."
+msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Activates time accounting."
@@ -20244,6 +20316,14 @@ msgstr ""
 msgid "Shows the title field in the NoteToLinkedTicket screen of the agent interface."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "User preferences backend to use."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Loader module registration for the public interface."
+msgstr ""
+
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "invalid-temporarily"
 msgstr "tidak sah-sementara"
@@ -20259,6 +20339,10 @@ msgstr "Kumpulan seluruh pentadbir."
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for statistics access."
 msgstr "Kumpulan untuk akses statistik."
+
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Group for time accounting web service access."
+msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "new"
@@ -20712,13 +20796,9 @@ msgstr ""
 msgid "Remove selection"
 msgstr "Alih pilihan"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-msgid "Do you really want to delete this generic agent job?"
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
-msgid "Delete this Event Trigger"
-msgstr "Padam pencetus acara ini"
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
+msgid "An error occurred during communication."
+msgstr "Ralat berlaku semasa komunikasi."
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "Duplicate event."
@@ -20727,10 +20807,6 @@ msgstr "Menyalin acara"
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Acara ini sudah dilampirkan pada tugas. Sila gunakan yang lain."
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
-msgid "An error occurred during communication."
-msgstr "Ralat berlaku semasa komunikasi."
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
 msgid "Request Details"
@@ -20759,6 +20835,10 @@ msgstr ""
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Invoker"
 msgstr "Padam Invoker ini"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
+msgid "Delete this Event Trigger"
+msgstr "Padam pencetus acara ini"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
 msgid "Sorry, the only existing condition can't be removed."
@@ -21232,10 +21312,6 @@ msgstr ""
 msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
-msgid "Do you really want to delete this statistic?"
-msgstr "Adakah anda betul-betul ingin memadam statistik ini?"
-
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
 msgid "Select a customer ID to assign to this ticket"
 msgstr ""
@@ -21554,10 +21630,6 @@ msgstr " 5 Minit"
 #. SysConfig
 msgid " 7 minutes"
 msgstr " 7 Minit"
-
-#. SysConfig
-msgid "\"Slim\" skin which tries to save screen space for power users."
-msgstr ""
 
 #. SysConfig
 msgid "%s"
@@ -22356,10 +22428,6 @@ msgid "Date / Time"
 msgstr "Tarikh / Masa"
 
 #. SysConfig
-msgid "Default (Slim)"
-msgstr ""
-
-#. SysConfig
 msgid "Default agent name"
 msgstr ""
 
@@ -22732,10 +22800,6 @@ msgid "Hebrew"
 msgstr "Hebrew"
 
 #. SysConfig
-msgid "High Contrast"
-msgstr ""
-
-#. SysConfig
 msgid "Hindi"
 msgstr "Hindi"
 
@@ -22800,14 +22864,6 @@ msgid "Italian"
 msgstr "Itali"
 
 #. SysConfig
-msgid "Ivory"
-msgstr ""
-
-#. SysConfig
-msgid "Ivory (Slim)"
-msgstr ""
-
-#. SysConfig
 msgid "Japanese"
 msgstr "Jepun"
 
@@ -22870,10 +22926,6 @@ msgstr ""
 #. SysConfig
 msgid "Latvian"
 msgstr "Latvia"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Left"
-msgstr "Kiri"
 
 #. SysConfig
 msgid "Link Object"
@@ -23473,10 +23525,6 @@ msgstr "Cari Pengguna"
 
 #. SysConfig
 msgid "Search tickets."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
-msgid "SearchTemplate"
 msgstr ""
 
 #. SysConfig
@@ -24217,137 +24265,5 @@ msgstr "berbalik"
 
 #. SysConfig
 msgid "stats"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
-msgid "Show Valid"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
-msgid "Show All"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketProcess.tt
-msgid "New Process Ticket"
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
-msgstr ""
-
-#. XML Definition: scripts/database/initial_insert.xml
-msgid "Group for time accounting web service access."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
-msgid "This field must be a hexadecimal color code."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-msgid "is invalid!"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-msgid "is invalid"
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Global settings for all popup profiles."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the global users popup profile."
-msgstr ""
-
-#. SysConfig
-msgid "Change your default popup profile settings."
-msgstr ""
-
-#. SysConfig
-msgid "Popup Profile"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "The horizontal distance of the window relative to the screen, in pixels."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Top"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "The vertical distance of the window relative to the screen, in pixels."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Width"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Width in pixels or percent."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Height"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Height in pixels or percent."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
-msgid "Overview Default Columns"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
-msgid "Cache TTL"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
-msgid "TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "User preferences backend to use."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Loader module registration for the public interface."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Enable highlighting services based on ticket age."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Sets the age in minutes (first level) for highlighting services that contain untouched tickets."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Sets the age in minutes (second level) for highlighting services that contain untouched tickets."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Activates a blinking mechanism of the service that contains the oldest ticket."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
-msgid "You can not edit a transition before it's connected to two activities."
-msgstr ""
-
-#. Perl Module: Kernel/Modules/Installer.pm
-msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
 msgstr ""
 
