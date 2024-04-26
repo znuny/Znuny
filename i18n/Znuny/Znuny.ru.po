@@ -9743,14 +9743,6 @@ msgid "Reset setting"
 msgstr "Сбросить настройку"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user specific changes for this setting"
-msgstr "Показать пользовательское значение этого параметра"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user settings"
-msgstr "Показать пользовательские настройки"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Copy a direct link to this setting to your clipboard"
 msgstr "Скопировать прямую ссылку на этот параметр в буфер обмена"
 
