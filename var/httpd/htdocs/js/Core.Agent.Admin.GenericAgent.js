@@ -198,13 +198,7 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
                 var FieldHTML = Response.Label + '<div class="Field flex-row" data-id="' + Response.ID + '">' + Response.Field;
                 // Append field HTML from response to selected fields area.
                 $('#' + SelectedFieldsID).append(FieldHTML);
-
-                // Added check for TooltipErrorMessage div, add RemoveButtonHTML before it, in case it exists, proceed as normal if not
-                if(FieldHTML.includes("TooltipErrorMessage")) {
-                    $('div.Field[data-id="' + Response.ID + '"] > .TooltipErrorMessage').before(RemoveButtonHTML);
-                } else {
-                    $('div.Field[data-id="' + Response.ID + '"]').append(RemoveButtonHTML);
-                }
+                $('div.Field[data-id="' + Response.ID + '"]').append(RemoveButtonHTML);
 
                 TargetNS.InitRemoveButtonEvent($('div.Field[data-id="' + Response.ID + '"]').find('.RemoveButton'), AddFieldsID);
 
