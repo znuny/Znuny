@@ -157,13 +157,15 @@ sub _AuthUser {
     my $ReturnData = 0;
 
     # get params
-    my $PostUser = $Param{Data}->{UserLogin} || '';
-    my $PostPw   = $Param{Data}->{Password}  || '';
+    my $PostUser           = $Param{Data}->{UserLogin}      || '';
+    my $PostPw             = $Param{Data}->{Password}       || '';
+    my $PostTwoFactorToken = $Param{Data}->{TwoFactorToken} || '';
 
     # check submitted data
     my $User = $Kernel::OM->Get('Kernel::System::Auth')->Auth(
-        User => $PostUser,
-        Pw   => $PostPw,
+        User           => $PostUser,
+        Pw             => $PostPw,
+        TwoFactorToken => $PostTwoFactorToken,
     );
 
     # login is valid
@@ -200,13 +202,15 @@ sub _AuthCustomerUser {
     my $ReturnData = $Param{Data}->{CustomerUserLogin} || 0;
 
     # get params
-    my $PostUser = $Param{Data}->{CustomerUserLogin} || '';
-    my $PostPw   = $Param{Data}->{Password}          || '';
+    my $PostUser           = $Param{Data}->{CustomerUserLogin} || '';
+    my $PostPw             = $Param{Data}->{Password}          || '';
+    my $PostTwoFactorToken = $Param{Data}->{TwoFactorToken}    || '';
 
     # check submitted data
     my $User = $Kernel::OM->Get('Kernel::System::CustomerAuth')->Auth(
-        User => $PostUser,
-        Pw   => $PostPw,
+        User           => $PostUser,
+        Pw             => $PostPw,
+        TwoFactorToken => $PostTwoFactorToken,
     );
 
     # login is invalid
