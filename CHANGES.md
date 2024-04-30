@@ -1,4 +1,5 @@
 # 6.5.9 2024-??-??
+ - 2024-04-29 Updated default values of PublicFrontend::FooterLinks.
  - 2024-04-22 Integrated package Znuny4OTRS-BugfixCustomerUserDBPasswordCryptType.
  - 2024-04-19 Added support for two factor auth token parameter to generic interface. Thanks to Flávio Marta (@CallMeFlanby). [#502](https://github.com/znuny/Znuny/pull/502)
  - 2024-04-18 Fixed smart tag replacement for article subjects in process activity dialogs.
