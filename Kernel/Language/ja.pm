@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.686808651147433;
+    $Self->{Completeness}        = 0.686705202312139;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3345,8 +3345,6 @@ sub Data {
         'Enable' => '有効',
         'Reset this setting to its default state' => 'この設定をデフォルトのステータスにリセットする',
         'Reset setting' => 'リセット設定',
-        'Show user specific changes for this setting' => 'この設定のユーザー固有の変更を表示する',
-        'Show user settings' => 'ユーザー設定を表示する',
         'Copy a direct link to this setting to your clipboard' => 'この設定への直接リンクをクリップボードにコピーする',
         'Copy direct link' => 'ダイレクトリンクをコピーする',
         'Remove this setting from your favorites setting' => 'この設定をお気に入り設定から削除',

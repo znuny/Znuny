@@ -9675,14 +9675,6 @@ msgid "Reset setting"
 msgstr "Ripristinare le impostazioni"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user specific changes for this setting"
-msgstr "Mostrare le modifiche specifiche dell'utente per questa impostazione"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user settings"
-msgstr "Mostrare le impostazioni dell'utente"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Copy a direct link to this setting to your clipboard"
 msgstr "Copia un link diretto a questa impostazione negli appunti"
 

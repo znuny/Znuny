@@ -4,6 +4,7 @@
  - 2024-04-19 Added support for two factor auth token parameter to generic interface. Thanks to Flávio Marta (@CallMeFlanby). [#502](https://github.com/znuny/Znuny/pull/502)
  - 2024-04-18 Fixed smart tag replacement for article subjects in process activity dialogs.
  - 2024-04-18 Improved AJAX subactions for AgentTicketEmailOutbound.
+ - 2024-04-04 Removed links to unsupported user modification functions from system configuration settings dialog.
 
 # 7.0.17 2024-04-17
  - 2024-04-10 Fixed mixed usage of database objects in customer and customer user database backend. [#540](https://github.com/znuny/Znuny/issues/540)

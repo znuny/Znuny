@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.872048869077101;
+    $Self->{Completeness}        = 0.872006606110652;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -3339,8 +3339,6 @@ sub Data {
         'Enable' => '사용',
         'Reset this setting to its default state' => '이 설정을 기본 상태로 재설정하십시오.',
         'Reset setting' => '재설정 설정',
-        'Show user specific changes for this setting' => '이 설정에 대한 사용자별 변경 사항 표시',
-        'Show user settings' => '사용자 설정 표시',
         'Copy a direct link to this setting to your clipboard' => '이 설정에 대한 직접 링크를 클립 보드로 복사하십시오.',
         'Copy direct link' => '직접 링크 복사',
         'Remove this setting from your favorites setting' => '즐겨찾기 설정에서 이 설정을 제거하십시오.',

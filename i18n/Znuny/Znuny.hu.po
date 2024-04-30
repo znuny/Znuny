@@ -9675,14 +9675,6 @@ msgid "Reset setting"
 msgstr "Beállítás visszaállítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user specific changes for this setting"
-msgstr "Felhasználóra jellemző változások megjelenítése ennél a beállításnál"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-msgid "Show user settings"
-msgstr "Felhasználói beállítások megjelenítése"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Copy a direct link to this setting to your clipboard"
 msgstr "Erre a beállításra mutató közvetlen hivatkozás másolása a vágólapra"
 
