@@ -24245,3 +24245,7 @@ msgstr "inverse"
 msgid "stats"
 msgstr "statistiques"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
+msgid "Watch tickets"
+msgstr ""
+

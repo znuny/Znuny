@@ -594,7 +594,7 @@ sub Run {
                 qw(ServiceID OwnerID Owner ResponsibleID Responsible PriorityID Priority QueueID Queue Subject
                 Body IsVisibleForCustomer TypeID StateID State MergeToSelection MergeTo LinkTogether
                 EmailSubject EmailBody EmailTimeUnits
-                LinkTogetherParent Unlock MergeToChecked MergeToOldestChecked)
+                LinkTogetherParent Unlock Watch MergeToChecked MergeToOldestChecked)
                 )
             {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key ) || '';
@@ -1317,6 +1317,20 @@ sub Run {
                         );
                     }
                 }
+
+                # watch or unwatch tickets
+                if ( $GetParam{'Watch'} ) {
+                    $Result = $TicketObject->TicketWatchSubscribe(
+                        TicketID    => $TicketID,
+                        WatchUserID => $Self->{UserID},
+                        UserID      => $Self->{UserID},
+                    );
+
+                    if ( !$Result ) {
+                        push @NonUpdatedTickets, $Ticket{TicketNumber};
+                    }
+                }
+
                 $ActionFlag = 1;
             }
             $Counter++;
@@ -1737,6 +1751,46 @@ sub _Mask {
         SelectedID => $Param{Unlock} // 1,
         Class      => 'Modernize',
     );
+
+    my $BulkWatch = 0;
+
+    my @WatcherGroups = @{ $ConfigObject->Get('Ticket::WatcherGroup') // [] };
+
+    # General permission via config switch to use ticket watcher.
+    if ( $ConfigObject->Get('Ticket::Watcher') ) {
+        $BulkWatch = 1;
+    }
+
+    # Ticket watcher via group.
+    elsif (@WatcherGroups) {
+        my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+        GROUP:
+        for my $Group (@WatcherGroups) {
+            my $HasPermission = $GroupObject->PermissionCheck(
+                UserID    => $Self->{UserID},
+                GroupName => $Group,
+                Type      => 'rw',
+            );
+            next GROUP if !$HasPermission;
+
+            $BulkWatch = 1;
+            last GROUP;
+        }
+    }
+
+    if ($BulkWatch) {
+        $Param{WatchYesNoOption} = $LayoutObject->BuildSelection(
+            Data       => $ConfigObject->Get('YesNoOptions'),
+            Name       => 'Watch',
+            SelectedID => $Param{Watch} // 0,
+            Class      => 'Modernize',
+        );
+
+        $LayoutObject->Block(
+            Name => 'Watch',
+            Data => \%Param,
+        );
+    }
 
     # add rich text editor for note & email
     if ( $LayoutObject->{BrowserRichText} ) {

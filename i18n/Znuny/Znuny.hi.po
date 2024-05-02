@@ -24245,3 +24245,7 @@ msgstr "उलटा"
 msgid "stats"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
+msgid "Watch tickets"
+msgstr ""
+

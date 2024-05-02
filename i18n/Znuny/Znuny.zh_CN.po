@@ -24255,3 +24255,7 @@ msgstr "倒序"
 msgid "stats"
 msgstr "stats（统计）"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
+msgid "Watch tickets"
+msgstr ""
+
