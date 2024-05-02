@@ -2733,6 +2733,7 @@ sub Data {
         'Remove active filters for this screen.' => '',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Eliminar de la llista de tiquets vists',
         'Tickets per page' => 'Tiquets per pàgina',
         'Filter assigned fields' => '',
 
@@ -4791,7 +4792,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'No veure',
-        'Remove from list of watched tickets' => 'Eliminar de la llista de tiquets vists',
         'Watch' => 'Veure',
         'Add to list of watched tickets' => 'Afegir a la llista de tiquets vists',
 

@@ -2741,6 +2741,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Fjern aktive filtre for dette skjermbildet.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Fjern fra listen over overvåkede saker',
         'Tickets per page' => 'Saker per side',
         'Filter assigned fields' => '',
 
@@ -4799,7 +4800,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Ikke overvåk',
-        'Remove from list of watched tickets' => 'Fjern fra listen over overvåkede saker',
         'Watch' => 'Overvåk',
         'Add to list of watched tickets' => 'Legg til i listen over overvåkede saker',
 

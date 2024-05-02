@@ -2735,6 +2735,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Fjern aktive filtre for dette billede.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Fjern fra listen over fulgte sager',
         'Tickets per page' => 'Sager pr. side',
         'Filter assigned fields' => '',
 
@@ -4793,7 +4794,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Følg ikke',
-        'Remove from list of watched tickets' => 'Fjern fra listen over fulgte sager',
         'Watch' => 'Følg',
         'Add to list of watched tickets' => 'Føj til listen over fulgte sager',
 

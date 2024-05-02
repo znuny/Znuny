@@ -13562,7 +13562,7 @@ msgstr "Заблокировать, чтобы работать с нею"
 msgid "Unwatch"
 msgstr "Не наблюдать"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "Удалить из списка наблюдаемых заявок"
 

@@ -2735,6 +2735,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Ondoa kichuja amilifu kwa skrini hii.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Ondoa kwenye orodha ya tiketi zilizoangaliwa',
         'Tickets per page' => 'Tiketi kwa ukurasa',
         'Filter assigned fields' => '',
 
@@ -4793,7 +4794,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Usiangalie',
-        'Remove from list of watched tickets' => 'Ondoa kwenye orodha ya tiketi zilizoangaliwa',
         'Watch' => 'Angalia',
         'Add to list of watched tickets' => 'Ongeza kwenye orodha ya tiketi zilizoangaliwa',
 

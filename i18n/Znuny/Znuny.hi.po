@@ -13562,7 +13562,7 @@ msgstr ""
 msgid "Unwatch"
 msgstr "अनदॆखॆ"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "ध्यानाधीन टिकटों की सूची से हटाएं।"
 

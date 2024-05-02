@@ -13563,7 +13563,7 @@ msgstr "Bloquear para trabajar en él"
 msgid "Unwatch"
 msgstr "No Vistos"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "Eliminar de la lista de tickets vistos"
 

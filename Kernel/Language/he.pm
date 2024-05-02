@@ -2739,6 +2739,7 @@ sub Data {
         'Remove active filters for this screen.' => 'הסר מסננים פעילים במסך זה.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'הסר מרשימת פניות במעקב',
         'Tickets per page' => 'פניות בעמוד',
         'Filter assigned fields' => '',
 
@@ -4797,7 +4798,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'הסר מעקב',
-        'Remove from list of watched tickets' => 'הסר מרשימת פניות במעקב',
         'Watch' => 'עקוב',
         'Add to list of watched tickets' => 'הוסף לרשימת פניות במעקב',
 

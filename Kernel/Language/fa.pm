@@ -2738,6 +2738,7 @@ sub Data {
         'Remove active filters for this screen.' => 'حذف فیلتر فعال برای این صفحه نمایش.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'حذف از فهرست درخواست‌های مشاهده شده',
         'Tickets per page' => 'درخواست در هر صفحه',
         'Filter assigned fields' => '',
 
@@ -4796,7 +4797,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'عدم پیگیری',
-        'Remove from list of watched tickets' => 'حذف از فهرست درخواست‌های مشاهده شده',
         'Watch' => 'پیگیری',
         'Add to list of watched tickets' => 'افزودن به فهرست درخواست‌های مشاهده شده',
 

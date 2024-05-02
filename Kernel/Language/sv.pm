@@ -2735,6 +2735,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Ta bort aktiva filter för denna vy.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Ta bort från lista av bevakade ärenden.',
         'Tickets per page' => 'Ärenden per sida',
         'Filter assigned fields' => '',
 
@@ -4793,7 +4794,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Ta bort bevakning',
-        'Remove from list of watched tickets' => 'Ta bort från lista av bevakade ärenden.',
         'Watch' => 'Bevaka',
         'Add to list of watched tickets' => 'Lägg till i listan av bevakade ärenden',
 

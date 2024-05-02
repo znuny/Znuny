@@ -2739,6 +2739,7 @@ sub Data {
         'Remove active filters for this screen.' => '清除这个屏幕的过滤器。',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => '从关注工单列表中移除',
         'Tickets per page' => '工单数/页',
         'Filter assigned fields' => '',
 
@@ -4797,7 +4798,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => '取消关注',
-        'Remove from list of watched tickets' => '从关注工单列表中移除',
         'Watch' => '关注',
         'Add to list of watched tickets' => '添加到关注工单列表',
 

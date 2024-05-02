@@ -13584,7 +13584,7 @@ msgstr "Bloquear para trabalhar com ticket"
 msgid "Unwatch"
 msgstr "Parar de seguir"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "Remover dos tickets vigiados"
 

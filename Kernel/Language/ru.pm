@@ -2744,6 +2744,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Удалить активные фильтры для этого экрана.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Удалить из списка наблюдаемых заявок',
         'Tickets per page' => 'Заявок на страницу',
         'Filter assigned fields' => '',
 
@@ -4802,7 +4803,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Не наблюдать',
-        'Remove from list of watched tickets' => 'Удалить из списка наблюдаемых заявок',
         'Watch' => 'Наблюдать',
         'Add to list of watched tickets' => 'Добавить в список наблюдаемых заявок',
 

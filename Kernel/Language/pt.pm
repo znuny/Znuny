@@ -2735,6 +2735,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Remover filtros',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Remover dos tickets vigiados',
         'Tickets per page' => 'Tickets por página',
         'Filter assigned fields' => '',
 
@@ -4793,7 +4794,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Parar de seguir',
-        'Remove from list of watched tickets' => 'Remover dos tickets vigiados',
         'Watch' => 'Vigiar',
         'Add to list of watched tickets' => 'Adicionar aos tickets vigiados',
 

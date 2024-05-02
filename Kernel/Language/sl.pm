@@ -2737,6 +2737,7 @@ sub Data {
         'Remove active filters for this screen.' => '',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Odstrani iz liste pregledanih zahtevkov',
         'Tickets per page' => 'Zahtevkov na stran',
         'Filter assigned fields' => '',
 
@@ -4795,7 +4796,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Prekini pregled',
-        'Remove from list of watched tickets' => 'Odstrani iz liste pregledanih zahtevkov',
         'Watch' => 'Preglej',
         'Add to list of watched tickets' => 'Dodaj na listo pregledanih zahtevkov',
 

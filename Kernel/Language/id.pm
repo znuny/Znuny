@@ -2734,6 +2734,7 @@ bin/znuny.Daemon.pl status\').',
         'Remove active filters for this screen.' => 'Membuang filter yang aktif untuk skrin ini',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Hapus dari daftar tiket yang diamati',
         'Tickets per page' => 'Tiket per halaman',
         'Filter assigned fields' => '',
 
@@ -4792,7 +4793,6 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Berhenti amati',
-        'Remove from list of watched tickets' => 'Hapus dari daftar tiket yang diamati',
         'Watch' => 'amati',
         'Add to list of watched tickets' => 'Tambahkan kepada daftar tiket yangdi amati',
 

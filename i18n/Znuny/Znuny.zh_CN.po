@@ -13562,7 +13562,7 @@ msgstr "锁定并处理工单"
 msgid "Unwatch"
 msgstr "取消关注"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "从关注工单列表中移除"
 

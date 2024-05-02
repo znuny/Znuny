@@ -13562,7 +13562,7 @@ msgstr "Blocați-l pentru a lucra la el"
 msgid "Unwatch"
 msgstr "Oprește urmărire"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "Scoate-l din lista de tichete aflate în supraveghere"
 

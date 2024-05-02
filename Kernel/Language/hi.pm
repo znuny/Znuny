@@ -2735,6 +2735,7 @@ sub Data {
         'Remove active filters for this screen.' => '',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'ध्यानाधीन टिकटों की सूची से हटाएं।',
         'Tickets per page' => 'टिकट प्रति पृष्ठ',
         'Filter assigned fields' => '',
 
@@ -4793,7 +4794,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'अनदॆखॆ',
-        'Remove from list of watched tickets' => 'ध्यानाधीन टिकटों की सूची से हटाएं।',
         'Watch' => 'देखो',
         'Add to list of watched tickets' => 'ध्यानाधीन टिकटों की सूची में जोड़ें।',
 

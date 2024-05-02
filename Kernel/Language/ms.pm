@@ -2732,6 +2732,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Buang penapis aktif untuk skrin ini.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Dibuang daripada senarai tiket dilihat',
         'Tickets per page' => 'Tiket setiap halaman',
         'Filter assigned fields' => '',
 
@@ -4790,7 +4791,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Tidak diperhati',
-        'Remove from list of watched tickets' => 'Dibuang daripada senarai tiket dilihat',
         'Watch' => 'Perhati',
         'Add to list of watched tickets' => 'Tambah kepada senarai tiket yang dilihat',
 

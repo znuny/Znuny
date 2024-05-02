@@ -2738,6 +2738,7 @@ sub Data {
         'Remove active filters for this screen.' => '',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Αφαίρεση από τη λίστα των προβεβλημένων δελτίων',
         'Tickets per page' => '',
         'Filter assigned fields' => '',
 
@@ -4796,7 +4797,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Μη προβολή',
-        'Remove from list of watched tickets' => 'Αφαίρεση από τη λίστα των προβεβλημένων δελτίων',
         'Watch' => 'Προβολή',
         'Add to list of watched tickets' => 'Προσθήκη στη λίστα των προβεβλημένων δελτίων',
 

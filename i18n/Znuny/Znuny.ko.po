@@ -13562,7 +13562,7 @@ msgstr "잠금 기능"
 msgid "Unwatch"
 msgstr "언 워치"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "감상한 티켓 목록에서 제거"
 

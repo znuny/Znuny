@@ -2733,6 +2733,7 @@ sub Data {
         'Remove active filters for this screen.' => '',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Izņemt no vēroto pieteikumu saraksta',
         'Tickets per page' => '',
         'Filter assigned fields' => '',
 
@@ -4791,7 +4792,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Nevērot',
-        'Remove from list of watched tickets' => 'Izņemt no vēroto pieteikumu saraksta',
         'Watch' => 'Vērot',
         'Add to list of watched tickets' => 'Pievienot vēroto pieteikumu sarakstam',
 

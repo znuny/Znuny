@@ -2733,6 +2733,7 @@ sub Data {
         'Remove active filters for this screen.' => '',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Премахване от списъка с наблюдавани билети',
         'Tickets per page' => '',
         'Filter assigned fields' => '',
 
@@ -4791,7 +4792,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Не наблюдаван.',
-        'Remove from list of watched tickets' => 'Премахване от списъка с наблюдавани билети',
         'Watch' => 'Наблюдавам',
         'Add to list of watched tickets' => 'Добавяне в списъка с наблюдавани билети',
 

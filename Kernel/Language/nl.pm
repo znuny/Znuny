@@ -2738,6 +2738,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Verwijder actieve filters voor dit scherm.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Verwijder van lijst met gevolgde tickets',
         'Tickets per page' => 'Tickets per pagina',
         'Filter assigned fields' => '',
 
@@ -4796,7 +4797,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Stop met volgen',
-        'Remove from list of watched tickets' => 'Verwijder van lijst met gevolgde tickets',
         'Watch' => 'Volg',
         'Add to list of watched tickets' => 'Voeg toe aan lijst met gevolgde tickets',
 

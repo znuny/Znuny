@@ -2732,6 +2732,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Vymaž aktívne filtre pre túto obrazovku',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Vymaž zo zoznamu sledovaných tiketov',
         'Tickets per page' => 'Počet zobrazených tiketov na stránku',
         'Filter assigned fields' => '',
 
@@ -4790,7 +4791,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Zruš sledovanie',
-        'Remove from list of watched tickets' => 'Vymaž zo zoznamu sledovaných tiketov',
         'Watch' => 'Sleduj',
         'Add to list of watched tickets' => 'Pridaj do zoznamu sledovaných tiketov',
 

@@ -13565,7 +13565,7 @@ msgstr "作業するためチケットをロック"
 msgid "Unwatch"
 msgstr "監視解除"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "監視チケットリストから削除"
 

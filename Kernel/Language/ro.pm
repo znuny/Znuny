@@ -2732,6 +2732,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Șterge filtrele active pentru acest ecran.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Scoate-l din lista de tichete aflate în supraveghere',
         'Tickets per page' => 'Nr tichete pe pagină',
         'Filter assigned fields' => '',
 
@@ -4790,7 +4791,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Oprește urmărire',
-        'Remove from list of watched tickets' => 'Scoate-l din lista de tichete aflate în supraveghere',
         'Watch' => 'Urmărire',
         'Add to list of watched tickets' => 'Adaugă la lista de tichete urmărite',
 

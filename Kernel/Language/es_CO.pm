@@ -2734,6 +2734,7 @@ sub Data {
         'Remove active filters for this screen.' => '',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Quitar de la lista de tickets monitoreados',
         'Tickets per page' => '',
         'Filter assigned fields' => '',
 
@@ -4792,7 +4793,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Dejar de monitorear',
-        'Remove from list of watched tickets' => 'Quitar de la lista de tickets monitoreados',
         'Watch' => 'Monitorear',
         'Add to list of watched tickets' => 'Agregar a la lista de tickets monitoreados',
 

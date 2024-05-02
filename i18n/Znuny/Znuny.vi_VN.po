@@ -13564,7 +13564,7 @@ msgstr "Khóa nó để làm việc trên nó"
 msgid "Unwatch"
 msgstr "Không xem"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "Xóa khỏi danh sách theo dõi vé"
 

@@ -13563,7 +13563,7 @@ msgstr "נעל זאת כדי לעבוד על כך"
 msgid "Unwatch"
 msgstr "הסר מעקב"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "הסר מרשימת פניות במעקב"
 

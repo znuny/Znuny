@@ -2740,6 +2740,7 @@ sub Data {
         'Remove active filters for this screen.' => '',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Retirer de la liste des demandes sous surveillance',
         'Tickets per page' => 'Demandes par page ',
         'Filter assigned fields' => '',
 
@@ -4798,7 +4799,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Arrêter la surveillance',
-        'Remove from list of watched tickets' => 'Retirer de la liste des demandes sous surveillance',
         'Watch' => 'Surveiller',
         'Add to list of watched tickets' => 'Ajouter à la liste des demandes sous surveillance',
 

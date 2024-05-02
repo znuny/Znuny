@@ -13563,7 +13563,7 @@ msgstr "鎖定並處理工單"
 msgid "Unwatch"
 msgstr "取消訂閱"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "取消訂閱此工單"
 

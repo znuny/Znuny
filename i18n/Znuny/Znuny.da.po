@@ -13562,7 +13562,7 @@ msgstr "Træk sagen for at arbejde på den"
 msgid "Unwatch"
 msgstr "Følg ikke"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "Fjern fra listen over fulgte sager"
 

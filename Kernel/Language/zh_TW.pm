@@ -2736,6 +2736,7 @@ sub Data {
         'Remove active filters for this screen.' => '清除此屏的過濾器',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => '取消訂閱此工單',
         'Tickets per page' => '工單數/頁',
         'Filter assigned fields' => '',
 
@@ -4794,7 +4795,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => '取消訂閱',
-        'Remove from list of watched tickets' => '取消訂閱此工單',
         'Watch' => '訂閱',
         'Add to list of watched tickets' => '訂閱此工單',
 

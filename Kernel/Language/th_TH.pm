@@ -2735,6 +2735,7 @@ sub Data {
         'Remove active filters for this screen.' => 'ลบตัวกรองที่ใช้งานอยู่สำหรับหน้าจอนี้',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'ลบออกจากรายการของตั๋วที่ดูแล้ว',
         'Tickets per page' => 'ตั๋วต่อหนึ่งหน้า',
         'Filter assigned fields' => '',
 
@@ -4793,7 +4794,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'ยังไม่ได้ดู',
-        'Remove from list of watched tickets' => 'ลบออกจากรายการของตั๋วที่ดูแล้ว',
         'Watch' => 'ดู',
         'Add to list of watched tickets' => 'เพิ่มไปยังรายการของตั๋วที่ดูแล้ว',
 

@@ -13562,7 +13562,7 @@ msgstr "قفل آن را بر روی آن کاربگذار "
 msgid "Unwatch"
 msgstr "عدم پیگیری"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "حذف از فهرست درخواست‌های مشاهده شده"
 

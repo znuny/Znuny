@@ -13562,7 +13562,7 @@ msgstr "Uzamkni na dalšiu prácu"
 msgid "Unwatch"
 msgstr "Zruš sledovanie"
 
-#. Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove from list of watched tickets"
 msgstr "Vymaž zo zoznamu sledovaných tiketov"
 

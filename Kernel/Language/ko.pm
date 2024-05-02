@@ -2732,6 +2732,7 @@ sub Data {
         'Remove active filters for this screen.' => '이 화면에서 활성 필터를 제거하십시오.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => '감상한 티켓 목록에서 제거',
         'Tickets per page' => '페이지 당 티켓',
         'Filter assigned fields' => '',
 
@@ -4790,7 +4791,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => '언 워치',
-        'Remove from list of watched tickets' => '감상한 티켓 목록에서 제거',
         'Watch' => '살피다',
         'Add to list of watched tickets' => '시청 티켓 목록에 추가',
 

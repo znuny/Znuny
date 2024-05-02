@@ -2738,6 +2738,7 @@ sub Data {
         'Remove active filters for this screen.' => 'この画面のアクティブなフィルターを削除します。',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => '監視チケットリストから削除',
         'Tickets per page' => 'ページ毎のチケット数',
         'Filter assigned fields' => '',
 
@@ -4797,7 +4798,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => '監視解除',
-        'Remove from list of watched tickets' => '監視チケットリストから削除',
         'Watch' => '監視',
         'Add to list of watched tickets' => '監視チケットリストに追加',
 
