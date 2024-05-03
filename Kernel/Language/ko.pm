@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.871718672610203;
+    $Self->{Completeness}        = 0.870568837592745;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5580,12 +5580,24 @@ sub Data {
         'The headline shown in the customer interface.' => '고객 인터페이스에 표시되는 헤드 라인.',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '고객 인터페이스의 머리글에 표시된 로고입니다. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '에이전트 인터페이스의 헤더에 표시된 로고. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '스킨 "기본"에 대한 에이전트 인터페이스의 머리글에 표시된 로고입니다. 자세한 설명은 "AgentLogo"를 참조하십시오.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '에이전트 인터페이스의 로그인 상자 상단에 표시된 로고입니다. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
+            '',
         'Defines the URL base path of icons, CSS and Java Script.' => '아이콘, CSS 및 Java Script의 URL 기본 경로를 정의합니다.',
         'Defines the URL image path of icons for navigation.' => '탐색을위한 아이콘의 URL 이미지 경로를 정의합니다.',
         'Defines the URL CSS path.' => 'URL CSS 경로를 정의합니다.',

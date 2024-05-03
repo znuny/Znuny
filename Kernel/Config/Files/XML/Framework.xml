@@ -287,6 +287,36 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="CustomerShortcutIcon" Required="0" Valid="1">
+        <Description Translatable="1">The shortcut icon for the customer interface.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/product.ico</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerShortcutIconCustom###default" Required="0" Valid="1">
+        <Description Translatable="1">The shortcut icon for the customer interface for the skin "default".</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/product.ico</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerAppleTouchIcon" Required="0" Valid="1">
+        <Description Translatable="1">The Apple touch icon for the customer interface.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/apple-touch-icon.png</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerAppleTouchIconCustom###default" Required="0" Valid="1">
+        <Description Translatable="1">The Apple touch icon for the customer interface for skin "default".</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/apple-touch-icon.png</Item>
+        </Value>
+    </Setting>
+
+
     <Setting Name="AgentLogo" Required="0" Valid="1">
         <Description Translatable="1">The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</Description>
         <Navigation>Frontend::Agent</Navigation>
@@ -321,6 +351,34 @@
                 <Item Key="URL">skins/Agent/default/img/logo.png</Item>
                 <Item Key="StyleHeight">60px</Item>
             </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentShortcutIcon" Required="0" Valid="1">
+        <Description Translatable="1">The shortcut icon for the agent interface.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/product.ico</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AgentShortcutIconCustom###default" Required="0" Valid="1">
+        <Description Translatable="1">The shortcut icon for the agent interface fot the skin "default".</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/product.ico</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AgentAppleTouchIcon" Required="0" Valid="1">
+        <Description Translatable="1">The Apple touch icon for the agent interface.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/apple-touch-icon.png</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AgentAppleTouchIconCustom###default" Required="0" Valid="1">
+        <Description Translatable="1">The Apple touch icon for the agent interface for the skin "default".</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/apple-touch-icon.png</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::WebPath" Required="1" Valid="1" ConfigLevel="200">

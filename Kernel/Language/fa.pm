@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.619118375433383;
+    $Self->{Completeness}        = 0.618301731244847;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5586,11 +5586,23 @@ sub Data {
         'The headline shown in the customer interface.' => 'تیتر نشان داده شده در رابط مشتری.',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'آرم نشان داده شده است در هدر رابط مشتری. URL به تصویر می تواند یک آدرس نسبی به دایرکتوری تصویر پوست، و یا یک URL کامل به یک وب سرور از راه دور.',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'آرم نشان داده شده است در هدر رابط عامل. URL به تصویر می تواند یک آدرس نسبی به دایرکتوری تصویر پوست، و یا یک URL کامل به یک وب سرور از راه دور.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'آرم نشان داده شده در هدر از رابط عامل برای پوست \ "به طور پیش فرض ". \ "AgentLogo " برای توضیحات بیشتر را مشاهده کنید.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
+            '',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'تعریف می کند که URL مسیر پایه از آیکون ها، CSS و جاوا اسکریپت.',
         'Defines the URL image path of icons for navigation.' => 'تعریف می کند که URL مسیر تصویر از آیکون برای ناوبری.',

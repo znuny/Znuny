@@ -779,6 +779,18 @@ sub Login {
         );
     }
 
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Agent',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
+        );
+    }
+
     # get system maintenance object
     my $SystemMaintenanceObject = $Kernel::OM->Get('Kernel::System::SystemMaintenance');
 
@@ -1338,6 +1350,18 @@ sub Header {
         $Self->Block(
             Name => 'HeaderLogoCSS',
             Data => \%Data,
+        );
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Agent',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
         );
     }
 
@@ -4069,6 +4093,18 @@ sub CustomerLogin {
         }
     }
 
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Customer',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
+        );
+    }
+
     # show prelogin block, if in prelogin mode (e.g. SSO login)
     if ( defined $Param{'Mode'} && $Param{'Mode'} eq 'PreLogin' ) {
         $Self->Block(
@@ -4353,6 +4389,18 @@ sub CustomerHeader {
                 Data => \%Param,
             );
         }
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Customer',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
+        );
     }
 
     # create & return output
@@ -6618,6 +6666,70 @@ sub _BuildLastViewsOutput {
     );
 
     return $LastViewHTML;
+}
+
+=head2 _GetShortcutIconsForInterface()
+
+Returns the paths to the shortcut icons of the given interface.
+
+    my %ShortcutConfig = $LayoutObject->_GetShortcutIconsForInterface(
+        Interface => 'Agent',    # or Customer
+    );
+
+=cut
+
+sub _GetShortcutIconsForInterface {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Interface)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    if ( $Param{Interface} !~ m{\A(?:Agent|Customer)\z} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'Interface' must be 'Agent' or 'Customer'.",
+        );
+        return;
+    }
+
+    my @ConfigParamNames = (
+        $Param{Interface} . 'ShortcutIcon',
+        $Param{Interface} . 'AppleTouchIcon',
+    );
+
+    my %ShortcutIcons;
+    for my $ConfigParam (@ConfigParamNames) {
+        my $CustomConfigParam = $ConfigParam . 'Custom';
+        my $CustomConfig      = $ConfigObject->Get($CustomConfigParam);
+
+        # check if we need to display a custom shortcut icon for the selected skin
+        if (
+            $Self->{SkinSelected}
+            && IsHashRefWithData($CustomConfig)
+            && $CustomConfig->{ $Self->{SkinSelected} }
+            )
+        {
+            $ShortcutIcons{$ConfigParam} = $CustomConfig->{ $Self->{SkinSelected} };
+        }
+
+        # Otherwise show default shortcut icon, if configured
+        elsif ( defined $ConfigObject->Get($ConfigParam) ) {
+            $ShortcutIcons{$ConfigParam} = $ConfigObject->Get($ConfigParam);
+        }
+    }
+
+    return %ShortcutIcons;
 }
 
 1;

@@ -24261,3 +24261,35 @@ msgstr "stats"
 msgid "Watch tickets"
 msgstr "Tickets beobachten"
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "The shortcut icon for the customer interface."
+msgstr "Das Shortcut-Icon, welches in der Kundenoberfläche angezeigt wird."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "The Apple touch icon for the customer interface."
+msgstr "Das Apple-Touch-Icon, welches in der Kundenoberfläche angezeigt wird."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "The shortcut icon for the agent interface."
+msgstr "Das Shortcut-Icon, welches in der Agentenoberfläche angezeigt wird."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "The Apple touch icon for the agent interface."
+msgstr "Das Apple-Touch-Icon, welches in der Agentenoberfläche angezeigt wird."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "The shortcut icon for the customer interface for the skin \"default\"."
+msgstr "Das Shortcut-Icon, welches in der Kundenoberfläche für das Design \"default\" angezeigt wird."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "The Apple touch icon for the customer interface for skin \"default\"."
+msgstr "Das Apple-Touch-Icon, welches in der Kundenoberfläche für das Design \"default\" angezeigt wird."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "The shortcut icon for the agent interface fot the skin \"default\"."
+msgstr "Das Shortcut-Icon, welches in der Agentenoberfläche für das Design \"default\" angezeigt wird."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "The Apple touch icon for the agent interface for the skin \"default\"."
+msgstr "Das Apple-Touch-Icon, welches in der Agentenoberfläche für das Design \"default\" angezeigt wird."
+

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991579990094106;
+    $Self->{Completeness}        = 0.99159109645507;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5581,12 +5581,24 @@ sub Data {
         'The headline shown in the customer interface.' => 'Die in der Kundenoberfläche angezeigte Überschrift.',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Das Logo, das im Kunden-Interface angezeigt wird. Die URL zu dem Bild kann entweder eine relative URL zum Designverzeichnis mit dem Bild sein, oder eine vollständige URL zu einem anderen Webserver.',
+        'The shortcut icon for the customer interface.' => 'Das Shortcut-Icon, welches in der Kundenoberfläche angezeigt wird.',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            'Das Shortcut-Icon, welches in der Kundenoberfläche für das Design "default" angezeigt wird.',
+        'The Apple touch icon for the customer interface.' => 'Das Apple-Touch-Icon, welches in der Kundenoberfläche angezeigt wird.',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            'Das Apple-Touch-Icon, welches in der Kundenoberfläche für das Design "default" angezeigt wird.',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Das Logo, das im Agenten-Interface angezeigt wird. Die URL zu dem Bild kann entweder eine relative URL zum Designverzeichnis mit dem Bild sein, oder eine vollständige URL zu einem anderen Webserver.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Das Logo, das für das Design "default" im Agenten-Interface angezeigt wird. Mehr Informationen finden Sie in der Einstellung "AgentLogo".',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Das Logo, das in der Anmelde-Box der Agenten-Oberfläche angezeigt wird. Die URL zu dem Bild kann entweder eine relative URL zum Designverzeichnis mit dem Bild sein, oder eine vollständige URL zu einem anderen Webserver.',
+        'The shortcut icon for the agent interface.' => 'Das Shortcut-Icon, welches in der Agentenoberfläche angezeigt wird.',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            'Das Shortcut-Icon, welches in der Agentenoberfläche für das Design "default" angezeigt wird.',
+        'The Apple touch icon for the agent interface.' => 'Das Apple-Touch-Icon, welches in der Agentenoberfläche angezeigt wird.',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
+            'Das Apple-Touch-Icon, welches in der Agentenoberfläche für das Design "default" angezeigt wird.',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Definiert den URL-Basispfad von Symbolen, CSS und JavaScript.',
         'Defines the URL image path of icons for navigation.' => 'Definiert den URL des Bildpfads von Symbolen für die Navigation.',
         'Defines the URL CSS path.' => 'Definiert den URL-CSS-Pfad.',
