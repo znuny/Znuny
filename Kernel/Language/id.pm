@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.607419620774938;
+    $Self->{Completeness}        = 0.605423171733772;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2619,6 +2619,8 @@ bin/znuny.Daemon.pl status\').',
         'Link to parent' => 'Menyambungkan ke parent',
         'Unlock tickets' => 'Membuka tiket',
         'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Menghasilkan Dukungan Bundle',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -4536,6 +4538,10 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Cetak artikel ini',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Tandai',
@@ -7873,6 +7879,22 @@ bin/znuny.Daemon.pl status\').',
             '',
         'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak valid sementara',
@@ -8566,6 +8588,10 @@ Helpdesk Team Anda
         'Configure and manage ACLs.' => 'Konfigurasi dan mengatus ACLs',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Konfigurasi yang layar harus ditampilkan setelah tiket baru telah dibuat.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'Membuat tiket proses Baru.',
         'Create Process Ticket' => '',
         'Create Ticket' => '',
@@ -8763,6 +8789,8 @@ Helpdesk Team Anda
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'Nama Pertama Nama Akhir',
         'Lastname Firstname (UserLogin)' => 'Nama Akhir Nama Pertama (Pengguna masuk)',
         'Lastname, Firstname' => 'Nama akhir, nama pertama',
@@ -8810,6 +8838,8 @@ Helpdesk Team Anda
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Tandai sebagai Spam!',
         'Mark this ticket as junk!' => 'Tandai tiket ini sebagai sampah!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Medium',
@@ -8916,6 +8946,8 @@ Helpdesk Team Anda
         'Russian' => 'Rusia',
         'S/MIME Certificates' => 'Sertifikat S/MIME',
         'Schedule a maintenance period.' => 'Jadwalkan masa pemeliharaan.',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Layar setelah tiket baru',
         'Search Customer' => 'Cari Pelanggan',
         'Search Ticket.' => 'Cari Tiket.',

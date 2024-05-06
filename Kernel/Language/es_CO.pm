@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.326133553173949;
+    $Self->{Completeness}        = 0.32506162695152;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2619,6 +2619,8 @@ sub Data {
         'Link to parent' => 'Enlazar al padre',
         'Unlock tickets' => 'Desbloquear tickets',
         'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -4536,6 +4538,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Imprimir este artículo',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Marcar',
@@ -7872,6 +7878,22 @@ sub Data {
             '',
         'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'temporalmente-inválido',
@@ -8554,6 +8576,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => '',
         'Configure which screen should be shown after a new ticket has been created.' =>
             '',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => '',
         'Create Process Ticket' => '',
         'Create Ticket' => '',
@@ -8751,6 +8777,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => '',
         'Lastname Firstname (UserLogin)' => '',
         'Lastname, Firstname' => '',
@@ -8798,6 +8826,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Marcar como correo no deseado',
         'Mark this ticket as junk!' => '',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Mediano',
@@ -8904,6 +8934,8 @@ Thanks for your help!
         'Russian' => '',
         'S/MIME Certificates' => 'Certificados S/MIME',
         'Schedule a maintenance period.' => '',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Pantalla posterior a nuevo ticket',
         'Search Customer' => 'Búsqueda de cliente',
         'Search Ticket.' => '',

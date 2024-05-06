@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.864138499587799;
+    $Self->{Completeness}        = 0.861298274445357;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2621,6 +2621,8 @@ sub Data {
         'Link to parent' => 'Associar ao pai',
         'Unlock tickets' => 'Desbloquear chamados',
         'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Executar Ação em Massa',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -4538,6 +4540,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Imprimir este artigo',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Marcar',
@@ -7874,6 +7880,22 @@ sub Data {
             '',
         'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'inválido-temporariamente',
@@ -8567,6 +8589,10 @@ Obrigado pela ajuda!
         'Configure and manage ACLs.' => 'Configurar e gerenciar ACLs.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Configure qual tela deve ser mostrada após criar um novo chamado.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'Criar novo ticket de processo.',
         'Create Process Ticket' => '',
         'Create Ticket' => 'Criar Ticket',
@@ -8764,6 +8790,8 @@ Obrigado pela ajuda!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'ÚltimoNome PrimeiroNome',
         'Lastname Firstname (UserLogin)' => 'ÚltimoNome PrimeiroNome (Login de Usuário)',
         'Lastname, Firstname' => 'Sobrenome, Nome',
@@ -8811,6 +8839,8 @@ Obrigado pela ajuda!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Marque como Spam',
         'Mark this ticket as junk!' => 'Marcar este chamado como lixo!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Médio',
@@ -8917,6 +8947,8 @@ Obrigado pela ajuda!
         'Russian' => 'Russo',
         'S/MIME Certificates' => 'Certificados S/MIME',
         'Schedule a maintenance period.' => 'Agendar um período de manutenção',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Tela Após Novo Chamado',
         'Search Customer' => 'Procurar cliente',
         'Search Ticket.' => 'Buscar Chamado.',

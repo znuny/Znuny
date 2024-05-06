@@ -13740,6 +13740,13 @@ Thanks for your help!
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
+                <Item Key="MarkArticleSeenUnseen">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen</Item>
+                        <Item Key="Prio">50</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -13814,6 +13821,13 @@ Thanks for your help!
                 <Item Key="AgentTicketNoteToLinkedTicket">
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
+                        <Item Key="Prio">50</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="MarkArticleSeenUnseen">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen</Item>
                         <Item Key="Prio">50</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
@@ -13906,6 +13920,13 @@ Thanks for your help!
                 <Item Key="AgentTicketNoteToLinkedTicket">
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
+                        <Item Key="Prio">50</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="MarkArticleSeenUnseen">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen</Item>
                         <Item Key="Prio">50</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>

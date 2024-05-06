@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.89563066776587;
+    $Self->{Completeness}        = 0.892686935086278;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2618,6 +2618,8 @@ sub Data {
         'Link to parent' => 'Повежи са надређеним',
         'Unlock tickets' => 'Откључај тикете',
         'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Изврши масовну акцију',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -4535,6 +4537,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Одштампај овај чланак',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Означено',
@@ -7871,6 +7877,22 @@ sub Data {
             '',
         'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'неважећи-привремено',
@@ -8564,6 +8586,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => 'Конфигуриши и управљај ACL листама.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Конфигурише који екран би требало приказати након креирања новог тикета.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'Креирај нови процес тикет',
         'Create Process Ticket' => '',
         'Create Ticket' => 'Креирај тикет',
@@ -8761,6 +8787,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'Презиме, Име',
         'Lastname Firstname (UserLogin)' => 'Презиме, Име (Корисничко име)',
         'Lastname, Firstname' => 'Презиме, Име',
@@ -8808,6 +8836,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Означи као Спам!',
         'Mark this ticket as junk!' => 'Означи овај тикет као бесмислен junk!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Средње',
@@ -8914,6 +8944,8 @@ Thanks for your help!
         'Russian' => 'Руски',
         'S/MIME Certificates' => 'S/MIME сертификати',
         'Schedule a maintenance period.' => 'Планирање периода одржавања.',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Приказ екрана после отварања новог тикета',
         'Search Customer' => 'Тражи клијента',
         'Search Ticket.' => 'Тражи тикет.',

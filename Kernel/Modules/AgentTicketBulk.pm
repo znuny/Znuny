@@ -594,7 +594,7 @@ sub Run {
                 qw(ServiceID OwnerID Owner ResponsibleID Responsible PriorityID Priority QueueID Queue Subject
                 Body IsVisibleForCustomer TypeID StateID State MergeToSelection MergeTo LinkTogether
                 EmailSubject EmailBody EmailTimeUnits
-                LinkTogetherParent Unlock Watch MergeToChecked MergeToOldestChecked)
+                LinkTogetherParent Unlock MergeToChecked MergeToOldestChecked MarkTicketsAsSeen MarkTicketsAsUnseen)
                 )
             {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key ) || '';
@@ -1331,6 +1331,41 @@ sub Run {
                     }
                 }
 
+                if ( $GetParam{'MarkTicketsAsSeen'} || $GetParam{'MarkTicketsAsUnseen'} ) {
+                    my $TicketActionFunction  = 'TicketFlagDelete';
+                    my $ArticleActionFunction = 'ArticleFlagDelete';
+
+                    if ( $GetParam{'MarkTicketsAsSeen'} ) {
+                        $TicketActionFunction  = 'TicketFlagSet';
+                        $ArticleActionFunction = 'ArticleFlagSet';
+                    }
+
+                    my @ArticleIDs = $ArticleObject->ArticleIndex(
+                        TicketID => $TicketID,
+                    );
+
+                    ARTICLEID:
+                    for my $ArticleID ( sort @ArticleIDs ) {
+
+                        # article flag
+                        my $Success = $ArticleObject->$ArticleActionFunction(
+                            TicketID  => $TicketID,
+                            ArticleID => $ArticleID,
+                            Key       => 'Seen',
+                            Value     => 1,                 # irrelevant in case of delete
+                            UserID    => $Self->{UserID},
+                        );
+                    }
+
+                    # ticket flag
+                    $TicketObject->$TicketActionFunction(
+                        TicketID => $TicketID,
+                        Key      => 'Seen',
+                        Value    => 1,                      # irrelevant in case of delete
+                        UserID   => $Self->{UserID},
+                    );
+                }
+
                 $ActionFlag = 1;
             }
             $Counter++;
@@ -1791,6 +1826,20 @@ sub _Mask {
             Data => \%Param,
         );
     }
+
+    $Param{MarkTicketsAsSeenOption} = $LayoutObject->BuildSelection(
+        Data       => $ConfigObject->Get('YesNoOptions'),
+        Name       => 'MarkTicketsAsSeen',
+        SelectedID => $Param{MarkTicketsAsSeen} // 0,
+        Class      => 'Modernize',
+    );
+
+    $Param{MarkTicketsAsUnseenOption} = $LayoutObject->BuildSelection(
+        Data       => $ConfigObject->Get('YesNoOptions'),
+        Name       => 'MarkTicketsAsUnseen',
+        SelectedID => $Param{MarkTicketsAsUnseen} // 0,
+        Class      => 'Modernize',
+    );
 
     # add rich text editor for note & email
     if ( $LayoutObject->{BrowserRichText} ) {

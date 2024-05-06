@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.870568837592745;
+    $Self->{Completeness}        = 0.867707477403451;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2617,6 +2617,8 @@ sub Data {
         'Link to parent' => '상위 링크',
         'Unlock tickets' => '티켓 잠금 해제',
         'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => '일괄 작업 실행',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -4534,6 +4536,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => '이 기사 인쇄',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => '마크',
@@ -7870,6 +7876,22 @@ sub Data {
             '',
         'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',
@@ -8563,6 +8585,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => 'ACL 구성 및 관리',
         'Configure which screen should be shown after a new ticket has been created.' =>
             '새 티켓이 작성된 후 표시할 화면을 구성하십시오.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => '새 프로세스 티켓을 만듭니다.',
         'Create Process Ticket' => '',
         'Create Ticket' => '티켓 만들기',
@@ -8760,6 +8786,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => '성 이름',
         'Lastname Firstname (UserLogin)' => '성 이름 (UserLogin)',
         'Lastname, Firstname' => '성, 이름',
@@ -8807,6 +8835,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '스팸으로 표시하십시오!',
         'Mark this ticket as junk!' => '이 티켓을 정크로 표시하십시오!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => '중간의',
@@ -8913,6 +8943,8 @@ Thanks for your help!
         'Russian' => '러시아인',
         'S/MIME Certificates' => 'S / MIME 인증서',
         'Schedule a maintenance period.' => '유지 보수 기간을 예약하십시오.',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => '새로운 티켓 후에 화면',
         'Search Customer' => '고객 검색',
         'Search Ticket.' => '티켓 검색.',

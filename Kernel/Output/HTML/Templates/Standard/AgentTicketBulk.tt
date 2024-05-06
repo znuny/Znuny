@@ -284,6 +284,18 @@
                             </div>
                         </div>
 [% RenderBlockEnd("Watch") %]
+                        <div class="field-wrapper">
+                            <label for="MarkTicketsAsSeen">[% Translate("Mark tickets as seen") | html %]</label>
+                            <div class="Field">
+                                [% Data.MarkTicketsAsSeenOption %]
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="MarkTicketsAsUneen">[% Translate("Mark tickets as unseen") | html %]</label>
+                            <div class="Field">
+                                [% Data.MarkTicketsAsUnseenOption %]
+                            </div>
+                        </div>
                         [% FOREACH CONTENT IN Data.BulkModuleContent %]
                             <div class="field-wrapper">
                                 [% CONTENT %]

@@ -24293,3 +24293,83 @@ msgstr "Das Shortcut-Icon, welches in der Agentenoberfläche für das Design \"d
 msgid "The Apple touch icon for the agent interface for the skin \"default\"."
 msgstr "Das Apple-Touch-Icon, welches in der Agentenoberfläche für das Design \"default\" angezeigt wird."
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
+msgid "Mark tickets as seen"
+msgstr "Tickets als gelesen markieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
+msgid "Mark tickets as unseen"
+msgstr "Tickets als ungelesen markieren"
+
+#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+msgid "Mark article as unseen"
+msgstr "Artikel als ungelesen markieren"
+
+#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+msgid "Mark as unseen"
+msgstr "Als ungelesen markieren"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketUnseenRedirectDefaultURL' is used if no selection is made by the agent."
+msgstr "Definiert die zur Verfügung stehenden Konfigurationsparameter in der Einstellungsansicht. Der Standard-Umleitungs-URL der SysConfig-Einstellung 'MarkTicketUnseenRedirectDefaultURL' wird verwendet, falls der Agent keine Auswahl getroffen hat."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the redirect URL for setting a ticket article to 'unseen'."
+msgstr "Definiert den URL, zu dem umgeleitet wird, nachdem ein Artikel auf 'ungelesen' gesetzt wurde."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketSeenRedirectDefaultURL' is used if no selection is made by the agent."
+msgstr "Definiert die zur Verfügung stehenden Konfigurationsparameter in der Einstellungsansicht. Der Standard-Umleitungs-URL der SysConfig-Einstellung 'MarkTicketSeenRedirectDefaultURL' wird verwendet, falls der Agent keine Auswahl getroffen hat."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the redirect URL for setting a ticket article to 'seen'."
+msgstr "Definiert den URL, zu dem umgeleitet wird, nachdem ein Artikel auf 'gelesen' gesetzt wurde."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Registers a link in the ticket menu to mark a ticket as unseen."
+msgstr "Registriert einen Link im Ticketmenü, um ein Ticket als ungelesen zu markieren."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Registers a link in the ticket menu to mark a ticket as seen."
+msgstr "Registriert einen Link im Ticketmenü, um ein Ticket als gelesen zu markieren."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen."
+msgstr "Registriert einen Link im Ticketmenü von Ticketübersichten, um ein Ticket als ungelesen zu markieren."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen."
+msgstr "Registriert einen Link im Ticketmenü von Ticketübersichten, um ein Ticket als gelesen zu markieren."
+
+#. SysConfig
+msgid "Configure which screen should be shown after marking a ticket or article as seen."
+msgstr "Konfigurieren Sie, welche Oberfläche angezeigt werden soll, nachdem ein Ticket oder Artikel als gelesen markiert wurde."
+
+#. SysConfig
+msgid "Configure which screen should be shown after marking a ticket or article as unseen."
+msgstr "Konfigurieren Sie, welche Oberfläche angezeigt werden soll, nachdem ein Ticket oder Artikel als ungelesen markiert wurde."
+
+#. SysConfig
+msgid "Last viewed overview"
+msgstr "Zuletzt angesehene Ansicht"
+
+#. SysConfig
+msgid "Last viewed screen"
+msgstr "Zuletzt angesehene Aktion"
+
+#. SysConfig
+msgid "Mark ticket as seen"
+msgstr "Ticket als gelesen markieren"
+
+#. SysConfig
+msgid "Mark ticket as unseen"
+msgstr "Ticket als ungelesen markieren"
+
+#. SysConfig
+msgid "Screen after marking as seen"
+msgstr "Ansicht nachdem als gelesen markiert wurde"
+
+#. SysConfig
+msgid "Screen after marking as unseen"
+msgstr "Ansicht nachdem als ungelesen markiert wurde"
+

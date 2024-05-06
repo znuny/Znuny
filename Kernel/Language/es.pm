@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.596702390766694;
+    $Self->{Completeness}        = 0.594741166803615;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2624,6 +2624,8 @@ sub Data {
         'Link to parent' => 'Enlazar al padre',
         'Unlock tickets' => 'Desbloquear los tickets',
         'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Ejecutar Acción en Bloque',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -4541,6 +4543,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Imprimir este artículo',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Marcar',
@@ -7884,6 +7890,22 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             '',
         'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'temporalmente-no-válido',
@@ -8577,6 +8599,10 @@ Tu Equipo de Soporte
         'Configure and manage ACLs.' => 'Configurar y administrar ACLs.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Configura que pantalla debe ser mostrada después de que un nuevo ticket haya sido creado.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'Crear nuevo ticket de proceso.',
         'Create Process Ticket' => '',
         'Create Ticket' => '',
@@ -8774,6 +8800,8 @@ Tu Equipo de Soporte
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'Apellidos Nombre',
         'Lastname Firstname (UserLogin)' => 'Apellidos Nombre (LoginUsuario) ',
         'Lastname, Firstname' => 'Apellidos, Nombre',
@@ -8821,6 +8849,8 @@ Tu Equipo de Soporte
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '¡Marcar como spam!',
         'Mark this ticket as junk!' => '¡Marcar este ticket como basura!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Mediano',
@@ -8927,6 +8957,8 @@ Tu Equipo de Soporte
         'Russian' => 'Ruso',
         'S/MIME Certificates' => 'Certificados S/MIME',
         'Schedule a maintenance period.' => 'Programar un periodo de mantenimiento.',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Pantalla posterior a nuevo ticket',
         'Search Customer' => 'Búsqueda de un cliente',
         'Search Ticket.' => 'Buscar ticket.',

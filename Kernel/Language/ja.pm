@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.685572959604287;
+    $Self->{Completeness}        = 0.683319638455218;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2623,6 +2623,8 @@ sub Data {
         'Link to parent' => '親へリンク',
         'Unlock tickets' => 'チケットのロック解除',
         'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => '一括処理を実行',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -4541,6 +4543,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'この記事を印刷',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'マーク',
@@ -7886,6 +7892,22 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '無効-暫定',
@@ -8577,6 +8599,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => 'ACLの設定と管理',
         'Configure which screen should be shown after a new ticket has been created.' =>
             '新規チケットが作成された後に表示する画面を選択してください。',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'プロセスチケットを作成',
         'Create Process Ticket' => '',
         'Create Ticket' => 'チケットを作成',
@@ -8774,6 +8800,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => '',
         'Lastname Firstname (UserLogin)' => '',
         'Lastname, Firstname' => '名, 姓',
@@ -8821,6 +8849,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '迷惑メールにする',
         'Mark this ticket as junk!' => 'このチケットをジャンクとしてマークします!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => '中',
@@ -8928,6 +8958,8 @@ Thanks for your help!
         'Russian' => 'ロシア語',
         'S/MIME Certificates' => 'S/MIME証明書',
         'Schedule a maintenance period.' => 'メンテナンス期間をスケジュール',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => '新規チケット作成後の画面',
         'Search Customer' => '顧客を検索します。',
         'Search Ticket.' => 'チケットを検索する。',

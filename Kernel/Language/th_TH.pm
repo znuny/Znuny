@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.524649629018961;
+    $Self->{Completeness}        = 0.522925225965489;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2620,6 +2620,8 @@ sub Data {
         'Link to parent' => 'เชื่อมโยงไปยัง parent',
         'Unlock tickets' => 'ปลดล็อคตั๋ว',
         'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'เริ่มดำเนินการเป็นกลุ่ม',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -4537,6 +4539,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'พิมพ์บทความนี้',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'มาร์ค',
@@ -7876,6 +7882,22 @@ sub Data {
             '',
         'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ไม่ถูกต้องชั่วคราว',
@@ -8569,6 +8591,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => 'กำหนดค่าและจัดการ ACLs',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'กำหนดค่าว่าหน้าจอใดควรจะแสดงหลังจากที่ตั๋วใหม่ถูกสร้างขึ้น',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'สร้างตั๋วกระบวนการใหม่',
         'Create Process Ticket' => '',
         'Create Ticket' => '',
@@ -8766,6 +8792,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'ชื่อนามสกุล',
         'Lastname Firstname (UserLogin)' => 'ชื่อนามสกุล (ผู้ใช้เข้าสู่ระบบ)',
         'Lastname, Firstname' => 'ชื่อ, นามสกุล',
@@ -8813,6 +8841,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'มาร์คว่าเป็นสแปม!',
         'Mark this ticket as junk!' => 'ทำเครื่องหมายตั๋วนี้เป็นขยะ!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'ขนาดกลาง',
@@ -8919,6 +8949,8 @@ Thanks for your help!
         'Russian' => 'ภาษารัสเซีย',
         'S/MIME Certificates' => 'ใบรับรอง S/MIME',
         'Schedule a maintenance period.' => '',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'หน้าจอหลังจากตั๋วใหม่',
         'Search Customer' => 'ค้นหาลูกค้า',
         'Search Ticket.' => 'ค้นหาตั๋ว',

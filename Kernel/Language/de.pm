@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.99159109645507;
+    $Self->{Completeness}        = 0.991618734593262;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2618,6 +2618,8 @@ sub Data {
         'Link to parent' => 'Mit Eltern verknüpfen',
         'Unlock tickets' => 'Tickets entsperren',
         'Watch tickets' => 'Tickets beobachten',
+        'Mark tickets as seen' => 'Tickets als gelesen markieren',
+        'Mark tickets as unseen' => 'Tickets als ungelesen markieren',
         'Execute Bulk Action' => 'Sammelaktion ausführen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -4535,6 +4537,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Diesen Artikel drucken',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => 'Artikel als ungelesen markieren',
+        'Mark as unseen' => 'Als ungelesen markieren',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Markieren',
@@ -7871,6 +7877,22 @@ sub Data {
             'Zeigt den Ticket-Titel in der "Notiz übergeben"-Aktion im Agenten-Interface an.',
         'User preferences backend to use.' => 'Zu verwendendes User-Preferences-Backend.',
         'Loader module registration for the public interface.' => 'Lade-Modulregistrierung für das öffentliche Interface.',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            'Definiert die zur Verfügung stehenden Konfigurationsparameter in der Einstellungsansicht. Der Standard-Umleitungs-URL der SysConfig-Einstellung \'MarkTicketUnseenRedirectDefaultURL\' wird verwendet, falls der Agent keine Auswahl getroffen hat.',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            'Definiert den URL, zu dem umgeleitet wird, nachdem ein Artikel auf \'ungelesen\' gesetzt wurde.',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            'Definiert die zur Verfügung stehenden Konfigurationsparameter in der Einstellungsansicht. Der Standard-Umleitungs-URL der SysConfig-Einstellung \'MarkTicketSeenRedirectDefaultURL\' wird verwendet, falls der Agent keine Auswahl getroffen hat.',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            'Definiert den URL, zu dem umgeleitet wird, nachdem ein Artikel auf \'gelesen\' gesetzt wurde.',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            'Registriert einen Link im Ticketmenü, um ein Ticket als ungelesen zu markieren.',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            'Registriert einen Link im Ticketmenü, um ein Ticket als gelesen zu markieren.',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            'Registriert einen Link im Ticketmenü von Ticketübersichten, um ein Ticket als ungelesen zu markieren.',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            'Registriert einen Link im Ticketmenü von Ticketübersichten, um ein Ticket als gelesen zu markieren.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',
@@ -8563,6 +8585,10 @@ Ihr Helpdesk-Team
         'Configure and manage ACLs.' => 'ACLs konfigurieren und verwalten.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Konfigurieren Sie, welche Oberfläche angezeigt werden soll, nachdem ein neues Ticket erstellt wurde.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            'Konfigurieren Sie, welche Oberfläche angezeigt werden soll, nachdem ein Ticket oder Artikel als gelesen markiert wurde.',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            'Konfigurieren Sie, welche Oberfläche angezeigt werden soll, nachdem ein Ticket oder Artikel als ungelesen markiert wurde.',
         'Create New process ticket.' => 'Neues Prozess-Ticket erstellen.',
         'Create Process Ticket' => 'Neues Prozess-Ticket erstellen',
         'Create Ticket' => 'Ticket erstellen',
@@ -8760,6 +8786,8 @@ Ihr Helpdesk-Team
         'Last view - limit' => 'Letzte Ansicht - Limit',
         'Last view - position' => 'Letzte Ansicht - Position',
         'Last view - types' => 'Letzte Ansicht - Typen',
+        'Last viewed overview' => 'Zuletzt angesehene Ansicht',
+        'Last viewed screen' => 'Zuletzt angesehene Aktion',
         'Lastname Firstname' => 'Nachname Vorname',
         'Lastname Firstname (UserLogin)' => 'Nachname Vorname (BenutzerAnmeldung)',
         'Lastname, Firstname' => 'Nachname, Vorname',
@@ -8807,6 +8835,8 @@ Ihr Helpdesk-Team
         'Management of ticket attribute relations.' => 'Verwaltung von abhängigen Ticketattributen.',
         'Mark as Spam!' => 'Als Spam makieren!',
         'Mark this ticket as junk!' => 'Dieses Ticket als Junk markieren!',
+        'Mark ticket as seen' => 'Ticket als gelesen markieren',
+        'Mark ticket as unseen' => 'Ticket als ungelesen markieren',
         'Mattermost Username' => 'Mattermost-Benutzername',
         'Max. number of articles per page in TicketZoom' => 'Max. Anzahl Artikel pro Seite in der Ticket-Detailansicht',
         'Medium' => 'Mittel',
@@ -8913,6 +8943,8 @@ Ihr Helpdesk-Team
         'Russian' => 'Russisch',
         'S/MIME Certificates' => 'S/MIME-Zertifikate',
         'Schedule a maintenance period.' => 'Eine Wartungsperiode planen.',
+        'Screen after marking as seen' => 'Ansicht nachdem als gelesen markiert wurde',
+        'Screen after marking as unseen' => 'Ansicht nachdem als ungelesen markiert wurde',
         'Screen after new ticket' => 'Ansicht nach Ticket-Erstellung',
         'Search Customer' => 'Kunden suchen',
         'Search Ticket.' => 'Ticket suchen.',

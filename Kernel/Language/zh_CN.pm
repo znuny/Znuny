@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.899093157460841;
+    $Self->{Completeness}        = 0.896138044371405;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2624,6 +2624,8 @@ sub Data {
         'Link to parent' => '链接到上一级',
         'Unlock tickets' => '解锁工单',
         'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => '执行批量操作',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -4541,6 +4543,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => '打印信件',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => '标记',
@@ -7877,6 +7883,22 @@ sub Data {
             '',
         'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '暂时无效',
@@ -8569,6 +8591,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => '配置和管理ACL。',
         'Configure which screen should be shown after a new ticket has been created.' =>
             '配置创建新工单后显示的界面。',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => '创建新的流程工单。',
         'Create Process Ticket' => '',
         'Create Ticket' => '创建工单',
@@ -8766,6 +8792,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => '姓 名',
         'Lastname Firstname (UserLogin)' => '姓 名（登录用户名）',
         'Lastname, Firstname' => '姓, 名',
@@ -8813,6 +8841,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '标记为垃圾!',
         'Mark this ticket as junk!' => '标记这个工单为垃圾!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => '基本',
@@ -8919,6 +8949,8 @@ Thanks for your help!
         'Russian' => '俄语',
         'S/MIME Certificates' => 'S/MIME证书',
         'Schedule a maintenance period.' => '计划一个系统维护期。',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => '创建新工单后的视图',
         'Search Customer' => '搜索客户',
         'Search Ticket.' => '搜索工单。',

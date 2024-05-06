@@ -253,6 +253,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::IntegrateZnunyNoteToLinkedTicket',
         },
         {
+            Message => 'Integrate Znuny-MarkTicketSeenUnseen',
+            Module  => 'scripts::Migration::Znuny::IntegrateZnunyMarkTicketSeenUnseen',
+        },
+        {
             Message => 'Migrate groups',
             Module  => 'scripts::Migration::Znuny::MigrateGroups',
         },
