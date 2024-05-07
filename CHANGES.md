@@ -1,4 +1,5 @@
 # 7.1.1 2024-??-??
+ - 2024-05-07 Added missing primary keys to database tables.
  - 2024-05-06 Integration of Znuny-MarkTicketSeenUnseen into Framework.
  - 2024-05-03 Icons for shortcut and Apple touch are now configurable.
  - 2024-05-02 Added a bulk function to watch tickets.

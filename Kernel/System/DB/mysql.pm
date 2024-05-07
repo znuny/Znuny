@@ -451,6 +451,16 @@ sub TableAlter {
                     $SQLAlter .= ' NULL';
                 }
 
+                # auto increment
+                if ( defined $Tag->{AutoIncrement} && $Tag->{AutoIncrement} =~ m{\Atrue\z}i ) {
+                    $SQLAlter .= ' AUTO_INCREMENT';
+                }
+
+                # add primary key
+                if ( defined $Tag->{PrimaryKey} && $Tag->{PrimaryKey} =~ m{\Atrue\z}i ) {
+                    $SQLAlter .= ' PRIMARY KEY FIRST';
+                }
+
                 push @SQL, $SQLAlter;
             }
         }
