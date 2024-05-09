@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.509412711182623;
+    $Self->{Completeness}        = 0.509333762471838;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2622,7 +2622,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
         'Statistics Management' => 'Statistiekbeheer',
         'Add Statistics' => 'Statistieken toevoegen',
-        'Read more about statistics in OTRS' => 'Lees meer over statistieken in OTRS',
         'Dynamic Matrix' => 'Dynamische matrix',
         'Each cell contains a singular data point.' => '',
         'Dynamic List' => 'Dynamische lijst',

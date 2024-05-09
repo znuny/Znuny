@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.88994368463395;
+    $Self->{Completeness}        = 0.889925973607982;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2616,7 +2616,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
         'Statistics Management' => '',
         'Add Statistics' => '통계 추가',
-        'Read more about statistics in OTRS' => 'OTRS의 통계에 대해 자세히 알아보십시오.',
         'Dynamic Matrix' => '가변 매트릭스',
         'Each cell contains a singular data point.' => '각 셀에는 단일 데이터 요소가 포함되어 있습니다.',
         'Dynamic List' => '가변 리스트',

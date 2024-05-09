@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.702172164119067;
+    $Self->{Completeness}        = 0.702124235597039;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2622,7 +2622,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
         'Statistics Management' => 'レポート管理',
         'Add Statistics' => 'レポートを追加',
-        'Read more about statistics in OTRS' => 'OTRSのレポートについて詳細を読む',
         'Dynamic Matrix' => '集計',
         'Each cell contains a singular data point.' => '各セルには特異点が含まれています。',
         'Dynamic List' => '一覧',

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-01-24 10:56+0000\n"
+"POT-Creation-Date: 2024-05-09 07:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7703,10 +7703,6 @@ msgid "Add Statistics"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-msgid "Read more about statistics in OTRS"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
 msgid "Dynamic Matrix"
 msgstr ""
 
@@ -8644,10 +8640,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
 msgid "PDF"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
-msgid "Unknown"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
@@ -9898,8 +9890,6 @@ msgstr ""
 msgid "Reset setting"
 msgstr ""
 
-
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Copy a direct link to this setting to your clipboard"
 msgstr ""
@@ -10106,6 +10096,10 @@ msgstr ""
 
 #. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
 msgid "Finished"
+msgstr ""
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
+msgid "Unknown"
 msgstr ""
 
 #. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl

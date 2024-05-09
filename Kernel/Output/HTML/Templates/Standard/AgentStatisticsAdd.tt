@@ -35,9 +35,6 @@
                     <li>
                         <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
-                    <li>
-                        <a href="https://doc.znuny.org/znuny/admin/statistics" target="_blank" class="CallForAction Fullsize Center"><span><i class="fa fa-book"></i>[% Translate("Read more about statistics in OTRS") | html %]</span></a>
-                    </li>
                 </ul>
             </div>
         </div>
