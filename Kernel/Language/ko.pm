@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.872006606110652;
+    $Self->{Completeness}        = 0.87198546415593;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2516,7 +2516,6 @@ sub Data {
         'Split' => '분리',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => 'Znuny의 통계에 대해 자세히 알아보십시오.',
         'Statistics Management' => '',
         'Add Statistics' => '통계 추가',
         'Dynamic Matrix' => '가변 매트릭스',

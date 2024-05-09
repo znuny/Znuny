@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.897109826589595;
+    $Self->{Completeness}        = 0.897092831185993;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2522,7 +2522,6 @@ sub Data {
         'Split' => 'Podeli',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => 'Pročitajte više o statistikama u Znuny',
         'Statistics Management' => 'Upravljanje statistikama',
         'Add Statistics' => 'Dodaj statistiku',
         'Dynamic Matrix' => 'Dinamička matrica',

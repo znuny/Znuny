@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.608422791081751;
+    $Self->{Completeness}        = 0.608523290386521;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2518,7 +2518,6 @@ bin/znuny.Daemon.pl status\').',
         'Split' => 'Pisah',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => '',
         'Statistics Management' => '',
         'Add Statistics' => '',
         'Dynamic Matrix' => 'Matrik dinamis',
