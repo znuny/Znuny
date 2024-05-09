@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.896138044371405;
+    $Self->{Completeness}        = 0.89612097304405;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2523,7 +2523,6 @@ sub Data {
         'Split' => '拆分',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => '详细了解OTR关于统计的信息',
         'Statistics Management' => '统计管理',
         'Add Statistics' => '添加统计',
         'Dynamic Matrix' => '动态矩阵',
