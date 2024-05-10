@@ -3089,6 +3089,7 @@
                 <Item Key="Key" Translatable="1"></Item>
                 <Item Key="Desc" Translatable="1">Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.</Item>
                 <Item Key="PrefKey">MaxArticlesPerPage</Item>
+                <Item Key="NeedsReload">1</Item>
                 <Item Key="Prio">50</Item>
                 <Item Key="Active">1</Item>
             </Hash>

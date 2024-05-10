@@ -11,6 +11,7 @@ package Kernel::Modules::AgentPreferences;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -147,6 +148,11 @@ sub Run {
                 $ConfigNeedsReload = 1;
             }
 
+            # Enable config reload for all generic modules
+            if ( $Module eq 'Kernel::Output::HTML::Preferences::Generic' ) {
+                $ConfigNeedsReload = 1;
+            }
+
             # When editing another agent, we don't want to reload the page and don't want to update session data.
             if ( defined $Self->{EditingAnotherAgent} ) {
                 $ConfigNeedsReload = 0;
@@ -192,8 +198,9 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Message  = '';
-        my $Priority = '';
+        my $Message           = '';
+        my $Priority          = '';
+        my $ConfigNeedsReload = 0;
 
         # check group param
         my @Groups = $ParamObject->GetArray( Param => 'Group' );
@@ -239,10 +246,20 @@ sub Run {
                 }
             }
 
+            if ( $Preferences{$Group}->{NeedsReload} ) {
+                $ConfigNeedsReload = 1;
+            }
+
+            # Enable config reload for all generic modules
+            if ( $Module eq 'Kernel::Output::HTML::Preferences::Generic' ) {
+                $ConfigNeedsReload = 1;
+            }
+
             if (
                 $Object->Run(
-                    GetParam => \%GetParam,
-                    UserData => \%UserData
+                    GetParam          => \%GetParam,
+                    UserData          => \%UserData,
+                    UpdateSessionData => $ConfigNeedsReload,
                 )
                 )
             {
