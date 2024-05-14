@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.436061801446417;
+    $Self->{Completeness}        = 0.435918501478804;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -7896,6 +7896,10 @@ Mfano:
         'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
             '',
         'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml

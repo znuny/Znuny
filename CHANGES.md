@@ -1,4 +1,5 @@
 # 7.1.1 2024-??-??
+ - 2024-05-14 Added configurable X-Priority email header for outgoing emails.
  - 2024-05-10 Fixed session handling while saving user preferences.
  - 2024-05-07 Added missing primary keys to database tables.
  - 2024-05-06 Integration of Znuny-MarkTicketSeenUnseen into Framework.

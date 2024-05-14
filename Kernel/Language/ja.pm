@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.683267587113741;
+    $Self->{Completeness}        = 0.683043049622084;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7906,6 +7906,10 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
             '',
         'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml

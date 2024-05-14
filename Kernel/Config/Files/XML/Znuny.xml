@@ -3598,4 +3598,31 @@
             </Hash>
         </Value>
     </Setting>
+
+    <Setting Name="PriorityEmailMapping###agent" Required="0" Valid="0">
+        <Description Translatable="1">Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="1 very low">5</Item>
+                <Item Key="2 low">4</Item>
+                <Item Key="3 normal">3</Item>
+                <Item Key="4 high">2</Item>
+                <Item Key="5 very high">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PriorityEmailMapping###system" Required="0" Valid="0">
+        <Description Translatable="1">Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="1 very low">5</Item>
+                <Item Key="2 low">4</Item>
+                <Item Key="3 normal">3</Item>
+                <Item Key="4 high">2</Item>
+                <Item Key="5 very high">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otrs_config>

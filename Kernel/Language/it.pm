@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.601742274819198;
+    $Self->{Completeness}        = 0.601544528425895;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -7903,6 +7903,10 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
             '',
         'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml
