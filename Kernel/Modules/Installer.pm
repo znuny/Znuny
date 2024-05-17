@@ -235,7 +235,6 @@ sub Run {
             Data       => \%Databases,
             Name       => 'DBType',
             Class      => 'Modernize',
-            Size       => scalar keys %Databases,
             SelectedID => 'mysql',
         );
 
