@@ -3404,6 +3404,7 @@ You can log in via the following URL:
                 <Item Key="Label" Translatable="1">Time Zone</Item>
                 <Item Key="Key" Translatable="1"></Item>
                 <Item Key="PrefKey">UserTimeZone</Item>
+                <Item Key="NeedsReload">1</Item>
                 <Item Key="Prio">3500</Item>
                 <Item Key="Active">1</Item>
             </Hash>
@@ -4094,6 +4095,7 @@ via the Preferences button after logging in.
                 <Item Key="Desc" Translatable="1">Select your personal time zone. All times will be displayed relative to this time zone.</Item>
                 <Item Key="Key" Translatable="1">Time Zone</Item>
                 <Item Key="PrefKey">UserTimeZone</Item>
+                <Item Key="NeedsReload">1</Item>
                 <Item Key="Prio">2500</Item>
                 <Item Key="Active">1</Item>
             </Hash>
