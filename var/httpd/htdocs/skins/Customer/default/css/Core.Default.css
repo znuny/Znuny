@@ -595,6 +595,7 @@ textarea.cke_dialog_ui_input_textarea:focus {
 }
 
 #Footer ul.FooterLinks li::after {
+    color: #bbb;
     content: '|';
 }
 
