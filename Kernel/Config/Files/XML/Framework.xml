@@ -6929,7 +6929,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Public</Navigation>
         <Value>
             <Hash>
-                <Item Key="https://www.otrs.com">OTRS Homepage</Item>
+                <Item Key="https://www.znuny.org">Znuny Open-Source Help Desk Platform</Item>
             </Hash>
         </Value>
     </Setting>
