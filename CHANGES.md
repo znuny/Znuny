@@ -1,4 +1,5 @@
 # 6.5.9 2024-??-??
+ - 2024-05-28 Fixed caching for queue updates.
  - 2024-05-17 Fixed session handling while saving user preferences.
  - 2024-04-29 Updated default values of PublicFrontend::FooterLinks.
  - 2024-04-22 Integrated package Znuny4OTRS-BugfixCustomerUserDBPasswordCryptType.
