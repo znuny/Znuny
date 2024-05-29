@@ -1,4 +1,4 @@
-# 7.0.18 2024-??-??
+# 7.0.18 2024-05-29
  - 2024-05-10 Fixed session handling while saving user preferences.
  - 2024-04-24 InnoDB is now the required default storage engine.
  - 2024-04-22 Integrated package Znuny4OTRS-BugfixCustomerUserDBPasswordCryptType.
