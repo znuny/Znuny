@@ -1752,6 +1752,19 @@ sub RepositoryPackageListGet {
 
     @Packages = @NewPackages;
 
+    # Sort packages by name and then by version (ascending).
+    @Packages = sort {
+        ( my $ComparableVersionA = $a->{Version} ) =~ s{(\A(\d+)\.(\d+)\.(\d+)\z)}{
+            sprintf( '%03u%03u%03u', $2, $3, $4 );
+        }e;
+        ( my $ComparableVersionB = $b->{Version} ) =~ s{(\A(\d+)\.(\d+)\.(\d+)\z)}{
+            sprintf( '%03u%03u%03u', $2, $3, $4 );
+        }e;
+
+        $a->{Name} cmp $b->{Name}
+            || $ComparableVersionA <=> $ComparableVersionB
+    } @Packages;
+
     # set cache
     if ( $Param{Cache} ) {
         $CacheObject->Set(

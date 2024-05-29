@@ -1,6 +1,5 @@
 # 7.1.1 2024-??-??
  - 2024-05-14 Added configurable X-Priority email header for outgoing emails.
- - 2024-05-10 Fixed session handling while saving user preferences.
  - 2024-05-07 Added missing primary keys to database tables.
  - 2024-05-06 Integration of Znuny-MarkTicketSeenUnseen into Framework.
  - 2024-05-03 Icons for shortcut and Apple touch are now configurable.
@@ -8,7 +7,8 @@
  - 2024-04-30 Added a function to bulk-unwatch tickets in the overview of watched tickets.
  - 2023-10-11 Added user preferences backend DBJSON.
 
-# 7.0.18 2024-??-??
+# 7.0.18 2024-05-29
+ - 2024-05-10 Fixed session handling while saving user preferences.
  - 2024-04-24 InnoDB is now the required default storage engine.
  - 2024-04-22 Integrated package Znuny4OTRS-BugfixCustomerUserDBPasswordCryptType.
  - 2024-04-19 Added support for two factor auth token parameter to generic interface. Thanks to Flávio Marta (@CallMeFlanby). [#502](https://github.com/znuny/Znuny/pull/502)
