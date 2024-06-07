@@ -1,4 +1,5 @@
 # 7.0.19 2024-??-??
+ - 2024-06-07 Fixed value used for owner lookup in AgentTicketProcess. Thanks to Falko Saller (@falkos). [#556](https://github.com/znuny/Znuny/pull/556)
 
 # 7.0.18 2024-05-29
  - 2024-05-10 Fixed session handling while saving user preferences.
