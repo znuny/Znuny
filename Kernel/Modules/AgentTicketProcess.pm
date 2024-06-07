@@ -3564,12 +3564,12 @@ sub _RenderOwner {
 
     # set server errors
     my $ServerError = '';
-    if ( IsHashRefWithData( $Param{Error} ) && $Param{Error}->{'OwnerID'} ) {
+    if ( IsHashRefWithData( $Param{Error} ) && $Param{Error}->{'Owner'} ) {
         $ServerError = 'ServerError';
     }
 
     if ( $Self->{LinkTicketData} ) {
-        $SelectedValue = $Self->{LinkTicketData}->{OwnerID};
+        $SelectedValue = $Self->{LinkTicketData}->{Owner};
     }
 
     # look up $SelectedID
