@@ -30,6 +30,7 @@ The following persons contributed to Znuny:
 * Elva Novoa <elva.novoa@otrs.com>
 * Emin Yazi <yazi@efflux.de>
 * Enrique Matías Sánchez (Quique) <cronopios@gmail.com>
+* Falko Saller <2903042+falkos@users.noreply.github.com>
 * Felix Niklas <felix.niklas@otrs.com>
 * Florian Edlhuber <florian.edlhuber@otrs.com>
 * Florian Liebe <florian.liebe@otrs.com>
