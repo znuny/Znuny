@@ -89,6 +89,18 @@ sub PrepareRequest {
             GetAllArticleAttachments => $GetAllArticleAttachments,
             UserID                   => 1,
         );
+
+        # Provide UntilTime as date/time parts
+        if ( $Ticket{UntilTime} ) {
+            my $UntilTimeDateTimeObject = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+            );
+            $UntilTimeDateTimeObject->Add(
+                Seconds => int( $Ticket{UntilTime} ),
+            );
+
+            $Ticket{UntilTimeDateTimeParts} = $UntilTimeDateTimeObject->Get();
+        }
     }
 
     # Remove configured fields.
