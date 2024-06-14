@@ -3,6 +3,7 @@
  - 2024-05-28 Fixed caching for queue updates.
  - 2024-05-17 Fixed session handling while saving user preferences.
  - 2024-04-29 Updated default values of PublicFrontend::FooterLinks.
+ - 2024-04-24 Fixed regular expression in Kernel::System::HTMLUtils::LinkQuote which could lead to long execution times.
  - 2024-04-22 Integrated package Znuny4OTRS-BugfixCustomerUserDBPasswordCryptType.
  - 2024-04-19 Added support for two factor auth token parameter to generic interface. Thanks to Flávio Marta (@CallMeFlanby). [#502](https://github.com/znuny/Znuny/pull/502)
  - 2024-04-18 Fixed smart tag replacement for article subjects in process activity dialogs.

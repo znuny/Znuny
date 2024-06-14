@@ -912,7 +912,7 @@ sub LinkQuote {
     }
     ${$String} =~ s{
         (                                          # $1 greater-than and less-than sign
-            > | < | \s+ | §{10} |
+            > | < | \s | §{10} |
             (?: &[a-zA-Z0-9]+; )                   # get html entities
         )
         (                                          # $2
