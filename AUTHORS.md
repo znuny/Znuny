@@ -111,7 +111,7 @@ The following persons contributed to Znuny:
 * Stefan Rother <stefan.rother@otrs.com>
 * Stefan Wintermeyer <stefan@otrs.org>
 * Steva Stevic <svik@s7designcreative.com>
-* Sławomir Niedbała <sniedbala@dev.opgksoftware.com>
+* Sławomir Niedbała <slawnied1234@gmail.com>
 * Theo van Hoesel <Th.J.v.Hoesel+GitHub@gmail.com>
 * Thomas Raith <thomas.raith@otrs.com>
 * Thomas Wouters <thomas@sijn.org>
