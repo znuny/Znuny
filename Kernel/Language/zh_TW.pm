@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.310042946812025;
+    $Self->{Completeness}        = 0.309991742361685;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -7859,6 +7859,7 @@ sub Data {
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
         'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '暫時無效',

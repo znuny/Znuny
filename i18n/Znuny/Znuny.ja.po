@@ -24340,3 +24340,7 @@ msgstr ""
 msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Deletes orphaned sessions."
+msgstr ""
+

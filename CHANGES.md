@@ -2,6 +2,7 @@
  - 2024-06-07 Fixed value used for owner lookup in AgentTicketProcess. Thanks to Falko Saller (@falkos). [#556](https://github.com/znuny/Znuny/pull/556)
  - 2024-06-03 Fixed CSS problem with displaying articles in ticket details view.
  - 2024-05-28 Fixed caching for queue updates.
+ - 2024-04-29 Added a daemon task to delete orphaned session records.
  - 2024-04-24 Fixed regular expression in Kernel::System::HTMLUtils::LinkQuote which could lead to long execution times.
 
 # 7.0.18 2024-05-29
