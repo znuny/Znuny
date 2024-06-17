@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.192408807098258;
+    $Self->{Completeness}        = 0.192377197305734;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7876,6 +7876,7 @@ sub Data {
             '',
         'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
         'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
             '',
         'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>

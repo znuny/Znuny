@@ -24381,3 +24381,7 @@ msgstr "Mapping der Ticketpriorität zum X-Priority E-Mail-Header für ausgehend
 msgid "Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel \"system\"."
 msgstr "Mapping der Ticketpriorität zum X-Priority E-Mail-Header für ausgehende E-Mails des Kommunikationskanals \"System\"."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Deletes orphaned sessions."
+msgstr "Löscht verwaiste Sessions."
+

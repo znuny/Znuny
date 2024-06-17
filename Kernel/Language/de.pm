@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991620111731844;
+    $Self->{Completeness}        = 0.99162148841794;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7876,6 +7876,7 @@ sub Data {
             'Zeigt den Ticket-Titel in der "Notiz übergeben"-Aktion im Agenten-Interface an.',
         'User preferences backend to use.' => 'Zu verwendendes User-Preferences-Backend.',
         'Loader module registration for the public interface.' => 'Lade-Modulregistrierung für das öffentliche Interface.',
+        'Deletes orphaned sessions.' => 'Löscht verwaiste Sessions.',
         'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
             'Definiert die zur Verfügung stehenden Konfigurationsparameter in der Einstellungsansicht. Der Standard-Umleitungs-URL der SysConfig-Einstellung \'MarkTicketUnseenRedirectDefaultURL\' wird verwendet, falls der Agent keine Auswahl getroffen hat.',
         'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>

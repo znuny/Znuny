@@ -24383,3 +24383,7 @@ msgstr ""
 msgid "Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel \"system\"."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Deletes orphaned sessions."
+msgstr ""
+
