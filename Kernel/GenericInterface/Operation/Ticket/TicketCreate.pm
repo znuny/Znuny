@@ -512,21 +512,39 @@ sub Run {
     }
 
     # isolate Article parameter
-    my @Articles;
+    my @Article;
     if ( IsHashRefWithData( $Param{Data}->{Article} ) ) {
-        push @Articles, $Param{Data}->{Article};
+        push @Article, $Param{Data}->{Article};
     }
-    else {
-        @Articles = @{ $Param{Data}->{Article} };
+    if ( IsArrayRefWithData( $Param{Data}->{Article} ) ) {
+        @Article = @{ $Param{Data}->{Article} };
     }
 
-    for my $Article (@Articles) {
+    for my $Article (@Article) {
         $Article->{UserType} = $UserType;
 
         # remove leading and trailing spaces
-        s/ (?: \A\s+ | \s+\z ) //gx for values %$Article;
+        for my $Attribute ( sort keys %{$Article} ) {
+            if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
+
+                #remove leading spaces
+                $Article->{$Attribute} =~ s{\A\s+}{};
+
+                #remove trailing spaces
+                $Article->{$Attribute} =~ s{\s+\z}{};
+            }
+        }
         if ( IsHashRefWithData( $Article->{OrigHeader} ) ) {
-            s/ (?: \A\s+ | \s+\z ) //gx for values %{ $Article->{OrigHeader} };
+            for my $Attribute ( sort keys %{ $Article->{OrigHeader} } ) {
+                if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
+
+                    #remove leading spaces
+                    $Article->{OrigHeader}->{$Attribute} =~ s{\A\s+}{};
+
+                    #remove trailing spaces
+                    $Article->{OrigHeader}->{$Attribute} =~ s{\s+\z}{};
+                }
+            }
         }
 
         # Check attributes that can be set by sysconfig.
@@ -574,11 +592,11 @@ sub Run {
         $DynamicField = $Param{Data}->{DynamicField};
 
         # homogenate input to array
-        if ( ref $DynamicField eq 'ARRAY' ) {
-            @DynamicFieldList = @{$DynamicField};
+        if ( ref $DynamicField eq 'HASH' ) {
+            push @DynamicFieldList, $DynamicField;
         }
         else {
-            push @DynamicFieldList, $DynamicField;
+            @DynamicFieldList = @{$DynamicField};
         }
 
         # check DynamicField internal structure
@@ -592,7 +610,16 @@ sub Run {
             }
 
             # remove leading and trailing spaces
-            s/ (?: \A\s+ | \s+\z ) //gx for values %{$DynamicFieldItem};
+            for my $Attribute ( sort keys %{$DynamicFieldItem} ) {
+                if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
+
+                    #remove leading spaces
+                    $DynamicFieldItem->{$Attribute} =~ s{\A\s+}{};
+
+                    #remove trailing spaces
+                    $DynamicFieldItem->{$Attribute} =~ s{\s+\z}{};
+                }
+            }
 
             # check DynamicField attribute values
             my $DynamicFieldCheck = $Self->_CheckDynamicField( DynamicField => $DynamicFieldItem );
@@ -630,7 +657,16 @@ sub Run {
             }
 
             # remove leading and trailing spaces
-            s/ (?: \A\s+ | \s+\z ) //gx for values %{$AttachmentItem};
+            for my $Attribute ( sort keys %{$AttachmentItem} ) {
+                if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
+
+                    #remove leading spaces
+                    $AttachmentItem->{$Attribute} =~ s{\A\s+}{};
+
+                    #remove trailing spaces
+                    $AttachmentItem->{$Attribute} =~ s{\s+\z}{};
+                }
+            }
 
             # check Attachment attribute values
             my $AttachmentCheck = $Self->_CheckAttachment( Attachment => $AttachmentItem );
@@ -643,7 +679,7 @@ sub Run {
 
     return $Self->_TicketCreate(
         Ticket           => $Ticket,
-        Article          => \@Articles,
+        Article          => \@Article,
         DynamicFieldList => \@DynamicFieldList,
         AttachmentList   => \@AttachmentList,
         UserID           => $UserID,

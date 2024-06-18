@@ -20,6 +20,7 @@ use Kernel::GenericInterface::Requester;
 
 use Kernel::System::VariableCheck qw(:all);
 
+# get helper object
 # skip SSL certificate verification
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
@@ -35,6 +36,7 @@ $HelperObject->ConfigSettingChange(
     Value => 0,
 );
 
+# get a random number
 my $RandomID = $HelperObject->GetRandomNumber();
 
 # create a new user for current test
@@ -43,6 +45,7 @@ my $UserLogin = $HelperObject->TestUserCreate(
 );
 my $Password = $UserLogin;
 
+# new user object
 my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
 $Self->{UserID} = $UserObject->UserLookup(
@@ -61,6 +64,7 @@ my $CustomerPassword  = $CustomerUserLogin;
 my $CustomerUserLogin2 = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword2  = $CustomerUserLogin2;
 
+# create dynamic field object
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
 # add text dynamic field
@@ -966,12 +970,18 @@ for my $Test (@Tests) {
     if ( $Test->{RequestData}->{Article} ) {
 
         # Get latest article data.
-        my ($Article) = $ArticleObject->ArticleList(
+        my @ArticleList = $ArticleObject->ArticleList(
             TicketID => $TicketID1,
             OnlyLast => 1,
         );
 
-        my $ArticleID = $Article->{ArticleID};
+        my $ArticleID;
+
+        ARTICLE:
+        for my $Article (@ArticleList) {
+            $ArticleID = $Article->{ArticleID};
+            last ARTICLE;
+        }
 
         if ( $Test->{ExpectedReturnLocalData} ) {
             $Test->{ExpectedReturnLocalData}->{Data} = {
@@ -1115,77 +1125,84 @@ for my $Test (@Tests) {
         }
 
         # Get latest article data.
-        my ($LastArticle) = $ArticleObject->ArticleList(
+        my @ArticleList = $ArticleObject->ArticleList(
             TicketID => $TicketID1,
             OnlyLast => 1,
         );
 
         my %Article;
 
-        my $ArticleBackendObject = $ArticleObject->BackendForArticle( %{$LastArticle} );
+        ARTICLE:
+        for my $Article (@ArticleList) {
+            my $ArticleBackendObject = $ArticleObject->BackendForArticle( %{$Article} );
 
-        %Article = $ArticleBackendObject->ArticleGet(
-            %{$LastArticle},
-            DynamicFields => 1,
-        );
-
-        for my $Key ( sort keys %Article ) {
-            $Article{$Key} //= '';
-        }
-
-        # Push all dynamic field data in a separate array structure.
-        my $DynamicFields;
-        for my $Key ( sort keys %Article ) {
-            if ( $Key =~ m{^DynamicField_(?<DFName>\w+)$}xms ) {
-                push @{$DynamicFields}, {
-                    Name  => $+{DFName},
-                    Value => $Article{$Key} // '',
-                };
-            }
-        }
-        for my $DynamicField ( @{$DynamicFields} ) {
-            delete $Article{"DynamicField_$DynamicField->{Name}"};
-        }
-        if ( scalar @{$DynamicFields} == 1 ) {
-            $DynamicFields = $DynamicFields->[0];
-        }
-        if ( IsArrayRefWithData($DynamicFields) || IsHashRefWithData($DynamicFields) ) {
-            $Article{DynamicField} = $DynamicFields;
-        }
-
-        my %AttachmentIndex = $ArticleBackendObject->ArticleAttachmentIndex(
-            ArticleID => $Article{ArticleID},
-        );
-
-        my @Attachments;
-        $Kernel::OM->Get('Kernel::System::Main')->Require('MIME::Base64');
-        ATTACHMENT:
-        for my $FileID ( sort keys %AttachmentIndex ) {
-            next ATTACHMENT if !$FileID;
-            my %Attachment = $ArticleBackendObject->ArticleAttachment(
-                ArticleID => $Article{ArticleID},
-                FileID    => $FileID,
+            %Article = $ArticleBackendObject->ArticleGet(
+                %{$Article},
+                DynamicFields => 1,
             );
 
-            next ATTACHMENT if !IsHashRefWithData( \%Attachment );
+            for my $Key ( sort keys %Article ) {
+                $Article{$Key} //= '';
+            }
 
-            # Convert content to base64.
-            $Attachment{Content} = MIME::Base64::encode_base64( $Attachment{Content}, '' );
-            push @Attachments, {%Attachment};
-        }
-
-        # Set attachment data.
-        if (@Attachments) {
-
-            # Flatten array if only one attachment was found.
-            if ( scalar @Attachments == 1 ) {
-                for my $Attachment (@Attachments) {
-                    $Article{Attachment} = $Attachment;
+            # Push all dynamic field data in a separate array structure.
+            my $DynamicFields;
+            KEY:
+            for my $Key ( sort keys %Article ) {
+                if ( $Key =~ m{^DynamicField_(?<DFName>\w+)$}xms ) {
+                    push @{$DynamicFields}, {
+                        Name  => $+{DFName},
+                        Value => $Article{$Key} // '',
+                    };
+                    next KEY;
                 }
             }
-            else {
-                $Article{Attachment} = \@Attachments;
+            for my $DynamicField ( @{$DynamicFields} ) {
+                delete $Article{"DynamicField_$DynamicField->{Name}"};
             }
+            if ( scalar @{$DynamicFields} == 1 ) {
+                $DynamicFields = $DynamicFields->[0];
+            }
+            if ( IsArrayRefWithData($DynamicFields) || IsHashRefWithData($DynamicFields) ) {
+                $Article{DynamicField} = $DynamicFields;
+            }
+
+            my %AttachmentIndex = $ArticleBackendObject->ArticleAttachmentIndex(
+                ArticleID => $Article{ArticleID},
+            );
+
+            my @Attachments;
+            $Kernel::OM->Get('Kernel::System::Main')->Require('MIME::Base64');
+            ATTACHMENT:
+            for my $FileID ( sort keys %AttachmentIndex ) {
+                next ATTACHMENT if !$FileID;
+                my %Attachment = $ArticleBackendObject->ArticleAttachment(
+                    ArticleID => $Article{ArticleID},
+                    FileID    => $FileID,
+                );
+
+                next ATTACHMENT if !IsHashRefWithData( \%Attachment );
+
+                # Convert content to base64.
+                $Attachment{Content} = MIME::Base64::encode_base64( $Attachment{Content}, '' );
+                push @Attachments, {%Attachment};
+            }
+
+            # Set attachment data.
+            if (@Attachments) {
+
+                # Flatten array if only one attachment was found.
+                if ( scalar @Attachments == 1 ) {
+                    for my $Attachment (@Attachments) {
+                        $Article{Attachment} = $Attachment;
+                    }
+                }
+                else {
+                    $Article{Attachment} = \@Attachments;
+                }
+            }
+
+            last ARTICLE;
         }
 
         # Transform some article properties so they match expected data structure.
