@@ -11446,14 +11446,20 @@
                 <Item>X-OTRS-ResponsibleID</Item>
                 <Item>X-OTRS-Loop</Item>
                 <Item>X-OTRS-Priority</Item>
+                <Item>X-OTRS-PriorityID</Item>
                 <Item>X-OTRS-Queue</Item>
+                <Item>X-OTRS-QueueID</Item>
                 <Item>X-OTRS-Lock</Item>
                 <Item>X-OTRS-Ignore</Item>
                 <Item>X-OTRS-State</Item>
+                <Item>X-OTRS-StateID</Item>
                 <Item>X-OTRS-State-PendingTime</Item>
                 <Item>X-OTRS-Type</Item>
+                <Item>X-OTRS-TypeID</Item>
                 <Item>X-OTRS-Service</Item>
+                <Item>X-OTRS-ServiceID</Item>
                 <Item>X-OTRS-SLA</Item>
+                <Item>X-OTRS-SLAID</Item>
                 <Item>X-OTRS-Title</Item>
                 <Item>X-OTRS-CustomerNo</Item>
                 <Item>X-OTRS-CustomerUser</Item>
@@ -11464,13 +11470,19 @@
                 <Item>X-OTRS-FollowUp-Responsible</Item>
                 <Item>X-OTRS-FollowUp-ResponsibleID</Item>
                 <Item>X-OTRS-FollowUp-Priority</Item>
+                <Item>X-OTRS-FollowUp-PriorityID</Item>
                 <Item>X-OTRS-FollowUp-Queue</Item>
+                <Item>X-OTRS-FollowUp-QueueID</Item>
                 <Item>X-OTRS-FollowUp-Lock</Item>
                 <Item>X-OTRS-FollowUp-State</Item>
+                <Item>X-OTRS-FollowUp-StateID</Item>
                 <Item>X-OTRS-FollowUp-State-PendingTime</Item>
                 <Item>X-OTRS-FollowUp-Type</Item>
+                <Item>X-OTRS-FollowUp-TypeID</Item>
                 <Item>X-OTRS-FollowUp-Service</Item>
+                <Item>X-OTRS-FollowUp-ServiceID</Item>
                 <Item>X-OTRS-FollowUp-SLA</Item>
+                <Item>X-OTRS-FollowUp-SLAID</Item>
                 <Item>X-OTRS-FollowUp-SenderType</Item>
                 <Item>X-OTRS-FollowUp-IsVisibleForCustomer</Item>
                 <Item>X-OTRS-FollowUp-Title</Item>
