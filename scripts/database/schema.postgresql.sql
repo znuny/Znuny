@@ -1529,7 +1529,7 @@ CREATE TABLE standard_template (
     name VARCHAR (200) NOT NULL,
     text VARCHAR NULL,
     content_type VARCHAR (250) NULL,
-    template_type VARCHAR (100) DEFAULT 'Answer' NOT NULL,
+    template_type VARCHAR (250) DEFAULT 'Answer' NOT NULL,
     comments VARCHAR (250) NULL,
     valid_id SMALLINT NOT NULL,
     create_time timestamp(0) NOT NULL,

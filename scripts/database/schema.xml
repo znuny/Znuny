@@ -1263,7 +1263,7 @@
     <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
     <Column Name="text" Required="false" Size="16777216" Type="VARCHAR"/>
     <Column Name="content_type" Required="false" Size="250" Type="VARCHAR"/>
-    <Column Name="template_type" Required="true" Size="100" Type="VARCHAR" Default="Answer"/>
+    <Column Name="template_type" Required="true" Size="250" Type="VARCHAR" Default="Answer"/>
     <Column Name="comments" Required="false" Size="250" Type="VARCHAR"/>
     <Column Name="valid_id" Required="true" Type="SMALLINT"/>
     <Column Name="create_time" Required="true" Type="DATE"/>

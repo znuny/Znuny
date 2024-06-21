@@ -132,20 +132,20 @@
                     </thead>
                     <tbody>
                         <tr class="FilterMessage Hidden">
-                            <td colspan="7">[% Translate("No matches found.") | html %]</td>
+                            <td colspan="8">[% Translate("No matches found.") | html %]</td>
                         </tr>
 [% RenderBlockStart("NoDataFoundMsg") %]
                         <tr>
-                            <td colspan="7">
+                            <td colspan="8">
                                 [% Translate("No data found.") | html %]
                             </td>
                         </tr>
 [% RenderBlockEnd("NoDataFoundMsg") %]
 [% RenderBlockStart("OverviewResultRow") %]
                         <tr [% IF Data.ValidID != 1 %]class="Invalid"[% END %]>
-                            <td>[% Translate(Data.TemplateType) | html %]</td>
+                            <td title="[% Data.TemplateType | html %]">[% Data.TemplateType | truncate(35) | html %]</td>
                             <td>
-                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Change;ID=[% Data.ID | uri %];Type=[% Data.TemplateType | uri %]">[% Data.Name | html %]</a>
+                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Change;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a>
                             </td>
                             <td>[% Data.Attachments | html %]</td>
                             <td title="[% Data.Comment | html %]">[% Data.Comment | truncate(26) | html %]</td>

@@ -798,7 +798,7 @@ CREATE TABLE standard_template (
     name VARCHAR (200) NOT NULL,
     text LONGTEXT NULL,
     content_type VARCHAR (250) NULL,
-    template_type VARCHAR (100) NOT NULL DEFAULT 'Answer',
+    template_type VARCHAR (250) NOT NULL DEFAULT 'Answer',
     comments VARCHAR (250) NULL,
     valid_id SMALLINT NOT NULL,
     create_time DATETIME NOT NULL,

@@ -1,4 +1,5 @@
 # 7.1.1 2024-??-??
+ - 2024-06-20 Standard templates can now have multiple template types.
  - 2024-06-18 Postmaster now also supports IDs for state, priority, type, queue, SLA and service in X-OTRS headers (e.g. X-OTRS-QueueID).
  - 2024-05-14 Added configurable X-Priority email header for outgoing emails.
  - 2024-05-07 Added missing primary keys to database tables.

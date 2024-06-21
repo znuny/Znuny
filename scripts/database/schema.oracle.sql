@@ -3050,7 +3050,7 @@ CREATE TABLE standard_template (
     name VARCHAR2 (200) NOT NULL,
     text CLOB NULL,
     content_type VARCHAR2 (250) NULL,
-    template_type VARCHAR2 (100) DEFAULT 'Answer' NOT NULL,
+    template_type VARCHAR2 (250) DEFAULT 'Answer' NOT NULL,
     comments VARCHAR2 (250) NULL,
     valid_id NUMBER (5, 0) NOT NULL,
     create_time DATE NOT NULL,

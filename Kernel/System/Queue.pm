@@ -279,7 +279,6 @@ sub QueueStandardTemplateMemberList {
         return;
     }
 
-    # get needed objects
     my $ValidObject = $Kernel::OM->Get('Kernel::System::Valid');
     my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -311,13 +310,28 @@ sub QueueStandardTemplateMemberList {
 
         # fetch the result
         my %StandardTemplates;
+        my %TemplateTypes;
         while ( my @Row = $DBObject->FetchrowArray() ) {
-
-            if ( $Param{TemplateTypes} ) {
-                $StandardTemplates{ $Row[2] }->{ $Row[0] } = $Row[1];
+            my @DBTypes = split( /\s*,\s*/, $Row[2] );
+            if ( scalar @DBTypes > 1 ) {
+                for my $Type (@DBTypes) {
+                    $TemplateTypes{$Type}->{ $Row[0] } = $Row[1];
+                }
             }
             else {
-                $StandardTemplates{ $Row[0] } = $Row[1];
+                $TemplateTypes{ $Row[2] }->{ $Row[0] } = $Row[1];
+            }
+        }
+
+        if ($TemplateTypes) {
+            %StandardTemplates = %TemplateTypes;
+        }
+        else {
+            for my $TemplateType ( sort keys %TemplateTypes ) {
+                %StandardTemplates = (
+                    %StandardTemplates,
+                    %{ $TemplateTypes{$TemplateType} }
+                );
             }
         }
 
