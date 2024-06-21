@@ -1,4 +1,5 @@
 # 7.0.19 2024-??-??
+ - 2024-06-19 Fixed home directory check in AdminSystemFiles to work with symbolic links.
  - 2024-06-07 Fixed value used for owner lookup in AgentTicketProcess. Thanks to Falko Saller (@falkos). [#556](https://github.com/znuny/Znuny/pull/556)
  - 2024-06-03 Fixed CSS problem with displaying articles in ticket details view.
  - 2024-05-28 Fixed caching for queue updates.
