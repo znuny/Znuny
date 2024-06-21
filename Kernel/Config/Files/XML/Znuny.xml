@@ -2411,7 +2411,7 @@
                 <Item Key="Users">
                     <Hash>
                         <Item Key="ItemTemplate">&lt;li class="Mention" data-id="{id}"&gt;{fullname}&lt;/li&gt;</Item>
-                        <Item Key="OutputTemplate">&lt;a class="Mention" href="#"&gt;@{username}&lt;/a&gt; </Item>
+                        <Item Key="OutputTemplate">&lt;a class="Mention" id="{username}" href="#"&gt;@{fullname}&lt;/a&gt; </Item>
                     </Hash>
                 </Item>
                 <Item Key="Groups">

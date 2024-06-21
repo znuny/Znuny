@@ -50,10 +50,10 @@ sub Run {
         $LayoutObject->Block(
             Name => "User",
             Data => {
-                UserLogin => $User{UserLogin},
-                UserEmail => $User{UserEmail},
-                UserID    => $User{UserID},
-                Removable => $UserCanRemoveMention,
+                UserFullname => $User{UserFullname},
+                UserEmail    => $User{UserEmail},
+                UserID       => $User{UserID},
+                Removable    => $UserCanRemoveMention,
             }
         );
     }

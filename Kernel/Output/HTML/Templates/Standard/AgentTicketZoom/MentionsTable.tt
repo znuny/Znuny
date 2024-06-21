@@ -17,7 +17,7 @@
 [% RenderBlockStart("User") %]
             <li>
                 <span class="email-wrapper">
-                    <span>[% Data.UserLogin | html %]</span>
+                    <span>[% Data.UserFullname | html %]</span>
                     <span>([% Data.UserEmail | html %])</span>
                 </span>
                 [% IF Data.Removable %]
