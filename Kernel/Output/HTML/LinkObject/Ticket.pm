@@ -221,6 +221,7 @@ sub TableCreateComplex {
     my $UserObject     = $Kernel::OM->Get('Kernel::System::User');
     my $JSONObject     = $Kernel::OM->Get('Kernel::System::JSON');
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
     # load user preferences
     my %Preferences = $UserObject->GetPreferences(
@@ -506,6 +507,9 @@ sub TableCreateComplex {
                     }
                     elsif ( $Column eq 'State' || $Column eq 'Priority' || $Column eq 'Lock' ) {
                         $Hash{'Content'} = $LanguageObject->Translate( $Ticket->{$Column} );
+                    }
+                    elsif ( $Column eq 'AccountedTime' ) {
+                        $Hash{'Content'} = $TicketObject->TicketAccountedTimeGet( TicketID => $TicketID ) || "-";
                     }
                     else {
                         $Hash{'Content'} = $Ticket->{$Column};

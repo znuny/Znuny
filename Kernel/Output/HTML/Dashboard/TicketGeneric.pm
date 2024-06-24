@@ -1965,6 +1965,9 @@ sub Run {
                     }
                     $DataValue = $CustomerCompanyData{CustomerCompanyName};
                 }
+                elsif ( $Column eq 'AccountedTime' ) {
+                    $DataValue = $TicketObject->TicketAccountedTimeGet( TicketID => $Ticket{TicketID} );
+                }
                 else {
                     $DataValue = $Ticket{$Column};
                 }
