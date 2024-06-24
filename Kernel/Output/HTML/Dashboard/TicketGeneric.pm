@@ -1215,26 +1215,10 @@ sub Run {
         if ( $HeaderColumn !~ m{\A DynamicField_}xms ) {
 
             $CSS = '';
-            my $Title = $LayoutObject->{LanguageObject}->Translate($HeaderColumn);
-
-            # Set title description.
-            if ( $Self->{SortBy} && $Self->{SortBy} eq $HeaderColumn ) {
-                my $TitleDesc = '';
-                if ( $TicketSearch{OrderBy} eq 'Down' ) {
-                    $CSS .= ' SortDescendingLarge';
-                    $TitleDesc = Translatable('sorted descending');
-                }
-                else {
-                    $CSS .= ' SortAscendingLarge';
-                    $TitleDesc = Translatable('sorted ascending');
-                }
-
-                $TitleDesc = $LayoutObject->{LanguageObject}->Translate($TitleDesc);
-                $Title .= ', ' . $TitleDesc;
-            }
 
             # translate the column name to write it in the current language
             my $TranslatedWord;
+
             if ( $HeaderColumn eq 'EscalationTime' ) {
                 $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Service Time');
             }
@@ -1264,6 +1248,25 @@ sub Run {
             }
             else {
                 $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($HeaderColumn);
+            }
+
+            # Use the translated word also as title.
+            my $Title = $TranslatedWord;
+
+            # Set title description.
+            if ( $Self->{SortBy} && $Self->{SortBy} eq $HeaderColumn ) {
+                my $TitleDesc = '';
+                if ( $TicketSearch{OrderBy} eq 'Down' ) {
+                    $CSS .= ' SortDescendingLarge';
+                    $TitleDesc = Translatable('sorted descending');
+                }
+                else {
+                    $CSS .= ' SortAscendingLarge';
+                    $TitleDesc = Translatable('sorted ascending');
+                }
+
+                $TitleDesc = $LayoutObject->{LanguageObject}->Translate($TitleDesc);
+                $Title .= ', ' . $TitleDesc;
             }
 
             # add surrounding container
