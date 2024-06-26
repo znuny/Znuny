@@ -1,4 +1,4 @@
-# 7.0.19 2024-??-??
+# 7.0.19 2024-06-26
  - 2024-06-19 Fixed home directory check in AdminSystemFiles to work with symbolic links.
  - 2024-06-07 Fixed value used for owner lookup in AgentTicketProcess. Thanks to Falko Saller (@falkos). [#556](https://github.com/znuny/Znuny/pull/556)
  - 2024-06-03 Fixed CSS problem with displaying articles in ticket details view.
@@ -251,6 +251,20 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.9 2024-06-26
+ - 2024-06-19 Fixed home directory check in AdminSystemFiles to work with symbolic links.
+ - 2024-06-07 Fixed value used for owner lookup in AgentTicketProcess. Thanks to Falko Saller (@falkos). [#556](https://github.com/znuny/Znuny/pull/556)
+ - 2024-05-28 Fixed caching for queue updates.
+ - 2024-05-17 Fixed session handling while saving user preferences.
+ - 2024-04-29 Updated default values of PublicFrontend::FooterLinks.
+ - 2024-04-24 Fixed regular expression in Kernel::System::HTMLUtils::LinkQuote which could lead to long execution times.
+ - 2024-04-22 Integrated package Znuny4OTRS-BugfixCustomerUserDBPasswordCryptType.
+ - 2024-04-19 Added support for two factor auth token parameter to generic interface. Thanks to Flávio Marta (@CallMeFlanby). [#502](https://github.com/znuny/Znuny/pull/502)
+ - 2024-04-18 Fixed smart tag replacement for article subjects in process activity dialogs.
+ - 2024-04-18 Improved AJAX subactions for AgentTicketEmailOutbound.
+ - 2024-04-16 Fixed CSS class used for showing sort order of dynamic fields in customer ticket overview.
+ - 2024-04-04 Removed links to unsupported user modification functions from system configuration settings dialog.
 
 # 6.5.8 2024-04-17
  - 2024-04-11 Fixed session handling while saving user preferences.
