@@ -508,6 +508,14 @@ sub Block {
         Data => $Param{Data},
         };
 
+    # For performance reasons:
+    # Do not initialize modern inputfields on selects with many entries
+    my $MaxDropdownOptions = $Kernel::OM->Get('Kernel::Config')->Get("MaxDropdownOptions");
+    $Self->AddJSData(
+        Key   => 'MaxDropdownOptions',
+        Value => $MaxDropdownOptions,
+    );
+
     return 1;
 }
 
