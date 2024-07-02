@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.99162148841794;
+    $Self->{Completeness}        = 0.991785772958765;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3027,7 +3027,7 @@ sub Data {
         'Delete all activities' => '',
         'Delete all' => '',
         'Mark all activities as seen' => '',
-        'Seen all' => '',
+        'Seen all' => 'Alle gesehen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
         'Overviews' => 'Ansichten',

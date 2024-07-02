@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
 "PO-Revision-Date: 2024-06-29 11:59+0000\n"
 "Last-Translator: Roy Kaldung <rk@znuny.com>\n"
-"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/"
-"de/>\n"
+"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24385,3 +24384,4 @@ msgstr "Mapping der Ticketpriorität zum X-Priority E-Mail-Header für ausgehend
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Deletes orphaned sessions."
 msgstr "Löscht verwaiste Sessions."
+
