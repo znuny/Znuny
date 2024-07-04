@@ -1,4 +1,5 @@
 # 7.1.1 2024-??-??
+ - 2024-07-04 Improved rendering of dynamic fields on AdminGenericAgent, AdminNotificationEvent, AdminACL and AdminDynamicFieldScreenConfiguration.
  - 2024-07-02 Updated required minimum database versions. Refactored database version checks and added them to the installer.
  - 2024-06-21 Added functionality to use user fullname for mention label.
  - 2024-06-20 Fixed output of last mention date in dashboard widget "Last mentions".

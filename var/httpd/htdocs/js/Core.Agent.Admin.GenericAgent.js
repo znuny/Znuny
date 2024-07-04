@@ -193,12 +193,26 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
             Core.Config.Get('CGIHandle'),
             Data,
             function (Response) {
+                var FieldHTML;
 
                 // Removed immediate addition of RemoveButtonHTML (see comment below)
-                var FieldHTML = Response.Label + '<div class="Field flex-row" data-id="' + Response.ID + '">' + Response.Field;
+                if (Widget === 'Update') {
+                    FieldHTML = Response.Label + '<div style="flex-flow: row" class="Field" data-id="' + Response.ID + '">' + Response.Field;
+                } else if (Widget === 'Select') {
+                    FieldHTML = Response.Label + '<div class="Field flex-row" data-id="' + Response.ID + '">' + Response.Field;
+                }
+
                 // Append field HTML from response to selected fields area.
                 $('#' + SelectedFieldsID).append(FieldHTML);
                 $('div.Field[data-id="' + Response.ID + '"]').append(RemoveButtonHTML);
+
+                // Initialize datepicker for dynamic fields of type Date or DateTime.
+                if (DynamicFieldsJS[Value].Type === 'TimeSlot') {
+                    TargetNS.InitDatepicker(Response.ID+"Start", Response.ValidateDateInFuture, Response.ValidateDateNotInFuture);
+                    TargetNS.InitDatepicker(Response.ID+"Stop", Response.ValidateDateInFuture, Response.ValidateDateNotInFuture);
+                } else if (Response.Type === 'DateTime' || Response.Type === 'Date') {
+                    TargetNS.InitDatepicker(Response.ID, Response.ValidateDateInFuture, Response.ValidateDateNotInFuture);
+                }
 
                 TargetNS.InitRemoveButtonEvent($('div.Field[data-id="' + Response.ID + '"]').find('.RemoveButton'), AddFieldsID);
 
@@ -262,6 +276,29 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
             Event.stopPropagation();
             Event.preventDefault();
             return false;
+        });
+    };
+
+    /**
+     * @name InitDatepicker
+     * @memberof Core.Agent.Admin.GenericAgentEvent
+     * @function
+     * @param {String} ElementName - Name
+     * @param {String} DateInFuture - DateInFuture
+     * @param {String} DateNotInFuture - DateNotInFuture
+     * @description
+     *      Initalize a date picker
+     */
+    TargetNS.InitDatepicker = function (ElementName, DateInFuture, DateNotInFuture) {
+        Core.UI.Datepicker.Init({
+            Day: $("#" + Core.App.EscapeSelector(ElementName) + "Day"),
+            Month: $("#" + Core.App.EscapeSelector(ElementName) + "Month"),
+            Year: $("#" + Core.App.EscapeSelector(ElementName) + "Year"),
+            Hour: $("#" + Core.App.EscapeSelector(ElementName) + "Hour"),
+            Minute: $("#" + Core.App.EscapeSelector(ElementName) + "Minute"),
+            DateInFuture: DateInFuture,
+            DateNotInFuture: DateNotInFuture,
+            WeekDayStart: Core.Config.Get('CalendarWeekDayStart'),
         });
     };
 
