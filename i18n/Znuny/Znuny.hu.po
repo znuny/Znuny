@@ -24384,3 +24384,7 @@ msgstr ""
 msgid "Deletes orphaned sessions."
 msgstr ""
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: You have the wrong database version installed (%s). You need at least version %s! "
+msgstr ""
+

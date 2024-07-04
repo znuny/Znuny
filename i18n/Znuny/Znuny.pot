@@ -12899,6 +12899,10 @@ msgid "Database already contains data - it should be empty!"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: You have the wrong database version installed (%s). You need at least version %s! "
+msgstr ""
+
+#. Perl Module: Kernel/Modules/Installer.pm
 msgid "Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors."
 msgstr ""
 

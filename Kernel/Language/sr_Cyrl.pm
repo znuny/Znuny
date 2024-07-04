@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.892229341218991;
+    $Self->{Completeness}        = 0.892082785808147;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4479,6 +4479,8 @@ sub Data {
             'Не могу се повезати на базу података, Перл модул DBD::%s није инсталиран!',
         'Can\'t connect to database, read comment!' => 'Не могу се повезати на базу података, прочитајте коментар!',
         'Database already contains data - it should be empty!' => 'База података већ садржи податке - требало би да буде празна.',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Грешка: Молимо да проверите да ваша база података прихвата пакете по величини веће од %s MB  (тренутно прихвата пакете величине до %s MB). Молимо да прилагодите параметар max_allowed_packet подешавање у вашој бази података како би избегли грешке.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>

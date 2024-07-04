@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.436011171348776;
+    $Self->{Completeness}        = 0.435939553219448;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4479,6 +4479,8 @@ sub Data {
             'Неможливо під\'єднатися до бази даних, не встановлено Perl-модуль DBD::%s!',
         'Can\'t connect to database, read comment!' => 'Неможливо під\'єднатися до бази даних, читай коментар!',
         'Database already contains data - it should be empty!' => 'База даних уже містить дані — вона має бути пуста!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Помилка: Будь ласка, переконайтеся в тому. що ваша база даних приймає пакунки розміром завбільшки %s МБ (в даний час приймаються пакунки за розміром до %s МБ). Будь ласка адаптуйте установку max_allowed_packet вашої бази даних, щоб уникнути помилок.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>

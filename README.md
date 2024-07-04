@@ -53,10 +53,10 @@ Web server
 - Web server with CGI support (CGI is not recommended)
 
 Databases
-- MySQL 5.0 or higher
-- MariaDB
-- PostgreSQL 9.2 or higher
-- Oracle 10g or higher
+- MySQL 8.0 or higher
+- MariaDB 10.3 or higher
+- PostgreSQL 12.0 or higher
+- Oracle 19c or higher
 
 Browsers
 - These browsers are NOT supported:

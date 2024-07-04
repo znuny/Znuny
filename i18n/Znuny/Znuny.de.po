@@ -24385,3 +24385,7 @@ msgstr "Mapping der Ticketpriorität zum X-Priority E-Mail-Header für ausgehend
 msgid "Deletes orphaned sessions."
 msgstr "Löscht verwaiste Sessions."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: You have the wrong database version installed (%s). You need at least version %s! "
+msgstr "Fehler: Sie haben eine falsche Datenbankversion installiert (%s). Sie benötigen mindestens Version %s!"
+

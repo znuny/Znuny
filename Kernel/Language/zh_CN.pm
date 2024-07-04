@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.89567931657631;
+    $Self->{Completeness}        = 0.895532194480946;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4485,6 +4485,8 @@ sub Data {
             '不能连接到数据库，没有安装Perl模块 DBD::%s！',
         'Can\'t connect to database, read comment!' => '不能连接到数据库，读取注释！',
         'Database already contains data - it should be empty!' => '数据库中已包含数据 - 应该清空它！',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '错误：请确认你的数据库能够接收大于%sMB的数据包（目前能够接收的最大数据包为%sMB）。为了避免程序报错，请调整数据库max_allowed_packet参数。',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>

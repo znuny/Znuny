@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.616067028092656;
+    $Self->{Completeness}        = 0.615965834428384;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4484,6 +4484,8 @@ sub Data {
             'نمی توانید به پایگاه داده متصل شوید، پرل و DBD :: %s نصب نشده است!',
         'Can\'t connect to database, read comment!' => 'نمی توانید به پایگاه داده متصل شوید، به عنوان خواننده نظر!',
         'Database already contains data - it should be empty!' => 'پایگاه داده در حال حاضر حاوی اطاعات است  -باید خالی باشد !',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'خطا: لطفا مطمئن شوید که پایگاه داده خود را بسته بر می پذیرد %s MB در اندازه (در حال حاضر تنها بسته می پذیرد تا %s MB). لطفا تنظیمات max_allowed_packet از پایگاه داده خود را به منظور جلوگیری از اشتباهات وفق دهند.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
