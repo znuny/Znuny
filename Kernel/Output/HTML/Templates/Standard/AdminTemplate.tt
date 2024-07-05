@@ -210,7 +210,7 @@
 [% RenderBlockEnd("NameServerError") %]
 [% RenderBlockStart("ExistNameServerError") %]
                                 <p>[% Translate("A standard template with this name already exists!") | html %]</p>
-[% RenderBlockEnd("NameServerError") %]
+[% RenderBlockEnd("ExistNameServerError") %]
                             </div>
                         </div>
                         <div class="Clear"></div>
