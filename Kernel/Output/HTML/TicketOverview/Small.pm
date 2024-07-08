@@ -11,6 +11,7 @@ package Kernel::Output::HTML::TicketOverview::Small;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -18,18 +19,18 @@ use Kernel::Language qw(Translatable);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Language',
-    'Kernel::System::Log',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::CustomerUser',
-    'Kernel::System::Group',
-    'Kernel::System::User',
-    'Kernel::System::JSON',
     'Kernel::System::DynamicField',
-    'Kernel::System::Ticket::ColumnFilter',
     'Kernel::System::DynamicField::Backend',
+    'Kernel::System::Group',
+    'Kernel::System::JSON',
+    'Kernel::System::Log',
+    'Kernel::System::Main',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::Main',
+    'Kernel::System::Ticket::ColumnFilter',
+    'Kernel::System::User',
 );
 
 sub new {

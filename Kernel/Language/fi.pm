@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.189224704336399;
+    $Self->{Completeness}        = 0.189091506489239;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2724,8 +2724,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Lähettäjä',
+        'Customer User Name' => '',
         'Impact' => '',
-        'CustomerID' => 'AsiakasID',
         'Update Time' => 'Päivitysaika',
         'Solution Time' => 'Ratkaisuaika',
         'First Response Time' => 'Ensimmäinen vastausaika',
@@ -2865,7 +2865,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Odottaa',
         'Locked' => 'Lukitus',
-        '%s Ticket(s)' => '%s tiketti(ä)',
         'Accounted time' => 'Käytetty aika',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2968,6 +2967,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profiili',
         'e. g. 10*5155 or 105658*' => 'esim. 10*5155 tai 10568*',
+        'CustomerID' => 'AsiakasID',
         'Types' => 'Tyypit',
         'Limitation' => '',
         'No time settings' => 'Ei aikamääritystä',
@@ -4153,7 +4153,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

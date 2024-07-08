@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.895532194480946;
+    $Self->{Completeness}        = 0.895515032035485;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2728,8 +2728,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => '发件人',
+        'Customer User Name' => '客户用户姓名',
         'Impact' => '影响',
-        'CustomerID' => 'CustomerID',
         'Update Time' => '更新时间',
         'Solution Time' => '解决时间',
         'First Response Time' => '首次响应时间',
@@ -2869,7 +2869,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => '挂起至',
         'Locked' => '锁定状态',
-        '%s Ticket(s)' => '%s个工单',
         'Accounted time' => '所用工时',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2972,6 +2971,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索条件',
         'e. g. 10*5155 or 105658*' => '例如: 10*5155 或 105658*',
+        'CustomerID' => 'CustomerID',
         'Types' => '类型',
         'Limitation' => '',
         'No time settings' => '没有设置时间',
@@ -4157,7 +4157,6 @@ sub Data {
         'Can\'t get element data of %s!' => '不能获得%s 的元素数据！',
         'Can\'t get filter content data of %s!' => '不能获得%s 的过滤器内容数据！',
         'Customer Name' => '客户名字',
-        'Customer User Name' => '客户用户姓名',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '需要SourceObject（源对象）和SourceKey（源键）！',

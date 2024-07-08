@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.155223390275953;
+    $Self->{Completeness}        = 0.155248891079349;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2722,8 +2722,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Nosūtītājs',
+        'Customer User Name' => '',
         'Impact' => '',
-        'CustomerID' => 'Klienta identifikators',
         'Update Time' => 'Atjaunināšanas laiks',
         'Solution Time' => 'Atrisinājuma laiks',
         'First Response Time' => 'Pirmais reakcijas laiks',
@@ -2863,7 +2863,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Neizlemts līdz',
         'Locked' => 'Aizslēgts',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Uzskaitītais laiks',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2966,6 +2965,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profils',
         'e. g. 10*5155 or 105658*' => '',
+        'CustomerID' => 'Klienta identifikators',
         'Types' => '',
         'Limitation' => '',
         'No time settings' => '',
@@ -4151,7 +4151,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

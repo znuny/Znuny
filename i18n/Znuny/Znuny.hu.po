@@ -8094,7 +8094,7 @@ msgstr "Küldő"
 msgid "Impact"
 msgstr "Hatás"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "CustomerID"
 msgstr "Ügyfél-azonosító"
 
@@ -12014,7 +12014,7 @@ msgstr "Nem lehet lekérni a(z) „%s” szűrőtartalom-adatait!"
 msgid "Customer Name"
 msgstr "Ügyfél neve"
 
-#. Perl Module: Kernel/Modules/AgentDashboardCommon.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "Customer User Name"
 msgstr "Ügyfél-felhasználó neve"
 

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.867115637319317;
+    $Self->{Completeness}        = 0.867093806472811;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2721,8 +2721,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => '보낸사람',
+        'Customer User Name' => '고객 사용자 이름',
         'Impact' => '',
-        'CustomerID' => '고객 ID',
         'Update Time' => '업데이트 시간',
         'Solution Time' => '솔루션 시간',
         'First Response Time' => '첫 번째 응답 시간',
@@ -2862,7 +2862,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => '대기 시간까지',
         'Locked' => '잠김',
-        '%s Ticket(s)' => '%s개 티켓',
         'Accounted time' => '소요 시간',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2965,6 +2964,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '프로필',
         'e. g. 10*5155 or 105658*' => '이자형. 지. 10 * 5155 또는 105658 *',
+        'CustomerID' => '고객 ID',
         'Types' => '유형',
         'Limitation' => '',
         'No time settings' => '시간 설정 없음',
@@ -4150,7 +4150,6 @@ sub Data {
         'Can\'t get element data of %s!' => '%s의 요소 데이터를 가져올 수 없습니다!',
         'Can\'t get filter content data of %s!' => '%s의 필터 콘텐츠 데이터를 가져올 수 없습니다!',
         'Customer Name' => '고객 이름',
-        'Customer User Name' => '고객 사용자 이름',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'SourceObject와 SourceKey가 필요합니다!',

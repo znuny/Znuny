@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.605124835742444;
+    $Self->{Completeness}        = 0.605224248398226;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2723,8 +2723,8 @@ bin/znuny.Daemon.pl status\').',
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Pengirim',
+        'Customer User Name' => '',
         'Impact' => 'Dampak',
-        'CustomerID' => 'ID Pelanggan',
         'Update Time' => 'Memperbaru waktu',
         'Solution Time' => 'Solusi waktu',
         'First Response Time' => 'Waktu respon yang pertama',
@@ -2864,7 +2864,6 @@ bin/znuny.Daemon.pl status\').',
         'is invalid' => '',
         'Pending till' => 'Ditunda hingga',
         'Locked' => 'Dikunci',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Waktu dicatat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2967,6 +2966,7 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'Contoh : 10*5155 atau 105658*',
+        'CustomerID' => 'ID Pelanggan',
         'Types' => 'Jenis',
         'Limitation' => '',
         'No time settings' => 'Tidak ada pengaturan waktu',
@@ -4152,7 +4152,6 @@ bin/znuny.Daemon.pl status\').',
         'Can\'t get element data of %s!' => 'Tidak bisa mendapatkan data unsur %s!',
         'Can\'t get filter content data of %s!' => 'Tidak bisa mendapatkan data filter konten dari %s!',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Perlu sumber objek dan sumber kunci!',

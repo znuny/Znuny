@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.895532194480946;
+    $Self->{Completeness}        = 0.895515032035485;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2727,8 +2727,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Küldő',
+        'Customer User Name' => 'Ügyfél-felhasználó neve',
         'Impact' => 'Hatás',
-        'CustomerID' => 'Ügyfél-azonosító',
         'Update Time' => 'Frissítés ideje',
         'Solution Time' => 'Megoldás ideje',
         'First Response Time' => 'Első válaszidő',
@@ -2868,7 +2868,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Várakozás eddig',
         'Locked' => 'Zárolt',
-        '%s Ticket(s)' => '%s jegy',
         'Accounted time' => 'Elszámolt idő',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2971,6 +2970,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'például 10*5155 vagy 105658*',
+        'CustomerID' => 'Ügyfél-azonosító',
         'Types' => 'Típusok',
         'Limitation' => '',
         'No time settings' => 'Nincsenek időbeállítások',
@@ -4156,7 +4156,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Nem lehet lekérni a(z) „%s” elemadatait!',
         'Can\'t get filter content data of %s!' => 'Nem lehet lekérni a(z) „%s” szűrőtartalom-adatait!',
         'Customer Name' => 'Ügyfél neve',
-        'Customer User Name' => 'Ügyfél-felhasználó neve',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Forrásobjektum és forráskulcs szükséges!',

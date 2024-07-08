@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.435775295663601;
+    $Self->{Completeness}        = 0.435846886807951;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2724,8 +2724,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Mtumaji',
+        'Customer User Name' => '',
         'Impact' => 'Madhara',
-        'CustomerID' => 'Kitambilisho cha mteja',
         'Update Time' => 'Muda wa kusasisha',
         'Solution Time' => 'Muda wa ufumbuzi',
         'First Response Time' => 'Muda wa kwanza wa majibu',
@@ -2865,7 +2865,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Inasubiri hadi',
         'Locked' => 'Fungwa',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Muda wa kuhesabu',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2968,6 +2967,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Maelezo mafupi',
         'e. g. 10*5155 or 105658*' => 'Mfano 10*5155 au 105658',
+        'CustomerID' => 'Kitambilisho cha mteja',
         'Types' => 'Aina',
         'Limitation' => '',
         'No time settings' => 'Hakuna mipangilio ya muda',
@@ -4153,7 +4153,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.522667542706964;
+    $Self->{Completeness}        = 0.522753408904222;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2724,8 +2724,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'ผู้ส่ง',
+        'Customer User Name' => '',
         'Impact' => 'ผลกระทบ',
-        'CustomerID' => 'ไอดีลูกค้า',
         'Update Time' => 'เวลาการอัพเดต',
         'Solution Time' => 'เวลาการแก้ปัญหา',
         'First Response Time' => 'เวลาตอบสนองครั้งแรก',
@@ -2865,7 +2865,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'รอดำเนินการจนถึง',
         'Locked' => 'ถูกล็อค',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'เวลาที่คิด',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2968,6 +2967,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'โปรไฟล์',
         'e. g. 10*5155 or 105658*' => 'เช่น 10*5155 หรือ 105658*',
+        'CustomerID' => 'ไอดีลูกค้า',
         'Types' => 'ประเภท',
         'Limitation' => '',
         'No time settings' => 'ไม่มีการตั้งค่าเวลา',
@@ -4153,7 +4153,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'ไม่สามารถรับองค์ประกอบของข้อมูลของ %s!',
         'Can\'t get filter content data of %s!' => 'ไม่สามารถรับข้อมูลกรองเนื้อหา',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'ต้องการ SourceObject และ SourceKey!',

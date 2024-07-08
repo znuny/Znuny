@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.147503285151117;
+    $Self->{Completeness}        = 0.147527517660588;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2721,8 +2721,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Người gửi',
+        'Customer User Name' => '',
         'Impact' => 'Tác động',
-        'CustomerID' => 'Mã khách hàng',
         'Update Time' => 'Thời gian cập nhật',
         'Solution Time' => 'Thời gian giải pháp',
         'First Response Time' => 'Lần phản hồi đầu tiên',
@@ -2862,7 +2862,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Treo tới khi',
         'Locked' => 'Đã khóa',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Thời gian kê khai',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2965,6 +2964,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Hồ sơ',
         'e. g. 10*5155 or 105658*' => '',
+        'CustomerID' => 'Mã khách hàng',
         'Types' => '',
         'Limitation' => '',
         'No time settings' => '',
@@ -4150,7 +4150,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

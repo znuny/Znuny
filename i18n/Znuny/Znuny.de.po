@@ -8096,7 +8096,7 @@ msgstr "Sender"
 msgid "Impact"
 msgstr "Auswirkung"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "CustomerID"
 msgstr "Kundennummer"
 
@@ -12016,7 +12016,7 @@ msgstr "Kann Filter-Daten von %s nicht ermitteln!"
 msgid "Customer Name"
 msgstr "Kundenname"
 
-#. Perl Module: Kernel/Modules/AgentDashboardCommon.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "Customer User Name"
 msgstr "Kundenbenutzer-Name"
 

@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.212713534822602;
+    $Self->{Completeness}        = 0.212748480367997;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2726,8 +2726,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Pošiljatelj',
+        'Customer User Name' => '',
         'Impact' => '',
-        'CustomerID' => 'ID stranke',
         'Update Time' => 'Čas posodobitve',
         'Solution Time' => 'Čas rešitve',
         'First Response Time' => 'Čas prvega odgovora',
@@ -2867,7 +2867,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Čakati do',
         'Locked' => 'Status',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Obračunan čas',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2970,6 +2969,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'npr 10*5155 ali 105658*',
+        'CustomerID' => 'ID stranke',
         'Types' => 'Tipi',
         'Limitation' => '',
         'No time settings' => '',
@@ -4155,7 +4155,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

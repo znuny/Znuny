@@ -8094,7 +8094,7 @@ msgstr "فرستنده"
 msgid "Impact"
 msgstr "اثر"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "CustomerID"
 msgstr "کد اشتراک"
 
@@ -12014,7 +12014,7 @@ msgstr "نمی توانید داده ها محتوای فیلتر را بگیر�
 msgid "Customer Name"
 msgstr "نام مشتری"
 
-#. Perl Module: Kernel/Modules/AgentDashboardCommon.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "Customer User Name"
 msgstr ""
 

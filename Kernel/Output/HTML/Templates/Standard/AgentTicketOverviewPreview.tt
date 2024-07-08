@@ -135,15 +135,27 @@
 [% RenderBlockStart("CustomerID") %]
                                         <label>[% Translate("Customer ID") | html %]</label>
 [% RenderBlockStart("CustomerIDRW") %]
-                                        <div title="[% Data.CustomerID | html %]"><a href="[% Config(" CustomerDBLink") | Interpolate %]" class="AsPopup PopupType_TicketAction" [% Config("CustomerDBLinkTarget") %]>[% Data.CustomerID | html %]</a></div>
+                                        <div title="[% Data.CustomerID | html %]">
+                                            <a href="[% Config("CustomerDBLink") | Interpolate %]" class="AsPopup PopupType_TicketAction" [% Config("CustomerDBLinkTarget") %]>[% Data.CustomerID | html %]</a>
+                                        </div>
 [% RenderBlockEnd("CustomerIDRW") %]
 [% RenderBlockStart("CustomerIDRO") %]
                                         <div title="[% Data.CustomerID | html %]">[% Data.CustomerID | html %]</div>
 [% RenderBlockEnd("CustomerIDRO") %]
-[% RenderBlockStart("CustomerName") %]
-                                        <div title="[% Data.CustomerName | html %]">[% Data.CustomerName | html %]</div>
-[% RenderBlockEnd("CustomerName") %]
 [% RenderBlockEnd("CustomerID") %]
+
+[% RenderBlockStart("CustomerName") %]
+                                        <br>
+                                        <label>[% Translate("Customer User Name") | html %]</label>
+[% RenderBlockStart("CustomerNameRW") %]
+                                        <div title="[% Data.CustomerName | html %]">
+                                            <a href="[% Env("Baselink") %]Action=AgentCustomerUserInformationCenter;CustomerUserID=[% Data.CustomerUserID | uri %]" class="AsPopup PopupType_TicketAction">[% Data.CustomerName | html %]</a>
+                                        </div>
+[% RenderBlockEnd("CustomerNameRW") %]
+[% RenderBlockStart("CustomerNameRO") %]
+                                        <div title="[% Data.CustomerName | html %]">[% Data.CustomerName | html %]</div>
+[% RenderBlockEnd("CustomerNameRO") %]
+[% RenderBlockEnd("CustomerName") %]
                                     </td>
                                     <td>
 [% RenderBlockStart("FirstResponseTime") %]

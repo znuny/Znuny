@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.639618922470434;
+    $Self->{Completeness}        = 0.63955971743059;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2726,8 +2726,8 @@ sub Data {
         ' Open / Close ticket action menu' => ' Menu akcji otwartych / zamkniętych zgłoszeń',
         ' Select this ticket' => ' Wybierz to zgłoszenie',
         'Sender' => 'Nadawca',
+        'Customer User Name' => 'Nazwa użytkownika klienta',
         'Impact' => 'Wpływ',
-        'CustomerID' => 'Identyfikator klienta',
         'Update Time' => 'Czas pozostały do aktualizacji',
         'Solution Time' => 'Czas pozostały do rozwiązania',
         'First Response Time' => 'Czas pozostały do pierwszej odpowiedzi',
@@ -2867,7 +2867,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Oczekuje do',
         'Locked' => 'Blokada',
-        '%s Ticket(s)' => '%s Zgłoszenie(a)',
         'Accounted time' => 'Zaraportowany czas',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2970,6 +2969,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'np. 10*5155 lub 105658*',
+        'CustomerID' => 'Identyfikator klienta',
         'Types' => 'Typy zgłoszeń',
         'Limitation' => '',
         'No time settings' => 'Brak ustawień czasowych',
@@ -4155,7 +4155,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => 'Nazwa klienta',
-        'Customer User Name' => 'Nazwa użytkownika klienta',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991787122207622;
+    $Self->{Completeness}        = 0.991785772958765;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2722,8 +2722,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Sender',
+        'Customer User Name' => 'Kundenbenutzer-Name',
         'Impact' => 'Auswirkung',
-        'CustomerID' => 'Kundennummer',
         'Update Time' => 'Aktualisierungszeit',
         'Solution Time' => 'Lösungszeit',
         'First Response Time' => 'Reaktionszeit',
@@ -2863,7 +2863,6 @@ sub Data {
         'is invalid' => 'ist ungültig',
         'Pending till' => 'Warten bis',
         'Locked' => 'Sperre',
-        '%s Ticket(s)' => '%s Ticket(s)',
         'Accounted time' => 'Erfasste Zeit',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2966,6 +2965,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'z. B. 10*5155 oder 105658*',
+        'CustomerID' => 'Kundennummer',
         'Types' => 'Typen',
         'Limitation' => 'Limitierung',
         'No time settings' => 'Keine Zeiteinstellungen',
@@ -4151,7 +4151,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Konnte Daten zu Element %s nicht ermitteln!',
         'Can\'t get filter content data of %s!' => 'Kann Filter-Daten von %s nicht ermitteln!',
         'Customer Name' => 'Kundenname',
-        'Customer User Name' => 'Kundenbenutzer-Name',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Benötige SourceObject und SourceKey!',

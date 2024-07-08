@@ -8094,7 +8094,7 @@ msgstr "Пошиљаоц"
 msgid "Impact"
 msgstr "Утицај"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "CustomerID"
 msgstr "ID клијента"
 
@@ -12014,7 +12014,7 @@ msgstr "Не могу прибавити податке садржаја фил�
 msgid "Customer Name"
 msgstr "Назив клијента"
 
-#. Perl Module: Kernel/Modules/AgentDashboardCommon.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "Customer User Name"
 msgstr "Назив клијент корисника"
 
