@@ -619,6 +619,13 @@
             <Item ValueType="String" ValueRegex="">ns.example.com</Item>
         </Value>
     </Setting>
+    <Setting Name="CheckMXRecord::Timeout" Required="0" Valid="0">
+        <Description Translatable="1">Sets the timeout (in seconds) for DNS resolver queries.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">3</Item>
+        </Value>
+    </Setting>
     <Setting Name="CheckEmailAddresses" Required="1" Valid="1">
         <Description Translatable="1">Makes the application check the syntax of email addresses.</Description>
         <Navigation>Core::Email</Navigation>
