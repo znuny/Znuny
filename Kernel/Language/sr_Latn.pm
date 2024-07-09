@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.892065056678167;
+    $Self->{Completeness}        = 0.8919185282523;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5655,6 +5655,7 @@ sub Data {
             'Proverava „MX” zapis imejl adrese pre slanja poruke ili telefonskih ili imejl tiketa.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Definiše adrese namenskog „DNS” servera, ukoliko je potrebno, za „CheckMXRecord” pretrage.',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => 'Primorava aplikaciju da proverava sintaksu imejl aderesa.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Definiše regularni izraz koji isključuje neke adrese iz provere sintakse (ako je „CheckEmailAddresses” postavljena na „Da”). Molimo vas unesite regularni izraz u ovo polje za imejl adrese, koje nisu sintaksno ispravne, ali su neophodne za sistem (npr. „root@localhost”).',

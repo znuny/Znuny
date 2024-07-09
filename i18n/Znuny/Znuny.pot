@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-07-08 08:50+0000\n"
+"POT-Creation-Date: 2024-07-09 05:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15508,6 +15508,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the address of a dedicated DNS server, if necessary, for the \"CheckMXRecord\" look-ups."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Sets the timeout (in seconds) for DNS resolver queries."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml

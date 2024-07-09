@@ -24389,3 +24389,7 @@ msgstr "Löscht verwaiste Sessions."
 msgid "Error: You have the wrong database version installed (%s). You need at least version %s! "
 msgstr "Fehler: Sie haben eine falsche Datenbankversion installiert (%s). Sie benötigen mindestens Version %s!"
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Sets the timeout (in seconds) for DNS resolver queries."
+msgstr "Steuert den Timeout (in Sekunden) für DNS-Resolver-Anfragen."
+

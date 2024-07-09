@@ -24378,3 +24378,7 @@ msgstr ""
 msgid "Error: You have the wrong database version installed (%s). You need at least version %s! "
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Sets the timeout (in seconds) for DNS resolver queries."
+msgstr ""
+

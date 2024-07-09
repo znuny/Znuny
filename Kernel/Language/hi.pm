@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.256941021849844;
+    $Self->{Completeness}        = 0.256898817345598;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5652,6 +5652,7 @@ sub Data {
             'एक ईमेल भेजने या एक टेलीफोन जमा या ईमेल के टिकट से पहले अनुप्रयोग ईमेल पतों की MX रिकॉर्ड की जाँच करें।',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             '"CheckMXRecord" देखने के लिए,यदि आवश्यक हो तो,एक समर्पित DNS सर्वर का पता को परिभाषित करता है।',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => 'अनुप्रयोग ईमेल पतों के वाक्यविन्यास की जाँच करें।',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'एक नियमित अभिव्यक्ति को परिभाषित करें जिसमें वाक्यविन्यास से कुछ पते शामिल नहीं है(यदि "ईमेल पतों की जाँच करें" "हाँ" पर स्थापित है)। ईमेल पते के लिए इस क्षेत्र में एक नियमित अभिव्यक्ति दर्ज करें,जो वाक्य रचना से वैध नहीं है,लेकिन सिस्टम के लिए आवश्यक हैं (अर्थात् "root@localhost")।',
