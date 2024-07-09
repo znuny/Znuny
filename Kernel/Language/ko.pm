@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.873078829945464;
+    $Self->{Completeness}        = 0.866951379763469;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1544,9 +1544,11 @@ sub Data {
         'Date' => '날짜',
         'List of Files' => '파일 목록',
         'Permission' => '허가',
+        'Size' => '크기',
+        'Problem' => '문제',
+        'OK' => '승인',
         'Download file from package!' => '패키지에서 파일을 다운로드 하십시오!',
         'Required' => '필수',
-        'Size' => '크기',
         'Primary Key' => '기본 키',
         'Auto Increment' => '자동 증가',
         'SQL' => 'SQL',
@@ -1745,6 +1747,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '이 활동을 정말로 삭제 하시겠습니까?',
         'Do you really want to delete this Activity Dialog?' => '이 활동 대화 상자를 정말로 삭제 하시겠습니까?',
         'Do you really want to delete this Transition?' => '이 전환을 정말로 삭제 하시겠습니까?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '이 전환 액션을 정말로 삭제 하시겠습니까?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '이 활동을 캔버스에서 정말로 제거 하시겠습니까? 저장하지 않고이 화면을 나가면 취소 할 수 있습니다.',
@@ -2512,7 +2516,6 @@ sub Data {
         'Split' => '분리',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => 'Znuny의 통계에 대해 자세히 알아보십시오.',
         'Statistics Management' => '',
         'Add Statistics' => '통계 추가',
         'Dynamic Matrix' => '가변 매트릭스',
@@ -2612,6 +2615,9 @@ sub Data {
         'Link together' => '함께 연결',
         'Link to parent' => '상위 링크',
         'Unlock tickets' => '티켓 잠금 해제',
+        'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => '일괄 작업 실행',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -2715,8 +2721,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => '보낸사람',
+        'Customer User Name' => '고객 사용자 이름',
         'Impact' => '',
-        'CustomerID' => '고객 ID',
         'Update Time' => '업데이트 시간',
         'Solution Time' => '솔루션 시간',
         'First Response Time' => '첫 번째 응답 시간',
@@ -2728,6 +2734,7 @@ sub Data {
         'Remove active filters for this screen.' => '이 화면에서 활성 필터를 제거하십시오.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => '감상한 티켓 목록에서 제거',
         'Tickets per page' => '페이지 당 티켓',
         'Filter assigned fields' => '',
 
@@ -2841,7 +2848,6 @@ sub Data {
         'Close this message' => '이 메시지를 닫습니다.',
         'Image' => '이미지',
         'PDF' => 'PDF',
-        'Unknown' => '알 수 없는',
         'View' => '전망',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2856,7 +2862,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => '대기 시간까지',
         'Locked' => '잠김',
-        '%s Ticket(s)' => '%s개 티켓',
         'Accounted time' => '소요 시간',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2892,8 +2897,8 @@ sub Data {
         'From assigned Customer IDs' => '할당 된 고객 ID로부터',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => '오류',
         'An Error Occurred' => '에러 발생됨',
-        'Error Details' => '오류 정보',
         'Traceback' => '역 추적',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2932,6 +2937,7 @@ sub Data {
         'Request New Password' => '새 비밀번호 요청',
         'Your User Name' => '사용자 이름',
         'A new password will be sent to your email address.' => '새 비밀번호가 이메일 주소로 전송됩니다.',
+        'Back to login' => '로그인으로 돌아 가기',
         'Create Account' => '계정 만들기',
         'Please fill out this form to receive login credentials.' => '로그인 자격 증명을 받으려면 이 양식을 작성하십시오.',
         'How we should address you' => '우리가 너를 어떻게 대해야하는지',
@@ -2958,6 +2964,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '프로필',
         'e. g. 10*5155 or 105658*' => '이자형. 지. 10 * 5155 또는 105658 *',
+        'CustomerID' => '고객 ID',
         'Types' => '유형',
         'Limitation' => '',
         'No time settings' => '시간 설정 없음',
@@ -2995,6 +3002,7 @@ sub Data {
         'Ticket fields' => '타켓 필드',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => '오류 정보',
         'Expand' => '넓히다',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3070,7 +3078,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '끝난',
-        'Error' => '오류',
         'Database setup successful!' => '데이터베이스 설정이 설공적으로 완료되었습니다!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3140,7 +3147,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => '비밀번호를 잊어 버렸습니까?',
-        'Back to login' => '로그인으로 돌아 가기',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '미리보기 콘텐츠 크기 조정',
@@ -3336,8 +3342,6 @@ sub Data {
         'Enable' => '사용',
         'Reset this setting to its default state' => '이 설정을 기본 상태로 재설정하십시오.',
         'Reset setting' => '재설정 설정',
-        'Show user specific changes for this setting' => '이 설정에 대한 사용자별 변경 사항 표시',
-        'Show user settings' => '사용자 설정 표시',
         'Copy a direct link to this setting to your clipboard' => '이 설정에 대한 직접 링크를 클립 보드로 복사하십시오.',
         'Copy direct link' => '직접 링크 복사',
         'Remove this setting from your favorites setting' => '즐겨찾기 설정에서 이 설정을 제거하십시오.',
@@ -3419,6 +3423,7 @@ sub Data {
         'Process state' => '프로세스 상태',
         'Running' => '달리는',
         'Finished' => '끝마친',
+        'Unknown' => '알 수 없는',
         'No package information available.' => '사용할 수있는 패키지 정보가 없습니다.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -3853,7 +3858,6 @@ sub Data {
         'No such file %s in package!' => '패키지에 %s 파일이 없습니다!',
         'No such file %s in local file system!' => '로컬 파일 시스템에 %s 파일이 없습니다!',
         'Can\'t read %s!' => '%s를 읽을 수 없습니다!',
-        'File is OK' => '파일은 정상입니다.',
         'Package has locally modified files.' => '패키지에 로컬로 수정된 파일이 있습니다.',
         'Not Started' => '시작되지 않음',
         'Updated' => '업데이트 됨',
@@ -4146,7 +4150,6 @@ sub Data {
         'Can\'t get element data of %s!' => '%s의 요소 데이터를 가져올 수 없습니다!',
         'Can\'t get filter content data of %s!' => '%s의 필터 콘텐츠 데이터를 가져올 수 없습니다!',
         'Customer Name' => '고객 이름',
-        'Customer User Name' => '고객 사용자 이름',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'SourceObject와 SourceKey가 필요합니다!',
@@ -4474,10 +4477,14 @@ sub Data {
             '데이터베이스에 연결할 수 없습니다. Perl 모듈 DBD :: %s이 설치되지 않았습니다!',
         'Can\'t connect to database, read comment!' => '데이터베이스에 연결할 수 없으므로 주석을 읽으십시오!',
         'Database already contains data - it should be empty!' => '데이터베이스에 이미 데이터가 있습니다. 비워두워야 합니다.',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '오류 : 데이터베이스가 크기가 %s를 넘는 패킷을 수락하는지 확인하십시오 (패키지는 현재 최대 %s MB 만 허용). 오류를 피하기 위해 데이터베이스의 max_allowed_packet 설정을 조정하십시오.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '오류 : 데이터베이스의 innodb_log_file_size 값을 최소 %s MB (현재 : %s MB, 권장 : %s MB)로 설정하십시오. 자세한 내용은 %s를보십시오.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '잘못된 데이터베이스 정렬 (%s는 %s이지만 utf8이어야합니다).',
 
@@ -4529,6 +4536,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => '이 기사 인쇄',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => '마크',
@@ -4787,7 +4798,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => '언 워치',
-        'Remove from list of watched tickets' => '감상한 티켓 목록에서 제거',
         'Watch' => '살피다',
         'Add to list of watched tickets' => '시청 티켓 목록에 추가',
 
@@ -5331,10 +5341,6 @@ sub Data {
         'Concurrent Users Details' => '동시 사용자 세부 정보',
         'Concurrent Users' => '동시 사용자',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => '승인',
-        'Problem' => '문제',
-
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '%s 설정이 없습니다!',
         'Setting %s is not locked to this user!' => '설정 %s이 이 사용자에게 잠겨 있지 않습니다.',
@@ -5580,12 +5586,24 @@ sub Data {
         'The headline shown in the customer interface.' => '고객 인터페이스에 표시되는 헤드 라인.',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '고객 인터페이스의 머리글에 표시된 로고입니다. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '에이전트 인터페이스의 헤더에 표시된 로고. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '스킨 "기본"에 대한 에이전트 인터페이스의 머리글에 표시된 로고입니다. 자세한 설명은 "AgentLogo"를 참조하십시오.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '에이전트 인터페이스의 로그인 상자 상단에 표시된 로고입니다. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
+            '',
         'Defines the URL base path of icons, CSS and Java Script.' => '아이콘, CSS 및 Java Script의 URL 기본 경로를 정의합니다.',
         'Defines the URL image path of icons for navigation.' => '탐색을위한 아이콘의 URL 이미지 경로를 정의합니다.',
         'Defines the URL CSS path.' => 'URL CSS 경로를 정의합니다.',
@@ -5631,6 +5649,7 @@ sub Data {
             '전자 메일을 보내거나 전화 또는 전자 메일 티켓을 제출하기 전에 응용 프로그램에서 전자 메일 주소의 MX 레코드를 확인하게합니다.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             '필요한 경우 "CheckMXRecord"조회를 위해 전용 DNS 서버의 주소를 정의합니다.',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => '응용 프로그램이 전자 메일 주소의 구문을 검사하도록 합니다.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             '구문 검사에서 일부 주소를 제외하는 정규 표현식을 정의합니다 ( "CheckEmailAddresses"가 "Yes"로 설정된 경우). 문법적으로 유효하지는 않지만 시스템에 필요한 전자 메일 주소 (예 : "root @ localhost")는이 필드에 정규식을 입력하십시오.',
@@ -6502,6 +6521,13 @@ sub Data {
             '우선 순위 별 사전 정렬을 서비스 보기에서 수행해야하는지 여부를 정의합니다.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             '우선 순위 정렬 후 서비스 보기의 모든 서비스에 대한 기본 정렬 순서를 정의합니다.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => '시간 계산을 활성화 합니다.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             '선호 시간 단위 (예 : 작업 단위, 시간, 분)를 설정합니다.',
@@ -7849,6 +7875,29 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
+        'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',
@@ -8542,6 +8591,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => 'ACL 구성 및 관리',
         'Configure which screen should be shown after a new ticket has been created.' =>
             '새 티켓이 작성된 후 표시할 화면을 구성하십시오.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => '새 프로세스 티켓을 만듭니다.',
         'Create Process Ticket' => '',
         'Create Ticket' => '티켓 만들기',
@@ -8739,6 +8792,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => '성 이름',
         'Lastname Firstname (UserLogin)' => '성 이름 (UserLogin)',
         'Lastname, Firstname' => '성, 이름',
@@ -8786,6 +8841,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '스팸으로 표시하십시오!',
         'Mark this ticket as junk!' => '이 티켓을 정크로 표시하십시오!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => '중간의',
@@ -8892,6 +8949,8 @@ Thanks for your help!
         'Russian' => '러시아인',
         'S/MIME Certificates' => 'S / MIME 인증서',
         'Schedule a maintenance period.' => '유지 보수 기간을 예약하십시오.',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => '새로운 티켓 후에 화면',
         'Search Customer' => '고객 검색',
         'Search Ticket.' => '티켓 검색.',
@@ -9228,6 +9287,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

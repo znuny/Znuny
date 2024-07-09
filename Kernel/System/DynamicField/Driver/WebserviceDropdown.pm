@@ -149,35 +149,28 @@ sub EditFieldRender {
             . $TreeSelectionMessage . '</span><i class="fa fa-sitemap"></i></a>';
     }
 
-    if ( $Param{Mandatory} ) {
-        my $DivID = $FieldName . 'Error';
-
-        my $FieldRequiredMessage = $Param{LayoutObject}->{LanguageObject}->Translate("This field is required.");
-
-        # for client side validation
-        $HTMLString .= <<"EOF";
-<div id="$DivID" class="TooltipErrorMessage">
+    # Tooltip for client side validation
+    my $ClientErrorTooltipDivID = $FieldName . 'Error';
+    my $FieldRequiredMessage    = $Param{LayoutObject}->{LanguageObject}->Translate("This field is required.");
+    $HTMLString .= <<"EOF";
+<div id="$ClientErrorTooltipDivID" class="TooltipErrorMessage">
     <p>
         $FieldRequiredMessage
     </p>
 </div>
 EOF
-    }
 
-    if ( $Param{ServerError} ) {
-        my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
-        $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
-        my $DivID = $FieldName . 'ServerError';
-
-        # for server side validation
-        $HTMLString .= <<"EOF";
-<div id="$DivID" class="TooltipErrorMessage">
+    # Tooltip for server side validation
+    my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
+    $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
+    my $ServerErrorTooltipDivID = $FieldName . 'ServerError';
+    $HTMLString .= <<"EOF";
+<div id="$ServerErrorTooltipDivID" class="TooltipErrorMessage">
     <p>
         $ErrorMessage
     </p>
 </div>
 EOF
-    }
 
     my $AutocompleteMinLength = int( $FieldConfig->{AutocompleteMinLength} || 3 );
     my $QueryDelay            = int( $FieldConfig->{QueryDelay}            || 500 );
@@ -278,10 +271,6 @@ sub ReadableValueRender {
     my ( $Self, %Param ) = @_;
 
     my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
-
-    $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
-
-    my $PossibleValues = $Param{DynamicFieldConfig}->{Config}->{PossibleValues};
 
     # set Value and Title variables
     my $Value = '';
@@ -763,6 +752,12 @@ sub StatsSearchFieldParameterBuild {
     my ( $Self, %Param ) = @_;
 
     return Kernel::System::DynamicField::Driver::BaseSelect::StatsSearchFieldParameterBuild( $Self, %Param );
+}
+
+sub FieldValueValidate {
+    my ( $Self, %Param ) = @_;
+
+    return 1;
 }
 
 1;

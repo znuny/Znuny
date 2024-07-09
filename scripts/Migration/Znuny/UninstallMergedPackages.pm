@@ -48,10 +48,13 @@ sub Run {
 
     # Note: Znuny and Znuny4OTRS in case one of the packages later will be built with the Znuny prefix
     my @PackageNames = (
+        'Znuny-MarkTicketSeenUnseen',
+        'Znuny4OTRS-MarkTicketSeenUnseen',
         'Znuny-NoteToLinkedTicket',
         'Znuny4OTRS-NoteToLinkedTicket',
         'Znuny4OTRS-UserMaxArticlesPerPage',
         'Znuny-DynamicFieldWebserviceTicketIDPayload',
+        'Znuny-RichTextEditorLinkFix',
     );
 
     PACKAGENAME:

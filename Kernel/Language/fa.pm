@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.619897537597091;
+    $Self->{Completeness}        = 0.615965834428384;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1550,9 +1550,11 @@ sub Data {
         'Date' => 'تاریخ',
         'List of Files' => 'فهرست فایل‌ها',
         'Permission' => 'حقوق دسترسی',
+        'Size' => 'اندازه',
+        'Problem' => 'مساله است.',
+        'OK' => 'خوب',
         'Download file from package!' => 'دریافت فایل از بسته!',
         'Required' => 'الزامی',
-        'Size' => 'اندازه',
         'Primary Key' => 'کلید اولیه',
         'Auto Increment' => 'افزایش خودکار',
         'SQL' => 'SQL',
@@ -1751,6 +1753,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'آیا شما واقعا می خواهید  این فعالیت را حذف کنید ؟',
         'Do you really want to delete this Activity Dialog?' => 'آیا شما واقعا می خواهید  این فعالیت گفت و گو را حذف کنید؟',
         'Do you really want to delete this Transition?' => 'آیا واقعا میخواهید این انتقال را حذف کنید؟',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'آیا شما واقعا می خواهید  این حرکت انتقال را حذف کنید؟',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'آیا شما واقعا می خواهید به حذف این فعالیت را از بوم؟ این فقط می تواند با ترک این صفحه نمایش بدون ذخیره خنثی کرد.',
@@ -2518,7 +2522,6 @@ sub Data {
         'Split' => 'جدا ساختن',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => '',
         'Statistics Management' => '',
         'Add Statistics' => '',
         'Dynamic Matrix' => 'ماتریس پویا',
@@ -2618,6 +2621,9 @@ sub Data {
         'Link together' => 'ارتباط با یک دیگر',
         'Link to parent' => 'ارتباط به والد',
         'Unlock tickets' => 'درخواست‌های تحویل داده شده',
+        'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'ادراه کردن میزان عمل',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -2721,8 +2727,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'فرستنده',
+        'Customer User Name' => '',
         'Impact' => 'اثر',
-        'CustomerID' => 'کد اشتراک',
         'Update Time' => 'زمان بروز رسانی',
         'Solution Time' => 'زمان ارائه راهکار',
         'First Response Time' => 'زمان اولین پاسخ',
@@ -2734,6 +2740,7 @@ sub Data {
         'Remove active filters for this screen.' => 'حذف فیلتر فعال برای این صفحه نمایش.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'حذف از فهرست درخواست‌های مشاهده شده',
         'Tickets per page' => 'درخواست در هر صفحه',
         'Filter assigned fields' => '',
 
@@ -2847,7 +2854,6 @@ sub Data {
         'Close this message' => 'این پیام را ببندید',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => 'ناشناخته',
         'View' => 'نمایش',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2862,7 +2868,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'تا زمانی که',
         'Locked' => 'تحویل گرفته شده',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'زمان محاسبه شده',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2898,8 +2903,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'خطا',
         'An Error Occurred' => 'خطا',
-        'Error Details' => 'جزئیات خطا',
         'Traceback' => 'بازبینی',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2938,6 +2943,7 @@ sub Data {
         'Request New Password' => 'درخواست رمز عبور جدید',
         'Your User Name' => 'نام کاربری شما',
         'A new password will be sent to your email address.' => 'رمز عبور جدید برای آدرس ایمیل شما ارسال خواهد شد.',
+        'Back to login' => 'بازگشت به صفحه ورود',
         'Create Account' => 'ثبت نام',
         'Please fill out this form to receive login credentials.' => 'لطفا این فرم را  برای دریافت اعتبار ورود پر کنید . ',
         'How we should address you' => 'ما چگونه شما را خطاب کنیم',
@@ -2964,6 +2970,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'مشخصات کاربری',
         'e. g. 10*5155 or 105658*' => 'به عنوان مثال 10*5155 یا 105658*',
+        'CustomerID' => 'کد اشتراک',
         'Types' => 'انواع',
         'Limitation' => '',
         'No time settings' => 'بدون تنظیمات زمان',
@@ -3001,6 +3008,7 @@ sub Data {
         'Ticket fields' => 'زمینه های درخواست',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'جزئیات خطا',
         'Expand' => 'گسترش',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3076,7 +3084,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'انجام شد',
-        'Error' => 'خطا',
         'Database setup successful!' => 'راه اندازی پایگاه داده موفق!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3146,7 +3153,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'رمز عبور خود را فراموش کرده اید؟',
-        'Back to login' => 'بازگشت به صفحه ورود',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'محتوای پیش نمایش مقیاس',
@@ -3342,8 +3348,6 @@ sub Data {
         'Enable' => '',
         'Reset this setting to its default state' => '',
         'Reset setting' => '',
-        'Show user specific changes for this setting' => '',
-        'Show user settings' => '',
         'Copy a direct link to this setting to your clipboard' => '',
         'Copy direct link' => '',
         'Remove this setting from your favorites setting' => '',
@@ -3425,6 +3429,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'پایان یافت',
+        'Unknown' => 'ناشناخته',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -3859,7 +3864,6 @@ sub Data {
         'No such file %s in package!' => 'بدون چنین فایل %s در بسته!',
         'No such file %s in local file system!' => 'بدون چنین فایلی  %s در فایل سیستم محلی!',
         'Can\'t read %s!' => 'نمی تواند بخواند %s !',
-        'File is OK' => 'فایل خوب است',
         'Package has locally modified files.' => 'بسته بندی به صورت محلی فایل های اصلاح شده.',
         'Not Started' => '',
         'Updated' => '',
@@ -4152,7 +4156,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'نمی توانید داده های عنصررا بگیرید %s !',
         'Can\'t get filter content data of %s!' => 'نمی توانید داده ها محتوای فیلتر را بگیرید  %s !',
         'Customer Name' => 'نام مشتری',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'نیاز SourceObject و SourceKey!',
@@ -4480,10 +4483,14 @@ sub Data {
             'نمی توانید به پایگاه داده متصل شوید، پرل و DBD :: %s نصب نشده است!',
         'Can\'t connect to database, read comment!' => 'نمی توانید به پایگاه داده متصل شوید، به عنوان خواننده نظر!',
         'Database already contains data - it should be empty!' => 'پایگاه داده در حال حاضر حاوی اطاعات است  -باید خالی باشد !',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'خطا: لطفا مطمئن شوید که پایگاه داده خود را بسته بر می پذیرد %s MB در اندازه (در حال حاضر تنها بسته می پذیرد تا %s MB). لطفا تنظیمات max_allowed_packet از پایگاه داده خود را به منظور جلوگیری از اشتباهات وفق دهند.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'خطا: لطفا مقدار را برای innodb_log_file_size در پایگاه داده خود را به حداقل مجموعه %s (: در حال حاضر MB %s MB، توصیه می شود: %s MB). برای کسب اطلاعات بیشتر، لطفا یک نگاهی به %s .',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 
@@ -4535,6 +4542,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'چاپ این نوشته ',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'علامت دار',
@@ -4793,7 +4804,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'عدم پیگیری',
-        'Remove from list of watched tickets' => 'حذف از فهرست درخواست‌های مشاهده شده',
         'Watch' => 'پیگیری',
         'Add to list of watched tickets' => 'افزودن به فهرست درخواست‌های مشاهده شده',
 
@@ -5337,10 +5347,6 @@ sub Data {
         'Concurrent Users Details' => 'کاربران همزمان اطلاعات',
         'Concurrent Users' => 'کاربران موازی',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'خوب',
-        'Problem' => 'مساله است.',
-
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
         'Setting %s is not locked to this user!' => '',
@@ -5586,11 +5592,23 @@ sub Data {
         'The headline shown in the customer interface.' => 'تیتر نشان داده شده در رابط مشتری.',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'آرم نشان داده شده است در هدر رابط مشتری. URL به تصویر می تواند یک آدرس نسبی به دایرکتوری تصویر پوست، و یا یک URL کامل به یک وب سرور از راه دور.',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'آرم نشان داده شده است در هدر رابط عامل. URL به تصویر می تواند یک آدرس نسبی به دایرکتوری تصویر پوست، و یا یک URL کامل به یک وب سرور از راه دور.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'آرم نشان داده شده در هدر از رابط عامل برای پوست \ "به طور پیش فرض ". \ "AgentLogo " برای توضیحات بیشتر را مشاهده کنید.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
+            '',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'تعریف می کند که URL مسیر پایه از آیکون ها، CSS و جاوا اسکریپت.',
         'Defines the URL image path of icons for navigation.' => 'تعریف می کند که URL مسیر تصویر از آیکون برای ناوبری.',
@@ -5637,6 +5655,7 @@ sub Data {
             'باعث می شود نرم افزار چک رکورد MX از آدرس های ایمیل قبل از ارسال ایمیل و یا ارسال یک تلفن و یا ایمیل بلیط.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'تعریف می کند که آدرس یک سرور DNS اختصاص داده شده، در صورت لزوم، برای \ "CheckMXRecord " نگاه یو پی اس.',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => 'باعث می شود نرم افزار چک نحو آدرس ایمیل.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'تعریف یک عبارت منظم که در آنها از برخی از آدرس های از کنترل و بررسی گرامر (در صورت \ "CheckEmailAddresses " قرار است به \ "بله "). لطفا یک عبارت منظم در این زمینه برای آدرس ایمیل، که از لحاظ دستوری معتبر نیست وارد کنید، اما برای سیستم (یعنی \ "ریشه @ localhost را ") لازم است.',
@@ -6508,6 +6527,13 @@ sub Data {
             'تعریف می کند اگر قبل از مرتب کردن بر اساس اولویت باید در نظر خدمات انجام  شود.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'تعریف می کند که به طور پیش فرض مرتب کردن برای همه خدمات در نظر خدمات، پس از مرتب کردن اولویت است.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'محاسبه زمان را فعال می‌کند.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'مجموعه واحد زمان مورد نظر (به عنوان مثال واحد کار، ساعت، دقیقه).',
@@ -7855,6 +7881,29 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
+        'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'موقتا غیر معتبر',
@@ -8548,6 +8597,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => 'پیکربندی و مدیریت ACL ها است.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'پیکربندی که صفحه نمایش باید نشان داده شود پس از یک درخواست جدید ایجاد شده است.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'ساختن درخواست روند جدید.',
         'Create Process Ticket' => '',
         'Create Ticket' => '',
@@ -8745,6 +8798,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'نام خانوادگی',
         'Lastname Firstname (UserLogin)' => 'نام خانوادگی نام (صفحهی)',
         'Lastname, Firstname' => 'نام خانوادگی',
@@ -8792,6 +8847,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'به‌عنوان هرزنامه علامت بزن',
         'Mark this ticket as junk!' => 'علامت گذاری به عنوان این درخواست به عنوان آشغال!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'متوسط',
@@ -8898,6 +8955,8 @@ Thanks for your help!
         'Russian' => 'روسی',
         'S/MIME Certificates' => 'گواهینامه‌های S/MIME',
         'Schedule a maintenance period.' => 'برنامه ریزی یک دوره تعمیر و نگهداری.',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'وضعیت نمایش پس از دریافت درخواست جدید',
         'Search Customer' => 'جستجوی مشترک',
         'Search Ticket.' => 'جستجو درخواست.',
@@ -9234,6 +9293,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

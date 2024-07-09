@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.605685010742026;
+    $Self->{Completeness}        = 0.601182654402103;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1553,9 +1553,11 @@ sub Data {
         'Date' => 'Data',
         'List of Files' => 'Lista dei file',
         'Permission' => 'Permessi',
+        'Size' => 'Dimensione',
+        'Problem' => 'Problema',
+        'OK' => 'OK',
         'Download file from package!' => 'Scarica file dal pacchetto!',
         'Required' => 'Richiesto',
-        'Size' => 'Dimensione',
         'Primary Key' => 'Chiave primaria',
         'Auto Increment' => 'Incremento automatico',
         'SQL' => 'Limite',
@@ -1754,6 +1756,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Vuoi davvero eliminare questa attività?',
         'Do you really want to delete this Activity Dialog?' => 'Vuoi davvero eliminare questa finestra dell\'attività?',
         'Do you really want to delete this Transition?' => 'Vuoi davvero eliminare questa transizione?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Vuoi davvero eliminare questa azione di transizione?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Vuoi davvero rimuovere questa attività dal riquadro? Ciò può essere annullato solo uscendo dalla schermata senza salvare.',
@@ -2521,7 +2525,6 @@ sub Data {
         'Split' => 'Dividi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => 'Ulteriori informazioni sulle statistiche in Znuny',
         'Statistics Management' => 'Gestione delle statistiche',
         'Add Statistics' => 'Aggiungi statistiche',
         'Dynamic Matrix' => 'Matrice dinamica',
@@ -2621,6 +2624,9 @@ sub Data {
         'Link together' => 'Collega',
         'Link to parent' => 'Collega a genitore',
         'Unlock tickets' => 'Sblocca ticket',
+        'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Esegui l\'azione in blocco',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -2724,8 +2730,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Mittente',
+        'Customer User Name' => 'Nome utenza cliente',
         'Impact' => 'Impatto',
-        'CustomerID' => 'Codice cliente',
         'Update Time' => 'Tempo per aggiornamento',
         'Solution Time' => 'Tempo per soluzione',
         'First Response Time' => 'Tempo iniziale per risposta',
@@ -2737,6 +2743,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Rimuovi i filtri attivi per questa schermata.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Rimuovere dalla lista di ticket osservati',
         'Tickets per page' => 'Numero di ticket per pagina',
         'Filter assigned fields' => '',
 
@@ -2850,7 +2857,6 @@ sub Data {
         'Close this message' => 'Chiudi questo messaggio',
         'Image' => 'Immagine',
         'PDF' => 'PDF',
-        'Unknown' => 'Sconosciuto',
         'View' => 'Vista',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2865,7 +2871,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'In attesa fino a',
         'Locked' => 'Bloccato',
-        '%s Ticket(s)' => '%s Ticket(s)',
         'Accounted time' => 'Tempo addebitato',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2901,8 +2906,8 @@ sub Data {
         'From assigned Customer IDs' => 'Dagli ID cliente assegnati',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Errore',
         'An Error Occurred' => 'Si è verificato un errore',
-        'Error Details' => 'Dettagli dell\'errore',
         'Traceback' => 'Dettaglio della tracciatura',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2941,6 +2946,7 @@ sub Data {
         'Request New Password' => 'Richiedi nuova password',
         'Your User Name' => 'Il tuo nome utente',
         'A new password will be sent to your email address.' => 'Una nuova password sarà inviata al tuo indirizzo email.',
+        'Back to login' => 'Torna all\'accesso',
         'Create Account' => 'Registrati',
         'Please fill out this form to receive login credentials.' => 'Compila questo modulo per ricevere le credenziali di accesso.',
         'How we should address you' => 'Come chiamarla',
@@ -2967,6 +2973,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profilo',
         'e. g. 10*5155 or 105658*' => 'es 10*5155 or 105658*',
+        'CustomerID' => 'Codice cliente',
         'Types' => 'Tipi',
         'Limitation' => '',
         'No time settings' => 'Nessuna impostazione per il tempo',
@@ -3004,6 +3011,7 @@ sub Data {
         'Ticket fields' => 'Campi ticket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Dettagli dell\'errore',
         'Expand' => 'Espandi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3079,7 +3087,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Fatto',
-        'Error' => 'Errore',
         'Database setup successful!' => 'Configurazione database terminata con successo!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3149,7 +3156,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Hai dimenticato la password?',
-        'Back to login' => 'Torna all\'accesso',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Ridimensiona il contenuto dell\'anteprima',
@@ -3345,8 +3351,6 @@ sub Data {
         'Enable' => 'Abilita',
         'Reset this setting to its default state' => 'Ripristina questa impostazione al suo stato predefinito',
         'Reset setting' => 'Ripristinare le impostazioni',
-        'Show user specific changes for this setting' => 'Mostrare le modifiche specifiche dell\'utente per questa impostazione',
-        'Show user settings' => 'Mostrare le impostazioni dell\'utente',
         'Copy a direct link to this setting to your clipboard' => 'Copia un link diretto a questa impostazione negli appunti',
         'Copy direct link' => 'Copia collegamento diretto',
         'Remove this setting from your favorites setting' => 'Rimuovi questa impostazione dalle tue impostazioni preferite',
@@ -3428,6 +3432,7 @@ sub Data {
         'Process state' => 'Stato processo',
         'Running' => 'Avvio',
         'Finished' => 'Operazione terminata',
+        'Unknown' => 'Sconosciuto',
         'No package information available.' => 'Nessuna informazione sul pacchetto disponibile.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -3862,7 +3867,6 @@ sub Data {
         'No such file %s in package!' => 'Nessun file del genere %s nel pacchetto!',
         'No such file %s in local file system!' => 'Nessun file %s nel file system locale!',
         'Can\'t read %s!' => 'Impossibile leggere %s!',
-        'File is OK' => 'File è OK',
         'Package has locally modified files.' => 'Il pacchetto ha file modificati localmente.',
         'Not Started' => 'Non iniziato',
         'Updated' => 'Aggiornato',
@@ -4155,7 +4159,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => 'Nome cliente',
-        'Customer User Name' => 'Nome utenza cliente',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',
@@ -4483,9 +4486,13 @@ sub Data {
             '',
         'Can\'t connect to database, read comment!' => '',
         'Database already contains data - it should be empty!' => 'Il database risulta contenere dati - dovrebbe essere vuoto!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            '',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
@@ -4538,6 +4545,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Stampa questo articolo',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Seleziona',
@@ -4796,7 +4807,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Non osservare',
-        'Remove from list of watched tickets' => 'Rimuovere dalla lista di ticket osservati',
         'Watch' => 'Osserva',
         'Add to list of watched tickets' => 'Aggiungere alla lista di ticket osservati',
 
@@ -5340,10 +5350,6 @@ sub Data {
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Utenti concomitanti',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => 'Problema',
-
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
         'Setting %s is not locked to this user!' => '',
@@ -5593,11 +5599,23 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'The headline shown in the customer interface.' => '',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
+            '',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Definisce la path URL di icone, CSS e Java Script.',
         'Defines the URL image path of icons for navigation.' => 'Definisce la path URL delle icone di navigazione.',
@@ -5644,6 +5662,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Definisce l\'indirizzo di un server DNS dedicato, se necessario, per i look-up di "CheckMXRecord".',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => '',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Definire un\'espressione regolare che esclude alcuni indirizzi dal controllo sintattico (se "CheckEmailAddress" è impostato a "Sì"). Inserire una espressione regolare in questo campo per gli indirizzi email, che non sono sintatticamente validi, ma che sono necessari per il sistema (ad es. "root@localhost").',
@@ -6514,6 +6533,13 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'Defines if a pre-sorting by priority should be done in the service view.' =>
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
+            '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             '',
         'Activates time accounting.' => 'Attiva Rendicontazione Tempo.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -7862,6 +7888,29 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
+        'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'non valido-temporaneamente',
@@ -8555,6 +8604,10 @@ Il tuo helpdesk.
         'Configure and manage ACLs.' => 'Configura e gestisci le ACL.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Seleziona quale schermata mostrare dopo la creazione di un ticket.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => '',
         'Create Process Ticket' => '',
         'Create Ticket' => '',
@@ -8752,6 +8805,8 @@ Il tuo helpdesk.
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'Cognome Nome',
         'Lastname Firstname (UserLogin)' => 'Cognome Nome (Utente)',
         'Lastname, Firstname' => 'Cognome, Nome',
@@ -8799,6 +8854,8 @@ Il tuo helpdesk.
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Contrassegna come spam!',
         'Mark this ticket as junk!' => 'Marca questo ticket come spam!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Medium',
@@ -8905,6 +8962,8 @@ Il tuo helpdesk.
         'Russian' => 'Russo',
         'S/MIME Certificates' => 'Certificati S/MIME',
         'Schedule a maintenance period.' => '',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Pagina da mostrare dopo un nuovo ticket',
         'Search Customer' => 'Ricerca cliente',
         'Search Ticket.' => 'Ricerca ticket.',
@@ -9241,6 +9300,7 @@ Il tuo helpdesk.
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

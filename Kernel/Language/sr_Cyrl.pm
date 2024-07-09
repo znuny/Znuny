@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.898198644852091;
+    $Self->{Completeness}        = 0.8919185282523;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1545,9 +1545,11 @@ sub Data {
         'Date' => 'Датум',
         'List of Files' => 'Списак датотека',
         'Permission' => 'Дозвола',
+        'Size' => 'Величина',
+        'Problem' => 'Проблем',
+        'OK' => 'У реду',
         'Download file from package!' => 'Преузми датотеку из пакета!',
         'Required' => 'Обавезно',
-        'Size' => 'Величина',
         'Primary Key' => 'Примарни кључ',
         'Auto Increment' => 'Ауто увећање',
         'SQL' => 'SQL',
@@ -1746,6 +1748,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Да ли стварно желите да обришете ову активност?',
         'Do you really want to delete this Activity Dialog?' => 'Да ли стварно желите да обришете овај дијалог активности?',
         'Do you really want to delete this Transition?' => 'Да ли стварно желите да обришете ову транзицију?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Да ли стварно желите да обришете ову транзициону активност?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Да ли стварно желите да уклоните ову активност са површине? Ово једино може да се опозове уколико напустите екран, а да претходно не сачувате измене.',
@@ -2513,7 +2517,6 @@ sub Data {
         'Split' => 'Подели',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => 'Прочитајте више о статистикама у Znuny',
         'Statistics Management' => 'Управљање статистикама',
         'Add Statistics' => 'Додај статистику',
         'Dynamic Matrix' => 'Динамичка матрица',
@@ -2613,6 +2616,9 @@ sub Data {
         'Link together' => 'Повежи заједно',
         'Link to parent' => 'Повежи са надређеним',
         'Unlock tickets' => 'Откључај тикете',
+        'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Изврши масовну акцију',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -2716,8 +2722,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Пошиљаоц',
+        'Customer User Name' => 'Назив клијент корисника',
         'Impact' => 'Утицај',
-        'CustomerID' => 'ID клијента',
         'Update Time' => 'Време ажурирања',
         'Solution Time' => 'Време решавања',
         'First Response Time' => 'Време првог одговора',
@@ -2729,6 +2735,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Уклони активне филтере за овај екран.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Уклони са листе праћених тикета',
         'Tickets per page' => 'Тикета по страни',
         'Filter assigned fields' => '',
 
@@ -2842,7 +2849,6 @@ sub Data {
         'Close this message' => 'Затвори ову поруку',
         'Image' => 'Слика',
         'PDF' => 'PDF',
-        'Unknown' => 'Непознато',
         'View' => 'Преглед',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2857,7 +2863,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'На чекању до',
         'Locked' => 'Закључано',
-        '%s Ticket(s)' => '%s тикет(а)',
         'Accounted time' => 'Обрачунато време',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2893,8 +2898,8 @@ sub Data {
         'From assigned Customer IDs' => 'Из листе додељених ID клијента',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Грешка',
         'An Error Occurred' => 'Догодила се грешка',
-        'Error Details' => 'Детаљи грешке',
         'Traceback' => 'Испрати уназад',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2933,6 +2938,7 @@ sub Data {
         'Request New Password' => 'Захтев за нову лозинку',
         'Your User Name' => 'Ваше корисничко име',
         'A new password will be sent to your email address.' => 'Нова лозинка ће бити послата на вашу имејл адресу.',
+        'Back to login' => 'Назад на пријављивање',
         'Create Account' => 'Креирајте налог',
         'Please fill out this form to receive login credentials.' => 'Молимо да попуните овај образац да би сте добили податке за пријаву.',
         'How we should address you' => 'Како да вас ословљавамо',
@@ -2959,6 +2965,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Профил',
         'e. g. 10*5155 or 105658*' => 'нпр. 10*5155 или 105658*',
+        'CustomerID' => 'ID клијента',
         'Types' => 'Типови',
         'Limitation' => '',
         'No time settings' => 'Нема подешавања времена',
@@ -2996,6 +3003,7 @@ sub Data {
         'Ticket fields' => 'Поља тикета',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Детаљи грешке',
         'Expand' => 'Прошири',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3071,7 +3079,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Урађено',
-        'Error' => 'Грешка',
         'Database setup successful!' => 'Успешно инсталирање базе',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3141,7 +3148,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Изгубили сте лозинку?',
-        'Back to login' => 'Назад на пријављивање',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Скалирај садржај за приказ',
@@ -3337,8 +3343,6 @@ sub Data {
         'Enable' => 'Укључи',
         'Reset this setting to its default state' => 'Поништи ово подешавање на подразумевану вредност',
         'Reset setting' => 'Поништи подешавање',
-        'Show user specific changes for this setting' => 'Прикажи корисничке промене за ово подешавање',
-        'Show user settings' => 'Прикажи корисничке промене',
         'Copy a direct link to this setting to your clipboard' => 'Копирај директну везу за ово подешавање',
         'Copy direct link' => 'Копирај директну везу',
         'Remove this setting from your favorites setting' => 'Уклони ово подешавање из омиљених',
@@ -3420,6 +3424,7 @@ sub Data {
         'Process state' => 'Стање процеса',
         'Running' => 'У току',
         'Finished' => 'Завршено',
+        'Unknown' => 'Непознато',
         'No package information available.' => 'Нема информација о пакету.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -3854,7 +3859,6 @@ sub Data {
         'No such file %s in package!' => 'Нема такве датотеке %s у пакету!',
         'No such file %s in local file system!' => 'Нема такве датотеке %s у локалном систему!',
         'Can\'t read %s!' => 'Немогуће читање %s!',
-        'File is OK' => 'Датотека је у реду',
         'Package has locally modified files.' => 'Пакет садржи локално измењене датотеке.',
         'Not Started' => 'Није покренуто',
         'Updated' => 'Ажурирано',
@@ -4147,7 +4151,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Не могу прибавити податке елемента за %s!',
         'Can\'t get filter content data of %s!' => 'Не могу прибавити податке садржаја филтера за %s!',
         'Customer Name' => 'Назив клијента',
-        'Customer User Name' => 'Назив клијент корисника',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Неопходни SourceObject и SourceKey!',
@@ -4475,10 +4478,14 @@ sub Data {
             'Не могу се повезати на базу података, Перл модул DBD::%s није инсталиран!',
         'Can\'t connect to database, read comment!' => 'Не могу се повезати на базу података, прочитајте коментар!',
         'Database already contains data - it should be empty!' => 'База података већ садржи податке - требало би да буде празна.',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Грешка: Молимо да проверите да ваша база података прихвата пакете по величини веће од %s MB  (тренутно прихвата пакете величине до %s MB). Молимо да прилагодите параметар max_allowed_packet подешавање у вашој бази података како би избегли грешке.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Грешка: Молимо да подесете вредност за innodb_log_file_size у вашој бази података на најмање %s MB (тренутно: %s MB, препоручено: %s MB). За више информација, молимо погледајте на %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             'Неисправно подешена база података (%s је %s, а требало би да буде utf8).',
 
@@ -4530,6 +4537,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Одштампај овај чланак',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Означено',
@@ -4788,7 +4799,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Прекини надзор',
-        'Remove from list of watched tickets' => 'Уклони са листе праћених тикета',
         'Watch' => 'Посматрај',
         'Add to list of watched tickets' => 'Додај на листу праћених тикета',
 
@@ -5332,10 +5342,6 @@ sub Data {
         'Concurrent Users Details' => 'Детаљи истовремених корисника',
         'Concurrent Users' => 'Истовремени корисници',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'У реду',
-        'Problem' => 'Проблем',
-
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => 'Подешавање %s не постоји!',
         'Setting %s is not locked to this user!' => 'Подешавање %s није закључано на овог корисника!',
@@ -5581,12 +5587,24 @@ sub Data {
         'The headline shown in the customer interface.' => 'Наслов приказан у клијентском интерфејсу.',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Лого приказан у заглављу клијентског интерфејса. URL до слике може бити релативан у односу на директоријум са сликама или апсолутан до удаљеног сервера.',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Лого приказан у заглављу оператерског интерфејса. URL до слике може бити релативан у односу на директоријум са сликама или апсолутан до удаљеног сервера.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Лого приказан у заглављу интерфејса оператера за изглед "подразумевани". Погледајте "AgentLogo" за детаљнији опис.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Лого приказан у заглављу интерфејса оператера. URL до слике може бити релативан у односу на директоријум са сликама или апсолутан до удаљеног сервера.',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
+            '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Дефинише URL основну путању за иконе, CSS и Java Script.',
         'Defines the URL image path of icons for navigation.' => 'Дефинише URL путању до слика за навигационе иконе.',
         'Defines the URL CSS path.' => 'Дефинише URL CSS путању.',
@@ -5632,6 +5650,7 @@ sub Data {
             'Проверава „MX” запис имејл адресе пре слања поруке или телефонских или имејл тикета.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Дефинише адресе наменског „DNS” сервера, уколико је потребно, за „CheckMXRecord” претраге.',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => 'Приморава апликацију да проверава синтаксу имејл адереса.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Дефинише регуларни израз који искључује неке адресе из провере синтаксе (ако је „CheckEmailAddresses” постављена на „Да”). Молимо вас унесите регуларни израз у ово поље за имејл адресе, које нису синтаксно исправне, али су неопходне за систем (нпр. „root@localhost”).',
@@ -6503,6 +6522,13 @@ sub Data {
             'Одређује да ли претходно сортирање по приоритету треба да се уради у сервисном приказу.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Дефинише подразумевани критеријум сортирања за све сервисе у сервисном прегледу, после  сортирања по приориту.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Активира мерење времена.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Подеси приоритетне временске јединице (нпр јединице посла, сате, минуте)',
@@ -7850,6 +7876,29 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
+        'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'неважећи-привремено',
@@ -8543,6 +8592,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => 'Конфигуриши и управљај ACL листама.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Конфигурише који екран би требало приказати након креирања новог тикета.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'Креирај нови процес тикет',
         'Create Process Ticket' => '',
         'Create Ticket' => 'Креирај тикет',
@@ -8740,6 +8793,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'Презиме, Име',
         'Lastname Firstname (UserLogin)' => 'Презиме, Име (Корисничко име)',
         'Lastname, Firstname' => 'Презиме, Име',
@@ -8787,6 +8842,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Означи као Спам!',
         'Mark this ticket as junk!' => 'Означи овај тикет као бесмислен junk!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Средње',
@@ -8893,6 +8950,8 @@ Thanks for your help!
         'Russian' => 'Руски',
         'S/MIME Certificates' => 'S/MIME сертификати',
         'Schedule a maintenance period.' => 'Планирање периода одржавања.',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Приказ екрана после отварања новог тикета',
         'Search Customer' => 'Тражи клијента',
         'Search Ticket.' => 'Тражи тикет.',
@@ -9229,6 +9288,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

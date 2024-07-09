@@ -65,6 +65,22 @@ sub Run {
             Message => 'Increase size of columns of database table generic_agent_jobs',
             Module  => 'GenericAgentJobs',
         },
+        {
+            Message => 'Increase size of columns of database table standard_template',
+            Module  => 'StandardTemplate',
+        },
+        {
+            Message => 'Increase size of columns of database table notification_event_message',
+            Module  => 'NotificationEventMessage',
+        },
+        {
+            Message => 'Increase size of column of database table customer_user_customer',
+            Module  => 'CustomerUserCustomerID',
+        },
+        {
+            Message => 'Create missing primary keys for database tables.',
+            Module  => 'CreatePrimaryKeys',
+        },
     );
 
     return 1   if !@Tasks;

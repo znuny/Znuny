@@ -11,6 +11,7 @@ package scripts::Migration::Znuny::MigrateNotificationEvents;    ## no critic
 
 use strict;
 use warnings;
+
 use utf8;
 
 use parent qw(scripts::Migration::Base);
@@ -18,7 +19,6 @@ use parent qw(scripts::Migration::Base);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::System::HTMLUtils',
     'Kernel::System::NotificationEvent',
 );
 
@@ -95,7 +95,6 @@ sub _MigrateMentionNotification {
     my ( $Self, %Param ) = @_;
 
     my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
-    my $HTMLUtilsObject         = $Kernel::OM->Get('Kernel::System::HTMLUtils');
 
     my %NotificationEvents = $NotificationEventObject->NotificationList(
 
@@ -114,7 +113,8 @@ sub _MigrateMentionNotification {
         next NOTIFICATIONEVENTID if !$NotificationEventsToUpdateByName{ $NotificationEvent->{Name} };
 
         if ( IsHashRefWithData( $NotificationEvent->{Message}->{en} ) ) {
-            $NotificationEvent->{Message}->{en}->{Body} = 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+            $NotificationEvent->{Message}->{en}->{ContentType} = 'text/plain';
+            $NotificationEvent->{Message}->{en}->{Body}        = 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
 
 you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
@@ -122,14 +122,10 @@ you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
 
 -- <OTRS_CONFIG_NotificationSenderName>';
-
-            $NotificationEvent->{Message}->{en}->{Body} = $HTMLUtilsObject->ToHTML(
-                String             => $NotificationEvent->{Message}->{en}->{Body},
-                ReplaceDoubleSpace => 0,
-            );
         }
 
         if ( IsHashRefWithData( $NotificationEvent->{Message}->{de} ) ) {
+            $NotificationEvent->{Message}->{de}->{ContentType} = 'text/plain';
             $NotificationEvent->{Message}->{de}->{Body}
                 = 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
 
@@ -139,11 +135,6 @@ Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
 
 -- <OTRS_CONFIG_NotificationSenderName>';
-
-            $NotificationEvent->{Message}->{de}->{Body} = $HTMLUtilsObject->ToHTML(
-                String             => $NotificationEvent->{Message}->{de}->{Body},
-                ReplaceDoubleSpace => 0,
-            );
         }
 
         my $NotificationEventUpdated = $NotificationEventObject->NotificationUpdate(
@@ -153,6 +144,7 @@ Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
         next NOTIFICATIONEVENTID if $NotificationEventUpdated;
 
         print "    Error updating notification event with ID $NotificationEventID.\n";
+        return;
     }
 
     return 1;

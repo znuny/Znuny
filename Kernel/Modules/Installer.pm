@@ -235,7 +235,6 @@ sub Run {
             Data       => \%Databases,
             Name       => 'DBType',
             Class      => 'Modernize',
-            Size       => scalar keys %Databases,
             SelectedID => 'mysql',
         );
 
@@ -1197,11 +1196,26 @@ sub ConnectToDB {
 sub CheckDBRequirements {
     my ( $Self, %Param ) = @_;
 
-    my %Result = $Self->ConnectToDB(
+    my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    my %Result;
+
+    # Check if the correct database version is installed.
+    my %VersionInfos = $DBObject->CheckRequiredDatabaseVersion();
+
+    if ( $VersionInfos{RequirementsPassed} != 1 ) {
+        $Result{Successful} = 0;
+        $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
+            "Error: You have the wrong database version installed (%s). You need at least version %s! ",
+            $VersionInfos{VersionString}, $VersionInfos{MinimumVersion}
+        );
+        return %Result;
+    }
+
+    %Result = $Self->ConnectToDB(
         %Param,
     );
-
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # If mysql, check some more values.
     if ( $Param{DBType} eq 'mysql' && $Result{Successful} == 1 ) {
@@ -1252,6 +1266,14 @@ sub CheckDBRequirements {
                     'https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html',
                 );
             }
+        }
+        else {
+            $Result{Successful} = 0;
+            $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
+                "Wrong default storage engine (%s is %s, but it needs to be InnoDB).",
+                'default_storage_engine',
+                $DefaultStorageEngine,
+            );
         }
 
         # Check character_set_database value.

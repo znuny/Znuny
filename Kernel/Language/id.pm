@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.608824987605355;
+    $Self->{Completeness}        = 0.605124835742444;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1544,9 +1544,11 @@ sub Data {
         'Date' => 'Tanggal',
         'List of Files' => 'Daftar arsip',
         'Permission' => 'Izin',
+        'Size' => 'Ukuran',
+        'Problem' => 'Masalah',
+        'OK' => 'Oke',
         'Download file from package!' => 'Muat turun arsin dari paket',
         'Required' => 'Diwajibkan',
-        'Size' => 'Ukuran',
         'Primary Key' => '',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -1746,6 +1748,8 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Do you really want to delete this Activity?' => 'Apakah anda ingin menghapus aktivitas?',
         'Do you really want to delete this Activity Dialog?' => 'Apakah anda ingin menghapus aktivitas dialog?',
         'Do you really want to delete this Transition?' => 'Apakah anda ingin menghapus transisi ini?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Apakah anda ingin menghapus aksi transisi ini?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Apakah anda benar-benar ingin menghapus kegiatan ini dari kanvas? Ini hanya bisa dibatalkan dengan meninggalkan layar tanpa menyimpan.',
@@ -2514,7 +2518,6 @@ bin/znuny.Daemon.pl status\').',
         'Split' => 'Pisah',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => '',
         'Statistics Management' => '',
         'Add Statistics' => '',
         'Dynamic Matrix' => 'Matrik dinamis',
@@ -2614,6 +2617,9 @@ bin/znuny.Daemon.pl status\').',
         'Link together' => 'Menyambungkan semua',
         'Link to parent' => 'Menyambungkan ke parent',
         'Unlock tickets' => 'Membuka tiket',
+        'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Menghasilkan Dukungan Bundle',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -2717,8 +2723,8 @@ bin/znuny.Daemon.pl status\').',
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Pengirim',
+        'Customer User Name' => '',
         'Impact' => 'Dampak',
-        'CustomerID' => 'ID Pelanggan',
         'Update Time' => 'Memperbaru waktu',
         'Solution Time' => 'Solusi waktu',
         'First Response Time' => 'Waktu respon yang pertama',
@@ -2730,6 +2736,7 @@ bin/znuny.Daemon.pl status\').',
         'Remove active filters for this screen.' => 'Membuang filter yang aktif untuk skrin ini',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Hapus dari daftar tiket yang diamati',
         'Tickets per page' => 'Tiket per halaman',
         'Filter assigned fields' => '',
 
@@ -2843,7 +2850,6 @@ bin/znuny.Daemon.pl status\').',
         'Close this message' => 'Tutup pesan ini',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => 'Tidak diketahui',
         'View' => 'Lihat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2858,7 +2864,6 @@ bin/znuny.Daemon.pl status\').',
         'is invalid' => '',
         'Pending till' => 'Ditunda hingga',
         'Locked' => 'Dikunci',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Waktu dicatat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2894,8 +2899,8 @@ bin/znuny.Daemon.pl status\').',
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Error',
         'An Error Occurred' => 'Terjadi kesalahan',
-        'Error Details' => 'Rincian eror',
         'Traceback' => 'Melacak kembali',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2934,6 +2939,7 @@ bin/znuny.Daemon.pl status\').',
         'Request New Password' => 'Meminta kata sandi baru',
         'Your User Name' => 'Nama pengguna anda',
         'A new password will be sent to your email address.' => 'Kata sandi baru anda akan dihantar ke email anda',
+        'Back to login' => 'Kembali ke dalam login',
         'Create Account' => 'Menciptakan akun',
         'Please fill out this form to receive login credentials.' => 'Silahkan isi formulir ini untuk menerima surat kepercayaan',
         'How we should address you' => 'Bagaimana kami mengalamatkan anda',
@@ -2960,6 +2966,7 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'Contoh : 10*5155 atau 105658*',
+        'CustomerID' => 'ID Pelanggan',
         'Types' => 'Jenis',
         'Limitation' => '',
         'No time settings' => 'Tidak ada pengaturan waktu',
@@ -2997,6 +3004,7 @@ bin/znuny.Daemon.pl status\').',
         'Ticket fields' => 'Dasar tiket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Rincian eror',
         'Expand' => 'Perluas',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3072,7 +3080,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Selesai',
-        'Error' => 'Error',
         'Database setup successful!' => 'Berhasil menyediakan database!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3142,7 +3149,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Kehilangan kata sandi anda?',
-        'Back to login' => 'Kembali ke dalam login',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'konten skala pratinjau ',
@@ -3338,8 +3344,6 @@ bin/znuny.Daemon.pl status\').',
         'Enable' => '',
         'Reset this setting to its default state' => '',
         'Reset setting' => '',
-        'Show user specific changes for this setting' => '',
-        'Show user settings' => '',
         'Copy a direct link to this setting to your clipboard' => '',
         'Copy direct link' => '',
         'Remove this setting from your favorites setting' => '',
@@ -3421,6 +3425,7 @@ bin/znuny.Daemon.pl status\').',
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Selesai',
+        'Unknown' => 'Tidak diketahui',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -3855,7 +3860,6 @@ bin/znuny.Daemon.pl status\').',
         'No such file %s in package!' => 'Tidak ada file seperti %s dalam paket',
         'No such file %s in local file system!' => 'Tidak ada jenis file %s di dalam file sistem lokal!',
         'Can\'t read %s!' => 'Tidak bisa dibaca %s!',
-        'File is OK' => '',
         'Package has locally modified files.' => 'Paket telah diubah secara lokal',
         'Not Started' => '',
         'Updated' => '',
@@ -4148,7 +4152,6 @@ bin/znuny.Daemon.pl status\').',
         'Can\'t get element data of %s!' => 'Tidak bisa mendapatkan data unsur %s!',
         'Can\'t get filter content data of %s!' => 'Tidak bisa mendapatkan data filter konten dari %s!',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Perlu sumber objek dan sumber kunci!',
@@ -4476,10 +4479,14 @@ bin/znuny.Daemon.pl status\').',
             'Tidak dapat terhubung ke database, Perl modul DBD ::%s tidak terpasang!',
         'Can\'t connect to database, read comment!' => 'Tidak dapat terhubung ke database, membaca komentar!',
         'Database already contains data - it should be empty!' => 'Database telah terisi data - database seharusnya kosong!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Kesalahan: Pastikan database Anda menerima paket lebih dari %s MB (itu saat ini hanya menerima paket sampai %s MB). Silahkan menyesuaikan pengaturan max_allowed_packet dari database Anda untuk menghindari kesalahan.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Kesalahan: Silakan menetapkan nilai untuk innodb_log_file_size pada database Anda untuk setidaknya%s MB (saat ini: %s MB, direkomendasikan: %s MB). Untuk informasi lebih lanjut, silakan lihat di %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 
@@ -4531,6 +4538,10 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Cetak artikel ini',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Tandai',
@@ -4789,7 +4800,6 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Berhenti amati',
-        'Remove from list of watched tickets' => 'Hapus dari daftar tiket yang diamati',
         'Watch' => 'amati',
         'Add to list of watched tickets' => 'Tambahkan kepada daftar tiket yangdi amati',
 
@@ -5333,10 +5343,6 @@ bin/znuny.Daemon.pl status\').',
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Pengguna bersamaan',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'Oke',
-        'Problem' => 'Masalah',
-
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
         'Setting %s is not locked to this user!' => '',
@@ -5582,11 +5588,23 @@ bin/znuny.Daemon.pl status\').',
         'The headline shown in the customer interface.' => 'judul menunjukkan dalam antarmuka pelanggan.',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Logo dalam header dari antarmuka pelanggan. URL untuk gambar bisa menjadi URL relatif ke direktori image kulit, atau URL lengkap ke web server jauh.',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Logo dalam header dari antarmuka agen. URL untuk gambar bisa menjadi URL relatif ke direktori image kulit, atau URL lengkap ke web server jauh.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Logo dalam header dari antarmuka agen untuk kulit "default". Lihat "Agen Logo" untuk deskripsi lebih lanjut.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
+            '',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Mendefinisikan path basis URL ikon, CSS dan Java Script.',
         'Defines the URL image path of icons for navigation.' => 'Mendefinisikan path gambar URL ikon untuk navigasi.',
@@ -5633,6 +5651,7 @@ bin/znuny.Daemon.pl status\').',
             'Membuat aplikasi untuk memeriksa catatan MX alamat email sebelum mengirim email   telepon atau email tiket.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Mendefinisikan alamat dari server DNS yang berdedikasi, jika perlu, untuk "Periksa MX Record" pencarian.',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => 'Membuat aplikasi memeriksa catatan MX alamat email sebelum mengirim email untuk mengirimkan telepon atau email tiket.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Mendefinisikan ekspresi reguler yang mengecualikan beberapa alamat dari cek sintaks (jika "CheckEmailAddresses" diatur ke "Ya"). Masukkan regex di bidang ini untuk alamat email, yang tidak sintaksis valid, tetapi diperlukan untuk sistem (yaitu "root @ localhost").',
@@ -6504,6 +6523,13 @@ bin/znuny.Daemon.pl status\').',
             'Mendefinisikan jika pra-pemilahan berdasarkan prioritas harus dilakukan dalam tampilan layanan.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Mendefinisikan urutan default untuk semua layanan dalam tampilan layanan, setelah  prioritas.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Mengaktifkan akuntansi waktu.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Mengatur unit waktu prefered (misalnya unit kerja, jam, menit).',
@@ -7852,6 +7878,29 @@ bin/znuny.Daemon.pl status\').',
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
+        'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak valid sementara',
@@ -8545,6 +8594,10 @@ Helpdesk Team Anda
         'Configure and manage ACLs.' => 'Konfigurasi dan mengatus ACLs',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Konfigurasi yang layar harus ditampilkan setelah tiket baru telah dibuat.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'Membuat tiket proses Baru.',
         'Create Process Ticket' => '',
         'Create Ticket' => '',
@@ -8742,6 +8795,8 @@ Helpdesk Team Anda
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'Nama Pertama Nama Akhir',
         'Lastname Firstname (UserLogin)' => 'Nama Akhir Nama Pertama (Pengguna masuk)',
         'Lastname, Firstname' => 'Nama akhir, nama pertama',
@@ -8789,6 +8844,8 @@ Helpdesk Team Anda
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Tandai sebagai Spam!',
         'Mark this ticket as junk!' => 'Tandai tiket ini sebagai sampah!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Medium',
@@ -8895,6 +8952,8 @@ Helpdesk Team Anda
         'Russian' => 'Rusia',
         'S/MIME Certificates' => 'Sertifikat S/MIME',
         'Schedule a maintenance period.' => 'Jadwalkan masa pemeliharaan.',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Layar setelah tiket baru',
         'Search Customer' => 'Cari Pelanggan',
         'Search Ticket.' => 'Cari Tiket.',
@@ -9231,6 +9290,7 @@ Helpdesk Team Anda
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

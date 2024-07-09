@@ -213,6 +213,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::DatabaseCharsetCheck',
         },
         {
+            Message => 'Check database default storage engine',
+            Module  => 'scripts::Migration::Base::DatabaseDefaultStorageEngineCheck',
+        },
+        {
             Message => 'Check required Perl modules',
             Module  => 'scripts::Migration::Base::PerlModulesCheck',
         },
@@ -247,6 +251,10 @@ sub _TasksGet {
         {
             Message => 'Integrate Znuny-NoteToLinkedTicket',
             Module  => 'scripts::Migration::Znuny::IntegrateZnunyNoteToLinkedTicket',
+        },
+        {
+            Message => 'Integrate Znuny-MarkTicketSeenUnseen',
+            Module  => 'scripts::Migration::Znuny::IntegrateZnunyMarkTicketSeenUnseen',
         },
         {
             Message => 'Migrate groups',

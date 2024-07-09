@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.438770451165097;
+    $Self->{Completeness}        = 0.435939553219448;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1545,9 +1545,11 @@ sub Data {
         'Date' => 'Дата',
         'List of Files' => 'Список файлів',
         'Permission' => 'Права доступу',
+        'Size' => 'Розмір',
+        'Problem' => '',
+        'OK' => '',
         'Download file from package!' => 'Завантажити файл із пакета!',
         'Required' => ' Потрібно',
-        'Size' => 'Розмір',
         'Primary Key' => 'Первинний ключ',
         'Auto Increment' => 'Автоматичний приріст',
         'SQL' => 'SQL',
@@ -1746,6 +1748,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Ви насправді хочете вилучити цю Активність?',
         'Do you really want to delete this Activity Dialog?' => 'Ви насправді хочете вилучити цей Діалог Активності?',
         'Do you really want to delete this Transition?' => 'Ви насправді хочете вилучити цей Перехід?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Ви насправді хочете вилучити цю Дію Переходу?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Ви дійсно хочете вилучити цю активність з цього полотна? Це може бути скасовано лише шляхом виходу з цього екрану без збереження. ',
@@ -2513,7 +2517,6 @@ sub Data {
         'Split' => 'Розділити',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => '',
         'Statistics Management' => '',
         'Add Statistics' => '',
         'Dynamic Matrix' => 'Динамічна Матриця',
@@ -2613,6 +2616,9 @@ sub Data {
         'Link together' => 'Зв\'язати',
         'Link to parent' => 'Зв\'язати з батьком',
         'Unlock tickets' => 'Розблокувати квитки',
+        'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Виконати Масову Дію',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -2716,8 +2722,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Відправник',
+        'Customer User Name' => '',
         'Impact' => '',
-        'CustomerID' => 'ID клієнта',
         'Update Time' => 'Час до зміни заявки',
         'Solution Time' => 'Час розв\'язку заявки',
         'First Response Time' => 'Час до першої відповіді',
@@ -2729,6 +2735,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Скасувати чинні фільтри на цьому екрані.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Вилучити зі списку спостережуваних заявок',
         'Tickets per page' => 'Квитків на сторінку.',
         'Filter assigned fields' => '',
 
@@ -2842,7 +2849,6 @@ sub Data {
         'Close this message' => 'Закрити це повідомлення',
         'Image' => '',
         'PDF' => '',
-        'Unknown' => '',
         'View' => 'Перегляд',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2857,7 +2863,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'В очікуванні до',
         'Locked' => 'Блокування',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Витрачене на заявку час',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2893,8 +2898,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Помилка',
         'An Error Occurred' => 'Виникла Помилка',
-        'Error Details' => 'Деталі помилки',
         'Traceback' => 'Відстеження',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2933,6 +2938,7 @@ sub Data {
         'Request New Password' => 'Вислати новий пароль',
         'Your User Name' => 'Логін',
         'A new password will be sent to your email address.' => 'Новий пароль буде надісланий до вашої електронної скриньки.',
+        'Back to login' => 'Повернутися',
         'Create Account' => 'Створити обліковий запис',
         'Please fill out this form to receive login credentials.' => 'Будь ласка, заповніть поля цієї форми щоб отримати реєстраційні дані.',
         'How we should address you' => 'Як ми можемо звертатися до Вас',
@@ -2959,6 +2965,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Параметри',
         'e. g. 10*5155 or 105658*' => 'наприклад, 10*5155 або 105658*',
+        'CustomerID' => 'ID клієнта',
         'Types' => 'Типи',
         'Limitation' => '',
         'No time settings' => 'Немає налаштувань часу',
@@ -2996,6 +3003,7 @@ sub Data {
         'Ticket fields' => 'Поля квитка',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Деталі помилки',
         'Expand' => 'Розгорнути',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3071,7 +3079,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Готово',
-        'Error' => 'Помилка',
         'Database setup successful!' => 'Базу даних успішно налаштовано!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3141,7 +3148,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Забули свій пароль',
-        'Back to login' => 'Повернутися',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Масштабувати перегляд вмісту',
@@ -3337,8 +3343,6 @@ sub Data {
         'Enable' => '',
         'Reset this setting to its default state' => '',
         'Reset setting' => '',
-        'Show user specific changes for this setting' => '',
-        'Show user settings' => '',
         'Copy a direct link to this setting to your clipboard' => '',
         'Copy direct link' => '',
         'Remove this setting from your favorites setting' => '',
@@ -3420,6 +3424,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Закінчено',
+        'Unknown' => '',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -3854,7 +3859,6 @@ sub Data {
         'No such file %s in package!' => 'Немає файлу %s в пакунку!',
         'No such file %s in local file system!' => 'Немає файлу %s в локальній файловій системі!',
         'Can\'t read %s!' => 'Неможливо прочитати %s!',
-        'File is OK' => 'Файл в нормі',
         'Package has locally modified files.' => 'Пакунок має локально змінені файли.',
         'Not Started' => '',
         'Updated' => '',
@@ -4147,7 +4151,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Не можу отримати елемент даних %s!',
         'Can\'t get filter content data of %s!' => 'Неможливо отримати дані вмісту фільтру для %s!',
         'Customer Name' => 'Ім\'я Клієнта',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Потрібні SourceObject та SourceKey!',
@@ -4475,10 +4478,14 @@ sub Data {
             'Неможливо під\'єднатися до бази даних, не встановлено Perl-модуль DBD::%s!',
         'Can\'t connect to database, read comment!' => 'Неможливо під\'єднатися до бази даних, читай коментар!',
         'Database already contains data - it should be empty!' => 'База даних уже містить дані — вона має бути пуста!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Помилка: Будь ласка, переконайтеся в тому. що ваша база даних приймає пакунки розміром завбільшки %s МБ (в даний час приймаються пакунки за розміром до %s МБ). Будь ласка адаптуйте установку max_allowed_packet вашої бази даних, щоб уникнути помилок.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Помилка: Будь ласка, встановіть значення для innodb_log_file_size вашої бази даних, принаймні %s МБ (зараз: %s МБ, рекомендовано: %s МБ). Для отримання додаткової інформації, будь ласка, перегляньте %s.',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 
@@ -4530,6 +4537,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Роздрукувати це повідомлення',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Позначити',
@@ -4788,7 +4799,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Перестати спостерігати',
-        'Remove from list of watched tickets' => 'Вилучити зі списку спостережуваних заявок',
         'Watch' => 'Спостерігати',
         'Add to list of watched tickets' => 'Додати до списку спостережуваних заявок',
 
@@ -5332,10 +5342,6 @@ sub Data {
         'Concurrent Users Details' => '',
         'Concurrent Users' => '',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => '',
-        'Problem' => '',
-
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
         'Setting %s is not locked to this user!' => '',
@@ -5581,11 +5587,23 @@ sub Data {
         'The headline shown in the customer interface.' => '',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
+            '',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => '',
         'Defines the URL image path of icons for navigation.' => '',
@@ -5632,6 +5650,7 @@ sub Data {
             '',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             '',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => '',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             '',
@@ -6502,6 +6521,13 @@ sub Data {
         'Defines if a pre-sorting by priority should be done in the service view.' =>
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
+            '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             '',
         'Activates time accounting.' => '',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -7850,6 +7876,29 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
+        'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'тимчасово недійсний',
@@ -8532,6 +8581,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => '',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Налаштуйте, який екран ви будете бачити після створення нової заявки',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => '',
         'Create Process Ticket' => '',
         'Create Ticket' => '',
@@ -8729,6 +8782,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => '',
         'Lastname Firstname (UserLogin)' => '',
         'Lastname, Firstname' => '',
@@ -8776,6 +8831,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Позначити як спам!',
         'Mark this ticket as junk!' => '',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Середній',
@@ -8882,6 +8939,8 @@ Thanks for your help!
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME-сертифікати',
         'Schedule a maintenance period.' => '',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Розділ після створення нової заявки',
         'Search Customer' => 'Шукати клієнта',
         'Search Ticket.' => '',
@@ -9218,6 +9277,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.687654933068914;
+    $Self->{Completeness}        = 0.682654402102497;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1550,9 +1550,11 @@ sub Data {
         'Date' => '日付',
         'List of Files' => 'ファイル一覧',
         'Permission' => '権限',
+        'Size' => 'サイズ',
+        'Problem' => '問題',
+        'OK' => 'OK',
         'Download file from package!' => 'パッケージからファイルをダウンロードしてください。',
         'Required' => '必要項目',
-        'Size' => 'サイズ',
         'Primary Key' => '主キー',
         'Auto Increment' => '自動カウントアップ',
         'SQL' => 'SQL',
@@ -1751,6 +1753,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'このアクティビティを本当に削除しますか？',
         'Do you really want to delete this Activity Dialog?' => 'このアクティビティダイアログを本当に削除しますか？',
         'Do you really want to delete this Transition?' => 'この遷移を本当に削除しますか？',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'この遷移動作を本当に削除しますか？',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '本当にこのアクティビティをキャンバス上から削除してもよろしいですか？保存せずにこの画面から移動する場合を除いてこの操作の取り消しはできません。',
@@ -2518,7 +2522,6 @@ sub Data {
         'Split' => '分割',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => 'Znunyのレポートについて詳細を読む',
         'Statistics Management' => 'レポート管理',
         'Add Statistics' => 'レポートを追加',
         'Dynamic Matrix' => '集計',
@@ -2618,6 +2621,9 @@ sub Data {
         'Link together' => '一緒にリンク',
         'Link to parent' => '親へリンク',
         'Unlock tickets' => 'チケットのロック解除',
+        'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => '一括処理を実行',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -2721,8 +2727,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => '送信者',
+        'Customer User Name' => '顧客ユーザー名',
         'Impact' => '影響度',
-        'CustomerID' => '顧客ID',
         'Update Time' => '更新期限',
         'Solution Time' => '解決期限',
         'First Response Time' => '初回応答期限',
@@ -2734,6 +2740,7 @@ sub Data {
         'Remove active filters for this screen.' => 'この画面のアクティブなフィルターを削除します。',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => '監視チケットリストから削除',
         'Tickets per page' => 'ページ毎のチケット数',
         'Filter assigned fields' => '',
 
@@ -2847,7 +2854,6 @@ sub Data {
         'Close this message' => 'このメッセージを閉じる',
         'Image' => '画像',
         'PDF' => 'PDF',
-        'Unknown' => 'アンノウン',
         'View' => 'ビュー',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2862,7 +2868,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => '保留時間',
         'Locked' => 'ロック状態',
-        '%s Ticket(s)' => '%sチケット',
         'Accounted time' => '作業時間',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2898,8 +2903,8 @@ sub Data {
         'From assigned Customer IDs' => '割り当てられた顧客IDから',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'エラー',
         'An Error Occurred' => 'エラーが発生しました。',
-        'Error Details' => 'エラーの詳細',
         'Traceback' => 'トレースバック',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2938,6 +2943,7 @@ sub Data {
         'Request New Password' => '新規パスワードを申請',
         'Your User Name' => 'ユーザー名',
         'A new password will be sent to your email address.' => '登録されたメールアドレスに新しいパスワードを送信します。',
+        'Back to login' => 'ログイン画面に戻る',
         'Create Account' => 'アカウント作成',
         'Please fill out this form to receive login credentials.' => '下記のフォームにログイン時に必要となる事項を入力してください。',
         'How we should address you' => '',
@@ -2964,6 +2970,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'プロファイル',
         'e. g. 10*5155 or 105658*' => '例: 10*5155 または 105658*',
+        'CustomerID' => '顧客ID',
         'Types' => 'タイプ',
         'Limitation' => '',
         'No time settings' => '時間設定なし',
@@ -3001,6 +3008,7 @@ sub Data {
         'Ticket fields' => 'チケット・フィールド',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'エラーの詳細',
         'Expand' => '展開',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3076,7 +3084,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '完了',
-        'Error' => 'エラー',
         'Database setup successful!' => 'データベース　設定成功',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3146,7 +3153,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'パスワードを忘れた方',
-        'Back to login' => 'ログイン画面に戻る',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -3342,8 +3348,6 @@ sub Data {
         'Enable' => '有効',
         'Reset this setting to its default state' => 'この設定をデフォルトのステータスにリセットする',
         'Reset setting' => 'リセット設定',
-        'Show user specific changes for this setting' => 'この設定のユーザー固有の変更を表示する',
-        'Show user settings' => 'ユーザー設定を表示する',
         'Copy a direct link to this setting to your clipboard' => 'この設定への直接リンクをクリップボードにコピーする',
         'Copy direct link' => 'ダイレクトリンクをコピーする',
         'Remove this setting from your favorites setting' => 'この設定をお気に入り設定から削除',
@@ -3425,6 +3429,7 @@ sub Data {
         'Process state' => 'プロセス・ステータス',
         'Running' => '実行中',
         'Finished' => '終了しました',
+        'Unknown' => 'アンノウン',
         'No package information available.' => '利用可能なパッケージ情報はありません。',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -3860,7 +3865,6 @@ sub Data {
         'No such file %s in package!' => 'パッケージ内にファイル %s はありません！',
         'No such file %s in local file system!' => 'ローカルファイルシステム内にファイル %s はありません！',
         'Can\'t read %s!' => '%s を読み込めません！',
-        'File is OK' => 'ファイルは正常です',
         'Package has locally modified files.' => 'パッケージにはローカルに変更されたファイルがあります。',
         'Not Started' => '始まっていない',
         'Updated' => '更新しました',
@@ -4153,7 +4157,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '顧客名',
-        'Customer User Name' => '顧客ユーザー名',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'ソース・オブジェクトとソース・キーが必要です！',
@@ -4481,10 +4484,14 @@ sub Data {
             'Perlモジュール DBD::%sがインストールされていないため、DBに接続できませんでした。',
         'Can\'t connect to database, read comment!' => 'データベースに接続できません、コメントを読んで下さい！',
         'Database already contains data - it should be empty!' => '既にデータベースにデータが含まれている場合、空にしなければなりません。',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'innodb_log_file_sizeの設定を少なくとも%s MB以上にしてください(現在: %s MB, 推奨: %s MB)。詳細は%sを参照して下さい。',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 
@@ -4536,6 +4543,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'この記事を印刷',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'マーク',
@@ -4794,7 +4805,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => '監視解除',
-        'Remove from list of watched tickets' => '監視チケットリストから削除',
         'Watch' => '監視',
         'Add to list of watched tickets' => '監視チケットリストに追加',
 
@@ -5338,10 +5348,6 @@ sub Data {
         'Concurrent Users Details' => '同時接続ユーザー詳細',
         'Concurrent Users' => '同時実行ユーザー',
 
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => 'OK',
-        'Problem' => '問題',
-
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '設定 %s は存在しません！',
         'Setting %s is not locked to this user!' => 'Setting %s is not locked to this user!',
@@ -5587,11 +5593,23 @@ sub Data {
         'The headline shown in the customer interface.' => '顧客インターフェイスの見出し',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '顧客画面のヘッダ部分に表示するロゴを設定します。画像の',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'スキン"デフォルト"時に担当者インターフェイスで表示されるロゴ。詳細は"AgentLogo"を参照してください。',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
+            '',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'アイコン、CSS、Java ScriptのURLベースのパスを定義します。',
         'Defines the URL image path of icons for navigation.' => 'ナビゲーションのためのアイコンのURLイメージ・パスを定義します。',
@@ -5638,6 +5656,7 @@ sub Data {
             'Eメールの送信または電話/Eメール・チケットの提出の前に、アプリケーションにEメール・アドレスのMXレコードをチェックさせるようにします。',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             '必要な場合には"CheckMXRecord"検索のための、専用DNSサーバのアドレスを定義します。',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => 'アプリケーションにEメール・アドレスのシンタクスをチェックさせます。',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             '一部のアドレスをシンタクスのチェックから除外する、通常の表現を定義します（"CheckEmailAddresses"が“Yes”に設定されている場合）。このフィールドに、構文的には有効でないがシステムには必要であるEメールアドレス（例："root@localhost"）に関するregrexを入力してください。',
@@ -6508,6 +6527,13 @@ sub Data {
         'Defines if a pre-sorting by priority should be done in the service view.' =>
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
+            '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             '',
         'Activates time accounting.' => 'タイム・アカウンティングを有効にします。',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -7865,6 +7891,29 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
+        'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '無効-暫定',
@@ -8556,6 +8605,10 @@ Thanks for your help!
         'Configure and manage ACLs.' => 'ACLの設定と管理',
         'Configure which screen should be shown after a new ticket has been created.' =>
             '新規チケットが作成された後に表示する画面を選択してください。',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'プロセスチケットを作成',
         'Create Process Ticket' => '',
         'Create Ticket' => 'チケットを作成',
@@ -8753,6 +8806,8 @@ Thanks for your help!
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => '',
         'Lastname Firstname (UserLogin)' => '',
         'Lastname, Firstname' => '名, 姓',
@@ -8800,6 +8855,8 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '迷惑メールにする',
         'Mark this ticket as junk!' => 'このチケットをジャンクとしてマークします!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => '中',
@@ -8907,6 +8964,8 @@ Thanks for your help!
         'Russian' => 'ロシア語',
         'S/MIME Certificates' => 'S/MIME証明書',
         'Schedule a maintenance period.' => 'メンテナンス期間をスケジュール',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => '新規チケット作成後の画面',
         'Search Customer' => '顧客を検索します。',
         'Search Ticket.' => 'チケットを検索する。',
@@ -9243,6 +9302,7 @@ Thanks for your help!
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

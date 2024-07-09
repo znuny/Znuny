@@ -30,9 +30,11 @@ The following persons contributed to Znuny:
 * Elva Novoa <elva.novoa@otrs.com>
 * Emin Yazi <yazi@efflux.de>
 * Enrique Matías Sánchez (Quique) <cronopios@gmail.com>
+* Falko Saller <2903042+falkos@users.noreply.github.com>
 * Felix Niklas <felix.niklas@otrs.com>
 * Florian Edlhuber <florian.edlhuber@otrs.com>
 * Florian Liebe <florian.liebe@otrs.com>
+* Flávio Marta <7440579+CallMeFlanby@users.noreply.github.com>
 * Friedrich Delgado <friedel@nomaden.org>
 * Gerald Young <gerald.young@noynim.com>
 * Henning Oschwald <henning.oschwald@otrs.com>
@@ -40,6 +42,7 @@ The following persons contributed to Znuny:
 * IB Development Team <dev@ib.pl>
 * Igor Djuric <igor.djuric@otrs.com>
 * Jan Steinweg <jan.steinweg@otrs.com>
+* JannisKleinrensing <71767611+JannisKleinrensing@users.noreply.github.com>
 * Jaroslav Balaz <jaroslav.balaz@otrs.com>
 * Jens Bothe <jens.bothe@otrs.com>
 * Jens Pfeifer <jp@znuny.com>
@@ -108,7 +111,7 @@ The following persons contributed to Znuny:
 * Stefan Rother <stefan.rother@otrs.com>
 * Stefan Wintermeyer <stefan@otrs.org>
 * Steva Stevic <svik@s7designcreative.com>
-* Sławomir Niedbała <sniedbala@dev.opgksoftware.com>
+* Sławomir Niedbała <slawnied1234@gmail.com>
 * Theo van Hoesel <Th.J.v.Hoesel+GitHub@gmail.com>
 * Thomas Raith <thomas.raith@otrs.com>
 * Thomas Wouters <thomas@sijn.org>
@@ -126,6 +129,7 @@ The following persons contributed to Znuny:
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
 * akmet <akmet@users.noreply.github.com>
 * anonymous <unknown@anonymous>
+* arlecchino <kolbma@users.noreply.github.com>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * djurici <igor.djuric@muehlbauer.de>
 * forwwward <hello@forwwward.studio>

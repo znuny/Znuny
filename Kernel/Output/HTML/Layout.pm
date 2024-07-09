@@ -715,11 +715,6 @@ sub Login {
         );
     }
 
-    # add user or global default popup profiles
-    if ( !$Self->{UserPopupProfiles} ) {
-        $Self->{UserPopupProfiles} = $Self->AddPopupProfiles();
-    }
-
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateAgentCSSCalls();
     $Self->LoaderCreateAgentJSCalls();
@@ -781,6 +776,18 @@ sub Login {
 
         $Self->Block(
             Name => 'LoginLogo'
+        );
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Agent',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
         );
     }
 
@@ -1296,6 +1303,11 @@ sub Header {
         );
     }
 
+    # add user or global default popup profiles
+    if ( !$Self->{UserPopupProfiles} ) {
+        $Self->{UserPopupProfiles} = $Self->AddPopupProfiles();
+    }
+
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateAgentCSSCalls();
     $Self->LoaderCreateDynamicCSS();
@@ -1338,6 +1350,18 @@ sub Header {
         $Self->Block(
             Name => 'HeaderLogoCSS',
             Data => \%Data,
+        );
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Agent',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
         );
     }
 
@@ -2727,16 +2751,13 @@ sub Attachment {
 
         # Disallow external and inline scripts, active content, frames, but keep allowing inline styles
         #   as this is a common use case in emails.
-        # Also disallow referrer headers to prevent referrer leaks via old-style policy directive. Please note this has
-        #   been deprecated and will be removed in future OTRS versions in favor of a separate header (see below).
         # img-src:    allow external and inline (data:) images
         # script-src: block all scripts
         # object-src: allow 'self' so that the browser can load plugins for PDF display
         # frame-src:  block all frames
         # style-src:  allow inline styles for nice email display
-        # referrer:   don't send referrers to prevent referrer-leak attacks
         $Output
-            .= "Content-Security-Policy: default-src *; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline'; referrer no-referrer;\n";
+            .= "Content-Security-Policy: default-src *; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline';\n";
 
         # Use Referrer-Policy header to suppress referrer information in modern browsers
         #   (to prevent referrer-leak attacks).
@@ -4069,6 +4090,18 @@ sub CustomerLogin {
         }
     }
 
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Customer',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
+        );
+    }
+
     # show prelogin block, if in prelogin mode (e.g. SSO login)
     if ( defined $Param{'Mode'} && $Param{'Mode'} eq 'PreLogin' ) {
         $Self->Block(
@@ -4353,6 +4386,18 @@ sub CustomerHeader {
                 Data => \%Param,
             );
         }
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Customer',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
+        );
     }
 
     # create & return output
@@ -6615,6 +6660,70 @@ sub _BuildLastViewsOutput {
     );
 
     return $LastViewHTML;
+}
+
+=head2 _GetShortcutIconsForInterface()
+
+Returns the paths to the shortcut icons of the given interface.
+
+    my %ShortcutConfig = $LayoutObject->_GetShortcutIconsForInterface(
+        Interface => 'Agent',    # or Customer
+    );
+
+=cut
+
+sub _GetShortcutIconsForInterface {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Interface)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    if ( $Param{Interface} !~ m{\A(?:Agent|Customer)\z} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'Interface' must be 'Agent' or 'Customer'.",
+        );
+        return;
+    }
+
+    my @ConfigParamNames = (
+        $Param{Interface} . 'ShortcutIcon',
+        $Param{Interface} . 'AppleTouchIcon',
+    );
+
+    my %ShortcutIcons;
+    for my $ConfigParam (@ConfigParamNames) {
+        my $CustomConfigParam = $ConfigParam . 'Custom';
+        my $CustomConfig      = $ConfigObject->Get($CustomConfigParam);
+
+        # check if we need to display a custom shortcut icon for the selected skin
+        if (
+            $Self->{SkinSelected}
+            && IsHashRefWithData($CustomConfig)
+            && $CustomConfig->{ $Self->{SkinSelected} }
+            )
+        {
+            $ShortcutIcons{$ConfigParam} = $CustomConfig->{ $Self->{SkinSelected} };
+        }
+
+        # Otherwise show default shortcut icon, if configured
+        elsif ( defined $ConfigObject->Get($ConfigParam) ) {
+            $ShortcutIcons{$ConfigParam} = $ConfigObject->Get($ConfigParam);
+        }
+    }
+
+    return %ShortcutIcons;
 }
 
 1;

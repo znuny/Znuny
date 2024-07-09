@@ -292,6 +292,78 @@ sub Version {
     return $Version;
 }
 
+=head2 CheckRequiredDatabaseVersion()
+
+Check if the required database version is installed or not.
+
+    my %VersionInfos = $DBObject->CheckRequiredDatabaseVersion();
+
+Returns:
+
+    my %VersionInfos = (
+        'DatabaseType'       => 'MariaDB',
+        'VersionString'      => 'MariaDB 10.6.12',
+        'InstalledVersion'   => '10.6.12',
+        'MinimumVersion'     => '5.0.0',
+        'RequirementsPassed' => 1,
+    );
+
+=cut
+
+sub CheckRequiredDatabaseVersion {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    # Use dotted-decimal version formats, since version->parse() might not work as you expect it to.
+    #
+    #   $Version   version->parse($Version)
+    #   ---------   -----------------------
+    #   1.23        v1.230.0
+    #   "1.23"      v1.230.0
+    #   v1.23       v1.23.0
+    #   "v1.23"     v1.23.0
+    #   "1.2.3"     v1.2.3
+    #   "v1.2.3"    v1.2.3
+    my %MinimumDatabaseVersion = (
+        MySQL      => '8.0.0',
+        MariaDB    => '10.3.0',
+        PostgreSQL => '12.0.0',
+        Oracle     => '19.0.0',
+    );
+
+    my $VersionString = $Self->Version();
+
+    my $DatabaseType;
+    my $DatabaseVersion;
+    if ( $VersionString =~ m{ \A (MySQL|MariaDB|Oracle|PostgreSQL) \s+ ([0-9.]+) \z }xms ) {
+        $DatabaseType    = $1;
+        $DatabaseVersion = $2;
+    }
+
+    if ( !$DatabaseType || !$DatabaseVersion ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Not able to detect database version!',
+        );
+        return;
+    }
+
+    my %Result = (
+        VersionString      => $VersionString,
+        DatabaseType       => $DatabaseType,
+        InstalledVersion   => $DatabaseVersion,
+        MinimumVersion     => $MinimumDatabaseVersion{$DatabaseType},
+        RequirementsPassed => 1,
+    );
+
+    if ( version->parse($DatabaseVersion) < version->parse( $MinimumDatabaseVersion{$DatabaseType} ) ) {
+        $Result{RequirementsPassed} = 0;
+    }
+
+    return %Result;
+}
+
 =head2 Quote()
 
 to quote sql parameters

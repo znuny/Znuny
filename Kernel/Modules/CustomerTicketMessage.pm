@@ -1011,6 +1011,7 @@ sub _MaskNew {
             SelectedID => $Param{ToSelected} || $Param{QueueID},
             TreeView   => $TreeView,
         );
+        $Param{RenderTeamData} = 1;
         $LayoutObject->Block(
             Name => 'Queue',
             Data => {
