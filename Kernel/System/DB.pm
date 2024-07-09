@@ -292,14 +292,15 @@ sub Version {
     return $Version;
 }
 
-=head2 CheckDatabaseMinimumVersion()
+=head2 CheckRequiredDatabaseVersion()
 
 Check if the required database version is installed or not.
 
     my %VersionInfos = $DBObject->CheckRequiredDatabaseVersion();
 
-    returns:
-    %VersionInfos = (
+Returns:
+
+    my %VersionInfos = (
         'DatabaseType'       => 'MariaDB',
         'VersionString'      => 'MariaDB 10.6.12',
         'InstalledVersion'   => '10.6.12',
