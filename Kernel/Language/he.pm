@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.221274541358223;
+    $Self->{Completeness}        = 0.221310156124256;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2802,11 +2802,11 @@ sub Data {
         'Open / Close ticket action menu' => '',
         'Select this ticket' => '',
         'Sender' => 'שולח',
+        'Customer User Name' => '',
         'First Response Time' => 'זמן המענה הראשוני',
         'Update Time' => 'זמן העדכון',
         'Solution Time' => 'זמן הפתרון',
         'Impact' => '',
-        'CustomerID' => 'מספר זיהוי לקוח',
         'Move ticket to a different queue' => 'העבר פניה לתור אחר',
         'Change queue' => 'שנה תור',
 
@@ -2944,7 +2944,6 @@ sub Data {
         'Note: Type is invalid!' => '',
         'Pending till' => 'ממתין עד',
         'Locked' => 'נעולה',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'זמן שחושב',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3051,6 +3050,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'פרופיל',
         'e. g. 10*5155 or 105658*' => 'למשל 10*5155 או 105658*',
+        'CustomerID' => 'מספר זיהוי לקוח',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'סוגים',
         'Time Restrictions' => '',
@@ -4255,7 +4255,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.915352429996781;
+    $Self->{Completeness}        = 0.915338805729921;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2802,11 +2802,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Akcioni meni Otvaranja / Zatvaranja tiketa',
         'Select this ticket' => 'Izaberite ovaj tiket',
         'Sender' => 'Pošiljaoc',
+        'Customer User Name' => 'Naziv klijent korisnika',
         'First Response Time' => 'Vreme prvog odgovora',
         'Update Time' => 'Vreme ažuriranja',
         'Solution Time' => 'Vreme rešavanja',
         'Impact' => 'Uticaj',
-        'CustomerID' => 'ID klijenta',
         'Move ticket to a different queue' => 'Premesti tiket u drugi red',
         'Change queue' => 'Promeni red',
 
@@ -2944,7 +2944,6 @@ sub Data {
         'Note: Type is invalid!' => 'Napomena: tip je nevažeći!',
         'Pending till' => 'Na čekanju do',
         'Locked' => 'Zaključano',
-        '%s Ticket(s)' => '%s tiket(a)',
         'Accounted time' => 'Obračunato vreme',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3051,6 +3050,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'npr. 10*5155 ili 105658*',
+        'CustomerID' => 'ID klijenta',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => 'Tekstualno pretraživanje u tiketima (npr. "John*n" ili "Will*")',
         'Types' => 'Tipovi',
         'Time Restrictions' => 'Vremenska ograničenja',
@@ -4255,7 +4255,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Ne mogu pribaviti podatke elementa za %s!',
         'Can\'t get filter content data of %s!' => 'Ne mogu pribaviti podatke sadržaja filtera za %s!',
         'Customer Name' => 'Naziv klijenta',
-        'Customer User Name' => 'Naziv klijent korisnika',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Neophodni SourceObject i SourceKey!',

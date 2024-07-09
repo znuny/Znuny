@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.509333762471838;
+    $Self->{Completeness}        = 0.509254788347014;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2802,11 +2802,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Open / Sluit ticket actie menu',
         'Select this ticket' => 'Selecteer dit ticket',
         'Sender' => 'Afzender',
+        'Customer User Name' => '',
         'First Response Time' => 'Eerste reactie',
         'Update Time' => 'Vervolg tijd',
         'Solution Time' => 'Oplossingstijd',
         'Impact' => 'Impact',
-        'CustomerID' => 'Klantcode',
         'Move ticket to a different queue' => 'Verplaats naar nieuwe wachtrij',
         'Change queue' => 'Verplaats naar wachtrij',
 
@@ -2944,7 +2944,6 @@ sub Data {
         'Note: Type is invalid!' => 'Let op: Type is ongeldig!',
         'Pending till' => 'In de wacht tot',
         'Locked' => 'Vergrendeling',
-        '%s Ticket(s)' => '%s Ticket(s)',
         'Accounted time' => 'Bestede tijd',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3051,6 +3050,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Sjabloon',
         'e. g. 10*5155 or 105658*' => 'bijv. 2010*5155 of 20100802*',
+        'CustomerID' => 'Klantcode',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Typen',
         'Time Restrictions' => '',
@@ -4255,7 +4255,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Kan element gegevens van %s niet ophalen!',
         'Can\'t get filter content data of %s!' => 'Kan filter gegevens van %s niet ophalen!',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

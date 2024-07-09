@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.185548760862568;
+    $Self->{Completeness}        = 0.185578625462739;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2796,11 +2796,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Otvoriť / Uzatvoriť menu akcíí na tikete',
         'Select this ticket' => 'Vyber tento tiket',
         'Sender' => 'Odosielateľ',
+        'Customer User Name' => '',
         'First Response Time' => 'Čas prvej odozvy',
         'Update Time' => 'Čas aktualizácie',
         'Solution Time' => 'Čas vyriešenia',
         'Impact' => '',
-        'CustomerID' => 'Zákaznícke č.',
         'Move ticket to a different queue' => 'Presunúť tiket do iného radu',
         'Change queue' => 'Zmeniť rad',
 
@@ -2938,7 +2938,6 @@ sub Data {
         'Note: Type is invalid!' => '',
         'Pending till' => 'Odložené do.',
         'Locked' => 'Uzamknutý',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Escalation in',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3045,6 +3044,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'napríklad 10*5155 alebo 105658*',
+        'CustomerID' => 'Zákaznícke č.',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Typy',
         'Time Restrictions' => '',
@@ -4249,7 +4249,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

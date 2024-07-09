@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.919053749597683;
+    $Self->{Completeness}        = 0.919040721068727;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2802,11 +2802,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Jegyművelet menü megnyitása vagy bezárása',
         'Select this ticket' => 'Jegy kijelölése',
         'Sender' => 'Küldő',
+        'Customer User Name' => 'Ügyfél-felhasználó neve',
         'First Response Time' => 'Első válaszidő',
         'Update Time' => 'Frissítés ideje',
         'Solution Time' => 'Megoldás ideje',
         'Impact' => 'Hatás',
-        'CustomerID' => 'Ügyfél-azonosító',
         'Move ticket to a different queue' => 'Jegy áthelyezése egy másik várólistába',
         'Change queue' => 'Várólista módosítása',
 
@@ -2944,7 +2944,6 @@ sub Data {
         'Note: Type is invalid!' => 'Megjegyzés: a típus érvénytelen!',
         'Pending till' => 'Várakozás eddig',
         'Locked' => 'Zárolt',
-        '%s Ticket(s)' => '%s jegy',
         'Accounted time' => 'Elszámolt idő',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3051,6 +3050,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'például 10*5155 vagy 105658*',
+        'CustomerID' => 'Ügyfél-azonosító',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => 'Szabad-szavas keresés a jegyekben (például „Kata*n” vagy „Gerg*”)',
         'Types' => 'Típusok',
         'Time Restrictions' => 'Idő megkötések',
@@ -4255,7 +4255,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Nem lehet lekérni a(z) „%s” elemadatait!',
         'Can\'t get filter content data of %s!' => 'Nem lehet lekérni a(z) „%s” szűrőtartalom-adatait!',
         'Customer Name' => 'Ügyfél neve',
-        'Customer User Name' => 'Ügyfél-felhasználó neve',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Forrásobjektum és forráskulcs szükséges!',

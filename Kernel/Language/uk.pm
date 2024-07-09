@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.456227872545864;
+    $Self->{Completeness}        = 0.456301303718011;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2797,11 +2797,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Відкрити/Закрити меню дій з квитком',
         'Select this ticket' => 'Вибрати цей квиток',
         'Sender' => 'Відправник',
+        'Customer User Name' => '',
         'First Response Time' => 'Час до першої відповіді',
         'Update Time' => 'Час до зміни заявки',
         'Solution Time' => 'Час розв\'язку заявки',
         'Impact' => '',
-        'CustomerID' => 'ID клієнта',
         'Move ticket to a different queue' => 'Перемістити заявку в іншу чергу',
         'Change queue' => 'Перемістити в іншу чергу',
 
@@ -2939,7 +2939,6 @@ sub Data {
         'Note: Type is invalid!' => 'Примітка: Тип недійсний!',
         'Pending till' => 'В очікуванні до',
         'Locked' => 'Блокування',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Витрачене на заявку час',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3046,6 +3045,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Параметри',
         'e. g. 10*5155 or 105658*' => 'наприклад, 10*5155 або 105658*',
+        'CustomerID' => 'ID клієнта',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Типи',
         'Time Restrictions' => '',
@@ -4250,7 +4250,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Не можу отримати елемент даних %s!',
         'Can\'t get filter content data of %s!' => 'Неможливо отримати дані вмісту фільтру для %s!',
         'Customer Name' => 'Ім\'я Клієнта',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Потрібні SourceObject та SourceKey!',

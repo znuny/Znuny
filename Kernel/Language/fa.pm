@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.635178628902478;
+    $Self->{Completeness}        = 0.635280862707227;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2802,11 +2802,11 @@ sub Data {
         'Open / Close ticket action menu' => 'باز / بستن بلیط منوی عمل',
         'Select this ticket' => 'انتخاب این تیکت',
         'Sender' => 'فرستنده',
+        'Customer User Name' => '',
         'First Response Time' => 'زمان اولین پاسخ',
         'Update Time' => 'زمان بروز رسانی',
         'Solution Time' => 'زمان ارائه راهکار',
         'Impact' => 'اثر',
-        'CustomerID' => 'کد اشتراک',
         'Move ticket to a different queue' => 'انتقال درخواست یه صف درخواست دیگر',
         'Change queue' => 'تغییر لیست درخواست',
 
@@ -2944,7 +2944,6 @@ sub Data {
         'Note: Type is invalid!' => 'توجه: نوع نامعتبر است!',
         'Pending till' => 'تا زمانی که',
         'Locked' => 'تحویل گرفته شده',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'زمان محاسبه شده',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3051,6 +3050,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'مشخصات کاربری',
         'e. g. 10*5155 or 105658*' => 'به عنوان مثال 10*5155 یا 105658*',
+        'CustomerID' => 'کد اشتراک',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'انواع',
         'Time Restrictions' => '',
@@ -4255,7 +4255,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'نمی توانید داده های عنصررا بگیرید %s !',
         'Can\'t get filter content data of %s!' => 'نمی توانید داده ها محتوای فیلتر را بگیرید  %s !',
         'Customer Name' => 'نام مشتری',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'نیاز SourceObject و SourceKey!',

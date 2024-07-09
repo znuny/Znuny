@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.311393627293209;
+    $Self->{Completeness}        = 0.311443746982134;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2800,11 +2800,11 @@ sub Data {
         'Open / Close ticket action menu' => '',
         'Select this ticket' => '',
         'Sender' => '發件人',
+        'Customer User Name' => '用戶名',
         'First Response Time' => '第一響應時間',
         'Update Time' => '更新時間',
         'Solution Time' => '解決時間',
         'Impact' => '影響',
-        'CustomerID' => '客戶編號',
         'Move ticket to a different queue' => '將工單轉移到另一個隊列',
         'Change queue' => '更改隊列',
 
@@ -2942,7 +2942,6 @@ sub Data {
         'Note: Type is invalid!' => '',
         'Pending till' => '掛起至',
         'Locked' => '鎖定狀態',
-        '%s Ticket(s)' => '',
         'Accounted time' => '所用時間',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3049,6 +3048,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索條件',
         'e. g. 10*5155 or 105658*' => '例如: 10*5155 或 105658*',
+        'CustomerID' => '客戶編號',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => '類型',
         'Time Restrictions' => '',
@@ -4253,7 +4253,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '客戶名稱',
-        'Customer User Name' => '用戶名',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

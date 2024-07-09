@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.918892822658513;
+    $Self->{Completeness}        = 0.918879768227909;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2803,11 +2803,11 @@ sub Data {
         'Open / Close ticket action menu' => '处理/关闭工单动作的菜单',
         'Select this ticket' => '选择这个工单',
         'Sender' => '发件人',
+        'Customer User Name' => '客户用户姓名',
         'First Response Time' => '首次响应时间',
         'Update Time' => '更新时间',
         'Solution Time' => '解决时间',
         'Impact' => '影响',
-        'CustomerID' => 'CustomerID',
         'Move ticket to a different queue' => '将工单转移到另一个队列',
         'Change queue' => '更改队列',
 
@@ -2945,7 +2945,6 @@ sub Data {
         'Note: Type is invalid!' => '注意：类型无效！',
         'Pending till' => '挂起至',
         'Locked' => '锁定状态',
-        '%s Ticket(s)' => '%s个工单',
         'Accounted time' => '所用工时',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3052,6 +3051,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索条件',
         'e. g. 10*5155 or 105658*' => '例如: 10*5155 或 105658*',
+        'CustomerID' => 'CustomerID',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '对工单进行全文搜索（例如 "John*n" 或 "Will*"）',
         'Types' => '类型',
         'Time Restrictions' => '时间限制',
@@ -4256,7 +4256,6 @@ sub Data {
         'Can\'t get element data of %s!' => '不能获得%s 的元素数据！',
         'Can\'t get filter content data of %s!' => '不能获得%s 的过滤器内容数据！',
         'Customer Name' => '客户名字',
-        'Customer User Name' => '客户用户姓名',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '需要SourceObject（源对象）和SourceKey（源键）！',

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.164145477953009;
+    $Self->{Completeness}        = 0.164171897633993;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2796,11 +2796,11 @@ sub Data {
         'Open / Close ticket action menu' => '',
         'Select this ticket' => '',
         'Sender' => 'Saatja',
+        'Customer User Name' => '',
         'First Response Time' => 'Reaktsiooniaeg',
         'Update Time' => 'Muutmisaeg',
         'Solution Time' => 'Lahendusaeg',
         'Impact' => '',
-        'CustomerID' => 'Kliendi nr.',
         'Move ticket to a different queue' => '',
         'Change queue' => 'Muuda järjekorda',
 
@@ -2938,7 +2938,6 @@ sub Data {
         'Note: Type is invalid!' => '',
         'Pending till' => 'Ootel kuni',
         'Locked' => 'Lukustatud',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Tööaeg',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3045,6 +3044,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profiil',
         'e. g. 10*5155 or 105658*' => '',
+        'CustomerID' => 'Kliendi nr.',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Tüübid',
         'Time Restrictions' => '',
@@ -4249,7 +4249,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

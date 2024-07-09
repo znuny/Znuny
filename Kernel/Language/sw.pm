@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.441905374959768;
+    $Self->{Completeness}        = 0.441976500885241;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2799,11 +2799,11 @@ sub Data {
         'Open / Close ticket action menu' => '',
         'Select this ticket' => 'Chagua tiketi hii',
         'Sender' => 'Mtumaji',
+        'Customer User Name' => '',
         'First Response Time' => 'Muda wa kwanza wa majibu',
         'Update Time' => 'Muda wa kusasisha',
         'Solution Time' => 'Muda wa ufumbuzi',
         'Impact' => 'Madhara',
-        'CustomerID' => 'Kitambilisho cha mteja',
         'Move ticket to a different queue' => 'Hamisha tiketi kwenye foleni nyingine',
         'Change queue' => 'Badili foleni',
 
@@ -2941,7 +2941,6 @@ sub Data {
         'Note: Type is invalid!' => '',
         'Pending till' => 'Inasubiri hadi',
         'Locked' => 'Fungwa',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Muda wa kuhesabu',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3048,6 +3047,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Maelezo mafupi',
         'e. g. 10*5155 or 105658*' => 'Mfano 10*5155 au 105658',
+        'CustomerID' => 'Kitambilisho cha mteja',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Aina',
         'Time Restrictions' => '',
@@ -4252,7 +4252,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

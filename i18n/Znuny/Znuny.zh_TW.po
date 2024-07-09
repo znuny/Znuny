@@ -8534,7 +8534,7 @@ msgstr "搜索條件"
 msgid "e. g. 10*5155 or 105658*"
 msgstr "例如: 10*5155 或 105658*"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "CustomerID"
 msgstr "客戶編號"
 
@@ -11726,7 +11726,7 @@ msgstr ""
 msgid "Customer Name"
 msgstr "客戶名稱"
 
-#. Perl Module: Kernel/Modules/AgentDashboardCommon.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "Customer User Name"
 msgstr "用戶名"
 

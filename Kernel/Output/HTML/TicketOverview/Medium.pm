@@ -11,6 +11,7 @@ package Kernel::Output::HTML::TicketOverview::Medium;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -452,13 +453,11 @@ sub _Show {
         Data => $StandardTemplates{Answer} || {},
     );
 
-    # customer info
-    if ( $Param{Config}->{CustomerInfo} ) {
-        if ( $Article{CustomerUserID} ) {
-            $Article{CustomerName} = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
-                UserLogin => $Article{CustomerUserID},
-            );
-        }
+    # Add CustomerName
+    if ( $Article{CustomerUserID} ) {
+        $Article{CustomerName} = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
+            UserLogin => $Article{CustomerUserID},
+        );
     }
 
     # get ACL restrictions
@@ -1042,37 +1041,51 @@ sub _Show {
         }
     }
 
-    # test access to frontend module for Customer
-    my $Access = $LayoutObject->Permission(
-        Action => 'AgentTicketCustomer',
-        Type   => 'rw',
-    );
-    if ($Access) {
+    if ( defined $Article{CustomerID} ) {
+        $LayoutObject->Block(
+            Name => 'CustomerID',
+            Data => {
+                %Param,
+                %Article,
+            },
+        );
 
-        # test access to ticket
-        my $Config = $ConfigObject->Get('Ticket::Frontend::AgentTicketCustomer');
-        if ( $Config->{Permission} ) {
-            my $OK = $TicketObject->Permission(
-                Type     => $Config->{Permission},
-                TicketID => $Param{TicketID},
-                UserID   => $Self->{UserID},
-                LogNo    => 1,
-            );
-            if ( !$OK ) {
-                $Access = 0;
-            }
-        }
+        my $CICRWAccess = $LayoutObject->Permission(
+            Action => 'AgentCustomerInformationCenter',
+            Type   => 'rw',
+        );
+
+        $LayoutObject->Block(
+            Name => $CICRWAccess ? 'CustomerIDRW' : 'CustomerIDRO',
+            Data => {
+                %Param,
+                %Article,
+            },
+        );
     }
 
-    # define proper tt block based on permissions
-    my $CustomerIDBlock = $Access ? 'CustomerIDRW' : 'CustomerIDRO';
-    $LayoutObject->Block(
-        Name => $CustomerIDBlock,
-        Data => {
-            %Param,
-            %Article,
-        },
-    );
+    if ( defined $Article{CustomerName} ) {
+        $LayoutObject->Block(
+            Name => 'CustomerName',
+            Data => {
+                %Param,
+                %Article,
+            },
+        );
+
+        my $CICRWAccess = $LayoutObject->Permission(
+            Action => 'AgentCustomerUserInformationCenter',
+            Type   => 'rw',
+        );
+
+        $LayoutObject->Block(
+            Name => $CICRWAccess ? 'CustomerNameRW' : 'CustomerNameRO',
+            Data => {
+                %Param,
+                %Article,
+            },
+        );
+    }
 
     my %ActionRowTickets;
 

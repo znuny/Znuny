@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.339716768587061;
+    $Self->{Completeness}        = 0.339771446966039;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2799,11 +2799,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Öppna/stängda ärenden-menyn',
         'Select this ticket' => 'Välj detta ärende',
         'Sender' => 'Avsändare',
+        'Customer User Name' => '',
         'First Response Time' => 'Första Responstid',
         'Update Time' => 'Uppdateringstid',
         'Solution Time' => 'Lösningstid',
         'Impact' => 'Påverkan',
-        'CustomerID' => 'Kund-ID',
         'Move ticket to a different queue' => 'Flytta ärende till en annan kö',
         'Change queue' => 'Ändra kö',
 
@@ -2941,7 +2941,6 @@ sub Data {
         'Note: Type is invalid!' => 'OBS: typen är ogiltig!',
         'Pending till' => 'Väntande tills',
         'Locked' => 'Låst',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Redovisad tid',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3048,6 +3047,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => '',
+        'CustomerID' => 'Kund-ID',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Typer',
         'Time Restrictions' => '',
@@ -4252,7 +4252,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

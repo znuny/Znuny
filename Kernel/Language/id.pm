@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.620856131316382;
+    $Self->{Completeness}        = 0.620956059874457;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2798,11 +2798,11 @@ bin/otrs.Daemon.pl status\').',
         'Open / Close ticket action menu' => 'Buka/tutup menu aksi tiket',
         'Select this ticket' => 'Pilih tiket ini',
         'Sender' => 'Pengirim',
+        'Customer User Name' => '',
         'First Response Time' => 'Waktu respon yang pertama',
         'Update Time' => 'Memperbaru waktu',
         'Solution Time' => 'Solusi waktu',
         'Impact' => 'Dampak',
-        'CustomerID' => 'ID Pelanggan',
         'Move ticket to a different queue' => 'Pindahkan tiket ke queue yang berbeda',
         'Change queue' => 'Ubah queue',
 
@@ -2940,7 +2940,6 @@ bin/otrs.Daemon.pl status\').',
         'Note: Type is invalid!' => 'Pemberitahuan: Tiket tidak sah!',
         'Pending till' => 'Ditunda hingga',
         'Locked' => 'Dikunci',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Waktu dicatat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3047,6 +3046,7 @@ bin/otrs.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'Contoh : 10*5155 atau 105658*',
+        'CustomerID' => 'ID Pelanggan',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Jenis',
         'Time Restrictions' => '',
@@ -4251,7 +4251,6 @@ bin/otrs.Daemon.pl status\').',
         'Can\'t get element data of %s!' => 'Tidak bisa mendapatkan data unsur %s!',
         'Can\'t get filter content data of %s!' => 'Tidak bisa mendapatkan data filter konten dari %s!',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Perlu sumber objek dan sumber kunci!',

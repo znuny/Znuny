@@ -8529,7 +8529,7 @@ msgstr "โปรไฟล์"
 msgid "e. g. 10*5155 or 105658*"
 msgstr "เช่น 10*5155 หรือ 105658*"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "CustomerID"
 msgstr "ไอดีลูกค้า"
 
@@ -11721,7 +11721,7 @@ msgstr "ไม่สามารถรับข้อมูลกรองเน
 msgid "Customer Name"
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AgentDashboardCommon.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "Customer User Name"
 msgstr ""
 

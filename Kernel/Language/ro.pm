@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.297071129707113;
+    $Self->{Completeness}        = 0.297118944149364;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2796,11 +2796,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Deschide/închide meniul pentru acțiuni tichet',
         'Select this ticket' => 'Selectează acest tichet',
         'Sender' => 'Expeditor',
+        'Customer User Name' => '',
         'First Response Time' => 'Timpul primului răspuns',
         'Update Time' => 'Momentul actualizării',
         'Solution Time' => 'Momentul soluționării',
         'Impact' => 'Impact',
-        'CustomerID' => 'IDClient',
         'Move ticket to a different queue' => 'Mută tichetul într-o coadă diferită',
         'Change queue' => 'Schimbă coada',
 
@@ -2938,7 +2938,6 @@ sub Data {
         'Note: Type is invalid!' => 'Notă: tipul este dezactivat!',
         'Pending till' => 'În așteptare până',
         'Locked' => 'Blocat',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Timp contorizat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3045,6 +3044,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => '',
+        'CustomerID' => 'IDClient',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Tipuri',
         'Time Restrictions' => '',
@@ -4249,7 +4249,6 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',

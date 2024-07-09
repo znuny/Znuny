@@ -89,13 +89,30 @@
 [% IF !Data.IsITSMIncidentProblemManagementInstalled %]
                         <td>
 [% RenderBlockStart("CustomerIDRW") %]
-                            <label>[% Translate("Customer ID") | html %]</label>[% IF Data.CustomerID %]<a href="[% Config("CustomerDBLink") | Interpolate %]" class="AsPopup PopupType_TicketAction" [% Config("CustomerDBLinkTarget") %]>[% Data.CustomerID | html %]</a>[% END %]
+                            <label>[% Translate("Customer ID") | html %]</label>
+                            <div title="[% Data.CustomerID | html %]">
+                                <a href="[% Config("CustomerDBLink") | Interpolate %]" class="AsPopup PopupType_TicketAction" [% Config("CustomerDBLinkTarget") %]>[% Data.CustomerID | html %]</a>
+                            </div>
 [% RenderBlockEnd("CustomerIDRW") %]
 [% RenderBlockStart("CustomerIDRO") %]
-                            <label>[% Translate("Customer ID") | html %]</label>[% Data.CustomerID | html %]
+                            <label>[% Translate("Customer ID") | html %]</label>
+                            <div title="[% Data.CustomerID | html %]">[% Data.CustomerID | html %]</div>
 [% RenderBlockEnd("CustomerIDRO") %]
-                            <br /><div title="[% Data.CustomerName | html %]">[% Data.CustomerName | html %]</div>
+
+[% RenderBlockStart("CustomerNameRW") %]
+                            <br>
+                            <label>[% Translate("Customer User Name") | html %]</label>
+                            <div title="[% Data.CustomerName | html %]">
+                                <a href="[% Env("Baselink") %]Action=AgentCustomerUserInformationCenter;CustomerUserID=[% Data.CustomerUserID | uri %]" class="AsPopup PopupType_TicketAction">[% Data.CustomerName | html %]</a>
+                            </div>
+[% RenderBlockEnd("CustomerNameRW") %]
+[% RenderBlockStart("CustomerNameRO") %]
+                            <br>
+                            <label>[% Translate("Customer User Name") | html %]</label>
+                            <div title="[% Data.CustomerName | html %]">[% Data.CustomerName | html %]</div>
+[% RenderBlockEnd("CustomerNameRO") %]
                         </td>
+
 [% END %]
 # example of how to use fixed dynamic field blocks for customizations
 # Note: Field1 is the name of the field and had to be replaced with the actual
@@ -209,12 +226,28 @@
 [% IF Data.IsITSMIncidentProblemManagementInstalled %]
                         <td>
 [% RenderBlockStart("CustomerIDRW") %]
-                            <label>[% Translate("CustomerID") | html %]</label><a href="[% Config("CustomerDBLink") | Interpolate %]" class="AsPopup PopupType_TicketAction" [% Config("CustomerDBLinkTarget") %]>[% Data.CustomerID | html %]</a>
+                            <label>[% Translate("Customer ID") | html %]</label>
+                            <div title="[% Data.CustomerID | html %]">
+                                <a href="[% Config("CustomerDBLink") | Interpolate %]" class="AsPopup PopupType_TicketAction" [% Config("CustomerDBLinkTarget") %]>[% Data.CustomerID | html %]</a>
+                            </div>
 [% RenderBlockEnd("CustomerIDRW") %]
 [% RenderBlockStart("CustomerIDRO") %]
-                            <label>[% Translate("CustomerID") | html %]</label>[% Data.CustomerID | html %]
+                            <label>[% Translate("Customer ID") | html %]</label>
+                            <div title="[% Data.CustomerID | html %]">[% Data.CustomerID | html %]</div>
 [% RenderBlockEnd("CustomerIDRO") %]
-                            <br /><div title="[% Data.CustomerName | html %]">[% Data.CustomerName | html %]</div>
+
+[% RenderBlockStart("CustomerNameRW") %]
+                            <br>
+                            <label>[% Translate("Customer User Name") | html %]</label>
+                            <div title="[% Data.CustomerName | html %]">
+                                <a href="[% Env("Baselink") %]Action=AgentCustomerUserInformationCenter;CustomerUserID=[% Data.CustomerUserID | uri %]" class="AsPopup PopupType_TicketAction">[% Data.CustomerName | html %]</a>
+                            </div>
+[% RenderBlockEnd("CustomerNameRW") %]
+[% RenderBlockStart("CustomerNameRO") %]
+                            <br>
+                            <label>[% Translate("Customer User Name") | html %]</label>
+                            <div title="[% Data.CustomerName | html %]">[% Data.CustomerName | html %]</div>
+[% RenderBlockEnd("CustomerNameRO") %]
                         </td>
 [% END %]
 # example of how to use fixed dynamic field blocks for customizations

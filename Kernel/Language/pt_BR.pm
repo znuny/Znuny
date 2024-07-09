@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.883006115223688;
+    $Self->{Completeness}        = 0.882987284725575;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2801,11 +2801,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Menu de Abrir / Fechar chamado',
         'Select this ticket' => 'Selecionar esse chamado',
         'Sender' => 'Remetente',
+        'Customer User Name' => 'Nome do Usuário Cliente',
         'First Response Time' => 'Prazo de Resposta Inicial',
         'Update Time' => 'Prazo de Atualização',
         'Solution Time' => 'Prazo de Solução',
         'Impact' => 'Impacto',
-        'CustomerID' => 'ID do Cliente',
         'Move ticket to a different queue' => 'Mover Chamado Para Uma Fila Diferente',
         'Change queue' => 'Alterar fila',
 
@@ -2943,7 +2943,6 @@ sub Data {
         'Note: Type is invalid!' => 'Nota: Tipo é inválido!',
         'Pending till' => 'Pendente até',
         'Locked' => 'Bloqueio',
-        '%s Ticket(s)' => '%s Ticket(s)',
         'Accounted time' => 'Tempo Contabilizado',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3050,6 +3049,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Perfil',
         'e. g. 10*5155 or 105658*' => 'ex. 10*5155 ou 105658*',
+        'CustomerID' => 'ID do Cliente',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Tipos',
         'Time Restrictions' => 'Restrições de tempo',
@@ -4254,7 +4254,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Não foi possível obter dados do elemento %s!',
         'Can\'t get filter content data of %s!' => 'Não foi possível obter dados do conteúdo do filtro %s!',
         'Customer Name' => 'Nome do Cliente',
-        'Customer User Name' => 'Nome do Usuário Cliente',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Necessário SourceObject e SourceKey!',

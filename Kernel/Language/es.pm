@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.616832957837142;
+    $Self->{Completeness}        = 0.616932238854016;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2802,11 +2802,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Abrir / Cerrar menu acción ticket',
         'Select this ticket' => 'Seleccionar este ticket',
         'Sender' => 'Remitente',
+        'Customer User Name' => '',
         'First Response Time' => 'Tiempo para primera respuesta',
         'Update Time' => 'Tiempo para actualización',
         'Solution Time' => 'Tiempo para solución',
         'Impact' => 'Impacto',
-        'CustomerID' => 'ID del cliente',
         'Move ticket to a different queue' => 'Mover el ticket a otra cola',
         'Change queue' => 'Cambiar de cola',
 
@@ -2944,7 +2944,6 @@ sub Data {
         'Note: Type is invalid!' => 'Nota: ¡El tipo no es válido!',
         'Pending till' => 'Pendiente hasta',
         'Locked' => 'Bloqueo',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Tiempo contabilizado',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3051,6 +3050,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Perfil',
         'e. g. 10*5155 or 105658*' => 'ej: 10*5155 or 105658*',
+        'CustomerID' => 'ID del cliente',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Tipos',
         'Time Restrictions' => '',
@@ -4255,7 +4255,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'No se pudieron obtener los datos de elementos de %s!',
         'Can\'t get filter content data of %s!' => 'No se pudieron obtener los datos de filtro de contenido de %s!',
         'Customer Name' => 'Nombre del cliente',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Se requiere  Objeto de Fuente y Clave de Fuente!',

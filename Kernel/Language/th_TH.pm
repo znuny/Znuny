@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.538461538461538;
+    $Self->{Completeness}        = 0.538548205375825;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2799,11 +2799,11 @@ sub Data {
         'Open / Close ticket action menu' => 'เปิด/ปิดเมนูตั๋วการดำเนินการ',
         'Select this ticket' => 'เลือกตั๋วนี้',
         'Sender' => 'ผู้ส่ง',
+        'Customer User Name' => '',
         'First Response Time' => 'เวลาตอบสนองครั้งแรก',
         'Update Time' => 'เวลาการอัพเดต',
         'Solution Time' => 'เวลาการแก้ปัญหา',
         'Impact' => 'ผลกระทบ',
-        'CustomerID' => 'ไอดีลูกค้า',
         'Move ticket to a different queue' => 'ย้ายตั๋วไปคิวอื่น',
         'Change queue' => 'เปลี่ยนคิว',
 
@@ -2941,7 +2941,6 @@ sub Data {
         'Note: Type is invalid!' => 'หมายเหตุ: ประเภทไม่ถูกต้อง!',
         'Pending till' => 'รอดำเนินการจนถึง',
         'Locked' => 'ถูกล็อค',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'เวลาที่คิด',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3048,6 +3047,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'โปรไฟล์',
         'e. g. 10*5155 or 105658*' => 'เช่น 10*5155 หรือ 105658*',
+        'CustomerID' => 'ไอดีลูกค้า',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'ประเภท',
         'Time Restrictions' => '',
@@ -4252,7 +4252,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'ไม่สามารถรับองค์ประกอบของข้อมูลของ %s!',
         'Can\'t get filter content data of %s!' => 'ไม่สามารถรับข้อมูลกรองเนื้อหา',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'ต้องการ SourceObject และ SourceKey!',

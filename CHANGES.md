@@ -1,4 +1,5 @@
 # 6.5.10 2024-??-??
+ - 2024-07-08 Improved and fixed links to customer and customer user information center in several widgets and overview pages.
  - 2024-06-20 Fixed output of last mention date in dashboard widget "Last mentions".
 
 # 6.5.9 2024-06-26

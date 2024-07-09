@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.854843900869006;
+    $Self->{Completeness}        = 0.854820537582488;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2808,11 +2808,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Меню действия по заявке - Открыть / Закрыть ',
         'Select this ticket' => 'Выбрать эту заявку',
         'Sender' => 'Отправитель',
+        'Customer User Name' => 'Имя клиента',
         'First Response Time' => 'Время до первого ответа',
         'Update Time' => 'Время до изменения заявки',
         'Solution Time' => 'Время до решения заявки',
         'Impact' => 'Степень влияния',
-        'CustomerID' => 'ID компании',
         'Move ticket to a different queue' => 'Переместить заявку в другую очередь',
         'Change queue' => 'Сменить очередь',
 
@@ -2950,7 +2950,6 @@ sub Data {
         'Note: Type is invalid!' => 'Внимание: Тип недействителен!',
         'Pending till' => 'В ожидании еще',
         'Locked' => 'Блокировка',
-        '%s Ticket(s)' => '%s заявка (ок)',
         'Accounted time' => 'Потраченное на заявку время',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3057,6 +3056,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Параметры',
         'e. g. 10*5155 or 105658*' => 'например, 10*5155 или 105658*',
+        'CustomerID' => 'ID компании',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => 'Полнотекстовый поиск в заявках (например, "Иван*в" или "Петр*")',
         'Types' => 'Типы',
         'Time Restrictions' => 'Временные рамки',
@@ -4261,7 +4261,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Не возможно получить данные элемента %s!',
         'Can\'t get filter content data of %s!' => 'Невозможно отфильтровать данные %s!',
         'Customer Name' => 'Имя клиента',
-        'Customer User Name' => 'Имя клиента',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Требуется SourceObject и SourceKey!',

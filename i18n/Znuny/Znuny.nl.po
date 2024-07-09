@@ -8544,7 +8544,7 @@ msgstr "Sjabloon"
 msgid "e. g. 10*5155 or 105658*"
 msgstr "bijv. 2010*5155 of 20100802*"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "CustomerID"
 msgstr "Klantcode"
 
@@ -11736,7 +11736,7 @@ msgstr "Kan filter gegevens van %s niet ophalen!"
 msgid "Customer Name"
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AgentDashboardCommon.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "Customer User Name"
 msgstr ""
 

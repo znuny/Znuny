@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.618925008046347;
+    $Self->{Completeness}        = 0.619024625784645;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2799,11 +2799,11 @@ sub Data {
         'Open / Close ticket action menu' => 'Open / Close ticket action menu',
         'Select this ticket' => 'Select this ticket',
         'Sender' => 'Sender',
+        'Customer User Name' => '',
         'First Response Time' => 'First Response Time',
         'Update Time' => 'Update Time',
         'Solution Time' => 'Solution Time',
         'Impact' => 'Impact',
-        'CustomerID' => 'CustomerID',
         'Move ticket to a different queue' => 'Move ticket to a different queue',
         'Change queue' => 'Change queue',
 
@@ -2941,7 +2941,6 @@ sub Data {
         'Note: Type is invalid!' => 'Note: Type is invalid!',
         'Pending till' => 'Pending till',
         'Locked' => 'Locked',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Accounted time',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -3048,6 +3047,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profile',
         'e. g. 10*5155 or 105658*' => 'e. g. 10*5155 or 105658*',
+        'CustomerID' => 'CustomerID',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Types',
         'Time Restrictions' => '',
@@ -4252,7 +4252,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Can\'t get element data of %s!',
         'Can\'t get filter content data of %s!' => 'Can\'t get filter content data of %s!',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Need SourceObject and SourceKey!',

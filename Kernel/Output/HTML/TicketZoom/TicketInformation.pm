@@ -13,6 +13,7 @@ use parent 'Kernel::Output::HTML::Base';
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
@@ -81,9 +82,21 @@ sub Run {
         $Self->_AddTimeNeededBlock( \%Ticket, $TimerName, \%AclAction ) if defined $Ticket{$TimerName};
     }
 
-    # show number of tickets with the same customer id if feature is active:
-    if ( $ConfigObject->Get('Ticket::Frontend::ZoomCustomerTickets') ) {
-        if ( $Ticket{CustomerID} ) {
+    if ( $Ticket{CustomerID} ) {
+
+        my $CICRWAccess = $LayoutObject->Permission(
+            Action => 'AgentCustomerInformationCenter',
+            Type   => 'rw',
+        );
+
+        $LayoutObject->Block(
+            Name => $CICRWAccess ? 'CustomerIDRW' : 'CustomerIDRO',
+            Data => \%Ticket,
+        );
+
+        # Show number of open tickets with the same customer id if feature is active:
+        if ( $ConfigObject->Get('Ticket::Frontend::ZoomCustomerTickets') ) {
+
             $Ticket{CustomerIDTickets} = $TicketObject->TicketSearch(
                 CustomerID => $Ticket{CustomerID},
                 Result     => 'COUNT',
