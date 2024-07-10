@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991787122207622;
+    $Self->{Completeness}        = 0.991784423266513;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -643,9 +643,6 @@ sub Data {
         'Query delay' => 'Abfrage-Verzögerung',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
             'Verzögerung (in Millisekunden) bis der AJAX-Request abgeschickt wird.',
-        'Autocompletion for search fields' => 'Autovervollständigung für Suchfelder',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
-            'Autovervollständigung für Suchfelder benutzen statt statischer Auswahl aktuell in Znuny gewählter Werte (in Tickets, Artikeln, etc.). Dies verbessert die Performance, sofern mehrere tausend Werte des dynamischen Felds gewählt wurden. Diese Einstellungen hat keine Auswirkungen auf die Suchfelder, die in AgentTicketSearch und CustomerTicketSearch angezeigt werden.',
         'Input field width' => 'Breite des Eingabefelds',
         'Width of the input field (percentage).' => 'Breite des Eingabefelds (in Prozent).',
         'Additional dynamic field storage' => 'Zusätzliche dynamische Felder befüllen',

@@ -3,6 +3,7 @@
  - 2024-07-05 Improved and fixed links to customer and also customer user information center in several widgets and overview pages. [#558](https://github.com/znuny/Znuny/issues/558)
  - 2024-07-04 Improved rendering of dynamic fields on AdminGenericAgent, AdminNotificationEvent, AdminACL and AdminDynamicFieldScreenConfiguration.
  - 2024-07-02 Updated required minimum database versions. Refactored database version checks and added them to the installer.
+ - 2024-07-01 Fixed autocompletion search for dynamic field types WebserviceDropdown and WebserviceMultiselect in AgentTicketSearch dialog.
  - 2024-06-21 Added functionality to use user fullname for mention label.
  - 2024-06-20 Fixed output of last mention date in dashboard widget "Last mentions".
  - 2024-06-20 Standard templates can now have multiple template types.
