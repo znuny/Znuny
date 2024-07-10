@@ -144,12 +144,16 @@ my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
     AJAXUpdate         => 1,
 );
 
+my ($InputFieldUUID) = $DynamicFieldHTML->{Field} =~ m{data-input-field-uuid="(.+?)"};
+
 $Self->IsDeeply(
     $DynamicFieldHTML,
     {
         'Field' =>
             '<select  data-dynamic-field-name="DynamicFieldWebserviceDriverMultiselect" data-dynamic-field-type="WebserviceMultiselect" data-selected-value-field-name="DynamicField_DynamicFieldWebserviceDriverMultiselect" data-autocomplete-field-name="DynamicField_DynamicFieldWebserviceDriverMultiselect_Search" data-autocomplete-min-length="3" data-query-delay="1" data-default-search-term="" data-ticket-id="'
             . $TicketID
+            . '" data-input-field-uuid="'
+            . $InputFieldUUID
             . '" class="DynamicFieldText Modernize W50pc" id="DynamicField_DynamicFieldWebserviceDriverMultiselect" multiple="multiple" name="DynamicField_DynamicFieldWebserviceDriverMultiselect">
   <option value="">-</option>
   <option value=" "></option>

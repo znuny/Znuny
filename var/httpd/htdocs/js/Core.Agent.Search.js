@@ -59,9 +59,12 @@ Core.Agent.Search = (function (TargetNS) {
      *      This function adds one attributes for search.
      */
     TargetNS.SearchAttributeAdd = function (Attribute) {
-        var $Label = $('#SearchAttributesHidden label#Label' + Attribute);
+        var $Label = $('#SearchAttributesHidden label#Label' + Attribute),
+            InputFieldUUID;
 
         if ($Label.length) {
+            InputFieldUUID = $Label.next().find(':input').attr('data-input-field-uuid');
+
             $Label.prev().clone().appendTo('#SearchInsert');
             $Label.clone().appendTo('#SearchInsert');
             $Label.next().clone().appendTo('#SearchInsert')
@@ -89,6 +92,13 @@ Core.Agent.Search = (function (TargetNS) {
 
             // Initially display dynamic fields with TreeMode = 1 correctly
             Core.UI.TreeSelection.InitDynamicFieldTreeViewRestore();
+
+            if (InputFieldUUID) {
+
+                // Note: Subscriber takes care of determining if this is
+                // really a dynamic field.
+                Core.App.Publish('Event.DynamicField.InitByInputFieldUUID', [InputFieldUUID]);
+            }
         }
 
         return false;
@@ -605,7 +615,6 @@ Core.Agent.Search = (function (TargetNS) {
                     TargetNS.AddSearchAttributes();
                     TargetNS.AdditionalAttributeSelectionRebuild();
                 }, 0);
-
             }, 'html'
         );
     };

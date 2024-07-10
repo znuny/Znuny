@@ -201,11 +201,11 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
             Core.Config.Get('CGIHandle'),
             Data,
             function (Response) {
-
-                var FieldHTML = Response.Label + '<div class="Field" data-id="' + Response.ID + '">' + Response.Field + RemoveButtonHTML + '</div><div class="Clear"></div>';
+                var $Field = $(Response.Label + '<div class="Field" data-id="' + Response.ID + '">' + Response.Field + RemoveButtonHTML + '</div><div class="Clear"></div>'),
+                    InputFieldUUID = $Field.find(':input').attr('data-input-field-uuid');
 
                 // Append field HTML from response to selected fields area.
-                $('#' + SelectedFieldsID).append(FieldHTML);
+                $('#' + SelectedFieldsID).append($Field);
                 TargetNS.InitRemoveButtonEvent($('div.Field[data-id="' + Response.ID + '"]').find('.RemoveButton'), AddFieldsID);
 
                 // Remove the field from add fields dropdown and redraw this dropdown.
@@ -224,7 +224,9 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
                 });
 
                 // Trigger dynamic field event initialization (needed for specific fields from packages).
-                Core.App.Publish('Event.DynamicField.Init', [Response.ID]);
+                if (InputFieldUUID) {
+                    Core.App.Publish('Event.DynamicField.InitByInputFieldUUID', [InputFieldUUID]);
+                }
 
                 return false;
 
