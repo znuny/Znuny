@@ -1,5 +1,6 @@
 # 6.5.10 2024-??-??
  - 2024-07-08 Improved and fixed links to customer and customer user information center in several widgets and overview pages.
+ - 2024-07-08 Invoker Ticket::Generic: Configured fields will now also be removed and encoded from/for given data (payload).
  - 2024-06-20 Fixed output of last mention date in dashboard widget "Last mentions".
  - 2024-02-13 Fixed autocompletion search for dynamic field types WebserviceDropdown and WebserviceMultiselect in AgentTicketSearch dialog.
 
