@@ -1,6 +1,7 @@
 # 7.1.1 2024-??-??
  - 2024-07-09 Added configurable timeout for DNS resolver queries. Thanks to Paweł Bogusławski (@pboguslawski). [#390](https://github.com/znuny/Znuny/pull/390)
  - 2024-07-05 Improved and fixed links to customer and also customer user information center in several widgets and overview pages. [#558](https://github.com/znuny/Znuny/issues/558)
+ - 2024-07-05 Added a foreground option to run the Znuny daemon without detaching. Thanks to Paweł Bogusławski (@pboguslawski). [#399](https://github.com/znuny/Znuny/pull/399)
  - 2024-07-04 Improved rendering of dynamic fields on AdminGenericAgent, AdminNotificationEvent, AdminACL and AdminDynamicFieldScreenConfiguration.
  - 2024-07-02 Updated required minimum database versions. Refactored database version checks and added them to the installer.
  - 2024-07-01 Fixed autocompletion search for dynamic field types WebserviceDropdown and WebserviceMultiselect in AgentTicketSearch dialog.
