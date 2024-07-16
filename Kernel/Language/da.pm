@@ -2035,6 +2035,7 @@ sub Data {
         'Support Data' => '',
         'Error: Support data could not be collected (%s).' => 'Fejl: Supportdata kunne ikke indsamles (%s).',
         'Support Data Collector' => 'Indsamling af support-data',
+        'Delete cache' => '',
         'Details' => 'Detaljer',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2132,7 +2133,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Rettigheder',

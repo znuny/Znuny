@@ -2035,6 +2035,7 @@ sub Data {
         'Support Data' => 'ข้อมูลการสนับสนุน',
         'Error: Support data could not be collected (%s).' => 'ข้อผิดพลาด: ไม่สามารถเก็บรวบรวมข้อมูลสนับสนุน (%s)',
         'Support Data Collector' => 'สนับสนุนการเก็บรวบรวมข้อมูล',
+        'Delete cache' => '',
         'Details' => 'รายละเอียด',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2132,7 +2133,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'การอนุญาต',

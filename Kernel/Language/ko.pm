@@ -2032,6 +2032,7 @@ sub Data {
         'Support Data' => '지원 데이터',
         'Error: Support data could not be collected (%s).' => '오류 : 지원 데이터를 수집 할 수 없습니다 (%s).',
         'Support Data Collector' => '지원 데이터 수집기',
+        'Delete cache' => '',
         'Details' => '세부',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2129,7 +2130,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => '권한',

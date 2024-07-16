@@ -6360,7 +6360,7 @@ msgstr "Einstellung: %s anzeigen"
 msgid "System file support"
 msgstr "Systemdatei-Support"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Delete cache"
 msgstr "Cache löschen"
 

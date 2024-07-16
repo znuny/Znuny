@@ -2032,6 +2032,7 @@ sub Data {
         'Support Data' => 'Data Sokongan',
         'Error: Support data could not be collected (%s).' => 'Ralat: Data sokongan tidak boleh dikumpulkan (%s).',
         'Support Data Collector' => 'Pengumpul Data Sokongan',
+        'Delete cache' => '',
         'Details' => 'Butiran',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2129,7 +2130,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'kebenaran',

@@ -2038,6 +2038,7 @@ sub Data {
         'Support Data' => 'پشتیبانی از داده ها',
         'Error: Support data could not be collected (%s).' => 'خطا: اطلاعات پشتیبانی نمی تواند جمع آوری  شود ( %s ).',
         'Support Data Collector' => 'پشتیبانی از داده های جمع آوری شده',
+        'Delete cache' => '',
         'Details' => 'جزئیات',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2135,7 +2136,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'دسترسی‌ها',

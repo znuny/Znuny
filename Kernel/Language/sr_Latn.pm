@@ -2038,6 +2038,7 @@ sub Data {
         'Support Data' => 'Podaci podrške',
         'Error: Support data could not be collected (%s).' => 'Podržani podaci ne mogu biti prikupljeni (%s).',
         'Support Data Collector' => 'Sakupljač podataka podrške',
+        'Delete cache' => '',
         'Details' => 'Detalji',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2135,7 +2136,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Dozvole',

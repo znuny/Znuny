@@ -2033,6 +2033,7 @@ sub Data {
         'Support Data' => 'Supportdaten',
         'Error: Support data could not be collected (%s).' => 'Fehler: Support-Daten konnten nicht ermittelt werden (%s).',
         'Support Data Collector' => 'Supportdaten-Analyse',
+        'Delete cache' => 'Cache löschen',
         'Details' => 'Details',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2130,7 +2131,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => 'Systemdatei-Support',
-        'Delete cache' => 'Cache löschen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Berechtigungen',

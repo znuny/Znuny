@@ -6358,7 +6358,7 @@ msgstr "단일보기 설정 : %s"
 msgid "System file support"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Delete cache"
 msgstr ""
 

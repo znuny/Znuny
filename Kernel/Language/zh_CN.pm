@@ -2039,6 +2039,7 @@ sub Data {
         'Support Data' => '支持数据',
         'Error: Support data could not be collected (%s).' => '错误：%s 无法收集支持数据。',
         'Support Data Collector' => '支持数据收集工具',
+        'Delete cache' => '',
         'Details' => '详情',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2136,7 +2137,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => '权限',

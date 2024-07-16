@@ -2033,6 +2033,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Support Data' => 'Data pendukung',
         'Error: Support data could not be collected (%s).' => 'Eror: data pendukung tidak dapat dikumpulkan (%s)',
         'Support Data Collector' => 'Pengumpul data pendukung',
+        'Delete cache' => '',
         'Details' => 'Rincian',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2130,7 +2131,6 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Izin',

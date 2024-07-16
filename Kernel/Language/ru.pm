@@ -2044,6 +2044,7 @@ sub Data {
         'Support Data' => 'Данные для поддержки',
         'Error: Support data could not be collected (%s).' => 'Ошибка: данные для поддержки не могут быть собраны (%s).',
         'Support Data Collector' => 'Сбор данных для поддержки',
+        'Delete cache' => '',
         'Details' => 'Подробно',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2141,7 +2142,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Права',

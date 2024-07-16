@@ -2033,6 +2033,7 @@ sub Data {
         'Support Data' => 'Дані підтримки',
         'Error: Support data could not be collected (%s).' => 'Помилка: дані підтримки не можуть бути зібрані (%s).',
         'Support Data Collector' => 'Збір даних підтримки',
+        'Delete cache' => '',
         'Details' => 'Подробиці',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2130,7 +2131,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Права',

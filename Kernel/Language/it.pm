@@ -2041,6 +2041,7 @@ sub Data {
         'Support Data' => 'Dati di supporto',
         'Error: Support data could not be collected (%s).' => 'Errore: i dati di supporto non possono essere collezionati (%s).',
         'Support Data Collector' => 'Collezionatore dati di supporto',
+        'Delete cache' => '',
         'Details' => 'Dettagli',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2138,7 +2139,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Permessi',
