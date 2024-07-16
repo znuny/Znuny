@@ -2,15 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2024-06-29 11:59+0000\n"
-"Last-Translator: Roy Kaldung <rk@znuny.com>\n"
-"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
+"PO-Revision-Date: 2024-07-16 07:37+0000\n"
+"Last-Translator: Marvin Voormann <m.voormann@googlemail.com>\n"
+"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/"
+"de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5.5\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Actions"
@@ -8022,7 +8023,7 @@ msgstr "Sender informieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
 msgid "Need a valid email address."
-msgstr "Benötige gültige E-Mail-Adresse."
+msgstr "Gültige E-Mail-Adresse benötigt."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "Move %s%s%s"
@@ -8066,7 +8067,7 @@ msgstr "Notiz ungültig."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Select all"
-msgstr ""
+msgstr " Alle auswählen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "No ticket data found."
@@ -8074,7 +8075,7 @@ msgstr "Keine Ticket-Daten gefunden."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Open / Close ticket action menu"
-msgstr ""
+msgstr " Öffne / Schließe Ticket Aktionsmenü"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Select this ticket"
@@ -24388,4 +24389,3 @@ msgstr "Bitte beachten Sie, dass Sie für diese Aktion bereits einen oder mehrer
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the timeout (in seconds) for DNS resolver queries."
 msgstr "Steuert den Timeout (in Sekunden) für DNS-Resolver-Anfragen."
-
