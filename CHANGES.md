@@ -1,4 +1,5 @@
 # 6.5.10 2024-??-??
+ - 2024-07-11 Updated Moment.js to 2.30.1 and jQueryUI to 1.13.3.
  - 2024-07-08 Improved and fixed links to customer and customer user information center in several widgets and overview pages.
  - 2024-07-08 Invoker Ticket::Generic: Configured fields will now also be removed and encoded from/for given data (payload).
  - 2024-06-20 Fixed output of last mention date in dashboard widget "Last mentions".
