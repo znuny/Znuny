@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.892211633256655;
+    $Self->{Completeness}        = 0.892065056678167;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3020,6 +3020,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Već ste učitali nacrt "%s". Poslednji put ste ga promenili u %s.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Već ste učitali nacrt "%s". Poslednji put je promenjen u %s od strane %s.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             'Molimo obratite pažnju da je ovaj nacrt zastareo jer je tiket modifikovan od kada je nacrt kreiran.',
 

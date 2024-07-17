@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991784423266513;
+    $Self->{Completeness}        = 0.991785772958765;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3015,6 +3015,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Sie haben den Entwurf "%s" geladen, den Sie zuletzt %s geändert haben.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Sie haben den Entwurf "%s" geladen, der zuletzt %s von %s geändert wurde.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            'Bitte beachten Sie, dass Sie für diese Aktion bereits einen oder mehrere Entwürfe gespeichert haben.',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             'Bitte beachten Sie, dass dieser Entwurf aufgrund zwischenzeitlicher Änderungen am Ticket möglicherweise veraltet ist.',
 

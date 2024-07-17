@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.860828130134735;
+    $Self->{Completeness}        = 0.860686709380647;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3018,6 +3018,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Você carregou o rascunho "%s". Sua última atualização foi em %s.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Você carregou o rascunho "%s". A última alteração foi em %s por %s.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             'Por favor, observer que este rascunho está desatualizado já que o chamado foi alterado desde quando o rascunho foi criado.',
 

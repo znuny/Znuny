@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.682878738087414;
+    $Self->{Completeness}        = 0.682766551667488;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3020,6 +3020,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => '下書き"%s"を読み込んでいます。 あなたは最後に%sを変更しました。',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'ドラフト"%s"を読み込んでいます。 %sによって%sが最後に変更されました。',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             'このドラフトは、このドラフトが作成されてから改訂されたため、古くなっています。',
 

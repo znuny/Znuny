@@ -24377,3 +24377,7 @@ msgstr ""
 msgid "Sets the timeout (in seconds) for DNS resolver queries."
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
+msgid "Please note that you have already one or more saved drafts for this action."
+msgstr ""
+

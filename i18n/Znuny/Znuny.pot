@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-07-09 05:57+0000\n"
+"POT-Creation-Date: 2024-07-17 13:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1885,10 +1885,6 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "Delay (in milliseconds) until the AJAX request will be sent."
 msgstr ""
-
-
-
-
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "Input field width"
@@ -6131,6 +6127,10 @@ msgid "Support Data Collector"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
+msgid "Delete cache"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Details"
 msgstr ""
 
@@ -6360,10 +6360,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
 msgid "System file support"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
-msgid "Delete cache"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
@@ -8908,6 +8904,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
 msgid "You have loaded the draft \"%s\". It was last changed %s by %s."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
+msgid "Please note that you have already one or more saved drafts for this action."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt

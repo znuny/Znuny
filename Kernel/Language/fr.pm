@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.38251725271114;
+    $Self->{Completeness}        = 0.382454411039921;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3023,6 +3023,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Vous avez chargé le brouillon " %s ". Dernière modification : %s.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Vous avez chargé le brouillon " %s ". Dernière modification : %s par %s.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '',
 

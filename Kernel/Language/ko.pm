@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.867236279986855;
+    $Self->{Completeness}        = 0.867093806472811;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -3014,6 +3014,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => '"%s"초안을 로드했습니다. 마지막으로 %s로 변경했습니다.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             '"%s"초안을로드했습니다. 마지막으로%s %s변경되었습니다.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '이 초안이 작성된 이후 티켓이 수정되었기 때문에 이 초안은 구식입니다.',
 

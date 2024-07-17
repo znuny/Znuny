@@ -24381,6 +24381,10 @@ msgstr "Löscht verwaiste Sessions."
 msgid "Error: You have the wrong database version installed (%s). You need at least version %s! "
 msgstr "Fehler: Sie haben eine falsche Datenbankversion installiert (%s). Sie benötigen mindestens Version %s!"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
+msgid "Please note that you have already one or more saved drafts for this action."
+msgstr "Bitte beachten Sie, dass Sie für diese Aktion bereits einen oder mehrere Entwürfe gespeichert haben."
+
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the timeout (in seconds) for DNS resolver queries."
 msgstr "Steuert den Timeout (in Sekunden) für DNS-Resolver-Anfragen."

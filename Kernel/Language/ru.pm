@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.831744988498193;
+    $Self->{Completeness}        = 0.831608345654674;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3026,6 +3026,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Вы загрузили черновик «%s». Последнее раз вы обновляли его %s.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Вы загрузили черновик «%s». Последнее обновление его было %s.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             'Обратите внимание, что черновик устарел, так как заявка была обновлена после его создания.',
 
