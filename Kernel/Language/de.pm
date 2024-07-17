@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991785772958765;
+    $Self->{Completeness}        = 0.992114342040414;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2697,7 +2697,7 @@ sub Data {
         'A valid ticket number is required.' => 'Eine gültige Ticketnummer ist erforderlich.',
         'Limit the search to tickets with same Customer ID (%s).' => 'Suche auf Tickets beschränken, die derselben Kundennummer (%s) zugewiesen sind.',
         'Inform Sender' => 'Sender informieren',
-        'Need a valid email address.' => 'Benötige gültige E-Mail-Adresse.',
+        'Need a valid email address.' => 'Gültige E-Mail-Adresse benötigt.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => '%s%s%s verschieben',
@@ -2714,9 +2714,9 @@ sub Data {
         'NoteToTicket invalid.' => 'Notiz ungültig.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
-        ' Select all' => '',
+        ' Select all' => ' Alle auswählen',
         'No ticket data found.' => 'Keine Ticket-Daten gefunden.',
-        ' Open / Close ticket action menu' => '',
+        ' Open / Close ticket action menu' => ' Öffne / Schließe Ticket Aktionsmenü',
         ' Select this ticket' => '',
         'Sender' => 'Sender',
         'Customer User Name' => 'Kundenbenutzer-Name',
