@@ -2783,7 +2783,7 @@ sub _Mask {
         if (
             IsHashRefWithData($QueueStandardTemplates)
             || ( $Config->{Queue} && %StandardTemplates )
-        )
+            )
         {
             $Param{StandardTemplateStrg} = $LayoutObject->BuildSelection(
                 Data         => $QueueStandardTemplates || {},
