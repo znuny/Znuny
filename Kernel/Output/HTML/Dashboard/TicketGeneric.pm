@@ -2174,6 +2174,7 @@ sub _InitialColumnFilter {
         Class       => $Class . ' Modernize',
         Translation => $TranslationOption,
         SelectedID  => '',
+        TreeView    => 1,
     );
 
     return $ColumnFilterHTML;
@@ -2283,7 +2284,7 @@ sub _ColumnFilterJSON {
     my $Data = [
         {
             Key   => 'DeleteFilter',
-            Value => uc $Label,
+            Value => '-',
         },
         {
             Key      => '-',
