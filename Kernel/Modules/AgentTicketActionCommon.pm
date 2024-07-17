@@ -2781,11 +2781,9 @@ sub _Mask {
         );
 
         if (
-            IsHashRefWithData(
-                $QueueStandardTemplates
-                    || ( $Config->{Queue} && IsHashRefWithData( \%StandardTemplates ) )
-            )
-            )
+            IsHashRefWithData($QueueStandardTemplates)
+            || ( $Config->{Queue} && %StandardTemplates )
+        )
         {
             $Param{StandardTemplateStrg} = $LayoutObject->BuildSelection(
                 Data         => $QueueStandardTemplates || {},
