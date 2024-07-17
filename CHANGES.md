@@ -1,4 +1,5 @@
 # 7.1.1 2024-??-??
+ - 2024-07-17 Removed ArticlePreViewModules from Medium.pm view. No articles are displayed at this point.
  - 2024-07-16 Added filtering and cache deletion to AdminSupportDataCollector.
  - 2024-07-11 Added a start and finish log message to Znuny daemon tasks. Thanks to Paweł Bogusławski (@pboguslawski). [#392](https://github.com/znuny/Znuny/pull/392)
  - 2024-07-11 Fixed ticket list filter selection in agent dashboard and ticket list views.
