@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.992114342040414;
+    $Self->{Completeness}        = 0.992278626581239;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8469,7 +8469,7 @@ Ihr Helpdesk-Team
         'Activation of dynamic fields for screens.' => 'Aktivierung dynamischer Felder für Masken.',
         'Activity LinkTarget' => '',
         'Activity Notification' => '',
-        'Activity.' => '',
+        'Activity.' => 'Aktivität.',
         'ActivityID' => 'ActivityID',
         'Add a note to this ticket' => 'Eine Notiz zu diesem Ticket hinzufügen',
         'Add an inbound phone call to this ticket' => 'Einen eingehenden Anruf zu diesem Ticket hinzufügen',
