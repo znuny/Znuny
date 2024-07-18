@@ -233,24 +233,8 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::RebuildConfig',
         },
         {
-            Message => 'Migrate SysConfig settings',
-            Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
-        },
-        {
             Message => 'Migrate DBCRUD UUID columns',
             Module  => 'scripts::Migration::Znuny::MigrateDBCRUDUUIDColumns',
-        },
-        {
-            Message => 'Migrate dynamic fields',
-            Module  => 'scripts::Migration::Znuny::MigrateDynamicFields',
-        },
-        {
-            Message => 'Migrate notification events',
-            Module  => 'scripts::Migration::Znuny::MigrateNotificationEvents',
-        },
-        {
-            Message => 'Integrate Znuny-NoteToLinkedTicket',
-            Module  => 'scripts::Migration::Znuny::IntegrateZnunyNoteToLinkedTicket',
         },
         {
             Message => 'Integrate Znuny-MarkTicketSeenUnseen',

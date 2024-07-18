@@ -50,11 +50,6 @@ sub Run {
     my @PackageNames = (
         'Znuny-MarkTicketSeenUnseen',
         'Znuny4OTRS-MarkTicketSeenUnseen',
-        'Znuny-NoteToLinkedTicket',
-        'Znuny4OTRS-NoteToLinkedTicket',
-        'Znuny4OTRS-UserMaxArticlesPerPage',
-        'Znuny-DynamicFieldWebserviceTicketIDPayload',
-        'Znuny-RichTextEditorLinkFix',
     );
 
     PACKAGENAME:
