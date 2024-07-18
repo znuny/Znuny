@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2024-07-16 07:37+0000\n"
-"Last-Translator: Marvin Voormann <m.voormann@googlemail.com>\n"
-"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
+"PO-Revision-Date: 2024-07-18 08:59+0000\n"
+"Last-Translator: NotSpecific <dembanacambo@gmail.com>\n"
+"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/"
+"de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21723,7 +21724,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Activity."
-msgstr ""
+msgstr "Aktivität."
 
 #. SysConfig
 msgid "ActivityID"
@@ -24388,4 +24389,3 @@ msgstr "Bitte beachten Sie, dass Sie für diese Aktion bereits einen oder mehrer
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the timeout (in seconds) for DNS resolver queries."
 msgstr "Steuert den Timeout (in Sekunden) für DNS-Resolver-Anfragen."
-
