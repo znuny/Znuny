@@ -13,6 +13,7 @@ package scripts::Migration;    ## no critic
 
 use strict;
 use warnings;
+use utf8;
 
 use Time::HiRes ();
 
@@ -205,18 +206,6 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::PerlVersionCheck',
         },
         {
-            Message => 'Check required database version',
-            Module  => 'scripts::Migration::Base::DatabaseVersionCheck',
-        },
-        {
-            Message => 'Check database charset',
-            Module  => 'scripts::Migration::Base::DatabaseCharsetCheck',
-        },
-        {
-            Message => 'Check database default storage engine',
-            Module  => 'scripts::Migration::Base::DatabaseDefaultStorageEngineCheck',
-        },
-        {
             Message => 'Check required Perl modules',
             Module  => 'scripts::Migration::Base::PerlModulesCheck',
         },
@@ -225,8 +214,24 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::DatabaseBackupCheck',
         },
         {
+            Message => 'Check required database version',
+            Module  => 'scripts::Migration::Base::DatabaseVersionCheck',
+        },
+        {
+            Message => 'Check database default storage engine',
+            Module  => 'scripts::Migration::Base::DatabaseDefaultStorageEngineCheck',
+        },
+        {
             Message => 'Upgrade database structure',
             Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
+        },
+        {
+            Message => 'Migrate database to utf8mb4',
+            Module  => 'scripts::Migration::Znuny::MigrateUTF8MB4',
+        },
+        {
+            Message => 'Check database charset',
+            Module  => 'scripts::Migration::Base::DatabaseCharsetCheck',
         },
         {
             Message => 'Rebuild configuration',

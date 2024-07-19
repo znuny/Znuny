@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.992278626581239;
+    $Self->{Completeness}        = 0.992444152431012;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4483,10 +4483,14 @@ sub Data {
             'Fehler: Bitte stellen Sie sicher, dass Ihre Datenbank Pakete größer als %s MB akzeptiert (derzeit werden nur Pakete bis zu einer Größe von %s MB akzeptiert). Bitte passen Sie die Einstellung max_allowed_packet Ihrer Datenbank an, um Fehler zu vermeiden.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Fehler: Bitte erhöhen Sie den Wert für innodb_log_file_size in Ihrer Datenbank-Konfiguration auf mindestens %s MB (aktuell: %s MB, empfohlen: %s MB). Mehr Informationen finden Sie unter %s.',
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
+            'Fehler: Bitte setzen Sie den Wert für innodb_file_per_table in Ihrer Datenbank-Konfiguration auf ON.',
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            'Fehler: Bitte setzen Sie den Wert für innodb_default_row_format in Ihrer Datenbank-Konfiguration auf dynamic.',
         'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             'Falsche Datenbank-Speicherengine (%s ist %s, muss aber InnoDB sein).',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
-            'Falsche Datenbank-Sortierfolge (%s ist %s, muss aber utf8 sein).',
+        'Wrong database collation (%s is %s, but it needs to be utf8mb4).' =>
+            'Falsche Datenbank-Sortierfolge (%s ist %s, muss aber utf8mb4 sein).',
 
         # Perl Module: Kernel/Modules/Mentions.pm
         '%s users will be mentioned' => '%s Benutzer werden erwähnt',
@@ -5033,14 +5037,12 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => 'Zeichensatz der Client-Verbindung',
-        'Setting character_set_client needs to be utf8.' => 'Einstellung character_set_client muss \'utf8\' sein.',
+        'Setting character_set_client needs to be utf8mb4.' => 'Einstellung character_set_client muss utf8mb4 sein.',
         'Server Database Charset' => 'Zeichensatz des Datenbank-Servers',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => 'Die Einstellung character_set_database muss \'utf8\' sein.',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => 'Die Einstellung character_set_database muss \'utf8mb4\' sein.',
         'Table Charset' => 'Zeichensatz der Tabellen',
-        'There were tables found which do not have \'utf8\' as charset.' =>
-            'Es wurden Tabellen gefunden, die nicht \'utf8\' als Zeichensatz haben.',
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
+            'Es wurden Tabellen gefunden, die nicht \'utf8mb4\' als Zeichensatz haben.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
         'InnoDB Log File Size' => 'Größe der InnoDB-Log-Datei',

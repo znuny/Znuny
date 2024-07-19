@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.895515032035485;
+    $Self->{Completeness}        = 0.894710906701708;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4489,10 +4489,14 @@ sub Data {
             '错误：请确认你的数据库能够接收大于%sMB的数据包（目前能够接收的最大数据包为%sMB）。为了避免程序报错，请调整数据库max_allowed_packet参数。',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '错误：请设置数据库参数innodb_log_file_size至少为%s MB（当前：%s MB，推荐：%s MB），请参阅 %s 获取更多信息。',
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
+            '',
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
         'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
-            '错误的数据库排序规则（%s是%s，但需要是utf8）。',
+        'Wrong database collation (%s is %s, but it needs to be utf8mb4).' =>
+            '',
 
         # Perl Module: Kernel/Modules/Mentions.pm
         '%s users will be mentioned' => '',
@@ -5039,14 +5043,12 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => '客户端连接字符集',
-        'Setting character_set_client needs to be utf8.' => 'character_set_client 需要设置为utf8。',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => '服务器端数据库字符集',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => 'character_set_database 需要设置为\'utf8\'。',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => '表字符集',
-        'There were tables found which do not have \'utf8\' as charset.' =>
-            '字符集没有设置成 \'utf8\'的表。',
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
         'InnoDB Log File Size' => 'InnoDB日志文件大小',
