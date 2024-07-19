@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991628365068943;
+    $Self->{Completeness}        = 0.994254760341431;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2717,7 +2717,7 @@ sub Data {
         ' Select all' => ' Alle auswählen',
         'No ticket data found.' => 'Keine Ticket-Daten gefunden.',
         ' Open / Close ticket action menu' => ' Öffne / Schließe Ticket Aktionsmenü',
-        ' Select this ticket' => '',
+        ' Select this ticket' => ' Dieses Ticket auswählen',
         'Sender' => 'Sender',
         'Customer User Name' => 'Kundenbenutzer-Name',
         'Impact' => 'Auswirkung',
@@ -2725,7 +2725,7 @@ sub Data {
         'Solution Time' => 'Lösungszeit',
         'First Response Time' => 'Reaktionszeit',
         ' Service Time' => '',
-        ' Move ticket to a different queue' => '',
+        ' Move ticket to a different queue' => ' Ticket in eine andere Queue verschieben',
         'Change queue' => 'Queue wechseln',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
@@ -3023,9 +3023,9 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
         'Last viewed' => 'Zuletzt gesehen',
         'You are logged in as' => 'Sie sind angemeldet als',
-        'Delete all activities' => '',
-        'Delete all' => '',
-        'Mark all activities as seen' => '',
+        'Delete all activities' => 'Alle Aktivitäten löschen',
+        'Delete all' => 'Alle löschen',
+        'Mark all activities as seen' => 'Alle Aktivitäten als gelesen markieren',
         'Seen all' => 'Alle gesehen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
@@ -3033,7 +3033,7 @@ sub Data {
         'Personal views' => 'Persönliche Ansichten',
         'Last Views' => 'Zuletzt gesehen',
         'Search tools' => 'Suche',
-        'SearchTemplate' => 'Surchvorlage',
+        'SearchTemplate' => 'Suchvorlage',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript nicht verfügbar',
@@ -5558,7 +5558,7 @@ sub Data {
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Definiert den Full Qualified Domain Name des Znuny Systems. Diese Einstellung wird als Variable OTRS_CONFIG_FQDN genutzt, welche in allen Nachrichten-Formularen zu finden ist oder um Links zu Tickets in Ihrem Znuny System zu generieren.',
         'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
-            '',
+            'Definiert den voll qualifizierten Domänennamen für die Generierung externer IDs (z. B. Message-ID, ContentID).',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             'Legt den HTTP-Hostnamen fest, der für die Sammlung von Supportdaten über das freie Modul \'PublicSupportDataCollector\' genutzt wird (z. B. durch den Znuny-Daemon).',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -8020,14 +8020,14 @@ sub Data {
         'This window must be called from compose window.' => 'Dieses Fenster muss aus dem Fenster zum Verfassen von Tickets aufgerufen werden.',
 
         # JS File: var/httpd/htdocs/js/Core.Activity.js
-        'An error occurred' => '',
-        'The activity could not be created. %s is needed.' => '',
-        'The activity could not be created.' => '',
-        'The activity could not be updated.' => '',
-        'The activity could not be deleted.' => '',
-        'The activity could not be marked as new.' => '',
-        'The activity could not be marked as seen.' => '',
-        'The activities could not be marked as seen.' => '',
+        'An error occurred' => 'Ein Fehler ist aufgetreten',
+        'The activity could not be created. %s is needed.' => 'Die Aktivität konnte nicht erstellt werden. %s wird benötigt.',
+        'The activity could not be created.' => 'Die Aktivität konnte nicht erstellt werden.',
+        'The activity could not be updated.' => 'Die Aktivität konnte nicht aktualisiert werden.',
+        'The activity could not be deleted.' => 'Die Aktivität konnte nicht gelöscht werden.',
+        'The activity could not be marked as new.' => 'Die Aktivität konnte nicht als neu markiert werden.',
+        'The activity could not be marked as seen.' => 'Die Aktivität konnte nicht als gelesen markiert werden.',
+        'The activities could not be marked as seen.' => 'Die Aktivitäten konnten nicht als gelesen markiert werden.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
         'Add all' => 'Alle hinzufügen',
@@ -8247,7 +8247,7 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
         'Please enter at least one search value or * to find anything.' =>
             'Bitte geben Sie zumindest einen Suchbegriff ein oder * um nach Allem zu suchen.',
-        'Insert selected customer user(s) into the "%s:" field.' => '',
+        'Insert selected customer user(s) into the "%s:" field.' => 'Ausgewählte(n) Kundenbenutzer in das Feld "%s:" einfügen.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
         'Information about the Znuny Daemon' => 'Informationen über den Znuny Daemon',
@@ -8978,7 +8978,7 @@ Ihr Helpdesk-Team
         'Select your personal time zone. All times will be displayed relative to this time zone.' =>
             'Wählen Sie Ihre persönliche Zeitzone aus. Alle Zeiten werden relativ zur eingestellten Zeitzone angezeigt.',
         'Select your preferred layout for the software.' => 'Wählen Sie Ihr bevorzugtes Layout aus.',
-        'Select your preferred theme for OTRS.' => '',
+        'Select your preferred theme for OTRS.' => 'Wählen Sie Ihr bevorzugtes Theme für Znuny.',
         'Send a unit test file' => 'Unit-Test-Datei versenden',
         'Send new outgoing mail from this ticket' => 'Neue ausgehende E-Mail aus diesem Ticket heraus senden',
         'Send notifications to users.' => 'Benachrichtigungen an Agenten verschicken.',
