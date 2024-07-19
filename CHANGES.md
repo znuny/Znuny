@@ -1,4 +1,5 @@
 # 7.1.1 2024-??-??
+ - 2024-07-18 Added Dark Skin.
  - 2024-07-17 Removed ArticlePreViewModules from Medium.pm view. No articles are displayed at this point.
  - 2024-07-16 Added filtering and cache deletion to AdminSupportDataCollector.
  - 2024-07-11 Updated Moment.js to 2.30.1 and jQueryUI to 1.13.3.

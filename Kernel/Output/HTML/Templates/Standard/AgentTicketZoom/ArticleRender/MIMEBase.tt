@@ -210,6 +210,18 @@ function CheckIFrameHeight(IFrameID) {
                             // workaround for firefox, which seems to cache the src attribute of iframes sometimes which leads to
                             // the wrong iframe content being displayed (see https://bugzilla.mozilla.org/show_bug.cgi?id=356558)
                             document.getElementById('Iframe[% Data.ArticleID | html %]').contentWindow.location.href = document.getElementById('Iframe[% Data.ArticleID | html %]').src
+
+                            document.getElementById('Iframe[% Data.ArticleID | html %]').addEventListener("load", function() {
+                                const element = document.querySelector("body");
+                                const value = window.getComputedStyle(element).getPropertyValue('filter');
+                                if (value === 'invert(1)') {
+                                    var frame = document.getElementById('Iframe[% Data.ArticleID | html %]');
+                                    var node = document.createElement('style');
+                                    node.appendChild(document.createTextNode('img, video, svg {filter: invert(180%)hue-rotate(180deg);}'));
+                                    frame.contentWindow.document.head.appendChild(node);
+                                }
+                            });
+
                             </script>
                         </div>
                     [% ELSE %]

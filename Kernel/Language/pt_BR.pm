@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.860193855758173;
+    $Self->{Completeness}        = 0.859487852921865;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6145,11 +6145,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Especifica a ordem em que o primeiro e o último nomes de agentes serão exibidos.',
         'Default skin for the agent interface.' => 'Tema padrão para a interface de atendente.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'O Nome Interno do skin de agente que deve ser utilizado na interface de agente. Por favor verificar os skins disponíveis em Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             '',
         'Default skin for the customer interface.' => 'Skin padrão para a interface do cliente',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8661,6 +8663,7 @@ Obrigado pela ajuda!
         'CustomerUser' => 'UsuárioCliente',
         'Czech' => 'Tcheco',
         'Danish' => 'Dinamarquês',
+        'Dark' => '',
         'Dashboard overview.' => 'Painel de Controle',
         'Date / Time' => 'Data / Hora',
         'Default agent name' => '',
@@ -9054,6 +9057,8 @@ Obrigado pela ajuda!
         'Theme' => 'Tema',
         'This is a Description for Comment on Framework.' => 'Esta é uma Descrição para Comentário no Framework.',
         'This is a Description for DynamicField on Framework.' => 'Esta é uma Descrição para Campo Dinâmico no Framework.',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             '',
         'This is the default orange - black skin.' => '',

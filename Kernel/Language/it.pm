@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.601117134877608;
+    $Self->{Completeness}        = 0.600623768877216;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6154,11 +6154,13 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => 'Tema predefinito per l\'interfaccia agente.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             '',
         'Default skin for the customer interface.' => 'Tema predefinito per l\'interfaccia del cliente.',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8670,6 +8672,7 @@ Il tuo helpdesk.
         'CustomerUser' => '',
         'Czech' => 'Ceco',
         'Danish' => 'Danese',
+        'Dark' => '',
         'Dashboard overview.' => 'Panoramica cruscotto.',
         'Date / Time' => 'Data / Ora',
         'Default agent name' => '',
@@ -9063,6 +9066,8 @@ Il tuo helpdesk.
         'Theme' => 'Tema',
         'This is a Description for Comment on Framework.' => 'Questa è una descrizione per Comment on Framework.',
         'This is a Description for DynamicField on Framework.' => 'Questa è una descrizione per DynamicField su Framework.',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             'Questa è la skin arancione - nera predefinita per l\'interfaccia clienti.',
         'This is the default orange - black skin.' => 'Questo è il tema arancione - nero predefinito.',
