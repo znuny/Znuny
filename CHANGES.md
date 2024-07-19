@@ -1,8 +1,17 @@
 # 7.1.1 2024-??-??
+ - 2024-07-17 Removed ArticlePreViewModules from Medium.pm view. No articles are displayed at this point.
+ - 2024-07-16 Added filtering and cache deletion to AdminSupportDataCollector.
+ - 2024-07-11 Updated Moment.js to 2.30.1 and jQueryUI to 1.13.3.
+ - 2024-07-11 Added a start and finish log message to Znuny daemon tasks. Thanks to Paweł Bogusławski (@pboguslawski). [#392](https://github.com/znuny/Znuny/pull/392)
+ - 2024-07-11 Fixed ticket list filter selection in agent dashboard and ticket list views.
  - 2024-07-09 Added configurable timeout for DNS resolver queries. Thanks to Paweł Bogusławski (@pboguslawski). [#390](https://github.com/znuny/Znuny/pull/390)
+ - 2024-07-08 Invoker Ticket::Generic: Configured fields will now also be removed and encoded from/for given data (payload).
+ - 2024-07-05 Added a notification to ticket dialogs for the case when a form draft already exists for the current action.
  - 2024-07-05 Improved and fixed links to customer and also customer user information center in several widgets and overview pages. [#558](https://github.com/znuny/Znuny/issues/558)
+ - 2024-07-05 Added a foreground option to run the Znuny daemon without detaching. Thanks to Paweł Bogusławski (@pboguslawski). [#399](https://github.com/znuny/Znuny/pull/399)
  - 2024-07-04 Improved rendering of dynamic fields on AdminGenericAgent, AdminNotificationEvent, AdminACL and AdminDynamicFieldScreenConfiguration.
  - 2024-07-02 Updated required minimum database versions. Refactored database version checks and added them to the installer.
+ - 2024-07-01 Fixed autocompletion search for dynamic field types WebserviceDropdown and WebserviceMultiselect in AgentTicketSearch dialog.
  - 2024-06-21 Added functionality to use user fullname for mention label.
  - 2024-06-20 Fixed output of last mention date in dashboard widget "Last mentions".
  - 2024-06-20 Standard templates can now have multiple template types.

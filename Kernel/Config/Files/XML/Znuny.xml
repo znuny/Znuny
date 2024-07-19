@@ -2562,8 +2562,8 @@
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketMention</Item>
                 <Item Key="Block">ToolBarPersonalViews</Item>
-                <Item Key="CssClass">Mention</Item>
-                <Item Key="CssClassNew">Mention New</Item>
+                <Item Key="CssClass">MentionView</Item>
+                <Item Key="CssClassNew">MentionView New</Item>
                 <Item Key="Icon">fa fa-comment</Item>
                 <Item Key="IconNew">fa fa-comment</Item>
                 <Item Key="IconReached">fa fa-comment</Item>

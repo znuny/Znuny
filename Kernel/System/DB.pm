@@ -296,11 +296,11 @@ sub Version {
 
 Check if the required database version is installed or not.
 
-    my %VersionInfos = $DBObject->CheckRequiredDatabaseVersion();
+    my %VersionInfo = $DBObject->CheckRequiredDatabaseVersion();
 
 Returns:
 
-    my %VersionInfos = (
+    my %VersionInfo = (
         'DatabaseType'       => 'MariaDB',
         'VersionString'      => 'MariaDB 10.6.12',
         'InstalledVersion'   => '10.6.12',
