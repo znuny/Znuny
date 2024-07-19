@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.992444152431012;
+    $Self->{Completeness}        = 0.992442911122063;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4489,8 +4489,6 @@ sub Data {
             'Fehler: Bitte setzen Sie den Wert für innodb_default_row_format in Ihrer Datenbank-Konfiguration auf dynamic.',
         'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             'Falsche Datenbank-Speicherengine (%s ist %s, muss aber InnoDB sein).',
-        'Wrong database collation (%s is %s, but it needs to be utf8mb4).' =>
-            'Falsche Datenbank-Sortierfolge (%s ist %s, muss aber utf8mb4 sein).',
 
         # Perl Module: Kernel/Modules/Mentions.pm
         '%s users will be mentioned' => '%s Benutzer werden erwähnt',

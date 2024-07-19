@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-07-18 09:11+0000\n"
+"POT-Creation-Date: 2024-07-19 09:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12912,10 +12912,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/Installer.pm
 msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
-msgstr ""
-
-#. Perl Module: Kernel/Modules/Installer.pm
-msgid "Wrong database collation (%s is %s, but it needs to be utf8mb4)."
 msgstr ""
 
 #. Perl Module: Kernel/Modules/Mentions.pm

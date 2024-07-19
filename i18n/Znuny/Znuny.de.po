@@ -24397,10 +24397,6 @@ msgstr "Fehler: Bitte setzen Sie den Wert für innodb_file_per_table in Ihrer Da
 msgid "Error: Please set the value for innodb_default_row_format on your database to dynamic."
 msgstr "Fehler: Bitte setzen Sie den Wert für innodb_default_row_format in Ihrer Datenbank-Konfiguration auf dynamic."
 
-#. Perl Module: Kernel/Modules/Installer.pm
-msgid "Wrong database collation (%s is %s, but it needs to be utf8mb4)."
-msgstr "Falsche Datenbank-Sortierfolge (%s ist %s, muss aber utf8mb4 sein)."
-
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Setting character_set_client needs to be utf8mb4."
 msgstr "Einstellung character_set_client muss utf8mb4 sein."
