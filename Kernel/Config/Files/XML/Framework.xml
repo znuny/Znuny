@@ -2772,7 +2772,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Package::Event::SupportDataSend</Item>
-                <Item Key="Event">(PackageInstall|PackageReinstall|PackageUpgrade|PackageUninstall)</Item>
+                <Item Key="Event">\A(PackageInstall|PackageReinstall|PackageUpgrade|PackageUninstall)\z</Item>
                 <Item Key="Transaction">1</Item>
             </Hash>
         </Value>
@@ -8377,7 +8377,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerCompany::Event::CustomerUserUpdate</Item>
-                <Item Key="Event">CustomerCompanyUpdate</Item>
+                <Item Key="Event">\ACustomerCompanyUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -8388,7 +8388,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerCompany::Event::DynamicFieldObjectNameUpdate</Item>
-                <Item Key="Event">CustomerCompanyUpdate</Item>
+                <Item Key="Event">\ACustomerCompanyUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -8399,7 +8399,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerUser::Event::SearchProfileUpdate</Item>
-                <Item Key="Event">CustomerUserUpdate</Item>
+                <Item Key="Event">\ACustomerUserUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -8410,7 +8410,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerUser::Event::ServiceMemberUpdate</Item>
-                <Item Key="Event">CustomerUserUpdate</Item>
+                <Item Key="Event">\ACustomerUserUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -8421,7 +8421,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerUser::Event::DynamicFieldObjectNameUpdate</Item>
-                <Item Key="Event">CustomerUserUpdate</Item>
+                <Item Key="Event">\ACustomerUserUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>

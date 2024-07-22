@@ -3,6 +3,7 @@
  - 2024-07-08 Improved and fixed links to customer and customer user information center in several widgets and overview pages.
  - 2024-07-08 Invoker Ticket::Generic: Configured fields will now also be removed and encoded from/for given data (payload).
  - 2024-06-20 Fixed output of last mention date in dashboard widget "Last mentions".
+ - 2024-04-12 Fixed event registration regular expressions in config options. Thanks to Paweł Bogusławski (@pboguslawski) for reporting. [#440](https://github.com/znuny/Znuny/issues/440)
  - 2024-02-13 Fixed autocompletion search for dynamic field types WebserviceDropdown and WebserviceMultiselect in AgentTicketSearch dialog.
 
 # 6.5.9 2024-06-26
