@@ -23,6 +23,7 @@
  - 2024-05-03 Icons for shortcut and Apple touch are now configurable.
  - 2024-05-02 Added a bulk function to watch tickets.
  - 2024-04-30 Added a function to bulk-unwatch tickets in the overview of watched tickets.
+ - 2024-04-12 Fixed event registration regular expressions in config options. Thanks to Paweł Bogusławski (@pboguslawski) for reporting. [#440](https://github.com/znuny/Znuny/issues/440)
  - 2023-10-11 Added user preferences backend DBJSON.
 
 # 7.0.19 2024-06-26
