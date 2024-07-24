@@ -29,7 +29,8 @@ Migrate database and all tables to utf8mb4
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    return if !$Self->_CheckDatabaseBackend(%Param);
+    return 1 if !$Self->_IsAffectedDatabaseBackend(%Param);
+
     return if !$Self->_CheckInnoDB(%Param);
     return if !$Self->_SetNames(%Param);
     return if !$Self->_SetCollationConnection(%Param);
@@ -40,7 +41,7 @@ sub Run {
     return 1;
 }
 
-sub _CheckDatabaseBackend {
+sub _IsAffectedDatabaseBackend {
     my ( $Self, %Param ) = @_;
 
     # verify that backend is mysql or mariadb

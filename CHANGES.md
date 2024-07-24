@@ -1,3 +1,6 @@
+# 7.1.2 2024-07-24
+ - 2024-07-24 Fixed migration for databases other than MySQL and MariaDB.
+
 # 7.1.1 2024-07-24
  - 2024-07-18 Added Dark Skin.
  - 2024-07-17 Removed ArticlePreViewModules from Medium.pm view. No articles are displayed at this point.
