@@ -1,3 +1,6 @@
+# 6.5.11 2024-??-??
+ - 2024-07-25 Console command Admin::PostMasterFilter::Import now will also update existing filters instead of only create new ones. Thanks to @meisterheister for reporting the issue. [#527](https://github.com/znuny/Znuny/issues/527)
+
 # 6.5.10 2024-07-24
  - 2024-07-11 Updated Moment.js to 2.30.1 and jQueryUI to 1.13.3.
  - 2024-07-08 Improved and fixed links to customer and customer user information center in several widgets and overview pages.
