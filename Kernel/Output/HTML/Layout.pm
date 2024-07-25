@@ -1310,7 +1310,7 @@ sub Header {
 
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateAgentCSSCalls();
-    if ( !$Self->{InstallerOnly}  ) {
+    if ( !$Self->{InstallerOnly} ) {
         $Self->LoaderCreateDynamicCSS();
     }
 
