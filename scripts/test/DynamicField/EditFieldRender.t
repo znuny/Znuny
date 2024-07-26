@@ -1871,7 +1871,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -1928,7 +1928,7 @@ EOF
   <option value="2016">2016</option>
   <option value="2017">2017</option>
   <option value="2018">2018</option>
-</select></div><div><select class="Validate_DateHour DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
+</select></div><div class="DynamicFieldTime"><select class="Validate_DateHour DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
   <option value="0">00</option>
   <option value="1">01</option>
   <option value="2">02</option>
@@ -2044,7 +2044,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -2101,7 +2101,7 @@ EOF
   <option value="2016">2016</option>
   <option value="2017">2017</option>
   <option value="2018">2018</option>
-</select></div><div><select class="Validate_DateHour DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
+</select></div><div class="DynamicFieldTime"><select class="Validate_DateHour DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
   <option value="0" selected="selected">00</option>
   <option value="1">01</option>
   <option value="2">02</option>
@@ -2225,7 +2225,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -2282,7 +2282,7 @@ EOF
   <option value="2016">2016</option>
   <option value="2017">2017</option>
   <option value="2018">2018</option>
-</select></div><div><select class="Validate_DateHour DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
+</select></div><div class="DynamicFieldTime"><select class="Validate_DateHour DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
   <option value="0" selected="selected">00</option>
   <option value="1">01</option>
   <option value="2">02</option>
@@ -2405,7 +2405,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -2462,7 +2462,7 @@ EOF
   <option value="2016">2016</option>
   <option value="2017">2017</option>
   <option value="2018">2018</option>
-</select></div><div><select class="Validate_DateHour DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
+</select></div><div class="DynamicFieldTime"><select class="Validate_DateHour DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
   <option value="0" selected="selected">00</option>
   <option value="1">01</option>
   <option value="2">02</option>
@@ -2585,7 +2585,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -2642,7 +2642,7 @@ EOF
   <option value="2016">2016</option>
   <option value="2017">2017</option>
   <option value="2018">2018</option>
-</select></div><div><select class="Validate_DateHour DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
+</select></div><div class="DynamicFieldTime"><select class="Validate_DateHour DynamicFieldText DateSelection MyClass" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
   <option value="0" selected="selected">00</option>
   <option value="1">01</option>
   <option value="2">02</option>
@@ -2759,7 +2759,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass Validate_Required" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass Validate_Required" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -2816,7 +2816,7 @@ EOF
   <option value="2016">2016</option>
   <option value="2017">2017</option>
   <option value="2018">2018</option>
-</select></div><div><select class="Validate_DateHour DynamicFieldText DateSelection MyClass Validate_Required" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
+</select></div><div class="DynamicFieldTime"><select class="Validate_DateHour DynamicFieldText DateSelection MyClass Validate_Required" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
   <option value="0" selected="selected">00</option>
   <option value="1">01</option>
   <option value="2">02</option>
@@ -2934,7 +2934,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass ServerError" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText DateSelection MyClass ServerError" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -2991,7 +2991,7 @@ EOF
   <option value="2016">2016</option>
   <option value="2017">2017</option>
   <option value="2018">2018</option>
-</select></div><div><select class="Validate_DateHour DynamicFieldText DateSelection MyClass ServerError" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
+</select></div><div class="DynamicFieldTime"><select class="Validate_DateHour DynamicFieldText DateSelection MyClass ServerError" id="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" name="DynamicField_$DynamicFieldConfigs{DateTime}->{Name}Hour" title="Hours">
   <option value="0" selected="selected">00</option>
   <option value="1">01</option>
   <option value="2">02</option>
@@ -3109,7 +3109,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText MyClass" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText MyClass" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -3196,7 +3196,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText MyClass" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText MyClass" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -3288,7 +3288,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText MyClass" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText MyClass" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -3380,7 +3380,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText MyClass" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText MyClass" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -3474,7 +3474,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText MyClass" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText MyClass" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -3562,7 +3562,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText MyClass Validate_Required" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText MyClass Validate_Required" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
@@ -3651,7 +3651,7 @@ EOF
         },
         ExpectedResults => {
             Field => <<"EOF",
-<div><select class="Validate_DateMonth DynamicFieldText MyClass ServerError" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
+<div class="DynamicFieldDate"><select class="Validate_DateMonth DynamicFieldText MyClass ServerError" id="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" name="DynamicField_$DynamicFieldConfigs{Date}->{Name}Month" title="Month">
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
