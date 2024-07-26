@@ -1,3 +1,6 @@
+# 7.1.3 2024-??-??
+ - 2024-06-26 Fixed wrong inversion of avatar image when using skin 'Dark'. [#558](https://github.com/znuny/Znuny/issues/558)
+
 # 7.1.2 2024-07-24
  - 2024-07-24 Fixed migration for databases other than MySQL and MariaDB.
 

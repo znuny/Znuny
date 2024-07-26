@@ -27,6 +27,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
   .icon {
       filter: invert(15%) hue-rotate(180deg);
   }
+  .UserAvatar,
+  .Avatar{
+     filter: invert(180%) hue-rotate(180deg);
+  }
+  .toolbar-row-wrapper .toolbar-row ul li a .iconWrapper span.Counter {
+      background: var(--primary-color);
+  }
   pre {
     filter: invert(6%);
   }
