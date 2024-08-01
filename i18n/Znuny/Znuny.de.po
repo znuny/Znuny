@@ -2,9 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2024-07-18 08:59+0000\n"
-"Last-Translator: NotSpecific <dembanacambo@gmail.com>\n"
-"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
+"PO-Revision-Date: 2024-08-01 21:00+0000\n"
+"Last-Translator: Denny Korsukéwitz <dk@znuny.com>\n"
+"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/"
+"de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8150,7 +8151,7 @@ msgstr "Übersicht zurücksetzen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
 msgid " Column Filters Form"
-msgstr ""
+msgstr " Spaltenfilter-Formular"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
 msgid "Split Into New Phone Ticket"
@@ -24227,7 +24228,7 @@ msgstr "im gleichen Tab öffnen"
 
 #. SysConfig
 msgid "open in new tab"
-msgstr "in neuem Tab öffnen"
+msgstr "im neuen Tab öffnen"
 
 #. SysConfig
 msgid "pending"
@@ -24428,4 +24429,3 @@ msgstr ""
 #. SysConfig
 msgid "This is the dark skin for the customer interface."
 msgstr ""
-
