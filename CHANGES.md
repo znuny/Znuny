@@ -1,4 +1,5 @@
 # 6.5.11 2024-??-??
+ - 2024-07-29 Fixed evaluation of ticket ID parameter in generic interface operation TicketGet.
  - 2024-07-25 Console command Admin::PostMasterFilter::Import now will also update existing filters instead of only create new ones. Thanks to @meisterheister for reporting the issue. [#527](https://github.com/znuny/Znuny/issues/527)
 
 # 6.5.10 2024-07-24
