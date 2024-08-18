@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.994254760341431;
+    $Self->{Completeness}        = 0.994418910045962;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2742,7 +2742,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => 'Übersicht zurücksetzen',
-        ' Column Filters Form' => '',
+        ' Column Filters Form' => ' Spaltenfilter-Formular',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => 'In ein neues Telefon-Ticket splitten',
@@ -9157,7 +9157,7 @@ Ihr Helpdesk-Team
         'not archived tickets' => 'nicht archivierte Tickets',
         'notice' => 'notice',
         'open in current tab' => 'im gleichen Tab öffnen',
-        'open in new tab' => 'in neuem Tab öffnen',
+        'open in new tab' => 'im neuen Tab öffnen',
         'pending' => 'Warten',
         'phone' => 'Telefonanruf',
         'responsible' => 'Verantwortlicher',
