@@ -221,7 +221,7 @@ sub TableCreateComplex {
     my $UserObject     = $Kernel::OM->Get('Kernel::System::User');
     my $JSONObject     = $Kernel::OM->Get('Kernel::System::JSON');
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
-    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $TicketObject   = $Kernel::OM->Get('Kernel::System::Ticket');
 
     # load user preferences
     my %Preferences = $UserObject->GetPreferences(
