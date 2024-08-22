@@ -13,6 +13,6 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
 @media screen,projection,tv,handheld {
     .AdminSupportDataCollector .CheckResults > li h3.Heading {
-      filter: invert(0%);
+        filter: invert(0%);
     }
 }

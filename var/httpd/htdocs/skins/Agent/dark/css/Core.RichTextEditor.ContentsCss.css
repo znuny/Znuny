@@ -17,6 +17,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
  * Applies a CSS filter to invert the colors and rotate the hue of images, videos, and SVG elements.
  * This creates a dark mode effect by inverting the colors and rotating the hue by 180 degrees.
  */
+
 img, video, svg {
     filter: invert(100%) hue-rotate(180deg);
 }

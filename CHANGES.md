@@ -1,4 +1,5 @@
 # 7.1.3 2024-??-??
+ - 2024-08-21 Improved CSS for skin 'Dark'. [#558](https://github.com/znuny/Znuny/issues/558)
  - 2024-08-21 Sector Nord AG: Fixed overflow of dynamic field groups in AgentTicketZoom process widget. Thanks to Sector Nord AG (@jsinagowitz). [PR#553](https://github.com/znuny/Znuny/pull/553)
  - 2024-06-26 Fixed wrong inversion of avatar image when using skin 'Dark'. [#558](https://github.com/znuny/Znuny/issues/558)
 
