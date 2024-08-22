@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.89567931657631;
+    $Self->{Completeness}        = 0.894123440577807;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -647,9 +647,6 @@ sub Data {
             '',
         'Query delay' => '',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
-            '',
-        'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -2041,6 +2038,7 @@ sub Data {
         'Support Data' => 'Támogatási adatok',
         'Error: Support data could not be collected (%s).' => 'Hiba: A támogatási adatokat nem sikerült összegyűjteni (%s).',
         'Support Data Collector' => 'Támogatási adatgyűjtő',
+        'Delete cache' => '',
         'Details' => 'Részletek',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2138,7 +2136,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Jogosultságok',
@@ -2727,8 +2724,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Küldő',
+        'Customer User Name' => 'Ügyfél-felhasználó neve',
         'Impact' => 'Hatás',
-        'CustomerID' => 'Ügyfél-azonosító',
         'Update Time' => 'Frissítés ideje',
         'Solution Time' => 'Megoldás ideje',
         'First Response Time' => 'Első válaszidő',
@@ -2868,7 +2865,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Várakozás eddig',
         'Locked' => 'Zárolt',
-        '%s Ticket(s)' => '%s jegy',
         'Accounted time' => 'Elszámolt idő',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2971,6 +2967,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'például 10*5155 vagy 105658*',
+        'CustomerID' => 'Ügyfél-azonosító',
         'Types' => 'Típusok',
         'Limitation' => '',
         'No time settings' => 'Nincsenek időbeállítások',
@@ -3023,6 +3020,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Betöltötte a következő piszkozatot: „%s”. Utoljára %s-kor változtatta meg.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Betöltötte a következő piszkozatot: „%s”. Utoljára %s-kor %s változtatta meg.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             'Ne feledje, hogy ez a piszkozat elavult, mert a jegyet módosították a piszkozat létrehozása óta.',
 
@@ -4156,7 +4155,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Nem lehet lekérni a(z) „%s” elemadatait!',
         'Can\'t get filter content data of %s!' => 'Nem lehet lekérni a(z) „%s” szűrőtartalom-adatait!',
         'Customer Name' => 'Ügyfél neve',
-        'Customer User Name' => 'Ügyfél-felhasználó neve',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Forrásobjektum és forráskulcs szükséges!',
@@ -4484,14 +4482,18 @@ sub Data {
             'Nem lehet kapcsolódni az adatbázishoz, a DBD::%s Perl-modul nincs telepítve!',
         'Can\'t connect to database, read comment!' => 'Nem lehet kapcsolódni az adatbázishoz, olvassa el a megjegyzést!',
         'Database already contains data - it should be empty!' => 'Az adatbázis már tartalmaz adatokat – üresnek kell lennie!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Hiba: Győződjön meg arról, hogy az adatbázisa elfogad-e %s MB méretűnél nagyobb csomagot (jelenleg csak legfeljebb %s MB méretű csomagot fogad el). A hibák elkerülése érdekében alkalmazkodjon az adatbázisa max_allowed_packet beállításához.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Hiba: Állítsa be az adatbázison az innodb_log_file_size értékét legalább %s MB méretűre (jelenleg: %s MB, ajánlott: %s MB). További információkért nézze meg a következőt: %s.',
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
+            '',
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
         'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
-            'Hibás adatbázis egyeztetés (a %s értéke %s, de utf8 értékűnek kell lennie).',
 
         # Perl Module: Kernel/Modules/Mentions.pm
         '%s users will be mentioned' => '',
@@ -5038,14 +5040,12 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => 'Kliens kapcsolat karakterkészlete',
-        'Setting character_set_client needs to be utf8.' => 'A character_set_client beállításnak utf8 értékűnek kell lennie.',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => 'Kiszolgáló adatbázis karakterkészlete',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => 'A character_set_database beállításnak „utf8” értékűnek kell lennie.',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Tábla karakterkészlete',
-        'There were tables found which do not have \'utf8\' as charset.' =>
-            'Olyan táblák találhatók, amelyek nem „utf8” karakterkészletűek.',
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
         'InnoDB Log File Size' => 'InnoDB naplófájl méret',
@@ -5654,6 +5654,7 @@ sub Data {
             'Ellenőrizteti az alkalmazással az e-mail címek MX-rekordjait egy e-mail küldésekor vagy egy telefon vagy e-mail jegy elküldésekor.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Meghatározza egy dedikált DNS kiszolgáló címét, ha szükséges a „CheckMXRecord” keresésekhez.',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => 'Ellenőrizteti az alkalmazással az e-mail címek szintaxisát.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Egy reguláris kifejezést határoz meg, amely néhány címet kizár a szintaxis-ellenőrzésből (ha a „CheckEmailAddresses” beállítás „Igen” értékre van állítva). Adjon meg egy reguláris kifejezést ebben a mezőben azokhoz az e-mail címekhez, amelyek szintaktikailag nem helyesek, de szükségesek a rendszerhez (azaz „root@localhost”).',
@@ -6146,11 +6147,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Azt a sorrendet adja meg, amelyben az ügyintéző keresztneve és vezetékneve megjelenítve legyen.',
         'Default skin for the agent interface.' => 'Alapértelmezett felszín az ügyintézői felülethez.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Az ügyintéző felszínének belső neve, amelyet az ügyintézői felületen kell használni. Ellenőrizze az elérhető felszíneket a Frontend::Agent::Skins helyen.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             'Lehetséges különféle felszínek beállítása, például különbséget lehet tenni az alkalmazáson belül különböző ügyintézők között tartományonkénti alapon használva. Egy reguláris kifejezés (regex) használatával beállíthat egy tartományra illeszkedő Kulcs/Tartalom párt. A „Kulcsban” lévő értéknek kell illeszkednie a tartományra, és a „Tartalomban” lévő értéknek a rendszeren lévő érvényes felszínnek kell lennie. Nézze meg a példabejegyzéseket a reguláris kifejezés megfelelő formájáért.',
         'Default skin for the customer interface.' => 'Alapértelmezett felszín az ügyfélfelülethez.',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             'Az ügyfél felszínének belső neve, amelyet az ügyfélfelületen kell használni. Ellenőrizze az elérhető felszíneket a Frontend::Customer::Skins helyen.',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8662,6 +8665,7 @@ Az Ön segélyszolgálat csapata
         'CustomerUser' => 'Ügyfél-felhasználó',
         'Czech' => 'Cseh',
         'Danish' => 'Dán',
+        'Dark' => '',
         'Dashboard overview.' => 'Vezérlőpult áttekintő.',
         'Date / Time' => 'Dátum / Idő',
         'Default agent name' => 'Alapértelmezett ügyintézőnév',
@@ -9055,6 +9059,8 @@ Az Ön segélyszolgálat csapata
         'Theme' => 'Téma',
         'This is a Description for Comment on Framework.' => 'Ez egy leírás a keretrendszeren lévő megjegyzéshez.',
         'This is a Description for DynamicField on Framework.' => 'Ez egy leírás a keretrendszeren lévő dinamikus mezőhöz.',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             'Ez az alapértelmezett narancssárga-fekete felszín az ügyfélfelülethez.',
         'This is the default orange - black skin.' => 'Ez az alapértelmezett narancssárga-fekete felszín.',

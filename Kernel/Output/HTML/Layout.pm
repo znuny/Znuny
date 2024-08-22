@@ -1798,6 +1798,7 @@ sub Footer {
         SearchFrontend             => $JSCall,
         Autocomplete               => $AutocompleteConfig,
         'Mentions::RichTextEditor' => $ConfigObject->Get('Mentions::RichTextEditor') // {},
+        Skin                       => $Self->{SkinSelected},
     );
 
     for my $Config ( sort keys %JSConfig ) {
@@ -2751,16 +2752,13 @@ sub Attachment {
 
         # Disallow external and inline scripts, active content, frames, but keep allowing inline styles
         #   as this is a common use case in emails.
-        # Also disallow referrer headers to prevent referrer leaks via old-style policy directive. Please note this has
-        #   been deprecated and will be removed in future OTRS versions in favor of a separate header (see below).
         # img-src:    allow external and inline (data:) images
         # script-src: block all scripts
         # object-src: allow 'self' so that the browser can load plugins for PDF display
         # frame-src:  block all frames
         # style-src:  allow inline styles for nice email display
-        # referrer:   don't send referrers to prevent referrer-leak attacks
         $Output
-            .= "Content-Security-Policy: default-src *; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline'; referrer no-referrer;\n";
+            .= "Content-Security-Policy: default-src *; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline';\n";
 
         # Use Referrer-Policy header to suppress referrer information in modern browsers
         #   (to prevent referrer-leak attacks).
@@ -6255,6 +6253,24 @@ sub SetRichTextParameters {
         }
     }
 
+    my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
+    my $WebPath  = $ConfigObject->Get('Frontend::WebPath') . 'skins';
+
+    my $UserType = $Self->{SessionSource} || '';
+    if ($UserType) {
+        $UserType =~ s/Interface//;
+    }
+
+    my $ContentsCssFS
+        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+    my $ContentsCss
+        = $WebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+
+    # If Core.RichTextEditor.ContentsCss.css for current skin exists, use it
+    if ( -e $ContentsCssFS ) {
+        $RichTextSettings{'ContentsCss'} = $ContentsCss;
+    }
+
     # get needed variables
     my $RichTextType        = $Param{Data}->{RichTextType}                || '';
     my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
@@ -6398,6 +6414,26 @@ sub CustomerSetRichTextParameters {
         if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
             $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
         }
+    }
+
+    my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
+    my $WebPath  = $ConfigObject->Get('Frontend::WebPath') . 'skins';
+
+    my $UserType = $Self->{SessionSource} || '';
+    if ($UserType) {
+        $UserType =~ s/Interface//;
+    }
+
+    $Self->{SkinSelected} = $ConfigObject->Get("Loader::Customer::SelectedSkin") || 'default';
+
+    my $ContentsCssFS
+        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+    my $ContentsCss
+        = $WebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+
+    # If Core.RichTextEditor.ContentsCss.css for current skin exists, use it
+    if ( -e $ContentsCssFS ) {
+        $RichTextSettings{'ContentsCss'} = $ContentsCss;
     }
 
     my $TextDir             = $Self->{TextDirection}                      || '';

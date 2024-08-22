@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.59454575324462;
+    $Self->{Completeness}        = 0.593893630991464;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -648,9 +648,6 @@ sub Data {
             '',
         'Query delay' => '',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
-            '',
-        'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -2042,6 +2039,7 @@ sub Data {
         'Support Data' => 'Datos de Soporte',
         'Error: Support data could not be collected (%s).' => 'Error: Los datos de soporte no han podido ser recolectados (%s).',
         'Support Data Collector' => 'Recolector Datos Soporte',
+        'Delete cache' => '',
         'Details' => 'Detalles',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2139,7 +2137,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Permisos',
@@ -2728,8 +2725,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Remitente',
+        'Customer User Name' => '',
         'Impact' => 'Impacto',
-        'CustomerID' => 'ID del cliente',
         'Update Time' => 'Tiempo para actualización',
         'Solution Time' => 'Tiempo para solución',
         'First Response Time' => 'Tiempo para primera respuesta',
@@ -2869,7 +2866,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Pendiente hasta',
         'Locked' => 'Bloqueo',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Tiempo contabilizado',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2972,6 +2968,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Perfil',
         'e. g. 10*5155 or 105658*' => 'ej: 10*5155 or 105658*',
+        'CustomerID' => 'ID del cliente',
         'Types' => 'Tipos',
         'Limitation' => '',
         'No time settings' => 'Sin ajustes de tiempo',
@@ -3024,6 +3021,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Ha cargado el borrador "%s". La ultima vez que lo cambiaste %s.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Ha cargado el borrador "%s". Fue cambiado por última vez %s por %s.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '',
 
@@ -4157,7 +4156,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'No se pudieron obtener los datos de elementos de %s!',
         'Can\'t get filter content data of %s!' => 'No se pudieron obtener los datos de filtro de contenido de %s!',
         'Customer Name' => 'Nombre del cliente',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Se requiere  Objeto de Fuente y Clave de Fuente!',
@@ -4485,13 +4483,17 @@ sub Data {
             'No se puede conectar ala base de datos, Modulo Perl DBD::%s No Instalado!',
         'Can\'t connect to database, read comment!' => '¡No se puede conectar a la base de datos, lee el comentario!',
         'Database already contains data - it should be empty!' => 'La base de datos ya contiene datos. ¡Debería estar vacía!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Error: Por favor, asegúrese de que su base de datos acepta paquetes de más de %s MB de tamaño (actualmente sólo acepta paquetes hasta %s MB). Por favor, adaptar el ajuste max_allowed_packet de su base de datos con el fin de evitar errores.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Error: Por favor, establezca el valor de innodb_log_file_size en su base de datos para al menos %s MB ( actual: %s MB, recomendado: %s MB). Para obtener más información, por favor, eche un vistazo a %s.',
-        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
             '',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
 
         # Perl Module: Kernel/Modules/Mentions.pm
@@ -5040,13 +5042,11 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => 'Juego de Caracteres de la Conexión del Cliente',
-        'Setting character_set_client needs to be utf8.' => 'El ajuste character_set_client necesita ser utf8.',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => 'Juego de Caracteres del Servidor de Base de Datos',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => '',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Juego de Caracter de la Tabla',
-        'There were tables found which do not have \'utf8\' as charset.' =>
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
@@ -5656,6 +5656,7 @@ sub Data {
             '',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             '',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => '',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             '',
@@ -6148,11 +6149,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => 'Apariencia por defecto para la interfaz de agente.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             '',
         'Default skin for the customer interface.' => 'Apariencia por defecto para la interfaz de cliente.',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8670,6 +8673,7 @@ Tu Equipo de Soporte
         'CustomerUser' => 'Usuario del cliente',
         'Czech' => 'Checo',
         'Danish' => 'Danes',
+        'Dark' => '',
         'Dashboard overview.' => 'Visión general del panel principal.',
         'Date / Time' => 'Fecha / Hora',
         'Default agent name' => '',
@@ -9063,6 +9067,8 @@ Tu Equipo de Soporte
         'Theme' => 'Tema',
         'This is a Description for Comment on Framework.' => '',
         'This is a Description for DynamicField on Framework.' => '',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             'Este es el aspecto predeterminado naranja - negro para la interfaz del cliente.',
         'This is the default orange - black skin.' => 'Este es el aspecto predeterminado naranja - negro.',

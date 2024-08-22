@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.605224248398226;
+    $Self->{Completeness}        = 0.604563361785949;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -641,9 +641,6 @@ sub Data {
             '',
         'Query delay' => '',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
-            '',
-        'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -2036,6 +2033,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Support Data' => 'Data pendukung',
         'Error: Support data could not be collected (%s).' => 'Eror: data pendukung tidak dapat dikumpulkan (%s)',
         'Support Data Collector' => 'Pengumpul data pendukung',
+        'Delete cache' => '',
         'Details' => 'Rincian',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2133,7 +2131,6 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Izin',
@@ -2723,8 +2720,8 @@ bin/znuny.Daemon.pl status\').',
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Pengirim',
+        'Customer User Name' => '',
         'Impact' => 'Dampak',
-        'CustomerID' => 'ID Pelanggan',
         'Update Time' => 'Memperbaru waktu',
         'Solution Time' => 'Solusi waktu',
         'First Response Time' => 'Waktu respon yang pertama',
@@ -2864,7 +2861,6 @@ bin/znuny.Daemon.pl status\').',
         'is invalid' => '',
         'Pending till' => 'Ditunda hingga',
         'Locked' => 'Dikunci',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Waktu dicatat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2967,6 +2963,7 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'Contoh : 10*5155 atau 105658*',
+        'CustomerID' => 'ID Pelanggan',
         'Types' => 'Jenis',
         'Limitation' => '',
         'No time settings' => 'Tidak ada pengaturan waktu',
@@ -3018,6 +3015,8 @@ bin/znuny.Daemon.pl status\').',
         'You have loaded the draft "%s".' => '',
         'You have loaded the draft "%s". You last changed it %s.' => '',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
+            '',
+        'Please note that you have already one or more saved drafts for this action.' =>
             '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '',
@@ -4152,7 +4151,6 @@ bin/znuny.Daemon.pl status\').',
         'Can\'t get element data of %s!' => 'Tidak bisa mendapatkan data unsur %s!',
         'Can\'t get filter content data of %s!' => 'Tidak bisa mendapatkan data filter konten dari %s!',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Perlu sumber objek dan sumber kunci!',
@@ -4480,13 +4478,17 @@ bin/znuny.Daemon.pl status\').',
             'Tidak dapat terhubung ke database, Perl modul DBD ::%s tidak terpasang!',
         'Can\'t connect to database, read comment!' => 'Tidak dapat terhubung ke database, membaca komentar!',
         'Database already contains data - it should be empty!' => 'Database telah terisi data - database seharusnya kosong!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Kesalahan: Pastikan database Anda menerima paket lebih dari %s MB (itu saat ini hanya menerima paket sampai %s MB). Silahkan menyesuaikan pengaturan max_allowed_packet dari database Anda untuk menghindari kesalahan.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Kesalahan: Silakan menetapkan nilai untuk innodb_log_file_size pada database Anda untuk setidaknya%s MB (saat ini: %s MB, direkomendasikan: %s MB). Untuk informasi lebih lanjut, silakan lihat di %s.',
-        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
             '',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
 
         # Perl Module: Kernel/Modules/Mentions.pm
@@ -5034,13 +5036,11 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => 'Koneksi klien charset',
-        'Setting character_set_client needs to be utf8.' => 'Pengaturan character_set_client perlu utf 8.',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => 'Server database charset',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => '',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Tabel charset',
-        'There were tables found which do not have \'utf8\' as charset.' =>
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
@@ -5650,6 +5650,7 @@ bin/znuny.Daemon.pl status\').',
             'Membuat aplikasi untuk memeriksa catatan MX alamat email sebelum mengirim email   telepon atau email tiket.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Mendefinisikan alamat dari server DNS yang berdedikasi, jika perlu, untuk "Periksa MX Record" pencarian.',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => 'Membuat aplikasi memeriksa catatan MX alamat email sebelum mengirim email untuk mengirimkan telepon atau email tiket.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Mendefinisikan ekspresi reguler yang mengecualikan beberapa alamat dari cek sintaks (jika "CheckEmailAddresses" diatur ke "Ya"). Masukkan regex di bidang ini untuk alamat email, yang tidak sintaksis valid, tetapi diperlukan untuk sistem (yaitu "root @ localhost").',
@@ -6142,11 +6143,13 @@ bin/znuny.Daemon.pl status\').',
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Menentukan urutan nama depan dan nama belakang dari agen akan ditampilkan.',
         'Default skin for the agent interface.' => 'kulit default untuk antarmuka agen.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'agen menguliti Nama internal yang harus digunakan dalam antarmuka agen. Silakan periksa kulit yang tersedia di  Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             'Hal ini dimungkinkan untuk mengkonfigurasi kulit yang berbeda, misalnya untuk membedakan antara agen berbeda, untuk digunakan pada basis per-domain dalam aplikasi. Menggunakan ekspresi reguler (regex), Anda dapat mengkonfigurasi sepasang Konten/Key untuk mencocokkan domain. Nilai di "Key" harus sesuai domain, dan nilai dalam "Content" harus menjadi kulit valid pada sistem Anda. Silahkan lihat contoh entri untuk bentuk yang tepat dari regex.',
         'Default skin for the customer interface.' => 'Default skin untuk antarmuka pelanggan',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             'Kulit pelanggan Nama internal yang harus digunakan dalam antarmuka pelanggan. Silakan periksa kulit yang tersedia di Frontend::Customer::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8659,6 +8662,7 @@ Helpdesk Team Anda
         'CustomerUser' => 'nasabah Pengguna',
         'Czech' => 'Bahasa Ceko',
         'Danish' => 'Denmark',
+        'Dark' => '',
         'Dashboard overview.' => '',
         'Date / Time' => 'Tanggal / Waktu',
         'Default agent name' => '',
@@ -9052,6 +9056,8 @@ Helpdesk Team Anda
         'Theme' => 'Tema',
         'This is a Description for Comment on Framework.' => '',
         'This is a Description for DynamicField on Framework.' => '',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             'Ini adalah oranye standar - kulit hitam untuk antarmuka pelanggan.',
         'This is the default orange - black skin.' => 'Ini adalah oranye standar - kulit hitam.',

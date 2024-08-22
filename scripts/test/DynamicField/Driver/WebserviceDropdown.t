@@ -144,14 +144,18 @@ my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
     AJAXUpdate         => 1,
 );
 
+my ($InputFieldUUID) = $DynamicFieldHTML->{Field} =~ m{data-input-field-uuid="(.+?)"};
+
 $Self->IsDeeply(
     $DynamicFieldHTML,
     {
         'Label' =>
             "<div class='label-wrapper'><label id='LabelDynamicField_DynamicFieldWebserviceDriverDropdown' for='DynamicField_DynamicFieldWebserviceDriverDropdown'>DynamicFieldWebserviceDriverDropdown</label></div>",
         'Field' =>
-            '<select data-dynamic-field-name="DynamicFieldWebserviceDriverDropdown" data-dynamic-field-type="WebserviceDropdown" data-selected-value-field-name="DynamicField_DynamicFieldWebserviceDriverDropdown" data-autocomplete-field-name="DynamicField_DynamicFieldWebserviceDriverDropdown_Search" data-autocomplete-min-length="3" data-query-delay="1" data-default-search-term="" data-ticket-id="'
+            '<select  data-dynamic-field-name="DynamicFieldWebserviceDriverDropdown" data-dynamic-field-type="WebserviceDropdown" data-selected-value-field-name="DynamicField_DynamicFieldWebserviceDriverDropdown" data-autocomplete-field-name="DynamicField_DynamicFieldWebserviceDriverDropdown_Search" data-autocomplete-min-length="3" data-query-delay="1" data-default-search-term="" data-ticket-id="'
             . $TicketID
+            . '" data-input-field-uuid="'
+            . $InputFieldUUID
             . '" class="DynamicFieldDropdown Modernize W50pc" id="DynamicField_DynamicFieldWebserviceDriverDropdown" name="DynamicField_DynamicFieldWebserviceDriverDropdown">
   <option value="">-</option>
   <option value=" "></option>

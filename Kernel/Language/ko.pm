@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.867258091013636;
+    $Self->{Completeness}        = 0.865725541694025;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -641,9 +641,6 @@ sub Data {
             '',
         'Query delay' => '',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
-            '',
-        'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -2035,6 +2032,7 @@ sub Data {
         'Support Data' => '지원 데이터',
         'Error: Support data could not be collected (%s).' => '오류 : 지원 데이터를 수집 할 수 없습니다 (%s).',
         'Support Data Collector' => '지원 데이터 수집기',
+        'Delete cache' => '',
         'Details' => '세부',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2132,7 +2130,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => '권한',
@@ -2721,8 +2718,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => '보낸사람',
+        'Customer User Name' => '고객 사용자 이름',
         'Impact' => '',
-        'CustomerID' => '고객 ID',
         'Update Time' => '업데이트 시간',
         'Solution Time' => '솔루션 시간',
         'First Response Time' => '첫 번째 응답 시간',
@@ -2862,7 +2859,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => '대기 시간까지',
         'Locked' => '잠김',
-        '%s Ticket(s)' => '%s개 티켓',
         'Accounted time' => '소요 시간',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2965,6 +2961,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '프로필',
         'e. g. 10*5155 or 105658*' => '이자형. 지. 10 * 5155 또는 105658 *',
+        'CustomerID' => '고객 ID',
         'Types' => '유형',
         'Limitation' => '',
         'No time settings' => '시간 설정 없음',
@@ -3017,6 +3014,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => '"%s"초안을 로드했습니다. 마지막으로 %s로 변경했습니다.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             '"%s"초안을로드했습니다. 마지막으로%s %s변경되었습니다.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '이 초안이 작성된 이후 티켓이 수정되었기 때문에 이 초안은 구식입니다.',
 
@@ -4150,7 +4149,6 @@ sub Data {
         'Can\'t get element data of %s!' => '%s의 요소 데이터를 가져올 수 없습니다!',
         'Can\'t get filter content data of %s!' => '%s의 필터 콘텐츠 데이터를 가져올 수 없습니다!',
         'Customer Name' => '고객 이름',
-        'Customer User Name' => '고객 사용자 이름',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'SourceObject와 SourceKey가 필요합니다!',
@@ -4478,14 +4476,18 @@ sub Data {
             '데이터베이스에 연결할 수 없습니다. Perl 모듈 DBD :: %s이 설치되지 않았습니다!',
         'Can\'t connect to database, read comment!' => '데이터베이스에 연결할 수 없으므로 주석을 읽으십시오!',
         'Database already contains data - it should be empty!' => '데이터베이스에 이미 데이터가 있습니다. 비워두워야 합니다.',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '오류 : 데이터베이스가 크기가 %s를 넘는 패킷을 수락하는지 확인하십시오 (패키지는 현재 최대 %s MB 만 허용). 오류를 피하기 위해 데이터베이스의 max_allowed_packet 설정을 조정하십시오.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '오류 : 데이터베이스의 innodb_log_file_size 값을 최소 %s MB (현재 : %s MB, 권장 : %s MB)로 설정하십시오. 자세한 내용은 %s를보십시오.',
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
+            '',
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
         'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
-            '잘못된 데이터베이스 정렬 (%s는 %s이지만 utf8이어야합니다).',
 
         # Perl Module: Kernel/Modules/Mentions.pm
         '%s users will be mentioned' => '',
@@ -5032,14 +5034,12 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => '클라이언트 연결 문자 세트',
-        'Setting character_set_client needs to be utf8.' => 'character_set_client 설정은 utf8이어야합니다.',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => '서버 데이터베이스 문자 세트',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => '설정 character_set_database는 \'utf8\'이어야합니다.',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => '표 문자 집합',
-        'There were tables found which do not have \'utf8\' as charset.' =>
-            '\'utf8\'이없는 테이블이 charset으로 발견되었습니다.',
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
         'InnoDB Log File Size' => 'InnoDB 로그 파일 사이즈',
@@ -5648,6 +5648,7 @@ sub Data {
             '전자 메일을 보내거나 전화 또는 전자 메일 티켓을 제출하기 전에 응용 프로그램에서 전자 메일 주소의 MX 레코드를 확인하게합니다.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             '필요한 경우 "CheckMXRecord"조회를 위해 전용 DNS 서버의 주소를 정의합니다.',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => '응용 프로그램이 전자 메일 주소의 구문을 검사하도록 합니다.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             '구문 검사에서 일부 주소를 제외하는 정규 표현식을 정의합니다 ( "CheckEmailAddresses"가 "Yes"로 설정된 경우). 문법적으로 유효하지는 않지만 시스템에 필요한 전자 메일 주소 (예 : "root @ localhost")는이 필드에 정규식을 입력하십시오.',
@@ -6140,11 +6141,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '에이전트의 성 및 성을 표시하는 순서를 지정합니다.',
         'Default skin for the agent interface.' => '에이전트 인터페이스의 기본 스킨입니다.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '에이전트 인터페이스에서 사용해야하는 에이전트 스킨의 InternalName입니다. Frontend :: Agent :: Skins에서 사용 가능한 스킨을 확인하십시오.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             '응용 프로그램 내에서 도메인별로 사용되도록 다른 스킨을 구성 할 수 있습니다 예 : 다른 에이전트를 구분할 수 있음. 정규식 (정규식)을 사용하면 키 / 내용 쌍을 도메인과 일치하도록 구성 할 수 있습니다. "Key"의 값은 도메인과 일치해야하며 "Content"의 값은 시스템의 유효한 스킨이어야합니다. 올바른 형식의 정규식에 대한 예제 항목을 참조하십시오.',
         'Default skin for the customer interface.' => '고객 인터페이스의 기본 스킨입니다.',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             '고객 인터페이스에서 사용해야하는 고객 스킨의 InternalName입니다. Frontend :: Customer :: Skins에서 사용 가능한 스킨을 확인하십시오.',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8656,6 +8659,7 @@ Thanks for your help!
         'CustomerUser' => '고객사용자',
         'Czech' => '체코',
         'Danish' => '덴마크어',
+        'Dark' => '',
         'Dashboard overview.' => '현황판 개요',
         'Date / Time' => '날짜 / 시간',
         'Default agent name' => '',
@@ -9049,6 +9053,8 @@ Thanks for your help!
         'Theme' => '테마',
         'This is a Description for Comment on Framework.' => '이것은 Framework에 대한 설명을위한 설명입니다.',
         'This is a Description for DynamicField on Framework.' => '이것은 Framework의 DynamicField에 대한 설명입니다.',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             '이것은 고객 인터페이스의 기본 오렌지색 검정색 스킨입니다.',
         'This is the default orange - black skin.' => '이것은 기본 오랜지색 검은색 피부입니다.',

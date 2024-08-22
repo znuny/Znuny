@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.892229341218991;
+    $Self->{Completeness}        = 0.890676296782666;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -642,9 +642,6 @@ sub Data {
             '',
         'Query delay' => '',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
-            '',
-        'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -2036,6 +2033,7 @@ sub Data {
         'Support Data' => 'Подаци подршке',
         'Error: Support data could not be collected (%s).' => 'Подржани подаци не могу бити прикупљени (%s).',
         'Support Data Collector' => 'Сакупљач података подршке',
+        'Delete cache' => '',
         'Details' => 'Детаљи',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2133,7 +2131,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Дозволе',
@@ -2722,8 +2719,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Пошиљаоц',
+        'Customer User Name' => 'Назив клијент корисника',
         'Impact' => 'Утицај',
-        'CustomerID' => 'ID клијента',
         'Update Time' => 'Време ажурирања',
         'Solution Time' => 'Време решавања',
         'First Response Time' => 'Време првог одговора',
@@ -2863,7 +2860,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'На чекању до',
         'Locked' => 'Закључано',
-        '%s Ticket(s)' => '%s тикет(а)',
         'Accounted time' => 'Обрачунато време',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2966,6 +2962,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Профил',
         'e. g. 10*5155 or 105658*' => 'нпр. 10*5155 или 105658*',
+        'CustomerID' => 'ID клијента',
         'Types' => 'Типови',
         'Limitation' => '',
         'No time settings' => 'Нема подешавања времена',
@@ -3018,6 +3015,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Већ сте учитали нацрт "%s". Последњи пут сте га променили у %s.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Већ сте учитали нацрт "%s". Последњи пут је промењен у %s од стране %s.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             'Молимо обратите пажњу да је овај нацрт застарео јер је тикет модификован од када је нацрт креиран.',
 
@@ -4151,7 +4150,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Не могу прибавити податке елемента за %s!',
         'Can\'t get filter content data of %s!' => 'Не могу прибавити податке садржаја филтера за %s!',
         'Customer Name' => 'Назив клијента',
-        'Customer User Name' => 'Назив клијент корисника',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Неопходни SourceObject и SourceKey!',
@@ -4479,14 +4477,18 @@ sub Data {
             'Не могу се повезати на базу података, Перл модул DBD::%s није инсталиран!',
         'Can\'t connect to database, read comment!' => 'Не могу се повезати на базу података, прочитајте коментар!',
         'Database already contains data - it should be empty!' => 'База података већ садржи податке - требало би да буде празна.',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Грешка: Молимо да проверите да ваша база података прихвата пакете по величини веће од %s MB  (тренутно прихвата пакете величине до %s MB). Молимо да прилагодите параметар max_allowed_packet подешавање у вашој бази података како би избегли грешке.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Грешка: Молимо да подесете вредност за innodb_log_file_size у вашој бази података на најмање %s MB (тренутно: %s MB, препоручено: %s MB). За више информација, молимо погледајте на %s.',
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
+            '',
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
         'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
-            'Неисправно подешена база података (%s је %s, а требало би да буде utf8).',
 
         # Perl Module: Kernel/Modules/Mentions.pm
         '%s users will be mentioned' => '',
@@ -5033,14 +5035,12 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => 'Карактерсет за повезивање клијента',
-        'Setting character_set_client needs to be utf8.' => 'Подешавање character_set_client мора бити utf8.',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => 'Karakterset serverske baze podataka',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => 'Подешавање character_set_database мора бити \'utf8\'.',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Табела карактерсета',
-        'There were tables found which do not have \'utf8\' as charset.' =>
-            'Пронађене су табеле које немају \'utf8\' као карактерсет.',
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
         'InnoDB Log File Size' => 'Величина InnoDB лог датотеке',
@@ -5649,6 +5649,7 @@ sub Data {
             'Проверава „MX” запис имејл адресе пре слања поруке или телефонских или имејл тикета.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Дефинише адресе наменског „DNS” сервера, уколико је потребно, за „CheckMXRecord” претраге.',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => 'Приморава апликацију да проверава синтаксу имејл адереса.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Дефинише регуларни израз који искључује неке адресе из провере синтаксе (ако је „CheckEmailAddresses” постављена на „Да”). Молимо вас унесите регуларни израз у ово поље за имејл адресе, које нису синтаксно исправне, али су неопходне за систем (нпр. „root@localhost”).',
@@ -6141,11 +6142,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Одређује облик у коме ће бити приказано име и презиме оператера.',
         'Default skin for the agent interface.' => 'Подразумевани изглед окружења за интерфејс оператера.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Излед који ће се користити у интерфејсу оператера. Молимо проверите доступне изгледе у Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             'Могуће је подесити различите изгледе за различите оператере, који се користе на нивоу домена у апликацији. Коришћењем регуларног израза (regex), можете подесити пар кључ/вредност за препознавање домена. Вредност у Key би требало да препозна домен, а вредност у Content би требало да буде важећи изглед у систему. Молимо консултујте примере за исправан облик регуларног израза.',
         'Default skin for the customer interface.' => 'Подразумевани изглед окружења за интерфејс клијента.',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             'Излед који ће се користити у интерфејсу корисника. Молимо проверите доступне изгледе у Frontend::Customer::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8657,6 +8660,7 @@ Thanks for your help!
         'CustomerUser' => 'Клијент корисник',
         'Czech' => 'Чешки',
         'Danish' => 'Дански',
+        'Dark' => '',
         'Dashboard overview.' => 'Преглед командне табле.',
         'Date / Time' => 'Датум / Време',
         'Default agent name' => 'Подразумевано име оператера',
@@ -9050,6 +9054,8 @@ Thanks for your help!
         'Theme' => 'Тема',
         'This is a Description for Comment on Framework.' => 'Ово је опис за коментар у систему.',
         'This is a Description for DynamicField on Framework.' => 'Ово је опис за динамичко поље у систему.',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             'Ово је подразумевани наранџасто-црни изглед клијентског интерфејса.',
         'This is the default orange - black skin.' => 'Ово је подразумевани наранџасто-црни изглед.',

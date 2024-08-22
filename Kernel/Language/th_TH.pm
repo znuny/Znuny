@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.522753408904222;
+    $Self->{Completeness}        = 0.522160210111622;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -641,9 +641,6 @@ sub Data {
             '',
         'Query delay' => '',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
-            '',
-        'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -2038,6 +2035,7 @@ sub Data {
         'Support Data' => 'ข้อมูลการสนับสนุน',
         'Error: Support data could not be collected (%s).' => 'ข้อผิดพลาด: ไม่สามารถเก็บรวบรวมข้อมูลสนับสนุน (%s)',
         'Support Data Collector' => 'สนับสนุนการเก็บรวบรวมข้อมูล',
+        'Delete cache' => '',
         'Details' => 'รายละเอียด',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2135,7 +2133,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'การอนุญาต',
@@ -2724,8 +2721,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'ผู้ส่ง',
+        'Customer User Name' => '',
         'Impact' => 'ผลกระทบ',
-        'CustomerID' => 'ไอดีลูกค้า',
         'Update Time' => 'เวลาการอัพเดต',
         'Solution Time' => 'เวลาการแก้ปัญหา',
         'First Response Time' => 'เวลาตอบสนองครั้งแรก',
@@ -2865,7 +2862,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'รอดำเนินการจนถึง',
         'Locked' => 'ถูกล็อค',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'เวลาที่คิด',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2968,6 +2964,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'โปรไฟล์',
         'e. g. 10*5155 or 105658*' => 'เช่น 10*5155 หรือ 105658*',
+        'CustomerID' => 'ไอดีลูกค้า',
         'Types' => 'ประเภท',
         'Limitation' => '',
         'No time settings' => 'ไม่มีการตั้งค่าเวลา',
@@ -3019,6 +3016,8 @@ sub Data {
         'You have loaded the draft "%s".' => '',
         'You have loaded the draft "%s". You last changed it %s.' => '',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
+            '',
+        'Please note that you have already one or more saved drafts for this action.' =>
             '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '',
@@ -4153,7 +4152,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'ไม่สามารถรับองค์ประกอบของข้อมูลของ %s!',
         'Can\'t get filter content data of %s!' => 'ไม่สามารถรับข้อมูลกรองเนื้อหา',
         'Customer Name' => '',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'ต้องการ SourceObject และ SourceKey!',
@@ -4481,13 +4479,17 @@ sub Data {
             'ไม่สามารถเชื่อมต่อกับฐานข้อมูล,ไม่ได้ติดตั้ง Perl โมดูล DBD::%s!',
         'Can\'t connect to database, read comment!' => 'ไม่สามารถเชื่อมต่อกับฐานข้อมูลกรุณาอ่านความคิดเห็น!',
         'Database already contains data - it should be empty!' => 'ฐานข้อมูลมีข้อมูลอยู่แล้ว - มันควรจะว่างเปล่า!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'ข้อผิดพลาด: โปรดตรวจสอบฐานข้อมูลของคุณว่าสามารถรับแพคเกจได้มากกว่า% s MB (ปัจจุบันรับเฉพาะแพคเกจขนาด% s MB) กรุณาปรับให้เข้าการตั้งค่า max_allowed_packet ของฐานข้อมูลของคุณเพื่อหลีกเลี่ยงข้อผิดพลาด',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'ข้อผิดพลาด: กรุณาระบุค่าสำหรับ innodb_log_file_size ในฐานข้อมูลของคุณอย่างน้อย% s MB (ปัจจุบัน:% s MB แนะนำ:% s MB) สำหรับข้อมูลเพิ่มเติมโปรดดูได้ที่',
-        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
             '',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
 
         # Perl Module: Kernel/Modules/Mentions.pm
@@ -5035,13 +5037,11 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => 'การเชื่อมต่อลูกค้ากับชุดรหัสอักขระ',
-        'Setting character_set_client needs to be utf8.' => 'การตั้งค่า character_set_client จะต้องเป็น utf8',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => 'ฐานข้อมูลชุดรหัสอักขระของเซิร์ฟเวอร์',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => '',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'ตารางชุดรหัสอักขระ',
-        'There were tables found which do not have \'utf8\' as charset.' =>
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
@@ -5652,6 +5652,7 @@ sub Data {
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'กำหนดที่อยู่ของเซิร์ฟเวอร์ DNS ในกรณีที่จำเป็น
 สำหรับ "CheckMXRecord" ',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => '',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'กำหนดนิพจน์ปกติที่ไม่รวมที่อยู่บางส่วนจากการตรวจสอบไวยากรณ์ (ถ้า "CheckEmailAddresses" ตั้งค่าเป็น "ใช่")กรุณากด regexในช่องนี้สำหรับที่อยู่อีเมล มีนไม่ใช่การสร้างประโยคที่ถูกต้อง แต่เป็นสิ่งจำเป็นสำหรับระบบ (เช่น "root@localhost")',
@@ -6144,11 +6145,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => 'สกีนเริ่มต้นสำหรับอินเตอร์เฟซเอเย่นต์',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             '',
         'Default skin for the customer interface.' => 'สกีนเริ่มต้นสำหรับอินเตอร์เฟซเลูกค้า (รุ่นบาง)',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8662,6 +8665,7 @@ Thanks for your help!
         'CustomerUser' => 'CustomerUser',
         'Czech' => 'ภาษาเช็ก',
         'Danish' => 'ภาษาเดนมาร์ก',
+        'Dark' => '',
         'Dashboard overview.' => '',
         'Date / Time' => 'วัน / เวลา',
         'Default agent name' => '',
@@ -9055,6 +9059,8 @@ Thanks for your help!
         'Theme' => 'ตีม',
         'This is a Description for Comment on Framework.' => '',
         'This is a Description for DynamicField on Framework.' => '',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             '',
         'This is the default orange - black skin.' => '',

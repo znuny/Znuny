@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.89567931657631;
+    $Self->{Completeness}        = 0.894123440577807;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -648,9 +648,6 @@ sub Data {
             '',
         'Query delay' => '',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
-            '',
-        'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -2042,6 +2039,7 @@ sub Data {
         'Support Data' => '支持数据',
         'Error: Support data could not be collected (%s).' => '错误：%s 无法收集支持数据。',
         'Support Data Collector' => '支持数据收集工具',
+        'Delete cache' => '',
         'Details' => '详情',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2139,7 +2137,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => '权限',
@@ -2728,8 +2725,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => '发件人',
+        'Customer User Name' => '客户用户姓名',
         'Impact' => '影响',
-        'CustomerID' => 'CustomerID',
         'Update Time' => '更新时间',
         'Solution Time' => '解决时间',
         'First Response Time' => '首次响应时间',
@@ -2869,7 +2866,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => '挂起至',
         'Locked' => '锁定状态',
-        '%s Ticket(s)' => '%s个工单',
         'Accounted time' => '所用工时',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2972,6 +2968,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索条件',
         'e. g. 10*5155 or 105658*' => '例如: 10*5155 或 105658*',
+        'CustomerID' => 'CustomerID',
         'Types' => '类型',
         'Limitation' => '',
         'No time settings' => '没有设置时间',
@@ -3024,6 +3021,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => '你已加载草稿“%s”。 你最后更改了%s。',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             '你已加载草稿“%s”。 最后更改了%s的是%s。',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '请注意，这个草稿已经过时了，因为这个草稿创建后该工单已经被修改过了。',
 
@@ -4157,7 +4156,6 @@ sub Data {
         'Can\'t get element data of %s!' => '不能获得%s 的元素数据！',
         'Can\'t get filter content data of %s!' => '不能获得%s 的过滤器内容数据！',
         'Customer Name' => '客户名字',
-        'Customer User Name' => '客户用户姓名',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '需要SourceObject（源对象）和SourceKey（源键）！',
@@ -4485,14 +4483,18 @@ sub Data {
             '不能连接到数据库，没有安装Perl模块 DBD::%s！',
         'Can\'t connect to database, read comment!' => '不能连接到数据库，读取注释！',
         'Database already contains data - it should be empty!' => '数据库中已包含数据 - 应该清空它！',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '错误：请确认你的数据库能够接收大于%sMB的数据包（目前能够接收的最大数据包为%sMB）。为了避免程序报错，请调整数据库max_allowed_packet参数。',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '错误：请设置数据库参数innodb_log_file_size至少为%s MB（当前：%s MB，推荐：%s MB），请参阅 %s 获取更多信息。',
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
+            '',
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
         'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
-            '错误的数据库排序规则（%s是%s，但需要是utf8）。',
 
         # Perl Module: Kernel/Modules/Mentions.pm
         '%s users will be mentioned' => '',
@@ -5039,14 +5041,12 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => '客户端连接字符集',
-        'Setting character_set_client needs to be utf8.' => 'character_set_client 需要设置为utf8。',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => '服务器端数据库字符集',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => 'character_set_database 需要设置为\'utf8\'。',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => '表字符集',
-        'There were tables found which do not have \'utf8\' as charset.' =>
-            '字符集没有设置成 \'utf8\'的表。',
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
         'InnoDB Log File Size' => 'InnoDB日志文件大小',
@@ -5655,6 +5655,7 @@ sub Data {
             '在发送邮件或提交电话工单/邮件工单前让系统检查邮件地址的MX记录。',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             '定义专用的DNS服务器地址，如果需要，用于“检查MX记录”时查找。',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => '让系统检查邮件地址的语法。',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             '定义一个执行语法检查以排除某些地址的正则表达式（如果参数“检查邮件地址”设置为“是”）。请在这里为语句构成上无效但系统需要的邮件地址输入一个正则表达式（如root@localhost）。',
@@ -6147,11 +6148,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '指定服务人员显示姓和名的先后顺序。',
         'Default skin for the agent interface.' => '服务人员界面的默认皮肤。',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '服务人员界面皮肤的内部名称，请在Frontend::Agent::Loader::Agent::Skin中检查可用的皮肤。',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             '配置不同皮肤是可能的，例如：区分系统中基于域名的不同服务人员。您可以使用一个正则表达式配置一个键/内容组合来匹配一个域名。“键”应该匹配域名，“值”是一个系统中有效的皮肤。请参照样例条目修改正则表达式的合适格式。',
         'Default skin for the customer interface.' => '客户界面的默认皮肤。',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             '客户界面皮肤的内部名称，请在Frontend::Customer::Loader::Customer::Skin中检查可用的皮肤。',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8662,6 +8665,7 @@ Thanks for your help!
         'CustomerUser' => '客户',
         'Czech' => '捷克语',
         'Danish' => '丹麦语',
+        'Dark' => '',
         'Dashboard overview.' => '仪表板概览。',
         'Date / Time' => '日期 / 时间',
         'Default agent name' => '默认的服务人员姓名',
@@ -9055,6 +9059,8 @@ Thanks for your help!
         'Theme' => '主题',
         'This is a Description for Comment on Framework.' => '这是在框架中关于注释的描述信息。',
         'This is a Description for DynamicField on Framework.' => '这是在框架中关于动态字段的描述信息。',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             '这是客户界面默认的橙色-黑色皮肤。',
         'This is the default orange - black skin.' => '这是默认的橙色-黑色皮肤。',
