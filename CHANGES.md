@@ -1,4 +1,5 @@
 # 7.1.3 2024-??-??
+ - 2024-08-22 Added '--single-transaction' option to scripts/backup.pl for MySQL/MariaDB. The --single-transaction flag will start a transaction before running.
  - 2024-08-21 Improved CSS for skin 'Dark'. [#584](https://github.com/znuny/Znuny/issues/584)
  - 2024-08-21 Sector Nord AG: Fixed overflow of dynamic field groups in AgentTicketZoom process widget. Thanks to Sector Nord AG (@jsinagowitz). [PR#553](https://github.com/znuny/Znuny/pull/553)
  - 2024-06-26 Fixed wrong inversion of avatar image when using skin 'Dark'. [#584](https://github.com/znuny/Znuny/issues/584)
