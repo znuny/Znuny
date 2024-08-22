@@ -29,6 +29,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Priority',
     'Kernel::System::State',
+    'Kernel::System::Ticket',
     'Kernel::System::Type',
     'Kernel::System::User',
     'Kernel::System::Web::Request',
