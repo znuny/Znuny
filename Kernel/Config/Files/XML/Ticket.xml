@@ -249,7 +249,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::ArchiveRestore</Item>
-                <Item Key="Event">TicketStateUpdate</Item>
+                <Item Key="Event">\ATicketStateUpdate\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -259,7 +259,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::TicketAcceleratorUpdate</Item>
-                <Item Key="Event">TicketStateUpdate|TicketQueueUpdate|TicketLockUpdate</Item>
+                <Item Key="Event">\A(TicketStateUpdate|TicketQueueUpdate|TicketLockUpdate)\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -269,7 +269,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::ForceOwnerReset</Item>
-                <Item Key="Event">TicketQueueUpdate</Item>
+                <Item Key="Event">\ATicketQueueUpdate\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -279,7 +279,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::ForceState</Item>
-                <Item Key="Event">TicketLockUpdate</Item>
+                <Item Key="Event">\ATicketLockUpdate\z</Item>
                 <Item Key="new">open</Item>
             </Hash>
         </Value>
@@ -290,7 +290,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::ResponsibleAutoSet</Item>
-                <Item Key="Event">TicketOwnerUpdate</Item>
+                <Item Key="Event">\ATicketOwnerUpdate\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -300,7 +300,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::LockAfterCreate</Item>
-                <Item Key="Event">TicketCreate</Item>
+                <Item Key="Event">\ATicketCreate\z</Item>
                 <Item Key="Action">AgentTicketPhone|AgentTicketEmail</Item>
                 <Item Key="Transaction">1</Item>
             </Hash>
@@ -312,7 +312,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::TicketPendingTimeReset</Item>
-                <Item Key="Event">TicketStateUpdate</Item>
+                <Item Key="Event">\ATicketStateUpdate\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -334,7 +334,7 @@
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::TicketEscalationIndex</Item>
                 <Item Key="Transaction">1</Item>
-                <Item Key="Event">TicketSLAUpdate|TicketQueueUpdate|TicketStateUpdate|TicketCreate|ArticleCreate|TicketDynamicFieldUpdate|TicketTypeUpdate|TicketServiceUpdate|TicketCustomerUpdate|TicketPriorityUpdate|TicketMerge</Item>
+                <Item Key="Event">\A(TicketSLAUpdate|TicketQueueUpdate|TicketStateUpdate|TicketCreate|ArticleCreate|TicketDynamicFieldUpdate_.+|TicketTypeUpdate|TicketServiceUpdate|TicketCustomerUpdate|TicketPriorityUpdate|TicketMerge)\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -345,7 +345,7 @@
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::TriggerEscalationStopEvents</Item>
                 <Item Key="Transaction">0</Item>
-                <Item Key="Event">TicketSLAUpdate|TicketQueueUpdate|TicketStateUpdate|ArticleCreate</Item>
+                <Item Key="Event">\A(TicketSLAUpdate|TicketQueueUpdate|TicketStateUpdate|ArticleCreate)\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -355,7 +355,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::ForceUnlock</Item>
-                <Item Key="Event">TicketQueueUpdate</Item>
+                <Item Key="Event">\ATicketQueueUpdate\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -365,7 +365,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::TicketNewMessageUpdate</Item>
-                <Item Key="Event">ArticleCreate|ArticleFlagSet</Item>
+                <Item Key="Event">\AArticleCreate|ArticleFlagSet\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -375,7 +375,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerCompany::Event::TicketUpdate</Item>
-                <Item Key="Event">CustomerCompanyUpdate</Item>
+                <Item Key="Event">\ACustomerCompanyUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -386,7 +386,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerUser::Event::TicketUpdate</Item>
-                <Item Key="Event">CustomerUserUpdate</Item>
+                <Item Key="Event">\ACustomerUserUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -406,7 +406,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::DynamicFieldFromCustomerUser</Item>
-                <Item Key="Event">(TicketCreate|TicketCustomerUpdate)</Item>
+                <Item Key="Event">\A(TicketCreate|TicketCustomerUpdate)\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -10675,7 +10675,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Queue::Event::TicketAcceleratorUpdate</Item>
-                <Item Key="Event">QueueUpdate</Item>
+                <Item Key="Event">\AQueueUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -12734,7 +12734,7 @@ Thanks for your help!
             <Hash>
                 <Item Key="Name">Field1</Item>
                 <Item Key="Value">Default</Item>
-                <Item Key="Event">TicketCreate</Item>
+                <Item Key="Event">\ATicketCreate\z</Item>
             </Hash>
         </Value>
     </Setting>

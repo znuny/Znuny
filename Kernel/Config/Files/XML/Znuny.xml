@@ -417,7 +417,7 @@
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::DynamicFieldWebservice</Item>
                 <Item Key="Transaction">1</Item>
-                <Item Key="Event">TicketDynamicFieldUpdate</Item>
+                <Item Key="Event">\ATicketDynamicFieldUpdate_.+\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1466,7 +1466,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::TicketAllChildrenClosed</Item>
-                <Item Key="Event">TicketStateUpdate|TicketCreate</Item>
+                <Item Key="Event">\A(TicketStateUpdate|TicketCreate)\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1480,7 +1480,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::NotifyOnEmptyProcessTickets</Item>
-                <Item Key="Event">TicketCreate</Item>
+                <Item Key="Event">\ATicketCreate\z</Item>
                 <Item Key="Transaction">1</Item>
             </Hash>
         </Value>
@@ -1573,7 +1573,7 @@
             <Hash>
                 <Item Key="Module">Kernel::System::DBCRUD::Event::DBCRUD</Item>
                 <Item Key="Transaction">1</Item>
-                <Item Key="Event">DBCRUD(.+)</Item>
+                <Item Key="Event">\ADBCRUD(.+)</Item>
             </Hash>
         </Value>
     </Setting>
@@ -2451,7 +2451,7 @@
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::Mentions</Item>
                 <Item Key="Transaction">1</Item>
-                <Item Key="Event">ArticleCreate</Item>
+                <Item Key="Event">\AArticleCreate\z</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3114,7 +3114,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Ticket::Event::DynamicFieldFromCustomerCompany</Item>
-                <Item Key="Event">(TicketCreate|TicketCustomerUpdate)</Item>
+                <Item Key="Event">\A(TicketCreate|TicketCustomerUpdate)\z</Item>
             </Hash>
         </Value>
     </Setting>

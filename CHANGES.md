@@ -1,4 +1,13 @@
-# 7.1.1 2024-??-??
+# 7.1.3 2024-??-??
+ - 2024-08-21 Improved CSS for skin 'Dark'. [#558](https://github.com/znuny/Znuny/issues/558)
+ - 2024-08-21 Sector Nord AG: Fixed overflow of dynamic field groups in AgentTicketZoom process widget. Thanks to Sector Nord AG (@jsinagowitz). [PR#553](https://github.com/znuny/Znuny/pull/553)
+ - 2024-06-26 Fixed wrong inversion of avatar image when using skin 'Dark'. [#558](https://github.com/znuny/Znuny/issues/558)
+
+# 7.1.2 2024-07-24
+ - 2024-07-24 Fixed migration for databases other than MySQL and MariaDB.
+
+# 7.1.1 2024-07-24
+ - 2024-07-18 Added Dark Skin.
  - 2024-07-17 Removed ArticlePreViewModules from Medium.pm view. No articles are displayed at this point.
  - 2024-07-16 Added filtering and cache deletion to AdminSupportDataCollector.
  - 2024-07-11 Updated Moment.js to 2.30.1 and jQueryUI to 1.13.3.
@@ -22,6 +31,7 @@
  - 2024-05-03 Icons for shortcut and Apple touch are now configurable.
  - 2024-05-02 Added a bulk function to watch tickets.
  - 2024-04-30 Added a function to bulk-unwatch tickets in the overview of watched tickets.
+ - 2024-04-12 Fixed event registration regular expressions in config options. Thanks to Paweł Bogusławski (@pboguslawski) for reporting. [#440](https://github.com/znuny/Znuny/issues/440)
  - 2023-10-11 Added user preferences backend DBJSON.
 
 # 7.0.19 2024-06-26
@@ -277,6 +287,14 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.10 2024-07-24
+ - 2024-07-11 Updated Moment.js to 2.30.1 and jQueryUI to 1.13.3.
+ - 2024-07-08 Improved and fixed links to customer and customer user information center in several widgets and overview pages.
+ - 2024-07-08 Invoker Ticket::Generic: Configured fields will now also be removed and encoded from/for given data (payload).
+ - 2024-06-20 Fixed output of last mention date in dashboard widget "Last mentions".
+ - 2024-04-12 Fixed event registration regular expressions in config options. Thanks to Paweł Bogusławski (@pboguslawski) for reporting. [#440](https://github.com/znuny/Znuny/issues/440)
+ - 2024-02-13 Fixed autocompletion search for dynamic field types WebserviceDropdown and WebserviceMultiselect in AgentTicketSearch dialog.
 
 # 6.5.9 2024-06-26
  - 2024-06-19 Fixed home directory check in AdminSystemFiles to work with symbolic links.

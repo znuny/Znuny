@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.891407918514868;
+    $Self->{Completeness}        = 0.890676296782666;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6147,11 +6147,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Određuje oblik u kome će biti prikazano ime i prezime operatera.',
         'Default skin for the agent interface.' => 'Podrazumevani izgled okruženja za interfejs operatera.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Izled koji će se koristiti u interfejsu operatera. Molimo proverite dostupne izglede u Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             'Moguće je podesiti različite izglede za različite operatere, koji se koriste na nivou domena u aplikaciji. Korišćenjem regularnog izraza (regex), možete podesiti par ključ/vrednost za prepoznavanje domena. Vrednost u Key bi trebalo da prepozna domen, a vrednost u Content bi trebalo da bude važeći izgled u sistemu. Molimo konsultujte primere za ispravan oblik regularnog izraza.',
         'Default skin for the customer interface.' => 'Podrazumevani izgled okruženja za interfejs klijenta.',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             'Izled koji će se koristiti u interfejsu korisnika. Molimo proverite dostupne izglede u Frontend::Customer::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8663,6 +8665,7 @@ Vaša tehnička podrška
         'CustomerUser' => 'Klijent korisnik',
         'Czech' => 'Češki',
         'Danish' => 'Danski',
+        'Dark' => '',
         'Dashboard overview.' => 'Pregled komandne table.',
         'Date / Time' => 'Datum / Vreme',
         'Default agent name' => 'Podrazumevano ime operatera',
@@ -9056,6 +9059,8 @@ Vaša tehnička podrška
         'Theme' => 'Tema',
         'This is a Description for Comment on Framework.' => 'Ovo je opis za komentar u sistemu.',
         'This is a Description for DynamicField on Framework.' => 'Ovo je opis za dinamičko polje u sistemu.',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             'Ovo je podrazumevani narandžasto-crni izgled klijentskog interfejsa.',
         'This is the default orange - black skin.' => 'Ovo je podrazumevani narandžasto-crni izgled.',

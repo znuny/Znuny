@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-07-19 09:29+0000\n"
+"POT-Creation-Date: 2024-07-19 08:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16615,6 +16615,10 @@ msgid "Default skin for the agent interface."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Dark skin for the agent interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The agent skin's InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins."
 msgstr ""
 
@@ -16624,6 +16628,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Default skin for the customer interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Dark skin for the customer interface."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -22498,6 +22506,10 @@ msgid "Danish"
 msgstr ""
 
 #. SysConfig
+msgid "Dark"
+msgstr ""
+
+#. SysConfig
 msgid "Dashboard overview."
 msgstr ""
 
@@ -23963,6 +23975,14 @@ msgstr ""
 
 #. SysConfig
 msgid "This is a Description for DynamicField on Framework."
+msgstr ""
+
+#. SysConfig
+msgid "This is the dark skin for the agent interface."
+msgstr ""
+
+#. SysConfig
+msgid "This is the dark skin for the customer interface."
 msgstr ""
 
 #. SysConfig
