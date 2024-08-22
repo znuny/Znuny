@@ -2758,7 +2758,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::Package::Event::SupportDataSend</Item>
-                <Item Key="Event">(PackageInstall|PackageReinstall|PackageUpgrade|PackageUninstall)</Item>
+                <Item Key="Event">\A(PackageInstall|PackageReinstall|PackageUpgrade|PackageUninstall)\z</Item>
                 <Item Key="Transaction">1</Item>
             </Hash>
         </Value>
@@ -4241,7 +4241,7 @@ via the Preferences button after logging in.
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>thirdparty/momentjs-2.29.4/moment.min.js</Item>
+                        <Item>thirdparty/momentjs-2.30.1/moment.min.js</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.js</Item>
                         <Item>thirdparty/d3-3.5.7/d3.min.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/nvd3.min.js</Item>
@@ -7773,7 +7773,7 @@ via the Preferences button after logging in.
             <Array>
                 <Item>thirdparty/jquery-3.7.0/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
-                <Item>thirdparty/jquery-ui-1.13.2/jquery-ui.js</Item>
+                <Item>thirdparty/jquery-ui-1.13.3/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.js</Item>
                 <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
@@ -7893,7 +7893,7 @@ via the Preferences button after logging in.
                 <Item>thirdparty/jquery-3.7.0/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
                 <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
-                <Item>thirdparty/jquery-ui-1.13.2/jquery-ui.js</Item>
+                <Item>thirdparty/jquery-ui-1.13.3/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.7/jquery.jstree.js</Item>
                 <Item>thirdparty/nunjucks-3.2.2/nunjucks.min.js</Item>
@@ -7980,7 +7980,19 @@ via the Preferences button after logging in.
                 <Item Key="InternalName">default</Item>
                 <Item Key="VisibleName" Translatable="1">Default</Item>
                 <Item Key="Description" Translatable="1">This is the default orange - black skin.</Item>
-                <Item Key="HomePage">www.otrs.org</Item>
+                <Item Key="HomePage">www.znuny.org</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Agent::Skin###000-dark" Required="0" Valid="1">
+        <Description Translatable="1">Dark skin for the agent interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">dark</Item>
+                <Item Key="VisibleName" Translatable="1">Dark</Item>
+                <Item Key="Description" Translatable="1">This is the dark skin for the agent interface.</Item>
+                <Item Key="HomePage">www.znuny.org</Item>
             </Hash>
         </Value>
     </Setting>
@@ -8009,7 +8021,19 @@ via the Preferences button after logging in.
                 <Item Key="InternalName">default</Item>
                 <Item Key="VisibleName" Translatable="1">Default</Item>
                 <Item Key="Description" Translatable="1">This is the default orange - black skin for the customer interface.</Item>
-                <Item Key="HomePage">www.otrs.org</Item>
+                <Item Key="HomePage">www.znuny.org</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Customer::Skin###000-dark" Required="0" Valid="1">
+        <Description Translatable="1">Dark skin for the customer interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="InternalName">dark</Item>
+                <Item Key="VisibleName" Translatable="1">Dark</Item>
+                <Item Key="Description" Translatable="1">This is the dark skin for the customer interface.</Item>
+                <Item Key="HomePage">www.znuny.org</Item>
             </Hash>
         </Value>
     </Setting>
@@ -8091,7 +8115,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerCompany::Event::CustomerUserUpdate</Item>
-                <Item Key="Event">CustomerCompanyUpdate</Item>
+                <Item Key="Event">\ACustomerCompanyUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -8102,7 +8126,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerCompany::Event::DynamicFieldObjectNameUpdate</Item>
-                <Item Key="Event">CustomerCompanyUpdate</Item>
+                <Item Key="Event">\ACustomerCompanyUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -8113,7 +8137,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerUser::Event::SearchProfileUpdate</Item>
-                <Item Key="Event">CustomerUserUpdate</Item>
+                <Item Key="Event">\ACustomerUserUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -8124,7 +8148,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerUser::Event::ServiceMemberUpdate</Item>
-                <Item Key="Event">CustomerUserUpdate</Item>
+                <Item Key="Event">\ACustomerUserUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>
@@ -8135,7 +8159,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerUser::Event::DynamicFieldObjectNameUpdate</Item>
-                <Item Key="Event">CustomerUserUpdate</Item>
+                <Item Key="Event">\ACustomerUserUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>
         </Value>

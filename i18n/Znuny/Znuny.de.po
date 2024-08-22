@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2024-06-29 11:59+0000\n"
-"Last-Translator: Roy Kaldung <rk@znuny.com>\n"
+"PO-Revision-Date: 2024-08-01 21:00+0000\n"
+"Last-Translator: Denny Korsukéwitz <dk@znuny.com>\n"
 "Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5.5\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Actions"
@@ -1887,14 +1887,6 @@ msgstr "Abfrage-Verzögerung"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "Delay (in milliseconds) until the AJAX request will be sent."
 msgstr "Verzögerung (in Millisekunden) bis der AJAX-Request abgeschickt wird."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
-msgid "Autocompletion for search fields"
-msgstr "Autovervollständigung für Suchfelder"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
-msgid "Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch."
-msgstr "Autovervollständigung für Suchfelder benutzen statt statischer Auswahl aktuell in Znuny gewählter Werte (in Tickets, Artikeln, etc.). Dies verbessert die Performance, sofern mehrere tausend Werte des dynamischen Felds gewählt wurden. Diese Einstellungen hat keine Auswirkungen auf die Suchfelder, die in AgentTicketSearch und CustomerTicketSearch angezeigt werden."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "Input field width"
@@ -6368,7 +6360,7 @@ msgstr "Einstellung: %s anzeigen"
 msgid "System file support"
 msgstr "Systemdatei-Support"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Delete cache"
 msgstr "Cache löschen"
 
@@ -8030,7 +8022,7 @@ msgstr "Sender informieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
 msgid "Need a valid email address."
-msgstr "Benötige gültige E-Mail-Adresse."
+msgstr "Gültige E-Mail-Adresse benötigt."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "Move %s%s%s"
@@ -8074,7 +8066,7 @@ msgstr "Notiz ungültig."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Select all"
-msgstr ""
+msgstr " Alle auswählen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "No ticket data found."
@@ -8082,11 +8074,11 @@ msgstr "Keine Ticket-Daten gefunden."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Open / Close ticket action menu"
-msgstr ""
+msgstr " Öffne / Schließe Ticket Aktionsmenü"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Select this ticket"
-msgstr ""
+msgstr " Dieses Ticket auswählen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "Sender"
@@ -8118,7 +8110,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid " Move ticket to a different queue"
-msgstr ""
+msgstr " Ticket in eine andere Queue verschieben"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "Change queue"
@@ -8158,7 +8150,7 @@ msgstr "Übersicht zurücksetzen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
 msgid " Column Filters Form"
-msgstr ""
+msgstr " Spaltenfilter-Formular"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
 msgid "Split Into New Phone Ticket"
@@ -8918,15 +8910,15 @@ msgstr "Sie sind angemeldet als"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
 msgid "Delete all activities"
-msgstr ""
+msgstr "Alle Aktivitäten löschen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
 msgid "Delete all"
-msgstr ""
+msgstr "Alle löschen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
 msgid "Mark all activities as seen"
-msgstr ""
+msgstr "Alle Aktivitäten als gelesen markieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
 msgid "Seen all"
@@ -8950,7 +8942,7 @@ msgstr "Suche"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
 msgid "SearchTemplate"
-msgstr "Surchvorlage"
+msgstr "Suchvorlage"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "JavaScript not available"
@@ -15278,7 +15270,7 @@ msgstr "Definiert den Full Qualified Domain Name des Znuny Systems. Diese Einste
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
-msgstr ""
+msgstr "Definiert den voll qualifizierten Domänennamen für die Generierung externer IDs (z. B. Message-ID, ContentID)."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the HTTP hostname for the support data collection with the public module 'PublicSupportDataCollector' (e.g. used from the Znuny Daemon)."
@@ -20706,35 +20698,35 @@ msgstr "Dieses Fenster muss aus dem Fenster zum Verfassen von Tickets aufgerufen
 
 #. JS File: var/httpd/htdocs/js/Core.Activity.js
 msgid "An error occurred"
-msgstr ""
+msgstr "Ein Fehler ist aufgetreten"
 
 #. JS File: var/httpd/htdocs/js/Core.Activity.js
 msgid "The activity could not be created. %s is needed."
-msgstr ""
+msgstr "Die Aktivität konnte nicht erstellt werden. %s wird benötigt."
 
 #. JS File: var/httpd/htdocs/js/Core.Activity.js
 msgid "The activity could not be created."
-msgstr ""
+msgstr "Die Aktivität konnte nicht erstellt werden."
 
 #. JS File: var/httpd/htdocs/js/Core.Activity.js
 msgid "The activity could not be updated."
-msgstr ""
+msgstr "Die Aktivität konnte nicht aktualisiert werden."
 
 #. JS File: var/httpd/htdocs/js/Core.Activity.js
 msgid "The activity could not be deleted."
-msgstr ""
+msgstr "Die Aktivität konnte nicht gelöscht werden."
 
 #. JS File: var/httpd/htdocs/js/Core.Activity.js
 msgid "The activity could not be marked as new."
-msgstr ""
+msgstr "Die Aktivität konnte nicht als neu markiert werden."
 
 #. JS File: var/httpd/htdocs/js/Core.Activity.js
 msgid "The activity could not be marked as seen."
-msgstr ""
+msgstr "Die Aktivität konnte nicht als gelesen markiert werden."
 
 #. JS File: var/httpd/htdocs/js/Core.Activity.js
 msgid "The activities could not be marked as seen."
-msgstr ""
+msgstr "Die Aktivitäten konnten nicht als gelesen markiert werden."
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
 msgid "Add all"
@@ -21234,7 +21226,7 @@ msgstr "Bitte geben Sie zumindest einen Suchbegriff ein oder * um nach Allem zu 
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
 msgid "Insert selected customer user(s) into the \"%s:\" field."
-msgstr ""
+msgstr "Ausgewählte(n) Kundenbenutzer in das Feld \"%s:\" einfügen."
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
 msgid "Information about the Znuny Daemon"
@@ -21731,7 +21723,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Activity."
-msgstr ""
+msgstr "Aktivität."
 
 #. SysConfig
 msgid "ActivityID"
@@ -23575,7 +23567,7 @@ msgstr "Wählen Sie Ihr bevorzugtes Layout aus."
 
 #. SysConfig
 msgid "Select your preferred theme for OTRS."
-msgstr ""
+msgstr "Wählen Sie Ihr bevorzugtes Theme für Znuny."
 
 #. SysConfig
 msgid "Send a unit test file"
@@ -24235,7 +24227,7 @@ msgstr "im gleichen Tab öffnen"
 
 #. SysConfig
 msgid "open in new tab"
-msgstr "in neuem Tab öffnen"
+msgstr "im neuen Tab öffnen"
 
 #. SysConfig
 msgid "pending"
@@ -24389,7 +24381,51 @@ msgstr "Löscht verwaiste Sessions."
 msgid "Error: You have the wrong database version installed (%s). You need at least version %s! "
 msgstr "Fehler: Sie haben eine falsche Datenbankversion installiert (%s). Sie benötigen mindestens Version %s!"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
+msgid "Please note that you have already one or more saved drafts for this action."
+msgstr "Bitte beachten Sie, dass Sie für diese Aktion bereits einen oder mehrere Entwürfe gespeichert haben."
+
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the timeout (in seconds) for DNS resolver queries."
 msgstr "Steuert den Timeout (in Sekunden) für DNS-Resolver-Anfragen."
+
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_file_per_table on your database to ON."
+msgstr "Fehler: Bitte setzen Sie den Wert für innodb_file_per_table in Ihrer Datenbank-Konfiguration auf ON."
+
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_default_row_format on your database to dynamic."
+msgstr "Fehler: Bitte setzen Sie den Wert für innodb_default_row_format in Ihrer Datenbank-Konfiguration auf dynamic."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
+msgid "Setting character_set_client needs to be utf8mb4."
+msgstr "Einstellung character_set_client muss utf8mb4 sein."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
+msgid "The setting character_set_database needs to be 'utf8mb4'."
+msgstr "Die Einstellung character_set_database muss 'utf8mb4' sein."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
+msgid "There were tables found which do not have 'utf8mb4' as charset."
+msgstr "Es wurden Tabellen gefunden, die nicht 'utf8mb4' als Zeichensatz haben."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Dark skin for the agent interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Dark skin for the customer interface."
+msgstr ""
+
+#. SysConfig
+msgid "Dark"
+msgstr ""
+
+#. SysConfig
+msgid "This is the dark skin for the agent interface."
+msgstr ""
+
+#. SysConfig
+msgid "This is the dark skin for the customer interface."
+msgstr ""
 

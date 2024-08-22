@@ -676,47 +676,6 @@ sub _Show {
         }
     }
 
-    # run article modules
-    if ( $Article{ArticleID} ) {
-        if ( ref $ConfigObject->Get('Ticket::Frontend::ArticlePreViewModule') eq 'HASH' ) {
-            my %Jobs = %{ $ConfigObject->Get('Ticket::Frontend::ArticlePreViewModule') };
-            for my $Job ( sort keys %Jobs ) {
-
-                # load module
-                if ( !$MainObject->Require( $Jobs{$Job}->{Module} ) ) {
-                    return $LayoutObject->FatalError();
-                }
-                my $Object = $Jobs{$Job}->{Module}->new(
-                    %{$Self},
-                    ArticleID => $Article{ArticleID},
-                    UserID    => $Self->{UserID},
-                    Debug     => $Self->{Debug},
-                );
-
-                # run module
-                my @Data = $Object->Check(
-                    Article => \%Article,
-                    %Param,
-                    Config => $Jobs{$Job},
-                );
-
-                for my $DataRef (@Data) {
-                    $LayoutObject->Block(
-                        Name => 'ArticleOption',
-                        Data => $DataRef,
-                    );
-                }
-
-                # filter option
-                $Object->Filter(
-                    Article => \%Article,
-                    %Param,
-                    Config => $Jobs{$Job},
-                );
-            }
-        }
-    }
-
     # create output
     $LayoutObject->Block(
         Name => 'AgentAnswer',
@@ -726,6 +685,7 @@ sub _Show {
             %AclAction,
         },
     );
+
     if (
         $ConfigObject->Get('Frontend::Module')->{AgentTicketCompose}
         && ( !defined $AclAction{AgentTicketCompose} || $AclAction{AgentTicketCompose} )

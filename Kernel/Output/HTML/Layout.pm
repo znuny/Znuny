@@ -1798,6 +1798,7 @@ sub Footer {
         SearchFrontend             => $JSCall,
         Autocomplete               => $AutocompleteConfig,
         'Mentions::RichTextEditor' => $ConfigObject->Get('Mentions::RichTextEditor') // {},
+        Skin                       => $Self->{SkinSelected},
     );
 
     for my $Config ( sort keys %JSConfig ) {
@@ -6249,6 +6250,24 @@ sub SetRichTextParameters {
         }
     }
 
+    my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
+    my $WebPath  = $ConfigObject->Get('Frontend::WebPath') . 'skins';
+
+    my $UserType = $Self->{SessionSource} || '';
+    if ($UserType) {
+        $UserType =~ s/Interface//;
+    }
+
+    my $ContentsCssFS
+        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+    my $ContentsCss
+        = $WebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+
+    # If Core.RichTextEditor.ContentsCss.css for current skin exists, use it
+    if ( -e $ContentsCssFS ) {
+        $RichTextSettings{'ContentsCss'} = $ContentsCss;
+    }
+
     # get needed variables
     my $RichTextType        = $Param{Data}->{RichTextType}                || '';
     my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
@@ -6392,6 +6411,26 @@ sub CustomerSetRichTextParameters {
         if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
             $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
         }
+    }
+
+    my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
+    my $WebPath  = $ConfigObject->Get('Frontend::WebPath') . 'skins';
+
+    my $UserType = $Self->{SessionSource} || '';
+    if ($UserType) {
+        $UserType =~ s/Interface//;
+    }
+
+    $Self->{SkinSelected} = $ConfigObject->Get("Loader::Customer::SelectedSkin") || 'default';
+
+    my $ContentsCssFS
+        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+    my $ContentsCss
+        = $WebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+
+    # If Core.RichTextEditor.ContentsCss.css for current skin exists, use it
+    if ( -e $ContentsCssFS ) {
+        $RichTextSettings{'ContentsCss'} = $ContentsCss;
     }
 
     my $TextDir             = $Self->{TextDirection}                      || '';

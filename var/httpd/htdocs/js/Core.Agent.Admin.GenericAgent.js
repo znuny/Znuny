@@ -193,17 +193,19 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
             Core.Config.Get('CGIHandle'),
             Data,
             function (Response) {
-                var FieldHTML;
+                var $Field,
+                    InputFieldUUID;
 
-                // Removed immediate addition of RemoveButtonHTML (see comment below)
                 if (Widget === 'Update') {
-                    FieldHTML = Response.Label + '<div style="flex-flow: row" class="Field" data-id="' + Response.ID + '">' + Response.Field;
+                    $Field = $(Response.Label + '<div style="flex-flow: row" class="Field" data-id="' + Response.ID + '">' + Response.Field);
                 } else if (Widget === 'Select') {
-                    FieldHTML = Response.Label + '<div class="Field flex-row" data-id="' + Response.ID + '">' + Response.Field;
+                    $Field = $(Response.Label + '<div class="Field flex-row" data-id="' + Response.ID + '">' + Response.Field);
                 }
 
+                InputFieldUUID = $Field.find(':input').attr('data-input-field-uuid');
+
                 // Append field HTML from response to selected fields area.
-                $('#' + SelectedFieldsID).append(FieldHTML);
+                $('#' + SelectedFieldsID).append($Field);
                 $('div.Field[data-id="' + Response.ID + '"]').append(RemoveButtonHTML);
 
                 // Initialize datepicker for dynamic fields of type Date or DateTime.
@@ -232,7 +234,9 @@ Core.Agent.Admin.GenericAgent = (function (TargetNS) {
                 });
 
                 // Trigger dynamic field event initialization (needed for specific fields from packages).
-                Core.App.Publish('Event.DynamicField.Init', [Response.ID]);
+                if (InputFieldUUID) {
+                    Core.App.Publish('Event.DynamicField.InitByInputFieldUUID', [InputFieldUUID]);
+                }
 
                 return false;
 

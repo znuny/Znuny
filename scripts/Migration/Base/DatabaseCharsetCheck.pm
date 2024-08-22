@@ -28,28 +28,35 @@ Checks if MySQL database is using correct charset.
 
 =cut
 
-sub Run {
+sub CheckPreviousRequirement {
     my ( $Self, %Param ) = @_;
 
     return 1;
 }
 
-=head2 CheckPreviousRequirement()
-
-Check for initial conditions for running this migration step.
-
-Returns 1 on success:
-
-    my $Result = $MigrateToZnunyObject->CheckPreviousRequirement();
-
-=cut
-
-sub CheckPreviousRequirement {
+sub Run {
     my ( $Self, %Param ) = @_;
 
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    # Get Znuny version
+    my $Version = $ConfigObject->Get('Version');
+    my $MajorVersion;
+    my $MinorVersion;
+
+    if ( $Version =~ m{(\d+)\.(\d+)}xms ) {
+        $MajorVersion = $1;
+        $MinorVersion = $2;
+    }
+
+    # Define the required charset based on Znuny version
+    my $RequiredCharacterSet = 'utf8';
+    if ( $MajorVersion == 7 && $MinorVersion >= 1 ) {
+        $RequiredCharacterSet = 'utf8mb4';
+    }
 
     # This check makes sense only for MySQL, so skip it in case of other back-ends.
     if ( $DBObject->GetDatabaseFunction('Type') ne 'mysql' ) {
@@ -59,20 +66,21 @@ sub CheckPreviousRequirement {
         return 1;
     }
 
-    my $ClientIsUTF8       = 0;
+    my $ClientIsCorrect    = 0;
     my $ClientCharacterSet = "";
 
     # Check client character set.
     $DBObject->Prepare( SQL => "show variables like 'character_set_client'" );
     while ( my @Row = $DBObject->FetchrowArray() ) {
         $ClientCharacterSet = $Row[1];
-        if ( $ClientCharacterSet =~ /utf8/i ) {
-            $ClientIsUTF8 = 1;
+
+        if ( $ClientCharacterSet =~ /^$RequiredCharacterSet/i ) {
+            $ClientIsCorrect = 1;
         }
     }
 
-    if ( !$ClientIsUTF8 ) {
-        print "    Error: Setting character_set_client needs to be utf8.\n";
+    if ( !$ClientIsCorrect ) {
+        print "    Error: Setting character_set_client needs to be '$RequiredCharacterSet'.\n";
         return;
     }
 
@@ -80,32 +88,21 @@ sub CheckPreviousRequirement {
         print "    The setting character_set_client is: $ClientCharacterSet. ";
     }
 
-    my $DatabaseIsUTF8       = 0;
-    my $DatabaseIsUTF8MB4    = 0;
+    my $DatabaseIsCorrect    = 0;
     my $DatabaseCharacterSet = "";
 
     # Check database character set.
     $DBObject->Prepare( SQL => "show variables like 'character_set_database'" );
     while ( my @Row = $DBObject->FetchrowArray() ) {
         $DatabaseCharacterSet = $Row[1];
-        if ( $DatabaseCharacterSet =~ /utf8/i ) {
-            $DatabaseIsUTF8 = 1;
-        }
-        if ( $DatabaseCharacterSet =~ /utf8mb4/i ) {
-            $DatabaseIsUTF8MB4 = 1;
+
+        if ( $DatabaseCharacterSet =~ /^$RequiredCharacterSet$/i ) {
+            $DatabaseIsCorrect = 1;
         }
     }
 
-    if ($DatabaseIsUTF8MB4) {
-        print "\n    Error: The setting character_set_database is set to '$DatabaseCharacterSet'.";
-        print
-            "\n    Error: This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361.";
-        print "\n    Error: Please convert your database to the character set 'utf8'.\n";
-        return;
-    }
-
-    if ( !$DatabaseIsUTF8 ) {
-        print "\n    Error: The setting character_set_database needs to be 'utf8'.\n";
+    if ( !$DatabaseIsCorrect ) {
+        print "\n    Error: The setting character_set_database needs to be '$RequiredCharacterSet'.\n";
         return;
     }
 
@@ -118,13 +115,13 @@ sub CheckPreviousRequirement {
     # Check for tables with invalid character set. Views have engine == null, ignore those.
     $DBObject->Prepare( SQL => 'show table status where engine is not null' );
     while ( my @Row = $DBObject->FetchrowArray() ) {
-        if ( $Row[14] =~ /^utf8mb4/i || $Row[14] !~ /^utf8/i ) {
+        if ( $Row[14] !~ /^$RequiredCharacterSet\_unicode_ci$/i ) {
             push @TablesWithInvalidCharset, $Row[0];
         }
     }
 
     if (@TablesWithInvalidCharset) {
-        print "\n    Error: There were tables found which do not have 'utf8' as charset: '";
+        print "\n    Error: There were tables found which do not have '$RequiredCharacterSet' as charset: '";
         print join( "', '", @TablesWithInvalidCharset ) . "'.\n";
         return;
     }

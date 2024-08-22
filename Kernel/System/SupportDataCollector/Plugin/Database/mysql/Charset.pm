@@ -37,7 +37,7 @@ sub Run {
 
     $DBObject->Prepare( SQL => "show variables like 'character_set_client'" );
     while ( my @Row = $DBObject->FetchrowArray() ) {
-        if ( $Row[1] =~ /utf8/i ) {
+        if ( $Row[1] =~ /utf8mb4/i ) {
             $Self->AddResultOk(
                 Identifier => 'ClientEncoding',
                 Label      => Translatable('Client Connection Charset'),
@@ -49,7 +49,7 @@ sub Run {
                 Identifier => 'ClientEncoding',
                 Label      => Translatable('Client Connection Charset'),
                 Value      => $Row[1],
-                Message    => Translatable('Setting character_set_client needs to be utf8.'),
+                Message    => Translatable('Setting character_set_client needs to be utf8mb4.'),
             );
         }
     }
@@ -57,16 +57,6 @@ sub Run {
     $DBObject->Prepare( SQL => "show variables like 'character_set_database'" );
     while ( my @Row = $DBObject->FetchrowArray() ) {
         if ( $Row[1] =~ /utf8mb4/i ) {
-            $Self->AddResultProblem(
-                Identifier => 'ServerEncoding',
-                Label      => Translatable('Server Database Charset'),
-                Value      => $Row[1],
-                Message    => Translatable(
-                    "This character set is not yet supported. Please convert your database to the character set 'utf8'."
-                ),
-            );
-        }
-        elsif ( $Row[1] =~ /utf8/i ) {
             $Self->AddResultOk(
                 Identifier => 'ServerEncoding',
                 Label      => Translatable('Server Database Charset'),
@@ -78,7 +68,7 @@ sub Run {
                 Identifier => 'ServerEncoding',
                 Label      => Translatable('Server Database Charset'),
                 Value      => $Row[1],
-                Message    => Translatable("The setting character_set_database needs to be 'utf8'."),
+                Message    => Translatable("The setting character_set_database needs to be 'utf8mb4'."),
             );
         }
     }
@@ -88,7 +78,7 @@ sub Run {
     # Views have engine == null, ignore those.
     $DBObject->Prepare( SQL => 'show table status where engine is not null' );
     while ( my @Row = $DBObject->FetchrowArray() ) {
-        if ( $Row[14] =~ /^utf8mb4/i || $Row[14] !~ /^utf8/i ) {
+        if ( $Row[14] !~ /^utf8mb4/i ) {
             push @TablesWithInvalidCharset, $Row[0];
         }
     }
@@ -97,7 +87,7 @@ sub Run {
             Identifier => 'TableEncoding',
             Label      => Translatable('Table Charset'),
             Value      => join( ', ', @TablesWithInvalidCharset ),
-            Message    => Translatable("There were tables found which do not have 'utf8' as charset."),
+            Message    => Translatable("There were tables found which do not have 'utf8mb4' as charset."),
         );
     }
     else {

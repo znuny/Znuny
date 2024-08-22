@@ -176,10 +176,11 @@ Core.Agent.Admin.NotificationEvent = (function (TargetNS) {
             Core.Config.Get('CGIHandle'),
             Data,
             function (Response) {
-                var FieldHTML = Response.Label + '<div class="Field flex-row" data-id="' + Response.ID + '">' + Response.Field;
+                var $Field = $(Response.Label + '<div class="Field flex-row" data-id="' + Response.ID + '">' + Response.Field),
+                    InputFieldUUID = $Field.find(':input').attr('data-input-field-uuid');
 
                 // Append field HTML from response to selected fields area.
-                $('#' + SelectedFieldsID).append(FieldHTML);
+                $('#' + SelectedFieldsID).append($Field);
                 $('div.Field[data-id="' + Response.ID + '"]').append(RemoveButtonHTML);
 
                 TargetNS.InitRemoveButtonEvent($('div.Field[data-id="' + Response.ID + '"]').find('.RemoveButton'), AddFieldsID);
@@ -200,7 +201,9 @@ Core.Agent.Admin.NotificationEvent = (function (TargetNS) {
                 });
 
                 // Trigger dynamic field event initialization (needed for specific fields from packages).
-                Core.App.Publish('Event.DynamicField.Init', [Response.ID]);
+                if (InputFieldUUID) {
+                    Core.App.Publish('Event.DynamicField.InitByInputFieldUUID', [InputFieldUUID]);
+                }
 
                 return false;
 

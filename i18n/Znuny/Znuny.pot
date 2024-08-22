@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-07-09 05:57+0000\n"
+"POT-Creation-Date: 2024-07-19 08:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1884,14 +1884,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "Delay (in milliseconds) until the AJAX request will be sent."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
-msgid "Autocompletion for search fields"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
-msgid "Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
@@ -6135,6 +6127,10 @@ msgid "Support Data Collector"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
+msgid "Delete cache"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Details"
 msgstr ""
 
@@ -6364,10 +6360,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
 msgid "System file support"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
-msgid "Delete cache"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
@@ -8912,6 +8904,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
 msgid "You have loaded the draft \"%s\". It was last changed %s by %s."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
+msgid "Please note that you have already one or more saved drafts for this action."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
@@ -12907,11 +12903,15 @@ msgid "Error: Please set the value for innodb_log_file_size on your database to 
 msgstr ""
 
 #. Perl Module: Kernel/Modules/Installer.pm
-msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
+msgid "Error: Please set the value for innodb_file_per_table on your database to ON."
 msgstr ""
 
 #. Perl Module: Kernel/Modules/Installer.pm
-msgid "Wrong database collation (%s is %s, but it needs to be utf8)."
+msgid "Error: Please set the value for innodb_default_row_format on your database to dynamic."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
 msgstr ""
 
 #. Perl Module: Kernel/Modules/Mentions.pm
@@ -14139,7 +14139,7 @@ msgid "Client Connection Charset"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "Setting character_set_client needs to be utf8."
+msgid "Setting character_set_client needs to be utf8mb4."
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
@@ -14147,11 +14147,7 @@ msgid "Server Database Charset"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "The setting character_set_database needs to be 'utf8'."
+msgid "The setting character_set_database needs to be 'utf8mb4'."
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
@@ -14159,7 +14155,7 @@ msgid "Table Charset"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "There were tables found which do not have 'utf8' as charset."
+msgid "There were tables found which do not have 'utf8mb4' as charset."
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
@@ -16619,6 +16615,10 @@ msgid "Default skin for the agent interface."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Dark skin for the agent interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The agent skin's InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins."
 msgstr ""
 
@@ -16628,6 +16628,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Default skin for the customer interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Dark skin for the customer interface."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -22502,6 +22506,10 @@ msgid "Danish"
 msgstr ""
 
 #. SysConfig
+msgid "Dark"
+msgstr ""
+
+#. SysConfig
 msgid "Dashboard overview."
 msgstr ""
 
@@ -23967,6 +23975,14 @@ msgstr ""
 
 #. SysConfig
 msgid "This is a Description for DynamicField on Framework."
+msgstr ""
+
+#. SysConfig
+msgid "This is the dark skin for the agent interface."
+msgstr ""
+
+#. SysConfig
+msgid "This is the dark skin for the customer interface."
 msgstr ""
 
 #. SysConfig

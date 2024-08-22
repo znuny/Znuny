@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.991787122207622;
+    $Self->{Completeness}        = 0.994418910045962;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -643,9 +643,6 @@ sub Data {
         'Query delay' => 'Abfrage-Verzögerung',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
             'Verzögerung (in Millisekunden) bis der AJAX-Request abgeschickt wird.',
-        'Autocompletion for search fields' => 'Autovervollständigung für Suchfelder',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
-            'Autovervollständigung für Suchfelder benutzen statt statischer Auswahl aktuell in Znuny gewählter Werte (in Tickets, Artikeln, etc.). Dies verbessert die Performance, sofern mehrere tausend Werte des dynamischen Felds gewählt wurden. Diese Einstellungen hat keine Auswirkungen auf die Suchfelder, die in AgentTicketSearch und CustomerTicketSearch angezeigt werden.',
         'Input field width' => 'Breite des Eingabefelds',
         'Width of the input field (percentage).' => 'Breite des Eingabefelds (in Prozent).',
         'Additional dynamic field storage' => 'Zusätzliche dynamische Felder befüllen',
@@ -2036,6 +2033,7 @@ sub Data {
         'Support Data' => 'Supportdaten',
         'Error: Support data could not be collected (%s).' => 'Fehler: Support-Daten konnten nicht ermittelt werden (%s).',
         'Support Data Collector' => 'Supportdaten-Analyse',
+        'Delete cache' => 'Cache löschen',
         'Details' => 'Details',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2133,7 +2131,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => 'Systemdatei-Support',
-        'Delete cache' => 'Cache löschen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Berechtigungen',
@@ -2700,7 +2697,7 @@ sub Data {
         'A valid ticket number is required.' => 'Eine gültige Ticketnummer ist erforderlich.',
         'Limit the search to tickets with same Customer ID (%s).' => 'Suche auf Tickets beschränken, die derselben Kundennummer (%s) zugewiesen sind.',
         'Inform Sender' => 'Sender informieren',
-        'Need a valid email address.' => 'Benötige gültige E-Mail-Adresse.',
+        'Need a valid email address.' => 'Gültige E-Mail-Adresse benötigt.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => '%s%s%s verschieben',
@@ -2717,10 +2714,10 @@ sub Data {
         'NoteToTicket invalid.' => 'Notiz ungültig.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
-        ' Select all' => '',
+        ' Select all' => ' Alle auswählen',
         'No ticket data found.' => 'Keine Ticket-Daten gefunden.',
-        ' Open / Close ticket action menu' => '',
-        ' Select this ticket' => '',
+        ' Open / Close ticket action menu' => ' Öffne / Schließe Ticket Aktionsmenü',
+        ' Select this ticket' => ' Dieses Ticket auswählen',
         'Sender' => 'Sender',
         'Customer User Name' => 'Kundenbenutzer-Name',
         'Impact' => 'Auswirkung',
@@ -2728,7 +2725,7 @@ sub Data {
         'Solution Time' => 'Lösungszeit',
         'First Response Time' => 'Reaktionszeit',
         ' Service Time' => '',
-        ' Move ticket to a different queue' => '',
+        ' Move ticket to a different queue' => ' Ticket in eine andere Queue verschieben',
         'Change queue' => 'Queue wechseln',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
@@ -2745,7 +2742,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => 'Übersicht zurücksetzen',
-        ' Column Filters Form' => '',
+        ' Column Filters Form' => ' Spaltenfilter-Formular',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => 'In ein neues Telefon-Ticket splitten',
@@ -3018,15 +3015,17 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Sie haben den Entwurf "%s" geladen, den Sie zuletzt %s geändert haben.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Sie haben den Entwurf "%s" geladen, der zuletzt %s von %s geändert wurde.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            'Bitte beachten Sie, dass Sie für diese Aktion bereits einen oder mehrere Entwürfe gespeichert haben.',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             'Bitte beachten Sie, dass dieser Entwurf aufgrund zwischenzeitlicher Änderungen am Ticket möglicherweise veraltet ist.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
         'Last viewed' => 'Zuletzt gesehen',
         'You are logged in as' => 'Sie sind angemeldet als',
-        'Delete all activities' => '',
-        'Delete all' => '',
-        'Mark all activities as seen' => '',
+        'Delete all activities' => 'Alle Aktivitäten löschen',
+        'Delete all' => 'Alle löschen',
+        'Mark all activities as seen' => 'Alle Aktivitäten als gelesen markieren',
         'Seen all' => 'Alle gesehen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
@@ -3034,7 +3033,7 @@ sub Data {
         'Personal views' => 'Persönliche Ansichten',
         'Last Views' => 'Zuletzt gesehen',
         'Search tools' => 'Suche',
-        'SearchTemplate' => 'Surchvorlage',
+        'SearchTemplate' => 'Suchvorlage',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript nicht verfügbar',
@@ -4484,10 +4483,12 @@ sub Data {
             'Fehler: Bitte stellen Sie sicher, dass Ihre Datenbank Pakete größer als %s MB akzeptiert (derzeit werden nur Pakete bis zu einer Größe von %s MB akzeptiert). Bitte passen Sie die Einstellung max_allowed_packet Ihrer Datenbank an, um Fehler zu vermeiden.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Fehler: Bitte erhöhen Sie den Wert für innodb_log_file_size in Ihrer Datenbank-Konfiguration auf mindestens %s MB (aktuell: %s MB, empfohlen: %s MB). Mehr Informationen finden Sie unter %s.',
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
+            'Fehler: Bitte setzen Sie den Wert für innodb_file_per_table in Ihrer Datenbank-Konfiguration auf ON.',
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            'Fehler: Bitte setzen Sie den Wert für innodb_default_row_format in Ihrer Datenbank-Konfiguration auf dynamic.',
         'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             'Falsche Datenbank-Speicherengine (%s ist %s, muss aber InnoDB sein).',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
-            'Falsche Datenbank-Sortierfolge (%s ist %s, muss aber utf8 sein).',
 
         # Perl Module: Kernel/Modules/Mentions.pm
         '%s users will be mentioned' => '%s Benutzer werden erwähnt',
@@ -5034,14 +5035,12 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => 'Zeichensatz der Client-Verbindung',
-        'Setting character_set_client needs to be utf8.' => 'Einstellung character_set_client muss \'utf8\' sein.',
+        'Setting character_set_client needs to be utf8mb4.' => 'Einstellung character_set_client muss utf8mb4 sein.',
         'Server Database Charset' => 'Zeichensatz des Datenbank-Servers',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => 'Die Einstellung character_set_database muss \'utf8\' sein.',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => 'Die Einstellung character_set_database muss \'utf8mb4\' sein.',
         'Table Charset' => 'Zeichensatz der Tabellen',
-        'There were tables found which do not have \'utf8\' as charset.' =>
-            'Es wurden Tabellen gefunden, die nicht \'utf8\' als Zeichensatz haben.',
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
+            'Es wurden Tabellen gefunden, die nicht \'utf8mb4\' als Zeichensatz haben.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
         'InnoDB Log File Size' => 'Größe der InnoDB-Log-Datei',
@@ -5559,7 +5558,7 @@ sub Data {
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Definiert den Full Qualified Domain Name des Znuny Systems. Diese Einstellung wird als Variable OTRS_CONFIG_FQDN genutzt, welche in allen Nachrichten-Formularen zu finden ist oder um Links zu Tickets in Ihrem Znuny System zu generieren.',
         'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
-            '',
+            'Definiert den voll qualifizierten Domänennamen für die Generierung externer IDs (z. B. Message-ID, ContentID).',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             'Legt den HTTP-Hostnamen fest, der für die Sammlung von Supportdaten über das freie Modul \'PublicSupportDataCollector\' genutzt wird (z. B. durch den Znuny-Daemon).',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -6143,11 +6142,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Legt die Reihenfolge fest, in der Vorname und Nachname von Agenten angezeigt wird.',
         'Default skin for the agent interface.' => 'Standard-Skin für das Agenten-Interface.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Der interne Name des Skins, der im Agentenbereich genutzt werden soll. Verfügbare Skins finden Sie unter Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             'Es ist möglich, verschiedene Skins zu konfigurieren, zum Beispiel um zwischen verschiedenen Agenten auf Basis der jeweiligen Domain zu unterscheiden. Sie können durch Nutzung von regulären Ausdrücken mithilfe von Schlüssel-/Wert-Paaren auf Domains prüfen. Der Inhalt von "Schlüssel" sollte die Prüfung auf die Domain beinhalten, der Inhalt von "Wert" den Namen des zu selektierenden Skins für diese Domain. Bitte beachten Sie die Einträge mit Beispielen für korrekte reguläre Ausdrücke.',
         'Default skin for the customer interface.' => 'Standard-Skin für das Kunden Interface.',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             'Der interne Name des Skins, der im Kundenbereich genutzt werden soll. Verfügbare Skins finden Sie unter Frontend::Customer::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -8019,14 +8020,14 @@ sub Data {
         'This window must be called from compose window.' => 'Dieses Fenster muss aus dem Fenster zum Verfassen von Tickets aufgerufen werden.',
 
         # JS File: var/httpd/htdocs/js/Core.Activity.js
-        'An error occurred' => '',
-        'The activity could not be created. %s is needed.' => '',
-        'The activity could not be created.' => '',
-        'The activity could not be updated.' => '',
-        'The activity could not be deleted.' => '',
-        'The activity could not be marked as new.' => '',
-        'The activity could not be marked as seen.' => '',
-        'The activities could not be marked as seen.' => '',
+        'An error occurred' => 'Ein Fehler ist aufgetreten',
+        'The activity could not be created. %s is needed.' => 'Die Aktivität konnte nicht erstellt werden. %s wird benötigt.',
+        'The activity could not be created.' => 'Die Aktivität konnte nicht erstellt werden.',
+        'The activity could not be updated.' => 'Die Aktivität konnte nicht aktualisiert werden.',
+        'The activity could not be deleted.' => 'Die Aktivität konnte nicht gelöscht werden.',
+        'The activity could not be marked as new.' => 'Die Aktivität konnte nicht als neu markiert werden.',
+        'The activity could not be marked as seen.' => 'Die Aktivität konnte nicht als gelesen markiert werden.',
+        'The activities could not be marked as seen.' => 'Die Aktivitäten konnten nicht als gelesen markiert werden.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
         'Add all' => 'Alle hinzufügen',
@@ -8246,7 +8247,7 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
         'Please enter at least one search value or * to find anything.' =>
             'Bitte geben Sie zumindest einen Suchbegriff ein oder * um nach Allem zu suchen.',
-        'Insert selected customer user(s) into the "%s:" field.' => '',
+        'Insert selected customer user(s) into the "%s:" field.' => 'Ausgewählte(n) Kundenbenutzer in das Feld "%s:" einfügen.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
         'Information about the Znuny Daemon' => 'Informationen über den Znuny Daemon',
@@ -8470,7 +8471,7 @@ Ihr Helpdesk-Team
         'Activation of dynamic fields for screens.' => 'Aktivierung dynamischer Felder für Masken.',
         'Activity LinkTarget' => '',
         'Activity Notification' => '',
-        'Activity.' => '',
+        'Activity.' => 'Aktivität.',
         'ActivityID' => 'ActivityID',
         'Add a note to this ticket' => 'Eine Notiz zu diesem Ticket hinzufügen',
         'Add an inbound phone call to this ticket' => 'Einen eingehenden Anruf zu diesem Ticket hinzufügen',
@@ -8658,6 +8659,7 @@ Ihr Helpdesk-Team
         'CustomerUser' => 'Kundenbenutzer',
         'Czech' => 'Tschechisch',
         'Danish' => 'Dänisch',
+        'Dark' => '',
         'Dashboard overview.' => 'Dashboardübersicht.',
         'Date / Time' => 'Datum / Zeit',
         'Default agent name' => 'Standard-Agentenname',
@@ -8976,7 +8978,7 @@ Ihr Helpdesk-Team
         'Select your personal time zone. All times will be displayed relative to this time zone.' =>
             'Wählen Sie Ihre persönliche Zeitzone aus. Alle Zeiten werden relativ zur eingestellten Zeitzone angezeigt.',
         'Select your preferred layout for the software.' => 'Wählen Sie Ihr bevorzugtes Layout aus.',
-        'Select your preferred theme for OTRS.' => '',
+        'Select your preferred theme for OTRS.' => 'Wählen Sie Ihr bevorzugtes Theme für Znuny.',
         'Send a unit test file' => 'Unit-Test-Datei versenden',
         'Send new outgoing mail from this ticket' => 'Neue ausgehende E-Mail aus diesem Ticket heraus senden',
         'Send notifications to users.' => 'Benachrichtigungen an Agenten verschicken.',
@@ -9051,6 +9053,8 @@ Ihr Helpdesk-Team
         'Theme' => 'Schema',
         'This is a Description for Comment on Framework.' => 'Dies ist die Beschreibung eines Kommentars.',
         'This is a Description for DynamicField on Framework.' => 'Dies ist die Beschreibung eines dynamischen Feldes.',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             'Der Standard-Skin (grau) für den Kundenbereich.',
         'This is the default orange - black skin.' => 'Dies ist die Standard orange-schwarze Farbgebung.',
@@ -9153,7 +9157,7 @@ Ihr Helpdesk-Team
         'not archived tickets' => 'nicht archivierte Tickets',
         'notice' => 'notice',
         'open in current tab' => 'im gleichen Tab öffnen',
-        'open in new tab' => 'in neuem Tab öffnen',
+        'open in new tab' => 'im neuen Tab öffnen',
         'pending' => 'Warten',
         'phone' => 'Telefonanruf',
         'responsible' => 'Verantwortlicher',
