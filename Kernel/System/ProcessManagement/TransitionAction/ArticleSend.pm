@@ -127,6 +127,7 @@ sub Run {
     my $StdAttachmentObject     = $Kernel::OM->Get('Kernel::System::StdAttachment');
     my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
     my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
 
     # define a common message to output in case of any error
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -183,6 +184,19 @@ sub Run {
                 ID => $ID,
             );
             next ATTACHMENT if !%Data;
+
+            if ( $Data{ValidID} != 1 ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  => $CommonMessage
+                        . 'Attachment (ID: '
+                        . $ID
+                        . ', Name: '
+                        . $Data{Name}
+                        . ') is invalid. Skip Attachment!',
+                );
+                next ATTACHMENT;
+            }
 
             push @{ $Param{Config}->{Attachment} }, {
                 Content     => $Data{Content},

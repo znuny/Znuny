@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.901503883655594;
+    $Self->{Completeness}        = 0.894123440577807;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -647,9 +647,6 @@ sub Data {
             '',
         'Query delay' => '',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
-            '',
-        'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -1753,6 +1750,8 @@ sub Data {
         'Do you really want to delete this Activity?' => 'Valóban törölni szeretné ezt a tevékenységet?',
         'Do you really want to delete this Activity Dialog?' => 'Valóban törölni szeretné ezt a tevékenység párbeszédet?',
         'Do you really want to delete this Transition?' => 'Valóban törölni szeretné ezt az átmenetet?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => 'Valóban törölni szeretné ezt az átmenet műveletet?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Valóban el szeretné távolítani ezt a tevékenységet a vászonról? Ezt csak akkor lehet változatlanul hagyni, ha mentés nélkül hagyja el ezt a képernyőt.',
@@ -2039,6 +2038,7 @@ sub Data {
         'Support Data' => 'Támogatási adatok',
         'Error: Support data could not be collected (%s).' => 'Hiba: A támogatási adatokat nem sikerült összegyűjteni (%s).',
         'Support Data Collector' => 'Támogatási adatgyűjtő',
+        'Delete cache' => '',
         'Details' => 'Részletek',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2136,7 +2136,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Jogosultságok',
@@ -2520,7 +2519,6 @@ sub Data {
         'Split' => 'Felosztás',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => 'Tudjon meg többet az Znuny-ben lévő statisztikákról',
         'Statistics Management' => 'Statisztikakezelés',
         'Add Statistics' => 'Statisztika hozzáadása',
         'Dynamic Matrix' => 'Dinamikus mátrix',
@@ -2620,6 +2618,9 @@ sub Data {
         'Link together' => 'Összekapcsolás',
         'Link to parent' => 'Összekapcsolás a szülővel',
         'Unlock tickets' => 'Jegyek feloldása',
+        'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Tömeges művelet végrehajtása',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -2723,8 +2724,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Küldő',
+        'Customer User Name' => 'Ügyfél-felhasználó neve',
         'Impact' => 'Hatás',
-        'CustomerID' => 'Ügyfél-azonosító',
         'Update Time' => 'Frissítés ideje',
         'Solution Time' => 'Megoldás ideje',
         'First Response Time' => 'Első válaszidő',
@@ -2736,6 +2737,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Aktív szűrők eltávolítása ennél a képernyőnél.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Eltávolítás a megfigyelt jegyek listájáról',
         'Tickets per page' => 'Jegyek oldalanként',
         'Filter assigned fields' => '',
 
@@ -2849,7 +2851,6 @@ sub Data {
         'Close this message' => 'Üzenet bezárása',
         'Image' => 'Kép',
         'PDF' => 'PDF',
-        'Unknown' => 'Ismeretlen',
         'View' => 'Nézet',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2864,7 +2865,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Várakozás eddig',
         'Locked' => 'Zárolt',
-        '%s Ticket(s)' => '%s jegy',
         'Accounted time' => 'Elszámolt idő',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2967,6 +2967,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'például 10*5155 vagy 105658*',
+        'CustomerID' => 'Ügyfél-azonosító',
         'Types' => 'Típusok',
         'Limitation' => '',
         'No time settings' => 'Nincsenek időbeállítások',
@@ -3019,6 +3020,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Betöltötte a következő piszkozatot: „%s”. Utoljára %s-kor változtatta meg.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Betöltötte a következő piszkozatot: „%s”. Utoljára %s-kor %s változtatta meg.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             'Ne feledje, hogy ez a piszkozat elavult, mert a jegyet módosították a piszkozat létrehozása óta.',
 
@@ -3344,8 +3347,6 @@ sub Data {
         'Enable' => 'Engedélyezés',
         'Reset this setting to its default state' => 'A beállítás visszaállítása az alapértelmezett állapotára',
         'Reset setting' => 'Beállítás visszaállítása',
-        'Show user specific changes for this setting' => 'Felhasználóra jellemző változások megjelenítése ennél a beállításnál',
-        'Show user settings' => 'Felhasználói beállítások megjelenítése',
         'Copy a direct link to this setting to your clipboard' => 'Erre a beállításra mutató közvetlen hivatkozás másolása a vágólapra',
         'Copy direct link' => 'Közvetlen hivatkozás másolása',
         'Remove this setting from your favorites setting' => 'A beállítás eltávolítása a kedvenc beállításokból',
@@ -3427,6 +3428,7 @@ sub Data {
         'Process state' => 'Folyamat állapota',
         'Running' => 'Fut',
         'Finished' => 'Befejezve',
+        'Unknown' => 'Ismeretlen',
         'No package information available.' => 'Nem érhetők el csomaginformációk.',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -4153,7 +4155,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'Nem lehet lekérni a(z) „%s” elemadatait!',
         'Can\'t get filter content data of %s!' => 'Nem lehet lekérni a(z) „%s” szűrőtartalom-adatait!',
         'Customer Name' => 'Ügyfél neve',
-        'Customer User Name' => 'Ügyfél-felhasználó neve',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Forrásobjektum és forráskulcs szükséges!',
@@ -4481,12 +4482,18 @@ sub Data {
             'Nem lehet kapcsolódni az adatbázishoz, a DBD::%s Perl-modul nincs telepítve!',
         'Can\'t connect to database, read comment!' => 'Nem lehet kapcsolódni az adatbázishoz, olvassa el a megjegyzést!',
         'Database already contains data - it should be empty!' => 'Az adatbázis már tartalmaz adatokat – üresnek kell lennie!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Hiba: Győződjön meg arról, hogy az adatbázisa elfogad-e %s MB méretűnél nagyobb csomagot (jelenleg csak legfeljebb %s MB méretű csomagot fogad el). A hibák elkerülése érdekében alkalmazkodjon az adatbázisa max_allowed_packet beállításához.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Hiba: Állítsa be az adatbázison az innodb_log_file_size értékét legalább %s MB méretűre (jelenleg: %s MB, ajánlott: %s MB). További információkért nézze meg a következőt: %s.',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
-            'Hibás adatbázis egyeztetés (a %s értéke %s, de utf8 értékűnek kell lennie).',
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
+            '',
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
+            '',
 
         # Perl Module: Kernel/Modules/Mentions.pm
         '%s users will be mentioned' => '',
@@ -4536,6 +4543,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Bejegyzés nyomtatása',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Megjelölés',
@@ -4794,7 +4805,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Leiratkozás',
-        'Remove from list of watched tickets' => 'Eltávolítás a megfigyelt jegyek listájáról',
         'Watch' => 'Megfigyelés',
         'Add to list of watched tickets' => 'Hozzáadás a megfigyelt jegyek listájához',
 
@@ -5030,14 +5040,12 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => 'Kliens kapcsolat karakterkészlete',
-        'Setting character_set_client needs to be utf8.' => 'A character_set_client beállításnak utf8 értékűnek kell lennie.',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => 'Kiszolgáló adatbázis karakterkészlete',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => 'A character_set_database beállításnak „utf8” értékűnek kell lennie.',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Tábla karakterkészlete',
-        'There were tables found which do not have \'utf8\' as charset.' =>
-            'Olyan táblák találhatók, amelyek nem „utf8” karakterkészletűek.',
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
         'InnoDB Log File Size' => 'InnoDB naplófájl méret',
@@ -5583,12 +5591,24 @@ sub Data {
         'The headline shown in the customer interface.' => 'Az ügyfélfelületen megjelenített főcím.',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Az ügyfélfelület fejlécében megjelenített logó. A kép URL lehet relatív URL a felszín képkönyvtárától, vagy egy teljes URL egy távoli webkiszolgálótól.',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Az ügyintéző felület fejlécében megjelenített logó. A kép URL lehet relatív URL a felszín képkönyvtárától, vagy egy teljes URL egy távoli webkiszolgálótól.',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             'Az ügyintézői felület fejlécében megjelenített logó az „Alapértelmezett” felszínnél. További leírásért nézze meg az „AgentLogo” beállítást.',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'Az ügyintéző felület bejelentkező doboza fölött megjelenített logó. A kép URL lehet relatív URL a felszín képkönyvtárától, vagy egy teljes URL egy távoli webkiszolgálótól.',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
+            '',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Meghatározza az URL alap útvonalát az ikonok, a CSS és a JavaScript eléréséhez.',
         'Defines the URL image path of icons for navigation.' => 'Meghatározza az URL ikonok kép útvonalát a navigációhoz.',
         'Defines the URL CSS path.' => 'Meghatározza az URL CSS útvonalát.',
@@ -5634,6 +5654,7 @@ sub Data {
             'Ellenőrizteti az alkalmazással az e-mail címek MX-rekordjait egy e-mail küldésekor vagy egy telefon vagy e-mail jegy elküldésekor.',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             'Meghatározza egy dedikált DNS kiszolgáló címét, ha szükséges a „CheckMXRecord” keresésekhez.',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => 'Ellenőrizteti az alkalmazással az e-mail címek szintaxisát.',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             'Egy reguláris kifejezést határoz meg, amely néhány címet kizár a szintaxis-ellenőrzésből (ha a „CheckEmailAddresses” beállítás „Igen” értékre van állítva). Adjon meg egy reguláris kifejezést ebben a mezőben azokhoz az e-mail címekhez, amelyek szintaktikailag nem helyesek, de szükségesek a rendszerhez (azaz „root@localhost”).',
@@ -6126,11 +6147,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Azt a sorrendet adja meg, amelyben az ügyintéző keresztneve és vezetékneve megjelenítve legyen.',
         'Default skin for the agent interface.' => 'Alapértelmezett felszín az ügyintézői felülethez.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Az ügyintéző felszínének belső neve, amelyet az ügyintézői felületen kell használni. Ellenőrizze az elérhető felszíneket a Frontend::Agent::Skins helyen.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             'Lehetséges különféle felszínek beállítása, például különbséget lehet tenni az alkalmazáson belül különböző ügyintézők között tartományonkénti alapon használva. Egy reguláris kifejezés (regex) használatával beállíthat egy tartományra illeszkedő Kulcs/Tartalom párt. A „Kulcsban” lévő értéknek kell illeszkednie a tartományra, és a „Tartalomban” lévő értéknek a rendszeren lévő érvényes felszínnek kell lennie. Nézze meg a példabejegyzéseket a reguláris kifejezés megfelelő formájáért.',
         'Default skin for the customer interface.' => 'Alapértelmezett felszín az ügyfélfelülethez.',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             'Az ügyfél felszínének belső neve, amelyet az ügyfélfelületen kell használni. Ellenőrizze az elérhető felszíneket a Frontend::Customer::Skins helyen.',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -6505,6 +6528,13 @@ sub Data {
             'Meghatározza, hogy a prioritás szerinti előrendezés legyen kész a szolgáltatás nézetben.',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
             'Meghatározza az alapértelmezett rendezési sorrendet a szolgáltatás nézetben lévő összes szolgáltatásnál a prioritás rendezés után.',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
         'Activates time accounting.' => 'Az időelszámolást aktiválja.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Beállítja az előnyben részesített időegységeket (például munkaegység, óra, perc).',
@@ -7852,7 +7882,29 @@ sub Data {
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'átmenetileg érvénytelen',
@@ -8546,6 +8598,10 @@ Az Ön segélyszolgálat csapata
         'Configure and manage ACLs.' => 'ACL-ek beállítása és kezelése.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Annak beállítása, hogy mely képernyő legyen megjelenítve, miután egy új jegyet létrehoztak.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'Új folyamatjegy létrehozása.',
         'Create Process Ticket' => '',
         'Create Ticket' => 'Jegy létrehozása',
@@ -8609,6 +8665,7 @@ Az Ön segélyszolgálat csapata
         'CustomerUser' => 'Ügyfél-felhasználó',
         'Czech' => 'Cseh',
         'Danish' => 'Dán',
+        'Dark' => '',
         'Dashboard overview.' => 'Vezérlőpult áttekintő.',
         'Date / Time' => 'Dátum / Idő',
         'Default agent name' => 'Alapértelmezett ügyintézőnév',
@@ -8743,6 +8800,8 @@ Az Ön segélyszolgálat csapata
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'Vezetéknév Keresztnév',
         'Lastname Firstname (UserLogin)' => 'Vezetéknév Keresztnév (Felhasználónév)',
         'Lastname, Firstname' => 'Vezetéknév, Keresztnév',
@@ -8790,6 +8849,8 @@ Az Ön segélyszolgálat csapata
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Megjelölés szemétként!',
         'Mark this ticket as junk!' => 'Jegy megjelölése szemétként!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Közepes',
@@ -8896,6 +8957,8 @@ Az Ön segélyszolgálat csapata
         'Russian' => 'Orosz',
         'S/MIME Certificates' => 'S/MIME tanúsítványok',
         'Schedule a maintenance period.' => 'Egy karbantartási időszakot ütemez.',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Új jegy utáni képernyő',
         'Search Customer' => 'Ügyfél keresése',
         'Search Ticket.' => 'Jegy keresése.',
@@ -8996,6 +9059,8 @@ Az Ön segélyszolgálat csapata
         'Theme' => 'Téma',
         'This is a Description for Comment on Framework.' => 'Ez egy leírás a keretrendszeren lévő megjegyzéshez.',
         'This is a Description for DynamicField on Framework.' => 'Ez egy leírás a keretrendszeren lévő dinamikus mezőhöz.',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             'Ez az alapértelmezett narancssárga-fekete felszín az ügyfélfelülethez.',
         'This is the default orange - black skin.' => 'Ez az alapértelmezett narancssárga-fekete felszín.',
@@ -9232,6 +9297,7 @@ Az Ön segélyszolgálat csapata
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

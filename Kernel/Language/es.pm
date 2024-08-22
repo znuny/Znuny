@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.598082961493968;
+    $Self->{Completeness}        = 0.593893630991464;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -648,9 +648,6 @@ sub Data {
             '',
         'Query delay' => '',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
-            '',
-        'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -1754,6 +1751,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '¿Realmente desea eliminar esta Actividad?',
         'Do you really want to delete this Activity Dialog?' => '¿Realmente desea eliminar  este Diálogo de Actividad?',
         'Do you really want to delete this Transition?' => '¿Realmente desea eliminar  esta Transición?',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '¿Realmente desea eliminar esta Acción de Transición?',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '¿Realmente desea eliminar la actividad del canvas? Esto sólo puede ser deshecho abandonando esta pantalla sin guardar.',
@@ -2040,6 +2039,7 @@ sub Data {
         'Support Data' => 'Datos de Soporte',
         'Error: Support data could not be collected (%s).' => 'Error: Los datos de soporte no han podido ser recolectados (%s).',
         'Support Data Collector' => 'Recolector Datos Soporte',
+        'Delete cache' => '',
         'Details' => 'Detalles',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2137,7 +2137,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Permisos',
@@ -2521,7 +2520,6 @@ sub Data {
         'Split' => 'Dividir',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => '',
         'Statistics Management' => 'Gestor de estadísticas',
         'Add Statistics' => '',
         'Dynamic Matrix' => 'Matriz Dinámica',
@@ -2621,6 +2619,9 @@ sub Data {
         'Link together' => 'Enlazar juntos',
         'Link to parent' => 'Enlazar al padre',
         'Unlock tickets' => 'Desbloquear los tickets',
+        'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Ejecutar Acción en Bloque',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -2724,8 +2725,8 @@ sub Data {
         ' Open / Close ticket action menu' => '',
         ' Select this ticket' => '',
         'Sender' => 'Remitente',
+        'Customer User Name' => '',
         'Impact' => 'Impacto',
-        'CustomerID' => 'ID del cliente',
         'Update Time' => 'Tiempo para actualización',
         'Solution Time' => 'Tiempo para solución',
         'First Response Time' => 'Tiempo para primera respuesta',
@@ -2737,6 +2738,7 @@ sub Data {
         'Remove active filters for this screen.' => 'Eliminar los filtros activos para esta pantalla.',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Eliminar de la lista de tickets vistos',
         'Tickets per page' => 'Tickets por página',
         'Filter assigned fields' => '',
 
@@ -2850,7 +2852,6 @@ sub Data {
         'Close this message' => 'Cerrar este mensaje',
         'Image' => '',
         'PDF' => 'PDF',
-        'Unknown' => 'Desconocido',
         'View' => 'Ver',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2865,7 +2866,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Pendiente hasta',
         'Locked' => 'Bloqueo',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Tiempo contabilizado',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2968,6 +2968,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Perfil',
         'e. g. 10*5155 or 105658*' => 'ej: 10*5155 or 105658*',
+        'CustomerID' => 'ID del cliente',
         'Types' => 'Tipos',
         'Limitation' => '',
         'No time settings' => 'Sin ajustes de tiempo',
@@ -3020,6 +3021,8 @@ sub Data {
         'You have loaded the draft "%s". You last changed it %s.' => 'Ha cargado el borrador "%s". La ultima vez que lo cambiaste %s.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
             'Ha cargado el borrador "%s". Fue cambiado por última vez %s por %s.',
+        'Please note that you have already one or more saved drafts for this action.' =>
+            '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '',
 
@@ -3345,8 +3348,6 @@ sub Data {
         'Enable' => '',
         'Reset this setting to its default state' => '',
         'Reset setting' => '',
-        'Show user specific changes for this setting' => '',
-        'Show user settings' => '',
         'Copy a direct link to this setting to your clipboard' => '',
         'Copy direct link' => '',
         'Remove this setting from your favorites setting' => '',
@@ -3428,6 +3429,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Finalizado',
+        'Unknown' => 'Desconocido',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -4154,7 +4156,6 @@ sub Data {
         'Can\'t get element data of %s!' => 'No se pudieron obtener los datos de elementos de %s!',
         'Can\'t get filter content data of %s!' => 'No se pudieron obtener los datos de filtro de contenido de %s!',
         'Customer Name' => 'Nombre del cliente',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => 'Se requiere  Objeto de Fuente y Clave de Fuente!',
@@ -4482,11 +4483,17 @@ sub Data {
             'No se puede conectar ala base de datos, Modulo Perl DBD::%s No Instalado!',
         'Can\'t connect to database, read comment!' => '¡No se puede conectar a la base de datos, lee el comentario!',
         'Database already contains data - it should be empty!' => 'La base de datos ya contiene datos. ¡Debería estar vacía!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Error: Por favor, asegúrese de que su base de datos acepta paquetes de más de %s MB de tamaño (actualmente sólo acepta paquetes hasta %s MB). Por favor, adaptar el ajuste max_allowed_packet de su base de datos con el fin de evitar errores.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Error: Por favor, establezca el valor de innodb_log_file_size en su base de datos para al menos %s MB ( actual: %s MB, recomendado: %s MB). Para obtener más información, por favor, eche un vistazo a %s.',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
+            '',
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
 
         # Perl Module: Kernel/Modules/Mentions.pm
@@ -4537,6 +4544,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Imprimir este artículo',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Marcar',
@@ -4796,7 +4807,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'No Vistos',
-        'Remove from list of watched tickets' => 'Eliminar de la lista de tickets vistos',
         'Watch' => 'Ver',
         'Add to list of watched tickets' => 'Añadir a la lista de tickets vistos',
 
@@ -5032,13 +5042,11 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => 'Juego de Caracteres de la Conexión del Cliente',
-        'Setting character_set_client needs to be utf8.' => 'El ajuste character_set_client necesita ser utf8.',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => 'Juego de Caracteres del Servidor de Base de Datos',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => '',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Juego de Caracter de la Tabla',
-        'There were tables found which do not have \'utf8\' as charset.' =>
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
@@ -5585,12 +5593,24 @@ sub Data {
         'The headline shown in the customer interface.' => '',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             'El logo que se muestra en la parte superior del cuadro de inicio de sesión de la interfaz del agente. La URL de la imagen puede ser una UTL relativa al directorio de la imagen del tema, o una URL completa de un servidor web remoto.',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
+            '',
         'Defines the URL base path of icons, CSS and Java Script.' => '',
         'Defines the URL image path of icons for navigation.' => '',
         'Defines the URL CSS path.' => '',
@@ -5636,6 +5656,7 @@ sub Data {
             '',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             '',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => '',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             '',
@@ -6128,11 +6149,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => 'Apariencia por defecto para la interfaz de agente.',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             '',
         'Default skin for the customer interface.' => 'Apariencia por defecto para la interfaz de cliente.',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -6506,6 +6529,13 @@ sub Data {
         'Defines if a pre-sorting by priority should be done in the service view.' =>
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
+            '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             '',
         'Activates time accounting.' => 'Activa la contabilidad del tiempo.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -7860,7 +7890,29 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
+        'User preferences backend to use.' => '',
         'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'temporalmente-no-válido',
@@ -8554,6 +8606,10 @@ Tu Equipo de Soporte
         'Configure and manage ACLs.' => 'Configurar y administrar ACLs.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Configura que pantalla debe ser mostrada después de que un nuevo ticket haya sido creado.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'Crear nuevo ticket de proceso.',
         'Create Process Ticket' => '',
         'Create Ticket' => '',
@@ -8617,6 +8673,7 @@ Tu Equipo de Soporte
         'CustomerUser' => 'Usuario del cliente',
         'Czech' => 'Checo',
         'Danish' => 'Danes',
+        'Dark' => '',
         'Dashboard overview.' => 'Visión general del panel principal.',
         'Date / Time' => 'Fecha / Hora',
         'Default agent name' => '',
@@ -8751,6 +8808,8 @@ Tu Equipo de Soporte
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => 'Apellidos Nombre',
         'Lastname Firstname (UserLogin)' => 'Apellidos Nombre (LoginUsuario) ',
         'Lastname, Firstname' => 'Apellidos, Nombre',
@@ -8798,6 +8857,8 @@ Tu Equipo de Soporte
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '¡Marcar como spam!',
         'Mark this ticket as junk!' => '¡Marcar este ticket como basura!',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Mediano',
@@ -8904,6 +8965,8 @@ Tu Equipo de Soporte
         'Russian' => 'Ruso',
         'S/MIME Certificates' => 'Certificados S/MIME',
         'Schedule a maintenance period.' => 'Programar un periodo de mantenimiento.',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Pantalla posterior a nuevo ticket',
         'Search Customer' => 'Búsqueda de un cliente',
         'Search Ticket.' => 'Buscar ticket.',
@@ -9004,6 +9067,8 @@ Tu Equipo de Soporte
         'Theme' => 'Tema',
         'This is a Description for Comment on Framework.' => '',
         'This is a Description for DynamicField on Framework.' => '',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             'Este es el aspecto predeterminado naranja - negro para la interfaz del cliente.',
         'This is the default orange - black skin.' => 'Este es el aspecto predeterminado naranja - negro.',
@@ -9240,6 +9305,7 @@ Tu Equipo de Soporte
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',

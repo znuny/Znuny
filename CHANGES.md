@@ -1,5 +1,87 @@
-# 7.0.16 2024-??-??
+# 7.1.3 2024-??-??
+ - 2024-08-21 Improved CSS for skin 'Dark'. [#558](https://github.com/znuny/Znuny/issues/558)
+ - 2024-08-21 Sector Nord AG: Fixed overflow of dynamic field groups in AgentTicketZoom process widget. Thanks to Sector Nord AG (@jsinagowitz). [PR#553](https://github.com/znuny/Znuny/pull/553)
+ - 2024-06-26 Fixed wrong inversion of avatar image when using skin 'Dark'. [#558](https://github.com/znuny/Znuny/issues/558)
+
+# 7.1.2 2024-07-24
+ - 2024-07-24 Fixed migration for databases other than MySQL and MariaDB.
+
+# 7.1.1 2024-07-24
+ - 2024-07-18 Added Dark Skin.
+ - 2024-07-17 Removed ArticlePreViewModules from Medium.pm view. No articles are displayed at this point.
+ - 2024-07-16 Added filtering and cache deletion to AdminSupportDataCollector.
+ - 2024-07-11 Updated Moment.js to 2.30.1 and jQueryUI to 1.13.3.
+ - 2024-07-11 Added a start and finish log message to Znuny daemon tasks. Thanks to Paweł Bogusławski (@pboguslawski). [#392](https://github.com/znuny/Znuny/pull/392)
+ - 2024-07-11 Fixed ticket list filter selection in agent dashboard and ticket list views.
+ - 2024-07-09 Added configurable timeout for DNS resolver queries. Thanks to Paweł Bogusławski (@pboguslawski). [#390](https://github.com/znuny/Znuny/pull/390)
+ - 2024-07-08 Invoker Ticket::Generic: Configured fields will now also be removed and encoded from/for given data (payload).
+ - 2024-07-05 Added a notification to ticket dialogs for the case when a form draft already exists for the current action.
+ - 2024-07-05 Improved and fixed links to customer and also customer user information center in several widgets and overview pages. [#558](https://github.com/znuny/Znuny/issues/558)
+ - 2024-07-05 Added a foreground option to run the Znuny daemon without detaching. Thanks to Paweł Bogusławski (@pboguslawski). [#399](https://github.com/znuny/Znuny/pull/399)
+ - 2024-07-04 Improved rendering of dynamic fields on AdminGenericAgent, AdminNotificationEvent, AdminACL and AdminDynamicFieldScreenConfiguration.
+ - 2024-07-02 Updated required minimum database versions. Refactored database version checks and added them to the installer.
+ - 2024-07-01 Fixed autocompletion search for dynamic field types WebserviceDropdown and WebserviceMultiselect in AgentTicketSearch dialog.
+ - 2024-06-21 Added functionality to use user fullname for mention label.
+ - 2024-06-20 Fixed output of last mention date in dashboard widget "Last mentions".
+ - 2024-06-20 Standard templates can now have multiple template types.
+ - 2024-06-18 Postmaster now also supports IDs for state, priority, type, queue, SLA and service in X-OTRS headers (e.g. X-OTRS-QueueID).
+ - 2024-05-14 Added configurable X-Priority email header for outgoing emails.
+ - 2024-05-07 Added missing primary keys to database tables.
+ - 2024-05-06 Integration of Znuny-MarkTicketSeenUnseen into Framework.
+ - 2024-05-03 Icons for shortcut and Apple touch are now configurable.
+ - 2024-05-02 Added a bulk function to watch tickets.
+ - 2024-04-30 Added a function to bulk-unwatch tickets in the overview of watched tickets.
+ - 2024-04-12 Fixed event registration regular expressions in config options. Thanks to Paweł Bogusławski (@pboguslawski) for reporting. [#440](https://github.com/znuny/Znuny/issues/440)
+ - 2023-10-11 Added user preferences backend DBJSON.
+
+# 7.0.19 2024-06-26
+ - 2024-06-19 Fixed home directory check in AdminSystemFiles to work with symbolic links.
+ - 2024-06-07 Fixed value used for owner lookup in AgentTicketProcess. Thanks to Falko Saller (@falkos). [#556](https://github.com/znuny/Znuny/pull/556)
+ - 2024-06-03 Fixed CSS problem with displaying articles in ticket details view.
+ - 2024-05-28 Fixed caching for queue updates.
+ - 2024-04-29 Added a daemon task to delete orphaned session records.
+ - 2024-04-24 Fixed regular expression in Kernel::System::HTMLUtils::LinkQuote which could lead to long execution times.
+
+# 7.0.18 2024-05-29
+ - 2024-05-10 Fixed session handling while saving user preferences.
+ - 2024-04-24 InnoDB is now the required default storage engine.
+ - 2024-04-22 Integrated package Znuny4OTRS-BugfixCustomerUserDBPasswordCryptType.
+ - 2024-04-19 Added support for two factor auth token parameter to generic interface. Thanks to Flávio Marta (@CallMeFlanby). [#502](https://github.com/znuny/Znuny/pull/502)
+ - 2024-04-18 Fixed smart tag replacement for article subjects in process activity dialogs.
+ - 2024-04-18 Improved AJAX subactions for AgentTicketEmailOutbound.
+ - 2024-04-16 Fixed CSS class used for showing sort order of dynamic fields in customer ticket overview.
+ - 2024-04-04 Removed links to unsupported user modification functions from system configuration settings dialog.
+
+# 7.0.17 2024-04-17
+ - 2024-04-10 Fixed mixed usage of database objects in customer and customer user database backend. [#540](https://github.com/znuny/Znuny/issues/540)
+ - 2024-04-09 Fixed session handling while saving user preferences.
+ - 2024-04-08 CVE-2024-32492: Fixed security issue with JavaScript in body of article being executed in customer ticket zoom. Thanks to Martino Spagnuolo for reporting this issue.
+ - 2024-04-05 CVE-2024-32493: Fixed SQL injection issue regarding Form IDs when cleaning up drafts. Thanks to Martino Spagnuolo for reporting the issue.
+ - 2024-04-05 CVE-2024-32491: Fixed security issue with uploading files that could be placed to any writable location and used for remote code execution. Thanks to Martino Spagnuolo for reporting and providing the fix.
+
+# 7.0.16 2024-04-03
+ - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
+ - 2024-03-19 Fixed button to edit customer user in widget of customer information center. [#543](https://github.com/znuny/Znuny/issues/543)
+ - 2024-03-13 Fixed usage of sysconfig setting `Ticket::Frontend::Overview::PreviewArticleSenderTypes`. [#542](https://github.com/znuny/Znuny/issues/542)
+ - 2024-03-11 Split Blink feature from VisualAlarms feature.
+ - 2024-03-05 Hide ticket zoom widgets when no data is available to show.
+ - 2024-03-04 Hide mentions widget on ticket zoom when no mentions are available.
+ - 2024-02-29 Hide unknown content-type on article attachments.
+ - 2024-02-29 Fixed js error in process management while editing a transition within a process if it is not linked to two activities.
+ - 2024-02-28 Process management: Transition actions TicketCreate, TicketArticleCreate, ArticleSend now skip on invalid attachment IDs.
+ - 2024-02-27 Fixed a variable for sha512 in Auth::DB. [#379](https://github.com/znuny/Znuny/issues/379)
+ - 2024-02-22 Fix for generic agent: Scheduled job immediate executed after schedule was changed. Thanks to Paweł Bogusławski (@pboguslawski). [#406](https://github.com/znuny/Znuny/pull/406)
+ - 2022-02-22 Removed initial insert of `TransportEmailTemplate` in `notification_event_item` table for mention notification and ticket email delivery failure notification. Thanks to Paweł Bogusławski (@pboguslawski). [#397](https://github.com/znuny/Znuny/pull/397)
+ - 2024-02-14 Fixed popup profiles only being loaded on login.
+ - 2024-02-14 Implemented features 'VisualAlarms' and 'Blink' into AgentTicketService like already done in AgentTicketQueue.
+ - 2024-02-13 Dashboard widget "My last changed tickets": Increased performance of database query.
+ - 2024-02-12 Fixed AdminProcessMangement: Text in MessageBox Notice should link to sync processes.
+ - 2024-02-09 Added ACL checks to ticket process toolbar entry.
+ - 2024-02-08 Pressing 'Ctrl+Enter' in a textarea or 'Enter' in an input field now submits the form instead of saving a draft.
+ - 2024-02-08 Process management: Fixed js error while editing activity dialog.
+ - 2024-02-06 Fixed handling of (un)selecting checkboxes on permissions table for AdminCustomerUserGroup.
  - 2024-02-05 AdminOAuth2TokenManagement: Added filter for (in)valid entries.
+ - 2024-02-02 Fixed form parameter evaluation in dialog for assignment of dynamic fields to screens (AdminDynamicFieldScreenConfiguration).
  - 2024-02-02 Removed session data from support bundle generator.
  - 2024-02-02 Prevent error message 'MissingTicketID' of ArticleList in inbound phone call screen. Thanks to Jannis Kleinrensing (@JannisKleinrensing), maxence. [PR#346](https://github.com/znuny/Znuny/pull/346)
  - 2024-02-02 Add html comment end tag into template file. Thanks to @kolbma. [PR#528](https://github.com/znuny/Znuny/pull/528)
@@ -205,6 +287,52 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.10 2024-07-24
+ - 2024-07-11 Updated Moment.js to 2.30.1 and jQueryUI to 1.13.3.
+ - 2024-07-08 Improved and fixed links to customer and customer user information center in several widgets and overview pages.
+ - 2024-07-08 Invoker Ticket::Generic: Configured fields will now also be removed and encoded from/for given data (payload).
+ - 2024-06-20 Fixed output of last mention date in dashboard widget "Last mentions".
+ - 2024-04-12 Fixed event registration regular expressions in config options. Thanks to Paweł Bogusławski (@pboguslawski) for reporting. [#440](https://github.com/znuny/Znuny/issues/440)
+ - 2024-02-13 Fixed autocompletion search for dynamic field types WebserviceDropdown and WebserviceMultiselect in AgentTicketSearch dialog.
+
+# 6.5.9 2024-06-26
+ - 2024-06-19 Fixed home directory check in AdminSystemFiles to work with symbolic links.
+ - 2024-06-07 Fixed value used for owner lookup in AgentTicketProcess. Thanks to Falko Saller (@falkos). [#556](https://github.com/znuny/Znuny/pull/556)
+ - 2024-05-28 Fixed caching for queue updates.
+ - 2024-05-17 Fixed session handling while saving user preferences.
+ - 2024-04-29 Updated default values of PublicFrontend::FooterLinks.
+ - 2024-04-24 Fixed regular expression in Kernel::System::HTMLUtils::LinkQuote which could lead to long execution times.
+ - 2024-04-22 Integrated package Znuny4OTRS-BugfixCustomerUserDBPasswordCryptType.
+ - 2024-04-19 Added support for two factor auth token parameter to generic interface. Thanks to Flávio Marta (@CallMeFlanby). [#502](https://github.com/znuny/Znuny/pull/502)
+ - 2024-04-18 Fixed smart tag replacement for article subjects in process activity dialogs.
+ - 2024-04-18 Improved AJAX subactions for AgentTicketEmailOutbound.
+ - 2024-04-16 Fixed CSS class used for showing sort order of dynamic fields in customer ticket overview.
+ - 2024-04-04 Removed links to unsupported user modification functions from system configuration settings dialog.
+
+# 6.5.8 2024-04-17
+ - 2024-04-11 Fixed session handling while saving user preferences.
+ - 2024-04-10 Fixed mixed usage of database objects in customer and customer user database backend. [#540](https://github.com/znuny/Znuny/issues/540)
+ - 2024-04-05 CVE-2024-32493: Fixed SQL injection issue regarding Form IDs when cleaning up drafts. Thanks to Martino Spagnuolo for reporting the issue.
+ - 2024-04-05 CVE-2024-32491: Fixed security issue with uploading files that could be placed to any writable location and used for remote code execution. Thanks to Martino Spagnuolo for reporting and providing the fix.
+
+# 6.5.7 2024-04-03
+ - 2024-03-22 Fixed dynamic field smart tag support for snippets. [#537](https://github.com/znuny/Znuny/issues/537)
+ - 2024-03-13 Fixed usage of sysconfig setting `Ticket::Frontend::Overview::PreviewArticleSenderTypes`. [#542](https://github.com/znuny/Znuny/issues/542)
+ - 2024-03-04 Hide mentions widget on ticket zoom when no mentions are available.
+ - 2024-02-29 Hide unknown content-type on article attachments.
+ - 2024-02-28 Process management: Transition actions TicketCreate, TicketArticleCreate, ArticleSend now skip on invalid attachment IDs.
+ - 2024-02-13 Dashboard widget "My last changed tickets": Increased performance of database query.
+ - 2024-02-27 Fixed a variable for sha512 in Auth::DB. [#379](https://github.com/znuny/Znuny/issues/379)
+ - 2024-02-22 Fix for generic agent: Scheduled job immediate executed after schedule was changed. Thanks to Paweł Bogusławski (@pboguslawski). [#406](https://github.com/znuny/Znuny/pull/406)
+ - 2022-02-22 Removed initial insert of `TransportEmailTemplate` in `notification_event_item` table for mention notification and ticket email delivery failure notification. Thanks to Paweł Bogusławski (@pboguslawski). [#397](https://github.com/znuny/Znuny/pull/397)
+ - 2024-02-08 Process management: Fixed js error while editing activity dialog.
+ - 2024-02-07 Fixed js error in process management while editing a transition within a process if it is not linked to two activities.
+ - 2024-02-06 Fixed handling of (un)selecting checkboxes on permissions table for AdminCustomerUserGroup.
+ - 2024-02-02 Fixed form parameter evaluation in dialog for assignment of dynamic fields to screens (AdminDynamicFieldScreenConfiguration).
+ - 2024-02-02 Removed session data from support bundle generator.
+ - 2024-02-02 Add html comment end tag into template file. Thanks to @kolbma. [PR#530](https://github.com/znuny/Znuny/pull/530)
+ - 2024-02-01 Added ACL checks to ticket process toolbar entry.
 
 # 6.5.6 2024-01-31
  - 2024-01-25 Fixed migration of mention notification.
