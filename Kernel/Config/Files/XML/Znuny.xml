@@ -3645,4 +3645,13 @@
             </Hash>
         </Value>
     </Setting>
+
+    <Setting Name="AutoAttributFieldIDMapping" Required="0" Valid="1">
+        <Description Translatable="1">Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+
 </otrs_config>

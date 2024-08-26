@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.68204202232436;
+    $Self->{Completeness}        = 0.68193008370261;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7914,6 +7914,8 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
             '',
         'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
+        'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml

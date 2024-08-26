@@ -1,4 +1,5 @@
 # 7.1.3 2024-??-??
+ - 2024-08-26 Added auto mapping for unknown actions to Znuny.Form.Input.FieldIDMapping.
  - 2024-08-23 Fixed evaluation of ticket ID parameter in generic interface operation TicketGet.
  - 2024-08-22 Console command Admin::PostMasterFilter::Import now will also update existing filters instead of only create new ones. Thanks to @meisterheister for reporting the issue. [#527](https://github.com/znuny/Znuny/issues/527)
  - 2024-08-22 Added '--single-transaction' option to scripts/backup.pl for MySQL/MariaDB. The --single-transaction flag will start a transaction before running.

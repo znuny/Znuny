@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-07-19 08:58+0000\n"
+"POT-Creation-Date: 2024-08-26 13:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20412,6 +20412,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel \"system\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input."
 msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml
