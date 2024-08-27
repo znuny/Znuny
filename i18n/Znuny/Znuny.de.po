@@ -25820,3 +25820,7 @@ msgstr "Lade-Modulregistrierung für das öffentliche Interface."
 msgid "You can not edit a transition before it's connected to two activities."
 msgstr "Sie können einen Übergang nicht bearbeiten, bevor er mit zwei Aktivitäten verbunden ist."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input."
+msgstr ""
+

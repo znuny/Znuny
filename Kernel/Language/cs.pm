@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.247464176461117;
+    $Self->{Completeness}        = 0.247424339987122;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8069,6 +8069,8 @@ sub Data {
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
         'Loader module registration for the public interface.' => '',
+        'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'neplatný-dočasně',
