@@ -1,4 +1,5 @@
 # 7.1.3 2024-??-??
+ - 2024-08-27 Fixed console command Admin::Service::Add - does not work after ITSMCore is installed.
  - 2024-08-26 Added auto mapping for unknown actions to Znuny.Form.Input.FieldIDMapping.
  - 2024-08-23 Fixed evaluation of ticket ID parameter in generic interface operation TicketGet.
  - 2024-08-22 Console command Admin::PostMasterFilter::Import now will also update existing filters instead of only create new ones. Thanks to @meisterheister for reporting the issue. [#527](https://github.com/znuny/Znuny/issues/527)
