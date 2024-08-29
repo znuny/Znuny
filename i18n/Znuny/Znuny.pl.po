@@ -24450,3 +24450,7 @@ msgstr ""
 msgid "This is the dark skin for the customer interface."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input."
+msgstr ""
+

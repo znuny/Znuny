@@ -1807,6 +1807,7 @@ sub Footer {
         Autocomplete               => $AutocompleteConfig,
         'Mentions::RichTextEditor' => $ConfigObject->Get('Mentions::RichTextEditor') // {},
         Skin                       => $Self->{SkinSelected},
+        AutoAttributFieldIDMapping => $ConfigObject->Get('AutoAttributFieldIDMapping') || 1,
     );
 
     for my $Config ( sort keys %JSConfig ) {

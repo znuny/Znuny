@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.074688115561392;
+    $Self->{Completeness}        = 0.074675857541441;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -7902,6 +7902,8 @@ sub Data {
         'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
             '',
         'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
+        'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml
