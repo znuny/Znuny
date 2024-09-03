@@ -1,4 +1,5 @@
 # 7.1.3 2024-??-??
+ - 2024-09-03 Fixed DialogModalClass in Core.UI.Dialog.js.
  - 2024-09-02 Updated schema.xml - Added needed dbcrud_uuid columns.
  - 2024-08-30 Added HTML filter to ProcessManagement/SLA template. Converts the characters <, >, & and " to &lt;, &gt;, &amp;, and &quot; respectively, protecting them from being interpreted as representing HTML tags or entities.
  - 2024-08-27 Fixed console command Admin::Service::Add - does not work after ITSMCore is installed.
