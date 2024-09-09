@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.304283604135894;
+    $Self->{Completeness}        = 0.308879041523059;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2186,7 +2186,7 @@ sub Data {
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Attribute' => '',
-        'Last update' => '',
+        'Last update' => 'Última atualização',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
         'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
@@ -2359,7 +2359,7 @@ sub Data {
         'New Appointment' => '',
         'Tomorrow' => 'Amanhã',
         'Soon' => '',
-        '5 days' => '',
+        '5 days' => '5 dias',
         'Start' => 'Início',
         'none' => 'nenhum(a)',
 
@@ -2370,11 +2370,11 @@ sub Data {
         ' Show or hide the content' => ' Mostrar ou ocultar o conteúdo',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
-        ' Save changes' => '',
-        ' Save' => '',
+        ' Save changes' => ' Guardar alterações',
+        ' Save' => ' Guardar',
         'Save changes' => '',
         ' Settings' => ' Configurações',
-        ' Refresh' => '',
+        ' Refresh' => ' Atualizar',
         ' Close this widget' => ' Fechar este widget',
         'Hide' => '',
         ' Cancel' => ' Cancelar',
@@ -2658,7 +2658,7 @@ sub Data {
         'From queue' => 'Da fila',
         ' Get all' => '',
         'Get all' => 'Obter todos',
-        ' Message body' => '',
+        ' Message body' => ' Corpo da mensagem',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => '',
@@ -2704,7 +2704,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => 'Mover %s%s%s',
         'New Queue' => 'Nova Fila',
-        'Communication' => '',
+        'Communication' => 'Comunicação',
         'Move' => 'Mover',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
@@ -2727,7 +2727,7 @@ sub Data {
         'Solution Time' => 'Tempo de solução',
         'First Response Time' => 'Tempo da primeira resposta',
         ' Service Time' => ' Tempo de serviço',
-        ' Move ticket to a different queue' => '',
+        ' Move ticket to a different queue' => ' Mover ticket para uma fila diferente',
         'Change queue' => 'Modificar a fila',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
@@ -2763,7 +2763,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => 'Criar novo ticket de processo',
-        ' Loading' => '',
+        ' Loading' => ' A carregar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => '',
@@ -3702,29 +3702,29 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminGenericInterfaceErrorHandlingRequestRetry.pm
         '0 seconds' => '0 segundos',
         '15 seconds' => '15 segundos',
-        '30 seconds' => '',
-        '45 seconds' => '',
+        '30 seconds' => '30 segundos',
+        '45 seconds' => '45 segundos',
         '1 minute' => '1 minuto',
-        '2 minutes' => '',
-        '3 minutes' => '',
-        '4 minutes' => '',
-        '5 minutes' => '',
+        '2 minutes' => '2 minutos',
+        '3 minutes' => '3 minutos',
+        '4 minutes' => '4 minutos',
+        '5 minutes' => '5 minutos',
         '10 minutes' => '10 Minutos',
         '15 minutes' => '15 minutos',
-        '30 minutes' => '',
+        '30 minutes' => '30 minutos',
         '1 hour' => '1 hora',
-        '2 hours' => '',
-        '3 hours' => '',
-        '4 hours' => '',
-        '5 hours' => '',
+        '2 hours' => '2 horas',
+        '3 hours' => '3 horas',
+        '4 hours' => '4 horas',
+        '5 hours' => '5 horas',
         '6 hours' => '',
         '12 hours' => '12 horas',
         '18 hours' => '18 horas',
         '1 day' => '1 dia',
-        '2 days' => '',
-        '3 days' => '',
-        '4 days' => '',
-        '6 days' => '',
+        '2 days' => '2 dias',
+        '3 days' => '3 dias',
+        '4 days' => '4 dias',
+        '6 days' => '6 dias',
         '1 week' => '1 semana',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceInvokerDefault.pm
@@ -8461,11 +8461,11 @@ A sua equipa de Helpdesk
         '2 - Enabled and required' => '2 - Habilitado e obrigatório',
         '2 - Enabled and shown by default' => '2 - Habilitado e exibido por padrão',
         '2 - Enabled by default' => '2 - Habilitado por padrão',
-        '2 Minutes' => '',
+        '2 Minutes' => '2 minutos',
         '200 (Advanced)' => '',
-        '30 Minutes' => '',
-        '300 (Beginner)' => '',
-        '5 Minutes' => '',
+        '30 Minutes' => '30 minutos',
+        '300 (Beginner)' => '300 (Principiante)',
+        '5 Minutes' => '5 Minutos',
         'A TicketWatcher Module.' => '',
         'A Website' => '',
         'A picture' => '',
