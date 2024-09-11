@@ -5579,7 +5579,7 @@ sub _BuildSelectionDataRefCreate {
                         $DisabledElements{$ElementLongName} = 1;
 
                         # add the element to the original data to be disabled later
-                        $DataLocal->{ $ElementLongName . '_Disabled' } = $ElementLongName;
+                        $DataLocal->{$ElementLongName} = $ElementLongName;
                     }
                     $Parents .= $Element . '::';
                 }
@@ -5686,7 +5686,7 @@ sub _BuildSelectionDataRefCreate {
 
                         # push the missing element to the data local array
                         push @NewDataLocal, {
-                            Key      => $ElementLongName . '_Disabled',
+                            Key      => $ElementLongName,
                             Value    => $ElementLongName,
                             Disabled => 1,
                         };

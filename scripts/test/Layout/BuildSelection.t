@@ -1705,10 +1705,10 @@ my @Tests = (
         Response =>
             '<select id="Select1ID" name="Select1" data-tree="true">
   <option value="1">Object1</option>
-  <option value="Object1::AttributeA_Disabled" disabled="disabled">' . "\xA0\xA0" . 'AttributeA</option>
+  <option value="Object1::AttributeA" disabled="disabled">' . "\xA0\xA0" . 'AttributeA</option>
   <option value="3" selected="selected">' . "\xA0\xA0\xA0\xA0" . 'Value1</option>
   <option value="4">' . "\xA0\xA0\xA0\xA0" . 'Value2</option>
-  <option value="Object1::AttributeB_Disabled" disabled="disabled">' . "\xA0\xA0" . 'AttributeB</option>
+  <option value="Object1::AttributeB" disabled="disabled">' . "\xA0\xA0" . 'AttributeB</option>
   <option value="6">' . "\xA0\xA0\xA0\xA0" . 'Value1</option>
   <option value="7" disabled="disabled">' . "\xA0\xA0\xA0\xA0" . 'Value2</option>
 </select> <a href="#" title="Baumauswahl anzeigen" class="ShowTreeSelection"><span>Baumauswahl anzeigen</span><i class="fa fa-sitemap"></i></a>',
@@ -1721,7 +1721,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    'Object1::AttributeA_Disabled', "\xA0\xA0AttributeA",
+                    'Object1::AttributeA', "\xA0\xA0AttributeA",
                     $JSONFalse, $JSONFalse, $JSONTrue,
                 ],
                 [
@@ -1733,7 +1733,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    'Object1::AttributeB_Disabled', "\xA0\xA0AttributeB",
+                    'Object1::AttributeB', "\xA0\xA0AttributeB",
                     $JSONFalse, $JSONFalse, $JSONTrue,
                 ],
                 [
