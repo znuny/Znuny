@@ -65,9 +65,9 @@
 [% RenderBlockStart("TicketSLA") %]
                             <div class="field-wrapper col-wide-100 col-desktop-50 col-tablet-50">
                                 [% IF Data.SLAMandatory %]
-                                <label for="SLAID" title="[% Translate(" Service level agreement") | html %]" class="Mandatory"><span class="Marker">*</span> [% Translate("SLA") | html %]:</label>
+                                <label for="SLAID" title="[% Translate("Service level agreement") | html %]" class="Mandatory"><span class="Marker">*</span> [% Translate("SLA") | html %]:</label>
                                 [% ELSE %]
-                                <label for="SLAID" title="[% Translate(" Service level agreement") | html %]">[% Translate("SLA") | html %]:</label>
+                                <label for="SLAID" title="[% Translate("Service level agreement") | html %]">[% Translate("SLA") | html %]:</label>
                                 [% END %]
                                 [% Data.SLAStrg %]
                                 [% IF Data.SLAMandatory %]
@@ -134,7 +134,7 @@
                                 <span class="Marker">*</span>
                                 [% Translate("Subject") | html %]:
                             </label>
-                            <input title="[% Translate(" Subject") | html %]" type="text" id="Subject" name="Subject" value="[% Data.Subject | html %]" class="Validate_Required [% Data.SubjectInvalid | html %]" />
+                            <input title="[% Translate("Subject") | html %]" type="text" id="Subject" name="Subject" value="[% Data.Subject | html %]" class="Validate_Required [% Data.SubjectInvalid | html %]" />
                             <div id="SubjectError" class="TooltipErrorMessage">
                                 <p>[% Translate("This field is required.") | html %]</p>
                             </div>
@@ -184,7 +184,7 @@
 #[% RenderBlockEnd("DynamicField_Field2") %]
         </fieldset>
         <div id="BottomActionRow" class="ActionRow">
-            <button id="submitRichText" accesskey="g" title="[% Translate(" Submit") | html %] (g)" type="submit" value="[% Translate(" Submit") | html %]" class="btn-primary btn-main btn-width-md">[% Translate("Submit") | html %]</button>
+            <button id="submitRichText" accesskey="g" title="[% Translate("Submit") | html %] (g)" type="submit" value="[% Translate("Submit") | html %]" class="btn-primary btn-main btn-width-md">[% Translate("Submit") | html %]</button>
         </div>
         </form>
     </div>

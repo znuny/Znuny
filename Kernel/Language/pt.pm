@@ -22,20 +22,20 @@ sub Data {
 
     # $$START$$
     # possible charsets
-    $Self->{Charset} = ['utf-8', ];
+    $Self->{Charset} = [];
     # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '%Y-%M-%D %T';
-    $Self->{DateFormatLong}      = '%A, %D de %B de %Y, %T';
-    $Self->{DateFormatShort}     = '%Y-%M-%D';
-    $Self->{DateInputFormat}     = '%Y-%M-%D';
-    $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.308879041523059;
+    $Self->{DateFormat}          = '';
+    $Self->{DateFormatLong}      = '';
+    $Self->{DateFormatShort}     = '';
+    $Self->{DateInputFormat}     = '';
+    $Self->{DateInputFormatLong} = '';
+    $Self->{Completeness}        = 0.3072358661612;
 
     # csv separator
-    $Self->{Separator}         = ';';
+    $Self->{Separator}         = '';
 
-    $Self->{DecimalSeparator}  = ',';
-    $Self->{ThousandSeparator} = '.';
+    $Self->{DecimalSeparator}  = '';
+    $Self->{ThousandSeparator} = '';
     $Self->{Translation} = {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
@@ -1688,7 +1688,7 @@ sub Data {
         'Available Fields' => 'Campos Disponíveis',
         'Filter available fields' => '',
         'Assigned Fields' => 'Campos Assignados',
-        ' Filter assigned fields' => '',
+        'Filter assigned fields' => '',
         'Communication Channel' => '',
         'Is visible for customer' => '',
         'Text Template' => 'Modelo',
@@ -2367,23 +2367,15 @@ sub Data {
         'in' => 'em',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        ' Show or hide the content' => ' Mostrar ou ocultar o conteúdo',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
-        ' Save changes' => ' Guardar alterações',
-        ' Save' => ' Guardar',
-        'Save changes' => '',
-        ' Settings' => ' Configurações',
-        ' Refresh' => ' Atualizar',
-        ' Close this widget' => ' Fechar este widget',
+        'Save changes' => 'Guardar alterações',
+        'Close this widget' => 'Fechar este widget',
         'Hide' => '',
-        ' Cancel' => ' Cancelar',
         'more' => 'mais',
         'No Data Available.' => '',
         'Available Columns' => 'Colunas disponíveis',
-        ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Colunas visíveis (arrastar e largar para ordenar)',
-        ' Submit' => ' Enviar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => '',
@@ -2603,11 +2595,11 @@ sub Data {
             'Necessita de um endereço de email válido, não utilize endereços de email locais',
         'Next ticket state' => 'Próximo estado do ticket',
         'Inform sender' => 'Informar o remetente',
-        'Send mail' => 'Enviar mensagem de email !',
+        'Send mail' => 'Enviar email',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
         'Ticket Bulk Action' => 'Ação em bloco sobre tickets',
-        'Send Email' => 'Enviar mensagem de email !',
+        'Send Email' => 'Enviar email',
         'Merge' => 'Fundir',
         'Merge to' => 'Ligar a',
         'Invalid ticket identifier!' => 'Identificador de ticket inválido',
@@ -2623,7 +2615,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
         'Compose Answer for %s%s%s' => 'Escrever resposta para %s%s%s',
         'Date Invalid!' => 'Data inválida',
-        ' Select one or more recipients from the customer user address book.' =>
+        'Select one or more recipients from the customer user address book.' =>
             '',
         'Customer user address book' => '',
         'This address is registered as system address and cannot be used: %s' =>
@@ -2633,12 +2625,9 @@ sub Data {
         'Please remove this entry and enter a new one with the correct value.' =>
             '',
         'This address already exists on the address list.' => '',
-        ' Cc' => ' Cc',
         'Remove Cc' => 'Remover CC',
-        'Bcc' => 'Bcc',
-        ' Bcc' => ' Cco',
+        'Bcc' => 'Cco',
         'Remove Bcc' => 'Remover BCC',
-        ' Send mail' => ' Enviar email',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => 'Modificar cliente de %s%s%s',
@@ -2647,23 +2636,16 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Criar novo ticket',
-        ' Example Template' => '',
         'Example Template' => '',
         'To customer user' => 'Para o utilizador do cliente',
-        ' To' => ' Para',
         'Please include at least one customer user for the ticket.' => '',
-        ' Select this customer as the main customer.' => '',
-        ' To customer user' => ' Para usuário cliente',
+        'Select this customer as the main customer.' => '',
         'Remove Ticket Customer User' => '',
         'From queue' => 'Da fila',
-        ' Get all' => '',
         'Get all' => 'Obter todos',
-        ' Message body' => ' Corpo da mensagem',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => '',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
@@ -2716,18 +2698,16 @@ sub Data {
         'NoteToTicket invalid.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
-        ' Select all' => ' Selecionar todos',
         'No ticket data found.' => 'Não foram encontrados dados do ticket',
-        ' Open / Close ticket action menu' => '',
-        ' Select this ticket' => '',
+        'Open / Close ticket action menu' => '',
+        'Select this ticket' => '',
         'Sender' => 'Remetente',
         'Customer User Name' => '',
         'Impact' => 'Impacto',
         'Update Time' => 'Tempo de actualização',
         'Solution Time' => 'Tempo de solução',
         'First Response Time' => 'Tempo da primeira resposta',
-        ' Service Time' => ' Tempo de serviço',
-        ' Move ticket to a different queue' => ' Mover ticket para uma fila diferente',
+        'Move ticket to a different queue' => 'Mover ticket para uma fila diferente',
         'Change queue' => 'Modificar a fila',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
@@ -2736,21 +2716,18 @@ sub Data {
         'Remove mention' => '',
         'Remove from list of watched tickets' => 'Remover dos tickets vigiados',
         'Tickets per page' => 'Tickets por página',
-        'Filter assigned fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
-        ' Missing channel' => '',
         'Missing channel' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => 'Repor',
-        ' Column Filters Form' => ' Formulário de filtros de coluna',
+        'Column Filters Form' => 'Formulário de filtros de coluna',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => 'Dividir para novo ticket telefónico',
         'Create New Phone Ticket' => 'Criar novo ticket por telefone',
         'Please include at least one customer for the ticket.' => 'Deve incluir pelo menos um cliente',
-        'Select this customer as the main customer.' => '',
         'To queue' => 'Para a fila',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
@@ -2763,7 +2740,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => 'Criar novo ticket de processo',
-        ' Loading' => ' A carregar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => '',
@@ -2807,7 +2783,6 @@ sub Data {
         'Save as default' => '',
         'Drafts' => '',
         'by' => 'por',
-        'Move ticket to a different queue' => 'Mover ticket para uma fila diferente',
         'Change Queue' => 'Mudar fila',
         'There are no dialogs available at this point in the process.' =>
             'Não existem mais diálogos disponíveis no processo.',
@@ -2949,9 +2924,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'New Ticket' => 'Novo Ticket',
-        ' Service level agreement' => ' Acordo de nível de serviço',
+        'Service level agreement' => 'Acordo de nível de serviço',
         'Dymanic Info' => '',
-        ' Subject' => ' Assunto',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => 'Bem vindo!',
@@ -3207,7 +3181,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
         'To get the appointment attribute' => 'Para obter os atributos do evento',
-        ' e. g.' => ' ex:',
+        'e. g.' => 'ex:',
         'To get the first 20 character of the appointment title.' => '',
         'To get the calendar attribute' => 'Para obter os atributos do calendário',
         'Attributes of the recipient user for the notification' => '',
@@ -3239,9 +3213,6 @@ sub Data {
         'Ticket dynamic fields internal key values' => '',
         'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
             '',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
-        'e. g.' => 'ex. ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
         'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
