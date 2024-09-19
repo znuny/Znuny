@@ -1,6 +1,7 @@
 # 7.1.3 2024-??-??
  - 2024-09-18 Fixed bug - In the AgentDashboard: Statistics widgets are always displayed, regardless of which DashboardWidgetExpand is currently set.
  - 2024-09-11 Fixed Bug - Duplicate value 'ArticleAgentNotification' in Ticket.xml 'Events###Article'. Thanks for reporting (@BuilderNSV). [#594](https://github.com/znuny/Znuny/issues/594)
+ - 2024-09-10 Fixed sorting of translated list entries in dropdown elements.
  - 2024-09-03 Fixed DialogModalClass in Core.UI.Dialog.js.
  - 2024-09-02 Updated schema.xml - Added needed dbcrud_uuid columns.
  - 2024-08-30 Added HTML filter to ProcessManagement/SLA template. Converts the characters <, >, & and " to &lt;, &gt;, &amp;, and &quot; respectively, protecting them from being interpreted as representing HTML tags or entities.
