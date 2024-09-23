@@ -114,6 +114,13 @@
                                     <td>
                                         [% IF TokenData.LastTokenRequestFailed %]
                                             [% Translate("Last token request failed.") | html %]
+                                            [% IF TokenData.TokenErrorMessage %]
+                                                <p>
+                                                    <code>
+                                                        [% TokenData.TokenErrorMessage | html %]
+                                                    </code>
+                                                </p>
+                                            [% END %]
                                         [% ELSE %]
                                             [% IF TokenData.TokenPresent %]
                                                 [% IF TokenData.TokenHasExpired %]
@@ -130,6 +137,13 @@
                                         [% IF TokenData.RefreshTokenRequestConfigured %]
                                             [% IF TokenData.LastTokenRequestFailed %]
                                                 [% Translate("Last (refresh) token request failed.") | html %]
+                                                [% IF TokenData.TokenErrorMessage %]
+                                                    <p>
+                                                        <code>
+                                                            [% TokenData.TokenErrorMessage | html %]
+                                                        </code>
+                                                    </p>
+                                                [% END %]
                                             [% ELSE %]
                                                 [% IF TokenData.RefreshTokenPresent %]
                                                     [% IF TokenData.RefreshTokenHasExpired %]

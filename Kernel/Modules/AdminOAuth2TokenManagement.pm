@@ -11,6 +11,8 @@ package Kernel::Modules::AdminOAuth2TokenManagement;
 use strict;
 use warnings;
 
+use utf8;
+
 use File::Basename;
 
 use Kernel::Language qw(Translatable);
@@ -198,16 +200,6 @@ sub _Overview {
 
     # Assemble details about tokens and refresh tokens
     for my $TokenConfig (@TokenConfigs) {
-        my %TokenData = (
-            TokenPresent                  => undef,
-            TokenExpirationDate           => undef,
-            TokenHasExpired               => undef,
-            LastTokenRequestFailed        => undef,
-            RefreshTokenPresent           => undef,
-            RefreshTokenExpirationDate    => undef,
-            RefreshTokenHasExpired        => undef,
-            RefreshTokenRequestConfigured => undef,
-        );
 
         # Because ID column is configurable in database backend and using simply 'ID'
         # in template might cause problems in the future.
@@ -243,11 +235,12 @@ sub _Overview {
             UserID        => $Self->{UserID},
         );
 
-        %TokenData = (
+        my %TokenData = (
             TokenPresent                  => $Token{Token} ? 1 : undef,
             TokenExpirationDate           => $Token{TokenExpirationDate},
             TokenHasExpired               => $TokenHasExpired,
             LastTokenRequestFailed        => defined $TokenErrorMessage ? 1 : undef,
+            TokenErrorMessage             => $TokenErrorMessage,
             AuthorizationCodeRequestURL   => $AuthorizationCodeRequestURL,
             RefreshTokenPresent           => $Token{RefreshToken} ? 1 : undef,
             RefreshTokenExpirationDate    => $Token{RefreshTokenExpirationDate},

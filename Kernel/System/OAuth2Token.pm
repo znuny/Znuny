@@ -650,7 +650,7 @@ sub RequestTokenByAuthorizationCode {
     my $TokenUpdated = $Self->DataUpdate(
         $Self->{Identifier} => $Token{ $Self->{Identifier} },
         AuthorizationCode   => $Param{AuthorizationCode},
-        Error               => undef,
+        ErrorMessage        => undef,
         ErrorDescription    => undef,
         ErrorCode           => undef,
         ChangeBy            => $Param{UserID},
@@ -884,7 +884,7 @@ sub RequestTokenByRefreshToken {
     my $TokenUpdated = $Self->DataUpdate(
         $Self->{Identifier} => $Token{ $Self->{Identifier} },
         AuthorizationCode   => undef,
-        Error               => undef,
+        ErrorMessage        => undef,
         ErrorDescription    => undef,
         ErrorCode           => undef,
         ChangeBy            => $Param{UserID},
