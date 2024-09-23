@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.684687654524477;
+    $Self->{Completeness}        = 0.68457481872116;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5016,6 +5016,8 @@ sub Data {
         'Server Database Charset' => 'データーベースサーバーのキャラクターセット',
         'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Table キャラクターセット',
+        'There were non-system tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
         'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 

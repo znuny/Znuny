@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.86912806988627;
+    $Self->{Completeness}        = 0.868984838497034;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5009,6 +5009,8 @@ sub Data {
         'Server Database Charset' => '서버 데이터베이스 문자 세트',
         'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => '표 문자 집합',
+        'There were non-system tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
         'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 

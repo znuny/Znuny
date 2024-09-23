@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.897642986649085;
+    $Self->{Completeness}        = 0.897495056031641;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5015,6 +5015,8 @@ sub Data {
         'Server Database Charset' => 'Kiszolgáló adatbázis karakterkészlete',
         'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Tábla karakterkészlete',
+        'There were non-system tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
         'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 

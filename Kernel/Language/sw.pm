@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.436954013515741;
+    $Self->{Completeness}        = 0.436882003955175;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -5012,6 +5012,8 @@ sub Data {
         'Server Database Charset' => 'Seti ya herufi ya hifadhi data ya seva',
         'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Seti ya herufi ya jedwali',
+        'There were non-system tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
         'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 

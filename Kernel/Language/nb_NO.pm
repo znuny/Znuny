@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.381242788857755;
+    $Self->{Completeness}        = 0.381179960448253;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5018,6 +5018,8 @@ sub Data {
         'Server Database Charset' => 'Tjener databasetegnsett',
         'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Tabel tegnsett',
+        'There were non-system tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
         'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 

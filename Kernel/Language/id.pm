@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.606889731333443;
+    $Self->{Completeness}        = 0.606789716545814;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -5011,6 +5011,8 @@ bin/znuny.Daemon.pl status\').',
         'Server Database Charset' => 'Server database charset',
         'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Tabel charset',
+        'There were non-system tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
         'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 

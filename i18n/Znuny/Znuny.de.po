@@ -24329,3 +24329,7 @@ msgstr ""
 msgid "Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input."
 msgstr "Ergänzt Feld-Mapping für AgentTicketActionCommon für unbekannte Action. Wird von Znuny.Form.Input verwendet."
 
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
+msgid "There were non-system tables found which do not have 'utf8mb4' as charset."
+msgstr "Es wurden systemfremde Tabellen gefunden, die nicht 'utf8mb4' als Zeichensatz haben."
+

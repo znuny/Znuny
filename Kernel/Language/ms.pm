@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.538157244107467;
+    $Self->{Completeness}        = 0.538068556361239;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5009,6 +5009,8 @@ sub Data {
         'Server Database Charset' => 'Setchar Pangkalan data Pelayan',
         'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Setchar Jadual',
+        'There were non-system tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
         'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 

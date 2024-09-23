@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.602933904730509;
+    $Self->{Completeness}        = 0.602834541858932;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5018,6 +5018,8 @@ sub Data {
         'Server Database Charset' => 'Charset del Server Database',
         'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => 'Charset della Tabella',
+        'There were non-system tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
         'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 

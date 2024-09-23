@@ -24352,3 +24352,7 @@ msgstr ""
 msgid "Outbound Email for %s%s%s"
 msgstr ""
 
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
+msgid "There were non-system tables found which do not have 'utf8mb4' as charset."
+msgstr ""
+
