@@ -1,4 +1,5 @@
 # 6.5.11 2024-??-??
+ - 2024-09-24 Fixed bug - ArticleStorageSwitch creates duplicate files with an additional file extension '-1'.
  - 2024-09-18 Fixed exit code of migration script.
  - 2024-09-10 Fixed sorting of translated list entries in dropdown elements.
  - 2024-09-09 Improved error logging in OAuth2 token overview. Fixed token error message reset.
