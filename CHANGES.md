@@ -1,4 +1,5 @@
 # 7.1.3 2024-??-??
+ - 2024-09-24 Fixed bug - ArticleStorageSwitch creates duplicate files with an additional file extension '-1'.
  - 2024-09-18 Fixed exit code of migration script.
  - 2024-09-18 Fixed bug - In the AgentDashboard: Statistics widgets are always displayed, regardless of which DashboardWidgetExpand is currently set.
  - 2024-09-11 Fixed Bug - Duplicate value 'ArticleAgentNotification' in Ticket.xml 'Events###Article'. Thanks for reporting (@BuilderNSV). [#594](https://github.com/znuny/Znuny/issues/594)
