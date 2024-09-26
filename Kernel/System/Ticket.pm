@@ -7050,21 +7050,42 @@ sub TicketFlagSet {
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # set flag
-    return if !$DBObject->Do(
+    my $FlagExists;
+    return if !$DBObject->Prepare(
         SQL => '
-            DELETE FROM ticket_flag
-            WHERE ticket_id = ?
-                AND ticket_key = ?
-                AND create_by = ?',
+            SELECT ticket_id
+            FROM   ticket_flag
+            WHERE  ticket_id = ?
+                   AND ticket_key = ?
+                   AND create_by = ?
+        ',
         Bind => [ \$Param{TicketID}, \$Param{Key}, \$Param{UserID} ],
     );
-    return if !$DBObject->Do(
-        SQL => '
-            INSERT INTO ticket_flag
-            (ticket_id, ticket_key, ticket_value, create_time, create_by)
-            VALUES (?, ?, ?, current_timestamp, ?)',
-        Bind => [ \$Param{TicketID}, \$Param{Key}, \$Param{Value}, \$Param{UserID} ],
-    );
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        $FlagExists = 1;
+    }
+
+    if ($FlagExists) {
+        return if !$DBObject->Do(
+            SQL => '
+                UPDATE ticket_flag
+                SET    ticket_value = ?
+                WHERE  ticket_id = ?
+                       AND ticket_key = ?
+                       AND create_by = ?
+            ',
+            Bind => [ \$Param{Value}, \$Param{TicketID}, \$Param{Key}, \$Param{UserID} ],
+        );
+    }
+    else {
+        return if !$DBObject->Do(
+            SQL => '
+                INSERT INTO ticket_flag
+                (ticket_id, ticket_key, ticket_value, create_time, create_by)
+                VALUES (?, ?, ?, current_timestamp, ?)',
+            Bind => [ \$Param{TicketID}, \$Param{Key}, \$Param{Value}, \$Param{UserID} ],
+        );
+    }
 
     # delete cache
     $Kernel::OM->Get('Kernel::System::Cache')->Delete(
