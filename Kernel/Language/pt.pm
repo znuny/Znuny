@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.307185234014502;
+    $Self->{Completeness}        = 0.309492419248517;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -801,7 +801,7 @@ sub Data {
         'Param %s key' => 'Chave do parametro %s',
         'Param %s value' => 'Valor do parametro %s',
         'Results' => 'Resultados',
-        '%s Tickets affected! What do you want to do?' => '%s Chamados afetados. O que deseja fazer ?',
+        '%s Tickets affected! What do you want to do?' => '%s Tickets afetados. O que deseja fazer?',
         'Warning: You used the DELETE option. All deleted tickets will be lost!' =>
             'Aviso: Utilizou a opção de APAGAR. Todos os tickets vão ser perdidos.',
         'Warning: There are %s tickets affected but only %s may be modified during one job execution!' =>
@@ -1593,7 +1593,7 @@ sub Data {
         'Edit PostMaster Filter' => 'Editar filtro de correio',
         'Delete this filter' => 'Apagar filtro',
         'Do you really want to delete this postmaster filter?' => '',
-        'A postmaster filter with this name already exists!' => '',
+        'A postmaster filter with this name already exists!' => 'Já existe um filtro postmaster com este nome!',
         'Filter Condition' => 'Condição do filtro',
         'AND Condition' => '',
         'Search header field' => '',
@@ -1802,7 +1802,7 @@ sub Data {
         'Configure Working Hours' => '',
         'Configure Queue Related Settings' => '',
         'Edit Queue' => 'Editar fila',
-        'A queue with this name already exists!' => '',
+        'A queue with this name already exists!' => 'Já existe uma fila com este nome!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
         'Sub-queue of' => 'Sub-fila de ',
@@ -2031,7 +2031,7 @@ sub Data {
         'Generate Support Bundle' => '',
         'The Support Bundle has been Generated' => '',
         'A file containing the support bundle will be downloaded to the local system.' =>
-            '',
+            'Um ficheiro contendo o pacote de suporte será descarregado para o sistema local.',
         'Support Data' => '',
         'Error: Support data could not be collected (%s).' => '',
         'Support Data Collector' => 'Agregador de Informação de Suporte',
@@ -2078,7 +2078,7 @@ sub Data {
         'By default, you will only deploy settings which you changed on your own. If you\'d like to deploy settings changed by other users, too, please click the link on top of the screen to enter the advanced deployment mode.' =>
             '',
         'A deployment has just been restored, which means that all affected setting have been reverted to the state from the selected deployment.' =>
-            '',
+            'Uma implementação acabou de ser restaurada, o que significa que todas as configurações afetadas foram revertidas para o estado da implementação selecionada.',
         'Please review the changed settings and deploy afterwards.' => '',
         'An empty list of changes means that there are no differences between the restored and the current state of the affected settings.' =>
             '',
@@ -2343,7 +2343,7 @@ sub Data {
         'The Znuny Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
             '',
         'A running Znuny Daemon is mandatory for correct system operation.' =>
-            '',
+            'Um Daemon Znuny em funcionamento é obrigatório para o funcionamento correto do sistema.',
         'Starting the Znuny Daemon' => '',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             '',
@@ -2383,8 +2383,8 @@ sub Data {
         'Closed' => 'Fechado',
         'Phone ticket' => 'Ticket por telefone',
         'Email ticket' => 'Ticket por email',
-        '%s open ticket(s) of %s' => '%s chamado(s) aberto(s) de %s',
-        '%s closed ticket(s) of %s' => '%s chamados(s) fechado(s) de %s',
+        '%s open ticket(s) of %s' => '%s ticket(s) aberto(s) de %s',
+        '%s closed ticket(s) of %s' => '%s Ticket(s) fechado(s) de %s',
         'New phone ticket from %s' => 'Novo ticket via telefone de %s',
         'New email ticket to %s' => 'Novo ticket via email de %s',
         'Edit customer ID' => '',
@@ -2804,7 +2804,7 @@ sub Data {
         'Resize' => 'Redimensionar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
-        '#%s' => '# %s',
+        '#%s' => '#%s',
         'via %s' => '',
         'by %s' => '',
         'Toggle article details' => '',
@@ -2881,7 +2881,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
-            '%s detectado possíveis problemas de rede. Você pode tentar recarregar esta página manualmente ou esperar até que seu navegador restabeleça a conexão por conta própria.',
+            '%s detetado possíveis problemas de rede. Pode tentar recarregar a página manualmente ou esperar até que seu navegador restabeleça a conexão por conta própria.',
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             '',
 
@@ -3129,7 +3129,7 @@ sub Data {
         'Open URL in new tab' => '',
         'Close preview' => '',
         'A preview of this website can\'t be provided because it didn\'t allow to be embedded.' =>
-            '',
+            'Não é possível fornecer uma pré-visualização desta página web, uma vez que não permitiu a sua ligação.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
         'Feature not Available' => '',
@@ -3688,7 +3688,7 @@ sub Data {
         '3 hours' => '3 horas',
         '4 hours' => '4 horas',
         '5 hours' => '5 horas',
-        '6 hours' => '',
+        '6 hours' => '6 horas',
         '12 hours' => '12 horas',
         '18 hours' => '18 horas',
         '1 day' => '1 dia',
@@ -4464,7 +4464,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/Mentions.pm
-        '%s users will be mentioned' => '%s usuários serão mencionados',
+        '%s users will be mentioned' => '%s utilizadores serão mencionados',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => '',
@@ -4528,10 +4528,10 @@ sub Data {
         'Crypted' => 'Cifrado',
         'Sent message encrypted to recipient!' => '',
         'Signed' => 'Assinado',
-        '"PGP SIGNED MESSAGE" header found, but invalid!' => 'Detectado cabeçalho "PGP SIGNED MESSAGE" inválido!',
+        '"PGP SIGNED MESSAGE" header found, but invalid!' => 'Detetado cabeçalho "PGP SIGNED MESSAGE" inválido!',
 
         # Perl Module: Kernel/Output/HTML/ArticleCheck/SMIME.pm
-        '"S/MIME SIGNED MESSAGE" header found, but invalid!' => 'Detectado cabeçalho "S/MIME SIGNED MESSAGE" inválido!',
+        '"S/MIME SIGNED MESSAGE" header found, but invalid!' => 'Detetado cabeçalho "S/MIME SIGNED MESSAGE" inválido!',
         'Ticket decrypted before' => 'Registo já desencriptado',
         'Impossible to decrypt: private key for email was not found!' => 'Impossível desencriptar: chave privada não encontrada!',
         'Successful decryption' => 'Desencriptação bem sucedida',
@@ -6285,7 +6285,7 @@ sub Data {
         'The format of the subject. \'Left\' means \'[TicketHook#:12345] Some Subject\', \'Right\' means \'Some Subject [TicketHook#:12345]\', \'None\' means \'Some Subject\' and no ticket number. In the latter case you should verify that the setting PostMaster::CheckFollowUpModule###0200-References is activated to recognize followups based on email headers.' =>
             '',
         'A list of dynamic fields that are merged into the main ticket during a merge operation. Only dynamic fields that are empty in the main ticket will be set.' =>
-            '',
+            'Uma lista de campos dinâmicos que são adicionados ao bilhete principal durante uma operação de combinação. Apenas campos dinâmicos vazios no bilhete principal, serão definidos.',
         'Name of custom queue. The custom queue is a queue selection of your preferred queues and can be selected in the preferences settings.' =>
             '',
         'Name of custom service. The custom service is a service selection of your preferred services and can be selected in the preferences settings.' =>
@@ -8093,7 +8093,7 @@ sub Data {
         'There is a package upgrade process running, click here to see status information about the upgrade progress.' =>
             '',
         'A package upgrade was recently finished. Click here to see the results.' =>
-            '',
+            'Um pacote foi recentemente atualizado. Clique aqui para ver os resultados.',
         'No response from get package upgrade result.' => '',
         'Update all packages' => '',
         'Dismiss' => '',
@@ -8275,7 +8275,7 @@ sub Data {
         'Do you really want to continue?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
-        ' ...and %s more' => ' e %s mais',
+        ' ...and %s more' => ' ...e %s mais',
         ' ...show less' => ' ...mostrar menos',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
@@ -8320,7 +8320,7 @@ sub Data {
         'Open this node in a new window' => '',
         'Please add values for all keys before saving the setting.' => '',
         'The key must not be empty.' => '',
-        'A key with this name (\'%s\') already exists.' => '',
+        'A key with this name (\'%s\') already exists.' => 'Uma chave com o nome (\'%s\') já existe.',
         'Do you really want to revert this setting to its historical value?' =>
             '',
 
@@ -8435,13 +8435,13 @@ A sua equipa de Helpdesk
         '2 - Enabled and shown by default' => '2 - Habilitado e exibido por padrão',
         '2 - Enabled by default' => '2 - Habilitado por padrão',
         '2 Minutes' => '2 minutos',
-        '200 (Advanced)' => '',
+        '200 (Advanced)' => '200(Avançado)',
         '30 Minutes' => '30 minutos',
         '300 (Beginner)' => '300 (Principiante)',
         '5 Minutes' => '5 Minutos',
-        'A TicketWatcher Module.' => '',
-        'A Website' => '',
-        'A picture' => '',
+        'A TicketWatcher Module.' => 'Um módulo TicketWatcher.',
+        'A Website' => 'Uma Página na Internet.',
+        'A picture' => 'Uma Imagem',
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',

@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.345912986156889;
+    $Self->{Completeness}        = 0.349208965062624;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1971,7 +1971,7 @@ sub Data {
             'Der mangler mindst et parameter for bindingen. Tjek det venligst.',
         'Result format' => 'Resultatformat',
         'Run Query' => 'Kør forespørgsel',
-        '%s Results' => '',
+        '%s Results' => '%s resultater',
         'Query is executed.' => 'Forespørgslen er udført',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
@@ -2881,7 +2881,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
-            '',
+            '%s oplever udfald på forbindelsen. Du kan enten forsøge at opdatere siden eller vente til din browser automatisk forsøger igen.',
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             '',
 
@@ -3307,7 +3307,7 @@ sub Data {
             '',
         'Changing this setting is only available in a higher config level!' =>
             '',
-        '%s (%s) is currently working on this setting.' => '',
+        '%s (%s) is currently working on this setting.' => '%s (%s) arbejder i øjeblikket på denne indstilling.',
         'Toggle advanced options for this setting' => '',
         'Disable this setting, so it is no longer effective' => '',
         'Disable' => '',
@@ -3454,7 +3454,7 @@ sub Data {
         'There was an error synchronizing the ACLs.' => '',
         'ACL %s could not be deleted' => '',
         'There was an error getting data for ACL with ID %s' => '',
-        '%s (copy) %s' => '',
+        '%s (copy) %s' => '%s (kopi) %s',
         'Please note that ACL restrictions will be ignored for the Superuser account (UserID 1).' =>
             '',
         'Exact match' => '',
@@ -3493,7 +3493,7 @@ sub Data {
         'There was an error getting data for Notification with ID:%s!' =>
             'Der var en fejl med at hente data for beskeden med ID:%s!',
         'Unknown Notification %s!' => 'Ukendt besked %s!',
-        '%s (copy)' => '',
+        '%s (copy)' => '%s (kopi)',
         'There was an error creating the Notification' => 'Der opstod en fejl ved oprettelse af beskeden',
         'Notifications could not be Imported due to a unknown error, please check Znuny logs for more information' =>
             'Beskeder kunne ikke importeres grundet en ukendt fejl. Tjek Znuny-loggen for mere information.',
@@ -4096,8 +4096,8 @@ sub Data {
         'until %s' => '',
         'No notification' => '',
         '%s minute(s) before' => '',
-        '%s hour(s) before' => '',
-        '%s day(s) before' => '',
+        '%s hour(s) before' => '%s time(r) før',
+        '%s day(s) before' => '%s dag(e) før',
         '%s week before' => '',
         'before the appointment starts' => '',
         'after the appointment has been started' => '',
@@ -4114,7 +4114,7 @@ sub Data {
         'Customer History' => 'Kunde-historik',
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
-        'No RecipientField is given!' => '',
+        'No RecipientField is given!' => 'Modtagerfeltet er ikke angivet',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '',
@@ -4128,7 +4128,7 @@ sub Data {
         'Need SourceObject and SourceKey!' => '',
         'You need ro permission!' => '',
         'Can not delete link with %s!' => 'Kan ikke slette link med %s!',
-        '%s Link(s) deleted successfully.' => '',
+        '%s Link(s) deleted successfully.' => '%s Link slettet.',
         'Can not create link with %s! Object already linked as %s.' => '',
         'Can not create link with %s!' => 'Kan ikke oprette link med %s!',
         '%s links added successfully.' => '',
@@ -4261,7 +4261,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketProcess.pm
         'Couldn\'t get ActivityDialogEntityID "%s"!' => '',
-        'No Process configured!' => '',
+        'No Process configured!' => 'Processen er ikke konfigureret!',
         'The selected process is invalid!' => 'Den valgte proces er ugyldig.',
         'Process %s is invalid!' => '',
         'Subaction is invalid!' => '',
@@ -4528,10 +4528,10 @@ sub Data {
         'Crypted' => 'Krypteret',
         'Sent message encrypted to recipient!' => '',
         'Signed' => 'Underskrevet',
-        '"PGP SIGNED MESSAGE" header found, but invalid!' => '',
+        '"PGP SIGNED MESSAGE" header found, but invalid!' => '"PGP SIGNED MESSAGE" header fundet, men den er invalid!',
 
         # Perl Module: Kernel/Output/HTML/ArticleCheck/SMIME.pm
-        '"S/MIME SIGNED MESSAGE" header found, but invalid!' => '',
+        '"S/MIME SIGNED MESSAGE" header found, but invalid!' => '"S/MIME SIGNED MESSAGE" header fundet, men den er invalid!',
         'Ticket decrypted before' => '',
         'Impossible to decrypt: private key for email was not found!' => '',
         'Successful decryption' => '',
@@ -4621,13 +4621,13 @@ sub Data {
         'Hours' => 'Timer',
         'Minutes' => 'Minutter',
         'Check to activate this date' => 'Marker for at aktivere denne dato',
-        '%s TB' => '',
-        '%s GB' => '',
-        '%s MB' => '',
-        '%s KB' => '',
-        '%s B' => '',
+        '%s TB' => '%s TB',
+        '%s GB' => '%s GB',
+        '%s MB' => '%s MB',
+        '%s KB' => '%s KB',
+        '%s B' => '%s B',
         'No Permission!' => 'Ingen tilladelse.',
-        'No Permission' => '',
+        'No Permission' => 'Ingen tilladelse',
         'Show Tree Selection' => 'Vis træ',
         'Split Quote' => '',
         'Remove Quote' => '',
@@ -5372,7 +5372,7 @@ sub Data {
         'Invalid Token!' => 'Ugyldigt Token!',
         'Sent new password to %s. Please check your email.' => 'Nyt password sendt til %s. Tjek venligst din mail.',
         'Error: invalid session.' => '',
-        'No Permission to use this frontend module!' => '',
+        'No Permission to use this frontend module!' => 'Ingen tilladelse til at anvende frontend modulet',
 
         # Perl Module: Kernel/System/Web/InterfaceCustomer.pm
         'Authentication succeeded, but no customer record is found in the customer backend. Please contact the administrator.' =>
@@ -8276,7 +8276,7 @@ sub Data {
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
         ' ...and %s more' => '',
-        ' ...show less' => '',
+        ' ...show less' => ' ... vis færre',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
         'Add new draft' => '',

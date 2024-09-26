@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.995056031641397;
+    $Self->{Completeness}        = 0.995220830586684;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8445,7 +8445,7 @@ Ihr Helpdesk-Team
         'AccountedTime' => 'Erfasste Zeit',
         'Activation of dynamic fields for screens.' => 'Aktivierung dynamischer Felder für Masken.',
         'Activity LinkTarget' => '',
-        'Activity Notification' => '',
+        'Activity Notification' => 'Aktivitätsbenachrichtigung',
         'Activity.' => 'Aktivität.',
         'ActivityID' => 'ActivityID',
         'Add a note to this ticket' => 'Eine Notiz zu diesem Ticket hinzufügen',

@@ -2466,7 +2466,7 @@ msgstr "Resultados"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "%s Tickets affected! What do you want to do?"
-msgstr "%s Chamados afetados. O que deseja fazer ?"
+msgstr "%s Tickets afetados. O que deseja fazer?"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Warning: You used the DELETE option. All deleted tickets will be lost!"
@@ -4822,7 +4822,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
 msgid "A postmaster filter with this name already exists!"
-msgstr ""
+msgstr "Já existe um filtro postmaster com este nome!"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
 msgid "Filter Condition"
@@ -5462,7 +5462,7 @@ msgstr "Editar fila"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "A queue with this name already exists!"
-msgstr ""
+msgstr "Já existe uma fila com este nome!"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!"
@@ -6134,7 +6134,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "A file containing the support bundle will be downloaded to the local system."
-msgstr ""
+msgstr "Um ficheiro contendo o pacote de suporte será descarregado para o sistema local."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data"
@@ -6250,7 +6250,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
 msgid "A deployment has just been restored, which means that all affected setting have been reverted to the state from the selected deployment."
-msgstr ""
+msgstr "Uma implementação acabou de ser restaurada, o que significa que todas as configurações afetadas foram revertidas para o estado da implementação selecionada."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
 msgid "Please review the changed settings and deploy afterwards."
@@ -7022,7 +7022,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
 msgid "A running Znuny Daemon is mandatory for correct system operation."
-msgstr ""
+msgstr "Um Daemon Znuny em funcionamento é obrigatório para o funcionamento correto do sistema."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
 msgid "Starting the Znuny Daemon"
@@ -7130,11 +7130,11 @@ msgstr "Ticket por email"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "%s open ticket(s) of %s"
-msgstr "%s chamado(s) aberto(s) de %s"
+msgstr "%s ticket(s) aberto(s) de %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "%s closed ticket(s) of %s"
-msgstr "%s chamados(s) fechado(s) de %s"
+msgstr "%s Ticket(s) fechado(s) de %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
 msgid "New phone ticket from %s"
@@ -8326,7 +8326,7 @@ msgstr "Redimensionar"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
 msgid "#%s"
-msgstr "# %s"
+msgstr "#%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
 msgid "via %s"
@@ -8418,7 +8418,7 @@ msgstr "Bloqueado"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 msgid "%s Ticket(s)"
-msgstr "%s Chamado(s)"
+msgstr "%s Ticket(s)"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 msgid "Accounted time"
@@ -8502,7 +8502,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
 msgid "%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own."
-msgstr "%s detectado possíveis problemas de rede. Você pode tentar recarregar esta página manualmente ou esperar até que seu navegador restabeleça a conexão por conta própria."
+msgstr "%s detetado possíveis problemas de rede. Pode tentar recarregar a página manualmente ou esperar até que seu navegador restabeleça a conexão por conta própria."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
 msgid "The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page."
@@ -9194,7 +9194,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
 msgid "A preview of this website can't be provided because it didn't allow to be embedded."
-msgstr ""
+msgstr "Não é possível fornecer uma pré-visualização desta página web, uma vez que não permitiu a sua ligação."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
 msgid "Feature not Available"
@@ -10714,7 +10714,7 @@ msgstr "5 horas"
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceErrorHandlingRequestRetry.pm
 msgid "6 hours"
-msgstr ""
+msgstr "6 horas"
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceErrorHandlingRequestRetry.pm
 msgid "12 hours"
@@ -12794,7 +12794,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/Mentions.pm
 msgid "%s users will be mentioned"
-msgstr "%s usuários serão mencionados"
+msgstr "%s utilizadores serão mencionados"
 
 #. Perl Module: Kernel/Modules/PublicCalendar.pm
 msgid "No %s!"
@@ -12914,11 +12914,11 @@ msgstr "Assinado"
 
 #. Perl Module: Kernel/Output/HTML/ArticleCheck/PGP.pm
 msgid "\"PGP SIGNED MESSAGE\" header found, but invalid!"
-msgstr "Detectado cabeçalho \"PGP SIGNED MESSAGE\" inválido!"
+msgstr "Detetado cabeçalho \"PGP SIGNED MESSAGE\" inválido!"
 
 #. Perl Module: Kernel/Output/HTML/ArticleCheck/SMIME.pm
 msgid "\"S/MIME SIGNED MESSAGE\" header found, but invalid!"
-msgstr "Detectado cabeçalho \"S/MIME SIGNED MESSAGE\" inválido!"
+msgstr "Detetado cabeçalho \"S/MIME SIGNED MESSAGE\" inválido!"
 
 #. Perl Module: Kernel/Output/HTML/ArticleCheck/SMIME.pm
 msgid "Ticket decrypted before"
@@ -16830,7 +16830,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "A list of dynamic fields that are merged into the main ticket during a merge operation. Only dynamic fields that are empty in the main ticket will be set."
-msgstr ""
+msgstr "Uma lista de campos dinâmicos que são adicionados ao bilhete principal durante uma operação de combinação. Apenas campos dinâmicos vazios no bilhete principal, serão definidos."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Name of custom queue. The custom queue is a queue selection of your preferred queues and can be selected in the preferences settings."
@@ -20794,7 +20794,7 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "A package upgrade was recently finished. Click here to see the results."
-msgstr ""
+msgstr "Um pacote foi recentemente atualizado. Clique aqui para ver os resultados."
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "No response from get package upgrade result."
@@ -21202,7 +21202,7 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
 msgid " ...and %s more"
-msgstr " e %s mais"
+msgstr " ...e %s mais"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
 msgid " ...show less"
@@ -21294,7 +21294,7 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
 msgid "A key with this name ('%s') already exists."
-msgstr ""
+msgstr "Uma chave com o nome ('%s') já existe."
 
 #. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
 msgid "Do you really want to revert this setting to its historical value?"
@@ -21568,7 +21568,7 @@ msgstr "2 minutos"
 
 #. SysConfig
 msgid "200 (Advanced)"
-msgstr ""
+msgstr "200(Avançado)"
 
 #. SysConfig
 msgid "30 Minutes"
@@ -21584,15 +21584,15 @@ msgstr "5 Minutos"
 
 #. SysConfig
 msgid "A TicketWatcher Module."
-msgstr ""
+msgstr "Um módulo TicketWatcher."
 
 #. SysConfig
 msgid "A Website"
-msgstr ""
+msgstr "Uma Página na Internet."
 
 #. SysConfig
 msgid "A picture"
-msgstr ""
+msgstr "Uma Imagem"
 
 #. SysConfig
 msgid "AJAX functions for notification event transport web service."

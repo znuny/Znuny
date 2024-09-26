@@ -5932,7 +5932,7 @@ msgstr "Kør forespørgsel"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
 msgid "%s Results"
-msgstr ""
+msgstr "%s resultater"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
 msgid "Query is executed."
@@ -8400,7 +8400,7 @@ msgstr "Tildelt"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 msgid "%s Ticket(s)"
-msgstr ""
+msgstr "%s sag(er)"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 msgid "Accounted time"
@@ -8484,7 +8484,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
 msgid "%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own."
-msgstr ""
+msgstr "%s oplever udfald på forbindelsen. Du kan enten forsøge at opdatere siden eller vente til din browser automatisk forsøger igen."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
 msgid "The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page."
@@ -9584,7 +9584,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "%s (%s) is currently working on this setting."
-msgstr ""
+msgstr "%s (%s) arbejder i øjeblikket på denne indstilling."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Toggle advanced options for this setting"
@@ -9976,7 +9976,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (kopi) %s"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "Please note that ACL restrictions will be ignored for the Superuser account (UserID 1)."
@@ -10100,7 +10100,7 @@ msgstr "Ukendt besked %s!"
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (kopi)"
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "There was an error creating the Notification"
@@ -11812,11 +11812,11 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
 msgid "%s hour(s) before"
-msgstr ""
+msgstr "%s time(r) før"
 
 #. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
 msgid "%s day(s) before"
-msgstr ""
+msgstr "%s dag(e) før"
 
 #. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
 msgid "%s week before"
@@ -11860,7 +11860,7 @@ msgstr "Kunde-historik"
 
 #. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "No RecipientField is given!"
-msgstr ""
+msgstr "Modtagerfeltet er ikke angivet"
 
 #. Perl Module: Kernel/Modules/AgentDashboardCommon.pm
 msgid "No such config for %s"
@@ -11904,7 +11904,7 @@ msgstr "Kan ikke slette link med %s!"
 
 #. Perl Module: Kernel/Modules/AgentLinkObject.pm
 msgid "%s Link(s) deleted successfully."
-msgstr ""
+msgstr "%s Link slettet."
 
 #. Perl Module: Kernel/Modules/AgentLinkObject.pm
 msgid "Can not create link with %s! Object already linked as %s."
@@ -12232,7 +12232,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentTicketProcess.pm
 msgid "No Process configured!"
-msgstr ""
+msgstr "Processen er ikke konfigureret!"
 
 #. Perl Module: Kernel/Modules/AgentTicketProcess.pm
 msgid "The selected process is invalid!"
@@ -12896,11 +12896,11 @@ msgstr "Underskrevet"
 
 #. Perl Module: Kernel/Output/HTML/ArticleCheck/PGP.pm
 msgid "\"PGP SIGNED MESSAGE\" header found, but invalid!"
-msgstr ""
+msgstr "\"PGP SIGNED MESSAGE\" header fundet, men den er invalid!"
 
 #. Perl Module: Kernel/Output/HTML/ArticleCheck/SMIME.pm
 msgid "\"S/MIME SIGNED MESSAGE\" header found, but invalid!"
-msgstr ""
+msgstr "\"S/MIME SIGNED MESSAGE\" header fundet, men den er invalid!"
 
 #. Perl Module: Kernel/Output/HTML/ArticleCheck/SMIME.pm
 msgid "Ticket decrypted before"
@@ -13120,23 +13120,23 @@ msgstr "Marker for at aktivere denne dato"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "%s TB"
-msgstr ""
+msgstr "%s TB"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "%s GB"
-msgstr ""
+msgstr "%s GB"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "%s KB"
-msgstr ""
+msgstr "%s KB"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "%s B"
-msgstr ""
+msgstr "%s B"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "No Permission!"
@@ -13144,7 +13144,7 @@ msgstr "Ingen tilladelse."
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "No Permission"
-msgstr ""
+msgstr "Ingen tilladelse"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "Show Tree Selection"
@@ -14776,7 +14776,7 @@ msgstr ""
 
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "No Permission to use this frontend module!"
-msgstr ""
+msgstr "Ingen tilladelse til at anvende frontend modulet"
 
 #. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
 msgid "Authentication succeeded, but no customer record is found in the customer backend. Please contact the administrator."
@@ -21188,7 +21188,7 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
 msgid " ...show less"
-msgstr ""
+msgstr " ... vis færre"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
 msgid "Add new draft"

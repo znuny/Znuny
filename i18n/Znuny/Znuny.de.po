@@ -21615,7 +21615,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Activity Notification"
-msgstr ""
+msgstr "Aktivitätsbenachrichtigung"
 
 #. SysConfig
 msgid "Activity."
