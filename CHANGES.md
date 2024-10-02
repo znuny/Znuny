@@ -1,6 +1,7 @@
 # 7.1.4 2024-??-??
 
 # 7.1.3 2024-??-??
+ - 2024-09-26 Removed regex from Kernel::System::HTMLUtils::DocumentCleanup that could lead to a security issue. It replaced HTML of Microsoft Word. Thanks for reporting to Emin Yazi (@eyazi), Efflux.
  - 2024-09-26 Fixed duplicate database record insert attempts for ticket flags. Thanks to @lukasdebaum for reporting. [#531](https://github.com/znuny/Znuny/issues/531)
  - 2024-09-25 Fixed link to customer information center in agent ticket zoom.
  - 2024-09-24 Fixed bug - ArticleStorageSwitch creates duplicate files with an additional file extension '-1'.
