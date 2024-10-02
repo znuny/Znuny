@@ -1,6 +1,6 @@
 # 7.1.4 2024-??-??
 
-# 7.1.3 2024-??-??
+# 7.1.3 2024-10-02
  - 2024-09-26 Removed regex from Kernel::System::HTMLUtils::DocumentCleanup that could lead to a security issue. It replaced HTML of Microsoft Word. Thanks for reporting to Emin Yazi (@eyazi), Efflux.
  - 2024-09-26 Fixed duplicate database record insert attempts for ticket flags. Thanks to @lukasdebaum for reporting. [#531](https://github.com/znuny/Znuny/issues/531)
  - 2024-09-25 Fixed link to customer information center in agent ticket zoom.
@@ -307,6 +307,24 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.11 2024-10-02
+ - 2024-10-02 Added HTML filter to ProcessManagement/SLA template. Converts the characters <, >, & and " to <, >, &, and " respectively, protecting them from being interpreted as representing HTML tags or entities.
+ - 2024-09-26 Removed regex from Kernel::System::HTMLUtils::DocumentCleanup that could lead to a security issue. It replaced HTML of Microsoft Word. Thanks for reporting to Emin Yazi (@eyazi), Efflux.
+ - 2024-09-25 Fixed link to customer information center in agent ticket zoom.
+ - 2024-09-24 Updated CKEditor to version 4.25.1-znuny.
+ - 2024-09-24 Fixed bug - ArticleStorageSwitch creates duplicate files with an additional file extension '-1'.
+ - 2024-09-18 Fixed exit code of migration script.
+ - 2024-09-10 Fixed sorting of translated list entries in dropdown elements.
+ - 2024-09-09 Improved performance regarding dynamic field values when fetching tickets.
+ - 2024-09-09 Improved error logging in OAuth2 token overview. Fixed token error message reset.
+ - 2024-08-27 Fixed console command Admin::Service::Add - does not work after ITSMCore is installed.
+ - 2024-08-27 Added auto mapping for unknown actions to Znuny.Form.Input.FieldIDMapping.
+ - 2024-08-23 Fixed duplicate database record insert attempts for ticket flags. Thanks to @lukasdebaum for reporting. #531
+ -
+ - 2024-08-22 Added '--single-transaction' option to scripts/backup.pl for MySQL/MariaDB. The --single-transaction flag will start a transaction before running.
+ - 2024-07-29 Fixed evaluation of ticket ID parameter in generic interface operation TicketGet.
+ - 2024-07-25 Console command Admin::PostMasterFilter::Import now will also update existing filters instead of only create new ones. Thanks to @meisterheister for reporting the issue. #527
 
 # 6.5.10 2024-07-24
  - 2024-07-11 Updated Moment.js to 2.30.1 and jQueryUI to 1.13.3.
