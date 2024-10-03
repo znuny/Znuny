@@ -4712,13 +4712,10 @@ sub CustomerNavigationBar {
             );
 
             # run module
-            %NavBarModule = (
-                %NavBarModule,
-                $Object->Run(
-                    %Param,
-                    Config       => $Jobs{$Job},
-                    NavBarModule => \%NavBarModule || {},
-                ),
+            $Object->Run(
+                %Param,
+                Config       => $Jobs{$Job},
+                NavBarModule => \%NavBarModule || {},
             );
         }
     }
