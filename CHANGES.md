@@ -1,4 +1,5 @@
 # 7.1.4 2024-??-??
+ - 2024-09-27 Fixed dynamic date fields being validated even if not selected for form submit. Thanks to @BuilderNSV for reporting the issue. [#596](https://github.com/znuny/Znuny/issues/596)
 
 # 7.1.3 2024-10-02
  - 2024-09-26 Removed regex from Kernel::System::HTMLUtils::DocumentCleanup that could lead to a security issue. It replaced HTML of Microsoft Word. Thanks for reporting to Emin Yazi (@eyazi), Efflux.
