@@ -1,4 +1,5 @@
 # 7.1.4 2024-??-??
+ - 2024-10-16 AdminSystemConfiguration: Addon name is no longer translated.
  - 2024-10-15 Added additional PageNavBar to bottom in AdminDynamicField.
  - 2024-10-10 Updated MIME::Decoder::QuotedPrint from 5.509 to 5.515.
  - 2024-10-07 Updated jstree from version 3.3.7 to 3.3.8.
