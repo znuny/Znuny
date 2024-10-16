@@ -4519,6 +4519,7 @@ sub ConfigurationCategoriesGet {
         }
 
         $Result{$PackageName} = {
+            PackageName => $PackageName,
             DisplayName => $DisplayName,
             Files       => \@XMLFiles,
         };
