@@ -465,10 +465,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         color: var(--gray-dark-semi);
     }
 
-    .NoMarginTop {
-        margin-top: 0px !important;
-    }
-
     /*#ActivityDialogContent .ContentColumn .TableLike > div {
         width: 100%;
         padding: 0;
