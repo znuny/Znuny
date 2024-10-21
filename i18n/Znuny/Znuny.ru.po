@@ -4,14 +4,12 @@ msgstr ""
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
 "PO-Revision-Date: 2024-10-19 00:17+0000\n"
 "Last-Translator: BuilderNSV <nikitin.sergey.v@gmail.com>\n"
-"Language-Team: Russian <https://translations.znuny.org/projects/znuny/znuny/"
-"ru/>\n"
+"Language-Team: Russian <https://translations.znuny.org/projects/znuny/znuny/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.6.2\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
@@ -21404,15 +21402,11 @@ msgstr "Следующие типы файлов не разрешены для 
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The following files exceed the maximum allowed size per file of %s and were not uploaded: %s"
-msgstr ""
-"Следующие файлы превысили максимальный допустимый размер одного файла (%s) и "
-"не были загружены: %s"
+msgstr "Следующие файлы превысили максимальный допустимый размер одного файла (%s) и не были загружены: %s"
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s"
-msgstr ""
-"Следующие файлы превысили максимальное допустимое количество символов в "
-"имени (%s) и не были загружены: %s"
+msgstr "Следующие файлы превысили максимальное допустимое количество символов в имени (%s) и не были загружены: %s"
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The following files were already uploaded and have not been uploaded again: %s"
@@ -24339,3 +24333,4 @@ msgstr ""
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "There were non-system tables found which do not have 'utf8mb4' as charset."
 msgstr ""
+

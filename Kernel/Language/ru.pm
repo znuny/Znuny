@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.833388266315096;
+    $Self->{Completeness}        = 0.833882663150956;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8377,13 +8377,13 @@ sub Data {
         'Please only select at most %s files for upload.' => 'Пожалуйста, выберите только файлы %s для загрузки.',
         'The following files are not allowed to be uploaded: %s' => 'Следующие типы файлов не разрешены для загрузки: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
-            '',
+            'Следующие файлы превысили максимальный допустимый размер одного файла (%s) и не были загружены: %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
-            '',
+            'Следующие файлы превысили максимальное допустимое количество символов в имени (%s) и не были загружены: %s',
         'The following files were already uploaded and have not been uploaded again: %s' =>
-            '',
+            'Следующие файлы уже загружены и не были загружены снова: %s',
         'No space left for the following files: %s' => 'Недостаточно места для следующих файлов: %s',
-        'Available space %s of %s.' => 'Доступное место 1%s из 1%s',
+        'Available space %s of %s.' => 'Доступное место %s из %s',
         'Upload information' => 'Информация о загрузке',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             'Неизвестная ошибка обнаружена при удалении вложения. Попробуйте повторить. Если ошибка повторяется постоянно, свяжитесь в вашим системным администратором.',
