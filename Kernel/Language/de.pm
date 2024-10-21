@@ -5609,6 +5609,8 @@ sub Data {
             'Automatischer Zeilenumbruch in Textnachrichten nach x-Zeichen.',
         'Sets the number of lines that are displayed in text messages (e.g. ticket lines in the QueueZoom).' =>
             'Legt die Anzahl an Zeilen fest, die von Textnachrichten angezeigt werden sollen (z. B. von Tickets in der Queue-Ansicht).',
+        'Sets the maximum number of dropdown field values before the select layout will be changed for performance reasons.' =>
+            'Legt die maximale Anzahl an Werten fest, bevor das Auswahlfeld-Layout zu Performancezwecken geändert wird.',
         'Turns on drag and drop for the main navigation.' => 'Aktiviert Drag und Drop für die Hauptnavigation.',
         'Defines the date input format used in forms (option or input fields).' =>
             'Definiert das benutzte Datumseingabeformat in Formularen (Option für Eingabefelder).',
