@@ -1,4 +1,5 @@
 # 7.1.4 2024-??-??
+ - 2024-10-21 Sector Nord AG: Fixed #571 AgentTicketProcess Mobile-View is not showing all elements of ActivityDialog. Thanks to @LuBroering (Lukas Bröring SectorNord AG). [PR#553](https://github.com/znuny/Znuny/pull/553)
  - 2024-10-16 AdminSystemConfiguration: Addon name is no longer translated.
  - 2024-10-15 Added additional PageNavBar to bottom in AdminDynamicField.
  - 2024-10-10 Updated MIME::Decoder::QuotedPrint from 5.509 to 5.515.
