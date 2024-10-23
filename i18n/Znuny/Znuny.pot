@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-09-23 11:44+0000\n"
+"POT-Creation-Date: 2024-10-22 11:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8640,10 +8640,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid "Service level agreement"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
-msgid "Dymanic Info"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt

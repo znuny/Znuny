@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.436882003955175;
+    $Self->{Completeness}        = 0.436954013515741;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2925,7 +2925,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'New Ticket' => 'Tiketi mpya',
         'Service level agreement' => '',
-        'Dymanic Info' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => 'Karibu ',

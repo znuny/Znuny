@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.637771918259723;
+    $Self->{Completeness}        = 0.637877039723092;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2927,7 +2927,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'New Ticket' => 'Nowe zgłoszenie',
         'Service level agreement' => 'Gwarantowany poziom świadczenia usług (SLA)',
-        'Dymanic Info' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => 'Witaj!',

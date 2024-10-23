@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.606789716545814;
+    $Self->{Completeness}        = 0.606889731333443;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2924,7 +2924,6 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'New Ticket' => 'Tiket baru',
         'Service level agreement' => '',
-        'Dymanic Info' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => 'Selamat datang!',
