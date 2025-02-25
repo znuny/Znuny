@@ -1,4 +1,5 @@
 # 6.5.15 2025-xx-xx
+ - 2025-02-25 Fixed AjaxAttachment.pm bug - Use of uninitialized value in concatenation (.) or string.
  - 2025-02-21 Fixed broken documentation link in ACL Edit Screen and changed text of hint.
 
 # 6.5.14 2025-02-19
