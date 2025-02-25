@@ -445,16 +445,31 @@ sub DynamicFieldUpdate {
         $ChangedOrder = 1;
     }
 
-    # sql
-    return if !$DBObject->Do(
-        SQL => 'UPDATE dynamic_field SET name = ?, label = ?, field_order =?, field_type = ?, '
-            . 'object_type = ?, config = ?, valid_id = ?, change_time = current_timestamp, '
-            . ' change_by = ? WHERE id = ?',
-        Bind => [
-            \$Param{Name}, \$Param{Label}, \$Param{FieldOrder}, \$Param{FieldType},
-            \$Param{ObjectType}, \$Config, \$Param{ValidID}, \$Param{UserID}, \$Param{ID},
-        ],
-    );
+    # InternalField is never set via the GUI (e.g. AdminDynamicFieldText.pm)
+    # If it is set via the "Backend" for example PackageSetup
+    # it should also be possible to change the 'InternalField' again.
+    if ( defined $Param{InternalField} ) {
+        return if !$DBObject->Do(
+            SQL => 'UPDATE dynamic_field SET internal_field = ?, name = ?, label = ?, field_order =?, field_type = ?, '
+                . 'object_type = ?, config = ?, valid_id = ?, change_time = current_timestamp, '
+                . ' change_by = ? WHERE id = ?',
+            Bind => [
+                \$Param{InternalField}, \$Param{Name}, \$Param{Label}, \$Param{FieldOrder}, \$Param{FieldType},
+                \$Param{ObjectType}, \$Config, \$Param{ValidID}, \$Param{UserID}, \$Param{ID},
+            ],
+        );
+    }
+    else {
+        return if !$DBObject->Do(
+            SQL => 'UPDATE dynamic_field SET name = ?, label = ?, field_order =?, field_type = ?, '
+                . 'object_type = ?, config = ?, valid_id = ?, change_time = current_timestamp, '
+                . ' change_by = ? WHERE id = ?',
+            Bind => [
+                \$Param{Name}, \$Param{Label}, \$Param{FieldOrder}, \$Param{FieldType},
+                \$Param{ObjectType}, \$Config, \$Param{ValidID}, \$Param{UserID}, \$Param{ID},
+            ],
+        );
+    }
 
     # get cache object
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');

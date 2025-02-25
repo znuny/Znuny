@@ -1,6 +1,5 @@
 # 6.5.15 2025-xx-xx
- - 2025-02-25 Fixed AjaxAttachment.pm bug - Use of uninitialized value in concatenation (.) or string.
- - 2025-02-21 Fixed broken documentation link in ACL Edit Screen and changed text of hint.
+ - 2025-02-25 Improved DynamicFieldUpdate function - InternalField can now be changed. InternalField is never set via the GUI (e.g. AdminDynamicFieldText.pm). If it is set via the "Backend" for example PackageSetup it should also be possible to change the 'InternalField' again.
 
 # 6.5.14 2025-02-19
  - 2025-02-14 Fixed content security policy HTTP header to allow externally linked images.
