@@ -5393,7 +5393,7 @@
                 <Item Key="Name" Translatable="1">Back</Item>
                 <Item Key="Description" Translatable="1">Go back</Item>
                 <Item Key="Action"></Item>
-                <Item Key="Link">[% Env("LastScreenOverview") %];TicketID=[% Data.TicketID | html %]</Item>
+                <Item Key="Link">[% Env("LastScreenOverview") %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1"></Item>
