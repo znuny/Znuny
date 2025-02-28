@@ -117,7 +117,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             return false;
         });
 
-        $('a.AsPopup_Redirect').on('click', function () {
+        $('a.AsPopup_Redirect').off('click.AsPopup_Redirect').on('click.AsPopup_Redirect', function () {
             var $Form = $(this).closest('form');
 
             $('#PopupRedirect').val(1);
