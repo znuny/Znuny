@@ -12,7 +12,6 @@ package Kernel::System::SysConfig;
 use strict;
 use warnings;
 
-use File::Copy;
 use Time::HiRes();
 use utf8;
 
@@ -4454,6 +4453,7 @@ sub ConfigurationCategoriesGet {
         my $DisplayName = $ConfigObject->Get("SystemConfiguration::Category::Name::$PackageName") || $PackageName;
 
         $Result{$PackageName} = {
+            PackageName => $PackageName,
             DisplayName => $DisplayName,
             Files       => \@XMLFiles,
         };
@@ -6309,7 +6309,14 @@ sub CreateZZZAAutoBackup {
     my $BackupDir              = "$Home/Kernel/Config/Backups/";
     my $ZZZAAutoFilePath       = "$Home/Kernel/Config/Files/ZZZAAuto.pm";
     my $ZZZAAutoBackupFilePath = "$Home/Kernel/Config/Backups/ZZZAAuto.pm";
+    my $FileClass              = "Kernel::Config::Files::ZZZAAuto";
+    my $BackupFileClass        = "Kernel::Config::Backups::ZZZAAuto";
 
+    if ( -f $ZZZAAutoBackupFilePath ) {
+        $MainObject->FileDelete(
+            Location => $ZZZAAutoBackupFilePath
+        );
+    }
     return if !-f $ZZZAAutoFilePath;
 
     # create backups directory if not existing
@@ -6317,7 +6324,22 @@ sub CreateZZZAAutoBackup {
         return if !mkdir $BackupDir;
     }
 
-    return if !copy( $ZZZAAutoFilePath, $ZZZAAutoBackupFilePath );
+    my $ContentSCALARRef = $MainObject->FileRead(
+        Location => $ZZZAAutoFilePath,
+        Mode     => 'utf8',
+        Type     => 'Local',
+        Result   => 'SCALAR',
+    );
+
+    my $ZZZAAutoData = ${$ContentSCALARRef};
+
+    # Search and replace package from Files to Backups
+    $ZZZAAutoData =~ s{package $FileClass}{package $BackupFileClass}g;
+
+    return if !$MainObject->FileWrite(
+        Location => $ZZZAAutoBackupFilePath,
+        Content  => \$ZZZAAutoData,
+    );
 
     return 1;
 }

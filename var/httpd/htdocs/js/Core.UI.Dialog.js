@@ -457,8 +457,8 @@ Core.UI.Dialog = (function (TargetNS) {
         if (InnerWidth >= 800){
             DialogModalClass = 'modal-lg';
         }
-        if (Params.DialogModalClass){
-            DialogModalClass = Params.DialogModalClass;
+        if (Params.ModalClass){
+            DialogModalClass = Params.ModalClass;
         }
 
         // add DialogModalClass to Dialog
@@ -481,7 +481,7 @@ Core.UI.Dialog = (function (TargetNS) {
         // Set position for Dialog
         if (Params.Type === 'Alert') {
             $Dialog.css({
-                top: $(window).scrollTop() + ($(window).height() * 0.3),
+                top: Math.round($(window).height() * 0.3),
                 left: Math.round(($(window).width() - $Dialog.width()) / 2)
             });
         }

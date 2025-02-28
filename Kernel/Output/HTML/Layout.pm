@@ -508,6 +508,15 @@ sub Block {
         Data => $Param{Data},
         };
 
+    # For performance reasons:
+    # Do not initialize modernized input fields on selections with many entries
+    my $MaxNumberOfOptions
+        = $Kernel::OM->Get('Kernel::Config')->Get("InputFields::ModernizedSelection::MaxNumberOfOptions");
+    $Self->AddJSData(
+        Key   => 'InputFields::ModernizedSelection::MaxNumberOfOptions',
+        Value => $MaxNumberOfOptions,
+    );
+
     return 1;
 }
 
@@ -696,7 +705,7 @@ sub Login {
             Expires  => '+1y',
             Path     => $ConfigObject->Get('ScriptAlias'),
             Secure   => $CookieSecureAttribute,
-            HttpOnly => 1,
+            HTTPOnly => 1,
         );
     }
 
@@ -713,11 +722,6 @@ sub Login {
             TemplateFile => 'Motd',
             Data         => \%Param
         );
-    }
-
-    # add user or global default popup profiles
-    if ( !$Self->{UserPopupProfiles} ) {
-        $Self->{UserPopupProfiles} = $Self->AddPopupProfiles();
     }
 
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
@@ -781,6 +785,18 @@ sub Login {
 
         $Self->Block(
             Name => 'LoginLogo'
+        );
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Agent',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
         );
     }
 
@@ -959,7 +975,6 @@ sub FatalError {
         Area  => 'Frontend',
         Title => 'Fatal Error'
     );
-    $Output .= $Self->NavigationBar() if $Self->{UserID};
     $Output .= $Self->Error(%Param);
     $Output .= $Self->Footer();
     $Self->Print( Output => \$Output );
@@ -973,7 +988,6 @@ sub SecureMode {
         Area  => 'Frontend',
         Title => 'Secure Mode'
     );
-    $Output .= $Self->NavigationBar() if $Self->{UserID};
     $Output .= $Self->Output(
         TemplateFile => 'AdminSecureMode',
         Data         => \%Param
@@ -1298,6 +1312,11 @@ sub Header {
         );
     }
 
+    # add user or global default popup profiles
+    if ( !$Self->{UserPopupProfiles} ) {
+        $Self->{UserPopupProfiles} = $Self->AddPopupProfiles();
+    }
+
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateAgentCSSCalls();
     $Self->LoaderCreateDynamicCSS();
@@ -1340,6 +1359,18 @@ sub Header {
         $Self->Block(
             Name => 'HeaderLogoCSS',
             Data => \%Data,
+        );
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Agent',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
         );
     }
 
@@ -1402,11 +1433,8 @@ sub Header {
 
         if ( $Param{ShowToolbarItems} && ref $ToolBarModule eq 'HASH' ) {
 
-            $Self->Block(
-                Name => 'ToolBar',
-                Data => \%Param,
-            );
             $Self->ToolbarModules(
+                %Param,
                 ToolBarModule => $ToolBarModule,
             );
         }
@@ -1522,17 +1550,6 @@ sub ToolbarModules {
     my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    my %ToolBarModuleBlocks = map { $Param{ToolBarModule}->{$_}->{Block} || 'ToolBarPersonalViews' => 1 }
-        grep { defined $Param{ToolBarModule}->{$_} } keys %{ $Param{ToolBarModule} };
-
-    # renders ToolBarContainer if a ToolBarModule is active
-    for my $Block ( sort keys %ToolBarModuleBlocks ) {
-        $Self->Block(
-            Name => $Block . 'Container',
-            Data => \%Param,
-        );
-    }
-
     my %Modules;
     my %Jobs = %{ $Param{ToolBarModule} };
 
@@ -1601,6 +1618,32 @@ sub ToolbarModules {
         %Modules = ( $Object->Run( %Param, Config => $Jobs{$Job} ), %Modules );
     }
 
+    my %ToolBarModuleBlocks;
+
+    # count the number of blocks for which modules are to be rendered.
+    for my $ModuleID ( sort keys %Modules ) {
+        my $Block = $Modules{$ModuleID}->{Block} || 'ToolBarPersonalViews';
+        $Block = 'ToolBarPersonalViews' if $Block eq 'ToolBarItem';
+
+        $ToolBarModuleBlocks{$Block}++;
+    }
+
+    # renders ToolBar block if ToolBarModules exist
+    if (%ToolBarModuleBlocks) {
+        $Self->Block(
+            Name => 'ToolBar',
+            Data => \%Param,
+        );
+    }
+
+    # renders ToolBarContainer if a ToolBarModule is active
+    for my $Block ( sort keys %ToolBarModuleBlocks ) {
+        $Self->Block(
+            Name => $Block . 'Container',
+            Data => \%Param,
+        );
+    }
+
     # show tool bar items
     MODULE:
     for my $Key ( sort keys %Modules ) {
@@ -1610,9 +1653,21 @@ sub ToolbarModules {
 
         # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
         # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
-        if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearch' ) {
-            $Modules{$Key}->{SearchInArchive}
+        if (
+            $ConfigObject->Get('Ticket::ArchiveSystem')
+            && $Modules{$Key}->{Block} eq 'ToolBarSearch'
+            && $Modules{$Key}->{Name} eq 'Fulltext'
+            )
+        {
+            my $SearchInArchive
                 = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
+
+            $Self->Block(
+                Name => 'SearchInArchive',
+                Data => {
+                    SearchInArchive => $SearchInArchive || 'AllTickets',
+                },
+            );
         }
 
         if (
@@ -1764,6 +1819,8 @@ sub Footer {
         SearchFrontend             => $JSCall,
         Autocomplete               => $AutocompleteConfig,
         'Mentions::RichTextEditor' => $ConfigObject->Get('Mentions::RichTextEditor') // {},
+        Skin                       => $Self->{SkinSelected},
+        AutoAttributFieldIDMapping => $ConfigObject->Get('AutoAttributFieldIDMapping') || 1,
     );
 
     for my $Config ( sort keys %JSConfig ) {
@@ -2717,16 +2774,13 @@ sub Attachment {
 
         # Disallow external and inline scripts, active content, frames, but keep allowing inline styles
         #   as this is a common use case in emails.
-        # Also disallow referrer headers to prevent referrer leaks via old-style policy directive. Please note this has
-        #   been deprecated and will be removed in future OTRS versions in favor of a separate header (see below).
         # img-src:    allow external and inline (data:) images
         # script-src: block all scripts
         # object-src: allow 'self' so that the browser can load plugins for PDF display
         # frame-src:  block all frames
         # style-src:  allow inline styles for nice email display
-        # referrer:   don't send referrers to prevent referrer-leak attacks
         $Output
-            .= "Content-Security-Policy: default-src *; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline'; referrer no-referrer;\n";
+            .= "Content-Security-Policy: default-src *; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline';\n";
 
         # Use Referrer-Policy header to suppress referrer information in modern browsers
         #   (to prevent referrer-leak attacks).
@@ -3975,7 +4029,7 @@ sub CustomerLogin {
             Expires  => '+1y',
             Path     => $ConfigObject->Get('ScriptAlias'),
             Secure   => $CookieSecureAttribute,
-            HttpOnly => 1,
+            HTTPOnly => 1,
         );
     }
 
@@ -4057,6 +4111,18 @@ sub CustomerLogin {
                 },
             );
         }
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Customer',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
+        );
     }
 
     # show prelogin block, if in prelogin mode (e.g. SSO login)
@@ -4343,6 +4409,18 @@ sub CustomerHeader {
                 Data => \%Param,
             );
         }
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Customer',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
+        );
     }
 
     # create & return output
@@ -4836,7 +4914,6 @@ sub CustomerErrorScreen {
     my ( $Self, %Param ) = @_;
 
     my $Output = $Self->CustomerHeader( Title => 'Error' );
-    $Output .= $Self->CustomerNavigationBar() if $Self->{UserCustomerID};
     $Output .= $Self->CustomerError(%Param);
     $Output .= $Self->CustomerFooter();
     return $Output;
@@ -4875,7 +4952,6 @@ sub CustomerNoPermission {
     # create output
     my $Output;
     $Output = $Self->CustomerHeader( Title => Translatable('No Permission') ) if ( $WithHeader eq 'yes' );
-    $Output .= $Self->CustomerNavigationBar() if $Self->{UserCustomerID};
     $Output .= $Self->Output(
         TemplateFile => 'NoPermission',
         Data         => \%Param
@@ -5524,14 +5600,21 @@ sub _BuildSelectionDataRefCreate {
                         $DisabledElements{$ElementLongName} = 1;
 
                         # add the element to the original data to be disabled later
-                        $DataLocal->{ $ElementLongName . '_Disabled' } = $ElementLongName;
+                        $DataLocal->{$ElementLongName} = $ElementLongName;
                     }
                     $Parents .= $Element . '::';
                 }
             }
         }
 
-        # sort hash (before the translation)
+        # translate value
+        if ( $OptionRef->{Translation} ) {
+            for my $Row ( sort keys %{$DataLocal} ) {
+                $DataLocal->{$Row} = $Self->{LanguageObject}->Translate( $DataLocal->{$Row} );
+            }
+        }
+
+        # sort hash
         my @SortKeys;
         if ( $OptionRef->{Sort} eq 'IndividualValue' && $OptionRef->{SortIndividual} ) {
             my %List = reverse %{$DataLocal};
@@ -5631,7 +5714,7 @@ sub _BuildSelectionDataRefCreate {
 
                         # push the missing element to the data local array
                         push @NewDataLocal, {
-                            Key      => $ElementLongName . '_Disabled',
+                            Key      => $ElementLongName,
                             Value    => $ElementLongName,
                             Disabled => 1,
                         };
@@ -6199,6 +6282,26 @@ sub SetRichTextParameters {
         }
     }
 
+    my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
+    my $WebPath  = $ConfigObject->Get('Frontend::WebPath') . 'skins';
+
+    my $UserType = $Self->{SessionSource} || '';
+    if ($UserType) {
+        $UserType =~ s/Interface//;
+    }
+
+    $Self->{SkinSelected} ||= $ConfigObject->Get("Loader::Agent::DefaultSelectedSkin") || 'default';
+
+    my $ContentsCssFS
+        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+    my $ContentsCss
+        = $WebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+
+    # If Core.RichTextEditor.ContentsCss.css for current skin exists, use it
+    if ( -e $ContentsCssFS ) {
+        $RichTextSettings{'ContentsCss'} = $ContentsCss;
+    }
+
     # get needed variables
     my $RichTextType        = $Param{Data}->{RichTextType}                || '';
     my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
@@ -6342,6 +6445,26 @@ sub CustomerSetRichTextParameters {
         if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
             $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
         }
+    }
+
+    my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
+    my $WebPath  = $ConfigObject->Get('Frontend::WebPath') . 'skins';
+
+    my $UserType = $Self->{SessionSource} || '';
+    if ($UserType) {
+        $UserType =~ s/Interface//;
+    }
+
+    $Self->{SkinSelected} ||= $ConfigObject->Get("Loader::Customer::SelectedSkin") || 'default';
+
+    my $ContentsCssFS
+        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+    my $ContentsCss
+        = $WebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+
+    # If Core.RichTextEditor.ContentsCss.css for current skin exists, use it
+    if ( -e $ContentsCssFS ) {
+        $RichTextSettings{'ContentsCss'} = $ContentsCss;
     }
 
     my $TextDir             = $Self->{TextDirection}                      || '';
@@ -6610,6 +6733,70 @@ sub _BuildLastViewsOutput {
     );
 
     return $LastViewHTML;
+}
+
+=head2 _GetShortcutIconsForInterface()
+
+Returns the paths to the shortcut icons of the given interface.
+
+    my %ShortcutConfig = $LayoutObject->_GetShortcutIconsForInterface(
+        Interface => 'Agent',    # or Customer
+    );
+
+=cut
+
+sub _GetShortcutIconsForInterface {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Interface)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    if ( $Param{Interface} !~ m{\A(?:Agent|Customer)\z} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'Interface' must be 'Agent' or 'Customer'.",
+        );
+        return;
+    }
+
+    my @ConfigParamNames = (
+        $Param{Interface} . 'ShortcutIcon',
+        $Param{Interface} . 'AppleTouchIcon',
+    );
+
+    my %ShortcutIcons;
+    for my $ConfigParam (@ConfigParamNames) {
+        my $CustomConfigParam = $ConfigParam . 'Custom';
+        my $CustomConfig      = $ConfigObject->Get($CustomConfigParam);
+
+        # check if we need to display a custom shortcut icon for the selected skin
+        if (
+            $Self->{SkinSelected}
+            && IsHashRefWithData($CustomConfig)
+            && $CustomConfig->{ $Self->{SkinSelected} }
+            )
+        {
+            $ShortcutIcons{$ConfigParam} = $CustomConfig->{ $Self->{SkinSelected} };
+        }
+
+        # Otherwise show default shortcut icon, if configured
+        elsif ( defined $ConfigObject->Get($ConfigParam) ) {
+            $ShortcutIcons{$ConfigParam} = $ConfigObject->Get($ConfigParam);
+        }
+    }
+
+    return %ShortcutIcons;
 }
 
 1;

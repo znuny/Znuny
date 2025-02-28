@@ -22,20 +22,20 @@ sub Data {
 
     # $$START$$
     # possible charsets
-    $Self->{Charset} = ['utf-8', ];
+    $Self->{Charset} = [];
     # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '%Y-%M-%D %T';
-    $Self->{DateFormatLong}      = '%A, %D de %B de %Y, %T';
-    $Self->{DateFormatShort}     = '%Y-%M-%D';
-    $Self->{DateInputFormat}     = '%Y-%M-%D';
-    $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.296528925619835;
+    $Self->{DateFormat}          = '%D/%M/%Y %T';
+    $Self->{DateFormatLong}      = '%A %D %B %T %Y';
+    $Self->{DateFormatShort}     = '%D/%M/%Y';
+    $Self->{DateInputFormat}     = '%D/%M/%Y';
+    $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
+    $Self->{Completeness}        = 0.309566935616664;
 
     # csv separator
-    $Self->{Separator}         = ';';
+    $Self->{Separator}         = '';
 
-    $Self->{DecimalSeparator}  = ',';
-    $Self->{ThousandSeparator} = '.';
+    $Self->{DecimalSeparator}  = '';
+    $Self->{ThousandSeparator} = '';
     $Self->{Translation} = {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
@@ -82,7 +82,8 @@ sub Data {
         'Change settings' => 'Alterar definições',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Defina o que  quer alterar se os critérios forem válidos. Lembre-se que "Possível" é uma lista branca, "Impossível" é uma lista negra.',
-        'Check the official %sdocumentation%s.' => '',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Editar ACL %s',
         'Edit ACL' => 'Editar ACL',
         'Show or hide the content' => 'Mostrar ou esconder o conteúdo',
@@ -300,7 +301,7 @@ sub Data {
         'Settings' => 'Configurações',
         'Entries per page' => 'Entradas por página',
         'No communications found.' => '',
-        '%s s' => '',
+        '%s s' => '%s s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
         'Back to overview' => '',
@@ -619,6 +620,9 @@ sub Data {
         'Backend' => '',
         'Backend which will be used for this dynamic field.' => '',
         'Backend documentation' => '',
+        'Cache TTL' => '',
+        'TTL (in seconds) for caching request results. Leave empty or set to 0 to disable caching.' =>
+            '',
         'Key for search' => '',
         'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
             '',
@@ -641,9 +645,6 @@ sub Data {
             '',
         'Query delay' => '',
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
-            '',
-        'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -719,10 +720,10 @@ sub Data {
         'To add a new event select the event object and event name' => '',
         'Do you really want to delete this event trigger?' => '',
         'Select Tickets' => 'Selecionar Tickets',
-        '(e. g. 10*5155 or 105658*)' => '(ex., 10*5155 ou 105658*)',
-        '(e. g. 234321)' => '(ex., 234321)',
+        '(e. g. 10*5155 or 105658*)' => '(ex. 10*5155 ou 105658*)',
+        '(e. g. 234321)' => '(ex. 234321)',
         'Customer user ID' => 'ID de cliente',
-        '(e. g. U5150)' => '(ex., U5150)',
+        '(e. g. U5150)' => '(ex. U5150)',
         'Fulltext-search in article (e. g. "Mar*in" or "Baue*").' => 'Pesquisa em texto integral do artigo (ex. "Mar*in" ou "Baue*")',
         'To' => 'Para',
         'Cc' => 'Cc',
@@ -801,7 +802,7 @@ sub Data {
         'Param %s key' => 'Chave do parametro %s',
         'Param %s value' => 'Valor do parametro %s',
         'Results' => 'Resultados',
-        '%s Tickets affected! What do you want to do?' => '%s tickets afetados. O que deseja fazer ?',
+        '%s Tickets affected! What do you want to do?' => '%s Tickets afetados. O que deseja fazer?',
         'Warning: You used the DELETE option. All deleted tickets will be lost!' =>
             'Aviso: Utilizou a opção de APAGAR. Todos os tickets vão ser perdidos.',
         'Warning: There are %s tickets affected but only %s may be modified during one job execution!' =>
@@ -1215,9 +1216,9 @@ sub Data {
         'Select how SOAP request function wrapper should be constructed.' =>
             '',
         '\'FunctionName\' is used as example for actual invoker/operation name.' =>
-            '',
+            '\'FunctionName\' é usado como exemplo para o nome real do invocador/operação.',
         '\'FreeText\' is used as example for actual configured value.' =>
-            '',
+            '\'FreeText\' é usado como exemplo para o valor real configurado.',
         'Request name free text' => '',
         'Text to be used to as function wrapper name suffix or replacement.' =>
             '',
@@ -1544,9 +1545,11 @@ sub Data {
         'Date' => 'Data',
         'List of Files' => 'Lista de ficheiros',
         'Permission' => 'Permissão',
+        'Size' => 'Tamanho',
+        'Problem' => '',
+        'OK' => '',
         'Download file from package!' => 'Descarregar ficheiro do pacote',
         'Required' => 'Obrigatório',
-        'Size' => 'Tamanho',
         'Primary Key' => 'Chave Primária',
         'Auto Increment' => '',
         'SQL' => 'SQL',
@@ -1591,7 +1594,7 @@ sub Data {
         'Edit PostMaster Filter' => 'Editar filtro de correio',
         'Delete this filter' => 'Apagar filtro',
         'Do you really want to delete this postmaster filter?' => '',
-        'A postmaster filter with this name already exists!' => '',
+        'A postmaster filter with this name already exists!' => 'Já existe um filtro postmaster com este nome!',
         'Filter Condition' => 'Condição do filtro',
         'AND Condition' => '',
         'Search header field' => '',
@@ -1686,7 +1689,7 @@ sub Data {
         'Available Fields' => 'Campos Disponíveis',
         'Filter available fields' => '',
         'Assigned Fields' => 'Campos Assignados',
-        ' Filter assigned fields' => '',
+        'Filter assigned fields' => '',
         'Communication Channel' => '',
         'Is visible for customer' => '',
         'Text Template' => 'Modelo',
@@ -1745,6 +1748,8 @@ sub Data {
         'Do you really want to delete this Activity?' => '',
         'Do you really want to delete this Activity Dialog?' => '',
         'Do you really want to delete this Transition?' => '',
+        'You can not edit a transition before it\'s connected to two activities.' =>
+            '',
         'Do you really want to delete this Transition Action?' => '',
         'Do you really want to remove this activity from the canvas? This can only be undone by leaving this screen without saving.' =>
             '',
@@ -1798,7 +1803,7 @@ sub Data {
         'Configure Working Hours' => '',
         'Configure Queue Related Settings' => '',
         'Edit Queue' => 'Editar fila',
-        'A queue with this name already exists!' => '',
+        'A queue with this name already exists!' => 'Já existe uma fila com este nome!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
         'Sub-queue of' => 'Sub-fila de ',
@@ -1812,7 +1817,7 @@ sub Data {
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Se um ticket for bloqueado e o agente não o fechar antes de terminar o prazo pendente, o ticket fica desbloqueado e disponível para outros agentes.',
         'Notify by' => 'Notificar por',
-        '0 = no escalation' => '0 = sem escalagem',
+        '0 = no escalation' => '0 = sem escalonamento',
         'If there is not added a customer contact, either email-external or phone, to a new ticket before the time defined here expires, the ticket is escalated.' =>
             'Se não tiver sido adicionado um contacto de cliente, seja de telefone ou email ao ticket, antes do período definido expirar, o ticket é escalado.',
         'If there is an article added, such as a follow-up via email or the customer portal, the escalation update time is reset. If there is no customer contact, either email-external or phone, added to a ticket before the time defined here expires, the ticket is escalated.' =>
@@ -1967,7 +1972,7 @@ sub Data {
             'Há pelo menos um parametro em falta. Corrija por favor',
         'Result format' => 'Formato do resultado',
         'Run Query' => 'Executar query',
-        '%s Results' => '',
+        '%s Results' => '%s Resultados',
         'Query is executed.' => 'A query foi executada',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
@@ -2027,10 +2032,11 @@ sub Data {
         'Generate Support Bundle' => '',
         'The Support Bundle has been Generated' => '',
         'A file containing the support bundle will be downloaded to the local system.' =>
-            '',
+            'Um ficheiro contendo o pacote de suporte será descarregado para o sistema local.',
         'Support Data' => '',
         'Error: Support data could not be collected (%s).' => '',
         'Support Data Collector' => 'Agregador de Informação de Suporte',
+        'Delete cache' => '',
         'Details' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
@@ -2073,7 +2079,7 @@ sub Data {
         'By default, you will only deploy settings which you changed on your own. If you\'d like to deploy settings changed by other users, too, please click the link on top of the screen to enter the advanced deployment mode.' =>
             '',
         'A deployment has just been restored, which means that all affected setting have been reverted to the state from the selected deployment.' =>
-            '',
+            'Uma implementação acabou de ser restaurada, o que significa que todas as configurações afetadas foram revertidas para o estado da implementação selecionada.',
         'Please review the changed settings and deploy afterwards.' => '',
         'An empty list of changes means that there are no differences between the restored and the current state of the affected settings.' =>
             '',
@@ -2128,7 +2134,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Permissões',
@@ -2182,7 +2187,7 @@ sub Data {
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Attribute' => '',
-        'Last update' => '',
+        'Last update' => 'Última atualização',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
         'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
@@ -2247,7 +2252,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
         'Basic information' => '',
-        'Date/Time' => '',
+        'Date/Time' => 'Data / Tempo',
         'Invalid date!' => 'Data inválida!',
         'Please set this to value before End date.' => '',
         'Please set this to value after Start date.' => 'Por favor colocar data posterior à data de inicio.',
@@ -2322,7 +2327,7 @@ sub Data {
         'Add another attribute' => 'Adicionar outro atributo',
         'The attributes with the identifier \'(Customer)\' are from the customer company.' =>
             '',
-        '(e. g. Term* or *Term*)' => '',
+        '(e. g. Term* or *Term*)' => '(ex. Term* ou *Term*)',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverview.tt
         'The customer user is already selected in the ticket mask.' => '',
@@ -2339,7 +2344,7 @@ sub Data {
         'The Znuny Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
             '',
         'A running Znuny Daemon is mandatory for correct system operation.' =>
-            '',
+            'Um Daemon Znuny em funcionamento é obrigatório para o funcionamento correto do sistema.',
         'Starting the Znuny Daemon' => '',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             '',
@@ -2355,7 +2360,7 @@ sub Data {
         'New Appointment' => '',
         'Tomorrow' => 'Amanhã',
         'Soon' => '',
-        '5 days' => '',
+        '5 days' => '5 dias',
         'Start' => 'Início',
         'none' => 'nenhum(a)',
 
@@ -2363,30 +2368,27 @@ sub Data {
         'in' => 'em',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        ' Show or hide the content' => '',
+        'All' => 'Todos',
         'Search inactive widgets' => '',
         'Active Widgets' => '',
-        ' Save changes' => '',
-        ' Save' => '',
-        'Save changes' => '',
-        ' Settings' => '',
-        ' Refresh' => '',
-        ' Close this widget' => ' Fechar este widget',
+        'Save changes' => 'Guardar alterações',
+        'Close this widget' => 'Fechar este widget',
         'Hide' => '',
-        ' Cancel' => ' Cancelar',
         'more' => 'mais',
         'No Data Available.' => '',
         'Available Columns' => 'Colunas disponíveis',
-        ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Colunas visíveis (arrastar e largar para ordenar)',
-        ' Submit' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => '',
         'Open' => 'Aberto',
         'Closed' => 'Fechado',
+        'Phone ticket' => 'Ticket por telefone',
+        'Email ticket' => 'Ticket por email',
         '%s open ticket(s) of %s' => '%s ticket(s) aberto(s) de %s',
-        '%s closed ticket(s) of %s' => '%s ticket(s) fechado(s) de %s',
+        '%s closed ticket(s) of %s' => '%s Ticket(s) fechado(s) de %s',
+        'New phone ticket from %s' => 'Novo ticket via telefone de %s',
+        'New email ticket to %s' => 'Novo ticket via email de %s',
         'Edit customer ID' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
@@ -2401,10 +2403,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '',
-        'Phone ticket' => 'Ticket por telefone',
-        'Email ticket' => 'Ticket por email',
-        'New phone ticket from %s' => 'Novo ticket via telefone de %s',
-        'New email ticket to %s' => 'Novo ticket via email de %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
@@ -2512,7 +2510,6 @@ sub Data {
         'Split' => 'Divide',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-        'Read more about statistics in Znuny' => '',
         'Statistics Management' => '',
         'Add Statistics' => '',
         'Dynamic Matrix' => '',
@@ -2600,11 +2597,11 @@ sub Data {
             'Necessita de um endereço de email válido, não utilize endereços de email locais',
         'Next ticket state' => 'Próximo estado do ticket',
         'Inform sender' => 'Informar o remetente',
-        'Send mail' => 'Enviar mensagem de email !',
+        'Send mail' => 'Enviar email',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
         'Ticket Bulk Action' => 'Ação em bloco sobre tickets',
-        'Send Email' => 'Enviar mensagem de email !',
+        'Send Email' => 'Enviar email',
         'Merge' => 'Fundir',
         'Merge to' => 'Ligar a',
         'Invalid ticket identifier!' => 'Identificador de ticket inválido',
@@ -2612,12 +2609,15 @@ sub Data {
         'Link together' => 'Ligar tickets',
         'Link to parent' => 'Ligar ao pai',
         'Unlock tickets' => 'Desbloquear ticket',
+        'Watch tickets' => '',
+        'Mark tickets as seen' => '',
+        'Mark tickets as unseen' => '',
         'Execute Bulk Action' => 'Executar ação em lote',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
         'Compose Answer for %s%s%s' => 'Escrever resposta para %s%s%s',
         'Date Invalid!' => 'Data inválida',
-        ' Select one or more recipients from the customer user address book.' =>
+        'Select one or more recipients from the customer user address book.' =>
             '',
         'Customer user address book' => '',
         'This address is registered as system address and cannot be used: %s' =>
@@ -2627,12 +2627,9 @@ sub Data {
         'Please remove this entry and enter a new one with the correct value.' =>
             '',
         'This address already exists on the address list.' => '',
-        ' Cc' => ' Cc',
         'Remove Cc' => 'Remover CC',
-        'Bcc' => 'Bcc',
-        ' Bcc' => ' Cco',
+        'Bcc' => 'Cco',
         'Remove Bcc' => 'Remover BCC',
-        ' Send mail' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => 'Modificar cliente de %s%s%s',
@@ -2641,23 +2638,16 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Criar novo ticket',
-        ' Example Template' => '',
         'Example Template' => '',
         'To customer user' => 'Para o utilizador do cliente',
-        ' To' => '',
         'Please include at least one customer user for the ticket.' => '',
-        ' Select this customer as the main customer.' => '',
-        ' To customer user' => '',
+        'Select this customer as the main customer.' => '',
         'Remove Ticket Customer User' => '',
         'From queue' => 'Da fila',
-        ' Get all' => '',
         'Get all' => 'Obter todos',
-        ' Message body' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => '',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
@@ -2698,7 +2688,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => 'Mover %s%s%s',
         'New Queue' => 'Nova Fila',
-        'Communication' => '',
+        'Communication' => 'Comunicação',
         'Move' => 'Mover',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
@@ -2710,40 +2700,36 @@ sub Data {
         'NoteToTicket invalid.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
-        ' Select all' => '',
         'No ticket data found.' => 'Não foram encontrados dados do ticket',
-        ' Open / Close ticket action menu' => '',
-        ' Select this ticket' => '',
+        'Open / Close ticket action menu' => '',
+        'Select this ticket' => '',
         'Sender' => 'Remetente',
+        'Customer User Name' => '',
         'Impact' => 'Impacto',
-        'CustomerID' => 'ID de Cliente',
         'Update Time' => 'Tempo de actualização',
         'Solution Time' => 'Tempo de solução',
         'First Response Time' => 'Tempo da primeira resposta',
-        ' Service Time' => '',
-        ' Move ticket to a different queue' => '',
+        'Move ticket to a different queue' => 'Mover ticket para uma fila diferente',
         'Change queue' => 'Modificar a fila',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Remover filtros',
         'Clear all filters' => '',
         'Remove mention' => '',
+        'Remove from list of watched tickets' => 'Remover dos tickets vigiados',
         'Tickets per page' => 'Tickets por página',
-        'Filter assigned fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
-        ' Missing channel' => '',
         'Missing channel' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => 'Repor',
-        ' Column Filters Form' => ' Formulário de filtros de coluna',
+        'Column Filters Form' => 'Formulário de filtros de coluna',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => 'Dividir para novo ticket telefónico',
         'Create New Phone Ticket' => 'Criar novo ticket por telefone',
         'Please include at least one customer for the ticket.' => 'Deve incluir pelo menos um cliente',
-        'Select this customer as the main customer.' => '',
         'To queue' => 'Para a fila',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
@@ -2756,7 +2742,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => 'Criar novo ticket de processo',
-        ' Loading' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => '',
@@ -2766,10 +2751,10 @@ sub Data {
         'Output' => 'Formato do resultado',
         'Fulltext' => 'Texto integral',
         'Customer ID (complex search)' => '',
-        '(e. g. 234*)' => '',
+        '(e. g. 234*)' => '(ex. 234*)',
         'Customer ID (exact match)' => '',
         'Assigned to Customer User Login (complex search)' => '',
-        '(e. g. U51*)' => '',
+        '(e. g. U51*)' => '(ex. U51*)',
         'Assigned to Customer User Login (exact match)' => '',
         'Accessible to Customer User Login (exact match)' => '',
         'Created in Queue' => 'Criado na Fila',
@@ -2800,7 +2785,6 @@ sub Data {
         'Save as default' => '',
         'Drafts' => '',
         'by' => 'por',
-        'Move ticket to a different queue' => 'Mover ticket para uma fila diferente',
         'Change Queue' => 'Mudar fila',
         'There are no dialogs available at this point in the process.' =>
             'Não existem mais diálogos disponíveis no processo.',
@@ -2822,7 +2806,7 @@ sub Data {
         'Resize' => 'Redimensionar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
-        '#%s' => '',
+        '#%s' => '#%s',
         'via %s' => '',
         'by %s' => '',
         'Toggle article details' => '',
@@ -2841,7 +2825,6 @@ sub Data {
         'Close this message' => 'Fechar esta mensagem',
         'Image' => 'Imagem',
         'PDF' => '',
-        'Unknown' => '',
         'View' => 'Ver',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
@@ -2856,7 +2839,6 @@ sub Data {
         'is invalid' => '',
         'Pending till' => 'Pendente até',
         'Locked' => 'Bloqueado',
-        '%s Ticket(s)' => '',
         'Accounted time' => 'Tempo contabilizado',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2881,7 +2863,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => '',
         'thank you for using our services.' => '',
-        'Yes, I accept your license.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
@@ -2893,8 +2874,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Erro',
         'An Error Occurred' => '',
-        'Error Details' => 'Detalhes do erro',
         'Traceback' => 'Retroceder',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -2902,7 +2883,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
-            '',
+            '%s detetado possíveis problemas de rede. Pode tentar recarregar a página manualmente ou esperar até que seu navegador restabeleça a conexão por conta própria.',
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             '',
 
@@ -2927,12 +2908,13 @@ sub Data {
         'Your user name' => 'O seu cód. utilizador',
         'Your password' => 'A sua password',
         'Forgot password?' => 'Esqueceu a password?',
-        '2 Factor Token' => '',
+        '2 Factor Token' => 'Token de 2 fatores',
         'Your 2 Factor Token' => '',
         'Log In' => 'Login',
         'Request New Password' => 'Recuperar password',
         'Your User Name' => 'O seu cód. utilizador',
         'A new password will be sent to your email address.' => 'A nova password será enviada para o seu email.',
+        'Back to login' => 'Voltar ao login',
         'Create Account' => 'Criar conta',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'Como deseja ser tratado',
@@ -2944,11 +2926,10 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'New Ticket' => 'Novo Ticket',
-        ' Service level agreement' => '',
-        'Dymanic Info' => '',
-        ' Subject' => '',
+        'Service level agreement' => 'Acordo de nível de serviço',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
+        'Tickets' => 'Tickets',
         'Welcome!' => 'Bem vindo!',
         'Please click the button below to create your first ticket.' => 'Clique no botão abaixo para criar o seu primeiro ticket',
         'Create your first ticket' => 'Criar o seu primeiro ticket',
@@ -2957,12 +2938,14 @@ sub Data {
         'New Process Ticket' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
+        'Ticket Search' => '',
         'Profile' => 'Perfil',
+        'Template Name' => 'Nome do modelo',
         'e. g. 10*5155 or 105658*' => 'ex. 20170102450052911 ou 201701*',
+        'CustomerID' => 'ID de Cliente',
         'Types' => 'Tipos',
         'Limitation' => '',
         'No time settings' => '',
-        'All' => 'Todos',
         'Specific date' => 'Data específica',
         'Only tickets created' => 'Apenas tickets criados',
         'Date range' => 'Intervalo de datas',
@@ -2971,7 +2954,6 @@ sub Data {
         'Save Search as Template?' => '',
         'Save as Template' => 'Guardar como modelo',
         'Save as Template?' => 'Guardar como modelo?',
-        'Template Name' => 'Nome do modelo',
         'Pick a profile name' => 'Seleccione o perfil',
         'Output to' => 'Tipo de resultado',
 
@@ -2996,6 +2978,7 @@ sub Data {
         'Ticket fields' => 'Campos do ticket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+        'Error Details' => 'Detalhes do erro',
         'Expand' => 'Expandir',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
@@ -3009,6 +2992,8 @@ sub Data {
         'You have loaded the draft "%s".' => '',
         'You have loaded the draft "%s". You last changed it %s.' => '',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
+            '',
+        'Please note that you have already one or more saved drafts for this action.' =>
             '',
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '',
@@ -3071,7 +3056,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Concluído',
-        'Error' => 'Erro',
         'Database setup successful!' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -3141,14 +3125,13 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Esqueceu a palavra-passe?',
-        'Back to login' => 'Voltar ao login',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
         'Open URL in new tab' => '',
         'Close preview' => '',
         'A preview of this website can\'t be provided because it didn\'t allow to be embedded.' =>
-            '',
+            'Não é possível fornecer uma pré-visualização desta página web, uma vez que não permitiu a sua ligação.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
         'Feature not Available' => '',
@@ -3200,7 +3183,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
         'To get the appointment attribute' => 'Para obter os atributos do evento',
-        ' e. g.' => 'ex:',
+        'e. g.' => 'ex:',
         'To get the first 20 character of the appointment title.' => '',
         'To get the calendar attribute' => 'Para obter os atributos do calendário',
         'Attributes of the recipient user for the notification' => '',
@@ -3232,9 +3215,6 @@ sub Data {
         'Ticket dynamic fields internal key values' => '',
         'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
             '',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
-        'e. g.' => 'ex. ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
         'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
@@ -3329,7 +3309,7 @@ sub Data {
             '',
         'Changing this setting is only available in a higher config level!' =>
             '',
-        '%s (%s) is currently working on this setting.' => '',
+        '%s (%s) is currently working on this setting.' => '%s (%s) está atualmente trabalhando nesta configuração.',
         'Toggle advanced options for this setting' => '',
         'Disable this setting, so it is no longer effective' => '',
         'Disable' => '',
@@ -3337,8 +3317,6 @@ sub Data {
         'Enable' => '',
         'Reset this setting to its default state' => '',
         'Reset setting' => '',
-        'Show user specific changes for this setting' => '',
-        'Show user settings' => '',
         'Copy a direct link to this setting to your clipboard' => '',
         'Copy direct link' => '',
         'Remove this setting from your favorites setting' => '',
@@ -3420,6 +3398,7 @@ sub Data {
         'Process state' => '',
         'Running' => '',
         'Finished' => 'Terminado',
+        'Unknown' => '',
         'No package information available.' => '',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
@@ -3477,7 +3456,7 @@ sub Data {
         'There was an error synchronizing the ACLs.' => '',
         'ACL %s could not be deleted' => '',
         'There was an error getting data for ACL with ID %s' => '',
-        '%s (copy) %s' => '',
+        '%s (copy) %s' => '%s (copiar) %s',
         'Please note that ACL restrictions will be ignored for the Superuser account (UserID 1).' =>
             '',
         'Exact match' => '',
@@ -3500,10 +3479,10 @@ sub Data {
         'Need CalendarID!' => '',
         'Could not retrieve data for given CalendarID' => '',
         'Successfully imported %s appointment(s) to calendar %s.' => '',
-        '+5 minutes' => '',
-        '+15 minutes' => '',
-        '+30 minutes' => '',
-        '+1 hour' => '',
+        '+5 minutes' => '+5 minutos',
+        '+15 minutes' => '+15 minutos',
+        '+30 minutes' => '+30 minutos',
+        '+1 hour' => '+1 hora',
 
         # Perl Module: Kernel/Modules/AdminAppointmentImport.pm
         'No permissions' => '',
@@ -3694,32 +3673,32 @@ sub Data {
         'Invoker deleted' => '',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceErrorHandlingRequestRetry.pm
-        '0 seconds' => '',
-        '15 seconds' => '',
-        '30 seconds' => '',
-        '45 seconds' => '',
-        '1 minute' => '',
-        '2 minutes' => '',
-        '3 minutes' => '',
-        '4 minutes' => '',
-        '5 minutes' => '',
-        '10 minutes' => '10 minutos',
+        '0 seconds' => '0 segundos',
+        '15 seconds' => '15 segundos',
+        '30 seconds' => '30 segundos',
+        '45 seconds' => '45 segundos',
+        '1 minute' => '1 minuto',
+        '2 minutes' => '2 minutos',
+        '3 minutes' => '3 minutos',
+        '4 minutes' => '4 minutos',
+        '5 minutes' => '5 minutos',
+        '10 minutes' => '10 Minutos',
         '15 minutes' => '15 minutos',
-        '30 minutes' => '',
-        '1 hour' => '',
-        '2 hours' => '',
-        '3 hours' => '',
-        '4 hours' => '',
-        '5 hours' => '',
-        '6 hours' => '',
-        '12 hours' => '',
-        '18 hours' => '',
-        '1 day' => '',
-        '2 days' => '',
-        '3 days' => '',
-        '4 days' => '',
-        '6 days' => '',
-        '1 week' => '',
+        '30 minutes' => '30 minutos',
+        '1 hour' => '1 hora',
+        '2 hours' => '2 horas',
+        '3 hours' => '3 horas',
+        '4 hours' => '4 horas',
+        '5 hours' => '5 horas',
+        '6 hours' => '6 horas',
+        '12 hours' => '12 horas',
+        '18 hours' => '18 horas',
+        '1 day' => '1 dia',
+        '2 days' => '2 dias',
+        '3 days' => '3 dias',
+        '4 days' => '4 dias',
+        '6 days' => '6 dias',
+        '1 week' => '1 semana',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceInvokerDefault.pm
         'Could not determine config for invoker %s' => '',
@@ -3854,7 +3833,6 @@ sub Data {
         'No such file %s in package!' => '',
         'No such file %s in local file system!' => '',
         'Can\'t read %s!' => '',
-        'File is OK' => '',
         'Package has locally modified files.' => '',
         'Not Started' => '',
         'Updated' => '',
@@ -4059,7 +4037,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminSystemFiles.pm
         'Package files - %s' => '',
         '(Files where only the permissions have been changed will not be displayed.)' =>
-            '',
+            '(Arquivos onde apenas as permissões foram alteradas não serão exibidos.)',
 
         # Perl Module: Kernel/Modules/AdminSystemMaintenance.pm
         'Start date shouldn\'t be defined after Stop date!' => '',
@@ -4119,10 +4097,10 @@ sub Data {
         'for ... time(s)' => '',
         'until %s' => '',
         'No notification' => '',
-        '%s minute(s) before' => '',
-        '%s hour(s) before' => '',
-        '%s day(s) before' => '',
-        '%s week before' => '',
+        '%s minute(s) before' => '%s minuto(s) antes',
+        '%s hour(s) before' => '%s hora(s) antes',
+        '%s day(s) before' => '%s dia(s) antes',
+        '%s week before' => '%s semana antes',
         'before the appointment starts' => '',
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
@@ -4132,7 +4110,7 @@ sub Data {
         'No permissions!' => '',
 
         # Perl Module: Kernel/Modules/AgentAppointmentList.pm
-        '+%s more' => '',
+        '+%s more' => '+%s mais',
 
         # Perl Module: Kernel/Modules/AgentCustomerSearch.pm
         'Customer History' => 'História do Cliente',
@@ -4147,16 +4125,15 @@ sub Data {
         'Can\'t get element data of %s!' => '',
         'Can\'t get filter content data of %s!' => '',
         'Customer Name' => 'Cliente',
-        'Customer User Name' => '',
 
         # Perl Module: Kernel/Modules/AgentLinkObject.pm
         'Need SourceObject and SourceKey!' => '',
         'You need ro permission!' => '',
         'Can not delete link with %s!' => 'Não é possível remover a ligação a %s.',
-        '%s Link(s) deleted successfully.' => '',
+        '%s Link(s) deleted successfully.' => '%s Link(s) excluído(s) com sucesso.',
         'Can not create link with %s! Object already linked as %s.' => 'Não é possível criar a ligação a %s. Já existe uma ligação a %s!',
         'Can not create link with %s!' => '',
-        '%s links added successfully.' => '',
+        '%s links added successfully.' => '%s links adicionados com sucesso.',
         'The object %s cannot link with other object!' => '',
 
         # Perl Module: Kernel/Modules/AgentPreferences.pm
@@ -4197,7 +4174,7 @@ sub Data {
         'End message' => 'Fim da mensagem',
 
         # Perl Module: Kernel/Modules/AgentTicketBounce.pm
-        '%s is needed!' => '%s é necessário.',
+        '%s is needed!' => '%s é necessário!',
         'Plain article not found for article %s!' => '',
         'Article does not belong to ticket %s!' => '',
         'Can\'t bounce email!' => '',
@@ -4475,15 +4452,21 @@ sub Data {
             '',
         'Can\'t connect to database, read comment!' => '',
         'Database already contains data - it should be empty!' => 'A base de dados já contém dados - deveria estar vazia!',
+        'Error: You have the wrong database version installed (%s). You need at least version %s! ' =>
+            '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
-        'Wrong database collation (%s is %s, but it needs to be utf8).' =>
+        'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
+            '',
+        'Error: Please set the value for innodb_default_row_format on your database to dynamic.' =>
+            '',
+        'Wrong default storage engine (%s is %s, but it needs to be InnoDB).' =>
             '',
 
         # Perl Module: Kernel/Modules/Mentions.pm
-        '%s users will be mentioned' => '',
+        '%s users will be mentioned' => '%s utilizadores serão mencionados',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => '',
@@ -4531,6 +4514,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Imprimir este artigo',
 
+        # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+        'Mark article as unseen' => '',
+        'Mark as unseen' => '',
+
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Marca',
         'Unmark' => 'Desmarca',
@@ -4543,10 +4530,10 @@ sub Data {
         'Crypted' => 'Cifrado',
         'Sent message encrypted to recipient!' => '',
         'Signed' => 'Assinado',
-        '"PGP SIGNED MESSAGE" header found, but invalid!' => 'Detectado cabeçalho "PGP SIGNED MESSAGE" inválido!',
+        '"PGP SIGNED MESSAGE" header found, but invalid!' => 'Detetado cabeçalho "PGP SIGNED MESSAGE" inválido!',
 
         # Perl Module: Kernel/Output/HTML/ArticleCheck/SMIME.pm
-        '"S/MIME SIGNED MESSAGE" header found, but invalid!' => 'Detectado cabeçalho "S/MIME SIGNED MESSAGE" inválido!',
+        '"S/MIME SIGNED MESSAGE" header found, but invalid!' => 'Detetado cabeçalho "S/MIME SIGNED MESSAGE" inválido!',
         'Ticket decrypted before' => 'Registo já desencriptado',
         'Impossible to decrypt: private key for email was not found!' => 'Impossível desencriptar: chave privada não encontrada!',
         'Successful decryption' => 'Desencriptação bem sucedida',
@@ -4636,11 +4623,11 @@ sub Data {
         'Hours' => 'Horas',
         'Minutes' => 'Minutos',
         'Check to activate this date' => 'Confirmar para ativar esta data',
-        '%s TB' => '',
-        '%s GB' => '',
-        '%s MB' => '',
-        '%s KB' => '',
-        '%s B' => '',
+        '%s TB' => '%s TB',
+        '%s GB' => '%s GB',
+        '%s MB' => '%s MB',
+        '%s KB' => '%s KB',
+        '%s B' => '%s B',
         'No Permission!' => 'Sem Permissão!',
         'No Permission' => 'Sem permissão',
         'Show Tree Selection' => 'Mostre a seleção em árvore',
@@ -4714,7 +4701,7 @@ sub Data {
         'Preferences updated successfully!' => 'Preferências atualizadas com sucesso!',
 
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
-        '(in process)' => '(em processamento)',
+        '(in process)' => '(em processo)',
 
         # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
         'Max. number of articles per page must be between 1 and 1000 or empty.' =>
@@ -4788,7 +4775,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/TicketMenu/TicketWatcher.pm
         'Unwatch' => 'Parar de seguir',
-        'Remove from list of watched tickets' => 'Remover dos tickets vigiados',
         'Watch' => 'Vigiar',
         'Add to list of watched tickets' => 'Adicionar aos tickets vigiados',
 
@@ -5024,13 +5010,13 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
         'Client Connection Charset' => '',
-        'Setting character_set_client needs to be utf8.' => '',
+        'Setting character_set_client needs to be utf8mb4.' => '',
         'Server Database Charset' => '',
-        'This character set is not yet supported. Please convert your database to the character set \'utf8\'.' =>
-            '',
-        'The setting character_set_database needs to be \'utf8\'.' => '',
+        'The setting character_set_database needs to be \'utf8mb4\'.' => '',
         'Table Charset' => '',
-        'There were tables found which do not have \'utf8\' as charset.' =>
+        'There were non-system tables found which do not have \'utf8mb4\' as charset.' =>
+            '',
+        'There were tables found which do not have \'utf8mb4\' as charset.' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
@@ -5074,7 +5060,7 @@ sub Data {
         'Setting server_encoding needs to be UNICODE or UTF8.' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/postgresql/DateStyle.pm
-        'Date Format' => '',
+        'Date Format' => 'Formato de data',
         'Setting DateStyle needs to be ISO.' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/postgresql/PrimaryKeySequences.pm
@@ -5201,7 +5187,6 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
         'Database Records' => '',
-        'Tickets' => 'Tickets',
         'Ticket History Entries' => '',
         'Articles' => '',
         'Attachments (DB, Without HTML)' => '',
@@ -5331,10 +5316,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/PluginAsynchronous/Znuny/ConcurrentUsers.pm
         'Concurrent Users Details' => '',
         'Concurrent Users' => 'Utilizadores Concorrentes',
-
-        # Perl Module: Kernel/System/SupportDataCollector/PluginBase.pm
-        'OK' => '',
-        'Problem' => '',
 
         # Perl Module: Kernel/System/SysConfig.pm
         'Setting %s does not exists!' => '',
@@ -5581,11 +5562,23 @@ sub Data {
         'The headline shown in the customer interface.' => '',
         'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
+        'The shortcut icon for the customer interface.' => '',
+        'The shortcut icon for the customer interface for the skin "default".' =>
+            '',
+        'The Apple touch icon for the customer interface.' => '',
+        'The Apple touch icon for the customer interface for skin "default".' =>
+            '',
         'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
             '',
         'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
             '',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
+            '',
+        'The shortcut icon for the agent interface.' => '',
+        'The shortcut icon for the agent interface fot the skin "default".' =>
+            '',
+        'The Apple touch icon for the agent interface.' => '',
+        'The Apple touch icon for the agent interface for the skin "default".' =>
             '',
         'Defines the URL base path of icons, CSS and Java Script.' => '',
         'Defines the URL image path of icons for navigation.' => '',
@@ -5619,6 +5612,8 @@ sub Data {
             '',
         'Sets the number of lines that are displayed in text messages (e.g. ticket lines in the QueueZoom).' =>
             '',
+        'Limits the number of options for modernized selection fields. If this limit will be exceeded, the selection field will for performance reasons be shown as non-modernized.' =>
+            '',
         'Turns on drag and drop for the main navigation.' => '',
         'Defines the date input format used in forms (option or input fields).' =>
             '',
@@ -5632,6 +5627,7 @@ sub Data {
             '',
         'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
             '',
+        'Sets the timeout (in seconds) for DNS resolver queries.' => '',
         'Makes the application check the syntax of email addresses.' => '',
         'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
             '',
@@ -6124,11 +6120,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '',
         'Default skin for the agent interface.' => '',
+        'Dark skin for the agent interface.' => '',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             '',
         'Default skin for the customer interface.' => '',
+        'Dark skin for the customer interface.' => '',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             '',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -6290,7 +6288,7 @@ sub Data {
         'The format of the subject. \'Left\' means \'[TicketHook#:12345] Some Subject\', \'Right\' means \'Some Subject [TicketHook#:12345]\', \'None\' means \'Some Subject\' and no ticket number. In the latter case you should verify that the setting PostMaster::CheckFollowUpModule###0200-References is activated to recognize followups based on email headers.' =>
             '',
         'A list of dynamic fields that are merged into the main ticket during a merge operation. Only dynamic fields that are empty in the main ticket will be set.' =>
-            '',
+            'Uma lista de campos dinâmicos que são adicionados ao bilhete principal durante uma operação de combinação. Apenas campos dinâmicos vazios no bilhete principal, serão definidos.',
         'Name of custom queue. The custom queue is a queue selection of your preferred queues and can be selected in the preferences settings.' =>
             '',
         'Name of custom service. The custom service is a service selection of your preferred services and can be selected in the preferences settings.' =>
@@ -6502,6 +6500,13 @@ sub Data {
         'Defines if a pre-sorting by priority should be done in the service view.' =>
             '',
         'Defines the default sort order for all services in the service view, after priority sort.' =>
+            '',
+        'Enable highlighting services based on ticket age.' => '',
+        'Sets the age in minutes (first level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
+            '',
+        'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             '',
         'Activates time accounting.' => '',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -7629,11 +7634,14 @@ sub Data {
             '',
 
         # XML Definition: Kernel/Config/Files/XML/Znuny.xml
+        'Default preferences to set during user creation.' => '',
         'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
             '',
         'Screens for which it is possible to enable or disable dynamic fields.' =>
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
+            '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
@@ -7774,6 +7782,8 @@ sub Data {
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7849,6 +7859,31 @@ sub Data {
         'Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.' =>
             '',
         'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'User preferences backend to use.' => '',
+        'Loader module registration for the public interface.' => '',
+        'Deletes orphaned sessions.' => '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
+            '',
+        'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
+            '',
+        'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu to mark a ticket as seen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
+            '',
+        'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
+            '',
+        'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
+            '',
+        'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml
@@ -8066,7 +8101,7 @@ sub Data {
         'There is a package upgrade process running, click here to see status information about the upgrade progress.' =>
             '',
         'A package upgrade was recently finished. Click here to see the results.' =>
-            '',
+            'Um pacote foi recentemente atualizado. Clique aqui para ver os resultados.',
         'No response from get package upgrade result.' => '',
         'Update all packages' => '',
         'Dismiss' => '',
@@ -8248,7 +8283,7 @@ sub Data {
         'Do you really want to continue?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
-        ' ...and %s more' => ' e %s mais',
+        ' ...and %s more' => ' ...e %s mais',
         ' ...show less' => ' ...mostrar menos',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
@@ -8293,7 +8328,7 @@ sub Data {
         'Open this node in a new window' => '',
         'Please add values for all keys before saving the setting.' => '',
         'The key must not be empty.' => '',
-        'A key with this name (\'%s\') already exists.' => '',
+        'A key with this name (\'%s\') already exists.' => 'Uma chave com o nome (\'%s\') já existe.',
         'Do you really want to revert this setting to its historical value?' =>
             '',
 
@@ -8340,6 +8375,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => '',
         'Please only select at most %s files for upload.' => '',
         'The following files are not allowed to be uploaded: %s' => '',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8395,26 +8431,26 @@ A sua equipa de Helpdesk
         ' 5 minutes' => ' 5 minutos',
         ' 7 minutes' => ' 7 minutos',
         '%s' => '%s',
-        '(UserLogin) Firstname Lastname' => '',
-        '(UserLogin) Lastname Firstname' => '',
-        '(UserLogin) Lastname, Firstname' => '',
-        '0 - Disabled' => '',
-        '1 - Available' => '',
-        '1 - Enabled' => '',
-        '10 Minutes' => '',
-        '100 (Expert)' => '',
-        '15 Minutes' => '',
-        '2 - Enabled and required' => '',
-        '2 - Enabled and shown by default' => '',
-        '2 - Enabled by default' => '',
-        '2 Minutes' => '',
-        '200 (Advanced)' => '',
-        '30 Minutes' => '',
-        '300 (Beginner)' => '',
-        '5 Minutes' => '',
-        'A TicketWatcher Module.' => '',
-        'A Website' => '',
-        'A picture' => '',
+        '(UserLogin) Firstname Lastname' => '(UserLogin) Primeiro nome Último nome',
+        '(UserLogin) Lastname Firstname' => '(UserLogin) Primeiro Nome Último Nome',
+        '(UserLogin) Lastname, Firstname' => '(UserLogin) Último nome, Primeiro nome',
+        '0 - Disabled' => '0 - Desativado',
+        '1 - Available' => '1 Disponível',
+        '1 - Enabled' => '1 - Habilitado',
+        '10 Minutes' => '10 minutos',
+        '100 (Expert)' => '100 (Especialista)',
+        '15 Minutes' => '15 Minutos',
+        '2 - Enabled and required' => '2 - Habilitado e obrigatório',
+        '2 - Enabled and shown by default' => '2 - Habilitado e exibido por padrão',
+        '2 - Enabled by default' => '2 - Habilitado por padrão',
+        '2 Minutes' => '2 minutos',
+        '200 (Advanced)' => '200(Avançado)',
+        '30 Minutes' => '30 minutos',
+        '300 (Beginner)' => '300 (Principiante)',
+        '5 Minutes' => '5 Minutos',
+        'A TicketWatcher Module.' => 'Um módulo TicketWatcher.',
+        'A Website' => 'Uma Página na Internet.',
+        'A picture' => 'Uma Imagem',
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
@@ -8543,6 +8579,10 @@ A sua equipa de Helpdesk
         'Configure and manage ACLs.' => '',
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Qual o ecran que deve ser mostrado após a criação de um ticket.',
+        'Configure which screen should be shown after marking a ticket or article as seen.' =>
+            '',
+        'Configure which screen should be shown after marking a ticket or article as unseen.' =>
+            '',
         'Create New process ticket.' => 'Criar novo ticket de processo.',
         'Create Process Ticket' => '',
         'Create Ticket' => '',
@@ -8606,6 +8646,7 @@ A sua equipa de Helpdesk
         'CustomerUser' => '',
         'Czech' => '',
         'Danish' => '',
+        'Dark' => '',
         'Dashboard overview.' => '',
         'Date / Time' => 'Data / Hora',
         'Default agent name' => '',
@@ -8740,6 +8781,8 @@ A sua equipa de Helpdesk
         'Last view - limit' => '',
         'Last view - position' => '',
         'Last view - types' => '',
+        'Last viewed overview' => '',
+        'Last viewed screen' => '',
         'Lastname Firstname' => '',
         'Lastname Firstname (UserLogin)' => '',
         'Lastname, Firstname' => '',
@@ -8786,7 +8829,10 @@ A sua equipa de Helpdesk
         'Manage tasks triggered by event or time based execution.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Marcar como Spam!',
+        'Mark as seen' => '',
         'Mark this ticket as junk!' => '',
+        'Mark ticket as seen' => '',
+        'Mark ticket as unseen' => '',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Médio',
@@ -8893,6 +8939,8 @@ A sua equipa de Helpdesk
         'Russian' => '',
         'S/MIME Certificates' => 'Certificados S/MIME',
         'Schedule a maintenance period.' => '',
+        'Screen after marking as seen' => '',
+        'Screen after marking as unseen' => '',
         'Screen after new ticket' => 'Ecrãn após novo ticket',
         'Search Customer' => 'Procurar Cliente',
         'Search Ticket.' => '',
@@ -8993,6 +9041,8 @@ A sua equipa de Helpdesk
         'Theme' => 'Tema',
         'This is a Description for Comment on Framework.' => '',
         'This is a Description for DynamicField on Framework.' => '',
+        'This is the dark skin for the agent interface.' => '',
+        'This is the dark skin for the customer interface.' => '',
         'This is the default orange - black skin for the customer interface.' =>
             '',
         'This is the default orange - black skin.' => '',
@@ -9020,7 +9070,6 @@ A sua equipa de Helpdesk
         'Ticket Priority.' => '',
         'Ticket Queue Overview' => 'Visão geral das filas de tickets',
         'Ticket Responsible.' => '',
-        'Ticket Search' => '',
         'Ticket Watcher' => '',
         'Ticket Zoom' => '',
         'Ticket Zoom.' => '',
@@ -9231,6 +9280,7 @@ Devemos voltar a estar online dentro de momentos.',
         'Duplicate event.',
         'Duplicated entry',
         'Edit Field Details',
+        'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
         'End date',
@@ -9411,6 +9461,7 @@ Devemos voltar a estar online dentro de momentos.',
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

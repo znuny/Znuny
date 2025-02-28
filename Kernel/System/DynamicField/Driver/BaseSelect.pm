@@ -240,38 +240,30 @@ sub EditFieldRender {
             . $TreeSelectionMessage . '</span><i class="fa fa-sitemap"></i></a>';
     }
 
-    if ( $Param{Mandatory} ) {
-        my $DivID = $FieldName . 'Error';
+    # Tooltip for client side validation
+    my $ClientErrorTooltipDivID = $FieldName . 'Error';
+    my $FieldRequiredMessage    = $Param{LayoutObject}->{LanguageObject}->Translate("This field is required.");
+    $HTMLString .= <<"EOF";
 
-        my $FieldRequiredMessage = $Param{LayoutObject}->{LanguageObject}->Translate("This field is required.");
-
-        # for client side validation
-        $HTMLString .= <<"EOF";
-
-<div id="$DivID" class="TooltipErrorMessage">
+<div id="$ClientErrorTooltipDivID" class="TooltipErrorMessage">
     <p>
         $FieldRequiredMessage
     </p>
 </div>
 EOF
-    }
 
-    if ( $Param{ServerError} ) {
+    # Tooltip for server side validation
+    my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
+    $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
+    my $ServerErrorTooltipDivID = $FieldName . 'ServerError';
+    $HTMLString .= <<"EOF";
 
-        my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
-        $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
-        my $DivID = $FieldName . 'ServerError';
-
-        # for server side validation
-        $HTMLString .= <<"EOF";
-
-<div id="$DivID" class="TooltipErrorMessage">
+<div id="$ServerErrorTooltipDivID" class="TooltipErrorMessage">
     <p>
         $ErrorMessage
     </p>
 </div>
 EOF
-    }
 
     if ( $Param{AJAXUpdate} ) {
 
@@ -666,15 +658,19 @@ sub StatsFieldParameterBuild {
     my $Values = $Param{DynamicFieldConfig}->{Config}->{PossibleValues};
 
     # get historical values from database
-    my $HistoricalValues = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->HistoricalValueGet(
-        FieldID   => $Param{DynamicFieldConfig}->{ID},
-        ValueType => 'Text,',
-    );
+    my $HistoricalValuesEnabled
+        = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::Driver::BaseSelect::EnableHistoricalValues') // 1;
+    if ($HistoricalValuesEnabled) {
+        my $HistoricalValues = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->HistoricalValueGet(
+            FieldID   => $Param{DynamicFieldConfig}->{ID},
+            ValueType => 'Text,',
+        );
 
-    # add historic values to current values (if they don't exist anymore)
-    for my $Key ( sort keys %{$HistoricalValues} ) {
-        if ( !$Values->{$Key} ) {
-            $Values->{$Key} = $HistoricalValues->{$Key};
+        # add historic values to current values (if they don't exist anymore)
+        for my $Key ( sort keys %{$HistoricalValues} ) {
+            if ( !$Values->{$Key} ) {
+                $Values->{$Key} = $HistoricalValues->{$Key};
+            }
         }
     }
 
@@ -794,6 +790,10 @@ sub HistoricalValuesGet {
     my ( $Self, %Param ) = @_;
 
     # get historical values from database
+    my $HistoricalValuesEnabled
+        = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::Driver::BaseSelect::EnableHistoricalValues') // 1;
+    return if !$HistoricalValuesEnabled;
+
     my $HistoricalValues = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->HistoricalValueGet(
         FieldID   => $Param{DynamicFieldConfig}->{ID},
         ValueType => 'Text',

@@ -37,29 +37,16 @@ sub Run {
 
     my @Tasks = (
         {
-            Message => 'Add new activity table',
-            Module  => 'Activity',
+            Message => 'Increase size of columns of database table standard_template',
+            Module  => 'StandardTemplate',
         },
         {
-            Message => 'Drop table "cloud_service_config".',
-            Module  => 'CloudServiceConfig',
+            Message => 'Create missing primary keys for database tables.',
+            Module  => 'CreatePrimaryKeys',
         },
         {
-            Message =>
-                'Add new column "color" to table "ticket_priority" and also add a default value for initial priorities.',
-            Module => 'PriorityColor',
-        },
-        {
-            Message => 'Add new column color to ticket_state table and also add a default value for initial states.',
-            Module  => 'StateColor',
-        },
-        {
-            Message => 'Update table smime_keys',
-            Module  => 'SMIME',
-        },
-        {
-            Message => 'Increase size of column of database table calendar_appointment_plugin',
-            Module  => 'CalendarAppointmentID',
+            Message => 'Increase size of columns of database table search_profile',
+            Module  => 'SearchProfile',
         },
     );
 

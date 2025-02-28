@@ -2946,7 +2946,7 @@ sub _RenderArticle {
     );
 
     $Data{Subject} = $TemplateGeneratorObject->_Replace(
-        RichText => $LayoutObject->{BrowserRichText},
+        RichText => 0,
         Text     => $Data{Subject} || '',
         Data     => {
             %{ $Param{GetParam} },
@@ -3577,7 +3577,7 @@ sub _RenderOwner {
     }
 
     if ( $Self->{LinkTicketData} ) {
-        $SelectedValue = $Self->{LinkTicketData}->{OwnerID};
+        $SelectedValue = $Self->{LinkTicketData}->{Owner};
     }
 
     # look up $SelectedID
@@ -5660,7 +5660,7 @@ sub _StoreActivityDialog {
                 );
 
                 $Param{GetParam}->{Subject} = $TemplateGeneratorObject->_Replace(
-                    RichText => $LayoutObject->{BrowserRichText},
+                    RichText => 0,
                     Text     => $Param{GetParam}->{Subject} || '',
                     Data     => {
                         %{ $Param{GetParam} },

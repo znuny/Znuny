@@ -509,8 +509,15 @@ $Selenium->RunTest(
         # open the actions menu.
         $Selenium->find_element( ".mobile-action-option", "css" )->click();
 
-        # Open the note screen (which should be an iframe now).
-        $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketNote;TicketID=$TicketID' )]")->click();
+        sleep 1;
+
+        $Selenium->execute_script(
+            "\$('.Cluster ul.Actions').scrollTop(50);"
+        );
+
+        my $Element = $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketNote;TicketID=$TicketID' )]");
+        $Selenium->mouse_move_to_location( element => $Element );
+        $Element->click();
 
         # Wait for the iframe to show up.
         $Selenium->WaitFor(
@@ -526,8 +533,11 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => "return \$('#RichText').length;" );
 
         # Check if the richtext is empty.
+        my $CKEditorValue = $Selenium->execute_script(
+            "return CKEDITOR.instances.RichText.getData()"
+        );
         $Self->Is(
-            $Selenium->find_element( '#RichText', 'css' )->get_value(),
+            $CKEditorValue,
             '',
             "RichText is empty",
         );
@@ -550,7 +560,7 @@ $Selenium->RunTest(
                 "return CKEDITOR.instances.RichText.getData() == '$TemplateText';"
         );
 
-        my $CKEditorValue = $Selenium->execute_script(
+        $CKEditorValue = $Selenium->execute_script(
             "return CKEDITOR.instances.RichText.getData()"
         );
         sleep 1;

@@ -20,7 +20,7 @@ Core.Agent.Admin = Core.Agent.Admin || {};
  * @description
  *      This namespace contains the special module function for SupportDataCollector module.
  */
- Core.Agent.Admin.SupportDataCollector = (function (TargetNS) {
+Core.Agent.Admin.SupportDataCollector = (function (TargetNS) {
 
     /*
     * @name Init
@@ -126,6 +126,39 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 $(this).prev('h3').find('.Flag').addClass('Unknown');
                 return true;
             }
+        });
+
+        // Bind event on Data Filter
+        $('#SupportDataFilter').on('keyup', function(){
+            var Filter = $('#SupportDataFilter').val().trim(),
+                FilterRE = new RegExp(Filter, 'i'),
+                VisibleCB = (Filter === undefined || Filter === '' || Filter == '*') ?
+                function() {
+                    return true;
+                } :
+                function(S) {
+                    return S.match(FilterRE) != null;
+                };
+
+            $('div.WidgetSimple').each(function() {
+                var $Sect = $(this),
+                    IsVisible = false;
+
+                $Sect.find('ul.CheckResults li').each(function() {
+                    var $li = $(this),
+                        Heading = $li.find('h3').filter(":first").text(),
+                        HeadingIsVisible = VisibleCB(Heading);
+
+                    if(HeadingIsVisible) {
+                        IsVisible = true;
+                    }
+                    $li.css('display', HeadingIsVisible ? 'block' : 'none');
+                });
+
+                $Sect.css('display', IsVisible ? 'block' : 'none');
+            });
+
+            event.preventDefault();
         });
     };
 

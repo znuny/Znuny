@@ -1469,18 +1469,18 @@ Returns:
 
     my %RepositoryList = (
         'Freebie Features' => {
-            URL   => 'https://download.znuny.org/releases/packages/',
+            URL   => 'https://download.znuny.org/releases/packages',
         },
         'Znuny Open Source Add-ons' => {
-            URL   => 'https://addons.znuny.com/api/addon_repos/public/',
+            URL   => 'https://addons.znuny.com/public',
         },
         'Znuny GmbH' => {
-            URL   => 'https://addons.znuny.com/api/addon_repos/',
+            URL   => 'https://addons.znuny.com/private',
             AuthHeaderKey   => '...',
             AuthHeaderValue => '...',
         },
         'Customer Z' => {
-            URL             => 'https://addons.znuny.com/api/addon_repos/',
+            URL             => 'https://addons.znuny.com/private',
             AuthHeaderKey   => '...',
             AuthHeaderValue => '...',
         },
@@ -1751,6 +1751,19 @@ sub RepositoryPackageListGet {
     }
 
     @Packages = @NewPackages;
+
+    # Sort packages by name and then by version (ascending).
+    @Packages = sort {
+        ( my $ComparableVersionA = $a->{Version} ) =~ s{(\A(\d+)\.(\d+)\.(\d+)\z)}{
+            sprintf( '%03u%03u%03u', $2, $3, $4 );
+        }e;
+        ( my $ComparableVersionB = $b->{Version} ) =~ s{(\A(\d+)\.(\d+)\.(\d+)\z)}{
+            sprintf( '%03u%03u%03u', $2, $3, $4 );
+        }e;
+
+        $a->{Name} cmp $b->{Name}
+            || $ComparableVersionA <=> $ComparableVersionB
+    } @Packages;
 
     # set cache
     if ( $Param{Cache} ) {
@@ -2974,7 +2987,11 @@ sub PackageUpgradeAll {
     );
 
     # Modify @PackageInstalledList if ITSM packages are installed from Bundle (see bug#13778).
-    if ( grep { $_->{Name} eq 'ITSM' } @PackageInstalledList && grep { $_->{Name} eq 'ITSM' } @PackageOnlineList ) {
+    if (
+        @PackageInstalledList && grep { $_->{Name} eq 'ITSM' }
+        @PackageInstalledList && grep { $_->{Name} eq 'ITSM' } @PackageOnlineList
+        )
+    {
         my @TmpPackages = (
             'GeneralCatalog',
             'ITSMCore',

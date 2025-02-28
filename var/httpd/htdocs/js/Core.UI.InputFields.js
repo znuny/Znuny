@@ -40,7 +40,6 @@ Core.UI.InputFields = (function (TargetNS) {
         ResizeEvent: 'onorientationchange' in window ? 'orientationchange' : 'resize',
         ResizeTimeout: 0,
         SafeMargin: 30,
-        MaxNumberOfOptions: 1000,
         MinQueryLength: 4,
         Diacritics: {
             "\u24B6":"A", "\uFF21":"A", "\u00C0":"A", "\u00C1":"A", "\u00C2":"A", "\u1EA6":"A",
@@ -230,7 +229,7 @@ Core.UI.InputFields = (function (TargetNS) {
                 $ShowTreeObj = $SelectObj.next('.ShowTreeSelection');
 
             if ($SelectObj.data('modernized')) {
-                 $('#' + Core.App.EscapeSelector($SelectObj.data('modernized'))).parents('.InputField_Container')
+                $('#' + Core.App.EscapeSelector($SelectObj.data('modernized'))).parents('.InputField_Container')
                     .blur()
                     .remove();
                 $SelectObj.show()
@@ -1120,7 +1119,7 @@ Core.UI.InputFields = (function (TargetNS) {
      *      Remove all diacritic characters from supplied string (accent folding).
      *      Taken from https://gist.github.com/instanceofme/1731620
      */
-     TargetNS.RemoveDiacritics = function (Str) {
+    TargetNS.RemoveDiacritics = function (Str) {
         var Chars = Str.split(''),
             i = Chars.length - 1,
             Alter = false,
@@ -1185,11 +1184,13 @@ Core.UI.InputFields = (function (TargetNS) {
                 $ShowTreeObj,
                 $FiltersListObj,
                 WholeRowClicked,
-                ScrollEventListener;
+                ScrollEventListener,
+                MaxNumberOfOptions;
 
             // For performance reasons:
             // Do not initialize modern inputfields on selects with many entries
-            if ($(SelectObj).children('option').length > Config.MaxNumberOfOptions) {
+            MaxNumberOfOptions = Core.Config.Get('InputFields::ModernizedSelection::MaxNumberOfOptions');
+            if ($(SelectObj).children('option').length > MaxNumberOfOptions) {
                 return;
             }
 

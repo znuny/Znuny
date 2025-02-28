@@ -1210,6 +1210,13 @@ handheld {
         right: 0;
     }
 
+    .main-search-component .search-ticket fieldset.TableLike .search-tmp-opt-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        gap: var(--gap-xs);
+        align-items: center;
+    }
+
     .main-search-component .search-ticket fieldset.TableLike .Field .InputField_Container {
         position: relative;
         display: flex;

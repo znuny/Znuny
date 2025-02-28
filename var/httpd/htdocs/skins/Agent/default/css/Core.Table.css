@@ -1139,6 +1139,11 @@ td a:hover i {
     color: var(--gray-darker);
 }
 
+button.table-icon-hover-md {
+    background: none;
+    border: none;
+    font-size: var(--font-size-lg);
+}
 
 .table-icon-hover-md {
     position: relative;

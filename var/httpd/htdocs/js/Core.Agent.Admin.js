@@ -38,7 +38,7 @@ Core.Agent.Admin = (function (TargetNS) {
         }
 
         // run InitFilterInvalidTableEntries for every Admin* action
-        if (Pattern.test(Action) === true) {
+        if (Pattern.test(Action) === true || Action == 'AgentStatistics') {
             TargetNS.InitFilterInvalidTableEntries();
         }
 
@@ -111,7 +111,7 @@ Core.Agent.Admin = (function (TargetNS) {
                 });
 
                 FavouriteRows.sort(function (a, b) {
-                  return a.localeCompare(b);
+                    return a.localeCompare(b);
                 });
 
                 RowIndex = FavouriteRows.indexOf(ModuleName);

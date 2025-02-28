@@ -187,6 +187,10 @@ sub _Overview {
         UserID => $Self->{UserID},
     );
 
+    $LayoutObject->Block(
+        Name => 'Filter',
+    );
+
     TOKENCONFIG:
     for my $TokenConfig (@TokenConfigs) {
         my $OAuth2TokenConfigIsInUse = $OAuth2TokenConfigObject->IsOAuth2TokenConfigInUse(

@@ -139,6 +139,7 @@ sub Run {
             if ($Content) {
                 $MainObject->Require('Text::Diff');
                 my $Diff = Text::Diff::diff( \$File, $Content, { STYLE => 'OldStyle' } );
+                $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$Diff );
                 $LayoutObject->Block(
                     Name => "FileDiff",
                     Data => {
@@ -438,7 +439,6 @@ sub Run {
                                         Version => $Version,
                                         %{$Hash},
                                         Message => $DeployInfo{File}->{ $Hash->{Location} },
-                                        Icon    => 'IconNotReady',
                                     },
                                 );
                             }
@@ -449,8 +449,6 @@ sub Run {
                                         Name    => $Name,
                                         Version => $Version,
                                         %{$Hash},
-                                        Message => $DeployInfo{File}->{ $Hash->{Location} },
-                                        Icon    => 'IconNotReadyGrey',
                                     },
                                 );
                             }
@@ -462,8 +460,6 @@ sub Run {
                                     Name    => $Name,
                                     Version => $Version,
                                     %{$Hash},
-                                    Message => Translatable('File is OK'),
-                                    Icon    => 'IconReady',
                                 },
                             );
                         }

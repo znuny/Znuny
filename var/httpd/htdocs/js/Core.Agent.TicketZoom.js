@@ -212,7 +212,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
             // add switchable toggle for new article
             $('label.Switchable').off('click.Switch').on('click.Switch', function() {
-                $(this).next('p.Value').find('.Switch').toggleClass('Hidden');
+                $(this).next('div').find('.Switch').toggleClass('Hidden');
             });
 
             //Remove Loading class
@@ -469,7 +469,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
      * @description
      *      This function initializes calendar events for article.
      */
-     function InitCalendarEvents() {
+    function InitCalendarEvents() {
         var $FieldContainer,
             OverlayTitle,
             OverlayHTML;
@@ -512,7 +512,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
      * @description
      *      This function initializes events for process widget.
      */
-     function InitProcessWidget() {
+    function InitProcessWidget() {
         var WidgetWidth, FieldsPerRow, FieldMargin, FieldWidth;
 
         if ($('.DynamicFieldAutoResize').length > 0) {
@@ -688,7 +688,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
             var Position;
             if ($(this).attr('rel') && $('#' + $(this).attr('rel')).length) {
                 Position = $(this).offset();
-                Core.UI.Dialog.ShowContentDialog($('#' + $(this).attr('rel'))[0].innerHTML, Core.Language.Translate('Attachments'), Position.top - $(window).scrollTop(), parseInt(Position.left, 10) + 25);
+                Core.UI.Dialog.ShowContentDialog($('#' + $(this).attr('rel'))[0].innerHTML, Core.Language.Translate('Attachments'), Position.top - $(window).scrollTop(), parseInt(Position.left, 10) - 250);
             }
             Event.preventDefault();
             Event.stopPropagation();
