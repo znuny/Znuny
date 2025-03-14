@@ -25832,3 +25832,7 @@ msgstr "Prüfung des Zertifikats des Unterzeichners einer signierten Nachricht d
 msgid "A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s."
 msgstr "Eine Liste aller möglichen Match- und Set-Kriterien finden Sie im ACL-Referenzhandbuch %sDokumentation%s."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default)."
+msgstr "Sobald das Limit der beobachteten Tickets pro Nutzer erreicht ist, werden die ältesten Einträge aus der Beobachtungsliste entfernt. Deaktivieren Sie diese Einstellung oder setzen Sie sie auf 0, um das Limit zu deaktivieren (Standard)."
+
