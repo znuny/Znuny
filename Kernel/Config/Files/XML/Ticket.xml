@@ -13665,9 +13665,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="AgentTicketCompose">
@@ -13743,9 +13741,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="AgentTicketCompose">
@@ -13821,9 +13817,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="AgentTicketCompose">
@@ -13963,9 +13957,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="ReinstallPackageLink">

@@ -1,4 +1,5 @@
 # 6.5.15 2025-xx-xx
+ - 2025-03-12 Fixed bug - Ticket::Frontend::Article::Actions###??? no possibility to add a new entry.
  - 2025-03-07 Fixed GroupSelection in AdminAppointmentCalendarManage for admin group member. A user can only create AppointmentCalendars for their own groups, even though they are a member of the Admin group.
  - 2025-02-28 Fixed missing notification in process management activity dialog edit screen.
  - 2025-02-28 Fixed doubled notification in process management transition edit screen.

@@ -8897,11 +8897,7 @@ via the Preferences button after logging in.
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="SearchLimit">10000</Item>
-                        <Item Key="PageShown">50</Item>
-                        <Item Key="CustomerTicketTextField">UserMailString</Item>
-                        <Item Key="SortBy::Default">UserLogin</Item>
-                        <Item Key="Order::Default">Up</Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="Email">
