@@ -218,6 +218,8 @@
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0110-CUIC-TicketEscalation">DashboardWidget CUIC-TicketEscalation</Item>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0120-CUIC-TicketNew">DashboardWidget CUIC-TicketNew</Item>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0130-CUIC-TicketOpen">DashboardWidget CUIC-TicketOpen</Item>
+
+                <Item Key="LinkObject::ComplexTable###Ticket">LinkObject ComplexTable</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1158,6 +1160,7 @@
                         <Item Key="DashboardBackend###0120-TicketNew">DashboardWidget TicketNew</Item>
                         <Item Key="DashboardBackend###0130-TicketOpen">DashboardWidget TicketOpen</Item>
                         <Item Key="DashboardBackend###0140-RunningTicketProcess">DashboardWidget RunningTicketProcess</Item>
+                        <Item Key="LinkObject::ComplexTable###Ticket">LinkObject ComplexTable</Item>
                     </Hash>
                 </Item>
                 <Item Key="Article">

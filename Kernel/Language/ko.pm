@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.868412384716733;
+    $Self->{Completeness}        = 0.868269389099292;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -79,7 +79,8 @@ sub Data {
         'Change settings' => '설정 변경',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             '기준이 일치하면 변경하려는 항목을 설정하십시오. Possible \'은 흰색 목록이고\'PossibleNot \'은 검은 색 목록입니다.',
-        'Check the official %sdocumentation%s.' => '',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'ACL 수정 %s',
         'Edit ACL' => 'ACL 수정',
         'Show or hide the content' => '내용 보여주기/가리기',
@@ -8371,6 +8372,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => '죄송합니다. %s 파일 만 업로드 할 수 있습니다.',
         'Please only select at most %s files for upload.' => '업로드하려면 최대 %s 파일 만 선택하십시오.',
         'The following files are not allowed to be uploaded: %s' => '다음 파일은 업로드 할 수 없습니다 : %s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '다음 파일은 파일 당 최대 허용 크기인 %s를 초과하여 업로드되지 않았습니다 : %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -9042,7 +9044,7 @@ Thanks for your help!
             '이것은 고객 인터페이스의 기본 오렌지색 검정색 스킨입니다.',
         'This is the default orange - black skin.' => '이것은 기본 오랜지색 검은색 피부입니다.',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => '티켓 닫기.',
         'Ticket Compose Bounce Email.' => '티켓 작성 반송 이메일.',
         'Ticket Compose email Answer.' => '티켓 전자 메일 응답을 작성하십시오.',
@@ -9454,6 +9456,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

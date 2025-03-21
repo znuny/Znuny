@@ -600,7 +600,7 @@ sub Run {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key ) || '';
             }
 
-            for my $Key (qw(TimeUnits)) {
+            for my $Key (qw(TimeUnits Watch)) {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
             }
 
@@ -1319,8 +1319,19 @@ sub Run {
                 }
 
                 # watch or unwatch tickets
-                if ( $GetParam{'Watch'} ) {
+                if ( $GetParam{'Watch'} eq '1' ) {
                     $Result = $TicketObject->TicketWatchSubscribe(
+                        TicketID    => $TicketID,
+                        WatchUserID => $Self->{UserID},
+                        UserID      => $Self->{UserID},
+                    );
+
+                    if ( !$Result ) {
+                        push @NonUpdatedTickets, $Ticket{TicketNumber};
+                    }
+                }
+                elsif ( $GetParam{'Watch'} eq '0' ) {
+                    $Result = $TicketObject->TicketWatchUnsubscribe(
                         TicketID    => $TicketID,
                         WatchUserID => $Self->{UserID},
                         UserID      => $Self->{UserID},
@@ -1787,9 +1798,9 @@ sub _Mask {
         Class      => 'Modernize',
     );
 
-    my $BulkWatch = 0;
-
+# Ticket::WatcherGroup - Enables or disables the ticket watcher feature, to keep track of tickets without being the owner nor the responsible.
     my @WatcherGroups = @{ $ConfigObject->Get('Ticket::WatcherGroup') // [] };
+    my $BulkWatch     = 0;
 
     # General permission via config switch to use ticket watcher.
     if ( $ConfigObject->Get('Ticket::Watcher') ) {
@@ -1815,10 +1826,11 @@ sub _Mask {
 
     if ($BulkWatch) {
         $Param{WatchYesNoOption} = $LayoutObject->BuildSelection(
-            Data       => $ConfigObject->Get('YesNoOptions'),
-            Name       => 'Watch',
-            SelectedID => $Param{Watch} // 0,
-            Class      => 'Modernize',
+            Data         => $ConfigObject->Get('YesNoOptions'),
+            Name         => 'Watch',
+            PossibleNone => 1,
+            SelectedID   => $Param{Watch} // '',
+            Class        => 'Modernize',
         );
 
         $LayoutObject->Block(

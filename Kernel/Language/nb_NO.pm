@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.380928853754941;
+    $Self->{Completeness}        = 0.380866128766672;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -88,7 +88,8 @@ sub Data {
         'Change settings' => 'Endre innstillinger',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Opprett de endringene du ønsker å utføre når kriteriene matcher. Merk at \'Muligens\' er en hviteliste, mens \'MuligensIkke\' er en svarteliste.',
-        'Check the official %sdocumentation%s.' => '',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Endre ACL %s',
         'Edit ACL' => 'Endre ACL',
         'Show or hide the content' => 'Vis eller skjul innholdet',
@@ -8380,6 +8381,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => '',
         'Please only select at most %s files for upload.' => '',
         'The following files are not allowed to be uploaded: %s' => '',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -9040,7 +9042,7 @@ Thanks for your help!
             '',
         'This is the default orange - black skin.' => '',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => '',
         'Ticket Compose Bounce Email.' => '',
         'Ticket Compose email Answer.' => '',
@@ -9452,6 +9454,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

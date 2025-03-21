@@ -232,6 +232,7 @@ $Self->IsDeeply(
         'DashboardBackend###0120-TicketNew'                                  => 'DashboardWidget TicketNew',
         'DashboardBackend###0130-TicketOpen'                                 => 'DashboardWidget TicketOpen',
         'DashboardBackend###0140-RunningTicketProcess'                       => 'DashboardWidget RunningTicketProcess',
+        'LinkObject::ComplexTable###Ticket'                                  => 'LinkObject ComplexTable',
         'Ticket::Frontend::AgentTicketClose###DynamicField'                  => 'AgentTicketClose',
         'Ticket::Frontend::AgentTicketCompose###DynamicField'                => 'AgentTicketCompose',
         'Ticket::Frontend::AgentTicketEmail###DynamicField'                  => 'AgentTicketEmail',

@@ -5420,7 +5420,7 @@
                 <Item Key="Name" Translatable="1">Back</Item>
                 <Item Key="Description" Translatable="1">Go back</Item>
                 <Item Key="Action"></Item>
-                <Item Key="Link">[% Env("LastScreenOverview") %];TicketID=[% Data.TicketID | html %]</Item>
+                <Item Key="Link">[% Env("LastScreenOverview") %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1"></Item>
@@ -9276,7 +9276,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Access Control Lists (ACL)</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9351,7 +9351,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Queues</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9422,7 +9422,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Templates</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9492,7 +9492,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Templates ↔ Queues</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9562,7 +9562,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Auto Responses</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9632,7 +9632,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Queues ↔ Auto Responses</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9702,7 +9702,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Attachments</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9772,7 +9772,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Templates ↔ Attachments</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9842,7 +9842,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Salutations</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9912,7 +9912,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Signatures</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9982,7 +9982,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Email Addresses</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10052,7 +10052,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Ticket Notifications</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10127,7 +10127,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Services</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10197,7 +10197,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Service Level Agreements</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10267,7 +10267,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Types</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10338,7 +10338,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">States</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10409,7 +10409,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Priorities</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10480,7 +10480,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">GenericAgent</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -11922,7 +11922,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields GUI</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -12025,7 +12025,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields Text Backend GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -12062,7 +12062,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields Checkbox Backend GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -12099,7 +12099,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields Drop-down Backend GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -12141,7 +12141,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields Date Time Backend GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -12183,7 +12183,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields Multiselect Backend GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -13682,9 +13682,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="AgentTicketCompose">
@@ -13767,9 +13765,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="AgentTicketCompose">
@@ -13852,9 +13848,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="AgentTicketCompose">
@@ -13951,9 +13945,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="ReinstallPackageLink">

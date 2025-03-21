@@ -12,6 +12,8 @@ package Kernel::System::SupportBundleGenerator;
 use strict;
 use warnings;
 
+use Kernel::System::VariableCheck qw(:all);
+
 use Archive::Tar;
 use Cwd qw(abs_path);
 
@@ -649,6 +651,40 @@ sub _MaskPasswords {
     }
 
     my $StringToMask = $Param{StringToMask};
+
+    if ( $Param{YAML} ) {
+        my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+
+        my $Data = $YAMLObject->Load(
+            Data => $StringToMask,
+        );
+        return $StringToMask if !IsHashRefWithData($Data);
+        return $StringToMask if !IsHashRefWithData( $Data->{Modified} );
+
+        OPTIONNAME:
+        for my $OptionName ( sort keys %{ $Data->{Modified} } ) {
+            next OPTIONNAME if $OptionName !~ m{Password|Pwd}i;
+
+            my $Option = $Data->{Modified}->{$OptionName};
+            next OPTIONNAME if !defined $Option->{EffectiveValue};
+
+            if ( ref $Option->{EffectiveValue} eq 'ARRAY' ) {
+                $Option->{EffectiveValue} = [
+                    map {'xxx'} @{ $Option->{EffectiveValue} }
+                ];
+            }
+            elsif ( !ref $Option->{EffectiveValue} ) {
+                $Option->{EffectiveValue} = 'xxx';
+            }
+        }
+
+        my $String = $YAMLObject->Dump(
+            Data => $Data,
+        );
+        return $StringToMask if !IsStringWithData($String);
+
+        return $String;
+    }
 
     # Trim any passswords.
     # Simple settings like $Self->{'DatabasePw'} or $Self->{'AuthModule::LDAP::SearchUserPw1'}.

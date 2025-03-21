@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.896903820816864;
+    $Self->{Completeness}        = 0.896591470442944;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -86,7 +86,8 @@ sub Data {
         'Change settings' => '操作动作',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             '当匹配条件满足时执行规定的操作动作。记住：\'Possible\'表示允许(白名单)，\'PossibleNot\'表示禁止(黑名单)。',
-        'Check the official %sdocumentation%s.' => '查看 %s 的官方文档 %s。',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => '编辑ACL %s',
         'Edit ACL' => '编辑ACL',
         'Show or hide the content' => '显示或隐藏内容',
@@ -8378,6 +8379,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => '对不起，您只能在这里上传%s个文件。',
         'Please only select at most %s files for upload.' => '请至少选择%s个文件进行上传。',
         'The following files are not allowed to be uploaded: %s' => '不允许上传以下文件：%s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '以下文件超过允许的单个文件最大大小%s，没有上传的文件有：%s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -9048,7 +9050,7 @@ Thanks for your help!
             '这是客户界面默认的橙色-黑色皮肤。',
         'This is the default orange - black skin.' => '这是默认的橙色-黑色皮肤。',
         'This key is not certified with a trusted signature!' => '此密钥未使用可信签名进行认证！',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => '工单关闭。',
         'Ticket Compose Bounce Email.' => '工单编写退回邮件。',
         'Ticket Compose email Answer.' => '工单编写邮件回复。',
@@ -9460,6 +9462,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

@@ -1,3 +1,26 @@
+# 7.1.7 2025-xx-xx
+ - 2025-03-17 Fixed bug - Ticket::Frontend::Article::Actions###??? no possibility to add a new entry.
+ - 2025-03-10 Fixed AgentTicketBulk - TicketWatchSubscribe and TicketWatchUnsubscribe is not working.
+ - 2025-03-07 Fixed GroupSelection in AdminAppointmentCalendarManage for admin group member. A user can only create AppointmentCalendars for their own groups, even though they are a member of the Admin group.
+ - 2025-02-28 Fixed missing notification in process management activity dialog edit screen.
+ - 2025-02-28 Fixed doubled notification in process management transition edit screen.
+ - 2025-02-27 Fixed obsolete parameter in overview URL. After jumping to AgentTicketZoom from an overview like AgentTicketStatus and return to that overview the URL parameter TicketID stays persistent to the URL. This action is repetitive and works with multiple TicketIDs, but the TicketID is not needed in anyway.
+ - 2025-02-25 Added missing DynamicFieldScreens configuration for `LinkObject::ComplexTable###Ticket`.
+ - 2025-02-25 Improved DynamicFieldUpdate function - InternalField can now be changed. InternalField is never set via the GUI (e.g. AdminDynamicFieldText.pm). If it is set via the "Backend" for example PackageSetup it should also be possible to change the 'InternalField' again.
+ - 2025-02-25 Fixed Core.UI.js bug - Added missing allowed file types text to FilenameTypeNotAllowed check. Currently, only the fact that a file does not correspond to the permitted FileType is displayed. It is not displayed which FileTypes are permitted.
+ - 2025-02-25 Fixed AjaxAttachment.pm bug - Use of uninitialized value in concatenation (.) or string.
+ - 2025-02-25 Fixed small bug - uninitialized value in concatenation. SkinSelected must also be set in the SetRichTextParameters function.
+ - 2025-02-21 Fixed Core.UI.js bugs - AttachmentExist is only generated for one upload field. However, it should be generated for all of them. In addition, the UploadField is not selected correctly.
+ - 2025-02-21 Fixed broken documentation link in ACL Edit Screen and changed text of hint.
+ - 2025-02-12 Fixed masking of passwords in support bundle generator for modified settings YAML file.
+
+# 7.1.6 2025-02-19
+ - 2025-02-14 Fixed content security policy HTTP header to allow externally linked images.
+ - 2025-02-13 Fixed ticket filter for new mentions.
+
+# 7.1.5 2025-02-13
+ - 2025-02-13 Fixed content security policy HTTP header. Thanks for reporting to @nixahnung. [#641](https://github.com/znuny/Znuny/issues/641)
+
 # 7.1.4 2025-02-12
  - 2025-02-06 Added SortBy and SortOrder options to Znuny.Form.Input.Set to sort select field options by key or value.
  - 2025-02-05 Fixed event check in ticket event module Kernel::System::Ticket::Event::TicketDynamicFieldDefault.
@@ -348,6 +371,9 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.13 2025-02-13
+ - 2025-02-13 Fixed content security policy HTTP header. Thanks for reporting to @nixahnung. [#641](https://github.com/znuny/Znuny/issues/641)
 
 # 6.5.12 2025-02-12
  - 2025-02-06 Added SortBy and SortOrder options to Znuny.Form.Input.Set to sort select field options by key or value.

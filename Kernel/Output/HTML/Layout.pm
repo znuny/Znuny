@@ -6290,6 +6290,8 @@ sub SetRichTextParameters {
         $UserType =~ s/Interface//;
     }
 
+    $Self->{SkinSelected} ||= $ConfigObject->Get("Loader::Agent::DefaultSelectedSkin") || 'default';
+
     my $ContentsCssFS
         = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
     my $ContentsCss
@@ -6453,7 +6455,7 @@ sub CustomerSetRichTextParameters {
         $UserType =~ s/Interface//;
     }
 
-    $Self->{SkinSelected} = $ConfigObject->Get("Loader::Customer::SelectedSkin") || 'default';
+    $Self->{SkinSelected} ||= $ConfigObject->Get("Loader::Customer::SelectedSkin") || 'default';
 
     my $ContentsCssFS
         = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';

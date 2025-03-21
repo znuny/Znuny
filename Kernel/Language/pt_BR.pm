@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.862154150197628;
+    $Self->{Completeness}        = 0.861847521817882;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -83,7 +83,8 @@ sub Data {
         'Change settings' => 'Alterar configurações',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Configure o que você quer alterar se o critério coincidir. Mantenha em mente que \'Possible\' é uma adição à lista e \'PossibleNot\', uma exclusão da lista.',
-        'Check the official %sdocumentation%s.' => 'Cheque a %s documentação %s oficial.',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Editar ACL %s',
         'Edit ACL' => 'Editar ACL',
         'Show or hide the content' => 'Mostrar ou esconder o conteúdo',
@@ -8375,6 +8376,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => 'Desculpe, você só pode carregar %s arquivos.',
         'Please only select at most %s files for upload.' => 'Por favor, selecione no máximo %s arquivos para carregar.',
         'The following files are not allowed to be uploaded: %s' => 'O carregamento dos seguintes arquivos não está autorizado: %s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'Os seguintes arquivos excedem o tamanho máximo permitido de %s por aquivo e não foram carregados: %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -9046,7 +9048,7 @@ Obrigado pela ajuda!
             '',
         'This is the default orange - black skin.' => '',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => 'Chamado fechado',
         'Ticket Compose Bounce Email.' => 'Compor chamado de devolução de E-mail',
         'Ticket Compose email Answer.' => 'Ticket Compor e-mail de Resposta.',
@@ -9458,6 +9460,7 @@ Obrigado pela ajuda!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

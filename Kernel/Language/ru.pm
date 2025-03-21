@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.869400527009223;
+    $Self->{Completeness}        = 0.872221307426313;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -91,7 +91,8 @@ sub Data {
         'Change settings' => 'Изменить настройки',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Задайте, что вы хотите изменить в случае выполнения условия. Имейте в виду, что \'Possible\' это "белый список", а \'PossibleNot\' - "черный список"',
-        'Check the official %sdocumentation%s.' => 'Проверьте в официальной %документации%s.',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Изменить ACL %s',
         'Edit ACL' => 'Изменить ACL',
         'Show or hide the content' => 'Отобразить или скрыть содержимое',
@@ -2723,7 +2724,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Удалить активные фильтры для этого экрана.',
         'Clear all filters' => 'Очистить все фильтры',
-        'Remove mention' => '',
+        'Remove mention' => 'Удалить упоминание',
         'Remove from list of watched tickets' => 'Удалить из списка наблюдаемых заявок',
         'Tickets per page' => 'Заявок на страницу',
 
@@ -2839,7 +2840,7 @@ sub Data {
         'Linked Objects' => 'Связанные объекты',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
-        'Mentions' => '',
+        'Mentions' => 'Упоминания',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Архив',
@@ -4248,8 +4249,8 @@ sub Data {
         'My Locked Tickets' => 'Мои заблокированные заявки',
 
         # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
-        'New mention' => '',
-        'My Mentions' => '',
+        'New mention' => 'Новое упоминание',
+        'My Mentions' => 'Заявки, где меня упомянули',
 
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => 'Не возможно объединить заявку с самой собой!',
@@ -4798,9 +4799,9 @@ sub Data {
         'Locked Tickets Total' => 'Заблокированные заявки: Всего',
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
-        'Total mentions' => '',
-        'Total new mentions' => '',
-        'New mentions' => '',
+        'Total mentions' => 'Упомянули в заявках (Все)',
+        'Total new mentions' => 'Упомянули в заявках (Новые)',
+        'New mentions' => 'Новые упоминания',
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => 'Владелец заявки (Новые)',
@@ -4893,7 +4894,7 @@ sub Data {
         'Error while validating Recipient email address.' => '',
 
         # Perl Module: Kernel/System/Mention.pm
-        'LastMention' => '',
+        'LastMention' => 'ПоследнееУпоминание',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7798,20 +7799,20 @@ sub Data {
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
-        'Defines which notifications about mentions should be sent.' => '',
-        'Defines if the toolbar mention icon should count mentions.' => '',
-        'These groups won\'t be selectable to be mentioned.' => '',
+        'Defines which notifications about mentions should be sent.' => 'Определяет какие уведомления об упоминании должны высылаться.',
+        'Defines if the toolbar mention icon should count mentions.' => 'Определяет должно ли подсчитываться количество упоминаний на иконке панели навигации.',
+        'These groups won\'t be selectable to be mentioned.' => 'Эти группы нельзя будет выбрать для упоминания.',
         'Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.' =>
-            '',
+            'Ограничение количества пользователей (в заметке), которые будут отмечены для упомянутые и уведомлены об этом. Пользователи (и пользователи из упомянутых групп) которые оказались за пределами лимита будут молча проигнорированы.',
         'Frontend registration of triggers for mention plugin of CKEditor.' =>
-            '',
+            'Frontend регистрация триггеров для плагина упоминания CKEditor.',
         'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
-            '',
-        'Event handler for mentions.' => '',
+            'Frontend регистрация шаблонов ввода/вывода для плагина упоминания CKEditor.',
+        'Event handler for mentions.' => 'Обработчик событий для упоминаний.',
         'Parameters for the dashboard backend of the last mention widget.' =>
-            '',
+            'Параметры для драйвера виджета в Дайджесте последних упоминаний по заявкам.',
         'Agent interface notification module to show the number of mentions.' =>
-            '',
+            'Модуль интерфейса агента для отображения количества упоминаний.',
         'Module to grant access to the mentioned agents of a ticket.' => '',
         'Assignment between event and type.' => '',
         'Defines the link type for each activity.' => '',
@@ -8383,6 +8384,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => 'Извините, но загрузить можно только %s файлы.',
         'Please only select at most %s files for upload.' => 'Пожалуйста, выберите только файлы %s для загрузки.',
         'The following files are not allowed to be uploaded: %s' => 'Следующие типы файлов не разрешены для загрузки: %s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'Следующие файлы превысили максимальный допустимый размер одного файла (%s) и не были загружены: %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8782,7 +8784,7 @@ Thanks for your help!
         'Korean' => 'Корейский',
         'Language' => 'Язык',
         'Large' => 'Большой',
-        'Last Mentions' => '',
+        'Last Mentions' => 'Последние Упоминания',
         'Last Screen Overview' => 'Обзор последних просмотренных страниц',
         'Last customer subject' => 'Последняя заголовок клиента',
         'Last view - limit' => 'Последние просмотренные страницы - ограничение',
@@ -8845,7 +8847,7 @@ Thanks for your help!
         'Medium' => 'Средний',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
-        'Mentions.' => '',
+        'Mentions.' => 'Упоминания.',
         'Merge this ticket and all articles into another ticket' => 'Объединить эту заявку и все ее заметки с другой заявкой',
         'Merged Ticket (%s/%s) to (%s/%s).' => '',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'Объединена заявка <OTRS_TICKET> с <OTRS_MERGE_TO_TICKET>.',
@@ -9054,7 +9056,7 @@ Thanks for your help!
             'Это стандартная оранжево-черная тема для интерфейса клиента.',
         'This is the default orange - black skin.' => 'Это стандартная оранжево-черная тема.',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => 'Заявка закрыта.',
         'Ticket Compose Bounce Email.' => '',
         'Ticket Compose email Answer.' => '',
@@ -9466,6 +9468,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

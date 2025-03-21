@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-02-11 10:48+0000\n"
+"POT-Creation-Date: 2025-02-28 11:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,7 +151,7 @@ msgid "Set up what you want to change if the criteria match. Keep in mind that '
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
-msgid "Check the official %sdocumentation%s."
+msgid "A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
@@ -21539,6 +21539,10 @@ msgid "The following files are not allowed to be uploaded: %s"
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "The following files types are allowed: %s"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The following files exceed the maximum allowed size per file of %s and were not uploaded: %s"
 msgstr ""
 
@@ -23922,7 +23926,7 @@ msgid "This key is not certified with a trusted signature!"
 msgstr ""
 
 #. SysConfig
-msgid "This module is part of the admin area of OTRS."
+msgid "This module is part of the admin area of Znuny."
 msgstr ""
 
 #. SysConfig

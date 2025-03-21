@@ -153,10 +153,6 @@ msgid "Set up what you want to change if the criteria match. Keep in mind that '
 msgstr "Задайте, что вы хотите изменить в случае выполнения условия. Имейте в виду, что 'Possible' это \"белый список\", а 'PossibleNot' - \"черный список\""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
-msgid "Check the official %sdocumentation%s."
-msgstr "Проверьте в официальной %документации%s."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
 msgid "Edit ACL %s"
 msgstr "Изменить ACL %s"
 
@@ -8034,7 +8030,7 @@ msgstr "Очистить все фильтры"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove mention"
-msgstr ""
+msgstr "Удалить упоминание"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Tickets per page"
@@ -8386,7 +8382,7 @@ msgstr "Связанные объекты"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
 msgid "Mentions"
-msgstr ""
+msgstr "Упоминания"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 msgid "Archive"
@@ -8627,10 +8623,6 @@ msgstr "Новая заявка"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid "Service level agreement"
 msgstr "Соглашения об уровне сервиса"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
-msgid "Dymanic Info"
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
 msgid "Welcome!"
@@ -12202,11 +12194,11 @@ msgstr "Мои заблокированные заявки"
 
 #. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
 msgid "New mention"
-msgstr ""
+msgstr "Новое упоминание"
 
 #. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
 msgid "My Mentions"
-msgstr ""
+msgstr "Заявки, где меня упомянули"
 
 #. Perl Module: Kernel/Modules/AgentTicketMerge.pm
 msgid "Can't merge ticket with itself!"
@@ -13478,15 +13470,15 @@ msgstr "Заблокированные заявки: Всего"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
 msgid "Total mentions"
-msgstr ""
+msgstr "Упомянули в заявках (Все)"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
 msgid "Total new mentions"
-msgstr ""
+msgstr "Упомянули в заявках (Новые)"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
 msgid "New mentions"
-msgstr ""
+msgstr "Новые упоминания"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
 msgid "Owned Tickets New"
@@ -13682,7 +13674,7 @@ msgstr ""
 
 #. Perl Module: Kernel/System/Mention.pm
 msgid "LastMention"
-msgstr ""
+msgstr "ПоследнееУпоминание"
 
 #. Perl Module: Kernel/System/NotificationEvent.pm
 msgid "Couldn't read Notification configuration file. Please make sure the file is valid."
@@ -20034,39 +20026,39 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines which notifications about mentions should be sent."
-msgstr ""
+msgstr "Определяет какие уведомления об упоминании должны высылаться."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines if the toolbar mention icon should count mentions."
-msgstr ""
+msgstr "Определяет должно ли подсчитываться количество упоминаний на иконке панели навигации."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "These groups won't be selectable to be mentioned."
-msgstr ""
+msgstr "Эти группы нельзя будет выбрать для упоминания."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored."
-msgstr ""
+msgstr "Ограничение количества пользователей (в заметке), которые будут отмечены для упомянутые и уведомлены об этом. Пользователи (и пользователи из упомянутых групп) которые оказались за пределами лимита будут молча проигнорированы."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Frontend registration of triggers for mention plugin of CKEditor."
-msgstr ""
+msgstr "Frontend регистрация триггеров для плагина упоминания CKEditor."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Frontend registration of input/output templates for mention plugin of CKEditor."
-msgstr ""
+msgstr "Frontend регистрация шаблонов ввода/вывода для плагина упоминания CKEditor."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Event handler for mentions."
-msgstr ""
+msgstr "Обработчик событий для упоминаний."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Parameters for the dashboard backend of the last mention widget."
-msgstr ""
+msgstr "Параметры для драйвера виджета в Дайджесте последних упоминаний по заявкам."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Agent interface notification module to show the number of mentions."
-msgstr ""
+msgstr "Модуль интерфейса агента для отображения количества упоминаний."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Module to grant access to the mentioned agents of a ticket."
@@ -22752,7 +22744,7 @@ msgstr "Большой"
 
 #. SysConfig
 msgid "Last Mentions"
-msgstr ""
+msgstr "Последние Упоминания"
 
 #. SysConfig
 msgid "Last Screen Overview"
@@ -22984,7 +22976,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Mentions."
-msgstr ""
+msgstr "Упоминания."
 
 #. SysConfig
 msgid "Merge this ticket and all articles into another ticket"
@@ -23747,7 +23739,7 @@ msgid "This key is not certified with a trusted signature!"
 msgstr ""
 
 #. SysConfig
-msgid "This module is part of the admin area of OTRS."
+msgid "This module is part of the admin area of Znuny."
 msgstr ""
 
 #. SysConfig
@@ -24352,5 +24344,17 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Do not verify the signer's certificate of a signed message."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
+msgid "A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
+msgid "Check the official %sdocumentation%s."
+msgstr "Проверьте в официальной %документации%s."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "The following files types are allowed: %s"
 msgstr ""
 

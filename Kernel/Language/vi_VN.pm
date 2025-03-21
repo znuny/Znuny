@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.147891963109354;
+    $Self->{Completeness}        = 0.147867610736045;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -79,7 +79,8 @@ sub Data {
         'Change settings' => 'Thay đổi cài đặt',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Thiết lập những gì bạn muốn thay đổi nếu phù hợp tiêu chuẩn. Hãy nhớ rằng "có thể" là một danh sách trắng, \'PossibleNot\' danh sách đen.',
-        'Check the official %sdocumentation%s.' => '',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Chỉnh sửa ACL% s Danh sách kiểm soát truy cập',
         'Edit ACL' => '',
         'Show or hide the content' => 'Hiển thị hoặc ẩn nội dung',
@@ -8371,6 +8372,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => '',
         'Please only select at most %s files for upload.' => '',
         'The following files are not allowed to be uploaded: %s' => '',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -9043,7 +9045,7 @@ Cảm ơn sự giúp đỡ của bạn!
             '',
         'This is the default orange - black skin.' => '',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => '',
         'Ticket Compose Bounce Email.' => '',
         'Ticket Compose email Answer.' => '',
@@ -9455,6 +9457,7 @@ Cảm ơn sự giúp đỡ của bạn!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

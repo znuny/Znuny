@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.896903820816864;
+    $Self->{Completeness}        = 0.896591470442944;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -85,7 +85,8 @@ sub Data {
         'Change settings' => 'Változtatási beállítások',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Állítsa be, amit módosítani szeretne a feltétel egyezésekor. Ne feledkezzen meg arról, hogy a „Possible” a fehérlista, a „PossibleNot” a feketelista.',
-        'Check the official %sdocumentation%s.' => 'Nézze meg a hivatalos %sdokumentációt%s.',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => '%s ACL szerkesztése',
         'Edit ACL' => 'ACL szerkesztése',
         'Show or hide the content' => 'A tartalom megjelenítése vagy elrejtése',
@@ -8377,6 +8378,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => 'Sajnáljuk, csak %s fájlt tud feltölteni.',
         'Please only select at most %s files for upload.' => 'Legfeljebb csak %s fájlt válasszon a feltöltéshez.',
         'The following files are not allowed to be uploaded: %s' => 'A következő fájlok nem engedélyezettek a feltöltéshez: %s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'A következő fájlok túllépik a legnagyobb megengedett fájlonkénti %s méretet, és nem lettek feltöltve: %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -9048,7 +9050,7 @@ Az Ön segélyszolgálat csapata
             'Ez az alapértelmezett narancssárga-fekete felszín az ügyfélfelülethez.',
         'This is the default orange - black skin.' => 'Ez az alapértelmezett narancssárga-fekete felszín.',
         'This key is not certified with a trusted signature!' => 'Ez a kulcs nincs tanúsítva egy megbízható aláírással!',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => 'Jegylezárás.',
         'Ticket Compose Bounce Email.' => 'E-mail átirányító jegyválasz.',
         'Ticket Compose email Answer.' => 'E-mailre történő jegyválasz.',
@@ -9460,6 +9462,7 @@ Az Ön segélyszolgálat csapata
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

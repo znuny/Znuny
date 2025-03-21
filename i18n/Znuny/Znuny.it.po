@@ -151,10 +151,6 @@ msgid "Set up what you want to change if the criteria match. Keep in mind that '
 msgstr "Imposta cosa cambiare nei criteri di corrispondenza. Considerare che 'Possible' è una whitelist, 'PossibileNot' una blacklist."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
-msgid "Check the official %sdocumentation%s."
-msgstr "Controlla la %s documentazione ufficiale %s."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
 msgid "Edit ACL %s"
 msgstr "Modifica l'ACL %s"
 
@@ -8624,10 +8620,6 @@ msgstr "Nuovo ticket"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid "Service level agreement"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
-msgid "Dymanic Info"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
@@ -23750,7 +23742,7 @@ msgid "This key is not certified with a trusted signature!"
 msgstr "Questa chiave non è certificata con una firma attendibile!"
 
 #. SysConfig
-msgid "This module is part of the admin area of OTRS."
+msgid "This module is part of the admin area of Znuny."
 msgstr ""
 
 #. SysConfig
@@ -24355,5 +24347,13 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Do not verify the signer's certificate of a signed message."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
+msgid "A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "The following files types are allowed: %s"
 msgstr ""
 

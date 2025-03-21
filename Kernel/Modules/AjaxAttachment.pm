@@ -72,7 +72,7 @@ sub Run {
         for my $Attachment (@Attachments) {
 
             # Hide inline attachments from the display. Please see bug#13498 for more information.
-            next ATTACHMENT if $Attachment->{Disposition} eq 'inline';
+            next ATTACHMENT if $Attachment->{Disposition} && $Attachment->{Disposition} eq 'inline';
 
             # Add human readable data size.
             $Attachment->{HumanReadableDataSize} = $LayoutObject->HumanReadableDataSize(

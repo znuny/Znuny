@@ -6520,7 +6520,7 @@ via the Preferences button after logging in.
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Communication Log GUI</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -8632,11 +8632,7 @@ via the Preferences button after logging in.
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="SearchLimit">10000</Item>
-                        <Item Key="PageShown">50</Item>
-                        <Item Key="CustomerTicketTextField">UserMailString</Item>
-                        <Item Key="SortBy::Default">UserLogin</Item>
-                        <Item Key="Order::Default">Up</Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="Email">

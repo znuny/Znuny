@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.893445322793149;
+    $Self->{Completeness}        = 0.893133541906801;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -80,7 +80,8 @@ sub Data {
         'Change settings' => 'Промени подешавања',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Подесите оно што желите да мењате ако се критеријуми слажу. Имајте на уму да је \'Possible\' бела листа, \'PossibleNot\' црна листа.',
-        'Check the official %sdocumentation%s.' => 'Прочитајте званичну %sдокументацију%s.',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Уреди ACL %s',
         'Edit ACL' => 'Уреди ACL',
         'Show or hide the content' => 'Покажи или сакриј садржај',
@@ -8372,6 +8373,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => 'Жао намо је, можете отпремити само %s датотеке(а).',
         'Please only select at most %s files for upload.' => 'Молимо да изаберете највише %s датотеке(а) за отпремање.',
         'The following files are not allowed to be uploaded: %s' => 'Није дозвољено отпремање следећих датотека: %s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'Следеће датотеке премашују највећу дозвољену величину од %s и нису биле отпремљене: %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -9043,7 +9045,7 @@ Thanks for your help!
             'Ово је подразумевани наранџасто-црни изглед клијентског интерфејса.',
         'This is the default orange - black skin.' => 'Ово је подразумевани наранџасто-црни изглед.',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => 'Затварање тикета.',
         'Ticket Compose Bounce Email.' => 'Преусмеравање имејл поруке у тикету.',
         'Ticket Compose email Answer.' => 'Писање имејл поруке у тикету.',
@@ -9455,6 +9457,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
