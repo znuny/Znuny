@@ -1,4 +1,5 @@
 # 6.5.15 2025-xx-xx
+ - 2025-03-20 Article data now also contains communication channel name instead of only the ID.
  - 2025-03-19 AdminSystemConfiguration: Addon name is no longer translated.
  - 2025-03-12 Fixed bug - Ticket::Frontend::Article::Actions###??? no possibility to add a new entry.
  - 2025-03-07 Fixed GroupSelection in AdminAppointmentCalendarManage for admin group member. A user can only create AppointmentCalendars for their own groups, even though they are a member of the Admin group.
