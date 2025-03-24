@@ -2,6 +2,7 @@
  - 2025-03-19 AdminSystemConfiguration: Addon name is no longer translated.
  - 2025-03-12 Fixed bug - Ticket::Frontend::Article::Actions###??? no possibility to add a new entry.
  - 2025-03-07 Fixed GroupSelection in AdminAppointmentCalendarManage for admin group member. A user can only create AppointmentCalendars for their own groups, even though they are a member of the Admin group.
+ - 2025-03-03 Improved performance in Kernel::System::LinkObject by fixing the cache key.
  - 2025-02-28 Fixed missing notification in process management activity dialog edit screen.
  - 2025-02-28 Fixed doubled notification in process management transition edit screen.
  - 2025-02-27 Fixed obsolete parameter in overview URL. After jumping to AgentTicketZoom from an overview like AgentTicketStatus and return to that overview the URL parameter TicketID stays persistent to the URL. This action is repetitive and works with multiple TicketIDs, but the TicketID is not needed in anyway.
