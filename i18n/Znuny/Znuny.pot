@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-11-01 12:29+0000\n"
+"POT-Creation-Date: 2025-03-14 09:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,7 +151,7 @@ msgid "Set up what you want to change if the criteria match. Keep in mind that '
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
-msgid "Check the official %sdocumentation%s."
+msgid "A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
@@ -7051,6 +7051,10 @@ msgid "in"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
+msgid "All"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
 msgid "Search inactive widgets"
 msgstr ""
 
@@ -8643,6 +8647,10 @@ msgid "Service level agreement"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
+msgid "Tickets"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
 msgid "Welcome!"
 msgstr ""
 
@@ -8659,7 +8667,15 @@ msgid "New Process Ticket"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
+msgid "Ticket Search"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "Profile"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
+msgid "Template Name"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
@@ -8680,10 +8696,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "No time settings"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
-msgid "All"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
@@ -8716,10 +8728,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
 msgid "Save as Template?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
-msgid "Template Name"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
@@ -14403,10 +14411,6 @@ msgid "Database Records"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
-msgid "Tickets"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Znuny/DatabaseRecords.pm
 msgid "Ticket History Entries"
 msgstr ""
 
@@ -19743,6 +19747,10 @@ msgid "Defines the default queue for new tickets in the agent interface."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Default preferences to set during user creation."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It's still recommended to use only verified packages."
 msgstr ""
 
@@ -19752,6 +19760,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Screens for which it is possible to enable or disable default columns."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -20091,6 +20103,10 @@ msgid "Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled i
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Do not verify the signer's certificate of a signed message."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
 msgstr ""
 
@@ -20316,6 +20332,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default)."
 msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml
@@ -21520,6 +21540,10 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The following files are not allowed to be uploaded: %s"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "The following files types are allowed: %s"
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
@@ -23906,7 +23930,7 @@ msgid "This key is not certified with a trusted signature!"
 msgstr ""
 
 #. SysConfig
-msgid "This module is part of the admin area of OTRS."
+msgid "This module is part of the admin area of Znuny."
 msgstr ""
 
 #. SysConfig
@@ -23995,10 +24019,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Ticket Responsible."
-msgstr ""
-
-#. SysConfig
-msgid "Ticket Search"
 msgstr ""
 
 #. SysConfig

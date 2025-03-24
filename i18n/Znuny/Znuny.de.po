@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2024-08-01 21:00+0000\n"
-"Last-Translator: Denny Korsukéwitz <dk@znuny.com>\n"
+"PO-Revision-Date: 2025-02-28 10:54+0000\n"
+"Last-Translator: Denny Korsukéwitz <dennykorsukewitz@gmail.com>\n"
 "Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.9.2\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Actions"
@@ -151,10 +151,6 @@ msgstr "Werte ändern"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
 msgid "Set up what you want to change if the criteria match. Keep in mind that 'Possible' is a white list, 'PossibleNot' a black list."
 msgstr "Stellt die Wertänderungen ein für den Fall, dass die Filterbedingungen zutreffen. Hierbei ist 'Possible' eine Positivliste und 'PossibleNot' eine Negativliste."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
-msgid "Check the official %sdocumentation%s."
-msgstr "Überprüfen Sie die offizielle %sdocumentation%s."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
 msgid "Edit ACL %s"
@@ -2966,7 +2962,7 @@ msgstr "Schlüssel"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingSimple.tt
 msgid "matching"
-msgstr ""
+msgstr "übereinstimmend"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingSimple.tt
 msgid "to new key"
@@ -7402,7 +7398,7 @@ msgstr "Haben Sie gewusst, dass Sie bei der Übersetzung von Znuny unter %s helf
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
 msgid "Choose from the groups on the left to find the settings you'd wish to change."
-msgstr ""
+msgstr "Wählen Sie aus den Gruppen auf der linken Seite, um die Einstellungen zu finden, die Sie ändern möchten."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
 msgid "Did you know?"
@@ -8635,10 +8631,6 @@ msgstr "Neues Ticket"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid "Service level agreement"
 msgstr "Service-Level-Vereinbarung"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
-msgid "Dymanic Info"
-msgstr "Dynamische Felder"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
 msgid "Welcome!"
@@ -14022,7 +14014,7 @@ msgstr "Zeichensatz des Datenbank-Servers"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
-msgstr ""
+msgstr "Dieser Zeichensatz wird noch nicht unterstützt. Bitte konvertieren Sie Ihre Datenbank auf den Zeichensatz 'utf8'."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "The setting character_set_database needs to be 'utf8'."
@@ -14978,7 +14970,7 @@ msgstr "Art der Logrotation, die vom Daemon genutzt werden soll. Wählen Sie \"O
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
 msgid "If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used."
-msgstr ""
+msgstr "Wenn diese Option aktiviert ist, verwendet der Daemon dieses Verzeichnis, um seine PID-Dateien zu erstellen. Hinweis: Bitte stoppen Sie den Daemon vor jeder Änderung und verwenden Sie diese Einstellung nur, wenn <$OTRS_HOME>/var/run/ nicht verwendet werden kann."
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
 msgid "Defines the number of days to keep the daemon log files."
@@ -16338,11 +16330,11 @@ msgstr "Erlaubt Agenten die Achsen einer Statistik zu tauschen, wenn sie eine St
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
-msgstr ""
+msgstr "Fügt die folgenden Elemente zur Verwendung in Statistiken hinzu: „Agent/Eigentümer“, ‚Erstellt von Agent/Eigentümer‘, ‚Verantwortlich‘, ‚Abgerechnete Zeit durch Agent‘."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
-msgstr ""
+msgstr "Ermöglicht die Verwendung von ungültigen Agenten in Statistiken. Stats::UseAgentElementInStats muss aktiv sein."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers)."
@@ -16702,7 +16694,7 @@ msgstr "Frontend-Modulregistrierung (verberge Ticket-Prozesse, falls kein Prozes
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate)."
-msgstr ""
+msgstr "Event-Modulregistrierung. Für mehr Performance können Sie ein Trigger-Event definieren (z. B. Event => TicketCreate)."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "This option defines the dynamic field in which a Process Management process entity id is stored."
@@ -16734,7 +16726,7 @@ msgstr "Einstellungen zum Überschreiben der Standardwerte für Prozess-Tickets 
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: 'Key =&gt; My Group', 'Content: Name_X, NameY'."
-msgstr ""
+msgstr "Dynamische Feldgruppen für das Prozess-Widget. Der Schlüssel ist der Name der Gruppe, der Wert enthält die Felder, die angezeigt werden sollen. Beispiel: 'Schlüssel => Meine Gruppe', 'Inhalt: Name_X, NameY'."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Dynamic fields shown in the process widget in ticket zoom screen of the agent interface."
@@ -16790,7 +16782,7 @@ msgstr "Definiert die Priorität in welcher die Information aufgezeichnet und pr
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgstr "Filter zur Fehlersuche bei Übergängen. Hinweis: Weitere Filter können im Format <OTRS_TICKET_Attribute> hinzugefügt werden, z.B. <OTRS_TICKET_Priority>."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Parameters for the dashboard backend of the running process tickets overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
@@ -17058,15 +17050,15 @@ msgstr "Anpassbare Stopworte für den Volltext-Index. Diese Worte werden aus dem
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows having a small format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information)."
-msgstr ""
+msgstr "Ermöglicht eine kleinformatige Ticketübersicht (CustomerInfo => 1 - zeigt auch die Kundeninformationen)."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows having a medium format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information)."
-msgstr ""
+msgstr "Ermöglicht eine mittelgroße Ticketübersicht (CustomerInfo => 1 - zeigt auch die Kundeninformationen)."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Shows a preview of the ticket overview (CustomerInfo =&gt; 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info)."
-msgstr ""
+msgstr "Zeigt eine Vorschau der Ticketübersicht an (CustomerInfo => 1 - zeigt auch die Kundeninfo an, CustomerInfoMaxSize - maximale Größe der Kundeninfo in Zeichen)."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines which article sender types should be shown in the preview of a ticket."
@@ -17642,7 +17634,7 @@ msgstr "Legt die Art des Empfängers für Telefon-Tickets und des Absenders für
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType \"&lt;Queue&gt;\" shows the names of the queues and for SystemAddress \"&lt;Realname&gt; &lt;&lt;Email&gt;&gt;\" shows the name and email of the recipient."
-msgstr ""
+msgstr "Legt die Strings fest, die als Empfänger (To:) des Telefontickets und als Absender (From:) des E-Mail-Tickets in der Agentenoberfläche angezeigt werden. Für Queue als NewQueueSelectionType \"<Queue>\" werden die Namen der Queues und für SystemAddress \"<Realname> <<Email>>\" die Namen und die Email des Empfängers angezeigt."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Determines which options will be valid of the recipient (phone ticket) and the sender (email ticket) in the agent interface."
@@ -19018,7 +19010,7 @@ msgstr "Legt die Art des Empfängers für Tickets im Kunden-Bereich fest (\"Queu
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, \"&lt;Queue&gt;\" shows the names of the queues, and for SystemAddress, \"&lt;Realname&gt; &lt;&lt;Email&gt;&gt;\" shows the name and email of the recipient."
-msgstr ""
+msgstr "Legt die Strings fest, die als Empfänger (To:) des Telefontickets und als Absender (From:) des E-Mail-Tickets in der Kundenoberfläche angezeigt werden. Für Queue als CustomerPanelSelectionType zeigt \"<Queue>\" die Namen der Queues und für SystemAddress zeigt \"<Realname> <<Email>>\" die Namen und die Email des Empfängers an."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Determines which queues will be valid for ticket's recepients in the customer interface."
@@ -19070,7 +19062,7 @@ msgstr "Zeigt die aktivierten Ticket-Attribute im Kundenbereich (0 = abgeschalte
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the length of the article preview in the customer interface."
-msgstr ""
+msgstr "Bestimmt die Länge der Artikelvorschau in der Kundenoberfläche."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting."
@@ -19222,7 +19214,7 @@ msgstr "Wenn aktiviert, werden Informationen zur Fehlerbehebung für ACLs gelogg
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgstr "Filter zur Fehlersuche bei ACLs. Hinweis: Weitere Ticketattribute können im Format <OTRS_TICKET_Attribute> hinzugefügt werden, z. B. <OTRS_TICKET_Priority>."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Maximal auto email responses to own email-address a day (Loop-Protection)."
@@ -19302,7 +19294,7 @@ msgstr "Modul zum filtern und bearbeiten von eingehenden Nachrichten. Blockiere/
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From =&gt; '(.+?)@.+?', and use () as [***] in Set =&gt;."
-msgstr ""
+msgstr "Modul zum Filtern und Manipulieren eingehender Nachrichten. Schreibt eine 4-stellige Zahl in ein FreeText-Feld, verwenden Sie einen Regex im Match z.B. From =&gt; '(.+?)@.+?', und verwenden Sie () als [***] in Set =&gt;."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Blocks all the incoming emails that do not have a valid ticket number in subject with From: @example.com address."
@@ -19574,7 +19566,7 @@ msgstr "Angezeigte dynamische Felder in der Anzeige von Suchergebnissen der Tick
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event."
-msgstr ""
+msgstr "Ereignis-Modulregistrierung. Für mehr Performance können Sie ein Trigger-Ereignis definieren (z. B. Event => TicketCreate). Dies ist nur möglich, wenn alle dynamischen Ticketfelder das gleiche Ereignis benötigen."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter \"Ticket Event Module\"."
@@ -20082,15 +20074,15 @@ msgstr "Modul, das Zugriff für die erwähnten Agenten eines Tickets gewährt."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Assignment between event and type."
-msgstr ""
+msgstr "Zuweisung zwischen Ereignis und Typ."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the link type for each activity."
-msgstr ""
+msgstr "Legt den Verknüpfungstyp für jede Aktivität fest."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them."
-msgstr ""
+msgstr "Liste der Farben in hexadezimaler RGB-Angabe, die zur Auswahl stehen werden. Stellen Sie sicher, dass die Farben dunkel genug sind, damit weißer Text darüber gelegt werden kann."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Mapping of non-standard time zones to official ones."
@@ -20222,7 +20214,7 @@ msgstr "Gruppe für den Statistikzugriff."
 
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for time accounting web service access."
-msgstr ""
+msgstr "Gruppe für den Zugriff auf den Webdienst Zeitabrechnung."
 
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "new"
@@ -21611,7 +21603,7 @@ msgstr "Aktivierung dynamischer Felder für Masken."
 
 #. SysConfig
 msgid "Activity LinkTarget"
-msgstr ""
+msgstr "Link-Ziel der Aktivität"
 
 #. SysConfig
 msgid "Activity Notification"
@@ -23551,7 +23543,7 @@ msgstr "Ermöglicht eine Ticket-Übersicht mit einigen Ticketinformationen (Cust
 
 #. SysConfig
 msgid "Shows information on how to start OTRS Daemon"
-msgstr ""
+msgstr "Zeigt Informationen, wie der Znuny-Daemon gestartet wird"
 
 #. SysConfig
 msgid "Shows last mention of tickets."
@@ -23754,8 +23746,8 @@ msgid "This key is not certified with a trusted signature!"
 msgstr "Dieser Schlüssel ist nicht mit einer vertrauenswürdigen Signatur zertifiziert!"
 
 #. SysConfig
-msgid "This module is part of the admin area of OTRS."
-msgstr ""
+msgid "This module is part of the admin area of Znuny."
+msgstr "Dieses Modul ist Teil des Adminbereichs von Znuny."
 
 #. SysConfig
 msgid "Ticket Close."
@@ -24307,23 +24299,23 @@ msgstr "Es wurden Tabellen gefunden, die nicht 'utf8mb4' als Zeichensatz haben."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Dark skin for the agent interface."
-msgstr ""
+msgstr "Dark Skin für die Agentenschnittstelle."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Dark skin for the customer interface."
-msgstr ""
+msgstr "Dark Skin für die Kundenschnittstelle."
 
 #. SysConfig
 msgid "Dark"
-msgstr ""
+msgstr "Dark"
 
 #. SysConfig
 msgid "This is the dark skin for the agent interface."
-msgstr ""
+msgstr "Dies ist der dark Skin für die Agentenschnittstelle."
 
 #. SysConfig
 msgid "This is the dark skin for the customer interface."
-msgstr ""
+msgstr "Dies ist die dark Haut für die Kundenschnittstelle."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input."
@@ -24340,4 +24332,28 @@ msgstr "Als gelesen markieren"
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Limits the number of options for modernized selection fields. If this limit will be exceeded, the selection field will for performance reasons be shown as non-modernized."
 msgstr "Limitiert die Anzahl an Optionen für modernized Auswahlfelder. Wenn das Limit überschritten ist, wird das Auswahlfeld aus Performancegründen als nicht-modernized angezeigt."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Default preferences to set during user creation."
+msgstr "Default-Einstellungen, die für einen neuen Benutzer bei dessen Erstellung gesetzt werden."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values."
+msgstr "Aktiviert historische Werte für die Auswahl in dynamischen Feldtypen, die auf BaseSelect basieren (Dropdown und Multiselect). Deaktivieren Sie dies, wenn es zu Leistungsproblemen aufgrund zu vieler unterschiedlicher gespeicherter Werte kommt."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Do not verify the signer's certificate of a signed message."
+msgstr "Prüfung des Zertifikats des Unterzeichners einer signierten Nachricht deaktivieren."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
+msgid "A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s."
+msgstr "Eine Liste aller möglichen Match- und Set-Kriterien finden Sie im ACL-Referenzhandbuch %sDokumentation%s."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "The following files types are allowed: %s"
+msgstr "Die folgenden Dateitypen sind zulässig: %s"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default)."
+msgstr "Sobald das Limit der beobachteten Tickets pro Nutzer erreicht ist, werden die ältesten Einträge aus der Beobachtungsliste entfernt. Deaktivieren Sie diese Einstellung oder setzen Sie sie auf 0, um das Limit zu deaktivieren (Standard)."
 

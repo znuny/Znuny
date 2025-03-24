@@ -29,11 +29,11 @@ sub Data {
     $Self->{Charset} = ['utf-8', ];
     # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
     $Self->{DateFormat}          = '%Y.%M.%D %T';
-    $Self->{DateFormatLong}      = ' %A %Y/%M/%D %T';
+    $Self->{DateFormatLong}      = '%A %Y/%M/%D %T';
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.897347174163783;
+    $Self->{Completeness}        = 0.896443859071452;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -86,7 +86,8 @@ sub Data {
         'Change settings' => '操作动作',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             '当匹配条件满足时执行规定的操作动作。记住：\'Possible\'表示允许(白名单)，\'PossibleNot\'表示禁止(黑名单)。',
-        'Check the official %sdocumentation%s.' => '查看 %s 的官方文档 %s。',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => '编辑ACL %s',
         'Edit ACL' => '编辑ACL',
         'Show or hide the content' => '显示或隐藏内容',
@@ -7637,11 +7638,14 @@ sub Data {
             '定义服务人员界面新建工单的默认队列。',
 
         # XML Definition: Kernel/Config/Files/XML/Znuny.xml
+        'Default preferences to set during user creation.' => '',
         'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
             '',
         'Screens for which it is possible to enable or disable dynamic fields.' =>
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
+            '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
@@ -7782,6 +7786,8 @@ sub Data {
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7882,6 +7888,8 @@ sub Data {
         'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
+            '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml
@@ -8373,6 +8381,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => '对不起，您只能在这里上传%s个文件。',
         'Please only select at most %s files for upload.' => '请至少选择%s个文件进行上传。',
         'The following files are not allowed to be uploaded: %s' => '不允许上传以下文件：%s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '以下文件超过允许的单个文件最大大小%s，没有上传的文件有：%s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -9043,7 +9052,7 @@ Thanks for your help!
             '这是客户界面默认的橙色-黑色皮肤。',
         'This is the default orange - black skin.' => '这是默认的橙色-黑色皮肤。',
         'This key is not certified with a trusted signature!' => '此密钥未使用可信签名进行认证！',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => '工单关闭。',
         'Ticket Compose Bounce Email.' => '工单编写退回邮件。',
         'Ticket Compose email Answer.' => '工单编写邮件回复。',
@@ -9455,6 +9464,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

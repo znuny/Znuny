@@ -812,7 +812,12 @@
         <Description Translatable="1">Forces encoding of outgoing emails (7bit|8bit|quoted-printable|base64).</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">base64</Item>
+            <Item ValueType="Select" SelectedID="base64">
+                <Item ValueType="Option" Value="base64" Translatable="0">base64</Item>
+                <Item ValueType="Option" Value="7bit" Translatable="0">7bit</Item>
+                <Item ValueType="Option" Value="8bit" Translatable="0">8bit</Item>
+                <Item ValueType="Option" Value="quoted-printable" Translatable="0">quoted-printable</Item>
+            </Item>
         </Value>
     </Setting>
     <Setting Name="Sendmail::DefaultHeaders" Required="0" Valid="0">
@@ -6515,7 +6520,7 @@ via the Preferences button after logging in.
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Communication Log GUI</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -8627,11 +8632,7 @@ via the Preferences button after logging in.
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="SearchLimit">10000</Item>
-                        <Item Key="PageShown">50</Item>
-                        <Item Key="CustomerTicketTextField">UserMailString</Item>
-                        <Item Key="SortBy::Default">UserLogin</Item>
-                        <Item Key="Order::Default">Up</Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="Email">

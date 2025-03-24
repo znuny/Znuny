@@ -227,8 +227,8 @@ sub Run {
             Name   => Translatable('New Article'),
             Prio   => 1001,
             Search => {
-                WatchUserIDs => [ $Self->{UserID} ],
-                TicketFlag   => {
+                WatchUserIDs  => [ $Self->{UserID} ],
+                NotTicketFlag => {
                     Seen => 1,
                 },
                 TicketFlagUserID => $Self->{UserID},
@@ -314,48 +314,6 @@ sub Run {
         );
     }
 
-    # prepare shown tickets for new article tickets
-    if ( $Filter eq 'New' ) {
-
-        my @OriginalViewableTicketsAll = $TicketObject->TicketSearch(
-            %{ $Filters{All}->{Search} },
-            Result => 'ARRAY',
-        );
-
-        my %OriginalViewableTicketsNotNew;
-        for my $TicketID (@OriginalViewableTickets) {
-            $OriginalViewableTicketsNotNew{$TicketID} = 1;
-        }
-
-        my @OriginalViewableTicketsTmp;
-        TICKETID:
-        for my $TicketIDAll (@OriginalViewableTicketsAll) {
-            next TICKETID if $OriginalViewableTicketsNotNew{$TicketIDAll};
-            push @OriginalViewableTicketsTmp, $TicketIDAll;
-        }
-        @OriginalViewableTickets = @OriginalViewableTicketsTmp;
-
-        my @ViewableTicketsAll = $TicketObject->TicketSearch(
-            %{ $Filters{All}->{Search} },
-            %ColumnFilter,
-            Result => 'ARRAY',
-            Limit  => $Limit,
-        );
-
-        my %ViewableTicketsNotNew;
-        for my $TicketID (@ViewableTickets) {
-            $ViewableTicketsNotNew{$TicketID} = 1;
-        }
-
-        my @ViewableTicketsTmp;
-        TICKETID:
-        for my $TicketIDAll (@ViewableTicketsAll) {
-            next TICKETID if $ViewableTicketsNotNew{$TicketIDAll};
-            push @ViewableTicketsTmp, $TicketIDAll;
-        }
-        @ViewableTickets = @ViewableTicketsTmp;
-    }
-
     my $View = $ParamObject->GetParam( Param => 'View' ) || '';
 
     if ( $Self->{Subaction} eq 'AJAXFilterUpdate' ) {
@@ -439,16 +397,6 @@ sub Run {
             %ColumnFilter,
             Result => 'COUNT',
         ) || 0;
-
-        # prepare count for new article tickets
-        if ( $FilterColumn eq 'New' ) {
-            my $CountAll = $TicketObject->TicketSearch(
-                %{ $Filters{All}->{Search} },
-                %ColumnFilter,
-                Result => 'COUNT',
-            ) || 0;
-            $Count = $CountAll - $Count;
-        }
 
         $NavBarFilter{ $Filters{$FilterColumn}->{Prio} } = {
             Count  => $Count,

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.53797989784149;
+    $Self->{Completeness}        = 0.537537043134672;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -79,7 +79,8 @@ sub Data {
         'Change settings' => 'Menukar tetapan',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Tetapkan apa yang ingin anda ubah jika ciri-ciri sesuai. Ingat bahawa \'Mungkin\' ialah senarai putih, \'Tidak mungkin\' ialah senarai hitam.',
-        'Check the official %sdocumentation%s.' => '',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Sunting Senarai Kawalan Akses',
         'Edit ACL' => '',
         'Show or hide the content' => 'Menunjukkan atau menyembunyikan kandungan',
@@ -7632,11 +7633,14 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
 
         # XML Definition: Kernel/Config/Files/XML/Znuny.xml
+        'Default preferences to set during user creation.' => '',
         'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
             '',
         'Screens for which it is possible to enable or disable dynamic fields.' =>
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
+            '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
@@ -7777,6 +7781,8 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7877,6 +7883,8 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
+            '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml
@@ -8368,6 +8376,7 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         'Sorry, you can only upload %s files.' => '',
         'Please only select at most %s files for upload.' => '',
         'The following files are not allowed to be uploaded: %s' => '',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -9040,7 +9049,7 @@ Kumpulan MejaBantuan Anda
             '',
         'This is the default orange - black skin.' => '',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => '',
         'Ticket Compose Bounce Email.' => '',
         'Ticket Compose email Answer.' => '',
@@ -9452,6 +9461,7 @@ Kumpulan MejaBantuan Anda
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

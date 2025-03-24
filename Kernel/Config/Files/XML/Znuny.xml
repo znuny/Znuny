@@ -4,6 +4,15 @@
     <!--
         General settings
     -->
+    <Setting Name="User::DefaultPreferences" Required="1" Valid="1">
+        <Description Translatable="1">Default preferences to set during user creation.</Description>
+        <Navigation>Frontend::Base::UserPrefs</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="UserToolBarSearchBackend">ToolBarSearchBackendFulltext</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Loader::Agent::CommonJS###888-Framework" Required="1" Valid="1">
         <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
@@ -209,7 +218,16 @@
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0110-CUIC-TicketEscalation">DashboardWidget CUIC-TicketEscalation</Item>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0120-CUIC-TicketNew">DashboardWidget CUIC-TicketNew</Item>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0130-CUIC-TicketOpen">DashboardWidget CUIC-TicketOpen</Item>
+
+                <Item Key="LinkObject::ComplexTable###Ticket">LinkObject ComplexTable</Item>
             </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::Driver::BaseSelect::EnableHistoricalValues" Required="1" Valid="1">
+        <Description Translatable="1">Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
 
@@ -1142,6 +1160,7 @@
                         <Item Key="DashboardBackend###0120-TicketNew">DashboardWidget TicketNew</Item>
                         <Item Key="DashboardBackend###0130-TicketOpen">DashboardWidget TicketOpen</Item>
                         <Item Key="DashboardBackend###0140-RunningTicketProcess">DashboardWidget RunningTicketProcess</Item>
+                        <Item Key="LinkObject::ComplexTable###Ticket">LinkObject ComplexTable</Item>
                     </Hash>
                 </Item>
                 <Item Key="Article">
@@ -2222,7 +2241,7 @@
         </Value>
     </Setting>
 
-    <!-- S/MIME key storage -->
+    <!-- S/MIME -->
     <Setting Name="Daemon::SchedulerCronTaskManager::Task###ReindexSMIMECertificates" Required="0" Valid="1">
         <Description Translatable="1">Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.</Description>
         <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
@@ -2239,6 +2258,13 @@
                     </Array>
                 </Item>
             </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="SMIME::NoVerify" Required="0" Valid="1">
+        <Description Translatable="1">Do not verify the signer's certificate of a signed message.</Description>
+        <Navigation>Core::Crypt::SMIME</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
 
@@ -3649,6 +3675,15 @@
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+
+    <!-- Limit for watched tickets -->
+    <Setting Name="Ticket::WatcherLimit" Required="0" Valid="1">
+        <Description Translatable="1">Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">0</Item>
         </Value>
     </Setting>
 
