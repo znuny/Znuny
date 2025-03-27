@@ -19,20 +19,20 @@ sub Data {
 
     # $$START$$
     # possible charsets
-    $Self->{Charset} = [];
+    $Self->{Charset} = ['utf-8', ];
     # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '';
-    $Self->{DateFormatLong}      = '';
-    $Self->{DateFormatShort}     = '';
-    $Self->{DateInputFormat}     = '';
-    $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.868269389099292;
+    $Self->{DateFormat}          = '%Y-%M-%D %T';
+    $Self->{DateFormatLong}      = '%A, %Y년 %M월 %D일 %T';
+    $Self->{DateFormatShort}     = '%Y-%M-%D';
+    $Self->{DateInputFormat}     = '%Y-%M-%D';
+    $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
+    $Self->{Completeness}        = 0.868126440566348;
 
     # csv separator
-    $Self->{Separator}         = '';
+    $Self->{Separator}         = ',';
 
-    $Self->{DecimalSeparator}  = '';
-    $Self->{ThousandSeparator} = '';
+    $Self->{DecimalSeparator}  = '.';
+    $Self->{ThousandSeparator} = ',';
     $Self->{Translation} = {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
@@ -7881,6 +7881,8 @@ sub Data {
         'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
+            '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml

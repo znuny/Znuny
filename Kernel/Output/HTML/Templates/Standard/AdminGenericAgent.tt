@@ -844,18 +844,18 @@
                                 [% Data.TicketEscalationSolutionTimeStop %]
                             </div>
                         </div>
-[% RenderBlockStart("SearchInArchive") %]
+[% RenderBlockStart("TicketArchive") %]
                         <div class="field-wrapper">
                             <label for="SearchInArchive">[% Translate("Archive search option") | html %]</label>
                             <div class="Field">
                                 [% Data.SearchInArchiveStrg %]
                             </div>
                         </div>
-[% RenderBlockEnd("SearchInArchive") %]
+[% RenderBlockEnd("TicketArchive") %]
                     </fieldset>
                 </div>
             </div>
-<!-- new options -->
+
             <div class="WidgetSimple Collapsed">
                 <div class="Header">
                     <div class="WidgetAction Toggle">

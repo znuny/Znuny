@@ -7883,6 +7883,8 @@ sub Data {
             'Mapping der Ticketpriorität zum X-Priority E-Mail-Header für ausgehende E-Mails des Kommunikationskanals "System".',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             'Ergänzt Feld-Mapping für AgentTicketActionCommon für unbekannte Action. Wird von Znuny.Form.Input verwendet.',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            'Sobald das Limit der beobachteten Tickets pro Nutzer erreicht ist, werden die ältesten Einträge aus der Beobachtungsliste entfernt. Deaktivieren Sie diese Einstellung oder setzen Sie sie auf 0, um das Limit zu deaktivieren (Standard).',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',

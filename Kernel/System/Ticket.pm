@@ -6863,6 +6863,41 @@ sub TicketWatchSubscribe {
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
+    #
+    # Check number of watched tickets of user and remove oldest redundant watch list entries.
+    #
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $WatcherLimit = $ConfigObject->Get('Ticket::WatcherLimit');
+    if ($WatcherLimit) {
+        return if !$DBObject->Prepare(
+            SQL => '
+                SELECT   ticket_id
+                FROM     ticket_watcher
+                WHERE    user_id = ?
+                ORDER BY create_time ASC
+            ',
+            Bind => [
+                \$Param{WatchUserID},
+            ],
+        );
+
+        my @WatchedTicketIDs;
+        while ( my @Row = $DBObject->FetchrowArray() ) {
+            push @WatchedTicketIDs, $Row[0];
+        }
+
+        # >= because the one newly subscribed to here must also be counted
+        while ( @WatchedTicketIDs >= $WatcherLimit ) {
+            my $WatchedTicketIDToDelete = shift @WatchedTicketIDs;
+
+            return if !$Self->TicketWatchUnsubscribe(
+                TicketID    => $WatchedTicketIDToDelete,
+                WatchUserID => $Param{WatchUserID},
+                UserID      => $Param{UserID},
+            );
+        }
+    }
+
     # db access
     return if !$DBObject->Do(
         SQL => '

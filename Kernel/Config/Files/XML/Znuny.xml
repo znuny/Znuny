@@ -3678,4 +3678,13 @@
         </Value>
     </Setting>
 
+    <!-- Limit for watched tickets -->
+    <Setting Name="Ticket::WatcherLimit" Required="0" Valid="1">
+        <Description Translatable="1">Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">0</Item>
+        </Value>
+    </Setting>
+
 </otrs_config>

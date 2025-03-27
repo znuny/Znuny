@@ -24364,3 +24364,7 @@ msgstr ""
 msgid "The following files types are allowed: %s"
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default)."
+msgstr ""
+

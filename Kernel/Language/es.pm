@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.5954223612712;
+    $Self->{Completeness}        = 0.595324333223576;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7895,6 +7895,8 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
         'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
+            '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml
