@@ -1,10 +1,14 @@
 The following persons contributed to Znuny:
 
 * 1soproni <csaba@sopron.hu>
+* akmet <akmet@users.noreply.github.com>
 * Alex Kantchev <ak@otrs.com>
 * Alex Mazur <alex.mazur@otrs.com>
 * Alexandre D. Rogoski <alexandre@exatati.com.br>
 * André Brás <andre.bras@otrs.com>
+* anonymous <unknown@anonymous>
+* arlecchino <kolbma@users.noreply.github.com>
+* b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * Balazs Ur <balazs.ur@otrs.com>
 * Balázs Úr <balazs.ur@otrs.com>
 * Belnet <info@belnet.be>
@@ -47,6 +51,8 @@ The following persons contributed to Znuny:
 * Jens Pfeifer <jp@znuny.com>
 * Johannes Hörburger <johannes.hoerburger@otrs.com>
 * Johannes Nickel <jn@znuny.com>
+* jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
+* juanmclavero <juanm.clavero@ibsalut.es>
 * Kai Herlemann <kh@znuny.com>
 * Kamil Furtek <kfurtek@dev.opgksoftware.com>
 * Keith Moore <tenareth@gmail.com>
@@ -58,7 +64,7 @@ The following persons contributed to Znuny:
 * Manuel Hecht <manuel.hecht@otrs.com>
 * Marc Bonsels <marc.bonsels@otrs.com>
 * Marc Nilius <marc.nilius@otrs.com>
-* MarcPahnke <89537707+MarcPahnke@users.noreply.github.com>
+* Marc Pahnke <89537707+MarcPahnke@users.noreply.github.com>
 * Marco Buchholz <marco.buchholz@otrs.com>
 * Marco Ferrante <marco@csita.unige.it>
 * Markus Esche <markus.esche@otrs.com>
@@ -68,6 +74,7 @@ The following persons contributed to Znuny:
 * Martin Gruner <martin.gruner@otrs.com>
 * Mathias Bräunling <mathias.braeunling@otrs.com>
 * Matthias Bethke <mb@znuny.com>
+* meisterheister <35762852+meisterheister@users.noreply.github.com>
 * Michael Tänzer <neo@nhng.de>
 * Michiel Beijen <michiel.beijen@otrs.com>
 * Milan Rakic <mrakic@s7designcreative.com>
@@ -98,7 +105,9 @@ The following persons contributed to Znuny:
 * Romain THERRAT <romain42@gmail.com>
 * Roy Kaldung <rk@znuny.com>
 * Rui Patinha <rui.patinha@otrs.com>
+* s7design <otrs@s7designcreative.com>
 * Sanjin Vik <svik@s7designcreative.com>
+* sergot <filip@sergot.pl>
 * Shawn Beasley <shawn.beasley@znuny.com>
 * Stefan Bedorf <stefan.bedorf@otrs.com>
 * Stefan Rother <stefan.rother@otrs.com>
@@ -109,27 +118,15 @@ The following persons contributed to Znuny:
 * Thomas Raith <thomas.raith@otrs.com>
 * Thomas Wouters <thomas@sijn.org>
 * Thorsten Eckel <te@znuny.com>
-* Tim Puettmanns <tim.puettmanns@maxence.de>
+* Tim Püttmanns <tim.puettmanns@maxence.de>
 * Timo Gurr <timo.gurr@gmail.com>
 * Torsten Thau <Torsten.Thau@cape-it.de>
 * Udo Bretz <udo.bretz@otrs.com>
 * Uwe Dieckmann <uwe.dieckmann@otrs.com>
+* vlascoder <vlascoder@gmail.com>
 * Walter Souto <walter.souto@saude.go.gov.br>
 * Wojciech Kuchta <klapi85@gmail.com>
 * Yuri Myasoedov <ymyasoedov@yandex.ru>
 * Ziggy Trotter <142500923+ZTrotter@users.noreply.github.com>
 * Znuny Weblate <do-not-reply@znuny.com>
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
-* akmet <akmet@users.noreply.github.com>
-* anonymous <unknown@anonymous>
-* arlecchino <kolbma@users.noreply.github.com>
-* b1-luettje <53084931+b1-luettje@users.noreply.github.com>
-* djurici <igor.djuric@muehlbauer.de>
-* jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
-* juanmclavero <juanm.clavero@ibsalut.es>
-* meisterheister <35762852+meisterheister@users.noreply.github.com>
-* s7design <otrs@s7designcreative.com>
-* sergot <filip@sergot.pl>
-* tipue <tim.puettmanns@maxence.de>
-* vlascoder <vlascoder@gmail.com>
-* vuckovicd <dusan.vuckovic@muehlbauer.de>
