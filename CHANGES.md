@@ -1,5 +1,6 @@
 # 6.5.15 2025-xx-xx
  - 2025-03-27 Added option ToAddressRegExp to postmaster filter ExternalTicketNumberRecognition.
+ - 2025-03-26 Added German message for ticket event notification "ticket email delivery failure".
  - 2025-03-25 Fixed bug - In AdminRoles comment display for roles is too short. Changed Truncation to 80.
  - 2025-03-20 Article data now also contains communication channel name instead of only the ID.
  - 2025-03-19 AdminSystemConfiguration: Addon name is no longer translated.
