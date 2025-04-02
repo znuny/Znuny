@@ -65,6 +65,15 @@ sub Run {
         }
     }
 
+    # check recipient (To)
+    if (
+        $Param{GetParam}->{To}
+        && $Param{JobConfig}->{ToAddressRegExp}
+        )
+    {
+        return 1 if $Param{GetParam}->{To} !~ m{$Param{JobConfig}->{ToAddressRegExp}}i;
+    }
+
     my $NumberRegExp = $Param{JobConfig}->{NumberRegExp};
 
     # search in the subject

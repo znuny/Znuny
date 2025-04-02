@@ -411,6 +411,60 @@ This is an update to incident by mail',
         },
         NewTicket => 2,
     },
+    {
+        Name =>
+            '#12 - Added option ToAddressRegExp - matching To',
+        Email => 'From: Sender <sender@example.com>
+To: Some Name <recipient@example2.com>
+Subject: An incident subject ' . $ExternalTicketID . '
+
+This is an update to incident by mail',
+        Check => {
+            "DynamicField_$FieldName" => $ExternalTicketID,
+        },
+        JobConfig => {
+            DynamicFieldName  => $FieldName,
+            FromAddressRegExp => '\\s*@example.com',
+            ToAddressRegExp   => '\\s*@example2.com',
+            Module            => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
+            Name              => 'Some Description',
+
+            NumberRegExp         => '(?:Some test\\s|incident subject\\s)(\\d.*)',
+            SearchInBody         => '0',
+            SearchInSubject      => '1',
+            SenderType           => 'system',
+            IsVisibleForCustomer => 1,
+            TicketStateTypes     => 'new;open',
+        },
+        NewTicket => 2,
+    },
+    {
+        Name =>
+            '#13 - Added option ToAddressRegExp - non-matching To',
+        Email => 'From: Sender <sender@example.com>
+To: Some Name <recipient@example999.com>
+Subject: An incident subject ' . $ExternalTicketID . '
+
+This is an update to incident by mail',
+        Check => {
+            "DynamicField_$FieldName" => undef,
+        },
+        JobConfig => {
+            DynamicFieldName  => $FieldName,
+            FromAddressRegExp => '\\s*@example.com',
+            ToAddressRegExp   => '\\s*@example2.com',
+            Module            => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
+            Name              => 'Some Description',
+
+            NumberRegExp         => '(?:Some test\\s|incident subject\\s)(\\d.*)',
+            SearchInBody         => '0',
+            SearchInSubject      => '1',
+            SenderType           => 'system',
+            IsVisibleForCustomer => 1,
+            TicketStateTypes     => 'new;open',
+        },
+        NewTicket => 1,
+    },
 );
 
 for my $Test (@Tests) {
@@ -456,6 +510,7 @@ for my $Test (@Tests) {
             Status => 'Successful',
         );
     }
+
     $Self->Is(
         $Return[0] || 0,
         $Test->{NewTicket},
