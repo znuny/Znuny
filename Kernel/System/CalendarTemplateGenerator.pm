@@ -101,7 +101,10 @@ sub NotificationEvent {
     # get system default language
     my $DefaultLanguage = $Kernel::OM->Get('Kernel::Config')->Get('DefaultLanguage') || 'en';
 
-    my $Languages = [ $Param{Recipient}->{UserLanguage}, $DefaultLanguage, 'en' ];
+    my $Languages = [ $DefaultLanguage, 'en' ];
+    if ( IsHashRefWithData( $Param{Recipient} ) && IsHashRefWithData( $Param{Recipient}->{UserLanguage} ) ) {
+        unshift @{$Languages}, $Param{Recipient}->{UserLanguage};
+    }
 
     my $Language;
     LANGUAGE:
@@ -302,7 +305,10 @@ sub _Replace {
     # cleanup
     $Param{Text} =~ s/$Tag.+?$End/-/gi;
 
-    my %Recipient = %{ $Param{Recipient} || {} };
+    my %Recipient;
+    if ( IsHashRefWithData( $Param{Recipient} ) ) {
+        %Recipient = %{ $Param{Recipient} || {} };
+    }
 
     # get user object
     my $UserObject = $Kernel::OM->Get('Kernel::System::User');
@@ -459,7 +465,7 @@ sub _Replace {
 
             next ATTRIBUTE if !IsArrayRefWithData( \@TeamNames );
 
-            # replace team ids with a comma seperated list of team names
+            # replace team ids with a comma separated list of team names
             $Replacement = join ', ', @TeamNames;
         }
 
@@ -486,7 +492,7 @@ sub _Replace {
 
             next ATTRIBUTE if !IsArrayRefWithData( \@UserNames );
 
-            # replace resource ids with a comma seperated list of team names
+            # replace resource ids with a comma separated list of team names
             $Replacement = join ', ', @UserNames;
         }
 

@@ -38,7 +38,7 @@ sub Run {
 
     my $UsageText = "<green>$ProductName</green> (<yellow>$ProductVersion</yellow>)\n\n";
     $UsageText .= "<yellow>Usage:</yellow>\n";
-    $UsageText .= " otrs.Console.pl command [options] [arguments]\n";
+    $UsageText .= " znuny.Console.pl command [options] [arguments]\n";
     $UsageText .= "\n<yellow>Options:</yellow>\n";
 
     OPTION:
@@ -89,7 +89,7 @@ Returns:
     my @Commands = (
         'Kernel::System::Console::Command::Help',
         'Kernel::System::Console::Command::List',
-        ...
+        # ...
     );
 
 =cut

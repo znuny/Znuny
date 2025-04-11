@@ -20,7 +20,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
+        my $CacheObject      = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
         my $HelperObject     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject       = $Kernel::OM->Get('Kernel::System::User');
         my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
 
         my $RandomID       = $HelperObject->GetRandomID();
@@ -100,7 +103,7 @@ EOS
 
         # Set user's time zone.
         my $UserTimeZone = 'Europe/Berlin';
-        $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
+        $UserObject->SetPreferences(
             Key    => 'UserTimeZone',
             Value  => $UserTimeZone,
             UserID => $TestUserID,
@@ -112,7 +115,7 @@ EOS
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminGenericInterfaceWebservice screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericInterfaceWebservice");
@@ -127,12 +130,10 @@ EOS
         $Selenium->find_element("//a[contains(\@href, 'WebserviceID=$WebserviceID')]")->VerifiedClick();
 
         # Click on 'Debugger' button.
-        $Selenium->find_element( "span .fa.fa-bug", 'css' )->VerifiedClick();
+        $Selenium->find_element( 'button#Debugger', 'css' )->VerifiedClick();
 
         # Check screen.
-        $Selenium->find_element( "table",             'css' );
-        $Selenium->find_element( "table thead tr th", 'css' );
-        $Selenium->find_element( "table tbody tr td", 'css' );
+        $Selenium->find_element( "table#RequestList", 'css' );
 
         for my $ID (
             qw(DeleteButton FilterType_Search FilterFromMonth FilterFromDay FilterFromYear FilterFromDayDatepickerIcon
@@ -146,26 +147,16 @@ EOS
 
         # Check breadcrumb on Debugger screen.
         my @Breadcrumbs = (
-            {
-                Text => 'Web Service Management',
-            },
-            {
-                Text => $WebserviceName,
-            },
-            {
-                Text => 'Debugger',
-            }
+            'Web Service Management',
+            $WebserviceName,
+            'Debugger',
         );
 
-        $Count = 1;
-        for my $Breadcrumb (@Breadcrumbs) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $Breadcrumb->{Text},
-                "Breadcrumb text '$Breadcrumb->{Text}' is found on screen"
+        for my $BreadcrumbText (@Breadcrumbs) {
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Verify CommunicationDetails are not visible.
@@ -187,7 +178,8 @@ EOS
         );
 
         # Click on it.
-        $Selenium->find_element( "Provider", 'link_text' )->click();
+        $Selenium->find_element( "table#RequestList a", 'css' )->click();
+
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && $("#CommunicationDetails:visible").length'
         );
@@ -278,7 +270,7 @@ EOS
         );
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Webservice' );
+        $CacheObject->CleanUp( Type => 'Webservice' );
     }
 );
 

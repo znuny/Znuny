@@ -16,8 +16,10 @@
                 </p>
                 <fieldset class="TableLike FixedLabelSmall Narrow">
 [% RenderBlockStart("LastViewParam") %]
-                    <label>[% Data.Key | html %]:</label>
-                    <p class="Value" title="[% Data.Value | html %]">[% Data.Value | html %]</p>
+                    <span>
+                        <label>[% Data.Key | html %]:</label>
+                        <p class="Value" title="[% Data.Value | html %]">[% Data.Value | html %]</p>
+                    </span>
                     <div class="Clear"></div>
 [% RenderBlockEnd("LastViewParam") %]
                 </fieldset>

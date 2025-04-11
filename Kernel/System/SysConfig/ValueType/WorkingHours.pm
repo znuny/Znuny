@@ -283,10 +283,10 @@ Extracts the effective value from a XML parsed setting.
             '1' => {
                 '1' => 'New Year\'s Day',
             },
-            ...
+            # ...
         },
         DefaultValue   => 'Product 5',      # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         Item           => [                 # (optional) XML parsed item
             {
                 'ValueType' => 'VacationDays',

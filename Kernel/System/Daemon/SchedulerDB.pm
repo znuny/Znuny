@@ -71,7 +71,7 @@ add a new task to scheduler task list
                                                             #   provided) that can exists at the same
                                                             #   time, value of 0 means unlimited
         Data => {                                           # data payload
-            ...
+            # ...
         },
     );
 
@@ -880,7 +880,7 @@ add a new task to scheduler future task list
                                                          #   that can exists at the same time,
                                                          #   value of 0 means unlimited
         Data => {                                        # data payload
-            ...
+            # ...
         },
     );
 
@@ -1810,9 +1810,9 @@ Returns:
         Type              => 'GenericInterface',
         LastExecutionTime => '2015-01-01 00:00:00',
         LockKey           => 'XYZ',
-        LockTime          => '2015-01-02 00:00:00'
-        CreateTime        => '2015-01-01 00:00:00'
-        ChangeTime        => '2015-01-02 00:00:00'
+        LockTime          => '2015-01-02 00:00:00',
+        CreateTime        => '2015-01-01 00:00:00',
+        ChangeTime        => '2015-01-02 00:00:00',
     );
 
 =cut
@@ -1875,9 +1875,9 @@ Returns:
             Type              => 'GenericInterface',
             LastExecutionTime => '2015-01-01 00:00:00',
             LockKey           => 'XYZ',
-            LockTime          => '2015-01-02 00:00:00'
-            CreateTime        => '2015-01-01 00:00:00'
-            ChangeTime        => '2015-01-02 00:00:00'
+            LockTime          => '2015-01-02 00:00:00',
+            CreateTime        => '2015-01-01 00:00:00',
+            ChangeTime        => '2015-01-02 00:00:00',
         },
         {
             TaskID            => 456,
@@ -1885,9 +1885,9 @@ Returns:
             Type              => 'GenericInterface',
             LastExecutionTime => '2015-01-01 00:00:00',
             LockKey           => 'XYZ',
-            LockTime          => '2015-01-02 00:00:00'
-            CreateTime        => '2015-01-01 00:00:00'
-            ChangeTime        => '2015-01-02 00:00:00'
+            LockTime          => '2015-01-02 00:00:00',
+            CreateTime        => '2015-01-01 00:00:00',
+            ChangeTime        => '2015-01-02 00:00:00',
         },
         # ...
     );
@@ -2002,7 +2002,7 @@ executes recurrent tasks like cron or generic agent tasks
                                                        #    table at the same time, value of 0 means
                                                        #    unlimited
         Data                   => {                    # data payload
-            ...
+            # ...
         },
     );
 

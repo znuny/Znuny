@@ -34,7 +34,6 @@ my $SupportBundleGeneratorObject = $Kernel::OM->Get('Kernel::System::SupportBund
 my $PackageObject                = $Kernel::OM->Get('Kernel::System::Package');
 my $CSVObject                    = $Kernel::OM->Get('Kernel::System::CSV');
 my $JSONObject                   = $Kernel::OM->Get('Kernel::System::JSON');
-my $RegistrationObject           = $Kernel::OM->Get('Kernel::System::Registration');
 my $SupportDataCollectorObject   = $Kernel::OM->Get('Kernel::System::SupportDataCollector');
 my $TempObject                   = $Kernel::OM->Get('Kernel::System::FileTemp');
 
@@ -51,7 +50,7 @@ $HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SupportDataCollector::DisablePlugins',
     Value => [
-        'Kernel::System::SupportDataCollector::Plugin::OTRS::PackageDeployment',
+        'Kernel::System::SupportDataCollector::Plugin::Znuny::PackageDeployment',
     ],
 );
 
@@ -82,7 +81,7 @@ else {
 }
 
 # create an ARCHIVE file on developer systems to continue working
-my $ArchiveGeneratorTool = $Home . '/bin/otrs.CheckSum.pl';
+my $ArchiveGeneratorTool = $Home . '/bin/znuny.CheckSum.pl';
 
 # if tool is not present we can't continue
 if ( !-e $ArchiveGeneratorTool ) {
@@ -417,59 +416,6 @@ for my $Test (@Tests) {
     }
 }
 
-# GenerateRegistrationInfo tests
-my %RegistrationInfo = $RegistrationObject->RegistrationDataGet();
-
-# execute function
-my ( $Content, $Filename ) = $SupportBundleGeneratorObject->GenerateRegistrationInfo();
-
-if (%RegistrationInfo) {
-    $Self->IsNot(
-        bytes::length( ${$Content} ) / ( 1024 * 1024 ),
-        0,
-        "GenerateRegistrationInfo() - The size of the RegistrationInfo.json is not 0",
-    );
-}
-
-# by encoding an empty string into JSON it will produce '{}' which is exactly 2 bytes
-else {
-    $Self->Is(
-        bytes::length( ${$Content} ),
-        2,
-        "GenerateRegistrationInfo() - The size of the  RegistrationInfo.json is 2",
-    );
-}
-$Self->Is(
-    $Filename,
-    'RegistrationInfo.json',
-    "GenerateRegistrationInfo() - Filename"
-);
-
-my $PerlStructureScalar = $JSONObject->Decode(
-    Data => ${$Content},
-);
-
-if (%RegistrationInfo) {
-    for my $Attribute (
-        qw(
-        FQDN OTRSVersion OSType OSVersion DatabaseVersion PerlVersion
-        Description SupportDataSending RegistrationKey APIKey State Type
-        )
-        )
-    {
-        $Self->IsNot(
-            $PerlStructureScalar->{$Attribute},
-            undef,
-            "GenerateRegistrationInfo() - $Attribute should not be undef",
-        );
-        $Self->IsNot(
-            $PerlStructureScalar->{$Attribute},
-            '',
-            "GenerateRegistrationInfo() - $Attribute should not be empty",
-        );
-    }
-}
-
 # GenerateSupportData tests
 my %OriginalResult = $SupportDataCollectorObject->Collect(
     WebTimeout => 40,
@@ -501,7 +447,7 @@ for my $Identifier (
 }
 
 # execute function
-( $Content, $Filename ) = $SupportBundleGeneratorObject->GenerateSupportData();
+my ( $Content, $Filename ) = $SupportBundleGeneratorObject->GenerateSupportData();
 
 if (%OriginalResult) {
     $Self->IsNot(
@@ -523,7 +469,7 @@ $Self->Is(
     "GenerateSupportData() - Filename"
 );
 
-$PerlStructureScalar = $JSONObject->Decode(
+my $PerlStructureScalar = $JSONObject->Decode(
     Data => ${$Content},
 );
 
@@ -693,7 +639,7 @@ my $TarObject = Archive::Tar->new();
 my $FileCount = $TarObject->read($TmpFilename);
 $Self->Is(
     $FileCount,
-    5,
+    4,
     "Generate() - The number of files",
 );
 my @FileList = $TarObject->get_files();
@@ -702,7 +648,7 @@ my @FileList = $TarObject->get_files();
 my %FileListLookup = map { $_->name() => 1 } sort @FileList;
 
 # check for files that must be in the tar file
-my @ExpectedFiles   = qw(InstalledPackages.csv RegistrationInfo.json SupportData.json);
+my @ExpectedFiles   = qw(InstalledPackages.csv SupportData.json);
 my $ApplicationFile = 'application.tar';
 if ( $Result->{Data}->{Filename} =~ m{\.gz} ) {
     $ApplicationFile .= '.gz';

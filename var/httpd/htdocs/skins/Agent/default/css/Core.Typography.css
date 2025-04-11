@@ -1,0 +1,45 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     Typography
+
+    typography:
+    - color
+    - Transform
+    - font-weight
+
+*/
+
+@media screen,projection,tv,handheld {
+
+    /* **************************************** Color **************************************** */
+    label.title {
+        padding: var(--padding-sm);
+        color: var(--gray-dark);
+    }
+
+    /* **************************************** Transform **************************************** */
+    .uppercase {
+        text-transform: uppercase;
+    }
+
+    /* **************************************** Font Weight **************************************** */
+    .bold {
+        font-weight: var(--bold);
+    }
+
+    .semi-bold {
+        font-weight: var(--semi-bold);
+    }
+
+    .regular {
+        font-weight: var(--normal);
+    }
+}

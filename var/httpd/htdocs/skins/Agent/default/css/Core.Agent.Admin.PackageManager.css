@@ -44,10 +44,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .IntroInstall {
-    background: #eee;
-    padding: 15px 20px;
-    margin-bottom: 10px;
-    line-height: 150%;
+    background: var(--main-bg-color);
+    padding: var(--padding-sm);
+    border-radius: var(--border-radius-xs);
+    line-height: 100%;
 }
 
 .IntroInstall.NotVerifiedPackage {
@@ -71,8 +71,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     margin-bottom: 5px;
 }
 
+.PackageRequired {
+    padding: var(--padding-sm) var(--padding-md);
+}
+
 .PackageRequired > li {
     margin-bottom: 10px;
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-sm);
 }
 
 .PackageRequired > li:last-child {
@@ -80,14 +87,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .PackageRequired > li > p {
-    padding: 3px 5px;
-    margin: 2px 0px 2px 28px;
+    border-radius: var(--border-radius-xxs);
+    padding: var(--padding-sm) var(--padding-md);
+    margin: 2px 0px 2px 35px;
     display: inline-block;
 }
 
 .PackageRequired > li h3.Heading {
     position: relative;
-    padding-left: 28px;
+    padding-left: 35px;
     font-size: 13px;
     margin-bottom: 0px;
 }

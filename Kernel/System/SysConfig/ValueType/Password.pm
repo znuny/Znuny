@@ -13,8 +13,6 @@ package Kernel::System::SysConfig::ValueType::Password;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 use parent qw(Kernel::System::SysConfig::BaseValueType);
 
 our @ObjectDependencies = (
@@ -57,7 +55,7 @@ Extracts the effective value from a XML parsed setting.
         Name           => 'SettingName',
         EffectiveValue => 'Product 6',      # (optional)
         DefaultValue   => 'Product 5',      # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         Item           => [                 # (optional) XML parsed item
             {
                 'ValueType' => 'Password',

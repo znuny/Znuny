@@ -20,7 +20,7 @@ Core.Agent.Admin = Core.Agent.Admin || {};
  * @description
  *      This namespace contains the special function for PostMasterFilter module.
  */
- Core.Agent.Admin.PostMasterFilter = (function (TargetNS) {
+Core.Agent.Admin.PostMasterFilter = (function (TargetNS) {
 
     /*
     * @name Init
@@ -76,7 +76,14 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 true,
                 [
                     {
-                        Class: 'Primary',
+                        Label: Core.Language.Translate("Cancel"),
+                        Type: 'Secondary',
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('#DeletePostMasterFilterDialog'));
+                        }
+                    },
+                    {
+                        Type: 'Warning',
                         Label: Core.Language.Translate("Confirm"),
                         Function: function() {
                             $('.Dialog .InnerContent .Center').text(Core.Language.Translate("Deleting the postmaster filter and its data. This may take a while..."));
@@ -86,19 +93,13 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                                 Core.Config.Get('Baselink'),
                                 $PostMasterFilterDelete.data('query-string'),
                                 function() {
-                                   Core.App.InternalRedirect({
-                                       Action: 'AdminPostMasterFilter'
-                                   });
+                                    Core.App.InternalRedirect({
+                                        Action: 'AdminPostMasterFilter'
+                                    });
                                 }
                             );
                         }
                     },
-                    {
-                        Label: Core.Language.Translate("Cancel"),
-                        Function: function () {
-                            Core.UI.Dialog.CloseDialog($('#DeletePostMasterFilterDialog'));
-                        }
-                    }
                 ]
             );
             return false;

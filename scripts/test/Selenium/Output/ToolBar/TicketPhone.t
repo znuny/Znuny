@@ -19,38 +19,44 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-
-        # get config object
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
         # enable tool bar AgentTicketPhone
         my %AgentTicketPhone = (
-            Action   => "AgentTicketPhone",
-            CssClass => "PhoneTicket",
-            Icon     => "fa fa-phone",
-            Link     => "Action=AgentTicketPhone",
-            Module   => "Kernel::Output::HTML::ToolBar::Link",
-            Name     => "New phone ticket",
-            Priority => "1020010",
+            AccessKey => "",
+            Action    => "AgentTicketPhone",
+            Block     => "ToolBarActions",
+            CssClass  => "PhoneTicket",
+            Icon      => "fa fa-phone",
+            Link      => "Action=AgentTicketPhone",
+            Module    => "Kernel::Output::HTML::ToolBar::Link",
+            Name      => "New phone ticket",
+            Priority  => "1020010",
         );
 
         $HelperObject->ConfigSettingChange(
-            Key   => 'Frontend::ToolBarModule###4-Ticket::AgentTicketPhone',
+            Key   => 'Frontend::ToolBarModule###140-Ticket::AgentTicketPhone',
             Value => \%AgentTicketPhone,
         );
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###4-Ticket::AgentTicketPhone',
+            Key   => 'Frontend::ToolBarModule###140-Ticket::AgentTicketPhone',
             Value => \%AgentTicketPhone
         );
 
-        # create test user and login
-        my $TestUserLogin = $HelperObject->TestUserCreate(
+        # Create test user.
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
+
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
 
         $Selenium->Login(
             Type     => 'Agent',

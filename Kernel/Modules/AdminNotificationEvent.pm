@@ -11,6 +11,7 @@ package Kernel::Modules::AdminNotificationEvent;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -567,7 +568,7 @@ sub Run {
     # ------------------------------------------------------------ #
     # delete
     # ------------------------------------------------------------ #
-    if ( $Self->{Subaction} eq 'Delete' ) {
+    elsif ( $Self->{Subaction} eq 'Delete' ) {
 
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
@@ -690,7 +691,7 @@ sub Run {
     # ------------------------------------------------------------ #
     # NotificationImport
     # ------------------------------------------------------------ #
-    if ( $Self->{Subaction} eq 'NotificationImport' ) {
+    elsif ( $Self->{Subaction} eq 'NotificationImport' ) {
 
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
@@ -712,7 +713,7 @@ sub Run {
         if ( !$NotificationImport->{Success} ) {
             my $Message = $NotificationImport->{Message}
                 || Translatable(
-                'Notifications could not be Imported due to a unknown error, please check OTRS logs for more information'
+                'Notifications could not be Imported due to a unknown error, please check Znuny logs for more information'
                 );
             return $LayoutObject->ErrorScreen(
                 Message => $Message,
@@ -767,9 +768,67 @@ sub Run {
         return $Output;
     }
 
-    # ------------------------------------------------------------
+    # ------------------------------------------------------------ #
+    # Add dynamic fields to ticket filter on notifications by AJAX
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'AddDynamicField' ) {
+        my $DynamicFieldID = $ParamObject->GetParam( Param => 'DynamicFieldID' );
+        my $SelectedValue  = $ParamObject->GetParam( Param => 'SelectedValue' );
+
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+
+        my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+            ID => $DynamicFieldID,
+        );
+
+        # get notification data
+        my %NotificationData;
+        my $NotificationID = $ParamObject->GetParam( Param => 'ID' ) || '';
+        if ($NotificationID) {
+            %NotificationData = $NotificationEventObject->NotificationGet(
+                ID => $NotificationID,
+            );
+        }
+        $NotificationData{Profile}   = $NotificationID;
+        $NotificationData{Subaction} = $Self->{Subaction};
+
+        my $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            LayoutObject       => $LayoutObject,
+            DefaultValue       => $DynamicFieldConfig->{Config}->{DefaultValue},
+            Profile            => \%NotificationData || {},
+        );
+
+        my $HTMLLabel       = $DynamicFieldHTML->{Label};
+        my $TranslatedLabel = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
+        my $CombinedLabel   = (
+            $TranslatedLabel eq $DynamicFieldConfig->{Name}
+            ? $TranslatedLabel
+            : $TranslatedLabel . ' (' . $DynamicFieldConfig->{Name} . ')'
+        );
+
+        $HTMLLabel =~ s{(.+)\Q$TranslatedLabel\E(.+)}{$1 $CombinedLabel $2}smx;
+
+        $DynamicFieldHTML->{Label} = $HTMLLabel;
+        $DynamicFieldHTML->{ID}    = $SelectedValue;
+
+        my $Output = $LayoutObject->JSONEncode(
+            Data => $DynamicFieldHTML,
+        );
+
+        # Send JSON response.
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $Output,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
+
+    # ------------------------------------------------------------ #
     # overview
-    # ------------------------------------------------------------
+    # ------------------------------------------------------------ #
     else {
         $Self->_Overview();
         my $Output = $LayoutObject->Header();
@@ -1031,54 +1090,105 @@ sub _Edit {
         );
     }
 
-    # create dynamic field HTML for set with historical data options
-    my $PrintDynamicFieldsSearchHeader = 1;
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
-    # cycle trough the activated Dynamic Fields for this screen
-    my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+    my @AddDynamicFields;
+    my %DynamicFieldsJS;
+
+    my $DynamicField = $DynamicFieldObject->DynamicFieldListGet(
         Valid      => 1,
         ObjectType => ['Ticket'],
     );
-
-    my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( @{$DynamicField} ) {
         next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
 
         # skip all dynamic fields that are not designed to be notification triggers
-        my $IsNotificationEventCondition = $BackendObject->HasBehavior(
+        my $IsNotificationEventCondition = $DynamicFieldBackendObject->HasBehavior(
             DynamicFieldConfig => $DynamicFieldConfig,
             Behavior           => 'IsNotificationEventCondition',
         );
 
         next DYNAMICFIELD if !$IsNotificationEventCondition;
 
-        # get field HTML
-        my $DynamicFieldHTML = $BackendObject->SearchFieldRender(
-            DynamicFieldConfig     => $DynamicFieldConfig,
-            Profile                => $Param{DynamicFieldValues} || {},
-            LayoutObject           => $LayoutObject,
-            ConfirmationCheckboxes => 1,
-            UseLabelHints          => 0,
+        # get search field preferences
+        my $SearchFieldPreferences = $DynamicFieldBackendObject->SearchFieldPreferences(
+            DynamicFieldConfig => $DynamicFieldConfig,
         );
 
-        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldHTML);
+        next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
 
-        if ($PrintDynamicFieldsSearchHeader) {
-            $LayoutObject->Block( Name => 'DynamicField' );
-            $PrintDynamicFieldsSearchHeader = 0;
+        my $Key = 'Search_DynamicField_' . $DynamicFieldConfig->{Name};
+
+        # Translate dynamic field label.
+        my $TranslatedLabel = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
+        my $CombinedLabel   = (
+            $TranslatedLabel eq $DynamicFieldConfig->{Name}
+            ? $TranslatedLabel
+            : $TranslatedLabel . ' (' . $DynamicFieldConfig->{Name} . ')'
+        );
+
+        # Save all dynamic fields for JS.
+        $DynamicFieldsJS{$Key} = {
+            ID   => $DynamicFieldConfig->{ID},
+            Text => $CombinedLabel,
+        };
+
+        # Decide if dynamic field go to add fields dropdown or selected fields area.
+        if ( defined $Param{Data}{$Key} ) {
+
+            # Get field HTML.
+            my $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                LayoutObject       => $LayoutObject,
+                Profile            => $Param{Data},
+            );
+
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldHTML);
+
+            my $HTMLLabel = $DynamicFieldHTML->{Label};
+            $HTMLLabel =~ s{(.+)\Q$TranslatedLabel\E(.+)}{$1 $CombinedLabel $2}smx;
+
+            $LayoutObject->Block(
+                Name => 'SelectedDynamicFields',
+                Data => {
+                    Label => $HTMLLabel,
+                    Field => $DynamicFieldHTML->{Field},
+                    ID    => $Key,
+                },
+            );
         }
-
-        # output dynamic field
-        $LayoutObject->Block(
-            Name => 'DynamicFieldElement',
-            Data => {
-                Label => $DynamicFieldHTML->{Label},
-                Field => $DynamicFieldHTML->{Field},
-            },
-        );
+        else {
+            push @AddDynamicFields, {
+                Key   => $Key,
+                Value => $CombinedLabel,
+            };
+        }
     }
+
+    @AddDynamicFields = sort { $a->{Value} cmp $b->{Value} } @AddDynamicFields;
+
+    my $DynamicFieldsStrg = $LayoutObject->BuildSelection(
+        PossibleNone => 1,
+        Data         => \@AddDynamicFields,
+        Name         => 'AddDynamicFields',
+        Multiple     => 0,
+        Class        => 'Modernize',
+    );
+
+    $LayoutObject->Block(
+        Name => 'AddDynamicFields',
+        Data => {
+            DynamicFieldsStrg => $DynamicFieldsStrg,
+        },
+    );
+
+    $LayoutObject->AddJSData(
+        Key   => 'DynamicFieldsJS',
+        Value => \%DynamicFieldsJS,
+    );
 
     # add rich text editor
     if ( $Param{RichText} ) {
@@ -1313,10 +1423,6 @@ sub _Edit {
     # set once per day checked value
     $Param{OncePerDayChecked} = ( $Param{Data}->{OncePerDay} ? 'checked="checked"' : '' );
 
-    my $OTRSBusinessObject      = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    my $OTRSBusinessIsInstalled = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-
-    # Third option is enabled only when OTRSBusiness is installed in the system.
     $Param{VisibleForAgentStrg} = $LayoutObject->BuildSelection(
         Data => [
             {
@@ -1327,11 +1433,6 @@ sub _Edit {
                 Key   => '1',
                 Value => Translatable('Yes'),
             },
-            {
-                Key      => '2',
-                Value    => Translatable('Yes, but require at least one active notification method.'),
-                Disabled => $OTRSBusinessIsInstalled ? 0 : 1,
-            }
         ],
         Name       => 'VisibleForAgent',
         Sort       => 'NumericKey',
@@ -1437,18 +1538,6 @@ sub _Edit {
                         },
                     );
                 }
-                else {
-
-                    # This trasnport needs to be active before use it.
-                    $LayoutObject->Block(
-                        Name => 'TransportRowNotActive',
-                        Data => {
-                            Transport     => $Transport,
-                            TransportName => $RegisteredTransports{$Transport}->{Name},
-                        },
-                    );
-                }
-
             }
 
         }

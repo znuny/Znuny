@@ -109,7 +109,7 @@ WARNING: This WSDL file is for development and testing purposes ONLY!
     </wsdl:binding>
     <wsdl:service name="GenericTimeAccounting">
         <wsdl:port name="GenericTimeAccounting_Port" binding="tns:GenericTimeAccounting_Binding">
-            <soap:address location="http://localhost/otrs/nph-genericinterface.pl/Webservice/TimeAccounting" />
+            <soap:address location="http://localhost/znuny/nph-genericinterface.pl/Webservice/TimeAccounting" />
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

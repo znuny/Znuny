@@ -35,7 +35,7 @@ if ( grep { $^V eq $_ } @BlacklistPerlVersions ) {
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
 my $Home   = $ConfigObject->Get('Home');
-my $Daemon = $Home . '/bin/otrs.Daemon.pl';
+my $Daemon = $Home . '/bin/znuny.Daemon.pl';
 
 # get current daemon status
 my $PreviousDaemonStatus = `$Daemon status`;

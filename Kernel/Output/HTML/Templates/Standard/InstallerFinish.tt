@@ -8,55 +8,56 @@
 # --
 
 [% RenderBlockStart("Finish") %]
-<div class="W950px SpacingTop SpacingBottom CenterBox">
+<div class="SpacingTop SpacingBottom CenterBox">
     <form action="[% Env("CGIHandle") %]" method="post">
         <input type="hidden" name="Action"    value="Installer">
         <input type="hidden" name="Subaction" value="Finish">
 
-        <div class="WidgetSimple">
+        <div class="WidgetSimple" id="WebInstallerBoxFinish">
             <div class="Header">
                 <h2>[% Translate(Data.Item) | html %] ([% Data.Step %])</h2>
             </div>
 
-            <div class="Content">
+            <div class="LayoutGrid Content">
                 <fieldset class="TableLike">
-
 [% RenderBlockStart("Restart") %]
                     <p>
-                        [% Translate("To be able to use OTRS you have to enter the following line in your command line (Terminal/Shell) as root.") | html %]
+                        [% Translate("To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.") | html %]
                     </p>
-                    <div class="Clear SpacingTop"></div>
 
-                    <label>[% Translate("Restart your webserver") | html %]:</label>
-                    <div class="Field Error">
-                        [% Data.Webserver %]
+                    <div class="field-wrapper">
+                        <label>[% Translate("Restart your webserver") | html %]</label>
+                        <div class="Field Error">
+                            [% Data.Webserver %]
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
                     <p class="SpacingTop">
-                        [% Translate("After doing so your OTRS is up and running.") | html %]
+                        [% Translate("After doing so your Znuny is up and running.") | html %]
                     </p>
-                    <div class="Clear SpacingTop"></div>
 [% RenderBlockEnd("Restart") %]
-                    <label>[% Translate("Start page") | html %]:</label>
-                    <div class="Field">
-                        <a href="http://[% Data.Host | html %]/[% Data.OTRSHandle %]/index.pl">
-                            http://[% Data.Host | html %]/[% Data.OTRSHandle %]/index.pl
-                        </a>
+                    <div class="card full-width">
+                        <label>[% Translate("Start page") | html %]</label>
+                        <div class="Field">
+                            <a href="http://[% Data.Host | html %]/[% Data.OTRSHandle %]/index.pl">
+                                http://[% Data.Host | html %]/[% Data.OTRSHandle %]/index.pl
+                            </a>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <label>[% Translate("User") | html %]:</label>
-                    <div class="Field">
-                        root@localhost
+                    <div class="card">
+                        <label>[% Translate("User") | html %]</label>
+                        <div class="Field">
+                            root@localhost
+                        </div>
                     </div>
-                    <div class="Clear"></div>
 
-                    <label>[% Translate("Password") | html %]:</label>
-                    <div class="Field">
-                        <span class="Emphasis">[% Data.Password | html %]</span>
+                    <div class="card">
+                        <label>[% Translate("Password") | html %]</label>
+                        <div class="Field">
+                            <span class="Emphasis">[% Data.Password | html %]</span>
+                        </div>
                     </div>
-                    <div class="Clear"></div>
                 </fieldset>
             </div>
         </div>

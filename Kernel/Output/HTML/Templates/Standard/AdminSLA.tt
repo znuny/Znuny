@@ -8,29 +8,8 @@
 # --
 
 [% RenderBlockStart("Overview") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("SLA Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('SLA Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% IF Data.SLAID %]
-        [% USE EditTitle = String(Translate("Edit SLA")) %]
-        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.SLAName ) }) %]
-    [% ELSIF Data.Subaction == "SLAEdit"  %]
-        [% BreadcrumbPath.push({ Name => Translate("Add SLA"),}) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
-
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
 [% RenderBlockStart("ActionList") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -38,16 +17,14 @@
             </div>
             <div class="Content">
                 <ul class="ActionList">
-
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
-
 [% RenderBlockStart("ActionAdd") %]
                     <li>
-                        <a class="CallForAction Fullsize Center" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SLAEdit">
+                        <a class="CallForAction btn-main btn-primary-ghost" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SLAEdit">
                             <span><i class="fa fa-plus-square"></i>[% Translate("Add SLA") | html %]</span>
                         </a>
                     </li>
@@ -74,21 +51,21 @@
             <div class='Content'>
                 <ul class='ActionList SpacingTop'>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminService' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminService' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Services') | html %]
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23SLA' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23SLA' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Configure SLA Visibility and Defaults') | html %]
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=TimeWorkingHours' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=TimeWorkingHours' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Configure Working Hours') | html %]
                             </span>
@@ -98,15 +75,36 @@
             </div>
         </div>
     </div>
-
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("SLA Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('SLA Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% IF Data.SLAID %]
+            [% USE EditTitle = String(Translate("Edit SLA")) %]
+            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.SLAName ) }) %]
+        [% ELSIF Data.Subaction == "SLAEdit"  %]
+            [% BreadcrumbPath.push({ Name => Translate("Add SLA"),}) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
 [% RenderBlockStart("OverviewList") %]
-            <div class="Header">
+            <div class="Header filter-items">
                 <h2>[% Translate("List") | html %]</h2>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <span class="show-valid">[% Translate("Show Valid") | html %]</span>
+                    <span class="show-all">[% Translate("Show All") | html %]</span>
+                </a>
             </div>
             <div class="Content">
-
                 <table class="DataTable" id="SLAs">
                     <thead>
                         <tr>
@@ -143,7 +141,6 @@
                 </table>
             </div>
 [% RenderBlockEnd("OverviewList") %]
-
 [% RenderBlockStart("SLAEdit") %]
             <div class="Header">
             [% IF !Data.SLAID %]
@@ -162,161 +159,187 @@
                         <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
                     [% END %]
                     <fieldset class="TableLike">
-
-                        <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("SLA") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
-                            <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("SLA") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Name" id="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="200"/>
+                                <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
                         [% IF Data.IsITSMInstalled %]
-                            <label for="TypeIDs">[% Translate("Type") | html %]:</label>
-                            <div class="Field">
-                                [% Data.TypeOptionStrg %]
+                            <div class="field-wrapper">
+                                <label for="TypeIDs">[% Translate("Type") | html %]</label>
+                                <div class="Field">
+                                    [% Data.TypeOptionStrg %]
+                                </div>
                             </div>
-                            <div class="Clear"></div>
                         [% END %]
 
-                        <label for="ServiceIDs">[% Translate("Service") | html %]:</label>
-                        <div class="Field">
-                            [% Data.ServiceOptionStrg %]
+                        <div class="field-wrapper">
+                            <label for="ServiceIDs">[% Translate("Service") | html %]</label>
+                            <div class="Field">
+                                [% Data.ServiceOptionStrg %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="Calendar">[% Translate("Calendar") | html %]:</label>
-                        <div class="Field">
-                            [% Data.CalendarOptionStrg %]
+                        <div class="field-wrapper">
+                            <label for="Calendar">[% Translate("Calendar") | html %]</label>
+                            <div class="Field">
+                                [% Data.CalendarOptionStrg %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
+                        <div class="Field single-row-inputs">
+                            <div class="field-wrapper">
+                                <label for="FirstResponseTime">[% Translate("Escalation - first response time") | html %] ([% Translate("minutes") | html %])</label>
+                                <input type="text" name="FirstResponseTime" id="FirstResponseTime" value="[% Data.FirstResponseTime | html %]" class="W50px Validate_Number" maxlength="10"/>
+                                <div id="FirstResponseTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="FirstResponseNotify">[% Translate("Notify by") | html %]</label>
+                                [% Data.FirstResponseNotifyOptionStrg %]
+                            </div>
+                            <div class="field-wrapper FieldExplanation">
+                                <p class="FieldExplanation">
+                                    [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                </p>
+                            </div>
+                        </div>
 
-                        <label for="FirstResponseTime">[% Translate("Escalation - first response time") | html %] ([% Translate("minutes") | html %]):</label>
-                        <div class="Field">
-                            <input type="text" name="FirstResponseTime" id="FirstResponseTime" value="[% Data.FirstResponseTime | html %]" class="W50px Validate_Number" maxlength="10"/>
-                            <div id="FirstResponseTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
-                            (<label for="FirstResponseNotify">[% Translate("Notify by") | html %]</label> [% Data.FirstResponseNotifyOptionStrg %])
-                            <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
-                            </p>
+                        <div class="Field single-row-inputs">
+                            <div class="field-wrapper">
+                                <label for="UpdateTime">[% Translate("Escalation - update time") | html %] ([% Translate("minutes") | html %])</label>
+                                <input type="text" name="UpdateTime" id="UpdateTime" value="[% Data.UpdateTime | html %]" class="W50px Validate_Number" maxlength="10"/>
+                                <div id="UpdateTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="UpdateNotify">[% Translate("Notify by") | html %]</label>
+                                [% Data.UpdateNotifyOptionStrg %]
+                            </div>
+                            <div class="field-wrapper FieldExplanation">
+                                <p class="FieldExplanation">
+                                    [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                </p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="UpdateTime">[% Translate("Escalation - update time") | html %] ([% Translate("minutes") | html %]):</label>
-                        <div class="Field">
-                            <input type="text" name="UpdateTime" id="UpdateTime" value="[% Data.UpdateTime | html %]" class="W50px Validate_Number" maxlength="10"/>
-                            <div id="UpdateTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
-                            (<label for="UpdateNotify">[% Translate("Notify by") | html %]</label> [% Data.UpdateNotifyOptionStrg %])
-                            <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
-                            </p>
+                        <div class="Field single-row-inputs">
+                            <div class="field-wrapper">
+                                <label for="SolutionTime">[% Translate("Escalation - solution time") | html %] ([% Translate("minutes") | html %])</label>
+                                <input type="text" name="SolutionTime" id="SolutionTime" value="[% Data.SolutionTime | html %]" class="W50px Validate_Number" maxlength="10"/>
+                                <div id="SolutionTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
+                            </div>
+                            <div class="field-wrapper">
+                                <label for="SolutionNotify">[% Translate("Notify by") | html %]</label> [% Data.SolutionNotifyOptionStrg %]
+                            </div>
+                            <div class="field-wrapper FieldExplanation">
+                                <p class="FieldExplanation">
+                                    [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                </p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
-
-                        <label for="SolutionTime">[% Translate("Escalation - solution time") | html %] ([% Translate("minutes") | html %]):</label>
-                        <div class="Field">
-                            <input type="text" name="SolutionTime" id="SolutionTime" value="[% Data.SolutionTime | html %]" class="W50px Validate_Number" maxlength="10"/>
-                            <div id="SolutionTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
-                            (<label for="SolutionNotify">[% Translate("Notify by") | html %]</label> [% Data.SolutionNotifyOptionStrg %])
-                            <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
-                            </p>
-                        </div>
-                        <div class="Clear"></div>
 
                         [% IF Data.IsITSMInstalled %]
-                            <label for="MinTimeBetweenIncidents">[% Translate("Minimum Time Between Incidents") | html %] ([% Translate("minutes") | html %]):</label>
-                            <div class="Field">
-                                <input type="text" name="MinTimeBetweenIncidents" id="MinTimeBetweenIncidents" value="[% Data.MinTimeBetweenIncidents | html %]" class="W25pc Validate_Number" maxlength="15"/>
-                                <div id="MinTimeBetweenIncidentsError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
+                            <div class="field-wrapper">
+                                <label for="MinTimeBetweenIncidents">[% Translate("Minimum Time Between Incidents") | html %] ([% Translate("minutes") | html %])</label>
+                                <div class="Field">
+                                    <input type="text" name="MinTimeBetweenIncidents" id="MinTimeBetweenIncidents" value="[% Data.MinTimeBetweenIncidents | html %]" class="W25pc Validate_Number" maxlength="15"/>
+                                    <div id="MinTimeBetweenIncidentsError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
                         [% END %]
 
-                        <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
-                        <div class="Field">
-                            [% Data.ValidOptionStrg %]
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]</label>
+                            <div class="Field">
+                                [% Data.ValidOptionStrg %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="Comment">[% Translate("Comment") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="W50pc" maxlength="250"/>
+                        <div class="field-wrapper">
+                            <label for="Comment">[% Translate("Comment") | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="Comment" id="Comment" value="[% Data.Comment | html %]" class="W50pc" maxlength="250"/>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockStart("SLAItem") %]
 [% RenderBlockStart("InputKey") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W50pc"/>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W50pc"/>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("InputKey") %]
 [% RenderBlockStart("Input") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W50pc"/>
-                            <p class="FieldExplanation">
-                                [% Translate(Data.Desc) | html %]
-                            </p>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                            <div class="Field">
+                                <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" class="W50pc"/>
+                                <p class="FieldExplanation">
+                                    [% Translate(Data.Desc) | html %]
+                                </p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("Input") %]
 [% RenderBlockStart("TextArea") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
-                        <div class="Field">
-                            <textarea name="[% Data.Name | html %]" id="[% Data.Name | html %]" rows="[% Data.Rows | html %]" cols="[% Data.Cols | html %]">[% Data.SelectedID | html %]</textarea>
-                            <p class="FieldExplanation">
-                                [% Translate(Data.Desc) | html %]
-                            </p>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
+                            <div class="Field">
+                                <textarea name="[% Data.Name | html %]" id="[% Data.Name | html %]" rows="[% Data.Rows | html %]" cols="[% Data.Cols | html %]">[% Data.SelectedID | html %]</textarea>
+                                <p class="FieldExplanation">
+                                    [% Translate(Data.Desc) | html %]
+                                </p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
-
 [% RenderBlockEnd("TextArea") %]
 [% RenderBlockStart("Option") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
-                        <div class="Field">
-                            [% Data.Option %]
-                            <p class="FieldExplanation">
-                                [% Translate(Data.Desc) | html %]
-                            </p>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                [% Data.Option %]
+                                <p class="FieldExplanation">
+                                    [% Translate(Data.Desc) | html %]
+                                </p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("Option") %]
 [% RenderBlockStart("Upload") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
-                        <div class="Field">
-                            <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="file" class="fixed"/>
-                            <a href="">[% Data.Filename | html %]</a>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                <input name="[% Data.Name | html %]" id="[% Data.Name | html %]" type="file" class="fixed"/>
+                                <a href="">[% Data.Filename | html %]</a>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("Upload") %]
 [% RenderBlockStart("Password") %]
-                        <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
-                        <div class="Field">
-                            <input type="password" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="" class="W50pc"/>
+                        <div class="field-wrapper">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]</label>
+                            <div class="Field">
+                                <input type="password" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="" class="W50pc"/>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 [% RenderBlockEnd("Password") %]
 [% RenderBlockEnd("SLAItem") %]
-                        <div class="Field SpacingTop">
-                            [% IF Data.SLAID %]
-                                <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                                [% Translate("or") | html %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                            [% ELSE %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% END %]
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                                [% IF Data.SLAID %]
+                                    <button class="CallForAction Primary btn-primary-ghost btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% ELSE %]
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% END %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
                     </fieldset>
                 </form>
             </div>
 [% RenderBlockEnd("SLAEdit") %]
         </div>
     </div>
-    <div class="Clear"></div>
 </div>
 [% RenderBlockEnd("Overview") %]

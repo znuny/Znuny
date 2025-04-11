@@ -20,9 +20,10 @@ $Selenium->RunTest(
 
         my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
 
         # Load sample XML file.
-        my $Directory = $Kernel::OM->Get('Kernel::Config')->Get('Home')
+        my $Directory = $ConfigObject->Get('Home')
             . '/scripts/test/sample/SysConfig/XML/AdminSystemConfiguration';
 
         my $XMLLoaded = $SysConfigObject->ConfigurationXML2DB(
@@ -60,7 +61,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to 'ExampleAoA' setting and add to favourites.
         $Selenium->VerifiedGet(

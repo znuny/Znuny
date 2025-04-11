@@ -150,8 +150,20 @@ sub divideup {
         # Set pseudo UNIX From line
         $block->[0] =  'MAILER-DAEMON Tue Feb 11 00:00:00 2014';
     }
-
     $block->[1] .= "\n" unless $block->[1] =~ /\n\z/;
+
+    for my $e ('image/', 'application/', 'text/html') {
+        # https://github.com/sisimai/p5-sisimai/issues/492, Reduce email size
+        my $p0 = 0;
+        my $p1 = 0;
+        my $ep = $e eq 'text/html' ? '</html>' : "--\n";
+        while(1) {
+            # Remove each part from "Content-Type: image/..." to "--\n" (the end of each boundary)
+            $p0 = index($block->[2], 'Content-Type: '.$e, $p0); last if $p0 < 0;
+            $p1 = index($block->[2], $ep, $p0 + 32);            last if $p1 < 0;
+            substr($block->[2], $p0, $p1 - $p0, '');
+        }
+    }
     $block->[2] .= "\n";
     return $block;
 }
@@ -246,7 +258,7 @@ sub parse {
     # Decode BASE64 Encoded message body
     my $mesgformat = lc($mailheader->{'content-type'} || '');
     my $ctencoding = lc($mailheader->{'content-transfer-encoding'} || '');
-    if( index($mesgformat, 'text/plain') == 0 || index($mesgformat, 'text/html') == 0 ) {
+    if( index($mesgformat, 'text/') == 0 ) {
         # Content-Type: text/plain; charset=UTF-8
         if( $ctencoding eq 'base64' ) {
             # Content-Transfer-Encoding: base64

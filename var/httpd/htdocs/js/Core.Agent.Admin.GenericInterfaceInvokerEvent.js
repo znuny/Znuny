@@ -123,7 +123,7 @@ Core.Agent.Admin.GenericInterfaceInvokerEvent= (function (TargetNS) {
      *      This function shows a confirmation dialog with 2 buttons.
      */
     TargetNS.GetConditionConfig = function ($Conditions) {
-         var Conditions = {},
+        var Conditions = {},
             ConditionKey;
 
         if (!$Conditions.length) {
@@ -172,13 +172,14 @@ Core.Agent.Admin.GenericInterfaceInvokerEvent= (function (TargetNS) {
             [
                 {
                     Label: Core.Language.Translate('Cancel'),
+                    Type: 'Secondary',
                     Function: function () {
                         Core.UI.Dialog.CloseDialog($('#DeleteDialog'));
                     }
                 },
-
                 {
                     Label: Core.Language.Translate('Delete'),
+                    Type: 'Warning',
                     Function: function () {
                         var Data = {
                             Action: 'AdminGenericInterfaceInvokerEvent',

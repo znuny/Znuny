@@ -132,7 +132,7 @@ returns:
 
     %SystemAddress = (
         ID         => 1,
-        Name       => 'info@example.com'
+        Name       => 'info@example.com',
         Realname   => 'Hotline',
         QueueID    => 123,
         Comment    => 'some comment',
@@ -545,15 +545,6 @@ sub SystemAddressLookup {
 
         my %SystemAddressesReverse = reverse %SystemAddresses;
         $ReturnData = $SystemAddressesReverse{$Value};
-    }
-
-    # check if data exists
-    if ( !defined $ReturnData ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => "No $Key for $Value found!",
-        );
-        return;
     }
 
     return $ReturnData;

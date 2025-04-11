@@ -190,7 +190,7 @@ Core.Agent.Admin.GenericInterfaceWebserviceHistory = (function (TargetNS) {
             [
                 {
                     Label: Core.Language.Translate('Cancel'),
-                    Class: 'Primary',
+                    Type: 'Secondary',
                     Function: function () {
                         Core.UI.Dialog.CloseDialog($('#RollbackDialog'));
                     }

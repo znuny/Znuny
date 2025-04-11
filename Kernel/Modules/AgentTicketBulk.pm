@@ -594,13 +594,13 @@ sub Run {
                 qw(ServiceID OwnerID Owner ResponsibleID Responsible PriorityID Priority QueueID Queue Subject
                 Body IsVisibleForCustomer TypeID StateID State MergeToSelection MergeTo LinkTogether
                 EmailSubject EmailBody EmailTimeUnits
-                LinkTogetherParent Unlock MergeToChecked MergeToOldestChecked)
+                LinkTogetherParent Unlock MergeToChecked MergeToOldestChecked MarkTicketsAsSeen MarkTicketsAsUnseen)
                 )
             {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key ) || '';
             }
 
-            for my $Key (qw(TimeUnits)) {
+            for my $Key (qw(TimeUnits Watch)) {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
             }
 
@@ -1317,6 +1317,66 @@ sub Run {
                         );
                     }
                 }
+
+                # watch or unwatch tickets
+                if ( $GetParam{'Watch'} eq '1' ) {
+                    $Result = $TicketObject->TicketWatchSubscribe(
+                        TicketID    => $TicketID,
+                        WatchUserID => $Self->{UserID},
+                        UserID      => $Self->{UserID},
+                    );
+
+                    if ( !$Result ) {
+                        push @NonUpdatedTickets, $Ticket{TicketNumber};
+                    }
+                }
+                elsif ( $GetParam{'Watch'} eq '0' ) {
+                    $Result = $TicketObject->TicketWatchUnsubscribe(
+                        TicketID    => $TicketID,
+                        WatchUserID => $Self->{UserID},
+                        UserID      => $Self->{UserID},
+                    );
+
+                    if ( !$Result ) {
+                        push @NonUpdatedTickets, $Ticket{TicketNumber};
+                    }
+                }
+
+                if ( $GetParam{'MarkTicketsAsSeen'} || $GetParam{'MarkTicketsAsUnseen'} ) {
+                    my $TicketActionFunction  = 'TicketFlagDelete';
+                    my $ArticleActionFunction = 'ArticleFlagDelete';
+
+                    if ( $GetParam{'MarkTicketsAsSeen'} ) {
+                        $TicketActionFunction  = 'TicketFlagSet';
+                        $ArticleActionFunction = 'ArticleFlagSet';
+                    }
+
+                    my @ArticleIDs = $ArticleObject->ArticleIndex(
+                        TicketID => $TicketID,
+                    );
+
+                    ARTICLEID:
+                    for my $ArticleID ( sort @ArticleIDs ) {
+
+                        # article flag
+                        my $Success = $ArticleObject->$ArticleActionFunction(
+                            TicketID  => $TicketID,
+                            ArticleID => $ArticleID,
+                            Key       => 'Seen',
+                            Value     => 1,                 # irrelevant in case of delete
+                            UserID    => $Self->{UserID},
+                        );
+                    }
+
+                    # ticket flag
+                    $TicketObject->$TicketActionFunction(
+                        TicketID => $TicketID,
+                        Key      => 'Seen',
+                        Value    => 1,                      # irrelevant in case of delete
+                        UserID   => $Self->{UserID},
+                    );
+                }
+
                 $ActionFlag = 1;
             }
             $Counter++;
@@ -1735,6 +1795,61 @@ sub _Mask {
         Data       => $ConfigObject->Get('YesNoOptions'),
         Name       => 'Unlock',
         SelectedID => $Param{Unlock} // 1,
+        Class      => 'Modernize',
+    );
+
+# Ticket::WatcherGroup - Enables or disables the ticket watcher feature, to keep track of tickets without being the owner nor the responsible.
+    my @WatcherGroups = @{ $ConfigObject->Get('Ticket::WatcherGroup') // [] };
+    my $BulkWatch     = 0;
+
+    # General permission via config switch to use ticket watcher.
+    if ( $ConfigObject->Get('Ticket::Watcher') ) {
+        $BulkWatch = 1;
+    }
+
+    # Ticket watcher via group.
+    elsif (@WatcherGroups) {
+        my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+        GROUP:
+        for my $Group (@WatcherGroups) {
+            my $HasPermission = $GroupObject->PermissionCheck(
+                UserID    => $Self->{UserID},
+                GroupName => $Group,
+                Type      => 'rw',
+            );
+            next GROUP if !$HasPermission;
+
+            $BulkWatch = 1;
+            last GROUP;
+        }
+    }
+
+    if ($BulkWatch) {
+        $Param{WatchYesNoOption} = $LayoutObject->BuildSelection(
+            Data         => $ConfigObject->Get('YesNoOptions'),
+            Name         => 'Watch',
+            PossibleNone => 1,
+            SelectedID   => $Param{Watch} // '',
+            Class        => 'Modernize',
+        );
+
+        $LayoutObject->Block(
+            Name => 'Watch',
+            Data => \%Param,
+        );
+    }
+
+    $Param{MarkTicketsAsSeenOption} = $LayoutObject->BuildSelection(
+        Data       => $ConfigObject->Get('YesNoOptions'),
+        Name       => 'MarkTicketsAsSeen',
+        SelectedID => $Param{MarkTicketsAsSeen} // 0,
+        Class      => 'Modernize',
+    );
+
+    $Param{MarkTicketsAsUnseenOption} = $LayoutObject->BuildSelection(
+        Data       => $ConfigObject->Get('YesNoOptions'),
+        Name       => 'MarkTicketsAsUnseen',
+        SelectedID => $Param{MarkTicketsAsUnseen} // 0,
         Class      => 'Modernize',
     );
 

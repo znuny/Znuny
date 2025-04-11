@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+    <Setting Name="DynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - DynamicField.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="DynamicField" ValueRegex="">ProcessManagementProcessID</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Group" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - Group.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Group" ValueRegex="">admin</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Priority" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - Priority.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Priority" ValueRegex="">3 normal</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Queue" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - Queue.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Queue" ValueRegex="">Junk</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Role" Required="0" Valid="0">
+        <Description Translatable="1">Entity test - Role.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Role" ValueRegex="">admin</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Service" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - Service.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Service" ValueRegex="">Service 1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="SLA" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - SLA.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="SLA" ValueRegex="">SLA 1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="State" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - State.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="State" ValueRegex="">open</Item>
+        </Value>
+    </Setting>
+    <Setting Name="SystemAddress" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - SystemAddress.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="SystemAddress" ValueRegex="">znuny@localhost</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Type" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - Type.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Type" ValueRegex="">Unclassified</Item>
+        </Value>
+    </Setting>
+    <Setting Name="User" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - User.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="User" ValueRegex="">root@localhost</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Valid" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - Valid.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Valid" ValueRegex="">valid</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Webservice" Required="0" Valid="1">
+        <Description Translatable="1">Entity test - Webservice.</Description>
+        <Navigation>Development::SysConfig::ValueType::Entity</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Webservice" ValueRegex="">OutOfOffice</Item>
+        </Value>
+    </Setting>
+</otrs_config>

@@ -60,10 +60,10 @@ sub new {
 collect system data
 
     my %Result = $SupportDataCollectorObject->Collect(
-        UseCache   => 1,    # (optional) to get data from cache if any
-        WebTimeout => 60,   # (optional)
-        Debug      => 1,    # (optional)
-        Hostname   => 'my.test.host:8080' # (optional, for testing purposes)
+        UseCache   => 1,                    # (optional) to get data from cache if any
+        WebTimeout => 60,                   # (optional)
+        Debug      => 1,                    # (optional)
+        Hostname   => 'my.test.host:8080'   # (optional, for testing purposes)
     );
 
     returns in case of error
@@ -82,7 +82,7 @@ collect system data
                 Identifier  => 'Kernel::System::SupportDataCollector::OTRS::Version',
                 DisplayPath => 'OTRS',
                 Status      => $StatusOK,
-                Label       => 'OTRS Version'
+                Label       => 'OTRS Version',
                 Value       => '3.3.2',
                 Message     => '',
             },
@@ -90,7 +90,7 @@ collect system data
                 Identifier  => 'Kernel::System::SupportDataCollector::Apache::mod_perl',
                 DisplayPath => 'OTRS',
                 Status      => $StatusProblem,
-                Label       => 'mod_perl usage'
+                Label       => 'mod_perl usage',
                 Value       => '0',
                 Message     => 'Please enable mod_perl to speed up OTRS.',
             },
@@ -98,7 +98,7 @@ collect system data
                 Identifier       => 'Some::Identifier',
                 DisplayPath      => 'SomePath',
                 Status           => $StatusOK,
-                Label            => 'Some Label'
+                Label            => 'Some Label',
                 Value            => '0',
                 MessageFormatted => 'Some \n Formatted \n\t Text.',
             },
@@ -461,6 +461,21 @@ sub CleanupAsynchronous {
     }
 
     return 1;
+}
+
+=head2 DeleteCache()
+
+Delete the cache of collected data to enable collecting anew.
+
+    $SupportDataCollectorObject->DeleteCache();
+
+=cut
+
+sub DeleteCache {
+    return $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+        Type => 'SupportDataCollector',
+        Key  => 'DataCollect',
+    );
 }
 
 =head1 TERMS AND CONDITIONS

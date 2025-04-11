@@ -8,29 +8,26 @@
 # --
 
 <fieldset class="TableLike FixedLabelSmall">
-
 [% RenderBlockStart("ContentSmallCustomerUserInformationRow") %]
-
 [% RenderBlockStart("ContentSmallCustomerUserInformationRowText") %]
-    <label>[% Translate(Data.Label) | html %]:</label>
-    <p class="Field FixedValueSmall">[% Data.Value | html %]
+    <span>
+        <label>[% Translate(Data.Label) | html %]:</label>
+        <p class="Field FixedValueSmall">[% Data.Value | html %]
 [% RenderBlockStart("ContentSmallCustomerUserInvalid") %]
-        <em class="Error">[% Translate("Note: Customer User is invalid!") | html %]</em>
+            <em class="Error">[% Translate("Note: Customer User is invalid!") | html %]</em>
 [% RenderBlockEnd("ContentSmallCustomerUserInvalid") %]
-    </p>
-    <div class="Clear"></div>
+        </p>
+    </span>
 [% RenderBlockEnd("ContentSmallCustomerUserInformationRowText") %]
-
 [% RenderBlockStart("ContentSmallCustomerUserInformationRowLink") %]
-    <label>[% Translate(Data.Label) | html %]:</label>
-    <div class="Field">
-        <a href="[% Data.URL | Interpolate %]" target="[% Data.Target | html %]">
-            [% Data.Value | html %]
-        </a>
-    </div>
-    <div class="Clear"></div>
+    <span>
+        <label>[% Translate(Data.Label) | html %]:</label>
+        <div class="Field">
+            <a href="[% Data.URL | Interpolate %]" target="[% Data.Target | html %]">
+                [% Data.Value | html %]
+            </a>
+        </div>
+    </span>
 [% RenderBlockEnd("ContentSmallCustomerUserInformationRowLink") %]
-
 [% RenderBlockEnd("ContentSmallCustomerUserInformationRow") %]
-
 </fieldset>

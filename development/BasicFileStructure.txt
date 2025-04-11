@@ -1,7 +1,5 @@
 Basic file structure
 
-- Kernel/Config/Files/CloudServices.xml
-    * Replaced, with a corresponding file in Kernel/Config/Files/XML.
 - Kernel/Config/Files/Daemon.xml
     * Replaced, with a corresponding file in Kernel/Config/Files/XML.
 - Kernel/Config/Files/Framework.xml
@@ -13,8 +11,6 @@ Basic file structure
 - Kernel/Config/Files/Ticket.xml
     * Replaced, with a corresponding file in Kernel/Config/Files/XML.
 
-- Kernel/Config/Files/XML/CloudServices.xml
-    * New. SysConfig sources, modified and beautified
 - Kernel/Config/Files/XML/Daemon.xml
     * New. SysConfig sources, modified and beautified
 - Kernel/Config/Files/XML/Framework.xml

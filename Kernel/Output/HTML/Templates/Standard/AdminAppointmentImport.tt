@@ -7,38 +7,22 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-
-    <h1 class="InvisibleText">[% Translate("Appointment Import") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Calendar Management'),
-                Link => 'AdminAppointmentCalendarManage',
-            },
-            {
-                Name => Translate('Import Appointments'),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
             </div>
             <div class="Content">
-[% IF Data.ModulePermissions.AdminAppointmentCalendarManage %]
+            [% IF Data.ModulePermissions.AdminAppointmentCalendarManage %]
                 <ul class="ActionList">
                     <li>
-                        <a id="Back" href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage" class="CallForAction Fullsize Center" title="[% Translate("Go back") | html %]">
+                        <a id="Back" href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage" class="CallForAction btn-main btn-primary-ghost" title="[% Translate("Go back") | html %]">
                             <span><i class="fa fa-caret-left"></i>[% Translate("Go back") | html %]</span>
                         </a>
                     </li>
                 </ul>
-[% END %]
+            [% END %]
             </div>
         </div>
         <div class="WidgetSimple">
@@ -57,48 +41,69 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Appointment Import") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Calendar Management'),
+                    Link => 'AdminAppointmentCalendarManage',
+                },
+                {
+                    Name => Translate('Import Appointments'),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Import Appointments") | html %]</h2>
             </div>
 
             <div class="Content">
-                <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits padding-lg">
                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                     <input type="hidden" name="Subaction" value="Import"/>
                     <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
                     <fieldset class="TableLike">
-                        <label for="FileUpload" class="Mandatory"><span class="Marker">*</span>[% Translate("Upload") | html %]:</label>
-                        <div class="Field">
-                            <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
-                            <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <div class="field-wrapper">
+                            <label for="FileUpload" class="Mandatory"><span class="Marker">*</span>[% Translate("Upload") | html %]</label>
+                            <div class="Field">
+                                <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
+                                <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            </div>
                         </div>
 
-                        <label for="CalendarID" class="Mandatory"><span class="Marker">*</span>[% Translate("Calendar") | html %]:</label>
-                        <div class="Field">
-                            [% Data.Calendar %]
-                            <div id="CalendarIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="CalendarIDServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <div class="field-wrapper">
+                            <label for="CalendarID" class="Mandatory"><span class="Marker">*</span>[% Translate("Calendar") | html %]</label>
+                            <div class="Field">
+                                [% Data.Calendar %]
+                                <div id="CalendarIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="CalendarIDServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            </div>
                         </div>
 
-                        <label for="UpdateExistingAppointments">[% Translate("Update existing appointments?") | html %]</label>
-                        <div class="Field">
-                            <input type="checkbox" value="1" name="UpdateExistingAppointments" id="UpdateExistingAppointments">
-                            <p class="FieldExplanation">
-                                [% Translate("All existing appointments in the calendar with same UniqueID will be overwritten.") | html %]
-                            </p>
+                        <div class="field-wrapper">
+                            <div class="Field CheckboxContainer">
+                                <input type="checkbox" value="1" name="UpdateExistingAppointments" id="UpdateExistingAppointments">
+                                <label for="UpdateExistingAppointments">[% Translate("Update existing appointments?") | html %]</label>
+                            </div>
+                             <p class="FieldExplanation">[% Translate("All existing appointments in the calendar with same UniqueID will be overwritten.") | html %]</p>
                         </div>
-                        <div class="Field SpacingTop">
-                            <button class="Primary CallForAction" type="submit" value="[% Translate("Upload calendar") | html %]">
-                                <span>[% Translate("Import appointments") | html %]</span>
-                            </button>
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage" title="[% Translate("Cancel") | html %]">
-                                <span>[% Translate("Cancel") | html %]</span>
-                            </a>
+
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage" title="[% Translate("Cancel") | html %]" class="btn-cancel-ghost btn-main btn-width-md">
+                                    <span>[% Translate("Cancel") | html %]</span>
+                                </a>
+
+                                <button class="btn-primary btn-main btn-width-xl" type="submit" value="[% Translate("Upload calendar") | html %]">
+                                    <span>[% Translate("Import appointments") | html %]</span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
                     </fieldset>
                 </form>
             </div>

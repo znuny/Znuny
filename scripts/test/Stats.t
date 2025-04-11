@@ -509,7 +509,7 @@ $Self->False(
     'Import() statistic with not existing object module must fail',
 );
 
-# try to use otrs.Console.pl Maint::Stats::Generate
+# try to use znuny.Console.pl Maint::Stats::Generate
 
 # check the imported stat
 my $Stat4 = $StatsObject->StatsGet( StatID => $StatID );

@@ -23,8 +23,11 @@ $Selenium->RunTest(
 
         # get needed object
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
 
         # disable all dashboard plugins
         my $Config = $ConfigObject->Get('DashboardBackend');
@@ -34,7 +37,7 @@ $Selenium->RunTest(
             Value => \%$Config,
         );
 
-        my %EventsTicketCalendarSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %EventsTicketCalendarSysConfig = $SysConfigObject->SettingGet(
             Name    => 'DashboardBackend###0280-DashboardEventsTicketCalendar',
             Default => 1,
         );
@@ -61,7 +64,7 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -198,7 +201,7 @@ $Selenium->RunTest(
             qw (Ticket DynamicField)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

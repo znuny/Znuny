@@ -5,19 +5,19 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-
+## nofilter(TidyAll::Plugin::Znuny::Common::Origin)
 [% RenderBlockStart("rw:Attachment") %]
 <label for="[% Data.FieldID | html %]" class="[% Data.MandatoryClass | html %]">
+    [% Translate(Data.Label) | html %]:
 [% RenderBlockStart("LabelSpan") %]
-    <span class="Marker">*</span>
+        <span class="Marker">*</span>
 [% RenderBlockEnd("LabelSpan") %]
 [% RenderBlockStart("rw:Attachment:DescriptionLong") %]
-    <span class="FieldHelpContainer">
-        <i class="fa fa-question-circle FieldHelpTrigger"></i>
-        <span>[% Translate(Data.DescriptionLong) | html %]</span>
-    </span>
+        <span class="FieldHelpContainer">
+            <i class="fa fa-question-circle FieldHelpTrigger"></i>
+            <span>[% Translate(Data.DescriptionLong) | html %]</span>
+        </span>
 [% RenderBlockEnd("rw:Attachment:DescriptionLong") %]
-    [% Translate(Data.Label) | html %]:
 </label>
 <div class="Field">
     [% Data.Content %]

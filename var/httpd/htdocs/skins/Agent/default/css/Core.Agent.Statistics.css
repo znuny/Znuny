@@ -33,11 +33,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .PreviewContainer .Preview {
 	width: 70%;
-	background: #eee;
-	height: 300px;
-    padding: 10px 0px;
-	margin: 20px auto;
-	border: 1px solid #ddd;
+	height: 500px;
+    background: var(--main-bg-color);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-radius: var(--border-radius-sm);
+    margin: 0 auto 30px;
 }
 
 .PreviewContainer .Preview .Error,
@@ -60,8 +60,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .PreviewContainer .PreviewSettings {
-    margin: 20px auto;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-sm);
 }
 
 .PreviewContainer .PreviewSettings a.Active {
@@ -70,8 +72,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .PreviewContainer .PreviewSettings .Warning {
     display: block;
-    margin-top: 15px;
-    color: #aaa;
+    color: var(--gray-medium);
+}
+
+.PreviewContainer .PreviewSettings .btns-wrapper {
+    display: flex;
+    gap: var(--gap-sm);
 }
 
 .PreviewContainer .CallForAction {
@@ -113,7 +119,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .PreviewContainer .CallForAction.Bottom {
 	display: block;
-	margin: 0px auto 20px auto;
+	margin: 0px auto 30px auto;
 }
 
 .WidgetSimple fieldset legend {
@@ -125,10 +131,7 @@ fieldset legend {
 }
 
 fieldset legend a {
-    position: absolute;
-    top: 4px;
-    left: 29%;
-    margin-left: -2px;
+
 }
 
 .PreviewContainer #PreviewCanvas {
@@ -139,19 +142,124 @@ fieldset legend a {
 
 .PreviewContainer .PreviewTable {
     overflow: auto;
-    height: 300px;
-    margin: 0 10px;
+    height: 100%;
+    margin: 0;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-radius: var(--border-radius-sm);
 }
 
 .PreviewContainer .PreviewTable td {
 	white-space: nowrap;
 }
 
+
 #EditDialog {
-    width: 800px;
+    max-width: 800px;
+    /*max-height: 70vh;*/ /* ED added on 23/01/18 */
+    /*                      beatriz removed on 23/02/15 - modal content restructure */
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-md-sm);
+}
+
+.Fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md-sm);
 }
 
 #EditDialog .InputField_Search {
     min-width: 500px;
 }
+
+
+/* MODALS */
+
+
+.Dialog.Modal .Content fieldset.TableLike.inner-previewModalContainer {
+}
+
+.Dialog .Content fieldset.inner-previewModalContainer > legend {
+    display: flex;
+    width: 100%;
+    gap: var(--gap-sm);
+    align-items: center;
+    padding-bottom: var(--padding-sm);
+    padding-top: var(--padding-md);
+    margin-top: var(--margin-md);
+    border-top: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+.Dialog .Content fieldset.inner-previewModalContainer:first-child > legend {
+    margin: 0;
+    padding: 0;
+    border-top: var(--border-width) var(--border-solid) transparent;
+}
+
+.Dialog .Content fieldset.inner-previewModalContainer > legend > span {
+    margin: 0;
+}
+
+.Dialog .Content fieldset.inner-previewModalContainer .field-wrapper {
+    padding-left: var(--padding-xxl);
+}
+
+.Dialog .Content fieldset.TableLike.Add .Field select {
+    width: 100%;
+    max-width: 100%;
+}
+
+.TableLike.Add .Field.Value{
+    width: 100%;
+    max-width: 100%;
+}
+
+/*
+.Dialog .Content fieldset.inner-previewModalContainer .Field {
+    padding: 0;
+    display: flex;
+    gap: var(--gap-xs);
+    padding-left: var(--padding-xxl);
+}
+
+.Dialog .Content fieldset.TableLike.Add label {
+    padding-top: var(--padding-sm);
+    padding-left: var(--padding-xxl);
+}
+.Dialog .Content fieldset.inner-previewModalContainer label,
+.Dialog .Content fieldset.TableLike.Add .Field {
+    padding-left: var(--padding-xxl);
+}
+
+
+
+.Dialog .Content fieldset.inner-previewModalContainer .radio-field-wrapper.absolute-period {
+    padding-top: var(--padding-sm);
+}
+
+.Dialog .Content fieldset.inner-previewModalContainer .radio-field-wrapper label {
+    display: flex;
+    gap: var(--gap-sm);
+    align-content: center;
+    padding-left: var(--padding-xxl);
+}
+
+.Dialog .Content fieldset.inner-previewModalContainer .radio-field-wrapper.relative-period {
+
+}
+
+ .Dialog .Content fieldset.inner-previewModalContainer .radio-field-wrapper.relative-period .Field,
+.Dialog .Content fieldset.inner-previewModalContainer .scale-field-wrapper .Field {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--gap-sm);
+}
+
+.Dialog .Content fieldset.inner-previewModalContainer .radio-field-wrapper.relative-period .Field > *,
+.Dialog .Content fieldset.inner-previewModalContainer .scale-field-wrapper .Field > * {
+    display: flex;
+    width: 100%;
+} */
+
 } /* end @media */

@@ -118,7 +118,7 @@ sub Run {
         ## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectManagerCreation)
         local $Kernel::OM = Kernel::System::ObjectManager->new(
             'Kernel::System::Log' => {
-                LogPrefix => 'OTRS-otrs.UnitTest',
+                LogPrefix => 'ZNUNY-znuny.UnitTest',
             },
         );
 

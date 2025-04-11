@@ -22,6 +22,9 @@ $Selenium->RunTest(
         my $SignatureObject    = $Kernel::OM->Get('Kernel::System::Signature');
         my $QueueObject        = $Kernel::OM->Get('Kernel::System::Queue');
         my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+
         my $IsITSMIncidentProblemManagementInstalled
             = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
 
@@ -170,7 +173,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketEmail screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketEmail");
@@ -385,7 +388,7 @@ $Selenium->RunTest(
         $Selenium->find_element( "#submitRichText", 'css' )->VerifiedClick();
 
         # Get created test ticket data.
-        my %TicketIDs = $Kernel::OM->Get('Kernel::System::Ticket')->TicketSearch(
+        my %TicketIDs = $TicketObject->TicketSearch(
             Result         => 'HASH',
             Limit          => 1,
             CustomerUserID => $TestData[1]->{UserLogin},
@@ -487,7 +490,7 @@ $Selenium->RunTest(
         );
 
         # Delete created test ticket.
-        my $Success = $Kernel::OM->Get('Kernel::System::Ticket')->TicketDelete(
+        my $Success = $TicketObject->TicketDelete(
             TicketID => $TicketID,
             UserID   => 1,
         );
@@ -495,7 +498,7 @@ $Selenium->RunTest(
         # Ticket deletion could fail if apache still writes to ticket history. Try again in this case.
         if ( !$Success ) {
             sleep 3;
-            $Success = $Kernel::OM->Get('Kernel::System::Ticket')->TicketDelete(
+            $Success = $TicketObject->TicketDelete(
                 TicketID => $TicketID,
                 UserID   => 1,
             );

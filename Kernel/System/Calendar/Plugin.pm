@@ -13,8 +13,6 @@ package Kernel::System::Calendar::Plugin;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::JSON',
@@ -128,7 +126,7 @@ run given plugin function with all existing params.
         PluginKey      => 'TicketLink',
         PluginFunction => 'Search',
         PluginData     => {
-            UserID    => 1
+            UserID    => 1,
             Search    => 'SearchTerm',      # (required) Search string
                                             # or
             ObjectID  => $TicketID          # (required) Object ID
@@ -154,12 +152,13 @@ sub PluginFunction {
     }
 
     my $PluginObject   = $Self->{Plugins}->{ $Param{PluginKey} }->{Object};
+    my $PluginModule   = $Self->{Plugins}->{ $Param{PluginKey} }->{Module};
     my $PluginFunction = $Param{PluginFunction};
 
-    if ( $MainObject->Require( $PluginObject, Silent => 1 ) ) {
+    if ( !$MainObject->Require( $PluginModule, Silent => 1 ) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message  => "Sorry, can't load $PluginObject!",
+            Message  => "Sorry, can't load $PluginModule!",
         );
         return;
     }
@@ -443,7 +442,7 @@ Returns:
             ChangeTime    => '...',
             ChangeBy      => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -516,7 +515,7 @@ Returns:
             'ChangeTime'    => '...',
             'ChangeBy'      => '...',
         },
-        ...
+        # ...
     );
 
 =cut

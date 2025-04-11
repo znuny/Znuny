@@ -22,6 +22,9 @@ $Selenium->RunTest(
         my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
         my $AutoResponseObject = $Kernel::OM->Get('Kernel::System::AutoResponse');
         my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject        = $Kernel::OM->Get('Kernel::System::Queue');
+        my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Get sort attributes config params.
         my %SortOverview = (
@@ -73,7 +76,7 @@ $Selenium->RunTest(
 
         # Create test queue.
         my $QueueName = 'Queue' . $RandomID;
-        my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID   = $QueueObject->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
             GroupID         => 1,
@@ -146,7 +149,7 @@ $Selenium->RunTest(
 
         my $RandomNumber = $HelperObject->GetRandomNumber();
 
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
 
@@ -209,7 +212,7 @@ $Selenium->RunTest(
         );
 
         # Go to queue ticket overview.
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketQueue;QueueID=$QueueID;View=");
 
         # Switch to large view.

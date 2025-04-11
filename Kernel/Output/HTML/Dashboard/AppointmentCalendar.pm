@@ -67,11 +67,12 @@ sub new {
         $Self->{Filter} = $Self->{$PreferencesKey} || $Self->{Config}->{Filter} || 'Today';
     }
 
-    # setup the prefrences keys
+    # setup the preferences keys
     $Self->{PrefKeyShown}   = 'AppointmentDashboardPref' . $Self->{Name} . '-Shown';
     $Self->{PrefKeyRefresh} = 'AppointmentDashboardPref' . $Self->{Name} . '-Refresh';
 
-    $Self->{PageShown} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyShown} }
+    $Self->{PageShown} = $Param{PageShown}
+        || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyShown} }
         || $Self->{Config}->{Limit} || 10;
 
     $Self->{PageRefresh} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyRefresh} }

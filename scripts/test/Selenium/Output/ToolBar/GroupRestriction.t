@@ -19,34 +19,25 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $GroupObject   = $Kernel::OM->Get('Kernel::System::Group');
-        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
-        my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
-        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
+        my $TicketObject      = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $DBObject          = $Kernel::OM->Get('Kernel::System::DB');
+        my $ProcessObject     = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject        = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
+        my $SysConfigObject   = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $ZnunyHelperObject = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
 
         # create temp process for 160-Ticket::AgentTicketProcess
-        my $RandomID  = $HelperObject->GetRandomID();
-        my $ProcessID = $ProcessObject->ProcessAdd(
-            EntityID      => 'EntityID-1' . $RandomID,
-            Name          => 'Process-1' . $RandomID,
-            StateEntityID => 'S1',
-            Layout        => {},
-            Config        => {
-                Description => 'a Description',
-                Path        => {
-                    'A1-' . $RandomID => {},
-                }
-            },
-            UserID => 1,
-        );
-        my $Location    = $ConfigObject->Get('Home') . '/Kernel/Config/Files/ZZZProcessManagement.pm';
-        my $ProcessDump = $ProcessObject->ProcessDump(
-            ResultType => 'FILE',
-            Location   => $Location,
-            UserID     => 1,
+        my $RandomID = $HelperObject->GetRandomID();
+        $ZnunyHelperObject->_ProcessCreateIfNotExists(
+            Processes => {
+                'TestProcess'
+                    . $RandomID => $ConfigObject->Get('Home')
+                    . '/scripts/test/sample/ProcessManagement/TestProcess.yml',
+            }
         );
 
         # enable ticket responsible
@@ -117,7 +108,7 @@ $Selenium->RunTest(
 
         # set group restriction for each toolbar module
         for my $ConfigUpdate (@Tests) {
-            my %ToolBarConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+            my %ToolBarConfig = $SysConfigObject->SettingGet(
                 Name    => 'Frontend::ToolBarModule###' . $ConfigUpdate->{ToolBarModule},
                 Default => 1,
             );
@@ -139,7 +130,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -273,7 +264,7 @@ $Selenium->RunTest(
             qw (Ticket Group)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

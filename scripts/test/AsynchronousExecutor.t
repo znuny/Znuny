@@ -14,10 +14,14 @@ use utf8;
 
 use vars (qw($Self));
 
-my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $Home         = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
+my $TaskWorkerObject  = $Kernel::OM->Get('Kernel::System::Daemon::DaemonModules::SchedulerTaskWorker');
+my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 
-my $Daemon = $Home . '/bin/otrs.Daemon.pl';
+my $Home = $ConfigObject->Get('Home');
+
+my $Daemon = $Home . '/bin/znuny.Daemon.pl';
 
 # Get current daemon status.
 my $PreviousDaemonStatus = `$Daemon status`;
@@ -26,7 +30,7 @@ my $PreviousDaemonStatus = `$Daemon status`;
 if ( !defined $PreviousDaemonStatus ) {
     $Self->False(
         0,
-        'Permission denied for deamon commands, skipping test',
+        'Permission denied for daemon commands, skipping test',
     );
     return 1;
 }
@@ -42,9 +46,6 @@ if ( $PreviousDaemonStatus =~ m{Daemon running}i ) {
     print 'Sleeping ' . $SleepTime . "s\n";
     sleep $SleepTime;
 }
-
-my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
-my $TaskWorkerObject  = $Kernel::OM->Get('Kernel::System::Daemon::DaemonModules::SchedulerTaskWorker');
 
 my $RunTasks = sub {
 

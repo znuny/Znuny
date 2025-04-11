@@ -47,41 +47,13 @@ my @Tests = (
             },
         ],
         EffectiveValue => 1,
-        ExpectedResult => '<div class="Setting" data-change-time=""><div class=\'SettingContent\'>
+        ExpectedResult =>
+            '<div class="Setting scroll-bar-styled bar-no-left-border" data-change-time=""><div class=\'SettingContent\'>
 <input class="" type="checkbox" id="Checkbox_TestCheckbox1" value="1" checked=\'checked\' disabled=\'disabled\' ><input type=\'hidden\' name=\'TestCheckbox1\' id="TestCheckbox1" value=\'1\' />
 <label for=\'Checkbox_TestCheckbox1\' class=\'CheckboxLabel\'>Enabled</label>
 </div><div class="WidgetMessage Bottom">Default: Disabled</div></div>
 ',
     },
-
-    # {
-    #     Name  => 'TestArrayCheckbox',
-    #     Value => [
-    #         {
-    #             'Array' => [
-    #                 {
-    #                     'DefaultItem' => [
-    #                         {
-    #                             'Content'   => '1',
-    #                             'ValueType' => 'Checkbox',
-    #                         },
-    #                     ],
-    #                     'Item' => [
-    #                         {
-    #                             'ValueType' => 'Checkbox',
-    #                             'Content'   => '0',
-    #                         },
-    #                         {
-    #                             'Content'   => '0',
-    #                             'ValueType' => 'Checkbox',
-    #                         },
-    #                     ],
-    #                 },
-    #             ],
-    #         },
-    #     ],
-    #     ExpectedResult => '',
-    # },
 
     # Internal Server error if you remove some modules.
     # See bug#13952.
@@ -121,7 +93,8 @@ my @Tests = (
             Title      => 'System Registration',
             NavBarName => 'Admin'
         },
-        ExpectedResult => "<div class=\"Setting\" data-change-time=\"\"><div class='Hash'>
+        ExpectedResult =>
+            "<div class=\"Setting scroll-bar-styled bar-no-left-border\" data-change-time=\"\"><div class='Hash'>
 <div class='HashItem'>
 <input type='text' value='Description' readonly='readonly' class='Key' />
 <div class='SettingContent'>
@@ -190,7 +163,7 @@ my @Tests = (
         ],
 
         EffectiveValue => '',
-        ExpectedResult => '<div class="Setting" data-change-time=""></div>
+        ExpectedResult => '<div class="Setting scroll-bar-styled bar-no-left-border" data-change-time=""></div>
 '
 
     },

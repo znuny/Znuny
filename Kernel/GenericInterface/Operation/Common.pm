@@ -12,8 +12,6 @@ package Kernel::GenericInterface::Operation::Common;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 our $ObjectManagerDisabled = 1;
 
 =head1 NAME
@@ -28,7 +26,7 @@ performs user or customer user authorization
 
     my ( $UserID, $UserType ) = $CommonObject->Auth(
         Data => {
-            SessionID         => 'AValidSessionIDValue'     # the ID of the user session
+            SessionID         => 'AValidSessionIDValue',    # the ID of the user session
             UserLogin         => 'Agent1',                  # optional, provide UserLogin or CustomerUserLogin
             # or
             CustomerUserLogin => 'Customer1',               # optional, provide UserLogin or CustomerUserLogin
@@ -157,13 +155,15 @@ sub _AuthUser {
     my $ReturnData = 0;
 
     # get params
-    my $PostUser = $Param{Data}->{UserLogin} || '';
-    my $PostPw   = $Param{Data}->{Password}  || '';
+    my $PostUser           = $Param{Data}->{UserLogin}      || '';
+    my $PostPw             = $Param{Data}->{Password}       || '';
+    my $PostTwoFactorToken = $Param{Data}->{TwoFactorToken} || '';
 
     # check submitted data
     my $User = $Kernel::OM->Get('Kernel::System::Auth')->Auth(
-        User => $PostUser,
-        Pw   => $PostPw,
+        User           => $PostUser,
+        Pw             => $PostPw,
+        TwoFactorToken => $PostTwoFactorToken,
     );
 
     # login is valid
@@ -200,13 +200,15 @@ sub _AuthCustomerUser {
     my $ReturnData = $Param{Data}->{CustomerUserLogin} || 0;
 
     # get params
-    my $PostUser = $Param{Data}->{CustomerUserLogin} || '';
-    my $PostPw   = $Param{Data}->{Password}          || '';
+    my $PostUser           = $Param{Data}->{CustomerUserLogin} || '';
+    my $PostPw             = $Param{Data}->{Password}          || '';
+    my $PostTwoFactorToken = $Param{Data}->{TwoFactorToken}    || '';
 
     # check submitted data
     my $User = $Kernel::OM->Get('Kernel::System::CustomerAuth')->Auth(
-        User => $PostUser,
-        Pw   => $PostPw,
+        User           => $PostUser,
+        Pw             => $PostPw,
+        TwoFactorToken => $PostTwoFactorToken,
     );
 
     # login is invalid

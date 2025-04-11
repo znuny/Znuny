@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_config version="2.0" init="Application">
+    <!-- nofilter(TidyAll::Plugin::Znuny::Config::ACLKeysLevel3Actions) -->
     <Setting Name="Frontend::Module###AdminProcessManagement" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
@@ -15,7 +16,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -96,7 +97,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management Activity GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -138,7 +139,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management Activity Dialog GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -180,7 +181,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management Transition GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -220,7 +221,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management Transition Action GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -260,7 +261,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management Path GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -531,14 +532,14 @@
                             </Array>
                         </Item>
                         <Item Key="Description" Translatable="1">Create new process ticket.</Item>
-                        <Item Key="Name" Translatable="1">New process ticket</Item>
+                        <Item Key="Name" Translatable="1">Create Process Ticket</Item>
                         <Item Key="Link">Action=CustomerTicketProcess</Item>
                         <Item Key="LinkOption"></Item>
                         <Item Key="NavBar">Ticket</Item>
-                        <Item Key="Type">Submenu</Item>
+                        <Item Key="Type">Menu</Item>
                         <Item Key="Block"></Item>
                         <Item Key="AccessKey">o</Item>
-                        <Item Key="Prio">220</Item>
+                        <Item Key="Prio">0010</Item>
                     </Hash>
                 </Item>
             </Array>
@@ -918,7 +919,7 @@
                         <Item Key="Lock">(* required) unlock|lock</Item>
                         <Item Key="Owner">(* required) someuserlogin</Item>
                         <Item Key="PendingTime">2021-09-01 09:00:00</Item>
-                        <Item Key="PendingTimeDiff">123</Item>
+                        <Item Key="PendingTimeDiff">123 (diff in seconds)</Item>
                         <Item Key="Priority">(* required) 3 normal</Item>
                         <Item Key="Queue">(* required) Raw</Item>
                         <Item Key="Responsible">someuserlogin</Item>
@@ -986,6 +987,8 @@
                 <Item Key="TicketStateSet">
                     <Hash>
                         <Item Key="State">(* required) open</Item>
+                        <Item Key="PendingTime">2021-09-01 09:00:00</Item>
+                        <Item Key="PendingTimeDiff">123 (diff in seconds)</Item>
                         <Item Key="UserID">1 (use to overwrite the logged user)</Item>
                     </Hash>
                 </Item>

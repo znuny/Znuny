@@ -162,6 +162,10 @@ sub Run {
     my $SessionObject      = $Kernel::OM->Get('Kernel::System::AuthSession');
     my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
+    my %Preferences = $UserObject->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
     # update/close item
     if ( $Self->{Subaction} eq 'UpdateRemove' ) {
 
@@ -363,6 +367,38 @@ sub Run {
             ContentType => 'text/html',
             Charset     => $LayoutObject->{UserCharset},
             Content     => '1',
+        );
+    }
+
+    # deliver element
+    elsif ( $Self->{Subaction} eq 'WidgetExpand' ) {
+
+        my $Name = $ParamObject->GetParam( Param => 'Name' );
+        $UserObject->SetPreferences(
+            UserID => $Self->{UserID},
+            Key    => 'UserDashboardWidgetExpand',
+            Value  => $Name,
+        );
+
+        $Config->{$Name}->{PageShown} = '50';
+
+        my %Element = $Self->_Element(
+            Name    => $Name,
+            Configs => $Config,
+            AJAX    => 1,
+        );
+
+        if ( !%Element ) {
+            $LayoutObject->FatalError(
+                Message => $LayoutObject->{LanguageObject}->Translate( 'Can\'t get element data of %s!', $Name ),
+            );
+        }
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Charset     => $LayoutObject->{UserCharset},
+            Content     => ${ $Element{Content} },
+            Type        => 'inline',
+            NoCache     => 1,
         );
     }
 
@@ -617,8 +653,29 @@ sub Run {
         push @Order, $Name;
     }
 
+    $Self->{UserDashboardWidgetExpand} = $Preferences{UserDashboardWidgetExpand} || 'All';
+
+    if ( !$Self->{UserDashboardWidgetExpand} || $Self->{UserDashboardWidgetExpand} eq 'All' ) {
+        $Param{ClassDashboardWidgetExpandAll} = 'active';
+        $LayoutObject->AddJSData(
+            Key   => 'UserDashboardWidgetExpand',
+            Value => 'All',
+        );
+    }
+
     # get default columns
     my $Columns = $Self->{Config}->{DefaultColumns} || $ConfigObject->Get('DefaultOverviewColumns') || {};
+
+    $Param{ActiveContentLargeWidgets} = 0;
+
+    if ( $BackendConfigKey eq 'DashboardBackend' ) {
+
+        # rendering dashboard widget expand menu
+        $LayoutObject->Block(
+            Name => 'DashboardWidgetExpand',
+            Data => {},
+        );
+    }
 
     # try every backend to load and execute it
     my @ContainerNames;
@@ -637,12 +694,46 @@ sub Run {
         my $NameForm = $Name;
         $NameForm =~ s{-}{}g;
 
+        my $NameClass = $NameForm;
+        $NameClass =~ s{\d*}{}g;
+
         my %JSData = (
-            Name     => $Name,
-            NameForm => $NameForm,
+            Name      => $Name,
+            NameForm  => $NameForm,
+            NameClass => $NameClass,
         );
 
         push @ContainerNames, \%JSData;
+
+        if ( $Element{Config}->{Block} eq 'ContentLarge' ) {
+            $Param{ActiveContentLargeWidgets}++;
+        }
+
+        if ( $BackendConfigKey eq 'DashboardBackend' && $Element{Config}->{Block} eq 'ContentLarge' ) {
+            my $WidgetName = $Name;
+            my $Class;
+            if ( $Self->{UserDashboardWidgetExpand} && $Self->{UserDashboardWidgetExpand} eq $WidgetName ) {
+                $Class = 'active';
+
+                $LayoutObject->AddJSData(
+                    Key   => 'UserDashboardWidgetExpand',
+                    Value => $WidgetName,
+                );
+            }
+
+            # rendering dashboard widget expand list items
+            $LayoutObject->Block(
+                Name => 'DashboardWidgetExpandListItem',
+                Data => {
+                    %{ $Element{Config} },
+                    Name     => $Name,
+                    NameForm => $NameForm,
+                    Header   => ${ $Element{Header} },
+                    Content  => ${ $Element{Content} },
+                    Class    => $Class,
+                },
+            );
+        }
 
         # rendering
         $LayoutObject->Block(
@@ -651,6 +742,8 @@ sub Run {
                 %{ $Element{Config} },
                 Name           => $Name,
                 NameForm       => $NameForm,
+                NameClass      => $NameClass,
+                Header         => ${ $Element{Header} },
                 Content        => ${ $Element{Content} },
                 CustomerID     => $Self->{CustomerID} || '',
                 CustomerUserID => $Self->{CustomerUserID} || '',
@@ -761,6 +854,19 @@ sub Run {
                 },
             );
         }
+    }
+
+    $LayoutObject->Block(
+        Name => 'DashboardWidgetExpandContent',
+        Data => {
+            %Param,
+        },
+    );
+
+    if ( !$Param{ActiveContentLargeWidgets} || $Param{ActiveContentLargeWidgets} == 0 ) {
+        $LayoutObject->Block(
+            Name => 'NoActiveLargeWidgets',
+        );
     }
 
     # send data to JS
@@ -911,6 +1017,7 @@ sub _Element {
     my $Object = $Module->new(
         %{$Self},
         Config                => $Configs->{$Name},
+        PageShown             => $Configs->{$Name}->{PageShown},
         Name                  => $Name,
         CustomerID            => $Self->{CustomerID} || '',
         CustomerUserID        => $Self->{CustomerUserID} || '',
@@ -1016,8 +1123,20 @@ sub _Element {
         );
     }
 
+    my $Header       = '';
+    my $HeaderMethod = $Object->can('Header');
+
+    if ($HeaderMethod) {
+        $Header = $Object->Header(
+            AJAX           => $Param{AJAX},
+            CustomerID     => $Self->{CustomerID} || '',
+            CustomerUserID => $Self->{CustomerUserID} || '',
+        );
+    }
+
     # return result
     return (
+        Header      => \$Header,
         Content     => \$Content,
         Config      => \%Config,
         Preferences => \@Preferences,

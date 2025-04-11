@@ -19,8 +19,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $AutoResponseObject  = $Kernel::OM->Get('Kernel::System::AutoResponse');
+        my $CacheObject         = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject        = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject            = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject         = $Kernel::OM->Get('Kernel::System::Queue');
+        my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
 
         # enable FilterQueuesWithoutAutoResponse filter
         $HelperObject->ConfigSettingChange(
@@ -42,7 +47,7 @@ $Selenium->RunTest(
 
         # add test queue
         my $QueueRandomID = "queue" . $HelperObject->GetRandomID();
-        my $QueueID       = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID       = $QueueObject->QueueAdd(
             Name            => $QueueRandomID,
             ValidID         => 1,
             GroupID         => 1,
@@ -56,9 +61,6 @@ $Selenium->RunTest(
             $QueueID,
             "Created Queue - $QueueRandomID",
         );
-
-        # get system address object
-        my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
 
         # add test system address
         my $SystemAddressRandomID = "sysadd" . $HelperObject->GetRandomID();
@@ -117,7 +119,7 @@ $Selenium->RunTest(
         my @AutoResponseIDs;
         for my $Test (@Tests) {
             my $AutoResponseNameRand = $Test->{Name} . $HelperObject->GetRandomID();
-            my $AutoResponseID       = $Kernel::OM->Get('Kernel::System::AutoResponse')->AutoResponseAdd(
+            my $AutoResponseID       = $AutoResponseObject->AutoResponseAdd(
                 Name        => $AutoResponseNameRand,
                 Subject     => $Test->{Subject},
                 Response    => 'Some Response',
@@ -141,7 +143,7 @@ $Selenium->RunTest(
         }
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AdminQueueAutoResponse screen
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminQueueAutoResponse");
@@ -237,19 +239,15 @@ $Selenium->RunTest(
         # check new QueueAutoResponse relations
         $Selenium->find_element( $QueueRandomID, 'link_text' )->VerifiedClick();
 
-        $Index = 1;
         for my $BreadcrumbText (
             'Manage Queue-Auto Response Relations',
             'Change Auto Response Relations for Queue ' . $QueueRandomID
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Index)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Index++;
         }
 
         $Index = 0;
@@ -277,14 +275,12 @@ $Selenium->RunTest(
             "$QueueRandomID not found on screen with QueuesWithoutAutoResponses filter on"
         );
 
-        $Self->Is(
-            $Selenium->execute_script("return \$('.BreadCrumb li:eq(2)').text().trim()"),
-            'Queues without Auto Responses',
-            "Breadcrumb text 'Queues without Auto Responses' is found on screen"
-        );
-
-        # get DB object
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+        for my $BreadcrumbText ('Queues without Auto Responses') {
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
+            );
+        }
 
         # since there are no tickets that rely on our test QueueAutoResponse,
         # we can remove test queue, system address and auto response from the DB
@@ -336,7 +332,7 @@ $Selenium->RunTest(
             qw (Queue AutoResponse SystemAddress QueueAutoResponse)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

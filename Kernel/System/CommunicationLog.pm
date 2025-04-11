@@ -214,7 +214,7 @@ sub ObjectLogStart {
 Stops a log object of a given object type.
 
     my $Success = $CommunicationLogObject->ObjectLogStop(
-        ObjectLogType => 'Connection'                        # (required) Can be 'Connection' or 'Message'
+        ObjectLogType => 'Connection',                       # (required) Can be 'Connection' or 'Message'
         ObjectLogID   => 123, # (required) The ObjectID of the started object type
     );
 
@@ -258,8 +258,8 @@ sub ObjectLogStop {
 Adds a log entry for a certain log object.
 
     my $Success = $CommunicationLogObject->ObjectLog(
-        ObjectLogType => '...' # (required) To be defined by the related LogObject
-        ObjectLogID   => 123, # (required) The ObjectID of the started object type
+        ObjectLogType => '...', # (required) To be defined by the related LogObject
+        ObjectLogID   => 123,   # (required) The ObjectID of the started object type
     );
 
 Returns:
@@ -425,11 +425,11 @@ Private methods
 Create a new communication entry.
 
     my $Success = $CommunicationLogObject->CommunicationStart(
-        Status => 'Processing', # (optional) Needs to be either 'Successful', 'Processing', 'Warning' or 'Failed'
-                                # In most of the cases, just 'Processing' will make sense at the very beginning
-                                # of a communication (Default: 'Processing').
-        AccountType =>          # (optional) The used account type
-        AccountID   =>          # (optional) The used account id
+        Status      => 'Processing',    # (optional) Needs to be either 'Successful', 'Processing', 'Warning' or 'Failed'
+                                        # In most of the cases, just 'Processing' will make sense at the very beginning
+                                        # of a communication (Default: 'Processing').
+        AccountType => 'AccountType',   # (optional) The used account type
+        AccountID   => 123,             # (optional) The used account id
     );
 
 Returns:

@@ -22,41 +22,91 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     overflow: visible;
 }
 
-.ClusterLink:hover {
-    cursor: default;
-    border: 0px !important;
+/*.Cluster ul li a,
+.Cluster ul li span {
+    padding: var(--padding-xs) var(--padding-sm);
+    border-radius: var(--border-radius-xxs);
+}
+
+.Cluster ul li:hover > a,
+.Cluster ul li:hover > span {
+    background: var(--gray-light);
+}*/
+
+.Cluster ul li:hover > span > i {
+    transform: rotate(180deg);
 }
 
 .Cluster ul ul {
+    display: none;
+    flex-flow: column;
     position: absolute;
-    top: 25px;
-    left: -9px;
-    background: #EDEDED;
+    top: 30px;
+    left: 0;
     z-index: 999;
     min-width: 110%;
-    box-shadow: 1px 1px 3px #999;
-    height: 0px;
     opacity: 0;
-    overflow: hidden;
-    transition: all 0.2s linear;
+    /*overflow: hidden;*/
+    transition: var(--main-transition);
+
+    background: var(--menu-bg);
+    box-shadow: var(--menu-box-shadow);
+    padding: var(--padding-sm);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    border-radius: var(--border-radius-xs);
+}
+
+@media only screen and (max-width: 1024px) {
+    .Cluster ul ul {
+        display: flex;
+        position: relative;
+        top: 0;
+        min-width: 100%;
+        opacity: 1;
+        box-shadow: unset;
+        padding: 0;
+        border: unset;
+        border-radius: unset;
+    }
+}
+
+
+.Cluster ul ul::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 15px;
+    top: -15px;
+    left: 0;
 }
 
 .Cluster > ul li:hover {
     z-index: 3500;
 }
 
-.Cluster ul li:hover ul,
-.Cluster ul ul.ForceVisible {
+.Cluster ul li:hover ul {
+    display: flex
+}
+
+.Cluster ul li:hover ul {
     height: auto;
     visibility: visible;
     opacity: 100;
 }
 
-.Cluster ul ul li {
+/* this class ForceVisible is needed for Selenium-Tests */
+.Cluster ul ul.ForceVisible {
+    height: auto;
+    visibility: visible;
+    opacity: 100;
     display: block;
-    float: none;
+}
+
+.Cluster ul ul li {
+    display: flex;
+    flex-flow: row;
     padding: 0px !important;
-    border-bottom: 1px solid #ddd;
+    border-bottom: none;
     white-space: nowrap;
 }
 
@@ -64,26 +114,35 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     border-bottom: 0px;
 }
 
-.Cluster ul ul li a {
-    padding: 3px 10px !important;
+.ActionRow.Cluster ul ul li a {
+    color: var(--main-font-color);
+    padding: var(--padding-sm);
     display: block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--medium);
+    /*font-family: Inter;*/
+    text-transform: unset;
+    border-radius: var(--border-radius-xs);
+    transition: var(--main-transition);
+    width: 100%;
 }
 
 .Cluster a.ClusterLink i {
     margin-left: 3px;
 }
 
-.Cluster ul ul li:first-child a {
+/*.Cluster ul ul li:first-child a {
     padding-top: 4px;
 }
 
 .Cluster ul ul li:last-child a {
     padding-bottom: 4px;
-}
+}*/
 
 .Cluster ul ul li a:hover {
     border-color: transparent;
-    background: #ddd;
+    background: var(--gray-light);
+    color: var(--main-font-color);
 }
 
 .Cluster ul ul li:after {
@@ -92,6 +151,19 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .Cluster > ul > li {
     position: relative;
+}
+
+.ClusterLink,
+.ClusterLink:hover {
+    cursor: pointer;
+    border: var(--border-width) var(--border-solid) transparent !important;
+}
+
+@media only screen and (max-width: 1024px) {
+    .ClusterLink,
+    .ClusterLink:hover {
+        font-size: var(--font-size-sm);
+    }
 }
 
 } /* end @media */

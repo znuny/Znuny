@@ -7,7 +7,6 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-
 <div>
     <div class="InnerContent">
         <fieldset class="TableLike FixedLabelSmall NoMargin">
@@ -18,12 +17,12 @@
             </div>
         </fieldset>
     </div>
-    <div class="ContentFooter Center">
-        <button id="SaveFormDraft" class="Primary CallForAction">
-            <span>{{ "Save" | Translate }}</span>
-        </button>
-        <button class="CallForAction CloseDialog" value="{{ "Cancel" | Translate }}">
+    <div class="ContentFooter space-between">
+        <button class="CallForAction btn-cancel-ghost btn-main btn-width-md CloseDialog" value="{{ "Cancel" | Translate }}">
             <span>{{ "Cancel" | Translate }}</span>
+        </button>
+        <button id="SaveFormDraft" class="CallForAction Primary btn-primary btn-main btn-width-md">
+            <span>{{ "Save" | Translate }}</span>
         </button>
     </div>
 </div>

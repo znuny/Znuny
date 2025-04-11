@@ -111,10 +111,11 @@ sub FormIDAddFile {
     my $Disposition = $Param{Disposition} || '';
     if ( !$ContentID && lc $Disposition eq 'inline' ) {
 
-        my $Random = rand 999999;
-        my $FQDN   = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
+        my $Random       = rand 999999;
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
 
-        $ContentID = "$Disposition$Random.$Param{FormID}\@$FQDN";
+        $ContentID = "$Disposition$Random.$Param{FormID}\@$ExternalFQDN";
     }
 
     # create cache subdirectory if not exist
@@ -137,10 +138,12 @@ sub FormIDAddFile {
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
-    # files must readable for creator
+    my $Filename = basename( $Param{Filename} );
+
+    # files must be readable for creator
     return if !$MainObject->FileWrite(
         Directory  => $Directory,
-        Filename   => "$Param{Filename}",
+        Filename   => $Filename,
         Content    => \$Param{Content},
         Mode       => 'binmode',
         Permission => '640',
@@ -148,7 +151,7 @@ sub FormIDAddFile {
     );
     return if !$MainObject->FileWrite(
         Directory  => $Directory,
-        Filename   => "$Param{Filename}.ContentType",
+        Filename   => "$Filename.ContentType",
         Content    => \$Param{ContentType},
         Mode       => 'binmode',
         Permission => '640',
@@ -156,7 +159,7 @@ sub FormIDAddFile {
     );
     return if !$MainObject->FileWrite(
         Directory  => $Directory,
-        Filename   => "$Param{Filename}.ContentID",
+        Filename   => "$Filename.ContentID",
         Content    => \$ContentID,
         Mode       => 'binmode',
         Permission => '640',
@@ -164,7 +167,7 @@ sub FormIDAddFile {
     );
     return if !$MainObject->FileWrite(
         Directory  => $Directory,
-        Filename   => "$Param{Filename}.Disposition",
+        Filename   => "$Filename.Disposition",
         Content    => \$Disposition,
         Mode       => 'binmode',
         Permission => '644',
@@ -428,7 +431,7 @@ sub FormIDCleanUp {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $FormDraftTTL = $ConfigObject->Get('FormDraftTTL');
 
-    my %DraftForms;
+    my %FormDrafts;
     my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
     for my $ObjectType ( sort keys %{$FormDraftTTL} ) {
         my $FormDraftList = $FormDraftObject->FormDraftListGet(
@@ -436,26 +439,25 @@ sub FormIDCleanUp {
             UserID     => 1,
         );
 
-        DRAFT:
+        FORMDRAFT:
         for my $FormDraft ( @{$FormDraftList} ) {
             my $FormDraftConfig = $FormDraftObject->FormDraftGet(
                 FormDraftID => $FormDraft->{FormDraftID},
                 UserID      => 1,
             );
 
+            next FORMDRAFT if !IsHashRefWithData($FormDraftConfig);
             my $FormID = $FormDraftConfig->{FormData}->{FormID};
 
-            # if TTL configuration is missing, use the default
-            next DRAFT if !$FormDraftTTL->{$ObjectType};
+            next FORMDRAFT if !$Self->_FormIDValidate($FormID);
 
-            # check for draft form configuration
-            next DRAFT if !IsHashRefWithData($FormDraftConfig);
-            next DRAFT if !$FormID;
+            # if TTL configuration is missing, use the default
+            next FORMDRAFT if !$FormDraftTTL->{$ObjectType};
 
             # form draft TTL config for specific object type is given in minutes
-            my $CurrentTile = time() - ( $FormDraftTTL->{$ObjectType} * 60 );
+            my $CurrentTime = time() - ( $FormDraftTTL->{$ObjectType} * 60 );
 
-            $DraftForms{$FormID} = $CurrentTile;
+            $FormDrafts{$FormID} = $CurrentTime;
         }
     }
 
@@ -483,9 +485,9 @@ sub FormIDCleanUp {
         }
 
         if (
-            ( $DraftForms{$Filename} && $DraftForms{$Filename} > $SubdirTime )
+            ( $FormDrafts{$Filename} && $FormDrafts{$Filename} > $SubdirTime )
             ||
-            ( !$DraftForms{$Filename} && $RetentionTime > $SubdirTime )
+            ( !$FormDrafts{$Filename} && $RetentionTime > $SubdirTime )
             )
         {
             my @Sublist = $MainObject->DirectoryRead(

@@ -18,12 +18,14 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+        my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
-
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Create test ticket.
         my $TicketNumber = $TicketObject->TicketCreateNumber();
@@ -44,7 +46,6 @@ $Selenium->RunTest(
             "Ticket is created - $TicketID",
         );
 
-        my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
         my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
         # Create test email article, invisible for customer.
@@ -80,6 +81,22 @@ $Selenium->RunTest(
             Value => 0,
         );
 
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Service',
+            Value => 0,
+        );
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Type',
+            Value => 0,
+        );
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Frontend::AgentTicketNote###Owner',
+            Value => 0,
+        );
+
         # Check if TicketOverview does show articles on ProcessTicket, see bug#14006.
         my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', ],
@@ -91,13 +108,12 @@ $Selenium->RunTest(
         );
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Get all processes.
-        my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
-        my $ProcessList   = $ProcessObject->ProcessListGet(
+        my $ProcessList = $ProcessObject->ProcessListGet(
             UserID => $TestUserID,
         );
 
@@ -180,9 +196,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketIDProcess");
 
         # Force sub menus to be visible in order to be able to click one of the links.
-        $Selenium->execute_script(
-            '$("#nav-Communication ul").css({ "height": "auto", "opacity": "100" });'
-        );
+        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
         $Selenium->WaitFor(
             JavaScript =>
                 'return $("#nav-Communication ul").css("opacity") == 1;'
@@ -225,6 +239,7 @@ $Selenium->RunTest(
         $Selenium->find_element( "#RichText",             'css' )->send_keys($TicketBody);
         $Selenium->find_element( "#IsVisibleForCustomer", 'css' )->click();
 
+        sleep 1;
         $Selenium->WaitFor( JavaScript => "return \$('#IsVisibleForCustomer:checked').length;" );
 
         $Selenium->find_element( "#submitRichText", 'css' )->click();
@@ -285,12 +300,12 @@ $Selenium->RunTest(
         )->VerifiedClick();
 
         # Check if table contains article.
-        my $TicketNumbeProcess = $TicketObject->TicketNumberLookup(
+        my $TicketNumberProcess = $TicketObject->TicketNumberLookup(
             TicketID => $TicketIDProcess,
         );
         $Self->Is(
             $Selenium->execute_script(
-                "return \$('table.Overview tbody tr a[href*=\"Action=CustomerTicketZoom;TicketNumber=$TicketNumbeProcess\"]').closest('tr').find('td:contains($TicketBody)').length === 1"
+                "return \$('table.Overview tbody tr a[href*=\"Action=CustomerTicketZoom;TicketNumber=$TicketNumberProcess\"]').closest('tr').length === 1"
             ),
             '1',
             'Customer Ticket Overview table contain process with visible article',

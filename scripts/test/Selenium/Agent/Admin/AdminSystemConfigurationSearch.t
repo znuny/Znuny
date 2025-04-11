@@ -19,9 +19,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
         my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
 
         # create test user and login
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -29,7 +29,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->Login(
             Type     => 'Agent',
@@ -42,9 +42,8 @@ $Selenium->RunTest(
             "${ScriptAlias}index.pl?Action=AdminSystemConfiguration"
         );
 
-        # Search for CloudService::Admin::Module###100-SupportDataCollector(setting with : and # to test encoding).
-        $Selenium->find_element( '#SysConfigSearch', 'css' )
-            ->send_keys('CloudService::Admin::Module###100-SupportDataCollector');
+        # Search for Frontend::RichText::Settings###FontSizes (setting with : and # to test encoding).
+        $Selenium->find_element( '#SysConfigSearch', 'css' )->send_keys('Frontend::RichText::Settings###FontSizes');
         $Selenium->WaitFor(
             JavaScript => 'return $("ul.ui-autocomplete a:visible").length',
         );
@@ -53,7 +52,7 @@ $Selenium->RunTest(
         $Selenium->find_element( 'a.ui-menu-item-wrapper', 'css' )->VerifiedClick();
 
         # Check if bread crumb link is working.
-        $Selenium->find_element( 'ul.BreadCrumb li:nth-child(3) a', 'css' )->VerifiedClick();
+        $Selenium->find_element( 'ul.BreadCrumb li:nth-child(5) a', 'css' )->VerifiedClick();
 
         # Check settings count.
         my $SettingCount = $Selenium->execute_script(
@@ -70,7 +69,7 @@ $Selenium->RunTest(
         );
         $Self->Is(
             $SettingName,
-            'CloudService::Admin::Module###100-SupportDataCollector',
+            'Frontend::RichText::Settings###FontSizes',
             'Check if correct setting is listed.'
         );
     }

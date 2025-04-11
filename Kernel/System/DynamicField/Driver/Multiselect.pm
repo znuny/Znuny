@@ -370,38 +370,30 @@ sub EditFieldRender {
             . $TreeSelectionMessage . '</span><i class="fa fa-sitemap"></i></a>';
     }
 
-    if ( $Param{Mandatory} ) {
-        my $DivID = $FieldName . 'Error';
+    # Tooltip for client side validation
+    my $ClientErrorTooltipDivID = $FieldName . 'Error';
+    my $FieldRequiredMessage    = $Param{LayoutObject}->{LanguageObject}->Translate("This field is required.");
+    $HTMLString .= <<"EOF";
 
-        my $FieldRequiredMessage = $Param{LayoutObject}->{LanguageObject}->Translate("This field is required.");
-
-        # for client side validation
-        $HTMLString .= <<"EOF";
-
-<div id="$DivID" class="TooltipErrorMessage">
+<div id="$ClientErrorTooltipDivID" class="TooltipErrorMessage">
     <p>
         $FieldRequiredMessage
     </p>
 </div>
 EOF
-    }
 
-    if ( $Param{ServerError} ) {
+    # for server side validation
+    my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
+    $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
+    my $ServerErrorTooltipDivID = $FieldName . 'ServerError';
+    $HTMLString .= <<"EOF";
 
-        my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
-        $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
-        my $DivID = $FieldName . 'ServerError';
-
-        # for server side validation
-        $HTMLString .= <<"EOF";
-
-<div id="$DivID" class="TooltipErrorMessage">
+<div id="$ServerErrorTooltipDivID" class="TooltipErrorMessage">
     <p>
         $ErrorMessage
     </p>
 </div>
 EOF
-    }
 
     if ( $Param{AJAXUpdate} ) {
 
@@ -863,19 +855,6 @@ sub ObjectMatch {
     }
 
     return $Match;
-}
-
-sub HistoricalValuesGet {
-    my ( $Self, %Param ) = @_;
-
-    # get historical values from database
-    my $HistoricalValues = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->HistoricalValueGet(
-        FieldID   => $Param{DynamicFieldConfig}->{ID},
-        ValueType => 'Text',
-    );
-
-    # return the historical values from database
-    return $HistoricalValues;
 }
 
 sub ValueLookup {

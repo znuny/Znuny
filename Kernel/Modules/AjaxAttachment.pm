@@ -12,7 +12,6 @@ package Kernel::Modules::AjaxAttachment;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
@@ -73,7 +72,7 @@ sub Run {
         for my $Attachment (@Attachments) {
 
             # Hide inline attachments from the display. Please see bug#13498 for more information.
-            next ATTACHMENT if $Attachment->{Disposition} eq 'inline';
+            next ATTACHMENT if $Attachment->{Disposition} && $Attachment->{Disposition} eq 'inline';
 
             # Add human readable data size.
             $Attachment->{HumanReadableDataSize} = $LayoutObject->HumanReadableDataSize(

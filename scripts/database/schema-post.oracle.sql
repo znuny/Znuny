@@ -52,6 +52,38 @@ END;
 --
 ;
 BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE activity ADD CONSTRAINT FK_activity_user_id_id FOREIGN KEY (user_id) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_activity_user_id ON activity (user_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE activity ADD CONSTRAINT FK_activity_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_activity_create_by ON activity (create_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
     EXECUTE IMMEDIATE 'ALTER TABLE acl_ticket_attribute_relations ADD CONSTRAINT FK_acl_ticket_attribute_relacc FOREIGN KEY (create_by) REFERENCES users (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
@@ -3677,54 +3709,6 @@ END;
 ;
 BEGIN
     EXECUTE IMMEDIATE 'CREATE INDEX FK_pm_transition_action_chan4f ON pm_transition_action (change_by)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_creafe FOREIGN KEY (create_by) REFERENCES users (id)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'CREATE INDEX FK_cloud_service_config_crea30 ON cloud_service_config (create_by)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_chan63 FOREIGN KEY (change_by) REFERENCES users (id)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'CREATE INDEX FK_cloud_service_config_chane1 ON cloud_service_config (change_by)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_vali9c FOREIGN KEY (valid_id) REFERENCES valid (id)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'CREATE INDEX FK_cloud_service_config_valib2 ON cloud_service_config (valid_id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;

@@ -7,19 +7,23 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<label for="CustomerID"[% IF Required %] class="Mandatory"[% END %]>[% IF Required %]<span class="Marker">*</span> [% END %][% Translate("Customer ID") | html %]:</label>
+<label class="gray-semi-dark" for="CustomerID"[% IF Required %] class="Mandatory"[% END %]>
+    [% IF Required %]<span class="Marker">*</span> [% END %][% Translate("Customer ID") | html %]:
+    <button id="SelectionCustomerID" class="icon-hover CallForAction [% IF Readonly || !Data.SelectedCustomerUser %] Disabled[% END %]" title="[% IF Readonly %][% Translate("The customer ID is not changeable, no other customer ID can be assigned to this ticket.") | html %][% ELSIF !Data.SelectedCustomerUser %][% Translate("First select a customer user, then you can select a customer ID to assign to this ticket.") | html %][% ELSE %][% Translate("Select a customer ID to assign to this ticket.") | html %][% END %]" [% IF Readonly || !Data.SelectedCustomerUser %] disabled="disabled"[% END %]>
+        <i class="fa fa-building-o"></i>
+    </button>
+</label>
 <div class="Field">
-    <input type="text" name="CustomerID" id="CustomerID" value="[% Data.CustomerID | html %]" [% IF Readonly %] readonly="readonly" [% END %] class="W75pc[% IF Required %] Validate_Required[% END %] [% Data.CustomerIDInvalid | html %]"/>
+    <input type="text" name="CustomerID" id="CustomerID" value="[% Data.CustomerID | html %]" [% IF Readonly %] readonly="readonly" [% END %] class="W75pc[% IF Required %] Validate_Required[% END %] [% Data.CustomerIDInvalid | html %]" tabindex="-1"/>
 [% IF Required %]
     <div id="CustomerAutoCompleteError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
     <div id="CustomerAutoCompleteServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
 [% END %]
-    <button type="button" id="SelectionCustomerID" class="CallForAction Inline[% IF Readonly || !Data.SelectedCustomerUser %] Disabled[% END %]" title="[% IF Readonly %][% Translate("The customer ID is not changeable, no other customer ID can be assigned to this ticket.") | html %][% ELSIF !Data.SelectedCustomerUser %][% Translate("First select a customer user, then you can select a customer ID to assign to this ticket.") | html %][% ELSE %][% Translate("Select a customer ID to assign to this ticket.") | html %][% END %]" [% IF Readonly || !Data.SelectedCustomerUser %] disabled="disabled"[% END %]>
-        <span><i class="fa fa-building-o"></i> [% Translate("Select") | html %]</span>
-    </button>
+
 [% IF Data.DescriptionShort %]
     <div class="FieldExplanation">[% Data.DescriptionShort %]</div>
 [% END %]
+
 [% IF !Readonly %]
     <div id="TemplateSelectionCustomerID" class="Hidden">
         <div id="AgentTicketCustomerIDSelection" class="InnerContent WidgetSettingsForm">

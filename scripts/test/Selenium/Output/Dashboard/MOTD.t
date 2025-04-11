@@ -19,11 +19,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         # get dashboard MOTD plugin default sysconfig
-        my %MOTDConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %MOTDConfig = $SysConfigObject->SettingGet(
             Name    => 'DashboardBackend###0210-MOTD',
             Default => 1,
         );

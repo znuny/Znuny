@@ -19,6 +19,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::CommunicationChannel',
     'Kernel::System::DB',
     'Kernel::System::DateTime',
     'Kernel::System::HTMLUtils',
@@ -114,10 +115,10 @@ Create a MIME article.
             },
         ],
         NoAgentNotify    => 0,                                      # if you don't want to send agent notifications
-        AutoResponseType => 'auto reply'                            # auto reject|auto follow up|auto reply/new ticket|auto remove
+        AutoResponseType => 'auto reply',                           # auto reject|auto follow up|auto reply/new ticket|auto remove
 
         ForceNotificationToUserID   => [ 1, 43, 56 ],               # if you want to force somebody
-        ExcludeNotificationToUserID => [ 43,56 ],                   # if you want full exclude somebody from notfications,
+        ExcludeNotificationToUserID => [ 43,56 ],                   # if you want full exclude somebody from notifications,
                                                                     # will also be removed in To: line of article,
                                                                     # higher prio as ForceNotificationToUserID
         ExcludeMuteNotificationToUserID => [ 43,56 ],               # the same as ExcludeNotificationToUserID but only the
@@ -215,9 +216,9 @@ sub ArticleCreate {
             }
         }
         $Param{Charset} = '';
-        if ( $Param{ContentType} =~ /charset=/i ) {
+        if ( $Param{ContentType} =~ /charset\s*=\s*/i ) {
             $Param{Charset} = $Param{ContentType};
-            $Param{Charset} =~ s/.+?charset=("|'|)(\w+)/$2/gi;
+            $Param{Charset} =~ s/.+?charset\s*=\s*("|'|)(\w+)/$2/gi;
             $Param{Charset} =~ s/"|'//g;
             $Param{Charset} =~ s/(.+?);.*/$1/g;
 
@@ -440,7 +441,7 @@ sub ArticleCreate {
     for my $Attachment (@AttachmentConvert) {
 
         if (
-            $Attachment->{ContentType} eq "text/html; charset=\"$Param{Charset}\""
+            $Attachment->{ContentType} =~ /^text\/html; charset\s*=\s*"$Param{Charset}"$/i
             && $Attachment->{Filename} eq 'file-2'
             )
         {
@@ -713,27 +714,29 @@ Returns single article data.
 Returns:
 
     %Article = (
-        TicketID             => 123,
-        ArticleID            => 123,
-        From                 => 'Some Agent <email@example.com>',
-        To                   => 'Some Customer A <customer-a@example.com>',
-        Cc                   => 'Some Customer B <customer-b@example.com>',
-        Bcc                  => 'Some Customer C <customer-c@example.com>',
-        ReplyTo              => 'Some Customer B <customer-b@example.com>',
-        Subject              => 'some short description',
-        MessageID            => '<asdasdasd.123@example.com>',
-        InReplyTo            => '<asdasdasd.12@example.com>',
-        References           => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
-        ContentType          => 'text/plain; charset=ISO-8859-15',
-        Body                 => 'the message text',
-        SenderTypeID         => 1,
-        SenderType           => 'agent',
-        IsVisibleForCustomer => 1,
-        IncomingTime         => 1490690026,
-        CreateBy             => 1,
-        CreateTime           => '2017-03-28 08:33:47',
-        Charset              => 'ISO-8859-15',
-        MimeType             => 'text/plain',
+        TicketID               => 123,
+        ArticleID              => 123,
+        From                   => 'Some Agent <email@example.com>',
+        To                     => 'Some Customer A <customer-a@example.com>',
+        Cc                     => 'Some Customer B <customer-b@example.com>',
+        Bcc                    => 'Some Customer C <customer-c@example.com>',
+        ReplyTo                => 'Some Customer B <customer-b@example.com>',
+        Subject                => 'some short description',
+        MessageID              => '<asdasdasd.123@example.com>',
+        InReplyTo              => '<asdasdasd.12@example.com>',
+        References             => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
+        ContentType            => 'text/plain; charset=ISO-8859-15',
+        Body                   => 'the message text',
+        SenderTypeID           => 1,
+        SenderType             => 'agent',
+        CommunicationChannelID => 3,
+        CommunicationChannel   => 'Internal',
+        IsVisibleForCustomer   => 1,
+        IncomingTime           => 1490690026,
+        CreateBy               => 1,
+        CreateTime             => '2017-03-28 08:33:47',
+        Charset                => 'ISO-8859-15',
+        MimeType               => 'text/plain',
 
         # If DynamicFields => 1 was passed, you'll get an entry like this for each dynamic field:
         DynamicField_X => 'value_x',
@@ -769,6 +772,13 @@ sub ArticleGet {
 
     my %ArticleSenderTypeList = $Kernel::OM->Get('Kernel::System::Ticket::Article')->ArticleSenderTypeList();
 
+    my %CommunicationChannel;
+    if ( $Article{CommunicationChannelID} ) {
+        %CommunicationChannel = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelGet(
+            ChannelID => $Article{CommunicationChannelID},
+        );
+    }
+
     # Email parser object might be used below for its field cleanup methods only.
     my $EmailParser;
     if ( $Param{RealNames} ) {
@@ -798,25 +808,26 @@ sub ArticleGet {
     while ( my @Row = $DBObject->FetchrowArray() ) {
         %Data = (
             %Article,
-            From         => $Row[0],
-            ReplyTo      => $Row[1],
-            To           => $Row[2],
-            Cc           => $Row[3],
-            Bcc          => $Row[4],
-            Subject      => $Row[5],
-            MessageID    => $Row[6],
-            InReplyTo    => $Row[7],
-            References   => $Row[8],
-            ContentType  => $Row[9],
-            Body         => $Row[10],
-            IncomingTime => $Row[11],
-            SenderType   => $ArticleSenderTypeList{ $Article{SenderTypeID} },
+            From                 => $Row[0],
+            ReplyTo              => $Row[1],
+            To                   => $Row[2],
+            Cc                   => $Row[3],
+            Bcc                  => $Row[4],
+            Subject              => $Row[5],
+            MessageID            => $Row[6],
+            InReplyTo            => $Row[7],
+            References           => $Row[8],
+            ContentType          => $Row[9],
+            Body                 => $Row[10],
+            IncomingTime         => $Row[11],
+            SenderType           => $ArticleSenderTypeList{ $Article{SenderTypeID} },
+            CommunicationChannel => $CommunicationChannel{ChannelName},
         );
 
         # Determine charset.
-        if ( $Data{ContentType} && $Data{ContentType} =~ /charset=/i ) {
+        if ( $Data{ContentType} && $Data{ContentType} =~ /charset\s*=\s*/i ) {
             $Data{Charset} = $Data{ContentType};
-            $Data{Charset} =~ s/.+?charset=("|'|)(\w+)/$2/gi;
+            $Data{Charset} =~ s/.+?charset\s*=\s*("|'|)(\w+)/$2/gi;
             $Data{Charset} =~ s/"|'//g;
             $Data{Charset} =~ s/(.+?);.*/$1/g;
         }
@@ -1086,7 +1097,7 @@ Returns:
         Content-Transfer-Encoding: 8bit
 
         Welcome to OTRS!
-        ...
+        # ...
     ';
 
 =cut
@@ -1208,7 +1219,7 @@ Returns:
             FilesizeRaw        => 183,
             Disposition        => 'attachment',
         },
-        ...
+        # ...
     };
 
 =cut

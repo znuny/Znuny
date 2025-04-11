@@ -45,7 +45,7 @@
                         <p class="HeaderMessage">[% Setting.Navigation | html %]</p>
                         <div class="ActionMenu Visible">
                             <div class="WidgetAction Compare">
-                                <a href=""><i class="fa fa-exchange"></i></a>
+                                <a class="icon-hover" href=""><i class="fa fa-exchange"></i></a>
                             </div>
                         </div>
                     </div>

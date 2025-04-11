@@ -14,12 +14,6 @@
         <li class="[% Data.item("Customer::Selected") | html %]"><a href="#" id="Dashboard[% Data.Name | html %]Customer" class="[% Data.item("Customer::Selected") | html %]">[% Translate("Customers") | html %] ([% Data.Customer | html %])</a></li>
     </ul>
 </div>
-[% RenderBlockStart("ContentSmallTicketGenericFilterNavBar") %]
-<span class="Pagination">
-    [% Data.SiteNavBar %]
-</span>
-[% RenderBlockEnd("ContentSmallTicketGenericFilterNavBar") %]
-
 [% RenderBlockEnd("ContentSmallUserOnlineFilter") %]
 <table class="DataTable DashboardUserOnline">
     <tbody>
@@ -48,28 +42,6 @@
                     </span>
                 [% END %]
                 </p>
-
-                [% IF Data.AgentEnableChat && Data.UserID != Env('UserID') || Data.CustomerEnableChat %]
-                <span class="UserChatIcons Hidden">
-                    <a href="#" title="[% Translate('Start chat') | html %]" type="button" class="UserChatStart"
-                        data-user-id="[% Data.UserID | html %]" data-user-type="[% Data.UserType.replace('Agent', 'User') | html %]"
-                        data-user-fullname="[% Data.UserFullname | html %]">
-                        <i class="fa fa-comments"></i>
-                    </a>
-                    [% IF Data.VideoChatEnabled %]
-                    <a href="#" title="[% Translate('Video call') | html %]" type="button" class="UserVideoCallStart[% IF !Data.VideoChatAvailable %] Unavailable[% ELSIF !Data.VideoChatSupport %] Unsupported[% END %]"
-                        data-user-id="[% Data.UserID | html %]" data-user-type="[% Data.UserType.replace('Agent', 'User') | html %]"
-                        data-user-fullname="[% Data.UserFullname | html %]">
-                        <i class="fa fa-video-camera"></i>
-                    </a>
-                    <a href="#" title="[% Translate('Audio call') | html %]" type="button" class="UserAudioCallStart[% IF !Data.VideoChatAvailable %] Unavailable[% ELSIF !Data.VideoChatSupport %] Unsupported[% END %]"
-                        data-user-id="[% Data.UserID | html %]" data-user-type="[% Data.UserType.replace('Agent', 'User') | html %]"
-                        data-user-fullname="[% Data.UserFullname | html %]">
-                        <i class="fa fa-microphone"></i>
-                    </a>
-                    [% END %]
-                </span>
-                [% END %]
             </td>
         </tr>
 [% RenderBlockEnd("ContentSmallUserOnlineRow") %]
@@ -82,3 +54,6 @@
 [% RenderBlockEnd("ContentSmallUserOnlineNone") %]
     </tbody>
 </table>
+[% RenderBlockStart("ContentSmallTicketGenericFilterNavBar") %]
+<span class="Pagination">[% Data.SiteNavBar %]</span>
+[% RenderBlockEnd("ContentSmallTicketGenericFilterNavBar") %]

@@ -927,7 +927,7 @@
 }
 @media (max-width: 768px) {
   #jstree-dnd.jstree-dnd-responsive {
-    line-height: 40px;
+    line-height: var(--table-tr-line-hight);
     font-weight: bold;
     font-size: 1.1em;
     text-shadow: 1px 1px white;
@@ -970,20 +970,20 @@
   }
   .jstree-default-responsive .jstree-node {
     min-height: 40px;
-    line-height: 40px;
+    line-height: var(--table-tr-line-hight);
     margin-left: 40px;
     min-width: 40px;
     white-space: nowrap;
   }
   .jstree-default-responsive .jstree-anchor {
-    line-height: 40px;
+    line-height: var(--table-tr-line-hight);
     height: 40px;
   }
   .jstree-default-responsive .jstree-icon,
   .jstree-default-responsive .jstree-icon:empty {
     width: 40px;
     height: 40px;
-    line-height: 40px;
+    line-height: var(--table-tr-line-hight);
   }
   .jstree-default-responsive > .jstree-container-ul > .jstree-node {
     margin-left: 0;

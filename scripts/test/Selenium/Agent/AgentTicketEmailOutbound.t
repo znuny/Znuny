@@ -19,13 +19,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
         my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
-
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
         # disable check email addresses
         $HelperObject->ConfigSettingChange(
@@ -58,7 +58,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -116,7 +116,7 @@ $Selenium->RunTest(
 
         # add test customer for testing
         my $TestCustomer       = 'Customer' . $HelperObject->GetRandomID();
-        my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomer,
             UserLastname   => $TestCustomer,
@@ -165,7 +165,7 @@ $Selenium->RunTest(
         my $Message = 'Article subject will be empty if the subject contains only the ticket hook!';
 
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice:contains(\"$Message\")').length;"),
+            $Selenium->execute_script("return \$('.MessageBox.Warning:contains(\"$Message\")').length;"),
             "Notification about empty subject is found",
         );
 
@@ -289,7 +289,7 @@ $Selenium->RunTest(
         # make sure the cache is correct
         for my $Cache (qw(Ticket CustomerUser))
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

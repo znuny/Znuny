@@ -13,7 +13,7 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Output = qx{"$^X" bin/otrs.Console.pl Maint::Ticket::PendingCheck --quiet};
+my $Output = qx{"$^X" bin/znuny.Console.pl Maint::Ticket::PendingCheck --quiet};
 
 $Self->False( scalar( $Output =~ /\S/ ), "No output with --quiet" );
 

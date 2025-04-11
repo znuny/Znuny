@@ -32,6 +32,17 @@ use Getopt::Std;
 
 use Kernel::System::ObjectManager;
 
+# UID check
+if ( $> == 0 ) {    # $EFFECTIVE_USER_ID
+    print "
+Cannot run this script as root.
+Please run it as the 'znuny' user or with the help of su:
+    su -c \"$0\" -s /bin/bash znuny
+";
+
+    exit 1;
+}
+
 # get options
 my %Opts;
 my $DB            = '';
@@ -42,14 +53,14 @@ getopt( 'hbd', \%Opts );
 if ( exists $Opts{h} ) {
     print <<EOF;
 
-Restore an OTRS system from backup.
+Restore a Znuny system from backup.
 
 Usage:
- restore.pl -b /data_backup/<TIME>/ -d /opt/otrs/
+ restore.pl -b /data_backup/<TIME>/ -d /opt/znuny/
 
 Options:
  -b                     - Directory of the backup files.
- -d                     - Target OTRS home directory.
+ -d                     - Target Znuny home directory.
  [-h]                   - Display help for this command.
 
 EOF
@@ -110,7 +121,7 @@ elsif ( -e $ConfigBackupBz2 ) {
 # create common objects
 local $Kernel::OM = Kernel::System::ObjectManager->new(
     'Kernel::System::Log' => {
-        LogPrefix => 'OTRS-restore.pl',
+        LogPrefix => 'Znuny-restore.pl',
     },
 );
 

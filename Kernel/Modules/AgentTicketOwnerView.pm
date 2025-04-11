@@ -10,6 +10,7 @@ package Kernel::Modules::AgentTicketOwnerView;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -388,7 +389,7 @@ sub Run {
         Filters           => \%NavBarFilter,
         LinkFilter        => $LinkFilter,
 
-        TitleName  => Translatable('My Owned Tickets'),
+        TitleName  => Translatable('My owned tickets'),
         TitleValue => $Filters{$Filter}->{Name},
         Bulk       => 1,
 

@@ -116,9 +116,11 @@ sub Run {
     my $URL = $LayoutObject->{Baselink};
     my %Return;
     my $Priority = $Param{Config}->{Priority};
+    my $Block    = $Param{Config}->{Block};
+
     if ($CountNew) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Description => Translatable('Watched Tickets New'),
             Count       => $CountNew,
             Class       => $ClassNew,
@@ -129,7 +131,7 @@ sub Run {
     }
     if ($CountReached) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Description => Translatable('Watched Tickets Reminder Reached'),
             Count       => $CountReached,
             Class       => $ClassReached,
@@ -140,7 +142,7 @@ sub Run {
     }
     if ($Count) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Description => Translatable('Watched Tickets Total'),
             Count       => $Count,
             Class       => $Class,

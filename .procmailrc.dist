@@ -7,7 +7,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-#SYS_HOME=/opt/otrs/
+#SYS_HOME=/opt/znuny/
 SYS_HOME=$HOME
 
 SHELL=/bin/sh
@@ -70,7 +70,7 @@ COMSAT=no
 # Pipe all email into the PostMaster process.
 
 :0 w
-| $SYS_HOME/bin/otrs.Console.pl Maint::PostMaster::Read
+| $SYS_HOME/bin/znuny.Console.pl Maint::PostMaster::Read
 
 
 # Spool all the rest (which the console command 'Maint::PostMaster::Read' can't process!)

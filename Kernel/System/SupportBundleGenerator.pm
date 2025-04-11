@@ -12,6 +12,8 @@ package Kernel::System::SupportBundleGenerator;
 use strict;
 use warnings;
 
+use Kernel::System::VariableCheck qw(:all);
+
 use Archive::Tar;
 use Cwd qw(abs_path);
 
@@ -22,7 +24,6 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Package',
-    'Kernel::System::Registration',
     'Kernel::System::SupportDataCollector',
     'Kernel::System::SysConfig',
     'Kernel::System::DateTime',
@@ -67,7 +68,7 @@ sub new {
 
 =head2 Generate()
 
-Generates a support bundle C<.tar> or C<.tar.gz> with the following contents: Registration Information,
+Generates a support bundle C<.tar> or C<.tar.gz> with the following contents:
 Support Data, Installed Packages, and another C<.tar> or C<.tar.gz> with all changed or new files in the
 OTRS installation directory.
 
@@ -106,21 +107,6 @@ sub Generate {
     ( $SupportFiles{PackageListContent}, $SupportFiles{PackageListFilename} ) = $Self->GeneratePackageList();
     if ( !$SupportFiles{PackageListFilename} ) {
         my $Message = 'Can not generate the list of installed packages!';
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => $Message,
-        );
-        return {
-            Success => 0,
-            Message => $Message,
-        };
-    }
-
-    # get the registration information
-    ( $SupportFiles{RegistrationInfoContent}, $SupportFiles{RegistrationInfoFilename} )
-        = $Self->GenerateRegistrationInfo();
-    if ( !$SupportFiles{RegistrationInfoFilename} ) {
-        my $Message = 'Can not get the registration information!';
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => $Message,
@@ -201,7 +187,7 @@ sub Generate {
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     my @List;
-    for my $Key (qw(PackageList RegistrationInfo SupportData CustomFilesArchive ConfigurationDump)) {
+    for my $Key (qw(PackageList SupportData CustomFilesArchive ConfigurationDump)) {
 
         if ( $SupportFiles{ $Key . 'Filename' } && $SupportFiles{ $Key . 'Content' } ) {
 
@@ -448,59 +434,9 @@ sub GeneratePackageList {
     return ( \$CSVContent, 'InstalledPackages.csv' );
 }
 
-=head2 GenerateRegistrationInfo()
-
-Generates a C<.json> file with the otrs system registration information
-
-    my ( $Content, $Filename ) = $SupportBundleGeneratorObject->GenerateRegistrationInfo();
-
-Returns:
-
-    $Content  = $FileContentsRef;
-    $Filename = 'RegistrationInfo.json';
-
-=cut
-
-sub GenerateRegistrationInfo {
-    my ( $Self, %Param ) = @_;
-
-    my %RegistrationInfo = $Kernel::OM->Get('Kernel::System::Registration')->RegistrationDataGet(
-        Extended => 1,
-    );
-
-    my %Data;
-    if (%RegistrationInfo) {
-        my $State = $RegistrationInfo{State} || '';
-        if ( $State && lc $State eq 'registered' ) {
-            $State = 'active';
-        }
-
-        %Data = (
-            %{ $RegistrationInfo{System} },
-            State              => $State,
-            APIVersion         => $RegistrationInfo{APIVersion},
-            APIKey             => $RegistrationInfo{APIKey},
-            LastUpdateID       => $RegistrationInfo{LastUpdateID},
-            RegistrationKey    => $RegistrationInfo{UniqueID},
-            SupportDataSending => $RegistrationInfo{SupportDataSending},
-            Type               => $RegistrationInfo{Type},
-            Description        => $RegistrationInfo{Description},
-        );
-    }
-    else {
-        %Data = %RegistrationInfo;
-    }
-
-    my $JSONContent = $Kernel::OM->Get('Kernel::System::JSON')->Encode(
-        Data => \%Data,
-    );
-
-    return ( \$JSONContent, 'RegistrationInfo.json' );
-}
-
 =head2 GenerateConfigurationDump()
 
-Generates a <.yml> file with the otrs system registration information
+Generates a <.yml> file with the otrs system configuration information
 
     my ( $Content, $Filename ) = $SupportBundleGeneratorObject->GenerateConfigurationDump();
 
@@ -659,6 +595,9 @@ sub _GetCustomFileList {
             # do not include documentation
             next FILE if $File =~ /doc/;
 
+            # do not include sessions
+            next FILE if $File =~ /sessions/;
+
             # add directory to list
             push @Files, $Self->_GetCustomFileList( Directory => $File );
         }
@@ -712,6 +651,40 @@ sub _MaskPasswords {
     }
 
     my $StringToMask = $Param{StringToMask};
+
+    if ( $Param{YAML} ) {
+        my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+
+        my $Data = $YAMLObject->Load(
+            Data => $StringToMask,
+        );
+        return $StringToMask if !IsHashRefWithData($Data);
+        return $StringToMask if !IsHashRefWithData( $Data->{Modified} );
+
+        OPTIONNAME:
+        for my $OptionName ( sort keys %{ $Data->{Modified} } ) {
+            next OPTIONNAME if $OptionName !~ m{Password|Pwd}i;
+
+            my $Option = $Data->{Modified}->{$OptionName};
+            next OPTIONNAME if !defined $Option->{EffectiveValue};
+
+            if ( ref $Option->{EffectiveValue} eq 'ARRAY' ) {
+                $Option->{EffectiveValue} = [
+                    map {'xxx'} @{ $Option->{EffectiveValue} }
+                ];
+            }
+            elsif ( !ref $Option->{EffectiveValue} ) {
+                $Option->{EffectiveValue} = 'xxx';
+            }
+        }
+
+        my $String = $YAMLObject->Dump(
+            Data => $Data,
+        );
+        return $StringToMask if !IsStringWithData($String);
+
+        return $String;
+    }
 
     # Trim any passswords.
     # Simple settings like $Self->{'DatabasePw'} or $Self->{'AuthModule::LDAP::SearchUserPw1'}.

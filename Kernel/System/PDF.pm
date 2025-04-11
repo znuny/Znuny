@@ -619,12 +619,12 @@ and an empty list is returned in list context.
     $CellData = [
         [
             {
-                Content => "Cell 1 (Row 1, Column 1)",  # (optional)
-                Font => 'Monospaced',                   # (optional) (see DocumentNew())
-                FontSize => 13,                         # (optional)
-                FontColor => '#00FF00',                 # (optional)
-                Align => 'center',                      # (optional)
-                Lead => 7,                              # (optional)
+                Content         => "Cell 1 (Row 1, Column 1)",  # (optional)
+                Font            => 'Monospaced',                   # (optional) (see DocumentNew())
+                FontSize        => 13,                         # (optional)
+                FontColor       => '#00FF00',                 # (optional)
+                Align           => 'center',                      # (optional)
+                Lead            => 7,                              # (optional)
                 BackgroundColor => '#101010',           # (optional)
             },
             {
@@ -1230,7 +1230,7 @@ Output a image
 
     $True = $PDFObject->Image(
         File   => '/path/image.gif',  # (gif|jpg|png)
-        Type   => 'ReturnFalse'       # (optional) default Reduce (ReturnFalse|Reduce)
+        Type   => 'ReturnFalse',      # (optional) default Reduce (ReturnFalse|Reduce)
         Width  => 300,                # width of image
         Height => 150,                # height of image
     );
@@ -1364,7 +1364,7 @@ Output a horizontal line
 
     $True = $PDFObject->HLine(
         Width     => 300,           # (optional) default 'end of printable dimension'
-        Type      => 'ReturnFalse'  # (optional) default Cut (ReturnFalse|Cut)
+        Type      => 'ReturnFalse', # (optional) default Cut (ReturnFalse|Cut)
         Color     => '#101010',     # (optional) default black
         LineWidth => 1,             # (optional) default 1
     );
@@ -2706,7 +2706,7 @@ sub _TextCalculate {
                     FontSize => $Param{FontSize},
                 );
 
-                # caculate exactly point of cut
+                # calculate exact point of cut
                 while ( $RowForeWidth < $Param{Width} ) {
                     $RowFore .= substr( $RowRear, 0, 1 );
                     $RowRear      = substr( $RowRear, 1 );
@@ -2750,7 +2750,7 @@ sub _TextCalculate {
             push( @PossibleRows, $Row );
             $Return{RequiredHeight} += $RowHeight;
 
-            # check, if min one character can count (protection of infinite loop)
+            # check, if min one character can count (protection from infinite loop)
             if ( defined( $Param{Text} ) ) {
                 if ( length( $Param{Text} ) >= $TextLength ) {
                     $Return{RequiredWidth}  = 0;

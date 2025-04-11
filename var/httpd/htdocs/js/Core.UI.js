@@ -124,7 +124,7 @@ Core.UI = (function (TargetNS) {
                 return false;
             }
 
-            // if tab doesnt exist or is already active, do nothing
+            // if tab doesn't exist or is already active, do nothing
             if ($TargetObj.length && !$TargetObj.hasClass('Active')) {
 
                 $ContainerObj.find('.Header > a').removeClass('Active');
@@ -391,7 +391,7 @@ Core.UI = (function (TargetNS) {
         }
         // otherwise insert it on top
         else {
-            $NotificationObj.insertAfter('#NavigationContainer');
+            $NotificationObj.insertAfter('#ToolBar');
         }
 
         // show it finally with animation and execute possible callbacks
@@ -522,6 +522,7 @@ Core.UI = (function (TargetNS) {
 
             var $ContainerObj = $DropObj.closest('.Field'),
                 $FileuploadFieldObj = $ContainerObj.find('.AjaxDnDUpload'),
+                FieldID = $FileuploadFieldObj.attr('id'),
                 FormID = $FileuploadFieldObj.data('form-id') ? $FileuploadFieldObj.data('form-id') : $DropObj.closest('form').find('input[name=FormID]').val(),
                 ChallengeToken = $DropObj.closest('form').find('input[name=ChallengeToken]').val(),
                 IsMultiple = ($FileuploadFieldObj.attr('multiple') == 'multiple'),
@@ -532,10 +533,10 @@ Core.UI = (function (TargetNS) {
                 FileTypes = $FileuploadFieldObj.data('file-types'),
                 Upload,
                 XHRObj,
-                FileTypeNotAllowed = [],
-                FileTypeNotAllowedText,
-                FilesTooBig = [],
-                FilesTooBigText,
+                FilenameTypeNotAllowed = [],
+                FilenameTypeNotAllowedText,
+                FilenamesTooBig = [],
+                FilenamesTooBigText,
                 FilenamesTooLong = [],
                 FilenamesTooLongText,
                 AttemptedToUploadAgain = [],
@@ -583,7 +584,10 @@ Core.UI = (function (TargetNS) {
             }
 
             if (MaxFiles && $FileuploadFieldObj.closest('.Field').find('.AttachmentList tbody tr').length >= MaxFiles) {
-                alert(Core.Language.Translate("Sorry, you can only upload %s files.", [ MaxFiles ]));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, you can only upload %s files.", [ MaxFiles ])
+                );
                 return false;
             }
 
@@ -632,13 +636,13 @@ Core.UI = (function (TargetNS) {
 
                 // check for allowed file types
                 if (typeof FileTypes === 'object' && FileTypes.indexOf(FileExtension) < 0) {
-                    FileTypeNotAllowed.push(File.name);
+                    FilenameTypeNotAllowed.push(File.name);
                     return true;
                 }
 
                 // check for max file size per file
                 if (MaxSizePerFile && File.size > MaxSizePerFile) {
-                    FilesTooBig.push(File.name);
+                    FilenamesTooBig.push(File.name);
                     return true;
                 }
 
@@ -744,8 +748,9 @@ Core.UI = (function (TargetNS) {
                             }
 
                             // Append input field for validation (see bug#13081).
-                            if (!$('#AttachmentExists').length) {
-                                $('.AttachmentListContainer').append('<input type="hidden" id="AttachmentExists" name="AttachmentExists" value="1" />');
+                            // Add the FieldID to the input field value to make it easier to identify the upload field, which gets a new file.
+                            if (!$ContainerObj.find('.AttachmentListContainer').find('#AttachmentExists').length) {
+                                $ContainerObj.find('.AttachmentListContainer').append('<input type="hidden" id="AttachmentExists" name="AttachmentExists" value="' + FieldID + '" />');
                             }
                         });
 
@@ -755,39 +760,42 @@ Core.UI = (function (TargetNS) {
                         $DropObj.removeClass('Uploading');
                     },
                     error: function() {
-                        // TODO: show an error tooltip?
                         $DropObj.removeClass('Uploading');
                     }
                 });
             });
 
-            if (FileTypeNotAllowed.length || FilesTooBig.length || FilenamesTooLong.length || NoSpaceLeft.length || AttemptedToUploadAgain.length) {
+            if (FilenameTypeNotAllowed.length || FilenamesTooBig.length || FilenamesTooLong.length || NoSpaceLeft.length || AttemptedToUploadAgain.length) {
 
                 // we need to empty the relevant file upload field because it would otherwise
                 // transfer the selected files again (only on click select, not on drag & drop)
                 $DropObj.prev('input[type=file]').val('');
                 $DropObj.removeClass('Uploading');
 
-                FileTypeNotAllowedText     = '';
-                FilesTooBigText            = '';
+                FilenameTypeNotAllowedText = '';
+                FilenamesTooBigText        = '';
                 FilenamesTooLongText       = '';
                 AttemptedToUploadAgainText = '';
                 NoSpaceLeftText            = '';
 
-                if (FileTypeNotAllowed.length) {
-                    FileTypeNotAllowedText =
+                if (FilenameTypeNotAllowed.length) {
+                    FilenameTypeNotAllowedText =
                         Core.Language.Translate(
                             'The following files are not allowed to be uploaded: %s',
-                            '<br>' + FileTypeNotAllowed.join(',<br>') + '<br><br>'
+                            '<br>' + FilenameTypeNotAllowed.join(',<br>') + '<br><br>'
+                        )
+                        + Core.Language.Translate(
+                            'The following files types are allowed: %s',
+                            '<br>' + FileTypes.join(', ') + '<br><br>'
                         );
                 }
 
-                if (FilesTooBig.length) {
-                    FilesTooBigText =
+                if (FilenamesTooBig.length) {
+                    FilenamesTooBigText =
                         Core.Language.Translate(
                             'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
                             MaxSizePerFileHR,
-                            '<br>' + FilesTooBig.join(',<br>') + '<br><br>'
+                            '<br>' + FilenamesTooBig.join(',<br>') + '<br><br>'
                         );
                 }
 
@@ -821,7 +829,7 @@ Core.UI = (function (TargetNS) {
                             Core.App.HumanReadableDataSize(WebMaxFileUpload)
                         );
                 }
-                Core.UI.Dialog.ShowAlert(Core.Language.Translate('Upload information'), FileTypeNotAllowedText + FilesTooBigText + FilenamesTooLongText + AttemptedToUploadAgainText + NoSpaceLeftText);
+                Core.UI.Dialog.ShowAlert(Core.Language.Translate('Upload information'), FilenameTypeNotAllowedText + FilenamesTooBigText + FilenamesTooLongText + AttemptedToUploadAgainText + NoSpaceLeftText);
             }
         }
 
@@ -836,7 +844,7 @@ Core.UI = (function (TargetNS) {
 
             var $TriggerObj = $(this),
                 $AttachmentListContainerObj = $TriggerObj.closest('.AttachmentListContainer'),
-                $UploadFieldObj = $AttachmentListContainerObj.next('.AjaxDnDUpload'),
+                $UploadFieldObj = $AttachmentListContainerObj.nextAll('.AjaxDnDUpload'),
                 FormID = $UploadFieldObj.data('form-id') ? $UploadFieldObj.data('form-id') : $(this).closest('form').find('input[name=FormID]').val(),
                 Data = {
                     Action: $(this).data('delete-action') ? $(this).data('delete-action') : 'AjaxAttachment',

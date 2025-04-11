@@ -61,7 +61,7 @@ Core.Agent.Admin.GenericInterfaceTransportHTTPREST = (function (TargetNS) {
         }
 
         // remove possible value
-        $('#' + IDSelector).parent().remove();
+        $('#' + IDSelector).parents('.ValueRow').remove();
 
         return false;
     };

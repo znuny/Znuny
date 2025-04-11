@@ -11,6 +11,7 @@ package Kernel::Modules::AgentTicketWatchView;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -31,9 +32,11 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     # get needed objects
-    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject        = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $SessionObject      = $Kernel::OM->Get('Kernel::System::AuthSession');
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
     # get config parameter
     my $Config = $ConfigObject->Get("Ticket::Frontend::$Self->{Action}");
@@ -44,9 +47,6 @@ sub Run {
     my $OrderBy = $ParamObject->GetParam( Param => 'OrderBy' )
         || $Config->{'Order::Default'}
         || 'Up';
-
-    # get session object
-    my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
 
     # store last screen
     $SessionObject->UpdateSessionID(
@@ -125,7 +125,7 @@ sub Run {
     }
 
     # get all dynamic fields
-    $Self->{DynamicField} = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+    $Self->{DynamicField} = $DynamicFieldObject->DynamicFieldListGet(
         Valid      => 1,
         ObjectType => ['Ticket'],
     );
@@ -227,8 +227,8 @@ sub Run {
             Name   => Translatable('New Article'),
             Prio   => 1001,
             Search => {
-                WatchUserIDs => [ $Self->{UserID} ],
-                TicketFlag   => {
+                WatchUserIDs  => [ $Self->{UserID} ],
+                NotTicketFlag => {
                     Seen => 1,
                 },
                 TicketFlagUserID => $Self->{UserID},
@@ -310,50 +310,8 @@ sub Run {
             %{ $Filters{$Filter}->{Search} },
             %ColumnFilter,
             Result => 'ARRAY',
-            Limit  => 1_000,
+            Limit  => $Limit,
         );
-    }
-
-    # prepare shown tickets for new article tickets
-    if ( $Filter eq 'New' ) {
-
-        my @OriginalViewableTicketsAll = $TicketObject->TicketSearch(
-            %{ $Filters{All}->{Search} },
-            Result => 'ARRAY',
-        );
-
-        my %OriginalViewableTicketsNotNew;
-        for my $TicketID (@OriginalViewableTickets) {
-            $OriginalViewableTicketsNotNew{$TicketID} = 1;
-        }
-
-        my @OriginalViewableTicketsTmp;
-        TICKETID:
-        for my $TicketIDAll (@OriginalViewableTicketsAll) {
-            next TICKETID if $OriginalViewableTicketsNotNew{$TicketIDAll};
-            push @OriginalViewableTicketsTmp, $TicketIDAll;
-        }
-        @OriginalViewableTickets = @OriginalViewableTicketsTmp;
-
-        my @ViewableTicketsAll = $TicketObject->TicketSearch(
-            %{ $Filters{All}->{Search} },
-            %ColumnFilter,
-            Result => 'ARRAY',
-            Limit  => 1_000,
-        );
-
-        my %ViewableTicketsNotNew;
-        for my $TicketID (@ViewableTickets) {
-            $ViewableTicketsNotNew{$TicketID} = 1;
-        }
-
-        my @ViewableTicketsTmp;
-        TICKETID:
-        for my $TicketIDAll (@ViewableTicketsAll) {
-            next TICKETID if $ViewableTicketsNotNew{$TicketIDAll};
-            push @ViewableTicketsTmp, $TicketIDAll;
-        }
-        @ViewableTickets = @ViewableTicketsTmp;
     }
 
     my $View = $ParamObject->GetParam( Param => 'View' ) || '';
@@ -385,6 +343,40 @@ sub Run {
             NoCache     => 1,
         );
     }
+    elsif ( $Self->{Subaction} eq 'AJAXUnsubscribeTickets' ) {
+
+        my $TicketIDs = $ParamObject->GetParam(
+            Param => 'TicketIDs',
+        ) // '';
+        my @TicketIDs = split /,/, $TicketIDs;
+        my $Success   = 1;
+
+        TICKETID:
+        for my $TicketID ( sort @TicketIDs ) {
+            my $Unsubscribed = $TicketObject->TicketWatchUnsubscribe(
+                TicketID    => $TicketID,
+                WatchUserID => $Self->{UserID},
+                UserID      => $Self->{UserID},
+            );
+            next TICKETID if $Unsubscribed;
+
+            $Success = 0;
+        }
+
+        my %Content = (
+            Success => $Success,
+        );
+        my $JSONEncodedContent = $JSONObject->Encode(
+            Data => \%Content,
+        );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $JSONEncodedContent,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
     else {
 
         # store column filters
@@ -405,16 +397,6 @@ sub Run {
             %ColumnFilter,
             Result => 'COUNT',
         ) || 0;
-
-        # prepare count for new article tickets
-        if ( $FilterColumn eq 'New' ) {
-            my $CountAll = $TicketObject->TicketSearch(
-                %{ $Filters{All}->{Search} },
-                %ColumnFilter,
-                Result => 'COUNT',
-            ) || 0;
-            $Count = $CountAll - $Count;
-        }
 
         $NavBarFilter{ $Filters{$FilterColumn}->{Prio} } = {
             Count  => $Count,

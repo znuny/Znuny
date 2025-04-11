@@ -11,6 +11,7 @@ package Kernel::Modules::AgentPreferences;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -33,11 +34,13 @@ sub Run {
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
-    my $EditUserID   = $ParamObject->GetParam( Param => 'EditUserID' );
 
+    my $EditUserID = $ParamObject->GetParam( Param => 'EditUserID' );
     $Self->{CurrentUserID} = $Self->{UserID};
+
     if (
         $EditUserID
+        && $EditUserID != $Self->{UserID}
         && $Self->_CheckEditPreferencesPermission()
         )
     {
@@ -64,7 +67,7 @@ sub Run {
         );
 
         # update session
-        if ($Success) {
+        if ( $Success && !defined $EditUserID ) {
             $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
                 SessionID => $Self->{SessionID},
                 Key       => $Key,
@@ -140,17 +143,30 @@ sub Run {
                 }
             }
 
+            # Check if a reload of the page is needed.
+            if ( $Preferences{$Group}->{NeedsReload} ) {
+                $ConfigNeedsReload = 1;
+            }
+
+            # Enable config reload for all generic modules
+            if ( $Module eq 'Kernel::Output::HTML::Preferences::Generic' ) {
+                $ConfigNeedsReload = 1;
+            }
+
+            # When editing another agent, we don't want to reload the page and don't want to update session data.
+            if ( defined $Self->{EditingAnotherAgent} ) {
+                $ConfigNeedsReload = 0;
+            }
+
             if (
                 $Object->Run(
-                    GetParam => \%GetParam,
-                    UserData => \%UserData
+                    GetParam          => \%GetParam,
+                    UserData          => \%UserData,
+                    UpdateSessionData => $ConfigNeedsReload,
                 )
                 )
             {
                 $Message .= $Object->Message();
-                if ( $Preferences{$Group}->{NeedsReload} ) {
-                    $ConfigNeedsReload = 1;
-                }
             }
             else {
                 $Priority .= 'Error';
@@ -182,8 +198,9 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Message  = '';
-        my $Priority = '';
+        my $Message           = '';
+        my $Priority          = '';
+        my $ConfigNeedsReload = 0;
 
         # check group param
         my @Groups = $ParamObject->GetArray( Param => 'Group' );
@@ -229,10 +246,20 @@ sub Run {
                 }
             }
 
+            if ( $Preferences{$Group}->{NeedsReload} ) {
+                $ConfigNeedsReload = 1;
+            }
+
+            # Enable config reload for all generic modules
+            if ( $Module eq 'Kernel::Output::HTML::Preferences::Generic' ) {
+                $ConfigNeedsReload = 1;
+            }
+
             if (
                 $Object->Run(
-                    GetParam => \%GetParam,
-                    UserData => \%UserData
+                    GetParam          => \%GetParam,
+                    UserData          => \%UserData,
+                    UpdateSessionData => $ConfigNeedsReload,
                 )
                 )
             {
@@ -256,199 +283,6 @@ sub Run {
         return $LayoutObject->Redirect(
             OP => "Action=AgentPreferences;Priority=$Priority;Message=$Message",
         );
-    }
-
-    elsif ( $Self->{Subaction} eq 'SettingUpdate' ) {
-
-        # challenge token check for write action
-        $LayoutObject->ChallengeTokenCheck();
-
-        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
-
-        my $SettingName        = $ParamObject->GetParam( Param => 'SettingName' ) || '';
-        my $EffectiveValueJSON = $ParamObject->GetParam( Param => 'EffectiveValue' );
-
-        my $EffectiveValue;
-
-        if ( !defined $EffectiveValueJSON ) {
-            $EffectiveValue = undef;
-        }
-        elsif (
-            !$EffectiveValueJSON
-            || $EffectiveValueJSON eq '"0"'
-
-            )
-        {
-            $EffectiveValue = 0;
-        }
-        else {
-            $EffectiveValue = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
-                Data => $EffectiveValueJSON,
-            );
-        }
-
-        my %Setting = $SysConfigObject->SettingGet(
-            Name            => $SettingName,
-            OverriddenInXML => 1,
-            UserID          => 1,
-        );
-        my $DataIsDifferent = DataIsDifferent(
-            Data1 => $EffectiveValue,
-            Data2 => $Setting{EffectiveValue},
-        );
-
-        if ( !$DataIsDifferent ) {
-            return $Self->_SettingReset( SettingName => $SettingName );
-        }
-
-        my %Result;
-
-        my %UpdateResult = $SysConfigObject->SettingUpdate(
-            Name           => $SettingName,
-            EffectiveValue => $EffectiveValue,
-            TargetUserID   => $Self->{CurrentUserID},
-            UserID         => $Self->{CurrentUserID},
-        );
-
-        if ( $UpdateResult{Error} ) {
-            $Result{Data}->{Error} = $UpdateResult{Error};
-        }
-        elsif ( !$SysConfigObject->can('UserConfigurationDeploy') ) {    # OTRS Business Solution™
-            $Result{Data}->{Error} = $Kernel::OM->Get('Kernel::Language')->Translate(
-                "This feature is part of the %s. Please contact us at %s for an upgrade."
-                , 'OTRS Business Solution™'
-                , 'sales@otrs.com'
-            );
-        }
-        else {
-
-            # update successful, now deploy only this setting (if it's dirty)
-            my %UpdatedSetting = $SysConfigObject->SettingGet(
-                Name         => $SettingName,
-                TargetUserID => $Self->{CurrentUserID},
-            );
-
-            if ( $UpdatedSetting{IsDirty} ) {
-                my $DeploySuccess = $SysConfigObject->UserConfigurationDeploy(
-                    TargetUserID => $Self->{CurrentUserID},
-                    Comments     => Translatable('Updated user preferences'),
-                );
-
-                if ( !$DeploySuccess ) {
-                    $Result{Data}->{Error} = $Kernel::OM->Get('Kernel::Language')->Translate(
-                        "System was unable to deploy your changes.",
-                    );
-                }
-            }
-
-            # reload setting with fresh data
-            %UpdatedSetting = $SysConfigObject->SettingGet(
-                Name         => $SettingName,
-                TargetUserID => $Self->{CurrentUserID},
-            );
-
-            my $GlobalEffectiveValue = $SysConfigObject->GlobalEffectiveValueGet(
-                SettingName => $SettingName,
-            );
-
-            my $IsModified = DataIsDifferent(
-                Data1 => \$UpdatedSetting{EffectiveValue},
-                Data2 => \$GlobalEffectiveValue,
-            ) || 0;
-
-            $Result{Data}->{HTMLStrg} = $SysConfigObject->SettingRender(
-                Setting => \%UpdatedSetting,
-                RW      => 1,
-                UserID  => $Self->{UserID},
-            );
-            $Result{Data}->{SettingData}->{IsModified}        = $IsModified;
-            $Result{Data}->{SettingData}->{IsLockedByMe}      = 1;
-            $Result{Data}->{SettingData}->{ExclusiveLockGUID} = 1;
-        }
-
-        # JSON response
-        my $JSON = $Kernel::OM->Get('Kernel::System::JSON')->Encode(
-            Data => \%Result,
-        );
-
-        return $LayoutObject->Attachment(
-            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
-            Content     => $JSON,
-            Type        => 'inline',
-            NoCache     => 1,
-        );
-    }
-
-    elsif ( $Self->{Subaction} eq 'SettingReset' ) {
-
-        # challenge token check for write action
-        $LayoutObject->ChallengeTokenCheck();
-
-        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
-
-        my $SettingName = $ParamObject->GetParam( Param => 'SettingName' ) || '';
-
-        return $Self->_SettingReset( SettingName => $SettingName );
-    }
-
-    elsif ( $Self->{Subaction} eq 'SettingList' ) {
-
-        # challenge token check for write action
-        $LayoutObject->ChallengeTokenCheck();
-
-        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
-        my $RootNavigation  = $ParamObject->GetParam( Param => 'RootNavigation' ) || '';
-
-        my @SettingList = $SysConfigObject->ConfigurationListGet(
-            TargetUserID    => $Self->{CurrentUserID},
-            IsValid         => 1,
-            Navigation      => $RootNavigation // undef,
-            OverriddenInXML => 1,
-            UserID          => 1,
-        );
-
-        for my $Setting (@SettingList) {
-
-            # OverriddenFileName is used only in Admin interface.
-            delete $Setting->{OverriddenFileName};
-
-            # If the setting is overriden in the *.pm file, take it as default and update IsModified.
-            my $GlobalEffectiveValue = $SysConfigObject->GlobalEffectiveValueGet(
-                SettingName => $Setting->{Name},
-            );
-
-            my $IsModified = DataIsDifferent(
-                Data1 => \$Setting->{EffectiveValue},
-                Data2 => \$GlobalEffectiveValue,
-            ) || 0;
-
-            $Setting->{IsModified} = $IsModified;
-
-            $Setting->{HTMLStrg} = $SysConfigObject->SettingRender(
-                Setting => $Setting,
-                RW      => 1,
-                UserID  => $Self->{UserID},
-            );
-        }
-
-        my $Output = "<ul class='SettingsList Preferences'>\n";
-        $Output .= $LayoutObject->Output(
-            TemplateFile => 'AgentPreferences/SettingsList',
-            Data         => {
-                RootNavigation => $RootNavigation,
-                SettingList    => \@SettingList,
-            },
-        );
-        $Output .= "</ul>\n";
-
-        return $LayoutObject->Attachment(
-            NoCache     => 1,
-            ContentType => 'text/html',
-            Charset     => $LayoutObject->{UserCharset},
-            Content     => $Output || '',
-            Type        => 'inline',
-        );
-
     }
 
     # ------------------------------------------------------------ #
@@ -821,7 +655,7 @@ sub _GetCategoriesStrg {
 
     # get selected category
     my %UserPreferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
-        UserID => $Self->{UserID},
+        UserID => $Self->{CurrentUserID},
     );
 
     my $Category = $UserPreferences{UserSystemConfigurationCategory};
@@ -848,15 +682,17 @@ sub _CheckEditPreferencesPermission {
 
     my ( $Self, %Param ) = @_;
 
+    my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     # check if the current user has the permissions to edit another users preferences
-    my $GroupObject                      = $Kernel::OM->Get('Kernel::System::Group');
     my $EditAnotherUsersPreferencesGroup = $GroupObject->GroupLookup(
-        Group => $Kernel::OM->Get('Kernel::Config')->Get('EditAnotherUsersPreferencesGroup'),
+        Group => $ConfigObject->Get('EditAnotherUsersPreferencesGroup'),
     );
 
     # get user groups, where the user has the rw privilege
     my %Groups = $GroupObject->PermissionUserGet(
-        UserID => $Self->{UserID},
+        UserID => $Self->{CurrentUserID},
         Type   => 'rw',
     );
 
@@ -866,108 +702,6 @@ sub _CheckEditPreferencesPermission {
     }
 
     return 0;
-}
-
-sub _SettingReset {
-    my ( $Self, %Param ) = @_;
-
-    my $SettingName = $Param{SettingName};
-
-    my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
-
-    my %Setting = $SysConfigObject->SettingGet(
-        Name            => $SettingName,
-        TargetUserID    => $Self->{CurrentUserID},
-        OverriddenInXML => 1,
-        UserID          => 1,
-    );
-
-    # OverriddenFileName is used only in Admin interface.
-    delete $Setting{OverriddenFileName};
-
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    my %Result;
-
-    if ( !%Setting ) {
-        $Result{Error} = $LayoutObject->{LanguageObject}->Translate("Setting not found!");
-    }
-    elsif ( !$SysConfigObject->can('UserSettingValueDelete') ) {    # OTRS Business Solution™
-        $Result{Data}->{Error} = $LayoutObject->{LanguageObject}->Translate(
-            "This feature is part of the %s. Please contact us at %s for an upgrade."
-            , 'OTRS Business Solution™'
-            , 'sales@otrs.com'
-        );
-    }
-    elsif ( $Setting{ModifiedID} ) {
-
-        # Remove user's value
-        my $UserValueDeleted = $SysConfigObject->UserSettingValueDelete(
-            Name       => $SettingName,
-            ModifiedID => $Setting{ModifiedID},
-            UserID     => $Self->{UserID},
-        );
-
-        if ($UserValueDeleted) {
-
-            # Get setting value after reset
-            %Setting = $SysConfigObject->SettingGet(
-                Name         => $SettingName,
-                TargetUserID => $Self->{CurrentUserID},
-            );
-
-            # If the setting is overriden in the *.pm file, take it as default and update IsModified.
-            my $GlobalEffectiveValue = $SysConfigObject->GlobalEffectiveValueGet(
-                SettingName => $SettingName,
-            );
-
-            $Setting{EffectiveValue} = $GlobalEffectiveValue;
-
-            $Result{Data}->{HTMLStrg} = $SysConfigObject->SettingRender(
-                Setting => \%Setting,
-                RW      => 1,
-                UserID  => $Self->{UserID},
-            );
-            $Result{Data}->{SettingData}->{IsModified}   = 0;
-            $Result{Data}->{SettingData}->{IsLockedByMe} = 1;
-        }
-        else {
-            $Result{Data}->{HTMLStrg} = $SysConfigObject->SettingRender(
-                Setting => \%Setting,
-                RW      => 1,
-                UserID  => $Self->{UserID},
-            );
-            $Result{Data}->{SettingData}->{IsModified}   = 1;
-            $Result{Data}->{SettingData}->{IsLockedByMe} = 1;
-            $Result{Error}                               = $LayoutObject->{LanguageObject}->Translate(
-                "System was unable to reset the setting!",
-            );
-        }
-    }
-    else {
-        $Result{Data}->{HTMLStrg} = $SysConfigObject->SettingRender(
-            Setting => \%Setting,
-            RW      => 1,
-            UserID  => $Self->{UserID},
-        );
-
-        $Result{Data}->{SettingData}->{IsLockedByMe} = 1;
-        $Result{Error} = $LayoutObject->{LanguageObject}->Translate(
-            "System was unable to reset the setting!",
-        );
-    }
-
-    # JSON response
-    my $JSON = $Kernel::OM->Get('Kernel::System::JSON')->Encode(
-        Data => \%Result,
-    );
-
-    return $LayoutObject->Attachment(
-        ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
-        Content     => $JSON,
-        Type        => 'inline',
-        NoCache     => 1,
-    );
 }
 
 1;

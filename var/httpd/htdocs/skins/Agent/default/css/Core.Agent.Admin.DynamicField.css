@@ -19,56 +19,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @subsubsection     AdminDynamicFields
  */
 
-.Header li {
-    margin-left: -3px;
-    padding-left: 2px;
-    float: left;
-    position: relative;
-}
-
-.RTL .Header li {
-    margin-left: 0;
-    margin-right: -3px;
-    float: right;
-}
-
-.Header li.Active,
-.Header li.Active:hover,
-.Header li.Active:active {
-    padding-left: 2px;
-}
-
-.Header a i {
-    color: #aaa;
-}
-
-.Header a:hover i {
-    color: #000;
-}
-
-.WidgetSimple > .DynamicFieldsContent {
-    overflow: auto;
-    padding: 0px 8px 10px;
-}
-
+.WidgetSimple > .DynamicFieldsContent,
 .WidgetSimple > .DynamicFieldsPagination {
     overflow: auto;
-    padding: 0px 8px 0px;
 }
 
-.WidgetSimple > .DynamicFieldsPagination span.Pagination {
-    display: block;
+.WidgetSimple > .DynamicFieldsPagination > .Pagination {
+    border-top: 0;
 }
 
-.SpacingTopMini {
-    margin-top: 5px;
-}
-
-.ValueRow input{
-    margin-right: 13px;
-}
-
-.RTL .ValueRow input{
-    margin-left: 13px;
-}
 }/* end @media */

@@ -102,6 +102,7 @@ Core.App.Responsive = (function (TargetNS) {
             // the same screen size before.
             Core.App.Publish('Event.App.Responsive.' + ActiveScreenSize);
             Core.App.Publish('Event.App.Responsive.SmallerOrEqual' + ActiveScreenSize);
+            Core.Config.Set('ActiveScreenSize', ActiveScreenSize);
 
             // publish event for "SmallerOrEqual" screen sizes
             for (i = 0; i < ScreenSizes[ActiveScreenSize].length; i++) {

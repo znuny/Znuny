@@ -548,13 +548,13 @@ Returns:
     my %Configs = (
         'Ticket::Frontend::AgentTicketStatusView###DefaultColumns' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
         'DashboardBackend###0100-TicketPendingReminder' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
@@ -621,13 +621,13 @@ This function enables the given Attributes for the requested DefaultColumns.
     my %Configs = (
         'Ticket::Frontend::AgentTicketStatusView###DefaultColumns' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
         'DashboardBackend###0100-TicketPendingReminder' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
@@ -769,13 +769,13 @@ This function disables the given Attributes for the requested DefaultColumns.
     my %Configs = (
         'Ticket::Frontend::AgentTicketStatusView###DefaultColumns' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
         'DashboardBackend###0100-TicketPendingReminder' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
@@ -2344,7 +2344,7 @@ sub _PostMasterFilterConfigImport {
     }
     return if !IsArrayRefWithData($Filter);
 
-    return $Self->_PostMasterFilterCreateIfNotExists( @{$Filter} );
+    return $Self->_PostMasterFilterCreate( @{$Filter} );
 }
 
 =head2 _GroupCreateIfNotExists()
@@ -3218,7 +3218,7 @@ sub _GeneralCatalogItemCreateIfNotExists {
 adds or updates a definition for a ConfigItemClass. You need to provide the configuration
 of the CMDB class in the following directory:
 
-/opt/otrs/scripts/cmdb_classes/Private_Endgeraete.config
+/opt/znuny/scripts/cmdb_classes/Private_Endgeraete.config
 
 The required general catalog item will be created automatically.
 
@@ -3370,7 +3370,7 @@ sub _ITSMConfigItemDefinitionCreate {
 add if not exists a definition for a ConfigItemClass. You need to provide the configuration
 of the CMDB class in the following directory:
 
-/opt/otrs/scripts/cmdb_classes/Private_Endgeraete.config
+/opt/znuny/scripts/cmdb_classes/Private_Endgeraete.config
 
 The required general catalog item will be created automatically.
 
@@ -3988,7 +3988,7 @@ OR:
     my $Result = $ZnunyHelperObject->_WebserviceCreateIfNotExists(
         Webservices => {
             'New Webservice 1234' => '/path/to/Webservice.yml',
-            ...
+            # ...
         }
     );
 
@@ -4085,7 +4085,7 @@ OR:
     my $Result = $ZnunyHelperObject->_WebserviceCreate(
         Webservices => {
             'New Webservice 1234' => '/path/to/Webservice.yml',
-            ...
+            # ...
         }
     );
 
@@ -4188,7 +4188,7 @@ OR:
     my $Result = $ZnunyHelperObject->_WebserviceDelete(
         Webservices => {
             'Not needed Webservice 1234' => 1, # value is not used
-            ...
+            # ...
         }
     );
 
@@ -4337,7 +4337,7 @@ OR:
     my $Success = $ZnunyHelperObject->_ProcessCreateIfNotExists(
         Processes => {
             'New Process 1234' => '/path/to/Process.yml',
-            ...
+            # ...
         }
     );
 
@@ -4507,7 +4507,7 @@ OR:
     my $Success = $ZnunyHelperObject->_ProcessCreate(
         Processes => {
             'New Process 1234' => '/path/to/Process.yml',
-            ...
+            # ...
         }
     );
 
@@ -5501,7 +5501,7 @@ creates generic agents if not exists
             Name => 'JobName',
             Data => {
                 Valid => '1',
-                ...
+                # ...
                 Title => 'Test'
             },
             UserID => 1,
@@ -5546,7 +5546,7 @@ sub _GenericAgentCreateIfNotExists {
 Adds article action menu items.
 
     my %ArticleActions = (
-        Internal => [ # Channel name (Internal, Phone, Email, Chat or Invalid)
+        Internal => [ # Channel name (Internal, Phone, Email or Invalid)
             {
                 Key      => 'ZnunyMarkTicketSeenUnseen',
                 Module   => 'Kernel::Output::HTML::ArticleAction::MyMenuItem',
@@ -5609,7 +5609,7 @@ sub _ArticleActionsAdd {
 Removes article action menu items.
 
     my %ArticleActions = (
-        Internal => [ # Channel name (Internal, Phone, Email, Chat or Invalid)
+        Internal => [ # Channel name (Internal, Phone, Email or Invalid)
             {
                 Module   => 'Kernel::Output::HTML::ArticleAction::MyMenuItem',
                 Priority => 999,

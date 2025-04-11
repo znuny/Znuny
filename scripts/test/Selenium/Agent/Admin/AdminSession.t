@@ -19,8 +19,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $AuthSessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 
         # create test user and login
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -32,9 +33,6 @@ $Selenium->RunTest(
             User     => $TestUserLogin,
             Password => $TestUserLogin,
         );
-
-        # get authsession object
-        my $AuthSessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
 
         # check current sessions
         my $CurrentSessionID;
@@ -57,7 +55,7 @@ $Selenium->RunTest(
         ) || return;
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AdminSession screen
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSession");
@@ -90,17 +88,12 @@ $Selenium->RunTest(
         $Selenium->find_element( "table", 'css' );
 
         # check breadcrumb on detail view screen
-        my $Count = 1;
-
         my $DetailViewBreadcrumbText = "Detail Session View for $TestUserLogin $TestUserLogin (User)";
         for my $BreadcrumbText ( 'Session Management', $DetailViewBreadcrumbText ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # kill current session, this means a logout effectively

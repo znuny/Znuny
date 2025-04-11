@@ -84,7 +84,7 @@ add new Process
 returns the id of the created process if success or undef otherwise
 
     my $ID = $ProcessObject->ProcessAdd(
-        EntityID       => 'P1'             # mandatory, exportable unique identifier
+        EntityID       => 'P1',            # mandatory, exportable unique identifier
         Name           => 'NameOfProcess', # mandatory
         StateEntityID  => 'S1',
         Layout         => $LayoutHashRef,  # mandatory, diagram objects positions to be stored in
@@ -569,7 +569,7 @@ returns 1 if success or undef otherwise
 
     my $Success = $ProcessObject->ProcessUpdate(
         ID            => 123,             # mandatory
-        EntityID      => 'P1'             # mandatory, exportable unique identifier
+        EntityID      => 'P1',            # mandatory, exportable unique identifier
         Name          => 'NameOfProcess', # mandatory
         StateentityID => 'S1',
         Layout        => $LayoutHashRef,  # mandatory, diagram objects positions to be stored in
@@ -991,7 +991,7 @@ ActivityDialogs, Transitions and TransitionActions
 
     my $ProcessDump = $ProcessObject->ProcessDump(
         ResultType  => 'SCALAR'                     # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt'   # mandatory for ResultType = 'FILE'
+        Location    => '/opt/znuny/var/myfile.txt'   # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 
@@ -999,110 +999,109 @@ Returns:
 
     $ProcessDump = '
         $Self->{'Process'} = {
-          'P1' => {
-            'Name' => 'Process 1',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'Path' => {
-              'A1' => {
-                'T1' => {
-                  'Action' => [
-                    'TA1',
-                  ],
-              }
+            'P1' => {
+                'Name' => 'Process 1',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'Path' => {
+                    'A1' => {
+                        'T1' => {
+                        'Action' => [
+                            'TA1',
+                        ],
+                    }
+                },
+                'StartActivity'       => 'A1',
+                'StartActivityDialog' => 'AD1',
+                'State'               => 'S1'
             },
-            'StartActivity' => 'A1',
-            'StartActivityDialog' => 'AD1',
-            'State' => 'S1'
-          },
-          # ...
+            # ...
         };
 
         $Self->{'Process::State'} = {
-          'S1' => 'Active',
-          'S2' => 'Inactive',
-          'S3' => 'FadeAway'
+            'S1' => 'Active',
+            'S2' => 'Inactive',
+            'S3' => 'FadeAway'
         };
 
         $Self->{'Process::Activity'} = {
-          'A1' => {
-            'Name' => 'Activity 1'
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'ActivityDialog' => {
-              '1' => 'AD1',
-              }
+            'A1' => {
+                'Name'           => 'Activity 1',
+                'CreateTime'     => '2012-07-21 08:11:33',
+                'ChangeTime'     => '2012-07-21 08:11:33',
+                'ActivityDialog' => {
+                    '1' => 'AD1',
+                }
             },
-          },
-          # ...
+            # ...
         };
 
         $Self->{'Process::ActivityDialog'} = {
-          'AD1' => {
-            'Name' => 'Activity Dialog 1',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'DescriptionLong' => 'Longer description',
-            'DescriptionShort' => 'Short description',
-            'FieldOrder' => [
-              'StateID',
-              'DynamicField_Marke',
-            ],
-            'Fields' => {
-              'StateID' => {
-                'DefaultValue' => '1',
-                'DescriptionLong' => 'Longer description',
+            'AD1' => {
+                'Name'             => 'Activity Dialog 1',
+                'CreateTime'       => '2012-07-21 08:11:33',
+                'ChangeTime'       => '2012-07-21 08:11:33',
+                'DescriptionLong'  => 'Longer description',
                 'DescriptionShort' => 'Short description',
-                'Display' => '0'
-              },
-              'DynamicField_Marke' => {
-                'DescriptionLong' => 'Longer description',
-                'DescriptionShort' => 'Short description',
-                'Display' => '2'
-              },
-            },
+                'FieldOrder'       => [
+                    'StateID',
+                    'DynamicField_Marke',
+                ],
+                'Fields' => {
+                    'StateID' => {
+                        'DefaultValue'     => '1',
+                        'DescriptionLong'  => 'Longer description',
+                        'DescriptionShort' => 'Short description',
+                        'Display'          => '0'
+                    },
+                    'DynamicField_Marke' => {
+                        'DescriptionLong'  => 'Longer description',
+                        'DescriptionShort' => 'Short description',
+                        'Display'          => '2'
+                    },
+                },
             #...
         };
 
         $Self->{'Process::Transition'} = {
-          'T1' => {
-            'Name' => 'Transition 1'
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'Condition' => {
-              'Type' => 'and',
-              'Cond1' => {
-                'Fields' => {
-                  'DynamicField_Marke' => {
-                    'Match' => 'Teststring',
-                    'Type' => 'String',
-                  },
+            'T1' => {
+                'Name'       => 'Transition 1',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'Condition'  => {
+                    'Type'  => 'and',
+                    'Cond1' => {
+                        'Fields' => {
+                            'DynamicField_Marke' => {
+                                'Match' => 'Teststring',
+                                'Type' => 'String',
+                            },
+                        },
+                        'Type' => 'and',
+                    },
                 },
-                'Type' => 'and',
-              },
             },
-          },
-          # ...
+            # ...
         };
 
         $Self->{'Process::Action'} = {
-          'TA1' => {
-            'Name' => 'Queue Move',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'Module' => 'Kernel::System::Process::Transition::Action::QueueMove',
-            'Config' => {
-              'NewOwner' => 'root@localhost',
-              'TargetQueue' => 'Raw',
+            'TA1' => {
+                'Name'       => 'Queue Move',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'Module'     => 'Kernel::System::Process::Transition::Action::QueueMove',
+                'Config'     => {
+                    'NewOwner'    => 'root@localhost',
+                    'TargetQueue' => 'Raw',
+                },
             },
-          },
-          # ...
+            # ...
         };
-     ';
+    ';
 
     my $ProcessDump = $ProcessObject->ProcessDump(
         ResultType  => 'HASH'                       # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt'   # mandatory for ResultType = 'FILE'
+        Location    => '/opt/znuny/var/myfile.txt'   # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 
@@ -1110,115 +1109,116 @@ Returns:
 
     $ProcessDump = {
         Process => {
-          'P1' => {
-            'Name' => 'Process 1',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'Path' => {
-              'A1' => {
-                'T1' => {
-                  'Action' => [
-                    'TA1',
-                  ],
-              }
+            'P1' => {
+                'Name'       => 'Process 1',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'Path'       => {
+                    'A1' => {
+                        'T1' => {
+                            'Action' => [
+                                'TA1',
+                            ],
+                        }
+                    },
+                    'StartActivity'       => 'A1',
+                    'StartActivityDialog' => 'AD1',
+                    'State'               => 'S1'
+                },
             },
-            'StartActivity' => 'A1',
-            'StartActivityDialog' => 'AD1',
-            'State' => 'S1'
-          },
-          # ...
+            # ...
         };
 
         State => {
-          'S1' => 'Active',
-          'S2' => 'Inactive',
-          'S3' => 'FadeAway'
+            'S1' => 'Active',
+            'S2' => 'Inactive',
+            'S3' => 'FadeAway'
         };
 
         Activity => {
-          'A1' => {
-            'Name' => 'Activity 1'
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'ActivityDialog' => {
-              '1' => 'AD1',
-              }
+            'A1' => {
+                'Name'           => 'Activity 1',
+                'CreateTime'     => '2012-07-21 08:11:33',
+                'ChangeTime'     => '2012-07-21 08:11:33',
+                'ActivityDialog' => {
+                    '1' => 'AD1',
+                }
             },
-          },
-          # ...
+            # ...
         };
 
         ActivityDialog => {
-          'AD1' => {
-            'Name' => 'Activity Dialog 1',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'DescriptionLong' => 'Longer description',
-            'DescriptionShort' => 'Short description',
-            'FieldOrder' => [
-              'StateID',
-              'DynamicField_Marke',
-            ],
-            'Fields' => {
-              'StateID' => {
-                'DefaultValue' => '1',
-                'DescriptionLong' => 'Longer description',
+            'AD1' => {
+                'Name'             => 'Activity Dialog 1',
+                'CreateTime'       => '2012-07-21 08:11:33',
+                'ChangeTime'       => '2012-07-21 08:11:33',
+                'DescriptionLong'  => 'Longer description',
                 'DescriptionShort' => 'Short description',
-                'Display' => '0'
-              },
-              'DynamicField_Marke' => {
-                'DescriptionLong' => 'Longer description',
-                'DescriptionShort' => 'Short description',
-                'Display' => '2'
-              },
+                'FieldOrder'       => [
+                    'StateID',
+                    'DynamicField_Marke',
+                ],
+                'Fields' => {
+                    'StateID' => {
+                        'DefaultValue'     => '1',
+                        'DescriptionLong'  => 'Longer description',
+                        'DescriptionShort' => 'Short description',
+                        'Display'          => '0'
+                    },
+                    'DynamicField_Marke' => {
+                        'DescriptionLong'  => 'Longer description',
+                        'DescriptionShort' => 'Short description',
+                        'Display'          => '2'
+                    },
+                },
             },
             #...
         };
 
         Transition => {
-          'T1' => {
-            'Name' => 'Transition 1'
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'Condition' => {
-              'Type' => 'and',
-              'Cond1' => {
-                'Fields' => {
-                  'DynamicField_Marke' => {
-                    'Match' => 'Teststring',
-                    'Type' => 'String',
-                  },
+            'T1' => {
+                'Name'       => 'Transition 1',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'Condition'  => {
+                    'Type'  => 'and',
+                    'Cond1' => {
+                        'Fields' => {
+                            'DynamicField_Marke' => {
+                                'Match' => 'Teststring',
+                                'Type'  => 'String',
+                            },
+                        },
+                        'Type' => 'and',
+                    },
                 },
-                'Type' => 'and',
-              },
             },
-          },
-          # ...
+            # ...
         };
 
         TransitionAction => {
-          'TA1' => {
-            'Name' => 'Queue Move',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'Module' => 'Kernel::System::Process::Transition::Action::QueueMove',
-            'Config' => {
-              'NewOwner' => 'root@localhost',
-              'TargetQueue' => 'Raw',
+            'TA1' => {
+                'Name'       => 'Queue Move',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'Module'     => 'Kernel::System::Process::Transition::Action::QueueMove',
+                'Config'     => {
+                    'NewOwner'    => 'root@localhost',
+                    'TargetQueue' => 'Raw',
+                },
             },
-          },
-          # ...
+            # ...
         };
     }
 
     my $ProcessDump = $ProcessObject->ProcessDump(
         ResultType  => 'Location'                     # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt'     # mandatory for ResultType = 'FILE'
+        Location    => '/opt/znuny/var/myfile.txt'     # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 
 Returns:
-    $ProcessDump = '/opt/otrs/var/myfile.txt';      # or undef if can't write the file
+    $ProcessDump = '/opt/znuny/var/myfile.txt';      # or undef if can't write the file
 
 =cut
 

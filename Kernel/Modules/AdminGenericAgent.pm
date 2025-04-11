@@ -11,8 +11,7 @@ package Kernel::Modules::AdminGenericAgent;
 
 use strict;
 use warnings;
-
-use URI::Escape;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -304,7 +303,7 @@ sub Run {
                     )
                 {
                     my $Profile = $Self->{Profile} || '';
-                    $Profile = uri_escape($Profile);    # See internal issue #477.
+                    $Profile = $LayoutObject->LinkEncode($Profile);    # See internal issues #477 and #684.
                     return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Subaction=Update;Profile=$Profile" );
                 }
                 else {
@@ -392,11 +391,11 @@ sub Run {
         # Get field HTML.
         if ( $Widget eq 'Select' ) {
             $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
-                DynamicFieldConfig     => $DynamicFieldConfig,
-                Profile                => \%JobData,
-                LayoutObject           => $LayoutObject,
-                ConfirmationCheckboxes => 1,
-                Type                   => $Type,
+                DynamicFieldConfig => $DynamicFieldConfig,
+                LayoutObject       => $LayoutObject,
+                DefaultValue       => $DynamicFieldConfig->{Config}->{DefaultValue},
+                Profile            => \%JobData,
+                Type               => $Type,
             );
         }
         elsif ( $Widget eq 'Update' ) {
@@ -441,6 +440,7 @@ sub Run {
                     }
                 }
             }
+
             $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
@@ -455,7 +455,26 @@ sub Run {
             );
         }
 
-        $DynamicFieldHTML->{ID} = $SelectedValue;
+        my $HTMLLabel       = $DynamicFieldHTML->{Label};
+        my $TranslatedLabel = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
+        my $CombinedLabel   = (
+            $TranslatedLabel eq $DynamicFieldConfig->{Name}
+            ? $TranslatedLabel
+            : $TranslatedLabel . ' (' . $DynamicFieldConfig->{Name} . ')'
+        );
+
+        $HTMLLabel =~ s{(.+)\Q$TranslatedLabel\E(.+)}{$1 $CombinedLabel $2}smx;
+
+        $DynamicFieldHTML->{Label} = $HTMLLabel;
+        $DynamicFieldHTML->{ID}    = $SelectedValue;
+        $DynamicFieldHTML->{Type}  = $DynamicFieldConfig->{FieldType};
+
+        if ( $DynamicFieldConfig->{Config}->{DateRestriction} ) {
+            $DynamicFieldHTML->{ValidateDateInFuture}
+                = ( $DynamicFieldConfig->{Config}->{DateRestriction} eq 'DisablePastDates' ? 'true' : 'false' );
+            $DynamicFieldHTML->{ValidateDateNotInFuture}
+                = ( $DynamicFieldConfig->{Config}->{DateRestriction} eq 'DisableFutureDates' ? 'true' : 'false' );
+        }
 
         my $Output = $LayoutObject->JSONEncode(
             Data => $DynamicFieldHTML,
@@ -474,16 +493,24 @@ sub Run {
     # delete an generic agent job
     # ---------------------------------------------------------- #
     if ( $Self->{Subaction} eq 'Delete' && $Self->{Profile} ) {
+        my $Success;
 
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
         if ( $Self->{Profile} ) {
-            $GenericAgentObject->JobDelete(
+            $Success = $GenericAgentObject->JobDelete(
                 Name   => $Self->{Profile},
                 UserID => $Self->{UserID},
             );
         }
+
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Content     => ($Success) ? 1 : 0,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
     }
 
     # ---------------------------------------------------------- #
@@ -1086,7 +1113,7 @@ sub _MaskUpdate {
         );
 
         $LayoutObject->Block(
-            Name => 'SearchInArchive',
+            Name => 'TicketArchive',
             Data => {%JobData},
         );
 
@@ -1129,9 +1156,7 @@ sub _MaskUpdate {
         next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
 
         # Translate dynamic field label.
-        my $TranslatedDynamicFieldLabel = $LayoutObject->{LanguageObject}->Translate(
-            $DynamicFieldConfig->{Label},
-        );
+        my $TranslatedLabel = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
 
         PREFERENCE:
         for my $Preference ( @{$SearchFieldPreferences} ) {
@@ -1145,14 +1170,18 @@ sub _MaskUpdate {
                 $TranslatedSuffix = ' (' . $TranslatedSuffix . ')';
             }
 
-            my $Key  = 'Search_DynamicField_' . $DynamicFieldConfig->{Name} . $Preference->{Type};
-            my $Text = $TranslatedDynamicFieldLabel . $TranslatedSuffix;
+            my $Key           = 'Search_DynamicField_' . $DynamicFieldConfig->{Name} . $Preference->{Type};
+            my $CombinedLabel = (
+                $TranslatedLabel eq $DynamicFieldConfig->{Name}
+                ? $TranslatedLabel . $TranslatedSuffix
+                : $TranslatedLabel . $TranslatedSuffix . ' (' . $DynamicFieldConfig->{Name} . ')'
+            );
 
             # Save all dynamic fields for JS.
             $DynamicFieldsJS{$Key} = {
                 ID   => $DynamicFieldConfig->{ID},
                 Type => $Preference->{Type},
-                Text => $Text,
+                Text => $CombinedLabel,
             };
 
             # Decide if dynamic field go to add fields dropdown or selected fields area.
@@ -1161,20 +1190,21 @@ sub _MaskUpdate {
                 # Get field HTML.
                 my $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
                     DynamicFieldConfig => $DynamicFieldConfig,
+                    LayoutObject       => $LayoutObject,
                     Profile            => \%JobData,
-                    DefaultValue =>
-                        $Self->{Config}->{Defaults}->{DynamicField}->{ $DynamicFieldConfig->{Name} },
-                    LayoutObject           => $LayoutObject,
-                    ConfirmationCheckboxes => 1,
-                    Type                   => $Preference->{Type},
+                    Type               => $Preference->{Type},
                 );
 
                 next PREFERENCE if !IsHashRefWithData($DynamicFieldHTML);
 
+                my $HTMLLabel = $DynamicFieldHTML->{Label};
+                my $Search    = $TranslatedLabel . $TranslatedSuffix;
+                $HTMLLabel =~ s{(.+)\Q$Search\E(.+)}{$1 $CombinedLabel $2}smx;
+
                 $LayoutObject->Block(
                     Name => 'SelectedDynamicFields',
                     Data => {
-                        Label => $DynamicFieldHTML->{Label},
+                        Label => $HTMLLabel,
                         Field => $DynamicFieldHTML->{Field},
                         ID    => $Key,
                     },
@@ -1183,11 +1213,13 @@ sub _MaskUpdate {
             else {
                 push @AddDynamicFields, {
                     Key   => $Key,
-                    Value => $Text,
+                    Value => $CombinedLabel,
                 };
             }
         }
     }
+
+    @AddDynamicFields = sort { $a->{Value} cmp $b->{Value} } @AddDynamicFields;
 
     my $DynamicFieldsStrg = $LayoutObject->BuildSelection(
         PossibleNone => 1,
@@ -1274,10 +1306,17 @@ sub _MaskUpdate {
             $Used = 1;
         }
 
+        my $TranslatedLabel = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
+        my $CombinedLabel   = (
+            $TranslatedLabel eq $DynamicFieldConfig->{Name}
+            ? $TranslatedLabel
+            : $TranslatedLabel . ' (' . $DynamicFieldConfig->{Name} . ')'
+        );
+
         # Save all new dynamic fields for JS.
         $DynamicFieldsJS{$Key} = {
             ID   => $DynamicFieldConfig->{ID},
-            Text => $DynamicFieldConfig->{Name},
+            Text => $CombinedLabel,
         };
 
         # Decide if dynamic field go to add fields dropdown or selected fields area.
@@ -1317,10 +1356,13 @@ sub _MaskUpdate {
 
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldHTML);
 
+            my $HTMLLabel = $DynamicFieldHTML->{Label};
+            $HTMLLabel =~ s{(.+)\Q$TranslatedLabel\E(.+)}{$1 $CombinedLabel $2}smx;
+
             $LayoutObject->Block(
                 Name => 'SelectedNewDynamicFields',
                 Data => {
-                    Label => $DynamicFieldHTML->{Label},
+                    Label => $HTMLLabel,
                     Field => $DynamicFieldHTML->{Field},
                     ID    => $Key,
                 },
@@ -1329,10 +1371,12 @@ sub _MaskUpdate {
         else {
             push @AddNewDynamicFields, {
                 Key   => $Key,
-                Value => $DynamicFieldConfig->{Name},
+                Value => $CombinedLabel,
             };
         }
     }
+
+    @AddNewDynamicFields = sort { $a->{Value} cmp $b->{Value} } @AddNewDynamicFields;
 
     my $NewDynamicFieldsStrg = $LayoutObject->BuildSelection(
         PossibleNone => 1,

@@ -11,24 +11,26 @@ package Kernel::Output::HTML::TicketOverview::Medium;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
     'Kernel::System::CustomerUser',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
-    'Kernel::Config',
     'Kernel::System::Group',
     'Kernel::System::JSON',
     'Kernel::System::Log',
-    'Kernel::Output::HTML::Layout',
-    'Kernel::System::User',
+    'Kernel::System::Main',
+    'Kernel::System::Queue',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::Main',
-    'Kernel::System::Queue'
+    'Kernel::System::User',
+    'Kernel::System::Util',
 );
 
 sub new {
@@ -452,13 +454,11 @@ sub _Show {
         Data => $StandardTemplates{Answer} || {},
     );
 
-    # customer info
-    if ( $Param{Config}->{CustomerInfo} ) {
-        if ( $Article{CustomerUserID} ) {
-            $Article{CustomerName} = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
-                UserLogin => $Article{CustomerUserID},
-            );
-        }
+    # Add CustomerName
+    if ( $Article{CustomerUserID} ) {
+        $Article{CustomerName} = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
+            UserLogin => $Article{CustomerUserID},
+        );
     }
 
     # get ACL restrictions
@@ -479,19 +479,7 @@ sub _Show {
             sort keys %Actions;
     }
 
-    my $ACL = $TicketObject->TicketAcl(
-        Data          => \%PossibleActions,
-        Action        => $Self->{Action},
-        TicketID      => $Article{TicketID},
-        ReturnType    => 'Action',
-        ReturnSubType => '-',
-        UserID        => $Self->{UserID},
-    );
-
     my %AclAction = %PossibleActions;
-    if ($ACL) {
-        %AclAction = $TicketObject->TicketAclActionData();
-    }
 
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
@@ -500,6 +488,22 @@ sub _Show {
     my @ActionItems;
     if ( ref $ConfigObject->Get('Ticket::Frontend::PreMenuModule') eq 'HASH' ) {
         my %Menus = %{ $ConfigObject->Get('Ticket::Frontend::PreMenuModule') };
+
+        if (%Menus) {
+            my $ACL = $TicketObject->TicketAcl(
+                Data          => \%PossibleActions,
+                Action        => $Self->{Action},
+                TicketID      => $Article{TicketID},
+                ReturnType    => 'Action',
+                ReturnSubType => '-',
+                UserID        => $Self->{UserID},
+            );
+
+            if ($ACL) {
+                %AclAction = $TicketObject->TicketAclActionData();
+            }
+        }
+
         MENU:
         for my $Menu ( sort keys %Menus ) {
 
@@ -578,11 +582,17 @@ sub _Show {
         Subject      => $Article{Subject} || '',
     );
 
+    my $PillClass;
+    if ( IsStringWithData( $Ticket{StateID} ) ) {
+        $PillClass .= 'pill StateID-' . $Ticket{StateID};
+    }
+
     $LayoutObject->Block(
         Name => 'DocumentContent',
         Data => {
             %Param,
             %Article,
+            PillClass                                => $PillClass,
             IsITSMIncidentProblemManagementInstalled => $Self->{IsITSMIncidentProblemManagementInstalled},
         },
     );
@@ -666,118 +676,6 @@ sub _Show {
             $LayoutObject->Block(
                 Name => 'MetaIcon',
                 Data => $Item,
-            );
-        }
-    }
-
-    # run article modules
-    if ( $Article{ArticleID} ) {
-        if ( ref $ConfigObject->Get('Ticket::Frontend::ArticlePreViewModule') eq 'HASH' ) {
-            my %Jobs = %{ $ConfigObject->Get('Ticket::Frontend::ArticlePreViewModule') };
-            for my $Job ( sort keys %Jobs ) {
-
-                # load module
-                if ( !$MainObject->Require( $Jobs{$Job}->{Module} ) ) {
-                    return $LayoutObject->FatalError();
-                }
-                my $Object = $Jobs{$Job}->{Module}->new(
-                    %{$Self},
-                    ArticleID => $Article{ArticleID},
-                    UserID    => $Self->{UserID},
-                    Debug     => $Self->{Debug},
-                );
-
-                # run module
-                my @Data = $Object->Check(
-                    Article => \%Article,
-                    %Param,
-                    Config => $Jobs{$Job},
-                );
-
-                for my $DataRef (@Data) {
-                    $LayoutObject->Block(
-                        Name => 'ArticleOption',
-                        Data => $DataRef,
-                    );
-                }
-
-                # filter option
-                $Object->Filter(
-                    Article => \%Article,
-                    %Param,
-                    Config => $Jobs{$Job},
-                );
-            }
-        }
-    }
-
-    # create output
-    $LayoutObject->Block(
-        Name => 'AgentAnswer',
-        Data => {
-            %Param,
-            %Article,
-            %AclAction,
-        },
-    );
-    if (
-        $ConfigObject->Get('Frontend::Module')->{AgentTicketCompose}
-        && ( !defined $AclAction{AgentTicketCompose} || $AclAction{AgentTicketCompose} )
-        )
-    {
-        my $Access = 1;
-        my $Config = $ConfigObject->Get("Ticket::Frontend::AgentTicketCompose");
-        if ( $Config->{Permission} ) {
-            my $Ok = $TicketObject->TicketPermission(
-                Type     => $Config->{Permission},
-                TicketID => $Param{TicketID},
-                UserID   => $Self->{UserID},
-                LogNo    => 1,
-            );
-            if ( !$Ok ) {
-                $Access = 0;
-            }
-            if ($Access) {
-                $LayoutObject->Block(
-                    Name => 'AgentAnswerCompose',
-                    Data => {
-                        %Param,
-                        %Article,
-                        %AclAction,
-                    },
-                );
-            }
-        }
-    }
-    if (
-        $ConfigObject->Get('Frontend::Module')->{AgentTicketPhoneOutbound}
-        && (
-            !defined $AclAction{AgentTicketPhoneOutbound}
-            || $AclAction{AgentTicketPhoneOutbound}
-        )
-        )
-    {
-        my $Access = 1;
-        my $Config = $ConfigObject->Get("Ticket::Frontend::AgentTicketPhoneOutbound");
-        if ( $Config->{Permission} ) {
-            my $OK = $TicketObject->TicketPermission(
-                Type     => $Config->{Permission},
-                TicketID => $Param{TicketID},
-                UserID   => $Self->{UserID},
-                LogNo    => 1,
-            );
-            if ( !$OK ) {
-                $Access = 0;
-            }
-        }
-        if ($Access) {
-            $LayoutObject->Block(
-                Name => 'AgentAnswerPhoneOutbound',
-                Data => {
-                    %Param,
-                    %Article,
-                    %AclAction,
-                },
             );
         }
     }
@@ -959,6 +857,7 @@ sub _Show {
                 Name => 'DynamicFieldTableRowRecordLink',
                 Data => {
                     Value                       => $ValueStrg->{Value},
+                    ValueKey                    => $Value,
                     Title                       => $ValueStrg->{Title},
                     Link                        => $ValueStrg->{Link},
                     $DynamicFieldConfig->{Name} => $ValueStrg->{Title},
@@ -1041,37 +940,35 @@ sub _Show {
         }
     }
 
-    # test access to frontend module for Customer
-    my $Access = $LayoutObject->Permission(
-        Action => 'AgentTicketCustomer',
-        Type   => 'rw',
-    );
-    if ($Access) {
+    if ( defined $Article{CustomerID} ) {
+        my $CICRWAccess = $LayoutObject->Permission(
+            Action => 'AgentCustomerInformationCenter',
+            Type   => 'rw',
+        );
 
-        # test access to ticket
-        my $Config = $ConfigObject->Get('Ticket::Frontend::AgentTicketCustomer');
-        if ( $Config->{Permission} ) {
-            my $OK = $TicketObject->Permission(
-                Type     => $Config->{Permission},
-                TicketID => $Param{TicketID},
-                UserID   => $Self->{UserID},
-                LogNo    => 1,
-            );
-            if ( !$OK ) {
-                $Access = 0;
-            }
-        }
+        $LayoutObject->Block(
+            Name => $CICRWAccess ? 'CustomerIDRW' : 'CustomerIDRO',
+            Data => {
+                %Param,
+                %Article,
+            },
+        );
     }
 
-    # define proper tt block based on permissions
-    my $CustomerIDBlock = $Access ? 'CustomerIDRW' : 'CustomerIDRO';
-    $LayoutObject->Block(
-        Name => $CustomerIDBlock,
-        Data => {
-            %Param,
-            %Article,
-        },
-    );
+    if ( defined $Article{CustomerName} ) {
+        my $CUICRWAccess = $LayoutObject->Permission(
+            Action => 'AgentCustomerUserInformationCenter',
+            Type   => 'rw',
+        );
+
+        $LayoutObject->Block(
+            Name => $CUICRWAccess ? 'CustomerNameRW' : 'CustomerNameRO',
+            Data => {
+                %Param,
+                %Article,
+            },
+        );
+    }
 
     my %ActionRowTickets;
 
@@ -1099,7 +996,6 @@ sub _Show {
         Data         => {
             %Param,
             %Article,
-            %AclAction,
         },
     );
 

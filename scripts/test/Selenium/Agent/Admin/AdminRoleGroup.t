@@ -18,11 +18,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Add test role.
         my $RoleName = $HelperObject->GetRandomID();
-        my $RoleID   = $Kernel::OM->Get('Kernel::System::Group')->RoleAdd(
+        my $RoleID   = $GroupObject->RoleAdd(
             Name    => $RoleName,
             ValidID => 1,
             UserID  => 1,
@@ -34,7 +38,7 @@ $Selenium->RunTest(
 
         # Add test group.
         my $GroupName = $HelperObject->GetRandomID();
-        my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
+        my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
             UserID  => 1,
@@ -55,7 +59,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminRoleGroup screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminRoleGroup");
@@ -84,19 +88,15 @@ $Selenium->RunTest(
         $Selenium->find_element( $RoleName, 'link_text' )->VerifiedClick();
 
         # Check breadcrumb on change screen.
-        my $Count = 1;
         for my $BreadcrumbText (
             'Manage Role-Group Relations',
-            'Change Group Relations for Role \'' . $RoleName . '\''
+            "Change Group Relations for Role '" . $RoleName . "'"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => '.BreadCrumb>li>[title="' . $BreadcrumbText . '"]',
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Set permissions.
@@ -225,7 +225,6 @@ $Selenium->RunTest(
 
         # Since there are no tickets that rely on our test group and role, we can remove them again
         # from the DB
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         if ($GroupID) {
             my $Success = $DBObject->Do(
                 SQL => "DELETE FROM group_role WHERE group_id = $GroupID",
@@ -257,8 +256,6 @@ $Selenium->RunTest(
                 "RoleDelete - $RoleName",
             );
         }
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (qw(Group Role)) {

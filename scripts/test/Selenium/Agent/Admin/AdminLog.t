@@ -20,6 +20,8 @@ $Selenium->RunTest(
 
         my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Set log module in sysconfig.
         $HelperObject->ConfigSettingChange(
@@ -65,7 +67,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminLog screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminLog");
@@ -175,7 +177,7 @@ $Selenium->RunTest(
         $LogObject->CleanUp();
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 );
 

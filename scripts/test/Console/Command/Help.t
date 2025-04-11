@@ -43,7 +43,7 @@ $Self->Is(
 );
 
 $Self->True(
-    index( $Result, 'otrs.Console.pl Help command' ) > -1,
+    index( $Result, 'znuny.Console.pl Help command' ) > -1,
     "Found Help for 'Help' command",
 );
 
@@ -62,7 +62,7 @@ $Self->Is(
 );
 
 $Self->False(
-    index( $Result, 'otrs.Console.pl Help command' ) > -1,
+    index( $Result, 'znuny.Console.pl Help command' ) > -1,
     "Help for 'Help' command not found",
 );
 
@@ -86,7 +86,7 @@ $Self->Is(
 );
 
 $Self->False(
-    index( $Result, 'otrs.Console.pl Help command' ) > -1,
+    index( $Result, 'znuny.Console.pl Help command' ) > -1,
     "Help for 'Help' command not found",
 );
 

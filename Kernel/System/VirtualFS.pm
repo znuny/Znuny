@@ -161,7 +161,7 @@ write a file to virtual file system
     my $Success = $VirtualFSObject->Write(
         Content  => \$Content,
         Filename => '/Object/SomeFileName.txt',
-        Mode     => 'binary'            # (binary|utf8)
+        Mode     => 'binary',            # (binary|utf8)
 
         # optional, preferences data
         Preferences => {

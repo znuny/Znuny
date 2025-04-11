@@ -317,11 +317,19 @@ sub DeleteAction {
 
     # challenge token check for write action
     $LayoutObject->ChallengeTokenCheck();
-    $Kernel::OM->Get('Kernel::System::Stats')->StatsDelete(
+    my $Success = $Kernel::OM->Get('Kernel::System::Stats')->StatsDelete(
         StatID => $StatID,
         UserID => $Self->{UserID},
     );
-    return $LayoutObject->Redirect( OP => "Action=AgentStatistics;Subaction=Overview" );
+
+    return $LayoutObject->Attachment(
+        ContentType => 'text/html',
+        Content     => ($Success) ? 1 : 0,
+        Type        => 'inline',
+        NoCache     => 1,
+    );
+
+    #     return $LayoutObject->Redirect( OP => "Action=AgentStatistics;Subaction=Overview" );
 }
 
 sub EditScreen {
@@ -729,8 +737,8 @@ sub ViewScreen {
         UserID => $Self->{UserID},
     );
     if ( !IsHashRefWithData( $StatsList->{$StatID} ) ) {
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('Could not load stat.'),
+        return $LayoutObject->NoPermission(
+            Message => Translatable("This stat does not exist, or you don't have permissions to access it."),
         );
     }
 

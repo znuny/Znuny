@@ -104,7 +104,7 @@ perform TicketCreate Operation. This will return the created ticket number.
 
                 PendingTime {       # optional
                     Year   => 2011,
-                    Month  => 12
+                    Month  => 12,
                     Day    => 03,
                     Hour   => 23,
                     Minute => 05,
@@ -138,6 +138,20 @@ perform TicketCreate Operation. This will return the created ticket number.
                 ForceNotificationToUserID       => [1, 2, 3]                   # optional
                 ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
                 ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                Attachment => [
+                    {
+                        Content     => 'content'                                 # base64 encoded
+                        ContentType => 'some content type'
+                        Filename    => 'some fine name'
+                    },
+                    # ...
+                ],
+                # or:
+                Attachment => {
+                    Content     => 'content'                                 # base64 encoded
+                    ContentType => 'some content type'
+                    Filename    => 'some fine name'
+                },
 
                 # Signing and encryption, only used when ArticleSend is set to 1
                 Sign => {
@@ -180,12 +194,18 @@ perform TicketCreate Operation. This will return the created ticket number.
                     ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
                     Attachment => [
                         {
-                            Content     => 'content'                                 # base64 encoded
-                            ContentType => 'some content type'
+                            Content     => 'content',                                # base64 encoded
+                            ContentType => 'some content type',
                             Filename    => 'some fine name'
                         },
                         # ...
                     ],
+                    # or:
+                    Attachment => {
+                        Content     => 'content'                                 # base64 encoded
+                        ContentType => 'some content type'
+                        Filename    => 'some fine name'
+                    },
                 },
                 # ...
             ],
@@ -206,16 +226,16 @@ perform TicketCreate Operation. This will return the created ticket number.
 
             Attachment => [
                 {
-                    Content     => 'content'                                 # base64 encoded
-                    ContentType => 'some content type'
+                    Content     => 'content',                                # base64 encoded
+                    ContentType => 'some content type',
                     Filename    => 'some fine name'
                 },
                 # ...
             ],
             #or
             #Attachment => {
-            #    Content     => 'content'
-            #    ContentType => 'some content type'
+            #    Content     => 'content',
+            #    ContentType => 'some content type',
             #    Filename    => 'some fine name'
             #},
         },
@@ -226,10 +246,10 @@ perform TicketCreate Operation. This will return the created ticket number.
         ErrorMessage    => '',                      # in case of error
         Data            => {                        # result data payload after Operation
             TicketID    => 123,                     # Ticket ID Znuny
-            TicketNumber => 2324454323322           # Ticket number in Znuny
+            TicketNumber => 2324454323322,          # Ticket number in Znuny
             ArticleID   => 43,                      # Article ID in Znuny
             Error => {                              # should not return errors
-                    ErrorCode    => 'Ticket.Create.ErrorCode'
+                    ErrorCode    => 'Ticket.Create.ErrorCode',
                     ErrorMessage => 'Error Description'
             },
 
@@ -261,7 +281,7 @@ perform TicketCreate Operation. This will return the created ticket number.
                     Responsible        => 'some_responsible_login',
                     ResponsibleID      => 123,
                     Age                => 3456,
-                    Created            => '2010-10-27 20:15:00'
+                    Created            => '2010-10-27 20:15:00',
                     CreateBy           => 123,
                     Changed            => '2010-10-27 20:15:15',
                     ChangeBy           => 123,
@@ -492,39 +512,21 @@ sub Run {
     }
 
     # isolate Article parameter
-    my @Article;
+    my @Articles;
     if ( IsHashRefWithData( $Param{Data}->{Article} ) ) {
-        push @Article, $Param{Data}->{Article};
+        push @Articles, $Param{Data}->{Article};
     }
-    if ( IsArrayRefWithData( $Param{Data}->{Article} ) ) {
-        @Article = @{ $Param{Data}->{Article} };
+    else {
+        @Articles = @{ $Param{Data}->{Article} };
     }
 
-    for my $Article (@Article) {
+    for my $Article (@Articles) {
         $Article->{UserType} = $UserType;
 
         # remove leading and trailing spaces
-        for my $Attribute ( sort keys %{$Article} ) {
-            if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
-
-                #remove leading spaces
-                $Article->{$Attribute} =~ s{\A\s+}{};
-
-                #remove trailing spaces
-                $Article->{$Attribute} =~ s{\s+\z}{};
-            }
-        }
+        s/ (?: \A\s+ | \s+\z ) //gx for values %$Article;
         if ( IsHashRefWithData( $Article->{OrigHeader} ) ) {
-            for my $Attribute ( sort keys %{ $Article->{OrigHeader} } ) {
-                if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
-
-                    #remove leading spaces
-                    $Article->{OrigHeader}->{$Attribute} =~ s{\A\s+}{};
-
-                    #remove trailing spaces
-                    $Article->{OrigHeader}->{$Attribute} =~ s{\s+\z}{};
-                }
-            }
+            s/ (?: \A\s+ | \s+\z ) //gx for values %{ $Article->{OrigHeader} };
         }
 
         # Check attributes that can be set by sysconfig.
@@ -572,11 +574,11 @@ sub Run {
         $DynamicField = $Param{Data}->{DynamicField};
 
         # homogenate input to array
-        if ( ref $DynamicField eq 'HASH' ) {
-            push @DynamicFieldList, $DynamicField;
+        if ( ref $DynamicField eq 'ARRAY' ) {
+            @DynamicFieldList = @{$DynamicField};
         }
         else {
-            @DynamicFieldList = @{$DynamicField};
+            push @DynamicFieldList, $DynamicField;
         }
 
         # check DynamicField internal structure
@@ -590,16 +592,7 @@ sub Run {
             }
 
             # remove leading and trailing spaces
-            for my $Attribute ( sort keys %{$DynamicFieldItem} ) {
-                if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
-
-                    #remove leading spaces
-                    $DynamicFieldItem->{$Attribute} =~ s{\A\s+}{};
-
-                    #remove trailing spaces
-                    $DynamicFieldItem->{$Attribute} =~ s{\s+\z}{};
-                }
-            }
+            s/ (?: \A\s+ | \s+\z ) //gx for values %{$DynamicFieldItem};
 
             # check DynamicField attribute values
             my $DynamicFieldCheck = $Self->_CheckDynamicField( DynamicField => $DynamicFieldItem );
@@ -637,16 +630,7 @@ sub Run {
             }
 
             # remove leading and trailing spaces
-            for my $Attribute ( sort keys %{$AttachmentItem} ) {
-                if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
-
-                    #remove leading spaces
-                    $AttachmentItem->{$Attribute} =~ s{\A\s+}{};
-
-                    #remove trailing spaces
-                    $AttachmentItem->{$Attribute} =~ s{\s+\z}{};
-                }
-            }
+            s/ (?: \A\s+ | \s+\z ) //gx for values %{$AttachmentItem};
 
             # check Attachment attribute values
             my $AttachmentCheck = $Self->_CheckAttachment( Attachment => $AttachmentItem );
@@ -659,7 +643,7 @@ sub Run {
 
     return $Self->_TicketCreate(
         Ticket           => $Ticket,
-        Article          => \@Article,
+        Article          => \@Articles,
         DynamicFieldList => \@DynamicFieldList,
         AttachmentList   => \@AttachmentList,
         UserID           => $UserID,
@@ -1006,13 +990,16 @@ sub _CheckArticle {
     # check Article->ContentType
     if ( $Article->{ContentType} ) {
 
+        # Internal issue #595: Remove line breaks from content type.
+        $Article->{ContentType} =~ s{\R}{ }g;
+
         $Article->{ContentType} = lc $Article->{ContentType};
 
         # check Charset part
         my $Charset = '';
-        if ( $Article->{ContentType} =~ /charset=/i ) {
+        if ( $Article->{ContentType} =~ /charset\s*=\s*/i ) {
             $Charset = $Article->{ContentType};
-            $Charset =~ s/.+?charset=("|'|)(\w+)/$2/gi;
+            $Charset =~ s/.+?charset\s*=\s*("|'|)(\w+)/$2/gi;
             $Charset =~ s/"|'//g;
             $Charset =~ s/(.+?);.*/$1/g;
         }
@@ -1245,13 +1232,16 @@ sub _CheckAttachment {
     # check Article->ContentType
     if ( $Attachment->{ContentType} ) {
 
+        # Internal issue #595: Remove line breaks from content type.
+        $Attachment->{ContentType} =~ s{\R}{ }g;
+
         $Attachment->{ContentType} = lc $Attachment->{ContentType};
 
         # check Charset part
         my $Charset = '';
-        if ( $Attachment->{ContentType} =~ /charset=/i ) {
+        if ( $Attachment->{ContentType} =~ /charset\s*=\s*/i ) {
             $Charset = $Attachment->{ContentType};
-            $Charset =~ s/.+?charset=("|'|)(\w+)/$2/gi;
+            $Charset =~ s/.+?charset\s*=\s*("|'|)(\w+)/$2/gi;
             $Charset =~ s/"|'//g;
             $Charset =~ s/(.+?);.*/$1/g;
         }
@@ -1582,13 +1572,15 @@ sub _TicketCreate {
 
         my $PlainBody = $Article->{Body};
 
+        my $ArticleIsHTML = ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
+            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i );
+
+        my $ArticleIsPlainText = ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/plain/i )
+            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/plain/i );
+
         # Convert article body to plain text, if HTML content was supplied. This is necessary since auto response code
         #   expects plain text content. Please see bug#13397 for more information.
-        if (
-            ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
-            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
-            )
-        {
+        if ($ArticleIsHTML) {
             $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
                 String => $Article->{Body},
             );
@@ -1619,20 +1611,31 @@ sub _TicketCreate {
                 };
             }
 
+            #
+            # Template generator implicitly takes Frontend::RichText into account.
+            # Temporarily enable/disable RichText setting according to content type of article,
+            # so that body and signature both are plain text or HTML.
+            #
+            my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+            my $OriginalRichTextSetting = $ConfigObject->Get('Frontend::RichText');
+
+            $ConfigObject->{'Frontend::RichText'} = 0 if $ArticleIsPlainText;
+            $ConfigObject->{'Frontend::RichText'} = 1 if $ArticleIsHTML;
+
             my $Signature = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Signature(
                 TicketID => $TicketID,
                 UserID   => $Param{UserID},
                 Data     => $Article,
             );
 
+            # Restore original RichText setting.
+            $ConfigObject->{'Frontend::RichText'} = $OriginalRichTextSetting;
+
             if ($Signature) {
                 $Article->{Body} = $Article->{Body} . $Signature;
 
-                if (
-                    ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
-                    || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
-                    )
-                {
+                if ($ArticleIsHTML) {
                     $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
                         String => $Article->{Body},
                     );
@@ -1668,6 +1671,17 @@ sub _TicketCreate {
             $MimeType = $Article->{MimeType};
         }
 
+        # Base-64-decode attachments.
+        if ( IsHashRefWithData( $Article->{Attachment} ) ) {
+            $Article->{Attachment} = [ $Article->{Attachment} ];
+        }
+        ATTACHMENT:
+        for my $Attachment ( @{ $Article->{Attachment} // [] } ) {
+            next ATTACHMENT if !IsStringWithData( $Attachment->{Content} );
+
+            $Attachment->{Content} = MIME::Base64::decode_base64( $Attachment->{Content} );
+        }
+
         my %ArticleParams = (
             NoAgentNotify        => $Article->{NoAgentNotify} || 0,
             TicketID             => $TicketID,
@@ -1693,6 +1707,7 @@ sub _TicketCreate {
                 Subject => $Subject,
                 Body    => $PlainBody,
             },
+            Attachment => $Article->{Attachment} // [],
         );
 
         # create article
@@ -1710,7 +1725,8 @@ sub _TicketCreate {
                         Content => MIME::Base64::decode_base64( $Attachment->{Content} ),
                     };
                 }
-                $ArticleParams{Attachment} = \@NewAttachments;
+
+                push @{ $ArticleParams{Attachment} }, @NewAttachments;
             }
 
             # signing and encryption

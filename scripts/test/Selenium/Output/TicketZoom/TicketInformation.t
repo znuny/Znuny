@@ -19,9 +19,22 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
-        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+        my $CacheObject               = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject                  = $Kernel::OM->Get('Kernel::System::DB');
+        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $DynamicFieldValueObject   = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+        my $HelperObject              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject               = $Kernel::OM->Get('Kernel::System::Queue');
+        my $SLAObject                 = $Kernel::OM->Get('Kernel::System::SLA');
+        my $ServiceObject             = $Kernel::OM->Get('Kernel::System::Service');
+        my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $TypeObject                = $Kernel::OM->Get('Kernel::System::Type');
+        my $UserObject                = $Kernel::OM->Get('Kernel::System::User');
+        my $UtilObject                = $Kernel::OM->Get('Kernel::System::Util');
+        my $ArticleBackendEmailObject = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Email');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
 
         # Disable 'Ticket Information', 'Customer Information' and 'Linked Objects' widgets in AgentTicketZoom screen.
         for my $WidgetDisable (qw(0100-TicketInformation 0200-CustomerInformation 0300-LinkTable)) {
@@ -89,8 +102,6 @@ $Selenium->RunTest(
             Value => {},
         );
 
-        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-
         # Create test responsible user.
         my $ResponsibleUser = $HelperObject->TestUserCreate(
             Groups => ['admin'],
@@ -126,8 +137,6 @@ $Selenium->RunTest(
             CreatedByUser => $UserObject->UserName( UserID => $UserLoginID ),
         );
 
-        my $TypeObject = $Kernel::OM->Get('Kernel::System::Type');
-
         # Create test type.
         my $TypeID = $TypeObject->TypeAdd(
             Name    => $TicketData{Type},
@@ -138,8 +147,6 @@ $Selenium->RunTest(
             $TypeID,
             "TypeID $TypeID is created"
         );
-
-        my $QueueObject = $Kernel::OM->Get('Kernel::System::Queue');
 
         # Create test queue.
         my $QueueID = $QueueObject->QueueAdd(
@@ -163,7 +170,8 @@ $Selenium->RunTest(
         if ($IsITSMInstalled) {
 
             # get the list of service types from general catalog
-            my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+            my $ServiceTypeList      = $GeneralCatalogObject->ItemList(
                 Class => 'ITSM::Service::Type',
             );
 
@@ -171,7 +179,7 @@ $Selenium->RunTest(
             my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
 
             # get the list of sla types from general catalog
-            my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            my $SLATypeList = $GeneralCatalogObject->ItemList(
                 Class => 'ITSM::SLA::Type',
             );
 
@@ -189,7 +197,7 @@ $Selenium->RunTest(
         }
 
         # Create test service.
-        my $ServiceID = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+        my $ServiceID = $ServiceObject->ServiceAdd(
             Name    => $TicketData{Service},
             ValidID => 1,
             Comment => 'Selenium Service',
@@ -207,7 +215,7 @@ $Selenium->RunTest(
             UpdateTime        => 40,
             SolutionTime      => 50,
         );
-        my $SLAID = $Kernel::OM->Get('Kernel::System::SLA')->SLAAdd(
+        my $SLAID = $SLAObject->SLAAdd(
             ServiceIDs        => [$ServiceID],
             Name              => $TicketData{SLA},
             FirstResponseTime => $EscalationTimes{FirstResponseTime},
@@ -222,9 +230,6 @@ $Selenium->RunTest(
             $SLAID,
             "SLAID $SLAID is created"
         );
-
-        my $DynamicFieldObject      = $Kernel::OM->Get('Kernel::System::DynamicField');
-        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
 
         # Create test dynamic field.
         my $DynamicFieldName = "DFText$RandomID";
@@ -253,8 +258,6 @@ $Selenium->RunTest(
                 $DynamicFieldName => 1,
             },
         );
-
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Create test ticket.
         my $Customer    = "Customer$RandomID";
@@ -341,25 +344,25 @@ $Selenium->RunTest(
 
         # Verify there is no collapsed elements on the screen.
         $Self->True(
-            $Selenium->find_element("//div[contains(\@class, \'WidgetSimple Expanded')]"),
+            $Selenium->find_element("//div[contains(\@class, \'WidgetSimple information-widget Expanded')]"),
             "Ticket Information Widget is expanded",
         );
 
         # Toggle to collapse 'Ticket Information' widget.
-        $Selenium->find_element("//a[contains(\@title, \'Show or hide the content' )]")->click();
+        $Selenium->find_element(
+            "//a[contains(\@title, \'Show or hide the content' )]//i[contains(\@class, 'fa-caret-down')]"
+        )->click();
 
-        $Selenium->WaitFor(
-            JavaScript => 'return $("div.WidgetSimple.Collapsed").length'
-        );
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("div.WidgetSimple.Collapsed").length' );
 
         # Verify there is collapsed element on the screen.
         $Self->True(
-            $Selenium->find_element("//div[contains(\@class, \'WidgetSimple Collapsed')]"),
+            $Selenium->find_element("//div[contains(\@class, 'WidgetSimple information-widget Collapsed')]"),
             "Ticket Information Widget is collapsed",
         );
 
         # Add article to ticket.
-        my $ArticleID = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Email')->ArticleCreate(
+        my $ArticleID = $ArticleBackendEmailObject->ArticleCreate(
             TicketID             => $TicketID,
             IsVisibleForCustomer => 1,
             SenderType           => 'customer',
@@ -394,8 +397,13 @@ $Selenium->RunTest(
 
         # Verify 'Ticket Information' widget values.
         for my $TicketInformationCheck ( sort keys %TicketData ) {
+
+            my $HTMLTag = 'p';
+            if ( $TicketInformationCheck eq 'State' ) {
+                $HTMLTag = 'span';
+            }
             $Self->True(
-                $Selenium->find_element("//p[contains(\@title, \'$TicketData{$TicketInformationCheck}' )]"),
+                $Selenium->find_element("//$HTMLTag\[contains(\@title, \'$TicketData{$TicketInformationCheck}' )]"),
                 "$TicketInformationCheck - $TicketData{$TicketInformationCheck} found in Ticket Information widget"
             );
         }
@@ -493,8 +501,6 @@ $Selenium->RunTest(
             "TicketID $TicketID is deleted",
         );
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         # Get delete test data.
         my @DeleteData = (
             {
@@ -535,8 +541,6 @@ $Selenium->RunTest(
                 $Item->{Message},
             );
         }
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure cache is correct.
         for my $Cache (qw( Ticket Type SLA Service Queue DynamicField )) {

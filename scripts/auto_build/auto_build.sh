@@ -18,9 +18,9 @@
 # along with this program. If not, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-echo "auto_build.sh - build OTRS release files"
+echo "auto_build.sh - build Znuny release files"
 echo "Copyright (C) 2001-2021 OTRS AG, https://otrs.com/";
-echo "Copyright (C) 2012-2021 Znuny GmbH, https://znuny.com/";
+echo "Copyright (C) 2021 Znuny GmbH, https://znuny.org/";
 
 PATH_TO_CVS_SRC=$1
 PRODUCT="Znuny"
@@ -45,7 +45,7 @@ if ! test $PATH_TO_CVS_SRC || ! test $VERSION || ! test $RELEASE; then
     echo ""
     echo "Usage: auto_build.sh <PATH_TO_CVS_SRC> <VERSION> <BUILD>"
     echo ""
-    echo "  Try: auto_build.sh /home/ernie/src/otrs 3.1.0.beta1 01"
+    echo "  Try: auto_build.sh /home/znuny 7.0.1 01"
     echo ""
     exit 1;
 else
@@ -53,7 +53,7 @@ else
     # check dir
     # --
     if ! test -e $PATH_TO_CVS_SRC/RELEASE; then
-        echo "Error: $PATH_TO_CVS_SRC is not OTRS CVS directory!"
+        echo "Error: $PATH_TO_CVS_SRC is not Znuny directory!"
         exit 1;
     fi
 fi
@@ -121,7 +121,7 @@ find -name ".#*" | xargs rm -rf
 find -name ".keep" | xargs rm -f
 
 # mk ARCHIVE
-bin/otrs.CheckSum.pl -a create
+bin/znuny.CheckSum.pl -a create
 # Create needed directories
 mkdir -p var/tmp var/article var/log
 
@@ -166,11 +166,11 @@ function CreateRPM() {
     mv $SYSTEM_SRPM_DIR/$PACKAGE*$VERSION*$RELEASE*.src.rpm $PACKAGE_DEST_DIR/SRPMS/$TargetPath
 }
 
-CreateRPM "RHEL 7"    "rhel7-otrs.spec"    "rhel/7"
-CreateRPM "SuSE 12"   "suse12-otrs.spec"   "suse/12/"
-CreateRPM "SuSE 13"   "suse13-otrs.spec"   "suse/13/"
-CreateRPM "Fedora 25" "fedora25-otrs.spec" "fedora/25/"
-CreateRPM "Fedora 26" "fedora26-otrs.spec" "fedora/26/"
+CreateRPM "RHEL 7"    "rhel7-znuny.spec"    "rhel/7"
+CreateRPM "SuSE 12"   "suse12-znuny.spec"   "suse/12/"
+CreateRPM "SuSE 13"   "suse13-znuny.spec"   "suse/13/"
+CreateRPM "Fedora 25" "fedora25-znuny.spec" "fedora/25/"
+CreateRPM "Fedora 26" "fedora26-znuny.spec" "fedora/26/"
 
 echo "-----------------------------------------------------------------";
 echo "You will find your tar.gz, RPMs and SRPMs in $PACKAGE_DEST_DIR";
@@ -207,7 +207,7 @@ else
     echo "No md5sum found in \$PATH!"
 fi
 prerelease=$(echo "$VERSION" | egrep -e '[a-zA-Z]')
-if [ -z "$prerelease" ]; then 
+if [ -z "$prerelease" ]; then
     ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-$MAJOR_VERSION.$MINOR_VERSION.tar.gz
     ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-latest-$MAJOR_VERSION.$MINOR_VERSION.tar.gz
     if [ $LATEST_VERSION  = "true" ]; then

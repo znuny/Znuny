@@ -12,22 +12,21 @@
 <div class="OverviewBox ARIARoleMain [% Data.View | html %]">
     <h1>[% Translate("Agenda Overview") | html %]</h1>
 
-    <div class="OverviewControl" id="OverviewControl">
+    <div class="OverviewControl OverviewAgenda" id="OverviewControl">
         <div>
             <div class="ControlRow">
-
 [% RenderBlockStart("OverviewNavBarFilter") %]
                 <ul class="Tabs">
 [% RenderBlockStart("OverviewNavBarFilterItem") %]
 [% RenderBlockStart("OverviewNavBarFilterItemSelected") %]
-                    <li class="Active [% Data.CSS | html %]">
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];Start=[% Data.Start | uri %]">[% Translate(Data.Name) | html %]</a>
-                    </li>
+                        <li class="Active [% Data.CSS | html %]">
+                            <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];Start=[% Data.Start | uri %]">[% Translate(Data.Name) | html %]</a>
+                        </li>
 [% RenderBlockEnd("OverviewNavBarFilterItemSelected") %]
 [% RenderBlockStart("OverviewNavBarFilterItemSelectedNot") %]
-                    <li class="[% Data.CSS | html %]">
-                        <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];Start=[% Data.Start | uri %]">[% Translate(Data.Name) | html %]</a>
-                    </li>
+                        <li class="[% Data.CSS | html %]">
+                            <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];Start=[% Data.Start | uri %]">[% Translate(Data.Name) | html %]</a>
+                        </li>
 [% RenderBlockEnd("OverviewNavBarFilterItemSelectedNot") %]
 [% RenderBlockEnd("OverviewNavBarFilterItem") %]
                 </ul>
@@ -36,30 +35,38 @@
             </div>
             <div class="ActionRow">
                 <div class="Buttons HeaderLeft">
-[% IF Data.ModulePermissions.AdminAppointmentCalendarManage %]
-                    <a href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage;Subaction=Overview" class="CallForAction Inline">
-                        <span><i class="fa fa-calendar-o"></i> [% Translate("Manage Calendars") | html %]</span>
-                    </a>
-[% END %]
+                    [% IF Data.ModulePermissions.AdminAppointmentCalendarManage %]
+                        <a href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage;Subaction=Overview" class="CallForAction Inline">
+                            <span>
+                                [% Translate("Manage Calendars") | html %]
+                            </span>
+                        </a>
+                    [% END %]
 [% RenderBlockStart("AppointmentCreateButton") %]
-                    <a id="AppointmentCreateButton" href="#" class="CallForAction Inline">
-                        <span><i class="fa fa-plus-square"></i> [% Translate("Add Appointment") | html %]</span>
-                    </a>
+                        <a id="AppointmentCreateButton" href="#" class="CallForAction Inline">
+                            <span>
+                                [% Translate("Add Appointment") | html %]
+                            </span>
+                        </a>
 [% RenderBlockEnd("AppointmentCreateButton") %]
                 </div>
-                <div class="Buttons HeaderRight">
-                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %]" class="CallForAction Inline">
-                        <span>[% Translate("Today") | html %]</span>
-                    </a>
-                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];Start=[% Data.Start | uri %];Jump=Prev" class="CallForAction Inline">
-                        <span class="fa fa-chevron-left"></span>
-                    </a>
-                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];Start=[% Data.Start | uri %];Jump=Next" class="CallForAction Inline">
-                        <span class="fa fa-chevron-right"></span>
-                    </a>
-                </div>
+
                 <div class="HeaderCenter">
                     <h2>[% Data.HeaderTitle | html %] <span class="WeekNumber">[% Data.HeaderTitleCW | html %]</span></h2>
+                </div>
+
+                <div class="Buttons HeaderRight">
+                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %]" class="CallForAction Inline btn-today">
+                        <span>[% Translate("Today") | html %]</span>
+                    </a>
+                    <div class="btns-arrow-wrapper">
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];Start=[% Data.Start | uri %];Jump=Prev" class="CallForAction Inline btn-arrow">
+                            <span class="fa fa-chevron-left"></span>
+                        </a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];Start=[% Data.Start | uri %];Jump=Next" class="CallForAction Inline btn-arrow">
+                            <span class="fa fa-chevron-right"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,77 +104,77 @@
             </tr>
         </thead>
 [% RenderBlockStart("AppointmentGroup") %]
-        <tbody>
-            <tr class="DateDivider [% Data.Class | html %]">
-                <td colspan="8">[% Data.CurrentDay | html %]</td>
-            </tr>
-        </tbody>
-        <tbody>
+            <tbody>
+                <tr class="DateDivider [% Data.Class | html %]">
+                    <td colspan="8">[% Data.CurrentDay | html %]</td>
+                </tr>
+            </tbody>
+            <tbody>
 [% RenderBlockStart("AppointmentActionRow") %]
-            <tr id="AppointmentID_[% Data.AppointmentID | html %]" class="MasterAction">
-                <td class="Flags Center">
-                    <div class="Flag Small" title="[% Data.CalendarData.${Data.CalendarID}.CalendarName | html %]">
-                        <span class="CalendarColor" style="background-color: [% Data.CalendarData.${Data.CalendarID}.Color | html %];"></span>
-                    </div>
-                </td>
-                <td>
-                    <div title="[% Data.CalendarData.${Data.CalendarID}.CalendarName | html %]">
-                        [% Data.CalendarData.${Data.CalendarID}.CalendarName | truncate(21) | html %]
-                    </div>
-                </td>
-                <td>
-                    <a class="MasterActionLink" data-appointment-id="[% Data.AppointmentID | html %]" href="#" title="[% Data.Title | html %]">
-                        [% Data.Title | truncate(36) | html %]
-                    </a>
-                </td>
-                <td>
-                    [% Data.StartDate | html %]
-                </td>
-                <td>
-                    [% Data.EndDate | html %]
-                </td>
-                <td>
-                    [% IF Data.AllDay == 1 %]
-                        [% Translate("Yes") | html %]
-                    [% ELSE %]
-                        [% Translate("No") | html %]
-                    [% END %]
-                </td>
-                <td>
-                    [% IF Data.Recurring == 1 %]
-                        [% Translate("Yes") | html %]
-                    [% ELSE %]
-                        [% Translate("No") | html %]
-                    [% END %]
-                </td>
-                <td>
-                    [% IF Data.NotificationDate %]
-                        [% Data.NotificationDate | html %]
-                    [% ELSE %]
-                        [% Translate("No") | html %]
-                    [% END %]
-                </td>
-            </tr>
+                <tr id="AppointmentID_[% Data.AppointmentID | html %]" class="MasterAction">
+                    <td class="Flags Center">
+                        <div class="Flag Small" title="[% Data.CalendarData.${Data.CalendarID}.CalendarName | html %]">
+                            <span class="CalendarColor" style="background-color: [% Data.CalendarData.${Data.CalendarID}.Color | html %];"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div title="[% Data.CalendarData.${Data.CalendarID}.CalendarName | html %]">
+                            [% Data.CalendarData.${Data.CalendarID}.CalendarName | truncate(21) | html %]
+                        </div>
+                    </td>
+                    <td>
+                        <a class="MasterActionLink" data-appointment-id="[% Data.AppointmentID | html %]" href="#" title="[% Data.Title | html %]">
+                            [% Data.Title | truncate(36) | html %]
+                        </a>
+                    </td>
+                    <td>
+                        [% Data.StartDate | html %]
+                    </td>
+                    <td>
+                        [% Data.EndDate | html %]
+                    </td>
+                    <td>
+                        [% IF Data.AllDay == 1 %]
+                            [% Translate("Yes") | html %]
+                        [% ELSE %]
+                            [% Translate("No") | html %]
+                        [% END %]
+                    </td>
+                    <td>
+                        [% IF Data.Recurring == 1 %]
+                            [% Translate("Yes") | html %]
+                        [% ELSE %]
+                            [% Translate("No") | html %]
+                        [% END %]
+                    </td>
+                    <td>
+                        [% IF Data.NotificationDate %]
+                            [% Data.NotificationDate | html %]
+                        [% ELSE %]
+                            [% Translate("No") | html %]
+                        [% END %]
+                    </td>
+                </tr>
 [% RenderBlockEnd("AppointmentActionRow") %]
-        </tbody>
+            </tbody>
 [% RenderBlockEnd("AppointmentGroup") %]
 [% RenderBlockStart("AppointmentNoDataRow") %]
-        <tbody>
-            <tr>
-                <td colspan="8">
-                    [% Translate("No data found.") | html %]
-                </td>
-            </tr>
-        </tbody>
+            <tbody>
+                <tr>
+                    <td colspan="8">
+                        [% Translate("No data found.") | html %]
+                    </td>
+                </tr>
+            </tbody>
 [% RenderBlockEnd("AppointmentNoDataRow") %]
 [% RenderBlockStart("CalendarsNotFound") %]
-        <tbody>
-            <tr>
-                <td colspan="8">
-                    [% Translate("No calendars found. Please add a calendar first by using Manage Calendars page.") | html %]
-                </td>
-            </tr>
-        </tbody>
+            <tbody>
+                <tr>
+                    <td colspan="8">
+                        [% Translate("No calendars found. Please add a calendar first by using Manage Calendars page.") | html %]
+                    </td>
+                </tr>
+            </tbody>
 [% RenderBlockEnd("CalendarsNotFound") %]
     </table>
 </div>

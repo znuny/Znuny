@@ -18,13 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
-        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
-        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $GroupObject     = $Kernel::OM->Get('Kernel::System::Group');
+        my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
+        my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
 
         # get needed variables
         my $RandomNumber = $HelperObject->GetRandomNumber();
@@ -46,7 +46,7 @@ $Selenium->RunTest(
         );
 
         # get original config for menu module 'Close'
-        my %MenuModuleCloseSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %MenuModuleCloseSysConfig = $SysConfigObject->SettingGet(
             Name => 'Ticket::Frontend::MenuModule###450-Close',
         );
 
@@ -73,7 +73,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -99,7 +99,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             {

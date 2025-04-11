@@ -1543,6 +1543,7 @@ $Selenium->RunTest(
 
         my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
 
         # Rebuild system configuration.
         my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Config::Rebuild');
@@ -1554,7 +1555,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Load sample XML file.
-        my $Directory = $Kernel::OM->Get('Kernel::Config')->Get('Home')
+        my $Directory = $ConfigObject->Get('Home')
             . '/scripts/test/sample/SysConfig/XML/AdminSystemConfiguration';
 
         my $XMLLoaded = $SysConfigObject->ConfigurationXML2DB(
@@ -1587,7 +1588,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSystemConfiguration");
 
@@ -1808,26 +1809,6 @@ $Selenium->RunTest(
         $Self->True(
             index( $Selenium->get_page_source(), 'You have undeployed settings, would you like to deploy them?' ) > -1,
             "Notification shown for undeployed settings."
-        );
-
-        $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && $("#CloudService > i:visible").length;',
-        );
-
-        $Selenium->execute_script("\$('#CloudService > i').trigger('click');");
-        $Selenium->WaitFor(
-            JavaScript =>
-                'return typeof($) === "function" && $("#ConfigTree ul > li:first > ul > li:first:visible").length;',
-        );
-
-        # Check navigation for disabled nodes.
-        my $NodeDisabled = $Selenium->execute_script(
-            'return $("#ConfigTree ul > li:first > ul > li:first a").hasClass("jstree-disabled");',
-        );
-
-        $Self->True(
-            $NodeDisabled,
-            'Check if CloudService::Admin node is disabled.',
         );
 
         # Enable this block if you want to test it multiple times.

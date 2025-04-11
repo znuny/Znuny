@@ -7,8 +7,6 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-
-
 [%  SET HighlightError = {};
     SET HighlightHint = {};
     SET DisableButton = {};
@@ -132,9 +130,13 @@
 
         <div class="PreviewSettings">
             [% Translate('Preview format') | html %]:
-            [% FOREACH Format IN PreviewFormats.sort %]
-            <button class="CallForAction SwitchPreviewFormat" data-format="[% Format | html %]"><span>[% Translate(FormatConfig.item(Format)) | html %]</span></button>
-            [% END %]
+            <div class="btns-wrapper">
+                [% FOREACH Format IN PreviewFormats.sort %]
+                <button class="SwitchPreviewFormat btn-primary btn-main btn-width-md" data-format="[% Format | html %]">
+                    <span>[% Translate(FormatConfig.item(Format)) | html %]</span>
+                </button>
+                [% END %]
+            </div>
             <span class="Warning">
                 [% Translate('Please note that the preview uses random data and does not consider data filters.') | html %]
             </span>
@@ -182,6 +184,7 @@
     class="CallForAction EditXAxis Bottom
         [% IF HighlightError.XAxis %]HighlightError[% END %]
         [% IF HighlightHint.XAxis %]HighlightHint[% END %]
+        btn-cancel-ghost btn-main
     "
     [% IF DisableButton.XAxis %]disabled="disabled"[% END %]
     data-configuration-type="XAxis"
@@ -198,6 +201,7 @@
     class="CallForAction EditYAxis Left
         [% IF HighlightError.YAxis %]HighlightError[% END %]
         [% IF HighlightHint.YAxis %]HighlightHint[% END %]
+        btn-cancel-ghost btn-main
     "
     [% IF DisableButton.YAxis %]disabled="disabled"[% END %]
     data-configuration-type="YAxis"
@@ -214,6 +218,7 @@
     class="CallForAction EditRestrictions Right
         [% IF HighlightError.Restrictions %]HighlightError[% END %]
         [% IF HighlightHint.Restrictions %]HighlightHint[% END %]
+        btn-cancel-ghost btn-main
     "
     [% IF DisableButton.Restrictions %]disabled="disabled"[% END %]
     data-configuration-type="Restrictions"
@@ -229,7 +234,7 @@
 <div id="EditDialogTemplate" class="Hidden">
     <div class="Fields"></div>
     <fieldset class="TableLike Add">
-        <label>[% Translate("Add") | html %]:</label>
+        <label>[% Translate("Add") | html %]</label>
         <div class="Field Value">
             <select></select>
         </div>

@@ -68,7 +68,7 @@ Sets out-of-office information for a specific user.
 
     my $Result = $OperationObject->Run(
         Data => {
-            SessionID                   => 'AValidSessionIDValue'                           # the ID of the user session
+            SessionID                   => 'AValidSessionIDValue',                          # the ID of the user session
             UserLogin                   => 'Agent',                                         # if no SessionID is given UserLogin is required
             Password                    => 'some password',                                 # user password
             OutOfOfficeEntriesCSVString => 'Original CSV string with out-of-office data',
@@ -102,7 +102,7 @@ Sets out-of-office information for a specific user.
         Data            => {                                    # result data payload after Operation
             Success => 1,
             Error   => {                                        # should not return errors
-                    ErrorCode    => 'OutOfOffice.ErrorCode'
+                    ErrorCode    => 'OutOfOffice.ErrorCode',
                     ErrorMessage => 'Error Description'
             },
         },

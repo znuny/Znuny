@@ -12,8 +12,6 @@ package Kernel::System::Calendar::Ticket::PendingTime;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 our @ObjectDependencies = (
     'Kernel::System::DateTime',
     'Kernel::System::Log',
@@ -94,7 +92,7 @@ set ticket pending time to supplied time value.
 
     my $Success = $TicketPendingTimeObject->SetTime(
         Type     => 'PendingTime',
-        Value    => '2016-01-01 00:00:00'
+        Value    => '2016-01-01 00:00:00',
         TicketID => 1,
     );
 

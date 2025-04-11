@@ -19,13 +19,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # create test customer user
         my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate() || die "Did not get test customer user";
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # First page load, no links shown.
         $HelperObject->ConfigSettingChange(
@@ -42,12 +42,12 @@ $Selenium->RunTest(
             "No links in footer area displayed",
         );
 
-        # Display link for OTRS Homepage.
+        # Display link for Znuny Homepage.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PublicFrontend::FooterLinks',
             Value => {
-                'https://www.otrs.com' => 'OTRS Homepage',
+                'https://www.znuny.org' => 'Znuny Open-Source Help Desk Platform',
             },
         );
 
@@ -60,8 +60,8 @@ $Selenium->RunTest(
         );
 
         $Self->True(
-            index( $Selenium->get_page_source(), 'OTRS Homepage' ) > -1,
-            'OTRS Homepage link is shown',
+            index( $Selenium->get_page_source(), 'Znuny Open-Source Help Desk Platform' ) > -1,
+            'Znuny Homepage link is shown',
         );
 
         # Check public interface as well.
@@ -80,8 +80,8 @@ $Selenium->RunTest(
         );
 
         $Self->True(
-            index( $Selenium->get_page_source(), 'OTRS Homepage' ) > -1,
-            'OTRS Homepage link is shown',
+            index( $Selenium->get_page_source(), 'Znuny Open-Source Help Desk Platform' ) > -1,
+            'Znuny Homepage link is shown',
         );
     }
 );

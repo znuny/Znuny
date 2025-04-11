@@ -13,8 +13,6 @@ package Kernel::System::SysConfig::ValueType::Textarea;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
-
 use parent qw(Kernel::System::SysConfig::BaseValueType);
 
 our @ObjectDependencies = (
@@ -57,7 +55,7 @@ Extracts the effective value from a XML parsed setting.
         Name           => 'SettingName',
         EffectiveValue => 'Textarea content', # (optional)
         DefaultValue   => 'Textarea content', # (optional)
-        Class          => 'My class'          # (optional)
+        Class          => 'My class',         # (optional)
         Item           => [                   # (optional) XML parsed item
             {
                 'ValueType' => 'Textarea',
@@ -179,7 +177,7 @@ Generate HTML for new array/hash item.
 Returns:
 
     $HTML = '<textarea rows=\'15\' cols=\'50\' class="" type="text" name="SettingName">
-        ...
+        # ...
         </textarea>';
 
 =cut

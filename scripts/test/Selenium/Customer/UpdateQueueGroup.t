@@ -21,8 +21,8 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # make sure that CustomerGroupSupport is disabled
         $HelperObject->ConfigSettingChange(
@@ -60,7 +60,7 @@ $Selenium->RunTest(
         );
 
         # click on 'Create your first ticket'
-        $Selenium->find_element( ".Button", 'css' )->VerifiedClick();
+        $Selenium->find_element( ".btn-primary", 'css' )->VerifiedClick();
 
         # verify that test queue is available for users group
         $Self->True(
@@ -158,7 +158,7 @@ $Selenium->RunTest(
             qw (Queue Group)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

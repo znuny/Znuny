@@ -55,7 +55,7 @@ perform data mapping
 
     my $Result = $MappingObject->Map(
         Data => {                                                                           # data payload before mapping
-            SessionID                   => 'AValidSessionIDValue'                           # the ID of the user session
+            SessionID                   => 'AValidSessionIDValue',                          # the ID of the user session
             UserLogin                   => 'Agent',                                         # if no SessionID is given UserLogin is required
             Password                    => 'some password',                                 # user password
             OutOfOfficeEntriesCSVString => 'CSV string with out-of-office entries to set',
@@ -66,7 +66,7 @@ perform data mapping
         Success         => 1,  # 0 or 1
         ErrorMessage    => '', # in case of error
         Data            => {                                                                # data payload of after mapping
-            SessionID                   => 'AValidSessionIDValue'                           # the ID of the user session
+            SessionID                   => 'AValidSessionIDValue',                          # the ID of the user session
             UserLogin                   => 'Agent',                                         # if no SessionID is given UserLogin is required
             Password                    => 'some password',                                 # user password
             OutOfOfficeEntriesCSVString => 'CSV string with out-of-office entries to set',

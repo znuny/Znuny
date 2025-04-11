@@ -7,13 +7,14 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<a href="[% Env("Baselink") %]Action=AgentAppointmentCalendarOverview;Subaction=AppointmentCreate" class="CallForAction Fullsize Center">
-    <span>
-        <i class="fa fa-plus-square"></i>
-        [% Translate("New Appointment") | html %]
+<a href="[% Env("Baselink") %]Action=AgentAppointmentCalendarOverview;Subaction=AppointmentCreate" class="btn-main btn-primary-ghost">
+    <span class="btn-wrapper">
+        <i class="fa fa-plus"></i>
+        <span class="btn-text">
+            [% Translate("New Appointment") | html %]
+        </span>
     </span>
 </a>
-
 [% RenderBlockStart("ContentSmallAppointmentFilter") %]
 <div class="DashboardActions">
     <ul class="AppointmentFilter Tab Actions">
@@ -22,14 +23,7 @@
         <li class="[% Data.item("Soon::Selected") | html %]"><a href="#" id="Dashboard[% Data.Name | html %]Soon" class="[% Data.item("Soon::Selected") | html %]" title="[% Translate("Soon") | html %] ([% Translate("5 days") | html %])">[% Translate("Soon") | html %] ([% Data.SoonCount | html %])</a></li>
     </ul>
 </div>
-[% RenderBlockStart("ContentSmallAppointmentFilterNavBar") %]
-<span class="SpacingTop Pagination">
-    [% Data.SiteNavBar %]
-</span>
-[% RenderBlockEnd("ContentSmallAppointmentFilterNavBar") %]
-
 [% RenderBlockEnd("ContentSmallAppointmentFilter") %]
-
 [% RenderBlockStart("ContentSmallTable") %]
 <table class="DataTable DashboardAppointmentCalendar">
     <thead>
@@ -61,3 +55,8 @@
     </tbody>
 </table>
 [% RenderBlockEnd("ContentSmallTable") %]
+[% RenderBlockStart("ContentSmallAppointmentFilterNavBar") %]
+<span class="SpacingTop Pagination">
+    [% Data.SiteNavBar %]
+</span>
+[% RenderBlockEnd("ContentSmallAppointmentFilterNavBar") %]

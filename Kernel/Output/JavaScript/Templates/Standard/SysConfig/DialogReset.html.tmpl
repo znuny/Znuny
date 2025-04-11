@@ -10,55 +10,15 @@
 <div>
     <div class="InnerContent">
         <h2>{{ Name }}</h2>
-            {% if ModificationAllowed == "1" and OTRSBusinessIsInstalled == "1" %}
-            <fieldset class="TableLike FixedLabelSmall">
-                <label for="ResetOptions"><span class="Mandatory Small">*</span> {{ "Reset options" | Translate }}:</label>
-                <div class="Field">
-                    <select id="ResetOptions" class="Validate_Required Modernize" multiple="multiple" name="ResetOptions">
-                        <option value="reset-globally" title="{{ "Reset setting on global level." | Translate }}" selected>
-                            {{ "Reset globally" | Translate }}
-                        </option>
-                        <option value="reset-locally" title="{{ "Remove all user changes." | Translate }}">
-                            {{ "Reset locally" | Translate }}
-                        </option>
-                    </select>
-                </div>
-            </fieldset>
-            <p>{{ "Help" | Translate}}:</p>
-               <ul class="Default">
-                <li>
-                    <strong>{{ "Reset globally" | Translate }}</strong> -
-                    {{ "Reset setting on global level." | Translate }}
-                </li>
-                <li>
-                    <strong>{{ "Reset locally" | Translate }}</strong> -
-                    {{ "Remove all user changes." | Translate }}
-                </li>
-                <li>
-                    <i class="fa fa-spinner fa-spin"></i>
-                    <span class="Hidden">
-                        <span class="UserModificationCount"></span>
-                        {{ "user(s) have modified this setting." | Translate }}
-                    </span>
-                </li>
-            </ul>
-        {% else %}
-            <input type="hidden" id="ResetOptions" value="reset-globally"/>
-            <p>{{ "Do you really want to reset this setting to it's default value?" | Translate }}</p>
-        {% endif %}
+        <input type="hidden" id="ResetOptions" value="reset-globally"/>
+        <p>{{ "Do you really want to reset this setting to it's default value?" | Translate }}</p>
     </div>
-    <div class="ContentFooter Center">
-        {% if ModificationAllowed == "1" and OTRSBusinessIsInstalled == "1"  %}
-        <button id="ResetConfirm" class="Primary CallForAction">
-            <span>{{ "Reset" | Translate }}</span>
-        </button>
-        {% else %}
-        <button id="ResetConfirm" class="Primary CallForAction">
-            <span>{{ "Confirm" | Translate }}</span>
-        </button>
-        {% endif %}
-        <button class="CallForAction CloseDialog" value="{{ "Cancel" | Translate }}">
+    <div class="ContentFooter SaveButtons">
+        <button class="CloseDialog btn-cancel-ghost btn-main btn-width-md" value="{{ "Cancel" | Translate }}">
             <span>{{ "Cancel" | Translate }}</span>
+        </button>
+        <button id="ResetConfirm" class="btn-primary btn-main btn-width-md">
+            <span>{{ "Confirm" | Translate }}</span>
         </button>
     </div>
 </div>

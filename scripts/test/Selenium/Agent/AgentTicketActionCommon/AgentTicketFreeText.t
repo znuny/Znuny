@@ -34,7 +34,11 @@ $Selenium->RunTest(
         my $StateObject     = $Kernel::OM->Get('Kernel::System::State');
         my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
         my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $UtilObject      = $Kernel::OM->Get('Kernel::System::Util');
+        my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
 
         my $RandomID = $HelperObject->GetRandomID();
         my $Success;
@@ -70,7 +74,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -113,8 +117,10 @@ $Selenium->RunTest(
 
         if ($IsITSMInstalled) {
 
+            my $GeneralCatalogObject = $Kernel::OM->Get('Kernel::System::GeneralCatalog');
+
             # get the list of service types from general catalog
-            my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            my $ServiceTypeList = $GeneralCatalogObject->ItemList(
                 Class => 'ITSM::Service::Type',
             );
 
@@ -122,7 +128,7 @@ $Selenium->RunTest(
             my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
 
             # get the list of sla types from general catalog
-            my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            my $SLATypeList = $GeneralCatalogObject->ItemList(
                 Class => 'ITSM::SLA::Type',
             );
 
@@ -201,7 +207,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Define field IDs and frontend modules.
         my %FreeTextFields = (
@@ -286,12 +292,7 @@ $Selenium->RunTest(
             $Selenium->WaitFor( JavaScript => 'return typeof($) === "function";' );
 
             # Force sub menus to be visible in order to be able to click one of the links.
-            $Selenium->execute_script("\$('#nav-Miscellaneous ul').css('height', 'auto');");
-            $Selenium->execute_script("\$('#nav-Miscellaneous ul').css('opacity', '1');");
-            $Selenium->WaitFor(
-                JavaScript =>
-                    "return \$('#nav-Miscellaneous ul').css('height') !== '0px' && \$('#nav-Miscellaneous ul').css('opacity') == '1';"
-            );
+            $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
 
             # Click on 'Free Fields' and switch window.
             $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketFreeText;TicketID=$TicketID' )]")
@@ -355,12 +356,7 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function";' );
 
         # Force sub menus to be visible in order to be able to click one of the links.
-        $Selenium->execute_script("\$('#nav-Miscellaneous ul').css('height', 'auto');");
-        $Selenium->execute_script("\$('#nav-Miscellaneous ul').css('opacity', '1');");
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return \$('#nav-Miscellaneous ul').css('height') !== '0px' && \$('#nav-Miscellaneous ul').css('opacity') == '1';"
-        );
+        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
 
         # Click on 'Free Fields' and switch window.
         $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketFreeText;TicketID=$TicketID' )]")->click();

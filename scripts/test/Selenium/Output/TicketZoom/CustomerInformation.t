@@ -18,8 +18,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject          = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
         # Disable 'Ticket Information', 'Customer Information' and 'Linked Object' widgets in AgentTicketZoom screen.
         for my $WidgetDisable (qw(0100-TicketInformation 0200-CustomerInformation 0300-LinkTable)) {
@@ -53,7 +56,7 @@ $Selenium->RunTest(
 
         # Create test customer company.
         my $CompanyNameID     = "CompanyID$RandomID";
-        my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $CompanyNameID,
             CustomerCompanyName    => $CustomerData{CompanyName},
             CustomerCompanyStreet  => $CustomerData{CompanyStreet},
@@ -70,7 +73,7 @@ $Selenium->RunTest(
         );
 
         # Create test customer user.
-        my $CustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUserID = $CustomerUserObject->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $CustomerData{CustomerFirstName},
             UserLastname   => $CustomerData{CustomerLastName},
@@ -114,7 +117,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AgentTicketZoom for test created ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -177,7 +180,7 @@ $Selenium->RunTest(
 
         # Toggle to collapse 'Customer Information' widget.
         $Selenium->find_element(
-            "//div[contains(\@class, 'SidebarColumn')]//a[contains(\@title, \'Show or hide the content' )]"
+            "//div[contains(\@class, 'SidebarColumn')]//a[contains(\@title, 'Show or hide the content')]//i[contains(\@class, 'fa-caret-down')]"
         )->click();
 
         $Selenium->WaitFor(

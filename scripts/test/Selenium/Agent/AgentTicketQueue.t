@@ -18,8 +18,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject   = $Kernel::OM->Get('Kernel::System::Queue');
+        my $StateObject   = $Kernel::OM->Get('Kernel::System::State');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
 
         # Do not check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -62,11 +69,9 @@ $Selenium->RunTest(
             Language => $Language,
         ) || die "Did not get test user";
 
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
-
-        my $QueueObject = $Kernel::OM->Get('Kernel::System::Queue');
 
         # Create test queues.
         my @Queues;
@@ -169,8 +174,7 @@ $Selenium->RunTest(
             }
         );
 
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel(
             ChannelName => 'Email',
         );
 
@@ -276,20 +280,39 @@ $Selenium->RunTest(
             for my $View (qw(Small Medium Preview)) {
 
                 # Return to default small view.
-                $Selenium->VerifiedGet(
-                    "${ScriptAlias}index.pl?Action=AgentTicketQueue;QueueID=$Test->{QueueID};SortBy=Age;OrderBy=Down;View=Small"
-                );
+                if ( $View eq 'Small' ) {
+                    $Selenium->VerifiedGet(
+                        "${ScriptAlias}index.pl?Action=AgentTicketQueue;QueueID=$Test->{QueueID};SortBy=Age;OrderBy=Down;View=Medium"
+                    );
 
-                # Wait until page has finished loading.
-                $Selenium->WaitFor(
-                    JavaScript =>
-                        "return typeof(\$) === 'function' && \$('a[href*=\"Action=AgentTicketQueue;Filter=Unlocked;View=$View;QueueID=$Test->{QueueID};SortBy=Age;OrderBy=Down;View=Small\"]').length;"
-                );
+                    # Wait until page has finished loading.
+                    $Selenium->WaitFor(
+                        JavaScript =>
+                            "return typeof(\$) === 'function' && \$('a[href*=\"Action=AgentTicketQueue;Filter=Unlocked;View=$View;QueueID=$Test->{QueueID};SortBy=Age;OrderBy=Down;View=Medium\"]').length;"
+                    );
 
-                # Click on viewer controller.
-                $Selenium->find_element(
-                    "//a[contains(\@href, \'Action=AgentTicketQueue;Filter=Unlocked;View=$View;QueueID=$Test->{QueueID};SortBy=Age;OrderBy=Down;View=Small;\' )]"
-                )->VerifiedClick();
+                    # Click on viewer controller.
+                    $Selenium->find_element(
+                        "//a[contains(\@href, \'Action=AgentTicketQueue;Filter=Unlocked;View=$View;QueueID=$Test->{QueueID};SortBy=Age;OrderBy=Down;View=Medium;\' )]"
+                    )->VerifiedClick();
+
+                }
+                else {
+                    $Selenium->VerifiedGet(
+                        "${ScriptAlias}index.pl?Action=AgentTicketQueue;QueueID=$Test->{QueueID};SortBy=Age;OrderBy=Down;View=Small"
+                    );
+
+                    # Wait until page has finished loading.
+                    $Selenium->WaitFor(
+                        JavaScript =>
+                            "return typeof(\$) === 'function' && \$('a[href*=\"Action=AgentTicketQueue;Filter=Unlocked;View=$View;QueueID=$Test->{QueueID};SortBy=Age;OrderBy=Down;View=Small\"]').length;"
+                    );
+
+                    # Click on viewer controller.
+                    $Selenium->find_element(
+                        "//a[contains(\@href, \'Action=AgentTicketQueue;Filter=Unlocked;View=$View;QueueID=$Test->{QueueID};SortBy=Age;OrderBy=Down;View=Small;\' )]"
+                    )->VerifiedClick();
+                }
 
                 # Verify that all expected tickets are present.
                 for my $TicketID (@TicketIDs) {
@@ -358,14 +381,17 @@ $Selenium->RunTest(
             "${ScriptAlias}index.pl?Action=AgentTicketQueue;QueueID=$Queues[2]->{QueueID};View=Small;Filter=Unlocked"
         );
 
+        my $HeaderText = $Selenium->execute_script("return \$('.OverviewBox.Small h1').text().trim();");
+
+        # remove whitespaces, that are added by the template
+        $HeaderText =~ s/\s+/ /g;
         $Self->Is(
-            $Selenium->execute_script("return \$('.OverviewBox.Small h1').text().trim();"),
+            $HeaderText,
             $LanguageObject->Translate('QueueView') . ": Delete",
             "Title for filtered AgentTicketQueue screen is not translated.",
         );
 
         # Check state ID for states 'open' and 'new'.
-        my $StateObject = $Kernel::OM->Get('Kernel::System::State');
         my $OpenStateID = $StateObject->StateLookup(
             State => 'open',
         );
@@ -380,9 +406,10 @@ $Selenium->RunTest(
 
         # Click on state column filter.
         $Selenium->execute_script("\$('.ColumnSettingsTrigger[title*=\"Status\"]').click();");
+
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('#ColumnFilterState:visible').length;"
+                "return typeof(\$) === 'function' && \$('#ColumnFilterState_Search:visible').length;"
         );
         $Selenium->WaitFor(
             JavaScript =>
@@ -406,9 +433,10 @@ $Selenium->RunTest(
 
         # Click on state column filter.
         $Selenium->execute_script("\$('.ColumnSettingsTrigger[title*=\"Status\"]').click();");
+
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('#ColumnFilterState:visible').length;"
+                "return typeof(\$) === 'function' && \$('#ColumnFilterState_Search:visible').length;"
         );
         $Selenium->WaitFor(
             JavaScript =>
@@ -450,7 +478,7 @@ $Selenium->RunTest(
         # Delete created test queue.
         for my $Queue (@Queues) {
             if ( $Queue->{Created} ) {
-                $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+                $Success = $DBObject->Do(
                     SQL => "DELETE FROM queue WHERE id = $Queue->{QueueID}",
                 );
                 $Self->True(
@@ -459,8 +487,6 @@ $Selenium->RunTest(
                 );
             }
         }
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure the cache is correct.
         for my $Cache (

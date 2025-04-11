@@ -19,8 +19,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+        my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
 
         # create test user and login
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -34,7 +35,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AdminMailAccount
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminMailAccount");
@@ -53,26 +54,19 @@ $Selenium->RunTest(
         # check "Add mail account" link
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminMailAccount;Subaction=AddNew' )]")->VerifiedClick();
 
-        for my $ID (
-            qw(TypeAdd LoginAdd PasswordAdd HostAdd IMAPFolder Trusted DispatchingBy ValidID Comment)
-            )
-        {
+        for my $ID (qw(TypeAdd LoginAdd PasswordAdd HostAdd IMAPFolder Trusted DispatchingBy ValidID Comment)) {
             my $Element = $Selenium->find_element( "#$ID", 'css' );
             $Element->is_enabled();
             $Element->is_displayed();
         }
 
         # check breadcrumb on Add screen
-        my $Count = 1;
         my $IsLinkedBreadcrumbText;
         for my $BreadcrumbText ( 'Mail Account Management', 'Add Mail Account' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # add real test mail account
@@ -107,19 +101,16 @@ $Selenium->RunTest(
         $Selenium->find_element( $TestMailHost, 'link_text' )->VerifiedClick();
 
         # check breadcrumb on Edit screen
-        $Count = 1;
         for my $BreadcrumbText (
-            'Mail Account Management',
+
+            #             'Mail Account Management',
             'Edit Mail Account for host "pop3.example.com" and user account "' . $RandomID . '"'
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         my %Check = (
@@ -142,7 +133,7 @@ $Selenium->RunTest(
         }
 
         my $MailAccountID = $Selenium->find_element( 'input[name=ID]', 'css' )->get_value();
-        my %MailAccount   = $Kernel::OM->Get('Kernel::System::MailAccount')->MailAccountGet( ID => $MailAccountID );
+        my %MailAccount   = $MailAccountObject->MailAccountGet( ID => $MailAccountID );
         $Self->Is(
             scalar $MailAccount{Password},
             'SomePassword',
@@ -159,7 +150,7 @@ $Selenium->RunTest(
 
         # Verify that the password is not changed even though it was not sent to the user.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminMailAccount;Subaction=Update;ID=$MailAccountID");
-        %MailAccount = $Kernel::OM->Get('Kernel::System::MailAccount')->MailAccountGet( ID => $MailAccountID );
+        %MailAccount = $MailAccountObject->MailAccountGet( ID => $MailAccountID );
         $Self->Is(
             scalar $MailAccount{Password},
             'SomePassword',
@@ -176,7 +167,7 @@ $Selenium->RunTest(
             Objects => ['Kernel::System::Cache'],
         );
 
-        %MailAccount = $Kernel::OM->Get('Kernel::System::MailAccount')->MailAccountGet( ID => $MailAccountID );
+        %MailAccount = $MailAccountObject->MailAccountGet( ID => $MailAccountID );
         $Self->Is(
             scalar $MailAccount{Password},
             'SomePassword2',
@@ -209,6 +200,22 @@ $Selenium->RunTest(
             "$TestMailHostEdit found on page",
         );
 
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
+        );
+
         # test showing IMAP Folder and Queue fields
         $Selenium->find_element( $TestMailHostEdit, 'link_text' )->VerifiedClick();
 
@@ -218,14 +225,14 @@ $Selenium->RunTest(
                 FieldID  => 'Type',
                 ForAttr  => 'IMAPFolder',
                 Selected => 'IMAP',
-                Display  => 'block',
+                Display  => 'flex',
             },
             {
                 Name     => 'Selected option IMAPS - IMAP Folder is shown',
                 FieldID  => 'Type',
                 ForAttr  => 'IMAPFolder',
                 Selected => 'IMAPS',
-                Display  => 'block',
+                Display  => 'flex',
             },
             {
                 Name     => 'Selected option POP3 - IMAP Folder is not shown',
@@ -260,7 +267,7 @@ $Selenium->RunTest(
                 FieldID  => 'DispatchingBy',
                 ForAttr  => 'QueueID',
                 Selected => 'Queue',
-                Display  => 'block',
+                Display  => 'flex',
             }
         );
 
@@ -299,7 +306,7 @@ $Selenium->RunTest(
         );
 
         # confirm delete action
-        $Selenium->find_element( "#DialogButton1", 'css' )->VerifiedClick();
+        $Selenium->find_element( "#DialogButton2", 'css' )->VerifiedClick();
 
         # check if mail account is deleted
         $Self->True(

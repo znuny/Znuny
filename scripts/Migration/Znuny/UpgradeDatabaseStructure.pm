@@ -12,6 +12,7 @@ package scripts::Migration::Znuny::UpgradeDatabaseStructure;    ## no critic
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(scripts::Migration::Base);
 
@@ -22,7 +23,7 @@ our @ObjectDependencies = (
 
 =head1 SYNOPSIS
 
-Upgrades the database structure to OTRS 6.
+Upgrades the database structure.
 
 =cut
 
@@ -34,13 +35,19 @@ sub Run {
 
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
-    # TODO: No database upgrade tasks as of now
     my @Tasks = (
-
-        #         {
-        #             Message => 'Create/update table smime_keys',
-        #             Module  => 'SMIMEKeys',
-        #         },
+        {
+            Message => 'Increase size of columns of database table standard_template',
+            Module  => 'StandardTemplate',
+        },
+        {
+            Message => 'Create missing primary keys for database tables.',
+            Module  => 'CreatePrimaryKeys',
+        },
+        {
+            Message => 'Increase size of columns of database table search_profile',
+            Module  => 'SearchProfile',
+        },
     );
 
     return 1   if !@Tasks;

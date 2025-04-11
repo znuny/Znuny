@@ -12,7 +12,11 @@ package scripts::Migration::Znuny::MigrateNotificationEvents;    ## no critic
 use strict;
 use warnings;
 
+use utf8;
+
 use parent qw(scripts::Migration::Base);
+
+use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::System::NotificationEvent',
@@ -29,13 +33,12 @@ Migrates existing notification events.
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    return if !$Self->_MigratePlaceholders(%Param);
-    return if !$Self->_MigrateMentionNotification(%Param);
+    return if !$Self->_MigrateEmailDeliveryFailureNotification(%Param);
 
     return 1;
 }
 
-sub _MigratePlaceholders {
+sub _MigrateEmailDeliveryFailureNotification {
     my ( $Self, %Param ) = @_;
 
     my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
@@ -56,67 +59,20 @@ sub _MigratePlaceholders {
         my $NotificationEvent = $NotificationEvents{$NotificationEventID};
         next NOTIFICATIONEVENTID if !$NotificationEventsToUpdateByName{ $NotificationEvent->{Name} };
 
-        my $MessageHasChanged;
-        for my $MessageLanguage ( sort keys %{ $NotificationEvent->{Message} // {} } ) {
+        next NOTIFICATIONEVENTID if IsHashRefWithData( $NotificationEvent->{Message}->{de} );
 
-            MESSAGEPART:
-            for my $MessagePart (qw( Subject Body )) {
-                my $MessagePartContent = $NotificationEvent->{Message}->{$MessageLanguage}->{$MessagePart};
-                next MESSAGEPART if !defined $MessagePartContent;
+        $NotificationEvent->{Message}->{de}->{ContentType} = 'text/plain';
+        $NotificationEvent->{Message}->{de}->{Subject}     = 'Fehler beim Versand einer E-Mail';
+        $NotificationEvent->{Message}->{de}->{Body}        = 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-                next MESSAGEPART if $MessagePartContent !~ m{OTRS_AGENT_ArticleID};
+bitte beachten Sie, dass der Versand eines E-Mail-Artikels für [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] fehlgeschlagen ist. Bitte überprüfen Sie die E-Mail-Adresse des Empfängers auf Fehler und versuchen Sie es erneut. Sie können den Artikel bei Bedarf manuell aus dem Ticket erneut senden.
 
-                $MessagePartContent =~ s{\bOTRS_AGENT_ArticleID\b}{OTRS_TICKET_LAST_ARTICLE_ID}g;
-                $MessageHasChanged = 1;
-                $NotificationEvent->{Message}->{$MessageLanguage}->{$MessagePart} = $MessagePartContent;
-            }
-        }
+Fehlermeldung:
+<OTRS_AGENT_TransmissionStatusMessage>
 
-        next NOTIFICATIONEVENTID if !$MessageHasChanged;
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
 
-        my $NotificationEventUpdated = $NotificationEventObject->NotificationUpdate(
-            %{$NotificationEvent},
-            UserID => 1,
-        );
-        next NOTIFICATIONEVENTID if $NotificationEventUpdated;
-
-        print "    Error updating notification event with ID $NotificationEventID.\n";
-        return;
-    }
-
-    return 1;
-}
-
-sub _MigrateMentionNotification {
-    my ( $Self, %Param ) = @_;
-
-    my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
-
-    my %NotificationEvents = $NotificationEventObject->NotificationList(
-
-        # Type    => 'Ticket', # type of notifications; default: 'Ticket'
-        Details => 1,    # include notification detailed data. possible (0|1) # ; default: 0
-        All => 1,    # optional: if given all notification types will be returned, even if type is given (possible: 0|1)
-    );
-
-    my %NotificationEventsToUpdateByName = (
-        'Mention notification' => 1,
-    );
-
-    NOTIFICATIONEVENTID:
-    for my $NotificationEventID ( sort keys %NotificationEvents ) {
-        my $NotificationEvent = $NotificationEvents{$NotificationEventID};
-        next NOTIFICATIONEVENTID if !$NotificationEventsToUpdateByName{ $NotificationEvent->{Name} };
-
-        $NotificationEvent->{Message}->{en}->{Body} = 'You have been mentioned in ticket <OTRS_TICKET_NUMBER>
-<OTRS_AGENT_BODY[5]>
-
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>';
-
-        $NotificationEvent->{Message}->{de}->{Body} = 'Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>
-<OTRS_AGENT_BODY[5]>
-
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>';
+-- <OTRS_CONFIG_NotificationSenderName>';
 
         my $NotificationEventUpdated = $NotificationEventObject->NotificationUpdate(
             %{$NotificationEvent},

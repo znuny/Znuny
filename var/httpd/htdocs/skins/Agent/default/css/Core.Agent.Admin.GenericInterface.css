@@ -15,6 +15,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
+
+#ExportButton a,
+#RollbackButton a {
+    color: var(--primary-color);
+}
+
+#ExportButton:hover a,
+#RollbackButton:hover a {
+    color: var(--primary-color-darker);
+}
+
 /**
  * @subsubsection     AdminGenericInterfaceDebugger
  */
@@ -49,7 +60,7 @@ span.WarningDialog {
  /**
  * @subsubsection     AdminGenericInterfaceMapping
  */
-.KeyTemplateHeader input{
+/*.KeyTemplateHeader input{
     margin-left: 13px;
     margin-right: 13px;
 }
@@ -62,6 +73,13 @@ span.WarningDialog {
 .ValueDefault{
     margin-left: 13px;
     margin-right: 13px;
+}*/
+
+.field-wrapper .ValueTemplateRow {
+    padding-top: var(--padding-sm);
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap-md);
 }
 
 /**
@@ -78,7 +96,7 @@ span.WarningDialog {
 }
 
 .ListContainer {
-    max-height: 120px;
+    max-height: 400px;
     overflow-y: auto !important;
 }
 
@@ -94,7 +112,7 @@ span.WarningDialog {
  * @subsubsection     Invoker Event conditions
  */
 
-.Fields {
+/*.Fields {
     margin-top: 15px;
 }
 
@@ -143,6 +161,6 @@ span.WarningDialog {
 
 #EventForm #ConfigParams input + label {
     margin-left: 5px;
-}
+}*/
 
 }/* end @media */

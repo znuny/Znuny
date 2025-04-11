@@ -140,7 +140,7 @@ Send article via email and create article with attachments.
         Body        => 'the message text',                                     # required
         InReplyTo   => '<asdasdasd.12@example.com>',                           # not required but useful
         References  => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # not required but useful
-        Charset     => 'iso-8859-15'
+        Charset     => 'iso-8859-15',
         MimeType    => 'text/plain',
         Loop        => 0, # 1|0 used for bulk emails
         Attachment => [
@@ -184,7 +184,7 @@ Send article via email and create article with attachments.
         Body        => 'the message text',                                     # required
         InReplyTo   => '<asdasdasd.12@example.com>',                           # not required but useful
         References  => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # not required but useful
-        Charset     => 'iso-8859-15'
+        Charset     => 'iso-8859-15',
         MimeType    => 'text/plain',
         Loop        => 0, # 1|0 used for bulk emails
         Attachment => [
@@ -277,16 +277,42 @@ sub ArticleSend {
         AttachmentsRef => $Param{Attachment},
     );
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     # create article
-    my $Time      = $DateTimeObject->ToEpoch();
-    my $Random    = rand 999999;
-    my $FQDN      = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
-    my $MessageID = "<$Time.$Random\@$FQDN>";
-    my $ArticleID = $Self->ArticleCreate(
+    my $Time         = $DateTimeObject->ToEpoch();
+    my $Random       = rand 999999;
+    my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
+    my $MessageID    = "<$Time.$Random\@$ExternalFQDN>";
+    my $ArticleID    = $Self->ArticleCreate(
         %Param,
         MessageID => $MessageID,
     );
     return if !$ArticleID;
+
+    # Set X-Priority email header based on configured ticket priority mapping
+    if ( $Param{SenderType} eq 'agent' || $Param{SenderType} eq 'system' ) {
+        my $PriorityEmailMapping = $ConfigObject->Get('PriorityEmailMapping') || {};
+        my $HeaderPriority;
+
+        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my %Ticket       = $TicketObject->TicketGet(
+            TicketID => $Param{TicketID},
+            UserID   => 1,
+        );
+
+        if (
+            $PriorityEmailMapping->{ $Param{SenderType} }
+            && $PriorityEmailMapping->{ $Param{SenderType} }->{ $Ticket{Priority} }
+            )
+        {
+            $HeaderPriority = $PriorityEmailMapping->{ $Param{SenderType} }->{ $Ticket{Priority} };
+        }
+
+        if ( $HeaderPriority && $HeaderPriority =~ m{^\d$} ) {
+            $Param{CustomHeaders}->{'X-Priority'} = $HeaderPriority;
+        }
+    }
 
     # Send the mail
     my $Result = $Kernel::OM->Get('Kernel::System::Email')->Send(
@@ -367,13 +393,14 @@ sub ArticleBounce {
         }
     }
 
+    my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
     my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
 
     # create message id
     my $Time         = $DateTimeObject->ToEpoch();
     my $Random       = rand 999999;
-    my $FQDN         = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
-    my $NewMessageID = "<$Time.$Random.0\@$FQDN>";
+    my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
+    my $NewMessageID = "<$Time.$Random.0\@$ExternalFQDN>";
     my $Email        = $Self->ArticlePlain( ArticleID => $Param{ArticleID} );
 
     # check if plain email exists
@@ -866,7 +893,7 @@ Get the Transmission Error entry for a given article.
         CreateTime => '2017-01-01 01:02:03',
         Status     => 'Failed',
     }
-    or undef in case of failure to retrive a record from the database.
+    or undef in case of failure to retrieve a record from the database.
 
 =cut
 

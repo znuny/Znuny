@@ -19,7 +19,6 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
@@ -92,9 +91,7 @@ $Selenium->RunTest(
 
             # check delete link
             $Self->True(
-                $Selenium->find_element(
-                    "//a[contains(\@href, \'Action=AgentStatistics;Subaction=DeleteAction;StatID=$StatID\' )]"
-                ),
+                $Selenium->find_element("//a[contains(\@data-statid, \'$StatID\' )]"),
                 "There is Delete link.",
             );
 

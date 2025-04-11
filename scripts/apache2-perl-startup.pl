@@ -33,16 +33,16 @@ BEGIN {
     # on Fedora, $0 is not a path which would break OTRS.
     # see bug # 8533
     if ( !-e $0 || -d $0 ) {
-        $0 = '/opt/otrs/bin/cgi-bin/index.pl';    ## no critic
+        $0 = '/opt/znuny/bin/cgi-bin/index.pl';    ## no critic
     }
 }
 
 use Apache2::RequestRec ();
 use ModPerl::Util       ();
 
-use lib "/opt/otrs/";
-use lib "/opt/otrs/Kernel/cpan-lib";
-use lib "/opt/otrs/Custom";
+use lib "/opt/znuny/";
+use lib "/opt/znuny/Kernel/cpan-lib";
+use lib "/opt/znuny/Custom";
 
 # Preload frequently used modules to speed up client spawning.
 use CGI ();

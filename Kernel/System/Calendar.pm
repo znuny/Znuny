@@ -83,16 +83,16 @@ sub new {
 creates a new calendar for given user.
 
     my %Calendar = $CalendarObject->CalendarCreate(
-        CalendarName    => 'Meetings',          # (required) Personal calendar name
-        GroupID         => 3,                   # (required) GroupID
-        Color           => '#FF7700',           # (required) Color in hexadecimal RGB notation
-        UserID          => 4,                   # (required) UserID
+        CalendarName         => 'Meetings',          # (required) Personal calendar name
+        GroupID              => 3,                   # (required) GroupID
+        Color                => '#FF7700',           # (required) Color in hexadecimal RGB notation
+        UserID               => 4,                   # (required) UserID
 
-        TicketAppointments => [                 # (optional) Ticket appointments, array ref of hashes
+        TicketAppointments   => [                    # (optional) Ticket appointments, array ref of hashes
             {
-                StartDate => 'FirstResponse',
-                EndDate   => 'Plus_5',
-                QueueID   => [ 2 ],
+                StartDate    => 'FirstResponse',
+                EndDate      => 'Plus_5',
+                QueueID      => [ 2 ],
                 SearchParams => {
                     Title => 'This is a title',
                     Types => 'This is a type',
@@ -414,7 +414,7 @@ Returns:
             ChangeBy     => 3,
             ValidID      => 0,
         },
-        ...
+        # ...
     ];
 
 =cut
@@ -513,14 +513,13 @@ sub CalendarList {
 updates an existing calendar.
 
     my $Success = $CalendarObject->CalendarUpdate(
-        CalendarID       => 1,                   # (required) CalendarID
-        GroupID          => 2,                   # (required) Calendar group
-        CalendarName     => 'Meetings',          # (required) Personal calendar name
-        Color            => '#FF9900',           # (required) Color in hexadecimal RGB notation
-        UserID           => 4,                   # (required) UserID (who made update)
-        ValidID          => 1,                   # (required) ValidID
-
-        TicketAppointments => [                 # (optional) Ticket appointments, array ref of hashes
+        CalendarID         => 1,                   # (required) CalendarID
+        GroupID            => 2,                   # (required) Calendar group
+        CalendarName       => 'Meetings',          # (required) Personal calendar name
+        Color              => '#FF9900',           # (required) Color in hexadecimal RGB notation
+        UserID             => 4,                   # (required) UserID (who made update)
+        ValidID            => 1,                   # (required) ValidID
+        TicketAppointments => [                    # (optional) Ticket appointments, array ref of hashes
             {
                 StartDate => 'FirstResponse',
                 EndDate   => 'Plus_5',
@@ -642,13 +641,13 @@ import a calendar
             },
             AppointmentData => {
                 {
-                    AppointmentID       => 2,
-                    ParentID            => 1,
-                    CalendarID          => 1,
-                    UniqueID            => '20160101T160000-71E386@localhost',
-                    ...
+                    AppointmentID => 2,
+                    ParentID      => 1,
+                    CalendarID    => 1,
+                    UniqueID      => '20160101T160000-71E386@localhost',
+                    # ...
                 },
-                ...
+                # ...
             },
         },
         OverwriteExistingEntities => 0,     # (optional) Overwrite existing calendar and appointments, default: 0
@@ -812,13 +811,13 @@ returns calendar hash with data:
         },
         AppointmentData => (
             {
-                AppointmentID       => 2,
-                ParentID            => 1,
-                CalendarID          => 1,
-                UniqueID            => '20160101T160000-71E386@localhost',
-                ...
+                AppointmentID => 2,
+                ParentID      => 1,
+                CalendarID    => 1,
+                UniqueID      => '20160101T160000-71E386@localhost',
+                # ...
             },
-            ...
+            # ...
         ),
     );
 
@@ -886,7 +885,7 @@ Get permission level for given CalendarID and UserID.
 
 Returns:
 
-    $Permission = 'rw';    # 'ro', 'rw', ...
+    $Permission = 'rw';    # 'ro', 'rw',
 
 =cut
 
@@ -1222,7 +1221,7 @@ Process the ticket appointment rule and create, update or delete appointment if 
             DynamicField_TestDate => {
                 Module => 'Kernel::System::Calendar::Ticket::DynamicField',
             },
-            ...
+            # ...
         },
         Rule => {
             StartDate => 'DynamicField_TestDate',
@@ -1707,7 +1706,6 @@ delete ticket appointment(s).
         RuleID        => '9bb20ea035e7a9930652a9d82d00c725',    # (required) RuleID
                                                                 # or
         TicketID      => 1,                                     # (required) Ticket ID
-
         AppointmentID => 1,                                     # (optional) Appointment ID is known
     );
 
@@ -2067,7 +2065,7 @@ Returns list of ticket appointments, where key will be either TicketID (default)
 %Appointments = (
     1 => 1,
     2 => 2,
-    ...
+    # ...
 );
 
 =cut

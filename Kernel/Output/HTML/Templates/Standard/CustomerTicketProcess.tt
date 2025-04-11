@@ -8,29 +8,36 @@
 # --
 
 [% IF Data.ProcessList %]
-<div id="MainBox" class="TicketProcess ARIARoleMain">
-    <div class="Content">
-        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="compose" id="NewProcessTicket" class="Validate PreventMultipleSubmits">
-            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-            <input type="hidden" name="Subaction" value="DisplayActivityDialog"/>
-            <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
-            <fieldset>
-            <p class="AsteriskExplanation AsteriskExplanationCustomer">[% Translate("All fields marked with an asterisk (*) are mandatory.") | html %]</p>
-                <div>
+<div id="MainBox" class="TicketProcess ARIARoleMain FormScreen">
+    <div class="ContentWrapper flex-column">
+        <h1 class="PageTitle">[% Translate("New Process Ticket") | html %]</h1>
+        <div class="Content card flex-center flex-column">
+            <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="compose" id="NewProcessTicket" class="Form Validate PreventMultipleSubmits">
+                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                <input type="hidden" name="Subaction" value="DisplayActivityDialog"/>
+                <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+                <fieldset>
 [% RenderBlockStart("ProcessList") %]
-                    <label class="Mandatory" for="ProcessEntityID"><span class="Marker">*</span>[% Translate("Process") | html %]:</label>
-                    [% Data.ProcessList %]
-                    <div id="ProcessEntityIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                    <div id="ProcessEntityIDServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                </div>
-                <div class="Spacing Clear"></div>
+                    <div class="inner-fieldset">
+                        <label class="Mandatory" for="ProcessEntityID">
+                            <span class="Marker">*</span>[% Translate("Process") | html %]:
+                        </label>
+                        [% Data.ProcessList %]
+                        <div id="ProcessEntityIDError" class="TooltipErrorMessage">
+                            <p>[% Translate("This field is required.") | html %]</p>
+                        </div>
+                        <div id="ProcessEntityIDServerError" class="TooltipErrorMessage">
+                            <p>[% Translate("This field is required.") | html %]</p>
+                        </div>
+                    </div>
 [% RenderBlockEnd("ProcessList") %]
-            </fieldset>
-        </form>
-        <div id="AJAXLoader" class="Spacing Center Hidden">
-            <span class="AJAXLoader" title="[% Translate("Loading") | html %]"></span>
+                </fieldset>
+            </form>
+            <div id="AJAXLoader" class="Spacing Center Hidden">
+                <span class="AJAXLoader" title="[% Translate("Loading") | html %]"></span>
+            </div>
+            <div id="ActivityDialogContent" class="inner-page-display"></div>
         </div>
-        <div id="ActivityDialogContent"></div>
     </div>
 </div>
 [% END %]

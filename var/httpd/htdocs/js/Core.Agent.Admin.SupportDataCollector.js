@@ -20,7 +20,7 @@ Core.Agent.Admin = Core.Agent.Admin || {};
  * @description
  *      This namespace contains the special module function for SupportDataCollector module.
  */
- Core.Agent.Admin.SupportDataCollector = (function (TargetNS) {
+Core.Agent.Admin.SupportDataCollector = (function (TargetNS) {
 
     /*
     * @name Init
@@ -30,50 +30,6 @@ Core.Agent.Admin = Core.Agent.Admin || {};
     *      This function initializes module functionality
     */
     TargetNS.Init = function () {
-
-        // Bind event on SendUpdate button
-        $('#SendUpdate').on('click', function (Event) {
-            var TextClass = '';
-            Core.UI.Dialog.ShowContentDialog('<div class="Spacing Center"><span class="AJAXLoader W33pc" title='+ Core.Language.Translate("Sending Update...") + '></span></div>',Core.Language.Translate("Sending Update..."), '10px', 'Center', true, undefined, true);
-
-            Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), 'Action=' + Core.Config.Get('Action') + ';Subaction=SendUpdate;', function (Response) {
-
-                var ResponseMessage = Core.Language.Translate('Support Data information was successfully sent.');
-
-                    // if the waiting dialog was canceled,
-                    // do not show the search dialog as well
-                    if (!$('.Dialog:visible').length) {
-                        return;
-                    }
-
-                if (Response === 0) {
-                    ResponseMessage = Core.Language.Translate('Was not possible to send Support Data information.');
-                    TextClass = 'Error';
-                }
-
-                Core.UI.Dialog.ShowContentDialog(
-                    '<div class="Spacing Center SendUpdateResultDialog"><span class="W50pc ' + TextClass + '" title="' + ResponseMessage + '">' + ResponseMessage + '</span></div>', Core.Language.Translate("Update Result"),
-                    '10px',
-                    'Center',
-                    true,
-                    [
-                        {
-                            Label: Core.Language.Translate('Close this dialog'),
-                            Class: 'Primary',
-                            Function: function () {
-                                Core.UI.Dialog.CloseDialog($('.SendUpdateResultDialog'));
-                            }
-                        }
-                    ],
-                    true
-                );
-
-            });
-
-            Event.preventDefault();
-            Event.stopPropagation();
-            return false;
-        });
 
         // Bind event on Generate Support bundle button
         $('#GenerateSupportBundle').on('click', function (Event) {
@@ -170,6 +126,39 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 $(this).prev('h3').find('.Flag').addClass('Unknown');
                 return true;
             }
+        });
+
+        // Bind event on Data Filter
+        $('#SupportDataFilter').on('keyup', function(){
+            var Filter = $('#SupportDataFilter').val().trim(),
+                FilterRE = new RegExp(Filter, 'i'),
+                VisibleCB = (Filter === undefined || Filter === '' || Filter == '*') ?
+                function() {
+                    return true;
+                } :
+                function(S) {
+                    return S.match(FilterRE) != null;
+                };
+
+            $('div.WidgetSimple').each(function() {
+                var $Sect = $(this),
+                    IsVisible = false;
+
+                $Sect.find('ul.CheckResults li').each(function() {
+                    var $li = $(this),
+                        Heading = $li.find('h3').filter(":first").text(),
+                        HeadingIsVisible = VisibleCB(Heading);
+
+                    if(HeadingIsVisible) {
+                        IsVisible = true;
+                    }
+                    $li.css('display', HeadingIsVisible ? 'block' : 'none');
+                });
+
+                $Sect.css('display', IsVisible ? 'block' : 'none');
+            });
+
+            event.preventDefault();
         });
     };
 

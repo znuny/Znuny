@@ -230,7 +230,7 @@ sub ProviderProcessRequest {
 
     # Convert charset if necessary.
     my $ContentCharset;
-    if ( $ENV{'CONTENT_TYPE'} =~ m{ \A ( .+ ) ;\s*charset= ["']{0,1} ( .+? ) ["']{0,1} (;|\z) }xmsi ) {
+    if ( $ENV{'CONTENT_TYPE'} =~ m{ \A ( .+ ) ;\s*charset\s*=\s* ["']{0,1} ( .+? ) ["']{0,1} (;|\z) }xmsi ) {
 
         # Remember content type for the response.
         $Self->{ContentType} = $1;
@@ -409,7 +409,7 @@ The HTTP code is set accordingly
 - C<500> for content syntax errors
 
     my $Result = $TransportObject->ProviderGenerateResponse(
-        Success => 1
+        Success => 1,
         Data    => { # data payload for response, optional
             ...
         },

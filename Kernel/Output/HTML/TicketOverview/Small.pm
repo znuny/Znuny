@@ -11,6 +11,7 @@ package Kernel::Output::HTML::TicketOverview::Small;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
@@ -18,18 +19,18 @@ use Kernel::Language qw(Translatable);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Language',
-    'Kernel::System::Log',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::CustomerUser',
-    'Kernel::System::Group',
-    'Kernel::System::User',
-    'Kernel::System::JSON',
     'Kernel::System::DynamicField',
-    'Kernel::System::Ticket::ColumnFilter',
     'Kernel::System::DynamicField::Backend',
+    'Kernel::System::Group',
+    'Kernel::System::JSON',
+    'Kernel::System::Log',
+    'Kernel::System::Main',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::Main',
+    'Kernel::System::Ticket::ColumnFilter',
+    'Kernel::System::User',
 );
 
 sub new {
@@ -541,23 +542,27 @@ sub Run {
                     sort keys %Actions;
             }
 
-            my $ACL = $TicketObject->TicketAcl(
-                Data          => \%PossibleActions,
-                Action        => $Self->{Action},
-                TicketID      => $Article{TicketID},
-                ReturnType    => 'Action',
-                ReturnSubType => '-',
-                UserID        => $Self->{UserID},
-            );
             my %AclAction = %PossibleActions;
-            if ($ACL) {
-                %AclAction = $TicketObject->TicketAclActionData();
-            }
 
             # run ticket pre menu modules
             my @ActionItems;
             if ( ref $ConfigObject->Get('Ticket::Frontend::PreMenuModule') eq 'HASH' ) {
                 my %Menus = %{ $ConfigObject->Get('Ticket::Frontend::PreMenuModule') };
+
+                if (%Menus) {
+                    my $ACL = $TicketObject->TicketAcl(
+                        Data          => \%PossibleActions,
+                        Action        => $Self->{Action},
+                        TicketID      => $Article{TicketID},
+                        ReturnType    => 'Action',
+                        ReturnSubType => '-',
+                        UserID        => $Self->{UserID},
+                    );
+                    if ($ACL) {
+                        %AclAction = $TicketObject->TicketAclActionData();
+                    }
+                }
+
                 my @Items;
                 MENU:
                 for my $Menu ( sort keys %Menus ) {
@@ -890,20 +895,21 @@ sub Run {
                     }
                     elsif ( $Column eq 'Owner' || $Column eq 'Responsible' ) {
 
-                        $LayoutObject->Block(
-                            Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkUserSearch',
-                            Data => {},
-                        );
+                      #136 - todo this autocomplete has been disabled for now
+                      #                         $LayoutObject->Block(
+                      #                             Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkUserSearch',
+                      #                             Data => {},
+                      #                         );
 
-                        # send data to JS
-                        $LayoutObject->AddJSData(
-                            Key   => 'UserAutocomplete',
-                            Value => {
-                                'QueryDelay'          => 100,
-                                'MaxResultsDisplayed' => 20,
-                                'MinQueryLength'      => 2,
-                            },
-                        );
+                        #                         # send data to JS
+                        #                         $LayoutObject->AddJSData(
+                        #                             Key   => 'UserAutocomplete',
+                        #                             Value => {
+                        #                                 'QueryDelay'          => 100,
+                        #                                 'MaxResultsDisplayed' => 20,
+                        #                                 'MinQueryLength'      => 2,
+                        #                             },
+                        #                         );
                     }
 
                 }
@@ -1093,21 +1099,22 @@ sub Run {
                     );
                     if ( $Column eq 'CustomerUserID' ) {
 
-                        $LayoutObject->Block(
-                            Name =>
-                                'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerUserSearch',
-                            Data => {},
-                        );
+                  #136 - todo this autocomplete has been disabled for now
+                  #                         $LayoutObject->Block(
+                  #                             Name =>
+                  #                                 'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerUserSearch',
+                  #                             Data => {},
+                  #                         );
 
-                        # send data to JS
-                        $LayoutObject->AddJSData(
-                            Key   => 'CustomerUserAutocomplete',
-                            Value => {
-                                'QueryDelay'          => 100,
-                                'MaxResultsDisplayed' => 20,
-                                'MinQueryLength'      => 2,
-                            },
-                        );
+                        #                         # send data to JS
+                        #                         $LayoutObject->AddJSData(
+                        #                             Key   => 'CustomerUserAutocomplete',
+                        #                             Value => {
+                        #                                 'QueryDelay'          => 100,
+                        #                                 'MaxResultsDisplayed' => 20,
+                        #                                 'MinQueryLength'      => 2,
+                        #                             },
+                        #                         );
                     }
                 }
 
@@ -1643,6 +1650,11 @@ sub Run {
                     }
                 }
 
+                # add pill class
+                if ( $TicketColumn eq 'State' && IsStringWithData( $Article{StateID} ) ) {
+                    $CSSClass .= 'pill StateID-' . $Article{StateID};
+                }
+
                 $LayoutObject->Block(
                     Name => "RecordTicketColumn$BlockType",
                     Data => {
@@ -1696,6 +1708,7 @@ sub Run {
                         Name => 'RecordDynamicFieldLink',
                         Data => {
                             Value                       => $ValueStrg->{Value},
+                            ValueKey                    => $Value,
                             Title                       => $ValueStrg->{Title},
                             Link                        => $ValueStrg->{Link},
                             $DynamicFieldConfig->{Name} => $ValueStrg->{Title},
@@ -1909,9 +1922,10 @@ sub _InitialColumnFilter {
     my $ColumnFilterHTML = $LayoutObject->BuildSelection(
         Name        => 'ColumnFilter' . $Param{ColumnName},
         Data        => $Data,
-        Class       => $Class,
+        Class       => $Class . ' Modernize',
         Translation => $TranslationOption,
         SelectedID  => '',
+        TreeView    => 1,
     );
     return $ColumnFilterHTML;
 }
@@ -2019,7 +2033,7 @@ sub _ColumnFilterJSON {
     my $Data = [
         {
             Key   => 'DeleteFilter',
-            Value => uc $Label,
+            Value => '-',
         },
         {
             Key      => '-',

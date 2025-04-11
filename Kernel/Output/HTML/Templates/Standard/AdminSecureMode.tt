@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::TT::Breadcrumb)
 
 <div class="MainBox AriaRoleMain">
     <div class="W33pc SpacingTopLarge SpacingBottomLarge CenterBox">
@@ -14,7 +15,6 @@
                 <h2>[% Translate("Secure Mode Needs to be Enabled!") | html %]</h2>
             </div>
             <div class="Content">
-
                 <p>
                     [% Translate("Secure mode will (normally) be set after the initial installation is completed.") | html %]
                 </p>

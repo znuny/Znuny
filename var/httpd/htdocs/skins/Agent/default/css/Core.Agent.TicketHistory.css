@@ -14,17 +14,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
-.HistoryActions label {
+/*.inline-filter-field label {
     line-height: 26px;
     margin-left: 10px;
 }
 
-.HistoryActions input[type=text] {
+.inline-filter-field input[type=text] {
     padding: 5px 10px;
     position: relative;
     top: 1px;
     width: 250px;
-}
+}*/
 
 .DataTable th:last-child {
     width: 30px;

@@ -6,20 +6,9 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("System Log") | html %]</h1>
 
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('System Log'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <div class="WidgetAction Toggle">
@@ -30,7 +19,7 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminLog;Subaction=Clear" id="ClearLogEntries" class="CallForAction Fullsize Center"><span><i class="fa fa-trash-o"></i>[% Translate("Clear log entries") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminLog;Subaction=Clear" id="ClearLogEntries" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-trash-o"></i>[% Translate("Clear log entries") | html %]</span></a>
                     </li>
                 </ul>
             </div>
@@ -52,12 +41,24 @@
                     [% Translate("Here you will find log information about your system.") | html %]
                 </p>
                 <p class="FieldExplanation">
-                    <a id="HideHint" href="#" class="CallForAction Fullsize Center"><span><i class="fa fa-times-circle"></i> [% Translate("Hide this message") | html %]</span></a>
+                    <a id="HideHint" href="#" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-times-circle"></i> [% Translate("Hide this message") | html %]</span></a>
                 </p>
             </div>
         </div>
     </div>
+
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("System Log") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('System Log'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 
         <div class="WidgetSimple">
             <div class="Header">

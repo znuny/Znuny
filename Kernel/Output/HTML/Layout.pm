@@ -21,25 +21,23 @@ use Kernel::Language qw(Translatable);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Language',
+    'Kernel::System::Activity',
     'Kernel::System::AuthSession',
     'Kernel::System::Cache',
-    'Kernel::System::Chat',
     'Kernel::System::CustomerGroup',
     'Kernel::System::CustomerUser',
     'Kernel::System::DateTime',
-    'Kernel::System::Group',
     'Kernel::System::Encode',
+    'Kernel::System::Group',
     'Kernel::System::HTMLUtils',
     'Kernel::System::JSON',
     'Kernel::System::LastViews',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::OTRSBusiness',
     'Kernel::System::State',
     'Kernel::System::Storable',
     'Kernel::System::SystemMaintenance',
     'Kernel::System::User',
-    'Kernel::System::VideoChat',
     'Kernel::System::Web::Request',
 );
 
@@ -510,6 +508,15 @@ sub Block {
         Data => $Param{Data},
         };
 
+    # For performance reasons:
+    # Do not initialize modernized input fields on selections with many entries
+    my $MaxNumberOfOptions
+        = $Kernel::OM->Get('Kernel::Config')->Get("InputFields::ModernizedSelection::MaxNumberOfOptions");
+    $Self->AddJSData(
+        Key   => 'InputFields::ModernizedSelection::MaxNumberOfOptions',
+        Value => $MaxNumberOfOptions,
+    );
+
     return 1;
 }
 
@@ -698,7 +705,7 @@ sub Login {
             Expires  => '+1y',
             Path     => $ConfigObject->Get('ScriptAlias'),
             Secure   => $CookieSecureAttribute,
-            HttpOnly => 1,
+            HTTPOnly => 1,
         );
     }
 
@@ -722,11 +729,6 @@ sub Login {
     $Self->LoaderCreateAgentJSCalls();
     $Self->LoaderCreateJavaScriptTranslationData();
     $Self->LoaderCreateJavaScriptTemplateData();
-
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-    $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-    $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
 
     # we need the baselink for VerfifiedGet() of selenium tests
     $Self->AddJSData(
@@ -783,6 +785,18 @@ sub Login {
 
         $Self->Block(
             Name => 'LoginLogo'
+        );
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Agent',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
         );
     }
 
@@ -1048,16 +1062,6 @@ sub Error {
 
     if ( !$Param{Message} ) {
         $Param{Message} = $Param{BackendMessage};
-
-        # Don't check for business package if the database was not yet configured (in the installer).
-        if (
-            $Kernel::OM->Get('Kernel::Config')->Get('SecureMode')
-            && $Kernel::OM->Get('Kernel::Config')->Get('DatabaseDSN')
-            && !$Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled()
-            )
-        {
-            $Param{ShowOTRSBusinessHint}++;
-        }
     }
 
     if ( $Param{BackendTraceback} ) {
@@ -1153,19 +1157,27 @@ sub Notify {
         return '' if !$Param{Info};
     }
 
-    my $BoxClass = 'Notice';
+    my $BoxClass  = 'Notice';
+    my $IconClass = 'fa fa-bell';
 
     if ( $Param{Info} ) {
         $Param{Info} =~ s/\n//g;
     }
     if ( $Param{Priority} && $Param{Priority} eq 'Error' ) {
-        $BoxClass = 'Error';
+        $BoxClass  = 'Error';
+        $IconClass = 'fa fa-exclamation-circle';
+    }
+    elsif ( $Param{Priority} && $Param{Priority} eq 'Warning' ) {
+        $BoxClass  = 'Warning';
+        $IconClass = 'fa fa-exclamation-triangle';
     }
     elsif ( $Param{Priority} && $Param{Priority} eq 'Success' ) {
-        $BoxClass = 'Success';
+        $BoxClass  = 'Success';
+        $IconClass = 'fa fa-check-circle';
     }
     elsif ( $Param{Priority} && $Param{Priority} eq 'Info' ) {
-        $BoxClass = 'Info';
+        $BoxClass  = 'Info';
+        $IconClass = 'fa fa-info-circle';
     }
 
     if ( $Param{Link} ) {
@@ -1201,7 +1213,8 @@ sub Notify {
         TemplateFile => 'Notify',
         Data         => {
             %Param,
-            BoxClass => $BoxClass,
+            BoxClass  => $BoxClass,
+            IconClass => $IconClass,
         },
     );
 }
@@ -1257,6 +1270,10 @@ sub Header {
 
     my $Type = $Param{Type} || '';
 
+    if ( !$Self->{UserToolBar} ) {
+        $Param{HideToolBar} = 'hide';
+    }
+
     # check params
     if ( !defined $Param{ShowToolbarItems} ) {
         $Param{ShowToolbarItems} = 1;
@@ -1295,8 +1312,14 @@ sub Header {
         );
     }
 
+    # add user or global default popup profiles
+    if ( !$Self->{UserPopupProfiles} ) {
+        $Self->{UserPopupProfiles} = $Self->AddPopupProfiles();
+    }
+
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateAgentCSSCalls();
+    $Self->LoaderCreateDynamicCSS();
 
     my %AgentLogo;
 
@@ -1336,6 +1359,18 @@ sub Header {
         $Self->Block(
             Name => 'HeaderLogoCSS',
             Data => \%Data,
+        );
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Agent',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
         );
     }
 
@@ -1393,40 +1428,15 @@ sub Header {
 
     # run tool bar item modules
     if ( $Self->{UserID} && $Self->{UserType} eq 'User' ) {
+
         my $ToolBarModule = $ConfigObject->Get('Frontend::ToolBarModule');
+
         if ( $Param{ShowToolbarItems} && ref $ToolBarModule eq 'HASH' ) {
 
-            $Self->Block(
-                Name => 'ToolBar',
-                Data => \%Param,
-            );
-
             $Self->ToolbarModules(
+                %Param,
                 ToolBarModule => $ToolBarModule,
             );
-
-            # Show links to last views, if enabled for tool bar.
-            my $ToolBarLastViewsHTML = $Self->_BuildLastViewsOutput(
-                Interface => 'Agent',
-                Position  => 'ToolBar',
-            );
-            if ( defined $ToolBarLastViewsHTML && length $ToolBarLastViewsHTML ) {
-                $Self->Block(
-                    Name => 'LastViewsToolBar',
-                    Data => {
-                        ToolBarLastViewsHTML => $ToolBarLastViewsHTML,
-                    },
-                );
-            }
-        }
-
-        if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Chat', Silent => 1 ) ) {
-            if ( $ConfigObject->Get('ChatEngine::Active') ) {
-                $Self->AddJSData(
-                    Key   => 'ChatEngine::Active',
-                    Value => $ConfigObject->Get('ChatEngine::Active')
-                );
-            }
         }
 
         # generate avatar
@@ -1434,7 +1444,7 @@ sub Header {
             my $DefaultIcon = $ConfigObject->Get('Frontend::Gravatar::DefaultImage') || 'mp';
             $Kernel::OM->Get('Kernel::System::Encode')->EncodeOutput( \$Self->{UserEmail} );
             $Param{Avatar}
-                = '//www.gravatar.com/avatar/' . md5_hex( lc $Self->{UserEmail} ) . '?s=100&d=' . $DefaultIcon;
+                = 'https://www.gravatar.com/avatar/' . md5_hex( lc $Self->{UserEmail} ) . '?s=100&d=' . $DefaultIcon;
         }
         else {
             my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
@@ -1458,6 +1468,42 @@ sub Header {
                 },
             );
         }
+
+        my $ActivityObject = $Kernel::OM->Get('Kernel::System::Activity');
+        my @Activities     = $ActivityObject->ListGet(
+            UserID => $Self->{UserID},
+        );
+
+        my $Count       = scalar @Activities;
+        my $NewActivity = grep { $_->{State} eq 'new' } @Activities;
+
+        my $ActivityBellClass = '';
+        if ($NewActivity) {
+            $ActivityBellClass = 'activity-new';
+        }
+
+        $Self->Block(
+            Name => 'Activity',
+            Data => {
+                Count             => $Count,
+                ActivityBellClass => $ActivityBellClass,
+            },
+        );
+
+        for my $Activity (@Activities) {
+            $Self->Block(
+                Name => 'ActivityList',
+                Data => {
+                    %{$Activity},
+                    LinkTarget => $Self->{UserActivityLinkTarget} || '_self',
+                },
+            );
+        }
+
+        $Self->AddJSData(
+            Key   => 'UserActivityLinkTarget',
+            Value => $Self->{UserActivityLinkTarget} || '_self',
+        );
 
         # show logged in notice
         if ( $Param{ShowPrefLink} ) {
@@ -1484,10 +1530,6 @@ sub Header {
                 Data => \%Param,
             );
         }
-    }
-
-    if ( $ConfigObject->Get('SecureMode') ) {
-        $Param{OTRSBusinessIsInstalled} = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
     }
 
     # create & return output
@@ -1576,17 +1618,69 @@ sub ToolbarModules {
         %Modules = ( $Object->Run( %Param, Config => $Jobs{$Job} ), %Modules );
     }
 
+    my %ToolBarModuleBlocks;
+
+    # count the number of blocks for which modules are to be rendered.
+    for my $ModuleID ( sort keys %Modules ) {
+        my $Block = $Modules{$ModuleID}->{Block} || 'ToolBarPersonalViews';
+        $Block = 'ToolBarPersonalViews' if $Block eq 'ToolBarItem';
+
+        $ToolBarModuleBlocks{$Block}++;
+    }
+
+    # renders ToolBar block if ToolBarModules exist
+    if (%ToolBarModuleBlocks) {
+        $Self->Block(
+            Name => 'ToolBar',
+            Data => \%Param,
+        );
+    }
+
+    # renders ToolBarContainer if a ToolBarModule is active
+    for my $Block ( sort keys %ToolBarModuleBlocks ) {
+        $Self->Block(
+            Name => $Block . 'Container',
+            Data => \%Param,
+        );
+    }
+
     # show tool bar items
     MODULE:
     for my $Key ( sort keys %Modules ) {
         next MODULE if !%{ $Modules{$Key} };
 
+        $Modules{$Key}->{Block} //= 'ToolBarPersonalViews';
+
         # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
         # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
-        if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearchFulltext' )
+        if (
+            $ConfigObject->Get('Ticket::ArchiveSystem')
+            && $Modules{$Key}->{Block} eq 'ToolBarSearch'
+            && $Modules{$Key}->{Name} eq 'Fulltext'
+            )
         {
-            $Modules{$Key}->{SearchInArchive}
+            my $SearchInArchive
                 = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
+
+            $Self->Block(
+                Name => 'SearchInArchive',
+                Data => {
+                    SearchInArchive => $SearchInArchive || 'AllTickets',
+                },
+            );
+        }
+
+        if (
+            $Modules{$Key}->{Block} eq 'ToolBarSearch'
+            && $Self->{UserToolBarSearchBackend}
+            && $Self->{UserToolBarSearchBackend} eq 'ToolBarSearchBackend' . $Modules{$Key}->{Name}
+            )
+        {
+            $Modules{$Key}->{Checked} = 'checked="checked"';
+        }
+
+        if ( $Modules{$Key}->{Block} eq 'ToolBarItem' ) {
+            $Modules{$Key}->{Block} = 'ToolBarPersonalViews';
         }
 
         $Self->Block(
@@ -1596,6 +1690,20 @@ sub ToolbarModules {
                 AccessKeyReference => $Modules{$Key}->{AccessKey}
                 ? " ($Modules{$Key}->{AccessKey})"
                 : '',
+            },
+        );
+    }
+
+    my $ToolBarLastViewsHTML = $Self->_BuildLastViewsOutput(
+        Interface => 'Agent',
+        Position  => 'ToolBar',
+    );
+
+    if ( defined $ToolBarLastViewsHTML && length $ToolBarLastViewsHTML ) {
+        $Self->Block(
+            Name => 'ToolBarLastViews',
+            Data => {
+                ToolBarLastViewsHTML => $ToolBarLastViewsHTML,
             },
         );
     }
@@ -1670,22 +1778,6 @@ sub Footer {
         }
     }
 
-    # get OTRS business object
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-
-    # don't check for business package if the database was not yet configured (in the installer)
-    if ( $ConfigObject->Get('SecureMode') ) {
-        $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-        $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-        $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
-    }
-
-    # Check if video chat is enabled.
-    if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::VideoChat', Silent => 1 ) ) {
-        $Param{VideoChatEnabled} = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled()
-            || $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'UnitTestMode' ) // 0;
-    }
-
     # Set an array with pending states.
     my @PendingStateIDs = $Kernel::OM->Get('Kernel::System::State')->StateGetStatesByType(
         StateType => [ 'pending reminder', 'pending auto' ],
@@ -1714,8 +1806,6 @@ sub Footer {
         CustomerInfoSet                => $ConfigObject->Get('Ticket::Frontend::CustomerInfoCompose'),
         IncludeUnknownTicketCustomers  => $ConfigObject->Get('Ticket::IncludeUnknownTicketCustomers'),
         InputFieldsActivated           => $ConfigObject->Get('ModernizeFormFields'),
-        OTRSBusinessIsInstalled        => $Param{OTRSBusinessIsInstalled},
-        VideoChatEnabled               => $Param{VideoChatEnabled},
         DatepickerShowWeek             => $ConfigObject->Get('Datepicker::ShowWeek') || 0,
         PendingStateIDs                => \@PendingStateIDs,
         CheckSearchStringsForStopWords => (
@@ -1729,6 +1819,8 @@ sub Footer {
         SearchFrontend             => $JSCall,
         Autocomplete               => $AutocompleteConfig,
         'Mentions::RichTextEditor' => $ConfigObject->Get('Mentions::RichTextEditor') // {},
+        Skin                       => $Self->{SkinSelected},
+        AutoAttributFieldIDMapping => $ConfigObject->Get('AutoAttributFieldIDMapping') || 1,
     );
 
     for my $Config ( sort keys %JSConfig ) {
@@ -2682,16 +2774,13 @@ sub Attachment {
 
         # Disallow external and inline scripts, active content, frames, but keep allowing inline styles
         #   as this is a common use case in emails.
-        # Also disallow referrer headers to prevent referrer leaks via old-style policy directive. Please note this has
-        #   been deprecated and will be removed in future OTRS versions in favor of a separate header (see below).
         # img-src:    allow external and inline (data:) images
         # script-src: block all scripts
         # object-src: allow 'self' so that the browser can load plugins for PDF display
         # frame-src:  block all frames
         # style-src:  allow inline styles for nice email display
-        # referrer:   don't send referrers to prevent referrer-leak attacks
         $Output
-            .= "Content-Security-Policy: default-src *; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline'; referrer no-referrer;\n";
+            .= "Content-Security-Policy: default-src *; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline';\n";
 
         # Use Referrer-Policy header to suppress referrer information in modern browsers
         #   (to prevent referrer-leak attacks).
@@ -2950,7 +3039,7 @@ sub PageNavBar {
 
     # only show total amount of pages if there is more than one
     if ( $Pages > 1 ) {
-        $Param{NavBarLong} = "- " . $Self->{LanguageObject}->Translate("Page") . ": $Param{SearchNavBar}";
+        $Param{NavBarLong} = $Param{SearchNavBar};
     }
     else {
         $Param{SearchNavBar} = '';
@@ -3329,7 +3418,7 @@ sub NavigationBar {
         }
     }
 
-    # run notification modules
+    # run notify modules
     my $FrontendNotifyModuleConfig = $ConfigObject->Get('Frontend::NotifyModule');
     if ( ref $FrontendNotifyModuleConfig eq 'HASH' ) {
         my %Jobs = %{$FrontendNotifyModuleConfig};
@@ -3940,7 +4029,7 @@ sub CustomerLogin {
             Expires  => '+1y',
             Path     => $ConfigObject->Get('ScriptAlias'),
             Secure   => $CookieSecureAttribute,
-            HttpOnly => 1,
+            HTTPOnly => 1,
         );
     }
 
@@ -3964,11 +4053,6 @@ sub CustomerLogin {
     $Self->LoaderCreateCustomerJSCalls();
     $Self->LoaderCreateJavaScriptTranslationData();
     $Self->LoaderCreateJavaScriptTemplateData();
-
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-    $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-    $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
 
     $Self->AddJSData(
         Key   => 'Baselink',
@@ -4027,6 +4111,18 @@ sub CustomerLogin {
                 },
             );
         }
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Customer',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
+        );
     }
 
     # show prelogin block, if in prelogin mode (e.g. SSO login)
@@ -4137,7 +4233,8 @@ sub CustomerHeader {
 
     my $Type = $Param{Type} || '';
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+    my $FrontendModule = $ConfigObject->Get('CustomerFrontend::Module');
 
     # add cookies if exists
     my $Output = '';
@@ -4155,18 +4252,18 @@ sub CustomerHeader {
     # area and title
     if (
         !$Param{Area}
-        && $ConfigObject->Get('CustomerFrontend::Module')->{ $Self->{Action} }
+        && $FrontendModule->{ $Self->{Action} }
         )
     {
-        $Param{Area} = $ConfigObject->Get('CustomerFrontend::Module')->{ $Self->{Action} }
+        $Param{Area} = $FrontendModule->{ $Self->{Action} }
             ->{NavBarName} || '';
     }
     if (
         !$Param{Title}
-        && $ConfigObject->Get('CustomerFrontend::Module')->{ $Self->{Action} }
+        && $FrontendModule->{ $Self->{Action} }
         )
     {
-        $Param{Title} = $ConfigObject->Get('CustomerFrontend::Module')->{ $Self->{Action} }->{Title}
+        $Param{Title} = $FrontendModule->{ $Self->{Action} }->{Title}
             || '';
     }
     if (
@@ -4192,7 +4289,7 @@ sub CustomerHeader {
     }
 
     my $Frontend;
-    if ( $ConfigObject->Get('CustomerFrontend::Module')->{ $Self->{Action} } ) {
+    if ( $FrontendModule->{ $Self->{Action} } ) {
         $Frontend = 'Customer';
     }
     else {
@@ -4258,6 +4355,73 @@ sub CustomerHeader {
     # Generate the minified CSS and JavaScript files
     # and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateCustomerCSSCalls();
+    $Self->LoaderCreateDynamicCSS();
+
+    # only on valid session
+    if ( $Self->{UserID} ) {
+
+        if ( $Frontend eq 'Customer' ) {
+            my $EncodeObject       = $Kernel::OM->Get('Kernel::System::Encode');
+            my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+
+            # generate avatar for CustomerUser
+            if ( $ConfigObject->Get('Frontend::AvatarEngine') eq 'Gravatar' && $Self->{UserEmail} ) {
+
+                my $DefaultIcon = $ConfigObject->Get('Frontend::Gravatar::DefaultImage') || 'mp';
+
+                $EncodeObject->EncodeOutput( \$Self->{UserEmail} );
+                $Param{Avatar} = 'https://www.gravatar.com/avatar/'
+                    . md5_hex( lc $Self->{UserEmail} )
+                    . '?s=100&d='
+                    . $DefaultIcon;
+            }
+            else {
+                my $Name = $CustomerUserObject->CustomerName(
+                    UserLogin => $Self->{UserID},
+                );
+
+                $Param{UserInitials} = $Self->UserInitialsGet(
+                    Fullname => $Name,
+                );
+            }
+        }
+
+        $Self->Block(
+            Name => 'Actions',
+            Data => \%Param,
+        );
+
+        # show logout button (if registered)
+        if ( $FrontendModule->{Logout} ) {
+            $Self->Block(
+                Name => 'Logout',
+                Data => \%Param,
+            );
+        }
+
+        # show preferences button (if registered)
+        if ( $FrontendModule->{CustomerPreferences} ) {
+            if ( $Self->{Action} eq 'CustomerPreferences' ) {
+                $Param{Class} = 'Selected';
+            }
+            $Self->Block(
+                Name => 'Preferences',
+                Data => \%Param,
+            );
+        }
+    }
+
+    # show shortcut icons based on selected skin
+    my %ShortcutIcons = $Self->_GetShortcutIconsForInterface(
+        Interface => 'Customer',
+    );
+
+    if (%ShortcutIcons) {
+        $Self->Block(
+            Name => 'ShortcutIcon',
+            Data => \%ShortcutIcons,
+        );
+    }
 
     # create & return output
     $Output .= $Self->Output(
@@ -4300,52 +4464,6 @@ sub CustomerFooter {
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # Check if video chat is enabled.
-    if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::VideoChat', Silent => 1 ) ) {
-        $Param{VideoChatEnabled} = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled()
-            || $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'UnitTestMode' ) // 0;
-    }
-
-    # Check if customer user has permission for chat.
-    my $CustomerChatPermission;
-    if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Chat', Silent => 1 ) ) {
-
-        my $CustomerChatConfig = $ConfigObject->Get('CustomerFrontend::Module')->{'CustomerChat'} || {};
-
-        if (
-            $Kernel::OM->Get('Kernel::Config')->Get('CustomerGroupSupport')
-            && (
-                IsArrayRefWithData( $CustomerChatConfig->{GroupRo} )
-                || IsArrayRefWithData( $CustomerChatConfig->{Group} )
-            )
-            )
-        {
-
-            my $CustomerGroupObject = $Kernel::OM->Get('Kernel::System::CustomerGroup');
-
-            GROUP:
-            for my $GroupName ( @{ $CustomerChatConfig->{GroupRo} }, @{ $CustomerChatConfig->{Group} } ) {
-                $CustomerChatPermission = $CustomerGroupObject->PermissionCheck(
-                    UserID    => $Self->{UserID},
-                    GroupName => $GroupName,
-                    Type      => 'ro',
-                );
-                last GROUP if $CustomerChatPermission;
-            }
-        }
-        else {
-            $CustomerChatPermission = 1;
-        }
-    }
-
-    # don't check for business package if the database was not yet configured (in the installer)
-    if ( $ConfigObject->Get('SecureMode') ) {
-        my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-        $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-        $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-        $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
-    }
-
     # AutoComplete-Config
     my $AutocompleteConfig = $ConfigObject->Get('AutoComplete::Customer');
 
@@ -4369,14 +4487,9 @@ sub CustomerFooter {
         CustomerPanelSessionName => $ConfigObject->Get('CustomerPanelSessionName'),
         UserLanguage             => $Self->{UserLanguage},
         CheckEmailAddresses      => $ConfigObject->Get('CheckEmailAddresses'),
-        OTRSBusinessIsInstalled  => $Param{OTRSBusinessIsInstalled},
-        OTRSSTORMIsInstalled     => $Param{OTRSSTORMIsInstalled},
-        OTRSCONTROLIsInstalled   => $Param{OTRSCONTROLIsInstalled},
         InputFieldsActivated     => $ConfigObject->Get('ModernizeCustomerFormFields'),
         Autocomplete             => $AutocompleteConfig,
-        VideoChatEnabled         => $Param{VideoChatEnabled},
         WebMaxFileUpload         => $ConfigObject->Get('WebMaxFileUpload'),
-        CustomerChatPermission   => $CustomerChatPermission,
     );
 
     for my $Config ( sort keys %JSConfig ) {
@@ -4741,58 +4854,6 @@ sub CustomerNavigationBar {
         $Param{UserLoginIdentifier} = $Self->{UserLoginIdentifier};
     }
 
-    # only on valid session
-    if ( $Self->{UserID} ) {
-
-        # show logout button (if registered)
-        if ( $FrontendModule->{Logout} ) {
-            $Self->Block(
-                Name => 'Logout',
-                Data => \%Param,
-            );
-        }
-
-        # show preferences button (if registered)
-        if ( $FrontendModule->{CustomerPreferences} ) {
-            if ( $Self->{Action} eq 'CustomerPreferences' ) {
-                $Param{Class} = 'Selected';
-            }
-            $Self->Block(
-                Name => 'Preferences',
-                Data => \%Param,
-            );
-        }
-
-        # Show open chat requests (if chat engine is active).
-        if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Chat', Silent => 1 ) ) {
-            if ( $ConfigObject->Get('ChatEngine::Active') ) {
-                my $ChatObject = $Kernel::OM->Get('Kernel::System::Chat');
-                my $Chats      = $ChatObject->ChatList(
-                    Status        => 'request',
-                    TargetType    => 'Customer',
-                    ChatterID     => $Self->{UserID},
-                    ChatterType   => 'Customer',
-                    ChatterActive => 0,
-                );
-
-                my $Count = scalar $Chats;
-
-                $Self->Block(
-                    Name => 'ChatRequests',
-                    Data => {
-                        Count => $Count,
-                        Class => ($Count) ? '' : 'Hidden',
-                    },
-                );
-
-                $Self->AddJSData(
-                    Key   => 'ChatEngine::Active',
-                    Value => $ConfigObject->Get('ChatEngine::Active')
-                );
-            }
-        }
-    }
-
     # Show links to last views, if enabled for menu bar.
     my $MenuBarLastViewsHTML = $Self->_BuildLastViewsOutput(
         Interface => 'Customer',
@@ -5097,7 +5158,7 @@ sub RichTextDocumentServe {
 
     # Get charset from passed content type parameter.
     my $Charset;
-    if ( $Param{Data}->{ContentType} =~ m/.+?charset=("|'|)(.+)/ig ) {
+    if ( $Param{Data}->{ContentType} =~ m/.+?charset\s*=\s*("|'|)(.+)/ig ) {
         $Charset = $2;
         $Charset =~ s/"|'//g;
     }
@@ -5117,7 +5178,7 @@ sub RichTextDocumentServe {
 
         # Replace charset in content type and content.
         $Param{Data}->{ContentType} =~ s/\Q$Charset\E/utf-8/gi;
-        if ( !( $Param{Data}->{Content} =~ s/(<meta[^>]+charset=("|'|))\Q$Charset\E/$1utf-8/gi ) ) {
+        if ( !( $Param{Data}->{Content} =~ s/(<meta[^>]+charset\s*=\s*("|'|))\Q$Charset\E/$1utf-8/gi ) ) {
 
             # Add explicit charset if missing.
             $Param{Data}->{Content}
@@ -5539,14 +5600,21 @@ sub _BuildSelectionDataRefCreate {
                         $DisabledElements{$ElementLongName} = 1;
 
                         # add the element to the original data to be disabled later
-                        $DataLocal->{ $ElementLongName . '_Disabled' } = $ElementLongName;
+                        $DataLocal->{$ElementLongName} = $ElementLongName;
                     }
                     $Parents .= $Element . '::';
                 }
             }
         }
 
-        # sort hash (before the translation)
+        # translate value
+        if ( $OptionRef->{Translation} ) {
+            for my $Row ( sort keys %{$DataLocal} ) {
+                $DataLocal->{$Row} = $Self->{LanguageObject}->Translate( $DataLocal->{$Row} );
+            }
+        }
+
+        # sort hash
         my @SortKeys;
         if ( $OptionRef->{Sort} eq 'IndividualValue' && $OptionRef->{SortIndividual} ) {
             my %List = reverse %{$DataLocal};
@@ -5646,7 +5714,7 @@ sub _BuildSelectionDataRefCreate {
 
                         # push the missing element to the data local array
                         push @NewDataLocal, {
-                            Key      => $ElementLongName . '_Disabled',
+                            Key      => $ElementLongName,
                             Value    => $ElementLongName,
                             Disabled => 1,
                         };
@@ -6214,6 +6282,26 @@ sub SetRichTextParameters {
         }
     }
 
+    my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
+    my $WebPath  = $ConfigObject->Get('Frontend::WebPath') . 'skins';
+
+    my $UserType = $Self->{SessionSource} || '';
+    if ($UserType) {
+        $UserType =~ s/Interface//;
+    }
+
+    $Self->{SkinSelected} ||= $ConfigObject->Get("Loader::Agent::DefaultSelectedSkin") || 'default';
+
+    my $ContentsCssFS
+        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+    my $ContentsCss
+        = $WebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+
+    # If Core.RichTextEditor.ContentsCss.css for current skin exists, use it
+    if ( -e $ContentsCssFS ) {
+        $RichTextSettings{'ContentsCss'} = $ContentsCss;
+    }
+
     # get needed variables
     my $RichTextType        = $Param{Data}->{RichTextType}                || '';
     my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
@@ -6357,6 +6445,26 @@ sub CustomerSetRichTextParameters {
         if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
             $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
         }
+    }
+
+    my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
+    my $WebPath  = $ConfigObject->Get('Frontend::WebPath') . 'skins';
+
+    my $UserType = $Self->{SessionSource} || '';
+    if ($UserType) {
+        $UserType =~ s/Interface//;
+    }
+
+    $Self->{SkinSelected} ||= $ConfigObject->Get("Loader::Customer::SelectedSkin") || 'default';
+
+    my $ContentsCssFS
+        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+    my $ContentsCss
+        = $WebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+
+    # If Core.RichTextEditor.ContentsCss.css for current skin exists, use it
+    if ( -e $ContentsCssFS ) {
+        $RichTextSettings{'ContentsCss'} = $ContentsCss;
     }
 
     my $TextDir             = $Self->{TextDirection}                      || '';
@@ -6625,6 +6733,70 @@ sub _BuildLastViewsOutput {
     );
 
     return $LastViewHTML;
+}
+
+=head2 _GetShortcutIconsForInterface()
+
+Returns the paths to the shortcut icons of the given interface.
+
+    my %ShortcutConfig = $LayoutObject->_GetShortcutIconsForInterface(
+        Interface => 'Agent',    # or Customer
+    );
+
+=cut
+
+sub _GetShortcutIconsForInterface {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Interface)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    if ( $Param{Interface} !~ m{\A(?:Agent|Customer)\z} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'Interface' must be 'Agent' or 'Customer'.",
+        );
+        return;
+    }
+
+    my @ConfigParamNames = (
+        $Param{Interface} . 'ShortcutIcon',
+        $Param{Interface} . 'AppleTouchIcon',
+    );
+
+    my %ShortcutIcons;
+    for my $ConfigParam (@ConfigParamNames) {
+        my $CustomConfigParam = $ConfigParam . 'Custom';
+        my $CustomConfig      = $ConfigObject->Get($CustomConfigParam);
+
+        # check if we need to display a custom shortcut icon for the selected skin
+        if (
+            $Self->{SkinSelected}
+            && IsHashRefWithData($CustomConfig)
+            && $CustomConfig->{ $Self->{SkinSelected} }
+            )
+        {
+            $ShortcutIcons{$ConfigParam} = $CustomConfig->{ $Self->{SkinSelected} };
+        }
+
+        # Otherwise show default shortcut icon, if configured
+        elsif ( defined $ConfigObject->Get($ConfigParam) ) {
+            $ShortcutIcons{$ConfigParam} = $ConfigObject->Get($ConfigParam);
+        }
+    }
+
+    return %ShortcutIcons;
 }
 
 1;

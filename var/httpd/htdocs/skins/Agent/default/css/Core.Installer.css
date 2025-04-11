@@ -14,46 +14,180 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
+/* Hide Header and UserAvatar*/
+#HeaderToolBar{
+    display: none;
+}
+
+.InstallerPage .Center + .CenterBox {
+    width: 100%;
+    max-width: 1440px;
+}
+
+.InstallerPage .WidgetSimple > .Content {
+    margin: auto;
+    padding: var(--padding-lg);
+}
+
+.InstallerPage .WidgetSimple > .Content > fieldset {
+    max-width: 550px;
+}
+
+#WebInstallerBox > .Content,
+#WebInstallerBoxFinish > .Content {
+    max-width: 785px;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    gap: var(--gap-md);
+}
+
+#WebInstallerBox > .Content .card,
+#WebInstallerBoxFinish > .Content .card {
+    gap: 0;
+    justify-content: center;
+    font-size: var(--main-font-size);
+    width: calc(33.33% - 14px);
+    border-radius: var(--border-radius-lg);
+    padding: var(--padding-md);
+}
+
+#WebInstallerBoxFinish > .Content .card.full-width {
+    width: 100%;
+}
+
+#WebInstallerBoxFinish fieldset {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
+#WebInstallerBoxFinish > .Content .card {
+    width: 48%;
+}
+
+
+#WebInstallerBox label,
+#WebInstallerBox p,
+#WebInstallerBoxFinish label,
+#WebInstallerBoxFinish p {
+    font-size: var(--main-font-size);
+    color: var(--black);
+    line-height: 22px;
+    font-weight: var(--normal);
+    letter-spacing: 0;
+    padding: 0;
+    margin: 0;
+}
+
+#WebInstallerBox label,
+#WebInstallerBoxFinish label {
+    opacity: .5;
+    transition: var(--main-transition);
+}
+
+#WebInstallerBox > .Content .card:hover label,
+#WebInstallerBoxFinish > .Content .card:hover label {
+    opacity: 1;
+}
+
 #InstallerContinueWithJS {
     display: none;
+    padding: var(--padding-lg);
+    flex-flow: row;
+    align-items: center;
+    justify-content: end;
+    gap: var(--gap-sm);
 }
 
 #InstallerContinueWithJS form {
     display: inline;
+    width: auto;
+    margin: 0;
 }
 
 div.License {
-   font-family: monospace;
-   white-space: pre;
-   border: 1px solid #000;
-   background-color: #FFF;
-   width: 600px;
-   height: 500px;
-   overflow-x: scroll;
-   text-align: left;
-   padding: 5px;
-   margin: auto;
+    font-size: var(--main-font-size);
+    letter-spacing: .1px;
+    line-height: 22px;
+    color: var(--black);
+    font-family: monospace;
+    white-space: pre;
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    background-color: var(--white);
+    width: 690px;
+    height: 560px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-align: left;
+    margin: auto;
+    border-radius: var(--border-radius-sm);
 }
 
 div.DBItem {
-   padding: 2px;
-   margin-left: 350px;
+    margin: auto;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    width: 250px;
+    padding-bottom: var(--padding-xs);
+    padding-left: 8px;
+    font-size: var(--main-font-size);
+}
+
+div.DBItem > i {
+    font-size: 16px;
+    color: var(--success-color);
+    padding-right: 8px;
+}
+
+div.DBItem > i.fa-times {
+    color: var(--warning-color);
+}
+
+div.MainBox.InstallerPage div.WidgetSimple > .Content > .DBItem > p:last-child {
+    width: 100%;
+    padding-top: var(--padding-md);
+    padding-bottom: var(--padding-lg);
+    color: var(--gray-darker);
+    font-size: var(--font-size-sm);
+}
+
+.InstallerPage .DBItem + .SaveButtons {
+    justify-content: center;
+}
+
+.InstallerPage .Success:not(i.fa):not(td) {
+    border: 0;
+    background: unset;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 div.Result {
-   color: #049e35;
-   font-weight: bold;
-   padding: 6px 8px 10px;
+    color: var(--success-color);
+    font-weight: var(--semi-bold);
+    font-size: var(--main-font-size);
+    line-height: normal;
+    letter-spacing: 0.2px;
+    /* font-family: 'Inter';*/
+    padding-top: var(--padding-sm);
 }
 
 span.Emphasis {
-    color: #049e35;
+    color: var(--success-color);
     font-weight: bold;
 }
 
-#FormDB fieldset > h4 {
-  margin-left: 31%;
-  margin-top: 15px;
+#FormDB fieldset > .field-wrapper > h4 {
+    line-height: normal;
+    font-size: var(--main-font-size);
+    letter-spacing: .2px;
+    color: var(--black);
+    font-weight: var(--medium);
+    /* font-family: 'Inter';*/
 }
 
 } /* end @media */

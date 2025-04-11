@@ -19,6 +19,7 @@ sub match {
         'dns records for the destination computer could not be found',
         'hop count exceeded - possible mail loop',
         'host is unreachable',
+        'host name lookup failure',
         'host not found, try again',
         'mail forwarding loop for ',
         'malformed name server reply',
@@ -97,7 +98,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2018,2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

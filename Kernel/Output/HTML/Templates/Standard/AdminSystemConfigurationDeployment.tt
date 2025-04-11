@@ -7,25 +7,8 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-
-    <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('System Configuration'),
-                Link => 'AdminSystemConfiguration',
-            },
-            {
-                Name => Translate('Changes Deployment'),
-                Link => 'AdminSystemConfigurationDeployment;Subaction=Deployment',
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -33,17 +16,11 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration" class="GoBackButton CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration" class="GoBackButton CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go back") | html %]</span></a>
                     </li>
-                    [% IF Data.OTRSBusinessIsInstalled %]
-                        <li>
-                            <a href="[% Env("Baselink") %]Action=AdminSystemConfigurationDeploymentHistory;Subaction=DeploymentHistory" class="CallForAction Fullsize Center OTRSBusinessRequired"><span><i class="fa fa-history"></i>[% Translate("History") | html %]</span></a>
-                        </li>
-                    [% END %]
                 </ul>
             </div>
         </div>
-
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Help") | html %]</h2>
@@ -67,11 +44,24 @@
             </div>
         </div>
         [% END %]
-
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
 
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('System Configuration'),
+                    Link => 'AdminSystemConfiguration',
+                },
+                {
+                    Name => Translate('Changes Deployment'),
+                    Link => 'AdminSystemConfigurationDeployment;Subaction=Deployment',
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
         <div class="WidgetSimple">
 
             <div class="Header">
@@ -79,7 +69,7 @@
                 <div class="ActionMenu Visible">
                 [% IF Data.SettingList.size() %]
                     <div class="WidgetAction CompareAll">
-                        <a href=""><i class="fa fa-exchange"></i></a>
+                        <a class="icon-hover-md" href="" ><i class="fa fa-exchange"></i></a>
                     </div>
                 [% END %]
                 </div>
@@ -87,25 +77,27 @@
             <div class="Content">
 
             [% IF Data.SettingList.size() %]
-                <p class="Center SpacingTopSmall">
+                <p class="Center flex-column">
                 [% IF Data.AdvancedMode %]
                     [% Translate("There are %s changed settings which will be deployed in this run.", Data.SettingList.size()) | html %]
+                    </br>
                     <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %]">[% Translate("Switch to basic mode to deploy settings only changed by you.") | html %]</a>
                 [% ELSE %]
                     [% Translate("You have %s changed settings which will be deployed in this run.", Data.SettingList.size()) | html %]
+                    </br>
                     <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];AdvancedMode=1">[% Translate("Switch to advanced mode to deploy settings changed by other users, too.") | html %]</a>
                 [% END %]
                 </p>
                 [% INCLUDE "SystemConfiguration/SettingsListCompare.tt" %]
             [% ELSE %]
-                <p class="Center">
+                <p class="Center flex-column">
                     [% Translate("There are no settings to be deployed.") | html %]
                     [% IF !Data.AdvancedMode %]
+                    </br>
                     <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];AdvancedMode=1">[% Translate("Switch to advanced mode to see deployable settings changed by other users.") | html %]</a>
                     [% END %]
                 </p>
             [% END %]
-
             </div>
         </div>
 
@@ -113,14 +105,12 @@
             <div class="Content">
                 <input type="hidden" name="AdvancedMode" id="AdvancedMode" autocomplete="off" value="[% Data.AdvancedMode | html %]" />
                 <input type="hidden" name="SelectedSettings" id="SelectedSettings" autocomplete="off" />
-                <div class="Center">
-                    <button class="CallForAction Primary [% IF !Data.SettingList.size() %]Disabled[% END %]" id="DeploymentStart" type="button" value="[% Translate("Deploy selected changes") | html %]" [% IF !Data.SettingList.size() %]disabled[% END %]><span>[% Translate("Deploy selected changes") | html %]</span></button>
-                    [% Translate("or") | html %]
-                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                <div class="SaveButtons">
+                    <button class="CallForAction Primary [% IF !Data.SettingList.size() %]Disabled[% END %] btn-main btn-primary btn-width-xxl" id="DeploymentStart" type="button" value="[% Translate("Deploy selected changes") | html %]" [% IF !Data.SettingList.size() %]disabled[% END %]><span>[% Translate("Deploy selected changes") | html %]</span></button>
+
+                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-main btn-secondary-ghost btn-width-md">[% Translate("Cancel") | html %]</a>
                 </div>
             </div>
         </div>
-
     </div>
-    <div class="Clear"></div>
 </div>

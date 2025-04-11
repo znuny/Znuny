@@ -18,7 +18,7 @@ use vars (qw($Self));
 
 my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
-my $Daemon = $Home . '/bin/otrs.Daemon.pl';
+my $Daemon = $Home . '/bin/znuny.Daemon.pl';
 
 # Get current daemon status.
 my $PreviousDaemonStatus = `$Daemon status`;

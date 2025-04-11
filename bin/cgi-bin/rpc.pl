@@ -49,7 +49,7 @@ sub Dispatch {
     $Pw   ||= '';
     local $Kernel::OM = Kernel::System::ObjectManager->new(
         'Kernel::System::Log' => {
-            LogPrefix => 'OTRS-RPC',
+            LogPrefix => 'Znuny-RPC',
         },
     );
 
@@ -128,7 +128,7 @@ sub DispatchMultipleTicketMethods {
     # common objects
     local $Kernel::OM = Kernel::System::ObjectManager->new(
         'Kernel::System::Log' => {
-            LogPrefix => 'OTRS-RPC',
+            LogPrefix => 'Znuny-RPC',
         },
     );
 

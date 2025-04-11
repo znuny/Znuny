@@ -14,7 +14,6 @@ use warnings;
 
 use List::Util qw(first);
 
-use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
@@ -322,9 +321,11 @@ sub _ShowEdit {
         $LayoutObject->Block(
             Name => 'AvailableTransitionActionRow',
             Data => {
-                ID       => $TransitionActionData->{ID},
-                EntityID => $TransitionActionData->{EntityID},
-                Name     => $TransitionActionData->{Name},
+                ID            => $TransitionActionData->{ID},
+                EntityID      => $TransitionActionData->{EntityID},
+                Name          => $TransitionActionData->{Name},
+                Scope         => $TransitionActionData->{Config}->{Scope} || 'Global',
+                ScopeEntityID => $TransitionActionData->{Config}->{ScopeEntityID},
             },
         );
     }

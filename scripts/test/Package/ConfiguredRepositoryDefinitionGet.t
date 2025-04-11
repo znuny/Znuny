@@ -42,7 +42,7 @@ my @Tests = (
                 'URL' => 'https://download.znuny.org/releases/packages',
             },
             'Znuny Open Source Add-ons' => {
-                'URL' => 'https://addons.znuny.com/api/addon_repos/public',
+                'URL' => 'https://addons.znuny.com/public',
             },
         },
     },
@@ -65,7 +65,7 @@ my @Tests = (
                 'URL' => 'https://download.znuny.org/releases/packages',
             },
             'Znuny Open Source Add-ons' => {
-                'URL' => 'https://addons.znuny.com/api/addon_repos/public',
+                'URL' => 'https://addons.znuny.com/public',
             },
             'Test repository' => {
                 URL             => 'https://download.znuny.org',

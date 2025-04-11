@@ -549,15 +549,21 @@ sub LinkAdd {
     # delete affected caches (both directions)
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     for my $Direction (qw(Source Target)) {
-        my $CacheKey =
-            'Cache::LinkListRaw'
-            . '::Direction' . $Direction
-            . '::ObjectID' . $Param{ $Direction . 'ObjectID' }
-            . '::StateID' . $StateID;
-        $CacheObject->Delete(
-            Type => $Self->{CacheType},
-            Key  => $CacheKey,
-        );
+        for my $ObjectID ( $Param{SourceObjectID}, $Param{TargetObjectID} ) {
+            for my $Key ( $Param{SourceKey}, $Param{TargetKey} ) {
+                my $CacheKey =
+                    'Cache::LinkListRaw'
+                    . '::Direction' . $Direction
+                    . '::ObjectID' . $ObjectID
+                    . '::StateID' . $StateID
+                    . '::Key' . $Key;
+
+                $CacheObject->Delete(
+                    Type => $Self->{CacheType},
+                    Key  => $CacheKey,
+                );
+            }
+        }
     }
 
     # run post event module of source object
@@ -604,8 +610,8 @@ deletes old links from database
 return true
 
     $True = $LinkObject->LinkCleanup(
-        State  => 'Temporary',
-        Age    => ( 60 * 60 * 24 ),
+        State => 'Temporary',
+        Age   => ( 60 * 60 * 24 ),
     );
 
 =cut
@@ -831,17 +837,21 @@ sub LinkDelete {
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     my %StateList   = $Self->StateList();
     for my $Direction (qw(Source Target)) {
-        for my $DirectionNumber (qw(1 2)) {
+        for my $ObjectID ( $Param{Object1ID}, $Param{Object2ID} ) {
             for my $StateID ( sort keys %StateList ) {
-                my $CacheKey =
-                    'Cache::LinkListRaw'
-                    . '::Direction' . $Direction
-                    . '::ObjectID' . $Param{ 'Object' . $DirectionNumber . 'ID' }
-                    . '::StateID' . $StateID;
-                $CacheObject->Delete(
-                    Type => $Self->{CacheType},
-                    Key  => $CacheKey,
-                );
+                for my $Key ( $Param{Key1}, $Param{Key2} ) {
+                    my $CacheKey =
+                        'Cache::LinkListRaw'
+                        . '::Direction' . $Direction
+                        . '::ObjectID' . $ObjectID
+                        . '::StateID' . $StateID
+                        . '::Key' . $Key;
+
+                    $CacheObject->Delete(
+                        Type => $Self->{CacheType},
+                        Key  => $CacheKey,
+                    );
+                }
             }
         }
     }
@@ -1180,14 +1190,14 @@ Return
     };
 
     my $LinkList = $LinkObject->LinkListWithData(
-        Object                          => 'Ticket',
-        Key                             => '321',
-        Object2                         => 'FAQ',         # (optional)
-        State                           => 'Valid',
-        Type                            => 'ParentChild', # (optional)
-        Direction                       => 'Target',      # (optional) default Both (Source|Target|Both)
-        UserID                          => 1,
-        ObjectParameters                => {              # (optional) backend specific flags
+        Object           => 'Ticket',
+        Key              => '321',
+        Object2          => 'FAQ',         # (optional)
+        State            => 'Valid',
+        Type             => 'ParentChild', # (optional)
+        Direction        => 'Target',      # (optional) default Both (Source|Target|Both)
+        UserID           => 1,
+        ObjectParameters => {              # (optional) backend specific flags
             Ticket => {
                 IgnoreLinkedTicketStateTypes => 0|1,
             },
@@ -2246,9 +2256,9 @@ sub StateList {
 checks read permission for a given object and UserID.
 
     $Permission = $LinkObject->ObjectPermission(
-        Object  => 'Ticket',
-        Key     => 123,
-        UserID  => 1,
+        Object => 'Ticket',
+        Key    => 123,
+        UserID => 1,
     );
 
 =cut
@@ -2289,9 +2299,9 @@ Return
     );
 
     %Description = $LinkObject->ObjectDescriptionGet(
-        Object  => 'Ticket',
-        Key     => 123,
-        UserID  => 1,
+        Object => 'Ticket',
+        Key    => 123,
+        UserID => 1,
     );
 
 =cut
@@ -2343,7 +2353,7 @@ Returns:
 
     $ObjectList = $LinkObject->ObjectSearch(
         Object       => 'ITSMConfigItem',
-        SubObject    => 'Computer'         # (optional)
+        SubObject    => 'Computer',        # (optional)
         SearchParams => $HashRef,          # (optional)
         UserID       => 1,
     );
@@ -2399,7 +2409,9 @@ sub _LinkListRaw {
         'Cache::LinkListRaw'
         . '::Direction' . $Param{Direction}
         . '::ObjectID' . $Param{ObjectID}
-        . '::StateID' . $Param{StateID};
+        . '::StateID' . $Param{StateID}
+        . '::Key' . $Param{Key};
+
     my $CachedLinks = $Kernel::OM->Get('Kernel::System::Cache')->Get(
         Type => $Self->{CacheType},
         Key  => $CacheKey,
@@ -2413,7 +2425,11 @@ sub _LinkListRaw {
 
         # prepare SQL statement
         my $TypeSQL = '';
-        my @Bind    = ( \$Param{ObjectID}, \$Param{StateID} );
+        my @Bind    = (
+            \$Param{ObjectID},
+            \$Param{Key},
+            \$Param{StateID},
+        );
 
         # get fields based on type
         my $SQL;
@@ -2421,13 +2437,15 @@ sub _LinkListRaw {
             $SQL =
                 'SELECT target_object_id, target_key, type_id, source_key'
                 . ' FROM link_relation'
-                . ' WHERE source_object_id = ?';
+                . ' WHERE source_object_id = ?'
+                . ' AND source_key = ?';
         }
         else {
             $SQL =
                 'SELECT source_object_id, source_key, type_id, target_key'
                 . ' FROM link_relation'
-                . ' WHERE target_object_id = ?';
+                . ' WHERE target_object_id = ?'
+                . ' AND target_key = ?';
         }
         $SQL .= ' AND state_id = ?' . $TypeSQL;
 

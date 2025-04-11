@@ -47,14 +47,9 @@ sub true {
     my $class = shift;
     my $argvs = shift // return undef;
 
-    if( my $r = $argvs->reason // '' ) {
-        # Do not overwrite the reason
-        return 0 if( $r eq 'securityerror' || $r eq 'systemerror' || $r eq 'undefined' );
-    } else {
-        # Check the value of Diagnosic-Code: header with patterns
-        return 1 if __PACKAGE__->match(lc $argvs->diagnosticcode);
-    }
-    return 0;
+    return 0 if $argvs->{'reason'}      =~ /\A(?:securityerror|systemerror|undefined)\z/;
+    return 0 if $argvs->{'smtpcommand'} =~ /\A(?:CONN|EHLO|HELO)\z/;
+    return 1 if __PACKAGE__->match(lc $argvs->{'diagnosticcode'});return 0;
 }
 
 1;

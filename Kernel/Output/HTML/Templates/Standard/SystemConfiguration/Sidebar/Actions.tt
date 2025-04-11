@@ -18,7 +18,7 @@
         <ul class="ActionList">
 [% IF Env("Action") == 'AdminSystemConfiguration' && Env("Subaction") == 'SearchLocked' %]
             <li>
-                <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration" class="GoBackButton CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back") | html %]</span></a>
+                <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration" class="GoBackButton CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go back") | html %]</span></a>
             </li>
 [% END %]
 [% IF Env("Action") == 'AdminSystemConfiguration' && Env("Subaction") == 'Search' %]
@@ -28,25 +28,25 @@
 [% END %]
 [% IF Env("LastEntityType") %]
             <li>
-                <a href="[% Env("Baselink") %][% Env("LastScreenEntity") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to admin: ") | html %][% Translate( Env("LastEntityType") ) | html %]</span></a>
+                <a href="[% Env("Baselink") %][% Env("LastScreenEntity") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go back to admin: ") | html %][% Translate( Env("LastEntityType") ) | html %]</span></a>
             </li>
 [% END %]
             <li>
-                <a href="[% Env("Baselink") %]Action=AdminSystemConfigurationDeployment;Subaction=Deployment" class="CallForAction Fullsize Center"><span><i class="fa fa-rocket"></i>[% Translate("Deployment") | html %]</span></a>
+                <a href="[% Env("Baselink") %]Action=AdminSystemConfigurationDeployment;Subaction=Deployment" class="CallForAction btn-main btn-primary-ghost"><span>[% Translate("Deployment") | html %]</span></a>
             </li>
             <li>
-                <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=SearchLocked" class="CallForAction Fullsize Center"><span><i class="fa fa-edit"></i>[% Translate("Settings I'm currently editing") | html %]</span></a>
+                <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=SearchLocked" class="CallForAction btn-main btn-primary-ghost"><span>[% Translate("Settings I'm currently editing") | html %]</span></a>
             </li>
             <li>
-                <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Favourites" class="CallForAction Fullsize Center"><span><i class="fa fa-star"></i>[% Translate("My favourite settings") | html %]</span></a>
+                <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Favourites" class="CallForAction btn-main btn-primary-ghost"><span>[% Translate("My favourite settings") | html %]</span></a>
             </li>
 [% IF Data.InvalidSettings %]
             <li>
-                <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Invalid" class="CallForAction Fullsize Center"><span><i class="fa fa-ban"></i>[% Translate("Invalid settings") | html %]</span></a>
+                <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Invalid" class="CallForAction btn-main btn-primary-ghost"><span>[% Translate("Invalid settings") | html %]</span></a>
             </li>
 [% END %]
             <li>
-                <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=ImportExport" class="CallForAction Fullsize Center"><span><i class="fa fa-exchange"></i>[% IF Config("ConfigImportAllowed") %][% Translate("Import & Export") | html %][% ELSE %][% Translate("Export") | html %][% END %]</span></a>
+                <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=ImportExport" id='ImportExport' class="CallForAction btn-main btn-primary-ghost"><span>[% IF Config("ConfigImportAllowed") %][% Translate("Import & Export") | html %][% ELSE %][% Translate("Export") | html %][% END %]</span></a>
             </li>
         </ul>
     </div>

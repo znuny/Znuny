@@ -56,28 +56,34 @@ Core.Agent = (function (TargetNS) {
      */
     function InitAvatarFlyout() {
 
-        var Timeout,
+        var Timeout = {},
+            ID,
             TimeoutDuration = 700;
 
-        // init the avatar toggle
-        $('#ToolBar .UserAvatar > a').off('click.UserAvatar').on('click.UserAvatar', function() {
-            $(this).next('div').fadeToggle('fast');
-            $(this).toggleClass('Active');
-            return false;
-        });
+        $.each($('#HeaderToolBar > li'), function () {
 
-        $('#ToolBar .UserAvatar > div').off('mouseenter.UserAvatar').on('mouseenter.UserAvatar', function() {
-            if (Timeout && $(this).css('opacity') == 1) {
-                clearTimeout(Timeout);
-            }
-        });
+            ID = $(this).attr('id');
 
-        $('#ToolBar .UserAvatar > div').off('mouseleave.UserAvatar').on('mouseleave.UserAvatar', function() {
-            Timeout = setTimeout(function() {
-                $('#ToolBar .UserAvatar > div').fadeOut('fast');
-                $('#ToolBar .UserAvatar > div').prev('a').removeClass('Active');
-            }, TimeoutDuration);
-        });
+            // init the HeaderToolBar li toggle
+            $(this).find('a').off('click.HeaderToolBar').on('click.HeaderToolBar', function() {
+                $(this).next('div').fadeToggle('fast');
+                $(this).toggleClass('Active');
+            });
+
+            $(this).find('div').first().off('mouseenter.HeaderToolBar').on('mouseenter.HeaderToolBar', function() {
+                if (Timeout[ID] && $(this).css('opacity') == 1) {
+                    clearTimeout(Timeout[ID]);
+                }
+            });
+
+            $(this).find('div').first().off('mouseleave.HeaderToolBar').on('mouseleave.HeaderToolBar', function() {
+                var $Content = $(this);
+                Timeout[ID] = setTimeout(function() {
+                    $Content.fadeOut('fast');
+                    $Content.prev('a').removeClass('Active');
+                }, TimeoutDuration);
+            });
+        })
     }
 
     /**
@@ -245,10 +251,6 @@ Core.Agent = (function (TargetNS) {
                 // if OpenMainMenuOnHover is enabled, clicking the item
                 // should lead to the link as regular
                 if ($('body').hasClass('Visible-ScreenXL') && !Core.App.Responsive.IsTouchDevice() && parseInt(Core.Config.Get('OpenMainMenuOnHover'), 10)) {
-                    return true;
-                }
-
-                if (!parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10) && $Target.hasClass('OTRSBusinessRequired')) {
                     return true;
                 }
 
@@ -709,11 +711,6 @@ Core.Agent = (function (TargetNS) {
         // Initialize pagination
         TargetNS.InitPagination();
 
-        // Initialize OTRSBusinessRequired dialog
-        if (!parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10)) {
-            InitOTRSBusinessRequiredDialog();
-        }
-
         // Initialize ticket in new window
         if (parseInt(Core.Config.Get('NewTicketInNewWindow'), 10)) {
             InitTicketInNewWindow();
@@ -814,49 +811,6 @@ Core.Agent = (function (TargetNS) {
             });
         }
     }
-
-    /**
-     * @private
-     * @name InitOTRSBusinessRequiredDialog
-     * @memberof Core.Agent
-     * @function
-     * @description
-     *      Initialize OTRSBusiness upgrade dialog on all clicks coming from anchor with OTRSBusinessRequired class.
-     */
-    function InitOTRSBusinessRequiredDialog () {
-        $('body').on('click', 'a.OTRSBusinessRequired', function() {
-            TargetNS.ShowOTRSBusinessRequiredDialog();
-            return false;
-        });
-    }
-
-    /**
-     * @name ShowOTRSBusinessRequiredDialog
-     * @memberof Core.Agent
-     * @function
-     * @description
-     *      This function shows OTRSBusiness upgrade dialog.
-     */
-    TargetNS.ShowOTRSBusinessRequiredDialog = function() {
-        var OTRSBusinessLabel = '<strong>OTRS Business Solution</strong>™';
-
-        Core.UI.Dialog.ShowContentDialog(
-            '<div class="OTRSBusinessRequiredDialog">' + Core.Language.Translate('This feature is part of the %s. Please contact us at %s for an upgrade.', OTRSBusinessLabel, 'sales@otrs.com') + '<a class="Hidden" href="http://www.otrs.com/solutions/" target="_blank"><span></span></a></div>',
-            '',
-            '240px',
-            'Center',
-            true,
-            [
-                {
-                    Label: Core.Language.Translate('Find out more'),
-                    Class: 'Primary',
-                    Function: function () {
-                        $('.OTRSBusinessRequiredDialog').find('a span').trigger('click');
-                    }
-                }
-            ]
-        );
-    };
 
     /**
      * @private

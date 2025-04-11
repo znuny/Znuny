@@ -8,42 +8,40 @@
 # --
 
 <div>
-	<div id="DialogDeployment" class="InnerContent">
-	    <form class="Validate">
+    <div id="DialogDeployment" class="InnerContent">
+        <form class="Validate">
             <textarea id="DeploymentComment" class="DialogComment Validate_MaxLength" data-maxlength="250" placeholder="{{ "Deployment comment..." | Translate }}"></textarea>
             <div id="DeploymentCommentError" class="TooltipErrorMessage"><p>{{ "This field can have no more than 250 characters." | Translate }}</p></div>
             <div id="DeploymentCommentServerError" class="TooltipErrorMessage"><p>{{ "This field can have no more than 250 characters." | Translate }}</p></div>
         </form>
 
-		<div class="Overlay Deploying">
-			<span>
-				<i class="Active fa fa-spinner fa-spin"></i>
-				<i class="Success fa fa-check"></i>
-				<i class="Error fa fa-times"></i>
-			</span>
-			<em>{{ "Deploying, please wait..." | Translate }}</em>
-		</div>
+        <div class="Overlay Deploying">
+            <span>
+                <i class="Active fa fa-spinner fa-spin"></i>
+                <i class="Success fa fa-check"></i>
+                <i class="Error fa fa-times"></i>
+            </span>
+            <em>{{ "Deploying, please wait..." | Translate }}</em>
+        </div>
 
-		<div class="Overlay Preparing">
-			<span>
-				<i class="Active fa fa-spinner fa-spin"></i>
-				<i class="Error fa fa-times"></i>
-			</span>
-			<em>{{ "Preparing to deploy, please wait..." | Translate }}</em>
-		</div>
-
-	</div>
-	<div class="ContentFooter Center">
-		<div class="ButtonsRegular">
-	    	<button id="Deploy" class="Primary CallForAction" value="{{ "Deploy now" | Translate }}"><span>{{ "Deploy now" | Translate }}</span></button>
-	    	&nbsp;{{ "or" | Translate }}&nbsp;
-	    	<button class="CallForAction CloseDialog" value="{{ "Deploy now" | Translate }}"><span>{{ "Cancel" | Translate }}</span></button>
-    	</div>
-    	<div class="ButtonsFinish">
-	    	<button class="CallForAction CloseDialog" value="{{ "Close this dialog" | Translate }}"><span>{{ "Close this dialog" | Translate }}</span></button>
-    	</div>
-    	<div class="ButtonsTryAgain">
-	    	<button class="CallForAction" value="{{ "Try again" | Translate }}"><span>{{ "Try again" | Translate }}</span></button>
-    	</div>
-	</div>
+        <div class="Overlay Preparing">
+            <span>
+                <i class="Active fa fa-spinner fa-spin"></i>
+                <i class="Error fa fa-times"></i>
+            </span>
+            <em>{{ "Preparing to deploy, please wait..." | Translate }}</em>
+        </div>
+    </div>
+    <div class="ContentFooter SaveButtons">
+        <div class="ButtonsRegular">
+            <button class="CloseDialog btn-cancel-ghost btn-main btn-width-md" value="{{ "Deploy now" | Translate }}"><span>{{ "Cancel" | Translate }}</span></button>
+            <button id="Deploy" class="CallForAction btn-primary btn-main btn-width-md" value="{{ "Deploy now" | Translate }}"><span>{{ "Deploy now" | Translate }}</span></button>
+        </div>
+        <div class="ButtonsFinish">
+            <button class="CloseDialog btn-cancel-ghost btn-main btn-width-md" value="{{ "Close this dialog" | Translate }}"><span>{{ "Close this dialog" | Translate }}</span></button>
+        </div>
+        <div class="ButtonsTryAgain">
+            <button class="btn-primary btn-main btn-width-md" value="{{ "Try again" | Translate }}"><span>{{ "Try again" | Translate }}</span></button>
+        </div>
+    </div>
 </div>

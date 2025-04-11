@@ -66,8 +66,8 @@ Uses caching internally.
             $Filename,
             $Filename2,
         ],
-        Checksum             => '...'       # optional, pass a checksum for the minified file
-        Content              => '...'       # optional, pass direct (already minified) content instead of a file list
+        Checksum             => '...',      # optional, pass a checksum for the minified file
+        Content              => '...',      # optional, pass direct (already minified) content instead of a file list
         Type                 => 'CSS',      # CSS | JavaScript
         TargetDirectory      => $TargetDirectory,
         TargetFilenamePrefix => 'CommonCSS',    # optional, prefix for the target filename

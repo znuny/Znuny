@@ -6,25 +6,23 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::TT::Breadcrumb)
 
 <div class="LayoutPopup ARIARoleMain">
     <div class="Header">
         <h1>
              [% Translate("Print process information") | html %]
         </h1>
-        <p>
-            <a class="ProcessPrint" href="#">[% Translate("Print") | html %]</a>
-            [% Translate("or") | html %]
-            <a class="CancelClosePopup" href="#">[% Translate("cancel & close") | html %]</a>
-        </p>
+        <div class="SaveButtons">
+            <a class="ProcessPrint btn-main btn-primary btn-width-md" href="#">[% Translate("Print") | html %]</a>
+            <a class="CancelClosePopup btn-main btn-cancel-ghost btn-width-md" href="#">[% Translate("Cancel") | html %]</a>
+        </div>
     </div>
     <div class="Content">
-
         <div class="PrintContainer">
-
-        [% RenderBlockStart("Logo") %]
+[% RenderBlockStart("Logo") %]
             <img src="[% Data.LogoURL | html %]" class="Logo" />
-        [% RenderBlockEnd("Logo") %]
+[% RenderBlockEnd("Logo") %]
             <h1>[% Data.Name | html %]</h1>
             <h2>
                 [% Translate("State") | html %]: [% Data.State | html %]<br />
@@ -33,145 +31,145 @@
             </h2>
 
             <ul id="Path">
-        [% RenderBlockStart("PathItem") %]
+[% RenderBlockStart("PathItem") %]
                 <li><span>[% Data.ActivityStart | html %]</span> <strong><em>[% Data.Transition | html %] [% Data.TransitionActions | html %]</em><span></span></strong> <span>[% Data.ActivityEnd | html %]</span></li>
-        [% RenderBlockEnd("PathItem") %]
+[% RenderBlockEnd("PathItem") %]
             </ul>
 
             <h3>[% Translate("Activities") | html %]</h3>
             <ul class="ItemData">
-        [% RenderBlockStart("ActivityRow") %]
+[% RenderBlockStart("ActivityRow") %]
                 <li>
                     <h4>
                         [% Data.Name | html %] ([% Data.EntityID | html %])
                         <span>[% Translate("Contains %s dialog(s)", Data.DialogCount) | html %]</span>
                     </h4>
-        [% RenderBlockStart("AssignedDialogs") %]
+[% RenderBlockStart("AssignedDialogs") %]
                     <strong>[% Translate("Assigned dialogs") | html %]:</strong>
                     <ol>
-        [% RenderBlockStart("AssignedDialogsRow") %]
+[% RenderBlockStart("AssignedDialogsRow") %]
                         <li>[% Data.Name | html %] ([% Data.EntityID | html %])</li>
-        [% RenderBlockEnd("AssignedDialogsRow") %]
+[% RenderBlockEnd("AssignedDialogsRow") %]
                     </ol>
-        [% RenderBlockEnd("AssignedDialogs") %]
+[% RenderBlockEnd("AssignedDialogs") %]
                 </li>
-        [% RenderBlockEnd("ActivityRow") %]
-        [% RenderBlockStart("ActivityRowEmpty") %]
+[% RenderBlockEnd("ActivityRow") %]
+[% RenderBlockStart("ActivityRowEmpty") %]
                 <li>
                     [% Translate("Activities are not being used in this process.") | html %]
                 </li>
-        [% RenderBlockEnd("ActivityRowEmpty") %]
+[% RenderBlockEnd("ActivityRowEmpty") %]
             </ul>
 
             <h3>[% Translate("Activity Dialogs") | html %]</h3>
             <ul class="ItemData">
-        [% RenderBlockStart("ActivityDialogRow") %]
+[% RenderBlockStart("ActivityDialogRow") %]
                 <li>
                     <h4>
                         [% Data.Name | html %] ([% Data.EntityID | html %])
                         <span>[% Translate("Available in") | html %] [% Data.ShownIn | html %]</span>
                     </h4>
                     <ul class="Attributes">
-        [% RenderBlockStart("ElementAttribute") %]
+[% RenderBlockStart("ElementAttribute") %]
                         <li><strong>[% Data.Key | html %]</strong>: [% Data.Value | html %]</li>
-        [% RenderBlockEnd("ElementAttribute") %]
+[% RenderBlockEnd("ElementAttribute") %]
                     </ul>
-        [% RenderBlockStart("AssignedFields") %]
+[% RenderBlockStart("AssignedFields") %]
                     <strong>[% Translate("Assigned fields") | html %]:</strong>
                     <ol>
-        [% RenderBlockStart("AssignedFieldsRow") %]
+[% RenderBlockStart("AssignedFieldsRow") %]
                         <li>
                             [% Data.Name | html %]
-        [% RenderBlockStart("AssignedFieldsRowValue") %]
+[% RenderBlockStart("AssignedFieldsRowValue") %]
                             <p><strong>[% Data.Key | html %]</strong>: [% Data.Value | html %]</p>
-        [% RenderBlockEnd("AssignedFieldsRowValue") %]
+[% RenderBlockEnd("AssignedFieldsRowValue") %]
                         </li>
-        [% RenderBlockEnd("AssignedFieldsRow") %]
+[% RenderBlockEnd("AssignedFieldsRow") %]
                     </ol>
-        [% RenderBlockEnd("AssignedFields") %]
+[% RenderBlockEnd("AssignedFields") %]
                 </li>
-        [% RenderBlockEnd("ActivityDialogRow") %]
-        [% RenderBlockStart("ActivityDialogRowEmpty") %]
+[% RenderBlockEnd("ActivityDialogRow") %]
+[% RenderBlockStart("ActivityDialogRowEmpty") %]
                 <li>
                     [% Translate("Activity dialogs are not being used in this process.") | html %]
                 </li>
-        [% RenderBlockEnd("ActivityDialogRowEmpty") %]
+[% RenderBlockEnd("ActivityDialogRowEmpty") %]
             </ul>
 
             <h3>[% Translate("Transitions") | html %]</h3>
             <ul class="ItemData">
-        [% RenderBlockStart("TransitionRow") %]
+[% RenderBlockStart("TransitionRow") %]
                 <li>
                     <h4>
                         [% Data.Name | html %] ([% Data.EntityID | html %])
                         <span>[% Translate("Condition linking") | html %]: [% Data.ConditionLinking | html %]</span>
                     </h4>
-        [% RenderBlockStart("Condition") %]
+[% RenderBlockStart("Condition") %]
                     <strong>[% Translate("Conditions") | html %]:</strong>
                     <ol>
-        [% RenderBlockStart("ConditionRow") %]
+[% RenderBlockStart("ConditionRow") %]
                         <li>
                             [% Translate("Condition") | html %]
-        [% RenderBlockStart("ConditionRowValue") %]
+[% RenderBlockStart("ConditionRowValue") %]
                             <p><strong>[% Data.Key | html %]</strong>: [% Data.Value | html %]</p>
-        [% RenderBlockEnd("ConditionRowValue") %]
-        [% RenderBlockStart("ConditionRowSub") %]
+[% RenderBlockEnd("ConditionRowValue") %]
+[% RenderBlockStart("ConditionRowSub") %]
                             <ul>
                                 <li>
                                     <h5>[% Data.NameSub | html %]:</h5>
-        [% RenderBlockStart("ConditionRowSubValue") %]
+[% RenderBlockStart("ConditionRowSubValue") %]
                                     <p class="sub"><strong>[% Data.Key | html %]</strong>: [% Data.Value | html %]</p>
-        [% RenderBlockEnd("ConditionRowSubValue") %]
-        [% RenderBlockStart("ConditionRowSubSub") %]
+[% RenderBlockEnd("ConditionRowSubValue") %]
+[% RenderBlockStart("ConditionRowSubSub") %]
                                     <ul>
                                         <li>
                                             <h6>[% Data.NameSubSub | html %]</h6>
                                         </li>
-        [% RenderBlockStart("ConditionRowSubSubValue") %]
+[% RenderBlockStart("ConditionRowSubSubValue") %]
                                         <li><strong>[% Data.Key | html %]</strong>: [% Data.Value | html %]</li>
-        [% RenderBlockEnd("ConditionRowSubSubValue") %]
+[% RenderBlockEnd("ConditionRowSubSubValue") %]
                                     </ul>
-        [% RenderBlockEnd("ConditionRowSubSub") %]
+[% RenderBlockEnd("ConditionRowSubSub") %]
                                 </li>
                             </ul>
-        [% RenderBlockEnd("ConditionRowSub") %]
+[% RenderBlockEnd("ConditionRowSub") %]
                         </li>
-        [% RenderBlockEnd("ConditionRow") %]
+[% RenderBlockEnd("ConditionRow") %]
                     </ol>
-        [% RenderBlockEnd("Condition") %]
+[% RenderBlockEnd("Condition") %]
 
                 </li>
-        [% RenderBlockEnd("TransitionRow") %]
-        [% RenderBlockStart("TransitionRowEmpty") %]
+[% RenderBlockEnd("TransitionRow") %]
+[% RenderBlockStart("TransitionRowEmpty") %]
                 <li>
                     [% Translate("Transitions are not being used in this process.") | html %]
                 </li>
-        [% RenderBlockEnd("TransitionRowEmpty") %]
+[% RenderBlockEnd("TransitionRowEmpty") %]
             </ul>
 
             <h3>[% Translate("Transition Actions") | html %]</h3>
             <ul class="ItemData">
-        [% RenderBlockStart("TransitionActionRow") %]
+[% RenderBlockStart("TransitionActionRow") %]
                 <li>
                     <h4>
                         [% Data.Name | html %] ([% Data.EntityID | html %])
                         <span>[% Translate("Module name") | html %]: [% Data.Module | html %]</span>
                     </h4>
-        [% RenderBlockStart("Config") %]
+[% RenderBlockStart("Config") %]
                     <strong>[% Translate("Configuration") | html %]:</strong>
                     <ol>
-        [% RenderBlockStart("ConfigRow") %]
+[% RenderBlockStart("ConfigRow") %]
                         <li>[% Data.Name | html %]: [% Data.Value | html %]</li>
-        [% RenderBlockEnd("ConfigRow") %]
+[% RenderBlockEnd("ConfigRow") %]
                     </ol>
-        [% RenderBlockEnd("Config") %]
+[% RenderBlockEnd("Config") %]
                 </li>
-        [% RenderBlockEnd("TransitionActionRow") %]
-        [% RenderBlockStart("TransitionActionRowEmpty") %]
+[% RenderBlockEnd("TransitionActionRow") %]
+[% RenderBlockStart("TransitionActionRowEmpty") %]
                 <li>
                     [% Translate("Transition actions are not being used in this process.") | html %]
                 </li>
-        [% RenderBlockEnd("TransitionActionRowEmpty") %]
+[% RenderBlockEnd("TransitionActionRowEmpty") %]
             </ul>
 
         </div>

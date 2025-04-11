@@ -42,11 +42,11 @@ Core.Agent.TicketHistory = (function (TargetNS) {
 
         $('#ExpandCollapseAll').off('click').on('click', function() {
             if ($(this).hasClass('Collapsed')) {
-                $('.WidgetSimple:not(.HistoryActions)').removeClass('Collapsed').addClass('Expanded');
+                $('.WidgetSimple:not(.inline-filter-field)').removeClass('Collapsed').addClass('Expanded');
                 $(this).removeClass('Collapsed');
             }
             else {
-                $('.WidgetSimple:not(.HistoryActions)').removeClass('Expanded').addClass('Collapsed');
+                $('.WidgetSimple:not(.inline-filter-field)').removeClass('Expanded').addClass('Collapsed');
                 $(this).addClass('Collapsed');
             }
             return false;

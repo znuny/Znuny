@@ -7,7 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<h1>[% Translate("OTRS Test Page") | html %]</h1>
+<h1>[% Translate("Znuny Test Page") | html %]</h1>
 <hr/>
 # translation test
 <b>translation test</b><br/>

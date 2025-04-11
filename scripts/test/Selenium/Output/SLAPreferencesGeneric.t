@@ -19,8 +19,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $SLAObject    = $Kernel::OM->Get('Kernel::System::SLA');
 
         # activate Service
         $HelperObject->ConfigSettingChange(
@@ -62,7 +64,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # go to SLA admin
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSLA");
@@ -129,7 +131,7 @@ $Selenium->RunTest(
         );
 
         # delete test SLA
-        my $SLAID = $Kernel::OM->Get('Kernel::System::SLA')->SLALookup(
+        my $SLAID = $SLAObject->SLALookup(
             Name => $RandomSLAName,
         );
 
@@ -157,7 +159,7 @@ $Selenium->RunTest(
             qw (SLAPreferencesDB SysConfig)
             )
         {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

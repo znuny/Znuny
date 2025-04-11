@@ -14,7 +14,6 @@ use warnings;
 use utf8;
 
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
     'Kernel::System::CommunicationChannel',
@@ -84,17 +83,12 @@ sub GetConfig {
         ChannelID => $Article{CommunicationChannelID},
     );
 
-    my $OTRSBusiness = $CommunicationChannel{PackageName} eq 'OTRSBusiness';
-
-    # Output either a link for OTRSBusiness or Package Manager screen.
     my %MenuItem = (
         ItemType    => 'Link',
-        Description => $OTRSBusiness
-        ? Translatable('Upgrade to OTRS Business Solution™')
-        : Translatable('Re-install Package'),
-        Name  => $OTRSBusiness ? Translatable('Upgrade')    : Translatable('Re-install'),
-        Link  => $OTRSBusiness ? 'Action=AdminOTRSBusiness' : 'Action=AdminPackageManager',
-        Class => $OTRSBusiness ? 'OTRSBusinessRequired'     : undef,
+        Description => Translatable('Re-install Package'),
+        Name        => Translatable('Re-install'),
+        Link        => 'Action=AdminPackageManager',
+        Class       => undef,
     );
 
     return ( \%MenuItem );

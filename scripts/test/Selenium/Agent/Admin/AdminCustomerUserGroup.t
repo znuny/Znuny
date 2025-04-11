@@ -18,7 +18,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
+        my $GroupObject        = $Kernel::OM->Get('Kernel::System::Group');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Disable check email address.
         $HelperObject->ConfigSettingChange(
@@ -46,7 +51,7 @@ $Selenium->RunTest(
 
         # Create new CustomerUser for the tests.
         my $UserRandomID   = "user" . $HelperObject->GetRandomID();
-        my $CustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUserID = $CustomerUserObject->CustomerUserAdd(
             UserFirstname  => $UserRandomID,
             UserLastname   => $UserRandomID,
             UserCustomerID => $UserRandomID,
@@ -62,7 +67,7 @@ $Selenium->RunTest(
 
         # Create new Group for the tests.
         my $GroupRandomID = "group" . $HelperObject->GetRandomID();
-        my $GroupID       = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
+        my $GroupID       = $GroupObject->GroupAdd(
             Name    => $GroupRandomID,
             ValidID => 1,
             UserID  => 1,
@@ -71,8 +76,6 @@ $Selenium->RunTest(
             $GroupID,
             "GroupAdd - $GroupID",
         );
-
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
@@ -106,7 +109,7 @@ $Selenium->RunTest(
         # Test CustomerUser filter.
         $Selenium->find_element( "#CustomerUserSearch", 'css' )->clear();
         $Selenium->find_element( "#CustomerUserSearch", 'css' )->send_keys($UserRandomID);
-        $Selenium->find_element("//button[\@value='Search'][\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#CustomerUserSearch", 'css' )->VerifiedSubmit();
 
         # Check for created test CustomerUser and Group on screen.
         $Self->True(
@@ -120,7 +123,7 @@ $Selenium->RunTest(
 
         # Clear CustomerUser filter.
         $Selenium->find_element( "#CustomerUserSearch", 'css' )->clear();
-        $Selenium->find_element("//button[\@value='Search'][\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#CustomerUserSearch", 'css' )->VerifiedSubmit();
 
         # Test Filter for Groups.
         $Selenium->find_element( "#FilterGroups", 'css' )->send_keys($GroupRandomID);
@@ -137,25 +140,21 @@ $Selenium->RunTest(
         $Selenium->find_element( $GroupRandomID, 'link_text' )->VerifiedClick();
 
         # Check breadcrumb on change screen.
-        my $Count = 1;
         my $IsLinkedBreadcrumbText;
         for my $BreadcrumbText (
             'Manage Customer User-Group Relations',
-            'Change Customer User Relations for Group \'' . $GroupRandomID . '\''
+            "Change Customer User Relations for Group '" . $GroupRandomID . "'"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$(\$('.BreadCrumb li')[$Count]).text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => '.BreadCrumb>li>[title="' . $BreadcrumbText . '"]',
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         $Selenium->find_element( "#CustomerUserSearch", 'css' )->clear();
         $Selenium->find_element( "#CustomerUserSearch", 'css' )->send_keys($UserRandomID);
-        $Selenium->find_element("//button[\@value='Search'][\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#CustomerUserSearch", 'css' )->VerifiedSubmit();
 
         $Selenium->find_element("//input[\@value='$UserRandomID'][\@name='rw']")->click();
         $Selenium->find_element("//button[\@value='Save'][\@type='submit']")->VerifiedClick();
@@ -196,8 +195,6 @@ $Selenium->RunTest(
 
         $Selenium->find_element("//button[\@value='Save'][\@type='submit']")->VerifiedClick();
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         # Since there are no tickets that rely on our test CustomerUserGroup we can remove
         # it from DB, delete test CustomerUser and test Group.
         if ($UserRandomID) {
@@ -220,8 +217,6 @@ $Selenium->RunTest(
                 "Deleted Group - $GroupRandomID",
             );
         }
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure cache is correct.
         for my $Cache (qw(Group User DBGroupUserGet)) {

@@ -1,0 +1,2060 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     Components
+    Components List:
+    - Badge
+    - Icons
+    - Card
+    - Pill
+    - Scrollbar
+    - Placeholer
+    - Date Picker UI
+    - Mentions
+    - Buttons
+        - Voting / Rate
+        - CallForAction
+        - AddButton, RemoveButton, ValueAdd, ValueRemove...
+        - Table Actions Button (text)
+        - Widget Header Text Buttons (DashboardActions)
+    - Message/Info box
+    - Attachment Blocker
+    - Table List (Sidebar and MainContent)
+    - Code Display Container
+    - Row of Columns (Widget Content Display)
+    - Input Fields
+        - Settings Tree
+        - Single Row Inputs
+        - Inline Filter Field
+*/
+
+@media screen,
+projection,
+tv,
+handheld {
+
+    /* **************************************** Badge **************************************** */
+    .badge {
+        padding: 0 8px;
+        background: var(--primary-color-rgb);
+        color: var(--black);
+        font-size: var(--font-size-sm);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .badge:empty {
+        display: none;
+    }
+
+    .badge.margin-left_sm {
+        margin-left: var(--margin-sm);
+    }
+
+    body a .fa.fa-caret-right {
+        display: none !important;
+    }
+
+
+    /* **************************************** Icons **************************************** */
+    .icon-hover,
+    .icon-hover-md,
+    .icon-hover-sm {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        justify-content: center;
+        width: var(--icon-hover-size);
+        height: var(--icon-hover-size);
+        min-height: 0 !important;
+        border-radius: var(--border-radius-xs);
+        transition: var(--main-transition);
+    }
+
+    .Field .icon-hover,
+    .Field .icon-hover-md,
+    .Field .icon-hover-sm {
+        align-self: inherit;
+    }
+
+    label .icon-hover,
+    button .icon-hover {
+        margin: 0;
+        position: relative;
+        left: 2px;
+        transition: var(--main-transition);
+    }
+
+    label .icon-hover i,
+    button .icon-hover i {
+        color: var(--gray-dark-semi);
+        font-size: var(--font-size-md);
+    }
+
+    .icon-hover-md {
+        width: var(--icon-hover-md-size);
+        height: var(--icon-hover-md-size);
+    }
+
+    .icon-hover-sm {
+        width: var(--icon-hover-sm-size);
+        height: var(--icon-hover-sm-size);
+        border-radius: var(--border-radius-xxs);
+        min-width: var(--icon-hover-sm-size);
+        min-height: var(--icon-hover-sm-size);
+    }
+
+    .icon-hover i,
+    .icon-hover-md i,
+    .icon-hover-sm i {
+        font-weight: var(--normal);
+        font-size: var(--font-size-md);
+        color: var(--gray-dark-semi);
+    }
+
+    .icon-hover:hover,
+    .icon-hover-md:hover,
+    .icon-hover-sm:hover {
+        cursor: pointer;
+        background-color: var(--icon-hover-color-light);
+    }
+
+    /* color exception for icons placed in lists */
+    ul:not(#HeaderToolBar)>li .icon-hover:hover,
+    ul:not(#HeaderToolBar)>li .icon-hover-sm:hover,
+    ul:not(#HeaderToolBar)>li .icon-hover-md:hover,
+    .RemoveFromFavourites.icon-hover:hover {
+        background-color: var(--primary-color);
+    }
+
+    ul>li .icon-hover:hover i,
+    ul>li .icon-hover-sm:hover i,
+    ul>li .icon-hover-md:hover i,
+    .RemoveFromFavourites.icon-hover:hover i {
+        color: var(--white);
+    }
+
+
+    /* **************************************** Cards **************************************** */
+    div.card,
+    span.card,
+    form.card,
+    fieldset.card,
+    .Field.card,
+    .card,
+    div.card-item,
+    span.card-item,
+    form.card-item,
+    fieldset.card-item,
+    .Field.card-item,
+    #ActivityDialogContent .Field.card,
+    .card-item {
+        gap: var(--gap-md);
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        position: relative;
+        z-index: 1;
+        background: var(--white);
+        padding: var(--padding-lg);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .card .Field.SaveButtons {
+        padding: 0 var(--padding-lg);
+    }
+
+    #ActivityDialogContent .TableLike {
+        border-radius: 0;
+    }
+
+    div.card-item,
+    span.card-item,
+    form.card-item,
+    fieldset.card-item,
+    .card-item {
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-xs);
+        background: var(--main-bg-color);
+        /* needed so its ::after element does not cause horizontal overflow in parent containers */
+        overflow: hidden;
+    }
+
+    .card-item-wrapper .card-item {
+        gap: var(--gap-md);
+    }
+
+    .card-title {
+        /*font-family: Poppins;*/
+        color: var(--black);
+        padding-bottom: var(--padding-xs);
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .card-title,
+    h2.card-title {
+        font-size: var(--font-size-md);
+        font-weight: var(--semi-bold);
+        letter-spacing: .1px;
+        line-height: 36px;
+    }
+
+    .card-item label {
+        display: flex;
+        align-items: center;
+        gap: var(--padding-xs);
+        line-height: normal;
+    }
+
+    div.card-item>.Row {
+        align-items: flex-start;
+    }
+
+    @media only screen and (max-width: 1599px) {
+
+        div.card-item::after {
+            content: '';
+            width: calc(100% + 200px);
+            height: 1px;
+            position: absolute;
+            left: -100px;
+            bottom: 0;
+            background: var(--border-color);
+        }
+
+        .manageLinks div.card-item::after {
+            width: 0;
+            left: 0;
+        }
+    }
+
+
+    @media (min-width: 1025px) and (max-width: 1599px) {
+
+        div.card-item,
+        div.card-item>.Row {
+            background: none;
+            border: 0;
+        }
+
+        div.card-item>.Row.col-desktop-50 {
+            width: calc(50% - 10px);
+        }
+
+        div.card-item {
+            /*padding: var(--padding-lg) var(--padding-sm); - lateral padding was cutting ajax loader icons in half*/
+            padding: var(--padding-lg);
+        }
+
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+
+        div.card-item,
+        div.card-item>.Row {
+            background: none;
+            border: 0;
+            width: 100%;
+        }
+
+    }
+
+
+
+    /* **************************************** Pill **************************************** */
+    .pill {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--white) !important;
+        font-size: var(--font-size-sm);
+        font-weight: var(--normal);
+        padding: 6px var(--padding-md);
+        border: 0;
+        float: left;
+        border-radius: var(--border-radius-xl);
+    }
+
+
+    /* **************************************** Scrollbar **************************************** */
+    ::-webkit-scrollbar,
+    body::-webkit-scrollbar,
+    body *::-webkit-scrollbar,
+    div.InputField_TreeContainer::-webkit-scrollbar,
+    .AllocationList::-webkit-scrollbar,
+    textarea::-webkit-scrollbar,
+    .scroll-bar-styled::-webkit-scrollbar {
+        /* affect only vertical scrollbar */
+        width: 12px;
+        /* affect only horizontal scrollbar */
+        height: 12px;
+        border-left: var(--border-width) var(--border-solid) var(--border-color);
+        box-sizing: border-box;
+
+        scrollbar-width: 12px;
+        -moz-border-left: var(--border-width) var(--border-solid) var(--border-color);
+        -moz-box-sizing: border-box;
+
+        overflow: hidden;
+    }
+
+    textarea::-webkit-scrollbar {
+        border: 0;
+    }
+
+    .bar-no-left-border::-webkit-scrollbar,
+    ::-webkit-scrollbar:horizontal {
+        border-left: 0;
+        -moz-border-left: 0;
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+        -moz-border-top: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    body::-webkit-scrollbar-track,
+    div.InputField_TreeContainer::-webkit-scrollbar-track,
+    .AllocationList::-webkit-scrollbar-track,
+    textarea::-webkit-scrollbar-track .scroll-bar-styled::-webkit-scrollbar-track {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    body::-webkit-scrollbar-thumb,
+    div.InputField_TreeContainer::-webkit-scrollbar-thumb,
+    .AllocationList::-webkit-scrollbar-thumb,
+    textarea::-webkit-scrollbar-thumb,
+    .scroll-bar-styled::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--color-scroll-bar);
+        outline: none;
+        border-radius: 20px;
+
+        scrollbar-color: var(--color-scroll-bar);
+        -moz-outline: none;
+        -moz-border-radius: 20px;
+
+        border: 2px solid transparent;
+        background-clip: content-box;
+
+        -moz-border: 2px solid transparent;
+        -moz-background-clip: content-box;
+    }
+
+
+    /* **************************************** Placeholder **************************************** */
+    ::placeholder,
+    ::-webkit-input-placeholder,
+    :-ms-input-placeholder,
+    ::-ms-input-placeholder {
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        color: var(--gray-dark-semi);
+    }
+
+
+    /* **************************************** Date Picker UI **************************************** */
+    .ui-datepicker-title {
+        font-size: var(--font-size-md);
+        font-weight: var(--medium);
+        color: var(--black);
+    }
+
+    .ui-datepicker-calendar thead {
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        color: var(--gray-dark-semi);
+        letter-spacing: .86px;
+    }
+
+    .ui-datepicker .ui-datepicker-calendar th {
+        width: 45px;
+        font-weight: var(--normal);
+    }
+
+    .ui-datepicker td {
+        padding: 0;
+    }
+
+    .ui-datepicker.ui-widget-content td a.ui-state-default {
+        font-size: var(--font-size-sm);
+    }
+
+    /*.ui-datepicker td a,
+    .ui-datepicker td span {
+        background: none !important;
+        border: 0;
+        border-radius: var(--border-radius-sm);
+        color: var(--black);
+        font-weight: var(--normal);
+        font-size: 14px;
+        line-height: 32px;
+        text-align: center;
+    }*/
+
+    .ui-datepicker td a:hover,
+    .ui-datepicker td span:hover,
+    .ui-state-hover,
+    .ui-state-hover.ui-datepicker-prev-hover,
+    .ui-state-hover.ui-datepicker-next-hover {
+        left: unset !important;
+        top: 0 !important;
+        border: none !important;
+        color: var(--gray-dark-semi) !important;
+        background: var(--gray-light-semi) !important;
+        cursor: pointer;
+    }
+
+    .ui-corner-all.ui-datepicker-prev,
+    .ui-corner-all.ui-datepicker-next {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--font-size-lg);
+        width: 32px !important;
+        height: 32px !important;
+        left: unset !important;
+        top: 0 !important;
+        background: none;
+        color: var(--gray-dark-semi);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        padding: 8px;
+        border-radius: 8px !important;
+    }
+
+    .ui-corner-all.ui-datepicker-next,
+    .ui-state-hover.ui-datepicker-next-hover {
+        right: 0 !important;
+    }
+
+    .ui-datepicker-days-cell-over,
+    .ui-datepicker td.ui-datepicker-days-cell-over a,
+    .ui-datepicker td a:active {
+        color: var(--white) !important;
+        background: var(--primary-color) !important;
+        border-radius: var(--border-radius-sm);
+    }
+
+
+    /* **************************************** Mentions **************************************** */
+    .mentions-widget ul {
+        display: flex;
+        flex-direction: column;
+        gap: var(--padding-md);
+    }
+
+    .mentions-widget ul li {
+        display: flex;
+        justify-content: space-between;
+        word-wrap: break-word;
+    }
+
+    /* .mentions-widget ul li:hover {
+        background: var(--main-font-color);
+        transition: var(--main-transition);
+    } */
+
+    .mentions-widget ul li .email-wrapper {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: var(--gap-xs);
+    }
+
+    .mentions-widget ul li .email-wrapper span:nth-child(2) {
+        color: var(--gray-dark-semi);
+    }
+
+    /* **************************************** Buttons **************************************** */
+    /* note - previously in Core.Widget */
+
+    /* --- Voting / Rate --- */
+    .voting .ArticleContent {
+        padding: var(--padding-md);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--gap-md);
+    }
+
+    .voting .ArticleContent .voting-form {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+        align-items: center;
+        overflow: unset;
+    }
+
+    .voting .ArticleContent .voting-form .RateButtons {
+        display: flex;
+        flex-direction: row;
+        gap: var(--gap-md);
+    }
+
+    .voting .ArticleContent .voting-form .RateButtons>li {
+        display: flex;
+        align-items: center;
+    }
+
+    .voting .ArticleContent .voting-form .RateButtons>li:first-child,
+    .voting .ArticleContent .voting-form .RateButtons>li:last-child {
+        color: var(--gray-dark-semi);
+    }
+
+    .Visible-ScreenS .RateButtons>li {
+        display: flex;
+    }
+
+    .Visible-ScreenS .RateButtons>li span {}
+
+    .voting .ArticleContent .voting-form .RateButton {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-xs);
+        position: relative;
+        cursor: pointer;
+        color: var(--black);
+        text-align: center;
+    }
+
+    .voting .ArticleContent .voting-form .RateButton i {
+        display: flex;
+        font-size: 16px;
+        width: 100%;
+        color: var(--gray-dark-semi);
+    }
+
+    .voting .ArticleContent .voting-form .RateButton i.fa-star {
+        display: none;
+    }
+
+    .voting .ArticleContent .voting-form .RateButton.RateChecked i.fa-star {
+        display: flex;
+        color: var(--primary-color);
+    }
+
+    .voting .ArticleContent .voting-form .RateButton.RateChecked i.fa-star-o {
+        display: none;
+    }
+
+    .voting .ArticleContent .voting-form .RateButton:hover i.fa-star-o {
+        color: var(--black);
+    }
+
+    .voting .ArticleContent .voting-form .RateStar {
+        display: flex;
+        padding-left: 1px;
+        font-size: 10px;
+    }
+
+    .voting .ArticleContent .voting-form .RateStarText {
+        text-indent: 5px;
+    }
+
+    .voting .ArticleContent .voting-form .RateLabelBefore,
+    .voting .ArticleContent .voting-form .RateLabelAfter {
+        color: var(--gray-dark-semi);
+        padding-top: 5px;
+        font-weight: bold;
+    }
+
+    .voting .ArticleContent .voting-form .RateLabelBefore {
+        padding-right: 6px;
+    }
+
+    .voting .ArticleContent .voting-form .RateLabelAfter {
+        padding-left: 5px;
+    }
+
+    /* --- CallForAction --- */
+    .CallForAction.Disabled {
+        opacity: 0.6;
+    }
+
+    .CallForAction.Disabled,
+    .CallForAction.Disabled.icon-hover,
+    .CallForAction.Disabled span {
+        cursor: no-drop;
+    }
+
+    /* --- AddButton, RemoveButton, ValueAdd, ValueRemove --- */
+    .ValueRemove,
+    .AddValue,
+    .AddButton,
+    .RemoveButton {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        justify-content: center;
+        width: var(--icon-hover-size);
+        height: var(--icon-hover-size);
+        border-radius: var(--border-radius-xs);
+        transition: var(--main-transition);
+    }
+
+    .ValueRemove:not(.btn-main):hover,
+    .AddValue:not(.btn-main):hover,
+    .AddButton:not(.btn-main):hover,
+    .RemoveButton:not(.btn-main):hover {
+        cursor: pointer;
+        background-color: var(--icon-hover-color-light);
+    }
+
+    .ValueRemove i,
+    .AddValue i,
+    .AddButton i,
+    .RemoveButton i {
+        font-weight: var(--normal);
+        font-size: var(--font-size-md);
+        color: var(--gray-dark-semi);
+        width: 14px;
+        height: 14px;
+    }
+
+    .AddButton:not(.btn-main),
+    .RemoveButton:not(.btn-main) {
+        color: var(--black);
+        font-size: var(--main-font-size);
+        vertical-align: middle;
+        align-self: auto;
+    }
+
+
+    /* --- Table Actions Button --- */
+    table .table-actions-button {
+        display: inline-block;
+        color: var(--primary-color);
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        /*font-family: Inter;*/
+        padding: var(--padding-xs) 0;
+        transition: var(--main-transition);
+    }
+
+    table .table-actions-button:hover {
+        color: var(--primary-color-darker);
+        text-decoration: underline;
+    }
+
+    /* --- Dashboard Actions --- */
+
+    .Content .DashboardActions {
+        padding: 12px var(--padding-lg);
+    }
+
+    .Content .DashboardActions ul {
+        display: flex;
+        flex-flow: row;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .Content .DashboardActions ul>li {
+        display: flex;
+        align-items: center;
+    }
+
+    .Content .DashboardActions ul>li:hover {
+        text-decoration: underline;
+    }
+
+    /* ************************************** MessageBox *************************************** */
+    /* note - previously in Core.TicketDetail */
+
+    .SmallBox,
+    .MessageBrowser,
+    .MessageBox,
+    .ACLNote {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        /* ed removed the comment on 22/12/13 - Added comment, fixed Close btn position when it exists (Beatriz 22/12/21)*/
+        /*justify-content: space-between;*/
+        padding: var(--padding-sm) var(--padding-lg);
+        /* margin-top: var(--margin-lg);  ed commented on 22/12/13 */
+        position: relative;
+        border-radius: var(--border-radius-xxs);
+        gap: var(--gap-md);
+    }
+
+    .MessageBrowser i,
+    .MessageBox i,
+    .ACLNote i {
+        font-size: var(--font-size-md);
+    }
+
+    .MessageBrowser .p-desc,
+    .MessageBox>span {
+        color: var(--alert-close-icon-color);
+        font-size: var(--font-size-sm);
+        font-weight: var(--normal);
+        padding: 0;
+    }
+
+    .SmallBox .Close,
+    .MessageBrowser .Close,
+    .MessageBox .Close,
+    .ACLNote .Close {
+        margin-left: auto;
+    }
+
+    .MessageBox p a {
+        color: var(--black);
+    }
+
+    .MessageBox p a:hover {
+        text-decoration: underline;
+        ;
+    }
+
+
+    .SmallBox p {
+        padding: 5px 25px 5px 25px;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    /* Error MessageBox*/
+    .MessageBox.Error {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .MessageBox.Error>span,
+    .MessageBox.Error i,
+    .MessageBox.Error p>a {
+        color: #721c24;
+    }
+
+    /* ************************************* Attachment Component ********************************* */
+
+    .component-attachment {
+        display: flex;
+        flex-direction: column;
+        background: var(--white);
+        border: var(--border-width) var(--border-solid) var(--border-input-color);
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+        background: var(--white);
+    }
+
+    fieldset .Field.component-attachment {
+        gap: 0;
+        background: var(--white);
+    }
+
+    .LayoutPopup .card .card-item .Field.component-attachment,
+    .AgentTicketActionCommon fieldset .Field.component-attachment {
+        margin-top: var(--margin-sm);
+    }
+
+    .outer-upload-file {
+        display: flex;
+        min-width: 100%;
+    }
+
+    .outer-upload-file .DnDUpload {}
+
+    .outer-upload-file .DnDUpload .ReadyForUpload {
+        display: flex;
+        align-content: center;
+    }
+
+    .AttachmentListContainer {
+        position: relative;
+        /*max-width: 622px;*/
+        min-width: 100%;
+    }
+
+    .AttachmentListContainer table:empty {
+        margin: 0;
+    }
+
+    .AttachmentListContainer .Busy {
+        position: absolute;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        background: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        box-sizing: border-box;
+        display: none;
+        z-index: 11111;
+    }
+
+    .AttachmentListContainer .Busy i {
+        vertical-align: middle;
+        line-height: 100%;
+        position: absolute;
+        top: 50%;
+        font-size: 20px;
+        margin-top: -10px;
+    }
+
+    div.DnDUploadBox:hover {
+        cursor: pointer;
+    }
+
+    div.DnDUpload {
+        display: flex;
+        justify-content: center;
+        padding: var(--padding-lg);
+        width: 100%;
+        font-size: var(--font-size-xs);
+        font-weight: var(--semi-bold);
+        line-height: normal;
+        transition: var(--main-transition);
+    }
+
+    /*span.ReadyForUpload {
+        padding: 50px 0px 25px;
+        display: block;
+    }*/
+
+    input.AjaxDnDUpload.Error+div.DnDUpload {
+        color: var(--alert-error-icon-color);
+        border-color: var(--alert-error-border-color)
+    }
+
+    div.DnDUpload.DragOver {
+        border-style: dashed;
+        background: var(--overlay-bg);
+        color: #444;
+    }
+
+    div.DnDUpload i {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        margin-left: -20px;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    div.DnDUpload i.fa-spinner {
+        display: none;
+    }
+
+    div.DnDUpload.Uploading i.fa-download {
+        display: none;
+    }
+
+    div.DnDUpload.Uploading i.fa-spinner {
+        display: block;
+    }
+
+    div.DnDUpload .UploadRunning {
+        display: none;
+    }
+
+    div.DnDUpload.Uploading .ReadyForUpload {
+        display: none;
+    }
+
+    div.DnDUpload.Uploading .UploadRunning {
+        display: block;
+    }
+
+    .AttachmentListContainer table.AttachmentList {
+        width: 100%;
+        table-layout: fixed;
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: 0;
+    }
+
+    table.AttachmentList thead {
+        display: none;
+    }
+
+    table.AttachmentList tbody tr {
+        border: 0;
+        border-radius: var(--border-radius-xs);
+    }
+
+    table.AttachmentList tbody tr td {
+        padding: 0 var(--padding-sm);
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: pre;
+        min-width: 125px;
+        max-width: 300px;
+    }
+
+    table.AttachmentList tbody tr:nth-child(2n) td {
+        background-color: transparent;
+    }
+
+    table.AttachmentList tbody tr:hover td {
+        background: var(--table-td-even-bg);
+    }
+
+    table.AttachmentList tbody tr {
+        display: block;
+    }
+
+    table.AttachmentList tbody tr,
+    table.AttachmentList tbody tr td {
+        max-height: 50px;
+        line-height: normal;
+    }
+
+    table.AttachmentList tbody tr td {
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    table.AttachmentList tbody tr:first-child td {
+        border-top: none;
+    }
+
+    table.AttachmentList .Filename {
+        color: var(--primary-color);
+    }
+
+    table.AttachmentList .Filetype {
+        display: none;
+    }
+
+    table.AttachmentList .Filesize {
+        color: var(--gray-dark-semi);
+    }
+
+    /*table.AttachmentList .Progress {
+        display: block;
+        height: 4px;
+        margin: 3px 0px;
+        background: #f92;
+        width: 0px;
+    }
+
+    table.AttachmentList .Delete {
+    }*/
+
+    table.AttachmentList tbody tr td:last-child {
+        width: 100%;
+        text-align: right;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    table.AttachmentList .AttachmentDelete {
+        display: inline-flex;
+    }
+
+    table.AttachmentList .AttachmentDelete i {
+        width: 16px;
+        height: 16px;
+    }
+
+    table.AttachmentList.DataTable thead th {
+        line-height: 12px;
+    }
+
+
+
+    /* ************************************** Attachment Blocker *************************************** */
+
+    .attachment-blocker {
+        padding: 10px 20px;
+        position: relative;
+        background: #50B5FF10;
+        border-radius: 5px;
+    }
+
+    /* ******************************************* FORM BUTTON ACTIONS ****************************************** */
+
+    .form-button-actions .buttons-field {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: var(--padding-lg);
+        padding-top: var(--padding-lg);
+    }
+
+    .Content>.field-wrapper.form-button-actions:only-child {
+        padding: var(--padding-lg);
+    }
+
+    .field-wrapper.form-button-actions:only-child .buttons-field {
+        padding: 0;
+    }
+
+    .form-button-actions .buttons-field .inner-output-field {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-xs);
+    }
+
+    .form-button-actions .buttons-field .inner-output-field span {
+        width: 100%;
+    }
+
+    /* ******************************************* Table List ****************************************** */
+
+    .TableList {
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        overflow: hidden;
+    }
+
+    .TableList.TableLikeOverflow {
+        overflow: auto;
+    }
+
+    .TableList thead tr th {
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .SidebarColumn .TableList tr:nth-child(1) td,
+    .ContentColumn .TableList tr:nth-child(1) td {
+        border-top: 0;
+    }
+
+    .SidebarColumn .TableList td,
+    .ContentColumn .TableList td {
+        padding: var(--padding-md);
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .SidebarColumn .TableList thead th,
+    .ContentColumn .TableList thead th {
+        padding: var(--padding-md);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    /* *************************************** Code Display Container **************************************** */
+
+    .code-container {
+        background: var(--main-bg-color);
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-sm);
+        color: var(--black);
+        line-height: normal;
+        letter-spacing: 0.2px;
+        padding: var(--padding-lg);
+        overflow: auto;
+    }
+
+    .code-container:not(:only-child) {
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .code-container h3 {
+        margin: 0;
+    }
+
+    .code-container textarea {
+        min-width: 100%;
+        height: auto;
+    }
+
+    /* ************************************* Widget Content - Row of Columns ********************************* */
+
+    .WidgetSimple.row-of-columns .Content fieldset,
+    .AdminManagement .row-of-columns .Content fieldset {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+        align-self: start;
+        max-width: unset;
+        gap: var(--gap-md);
+    }
+
+    .WidgetSimple.row-of-columns .Content fieldset .field-wrapper,
+    .AdminManagement .row-of-columns .Content fieldset .field-wrapper {
+        max-width: calc(25% - var(--gap-md));
+        width: 100%;
+    }
+
+    @media (min-width: 1025px) and (max-width: 1599px) {
+
+        .row-of-columns .Content fieldset .field-wrapper,
+        .AdminManagement .row-of-columns .Content fieldset .field-wrapper {
+            max-width: calc(50% - var(--gap-md));
+        }
+    }
+
+    /* ************************************* Main Search Component ********************************* */
+
+    .Dialog>.Content>.InnerContent.main-search-component {
+        overflow-y: scroll;
+        margin: -20px -20px 0;
+        padding: 20px 20px 0;
+    }
+
+    .Dialog>.Content>.InnerContent .main-search-component {
+        min-width: 400px;
+    }
+
+    .main-search-component .search-ticket {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .main-search-component .search-ticket .top-section:not(.Hidden),
+    .main-search-component .search-ticket .bottom-section:not(.Hidden) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: var(--gap-md);
+    }
+
+    .main-search-component .search-ticket fieldset.TableLike:not(.Hidden) {
+        position: relative;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        margin: 0;
+        padding: 40px 0 0;
+    }
+
+    .main-search-component .search-ticket fieldset.TableLike>legend {
+        display: flex;
+        padding-bottom: var(--padding-md);
+        width: 100%;
+    }
+
+    /*.search-ticket fieldset.TableLike > legend span*/
+    .main-search-component .search-ticket fieldset.TableLike legend span {
+        display: flex;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        text-indent: 0;
+        font-size: var(--font-size-md);
+        font-weight: var(--semi-bold);
+    }
+
+
+    .main-search-component .search-ticket fieldset.TableLike>label {
+        display: flex;
+        width: 100%;
+    }
+
+    .main-search-component .search-ticket fieldset.TableLike .Field {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        margin: 0;
+        align-items: center;
+    }
+
+    .main-search-component .search-ticket fieldset.TableLike div:not(.checkbox-container)>.Field {
+        width: 100%;
+    }
+
+    /* SECTION TOP */
+
+    .main-search-component .search-ticket .top-section .Field {
+        display: flex;
+        flex-direction: row;
+        padding-bottom: var(--padding-sm);
+    }
+
+    .main-search-component .search-ticket .top-section fieldset.TableLike .Field {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-search-component .search-ticket .top-section fieldset.TableLike .Field.create-tpm-btn {
+        flex-direction: row;
+        justify-content: flex-end;
+        position: absolute;
+        gap: var(--padding-md);
+        top: -30px;
+        right: 0;
+    }
+
+    /* .main-search-component .search-ticket .create-tpl-btn {
+        position: absolute;
+        top: var(--padding-md);
+        right: 0;
+    } */
+
+    .main-search-component .search-ticket .create-tpm-btn button {
+        min-width: var(--btn-max-width-sm);
+        cursor: pointer;
+    }
+
+    /* 'Submit' & 'Create' button container */
+    .main-search-component .search-ticket fieldset.TableLike .Field:last-child {
+        position: relative;
+    }
+
+    .main-search-component .search-ticket fieldset.TableLike .Field .new-tpl-input {
+        position: relative;
+        padding-top: 45px;
+        display: flex;
+        width: 100%;
+    }
+
+    .main-search-component .search-ticket fieldset.TableLike .Field .create-tpm-btn {
+        position: absolute;
+        top: 10px;
+        right: 0;
+    }
+
+    .main-search-component .search-ticket fieldset.TableLike .search-tmp-opt-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        gap: var(--gap-xs);
+        align-items: center;
+    }
+
+    .main-search-component .search-ticket fieldset.TableLike .Field .InputField_Container {
+        position: relative;
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0;
+        flex: 1;
+    }
+
+
+    /* SECTION BOTTOM */
+
+    .Dialog .Content .search-ticket .bottom-section fieldset {
+        width: 50%;
+    }
+
+    .Dialog .Content .search-ticket .bottom-section fieldset .field-wrapper {
+        width: 100%;
+    }
+
+    .main-search-component .bottom-section .TableLike {
+        gap: var(--gap-md) !important;
+    }
+
+    /* .main-search-component .search-ticket fieldset.TableLike .Field input[type=text],
+    body .Dialog .Content .InnerContent.main-search-component .search-ticket fieldset.TableLike .Field .InputField_Search {
+        border: 0;
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: 0;
+        min-height: 35px;
+        padding: 0;
+        color: var(--table-text-color);
+        font-size: 14px;
+        font-weight: var(--medium);
+        min-width: auto;
+    } */
+
+    .main-search-component .search-ticket .bottom-section fieldset.TableLike .Field .RemoveButton {
+        margin: 0;
+        position: relative;
+        right: 0;
+        font-size: var(--font-size-md);
+    }
+
+    /* SECTION Buttons */
+
+    .Dialog>.Content>.ContentFooter.main-search-component-btns {
+        justify-content: space-between;
+    }
+
+    /* *************************************  Widget Simple - Has no items ********************************* */
+    .WidgetSimple.has-no-articles .Content {
+        padding: var(--padding-md);
+    }
+
+    .WidgetSimple.has-no-articles>.Content>p,
+    .WidgetSimple.has-no-articles>.Content>p:last-child:first-child {
+        padding: 0;
+    }
+
+    /* ************************************* Attachment Widget ********************************* */
+    .attachment-widget .message {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding-left: var(--padding-md);
+        padding-bottom: var(--padding-md);
+    }
+
+    .attachment-widget .message .DownloadAttachment {
+        display: flex;
+        width: 33.3%;
+        padding-top: var(--padding-md);
+        padding-right: var(--padding-md);
+    }
+
+    .attachment-widget .message .DownloadAttachment a {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        transition: var(--main-transition);
+    }
+
+    .attachment-widget .message .DownloadAttachment a:hover {
+        background: var(--table-td-even-bg);
+    }
+
+    .attachment-widget .message .DownloadAttachment a .file-info {
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-md) var(--padding-xs) var(--padding-md) var(--padding-md);
+        gap: var(--gap-sm);
+    }
+
+    .attachment-widget .message .DownloadAttachment a .file-name {
+        color: var(--primary-color);
+    }
+
+    .attachment-widget .message .DownloadAttachment a .file-weight {
+        color: var(--gray-dark-semi);
+    }
+
+    .attachment-widget .message .DownloadAttachment a .file-icon {
+        display: flex;
+        padding: var(--padding-md);
+        align-items: center;
+    }
+
+    .attachment-widget .message .DownloadAttachment a .file-icon i {
+        color: var(--gray-dark-semi);
+        font-size: 16px;
+    }
+
+    /* ************************************* Attachment List ********************************* */
+
+    .ArticleAttachments {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0;
+        margin-right: -15px;
+    }
+
+    .Incoming .ArticleAttachments {
+        margin: 0;
+    }
+
+    .ArticleAttachments li {
+        display: flex;
+        width: 33.3%;
+        min-width: 255px;
+        max-width: 350px;
+        flex: 1;
+        padding-top: var(--padding-md);
+        padding-right: var(--padding-md);
+    }
+
+    .ArticleAttachments li .inner-content {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        transition: var(--main-transition);
+        overflow: hidden;
+    }
+
+    .ArticleAttachments li .file-info {
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-md) var(--padding-xs) var(--padding-md) var(--padding-md);
+        gap: var(--gap-sm);
+        overflow: hidden;
+    }
+
+    .ArticleAttachments li .file-name {
+        color: var(--primary-color);
+    }
+
+    .ArticleAttachments li .file-weight {
+        color: var(--gray-dark-semi);
+    }
+
+    .ArticleAttachments li .file-icon {
+        display: flex;
+        padding: var(--padding-md);
+        align-items: center;
+        transition: var(--main-transition);
+    }
+
+    .ArticleAttachments li .file-icon:hover {
+        background: var(--table-td-even-bg);
+    }
+
+    .ArticleAttachments li .file-icon i {
+        color: var(--gray-dark-semi);
+        font-size: 16px;
+    }
+
+    /* ************************************* FAQ Related Articles Widget ********************************* */
+
+    .FAQ-related-articles-widget {
+        margin-top: var(--margin-sm);
+    }
+
+    /* ************************************* WidgetSimple Valid Filter Active ********************************* */
+
+    .filter-items ul.ContextFunctions li.ContextHelp a span,
+    .filter-items ul.ContextFunctions li.ContextSettings a span,
+    .filter-items ul.ContextFunctions li.ContextHelp a span,
+    .filter-items ul.ContextFunctions li.ContextSettings a span {
+        display: none;
+    }
+
+    .filter-items a span,
+    .filter-items ul.ContextFunctions li.ContextSettings a span {
+        color: var(--primary-color);
+        text-decoration: underline;
+        font-size: var(--main-font-size);
+        font-weight: var(--normal);
+    }
+
+    .filter-items a .show-valid,
+    .filter-items.ValidFilterActive a .show-all,
+    .filter-items ul.ContextFunctions li.ContextSettings a .show-valid,
+    .filter-items ul.ContextFunctions li.ContextSettings.ValidFilterActive a .show-all {
+        display: flex;
+        position: relative;
+        left: unset;
+        top: unset;
+    }
+
+    .filter-items a .show-all,
+    .filter-items.ValidFilterActive a .show-valid,
+    .filter-items ul.ContextFunctions li.ContextSettings a .show-all,
+    .filter-items ul.ContextFunctions li.ContextSettings.ValidFilterActive a .show-valid {
+        display: none;
+        position: relative;
+        left: unset;
+        top: unset;
+    }
+
+    .filter-items ul.ContextFunctions li.ContextSettings a.icon-hover {
+        text-decoration: none;
+    }
+
+    /* ************************************* Search Filter Admin Widget ********************************* */
+
+    .search-fileter-admin-widget {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+    }
+
+    .search-fileter-admin-widget .Header {
+        border-radius: 0;
+        border: 0;
+    }
+
+
+    /* ************************************* Search Widget ********************************* */
+
+    .search-widget .Actionlist li {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm)
+    }
+
+    .search-widget .field-wrapper input[type="text"] {
+        padding-left: var(--padding-sm);
+        padding-right: var(--padding-xxl);
+    }
+
+    .search-widget .field-wrapper button {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    /* ************************************* Widget Title Divider ********************************* */
+
+
+    @media only screen and (max-width: 1599px) {
+        .WidgetSimple.Widget-title-divider .Content fieldset.TableLike {
+            gap: 0;
+            padding: 0;
+        }
+
+        .WidgetSimple.Widget-title-divider .TableLike :nth-last-child(2):after {
+            background: transparent;
+        }
+
+        .WidgetSimple.Widget-title-divider .Content fieldset.TableLike .form-button-actions {
+            padding: 0 var(--padding-lg) var(--padding-lg);
+        }
+
+        .WidgetSimple.Widget-title-divider .Content fieldset.TableLike .form-button-actions .buttons-field {
+            padding-top: 0;
+        }
+    }
+
+    /* ************************************* Mini List Widget ********************************* */
+
+    .mini-list-widget .Tablelike li a {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mini-list-widget .Tablelike li a div {
+        color: var(--primary-color);
+        font-weight: var(--medium);
+    }
+
+    .mini-list-widget .Tablelike li a p {
+        font-weight: var(--normal);
+    }
+
+    /* ************************************* Information Widget ********************************* */
+
+    .information-widget .state span {
+        line-height: initial;
+    }
+
+    .information-widget .state .Value.pill {
+        padding: 6px var(--padding-md);
+    }
+
+
+    /* **************************************** Input Fields *********************************** */
+
+    /* --- Settings Tree --- */
+    .Content fieldset.TableLike .settings-tree,
+    .settings-tree {
+        display: flex;
+        flex-flow: column;
+        gap: var(--gap-md);
+    }
+
+    .settings-tree h4 {
+        font-size: var(--main-font-size);
+        color: var(--black);
+        font-weight: var(--medium);
+    }
+
+    .settings-tree h4,
+    .settings-tree ul {
+        margin: 0;
+        padding: 0;
+        flex-basis: 100%;
+    }
+
+    .settings-tree ul li {
+        line-height: 30px;
+        position: relative;
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: baseline;
+        gap: var(--gap-xs);
+    }
+
+    .settings-tree ul li:not(.DataItem),
+    .settings-tree select {
+        flex: 1;
+    }
+
+    .settings-tree li ul:not(.Hidden) {
+        display: flex;
+        padding-left: 44px;
+    }
+
+    .settings-tree li ul {
+        padding-left: var(--padding-xl);
+        flex-flow: column;
+        gap: var(--gap-sm);
+    }
+
+    .settings-tree li input,
+    .settings-tree li .InputField_Container {
+        height: auto;
+        width: auto;
+        min-width: unset;
+        flex: 1;
+        margin: 0;
+    }
+
+    .settings-tree li input {
+        padding: var(--padding-xs) var(--padding-sm);
+    }
+
+    .settings-tree .NewDataItem {
+        margin: 0;
+    }
+
+    .settings-tree>ul>li>ul>li>span.Icon.AddButton.icon-hover:first-child,
+    .settings-tree>ul>li>ul>li>span.Icon.RemoveButton.icon-hover:first-child {
+        margin-left: 15px;
+    }
+
+    .settings-tree .Trigger {
+        cursor: pointer;
+    }
+
+    .Trigger i {
+        transition: var(--main-transition);
+        transform: rotate(0);
+    }
+
+    .Trigger.Collapse i {
+        transform: rotate(-90deg);
+    }
+
+    .settings-tree em i {
+        font-size: var(--font-size-xs);
+        cursor: pointer;
+    }
+
+    .settings-tree .icon-hover i {
+        font-size: var(--font-size-xl);
+        width: 16px;
+        height: 16px;
+    }
+
+    .settings-tree li ul li ul li ul,
+    .settings-tree ul.LastLevel {
+        display: flex;
+        flex-flow: row;
+        gap: var(--gap-sm);
+        margin-left: -12px;
+        flex-wrap: wrap;
+    }
+
+    .settings-tree ul.LastLevel {
+        margin-left: 5px;
+    }
+
+    .settings-tree li ul li ul li ul li.DataItem,
+    .settings-tree ul.LastLevel>li.DataItem.Editable {
+        display: flex;
+        flex-flow: row;
+        gap: var(--gap-xs);
+        padding: 8px var(--padding-md);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        background: var(--gray-light-semi);
+        color: var(--black);
+        line-height: normal;
+        border-radius: var(--border-radius-sm);
+        height: 30px;
+    }
+
+    /* --- Single Row Inputs --- */
+    /* - Note: Rows containing more than 1 input fields, may also include buttons */
+    .single-row-inputs:not(.Hidden),
+    .WidgetSimple .Content fieldset .single-row-inputs:not(.Hidden) {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+        gap: var(--gap-md);
+        justify-content: space-between;
+        padding-top: var(--padding-xs);
+        align-items: center;
+    }
+
+    .single-row-inputs:first-child,
+    .WidgetSimple .Content fieldset .single-row-inputs:first-child {
+        padding: 0;
+    }
+
+    .WidgetSimple fieldset fieldset.single-row-inputs,
+    fieldset fieldset.single-row-inputs {
+        padding: 0;
+        padding-top: var(--padding-sm);
+    }
+
+    .single-row-inputs .field-wrapper,
+    .WidgetSimple .Content .single-row-inputs .field-wrapper {
+        display: flex;
+        flex-flow: row;
+        flex-wrap: nowrap;
+        gap: var(--gap-xs);
+        flex: 1;
+        align-items: baseline;
+    }
+
+    .single-row-inputs .checkbox-container,
+    .WidgetSimple .Content .single-row-inputs .checkbox-container {
+        /* auto width */
+        flex: unset;
+        gap: var(--gap-sm);
+    }
+
+    .single-row-inputs .field-wrapper label,
+    .single-row-inputs>a {
+        align-self: start;
+    }
+
+    .single-row-inputs .field-wrapper label {
+        max-width: 125px;
+        /* min-width: 65px; removed by ED on 23/03/28 */
+        padding-right: var(--padding-xs);
+    }
+
+    .single-row-inputs .field-wrapper .Field {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        flex-wrap: wrap;
+        flex: 1;
+        min-width: 70%;
+    }
+
+    .single-row-inputs .field-wrapper.FieldExplanation,
+    .WidgetSimple .Content .single-row-inputs .field-wrapper.FieldExplanation {
+        display: flex;
+        flex-flow: column;
+        min-width: 100%;
+    }
+
+    /* --- Inline Filter Field --- */
+    /* - Row with single input field and a button at the end */
+    .inline-filter-field button {
+        min-width: 100px;
+    }
+
+    .LayoutPopup .inline-filter-field.card,
+    .MainBox .inline-filter-field {
+        background: var(--main-bg-color);
+        overflow: hidden;
+    }
+
+    .MainBox .inline-filter-field>.Header {
+        background: var(--white);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .LayoutPopup .WidgetSimple.inline-filter-field .Content,
+    .MainBox .WidgetSimple.inline-filter-field .Content {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--gap-md);
+        border: 0;
+        padding: var(--padding-lg);
+    }
+
+    .MainBox .inline-filter-field .Content {
+        padding: var(--padding-md) var(--padding-lg);
+    }
+
+    .LayoutPopup .inline-filter-field .Content span:nth-child(1),
+    .MainBox .inline-filter-field .Content span:nth-child(1) {
+        min-width: unset;
+        width: 100%;
+        /*max-width: 500px;*/
+    }
+
+    .LayoutPopup .inline-filter-field .Content span input,
+    .MainBox .inline-filter-field .Content span input {
+        background: var(--white);
+        /*max-height: 28px;*/
+    }
+
+    /* **************************************** Pagination *********************************** */
+
+    .Pagination {
+        display: flex;
+        flex-flow: row;
+        justify-content: flex-end;
+        margin-right: 0;
+        font-size: var(--main-font-size);
+        padding: var(--padding-sm) var(--padding-xl);
+        background: var(--white);
+    }
+
+    .Content>.Pagination:first-child {
+        border-top: 0;
+    }
+
+    .Pagination:empty {
+        padding: 0;
+        display: none;
+    }
+
+    .SidebarColumn .Pagination {
+        background: transparent;
+        border-top: 0;
+    }
+
+    .Pagination:empty,
+    .Pagination:is(:empty),
+    .Pagination:has(.page-links:empty) {
+        padding: 0;
+        display: none;
+    }
+
+    .Pagination ul {
+        display: flex;
+        align-items: baseline;
+        flex-flow: row;
+        gap: var(--padding-md);
+    }
+
+    .Pagination ul li {
+        display: flex;
+        position: relative;
+        height: 26px;
+        align-items: center;
+    }
+
+    .Pagination ul li:first-child:after {
+        width: 0;
+        height: 0;
+        background-color: transparent;
+    }
+
+    .Pagination li,
+    .Pagination li span {
+        align-self: center;
+        font-size: var(--font-size-sm);
+        color: var(--gray-dark-semi);
+    }
+
+    .Pagination ul li a:first-child {
+        margin-left: 0px;
+        position: relative;
+    }
+
+    .Pagination a {
+        color: var(--gray-dark-semi);
+    }
+
+    .Pagination .page-links a:hover {
+        border-radius: var(--border-radius-xs);
+        border-color: var(--border-color);
+    }
+
+    .Pagination .page-links {
+        display: flex;
+        flex-flow: row;
+    }
+
+    .Pagination .page-links a {
+        display: flex;
+        position: relative;
+        width: 26px;
+        height: 26px;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--border-radius-xs);
+        border: var(--border-width) var(--border-solid) transparent;
+        transition: var(--main-transition);
+    }
+
+    .Pagination .page-links a:first-child {
+        margin-left: var(--margin-xs);
+    }
+
+    .Pagination .page-links a:first-child::after {
+        display: inline-block;
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 26px;
+        top: 0;
+        background-color: var(--gray-light);
+        left: -7px;
+    }
+
+
+    .Pagination .page-links a:hover {
+        background-color: var(--gray-light);
+        color: var(--gray-dark-semi);
+    }
+
+    .Pagination.page-links a:hover {
+        background: rgba(1, 1, 1, 0.08);
+    }
+
+    .Pagination .page-links a.pagination-travel-l,
+    .Pagination .page-links a.pagination-travel-r,
+    .Pagination .page-links a.pagination-travel-one-l,
+    .Pagination .page-links a.pagination-travel-one-r {
+        font-size: var(--main-font-size);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .Pagination .page-links a.pagination-travel-l,
+    .Pagination .page-links a.pagination-travel-one-l {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: 0;
+    }
+
+    .Pagination .page-links a.pagination-travel-r,
+    .Pagination .page-links a.pagination-travel-one-r {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .Pagination .page-links a.pagination-travel-one-l {
+        margin-left: var(--padding-sm);
+    }
+
+    .Pagination .page-links>a.pagination-travel-one-r {
+        margin-right: var(--padding-sm);
+    }
+
+
+    .RTL .Pagination {
+        float: left;
+    }
+
+    form.Pagination>* {
+        float: left;
+    }
+
+    .RTL .Pagination>* {
+        float: right;
+    }
+
+    .Pagination>span {
+        margin-top: 3px;
+    }
+
+    form.Pagination a {
+        height: 24px;
+        width: 24px;
+        display: block;
+    }
+
+    .Pagination a.Selected {
+        font-weight: bold;
+        color: var(--primary-color);
+        pointer-events: none;
+    }
+
+    .Pagination a.Selected:hover {
+        background-color: transparent;
+        color: var(--primary-color);
+    }
+
+    .Pagination .PaginationLimit {
+        color: var(--alert-error-icon-color);
+    }
+
+    .Pagination a span {
+        margin: 7px 6px;
+        height: 9px;
+        width: 11px;
+        text-indent: -9999px;
+        background: url(../img/arrows.png) no-repeat;
+        display: block;
+    }
+
+    /*.Pagination .ArrowLeft span {
+        background-position: left top;
+    }
+
+    .RTL .Pagination .ArrowLeft span {
+        background-position: right top;
+    }
+
+    .Pagination .ArrowRight span {
+        background-position: right top;
+    }
+
+    .RTL .Pagination .ArrowRight span {
+        background-position: left top;
+    }*/
+
+    .Pagination input {
+        width: 16px;
+        margin-right: 2px;
+        padding: 1px 3px;
+        font-size: 11px;
+        font-family: inherit;
+        text-align: right;
+    }
+
+    @media only screen and (max-width: 1024px) {
+
+        .WidgetSimple span.Pagination {
+            display: none;
+        }
+
+        .WidgetSimple span.Pagination.AsBlock {
+            display: flex;
+        }
+    }
+
+
+    /* **************************************** Filters *********************************** */
+
+    .TableFilterContainer {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    .TableFilterContainer .FilterRemove {
+        position: absolute;
+        right: 15px;
+        font-size: 12px;
+        display: none;
+        color: var(--gray-dark-semi);
+        transition: color ease 0.3s;
+    }
+
+    .TableFilterContainer .FilterRemove:focus,
+    .TableFilterContainer .FilterRemove:hover,
+    .TableFilterContainer .FilterRemove:active {
+        color: var(--black);
+    }
+
+    span.TableFilterContainer>input,
+    span.TableFilterContainer>input.FilterBox,
+    input#SysConfigSearch {
+        padding: 6px var(--padding-sm);
+        padding-left: var(--padding-xxl);
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    span.TableFilterContainer>i,
+    span.TableFilterContainer>button {
+        position: absolute;
+        bottom: 25%;
+        left: 10px;
+        font-size: var(--font-size-md);
+        color: var(--gray-dark-semi);
+        background: unset;
+        border: 0;
+    }
+
+    /* **************************************** Time Units Component *********************************** */
+
+    .time-units-component .time-units-dropdown-element {
+        display: flex;
+        gap: var(--gap-md);
+    }
+
+    .time-units-component .time-units-dropdown-element .field-wrapper {
+        gap: 0;
+    }
+
+    .time-units-component .time-units-dropdown-element .field-wrapper label {
+        font-size: var(--font-size-sm);
+        font-weight: var(--normal);
+    }
+
+
+
+
+}

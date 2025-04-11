@@ -22,6 +22,9 @@ $Selenium->RunTest(
         my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
         my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
         my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $MainObject    = $Kernel::OM->Get('Kernel::System::Main');
 
         # Turn on RichText.
         $HelperObject->ConfigSettingChange(
@@ -43,7 +46,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -153,7 +156,7 @@ $Selenium->RunTest(
         my $AttachmentName = "StdAttachment-Test1.png";
         $Location = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/$AttachmentName";
-        my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+        my $ContentRef = $MainObject->FileRead(
             Location => $Location,
             Mode     => 'binmode',
         );
@@ -243,7 +246,7 @@ $Selenium->RunTest(
         $Selenium->find_element("//button[\@value='Submit'][\@type='submit']")->VerifiedClick();
 
         # Get last article id.
-        my @Articles = $Kernel::OM->Get('Kernel::System::Ticket::Article')->ArticleList(
+        my @Articles = $ArticleObject->ArticleList(
             TicketID => $TicketID,
             OnlyLast => 1,
         );

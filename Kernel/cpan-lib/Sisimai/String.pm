@@ -82,8 +82,8 @@ sub to_plain {
         # 2. Remove <style>...</style>
         # 3. <a href = 'http://...'>...</a> to " http://... "
         # 4. <a href = 'mailto:...'>...</a> to " Value <mailto:...> "
-        $plain =~ s|<head>.+</head>||gsim;
-        $plain =~ s|<style.+?>.+</style>||gsim;
+        $plain =~ s|<head>.*?</head>||gsim;
+        $plain =~ s|<style.*?>.*?</style>||gsim;
         $plain =~ s|<a\s+href\s*=\s*['"](https?://.+?)['"].*?>(.*?)</a>| [$2]($1) |gsim;
         $plain =~ s|<a\s+href\s*=\s*["']mailto:([^\s]+?)["']>(.*?)</a>| [$2](mailto:$1) |gsim;
 
@@ -218,7 +218,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2016,2018,2019,2021 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2016,2018,2019,2021,2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

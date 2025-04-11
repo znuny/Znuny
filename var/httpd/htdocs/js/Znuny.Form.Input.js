@@ -189,6 +189,11 @@ Znuny.Form.Input = (function (TargetNS) {
             return Attribute;
         }
 
+        // Use the common field ID mapping of AgentTicketActionCommon for unknown modules
+        if (!AttributFieldIDMapping[Module] && Core.Config.Get('AutoAttributFieldIDMapping')) {
+            AttributFieldIDMapping[Module] = AttributFieldIDMapping['AgentTicketActionCommon'];
+        }
+
         if (
             !AttributFieldIDMapping[ Module ]
             || !AttributFieldIDMapping[ Module ][ Attribute ]
@@ -210,8 +215,8 @@ Znuny.Form.Input = (function (TargetNS) {
 
         var Result = Znuny.Form.Input.FieldIDMapping('AdminQueue',
             {
-                EscalationStep1Color: 'EscalationStep1Color' # FirstParam = AccessKey
-                                                             # SecondParam = ID of the HTML element on page
+                EscalationStep1Color: 'EscalationStep1Color'    # FirstParam = AccessKey
+                                                                # SecondParam = ID of the HTML element on page
             }
         );
 
@@ -328,7 +333,7 @@ Znuny.Form.Input = (function (TargetNS) {
                     if (Value.length === 0) return true;
 
                     // only get selected customers if option is set
-                    if (Options.Selected && !$(Element).siblings('.CustomerTicketRadio').prop('checked')) return true;
+                    if (Options.Selected && !$(Element).siblings('.RadioRound').prop('checked')) return true;
 
                     Result.push(Value);
                 });
@@ -530,14 +535,20 @@ Znuny.Form.Input = (function (TargetNS) {
         var Success = Znuny.Form.Input.Set('Queue',
             'Postmaster',
             {
-                KeyOrValue:    'Value',
-                TriggerChange: 'false',
+                KeyOrValue:     'Value',     # Key, Value
+                TriggerChange:  'false',
+                Modernize:       true,       # true, false
+
+                SelectOption:    true,       # true, false  - set options of select field
+                AddEmptyOption:  true,       # true, false  - add empty option as first option for single-selects/dropdowns
+                SortBy:         'Key',       # Key, Value   - Key is default
+                SortOrder:      'ASC',       # ASC, DESC    - ASC is default
             }
         );
 
     Returns:
 
-        var Success = true; # true, false
+        var Success = true;     # true, false
 
     */
     TargetNS.Set = function (Attribute, Content, Options) {
@@ -853,11 +864,74 @@ Znuny.Form.Input = (function (TargetNS) {
                 $('#'+ FieldID +' option').remove();
 
                 function AppendOptions() {
-                    $.each(Content, function(Key, Value) {
-                        if (Value !== '') {
-                            $('#'+ FieldID).append($('<option>', { value: Key }).text(Value));
+                    var ContentArray;
+
+                    // Add empty option as first option for single-selects/dropdowns
+                    // because otherwise somehow the first element will be selected
+                    // automatically. Somehow this is not the case for multi-select fields.
+                    // Also, the single-select/dropdown would not display the 'x' button to
+                    // clear the field if this option won't be added.
+                    // To avoid unknown side effects, leave it as optional via flag AddEmptyOption.
+                    if (
+                        Modernize
+                        && $('#'+ FieldID).hasClass('Modernize')
+                        && !$('#'+ FieldID).prop('multiple')
+                        && Options.AddEmptyOption
+                    ) {
+                        $('#'+ FieldID).append($('<option>', { value: '', selected: true }).text('-'));
+                    }
+
+                    // create array from object
+                    if (Options.SortBy || Options.SortOrder) {
+
+                        ContentArray = Object.entries(Content).map(([key, value]) => ({ key: parseInt(key), value }));
+
+                        if (
+                            typeof Options.SortBy === 'undefined'
+                            || (Options.SortBy !== 'Key' && Options.SortBy !== 'Value')
+                        ) {
+                            Options.SortBy = 'Key';
                         }
-                    });
+
+                        if (
+                            typeof Options.SortOrder === 'undefined'
+                            || (Options.SortOrder !== 'DESC' && Options.SortOrder !== 'ASC')
+                        ) {
+                            Options.SortOrder = 'DESC';
+                        }
+                        // sort by id
+                        if (Options.SortBy == 'Key') {
+                            ContentArray.sort((a, b) => a.key - b.key);
+                        }
+
+                        // sort by name
+                        else if (Options.SortBy == 'Value') {
+                            ContentArray.sort((a, b) => a.value.localeCompare(b.value));
+                        }
+
+                        // sort order
+                        if (Options.SortOrder == 'DESC') {
+                            ContentArray.reverse();
+                        }
+                        // add options
+                        ContentArray.forEach(function(item) {
+                            var Key = item.key;
+                            var Value = item.value;
+
+                            if (Value !== '') {
+                                $('#'+ FieldID).append($('<option>', { value: Key }).text(Value));
+                            }
+                        });
+                    }
+
+                    // add options without sorting
+                    else {
+                        $.each(Content, function(Key, Value) {
+                            if (Value !== '') {
+                                $('#'+ FieldID).append($('<option>', { value: Key }).text(Value));
+                            }
+                        });
+                    }
                 }
 
                 function RedrawInputField() {
@@ -902,7 +976,7 @@ Znuny.Form.Input = (function (TargetNS) {
 
                 // cast to strings
                 SetSelected = jQuery.map(SetSelected, function(Element) {
-                  return Element.toString();
+                    return Element.toString();
                 });
 
                 $('#'+ FieldID +' option').filter(function() {
@@ -1175,18 +1249,18 @@ Znuny.Form.Input = (function (TargetNS) {
         }
 
         if (Readonly) {
-            $('#' + FieldID).prop('readonly', true);
+            $('#' + FieldID).prop('readonly', true).attr('tabindex', '-1');
 
             if (Type == 'select'){
-                $('#' + FieldID + '_Search').prop('readonly', true);
+                $('#' + FieldID + '_Search').prop('readonly', true).attr('tabindex', '-1');
                 $('#' + FieldID + '_Search').next().find('.Remove').remove();
             }
         }
         else {
-            $('#' + FieldID).prop('readonly', false);
+            $('#' + FieldID).prop('readonly', false).attr('tabindex', '0');
 
             if (Type == 'select'){
-                $('#' + FieldID + '_Search').prop('readonly', false);
+                $('#' + FieldID + '_Search').prop('readonly', false).attr('tabindex', '0');
             }
         }
 
@@ -1220,15 +1294,15 @@ Znuny.Form.Input = (function (TargetNS) {
     Manipulates the configuration of RichText input fields. It takes a config structure where the key is the Editor FieldID and the value is another structure with the config items it should set. It's possible to use the meta key 'Global' to set the config of all RichText instances on the current site. Notice that old configurations will be kept and extended instead of removed. For a complete list of possible config attributes visit the CKEdior documentation: http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
     var Result = Znuny.Form.Input.RichTextConfig({
-      'RichText': {
-        toolbarCanCollapse:     true,
-        toolbarStartupExpanded: false,
-      }
+        'RichText': {
+            toolbarCanCollapse:     true,
+            toolbarStartupExpanded: false,
+        }
     });
 
     Returns:
 
-      Result = true
+        Result = true
     */
     TargetNS.RichTextConfig = function (NewConfig) {
         if (typeof CKEDITOR === 'undefined') {
@@ -1251,7 +1325,7 @@ Znuny.Form.Input = (function (TargetNS) {
         CKEDITOR.replace = function(EditorID, EditorConfig) {
             var ExtendedConfig = NewConfig[ EditorID ] || NewConfig['Global'];
             $.each(ExtendedConfig, function(Attribute, Value) {
-              EditorConfig[ Attribute ] = Value;
+                EditorConfig[ Attribute ] = Value;
             });
 
             return CKEDITOR.replaceZnunyFormInput(EditorID, EditorConfig);
@@ -1364,7 +1438,7 @@ Znuny.Form.Input = (function (TargetNS) {
     }
 
     function escapeRegExp(str) {
-      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
 
     //
@@ -1428,6 +1502,7 @@ Znuny.Form.Input = (function (TargetNS) {
                 'change.PendingStateDateTimeSelectionToggle',
                 function () {
                     var SelectedStateID = $(this).val(),
+                        $ParentField,
                         PendingStateIDsFound = [];
 
                     PendingStateIDsFound = jQuery.grep(
@@ -1438,13 +1513,14 @@ Znuny.Form.Input = (function (TargetNS) {
                     );
 
                     if (PendingStateIDsFound.length) {
-                        $('#Month, #PendingTimeMonth').parent().prev().show();
-                        $('#Month, #PendingTimeMonth').parent().show();
+                        $('#Month, #PendingTimeMonth').closest('div.Field').parent().show();
                         return;
                     }
 
-                    $('#Month, #PendingTimeMonth').parent().prev().hide();
-                    $('#Month, #PendingTimeMonth').parent().hide();
+                    $ParentField = $('#Month, #PendingTimeMonth').closest('div.Field').parent();
+                    if ( $ParentField.is("div") ) {
+                        $ParentField.hide();
+                    }
                 }
             )
             .trigger('change.PendingStateDateTimeSelectionToggle');
@@ -1453,6 +1529,10 @@ Znuny.Form.Input = (function (TargetNS) {
     TargetNS.Init = function () {
         InitDynamicFieldDateTimeAutoCheckboxSet();
         InitPendingStateDateTimeSelectionToggle();
+
+        Core.App.Subscribe('TicketProcess.Init.FirstActivityDialog.Load', function($Element) {
+            InitPendingStateDateTimeSelectionToggle();
+        });
     }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

@@ -33,7 +33,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .HeaderLeft.Buttons a,
     .RTL .HeaderRight.Buttons a {
-        margin-right: 3px;
+        /*margin-right: 3px;*/
+        font-size: 14px;
     }
 
     .HeaderCenter {
@@ -60,10 +61,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .DateDivider td {
-        background-color: #EEE;
-        border-top: 1px dotted #CCC;
-        border-bottom: 1px dotted #CCC;
+        background: var(--gray-light-semi);
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
         line-height: 2em;
+
+        font-size: var(--font-size-sm);
+        font-weight: var(--semi-bold);
+        color: var(--table-text-color);
+        letter-spacing: .8px;
     }
 
     .DateDivider.First > td {

@@ -94,9 +94,11 @@ sub Run {
     my $URL = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{Baselink};
     my %Return;
     my $Priority = $Param{Config}->{Priority};
+    my $Block    = $Param{Config}->{Block};
+
     if ($Count) {
         $Return{ $Priority++ } = {
-            Block       => 'ToolBarItem',
+            Block       => $Block,
             Description => Translatable('Tickets in My Services'),
             Count       => $Count,
             Class       => $Class,

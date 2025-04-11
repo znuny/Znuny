@@ -40,6 +40,28 @@ BEGIN
 IF NOT EXISTS (
     SELECT 1
     FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_activity_user_id_id')
+    ) THEN
+    ALTER TABLE activity ADD CONSTRAINT FK_activity_user_id_id FOREIGN KEY (user_id) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_activity_create_by_id')
+    ) THEN
+    ALTER TABLE activity ADD CONSTRAINT FK_activity_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
     WHERE LOWER(conname) = LOWER('FK_acl_ticket_attribute_relations_create_by_id')
     ) THEN
     ALTER TABLE acl_ticket_attribute_relations ADD CONSTRAINT FK_acl_ticket_attribute_relations_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
@@ -2529,39 +2551,6 @@ IF NOT EXISTS (
     WHERE LOWER(conname) = LOWER('FK_pm_transition_action_change_by_id')
     ) THEN
     ALTER TABLE pm_transition_action ADD CONSTRAINT FK_pm_transition_action_change_by_id FOREIGN KEY (change_by) REFERENCES users (id);
-END IF;
-END$$;
-;
-DO $$
-BEGIN
-IF NOT EXISTS (
-    SELECT 1
-    FROM pg_constraint
-    WHERE LOWER(conname) = LOWER('FK_cloud_service_config_create_by_id')
-    ) THEN
-    ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
-END IF;
-END$$;
-;
-DO $$
-BEGIN
-IF NOT EXISTS (
-    SELECT 1
-    FROM pg_constraint
-    WHERE LOWER(conname) = LOWER('FK_cloud_service_config_change_by_id')
-    ) THEN
-    ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_change_by_id FOREIGN KEY (change_by) REFERENCES users (id);
-END IF;
-END$$;
-;
-DO $$
-BEGIN
-IF NOT EXISTS (
-    SELECT 1
-    FROM pg_constraint
-    WHERE LOWER(conname) = LOWER('FK_cloud_service_config_valid_id_id')
-    ) THEN
-    ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_valid_id_id FOREIGN KEY (valid_id) REFERENCES valid (id);
 END IF;
 END$$;
 ;

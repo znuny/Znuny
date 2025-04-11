@@ -20,8 +20,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $MailQueueObject    = $Kernel::OM->Get('Kernel::System::MailQueue');
 
         # Disable check of email addresses.
         $HelperObject->ConfigSettingChange(
@@ -59,7 +63,7 @@ $Selenium->RunTest(
         ) || die 'Did not get test customer user';
 
         # Get test customer user data.
-        my %TestCustomerUserData = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
+        my %TestCustomerUserData = $CustomerUserObject->CustomerUserDataGet(
             User => $TestCustomerUserLogin,
         );
 
@@ -82,8 +86,7 @@ $Selenium->RunTest(
             "Ticket is created - ID $TicketID"
         );
 
-        my $ArticleBackendObject
-            = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel( ChannelName => 'Email' );
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
         # Create test email article.
         my $ArticleID = $ArticleBackendObject->ArticleCreate(
@@ -172,7 +175,7 @@ $Selenium->RunTest(
             $Selenium->find_element( "#$Field", 'css' )->send_keys($Value);
 
             # Lose the focus.
-            $Selenium->find_element( 'body', 'css' )->click();
+            $Selenium->find_element( '#Subject', 'css' )->click();
 
             next FIELD if $Field eq 'RichText';
 
@@ -221,7 +224,7 @@ $Selenium->RunTest(
         # Introduce temporary error to mail queue entry, and check if processing message reflects that.
         my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
         $DateTimeObject->Add( Hours => 1 );
-        my $Result = $Kernel::OM->Get('Kernel::System::MailQueue')->Update(
+        my $Result = $MailQueueObject->Update(
             Filters => {
                 ArticleID => $ComposeArticleID,
             },
@@ -303,8 +306,16 @@ $Selenium->RunTest(
                 $Selenium->WaitFor(
                     JavaScript => "return \$('#$Selector').length;"
                 );
+
+                my $Value = $Selenium->InputGet(
+                    Attribute => "${Selector}",
+                    Options   => {
+                        KeyOrValue => 'Value',
+                    }
+                );
+
                 $Self->Is(
-                    $Selenium->find_element( "#$Selector", 'css' )->get_value(),
+                    $Value,
                     $ComposeData{$Field},
                     "Value for '$Field'"
                 );
@@ -336,8 +347,15 @@ $Selenium->RunTest(
                     JavaScript => "return \$('#${Selector}TicketText_1').length;"
                 );
 
+                my $Value = $Selenium->InputGet(
+                    Attribute => "${Selector}TicketText_1",
+                    Options   => {
+                        KeyOrValue => 'Value',
+                    }
+                );
+
                 $Self->Is(
-                    $Selenium->find_element( "#${Selector}TicketText_1", 'css' )->get_value(),
+                    $Value,
                     $ComposeData{$Field},
                     "Value for '$Field'"
                 );
@@ -399,7 +417,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     }

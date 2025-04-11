@@ -44,12 +44,15 @@ sub match {
         |may[ ]consider[ ]spam
         |message[ ](?:
              considered[ ]as[ ]spam[ ]or[ ]virus
+            |contains[ ]spam[ ]or[ ]virus
             |content[ ]rejected
+            |detected[ ]as[ ]spam
             |filtered
             |filtered[.][ ](?:
                  please[ ]see[ ]the[ ]faqs[ ]section[ ]on[ ]spam
                 |refer[ ]to[ ]the[ ]troubleshooting[ ]page[ ]at[ ]
                 )
+            |is[ ]being[ ]rejected[ ]as[ ]it[ ]seems[ ]to[ ]be[ ]a[ ]spam
             |looks[ ]like[ ]spam
             |refused[ ]by[ ](?:
                  mailmarshal[ ]spamprofiler
@@ -97,6 +100,7 @@ sub match {
         |spambouncer[ ]identified[ ]spam    # SpamBouncer identified SPAM
         |spamming[ ]not[ ]allowed
         |too[ ]much[ ]spam[.]               # Earthlink
+        |the[ ]email[ ]message[ ]was[ ]detected[ ]as[ ]spam
         |the[ ]message[ ](?:
              has[ ]been[ ]rejected[ ]by[ ]spam[ ]filtering[ ]engine
             |was[ ]rejected[ ]due[ ]to[ ]classification[ ]as[ ]bulk[ ]mail
@@ -157,6 +161,11 @@ sub true {
     return undef unless $argvs->deliverystatus;
     return 1 if $argvs->reason eq 'spamdetected';
     return 1 if (Sisimai::SMTP::Status->name($argvs->deliverystatus) || '') eq 'spamdetected';
+
+    # The value of "reason" isn't "spamdetected" when the value of "smtpcommand" is an SMTP command
+    # to be sent before the SMTP DATA command because all the MTAs read the headers and the entire
+    # message body after the DATA command.
+    return 0 if $argvs->{'smtpcommand'} =~ /\A(?:CONN|EHLO|HELO|MAIL|RCPT)\z/;
     return 1 if __PACKAGE__->match(lc $argvs->diagnosticcode);
     return 0;
 }
@@ -217,7 +226,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2015-2018,2020,2021 azumakuniyuki, All rights reserved.
+Copyright (C) 2015-2018,2020-2022 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

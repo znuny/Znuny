@@ -534,14 +534,14 @@ Create or replace draft using data from param object and upload cache.
 Specified params can be overwritten if necessary.
 
     my $FormDraftID = $ParamObject->SaveFormDraft(
-        UserID         => 1
+        UserID         => 1,
         ObjectType     => 'Ticket',
         ObjectID       => 123,
         OverrideParams => {               # optional, can contain strings and array references
             Subaction   => undef,
             UserID      => 1,
             CustomParam => [ 1, 2, 3, ],
-            ...
+            # ...
         },
     );
 
@@ -610,12 +610,12 @@ sub SaveFormDraft {
             my @Values = $Self->GetArray( Param => $Param );
             next PARAM if !IsArrayRefWithData( \@Values );
 
-            # store single occurances as string
+            # store single occurrences as string
             if ( scalar @Values == 1 ) {
                 $Value = $Values[0];
             }
 
-            # store multiple occurances as array reference
+            # store multiple occurrences as array reference
             else {
                 $Value = \@Values;
             }

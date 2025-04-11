@@ -315,7 +315,7 @@ sub RepositoryGet {
 add a package to local repository
 
     $PackageObject->RepositoryAdd(
-        String    => $FileString,
+        String => $FileString,
     );
 
 =cut
@@ -452,8 +452,8 @@ sub RepositoryRemove {
 install a package
 
     $PackageObject->PackageInstall(
-        String    => $FileString,
-        Force     => 1,             # optional 1 or 0, for to install package even if validation fails
+        String => $FileString,
+        Force  => 1,             # optional 1 or 0, for to install package even if validation fails
     );
 
 =cut
@@ -1307,14 +1307,14 @@ Returns:
 
     my $PackageRequired = (
       {
-        'Name'                       => 'ITSMCore'
+        'Name'                       => 'ITSMCore',
         'Version'                    => '',
         'IsInstalled'                => 'Problem',
         'IsRequiredVersionInstalled' => 0,
       },
       {
         'Name'                       => 'Survey',
-        'Version'                    => '6.5.0'
+        'Version'                    => '6.5.0',
         'IsInstalled'                => 'OK',
         'IsRequiredVersionInstalled' => 1,
       }
@@ -1361,16 +1361,16 @@ sub GetRequiredPackages {
             Name => $Element->{Content}
         );
 
-        my $IsInstalled = "Problem";
+        my $IsInstalled = 0;
         if ($PackageIsInstalled) {
-            $IsInstalled = "OK";
+            $IsInstalled = 1;
         }
 
         my $Version                    = $Element->{Version} // "";
         my $IsRequiredVersionInstalled = 1;
 
         # if the required package is already installed, check if the installed version is high enough.
-        if ( $IsInstalled eq "OK" && $Version ne "" ) {
+        if ( $IsInstalled eq 1 && $Version ne "" ) {
             my $InstalledVersion = 0;
 
             LOCAL:
@@ -1389,7 +1389,7 @@ sub GetRequiredPackages {
             );
 
             if ( !$CheckVersion ) {
-                $IsInstalled                = "Problem";
+                $IsInstalled                = 0;
                 $IsRequiredVersionInstalled = 0;
             }
         }
@@ -1469,18 +1469,18 @@ Returns:
 
     my %RepositoryList = (
         'Freebie Features' => {
-            URL   => 'https://download.znuny.org/releases/packages/',
+            URL   => 'https://download.znuny.org/releases/packages',
         },
         'Znuny Open Source Add-ons' => {
-            URL   => 'https://addons.znuny.com/api/addon_repos/public/',
+            URL   => 'https://addons.znuny.com/public',
         },
         'Znuny GmbH' => {
-            URL   => 'https://addons.znuny.com/api/addon_repos/',
+            URL   => 'https://addons.znuny.com/private',
             AuthHeaderKey   => '...',
             AuthHeaderValue => '...',
         },
         'Customer Z' => {
-            URL             => 'https://addons.znuny.com/api/addon_repos/',
+            URL             => 'https://addons.znuny.com/private',
             AuthHeaderKey   => '...',
             AuthHeaderValue => '...',
         },
@@ -1529,10 +1529,10 @@ sub ConfiguredRepositoryListGet {
 Returns a list of available packages for the given source repository.
 
     my @List = $PackageObject->RepositoryPackageListGet(
-        Source             => 'Example repository 1', # the value of key 'Name' in item of SysConfig option Package::RepositoryList or a direct download URL
+        Source             => 'Example repository 1',   # the value of key 'Name' in item of SysConfig option Package::RepositoryList or a direct download URL
         Lang               => 'en',
-        Cache              => 0,    # (optional) use cached data
-        IncludeSameVersion => 1,    # (optional) also get packages already installed and with the same version
+        Cache              => 0,                        # (optional) use cached data
+        IncludeSameVersion => 1,                        # (optional) also get packages already installed and with the same version
     );
 
 =cut
@@ -1752,6 +1752,19 @@ sub RepositoryPackageListGet {
 
     @Packages = @NewPackages;
 
+    # Sort packages by name and then by version (ascending).
+    @Packages = sort {
+        ( my $ComparableVersionA = $a->{Version} ) =~ s{(\A(\d+)\.(\d+)\.(\d+)\z)}{
+            sprintf( '%03u%03u%03u', $2, $3, $4 );
+        }e;
+        ( my $ComparableVersionB = $b->{Version} ) =~ s{(\A(\d+)\.(\d+)\.(\d+)\z)}{
+            sprintf( '%03u%03u%03u', $2, $3, $4 );
+        }e;
+
+        $a->{Name} cmp $b->{Name}
+            || $ComparableVersionA <=> $ComparableVersionB
+    } @Packages;
+
     # set cache
     if ( $Param{Cache} ) {
         $CacheObject->Set(
@@ -1833,7 +1846,7 @@ check if package (files) is deployed, returns true if it's ok
     $PackageObject->DeployCheck(
         Name    => 'Application A',
         Version => '1.0',
-        Log     => 1, # Default: 1
+        Log     => 1,       # Default: 1
     );
 
 =cut
@@ -1972,12 +1985,12 @@ build an opm package
         ],
         Filelist = [
             {
-                Location   => 'Kernel/System/Lala.pm'
+                Location   => 'Kernel/System/Lala.pm',
                 Permission => '644',
                 Content    => $FileInString,
             },
             {
-                Location   => 'Kernel/System/Lulu.pm'
+                Location   => 'Kernel/System/Lulu.pm',
                 Permission => '644',
                 Content    => $FileInString,
             },
@@ -2599,15 +2612,15 @@ sub PackageInstallDefaultFiles {
 generates a MD5 Sum for all files in a given package
 
     my $MD5Sum = $PackageObject->PackageFileGetMD5Sum(
-        Name => 'Package Name',
+        Name    => 'Package Name',
         Version => 123.0,
     );
 
 returns:
 
     $MD5SumLookup = {
-        'Direcoty/File1' => 'f3f30bd59afadf542770d43edb280489'
-        'Direcoty/File2' => 'ccb8a0b86adf125a36392e388eb96778'
+        'Direcoty/File1' => 'f3f30bd59afadf542770d43edb280489',
+        'Direcoty/File2' => 'ccb8a0b86adf125a36392e388eb96778',
     };
 
 =cut
@@ -2681,15 +2694,15 @@ sub PackageFileGetMD5Sum {
 Compare a framework array with the current framework.
 
     my %CheckOk = $PackageObject->AnalyzePackageFrameworkRequirements(
-        Framework       => $Structure{Framework}, # [ { 'Content' => '4.0.x', 'Minimum' => '4.0.4'} ]
-        NoLog           => 1, # optional
+        Framework => $Structure{Framework},     # [ { 'Content' => '4.0.x', 'Minimum' => '4.0.4'} ]
+        NoLog     => 1, # optional
     );
 
     %CheckOK = (
-        Success                     => 1,           # 1 || 0
-        RequiredFramework           => '5.0.x',
-        RequiredFrameworkMinimum    => '5.0.10',
-        RequiredFrameworkMaximum    => '5.0.16',
+        Success                  => 1,           # 1 || 0
+        RequiredFramework        => '5.0.x',
+        RequiredFrameworkMinimum => '5.0.10',
+        RequiredFrameworkMaximum => '5.0.16',
     );
 
 =cut
@@ -2871,8 +2884,7 @@ sub AnalyzePackageFrameworkRequirements {
 
 =head2 PackageUpgradeAll()
 
-Updates installed packages to their latest version. Also updates OTRS Business Solution™ if system
-    is entitled and there is an update.
+Updates installed packages to their latest version.
 
     my %Result = $PackageObject->PackageUpgradeAll(
         Force           => 1,     # optional 1 or 0, Upgrades packages even if validation fails.
@@ -2975,7 +2987,11 @@ sub PackageUpgradeAll {
     );
 
     # Modify @PackageInstalledList if ITSM packages are installed from Bundle (see bug#13778).
-    if ( grep { $_->{Name} eq 'ITSM' } @PackageInstalledList && grep { $_->{Name} eq 'ITSM' } @PackageOnlineList ) {
+    if (
+        @PackageInstalledList && grep { $_->{Name} eq 'ITSM' }
+        @PackageInstalledList && grep { $_->{Name} eq 'ITSM' } @PackageOnlineList
+        )
+    {
         my @TmpPackages = (
             'GeneralCatalog',
             'ITSMCore',
@@ -3248,7 +3264,7 @@ system data.
 Returns:
     %Result = (
         IsRunning      => 1,             # or 0 if it is not running
-        UpgradeStatus  => 'Running'      # (optional) 'Running' or 'Finished' or 'TimedOut',
+        UpgradeStatus  => 'Running',     # (optional) 'Running' or 'Finished' or 'TimedOut',
         UpgradeSuccess => 1,             # (optional) 1 or 0,
     );
 
@@ -3460,9 +3476,9 @@ sub GetRequiredModules {
             Module => $Element->{Content},
         );
 
-        my $IsInstalled = "Problem";
+        my $IsInstalled = 0;
         if ($Version) {
-            $IsInstalled = "OK";
+            $IsInstalled = 1;
         }
 
         push @Requirements, {
@@ -4188,7 +4204,7 @@ sub _FileSystemCheck {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "ERROR: Need write permissions for directory $Home$Filepath\n"
-                . " Try: $Home/bin/otrs.SetPermissions.pl!",
+                . " Try: $Home/bin/znuny.SetPermissions.pl!",
         );
 
         return;
@@ -4812,12 +4828,12 @@ Returns:
     %OnlinePackages = (
         PackageList => [
             {
-                Name => 'Test',
-                Version => '6.0.20',
-                File => 'Test-6.0.20.opm',
-                ChangeLog => 'InitialRelease',
+                Name        => 'Test',
+                Version     => '6.0.20',
+                File        => 'Test-6.0.20.opm',
+                ChangeLog   => 'InitialRelease',
                 Description => 'Test package.',
-                Framework => [
+                Framework   => [
                     {
                         Content => '6.0.x',
                         Minimum => '6.0.2',
@@ -4832,7 +4848,7 @@ Returns:
                         # ... ,
                     },
                 ],
-                URL => 'http://otrs.org/',
+                URL    => 'http://otrs.org/',
                 Vendor => 'OTRS AG',
             },
             # ...

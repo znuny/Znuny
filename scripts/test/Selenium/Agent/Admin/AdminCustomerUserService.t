@@ -18,8 +18,15 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $DBObject           = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ServiceObject      = $Kernel::OM->Get('Kernel::System::Service');
+        my $UtilObject         = $Kernel::OM->Get('Kernel::System::Util');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
 
         # Disable check email address.
         $HelperObject->ConfigSettingChange(
@@ -29,7 +36,7 @@ $Selenium->RunTest(
 
         # Create test CustomerUser.
         my $CustomerUserName = "CustomerUser" . $HelperObject->GetRandomID();
-        my $CustomerUserID   = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+        my $CustomerUserID   = $CustomerUserObject->CustomerUserAdd(
             UserFirstname  => $CustomerUserName,
             UserLastname   => $CustomerUserName,
             UserCustomerID => $CustomerUserName,
@@ -57,7 +64,7 @@ $Selenium->RunTest(
             $ServiceValues{Criticality} = '3 normal';
         }
 
-        my $ServiceID = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+        my $ServiceID = $ServiceObject->ServiceAdd(
             %ServiceValues,
         );
         $Self->True(
@@ -76,7 +83,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate AdminCustomerUserService screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminCustomerUserService");
@@ -104,7 +111,7 @@ $Selenium->RunTest(
         # Test search filter for CustomerUser.
         $Selenium->find_element( "#CustomerUserSearch", 'css' )->clear();
         $Selenium->find_element( "#CustomerUserSearch", 'css' )->send_keys($CustomerUserName);
-        $Selenium->find_element("//button[\@value='Search'][\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#CustomerUserSearch", 'css' )->VerifiedSubmit();
 
         $Self->True(
             index( $Selenium->get_page_source(), $CustomerUserName ) > -1,
@@ -115,26 +122,22 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'CustomerUserLogin=$CustomerUserName' )]")->VerifiedClick();
 
         # Check breadcrumb on allocate screen.
-        my $Count = 1;
         my $IsLinkedBreadcrumbText;
         for my $BreadcrumbText (
             'Manage Customer User-Service Relations',
-            'Allocate Services to Customer User \''
-            . $CustomerUserName . ' '
-            . $CustomerUserName . ' ('
-            . $CustomerUserName . ')\''
+            "Allocate Services to Customer User \'"
+            . $CustomerUserName . " "
+            . $CustomerUserName . " ("
+            . $CustomerUserName . ")\'"
             )
         {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => '.BreadCrumb>li>[title="' . $BreadcrumbText . '"]',
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
-        $Selenium->find_element("//input[\@value='$ServiceID']")->click();
+        $Selenium->find_element("//table[\@id='Service']//input[\@value='$ServiceID']")->click();
         $Selenium->find_element("//button[\@value='Save'][\@type='submit']")->VerifiedClick();
 
         # Check test customer user allocation to test service.
@@ -142,7 +145,7 @@ $Selenium->RunTest(
 
         $Selenium->find_element( "#CustomerUserSearch", 'css' )->clear();
         $Selenium->find_element( "#CustomerUserSearch", 'css' )->send_keys($CustomerUserName);
-        $Selenium->find_element("//button[\@value='Search'][\@type='submit']")->VerifiedClick();
+        $Selenium->find_element( "#CustomerUserSearch", 'css' )->VerifiedSubmit();
 
         $Self->Is(
             $Selenium->find_element("//input[contains(\@title, \'Toggle active state for $CustomerUserName' )]")
@@ -164,8 +167,6 @@ $Selenium->RunTest(
             0,
             "Service $ServiceName is not active for CustomerUser $CustomerUserName",
         ) || die;
-
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
         # Delete created test customer user.
         if ($ServiceID) {
@@ -199,8 +200,6 @@ $Selenium->RunTest(
             );
         }
 
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-
         # Make sure the cache is correct.
         for my $Cache (qw( CustomerUser Service )) {
             $CacheObject->CleanUp(
@@ -208,7 +207,6 @@ $Selenium->RunTest(
             );
         }
     }
-
 );
 
 1;

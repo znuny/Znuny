@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use parent qw(Kernel::Output::HTML::Dashboard::Base);
 
 our $ObjectManagerDisabled = 1;
 
@@ -37,7 +38,7 @@ sub new {
 
     $Self->{PrefKey} = 'UserDashboardPref' . $Self->{Name} . '-Shown';
 
-    $Self->{PageShown} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKey} }
+    $Self->{PageShown} = $Param{PageShown} || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKey} }
         || $Self->{Config}->{Limit};
 
     $Self->{StartHit} = int( $ParamObject->GetParam( Param => 'StartHit' ) || 1 );
@@ -83,25 +84,125 @@ sub Config {
     );
 }
 
+=head2 Header()
+
+Returns additional header content of dashboard (HTML).
+
+    my $Header = $Object->Header();
+
+Returns:
+
+    my $Header = 1;
+
+=cut
+
+sub Header {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $LayoutObject->Block(
+        Name => 'HeaderCustomerIDList',
+        Data => {
+            %Param,
+        },
+    );
+
+    # show change customer relations button if the agent has permission
+    my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
+        Action => 'AdminCustomerUserCustomer',
+        Type   => 'rw',                          # ro|rw possible
+    );
+
+    if ($ChangeCustomerReleationsAccess) {
+        $LayoutObject->Block(
+            Name => 'ContentLargeCustomerIDAdd',
+            Data => {
+                CustomerUserID => $Param{CustomerUserID},
+            },
+        );
+    }
+
+    my $Header = $LayoutObject->Output(
+        TemplateFile => 'AgentDashboardCustomerIDList',
+        Data         => {
+            %{ $Self->{Config} },
+            Name => $Self->{Name},
+        },
+        AJAX => $Param{AJAX},
+    );
+
+    return $Header;
+}
+
 sub Run {
     my ( $Self, %Param ) = @_;
 
     return if !$Param{CustomerUserID};
 
-    # get needed objects
+    my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
     my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
     my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+    my $GroupObject           = $Kernel::OM->Get('Kernel::System::Group');
+    my $LayoutObject          = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # get all customer ids of this customer user
     my @CustomerIDs = $CustomerUserObject->CustomerIDs(
         User => $Param{CustomerUserID},
     );
 
-    # add page nav bar
     my $Total = scalar @CustomerIDs;
 
-    # get layout object
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    # show link to edit customer id if the agent has permission
+    my $EditCustomerIDPermission = $LayoutObject->Permission(
+        Action => 'AdminCustomerCompany',
+        Type   => 'rw',
+    );
+
+    # show link to create new phone ticket if the agent has permission
+    my $AgentTicketPhonePermission = $LayoutObject->Permission(
+        Action => 'AgentTicketPhone',
+        Type   => 'rw',
+    );
+
+    # show link to create new email ticket if the agent has permission
+    my $AgentTicketEmailPermission = $LayoutObject->Permission(
+        Action => 'AgentTicketEmail',
+        Type   => 'rw',
+    );
+
+    # check the permission for the SwitchToCustomer feature
+    my $SwitchToCustomerPermission = 0;
+    if ( $ConfigObject->Get('SwitchToCustomer') ) {
+
+        # get the group id which is allowed to use the switch to customer feature
+        my $PermissionGroup         = $ConfigObject->Get('SwitchToCustomer::PermissionGroup');
+        my $SwitchToCustomerGroupID = $GroupObject->GroupLookup(
+            Group => $PermissionGroup,
+        );
+
+        # get user groups, where the user has the rw privilege
+        my %Groups = $GroupObject->PermissionUserGet(
+            UserID => $Self->{UserID},
+            Type   => 'rw',
+        );
+
+        # if the user is a member in this group he can access the feature
+        if ( $Groups{$SwitchToCustomerGroupID} ) {
+            $SwitchToCustomerPermission = 1;
+        }
+    }
+
+    $LayoutObject->Block(
+        Name => 'ContentCustomerIDList',
+        Data => {
+            %Param,
+            EditCustomerIDPermission   => $EditCustomerIDPermission,
+            AgentTicketPhonePermission => $AgentTicketPhonePermission,
+            AgentTicketEmailPermission => $AgentTicketEmailPermission,
+            SwitchToCustomerPermission => $SwitchToCustomerPermission,
+        },
+    );
 
     my $LinkPage = 'Subaction=Element;Name='
         . $Self->{Name} . ';'
@@ -128,30 +229,6 @@ sub Run {
         },
     );
 
-    # get config object
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    # show change customer relations button if the agent has permission
-    my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
-        Action => 'AdminCustomerUserCustomer',
-        Type   => 'rw',                          # ro|rw possible
-    );
-
-    if ($ChangeCustomerReleationsAccess) {
-        $LayoutObject->Block(
-            Name => 'ContentLargeCustomerIDAdd',
-            Data => {
-                CustomerUserID => $Param{CustomerUserID},
-            },
-        );
-    }
-
-    # show links to edit customer id if the agent has permission
-    my $EditCustomerIDPermission = $LayoutObject->Permission(
-        Action => 'AdminCustomerCompany',
-        Type   => 'rw',                     # ro|rw possible
-    );
-
     @CustomerIDs = splice @CustomerIDs, $Self->{StartHit} - 1, $Self->{PageShown};
 
     for my $CustomerID (@CustomerIDs) {
@@ -166,8 +243,11 @@ sub Run {
             Data => {
                 %Param,
                 %CustomerCompany,
-                CustomerID               => $CustomerID,
-                EditCustomerIDPermission => %CustomerCompany ? $EditCustomerIDPermission : 0,
+                CustomerID                 => $CustomerID,
+                EditCustomerIDPermission   => %CustomerCompany ? $EditCustomerIDPermission : 0,
+                AgentTicketPhonePermission => $AgentTicketPhonePermission,
+                AgentTicketEmailPermission => $AgentTicketEmailPermission,
+                SwitchToCustomerPermission => $SwitchToCustomerPermission,
             },
         );
 

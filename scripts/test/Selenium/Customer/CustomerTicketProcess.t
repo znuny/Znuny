@@ -19,7 +19,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # Do not check RichText.
         $HelperObject->ConfigSettingChange(
@@ -34,8 +36,6 @@ $Selenium->RunTest(
             Key   => 'Ticket::Type',
             Value => 1
         );
-
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         my @DynamicFields = (
             {
@@ -252,7 +252,7 @@ $Selenium->RunTest(
         sleep 1;
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -397,23 +397,7 @@ $Selenium->RunTest(
         $Element->is_enabled();
         $Element->is_displayed();
 
-        my $OTRSBusinessIsInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-        my $OTRSSTORMIsInstalled    = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSSTORMIsInstalled();
-        my $OTRSCONTROLIsInstalled  = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSCONTROLIsInstalled();
-
-        my $FooterMessage;
-        if ($OTRSSTORMIsInstalled) {
-            $FooterMessage = 'STORM powered by OTRS';
-        }
-        elsif ($OTRSCONTROLIsInstalled) {
-            $FooterMessage = 'CONTROL powered by OTRS';
-        }
-        elsif ($OTRSBusinessIsInstalled) {
-            $FooterMessage = 'Powered by OTRS Business Solution';
-        }
-        else {
-            $FooterMessage = 'Powered by ' . $ConfigObject->Get('Product');
-        }
+        my $FooterMessage = 'Powered by ' . $ConfigObject->Get('Product');
 
         # Get secure disable banner.
         my $SecureDisableBanner = $ConfigObject->Get('Secure::DisableBanner');

@@ -7,37 +7,38 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
 
-    <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('System Configuration'),
-                Link => 'AdminSystemConfiguration',
-            },
-        ]
-    %]
-
-[% IF Env("Subaction") == 'Search' %]
-    [% IF Data.Search %]
-        [% BreadcrumbPath.push({ Name => Translate('Search for') _ ' "' _ Data.Search _ '"', Link => 'AdminSystemConfiguration;Subaction=Search;Search=' _ Data.Search }) %]
-    [% ELSIF Data.Category %]
-        [% BreadcrumbPath.push({ Name => Translate('Search for category') _ ' "' _ Translate(Data.Category) _ '"', Link => 'AdminSystemConfiguration;Subaction=Search;Category=' _ Data.Category }) %]
-    [% END %]
-[% ELSIF Env("Subaction") == 'SearchLocked' %]
-    [% BreadcrumbPath.push({ Name => Translate('Settings I\'m currently editing'), Link => 'AdminSystemConfiguration;Subaction=SearchLocked' }) %]
-[% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
         [% INCLUDE "SystemConfiguration/Sidebar/Actions.tt" %]
         [% INCLUDE "SystemConfiguration/Sidebar/Help.tt" %]
         [% INCLUDE "SystemConfiguration/Sidebar/DynamicActions.tt" %]
     </div>
 
     <div class="ContentColumn">
+
+        <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('System Configuration'),
+                    Link => 'AdminSystemConfiguration',
+                },
+            ]
+        %]
+
+    [% IF Env("Subaction") == 'Search' %]
+        [% IF Data.Search %]
+            [% BreadcrumbPath.push({ Name => Translate('Search for') _ ' "' _ Data.Search _ '"', Link => 'AdminSystemConfiguration;Subaction=Search;Search=' _ Data.Search }) %]
+        [% ELSIF Data.Category %]
+            [% BreadcrumbPath.push({ Name => Translate('Search for category') _ ' "' _ Translate(Data.Category) _ '"', Link => 'AdminSystemConfiguration;Subaction=Search;Category=' _ Data.Category }) %]
+        [% END %]
+    [% ELSIF Env("Subaction") == 'SearchLocked' %]
+        [% BreadcrumbPath.push({ Name => Translate('Settings I\'m currently editing'), Link => 'AdminSystemConfiguration;Subaction=SearchLocked' }) %]
+    [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
     [% IF Env("Subaction") == 'Search' %]
         <div class="WidgetSimple">
             <div class="Content">
@@ -69,5 +70,4 @@
     [% END %]
         [% INCLUDE "SystemConfiguration/SettingsList.tt" %]
     </div>
-    <div class="Clear"></div>
 </div>

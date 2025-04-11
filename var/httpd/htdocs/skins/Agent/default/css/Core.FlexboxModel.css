@@ -1,0 +1,175 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     Header
+    Flexbox:
+    - main classes
+    - aligns
+ */
+
+@media screen,projection,tv,handheld {
+
+    /* **************************************** Main Classes **************************************** */
+    .full-width,
+    .WidgetSimple.full-width .Content fieldset,
+    .WidgetSimple.full-width .Content form,
+    .WidgetSimple .Content fieldset.full-width,
+    .WidgetSimple .Content form.full-width {
+        max-width: unset;
+        width: 100%;
+    }
+
+    .WidgetSimple .flex-column,
+    div.flex-column,
+    span.flex-column,
+    .flex-column {
+        display: flex;
+        flex-flow: column !important;
+    }
+
+    .WidgetSimple .flex-row,
+    div.flex-row,
+    span.flex-row,
+    fieldset.flex-row,
+    .AdminManagement .WidgetSimple .Field.flex-row,
+    .flex-row {
+        display: flex;
+        flex-flow: row;
+        gap: var(--gap-xs);
+        align-items: center;
+    }
+
+    .AdminManagement .WidgetSimple .Field.flex-row {
+        flex-wrap: wrap;
+    }
+
+    .Field.flex-row > :first-child:not(select) {
+        flex: 1 0 75%;
+    }
+
+    div.flex-row.flex-wrap,
+    span.flex-row.flex-wrap,
+    div.flex-column.flex-wrap,
+    span.flex-column.flex-wrap,
+    div.flex-wrap,
+    span.flex-wrap,
+    .flex-wrap {
+        flex-wrap: wrap;
+    }
+
+    .no-gap {
+        gap: 0;
+    }
+
+    .gap-md,
+    .flex-row.gap-md,
+    .flex-column.gap-md {
+        gap: var(--gap-md);
+    }
+
+    .gap-lg,
+    .flex-row.gap-lg,
+    .flex-column.gap-lg {
+        gap: var(--gap-lg);
+    }
+
+    div.no-border-bottom,
+    span.no-border-bottom {
+        border-bottom: 0 !important;
+    }
+
+    div.no-border-top,
+    span.no-border-top {
+        border-top: 0;
+    }
+
+    div.border-bottom,
+    span.border-bottom {
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .border {
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    div.row-reverse,
+    span.row-reverse,
+    ul.row-reverse,
+    li.row-reverse {
+        flex-flow: row-reverse !important;
+    }
+
+
+    /* **************************************** Aligns **************************************** */
+    .align-left,
+    .align-center,
+    .align-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .align-left {
+        display: flex !important;
+        justify-content: flex-start !important;
+    }
+
+    .align-center {
+        justify-content: center;
+    }
+
+    .align-right {
+        justify-content: flex-end;
+    }
+
+    .align-left-auto {
+        margin-right: auto !important;
+    }
+
+    .align-right-auto {
+        margin-left: auto !important;
+    }
+
+    .align-item-left {
+        display: flex;
+        align-items: flex-start !important;
+    }
+
+    .align-item-right {
+        display: flex;
+        align-items: flex-end !important;
+    }
+
+    .align-item-start {
+        display: flex;
+        align-items: flex-start !important;
+    }
+
+    .space-between {
+        justify-content: space-between !important;
+    }
+
+    .no-padding {
+        padding: 0 !important;
+    }
+
+    .no-margin {
+        margin: 0 !important;
+    }
+
+    .padding-lg {
+        padding: var(--padding-lg);
+    }
+
+    .padding-md {
+        padding: var(--padding-md);
+    }
+
+}

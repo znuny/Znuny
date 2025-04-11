@@ -31,27 +31,16 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # ------------------------------------------------------------ #
-    # Send Support Data Update
-    # ------------------------------------------------------------ #
-
-    if ( $Self->{Subaction} eq 'SendUpdate' ) {
-
-        my %Result = $Kernel::OM->Get('Kernel::System::Registration')->RegistrationUpdateSend();
-
-        return $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Attachment(
-            ContentType => 'text/html',
-            Content     => $Result{Success},
-            Type        => 'inline',
-            NoCache     => 1,
-        );
-    }
-    elsif ( $Self->{Subaction} eq 'GenerateSupportBundle' ) {
+    if ( $Self->{Subaction} eq 'GenerateSupportBundle' ) {
         return $Self->_GenerateSupportBundle();
     }
     elsif ( $Self->{Subaction} eq 'DownloadSupportBundle' ) {
         return $Self->_DownloadSupportBundle();
     }
+    elsif ( $Self->{Subaction} eq 'DeleteCache' ) {
+        return $Self->_DeleteCache();
+    }
+
     return $Self->_SupportDataCollectorView(%Param);
 }
 
@@ -64,9 +53,6 @@ sub _SupportDataCollectorView {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    # check if cloud services are disabled
-    my $CloudServicesDisabled = $Kernel::OM->Get('Kernel::Config')->Get('CloudServices::Disabled') || 0;
-
     if ( !$SupportData{Success} ) {
         $LayoutObject->Block(
             Name => 'SupportDataCollectionFailed',
@@ -74,11 +60,6 @@ sub _SupportDataCollectorView {
         );
     }
     else {
-        if ($CloudServicesDisabled) {
-            $LayoutObject->Block(
-                Name => 'CloudServicesWarning',
-            );
-        }
         $LayoutObject->Block(
             Name => 'NoteSupportBundle',
         );
@@ -384,6 +365,12 @@ sub _DownloadSupportBundle {
         ContentType => 'application/octet-stream; charset=' . $LayoutObject->{UserCharset},
         Content     => $$Content,
     );
+}
+
+sub _DeleteCache {
+    my ($Self) = @_;
+    $Kernel::OM->Get('Kernel::System::SupportDataCollector')->DeleteCache();
+    return $Self->_SupportDataCollectorView();
 }
 
 1;

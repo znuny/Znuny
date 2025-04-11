@@ -23,7 +23,8 @@ Znuny.Agent.MentionAction = (function (TargetNS) {
         };
 
         $('.MentionRow').each(function() {
-            $(this).on('click', function() {
+            $(this).on('click', function(Event) {
+                Event.preventDefault();
                 Data.MentionedUserID = $(this).attr('data-user-id');
 
                 Core.AJAX.FunctionCall(
@@ -34,7 +35,7 @@ Znuny.Agent.MentionAction = (function (TargetNS) {
                     }
                 )
             });
-       });
+        });
     };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

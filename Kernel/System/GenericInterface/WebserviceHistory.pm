@@ -55,7 +55,7 @@ add new WebserviceHistory entry
     my $ID = $WebserviceHistoryObject->WebserviceHistoryAdd(
         WebserviceID => 2134,
         Config       => {
-            ...
+            # ...
         },
         UserID  => 123,
     );
@@ -183,7 +183,7 @@ update WebserviceHistory attributes
 
     my $Success = $WebserviceHistoryObject->WebserviceHistoryUpdate(
         ID           => 123,
-        WebserviceID => 123
+        WebserviceID => 123,
         Config       => $ConfigHashRef,
         UserID       => 123,
     );

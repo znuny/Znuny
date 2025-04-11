@@ -31,5 +31,5 @@
 </div>
 
 <div class="ContentFooter Center">
-    <button id="SplitSubmit" class="Primary CallForAction" value="[% Translate("Split") | html %]" type="submit"><span>[% Translate("Split") | html %]</span></button>
+    <button id="SplitSubmit" class="btn-main btn-primary btn-width-md" value="[% Translate("Split") | html %]" type="submit"><span>[% Translate("Split") | html %]</span></button>
 </div>

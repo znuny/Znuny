@@ -19,11 +19,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
         # get dashboard Image plugin default sysconfig
-        my %ImageConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+        my %ImageConfig = $SysConfigObject->SettingGet(
             Name    => 'DashboardBackend###0200-Image',
             Default => 1,
         );

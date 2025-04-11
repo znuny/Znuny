@@ -23,6 +23,7 @@ $Selenium->RunTest(
         my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
         my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
         my $UserObject        = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 
         my $RandomID = $HelperObject->GetRandomID();
 
@@ -34,7 +35,7 @@ $Selenium->RunTest(
             UserID  => 1,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my $NextMonthObject = $Kernel::OM->Create('Kernel::System::DateTime');
         $NextMonthObject->Add(

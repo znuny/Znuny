@@ -25,6 +25,7 @@ $Selenium->RunTest(
         my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
         my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Do not check email addresses.
         $ConfigObject->Set(
@@ -533,7 +534,7 @@ $Selenium->RunTest(
         );
 
         # Clean the article cache, otherwise we'll get the caches result, which are wrong.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Article',
         );
 
@@ -800,7 +801,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

@@ -60,7 +60,7 @@ sub new {
     Returns:
 
     $Activity = {
-          'Name'           => 'Activity 3'
+          'Name'           => 'Activity 3',
           'CreateTime'     => '08-02-2012 13:37:00',
           'ChangeBy'       => '2',
           'ChangeTime'     => '09-02-2012 13:37:00',

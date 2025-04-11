@@ -241,7 +241,7 @@ sub Run {
         $Self->Print(
             "\nFollowing settings were not fixed:\n"
                 . join( ",\n", map {"  - $_"} @NotFixedSettings ) . "\n"
-                . "\nPlease use console command (bin/otrs.Console.pl Admin::Config::Update --help) or GUI to fix them.\n\n"
+                . "\nPlease use console command (bin/znuny.Console.pl Admin::Config::Update --help) or GUI to fix them.\n\n"
         );
     }
 

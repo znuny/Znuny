@@ -143,7 +143,7 @@ Returns:
             ChangeTime => '...',
             ChangeBy   => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -198,7 +198,7 @@ Returns:
             ChangeTime => '...',
             ChangeBy   => '...',
         },
-        ...
+        # ...
     );
 
 =cut
@@ -327,10 +327,10 @@ Returns:
                 ClientID      => 2,
                 Scope         => https://mail.google.com/,
                 ClientSecret  => 3,
-                TemplateName  => Google Mail
+                TemplateName  => Google Mail,
                 Notifications => {
                     NotifyOnExpiredRefreshToken => 1,
-                    NotifyOnExpiredToken        => 1
+                    NotifyOnExpiredToken        => 1,
                 },
             },
             ValidID    => 1,

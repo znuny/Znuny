@@ -67,10 +67,10 @@ add new Activity
 returns the id of the created activity if success or undef otherwise
 
     my $ID = $ActivityObject->ActivityAdd(
-        EntityID => 'A1'                                                # mandatory, exportable unique identifier
+        EntityID => 'A1',                                               # mandatory, exportable unique identifier
         Name     => 'NameOfActivity',                                   # mandatory
         Config   => {                                                   # mandatory, activity configuration to be stored in YAML format
-            Scope         => 'Global'                                   # mandatory, default 'Global' (Process|Global)
+            Scope         => 'Global',                                  # mandatory, default 'Global' (Process|Global)
             ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199' # ScopeEntityID, used if specific scope is set e.g. 'Process'
         },
         UserID   => 123,                                                # mandatory

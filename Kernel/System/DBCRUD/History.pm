@@ -29,6 +29,10 @@ our %ConfigBackup;
 our @ConfigBackupColumns
     = qw(Columns Name Identifier DatabaseTable DefaultSortBy DefaultOrderBy CacheType CacheTTL PreventHistory FunctionDataAdd FunctionDataUpdate FunctionDataDelete FunctionDataGet FunctionDataListGet FunctionDataSearch FunctionDataSearchValue);
 
+=head1 NAME
+
+Kernel::System::DBCRUD::History
+
 =head2 HistoryBackendSet()
 
 This function sets the information for the history DBCRUD module
@@ -598,7 +602,7 @@ sub _DataHistoryGet {
         );
     }
 
-    # set default because we dont write the initial value of data add to the history
+    # set default because we don't write the initial value of data add to the history
     # because of performance reasons
     DEFAULT:
     for my $Key ( sort keys %DataGet ) {
@@ -660,9 +664,11 @@ sub _DataHistoryGet {
 
     # trigger event
     $Self->EventHandler(
-        Event  => $Self->{Name} . 'HistoryGet',
-        Data   => \%Entry,
-        UserID => $Param{UserID} || 1,
+        ModuleName        => ref $Self,
+        UseHistoryBackend => 1,
+        Event             => 'DBCRUDHistoryGet',
+        Data              => \%Entry,
+        UserID            => $Param{UserID} || 1,
     );
 
     return %Entry;

@@ -19,9 +19,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
 
         # do not check email addresses
         $HelperObject->ConfigSettingChange(
@@ -41,14 +44,14 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # create test company
         my $TestCustomerID    = $HelperObject->GetRandomID() . "CID";
         my $TestCompanyName   = "Company" . $HelperObject->GetRandomID();
-        my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $TestCustomerID,
             CustomerCompanyName    => $TestCompanyName,
             CustomerCompanyStreet  => '5201 Blue Lagoon Drive',
@@ -70,7 +73,7 @@ $Selenium->RunTest(
         my @CustomerIDs;
         for my $Customers ( 1 .. 3 ) {
             my $TestCustomerLogin = "Customer" . $HelperObject->GetRandomID();
-            my $CustomerID        = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
+            my $CustomerID        = $CustomerUserObject->CustomerUserAdd(
                 Source         => 'CustomerUser',
                 UserFirstname  => $TestCustomerLogin,
                 UserLastname   => $TestCustomerLogin,
@@ -131,7 +134,7 @@ $Selenium->RunTest(
 
         # make sure the cache is correct
         for my $Cache (qw(CustomerCompany CustomerUser)) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+            $CacheObject->CleanUp(
                 Type => $Cache,
             );
         }

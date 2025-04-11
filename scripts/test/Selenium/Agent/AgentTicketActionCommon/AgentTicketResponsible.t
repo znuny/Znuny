@@ -20,6 +20,9 @@ $Selenium->RunTest(
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Enable change owner to everyone feature.
         $HelperObject->ConfigSettingChange(
@@ -42,7 +45,7 @@ $Selenium->RunTest(
             Value => 0,
         );
 
-        my $Config = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::AgentTicketResponsible');
+        my $Config = $ConfigObject->Get('Ticket::Frontend::AgentTicketResponsible');
         $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketResponsible',
@@ -66,7 +69,7 @@ $Selenium->RunTest(
         # Get test users ID.
         my @UserID;
         for my $UserID (@TestUser) {
-            my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+            my $TestUserID = $UserObject->UserLookup(
                 UserLogin => $UserID,
             );
 
@@ -98,7 +101,7 @@ $Selenium->RunTest(
             Password => $TestUser[0],
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to zoom view of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -171,7 +174,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
 
@@ -207,7 +210,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     }
