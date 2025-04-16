@@ -1,4 +1,5 @@
 # 6.5.15 2025-xx-xx
+ - 2025-04-16 Fixed bug - $LayoutObject->BuildDateSelection() does not deactivate the DatePicker and DatePickerIcon if Disabled is 1.
  - 2025-04-11 Added option CcAddressRegExp to postmaster filter ExternalTicketNumberRecognition.
  - 2025-03-27 Added option ToAddressRegExp to postmaster filter ExternalTicketNumberRecognition.
  - 2025-03-26 Added German message for ticket event notification "ticket email delivery failure".
