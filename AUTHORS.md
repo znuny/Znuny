@@ -5,6 +5,7 @@ The following persons contributed to Znuny:
 * Alex Kantchev <ak@otrs.com>
 * Alex Mazur <alex.mazur@otrs.com>
 * Alexandre D. Rogoski <alexandre@exatati.com.br>
+* AM Mike <monitoring@amlogisticsolutions.de>
 * André Brás <andre.bras@otrs.com>
 * anonymous <unknown@anonymous>
 * arlecchino <kolbma@users.noreply.github.com>
