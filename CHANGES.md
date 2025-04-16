@@ -1,4 +1,5 @@
 # 6.5.15 2025-xx-xx
+ - 2025-04-11 Added option CcAddressRegExp to postmaster filter ExternalTicketNumberRecognition.
  - 2025-03-27 Added option ToAddressRegExp to postmaster filter ExternalTicketNumberRecognition.
  - 2025-03-26 Added German message for ticket event notification "ticket email delivery failure".
  - 2025-03-25 Fixed bug - In AdminRoles comment display for roles is too short. Changed Truncation to 80.
