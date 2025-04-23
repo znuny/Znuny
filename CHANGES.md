@@ -12,6 +12,7 @@
  - 2025-02-28 Fixed missing notification in process management activity dialog edit screen.
  - 2025-02-28 Fixed doubled notification in process management transition edit screen.
  - 2025-02-27 Fixed obsolete parameter in overview URL. After jumping to AgentTicketZoom from an overview like AgentTicketStatus and return to that overview the URL parameter TicketID stays persistent to the URL. This action is repetitive and works with multiple TicketIDs, but the TicketID is not needed in anyway.
+ - 2025-02-26 Added option to generic interface operations TicketCreate and TicketUpdate to control if a signature will be appended to the sent article's body.
  - 2025-02-25 Added missing DynamicFieldScreens configuration for `LinkObject::ComplexTable###Ticket`.
  - 2025-02-25 Improved DynamicFieldUpdate function - InternalField can now be changed. InternalField is never set via the GUI (e.g. AdminDynamicFieldText.pm). If it is set via the "Backend" for example PackageSetup it should also be possible to change the 'InternalField' again.
  - 2025-02-25 Fixed AjaxAttachment.pm bug - Use of uninitialized value in concatenation (.) or string.
