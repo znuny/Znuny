@@ -54,6 +54,12 @@ for my $Key ( sort keys %UserData ) {
     next KEY if $Key =~ m/UserEmail$/smx;
     next KEY if $Key =~ m/UserMobile$/smx;
 
+    # Skip UserLastPwChangeTime
+    next KEY if $Key eq 'UserLastPwChangeTime';
+
+    # Skip UserLoginFailed
+    next KEY if $Key eq 'UserLoginFailed';
+
     # Skip out-of-office status (will always be set dynamically in Kernel::System::User
     # and cannot be set/changed by SetPreferences()).
     next KEY if $Key eq 'LoggedStatusMessage';
