@@ -31,6 +31,8 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
@@ -59,21 +61,53 @@ sub Run {
         my $Key   = $ParamObject->GetParam( Param => 'Key' );
         my $Value = $ParamObject->GetParam( Param => 'Value' );
 
-        # update preferences
-        my $Success = $UserObject->SetPreferences(
-            UserID => $Self->{CurrentUserID},
-            Key    => $Key,
-            Value  => $Value,
-        );
+        #
+        # Check config AgentPreferences::AJAXUpdate::AllowedKeys
+        #
+        my $KeyAllowed;
+        my $AllowedKeys = $ConfigObject->Get('AgentPreferences::AJAXUpdate::AllowedKeys') // {};
 
-        # update session
-        if ( $Success && !defined $EditUserID ) {
-            $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
-                SessionID => $Self->{SessionID},
-                Key       => $Key,
-                Value     => $Value,
+        CONTEXT:
+        for my $Context ( sort keys %{$AllowedKeys} ) {
+            ALLOWEDKEYREGEX:
+            for my $AllowedKeyRegex ( @{ $AllowedKeys->{$Context} // [] } ) {
+                next ALLOWEDKEYREGEX if $Key !~ m{$AllowedKeyRegex};
+
+                $KeyAllowed = 1;
+                last CONTEXT;
+            }
+        }
+
+        # Default to success to prevent reporting an error to the client if the key is not allowed
+        # in the first place.
+        my $Success = 1;
+
+        if ($KeyAllowed) {
+
+            # update preferences
+            $Success = $UserObject->SetPreferences(
+                UserID => $Self->{CurrentUserID},
+                Key    => $Key,
+                Value  => $Value,
+            );
+
+            # update session
+            if ( $Success && !defined $EditUserID ) {
+                $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
+                    SessionID => $Self->{SessionID},
+                    Key       => $Key,
+                    Value     => $Value,
+                );
+            }
+        }
+        else {
+            $LogObject->Log(
+                Priority => 'debug',
+                Message =>
+                    "User preference key $Key is not configured in AgentPreferences::AJAXUpdate::AllowedKeys to be allowed to be set via UpdateAJAX.",
             );
         }
+
         my $JSON = $LayoutObject->JSONEncode(
             Data => $Success,
         );

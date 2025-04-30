@@ -25836,3 +25836,7 @@ msgstr "Eine Liste aller möglichen Match- und Set-Kriterien finden Sie im ACL-R
 msgid "Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default)."
 msgstr "Sobald das Limit der beobachteten Tickets pro Nutzer erreicht ist, werden die ältesten Einträge aus der Beobachtungsliste entfernt. Deaktivieren Sie diese Einstellung oder setzen Sie sie auf 0, um das Limit zu deaktivieren (Standard)."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions."
+msgstr "Liste von Benutzereinstellungen (Keys), für die ein Update per UpdateAJAX-Subaction über das Frontendmodul AgentPreferences erlaubt ist. Eingabe als reguläre Ausdrücke."
+

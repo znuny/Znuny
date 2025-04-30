@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.914883346741754;
+    $Self->{Completeness}        = 0.914736164736165;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8074,6 +8074,8 @@ sub Data {
             '',
         'Loader module registration for the public interface.' => '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',

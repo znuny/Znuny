@@ -1,4 +1,4 @@
-# 6.5.15 2025-xx-xx
+# 6.5.15 2025-04-30
  - 2025-04-24 Fixed bug - Setting the password does not reset preferences UserLoginFailed and UserLastPwChangeTime.
  - 2025-04-16 Updated Net::IMAP::Simple to latest version from GitHub. Thanks to @dandanpena. [PR#155](https://github.com/znuny/Znuny/pull/155)
  - 2025-04-16 Fixed bug - $LayoutObject->BuildDateSelection() does not deactivate the DatePicker and DatePickerIcon if Disabled is 1. Thanks for reporting to @BuilderNSV. [#649](https://github.com/znuny/Znuny/issues/649)
@@ -10,6 +10,7 @@
  - 2025-03-19 AdminSystemConfiguration: Addon name is no longer translated.
  - 2025-03-12 Fixed bug - Ticket::Frontend::Article::Actions###??? no possibility to add a new entry.
  - 2025-03-07 Fixed GroupSelection in AdminAppointmentCalendarManage for admin group member. A user can only create AppointmentCalendars for their own groups, even though they are a member of the Admin group.
+ - 2025-03-05 CVE-2025-43926: AgentPreferences now only supports configured user preference keys (in AgentPreferences::AJAXUpdate::AllowedKeys) to be updated via AJAX request. Thanks to Tim Püttmanns (maxence) for reporting the issue.
  - 2025-03-03 Improved performance in Kernel::System::LinkObject by fixing the cache key.
  - 2025-02-28 Fixed missing notification in process management activity dialog edit screen.
  - 2025-02-28 Fixed doubled notification in process management transition edit screen.

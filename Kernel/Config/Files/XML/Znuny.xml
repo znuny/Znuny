@@ -3248,6 +3248,28 @@
         </Value>
     </Setting>
 
+    <!-- AgentPreferences -->
+    <Setting Name="AgentPreferences::AJAXUpdate::AllowedKeys###Framework" Required="0" Valid="1">
+        <Description Translatable="1">List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.</Description>
+        <Navigation>Core::AgentPreferences</Navigation>
+        <Value>
+            <Array>
+                <Item>\AAdminNavigationBarFavourites\z</Item>
+                <Item>\AUserAgentDoNotShowBrowserLinkMessage\z</Item>
+                <Item>\AUserPopupProfile\z</Item>
+                <Item>\AUserSystemConfigurationCategory\z</Item>
+                <Item>\AUserSystemConfigurationFavourites\z</Item>
+                <Item>\AUserTicketZoomArticleTableHeight\z</Item>
+
+                <!-- Core.Agent.Admin.SystemConfiguration.Init, sidebar action widget toggle -->
+                <Item>\AUserWidgetState.+</Item>
+
+                <!-- Core.UI.AdvancedChart.UpdatePreferences, line diagram dashboard widgets -->
+                <Item>\AGraphWidget.+</Item>
+            </Array>
+        </Value>
+    </Setting>
+
     <!-- Limit for watched tickets -->
     <Setting Name="Ticket::WatcherLimit" Required="0" Valid="1">
         <Description Translatable="1">Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).</Description>
