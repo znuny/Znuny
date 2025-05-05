@@ -1,3 +1,6 @@
+# 6.5.16 2025-??-??
+ - 2025-05-05 Fixed: Memory overflow in calendar event when displayed in the ticket detail view. Thanks to @DonMarlowne. [PR#652](https://github.com/znuny/Znuny/pull/652)
+
 # 6.5.15 2025-04-30
  - 2025-04-24 Fixed bug - Setting the password does not reset preferences UserLoginFailed and UserLastPwChangeTime.
  - 2025-04-16 Updated Net::IMAP::Simple to latest version from GitHub. Thanks to @dandanpena. [PR#155](https://github.com/znuny/Znuny/pull/155)
