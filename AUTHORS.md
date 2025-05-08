@@ -30,6 +30,7 @@ The following persons contributed to Znuny:
 * Diego Selzlein <diegoselzlein@gmail.com>
 * Dietmar Berg <dietmar.berg@thalesgroup.com>
 * Dominik Klein <dominik.klein@otrs.com>
+* DonMarlowne <184617043+DonMarlowne@users.noreply.github.com>
 * Dusan Vuckovic <dusan.vuckovic@otrs.com>
 * Elias Probst <elias.probst@otrs.com>
 * Elva Novoa <elva.novoa@otrs.com>
