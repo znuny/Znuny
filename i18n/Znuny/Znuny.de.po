@@ -45,15 +45,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2024-03-06 19:11+0000\n"
-"Last-Translator: Emin Yazi <yazi@efflux.de>\n"
-"Language-Team: German <https://translations.znuny.org/projects/znuny-lts/znuny/de/>\n"
+"PO-Revision-Date: 2025-05-10 18:18+0000\n"
+"Last-Translator: Roy Kaldung <rk@znuny.com>\n"
+"Language-Team: German <https://translations.znuny.org/projects/znuny-lts/"
+"znuny/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0.2\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -6493,7 +6494,7 @@ msgstr "Beispielvorlage"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
 msgid "The current ticket state is"
-msgstr "Der aktuelle Ticket-Status ist"
+msgstr "Der aktuell Status des Tickets ist"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
 msgid "Your email address is"
@@ -25839,4 +25840,3 @@ msgstr "Sobald das Limit der beobachteten Tickets pro Nutzer erreicht ist, werde
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions."
 msgstr "Liste von Benutzereinstellungen (Keys), für die ein Update per UpdateAJAX-Subaction über das Frontendmodul AgentPreferences erlaubt ist. Eingabe als reguläre Ausdrücke."
-
