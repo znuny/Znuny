@@ -1,4 +1,5 @@
 # 6.5.16 2025-??-??
+ - 2025-05-15 Fixed bug - Process Management: Dynamic Field Long Description is on the wrong side of Label.
  - 2025-05-05 Fixed: Memory overflow in calendar event when displayed in the ticket detail view. Thanks to @DonMarlowne. [PR#652](https://github.com/znuny/Znuny/pull/652)
  - 2025-03-26 Fixed tree view icon not showing up for dynamic field types Dropdown and Multiselect.
 

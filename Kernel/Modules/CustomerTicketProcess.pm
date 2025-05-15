@@ -2064,16 +2064,32 @@ sub _RenderDynamicField {
         ErrorMessage         => $ErrorMessage,
     );
 
+    my $LabelText = $LayoutObject->Ascii2Html(
+        Text => $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} )
+    );
+
     my %Data = (
         Name    => $DynamicFieldConfig->{Name},
-        Label   => $DynamicFieldHTML->{Label},
         Content => $DynamicFieldHTML->{Field},
+        Label   => $LabelText,
     );
+
+    if ( $Param{ActivityDialogField}->{Display} == 2 ) {
+        $Data{MandatoryClass} = 'Mandatory';
+    }
 
     $LayoutObject->Block(
         Name => $Param{ActivityDialogField}->{LayoutBlock} || 'rw:DynamicField',
         Data => \%Data,
     );
+
+    if ( $Param{ActivityDialogField}->{Display} == 2 ) {
+        $LayoutObject->Block(
+            Name => 'LabelSpan',
+            Data => {},
+        );
+    }
+
     if ( $Param{DescriptionShort} ) {
         $LayoutObject->Block(
             Name => $Param{ActivityDialogField}->{LayoutBlock}

@@ -9,13 +9,20 @@
 
 [% RenderBlockStart("rw:DynamicField") %]
 <div class="Row Row_DynamicField_[% Data.Name %]">
+
+    <label for="[% Data.Name | html %]" class="[% Data.MandatoryClass | html %]">
+[% RenderBlockStart("LabelSpan") %]
+        <span class="Marker">*</span>
+[% RenderBlockEnd("LabelSpan") %]
 [% RenderBlockStart("rw:DynamicField:DescriptionLong") %]
-    <span class="FieldHelpContainer">
-        <i class="fa fa-question-circle FieldHelpTrigger"></i>
-        <span>[% Translate(Data.DescriptionLong) | html %]</span>
-    </span>
+        <span class="FieldHelpContainer">
+            <i class="fa fa-question-circle FieldHelpTrigger"></i>
+            <span>[% Translate(Data.DescriptionLong) | html %]</span>
+        </span>
 [% RenderBlockEnd("rw:DynamicField:DescriptionLong") %]
-    [% Data.Label %]
+        [% Data.Label %]:
+    </label>
+
     <div class="Field">
         [% Data.Content %]
 [% RenderBlockStart("rw:DynamicField:DescriptionShort") %]
