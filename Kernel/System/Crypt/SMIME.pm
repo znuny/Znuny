@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2025 Informatyka Boguslawski sp. z o.o. sp.k., https://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -16,6 +17,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
     'Kernel::System::Cache',
     'Kernel::System::CheckItem',
     'Kernel::System::CustomerUser',
@@ -1097,6 +1099,7 @@ sub CertificateAdd {
 
     my $DBObject       = $Kernel::OM->Get('Kernel::System::DB');
     my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+    my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     my $UserID = $Param{UserID} // 1;
 
@@ -1119,7 +1122,7 @@ sub CertificateAdd {
         );
         %Result = (
             Successful => 0,
-            Message    => 'Can\'t add invalid certificate!',
+            Message    => $LayoutObject->{LanguageObject}->Translate('Can\'t add invalid certificate!'),
         );
         return %Result;
     }
@@ -1135,7 +1138,7 @@ sub CertificateAdd {
         if ( $Attributes{Fingerprint} eq $CertResult->{Fingerprint} ) {
             %Result = (
                 Successful => 0,
-                Message    => 'Certificate already installed!',
+                Message    => $LayoutObject->{LanguageObject}->Translate('Certificate already installed!'),
             );
             return %Result;
         }
@@ -1159,7 +1162,7 @@ sub CertificateAdd {
             close($OUT);
             %Result = (
                 Successful => 1,
-                Message    => 'Certificate uploaded',
+                Message    => $LayoutObject->{LanguageObject}->Translate('Certificate uploaded'),
                 Filename   => "$Attributes{Hash}.$Count",
             );
 
@@ -1200,7 +1203,8 @@ sub CertificateAdd {
 
     %Result = (
         Successful => 0,
-        Message    => "No more available filenames for certificate hash:$Attributes{Hash}!",
+        Message    => $LayoutObject->{LanguageObject}
+            ->Translate( 'No more available filenames for certificate hash:%s!', $Attributes{Hash} ),
     );
     return %Result;
 }
@@ -1246,7 +1250,7 @@ sub CertificateGet {
 
 =head2 CertificateRemove()
 
-remove a local certificate
+remove a local certificate and its private key
 
     $CryptObject->CertificateRemove(
         Filename => $CertificateHash,
@@ -1262,7 +1266,8 @@ remove a local certificate
 sub CertificateRemove {
     my ( $Self, %Param ) = @_;
 
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # check needed stuff
     if ( !$Param{Filename} && !( $Param{Hash} && $Param{Fingerprint} ) ) {
@@ -1291,10 +1296,10 @@ sub CertificateRemove {
         );
     }
 
-    # private certificate shouldn't exists if certificate is deleted
-    # therefor if exists, first remove private certificate
-    # if private delete fails abort certificate removing
+    my $Message = $LayoutObject->{LanguageObject}->Translate('Certificate removed');
 
+    # Private key shouldn't exist without its certificate so remove private key first.
+    # If private key removing fails, abort certificate removing.
     my ($PrivateExists) = $Self->PrivateGet(
         Filename => $Param{Filename},
     );
@@ -1306,24 +1311,27 @@ sub CertificateRemove {
         if ( !$PrivateResults{Successful} ) {
             %Result = (
                 Successful => 0,
-                Message    => "Delete certificate aborted, $PrivateResults{Message}: $!!",
+                Message    => $LayoutObject->{LanguageObject}->Translate(
+                    'Error removing private key, certificate removing aborted: %s!',
+                    "$PrivateResults{Message}: $!"
+                ),
             );
             return %Result;
         }
+
+        $Message = $LayoutObject->{LanguageObject}->Translate('Certificate and its private key removed');
     }
 
-    my $Message = "Certificate successfully removed";
     my $Success = 1;
 
-    # remove certificate
+    # Remove certificate.
     my $Cert = unlink "$Self->{CertPath}/$Param{Filename}";
     if ( !$Cert ) {
-        $Message = "Impossible to remove certificate: $Self->{CertPath}/$Param{Filename}: $!!";
+        $Message
+            = $LayoutObject->{LanguageObject}
+            ->Translate( 'Error removing certificate, only its private key was removed: %s!',
+            "$Self->{CertPath}/$Param{Filename}: $!" );
         $Success = 0;
-    }
-
-    if ($PrivateExists) {
-        $Message .= ". Private certificate successfully deleted";
     }
 
     if ($Success) {
@@ -1714,6 +1722,7 @@ sub PrivateAdd {
 
     my $DBObject       = $Kernel::OM->Get('Kernel::System::DB');
     my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+    my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     my $UserID = $Param{UserID} // 1;
 
@@ -1738,7 +1747,7 @@ sub PrivateAdd {
         );
         %Result = (
             Successful => 0,
-            Message    => 'No private key',
+            Message    => $LayoutObject->{LanguageObject}->Translate('No private key!'),
         );
         return;
     }
@@ -1748,22 +1757,28 @@ sub PrivateAdd {
     if ( !@Certificates ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Need Certificate of Private Key first -$Attributes{Modulus})!",
+            Message =>
+                "Certificate for private key not found (upload it first) or invalid private key or invalid password: $Attributes{Modulus})!",
         );
         %Result = (
             Successful => 0,
-            Message    => "Need Certificate of Private Key first -$Attributes{Modulus})!",
+            Message    => $LayoutObject->{LanguageObject}->Translate(
+                'Certificate for private key not found (upload it first) or invalid private key or invalid password: %s!',
+                $Attributes{Modulus}
+            ),
         );
         return %Result;
     }
     elsif ( $#Certificates > 0 ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => 'Multiple Certificates with the same Modulus, can\'t add Private Key!',
+            Message  => $LayoutObject->{LanguageObject}
+                ->Translate('Multiple certificates with the same modulus, can\'t add private key!'),
         );
         %Result = (
             Successful => 0,
-            Message    => 'Multiple Certificates with the same Modulus, can\'t add Private Key!',
+            Message    => $LayoutObject->{LanguageObject}
+                ->Translate('Multiple certificates with the same modulus, can\'t add private key!'),
         );
         return %Result;
     }
@@ -1783,7 +1798,7 @@ sub PrivateAdd {
             close $PassFH;
             %Result = (
                 Successful => 1,
-                Message    => 'Private Key uploaded!',
+                Message    => $LayoutObject->{LanguageObject}->Translate('Private key uploaded'),
                 Filename   => $Certificates[0]->{Filename},
             );
 
@@ -1819,7 +1834,7 @@ sub PrivateAdd {
             );
             %Result = (
                 Successful => 0,
-                Message    => "Can't write $File: $!!",
+                Message    => $LayoutObject->{LanguageObject}->Translate( 'Can\'t write %s: %s!', $File, $! ),
             );
             return %Result;
         }
@@ -1831,7 +1846,7 @@ sub PrivateAdd {
     );
     %Result = (
         Successful => 0,
-        Message    => 'Can\'t add invalid private key!',
+        Message    => $LayoutObject->{LanguageObject}->Translate('Can\'t add invalid private key!'),
     );
 
     return %Result;
@@ -1911,7 +1926,8 @@ remove private key
 sub PrivateRemove {
     my ( $Self, %Param ) = @_;
 
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # check needed stuff
     if ( !$Param{Filename} && !( $Param{Hash} && $Param{Modulus} ) ) {
@@ -1930,19 +1946,22 @@ sub PrivateRemove {
         );
         %Return = (
             Successful => 0,
-            Message    => "Filename not found for hash: $Param{Hash} in: $Self->{PrivatePath}, $!!",
+            Message    => $LayoutObject->{LanguageObject}
+                ->Translate( "Filename not found for hash: %s in: %s, %s!", $Param{Hash}, $Self->{PrivatePath}, $! ),
         );
         return %Return if !$Param{Filename};
     }
 
     my $SecretDelete = unlink "$Self->{PrivatePath}/$Param{Filename}.P";
 
-    # abort if secret is not deleted
+    # Abort if secret is not deleted.
     if ( !$SecretDelete ) {
         %Return = (
             Successful => 0,
-            Message =>
-                "Delete private aborted, not possible to delete Secret: $Self->{PrivatePath}/$Param{Filename}.P, $!!",
+            Message    => $LayoutObject->{LanguageObject}->Translate(
+                'Deleting private key aborted, not possible to delete its secret %s: %s!',
+                "$Self->{PrivatePath}/$Param{Filename}.P", $!
+            ),
         );
         return %Return;
     }
@@ -1966,7 +1985,7 @@ sub PrivateRemove {
 
         %Return = (
             Successful => 1,
-            Message    => 'Private key deleted!'
+            Message    => $LayoutObject->{LanguageObject}->Translate('Private key deleted'),
         );
 
         return if !$DBObject->Do(
@@ -1991,7 +2010,8 @@ sub PrivateRemove {
 
     %Return = (
         Successful => 0,
-        Message    => "Impossible to delete key $Param{Filename} $!!"
+        Message    => $LayoutObject->{LanguageObject}
+            ->Translate( 'Impossible to delete private key %s: %s!', $Param{Filename}, $! ),
     );
 
     return %Return;
