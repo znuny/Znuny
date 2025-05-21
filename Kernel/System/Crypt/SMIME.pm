@@ -1328,10 +1328,10 @@ sub CertificateRemove {
     # Remove certificate.
     my $Cert = unlink "$Self->{CertPath}/$Param{Filename}";
     if ( !$Cert ) {
-        $Message
-            = $LayoutObject->{LanguageObject}
-            ->Translate( 'Error removing certificate, only its private key was removed: %s!',
-            "$Self->{CertPath}/$Param{Filename}: $!" );
+        $Message = $LayoutObject->{LanguageObject}->Translate(
+            'Error removing certificate, only its private key was removed: %s!',
+            "$Self->{CertPath}/$Param{Filename}: $!"
+        );
         $Success = 0;
     }
 
