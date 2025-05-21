@@ -55,6 +55,12 @@ for my $Key ( sort keys %UserData ) {
     next KEY if $Key =~ m/UserEmail$/smx;
     next KEY if $Key =~ m/UserMobile$/smx;
 
+    # Skip UserLastPwChangeTime
+    next KEY if $Key eq 'UserLastPwChangeTime';
+
+    # Skip UserLoginFailed
+    next KEY if $Key eq 'UserLoginFailed';
+
     # Skip UserToolBarSearchBackend which is set by default
     next KEY if $Key eq 'UserToolBarSearchBackend';
 

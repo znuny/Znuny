@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.897199341021417;
+    $Self->{Completeness}        = 0.891874180865007;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -85,7 +85,8 @@ sub Data {
         'Change settings' => 'Változtatási beállítások',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Állítsa be, amit módosítani szeretne a feltétel egyezésekor. Ne feledkezzen meg arról, hogy a „Possible” a fehérlista, a „PossibleNot” a feketelista.',
-        'Check the official %sdocumentation%s.' => 'Nézze meg a hivatalos %sdokumentációt%s.',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => '%s ACL szerkesztése',
         'Edit ACL' => 'ACL szerkesztése',
         'Show or hide the content' => 'A tartalom megjelenítése vagy elrejtése',
@@ -245,6 +246,19 @@ sub Data {
         'If signing key/certificate is missing' => 'Ha az aláíró kulcs vagy tanúsítvány hiányzik',
         'If encryption key/certificate is missing' => 'Ha a titkosító kulcs vagy tanúsítvány hiányzik',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => 'Szűrő az elemekhez',
+        'Hint' => 'Tipp',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            '',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            '',
+        'Article Color Management' => '',
+        'Sender Type' => 'Küldőtípus',
+        'Communication Channel' => 'Kommunikációs csatorna',
+        'Visible for customer' => 'Látható az ügyfélnek',
+        'Color' => 'Szín',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => 'Melléklet hozzáadása',
         'Filter for Attachments' => 'Szűrő a mellékletekhez',
@@ -276,7 +290,6 @@ sub Data {
             'Csak azon kommunikációs naplók megjelenítése, amelyek egy adott időtartományban jöttek létre.',
         'Filter for Communications' => 'Szűrő a kommunikációkhoz',
         'Filter for communications' => 'Szűrő a kommunikációkhoz',
-        'Hint' => 'Tipp',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             'Ezen a képernyőn egy áttekintőt láthat a bejövő és kimenő kommunikációkról.',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -482,31 +495,38 @@ sub Data {
         'Object' => 'Objektum',
         'Delete this field' => 'Mező törlése',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => 'Vissza az áttekintőhöz',
+        'Add %s field' => '%s mező hozzáadása',
+        'Change %s field' => '%s mező megváltoztatása',
         'Dynamic Fields' => 'Dinamikus mezők',
         'General' => 'Általános',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'Ez a mező kötelező, és az értéke csak betű és szám karakter lehet.',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             'Egyedinek kell lennie, és csak betű és szám karaktereket fogad el.',
-        'Changing this value will require manual changes in the system.' =>
-            'Az érték megváltoztatása kézi módosításokat fog igényelni a rendszeren.',
+        'Changing this value will require manual changes to the system.' =>
+            '',
         'This is the name to be shown on the screens where the field is active.' =>
             'Ez azokon a képernyőkön megjelenítendő név, ahol a mező aktív.',
         'Field order' => 'Mezősorrend',
         'This field is required and must be numeric.' => 'Ez a mező kötelező, és csak számot tartalmazhat.',
         'This is the order in which this field will be shown on the screens where is active.' =>
             'Ez az a sorrend, amelyben ez a mező meg fog jelenni a képernyőkön, ahol aktív.',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            'Nem lehetséges érvényteleníteni ezt a bejegyzést, az összes konfigurációs beállítást meg kell változtatni előtte.',
         'Field type' => 'Mezőtípus',
         'Object type' => 'Objektumtípus',
         'Internal field' => 'Belső mező',
         'This field is protected and can\'t be deleted.' => 'Ez a mező védett, és nem lehet törölni.',
+        'Field Settings' => 'mezőbeállítások',
+        'There is no configuration available for this dynamic field.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            'Az érték megváltoztatása kézi módosításokat fog igényelni a rendszeren.',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            'Nem lehetséges érvényteleníteni ezt a bejegyzést, az összes konfigurációs beállítást meg kell változtatni előtte.',
         'This dynamic field is used in the following config settings:' =>
             'Ez a dinamikus mező a következő konfigurációs beállításokban van használva:',
-        'Field Settings' => 'mezőbeállítások',
         'Default value' => 'Alapértelmezett érték',
         'This is the default value for this field.' => 'Ez az alapértelmezett érték ehhez a mezőhöz.',
 
@@ -793,7 +813,6 @@ sub Data {
         'New type' => 'Új típus',
         'Archive selected tickets' => 'Kijelölt jegyek archiválása',
         'Add Note' => 'Jegyzet hozzáadása',
-        'Visible for customer' => 'Látható az ügyfélnek',
         'Time units' => 'Időegységek',
         'Execute Ticket Commands' => 'Jegyparancsok végrehajtása',
         'Send agent/customer notifications on changes' => 'Ügyintéző/ügyfél értesítések küldése módosításkor',
@@ -1333,6 +1352,8 @@ sub Data {
         'System Log' => 'Rendszernapló',
         'Recent Log Entries' => 'Legutóbbi naplóbejegyzések',
         'Facility' => 'Összetevő',
+        'Source' => '',
+        'Line' => '',
         'Message' => 'Üzenet',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1369,7 +1390,6 @@ sub Data {
             'Hozzáadhat kedvenceket, ha a kurzort a jobb oldalon lévő elemek fölé viszi, és a csillag ikonra kattint.',
         'Links' => 'Hivatkozások',
         'View the admin manual on Github' => 'Az adminisztrátori kézikönyv megtekintése a GitHubon',
-        'Filter for Items' => 'Szűrő az elemekhez',
         'No Matches' => 'Nincs találat',
         'Sorry, your search didn\'t match any items.' => 'Sajnáljuk, a keresése nem illeszkedik egyetlen elemre sem.',
         'Set as favorite' => 'Beállítás kedvencként',
@@ -1616,7 +1636,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => '',
         'Priority Management' => 'Prioritás-kezelés',
         'Edit Priority' => 'Prioritás szerkesztése',
-        'Color' => 'Szín',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             'Ez a prioritás megtalálható egy rendszerbállításban, az új prioritásra mutató beállítások frissítésének megerősítése szükséges!',
         'This priority is used in the following config settings:' => 'Ez a prioritás a következő konfigurációs beállításokban van használva:',
@@ -1692,7 +1711,6 @@ sub Data {
         'Filter available fields' => 'Elérhető mezők szűrése',
         'Assigned Fields' => 'Hozzárendelt mezők',
         'Filter assigned fields' => '',
-        'Communication Channel' => 'Kommunikációs csatorna',
         'Is visible for customer' => 'Látható az ügyfélnek',
         'Text Template' => 'Szövegsablon',
         'Auto fill' => '',
@@ -2131,8 +2149,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Vissza az üzembe állítás részleteihez',
-        'View a custom List of Settings' => 'Egyéni beállításlista megtekintése',
-        'View single Setting: %s' => 'Önálló beállítás megtekintése: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2197,6 +2213,25 @@ sub Data {
         'Add missing possible dynamic field values' => '',
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => '',
+        'Translation Management' => '',
+        'Add Translation' => '',
+        'Edit Translation' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => '',
+        'Language' => 'Nyelv',
+        'An entry with this name already exists!' => '',
+        'Destination' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => 'Módosította',
+        'Deployment' => 'Üzembe állítás',
+        'Copy this object' => '',
+        'Do you really want to delete this object? All associated data will be lost!' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
@@ -2544,7 +2579,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Statisztikák információi',
         'Created by' => 'Létrehozta',
-        'Changed by' => 'Módosította',
         'Sum rows' => 'Sorok összegzése',
         'Sum columns' => 'Oszlopok összegzése',
         'Show as dashboard widget' => 'Megjelenítés vezérlőpult felületi elemként',
@@ -2781,7 +2815,6 @@ sub Data {
         'Archive Search' => 'Archívum keresés',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => 'Küldőtípus',
         'Save filter settings as default' => 'Szűrőbeállítások mentése alapértelmezettként',
         'Event Type' => 'Eseménytípus',
         'Save as default' => 'Mentés alapértelmezettként',
@@ -3305,6 +3338,8 @@ sub Data {
             'Ne feledje, hogy az Y-tengely méretezésének nagyobbnak kell lennie az X-tengely méretezésénél (például X-tengely => Hónap, Y-tengely => Év).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => 'Egyéni beállításlista megtekintése',
+        'View single Setting: %s' => 'Önálló beállítás megtekintése: %s',
         'This setting is disabled.' => 'Ez a beállítás le van tiltva.',
         'This setting is fixed but not deployed yet!' => 'Ez a beállítás javítva lett, de még nincs üzembe állítva!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3342,7 +3377,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => 'Keresés szerkesztése',
         'Go back to admin: ' => 'Vissza az adminisztrációhoz: ',
-        'Deployment' => 'Üzembe állítás',
         'My favourite settings' => 'Kedvenc beállításaim',
         'Invalid settings' => 'Érvénytelen beállítások',
 
@@ -3438,7 +3472,7 @@ sub Data {
         'Mrs.' => 'Úrhölgy',
         'View system log messages.' => 'Rendszernapló üzenetek megtekintése.',
         'Edit the system configuration settings.' => 'A rendszer konfigurációs beállításainak szerkesztése.',
-        'Update and extend your system with software packages.' => 'A rendszer frissítése vagy kibővítése szoftvercsomagokkal.',
+        'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3583,10 +3617,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'Nem sikerült megfelelően visszaállítani a dinamikus mező sorrendjét. További részletekért nézze meg a hibanaplót.',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => 'Jelenleg',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => 'Meghatározatlan alművelet.',
         'Need %s' => '%s szükséges',
-        'Add %s field' => '%s mező hozzáadása',
         'The field does not contain only ASCII letters and numbers.' => 'Ez a mező nem csak ASCII betűket és számokat tartalmaz.',
         'There is another field with the same name.' => 'Már létezik egy ugyanilyen nevű mező.',
         'The field must be numeric.' => 'Ez a mező csak számot tartalmazhat.',
@@ -3594,10 +3630,8 @@ sub Data {
         'Could not create the new field' => 'Nem sikerült létrehozni az új mezőt',
         'Need ID' => 'Azonosító szükséges',
         'Could not get data for dynamic field %s' => 'Nem sikerült lekérni az adatokat a dinamikus mezőhöz: %s',
-        'Change %s field' => '%s mező megváltoztatása',
         'The name for this field should not change.' => 'Ennek a mezőnek a nevét nem szabad megváltoztatni.',
         'Could not update the field %s' => 'Nem sikerült frissíteni a következő mezőt: %s',
-        'Currently' => 'Jelenleg',
         'Unchecked' => 'Nincs bejelölve',
         'Checked' => 'Bejelölve',
 
@@ -4152,6 +4186,8 @@ sub Data {
         'Export: Need StatID!' => 'Exportálás: statisztikaazonosító szükséges!',
         'Delete: Get no StatID!' => 'Törlés: nem kaptam statisztikaazonosítót!',
         'Need StatID!' => 'Statisztikaazonosító szükséges!',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            '',
         'Could not load stat.' => 'Nem sikerült betölteni a statisztikát.',
         'Add New Statistic' => 'Új statisztika hozzáadása',
         'Could not create statistic.' => 'Nem sikerült létrehozni a statisztikát.',
@@ -4692,6 +4728,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => 'A beállítások frissítés alatt vannak, legyen türelemmel…',
         'There is an error updating the system configuration!' => 'Hiba történt a rendszerbeállítások frissítésekor!',
+
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
@@ -7643,6 +7683,8 @@ sub Data {
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
             '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7782,6 +7824,8 @@ sub Data {
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7883,6 +7927,16 @@ sub Data {
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            '',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            '',
+        'Defines the format of exported files when using the admin interface.' =>
+            '',
+        'Defines the separator for export csv files.' => '',
+        'Defines the quote for export csv files.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'átmenetileg érvénytelen',
@@ -8027,6 +8081,9 @@ sub Data {
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             'Hiba történt a melléklet törlésekor. További információkért nézze meg a naplókat.',
         'Attachment was deleted successfully.' => 'A melléklet sikeresen törölve lett.',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8373,6 +8430,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => 'Sajnáljuk, csak %s fájlt tud feltölteni.',
         'Please only select at most %s files for upload.' => 'Legfeljebb csak %s fájlt válasszon a feltöltéshez.',
         'The following files are not allowed to be uploaded: %s' => 'A következő fájlok nem engedélyezettek a feltöltéshez: %s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'A következő fájlok túllépik a legnagyobb megengedett fájlonkénti %s méretet, és nem lettek feltöltve: %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8514,6 +8572,7 @@ Az Ön segélyszolgálat csapata
         'Appointment list.' => 'Időpontlista.',
         'Appointment notifications' => 'Időpont-értesítések',
         'Arabic (Saudi Arabia)' => 'Arab (Szaúd-Arábia)',
+        'Article Color' => '',
         'ArticleTree' => 'Bejegyzés fa',
         'Attachment Name' => 'Melléklet neve',
         'Avatar' => 'Profilkép',
@@ -8605,6 +8664,7 @@ Az Ön segélyszolgálat csapata
         'Create and manage ticket priorities.' => 'Jegyprioritások létrehozása és kezelése.',
         'Create and manage ticket states.' => 'Jegyállapotok létrehozása és kezelése.',
         'Create and manage ticket types.' => 'Jegytípusok létrehozása és kezelése.',
+        'Create and manage translation.' => '',
         'Create and manage web services.' => 'Webszolgáltatások létrehozása és kezelése.',
         'Create new Ticket.' => 'Új jegy létrehozása.',
         'Create new appointment.' => 'Új időpont létrehozása.',
@@ -8669,6 +8729,7 @@ Az Ön segélyszolgálat csapata
         'Dynamic Fields Multiselect Backend GUI' => 'Dinamikus mezők többválasztós háttérprogram grafikus felület',
         'Dynamic Fields Overview Limit' => 'Dinamikus mezők áttekintő korlát',
         'Dynamic Fields Text Backend GUI' => 'Dinamikus mezők szöveg háttérprogram grafikus felület',
+        'Dynamic fields administration' => '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             'Dinamikus mezők csoportjai a folyamat felületi elemhez. A kulcs a csoport neve, az érték a megjelenítendő mezőket tartalmazza. Példa: „Kulcs => Saját csoport”, „Tartalom: Név_X, Név_Y”.',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => 'Oldalankénti dinamikus mező korlát a dinamikus mezők áttekintőnél.',
@@ -8770,7 +8831,6 @@ Az Ön segélyszolgálat csapata
         'Italian' => 'Olasz',
         'Japanese' => 'Japán',
         'Korean' => 'Koreai',
-        'Language' => 'Nyelv',
         'Large' => 'Nagy',
         'Last Mentions' => '',
         'Last Screen Overview' => 'Utolsó képernyő áttekintője',
@@ -8824,6 +8884,8 @@ Az Ön segélyszolgálat csapata
         'Manage support data.' => 'Támogatási adatok kezelése.',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'Esemény vagy időalapú végrehajtás által aktivált feladatok kezelése.',
+        'Manage ticket article color.' => '',
+        'Manage translation.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Megjelölés szemétként!',
         'Mark as seen' => '',
@@ -9044,7 +9106,7 @@ Az Ön segélyszolgálat csapata
             'Ez az alapértelmezett narancssárga-fekete felszín az ügyfélfelülethez.',
         'This is the default orange - black skin.' => 'Ez az alapértelmezett narancssárga-fekete felszín.',
         'This key is not certified with a trusted signature!' => 'Ez a kulcs nincs tanúsítva egy megbízható aláírással!',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => 'Jegylezárás.',
         'Ticket Compose Bounce Email.' => 'E-mail átirányító jegyválasz.',
         'Ticket Compose email Answer.' => 'E-mailre történő jegyválasz.',
@@ -9115,6 +9177,7 @@ Az Ön segélyszolgálat csapata
         'Web service (Multiselect)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
+        'YAML' => '',
         'Yes, but hide archived tickets' => 'Igen, de az archivált jegyek elrejtése',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             'Az Ön „<OTRS_TICKET>” számú jegyhez rendelt e-mailje átirányításra került a következő címre: „<OTRS_BOUNCE_TO>”. További információkért vegye fel ezzel a címmel a kapcsolatot.',
@@ -9247,6 +9310,7 @@ Az Ön segélyszolgálat csapata
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9456,6 +9520,7 @@ Az Ön segélyszolgálat csapata
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

@@ -1878,7 +1878,7 @@ via the Preferences button after logging in.
         GroupRo      => [],
         IconBig     => 'fa-plug',
         IconSmall => '',
-        Description => Translatable('Update and extend your system with software packages.'),
+        Description => Translatable('Manage add-ons.'),
         Module      => 'Kernel::Output::HTML::NavBar::ModuleAdmin',
         Name        => Translatable('Package Manager'),
         Block => 'Administration',

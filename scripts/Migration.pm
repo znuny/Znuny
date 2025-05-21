@@ -242,8 +242,16 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::MigrateDBCRUDUUIDColumns',
         },
         {
+            Message => 'Migrate notification events',
+            Module  => 'scripts::Migration::Znuny::MigrateNotificationEvents',
+        },
+        {
             Message => 'Integrate Znuny-MarkTicketSeenUnseen',
             Module  => 'scripts::Migration::Znuny::IntegrateZnunyMarkTicketSeenUnseen',
+        },
+        {
+            Message => 'Integrate Znuny-Translations',
+            Module  => 'scripts::Migration::Znuny::IntegrateZnunyTranslations',
         },
         {
             Message => 'Migrate groups',

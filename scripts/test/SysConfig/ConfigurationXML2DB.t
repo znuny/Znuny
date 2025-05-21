@@ -219,6 +219,15 @@ my @Tests = (
                         Created             => '1',
                         CustomerCompanyName => '1',
                     },
+                    DefaultPageShown => {
+                        '5'   => '  5',
+                        '10'  => ' 10',
+                        '15'  => ' 15',
+                        '20'  => ' 20',
+                        '25'  => ' 25',
+                        '50'  => ' 50',
+                        '100' => '100',
+                    },
                 },
                 'UserModificationActive' => '0',
                 'ExclusiveLockGUID'      => '0',
@@ -283,6 +292,43 @@ my @Tests = (
                                                 }
                                             ],
                                             'Key' => 'DefaultColumns',
+                                        },
+                                        {
+                                            'Hash' => [
+                                                {
+                                                    'Item' => [
+                                                        {
+                                                            'Key'     => '5',
+                                                            'Content' => '  5'
+                                                        },
+                                                        {
+                                                            'Key'     => '10',
+                                                            'Content' => ' 10'
+                                                        },
+                                                        {
+                                                            'Key'     => '15',
+                                                            'Content' => ' 15'
+                                                        },
+                                                        {
+                                                            'Key'     => '20',
+                                                            'Content' => ' 20'
+                                                        },
+                                                        {
+                                                            'Key'     => '25',
+                                                            'Content' => ' 25'
+                                                        },
+                                                        {
+                                                            'Key'     => '50',
+                                                            'Content' => ' 50'
+                                                        },
+                                                        {
+                                                            'Key'     => '100',
+                                                            'Content' => '100'
+                                                        },
+                                                    ],
+                                                }
+                                            ],
+                                            'Key' => 'DefaultPageShown',
                                         }
                                     ],
                                 },
@@ -303,6 +349,17 @@ my @Tests = (
                     <Hash>
                         <Item Key=\"Created\">1</Item>
                         <Item Key=\"CustomerCompanyName\">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key=\"DefaultPageShown\">
+                    <Hash>
+                        <Item Key=\"5\">  5</Item>
+                        <Item Key=\"10\"> 10</Item>
+                        <Item Key=\"15\"> 15</Item>
+                        <Item Key=\"20\"> 20</Item>
+                        <Item Key=\"25\"> 25</Item>
+                        <Item Key=\"50\"> 50</Item>
+                        <Item Key=\"100\">100</Item>
                     </Hash>
                 </Item>
             </Hash>

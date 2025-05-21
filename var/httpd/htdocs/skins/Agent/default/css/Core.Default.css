@@ -70,10 +70,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         .RealPopup #AppWrapper {
             padding-top: 0;
         }
-
-        #AppWrapper .LayoutPopup {
-            margin-top: -48px;
-        }
     }
 
     .RTL {
@@ -851,7 +847,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .BreadCrumb li:last-child {
         overflow-y: visible;
-        overflow-x: hidden;
         text-overflow: ellipsis;
     }
 

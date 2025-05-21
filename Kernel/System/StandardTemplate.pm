@@ -397,6 +397,7 @@ get all valid standard templates
     my %StandardTemplates = $StandardTemplateObject->StandardTemplateList();
 
 Returns:
+
     %StandardTemplates = (
         1 => 'Some Name',
         2 => 'Some Name2',
@@ -410,29 +411,34 @@ get all standard templates
     );
 
 Returns:
+
     %StandardTemplates = (
         1 => 'Some Name',
         2 => 'Some Name2',
     );
 
 get standard templates of a single type
+
     my %StandardTemplates = $StandardTemplateObject->StandardTemplateList(
         Valid => 0,
         Type  => 'Answer',
     );
 
 Returns:
+
     %StandardTemplates = (
         1 => 'Some Name',
     );
 
 get standard templates for multiple types
+
     my %StandardTemplates = $StandardTemplateObject->StandardTemplateList(
         Valid => 0,
         Type  => 'Answer,Forward',
     );
 
 Returns:
+
     %StandardTemplates = (
         'Answer' => {
             '1' => 'Some Name',

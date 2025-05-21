@@ -29,11 +29,11 @@ sub Data {
     $Self->{Charset} = ['utf-8', ];
     # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
     $Self->{DateFormat}          = '%Y.%M.%D %T';
-    $Self->{DateFormatLong}      = ' %A %Y/%M/%D %T';
+    $Self->{DateFormatLong}      = '%A %Y/%M/%D %T';
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.897199341021417;
+    $Self->{Completeness}        = 0.891874180865007;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -86,7 +86,8 @@ sub Data {
         'Change settings' => '操作动作',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             '当匹配条件满足时执行规定的操作动作。记住：\'Possible\'表示允许(白名单)，\'PossibleNot\'表示禁止(黑名单)。',
-        'Check the official %sdocumentation%s.' => '查看 %s 的官方文档 %s。',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => '编辑ACL %s',
         'Edit ACL' => '编辑ACL',
         'Show or hide the content' => '显示或隐藏内容',
@@ -246,6 +247,19 @@ sub Data {
         'If signing key/certificate is missing' => '如果签名密钥/证书丢失了',
         'If encryption key/certificate is missing' => '如果加密密钥/证书丢失了',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => '条目过滤器',
+        'Hint' => '提示',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            '',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            '',
+        'Article Color Management' => '',
+        'Sender Type' => '发送人类型',
+        'Communication Channel' => '通信渠道',
+        'Visible for customer' => '对客户的可见性',
+        'Color' => '颜色',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => '添加附件',
         'Filter for Attachments' => '附件过滤器',
@@ -277,7 +291,6 @@ sub Data {
             '仅显示指定时间范围内创建的通信日志。',
         'Filter for Communications' => '交互筛选',
         'Filter for communications' => '通信过滤器',
-        'Hint' => '提示',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             '在此屏幕中，你可以看到有关传入和外发通信的概览。',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -483,31 +496,38 @@ sub Data {
         'Object' => '对象',
         'Delete this field' => '删除这个字段',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => '返回概览',
+        'Add %s field' => '添加%s字段',
+        'Change %s field' => '修改%s字段',
         'Dynamic Fields' => '动态字段',
         'General' => '一般',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             '这个字段是必需的，且它的值只能是字母和数字。',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             '必须是唯一的且只接受字母和数字字符。',
-        'Changing this value will require manual changes in the system.' =>
-            '更改此值需要在系统中进行手动更改。',
+        'Changing this value will require manual changes to the system.' =>
+            '',
         'This is the name to be shown on the screens where the field is active.' =>
             '这是在激活了该字段的屏幕上显示的名称。',
         'Field order' => '字段顺序',
         'This field is required and must be numeric.' => '这个字段是必需的且必须是数字。',
         'This is the order in which this field will be shown on the screens where is active.' =>
             '这是在激活了该字段的屏幕上显示的顺序。',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            '不可能使此条目无效，所有配置设置都必须事先更改。',
         'Field type' => '字段类型',
         'Object type' => '对象类型',
         'Internal field' => '内置字段',
         'This field is protected and can\'t be deleted.' => '这是内置字段，不能删除它。',
+        'Field Settings' => '字段设置',
+        'There is no configuration available for this dynamic field.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            '更改此值需要在系统中进行手动更改。',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            '不可能使此条目无效，所有配置设置都必须事先更改。',
         'This dynamic field is used in the following config settings:' =>
             '这个动态字段已用于以下配置设置中：',
-        'Field Settings' => '字段设置',
         'Default value' => '默认值',
         'This is the default value for this field.' => '这是该字段的默认值。',
 
@@ -794,7 +814,6 @@ sub Data {
         'New type' => '指定类型',
         'Archive selected tickets' => '归档选中的工单',
         'Add Note' => '添加备注',
-        'Visible for customer' => '对客户的可见性',
         'Time units' => '时间单元',
         'Execute Ticket Commands' => '执行工单指令',
         'Send agent/customer notifications on changes' => '给服务人员/客户发送通知',
@@ -1334,6 +1353,8 @@ sub Data {
         'System Log' => '系统日志',
         'Recent Log Entries' => '最近的日志条目',
         'Facility' => '设施',
+        'Source' => '',
+        'Line' => '',
         'Message' => '消息',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1370,7 +1391,6 @@ sub Data {
             '你可以移动鼠标到条目的右上角并点击星形图标来将条目添加到收藏夹。',
         'Links' => '链接',
         'View the admin manual on Github' => '查看Github上的管理手册',
-        'Filter for Items' => '条目过滤器',
         'No Matches' => '无匹配',
         'Sorry, your search didn\'t match any items.' => '对不起，你的搜索不匹配任何条目。',
         'Set as favorite' => '添加到收藏夹',
@@ -1617,7 +1637,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => '',
         'Priority Management' => '优先级管理',
         'Edit Priority' => '编辑优先级',
-        'Color' => '颜色',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '此优先级已存在于系统配置的一个设置中，需要更新设置以确认指向新的优先级！',
         'This priority is used in the following config settings:' => '这个优先级已用于以下的系统配置设置：',
@@ -1693,7 +1712,6 @@ sub Data {
         'Filter available fields' => '可用字段的过滤器',
         'Assigned Fields' => '分配的字段',
         'Filter assigned fields' => '',
-        'Communication Channel' => '通信渠道',
         'Is visible for customer' => '对客户可见',
         'Text Template' => '内容模板',
         'Auto fill' => '',
@@ -2132,8 +2150,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '返回到部署详情',
-        'View a custom List of Settings' => '查看设置的自定义列表',
-        'View single Setting: %s' => '查看单个设置：%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2198,6 +2214,25 @@ sub Data {
         'Add missing possible dynamic field values' => '',
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => '',
+        'Translation Management' => '',
+        'Add Translation' => '',
+        'Edit Translation' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => '',
+        'Language' => '语言',
+        'An entry with this name already exists!' => '',
+        'Destination' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => '修改人',
+        'Deployment' => '部署',
+        'Copy this object' => '',
+        'Do you really want to delete this object? All associated data will be lost!' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
@@ -2545,7 +2580,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '统计信息',
         'Created by' => '创建人',
-        'Changed by' => '修改人',
         'Sum rows' => '行汇总',
         'Sum columns' => '列汇总',
         'Show as dashboard widget' => '以仪表板小部件显示',
@@ -2782,7 +2816,6 @@ sub Data {
         'Archive Search' => '归档搜索',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => '发送人类型',
         'Save filter settings as default' => '将过滤器设置保存为默认过滤器',
         'Event Type' => '事件类型',
         'Save as default' => '保存为默认',
@@ -3306,6 +3339,8 @@ sub Data {
             '请记住：Y轴的时间刻度必须大于X轴的时间刻度（例如：X轴=>月，Y轴=>年）。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => '查看设置的自定义列表',
+        'View single Setting: %s' => '查看单个设置：%s',
         'This setting is disabled.' => '这个设置已被禁用。',
         'This setting is fixed but not deployed yet!' => '这个设置已修正，但尚未部署！',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3343,7 +3378,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => '编辑搜索',
         'Go back to admin: ' => '返回到系统管理： ',
-        'Deployment' => '部署',
         'My favourite settings' => '我收藏的设置',
         'Invalid settings' => '设置无效',
 
@@ -3439,7 +3473,7 @@ sub Data {
         'Mrs.' => '女士',
         'View system log messages.' => '查看系统日志信息。',
         'Edit the system configuration settings.' => '编辑系统配置。',
-        'Update and extend your system with software packages.' => '更新或安装系统的软件包或模块。',
+        'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3584,10 +3618,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             '不能正确地重置动态字段顺序，请检查错误日志以获得更多详细信息。',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => '当前',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => '没有定义的子动作。',
         'Need %s' => '需要%s',
-        'Add %s field' => '添加%s字段',
         'The field does not contain only ASCII letters and numbers.' => '这个字段不是仅包含ASCII字符和数字。',
         'There is another field with the same name.' => '存在同名的另一字段。',
         'The field must be numeric.' => '这个字段必须是数字。',
@@ -3595,10 +3631,8 @@ sub Data {
         'Could not create the new field' => '不能创建这个新字段',
         'Need ID' => '需要ID',
         'Could not get data for dynamic field %s' => '不能获得动态字段%s 的数据',
-        'Change %s field' => '修改%s字段',
         'The name for this field should not change.' => '不能更改这个字段的名称。',
         'Could not update the field %s' => '不能更新字段 %s',
-        'Currently' => '当前',
         'Unchecked' => '未检查',
         'Checked' => '已检查',
 
@@ -4153,6 +4187,8 @@ sub Data {
         'Export: Need StatID!' => '导出：需要StatID（统计ID）！',
         'Delete: Get no StatID!' => '删除：没有StatID（统计ID）！',
         'Need StatID!' => '需要StatID（统计ID）！',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            '',
         'Could not load stat.' => '不能载入统计。',
         'Add New Statistic' => '添加新的统计',
         'Could not create statistic.' => '不能创建统计。',
@@ -4693,6 +4729,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '配置正在更新，请耐心等待...',
         'There is an error updating the system configuration!' => '更新系统配置时出现错误！',
+
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
@@ -7644,6 +7684,8 @@ sub Data {
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
             '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7783,6 +7825,8 @@ sub Data {
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7884,6 +7928,16 @@ sub Data {
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            '',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            '',
+        'Defines the format of exported files when using the admin interface.' =>
+            '',
+        'Defines the separator for export csv files.' => '',
+        'Defines the quote for export csv files.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '暂时无效',
@@ -8028,6 +8082,9 @@ sub Data {
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             '删除附件时出错。 请检查日志以获取更多信息。',
         'Attachment was deleted successfully.' => '附件已成功删除。',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8374,6 +8431,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => '对不起，您只能在这里上传%s个文件。',
         'Please only select at most %s files for upload.' => '请至少选择%s个文件进行上传。',
         'The following files are not allowed to be uploaded: %s' => '不允许上传以下文件：%s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '以下文件超过允许的单个文件最大大小%s，没有上传的文件有：%s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8514,6 +8572,7 @@ Thanks for your help!
         'Appointment list.' => '预约列表。',
         'Appointment notifications' => '预约通知',
         'Arabic (Saudi Arabia)' => '阿拉伯语（沙特阿拉伯）',
+        'Article Color' => '',
         'ArticleTree' => '信件树',
         'Attachment Name' => '附件名',
         'Avatar' => '头像',
@@ -8605,6 +8664,7 @@ Thanks for your help!
         'Create and manage ticket priorities.' => '创建和管理工单优先级别。',
         'Create and manage ticket states.' => '创建和管理工单状态。',
         'Create and manage ticket types.' => '创建和管理工单类型。',
+        'Create and manage translation.' => '',
         'Create and manage web services.' => '创建和管理Web服务。',
         'Create new Ticket.' => '创建新工单。',
         'Create new appointment.' => '创建新的预约。',
@@ -8669,6 +8729,7 @@ Thanks for your help!
         'Dynamic Fields Multiselect Backend GUI' => '动态字段多选框后端GUI',
         'Dynamic Fields Overview Limit' => '动态字段概览限制',
         'Dynamic Fields Text Backend GUI' => '动态字段文本框后端图形界面',
+        'Dynamic fields administration' => '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             '流程小部件的动态字段组。键是组名，值是要显示的动态字段。例如：\'键 => My Group\'，\'值: Name_X, NameY\'。',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => '动态字段概览视图的每页动态字段数限制。',
@@ -8770,7 +8831,6 @@ Thanks for your help!
         'Italian' => '意大利语',
         'Japanese' => '日语',
         'Korean' => '韩语',
-        'Language' => '语言',
         'Large' => '详细',
         'Last Mentions' => '',
         'Last Screen Overview' => '最近屏幕概览',
@@ -8824,6 +8884,8 @@ Thanks for your help!
         'Manage support data.' => '管理支持数据。',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => '管理事件触发或基于时间执行的任务。',
+        'Manage ticket article color.' => '',
+        'Manage translation.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '标记为垃圾!',
         'Mark as seen' => '',
@@ -9044,7 +9106,7 @@ Thanks for your help!
             '这是客户界面默认的橙色-黑色皮肤。',
         'This is the default orange - black skin.' => '这是默认的橙色-黑色皮肤。',
         'This key is not certified with a trusted signature!' => '此密钥未使用可信签名进行认证！',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => '工单关闭。',
         'Ticket Compose Bounce Email.' => '工单编写退回邮件。',
         'Ticket Compose email Answer.' => '工单编写邮件回复。',
@@ -9115,6 +9177,7 @@ Thanks for your help!
         'Web service (Multiselect)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
+        'YAML' => '',
         'Yes, but hide archived tickets' => '是，但隐藏已归档的工单',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             '您的工单号为“<OTRS_TICKET>”的邮件已经退回给“<OTRS_BOUNCE_TO>”，请联系这个地址以获得更多的信息。',
@@ -9247,6 +9310,7 @@ Thanks for your help!
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9456,6 +9520,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

@@ -282,8 +282,20 @@ handheld {
         border: 0;
         float: left;
         border-radius: var(--border-radius-xl);
+        background: var(--primary-color);
     }
 
+    .pill.Info,
+    .pill.Error,
+    .pill.Success,
+    .pill.Warning {
+        color: var(--main-font-color) !important;
+    }
+
+    .pill.contrast {
+        border: var(--border-width) solid var(--main-font-color);
+        color: var(--main-font-color) !important;
+    }
 
     /* **************************************** Scrollbar **************************************** */
     ::-webkit-scrollbar,
@@ -1983,11 +1995,6 @@ handheld {
     }
 
     @media only screen and (max-width: 1024px) {
-
-        .WidgetSimple span.Pagination {
-            display: none;
-        }
-
         .WidgetSimple span.Pagination.AsBlock {
             display: flex;
         }

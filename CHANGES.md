@@ -1,14 +1,81 @@
-# 7.1.4 2024-??-??
+# 7.2.1 2025-xx-xx
+ - 2025-05-23 Integrated package Znuny-ArticleColors: Admin module to edit article colors directly in Znuny.
+ - 2025-05-19 Integrated package Znuny-Translations: Admin module to edit translations directly in Znuny.
+ - 2025-05-16 Process Management: Removed obsolete JS code in Core.Agent.TicketProcess.js and Core.Customer.TicketProcess.js.
+ - 2025-05-12 Fixed bug - Dashboard widget filter 'all' not selected on click. [#665](https://github.com/znuny/Znuny/issues/665)
+ - 2025-05-09 Fixed bug - Breadcrumb disappears in SystemConfiguration when SystemConfiguration/SettingsList is displayed via SettingNavigation.
+ - 2025-05-09 Fixed bug - Incorrect path is used in apache conf files. Thanks for reporting to @BuilderNSV. [#664](https://github.com/znuny/Znuny/issues/664)
+ - 2024-05-07 Integrated package Znuny-DynamicFieldAdminAutoConfig - Administration backend for dynamic fields without configuration.
+ - 2025-05-07 Added source (subroutine) and line to AdminLog / Log Object.
+ - 2025-05-06 The console command Dev::TranslationUpdate can now remove unused strings from PO files.
+ - 2025-05-06 Added DefaultPageShown setting to every DashboardBackend SysConfig that uses the module `Kernel::Output::HTML::Dashboard::TicketGeneric`. This allows the number of items shown per page to be defined and extended for each dashboard widget.
+ - 2025-05-05 Added SysConfigLink to AdminPackageManager - Redirect to System Configuration from Package Manager.
+ - 2025-04-30 Fixed OTRS_CUSTOMER_REALNAME placeholder expansion in AgentTicketMerge.
+
+# 7.1.7 2025-04-30
+ - 2025-04-24 Fixed bug - Setting the password does not reset preferences UserLoginFailed and UserLastPwChangeTime.
+ - 2025-04-16 Updated Net::IMAP::Simple to latest version from GitHub. Thanks to @dandanpena. [PR#155](https://github.com/znuny/Znuny/pull/155)
+ - 2025-04-16 Fixed bug - $LayoutObject->BuildDateSelection() does not deactivate the DatePicker and DatePickerIcon if Disabled is 1. Thanks for reporting to @BuilderNSV. [#649](https://github.com/znuny/Znuny/issues/649)
+ - 2025-04-16 Fixed bug - Page selector not available in mobile view. Thanks for reporting to @MIPMHannes. [#617](https://github.com/znuny/Znuny/issues/617)
+ - 2025-04-11 Added option CcAddressRegExp to postmaster filter ExternalTicketNumberRecognition.
+ - 2025-04-10 Fixed bug - Color inversion in inline attachment with dark mode activated is not working.
+ - 2025-04-04 Fixed bug - Incomplete error message in Stats.
+ - 2025-04-02 Fixed bug - In AdminRoles comment display for roles is too short. Changed Truncation to 80.
+ - 2025-03-28 Fixed 'ticket-locked' message and position. Change button size for 'Undo & close'.
+ - 2025-03-28 Fixed memoverflow in CalendarEvents (TicketZoom).Thanks to @DonMarlowne. [PR#652](https://github.com/znuny/Znuny/pull/652)
+ - 2025-03-27 Added option ToAddressRegExp to postmaster filter ExternalTicketNumberRecognition.
+ - 2025-03-27 Fixed bug - GUI Table thead width in Admin Area is much too big. Removed static width 100px for 'thead tr th'.
+ - 2025-03-26 Added German message for ticket event notification "ticket email delivery failure".
+ - 2025-03-24 Fixed bug - GenericAgent no possibility to search in archive. Changed Blockname from SearchInArchive to TicketArchive. SearchInArchive is already used in /Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt.
+ - 2025-03-20 Article data now also contains communication channel name instead of only the ID.
+ - 2025-03-17 Fixed bug - Ticket::Frontend::Article::Actions###??? no possibility to add a new entry.
+ - 2025-03-10 Fixed AgentTicketBulk - TicketWatchSubscribe and TicketWatchUnsubscribe is not working.
+ - 2025-03-07 Fixed GroupSelection in AdminAppointmentCalendarManage for admin group member. A user can only create AppointmentCalendars for their own groups, even though they are a member of the Admin group.
+ - 2025-03-05 CVE-2025-43926: AgentPreferences now only supports configured user preference keys (in AgentPreferences::AJAXUpdate::AllowedKeys) to be updated via AJAX request. Thanks to Tim Püttmanns (maxence) for reporting the issue.
+ - 2025-03-03 Improved performance in Kernel::System::LinkObject by fixing the cache key.
+ - 2025-02-28 Fixed missing notification in process management activity dialog edit screen.
+ - 2025-02-28 Fixed doubled notification in process management transition edit screen.
+ - 2025-02-27 Fixed obsolete parameter in overview URL. After jumping to AgentTicketZoom from an overview like AgentTicketStatus and return to that overview the URL parameter TicketID stays persistent to the URL. This action is repetitive and works with multiple TicketIDs, but the TicketID is not needed in anyway.
+ - 2025-02-26 Added option to generic interface operations TicketCreate and TicketUpdate to control if a signature will be appended to the sent article's body.
+ - 2025-02-25 Added missing DynamicFieldScreens configuration for `LinkObject::ComplexTable###Ticket`.
+ - 2025-02-25 Improved DynamicFieldUpdate function - InternalField can now be changed. InternalField is never set via the GUI (e.g. AdminDynamicFieldText.pm). If it is set via the "Backend" for example PackageSetup it should also be possible to change the 'InternalField' again.
+ - 2025-02-25 Fixed Core.UI.js bug - Added missing allowed file types text to FilenameTypeNotAllowed check. Currently, only the fact that a file does not correspond to the permitted FileType is displayed. It is not displayed which FileTypes are permitted.
+ - 2025-02-25 Fixed AjaxAttachment.pm bug - Use of uninitialized value in concatenation (.) or string.
+ - 2025-02-25 Fixed small bug - uninitialized value in concatenation. SkinSelected must also be set in the SetRichTextParameters function.
+ - 2025-02-21 Fixed Core.UI.js bugs - AttachmentExist is only generated for one upload field. However, it should be generated for all of them. In addition, the UploadField is not selected correctly.
+ - 2025-02-21 Fixed broken documentation link in ACL Edit Screen and changed text of hint.
+ - 2025-02-14 Added configurable limit to number of watched tickets per user.
+ - 2025-02-12 CVE-2025-26847: Fixed masking of passwords in support bundle generator for modified settings YAML file.
+
+# 7.1.6 2025-02-19
+ - 2025-02-14 Fixed content security policy HTTP header to allow externally linked images.
+ - 2025-02-13 Fixed ticket filter for new mentions.
+
+# 7.1.5 2025-02-13
+ - 2025-02-13 Fixed content security policy HTTP header. Thanks for reporting to @nixahnung. [#641](https://github.com/znuny/Znuny/issues/641)
+
+# 7.1.4 2025-02-12
+ - 2025-02-06 Added SortBy and SortOrder options to Znuny.Form.Input.Set to sort select field options by key or value.
+ - 2025-02-05 Fixed event check in ticket event module Kernel::System::Ticket::Event::TicketDynamicFieldDefault.
+ - 2025-01-29 Added HTTP headers for more safety.
+ - 2025-01-28 Fixed permission check in generic interface operation TicketUpdate.
+ - 2025-01-27 Added user check to scripts/backup.pl and scripts/restore.pl to prevent these scripts from being executed with root permissions. Thanks to Diego Tellaroli for reporting this issue.
+ - 2025-01-27 Added GetColumnMaxLengths function to DB Object and improved maxlength for customer id on AdminCustomerCompany and for user login on AdminCustomerUser.
+ - 2025-01-22 Fixed uninitialized value bug. TicketZoom/Agent/MIMEBase.pm - Added special handling for 'undef' values in the arrayref $Event->{$Property}.
  - 2025-01-21 Fixed Bug - Problem when handling errors in the owner field in the activity dialog. Thanks to Daylton Rodrigues (@dayltonr) for reporting. [#627](https://github.com/znuny/Znuny/issues/627).
  - 2025-01-16 Increased size of columns profile_key and profile_value of database table search_profile.
  - 2025-01-15 Sector Nord AG: Fixed module check for calendar plugin. Thanks to Sector Nord AG (@jsinagowitz). [PR#623](https://github.com/znuny/Znuny/pull/623)
+ - 2025-01-14 Fixed setting of HTTP type attribute in cookie on agent and customer user login.
+ - 2025-01-08 Added config option DynamicFields::Driver::BaseSelect::EnableHistoricalValues to enable/disable evaluation of historical values for dynamic field types based on BaseSelect.
  - 2024-12-23 Improved ACL checks in ticket overview modules.
+ - 2024-12-17 Fixed time zone handling for cron events.
  - 2024-12-10 System configuration option SendmailEncodingForce is now a selection instead of a text field.
  - 2024-12-10 Fixed "From" and "To" not being expandable for an article in ticket zoom. Thanks to Oliver Freyermuth (@olifre) for reporting. [#605](https://github.com/znuny/Znuny/issues/605)
  - 2024-12-09 Fixed multiple notifications being sent for empty process tickets (event NotificationNewTicket).
  - 2024-12-06 Fixed data evaluation in ICS calendar event.
  - 2024-12-02 Added Filter for Admin->Export DynamicFields.
  - 2024-11-28 Fixed Server Error, when Frontend::Template::GenerateBlockHooks###NAME has no valid data structure.
+ - 2024-11-27 Fixed user cache being cleared for all users whenever a user logs in/out.
  - 2024-11-22 Added new system configuration option 'User::DefaultPreferences'. These preferences will automatically be set during user (agent) creation.
  - 2024-11-01 Fixed Bug - Added missing template toolkit translations. Translate the ticket state in PDF search result (AgentTicketSearch|CustomerTicketSearch). Thanks to @BuilderNSV for reporting the issue. [#615](https://github.com/znuny/Znuny/issues/615)
  - 2024-11-01 Sector Nord AG: Fixed uninitialized value in AdminSelectBox. Thanks to Sector Nord AG (@jsinagowitz). [PR#611](https://github.com/znuny/Znuny/pull/611)
@@ -17,6 +84,7 @@
  - 2024-10-31 Fixed Bug - Missing translation 'mark as seen'. Thanks to @LuBroering (Lukas Bröring SectorNord AG) for reporting the issue. [#613](https://github.com/znuny/Znuny/issues/613)
  - 2024-10-31 Fixed Bug - Missing translation 'mark as seen'. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) for reporting the issue. [#613](https://github.com/znuny/Znuny/issues/613)
  - 2024-10-31 Template generator will now keep `&nbsp;` in a template when in rich text mode and won't replace them with spaces anymore. This lead to multiple `&nbsp;` reduced to one space being shown in the editor.
+ - 2024-10-28 S/MIME verification: Added fallback option to disable verification of the signer's certificate after initial verification failed. Activated by new config option SMIME::NoVerify.
  - 2024-10-24 Fixed Bug - 'Use of uninitialized value' warning on build custom package and there are no permissions to write to the target directory. Thanks to @BuilderNSV for reporting the issue. [#610](https://github.com/znuny/Znuny/issues/610)
  - 2024-10-22 Perl Module Hash::Merge is now be listed in znuny.CheckModules.pl/otrs.CheckModules.pl as mandatory.
  - 2024-10-21 Sector Nord AG: Fixed #571 AgentTicketProcess Mobile-View is not showing all elements of ActivityDialog. Thanks to @LuBroering (Lukas Bröring Sector Nord AG). [PR#553](https://github.com/znuny/Znuny/pull/553)
@@ -336,6 +404,67 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.15 2025-04-30
+ - 2025-04-24 Fixed bug - Setting the password does not reset preferences UserLoginFailed and UserLastPwChangeTime.
+ - 2025-04-16 Updated Net::IMAP::Simple to latest version from GitHub. Thanks to @dandanpena. [PR#155](https://github.com/znuny/Znuny/pull/155)
+ - 2025-04-16 Fixed bug - $LayoutObject->BuildDateSelection() does not deactivate the DatePicker and DatePickerIcon if Disabled is 1. Thanks for reporting to @BuilderNSV. [#649](https://github.com/znuny/Znuny/issues/649)
+ - 2025-04-11 Added option CcAddressRegExp to postmaster filter ExternalTicketNumberRecognition.
+ - 2025-03-27 Added option ToAddressRegExp to postmaster filter ExternalTicketNumberRecognition.
+ - 2025-03-26 Added German message for ticket event notification "ticket email delivery failure".
+ - 2025-03-25 Fixed bug - In AdminRoles comment display for roles is too short. Changed Truncation to 80.
+ - 2025-03-20 Article data now also contains communication channel name instead of only the ID.
+ - 2025-03-19 AdminSystemConfiguration: Addon name is no longer translated.
+ - 2025-03-12 Fixed bug - Ticket::Frontend::Article::Actions###??? no possibility to add a new entry.
+ - 2025-03-07 Fixed GroupSelection in AdminAppointmentCalendarManage for admin group member. A user can only create AppointmentCalendars for their own groups, even though they are a member of the Admin group.
+ - 2025-03-05 CVE-2025-43926: AgentPreferences now only supports configured user preference keys (in AgentPreferences::AJAXUpdate::AllowedKeys) to be updated via AJAX request. Thanks to Tim Püttmanns (maxence) for reporting the issue.
+ - 2025-03-03 Improved performance in Kernel::System::LinkObject by fixing the cache key.
+ - 2025-02-28 Fixed missing notification in process management activity dialog edit screen.
+ - 2025-02-28 Fixed doubled notification in process management transition edit screen.
+ - 2025-02-27 Fixed obsolete parameter in overview URL. After jumping to AgentTicketZoom from an overview like AgentTicketStatus and return to that overview the URL parameter TicketID stays persistent to the URL. This action is repetitive and works with multiple TicketIDs, but the TicketID is not needed in anyway.
+ - 2025-02-26 Added option to generic interface operations TicketCreate and TicketUpdate to control if a signature will be appended to the sent article's body.
+ - 2025-02-25 Added missing DynamicFieldScreens configuration for `LinkObject::ComplexTable###Ticket`.
+ - 2025-02-25 Improved DynamicFieldUpdate function - InternalField can now be changed. InternalField is never set via the GUI (e.g. AdminDynamicFieldText.pm). If it is set via the "Backend" for example PackageSetup it should also be possible to change the 'InternalField' again.
+ - 2025-02-25 Fixed AjaxAttachment.pm bug - Use of uninitialized value in concatenation (.) or string.
+ - 2025-02-21 Fixed broken documentation link in ACL Edit Screen and changed text of hint.
+ - 2025-02-14 Added configurable limit to number of watched tickets per user.
+ - 2025-02-12 CVE-2025-26847 Fixed masking of passwords in support bundle generator for modified settings YAML file.
+
+# 6.5.14 2025-02-19
+ - 2025-02-14 Fixed content security policy HTTP header to allow externally linked images.
+ - 2025-02-13 Fixed ticket filter for new mentions.
+
+# 6.5.13 2025-02-13
+ - 2025-02-13 Fixed content security policy HTTP header. Thanks for reporting to @nixahnung. [#641](https://github.com/znuny/Znuny/issues/641)
+
+# 6.5.12 2025-02-12
+ - 2025-02-06 Added SortBy and SortOrder options to Znuny.Form.Input.Set to sort select field options by key or value.
+ - 2025-02-05 Fixed event check in ticket event module Kernel::System::Ticket::Event::TicketDynamicFieldDefault.
+ - 2025-01-29 Added HTTP headers for more safety.
+ - 2025-01-28 Fixed permission check in generic interface operation TicketUpdate.
+ - 2025-01-27 Added user check to scripts/backup.pl and scripts/restore.pl to prevent these scripts from being executed with root permissions. Thanks to Diego Tellaroli for reporting this issue.
+ - 2025-01-22 Fixed uninitialized value bug. TicketZoom/Agent/MIMEBase.pm - Added special handling for 'undef' values in the arrayref $Event->{$Property}.
+ - 2025-01-21 Fixed Bug - Problem when handling errors in the owner field in the activity dialog. Thanks to Daylton Rodrigues (@dayltonr) for reporting. [#627](https://github.com/znuny/Znuny/issues/627).
+ - 2025-01-16 Increased size of columns profile_key and profile_value of database table search_profile.
+ - 2025-01-14 Fixed setting of HTTP type attribute in cookie on agent and customer user login.
+ - 2025-01-08 Added config option DynamicFields::Driver::BaseSelect::EnableHistoricalValues to enable/disable evaluation of historical values for dynamic field types based on BaseSelect.
+ - 2024-12-23 Improved ACL checks in ticket overview modules.
+ - 2024-12-17 Fixed time zone handling for cron events.
+ - 2024-12-10 System configuration option SendmailEncodingForce is now a selection instead of a text field.
+ - 2024-12-09 Fixed multiple notifications being sent for empty process tickets (event NotificationNewTicket).
+ - 2024-12-06 Fixed data evaluation in ICS calendar event.
+ - 2024-11-28 Fixed Server Error, when Frontend::Template::GenerateBlockHooks###NAME has no valid data structure.
+ - 2024-11-27 Fixed user cache being cleared for all users whenever a user logs in/out.
+ - 2024-11-01 Fixed Bug - Translate the ticket state in PDF search result (AgentTicketSearch and CustomerTicketSearch). Thanks to @BuilderNSV for reporting the issue. [#615](https://github.com/znuny/Znuny/issues/615)
+ - 2024-11-01 Sector Nord AG: Fixed uninitialized value in AdminSelectBox. Thanks to Sector Nord AG (@jsinagowitz). [PR#611](https://github.com/znuny/Znuny/pull/611)
+ - 2024-10-31 Template generator will now keep &nbsp; in a template when in rich text mode and won't replace them with spaces anymore. This lead to multiple &nbsp; reduced to one space being shown in the editor.
+ - 2024-10-28 S/MIME verification: Added fallback option to disable verification of the signer's certificate after initial verification failed. Activated by new config option SMIME::NoVerify.
+ - 2024-10-24 Fixed Bug - 'Use of uninitialized value' warning on build custom package and there are no permissions to write to the target directory. Thanks to @BuilderNSV for reporting the issue. [#610](https://github.com/znuny/Znuny/issues/610)
+ - 2024-10-22 Perl Module Hash::Merge is now be listed in otrs.CheckModules.pl as mandatory.
+ - 2024-10-15 Ticket search for customer ID in customer interface now searches for the raw ID. Thanks to @BuilderNSV for reporting the issue. [#602](https://github.com/znuny/Znuny/issues/602)
+ - 2024-10-10 Updated MIME::Decoder::QuotedPrint from 5.509 to 5.515.
+ - 2024-10-07 Updated jstree from version 3.3.7 to 3.3.8.
+ - 2024-10-07 Updated nunjucks from version 3.2.2 to 3.2.3.
 
 # 6.5.11 2024-10-02
  - 2024-10-02 Added HTML filter to ProcessManagement/SLA template. Converts the characters <, >, & and " to <, >, &, and " respectively, protecting them from being interpreted as representing HTML tags or entities.

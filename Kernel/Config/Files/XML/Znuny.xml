@@ -218,7 +218,16 @@
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0110-CUIC-TicketEscalation">DashboardWidget CUIC-TicketEscalation</Item>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0120-CUIC-TicketNew">DashboardWidget CUIC-TicketNew</Item>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0130-CUIC-TicketOpen">DashboardWidget CUIC-TicketOpen</Item>
+
+                <Item Key="LinkObject::ComplexTable###Ticket">LinkObject ComplexTable</Item>
             </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::Driver::BaseSelect::EnableHistoricalValues" Required="1" Valid="1">
+        <Description Translatable="1">Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
 
@@ -1151,6 +1160,7 @@
                         <Item Key="DashboardBackend###0120-TicketNew">DashboardWidget TicketNew</Item>
                         <Item Key="DashboardBackend###0130-TicketOpen">DashboardWidget TicketOpen</Item>
                         <Item Key="DashboardBackend###0140-RunningTicketProcess">DashboardWidget RunningTicketProcess</Item>
+                        <Item Key="LinkObject::ComplexTable###Ticket">LinkObject ComplexTable</Item>
                     </Hash>
                 </Item>
                 <Item Key="Article">
@@ -2231,7 +2241,7 @@
         </Value>
     </Setting>
 
-    <!-- S/MIME key storage -->
+    <!-- S/MIME -->
     <Setting Name="Daemon::SchedulerCronTaskManager::Task###ReindexSMIMECertificates" Required="0" Valid="1">
         <Description Translatable="1">Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.</Description>
         <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
@@ -2248,6 +2258,13 @@
                     </Array>
                 </Item>
             </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="SMIME::NoVerify" Required="0" Valid="1">
+        <Description Translatable="1">Do not verify the signer's certificate of a signed message.</Description>
+        <Navigation>Core::Crypt::SMIME</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
 
@@ -2549,6 +2566,17 @@
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                         <Item Key="LastMention" SelectedID="2"></Item>
+                    </Hash>
+                </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
                     </Hash>
                 </Item>
                 <Item Key="Mandatory">0</Item>
@@ -3573,7 +3601,7 @@
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name" Translatable="1">Mark as unseen</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as unseen</Item>
-                <Item Key="Action"></Item>
+                <Item Key="Action">AgentTicketMarkSeenUnseen</Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
@@ -3588,7 +3616,7 @@
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name" Translatable="1">Mark as seen</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as seen</Item>
-                <Item Key="Action"></Item>
+                <Item Key="Action">AgentTicketMarkSeenUnseen</Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
@@ -3661,4 +3689,250 @@
         </Value>
     </Setting>
 
+    <!--
+        Znuny-DynamicFieldAdminAutoConfig
+    -->
+    <Setting Name="Frontend::Module###AdminDynamicFieldAutoConfig" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Dynamic fields administration</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AdminDynamicFieldAutoConfig###003-DynamicFieldAdminAutoConfig" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!-- Limit for watched tickets -->
+    <Setting Name="Ticket::WatcherLimit" Required="0" Valid="1">
+        <Description Translatable="1">Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">0</Item>
+        </Value>
+    </Setting>
+
+    <!-- Znuny-ArticleColor -->
+    <Setting Name="Frontend::Module###AdminArticleColor" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
+                    <Item Key="Title" Translatable="1">Article Color</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AdminArticleColor###002-Ticket" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminArticleColor" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Article Color</Item>
+                <Item Key="Block">Ticket</Item>
+                <Item Key="Description" Translatable="1">Manage ticket article color.</Item>
+                <Item Key="IconBig">fa-list</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- AgentPreferences -->
+    <Setting Name="AgentPreferences::AJAXUpdate::AllowedKeys###Framework" Required="0" Valid="1">
+        <Description Translatable="1">List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.</Description>
+        <Navigation>Core::AgentPreferences</Navigation>
+        <Value>
+            <Array>
+                <Item>\AAdminNavigationBarFavourites\z</Item>
+                <Item>\AUserAgentDoNotShowBrowserLinkMessage\z</Item>
+                <Item>\AUserPopupProfile\z</Item>
+                <Item>\AUserSystemConfigurationCategory\z</Item>
+                <Item>\AUserSystemConfigurationFavourites\z</Item>
+                <Item>\AUserTicketZoomArticleTableHeight\z</Item>
+                <Item>\AUserDashboardWidgetExpand\z</Item>
+                <Item>\AUserToolBarSearchBackend\z</Item>
+
+                <!-- Core.Agent.Admin.SystemConfiguration.Init, sidebar action widget toggle -->
+                <Item>\AUserWidgetState.+</Item>
+
+                <!-- Core.UI.AdvancedChart.UpdatePreferences, line diagram dashboard widgets -->
+                <Item>\AGraphWidget.+</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!-- Znuny-Translation -->
+    <Setting Name="Frontend::Module###AdminTranslation" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the admin interface.</Description>
+        <Navigation>Core::Znuny::Translation</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Create and manage translation.</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                    <Item Key="Title" Translatable="1">Translation</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AdminTranslation###001-Translation" Required="0" Valid="1">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminTranslation" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Translation</Item>
+                <Item Key="Block">Administration</Item>
+                <Item Key="Description" Translatable="1">Manage translation.</Item>
+                <Item Key="IconBig">fa-language</Item>
+                <Item Key="IconSmall">fa-wrench</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminTranslation###001-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.DBCRUD.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DBCRUD::Translation::CacheTTL" Required="1" Valid="1">
+        <Description Translatable="1">Cache settings for DBCRUD modules (default: 1 day).</Description>
+        <Navigation>Core::Znuny::Translation</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="\d+">86400</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NotifyModule###100-TranslationCheck" Required="1" Valid="1">
+        <Description Translatable="1">Defines a module to display a notification if translation deployment is needed.</Description>
+        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Notification::TranslationCheck</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Translation###Export###DefaultFormat" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Defines the format of exported files when using the admin interface.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="xlsx">
+                <Item ValueType="Option" Value="xlsx" Translatable="1">Excel</Item>
+                <Item ValueType="Option" Value="yml" Translatable="1">YAML</Item>
+                <Item ValueType="Option" Value="csv" Translatable="1">CSV</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Translation###Export###CSV###Separator" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Defines the separator for export csv files.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">;</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Translation###Export###CSV###Quote" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Defines the quote for export csv files.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">"</Item>
+        </Value>
+    </Setting>
 </otrs_config>

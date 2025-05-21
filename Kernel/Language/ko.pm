@@ -19,20 +19,20 @@ sub Data {
 
     # $$START$$
     # possible charsets
-    $Self->{Charset} = [];
+    $Self->{Charset} = ['utf-8', ];
     # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '';
-    $Self->{DateFormatLong}      = '';
-    $Self->{DateFormatShort}     = '';
-    $Self->{DateInputFormat}     = '';
-    $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.868698517298188;
+    $Self->{DateFormat}          = '%Y-%M-%D %T';
+    $Self->{DateFormatLong}      = '%A, %Y년 %M월 %D일 %T';
+    $Self->{DateFormatShort}     = '%Y-%M-%D';
+    $Self->{DateInputFormat}     = '%Y-%M-%D';
+    $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
+    $Self->{Completeness}        = 0.863695937090432;
 
     # csv separator
-    $Self->{Separator}         = '';
+    $Self->{Separator}         = ',';
 
-    $Self->{DecimalSeparator}  = '';
-    $Self->{ThousandSeparator} = '';
+    $Self->{DecimalSeparator}  = '.';
+    $Self->{ThousandSeparator} = ',';
     $Self->{Translation} = {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
@@ -79,7 +79,8 @@ sub Data {
         'Change settings' => '설정 변경',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             '기준이 일치하면 변경하려는 항목을 설정하십시오. Possible \'은 흰색 목록이고\'PossibleNot \'은 검은 색 목록입니다.',
-        'Check the official %sdocumentation%s.' => '',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'ACL 수정 %s',
         'Edit ACL' => 'ACL 수정',
         'Show or hide the content' => '내용 보여주기/가리기',
@@ -239,6 +240,19 @@ sub Data {
         'If signing key/certificate is missing' => '서명 키 / 인증서가 누락 된 경우',
         'If encryption key/certificate is missing' => '암호화 키 / 인증서가 누락 된 경우',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => '항목 필터링',
+        'Hint' => '힌트',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            '',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            '',
+        'Article Color Management' => '',
+        'Sender Type' => '발신자 유형',
+        'Communication Channel' => '통신 채널',
+        'Visible for customer' => '고객에게 공개',
+        'Color' => '색깔',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => '첨부파일 추가',
         'Filter for Attachments' => '첨부파일 필터링',
@@ -270,7 +284,6 @@ sub Data {
             '특정 시간 범위에서 생성 된 통신 로그 만 표시합니다.',
         'Filter for Communications' => '',
         'Filter for communications' => '통신용 필터',
-        'Hint' => '힌트',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             '이 화면에서 들어오고 나가는 통신에 대한 개요를 볼 수 있습니다.',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -476,31 +489,38 @@ sub Data {
         'Object' => '목적',
         'Delete this field' => '이 입력란을 삭제하십시오.',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => '개요로 돌아가기',
+        'Add %s field' => '%s 필드 추가',
+        'Change %s field' => '동적 필드 %s에 대한 데이터가 없습니다.',
         'Dynamic Fields' => '동적 필드',
         'General' => '일반',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             '이 필드는 필수이며 값은 영숫자여야 합니다.',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             '고유해야하며 영문자의 숫자만 사용할 수 있습니다.',
-        'Changing this value will require manual changes in the system.' =>
-            '이 값을 변경하면 시스템에서 수동으로 변경해야 합니다.',
+        'Changing this value will require manual changes to the system.' =>
+            '',
         'This is the name to be shown on the screens where the field is active.' =>
             '필드가 활성화된 화면에 표시할 이름 입니다.',
         'Field order' => '필드 주문',
         'This field is required and must be numeric.' => '이 필드는 필수이며 숫자여야 합니다.',
         'This is the order in which this field will be shown on the screens where is active.' =>
             '이 필드가 활성화 된 화면에 표시되는 순서입니다.',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            '이 항목을 무효화 할 수 없으므로 모든 구성 설정을 미리 변경해야 합니다.',
         'Field type' => '필드 유형',
         'Object type' => '객체 유형',
         'Internal field' => '내부 필드',
         'This field is protected and can\'t be deleted.' => '이 필드는 보호되어 있으며 삭제할 수 없습니다.',
+        'Field Settings' => '필드 설정',
+        'There is no configuration available for this dynamic field.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            '이 값을 변경하면 시스템에서 수동으로 변경해야 합니다.',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            '이 항목을 무효화 할 수 없으므로 모든 구성 설정을 미리 변경해야 합니다.',
         'This dynamic field is used in the following config settings:' =>
             '이 동적 필드는 다음 구성 설정에서 사용됩니다.',
-        'Field Settings' => '필드 설정',
         'Default value' => '기본값',
         'This is the default value for this field.' => '이 필드의 기본값입니다.',
 
@@ -787,7 +807,6 @@ sub Data {
         'New type' => '새로운 유형',
         'Archive selected tickets' => '선택한 티켓 보관 처리',
         'Add Note' => '메모 추가',
-        'Visible for customer' => '고객에게 공개',
         'Time units' => '시간 단위',
         'Execute Ticket Commands' => '티켓 명령 실행',
         'Send agent/customer notifications on changes' => '변경 사항에 대한 상담원 / 고객 알림 보내기',
@@ -1327,6 +1346,8 @@ sub Data {
         'System Log' => '시스템 로그',
         'Recent Log Entries' => '최근 로그 항목',
         'Facility' => '쉬움',
+        'Source' => '',
+        'Line' => '',
         'Message' => '메시지',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1363,7 +1384,6 @@ sub Data {
             '오른쪽에있는 항목 위로 커서를 이동하고 별 모양 아이콘을 클릭하여 즐겨 찾기를 추가 할 수 있습니다.',
         'Links' => '링크',
         'View the admin manual on Github' => 'Github에서 관리자 매뉴얼보기',
-        'Filter for Items' => '항목 필터링',
         'No Matches' => '일치하지 않는다.',
         'Sorry, your search didn\'t match any items.' => '죄송합니다. 검색 결과와 일치하지 않습니다.',
         'Set as favorite' => '즐겨찾기로 설정',
@@ -1610,7 +1630,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => '',
         'Priority Management' => '우선 순위 관리',
         'Edit Priority' => '우선 순위 편집',
-        'Color' => '색깔',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '이 우선 순위는 SysConfig 설정에 있으며 새로운 우선 순위를 가리 키도록 설정을 업데이트해야합니다!',
         'This priority is used in the following config settings:' => '이 우선 순위는 다음 구성 설정에서 사용됩니다.',
@@ -1686,7 +1705,6 @@ sub Data {
         'Filter available fields' => '사용 가능한 필드 필터링',
         'Assigned Fields' => '할당된 필드',
         'Filter assigned fields' => '',
-        'Communication Channel' => '통신 채널',
         'Is visible for customer' => '고객에게 표시됩니다.',
         'Text Template' => '텍스트 템플릿',
         'Auto fill' => '',
@@ -2125,8 +2143,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '배치 세부 사항으로 돌아가기',
-        'View a custom List of Settings' => '사용자 정의 설정 목록보기',
-        'View single Setting: %s' => '단일보기 설정 : %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2191,6 +2207,25 @@ sub Data {
         'Add missing possible dynamic field values' => '',
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => '',
+        'Translation Management' => '',
+        'Add Translation' => '',
+        'Edit Translation' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => '',
+        'Language' => '언어',
+        'An entry with this name already exists!' => '',
+        'Destination' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => '변경자 ',
+        'Deployment' => '전개',
+        'Copy this object' => '',
+        'Do you really want to delete this object? All associated data will be lost!' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
@@ -2538,7 +2573,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '통계 정보',
         'Created by' => '작성자 : ',
-        'Changed by' => '변경자 ',
         'Sum rows' => '행 합계',
         'Sum columns' => '열 합계',
         'Show as dashboard widget' => '대시 보드 위젯으로 표시',
@@ -2775,7 +2809,6 @@ sub Data {
         'Archive Search' => '아카이브 검색',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => '발신자 유형',
         'Save filter settings as default' => '필터 설정을 기본값으로 저장',
         'Event Type' => '이벤트 유형',
         'Save as default' => '기본값으로 저장',
@@ -3299,6 +3332,8 @@ sub Data {
             'Y 축의 축척은 X 축의 축척보다 커야합니다 (예 : X 축 => 월, Y 축 => 연도).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => '사용자 정의 설정 목록보기',
+        'View single Setting: %s' => '단일보기 설정 : %s',
         'This setting is disabled.' => '이 설정은 사용할 수 없습니다.',
         'This setting is fixed but not deployed yet!' => '이 설정은 고정되어 있지만 아직 배포되지 않았습니다!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3336,7 +3371,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => '검색 수정',
         'Go back to admin: ' => '관리자에게 돌아가기 : ',
-        'Deployment' => '전개',
         'My favourite settings' => '내가 가장 좋아하는 설정',
         'Invalid settings' => '설정이 잘못되었습니다.',
 
@@ -3432,7 +3466,7 @@ sub Data {
         'Mrs.' => 'Mrs.',
         'View system log messages.' => '시스템 로그 메시지를 봅니다.',
         'Edit the system configuration settings.' => '시스템 구성 설정을 편집 하십시오.',
-        'Update and extend your system with software packages.' => '소프트웨어 패키지로 시스템을 업데이트하고 확장하십시오.',
+        'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3577,10 +3611,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             '동적 필드 순서를 제대로 재설정 할 수 없습니다. 자세한 내용은 오류 로그를 확인하십시오.',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => '현재',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => '지정되지 않은 서브액션',
         'Need %s' => '%s 필요',
-        'Add %s field' => '%s 필드 추가',
         'The field does not contain only ASCII letters and numbers.' => '입력란에는 ASCII 문자와 숫자 만 포함되지 않습니다.',
         'There is another field with the same name.' => '같은 이름의 다른 필드가 있습니다.',
         'The field must be numeric.' => '이 필드는 숫자여야 합니다.',
@@ -3588,10 +3624,8 @@ sub Data {
         'Could not create the new field' => '새 필드를 만들지 못했습니다.',
         'Need ID' => '신분증이 필요함',
         'Could not get data for dynamic field %s' => '동적 필드 %s에 대한 데이터를 가져올 수 없습니다.',
-        'Change %s field' => '동적 필드 %s에 대한 데이터가 없습니다.',
         'The name for this field should not change.' => '이 입력란의 이름은 변경해서는 안됩니다.',
         'Could not update the field %s' => '%s 필드를 업데이트 할 수 없습니다.',
-        'Currently' => '현재',
         'Unchecked' => '선택하지 않았다.',
         'Checked' => '체크됨',
 
@@ -4146,6 +4180,8 @@ sub Data {
         'Export: Need StatID!' => '내보내기 : StatID가 필요합니다!',
         'Delete: Get no StatID!' => '삭제 : StatID를 가져 오지 마십시오!',
         'Need StatID!' => 'StatID가 필요합니다!',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            '',
         'Could not load stat.' => '통계를 로드 할 수 없습니다.',
         'Add New Statistic' => '새 통계 추가',
         'Could not create statistic.' => '통계를 만들 수 없습니다.',
@@ -4686,6 +4722,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '구성이 업데이트 되고 있습니다. 기다려주십시오...',
         'There is an error updating the system configuration!' => '시스템 구성을 업데이트 하는 중 오류가 발생했습니다!',
+
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
@@ -7637,6 +7677,8 @@ sub Data {
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
             '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7776,6 +7818,8 @@ sub Data {
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7877,6 +7921,16 @@ sub Data {
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            '',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            '',
+        'Defines the format of exported files when using the admin interface.' =>
+            '',
+        'Defines the separator for export csv files.' => '',
+        'Defines the quote for export csv files.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',
@@ -8021,6 +8075,9 @@ sub Data {
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             '첨부 파일을 삭제하는 중 오류가 발생했습니다. 자세한 내용은 로그를 확인하십시오.',
         'Attachment was deleted successfully.' => '첨부 파일을 삭제했습니다.',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8367,6 +8424,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => '죄송합니다. %s 파일 만 업로드 할 수 있습니다.',
         'Please only select at most %s files for upload.' => '업로드하려면 최대 %s 파일 만 선택하십시오.',
         'The following files are not allowed to be uploaded: %s' => '다음 파일은 업로드 할 수 없습니다 : %s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '다음 파일은 파일 당 최대 허용 크기인 %s를 초과하여 업로드되지 않았습니다 : %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8508,6 +8566,7 @@ Thanks for your help!
         'Appointment list.' => '약속 목록',
         'Appointment notifications' => '약속 알림',
         'Arabic (Saudi Arabia)' => '아랍어 (사우디 아라비아)',
+        'Article Color' => '',
         'ArticleTree' => 'ArticleTree',
         'Attachment Name' => '첨부명',
         'Avatar' => '화신',
@@ -8599,6 +8658,7 @@ Thanks for your help!
         'Create and manage ticket priorities.' => '티켘ㅅ 우선 순위를 만들고 관리합니다.',
         'Create and manage ticket states.' => '티켓 상태를 생성하고 관리합니다.',
         'Create and manage ticket types.' => '티켓 유형을 생성하고 관리하십시오.',
+        'Create and manage translation.' => '',
         'Create and manage web services.' => '웹 서비스를 만들고 관리합니다.',
         'Create new Ticket.' => '새 티켓을 만듭니다.',
         'Create new appointment.' => '새 약속을 만듭니다.',
@@ -8663,6 +8723,7 @@ Thanks for your help!
         'Dynamic Fields Multiselect Backend GUI' => '동적 필드 다중 선택 백엔드 GUI',
         'Dynamic Fields Overview Limit' => '동적 필드 개요 제한',
         'Dynamic Fields Text Backend GUI' => '동적 필드 텍스트 백엔드 GUI',
+        'Dynamic fields administration' => '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             '프로세스 위젯의 동적 필드 그룹. 키는 그룹의 이름이고, 값은 표시 할 필드를 포함합니다. 예 : \'Key => My Group\', \'Content : Name_X, NameY\'.',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => '동적 필드 개요에 대한 페이지 당 동적 필드 제한',
@@ -8764,7 +8825,6 @@ Thanks for your help!
         'Italian' => '이탈리아 사람',
         'Japanese' => '일본어',
         'Korean' => '',
-        'Language' => '언어',
         'Large' => '큰',
         'Last Mentions' => '',
         'Last Screen Overview' => '마지막 화면 개요',
@@ -8818,6 +8878,8 @@ Thanks for your help!
         'Manage support data.' => '지원 데이터를 관리합니다.',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => '이벤트 또는 시간 기반 실행에 의해 트리거된 작업을 관리합니다.',
+        'Manage ticket article color.' => '',
+        'Manage translation.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '스팸으로 표시하십시오!',
         'Mark as seen' => '',
@@ -9038,7 +9100,7 @@ Thanks for your help!
             '이것은 고객 인터페이스의 기본 오렌지색 검정색 스킨입니다.',
         'This is the default orange - black skin.' => '이것은 기본 오랜지색 검은색 피부입니다.',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => '티켓 닫기.',
         'Ticket Compose Bounce Email.' => '티켓 작성 반송 이메일.',
         'Ticket Compose email Answer.' => '티켓 전자 메일 응답을 작성하십시오.',
@@ -9109,6 +9171,7 @@ Thanks for your help!
         'Web service (Multiselect)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
+        'YAML' => '',
         'Yes, but hide archived tickets' => '예, 보관된 티켓은 숨깁니다.',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             '티켓 번호가 "1"인 이메일은 "2"로 반송됩니다. 자세한 내용은이 주소로 문의하십시오.',
@@ -9241,6 +9304,7 @@ Thanks for your help!
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9450,6 +9514,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

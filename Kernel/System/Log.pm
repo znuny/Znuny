@@ -259,7 +259,7 @@ sub Log {
     if ( lc $Priority ne 'debug' && $Self->{IPC} ) {
         $Priority = lc $Priority;
 
-        my $Data   = $LogTime . ";;$Priority;;$Self->{LogPrefix};;$Message\n";    ## no critic
+        my $Data   = $LogTime . ";;$Priority;;$Self->{LogPrefix};;$Subroutine2;;$Line1;;$Message\n";    ## no critic
         my $String = $Self->GetLog();
 
         # Fix for issue #286 (GitHub) / #328 (internal): Encode output.

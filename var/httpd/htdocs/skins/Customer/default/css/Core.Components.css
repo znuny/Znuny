@@ -243,6 +243,14 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         border: 0;
         float: left;
         border-radius: var(--border-radius-xl);
+        background: var(--primary-color);
+    }
+
+    .pill.Info,
+    .pill.Error,
+    .pill.Success,
+    .pill.Warning {
+        color: var(--main-font-color) !important;
     }
 
     /* **************************************** Buttons **************************************** */
@@ -262,7 +270,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         text-align: center;
         font-size: var(--font-size-sm);
     }
-    
+
 
     .btn-main.Hidden {
         display: none;
@@ -508,7 +516,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         color: var(--alert-error-icon-color);
     }
 
-    .MessageBox.Confirmation, 
+    .MessageBox.Confirmation,
     .Success {
         background: var(--alert-success-bg-color);
         border: 1px solid var(--alert-success-border-color);

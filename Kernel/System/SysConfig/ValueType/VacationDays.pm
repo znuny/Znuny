@@ -83,6 +83,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => {                     # Note for VacationDays ValueTypes EffectiveValue is not changed.
             '1' => {

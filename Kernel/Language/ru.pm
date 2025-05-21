@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.869686985172982;
+    $Self->{Completeness}        = 0.867627785058978;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -91,7 +91,8 @@ sub Data {
         'Change settings' => 'Изменить настройки',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Задайте, что вы хотите изменить в случае выполнения условия. Имейте в виду, что \'Possible\' это "белый список", а \'PossibleNot\' - "черный список"',
-        'Check the official %sdocumentation%s.' => 'Проверьте в официальной %документации%s.',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Изменить ACL %s',
         'Edit ACL' => 'Изменить ACL',
         'Show or hide the content' => 'Отобразить или скрыть содержимое',
@@ -251,6 +252,19 @@ sub Data {
         'If signing key/certificate is missing' => 'Если ключ/сертификат подписи отсутствует',
         'If encryption key/certificate is missing' => 'Если ключ/сертификат шифрования отсутствует',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => 'Фильтр для элементов',
+        'Hint' => 'Подсказка',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            '',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            '',
+        'Article Color Management' => '',
+        'Sender Type' => 'Тип отправителя',
+        'Communication Channel' => 'Канал связи',
+        'Visible for customer' => 'Видно клиенту',
+        'Color' => 'Цвет',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => 'Добавить вложение',
         'Filter for Attachments' => 'Фильтр для вложений',
@@ -282,7 +296,6 @@ sub Data {
             'Показать записи журнала связи созданные в определенном промежутке времени.',
         'Filter for Communications' => 'Фильтр по сеансам связи',
         'Filter for communications' => 'Фильтр для сеансов',
-        'Hint' => 'Подсказка',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             'На этой странице Вы можете видеть обзор входящих и исходящих сеансов связи.',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -488,31 +501,38 @@ sub Data {
         'Object' => 'Объект',
         'Delete this field' => 'Удалить это поле',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => 'Вернуться к обзору',
+        'Add %s field' => 'Добавить %s поле',
+        'Change %s field' => 'Изменить поле %s',
         'Dynamic Fields' => 'Динамические поля',
         'General' => 'Общие',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'Данное поле обязательно, и может состоять только из букв и цифр.',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             'Должно быть уникальным, и может состоять только из букв и цифр.',
-        'Changing this value will require manual changes in the system.' =>
-            'Изменение этого значения потребует ручных изменений в системе.',
+        'Changing this value will require manual changes to the system.' =>
+            '',
         'This is the name to be shown on the screens where the field is active.' =>
             'Это имя, под которым поле будет показано на тех экранах, на которых оно активно.',
         'Field order' => 'Порядок поля',
         'This field is required and must be numeric.' => 'Это поле обязательно, и должно быть числовым.',
         'This is the order in which this field will be shown on the screens where is active.' =>
             'Это порядок, в котором поле будет показываться среди других полей на тех экранах, где оно активно.',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            'Невозможно аннулировать эту запись, все настройки конфигурации должны быть изменены заранее.',
         'Field type' => 'Тип поля',
         'Object type' => 'Тип объекта',
         'Internal field' => 'Внутреннее поле',
         'This field is protected and can\'t be deleted.' => 'Это поле защищено и не может быть удалено.',
+        'Field Settings' => 'Настройки поля',
+        'There is no configuration available for this dynamic field.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            'Изменение этого значения потребует ручных изменений в системе.',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            'Невозможно аннулировать эту запись, все настройки конфигурации должны быть изменены заранее.',
         'This dynamic field is used in the following config settings:' =>
             'Это динамическое поле используется в следующих параметрах конфигурации:',
-        'Field Settings' => 'Настройки поля',
         'Default value' => 'Значение по умолчанию',
         'This is the default value for this field.' => 'Это значение по умолчанию для данного поля.',
 
@@ -799,7 +819,6 @@ sub Data {
         'New type' => 'Новый тип',
         'Archive selected tickets' => 'Архивировать выбранные заявки',
         'Add Note' => 'Добавить заметку/сообщение',
-        'Visible for customer' => 'Видно клиенту',
         'Time units' => 'Затраченное время',
         'Execute Ticket Commands' => 'Выполнить действия над заявкой',
         'Send agent/customer notifications on changes' => 'Отправить уведомление агенту/клиенту при изменениях',
@@ -1339,6 +1358,8 @@ sub Data {
         'System Log' => 'Системный журнал',
         'Recent Log Entries' => 'Свежие записи в логе',
         'Facility' => 'Объект',
+        'Source' => '',
+        'Line' => '',
         'Message' => 'Сообщение',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1375,7 +1396,6 @@ sub Data {
             'Можно добавить отдельные настройки в Избранные кликнув мышкой по "звездочке" справа в списке параметров.',
         'Links' => 'Ссылки',
         'View the admin manual on Github' => 'Смотрите руководство администратора на Github',
-        'Filter for Items' => 'Фильтр для элементов',
         'No Matches' => 'Совпадений не найдено',
         'Sorry, your search didn\'t match any items.' => 'К сожалению, поиск не дал результатов.',
         'Set as favorite' => 'Назначить избранным',
@@ -1622,7 +1642,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => '',
         'Priority Management' => 'Управление приоритетами',
         'Edit Priority' => 'Изменить приоритет',
-        'Color' => 'Цвет',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             'Это значение приоритета указано в настройках SysConfig, требуется подтверждение для обновления настроек для его использования в системе!',
         'This priority is used in the following config settings:' => 'Этот приоритет используется в следующих параметрах конфигурации:',
@@ -1645,7 +1664,7 @@ sub Data {
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Изменения в Процессах сделанные здесь будут актуальны после синхронизации данных Процесса. При синхронизации, все вновь внесенные изменения будут записаны в конигурационные файлы системы.',
         'Access Control Lists (ACL)' => 'Списки управления доступом (ACL)',
-        'Generic Agent' => 'Планировщие задач',
+        'Generic Agent' => 'Планировщик задач',
         'Manage Process Widget Groups' => '',
         'Processes' => 'Процессы',
         'Process name' => 'Имя Процесса',
@@ -1698,7 +1717,6 @@ sub Data {
         'Filter available fields' => 'Фильтр доступных полей',
         'Assigned Fields' => 'Назначенные поля',
         'Filter assigned fields' => 'Фильтр назначенных полей',
-        'Communication Channel' => 'Канал связи',
         'Is visible for customer' => 'Виден клиенту',
         'Text Template' => 'Текстовый шаблон',
         'Auto fill' => '',
@@ -2137,8 +2155,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '',
-        'View a custom List of Settings' => 'Просмотр пользовательского Списка Изменений',
-        'View single Setting: %s' => 'Просмотр единственного параметра: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2204,6 +2220,25 @@ sub Data {
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
             'Если значение окрашено красным, оно отсутствует в списке возможных значений в конфигурации динамического поля.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => '',
+        'Translation Management' => '',
+        'Add Translation' => '',
+        'Edit Translation' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => '',
+        'Language' => 'Язык',
+        'An entry with this name already exists!' => '',
+        'Destination' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => 'Изменил',
+        'Deployment' => 'Применение',
+        'Copy this object' => '',
+        'Do you really want to delete this object? All associated data will be lost!' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
         'Add Type' => 'Добавить тип',
@@ -2508,7 +2543,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
         'Choose from the groups on the left to find the settings you\'d wish to change.' =>
             'Выберите группу слева, чтобы найти настройки, которые желаете изменить.',
-        'Did you know?' => 'Знаете ли Dы?',
+        'Did you know?' => 'Знаете ли Вы?',
         'You can change your avatar by registering with your email address %s on %s' =>
             'Вы можете изменить свое изображение аватара поменяв адрес электронной почты с %sна %s',
 
@@ -2550,7 +2585,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Информация об отчете',
         'Created by' => 'Создал',
-        'Changed by' => 'Изменил',
         'Sum rows' => 'Сумма строк',
         'Sum columns' => 'Сумма столбцов',
         'Show as dashboard widget' => 'Показать как виджет Дайджеста',
@@ -2619,7 +2653,7 @@ sub Data {
         'Unlock tickets' => 'Разблокировать заявки',
         'Watch tickets' => 'Наблюдать за заявками',
         'Mark tickets as seen' => 'Пометить заявки как прочитанные',
-        'Mark tickets as unseen' => 'Пометить заявки как непрочитанные',
+        'Mark tickets as unseen' => 'Отметить заявки как непрочитанные',
         'Execute Bulk Action' => 'Выполнить Массовое действие',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -2723,7 +2757,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Удалить активные фильтры для этого экрана.',
         'Clear all filters' => 'Очистить все фильтры',
-        'Remove mention' => '',
+        'Remove mention' => 'Удалить упоминание',
         'Remove from list of watched tickets' => 'Удалить из списка наблюдаемых заявок',
         'Tickets per page' => 'Заявок на страницу',
 
@@ -2787,7 +2821,6 @@ sub Data {
         'Archive Search' => 'Поиск в архиве',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => 'Тип отправителя',
         'Save filter settings as default' => 'Сохранить условия фильтра для показа по умолчанию',
         'Event Type' => 'Тип события',
         'Save as default' => 'Сохранить, как значение по умолчанию',
@@ -2839,7 +2872,7 @@ sub Data {
         'Linked Objects' => 'Связанные объекты',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
-        'Mentions' => '',
+        'Mentions' => 'Упоминания',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Архив',
@@ -2921,7 +2954,7 @@ sub Data {
         'Log In' => 'Войти',
         'Request New Password' => 'Запросить новый пароль',
         'Your User Name' => 'Логин',
-        'A new password will be sent to your email address.' => 'Новый пароль будет отправлен на Ваш адрес электронной почты.',
+        'A new password will be sent to your email address.' => 'Новый пароль будет отправлен на адрес Вашей электронной почты.',
         'Back to login' => 'Вернуться к странице входа в систему',
         'Create Account' => 'Создать учетную запись',
         'Please fill out this form to receive login credentials.' => 'Пожалуйста, заполните эту форму, чтобы получить учетные данные для входа',
@@ -3311,6 +3344,8 @@ sub Data {
             'Помните, что масштаб для групп значений должен быть больше, чем масштаб для оси X (например, ось Х — месяц, группы значений — год).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => 'Просмотр пользовательского Списка Изменений',
+        'View single Setting: %s' => 'Просмотр единственного параметра: %s',
         'This setting is disabled.' => 'Данный параметр отключен.',
         'This setting is fixed but not deployed yet!' => 'Этот параметр исправлен, но пока не применен!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3348,7 +3383,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => 'Изменить условия поиска',
         'Go back to admin: ' => 'Вернуться в панель администратора: ',
-        'Deployment' => 'Применение',
         'My favourite settings' => 'Мои избранные настройки',
         'Invalid settings' => 'Неверное значение параметра',
 
@@ -3444,7 +3478,7 @@ sub Data {
         'Mrs.' => 'Г-жа',
         'View system log messages.' => 'Просмотр системных сообщений.',
         'Edit the system configuration settings.' => 'Редактировать настройки конфигурации системы',
-        'Update and extend your system with software packages.' => 'Обновление и расширение системы с помощью программных пакетов.',
+        'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3589,10 +3623,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'Невозможно правильно сбросить очередность Динамического Поля, подробности в логе ошибок.',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => 'В настоящий момент',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => 'Неопределенный subaction.',
         'Need %s' => 'Требуется  %s',
-        'Add %s field' => 'Добавить %s поле',
         'The field does not contain only ASCII letters and numbers.' => 'Поле содержит не только буквы и цифры таблицы ASCII.',
         'There is another field with the same name.' => 'Существует другое поле с таким же именем.',
         'The field must be numeric.' => 'Это поле должно быть числовым',
@@ -3600,10 +3636,8 @@ sub Data {
         'Could not create the new field' => 'Не удалось создать новое поле',
         'Need ID' => 'Требуется ID',
         'Could not get data for dynamic field %s' => 'Невозможно получить данные для динамического поля  %s',
-        'Change %s field' => 'Изменить поле %s',
         'The name for this field should not change.' => 'Наименование этого поля не должно меняться',
         'Could not update the field %s' => 'Не удалось обновить поле %s',
-        'Currently' => 'В настоящий момент',
         'Unchecked' => 'Не отмечено',
         'Checked' => 'Отмечено',
 
@@ -4158,6 +4192,8 @@ sub Data {
         'Export: Need StatID!' => 'Экспорт: нужен StatID!',
         'Delete: Get no StatID!' => 'Удаление: Нет StatID!',
         'Need StatID!' => 'Требуется StatID!',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            '',
         'Could not load stat.' => 'Не удалось загрузить статистику.',
         'Add New Statistic' => 'Добавить новый отчет',
         'Could not create statistic.' => 'Не удалось создать отчёт.',
@@ -4248,8 +4284,8 @@ sub Data {
         'My Locked Tickets' => 'Мои заблокированные заявки',
 
         # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
-        'New mention' => '',
-        'My Mentions' => '',
+        'New mention' => 'Новое упоминание',
+        'My Mentions' => 'Заявки, где меня упомянули',
 
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => 'Не возможно объединить заявку с самой собой!',
@@ -4524,7 +4560,7 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => 'Отметить сообщение как непрочитанное',
-        'Mark as unseen' => 'Пометить как непрочитанное',
+        'Mark as unseen' => 'Отметить как непрочитанное',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Пометить',
@@ -4699,6 +4735,10 @@ sub Data {
         'The configuration is being updated, please be patient...' => 'Конфигурация обновляется, будьте внимательны...',
         'There is an error updating the system configuration!' => 'Произошла ошибка при обновлении конфигурации!',
 
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
             'Не используйте учетную запись суперпользователя для работы с Znuny! Создайте новых агентов и работайте под их учетными записями.',
@@ -4798,9 +4838,9 @@ sub Data {
         'Locked Tickets Total' => 'Заблокированные заявки: Всего',
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
-        'Total mentions' => '',
-        'Total new mentions' => '',
-        'New mentions' => '',
+        'Total mentions' => 'Упомянули в заявках (Все)',
+        'Total new mentions' => 'Упомянули в заявках (Новые)',
+        'New mentions' => 'Новые упоминания',
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => 'Владелец заявки (Новые)',
@@ -4893,7 +4933,7 @@ sub Data {
         'Error while validating Recipient email address.' => '',
 
         # Perl Module: Kernel/System/Mention.pm
-        'LastMention' => '',
+        'LastMention' => 'ПоследнееУпоминание',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -5929,7 +5969,7 @@ sub Data {
         'Defines the module that shows the currently logged in customers in the customer interface.' =>
             'Задает модуль который показывает всех подключившихся клиентов в интерфейсе клиента.',
         'Defines the module to display a notification in the customer interface, if the customer is logged in while having system maintenance active.' =>
-            'Задает модуль, который показывает уведомление в интерфейсе клиента, если клиента зашел в систему, когда она в состоянии Профилактика/Обслуживание системы',
+            'Задает модуль, который показывает уведомление в интерфейсе клиента, если клиент зашел в систему, когда она в состоянии Профилактика/Обслуживание системы',
         'Defines the module to display a notification in the customer interface, if the customer user has not yet selected a time zone.' =>
             'Задает модуль для отображения уведомлений в интерфейсе клиента, если клиент все еще не выбрал временную зону.',
         'Defines an alternate login URL for the customer panel..' => 'Задает альтернативную URL, для входа  клиента.',
@@ -6128,7 +6168,7 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Задает порядок в котором отображаются Фамилия и Имя агентов.',
         'Default skin for the agent interface.' => 'Стандартная тема оформления для интерфейса агента.',
-        'Dark skin for the agent interface.' => 'Темный окрас в интерфейса агента.',
+        'Dark skin for the agent interface.' => 'Темная тема оформления интерфейса агента.',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Внутреннее имя окраса (skin) экрана для интерфейса агента. Доступные варианты заданы в Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -7649,6 +7689,8 @@ sub Data {
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
             '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7788,26 +7830,28 @@ sub Data {
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
-        'Defines which notifications about mentions should be sent.' => '',
-        'Defines if the toolbar mention icon should count mentions.' => '',
-        'These groups won\'t be selectable to be mentioned.' => '',
+        'Defines which notifications about mentions should be sent.' => 'Определяет какие уведомления об упоминании должны высылаться.',
+        'Defines if the toolbar mention icon should count mentions.' => 'Определяет должно ли подсчитываться количество упоминаний на иконке панели навигации.',
+        'These groups won\'t be selectable to be mentioned.' => 'Эти группы нельзя будет выбрать для упоминания.',
         'Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.' =>
-            '',
+            'Ограничение количества пользователей (в заметке), которые будут отмечены для упомянутые и уведомлены об этом. Пользователи (и пользователи из упомянутых групп) которые оказались за пределами лимита будут молча проигнорированы.',
         'Frontend registration of triggers for mention plugin of CKEditor.' =>
-            '',
+            'Frontend регистрация триггеров для плагина упоминания CKEditor.',
         'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
-            '',
-        'Event handler for mentions.' => '',
+            'Frontend регистрация шаблонов ввода/вывода для плагина упоминания CKEditor.',
+        'Event handler for mentions.' => 'Обработчик событий для упоминаний.',
         'Parameters for the dashboard backend of the last mention widget.' =>
-            '',
+            'Параметры для драйвера виджета в Дайджесте последних упоминаний по заявкам.',
         'Agent interface notification module to show the number of mentions.' =>
-            '',
+            'Модуль интерфейса агента для отображения количества упоминаний.',
         'Module to grant access to the mentioned agents of a ticket.' => '',
         'Assignment between event and type.' => '',
         'Defines the link type for each activity.' => '',
@@ -7889,6 +7933,16 @@ sub Data {
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            '',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            '',
+        'Defines the format of exported files when using the admin interface.' =>
+            '',
+        'Defines the separator for export csv files.' => '',
+        'Defines the quote for export csv files.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'временно недействительный',
@@ -7975,13 +8029,13 @@ sub Data {
         'customer' => 'клиент',
         'Ticket create notification' => 'Уведомление о создании заявки',
         'You will receive a notification each time a new ticket is created in one of your "My Queues" or "My Services".' =>
-            'Вы будете получать уведомление всякий раз при создании новой заявки в Вашей очереди из "Мои очереди" или "Мои Сервисы".',
+            'Вы будете получать уведомление всякий раз при создании новой заявки либо в "Мои очереди", либо в "Мои Сервисы".',
         'Ticket follow-up notification (unlocked)' => 'Уведомление об ответе по заявке (для разблокированных)',
         'You will receive a notification if a customer sends a follow-up to an unlocked ticket which is in your "My Queues" or "My Services".' =>
-            'Вы будете получать уведомление всякий раз когда клиент посылает дополнение к разблокированной заявке в "Моих очередях" или "Моих Сервисах".',
+            'Вы будете получать уведомление всякий раз, когда клиент посылает дополнение к разблокированной заявке в "Моих очередях" или "Моих Сервисах".',
         'Ticket follow-up notification (locked)' => 'Уведомление об ответе по заявке (для заблокированных)',
         'You will receive a notification if a customer sends a follow-up to a locked ticket of which you are the ticket owner or responsible.' =>
-            'Вы будете получать уведомление, когда клиент посылает дополнение к заблокированной заявке, для которой вы являетесь Владельцем или Ответственным.',
+            'Вы будете получать уведомление всякий раз, когда клиент посылает дополнение к заблокированной заявке, для которой Вы являетесь Владельцем или Ответственным.',
         'Ticket lock timeout notification' => 'Уведомление об истечении срока блокировки заявки системой',
         'You will receive a notification as soon as a ticket owned by you is automatically unlocked.' =>
             'Вы будете получать уведомление как только заявка, владельцем которой вы являетесь - будет автоматически разблокирована.',
@@ -8033,6 +8087,9 @@ sub Data {
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             'Произошла ошибка при удалении вложения. Подробности в лог-файле.',
         'Attachment was deleted successfully.' => 'Вложение успешно удалено.',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8379,6 +8436,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => 'Извините, но загрузить можно только %s файлы.',
         'Please only select at most %s files for upload.' => 'Пожалуйста, выберите только файлы %s для загрузки.',
         'The following files are not allowed to be uploaded: %s' => 'Следующие типы файлов не разрешены для загрузки: %s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'Следующие файлы превысили максимальный допустимый размер одного файла (%s) и не были загружены: %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8495,7 +8553,7 @@ Thanks for your help!
         'All CustomerIDs of a customer user.' => 'Все компании клиента.',
         'All customer users of a CustomerID' => 'Все клиенты компании',
         'All escalated tickets' => 'Все эскалированные заявки',
-        'All new tickets, these tickets have not been worked on yet' => 'Все новые заявки; с этими заявками еще никто не работал',
+        'All new tickets, these tickets have not been worked on yet' => 'Все новые заявки, с этими заявками еще никто не работал',
         'All open tickets, these tickets have already been worked on.' =>
             'Все открытые заявки, это заявки работа с которыми начата.',
         'All tickets with a reminder set where the reminder date has been reached' =>
@@ -8520,6 +8578,7 @@ Thanks for your help!
         'Appointment list.' => 'Список мероприятий.',
         'Appointment notifications' => 'Уведомления о мероприятиях',
         'Arabic (Saudi Arabia)' => 'Арабский (Саудовская Аравия)',
+        'Article Color' => '',
         'ArticleTree' => 'Дерево сообщений',
         'Attachment Name' => 'Имя вложения',
         'Avatar' => 'Аватар',
@@ -8611,6 +8670,7 @@ Thanks for your help!
         'Create and manage ticket priorities.' => 'Создание приоритетов заявок и управление ими.',
         'Create and manage ticket states.' => 'Создание состояний заявок и управление ими.',
         'Create and manage ticket types.' => 'Создание типов заявок и управление ими.',
+        'Create and manage translation.' => '',
         'Create and manage web services.' => 'Создание и управление веб-сервисами.',
         'Create new Ticket.' => 'Создать новую Заявку.',
         'Create new appointment.' => 'Создать новое мероприятие.',
@@ -8675,6 +8735,7 @@ Thanks for your help!
         'Dynamic Fields Multiselect Backend GUI' => 'Редактор динамических полей типа Multiselect',
         'Dynamic Fields Overview Limit' => 'Количество строк списка динамических полей на странице.',
         'Dynamic Fields Text Backend GUI' => 'Редактор динамических полей типа Text',
+        'Dynamic fields administration' => '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             'Группы динамических полей для процессного виджета. Ключ - имя группы, Значение - содержит имена показываемых полей. Например: Ключ - "My Group", Содержание: "Name_X, NameY".',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => '',
@@ -8776,9 +8837,8 @@ Thanks for your help!
         'Italian' => 'Итальянский',
         'Japanese' => 'Японский',
         'Korean' => 'Корейский',
-        'Language' => 'Язык',
         'Large' => 'Большой',
-        'Last Mentions' => '',
+        'Last Mentions' => 'Последние Упоминания',
         'Last Screen Overview' => 'Обзор последних просмотренных страниц',
         'Last customer subject' => 'Последняя заголовок клиента',
         'Last view - limit' => 'Последние просмотренные страницы - ограничение',
@@ -8830,18 +8890,20 @@ Thanks for your help!
         'Manage support data.' => 'Управление данными для поддержки.',
         'Manage system files.' => 'Управление системными файлами.',
         'Manage tasks triggered by event or time based execution.' => 'Управление заданиями, основанными на событиях или времени выполнения',
+        'Manage ticket article color.' => '',
+        'Manage translation.' => '',
         'Management of ticket attribute relations.' => 'Управление связями свойств заявки.',
         'Mark as Spam!' => 'Пометить как спам!',
         'Mark as seen' => '',
         'Mark this ticket as junk!' => 'Пометить эту заявку как мусор!',
         'Mark ticket as seen' => 'Пометить заявку как прочитанную',
-        'Mark ticket as unseen' => 'Пометить заявку как непрочитанную',
+        'Mark ticket as unseen' => 'Отметить заявку как непрочитанную',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => 'Максимальное число сообщений на странице при просмотре заявки',
         'Medium' => 'Средний',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
-        'Mentions.' => '',
+        'Mentions.' => 'Упоминания.',
         'Merge this ticket and all articles into another ticket' => 'Объединить эту заявку и все ее заметки с другой заявкой',
         'Merged Ticket (%s/%s) to (%s/%s).' => '',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'Объединена заявка <OTRS_TICKET> с <OTRS_MERGE_TO_TICKET>.',
@@ -9044,13 +9106,13 @@ Thanks for your help!
         'Theme' => 'Тема',
         'This is a Description for Comment on Framework.' => 'Это Описание Комментария к Фреймворку',
         'This is a Description for DynamicField on Framework.' => 'Это Описание Динамических Полей Фреймворка',
-        'This is the dark skin for the agent interface.' => 'Это темный окрас интерфейса агента.',
+        'This is the dark skin for the agent interface.' => 'Это темная тема оформления интерфейса агента.',
         'This is the dark skin for the customer interface.' => 'Это темный окрас интерфейса клиента.',
         'This is the default orange - black skin for the customer interface.' =>
             'Это стандартная оранжево-черная тема для интерфейса клиента.',
         'This is the default orange - black skin.' => 'Это стандартная оранжево-черная тема.',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => 'Заявка закрыта.',
         'Ticket Compose Bounce Email.' => '',
         'Ticket Compose email Answer.' => '',
@@ -9121,6 +9183,7 @@ Thanks for your help!
         'Web service (Multiselect)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
+        'YAML' => '',
         'Yes, but hide archived tickets' => 'Да, скрыть архивированные заявки',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             'Ваше письмо с номером заявки "<OTRS_TICKET>" переправлено адресату "<OTRS_BOUNCE_TO>". Контактируйте по этому адресу для получения дальнейшей информации.',
@@ -9253,6 +9316,7 @@ Thanks for your help!
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9462,6 +9526,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

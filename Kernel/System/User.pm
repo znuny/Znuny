@@ -986,6 +986,22 @@ sub SetPassword {
         Message  => "User: '$Param{UserLogin}' changed password successfully!",
     );
 
+    my $SystemTime = $Kernel::OM->Get('Kernel::System::Time')->SystemTime();
+
+    # Set password change time
+    $Self->SetPreferences(
+        Key    => 'UserLastPwChangeTime',
+        Value  => $SystemTime,
+        UserID => $User{UserID},
+    );
+
+    # Reset UserLoginFailed
+    $Self->SetPreferences(
+        Key    => 'UserLoginFailed',
+        Value  => 0,
+        UserID => $User{UserID},
+    );
+
     return 1;
 }
 

@@ -2333,6 +2333,112 @@ END;
 --
 ;
 -- ----------------------------------------------------------
+--  create table translation
+-- ----------------------------------------------------------
+CREATE TABLE translation (
+    id NUMBER (12, 0) NOT NULL,
+    dbcrud_uuid VARCHAR2 (36) NULL,
+    language_id VARCHAR2 (5) NOT NULL,
+    source_string VARCHAR2 (1000) NOT NULL,
+    destination_string VARCHAR2 (1000) NOT NULL,
+    valid_id NUMBER (5, 0) DEFAULT 1 NOT NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL,
+    change_time DATE NOT NULL,
+    change_by NUMBER (12, 0) NOT NULL,
+    deployment_state NUMBER (5, 0) DEFAULT 0 NOT NULL,
+    CONSTRAINT translation_uuid UNIQUE (dbcrud_uuid)
+);
+ALTER TABLE translation ADD CONSTRAINT PK_translation PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_translation';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_translation
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_translation_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_translation_t
+BEFORE INSERT ON translation
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_translation.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
+--  create table article_color
+-- ----------------------------------------------------------
+CREATE TABLE article_color (
+    id NUMBER (5, 0) NOT NULL,
+    name VARCHAR2 (200) NOT NULL,
+    color VARCHAR2 (10) NOT NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL,
+    change_time DATE NOT NULL,
+    change_by NUMBER (12, 0) NOT NULL,
+    CONSTRAINT article_color_name UNIQUE (name)
+);
+ALTER TABLE article_color ADD CONSTRAINT PK_article_color PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_article_color';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_article_color
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_article_color_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_article_color_t
+BEFORE INSERT ON article_color
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_article_color.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
 --  create table article_sender_type
 -- ----------------------------------------------------------
 CREATE TABLE article_sender_type (

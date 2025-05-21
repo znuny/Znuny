@@ -254,23 +254,25 @@ get a hash with data from Auto Response and it's corresponding System Address
 Return::
 
     my %QueueAddressData(
-        #Auto Response Data
-        'Text'            => 'Your OTRS TeamOTRS! answered by a human asap.',
-        'Subject'         => 'New ticket has been created! (RE: <OTRS_CUSTOMER_SUBJECT[24]>)',
+
+        # Auto Response Data
+        'Text'            => 'Your ZNUNY TeamZNUNY! answered by a human asap.',
+        'Subject'         => 'New ticket has been created! (RE: <ZNUNY_CUSTOMER_SUBJECT[24]>)',
         'ContentType'     => 'text/plain',
         'SystemAddressID' => '1',
-        'AutoResponseID'  => '1'
+        'AutoResponseID'  => '1',
 
-        #System Address Data
+        # System Address Data
         'ID'              => '1',
-        'Name'            => 'otrs@localhost',
-        'Address'         => 'otrs@localhost',  #Compatibility with OTRS 2.1
-        'Realname'        => 'OTRS System',
+        'Name'            => 'znuny@localhost',
+        'Address'         => 'znuny@localhost',
+        'Realname'        => 'ZNUNY System',
         'Comment'         => 'Standard Address.',
         'ValidID'         => '1',
         'QueueID'         => '1',
         'CreateTime'      => '2010-03-16 21:24:03',
         'ChangeTime'      => '2010-03-16 21:24:03',
+
     );
 
 =cut

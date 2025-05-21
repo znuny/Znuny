@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.684349258649094;
+    $Self->{Completeness}        = 0.680373525557012;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -83,7 +83,8 @@ sub Data {
         'Change settings' => '変更設定',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'マッチした対象をどのように絞り込むかを指定します。\'Possible\'はホワイトリスト、\'PossibleNot\'はブラックリストです。',
-        'Check the official %sdocumentation%s.' => '',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'ACLの %s を編集',
         'Edit ACL' => 'ACLを編集',
         'Show or hide the content' => '内容の表示・非表示',
@@ -243,6 +244,19 @@ sub Data {
         'If signing key/certificate is missing' => 'もし署名された鍵/証明書が存在しない場合',
         'If encryption key/certificate is missing' => 'もし暗号化された鍵/証明書が存在しない場合',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => 'アイテムをフィルター',
+        'Hint' => 'ヒント',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            '',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            '',
+        'Article Color Management' => '',
+        'Sender Type' => '送信者タイプ',
+        'Communication Channel' => 'コミュニケーション・チャネル',
+        'Visible for customer' => '顧客が閲覧可能な記事',
+        'Color' => '色',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => '添付ファイルを追加',
         'Filter for Attachments' => '添付ファイルでフィルタ',
@@ -274,7 +288,6 @@ sub Data {
             '特定の時間範囲で作成された通信ログのみを表示します。',
         'Filter for Communications' => '',
         'Filter for communications' => 'コミュニケーションでフィルター',
-        'Hint' => 'ヒント',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             'この画面では、着信および発信コミュニケーションの概要を確認できます。',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -480,31 +493,38 @@ sub Data {
         'Object' => '対象',
         'Delete this field' => 'この領域を削除',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => '一覧に戻る',
+        'Add %s field' => '',
+        'Change %s field' => '',
         'Dynamic Fields' => 'ダイナミック・フィールド',
         'General' => 'ジェネラル',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'この領域は必須であり、値はアルファベットと数値のみでなければなりません。',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             '一意でなければならず、アルファベットと数値のみ受け付けます。',
-        'Changing this value will require manual changes in the system.' =>
-            'この値の変更はシステム内で手動で行う必要があります。',
+        'Changing this value will require manual changes to the system.' =>
+            '',
         'This is the name to be shown on the screens where the field is active.' =>
             'これは領域がアクティブである画面で表示される名前です。',
         'Field order' => '領域の順序',
         'This field is required and must be numeric.' => 'この領域は必須かつ数値でなければなりません。',
         'This is the order in which this field will be shown on the screens where is active.' =>
             'これはこの領域がアクティブである画面で表示される順序です。',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            '',
         'Field type' => '領域タイプ',
         'Object type' => 'オブジェクトタイプ',
         'Internal field' => '内部領域',
         'This field is protected and can\'t be deleted.' => 'この領域は保護されており、削除できません。',
+        'Field Settings' => '領域設定',
+        'There is no configuration available for this dynamic field.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            'この値の変更はシステム内で手動で行う必要があります。',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            '',
         'This dynamic field is used in the following config settings:' =>
             'このダイナミック・フィールドは、次の設定で使用されます。',
-        'Field Settings' => '領域設定',
         'Default value' => 'デフォルト値',
         'This is the default value for this field.' => 'これはこの領域に対するデフォルト値です。',
 
@@ -791,7 +811,6 @@ sub Data {
         'New type' => '新しいタイプ',
         'Archive selected tickets' => '選択されたアーカイブ・チケット',
         'Add Note' => 'メモを追加',
-        'Visible for customer' => '顧客が閲覧可能な記事',
         'Time units' => '時間の単位',
         'Execute Ticket Commands' => 'チケットコマンドを実行',
         'Send agent/customer notifications on changes' => '変更を担当者／顧客に通知する',
@@ -1333,6 +1352,8 @@ sub Data {
         'System Log' => 'システムログ',
         'Recent Log Entries' => '最近のログ一覧',
         'Facility' => 'ファシリティ',
+        'Source' => '',
+        'Line' => '',
         'Message' => 'メッセージ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1369,7 +1390,6 @@ sub Data {
             '右側のアイテムにカーソルを合わせてスターアイコンをクリックすると、お気に入りを追加できます。',
         'Links' => 'リンク',
         'View the admin manual on Github' => 'Githubの管理マニュアルを表示',
-        'Filter for Items' => 'アイテムをフィルター',
         'No Matches' => 'マッチなし',
         'Sorry, your search didn\'t match any items.' => '申し訳ありませんが、あなたの検索はどのアイテムにも一致しませんでした。',
         'Set as favorite' => 'お気に入りに指定',
@@ -1616,7 +1636,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => '',
         'Priority Management' => '優先度管理',
         'Edit Priority' => '優先度を編集',
-        'Color' => '色',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
@@ -1692,7 +1711,6 @@ sub Data {
         'Filter available fields' => '利用可能な領域をフィルタ',
         'Assigned Fields' => '割り当てられた領域',
         'Filter assigned fields' => '',
-        'Communication Channel' => 'コミュニケーション・チャネル',
         'Is visible for customer' => '顧客が閲覧可能',
         'Text Template' => '本文テンプレート',
         'Auto fill' => '',
@@ -2131,8 +2149,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '',
-        'View a custom List of Settings' => 'カスタム設定の一覧を表示',
-        'View single Setting: %s' => '単一の設定を表示：%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2197,6 +2213,25 @@ sub Data {
         'Add missing possible dynamic field values' => '',
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => '',
+        'Translation Management' => '',
+        'Add Translation' => '',
+        'Edit Translation' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => '',
+        'Language' => '言語',
+        'An entry with this name already exists!' => '',
+        'Destination' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => '変更者',
+        'Deployment' => 'デプロイ',
+        'Copy this object' => '',
+        'Do you really want to delete this object? All associated data will be lost!' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
@@ -2544,7 +2579,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'レポート情報',
         'Created by' => '作成者',
-        'Changed by' => '変更者',
         'Sum rows' => '行の合計',
         'Sum columns' => '列の合計',
         'Show as dashboard widget' => 'ダッシュボードウィジェットとして表示',
@@ -2781,7 +2815,6 @@ sub Data {
         'Archive Search' => 'アーカイブ検索',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => '送信者タイプ',
         'Save filter settings as default' => 'デフォルトのフィルター設定を保存',
         'Event Type' => 'イベントタイプ',
         'Save as default' => 'ドラフトとして保存',
@@ -3305,6 +3338,8 @@ sub Data {
             'Y軸の目盛はX軸の目盛より大きくする必要があります (例: X軸=>月、Y軸=>年)',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => 'カスタム設定の一覧を表示',
+        'View single Setting: %s' => '単一の設定を表示：%s',
         'This setting is disabled.' => 'この設定は無効です。',
         'This setting is fixed but not deployed yet!' => 'この設定は確定しましたが、まだデプロイされていません！',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3342,7 +3377,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => '検索を修正',
         'Go back to admin: ' => '管理に戻る：',
-        'Deployment' => 'デプロイ',
         'My favourite settings' => '私のお気に入りの設定',
         'Invalid settings' => '無効な設定',
 
@@ -3438,7 +3472,7 @@ sub Data {
         'Mrs.' => '様',
         'View system log messages.' => 'システム・ログ・メッセージを見る。',
         'Edit the system configuration settings.' => 'システム設定の編集',
-        'Update and extend your system with software packages.' => 'このシステムのソフトウェアパッケージの更新と展開',
+        'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3584,10 +3618,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'ダイナミック・フィールドのオーダー定義を初期化できませんでした。詳細はエラーログを参照願います。',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => '現在の',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => '未定義のサブアクションです。',
         'Need %s' => '%s の入力が必要です。',
-        'Add %s field' => '',
         'The field does not contain only ASCII letters and numbers.' => '',
         'There is another field with the same name.' => '',
         'The field must be numeric.' => '',
@@ -3595,10 +3631,8 @@ sub Data {
         'Could not create the new field' => '新しいフィールドを作成できませんでした。',
         'Need ID' => 'IDが必要',
         'Could not get data for dynamic field %s' => 'ダイナミック・フィールド %s の値を取得できませんでした',
-        'Change %s field' => '',
         'The name for this field should not change.' => '',
         'Could not update the field %s' => '',
-        'Currently' => '現在の',
         'Unchecked' => '未選択',
         'Checked' => '選択済み',
 
@@ -4153,6 +4187,8 @@ sub Data {
         'Export: Need StatID!' => 'エクスポート: StatIDが必要です！',
         'Delete: Get no StatID!' => '削除: StatIDが存在しません！',
         'Need StatID!' => 'StatIDが必要です！',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            '',
         'Could not load stat.' => '統計を読み込めませんでした。',
         'Add New Statistic' => '新しいレポートを追加',
         'Could not create statistic.' => 'レポートを作成できませんでした。',
@@ -4693,6 +4729,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '設定は更新されておりますので、ご安心ください。',
         'There is an error updating the system configuration!' => 'システム設定の更新時にエラーが発生しました。',
+
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
@@ -7653,6 +7693,8 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
             '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7792,6 +7834,8 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7893,6 +7937,16 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            '',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            '',
+        'Defines the format of exported files when using the admin interface.' =>
+            '',
+        'Defines the separator for export csv files.' => '',
+        'Defines the quote for export csv files.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '無効-暫定',
@@ -8037,6 +8091,9 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             '添付ファイル削除時にエラーが発生しました。詳細はログを確認してください。',
         'Attachment was deleted successfully.' => '添付ファイルが正常に削除されました。',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8383,6 +8440,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Sorry, you can only upload %s files.' => '',
         'Please only select at most %s files for upload.' => '',
         'The following files are not allowed to be uploaded: %s' => '',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8522,6 +8580,7 @@ Thanks for your help!
         'Appointment list.' => '予約リスト',
         'Appointment notifications' => '予約通知',
         'Arabic (Saudi Arabia)' => '',
+        'Article Color' => '',
         'ArticleTree' => '',
         'Attachment Name' => '添付ファイル名',
         'Avatar' => 'アバター',
@@ -8613,6 +8672,7 @@ Thanks for your help!
         'Create and manage ticket priorities.' => 'チケット優先度の作成と管理',
         'Create and manage ticket states.' => 'チケット状態の作成と管理',
         'Create and manage ticket types.' => 'チケットタイプの作成と管理',
+        'Create and manage translation.' => '',
         'Create and manage web services.' => 'Webサービスの作成と管理',
         'Create new Ticket.' => '新規チケットの作成',
         'Create new appointment.' => '予約を登録',
@@ -8677,6 +8737,7 @@ Thanks for your help!
         'Dynamic Fields Multiselect Backend GUI' => 'ダイナミック・フィールド複数選択バックエンドGUI',
         'Dynamic Fields Overview Limit' => 'ダイナミック・フィールド一覧の表示数',
         'Dynamic Fields Text Backend GUI' => 'ダイナミックフィールド・テキストバックエンドGUI',
+        'Dynamic fields administration' => '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             '',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => 'ダイナミック・フィールド一覧内のダイナミック・フィールド表示上限数',
@@ -8778,7 +8839,6 @@ Thanks for your help!
         'Italian' => 'イタリア語',
         'Japanese' => '日本語',
         'Korean' => '',
-        'Language' => '言語',
         'Large' => '大',
         'Last Mentions' => '',
         'Last Screen Overview' => '',
@@ -8832,6 +8892,8 @@ Thanks for your help!
         'Manage support data.' => 'サポート情報の管理',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'イベントトリガーまたは時間ベースで実行されるタスクの管理',
+        'Manage ticket article color.' => '',
+        'Manage translation.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '迷惑メールにする',
         'Mark as seen' => '',
@@ -9053,7 +9115,7 @@ Thanks for your help!
             'これは、デフォルトの黒地と橙色をモチーフにした、顧客インタフェース向けのスキンです。',
         'This is the default orange - black skin.' => 'これは、デフォルトの黒地と橙色をモチーフにしたスキンです。',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => 'チケットをクローズする',
         'Ticket Compose Bounce Email.' => 'バウンスメールを送信する',
         'Ticket Compose email Answer.' => '',
@@ -9124,6 +9186,7 @@ Thanks for your help!
         'Web service (Multiselect)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
+        'YAML' => '',
         'Yes, but hide archived tickets' => 'はい、アーカイブされたチケットを非表示にします。',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             'チケット番号"<OTRS_TICKET>" のメールは、"<OTRS_BOUNCE_TO>"宛にバウンスされました。詳細は、このアドレスまでお問合せください。',
@@ -9256,6 +9319,7 @@ Thanks for your help!
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9465,6 +9529,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

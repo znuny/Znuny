@@ -1139,6 +1139,11 @@ td a:hover i {
     color: var(--gray-darker);
 }
 
+button.table-icon-hover-md {
+    background: none;
+    border: none;
+    font-size: var(--font-size-lg);
+}
 
 .table-icon-hover-md {
     position: relative;
@@ -1255,19 +1260,6 @@ td a:hover i {
 /**************************/
 /*          Admin         */
 /**************************/
-.WidgetPermissions table thead tr th,
-table#Users thead tr th,
-table#Groups thead tr th,
-table#Roles thead tr th,
-table#CustomerUsers thead tr th,
-table#Customers thead tr th,
-table#Customer thead tr th,
-table[id='Customer User'] thead tr th,
-table#Group thead tr th,
-table#Group thead tr:nth-child(2) th,
-table#AlwaysGroups thead tr th {
-    width: 100px;
-}
 
 .WidgetPermissions table thead tr th:first-child,
 table#Users thead tr th:first-child,

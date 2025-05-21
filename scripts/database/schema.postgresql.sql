@@ -1168,6 +1168,38 @@ END IF;
 END$$;
 ;
 -- ----------------------------------------------------------
+--  create table translation
+-- ----------------------------------------------------------
+CREATE TABLE translation (
+    id serial NOT NULL,
+    dbcrud_uuid VARCHAR (36) NULL,
+    language_id VARCHAR (5) NOT NULL,
+    source_string VARCHAR (1000) NOT NULL,
+    destination_string VARCHAR (1000) NOT NULL,
+    valid_id SMALLINT DEFAULT 1 NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    deployment_state SMALLINT DEFAULT 0 NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT translation_uuid UNIQUE (dbcrud_uuid)
+);
+-- ----------------------------------------------------------
+--  create table article_color
+-- ----------------------------------------------------------
+CREATE TABLE article_color (
+    id serial NOT NULL,
+    name VARCHAR (200) NOT NULL,
+    color VARCHAR (10) NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT article_color_name UNIQUE (name)
+);
+-- ----------------------------------------------------------
 --  create table article_sender_type
 -- ----------------------------------------------------------
 CREATE TABLE article_sender_type (

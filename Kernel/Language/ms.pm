@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.537891268533773;
+    $Self->{Completeness}        = 0.534731323722149;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -79,7 +79,8 @@ sub Data {
         'Change settings' => 'Menukar tetapan',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Tetapkan apa yang ingin anda ubah jika ciri-ciri sesuai. Ingat bahawa \'Mungkin\' ialah senarai putih, \'Tidak mungkin\' ialah senarai hitam.',
-        'Check the official %sdocumentation%s.' => '',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Sunting Senarai Kawalan Akses',
         'Edit ACL' => '',
         'Show or hide the content' => 'Menunjukkan atau menyembunyikan kandungan',
@@ -239,6 +240,19 @@ sub Data {
         'If signing key/certificate is missing' => 'Jika kunci penandatangan/sijil hilang',
         'If encryption key/certificate is missing' => 'Jika kunci penyulitan/sijil hilang',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => '',
+        'Hint' => 'Petunjuk',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            '',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            '',
+        'Article Color Management' => '',
+        'Sender Type' => 'Jenis penghantar',
+        'Communication Channel' => '',
+        'Visible for customer' => '',
+        'Color' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => 'Tambah lampiran',
         'Filter for Attachments' => 'Penapis lampiran',
@@ -270,7 +284,6 @@ sub Data {
             '',
         'Filter for Communications' => '',
         'Filter for communications' => '',
-        'Hint' => 'Petunjuk',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             '',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -476,31 +489,38 @@ sub Data {
         'Object' => 'Objek',
         'Delete this field' => 'Padam bidang ini',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => 'Pergi kembali ke gambaran keseluruhan',
+        'Add %s field' => '',
+        'Change %s field' => '',
         'Dynamic Fields' => 'Perlengkapan dinamik',
         'General' => 'Umum',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'Bidang ini diperlukan, dan nilai harus aksara abjad dan nombor sahaja.',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             'Mestilah unik dan hanya menerima aksara abjad dan nombor.',
-        'Changing this value will require manual changes in the system.' =>
-            'Menukar nilai ini akan memerlukan perubahan manual dalam sistem.',
+        'Changing this value will require manual changes to the system.' =>
+            '',
         'This is the name to be shown on the screens where the field is active.' =>
             'Ini adalah nama yang ditunjukkan pada skrin di mana bidang aktif.',
         'Field order' => 'Turutan bidang',
         'This field is required and must be numeric.' => 'Bidang ini diperlukan dan mesti terdiri daripada angka.',
         'This is the order in which this field will be shown on the screens where is active.' =>
             'Ini adalah perintah di mana bidang ini akan ditunjukkan pada skrin di mana aktif.',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            '',
         'Field type' => 'Jenis bidang',
         'Object type' => 'Jenis objek',
         'Internal field' => 'Medan dalaman',
         'This field is protected and can\'t be deleted.' => 'Medan ini adalah dilindungi dan tidak boleh dihapuskan.',
+        'Field Settings' => 'Aturan bidang',
+        'There is no configuration available for this dynamic field.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            'Menukar nilai ini akan memerlukan perubahan manual dalam sistem.',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            '',
         'This dynamic field is used in the following config settings:' =>
             '',
-        'Field Settings' => 'Aturan bidang',
         'Default value' => 'Nilai sedia ada',
         'This is the default value for this field.' => 'Ini adalah nilai lalai untuk bidang ini',
 
@@ -787,7 +807,6 @@ sub Data {
         'New type' => 'jenis baru',
         'Archive selected tickets' => 'Arkib dipilih tiket',
         'Add Note' => 'Tambah Nota',
-        'Visible for customer' => '',
         'Time units' => 'masa unit',
         'Execute Ticket Commands' => 'Jalankan Arahan Tiket',
         'Send agent/customer notifications on changes' => 'Hantar ejen / pelanggan pemberitahuan mengenai perubahan',
@@ -1327,6 +1346,8 @@ sub Data {
         'System Log' => 'Log Sistem',
         'Recent Log Entries' => 'Log Masuk Baru',
         'Facility' => 'Kemudahan',
+        'Source' => '',
+        'Line' => '',
         'Message' => 'Mesej',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1363,7 +1384,6 @@ sub Data {
             '',
         'Links' => '',
         'View the admin manual on Github' => '',
-        'Filter for Items' => '',
         'No Matches' => '',
         'Sorry, your search didn\'t match any items.' => '',
         'Set as favorite' => '',
@@ -1610,7 +1630,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => '',
         'Priority Management' => 'Pengurusan keutamaan',
         'Edit Priority' => 'Edit Keutamaan',
-        'Color' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
@@ -1686,7 +1705,6 @@ sub Data {
         'Filter available fields' => 'Tapis medan tersedia',
         'Assigned Fields' => 'Medan yang ditetapkan',
         'Filter assigned fields' => '',
-        'Communication Channel' => '',
         'Is visible for customer' => '',
         'Text Template' => 'Templat teks',
         'Auto fill' => '',
@@ -2125,8 +2143,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '',
-        'View a custom List of Settings' => '',
-        'View single Setting: %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2191,6 +2207,25 @@ sub Data {
         'Add missing possible dynamic field values' => '',
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => '',
+        'Translation Management' => '',
+        'Add Translation' => '',
+        'Edit Translation' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => '',
+        'Language' => 'Bahasa',
+        'An entry with this name already exists!' => '',
+        'Destination' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => 'Diubah oleh',
+        'Deployment' => '',
+        'Copy this object' => '',
+        'Do you really want to delete this object? All associated data will be lost!' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
@@ -2538,7 +2573,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
         'Created by' => 'Dicipta oleh',
-        'Changed by' => 'Diubah oleh',
         'Sum rows' => 'Jumlah baris',
         'Sum columns' => 'Jumlah lajur',
         'Show as dashboard widget' => 'Tunjuk sebagai papan pemuka widget',
@@ -2775,7 +2809,6 @@ sub Data {
         'Archive Search' => 'Carian Arkib',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => 'Jenis penghantar',
         'Save filter settings as default' => 'Simpan tetapan penapis sebagai piawai.',
         'Event Type' => 'Jenis Acara',
         'Save as default' => 'Simpan sebagai lalai',
@@ -3299,6 +3332,8 @@ sub Data {
             'Sila ingat bahawa skala bagi paksi-Y telah menjadi lebih besar daripada skala untuk paksi-X (contoh: paksi-X => Bulan, paksi-Y => Tahun).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => '',
+        'View single Setting: %s' => '',
         'This setting is disabled.' => '',
         'This setting is fixed but not deployed yet!' => '',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3336,7 +3371,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => '',
         'Go back to admin: ' => '',
-        'Deployment' => '',
         'My favourite settings' => '',
         'Invalid settings' => '',
 
@@ -3432,7 +3466,7 @@ sub Data {
         'Mrs.' => 'Puan',
         'View system log messages.' => 'Melihat mesej log sistem.',
         'Edit the system configuration settings.' => 'Mengaudit aturan konfigurasi sistem',
-        'Update and extend your system with software packages.' => 'Naik taraf dan kembangkan sistem anda dengan pakej perisian.',
+        'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3577,10 +3611,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'Tidak boleh membetulkan semula susunan Bidang Dinamik dengan elok, sila semak log kesalahan untuk maklumat lanjut.',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => 'Buat masa sekarang',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => 'Tindakan bawah tidak tertakrif',
         'Need %s' => 'Perlukan %s',
-        'Add %s field' => '',
         'The field does not contain only ASCII letters and numbers.' => '',
         'There is another field with the same name.' => 'Terdapat ruang yang lain dengan nama yang sama.',
         'The field must be numeric.' => 'Ruang tersebut perlu jadi numerik',
@@ -3588,10 +3624,8 @@ sub Data {
         'Could not create the new field' => 'Tidak boleh cipta ruang baru',
         'Need ID' => 'Perlukan ID',
         'Could not get data for dynamic field %s' => 'Tidak boleh mendapatkan data untuk ruang dinamik %s',
-        'Change %s field' => '',
         'The name for this field should not change.' => 'Nama untuk ruang tidak patut ditukar.',
         'Could not update the field %s' => 'Tidak dapat mengemaskini ruang tersebut %s',
-        'Currently' => 'Buat masa sekarang',
         'Unchecked' => 'Tidak disemak',
         'Checked' => 'Disemak',
 
@@ -4146,6 +4180,8 @@ sub Data {
         'Export: Need StatID!' => '',
         'Delete: Get no StatID!' => '',
         'Need StatID!' => '',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            '',
         'Could not load stat.' => '',
         'Add New Statistic' => 'Tambah Statistik Baru',
         'Could not create statistic.' => '',
@@ -4686,6 +4722,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '',
         'There is an error updating the system configuration!' => '',
+
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
@@ -7639,6 +7679,8 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
             '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7778,6 +7820,8 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7879,6 +7923,16 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            '',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            '',
+        'Defines the format of exported files when using the admin interface.' =>
+            '',
+        'Defines the separator for export csv files.' => '',
+        'Defines the quote for export csv files.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak sah-sementara',
@@ -8023,6 +8077,9 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             '',
         'Attachment was deleted successfully.' => '',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8369,6 +8426,7 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         'Sorry, you can only upload %s files.' => '',
         'Please only select at most %s files for upload.' => '',
         'The following files are not allowed to be uploaded: %s' => '',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8511,6 +8569,7 @@ Kumpulan MejaBantuan Anda
         'Appointment list.' => '',
         'Appointment notifications' => '',
         'Arabic (Saudi Arabia)' => 'Arab (Arab Saudi)',
+        'Article Color' => '',
         'ArticleTree' => 'PokokArtikel',
         'Attachment Name' => 'Nama Lampiran',
         'Avatar' => '',
@@ -8602,6 +8661,7 @@ Kumpulan MejaBantuan Anda
         'Create and manage ticket priorities.' => 'Mewujudkan dan menguruskan keutamaan tiket.',
         'Create and manage ticket states.' => 'Mewujudkan dan menguruskan status tiket.',
         'Create and manage ticket types.' => 'Mewujudkan dan menguruskan jenis tiket.',
+        'Create and manage translation.' => '',
         'Create and manage web services.' => 'Mewujudkan dan menguruskan perkhidmatan web.',
         'Create new Ticket.' => '',
         'Create new appointment.' => '',
@@ -8666,6 +8726,7 @@ Kumpulan MejaBantuan Anda
         'Dynamic Fields Multiselect Backend GUI' => 'GUI Backend Multiselect Medan Dinamik',
         'Dynamic Fields Overview Limit' => 'Had Overview Medan Dinamik',
         'Dynamic Fields Text Backend GUI' => 'GUI Backend Teks Medan Dinamik',
+        'Dynamic fields administration' => '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             'Medan kumpulan dinamik untuk proses widget. Kuncinya adalah nama kumpulan, nilai mengandungi medan untuk ditunjukkan. Contoh: \'Kunci => Kumpulan Saya\', \'Kandungan: Nama_X, NamaY\'.',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => '',
@@ -8767,7 +8828,6 @@ Kumpulan MejaBantuan Anda
         'Italian' => 'Itali',
         'Japanese' => 'Jepun',
         'Korean' => '',
-        'Language' => 'Bahasa',
         'Large' => 'Besar',
         'Last Mentions' => '',
         'Last Screen Overview' => '',
@@ -8821,6 +8881,8 @@ Kumpulan MejaBantuan Anda
         'Manage support data.' => 'Urus data sokongan.',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'Uruskan tugas yang dicetuskan oleh acara atau pelaksanaan berdasarkan masa.',
+        'Manage ticket article color.' => '',
+        'Manage translation.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Tanda sebagai Spam!',
         'Mark as seen' => '',
@@ -9041,7 +9103,7 @@ Kumpulan MejaBantuan Anda
             '',
         'This is the default orange - black skin.' => '',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => '',
         'Ticket Compose Bounce Email.' => '',
         'Ticket Compose email Answer.' => '',
@@ -9112,6 +9174,7 @@ Kumpulan MejaBantuan Anda
         'Web service (Multiselect)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
+        'YAML' => '',
         'Yes, but hide archived tickets' => 'Ya, tetapi sembunyi tiket disimpan.',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             'Emel anda dengan nombor tiket "<OTRS_TICKET>" dilantunkan ke "<OTRS_BOUNCE_TO>".  Hubungi alamat ini untuk maklumat lanjut. ',
@@ -9244,6 +9307,7 @@ Kumpulan MejaBantuan Anda
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9453,6 +9517,7 @@ Kumpulan MejaBantuan Anda
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

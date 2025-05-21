@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.523887973640857;
+    $Self->{Completeness}        = 0.520806028833552;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -79,7 +79,8 @@ sub Data {
         'Change settings' => 'เปลี่ยนการตั้งค่า',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'ตั้งค่าสิ่งที่คุณต้องการที่จะเปลี่ยนแปลงถ้าหากตรงตามเกณฑ์ โปรดจำไว้ว่า \'Possible\' เป็นรายการที่อนุญาต \'PossibleNo\' คือแบล็คลิสต์',
-        'Check the official %sdocumentation%s.' => '',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'แก้ไข ACL %s',
         'Edit ACL' => '',
         'Show or hide the content' => 'แสดงหรือซ่อนเนื้อหา',
@@ -239,6 +240,19 @@ sub Data {
         'If signing key/certificate is missing' => '',
         'If encryption key/certificate is missing' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => '',
+        'Hint' => 'คำแนะนำ',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            '',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            '',
+        'Article Color Management' => '',
+        'Sender Type' => 'ประเภทผู้ส่ง',
+        'Communication Channel' => '',
+        'Visible for customer' => '',
+        'Color' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => 'เพิ่มเอกสารแนบ',
         'Filter for Attachments' => 'ตัวกรองสำหรับสิ่งที่แนบมา',
@@ -270,7 +284,6 @@ sub Data {
             '',
         'Filter for Communications' => '',
         'Filter for communications' => '',
-        'Hint' => 'คำแนะนำ',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             '',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -476,31 +489,38 @@ sub Data {
         'Object' => 'ออบเจค',
         'Delete this field' => 'ลบฟิลด์นี้',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => 'กลับไปที่ภาพรวม',
+        'Add %s field' => '',
+        'Change %s field' => '',
         'Dynamic Fields' => 'ไดมานิคฟิลด์',
         'General' => 'ทั่วไป',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'จำเป็นต้องกรอกข้อมูลในช่องนี้และข้อมูลในช่องนี้ควรจะเป็นตัวอักษรและตัวเลขเท่านั้น',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             'ต้องเป็นชื่อเฉพาะ และเป็นตัวหนังสือและตัวเลขเท่านั่น',
-        'Changing this value will require manual changes in the system.' =>
-            'การเปลี่ยนค่านี้จะต้องมีการเปลี่ยนแปลงด้วยตนเองในระบบ',
+        'Changing this value will require manual changes to the system.' =>
+            '',
         'This is the name to be shown on the screens where the field is active.' =>
             'นี่คือชื่อที่จะแสดงบนหน้าจอที่ฟิลด์มีการใช้งาน',
         'Field order' => 'ลำดับของฟิลด์',
         'This field is required and must be numeric.' => 'ข้อมูลนี้จำเป็นต้องมีและต้องเป็นตัวเลข',
         'This is the order in which this field will be shown on the screens where is active.' =>
             'นี่คือลำดับที่จะแสดงบนหน้าจอที่ฟิลด์มีการใช้งาน',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            '',
         'Field type' => 'ประเภทของฟิลด์',
         'Object type' => 'ประเภทของออบเจค',
         'Internal field' => 'ฟิลด์ภายใน',
         'This field is protected and can\'t be deleted.' => 'ข้อมูลนี้มีการป้องกันและไม่สามารถลบได้',
+        'Field Settings' => 'การตั้งค่าฟิลด์',
+        'There is no configuration available for this dynamic field.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            'การเปลี่ยนค่านี้จะต้องมีการเปลี่ยนแปลงด้วยตนเองในระบบ',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            '',
         'This dynamic field is used in the following config settings:' =>
             '',
-        'Field Settings' => 'การตั้งค่าฟิลด์',
         'Default value' => 'ค่าเริ่มต้น',
         'This is the default value for this field.' => 'นี่คือค่าเริ่มต้นสำหรับข้อมูลนี้',
 
@@ -787,7 +807,6 @@ sub Data {
         'New type' => 'ประเภทใหม่',
         'Archive selected tickets' => 'การเก็บถาวรของตั๋วที่ถูกเลือก',
         'Add Note' => 'เพิ่มโน้ต',
-        'Visible for customer' => '',
         'Time units' => 'หน่วยเวลา',
         'Execute Ticket Commands' => 'คำสั่งดำเนินการตั๋ว',
         'Send agent/customer notifications on changes' => 'ส่งการแจ้งเตือนเกี่ยวกับการเปลี่ยนแปลงไปยัง เอเย่นต์/ ลูกค้า',
@@ -1327,6 +1346,8 @@ sub Data {
         'System Log' => 'ระบบ Log',
         'Recent Log Entries' => 'รายการการเข้าสู่ระบบล่าสุด',
         'Facility' => 'สิ่งอำนวยความสะดวก',
+        'Source' => '',
+        'Line' => '',
         'Message' => 'ข้อความ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1363,7 +1384,6 @@ sub Data {
             '',
         'Links' => '',
         'View the admin manual on Github' => '',
-        'Filter for Items' => '',
         'No Matches' => '',
         'Sorry, your search didn\'t match any items.' => '',
         'Set as favorite' => '',
@@ -1611,7 +1631,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => '',
         'Priority Management' => 'การบริหารจัดการลำดับความสำคัญ',
         'Edit Priority' => 'แก้ไขลำดับความสำคัญ',
-        'Color' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
@@ -1688,7 +1707,6 @@ sub Data {
         'Filter available fields' => 'ตัวกรองฟิลด์ที่สามารถใช้ได้',
         'Assigned Fields' => 'ฟิลด์ที่ได้รับมอบหมาย',
         'Filter assigned fields' => '',
-        'Communication Channel' => '',
         'Is visible for customer' => '',
         'Text Template' => 'รูปแบบข้อความ',
         'Auto fill' => '',
@@ -2128,8 +2146,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '',
-        'View a custom List of Settings' => '',
-        'View single Setting: %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2194,6 +2210,25 @@ sub Data {
         'Add missing possible dynamic field values' => '',
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => '',
+        'Translation Management' => '',
+        'Add Translation' => '',
+        'Edit Translation' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => '',
+        'Language' => 'ภาษา',
+        'An entry with this name already exists!' => '',
+        'Destination' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => 'เปลี่ยนโดย',
+        'Deployment' => '',
+        'Copy this object' => '',
+        'Do you really want to delete this object? All associated data will be lost!' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
@@ -2541,7 +2576,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
         'Created by' => 'สร้างโดย',
-        'Changed by' => 'เปลี่ยนโดย',
         'Sum rows' => 'ผลรวมของแถว',
         'Sum columns' => 'ผลรวมของคอลัมน์',
         'Show as dashboard widget' => 'แสดงเป็นเครื่องมือแดชบอร์ด',
@@ -2778,7 +2812,6 @@ sub Data {
         'Archive Search' => 'ค้นหาเอกสารเก่า',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => 'ประเภทผู้ส่ง',
         'Save filter settings as default' => 'บันทึกการตั้งค่าตัวกรองเป็นค่าเริ่มต้น',
         'Event Type' => 'ประเภทของกิจกรรม',
         'Save as default' => 'บันทึกเป็นค่าเริ่มต้น',
@@ -3302,6 +3335,8 @@ sub Data {
             'โปรดจำไว้ว่าขนาดสำหรับแกน Y จะต้องมีขนาดใหญ่กว่าขนาดสำหรับแกน X (เช่นแกน X => เดือนที่แกน Y => ปี)',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => '',
+        'View single Setting: %s' => '',
         'This setting is disabled.' => '',
         'This setting is fixed but not deployed yet!' => '',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3339,7 +3374,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => '',
         'Go back to admin: ' => '',
-        'Deployment' => '',
         'My favourite settings' => '',
         'Invalid settings' => '',
 
@@ -3435,7 +3469,7 @@ sub Data {
         'Mrs.' => 'นาง',
         'View system log messages.' => 'ดูข้อความเข้าสู่ระบบ',
         'Edit the system configuration settings.' => 'แก้ไขการตั้งค่าการกำหนดค่าระบบ',
-        'Update and extend your system with software packages.' => 'ปรับปรุงและขยายระบบของคุณด้วยซอฟแวร์',
+        'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3580,10 +3614,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'ไม่สามารถรีเซ็ตคำสั่งฟิลด์ไดนามิกอย่างถูกต้องโปรดตรวจสอบบันทึกข้อผิดพลาดสำหรับรายละเอียดเพิ่มเติม',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => 'ปัจจุบัน',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => 'subaction ที่ไม่ได้กำหนด',
         'Need %s' => 'ต้องการ %s',
-        'Add %s field' => '',
         'The field does not contain only ASCII letters and numbers.' => 'ฟิลด์ไม่ประกอบด้วยตัวอักษร ASCII และตัวเลข',
         'There is another field with the same name.' => 'มีฟิลด์อื่นที่มีชื่อเดียวกัน',
         'The field must be numeric.' => 'ข้อมูลนี้ต้องเป็นตัวเลข',
@@ -3591,10 +3627,8 @@ sub Data {
         'Could not create the new field' => 'ไม่สามารถสร้างฟิลด์ใหม่',
         'Need ID' => 'ต้องการ ID',
         'Could not get data for dynamic field %s' => 'ไม่สามารถรับข้อมูลสำหรับข้อมูลแบบไดนามิก %s',
-        'Change %s field' => '',
         'The name for this field should not change.' => 'ชื่อข้อมูลนี้ไม่ควรเปลี่ยน',
         'Could not update the field %s' => 'ไม่สามารถปรับปรุงฟิลด์ %s',
-        'Currently' => 'ปัจจุบัน',
         'Unchecked' => 'ยกเลิกการทำเครื่องหมาย',
         'Checked' => 'ตรวจสอบ',
 
@@ -4149,6 +4183,8 @@ sub Data {
         'Export: Need StatID!' => 'ส่งออก: ต้องการ StatID!',
         'Delete: Get no StatID!' => 'ลบ: ไม่ได้รับ StatID!',
         'Need StatID!' => 'ต้องการ StatID!',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            '',
         'Could not load stat.' => 'ไม่สามารถโหลดสถิติ',
         'Add New Statistic' => 'เพิ่มสถิติใหม่',
         'Could not create statistic.' => 'ไม่สามารถสร้างสถิติ',
@@ -4689,6 +4725,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '',
         'There is an error updating the system configuration!' => '',
+
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
@@ -7643,6 +7683,8 @@ sub Data {
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
             '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7782,6 +7824,8 @@ sub Data {
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7883,6 +7927,16 @@ sub Data {
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            '',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            '',
+        'Defines the format of exported files when using the admin interface.' =>
+            '',
+        'Defines the separator for export csv files.' => '',
+        'Defines the quote for export csv files.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ไม่ถูกต้องชั่วคราว',
@@ -8027,6 +8081,9 @@ sub Data {
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             '',
         'Attachment was deleted successfully.' => '',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8373,6 +8430,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => '',
         'Please only select at most %s files for upload.' => '',
         'The following files are not allowed to be uploaded: %s' => '',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8514,6 +8572,7 @@ Thanks for your help!
         'Appointment list.' => '',
         'Appointment notifications' => '',
         'Arabic (Saudi Arabia)' => 'ภาษาอาหรับ (ซาอุดีอาระเบีย)',
+        'Article Color' => '',
         'ArticleTree' => 'ArticleTree',
         'Attachment Name' => 'ชื่อเอกสารที่แนบมา',
         'Avatar' => '',
@@ -8605,6 +8664,7 @@ Thanks for your help!
         'Create and manage ticket priorities.' => 'สร้างและจัดการลำดับความสำคัญของตั๋ว',
         'Create and manage ticket states.' => 'สร้างและจัดการสถานะตั๋ว',
         'Create and manage ticket types.' => 'สร้างและจัดการกับประเภทของตั๋ว',
+        'Create and manage translation.' => '',
         'Create and manage web services.' => 'สร้างและจัดการ web services',
         'Create new Ticket.' => 'สร้างตั๋วใหม่',
         'Create new appointment.' => '',
@@ -8669,6 +8729,7 @@ Thanks for your help!
         'Dynamic Fields Multiselect Backend GUI' => 'ฟิลด์แบบไดนามิก Multiselect Backend GUI',
         'Dynamic Fields Overview Limit' => 'ภาพรวมทีจำกัดของไดมานิคฟิลด์',
         'Dynamic Fields Text Backend GUI' => 'ฟิลด์แบบไดนามิก ฟิลด์แบบไดนามิก',
+        'Dynamic fields administration' => '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             'กลุ่มฟิลด์แบบไดนามิกสำหรับกระบวนการของวิดเจ็ต กุญแจสำคัญคือชื่อของกลุ่ม ค่าประกอบด้วยฟิลด์ที่จะแสดง ตัวอย่าง: \'Key => My Group\', \'Content: Name_X, NameY\'.',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => '',
@@ -8770,7 +8831,6 @@ Thanks for your help!
         'Italian' => 'ภาษาอิตาลี',
         'Japanese' => 'ภาษาญี่ปุ่น',
         'Korean' => '',
-        'Language' => 'ภาษา',
         'Large' => 'ขนาดใหญ่',
         'Last Mentions' => '',
         'Last Screen Overview' => '',
@@ -8824,6 +8884,8 @@ Thanks for your help!
         'Manage support data.' => '',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => '',
+        'Manage ticket article color.' => '',
+        'Manage translation.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'มาร์คว่าเป็นสแปม!',
         'Mark as seen' => '',
@@ -9044,7 +9106,7 @@ Thanks for your help!
             '',
         'This is the default orange - black skin.' => '',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => 'ตั๋วปิด',
         'Ticket Compose Bounce Email.' => '__',
         'Ticket Compose email Answer.' => '',
@@ -9115,6 +9177,7 @@ Thanks for your help!
         'Web service (Multiselect)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
+        'YAML' => '',
         'Yes, but hide archived tickets' => '',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             '',
@@ -9247,6 +9310,7 @@ Thanks for your help!
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9456,6 +9520,7 @@ Thanks for your help!
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

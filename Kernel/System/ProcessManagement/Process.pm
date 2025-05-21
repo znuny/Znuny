@@ -323,7 +323,8 @@ sub ProcessStartpointGet {
         },
     );
 
-    Returns:
+Returns:
+
     $Success = 1; # undef # if "CheckOnly" is NOT set
     1 if Transition was executed and Ticket->ActivityEntityID updated
     undef if no Transition matched or check failed otherwise
@@ -599,8 +600,10 @@ sub ProcessTransition {
         UserID           => 123,
     );
 
-    Returns:
+Returns:
+
     $Success = 1; # undef
+
     1 if setting the Activity was executed
     undef if setting failed
 
@@ -718,7 +721,8 @@ sub ProcessTicketActivitySet {
         UserID          => 123,
     );
 
-    Returns:
+Returns:
+
     $Success = 1; # undef
     1 if setting the Activity was executed
     undef if setting failed

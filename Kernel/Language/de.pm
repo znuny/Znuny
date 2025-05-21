@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.995222405271829;
+    $Self->{Completeness}        = 1;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -80,7 +80,8 @@ sub Data {
         'Change settings' => 'Werte ändern',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Stellt die Wertänderungen ein für den Fall, dass die Filterbedingungen zutreffen. Hierbei ist \'Possible\' eine Positivliste und \'PossibleNot\' eine Negativliste.',
-        'Check the official %sdocumentation%s.' => 'Überprüfen Sie die offizielle %sdocumentation%s.',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            'Eine Liste aller möglichen Match- und Set-Kriterien finden Sie im ACL-Referenzhandbuch %sDokumentation%s.',
         'Edit ACL %s' => 'ACL %s bearbeiten',
         'Edit ACL' => 'ACL bearbeiten',
         'Show or hide the content' => 'Inhalt einblenden oder ausblenden',
@@ -240,6 +241,19 @@ sub Data {
         'If signing key/certificate is missing' => 'Wenn Schlüssel/Zertifikat zum Signieren fehlen',
         'If encryption key/certificate is missing' => 'Wenn Schlüssel/Zertifikat zum Verschlüsseln fehlen',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => 'Filter für Einträge',
+        'Hint' => 'Hinweis',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            'Hier sehen Sie alle möglichen Artikelkombinationen, die theoretisch in Ihrem System vorhanden sind.',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            'Sie können für jede Artikelkombination eine Hintergrundfarbe festlegen. Klicken Sie auf den Farbcode.',
+        'Article Color Management' => 'Artikel Farbmanagement',
+        'Sender Type' => 'Absendertyp',
+        'Communication Channel' => 'Kommunikationskanal',
+        'Visible for customer' => 'Sichtbar für Kunde',
+        'Color' => 'Farbe',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => 'Anhang hinzufügen',
         'Filter for Attachments' => 'Filter für Anhänge',
@@ -271,7 +285,6 @@ sub Data {
             'Nur Verbindungsprotokolle anzeigen, die in einem bestimmten Zeitraum erfasst wurden.',
         'Filter for Communications' => 'Filter für Kommunikationen',
         'Filter for communications' => 'Filter für Kommunikationen',
-        'Hint' => 'Hinweis',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             'Dieser Bereich zeigt eine Übersicht von eingehender und ausgehender Kommunikation.',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -477,15 +490,17 @@ sub Data {
         'Object' => 'Objekt',
         'Delete this field' => 'Dieses Feld löschen',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => 'Zurück zur Übersicht gehen',
+        'Add %s field' => '%s Feld hinzufügen',
+        'Change %s field' => '%s Feld ändern',
         'Dynamic Fields' => 'Dynamische Felder',
         'General' => 'Allgemein',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'Dieses Feld wird benötigt, und der Wert darf nur Buchstaben und Zahlen enthalten.',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             'Muss eindeutig sein und darf nur aus Buchstaben und Zahlen bestehen.',
-        'Changing this value will require manual changes in the system.' =>
+        'Changing this value will require manual changes to the system.' =>
             'Eine Änderung dieses Wertes macht weitere manuelle Änderungen am System erforderlich.',
         'This is the name to be shown on the screens where the field is active.' =>
             'Dieser Name wird auf den Bildschirmen angezeigt, auf denen dieses Feld aktiv ist.',
@@ -493,15 +508,20 @@ sub Data {
         'This field is required and must be numeric.' => 'Dieses Feld wird benötigt und darf nur Zahlen enthalten.',
         'This is the order in which this field will be shown on the screens where is active.' =>
             'Die Feldreihenfolge steuert die Ausgabe der Felder auf den Bildschirmen.',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            'Es ist nicht möglich, diesen Eintrag auf ungültig zu setzen, bevor alle betroffenen Konfiguration entsprechend angepasst wurden.',
         'Field type' => 'Feldtyp',
         'Object type' => 'Objekttyp',
         'Internal field' => 'Internes Feld',
         'This field is protected and can\'t be deleted.' => 'Dies ist ein geschütztes internes Feld und kann nicht gelöscht werden.',
+        'Field Settings' => 'Feldeinstellungen',
+        'There is no configuration available for this dynamic field.' => 'Für dieses dynamische Feld gibt es keine Konfiguration.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            'Eine Änderung dieses Wertes macht weitere manuelle Änderungen am System erforderlich.',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            'Es ist nicht möglich, diesen Eintrag auf ungültig zu setzen, bevor alle betroffenen Konfiguration entsprechend angepasst wurden.',
         'This dynamic field is used in the following config settings:' =>
             'Dieses Dynamische Feld wird in folgenden Konfigurationseinstellungen verwendet:',
-        'Field Settings' => 'Feldeinstellungen',
         'Default value' => 'Standardwert',
         'This is the default value for this field.' => 'Dies ist der Standardwert für dieses Feld.',
 
@@ -788,7 +808,6 @@ sub Data {
         'New type' => 'Neuer Typ',
         'Archive selected tickets' => 'Ausgewählte Tickets archivieren',
         'Add Note' => 'Notiz hinzufügen',
-        'Visible for customer' => 'Sichtbar für Kunde',
         'Time units' => 'Zeiteinheiten',
         'Execute Ticket Commands' => 'Ticket-Befehle ausführen',
         'Send agent/customer notifications on changes' => 'Sende eine Agenten-/Kunden-Benachrichtigung bei Änderungen',
@@ -983,7 +1002,7 @@ sub Data {
         'Remove key mapping' => 'Schlüssel-Mapping entfernen',
         'Key mapping' => 'Schlüssel-Mapping',
         'Map key' => 'Schlüssel',
-        'matching' => '',
+        'matching' => 'übereinstimmend',
         'to new key' => 'auf neuen Schlüssel mappen',
         'Value mapping' => 'Wert-Mapping',
         'Map value' => 'Wert',
@@ -1328,6 +1347,8 @@ sub Data {
         'System Log' => 'Systemprotokoll',
         'Recent Log Entries' => 'Aktuelle Einträge im Systemprotokoll',
         'Facility' => 'Einrichtung',
+        'Source' => 'Quelle',
+        'Line' => 'Zeile',
         'Message' => 'Nachricht',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1364,7 +1385,6 @@ sub Data {
             'Sie können Favoriten hinzufügen, indem Sie Ihren Mauszeiger über Einträge auf der rechten Seite bewegen und dann das Sternsymbol anklicken.',
         'Links' => 'Verknüpfungen',
         'View the admin manual on Github' => 'Administrator-Handbuch auf Github',
-        'Filter for Items' => 'Filter für Einträge',
         'No Matches' => 'Keine Treffer',
         'Sorry, your search didn\'t match any items.' => 'Es wurden leider keine passenden Einträge gefunden.',
         'Set as favorite' => 'Als Favorit markieren',
@@ -1611,7 +1631,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => 'Prioritätssichtbarkeit und Standardeinstellungen konfigurieren',
         'Priority Management' => 'Prioritäten-Verwaltung',
         'Edit Priority' => 'Priorität bearbeiten',
-        'Color' => 'Farbe',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             'Diese Priorität ist in einer SysConfig-Einstellung vorhanden. Eine Bestätigung für die Aktualisierung der Einstellung auf die neue Priorität ist notwendig!',
         'This priority is used in the following config settings:' => 'Diese Priorität wird in folgenden Konfigurationseinstellungen verwendet:',
@@ -1687,7 +1706,6 @@ sub Data {
         'Filter available fields' => 'Verfügbare Felder filtern',
         'Assigned Fields' => 'Zugewiesene Felder',
         'Filter assigned fields' => 'Zugewiesene Felder filtern',
-        'Communication Channel' => 'Kommunikationskanal',
         'Is visible for customer' => 'Ist sichtbar für Kunde',
         'Text Template' => 'Textvorlage',
         'Auto fill' => 'automatisch ausfüllen',
@@ -2126,8 +2144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Zurück zu den Inbetriebnahme-Details gehen',
-        'View a custom List of Settings' => 'Eine eigene Liste an Einstellungen anzeigen',
-        'View single Setting: %s' => 'Einstellung: %s anzeigen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => 'Systemdatei-Support',
@@ -2193,6 +2209,25 @@ sub Data {
         'Attribute values' => 'Attributwerte',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
             'Falls ein Wert rot ist, fehlt er in der Liste der möglichen Werte der Konfiguration des dynamischen Felds.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => 'Übersetzung',
+        'Translation Management' => 'Verwaltung von Übersetzungen',
+        'Add Translation' => 'Übersetzung hinzufügen',
+        'Edit Translation' => 'Übersetzung bearbeiten',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => 'Übersetzung aktualisieren',
+        'Language' => 'Sprache',
+        'An entry with this name already exists!' => 'Ein Eintrag mit diesem Namen existiert bereits!',
+        'Destination' => 'Ziel',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => 'Geändert von',
+        'Deployment' => 'Inbetriebnahme',
+        'Copy this object' => 'Kopiere dieses Objekt',
+        'Do you really want to delete this object? All associated data will be lost!' =>
+            'Wollen Sie dieses Objekt wirklich löschen? Alle zugehörigen Daten werden verloren gehen!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
         'Add Type' => 'Typ hinzufügen',
@@ -2496,7 +2531,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
         'Choose from the groups on the left to find the settings you\'d wish to change.' =>
-            '',
+            'Wählen Sie aus den Gruppen auf der linken Seite, um die Einstellungen zu finden, die Sie ändern möchten.',
         'Did you know?' => 'Wussten Sie schon?',
         'You can change your avatar by registering with your email address %s on %s' =>
             'Sie können Ihren Avatar ändern, indem Sie sich mit Ihrer E-Mail-Adresse %s unter %s registrieren',
@@ -2539,7 +2574,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Statistik-Informationen',
         'Created by' => 'Erstellt von',
-        'Changed by' => 'Geändert von',
         'Sum rows' => 'Zeilensummierung',
         'Sum columns' => 'Spaltensummierung',
         'Show as dashboard widget' => 'Als Dashboard-Widget anzeigen',
@@ -2776,7 +2810,6 @@ sub Data {
         'Archive Search' => 'Archivsuche',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => 'Absendertyp',
         'Save filter settings as default' => 'Filtereinstellungen als Standard speichern',
         'Event Type' => 'Ereignistyp',
         'Save as default' => 'Als Standard speichern',
@@ -3300,6 +3333,8 @@ sub Data {
             'Bitte beachten Sie, dass die Skalierung der Y-Achse größer sein muss als die Skalierung der X-Achse (z. B. X-Achse => Monat, Y-Achse => Jahr).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => 'Eine eigene Liste an Einstellungen anzeigen',
+        'View single Setting: %s' => 'Einstellung: %s anzeigen',
         'This setting is disabled.' => 'Diese Einstellung ist deaktiviert.',
         'This setting is fixed but not deployed yet!' => 'Die Einstellung wurde korrigiert, aber bislang nicht in Betrieb genommen!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3337,7 +3372,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => 'Suche bearbeiten',
         'Go back to admin: ' => 'Zurück zum Admin-Bereich: ',
-        'Deployment' => 'Inbetriebnahme',
         'My favourite settings' => 'Meine Favoriten',
         'Invalid settings' => 'Ungültige Einstellungen',
 
@@ -3433,7 +3467,7 @@ sub Data {
         'Mrs.' => 'Frau',
         'View system log messages.' => 'Systemprotokoll-Nachrichten ansehen.',
         'Edit the system configuration settings.' => 'Systemeinstellungen bearbeiten.',
-        'Update and extend your system with software packages.' => 'System mit Softwarepaketen aktualisieren und erweitern.',
+        'Manage add-ons.' => 'Add-ons verwalten.',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3578,10 +3612,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'Konnte die Reihenfolge der Dynamischen Felder nicht zurücksetzen, bitte prüfen Sie das Systemprotokoll für mehr Informationen.',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => 'Aktuell',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => 'Unbestimmte Unteraktion.',
         'Need %s' => '%s benötigt',
-        'Add %s field' => '%s Feld hinzufügen',
         'The field does not contain only ASCII letters and numbers.' => 'Dieses Feld enthält nicht nur ASCII-Zeichen.',
         'There is another field with the same name.' => 'Es existiert bereits ein Feld mit demselben Namen.',
         'The field must be numeric.' => 'Das Feld darf nur Zahlen beinhalten.',
@@ -3589,10 +3625,8 @@ sub Data {
         'Could not create the new field' => 'Konnte das neue Feld nicht anlegen',
         'Need ID' => 'ID benötigt',
         'Could not get data for dynamic field %s' => 'Konnte keine Daten für das Dynamische Feld %s ermitteln',
-        'Change %s field' => '%s Feld ändern',
         'The name for this field should not change.' => 'Der Name dieses Feldes sollte sich nicht ändern.',
         'Could not update the field %s' => 'Das Feld %s konnte nicht aktualisiert werden',
-        'Currently' => 'Aktuell',
         'Unchecked' => 'Nicht ausgewählt',
         'Checked' => 'Ausgewählt',
 
@@ -4147,6 +4181,8 @@ sub Data {
         'Export: Need StatID!' => 'Export: Benötige StatID!',
         'Delete: Get no StatID!' => 'Löschen: Keine StatID empfangen!',
         'Need StatID!' => 'Benötige StatID!',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            'Diese Statistik existiert nicht, oder Sie haben keine Zugriffsberechtigung.',
         'Could not load stat.' => 'Konnte Statistik nicht laden.',
         'Add New Statistic' => 'Neue Statistik hinzufügen',
         'Could not create statistic.' => 'Konnte Statistik nicht erstellen.',
@@ -4687,6 +4723,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => 'Die Systemkonfiguration wird aktualisiert. Bitte haben Sie etwas Geduld.',
         'There is an error updating the system configuration!' => 'Beim Aktualisieren der Systemkonfiguration ist ein Fehler aufgetreten!',
+
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            'Die Übersetzungen in der Datenbank sind nicht synchron. Bitte synchronisieren Sie alle Übersetzungen.',
 
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
@@ -5455,7 +5495,7 @@ sub Data {
         'Type of daemon log rotation to use: Choose \'OTRS\' to let Znuny system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
             'Art der Logrotation, die vom Daemon genutzt werden soll. Wählen Sie "OTRS", um das System die Rotation verwalten zu lassen oder "extern", um eine Drittapplikation dafür zu nutzen (z. B. logrotate). Hinweis: externe Mechanismen erfordern weiterhin eine eigene Konfiguration.',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
-            '',
+            'Wenn diese Option aktiviert ist, verwendet der Daemon dieses Verzeichnis, um seine PID-Dateien zu erstellen. Hinweis: Bitte stoppen Sie den Daemon vor jeder Änderung und verwenden Sie diese Einstellung nur, wenn <$OTRS_HOME>/var/run/ nicht verwendet werden kann.',
         'Defines the number of days to keep the daemon log files.' => 'Definiert die Aufbewahrungszeit für die Daemon Log-Dateien in Tagen.',
         'If enabled the daemon will redirect the standard output stream to a log file.' =>
             'Aktivieren um die Standard-Ausgabe des Daemons in eine Log-Datei umzuleiten.',
@@ -6059,9 +6099,9 @@ sub Data {
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'Erlaubt Agenten die Achsen einer Statistik zu tauschen, wenn sie eine Statistik generieren.',
         'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
-            '',
+            'Fügt die folgenden Elemente zur Verwendung in Statistiken hinzu: „Agent/Eigentümer“, ‚Erstellt von Agent/Eigentümer‘, ‚Verantwortlich‘, ‚Abgerechnete Zeit durch Agent‘.',
         'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
-            '',
+            'Ermöglicht die Verwendung von ungültigen Agenten in Statistiken. Stats::UseAgentElementInStats muss aktiv sein.',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             'Zeigt alle Kunden-Identifikatoren in einem Mehrfachauswahlfeld (nicht sinnvoll, wenn Sie sehr viele Identifikatoren haben).',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
@@ -6117,13 +6157,13 @@ sub Data {
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Legt die Reihenfolge fest, in der Vorname und Nachname von Agenten angezeigt wird.',
         'Default skin for the agent interface.' => 'Standard-Skin für das Agenten-Interface.',
-        'Dark skin for the agent interface.' => '',
+        'Dark skin for the agent interface.' => 'Dark Skin für die Agentenschnittstelle.',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             'Der interne Name des Skins, der im Agentenbereich genutzt werden soll. Verfügbare Skins finden Sie unter Frontend::Agent::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
             'Es ist möglich, verschiedene Skins zu konfigurieren, zum Beispiel um zwischen verschiedenen Agenten auf Basis der jeweiligen Domain zu unterscheiden. Sie können durch Nutzung von regulären Ausdrücken mithilfe von Schlüssel-/Wert-Paaren auf Domains prüfen. Der Inhalt von "Schlüssel" sollte die Prüfung auf die Domain beinhalten, der Inhalt von "Wert" den Namen des zu selektierenden Skins für diese Domain. Bitte beachten Sie die Einträge mit Beispielen für korrekte reguläre Ausdrücke.',
         'Default skin for the customer interface.' => 'Standard-Skin für das Kunden Interface.',
-        'Dark skin for the customer interface.' => '',
+        'Dark skin for the customer interface.' => 'Dark Skin für die Kundenschnittstelle.',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
             'Der interne Name des Skins, der im Kundenbereich genutzt werden soll. Verfügbare Skins finden Sie unter Frontend::Customer::Skins.',
         'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
@@ -6229,7 +6269,7 @@ sub Data {
         'Frontend module registration (disable ticket processes screen if no process available).' =>
             'Frontend-Modulregistrierung (verberge Ticket-Prozesse, falls kein Prozess verfügbar ist).',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate).' =>
-            '',
+            'Event-Modulregistrierung. Für mehr Performance können Sie ein Trigger-Event definieren (z. B. Event => TicketCreate).',
         'This option defines the dynamic field in which a Process Management process entity id is stored.' =>
             'Legt fest, in welchem dynamischen Feld die Prozess-ID im Prozessmanagement gespeichert werden soll.',
         'This option defines the dynamic field in which a Process Management activity entity id is stored.' =>
@@ -6240,7 +6280,7 @@ sub Data {
         'This option defines the process tickets default priority.' => 'Diese Option setzt die Prozess-Ticket Standardpriorität.',
         'Display settings to override defaults for Process Tickets.' => 'Einstellungen zum Überschreiben der Standardwerte für Prozess-Tickets anzeigen.',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key =&gt; My Group\', \'Content: Name_X, NameY\'.' =>
-            '',
+            'Dynamische Feldgruppen für das Prozess-Widget. Der Schlüssel ist der Name der Gruppe, der Wert enthält die Felder, die angezeigt werden sollen. Beispiel: \'Schlüssel => Meine Gruppe\', \'Inhalt: Name_X, NameY\'.',
         'Dynamic fields shown in the process widget in ticket zoom screen of the agent interface.' =>
             'Angezeigte Dynamische Felder im Prozess-Widget in der Ticket-Detailansicht des Agentenbereichs.',
         'Shows a link in the menu to enroll a ticket into a process in the ticket zoom view of the agent interface.' =>
@@ -6264,7 +6304,7 @@ sub Data {
         'Defines the priority in which the information is logged and presented.' =>
             'Definiert die Priorität in welcher die Information aufgezeichnet und präsentiert wird.',
         'Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            '',
+            'Filter zur Fehlersuche bei Übergängen. Hinweis: Weitere Filter können im Format <OTRS_TICKET_Attribute> hinzugefügt werden, z.B. <OTRS_TICKET_Priority>.',
         'Parameters for the dashboard backend of the running process tickets overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Legt die Parameter für das Dashboard-Backend fest. "Limit" legt die Anzahl an Einträgen fest, die standardmäßig angezeigt werden. "Group" beschränkt den Zugang zum jeweiligen Dashlet (z. B. Group: admin;group1;group2). "Default" bestimmt, ob das Dashlet standardmäßig aktiv ist oder vom Nutzer manuell aktiviert werden muss. "CacheTTLLocal" bestimmt die Cachingdauer für das Dashlet in Minuten. Mit "Mandatory" kann das Dashlet so konfiguriert werden, dass Nutzer es nicht ausblenden können.',
         'DynamicField backend registration.' => 'Backend-Registrierung für Dynamische Felder.',
@@ -6395,11 +6435,11 @@ sub Data {
         'Customizable stop words for fulltext index. These words will be removed from the search index.' =>
             'Anpassbare Stopworte für den Volltext-Index. Diese Worte werden aus dem Suchindex entfernt.',
         'Allows having a small format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information).' =>
-            '',
+            'Ermöglicht eine kleinformatige Ticketübersicht (CustomerInfo => 1 - zeigt auch die Kundeninformationen).',
         'Allows having a medium format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information).' =>
-            '',
+            'Ermöglicht eine mittelgroße Ticketübersicht (CustomerInfo => 1 - zeigt auch die Kundeninformationen).',
         'Shows a preview of the ticket overview (CustomerInfo =&gt; 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
-            '',
+            'Zeigt eine Vorschau der Ticketübersicht an (CustomerInfo => 1 - zeigt auch die Kundeninfo an, CustomerInfoMaxSize - maximale Größe der Kundeninfo in Zeichen).',
         'Defines which article sender types should be shown in the preview of a ticket.' =>
             'Gibt an, welche Artikel-Sendertypen in der Vorschau eines Tickets angezeigt werden sollen.',
         'Sets the count of articles visible in preview mode of ticket overviews.' =>
@@ -6664,7 +6704,7 @@ sub Data {
         'Defines the recipient target of the phone ticket and the sender of the email ticket ("Queue" shows all queues, "System address" displays all system addresses) in the agent interface.' =>
             'Legt die Art des Empfängers für Telefon-Tickets und des Absenders für E-Mail-Tickets im Agenten-Bereich fest ("Queue" zeigt alle Queues, "System address" alle System-Adressen).',
         'Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType "&lt;Queue&gt;" shows the names of the queues and for SystemAddress "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" shows the name and email of the recipient.' =>
-            '',
+            'Legt die Strings fest, die als Empfänger (To:) des Telefontickets und als Absender (From:) des E-Mail-Tickets in der Agentenoberfläche angezeigt werden. Für Queue als NewQueueSelectionType "<Queue>" werden die Namen der Queues und für SystemAddress "<Realname> <<Email>>" die Namen und die Email des Empfängers angezeigt.',
         'Determines which options will be valid of the recipient (phone ticket) and the sender (email ticket) in the agent interface.' =>
             'Definiert, welche Optionen für den Empfänger (Telefon-Ticket) und den Absender (E-Mail-Ticket) im Agenten-Interface gültig sind.',
         'Shows customer history tickets in AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer.' =>
@@ -7334,7 +7374,7 @@ sub Data {
         'Defines the recipient target of the tickets ("Queue" shows all queues, "SystemAddress" shows only the queues which are assigned to system addresses) in the customer interface.' =>
             'Legt die Art des Empfängers für Tickets im Kunden-Bereich fest ("Queue" zeigt alle Queues, "System address" nur die Queues, die System-Adressen zugewiesen sind).',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "&lt;Queue&gt;" shows the names of the queues, and for SystemAddress, "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" shows the name and email of the recipient.' =>
-            '',
+            'Legt die Strings fest, die als Empfänger (To:) des Telefontickets und als Absender (From:) des E-Mail-Tickets in der Kundenoberfläche angezeigt werden. Für Queue als CustomerPanelSelectionType zeigt "<Queue>" die Namen der Queues und für SystemAddress zeigt "<Realname> <<Email>>" die Namen und die Email des Empfängers an.',
         'Determines which queues will be valid for ticket\'s recepients in the customer interface.' =>
             'Definiert, welche Queues für Ticket-Empfänger im Kunden-Interface gültig sind.',
         'Module for To-selection in new ticket screen in the customer interface.' =>
@@ -7360,7 +7400,7 @@ sub Data {
         'Shows the enabled ticket attributes in the customer interface (0 = Disabled and 1 = Enabled).' =>
             'Zeigt die aktivierten Ticket-Attribute im Kundenbereich (0 = abgeschaltet, 1 = eingeschaltet).',
         'Defines the length of the article preview in the customer interface.' =>
-            '',
+            'Bestimmt die Länge der Artikelvorschau in der Kundenoberfläche.',
         'Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting.' =>
             'Definiert den angezeigten Stil des Feldes "Von" in Notizen, die für Kunden sichtbar sind. Ein Standard-Agentenname kann in der Einstellung Ticket::Frontend::CustomerTicketZoom####DefaultAgentName definiert werden.',
         'Defines the default agent name in the ticket zoom view of the customer interface.' =>
@@ -7426,7 +7466,7 @@ sub Data {
         'Cache time in seconds for the DB ACL backend.' => 'Cache-Zeit in Sekunden für Datenbank ACL-Backends.',
         'If enabled debugging information for ACLs is logged.' => 'Wenn aktiviert, werden Informationen zur Fehlerbehebung für ACLs geloggt.',
         'Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            '',
+            'Filter zur Fehlersuche bei ACLs. Hinweis: Weitere Ticketattribute können im Format <OTRS_TICKET_Attribute> hinzugefügt werden, z. B. <OTRS_TICKET_Priority>.',
         'Maximal auto email responses to own email-address a day (Loop-Protection).' =>
             'Maximale Anzahl von automatischen E-Mailantworten zur eigenen E-Mail-Adresse pro Tag (Loop-Protection).',
         'Maximal auto email responses to own email-address a day, configurable by email address (Loop-Protection).' =>
@@ -7458,7 +7498,7 @@ sub Data {
         'Module to filter and manipulate incoming messages. Block/ignore all spam email with From: noreply@ address.' =>
             'Modul zum filtern und bearbeiten von eingehenden Nachrichten. Blockiere/Ignoriere alle Nachrichten mit einer noreply@ Absender-Adresse.',
         'Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From =&gt; \'(.+?)@.+?\', and use () as [***] in Set =&gt;.' =>
-            '',
+            'Modul zum Filtern und Manipulieren eingehender Nachrichten. Schreibt eine 4-stellige Zahl in ein FreeText-Feld, verwenden Sie einen Regex im Match z.B. From =&gt; \'(.+?)@.+?\', und verwenden Sie () als [***] in Set =&gt;.',
         'Blocks all the incoming emails that do not have a valid ticket number in subject with From: @example.com address.' =>
             'Blockiert alle eingehenden E-Mails, die keine gültige Ticketnummer im Betreff mit Absenderadresse: @ example.com besitzen.',
         'Defines the sender for rejected emails.' => 'Definiert die Absendeadresse für abgelehnte E-Mails.',
@@ -7583,7 +7623,7 @@ sub Data {
         'Dynamic fields shown in the ticket search overview results screen of the customer interface.' =>
             'Angezeigte dynamische Felder in der Anzeige von Suchergebnissen der Ticketsuche im Kundenbereich.',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
-            '',
+            'Ereignis-Modulregistrierung. Für mehr Performance können Sie ein Trigger-Ereignis definieren (z. B. Event => TicketCreate). Dies ist nur möglich, wenn alle dynamischen Ticketfelder das gleiche Ereignis benötigen.',
         'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
             'Konfiguriert eine Standardeinstellung für TicketDynamicField. "Name" definiert das Dynamische Feld, das verwendet werden soll, "Wert" sind die Daten, die gesetzt werden sollen, und "Ereignis" definiert das Auslöseereignis. Bitte beachten Sie das Entwicklerhandbuch (https://doc.znuny.org/manual/developer/), Kapitel "Ticket Event Module".',
         'Defines the list of types for templates.' => 'Definiert die Typenliste für Templates.',
@@ -7638,6 +7678,8 @@ sub Data {
             'Dialoge, für die es möglich ist, dynamische Felder zu aktivieren oder zu deaktivieren.',
         'Screens for which it is possible to enable or disable default columns.' =>
             'Dialoge, für die es möglich ist, Standardspalten zu aktivieren oder zu deaktivieren.',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            'Aktiviert historische Werte für die Auswahl in dynamischen Feldtypen, die auf BaseSelect basieren (Dropdown und Multiselect). Deaktivieren Sie dies, wenn es zu Leistungsproblemen aufgrund zu vieler unterschiedlicher gespeicherter Werte kommt.',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             'Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die base-64-kodiert werden sollen. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Inhalte aus verschiedenen Feldern je Invoker können kodiert werden, indem die Felder mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7777,6 +7819,8 @@ sub Data {
             'Maximale Anzahl zitierter Zeilen in weitergeleiteten Nachrichten.',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             'Re-indiziert S/MIME-Zertifikat-Verzeichnisse. Hinweis: S/MIME muss in der SysConfig aktiviert sein.',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            'Prüfung des Zertifikats des Unterzeichners einer signierten Nachricht deaktivieren.',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             'Maximale Länge der angezeigten Dateinamen von Anhängen in der Artikelvorschau der Ticket-Detailansicht.',
         'General settings for autocompletion in rich text editor.' => 'Allgemeine Einstellungen für Autovervollständigung im Rich-Text-Editor.',
@@ -7798,10 +7842,10 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             'Benachrichtigungsmodul für Agenten-Interface, das die Anzahl der Erwähnungen anzeigt.',
         'Module to grant access to the mentioned agents of a ticket.' => 'Modul, das Zugriff für die erwähnten Agenten eines Tickets gewährt.',
-        'Assignment between event and type.' => '',
-        'Defines the link type for each activity.' => '',
+        'Assignment between event and type.' => 'Zuweisung zwischen Ereignis und Typ.',
+        'Defines the link type for each activity.' => 'Legt den Verknüpfungstyp für jede Aktivität fest.',
         'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
-            '',
+            'Liste der Farben in hexadezimaler RGB-Angabe, die zur Auswahl stehen werden. Stellen Sie sicher, dass die Farben dunkel genug sind, damit weißer Text darüber gelegt werden kann.',
         'Mapping of non-standard time zones to official ones.' => 'Mapping von Nicht-Standard-Zeitzonen zu offiziellen Zeitzonen.',
         'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
             'Startdatum (JJJJMMTT) des Bereichs, der beim Parsen von ICS-Dateien verwendet werden soll. Das verwendete CPAN-Modul iCal::Parser benötigt diese Angabe, um ICS-Dateien mit Events in einem Jahr vor dem aktuellen Jahr parsen zu können. Das Enddatum des Bereichs wird automatisch auf 10 Jahre in der Zukunft ab dem Zeitpunkt des Parsens/Ausführens gesetzt.',
@@ -7878,13 +7922,23 @@ sub Data {
             'Mapping der Ticketpriorität zum X-Priority E-Mail-Header für ausgehende E-Mails des Kommunikationskanals "System".',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             'Ergänzt Feld-Mapping für AgentTicketActionCommon für unbekannte Action. Wird von Znuny.Form.Input verwendet.',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            'Sobald das Limit der beobachteten Tickets pro Nutzer erreicht ist, werden die ältesten Einträge aus der Beobachtungsliste entfernt. Deaktivieren Sie diese Einstellung oder setzen Sie sie auf 0, um das Limit zu deaktivieren (Standard).',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            'Liste von Benutzereinstellungen (Keys), für die ein Update per UpdateAJAX-Subaction über das Frontendmodul AgentPreferences erlaubt ist. Eingabe als reguläre Ausdrücke.',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            'Definiert ein Modul, das eine Benachrichtigung anzeigt, wenn ein Übersetzungseinsatz erforderlich ist.',
+        'Defines the format of exported files when using the admin interface.' =>
+            'Legt das Format der exportierten Dateien bei Verwendung der Verwaltungsoberfläche fest.',
+        'Defines the separator for export csv files.' => 'Legt das Trennzeichen für csv-Exportdateien fest.',
+        'Defines the quote for export csv files.' => 'Legt das Zitat für den Export von csv-Dateien fest.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',
         'Group for default access.' => 'Gruppe für den Standardzugriff.',
         'Group of all administrators.' => 'Gruppe aller Administratoren.',
         'Group for statistics access.' => 'Gruppe für den Statistikzugriff.',
-        'Group for time accounting web service access.' => '',
+        'Group for time accounting web service access.' => 'Gruppe für den Zugriff auf den Webdienst Zeitabrechnung.',
         'new' => 'neu',
         'All new state types (default: viewable).' => 'Alle neuen Statustypen (Standard: sichtbar).',
         'open' => 'offen',
@@ -8022,6 +8076,9 @@ sub Data {
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             'Es ist ein Fehler beim Entfernen des Anhangs aufgetreten. Bitte prüfen Sie die Protokolle für mehr Informationen.',
         'Attachment was deleted successfully.' => 'Anhang erfolgreich entfernt.',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => 'Löschen des Objekts und seiner Daten. Dies kann eine Weile dauern...',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8367,7 +8424,8 @@ sub Data {
         'Sorry, you can only upload one file here.' => 'Sie können hier nur eine Datei hochladen.',
         'Sorry, you can only upload %s files.' => 'Sie können nur %s Datei(en) hochladen.',
         'Please only select at most %s files for upload.' => 'Bitte wählen Sie höchstens %s Datei(en) zum Hochladen aus.',
-        'The following files are not allowed to be uploaded: %s' => 'Die folgenden Dateien dürfen nicht geändert werden: %s',
+        'The following files are not allowed to be uploaded: %s' => 'Die folgenden Dateien dürfen nicht hochgeladen werden: %s',
+        'The following files types are allowed: %s' => 'Die folgenden Dateitypen sind zulässig: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'Folgende Dateien überschreiten die Maximalgröße pro Datei (%s) und wurden nicht aktualisiert: %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8447,7 +8505,7 @@ Ihr Helpdesk-Team
         'AJAX interface for the web service dynamic field backends.' => 'AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends.',
         'AccountedTime' => 'Erfasste Zeit',
         'Activation of dynamic fields for screens.' => 'Aktivierung dynamischer Felder für Masken.',
-        'Activity LinkTarget' => '',
+        'Activity LinkTarget' => 'Link-Ziel der Aktivität',
         'Activity Notification' => 'Aktivitätsbenachrichtigung',
         'Activity.' => 'Aktivität.',
         'ActivityID' => 'ActivityID',
@@ -8508,6 +8566,7 @@ Ihr Helpdesk-Team
         'Appointment list.' => 'Terminliste.',
         'Appointment notifications' => 'Terminbenachrichtigungen',
         'Arabic (Saudi Arabia)' => 'Arabisch (Saudi-Arabien)',
+        'Article Color' => 'Artikel Farbe',
         'ArticleTree' => 'Artikelbaum',
         'Attachment Name' => 'Name des Anhangs',
         'Avatar' => 'Avatar',
@@ -8599,6 +8658,7 @@ Ihr Helpdesk-Team
         'Create and manage ticket priorities.' => 'Ticket-Prioritäten erstellen und verwalten.',
         'Create and manage ticket states.' => 'Ticket-Status erstellen und verwalten.',
         'Create and manage ticket types.' => 'Ticket-Typen erstellen und verwalten.',
+        'Create and manage translation.' => 'Übersetzungen erstellen und verwalten.',
         'Create and manage web services.' => 'Webservices erstellen und verwalten.',
         'Create new Ticket.' => 'Neues Ticket erstellen.',
         'Create new appointment.' => 'Einen neuen Termin erstellen.',
@@ -8637,7 +8697,7 @@ Ihr Helpdesk-Team
         'CustomerUser' => 'Kundenbenutzer',
         'Czech' => 'Tschechisch',
         'Danish' => 'Dänisch',
-        'Dark' => '',
+        'Dark' => 'Dark',
         'Dashboard overview.' => 'Dashboardübersicht.',
         'Date / Time' => 'Datum / Zeit',
         'Default agent name' => 'Standard-Agentenname',
@@ -8663,6 +8723,7 @@ Ihr Helpdesk-Team
         'Dynamic Fields Multiselect Backend GUI' => 'Dynamic Fields-Oberfläche für Mehrfachauswahlboxen',
         'Dynamic Fields Overview Limit' => 'Übersichtsbegrenzung der dynamischen Felder',
         'Dynamic Fields Text Backend GUI' => 'Dynamic Fields-Oberfläche für Textfelder',
+        'Dynamic fields administration' => 'Verwaltung dynamischer Felder',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             'Dynamische Feldergruppen für das Prozess-Widget. Der Schlüssel ist der Name der Gruppe, der Wert enthält die Felder, die angezeigt werden sollen. Beispiel: \'Key => Meine Gruppe\', \'Content: NameX, NameY\'.',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => 'Maximale Anzahl dynamischer Felder pro Seite in Übersichtsseite der dynamischen Felder.',
@@ -8764,7 +8825,6 @@ Ihr Helpdesk-Team
         'Italian' => 'Italienisch',
         'Japanese' => 'Japanisch',
         'Korean' => 'Koreanisch',
-        'Language' => 'Sprache',
         'Large' => 'Groß',
         'Last Mentions' => 'Letzte Erwähnungen',
         'Last Screen Overview' => 'Letzte Masken-Übersicht',
@@ -8818,6 +8878,8 @@ Ihr Helpdesk-Team
         'Manage support data.' => 'Supportdaten verwalten.',
         'Manage system files.' => 'Systemdateien verwalten',
         'Manage tasks triggered by event or time based execution.' => 'Verwaltung von event- oder zeitbasierten Aufgaben.',
+        'Manage ticket article color.' => 'Artikel Farbe verwalten.',
+        'Manage translation.' => 'Übersatzungen verwalten.',
         'Management of ticket attribute relations.' => 'Verwaltung von abhängigen Ticketattributen.',
         'Mark as Spam!' => 'Als Spam makieren!',
         'Mark as seen' => 'Als gelesen markieren',
@@ -8981,7 +9043,7 @@ Ihr Helpdesk-Team
         'Show the ticket history' => 'Ticket-Historie anzeigen',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Ermöglicht eine Ticket-Übersicht mit einigen Ticketinformationen (Customer => 1 - zeigt auch die Kundeninformation, CustomerInfoMaxSize steuert die maximale Anzahl an Zeichen der Kundeninformation).',
-        'Shows information on how to start OTRS Daemon' => '',
+        'Shows information on how to start OTRS Daemon' => 'Zeigt Informationen, wie der Znuny-Daemon gestartet wird',
         'Shows last mention of tickets.' => 'Zeigt letzte Erwähnung von Tickets.',
         'Signature data.' => 'Signatur-Daten.',
         'Simple' => 'Einfach',
@@ -9032,13 +9094,13 @@ Ihr Helpdesk-Team
         'Theme' => 'Schema',
         'This is a Description for Comment on Framework.' => 'Dies ist die Beschreibung eines Kommentars.',
         'This is a Description for DynamicField on Framework.' => 'Dies ist die Beschreibung eines dynamischen Feldes.',
-        'This is the dark skin for the agent interface.' => '',
-        'This is the dark skin for the customer interface.' => '',
+        'This is the dark skin for the agent interface.' => 'Dies ist der dark Skin für die Agentenschnittstelle.',
+        'This is the dark skin for the customer interface.' => 'Dies ist die dark Haut für die Kundenschnittstelle.',
         'This is the default orange - black skin for the customer interface.' =>
             'Der Standard-Skin (grau) für den Kundenbereich.',
         'This is the default orange - black skin.' => 'Dies ist die Standard orange-schwarze Farbgebung.',
         'This key is not certified with a trusted signature!' => 'Dieser Schlüssel ist nicht mit einer vertrauenswürdigen Signatur zertifiziert!',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => 'Dieses Modul ist Teil des Adminbereichs von Znuny.',
         'Ticket Close.' => 'Ticket schließen.',
         'Ticket Compose Bounce Email.' => 'E-Mail-Erstellung für Ticket-Umleitung.',
         'Ticket Compose email Answer.' => 'E-Mail-Erstellung für Ticket-Antwort.',
@@ -9109,6 +9171,7 @@ Ihr Helpdesk-Team
         'Web service (Multiselect)' => 'Webservice (Mehrfachauswahl)',
         'Web service dynamic field AJAX interface' => 'AJAX-Schnittstelle für dynamische Webservice-Felder',
         'Webservice' => 'Webservice',
+        'YAML' => 'YAML',
         'Yes, but hide archived tickets' => 'Ja, aber archivierte Tickets verstecken',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             'Ihre E-Mail mit Ticket-Nummer "<OTRS_TICKET>" wurde an "<OTRS_BOUNCE_TO>" umgeleitet. Kontaktieren Sie diese Adresse für weitere Informationen.',
@@ -9241,6 +9304,7 @@ Ihr Helpdesk-Team
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9450,6 +9514,7 @@ Ihr Helpdesk-Team
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

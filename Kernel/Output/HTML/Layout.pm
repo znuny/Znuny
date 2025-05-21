@@ -705,7 +705,7 @@ sub Login {
             Expires  => '+1y',
             Path     => $ConfigObject->Get('ScriptAlias'),
             Secure   => $CookieSecureAttribute,
-            HttpOnly => 1,
+            HTTPOnly => 1,
         );
     }
 
@@ -3879,6 +3879,9 @@ sub BuildDateSelection {
         %Param,
     );
 
+    # Do not initialise Datepicker if Disabled is set.
+    return $Output if $Param{Disabled};
+
     # prepare datepicker for specific calendar
     my $VacationDays = '';
     if ( $Param{Calendar} ) {
@@ -4029,7 +4032,7 @@ sub CustomerLogin {
             Expires  => '+1y',
             Path     => $ConfigObject->Get('ScriptAlias'),
             Secure   => $CookieSecureAttribute,
-            HttpOnly => 1,
+            HTTPOnly => 1,
         );
     }
 
@@ -6198,10 +6201,10 @@ Do this _just_ if the line, that should be wrapped, contains space characters at
 If you need more info to understand what it does, take a look at the UnitTest WrapPlainText.t to see
 use cases there.
 
-my $WrappedPlainText = $LayoutObject->WrapPlainText(
-    PlainText     => "Some Plain text that is longer than the amount stored in MaxCharacters",
-    MaxCharacters => 80,
-);
+    my $WrappedPlainText = $LayoutObject->WrapPlainText(
+        PlainText     => "Some Plain text that is longer than the amount stored in MaxCharacters",
+        MaxCharacters => 80,
+    );
 
 =cut
 
@@ -6249,9 +6252,9 @@ sub WrapPlainText {
 
 set properties for rich text editor and send them to JS via AddJSData()
 
-$LayoutObject->SetRichTextParameters(
-    Data => \%Param,
-);
+    $LayoutObject->SetRichTextParameters(
+        Data => \%Param,
+    );
 
 =cut
 
@@ -6289,6 +6292,8 @@ sub SetRichTextParameters {
     if ($UserType) {
         $UserType =~ s/Interface//;
     }
+
+    $Self->{SkinSelected} ||= $ConfigObject->Get("Loader::Agent::DefaultSelectedSkin") || 'default';
 
     my $ContentsCssFS
         = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
@@ -6412,9 +6417,9 @@ sub SetRichTextParameters {
 
 set properties for customer rich text editor and send them to JS via AddJSData()
 
-$LayoutObject->CustomerSetRichTextParameters(
-    Data => \%Param,
-);
+    $LayoutObject->CustomerSetRichTextParameters(
+        Data => \%Param,
+    );
 
 =cut
 
@@ -6453,7 +6458,7 @@ sub CustomerSetRichTextParameters {
         $UserType =~ s/Interface//;
     }
 
-    $Self->{SkinSelected} = $ConfigObject->Get("Loader::Customer::SelectedSkin") || 'default';
+    $Self->{SkinSelected} ||= $ConfigObject->Get("Loader::Customer::SelectedSkin") || 'default';
 
     my $ContentsCssFS
         = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';

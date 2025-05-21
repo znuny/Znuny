@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.497528830313015;
+    $Self->{Completeness}        = 0.494429882044561;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -85,7 +85,8 @@ sub Data {
         'Change settings' => 'Verander instellingen',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Geef aan wat u wilt dat gebeurt als de activatie-criteria kloppen.',
-        'Check the official %sdocumentation%s.' => 'Bekijk de officiële %sdocumentatie%s',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Bewerk ACL %s',
         'Edit ACL' => 'Bewerkt ACL',
         'Show or hide the content' => 'Toon of verberg de inhoud',
@@ -245,6 +246,19 @@ sub Data {
         'If signing key/certificate is missing' => 'Als signeer sleutel/certificaat ontbreekt',
         'If encryption key/certificate is missing' => 'Als encryptie sleutel/certificaat ontbreekt',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => '',
+        'Hint' => 'Opmerking',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            '',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            '',
+        'Article Color Management' => '',
+        'Sender Type' => 'Soort verzender',
+        'Communication Channel' => 'Communicatiekanaal',
+        'Visible for customer' => 'Zichtbaar voor klant',
+        'Color' => 'Kleur',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => 'Nieuwe bijlage',
         'Filter for Attachments' => 'Filter op bijlagen',
@@ -276,7 +290,6 @@ sub Data {
             'Toon alleen communicatielogboeken gemaakt binnen een bepaald tijdbereik.',
         'Filter for Communications' => 'Filter op communicatie',
         'Filter for communications' => 'Filter op communicatie',
-        'Hint' => 'Opmerking',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             'Op dit scherm ziet u een overzicht van de binnenkomende en uitgaande communicatie.',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -482,31 +495,38 @@ sub Data {
         'Object' => 'Object',
         'Delete this field' => 'Verwijder dit veld',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => 'Terug naar het overzicht',
+        'Add %s field' => '',
+        'Change %s field' => '',
         'Dynamic Fields' => 'Dynamische velden',
         'General' => 'Algemeen',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'Dit veld is verplicht. Het kan aleen alfanumerieke tekens bevatten.',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             'Moet uniek zijn en kan alleen alfanumerieke tekens bevatten.',
-        'Changing this value will require manual changes in the system.' =>
-            'Na aanpassen van deze waarde zijn handmatige aanpassingen in het systeem nodig.',
+        'Changing this value will require manual changes to the system.' =>
+            '',
         'This is the name to be shown on the screens where the field is active.' =>
             'Deze naam wordt getoond in de schermen waar dit veld actief is.',
         'Field order' => 'Veldvolgorde',
         'This field is required and must be numeric.' => 'Dit veld is verplicht en moet numeriek zijn.',
         'This is the order in which this field will be shown on the screens where is active.' =>
             'Dit is de volgorde waarin de velden worden weergegeven op de schermen waar ze geactiveerd zijn.',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            '',
         'Field type' => 'Veldtype',
         'Object type' => 'Objecttype',
         'Internal field' => 'Intern veld',
         'This field is protected and can\'t be deleted.' => 'Dit veld is beschermd en kan niet worden verwijderd.',
+        'Field Settings' => 'Veld-instellingen',
+        'There is no configuration available for this dynamic field.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            'Na aanpassen van deze waarde zijn handmatige aanpassingen in het systeem nodig.',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            '',
         'This dynamic field is used in the following config settings:' =>
             'Dit dynamische veld wordt gebruikt in de volgende configuratie-instellingen:',
-        'Field Settings' => 'Veld-instellingen',
         'Default value' => 'Standaard waarde',
         'This is the default value for this field.' => 'Dit is de standaard-waarde voor dit veld.',
 
@@ -793,7 +813,6 @@ sub Data {
         'New type' => 'Nieuw type',
         'Archive selected tickets' => 'Archiveer geselecteerde tickets',
         'Add Note' => 'Notitie toevoegen',
-        'Visible for customer' => 'Zichtbaar voor klant',
         'Time units' => 'Bestede tijd',
         'Execute Ticket Commands' => 'Ticketcommando\'s uitvoeren',
         'Send agent/customer notifications on changes' => 'Stuur behandelaars / klanten een melding bij wijzigingen',
@@ -1333,6 +1352,8 @@ sub Data {
         'System Log' => 'Logboek',
         'Recent Log Entries' => 'Recente Logboekregels',
         'Facility' => 'Maatregel',
+        'Source' => '',
+        'Line' => '',
         'Message' => 'Bericht',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1369,7 +1390,6 @@ sub Data {
             '',
         'Links' => 'Koppelingen',
         'View the admin manual on Github' => '',
-        'Filter for Items' => '',
         'No Matches' => 'Geen overeenkomsten',
         'Sorry, your search didn\'t match any items.' => '',
         'Set as favorite' => '',
@@ -1616,7 +1636,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => '',
         'Priority Management' => 'Prioriteitenbeheer',
         'Edit Priority' => 'Bewerk prioriteit',
-        'Color' => 'Kleur',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => 'Deze prioriteit wordt gebruikt in de volgende configuratieinstellingen:',
@@ -1692,7 +1711,6 @@ sub Data {
         'Filter available fields' => 'Filter beschikbare velden',
         'Assigned Fields' => 'Toegewezen velden',
         'Filter assigned fields' => '',
-        'Communication Channel' => 'Communicatiekanaal',
         'Is visible for customer' => 'Is zichtbaar voor de klant',
         'Text Template' => 'Tekstsjabloon',
         'Auto fill' => '',
@@ -2131,8 +2149,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '',
-        'View a custom List of Settings' => '',
-        'View single Setting: %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2197,6 +2213,25 @@ sub Data {
         'Add missing possible dynamic field values' => '',
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => '',
+        'Translation Management' => '',
+        'Add Translation' => '',
+        'Edit Translation' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => '',
+        'Language' => 'Taal',
+        'An entry with this name already exists!' => '',
+        'Destination' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => 'Gewijzigd door',
+        'Deployment' => '',
+        'Copy this object' => '',
+        'Do you really want to delete this object? All associated data will be lost!' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
@@ -2544,7 +2579,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => '',
         'Created by' => 'Aangemaakt door',
-        'Changed by' => 'Gewijzigd door',
         'Sum rows' => 'Toon totaal per rij',
         'Sum columns' => 'Toon totaal per kolom',
         'Show as dashboard widget' => 'Toon als dashboard-widget',
@@ -2781,7 +2815,6 @@ sub Data {
         'Archive Search' => 'Zoek in archief',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => 'Soort verzender',
         'Save filter settings as default' => 'Sla filter op als standaard',
         'Event Type' => 'Gebeurtenis type',
         'Save as default' => 'Opslaan als standaard',
@@ -3305,6 +3338,8 @@ sub Data {
             'De schaal van de Y-as moet groter zijn dan de schaal voor de X-as (bijvoorbeeld: X-as => Maand, Y-as => Jaar).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => '',
+        'View single Setting: %s' => '',
         'This setting is disabled.' => 'Deze instelling is uitgeschakeld',
         'This setting is fixed but not deployed yet!' => '',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3342,7 +3377,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => 'Bewerk zoekopdracht',
         'Go back to admin: ' => 'Ga terug naar admin:',
-        'Deployment' => '',
         'My favourite settings' => '',
         'Invalid settings' => 'Ongeldige instellingen',
 
@@ -3438,7 +3472,7 @@ sub Data {
         'Mrs.' => 'Mevr.',
         'View system log messages.' => 'Bekijk het Znuny logboek.',
         'Edit the system configuration settings.' => 'Bewerk de systeemconfiguratie.',
-        'Update and extend your system with software packages.' => 'Voeg functies toe aan uw systeem door het installeren van pakketten.',
+        'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3583,10 +3617,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'Kon dynamische velden niet herstellen, kijk in het logbestand voor details.',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => 'Huidige',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => 'Ongedefinieerde subactie.',
         'Need %s' => 'Heb %s nodig',
-        'Add %s field' => '',
         'The field does not contain only ASCII letters and numbers.' => 'Het veld bevat niet alleen maar ASCII letters en cijfers.',
         'There is another field with the same name.' => 'Er is een ander veld met dezelfde naam.',
         'The field must be numeric.' => 'Het veld moet numeriek zijn.',
@@ -3594,10 +3630,8 @@ sub Data {
         'Could not create the new field' => 'Het nieuwe veld kon niet worden aangemaakt',
         'Need ID' => 'Heb ID nodig',
         'Could not get data for dynamic field %s' => 'Kon de gegevens voor dynamisch veld %s niet ophalen',
-        'Change %s field' => '',
         'The name for this field should not change.' => 'De naam van dit veld zou niet moeten veranderen.',
         'Could not update the field %s' => 'Het veld %s kon niet bijgewerkt worden.',
-        'Currently' => 'Huidige',
         'Unchecked' => '',
         'Checked' => '',
 
@@ -4152,6 +4186,8 @@ sub Data {
         'Export: Need StatID!' => 'Exporteren: Heb geen StatID!',
         'Delete: Get no StatID!' => 'Verwijderen: Heb geen StatID!',
         'Need StatID!' => 'Heb geen StatID!',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            '',
         'Could not load stat.' => 'Kon rapportage niet laden',
         'Add New Statistic' => 'Voeg een nieuwe statistiek toe',
         'Could not create statistic.' => 'Kon rapportage niet aanmaken.',
@@ -4692,6 +4728,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '',
         'There is an error updating the system configuration!' => '',
+
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
@@ -7643,6 +7683,8 @@ sub Data {
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
             '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7782,6 +7824,8 @@ sub Data {
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7883,6 +7927,16 @@ sub Data {
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            '',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            '',
+        'Defines the format of exported files when using the admin interface.' =>
+            '',
+        'Defines the separator for export csv files.' => '',
+        'Defines the quote for export csv files.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tijdelijk ongeldig',
@@ -8027,6 +8081,9 @@ sub Data {
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             '',
         'Attachment was deleted successfully.' => '',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8373,6 +8430,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => '',
         'Please only select at most %s files for upload.' => '',
         'The following files are not allowed to be uploaded: %s' => '',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8514,6 +8572,7 @@ Het Helpdesk Team
         'Appointment list.' => '',
         'Appointment notifications' => '',
         'Arabic (Saudi Arabia)' => 'Arabisch (Saudi Arabië)',
+        'Article Color' => '',
         'ArticleTree' => 'Interactie-boom',
         'Attachment Name' => 'Bijlage naam',
         'Avatar' => '',
@@ -8605,6 +8664,7 @@ Het Helpdesk Team
         'Create and manage ticket priorities.' => 'Aanmaken en beheren van prioriteiten.',
         'Create and manage ticket states.' => 'Aanmaken en beheren van statussen.',
         'Create and manage ticket types.' => 'Aanmaken en beheren van typen.',
+        'Create and manage translation.' => '',
         'Create and manage web services.' => 'Aanmaken en beheren van webservices.',
         'Create new Ticket.' => 'Maak een nieuw ticket.',
         'Create new appointment.' => '',
@@ -8669,6 +8729,7 @@ Het Helpdesk Team
         'Dynamic Fields Multiselect Backend GUI' => '',
         'Dynamic Fields Overview Limit' => '',
         'Dynamic Fields Text Backend GUI' => '',
+        'Dynamic fields administration' => '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             '',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => '',
@@ -8770,7 +8831,6 @@ Het Helpdesk Team
         'Italian' => '',
         'Japanese' => 'Japans',
         'Korean' => '',
-        'Language' => 'Taal',
         'Large' => 'Groot',
         'Last Mentions' => '',
         'Last Screen Overview' => '',
@@ -8824,6 +8884,8 @@ Het Helpdesk Team
         'Manage support data.' => 'Beheer support gegevens.',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'Beheer van taken op basis van events of tijdschema\'s',
+        'Manage ticket article color.' => '',
+        'Manage translation.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Markeer als spam',
         'Mark as seen' => '',
@@ -9044,7 +9106,7 @@ Het Helpdesk Team
             '',
         'This is the default orange - black skin.' => '',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => '',
         'Ticket Compose Bounce Email.' => '',
         'Ticket Compose email Answer.' => '',
@@ -9115,6 +9177,7 @@ Het Helpdesk Team
         'Web service (Multiselect)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
+        'YAML' => '',
         'Yes, but hide archived tickets' => '',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             '',
@@ -9247,6 +9310,7 @@ Het Helpdesk Team
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9456,6 +9520,7 @@ Het Helpdesk Team
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

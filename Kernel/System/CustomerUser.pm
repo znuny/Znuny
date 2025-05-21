@@ -1407,6 +1407,7 @@ get related customer IDs of a customer user
     );
 
 Returns:
+
     @CustomerIDs = (
         '123',
         '456',
@@ -1419,6 +1420,7 @@ get related customer users of a customer ID
     );
 
 Returns:
+
     @CustomerUsers = (
         '123',
         '456',

@@ -1,0 +1,127 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
+
+[% RenderBlockStart("ActionList") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                [% FOR ActionItem IN Data.ActionItems %]
+                    <li>
+                        <a href="[% ActionItem.LinkHref %]" class="[% ActionItem.LinkClass %]">
+                            <span>
+                                <i class="[% ActionItem.IconClass %]"></i>
+                                [% Translate(ActionItem.LinkText) | html %]
+                            </span>
+                        </a>
+                    </li>
+                [% END %]
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("ActionList") %]
+[% RenderBlockStart("Filter") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate(Data.Label) | html %]</h2>
+            </div>
+            <div class="Content">
+[% RenderBlockStart("FilterInput") %]
+                <input type="text" id="[% Data.FilterInput %]" class="W95pc" name="[% Data.FilterInput %]" value="" title="[% Translate('Filter') | html %]" placeholder="[% Translate(Data.Label) | html %]..." />
+[% RenderBlockEnd("FilterInput") %]
+            </div>
+        </div>
+[% RenderBlockEnd("Filter") %]
+
+[% RenderBlockStart("ImportExport") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate(Data.Label) | html %]</h2>
+            </div>
+            <div class="Content">
+                <p class='FieldExplanation'>
+                    [% Translate(Data.Explanation, Translate('Translation'),Translate('Translation')) | html %]
+                </p>
+                <ul class='ActionList'>
+                    <li>
+                        <form action='[% Env("CGIHandle") %]' method='post' enctype='multipart/form-data' class='Validate PreventMultipleSubmits'>
+                            <input type='hidden' name='ChallengeToken' value=[% Env("UserChallengeToken") | JSON %]>
+                            <input type='hidden' name='Action' value='[% Data.Action | html %]'/>
+                            <input type='hidden' name='Subaction' value='Import'/>
+                            <input name='FileUpload' id='FileUpload' type='file' size='18' class='Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]'/>
+                            <div id='FileUploadError' class='TooltipErrorMessage'>
+                                <p>
+                                    [% Translate('This field is required.') | html %]
+                                </p>
+                            </div>
+                            <div id='FileUploadServerError' class='TooltipErrorMessage'>
+                                <p>
+                                    % Translate('This field is required.') | html %]
+                                </p>
+                            </div>
+
+                            <fieldset class="flex-row">
+                                <input type='checkbox' id='OverwriteExistingEntitiesExample' name='OverwriteExistingEntities' value='1'/>
+                                <label for='OverwriteExistingEntitiesExample'>
+                                    [% Translate('Overwrite existing entities') | html %]
+                                </label>
+                            </fieldset>
+                            <button class='CallForAction Fullsize Center' id='TranslationImport' type='submit'>
+                                <span><i class='fa fa-upload'></i>
+                                    Translation [% Translate('Import') | html %]
+                                </span>
+                            </button>
+                        </form>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=[% Data.Action | html %];Subaction=Export' id='TranslationExport' class='CallForAction Fullsize Center'>
+                            <span><i class='fa fa-download'></i>
+                                Translation [% Translate('Export') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("ImportExport") %]
+    </div>
+
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Translation Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate("Translation Management"),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% SWITCH Data.Subaction %]
+            [% CASE 'Add' %]
+                [% BreadcrumbPath.push({ Name => Translate("Add Translation")}) %]
+            [% CASE 'Update' %]
+                [% BreadcrumbPath.push({ Name => Translate("Edit Translation")}) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+
+        [% INCLUDE "AdminTranslation/Overview.tt" %]
+        [% INCLUDE "AdminTranslation/Form.tt" %]
+
+        </div>
+    </div>
+    <div class="Clear"></div>
+</div>

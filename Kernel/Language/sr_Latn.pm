@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.893739703459638;
+    $Self->{Completeness}        = 0.88843381389253;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -85,7 +85,8 @@ sub Data {
         'Change settings' => 'Promeni podešavanja',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Podesite ono što želite da menjate ako se kriterijumi slažu. Imajte na umu da je \'Possible\' bela lista, \'PossibleNot\' crna lista.',
-        'Check the official %sdocumentation%s.' => 'Pročitajte zvaničnu %sdokumentaciju%s.',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Uredi ACL %s',
         'Edit ACL' => 'Uredi ACL',
         'Show or hide the content' => 'Pokaži ili sakrij sadržaj',
@@ -245,6 +246,19 @@ sub Data {
         'If signing key/certificate is missing' => 'Ako potpisivanje ključa/sertifikata nedostaje',
         'If encryption key/certificate is missing' => 'Ako ključa/sertifikat za šifriranje nedostaje',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => 'Filter za stavke',
+        'Hint' => 'Savet',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            '',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            '',
+        'Article Color Management' => '',
+        'Sender Type' => 'Tip pošiljaoca',
+        'Communication Channel' => 'Komunikacioni kanal',
+        'Visible for customer' => 'Vidljivo klijentu',
+        'Color' => 'Boja',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => 'Dodaj prilog',
         'Filter for Attachments' => 'Filter za priloge',
@@ -276,7 +290,6 @@ sub Data {
             'Prikaži samo komunikacione logove kreirane u određenom vremenskom periodu.',
         'Filter for Communications' => 'Filter za komunikacije',
         'Filter for communications' => 'Filter za komunikacije',
-        'Hint' => 'Savet',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             'U ovom ekranu možete pregledati sve dolazne i odlazne komunikacije.',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -482,31 +495,38 @@ sub Data {
         'Object' => 'Objekat',
         'Delete this field' => 'Obriši ovo polje',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => 'Idi nazad na pregled',
+        'Add %s field' => 'Dodaj %s polje',
+        'Change %s field' => 'Izmeni %s polje',
         'Dynamic Fields' => 'Dinamička polja',
         'General' => 'Opšte',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'Ovo polje je obavezno i može sadržati samo od slova i brojeve.',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             'Mora biti jedinstveno i prihvata samo slova i brojeve.',
-        'Changing this value will require manual changes in the system.' =>
-            'Izmena ovog polja će zahtevati ručne promene u sistemu.',
+        'Changing this value will require manual changes to the system.' =>
+            '',
         'This is the name to be shown on the screens where the field is active.' =>
             'Ovo je naziv koji će se prikazivati na ekranima gde je polje aktivno.',
         'Field order' => 'Redosled polja',
         'This field is required and must be numeric.' => 'Ovo polje je obavezno i mora biti numeričko.',
         'This is the order in which this field will be shown on the screens where is active.' =>
             'Ovo je redosled po kom će polja biti prikazana na ekranima gde su aktivna.',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            'Nije moguće obeležiti ovu stavku kao nevažeću, sva podešavanja moraju biti prvo izmenjena.',
         'Field type' => 'Tip polja',
         'Object type' => 'Tip objekta',
         'Internal field' => 'Interno polje',
         'This field is protected and can\'t be deleted.' => 'Ovo polje je zaštićeno i ne može biti obrisano.',
+        'Field Settings' => 'Podešavanje polja',
+        'There is no configuration available for this dynamic field.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            'Izmena ovog polja će zahtevati ručne promene u sistemu.',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            'Nije moguće obeležiti ovu stavku kao nevažeću, sva podešavanja moraju biti prvo izmenjena.',
         'This dynamic field is used in the following config settings:' =>
             'Ovo dinamičko polje je upotrebljeno u sledećim postavkama:',
-        'Field Settings' => 'Podešavanje polja',
         'Default value' => 'Podrazumevana vrednost',
         'This is the default value for this field.' => 'Ovo je podrazumevana vrednost za ovo polje.',
 
@@ -793,7 +813,6 @@ sub Data {
         'New type' => 'Novi tip',
         'Archive selected tickets' => 'Arhiviraj izabrane tikete',
         'Add Note' => 'Dodaj napomenu',
-        'Visible for customer' => 'Vidljivo klijentu',
         'Time units' => 'Vremenske jedinice',
         'Execute Ticket Commands' => 'Izvrši komande tiketa',
         'Send agent/customer notifications on changes' => 'Pošalji obaveštenja operateru/klijentu pri promenama',
@@ -1333,6 +1352,8 @@ sub Data {
         'System Log' => 'Sistemski dnevnik',
         'Recent Log Entries' => 'Poslednji log unosi',
         'Facility' => 'Instalacija',
+        'Source' => '',
+        'Line' => '',
         'Message' => 'Poruka',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1369,7 +1390,6 @@ sub Data {
             'Možete dodati omiljene prevlačenjem kursora preko stavke sa desne strane i klikom na ikonicu zvezde.',
         'Links' => 'Veze',
         'View the admin manual on Github' => 'Pregledajte uputstvo za administratore na Github',
-        'Filter for Items' => 'Filter za stavke',
         'No Matches' => 'Ništa nije pronađeno',
         'Sorry, your search didn\'t match any items.' => 'Žao nam je, vaša pretraga nije vratila rezultate.',
         'Set as favorite' => 'Stavi u omiljene',
@@ -1616,7 +1636,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => '',
         'Priority Management' => 'Upravljanje prioritetima',
         'Edit Priority' => 'Uredi Prioritet',
-        'Color' => 'Boja',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             'Ovaj prioritet se koristi u sistemskoj konfiguraciji, neophodna je dodatna potvrda za promenu podešavanja na novu vrednost!',
         'This priority is used in the following config settings:' => 'Ovaj prioritet se koristi u sledećim sistemskim podešavanjima:',
@@ -1692,7 +1711,6 @@ sub Data {
         'Filter available fields' => 'Filtriraj raspoloživa polja',
         'Assigned Fields' => 'Dodeljena polja',
         'Filter assigned fields' => '',
-        'Communication Channel' => 'Komunikacioni kanal',
         'Is visible for customer' => 'Vidljivo klijentu',
         'Text Template' => 'Šablon teksta',
         'Auto fill' => '',
@@ -2131,8 +2149,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Nazad na detalje raspoređivanja',
-        'View a custom List of Settings' => 'Pregled liste podešavanja',
-        'View single Setting: %s' => 'Pregled pojedinačnog podešavanja: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2197,6 +2213,25 @@ sub Data {
         'Add missing possible dynamic field values' => '',
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => '',
+        'Translation Management' => '',
+        'Add Translation' => '',
+        'Edit Translation' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => '',
+        'Language' => 'Jezik',
+        'An entry with this name already exists!' => '',
+        'Destination' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => 'Izmenio',
+        'Deployment' => 'Raspored',
+        'Copy this object' => '',
+        'Do you really want to delete this object? All associated data will be lost!' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
@@ -2544,7 +2579,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Informacije o statistici',
         'Created by' => 'Kreirao',
-        'Changed by' => 'Izmenio',
         'Sum rows' => 'Zbir redova',
         'Sum columns' => 'Zbir kolona',
         'Show as dashboard widget' => 'Prikaži kao dodatak kontrolne table',
@@ -2781,7 +2815,6 @@ sub Data {
         'Archive Search' => 'Pretraga arhiva',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => 'Tip pošiljaoca',
         'Save filter settings as default' => 'Sačuvaj podešavanja filtera kao podrazumevana',
         'Event Type' => 'Tip događaja',
         'Save as default' => 'Sačuvaj kao podrazumevano',
@@ -3305,6 +3338,8 @@ sub Data {
             'Molimo zapamtite, da skala za Y-osu treba da bude veća od skale za H-osu (npr. H-Osa => mesec; Y-osa => godina).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => 'Pregled liste podešavanja',
+        'View single Setting: %s' => 'Pregled pojedinačnog podešavanja: %s',
         'This setting is disabled.' => 'Ovo podešavanje je isključeno.',
         'This setting is fixed but not deployed yet!' => 'Ovo podešavanje je statičko, ali nije još raspoređeno!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3342,7 +3377,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => 'Uredi pretragu',
         'Go back to admin: ' => 'Nazad na admin:',
-        'Deployment' => 'Raspored',
         'My favourite settings' => 'Moja omiljena podešavanja',
         'Invalid settings' => 'Nevažeća podešavanja',
 
@@ -3438,7 +3472,7 @@ sub Data {
         'Mrs.' => 'G-đa',
         'View system log messages.' => 'Pregled poruka sistemskog loga.',
         'Edit the system configuration settings.' => 'Uredi podešavanja sistemske konfiguracije.',
-        'Update and extend your system with software packages.' => 'Ažuriraj i nadogradi sistem softverskim paketima.',
+        'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3583,10 +3617,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'Nije moguće poništiti redosled dinamičkih polja, molimo da proverite Znuny logove za više informacija.',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => 'Trenutno',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => 'Nedefinisana subakcija.',
         'Need %s' => 'Neophodan %s',
-        'Add %s field' => 'Dodaj %s polje',
         'The field does not contain only ASCII letters and numbers.' => 'Polje ne sadrži samo ASCII slova i brojeve.',
         'There is another field with the same name.' => 'Postoji drugo polje sa istim imenom.',
         'The field must be numeric.' => 'Polje mora biti numeričko.',
@@ -3594,10 +3630,8 @@ sub Data {
         'Could not create the new field' => 'Nije moguće kreirati novo polje',
         'Need ID' => 'Neophodan ID',
         'Could not get data for dynamic field %s' => 'Ne mogu pribaviti podatke za dinamičko polje %s',
-        'Change %s field' => 'Izmeni %s polje',
         'The name for this field should not change.' => 'Naziv ovog polja nije poželjno menjati.',
         'Could not update the field %s' => 'Nije moguće ažurirati polje %s',
-        'Currently' => 'Trenutno',
         'Unchecked' => 'Isključeno',
         'Checked' => 'Uključeno',
 
@@ -4152,6 +4186,8 @@ sub Data {
         'Export: Need StatID!' => 'Izvoz: neophodan StatID!',
         'Delete: Get no StatID!' => 'Delete: nema StatID!',
         'Need StatID!' => 'Neophodan StatID!',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            '',
         'Could not load stat.' => 'Nije moguće učitavanje statistike.',
         'Add New Statistic' => 'Dodaj novu statistiku',
         'Could not create statistic.' => 'Nije moguće kreiranje statistike.',
@@ -4692,6 +4728,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => 'Konfiguracija se osvežava, molimo sačekajte...',
         'There is an error updating the system configuration!' => 'Greška prilikom osvežavanja sistemske konfiguracije!',
+
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
@@ -7643,6 +7683,8 @@ sub Data {
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
             '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7782,6 +7824,8 @@ sub Data {
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7883,6 +7927,16 @@ sub Data {
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            '',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            '',
+        'Defines the format of exported files when using the admin interface.' =>
+            '',
+        'Defines the separator for export csv files.' => '',
+        'Defines the quote for export csv files.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'nevažeći-privremeno',
@@ -8027,6 +8081,9 @@ sub Data {
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             'Greška prilikom brisanja priloga. Molimo proverite log datoteku za više informacija.',
         'Attachment was deleted successfully.' => 'Prilog je uspešno obrisan.',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8373,6 +8430,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => 'Žao namo je, možete otpremiti samo %s datoteke(a).',
         'Please only select at most %s files for upload.' => 'Molimo da izaberete najviše %s datoteke(a) za otpremanje.',
         'The following files are not allowed to be uploaded: %s' => 'Nije dozvoljeno otpremanje sledećih datoteka: %s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'Sledeće datoteke premašuju najveću dozvoljenu veličinu od %s i nisu bile otpremljene: %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8514,6 +8572,7 @@ Vaša tehnička podrška
         'Appointment list.' => 'Lista termina.',
         'Appointment notifications' => 'Obaveštenja o terminu',
         'Arabic (Saudi Arabia)' => 'Arapski (Saudijska arabija)',
+        'Article Color' => '',
         'ArticleTree' => 'Članak u obliku drveta',
         'Attachment Name' => 'Naziv priloga',
         'Avatar' => 'Avatar sličica',
@@ -8605,6 +8664,7 @@ Vaša tehnička podrška
         'Create and manage ticket priorities.' => 'Kreiranje i upravljanje prioritetima tiketa.',
         'Create and manage ticket states.' => 'Kreiranje i upravljanje statusima tiketa.',
         'Create and manage ticket types.' => 'Kreiranje i upravljanje tipovima tiketa.',
+        'Create and manage translation.' => '',
         'Create and manage web services.' => 'Kreiranje i upravljanje veb servisima.',
         'Create new Ticket.' => 'Kreiranje novog tiketa.',
         'Create new appointment.' => 'Kreira novi termin.',
@@ -8669,6 +8729,7 @@ Vaša tehnička podrška
         'Dynamic Fields Multiselect Backend GUI' => 'Grafički interfejs dinamičkog polja sa višestrukim izborom',
         'Dynamic Fields Overview Limit' => 'Ograničen pregled dinamičkih polja',
         'Dynamic Fields Text Backend GUI' => 'Grafički interfejs tekstualnog dinamičkog polja',
+        'Dynamic fields administration' => '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             'Grupe dinamičkih polja za procesni dodatak. Ključ je naziv grupe, vrednost sadrži polje koje će biti prikazano. Primer: \'Key => My Group\', \'Content: Name_X, NameY\'.',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => 'Ograničenje dinamičkih polja po strani za prikaz dinamičkih polja.',
@@ -8770,7 +8831,6 @@ Vaša tehnička podrška
         'Italian' => 'Italijanski',
         'Japanese' => 'Japanski',
         'Korean' => 'Korejski',
-        'Language' => 'Jezik',
         'Large' => 'Veliko',
         'Last Mentions' => '',
         'Last Screen Overview' => 'Pregled poslednjeg ekrana',
@@ -8824,6 +8884,8 @@ Vaša tehnička podrška
         'Manage support data.' => 'Upravljanje podacima podrške.',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'Upravlja zadacima pokrenutim od događaja ili na osnovu vremenskog izvršavanja.',
+        'Manage ticket article color.' => '',
+        'Manage translation.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Označi kao Spam!',
         'Mark as seen' => '',
@@ -9044,7 +9106,7 @@ Vaša tehnička podrška
             'Ovo je podrazumevani narandžasto-crni izgled klijentskog interfejsa.',
         'This is the default orange - black skin.' => 'Ovo je podrazumevani narandžasto-crni izgled.',
         'This key is not certified with a trusted signature!' => '',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => 'Zatvaranje tiketa.',
         'Ticket Compose Bounce Email.' => 'Preusmeravanje imejl poruke u tiketu.',
         'Ticket Compose email Answer.' => 'Pisanje imejl poruke u tiketu.',
@@ -9115,6 +9177,7 @@ Vaša tehnička podrška
         'Web service (Multiselect)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
+        'YAML' => '',
         'Yes, but hide archived tickets' => 'Da, ali skloni arhivirane tikete',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             'Vaš imejl sa brojem tiketa "<OTRS_TICKET>" je preusmeren na tiket "<OTRS_BOUNCE_TO>"!',
@@ -9247,6 +9310,7 @@ Vaša tehnička podrška
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9456,6 +9520,7 @@ Vaša tehnička podrška
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

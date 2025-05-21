@@ -2438,6 +2438,38 @@ Repeat: &lt;OTRS_APPOINTMENT_RECURRING&gt;<br />
 <br />
 -- &lt;OTRS_CONFIG_NotificationSenderName&gt;]]></Data>
     </Insert>
+    <Insert Table="notification_event_message">
+        <Data Key="id" Type="AutoIncrement">110</Data>
+        <Data Key="notification_id">15</Data>
+        <Data Key="content_type" Type="Quote">text/plain</Data>
+        <Data Key="language" Type="Quote">en</Data>
+        <Data Key="subject" Type="Quote"><![CDATA[Email Delivery Failure]]></Data>
+        <Data Key="text" Type="Quote"><![CDATA[Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+Please note, that the delivery of an email article of [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has failed. Please check the email address of your recipient for mistakes and try again. You can manually resend the article from the ticket if required.
+
+Error Message:
+<OTRS_AGENT_TransmissionStatusMessage>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
+
+-- <OTRS_CONFIG_NotificationSenderName>]]></Data>
+    </Insert>
+    <Insert Table="notification_event_message">
+        <Data Key="id" Type="AutoIncrement">112</Data>
+        <Data Key="notification_id">16</Data>
+        <Data Key="content_type" Type="Quote">text/plain</Data>
+        <Data Key="language" Type="Quote">en</Data>
+        <Data Key="subject" Type="Quote"><![CDATA[Mention in ticket: <OTRS_TICKET_Title>]]></Data>
+        <Data Key="text" Type="Quote"><![CDATA[Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
+<OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+
+-- <OTRS_CONFIG_NotificationSenderName>]]></Data>
+    </Insert>
 
     <!-- notification_event_message - de -->
     <Insert Table="notification_event_message">
@@ -2660,6 +2692,38 @@ Wiederholung: &lt;OTRS_APPOINTMENT_RECURRING&gt;<br />
 <a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a><br />
 <br />
 -- &lt;OTRS_CONFIG_NotificationSenderName&gt;]]></Data>
+    </Insert>
+    <Insert Table="notification_event_message">
+        <Data Key="id" Type="AutoIncrement">114</Data>
+        <Data Key="notification_id">15</Data>
+        <Data Key="content_type" Type="Quote">text/plain</Data>
+        <Data Key="language" Type="Quote">de</Data>
+        <Data Key="subject" Type="Quote"><![CDATA[Fehler beim Versand einer E-Mail]]></Data>
+        <Data Key="text" Type="Quote"><![CDATA[Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+bitte beachten Sie, dass der Versand eines E-Mail-Artikels für [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] fehlgeschlagen ist. Bitte überprüfen Sie die E-Mail-Adresse des Empfängers auf Fehler und versuchen Sie es erneut. Sie können den Artikel bei Bedarf manuell aus dem Ticket erneut senden.
+
+Fehlermeldung:
+<OTRS_AGENT_TransmissionStatusMessage>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
+
+-- <OTRS_CONFIG_NotificationSenderName>]]></Data>
+    </Insert>
+    <Insert Table="notification_event_message">
+        <Data Key="id" Type="AutoIncrement">113</Data>
+        <Data Key="notification_id">16</Data>
+        <Data Key="content_type" Type="Quote">text/plain</Data>
+        <Data Key="language" Type="Quote">de</Data>
+        <Data Key="subject" Type="Quote"><![CDATA[Erwähnung in Ticket: <OTRS_TICKET_Title>]]></Data>
+        <Data Key="text" Type="Quote"><![CDATA[Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+
+Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
+<OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+
+-- <OTRS_CONFIG_NotificationSenderName>]]></Data>
     </Insert>
 
     <!-- notification_event_message - es_MX -->
@@ -3487,6 +3551,23 @@ Ismétlődés: &lt;OTRS_APPOINTMENT_RECURRING&gt;<br />
 <br />
 -- &lt;OTRS_CONFIG_NotificationSenderName&gt;]]></Data>
     </Insert>
+    <Insert Table="notification_event_message">
+        <Data Key="id" Type="AutoIncrement">111</Data>
+        <Data Key="notification_id">15</Data>
+        <Data Key="content_type" Type="Quote">text/plain</Data>
+        <Data Key="language" Type="Quote">hu</Data>
+        <Data Key="subject" Type="Quote"><![CDATA[E-mail kézbesítési hiba]]></Data>
+        <Data Key="text" Type="Quote"><![CDATA[Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+
+Felhívjuk a figyelmét, hogy a(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy e-mail bejegyzésének kézbesítése nem sikerült. Ellenőrizze, hogy nincs-e a címzett e-mail címében hiba, és próbálja meg újra. Kézileg is újraküldheti a bejegyzést a jegyből, ha szükséges.
+
+Hibaüzenet:
+<OTRS_AGENT_TransmissionStatusMessage>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
+
+-- <OTRS_CONFIG_NotificationSenderName>]]></Data>
+    </Insert>
 
     <!-- notification_event_message - sr_Cyrl -->
     <Insert Table="notification_event_message">
@@ -3932,70 +4013,6 @@ Ponavljanje: &lt;OTRS_APPOINTMENT_RECURRING&gt;<br />
 <a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a><br />
 <br />
 -- &lt;OTRS_CONFIG_NotificationSenderName&gt;]]></Data>
-    </Insert>
-    <Insert Table="notification_event_message">
-        <Data Key="id" Type="AutoIncrement">110</Data>
-        <Data Key="notification_id">15</Data>
-        <Data Key="content_type" Type="Quote">text/plain</Data>
-        <Data Key="language" Type="Quote">en</Data>
-        <Data Key="subject" Type="Quote"><![CDATA[Email Delivery Failure]]></Data>
-        <Data Key="text" Type="Quote"><![CDATA[Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
-
-Please note, that the delivery of an email article of [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has failed. Please check the email address of your recipient for mistakes and try again. You can manually resend the article from the ticket if required.
-
-Error Message:
-<OTRS_AGENT_TransmissionStatusMessage>
-
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
-
--- <OTRS_CONFIG_NotificationSenderName>]]></Data>
-    </Insert>
-    <Insert Table="notification_event_message">
-        <Data Key="id" Type="AutoIncrement">111</Data>
-        <Data Key="notification_id">15</Data>
-        <Data Key="content_type" Type="Quote">text/plain</Data>
-        <Data Key="language" Type="Quote">hu</Data>
-        <Data Key="subject" Type="Quote"><![CDATA[E-mail kézbesítési hiba]]></Data>
-        <Data Key="text" Type="Quote"><![CDATA[Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
-
-Felhívjuk a figyelmét, hogy a(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy e-mail bejegyzésének kézbesítése nem sikerült. Ellenőrizze, hogy nincs-e a címzett e-mail címében hiba, és próbálja meg újra. Kézileg is újraküldheti a bejegyzést a jegyből, ha szükséges.
-
-Hibaüzenet:
-<OTRS_AGENT_TransmissionStatusMessage>
-
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
-
--- <OTRS_CONFIG_NotificationSenderName>]]></Data>
-    </Insert>
-    <Insert Table="notification_event_message">
-        <Data Key="id" Type="AutoIncrement">112</Data>
-        <Data Key="notification_id">16</Data>
-        <Data Key="content_type" Type="Quote">text/plain</Data>
-        <Data Key="language" Type="Quote">en</Data>
-        <Data Key="subject" Type="Quote"><![CDATA[Mention in ticket: <OTRS_TICKET_Title>]]></Data>
-        <Data Key="text" Type="Quote"><![CDATA[Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
-
-you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
-<OTRS_AGENT_BODY[5]>
-
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
-
--- <OTRS_CONFIG_NotificationSenderName>]]></Data>
-    </Insert>
-    <Insert Table="notification_event_message">
-        <Data Key="id" Type="AutoIncrement">113</Data>
-        <Data Key="notification_id">16</Data>
-        <Data Key="content_type" Type="Quote">text/plain</Data>
-        <Data Key="language" Type="Quote">de</Data>
-        <Data Key="subject" Type="Quote"><![CDATA[Erwähnung in Ticket: <OTRS_TICKET_Title>]]></Data>
-        <Data Key="text" Type="Quote"><![CDATA[Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
-
-Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
-<OTRS_AGENT_BODY[5]>
-
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
-
--- <OTRS_CONFIG_NotificationSenderName>]]></Data>
     </Insert>
 
     <!-- Internal dynamic fields for ProcessManagement -->

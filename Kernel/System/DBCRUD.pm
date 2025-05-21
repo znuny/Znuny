@@ -1541,9 +1541,10 @@ sub DataCopy {
 
     delete $Data{ $Self->{Identifier} };
     delete $Data{CreateTime};
-    delete $Data{CreateBy};
     delete $Data{ChangeTime};
-    delete $Data{ChangeBy};
+
+    $Data{CreateBy} = $Param{UserID};
+    $Data{ChangeBy} = $Param{UserID};
 
     my $ObjectID = $Self->DataAdd(
         %Data,

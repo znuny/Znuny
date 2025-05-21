@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.731466227347611;
+    $Self->{Completeness}        = 0.727064220183486;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -80,7 +80,8 @@ sub Data {
         'Change settings' => 'Cambiar configuración',
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Configure lo que quiere cambiar si los criterios corresponden entre si. Tenga en cuenta que \'Possible\' es una lista blanca, \'PossibleNot\' una lista negra.',
-        'Check the official %sdocumentation%s.' => 'Verificar la %sdocumentación%s oficial.',
+        'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
+            '',
         'Edit ACL %s' => 'Editar ACL %s',
         'Edit ACL' => 'Editar ACL',
         'Show or hide the content' => 'Ocultar o mostrar el contenido',
@@ -240,6 +241,19 @@ sub Data {
         'If signing key/certificate is missing' => 'Si la llave o certificado para firmar no se encuentran',
         'If encryption key/certificate is missing' => 'Si la llave o certificado de cifrado no se encuentran',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+        'Filter for Items' => 'Filtro para elementos',
+        'Hint' => 'Pista',
+        'Here you can see all possible article combination that are theoretically available in your system.' =>
+            '',
+        'You can define a background color for each article combination. Click on the color code.' =>
+            '',
+        'Article Color Management' => '',
+        'Sender Type' => 'Tipo de remitente',
+        'Communication Channel' => 'Canal de Comunicacion',
+        'Visible for customer' => 'Visible para el cliente',
+        'Color' => 'Color',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Add Attachment' => 'Adjuntar Archivo',
         'Filter for Attachments' => 'Filtro para Archivos Adjuntos',
@@ -271,7 +285,6 @@ sub Data {
             'Mostrar sólo los registros de comunicación creados en un rango de tiempo específico.',
         'Filter for Communications' => 'Filtro para Comunicaciones',
         'Filter for communications' => 'Filtro para comunicaciones',
-        'Hint' => 'Pista',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             'En esta pantalla puede ver una descripción general de las comunicaciones de entrada y salida.',
         'You can change the sort and order of the columns by clicking on the column header.' =>
@@ -477,31 +490,38 @@ sub Data {
         'Object' => 'Objeto',
         'Delete this field' => 'Eliminar este campo',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
         'Go back to overview' => 'Regresar al resumen',
+        'Add %s field' => 'Agregar %s campo',
+        'Change %s field' => 'Cambiar %s campo',
         'Dynamic Fields' => 'Campos Dinámicos',
         'General' => 'General',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'Este campo es obligatorio, y el valor debe ser sólo de caracteres alfabéticos y numéricos.',
         'Must be unique and only accept alphabetic and numeric characters.' =>
             'Debe ser único y sólo acepta caracteres alfabéticos y numéricos.',
-        'Changing this value will require manual changes in the system.' =>
-            'Cambiar este valor requerirá cambios manuales en el sistema.',
+        'Changing this value will require manual changes to the system.' =>
+            '',
         'This is the name to be shown on the screens where the field is active.' =>
             'Éste es el nombre a ser mostrado en las pantallas en las que el campo esté activo.',
         'Field order' => 'Orden del campo',
         'This field is required and must be numeric.' => 'Este campo es obligatorio y debe ser numérico.',
         'This is the order in which this field will be shown on the screens where is active.' =>
             'Éste es el orden en que se mostrará este campo en las pantallas en las que esté activo.',
-        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
-            'No es posible desactivar esta entrada, todas las configuraciones deben cambiarse de antemano.',
         'Field type' => 'Tipo de campo',
         'Object type' => 'Tipo de objeto',
         'Internal field' => 'Campo interno',
         'This field is protected and can\'t be deleted.' => 'Este campo está protegido y no puede ser eliminado.',
+        'Field Settings' => 'Configuración del Campo',
+        'There is no configuration available for this dynamic field.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+        'Changing this value will require manual changes in the system.' =>
+            'Cambiar este valor requerirá cambios manuales en el sistema.',
+        'Is not possible to invalidate this entry, all config settings have to be changed beforehand.' =>
+            'No es posible desactivar esta entrada, todas las configuraciones deben cambiarse de antemano.',
         'This dynamic field is used in the following config settings:' =>
             'Este campo dinámico es utilizado por los siguientes parámetros de configuración:',
-        'Field Settings' => 'Configuración del Campo',
         'Default value' => 'Valor predeterminado',
         'This is the default value for this field.' => 'Este es el valor predeterminado para este campo.',
 
@@ -788,7 +808,6 @@ sub Data {
         'New type' => 'Nuevo tipo',
         'Archive selected tickets' => 'Archivar tickets seleccionados',
         'Add Note' => 'Agregar Nota',
-        'Visible for customer' => 'Visible para el cliente',
         'Time units' => 'Unidades de tiempo',
         'Execute Ticket Commands' => 'Ejecutar Comandos del Ticket',
         'Send agent/customer notifications on changes' => 'Enviar notificación de cambios al agente/cliente',
@@ -1328,6 +1347,8 @@ sub Data {
         'System Log' => 'Log del Sistema',
         'Recent Log Entries' => 'Registros de eventos recientes',
         'Facility' => 'Instalación',
+        'Source' => '',
+        'Line' => '',
         'Message' => 'Mensaje',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -1364,7 +1385,6 @@ sub Data {
             'Puede agregar favoritos moviendo el cursos sobre el elemento por el lado derecho y haciendo clic en el ícono de estrella.',
         'Links' => 'Vínculos',
         'View the admin manual on Github' => '',
-        'Filter for Items' => 'Filtro para elementos',
         'No Matches' => 'No hay coincidencias',
         'Sorry, your search didn\'t match any items.' => 'Lo sentimos, su búsqueda no coincide con ningún elemento.',
         'Set as favorite' => 'Fijar como favorito',
@@ -1611,7 +1631,6 @@ sub Data {
         'Configure Priority Visibility and Defaults' => '',
         'Priority Management' => 'Administración de Prioridades',
         'Edit Priority' => 'Modificar Prioridad',
-        'Color' => 'Color',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             'Esta prioridad está presente en una configuración de SysConfig, ¡se necesita confirmación para actualizar la configuración y definir la nueva prioridad!',
         'This priority is used in the following config settings:' => 'Esta prioridad se usa en los siguientes parámetros de configuración:',
@@ -1687,7 +1706,6 @@ sub Data {
         'Filter available fields' => 'Filtrar campos disponibles',
         'Assigned Fields' => 'Campos Asignados',
         'Filter assigned fields' => '',
-        'Communication Channel' => 'Canal de Comunicacion',
         'Is visible for customer' => 'Visible para el cliente',
         'Text Template' => 'Plantilla de texto',
         'Auto fill' => '',
@@ -2126,8 +2144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Regrese a Detalles de implementación',
-        'View a custom List of Settings' => 'Ver una lista personalizada de configuraciones',
-        'View single Setting: %s' => 'Ver únicamente una configuración: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2192,6 +2208,25 @@ sub Data {
         'Add missing possible dynamic field values' => '',
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+        'Translation' => '',
+        'Translation Management' => '',
+        'Add Translation' => '',
+        'Edit Translation' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+        'Update Translation' => '',
+        'Language' => 'Idioma',
+        'An entry with this name already exists!' => '',
+        'Destination' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+        'Changed by' => 'Modificado por',
+        'Deployment' => 'Implementar',
+        'Copy this object' => '',
+        'Do you really want to delete this object? All associated data will be lost!' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
@@ -2539,7 +2574,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Information' => 'Información de Estadísticas',
         'Created by' => 'Creado por',
-        'Changed by' => 'Modificado por',
         'Sum rows' => 'Sumar filas',
         'Sum columns' => 'Sumar columnas',
         'Show as dashboard widget' => 'Mostrar como widget en el panel principal',
@@ -2776,7 +2810,6 @@ sub Data {
         'Archive Search' => 'Búsqueda de Archivo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-        'Sender Type' => 'Tipo de remitente',
         'Save filter settings as default' => 'Grabar configuración de filtros como defecto',
         'Event Type' => 'Tipo de Evento',
         'Save as default' => 'Guardar como predeterminado',
@@ -3300,6 +3333,8 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+        'View a custom List of Settings' => 'Ver una lista personalizada de configuraciones',
+        'View single Setting: %s' => 'Ver únicamente una configuración: %s',
         'This setting is disabled.' => 'Esta configuración no está habilitada.',
         'This setting is fixed but not deployed yet!' => '¡Esta configuración es definida pero aún no está implementada!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3337,7 +3372,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => 'Editar búsqueda',
         'Go back to admin: ' => 'Regresar a administración: ',
-        'Deployment' => 'Implementar',
         'My favourite settings' => 'Mis parámetros favoritos',
         'Invalid settings' => 'Parámetros inválidos',
 
@@ -3433,7 +3467,7 @@ sub Data {
         'Mrs.' => 'Sra.',
         'View system log messages.' => 'Ver los mensajes del log del sistema.',
         'Edit the system configuration settings.' => 'Modificar la configuración del sistema.',
-        'Update and extend your system with software packages.' => 'Actualizar y extender su sistema con paquetes de software.',
+        'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3578,10 +3612,12 @@ sub Data {
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'No pudo reajustar el orden de Campo Dinámico apropiadamente, favor revise el registro de errores para más información.',
 
+        # Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
+        'Currently' => 'Actualmente',
+
         # Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
         'Undefined subaction.' => 'Subrutina no definida.',
         'Need %s' => 'Necesita %s',
-        'Add %s field' => 'Agregar %s campo',
         'The field does not contain only ASCII letters and numbers.' => 'El campo no contiene solamente caracteres y números de ASCII.',
         'There is another field with the same name.' => 'Hay otro campo con el mismo nombre.',
         'The field must be numeric.' => 'El campo debe ser numérico.',
@@ -3589,10 +3625,8 @@ sub Data {
         'Could not create the new field' => 'No se pudo crear el nuevo campo',
         'Need ID' => 'Necesita ID',
         'Could not get data for dynamic field %s' => 'No se pudo cargar los datos del campo dinámico %s',
-        'Change %s field' => 'Cambiar %s campo',
         'The name for this field should not change.' => 'El nombre de este campo no debe ser cambiado.',
         'Could not update the field %s' => 'No se pudo actualizar el campo %s',
-        'Currently' => 'Actualmente',
         'Unchecked' => 'Desmarcado',
         'Checked' => 'Marcado',
 
@@ -4147,6 +4181,8 @@ sub Data {
         'Export: Need StatID!' => '',
         'Delete: Get no StatID!' => '',
         'Need StatID!' => '',
+        'This stat does not exist, or you don\'t have permissions to access it.' =>
+            '',
         'Could not load stat.' => '',
         'Add New Statistic' => 'Agregar Nueva Estadística',
         'Could not create statistic.' => '',
@@ -4687,6 +4723,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => 'La configuración está siendo actualizada, por favor tenga paciencia ...',
         'There is an error updating the system configuration!' => '¡Se produjo un error al actualizar la configuración del sistema!',
+
+        # Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+        'The translations in the database are not synchronous. Please synchronize all translations.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/UIDCheck.pm
         'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.' =>
@@ -7638,6 +7678,8 @@ sub Data {
             '',
         'Screens for which it is possible to enable or disable default columns.' =>
             '',
+        'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
+            '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7777,6 +7819,8 @@ sub Data {
             '',
         'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
+        'Do not verify the signer\'s certificate of a signed message.' =>
+            '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
         'General settings for autocompletion in rich text editor.' => '',
@@ -7878,6 +7922,16 @@ sub Data {
             '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
             '',
+        'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
+            '',
+        'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
+            '',
+        'Defines a module to display a notification if translation deployment is needed.' =>
+            '',
+        'Defines the format of exported files when using the admin interface.' =>
+            '',
+        'Defines the separator for export csv files.' => '',
+        'Defines the quote for export csv files.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'temporalmente-inválido',
@@ -8022,6 +8076,9 @@ sub Data {
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             'Se ha producido un error al eliminar el archivo adjunto. Por favor, consulte los registros para obtener más información.',
         'Attachment was deleted successfully.' => 'El archivo adjunto fue eliminado satisfactoriamente.',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+        'Deleting the object and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
@@ -8368,6 +8425,7 @@ sub Data {
         'Sorry, you can only upload %s files.' => 'Lo sentimos, solo puede cargar % s archivos.',
         'Please only select at most %s files for upload.' => 'Seleccione como máximo % s archivos para cargar.',
         'The following files are not allowed to be uploaded: %s' => 'No se permite cargar los siguientes archivos: % s',
+        'The following files types are allowed: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'Los siguientes archivos superan el tamaño máximo permitido por archivo de %s y no se cargaron: %s',
         'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
@@ -8509,6 +8567,7 @@ Tu Equipo de Soporte
         'Appointment list.' => 'Lista de citas.',
         'Appointment notifications' => 'Notificaciones de citas',
         'Arabic (Saudi Arabia)' => 'Árabe (Arabia Saudita)',
+        'Article Color' => '',
         'ArticleTree' => 'ArticleTree',
         'Attachment Name' => 'Nombre del Archivo Adjunto',
         'Avatar' => 'Avatar',
@@ -8600,6 +8659,7 @@ Tu Equipo de Soporte
         'Create and manage ticket priorities.' => 'Crear y gestionar las prioridades del ticket.',
         'Create and manage ticket states.' => 'Crear y gestionar los estados del ticket.',
         'Create and manage ticket types.' => 'Crear y gestionar los tipos de ticket.',
+        'Create and manage translation.' => '',
         'Create and manage web services.' => 'Crear y gestionar web services.',
         'Create new Ticket.' => '',
         'Create new appointment.' => 'Crear nueva cita.',
@@ -8664,6 +8724,7 @@ Tu Equipo de Soporte
         'Dynamic Fields Multiselect Backend GUI' => '',
         'Dynamic Fields Overview Limit' => '',
         'Dynamic Fields Text Backend GUI' => '',
+        'Dynamic fields administration' => '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             '',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => '',
@@ -8765,7 +8826,6 @@ Tu Equipo de Soporte
         'Italian' => 'Italiano',
         'Japanese' => 'Japonés',
         'Korean' => 'Coreano',
-        'Language' => 'Idioma',
         'Large' => 'Grande',
         'Last Mentions' => '',
         'Last Screen Overview' => '',
@@ -8819,6 +8879,8 @@ Tu Equipo de Soporte
         'Manage support data.' => 'Gestionar datos de soporte.',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'Gestionar tareas activadas por eventos o ejecuciones temporales.',
+        'Manage ticket article color.' => '',
+        'Manage translation.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '¡Marcar como correo no deseado!',
         'Mark as seen' => '',
@@ -9039,7 +9101,7 @@ Tu Equipo de Soporte
             '',
         'This is the default orange - black skin.' => '',
         'This key is not certified with a trusted signature!' => '¡Esta llave no está certificada con una firma de confianza!',
-        'This module is part of the admin area of OTRS.' => '',
+        'This module is part of the admin area of Znuny.' => '',
         'Ticket Close.' => 'Cerrar Ticket.',
         'Ticket Compose Bounce Email.' => 'Componer Rebote de Correo Electrónico de Ticket.',
         'Ticket Compose email Answer.' => 'Componer Respuesta de Correo Electrónico de Ticket.',
@@ -9110,6 +9172,7 @@ Tu Equipo de Soporte
         'Web service (Multiselect)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
+        'YAML' => '',
         'Yes, but hide archived tickets' => '',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             '',
@@ -9242,6 +9305,7 @@ Tu Equipo de Soporte
         'Deleting attachment...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
+        'Deleting the object and its data. This may take a while...',
         'Deleting the postmaster filter and its data. This may take a while...',
         'Deleting the template and its data. This may take a while...',
         'Deploy',
@@ -9451,6 +9515,7 @@ Tu Equipo de Soporte
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
+        'The following files types are allowed: %s',
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',

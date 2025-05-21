@@ -368,6 +368,20 @@ sub Preferences {
     my @ColumnsAvailableNotEnabled;
 
     # check for default settings
+
+    $Self->{PageShownData} = {
+        5  => ' 5',
+        10 => '10',
+        15 => '15',
+        20 => '20',
+        25 => '25',
+        50 => '50',
+    };
+
+    if ( $Self->{Config}->{DefaultPageShown} && IsHashRefWithData( $Self->{Config}->{DefaultPageShown} ) ) {
+        $Self->{PageShownData} = $Self->{Config}->{DefaultPageShown};
+    }
+
     if (
         $Self->{Config}->{DefaultColumns}
         && IsHashRefWithData( $Self->{Config}->{DefaultColumns} )
@@ -433,17 +447,10 @@ sub Preferences {
 
     my @Params = (
         {
-            Desc  => Translatable('Shown Tickets'),
-            Name  => $Self->{PrefKeyShown},
-            Block => 'Option',
-            Data  => {
-                5  => ' 5',
-                10 => '10',
-                15 => '15',
-                20 => '20',
-                25 => '25',
-                50 => '50',
-            },
+            Desc        => Translatable('Shown Tickets'),
+            Name        => $Self->{PrefKeyShown},
+            Block       => 'Option',
+            Data        => $Self->{PageShownData},
             SelectedID  => $Self->{PageShown},
             Translation => 0,
         },

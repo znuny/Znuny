@@ -4,6 +4,7 @@ The following persons contributed to Znuny:
 * Alex Kantchev <ak@otrs.com>
 * Alex Mazur <alex.mazur@otrs.com>
 * Alexandre D. Rogoski <alexandre@exatati.com.br>
+* AM Mike <monitoring@amlogisticsolutions.de>
 * André Brás <andre.bras@otrs.com>
 * Balazs Ur <balazs.ur@otrs.com>
 * Balázs Úr <balazs.ur@otrs.com>
@@ -25,6 +26,7 @@ The following persons contributed to Znuny:
 * Diego Selzlein <diegoselzlein@gmail.com>
 * Dietmar Berg <dietmar.berg@thalesgroup.com>
 * Dominik Klein <dominik.klein@otrs.com>
+* DonMarlowne <184617043+DonMarlowne@users.noreply.github.com>
 * Dusan Vuckovic <dusan.vuckovic@otrs.com>
 * Elias Probst <elias.probst@otrs.com>
 * Elva Novoa <elva.novoa@otrs.com>
@@ -39,6 +41,7 @@ The following persons contributed to Znuny:
 * Gerald Young <gerald.young@noynim.com>
 * Henning Oschwald <henning.oschwald@otrs.com>
 * Henrik Vetter <hv@znuny.com>
+* Hog Duske <hog.duske@dusketech.de>
 * IB Development Team <dev@ib.pl>
 * Igor Djuric <igor.djuric@otrs.com>
 * Ivo Oliveira <128880860+Bashizz@users.noreply.github.com>
@@ -60,7 +63,7 @@ The following persons contributed to Znuny:
 * Manuel Hecht <manuel.hecht@otrs.com>
 * Marc Bonsels <marc.bonsels@otrs.com>
 * Marc Nilius <marc.nilius@otrs.com>
-* MarcPahnke <89537707+MarcPahnke@users.noreply.github.com>
+* Marc Pahnke <89537707+MarcPahnke@users.noreply.github.com>
 * Marco Buchholz <marco.buchholz@otrs.com>
 * Marco Ferrante <marco@csita.unige.it>
 * Marcos Silverio <marcos.aurelio@infracerta.com.br>
@@ -133,7 +136,6 @@ The following persons contributed to Znuny:
 * anonymous <unknown@anonymous>
 * arlecchino <kolbma@users.noreply.github.com>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
-* djurici <igor.djuric@muehlbauer.de>
 * forwwward <hello@forwwward.studio>
 * itweserems <153607410+itweserems@users.noreply.github.com>
 * jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
@@ -141,6 +143,4 @@ The following persons contributed to Znuny:
 * meisterheister <35762852+meisterheister@users.noreply.github.com>
 * s7design <otrs@s7designcreative.com>
 * sergot <filip@sergot.pl>
-* tipue <tim.puettmanns@maxence.de>
 * vlascoder <vlascoder@gmail.com>
-* vuckovicd <dusan.vuckovic@muehlbauer.de>
