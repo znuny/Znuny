@@ -1,7 +1,7 @@
 # --
 # Copyright (C) 2003-2010 Tomasz Melissa <janek at rumianek.com>
 # Copyright (C) 2009 Artur Skalski <skal.ar at wp.pl>
-# Copyright (C) 2011 Informatyka Boguslawski sp. z o.o. sp.k., https://www.ib.pl/
+# Copyright (C) 2011-2013 Informatyka Boguslawski sp. z o.o. sp.k., https://www.ib.pl/
 # Copyright (C) 2014 Wojciech Myrda <wmyrda at auticon.pl>, http://www.auticon.pl
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
@@ -2028,19 +2028,6 @@ sub Data {
         'Available Certificates' => 'Dostępne certyfikaty',
         'Filter for S/MIME certs' => 'Filtruj certyfikaty S/MIME',
         'Relate this certificate' => 'Powiąż ten certyfikat',
-        'Error removing private key, certificate removing aborted: %s!' => 'Błąd przy usuwaniu klucza prywatnego, usuwanie certyfikatu anulowane: %s!',
-        'Certificate and its private key removed' => 'Certyfikat i jego klucz prywatny usunięte',
-        'Error removing certificate, only its private key was removed: %s!' => 'Błąd przy usuwaniu certyfikatu, usunięty został tylko jego klucz prywatny: %s!',
-        'Certificate removed' => 'Certyfikat usunięty',
-        'Certificate already installed!' => 'Certyfikat jest już zainstalowany!',
-        'Certificate uploaded' => 'Certyfikat załadowany',
-        'Private key uploaded' => 'Klucz prywatny załadowany',
-        'Can\'t add invalid private key!' => 'Nie mogę dodać niepoprawnego klucza prywatnego!',
-        'Can\'t add invalid certificate!' => 'Nie mogę dodać niepoprawnego certyfikatu!',
-        'No more available filenames for certificate hash:%s!' => 'Brak dalszych nazw plików dla skrótu certyfikatu:%s!',
-        'No private key!' => 'Brak klucza prywatnego!',
-        'Certificate for private key not found (upload it first) or invalid private key or invalid password: %s!' => 'Brak certyfikatu do klucza prywatnego (załaduj go najpierw) lub niepoprawny klucz prywatny lub niepoprawne hasło: %s!',
-        'Private key deleted' => 'Klucz prywatny usunięty',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
         'S/MIME Certificate' => 'Certyfikat S/MIME',
@@ -8331,7 +8318,7 @@ sub Data {
         'Are you sure you want to overwrite the config parameters?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
-        'Do you really want to delete this item?' => 'Czy na pewno chcesz usunąć ten element?',
+        'Do you really want to delete this certificate?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
         'Sending Update...' => 'Wysyłanie aktualizacji...',
