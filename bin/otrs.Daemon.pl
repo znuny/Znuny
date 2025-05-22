@@ -72,9 +72,9 @@ my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 # get the NodeID from the SysConfig settings, this is used on High Availability systems.
 my $NodeID = $ConfigObject->Get('NodeID') || 1;
 
-# check NodeID, if does not match its impossible to continue
-if ( $NodeID !~ m{ \A \d+ \z }xms && $NodeID > 0 && $NodeID < 1000 ) {
-    print STDERR "NodeID '$NodeID' is invalid. Change the NodeID to a number between 1 and 999.";
+# check NodeID, if it does not match, it's impossible to continue
+if ( $NodeID !~ m{\A[1-9]\d{0,2}\z} ) {
+    print STDERR "NodeID '$NodeID' is invalid. Change it to a number between 1 and 999.";
     exit 1;
 }
 
