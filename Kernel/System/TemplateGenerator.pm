@@ -476,6 +476,7 @@ sub Template {
     );
 
     if ( $Self->{RichText} ) {
+        $TemplateText =~ s/&amp;nbsp;/&nbsp;/g;
         $TemplateText =~ s/&lt;/</g;
         $TemplateText =~ s/&gt;/>/g;
         $TemplateText =~ s/&quot;/"/g;
