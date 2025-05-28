@@ -1,6 +1,3 @@
-# ?.?.? ????-??-??
- - 2025-05-28 Added parameter SendmailModule::Timeout to allow SMTP timeout configuration.
-
 # 6.5.1 2023-03-09
  - 2023-02-28 Added options tickets-created-before-date and tickets-created-before-days to console command Admin::Article::StorageSwitch.
  - 2023-02-28 Fixed encoding of postmaster filter name in AdminPostMasterFilter.
