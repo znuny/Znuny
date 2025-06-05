@@ -1,0 +1,51 @@
+networks:
+  znuny-net:
+    driver: bridge
+
+volumes:
+  znuny_db_data:
+  znuny_httpd_data:
+
+services:
+  znuny:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: znuny:${ZNUNY_VERSION:-7.1.7}
+    container_name: znuny_httpd
+    mem_limit: ${ZNUNY_MEMLIMIT:-2048m}
+    privileged: true
+    depends_on:
+      - mariadb
+    volumes:
+      - znuny_httpd_data:/opt/znuny
+    restart: ${RESTART:-unless-stopped}
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+    networks:
+      - znuny-net
+    labels:
+      org.label-schema.group: "znuny"
+
+  mariadb:
+    image: mariadb:${MARIADB_VERSION:-11.4.7}
+    container_name: znuny_db
+    mem_limit: ${ZNUNY_DB_MEMLIMIT:-2048m}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASS:-root-pass}
+      MYSQL_DATABASE: ${DATA_BASE_NAME:-znuny}
+      MYSQL_USER: ${DB_USER:-znuny}
+      MYSQL_PASSWORD: ${DB_USER_PASS:-some-pass}
+    volumes:
+      - znuny_db_data:/var/lib/mysql
+    restart: ${RESTART:-unless-stopped}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    networks:
+      - znuny-net
+    command: [
+      "--max_allowed_packet=256M",
+      "--innodb_log_file_size=512M"
+    ]
+    labels:
+      org.label-schema.group: "znuny"
