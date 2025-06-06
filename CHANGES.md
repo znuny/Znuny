@@ -1,3 +1,8 @@
+# 6.5.16 2025-??-??
+ - 2025-05-15 Fixed bug - Process Management: Dynamic Field Long Description is on the wrong side of Label.
+ - 2025-05-05 Fixed: Memory overflow in calendar event when displayed in the ticket detail view. Thanks to @DonMarlowne. [PR#652](https://github.com/znuny/Znuny/pull/652)
+ - 2025-03-26 Fixed tree view icon not showing up for dynamic field types Dropdown and Multiselect.
+
 # 6.5.15 2025-04-30
  - 2025-04-24 Fixed bug - Setting the password does not reset preferences UserLoginFailed and UserLastPwChangeTime.
  - 2025-04-16 Updated Net::IMAP::Simple to latest version from GitHub. Thanks to @dandanpena. [PR#155](https://github.com/znuny/Znuny/pull/155)

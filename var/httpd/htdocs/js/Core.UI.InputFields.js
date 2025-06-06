@@ -1204,7 +1204,7 @@ Core.UI.InputFields = (function (TargetNS) {
                 $ShowTreeObj = $SelectObj.next('.ShowTreeSelection');
                 if ($SelectObj.data('tree') || $ShowTreeObj.length) {
                     if ($ShowTreeObj.length) {
-                        $ShowTreeObj.hide();
+                        $ShowTreeObj.show();
                     }
                     $SelectObj.data('tree', true);
                     TreeView = true;
