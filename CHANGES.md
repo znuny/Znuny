@@ -1,3 +1,6 @@
+# ?.?.? ????-??-??
+ - 2025-06-06 Added parameter SMIME::NoDefaultCA to allow disable loading of default CA certificates on S/MIME verification.
+
 # 6.5.15 2025-04-30
  - 2025-04-24 Fixed bug - Setting the password does not reset preferences UserLoginFailed and UserLastPwChangeTime.
  - 2025-04-16 Updated Net::IMAP::Simple to latest version from GitHub. Thanks to @dandanpena. [PR#155](https://github.com/znuny/Znuny/pull/155)

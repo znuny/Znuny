@@ -1127,6 +1127,7 @@ sub LoadDefaults {
 
 #    $Self->{'SMIME::CertPath'} = '/etc/ssl/certs';
 #    $Self->{'SMIME::PrivatePath'} = '/etc/ssl/private';
+#    $Self->{'SMIME::NoDefaultCA'} = 0;
 
     # --------------------------------------------------- #
     # system permissions
