@@ -635,6 +635,7 @@ sub Run {
         TicketDynamicFields => $DynamicFieldList,
         AttachmentList      => \@AttachmentList,
         UserID              => $UserID,
+        PermissionUserID    => $PermissionUserID,
         UserType            => $UserType,
     );
 }
@@ -1353,9 +1354,13 @@ sub _CheckUpdatePermissions {
     # get ticket object
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
+    my $TicketPermissionFunctionName = $Param{UserType} eq 'Customer'
+        ? 'TicketCustomerPermission'
+        : 'TicketPermission';
+
     # check Article permissions
     if ( IsHashRefWithData($Article) ) {
-        my $Access = $TicketObject->TicketPermission(
+        my $Access = $TicketObject->$TicketPermissionFunctionName(
             Type     => 'note',
             TicketID => $TicketID,
             UserID   => $Param{UserID},
@@ -1370,7 +1375,7 @@ sub _CheckUpdatePermissions {
 
     # check dynamic field permissions
     if ( IsArrayRefWithData($DynamicFieldList) ) {
-        my $Access = $TicketObject->TicketPermission(
+        my $Access = $TicketObject->$TicketPermissionFunctionName(
             Type     => 'rw',
             TicketID => $TicketID,
             UserID   => $Param{UserID},
@@ -1385,7 +1390,7 @@ sub _CheckUpdatePermissions {
 
     # check queue permissions
     if ( $Ticket->{Queue} || $Ticket->{QueueID} ) {
-        my $Access = $TicketObject->TicketPermission(
+        my $Access = $TicketObject->$TicketPermissionFunctionName(
             Type     => 'move',
             TicketID => $TicketID,
             UserID   => $Param{UserID},
@@ -1400,7 +1405,7 @@ sub _CheckUpdatePermissions {
 
     # check owner permissions
     if ( $Ticket->{Owner} || $Ticket->{OwnerID} ) {
-        my $Access = $TicketObject->TicketPermission(
+        my $Access = $TicketObject->$TicketPermissionFunctionName(
             Type     => 'owner',
             TicketID => $TicketID,
             UserID   => $Param{UserID},
@@ -1415,7 +1420,7 @@ sub _CheckUpdatePermissions {
 
     # check responsible permissions
     if ( $Ticket->{Responsible} || $Ticket->{ResponsibleID} ) {
-        my $Access = $TicketObject->TicketPermission(
+        my $Access = $TicketObject->$TicketPermissionFunctionName(
             Type     => 'responsible',
             TicketID => $TicketID,
             UserID   => $Param{UserID},
@@ -1430,7 +1435,7 @@ sub _CheckUpdatePermissions {
 
     # check priority permissions
     if ( $Ticket->{Priority} || $Ticket->{PriorityID} ) {
-        my $Access = $TicketObject->TicketPermission(
+        my $Access = $TicketObject->$TicketPermissionFunctionName(
             Type     => 'priority',
             TicketID => $TicketID,
             UserID   => $Param{UserID},
@@ -1469,7 +1474,7 @@ sub _CheckUpdatePermissions {
         my $Access = 1;
 
         if ( $StateData{TypeName} =~ /^close/i ) {
-            $Access = $TicketObject->TicketPermission(
+            $Access = $TicketObject->$TicketPermissionFunctionName(
                 Type     => 'close',
                 TicketID => $TicketID,
                 UserID   => $Param{UserID},
@@ -1478,7 +1483,7 @@ sub _CheckUpdatePermissions {
 
         # set pending time
         elsif ( $StateData{TypeName} =~ /^pending/i ) {
-            $Access = $TicketObject->TicketPermission(
+            $Access = $TicketObject->$TicketPermissionFunctionName(
                 Type     => 'close',
                 TicketID => $TicketID,
                 UserID   => $Param{UserID},
@@ -1502,13 +1507,14 @@ sub _CheckUpdatePermissions {
 updates a ticket and creates an article and sets dynamic fields and attachments if specified.
 
     my $Response = $OperationObject->_TicketUpdate(
-        TicketID     => 123,
-        Ticket       => $Ticket,                  # all ticket parameters
-        Articles     => @Articles,                # all article parameters, optionally with dynamic fields
-        DynamicField => $DynamicField,            # all ticket dynamic field parameters
-        Attachment   => $Attachment,              # all attachment parameters
-        UserID       => 123,
-        UserType     => 'Agent'                   # || 'Customer
+        TicketID         => 123,
+        Ticket           => $Ticket,                  # all ticket parameters
+        Articles         => @Articles,                # all article parameters, optionally with dynamic fields
+        DynamicField     => $DynamicField,            # all ticket dynamic field parameters
+        Attachment       => $Attachment,              # all attachment parameters
+        UserID           => 123,
+        PermissionUserID => 201,                      # User for which permissions will be checked
+        UserType         => 'Agent'                   # || 'Customer
     );
 
     returns:
@@ -1539,7 +1545,10 @@ sub _TicketUpdate {
     my $TicketDynamicFields = $Param{TicketDynamicFields};
     my $AttachmentList      = $Param{AttachmentList};
 
-    my $Access = $Self->_CheckUpdatePermissions(%Param);
+    my $Access = $Self->_CheckUpdatePermissions(
+        %Param,
+        UserID => $Param{PermissionUserID},
+    );
 
     # if no permissions return error
     if ( !$Access->{Success} ) {

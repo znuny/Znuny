@@ -1,3 +1,4 @@
+
 # 6.5.16 2025-??-??
  - 2025-06-05 Fixed: Added missing required parameter UserType in Kernel::System::AuthSession->() to Perldoc. Added optional parameter SessionSource to Perldoc.
  - 2025-05-20 Fixed: Multiple spaces in templates not replaced correctly when using placeholders (e.g. OTRS_CUSTOMER_BODY).
@@ -5,6 +6,7 @@
  - 2025-05-05 Fixed: Memory overflow in calendar event when displayed in the ticket detail view. Thanks to @DonMarlowne. [PR#652](https://github.com/znuny/Znuny/pull/652)
  - 2025-04-30 Fixed: broken OTRS_CUSTOMER_REALNAME placeholder expansion in AgentTicketMerge.
  - 2025-03-26 Fixed: Tree view icon not showing up for dynamic field types Dropdown and Multiselect.
+ - 2025-03-25 Generic interface operation TicketUpdate now checks detailed ticket permissions of customer user.
 
 # 6.5.15 2025-04-30
  - 2025-04-24 Fixed bug - Setting the password does not reset preferences UserLoginFailed and UserLastPwChangeTime.
