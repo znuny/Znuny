@@ -3911,6 +3911,7 @@
                 <Item>\AUserSystemConfigurationFavourites\z</Item>
                 <Item>\AUserTicketZoomArticleTableHeight\z</Item>
                 <Item>\AUserDashboardWidgetExpand\z</Item>
+                <Item>\AUserToolBar\z</Item>
                 <Item>\AUserToolBarSearchBackend\z</Item>
 
                 <!-- Core.Agent.Admin.SystemConfiguration.Init, sidebar action widget toggle -->
