@@ -441,7 +441,7 @@ sub CustomerSearch {
     return if !$Self->{DBObject}->Prepare(
         SQL   => $SQL,
         Bind  => \@Bind,
-        Limit => $Param{Limit} // $Self->{UserSearchListLimit},
+        Limit => $Param{Limit} || $Self->{UserSearchListLimit},
     );
 
     my @CustomerUserData;
