@@ -3906,10 +3906,11 @@
             <Array>
                 <Item>\AAdminNavigationBarFavourites\z</Item>
                 <Item>\AUserAgentDoNotShowBrowserLinkMessage\z</Item>
-                <Item>\AUserPopupProfile\z</Item>
+                <Item>\AUserPopupProfile.+</Item>
                 <Item>\AUserSystemConfigurationCategory\z</Item>
                 <Item>\AUserSystemConfigurationFavourites\z</Item>
                 <Item>\AUserTicketZoomArticleTableHeight\z</Item>
+                <Item>\AUserToolBar\z</Item>
                 <Item>\AUserDashboardWidgetExpand\z</Item>
                 <Item>\AUserToolBarSearchBackend\z</Item>
 
