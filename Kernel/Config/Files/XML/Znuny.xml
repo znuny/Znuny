@@ -3912,7 +3912,9 @@
                 <Item>\AUserTicketZoomArticleTableHeight\z</Item>
                 <Item>\AUserToolBar\z</Item>
                 <Item>\AUserDashboardWidgetExpand\z</Item>
+                <Item>\AUserToolBar\z</Item>
                 <Item>\AUserToolBarSearchBackend\z</Item>
+                <Item>\AUserNavBarItemsOrder\z</Item>
 
                 <!-- Core.Agent.Admin.SystemConfiguration.Init, sidebar action widget toggle -->
                 <Item>\AUserWidgetState.+</Item>

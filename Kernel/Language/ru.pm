@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.859606312022125;
+    $Self->{Completeness}        = 0.860257035952497;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2662,7 +2662,7 @@ sub Data {
         'Unlock tickets' => 'Разблокировать заявки',
         'Watch tickets' => 'Наблюдать за заявками',
         'Mark tickets as' => '',
-        'Execute Bulk Action' => 'Выполнить Массовое действие',
+        'Execute Bulk Action' => 'Выполнить массовое действие',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
         'Compose Answer for %s%s%s' => 'Создать ответ для %s%s%s',
@@ -4612,8 +4612,8 @@ sub Data {
         'Print this article' => 'Напечатать это сообщение',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
-        'Mark article as unseen' => 'Отметить сообщение как непрочитанное',
-        'Mark as unseen' => 'Отметить как непрочитанное',
+        'Mark article as unseen' => 'Пометить сообщение как непрочитанное',
+        'Mark as unseen' => 'Пометить как непрочитанное',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Пометить',
@@ -6632,7 +6632,7 @@ sub Data {
         'Defines if time accounting is mandatory in the agent interface. If enabled, a note must be entered for all ticket actions (no matter if the note itself is configured as active or is originally mandatory for the individual ticket action screen).' =>
             '',
         'Defines if time accounting must be set to all tickets in bulk action.' =>
-            'Включить Учет времени для всех заявок при массовом действии.',
+            'Включает Учет времени для всех заявок при массовом действии.',
         'Defines the default ticket attribute for ticket sorting in the status view of the agent interface.' =>
             'Задает атрибут заявки по умолчанию для сортировки заявок в обзоре статусов заявок в интерфейсе агента.',
         'Defines the default ticket order (after priority sort) in the status view of the agent interface. Up: oldest on top. Down: latest on top.' =>
@@ -7097,7 +7097,7 @@ sub Data {
         'Defines the history comment for the ticket responsible screen action, which gets used for ticket history in the agent interface.' =>
             'Задает текст комментария в записи истории для экрана назначения Ответственного, в интерфейсе агента.',
         'Automatically lock and set owner to current Agent after selecting for an Bulk Action.' =>
-            'Автоматически блокирует заявку и назначает текущего агента владельцем при выборе массового действия',
+            'Автоматически блокирует заявку и назначает текущего агента владельцем при выборе массового действия.',
         'Sets the ticket type in the ticket bulk screen of the agent interface.' =>
             'Задает Тип заявки при массовом действии с заявками в интерфейсе агента. (Ticket::Type должен быть активирован).',
         'Sets the ticket owner in the ticket bulk screen of the agent interface.' =>
@@ -7105,9 +7105,9 @@ sub Data {
         'Sets the responsible agent of the ticket in the ticket bulk screen of the agent interface.' =>
             'Задает Ответственного за заявку при массовом действии с заявками в интерфейсе агента.',
         'Sets the state of a ticket in the ticket bulk screen of the agent interface.' =>
-            '',
+            'Задает Состояние заявки при массовом действии с заявками в интерфейсе агента.',
         'Defines the next state of a ticket, in the ticket bulk screen of the agent interface.' =>
-            '',
+            'Определяет следующее состояние для заявки на экране массового действия с заявками в интерфейсе агента.',
         'Defines the default next state of a ticket, in the ticket bulk screen of the agent interface.' =>
             'Определяет следующее состояние по умолчанию для заявки на экране массового действия с заявками в интерфейсе агента.',
         'Shows the ticket priority options in the ticket bulk screen of the agent interface.' =>
@@ -7840,9 +7840,9 @@ sub Data {
         'Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").' =>
             '',
         'Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled).' =>
-            '',
+            'Задает Сервис заявки при массовом действии с заявками в интерфейсе агента (Ticket::Service должен быть активирован).',
         'Dynamic fields shown in the ticket bulk screen of the agent interface.' =>
-            '',
+            'Динамические поля, которые будут отображаться на экране массовых действий в интерфейсе агента.',
         'This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values.' =>
             '',
         'Default format for export files.' => '',
@@ -7992,15 +7992,15 @@ sub Data {
         'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
             'Определяет параметры конфигурации, доступные в персональных настройках. Если сотрудник не выберет значение, он будет перенаправлен на URL-адрес страницы по умолчанию, заданный \'MarkTicketSeenRedirectDefaultURL\' параметром системной конфигурации.',
         'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
-            'Определяет URL-адрес страницы для отметки сообщения заявки как \'прочитанное\'.',
+            'Определяет URL-адрес страницы для пометки сообщения заявки как \'прочитанное\'.',
         'Registers a link in the ticket menu to mark a ticket as unseen.' =>
-            'Регистрирует ссылку в меню заявки для отметки заявки как непрочитанной.',
+            'Регистрирует ссылку в меню заявки для пометки заявки как непрочитанной.',
         'Registers a link in the ticket menu to mark a ticket as seen.' =>
-            'Регистрирует ссылку в меню заявки для отметки заявки как прочитанной.',
+            'Регистрирует ссылку в меню заявки для пометки заявки как прочитанной.',
         'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.' =>
-            'Регистрирует ссылку в меню заявки в обзоре заявок для отметки всех сообщений заявки как непрочитанные.',
+            'Регистрирует ссылку в меню заявки в обзоре заявок для пометки всех сообщений заявки как непрочитанные.',
         'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.' =>
-            'Регистрирует ссылку в меню заявки в обзоре заявок для отметки всех сообщений заявки как прочитанные.',
+            'Регистрирует ссылку в меню заявки в обзоре заявок для пометки всех сообщений заявки как прочитанные.',
         'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "agent".' =>
             '',
         'Mapping of ticket priority to X-Priority email header for outgoing emails of communication channel "system".' =>
@@ -8716,9 +8716,9 @@ Thanks for your help!
         'Configure which screen should be shown after a new ticket has been created.' =>
             'Выберите экран, который должен отображаться после создания новой заявки.',
         'Configure which screen should be shown after marking a ticket or article as seen.' =>
-            'Настраивает экран, который должен отображаться после отметки заявки или сообщения как прочитанное.',
+            'Настраивает экран, который должен отображаться после пометки заявки или сообщения как прочитанное.',
         'Configure which screen should be shown after marking a ticket or article as unseen.' =>
-            'Настраивает экран, который должен отображаться после отметки заявки или сообщения как непрочитанное.',
+            'Настраивает экран, который должен отображаться после пометки заявки или сообщения как непрочитанное.',
         'Create New process ticket.' => 'Создать новую процессную заявку.',
         'Create Process Ticket' => '',
         'Create Ticket' => 'Создание заявки',
@@ -8971,7 +8971,7 @@ Thanks for your help!
         'Mark as seen' => '',
         'Mark this ticket as junk!' => 'Пометить эту заявку как мусор!',
         'Mark ticket as seen' => 'Пометить заявку как прочитанную',
-        'Mark ticket as unseen' => 'Отметить заявку как непрочитанную',
+        'Mark ticket as unseen' => 'Пометить заявку как непрочитанную',
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => 'Максимальное число сообщений на странице при просмотре заявки',
         'Medium' => 'Средний',
@@ -9078,8 +9078,8 @@ Thanks for your help!
         'Russian' => 'Русский',
         'S/MIME Certificates' => 'Сертификаты S/MIME',
         'Schedule a maintenance period.' => 'Управлять периодом обслуживания.',
-        'Screen after marking as seen' => 'Страница после отметки как прочитанное',
-        'Screen after marking as unseen' => 'Страница после отметки как непрочитанное',
+        'Screen after marking as seen' => 'Страница после пометки как прочитанное',
+        'Screen after marking as unseen' => 'Страница после пометки как непрочитанное',
         'Screen after new ticket' => 'Экран после создания новой заявки',
         'Search Customer' => 'Искать клиента',
         'Search Ticket.' => 'Поиск заявки.',
