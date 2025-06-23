@@ -775,8 +775,17 @@ sub _Overview {
         # get config object
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-        # Shown customer limitation in AdminCustomerCompany.
+        # Use the smallest results limit from all sources as results limit but don't exceed 400 to avoid overloads.
         my $Limit = 400;
+        SOURCE:
+        for my $Count ( '', 1 .. 10 ) {
+            next SOURCE if !$ConfigObject->Get("CustomerCompany$Count");
+            my $CustomerUserMap = $ConfigObject->Get("CustomerCompany$Count");
+            next SOURCE if !$CustomerUserMap->{CustomerCompanySearchListLimit};
+            if ( $CustomerUserMap->{CustomerCompanySearchListLimit} < $Limit ) {
+                $Limit = $CustomerUserMap->{CustomerCompanySearchListLimit};
+            }
+        }
 
         # Search customers with limit (+1 to decide if "more available" must be displayed)
         # this may actually return ( ($Limit + 1) * # of backends ) number of results; will be

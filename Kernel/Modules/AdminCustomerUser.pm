@@ -887,8 +887,17 @@ sub _Overview {
         # when there is no data to show, a message is displayed on the table with this colspan
         my $ColSpan = 6;
 
-        # Shown customer user limitation in AdminCustomerUser.
+        # Use the smallest results limit from all sources as results limit but don't exceed 400 to avoid overloads.
         my $Limit = 400;
+        SOURCE:
+        for my $Count ( '', 1 .. 10 ) {
+            next SOURCE if !$ConfigObject->Get("CustomerUser$Count");
+            my $CustomerUserMap = $ConfigObject->Get("CustomerUser$Count");
+            next SOURCE if !$CustomerUserMap->{CustomerUserSearchListLimit};
+            if ( $CustomerUserMap->{CustomerUserSearchListLimit} < $Limit ) {
+                $Limit = $CustomerUserMap->{CustomerUserSearchListLimit};
+            }
+        }
 
         # Search customer users with limit (+1 to decide if "more available" must be displayed);
         # this may actually return ( ($Limit + 1) * # of backends ) number of results; will be

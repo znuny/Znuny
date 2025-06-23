@@ -800,18 +800,11 @@ sub UserSearch {
             . join( ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet() ) . ")";
     }
 
-    # Use limit specified in function call if specified but do not
-    # go beyond source limit.
-    my $Limit = $Param{Limit} // $Self->{UserSearchListLimit};
-    if ( defined $Self->{UserSearchListLimit} && ( $Limit > $Self->{UserSearchListLimit} ) ) {
-        $Limit = $Self->{UserSearchListLimit};
-    }
-
     # get data
     return if !$DBObject->Prepare(
         SQL   => $SQL,
         Bind  => \@Bind,
-        Limit => $Limit,
+        Limit => $Self->{UserSearchListLimit} || $Param{Limit},
     );
 
     # fetch the result
