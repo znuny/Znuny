@@ -323,7 +323,7 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Module###AgentTicketToUnitTest" Required="1" Valid="1">
+    <Setting Name="Frontend::Module###AgentTicketToUnitTest" Required="0" Valid="0">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
         <Value>
