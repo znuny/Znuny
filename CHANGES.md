@@ -250,7 +250,7 @@
  - 2021-10-01 Added initial config for Frontend::Navigation###AdminCustomerUserCustomer###001-Framework. Thanks to Kevin Janssen (@BuTzZ). [#146](https://github.com/znuny/Znuny/pull/146)
  - 2021-10-01 Disabled connection to external RSS during unit testing.
  - 2021-10-01 Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME (OTRS bug #14522). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
- - 2021-08-31 Added generic interface operation SessionRemove. Thanks to Kevin Janssen (@BuTzZ). [#12https://github.com/znuny/Znuny/pull/6910](https://github.com/znuny/Znuny/pull/120)
+ - 2021-08-31 Added generic interface operation SessionRemove. Thanks to Kevin Janssen (@BuTzZ). [#120](https://github.com/znuny/Znuny/pull/120)
  - 2021-08-20 Added SysConfig option to enable week numbers in the datepicker widget. Thanks to Renée Bäcker (@reneeb). [#89](https://github.com/znuny/Znuny/pull/89)
  - 2021-08-20 Added new autocomplete values to input fields. Thanks to Tim Püttmanns (@tipue-dev), maxence. [#67](https://github.com/znuny/Znuny/pull/67)
 
