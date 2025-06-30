@@ -166,7 +166,7 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
 
         if (TooltipPosition === 'TongueBottom') {
             TopOffset = Offset.top + OffsetTopFileUpload;
-        } 
+        }
         else if (TooltipPosition === 'TongueTop') {
             TopOffset = Offset.top + $Element.height() - $TooltipContainer.height() - OffsetTopFileUpload + TongueHeight;
         }
