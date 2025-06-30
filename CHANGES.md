@@ -4,6 +4,7 @@
  - 2025-06-17 Fixed: Added missing parameter TwoFactorToken in Kernel::GenericInterface::Operation::Session::Common->CreateSessionID() to Perldoc.
  - 2025-06-06 Fixed: TLD of email address in S/MIME certificates is limited in length to two to four characters. Thanks for reporting to @dsm-museum-it. [#674](https://github.com/znuny/Znuny/issues/674)
  - 2025-06-05 Fixed: Added missing required parameter UserType in Kernel::System::AuthSession->() to Perldoc. Added optional parameter SessionSource to Perldoc.
+ - 2025-05-22 Fixed: Generic interface operation Session::SessionRemove requires a user login instead of just a valid session ID. [#638](https://github.com/znuny/Znuny/issues/638).
  - 2025-05-20 Fixed: Multiple spaces in templates not replaced correctly when using placeholders (e.g. OTRS_CUSTOMER_BODY).
  - 2025-05-15 Fixed: Process Management: Dynamic field long description is on the wrong side of Label.
  - 2025-05-05 Fixed: Memory overflow in calendar event when displayed in the ticket detail view. Thanks to @DonMarlowne. [PR#652](https://github.com/znuny/Znuny/pull/652)
