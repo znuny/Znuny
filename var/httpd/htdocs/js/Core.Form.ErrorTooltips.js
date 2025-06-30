@@ -133,7 +133,8 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
         if (FileUploadElement) {
             OffsetTopFileUpload = 55;  
             OffsetLeftFileUpload = 40;
-        } else {
+        } 
+        else {
             OffsetTopFileUpload = TooltipOffsetTop;  
             OffsetLeftFileUpload = TooltipOffsetLeft;
         }
@@ -144,7 +145,8 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
          */
         if (($(document).width() - $Element.offset().left) < 250) {
             TongueClass = 'TongueRight';
-        } else {
+        } 
+        else {
             TongueClass = 'TongueLeft';  
         }
 
@@ -164,7 +166,8 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
 
         if (TooltipPosition === 'TongueBottom') {
             TopOffset = Offset.top + OffsetTopFileUpload;
-        } else if (TooltipPosition === 'TongueTop') {
+        } 
+        else if (TooltipPosition === 'TongueTop') {
             TopOffset = Offset.top + $Element.height() - $TooltipContainer.height() - OffsetTopFileUpload + TongueHeight;
         }
 
