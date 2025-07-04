@@ -25,27 +25,9 @@
         <div class="Header">
             <div>
                 <h1>
-[% RenderBlockStart("HeaderAgentTicketFreeText") %]
-    [% Translate("Change Free Text of %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]
-[% RenderBlockEnd("HeaderAgentTicketFreeText") %]
-[% RenderBlockStart("HeaderAgentTicketOwner") %]
-    [% Translate("Change Owner of %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]
-[% RenderBlockEnd("HeaderAgentTicketOwner") %]
-[% RenderBlockStart("HeaderAgentTicketClose") %]
-    [% Translate("Close %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]
-[% RenderBlockEnd("HeaderAgentTicketClose") %]
-[% RenderBlockStart("HeaderAgentTicketNote") %]
-    [% Translate("Add Note to %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]
-[% RenderBlockEnd("HeaderAgentTicketNote") %]
-[% RenderBlockStart("HeaderAgentTicketPending") %]
-    [% Translate("Set Pending Time for %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]
-[% RenderBlockEnd("HeaderAgentTicketPending") %]
-[% RenderBlockStart("HeaderAgentTicketPriority") %]
-    [% Translate("Change Priority of %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]
-[% RenderBlockEnd("HeaderAgentTicketPriority") %]
-[% RenderBlockStart("HeaderAgentTicketResponsible") %]
-    [% Translate("Change Responsible of %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]
-[% RenderBlockEnd("HeaderAgentTicketResponsible") %]
+[% RenderBlockStart("HeaderAction") %]
+    [% Data.Header %]
+[% RenderBlockEnd("HeaderAction") %]
                     &mdash; [% Data.Title | html %]
                 </h1>
 #                <p class="AsteriskExplanation"></p>

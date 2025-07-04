@@ -9292,6 +9292,20 @@ Ihr Helpdesk-Team
         'responsible' => 'Verantwortlicher',
         'reverse' => 'umgekehrt',
         'stats' => 'stats',
+        'Header shown in the ticket responsible screen of the agent interface.' =>
+            'Kopfzeile im Verantwortlichen zuweisen-Bildschirm des Agentenbereichs.',
+        'Header shown in the ticket priority screen of the agent interface.' =>
+            'Kopfzeile im Priorität setzen-Bildschirm des Agentenbereichs.',
+        'Header shown in the ticket pending screen of the agent interface.' =>
+            'Kopfzeile im Wartezeit setzen-Bildschirm des Agentenbereichs.',
+        'Header shown in the ticket owner screen of the agent interface.' =>
+            'Kopfzeile im Besitzer wechseln-Bildschirm des Agentenbereichs.',
+        'Header shown in the ticket note screen of the agent interface.' =>
+            'Kopfzeile im Notiz erstellen-Bildschirm des Agentenbereichs.',
+        'Header shown in the ticket free text screen of the agent interface.' =>
+            'Kopfzeile im Freitextfelder-Bildschirm des Agentenbereichs.',
+        'Header shown in the ticket close screen of the agent interface.' =>
+            'Kopfzeile im Ticket schließen-Bildschirm des Agentenbereichs.',
 
     };
 

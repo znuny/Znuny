@@ -246,11 +246,16 @@ sub Run {
         },
     );
 
-    # show right header
+    # show header
+    my $HTMLHeader = $LayoutObject->Output(
+        Template => $Config->{Header} || '',
+        Data     => \%Ticket,
+    );
+
     $LayoutObject->Block(
-        Name => 'Header' . $Self->{Action},
+        Name => 'HeaderAction',
         Data => {
-            %Ticket,
+            Header => $HTMLHeader,
         },
     );
 
