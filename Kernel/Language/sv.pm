@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.339607464607465;
+    $Self->{Completeness}        = 0.339498230942425;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7951,6 +7951,10 @@ sub Data {
         'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
             '',
         'Name of the OAuth2 token configuration to use for sending mails if \'OAuth2 token\' was configured in SendmailModule::AuthenticationType.' =>
+            '',
+        'Limits the amount of emails which are sent within one batch. Disable this setting to have no limit.' =>
+            '',
+        'Applies the limit defined in \'SendmailModule::RateLimit\' per sender address.' =>
             '',
         'Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook.' =>
             '',

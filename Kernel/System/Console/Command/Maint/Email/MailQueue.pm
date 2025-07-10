@@ -185,9 +185,29 @@ sub Run {
 sub Send {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
     my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
 
-    my $List = $MailQueueObject->List();
+    my $RateLimit          = $ConfigObject->Get('SendmailModule::RateLimit') // 30;
+    my $RateLimitPerSender = $ConfigObject->Get('SendmailModule::RateLimitPerSenderAddress');
+    my $List;
+
+    if ($RateLimitPerSender) {
+        my $UnfilteredList = $MailQueueObject->List();
+        my %SenderAddressCounter;
+
+        ITEM:
+        for my $Item ( @{$UnfilteredList} ) {
+            my $Sender = $Item->{Recipient} // 'Default';
+            $SenderAddressCounter{$Sender}++;
+            next ITEM if $SenderAddressCounter{$Sender} > $RateLimit;
+
+            push @{$List}, $Item;
+        }
+    }
+    else {
+        $List = $MailQueueObject->List( Limit => $RateLimit );
+    }
 
     if ( !IsArrayRefWithData($List) ) {
         $Self->Print("\n<yellow>No messages available for sending.</yellow>\n");
@@ -201,8 +221,7 @@ sub Send {
     my $Verbose      = $Self->GetOption('verbose');
     my $SendTimeout  = $Self->GetOption('send-timeout') // 600;
 
-    MAILQUEUE:
-    for my $Item (@$List) {
+    for my $Item ( @{$List} ) {
         my $Result;
 
         eval {

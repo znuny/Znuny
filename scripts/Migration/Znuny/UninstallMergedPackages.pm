@@ -54,6 +54,7 @@ sub Run {
         'Znuny-DynamicFieldWebserviceTicketIDPayload',
         'Znuny-RichTextEditorLinkFix',
         'Znuny-BugfixFileUploadPathTraversal',
+        'Znuny-SMTPRateLimit',
     );
 
     PACKAGENAME:

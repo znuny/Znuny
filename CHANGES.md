@@ -3,6 +3,7 @@
  - 2025-06-17 Fixed: Added missing parameter TwoFactorToken in Kernel::GenericInterface::Operation::Session::Common->CreateSessionID() to Perldoc.
  - 2025-06-06 Fixed: Some HTTP headers have a semicolon at the end of the value. Thanks to Paweł Bogusławski (@pboguslawski) for reporting. [#653](https://github.com/znuny/Znuny/issues/653)
  - 2025-06-06 Fixed: TLD of email address in S/MIME certificates is limited in length to two to four characters. Thanks for reporting to @dsm-museum-it. [#674](https://github.com/znuny/Znuny/issues/674)
+ - 2025-06-05 Integrated package Znuny-SMTPRateLimit. Adds configuration options 'SendmailModule::RateLimit' and 'SendmailModule::RateLimitPerSenderAddress' to limit amount of sent emails per batch.
  - 2025-06-05 Fixed: Added missing required parameter UserType in Kernel::System::AuthSession->() to Perldoc. Added optional parameter SessionSource to Perldoc.
  - 2025-05-22 Fixed: Generic interface operation Session::SessionRemove requires a user login instead of just a valid session ID. [#638](https://github.com/znuny/Znuny/issues/638).
  - 2025-05-20 Fixed: Multiple spaces in templates not replaced correctly when using placeholders (e.g. OTRS_CUSTOMER_BODY).

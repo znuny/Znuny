@@ -1707,6 +1707,23 @@
             <Item ValueType="String" ValueRegex=""></Item>
         </Value>
     </Setting>
+    <Setting Name="SendmailModule::RateLimit" Required="0" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Limits the amount of emails which are sent within one batch. Disable this setting to have no limit.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,6}$">30</Item>
+        </Value>
+    </Setting>
+    <Setting Name="SendmailModule::RateLimitPerSenderAddress" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Applies the limit defined in 'SendmailModule::RateLimit' per sender address.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="1" Translatable="1">yes</Item>
+                <Item ValueType="Option" Value="0" Translatable="1">no</Item>
+            </Item>
+        </Value>
+    </Setting>
     <Setting Name="MailAccount::POP3::Auth::SplitOAuth2MethodAndToken::Hosts" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook.</Description>
         <Navigation>Core::Email</Navigation>
