@@ -9,7 +9,7 @@
 
 [%
     SET DocumentationLinkText  = Translate('online administrator documentation');
-    SET DocumentationLink      = "<a href='https://doc.znuny.org/znuny/admin/sysconfig' target='_blank'>" _ DocumentationLinkText.html() _ "</a>";
+    SET DocumentationLink      = "<a href='https://doc.znuny.org/znuny-lts_6_5/admin/systemconfiguration/index.html' target='_blank'>" _ DocumentationLinkText.html() _ "</a>";
 %]
 
 <div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
